@@ -1,0 +1,1 @@
+./error_spe_param2.nit:24,1--23: Redef error: Expected Int (as in A::toto), got Char in B::toto.

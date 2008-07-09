@@ -1,0 +1,51 @@
+NIT is a statically typed object-oriented programming language.
+The goal of NIT is to propose a statically typed programming language where structure is not a pain.
+
+NIT has a simple straightforward style and can usually be picked up quickly, particularly by anyone who has programmed before.
+While object-oriented, it allows procedural styles.
+
+The NIT Compiler (nitc) produces efficient machine language binaries.
+
+Some NIT features:
+ * Pure Object-Oriented.
+ * Multiple Inheritance.
+ * Realist typing policy.
+ * Light and clear syntax.
+
+
+Requirement:
+	
+	* gcc		http://gcc.gnu.org/
+
+
+Important files and directory:
+
+	bin/		The NIT tools
+	bin/prmc	The NIT compiler
+	bin/prmdoc	The NIT autodoc
+	BUGS		Known big usability bugs
+	c_src/		C code of nitc (needed to bootstrap)
+	Changelog	List of change between versions
+	doc/		Documentation
+	examples/	Program examples written in NIT
+	LICENCE		License of the software
+	tests/		Non-regression test-suite
+	lib/		NIT standard library
+	Makefile	Bootstrap the NIT tools
+	NOTICE		List of the authors
+	README		This file
+	src/		The NIT tool sources (written in NIT)
+	TODO		What next features are planed
+
+
+How to start:
+
+ * $ make
+ * $ bin/nitc examples/hello_world.nit
+ * $ ./hello_world
+
+
+More information:
+
+	http://www.nitlanguage.org
+

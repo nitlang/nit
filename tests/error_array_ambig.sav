@@ -1,0 +1,1 @@
+./error_array_ambig.nit:17,10--15: Type error: expected Int, got Char

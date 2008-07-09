@@ -1,0 +1,1 @@
+alt/base_init_linext2_alt2.nit:81,2--94:12: Error: Conflicting default constructor to call for B: initb, init_par, init_par2.

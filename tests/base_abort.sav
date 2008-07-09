@@ -1,0 +1,5 @@
+Aborted: ./base_abort.nit:21,2--6
+,---- Stack trace -- - -  -
+| base_abort::Object::foo (./base_abort.nit:19,1--21:6)
+| base_abort::Sys::main (./base_abort.nit:24,1--3)
+`------------------- - -  -

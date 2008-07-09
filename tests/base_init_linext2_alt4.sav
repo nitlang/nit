@@ -1,0 +1,2 @@
+alt/base_init_linext2_alt4.nit:103,3--7: Error: Constructor of B must be invoked before constructor of C
+alt/base_init_linext2_alt4.nit:97,2--111:12: Error: Conflicting default constructor to call for B: initb, init_par, init_par2.

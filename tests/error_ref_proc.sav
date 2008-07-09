@@ -1,0 +1,1 @@
+./error_ref_proc.nit:20,2--37: Redef error: The function C::r redefines the procedure C::r.

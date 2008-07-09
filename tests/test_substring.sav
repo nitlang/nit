@@ -1,0 +1,9 @@
+substring: toto
+substring_from: toto.nit
+has_substring: true
+has_substring: true
+has_substring: false
+has_prefix: true
+has_prefix: false
+has_suffix: true
+has_suffix: false

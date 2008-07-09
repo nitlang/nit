@@ -1,0 +1,123 @@
+/* This file is part of NIT ( http://www.nitlanguage.org ).
+ *
+ * Copyright 2008 Jean Privat <jean@pryen.org>
+ * Based on algorithms developped for ( http://www.sablecc.org/ ).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+$ template make_abs_nodes()
+# Root of the AST hierarchy
+abstract class PNode
+end
+
+# Ancestor of all tokens
+abstract class Token
+special PNode
+end
+
+# Ancestor of all productions
+abstract class Prod
+special PNode
+end
+$ end template
+
+$ template make_nodes()
+redef class PNode
+	# Parent of the node in the AST
+	readable writable attr _parent: PNode 
+
+	# Remove a child from the AST
+	meth remove_child(child: PNode)
+	do
+		replace_child(child, null)
+	end
+
+	# Replace a child with an other node in the AST
+	meth replace_child(old_child: PNode, new_child: PNode) is abstract
+
+	# Replace itself with an other node in the AST
+	meth replace_with(node: PNode)
+	do
+		if (_parent != null) then
+			_parent.replace_child(self, node)
+		end
+	end
+
+	# Visit all nodes in order.
+	# Thus, call "v.visit(e)" for each node e
+	meth visit_all(v: Visitor) is abstract
+
+	# Visit all nodes in reverse order.
+	# Thus, call "v.visit(e)" for each node e starting from the last child
+	meth visit_all_reverse(v: Visitor) is abstract
+
+	# Give a human readable location of the node.
+	meth locate: String is abstract
+
+	# Debug method: output a message prefixed with the location.
+	meth printl(str: String)
+	do
+		print("{locate}: {str}\n")
+	end
+end
+
+redef class Token
+	redef meth visit_all(v: Visitor) do end
+	redef meth visit_all_reverse(v: Visitor) do end
+	redef meth replace_child(old_child: PNode, new_child: PNode) do end
+
+	redef meth locate: String
+	do
+		return "{filename}:{line},{pos}"
+	end
+end
+
+redef class Prod
+	# The first token of the production node
+	readable writable attr _first_token: Token 
+
+	# The last token of the production node
+	readable writable attr _last_token: Token 
+
+	redef meth locate: String
+	do
+		if first_token == null then
+			return "????"
+		end
+		var lastpos = last_token.pos + last_token.text.length - 1
+		if first_token.line == last_token.line then
+			return "{first_token.locate}--{lastpos}"
+		else
+			return "{first_token.locate}--{last_token.line}:{lastpos}"
+		end
+	end
+
+	redef meth replace_with(n: PNode)
+	do
+		super
+		assert n isa Prod
+		n.first_token = first_token
+		n.last_token = last_token
+	end
+end
+
+# Abstract standard visitor
+class Visitor
+        # Ask the visitor to visit a given node.
+        # Usually automatically called by visit_all* methods.
+        # Concrete visitors should redefine this method.
+        meth visit(e: PNode) is abstract
+end
+
+$ end template

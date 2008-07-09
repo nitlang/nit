@@ -1,0 +1,1 @@
+./error_ref_ret.nit:20,2--30: Redef error: Expected B (as in C::s), got Int in C::s.

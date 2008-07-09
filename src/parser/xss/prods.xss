@@ -1,0 +1,202 @@
+/* This file is part of NIT ( http://www.nitlanguage.org ).
+ *
+ * Copyright 2008 Jean Privat <jean@pryen.org>
+ * Based on algorithms developped for ( http://www.sablecc.org/ ).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+$ template make_abs_prods()
+$ set baseprod = {//prod/@ename}
+
+$ foreach {//prod}
+class @ename special Prod end
+$ end
+
+$ foreach {//alt}
+class @ename
+special ${../@ename}
+$ foreach {elem}
+$   if @is_list
+    readable writable attr _n_@name: List[@etype] 
+$   else
+    readable writable attr _n_@name: @etype 
+$   end
+$ end
+end
+$ end
+
+class Start
+special Prod
+    readable writable attr _n_base: $baseprod 
+    readable writable attr _n_eof: EOF 
+end
+$ end template
+
+$ template make_prods()
+$ set baseprod = {//prod/@ename}
+$ foreach {//alt}
+redef class @ename
+$ foreach {elem}
+$   if @is_list
+$   else
+    redef meth n_@name=(n: @etype)
+    do
+        _n_@name = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+$   end
+$ end
+
+    private init empty_init do end
+
+$ if {count(elem)!=0}
+    init init_${translate(@ename,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} (
+$ foreach {elem}
+$   if {@is_list}
+            n_@{name}: Array[Object] [-sep ','-] # Should be Array[@etype]
+$   else
+            n_@{name}: @etype [-sep ','-]
+$   end
+$ end
+    )
+$ else
+    init init_${translate(@ename,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}
+$ end
+    do
+$ foreach {elem}
+$   if @is_list
+        _n_@{name} = new List[@{etype}]
+	for n in n_@{name} do
+		assert n isa @{etype}
+		_n_@{name}.add(n)
+		n.parent = self
+	end
+$   else
+        _n_@name = n_@{name}
+	if n_@{name} != null then
+		n_@{name}.parent = self
+	end
+$   end
+$ end
+    end
+
+    redef meth replace_child(old_child: PNode, new_child: PNode)
+    do
+        assert old_child != null
+$ foreach {elem}
+$   if @is_list
+        for i in [0.._n_@{name}.length[ do
+            if _n_@{name}[i] == old_child then
+                if new_child != null then
+		    assert new_child isa @etype
+                    _n_@{name}[i] = new_child
+                    new_child.parent = self
+                else
+                    _n_@{name}.remove_at(i)
+                end
+                return
+            end
+        end
+$   else
+        if _n_@{name} == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa @etype
+                _n_@{name} = new_child
+	    else
+		_n_@{name} = null
+            end
+            return
+	end
+$   end
+$ end foreach
+    end
+
+    redef meth visit_all(v: Visitor)
+    do
+$   foreach {elem}
+$     if @is_list
+            for n in _n_@{name} do
+                v.visit(n)
+	    end
+$     else
+        if _n_@{name} != null then
+            v.visit(_n_@{name})
+        end
+$     end
+$   end foreach
+    end
+
+    redef meth visit_all_reverse(v: Visitor)
+    do
+$   foreach {elem}
+$     if @is_list
+	do
+	    var i = _n_@{name}.length
+            while i >= 0 do
+                v.visit(_n_@{name}[i])
+		i = i - 1
+	    end
+	end
+$     else
+        if _n_@{name} != null then
+            v.visit(_n_@{name})
+        end
+$     end
+$   end foreach
+    end
+end
+$ end foreach
+
+redef class Start
+    init(
+        n_base: $baseprod,
+        n_eof: EOF)
+    do
+        _n_base = n_base
+        _n_eof = n_eof
+    end
+
+    redef meth replace_child(old_child: PNode, new_child: PNode)
+    do
+        assert old_child != null
+        if _n_base == old_child then
+            if new_child == null then
+            else
+                new_child.parent = self
+		assert new_child isa $baseprod
+                _n_base = new_child
+            end
+            old_child.parent = null
+            return
+	end
+    end
+
+    redef meth visit_all(v: Visitor)
+    do
+        if _n_base != null then
+            v.visit(_n_base)
+        end
+    end
+
+    redef meth visit_all_reverse(v: Visitor)
+    do
+        if _n_base != null then
+            v.visit(_n_base)
+        end
+    end
+end
+$ end template

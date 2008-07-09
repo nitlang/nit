@@ -1,0 +1,1 @@
+./error_spe_param.nit:24,1--25: Redef error: Expected Int (as in A::toto), got Object in B::toto.

@@ -1,0 +1,1 @@
+alt/error_defs_alt4.nit:28,1--29:30: Redef error: A::baz is an inherited property. To redefine it, add the redef keyword.

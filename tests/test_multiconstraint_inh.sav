@@ -1,0 +1,1 @@
+./test_multiconstraint_inh.nit:39,4--32: Redef error: Expected I[A] (as in G::baz), got J in H::baz.

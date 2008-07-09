@@ -1,0 +1,298 @@
+/* This file is part of NIT ( http://www.nitlanguage.org ).
+ *
+ * Copyright 2008 Jean Privat <jean@pryen.org>
+ * Based on algorithms developped for ( http://www.sablecc.org/ ).
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+$ template make_lexer()
+
+# The lexer extract NIT tokens from an input stream.
+# It is better user with the Parser
+class Lexer
+	# Last peeked token
+	attr _token: Token
+
+	# Lexer current state
+	attr _state: Int
+
+	# Name of the stream (as given to tokens)
+	readable attr _filename: String 
+
+	# Input stream where character are read
+	attr _stream: IStream
+
+	# Pushback buffer to store unread character
+	attr _stream_buf: String
+
+	# Number of character stored in the pushback buffer
+	attr _stream_pos: Int
+
+	# Current line number in the input stream
+	attr _line: Int
+
+	# Current column in the input stream
+	attr _pos: Int
+
+	# Was the last character a cariage-return?
+	attr _cr: Bool
+
+	# If the end of stream?
+	attr _eof: Bool
+
+	# Current working text read from the input stream
+	attr _text: String
+
+$ foreach {lexer_data/state}
+	# Constante state values
+	private meth state_${translate(@name,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}: Int do return @id end
+$ end foreach
+
+	# Create a new lexer for a stream (and a name)
+	init(stream: IStream, fname: String)
+	do
+		_filename = fname
+		_text = new String
+		_stream = stream
+		_stream_pos = -1
+		_stream_buf = new String
+		build_goto_table
+		build_accept_table
+	end
+
+	# Give the next token (but do not consume it)
+	meth peek: Token
+	do
+		while _token == null do
+			_token = get_token
+		end
+		return _token
+	end
+
+	# Give and consume the next token
+	meth next: Token
+	do
+		var result = _token
+		while result == null do
+			result = get_token
+		end
+		_token = null
+		return result
+	end
+
+	# Get a token, or null if it is discarded
+	private meth get_token: Token
+	do
+		var dfa_state = 0
+
+		var start_pos = _pos
+		var start_line = _line
+
+		var accept_state = -1
+		var accept_token = -1
+		var accept_length = -1
+		var accept_pos = -1
+		var accept_line = -1
+
+		var goto_table = _goto_table[_state]
+		var accept = _accept_table[_state]
+		_text.clear
+
+		while true do
+			var c = get_char
+
+			if c != -1 then
+				if c == 10 then
+					if _cr then
+						_cr = false
+					else
+						_line = _line + 1
+						_pos = 0
+					end
+				else if c == 13 then
+					_line = _line + 1
+					_pos = 0
+					_cr = true
+				else
+					_pos = _pos + 1
+					_cr = false
+				end
+
+				_text.add(c.ascii)
+
+				var first_loop = true # aka until
+				while dfa_state < -1 or first_loop do
+					var old_state = dfa_state
+					if dfa_state < -1 then
+						old_state = -2 - dfa_state
+					end
+
+					dfa_state = -1
+
+					var tmp1 = goto_table[old_state]
+					var low = 0
+					var high = tmp1.length - 1
+
+					while low <= high do
+						var middle = (low + high) / 2
+						var tmp2 = tmp1[middle]
+
+						if c < tmp2[0] then
+							high = middle - 1
+						else if c > tmp2[1] then
+							low = middle + 1
+						else
+							dfa_state = tmp2[2]
+							low = high + 1 # aka break
+						end
+					end
+					first_loop = false # aka until
+				end
+			else
+				dfa_state = -1
+			end
+
+			if dfa_state >= 0 then
+				if accept[dfa_state] != -1 then
+					accept_state = dfa_state
+					accept_token = accept[dfa_state]
+					accept_length = _text.length
+					accept_pos = _pos
+					accept_line = _line
+				end
+			else
+				if accept_state != -1 then
+$ foreach {//token}
+					if accept_token == ${position()-1} then
+$    if {not(@text)}
+$        if {@parser_index}
+	    					var token_text = _text.substring(0, accept_length)
+						var token = new @ename(token_text, _filename, start_line + 1, start_pos + 1)
+$        end
+$    else
+						var token = new @ename(_filename, start_line + 1, start_pos + 1)
+$    end
+						push_back(accept_length)
+						_pos = accept_pos
+						_line = accept_line
+$    if {count(transition[@from!=@to])!=0}
+						var state_id = _state
+$        foreach transition in {transition[@from!=@to]}
+						if state_id == ${/parser/lexer_data/state[@name=$transition/@from]/@id} then
+							_state = state_${translate(@to,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}
+						end
+$        end
+$    end if
+$    if {@parser_index}
+						return token
+$    else
+						return null
+$    end
+					end
+$ end foreach
+				else
+					if _text.length > 0 then
+						var token = new PError.init_error(_filename, start_line + 1, start_pos + 1, "Unknown token: {_text}")
+						return token
+					else
+						var token = new EOF(_filename, start_line + 1, start_pos + 1)
+						return token
+					end
+				end
+			end
+		end
+		return null
+	end
+
+	# Read the next character.
+	# The character is read from the stream of from the pushback buffer.
+	private meth get_char: Int
+	do
+		if _eof then
+			return -1
+		end
+
+		var result: Int
+
+		var sp = _stream_pos
+		if sp >= 0 then
+			var res = _stream_buf[_stream_pos]
+			_stream_pos = sp - 1
+			result = res.ascii
+		else
+			result = _stream.read_char
+		end
+
+		if result == -1 then
+			_eof = true
+		end
+
+		return result
+	end
+
+	# Unread some characters.
+	# Unread characters are stored in the pushback buffer.
+	private meth push_back(accept_length: Int)
+	do
+		var length = _text.length
+		var i = length - 1
+		while i >= accept_length do
+			_eof = false
+			_stream_pos = _stream_pos + 1
+			_stream_buf[_stream_pos] = _text[i]
+			i = i - 1
+		end
+	end
+
+	attr _goto_table: Array[Array[Array[Array[Int]]]]
+	private meth build_goto_table
+	do
+		_goto_table = once [
+$ foreach {lexer_data/goto_table/state}
+			[
+$     foreach {row}
+$         if {count(goto)!=0}
+				[
+$             foreach {goto}
+					[@low, @high, @state] [-sep ','-]
+$             end foreach
+				] [-sep ','-]
+$         else
+				nil_array [-sep ','-]
+$         end
+$     end foreach
+			] [-sep ','-]
+$ end foreach
+		]
+	end
+    
+	private meth nil_array: Array[Array[Int]]
+	do
+		return once new Array[Array[Int]]
+	end
+
+	attr _accept_table: Array[Array[Int]]
+	private meth build_accept_table do
+		_accept_table = once [
+$ foreach {lexer_data/accept_table/state}
+            		[
+				[-foreach {i}-]${.} [-sep ','-] [-end foreach-]
+
+			] [-sep ','-]
+$ end foreach
+		]
+	end
+end
+
+$ end template
