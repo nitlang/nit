@@ -23,6 +23,7 @@ CC="gcc --ansi --pedantic" # Default compiler call
 ext="_savo _sav" # Default flavor to reuse
 out="a.out"  # Default output binary filename
 dir="" # Default tmp dir
+nolibgc="false" # Try to use libgc ?
 CKSUM="cksum" # Tool that perfors checksum. cksum seems to be very portable
 
 usage()
@@ -35,8 +36,29 @@ Usage: $e [options] modulename [options for module execution]
 -I path     Add a include directory
 -o name     Call name the executable
 -d          Create temporary files in a specific directory
+-nolibgc    Do not include libgc
 -h          This help
 END
+}
+
+test_libgc() {
+cat > .tmp.c <<END
+#include <stdlib.h>
+#include <gc/gc.h>
+int main(void) {
+        void *r = GC_malloc(1);
+	        return r == NULL;
+	}
+END
+gcc .tmp.c -lgc -o .tmp.bin 2> /dev/null
+res=$?
+rm .tmp.c
+if [ $res = 0 ]; then
+	./.tmp.bin
+	res=$?
+	rm .tmp.bin
+fi
+return $res
 }
 
 stop=false
@@ -47,16 +69,21 @@ while [ $stop = false ]; do
 		-I) OPTS="$OPTS -I $2"; shift; shift;;
 		-o) out="$2"; shift; shift;;
 		-d) dir="$2/"; shift; shift;;
+		--nolibgc) nolibgc=true; shift;;
 		-x) OPTS="$OPTS $2"; shift; shift;;
 		-h|"") usage; exit;;
 		*) stop=true
 	esac
 done
 
+if [ $nolibgc != true ] && test_libgc; then
+	OPTS="$OPTS -DWITH_LIBGC -lgc"
+fi
+
 for i in "$@"; do
 	j=`basename "$i" .c`
 	found="false"
-	cksum=`gcc -E $i 2> /dev/null | $CKSUM`
+	cksum=`gcc -E $OPTS $i 2> /dev/null | $CKSUM`
 	for e in $ext; do
 		o="$dir$j.$e.o"
 		cksumfile="$dir$j.$e.cksum"

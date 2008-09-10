@@ -1,0 +1,7 @@
+* GC **************************************************************************
+
+If Bohem's GC is available, it will be automatically used within compiled NIT
+programs.
+
+On GC enabled NIT program, GC can be dynamically disabled if the NIT_NOGC envvar is set.
+

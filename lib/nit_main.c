@@ -2,6 +2,19 @@
 #include <signal.h>
 #include <stdarg.h>
 
+#ifdef WITH_LIBGC
+#define GC_DEBUG
+#include <gc/gc.h>
+int nolibgc = 0;
+void *simple_alloc(size_t s0);
+void *alloc(size_t s0)
+{
+	if (!nolibgc) { return GC_MALLOC(s0); }
+	else return simple_alloc(s0);
+}
+#define alloc simple_alloc
+#endif
+
 void * alloc(size_t s0)
 {
 	static char * alloc_pos = NULL;
@@ -27,6 +40,10 @@ void exithandler(int s) {
 	nit_exit(1);
 }
 void prepare_signals(void) {
+#if WITH_LIBGC
+	nolibgc = (getenv("NIT_NOLIBGC") != NULL);
+	if (!nolibgc) GC_INIT();
+#endif
 	signal(SIGINT,exithandler);
 	signal(SIGABRT,exithandler);
 	signal(SIGSEGV,exithandler);
