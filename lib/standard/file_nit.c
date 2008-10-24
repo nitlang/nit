@@ -2,6 +2,7 @@
  *
  * Copyright 2004-2008 Jean Privat <jean@pryen.org>
  * Copyright 2008 Floréal Morandat <morandat@lirmm.fr> 
+ * Copyright 2008 Jean-Sébastien Gélinas <calestar@gmail.com>
  *
  * This file is free software, which comes along with NIT.  This software is
  * distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
@@ -46,4 +47,8 @@ int file_NativeFile_NativeFile_file_stat_0(FILE *f){
 	if(fstat(fileno(f), &buff) != -1)
 		return to_nit_file_stat(&buff);
 	return 0;
+}
+
+extern int string_NativeString_NativeString_file_delete_0(char *f){
+  return (remove(f) == 0);
 }

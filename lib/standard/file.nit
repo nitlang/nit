@@ -2,6 +2,7 @@
 #
 # Copyright 2004-2008 Jean Privat <jean@pryen.org>
 # Copyright 2008 Floréal Morandat <morandat@lirmm.fr>
+# Copyright 2008 Jean-Sébastien Gélinas <calestar@gmail.com>
 #
 # This file is free software, which comes along with NIT.  This software is
 # distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
@@ -197,6 +198,8 @@ redef class String
 
 	meth file_stat: FileStat do return to_cstring.file_stat
 
+	meth file_delete: Bool do return to_cstring.file_delete
+
 	meth strip_extension(ext: String): String
 	do
 		if has_suffix(ext) then
@@ -258,6 +261,7 @@ redef class NativeString
 	private meth file_exists: Bool is extern "string_NativeString_NativeString_file_exists_0"
 	private meth file_stat: FileStat is extern "string_NativeString_NativeString_file_stat_0"
 	private meth file_mkdir: Bool is extern "string_NativeString_NativeString_file_mkdir_0"
+	private meth file_delete: Bool is extern "string_NativeString_NativeString_file_delete_0"
 end
 
 universal FileStat
