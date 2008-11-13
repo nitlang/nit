@@ -131,7 +131,18 @@ redef class CompilerVisitor
 
 	# Variable where a functionnal nit return must store its value
 	readable writable attr _return_value: String 
-	
+
+	# Generate an fprintf to display an error location
+	meth printf_locate_error(node: PNode): String
+	do
+		var s = "fprintf(stderr, \""
+		if method != null then s.append(" in %s")
+		s.append(" (%s:%d)\\n\", ")
+		if method != null then s.append("LOCATE_{method.cname}, ")
+		s.append("LOCATE_{module.name}, {node.line_number});")
+		return s
+	end
+
 	redef init(module: MMSrcModule)
 	do
 		super
@@ -309,13 +320,14 @@ redef class MMSrcMethod
 			args.add(" param{i}")
 		end
 		var cs = decl_csignature(v, args)
+		v.add_decl("#define LOCATE_{cname} \"{full_name}\"")
 
 		v.add_instr("{cs} \{")
 		v.indent
 		var ctx_old = v.ctx
 		v.ctx = new CContext
 
-		v.add_decl("struct trace_t trace = \{NULL, \"{module.name}::{local_class.name}::{name} ({node.locate})\"};")
+		v.add_decl("struct trace_t trace = \{NULL, LOCATE_{module.name}, {node.line_number}, LOCATE_{cname}};")
 		v.add_instr("trace.prev = tracehead; tracehead = &trace;")
 		var s = do_compile_inside(v, args)
 		v.add_instr("tracehead = trace.prev;")
@@ -372,7 +384,7 @@ redef class MMType
 	do
 		# Fixme: handle formaltypes
 		var g = local_class.global
-		v.add_instr("if (({recv}!=NIT_NULL) && !VAL_ISA({recv}, {g.color_id}, {g.id_id})) \{ fprintf(stderr, \"Cast failled at {n.locate}\\n\"); nit_exit(1); } /*cast {self}*/;")
+		v.add_instr("if (({recv}!=NIT_NULL) && !VAL_ISA({recv}, {g.color_id}, {g.id_id})) \{ fprintf(stderr, \"Cast failled\"); {v.printf_locate_error(n)} nit_exit(1); } /*cast {self}*/;")
 	end
 end
 
@@ -425,8 +437,8 @@ redef class AConcreteMethPropdef
 		else
 			v.return_value = null
 		end
+		v.method = method
 		if self isa AConcreteInitPropdef then
-			v.method = method
 			v.invoke_super_init_calls_after(null)
 		end
 		if n_block != null then
@@ -450,7 +462,8 @@ end
 redef class ADeferredMethPropdef
 	redef meth do_compile_inside(v, method, params)
 	do
-		v.add_instr("fprintf(stderr, \"Deferred method {name} called ({first_token.locate})\\n\");")
+		v.add_instr("fprintf(stderr, \"Deferred method %s called\");")
+		v.add_instr(v.printf_locate_error(self))
 		v.add_instr("nit_exit(1);")
 		if method.signature.return_type != null then
 			return("NIT_NULL")
@@ -735,7 +748,7 @@ end
 redef class AAbortExpr
 	redef meth compile_stmt(v)
 	do
-		v.add_instr("fprintf(stderr, \"Aborted: {locate}\\n\"); nit_exit(1);")
+		v.add_instr("fprintf(stderr, \"Aborted\"); {v.printf_locate_error(self)} nit_exit(1);")
 	end
 end
 
@@ -888,11 +901,11 @@ redef class AAssertExpr
 	redef meth compile_stmt(v)
 	do
 		var e = v.compile_expr(n_expr)
-		var s = "Assert"
+		var s = ""
 		if n_id != null then
-			s = "Assert '{n_id.text}' "
+			s = " '{n_id.text}' "
 		end
-		v.add_instr("if (!UNTAG_Bool({e})) \{ fprintf(stderr, \"{s} failed: {locate}\\n\"); nit_exit(1);}")
+		v.add_instr("if (!UNTAG_Bool({e})) \{ fprintf(stderr, \"Assert%s failed\", \"{s}\"); {v.printf_locate_error(self)} nit_exit(1);}")
 	end
 end
 

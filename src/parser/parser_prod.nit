@@ -37,6 +37,9 @@ redef class PNode
 	# Give a human readable location of the node.
 	meth locate: String is abstract
 
+	# Return only the line number of the node
+	meth line_number: Int is abstract
+
 	# Debug method: output a message prefixed with the location.
 	meth printl(str: String)
 	do
@@ -53,6 +56,8 @@ redef class Token
 	do
 		return "{filename}:{line},{pos}"
 	end
+
+	redef meth line_number do return line
 end
 
 redef class Prod
@@ -76,11 +81,20 @@ redef class Prod
 	end
 
 	redef meth replace_with(n: PNode)
+        do
+                super
+                assert n isa Prod
+                n.first_token = first_token
+                n.last_token = last_token
+        end
+
+	redef meth line_number
 	do
-		super
-		assert n isa Prod
-		n.first_token = first_token
-		n.last_token = last_token
+		if first_token != null then
+			return first_token.line
+		else
+			return 0
+		end
 	end
 end
 

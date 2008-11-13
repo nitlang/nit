@@ -38,7 +38,7 @@ struct trace_t *tracehead = NULL;
 void nit_exit(int i) {
 	fprintf(stderr, ",---- Stack trace -- - -  -\n");
 	while(tracehead != NULL) {
-		fprintf(stderr, "| %s\n",tracehead->text);
+		fprintf(stderr, "| %s (%s:%d)\n", tracehead->meth, tracehead->file, tracehead->line);
 		if (tracehead == tracehead->prev) break;
 		tracehead = tracehead->prev;
 	}

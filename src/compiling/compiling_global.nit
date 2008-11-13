@@ -493,6 +493,7 @@ redef class MMSrcModule
 	# Compile sep files 
 	meth compile_mod_to_c(v: CompilerVisitor)
 	do
+		v.add_decl("#define LOCATE_{name} \"{filename}\"")
 		if not v.tc.global then
 			v.add_decl("extern const int SFT_{name}[];")
 		end

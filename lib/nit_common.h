@@ -100,8 +100,10 @@ extern int glob_argc;
 extern char ** glob_argv;
 
 struct trace_t {
-	struct trace_t *prev;
-	const char *text;
+	struct trace_t *prev; /* previous stack frame */
+	const char *file; /* source filename */
+	int line; /* line number */
+	const char *meth; /* method name */
 };
 extern struct trace_t *tracehead;
 typedef enum {true = (1==1),false = (0==1)} bool;
