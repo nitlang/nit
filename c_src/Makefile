@@ -15,7 +15,6 @@
 # limitations under the License.
 
 all:
-	ln -sf . .nit_compile 2> /dev/null || true
 	sh nitc._build.sh -o nitc
 
 clean:
