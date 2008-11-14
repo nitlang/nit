@@ -474,15 +474,14 @@ redef class MMSrcModule
 			print("No main")
 		else
 			var sys = class_by_name(sysname).get_type
-			var main = sys.select_method(once "init".to_symbol)
-			if main == null then
-				main = sys.select_method(once "main".to_symbol)
-			end
-			if main == null then
+			# var initm = sys.select_method(once "init".to_symbol)
+			var mainm = sys.select_method(once "main".to_symbol)
+			if mainm == null then
 				print("No main")
 			else
+				#v.add_instr("G_sys = NEW_{initm.cname}();")
 				v.add_instr("G_sys = NEW_Sys();")
-				v.add_instr("{main.cname}(G_sys);")
+				v.add_instr("{mainm.cname}(G_sys);")
 			end
 		end
 		v.add_instr("return 0;")
