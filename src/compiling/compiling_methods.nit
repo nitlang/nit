@@ -272,7 +272,7 @@ redef class MMAttribute
 	end
 end
 
-redef class MMSrcLocalProperty
+redef class MMConcreteProperty
 	# Compile the property as a C property
 	meth compile_property_to_c(v: CompilerVisitor) do end
 end

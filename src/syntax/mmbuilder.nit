@@ -135,12 +135,12 @@ end
 redef class MMSrcLocalClass
 	# Add a source property
 	# Register it to the class and attach it to global property
-	private meth add_src_local_property(v: PropertyBuilderVisitor, prop: MMSrcLocalProperty)
+	private meth add_src_local_property(v: PropertyBuilderVisitor, prop: MMConcreteProperty)
 	do
 		var pname = prop.name
 		# Check double definition in the same class
 		if src_local_properties.has_key(pname) then
-			v.error(prop.node, "Error: A property {pname} is already defined in class {name} at line {src_local_properties[pname].node.first_token.line}.")
+			v.error(prop.node, "Error: A property {pname} is already defined in class {name}.")
 			return
 		end
 		src_local_properties[pname] = prop
@@ -595,7 +595,7 @@ redef class PPropdef
 	# * Check redef errors.
 	# * Check forbiden attribute definitions.
 	# * Check signature conformance.
-	private meth process_and_check(v: PropertyVerifierVisitor, prop: MMSrcLocalProperty, has_redef: Bool, visibility_level: Int)
+	private meth process_and_check(v: PropertyVerifierVisitor, prop: MMConcreteProperty, has_redef: Bool, visibility_level: Int)
 	do
 		if prop.global.intro == prop then
 			do_and_check_intro(v, prop, has_redef, visibility_level)
@@ -605,7 +605,7 @@ redef class PPropdef
 	end
 
 	# The part of process_and_check when prop is an introduction
-	private meth do_and_check_intro(v: PropertyVerifierVisitor, prop: MMSrcLocalProperty, has_redef: Bool, visibility_level: Int)
+	private meth do_and_check_intro(v: PropertyVerifierVisitor, prop: MMConcreteProperty, has_redef: Bool, visibility_level: Int)
 	do
 		var glob = prop.global
 		var gbc = prop.local_class.global
@@ -645,7 +645,7 @@ redef class PPropdef
 		end
 	end
 
-	private meth inherit_signature(v: PropertyVerifierVisitor, prop: MMSrcLocalProperty, supers: Array[MMLocalProperty])
+	private meth inherit_signature(v: PropertyVerifierVisitor, prop: MMConcreteProperty, supers: Array[MMLocalProperty])
 	do
 		var s = prop.signature
 		for ip in supers do
@@ -672,7 +672,7 @@ redef class PPropdef
 	end
 
 	# The part of process_and_check when prop is a redefinition
-	private meth do_and_check_redef(v: PropertyVerifierVisitor, prop: MMSrcLocalProperty, has_redef: Bool, visibility_level: Int)
+	private meth do_and_check_redef(v: PropertyVerifierVisitor, prop: MMConcreteProperty, has_redef: Bool, visibility_level: Int)
 	do
 		var is_init = self isa AConcreteInitPropdef
 		var glob = prop.global
@@ -940,7 +940,7 @@ end
 
 redef class PSignature
 	# Check that visibilities of types in the signature are compatible with the visibility of the property.
-	meth check_visibility(v: AbsSyntaxVisitor, p: MMSrcLocalProperty) is abstract
+	meth check_visibility(v: AbsSyntaxVisitor, p: MMConcreteProperty) is abstract
 end
 
 redef class ASignature
@@ -1020,7 +1020,7 @@ end
 
 redef class PType
 	# Check that visibilities of types in the signature are compatible with the visibility of the property.
-	private meth check_visibility(v: AbsSyntaxVisitor, p: MMSrcLocalProperty) is abstract
+	private meth check_visibility(v: AbsSyntaxVisitor, p: MMConcreteProperty) is abstract
 end
 
 redef class AType

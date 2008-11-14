@@ -518,7 +518,7 @@ redef class MMSrcModule
 						v.add_decl("#define {pg.attr_access}(recv) ATTR(recv, {pg.color_id})")
 					end
 				end
-				assert p isa MMSrcLocalProperty
+				assert p isa MMConcreteProperty
 				p.compile_property_to_c(v)
 			end
 		end
@@ -556,11 +556,11 @@ end
 
 class TableEltPropPos
 special LocalTableElt
-	attr _property: MMSrcLocalProperty
+	attr _property: MMConcreteProperty
 	redef meth symbol do return _property.global.color_id
 	redef meth value(ga) do return "{ga.color(self)} /* Property {_property} */"
 
-	init(p: MMSrcLocalProperty)
+	init(p: MMConcreteProperty)
 	do
 		_property = p
 	end

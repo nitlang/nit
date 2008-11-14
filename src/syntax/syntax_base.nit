@@ -66,13 +66,13 @@ special MMConcreteClass
 	readable writable attr _formal_dict: Map[Symbol, MMTypeFormalParameter]
 
 	# Concrete NIT source properties by name
-	readable attr _src_local_properties: Map[Symbol, MMSrcLocalProperty] 
+	readable attr _src_local_properties: Map[Symbol, MMConcreteProperty] 
 
 	init(n: Symbol, cla: PClassdef, a: Int)
 	do
 		super(n, a)
 		_nodes = [cla]
-		_src_local_properties = new HashMap[Symbol, MMSrcLocalProperty]
+		_src_local_properties = new HashMap[Symbol, MMConcreteProperty]
 	end
 end
 
@@ -99,20 +99,16 @@ redef class MMGlobalProperty
 	end
 end
 
-# Concrete NIT source local property
-class MMSrcLocalProperty
-special MMConcreteProperty
-	# Type of the related AST node
-	type NODE: PPropdef
-
-	# The related AST node
-	readable attr _node: NODE
+redef class MMConcreteProperty
+	# The attached node (if any)
+	meth node: PNode do return null
 end
 
 # Concrete NIT source attribute
 class MMSrcAttribute
-special MMSrcLocalProperty
+special MMConcreteProperty
 special MMAttribute
+	redef readable attr _node: AAttrPropdef
 	init(name: Symbol, cla: MMLocalClass, n: AAttrPropdef)
 	do
 		super(name, cla, self)
@@ -122,14 +118,14 @@ end
 
 # Concrete NIT source method
 class MMSrcMethod
-special MMSrcLocalProperty
+special MMConcreteProperty
 special MMMethod
 end
 
 # Concrete NIT source method for an automatic accesor
 class MMAttrImplementationMethod
 special MMSrcMethod
-	redef type NODE: AAttrPropdef
+	redef readable attr _node: AAttrPropdef
 end
 
 # Concrete NIT source method for an automatic read accesor
@@ -157,8 +153,7 @@ end
 # Concrete NIT source method for an explicit method
 class MMMethSrcMethod
 special MMSrcMethod
-	redef type NODE: AMethPropdef
-
+	redef readable attr _node: AMethPropdef
 	init(name: Symbol, cla: MMLocalClass, n: AMethPropdef)
 	do
 		super(name, cla, self)
@@ -168,8 +163,9 @@ end
 
 # Concrete NIT source virtual type
 class MMSrcTypeProperty
-special MMSrcLocalProperty
+special MMConcreteProperty
 special MMTypeProperty
+	redef readable attr _node: ATypePropdef
 	init(name: Symbol, cla: MMLocalClass, n: ATypePropdef)
 	do
 		super(name, cla, self)
@@ -270,7 +266,7 @@ special Visitor
 	readable writable attr _local_class: MMSrcLocalClass 
 
 	# The current property
-	readable writable attr _local_property: MMSrcLocalProperty
+	readable writable attr _local_property: MMConcreteProperty
 
 	# The current tool configuration/status
 	readable attr _tc: ToolContext 
