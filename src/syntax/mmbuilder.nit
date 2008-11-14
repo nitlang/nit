@@ -73,11 +73,7 @@ redef class MMSrcModule
 		# Compute class ancestors types
 		var mmbv1b = new ClassAncestorBuilder(tc, self)
 		for c in classes do
-			if c isa MMSrcLocalClass then
-				for n in c.nodes do
-					mmbv1b.visit(n)
-				end
-			end
+			c.accept_class_visitor(mmbv1b)
 			c.compute_ancestors
 		end
 		if tc.error_count > 0 then exit(1)
@@ -85,11 +81,7 @@ redef class MMSrcModule
 		# Check class conformity
 		var mmbv1b = new ClassVerifierVisitor(tc, self)
 		for c in classes do
-			if c isa MMSrcLocalClass then
-				for n in c.nodes do
-					mmbv1b.visit(n)
-				end
-			end
+			c.accept_class_visitor(mmbv1b)
 		end
 		if tc.error_count > 0 then exit(1)
 
@@ -100,10 +92,8 @@ redef class MMSrcModule
 			c.inherit_global_properties
 
 			# Global property introduction and redefinition 
+			c.accept_class_visitor(mmbv2)
 			if c isa MMSrcLocalClass then
-				for n in c.nodes do
-					mmbv2.visit(n)
-				end
 			end
 
 			# Note that inherited unredefined property are processed on demand latter
@@ -113,11 +103,7 @@ redef class MMSrcModule
 		# Property signature analysis and inheritance conformance
 		var mmbv3 = new PropertyVerifierVisitor(tc, self)
 		for c in classes do
-			if c isa MMSrcLocalClass then
-				for n in c.nodes do
-					mmbv3.visit(n)
-				end
-			end
+			c.accept_properties_visitor(mmbv3)
 		end
 
 		# Check inherited local properties
@@ -132,7 +118,37 @@ redef class MMSrcModule
 	end
 end
 
+redef class MMLocalClass
+	# Accept a class visitor (on class nodes)
+	private meth accept_class_visitor(v: AbsSyntaxVisitor)
+	do
+	end
+
+	# Accept a class visitor (on class properties)
+	private meth accept_properties_visitor(v: AbsSyntaxVisitor)
+	do
+	end
+end
+
 redef class MMSrcLocalClass
+	redef meth accept_class_visitor(v)
+	do
+		for n in nodes do
+			v.visit(n)
+		end
+	end
+
+	# Accept a class visitor (on class properties)
+	redef meth accept_properties_visitor(v)
+	do
+		for n in nodes do
+			v.visit(n)
+		end
+
+		for p in src_local_properties do
+			p.accept_property_visitor(v)
+		end
+	end
 	# Add a source property
 	# Register it to the class and attach it to global property
 	private meth add_src_local_property(v: PropertyBuilderVisitor, prop: MMConcreteProperty)
@@ -163,6 +179,11 @@ redef class MMSrcLocalClass
 	end
 end
 
+redef class MMConcreteProperty
+	private meth accept_property_visitor(v: AbsSyntaxVisitor)
+	do
+	end
+end
 # Concrete NIT class specialization relation
 class MMSrcAncestor
 special MMAncestor
