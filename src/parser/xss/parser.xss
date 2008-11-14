@@ -33,7 +33,8 @@ private class State
 	end
 end
 
-redef class Parser
+class Parser
+special ParserTable
 	# Associated lexer
 	attr _lexer: Lexer
 
@@ -278,8 +279,8 @@ $ end template
 
 $ template make_parser_tables()
 # Parser that build a full AST
-class Parser
-	attr _action_table: Array[Array[Int]]
+abstract class ParserTable
+	attr _action_table: Array[Array[Int]] = null
 	private meth build_action_table
 	do
 		_action_table = once [ 
@@ -300,7 +301,7 @@ $   end foreach
 	end
 $ end foreach
 
-	attr _goto_table: Array[Array[Int]]
+	attr _goto_table: Array[Array[Int]] = null
 	private meth build_goto_table
 	do
 		_goto_table = once [ 

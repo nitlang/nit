@@ -23,7 +23,7 @@ special IndexedCollection[E]
 	meth enlarge(cap: Int) is abstract
 
 	# The current length
-	redef readable attr _length: Int
+	redef readable attr _length: Int = 0
 	
 	redef meth is_empty do return _length == 0
 
@@ -563,13 +563,13 @@ end
 # Native classes ##############################################################
 
 # Subclasses of this class can create native arrays
-class ArrayCapable[E]
+interface ArrayCapable[E]
 	# Get a new array of `size' elements.
 	protected meth calloc_array(size: Int): NativeArray[E] is intern
 end
 
 # Native C array (void ...).
-class NativeArray[E]
+universal NativeArray[E]
 	meth [](index: Int): E is intern
 	meth []=(index: Int, item: E) is intern
 	meth copy_to(dest: NativeArray[E], length: Int) is intern

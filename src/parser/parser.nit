@@ -20,7 +20,8 @@ private class State
 	end
 end
 
-redef class Parser
+class Parser
+special ParserTable
 	# Associated lexer
 	attr _lexer: Lexer
 

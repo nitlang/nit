@@ -38,7 +38,7 @@ import kernel
 #
 # This abstract class implements its others methods with an iterator.
 # Subclasses may redefine them with an efficient implementation.
-class Collection[E]
+interface Collection[E]
 	# Get a new iterator on the collection.
 	meth iterator: Iterator[E] is abstract
 
@@ -67,7 +67,7 @@ end
 
 # Naive implementation of collections method
 # You only have to define iterator!
-class NaiveCollection[E: Object]
+interface NaiveCollection[E: Object]
 special Collection[E]
 	redef meth is_empty do return length == 0
 
@@ -106,7 +106,7 @@ end
 
 # Instances of the Iterator class generates a series of elements, one at a time.
 # They are mainly used with collections.
-class Iterator[E]
+interface Iterator[E]
 	# The current item.
 	# Require `is_ok'.
 	meth item: E is abstract
@@ -166,7 +166,7 @@ special Iterator[E]
 end
 
 # Items can be removed from this collection
-class RemovableCollection[E]
+interface RemovableCollection[E]
 special Collection[E]
 	# Remove all items
 	meth clear is abstract
@@ -179,7 +179,7 @@ special Collection[E]
 end
 
 # Items can be added to these collections.
-class SimpleCollection[E]
+interface SimpleCollection[E]
 special RemovableCollection[E]
 	# Add an item in a collection.
 	# Ensure col.has(item)
@@ -198,7 +198,7 @@ end
 #    ...
 #    s.add(a)
 #    s.has(b) # --> true
-class Set[E]
+interface Set[E]
 special SimpleCollection[E]
 
 	redef meth has_only(item)
@@ -239,7 +239,7 @@ end
 #     map[u2]            # -> v2
 #     map.has_key(u1)    # -> true
 #     map.has_key(u3)    # -> false
-class Map[K, E]
+interface Map[K, E]
 special RemovableCollection[E]
 	# Get the item at `key'.    
 	meth [](key: K): E is abstract
@@ -268,7 +268,7 @@ special RemovableCollection[E]
 end
 
 # Iterators for Map.
-class MapIterator[K, E]
+interface MapIterator[K, E]
 special Iterator[E]
 	# The key of the current item.
 	meth key: K is abstract
@@ -279,7 +279,7 @@ end
 
 # Indexed collection are ordoned collections.
 # The first item is 0. The last is `length'-1.
-class IndexedCollection[E]
+interface IndexedCollection[E]
 special Map[Int, E]
 special SimpleCollection[E]
 	# Get the first item.
@@ -350,7 +350,7 @@ special SimpleCollection[E]
 end
 
 # Iterators on indexed collections.
-class IndexedIterator[E]
+interface IndexedIterator[E]
 special MapIterator[Int, E]
 	# The index of the current item.
 	meth index: Int is abstract

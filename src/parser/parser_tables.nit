@@ -3,8 +3,8 @@
 package parser_tables
 
 # Parser that build a full AST
-class Parser
-	attr _action_table: Array[Array[Int]]
+abstract class ParserTable
+	attr _action_table: Array[Array[Int]] = null
 	private meth build_action_table
 	do
 		_action_table = once [ 
@@ -13219,7 +13219,7 @@ class Parser
             		]
 	end
 
-	attr _goto_table: Array[Array[Int]]
+	attr _goto_table: Array[Array[Int]] = null
 	private meth build_goto_table
 	do
 		_goto_table = once [ 

@@ -64,18 +64,18 @@ end
 private class HashCollection[K: Object, N: HashNode[K], E: Object]
 special Collection[E]
 special ArrayCapable[N]
-	attr _array: NativeArray[N] # Used to store items
-	attr _capacity: Int # Size of _array
-	redef readable attr _length: Int # Number of items in the map
+	attr _array: NativeArray[N] = null # Used to store items
+	attr _capacity: Int = 0 # Size of _array
+	redef readable attr _length: Int = 0 # Number of items in the map
 
-	readable attr _first_item: N # First added item (used to visit items in nice order)
-	attr _last_item: N # Last added item (same)
+	readable attr _first_item: N = null # First added item (used to visit items in nice order)
+	attr _last_item: N = null # Last added item (same)
 
 	# The last index accessed
-	attr _last_accessed_index: Int
+	attr _last_accessed_index: Int = -1
 
 	# The last key accessed
-	attr _last_accessed_key: K
+	attr _last_accessed_key: K = null
 
 	# Return the index of the k element
 	meth index_at(k: K): Int
@@ -221,8 +221,8 @@ end
 private class HashNode[K]
 	meth key: K is abstract
 	type N: HashNode[K]
-	readable writable attr _next_item: N
-	readable writable attr _prev_item: N
+	readable writable attr _next_item: N = null
+	readable writable attr _prev_item: N = null
 end
 
 class HashMap[K, V]
