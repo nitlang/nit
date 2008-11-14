@@ -71,9 +71,9 @@ special AbsSyntaxVisitor
 			if g.intro.local_class != c then continue
 			var gp = c[g]
 			assert gp isa MMMethod
-			var garity = g.intro.signature.arity
+			var garity = gp.signature.arity
 			if prop != null and g.intro.name == prop.name then
-				if garity == 0 or garity == parity then
+				if garity == 0 or prop.signature < gp.signature then
 					return gp
 				else
 					false_candidates.add(gp)
@@ -87,12 +87,14 @@ special AbsSyntaxVisitor
 		end
 		if candidates.length == 1 then
 			return candidates.first
-		else if false_candidates.is_empty then
-			v.warning(n, "Fatal error: there is no available constrctor in {c}.")
+		else if candidates.length > 0 then
+			v.error(n, "Error: Conflicting default constructor to call for {c}: {candidates.join(", ")}.")
 			return null
-			#abort
+		else if false_candidates.length > 0 then
+			v.error(n, "Error: there is no available compatible constrctor in {c}.")
+			return null
 		else
-			v.error(n, "Error: Conflicting default constructor to call for {c}: {false_candidates.join(", ")}.")
+			v.warning(n, "Error: there is no available compatible constrctor in {c}.")
 			return null
 		end
 	end
@@ -240,7 +242,9 @@ redef class AConcreteInitPropdef
 			var j = 0
 			while j < v.local_class.cshe.direct_greaters.length do
 				var c = v.local_class.cshe.direct_greaters[j]
-				if cur_c != null and c.cshe <= cur_c then
+				if c.global.is_interface or c.global.is_universal then
+					j += 1
+				else if cur_c != null and c.cshe <= cur_c then
 					if c == cur_c then j += 1
 					super_init_calls.add(cur_m)
 					i += 1
