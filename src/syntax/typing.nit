@@ -1143,6 +1143,14 @@ redef class AIsaExpr
 	end
 end
 
+redef class AAsCastExpr
+	redef meth after_typing(v)
+	do
+		_stype = n_type.stype
+		var et = n_expr.stype
+	end
+end
+
 redef class AProxyExpr
 	redef meth after_typing(v)
 	do

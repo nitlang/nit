@@ -102,6 +102,7 @@ kwself = 'self';
 kwtrue = 'true';
 kwfalse = 'false';
 kwnull = 'null';
+kwas = 'as';
 
 opar = '(';
 cpar = ')';
@@ -430,6 +431,7 @@ expr_atom/*B3*//*B*/ {-> expr}
 	| {string} string  {-> New expr.string(string)}
 	| {superstring} superstring  {-> superstring.expr}
 /*N3*/	| {par} opar expr cpar {-> expr}
+        | {as_cast} expr_atom/*B3*//*B*/ dot no kwas [n2]:no opar [n3]:no type [n4]:no cpar {-> New expr.as_cast(expr_atom/*B3*//*B*/.expr, kwas, type)}
 	;
 
 superstring {-> expr} 
@@ -626,6 +628,7 @@ expr	= {block} expr*
 	| {end_string} [string]:end_string 
 	| {superstring} [exprs]:expr*
 	| {par} expr 
+        | {as_cast} expr kwas type
 	;
 assign_op
 	= {plus} pluseq

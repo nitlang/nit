@@ -156,6 +156,9 @@ end
 class TKwnull
 special Token
 end
+class TKwas
+special Token
+end
 class TOpar
 special Token
 end
@@ -846,6 +849,12 @@ end
 class AProxyExpr
 special PExpr
     readable writable attr _n_expr: PExpr 
+end
+class AAsCastExpr
+special PExpr
+    readable writable attr _n_expr: PExpr 
+    readable writable attr _n_kwas: TKwas 
+    readable writable attr _n_type: PType 
 end
 class APlusAssignOp
 special PAssignOp

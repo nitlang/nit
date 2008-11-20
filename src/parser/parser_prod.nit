@@ -10109,6 +10109,112 @@ redef class AParExpr
         end
     end
 end
+redef class AAsCastExpr
+    redef meth n_expr=(n: PExpr)
+    do
+        _n_expr = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+    redef meth n_kwas=(n: TKwas)
+    do
+        _n_kwas = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+    redef meth n_type=(n: PType)
+    do
+        _n_type = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+
+    private init empty_init do end
+
+    init init_aascastexpr (
+            n_expr: PExpr ,
+            n_kwas: TKwas ,
+            n_type: PType 
+    )
+    do
+        _n_expr = n_expr
+	if n_expr != null then
+		n_expr.parent = self
+	end
+        _n_kwas = n_kwas
+	if n_kwas != null then
+		n_kwas.parent = self
+	end
+        _n_type = n_type
+	if n_type != null then
+		n_type.parent = self
+	end
+    end
+
+    redef meth replace_child(old_child: PNode, new_child: PNode)
+    do
+        assert old_child != null
+        if _n_expr == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa PExpr
+                _n_expr = new_child
+	    else
+		_n_expr = null
+            end
+            return
+	end
+        if _n_kwas == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwas
+                _n_kwas = new_child
+	    else
+		_n_kwas = null
+            end
+            return
+	end
+        if _n_type == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa PType
+                _n_type = new_child
+	    else
+		_n_type = null
+            end
+            return
+	end
+    end
+
+    redef meth visit_all(v: Visitor)
+    do
+        if _n_expr != null then
+            v.visit(_n_expr)
+        end
+        if _n_kwas != null then
+            v.visit(_n_kwas)
+        end
+        if _n_type != null then
+            v.visit(_n_type)
+        end
+    end
+
+    redef meth visit_all_reverse(v: Visitor)
+    do
+        if _n_expr != null then
+            v.visit(_n_expr)
+        end
+        if _n_kwas != null then
+            v.visit(_n_kwas)
+        end
+        if _n_type != null then
+            v.visit(_n_type)
+        end
+    end
+end
 redef class APlusAssignOp
     redef meth n_pluseq=(n: TPluseq)
     do

@@ -995,6 +995,15 @@ redef class AIsaExpr
 	end
 end
 
+redef class AAsCastExpr
+	redef meth compile_expr(v)
+	do
+		var e = v.compile_expr(n_expr)
+		n_type.stype.compile_type_check(v, e, self)
+		return e
+	end
+end
+
 redef class ATrueExpr
 	redef meth compile_expr(v)
 	do

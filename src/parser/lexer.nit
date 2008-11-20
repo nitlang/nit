@@ -722,10 +722,25 @@ redef class TKwnull
     end
 end
 
-redef class TOpar
+redef class TKwas
     redef meth parser_index: Int
     do
     	return 47
+    end
+
+    init(fname: String, line: Int, pos: Int)
+    do
+        _text = once "as"
+	_filename = fname
+        _line = line
+        _pos = pos
+    end
+end
+
+redef class TOpar
+    redef meth parser_index: Int
+    do
+    	return 48
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -740,7 +755,7 @@ end
 redef class TCpar
     redef meth parser_index: Int
     do
-    	return 48
+    	return 49
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -755,7 +770,7 @@ end
 redef class TObra
     redef meth parser_index: Int
     do
-    	return 49
+    	return 50
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -770,7 +785,7 @@ end
 redef class TCbra
     redef meth parser_index: Int
     do
-    	return 50
+    	return 51
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -785,7 +800,7 @@ end
 redef class TComma
     redef meth parser_index: Int
     do
-    	return 51
+    	return 52
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -800,7 +815,7 @@ end
 redef class TColumn
     redef meth parser_index: Int
     do
-    	return 52
+    	return 53
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -815,7 +830,7 @@ end
 redef class TQuad
     redef meth parser_index: Int
     do
-    	return 53
+    	return 54
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -830,7 +845,7 @@ end
 redef class TAssign
     redef meth parser_index: Int
     do
-    	return 54
+    	return 55
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -845,7 +860,7 @@ end
 redef class TPluseq
     redef meth parser_index: Int
     do
-    	return 55
+    	return 56
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -860,7 +875,7 @@ end
 redef class TMinuseq
     redef meth parser_index: Int
     do
-    	return 56
+    	return 57
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -875,7 +890,7 @@ end
 redef class TDotdotdot
     redef meth parser_index: Int
     do
-    	return 57
+    	return 58
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -890,7 +905,7 @@ end
 redef class TDotdot
     redef meth parser_index: Int
     do
-    	return 58
+    	return 59
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -905,7 +920,7 @@ end
 redef class TDot
     redef meth parser_index: Int
     do
-    	return 59
+    	return 60
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -920,7 +935,7 @@ end
 redef class TPlus
     redef meth parser_index: Int
     do
-    	return 60
+    	return 61
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -935,7 +950,7 @@ end
 redef class TMinus
     redef meth parser_index: Int
     do
-    	return 61
+    	return 62
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -950,7 +965,7 @@ end
 redef class TStar
     redef meth parser_index: Int
     do
-    	return 62
+    	return 63
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -965,7 +980,7 @@ end
 redef class TSlash
     redef meth parser_index: Int
     do
-    	return 63
+    	return 64
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -980,7 +995,7 @@ end
 redef class TPercent
     redef meth parser_index: Int
     do
-    	return 64
+    	return 65
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -995,7 +1010,7 @@ end
 redef class TEq
     redef meth parser_index: Int
     do
-    	return 65
+    	return 66
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -1010,7 +1025,7 @@ end
 redef class TNe
     redef meth parser_index: Int
     do
-    	return 66
+    	return 67
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -1025,7 +1040,7 @@ end
 redef class TLt
     redef meth parser_index: Int
     do
-    	return 67
+    	return 68
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -1040,7 +1055,7 @@ end
 redef class TLe
     redef meth parser_index: Int
     do
-    	return 68
+    	return 69
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -1055,7 +1070,7 @@ end
 redef class TGt
     redef meth parser_index: Int
     do
-    	return 69
+    	return 70
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -1070,7 +1085,7 @@ end
 redef class TGe
     redef meth parser_index: Int
     do
-    	return 70
+    	return 71
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -1085,7 +1100,7 @@ end
 redef class TStarship
     redef meth parser_index: Int
     do
-    	return 71
+    	return 72
     end
 
     init(fname: String, line: Int, pos: Int)
@@ -1100,7 +1115,7 @@ end
 redef class TClassid
     redef meth parser_index: Int
     do
-    	return 72
+    	return 73
     end
 
     init(text: String, fname: String, line: Int, pos: Int)
@@ -1115,7 +1130,7 @@ end
 redef class TId
     redef meth parser_index: Int
     do
-    	return 73
+    	return 74
     end
 
     init(text: String, fname: String, line: Int, pos: Int)
@@ -1130,7 +1145,7 @@ end
 redef class TAttrid
     redef meth parser_index: Int
     do
-    	return 74
+    	return 75
     end
 
     init(text: String, fname: String, line: Int, pos: Int)
@@ -1145,7 +1160,7 @@ end
 redef class TNumber
     redef meth parser_index: Int
     do
-    	return 75
+    	return 76
     end
 
     init(text: String, fname: String, line: Int, pos: Int)
@@ -1160,7 +1175,7 @@ end
 redef class TFloat
     redef meth parser_index: Int
     do
-    	return 76
+    	return 77
     end
 
     init(text: String, fname: String, line: Int, pos: Int)
@@ -1175,7 +1190,7 @@ end
 redef class TChar
     redef meth parser_index: Int
     do
-    	return 77
+    	return 78
     end
 
     init(text: String, fname: String, line: Int, pos: Int)
@@ -1190,7 +1205,7 @@ end
 redef class TString
     redef meth parser_index: Int
     do
-    	return 78
+    	return 79
     end
 
     init(text: String, fname: String, line: Int, pos: Int)
@@ -1205,7 +1220,7 @@ end
 redef class TStartString
     redef meth parser_index: Int
     do
-    	return 79
+    	return 80
     end
 
     init(text: String, fname: String, line: Int, pos: Int)
@@ -1220,7 +1235,7 @@ end
 redef class TMidString
     redef meth parser_index: Int
     do
-    	return 80
+    	return 81
     end
 
     init(text: String, fname: String, line: Int, pos: Int)
@@ -1235,7 +1250,7 @@ end
 redef class TEndString
     redef meth parser_index: Int
     do
-    	return 81
+    	return 82
     end
 
     init(text: String, fname: String, line: Int, pos: Int)
@@ -1251,7 +1266,7 @@ end
 redef class EOF 
     redef meth parser_index: Int
     do
-    	return 82
+    	return 83
     end
     
     init(fname: String, line: Int, pos: Int)
@@ -1765,183 +1780,182 @@ class Lexer
 						return token
 					end
 					if accept_token == 48 then
-						var token = new TOpar(_filename, start_line + 1, start_pos + 1)
+						var token = new TKwas(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 49 then
-						var token = new TCpar(_filename, start_line + 1, start_pos + 1)
+						var token = new TOpar(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 50 then
-						var token = new TObra(_filename, start_line + 1, start_pos + 1)
+						var token = new TCpar(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 51 then
-						var token = new TCbra(_filename, start_line + 1, start_pos + 1)
+						var token = new TObra(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 52 then
-						var token = new TComma(_filename, start_line + 1, start_pos + 1)
+						var token = new TCbra(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 53 then
-						var token = new TColumn(_filename, start_line + 1, start_pos + 1)
+						var token = new TComma(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 54 then
-						var token = new TQuad(_filename, start_line + 1, start_pos + 1)
+						var token = new TColumn(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 55 then
-						var token = new TAssign(_filename, start_line + 1, start_pos + 1)
+						var token = new TQuad(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 56 then
-						var token = new TPluseq(_filename, start_line + 1, start_pos + 1)
+						var token = new TAssign(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 57 then
-						var token = new TMinuseq(_filename, start_line + 1, start_pos + 1)
+						var token = new TPluseq(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 58 then
-						var token = new TDotdotdot(_filename, start_line + 1, start_pos + 1)
+						var token = new TMinuseq(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 59 then
-						var token = new TDotdot(_filename, start_line + 1, start_pos + 1)
+						var token = new TDotdotdot(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 60 then
-						var token = new TDot(_filename, start_line + 1, start_pos + 1)
+						var token = new TDotdot(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 61 then
-						var token = new TPlus(_filename, start_line + 1, start_pos + 1)
+						var token = new TDot(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 62 then
-						var token = new TMinus(_filename, start_line + 1, start_pos + 1)
+						var token = new TPlus(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 63 then
-						var token = new TStar(_filename, start_line + 1, start_pos + 1)
+						var token = new TMinus(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 64 then
-						var token = new TSlash(_filename, start_line + 1, start_pos + 1)
+						var token = new TStar(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 65 then
-						var token = new TPercent(_filename, start_line + 1, start_pos + 1)
+						var token = new TSlash(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 66 then
-						var token = new TEq(_filename, start_line + 1, start_pos + 1)
+						var token = new TPercent(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 67 then
-						var token = new TNe(_filename, start_line + 1, start_pos + 1)
+						var token = new TEq(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 68 then
-						var token = new TLt(_filename, start_line + 1, start_pos + 1)
+						var token = new TNe(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 69 then
-						var token = new TLe(_filename, start_line + 1, start_pos + 1)
+						var token = new TLt(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 70 then
-						var token = new TGt(_filename, start_line + 1, start_pos + 1)
+						var token = new TLe(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 71 then
-						var token = new TGe(_filename, start_line + 1, start_pos + 1)
+						var token = new TGt(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 72 then
-						var token = new TStarship(_filename, start_line + 1, start_pos + 1)
+						var token = new TGe(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 73 then
-	    					var token_text = _text.substring(0, accept_length)
-						var token = new TClassid(token_text, _filename, start_line + 1, start_pos + 1)
+						var token = new TStarship(_filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1949,7 +1963,7 @@ class Lexer
 					end
 					if accept_token == 74 then
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TId(token_text, _filename, start_line + 1, start_pos + 1)
+						var token = new TClassid(token_text, _filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1957,7 +1971,7 @@ class Lexer
 					end
 					if accept_token == 75 then
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TAttrid(token_text, _filename, start_line + 1, start_pos + 1)
+						var token = new TId(token_text, _filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1965,7 +1979,7 @@ class Lexer
 					end
 					if accept_token == 76 then
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TNumber(token_text, _filename, start_line + 1, start_pos + 1)
+						var token = new TAttrid(token_text, _filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1973,7 +1987,7 @@ class Lexer
 					end
 					if accept_token == 77 then
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TFloat(token_text, _filename, start_line + 1, start_pos + 1)
+						var token = new TNumber(token_text, _filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1981,7 +1995,7 @@ class Lexer
 					end
 					if accept_token == 78 then
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TChar(token_text, _filename, start_line + 1, start_pos + 1)
+						var token = new TFloat(token_text, _filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1989,7 +2003,7 @@ class Lexer
 					end
 					if accept_token == 79 then
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TString(token_text, _filename, start_line + 1, start_pos + 1)
+						var token = new TChar(token_text, _filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -1997,7 +2011,7 @@ class Lexer
 					end
 					if accept_token == 80 then
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TStartString(token_text, _filename, start_line + 1, start_pos + 1)
+						var token = new TString(token_text, _filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
@@ -2005,13 +2019,21 @@ class Lexer
 					end
 					if accept_token == 81 then
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new TMidString(token_text, _filename, start_line + 1, start_pos + 1)
+						var token = new TStartString(token_text, _filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
 						_pos = accept_pos
 						_line = accept_line
 						return token
 					end
 					if accept_token == 82 then
+	    					var token_text = _text.substring(0, accept_length)
+						var token = new TMidString(token_text, _filename, start_line + 1, start_pos + 1)
+						push_back(accept_length)
+						_pos = accept_pos
+						_line = accept_line
+						return token
+					end
+					if accept_token == 83 then
 	    					var token_text = _text.substring(0, accept_length)
 						var token = new TEndString(token_text, _filename, start_line + 1, start_pos + 1)
 						push_back(accept_length)
@@ -3234,7 +3256,7 @@ class Lexer
 	private meth build_accept_table do
 		_accept_table = once [
             		[
-				-1 , 0 , 1 , 1 , 0 , -1 , -1 , -1 , 65 , -1 , 48 , 49 , 63 , 61 , 52 , 62 , 60 , 64 , 76 , 53 , 68 , 55 , 70 , 73 , 50 , 51 , -1 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , -1 , 1 , 67 , -1 , 79 , -1 , 80 , -1 , 2 , 2 , -1 , 78 , 56 , 57 , 59 , 77 , -1 , 54 , 69 , 66 , 71 , 73 , 73 , 73 , 73 , 75 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 17 , 74 , 74 , 74 , 74 , 74 , 26 , 74 , 31 , 16 , 74 , 74 , 74 , 74 , 74 , 33 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , -1 , 82 , -1 , 81 , -1 , 2 , 58 , 72 , 75 , 75 , 75 , 75 , 74 , 74 , 32 , 74 , 74 , 74 , 74 , 74 , 74 , 10 , 74 , 74 , 30 , 74 , 74 , 74 , 41 , 74 , 40 , 34 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 20 , 74 , 74 , -1 , 74 , 74 , 74 , 13 , 74 , 74 , 74 , 28 , 74 , 74 , 74 , 14 , 74 , 74 , 11 , 47 , 42 , 74 , 74 , 74 , 74 , 74 , 74 , 44 , 74 , 74 , 27 , 45 , 12 , 74 , 74 , 74 , 38 , 74 , 74 , 37 , 5 , 74 , 74 , 46 , 74 , 74 , 74 , 74 , 74 , 74 , 74 , 15 , 74 , 74 , 43 , 74 , 29 , 74 , 74 , 39 , 74 , 22 , 4 , 74 , 21 , 74 , 74 , 74 , 74 , 74 , 35 , 74 , 74 , 74 , 74 , 74 , 74 , 25 , 3 , 24 , 74 , 74 , 9 , 74 , 74 , 6 , 36 , 74 , 74 , 18 , 74 , 19 , 7 , 23 , 8  
+				-1 , 0 , 1 , 1 , 0 , -1 , -1 , -1 , 66 , -1 , 49 , 50 , 64 , 62 , 53 , 63 , 61 , 65 , 77 , 54 , 69 , 56 , 71 , 74 , 51 , 52 , -1 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , -1 , 1 , 68 , -1 , 80 , -1 , 81 , -1 , 2 , 2 , -1 , 79 , 57 , 58 , 60 , 78 , -1 , 55 , 70 , 67 , 72 , 74 , 74 , 74 , 74 , 76 , 75 , 75 , 75 , 75 , 75 , 75 , 48 , 75 , 75 , 75 , 75 , 17 , 75 , 75 , 75 , 75 , 75 , 26 , 75 , 31 , 16 , 75 , 75 , 75 , 75 , 75 , 33 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , -1 , 83 , -1 , 82 , -1 , 2 , 59 , 73 , 76 , 76 , 76 , 76 , 75 , 75 , 32 , 75 , 75 , 75 , 75 , 75 , 75 , 10 , 75 , 75 , 30 , 75 , 75 , 75 , 41 , 75 , 40 , 34 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 20 , 75 , 75 , -1 , 75 , 75 , 75 , 13 , 75 , 75 , 75 , 28 , 75 , 75 , 75 , 14 , 75 , 75 , 11 , 47 , 42 , 75 , 75 , 75 , 75 , 75 , 75 , 44 , 75 , 75 , 27 , 45 , 12 , 75 , 75 , 75 , 38 , 75 , 75 , 37 , 5 , 75 , 75 , 46 , 75 , 75 , 75 , 75 , 75 , 75 , 75 , 15 , 75 , 75 , 43 , 75 , 29 , 75 , 75 , 39 , 75 , 22 , 4 , 75 , 21 , 75 , 75 , 75 , 75 , 75 , 35 , 75 , 75 , 75 , 75 , 75 , 75 , 25 , 3 , 24 , 75 , 75 , 9 , 75 , 75 , 6 , 36 , 75 , 75 , 18 , 75 , 19 , 7 , 23 , 8  
 
 			] 
 		]
