@@ -46,6 +46,23 @@ special AbsSyntaxVisitor
 	# Current knowledge about variables types
 	readable writable attr _control_flow_ctx: ControlFlowContext
 
+	meth check_is_set(n: PNode, v: Variable)
+	do
+		if not control_flow_ctx.is_set(v) then
+			error(n, "Error: variable '{v}' is possibly unset.")
+			var cfc = control_flow_ctx
+			while cfc != null do
+				print("cfc: " + cfc.set_variables.join(" "))
+				cfc = cfc.prev
+			end
+		end
+	end
+
+	meth mark_is_set(v: Variable)
+	do
+		control_flow_ctx.set_variables.add(v)
+	end
+
 	init(tc, m) do super
 end
 
@@ -65,6 +82,15 @@ private class ControlFlowContext
 
 	# Current controlable block (for or while)
 	readable writable attr _base_block: AControlableBlock
+
+	# Set of variable that are set (assigned)
+	readable attr _set_variables: HashSet[Variable] = new HashSet[Variable]
+
+	# Is a variable set?
+	meth is_set(v: Variable): Bool
+	do
+		return _set_variables.has(v) or (_prev != null and _prev.is_set(v))
+	end
 
 	meth sub: ControlFlowContext
 	do
@@ -109,6 +135,22 @@ redef class AConcreteMethPropdef
 		if v.control_flow_ctx.has_return == false and method.signature.return_type != null then
 			v.error(self, "Control error: Reached end of function.")
 		end
+	end
+end
+
+redef class PParam
+	redef meth accept_control_flow(v)
+	do
+		super
+		v.mark_is_set(variable)
+	end
+end
+
+redef class AVardeclExpr
+	redef meth accept_control_flow(v)
+	do
+		super
+		if n_expr != null then v.mark_is_set(variable)
 	end
 end
 
@@ -188,20 +230,28 @@ redef class AIfExpr
 		v.visit(n_then)
 
 		if n_else == null then
-			# Restore control flow ctx
+			# Restore control flow ctx since the 'then" block is optional
 			v.control_flow_ctx = old_control_flow_ctx
 		else
 			# Remember what appens in the 'then'
 			var then_control_flow_ctx = v.control_flow_ctx
 			# Reset to execute the 'else'
-			v.control_flow_ctx = old_control_flow_ctx
+			v.control_flow_ctx = old_control_flow_ctx.sub
 
 			v.visit(n_else)
 
-			# Restore and conclude
+			# Merge then and else in the old control_flow
+			old_control_flow_ctx.has_return = v.control_flow_ctx.has_return and then_control_flow_ctx.has_return
+			old_control_flow_ctx.unreash = v.control_flow_ctx.unreash and then_control_flow_ctx.unreash
+
+			if v.control_flow_ctx.unreash then v.control_flow_ctx = then_control_flow_ctx
+			if then_control_flow_ctx.unreash then then_control_flow_ctx = v.control_flow_ctx
+			for variable in v.control_flow_ctx.set_variables do
+				if then_control_flow_ctx.is_set(variable) then
+					old_control_flow_ctx.set_variables.add(variable)
+				end
+			end
 			v.control_flow_ctx = old_control_flow_ctx
-			v.control_flow_ctx.has_return = v.control_flow_ctx.has_return and then_control_flow_ctx.has_return
-			v.control_flow_ctx.unreash = v.control_flow_ctx.unreash and then_control_flow_ctx.unreash
 		end
 	end
 end
@@ -219,7 +269,7 @@ special PExpr
 
 		super
 
-		# Restore control flow value
+		# Restore control flow value since all controlable blocks are optionnal
 		v.control_flow_ctx = old_control_flow_ctx
 	end
 end
@@ -231,6 +281,41 @@ end
 redef class AForExpr
 special AControlableBlock
 end
+
+redef class AForVardeclExpr
+	redef meth accept_control_flow(v)
+	do
+		super
+		v.mark_is_set(variable)
+	end
+end     
+
+
+redef class AVarExpr
+	redef meth accept_control_flow(v)
+	do
+		super
+		v.check_is_set(self, variable)
+	end
+end
+
+redef class AVarAssignExpr
+	redef meth accept_control_flow(v)
+	do
+		super
+		v.mark_is_set(variable)
+	end
+end
+
+redef class AVarReassignExpr
+	redef meth accept_control_flow(v)
+	do
+		super
+		v.check_is_set(self, variable)
+		v.mark_is_set(variable)
+	end
+end
+
 
 redef class AOnceExpr
 	redef meth accept_control_flow(v)
