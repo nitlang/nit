@@ -132,13 +132,13 @@ private class VariableContext
 	attr _dico: Map[Symbol, Variable]
 
 	# Build a new VariableContext
-	meth sub: VariableContext
+	meth sub: SubVariableContext
 	do
 		return new SubVariableContext.with(self, null, null)
 	end
 
 	# Build a nested VariableContext with new variable information
-	meth sub_with(v: Variable, t: MMType): VariableContext
+	meth sub_with(v: Variable, t: MMType): SubVariableContext
 	do
 		return new SubVariableContext.with(self, v, t)
 	end
@@ -233,8 +233,8 @@ redef class AConcreteInitPropdef
 		else 
 			var i = 0
 			var l = explicit_super_init_calls.length
-			var cur_m: MMMethod
-			var cur_c: MMLocalClass
+			var cur_m: MMMethod = null
+			var cur_c: MMLocalClass = null
 			if i < l then
 				cur_m = explicit_super_init_calls[i]
 				cur_c = cur_m.global.intro.local_class
@@ -301,13 +301,10 @@ redef class PExpr
 end
 
 redef class AVardeclExpr
-	# Assiociated local variable
-        readable attr _variable: Variable
-
 	redef meth after_typing(v)
 	do
 		var va = new Variable(n_id.to_symbol, self)
-		_variable = va
+		variable = va
 		v.variable_ctx.add(va)
 
 		if n_type != null then
@@ -387,15 +384,12 @@ redef class AForExpr
 end
 
 redef class AForVardeclExpr
-	# Associated automatic local variable
-	readable attr _variable: Variable
-
 	redef meth after_typing(v)
 	do
 		v.variable_ctx = v.variable_ctx.sub
-		var variable = new Variable(n_id.to_symbol, self)
-		_variable = variable
-		v.variable_ctx.add(variable)
+		var va = new Variable(n_id.to_symbol, self)
+		variable = va
+		v.variable_ctx.add(va)
 
 		var expr_type = n_expr.stype
 		if not v.check_conform(self, expr_type, v.type_collection) then
@@ -414,7 +408,7 @@ redef class AForVardeclExpr
 		end
 		var t = prop2.signature.return_type
 		if not n_expr.is_self then t = t.not_for_self
-		variable.stype = t
+		va.stype = t
 	end
 end
 
@@ -424,11 +418,6 @@ redef class AAssertExpr
 		v.check_conform(self, n_expr.stype, v.type_bool)
 		if n_expr.if_true_variable_ctx != null then v.variable_ctx = n_expr.if_true_variable_ctx
 	end
-end
-
-redef class AVarFormExpr
-	# Associated local variable
-        readable writable attr _variable: Variable 
 end
 
 redef class AVarExpr
@@ -472,6 +461,14 @@ redef class AReassignFormExpr
 	readable attr _assign_method: MMMethod
 end
 
+redef class AVarReassignExpr
+	redef meth after_typing(v)
+	do
+		var t = v.variable_ctx.stype(variable)
+		do_lvalue_typing(v, t)
+	end
+end
+
 redef class PAssignOp
 	meth method_name: Symbol is abstract
 end
@@ -480,14 +477,6 @@ redef class APlusAssignOp
 end
 redef class AMinusAssignOp
 	redef meth method_name do return once "-".to_symbol
-end
-
-redef class AVarReassignExpr
-	redef meth after_typing(v)
-	do
-		var t = v.variable_ctx.stype(variable)
-		do_lvalue_typing(v, t)
-	end
 end
 
 redef class ASelfExpr
@@ -625,7 +614,7 @@ redef class AArrayExpr
 
 	redef meth after_typing(v)
 	do
-		var stype: MMType
+		var stype: MMType = null
 		for n in n_exprs do
 			var ntype = n.stype
 			if stype == null or (ntype != null and stype < ntype) then
@@ -698,7 +687,7 @@ special ASuperInitCall
 
 		if precs.first.signature.return_type != null then
 			var stypes = new Array[MMType]
-			var stype: MMType
+			var stype: MMType = null
 			for prop in precs do
 				assert prop isa MMMethod
 				var t = prop.signature.return_type.for_module(v.module).adapt_to(v.local_property.signature.recv)
@@ -876,7 +865,7 @@ special AAbsSendExpr
 			v.error(self, "Error: Constructor invocation {property} must not be in nested block.")
 		end
 		var cla = v.module[property.global.intro.local_class.global]
-		var prev_class: MMLocalClass
+		var prev_class: MMLocalClass = null
 		if not v.explicit_super_init_calls.is_empty then
 			prev_class = v.explicit_super_init_calls.last.global.intro.local_class
 		end

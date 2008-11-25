@@ -185,6 +185,8 @@ class Variable
 	# Static type
 	readable writable attr _stype: MMType 
 
+	redef meth to_s do return _name.to_s
+
 	init(n: Symbol, d: PNode)
 	do
 		assert n != null
@@ -497,3 +499,19 @@ redef class PExpr
 	# Is null for statement and for erronus expression
 	meth stype: MMType is abstract
 end
+
+redef class AVardeclExpr
+	# Assiociated local variable
+	readable writable attr _variable: Variable
+end
+
+redef class AForVardeclExpr
+	# Associated automatic local variable
+	readable writable attr _variable: Variable
+end
+
+redef class AVarFormExpr
+	# Associated local variable
+	readable writable attr _variable: Variable 
+end
+

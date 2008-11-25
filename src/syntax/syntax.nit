@@ -78,11 +78,12 @@ redef class MMSrcModule
 		do_mmbuilder(tc)
 		if tc.error_count > 0 then exit(1)
 
+		do_typing(tc)
+		if tc.error_count > 0 then exit(1)
+
 		do_control_flow(tc)
 		if tc.error_count > 0 then exit(1)
 
-		do_typing(tc)
-		if tc.error_count > 0 then exit(1)
 	end
 
 end

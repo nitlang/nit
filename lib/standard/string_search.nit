@@ -153,7 +153,7 @@ special Pattern
 		var m = _length
 		var suff = new Array[Int].filled_with(m, m)
 
-		var f: Int
+		var f = 0
 		var g = m - 1
 		var i = m - 2
 		while i >= 0 do

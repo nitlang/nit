@@ -171,7 +171,7 @@ redef class CompilerVisitor
 			end
 			j += 1
 		end
-		var stop_prop: MMMethod
+		var stop_prop: MMMethod = null
 		if j < n.explicit_super_init_calls.length then
 			stop_prop = n.explicit_super_init_calls[j]
 		end
@@ -282,7 +282,7 @@ redef class MMSrcMethod
 	protected meth decl_csignature(v: CompilerVisitor, args: Array[String]): String
 	do
 		var params = new Array[String]
-		var params_new: Array[String]
+		var params_new: Array[String] = null
 		if global.is_init then
 			params_new = new Array[String]
 		end
@@ -421,7 +421,7 @@ redef class AConcreteMethPropdef
 		var old_return_value = v.return_value
 		var old_has_return = v.has_return
 
-		var itpos: String
+		var itpos: String = null
 		if self isa AConcreteInitPropdef then
 			itpos = "VAL2OBJ({params[0]})->vft[{method.local_class.global.init_table_pos_id}].i"
 			# v.add_instr("printf(\"{method.full_name}: inittable[%d] = %d\\n\", {itpos}, init_table[{itpos}]);")
@@ -505,7 +505,7 @@ redef class AInternMethPropdef
 	do
 		var c = method.local_class.name
 		var n = method.name
-		var s: String
+		var s: String = null
 		if c == once "Int".to_symbol then
 			if n == once "object_id".to_symbol then
 				s = "{p[0]}"

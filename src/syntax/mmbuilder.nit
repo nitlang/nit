@@ -289,7 +289,7 @@ redef class AModule
 		# Import super-modules
 		var module_names_to_import = new Array[Symbol]
 		var module_visibility = new HashMap[Symbol, Int]
-		var no_import: PImport
+		var no_import: PImport = null
 		for i in n_imports do
 			var n = i.module_name
 			if n != null then
