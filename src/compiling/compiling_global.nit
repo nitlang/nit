@@ -817,7 +817,7 @@ redef class MMLocalClass
 			if e == null then
 				v.add_instr("\{0} /* Class Hole :( */,")
 			else
-				v.add_instr("\{(int) {e.compile_to_c(v, self)}},")
+				v.add_instr("\{(bigint) {e.compile_to_c(v, self)}},")
 			end
 		end
 		if clen > ctab.length then

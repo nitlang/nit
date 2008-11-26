@@ -200,9 +200,9 @@ redef class MMLocalClass
 	private meth primitive_ctypes: HashMap[Symbol, PrimitiveInfo]
 	do
 		var res = new HashMap[Symbol, PrimitiveInfo]
-		var pnames = ["Int", "Char", "Bool", "Float", "NativeString", "NativeArray", "Pointer"]
-		var tagged = [true,  true,   true,   false,   false,          false,         false]
-		var cnames = ["int", "char", "int",  "float", "char *",       "val_t *",     "void *"]
+		var pnames = ["Int",    "Char", "Bool", "Float", "NativeString", "NativeArray", "Pointer"]
+		var tagged = [true,     true,   true,   false,   false,          false,         false]
+		var cnames = ["bigint", "char", "int",  "float", "char *",       "val_t *",     "void *"]
 		for i in [0..pnames.length[ do
 			var n = pnames[i].to_symbol
 			var pi = new PrimitiveInfo

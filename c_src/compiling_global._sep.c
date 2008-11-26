@@ -2832,7 +2832,7 @@ void compiling_global___MMLocalClass___compile_tables_to_c(val_t  self, val_t  p
       ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable0 /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable0 /*v*/, variable6) /*CompilerVisitor::add_instr*/;
     } else { /*if*/
       variable6 = NEW_string___String___init(); /*new String*/
-      variable7 = NEW_string___String___with_native(BOX_NativeString("{(int) "), TAG_Int(7)); /*new String*/
+      variable7 = NEW_string___String___with_native(BOX_NativeString("{(long int) "), TAG_Int(12)); /*new String*/
       variable8 = variable7;
       ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable8) /*String::append*/;
       variable9 = ((compiling_global___TableElt___compile_to_c_t)CALL( variable5 /*e*/,COLOR_compiling_global___TableElt___compile_to_c))( variable5 /*e*/,  variable0 /*v*/,  self) /*TableElt::compile_to_c*/;

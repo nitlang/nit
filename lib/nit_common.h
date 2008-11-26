@@ -11,12 +11,15 @@
 #define calloc(x,y) GC_MALLOC((x)*(y))
 #endif
 
+
+
 /* *** Types *** */
-typedef int (*fun_t)(int);	     				/* generic function pointer */
-typedef unsigned int cid_t;					/* class identifier */
-typedef unsigned long int val_t;	/* value (everything is a val_t) */
+typedef signed long int bigint;	/* standard int value, must be larger that any poiner */
+typedef bigint (*fun_t) (bigint);	     				/* generic function pointer */
+typedef bigint cid_t;					/* class identifier */
+typedef bigint val_t;	/* value (everything is a val_t) */
 typedef union obj_tu {union classtable_elt_tu * vft; val_t attr;} *obj_t; /* standard object */
-typedef union classtable_elt_tu { int i; fun_t f; cid_t cid;} classtable_elt_t;	/* classtable element */
+typedef union classtable_elt_tu { bigint i; fun_t f; cid_t cid;} classtable_elt_t;	/* classtable element */
 
 typedef classtable_elt_t * classtable_t;    	 		/* classtable */
 
@@ -51,7 +54,7 @@ typedef classtable_elt_t * classtable_t;    	 		/* classtable */
 #	define IntTAG 1
 #endif
 #define TAG_Int(x) ((val_t)(((x)<<2)|IntTAG))
-#define UNTAG_Int(x) ((int)(x)>>2)
+#define UNTAG_Int(x) ((bigint)(x)>>2)
 #ifndef CharTAG
 #	define CharTAG 2
 #endif

@@ -550,13 +550,13 @@ redef class AInternMethPropdef
 			end
 		else if c == once "Float".to_symbol then
 			if n == once "object_id".to_symbol then
-				s = "TAG_Int((int)UNBOX_Float({p[0]}))"
+				s = "TAG_Int((bigint)UNBOX_Float({p[0]}))"
 			else if n == once "unary -".to_symbol then
 				s = "BOX_Float(-UNBOX_Float({p[0]}))"
 			else if n == once "output".to_symbol then
 				v.add_instr("printf(\"%f\\n\", UNBOX_Float({p[0]}));")
 			else if n == once "to_i".to_symbol then
-				s = "TAG_Int((int)UNBOX_Float({p[0]}))"
+				s = "TAG_Int((bigint)UNBOX_Float({p[0]}))"
 			else if n == once "+".to_symbol then
 				s = "BOX_Float(UNBOX_Float({p[0]})+UNBOX_Float({p[1]}))" 
 			else if n == once "-".to_symbol then
@@ -651,7 +651,7 @@ redef class AInternMethPropdef
 				v.add_instr("(void)memcpy(UNBOX_NativeString({p[1]})+UNTAG_Int({p[4]}), UNBOX_NativeString({p[0]})+UNTAG_Int({p[3]}), UNTAG_Int({p[2]}));")
 			end
 		else if n == once "object_id".to_symbol then
-			s = "TAG_Int((int){p[0]})"
+			s = "TAG_Int((bigint){p[0]})"
 		else if n == once "sys".to_symbol then
 			s = "(G_sys)"
 		else if n == once "is_same_type".to_symbol then
