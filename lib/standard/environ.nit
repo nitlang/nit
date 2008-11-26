@@ -19,24 +19,20 @@ redef class Symbol
 	# Return environement valued for this symbol
 	meth environ: String
 	do
-		environ_default = "" # FIXME: Why this ?!?
-		return new String.from_cstring(to_s.to_cstring.get_environ)
+		var res = to_s.to_cstring.get_environ
+		# FIXME: There is no proper way to handle NULL C string yet. What a pitty.
+		var nulstr = once ("".to_cstring.get_environ)
+		if res != nulstr then
+			"env {self}=".output
+			res.output
+			return new String.from_cstring(res)
+		else
+			return ""
+		end
 	end
-
-	# set environement value for this symbol
-	meth environ=(v: String) do to_s.to_cstring.set_environ(v.to_cstring, 1)
-	
-	# set default environement value for this symbol
-	meth environ_default=(v: String) do to_s.to_cstring.set_environ(v.to_cstring, 0)
-		
-	# Unset the environement value of this symbol
-	meth unset do to_s.to_cstring.unset_environ
 end
 
 redef class NativeString
 # Refinned to add environement bindings
 	private meth get_environ: NativeString is extern "string_NativeString_NativeString_get_environ_0"
-	private meth put_environ is extern "string_NativeString_NativeString_put_environ_0" # this one is a bit compilcated to use ... so we dosen't use
-	private meth unset_environ is extern "string_NativeString_NativeString_unset_environ_0"
-	private meth set_environ(value : NativeString, overwrite : Int) is extern "string_NativeString_NativeString_set_environ_2"
 end

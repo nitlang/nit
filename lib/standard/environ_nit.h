@@ -17,8 +17,5 @@
 #include <stdlib.h>
 
 #define string_NativeString_NativeString_get_environ_0(self) getenv(self)
-#define string_NativeString_NativeString_put_environ_0(self) putenv(self)
-#define string_NativeString_NativeString_unset_environ_0(self) unsetenv(self)
-#define string_NativeString_NativeString_set_environ_2(self, p0, p1) setenv(self, p0, p1)
 
 #endif
