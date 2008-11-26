@@ -58,11 +58,6 @@ special ModuleLoader
 	init do end
 end
 
-redef class MMContext
-	# The current configuration/status of the tool
-        readable writable attr _tc: ToolContext 
-end
-
 redef class MMSrcModule
 	# Loading and syntax analysis of super modules
 	private meth process_supermodules(tc: ToolContext)

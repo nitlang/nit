@@ -24,7 +24,7 @@ import abstracttool
 
 # Store knowledge and facilities to generate files
 class DocContext
-special ToolContext
+special AbstractCompiler
 	# Destination directory
 	readable writable attr _dir: String
 
@@ -91,8 +91,6 @@ special ToolContext
 	do
 		_stage_context = new StageContext(null)
 	end
-
-	redef init do end
 
 	# Generate common files (frames, index, overview)
 	meth extract_other_doc
@@ -230,6 +228,32 @@ special ToolContext
 		else
 			return res
 		end
+	end
+
+	readable attr _opt_dir: OptionString = new OptionString("Directory where doc is generated", "-d", "--dir")
+
+	redef meth perform_work(mods)
+	do
+		dir.mkdir
+
+		for mod in modules do
+			assert mod isa MMSrcModule
+			mod.extract_module_doc(self)
+		end
+		self.extract_other_doc
+	end
+
+	redef init
+	do
+		super
+		option_context.add_option(opt_dir)
+	end
+
+	redef meth process_options
+	do
+		super
+		dir = opt_dir.value
+		if dir == null then dir = "."
 	end
 end
 
@@ -433,7 +457,7 @@ special MMEntity
 	do
 		var res = signature.to_html(dctx)
 		var s = self
-		if s isa MMSrcLocalProperty then
+		if s isa MMConcreteProperty then
 			if s.node isa ADeferredMethPropdef then
 				res.append(" is abstract")
 			else if s.node isa AInternMethPropdef then
@@ -454,20 +478,9 @@ redef class MMTypeProperty
 end
 
 redef class MMSrcModule
-	# Extract doc for the module and its supermodules 
-	meth extract_all_modules_doc(dctx: DocContext)
-	do
-		for m in mhe.greaters_and_self do
-			assert m isa MMSrcModule
-			m.extract_module_doc(dctx)
-		end
-	end	
-
-	# Extract and generate html file fhe the module
+	# Extract and generate html file for the module
 	meth extract_module_doc(dctx: DocContext)
 	do
-		if dctx.modules.has(self) then return
-
 		dctx.register(self)
 
 		dctx.clear
@@ -1051,7 +1064,7 @@ redef class MMSrcLocalClass
 	end
 end
 
-redef class MMSrcLocalProperty
+redef class MMConcreteProperty
 	redef meth need_doc(dctx)
 	do
 		if global.visibility_level >= 3 or self isa MMAttribute then
@@ -1142,42 +1155,5 @@ redef class MMTypeGeneric
 	end
 end
 
-
-# The main class of the nitdoc program
-class NitDoc
-special AbstractCompiler
-	readable attr _opt_dir: OptionString = new OptionString("Directory where doc is generated", "-d", "--dir")
-
-	redef meth perform_work(mods)
-	do
-		var dctx = tc
-		assert dctx isa DocContext
-
-		dctx.dir.mkdir
-
-		for mod in mods do
-			assert mod isa MMSrcModule
-			mod.extract_all_modules_doc(dctx)
-		end
-		dctx.extract_other_doc
-	end
-
-	redef init
-	do
-		super
-		option_context.add_option(opt_dir)
-	end
-
-	redef meth process_options
-	do
-		super
-		var dctx = new DocContext
-		dctx.dir = opt_dir.value
-		if dctx.dir == null then dctx.dir = "."
-
-		tc = dctx
-	end
-end
-
-var c = new NitDoc
+var c = new DocContext
 c.exec_cmd_line

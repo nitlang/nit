@@ -41,41 +41,40 @@ special AbstractCompiler
 	redef meth process_options
 	do
 		super
-		tc = new ToolContext
-		tc.output_file = opt_output.value
-		tc.boost = opt_boost.value
-		tc.no_cc = opt_no_cc.value
-		tc.ext_prefix = opt_extension_prefix.value
-		if tc.ext_prefix == null then tc.ext_prefix = ""
-		tc.attr_sim = opt_attr_sim.value
-		tc.global = opt_global.value
-		tc.base_dir = ".nit_compile"
-		tc.clibdir = opt_clibdir.value
-		if tc.clibdir == null then
+		output_file = opt_output.value
+		boost = opt_boost.value
+		no_cc = opt_no_cc.value
+		ext_prefix = opt_extension_prefix.value
+		if ext_prefix == null then ext_prefix = ""
+		attr_sim = opt_attr_sim.value
+		global = opt_global.value
+		base_dir = ".nit_compile"
+		clibdir = opt_clibdir.value
+		if clibdir == null then
 			var dir = once ("NIT_DIR".to_symbol).environ
 			if dir.is_empty then 
 				var dir = "{sys.program_name.dirname}/../lib"
-				if dir.file_exists then tc.clibdir = dir
+				if dir.file_exists then clibdir = dir
 			else
 				dir = "{dir}/lib"
-				if dir.file_exists then tc.clibdir = dir
+				if dir.file_exists then clibdir = dir
 			end
-			if tc.clibdir == null then
+			if clibdir == null then
 				error("Error: Cannot locate NIT C library directory. Uses --clibdir or envvar NIT_DIR.")
 				exit(1)
 			end
 		end
-		tc.bindir = opt_bindir.value
-		if tc.bindir == null then
+		bindir = opt_bindir.value
+		if bindir == null then
 			var dir = once ("NIT_DIR".to_symbol).environ
 			if dir.is_empty then 
 				var dir = "{sys.program_name.dirname}/../bin"
-				if dir.file_exists then tc.bindir = dir
+				if dir.file_exists then bindir = dir
 			else
 				dir = "{dir}/bin"
-				if dir.file_exists then tc.bindir = dir
+				if dir.file_exists then bindir = dir
 			end
-			if tc.bindir == null then
+			if bindir == null then
 				error("Error: Cannot locate NIT tools directory. Uses --bindir or envvar NIT_DIR.")
 				exit(1)
 			end
@@ -86,7 +85,7 @@ special AbstractCompiler
 	do
 		for mod in mods do
 			assert mod isa MMSrcModule
-			mod.compile_prog_to_c(tc)
+			mod.compile_prog_to_c(self)
 		end
 
 	end
