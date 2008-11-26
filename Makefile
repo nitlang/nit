@@ -41,22 +41,22 @@ c_src/nitc:
 	@echo '***************************************************************'
 	@echo '* Compile nitc from C source files                            *'
 	@echo '***************************************************************'
-	make -C c_src
+	cd c_src; make
 
 src/parser/parser.nit:
 	@echo '***************************************************************'
 	@echo '* Generate nit parser                                         *'
 	@echo '***************************************************************'
-	make -C src/parser
+	cd src/parser; make
 
 clean:
 	rm -rf -- .nit_compile 2> /dev/null || true
-	make -C c_src clean 
-	make -C src/parser clean 
-	make -C tests clean 
+	cd c_src; make clean 
+	cd src/parser; make clean 
+	cd tests; make clean 
 
 dist-clean: clean
-	make -C c_src dist-clean
-	make -C src/parser dist-clean
+	cd c_src; make dist-clean
+	cd src/parser; make dist-clean
 	rm -rf -- bin/nitc bin/nitdoc doc/stdlib
 
