@@ -514,7 +514,7 @@ class MMGlobalProperty
 	# The local property for each class that has the global property
 
 	# The introducing local property
-	readable attr _intro: MMConcreteProperty
+	readable attr _intro: MMLocalProperty
 
 	# The local class that introduces the global property
  	meth local_class: MMLocalClass
@@ -522,29 +522,28 @@ class MMGlobalProperty
  		return intro.local_class
  	end
 
-	# The concrete property redefinition hierarchy
-	readable attr _concrete_property_hierarchy: PartialOrder[MMConcreteProperty] = new PartialOrder[MMConcreteProperty]
+	# The property redefinition hierarchy
+	readable attr _property_hierarchy: PartialOrder[MMLocalProperty] = new PartialOrder[MMLocalProperty]
 
 	# Create a new global property introduced by a local one
-	protected init(p: MMConcreteProperty)
+	protected init(p: MMLocalProperty)
 	do
 		assert p != null
-		assert p.concrete_property != null
 
-		_concrete_property_hierarchy = new PartialOrder[MMConcreteProperty]
+		_property_hierarchy = new PartialOrder[MMLocalProperty]
 	
 		_intro = p
-		add_concrete_property(p, new Array[MMConcreteProperty])
+		add_local_property(p, new Array[MMLocalProperty])
 	end
 
 	redef meth to_s do return intro.full_name
 
-	# Register a new concrete property
-	meth add_concrete_property(i: MMConcreteProperty, sup: Array[MMConcreteProperty])
+	# Register a new local property
+	meth add_local_property(i: MMLocalProperty, sup: Array[MMLocalProperty])
 	do
 		assert i != null
 		assert sup != null
-		i._cprhe = _concrete_property_hierarchy.add(i,sup)
+		i._prhe = _property_hierarchy.add(i,sup)
 	end
 
 	# Is the global property an attribute ?
@@ -563,8 +562,7 @@ class MMGlobalProperty
 	readable writable attr _visibility_level: Int
 end
 
-# Local properties are adaptation of concrete local properties
-# They can be adapted for inheritance (or importation) or for type variarion (genericity, etc.)
+# Local properties are properties defined (explicitely or not) in a local class
 class MMLocalProperty
 	# The name of the property
 	readable attr _name: Symbol
@@ -575,9 +573,8 @@ class MMLocalProperty
 	# The global property where belong the local property
 	readable attr _global: MMGlobalProperty
 
-	# The concrete property
-	# May be self if self is a concrete property
-	readable attr _concrete_property: MMConcreteProperty 
+	# Redefinition hierarchy of the local property
+	readable attr _prhe: PartialOrderElement[MMLocalProperty]
 
 	# The module of the local property
 	meth module: MMModule do return _local_class.module
@@ -601,14 +598,24 @@ class MMLocalProperty
 		_global = g
 		_local_class.register_local_property(self)
 	end
+
+	# Introduce a new global property for this local one
+	meth new_global
+	do
+		assert _global == null
+		_global = new MMGlobalProperty(self)
+		_local_class.register_global_property(_global)
+	end
 	
 	redef meth to_s do return name.to_s
 
-	protected init(n: Symbol, bc: MMLocalClass, i: MMConcreteProperty)
+	# Is the concrete property contain a `super' in the body?
+	readable writable attr _need_super: Bool
+
+	protected init(n: Symbol, bc: MMLocalClass)
  	do
  		_name = n
 		_local_class = bc
- 		_concrete_property = i
  	end
 end
 
@@ -625,23 +632,5 @@ end
 # Concrete local classes
 class MMConcreteClass
 special MMLocalClass
-end
-
-# Concrete local properties
-class MMConcreteProperty
-special MMLocalProperty
-	# Redefinition hierarchy of the concrete property
-	readable attr _cprhe: PartialOrderElement[MMConcreteProperty]
-
-	# Is the concrete property contain a `super' in the body?
-	readable writable attr _need_super: Bool
- 
-	# Introduce a new global property for this local one
-	meth new_global
-	do
-		assert _global == null
-		_global = new MMGlobalProperty(self)
-		_local_class.register_global_property(_global)
-	end
 end
 

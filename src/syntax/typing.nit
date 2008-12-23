@@ -654,7 +654,7 @@ special ASuperInitCall
 	readable attr _init_in_superclass: MMMethod
 	redef meth after_typing(v)
 	do
-		var precs: Array[MMLocalProperty] = v.local_property.cprhe.direct_greaters
+		var precs: Array[MMLocalProperty] = v.local_property.prhe.direct_greaters
 		if not precs.is_empty then
 			v.local_property.need_super = true
 		else if v.local_property.global.is_init then

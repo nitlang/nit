@@ -318,7 +318,7 @@ redef class MMLocalClass
 
 		var impl: MMLocalProperty
 
-		var ghier = glob.concrete_property_hierarchy
+		var ghier = glob.property_hierarchy
 		var supers = che.direct_greaters
 		if ghier.length == 1 then
 			# Unredefined property
@@ -329,10 +329,9 @@ redef class MMLocalClass
 		else
 			# Hard multiple inheritance
 			# First compute the set of bottom properties
-			var impls = new ArraySet[MMConcreteProperty]
+			var impls = new ArraySet[MMLocalProperty]
 			for sc in supers do
 				var p = sc[glob]
-				assert p isa MMConcreteProperty
 				if p != null then impls.add(p)
 			end
 			# Second, extract most specific
@@ -344,8 +343,8 @@ redef class MMLocalClass
 				for i in impls2 do
 					print("   {i.full_name}")
 				end
-				print("------- {glob.concrete_property_hierarchy.first}")
-				print("------- {glob.concrete_property_hierarchy.to_dot}")
+				print("------- {glob.property_hierarchy.first}")
+				print("------- {glob.property_hierarchy.to_dot}")
 				exit(1)
 			end
 			impl = impls2.first
@@ -364,24 +363,18 @@ redef class MMLocalClass
 	end
 end
 
-redef class MMConcreteProperty
-	# FIXME: use this
-	meth is_deferred: Bool do return false
-end
-
 redef class MMLocalProperty
 	# Attach self to a global property
 	meth inherit_global(g: MMGlobalProperty)
 	do
 		set_global(g)
-		var impls = new Array[MMConcreteProperty]
+		var impls = new Array[MMLocalProperty]
 		for sc in local_class.che.direct_greaters do
 			var p = sc[g]
 			if p == null then continue
-			assert p isa MMConcreteProperty
 			impls.add(p)
 		end
-		g.add_concrete_property(concrete_property, impls)
+		g.add_local_property(self, impls)
 	end
 end
 

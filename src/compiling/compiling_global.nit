@@ -518,7 +518,6 @@ redef class MMSrcModule
 						v.add_decl("#define {pg.attr_access}(recv) ATTR(recv, {pg.color_id})")
 					end
 				end
-				assert p isa MMConcreteProperty
 				p.compile_property_to_c(v)
 			end
 		end
@@ -556,11 +555,11 @@ end
 
 class TableEltPropPos
 special LocalTableElt
-	attr _property: MMConcreteProperty
+	attr _property: MMLocalProperty
 	redef meth symbol do return _property.global.color_id
 	redef meth value(ga) do return "{ga.color(self)} /* Property {_property} */"
 
-	init(p: MMConcreteProperty)
+	init(p: MMLocalProperty)
 	do
 		_property = p
 	end
@@ -591,7 +590,7 @@ special TableEltPropPos
 				found = true
 			else if found and c.che < s then
 				var p = s[g]
-				if p != null and p isa MMConcreteProperty then
+				if p != null then
 					#print "found {s.module}::{s}::{p}"
 					return p.cname
 				end
@@ -853,9 +852,8 @@ redef class MMLocalClass
 				var t = p.signature.return_type
 				if p isa MMAttribute and t != null then
 					# FIXME: Not compatible with sep compilation
-					var pi = p.concrete_property
-					assert pi isa MMSrcAttribute
-					var np = pi.node
+					assert p isa MMSrcAttribute
+					var np = p.node
 					assert np isa AAttrPropdef
 					var ne = np.n_expr
 					if ne != null then
@@ -895,7 +893,7 @@ redef class MMLocalClass
 				v.indent
 				v.add_instr(init_table_decl)
 				v.add_instr("val_t self = NEW_{name}();")
-				v.add_instr("{p.concrete_property.cname}({args.join(", ")});")
+				v.add_instr("{p.cname}({args.join(", ")});")
 				v.add_instr("return self;")
 				v.unindent
 				v.add_instr("}")

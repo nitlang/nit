@@ -290,7 +290,7 @@ redef class MMLocalProperty
 	meth cname: String
 	do
 		if _cname_cache == null then
-			_cname_cache = cmangle(concrete_property.module.name, concrete_property.local_class.name, name)
+			_cname_cache = cmangle(module.name, local_class.name, name)
 		end
 		return _cname_cache
 	end

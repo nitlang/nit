@@ -207,7 +207,7 @@ redef class MMMethod
 	# == and != are guarded and possibly inlined
 	meth compile_call(v: CompilerVisitor, cargs: Array[String]): String
 	do
-		var i = concrete_property
+		var i = self
 		assert i isa MMSrcMethod
 		if i.node isa AInternMethPropdef or 
 			(i.local_class.name == (once "Array".to_symbol) and name == (once "[]".to_symbol))
@@ -272,7 +272,7 @@ redef class MMAttribute
 	end
 end
 
-redef class MMConcreteProperty
+redef class MMLocalProperty
 	# Compile the property as a C property
 	meth compile_property_to_c(v: CompilerVisitor) do end
 end

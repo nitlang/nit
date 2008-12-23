@@ -66,13 +66,13 @@ special MMConcreteClass
 	readable writable attr _formal_dict: Map[Symbol, MMTypeFormalParameter]
 
 	# Concrete NIT source properties by name
-	readable attr _src_local_properties: Map[Symbol, MMConcreteProperty] 
+	readable attr _src_local_properties: Map[Symbol, MMLocalProperty] 
 
 	init(n: Symbol, cla: PClassdef, a: Int)
 	do
 		super(n, a)
 		_nodes = [cla]
-		_src_local_properties = new HashMap[Symbol, MMConcreteProperty]
+		_src_local_properties = new HashMap[Symbol, MMLocalProperty]
 	end
 end
 
@@ -99,26 +99,26 @@ redef class MMGlobalProperty
 	end
 end
 
-redef class MMConcreteProperty
+redef class MMLocalProperty
 	# The attached node (if any)
 	meth node: PNode do return null
 end
 
 # Concrete NIT source attribute
 class MMSrcAttribute
-special MMConcreteProperty
+special MMLocalProperty
 special MMAttribute
 	redef readable attr _node: AAttrPropdef
 	init(name: Symbol, cla: MMLocalClass, n: AAttrPropdef)
 	do
-		super(name, cla, self)
+		super(name, cla)
 		_node = n
 	end
 end
 
 # Concrete NIT source method
 class MMSrcMethod
-special MMConcreteProperty
+special MMLocalProperty
 special MMMethod
 end
 
@@ -134,7 +134,7 @@ special MMAttrImplementationMethod
 
 	init(name: Symbol, cla: MMLocalClass, n: AAttrPropdef)
 	do
-		super(name, cla, self)
+		super(name, cla)
 		_node = n
 	end
 end
@@ -145,7 +145,7 @@ special MMAttrImplementationMethod
 
 	init(name: Symbol, cla: MMLocalClass, n: AAttrPropdef)
 	do
-		super(name, cla, self)
+		super(name, cla)
 		_node = n
 	end
 end
@@ -156,19 +156,19 @@ special MMSrcMethod
 	redef readable attr _node: AMethPropdef
 	init(name: Symbol, cla: MMLocalClass, n: AMethPropdef)
 	do
-		super(name, cla, self)
+		super(name, cla)
 		_node = n
 	end
 end
 
 # Concrete NIT source virtual type
 class MMSrcTypeProperty
-special MMConcreteProperty
+special MMLocalProperty
 special MMTypeProperty
 	redef readable attr _node: ATypePropdef
 	init(name: Symbol, cla: MMLocalClass, n: ATypePropdef)
 	do
-		super(name, cla, self)
+		super(name, cla)
 		_node = n
 	end
 end
@@ -268,7 +268,7 @@ special Visitor
 	readable writable attr _local_class: MMSrcLocalClass 
 
 	# The current property
-	readable writable attr _local_property: MMConcreteProperty
+	readable writable attr _local_property: MMLocalProperty
 
 	# The current tool configuration/status
 	readable attr _tc: ToolContext 
