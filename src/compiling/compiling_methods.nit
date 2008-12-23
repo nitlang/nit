@@ -399,7 +399,7 @@ redef class AConcreteMethPropdef
 	redef meth do_compile_inside(v, method, params)
 	do
 		var orig_meth: MMLocalProperty = method.global.intro
-		var orig_sig = orig_meth.signature.adaptation_to(method.signature.recv)
+		var orig_sig = orig_meth.signature_for(method.signature.recv)
 		if n_signature != null then
 			var sig = n_signature
 			assert sig isa ASignature

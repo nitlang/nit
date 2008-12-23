@@ -105,7 +105,7 @@ redef class MMLocalClass
 		file.write("class {self}\n")
 		for p in global_properties do
 			var lp = self[p]
-			file.write("\t{lp}{lp.signature}\n")
+			file.write("\t{lp}{lp.signature_for(get_type)}\n")
 		end
 		file.write("end # {self}\n")
 	end

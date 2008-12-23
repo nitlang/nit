@@ -575,10 +575,6 @@ class MMLocalProperty
 	# The global property where belong the local property
 	readable attr _global: MMGlobalProperty
 
-	# The original property where self is derived
-	# May be null if self is an original one
-	readable attr _super_prop: MMLocalProperty
-
 	# The concrete property
 	# May be self if self is a concrete property
 	readable attr _concrete_property: MMConcreteProperty 

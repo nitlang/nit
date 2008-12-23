@@ -58,7 +58,7 @@ special AbsSyntaxVisitor
 
 	init(tc, module) do super
 
-	private meth get_default_constructor_for(n: PNode, c: MMLocalClass, prop: MMMethod): MMMethod
+	private meth get_default_constructor_for(n: PNode, c: MMLocalClass, prop: MMSrcMethod): MMMethod
 	do
 		var v = self
 		#var prop = v.local_property
@@ -70,7 +70,7 @@ special AbsSyntaxVisitor
 			if not g.is_init then continue
 			if g.intro.local_class != c then continue
 			var gp = c[g]
-			assert gp isa MMMethod
+			assert gp isa MMSrcMethod
 			var garity = gp.signature.arity
 			if prop != null and g.intro.name == prop.name then
 				if garity == 0 or prop.signature < gp.signature then
@@ -400,13 +400,13 @@ redef class AForVardeclExpr
 			v.error(self, "Error: Collection MUST have an iterate method")
 			return
 		end
-		var iter_type = prop.signature.return_type
+		var iter_type = prop.signature_for(expr_type).return_type
 		var prop2 = iter_type.select_method(once ("item".to_symbol))
 		if prop2 == null then
 			v.error(self, "Error: {iter_type} MUST have an item method")
 			return
 		end
-		var t = prop2.signature.return_type
+		var t = prop2.signature_for(iter_type).return_type
 		if not n_expr.is_self then t = t.not_for_self
 		va.stype = t
 	end
@@ -451,9 +451,9 @@ redef class AReassignFormExpr
 			return
 		end
 		prop.global.check_visibility(v, self, v.module, false)
-		var psig = prop.signature
+		var psig = prop.signature_for(type_lvalue)
 		_assign_method = prop
-		v.check_conform(self, n_value.stype, psig[0].not_for_self)
+		v.check_conform(n_value, n_value.stype, psig[0].not_for_self)
 		v.check_conform(self, psig.return_type.not_for_self, n_value.stype)
 	end
 
@@ -678,19 +678,19 @@ special ASuperInitCall
 			_init_in_superclass = p
 			register_super_init_call(v, p)
 			if n_args.length > 0 then
-				_arguments = process_signature(v, p, true, n_args.to_a)
+				_arguments = process_signature(v, v.self_type, p, true, n_args.to_a)
 			end
 		else
 			v.error(self, "Error: No super method to call for {v.local_property}.")
 			return
 		end
 
-		if precs.first.signature.return_type != null then
+		if precs.first.signature_for(v.self_type).return_type != null then
 			var stypes = new Array[MMType]
 			var stype: MMType = null
 			for prop in precs do
 				assert prop isa MMMethod
-				var t = prop.signature.return_type.for_module(v.module).adapt_to(v.local_property.signature.recv)
+				var t = prop.signature_for(v.self_type).return_type.for_module(v.module).adapt_to(v.local_property.signature.recv)
 				stypes.add(t)
 				if stype == null or stype < t then
 					stype = t
@@ -711,6 +711,9 @@ redef class AAttrFormExpr
 	# Attribute accessed
 	readable attr _prop: MMAttribute
 
+	# Attribute type of the acceded attribute
+	readable attr _attr_type: MMType
+
 	# Compute the attribute accessed
 	private meth do_typing(v: TypingVisitor)
 	do
@@ -727,6 +730,9 @@ redef class AAttrFormExpr
 			v.error(self, "Error: Attribute {name} from {prop.global.local_class.module} is invisible in {v.module}")
 		end
 		_prop = prop
+		var at = prop.signature_for(type_recv).return_type 
+		if not n_expr.is_self then at = at.not_for_self
+		_attr_type = at
 	end
 end
 
@@ -737,8 +743,6 @@ redef class AAttrExpr
 		if prop == null then
 			return
 		end
-		var attr_type = prop.signature.return_type
-		if not n_expr.is_self then attr_type = attr_type.not_for_self
 		_stype = attr_type
 	end
 end
@@ -750,8 +754,6 @@ redef class AAttrAssignExpr
 		if prop == null then
 			return
 		end
-		var attr_type = prop.signature.return_type
-		if not n_expr.is_self then attr_type = attr_type.not_for_self
 		v.check_conform(self, n_value.stype, attr_type)
 	end
 end
@@ -763,8 +765,6 @@ redef class AAttrReassignExpr
 		if prop == null then
 			return
 		end
-		var attr_type = prop.signature.return_type
-		if not n_expr.is_self then attr_type = attr_type.not_for_self
 		do_lvalue_typing(v, attr_type)
 	end
 end
@@ -776,7 +776,7 @@ special PExpr
 	do
 		var prop = get_property(v, type_recv, is_implicit_self, name)
 		if prop == null then return
-		var args = process_signature(v, prop, recv_is_self, raw_args)
+		var args = process_signature(v, type_recv, prop, recv_is_self, raw_args)
 		if args == null then return
 		_prop = prop
 		_arguments = args
@@ -809,10 +809,10 @@ special PExpr
 		return prop
 	end
 
-	private meth process_signature(v: TypingVisitor, prop: MMMethod, recv_is_self: Bool, raw_args: Array[PExpr]): Array[PExpr]
+	private meth process_signature(v: TypingVisitor, type_recv: MMType, prop: MMMethod, recv_is_self: Bool, raw_args: Array[PExpr]): Array[PExpr]
 	do
 		prop.global.check_visibility(v, self, v.module, recv_is_self)
-		var psig = prop.signature
+		var psig = prop.signature_for(type_recv)
 		var par_vararg = psig.vararg_rank
 		var par_arity = psig.arity
 		var raw_arity: Int
@@ -946,7 +946,7 @@ special ASuperInitCall
 				register_super_init_call(v, prop)
 			end
 		end
-		var t = prop.signature.return_type
+		var t = prop.signature_for(n_expr.stype).return_type
 		if t != null and not n_expr.is_self then t = t.not_for_self
 		_stype = t
 	end
@@ -968,7 +968,7 @@ special AReassignFormExpr
 				v.error(self, "Error: constructor {prop} is not invoken on 'self'.")
 			end
 		end
-		var t = prop.signature.return_type
+		var t = prop.signature_for(n_expr.stype).return_type
 		if not n_expr.is_self then t = t.not_for_self
 
 		do_lvalue_typing(v, t)

@@ -54,24 +54,15 @@ redef class MMLocalClass
 end
 
 redef class MMLocalProperty
-	# The cached result of signature
-	attr _signature_cache: MMSignature
+	# The signature of the property (where it is declared)
+	readable writable attr _signature: MMSignature
 
-	# return signature for this property
-	meth signature: MMSignature # FIXME must rewrite
-	do
-		if _signature_cache == null then
-			if _super_prop == null then
-				_signature_cache = _concrete_property.signature
-			else
-				_signature_cache = _super_prop.signature
-			end
-		end
-		assert _signature_cache != null
-		return _signature_cache
+	# Return the adapted signature of self for a receiver of type t
+	meth signature_for(t: MMType): MMSignature do
+		var x = self
+		assert x isa MMConcreteProperty
+		return x.signature.adaptation_to(t)
 	end
-
-	meth signature=(s: MMSignature) do _signature_cache = s
 end
 
 # Signature for local properties
@@ -141,6 +132,27 @@ class MMSignature
 			s.append(": {_return_type}")
 		end
 		return s
+	end
+
+	# Adapt the signature to a different receiver
+	meth adaptation_to(r: MMType): MMSignature
+	do
+		if _recv == r then
+			return self
+		end
+		var mod = r.module
+		var p = _params
+		if p != null then
+			p = new Array[MMType]
+			for i in _params do
+				p.add(i.for_module(mod).adapt_to(r))
+			end
+		end
+		var rv = _return_type
+		if rv != null then
+			rv = rv.for_module(mod).adapt_to(r)
+		end
+		return new MMSignature(p,rv,r)
 	end
 
 	init(params: Array[MMType], return_type: MMType, r: MMType)

@@ -28,26 +28,28 @@ end
 # Virtual type properties
 class MMTypeProperty
 special MMLocalProperty
-	redef meth inherit_to(t)
+	# The virtual static type associated
+	meth stype_for(recv: MMType): MMVirtualType
 	do
-		return new MMImplicitType(self, t)
+		var prop = recv.select_property(global)
+		assert prop isa MMTypeProperty
+		return prop.real_stype_for(recv)
 	end
 
-	# Cached result of stype
-	attr _stype_cache: MMVirtualType
+	# Cached results of stype
+	attr _stypes_cache: HashMap[MMType, MMVirtualType] = new HashMap[MMType, MMVirtualType]
 
-	# The virtual static type associated
-	meth stype: MMVirtualType
+	private meth real_stype_for(recv: MMType): MMVirtualType
 	do
 		# If the signature is not build: Circular definition
 		if signature == null then return null
 
-		var r = _stype_cache
-		if r == null then
-			r = new MMVirtualType(self)
-			_stype_cache = r
-		end
-		return r
+		if _stypes_cache.has_key(recv) then return _stypes_cache[recv]
+
+		var res = new MMVirtualType(self, recv)
+		_stypes_cache[recv] = res
+
+		return res
 	end
 end
 
@@ -68,16 +70,22 @@ special MMTypeFormal
 	# The property associed
 	readable attr _property: MMTypeProperty
 
-	protected init(p: MMTypeProperty)
+	# The receiver type
+	readable attr _recv: MMType
+
+	protected init(p: MMTypeProperty, recv: MMType)
 	do
-		super(p.name, p.signature.return_type)
+		super(p.name, p.signature_for(recv).return_type)
 		_property = p
+		_recv = recv
 	end
+
+	redef meth module do return _recv.module
 
 	redef meth for_module(mod)
 	do
-		var recv = _property.signature.recv.for_module(mod)
-		return adapt_to(recv)
+		if mod == module then return self
+		return adapt_to(recv.for_module(mod))
 	end
 
 	redef meth not_for_self
@@ -87,10 +95,7 @@ special MMTypeFormal
 
 	redef meth adapt_to(recv)
 	do
-		# print "adapt {self} from {_property.signature.recv.module}::{_property.signature.recv} to {recv.module}::{recv}"
-		var prop = recv.select_property(_property.global)
-		assert prop isa MMTypeProperty
-		return prop.stype
+		return property.stype_for(recv)
 	end
 end
 
@@ -103,10 +108,4 @@ redef class MMLocalClass
 		end
 		return null
 	end
-end
-
-class MMImplicitType
-special MMTypeProperty
-special MMImplicitProperty
-	init(p, t) do super
 end

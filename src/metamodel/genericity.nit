@@ -91,95 +91,6 @@ redef class MMLocalClass
 	meth is_generic: Bool do return arity > 0
 end
 
-redef class MMSignature
-	# Adapt the signature to a different receiver
-	meth adaptation_to(r: MMType): MMSignature
-	do
-		if _recv == r then
-			return self
-		end
-		var mod = r.module
-		var p = _params
-		if p != null then
-			p = new Array[MMType]
-			for i in _params do
-				p.add(i.for_module(mod).adapt_to(r))
-			end
-		end
-		var rv = _return_type
-		if rv != null then
-			rv = rv.for_module(mod).adapt_to(r)
-		end
-		return new MMSignature(p,rv,r)
-	end
-end
-
-redef class MMLocalProperty
-	# The receiver type if the signature is unknown (aka lazily computed)
-	attr _recv_alone: MMType
-
-	meth recv: MMType
-	do
-		assert signature != null
-		return signature.recv
-	end
-
-	meth recv=(rec: MMType)
-	do
-		assert rec != null
-		#		print("setting recv for {self} {rec} {_recv == null}")
-		assert _signature_cache == null
-		_recv_alone = rec
-	end
-
-	redef meth signature
-	do
-		var sig = _signature_cache
-		if sig != null then
-			return sig
-		end
-		if self isa MMConcreteProperty then
-			return null
-		end
-		var sp = _super_prop
-		#assert self != sp
-		var impl = _concrete_property
-		if sp == null then # superprop ?
-			#		print("building signature for {self}:{self.object_id} and type {_recv}")
-			_signature_cache = impl.signature
-			assert _signature_cache != null
-		else
-			#		print("adapting signature for {self}:{self.object_id} and type {_recv}")
-			assert sp.signature != null
-			assert _recv_alone != null
-			#_signature = sp.signature
-			_signature_cache = sp.signature.adaptation_to(_recv_alone)
-		end
-		assert _signature_cache != null
-		#		print("finally recv is {_recv} for {self}:{self.object_id} and sig is {_signature.recv}")
-		return _signature_cache
-	end
-
-	# Adapt the property to a different receiver
-	# TODO: Merge with inheritance stuff
-	meth adapt_property(t: MMType): MMLocalProperty
-	do
-		assert t != null
-		var recv = local_class.get_type
-		if t == recv then
-			return self
-		else
-			return inherit_to(t)
-		end
-	end
-
-	redef meth inherit_from(s, t) # for the super bugs
-	do
-		super
-		_recv_alone = t
-	end
-end
-
 redef class MMType
 	# TODO: IS this useful? 
 	meth is_generic: Bool is abstract
@@ -270,9 +181,10 @@ special MMTypeClass
 			assert _local_class != null
 			var p = _local_class[g]
 			if p != null then
-				var p2 = p.adapt_property(self)
-				_props[g] = p2
-				return p2
+				#var p2 = p.adapt_property(self)
+				#_props[g] = p2
+				#return p2
+				return p
 			else
 				assert false
 			end
@@ -335,8 +247,12 @@ special MMTypeFormal
 
 	redef meth adapt_to(r)
 	do
+		r = r.direct_type
 		var old_r = r.upcast_for(def_class)
-		#print "adapt {self} for ({old_r} -> {r})"
+		#if not old_r isa MMTypeGeneric then
+		#	print "adapt {self}'{def_class}'{self.module} to {r}'{r.module}"
+		#	print "   old_r = {old_r}'{old_r.module}"
+		#end
 		assert old_r isa MMTypeGeneric
 		var reduct = old_r.params[position]
 		assert reduct != null

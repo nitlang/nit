@@ -335,8 +335,7 @@ redef class MMLocalClass
 		assert a.local_class != self
 		var sup = a.select_property(glob) # Select super prop
 		assert sup != null
-		var prop = sup.inherit_to(get_type) # special the new prop
-		return prop
+		return sup
 	end
 end
 
@@ -382,56 +381,6 @@ redef class MMLocalProperty
 		# What the next line used for?
 		g.add_concrete_property(concrete_property, g.get_compatible_concrete_properties_for(local_class))
 	end
-
-	# Create an adaptation of self to a different receiver
-	meth inherit_to(t: MMType): MMLocalProperty is abstract
-
-	# ?
-	protected meth inherit_from(s: MMLocalProperty, t: MMType) # for the super bugs
-	do
-		assert _super_prop == null
-		_super_prop = s
-		if _global == null then
-			set_global(s.global)
-		end
-	end
-
-end
-
-redef class MMMethod
-	redef meth inherit_to(t) do
-		return new MMImplicitMethod(self, t)
-	end
-end
-
-# A local property that is an adatation of an exiting one
-class MMImplicitProperty
-special MMLocalProperty
-	# Create a property from an existing property and a new receiver
-	init(prop: MMLocalProperty, bt: MMType)
-	do
-		super(prop.name, bt.local_class, prop.concrete_property)
-		inherit_from(prop, bt)
-	end
-end
-
-class MMImplicitMethod
-special MMMethod
-special MMImplicitProperty
-	init(p, t) do super
-end
-
-redef class MMAttribute
-	redef meth inherit_to(t)
-	do
-		return new MMImplicitAttribute(self,t)
-	end
-end
-
-class MMImplicitAttribute
-special MMAttribute
-special MMImplicitProperty
-	init(p, t) do super
 end
 
 redef class MMAncestor

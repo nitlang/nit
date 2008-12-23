@@ -670,6 +670,7 @@ redef class PPropdef
 	do
 		var s = prop.signature
 		for ip in supers do
+			assert ip isa MMConcreteProperty
 			var isig = ip.signature.adaptation_to(v.local_class.get_type)
 
 			if s == null then
