@@ -316,26 +316,51 @@ redef class MMLocalClass
 		assert not _local_property_by_global.has_key(glob)
 		assert glob != null
 
-		var impls = glob.get_compatible_concrete_properties_for(self)
-		if impls.length != 1 then
-			stderr.write("Fatal error: inherit_local_property error\n")
-			print("------- {module}::{self} {glob.intro.full_name}")
-			for i in impls do
-				print("   {i.full_name}")
+		var impl: MMLocalProperty
+
+		var ghier = glob.concrete_property_hierarchy
+		var supers = che.direct_greaters
+		if ghier.length == 1 then
+			# Unredefined property
+			impl = glob.intro
+		else if supers.length == 1 then
+			# Single inheritance
+			impl = supers.first[glob]
+		else
+			# Hard multiple inheritance
+			# First compute the set of bottom properties
+			var impls = new ArraySet[MMConcreteProperty]
+			for sc in supers do
+				var p = sc[glob]
+				assert p isa MMConcreteProperty
+				if p != null then impls.add(p)
 			end
-			print("------- {glob.concrete_property_hierarchy.first}")
-			print("------- {glob.concrete_property_hierarchy.to_dot}")
-			exit(1)
+			# Second, extract most specific
+			var impls2 = ghier.select_smallests(impls)
+			# Conflict case (FIXME)
+			if impls2.length != 1 then
+				stderr.write("Fatal error: inherit_local_property error\n")
+				print("------- {module}::{self} {glob.intro.full_name}")
+				for i in impls2 do
+					print("   {i.full_name}")
+				end
+				print("------- {glob.concrete_property_hierarchy.first}")
+				print("------- {glob.concrete_property_hierarchy.to_dot}")
+				exit(1)
+			end
+			impl = impls2.first
 		end
-		var impl = impls.first
-		var ac = ancestor_for(impl.local_class)
-		ac.local_class.inherit_global_properties
-		var a = ac.stype
+
+		# FIXME: Why these 3 lines ?
+		#var ac = ancestor_for(impl.local_class)
+		#ac.local_class.inherit_global_properties
+		#var a = ac.stype
+		#assert a.local_class != self
+
+		# Register the local property
+		_local_property_by_global[glob] = impl
 		
-		assert a.local_class != self
-		var sup = a.select_property(glob) # Select super prop
-		assert sup != null
-		return sup
+		return impl
 	end
 end
 
@@ -344,42 +369,19 @@ redef class MMConcreteProperty
 	meth is_deferred: Bool do return false
 end
 
-redef class MMGlobalProperty
-	# Get the most specific local properties defined in superclasses of c
-	private meth get_compatible_concrete_properties_for(cla: MMLocalClass): Array[MMConcreteProperty]
-	do
-		var impl_hier = _concrete_property_hierarchy
-		if impl_hier.length == 1 then return [intro]
-		var impls = new ArraySet[MMConcreteProperty]
-		var clache = cla.che
-		if true then
-			#print "{cla.module}::{cla} get glob {intro.local_class}::{intro.name}"
-		for sc in cla.che.direct_greaters do
-			#print "   try {sc.module}::{sc} {sc.che != null} {sc.crhe != null} {sc.che != null}"
-			var p = sc[self]
-			if p == null then continue
-			var impl = p.concrete_property
-			impls.add(impl)
-		end
-		else
-		for impl in impl_hier do
-			var bc = impl.local_class
-			if clache < bc then
-				impls.add(impl)
-			end
-		end
-		end
-		return impl_hier.select_smallests(impls)
-	end
-end
-
 redef class MMLocalProperty
 	# Attach self to a global property
 	meth inherit_global(g: MMGlobalProperty)
 	do
 		set_global(g)
-		# What the next line used for?
-		g.add_concrete_property(concrete_property, g.get_compatible_concrete_properties_for(local_class))
+		var impls = new Array[MMConcreteProperty]
+		for sc in local_class.che.direct_greaters do
+			var p = sc[g]
+			if p == null then continue
+			assert p isa MMConcreteProperty
+			impls.add(p)
+		end
+		g.add_concrete_property(concrete_property, impls)
 	end
 end
 

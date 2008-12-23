@@ -57,11 +57,17 @@ redef class MMLocalProperty
 	# The signature of the property (where it is declared)
 	readable writable attr _signature: MMSignature
 
+	attr _signatures_cache: HashMap[MMType, MMSignature] = new HashMap[MMType, MMSignature]
+
 	# Return the adapted signature of self for a receiver of type t
 	meth signature_for(t: MMType): MMSignature do
-		var x = self
-		assert x isa MMConcreteProperty
-		return x.signature.adaptation_to(t)
+		if t == local_class.get_type then return signature
+
+		if _signatures_cache.has_key(t) then return _signatures_cache[t]
+
+		var res = signature.adaptation_to(t)
+		_signatures_cache[t] = res
+		return res
 	end
 end
 
