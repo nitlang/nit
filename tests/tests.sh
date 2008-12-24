@@ -39,8 +39,8 @@ elif [ ! -f "$HTM" ]; then
 	for i in "$@"; do
 		f=`echo $i | cut -f1 -d.`
 		echo -n "<td><a href=\"$f.nit\">$f</a>" >> $HTM
-		if [ -r "$f.sav" ]; then
-			echo -n " - <a href=\"$f.sav\">sav</a>" >> $HTM
+		if [ -r "sav/$f.sav" ]; then
+			echo -n " - <a href=\"sav/$f.sav\">sav</a>" >> $HTM
 		fi
 		if [ -f "$f.inputs" ]; then
 			echo -n " - <a href=\"$f.inputs\">inputs</a>" >> $HTM
@@ -107,14 +107,14 @@ for ii in "$@"; do
 	fi
 
 	# Result	
-	if [ -r "$ff.sav" ]; then
-		diff "$ff.res" "$ff.sav" > "$ff.diff.log"
+	if [ -r "sav/$ff.sav" ]; then
+		diff "$ff.res" "sav/$ff.sav" > "$ff.diff.log"
 		if [ "$?" == 0 ]; then
 			echo "[ok] $ff.res"
 			ok="$ok $ff"
 			echo -n "<a href=\"$ff.res\">res ok</a>" >> $HTM
 		else
-			echo "[======= fail $ff.res $ff.sav =======]"
+			echo "[======= fail $ff.res sav/$ff.sav =======]"
 			nok="$nok $ff"
 			echo -n "<strong style=\"background-color:red\"><a href=\"$ff.res\">res fail</a> - <a href=\"$ff.diff.log\">diff</a></strong>" >> $HTM
 		fi

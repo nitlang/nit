@@ -26,20 +26,20 @@ echo -n "=> $f: "
 
 if [ -r $f.res ]; then
 	# Result	
-	if [ -r $f.sav ]; then
-		diff -q $f.res $f.sav > /dev/null;
+	if [ -r sav/$f.sav ]; then
+		diff -q $f.res sav/$f.sav > /dev/null;
 		if [ $? == 0 ]; then
 			echo "[ok] $f"
 		else
-			echo "======== [update] $f.sav ========="
-			cp $f.res $f.sav
+			echo "======== [update] sav/$f.sav ========="
+			cp $f.res sav/$f.sav
 		fi
 	else
-		echo "======== [new] $f.sav ========="
-		cp $f.res $f.sav
+		echo "======== [new] sav/$f.sav ========="
+		cp $f.res sav/$f.sav
 	fi
 else
-	if [ -r $f.sav ]; then
+	if [ -r sav/$f.sav ]; then
 		echo "[no res] $f"
 	else
 		echo "[not yet] $f"
