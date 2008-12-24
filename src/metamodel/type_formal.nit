@@ -43,15 +43,6 @@ special MMType
 		return _bound.local_class
 	end
 
-	redef meth select_property(g)
-	do
-		if g == null then
-			return null
-		else
-			return _bound.select_property(g)
-		end
-	end
-
 	redef meth to_s do return _name.to_s
 
 	protected init(name: Symbol, bound: MMType)

@@ -473,7 +473,7 @@ redef class MMSrcModule
 		if not has_global_class_named(sysname) then
 			print("No main")
 		else
-			var sys = class_by_name(sysname).get_type
+			var sys = class_by_name(sysname)
 			# var initm = sys.select_method(once "init".to_symbol)
 			var mainm = sys.select_method(once "main".to_symbol)
 			if mainm == null then

@@ -31,7 +31,7 @@ special MMLocalProperty
 	# The virtual static type associated
 	meth stype_for(recv: MMType): MMVirtualType
 	do
-		var prop = recv.select_property(global)
+		var prop = recv.local_class[global]
 		assert prop isa MMTypeProperty
 		return prop.real_stype_for(recv)
 	end
@@ -49,18 +49,6 @@ special MMLocalProperty
 		var res = new MMVirtualType(self, recv)
 		_stypes_cache[recv] = res
 
-		return res
-	end
-end
-
-redef class MMType
-	# Select a virtual type property by its name
-	meth select_virtual_type(name: Symbol): MMTypeProperty
-	do
-		assert local_class != null
-		assert name != null
-		var res = select_property(local_class.virtual_type(name))
-		assert res isa MMTypeProperty
 		return res
 	end
 end
@@ -107,5 +95,16 @@ redef class MMLocalClass
 			return prop
 		end
 		return null
+	end
+
+	# Select a virtual type property by its name
+	meth select_virtual_type(name: Symbol): MMTypeProperty
+	do
+		assert name != null
+		var gp = virtual_type(name)
+		if gp == null then return null
+		var res = self[gp]
+		assert res isa MMTypeProperty
+		return res
 	end
 end

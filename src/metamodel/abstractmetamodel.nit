@@ -443,6 +443,30 @@ class MMLocalClass
 
 		return null
 	end
+
+	# Select a method from its name
+	# TODO: Will disapear when qualified names will be available
+	meth select_method(name: Symbol): MMMethod
+	do
+		assert name != null
+		var gp = method(name)
+		if gp == null then return null
+		var res = self[gp]
+		assert res isa MMMethod
+		return res
+	end
+	
+	# Select an attribute from its name
+	# TODO: Will disapear when qualified names will be available
+	meth select_attribute(name: Symbol): MMAttribute
+	do
+		assert name != null
+		var gp = attribute(name)
+		if gp == null then return null
+		var res = self[gp]
+		assert res isa MMAttribute
+		return res
+	end
 	
 	# Look in super-classes (by specialization) and return properties with name
 	# Beware, global property of results is not intended to be the same

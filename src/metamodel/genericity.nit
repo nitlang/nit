@@ -108,7 +108,6 @@ class MMTypeGeneric
 special MMTypeClass
 	# Formal arguments
 	readable attr _params: Array[MMType] 
-	attr _props: Map[MMGlobalProperty, MMLocalProperty] = new HashMap[MMGlobalProperty, MMLocalProperty]
 
 	redef meth is_generic do return true
 
@@ -170,26 +169,6 @@ special MMTypeClass
 			end
 		end
 		return true
-	end
-
-	redef meth select_property(g)
-	do
-		if g == null then
-			return null
-		end
-		if not _props.has_key(g) then
-			assert _local_class != null
-			var p = _local_class[g]
-			if p != null then
-				#var p2 = p.adapt_property(self)
-				#_props[g] = p2
-				#return p2
-				return p
-			else
-				assert false
-			end
-		end
-		return _props[g]
 	end
 
 	redef meth to_s

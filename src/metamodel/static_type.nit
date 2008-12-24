@@ -216,29 +216,6 @@ abstract class MMType
 	# a double dispatch is needed
 	meth is_supertype(t: MMType): Bool is abstract
 
-	# Select a method from its name
-	meth select_method(name: Symbol): MMMethod
-	do
-		assert local_class != null
-		assert name != null
-		var res = select_property(local_class.method(name))
-		assert res isa MMMethod
-		return res
-	end
-	
-	# Select an attribute from its name
-	meth select_attribute(name: Symbol): MMAttribute
-	do
-		assert name != null
-		assert local_class != null
-		var res = select_property(local_class.attribute(name))
-		assert res isa MMAttribute
-		return res
-	end
-
-	# Select a local property from its global property
-	meth select_property(t: MMGlobalProperty): MMLocalProperty is abstract
-
 	# Adapt self to another module
 	meth for_module(mod: MMModule): MMType is abstract
 
@@ -290,15 +267,6 @@ special MMTypeClass
 	redef meth is_supertype(t)
 	do
 		return  t.local_class.cshe <= _local_class
-	end
-
-	redef meth select_property(g)
-	do
-		assert _local_class != null
-		if g == null then
-			return null
-		end
-		return _local_class[g]
 	end
 
 	redef meth for_module(mod)

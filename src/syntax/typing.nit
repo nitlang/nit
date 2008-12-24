@@ -395,13 +395,13 @@ redef class AForVardeclExpr
 		if not v.check_conform(self, expr_type, v.type_collection) then
 			return
 		end
-		var prop = expr_type.select_method(once ("iterator".to_symbol))
+		var prop = expr_type.local_class.select_method(once ("iterator".to_symbol))
 		if prop == null then
 			v.error(self, "Error: Collection MUST have an iterate method")
 			return
 		end
 		var iter_type = prop.signature_for(expr_type).return_type
-		var prop2 = iter_type.select_method(once ("item".to_symbol))
+		var prop2 = iter_type.local_class.select_method(once ("item".to_symbol))
 		if prop2 == null then
 			v.error(self, "Error: {iter_type} MUST have an item method")
 			return
@@ -445,7 +445,7 @@ redef class AReassignFormExpr
 			return
 		end
 		var name = n_assign_op.method_name
-		var prop = type_lvalue.select_method(name)
+		var prop = type_lvalue.local_class.select_method(name)
 		if prop == null then
 			v.error(self, "Error: Method '{name}' doesn't exists in {type_lvalue}.")
 			return
@@ -663,7 +663,7 @@ special ASuperInitCall
 				if not p.global.is_init then
 					v.error(self, "Error: {p.local_class}::{p} is not a constructor.")
 				else
-					precs.add(v.self_type.select_property(p.global))
+					precs.add(v.local_class[p.global])
 				end
 			end
 			if precs.is_empty then
@@ -722,7 +722,7 @@ redef class AAttrFormExpr
 			return
 		end
 		var name = n_id.to_symbol
-		var prop = type_recv.select_attribute(name)
+		var prop = type_recv.local_class.select_attribute(name)
 		if prop == null then
 			v.error(self, "Error: Attribute {name} doesn't exists in {type_recv}.")
 			return
@@ -785,14 +785,14 @@ special PExpr
 	private meth get_property(v: TypingVisitor, type_recv: MMType, is_implicit_self: Bool, name: Symbol): MMMethod
 	do
 		if type_recv == null then return null
-		var prop = type_recv.select_method(name)
+		var prop = type_recv.local_class.select_method(name)
 		if prop == null and v.local_property.global.is_init then
 			var props = type_recv.local_class.super_methods_named(name)
 			if props.length > 1 then
 				v.error(self, "Error: Ambigous method name '{name}' for {props.join(", ")}. Use explicit designation.")
 				return null
 			else if props.length == 1 then 
-				var p = type_recv.select_property(props.first.global)
+				var p = type_recv.local_class[props.first.global]
 				assert p isa MMMethod
 				prop = p
 			end

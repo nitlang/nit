@@ -218,7 +218,7 @@ redef class MMMethod
 		var ee = once "==".to_symbol
 		var ne = once "!=".to_symbol
 		if name == ne then
-			var eqp = signature.recv.select_method(ee)
+			var eqp = signature.recv.local_class.select_method(ee)
 			var eqcall = eqp.compile_call(v, cargs)
 			return "TAG_Bool(!UNTAG_Bool({eqcall}))"
 		end
@@ -849,7 +849,7 @@ redef class AForVardeclExpr
 	redef meth compile_stmt(v)
 	do
 		var e = v.compile_expr(n_expr)
-		var prop = n_expr.stype.select_method(once "iterator".to_symbol)
+		var prop = n_expr.stype.local_class.select_method(once "iterator".to_symbol)
 		if prop == null then
 			printl("No iterator")
 			return
@@ -858,17 +858,17 @@ redef class AForVardeclExpr
 		v.free_var(e)
 		var iter = v.get_var
 		v.add_assignment(iter, prop.compile_call(v, [e]))
-		var prop2 = ittype.select_method(once "is_ok".to_symbol)
+		var prop2 = ittype.local_class.select_method(once "is_ok".to_symbol)
 		if prop2 == null then
 			printl("No is_ok")
 			return
 		end
-		var prop3 = ittype.select_method(once "item".to_symbol)
+		var prop3 = ittype.local_class.select_method(once "item".to_symbol)
 		if prop3 == null then
 			printl("No item")
 			return
 		end
-		var prop4 = ittype.select_method(once "next".to_symbol)
+		var prop4 = ittype.local_class.select_method(once "next".to_symbol)
 		if prop4 == null then
 			printl("No next")
 			return
@@ -1042,7 +1042,7 @@ end
 redef class AStringFormExpr
 	redef meth compile_expr(v)
 	do
-		var prop = stype.select_method(once "with_native".to_symbol)
+		var prop = stype.local_class.select_method(once "with_native".to_symbol)
 		compute_string_info
 		return prop.compile_constructor_call(v, ["BOX_NativeString(\"{_cstring}\")", "TAG_Int({_cstring_length})"])
 	end
@@ -1098,12 +1098,12 @@ end
 redef class ASuperstringExpr
 	redef meth compile_expr(v)
 	do
-		var prop = stype.select_method(once "init".to_symbol)
+		var prop = stype.local_class.select_method(once "init".to_symbol)
 		var recv = prop.compile_constructor_call(v, new Array[String]) 
 
-		var prop2 = stype.select_method(once "append".to_symbol)
+		var prop2 = stype.local_class.select_method(once "append".to_symbol)
 
-		var prop3 = stype.select_method(once "to_s".to_symbol)
+		var prop3 = stype.local_class.select_method(once "to_s".to_symbol)
 		for ne in n_exprs do
 			var e = v.ensure_var(v.compile_expr(ne))
 			if ne.stype != stype then
@@ -1126,10 +1126,10 @@ end
 redef class AArrayExpr
 	redef meth compile_expr(v)
 	do
-		var prop = stype.select_method(once "with_capacity".to_symbol)
+		var prop = stype.local_class.select_method(once "with_capacity".to_symbol)
 		var recv = prop.compile_constructor_call(v,["TAG_Int({n_exprs.length})"])
 
-		var prop2 = stype.select_method(once "add".to_symbol)
+		var prop2 = stype.local_class.select_method(once "add".to_symbol)
 		for ne in n_exprs do
 			var e = v.compile_expr(ne)
 			prop2.compile_call(v, [recv, e])
@@ -1141,7 +1141,7 @@ end
 redef class ARangeExpr
 	redef meth compile_expr(v)
 	do
-		var prop = stype.select_method(propname)
+		var prop = stype.local_class.select_method(propname)
 		var e = v.compile_expr(n_expr)
 		var e2 = v.compile_expr(n_expr2)
 		return prop.compile_constructor_call(v, [e, e2])

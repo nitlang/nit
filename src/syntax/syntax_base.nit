@@ -437,7 +437,7 @@ redef class AType
 				v.error(self, "Type error: formal type {name} cannot have formal parameters.")
 				return null
 			end
-			var t = cla.get_type.select_virtual_type(name).stype_for(cla.get_type)
+			var t = cla.get_type.local_class.select_virtual_type(name).stype_for(cla.get_type)
 			if t == null then
 				v.error(self, "Type error: circular definition in formal type {name}.")
 				return null
