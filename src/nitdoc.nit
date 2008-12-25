@@ -408,12 +408,6 @@ special MMEntity
 		end
 	end
 	
-	redef meth short_doc do return concrete_property.short_doc
-
-	redef meth doc do return concrete_property.doc
-
-	redef meth need_doc(dctx) do return false
-
 	# Kind of property (meth, attr, etc.)
 	meth kind: String is abstract
 
@@ -457,7 +451,7 @@ special MMEntity
 	do
 		var res = signature.to_html(dctx)
 		var s = self
-		if s isa MMConcreteProperty then
+		if s.node != null then
 			if s.node isa ADeferredMethPropdef then
 				res.append(" is abstract")
 			else if s.node isa AInternMethPropdef then
@@ -465,6 +459,49 @@ special MMEntity
 			end
 		end
 		return res
+	end
+
+	redef meth need_doc(dctx)
+	do
+		if global.visibility_level >= 3 or self isa MMAttribute then
+			if not dctx.intrude_mode then return false
+			if dctx.module.visibility_for(module) == 0 then return false
+		end
+		if global.intro == self then
+			return true
+		end
+		return doc != null
+	end
+
+	redef meth short_doc
+	do
+		var d = doc
+		if d != null then
+			return d.short
+		else if global.intro == self then
+			return "&nbsp;"
+		else
+			return global.intro.short_doc
+		end
+	end
+	
+	redef meth doc
+	do
+		var n = node
+		if not node isa PPropdef then
+			return null
+		end
+		assert n isa PPropdef
+		var d = n.n_doc
+		assert d isa ADoc
+		if d == null then
+			return null
+		end
+		if d.n_comment.is_empty then
+			return null
+		else
+			return d
+		end
 	end
 end
 redef class MMMethod
@@ -827,20 +864,20 @@ special MMEntity
 		var passname = pass_name(pass)
 		dctx.open_stage
 		dctx.stage("<table border=\"1\" width=\"100%\" cellpadding=\"3\" cellspacing=\"0\">\n")
-		dctx.stage("<tr bgcolor=\"#CCCCFF\"><th colspan=\"2\">{passname} Summary of {self}</th><tr>\n")
+		dctx.stage("<tr bgcolor=\"#CCCCFF\"><th colspan=\"2\">{passname} Summary of {self}</th></tr>\n")
 
 		var new_props = new Array[MMLocalProperty]
 		for g in global_properties do
 			if not accept_prop(g.intro, pass) then continue
 			if module.visibility_for(g.intro.module) < g.visibility_level then continue
 			var p = self[g]
-			if not p.need_doc(dctx) then
+			if p.local_class != self or not p.need_doc(dctx) then
 				var cla = new Array[MMLocalClass]
 				for m in dctx.owned_modules do
 					var c = m[global]
 					if c == null or not c isa MMConcreteClass then continue
 					var p2 = c[g]
-					if p2 == null or not p2.need_doc(dctx) then continue
+					if p2 == null or p2.local_class != c or not p2.need_doc(dctx) then continue
 					cla.add(c)
 				end
 				if cla.is_empty then continue
@@ -854,7 +891,7 @@ special MMEntity
 		end
 		dctx.sort(new_props)
 		for p in new_props do
-			dctx.add("<tr><td width=\"20%\" align=\"right\">{p.prototype_head(dctx)}</td><td><b>{p.html_link(dctx)}</b>{p.prototype_body(dctx)}<br/>&nbsp;&nbsp;&nbsp;&nbsp;{p.short_doc}</td><tr>\n")
+			dctx.add("<tr><td width=\"20%\" align=\"right\">{p.prototype_head(dctx)}</td><td><b>{p.html_link(dctx)}</b>{p.prototype_body(dctx)}<br/>&nbsp;&nbsp;&nbsp;&nbsp;{p.short_doc}</td></tr>\n")
 		end
 		dctx.stage("</table><br/>\n")
 
@@ -888,7 +925,7 @@ special MMEntity
 					end
 					for g in c.global_properties do
 						var p = c[g]
-						if p.need_doc(dctx) and accept_prop(p, pass) then
+						if p.local_class == c and p.need_doc(dctx) and accept_prop(p, pass) then
 							props.add(kc[g])
 						end
 					end
@@ -937,7 +974,7 @@ special MMEntity
 			end
 			for g in c.global_properties do
 				var p = c[g]
-				if p.need_doc(dctx) and accept_prop(p, pass) then
+				if p.local_class == c and p.need_doc(dctx) and accept_prop(p, pass) then
 					var kp = kc[g]
 					if not props.has(kp) then props.add(kp)
 				end
@@ -997,7 +1034,7 @@ special MMEntity
 		var properties = new Array[String]
 		for g in global_properties do
 			var p = self[g]
-			if p.need_doc(dctx) and accept_prop(p, pass) then
+			if p.local_class == self and p.need_doc(dctx) and accept_prop(p, pass) then
 				properties.add(p.html_link(dctx))
 			end
 		end
@@ -1061,51 +1098,6 @@ redef class MMSrcLocalClass
 			end
 		end
 		return super
-	end
-end
-
-redef class MMConcreteProperty
-	redef meth need_doc(dctx)
-	do
-		if global.visibility_level >= 3 or self isa MMAttribute then
-			if not dctx.intrude_mode then return false
-			if dctx.module.visibility_for(module) == 0 then return false
-		end
-		if global.intro == self then
-			return true
-		end
-		return true
-	end
-
-	redef meth short_doc
-	do
-		var d = doc
-		if d != null then
-			return d.short
-		else if global.intro == self then
-			return "&nbsp;"
-		else
-			return global.intro.short_doc
-		end
-	end
-	
-	redef meth doc
-	do
-		var n = node
-		if not node isa PPropdef then
-			return null
-		end
-		assert n isa PPropdef
-		var d = n.n_doc
-		assert d isa ADoc
-		if d == null then
-			return null
-		end
-		if d.n_comment.is_empty then
-			return null
-		else
-			return d
-		end
 	end
 end
 
