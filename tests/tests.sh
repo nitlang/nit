@@ -121,15 +121,19 @@ for ii in "$@"; do
 	else
 		echo "[=== no sav ===] $ff.res"
 		echo -n "<a href=\"$ff.res\">res</a>" >> $HTM
+		nos="$nos $ff"
 	fi
 	echo "</td>" >> $HTM
    done
 done
 
-echo "ok: " `echo $ok | wc -w` "/ $#"
+echo "ok: " `echo $ok | wc -w` "/" `echo $ok $nok $nos | wc -w`
 echo "<td>" `echo $ok | wc -w` "</td><td>" `echo $nok | wc -w` "</td></tr>" >> $HTM
 
 if [ -n "$nok" ]; then
 	echo "fail: $nok"
 	echo "There were errors !"
+fi
+if [ -n "$nos" ]; then
+	echo "no sav: $nos"
 fi

@@ -27,7 +27,7 @@ class A
 	end
 end
 
-var a: A
+var a: A = null
 if a != null then
 	a.foo
 	a.bar.output

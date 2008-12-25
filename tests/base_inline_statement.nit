@@ -16,7 +16,7 @@
 
 import kernel
 
-var x: Int
+var x = 0
 while x == 0 do x = 2
 while x == 0 do
 	x = 2

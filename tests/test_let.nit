@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var i: Int
+var i = 0
 var j: Object = i
 var k: Object
 

@@ -87,8 +87,12 @@ class Transformation
     attr _t: Int
     attr _k: Int
 
-
     init(q: Int, r: Int, s: Int, t: Int)
+        do
+	    set(q, r, s, t)
+	end
+
+    meth set(q: Int, r: Int, s: Int, t: Int)
 	do
 	    _q = q
 	    _r = r
@@ -125,7 +129,7 @@ class Transformation
 
     meth qrst(q: Int, r: Int, s: Int, t: Int): Transformation
 	do
-	    init(q, r, s, t)
+	    set(q, r, s, t)
 	    return self
 	end
 end

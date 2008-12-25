@@ -27,6 +27,6 @@ class A
 	end
 end
 
-var a: A
+var a: A = null
 a.bar.output
 a.foo

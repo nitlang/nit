@@ -15,10 +15,10 @@
 # limitations under the License.
 
 
-var a: Object
-var b: Object
-var c= a
-var d= "coucou"
+var a: Object = null
+var b: Object = null
+var c = a
+var d = "coucou"
 d = null
 printn(0)
 printn(null)
