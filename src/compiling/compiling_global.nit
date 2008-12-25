@@ -492,7 +492,7 @@ redef class MMSrcModule
 	# Compile sep files 
 	meth compile_mod_to_c(v: CompilerVisitor)
 	do
-		v.add_decl("#define LOCATE_{name} \"{filename}\"")
+		v.add_decl("extern const char *LOCATE_{name};")
 		if not v.tc.global then
 			v.add_decl("extern const int SFT_{name}[];")
 		end
@@ -526,6 +526,8 @@ redef class MMSrcModule
 	# Compile module file for the current module
 	meth compile_local_table_to_c(v: CompilerVisitor)
 	do
+		v.add_instr("const char *LOCATE_{name} = \"{filename}\";")
+
 		if v.tc.global or _local_table.is_empty then
 			return
 		end

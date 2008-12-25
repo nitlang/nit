@@ -327,8 +327,9 @@ redef class MMSrcMethod
 		var ctx_old = v.ctx
 		v.ctx = new CContext
 
-		v.add_decl("struct trace_t trace = \{NULL, LOCATE_{module.name}, {node.line_number}, LOCATE_{cname}};")
+		v.add_decl("struct trace_t trace = \{NULL, NULL, {node.line_number}, LOCATE_{cname}};")
 		v.add_instr("trace.prev = tracehead; tracehead = &trace;")
+		v.add_instr("trace.file = LOCATE_{module.name};")
 		var s = do_compile_inside(v, args)
 		v.add_instr("tracehead = trace.prev;")
 		if s == null then
