@@ -83,7 +83,8 @@ fi
 for i in "$@"; do
 	j=`basename "$i" .c`
 	found="false"
-	cksum=`gcc -E $OPTS $i 2> /dev/null | $CKSUM`
+	# We remove starting # to be path independent (after preprocess, there are the only # remainings)
+	cksum=`gcc -E $OPTS $i 2> /dev/null | grep -v "^#" | $CKSUM`
 	for e in $ext; do
 		o="$dir$j.$e.o"
 		cksumfile="$dir$j.$e.cksum"
