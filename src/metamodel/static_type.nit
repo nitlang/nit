@@ -97,8 +97,7 @@ class MMSignature
 			return true
 		end
 		assert _recv.module == s.recv.module
-		assert arity == s.arity
-		assert (_return_type == null) == (s.return_type == null)
+		if arity != s.arity or (_return_type == null) != (s.return_type == null) then return false
 		if _return_type != null and not _return_type < s.return_type then
 			return false
 		end

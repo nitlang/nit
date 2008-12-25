@@ -674,7 +674,7 @@ redef class PPropdef
 
 			if s == null then
 				if v.params.length != isig.arity then
-					prop.node.printl("v.params.length {v.params.length} != isig.arity {isig.arity} ; {prop.full_name} vs {ip.full_name}")
+					#prop.node.printl("v.params.length {v.params.length} != isig.arity {isig.arity} ; {prop.full_name} vs {ip.full_name}")
 					return
 				end
 				for p in v.params do
