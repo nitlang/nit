@@ -45,6 +45,7 @@
 #include "utils._sep.h"
 #include "nitc._sep.h"
 #include <nit_common.h>
+const char *LOCATE_abstracttool = "./abstracttool.nit";
 const int SFT_abstracttool[9] = {
   3239 /* Id of AbstractCompiler */,
   4 /* Color of AbstractCompiler */,
@@ -56,6 +57,7 @@ const int SFT_abstracttool[9] = {
   40 /* Property dump_module_info */,
   40 /* Property dump_properties */,
 };
+const char *LOCATE_syntax = "./syntax//syntax.nit";
 const int SFT_syntax[6] = {
   203 /* Id of SrcModuleLoader */,
   3 /* Color of SrcModuleLoader */,
@@ -64,6 +66,7 @@ const int SFT_syntax[6] = {
   84 /* Property process_supermodules */,
   85 /* Property process_syntax */,
 };
+const char *LOCATE_mmbuilder = "./syntax//mmbuilder.nit";
 const int SFT_mmbuilder[131] = {
   2667 /* Id of CSHSorter */,
   3 /* Color of CSHSorter */,
@@ -197,6 +200,7 @@ const int SFT_mmbuilder[131] = {
   70 /* Property is_vararg */,
   67 /* Property check_visibility */,
 };
+const char *LOCATE_syntax_base = "./syntax//syntax_base.nit";
 const int SFT_syntax_base[118] = {
   2567 /* Id of MMSrcModule */,
   3 /* Color of MMSrcModule */,
@@ -317,6 +321,7 @@ const int SFT_syntax_base[118] = {
   76 /* Property variable */,
   77 /* Property variable= */,
 };
+const char *LOCATE_parser = "./parser//parser.nit";
 const int SFT_parser[2326] = {
   35 /* Id of State */,
   2 /* Color of State */,
@@ -2645,6 +2650,7 @@ const int SFT_parser[2326] = {
   42 /* Color of ReduceAction572 */,
   43 /* Property init */,
 };
+const char *LOCATE_parser_prod = "./parser//parser_prod.nit";
 const int SFT_parser_prod[261] = {
   1 /* Property _parent */,
   47 /* Property parent */,
@@ -2908,6 +2914,7 @@ const int SFT_parser_prod[261] = {
   69 /* Property init_adoc */,
   67 /* Property init */,
 };
+const char *LOCATE_lexer = "./parser//lexer.nit";
 const int SFT_lexer[125] = {
   3 /* Property _text */,
   4 /* Property _filename */,
@@ -3035,6 +3042,7 @@ const int SFT_lexer[125] = {
   50 /* Property nil_array */,
   51 /* Property build_accept_table */,
 };
+const char *LOCATE_parser_nodes = "./parser//parser_nodes.nit";
 const int SFT_parser_nodes[1257] = {
   63 /* Id of PNode */,
   2 /* Color of PNode */,
@@ -4294,10 +4302,13 @@ const int SFT_parser_nodes[1257] = {
   71 /* Property n_eof */,
   72 /* Property n_eof= */,
 };
+const char *LOCATE_standard = "./../lib/standard//standard.nit";
+const char *LOCATE_environ = "./../lib/standard//environ.nit";
 const int SFT_environ[2] = {
   40 /* Property environ */,
   40 /* Property get_environ */,
 };
+const char *LOCATE_symbol = "./../lib/standard//symbol.nit";
 const int SFT_symbol[6] = {
   98 /* Property to_symbol */,
   27 /* Id of Symbol */,
@@ -4306,6 +4317,7 @@ const int SFT_symbol[6] = {
   41 /* Color of Symbol */,
   42 /* Property init */,
 };
+const char *LOCATE_hash = "./../lib/standard//hash.nit";
 const int SFT_hash[57] = {
   15 /* Property hash */,
   2627 /* Id of HashCollection */,
@@ -4365,6 +4377,7 @@ const int SFT_hash[57] = {
   45 /* Color of HashSetIterator */,
   46 /* Property init */,
 };
+const char *LOCATE_string = "./../lib/standard//string.nit";
 const int SFT_string[54] = {
   3783 /* Id of String */,
   11 /* Color of String */,
@@ -4421,6 +4434,7 @@ const int SFT_string[54] = {
   43 /* Property native_argc */,
   44 /* Property native_argv */,
 };
+const char *LOCATE_array = "./../lib/standard//array.nit";
 const int SFT_array[61] = {
   3651 /* Id of AbstractArray */,
   10 /* Color of AbstractArray */,
@@ -4484,6 +4498,7 @@ const int SFT_array[61] = {
   42 /* Property []= */,
   43 /* Property copy_to */,
 };
+const char *LOCATE_abstract_collection = "./../lib/standard//abstract_collection.nit";
 const int SFT_abstract_collection[94] = {
   163 /* Id of Collection */,
   5 /* Color of Collection */,
@@ -4580,6 +4595,7 @@ const int SFT_abstract_collection[94] = {
   50 /* Property second= */,
   51 /* Property init */,
 };
+const char *LOCATE_kernel = "./../lib/standard//kernel.nit";
 const int SFT_kernel[72] = {
   3 /* Id of Object */,
   1 /* Color of Object */,
@@ -4654,9 +4670,11 @@ const int SFT_kernel[72] = {
   2 /* Color of Pointer */,
   40 /* Color of Pointer */,
 };
+const char *LOCATE_time = "./../lib/standard//time.nit";
 const int SFT_time[1] = {
   28 /* Property get_time */,
 };
+const char *LOCATE_sorter = "./../lib/standard//sorter.nit";
 const int SFT_sorter[12] = {
   175 /* Id of AbstractSorter */,
   2 /* Color of AbstractSorter */,
@@ -4671,6 +4689,7 @@ const int SFT_sorter[12] = {
   46 /* Color of ComparableSorter */,
   47 /* Property init */,
 };
+const char *LOCATE_file = "./../lib/standard//file.nit";
 const int SFT_file[73] = {
   29 /* Property printn */,
   30 /* Property print */,
@@ -4746,6 +4765,7 @@ const int SFT_file[73] = {
   44 /* Property native_stdout */,
   45 /* Property native_stderr */,
 };
+const char *LOCATE_stream = "./../lib/standard//stream.nit";
 const int SFT_stream[52] = {
   135 /* Id of IOS */,
   3 /* Color of IOS */,
@@ -4800,6 +4820,7 @@ const int SFT_stream[52] = {
   63 /* Color of FDIOStream */,
   64 /* Property init */,
 };
+const char *LOCATE_string_search = "./../lib/standard//string_search.nit";
 const int SFT_string_search[35] = {
   51 /* Id of Pattern */,
   3 /* Color of Pattern */,
@@ -4837,6 +4858,7 @@ const int SFT_string_search[35] = {
   132 /* Property split_with */,
   133 /* Property split */,
 };
+const char *LOCATE_exec = "./../lib/standard//exec.nit";
 const int SFT_exec[44] = {
   43 /* Id of Process */,
   2 /* Color of Process */,
@@ -4883,6 +4905,7 @@ const int SFT_exec[44] = {
   48 /* Property out_fd */,
   49 /* Property err_fd */,
 };
+const char *LOCATE_list = "./../lib/standard//list.nit";
 const int SFT_list[28] = {
   3631 /* Id of List */,
   10 /* Color of List */,
@@ -4913,6 +4936,7 @@ const int SFT_list[28] = {
   74 /* Property prev */,
   75 /* Property prev= */,
 };
+const char *LOCATE_range = "./../lib/standard//range.nit";
 const int SFT_range[16] = {
   2507 /* Id of Range */,
   6 /* Color of Range */,
@@ -4931,6 +4955,7 @@ const int SFT_range[16] = {
   45 /* Color of IteratorRange */,
   46 /* Property init */,
 };
+const char *LOCATE_math = "./../lib/standard//math.nit";
 const int SFT_math[16] = {
   76 /* Property rand */,
   52 /* Property sqrt */,
@@ -4949,6 +4974,7 @@ const int SFT_math[16] = {
   38 /* Property srand_from */,
   39 /* Property srand */,
 };
+const char *LOCATE_parser_tables = "./parser//parser_tables.nit";
 const int SFT_parser_tables[1174] = {
   59 /* Id of ParserTable */,
   2 /* Color of ParserTable */,
@@ -6125,6 +6151,7 @@ const int SFT_parser_tables[1174] = {
   1208 /* Property error_messages */,
   1209 /* Property errors */,
 };
+const char *LOCATE_mmloader = "./mmloader.nit";
 const int SFT_mmloader[52] = {
   179 /* Id of ToolContext */,
   3 /* Color of ToolContext */,
@@ -6179,6 +6206,8 @@ const int SFT_mmloader[52] = {
   44 /* Property mtime= */,
   45 /* Property import_supers_modules */,
 };
+const char *LOCATE_metamodel = "./metamodel//metamodel.nit";
+const char *LOCATE_vararg = "./metamodel//vararg.nit";
 const int SFT_vararg[6] = {
   1 /* Property _vararg_rank */,
   40 /* Property vararg_rank */,
@@ -6187,6 +6216,7 @@ const int SFT_vararg[6] = {
   43 /* Property adaptation_to */,
   44 /* Property init */,
 };
+const char *LOCATE_genericity = "./metamodel//genericity.nit";
 const int SFT_genericity[29] = {
   1 /* Property _types */,
   2 /* Property _formals_types */,
@@ -6218,6 +6248,7 @@ const int SFT_genericity[29] = {
   65 /* Property with_bound */,
   66 /* Property init */,
 };
+const char *LOCATE_type_formal = "./metamodel//type_formal.nit";
 const int SFT_type_formal[9] = {
   47 /* Property direct_type */,
   2559 /* Id of MMTypeFormal */,
@@ -6229,6 +6260,7 @@ const int SFT_type_formal[9] = {
   59 /* Property bound */,
   60 /* Property init */,
 };
+const char *LOCATE_inheritance = "./metamodel//inheritance.nit";
 const int SFT_inheritance[40] = {
   46 /* Property type_any */,
   47 /* Property import_global_classes */,
@@ -6271,6 +6303,7 @@ const int SFT_inheritance[40] = {
   49 /* Color of MMDefaultAncestor */,
   50 /* Property init */,
 };
+const char *LOCATE_static_type = "./metamodel//static_type.nit";
 const int SFT_static_type[63] = {
   5 /* Property _base_type_cache */,
   6 /* Property _ancestors */,
@@ -6336,6 +6369,7 @@ const int SFT_static_type[63] = {
   3 /* Property _type_none */,
   49 /* Property type_none */,
 };
+const char *LOCATE_abstractmetamodel = "./metamodel//abstractmetamodel.nit";
 const int SFT_abstractmetamodel[179] = {
   119 /* Id of MMContext */,
   2 /* Color of MMContext */,
@@ -6517,6 +6551,7 @@ const int SFT_abstractmetamodel[179] = {
   3 /* Color of MMConcreteClass */,
   104 /* Color of MMConcreteClass */,
 };
+const char *LOCATE_partial_order = "./metamodel//partial_order.nit";
 const int SFT_partial_order[49] = {
   2515 /* Id of PartialOrder */,
   6 /* Color of PartialOrder */,
@@ -6568,6 +6603,7 @@ const int SFT_partial_order[49] = {
   55 /* Property register_direct_smallers */,
   56 /* Property init */,
 };
+const char *LOCATE_virtualtype = "./metamodel//virtualtype.nit";
 const int SFT_virtualtype[17] = {
   46 /* Property is_virtual_type */,
   2551 /* Id of MMTypeProperty */,
@@ -6587,6 +6623,7 @@ const int SFT_virtualtype[17] = {
   97 /* Property virtual_type */,
   98 /* Property select_virtual_type */,
 };
+const char *LOCATE_opts = "./../lib/opts.nit";
 const int SFT_opts[69] = {
   71 /* Id of Option */,
   2 /* Color of Option */,
@@ -6658,6 +6695,7 @@ const int SFT_opts[69] = {
   47 /* Property init */,
   48 /* Property build */,
 };
+const char *LOCATE_control_flow = "./syntax//control_flow.nit";
 const int SFT_control_flow[59] = {
   91 /* Property do_control_flow */,
   3215 /* Id of ControlFlowVisitor */,
@@ -6719,6 +6757,7 @@ const int SFT_control_flow[59] = {
   88 /* Property accept_control_flow */,
   79 /* Property accept_control_flow */,
 };
+const char *LOCATE_typing = "./syntax//typing.nit";
 const int SFT_typing[94] = {
   92 /* Property do_typing */,
   2683 /* Id of TypingVisitor */,
@@ -6815,11 +6854,13 @@ const int SFT_typing[94] = {
   102 /* Property after_typing */,
   103 /* Property variable_create */,
 };
+const char *LOCATE_compiling = "./compiling//compiling.nit";
 const int SFT_compiling[3] = {
   70 /* Property compile_prog_to_c */,
   71 /* Property compile_main */,
   72 /* Property compile_separate_module */,
 };
+const char *LOCATE_compiling_global = "./compiling//compiling_global.nit";
 const int SFT_compiling_global[140] = {
   159 /* Id of ColorContext */,
   2 /* Color of ColorContext */,
@@ -6962,6 +7003,7 @@ const int SFT_compiling_global[140] = {
   100 /* Property declare_tables_to_c */,
   101 /* Property compile_tables_to_c */,
 };
+const char *LOCATE_compiling_methods = "./compiling//compiling_methods.nit";
 const int SFT_compiling_methods[55] = {
   2 /* Property _variable_index */,
   3 /* Property _variable_index_max */,
@@ -7019,10 +7061,11 @@ const int SFT_compiling_methods[55] = {
   77 /* Property compute_string_info */,
   76 /* Property propname */,
 };
+const char *LOCATE_compiling_base = "./compiling//compiling_base.nit";
 const int SFT_compiling_base[88] = {
   5 /* Property _global */,
   6 /* Property _attr_sim */,
-  7 /* Property _base_dir */,
+  7 /* Property _compdir */,
   8 /* Property _clibdir */,
   9 /* Property _bindir */,
   10 /* Property _output_file */,
@@ -7033,8 +7076,8 @@ const int SFT_compiling_base[88] = {
   49 /* Property global= */,
   50 /* Property attr_sim */,
   51 /* Property attr_sim= */,
-  52 /* Property base_dir */,
-  53 /* Property base_dir= */,
+  52 /* Property compdir */,
+  53 /* Property compdir= */,
   54 /* Property clibdir */,
   55 /* Property clibdir= */,
   56 /* Property bindir */,
@@ -7109,11 +7152,13 @@ const int SFT_compiling_base[88] = {
   41 /* Property cname */,
   42 /* Property color_id_for_super */,
 };
+const char *LOCATE_utils = "./utils.nit";
 const int SFT_utils[2] = {
   13 /* Property cmangle */,
   14 /* Property cmangle_table */,
 };
-const int SFT_nitc[21] = {
+const char *LOCATE_nitc = "./nitc.nit";
+const int SFT_nitc[23] = {
   3283 /* Id of NitCompiler */,
   5 /* Color of NitCompiler */,
   27 /* Property _opt_output */,
@@ -7123,7 +7168,8 @@ const int SFT_nitc[21] = {
   31 /* Property _opt_global */,
   32 /* Property _opt_clibdir */,
   33 /* Property _opt_bindir */,
-  34 /* Property _opt_extension_prefix */,
+  34 /* Property _opt_compdir */,
+  35 /* Property _opt_extension_prefix */,
   91 /* Color of NitCompiler */,
   92 /* Property opt_output */,
   93 /* Property opt_boost */,
@@ -7132,11 +7178,12 @@ const int SFT_nitc[21] = {
   96 /* Property opt_global */,
   97 /* Property opt_clibdir */,
   98 /* Property opt_bindir */,
-  99 /* Property opt_extension_prefix */,
-  100 /* Property init */,
-  101 /* Property process_options */,
+  99 /* Property opt_compdir */,
+  100 /* Property opt_extension_prefix */,
+  101 /* Property init */,
+  102 /* Property process_options */,
 };
-const classtable_elt_t VFT_NitCompiler[102] = {
+const classtable_elt_t VFT_NitCompiler[103] = {
   {(bigint) 3283 /* 0: Identity */},
   {(bigint) 3 /* 1: NitCompiler < Object: superclass typecheck marker */},
   {(bigint) 119 /* 2: NitCompiler < MMContext: superclass typecheck marker */},
@@ -7189,8 +7236,8 @@ const classtable_elt_t VFT_NitCompiler[102] = {
   {(bigint) compiling_base___ToolContext___global__eq},
   {(bigint) compiling_base___ToolContext___attr_sim},
   {(bigint) compiling_base___ToolContext___attr_sim__eq},
-  {(bigint) compiling_base___ToolContext___base_dir},
-  {(bigint) compiling_base___ToolContext___base_dir__eq},
+  {(bigint) compiling_base___ToolContext___compdir},
+  {(bigint) compiling_base___ToolContext___compdir__eq},
   {(bigint) compiling_base___ToolContext___clibdir},
   {(bigint) compiling_base___ToolContext___clibdir__eq},
   {(bigint) compiling_base___ToolContext___bindir},
@@ -7236,6 +7283,7 @@ const classtable_elt_t VFT_NitCompiler[102] = {
   {(bigint) nitc___NitCompiler___opt_global},
   {(bigint) nitc___NitCompiler___opt_clibdir},
   {(bigint) nitc___NitCompiler___opt_bindir},
+  {(bigint) nitc___NitCompiler___opt_compdir},
   {(bigint) nitc___NitCompiler___opt_extension_prefix},
   {(bigint) nitc___NitCompiler___init},
   {(bigint) mmloader___ToolContext___process_options},
@@ -7247,7 +7295,7 @@ const classtable_elt_t VFT_NitCompiler[102] = {
 /* 4: Attribute NitCompiler::_modules */
 /* 5: Attribute NitCompiler::_global */
 /* 6: Attribute NitCompiler::_attr_sim */
-/* 7: Attribute NitCompiler::_base_dir */
+/* 7: Attribute NitCompiler::_compdir */
 /* 8: Attribute NitCompiler::_clibdir */
 /* 9: Attribute NitCompiler::_bindir */
 /* 10: Attribute NitCompiler::_output_file */
@@ -7274,7 +7322,8 @@ const classtable_elt_t VFT_NitCompiler[102] = {
 /* 31: Attribute NitCompiler::_opt_global */
 /* 32: Attribute NitCompiler::_opt_clibdir */
 /* 33: Attribute NitCompiler::_opt_bindir */
-/* 34: Attribute NitCompiler::_opt_extension_prefix */
+/* 34: Attribute NitCompiler::_opt_compdir */
+/* 35: Attribute NitCompiler::_opt_extension_prefix */
 val_t NEW_NitCompiler(void) {
   val_t variable0;
   val_t variable1;
@@ -7327,8 +7376,11 @@ val_t NEW_NitCompiler(void) {
   val_t variable48;
   val_t variable49;
   val_t variable50;
+  val_t variable51;
+  val_t variable52;
+  val_t variable53;
   obj_t obj;
-  obj = alloc(sizeof(val_t) * 35);
+  obj = alloc(sizeof(val_t) * 36);
   obj->vft = (classtable_elt_t*)VFT_NitCompiler;
   variable0 = NEW_partial_order___PartialOrder___init(); /*new PartialOrder[E]*/
   ATTR_abstractmetamodel___MMContext____module_hierarchy(obj) = variable0;
@@ -7442,14 +7494,20 @@ val_t NEW_NitCompiler(void) {
   ((array___AbstractArray___add_t)CALL(variable45,COLOR_abstract_collection___SimpleCollection___add))(variable45, variable46) /*AbstractArray::add*/;
   variable46 = NEW_opts___OptionString___init(variable44, variable45); /*new OptionString*/
   ATTR_nitc___NitCompiler____opt_bindir(obj) = variable46;
-  variable47 = NEW_string___String___with_native(BOX_NativeString("Append prefix to file extension"), TAG_Int(31)); /*new String*/
-  variable48 = NEW_array___Array___with_capacity(TAG_Int(2)); /*new Array[E]*/
-  variable49 = NEW_string___String___with_native(BOX_NativeString("-p"), TAG_Int(2)); /*new String*/
+  variable47 = NEW_string___String___with_native(BOX_NativeString("Intermediate compilation directory"), TAG_Int(34)); /*new String*/
+  variable48 = NEW_array___Array___with_capacity(TAG_Int(1)); /*new Array[E]*/
+  variable49 = NEW_string___String___with_native(BOX_NativeString("--compdir"), TAG_Int(9)); /*new String*/
   ((array___AbstractArray___add_t)CALL(variable48,COLOR_abstract_collection___SimpleCollection___add))(variable48, variable49) /*AbstractArray::add*/;
-  variable50 = NEW_string___String___with_native(BOX_NativeString("--extension-prefix"), TAG_Int(18)); /*new String*/
-  ((array___AbstractArray___add_t)CALL(variable48,COLOR_abstract_collection___SimpleCollection___add))(variable48, variable50) /*AbstractArray::add*/;
   variable49 = NEW_opts___OptionString___init(variable47, variable48); /*new OptionString*/
-  ATTR_nitc___NitCompiler____opt_extension_prefix(obj) = variable49;
+  ATTR_nitc___NitCompiler____opt_compdir(obj) = variable49;
+  variable50 = NEW_string___String___with_native(BOX_NativeString("Append prefix to file extension"), TAG_Int(31)); /*new String*/
+  variable51 = NEW_array___Array___with_capacity(TAG_Int(2)); /*new Array[E]*/
+  variable52 = NEW_string___String___with_native(BOX_NativeString("-p"), TAG_Int(2)); /*new String*/
+  ((array___AbstractArray___add_t)CALL(variable51,COLOR_abstract_collection___SimpleCollection___add))(variable51, variable52) /*AbstractArray::add*/;
+  variable53 = NEW_string___String___with_native(BOX_NativeString("--extension-prefix"), TAG_Int(18)); /*new String*/
+  ((array___AbstractArray___add_t)CALL(variable51,COLOR_abstract_collection___SimpleCollection___add))(variable51, variable53) /*AbstractArray::add*/;
+  variable52 = NEW_opts___OptionString___init(variable50, variable51); /*new OptionString*/
+  ATTR_nitc___NitCompiler____opt_extension_prefix(obj) = variable52;
   return OBJ2VAL(obj);
 }
 val_t NEW_nitc___NitCompiler___init() {
@@ -77870,8 +77928,8 @@ const classtable_elt_t VFT_ToolContext[86] = {
   {(bigint) compiling_base___ToolContext___global__eq},
   {(bigint) compiling_base___ToolContext___attr_sim},
   {(bigint) compiling_base___ToolContext___attr_sim__eq},
-  {(bigint) compiling_base___ToolContext___base_dir},
-  {(bigint) compiling_base___ToolContext___base_dir__eq},
+  {(bigint) compiling_base___ToolContext___compdir},
+  {(bigint) compiling_base___ToolContext___compdir__eq},
   {(bigint) compiling_base___ToolContext___clibdir},
   {(bigint) compiling_base___ToolContext___clibdir__eq},
   {(bigint) compiling_base___ToolContext___bindir},
@@ -77912,7 +77970,7 @@ const classtable_elt_t VFT_ToolContext[86] = {
 /* 4: Attribute ToolContext::_modules */
 /* 5: Attribute ToolContext::_global */
 /* 6: Attribute ToolContext::_attr_sim */
-/* 7: Attribute ToolContext::_base_dir */
+/* 7: Attribute ToolContext::_compdir */
 /* 8: Attribute ToolContext::_clibdir */
 /* 9: Attribute ToolContext::_bindir */
 /* 10: Attribute ToolContext::_output_file */
@@ -81118,8 +81176,8 @@ const classtable_elt_t VFT_AbstractCompiler[91] = {
   {(bigint) compiling_base___ToolContext___global__eq},
   {(bigint) compiling_base___ToolContext___attr_sim},
   {(bigint) compiling_base___ToolContext___attr_sim__eq},
-  {(bigint) compiling_base___ToolContext___base_dir},
-  {(bigint) compiling_base___ToolContext___base_dir__eq},
+  {(bigint) compiling_base___ToolContext___compdir},
+  {(bigint) compiling_base___ToolContext___compdir__eq},
   {(bigint) compiling_base___ToolContext___clibdir},
   {(bigint) compiling_base___ToolContext___clibdir__eq},
   {(bigint) compiling_base___ToolContext___bindir},
@@ -81165,7 +81223,7 @@ const classtable_elt_t VFT_AbstractCompiler[91] = {
 /* 4: Attribute AbstractCompiler::_modules */
 /* 5: Attribute AbstractCompiler::_global */
 /* 6: Attribute AbstractCompiler::_attr_sim */
-/* 7: Attribute AbstractCompiler::_base_dir */
+/* 7: Attribute AbstractCompiler::_compdir */
 /* 8: Attribute AbstractCompiler::_clibdir */
 /* 9: Attribute AbstractCompiler::_bindir */
 /* 10: Attribute AbstractCompiler::_output_file */
