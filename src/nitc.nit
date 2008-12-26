@@ -30,12 +30,13 @@ special AbstractCompiler
 	readable attr _opt_global: OptionBool = new OptionBool("Use global compilation", "--global")
 	readable attr _opt_clibdir: OptionString = new OptionString("NIT C library directory", "--clibdir")
 	readable attr _opt_bindir: OptionString = new OptionString("NIT tools directory", "--bindir")
+	readable attr _opt_compdir: OptionString = new OptionString("Intermediate compilation directory", "--compdir")
 	readable attr _opt_extension_prefix: OptionString = new OptionString("Append prefix to file extension", "-p", "--extension-prefix")
 
 	init
 	do
 		super
-		option_context.add_option(opt_output, opt_boost, opt_no_cc, opt_attr_sim, opt_global, opt_clibdir, opt_bindir, opt_extension_prefix)
+		option_context.add_option(opt_output, opt_boost, opt_no_cc, opt_attr_sim, opt_global, opt_clibdir, opt_bindir, opt_compdir, opt_extension_prefix)
 	end
 
 	redef meth process_options
@@ -48,7 +49,17 @@ special AbstractCompiler
 		if ext_prefix == null then ext_prefix = ""
 		attr_sim = opt_attr_sim.value
 		global = opt_global.value
-		base_dir = ".nit_compile"
+		compdir = opt_compdir.value
+		if compdir == null then
+			var dir = once ("NIT_COMPDIR".to_symbol).environ
+			if not dir.is_empty then 
+				compdir = dir
+			end
+			if compdir == null then
+				compdir = ".nit_compile"
+			end
+		end
+
 		clibdir = opt_clibdir.value
 		if clibdir == null then
 			var dir = once ("NIT_DIR".to_symbol).environ
@@ -65,6 +76,7 @@ special AbstractCompiler
 			end
 		end
 		bindir = opt_bindir.value
+
 		if bindir == null then
 			var dir = once ("NIT_DIR".to_symbol).environ
 			if dir.is_empty then 

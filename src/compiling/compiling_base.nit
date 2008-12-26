@@ -23,7 +23,7 @@ private import utils
 redef class ToolContext
 	readable writable attr _global: Bool 
 	readable writable attr _attr_sim: Bool 
-	readable writable attr _base_dir: String
+	readable writable attr _compdir: String
 	readable writable attr _clibdir: String
 	readable writable attr _bindir: String
 	readable writable attr _output_file: String
