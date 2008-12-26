@@ -22,8 +22,9 @@ bin/nitc: c_src/nitc src/parser/parser.nit
 	@echo '***************************************************************'
 	@echo '* Compile nitc from NIT source files                          *'
 	@echo '***************************************************************'
-	cp c_src/nitc bin/nitc
-	bin/nitc ${NITCOPT} -o bin/nitc -O src/nitc.nit
+	mkdir .nit_compile 2> /dev/null || true
+	cp c_src/* .nit_compile
+	c_src/nitc ${NITCOPT} -o bin/nitc -O src/nitc.nit
 
 bin/nitdoc: bin/nitc
 	@echo '***************************************************************'

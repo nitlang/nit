@@ -15,7 +15,7 @@
 # limitations under the License.
 
 all:
-	sh nitc._build.sh -o nitc
+	sh nitc._build.sh -O -o nitc
 
 clean:
 	rm -f -- *._sav[oi].* *._sav.* || true
