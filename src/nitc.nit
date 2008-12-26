@@ -59,6 +59,7 @@ special AbstractCompiler
 				compdir = ".nit_compile"
 			end
 		end
+		compdir.append(ext_prefix)
 
 		clibdir = opt_clibdir.value
 		if clibdir == null then
