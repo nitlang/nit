@@ -301,10 +301,10 @@ special ArrayCapable[E]
 	end
 
 	# The internal storage.
-	attr _items: NativeArray[E]
+	attr _items: NativeArray[E] = null
 
 	# The size of `_items'.
-	attr _capacity: Int
+	attr _capacity: Int = 0
 end
 
 # An `Iterator' on `AbstractArray'

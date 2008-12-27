@@ -28,12 +28,12 @@ special A
 		a = new B
 		(a isa C).output
 	end
-	redef init do end
+	init do end
 end
 
 class C
 special A
-	redef init do end
+	init do end
 end
 
 var a: A

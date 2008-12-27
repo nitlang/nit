@@ -30,7 +30,7 @@ end
 class B
 special A
 special U
-	redef init do end
+	init do end
 end
 
 var a: Object = new A

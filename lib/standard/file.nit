@@ -55,10 +55,10 @@ special IOS
 special NativeFileCapable
 	
 	# The path of the file.
-	readable attr _path: String
+	readable attr _path: String = null
 
 	# The FILE *.
-	attr _file: NativeFile
+	attr _file: NativeFile = null
 
 	meth file_stat: FileStat
 	do return _file.file_stat end
@@ -98,7 +98,7 @@ special BufferedIStream
 	end
 	
 	# End of file?
-	redef readable attr _end_reached: Bool
+	redef readable attr _end_reached: Bool = false
 
 	# Open the file at `path' for reading.
 	init open(path: String)
@@ -109,6 +109,7 @@ special BufferedIStream
 		assert cant_open_file: _file != null
 	end
 
+	private init do end
 	private init without_file do end
 end
 
@@ -155,6 +156,7 @@ special OStream
 		_writable = true
 	end
 	
+	private init do end
 	private init without_file do end
 end
 
@@ -277,7 +279,7 @@ special Pointer
 	meth file_stat: FileStat is extern "file_NativeFile_NativeFile_file_stat_0"
 end
 
-private class NativeFileCapable
+private interface NativeFileCapable
 	meth io_open_read(path: NativeString): NativeFile is extern "file_NativeFileCapable_NativeFileCapable_io_open_read_1"
 	meth io_open_write(path: NativeString): NativeFile is extern "file_NativeFileCapable_NativeFileCapable_io_open_write_1"
 	meth native_stdin: NativeFile is extern "file_NativeFileCapable_NativeFileCapable_native_stdin_0"

@@ -123,6 +123,7 @@ redef class AModule
             n_classdefs: Array[Object]  # Should be Array[PClassdef]
     )
     do
+        empty_init
         _n_packagedecl = n_packagedecl
 	if n_packagedecl != null then
 		n_packagedecl.parent = self
@@ -245,6 +246,7 @@ redef class APackagedecl
             n_id: TId 
     )
     do
+        empty_init
         _n_doc = n_doc
 	if n_doc != null then
 		n_doc.parent = self
@@ -351,6 +353,7 @@ redef class AImport
             n_id: TId 
     )
     do
+        empty_init
         _n_visibility = n_visibility
 	if n_visibility != null then
 		n_visibility.parent = self
@@ -457,6 +460,7 @@ redef class ANoImport
             n_kwend: TKwend 
     )
     do
+        empty_init
         _n_visibility = n_visibility
 	if n_visibility != null then
 		n_visibility.parent = self
@@ -538,6 +542,7 @@ redef class APublicVisibility
 
     init init_apublicvisibility
     do
+        empty_init
     end
 
     redef meth replace_child(old_child: PNode, new_child: PNode)
@@ -568,6 +573,7 @@ redef class APrivateVisibility
             n_kwprivate: TKwprivate 
     )
     do
+        empty_init
         _n_kwprivate = n_kwprivate
 	if n_kwprivate != null then
 		n_kwprivate.parent = self
@@ -618,6 +624,7 @@ redef class AProtectedVisibility
             n_kwprotected: TKwprotected 
     )
     do
+        empty_init
         _n_kwprotected = n_kwprotected
 	if n_kwprotected != null then
 		n_kwprotected.parent = self
@@ -668,6 +675,7 @@ redef class AIntrudeVisibility
             n_kwintrude: TKwintrude 
     )
     do
+        empty_init
         _n_kwintrude = n_kwintrude
 	if n_kwintrude != null then
 		n_kwintrude.parent = self
@@ -753,6 +761,7 @@ redef class AClassdef
             n_propdefs: Array[Object]  # Should be Array[PPropdef]
     )
     do
+        empty_init
         _n_doc = n_doc
 	if n_doc != null then
 		n_doc.parent = self
@@ -960,6 +969,7 @@ redef class ATopClassdef
             n_propdefs: Array[Object]  # Should be Array[PPropdef]
     )
     do
+        empty_init
         _n_propdefs = new List[PPropdef]
 	for n in n_propdefs do
 		assert n isa PPropdef
@@ -1011,6 +1021,7 @@ redef class AMainClassdef
             n_propdefs: Array[Object]  # Should be Array[PPropdef]
     )
     do
+        empty_init
         _n_propdefs = new List[PPropdef]
 	for n in n_propdefs do
 		assert n isa PPropdef
@@ -1069,6 +1080,7 @@ redef class AConcreteClasskind
             n_kwclass: TKwclass 
     )
     do
+        empty_init
         _n_kwclass = n_kwclass
 	if n_kwclass != null then
 		n_kwclass.parent = self
@@ -1127,6 +1139,7 @@ redef class AAbstractClasskind
             n_kwclass: TKwclass 
     )
     do
+        empty_init
         _n_kwabstract = n_kwabstract
 	if n_kwabstract != null then
 		n_kwabstract.parent = self
@@ -1197,6 +1210,7 @@ redef class AInterfaceClasskind
             n_kwinterface: TKwinterface 
     )
     do
+        empty_init
         _n_kwinterface = n_kwinterface
 	if n_kwinterface != null then
 		n_kwinterface.parent = self
@@ -1247,6 +1261,7 @@ redef class AUniversalClasskind
             n_kwuniversal: TKwuniversal 
     )
     do
+        empty_init
         _n_kwuniversal = n_kwuniversal
 	if n_kwuniversal != null then
 		n_kwuniversal.parent = self
@@ -1305,6 +1320,7 @@ redef class AFormaldef
             n_type: PType 
     )
     do
+        empty_init
         _n_id = n_id
 	if n_id != null then
 		n_id.parent = self
@@ -1383,6 +1399,7 @@ redef class ASuperclass
             n_type: PType 
     )
     do
+        empty_init
         _n_kwspecial = n_kwspecial
 	if n_kwspecial != null then
 		n_kwspecial.parent = self
@@ -1517,6 +1534,7 @@ redef class AAttrPropdef
             n_expr: PExpr 
     )
     do
+        empty_init
         _n_doc = n_doc
 	if n_doc != null then
 		n_doc.parent = self
@@ -1759,6 +1777,7 @@ redef class AMethPropdef
             n_signature: PSignature 
     )
     do
+        empty_init
         _n_doc = n_doc
 	if n_doc != null then
 		n_doc.parent = self
@@ -1929,6 +1948,7 @@ redef class ADeferredMethPropdef
             n_signature: PSignature 
     )
     do
+        empty_init
         _n_doc = n_doc
 	if n_doc != null then
 		n_doc.parent = self
@@ -2119,6 +2139,7 @@ redef class AInternMethPropdef
             n_signature: PSignature 
     )
     do
+        empty_init
         _n_doc = n_doc
 	if n_doc != null then
 		n_doc.parent = self
@@ -2317,6 +2338,7 @@ redef class AExternMethPropdef
             n_extern: TString 
     )
     do
+        empty_init
         _n_doc = n_doc
 	if n_doc != null then
 		n_doc.parent = self
@@ -2535,6 +2557,7 @@ redef class AConcreteMethPropdef
             n_block: PExpr 
     )
     do
+        empty_init
         _n_doc = n_doc
 	if n_doc != null then
 		n_doc.parent = self
@@ -2753,6 +2776,7 @@ redef class AConcreteInitPropdef
             n_block: PExpr 
     )
     do
+        empty_init
         _n_doc = n_doc
 	if n_doc != null then
 		n_doc.parent = self
@@ -2931,6 +2955,7 @@ redef class AMainMethPropdef
             n_block: PExpr 
     )
     do
+        empty_init
         _n_kwredef = n_kwredef
 	if n_kwredef != null then
 		n_kwredef.parent = self
@@ -3041,6 +3066,7 @@ redef class ATypePropdef
             n_type: PType 
     )
     do
+        empty_init
         _n_doc = n_doc
 	if n_doc != null then
 		n_doc.parent = self
@@ -3199,6 +3225,7 @@ redef class AReadAble
             n_kwreadable: TKwreadable 
     )
     do
+        empty_init
         _n_kwredef = n_kwredef
 	if n_kwredef != null then
 		n_kwredef.parent = self
@@ -3277,6 +3304,7 @@ redef class AWriteAble
             n_kwwritable: TKwwritable 
     )
     do
+        empty_init
         _n_kwredef = n_kwredef
 	if n_kwredef != null then
 		n_kwredef.parent = self
@@ -3347,6 +3375,7 @@ redef class AIdMethid
             n_id: TId 
     )
     do
+        empty_init
         _n_id = n_id
 	if n_id != null then
 		n_id.parent = self
@@ -3397,6 +3426,7 @@ redef class APlusMethid
             n_plus: TPlus 
     )
     do
+        empty_init
         _n_plus = n_plus
 	if n_plus != null then
 		n_plus.parent = self
@@ -3447,6 +3477,7 @@ redef class AMinusMethid
             n_minus: TMinus 
     )
     do
+        empty_init
         _n_minus = n_minus
 	if n_minus != null then
 		n_minus.parent = self
@@ -3497,6 +3528,7 @@ redef class AStarMethid
             n_star: TStar 
     )
     do
+        empty_init
         _n_star = n_star
 	if n_star != null then
 		n_star.parent = self
@@ -3547,6 +3579,7 @@ redef class ASlashMethid
             n_slash: TSlash 
     )
     do
+        empty_init
         _n_slash = n_slash
 	if n_slash != null then
 		n_slash.parent = self
@@ -3597,6 +3630,7 @@ redef class APercentMethid
             n_percent: TPercent 
     )
     do
+        empty_init
         _n_percent = n_percent
 	if n_percent != null then
 		n_percent.parent = self
@@ -3647,6 +3681,7 @@ redef class AEqMethid
             n_eq: TEq 
     )
     do
+        empty_init
         _n_eq = n_eq
 	if n_eq != null then
 		n_eq.parent = self
@@ -3697,6 +3732,7 @@ redef class ANeMethid
             n_ne: TNe 
     )
     do
+        empty_init
         _n_ne = n_ne
 	if n_ne != null then
 		n_ne.parent = self
@@ -3747,6 +3783,7 @@ redef class ALeMethid
             n_le: TLe 
     )
     do
+        empty_init
         _n_le = n_le
 	if n_le != null then
 		n_le.parent = self
@@ -3797,6 +3834,7 @@ redef class AGeMethid
             n_ge: TGe 
     )
     do
+        empty_init
         _n_ge = n_ge
 	if n_ge != null then
 		n_ge.parent = self
@@ -3847,6 +3885,7 @@ redef class ALtMethid
             n_lt: TLt 
     )
     do
+        empty_init
         _n_lt = n_lt
 	if n_lt != null then
 		n_lt.parent = self
@@ -3897,6 +3936,7 @@ redef class AGtMethid
             n_gt: TGt 
     )
     do
+        empty_init
         _n_gt = n_gt
 	if n_gt != null then
 		n_gt.parent = self
@@ -3955,6 +3995,7 @@ redef class ABraMethid
             n_cbra: TCbra 
     )
     do
+        empty_init
         _n_obra = n_obra
 	if n_obra != null then
 		n_obra.parent = self
@@ -4025,6 +4066,7 @@ redef class AStarshipMethid
             n_starship: TStarship 
     )
     do
+        empty_init
         _n_starship = n_starship
 	if n_starship != null then
 		n_starship.parent = self
@@ -4083,6 +4125,7 @@ redef class AAssignMethid
             n_assign: TAssign 
     )
     do
+        empty_init
         _n_id = n_id
 	if n_id != null then
 		n_id.parent = self
@@ -4169,6 +4212,7 @@ redef class ABraassignMethid
             n_assign: TAssign 
     )
     do
+        empty_init
         _n_obra = n_obra
 	if n_obra != null then
 		n_obra.parent = self
@@ -4260,6 +4304,7 @@ redef class ASignature
             n_type: PType 
     )
     do
+        empty_init
         _n_params = new List[PParam]
 	for n in n_params do
 		assert n isa PParam
@@ -4354,6 +4399,7 @@ redef class AParam
             n_dotdotdot: TDotdotdot 
     )
     do
+        empty_init
         _n_id = n_id
 	if n_id != null then
 		n_id.parent = self
@@ -4445,6 +4491,7 @@ redef class AType
             n_types: Array[Object]  # Should be Array[PType]
     )
     do
+        empty_init
         _n_id = n_id
 	if n_id != null then
 		n_id.parent = self
@@ -4516,6 +4563,7 @@ redef class ABlockExpr
             n_expr: Array[Object]  # Should be Array[PExpr]
     )
     do
+        empty_init
         _n_expr = new List[PExpr]
 	for n in n_expr do
 		assert n isa PExpr
@@ -4606,6 +4654,7 @@ redef class AVardeclExpr
             n_expr: PExpr 
     )
     do
+        empty_init
         _n_kwvar = n_kwvar
 	if n_kwvar != null then
 		n_kwvar.parent = self
@@ -4744,6 +4793,7 @@ redef class AReturnExpr
             n_expr: PExpr 
     )
     do
+        empty_init
         _n_kwreturn = n_kwreturn
 	if n_kwreturn != null then
 		n_kwreturn.parent = self
@@ -4814,6 +4864,7 @@ redef class ABreakExpr
             n_kwbreak: TKwbreak 
     )
     do
+        empty_init
         _n_kwbreak = n_kwbreak
 	if n_kwbreak != null then
 		n_kwbreak.parent = self
@@ -4864,6 +4915,7 @@ redef class AAbortExpr
             n_kwabort: TKwabort 
     )
     do
+        empty_init
         _n_kwabort = n_kwabort
 	if n_kwabort != null then
 		n_kwabort.parent = self
@@ -4914,6 +4966,7 @@ redef class AContinueExpr
             n_kwcontinue: TKwcontinue 
     )
     do
+        empty_init
         _n_kwcontinue = n_kwcontinue
 	if n_kwcontinue != null then
 		n_kwcontinue.parent = self
@@ -4972,6 +5025,7 @@ redef class ADoExpr
             n_block: PExpr 
     )
     do
+        empty_init
         _n_kwdo = n_kwdo
 	if n_kwdo != null then
 		n_kwdo.parent = self
@@ -5066,6 +5120,7 @@ redef class AIfExpr
             n_else: PExpr 
     )
     do
+        empty_init
         _n_kwif = n_kwif
 	if n_kwif != null then
 		n_kwif.parent = self
@@ -5216,6 +5271,7 @@ redef class AIfexprExpr
             n_else: PExpr 
     )
     do
+        empty_init
         _n_kwif = n_kwif
 	if n_kwif != null then
 		n_kwif.parent = self
@@ -5390,6 +5446,7 @@ redef class AWhileExpr
             n_block: PExpr 
     )
     do
+        empty_init
         _n_kwwhile = n_kwwhile
 	if n_kwwhile != null then
 		n_kwwhile.parent = self
@@ -5516,6 +5573,7 @@ redef class AForExpr
             n_block: PExpr 
     )
     do
+        empty_init
         _n_vardecl = n_vardecl
 	if n_vardecl != null then
 		n_vardecl.parent = self
@@ -5622,6 +5680,7 @@ redef class AForVardeclExpr
             n_expr: PExpr 
     )
     do
+        empty_init
         _n_kwfor = n_kwfor
 	if n_kwfor != null then
 		n_kwfor.parent = self
@@ -5728,6 +5787,7 @@ redef class AAssertExpr
             n_expr: PExpr 
     )
     do
+        empty_init
         _n_kwassert = n_kwassert
 	if n_kwassert != null then
 		n_kwassert.parent = self
@@ -5826,6 +5886,7 @@ redef class AOnceExpr
             n_expr: PExpr 
     )
     do
+        empty_init
         _n_kwonce = n_kwonce
 	if n_kwonce != null then
 		n_kwonce.parent = self
@@ -5896,6 +5957,7 @@ redef class ASendExpr
             n_expr: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -5954,6 +6016,7 @@ redef class ABinopExpr
             n_expr2: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -6032,6 +6095,7 @@ redef class AOrExpr
             n_expr2: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -6110,6 +6174,7 @@ redef class AAndExpr
             n_expr2: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -6188,6 +6253,7 @@ redef class ANotExpr
             n_expr: PExpr 
     )
     do
+        empty_init
         _n_kwnot = n_kwnot
 	if n_kwnot != null then
 		n_kwnot.parent = self
@@ -6266,6 +6332,7 @@ redef class AEqExpr
             n_expr2: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -6344,6 +6411,7 @@ redef class AEeExpr
             n_expr2: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -6422,6 +6490,7 @@ redef class ANeExpr
             n_expr2: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -6500,6 +6569,7 @@ redef class ALtExpr
             n_expr2: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -6578,6 +6648,7 @@ redef class ALeExpr
             n_expr2: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -6656,6 +6727,7 @@ redef class AGtExpr
             n_expr2: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -6734,6 +6806,7 @@ redef class AGeExpr
             n_expr2: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -6812,6 +6885,7 @@ redef class AIsaExpr
             n_type: PType 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -6890,6 +6964,7 @@ redef class APlusExpr
             n_expr2: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -6968,6 +7043,7 @@ redef class AMinusExpr
             n_expr2: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -7046,6 +7122,7 @@ redef class AStarshipExpr
             n_expr2: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -7124,6 +7201,7 @@ redef class AStarExpr
             n_expr2: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -7202,6 +7280,7 @@ redef class ASlashExpr
             n_expr2: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -7280,6 +7359,7 @@ redef class APercentExpr
             n_expr2: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -7358,6 +7438,7 @@ redef class AUminusExpr
             n_expr: PExpr 
     )
     do
+        empty_init
         _n_minus = n_minus
 	if n_minus != null then
 		n_minus.parent = self
@@ -7445,6 +7526,7 @@ redef class ANewExpr
             n_args: Array[Object]  # Should be Array[PExpr]
     )
     do
+        empty_init
         _n_kwnew = n_kwnew
 	if n_kwnew != null then
 		n_kwnew.parent = self
@@ -7571,6 +7653,7 @@ redef class AAttrExpr
             n_id: TAttrid 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -7665,6 +7748,7 @@ redef class AAttrAssignExpr
             n_value: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -7799,6 +7883,7 @@ redef class AAttrReassignExpr
             n_value: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -7918,6 +8003,7 @@ redef class ACallExpr
             n_args: Array[Object]  # Should be Array[PExpr]
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -8041,6 +8127,7 @@ redef class ACallAssignExpr
             n_value: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -8204,6 +8291,7 @@ redef class ACallReassignExpr
             n_value: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -8351,6 +8439,7 @@ redef class ASuperExpr
             n_args: Array[Object]  # Should be Array[PExpr]
     )
     do
+        empty_init
         _n_qualified = n_qualified
 	if n_qualified != null then
 		n_qualified.parent = self
@@ -8458,6 +8547,7 @@ redef class AInitExpr
             n_args: Array[Object]  # Should be Array[PExpr]
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -8557,6 +8647,7 @@ redef class ABraExpr
             n_args: Array[Object]  # Should be Array[PExpr]
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -8652,6 +8743,7 @@ redef class ABraAssignExpr
             n_value: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -8787,6 +8879,7 @@ redef class ABraReassignExpr
             n_value: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -8905,6 +8998,7 @@ redef class AVarExpr
             n_id: TId 
     )
     do
+        empty_init
         _n_id = n_id
 	if n_id != null then
 		n_id.parent = self
@@ -8971,6 +9065,7 @@ redef class AVarAssignExpr
             n_value: PExpr 
     )
     do
+        empty_init
         _n_id = n_id
 	if n_id != null then
 		n_id.parent = self
@@ -9077,6 +9172,7 @@ redef class AVarReassignExpr
             n_value: PExpr 
     )
     do
+        empty_init
         _n_id = n_id
 	if n_id != null then
 		n_id.parent = self
@@ -9175,6 +9271,7 @@ redef class ARangeExpr
             n_expr2: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -9253,6 +9350,7 @@ redef class ACrangeExpr
             n_expr2: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -9331,6 +9429,7 @@ redef class AOrangeExpr
             n_expr2: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -9394,6 +9493,7 @@ redef class AArrayExpr
             n_exprs: Array[Object]  # Should be Array[PExpr]
     )
     do
+        empty_init
         _n_exprs = new List[PExpr]
 	for n in n_exprs do
 		assert n isa PExpr
@@ -9452,6 +9552,7 @@ redef class ASelfExpr
             n_kwself: TKwself 
     )
     do
+        empty_init
         _n_kwself = n_kwself
 	if n_kwself != null then
 		n_kwself.parent = self
@@ -9493,6 +9594,7 @@ redef class AImplicitSelfExpr
 
     init init_aimplicitselfexpr
     do
+        empty_init
     end
 
     redef meth replace_child(old_child: PNode, new_child: PNode)
@@ -9523,6 +9625,7 @@ redef class ATrueExpr
             n_kwtrue: TKwtrue 
     )
     do
+        empty_init
         _n_kwtrue = n_kwtrue
 	if n_kwtrue != null then
 		n_kwtrue.parent = self
@@ -9573,6 +9676,7 @@ redef class AFalseExpr
             n_kwfalse: TKwfalse 
     )
     do
+        empty_init
         _n_kwfalse = n_kwfalse
 	if n_kwfalse != null then
 		n_kwfalse.parent = self
@@ -9623,6 +9727,7 @@ redef class ANullExpr
             n_kwnull: TKwnull 
     )
     do
+        empty_init
         _n_kwnull = n_kwnull
 	if n_kwnull != null then
 		n_kwnull.parent = self
@@ -9673,6 +9778,7 @@ redef class AIntExpr
             n_number: TNumber 
     )
     do
+        empty_init
         _n_number = n_number
 	if n_number != null then
 		n_number.parent = self
@@ -9723,6 +9829,7 @@ redef class AFloatExpr
             n_float: TFloat 
     )
     do
+        empty_init
         _n_float = n_float
 	if n_float != null then
 		n_float.parent = self
@@ -9773,6 +9880,7 @@ redef class ACharExpr
             n_char: TChar 
     )
     do
+        empty_init
         _n_char = n_char
 	if n_char != null then
 		n_char.parent = self
@@ -9823,6 +9931,7 @@ redef class AStringExpr
             n_string: TString 
     )
     do
+        empty_init
         _n_string = n_string
 	if n_string != null then
 		n_string.parent = self
@@ -9873,6 +9982,7 @@ redef class AStartStringExpr
             n_string: TStartString 
     )
     do
+        empty_init
         _n_string = n_string
 	if n_string != null then
 		n_string.parent = self
@@ -9923,6 +10033,7 @@ redef class AMidStringExpr
             n_string: TMidString 
     )
     do
+        empty_init
         _n_string = n_string
 	if n_string != null then
 		n_string.parent = self
@@ -9973,6 +10084,7 @@ redef class AEndStringExpr
             n_string: TEndString 
     )
     do
+        empty_init
         _n_string = n_string
 	if n_string != null then
 		n_string.parent = self
@@ -10016,6 +10128,7 @@ redef class ASuperstringExpr
             n_exprs: Array[Object]  # Should be Array[PExpr]
     )
     do
+        empty_init
         _n_exprs = new List[PExpr]
 	for n in n_exprs do
 		assert n isa PExpr
@@ -10074,6 +10187,7 @@ redef class AParExpr
             n_expr: PExpr 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -10140,6 +10254,7 @@ redef class AAsCastExpr
             n_type: PType 
     )
     do
+        empty_init
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
@@ -10230,6 +10345,7 @@ redef class APlusAssignOp
             n_pluseq: TPluseq 
     )
     do
+        empty_init
         _n_pluseq = n_pluseq
 	if n_pluseq != null then
 		n_pluseq.parent = self
@@ -10280,6 +10396,7 @@ redef class AMinusAssignOp
             n_minuseq: TMinuseq 
     )
     do
+        empty_init
         _n_minuseq = n_minuseq
 	if n_minuseq != null then
 		n_minuseq.parent = self
@@ -10331,6 +10448,7 @@ redef class AQualified
             n_classid: TClassid 
     )
     do
+        empty_init
         _n_id = new List[TId]
 	for n in n_id do
 		assert n isa TId
@@ -10402,6 +10520,7 @@ redef class ADoc
             n_comment: Array[Object]  # Should be Array[TComment]
     )
     do
+        empty_init
         _n_comment = new List[TComment]
 	for n in n_comment do
 		assert n isa TComment

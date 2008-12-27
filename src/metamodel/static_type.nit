@@ -280,7 +280,7 @@ special MMTypeClass
 
 	redef meth adapt_to(recv) do return self
 
-	redef init(c: MMLocalClass)
+	init(c: MMLocalClass)
 	do
 		super(c)
 	end

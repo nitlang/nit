@@ -26,9 +26,11 @@ $ end
 $ end
 class EOF 
 special Token
+private init noinit do end
 end
 class PError
 special EOF
+private init noinit do end
 end
 $ end template
 
@@ -56,11 +58,11 @@ redef class @ename
     end
 
 $ if {not(@text)}
-    init(text: String, fname: String, line: Int, pos: Int)
+    init init_tk(text: String, fname: String, line: Int, pos: Int)
     do
         _text = text
 $ else
-    init(fname: String, line: Int, pos: Int)
+    init init_tk(fname: String, line: Int, pos: Int)
     do
         _text = once "${sablecc:string2escaped_unicode(@text)}"
 $ end

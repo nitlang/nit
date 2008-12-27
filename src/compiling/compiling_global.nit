@@ -23,7 +23,7 @@ private import syntax
 
 # Something that store color of table elements
 class ColorContext
-	attr _colors: HashMap[TableElt, Int]
+	attr _colors: HashMap[TableElt, Int] = null
 
 	# The color of a table element.
 	meth color(e: TableElt): Int

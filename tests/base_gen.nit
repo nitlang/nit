@@ -39,7 +39,7 @@ special A
 		(i+1).output
 	end
 
-	redef init do end
+	init do end
 end
 
 class G[E: Object]

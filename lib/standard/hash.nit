@@ -319,7 +319,7 @@ special HashNode[K]
 	redef meth key do return first
 	redef type N: HashMapNode[K, V]
 
-	redef init(k: K, v: V)
+	init(k: K, v: V)
 	do
 		first = k
 		second = v 

@@ -24,32 +24,32 @@ end
 class B
 special A
 	redef meth foo do end
-	redef init do end
+	init do end
 
 end
 class C
 special A
-	redef init do end
+	init do end
 
 end
 class D
 special B
 special C
-	redef init do end
+	init do end
 
 end
 class E
 special B
 special C
 	redef meth foo do end
-	redef init do end
+	init do end
 
 end
 class F
 special D
 special E
 	redef meth foo do end
-	redef init do end
+	init do end
 
 end
 

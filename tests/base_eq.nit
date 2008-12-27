@@ -36,7 +36,7 @@ special A
 		return a.a is _a
 	end
 
-	redef init(b: Int)
+	init(b: Int)
 	do
 		_a = b
 	end

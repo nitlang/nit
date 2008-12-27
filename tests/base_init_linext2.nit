@@ -48,11 +48,13 @@ special A
 		' '.output
 	end
 	init init_par do
+		inita
 		'B'.output
 		'3'.output
 		' '.output
 	end
 	init init_par2(c: Char) do
+		inita
 		'B'.output
 		'4'.output
 		c.output
@@ -62,7 +64,7 @@ end
 
 class C
 special A
-	init initc do
+	init do
 		'C'.output
 		'1'.output
 		' '.output
@@ -99,13 +101,13 @@ special C
 		'D'.output
 		'1'.output
 		' '.output
-#alt4#		initc
+#alt4#		init
 		initb #!alt2#
 		'D'.output
 		'2'.output
 		' '.output
 #alt5#		initb
-#alt3#		initc
+#alt3#		init
 		'D'.output
 		'3'.output
 		' '.output
@@ -117,6 +119,6 @@ end
 (new B.initb).work
 (new B.init_par).work
 (new B.init_par2('y')).work
-(new C.initc).work
+(new C).work
 (new C.init_par('z')).work
 (new D.initd).work

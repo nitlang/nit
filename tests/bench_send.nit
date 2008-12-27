@@ -58,7 +58,7 @@ special A
 		return 1
 	end
 
-	redef init
+	init
 	do
 	end
 end
@@ -70,7 +70,7 @@ special A
 		return 2
 	end
 
-	redef init
+	init
 	do
 	end
 end
@@ -82,7 +82,7 @@ special A
 		return 3
 	end
 
-	redef init
+	init
 	do
 	end
 end

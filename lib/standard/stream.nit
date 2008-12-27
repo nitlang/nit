@@ -184,10 +184,10 @@ special IStream
 	redef meth eof do return _buffer_pos >= _buffer.length and end_reached
 
 	# The buffer
-	attr _buffer: String
+	attr _buffer: String = null
 
 	# The current position in the buffer
-	attr _buffer_pos: Int
+	attr _buffer_pos: Int = 0
 
 	# Fill the buffer
 	protected meth fill_buffer is abstract
@@ -237,7 +237,7 @@ special IStream
 		return nb
 	end
 
-	redef init(fd: Int) do super
+	init(fd: Int) do end 
 end
 
 class FDOStream
@@ -251,9 +251,8 @@ special OStream
 		if nb < s.length then _is_writable = false
 	end
 
-	redef init(fd: Int)
+	init(fd: Int)
 	do
-		super
 		_is_writable = true
 	end
 end
@@ -262,7 +261,7 @@ class FDIOStream
 special FDIStream
 special FDOStream
 special IOStream
-	redef init(fd: Int)
+	init(fd: Int)
 	do
 		_fd = fd
 		_is_writable = true

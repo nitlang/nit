@@ -49,7 +49,7 @@ special Foo
 		_a3.output
 	end
 
-	redef init 
+	init 
 	do 
 		_a1 = 10
 		_a2 = 20

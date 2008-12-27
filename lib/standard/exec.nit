@@ -90,13 +90,13 @@ special IStream
 
 	redef meth eof do return _in.eof
 
-	redef init(command: String, arguments: String...)
+	init(command: String, arguments: String...)
 	do
 		execute(command, arguments, 2)
 		_in = new FDIStream(_data.out_fd)
 	end
 	
-	redef init init_(command: String)
+	init init_(command: String)
 	do
 		execute(command, null, 2)
 		_in = new FDIStream(_data.out_fd)
@@ -115,13 +115,13 @@ special OStream
 
 	redef meth write(s) do _out.write(s)
 	
-	redef init(command: String, arguments: String...)
+	init(command: String, arguments: String...)
 	do
 		execute(command, arguments, 1)
 		_out = new FDOStream(_data.in_fd)
 	end
 	
-	redef init init_(command: String)
+	init init_(command: String)
 	do
 		execute(command, null, 1)
 		_out = new FDOStream(_data.in_fd)
@@ -140,14 +140,14 @@ special IOStream
 		_out.close
 	end
 
-	redef init(command: String, arguments: String...)
+	init(command: String, arguments: String...)
 	do
 		execute(command, arguments, 3)
 		_in = new FDIStream(_data.out_fd)
 		_out = new FDOStream(_data.in_fd)
 	end
 	
-	redef init init_(command: String)
+	init init_(command: String)
 	do
 		execute(command, null, 3)
 		_in = new FDIStream(_data.out_fd)

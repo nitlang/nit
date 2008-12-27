@@ -360,7 +360,7 @@ special MapIterator[Int, E]
 end
 
 # Associatives arrays that internally uses couples to represent each (key, value) pairs.
-class CoupleMap[K, E]
+interface CoupleMap[K, E]
 special Map[K, E]
 	# Return the couple of the corresponding key
 	# Return null if the key is no associated element

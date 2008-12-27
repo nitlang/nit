@@ -50,7 +50,7 @@ special A
 		(i*100).output
 	end
 
-	redef init do end
+	init do end
 end
 
 var a = new A

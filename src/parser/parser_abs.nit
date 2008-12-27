@@ -266,9 +266,11 @@ special Token
 end
 class EOF 
 special Token
+private init noinit do end
 end
 class PError
 special EOF
+private init noinit do end
 end
 
 class PModule special Prod end

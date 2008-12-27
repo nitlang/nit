@@ -178,10 +178,10 @@ $ foreach {//token}
 $    if {not(@text)}
 $        if {@parser_index}
 	    					var token_text = _text.substring(0, accept_length)
-						var token = new @ename(token_text, _filename, start_line + 1, start_pos + 1)
+						var token = new @ename.init_tk(token_text, _filename, start_line + 1, start_pos + 1)
 $        end
 $    else
-						var token = new @ename(_filename, start_line + 1, start_pos + 1)
+						var token = new @ename.init_tk(_filename, start_line + 1, start_pos + 1)
 $    end
 						push_back(accept_length)
 						_pos = accept_pos

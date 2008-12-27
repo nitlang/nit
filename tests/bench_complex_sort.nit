@@ -15,30 +15,30 @@
 # limitations under the License.
 
 
-class Elt
+interface Elt
 	meth val1: Int is abstract
-	meth val2: Int do return val1 end
+	meth val2: Int do return val1
 end
 
 class A
 special Elt
 	attr _a: Int
-	redef meth val1: Int do return _a end
+	redef meth val1: Int do return _a
 
-	init(i: Int) do _a = i end
+	init(i: Int) do _a = i
 end
 
 class Elt2
 special Elt
 	attr _b: Int
-	redef meth val1: Int do return _b/2 end
-	redef meth val2: Int do return _b end
+	redef meth val1: Int do return _b/2
+	redef meth val2: Int do return _b
+	init initelt2(i: Int) do _b = i
 end
 
 class B
 special Elt2
-
-	init(i: Int) do _b = i end
+	init(i: Int) do initelt2(i)
 end
 
 class C
@@ -62,7 +62,7 @@ special Elt2
 
 	init init2(i: Int, j: Int) do
 		init(i)
-		_b = j
+		initelt2(j)
 	end
 end
 
@@ -70,7 +70,7 @@ class E
 special Elt2
 	redef meth val1: Int do return 5 end
 
-	init(i: Int) do _b = i end
+	init(i: Int) do initelt2(i)
 end
 
 class EltSorter

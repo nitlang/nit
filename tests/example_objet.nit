@@ -208,8 +208,8 @@ end
 
 class Rayon
 private
-	attr _stock: Array[Produit]	# Des produits en stock
-	attr _rubrique: String		# La catégorie des produits stockés
+	attr _stock: Array[Produit] = null	# Des produits en stock
+	attr _rubrique: String = null		# La catégorie des produits stockés
 
 	# Cette fonction est utilisé par to_s pour afficher un petit titre
 	meth to_s_head: String

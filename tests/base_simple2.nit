@@ -62,7 +62,7 @@ special A
 		0.output
 	end
 
-	redef init
+	init
 	do
 		1.output
 	end

@@ -19,7 +19,7 @@ class Node
 	do
 		return _name
 	end
-	attr _name: String
+	attr _name: String = null
 end
 
 class WakeUpNode
@@ -31,12 +31,12 @@ special Node
 	do
 		_scheduler.add_event(self, d)
 	end
-	attr _scheduler: Scheduler
+	attr _scheduler: Scheduler = null
 end
 
 class NodeSource
 special Node
-	attr _nexts: ArraySet[NodeSink]
+	attr _nexts: ArraySet[NodeSink] = null
 	meth attach(n: NodeSink)
 	# Add the sink `n' the the connected nodes
 	# Do nothing if `n' is already connected
@@ -155,7 +155,7 @@ end
 
 class CountSink
 special NodeSink
-	readable attr _count: Int
+	readable attr _count: Int = 0
 	redef meth recieve(n: NodeSource)
 	do
 		_count = _count + 1

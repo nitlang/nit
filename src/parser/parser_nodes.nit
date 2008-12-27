@@ -266,9 +266,11 @@ special Token
 end
 class EOF 
 special Token
+private init noinit do end
 end
 class PError
 special EOF
+private init noinit do end
 end
 
 class PModule special Prod end
@@ -280,17 +282,17 @@ class PClasskind special Prod end
 class PFormaldef special Prod end
 class PSuperclass special Prod end
 class PPropdef special Prod 
-    readable writable attr _n_doc: PDoc
+    readable writable attr _n_doc: PDoc = null
 end
 class PAble special Prod
-    readable writable attr _n_kwredef: TKwredef 
+    readable writable attr _n_kwredef: TKwredef = null
 end
 class PMethid special Prod end
 class PSignature special Prod end
 class PParam
 special Prod
-    readable writable attr _n_id: TId 
-    readable writable attr _n_type: PType 
+    readable writable attr _n_id: TId = null
+    readable writable attr _n_type: PType = null
 end
 class PType special Prod end
 class PExpr special Prod end
@@ -300,355 +302,355 @@ class PDoc special Prod end
 
 class AModule
 special PModule
-    readable writable attr _n_packagedecl: PPackagedecl 
-    readable writable attr _n_imports: List[PImport] 
-    readable writable attr _n_classdefs: List[PClassdef] 
+    readable writable attr _n_packagedecl: PPackagedecl = null
+    readable writable attr _n_imports: List[PImport] = null
+    readable writable attr _n_classdefs: List[PClassdef] = null
 end
 class APackagedecl
 special PPackagedecl
-    readable writable attr _n_doc: PDoc 
-    readable writable attr _n_kwpackage: TKwpackage 
-    readable writable attr _n_id: TId 
+    readable writable attr _n_doc: PDoc = null
+    readable writable attr _n_kwpackage: TKwpackage = null
+    readable writable attr _n_id: TId = null
 end
 class AImport
 special PImport
-    readable writable attr _n_visibility: PVisibility 
-    readable writable attr _n_kwimport: TKwimport 
-    readable writable attr _n_id: TId 
+    readable writable attr _n_visibility: PVisibility = null
+    readable writable attr _n_kwimport: TKwimport = null
+    readable writable attr _n_id: TId = null
 end
 class ANoImport
 special PImport
-    readable writable attr _n_visibility: PVisibility 
-    readable writable attr _n_kwimport: TKwimport 
-    readable writable attr _n_kwend: TKwend 
+    readable writable attr _n_visibility: PVisibility = null
+    readable writable attr _n_kwimport: TKwimport = null
+    readable writable attr _n_kwend: TKwend = null
 end
 class APublicVisibility
 special PVisibility
 end
 class APrivateVisibility
 special PVisibility
-    readable writable attr _n_kwprivate: TKwprivate 
+    readable writable attr _n_kwprivate: TKwprivate = null
 end
 class AProtectedVisibility
 special PVisibility
-    readable writable attr _n_kwprotected: TKwprotected 
+    readable writable attr _n_kwprotected: TKwprotected = null
 end
 class AIntrudeVisibility
 special PVisibility
-    readable writable attr _n_kwintrude: TKwintrude 
+    readable writable attr _n_kwintrude: TKwintrude = null
 end
 class AClassdef
 special PClassdef
-    readable writable attr _n_doc: PDoc
-    readable writable attr _n_kwredef: TKwredef 
-    readable writable attr _n_visibility: PVisibility 
-    readable writable attr _n_classkind: PClasskind 
-    readable writable attr _n_id: TClassid 
-    readable writable attr _n_formaldefs: List[PFormaldef] 
-    readable writable attr _n_superclasses: List[PSuperclass] 
-    readable writable attr _n_propdefs: List[PPropdef] 
+    readable writable attr _n_doc: PDoc = null
+    readable writable attr _n_kwredef: TKwredef = null
+    readable writable attr _n_visibility: PVisibility = null
+    readable writable attr _n_classkind: PClasskind = null
+    readable writable attr _n_id: TClassid = null
+    readable writable attr _n_formaldefs: List[PFormaldef] = null
+    readable writable attr _n_superclasses: List[PSuperclass] = null
+    readable writable attr _n_propdefs: List[PPropdef] = null
 end
 class ATopClassdef
 special PClassdef
-    readable writable attr _n_propdefs: List[PPropdef] 
+    readable writable attr _n_propdefs: List[PPropdef] = null
 end
 class AMainClassdef
 special PClassdef
-    readable writable attr _n_propdefs: List[PPropdef] 
+    readable writable attr _n_propdefs: List[PPropdef] = null
 end
 class AConcreteClasskind
 special PClasskind
-    readable writable attr _n_kwclass: TKwclass 
+    readable writable attr _n_kwclass: TKwclass = null
 end
 class AAbstractClasskind
 special PClasskind
-    readable writable attr _n_kwabstract: TKwabstract 
-    readable writable attr _n_kwclass: TKwclass 
+    readable writable attr _n_kwabstract: TKwabstract = null
+    readable writable attr _n_kwclass: TKwclass = null
 end
 class AInterfaceClasskind
 special PClasskind
-    readable writable attr _n_kwinterface: TKwinterface 
+    readable writable attr _n_kwinterface: TKwinterface = null
 end
 class AUniversalClasskind
 special PClasskind
-    readable writable attr _n_kwuniversal: TKwuniversal 
+    readable writable attr _n_kwuniversal: TKwuniversal = null
 end
 class AFormaldef
 special PFormaldef
-    readable writable attr _n_id: TClassid 
-    readable writable attr _n_type: PType 
+    readable writable attr _n_id: TClassid = null
+    readable writable attr _n_type: PType = null
 end
 class ASuperclass
 special PSuperclass
-    readable writable attr _n_kwspecial: TKwspecial 
-    readable writable attr _n_type: PType 
+    readable writable attr _n_kwspecial: TKwspecial = null
+    readable writable attr _n_type: PType = null
 end
 class AAttrPropdef
 special PPropdef
-    readable writable attr _n_kwredef: TKwredef 
-    readable writable attr _n_visibility: PVisibility 
-    readable writable attr _n_kwattr: TKwattr 
-    readable writable attr _n_id: TAttrid 
-    readable writable attr _n_type: PType 
-    readable writable attr _n_readable: PAble 
-    readable writable attr _n_writable: PAble 
-    readable writable attr _n_expr: PExpr 
+    readable writable attr _n_kwredef: TKwredef = null
+    readable writable attr _n_visibility: PVisibility = null
+    readable writable attr _n_kwattr: TKwattr = null
+    readable writable attr _n_id: TAttrid = null
+    readable writable attr _n_type: PType = null
+    readable writable attr _n_readable: PAble = null
+    readable writable attr _n_writable: PAble = null
+    readable writable attr _n_expr: PExpr = null
 end
 class AMethPropdef
 special PPropdef
-    readable writable attr _n_kwredef: TKwredef 
-    readable writable attr _n_visibility: PVisibility 
-    readable writable attr _n_methid: PMethid 
-    readable writable attr _n_signature: PSignature 
+    readable writable attr _n_kwredef: TKwredef = null
+    readable writable attr _n_visibility: PVisibility = null
+    readable writable attr _n_methid: PMethid = null
+    readable writable attr _n_signature: PSignature = null
 end
 class ADeferredMethPropdef
 special AMethPropdef
-    readable writable attr _n_kwmeth: TKwmeth 
+    readable writable attr _n_kwmeth: TKwmeth = null
 end
 class AInternMethPropdef
 special AMethPropdef
-    readable writable attr _n_kwmeth: TKwmeth 
+    readable writable attr _n_kwmeth: TKwmeth = null
 end
 class AExternMethPropdef
 special AMethPropdef
-    readable writable attr _n_kwmeth: TKwmeth 
-    readable writable attr _n_extern: TString 
+    readable writable attr _n_kwmeth: TKwmeth = null
+    readable writable attr _n_extern: TString = null
 end
 class AConcreteMethPropdef
 special AMethPropdef
-    readable writable attr _n_kwmeth: TKwmeth 
-    readable writable attr _n_block: PExpr 
+    readable writable attr _n_kwmeth: TKwmeth = null
+    readable writable attr _n_block: PExpr = null
 end
 class AConcreteInitPropdef
 special AConcreteMethPropdef
-    readable writable attr _n_kwinit: TKwinit 
+    readable writable attr _n_kwinit: TKwinit = null
 end
 class AMainMethPropdef
 special AConcreteMethPropdef
 end
 class ATypePropdef
 special PPropdef
-    readable writable attr _n_kwredef: TKwredef 
-    readable writable attr _n_visibility: PVisibility 
-    readable writable attr _n_kwtype: TKwtype 
-    readable writable attr _n_id: TClassid 
-    readable writable attr _n_type: PType 
+    readable writable attr _n_kwredef: TKwredef = null
+    readable writable attr _n_visibility: PVisibility = null
+    readable writable attr _n_kwtype: TKwtype = null
+    readable writable attr _n_id: TClassid = null
+    readable writable attr _n_type: PType = null
 end
 class AReadAble
 special PAble
-    readable writable attr _n_kwreadable: TKwreadable 
+    readable writable attr _n_kwreadable: TKwreadable = null
 end
 class AWriteAble
 special PAble
-    readable writable attr _n_kwwritable: TKwwritable 
+    readable writable attr _n_kwwritable: TKwwritable = null
 end
 class AIdMethid
 special PMethid
-    readable writable attr _n_id: TId 
+    readable writable attr _n_id: TId = null
 end
 class APlusMethid
 special PMethid
-    readable writable attr _n_plus: TPlus 
+    readable writable attr _n_plus: TPlus = null
 end
 class AMinusMethid
 special PMethid
-    readable writable attr _n_minus: TMinus 
+    readable writable attr _n_minus: TMinus = null
 end
 class AStarMethid
 special PMethid
-    readable writable attr _n_star: TStar 
+    readable writable attr _n_star: TStar = null
 end
 class ASlashMethid
 special PMethid
-    readable writable attr _n_slash: TSlash 
+    readable writable attr _n_slash: TSlash = null
 end
 class APercentMethid
 special PMethid
-    readable writable attr _n_percent: TPercent 
+    readable writable attr _n_percent: TPercent = null
 end
 class AEqMethid
 special PMethid
-    readable writable attr _n_eq: TEq 
+    readable writable attr _n_eq: TEq = null
 end
 class ANeMethid
 special PMethid
-    readable writable attr _n_ne: TNe 
+    readable writable attr _n_ne: TNe = null
 end
 class ALeMethid
 special PMethid
-    readable writable attr _n_le: TLe 
+    readable writable attr _n_le: TLe = null
 end
 class AGeMethid
 special PMethid
-    readable writable attr _n_ge: TGe 
+    readable writable attr _n_ge: TGe = null
 end
 class ALtMethid
 special PMethid
-    readable writable attr _n_lt: TLt 
+    readable writable attr _n_lt: TLt = null
 end
 class AGtMethid
 special PMethid
-    readable writable attr _n_gt: TGt 
+    readable writable attr _n_gt: TGt = null
 end
 class ABraMethid
 special PMethid
-    readable writable attr _n_obra: TObra 
-    readable writable attr _n_cbra: TCbra 
+    readable writable attr _n_obra: TObra = null
+    readable writable attr _n_cbra: TCbra = null
 end
 class AStarshipMethid
 special PMethid
-    readable writable attr _n_starship: TStarship 
+    readable writable attr _n_starship: TStarship = null
 end
 class AAssignMethid
 special PMethid
-    readable writable attr _n_id: TId 
-    readable writable attr _n_assign: TAssign 
+    readable writable attr _n_id: TId = null
+    readable writable attr _n_assign: TAssign = null
 end
 class ABraassignMethid
 special PMethid
-    readable writable attr _n_obra: TObra 
-    readable writable attr _n_cbra: TCbra 
-    readable writable attr _n_assign: TAssign 
+    readable writable attr _n_obra: TObra = null
+    readable writable attr _n_cbra: TCbra = null
+    readable writable attr _n_assign: TAssign = null
 end
 class ASignature
 special PSignature
-    readable writable attr _n_params: List[PParam] 
-    readable writable attr _n_type: PType 
+    readable writable attr _n_params: List[PParam] = null
+    readable writable attr _n_type: PType = null
 end
 class AParam
 special PParam
-    readable writable attr _n_dotdotdot: TDotdotdot 
+    readable writable attr _n_dotdotdot: TDotdotdot = null
 end
 class AType
 special PType
-    readable writable attr _n_id: TClassid 
-    readable writable attr _n_types: List[PType] 
+    readable writable attr _n_id: TClassid = null
+    readable writable attr _n_types: List[PType] = null
 end
 
 
 
 class ABlockExpr
 special PExpr
-    readable writable attr _n_expr: List[PExpr] 
+    readable writable attr _n_expr: List[PExpr] = null
 end
 class AVardeclExpr
 special PExpr
-    readable writable attr _n_kwvar: TKwvar 
-    readable writable attr _n_id: TId 
-    readable writable attr _n_type: PType 
-    readable writable attr _n_assign: TAssign 
-    readable writable attr _n_expr: PExpr 
+    readable writable attr _n_kwvar: TKwvar = null
+    readable writable attr _n_id: TId = null
+    readable writable attr _n_type: PType = null
+    readable writable attr _n_assign: TAssign = null
+    readable writable attr _n_expr: PExpr = null
 end
 class AReturnExpr
 special PExpr
-    readable writable attr _n_kwreturn: TKwreturn 
-    readable writable attr _n_expr: PExpr 
+    readable writable attr _n_kwreturn: TKwreturn = null
+    readable writable attr _n_expr: PExpr = null
 end
 class ABreakExpr
 special PExpr
-    readable writable attr _n_kwbreak: TKwbreak 
+    readable writable attr _n_kwbreak: TKwbreak = null
 end
 class AAbortExpr
 special PExpr
-    readable writable attr _n_kwabort: TKwabort 
+    readable writable attr _n_kwabort: TKwabort = null
 end
 class AContinueExpr
 special PExpr
-    readable writable attr _n_kwcontinue: TKwcontinue 
+    readable writable attr _n_kwcontinue: TKwcontinue = null
 end
 class ADoExpr
 special PExpr
-    readable writable attr _n_kwdo: TKwdo 
-    readable writable attr _n_block: PExpr 
+    readable writable attr _n_kwdo: TKwdo = null
+    readable writable attr _n_block: PExpr = null
 end
 class AIfExpr
 special PExpr
-    readable writable attr _n_kwif: TKwif 
-    readable writable attr _n_expr: PExpr 
-    readable writable attr _n_then: PExpr 
-    readable writable attr _n_else: PExpr 
+    readable writable attr _n_kwif: TKwif = null
+    readable writable attr _n_expr: PExpr = null
+    readable writable attr _n_then: PExpr = null
+    readable writable attr _n_else: PExpr = null
 end
 class AIfexprExpr
 special PExpr
-    readable writable attr _n_kwif: TKwif 
-    readable writable attr _n_expr: PExpr 
-    readable writable attr _n_kwthen: TKwthen 
-    readable writable attr _n_then: PExpr 
-    readable writable attr _n_kwelse: TKwelse 
-    readable writable attr _n_else: PExpr 
+    readable writable attr _n_kwif: TKwif = null
+    readable writable attr _n_expr: PExpr = null
+    readable writable attr _n_kwthen: TKwthen = null
+    readable writable attr _n_then: PExpr = null
+    readable writable attr _n_kwelse: TKwelse = null
+    readable writable attr _n_else: PExpr = null
 end
 class AWhileExpr
 special PExpr
-    readable writable attr _n_kwwhile: TKwwhile 
-    readable writable attr _n_expr: PExpr 
-    readable writable attr _n_kwdo: TKwdo 
-    readable writable attr _n_block: PExpr 
+    readable writable attr _n_kwwhile: TKwwhile = null
+    readable writable attr _n_expr: PExpr = null
+    readable writable attr _n_kwdo: TKwdo = null
+    readable writable attr _n_block: PExpr = null
 end
 class AForExpr
 special PExpr
-    readable writable attr _n_vardecl: PExpr 
-    readable writable attr _n_kwdo: TKwdo 
-    readable writable attr _n_block: PExpr 
+    readable writable attr _n_vardecl: PExpr = null
+    readable writable attr _n_kwdo: TKwdo = null
+    readable writable attr _n_block: PExpr = null
 end
 class AForVardeclExpr
 special PExpr
-    readable writable attr _n_kwfor: TKwfor 
-    readable writable attr _n_id: TId 
-    readable writable attr _n_expr: PExpr 
+    readable writable attr _n_kwfor: TKwfor = null
+    readable writable attr _n_id: TId = null
+    readable writable attr _n_expr: PExpr = null
 end
 class AAssertExpr
 special PExpr
-    readable writable attr _n_kwassert: TKwassert 
-    readable writable attr _n_id: TId 
-    readable writable attr _n_expr: PExpr 
+    readable writable attr _n_kwassert: TKwassert = null
+    readable writable attr _n_id: TId = null
+    readable writable attr _n_expr: PExpr = null
 end
 class AAssignFormExpr
 special PExpr
-    readable writable attr _n_assign: TAssign 
-    readable writable attr _n_value: PExpr 
+    readable writable attr _n_assign: TAssign = null
+    readable writable attr _n_value: PExpr = null
 end
 class AReassignFormExpr
 special PExpr
-    readable writable attr _n_assign_op: PAssignOp
-    readable writable attr _n_value: PExpr 
+    readable writable attr _n_assign_op: PAssignOp = null
+    readable writable attr _n_value: PExpr = null
 end
 class AOnceExpr
 special AProxyExpr
-    readable writable attr _n_kwonce: TKwonce 
+    readable writable attr _n_kwonce: TKwonce = null
 end
 class ASendExpr
 special PExpr
-    readable writable attr _n_expr: PExpr 
+    readable writable attr _n_expr: PExpr = null
 end
 class ABinopExpr
 special ASendExpr
-    readable writable attr _n_expr2: PExpr 
+    readable writable attr _n_expr2: PExpr = null
 end
 class ABoolExpr
 special PExpr
 end
 class AOrExpr
 special ABoolExpr
-    readable writable attr _n_expr: PExpr 
-    readable writable attr _n_expr2: PExpr 
+    readable writable attr _n_expr: PExpr = null
+    readable writable attr _n_expr2: PExpr = null
 end
 class AAndExpr
 special ABoolExpr
-    readable writable attr _n_expr: PExpr 
-    readable writable attr _n_expr2: PExpr 
+    readable writable attr _n_expr: PExpr = null
+    readable writable attr _n_expr2: PExpr = null
 end
 class ANotExpr
 special ABoolExpr
-    readable writable attr _n_kwnot: TKwnot 
-    readable writable attr _n_expr: PExpr 
+    readable writable attr _n_kwnot: TKwnot = null
+    readable writable attr _n_expr: PExpr = null
 end
 class AEqExpr
 special ABinopExpr
 end
 class AEeExpr
 special ABoolExpr
-    readable writable attr _n_expr: PExpr 
-    readable writable attr _n_expr2: PExpr 
+    readable writable attr _n_expr: PExpr = null
+    readable writable attr _n_expr2: PExpr = null
 end
 class ANeExpr
 special ABinopExpr
@@ -667,8 +669,8 @@ special ABinopExpr
 end
 class AIsaExpr
 special ABoolExpr
-    readable writable attr _n_expr: PExpr 
-    readable writable attr _n_type: PType 
+    readable writable attr _n_expr: PExpr = null
+    readable writable attr _n_type: PType = null
 end
 class APlusExpr
 special ABinopExpr
@@ -690,19 +692,19 @@ special ABinopExpr
 end
 class AUminusExpr
 special ASendExpr
-    readable writable attr _n_minus: TMinus 
+    readable writable attr _n_minus: TMinus = null
 end
 class ANewExpr
 special PExpr
-    readable writable attr _n_kwnew: TKwnew 
-    readable writable attr _n_type: PType 
-    readable writable attr _n_id: TId 
-    readable writable attr _n_args: List[PExpr] 
+    readable writable attr _n_kwnew: TKwnew = null
+    readable writable attr _n_type: PType = null
+    readable writable attr _n_id: TId = null
+    readable writable attr _n_args: List[PExpr] = null
 end
 class AAttrFormExpr
 special PExpr
-    readable writable attr _n_expr: PExpr 
-    readable writable attr _n_id: TAttrid 
+    readable writable attr _n_expr: PExpr = null
+    readable writable attr _n_id: TAttrid = null
 end
 class AAttrExpr
 special AAttrFormExpr
@@ -713,8 +715,8 @@ special AAssignFormExpr
 end
 class ACallFormExpr
 special ASendExpr
-    readable writable attr _n_id: TId 
-    readable writable attr _n_args: List[PExpr] 
+    readable writable attr _n_id: TId = null
+    readable writable attr _n_args: List[PExpr] = null
 end
 class AAttrReassignExpr
 special PExpr
@@ -735,18 +737,18 @@ special AReassignFormExpr
 end
 class ASuperExpr
 special PExpr
-    readable writable attr _n_qualified: PQualified 
-    readable writable attr _n_kwsuper: TKwsuper 
-    readable writable attr _n_args: List[PExpr] 
+    readable writable attr _n_qualified: PQualified = null
+    readable writable attr _n_kwsuper: TKwsuper = null
+    readable writable attr _n_args: List[PExpr] = null
 end
 class AInitExpr
 special ASendExpr
-    readable writable attr _n_kwinit: TKwinit 
-    readable writable attr _n_args: List[PExpr] 
+    readable writable attr _n_kwinit: TKwinit = null
+    readable writable attr _n_args: List[PExpr] = null
 end
 class ABraFormExpr
 special ASendExpr
-    readable writable attr _n_args: List[PExpr] 
+    readable writable attr _n_args: List[PExpr] = null 
 end
 class ABraExpr
 special ABraFormExpr
@@ -757,7 +759,7 @@ special AAssignFormExpr
 end
 class AVarFormExpr
 special PExpr
-    readable writable attr _n_id: TId 
+    readable writable attr _n_id: TId = null 
 end
 class ABraReassignExpr
 special ABraFormExpr
@@ -776,8 +778,8 @@ special AReassignFormExpr
 end
 class ARangeExpr
 special PExpr
-    readable writable attr _n_expr: PExpr 
-    readable writable attr _n_expr2: PExpr 
+    readable writable attr _n_expr: PExpr = null 
+    readable writable attr _n_expr2: PExpr = null
 end
 class ACrangeExpr
 special ARangeExpr
@@ -787,95 +789,95 @@ special ARangeExpr
 end
 class AArrayExpr
 special PExpr
-    readable writable attr _n_exprs: List[PExpr] 
+    readable writable attr _n_exprs: List[PExpr] = null
 end
 class ASelfExpr
 special PExpr
-    readable writable attr _n_kwself: TKwself 
+    readable writable attr _n_kwself: TKwself = null
 end
 class AImplicitSelfExpr
 special ASelfExpr
 end
 class ATrueExpr
 special ABoolExpr
-    readable writable attr _n_kwtrue: TKwtrue 
+    readable writable attr _n_kwtrue: TKwtrue = null
 end
 class AFalseExpr
 special ABoolExpr
-    readable writable attr _n_kwfalse: TKwfalse 
+    readable writable attr _n_kwfalse: TKwfalse = null
 end
 class ANullExpr
 special PExpr
-    readable writable attr _n_kwnull: TKwnull 
+    readable writable attr _n_kwnull: TKwnull = null
 end
 class AIntExpr
 special PExpr
-    readable writable attr _n_number: TNumber 
+    readable writable attr _n_number: TNumber = null
 end
 class AFloatExpr
 special PExpr
-    readable writable attr _n_float: TFloat 
+    readable writable attr _n_float: TFloat = null
 end
 class ACharExpr
 special PExpr
-    readable writable attr _n_char: TChar 
+    readable writable attr _n_char: TChar = null
 end
 class AStringFormExpr
 special PExpr
 end
 class AStringExpr
 special AStringFormExpr
-    readable writable attr _n_string: TString 
+    readable writable attr _n_string: TString = null
 end
 class AStartStringExpr
 special AStringFormExpr
-    readable writable attr _n_string: TStartString 
+    readable writable attr _n_string: TStartString = null
 end
 class AMidStringExpr
 special AStringFormExpr
-    readable writable attr _n_string: TMidString 
+    readable writable attr _n_string: TMidString = null
 end
 class AEndStringExpr
 special AStringFormExpr
-    readable writable attr _n_string: TEndString 
+    readable writable attr _n_string: TEndString = null
 end
 class ASuperstringExpr
 special PExpr
-    readable writable attr _n_exprs: List[PExpr] 
+    readable writable attr _n_exprs: List[PExpr] = null
 end
 class AParExpr
 special AProxyExpr
 end
 class AProxyExpr
 special PExpr
-    readable writable attr _n_expr: PExpr 
+    readable writable attr _n_expr: PExpr = null
 end
 class AAsCastExpr
 special PExpr
-    readable writable attr _n_expr: PExpr 
-    readable writable attr _n_kwas: TKwas 
-    readable writable attr _n_type: PType 
+    readable writable attr _n_expr: PExpr = null
+    readable writable attr _n_kwas: TKwas = null
+    readable writable attr _n_type: PType = null
 end
 class APlusAssignOp
 special PAssignOp
-    readable writable attr _n_pluseq: TPluseq 
+    readable writable attr _n_pluseq: TPluseq = null
 end
 class AMinusAssignOp
 special PAssignOp
-    readable writable attr _n_minuseq: TMinuseq 
+    readable writable attr _n_minuseq: TMinuseq = null
 end
 class AQualified
 special PQualified
-    readable writable attr _n_id: List[TId] 
-    readable writable attr _n_classid: TClassid 
+    readable writable attr _n_id: List[TId] = null
+    readable writable attr _n_classid: TClassid = null
 end
 class ADoc
 special PDoc
-    readable writable attr _n_comment: List[TComment] 
+    readable writable attr _n_comment: List[TComment] = null
 end
 
 class Start
 special Prod
-    readable writable attr _n_base: PModule 
-    readable writable attr _n_eof: EOF 
+    readable writable attr _n_base: PModule
+    readable writable attr _n_eof: EOF
 end

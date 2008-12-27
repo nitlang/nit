@@ -243,7 +243,7 @@ special AbstractCompiler
 		self.extract_other_doc
 	end
 
-	redef init
+	init
 	do
 		super
 		option_context.add_option(opt_dir)
