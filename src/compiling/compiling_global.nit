@@ -881,7 +881,8 @@ redef class MMLocalClass
 
 			for g in global_properties do
 				var p = self[g]
-				if not p.global.is_init or p.global.intro.local_class.global != global then continue
+				# FIXME skip invisible constructors
+				if not p.global.is_init then continue
 				v.clear
 				var params = new Array[String]
 				var args = ["self"]
@@ -890,7 +891,8 @@ redef class MMLocalClass
 					args.add("p{i}")
 				end
 				args.add("init_table")
-				var s = "val_t NEW_{p.global.intro.cname}({params.join(", ")})"
+				var s = "val_t NEW_{self}_{p.global.intro.cname}({params.join(", ")})"
+				v.add_decl(s + ";")
 				v.add_instr(s + " \{")
 				v.indent
 				v.add_instr(init_table_decl)

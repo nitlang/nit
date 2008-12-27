@@ -246,11 +246,10 @@ redef class MMMethod
 	end
 
 	# Compile a call as constructor with given args
-	meth compile_constructor_call(v: CompilerVisitor, cargs: Array[String]): String
+	meth compile_constructor_call(v: CompilerVisitor, recvtype: MMType, cargs: Array[String]): String
 	do
 		var recv = v.get_var
-		var stype = signature.recv
-		v.add_instr("{recv} = NEW_{global.intro.cname}({cargs.join(", ")}); /*new {stype}*/")
+		v.add_instr("{recv} = NEW_{recvtype.local_class}_{global.intro.cname}({cargs.join(", ")}); /*new {recvtype}*/")
 		return recv
 	end
 
@@ -1045,7 +1044,7 @@ redef class AStringFormExpr
 	do
 		var prop = stype.local_class.select_method(once "with_native".to_symbol)
 		compute_string_info
-		return prop.compile_constructor_call(v, ["BOX_NativeString(\"{_cstring}\")", "TAG_Int({_cstring_length})"])
+		return prop.compile_constructor_call(v, stype , ["BOX_NativeString(\"{_cstring}\")", "TAG_Int({_cstring_length})"])
 	end
 
 	# The raw string value
@@ -1100,7 +1099,7 @@ redef class ASuperstringExpr
 	redef meth compile_expr(v)
 	do
 		var prop = stype.local_class.select_method(once "init".to_symbol)
-		var recv = prop.compile_constructor_call(v, new Array[String]) 
+		var recv = prop.compile_constructor_call(v, stype, new Array[String]) 
 
 		var prop2 = stype.local_class.select_method(once "append".to_symbol)
 
@@ -1128,7 +1127,7 @@ redef class AArrayExpr
 	redef meth compile_expr(v)
 	do
 		var prop = stype.local_class.select_method(once "with_capacity".to_symbol)
-		var recv = prop.compile_constructor_call(v,["TAG_Int({n_exprs.length})"])
+		var recv = prop.compile_constructor_call(v, stype, ["TAG_Int({n_exprs.length})"])
 
 		var prop2 = stype.local_class.select_method(once "add".to_symbol)
 		for ne in n_exprs do
@@ -1145,7 +1144,7 @@ redef class ARangeExpr
 		var prop = stype.local_class.select_method(propname)
 		var e = v.compile_expr(n_expr)
 		var e2 = v.compile_expr(n_expr2)
-		return prop.compile_constructor_call(v, [e, e2])
+		return prop.compile_constructor_call(v, stype, [e, e2])
 	end
 	# The constructor that must be used for the range
 	protected meth propname: Symbol is abstract
@@ -1270,7 +1269,7 @@ redef class ANewExpr
 		for a in arguments do
 			cargs.add(v.compile_expr(a))
 		end
-		return prop.compile_constructor_call(v, cargs) 
+		return prop.compile_constructor_call(v, stype, cargs) 
 	end
 end
 
