@@ -234,9 +234,8 @@ redef class MMSrcLocalClass
 		end
 
 		if prop.global == null then
-			#print "{prop.full_name} is an introduction"
 			prop.new_global
-			prop.global.is_init = prop.node isa AConcreteInitPropdef
+			prop.global.is_init = prop.is_init
 		end
 	end
 end

@@ -208,12 +208,13 @@ redef class MMMethod
 	meth compile_call(v: CompilerVisitor, cargs: Array[String]): String
 	do
 		var i = self
-		assert i isa MMSrcMethod
-		if i.node isa AInternMethPropdef or 
-			(i.local_class.name == (once "Array".to_symbol) and name == (once "[]".to_symbol))
-		then
-			var e = i.do_compile_inside(v, cargs)
-			return e
+		if i isa MMSrcMethod then
+			if i isa MMMethSrcMethod and i.node isa AInternMethPropdef or 
+				(i.local_class.name == (once "Array".to_symbol) and name == (once "[]".to_symbol))
+			then
+				var e = i.do_compile_inside(v, cargs)
+				return e
+			end
 		end
 		var ee = once "==".to_symbol
 		var ne = once "!=".to_symbol
@@ -326,7 +327,10 @@ redef class MMSrcMethod
 		var ctx_old = v.ctx
 		v.ctx = new CContext
 
-		v.add_decl("struct trace_t trace = \{NULL, NULL, {node.line_number}, LOCATE_{cname}};")
+		var ln = 0
+		var s = self
+		if s.node != null then ln = s.node.line_number
+		v.add_decl("struct trace_t trace = \{NULL, NULL, {ln}, LOCATE_{cname}};")
 		v.add_instr("trace.prev = tracehead; tracehead = &trace;")
 		v.add_instr("trace.file = LOCATE_{module.name};")
 		var s = do_compile_inside(v, args)

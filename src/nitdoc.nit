@@ -488,7 +488,7 @@ special MMEntity
 	redef meth doc
 	do
 		var n = node
-		if not node isa PPropdef then
+		if n == null or not node isa PPropdef then
 			return null
 		end
 		assert n isa PPropdef

@@ -102,11 +102,13 @@ end
 redef class MMLocalProperty
 	# The attached node (if any)
 	meth node: PNode do return null
+
+	# Is the concrete method defined as init
+	meth is_init: Bool do return false
 end
 
 # Concrete NIT source attribute
 class MMSrcAttribute
-special MMLocalProperty
 special MMAttribute
 	redef readable attr _node: AAttrPropdef
 	init(name: Symbol, cla: MMLocalClass, n: AAttrPropdef)
@@ -118,7 +120,6 @@ end
 
 # Concrete NIT source method
 class MMSrcMethod
-special MMLocalProperty
 special MMMethod
 end
 
@@ -126,33 +127,35 @@ end
 class MMAttrImplementationMethod
 special MMSrcMethod
 	redef readable attr _node: AAttrPropdef
+	init(name: Symbol, cla: MMLocalClass, n: AAttrPropdef)
+	do
+		super(name, cla)
+		_node = n
+	end
 end
 
 # Concrete NIT source method for an automatic read accesor
 class MMReadImplementationMethod
 special MMAttrImplementationMethod
-
 	init(name: Symbol, cla: MMLocalClass, n: AAttrPropdef)
 	do
-		super(name, cla)
-		_node = n
+		super(name, cla, n)
 	end
 end
 
 # Concrete NIT source method for an automatic write accesor
 class MMWriteImplementationMethod
 special MMAttrImplementationMethod
-
 	init(name: Symbol, cla: MMLocalClass, n: AAttrPropdef)
 	do
-		super(name, cla)
-		_node = n
+		super(name, cla, n)
 	end
 end
 
 # Concrete NIT source method for an explicit method
 class MMMethSrcMethod
 special MMSrcMethod
+	redef meth is_init do return _node isa AConcreteInitPropdef
 	redef readable attr _node: AMethPropdef
 	init(name: Symbol, cla: MMLocalClass, n: AMethPropdef)
 	do
@@ -276,13 +279,20 @@ special Visitor
 	# Display an error for a given syntax node
 	meth error(n: PNode, s: String)
 	do
-		_tc.error("{n.locate}: {s}")
+		_tc.error("{locate(n)}: {s}")
 	end
 
 	# Display a warning for a given syntax node
 	meth warning(n: PNode, s: String)
 	do
-		_tc.warning("{n.locate}: {s}")
+		_tc.warning("{locate(n)}: {s}")
+	end
+
+	#
+	meth locate(n: PNode): String
+	do
+		if n != null then return n.locate
+		return _module.filename
 	end
 
 	# Check conformity and display error
