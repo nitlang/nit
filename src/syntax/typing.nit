@@ -912,6 +912,8 @@ special AAbsSendExpr
 		end
 
 		do_typing(v, t, false, false, name, n_args.to_a)
+		if prop == null then return
+
 		if not prop.global.is_init then
 			v.error(self, "Error: {prop} is not a constructor.")
 		end
