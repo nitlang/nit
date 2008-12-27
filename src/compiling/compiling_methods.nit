@@ -373,6 +373,33 @@ redef class MMMethSrcMethod
 	end
 end
 
+redef class MMImplicitInit
+	redef meth do_compile_inside(v, params)
+	do
+		var f = params.length - unassigned_attributes.length
+		var recv = params.first
+		for sp in super_inits do
+			assert sp isa MMMethod
+			var args_recv = [recv]
+			if sp == super_init then
+				var args = new Array[String].with_capacity(f)
+				args.add(recv)
+				for i in [1..f[ do
+					args.add(params[i])
+				end
+				sp.compile_call(v, args)
+			else
+				sp.compile_call(v, args_recv)
+			end
+		end
+		for i in [f..params.length[ do
+			var attribute = unassigned_attributes[i-f]
+			v.add_assignment(attribute.compile_access(v, recv), params[i])
+		end
+		return null
+	end
+end
+
 redef class MMType
 	# Compile a subtype check to self
 	# Return a NIT Bool

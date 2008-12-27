@@ -168,12 +168,27 @@ redef class MMSrcLocalClass
 		end
 
 		# Collect visible constructors in super stateful classes
+		var super_inits = new ArraySet[MMLocalProperty]
 		var super_constructors = new ArraySet[MMGlobalProperty]
 		for sc in che.direct_greaters do
 			if sc.global.is_universal or sc.global.is_interface then continue
 			for gp in sc.global_properties do
 				if not gp.is_init then continue
 				super_constructors.add(gp)
+			end
+			var gp = sc.get_property_by_name(once ("init".to_symbol))
+			if gp != null then
+				super_inits.add(self[gp])
+			end
+		end
+
+		# Collect unassigned attributes
+		var unassigned_attributes = new Array[MMSrcAttribute]
+		for a in src_local_properties do
+			if a isa MMSrcAttribute then
+				var n = a.node
+				assert n isa AAttrPropdef
+				if n.n_expr == null then unassigned_attributes.add(a)
 			end
 		end
 
@@ -208,6 +223,13 @@ redef class MMSrcLocalClass
 				end
 			end
 			_is_mixin = true
+		else
+			# v.error(nodes.first, "Error, constructor required in {self} since no anonimous init found in {sc}.")
+
+			# unassigned attributes, then implicit consructors are generated
+			var p = new MMImplicitInit(self, unassigned_attributes, super_inits.to_a)
+			add_src_local_property(v, p)
+			#print("Create implicit init {p} in {self} from {super_inits.join(", ")} + {unassigned_attributes.length} args")
 		end
 	end
 
@@ -245,6 +267,39 @@ redef class MMLocalProperty
 	do
 	end
 end
+
+redef class MMImplicitInit
+	readable attr _super_init: MMLocalProperty = null
+	redef meth accept_property_visitor(v)
+	do
+		var base: MMLocalProperty = null
+		for p in super_inits do
+			if p.signature.arity > 0 then
+				if base == null then
+					base = p
+				else
+					v.error(null, "Error: explicit constructor needed in {local_class} since both super-constructor {base.full_name} and {p.full_name} have paramters")
+					return
+				end
+			end
+		end
+		_super_init = base
+
+		var params = new Array[MMType]
+		if base != null then
+			var sig = base.signature
+			for i in [0..sig.arity[ do
+				params.add(sig[i])
+			end
+		end
+		for a in unassigned_attributes do
+			params.add(a.signature.return_type)
+		end
+		signature = new MMSignature(params, null, local_class.get_type)
+	end
+end
+
+
 # Concrete NIT class specialization relation
 class MMSrcAncestor
 special MMAncestor

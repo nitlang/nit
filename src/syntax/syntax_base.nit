@@ -176,6 +176,19 @@ special MMTypeProperty
 	end
 end
 
+# Concrete NIT implicit constructor
+class MMImplicitInit
+special MMMethSrcMethod
+	redef meth is_init do return true
+	readable attr _unassigned_attributes: Array[MMSrcAttribute]
+	readable attr _super_inits: Array[MMLocalProperty]
+	init(cla: MMLocalClass, unassigned_attributes: Array[MMSrcAttribute], super_inits: Array[MMLocalProperty])
+	do
+		super(once "init".to_symbol, cla, null)
+		_unassigned_attributes = unassigned_attributes
+		_super_inits = super_inits
+	end
+end
 
 # Local variable and method parameter
 class Variable
