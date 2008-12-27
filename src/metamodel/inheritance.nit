@@ -130,17 +130,24 @@ redef class MMLocalClass
 					continue
 				end
 
-				var gname = glob.intro.name
-				var conf_set: Array[MMGlobalProperty]
-				if names.has_key(gname) then
-					conf_set = names[gname]
-				else
-					conf_set = new Array[MMGlobalProperty]
-					names[gname] = conf_set
-				end
-				conf_set.add(glob)
+				make_visible_an_inherited_global_property(glob)
 			end
 		end
+	end
+
+	# Make the name of a global property meaningful in the class
+	meth make_visible_an_inherited_global_property(glob: MMGlobalProperty)
+	do
+		var names = _properties_by_name
+		var gname = glob.intro.name
+		var conf_set: Array[MMGlobalProperty]
+		if names.has_key(gname) then
+			conf_set = names[gname]
+		else
+			conf_set = new Array[MMGlobalProperty]
+			names[gname] = conf_set
+		end
+		conf_set.add(glob)
 	end
 
 	# Add super stype of this current local class

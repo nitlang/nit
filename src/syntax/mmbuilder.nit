@@ -93,7 +93,10 @@ redef class MMSrcModule
 
 			# Global property introduction and redefinition 
 			c.accept_class_visitor(mmbv2)
-			if c isa MMSrcLocalClass then
+
+			# Default and inherited constructor if needed
+			if c isa MMSrcLocalClass and c.global.intro == c and not c.global.is_universal and not c.global.is_interface then
+				c.process_default_constructors(mmbv2)
 			end
 
 			# Note that inherited unredefined property are processed on demand latter
@@ -149,6 +152,65 @@ redef class MMSrcLocalClass
 			p.accept_property_visitor(v)
 		end
 	end
+
+	# A mixin class can be build the same way that one of its superclasses
+	readable attr _is_mixin: Bool = false
+
+	# Introduce or inherit default constructors
+	private meth process_default_constructors(v: PropertyBuilderVisitor)
+	do
+		# Is there already a constructor ?
+		for gp in global_properties do
+			if gp.is_init then
+				# Return if explicit constructor in the class
+				if gp.intro.local_class == self then return
+			end
+		end
+
+		# Collect visible constructors in super stateful classes
+		var super_constructors = new ArraySet[MMGlobalProperty]
+		for sc in che.direct_greaters do
+			if sc.global.is_universal or sc.global.is_interface then continue
+			for gp in sc.global_properties do
+				if not gp.is_init then continue
+				super_constructors.add(gp)
+			end
+		end
+
+		if not super_constructors.is_empty then
+			# Select most specific classes introducing inheritable constructors
+			# Mixin classes are skipped
+			var supers = new Array[MMLocalClass]
+			for gp in super_constructors do
+				var sc = gp.local_class
+				if supers.has(sc) then continue
+				assert sc isa MMSrcLocalClass
+				if not sc.is_mixin then
+					supers.add(sc)
+				end
+			end
+			supers = che.order.select_smallests(supers)
+
+			# A mixin class can only have 0 or 1 most specific non-mixin superclass
+			var superclass: MMLocalClass = null # This most specific non-mixin superclass (if any)
+
+			if supers.length > 1 then
+				v.error(nodes.first, "Error: Explicit constructor required in {self} since multiple inheritance of constructor is forbiden. Conflicting classes are {supers.join(", ")}. Costructors are {super_constructors.join(", ")}.")
+				return
+			else if supers.length == 1 then
+				superclass = supers.first
+			end
+
+			for gp in super_constructors do
+				# Inherit constructors : the one of the non-mixin super class or all from the all mixin super-classes
+				if superclass == null or gp.local_class == superclass then
+					make_visible_an_inherited_global_property(gp)
+				end
+			end
+			_is_mixin = true
+		end
+	end
+
 	# Add a source property
 	# Register it to the class and attach it to global property
 	private meth add_src_local_property(v: PropertyBuilderVisitor, prop: MMLocalProperty)
