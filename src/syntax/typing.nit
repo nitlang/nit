@@ -72,13 +72,13 @@ special AbsSyntaxVisitor
 			var gp = c[g]
 			assert gp isa MMSrcMethod
 			var garity = gp.signature.arity
-			if prop != null and g.intro.name == prop.name then
-				if garity == 0 or prop.signature < gp.signature then
+			if prop != null and gp.name == prop.name then
+				if garity == 0 or (parity == garity and prop.signature < gp.signature) then
 					return gp
 				else
 					false_candidates.add(gp)
 				end
-			else if garity == 0 then
+			else if garity == 0 and gp.name == once ("init".to_symbol) then
 				candidates.add(gp)
 				false_candidates.add(gp)
 			else
@@ -91,7 +91,7 @@ special AbsSyntaxVisitor
 			v.error(n, "Error: Conflicting default constructor to call for {c}: {candidates.join(", ")}.")
 			return null
 		else if false_candidates.length > 0 then
-			v.error(n, "Error: there is no available compatible constrctor in {c}.")
+			v.error(n, "Error: there is no available compatible constrctor in {c}. discarded candidates are {false_candidates.join(", ")}.")
 			return null
 		else
 			v.warning(n, "Error: there is no available compatible constrctor in {c}.")
