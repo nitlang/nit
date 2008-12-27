@@ -1,0 +1,11 @@
+alt/base_init_inherit_alt1.nit:95,2--9: Error: Method 'ca' doesn't exists in B.
+alt/base_init_inherit_alt1.nit:96,2--10: Error: Method 'ca2' doesn't exists in B.
+alt/base_init_inherit_alt1.nit:98,2--9: Error: Method 'ca' doesn't exists in C.
+alt/base_init_inherit_alt1.nit:99,2--10: Error: Method 'ca2' doesn't exists in C.
+alt/base_init_inherit_alt1.nit:100,2--9: Error: Method 'cb' doesn't exists in C.
+alt/base_init_inherit_alt1.nit:104,2--9: Error: Method 'ca' doesn't exists in N.
+alt/base_init_inherit_alt1.nit:105,2--10: Error: Method 'ca2' doesn't exists in N.
+alt/base_init_inherit_alt1.nit:107,2--9: Error: Method 'ca' doesn't exists in O.
+alt/base_init_inherit_alt1.nit:108,2--10: Error: Method 'ca2' doesn't exists in O.
+alt/base_init_inherit_alt1.nit:109,2--9: Error: Method 'cb' doesn't exists in O.
+alt/base_init_inherit_alt1.nit:110,2--9: Error: Method 'cc' doesn't exists in O.
