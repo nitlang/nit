@@ -635,7 +635,7 @@ redef class PPropdef
 			visibility_level = 3
 		end
 		glob.visibility_level = visibility_level
-		if has_redef and not glob.is_init then
+		if has_redef then
 			v.error(self, "Error: No property {prop.local_class}::{prop} is inherited. Remove the redef keyword to define a new property.")
 		end
 		if glob.is_attribute then
@@ -698,7 +698,7 @@ redef class PPropdef
 		var is_init = self isa AConcreteInitPropdef
 		var glob = prop.global
 
-		if not has_redef and prop.name != once "init".to_symbol then
+		if not has_redef then
 			v.error(self, "Redef error: {prop.local_class}::{prop} is an inherited property. To redefine it, add the redef keyword.")
 			return
 		end
