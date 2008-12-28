@@ -160,6 +160,42 @@ class MMSignature
 		return new MMSignature(p,rv,r)
 	end
 
+	attr _not_for_self_cache: MMSignature
+
+	# Return a type approximation if the reveiver is not self
+	# Useful for virtual types
+	meth not_for_self: MMSignature
+	do
+		var res = _not_for_self_cache
+		if res != null then return res
+
+		var need_for_self = false
+		var p = _params
+		if p != null then
+			p = new Array[MMType]
+			for i in _params do
+				var i2 = i.not_for_self
+				if i != i2 then need_for_self = true
+				p.add(i.not_for_self)
+			end
+		end
+		
+		var rv = _return_type
+		if rv != null then
+			var rv = rv.not_for_self
+			if rv != _return_type then need_for_self = true
+		end
+
+		if need_for_self then
+			res = new MMSignature(p, rv, _recv)
+		else
+			res = self
+		end
+
+		_not_for_self_cache = res
+		return res
+	end
+
 	init(params: Array[MMType], return_type: MMType, r: MMType)
 	do
 		assert params != null

@@ -678,7 +678,8 @@ special ASuperInitCall
 			_init_in_superclass = p
 			register_super_init_call(v, p)
 			if n_args.length > 0 then
-				_arguments = process_signature(v, v.self_type, p, true, n_args.to_a)
+				var signature = get_signature(v, v.self_type, p, true)
+				_arguments = process_signature(v, signature, p, n_args.to_a)
 			end
 		else
 			v.error(self, "Error: No super method to call for {v.local_property}.")
@@ -776,7 +777,9 @@ special PExpr
 	do
 		var prop = get_property(v, type_recv, is_implicit_self, name)
 		if prop == null then return
-		var args = process_signature(v, type_recv, prop, recv_is_self, raw_args)
+		var sig = get_signature(v, type_recv, prop, recv_is_self)
+		if sig == null then return
+		var args = process_signature(v, sig, prop, raw_args)
 		if args == null then return
 		_prop = prop
 		_arguments = args
@@ -809,10 +812,17 @@ special PExpr
 		return prop
 	end
 
-	private meth process_signature(v: TypingVisitor, type_recv: MMType, prop: MMMethod, recv_is_self: Bool, raw_args: Array[PExpr]): Array[PExpr]
+	private meth get_signature(v: TypingVisitor, type_recv: MMType, prop: MMMethod, recv_is_self: Bool): MMSignature
 	do
 		prop.global.check_visibility(v, self, v.module, recv_is_self)
 		var psig = prop.signature_for(type_recv)
+		if not recv_is_self then psig = psig.not_for_self
+		return psig
+	end
+	
+	# Check the conformity of a set of arguments `raw_args' to a signature.
+	private meth process_signature(v: TypingVisitor, psig: MMSignature, prop: MMMethod, raw_args: Array[PExpr]): Array[PExpr]
+	do
 		var par_vararg = psig.vararg_rank
 		var par_arity = psig.arity
 		var raw_arity: Int
@@ -826,7 +836,6 @@ special PExpr
 		for par_idx in [0..par_arity[ do
 			var a: PExpr
 			var par_type = psig[par_idx]
-			if not recv_is_self then par_type = par_type.not_for_self
 			if par_idx == par_vararg then
 				var star = new Array[PExpr]
 				for i in [0..(raw_arity-par_arity)] do
