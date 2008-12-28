@@ -28,9 +28,9 @@ class @ename
 special ${../@ename}
 $ foreach {elem}
 $   if @is_list
-    readable writable attr _n_@name: List[@etype] 
+    readable writable attr _n_@name: List[@etype] = null
 $   else
-    readable writable attr _n_@name: @etype 
+    readable writable attr _n_@name: @etype = null
 $   end
 $ end
 end
