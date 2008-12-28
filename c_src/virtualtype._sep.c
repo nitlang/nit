@@ -55,7 +55,7 @@ val_t virtualtype___MMTypeProperty___real_stype_for(val_t  self, val_t  param0) 
     variable1 = ((abstract_collection___CoupleMap_____bra_t)CALL(variable1,COLOR_abstract_collection___Map_____bra))(variable1,  variable0 /*recv*/) /*CoupleMap::[]*/;
     goto return_label2;
   }
-  variable2 = NEW_virtualtype___MMVirtualType___init( self,  variable0 /*recv*/); /*new MMVirtualType*/
+  variable2 = NEW_MMVirtualType_virtualtype___MMVirtualType___init( self,  variable0 /*recv*/); /*new MMVirtualType*/
   variable1 = variable2;
   variable2 = ATTR_virtualtype___MMTypeProperty____stypes_cache( self) /*MMTypeProperty::_stypes_cache*/;
   ((hash___HashMap_____braeq_t)CALL(variable2,COLOR_abstract_collection___Map_____braeq))(variable2,  variable0 /*recv*/,  variable1 /*res*/) /*HashMap::[]=*/;

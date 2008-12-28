@@ -77,7 +77,7 @@ val_t genericity___MMLocalClass___get_instantiate_type(val_t  self, val_t  param
     ((array___ArrayIterator___next_t)CALL(variable1,COLOR_abstract_collection___Iterator___next))(variable1) /*ArrayIterator::next*/;
   }
   break_4: while(0);
-  variable2 = NEW_genericity___MMTypeGeneric___init( self,  variable0 /*t*/); /*new MMTypeGeneric*/
+  variable2 = NEW_MMTypeGeneric_genericity___MMTypeGeneric___init( self,  variable0 /*t*/); /*new MMTypeGeneric*/
   variable1 = variable2;
   variable2 = ATTR_genericity___MMLocalClass____types( self) /*MMLocalClass::_types*/;
   ((array___AbstractArray___add_t)CALL(variable2,COLOR_abstract_collection___SimpleCollection___add))(variable2,  variable1 /*g*/) /*AbstractArray::add*/;
@@ -105,7 +105,7 @@ val_t genericity___MMLocalClass___formals_types(val_t  self) {
     variable0 = TAG_Bool(( self==NIT_NULL) || VAL_ISA( self, COLOR_MMConcreteClass, ID_MMConcreteClass)) /*cast MMConcreteClass*/;
     if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable0)))) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_genericity___MMLocalClass___formals_types, LOCATE_genericity, 62); nit_exit(1);}
     variable0 = ((abstractmetamodel___MMLocalClass___arity_t)CALL( self,COLOR_abstractmetamodel___MMLocalClass___arity))( self) /*MMLocalClass::arity*/;
-    variable1 = NEW_range___Range___without_last( TAG_Int(0), variable0); /*new Range[E]*/
+    variable1 = NEW_Range_range___Range___without_last( TAG_Int(0), variable0); /*new Range[Int]*/
     variable0 = variable1;
     variable0 = ((range___Range___iterator_t)CALL(variable0,COLOR_abstract_collection___Collection___iterator))(variable0) /*Range::iterator*/;
     while (true) { /*for*/
@@ -117,7 +117,7 @@ val_t genericity___MMLocalClass___formals_types(val_t  self) {
       variable3 = ((genericity___MMLocalClass___get_formal_t)CALL(variable3,COLOR_genericity___MMLocalClass___get_formal))(variable3,  variable1 /*i*/) /*MMLocalClass::get_formal*/;
       variable2 = variable3;
       variable4 = ((type_formal___MMTypeFormal___name_t)CALL( variable2 /*oft*/,COLOR_type_formal___MMTypeFormal___name))( variable2 /*oft*/) /*MMTypeFormal::name*/;
-      variable5 = NEW_genericity___MMTypeFormalParameter___init(variable4,  variable1 /*i*/,  self); /*new MMTypeFormalParameter*/
+      variable5 = NEW_MMTypeFormalParameter_genericity___MMTypeFormalParameter___init(variable4,  variable1 /*i*/,  self); /*new MMTypeFormalParameter*/
       variable4 = variable5;
       variable3 = variable4;
       ((genericity___MMLocalClass___register_formal_t)CALL( self,COLOR_genericity___MMLocalClass___register_formal))( self,  variable3 /*ft*/) /*MMLocalClass::register_formal*/;
@@ -126,7 +126,7 @@ val_t genericity___MMLocalClass___formals_types(val_t  self) {
     }
     break_6: while(0);
     variable0 = ((abstractmetamodel___MMLocalClass___arity_t)CALL( self,COLOR_abstractmetamodel___MMLocalClass___arity))( self) /*MMLocalClass::arity*/;
-    variable1 = NEW_range___Range___without_last( TAG_Int(0), variable0); /*new Range[E]*/
+    variable1 = NEW_Range_range___Range___without_last( TAG_Int(0), variable0); /*new Range[Int]*/
     variable0 = variable1;
     variable0 = ((range___Range___iterator_t)CALL(variable0,COLOR_abstract_collection___Collection___iterator))(variable0) /*Range::iterator*/;
     while (true) { /*for*/
@@ -325,7 +325,7 @@ val_t genericity___MMTypeGeneric___for_module(val_t  self, val_t  param0) {
   variable2 = ((static_type___MMTypeClass___module_t)CALL( self,COLOR_static_type___MMType___module))( self) /*MMTypeClass::module*/;
   variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable2 ==  variable0 /*mod*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, variable0 /*mod*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  variable0 /*mod*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable2)) { /*if*/
-    variable3 = NEW_array___Array___init(); /*new Array[E]*/
+    variable3 = NEW_Array_array___Array___init(); /*new Array[MMType]*/
     variable2 = variable3;
     variable3 = ATTR_genericity___MMTypeGeneric____params( self) /*MMTypeGeneric::_params*/;
     variable3 = ((array___AbstractArray___iterator_t)CALL(variable3,COLOR_abstract_collection___Collection___iterator))(variable3) /*AbstractArray::iterator*/;
@@ -363,7 +363,7 @@ val_t genericity___MMTypeGeneric___adapt_to(val_t  self, val_t  param0) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
   variable0 =  param0;
-  variable2 = NEW_array___Array___init(); /*new Array[E]*/
+  variable2 = NEW_Array_array___Array___init(); /*new Array[MMType]*/
   variable1 = variable2;
   variable2 = ATTR_genericity___MMTypeGeneric____params( self) /*MMTypeGeneric::_params*/;
   variable2 = ((array___AbstractArray___iterator_t)CALL(variable2,COLOR_abstract_collection___Collection___iterator))(variable2) /*AbstractArray::iterator*/;
@@ -407,7 +407,7 @@ val_t genericity___MMTypeGeneric___params_equals(val_t  self, val_t  param0) {
     goto return_label20;
   }
   variable1 = ((array___AbstractArray___length_t)CALL( variable0 /*t*/,COLOR_abstract_collection___Collection___length))( variable0 /*t*/) /*AbstractArray::length*/;
-  variable2 = NEW_range___Range___without_last( TAG_Int(0), variable1); /*new Range[E]*/
+  variable2 = NEW_Range_range___Range___without_last( TAG_Int(0), variable1); /*new Range[Int]*/
   variable1 = variable2;
   variable1 = ((range___Range___iterator_t)CALL(variable1,COLOR_abstract_collection___Collection___iterator))(variable1) /*Range::iterator*/;
   while (true) { /*for*/
@@ -510,22 +510,22 @@ val_t genericity___MMTypeGeneric___to_s(val_t  self) {
   val_t variable10;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
-  variable0 = NEW_string___String___init(); /*new String*/
-  variable1 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable0 = NEW_String_string___String___init(); /*new String*/
+  variable1 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   variable2 = variable1;
   ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable2) /*String::append*/;
   variable3 = ((genericity___MMTypeGeneric___to_s_t)CALL( self,COLOR_SUPER_genericity___MMTypeGeneric___to_s))( self) /*super MMTypeGeneric::to_s*/;
   variable4 = variable3;
   ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable4) /*String::append*/;
-  variable5 = NEW_string___String___with_native(BOX_NativeString("["), TAG_Int(1)); /*new String*/
+  variable5 = NEW_String_string___String___with_native(BOX_NativeString("["), TAG_Int(1)); /*new String*/
   variable6 = variable5;
   ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable6) /*String::append*/;
   variable7 = ATTR_genericity___MMTypeGeneric____params( self) /*MMTypeGeneric::_params*/;
-  variable8 = NEW_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
+  variable8 = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
   variable7 = ((string___Collection___join_t)CALL(variable7,COLOR_string___Collection___join))(variable7, variable8) /*Collection::join*/;
   variable8 = variable7;
   ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable8) /*String::append*/;
-  variable9 = NEW_string___String___with_native(BOX_NativeString("]"), TAG_Int(1)); /*new String*/
+  variable9 = NEW_String_string___String___with_native(BOX_NativeString("]"), TAG_Int(1)); /*new String*/
   variable10 = variable9;
   ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable10) /*String::append*/;
   goto return_label26;
@@ -548,7 +548,7 @@ val_t genericity___MMTypeGeneric___is_subtype(val_t  self, val_t  param0) {
   variable0 =  param0;
   variable1 = ATTR_genericity___MMTypeGeneric____params( self) /*MMTypeGeneric::_params*/;
   variable1 = ((array___AbstractArray___length_t)CALL(variable1,COLOR_abstract_collection___Collection___length))(variable1) /*AbstractArray::length*/;
-  variable2 = NEW_range___Range___without_last( TAG_Int(0), variable1); /*new Range[E]*/
+  variable2 = NEW_Range_range___Range___without_last( TAG_Int(0), variable1); /*new Range[Int]*/
   variable1 = variable2;
   variable1 = ((range___Range___iterator_t)CALL(variable1,COLOR_abstract_collection___Collection___iterator))(variable1) /*Range::iterator*/;
   while (true) { /*for*/

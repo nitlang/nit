@@ -23,6 +23,8 @@ extern const classtable_elt_t VFT_MMMethSrcMethod[];
 
 extern const classtable_elt_t VFT_MMSrcTypeProperty[];
 
+extern const classtable_elt_t VFT_MMImplicitInit[];
+
 extern const classtable_elt_t VFT_Variable[];
 
 extern const classtable_elt_t VFT_AbsSyntaxVisitor[];
@@ -50,102 +52,113 @@ extern const int SFT_syntax_base[];
 #define COLOR_syntax_base___MMSrcLocalClass___init SFT_syntax_base[19]
 #define COLOR_syntax_base___MMGlobalProperty___check_visibility SFT_syntax_base[20]
 #define COLOR_syntax_base___MMLocalProperty___node SFT_syntax_base[21]
-#define ID_MMSrcAttribute SFT_syntax_base[22]
-#define COLOR_MMSrcAttribute SFT_syntax_base[23]
-#define COLOR_syntax_base___MMSrcAttribute____node SFT_syntax_base[24]
-#define INIT_TABLE_POS_MMSrcAttribute SFT_syntax_base[25]
-#define COLOR_syntax_base___MMSrcAttribute___init SFT_syntax_base[26]
-#define ID_MMSrcMethod SFT_syntax_base[27]
-#define COLOR_MMSrcMethod SFT_syntax_base[28]
-#define INIT_TABLE_POS_MMSrcMethod SFT_syntax_base[29]
-#define ID_MMAttrImplementationMethod SFT_syntax_base[30]
-#define COLOR_MMAttrImplementationMethod SFT_syntax_base[31]
-#define COLOR_syntax_base___MMAttrImplementationMethod____node SFT_syntax_base[32]
-#define INIT_TABLE_POS_MMAttrImplementationMethod SFT_syntax_base[33]
-#define ID_MMReadImplementationMethod SFT_syntax_base[34]
-#define COLOR_MMReadImplementationMethod SFT_syntax_base[35]
-#define INIT_TABLE_POS_MMReadImplementationMethod SFT_syntax_base[36]
-#define COLOR_syntax_base___MMReadImplementationMethod___init SFT_syntax_base[37]
-#define ID_MMWriteImplementationMethod SFT_syntax_base[38]
-#define COLOR_MMWriteImplementationMethod SFT_syntax_base[39]
-#define INIT_TABLE_POS_MMWriteImplementationMethod SFT_syntax_base[40]
-#define COLOR_syntax_base___MMWriteImplementationMethod___init SFT_syntax_base[41]
-#define ID_MMMethSrcMethod SFT_syntax_base[42]
-#define COLOR_MMMethSrcMethod SFT_syntax_base[43]
-#define COLOR_syntax_base___MMMethSrcMethod____node SFT_syntax_base[44]
-#define INIT_TABLE_POS_MMMethSrcMethod SFT_syntax_base[45]
-#define COLOR_syntax_base___MMMethSrcMethod___init SFT_syntax_base[46]
-#define ID_MMSrcTypeProperty SFT_syntax_base[47]
-#define COLOR_MMSrcTypeProperty SFT_syntax_base[48]
-#define COLOR_syntax_base___MMSrcTypeProperty____node SFT_syntax_base[49]
-#define INIT_TABLE_POS_MMSrcTypeProperty SFT_syntax_base[50]
-#define COLOR_syntax_base___MMSrcTypeProperty___init SFT_syntax_base[51]
-#define ID_Variable SFT_syntax_base[52]
-#define COLOR_Variable SFT_syntax_base[53]
-#define COLOR_syntax_base___Variable____name SFT_syntax_base[54]
-#define COLOR_syntax_base___Variable____decl SFT_syntax_base[55]
-#define COLOR_syntax_base___Variable____stype SFT_syntax_base[56]
-#define INIT_TABLE_POS_Variable SFT_syntax_base[57]
-#define COLOR_syntax_base___Variable___name SFT_syntax_base[58]
-#define COLOR_syntax_base___Variable___decl SFT_syntax_base[59]
-#define COLOR_syntax_base___Variable___stype SFT_syntax_base[60]
-#define COLOR_syntax_base___Variable___stype__eq SFT_syntax_base[61]
-#define COLOR_syntax_base___Variable___init SFT_syntax_base[62]
-#define ID_AbsSyntaxVisitor SFT_syntax_base[63]
-#define COLOR_AbsSyntaxVisitor SFT_syntax_base[64]
-#define COLOR_syntax_base___AbsSyntaxVisitor____module SFT_syntax_base[65]
-#define COLOR_syntax_base___AbsSyntaxVisitor____local_class SFT_syntax_base[66]
-#define COLOR_syntax_base___AbsSyntaxVisitor____local_property SFT_syntax_base[67]
-#define COLOR_syntax_base___AbsSyntaxVisitor____tc SFT_syntax_base[68]
-#define INIT_TABLE_POS_AbsSyntaxVisitor SFT_syntax_base[69]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_bool SFT_syntax_base[70]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_int SFT_syntax_base[71]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_float SFT_syntax_base[72]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_char SFT_syntax_base[73]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_string SFT_syntax_base[74]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_collection SFT_syntax_base[75]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_array SFT_syntax_base[76]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_discrete SFT_syntax_base[77]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_range SFT_syntax_base[78]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_none SFT_syntax_base[79]
-#define COLOR_syntax_base___AbsSyntaxVisitor___module SFT_syntax_base[80]
-#define COLOR_syntax_base___AbsSyntaxVisitor___module__eq SFT_syntax_base[81]
-#define COLOR_syntax_base___AbsSyntaxVisitor___local_class SFT_syntax_base[82]
-#define COLOR_syntax_base___AbsSyntaxVisitor___local_class__eq SFT_syntax_base[83]
-#define COLOR_syntax_base___AbsSyntaxVisitor___local_property SFT_syntax_base[84]
-#define COLOR_syntax_base___AbsSyntaxVisitor___local_property__eq SFT_syntax_base[85]
-#define COLOR_syntax_base___AbsSyntaxVisitor___tc SFT_syntax_base[86]
-#define COLOR_syntax_base___AbsSyntaxVisitor___error SFT_syntax_base[87]
-#define COLOR_syntax_base___AbsSyntaxVisitor___warning SFT_syntax_base[88]
-#define COLOR_syntax_base___AbsSyntaxVisitor___check_conform SFT_syntax_base[89]
-#define COLOR_syntax_base___AbsSyntaxVisitor___init SFT_syntax_base[90]
-#define COLOR_syntax_base___PNode___accept_abs_syntax_visitor SFT_syntax_base[91]
-#define COLOR_syntax_base___Token____symbol SFT_syntax_base[92]
-#define COLOR_syntax_base___Token___to_symbol SFT_syntax_base[93]
-#define COLOR_syntax_base___PClassdef___local_class SFT_syntax_base[94]
-#define COLOR_syntax_base___AAttrPropdef___prop SFT_syntax_base[95]
-#define COLOR_syntax_base___AAttrPropdef___readmethod SFT_syntax_base[96]
-#define COLOR_syntax_base___AAttrPropdef___writemethod SFT_syntax_base[97]
-#define COLOR_syntax_base___AMethPropdef___method SFT_syntax_base[98]
-#define COLOR_syntax_base___ATypePropdef___prop SFT_syntax_base[99]
-#define COLOR_syntax_base___PParam___position SFT_syntax_base[100]
-#define COLOR_syntax_base___PParam___variable SFT_syntax_base[101]
-#define COLOR_syntax_base___PType___get_local_class SFT_syntax_base[102]
-#define COLOR_syntax_base___PType___get_stype SFT_syntax_base[103]
-#define COLOR_syntax_base___PType___get_unchecked_stype SFT_syntax_base[104]
-#define COLOR_syntax_base___PType___check_conform SFT_syntax_base[105]
-#define COLOR_syntax_base___AType____stype_cache SFT_syntax_base[106]
-#define COLOR_syntax_base___AType____stype_cached SFT_syntax_base[107]
-#define COLOR_syntax_base___PExpr___stype SFT_syntax_base[108]
-#define COLOR_syntax_base___AVardeclExpr____variable SFT_syntax_base[109]
-#define COLOR_syntax_base___AVardeclExpr___variable SFT_syntax_base[110]
-#define COLOR_syntax_base___AVardeclExpr___variable__eq SFT_syntax_base[111]
-#define COLOR_syntax_base___AForVardeclExpr____variable SFT_syntax_base[112]
-#define COLOR_syntax_base___AForVardeclExpr___variable SFT_syntax_base[113]
-#define COLOR_syntax_base___AForVardeclExpr___variable__eq SFT_syntax_base[114]
-#define COLOR_syntax_base___AVarFormExpr____variable SFT_syntax_base[115]
-#define COLOR_syntax_base___AVarFormExpr___variable SFT_syntax_base[116]
-#define COLOR_syntax_base___AVarFormExpr___variable__eq SFT_syntax_base[117]
+#define COLOR_syntax_base___MMLocalProperty___is_init SFT_syntax_base[22]
+#define ID_MMSrcAttribute SFT_syntax_base[23]
+#define COLOR_MMSrcAttribute SFT_syntax_base[24]
+#define COLOR_syntax_base___MMSrcAttribute____node SFT_syntax_base[25]
+#define INIT_TABLE_POS_MMSrcAttribute SFT_syntax_base[26]
+#define COLOR_syntax_base___MMSrcAttribute___init SFT_syntax_base[27]
+#define ID_MMSrcMethod SFT_syntax_base[28]
+#define COLOR_MMSrcMethod SFT_syntax_base[29]
+#define INIT_TABLE_POS_MMSrcMethod SFT_syntax_base[30]
+#define ID_MMAttrImplementationMethod SFT_syntax_base[31]
+#define COLOR_MMAttrImplementationMethod SFT_syntax_base[32]
+#define COLOR_syntax_base___MMAttrImplementationMethod____node SFT_syntax_base[33]
+#define INIT_TABLE_POS_MMAttrImplementationMethod SFT_syntax_base[34]
+#define COLOR_syntax_base___MMAttrImplementationMethod___init SFT_syntax_base[35]
+#define ID_MMReadImplementationMethod SFT_syntax_base[36]
+#define COLOR_MMReadImplementationMethod SFT_syntax_base[37]
+#define INIT_TABLE_POS_MMReadImplementationMethod SFT_syntax_base[38]
+#define COLOR_syntax_base___MMReadImplementationMethod___init SFT_syntax_base[39]
+#define ID_MMWriteImplementationMethod SFT_syntax_base[40]
+#define COLOR_MMWriteImplementationMethod SFT_syntax_base[41]
+#define INIT_TABLE_POS_MMWriteImplementationMethod SFT_syntax_base[42]
+#define COLOR_syntax_base___MMWriteImplementationMethod___init SFT_syntax_base[43]
+#define ID_MMMethSrcMethod SFT_syntax_base[44]
+#define COLOR_MMMethSrcMethod SFT_syntax_base[45]
+#define COLOR_syntax_base___MMMethSrcMethod____node SFT_syntax_base[46]
+#define INIT_TABLE_POS_MMMethSrcMethod SFT_syntax_base[47]
+#define COLOR_syntax_base___MMMethSrcMethod___init SFT_syntax_base[48]
+#define ID_MMSrcTypeProperty SFT_syntax_base[49]
+#define COLOR_MMSrcTypeProperty SFT_syntax_base[50]
+#define COLOR_syntax_base___MMSrcTypeProperty____node SFT_syntax_base[51]
+#define INIT_TABLE_POS_MMSrcTypeProperty SFT_syntax_base[52]
+#define COLOR_syntax_base___MMSrcTypeProperty___init SFT_syntax_base[53]
+#define ID_MMImplicitInit SFT_syntax_base[54]
+#define COLOR_MMImplicitInit SFT_syntax_base[55]
+#define COLOR_syntax_base___MMImplicitInit____unassigned_attributes SFT_syntax_base[56]
+#define COLOR_syntax_base___MMImplicitInit____super_inits SFT_syntax_base[57]
+#define INIT_TABLE_POS_MMImplicitInit SFT_syntax_base[58]
+#define COLOR_syntax_base___MMImplicitInit___unassigned_attributes SFT_syntax_base[59]
+#define COLOR_syntax_base___MMImplicitInit___super_inits SFT_syntax_base[60]
+#define COLOR_syntax_base___MMImplicitInit___init SFT_syntax_base[61]
+#define ID_Variable SFT_syntax_base[62]
+#define COLOR_Variable SFT_syntax_base[63]
+#define COLOR_syntax_base___Variable____name SFT_syntax_base[64]
+#define COLOR_syntax_base___Variable____decl SFT_syntax_base[65]
+#define COLOR_syntax_base___Variable____stype SFT_syntax_base[66]
+#define INIT_TABLE_POS_Variable SFT_syntax_base[67]
+#define COLOR_syntax_base___Variable___name SFT_syntax_base[68]
+#define COLOR_syntax_base___Variable___decl SFT_syntax_base[69]
+#define COLOR_syntax_base___Variable___stype SFT_syntax_base[70]
+#define COLOR_syntax_base___Variable___stype__eq SFT_syntax_base[71]
+#define COLOR_syntax_base___Variable___init SFT_syntax_base[72]
+#define ID_AbsSyntaxVisitor SFT_syntax_base[73]
+#define COLOR_AbsSyntaxVisitor SFT_syntax_base[74]
+#define COLOR_syntax_base___AbsSyntaxVisitor____module SFT_syntax_base[75]
+#define COLOR_syntax_base___AbsSyntaxVisitor____local_class SFT_syntax_base[76]
+#define COLOR_syntax_base___AbsSyntaxVisitor____local_property SFT_syntax_base[77]
+#define COLOR_syntax_base___AbsSyntaxVisitor____tc SFT_syntax_base[78]
+#define INIT_TABLE_POS_AbsSyntaxVisitor SFT_syntax_base[79]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_bool SFT_syntax_base[80]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_int SFT_syntax_base[81]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_float SFT_syntax_base[82]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_char SFT_syntax_base[83]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_string SFT_syntax_base[84]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_collection SFT_syntax_base[85]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_array SFT_syntax_base[86]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_discrete SFT_syntax_base[87]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_range SFT_syntax_base[88]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_none SFT_syntax_base[89]
+#define COLOR_syntax_base___AbsSyntaxVisitor___module SFT_syntax_base[90]
+#define COLOR_syntax_base___AbsSyntaxVisitor___module__eq SFT_syntax_base[91]
+#define COLOR_syntax_base___AbsSyntaxVisitor___local_class SFT_syntax_base[92]
+#define COLOR_syntax_base___AbsSyntaxVisitor___local_class__eq SFT_syntax_base[93]
+#define COLOR_syntax_base___AbsSyntaxVisitor___local_property SFT_syntax_base[94]
+#define COLOR_syntax_base___AbsSyntaxVisitor___local_property__eq SFT_syntax_base[95]
+#define COLOR_syntax_base___AbsSyntaxVisitor___tc SFT_syntax_base[96]
+#define COLOR_syntax_base___AbsSyntaxVisitor___error SFT_syntax_base[97]
+#define COLOR_syntax_base___AbsSyntaxVisitor___warning SFT_syntax_base[98]
+#define COLOR_syntax_base___AbsSyntaxVisitor___locate SFT_syntax_base[99]
+#define COLOR_syntax_base___AbsSyntaxVisitor___check_conform SFT_syntax_base[100]
+#define COLOR_syntax_base___AbsSyntaxVisitor___init SFT_syntax_base[101]
+#define COLOR_syntax_base___PNode___accept_abs_syntax_visitor SFT_syntax_base[102]
+#define COLOR_syntax_base___Token____symbol SFT_syntax_base[103]
+#define COLOR_syntax_base___Token___to_symbol SFT_syntax_base[104]
+#define COLOR_syntax_base___PClassdef___local_class SFT_syntax_base[105]
+#define COLOR_syntax_base___AAttrPropdef___prop SFT_syntax_base[106]
+#define COLOR_syntax_base___AAttrPropdef___readmethod SFT_syntax_base[107]
+#define COLOR_syntax_base___AAttrPropdef___writemethod SFT_syntax_base[108]
+#define COLOR_syntax_base___AMethPropdef___method SFT_syntax_base[109]
+#define COLOR_syntax_base___ATypePropdef___prop SFT_syntax_base[110]
+#define COLOR_syntax_base___PParam___position SFT_syntax_base[111]
+#define COLOR_syntax_base___PParam___variable SFT_syntax_base[112]
+#define COLOR_syntax_base___PType___get_local_class SFT_syntax_base[113]
+#define COLOR_syntax_base___PType___get_stype SFT_syntax_base[114]
+#define COLOR_syntax_base___PType___get_unchecked_stype SFT_syntax_base[115]
+#define COLOR_syntax_base___PType___check_conform SFT_syntax_base[116]
+#define COLOR_syntax_base___AType____stype_cache SFT_syntax_base[117]
+#define COLOR_syntax_base___AType____stype_cached SFT_syntax_base[118]
+#define COLOR_syntax_base___PExpr___stype SFT_syntax_base[119]
+#define COLOR_syntax_base___AVardeclExpr____variable SFT_syntax_base[120]
+#define COLOR_syntax_base___AVardeclExpr___variable SFT_syntax_base[121]
+#define COLOR_syntax_base___AVardeclExpr___variable__eq SFT_syntax_base[122]
+#define COLOR_syntax_base___AForVardeclExpr____variable SFT_syntax_base[123]
+#define COLOR_syntax_base___AForVardeclExpr___variable SFT_syntax_base[124]
+#define COLOR_syntax_base___AForVardeclExpr___variable__eq SFT_syntax_base[125]
+#define COLOR_syntax_base___AVarFormExpr____variable SFT_syntax_base[126]
+#define COLOR_syntax_base___AVarFormExpr___variable SFT_syntax_base[127]
+#define COLOR_syntax_base___AVarFormExpr___variable__eq SFT_syntax_base[128]
 #define ATTR_syntax_base___MMSrcModule____node(recv) ATTR(recv, COLOR_syntax_base___MMSrcModule____node)
 typedef val_t (* syntax_base___MMSrcModule___node_t)(val_t  self);
 val_t syntax_base___MMSrcModule___node(val_t  self);
@@ -186,6 +199,9 @@ val_t syntax_base___MMGlobalProperty___check_visibility(val_t  self, val_t  para
 typedef val_t (* syntax_base___MMLocalProperty___node_t)(val_t  self);
 val_t syntax_base___MMLocalProperty___node(val_t  self);
 #define LOCATE_syntax_base___MMLocalProperty___node "syntax_base::MMLocalProperty::node"
+typedef val_t (* syntax_base___MMLocalProperty___is_init_t)(val_t  self);
+val_t syntax_base___MMLocalProperty___is_init(val_t  self);
+#define LOCATE_syntax_base___MMLocalProperty___is_init "syntax_base::MMLocalProperty::is_init"
 #define ATTR_syntax_base___MMSrcAttribute____node(recv) ATTR(recv, COLOR_syntax_base___MMSrcAttribute____node)
 typedef val_t (* syntax_base___MMSrcAttribute___node_t)(val_t  self);
 val_t syntax_base___MMSrcAttribute___node(val_t  self);
@@ -198,6 +214,10 @@ val_t NEW_syntax_base___MMSrcAttribute___init(val_t  param0, val_t  param1, val_
 typedef val_t (* syntax_base___MMAttrImplementationMethod___node_t)(val_t  self);
 val_t syntax_base___MMAttrImplementationMethod___node(val_t  self);
 #define LOCATE_syntax_base___MMAttrImplementationMethod___node "syntax_base::MMAttrImplementationMethod::(syntax_base::MMLocalProperty::node)"
+typedef void (* syntax_base___MMAttrImplementationMethod___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void syntax_base___MMAttrImplementationMethod___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t NEW_syntax_base___MMAttrImplementationMethod___init(val_t  param0, val_t  param1, val_t  param2);
+#define LOCATE_syntax_base___MMAttrImplementationMethod___init "syntax_base::MMAttrImplementationMethod::init"
 typedef void (* syntax_base___MMReadImplementationMethod___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 void syntax_base___MMReadImplementationMethod___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 val_t NEW_syntax_base___MMReadImplementationMethod___init(val_t  param0, val_t  param1, val_t  param2);
@@ -206,6 +226,9 @@ typedef void (* syntax_base___MMWriteImplementationMethod___init_t)(val_t  self,
 void syntax_base___MMWriteImplementationMethod___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 val_t NEW_syntax_base___MMWriteImplementationMethod___init(val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_syntax_base___MMWriteImplementationMethod___init "syntax_base::MMWriteImplementationMethod::init"
+typedef val_t (* syntax_base___MMMethSrcMethod___is_init_t)(val_t  self);
+val_t syntax_base___MMMethSrcMethod___is_init(val_t  self);
+#define LOCATE_syntax_base___MMMethSrcMethod___is_init "syntax_base::MMMethSrcMethod::(syntax_base::MMLocalProperty::is_init)"
 #define ATTR_syntax_base___MMMethSrcMethod____node(recv) ATTR(recv, COLOR_syntax_base___MMMethSrcMethod____node)
 typedef val_t (* syntax_base___MMMethSrcMethod___node_t)(val_t  self);
 val_t syntax_base___MMMethSrcMethod___node(val_t  self);
@@ -222,6 +245,21 @@ typedef void (* syntax_base___MMSrcTypeProperty___init_t)(val_t  self, val_t  pa
 void syntax_base___MMSrcTypeProperty___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 val_t NEW_syntax_base___MMSrcTypeProperty___init(val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_syntax_base___MMSrcTypeProperty___init "syntax_base::MMSrcTypeProperty::init"
+typedef val_t (* syntax_base___MMImplicitInit___is_init_t)(val_t  self);
+val_t syntax_base___MMImplicitInit___is_init(val_t  self);
+#define LOCATE_syntax_base___MMImplicitInit___is_init "syntax_base::MMImplicitInit::(syntax_base::MMLocalProperty::is_init)"
+#define ATTR_syntax_base___MMImplicitInit____unassigned_attributes(recv) ATTR(recv, COLOR_syntax_base___MMImplicitInit____unassigned_attributes)
+typedef val_t (* syntax_base___MMImplicitInit___unassigned_attributes_t)(val_t  self);
+val_t syntax_base___MMImplicitInit___unassigned_attributes(val_t  self);
+#define LOCATE_syntax_base___MMImplicitInit___unassigned_attributes "syntax_base::MMImplicitInit::unassigned_attributes"
+#define ATTR_syntax_base___MMImplicitInit____super_inits(recv) ATTR(recv, COLOR_syntax_base___MMImplicitInit____super_inits)
+typedef val_t (* syntax_base___MMImplicitInit___super_inits_t)(val_t  self);
+val_t syntax_base___MMImplicitInit___super_inits(val_t  self);
+#define LOCATE_syntax_base___MMImplicitInit___super_inits "syntax_base::MMImplicitInit::super_inits"
+typedef void (* syntax_base___MMImplicitInit___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void syntax_base___MMImplicitInit___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+val_t NEW_syntax_base___MMImplicitInit___init(val_t  param0, val_t  param1, val_t  param2);
+#define LOCATE_syntax_base___MMImplicitInit___init "syntax_base::MMImplicitInit::init"
 #define ATTR_syntax_base___Variable____name(recv) ATTR(recv, COLOR_syntax_base___Variable____name)
 typedef val_t (* syntax_base___Variable___name_t)(val_t  self);
 val_t syntax_base___Variable___name(val_t  self);
@@ -305,6 +343,9 @@ void syntax_base___AbsSyntaxVisitor___error(val_t  self, val_t  param0, val_t  p
 typedef void (* syntax_base___AbsSyntaxVisitor___warning_t)(val_t  self, val_t  param0, val_t  param1);
 void syntax_base___AbsSyntaxVisitor___warning(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_syntax_base___AbsSyntaxVisitor___warning "syntax_base::AbsSyntaxVisitor::warning"
+typedef val_t (* syntax_base___AbsSyntaxVisitor___locate_t)(val_t  self, val_t  param0);
+val_t syntax_base___AbsSyntaxVisitor___locate(val_t  self, val_t  param0);
+#define LOCATE_syntax_base___AbsSyntaxVisitor___locate "syntax_base::AbsSyntaxVisitor::locate"
 typedef val_t (* syntax_base___AbsSyntaxVisitor___check_conform_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 val_t syntax_base___AbsSyntaxVisitor___check_conform(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_syntax_base___AbsSyntaxVisitor___check_conform "syntax_base::AbsSyntaxVisitor::check_conform"

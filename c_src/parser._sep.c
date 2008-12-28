@@ -54,7 +54,7 @@ void parser___Parser___init(val_t  self, val_t  param0, int* init_table) {
   variable0 =  param0;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Parser].i]) return;
   ATTR_parser___Parser____lexer( self) /*Parser::_lexer*/ =  variable0 /*lexer*/;
-  variable1 = NEW_array___Array___init(); /*new Array[E]*/
+  variable1 = NEW_Array_array___Array___init(); /*new Array[State]*/
   ATTR_parser___Parser____stack( self) /*Parser::_stack*/ = variable1;
   variable1 = TAG_Int(-UNTAG_Int( TAG_Int(1)));
   ATTR_parser___Parser____stack_pos( self) /*Parser::_stack_pos*/ = variable1;
@@ -238,7 +238,7 @@ void parser___Parser___push(val_t  self, val_t  param0, val_t  param1) {
     ((parser___State___nodes__eq_t)CALL( variable3 /*state*/,COLOR_parser___State___nodes__eq))( variable3 /*state*/,  variable1 /*list_node*/) /*State::nodes=*/;
   } else { /*if*/
     variable3 = ATTR_parser___Parser____stack( self) /*Parser::_stack*/;
-    variable4 = NEW_parser___State___init( variable0 /*numstate*/,  variable1 /*list_node*/); /*new State*/
+    variable4 = NEW_State_parser___State___init( variable0 /*numstate*/,  variable1 /*list_node*/); /*new State*/
     ((array___AbstractArray___push_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___push))(variable3, variable4) /*AbstractArray::push*/;
   }
   tracehead = trace.prev;
@@ -354,7 +354,7 @@ val_t parser___Parser___parse(val_t  self) {
     if (UNTAG_Bool(variable5)) { /*if*/
       variable5 = TAG_Bool(( variable2 /*token*/==NIT_NULL) || VAL_ISA( variable2 /*token*/, COLOR_PError, ID_PError)) /*cast PError*/;
       if (!UNTAG_Bool(variable5)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___Parser___parse, LOCATE_parser, 110); nit_exit(1);}
-      variable5 = NEW_parser_prod___Start___init( NIT_NULL /*null*/,  variable2 /*token*/); /*new Start*/
+      variable5 = NEW_Start_parser_prod___Start___init( NIT_NULL /*null*/,  variable2 /*token*/); /*new Start*/
       variable0 = variable5;
       goto return_label15;
     }
@@ -535,9 +535,9 @@ val_t parser___Parser___parse(val_t  self) {
           variable12 = variable13;
           variable13 = TAG_Bool(( variable12 /*node1*/==NIT_NULL) || VAL_ISA( variable12 /*node1*/, COLOR_PModule, ID_PModule)) /*cast PModule*/;
           if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_parser, 145); nit_exit(1);}
-          variable14 = NEW_parser_prod___Start___init( variable12 /*node1*/,  variable11 /*node2*/); /*new Start*/
+          variable14 = NEW_Start_parser_prod___Start___init( variable12 /*node1*/,  variable11 /*node2*/); /*new Start*/
           variable13 = variable14;
-          variable14 = NEW_parser___SearchTokensVisitor___init(); /*new SearchTokensVisitor*/
+          variable14 = NEW_SearchTokensVisitor_parser___SearchTokensVisitor___init(); /*new SearchTokensVisitor*/
           ((parser___SearchTokensVisitor___visit_t)CALL(variable14,COLOR_parser_prod___Visitor___visit))(variable14,  variable13 /*node*/) /*SearchTokensVisitor::visit*/;
           variable0 =  variable13 /*node*/;
           goto return_label15;
@@ -579,10 +579,10 @@ val_t parser___Parser___parse(val_t  self) {
             goto return_label27;
             return_label27: while(false);
             variable13 = variable16;
-            variable14 = NEW_lexer___PError___init_error(variable12,  variable4 /*last_line*/,  variable3 /*last_pos*/, variable13); /*new PError*/
+            variable14 = NEW_PError_lexer___PError___init_error(variable12,  variable4 /*last_line*/,  variable3 /*last_pos*/, variable13); /*new PError*/
             variable12 = variable14;
             variable11 = variable12;
-            variable13 = NEW_parser_prod___Start___init( NIT_NULL /*null*/,  variable11 /*node2*/); /*new Start*/
+            variable13 = NEW_Start_parser_prod___Start___init( NIT_NULL /*null*/,  variable11 /*node2*/); /*new Start*/
             variable12 = variable13;
             variable0 =  variable12 /*node*/;
             goto return_label15;
@@ -1177,1154 +1177,1154 @@ void parser___Parser___build_reduce_table(val_t  self) {
   val_t variable573;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_parser;
-  variable0 = NEW_array___Array___with_capacity(TAG_Int(573)); /*new Array[E]*/
-  variable1 = NEW_parser___ReduceAction0___init(); /*new ReduceAction0*/
+  variable0 = NEW_Array_array___Array___with_capacity(TAG_Int(573)); /*new Array[ReduceAction]*/
+  variable1 = NEW_ReduceAction0_parser___ReduceAction0___init(); /*new ReduceAction0*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable1) /*AbstractArray::add*/;
-  variable2 = NEW_parser___ReduceAction1___init(); /*new ReduceAction1*/
+  variable2 = NEW_ReduceAction1_parser___ReduceAction1___init(); /*new ReduceAction1*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable2) /*AbstractArray::add*/;
-  variable3 = NEW_parser___ReduceAction2___init(); /*new ReduceAction2*/
+  variable3 = NEW_ReduceAction2_parser___ReduceAction2___init(); /*new ReduceAction2*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable3) /*AbstractArray::add*/;
-  variable4 = NEW_parser___ReduceAction3___init(); /*new ReduceAction3*/
+  variable4 = NEW_ReduceAction3_parser___ReduceAction3___init(); /*new ReduceAction3*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable4) /*AbstractArray::add*/;
-  variable5 = NEW_parser___ReduceAction4___init(); /*new ReduceAction4*/
+  variable5 = NEW_ReduceAction4_parser___ReduceAction4___init(); /*new ReduceAction4*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable5) /*AbstractArray::add*/;
-  variable6 = NEW_parser___ReduceAction5___init(); /*new ReduceAction5*/
+  variable6 = NEW_ReduceAction5_parser___ReduceAction5___init(); /*new ReduceAction5*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable6) /*AbstractArray::add*/;
-  variable7 = NEW_parser___ReduceAction6___init(); /*new ReduceAction6*/
+  variable7 = NEW_ReduceAction6_parser___ReduceAction6___init(); /*new ReduceAction6*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable7) /*AbstractArray::add*/;
-  variable8 = NEW_parser___ReduceAction7___init(); /*new ReduceAction7*/
+  variable8 = NEW_ReduceAction7_parser___ReduceAction7___init(); /*new ReduceAction7*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable8) /*AbstractArray::add*/;
-  variable9 = NEW_parser___ReduceAction8___init(); /*new ReduceAction8*/
+  variable9 = NEW_ReduceAction8_parser___ReduceAction8___init(); /*new ReduceAction8*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable9) /*AbstractArray::add*/;
-  variable10 = NEW_parser___ReduceAction9___init(); /*new ReduceAction9*/
+  variable10 = NEW_ReduceAction9_parser___ReduceAction9___init(); /*new ReduceAction9*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable10) /*AbstractArray::add*/;
-  variable11 = NEW_parser___ReduceAction10___init(); /*new ReduceAction10*/
+  variable11 = NEW_ReduceAction10_parser___ReduceAction10___init(); /*new ReduceAction10*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable11) /*AbstractArray::add*/;
-  variable12 = NEW_parser___ReduceAction11___init(); /*new ReduceAction11*/
+  variable12 = NEW_ReduceAction11_parser___ReduceAction11___init(); /*new ReduceAction11*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable12) /*AbstractArray::add*/;
-  variable13 = NEW_parser___ReduceAction12___init(); /*new ReduceAction12*/
+  variable13 = NEW_ReduceAction12_parser___ReduceAction12___init(); /*new ReduceAction12*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable13) /*AbstractArray::add*/;
-  variable14 = NEW_parser___ReduceAction13___init(); /*new ReduceAction13*/
+  variable14 = NEW_ReduceAction13_parser___ReduceAction13___init(); /*new ReduceAction13*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable14) /*AbstractArray::add*/;
-  variable15 = NEW_parser___ReduceAction14___init(); /*new ReduceAction14*/
+  variable15 = NEW_ReduceAction14_parser___ReduceAction14___init(); /*new ReduceAction14*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable15) /*AbstractArray::add*/;
-  variable16 = NEW_parser___ReduceAction15___init(); /*new ReduceAction15*/
+  variable16 = NEW_ReduceAction15_parser___ReduceAction15___init(); /*new ReduceAction15*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable16) /*AbstractArray::add*/;
-  variable17 = NEW_parser___ReduceAction16___init(); /*new ReduceAction16*/
+  variable17 = NEW_ReduceAction16_parser___ReduceAction16___init(); /*new ReduceAction16*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable17) /*AbstractArray::add*/;
-  variable18 = NEW_parser___ReduceAction17___init(); /*new ReduceAction17*/
+  variable18 = NEW_ReduceAction17_parser___ReduceAction17___init(); /*new ReduceAction17*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable18) /*AbstractArray::add*/;
-  variable19 = NEW_parser___ReduceAction18___init(); /*new ReduceAction18*/
+  variable19 = NEW_ReduceAction18_parser___ReduceAction18___init(); /*new ReduceAction18*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable19) /*AbstractArray::add*/;
-  variable20 = NEW_parser___ReduceAction19___init(); /*new ReduceAction19*/
+  variable20 = NEW_ReduceAction19_parser___ReduceAction19___init(); /*new ReduceAction19*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable20) /*AbstractArray::add*/;
-  variable21 = NEW_parser___ReduceAction20___init(); /*new ReduceAction20*/
+  variable21 = NEW_ReduceAction20_parser___ReduceAction20___init(); /*new ReduceAction20*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable21) /*AbstractArray::add*/;
-  variable22 = NEW_parser___ReduceAction21___init(); /*new ReduceAction21*/
+  variable22 = NEW_ReduceAction21_parser___ReduceAction21___init(); /*new ReduceAction21*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable22) /*AbstractArray::add*/;
-  variable23 = NEW_parser___ReduceAction22___init(); /*new ReduceAction22*/
+  variable23 = NEW_ReduceAction22_parser___ReduceAction22___init(); /*new ReduceAction22*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable23) /*AbstractArray::add*/;
-  variable24 = NEW_parser___ReduceAction23___init(); /*new ReduceAction23*/
+  variable24 = NEW_ReduceAction23_parser___ReduceAction23___init(); /*new ReduceAction23*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable24) /*AbstractArray::add*/;
-  variable25 = NEW_parser___ReduceAction24___init(); /*new ReduceAction24*/
+  variable25 = NEW_ReduceAction24_parser___ReduceAction24___init(); /*new ReduceAction24*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable25) /*AbstractArray::add*/;
-  variable26 = NEW_parser___ReduceAction25___init(); /*new ReduceAction25*/
+  variable26 = NEW_ReduceAction25_parser___ReduceAction25___init(); /*new ReduceAction25*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable26) /*AbstractArray::add*/;
-  variable27 = NEW_parser___ReduceAction26___init(); /*new ReduceAction26*/
+  variable27 = NEW_ReduceAction26_parser___ReduceAction26___init(); /*new ReduceAction26*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable27) /*AbstractArray::add*/;
-  variable28 = NEW_parser___ReduceAction27___init(); /*new ReduceAction27*/
+  variable28 = NEW_ReduceAction27_parser___ReduceAction27___init(); /*new ReduceAction27*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable28) /*AbstractArray::add*/;
-  variable29 = NEW_parser___ReduceAction28___init(); /*new ReduceAction28*/
+  variable29 = NEW_ReduceAction28_parser___ReduceAction28___init(); /*new ReduceAction28*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable29) /*AbstractArray::add*/;
-  variable30 = NEW_parser___ReduceAction29___init(); /*new ReduceAction29*/
+  variable30 = NEW_ReduceAction29_parser___ReduceAction29___init(); /*new ReduceAction29*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable30) /*AbstractArray::add*/;
-  variable31 = NEW_parser___ReduceAction30___init(); /*new ReduceAction30*/
+  variable31 = NEW_ReduceAction30_parser___ReduceAction30___init(); /*new ReduceAction30*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable31) /*AbstractArray::add*/;
-  variable32 = NEW_parser___ReduceAction31___init(); /*new ReduceAction31*/
+  variable32 = NEW_ReduceAction31_parser___ReduceAction31___init(); /*new ReduceAction31*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable32) /*AbstractArray::add*/;
-  variable33 = NEW_parser___ReduceAction32___init(); /*new ReduceAction32*/
+  variable33 = NEW_ReduceAction32_parser___ReduceAction32___init(); /*new ReduceAction32*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable33) /*AbstractArray::add*/;
-  variable34 = NEW_parser___ReduceAction33___init(); /*new ReduceAction33*/
+  variable34 = NEW_ReduceAction33_parser___ReduceAction33___init(); /*new ReduceAction33*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable34) /*AbstractArray::add*/;
-  variable35 = NEW_parser___ReduceAction34___init(); /*new ReduceAction34*/
+  variable35 = NEW_ReduceAction34_parser___ReduceAction34___init(); /*new ReduceAction34*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable35) /*AbstractArray::add*/;
-  variable36 = NEW_parser___ReduceAction35___init(); /*new ReduceAction35*/
+  variable36 = NEW_ReduceAction35_parser___ReduceAction35___init(); /*new ReduceAction35*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable36) /*AbstractArray::add*/;
-  variable37 = NEW_parser___ReduceAction36___init(); /*new ReduceAction36*/
+  variable37 = NEW_ReduceAction36_parser___ReduceAction36___init(); /*new ReduceAction36*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable37) /*AbstractArray::add*/;
-  variable38 = NEW_parser___ReduceAction37___init(); /*new ReduceAction37*/
+  variable38 = NEW_ReduceAction37_parser___ReduceAction37___init(); /*new ReduceAction37*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable38) /*AbstractArray::add*/;
-  variable39 = NEW_parser___ReduceAction38___init(); /*new ReduceAction38*/
+  variable39 = NEW_ReduceAction38_parser___ReduceAction38___init(); /*new ReduceAction38*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable39) /*AbstractArray::add*/;
-  variable40 = NEW_parser___ReduceAction39___init(); /*new ReduceAction39*/
+  variable40 = NEW_ReduceAction39_parser___ReduceAction39___init(); /*new ReduceAction39*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable40) /*AbstractArray::add*/;
-  variable41 = NEW_parser___ReduceAction40___init(); /*new ReduceAction40*/
+  variable41 = NEW_ReduceAction40_parser___ReduceAction40___init(); /*new ReduceAction40*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable41) /*AbstractArray::add*/;
-  variable42 = NEW_parser___ReduceAction41___init(); /*new ReduceAction41*/
+  variable42 = NEW_ReduceAction41_parser___ReduceAction41___init(); /*new ReduceAction41*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable42) /*AbstractArray::add*/;
-  variable43 = NEW_parser___ReduceAction42___init(); /*new ReduceAction42*/
+  variable43 = NEW_ReduceAction42_parser___ReduceAction42___init(); /*new ReduceAction42*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable43) /*AbstractArray::add*/;
-  variable44 = NEW_parser___ReduceAction43___init(); /*new ReduceAction43*/
+  variable44 = NEW_ReduceAction43_parser___ReduceAction43___init(); /*new ReduceAction43*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable44) /*AbstractArray::add*/;
-  variable45 = NEW_parser___ReduceAction44___init(); /*new ReduceAction44*/
+  variable45 = NEW_ReduceAction44_parser___ReduceAction44___init(); /*new ReduceAction44*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable45) /*AbstractArray::add*/;
-  variable46 = NEW_parser___ReduceAction45___init(); /*new ReduceAction45*/
+  variable46 = NEW_ReduceAction45_parser___ReduceAction45___init(); /*new ReduceAction45*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable46) /*AbstractArray::add*/;
-  variable47 = NEW_parser___ReduceAction46___init(); /*new ReduceAction46*/
+  variable47 = NEW_ReduceAction46_parser___ReduceAction46___init(); /*new ReduceAction46*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable47) /*AbstractArray::add*/;
-  variable48 = NEW_parser___ReduceAction47___init(); /*new ReduceAction47*/
+  variable48 = NEW_ReduceAction47_parser___ReduceAction47___init(); /*new ReduceAction47*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable48) /*AbstractArray::add*/;
-  variable49 = NEW_parser___ReduceAction48___init(); /*new ReduceAction48*/
+  variable49 = NEW_ReduceAction48_parser___ReduceAction48___init(); /*new ReduceAction48*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable49) /*AbstractArray::add*/;
-  variable50 = NEW_parser___ReduceAction49___init(); /*new ReduceAction49*/
+  variable50 = NEW_ReduceAction49_parser___ReduceAction49___init(); /*new ReduceAction49*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable50) /*AbstractArray::add*/;
-  variable51 = NEW_parser___ReduceAction50___init(); /*new ReduceAction50*/
+  variable51 = NEW_ReduceAction50_parser___ReduceAction50___init(); /*new ReduceAction50*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable51) /*AbstractArray::add*/;
-  variable52 = NEW_parser___ReduceAction51___init(); /*new ReduceAction51*/
+  variable52 = NEW_ReduceAction51_parser___ReduceAction51___init(); /*new ReduceAction51*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable52) /*AbstractArray::add*/;
-  variable53 = NEW_parser___ReduceAction52___init(); /*new ReduceAction52*/
+  variable53 = NEW_ReduceAction52_parser___ReduceAction52___init(); /*new ReduceAction52*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable53) /*AbstractArray::add*/;
-  variable54 = NEW_parser___ReduceAction53___init(); /*new ReduceAction53*/
+  variable54 = NEW_ReduceAction53_parser___ReduceAction53___init(); /*new ReduceAction53*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable54) /*AbstractArray::add*/;
-  variable55 = NEW_parser___ReduceAction54___init(); /*new ReduceAction54*/
+  variable55 = NEW_ReduceAction54_parser___ReduceAction54___init(); /*new ReduceAction54*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable55) /*AbstractArray::add*/;
-  variable56 = NEW_parser___ReduceAction55___init(); /*new ReduceAction55*/
+  variable56 = NEW_ReduceAction55_parser___ReduceAction55___init(); /*new ReduceAction55*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable56) /*AbstractArray::add*/;
-  variable57 = NEW_parser___ReduceAction56___init(); /*new ReduceAction56*/
+  variable57 = NEW_ReduceAction56_parser___ReduceAction56___init(); /*new ReduceAction56*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable57) /*AbstractArray::add*/;
-  variable58 = NEW_parser___ReduceAction57___init(); /*new ReduceAction57*/
+  variable58 = NEW_ReduceAction57_parser___ReduceAction57___init(); /*new ReduceAction57*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable58) /*AbstractArray::add*/;
-  variable59 = NEW_parser___ReduceAction58___init(); /*new ReduceAction58*/
+  variable59 = NEW_ReduceAction58_parser___ReduceAction58___init(); /*new ReduceAction58*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable59) /*AbstractArray::add*/;
-  variable60 = NEW_parser___ReduceAction59___init(); /*new ReduceAction59*/
+  variable60 = NEW_ReduceAction59_parser___ReduceAction59___init(); /*new ReduceAction59*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable60) /*AbstractArray::add*/;
-  variable61 = NEW_parser___ReduceAction60___init(); /*new ReduceAction60*/
+  variable61 = NEW_ReduceAction60_parser___ReduceAction60___init(); /*new ReduceAction60*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable61) /*AbstractArray::add*/;
-  variable62 = NEW_parser___ReduceAction61___init(); /*new ReduceAction61*/
+  variable62 = NEW_ReduceAction61_parser___ReduceAction61___init(); /*new ReduceAction61*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable62) /*AbstractArray::add*/;
-  variable63 = NEW_parser___ReduceAction62___init(); /*new ReduceAction62*/
+  variable63 = NEW_ReduceAction62_parser___ReduceAction62___init(); /*new ReduceAction62*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable63) /*AbstractArray::add*/;
-  variable64 = NEW_parser___ReduceAction63___init(); /*new ReduceAction63*/
+  variable64 = NEW_ReduceAction63_parser___ReduceAction63___init(); /*new ReduceAction63*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable64) /*AbstractArray::add*/;
-  variable65 = NEW_parser___ReduceAction64___init(); /*new ReduceAction64*/
+  variable65 = NEW_ReduceAction64_parser___ReduceAction64___init(); /*new ReduceAction64*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable65) /*AbstractArray::add*/;
-  variable66 = NEW_parser___ReduceAction65___init(); /*new ReduceAction65*/
+  variable66 = NEW_ReduceAction65_parser___ReduceAction65___init(); /*new ReduceAction65*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable66) /*AbstractArray::add*/;
-  variable67 = NEW_parser___ReduceAction66___init(); /*new ReduceAction66*/
+  variable67 = NEW_ReduceAction66_parser___ReduceAction66___init(); /*new ReduceAction66*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable67) /*AbstractArray::add*/;
-  variable68 = NEW_parser___ReduceAction67___init(); /*new ReduceAction67*/
+  variable68 = NEW_ReduceAction67_parser___ReduceAction67___init(); /*new ReduceAction67*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable68) /*AbstractArray::add*/;
-  variable69 = NEW_parser___ReduceAction68___init(); /*new ReduceAction68*/
+  variable69 = NEW_ReduceAction68_parser___ReduceAction68___init(); /*new ReduceAction68*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable69) /*AbstractArray::add*/;
-  variable70 = NEW_parser___ReduceAction69___init(); /*new ReduceAction69*/
+  variable70 = NEW_ReduceAction69_parser___ReduceAction69___init(); /*new ReduceAction69*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable70) /*AbstractArray::add*/;
-  variable71 = NEW_parser___ReduceAction70___init(); /*new ReduceAction70*/
+  variable71 = NEW_ReduceAction70_parser___ReduceAction70___init(); /*new ReduceAction70*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable71) /*AbstractArray::add*/;
-  variable72 = NEW_parser___ReduceAction71___init(); /*new ReduceAction71*/
+  variable72 = NEW_ReduceAction71_parser___ReduceAction71___init(); /*new ReduceAction71*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable72) /*AbstractArray::add*/;
-  variable73 = NEW_parser___ReduceAction72___init(); /*new ReduceAction72*/
+  variable73 = NEW_ReduceAction72_parser___ReduceAction72___init(); /*new ReduceAction72*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable73) /*AbstractArray::add*/;
-  variable74 = NEW_parser___ReduceAction73___init(); /*new ReduceAction73*/
+  variable74 = NEW_ReduceAction73_parser___ReduceAction73___init(); /*new ReduceAction73*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable74) /*AbstractArray::add*/;
-  variable75 = NEW_parser___ReduceAction74___init(); /*new ReduceAction74*/
+  variable75 = NEW_ReduceAction74_parser___ReduceAction74___init(); /*new ReduceAction74*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable75) /*AbstractArray::add*/;
-  variable76 = NEW_parser___ReduceAction75___init(); /*new ReduceAction75*/
+  variable76 = NEW_ReduceAction75_parser___ReduceAction75___init(); /*new ReduceAction75*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable76) /*AbstractArray::add*/;
-  variable77 = NEW_parser___ReduceAction76___init(); /*new ReduceAction76*/
+  variable77 = NEW_ReduceAction76_parser___ReduceAction76___init(); /*new ReduceAction76*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable77) /*AbstractArray::add*/;
-  variable78 = NEW_parser___ReduceAction77___init(); /*new ReduceAction77*/
+  variable78 = NEW_ReduceAction77_parser___ReduceAction77___init(); /*new ReduceAction77*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable78) /*AbstractArray::add*/;
-  variable79 = NEW_parser___ReduceAction78___init(); /*new ReduceAction78*/
+  variable79 = NEW_ReduceAction78_parser___ReduceAction78___init(); /*new ReduceAction78*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable79) /*AbstractArray::add*/;
-  variable80 = NEW_parser___ReduceAction79___init(); /*new ReduceAction79*/
+  variable80 = NEW_ReduceAction79_parser___ReduceAction79___init(); /*new ReduceAction79*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable80) /*AbstractArray::add*/;
-  variable81 = NEW_parser___ReduceAction80___init(); /*new ReduceAction80*/
+  variable81 = NEW_ReduceAction80_parser___ReduceAction80___init(); /*new ReduceAction80*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable81) /*AbstractArray::add*/;
-  variable82 = NEW_parser___ReduceAction81___init(); /*new ReduceAction81*/
+  variable82 = NEW_ReduceAction81_parser___ReduceAction81___init(); /*new ReduceAction81*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable82) /*AbstractArray::add*/;
-  variable83 = NEW_parser___ReduceAction82___init(); /*new ReduceAction82*/
+  variable83 = NEW_ReduceAction82_parser___ReduceAction82___init(); /*new ReduceAction82*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable83) /*AbstractArray::add*/;
-  variable84 = NEW_parser___ReduceAction83___init(); /*new ReduceAction83*/
+  variable84 = NEW_ReduceAction83_parser___ReduceAction83___init(); /*new ReduceAction83*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable84) /*AbstractArray::add*/;
-  variable85 = NEW_parser___ReduceAction84___init(); /*new ReduceAction84*/
+  variable85 = NEW_ReduceAction84_parser___ReduceAction84___init(); /*new ReduceAction84*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable85) /*AbstractArray::add*/;
-  variable86 = NEW_parser___ReduceAction85___init(); /*new ReduceAction85*/
+  variable86 = NEW_ReduceAction85_parser___ReduceAction85___init(); /*new ReduceAction85*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable86) /*AbstractArray::add*/;
-  variable87 = NEW_parser___ReduceAction86___init(); /*new ReduceAction86*/
+  variable87 = NEW_ReduceAction86_parser___ReduceAction86___init(); /*new ReduceAction86*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable87) /*AbstractArray::add*/;
-  variable88 = NEW_parser___ReduceAction87___init(); /*new ReduceAction87*/
+  variable88 = NEW_ReduceAction87_parser___ReduceAction87___init(); /*new ReduceAction87*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable88) /*AbstractArray::add*/;
-  variable89 = NEW_parser___ReduceAction88___init(); /*new ReduceAction88*/
+  variable89 = NEW_ReduceAction88_parser___ReduceAction88___init(); /*new ReduceAction88*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable89) /*AbstractArray::add*/;
-  variable90 = NEW_parser___ReduceAction89___init(); /*new ReduceAction89*/
+  variable90 = NEW_ReduceAction89_parser___ReduceAction89___init(); /*new ReduceAction89*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable90) /*AbstractArray::add*/;
-  variable91 = NEW_parser___ReduceAction90___init(); /*new ReduceAction90*/
+  variable91 = NEW_ReduceAction90_parser___ReduceAction90___init(); /*new ReduceAction90*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable91) /*AbstractArray::add*/;
-  variable92 = NEW_parser___ReduceAction91___init(); /*new ReduceAction91*/
+  variable92 = NEW_ReduceAction91_parser___ReduceAction91___init(); /*new ReduceAction91*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable92) /*AbstractArray::add*/;
-  variable93 = NEW_parser___ReduceAction92___init(); /*new ReduceAction92*/
+  variable93 = NEW_ReduceAction92_parser___ReduceAction92___init(); /*new ReduceAction92*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable93) /*AbstractArray::add*/;
-  variable94 = NEW_parser___ReduceAction93___init(); /*new ReduceAction93*/
+  variable94 = NEW_ReduceAction93_parser___ReduceAction93___init(); /*new ReduceAction93*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable94) /*AbstractArray::add*/;
-  variable95 = NEW_parser___ReduceAction94___init(); /*new ReduceAction94*/
+  variable95 = NEW_ReduceAction94_parser___ReduceAction94___init(); /*new ReduceAction94*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable95) /*AbstractArray::add*/;
-  variable96 = NEW_parser___ReduceAction95___init(); /*new ReduceAction95*/
+  variable96 = NEW_ReduceAction95_parser___ReduceAction95___init(); /*new ReduceAction95*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable96) /*AbstractArray::add*/;
-  variable97 = NEW_parser___ReduceAction96___init(); /*new ReduceAction96*/
+  variable97 = NEW_ReduceAction96_parser___ReduceAction96___init(); /*new ReduceAction96*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable97) /*AbstractArray::add*/;
-  variable98 = NEW_parser___ReduceAction97___init(); /*new ReduceAction97*/
+  variable98 = NEW_ReduceAction97_parser___ReduceAction97___init(); /*new ReduceAction97*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable98) /*AbstractArray::add*/;
-  variable99 = NEW_parser___ReduceAction98___init(); /*new ReduceAction98*/
+  variable99 = NEW_ReduceAction98_parser___ReduceAction98___init(); /*new ReduceAction98*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable99) /*AbstractArray::add*/;
-  variable100 = NEW_parser___ReduceAction99___init(); /*new ReduceAction99*/
+  variable100 = NEW_ReduceAction99_parser___ReduceAction99___init(); /*new ReduceAction99*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable100) /*AbstractArray::add*/;
-  variable101 = NEW_parser___ReduceAction100___init(); /*new ReduceAction100*/
+  variable101 = NEW_ReduceAction100_parser___ReduceAction100___init(); /*new ReduceAction100*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable101) /*AbstractArray::add*/;
-  variable102 = NEW_parser___ReduceAction101___init(); /*new ReduceAction101*/
+  variable102 = NEW_ReduceAction101_parser___ReduceAction101___init(); /*new ReduceAction101*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable102) /*AbstractArray::add*/;
-  variable103 = NEW_parser___ReduceAction102___init(); /*new ReduceAction102*/
+  variable103 = NEW_ReduceAction102_parser___ReduceAction102___init(); /*new ReduceAction102*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable103) /*AbstractArray::add*/;
-  variable104 = NEW_parser___ReduceAction103___init(); /*new ReduceAction103*/
+  variable104 = NEW_ReduceAction103_parser___ReduceAction103___init(); /*new ReduceAction103*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable104) /*AbstractArray::add*/;
-  variable105 = NEW_parser___ReduceAction104___init(); /*new ReduceAction104*/
+  variable105 = NEW_ReduceAction104_parser___ReduceAction104___init(); /*new ReduceAction104*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable105) /*AbstractArray::add*/;
-  variable106 = NEW_parser___ReduceAction105___init(); /*new ReduceAction105*/
+  variable106 = NEW_ReduceAction105_parser___ReduceAction105___init(); /*new ReduceAction105*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable106) /*AbstractArray::add*/;
-  variable107 = NEW_parser___ReduceAction106___init(); /*new ReduceAction106*/
+  variable107 = NEW_ReduceAction106_parser___ReduceAction106___init(); /*new ReduceAction106*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable107) /*AbstractArray::add*/;
-  variable108 = NEW_parser___ReduceAction107___init(); /*new ReduceAction107*/
+  variable108 = NEW_ReduceAction107_parser___ReduceAction107___init(); /*new ReduceAction107*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable108) /*AbstractArray::add*/;
-  variable109 = NEW_parser___ReduceAction108___init(); /*new ReduceAction108*/
+  variable109 = NEW_ReduceAction108_parser___ReduceAction108___init(); /*new ReduceAction108*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable109) /*AbstractArray::add*/;
-  variable110 = NEW_parser___ReduceAction109___init(); /*new ReduceAction109*/
+  variable110 = NEW_ReduceAction109_parser___ReduceAction109___init(); /*new ReduceAction109*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable110) /*AbstractArray::add*/;
-  variable111 = NEW_parser___ReduceAction110___init(); /*new ReduceAction110*/
+  variable111 = NEW_ReduceAction110_parser___ReduceAction110___init(); /*new ReduceAction110*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable111) /*AbstractArray::add*/;
-  variable112 = NEW_parser___ReduceAction111___init(); /*new ReduceAction111*/
+  variable112 = NEW_ReduceAction111_parser___ReduceAction111___init(); /*new ReduceAction111*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable112) /*AbstractArray::add*/;
-  variable113 = NEW_parser___ReduceAction112___init(); /*new ReduceAction112*/
+  variable113 = NEW_ReduceAction112_parser___ReduceAction112___init(); /*new ReduceAction112*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable113) /*AbstractArray::add*/;
-  variable114 = NEW_parser___ReduceAction113___init(); /*new ReduceAction113*/
+  variable114 = NEW_ReduceAction113_parser___ReduceAction113___init(); /*new ReduceAction113*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable114) /*AbstractArray::add*/;
-  variable115 = NEW_parser___ReduceAction114___init(); /*new ReduceAction114*/
+  variable115 = NEW_ReduceAction114_parser___ReduceAction114___init(); /*new ReduceAction114*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable115) /*AbstractArray::add*/;
-  variable116 = NEW_parser___ReduceAction115___init(); /*new ReduceAction115*/
+  variable116 = NEW_ReduceAction115_parser___ReduceAction115___init(); /*new ReduceAction115*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable116) /*AbstractArray::add*/;
-  variable117 = NEW_parser___ReduceAction116___init(); /*new ReduceAction116*/
+  variable117 = NEW_ReduceAction116_parser___ReduceAction116___init(); /*new ReduceAction116*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable117) /*AbstractArray::add*/;
-  variable118 = NEW_parser___ReduceAction117___init(); /*new ReduceAction117*/
+  variable118 = NEW_ReduceAction117_parser___ReduceAction117___init(); /*new ReduceAction117*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable118) /*AbstractArray::add*/;
-  variable119 = NEW_parser___ReduceAction118___init(); /*new ReduceAction118*/
+  variable119 = NEW_ReduceAction118_parser___ReduceAction118___init(); /*new ReduceAction118*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable119) /*AbstractArray::add*/;
-  variable120 = NEW_parser___ReduceAction119___init(); /*new ReduceAction119*/
+  variable120 = NEW_ReduceAction119_parser___ReduceAction119___init(); /*new ReduceAction119*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable120) /*AbstractArray::add*/;
-  variable121 = NEW_parser___ReduceAction120___init(); /*new ReduceAction120*/
+  variable121 = NEW_ReduceAction120_parser___ReduceAction120___init(); /*new ReduceAction120*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable121) /*AbstractArray::add*/;
-  variable122 = NEW_parser___ReduceAction121___init(); /*new ReduceAction121*/
+  variable122 = NEW_ReduceAction121_parser___ReduceAction121___init(); /*new ReduceAction121*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable122) /*AbstractArray::add*/;
-  variable123 = NEW_parser___ReduceAction122___init(); /*new ReduceAction122*/
+  variable123 = NEW_ReduceAction122_parser___ReduceAction122___init(); /*new ReduceAction122*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable123) /*AbstractArray::add*/;
-  variable124 = NEW_parser___ReduceAction123___init(); /*new ReduceAction123*/
+  variable124 = NEW_ReduceAction123_parser___ReduceAction123___init(); /*new ReduceAction123*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable124) /*AbstractArray::add*/;
-  variable125 = NEW_parser___ReduceAction124___init(); /*new ReduceAction124*/
+  variable125 = NEW_ReduceAction124_parser___ReduceAction124___init(); /*new ReduceAction124*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable125) /*AbstractArray::add*/;
-  variable126 = NEW_parser___ReduceAction125___init(); /*new ReduceAction125*/
+  variable126 = NEW_ReduceAction125_parser___ReduceAction125___init(); /*new ReduceAction125*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable126) /*AbstractArray::add*/;
-  variable127 = NEW_parser___ReduceAction126___init(); /*new ReduceAction126*/
+  variable127 = NEW_ReduceAction126_parser___ReduceAction126___init(); /*new ReduceAction126*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable127) /*AbstractArray::add*/;
-  variable128 = NEW_parser___ReduceAction127___init(); /*new ReduceAction127*/
+  variable128 = NEW_ReduceAction127_parser___ReduceAction127___init(); /*new ReduceAction127*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable128) /*AbstractArray::add*/;
-  variable129 = NEW_parser___ReduceAction128___init(); /*new ReduceAction128*/
+  variable129 = NEW_ReduceAction128_parser___ReduceAction128___init(); /*new ReduceAction128*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable129) /*AbstractArray::add*/;
-  variable130 = NEW_parser___ReduceAction129___init(); /*new ReduceAction129*/
+  variable130 = NEW_ReduceAction129_parser___ReduceAction129___init(); /*new ReduceAction129*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable130) /*AbstractArray::add*/;
-  variable131 = NEW_parser___ReduceAction130___init(); /*new ReduceAction130*/
+  variable131 = NEW_ReduceAction130_parser___ReduceAction130___init(); /*new ReduceAction130*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable131) /*AbstractArray::add*/;
-  variable132 = NEW_parser___ReduceAction131___init(); /*new ReduceAction131*/
+  variable132 = NEW_ReduceAction131_parser___ReduceAction131___init(); /*new ReduceAction131*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable132) /*AbstractArray::add*/;
-  variable133 = NEW_parser___ReduceAction132___init(); /*new ReduceAction132*/
+  variable133 = NEW_ReduceAction132_parser___ReduceAction132___init(); /*new ReduceAction132*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable133) /*AbstractArray::add*/;
-  variable134 = NEW_parser___ReduceAction133___init(); /*new ReduceAction133*/
+  variable134 = NEW_ReduceAction133_parser___ReduceAction133___init(); /*new ReduceAction133*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable134) /*AbstractArray::add*/;
-  variable135 = NEW_parser___ReduceAction134___init(); /*new ReduceAction134*/
+  variable135 = NEW_ReduceAction134_parser___ReduceAction134___init(); /*new ReduceAction134*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable135) /*AbstractArray::add*/;
-  variable136 = NEW_parser___ReduceAction135___init(); /*new ReduceAction135*/
+  variable136 = NEW_ReduceAction135_parser___ReduceAction135___init(); /*new ReduceAction135*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable136) /*AbstractArray::add*/;
-  variable137 = NEW_parser___ReduceAction136___init(); /*new ReduceAction136*/
+  variable137 = NEW_ReduceAction136_parser___ReduceAction136___init(); /*new ReduceAction136*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable137) /*AbstractArray::add*/;
-  variable138 = NEW_parser___ReduceAction137___init(); /*new ReduceAction137*/
+  variable138 = NEW_ReduceAction137_parser___ReduceAction137___init(); /*new ReduceAction137*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable138) /*AbstractArray::add*/;
-  variable139 = NEW_parser___ReduceAction138___init(); /*new ReduceAction138*/
+  variable139 = NEW_ReduceAction138_parser___ReduceAction138___init(); /*new ReduceAction138*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable139) /*AbstractArray::add*/;
-  variable140 = NEW_parser___ReduceAction139___init(); /*new ReduceAction139*/
+  variable140 = NEW_ReduceAction139_parser___ReduceAction139___init(); /*new ReduceAction139*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable140) /*AbstractArray::add*/;
-  variable141 = NEW_parser___ReduceAction140___init(); /*new ReduceAction140*/
+  variable141 = NEW_ReduceAction140_parser___ReduceAction140___init(); /*new ReduceAction140*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable141) /*AbstractArray::add*/;
-  variable142 = NEW_parser___ReduceAction141___init(); /*new ReduceAction141*/
+  variable142 = NEW_ReduceAction141_parser___ReduceAction141___init(); /*new ReduceAction141*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable142) /*AbstractArray::add*/;
-  variable143 = NEW_parser___ReduceAction142___init(); /*new ReduceAction142*/
+  variable143 = NEW_ReduceAction142_parser___ReduceAction142___init(); /*new ReduceAction142*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable143) /*AbstractArray::add*/;
-  variable144 = NEW_parser___ReduceAction143___init(); /*new ReduceAction143*/
+  variable144 = NEW_ReduceAction143_parser___ReduceAction143___init(); /*new ReduceAction143*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable144) /*AbstractArray::add*/;
-  variable145 = NEW_parser___ReduceAction144___init(); /*new ReduceAction144*/
+  variable145 = NEW_ReduceAction144_parser___ReduceAction144___init(); /*new ReduceAction144*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable145) /*AbstractArray::add*/;
-  variable146 = NEW_parser___ReduceAction145___init(); /*new ReduceAction145*/
+  variable146 = NEW_ReduceAction145_parser___ReduceAction145___init(); /*new ReduceAction145*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable146) /*AbstractArray::add*/;
-  variable147 = NEW_parser___ReduceAction146___init(); /*new ReduceAction146*/
+  variable147 = NEW_ReduceAction146_parser___ReduceAction146___init(); /*new ReduceAction146*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable147) /*AbstractArray::add*/;
-  variable148 = NEW_parser___ReduceAction147___init(); /*new ReduceAction147*/
+  variable148 = NEW_ReduceAction147_parser___ReduceAction147___init(); /*new ReduceAction147*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable148) /*AbstractArray::add*/;
-  variable149 = NEW_parser___ReduceAction148___init(); /*new ReduceAction148*/
+  variable149 = NEW_ReduceAction148_parser___ReduceAction148___init(); /*new ReduceAction148*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable149) /*AbstractArray::add*/;
-  variable150 = NEW_parser___ReduceAction149___init(); /*new ReduceAction149*/
+  variable150 = NEW_ReduceAction149_parser___ReduceAction149___init(); /*new ReduceAction149*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable150) /*AbstractArray::add*/;
-  variable151 = NEW_parser___ReduceAction150___init(); /*new ReduceAction150*/
+  variable151 = NEW_ReduceAction150_parser___ReduceAction150___init(); /*new ReduceAction150*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable151) /*AbstractArray::add*/;
-  variable152 = NEW_parser___ReduceAction151___init(); /*new ReduceAction151*/
+  variable152 = NEW_ReduceAction151_parser___ReduceAction151___init(); /*new ReduceAction151*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable152) /*AbstractArray::add*/;
-  variable153 = NEW_parser___ReduceAction152___init(); /*new ReduceAction152*/
+  variable153 = NEW_ReduceAction152_parser___ReduceAction152___init(); /*new ReduceAction152*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable153) /*AbstractArray::add*/;
-  variable154 = NEW_parser___ReduceAction153___init(); /*new ReduceAction153*/
+  variable154 = NEW_ReduceAction153_parser___ReduceAction153___init(); /*new ReduceAction153*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable154) /*AbstractArray::add*/;
-  variable155 = NEW_parser___ReduceAction154___init(); /*new ReduceAction154*/
+  variable155 = NEW_ReduceAction154_parser___ReduceAction154___init(); /*new ReduceAction154*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable155) /*AbstractArray::add*/;
-  variable156 = NEW_parser___ReduceAction155___init(); /*new ReduceAction155*/
+  variable156 = NEW_ReduceAction155_parser___ReduceAction155___init(); /*new ReduceAction155*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable156) /*AbstractArray::add*/;
-  variable157 = NEW_parser___ReduceAction156___init(); /*new ReduceAction156*/
+  variable157 = NEW_ReduceAction156_parser___ReduceAction156___init(); /*new ReduceAction156*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable157) /*AbstractArray::add*/;
-  variable158 = NEW_parser___ReduceAction157___init(); /*new ReduceAction157*/
+  variable158 = NEW_ReduceAction157_parser___ReduceAction157___init(); /*new ReduceAction157*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable158) /*AbstractArray::add*/;
-  variable159 = NEW_parser___ReduceAction158___init(); /*new ReduceAction158*/
+  variable159 = NEW_ReduceAction158_parser___ReduceAction158___init(); /*new ReduceAction158*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable159) /*AbstractArray::add*/;
-  variable160 = NEW_parser___ReduceAction159___init(); /*new ReduceAction159*/
+  variable160 = NEW_ReduceAction159_parser___ReduceAction159___init(); /*new ReduceAction159*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable160) /*AbstractArray::add*/;
-  variable161 = NEW_parser___ReduceAction160___init(); /*new ReduceAction160*/
+  variable161 = NEW_ReduceAction160_parser___ReduceAction160___init(); /*new ReduceAction160*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable161) /*AbstractArray::add*/;
-  variable162 = NEW_parser___ReduceAction161___init(); /*new ReduceAction161*/
+  variable162 = NEW_ReduceAction161_parser___ReduceAction161___init(); /*new ReduceAction161*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable162) /*AbstractArray::add*/;
-  variable163 = NEW_parser___ReduceAction162___init(); /*new ReduceAction162*/
+  variable163 = NEW_ReduceAction162_parser___ReduceAction162___init(); /*new ReduceAction162*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable163) /*AbstractArray::add*/;
-  variable164 = NEW_parser___ReduceAction163___init(); /*new ReduceAction163*/
+  variable164 = NEW_ReduceAction163_parser___ReduceAction163___init(); /*new ReduceAction163*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable164) /*AbstractArray::add*/;
-  variable165 = NEW_parser___ReduceAction164___init(); /*new ReduceAction164*/
+  variable165 = NEW_ReduceAction164_parser___ReduceAction164___init(); /*new ReduceAction164*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable165) /*AbstractArray::add*/;
-  variable166 = NEW_parser___ReduceAction165___init(); /*new ReduceAction165*/
+  variable166 = NEW_ReduceAction165_parser___ReduceAction165___init(); /*new ReduceAction165*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable166) /*AbstractArray::add*/;
-  variable167 = NEW_parser___ReduceAction166___init(); /*new ReduceAction166*/
+  variable167 = NEW_ReduceAction166_parser___ReduceAction166___init(); /*new ReduceAction166*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable167) /*AbstractArray::add*/;
-  variable168 = NEW_parser___ReduceAction167___init(); /*new ReduceAction167*/
+  variable168 = NEW_ReduceAction167_parser___ReduceAction167___init(); /*new ReduceAction167*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable168) /*AbstractArray::add*/;
-  variable169 = NEW_parser___ReduceAction168___init(); /*new ReduceAction168*/
+  variable169 = NEW_ReduceAction168_parser___ReduceAction168___init(); /*new ReduceAction168*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable169) /*AbstractArray::add*/;
-  variable170 = NEW_parser___ReduceAction169___init(); /*new ReduceAction169*/
+  variable170 = NEW_ReduceAction169_parser___ReduceAction169___init(); /*new ReduceAction169*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable170) /*AbstractArray::add*/;
-  variable171 = NEW_parser___ReduceAction170___init(); /*new ReduceAction170*/
+  variable171 = NEW_ReduceAction170_parser___ReduceAction170___init(); /*new ReduceAction170*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable171) /*AbstractArray::add*/;
-  variable172 = NEW_parser___ReduceAction171___init(); /*new ReduceAction171*/
+  variable172 = NEW_ReduceAction171_parser___ReduceAction171___init(); /*new ReduceAction171*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable172) /*AbstractArray::add*/;
-  variable173 = NEW_parser___ReduceAction172___init(); /*new ReduceAction172*/
+  variable173 = NEW_ReduceAction172_parser___ReduceAction172___init(); /*new ReduceAction172*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable173) /*AbstractArray::add*/;
-  variable174 = NEW_parser___ReduceAction173___init(); /*new ReduceAction173*/
+  variable174 = NEW_ReduceAction173_parser___ReduceAction173___init(); /*new ReduceAction173*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable174) /*AbstractArray::add*/;
-  variable175 = NEW_parser___ReduceAction174___init(); /*new ReduceAction174*/
+  variable175 = NEW_ReduceAction174_parser___ReduceAction174___init(); /*new ReduceAction174*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable175) /*AbstractArray::add*/;
-  variable176 = NEW_parser___ReduceAction175___init(); /*new ReduceAction175*/
+  variable176 = NEW_ReduceAction175_parser___ReduceAction175___init(); /*new ReduceAction175*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable176) /*AbstractArray::add*/;
-  variable177 = NEW_parser___ReduceAction176___init(); /*new ReduceAction176*/
+  variable177 = NEW_ReduceAction176_parser___ReduceAction176___init(); /*new ReduceAction176*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable177) /*AbstractArray::add*/;
-  variable178 = NEW_parser___ReduceAction177___init(); /*new ReduceAction177*/
+  variable178 = NEW_ReduceAction177_parser___ReduceAction177___init(); /*new ReduceAction177*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable178) /*AbstractArray::add*/;
-  variable179 = NEW_parser___ReduceAction178___init(); /*new ReduceAction178*/
+  variable179 = NEW_ReduceAction178_parser___ReduceAction178___init(); /*new ReduceAction178*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable179) /*AbstractArray::add*/;
-  variable180 = NEW_parser___ReduceAction179___init(); /*new ReduceAction179*/
+  variable180 = NEW_ReduceAction179_parser___ReduceAction179___init(); /*new ReduceAction179*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable180) /*AbstractArray::add*/;
-  variable181 = NEW_parser___ReduceAction180___init(); /*new ReduceAction180*/
+  variable181 = NEW_ReduceAction180_parser___ReduceAction180___init(); /*new ReduceAction180*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable181) /*AbstractArray::add*/;
-  variable182 = NEW_parser___ReduceAction181___init(); /*new ReduceAction181*/
+  variable182 = NEW_ReduceAction181_parser___ReduceAction181___init(); /*new ReduceAction181*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable182) /*AbstractArray::add*/;
-  variable183 = NEW_parser___ReduceAction182___init(); /*new ReduceAction182*/
+  variable183 = NEW_ReduceAction182_parser___ReduceAction182___init(); /*new ReduceAction182*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable183) /*AbstractArray::add*/;
-  variable184 = NEW_parser___ReduceAction183___init(); /*new ReduceAction183*/
+  variable184 = NEW_ReduceAction183_parser___ReduceAction183___init(); /*new ReduceAction183*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable184) /*AbstractArray::add*/;
-  variable185 = NEW_parser___ReduceAction184___init(); /*new ReduceAction184*/
+  variable185 = NEW_ReduceAction184_parser___ReduceAction184___init(); /*new ReduceAction184*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable185) /*AbstractArray::add*/;
-  variable186 = NEW_parser___ReduceAction185___init(); /*new ReduceAction185*/
+  variable186 = NEW_ReduceAction185_parser___ReduceAction185___init(); /*new ReduceAction185*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable186) /*AbstractArray::add*/;
-  variable187 = NEW_parser___ReduceAction186___init(); /*new ReduceAction186*/
+  variable187 = NEW_ReduceAction186_parser___ReduceAction186___init(); /*new ReduceAction186*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable187) /*AbstractArray::add*/;
-  variable188 = NEW_parser___ReduceAction187___init(); /*new ReduceAction187*/
+  variable188 = NEW_ReduceAction187_parser___ReduceAction187___init(); /*new ReduceAction187*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable188) /*AbstractArray::add*/;
-  variable189 = NEW_parser___ReduceAction188___init(); /*new ReduceAction188*/
+  variable189 = NEW_ReduceAction188_parser___ReduceAction188___init(); /*new ReduceAction188*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable189) /*AbstractArray::add*/;
-  variable190 = NEW_parser___ReduceAction189___init(); /*new ReduceAction189*/
+  variable190 = NEW_ReduceAction189_parser___ReduceAction189___init(); /*new ReduceAction189*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable190) /*AbstractArray::add*/;
-  variable191 = NEW_parser___ReduceAction190___init(); /*new ReduceAction190*/
+  variable191 = NEW_ReduceAction190_parser___ReduceAction190___init(); /*new ReduceAction190*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable191) /*AbstractArray::add*/;
-  variable192 = NEW_parser___ReduceAction191___init(); /*new ReduceAction191*/
+  variable192 = NEW_ReduceAction191_parser___ReduceAction191___init(); /*new ReduceAction191*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable192) /*AbstractArray::add*/;
-  variable193 = NEW_parser___ReduceAction192___init(); /*new ReduceAction192*/
+  variable193 = NEW_ReduceAction192_parser___ReduceAction192___init(); /*new ReduceAction192*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable193) /*AbstractArray::add*/;
-  variable194 = NEW_parser___ReduceAction193___init(); /*new ReduceAction193*/
+  variable194 = NEW_ReduceAction193_parser___ReduceAction193___init(); /*new ReduceAction193*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable194) /*AbstractArray::add*/;
-  variable195 = NEW_parser___ReduceAction194___init(); /*new ReduceAction194*/
+  variable195 = NEW_ReduceAction194_parser___ReduceAction194___init(); /*new ReduceAction194*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable195) /*AbstractArray::add*/;
-  variable196 = NEW_parser___ReduceAction195___init(); /*new ReduceAction195*/
+  variable196 = NEW_ReduceAction195_parser___ReduceAction195___init(); /*new ReduceAction195*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable196) /*AbstractArray::add*/;
-  variable197 = NEW_parser___ReduceAction196___init(); /*new ReduceAction196*/
+  variable197 = NEW_ReduceAction196_parser___ReduceAction196___init(); /*new ReduceAction196*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable197) /*AbstractArray::add*/;
-  variable198 = NEW_parser___ReduceAction197___init(); /*new ReduceAction197*/
+  variable198 = NEW_ReduceAction197_parser___ReduceAction197___init(); /*new ReduceAction197*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable198) /*AbstractArray::add*/;
-  variable199 = NEW_parser___ReduceAction198___init(); /*new ReduceAction198*/
+  variable199 = NEW_ReduceAction198_parser___ReduceAction198___init(); /*new ReduceAction198*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable199) /*AbstractArray::add*/;
-  variable200 = NEW_parser___ReduceAction199___init(); /*new ReduceAction199*/
+  variable200 = NEW_ReduceAction199_parser___ReduceAction199___init(); /*new ReduceAction199*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable200) /*AbstractArray::add*/;
-  variable201 = NEW_parser___ReduceAction200___init(); /*new ReduceAction200*/
+  variable201 = NEW_ReduceAction200_parser___ReduceAction200___init(); /*new ReduceAction200*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable201) /*AbstractArray::add*/;
-  variable202 = NEW_parser___ReduceAction201___init(); /*new ReduceAction201*/
+  variable202 = NEW_ReduceAction201_parser___ReduceAction201___init(); /*new ReduceAction201*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable202) /*AbstractArray::add*/;
-  variable203 = NEW_parser___ReduceAction202___init(); /*new ReduceAction202*/
+  variable203 = NEW_ReduceAction202_parser___ReduceAction202___init(); /*new ReduceAction202*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable203) /*AbstractArray::add*/;
-  variable204 = NEW_parser___ReduceAction203___init(); /*new ReduceAction203*/
+  variable204 = NEW_ReduceAction203_parser___ReduceAction203___init(); /*new ReduceAction203*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable204) /*AbstractArray::add*/;
-  variable205 = NEW_parser___ReduceAction204___init(); /*new ReduceAction204*/
+  variable205 = NEW_ReduceAction204_parser___ReduceAction204___init(); /*new ReduceAction204*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable205) /*AbstractArray::add*/;
-  variable206 = NEW_parser___ReduceAction205___init(); /*new ReduceAction205*/
+  variable206 = NEW_ReduceAction205_parser___ReduceAction205___init(); /*new ReduceAction205*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable206) /*AbstractArray::add*/;
-  variable207 = NEW_parser___ReduceAction206___init(); /*new ReduceAction206*/
+  variable207 = NEW_ReduceAction206_parser___ReduceAction206___init(); /*new ReduceAction206*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable207) /*AbstractArray::add*/;
-  variable208 = NEW_parser___ReduceAction207___init(); /*new ReduceAction207*/
+  variable208 = NEW_ReduceAction207_parser___ReduceAction207___init(); /*new ReduceAction207*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable208) /*AbstractArray::add*/;
-  variable209 = NEW_parser___ReduceAction208___init(); /*new ReduceAction208*/
+  variable209 = NEW_ReduceAction208_parser___ReduceAction208___init(); /*new ReduceAction208*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable209) /*AbstractArray::add*/;
-  variable210 = NEW_parser___ReduceAction209___init(); /*new ReduceAction209*/
+  variable210 = NEW_ReduceAction209_parser___ReduceAction209___init(); /*new ReduceAction209*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable210) /*AbstractArray::add*/;
-  variable211 = NEW_parser___ReduceAction210___init(); /*new ReduceAction210*/
+  variable211 = NEW_ReduceAction210_parser___ReduceAction210___init(); /*new ReduceAction210*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable211) /*AbstractArray::add*/;
-  variable212 = NEW_parser___ReduceAction211___init(); /*new ReduceAction211*/
+  variable212 = NEW_ReduceAction211_parser___ReduceAction211___init(); /*new ReduceAction211*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable212) /*AbstractArray::add*/;
-  variable213 = NEW_parser___ReduceAction212___init(); /*new ReduceAction212*/
+  variable213 = NEW_ReduceAction212_parser___ReduceAction212___init(); /*new ReduceAction212*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable213) /*AbstractArray::add*/;
-  variable214 = NEW_parser___ReduceAction213___init(); /*new ReduceAction213*/
+  variable214 = NEW_ReduceAction213_parser___ReduceAction213___init(); /*new ReduceAction213*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable214) /*AbstractArray::add*/;
-  variable215 = NEW_parser___ReduceAction214___init(); /*new ReduceAction214*/
+  variable215 = NEW_ReduceAction214_parser___ReduceAction214___init(); /*new ReduceAction214*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable215) /*AbstractArray::add*/;
-  variable216 = NEW_parser___ReduceAction215___init(); /*new ReduceAction215*/
+  variable216 = NEW_ReduceAction215_parser___ReduceAction215___init(); /*new ReduceAction215*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable216) /*AbstractArray::add*/;
-  variable217 = NEW_parser___ReduceAction216___init(); /*new ReduceAction216*/
+  variable217 = NEW_ReduceAction216_parser___ReduceAction216___init(); /*new ReduceAction216*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable217) /*AbstractArray::add*/;
-  variable218 = NEW_parser___ReduceAction217___init(); /*new ReduceAction217*/
+  variable218 = NEW_ReduceAction217_parser___ReduceAction217___init(); /*new ReduceAction217*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable218) /*AbstractArray::add*/;
-  variable219 = NEW_parser___ReduceAction218___init(); /*new ReduceAction218*/
+  variable219 = NEW_ReduceAction218_parser___ReduceAction218___init(); /*new ReduceAction218*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable219) /*AbstractArray::add*/;
-  variable220 = NEW_parser___ReduceAction219___init(); /*new ReduceAction219*/
+  variable220 = NEW_ReduceAction219_parser___ReduceAction219___init(); /*new ReduceAction219*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable220) /*AbstractArray::add*/;
-  variable221 = NEW_parser___ReduceAction220___init(); /*new ReduceAction220*/
+  variable221 = NEW_ReduceAction220_parser___ReduceAction220___init(); /*new ReduceAction220*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable221) /*AbstractArray::add*/;
-  variable222 = NEW_parser___ReduceAction221___init(); /*new ReduceAction221*/
+  variable222 = NEW_ReduceAction221_parser___ReduceAction221___init(); /*new ReduceAction221*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable222) /*AbstractArray::add*/;
-  variable223 = NEW_parser___ReduceAction222___init(); /*new ReduceAction222*/
+  variable223 = NEW_ReduceAction222_parser___ReduceAction222___init(); /*new ReduceAction222*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable223) /*AbstractArray::add*/;
-  variable224 = NEW_parser___ReduceAction223___init(); /*new ReduceAction223*/
+  variable224 = NEW_ReduceAction223_parser___ReduceAction223___init(); /*new ReduceAction223*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable224) /*AbstractArray::add*/;
-  variable225 = NEW_parser___ReduceAction224___init(); /*new ReduceAction224*/
+  variable225 = NEW_ReduceAction224_parser___ReduceAction224___init(); /*new ReduceAction224*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable225) /*AbstractArray::add*/;
-  variable226 = NEW_parser___ReduceAction225___init(); /*new ReduceAction225*/
+  variable226 = NEW_ReduceAction225_parser___ReduceAction225___init(); /*new ReduceAction225*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable226) /*AbstractArray::add*/;
-  variable227 = NEW_parser___ReduceAction226___init(); /*new ReduceAction226*/
+  variable227 = NEW_ReduceAction226_parser___ReduceAction226___init(); /*new ReduceAction226*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable227) /*AbstractArray::add*/;
-  variable228 = NEW_parser___ReduceAction227___init(); /*new ReduceAction227*/
+  variable228 = NEW_ReduceAction227_parser___ReduceAction227___init(); /*new ReduceAction227*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable228) /*AbstractArray::add*/;
-  variable229 = NEW_parser___ReduceAction228___init(); /*new ReduceAction228*/
+  variable229 = NEW_ReduceAction228_parser___ReduceAction228___init(); /*new ReduceAction228*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable229) /*AbstractArray::add*/;
-  variable230 = NEW_parser___ReduceAction229___init(); /*new ReduceAction229*/
+  variable230 = NEW_ReduceAction229_parser___ReduceAction229___init(); /*new ReduceAction229*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable230) /*AbstractArray::add*/;
-  variable231 = NEW_parser___ReduceAction230___init(); /*new ReduceAction230*/
+  variable231 = NEW_ReduceAction230_parser___ReduceAction230___init(); /*new ReduceAction230*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable231) /*AbstractArray::add*/;
-  variable232 = NEW_parser___ReduceAction231___init(); /*new ReduceAction231*/
+  variable232 = NEW_ReduceAction231_parser___ReduceAction231___init(); /*new ReduceAction231*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable232) /*AbstractArray::add*/;
-  variable233 = NEW_parser___ReduceAction232___init(); /*new ReduceAction232*/
+  variable233 = NEW_ReduceAction232_parser___ReduceAction232___init(); /*new ReduceAction232*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable233) /*AbstractArray::add*/;
-  variable234 = NEW_parser___ReduceAction233___init(); /*new ReduceAction233*/
+  variable234 = NEW_ReduceAction233_parser___ReduceAction233___init(); /*new ReduceAction233*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable234) /*AbstractArray::add*/;
-  variable235 = NEW_parser___ReduceAction234___init(); /*new ReduceAction234*/
+  variable235 = NEW_ReduceAction234_parser___ReduceAction234___init(); /*new ReduceAction234*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable235) /*AbstractArray::add*/;
-  variable236 = NEW_parser___ReduceAction235___init(); /*new ReduceAction235*/
+  variable236 = NEW_ReduceAction235_parser___ReduceAction235___init(); /*new ReduceAction235*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable236) /*AbstractArray::add*/;
-  variable237 = NEW_parser___ReduceAction236___init(); /*new ReduceAction236*/
+  variable237 = NEW_ReduceAction236_parser___ReduceAction236___init(); /*new ReduceAction236*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable237) /*AbstractArray::add*/;
-  variable238 = NEW_parser___ReduceAction237___init(); /*new ReduceAction237*/
+  variable238 = NEW_ReduceAction237_parser___ReduceAction237___init(); /*new ReduceAction237*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable238) /*AbstractArray::add*/;
-  variable239 = NEW_parser___ReduceAction238___init(); /*new ReduceAction238*/
+  variable239 = NEW_ReduceAction238_parser___ReduceAction238___init(); /*new ReduceAction238*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable239) /*AbstractArray::add*/;
-  variable240 = NEW_parser___ReduceAction239___init(); /*new ReduceAction239*/
+  variable240 = NEW_ReduceAction239_parser___ReduceAction239___init(); /*new ReduceAction239*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable240) /*AbstractArray::add*/;
-  variable241 = NEW_parser___ReduceAction240___init(); /*new ReduceAction240*/
+  variable241 = NEW_ReduceAction240_parser___ReduceAction240___init(); /*new ReduceAction240*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable241) /*AbstractArray::add*/;
-  variable242 = NEW_parser___ReduceAction241___init(); /*new ReduceAction241*/
+  variable242 = NEW_ReduceAction241_parser___ReduceAction241___init(); /*new ReduceAction241*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable242) /*AbstractArray::add*/;
-  variable243 = NEW_parser___ReduceAction242___init(); /*new ReduceAction242*/
+  variable243 = NEW_ReduceAction242_parser___ReduceAction242___init(); /*new ReduceAction242*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable243) /*AbstractArray::add*/;
-  variable244 = NEW_parser___ReduceAction243___init(); /*new ReduceAction243*/
+  variable244 = NEW_ReduceAction243_parser___ReduceAction243___init(); /*new ReduceAction243*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable244) /*AbstractArray::add*/;
-  variable245 = NEW_parser___ReduceAction244___init(); /*new ReduceAction244*/
+  variable245 = NEW_ReduceAction244_parser___ReduceAction244___init(); /*new ReduceAction244*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable245) /*AbstractArray::add*/;
-  variable246 = NEW_parser___ReduceAction245___init(); /*new ReduceAction245*/
+  variable246 = NEW_ReduceAction245_parser___ReduceAction245___init(); /*new ReduceAction245*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable246) /*AbstractArray::add*/;
-  variable247 = NEW_parser___ReduceAction246___init(); /*new ReduceAction246*/
+  variable247 = NEW_ReduceAction246_parser___ReduceAction246___init(); /*new ReduceAction246*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable247) /*AbstractArray::add*/;
-  variable248 = NEW_parser___ReduceAction247___init(); /*new ReduceAction247*/
+  variable248 = NEW_ReduceAction247_parser___ReduceAction247___init(); /*new ReduceAction247*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable248) /*AbstractArray::add*/;
-  variable249 = NEW_parser___ReduceAction248___init(); /*new ReduceAction248*/
+  variable249 = NEW_ReduceAction248_parser___ReduceAction248___init(); /*new ReduceAction248*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable249) /*AbstractArray::add*/;
-  variable250 = NEW_parser___ReduceAction249___init(); /*new ReduceAction249*/
+  variable250 = NEW_ReduceAction249_parser___ReduceAction249___init(); /*new ReduceAction249*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable250) /*AbstractArray::add*/;
-  variable251 = NEW_parser___ReduceAction250___init(); /*new ReduceAction250*/
+  variable251 = NEW_ReduceAction250_parser___ReduceAction250___init(); /*new ReduceAction250*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable251) /*AbstractArray::add*/;
-  variable252 = NEW_parser___ReduceAction251___init(); /*new ReduceAction251*/
+  variable252 = NEW_ReduceAction251_parser___ReduceAction251___init(); /*new ReduceAction251*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable252) /*AbstractArray::add*/;
-  variable253 = NEW_parser___ReduceAction252___init(); /*new ReduceAction252*/
+  variable253 = NEW_ReduceAction252_parser___ReduceAction252___init(); /*new ReduceAction252*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable253) /*AbstractArray::add*/;
-  variable254 = NEW_parser___ReduceAction253___init(); /*new ReduceAction253*/
+  variable254 = NEW_ReduceAction253_parser___ReduceAction253___init(); /*new ReduceAction253*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable254) /*AbstractArray::add*/;
-  variable255 = NEW_parser___ReduceAction254___init(); /*new ReduceAction254*/
+  variable255 = NEW_ReduceAction254_parser___ReduceAction254___init(); /*new ReduceAction254*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable255) /*AbstractArray::add*/;
-  variable256 = NEW_parser___ReduceAction255___init(); /*new ReduceAction255*/
+  variable256 = NEW_ReduceAction255_parser___ReduceAction255___init(); /*new ReduceAction255*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable256) /*AbstractArray::add*/;
-  variable257 = NEW_parser___ReduceAction256___init(); /*new ReduceAction256*/
+  variable257 = NEW_ReduceAction256_parser___ReduceAction256___init(); /*new ReduceAction256*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable257) /*AbstractArray::add*/;
-  variable258 = NEW_parser___ReduceAction257___init(); /*new ReduceAction257*/
+  variable258 = NEW_ReduceAction257_parser___ReduceAction257___init(); /*new ReduceAction257*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable258) /*AbstractArray::add*/;
-  variable259 = NEW_parser___ReduceAction258___init(); /*new ReduceAction258*/
+  variable259 = NEW_ReduceAction258_parser___ReduceAction258___init(); /*new ReduceAction258*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable259) /*AbstractArray::add*/;
-  variable260 = NEW_parser___ReduceAction259___init(); /*new ReduceAction259*/
+  variable260 = NEW_ReduceAction259_parser___ReduceAction259___init(); /*new ReduceAction259*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable260) /*AbstractArray::add*/;
-  variable261 = NEW_parser___ReduceAction260___init(); /*new ReduceAction260*/
+  variable261 = NEW_ReduceAction260_parser___ReduceAction260___init(); /*new ReduceAction260*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable261) /*AbstractArray::add*/;
-  variable262 = NEW_parser___ReduceAction261___init(); /*new ReduceAction261*/
+  variable262 = NEW_ReduceAction261_parser___ReduceAction261___init(); /*new ReduceAction261*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable262) /*AbstractArray::add*/;
-  variable263 = NEW_parser___ReduceAction262___init(); /*new ReduceAction262*/
+  variable263 = NEW_ReduceAction262_parser___ReduceAction262___init(); /*new ReduceAction262*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable263) /*AbstractArray::add*/;
-  variable264 = NEW_parser___ReduceAction263___init(); /*new ReduceAction263*/
+  variable264 = NEW_ReduceAction263_parser___ReduceAction263___init(); /*new ReduceAction263*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable264) /*AbstractArray::add*/;
-  variable265 = NEW_parser___ReduceAction264___init(); /*new ReduceAction264*/
+  variable265 = NEW_ReduceAction264_parser___ReduceAction264___init(); /*new ReduceAction264*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable265) /*AbstractArray::add*/;
-  variable266 = NEW_parser___ReduceAction265___init(); /*new ReduceAction265*/
+  variable266 = NEW_ReduceAction265_parser___ReduceAction265___init(); /*new ReduceAction265*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable266) /*AbstractArray::add*/;
-  variable267 = NEW_parser___ReduceAction266___init(); /*new ReduceAction266*/
+  variable267 = NEW_ReduceAction266_parser___ReduceAction266___init(); /*new ReduceAction266*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable267) /*AbstractArray::add*/;
-  variable268 = NEW_parser___ReduceAction267___init(); /*new ReduceAction267*/
+  variable268 = NEW_ReduceAction267_parser___ReduceAction267___init(); /*new ReduceAction267*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable268) /*AbstractArray::add*/;
-  variable269 = NEW_parser___ReduceAction268___init(); /*new ReduceAction268*/
+  variable269 = NEW_ReduceAction268_parser___ReduceAction268___init(); /*new ReduceAction268*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable269) /*AbstractArray::add*/;
-  variable270 = NEW_parser___ReduceAction269___init(); /*new ReduceAction269*/
+  variable270 = NEW_ReduceAction269_parser___ReduceAction269___init(); /*new ReduceAction269*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable270) /*AbstractArray::add*/;
-  variable271 = NEW_parser___ReduceAction270___init(); /*new ReduceAction270*/
+  variable271 = NEW_ReduceAction270_parser___ReduceAction270___init(); /*new ReduceAction270*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable271) /*AbstractArray::add*/;
-  variable272 = NEW_parser___ReduceAction271___init(); /*new ReduceAction271*/
+  variable272 = NEW_ReduceAction271_parser___ReduceAction271___init(); /*new ReduceAction271*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable272) /*AbstractArray::add*/;
-  variable273 = NEW_parser___ReduceAction272___init(); /*new ReduceAction272*/
+  variable273 = NEW_ReduceAction272_parser___ReduceAction272___init(); /*new ReduceAction272*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable273) /*AbstractArray::add*/;
-  variable274 = NEW_parser___ReduceAction273___init(); /*new ReduceAction273*/
+  variable274 = NEW_ReduceAction273_parser___ReduceAction273___init(); /*new ReduceAction273*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable274) /*AbstractArray::add*/;
-  variable275 = NEW_parser___ReduceAction274___init(); /*new ReduceAction274*/
+  variable275 = NEW_ReduceAction274_parser___ReduceAction274___init(); /*new ReduceAction274*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable275) /*AbstractArray::add*/;
-  variable276 = NEW_parser___ReduceAction275___init(); /*new ReduceAction275*/
+  variable276 = NEW_ReduceAction275_parser___ReduceAction275___init(); /*new ReduceAction275*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable276) /*AbstractArray::add*/;
-  variable277 = NEW_parser___ReduceAction276___init(); /*new ReduceAction276*/
+  variable277 = NEW_ReduceAction276_parser___ReduceAction276___init(); /*new ReduceAction276*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable277) /*AbstractArray::add*/;
-  variable278 = NEW_parser___ReduceAction277___init(); /*new ReduceAction277*/
+  variable278 = NEW_ReduceAction277_parser___ReduceAction277___init(); /*new ReduceAction277*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable278) /*AbstractArray::add*/;
-  variable279 = NEW_parser___ReduceAction278___init(); /*new ReduceAction278*/
+  variable279 = NEW_ReduceAction278_parser___ReduceAction278___init(); /*new ReduceAction278*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable279) /*AbstractArray::add*/;
-  variable280 = NEW_parser___ReduceAction279___init(); /*new ReduceAction279*/
+  variable280 = NEW_ReduceAction279_parser___ReduceAction279___init(); /*new ReduceAction279*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable280) /*AbstractArray::add*/;
-  variable281 = NEW_parser___ReduceAction280___init(); /*new ReduceAction280*/
+  variable281 = NEW_ReduceAction280_parser___ReduceAction280___init(); /*new ReduceAction280*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable281) /*AbstractArray::add*/;
-  variable282 = NEW_parser___ReduceAction281___init(); /*new ReduceAction281*/
+  variable282 = NEW_ReduceAction281_parser___ReduceAction281___init(); /*new ReduceAction281*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable282) /*AbstractArray::add*/;
-  variable283 = NEW_parser___ReduceAction282___init(); /*new ReduceAction282*/
+  variable283 = NEW_ReduceAction282_parser___ReduceAction282___init(); /*new ReduceAction282*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable283) /*AbstractArray::add*/;
-  variable284 = NEW_parser___ReduceAction283___init(); /*new ReduceAction283*/
+  variable284 = NEW_ReduceAction283_parser___ReduceAction283___init(); /*new ReduceAction283*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable284) /*AbstractArray::add*/;
-  variable285 = NEW_parser___ReduceAction284___init(); /*new ReduceAction284*/
+  variable285 = NEW_ReduceAction284_parser___ReduceAction284___init(); /*new ReduceAction284*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable285) /*AbstractArray::add*/;
-  variable286 = NEW_parser___ReduceAction285___init(); /*new ReduceAction285*/
+  variable286 = NEW_ReduceAction285_parser___ReduceAction285___init(); /*new ReduceAction285*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable286) /*AbstractArray::add*/;
-  variable287 = NEW_parser___ReduceAction286___init(); /*new ReduceAction286*/
+  variable287 = NEW_ReduceAction286_parser___ReduceAction286___init(); /*new ReduceAction286*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable287) /*AbstractArray::add*/;
-  variable288 = NEW_parser___ReduceAction287___init(); /*new ReduceAction287*/
+  variable288 = NEW_ReduceAction287_parser___ReduceAction287___init(); /*new ReduceAction287*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable288) /*AbstractArray::add*/;
-  variable289 = NEW_parser___ReduceAction288___init(); /*new ReduceAction288*/
+  variable289 = NEW_ReduceAction288_parser___ReduceAction288___init(); /*new ReduceAction288*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable289) /*AbstractArray::add*/;
-  variable290 = NEW_parser___ReduceAction289___init(); /*new ReduceAction289*/
+  variable290 = NEW_ReduceAction289_parser___ReduceAction289___init(); /*new ReduceAction289*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable290) /*AbstractArray::add*/;
-  variable291 = NEW_parser___ReduceAction290___init(); /*new ReduceAction290*/
+  variable291 = NEW_ReduceAction290_parser___ReduceAction290___init(); /*new ReduceAction290*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable291) /*AbstractArray::add*/;
-  variable292 = NEW_parser___ReduceAction291___init(); /*new ReduceAction291*/
+  variable292 = NEW_ReduceAction291_parser___ReduceAction291___init(); /*new ReduceAction291*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable292) /*AbstractArray::add*/;
-  variable293 = NEW_parser___ReduceAction292___init(); /*new ReduceAction292*/
+  variable293 = NEW_ReduceAction292_parser___ReduceAction292___init(); /*new ReduceAction292*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable293) /*AbstractArray::add*/;
-  variable294 = NEW_parser___ReduceAction293___init(); /*new ReduceAction293*/
+  variable294 = NEW_ReduceAction293_parser___ReduceAction293___init(); /*new ReduceAction293*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable294) /*AbstractArray::add*/;
-  variable295 = NEW_parser___ReduceAction294___init(); /*new ReduceAction294*/
+  variable295 = NEW_ReduceAction294_parser___ReduceAction294___init(); /*new ReduceAction294*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable295) /*AbstractArray::add*/;
-  variable296 = NEW_parser___ReduceAction295___init(); /*new ReduceAction295*/
+  variable296 = NEW_ReduceAction295_parser___ReduceAction295___init(); /*new ReduceAction295*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable296) /*AbstractArray::add*/;
-  variable297 = NEW_parser___ReduceAction296___init(); /*new ReduceAction296*/
+  variable297 = NEW_ReduceAction296_parser___ReduceAction296___init(); /*new ReduceAction296*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable297) /*AbstractArray::add*/;
-  variable298 = NEW_parser___ReduceAction297___init(); /*new ReduceAction297*/
+  variable298 = NEW_ReduceAction297_parser___ReduceAction297___init(); /*new ReduceAction297*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable298) /*AbstractArray::add*/;
-  variable299 = NEW_parser___ReduceAction298___init(); /*new ReduceAction298*/
+  variable299 = NEW_ReduceAction298_parser___ReduceAction298___init(); /*new ReduceAction298*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable299) /*AbstractArray::add*/;
-  variable300 = NEW_parser___ReduceAction299___init(); /*new ReduceAction299*/
+  variable300 = NEW_ReduceAction299_parser___ReduceAction299___init(); /*new ReduceAction299*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable300) /*AbstractArray::add*/;
-  variable301 = NEW_parser___ReduceAction300___init(); /*new ReduceAction300*/
+  variable301 = NEW_ReduceAction300_parser___ReduceAction300___init(); /*new ReduceAction300*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable301) /*AbstractArray::add*/;
-  variable302 = NEW_parser___ReduceAction301___init(); /*new ReduceAction301*/
+  variable302 = NEW_ReduceAction301_parser___ReduceAction301___init(); /*new ReduceAction301*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable302) /*AbstractArray::add*/;
-  variable303 = NEW_parser___ReduceAction302___init(); /*new ReduceAction302*/
+  variable303 = NEW_ReduceAction302_parser___ReduceAction302___init(); /*new ReduceAction302*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable303) /*AbstractArray::add*/;
-  variable304 = NEW_parser___ReduceAction303___init(); /*new ReduceAction303*/
+  variable304 = NEW_ReduceAction303_parser___ReduceAction303___init(); /*new ReduceAction303*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable304) /*AbstractArray::add*/;
-  variable305 = NEW_parser___ReduceAction304___init(); /*new ReduceAction304*/
+  variable305 = NEW_ReduceAction304_parser___ReduceAction304___init(); /*new ReduceAction304*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable305) /*AbstractArray::add*/;
-  variable306 = NEW_parser___ReduceAction305___init(); /*new ReduceAction305*/
+  variable306 = NEW_ReduceAction305_parser___ReduceAction305___init(); /*new ReduceAction305*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable306) /*AbstractArray::add*/;
-  variable307 = NEW_parser___ReduceAction306___init(); /*new ReduceAction306*/
+  variable307 = NEW_ReduceAction306_parser___ReduceAction306___init(); /*new ReduceAction306*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable307) /*AbstractArray::add*/;
-  variable308 = NEW_parser___ReduceAction307___init(); /*new ReduceAction307*/
+  variable308 = NEW_ReduceAction307_parser___ReduceAction307___init(); /*new ReduceAction307*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable308) /*AbstractArray::add*/;
-  variable309 = NEW_parser___ReduceAction308___init(); /*new ReduceAction308*/
+  variable309 = NEW_ReduceAction308_parser___ReduceAction308___init(); /*new ReduceAction308*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable309) /*AbstractArray::add*/;
-  variable310 = NEW_parser___ReduceAction309___init(); /*new ReduceAction309*/
+  variable310 = NEW_ReduceAction309_parser___ReduceAction309___init(); /*new ReduceAction309*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable310) /*AbstractArray::add*/;
-  variable311 = NEW_parser___ReduceAction310___init(); /*new ReduceAction310*/
+  variable311 = NEW_ReduceAction310_parser___ReduceAction310___init(); /*new ReduceAction310*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable311) /*AbstractArray::add*/;
-  variable312 = NEW_parser___ReduceAction311___init(); /*new ReduceAction311*/
+  variable312 = NEW_ReduceAction311_parser___ReduceAction311___init(); /*new ReduceAction311*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable312) /*AbstractArray::add*/;
-  variable313 = NEW_parser___ReduceAction312___init(); /*new ReduceAction312*/
+  variable313 = NEW_ReduceAction312_parser___ReduceAction312___init(); /*new ReduceAction312*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable313) /*AbstractArray::add*/;
-  variable314 = NEW_parser___ReduceAction313___init(); /*new ReduceAction313*/
+  variable314 = NEW_ReduceAction313_parser___ReduceAction313___init(); /*new ReduceAction313*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable314) /*AbstractArray::add*/;
-  variable315 = NEW_parser___ReduceAction314___init(); /*new ReduceAction314*/
+  variable315 = NEW_ReduceAction314_parser___ReduceAction314___init(); /*new ReduceAction314*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable315) /*AbstractArray::add*/;
-  variable316 = NEW_parser___ReduceAction315___init(); /*new ReduceAction315*/
+  variable316 = NEW_ReduceAction315_parser___ReduceAction315___init(); /*new ReduceAction315*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable316) /*AbstractArray::add*/;
-  variable317 = NEW_parser___ReduceAction316___init(); /*new ReduceAction316*/
+  variable317 = NEW_ReduceAction316_parser___ReduceAction316___init(); /*new ReduceAction316*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable317) /*AbstractArray::add*/;
-  variable318 = NEW_parser___ReduceAction317___init(); /*new ReduceAction317*/
+  variable318 = NEW_ReduceAction317_parser___ReduceAction317___init(); /*new ReduceAction317*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable318) /*AbstractArray::add*/;
-  variable319 = NEW_parser___ReduceAction318___init(); /*new ReduceAction318*/
+  variable319 = NEW_ReduceAction318_parser___ReduceAction318___init(); /*new ReduceAction318*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable319) /*AbstractArray::add*/;
-  variable320 = NEW_parser___ReduceAction319___init(); /*new ReduceAction319*/
+  variable320 = NEW_ReduceAction319_parser___ReduceAction319___init(); /*new ReduceAction319*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable320) /*AbstractArray::add*/;
-  variable321 = NEW_parser___ReduceAction320___init(); /*new ReduceAction320*/
+  variable321 = NEW_ReduceAction320_parser___ReduceAction320___init(); /*new ReduceAction320*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable321) /*AbstractArray::add*/;
-  variable322 = NEW_parser___ReduceAction321___init(); /*new ReduceAction321*/
+  variable322 = NEW_ReduceAction321_parser___ReduceAction321___init(); /*new ReduceAction321*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable322) /*AbstractArray::add*/;
-  variable323 = NEW_parser___ReduceAction322___init(); /*new ReduceAction322*/
+  variable323 = NEW_ReduceAction322_parser___ReduceAction322___init(); /*new ReduceAction322*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable323) /*AbstractArray::add*/;
-  variable324 = NEW_parser___ReduceAction323___init(); /*new ReduceAction323*/
+  variable324 = NEW_ReduceAction323_parser___ReduceAction323___init(); /*new ReduceAction323*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable324) /*AbstractArray::add*/;
-  variable325 = NEW_parser___ReduceAction324___init(); /*new ReduceAction324*/
+  variable325 = NEW_ReduceAction324_parser___ReduceAction324___init(); /*new ReduceAction324*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable325) /*AbstractArray::add*/;
-  variable326 = NEW_parser___ReduceAction325___init(); /*new ReduceAction325*/
+  variable326 = NEW_ReduceAction325_parser___ReduceAction325___init(); /*new ReduceAction325*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable326) /*AbstractArray::add*/;
-  variable327 = NEW_parser___ReduceAction326___init(); /*new ReduceAction326*/
+  variable327 = NEW_ReduceAction326_parser___ReduceAction326___init(); /*new ReduceAction326*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable327) /*AbstractArray::add*/;
-  variable328 = NEW_parser___ReduceAction327___init(); /*new ReduceAction327*/
+  variable328 = NEW_ReduceAction327_parser___ReduceAction327___init(); /*new ReduceAction327*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable328) /*AbstractArray::add*/;
-  variable329 = NEW_parser___ReduceAction328___init(); /*new ReduceAction328*/
+  variable329 = NEW_ReduceAction328_parser___ReduceAction328___init(); /*new ReduceAction328*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable329) /*AbstractArray::add*/;
-  variable330 = NEW_parser___ReduceAction329___init(); /*new ReduceAction329*/
+  variable330 = NEW_ReduceAction329_parser___ReduceAction329___init(); /*new ReduceAction329*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable330) /*AbstractArray::add*/;
-  variable331 = NEW_parser___ReduceAction330___init(); /*new ReduceAction330*/
+  variable331 = NEW_ReduceAction330_parser___ReduceAction330___init(); /*new ReduceAction330*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable331) /*AbstractArray::add*/;
-  variable332 = NEW_parser___ReduceAction331___init(); /*new ReduceAction331*/
+  variable332 = NEW_ReduceAction331_parser___ReduceAction331___init(); /*new ReduceAction331*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable332) /*AbstractArray::add*/;
-  variable333 = NEW_parser___ReduceAction332___init(); /*new ReduceAction332*/
+  variable333 = NEW_ReduceAction332_parser___ReduceAction332___init(); /*new ReduceAction332*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable333) /*AbstractArray::add*/;
-  variable334 = NEW_parser___ReduceAction333___init(); /*new ReduceAction333*/
+  variable334 = NEW_ReduceAction333_parser___ReduceAction333___init(); /*new ReduceAction333*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable334) /*AbstractArray::add*/;
-  variable335 = NEW_parser___ReduceAction334___init(); /*new ReduceAction334*/
+  variable335 = NEW_ReduceAction334_parser___ReduceAction334___init(); /*new ReduceAction334*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable335) /*AbstractArray::add*/;
-  variable336 = NEW_parser___ReduceAction335___init(); /*new ReduceAction335*/
+  variable336 = NEW_ReduceAction335_parser___ReduceAction335___init(); /*new ReduceAction335*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable336) /*AbstractArray::add*/;
-  variable337 = NEW_parser___ReduceAction336___init(); /*new ReduceAction336*/
+  variable337 = NEW_ReduceAction336_parser___ReduceAction336___init(); /*new ReduceAction336*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable337) /*AbstractArray::add*/;
-  variable338 = NEW_parser___ReduceAction337___init(); /*new ReduceAction337*/
+  variable338 = NEW_ReduceAction337_parser___ReduceAction337___init(); /*new ReduceAction337*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable338) /*AbstractArray::add*/;
-  variable339 = NEW_parser___ReduceAction338___init(); /*new ReduceAction338*/
+  variable339 = NEW_ReduceAction338_parser___ReduceAction338___init(); /*new ReduceAction338*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable339) /*AbstractArray::add*/;
-  variable340 = NEW_parser___ReduceAction339___init(); /*new ReduceAction339*/
+  variable340 = NEW_ReduceAction339_parser___ReduceAction339___init(); /*new ReduceAction339*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable340) /*AbstractArray::add*/;
-  variable341 = NEW_parser___ReduceAction340___init(); /*new ReduceAction340*/
+  variable341 = NEW_ReduceAction340_parser___ReduceAction340___init(); /*new ReduceAction340*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable341) /*AbstractArray::add*/;
-  variable342 = NEW_parser___ReduceAction341___init(); /*new ReduceAction341*/
+  variable342 = NEW_ReduceAction341_parser___ReduceAction341___init(); /*new ReduceAction341*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable342) /*AbstractArray::add*/;
-  variable343 = NEW_parser___ReduceAction342___init(); /*new ReduceAction342*/
+  variable343 = NEW_ReduceAction342_parser___ReduceAction342___init(); /*new ReduceAction342*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable343) /*AbstractArray::add*/;
-  variable344 = NEW_parser___ReduceAction343___init(); /*new ReduceAction343*/
+  variable344 = NEW_ReduceAction343_parser___ReduceAction343___init(); /*new ReduceAction343*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable344) /*AbstractArray::add*/;
-  variable345 = NEW_parser___ReduceAction344___init(); /*new ReduceAction344*/
+  variable345 = NEW_ReduceAction344_parser___ReduceAction344___init(); /*new ReduceAction344*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable345) /*AbstractArray::add*/;
-  variable346 = NEW_parser___ReduceAction345___init(); /*new ReduceAction345*/
+  variable346 = NEW_ReduceAction345_parser___ReduceAction345___init(); /*new ReduceAction345*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable346) /*AbstractArray::add*/;
-  variable347 = NEW_parser___ReduceAction346___init(); /*new ReduceAction346*/
+  variable347 = NEW_ReduceAction346_parser___ReduceAction346___init(); /*new ReduceAction346*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable347) /*AbstractArray::add*/;
-  variable348 = NEW_parser___ReduceAction347___init(); /*new ReduceAction347*/
+  variable348 = NEW_ReduceAction347_parser___ReduceAction347___init(); /*new ReduceAction347*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable348) /*AbstractArray::add*/;
-  variable349 = NEW_parser___ReduceAction348___init(); /*new ReduceAction348*/
+  variable349 = NEW_ReduceAction348_parser___ReduceAction348___init(); /*new ReduceAction348*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable349) /*AbstractArray::add*/;
-  variable350 = NEW_parser___ReduceAction349___init(); /*new ReduceAction349*/
+  variable350 = NEW_ReduceAction349_parser___ReduceAction349___init(); /*new ReduceAction349*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable350) /*AbstractArray::add*/;
-  variable351 = NEW_parser___ReduceAction350___init(); /*new ReduceAction350*/
+  variable351 = NEW_ReduceAction350_parser___ReduceAction350___init(); /*new ReduceAction350*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable351) /*AbstractArray::add*/;
-  variable352 = NEW_parser___ReduceAction351___init(); /*new ReduceAction351*/
+  variable352 = NEW_ReduceAction351_parser___ReduceAction351___init(); /*new ReduceAction351*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable352) /*AbstractArray::add*/;
-  variable353 = NEW_parser___ReduceAction352___init(); /*new ReduceAction352*/
+  variable353 = NEW_ReduceAction352_parser___ReduceAction352___init(); /*new ReduceAction352*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable353) /*AbstractArray::add*/;
-  variable354 = NEW_parser___ReduceAction353___init(); /*new ReduceAction353*/
+  variable354 = NEW_ReduceAction353_parser___ReduceAction353___init(); /*new ReduceAction353*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable354) /*AbstractArray::add*/;
-  variable355 = NEW_parser___ReduceAction354___init(); /*new ReduceAction354*/
+  variable355 = NEW_ReduceAction354_parser___ReduceAction354___init(); /*new ReduceAction354*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable355) /*AbstractArray::add*/;
-  variable356 = NEW_parser___ReduceAction355___init(); /*new ReduceAction355*/
+  variable356 = NEW_ReduceAction355_parser___ReduceAction355___init(); /*new ReduceAction355*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable356) /*AbstractArray::add*/;
-  variable357 = NEW_parser___ReduceAction356___init(); /*new ReduceAction356*/
+  variable357 = NEW_ReduceAction356_parser___ReduceAction356___init(); /*new ReduceAction356*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable357) /*AbstractArray::add*/;
-  variable358 = NEW_parser___ReduceAction357___init(); /*new ReduceAction357*/
+  variable358 = NEW_ReduceAction357_parser___ReduceAction357___init(); /*new ReduceAction357*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable358) /*AbstractArray::add*/;
-  variable359 = NEW_parser___ReduceAction358___init(); /*new ReduceAction358*/
+  variable359 = NEW_ReduceAction358_parser___ReduceAction358___init(); /*new ReduceAction358*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable359) /*AbstractArray::add*/;
-  variable360 = NEW_parser___ReduceAction359___init(); /*new ReduceAction359*/
+  variable360 = NEW_ReduceAction359_parser___ReduceAction359___init(); /*new ReduceAction359*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable360) /*AbstractArray::add*/;
-  variable361 = NEW_parser___ReduceAction360___init(); /*new ReduceAction360*/
+  variable361 = NEW_ReduceAction360_parser___ReduceAction360___init(); /*new ReduceAction360*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable361) /*AbstractArray::add*/;
-  variable362 = NEW_parser___ReduceAction361___init(); /*new ReduceAction361*/
+  variable362 = NEW_ReduceAction361_parser___ReduceAction361___init(); /*new ReduceAction361*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable362) /*AbstractArray::add*/;
-  variable363 = NEW_parser___ReduceAction362___init(); /*new ReduceAction362*/
+  variable363 = NEW_ReduceAction362_parser___ReduceAction362___init(); /*new ReduceAction362*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable363) /*AbstractArray::add*/;
-  variable364 = NEW_parser___ReduceAction363___init(); /*new ReduceAction363*/
+  variable364 = NEW_ReduceAction363_parser___ReduceAction363___init(); /*new ReduceAction363*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable364) /*AbstractArray::add*/;
-  variable365 = NEW_parser___ReduceAction364___init(); /*new ReduceAction364*/
+  variable365 = NEW_ReduceAction364_parser___ReduceAction364___init(); /*new ReduceAction364*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable365) /*AbstractArray::add*/;
-  variable366 = NEW_parser___ReduceAction365___init(); /*new ReduceAction365*/
+  variable366 = NEW_ReduceAction365_parser___ReduceAction365___init(); /*new ReduceAction365*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable366) /*AbstractArray::add*/;
-  variable367 = NEW_parser___ReduceAction366___init(); /*new ReduceAction366*/
+  variable367 = NEW_ReduceAction366_parser___ReduceAction366___init(); /*new ReduceAction366*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable367) /*AbstractArray::add*/;
-  variable368 = NEW_parser___ReduceAction367___init(); /*new ReduceAction367*/
+  variable368 = NEW_ReduceAction367_parser___ReduceAction367___init(); /*new ReduceAction367*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable368) /*AbstractArray::add*/;
-  variable369 = NEW_parser___ReduceAction368___init(); /*new ReduceAction368*/
+  variable369 = NEW_ReduceAction368_parser___ReduceAction368___init(); /*new ReduceAction368*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable369) /*AbstractArray::add*/;
-  variable370 = NEW_parser___ReduceAction369___init(); /*new ReduceAction369*/
+  variable370 = NEW_ReduceAction369_parser___ReduceAction369___init(); /*new ReduceAction369*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable370) /*AbstractArray::add*/;
-  variable371 = NEW_parser___ReduceAction370___init(); /*new ReduceAction370*/
+  variable371 = NEW_ReduceAction370_parser___ReduceAction370___init(); /*new ReduceAction370*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable371) /*AbstractArray::add*/;
-  variable372 = NEW_parser___ReduceAction371___init(); /*new ReduceAction371*/
+  variable372 = NEW_ReduceAction371_parser___ReduceAction371___init(); /*new ReduceAction371*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable372) /*AbstractArray::add*/;
-  variable373 = NEW_parser___ReduceAction372___init(); /*new ReduceAction372*/
+  variable373 = NEW_ReduceAction372_parser___ReduceAction372___init(); /*new ReduceAction372*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable373) /*AbstractArray::add*/;
-  variable374 = NEW_parser___ReduceAction373___init(); /*new ReduceAction373*/
+  variable374 = NEW_ReduceAction373_parser___ReduceAction373___init(); /*new ReduceAction373*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable374) /*AbstractArray::add*/;
-  variable375 = NEW_parser___ReduceAction374___init(); /*new ReduceAction374*/
+  variable375 = NEW_ReduceAction374_parser___ReduceAction374___init(); /*new ReduceAction374*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable375) /*AbstractArray::add*/;
-  variable376 = NEW_parser___ReduceAction375___init(); /*new ReduceAction375*/
+  variable376 = NEW_ReduceAction375_parser___ReduceAction375___init(); /*new ReduceAction375*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable376) /*AbstractArray::add*/;
-  variable377 = NEW_parser___ReduceAction376___init(); /*new ReduceAction376*/
+  variable377 = NEW_ReduceAction376_parser___ReduceAction376___init(); /*new ReduceAction376*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable377) /*AbstractArray::add*/;
-  variable378 = NEW_parser___ReduceAction377___init(); /*new ReduceAction377*/
+  variable378 = NEW_ReduceAction377_parser___ReduceAction377___init(); /*new ReduceAction377*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable378) /*AbstractArray::add*/;
-  variable379 = NEW_parser___ReduceAction378___init(); /*new ReduceAction378*/
+  variable379 = NEW_ReduceAction378_parser___ReduceAction378___init(); /*new ReduceAction378*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable379) /*AbstractArray::add*/;
-  variable380 = NEW_parser___ReduceAction379___init(); /*new ReduceAction379*/
+  variable380 = NEW_ReduceAction379_parser___ReduceAction379___init(); /*new ReduceAction379*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable380) /*AbstractArray::add*/;
-  variable381 = NEW_parser___ReduceAction380___init(); /*new ReduceAction380*/
+  variable381 = NEW_ReduceAction380_parser___ReduceAction380___init(); /*new ReduceAction380*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable381) /*AbstractArray::add*/;
-  variable382 = NEW_parser___ReduceAction381___init(); /*new ReduceAction381*/
+  variable382 = NEW_ReduceAction381_parser___ReduceAction381___init(); /*new ReduceAction381*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable382) /*AbstractArray::add*/;
-  variable383 = NEW_parser___ReduceAction382___init(); /*new ReduceAction382*/
+  variable383 = NEW_ReduceAction382_parser___ReduceAction382___init(); /*new ReduceAction382*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable383) /*AbstractArray::add*/;
-  variable384 = NEW_parser___ReduceAction383___init(); /*new ReduceAction383*/
+  variable384 = NEW_ReduceAction383_parser___ReduceAction383___init(); /*new ReduceAction383*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable384) /*AbstractArray::add*/;
-  variable385 = NEW_parser___ReduceAction384___init(); /*new ReduceAction384*/
+  variable385 = NEW_ReduceAction384_parser___ReduceAction384___init(); /*new ReduceAction384*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable385) /*AbstractArray::add*/;
-  variable386 = NEW_parser___ReduceAction385___init(); /*new ReduceAction385*/
+  variable386 = NEW_ReduceAction385_parser___ReduceAction385___init(); /*new ReduceAction385*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable386) /*AbstractArray::add*/;
-  variable387 = NEW_parser___ReduceAction386___init(); /*new ReduceAction386*/
+  variable387 = NEW_ReduceAction386_parser___ReduceAction386___init(); /*new ReduceAction386*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable387) /*AbstractArray::add*/;
-  variable388 = NEW_parser___ReduceAction387___init(); /*new ReduceAction387*/
+  variable388 = NEW_ReduceAction387_parser___ReduceAction387___init(); /*new ReduceAction387*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable388) /*AbstractArray::add*/;
-  variable389 = NEW_parser___ReduceAction388___init(); /*new ReduceAction388*/
+  variable389 = NEW_ReduceAction388_parser___ReduceAction388___init(); /*new ReduceAction388*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable389) /*AbstractArray::add*/;
-  variable390 = NEW_parser___ReduceAction389___init(); /*new ReduceAction389*/
+  variable390 = NEW_ReduceAction389_parser___ReduceAction389___init(); /*new ReduceAction389*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable390) /*AbstractArray::add*/;
-  variable391 = NEW_parser___ReduceAction390___init(); /*new ReduceAction390*/
+  variable391 = NEW_ReduceAction390_parser___ReduceAction390___init(); /*new ReduceAction390*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable391) /*AbstractArray::add*/;
-  variable392 = NEW_parser___ReduceAction391___init(); /*new ReduceAction391*/
+  variable392 = NEW_ReduceAction391_parser___ReduceAction391___init(); /*new ReduceAction391*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable392) /*AbstractArray::add*/;
-  variable393 = NEW_parser___ReduceAction392___init(); /*new ReduceAction392*/
+  variable393 = NEW_ReduceAction392_parser___ReduceAction392___init(); /*new ReduceAction392*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable393) /*AbstractArray::add*/;
-  variable394 = NEW_parser___ReduceAction393___init(); /*new ReduceAction393*/
+  variable394 = NEW_ReduceAction393_parser___ReduceAction393___init(); /*new ReduceAction393*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable394) /*AbstractArray::add*/;
-  variable395 = NEW_parser___ReduceAction394___init(); /*new ReduceAction394*/
+  variable395 = NEW_ReduceAction394_parser___ReduceAction394___init(); /*new ReduceAction394*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable395) /*AbstractArray::add*/;
-  variable396 = NEW_parser___ReduceAction395___init(); /*new ReduceAction395*/
+  variable396 = NEW_ReduceAction395_parser___ReduceAction395___init(); /*new ReduceAction395*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable396) /*AbstractArray::add*/;
-  variable397 = NEW_parser___ReduceAction396___init(); /*new ReduceAction396*/
+  variable397 = NEW_ReduceAction396_parser___ReduceAction396___init(); /*new ReduceAction396*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable397) /*AbstractArray::add*/;
-  variable398 = NEW_parser___ReduceAction397___init(); /*new ReduceAction397*/
+  variable398 = NEW_ReduceAction397_parser___ReduceAction397___init(); /*new ReduceAction397*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable398) /*AbstractArray::add*/;
-  variable399 = NEW_parser___ReduceAction398___init(); /*new ReduceAction398*/
+  variable399 = NEW_ReduceAction398_parser___ReduceAction398___init(); /*new ReduceAction398*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable399) /*AbstractArray::add*/;
-  variable400 = NEW_parser___ReduceAction399___init(); /*new ReduceAction399*/
+  variable400 = NEW_ReduceAction399_parser___ReduceAction399___init(); /*new ReduceAction399*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable400) /*AbstractArray::add*/;
-  variable401 = NEW_parser___ReduceAction400___init(); /*new ReduceAction400*/
+  variable401 = NEW_ReduceAction400_parser___ReduceAction400___init(); /*new ReduceAction400*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable401) /*AbstractArray::add*/;
-  variable402 = NEW_parser___ReduceAction401___init(); /*new ReduceAction401*/
+  variable402 = NEW_ReduceAction401_parser___ReduceAction401___init(); /*new ReduceAction401*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable402) /*AbstractArray::add*/;
-  variable403 = NEW_parser___ReduceAction402___init(); /*new ReduceAction402*/
+  variable403 = NEW_ReduceAction402_parser___ReduceAction402___init(); /*new ReduceAction402*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable403) /*AbstractArray::add*/;
-  variable404 = NEW_parser___ReduceAction403___init(); /*new ReduceAction403*/
+  variable404 = NEW_ReduceAction403_parser___ReduceAction403___init(); /*new ReduceAction403*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable404) /*AbstractArray::add*/;
-  variable405 = NEW_parser___ReduceAction404___init(); /*new ReduceAction404*/
+  variable405 = NEW_ReduceAction404_parser___ReduceAction404___init(); /*new ReduceAction404*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable405) /*AbstractArray::add*/;
-  variable406 = NEW_parser___ReduceAction405___init(); /*new ReduceAction405*/
+  variable406 = NEW_ReduceAction405_parser___ReduceAction405___init(); /*new ReduceAction405*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable406) /*AbstractArray::add*/;
-  variable407 = NEW_parser___ReduceAction406___init(); /*new ReduceAction406*/
+  variable407 = NEW_ReduceAction406_parser___ReduceAction406___init(); /*new ReduceAction406*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable407) /*AbstractArray::add*/;
-  variable408 = NEW_parser___ReduceAction407___init(); /*new ReduceAction407*/
+  variable408 = NEW_ReduceAction407_parser___ReduceAction407___init(); /*new ReduceAction407*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable408) /*AbstractArray::add*/;
-  variable409 = NEW_parser___ReduceAction408___init(); /*new ReduceAction408*/
+  variable409 = NEW_ReduceAction408_parser___ReduceAction408___init(); /*new ReduceAction408*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable409) /*AbstractArray::add*/;
-  variable410 = NEW_parser___ReduceAction409___init(); /*new ReduceAction409*/
+  variable410 = NEW_ReduceAction409_parser___ReduceAction409___init(); /*new ReduceAction409*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable410) /*AbstractArray::add*/;
-  variable411 = NEW_parser___ReduceAction410___init(); /*new ReduceAction410*/
+  variable411 = NEW_ReduceAction410_parser___ReduceAction410___init(); /*new ReduceAction410*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable411) /*AbstractArray::add*/;
-  variable412 = NEW_parser___ReduceAction411___init(); /*new ReduceAction411*/
+  variable412 = NEW_ReduceAction411_parser___ReduceAction411___init(); /*new ReduceAction411*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable412) /*AbstractArray::add*/;
-  variable413 = NEW_parser___ReduceAction412___init(); /*new ReduceAction412*/
+  variable413 = NEW_ReduceAction412_parser___ReduceAction412___init(); /*new ReduceAction412*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable413) /*AbstractArray::add*/;
-  variable414 = NEW_parser___ReduceAction413___init(); /*new ReduceAction413*/
+  variable414 = NEW_ReduceAction413_parser___ReduceAction413___init(); /*new ReduceAction413*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable414) /*AbstractArray::add*/;
-  variable415 = NEW_parser___ReduceAction414___init(); /*new ReduceAction414*/
+  variable415 = NEW_ReduceAction414_parser___ReduceAction414___init(); /*new ReduceAction414*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable415) /*AbstractArray::add*/;
-  variable416 = NEW_parser___ReduceAction415___init(); /*new ReduceAction415*/
+  variable416 = NEW_ReduceAction415_parser___ReduceAction415___init(); /*new ReduceAction415*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable416) /*AbstractArray::add*/;
-  variable417 = NEW_parser___ReduceAction416___init(); /*new ReduceAction416*/
+  variable417 = NEW_ReduceAction416_parser___ReduceAction416___init(); /*new ReduceAction416*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable417) /*AbstractArray::add*/;
-  variable418 = NEW_parser___ReduceAction417___init(); /*new ReduceAction417*/
+  variable418 = NEW_ReduceAction417_parser___ReduceAction417___init(); /*new ReduceAction417*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable418) /*AbstractArray::add*/;
-  variable419 = NEW_parser___ReduceAction418___init(); /*new ReduceAction418*/
+  variable419 = NEW_ReduceAction418_parser___ReduceAction418___init(); /*new ReduceAction418*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable419) /*AbstractArray::add*/;
-  variable420 = NEW_parser___ReduceAction419___init(); /*new ReduceAction419*/
+  variable420 = NEW_ReduceAction419_parser___ReduceAction419___init(); /*new ReduceAction419*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable420) /*AbstractArray::add*/;
-  variable421 = NEW_parser___ReduceAction420___init(); /*new ReduceAction420*/
+  variable421 = NEW_ReduceAction420_parser___ReduceAction420___init(); /*new ReduceAction420*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable421) /*AbstractArray::add*/;
-  variable422 = NEW_parser___ReduceAction421___init(); /*new ReduceAction421*/
+  variable422 = NEW_ReduceAction421_parser___ReduceAction421___init(); /*new ReduceAction421*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable422) /*AbstractArray::add*/;
-  variable423 = NEW_parser___ReduceAction422___init(); /*new ReduceAction422*/
+  variable423 = NEW_ReduceAction422_parser___ReduceAction422___init(); /*new ReduceAction422*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable423) /*AbstractArray::add*/;
-  variable424 = NEW_parser___ReduceAction423___init(); /*new ReduceAction423*/
+  variable424 = NEW_ReduceAction423_parser___ReduceAction423___init(); /*new ReduceAction423*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable424) /*AbstractArray::add*/;
-  variable425 = NEW_parser___ReduceAction424___init(); /*new ReduceAction424*/
+  variable425 = NEW_ReduceAction424_parser___ReduceAction424___init(); /*new ReduceAction424*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable425) /*AbstractArray::add*/;
-  variable426 = NEW_parser___ReduceAction425___init(); /*new ReduceAction425*/
+  variable426 = NEW_ReduceAction425_parser___ReduceAction425___init(); /*new ReduceAction425*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable426) /*AbstractArray::add*/;
-  variable427 = NEW_parser___ReduceAction426___init(); /*new ReduceAction426*/
+  variable427 = NEW_ReduceAction426_parser___ReduceAction426___init(); /*new ReduceAction426*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable427) /*AbstractArray::add*/;
-  variable428 = NEW_parser___ReduceAction427___init(); /*new ReduceAction427*/
+  variable428 = NEW_ReduceAction427_parser___ReduceAction427___init(); /*new ReduceAction427*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable428) /*AbstractArray::add*/;
-  variable429 = NEW_parser___ReduceAction428___init(); /*new ReduceAction428*/
+  variable429 = NEW_ReduceAction428_parser___ReduceAction428___init(); /*new ReduceAction428*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable429) /*AbstractArray::add*/;
-  variable430 = NEW_parser___ReduceAction429___init(); /*new ReduceAction429*/
+  variable430 = NEW_ReduceAction429_parser___ReduceAction429___init(); /*new ReduceAction429*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable430) /*AbstractArray::add*/;
-  variable431 = NEW_parser___ReduceAction430___init(); /*new ReduceAction430*/
+  variable431 = NEW_ReduceAction430_parser___ReduceAction430___init(); /*new ReduceAction430*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable431) /*AbstractArray::add*/;
-  variable432 = NEW_parser___ReduceAction431___init(); /*new ReduceAction431*/
+  variable432 = NEW_ReduceAction431_parser___ReduceAction431___init(); /*new ReduceAction431*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable432) /*AbstractArray::add*/;
-  variable433 = NEW_parser___ReduceAction432___init(); /*new ReduceAction432*/
+  variable433 = NEW_ReduceAction432_parser___ReduceAction432___init(); /*new ReduceAction432*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable433) /*AbstractArray::add*/;
-  variable434 = NEW_parser___ReduceAction433___init(); /*new ReduceAction433*/
+  variable434 = NEW_ReduceAction433_parser___ReduceAction433___init(); /*new ReduceAction433*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable434) /*AbstractArray::add*/;
-  variable435 = NEW_parser___ReduceAction434___init(); /*new ReduceAction434*/
+  variable435 = NEW_ReduceAction434_parser___ReduceAction434___init(); /*new ReduceAction434*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable435) /*AbstractArray::add*/;
-  variable436 = NEW_parser___ReduceAction435___init(); /*new ReduceAction435*/
+  variable436 = NEW_ReduceAction435_parser___ReduceAction435___init(); /*new ReduceAction435*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable436) /*AbstractArray::add*/;
-  variable437 = NEW_parser___ReduceAction436___init(); /*new ReduceAction436*/
+  variable437 = NEW_ReduceAction436_parser___ReduceAction436___init(); /*new ReduceAction436*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable437) /*AbstractArray::add*/;
-  variable438 = NEW_parser___ReduceAction437___init(); /*new ReduceAction437*/
+  variable438 = NEW_ReduceAction437_parser___ReduceAction437___init(); /*new ReduceAction437*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable438) /*AbstractArray::add*/;
-  variable439 = NEW_parser___ReduceAction438___init(); /*new ReduceAction438*/
+  variable439 = NEW_ReduceAction438_parser___ReduceAction438___init(); /*new ReduceAction438*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable439) /*AbstractArray::add*/;
-  variable440 = NEW_parser___ReduceAction439___init(); /*new ReduceAction439*/
+  variable440 = NEW_ReduceAction439_parser___ReduceAction439___init(); /*new ReduceAction439*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable440) /*AbstractArray::add*/;
-  variable441 = NEW_parser___ReduceAction440___init(); /*new ReduceAction440*/
+  variable441 = NEW_ReduceAction440_parser___ReduceAction440___init(); /*new ReduceAction440*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable441) /*AbstractArray::add*/;
-  variable442 = NEW_parser___ReduceAction441___init(); /*new ReduceAction441*/
+  variable442 = NEW_ReduceAction441_parser___ReduceAction441___init(); /*new ReduceAction441*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable442) /*AbstractArray::add*/;
-  variable443 = NEW_parser___ReduceAction442___init(); /*new ReduceAction442*/
+  variable443 = NEW_ReduceAction442_parser___ReduceAction442___init(); /*new ReduceAction442*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable443) /*AbstractArray::add*/;
-  variable444 = NEW_parser___ReduceAction443___init(); /*new ReduceAction443*/
+  variable444 = NEW_ReduceAction443_parser___ReduceAction443___init(); /*new ReduceAction443*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable444) /*AbstractArray::add*/;
-  variable445 = NEW_parser___ReduceAction444___init(); /*new ReduceAction444*/
+  variable445 = NEW_ReduceAction444_parser___ReduceAction444___init(); /*new ReduceAction444*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable445) /*AbstractArray::add*/;
-  variable446 = NEW_parser___ReduceAction445___init(); /*new ReduceAction445*/
+  variable446 = NEW_ReduceAction445_parser___ReduceAction445___init(); /*new ReduceAction445*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable446) /*AbstractArray::add*/;
-  variable447 = NEW_parser___ReduceAction446___init(); /*new ReduceAction446*/
+  variable447 = NEW_ReduceAction446_parser___ReduceAction446___init(); /*new ReduceAction446*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable447) /*AbstractArray::add*/;
-  variable448 = NEW_parser___ReduceAction447___init(); /*new ReduceAction447*/
+  variable448 = NEW_ReduceAction447_parser___ReduceAction447___init(); /*new ReduceAction447*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable448) /*AbstractArray::add*/;
-  variable449 = NEW_parser___ReduceAction448___init(); /*new ReduceAction448*/
+  variable449 = NEW_ReduceAction448_parser___ReduceAction448___init(); /*new ReduceAction448*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable449) /*AbstractArray::add*/;
-  variable450 = NEW_parser___ReduceAction449___init(); /*new ReduceAction449*/
+  variable450 = NEW_ReduceAction449_parser___ReduceAction449___init(); /*new ReduceAction449*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable450) /*AbstractArray::add*/;
-  variable451 = NEW_parser___ReduceAction450___init(); /*new ReduceAction450*/
+  variable451 = NEW_ReduceAction450_parser___ReduceAction450___init(); /*new ReduceAction450*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable451) /*AbstractArray::add*/;
-  variable452 = NEW_parser___ReduceAction451___init(); /*new ReduceAction451*/
+  variable452 = NEW_ReduceAction451_parser___ReduceAction451___init(); /*new ReduceAction451*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable452) /*AbstractArray::add*/;
-  variable453 = NEW_parser___ReduceAction452___init(); /*new ReduceAction452*/
+  variable453 = NEW_ReduceAction452_parser___ReduceAction452___init(); /*new ReduceAction452*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable453) /*AbstractArray::add*/;
-  variable454 = NEW_parser___ReduceAction453___init(); /*new ReduceAction453*/
+  variable454 = NEW_ReduceAction453_parser___ReduceAction453___init(); /*new ReduceAction453*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable454) /*AbstractArray::add*/;
-  variable455 = NEW_parser___ReduceAction454___init(); /*new ReduceAction454*/
+  variable455 = NEW_ReduceAction454_parser___ReduceAction454___init(); /*new ReduceAction454*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable455) /*AbstractArray::add*/;
-  variable456 = NEW_parser___ReduceAction455___init(); /*new ReduceAction455*/
+  variable456 = NEW_ReduceAction455_parser___ReduceAction455___init(); /*new ReduceAction455*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable456) /*AbstractArray::add*/;
-  variable457 = NEW_parser___ReduceAction456___init(); /*new ReduceAction456*/
+  variable457 = NEW_ReduceAction456_parser___ReduceAction456___init(); /*new ReduceAction456*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable457) /*AbstractArray::add*/;
-  variable458 = NEW_parser___ReduceAction457___init(); /*new ReduceAction457*/
+  variable458 = NEW_ReduceAction457_parser___ReduceAction457___init(); /*new ReduceAction457*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable458) /*AbstractArray::add*/;
-  variable459 = NEW_parser___ReduceAction458___init(); /*new ReduceAction458*/
+  variable459 = NEW_ReduceAction458_parser___ReduceAction458___init(); /*new ReduceAction458*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable459) /*AbstractArray::add*/;
-  variable460 = NEW_parser___ReduceAction459___init(); /*new ReduceAction459*/
+  variable460 = NEW_ReduceAction459_parser___ReduceAction459___init(); /*new ReduceAction459*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable460) /*AbstractArray::add*/;
-  variable461 = NEW_parser___ReduceAction460___init(); /*new ReduceAction460*/
+  variable461 = NEW_ReduceAction460_parser___ReduceAction460___init(); /*new ReduceAction460*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable461) /*AbstractArray::add*/;
-  variable462 = NEW_parser___ReduceAction461___init(); /*new ReduceAction461*/
+  variable462 = NEW_ReduceAction461_parser___ReduceAction461___init(); /*new ReduceAction461*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable462) /*AbstractArray::add*/;
-  variable463 = NEW_parser___ReduceAction462___init(); /*new ReduceAction462*/
+  variable463 = NEW_ReduceAction462_parser___ReduceAction462___init(); /*new ReduceAction462*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable463) /*AbstractArray::add*/;
-  variable464 = NEW_parser___ReduceAction463___init(); /*new ReduceAction463*/
+  variable464 = NEW_ReduceAction463_parser___ReduceAction463___init(); /*new ReduceAction463*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable464) /*AbstractArray::add*/;
-  variable465 = NEW_parser___ReduceAction464___init(); /*new ReduceAction464*/
+  variable465 = NEW_ReduceAction464_parser___ReduceAction464___init(); /*new ReduceAction464*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable465) /*AbstractArray::add*/;
-  variable466 = NEW_parser___ReduceAction465___init(); /*new ReduceAction465*/
+  variable466 = NEW_ReduceAction465_parser___ReduceAction465___init(); /*new ReduceAction465*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable466) /*AbstractArray::add*/;
-  variable467 = NEW_parser___ReduceAction466___init(); /*new ReduceAction466*/
+  variable467 = NEW_ReduceAction466_parser___ReduceAction466___init(); /*new ReduceAction466*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable467) /*AbstractArray::add*/;
-  variable468 = NEW_parser___ReduceAction467___init(); /*new ReduceAction467*/
+  variable468 = NEW_ReduceAction467_parser___ReduceAction467___init(); /*new ReduceAction467*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable468) /*AbstractArray::add*/;
-  variable469 = NEW_parser___ReduceAction468___init(); /*new ReduceAction468*/
+  variable469 = NEW_ReduceAction468_parser___ReduceAction468___init(); /*new ReduceAction468*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable469) /*AbstractArray::add*/;
-  variable470 = NEW_parser___ReduceAction469___init(); /*new ReduceAction469*/
+  variable470 = NEW_ReduceAction469_parser___ReduceAction469___init(); /*new ReduceAction469*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable470) /*AbstractArray::add*/;
-  variable471 = NEW_parser___ReduceAction470___init(); /*new ReduceAction470*/
+  variable471 = NEW_ReduceAction470_parser___ReduceAction470___init(); /*new ReduceAction470*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable471) /*AbstractArray::add*/;
-  variable472 = NEW_parser___ReduceAction471___init(); /*new ReduceAction471*/
+  variable472 = NEW_ReduceAction471_parser___ReduceAction471___init(); /*new ReduceAction471*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable472) /*AbstractArray::add*/;
-  variable473 = NEW_parser___ReduceAction472___init(); /*new ReduceAction472*/
+  variable473 = NEW_ReduceAction472_parser___ReduceAction472___init(); /*new ReduceAction472*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable473) /*AbstractArray::add*/;
-  variable474 = NEW_parser___ReduceAction473___init(); /*new ReduceAction473*/
+  variable474 = NEW_ReduceAction473_parser___ReduceAction473___init(); /*new ReduceAction473*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable474) /*AbstractArray::add*/;
-  variable475 = NEW_parser___ReduceAction474___init(); /*new ReduceAction474*/
+  variable475 = NEW_ReduceAction474_parser___ReduceAction474___init(); /*new ReduceAction474*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable475) /*AbstractArray::add*/;
-  variable476 = NEW_parser___ReduceAction475___init(); /*new ReduceAction475*/
+  variable476 = NEW_ReduceAction475_parser___ReduceAction475___init(); /*new ReduceAction475*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable476) /*AbstractArray::add*/;
-  variable477 = NEW_parser___ReduceAction476___init(); /*new ReduceAction476*/
+  variable477 = NEW_ReduceAction476_parser___ReduceAction476___init(); /*new ReduceAction476*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable477) /*AbstractArray::add*/;
-  variable478 = NEW_parser___ReduceAction477___init(); /*new ReduceAction477*/
+  variable478 = NEW_ReduceAction477_parser___ReduceAction477___init(); /*new ReduceAction477*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable478) /*AbstractArray::add*/;
-  variable479 = NEW_parser___ReduceAction478___init(); /*new ReduceAction478*/
+  variable479 = NEW_ReduceAction478_parser___ReduceAction478___init(); /*new ReduceAction478*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable479) /*AbstractArray::add*/;
-  variable480 = NEW_parser___ReduceAction479___init(); /*new ReduceAction479*/
+  variable480 = NEW_ReduceAction479_parser___ReduceAction479___init(); /*new ReduceAction479*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable480) /*AbstractArray::add*/;
-  variable481 = NEW_parser___ReduceAction480___init(); /*new ReduceAction480*/
+  variable481 = NEW_ReduceAction480_parser___ReduceAction480___init(); /*new ReduceAction480*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable481) /*AbstractArray::add*/;
-  variable482 = NEW_parser___ReduceAction481___init(); /*new ReduceAction481*/
+  variable482 = NEW_ReduceAction481_parser___ReduceAction481___init(); /*new ReduceAction481*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable482) /*AbstractArray::add*/;
-  variable483 = NEW_parser___ReduceAction482___init(); /*new ReduceAction482*/
+  variable483 = NEW_ReduceAction482_parser___ReduceAction482___init(); /*new ReduceAction482*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable483) /*AbstractArray::add*/;
-  variable484 = NEW_parser___ReduceAction483___init(); /*new ReduceAction483*/
+  variable484 = NEW_ReduceAction483_parser___ReduceAction483___init(); /*new ReduceAction483*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable484) /*AbstractArray::add*/;
-  variable485 = NEW_parser___ReduceAction484___init(); /*new ReduceAction484*/
+  variable485 = NEW_ReduceAction484_parser___ReduceAction484___init(); /*new ReduceAction484*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable485) /*AbstractArray::add*/;
-  variable486 = NEW_parser___ReduceAction485___init(); /*new ReduceAction485*/
+  variable486 = NEW_ReduceAction485_parser___ReduceAction485___init(); /*new ReduceAction485*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable486) /*AbstractArray::add*/;
-  variable487 = NEW_parser___ReduceAction486___init(); /*new ReduceAction486*/
+  variable487 = NEW_ReduceAction486_parser___ReduceAction486___init(); /*new ReduceAction486*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable487) /*AbstractArray::add*/;
-  variable488 = NEW_parser___ReduceAction487___init(); /*new ReduceAction487*/
+  variable488 = NEW_ReduceAction487_parser___ReduceAction487___init(); /*new ReduceAction487*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable488) /*AbstractArray::add*/;
-  variable489 = NEW_parser___ReduceAction488___init(); /*new ReduceAction488*/
+  variable489 = NEW_ReduceAction488_parser___ReduceAction488___init(); /*new ReduceAction488*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable489) /*AbstractArray::add*/;
-  variable490 = NEW_parser___ReduceAction489___init(); /*new ReduceAction489*/
+  variable490 = NEW_ReduceAction489_parser___ReduceAction489___init(); /*new ReduceAction489*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable490) /*AbstractArray::add*/;
-  variable491 = NEW_parser___ReduceAction490___init(); /*new ReduceAction490*/
+  variable491 = NEW_ReduceAction490_parser___ReduceAction490___init(); /*new ReduceAction490*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable491) /*AbstractArray::add*/;
-  variable492 = NEW_parser___ReduceAction491___init(); /*new ReduceAction491*/
+  variable492 = NEW_ReduceAction491_parser___ReduceAction491___init(); /*new ReduceAction491*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable492) /*AbstractArray::add*/;
-  variable493 = NEW_parser___ReduceAction492___init(); /*new ReduceAction492*/
+  variable493 = NEW_ReduceAction492_parser___ReduceAction492___init(); /*new ReduceAction492*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable493) /*AbstractArray::add*/;
-  variable494 = NEW_parser___ReduceAction493___init(); /*new ReduceAction493*/
+  variable494 = NEW_ReduceAction493_parser___ReduceAction493___init(); /*new ReduceAction493*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable494) /*AbstractArray::add*/;
-  variable495 = NEW_parser___ReduceAction494___init(); /*new ReduceAction494*/
+  variable495 = NEW_ReduceAction494_parser___ReduceAction494___init(); /*new ReduceAction494*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable495) /*AbstractArray::add*/;
-  variable496 = NEW_parser___ReduceAction495___init(); /*new ReduceAction495*/
+  variable496 = NEW_ReduceAction495_parser___ReduceAction495___init(); /*new ReduceAction495*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable496) /*AbstractArray::add*/;
-  variable497 = NEW_parser___ReduceAction496___init(); /*new ReduceAction496*/
+  variable497 = NEW_ReduceAction496_parser___ReduceAction496___init(); /*new ReduceAction496*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable497) /*AbstractArray::add*/;
-  variable498 = NEW_parser___ReduceAction497___init(); /*new ReduceAction497*/
+  variable498 = NEW_ReduceAction497_parser___ReduceAction497___init(); /*new ReduceAction497*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable498) /*AbstractArray::add*/;
-  variable499 = NEW_parser___ReduceAction498___init(); /*new ReduceAction498*/
+  variable499 = NEW_ReduceAction498_parser___ReduceAction498___init(); /*new ReduceAction498*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable499) /*AbstractArray::add*/;
-  variable500 = NEW_parser___ReduceAction499___init(); /*new ReduceAction499*/
+  variable500 = NEW_ReduceAction499_parser___ReduceAction499___init(); /*new ReduceAction499*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable500) /*AbstractArray::add*/;
-  variable501 = NEW_parser___ReduceAction500___init(); /*new ReduceAction500*/
+  variable501 = NEW_ReduceAction500_parser___ReduceAction500___init(); /*new ReduceAction500*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable501) /*AbstractArray::add*/;
-  variable502 = NEW_parser___ReduceAction501___init(); /*new ReduceAction501*/
+  variable502 = NEW_ReduceAction501_parser___ReduceAction501___init(); /*new ReduceAction501*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable502) /*AbstractArray::add*/;
-  variable503 = NEW_parser___ReduceAction502___init(); /*new ReduceAction502*/
+  variable503 = NEW_ReduceAction502_parser___ReduceAction502___init(); /*new ReduceAction502*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable503) /*AbstractArray::add*/;
-  variable504 = NEW_parser___ReduceAction503___init(); /*new ReduceAction503*/
+  variable504 = NEW_ReduceAction503_parser___ReduceAction503___init(); /*new ReduceAction503*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable504) /*AbstractArray::add*/;
-  variable505 = NEW_parser___ReduceAction504___init(); /*new ReduceAction504*/
+  variable505 = NEW_ReduceAction504_parser___ReduceAction504___init(); /*new ReduceAction504*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable505) /*AbstractArray::add*/;
-  variable506 = NEW_parser___ReduceAction505___init(); /*new ReduceAction505*/
+  variable506 = NEW_ReduceAction505_parser___ReduceAction505___init(); /*new ReduceAction505*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable506) /*AbstractArray::add*/;
-  variable507 = NEW_parser___ReduceAction506___init(); /*new ReduceAction506*/
+  variable507 = NEW_ReduceAction506_parser___ReduceAction506___init(); /*new ReduceAction506*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable507) /*AbstractArray::add*/;
-  variable508 = NEW_parser___ReduceAction507___init(); /*new ReduceAction507*/
+  variable508 = NEW_ReduceAction507_parser___ReduceAction507___init(); /*new ReduceAction507*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable508) /*AbstractArray::add*/;
-  variable509 = NEW_parser___ReduceAction508___init(); /*new ReduceAction508*/
+  variable509 = NEW_ReduceAction508_parser___ReduceAction508___init(); /*new ReduceAction508*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable509) /*AbstractArray::add*/;
-  variable510 = NEW_parser___ReduceAction509___init(); /*new ReduceAction509*/
+  variable510 = NEW_ReduceAction509_parser___ReduceAction509___init(); /*new ReduceAction509*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable510) /*AbstractArray::add*/;
-  variable511 = NEW_parser___ReduceAction510___init(); /*new ReduceAction510*/
+  variable511 = NEW_ReduceAction510_parser___ReduceAction510___init(); /*new ReduceAction510*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable511) /*AbstractArray::add*/;
-  variable512 = NEW_parser___ReduceAction511___init(); /*new ReduceAction511*/
+  variable512 = NEW_ReduceAction511_parser___ReduceAction511___init(); /*new ReduceAction511*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable512) /*AbstractArray::add*/;
-  variable513 = NEW_parser___ReduceAction512___init(); /*new ReduceAction512*/
+  variable513 = NEW_ReduceAction512_parser___ReduceAction512___init(); /*new ReduceAction512*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable513) /*AbstractArray::add*/;
-  variable514 = NEW_parser___ReduceAction513___init(); /*new ReduceAction513*/
+  variable514 = NEW_ReduceAction513_parser___ReduceAction513___init(); /*new ReduceAction513*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable514) /*AbstractArray::add*/;
-  variable515 = NEW_parser___ReduceAction514___init(); /*new ReduceAction514*/
+  variable515 = NEW_ReduceAction514_parser___ReduceAction514___init(); /*new ReduceAction514*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable515) /*AbstractArray::add*/;
-  variable516 = NEW_parser___ReduceAction515___init(); /*new ReduceAction515*/
+  variable516 = NEW_ReduceAction515_parser___ReduceAction515___init(); /*new ReduceAction515*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable516) /*AbstractArray::add*/;
-  variable517 = NEW_parser___ReduceAction516___init(); /*new ReduceAction516*/
+  variable517 = NEW_ReduceAction516_parser___ReduceAction516___init(); /*new ReduceAction516*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable517) /*AbstractArray::add*/;
-  variable518 = NEW_parser___ReduceAction517___init(); /*new ReduceAction517*/
+  variable518 = NEW_ReduceAction517_parser___ReduceAction517___init(); /*new ReduceAction517*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable518) /*AbstractArray::add*/;
-  variable519 = NEW_parser___ReduceAction518___init(); /*new ReduceAction518*/
+  variable519 = NEW_ReduceAction518_parser___ReduceAction518___init(); /*new ReduceAction518*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable519) /*AbstractArray::add*/;
-  variable520 = NEW_parser___ReduceAction519___init(); /*new ReduceAction519*/
+  variable520 = NEW_ReduceAction519_parser___ReduceAction519___init(); /*new ReduceAction519*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable520) /*AbstractArray::add*/;
-  variable521 = NEW_parser___ReduceAction520___init(); /*new ReduceAction520*/
+  variable521 = NEW_ReduceAction520_parser___ReduceAction520___init(); /*new ReduceAction520*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable521) /*AbstractArray::add*/;
-  variable522 = NEW_parser___ReduceAction521___init(); /*new ReduceAction521*/
+  variable522 = NEW_ReduceAction521_parser___ReduceAction521___init(); /*new ReduceAction521*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable522) /*AbstractArray::add*/;
-  variable523 = NEW_parser___ReduceAction522___init(); /*new ReduceAction522*/
+  variable523 = NEW_ReduceAction522_parser___ReduceAction522___init(); /*new ReduceAction522*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable523) /*AbstractArray::add*/;
-  variable524 = NEW_parser___ReduceAction523___init(); /*new ReduceAction523*/
+  variable524 = NEW_ReduceAction523_parser___ReduceAction523___init(); /*new ReduceAction523*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable524) /*AbstractArray::add*/;
-  variable525 = NEW_parser___ReduceAction524___init(); /*new ReduceAction524*/
+  variable525 = NEW_ReduceAction524_parser___ReduceAction524___init(); /*new ReduceAction524*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable525) /*AbstractArray::add*/;
-  variable526 = NEW_parser___ReduceAction525___init(); /*new ReduceAction525*/
+  variable526 = NEW_ReduceAction525_parser___ReduceAction525___init(); /*new ReduceAction525*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable526) /*AbstractArray::add*/;
-  variable527 = NEW_parser___ReduceAction526___init(); /*new ReduceAction526*/
+  variable527 = NEW_ReduceAction526_parser___ReduceAction526___init(); /*new ReduceAction526*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable527) /*AbstractArray::add*/;
-  variable528 = NEW_parser___ReduceAction527___init(); /*new ReduceAction527*/
+  variable528 = NEW_ReduceAction527_parser___ReduceAction527___init(); /*new ReduceAction527*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable528) /*AbstractArray::add*/;
-  variable529 = NEW_parser___ReduceAction528___init(); /*new ReduceAction528*/
+  variable529 = NEW_ReduceAction528_parser___ReduceAction528___init(); /*new ReduceAction528*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable529) /*AbstractArray::add*/;
-  variable530 = NEW_parser___ReduceAction529___init(); /*new ReduceAction529*/
+  variable530 = NEW_ReduceAction529_parser___ReduceAction529___init(); /*new ReduceAction529*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable530) /*AbstractArray::add*/;
-  variable531 = NEW_parser___ReduceAction530___init(); /*new ReduceAction530*/
+  variable531 = NEW_ReduceAction530_parser___ReduceAction530___init(); /*new ReduceAction530*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable531) /*AbstractArray::add*/;
-  variable532 = NEW_parser___ReduceAction531___init(); /*new ReduceAction531*/
+  variable532 = NEW_ReduceAction531_parser___ReduceAction531___init(); /*new ReduceAction531*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable532) /*AbstractArray::add*/;
-  variable533 = NEW_parser___ReduceAction532___init(); /*new ReduceAction532*/
+  variable533 = NEW_ReduceAction532_parser___ReduceAction532___init(); /*new ReduceAction532*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable533) /*AbstractArray::add*/;
-  variable534 = NEW_parser___ReduceAction533___init(); /*new ReduceAction533*/
+  variable534 = NEW_ReduceAction533_parser___ReduceAction533___init(); /*new ReduceAction533*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable534) /*AbstractArray::add*/;
-  variable535 = NEW_parser___ReduceAction534___init(); /*new ReduceAction534*/
+  variable535 = NEW_ReduceAction534_parser___ReduceAction534___init(); /*new ReduceAction534*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable535) /*AbstractArray::add*/;
-  variable536 = NEW_parser___ReduceAction535___init(); /*new ReduceAction535*/
+  variable536 = NEW_ReduceAction535_parser___ReduceAction535___init(); /*new ReduceAction535*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable536) /*AbstractArray::add*/;
-  variable537 = NEW_parser___ReduceAction536___init(); /*new ReduceAction536*/
+  variable537 = NEW_ReduceAction536_parser___ReduceAction536___init(); /*new ReduceAction536*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable537) /*AbstractArray::add*/;
-  variable538 = NEW_parser___ReduceAction537___init(); /*new ReduceAction537*/
+  variable538 = NEW_ReduceAction537_parser___ReduceAction537___init(); /*new ReduceAction537*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable538) /*AbstractArray::add*/;
-  variable539 = NEW_parser___ReduceAction538___init(); /*new ReduceAction538*/
+  variable539 = NEW_ReduceAction538_parser___ReduceAction538___init(); /*new ReduceAction538*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable539) /*AbstractArray::add*/;
-  variable540 = NEW_parser___ReduceAction539___init(); /*new ReduceAction539*/
+  variable540 = NEW_ReduceAction539_parser___ReduceAction539___init(); /*new ReduceAction539*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable540) /*AbstractArray::add*/;
-  variable541 = NEW_parser___ReduceAction540___init(); /*new ReduceAction540*/
+  variable541 = NEW_ReduceAction540_parser___ReduceAction540___init(); /*new ReduceAction540*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable541) /*AbstractArray::add*/;
-  variable542 = NEW_parser___ReduceAction541___init(); /*new ReduceAction541*/
+  variable542 = NEW_ReduceAction541_parser___ReduceAction541___init(); /*new ReduceAction541*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable542) /*AbstractArray::add*/;
-  variable543 = NEW_parser___ReduceAction542___init(); /*new ReduceAction542*/
+  variable543 = NEW_ReduceAction542_parser___ReduceAction542___init(); /*new ReduceAction542*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable543) /*AbstractArray::add*/;
-  variable544 = NEW_parser___ReduceAction543___init(); /*new ReduceAction543*/
+  variable544 = NEW_ReduceAction543_parser___ReduceAction543___init(); /*new ReduceAction543*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable544) /*AbstractArray::add*/;
-  variable545 = NEW_parser___ReduceAction544___init(); /*new ReduceAction544*/
+  variable545 = NEW_ReduceAction544_parser___ReduceAction544___init(); /*new ReduceAction544*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable545) /*AbstractArray::add*/;
-  variable546 = NEW_parser___ReduceAction545___init(); /*new ReduceAction545*/
+  variable546 = NEW_ReduceAction545_parser___ReduceAction545___init(); /*new ReduceAction545*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable546) /*AbstractArray::add*/;
-  variable547 = NEW_parser___ReduceAction546___init(); /*new ReduceAction546*/
+  variable547 = NEW_ReduceAction546_parser___ReduceAction546___init(); /*new ReduceAction546*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable547) /*AbstractArray::add*/;
-  variable548 = NEW_parser___ReduceAction547___init(); /*new ReduceAction547*/
+  variable548 = NEW_ReduceAction547_parser___ReduceAction547___init(); /*new ReduceAction547*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable548) /*AbstractArray::add*/;
-  variable549 = NEW_parser___ReduceAction548___init(); /*new ReduceAction548*/
+  variable549 = NEW_ReduceAction548_parser___ReduceAction548___init(); /*new ReduceAction548*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable549) /*AbstractArray::add*/;
-  variable550 = NEW_parser___ReduceAction549___init(); /*new ReduceAction549*/
+  variable550 = NEW_ReduceAction549_parser___ReduceAction549___init(); /*new ReduceAction549*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable550) /*AbstractArray::add*/;
-  variable551 = NEW_parser___ReduceAction550___init(); /*new ReduceAction550*/
+  variable551 = NEW_ReduceAction550_parser___ReduceAction550___init(); /*new ReduceAction550*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable551) /*AbstractArray::add*/;
-  variable552 = NEW_parser___ReduceAction551___init(); /*new ReduceAction551*/
+  variable552 = NEW_ReduceAction551_parser___ReduceAction551___init(); /*new ReduceAction551*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable552) /*AbstractArray::add*/;
-  variable553 = NEW_parser___ReduceAction552___init(); /*new ReduceAction552*/
+  variable553 = NEW_ReduceAction552_parser___ReduceAction552___init(); /*new ReduceAction552*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable553) /*AbstractArray::add*/;
-  variable554 = NEW_parser___ReduceAction553___init(); /*new ReduceAction553*/
+  variable554 = NEW_ReduceAction553_parser___ReduceAction553___init(); /*new ReduceAction553*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable554) /*AbstractArray::add*/;
-  variable555 = NEW_parser___ReduceAction554___init(); /*new ReduceAction554*/
+  variable555 = NEW_ReduceAction554_parser___ReduceAction554___init(); /*new ReduceAction554*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable555) /*AbstractArray::add*/;
-  variable556 = NEW_parser___ReduceAction555___init(); /*new ReduceAction555*/
+  variable556 = NEW_ReduceAction555_parser___ReduceAction555___init(); /*new ReduceAction555*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable556) /*AbstractArray::add*/;
-  variable557 = NEW_parser___ReduceAction556___init(); /*new ReduceAction556*/
+  variable557 = NEW_ReduceAction556_parser___ReduceAction556___init(); /*new ReduceAction556*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable557) /*AbstractArray::add*/;
-  variable558 = NEW_parser___ReduceAction557___init(); /*new ReduceAction557*/
+  variable558 = NEW_ReduceAction557_parser___ReduceAction557___init(); /*new ReduceAction557*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable558) /*AbstractArray::add*/;
-  variable559 = NEW_parser___ReduceAction558___init(); /*new ReduceAction558*/
+  variable559 = NEW_ReduceAction558_parser___ReduceAction558___init(); /*new ReduceAction558*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable559) /*AbstractArray::add*/;
-  variable560 = NEW_parser___ReduceAction559___init(); /*new ReduceAction559*/
+  variable560 = NEW_ReduceAction559_parser___ReduceAction559___init(); /*new ReduceAction559*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable560) /*AbstractArray::add*/;
-  variable561 = NEW_parser___ReduceAction560___init(); /*new ReduceAction560*/
+  variable561 = NEW_ReduceAction560_parser___ReduceAction560___init(); /*new ReduceAction560*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable561) /*AbstractArray::add*/;
-  variable562 = NEW_parser___ReduceAction561___init(); /*new ReduceAction561*/
+  variable562 = NEW_ReduceAction561_parser___ReduceAction561___init(); /*new ReduceAction561*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable562) /*AbstractArray::add*/;
-  variable563 = NEW_parser___ReduceAction562___init(); /*new ReduceAction562*/
+  variable563 = NEW_ReduceAction562_parser___ReduceAction562___init(); /*new ReduceAction562*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable563) /*AbstractArray::add*/;
-  variable564 = NEW_parser___ReduceAction563___init(); /*new ReduceAction563*/
+  variable564 = NEW_ReduceAction563_parser___ReduceAction563___init(); /*new ReduceAction563*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable564) /*AbstractArray::add*/;
-  variable565 = NEW_parser___ReduceAction564___init(); /*new ReduceAction564*/
+  variable565 = NEW_ReduceAction564_parser___ReduceAction564___init(); /*new ReduceAction564*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable565) /*AbstractArray::add*/;
-  variable566 = NEW_parser___ReduceAction565___init(); /*new ReduceAction565*/
+  variable566 = NEW_ReduceAction565_parser___ReduceAction565___init(); /*new ReduceAction565*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable566) /*AbstractArray::add*/;
-  variable567 = NEW_parser___ReduceAction566___init(); /*new ReduceAction566*/
+  variable567 = NEW_ReduceAction566_parser___ReduceAction566___init(); /*new ReduceAction566*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable567) /*AbstractArray::add*/;
-  variable568 = NEW_parser___ReduceAction567___init(); /*new ReduceAction567*/
+  variable568 = NEW_ReduceAction567_parser___ReduceAction567___init(); /*new ReduceAction567*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable568) /*AbstractArray::add*/;
-  variable569 = NEW_parser___ReduceAction568___init(); /*new ReduceAction568*/
+  variable569 = NEW_ReduceAction568_parser___ReduceAction568___init(); /*new ReduceAction568*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable569) /*AbstractArray::add*/;
-  variable570 = NEW_parser___ReduceAction569___init(); /*new ReduceAction569*/
+  variable570 = NEW_ReduceAction569_parser___ReduceAction569___init(); /*new ReduceAction569*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable570) /*AbstractArray::add*/;
-  variable571 = NEW_parser___ReduceAction570___init(); /*new ReduceAction570*/
+  variable571 = NEW_ReduceAction570_parser___ReduceAction570___init(); /*new ReduceAction570*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable571) /*AbstractArray::add*/;
-  variable572 = NEW_parser___ReduceAction571___init(); /*new ReduceAction571*/
+  variable572 = NEW_ReduceAction571_parser___ReduceAction571___init(); /*new ReduceAction571*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable572) /*AbstractArray::add*/;
-  variable573 = NEW_parser___ReduceAction572___init(); /*new ReduceAction572*/
+  variable573 = NEW_ReduceAction572_parser___ReduceAction572___init(); /*new ReduceAction572*/
   ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable573) /*AbstractArray::add*/;
-  variable1 = NEW_array___Array___with(variable0); /*new Array[E]*/
+  variable1 = NEW_Array_array___Array___with(variable0); /*new Array[ReduceAction]*/
   variable0 = variable1;
   ATTR_parser___Parser____reduce_table( self) /*Parser::_reduce_table*/ = variable0;
   tracehead = trace.prev;
@@ -2374,7 +2374,7 @@ void parser___SearchTokensVisitor___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_parser;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_SearchTokensVisitor].i]) return;
-  variable0 = NEW_array___Array___init(); /*new Array[E]*/
+  variable0 = NEW_Array_array___Array___init(); /*new Array[Prod]*/
   ATTR_parser___SearchTokensVisitor____untokenned_nodes( self) /*SearchTokensVisitor::_untokenned_nodes*/ = variable0;
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_SearchTokensVisitor].i] = 1;
   tracehead = trace.prev;
@@ -2390,6 +2390,13 @@ void parser___ReduceAction___action(val_t  self, val_t  param0) {
   tracehead = trace.prev;
   return;
 }
+void parser___ReduceAction___init(val_t  self, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 0, LOCATE_parser___ReduceAction___init};
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_parser;
+  tracehead = trace.prev;
+  return;
+}
 void parser___ReduceAction0___action(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 773, LOCATE_parser___ReduceAction0___action};
   val_t variable0;
@@ -2402,11 +2409,11 @@ void parser___ReduceAction0___action(val_t  self, val_t  param0) {
   trace.file = LOCATE_parser;
   variable0 =  param0;
   variable1 =  NIT_NULL /*null*/;
-  variable3 = NEW_array___Array___init(); /*new Array[E]*/
+  variable3 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
-  variable5 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable2 /*listnode3*/,  variable3 /*listnode4*/); /*new AModule*/
+  variable5 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable2 /*listnode3*/,  variable3 /*listnode4*/); /*new AModule*/
   variable4 = variable5;
   variable1 =  variable4 /*pmodulenode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -2439,14 +2446,14 @@ void parser___ReduceAction1___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable2 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable5 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
   if (!UNTAG_Bool(variable6)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction1___action, LOCATE_parser, 797); nit_exit(1);}
-  variable7 = NEW_parser_prod___AModule___init_amodule( variable5 /*ppackagedeclnode2*/,  variable3 /*listnode3*/,  variable4 /*listnode4*/); /*new AModule*/
+  variable7 = NEW_AModule_parser_prod___AModule___init_amodule( variable5 /*ppackagedeclnode2*/,  variable3 /*listnode3*/,  variable4 /*listnode4*/); /*new AModule*/
   variable6 = variable7;
   variable1 =  variable6 /*pmodulenode1*/ /*node_list=*/;
   variable7 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -2479,9 +2486,9 @@ void parser___ReduceAction2___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable2 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*listnode3*/==NIT_NULL) || VAL_ISA( variable5 /*listnode3*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -2495,7 +2502,7 @@ void parser___ReduceAction2___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable3 /*listnode4*/,COLOR_abstract_collection___IndexedCollection___append))( variable3 /*listnode4*/,  variable5 /*listnode3*/) /*IndexedCollection::append*/;
     }
   }
-  variable7 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable3 /*listnode4*/,  variable4 /*listnode5*/); /*new AModule*/
+  variable7 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable3 /*listnode4*/,  variable4 /*listnode5*/); /*new AModule*/
   variable6 = variable7;
   variable1 =  variable6 /*pmodulenode1*/ /*node_list=*/;
   variable7 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -2532,9 +2539,9 @@ void parser___ReduceAction3___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
   variable6 =  variable3 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable6 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
@@ -2551,7 +2558,7 @@ void parser___ReduceAction3___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode4*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode4*/,  variable7 /*listnode3*/) /*IndexedCollection::append*/;
     }
   }
-  variable9 = NEW_parser_prod___AModule___init_amodule( variable6 /*ppackagedeclnode2*/,  variable4 /*listnode4*/,  variable5 /*listnode5*/); /*new AModule*/
+  variable9 = NEW_AModule_parser_prod___AModule___init_amodule( variable6 /*ppackagedeclnode2*/,  variable4 /*listnode4*/,  variable5 /*listnode5*/); /*new AModule*/
   variable8 = variable9;
   variable1 =  variable8 /*pmodulenode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -2584,9 +2591,9 @@ void parser___ReduceAction4___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable2 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*listnode4*/==NIT_NULL) || VAL_ISA( variable5 /*listnode4*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -2600,7 +2607,7 @@ void parser___ReduceAction4___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode5*/,  variable5 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable7 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable3 /*listnode3*/,  variable4 /*listnode5*/); /*new AModule*/
+  variable7 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable3 /*listnode3*/,  variable4 /*listnode5*/); /*new AModule*/
   variable6 = variable7;
   variable1 =  variable6 /*pmodulenode1*/ /*node_list=*/;
   variable7 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -2637,9 +2644,9 @@ void parser___ReduceAction5___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
   variable6 =  variable3 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable6 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
@@ -2656,7 +2663,7 @@ void parser___ReduceAction5___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable5 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable5 /*listnode5*/,  variable7 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable9 = NEW_parser_prod___AModule___init_amodule( variable6 /*ppackagedeclnode2*/,  variable4 /*listnode3*/,  variable5 /*listnode5*/); /*new AModule*/
+  variable9 = NEW_AModule_parser_prod___AModule___init_amodule( variable6 /*ppackagedeclnode2*/,  variable4 /*listnode3*/,  variable5 /*listnode5*/); /*new AModule*/
   variable8 = variable9;
   variable1 =  variable8 /*pmodulenode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -2693,9 +2700,9 @@ void parser___ReduceAction6___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
   variable6 =  variable3 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*listnode3*/==NIT_NULL) || VAL_ISA( variable6 /*listnode3*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -2721,7 +2728,7 @@ void parser___ReduceAction6___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable5 /*listnode6*/,COLOR_abstract_collection___IndexedCollection___append))( variable5 /*listnode6*/,  variable7 /*listnode5*/) /*IndexedCollection::append*/;
     }
   }
-  variable9 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable4 /*listnode4*/,  variable5 /*listnode6*/); /*new AModule*/
+  variable9 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable4 /*listnode4*/,  variable5 /*listnode6*/); /*new AModule*/
   variable8 = variable9;
   variable1 =  variable8 /*pmodulenode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -2762,9 +2769,9 @@ void parser___ReduceAction7___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
   variable7 =  variable4 /*nodearraylist1*/;
   variable8 = TAG_Bool(( variable7 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable7 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
@@ -2793,7 +2800,7 @@ void parser___ReduceAction7___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable6 /*listnode6*/,COLOR_abstract_collection___IndexedCollection___append))( variable6 /*listnode6*/,  variable9 /*listnode5*/) /*IndexedCollection::append*/;
     }
   }
-  variable11 = NEW_parser_prod___AModule___init_amodule( variable7 /*ppackagedeclnode2*/,  variable5 /*listnode4*/,  variable6 /*listnode6*/); /*new AModule*/
+  variable11 = NEW_AModule_parser_prod___AModule___init_amodule( variable7 /*ppackagedeclnode2*/,  variable5 /*listnode4*/,  variable6 /*listnode6*/); /*new AModule*/
   variable10 = variable11;
   variable1 =  variable10 /*pmodulenode1*/ /*node_list=*/;
   variable11 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -2831,11 +2838,11 @@ void parser___ReduceAction8___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
   variable7 =  variable3 /*nodearraylist1*/;
   variable8 = TAG_Bool(( variable7 /*ppropdefnode5*/==NIT_NULL) || VAL_ISA( variable7 /*ppropdefnode5*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -2844,13 +2851,13 @@ void parser___ReduceAction8___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable8)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable6 /*listnode6*/,COLOR_abstract_collection___SimpleCollection___add))( variable6 /*listnode6*/,  variable7 /*ppropdefnode5*/) /*AbstractArray::add*/;
   }
-  variable9 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable6 /*listnode6*/); /*new ATopClassdef*/
+  variable9 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable6 /*listnode6*/); /*new ATopClassdef*/
   variable8 = variable9;
   variable9 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable8 /*pclassdefnode4*/ ==  NIT_NULL /*null*/) || (( variable8 /*pclassdefnode4*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable8 /*pclassdefnode4*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable8 /*pclassdefnode4*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable8 /*pclassdefnode4*/,COLOR_kernel___Object_____eqeq))( variable8 /*pclassdefnode4*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable9)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable5 /*listnode7*/,COLOR_abstract_collection___SimpleCollection___add))( variable5 /*listnode7*/,  variable8 /*pclassdefnode4*/) /*AbstractArray::add*/;
   }
-  variable10 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable4 /*listnode3*/,  variable5 /*listnode7*/); /*new AModule*/
+  variable10 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable4 /*listnode3*/,  variable5 /*listnode7*/); /*new AModule*/
   variable9 = variable10;
   variable1 =  variable9 /*pmodulenode1*/ /*node_list=*/;
   variable10 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -2892,11 +2899,11 @@ void parser___ReduceAction9___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable4 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*ppropdefnode5*/==NIT_NULL) || VAL_ISA( variable8 /*ppropdefnode5*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -2917,13 +2924,13 @@ void parser___ReduceAction9___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable7 /*listnode7*/,COLOR_abstract_collection___IndexedCollection___append))( variable7 /*listnode7*/,  variable9 /*listnode6*/) /*IndexedCollection::append*/;
     }
   }
-  variable11 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable7 /*listnode7*/); /*new ATopClassdef*/
+  variable11 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable7 /*listnode7*/); /*new ATopClassdef*/
   variable10 = variable11;
   variable11 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable10 /*pclassdefnode4*/ ==  NIT_NULL /*null*/) || (( variable10 /*pclassdefnode4*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable10 /*pclassdefnode4*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable10 /*pclassdefnode4*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable10 /*pclassdefnode4*/,COLOR_kernel___Object_____eqeq))( variable10 /*pclassdefnode4*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable11)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable6 /*listnode8*/,COLOR_abstract_collection___SimpleCollection___add))( variable6 /*listnode8*/,  variable10 /*pclassdefnode4*/) /*AbstractArray::add*/;
   }
-  variable12 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable5 /*listnode3*/,  variable6 /*listnode8*/); /*new AModule*/
+  variable12 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable5 /*listnode3*/,  variable6 /*listnode8*/); /*new AModule*/
   variable11 = variable12;
   variable1 =  variable11 /*pmodulenode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -2965,14 +2972,14 @@ void parser___ReduceAction10___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
   variable7 =  variable4 /*nodearraylist1*/;
   variable8 = TAG_Bool(( variable7 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable7 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction10___action, LOCATE_parser, 1082); nit_exit(1);}
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable3 /*nodearraylist2*/;
   variable10 = TAG_Bool(( variable9 /*ppropdefnode5*/==NIT_NULL) || VAL_ISA( variable9 /*ppropdefnode5*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -2981,13 +2988,13 @@ void parser___ReduceAction10___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable10)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable8 /*listnode6*/,COLOR_abstract_collection___SimpleCollection___add))( variable8 /*listnode6*/,  variable9 /*ppropdefnode5*/) /*AbstractArray::add*/;
   }
-  variable11 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable8 /*listnode6*/); /*new ATopClassdef*/
+  variable11 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable8 /*listnode6*/); /*new ATopClassdef*/
   variable10 = variable11;
   variable11 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable10 /*pclassdefnode4*/ ==  NIT_NULL /*null*/) || (( variable10 /*pclassdefnode4*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable10 /*pclassdefnode4*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable10 /*pclassdefnode4*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable10 /*pclassdefnode4*/,COLOR_kernel___Object_____eqeq))( variable10 /*pclassdefnode4*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable11)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable6 /*listnode7*/,COLOR_abstract_collection___SimpleCollection___add))( variable6 /*listnode7*/,  variable10 /*pclassdefnode4*/) /*AbstractArray::add*/;
   }
-  variable12 = NEW_parser_prod___AModule___init_amodule( variable7 /*ppackagedeclnode2*/,  variable5 /*listnode3*/,  variable6 /*listnode7*/); /*new AModule*/
+  variable12 = NEW_AModule_parser_prod___AModule___init_amodule( variable7 /*ppackagedeclnode2*/,  variable5 /*listnode3*/,  variable6 /*listnode7*/); /*new AModule*/
   variable11 = variable12;
   variable1 =  variable11 /*pmodulenode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -3033,14 +3040,14 @@ void parser___ReduceAction11___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable5 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable8 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
   if (!UNTAG_Bool(variable9)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction11___action, LOCATE_parser, 1117); nit_exit(1);}
-  variable10 = NEW_array___Array___init(); /*new Array[E]*/
+  variable10 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable9 = variable10;
   variable10 =  variable4 /*nodearraylist2*/;
   variable11 = TAG_Bool(( variable10 /*ppropdefnode5*/==NIT_NULL) || VAL_ISA( variable10 /*ppropdefnode5*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -3061,13 +3068,13 @@ void parser___ReduceAction11___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable9 /*listnode7*/,COLOR_abstract_collection___IndexedCollection___append))( variable9 /*listnode7*/,  variable11 /*listnode6*/) /*IndexedCollection::append*/;
     }
   }
-  variable13 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable9 /*listnode7*/); /*new ATopClassdef*/
+  variable13 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable9 /*listnode7*/); /*new ATopClassdef*/
   variable12 = variable13;
   variable13 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable12 /*pclassdefnode4*/ ==  NIT_NULL /*null*/) || (( variable12 /*pclassdefnode4*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable12 /*pclassdefnode4*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable12 /*pclassdefnode4*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable12 /*pclassdefnode4*/,COLOR_kernel___Object_____eqeq))( variable12 /*pclassdefnode4*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable13)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable7 /*listnode8*/,COLOR_abstract_collection___SimpleCollection___add))( variable7 /*listnode8*/,  variable12 /*pclassdefnode4*/) /*AbstractArray::add*/;
   }
-  variable14 = NEW_parser_prod___AModule___init_amodule( variable8 /*ppackagedeclnode2*/,  variable6 /*listnode3*/,  variable7 /*listnode8*/); /*new AModule*/
+  variable14 = NEW_AModule_parser_prod___AModule___init_amodule( variable8 /*ppackagedeclnode2*/,  variable6 /*listnode3*/,  variable7 /*listnode8*/); /*new AModule*/
   variable13 = variable14;
   variable1 =  variable13 /*pmodulenode1*/ /*node_list=*/;
   variable14 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -3109,9 +3116,9 @@ void parser___ReduceAction12___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
   variable7 =  variable4 /*nodearraylist1*/;
   variable8 = TAG_Bool(( variable7 /*listnode3*/==NIT_NULL) || VAL_ISA( variable7 /*listnode3*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -3125,7 +3132,7 @@ void parser___ReduceAction12___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable5 /*listnode4*/,COLOR_abstract_collection___IndexedCollection___append))( variable5 /*listnode4*/,  variable7 /*listnode3*/) /*IndexedCollection::append*/;
     }
   }
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable3 /*nodearraylist2*/;
   variable10 = TAG_Bool(( variable9 /*ppropdefnode6*/==NIT_NULL) || VAL_ISA( variable9 /*ppropdefnode6*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -3134,13 +3141,13 @@ void parser___ReduceAction12___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable10)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable8 /*listnode7*/,COLOR_abstract_collection___SimpleCollection___add))( variable8 /*listnode7*/,  variable9 /*ppropdefnode6*/) /*AbstractArray::add*/;
   }
-  variable11 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable8 /*listnode7*/); /*new ATopClassdef*/
+  variable11 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable8 /*listnode7*/); /*new ATopClassdef*/
   variable10 = variable11;
   variable11 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable10 /*pclassdefnode5*/ ==  NIT_NULL /*null*/) || (( variable10 /*pclassdefnode5*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable10 /*pclassdefnode5*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable10 /*pclassdefnode5*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable10 /*pclassdefnode5*/,COLOR_kernel___Object_____eqeq))( variable10 /*pclassdefnode5*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable11)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable6 /*listnode8*/,COLOR_abstract_collection___SimpleCollection___add))( variable6 /*listnode8*/,  variable10 /*pclassdefnode5*/) /*AbstractArray::add*/;
   }
-  variable12 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable5 /*listnode4*/,  variable6 /*listnode8*/); /*new AModule*/
+  variable12 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable5 /*listnode4*/,  variable6 /*listnode8*/); /*new AModule*/
   variable11 = variable12;
   variable1 =  variable11 /*pmodulenode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -3186,9 +3193,9 @@ void parser___ReduceAction13___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable5 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*listnode3*/==NIT_NULL) || VAL_ISA( variable8 /*listnode3*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -3202,7 +3209,7 @@ void parser___ReduceAction13___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable6 /*listnode4*/,COLOR_abstract_collection___IndexedCollection___append))( variable6 /*listnode4*/,  variable8 /*listnode3*/) /*IndexedCollection::append*/;
     }
   }
-  variable10 = NEW_array___Array___init(); /*new Array[E]*/
+  variable10 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable9 = variable10;
   variable10 =  variable4 /*nodearraylist2*/;
   variable11 = TAG_Bool(( variable10 /*ppropdefnode6*/==NIT_NULL) || VAL_ISA( variable10 /*ppropdefnode6*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -3223,13 +3230,13 @@ void parser___ReduceAction13___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable9 /*listnode8*/,COLOR_abstract_collection___IndexedCollection___append))( variable9 /*listnode8*/,  variable11 /*listnode7*/) /*IndexedCollection::append*/;
     }
   }
-  variable13 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable9 /*listnode8*/); /*new ATopClassdef*/
+  variable13 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable9 /*listnode8*/); /*new ATopClassdef*/
   variable12 = variable13;
   variable13 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable12 /*pclassdefnode5*/ ==  NIT_NULL /*null*/) || (( variable12 /*pclassdefnode5*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable12 /*pclassdefnode5*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable12 /*pclassdefnode5*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable12 /*pclassdefnode5*/,COLOR_kernel___Object_____eqeq))( variable12 /*pclassdefnode5*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable13)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable7 /*listnode9*/,COLOR_abstract_collection___SimpleCollection___add))( variable7 /*listnode9*/,  variable12 /*pclassdefnode5*/) /*AbstractArray::add*/;
   }
-  variable14 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable6 /*listnode4*/,  variable7 /*listnode9*/); /*new AModule*/
+  variable14 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable6 /*listnode4*/,  variable7 /*listnode9*/); /*new AModule*/
   variable13 = variable14;
   variable1 =  variable13 /*pmodulenode1*/ /*node_list=*/;
   variable14 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -3275,9 +3282,9 @@ void parser___ReduceAction14___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable5 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable8 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
@@ -3294,7 +3301,7 @@ void parser___ReduceAction14___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable6 /*listnode4*/,COLOR_abstract_collection___IndexedCollection___append))( variable6 /*listnode4*/,  variable9 /*listnode3*/) /*IndexedCollection::append*/;
     }
   }
-  variable11 = NEW_array___Array___init(); /*new Array[E]*/
+  variable11 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable10 = variable11;
   variable11 =  variable3 /*nodearraylist3*/;
   variable12 = TAG_Bool(( variable11 /*ppropdefnode6*/==NIT_NULL) || VAL_ISA( variable11 /*ppropdefnode6*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -3303,13 +3310,13 @@ void parser___ReduceAction14___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable12)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable10 /*listnode7*/,COLOR_abstract_collection___SimpleCollection___add))( variable10 /*listnode7*/,  variable11 /*ppropdefnode6*/) /*AbstractArray::add*/;
   }
-  variable13 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable10 /*listnode7*/); /*new ATopClassdef*/
+  variable13 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable10 /*listnode7*/); /*new ATopClassdef*/
   variable12 = variable13;
   variable13 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable12 /*pclassdefnode5*/ ==  NIT_NULL /*null*/) || (( variable12 /*pclassdefnode5*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable12 /*pclassdefnode5*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable12 /*pclassdefnode5*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable12 /*pclassdefnode5*/,COLOR_kernel___Object_____eqeq))( variable12 /*pclassdefnode5*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable13)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable7 /*listnode8*/,COLOR_abstract_collection___SimpleCollection___add))( variable7 /*listnode8*/,  variable12 /*pclassdefnode5*/) /*AbstractArray::add*/;
   }
-  variable14 = NEW_parser_prod___AModule___init_amodule( variable8 /*ppackagedeclnode2*/,  variable6 /*listnode4*/,  variable7 /*listnode8*/); /*new AModule*/
+  variable14 = NEW_AModule_parser_prod___AModule___init_amodule( variable8 /*ppackagedeclnode2*/,  variable6 /*listnode4*/,  variable7 /*listnode8*/); /*new AModule*/
   variable13 = variable14;
   variable1 =  variable13 /*pmodulenode1*/ /*node_list=*/;
   variable14 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -3359,9 +3366,9 @@ void parser___ReduceAction15___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable6 /*nodearraylist1*/;
   variable10 = TAG_Bool(( variable9 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable9 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
@@ -3378,7 +3385,7 @@ void parser___ReduceAction15___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable7 /*listnode4*/,COLOR_abstract_collection___IndexedCollection___append))( variable7 /*listnode4*/,  variable10 /*listnode3*/) /*IndexedCollection::append*/;
     }
   }
-  variable12 = NEW_array___Array___init(); /*new Array[E]*/
+  variable12 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable11 = variable12;
   variable12 =  variable4 /*nodearraylist3*/;
   variable13 = TAG_Bool(( variable12 /*ppropdefnode6*/==NIT_NULL) || VAL_ISA( variable12 /*ppropdefnode6*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -3399,13 +3406,13 @@ void parser___ReduceAction15___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable11 /*listnode8*/,COLOR_abstract_collection___IndexedCollection___append))( variable11 /*listnode8*/,  variable13 /*listnode7*/) /*IndexedCollection::append*/;
     }
   }
-  variable15 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable11 /*listnode8*/); /*new ATopClassdef*/
+  variable15 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable11 /*listnode8*/); /*new ATopClassdef*/
   variable14 = variable15;
   variable15 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable14 /*pclassdefnode5*/ ==  NIT_NULL /*null*/) || (( variable14 /*pclassdefnode5*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable14 /*pclassdefnode5*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable14 /*pclassdefnode5*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable14 /*pclassdefnode5*/,COLOR_kernel___Object_____eqeq))( variable14 /*pclassdefnode5*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable15)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable8 /*listnode9*/,COLOR_abstract_collection___SimpleCollection___add))( variable8 /*listnode9*/,  variable14 /*pclassdefnode5*/) /*AbstractArray::add*/;
   }
-  variable16 = NEW_parser_prod___AModule___init_amodule( variable9 /*ppackagedeclnode2*/,  variable7 /*listnode4*/,  variable8 /*listnode9*/); /*new AModule*/
+  variable16 = NEW_AModule_parser_prod___AModule___init_amodule( variable9 /*ppackagedeclnode2*/,  variable7 /*listnode4*/,  variable8 /*listnode9*/); /*new AModule*/
   variable15 = variable16;
   variable1 =  variable15 /*pmodulenode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -3447,14 +3454,14 @@ void parser___ReduceAction16___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
   variable7 =  variable4 /*nodearraylist1*/;
   variable8 = TAG_Bool(( variable7 /*listnode4*/==NIT_NULL) || VAL_ISA( variable7 /*listnode4*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction16___action, LOCATE_parser, 1350); nit_exit(1);}
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable3 /*nodearraylist2*/;
   variable10 = TAG_Bool(( variable9 /*ppropdefnode6*/==NIT_NULL) || VAL_ISA( variable9 /*ppropdefnode6*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -3463,7 +3470,7 @@ void parser___ReduceAction16___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable10)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable8 /*listnode7*/,COLOR_abstract_collection___SimpleCollection___add))( variable8 /*listnode7*/,  variable9 /*ppropdefnode6*/) /*AbstractArray::add*/;
   }
-  variable11 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable8 /*listnode7*/); /*new ATopClassdef*/
+  variable11 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable8 /*listnode7*/); /*new ATopClassdef*/
   variable10 = variable11;
   variable11 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable7 /*listnode4*/ ==  NIT_NULL /*null*/) || (( variable7 /*listnode4*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable7 /*listnode4*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable7 /*listnode4*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable7 /*listnode4*/,COLOR_kernel___Object_____eqeq))( variable7 /*listnode4*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable11)) { /*if*/
@@ -3478,7 +3485,7 @@ void parser___ReduceAction16___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable11)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable6 /*listnode8*/,COLOR_abstract_collection___SimpleCollection___add))( variable6 /*listnode8*/,  variable10 /*pclassdefnode5*/) /*AbstractArray::add*/;
   }
-  variable12 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable5 /*listnode3*/,  variable6 /*listnode8*/); /*new AModule*/
+  variable12 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable5 /*listnode3*/,  variable6 /*listnode8*/); /*new AModule*/
   variable11 = variable12;
   variable1 =  variable11 /*pmodulenode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -3524,14 +3531,14 @@ void parser___ReduceAction17___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable5 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*listnode4*/==NIT_NULL) || VAL_ISA( variable8 /*listnode4*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
   if (!UNTAG_Bool(variable9)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction17___action, LOCATE_parser, 1392); nit_exit(1);}
-  variable10 = NEW_array___Array___init(); /*new Array[E]*/
+  variable10 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable9 = variable10;
   variable10 =  variable4 /*nodearraylist2*/;
   variable11 = TAG_Bool(( variable10 /*ppropdefnode6*/==NIT_NULL) || VAL_ISA( variable10 /*ppropdefnode6*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -3552,7 +3559,7 @@ void parser___ReduceAction17___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable9 /*listnode8*/,COLOR_abstract_collection___IndexedCollection___append))( variable9 /*listnode8*/,  variable11 /*listnode7*/) /*IndexedCollection::append*/;
     }
   }
-  variable13 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable9 /*listnode8*/); /*new ATopClassdef*/
+  variable13 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable9 /*listnode8*/); /*new ATopClassdef*/
   variable12 = variable13;
   variable13 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable8 /*listnode4*/ ==  NIT_NULL /*null*/) || (( variable8 /*listnode4*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable8 /*listnode4*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable8 /*listnode4*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable8 /*listnode4*/,COLOR_kernel___Object_____eqeq))( variable8 /*listnode4*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable13)) { /*if*/
@@ -3567,7 +3574,7 @@ void parser___ReduceAction17___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable13)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable7 /*listnode9*/,COLOR_abstract_collection___SimpleCollection___add))( variable7 /*listnode9*/,  variable12 /*pclassdefnode5*/) /*AbstractArray::add*/;
   }
-  variable14 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable6 /*listnode3*/,  variable7 /*listnode9*/); /*new AModule*/
+  variable14 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable6 /*listnode3*/,  variable7 /*listnode9*/); /*new AModule*/
   variable13 = variable14;
   variable1 =  variable13 /*pmodulenode1*/ /*node_list=*/;
   variable14 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -3613,9 +3620,9 @@ void parser___ReduceAction18___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable5 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable8 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
@@ -3623,7 +3630,7 @@ void parser___ReduceAction18___action(val_t  self, val_t  param0) {
   variable9 =  variable4 /*nodearraylist2*/;
   variable10 = TAG_Bool(( variable9 /*listnode4*/==NIT_NULL) || VAL_ISA( variable9 /*listnode4*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
   if (!UNTAG_Bool(variable10)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction18___action, LOCATE_parser, 1445); nit_exit(1);}
-  variable11 = NEW_array___Array___init(); /*new Array[E]*/
+  variable11 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable10 = variable11;
   variable11 =  variable3 /*nodearraylist3*/;
   variable12 = TAG_Bool(( variable11 /*ppropdefnode6*/==NIT_NULL) || VAL_ISA( variable11 /*ppropdefnode6*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -3632,7 +3639,7 @@ void parser___ReduceAction18___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable12)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable10 /*listnode7*/,COLOR_abstract_collection___SimpleCollection___add))( variable10 /*listnode7*/,  variable11 /*ppropdefnode6*/) /*AbstractArray::add*/;
   }
-  variable13 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable10 /*listnode7*/); /*new ATopClassdef*/
+  variable13 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable10 /*listnode7*/); /*new ATopClassdef*/
   variable12 = variable13;
   variable13 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable9 /*listnode4*/ ==  NIT_NULL /*null*/) || (( variable9 /*listnode4*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable9 /*listnode4*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable9 /*listnode4*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable9 /*listnode4*/,COLOR_kernel___Object_____eqeq))( variable9 /*listnode4*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable13)) { /*if*/
@@ -3647,7 +3654,7 @@ void parser___ReduceAction18___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable13)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable7 /*listnode8*/,COLOR_abstract_collection___SimpleCollection___add))( variable7 /*listnode8*/,  variable12 /*pclassdefnode5*/) /*AbstractArray::add*/;
   }
-  variable14 = NEW_parser_prod___AModule___init_amodule( variable8 /*ppackagedeclnode2*/,  variable6 /*listnode3*/,  variable7 /*listnode8*/); /*new AModule*/
+  variable14 = NEW_AModule_parser_prod___AModule___init_amodule( variable8 /*ppackagedeclnode2*/,  variable6 /*listnode3*/,  variable7 /*listnode8*/); /*new AModule*/
   variable13 = variable14;
   variable1 =  variable13 /*pmodulenode1*/ /*node_list=*/;
   variable14 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -3697,9 +3704,9 @@ void parser___ReduceAction19___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable6 /*nodearraylist1*/;
   variable10 = TAG_Bool(( variable9 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable9 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
@@ -3707,7 +3714,7 @@ void parser___ReduceAction19___action(val_t  self, val_t  param0) {
   variable10 =  variable5 /*nodearraylist2*/;
   variable11 = TAG_Bool(( variable10 /*listnode4*/==NIT_NULL) || VAL_ISA( variable10 /*listnode4*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
   if (!UNTAG_Bool(variable11)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction19___action, LOCATE_parser, 1490); nit_exit(1);}
-  variable12 = NEW_array___Array___init(); /*new Array[E]*/
+  variable12 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable11 = variable12;
   variable12 =  variable4 /*nodearraylist3*/;
   variable13 = TAG_Bool(( variable12 /*ppropdefnode6*/==NIT_NULL) || VAL_ISA( variable12 /*ppropdefnode6*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -3728,7 +3735,7 @@ void parser___ReduceAction19___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable11 /*listnode8*/,COLOR_abstract_collection___IndexedCollection___append))( variable11 /*listnode8*/,  variable13 /*listnode7*/) /*IndexedCollection::append*/;
     }
   }
-  variable15 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable11 /*listnode8*/); /*new ATopClassdef*/
+  variable15 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable11 /*listnode8*/); /*new ATopClassdef*/
   variable14 = variable15;
   variable15 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable10 /*listnode4*/ ==  NIT_NULL /*null*/) || (( variable10 /*listnode4*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable10 /*listnode4*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable10 /*listnode4*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable10 /*listnode4*/,COLOR_kernel___Object_____eqeq))( variable10 /*listnode4*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable15)) { /*if*/
@@ -3743,7 +3750,7 @@ void parser___ReduceAction19___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable15)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable8 /*listnode9*/,COLOR_abstract_collection___SimpleCollection___add))( variable8 /*listnode9*/,  variable14 /*pclassdefnode5*/) /*AbstractArray::add*/;
   }
-  variable16 = NEW_parser_prod___AModule___init_amodule( variable9 /*ppackagedeclnode2*/,  variable7 /*listnode3*/,  variable8 /*listnode9*/); /*new AModule*/
+  variable16 = NEW_AModule_parser_prod___AModule___init_amodule( variable9 /*ppackagedeclnode2*/,  variable7 /*listnode3*/,  variable8 /*listnode9*/); /*new AModule*/
   variable15 = variable16;
   variable1 =  variable15 /*pmodulenode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -3789,9 +3796,9 @@ void parser___ReduceAction20___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable5 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*listnode3*/==NIT_NULL) || VAL_ISA( variable8 /*listnode3*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -3808,7 +3815,7 @@ void parser___ReduceAction20___action(val_t  self, val_t  param0) {
   variable9 =  variable4 /*nodearraylist2*/;
   variable10 = TAG_Bool(( variable9 /*listnode5*/==NIT_NULL) || VAL_ISA( variable9 /*listnode5*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
   if (!UNTAG_Bool(variable10)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction20___action, LOCATE_parser, 1550); nit_exit(1);}
-  variable11 = NEW_array___Array___init(); /*new Array[E]*/
+  variable11 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable10 = variable11;
   variable11 =  variable3 /*nodearraylist3*/;
   variable12 = TAG_Bool(( variable11 /*ppropdefnode7*/==NIT_NULL) || VAL_ISA( variable11 /*ppropdefnode7*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -3817,7 +3824,7 @@ void parser___ReduceAction20___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable12)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable10 /*listnode8*/,COLOR_abstract_collection___SimpleCollection___add))( variable10 /*listnode8*/,  variable11 /*ppropdefnode7*/) /*AbstractArray::add*/;
   }
-  variable13 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable10 /*listnode8*/); /*new ATopClassdef*/
+  variable13 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable10 /*listnode8*/); /*new ATopClassdef*/
   variable12 = variable13;
   variable13 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable9 /*listnode5*/ ==  NIT_NULL /*null*/) || (( variable9 /*listnode5*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable9 /*listnode5*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable9 /*listnode5*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable9 /*listnode5*/,COLOR_kernel___Object_____eqeq))( variable9 /*listnode5*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable13)) { /*if*/
@@ -3832,7 +3839,7 @@ void parser___ReduceAction20___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable13)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable7 /*listnode9*/,COLOR_abstract_collection___SimpleCollection___add))( variable7 /*listnode9*/,  variable12 /*pclassdefnode6*/) /*AbstractArray::add*/;
   }
-  variable14 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable6 /*listnode4*/,  variable7 /*listnode9*/); /*new AModule*/
+  variable14 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable6 /*listnode4*/,  variable7 /*listnode9*/); /*new AModule*/
   variable13 = variable14;
   variable1 =  variable13 /*pmodulenode1*/ /*node_list=*/;
   variable14 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -3882,9 +3889,9 @@ void parser___ReduceAction21___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable6 /*nodearraylist1*/;
   variable10 = TAG_Bool(( variable9 /*listnode3*/==NIT_NULL) || VAL_ISA( variable9 /*listnode3*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -3901,7 +3908,7 @@ void parser___ReduceAction21___action(val_t  self, val_t  param0) {
   variable10 =  variable5 /*nodearraylist2*/;
   variable11 = TAG_Bool(( variable10 /*listnode5*/==NIT_NULL) || VAL_ISA( variable10 /*listnode5*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
   if (!UNTAG_Bool(variable11)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction21___action, LOCATE_parser, 1602); nit_exit(1);}
-  variable12 = NEW_array___Array___init(); /*new Array[E]*/
+  variable12 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable11 = variable12;
   variable12 =  variable4 /*nodearraylist3*/;
   variable13 = TAG_Bool(( variable12 /*ppropdefnode7*/==NIT_NULL) || VAL_ISA( variable12 /*ppropdefnode7*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -3922,7 +3929,7 @@ void parser___ReduceAction21___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable11 /*listnode9*/,COLOR_abstract_collection___IndexedCollection___append))( variable11 /*listnode9*/,  variable13 /*listnode8*/) /*IndexedCollection::append*/;
     }
   }
-  variable15 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable11 /*listnode9*/); /*new ATopClassdef*/
+  variable15 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable11 /*listnode9*/); /*new ATopClassdef*/
   variable14 = variable15;
   variable15 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable10 /*listnode5*/ ==  NIT_NULL /*null*/) || (( variable10 /*listnode5*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable10 /*listnode5*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable10 /*listnode5*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable10 /*listnode5*/,COLOR_kernel___Object_____eqeq))( variable10 /*listnode5*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable15)) { /*if*/
@@ -3937,7 +3944,7 @@ void parser___ReduceAction21___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable15)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable8 /*listnode10*/,COLOR_abstract_collection___SimpleCollection___add))( variable8 /*listnode10*/,  variable14 /*pclassdefnode6*/) /*AbstractArray::add*/;
   }
-  variable16 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable7 /*listnode4*/,  variable8 /*listnode10*/); /*new AModule*/
+  variable16 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable7 /*listnode4*/,  variable8 /*listnode10*/); /*new AModule*/
   variable15 = variable16;
   variable1 =  variable15 /*pmodulenode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -3987,9 +3994,9 @@ void parser___ReduceAction22___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable6 /*nodearraylist1*/;
   variable10 = TAG_Bool(( variable9 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable9 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
@@ -4009,7 +4016,7 @@ void parser___ReduceAction22___action(val_t  self, val_t  param0) {
   variable11 =  variable4 /*nodearraylist3*/;
   variable12 = TAG_Bool(( variable11 /*listnode5*/==NIT_NULL) || VAL_ISA( variable11 /*listnode5*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction22___action, LOCATE_parser, 1665); nit_exit(1);}
-  variable13 = NEW_array___Array___init(); /*new Array[E]*/
+  variable13 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable12 = variable13;
   variable13 =  variable3 /*nodearraylist4*/;
   variable14 = TAG_Bool(( variable13 /*ppropdefnode7*/==NIT_NULL) || VAL_ISA( variable13 /*ppropdefnode7*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -4018,7 +4025,7 @@ void parser___ReduceAction22___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable14)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable12 /*listnode8*/,COLOR_abstract_collection___SimpleCollection___add))( variable12 /*listnode8*/,  variable13 /*ppropdefnode7*/) /*AbstractArray::add*/;
   }
-  variable15 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable12 /*listnode8*/); /*new ATopClassdef*/
+  variable15 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable12 /*listnode8*/); /*new ATopClassdef*/
   variable14 = variable15;
   variable15 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable11 /*listnode5*/ ==  NIT_NULL /*null*/) || (( variable11 /*listnode5*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable11 /*listnode5*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable11 /*listnode5*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable11 /*listnode5*/,COLOR_kernel___Object_____eqeq))( variable11 /*listnode5*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable15)) { /*if*/
@@ -4033,7 +4040,7 @@ void parser___ReduceAction22___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable15)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable8 /*listnode9*/,COLOR_abstract_collection___SimpleCollection___add))( variable8 /*listnode9*/,  variable14 /*pclassdefnode6*/) /*AbstractArray::add*/;
   }
-  variable16 = NEW_parser_prod___AModule___init_amodule( variable9 /*ppackagedeclnode2*/,  variable7 /*listnode4*/,  variable8 /*listnode9*/); /*new AModule*/
+  variable16 = NEW_AModule_parser_prod___AModule___init_amodule( variable9 /*ppackagedeclnode2*/,  variable7 /*listnode4*/,  variable8 /*listnode9*/); /*new AModule*/
   variable15 = variable16;
   variable1 =  variable15 /*pmodulenode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -4087,9 +4094,9 @@ void parser___ReduceAction23___action(val_t  self, val_t  param0) {
   variable6 = variable7;
   variable8 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
-  variable10 = NEW_array___Array___init(); /*new Array[E]*/
+  variable10 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable9 = variable10;
   variable10 =  variable7 /*nodearraylist1*/;
   variable11 = TAG_Bool(( variable10 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable10 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
@@ -4109,7 +4116,7 @@ void parser___ReduceAction23___action(val_t  self, val_t  param0) {
   variable12 =  variable5 /*nodearraylist3*/;
   variable13 = TAG_Bool(( variable12 /*listnode5*/==NIT_NULL) || VAL_ISA( variable12 /*listnode5*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction23___action, LOCATE_parser, 1720); nit_exit(1);}
-  variable14 = NEW_array___Array___init(); /*new Array[E]*/
+  variable14 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable13 = variable14;
   variable14 =  variable4 /*nodearraylist4*/;
   variable15 = TAG_Bool(( variable14 /*ppropdefnode7*/==NIT_NULL) || VAL_ISA( variable14 /*ppropdefnode7*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -4130,7 +4137,7 @@ void parser___ReduceAction23___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable13 /*listnode9*/,COLOR_abstract_collection___IndexedCollection___append))( variable13 /*listnode9*/,  variable15 /*listnode8*/) /*IndexedCollection::append*/;
     }
   }
-  variable17 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable13 /*listnode9*/); /*new ATopClassdef*/
+  variable17 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable13 /*listnode9*/); /*new ATopClassdef*/
   variable16 = variable17;
   variable17 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable12 /*listnode5*/ ==  NIT_NULL /*null*/) || (( variable12 /*listnode5*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable12 /*listnode5*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable12 /*listnode5*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable12 /*listnode5*/,COLOR_kernel___Object_____eqeq))( variable12 /*listnode5*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable17)) { /*if*/
@@ -4145,7 +4152,7 @@ void parser___ReduceAction23___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable17)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable9 /*listnode10*/,COLOR_abstract_collection___SimpleCollection___add))( variable9 /*listnode10*/,  variable16 /*pclassdefnode6*/) /*AbstractArray::add*/;
   }
-  variable18 = NEW_parser_prod___AModule___init_amodule( variable10 /*ppackagedeclnode2*/,  variable8 /*listnode4*/,  variable9 /*listnode10*/); /*new AModule*/
+  variable18 = NEW_AModule_parser_prod___AModule___init_amodule( variable10 /*ppackagedeclnode2*/,  variable8 /*listnode4*/,  variable9 /*listnode10*/); /*new AModule*/
   variable17 = variable18;
   variable1 =  variable17 /*pmodulenode1*/ /*node_list=*/;
   variable18 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -4178,9 +4185,9 @@ void parser___ReduceAction24___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable2 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*pclassdefnode4*/==NIT_NULL) || VAL_ISA( variable5 /*pclassdefnode4*/, COLOR_PClassdef, ID_PClassdef)) /*cast PClassdef*/;
@@ -4189,7 +4196,7 @@ void parser___ReduceAction24___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable6)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable4 /*listnode5*/,COLOR_abstract_collection___SimpleCollection___add))( variable4 /*listnode5*/,  variable5 /*pclassdefnode4*/) /*AbstractArray::add*/;
   }
-  variable7 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable3 /*listnode3*/,  variable4 /*listnode5*/); /*new AModule*/
+  variable7 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable3 /*listnode3*/,  variable4 /*listnode5*/); /*new AModule*/
   variable6 = variable7;
   variable1 =  variable6 /*pmodulenode1*/ /*node_list=*/;
   variable7 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -4226,9 +4233,9 @@ void parser___ReduceAction25___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
   variable6 =  variable3 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable6 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
@@ -4240,7 +4247,7 @@ void parser___ReduceAction25___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable8)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable5 /*listnode5*/,COLOR_abstract_collection___SimpleCollection___add))( variable5 /*listnode5*/,  variable7 /*pclassdefnode4*/) /*AbstractArray::add*/;
   }
-  variable9 = NEW_parser_prod___AModule___init_amodule( variable6 /*ppackagedeclnode2*/,  variable4 /*listnode3*/,  variable5 /*listnode5*/); /*new AModule*/
+  variable9 = NEW_AModule_parser_prod___AModule___init_amodule( variable6 /*ppackagedeclnode2*/,  variable4 /*listnode3*/,  variable5 /*listnode5*/); /*new AModule*/
   variable8 = variable9;
   variable1 =  variable8 /*pmodulenode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -4277,9 +4284,9 @@ void parser___ReduceAction26___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
   variable6 =  variable3 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*listnode3*/==NIT_NULL) || VAL_ISA( variable6 /*listnode3*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -4300,7 +4307,7 @@ void parser___ReduceAction26___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable8)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable5 /*listnode6*/,COLOR_abstract_collection___SimpleCollection___add))( variable5 /*listnode6*/,  variable7 /*pclassdefnode5*/) /*AbstractArray::add*/;
   }
-  variable9 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable4 /*listnode4*/,  variable5 /*listnode6*/); /*new AModule*/
+  variable9 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable4 /*listnode4*/,  variable5 /*listnode6*/); /*new AModule*/
   variable8 = variable9;
   variable1 =  variable8 /*pmodulenode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -4341,9 +4348,9 @@ void parser___ReduceAction27___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
   variable7 =  variable4 /*nodearraylist1*/;
   variable8 = TAG_Bool(( variable7 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable7 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
@@ -4367,7 +4374,7 @@ void parser___ReduceAction27___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable10)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable6 /*listnode6*/,COLOR_abstract_collection___SimpleCollection___add))( variable6 /*listnode6*/,  variable9 /*pclassdefnode5*/) /*AbstractArray::add*/;
   }
-  variable11 = NEW_parser_prod___AModule___init_amodule( variable7 /*ppackagedeclnode2*/,  variable5 /*listnode4*/,  variable6 /*listnode6*/); /*new AModule*/
+  variable11 = NEW_AModule_parser_prod___AModule___init_amodule( variable7 /*ppackagedeclnode2*/,  variable5 /*listnode4*/,  variable6 /*listnode6*/); /*new AModule*/
   variable10 = variable11;
   variable1 =  variable10 /*pmodulenode1*/ /*node_list=*/;
   variable11 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -4404,9 +4411,9 @@ void parser___ReduceAction28___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
   variable6 =  variable3 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*listnode4*/==NIT_NULL) || VAL_ISA( variable6 /*listnode4*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -4427,7 +4434,7 @@ void parser___ReduceAction28___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable8)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable5 /*listnode6*/,COLOR_abstract_collection___SimpleCollection___add))( variable5 /*listnode6*/,  variable7 /*pclassdefnode5*/) /*AbstractArray::add*/;
   }
-  variable9 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable4 /*listnode3*/,  variable5 /*listnode6*/); /*new AModule*/
+  variable9 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable4 /*listnode3*/,  variable5 /*listnode6*/); /*new AModule*/
   variable8 = variable9;
   variable1 =  variable8 /*pmodulenode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -4468,9 +4475,9 @@ void parser___ReduceAction29___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
   variable7 =  variable4 /*nodearraylist1*/;
   variable8 = TAG_Bool(( variable7 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable7 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
@@ -4494,7 +4501,7 @@ void parser___ReduceAction29___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable10)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable6 /*listnode6*/,COLOR_abstract_collection___SimpleCollection___add))( variable6 /*listnode6*/,  variable9 /*pclassdefnode5*/) /*AbstractArray::add*/;
   }
-  variable11 = NEW_parser_prod___AModule___init_amodule( variable7 /*ppackagedeclnode2*/,  variable5 /*listnode3*/,  variable6 /*listnode6*/); /*new AModule*/
+  variable11 = NEW_AModule_parser_prod___AModule___init_amodule( variable7 /*ppackagedeclnode2*/,  variable5 /*listnode3*/,  variable6 /*listnode6*/); /*new AModule*/
   variable10 = variable11;
   variable1 =  variable10 /*pmodulenode1*/ /*node_list=*/;
   variable11 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -4535,9 +4542,9 @@ void parser___ReduceAction30___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
   variable7 =  variable4 /*nodearraylist1*/;
   variable8 = TAG_Bool(( variable7 /*listnode3*/==NIT_NULL) || VAL_ISA( variable7 /*listnode3*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -4570,7 +4577,7 @@ void parser___ReduceAction30___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable10)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable6 /*listnode7*/,COLOR_abstract_collection___SimpleCollection___add))( variable6 /*listnode7*/,  variable9 /*pclassdefnode6*/) /*AbstractArray::add*/;
   }
-  variable11 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable5 /*listnode4*/,  variable6 /*listnode7*/); /*new AModule*/
+  variable11 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable5 /*listnode4*/,  variable6 /*listnode7*/); /*new AModule*/
   variable10 = variable11;
   variable1 =  variable10 /*pmodulenode1*/ /*node_list=*/;
   variable11 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -4615,9 +4622,9 @@ void parser___ReduceAction31___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable5 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable8 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
@@ -4653,7 +4660,7 @@ void parser___ReduceAction31___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable12)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable7 /*listnode7*/,COLOR_abstract_collection___SimpleCollection___add))( variable7 /*listnode7*/,  variable11 /*pclassdefnode6*/) /*AbstractArray::add*/;
   }
-  variable13 = NEW_parser_prod___AModule___init_amodule( variable8 /*ppackagedeclnode2*/,  variable6 /*listnode4*/,  variable7 /*listnode7*/); /*new AModule*/
+  variable13 = NEW_AModule_parser_prod___AModule___init_amodule( variable8 /*ppackagedeclnode2*/,  variable6 /*listnode4*/,  variable7 /*listnode7*/); /*new AModule*/
   variable12 = variable13;
   variable1 =  variable12 /*pmodulenode1*/ /*node_list=*/;
   variable13 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -4695,11 +4702,11 @@ void parser___ReduceAction32___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable4 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*ppropdefnode5*/==NIT_NULL) || VAL_ISA( variable8 /*ppropdefnode5*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -4708,7 +4715,7 @@ void parser___ReduceAction32___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable9)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable7 /*listnode6*/,COLOR_abstract_collection___SimpleCollection___add))( variable7 /*listnode6*/,  variable8 /*ppropdefnode5*/) /*AbstractArray::add*/;
   }
-  variable10 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable7 /*listnode6*/); /*new ATopClassdef*/
+  variable10 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable7 /*listnode6*/); /*new ATopClassdef*/
   variable9 = variable10;
   variable10 =  variable2 /*nodearraylist3*/;
   variable11 = TAG_Bool(( variable10 /*pclassdefnode7*/==NIT_NULL) || VAL_ISA( variable10 /*pclassdefnode7*/, COLOR_PClassdef, ID_PClassdef)) /*cast PClassdef*/;
@@ -4721,7 +4728,7 @@ void parser___ReduceAction32___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable11)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable6 /*listnode8*/,COLOR_abstract_collection___SimpleCollection___add))( variable6 /*listnode8*/,  variable10 /*pclassdefnode7*/) /*AbstractArray::add*/;
   }
-  variable12 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable5 /*listnode3*/,  variable6 /*listnode8*/); /*new AModule*/
+  variable12 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable5 /*listnode3*/,  variable6 /*listnode8*/); /*new AModule*/
   variable11 = variable12;
   variable1 =  variable11 /*pmodulenode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -4767,11 +4774,11 @@ void parser___ReduceAction33___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable5 /*nodearraylist1*/;
   variable10 = TAG_Bool(( variable9 /*ppropdefnode5*/==NIT_NULL) || VAL_ISA( variable9 /*ppropdefnode5*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -4792,7 +4799,7 @@ void parser___ReduceAction33___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable8 /*listnode7*/,COLOR_abstract_collection___IndexedCollection___append))( variable8 /*listnode7*/,  variable10 /*listnode6*/) /*IndexedCollection::append*/;
     }
   }
-  variable12 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable8 /*listnode7*/); /*new ATopClassdef*/
+  variable12 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable8 /*listnode7*/); /*new ATopClassdef*/
   variable11 = variable12;
   variable12 =  variable2 /*nodearraylist4*/;
   variable13 = TAG_Bool(( variable12 /*pclassdefnode8*/==NIT_NULL) || VAL_ISA( variable12 /*pclassdefnode8*/, COLOR_PClassdef, ID_PClassdef)) /*cast PClassdef*/;
@@ -4805,7 +4812,7 @@ void parser___ReduceAction33___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable13)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable7 /*listnode9*/,COLOR_abstract_collection___SimpleCollection___add))( variable7 /*listnode9*/,  variable12 /*pclassdefnode8*/) /*AbstractArray::add*/;
   }
-  variable14 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable6 /*listnode3*/,  variable7 /*listnode9*/); /*new AModule*/
+  variable14 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable6 /*listnode3*/,  variable7 /*listnode9*/); /*new AModule*/
   variable13 = variable14;
   variable1 =  variable13 /*pmodulenode1*/ /*node_list=*/;
   variable14 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -4851,14 +4858,14 @@ void parser___ReduceAction34___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable5 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable8 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
   if (!UNTAG_Bool(variable9)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction34___action, LOCATE_parser, 2131); nit_exit(1);}
-  variable10 = NEW_array___Array___init(); /*new Array[E]*/
+  variable10 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable9 = variable10;
   variable10 =  variable4 /*nodearraylist2*/;
   variable11 = TAG_Bool(( variable10 /*ppropdefnode5*/==NIT_NULL) || VAL_ISA( variable10 /*ppropdefnode5*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -4867,7 +4874,7 @@ void parser___ReduceAction34___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable11)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable9 /*listnode6*/,COLOR_abstract_collection___SimpleCollection___add))( variable9 /*listnode6*/,  variable10 /*ppropdefnode5*/) /*AbstractArray::add*/;
   }
-  variable12 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable9 /*listnode6*/); /*new ATopClassdef*/
+  variable12 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable9 /*listnode6*/); /*new ATopClassdef*/
   variable11 = variable12;
   variable12 =  variable2 /*nodearraylist4*/;
   variable13 = TAG_Bool(( variable12 /*pclassdefnode7*/==NIT_NULL) || VAL_ISA( variable12 /*pclassdefnode7*/, COLOR_PClassdef, ID_PClassdef)) /*cast PClassdef*/;
@@ -4880,7 +4887,7 @@ void parser___ReduceAction34___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable13)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable7 /*listnode8*/,COLOR_abstract_collection___SimpleCollection___add))( variable7 /*listnode8*/,  variable12 /*pclassdefnode7*/) /*AbstractArray::add*/;
   }
-  variable14 = NEW_parser_prod___AModule___init_amodule( variable8 /*ppackagedeclnode2*/,  variable6 /*listnode3*/,  variable7 /*listnode8*/); /*new AModule*/
+  variable14 = NEW_AModule_parser_prod___AModule___init_amodule( variable8 /*ppackagedeclnode2*/,  variable6 /*listnode3*/,  variable7 /*listnode8*/); /*new AModule*/
   variable13 = variable14;
   variable1 =  variable13 /*pmodulenode1*/ /*node_list=*/;
   variable14 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -4930,14 +4937,14 @@ void parser___ReduceAction35___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable6 /*nodearraylist1*/;
   variable10 = TAG_Bool(( variable9 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable9 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
   if (!UNTAG_Bool(variable10)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction35___action, LOCATE_parser, 2172); nit_exit(1);}
-  variable11 = NEW_array___Array___init(); /*new Array[E]*/
+  variable11 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable10 = variable11;
   variable11 =  variable5 /*nodearraylist2*/;
   variable12 = TAG_Bool(( variable11 /*ppropdefnode5*/==NIT_NULL) || VAL_ISA( variable11 /*ppropdefnode5*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -4958,7 +4965,7 @@ void parser___ReduceAction35___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable10 /*listnode7*/,COLOR_abstract_collection___IndexedCollection___append))( variable10 /*listnode7*/,  variable12 /*listnode6*/) /*IndexedCollection::append*/;
     }
   }
-  variable14 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable10 /*listnode7*/); /*new ATopClassdef*/
+  variable14 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable10 /*listnode7*/); /*new ATopClassdef*/
   variable13 = variable14;
   variable14 =  variable2 /*nodearraylist5*/;
   variable15 = TAG_Bool(( variable14 /*pclassdefnode8*/==NIT_NULL) || VAL_ISA( variable14 /*pclassdefnode8*/, COLOR_PClassdef, ID_PClassdef)) /*cast PClassdef*/;
@@ -4971,7 +4978,7 @@ void parser___ReduceAction35___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable15)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable8 /*listnode9*/,COLOR_abstract_collection___SimpleCollection___add))( variable8 /*listnode9*/,  variable14 /*pclassdefnode8*/) /*AbstractArray::add*/;
   }
-  variable16 = NEW_parser_prod___AModule___init_amodule( variable9 /*ppackagedeclnode2*/,  variable7 /*listnode3*/,  variable8 /*listnode9*/); /*new AModule*/
+  variable16 = NEW_AModule_parser_prod___AModule___init_amodule( variable9 /*ppackagedeclnode2*/,  variable7 /*listnode3*/,  variable8 /*listnode9*/); /*new AModule*/
   variable15 = variable16;
   variable1 =  variable15 /*pmodulenode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -5017,9 +5024,9 @@ void parser___ReduceAction36___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable5 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*listnode3*/==NIT_NULL) || VAL_ISA( variable8 /*listnode3*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -5033,7 +5040,7 @@ void parser___ReduceAction36___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable6 /*listnode4*/,COLOR_abstract_collection___IndexedCollection___append))( variable6 /*listnode4*/,  variable8 /*listnode3*/) /*IndexedCollection::append*/;
     }
   }
-  variable10 = NEW_array___Array___init(); /*new Array[E]*/
+  variable10 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable9 = variable10;
   variable10 =  variable4 /*nodearraylist2*/;
   variable11 = TAG_Bool(( variable10 /*ppropdefnode6*/==NIT_NULL) || VAL_ISA( variable10 /*ppropdefnode6*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -5042,7 +5049,7 @@ void parser___ReduceAction36___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable11)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable9 /*listnode7*/,COLOR_abstract_collection___SimpleCollection___add))( variable9 /*listnode7*/,  variable10 /*ppropdefnode6*/) /*AbstractArray::add*/;
   }
-  variable12 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable9 /*listnode7*/); /*new ATopClassdef*/
+  variable12 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable9 /*listnode7*/); /*new ATopClassdef*/
   variable11 = variable12;
   variable12 =  variable2 /*nodearraylist4*/;
   variable13 = TAG_Bool(( variable12 /*pclassdefnode8*/==NIT_NULL) || VAL_ISA( variable12 /*pclassdefnode8*/, COLOR_PClassdef, ID_PClassdef)) /*cast PClassdef*/;
@@ -5055,7 +5062,7 @@ void parser___ReduceAction36___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable13)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable7 /*listnode9*/,COLOR_abstract_collection___SimpleCollection___add))( variable7 /*listnode9*/,  variable12 /*pclassdefnode8*/) /*AbstractArray::add*/;
   }
-  variable14 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable6 /*listnode4*/,  variable7 /*listnode9*/); /*new AModule*/
+  variable14 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable6 /*listnode4*/,  variable7 /*listnode9*/); /*new AModule*/
   variable13 = variable14;
   variable1 =  variable13 /*pmodulenode1*/ /*node_list=*/;
   variable14 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -5105,9 +5112,9 @@ void parser___ReduceAction37___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable6 /*nodearraylist1*/;
   variable10 = TAG_Bool(( variable9 /*listnode3*/==NIT_NULL) || VAL_ISA( variable9 /*listnode3*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -5121,7 +5128,7 @@ void parser___ReduceAction37___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable7 /*listnode4*/,COLOR_abstract_collection___IndexedCollection___append))( variable7 /*listnode4*/,  variable9 /*listnode3*/) /*IndexedCollection::append*/;
     }
   }
-  variable11 = NEW_array___Array___init(); /*new Array[E]*/
+  variable11 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable10 = variable11;
   variable11 =  variable5 /*nodearraylist2*/;
   variable12 = TAG_Bool(( variable11 /*ppropdefnode6*/==NIT_NULL) || VAL_ISA( variable11 /*ppropdefnode6*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -5142,7 +5149,7 @@ void parser___ReduceAction37___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable10 /*listnode8*/,COLOR_abstract_collection___IndexedCollection___append))( variable10 /*listnode8*/,  variable12 /*listnode7*/) /*IndexedCollection::append*/;
     }
   }
-  variable14 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable10 /*listnode8*/); /*new ATopClassdef*/
+  variable14 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable10 /*listnode8*/); /*new ATopClassdef*/
   variable13 = variable14;
   variable14 =  variable2 /*nodearraylist5*/;
   variable15 = TAG_Bool(( variable14 /*pclassdefnode9*/==NIT_NULL) || VAL_ISA( variable14 /*pclassdefnode9*/, COLOR_PClassdef, ID_PClassdef)) /*cast PClassdef*/;
@@ -5155,7 +5162,7 @@ void parser___ReduceAction37___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable15)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable8 /*listnode10*/,COLOR_abstract_collection___SimpleCollection___add))( variable8 /*listnode10*/,  variable14 /*pclassdefnode9*/) /*AbstractArray::add*/;
   }
-  variable16 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable7 /*listnode4*/,  variable8 /*listnode10*/); /*new AModule*/
+  variable16 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable7 /*listnode4*/,  variable8 /*listnode10*/); /*new AModule*/
   variable15 = variable16;
   variable1 =  variable15 /*pmodulenode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -5205,9 +5212,9 @@ void parser___ReduceAction38___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable6 /*nodearraylist1*/;
   variable10 = TAG_Bool(( variable9 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable9 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
@@ -5224,7 +5231,7 @@ void parser___ReduceAction38___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable7 /*listnode4*/,COLOR_abstract_collection___IndexedCollection___append))( variable7 /*listnode4*/,  variable10 /*listnode3*/) /*IndexedCollection::append*/;
     }
   }
-  variable12 = NEW_array___Array___init(); /*new Array[E]*/
+  variable12 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable11 = variable12;
   variable12 =  variable4 /*nodearraylist3*/;
   variable13 = TAG_Bool(( variable12 /*ppropdefnode6*/==NIT_NULL) || VAL_ISA( variable12 /*ppropdefnode6*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -5233,7 +5240,7 @@ void parser___ReduceAction38___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable13)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable11 /*listnode7*/,COLOR_abstract_collection___SimpleCollection___add))( variable11 /*listnode7*/,  variable12 /*ppropdefnode6*/) /*AbstractArray::add*/;
   }
-  variable14 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable11 /*listnode7*/); /*new ATopClassdef*/
+  variable14 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable11 /*listnode7*/); /*new ATopClassdef*/
   variable13 = variable14;
   variable14 =  variable2 /*nodearraylist5*/;
   variable15 = TAG_Bool(( variable14 /*pclassdefnode8*/==NIT_NULL) || VAL_ISA( variable14 /*pclassdefnode8*/, COLOR_PClassdef, ID_PClassdef)) /*cast PClassdef*/;
@@ -5246,7 +5253,7 @@ void parser___ReduceAction38___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable15)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable8 /*listnode9*/,COLOR_abstract_collection___SimpleCollection___add))( variable8 /*listnode9*/,  variable14 /*pclassdefnode8*/) /*AbstractArray::add*/;
   }
-  variable16 = NEW_parser_prod___AModule___init_amodule( variable9 /*ppackagedeclnode2*/,  variable7 /*listnode4*/,  variable8 /*listnode9*/); /*new AModule*/
+  variable16 = NEW_AModule_parser_prod___AModule___init_amodule( variable9 /*ppackagedeclnode2*/,  variable7 /*listnode4*/,  variable8 /*listnode9*/); /*new AModule*/
   variable15 = variable16;
   variable1 =  variable15 /*pmodulenode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -5300,9 +5307,9 @@ void parser___ReduceAction39___action(val_t  self, val_t  param0) {
   variable6 = variable7;
   variable8 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
-  variable10 = NEW_array___Array___init(); /*new Array[E]*/
+  variable10 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable9 = variable10;
   variable10 =  variable7 /*nodearraylist1*/;
   variable11 = TAG_Bool(( variable10 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable10 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
@@ -5319,7 +5326,7 @@ void parser___ReduceAction39___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable8 /*listnode4*/,COLOR_abstract_collection___IndexedCollection___append))( variable8 /*listnode4*/,  variable11 /*listnode3*/) /*IndexedCollection::append*/;
     }
   }
-  variable13 = NEW_array___Array___init(); /*new Array[E]*/
+  variable13 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable12 = variable13;
   variable13 =  variable5 /*nodearraylist3*/;
   variable14 = TAG_Bool(( variable13 /*ppropdefnode6*/==NIT_NULL) || VAL_ISA( variable13 /*ppropdefnode6*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -5340,7 +5347,7 @@ void parser___ReduceAction39___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable12 /*listnode8*/,COLOR_abstract_collection___IndexedCollection___append))( variable12 /*listnode8*/,  variable14 /*listnode7*/) /*IndexedCollection::append*/;
     }
   }
-  variable16 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable12 /*listnode8*/); /*new ATopClassdef*/
+  variable16 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable12 /*listnode8*/); /*new ATopClassdef*/
   variable15 = variable16;
   variable16 =  variable2 /*nodearraylist6*/;
   variable17 = TAG_Bool(( variable16 /*pclassdefnode9*/==NIT_NULL) || VAL_ISA( variable16 /*pclassdefnode9*/, COLOR_PClassdef, ID_PClassdef)) /*cast PClassdef*/;
@@ -5353,7 +5360,7 @@ void parser___ReduceAction39___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable17)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable9 /*listnode10*/,COLOR_abstract_collection___SimpleCollection___add))( variable9 /*listnode10*/,  variable16 /*pclassdefnode9*/) /*AbstractArray::add*/;
   }
-  variable18 = NEW_parser_prod___AModule___init_amodule( variable10 /*ppackagedeclnode2*/,  variable8 /*listnode4*/,  variable9 /*listnode10*/); /*new AModule*/
+  variable18 = NEW_AModule_parser_prod___AModule___init_amodule( variable10 /*ppackagedeclnode2*/,  variable8 /*listnode4*/,  variable9 /*listnode10*/); /*new AModule*/
   variable17 = variable18;
   variable1 =  variable17 /*pmodulenode1*/ /*node_list=*/;
   variable18 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -5399,14 +5406,14 @@ void parser___ReduceAction40___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable5 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*listnode4*/==NIT_NULL) || VAL_ISA( variable8 /*listnode4*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
   if (!UNTAG_Bool(variable9)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction40___action, LOCATE_parser, 2435); nit_exit(1);}
-  variable10 = NEW_array___Array___init(); /*new Array[E]*/
+  variable10 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable9 = variable10;
   variable10 =  variable4 /*nodearraylist2*/;
   variable11 = TAG_Bool(( variable10 /*ppropdefnode6*/==NIT_NULL) || VAL_ISA( variable10 /*ppropdefnode6*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -5415,7 +5422,7 @@ void parser___ReduceAction40___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable11)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable9 /*listnode7*/,COLOR_abstract_collection___SimpleCollection___add))( variable9 /*listnode7*/,  variable10 /*ppropdefnode6*/) /*AbstractArray::add*/;
   }
-  variable12 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable9 /*listnode7*/); /*new ATopClassdef*/
+  variable12 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable9 /*listnode7*/); /*new ATopClassdef*/
   variable11 = variable12;
   variable12 =  variable2 /*nodearraylist4*/;
   variable13 = TAG_Bool(( variable12 /*pclassdefnode8*/==NIT_NULL) || VAL_ISA( variable12 /*pclassdefnode8*/, COLOR_PClassdef, ID_PClassdef)) /*cast PClassdef*/;
@@ -5437,7 +5444,7 @@ void parser___ReduceAction40___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable13)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable7 /*listnode9*/,COLOR_abstract_collection___SimpleCollection___add))( variable7 /*listnode9*/,  variable12 /*pclassdefnode8*/) /*AbstractArray::add*/;
   }
-  variable14 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable6 /*listnode3*/,  variable7 /*listnode9*/); /*new AModule*/
+  variable14 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable6 /*listnode3*/,  variable7 /*listnode9*/); /*new AModule*/
   variable13 = variable14;
   variable1 =  variable13 /*pmodulenode1*/ /*node_list=*/;
   variable14 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -5487,14 +5494,14 @@ void parser___ReduceAction41___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable6 /*nodearraylist1*/;
   variable10 = TAG_Bool(( variable9 /*listnode4*/==NIT_NULL) || VAL_ISA( variable9 /*listnode4*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
   if (!UNTAG_Bool(variable10)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction41___action, LOCATE_parser, 2483); nit_exit(1);}
-  variable11 = NEW_array___Array___init(); /*new Array[E]*/
+  variable11 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable10 = variable11;
   variable11 =  variable5 /*nodearraylist2*/;
   variable12 = TAG_Bool(( variable11 /*ppropdefnode6*/==NIT_NULL) || VAL_ISA( variable11 /*ppropdefnode6*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -5515,7 +5522,7 @@ void parser___ReduceAction41___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable10 /*listnode8*/,COLOR_abstract_collection___IndexedCollection___append))( variable10 /*listnode8*/,  variable12 /*listnode7*/) /*IndexedCollection::append*/;
     }
   }
-  variable14 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable10 /*listnode8*/); /*new ATopClassdef*/
+  variable14 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable10 /*listnode8*/); /*new ATopClassdef*/
   variable13 = variable14;
   variable14 =  variable2 /*nodearraylist5*/;
   variable15 = TAG_Bool(( variable14 /*pclassdefnode9*/==NIT_NULL) || VAL_ISA( variable14 /*pclassdefnode9*/, COLOR_PClassdef, ID_PClassdef)) /*cast PClassdef*/;
@@ -5537,7 +5544,7 @@ void parser___ReduceAction41___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable15)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable8 /*listnode10*/,COLOR_abstract_collection___SimpleCollection___add))( variable8 /*listnode10*/,  variable14 /*pclassdefnode9*/) /*AbstractArray::add*/;
   }
-  variable16 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable7 /*listnode3*/,  variable8 /*listnode10*/); /*new AModule*/
+  variable16 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable7 /*listnode3*/,  variable8 /*listnode10*/); /*new AModule*/
   variable15 = variable16;
   variable1 =  variable15 /*pmodulenode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -5587,9 +5594,9 @@ void parser___ReduceAction42___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable6 /*nodearraylist1*/;
   variable10 = TAG_Bool(( variable9 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable9 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
@@ -5597,7 +5604,7 @@ void parser___ReduceAction42___action(val_t  self, val_t  param0) {
   variable10 =  variable5 /*nodearraylist2*/;
   variable11 = TAG_Bool(( variable10 /*listnode4*/==NIT_NULL) || VAL_ISA( variable10 /*listnode4*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
   if (!UNTAG_Bool(variable11)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction42___action, LOCATE_parser, 2542); nit_exit(1);}
-  variable12 = NEW_array___Array___init(); /*new Array[E]*/
+  variable12 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable11 = variable12;
   variable12 =  variable4 /*nodearraylist3*/;
   variable13 = TAG_Bool(( variable12 /*ppropdefnode6*/==NIT_NULL) || VAL_ISA( variable12 /*ppropdefnode6*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -5606,7 +5613,7 @@ void parser___ReduceAction42___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable13)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable11 /*listnode7*/,COLOR_abstract_collection___SimpleCollection___add))( variable11 /*listnode7*/,  variable12 /*ppropdefnode6*/) /*AbstractArray::add*/;
   }
-  variable14 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable11 /*listnode7*/); /*new ATopClassdef*/
+  variable14 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable11 /*listnode7*/); /*new ATopClassdef*/
   variable13 = variable14;
   variable14 =  variable2 /*nodearraylist5*/;
   variable15 = TAG_Bool(( variable14 /*pclassdefnode8*/==NIT_NULL) || VAL_ISA( variable14 /*pclassdefnode8*/, COLOR_PClassdef, ID_PClassdef)) /*cast PClassdef*/;
@@ -5628,7 +5635,7 @@ void parser___ReduceAction42___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable15)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable8 /*listnode9*/,COLOR_abstract_collection___SimpleCollection___add))( variable8 /*listnode9*/,  variable14 /*pclassdefnode8*/) /*AbstractArray::add*/;
   }
-  variable16 = NEW_parser_prod___AModule___init_amodule( variable9 /*ppackagedeclnode2*/,  variable7 /*listnode3*/,  variable8 /*listnode9*/); /*new AModule*/
+  variable16 = NEW_AModule_parser_prod___AModule___init_amodule( variable9 /*ppackagedeclnode2*/,  variable7 /*listnode3*/,  variable8 /*listnode9*/); /*new AModule*/
   variable15 = variable16;
   variable1 =  variable15 /*pmodulenode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -5682,9 +5689,9 @@ void parser___ReduceAction43___action(val_t  self, val_t  param0) {
   variable6 = variable7;
   variable8 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
-  variable10 = NEW_array___Array___init(); /*new Array[E]*/
+  variable10 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable9 = variable10;
   variable10 =  variable7 /*nodearraylist1*/;
   variable11 = TAG_Bool(( variable10 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable10 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
@@ -5692,7 +5699,7 @@ void parser___ReduceAction43___action(val_t  self, val_t  param0) {
   variable11 =  variable6 /*nodearraylist2*/;
   variable12 = TAG_Bool(( variable11 /*listnode4*/==NIT_NULL) || VAL_ISA( variable11 /*listnode4*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction43___action, LOCATE_parser, 2593); nit_exit(1);}
-  variable13 = NEW_array___Array___init(); /*new Array[E]*/
+  variable13 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable12 = variable13;
   variable13 =  variable5 /*nodearraylist3*/;
   variable14 = TAG_Bool(( variable13 /*ppropdefnode6*/==NIT_NULL) || VAL_ISA( variable13 /*ppropdefnode6*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -5713,7 +5720,7 @@ void parser___ReduceAction43___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable12 /*listnode8*/,COLOR_abstract_collection___IndexedCollection___append))( variable12 /*listnode8*/,  variable14 /*listnode7*/) /*IndexedCollection::append*/;
     }
   }
-  variable16 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable12 /*listnode8*/); /*new ATopClassdef*/
+  variable16 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable12 /*listnode8*/); /*new ATopClassdef*/
   variable15 = variable16;
   variable16 =  variable2 /*nodearraylist6*/;
   variable17 = TAG_Bool(( variable16 /*pclassdefnode9*/==NIT_NULL) || VAL_ISA( variable16 /*pclassdefnode9*/, COLOR_PClassdef, ID_PClassdef)) /*cast PClassdef*/;
@@ -5735,7 +5742,7 @@ void parser___ReduceAction43___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable17)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable9 /*listnode10*/,COLOR_abstract_collection___SimpleCollection___add))( variable9 /*listnode10*/,  variable16 /*pclassdefnode9*/) /*AbstractArray::add*/;
   }
-  variable18 = NEW_parser_prod___AModule___init_amodule( variable10 /*ppackagedeclnode2*/,  variable8 /*listnode3*/,  variable9 /*listnode10*/); /*new AModule*/
+  variable18 = NEW_AModule_parser_prod___AModule___init_amodule( variable10 /*ppackagedeclnode2*/,  variable8 /*listnode3*/,  variable9 /*listnode10*/); /*new AModule*/
   variable17 = variable18;
   variable1 =  variable17 /*pmodulenode1*/ /*node_list=*/;
   variable18 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -5785,9 +5792,9 @@ void parser___ReduceAction44___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable6 /*nodearraylist1*/;
   variable10 = TAG_Bool(( variable9 /*listnode3*/==NIT_NULL) || VAL_ISA( variable9 /*listnode3*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -5804,7 +5811,7 @@ void parser___ReduceAction44___action(val_t  self, val_t  param0) {
   variable10 =  variable5 /*nodearraylist2*/;
   variable11 = TAG_Bool(( variable10 /*listnode5*/==NIT_NULL) || VAL_ISA( variable10 /*listnode5*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
   if (!UNTAG_Bool(variable11)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction44___action, LOCATE_parser, 2659); nit_exit(1);}
-  variable12 = NEW_array___Array___init(); /*new Array[E]*/
+  variable12 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable11 = variable12;
   variable12 =  variable4 /*nodearraylist3*/;
   variable13 = TAG_Bool(( variable12 /*ppropdefnode7*/==NIT_NULL) || VAL_ISA( variable12 /*ppropdefnode7*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -5813,7 +5820,7 @@ void parser___ReduceAction44___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable13)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable11 /*listnode8*/,COLOR_abstract_collection___SimpleCollection___add))( variable11 /*listnode8*/,  variable12 /*ppropdefnode7*/) /*AbstractArray::add*/;
   }
-  variable14 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable11 /*listnode8*/); /*new ATopClassdef*/
+  variable14 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable11 /*listnode8*/); /*new ATopClassdef*/
   variable13 = variable14;
   variable14 =  variable2 /*nodearraylist5*/;
   variable15 = TAG_Bool(( variable14 /*pclassdefnode9*/==NIT_NULL) || VAL_ISA( variable14 /*pclassdefnode9*/, COLOR_PClassdef, ID_PClassdef)) /*cast PClassdef*/;
@@ -5835,7 +5842,7 @@ void parser___ReduceAction44___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable15)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable8 /*listnode10*/,COLOR_abstract_collection___SimpleCollection___add))( variable8 /*listnode10*/,  variable14 /*pclassdefnode9*/) /*AbstractArray::add*/;
   }
-  variable16 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable7 /*listnode4*/,  variable8 /*listnode10*/); /*new AModule*/
+  variable16 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable7 /*listnode4*/,  variable8 /*listnode10*/); /*new AModule*/
   variable15 = variable16;
   variable1 =  variable15 /*pmodulenode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -5889,9 +5896,9 @@ void parser___ReduceAction45___action(val_t  self, val_t  param0) {
   variable6 = variable7;
   variable8 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
-  variable10 = NEW_array___Array___init(); /*new Array[E]*/
+  variable10 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable9 = variable10;
   variable10 =  variable7 /*nodearraylist1*/;
   variable11 = TAG_Bool(( variable10 /*listnode3*/==NIT_NULL) || VAL_ISA( variable10 /*listnode3*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -5908,7 +5915,7 @@ void parser___ReduceAction45___action(val_t  self, val_t  param0) {
   variable11 =  variable6 /*nodearraylist2*/;
   variable12 = TAG_Bool(( variable11 /*listnode5*/==NIT_NULL) || VAL_ISA( variable11 /*listnode5*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction45___action, LOCATE_parser, 2717); nit_exit(1);}
-  variable13 = NEW_array___Array___init(); /*new Array[E]*/
+  variable13 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable12 = variable13;
   variable13 =  variable5 /*nodearraylist3*/;
   variable14 = TAG_Bool(( variable13 /*ppropdefnode7*/==NIT_NULL) || VAL_ISA( variable13 /*ppropdefnode7*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -5929,7 +5936,7 @@ void parser___ReduceAction45___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable12 /*listnode9*/,COLOR_abstract_collection___IndexedCollection___append))( variable12 /*listnode9*/,  variable14 /*listnode8*/) /*IndexedCollection::append*/;
     }
   }
-  variable16 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable12 /*listnode9*/); /*new ATopClassdef*/
+  variable16 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable12 /*listnode9*/); /*new ATopClassdef*/
   variable15 = variable16;
   variable16 =  variable2 /*nodearraylist6*/;
   variable17 = TAG_Bool(( variable16 /*pclassdefnode10*/==NIT_NULL) || VAL_ISA( variable16 /*pclassdefnode10*/, COLOR_PClassdef, ID_PClassdef)) /*cast PClassdef*/;
@@ -5951,7 +5958,7 @@ void parser___ReduceAction45___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable17)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable9 /*listnode11*/,COLOR_abstract_collection___SimpleCollection___add))( variable9 /*listnode11*/,  variable16 /*pclassdefnode10*/) /*AbstractArray::add*/;
   }
-  variable18 = NEW_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable8 /*listnode4*/,  variable9 /*listnode11*/); /*new AModule*/
+  variable18 = NEW_AModule_parser_prod___AModule___init_amodule( NIT_NULL /*null*/,  variable8 /*listnode4*/,  variable9 /*listnode11*/); /*new AModule*/
   variable17 = variable18;
   variable1 =  variable17 /*pmodulenode1*/ /*node_list=*/;
   variable18 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -6005,9 +6012,9 @@ void parser___ReduceAction46___action(val_t  self, val_t  param0) {
   variable6 = variable7;
   variable8 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
-  variable10 = NEW_array___Array___init(); /*new Array[E]*/
+  variable10 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable9 = variable10;
   variable10 =  variable7 /*nodearraylist1*/;
   variable11 = TAG_Bool(( variable10 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable10 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
@@ -6027,7 +6034,7 @@ void parser___ReduceAction46___action(val_t  self, val_t  param0) {
   variable12 =  variable5 /*nodearraylist3*/;
   variable13 = TAG_Bool(( variable12 /*listnode5*/==NIT_NULL) || VAL_ISA( variable12 /*listnode5*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction46___action, LOCATE_parser, 2786); nit_exit(1);}
-  variable14 = NEW_array___Array___init(); /*new Array[E]*/
+  variable14 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable13 = variable14;
   variable14 =  variable4 /*nodearraylist4*/;
   variable15 = TAG_Bool(( variable14 /*ppropdefnode7*/==NIT_NULL) || VAL_ISA( variable14 /*ppropdefnode7*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -6036,7 +6043,7 @@ void parser___ReduceAction46___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable15)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable13 /*listnode8*/,COLOR_abstract_collection___SimpleCollection___add))( variable13 /*listnode8*/,  variable14 /*ppropdefnode7*/) /*AbstractArray::add*/;
   }
-  variable16 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable13 /*listnode8*/); /*new ATopClassdef*/
+  variable16 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable13 /*listnode8*/); /*new ATopClassdef*/
   variable15 = variable16;
   variable16 =  variable2 /*nodearraylist6*/;
   variable17 = TAG_Bool(( variable16 /*pclassdefnode9*/==NIT_NULL) || VAL_ISA( variable16 /*pclassdefnode9*/, COLOR_PClassdef, ID_PClassdef)) /*cast PClassdef*/;
@@ -6058,7 +6065,7 @@ void parser___ReduceAction46___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable17)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable9 /*listnode10*/,COLOR_abstract_collection___SimpleCollection___add))( variable9 /*listnode10*/,  variable16 /*pclassdefnode9*/) /*AbstractArray::add*/;
   }
-  variable18 = NEW_parser_prod___AModule___init_amodule( variable10 /*ppackagedeclnode2*/,  variable8 /*listnode4*/,  variable9 /*listnode10*/); /*new AModule*/
+  variable18 = NEW_AModule_parser_prod___AModule___init_amodule( variable10 /*ppackagedeclnode2*/,  variable8 /*listnode4*/,  variable9 /*listnode10*/); /*new AModule*/
   variable17 = variable18;
   variable1 =  variable17 /*pmodulenode1*/ /*node_list=*/;
   variable18 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -6116,9 +6123,9 @@ void parser___ReduceAction47___action(val_t  self, val_t  param0) {
   variable7 = variable8;
   variable9 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable8 = variable9;
-  variable10 = NEW_array___Array___init(); /*new Array[E]*/
+  variable10 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable9 = variable10;
-  variable11 = NEW_array___Array___init(); /*new Array[E]*/
+  variable11 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable10 = variable11;
   variable11 =  variable8 /*nodearraylist1*/;
   variable12 = TAG_Bool(( variable11 /*ppackagedeclnode2*/==NIT_NULL) || VAL_ISA( variable11 /*ppackagedeclnode2*/, COLOR_PPackagedecl, ID_PPackagedecl)) /*cast PPackagedecl*/;
@@ -6138,7 +6145,7 @@ void parser___ReduceAction47___action(val_t  self, val_t  param0) {
   variable13 =  variable6 /*nodearraylist3*/;
   variable14 = TAG_Bool(( variable13 /*listnode5*/==NIT_NULL) || VAL_ISA( variable13 /*listnode5*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction47___action, LOCATE_parser, 2847); nit_exit(1);}
-  variable15 = NEW_array___Array___init(); /*new Array[E]*/
+  variable15 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable14 = variable15;
   variable15 =  variable5 /*nodearraylist4*/;
   variable16 = TAG_Bool(( variable15 /*ppropdefnode7*/==NIT_NULL) || VAL_ISA( variable15 /*ppropdefnode7*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -6159,7 +6166,7 @@ void parser___ReduceAction47___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable14 /*listnode9*/,COLOR_abstract_collection___IndexedCollection___append))( variable14 /*listnode9*/,  variable16 /*listnode8*/) /*IndexedCollection::append*/;
     }
   }
-  variable18 = NEW_parser_prod___ATopClassdef___init_atopclassdef( variable14 /*listnode9*/); /*new ATopClassdef*/
+  variable18 = NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef( variable14 /*listnode9*/); /*new ATopClassdef*/
   variable17 = variable18;
   variable18 =  variable2 /*nodearraylist7*/;
   variable19 = TAG_Bool(( variable18 /*pclassdefnode10*/==NIT_NULL) || VAL_ISA( variable18 /*pclassdefnode10*/, COLOR_PClassdef, ID_PClassdef)) /*cast PClassdef*/;
@@ -6181,7 +6188,7 @@ void parser___ReduceAction47___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable19)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable10 /*listnode11*/,COLOR_abstract_collection___SimpleCollection___add))( variable10 /*listnode11*/,  variable18 /*pclassdefnode10*/) /*AbstractArray::add*/;
   }
-  variable20 = NEW_parser_prod___AModule___init_amodule( variable11 /*ppackagedeclnode2*/,  variable9 /*listnode4*/,  variable10 /*listnode11*/); /*new AModule*/
+  variable20 = NEW_AModule_parser_prod___AModule___init_amodule( variable11 /*ppackagedeclnode2*/,  variable9 /*listnode4*/,  variable10 /*listnode11*/); /*new AModule*/
   variable19 = variable20;
   variable1 =  variable19 /*pmodulenode1*/ /*node_list=*/;
   variable20 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(0)) /*Parser::go_to*/;
@@ -6235,7 +6242,7 @@ void parser___ReduceAction48___action(val_t  self, val_t  param0) {
   variable9 =  variable3 /*nodearraylist4*/;
   variable10 = TAG_Bool(( variable9 /*tidnode4*/==NIT_NULL) || VAL_ISA( variable9 /*tidnode4*/, COLOR_TId, ID_TId)) /*cast TId*/;
   if (!UNTAG_Bool(variable10)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction48___action, LOCATE_parser, 2906); nit_exit(1);}
-  variable11 = NEW_parser_prod___APackagedecl___init_apackagedecl( variable7 /*pdocnode2*/,  variable8 /*tkwpackagenode3*/,  variable9 /*tidnode4*/); /*new APackagedecl*/
+  variable11 = NEW_APackagedecl_parser_prod___APackagedecl___init_apackagedecl( variable7 /*pdocnode2*/,  variable8 /*tkwpackagenode3*/,  variable9 /*tidnode4*/); /*new APackagedecl*/
   variable10 = variable11;
   variable1 =  variable10 /*ppackagedeclnode1*/ /*node_list=*/;
   variable11 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(1)) /*Parser::go_to*/;
@@ -6292,7 +6299,7 @@ void parser___ReduceAction49___action(val_t  self, val_t  param0) {
   variable10 =  variable3 /*nodearraylist5*/;
   variable11 = TAG_Bool(( variable10 /*tidnode4*/==NIT_NULL) || VAL_ISA( variable10 /*tidnode4*/, COLOR_TId, ID_TId)) /*cast TId*/;
   if (!UNTAG_Bool(variable11)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction49___action, LOCATE_parser, 2933); nit_exit(1);}
-  variable12 = NEW_parser_prod___AImport___init_aimport( variable8 /*pvisibilitynode2*/,  variable9 /*tkwimportnode3*/,  variable10 /*tidnode4*/); /*new AImport*/
+  variable12 = NEW_AImport_parser_prod___AImport___init_aimport( variable8 /*pvisibilitynode2*/,  variable9 /*tkwimportnode3*/,  variable10 /*tidnode4*/); /*new AImport*/
   variable11 = variable12;
   variable1 =  variable11 /*pimportnode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(2)) /*Parser::go_to*/;
@@ -6349,7 +6356,7 @@ void parser___ReduceAction50___action(val_t  self, val_t  param0) {
   variable10 =  variable3 /*nodearraylist5*/;
   variable11 = TAG_Bool(( variable10 /*tkwendnode4*/==NIT_NULL) || VAL_ISA( variable10 /*tkwendnode4*/, COLOR_TKwend, ID_TKwend)) /*cast TKwend*/;
   if (!UNTAG_Bool(variable11)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction50___action, LOCATE_parser, 2960); nit_exit(1);}
-  variable12 = NEW_parser_prod___ANoImport___init_anoimport( variable8 /*pvisibilitynode2*/,  variable9 /*tkwimportnode3*/,  variable10 /*tkwendnode4*/); /*new ANoImport*/
+  variable12 = NEW_ANoImport_parser_prod___ANoImport___init_anoimport( variable8 /*pvisibilitynode2*/,  variable9 /*tkwimportnode3*/,  variable10 /*tkwendnode4*/); /*new ANoImport*/
   variable11 = variable12;
   variable1 =  variable11 /*pimportnode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(2)) /*Parser::go_to*/;
@@ -6381,7 +6388,7 @@ void parser___ReduceAction51___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*ppropdefnode2*/==NIT_NULL) || VAL_ISA( variable4 /*ppropdefnode2*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -6390,7 +6397,7 @@ void parser___ReduceAction51___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable5)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable3 /*listnode3*/,COLOR_abstract_collection___SimpleCollection___add))( variable3 /*listnode3*/,  variable4 /*ppropdefnode2*/) /*AbstractArray::add*/;
   }
-  variable6 = NEW_parser_prod___AMainClassdef___init_amainclassdef( variable3 /*listnode3*/); /*new AMainClassdef*/
+  variable6 = NEW_AMainClassdef_parser_prod___AMainClassdef___init_amainclassdef( variable3 /*listnode3*/); /*new AMainClassdef*/
   variable5 = variable6;
   variable1 =  variable5 /*pclassdefnode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(3)) /*Parser::go_to*/;
@@ -6456,7 +6463,7 @@ void parser___ReduceAction53___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
   variable6 =  variable3 /*nodearraylist2*/;
   variable7 = TAG_Bool(( variable6 /*pexprnode4*/==NIT_NULL) || VAL_ISA( variable6 /*pexprnode4*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -6465,9 +6472,9 @@ void parser___ReduceAction53___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable7)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable5 /*listnode5*/,COLOR_abstract_collection___SimpleCollection___add))( variable5 /*listnode5*/,  variable6 /*pexprnode4*/) /*AbstractArray::add*/;
   }
-  variable8 = NEW_parser_prod___ABlockExpr___init_ablockexpr( variable5 /*listnode5*/); /*new ABlockExpr*/
+  variable8 = NEW_ABlockExpr_parser_prod___ABlockExpr___init_ablockexpr( variable5 /*listnode5*/); /*new ABlockExpr*/
   variable7 = variable8;
-  variable9 = NEW_parser_prod___AMainMethPropdef___init_amainmethpropdef( NIT_NULL /*null*/,  variable7 /*pexprnode3*/); /*new AMainMethPropdef*/
+  variable9 = NEW_AMainMethPropdef_parser_prod___AMainMethPropdef___init_amainmethpropdef( NIT_NULL /*null*/,  variable7 /*pexprnode3*/); /*new AMainMethPropdef*/
   variable8 = variable9;
   variable1 =  variable8 /*ppropdefnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(4)) /*Parser::go_to*/;
@@ -6510,7 +6517,7 @@ void parser___ReduceAction54___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
   variable7 =  variable4 /*nodearraylist2*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode4*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode4*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -6531,9 +6538,9 @@ void parser___ReduceAction54___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable6 /*listnode6*/,COLOR_abstract_collection___IndexedCollection___append))( variable6 /*listnode6*/,  variable8 /*listnode5*/) /*IndexedCollection::append*/;
     }
   }
-  variable10 = NEW_parser_prod___ABlockExpr___init_ablockexpr( variable6 /*listnode6*/); /*new ABlockExpr*/
+  variable10 = NEW_ABlockExpr_parser_prod___ABlockExpr___init_ablockexpr( variable6 /*listnode6*/); /*new ABlockExpr*/
   variable9 = variable10;
-  variable11 = NEW_parser_prod___AMainMethPropdef___init_amainmethpropdef( NIT_NULL /*null*/,  variable9 /*pexprnode3*/); /*new AMainMethPropdef*/
+  variable11 = NEW_AMainMethPropdef_parser_prod___AMainMethPropdef___init_amainmethpropdef( NIT_NULL /*null*/,  variable9 /*pexprnode3*/); /*new AMainMethPropdef*/
   variable10 = variable11;
   variable1 =  variable10 /*ppropdefnode1*/ /*node_list=*/;
   variable11 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(4)) /*Parser::go_to*/;
@@ -6588,11 +6595,11 @@ void parser___ReduceAction55___action(val_t  self, val_t  param0) {
   variable7 = variable8;
   variable9 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable8 = variable9;
-  variable10 = NEW_array___Array___init(); /*new Array[E]*/
+  variable10 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable9 = variable10;
-  variable11 = NEW_array___Array___init(); /*new Array[E]*/
+  variable11 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable10 = variable11;
-  variable12 = NEW_array___Array___init(); /*new Array[E]*/
+  variable12 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable11 = variable12;
   variable12 =  variable8 /*nodearraylist1*/;
   variable13 = TAG_Bool(( variable12 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable12 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -6606,7 +6613,7 @@ void parser___ReduceAction55___action(val_t  self, val_t  param0) {
   variable15 =  variable4 /*nodearraylist5*/;
   variable16 = TAG_Bool(( variable15 /*tclassidnode6*/==NIT_NULL) || VAL_ISA( variable15 /*tclassidnode6*/, COLOR_TClassid, ID_TClassid)) /*cast TClassid*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction55___action, LOCATE_parser, 3086); nit_exit(1);}
-  variable17 = NEW_parser_prod___AClassdef___init_aclassdef( variable12 /*pdocnode2*/,  NIT_NULL /*null*/,  variable13 /*pvisibilitynode4*/,  variable14 /*pclasskindnode5*/,  variable15 /*tclassidnode6*/,  variable9 /*listnode7*/,  variable10 /*listnode8*/,  variable11 /*listnode9*/); /*new AClassdef*/
+  variable17 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable12 /*pdocnode2*/,  NIT_NULL /*null*/,  variable13 /*pvisibilitynode4*/,  variable14 /*pclasskindnode5*/,  variable15 /*tclassidnode6*/,  variable9 /*listnode7*/,  variable10 /*listnode8*/,  variable11 /*listnode9*/); /*new AClassdef*/
   variable16 = variable17;
   variable1 =  variable16 /*pclassdefnode1*/ /*node_list=*/;
   variable17 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -6665,11 +6672,11 @@ void parser___ReduceAction56___action(val_t  self, val_t  param0) {
   variable8 = variable9;
   variable10 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable9 = variable10;
-  variable11 = NEW_array___Array___init(); /*new Array[E]*/
+  variable11 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable10 = variable11;
-  variable12 = NEW_array___Array___init(); /*new Array[E]*/
+  variable12 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable11 = variable12;
-  variable13 = NEW_array___Array___init(); /*new Array[E]*/
+  variable13 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable12 = variable13;
   variable13 =  variable9 /*nodearraylist1*/;
   variable14 = TAG_Bool(( variable13 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable13 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -6686,7 +6693,7 @@ void parser___ReduceAction56___action(val_t  self, val_t  param0) {
   variable17 =  variable4 /*nodearraylist6*/;
   variable18 = TAG_Bool(( variable17 /*tclassidnode6*/==NIT_NULL) || VAL_ISA( variable17 /*tclassidnode6*/, COLOR_TClassid, ID_TClassid)) /*cast TClassid*/;
   if (!UNTAG_Bool(variable18)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction56___action, LOCATE_parser, 3127); nit_exit(1);}
-  variable19 = NEW_parser_prod___AClassdef___init_aclassdef( variable13 /*pdocnode2*/,  variable14 /*tkwredefnode3*/,  variable15 /*pvisibilitynode4*/,  variable16 /*pclasskindnode5*/,  variable17 /*tclassidnode6*/,  variable10 /*listnode7*/,  variable11 /*listnode8*/,  variable12 /*listnode9*/); /*new AClassdef*/
+  variable19 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable13 /*pdocnode2*/,  variable14 /*tkwredefnode3*/,  variable15 /*pvisibilitynode4*/,  variable16 /*pclasskindnode5*/,  variable17 /*tclassidnode6*/,  variable10 /*listnode7*/,  variable11 /*listnode8*/,  variable12 /*listnode9*/); /*new AClassdef*/
   variable18 = variable19;
   variable1 =  variable18 /*pclassdefnode1*/ /*node_list=*/;
   variable19 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -6745,11 +6752,11 @@ void parser___ReduceAction57___action(val_t  self, val_t  param0) {
   variable8 = variable9;
   variable10 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable9 = variable10;
-  variable11 = NEW_array___Array___init(); /*new Array[E]*/
+  variable11 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable10 = variable11;
-  variable12 = NEW_array___Array___init(); /*new Array[E]*/
+  variable12 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable11 = variable12;
-  variable13 = NEW_array___Array___init(); /*new Array[E]*/
+  variable13 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable12 = variable13;
   variable13 =  variable9 /*nodearraylist1*/;
   variable14 = TAG_Bool(( variable13 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable13 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -6775,7 +6782,7 @@ void parser___ReduceAction57___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable10 /*listnode8*/,COLOR_abstract_collection___IndexedCollection___append))( variable10 /*listnode8*/,  variable17 /*listnode7*/) /*IndexedCollection::append*/;
     }
   }
-  variable19 = NEW_parser_prod___AClassdef___init_aclassdef( variable13 /*pdocnode2*/,  NIT_NULL /*null*/,  variable14 /*pvisibilitynode4*/,  variable15 /*pclasskindnode5*/,  variable16 /*tclassidnode6*/,  variable10 /*listnode8*/,  variable11 /*listnode9*/,  variable12 /*listnode10*/); /*new AClassdef*/
+  variable19 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable13 /*pdocnode2*/,  NIT_NULL /*null*/,  variable14 /*pvisibilitynode4*/,  variable15 /*pclasskindnode5*/,  variable16 /*tclassidnode6*/,  variable10 /*listnode8*/,  variable11 /*listnode9*/,  variable12 /*listnode10*/); /*new AClassdef*/
   variable18 = variable19;
   variable1 =  variable18 /*pclassdefnode1*/ /*node_list=*/;
   variable19 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -6838,11 +6845,11 @@ void parser___ReduceAction58___action(val_t  self, val_t  param0) {
   variable9 = variable10;
   variable11 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable10 = variable11;
-  variable12 = NEW_array___Array___init(); /*new Array[E]*/
+  variable12 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable11 = variable12;
-  variable13 = NEW_array___Array___init(); /*new Array[E]*/
+  variable13 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable12 = variable13;
-  variable14 = NEW_array___Array___init(); /*new Array[E]*/
+  variable14 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable13 = variable14;
   variable14 =  variable10 /*nodearraylist1*/;
   variable15 = TAG_Bool(( variable14 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable14 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -6871,7 +6878,7 @@ void parser___ReduceAction58___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable11 /*listnode8*/,COLOR_abstract_collection___IndexedCollection___append))( variable11 /*listnode8*/,  variable19 /*listnode7*/) /*IndexedCollection::append*/;
     }
   }
-  variable21 = NEW_parser_prod___AClassdef___init_aclassdef( variable14 /*pdocnode2*/,  variable15 /*tkwredefnode3*/,  variable16 /*pvisibilitynode4*/,  variable17 /*pclasskindnode5*/,  variable18 /*tclassidnode6*/,  variable11 /*listnode8*/,  variable12 /*listnode9*/,  variable13 /*listnode10*/); /*new AClassdef*/
+  variable21 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable14 /*pdocnode2*/,  variable15 /*tkwredefnode3*/,  variable16 /*pvisibilitynode4*/,  variable17 /*pclasskindnode5*/,  variable18 /*tclassidnode6*/,  variable11 /*listnode8*/,  variable12 /*listnode9*/,  variable13 /*listnode10*/); /*new AClassdef*/
   variable20 = variable21;
   variable1 =  variable20 /*pclassdefnode1*/ /*node_list=*/;
   variable21 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -6930,11 +6937,11 @@ void parser___ReduceAction59___action(val_t  self, val_t  param0) {
   variable8 = variable9;
   variable10 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable9 = variable10;
-  variable11 = NEW_array___Array___init(); /*new Array[E]*/
+  variable11 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable10 = variable11;
-  variable12 = NEW_array___Array___init(); /*new Array[E]*/
+  variable12 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable11 = variable12;
-  variable13 = NEW_array___Array___init(); /*new Array[E]*/
+  variable13 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable12 = variable13;
   variable13 =  variable9 /*nodearraylist1*/;
   variable14 = TAG_Bool(( variable13 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable13 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -6960,7 +6967,7 @@ void parser___ReduceAction59___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable11 /*listnode9*/,COLOR_abstract_collection___IndexedCollection___append))( variable11 /*listnode9*/,  variable17 /*listnode8*/) /*IndexedCollection::append*/;
     }
   }
-  variable19 = NEW_parser_prod___AClassdef___init_aclassdef( variable13 /*pdocnode2*/,  NIT_NULL /*null*/,  variable14 /*pvisibilitynode4*/,  variable15 /*pclasskindnode5*/,  variable16 /*tclassidnode6*/,  variable10 /*listnode7*/,  variable11 /*listnode9*/,  variable12 /*listnode10*/); /*new AClassdef*/
+  variable19 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable13 /*pdocnode2*/,  NIT_NULL /*null*/,  variable14 /*pvisibilitynode4*/,  variable15 /*pclasskindnode5*/,  variable16 /*tclassidnode6*/,  variable10 /*listnode7*/,  variable11 /*listnode9*/,  variable12 /*listnode10*/); /*new AClassdef*/
   variable18 = variable19;
   variable1 =  variable18 /*pclassdefnode1*/ /*node_list=*/;
   variable19 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -7023,11 +7030,11 @@ void parser___ReduceAction60___action(val_t  self, val_t  param0) {
   variable9 = variable10;
   variable11 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable10 = variable11;
-  variable12 = NEW_array___Array___init(); /*new Array[E]*/
+  variable12 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable11 = variable12;
-  variable13 = NEW_array___Array___init(); /*new Array[E]*/
+  variable13 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable12 = variable13;
-  variable14 = NEW_array___Array___init(); /*new Array[E]*/
+  variable14 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable13 = variable14;
   variable14 =  variable10 /*nodearraylist1*/;
   variable15 = TAG_Bool(( variable14 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable14 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -7056,7 +7063,7 @@ void parser___ReduceAction60___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable12 /*listnode9*/,COLOR_abstract_collection___IndexedCollection___append))( variable12 /*listnode9*/,  variable19 /*listnode8*/) /*IndexedCollection::append*/;
     }
   }
-  variable21 = NEW_parser_prod___AClassdef___init_aclassdef( variable14 /*pdocnode2*/,  variable15 /*tkwredefnode3*/,  variable16 /*pvisibilitynode4*/,  variable17 /*pclasskindnode5*/,  variable18 /*tclassidnode6*/,  variable11 /*listnode7*/,  variable12 /*listnode9*/,  variable13 /*listnode10*/); /*new AClassdef*/
+  variable21 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable14 /*pdocnode2*/,  variable15 /*tkwredefnode3*/,  variable16 /*pvisibilitynode4*/,  variable17 /*pclasskindnode5*/,  variable18 /*tclassidnode6*/,  variable11 /*listnode7*/,  variable12 /*listnode9*/,  variable13 /*listnode10*/); /*new AClassdef*/
   variable20 = variable21;
   variable1 =  variable20 /*pclassdefnode1*/ /*node_list=*/;
   variable21 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -7119,11 +7126,11 @@ void parser___ReduceAction61___action(val_t  self, val_t  param0) {
   variable9 = variable10;
   variable11 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable10 = variable11;
-  variable12 = NEW_array___Array___init(); /*new Array[E]*/
+  variable12 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable11 = variable12;
-  variable13 = NEW_array___Array___init(); /*new Array[E]*/
+  variable13 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable12 = variable13;
-  variable14 = NEW_array___Array___init(); /*new Array[E]*/
+  variable14 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable13 = variable14;
   variable14 =  variable10 /*nodearraylist1*/;
   variable15 = TAG_Bool(( variable14 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable14 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -7161,7 +7168,7 @@ void parser___ReduceAction61___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable12 /*listnode10*/,COLOR_abstract_collection___IndexedCollection___append))( variable12 /*listnode10*/,  variable19 /*listnode9*/) /*IndexedCollection::append*/;
     }
   }
-  variable21 = NEW_parser_prod___AClassdef___init_aclassdef( variable14 /*pdocnode2*/,  NIT_NULL /*null*/,  variable15 /*pvisibilitynode4*/,  variable16 /*pclasskindnode5*/,  variable17 /*tclassidnode6*/,  variable11 /*listnode8*/,  variable12 /*listnode10*/,  variable13 /*listnode11*/); /*new AClassdef*/
+  variable21 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable14 /*pdocnode2*/,  NIT_NULL /*null*/,  variable15 /*pvisibilitynode4*/,  variable16 /*pclasskindnode5*/,  variable17 /*tclassidnode6*/,  variable11 /*listnode8*/,  variable12 /*listnode10*/,  variable13 /*listnode11*/); /*new AClassdef*/
   variable20 = variable21;
   variable1 =  variable20 /*pclassdefnode1*/ /*node_list=*/;
   variable21 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -7228,11 +7235,11 @@ void parser___ReduceAction62___action(val_t  self, val_t  param0) {
   variable10 = variable11;
   variable12 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable11 = variable12;
-  variable13 = NEW_array___Array___init(); /*new Array[E]*/
+  variable13 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable12 = variable13;
-  variable14 = NEW_array___Array___init(); /*new Array[E]*/
+  variable14 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable13 = variable14;
-  variable15 = NEW_array___Array___init(); /*new Array[E]*/
+  variable15 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable14 = variable15;
   variable15 =  variable11 /*nodearraylist1*/;
   variable16 = TAG_Bool(( variable15 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable15 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -7273,7 +7280,7 @@ void parser___ReduceAction62___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable13 /*listnode10*/,COLOR_abstract_collection___IndexedCollection___append))( variable13 /*listnode10*/,  variable21 /*listnode9*/) /*IndexedCollection::append*/;
     }
   }
-  variable23 = NEW_parser_prod___AClassdef___init_aclassdef( variable15 /*pdocnode2*/,  variable16 /*tkwredefnode3*/,  variable17 /*pvisibilitynode4*/,  variable18 /*pclasskindnode5*/,  variable19 /*tclassidnode6*/,  variable12 /*listnode8*/,  variable13 /*listnode10*/,  variable14 /*listnode11*/); /*new AClassdef*/
+  variable23 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable15 /*pdocnode2*/,  variable16 /*tkwredefnode3*/,  variable17 /*pvisibilitynode4*/,  variable18 /*pclasskindnode5*/,  variable19 /*tclassidnode6*/,  variable12 /*listnode8*/,  variable13 /*listnode10*/,  variable14 /*listnode11*/); /*new AClassdef*/
   variable22 = variable23;
   variable1 =  variable22 /*pclassdefnode1*/ /*node_list=*/;
   variable23 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -7335,11 +7342,11 @@ void parser___ReduceAction63___action(val_t  self, val_t  param0) {
   variable9 = variable10;
   variable11 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable10 = variable11;
-  variable12 = NEW_array___Array___init(); /*new Array[E]*/
+  variable12 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable11 = variable12;
-  variable13 = NEW_array___Array___init(); /*new Array[E]*/
+  variable13 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable12 = variable13;
-  variable14 = NEW_array___Array___init(); /*new Array[E]*/
+  variable14 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable13 = variable14;
   variable14 =  variable10 /*nodearraylist1*/;
   variable15 = TAG_Bool(( variable14 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable14 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -7360,7 +7367,7 @@ void parser___ReduceAction63___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable19)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable13 /*listnode10*/,COLOR_abstract_collection___SimpleCollection___add))( variable13 /*listnode10*/,  variable18 /*ppropdefnode9*/) /*AbstractArray::add*/;
   }
-  variable20 = NEW_parser_prod___AClassdef___init_aclassdef( variable14 /*pdocnode2*/,  NIT_NULL /*null*/,  variable15 /*pvisibilitynode4*/,  variable16 /*pclasskindnode5*/,  variable17 /*tclassidnode6*/,  variable11 /*listnode7*/,  variable12 /*listnode8*/,  variable13 /*listnode10*/); /*new AClassdef*/
+  variable20 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable14 /*pdocnode2*/,  NIT_NULL /*null*/,  variable15 /*pvisibilitynode4*/,  variable16 /*pclasskindnode5*/,  variable17 /*tclassidnode6*/,  variable11 /*listnode7*/,  variable12 /*listnode8*/,  variable13 /*listnode10*/); /*new AClassdef*/
   variable19 = variable20;
   variable1 =  variable19 /*pclassdefnode1*/ /*node_list=*/;
   variable20 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -7426,11 +7433,11 @@ void parser___ReduceAction64___action(val_t  self, val_t  param0) {
   variable10 = variable11;
   variable12 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable11 = variable12;
-  variable13 = NEW_array___Array___init(); /*new Array[E]*/
+  variable13 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable12 = variable13;
-  variable14 = NEW_array___Array___init(); /*new Array[E]*/
+  variable14 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable13 = variable14;
-  variable15 = NEW_array___Array___init(); /*new Array[E]*/
+  variable15 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable14 = variable15;
   variable15 =  variable11 /*nodearraylist1*/;
   variable16 = TAG_Bool(( variable15 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable15 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -7463,7 +7470,7 @@ void parser___ReduceAction64___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable14 /*listnode11*/,COLOR_abstract_collection___IndexedCollection___append))( variable14 /*listnode11*/,  variable20 /*listnode10*/) /*IndexedCollection::append*/;
     }
   }
-  variable22 = NEW_parser_prod___AClassdef___init_aclassdef( variable15 /*pdocnode2*/,  NIT_NULL /*null*/,  variable16 /*pvisibilitynode4*/,  variable17 /*pclasskindnode5*/,  variable18 /*tclassidnode6*/,  variable12 /*listnode7*/,  variable13 /*listnode8*/,  variable14 /*listnode11*/); /*new AClassdef*/
+  variable22 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable15 /*pdocnode2*/,  NIT_NULL /*null*/,  variable16 /*pvisibilitynode4*/,  variable17 /*pclasskindnode5*/,  variable18 /*tclassidnode6*/,  variable12 /*listnode7*/,  variable13 /*listnode8*/,  variable14 /*listnode11*/); /*new AClassdef*/
   variable21 = variable22;
   variable1 =  variable21 /*pclassdefnode1*/ /*node_list=*/;
   variable22 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -7529,11 +7536,11 @@ void parser___ReduceAction65___action(val_t  self, val_t  param0) {
   variable10 = variable11;
   variable12 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable11 = variable12;
-  variable13 = NEW_array___Array___init(); /*new Array[E]*/
+  variable13 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable12 = variable13;
-  variable14 = NEW_array___Array___init(); /*new Array[E]*/
+  variable14 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable13 = variable14;
-  variable15 = NEW_array___Array___init(); /*new Array[E]*/
+  variable15 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable14 = variable15;
   variable15 =  variable11 /*nodearraylist1*/;
   variable16 = TAG_Bool(( variable15 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable15 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -7557,7 +7564,7 @@ void parser___ReduceAction65___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable21)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable14 /*listnode10*/,COLOR_abstract_collection___SimpleCollection___add))( variable14 /*listnode10*/,  variable20 /*ppropdefnode9*/) /*AbstractArray::add*/;
   }
-  variable22 = NEW_parser_prod___AClassdef___init_aclassdef( variable15 /*pdocnode2*/,  variable16 /*tkwredefnode3*/,  variable17 /*pvisibilitynode4*/,  variable18 /*pclasskindnode5*/,  variable19 /*tclassidnode6*/,  variable12 /*listnode7*/,  variable13 /*listnode8*/,  variable14 /*listnode10*/); /*new AClassdef*/
+  variable22 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable15 /*pdocnode2*/,  variable16 /*tkwredefnode3*/,  variable17 /*pvisibilitynode4*/,  variable18 /*pclasskindnode5*/,  variable19 /*tclassidnode6*/,  variable12 /*listnode7*/,  variable13 /*listnode8*/,  variable14 /*listnode10*/); /*new AClassdef*/
   variable21 = variable22;
   variable1 =  variable21 /*pclassdefnode1*/ /*node_list=*/;
   variable22 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -7627,11 +7634,11 @@ void parser___ReduceAction66___action(val_t  self, val_t  param0) {
   variable11 = variable12;
   variable13 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable12 = variable13;
-  variable14 = NEW_array___Array___init(); /*new Array[E]*/
+  variable14 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable13 = variable14;
-  variable15 = NEW_array___Array___init(); /*new Array[E]*/
+  variable15 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable14 = variable15;
-  variable16 = NEW_array___Array___init(); /*new Array[E]*/
+  variable16 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable15 = variable16;
   variable16 =  variable12 /*nodearraylist1*/;
   variable17 = TAG_Bool(( variable16 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable16 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -7667,7 +7674,7 @@ void parser___ReduceAction66___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable15 /*listnode11*/,COLOR_abstract_collection___IndexedCollection___append))( variable15 /*listnode11*/,  variable22 /*listnode10*/) /*IndexedCollection::append*/;
     }
   }
-  variable24 = NEW_parser_prod___AClassdef___init_aclassdef( variable16 /*pdocnode2*/,  variable17 /*tkwredefnode3*/,  variable18 /*pvisibilitynode4*/,  variable19 /*pclasskindnode5*/,  variable20 /*tclassidnode6*/,  variable13 /*listnode7*/,  variable14 /*listnode8*/,  variable15 /*listnode11*/); /*new AClassdef*/
+  variable24 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable16 /*pdocnode2*/,  variable17 /*tkwredefnode3*/,  variable18 /*pvisibilitynode4*/,  variable19 /*pclasskindnode5*/,  variable20 /*tclassidnode6*/,  variable13 /*listnode7*/,  variable14 /*listnode8*/,  variable15 /*listnode11*/); /*new AClassdef*/
   variable23 = variable24;
   variable1 =  variable23 /*pclassdefnode1*/ /*node_list=*/;
   variable24 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -7733,11 +7740,11 @@ void parser___ReduceAction67___action(val_t  self, val_t  param0) {
   variable10 = variable11;
   variable12 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable11 = variable12;
-  variable13 = NEW_array___Array___init(); /*new Array[E]*/
+  variable13 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable12 = variable13;
-  variable14 = NEW_array___Array___init(); /*new Array[E]*/
+  variable14 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable13 = variable14;
-  variable15 = NEW_array___Array___init(); /*new Array[E]*/
+  variable15 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable14 = variable15;
   variable15 =  variable11 /*nodearraylist1*/;
   variable16 = TAG_Bool(( variable15 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable15 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -7770,7 +7777,7 @@ void parser___ReduceAction67___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable21)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable14 /*listnode11*/,COLOR_abstract_collection___SimpleCollection___add))( variable14 /*listnode11*/,  variable20 /*ppropdefnode10*/) /*AbstractArray::add*/;
   }
-  variable22 = NEW_parser_prod___AClassdef___init_aclassdef( variable15 /*pdocnode2*/,  NIT_NULL /*null*/,  variable16 /*pvisibilitynode4*/,  variable17 /*pclasskindnode5*/,  variable18 /*tclassidnode6*/,  variable12 /*listnode8*/,  variable13 /*listnode9*/,  variable14 /*listnode11*/); /*new AClassdef*/
+  variable22 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable15 /*pdocnode2*/,  NIT_NULL /*null*/,  variable16 /*pvisibilitynode4*/,  variable17 /*pclasskindnode5*/,  variable18 /*tclassidnode6*/,  variable12 /*listnode8*/,  variable13 /*listnode9*/,  variable14 /*listnode11*/); /*new AClassdef*/
   variable21 = variable22;
   variable1 =  variable21 /*pclassdefnode1*/ /*node_list=*/;
   variable22 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -7840,11 +7847,11 @@ void parser___ReduceAction68___action(val_t  self, val_t  param0) {
   variable11 = variable12;
   variable13 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable12 = variable13;
-  variable14 = NEW_array___Array___init(); /*new Array[E]*/
+  variable14 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable13 = variable14;
-  variable15 = NEW_array___Array___init(); /*new Array[E]*/
+  variable15 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable14 = variable15;
-  variable16 = NEW_array___Array___init(); /*new Array[E]*/
+  variable16 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable15 = variable16;
   variable16 =  variable12 /*nodearraylist1*/;
   variable17 = TAG_Bool(( variable16 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable16 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -7889,7 +7896,7 @@ void parser___ReduceAction68___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable15 /*listnode12*/,COLOR_abstract_collection___IndexedCollection___append))( variable15 /*listnode12*/,  variable22 /*listnode11*/) /*IndexedCollection::append*/;
     }
   }
-  variable24 = NEW_parser_prod___AClassdef___init_aclassdef( variable16 /*pdocnode2*/,  NIT_NULL /*null*/,  variable17 /*pvisibilitynode4*/,  variable18 /*pclasskindnode5*/,  variable19 /*tclassidnode6*/,  variable13 /*listnode8*/,  variable14 /*listnode9*/,  variable15 /*listnode12*/); /*new AClassdef*/
+  variable24 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable16 /*pdocnode2*/,  NIT_NULL /*null*/,  variable17 /*pvisibilitynode4*/,  variable18 /*pclasskindnode5*/,  variable19 /*tclassidnode6*/,  variable13 /*listnode8*/,  variable14 /*listnode9*/,  variable15 /*listnode12*/); /*new AClassdef*/
   variable23 = variable24;
   variable1 =  variable23 /*pclassdefnode1*/ /*node_list=*/;
   variable24 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -7959,11 +7966,11 @@ void parser___ReduceAction69___action(val_t  self, val_t  param0) {
   variable11 = variable12;
   variable13 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable12 = variable13;
-  variable14 = NEW_array___Array___init(); /*new Array[E]*/
+  variable14 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable13 = variable14;
-  variable15 = NEW_array___Array___init(); /*new Array[E]*/
+  variable15 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable14 = variable15;
-  variable16 = NEW_array___Array___init(); /*new Array[E]*/
+  variable16 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable15 = variable16;
   variable16 =  variable12 /*nodearraylist1*/;
   variable17 = TAG_Bool(( variable16 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable16 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -7999,7 +8006,7 @@ void parser___ReduceAction69___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable23)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable15 /*listnode11*/,COLOR_abstract_collection___SimpleCollection___add))( variable15 /*listnode11*/,  variable22 /*ppropdefnode10*/) /*AbstractArray::add*/;
   }
-  variable24 = NEW_parser_prod___AClassdef___init_aclassdef( variable16 /*pdocnode2*/,  variable17 /*tkwredefnode3*/,  variable18 /*pvisibilitynode4*/,  variable19 /*pclasskindnode5*/,  variable20 /*tclassidnode6*/,  variable13 /*listnode8*/,  variable14 /*listnode9*/,  variable15 /*listnode11*/); /*new AClassdef*/
+  variable24 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable16 /*pdocnode2*/,  variable17 /*tkwredefnode3*/,  variable18 /*pvisibilitynode4*/,  variable19 /*pclasskindnode5*/,  variable20 /*tclassidnode6*/,  variable13 /*listnode8*/,  variable14 /*listnode9*/,  variable15 /*listnode11*/); /*new AClassdef*/
   variable23 = variable24;
   variable1 =  variable23 /*pclassdefnode1*/ /*node_list=*/;
   variable24 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -8073,11 +8080,11 @@ void parser___ReduceAction70___action(val_t  self, val_t  param0) {
   variable12 = variable13;
   variable14 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable13 = variable14;
-  variable15 = NEW_array___Array___init(); /*new Array[E]*/
+  variable15 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable14 = variable15;
-  variable16 = NEW_array___Array___init(); /*new Array[E]*/
+  variable16 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable15 = variable16;
-  variable17 = NEW_array___Array___init(); /*new Array[E]*/
+  variable17 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable16 = variable17;
   variable17 =  variable13 /*nodearraylist1*/;
   variable18 = TAG_Bool(( variable17 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable17 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -8125,7 +8132,7 @@ void parser___ReduceAction70___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable16 /*listnode12*/,COLOR_abstract_collection___IndexedCollection___append))( variable16 /*listnode12*/,  variable24 /*listnode11*/) /*IndexedCollection::append*/;
     }
   }
-  variable26 = NEW_parser_prod___AClassdef___init_aclassdef( variable17 /*pdocnode2*/,  variable18 /*tkwredefnode3*/,  variable19 /*pvisibilitynode4*/,  variable20 /*pclasskindnode5*/,  variable21 /*tclassidnode6*/,  variable14 /*listnode8*/,  variable15 /*listnode9*/,  variable16 /*listnode12*/); /*new AClassdef*/
+  variable26 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable17 /*pdocnode2*/,  variable18 /*tkwredefnode3*/,  variable19 /*pvisibilitynode4*/,  variable20 /*pclasskindnode5*/,  variable21 /*tclassidnode6*/,  variable14 /*listnode8*/,  variable15 /*listnode9*/,  variable16 /*listnode12*/); /*new AClassdef*/
   variable25 = variable26;
   variable1 =  variable25 /*pclassdefnode1*/ /*node_list=*/;
   variable26 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -8191,11 +8198,11 @@ void parser___ReduceAction71___action(val_t  self, val_t  param0) {
   variable10 = variable11;
   variable12 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable11 = variable12;
-  variable13 = NEW_array___Array___init(); /*new Array[E]*/
+  variable13 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable12 = variable13;
-  variable14 = NEW_array___Array___init(); /*new Array[E]*/
+  variable14 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable13 = variable14;
-  variable15 = NEW_array___Array___init(); /*new Array[E]*/
+  variable15 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable14 = variable15;
   variable15 =  variable11 /*nodearraylist1*/;
   variable16 = TAG_Bool(( variable15 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable15 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -8228,7 +8235,7 @@ void parser___ReduceAction71___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable21)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable14 /*listnode11*/,COLOR_abstract_collection___SimpleCollection___add))( variable14 /*listnode11*/,  variable20 /*ppropdefnode10*/) /*AbstractArray::add*/;
   }
-  variable22 = NEW_parser_prod___AClassdef___init_aclassdef( variable15 /*pdocnode2*/,  NIT_NULL /*null*/,  variable16 /*pvisibilitynode4*/,  variable17 /*pclasskindnode5*/,  variable18 /*tclassidnode6*/,  variable12 /*listnode7*/,  variable13 /*listnode9*/,  variable14 /*listnode11*/); /*new AClassdef*/
+  variable22 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable15 /*pdocnode2*/,  NIT_NULL /*null*/,  variable16 /*pvisibilitynode4*/,  variable17 /*pclasskindnode5*/,  variable18 /*tclassidnode6*/,  variable12 /*listnode7*/,  variable13 /*listnode9*/,  variable14 /*listnode11*/); /*new AClassdef*/
   variable21 = variable22;
   variable1 =  variable21 /*pclassdefnode1*/ /*node_list=*/;
   variable22 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -8298,11 +8305,11 @@ void parser___ReduceAction72___action(val_t  self, val_t  param0) {
   variable11 = variable12;
   variable13 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable12 = variable13;
-  variable14 = NEW_array___Array___init(); /*new Array[E]*/
+  variable14 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable13 = variable14;
-  variable15 = NEW_array___Array___init(); /*new Array[E]*/
+  variable15 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable14 = variable15;
-  variable16 = NEW_array___Array___init(); /*new Array[E]*/
+  variable16 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable15 = variable16;
   variable16 =  variable12 /*nodearraylist1*/;
   variable17 = TAG_Bool(( variable16 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable16 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -8347,7 +8354,7 @@ void parser___ReduceAction72___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable15 /*listnode12*/,COLOR_abstract_collection___IndexedCollection___append))( variable15 /*listnode12*/,  variable22 /*listnode11*/) /*IndexedCollection::append*/;
     }
   }
-  variable24 = NEW_parser_prod___AClassdef___init_aclassdef( variable16 /*pdocnode2*/,  NIT_NULL /*null*/,  variable17 /*pvisibilitynode4*/,  variable18 /*pclasskindnode5*/,  variable19 /*tclassidnode6*/,  variable13 /*listnode7*/,  variable14 /*listnode9*/,  variable15 /*listnode12*/); /*new AClassdef*/
+  variable24 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable16 /*pdocnode2*/,  NIT_NULL /*null*/,  variable17 /*pvisibilitynode4*/,  variable18 /*pclasskindnode5*/,  variable19 /*tclassidnode6*/,  variable13 /*listnode7*/,  variable14 /*listnode9*/,  variable15 /*listnode12*/); /*new AClassdef*/
   variable23 = variable24;
   variable1 =  variable23 /*pclassdefnode1*/ /*node_list=*/;
   variable24 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -8417,11 +8424,11 @@ void parser___ReduceAction73___action(val_t  self, val_t  param0) {
   variable11 = variable12;
   variable13 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable12 = variable13;
-  variable14 = NEW_array___Array___init(); /*new Array[E]*/
+  variable14 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable13 = variable14;
-  variable15 = NEW_array___Array___init(); /*new Array[E]*/
+  variable15 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable14 = variable15;
-  variable16 = NEW_array___Array___init(); /*new Array[E]*/
+  variable16 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable15 = variable16;
   variable16 =  variable12 /*nodearraylist1*/;
   variable17 = TAG_Bool(( variable16 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable16 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -8457,7 +8464,7 @@ void parser___ReduceAction73___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable23)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable15 /*listnode11*/,COLOR_abstract_collection___SimpleCollection___add))( variable15 /*listnode11*/,  variable22 /*ppropdefnode10*/) /*AbstractArray::add*/;
   }
-  variable24 = NEW_parser_prod___AClassdef___init_aclassdef( variable16 /*pdocnode2*/,  variable17 /*tkwredefnode3*/,  variable18 /*pvisibilitynode4*/,  variable19 /*pclasskindnode5*/,  variable20 /*tclassidnode6*/,  variable13 /*listnode7*/,  variable14 /*listnode9*/,  variable15 /*listnode11*/); /*new AClassdef*/
+  variable24 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable16 /*pdocnode2*/,  variable17 /*tkwredefnode3*/,  variable18 /*pvisibilitynode4*/,  variable19 /*pclasskindnode5*/,  variable20 /*tclassidnode6*/,  variable13 /*listnode7*/,  variable14 /*listnode9*/,  variable15 /*listnode11*/); /*new AClassdef*/
   variable23 = variable24;
   variable1 =  variable23 /*pclassdefnode1*/ /*node_list=*/;
   variable24 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -8531,11 +8538,11 @@ void parser___ReduceAction74___action(val_t  self, val_t  param0) {
   variable12 = variable13;
   variable14 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable13 = variable14;
-  variable15 = NEW_array___Array___init(); /*new Array[E]*/
+  variable15 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable14 = variable15;
-  variable16 = NEW_array___Array___init(); /*new Array[E]*/
+  variable16 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable15 = variable16;
-  variable17 = NEW_array___Array___init(); /*new Array[E]*/
+  variable17 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable16 = variable17;
   variable17 =  variable13 /*nodearraylist1*/;
   variable18 = TAG_Bool(( variable17 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable17 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -8583,7 +8590,7 @@ void parser___ReduceAction74___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable16 /*listnode12*/,COLOR_abstract_collection___IndexedCollection___append))( variable16 /*listnode12*/,  variable24 /*listnode11*/) /*IndexedCollection::append*/;
     }
   }
-  variable26 = NEW_parser_prod___AClassdef___init_aclassdef( variable17 /*pdocnode2*/,  variable18 /*tkwredefnode3*/,  variable19 /*pvisibilitynode4*/,  variable20 /*pclasskindnode5*/,  variable21 /*tclassidnode6*/,  variable14 /*listnode7*/,  variable15 /*listnode9*/,  variable16 /*listnode12*/); /*new AClassdef*/
+  variable26 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable17 /*pdocnode2*/,  variable18 /*tkwredefnode3*/,  variable19 /*pvisibilitynode4*/,  variable20 /*pclasskindnode5*/,  variable21 /*tclassidnode6*/,  variable14 /*listnode7*/,  variable15 /*listnode9*/,  variable16 /*listnode12*/); /*new AClassdef*/
   variable25 = variable26;
   variable1 =  variable25 /*pclassdefnode1*/ /*node_list=*/;
   variable26 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -8653,11 +8660,11 @@ void parser___ReduceAction75___action(val_t  self, val_t  param0) {
   variable11 = variable12;
   variable13 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable12 = variable13;
-  variable14 = NEW_array___Array___init(); /*new Array[E]*/
+  variable14 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable13 = variable14;
-  variable15 = NEW_array___Array___init(); /*new Array[E]*/
+  variable15 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable14 = variable15;
-  variable16 = NEW_array___Array___init(); /*new Array[E]*/
+  variable16 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable15 = variable16;
   variable16 =  variable12 /*nodearraylist1*/;
   variable17 = TAG_Bool(( variable16 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable16 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -8702,7 +8709,7 @@ void parser___ReduceAction75___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable23)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable15 /*listnode12*/,COLOR_abstract_collection___SimpleCollection___add))( variable15 /*listnode12*/,  variable22 /*ppropdefnode11*/) /*AbstractArray::add*/;
   }
-  variable24 = NEW_parser_prod___AClassdef___init_aclassdef( variable16 /*pdocnode2*/,  NIT_NULL /*null*/,  variable17 /*pvisibilitynode4*/,  variable18 /*pclasskindnode5*/,  variable19 /*tclassidnode6*/,  variable13 /*listnode8*/,  variable14 /*listnode10*/,  variable15 /*listnode12*/); /*new AClassdef*/
+  variable24 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable16 /*pdocnode2*/,  NIT_NULL /*null*/,  variable17 /*pvisibilitynode4*/,  variable18 /*pclasskindnode5*/,  variable19 /*tclassidnode6*/,  variable13 /*listnode8*/,  variable14 /*listnode10*/,  variable15 /*listnode12*/); /*new AClassdef*/
   variable23 = variable24;
   variable1 =  variable23 /*pclassdefnode1*/ /*node_list=*/;
   variable24 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -8776,11 +8783,11 @@ void parser___ReduceAction76___action(val_t  self, val_t  param0) {
   variable12 = variable13;
   variable14 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable13 = variable14;
-  variable15 = NEW_array___Array___init(); /*new Array[E]*/
+  variable15 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable14 = variable15;
-  variable16 = NEW_array___Array___init(); /*new Array[E]*/
+  variable16 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable15 = variable16;
-  variable17 = NEW_array___Array___init(); /*new Array[E]*/
+  variable17 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable16 = variable17;
   variable17 =  variable13 /*nodearraylist1*/;
   variable18 = TAG_Bool(( variable17 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable17 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -8837,7 +8844,7 @@ void parser___ReduceAction76___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable16 /*listnode13*/,COLOR_abstract_collection___IndexedCollection___append))( variable16 /*listnode13*/,  variable24 /*listnode12*/) /*IndexedCollection::append*/;
     }
   }
-  variable26 = NEW_parser_prod___AClassdef___init_aclassdef( variable17 /*pdocnode2*/,  NIT_NULL /*null*/,  variable18 /*pvisibilitynode4*/,  variable19 /*pclasskindnode5*/,  variable20 /*tclassidnode6*/,  variable14 /*listnode8*/,  variable15 /*listnode10*/,  variable16 /*listnode13*/); /*new AClassdef*/
+  variable26 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable17 /*pdocnode2*/,  NIT_NULL /*null*/,  variable18 /*pvisibilitynode4*/,  variable19 /*pclasskindnode5*/,  variable20 /*tclassidnode6*/,  variable14 /*listnode8*/,  variable15 /*listnode10*/,  variable16 /*listnode13*/); /*new AClassdef*/
   variable25 = variable26;
   variable1 =  variable25 /*pclassdefnode1*/ /*node_list=*/;
   variable26 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -8911,11 +8918,11 @@ void parser___ReduceAction77___action(val_t  self, val_t  param0) {
   variable12 = variable13;
   variable14 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable13 = variable14;
-  variable15 = NEW_array___Array___init(); /*new Array[E]*/
+  variable15 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable14 = variable15;
-  variable16 = NEW_array___Array___init(); /*new Array[E]*/
+  variable16 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable15 = variable16;
-  variable17 = NEW_array___Array___init(); /*new Array[E]*/
+  variable17 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable16 = variable17;
   variable17 =  variable13 /*nodearraylist1*/;
   variable18 = TAG_Bool(( variable17 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable17 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -8963,7 +8970,7 @@ void parser___ReduceAction77___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable25)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable16 /*listnode12*/,COLOR_abstract_collection___SimpleCollection___add))( variable16 /*listnode12*/,  variable24 /*ppropdefnode11*/) /*AbstractArray::add*/;
   }
-  variable26 = NEW_parser_prod___AClassdef___init_aclassdef( variable17 /*pdocnode2*/,  variable18 /*tkwredefnode3*/,  variable19 /*pvisibilitynode4*/,  variable20 /*pclasskindnode5*/,  variable21 /*tclassidnode6*/,  variable14 /*listnode8*/,  variable15 /*listnode10*/,  variable16 /*listnode12*/); /*new AClassdef*/
+  variable26 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable17 /*pdocnode2*/,  variable18 /*tkwredefnode3*/,  variable19 /*pvisibilitynode4*/,  variable20 /*pclasskindnode5*/,  variable21 /*tclassidnode6*/,  variable14 /*listnode8*/,  variable15 /*listnode10*/,  variable16 /*listnode12*/); /*new AClassdef*/
   variable25 = variable26;
   variable1 =  variable25 /*pclassdefnode1*/ /*node_list=*/;
   variable26 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -9041,11 +9048,11 @@ void parser___ReduceAction78___action(val_t  self, val_t  param0) {
   variable13 = variable14;
   variable15 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable14 = variable15;
-  variable16 = NEW_array___Array___init(); /*new Array[E]*/
+  variable16 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable15 = variable16;
-  variable17 = NEW_array___Array___init(); /*new Array[E]*/
+  variable17 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable16 = variable17;
-  variable18 = NEW_array___Array___init(); /*new Array[E]*/
+  variable18 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable17 = variable18;
   variable18 =  variable14 /*nodearraylist1*/;
   variable19 = TAG_Bool(( variable18 /*pdocnode2*/==NIT_NULL) || VAL_ISA( variable18 /*pdocnode2*/, COLOR_PDoc, ID_PDoc)) /*cast PDoc*/;
@@ -9105,7 +9112,7 @@ void parser___ReduceAction78___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable17 /*listnode13*/,COLOR_abstract_collection___IndexedCollection___append))( variable17 /*listnode13*/,  variable26 /*listnode12*/) /*IndexedCollection::append*/;
     }
   }
-  variable28 = NEW_parser_prod___AClassdef___init_aclassdef( variable18 /*pdocnode2*/,  variable19 /*tkwredefnode3*/,  variable20 /*pvisibilitynode4*/,  variable21 /*pclasskindnode5*/,  variable22 /*tclassidnode6*/,  variable15 /*listnode8*/,  variable16 /*listnode10*/,  variable17 /*listnode13*/); /*new AClassdef*/
+  variable28 = NEW_AClassdef_parser_prod___AClassdef___init_aclassdef( variable18 /*pdocnode2*/,  variable19 /*tkwredefnode3*/,  variable20 /*pvisibilitynode4*/,  variable21 /*pclasskindnode5*/,  variable22 /*tclassidnode6*/,  variable15 /*listnode8*/,  variable16 /*listnode10*/,  variable17 /*listnode13*/); /*new AClassdef*/
   variable27 = variable28;
   variable1 =  variable27 /*pclassdefnode1*/ /*node_list=*/;
   variable28 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(5)) /*Parser::go_to*/;
@@ -9139,7 +9146,7 @@ void parser___ReduceAction79___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwclassnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwclassnode2*/, COLOR_TKwclass, ID_TKwclass)) /*cast TKwclass*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction79___action, LOCATE_parser, 4451); nit_exit(1);}
-  variable5 = NEW_parser_prod___AConcreteClasskind___init_aconcreteclasskind( variable3 /*tkwclassnode2*/); /*new AConcreteClasskind*/
+  variable5 = NEW_AConcreteClasskind_parser_prod___AConcreteClasskind___init_aconcreteclasskind( variable3 /*tkwclassnode2*/); /*new AConcreteClasskind*/
   variable4 = variable5;
   variable1 =  variable4 /*pclasskindnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(6)) /*Parser::go_to*/;
@@ -9180,7 +9187,7 @@ void parser___ReduceAction80___action(val_t  self, val_t  param0) {
   variable5 =  variable2 /*nodearraylist2*/;
   variable6 = TAG_Bool(( variable5 /*tkwclassnode3*/==NIT_NULL) || VAL_ISA( variable5 /*tkwclassnode3*/, COLOR_TKwclass, ID_TKwclass)) /*cast TKwclass*/;
   if (!UNTAG_Bool(variable6)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction80___action, LOCATE_parser, 4470); nit_exit(1);}
-  variable7 = NEW_parser_prod___AAbstractClasskind___init_aabstractclasskind( variable4 /*tkwabstractnode2*/,  variable5 /*tkwclassnode3*/); /*new AAbstractClasskind*/
+  variable7 = NEW_AAbstractClasskind_parser_prod___AAbstractClasskind___init_aabstractclasskind( variable4 /*tkwabstractnode2*/,  variable5 /*tkwclassnode3*/); /*new AAbstractClasskind*/
   variable6 = variable7;
   variable1 =  variable6 /*pclasskindnode1*/ /*node_list=*/;
   variable7 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(6)) /*Parser::go_to*/;
@@ -9214,7 +9221,7 @@ void parser___ReduceAction81___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwinterfacenode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwinterfacenode2*/, COLOR_TKwinterface, ID_TKwinterface)) /*cast TKwinterface*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction81___action, LOCATE_parser, 4487); nit_exit(1);}
-  variable5 = NEW_parser_prod___AInterfaceClasskind___init_ainterfaceclasskind( variable3 /*tkwinterfacenode2*/); /*new AInterfaceClasskind*/
+  variable5 = NEW_AInterfaceClasskind_parser_prod___AInterfaceClasskind___init_ainterfaceclasskind( variable3 /*tkwinterfacenode2*/); /*new AInterfaceClasskind*/
   variable4 = variable5;
   variable1 =  variable4 /*pclasskindnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(6)) /*Parser::go_to*/;
@@ -9248,7 +9255,7 @@ void parser___ReduceAction82___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwuniversalnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwuniversalnode2*/, COLOR_TKwuniversal, ID_TKwuniversal)) /*cast TKwuniversal*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction82___action, LOCATE_parser, 4503); nit_exit(1);}
-  variable5 = NEW_parser_prod___AUniversalClasskind___init_auniversalclasskind( variable3 /*tkwuniversalnode2*/); /*new AUniversalClasskind*/
+  variable5 = NEW_AUniversalClasskind_parser_prod___AUniversalClasskind___init_auniversalclasskind( variable3 /*tkwuniversalnode2*/); /*new AUniversalClasskind*/
   variable4 = variable5;
   variable1 =  variable4 /*pclasskindnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(6)) /*Parser::go_to*/;
@@ -9291,7 +9298,7 @@ void parser___ReduceAction83___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable4 /*nodearraylist3*/;
   variable9 = TAG_Bool(( variable8 /*pformaldefnode1*/==NIT_NULL) || VAL_ISA( variable8 /*pformaldefnode1*/, COLOR_PFormaldef, ID_PFormaldef)) /*cast PFormaldef*/;
@@ -9345,7 +9352,7 @@ void parser___ReduceAction84___action(val_t  self, val_t  param0) {
   variable6 = variable7;
   variable8 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable5 /*nodearraylist3*/;
   variable10 = TAG_Bool(( variable9 /*pformaldefnode1*/==NIT_NULL) || VAL_ISA( variable9 /*pformaldefnode1*/, COLOR_PFormaldef, ID_PFormaldef)) /*cast PFormaldef*/;
@@ -9435,7 +9442,7 @@ void parser___ReduceAction86___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tclassidnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tclassidnode2*/, COLOR_TClassid, ID_TClassid)) /*cast TClassid*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction86___action, LOCATE_parser, 4586); nit_exit(1);}
-  variable5 = NEW_parser_prod___AFormaldef___init_aformaldef( variable3 /*tclassidnode2*/,  NIT_NULL /*null*/); /*new AFormaldef*/
+  variable5 = NEW_AFormaldef_parser_prod___AFormaldef___init_aformaldef( variable3 /*tclassidnode2*/,  NIT_NULL /*null*/); /*new AFormaldef*/
   variable4 = variable5;
   variable1 =  variable4 /*pformaldefnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(9)) /*Parser::go_to*/;
@@ -9476,7 +9483,7 @@ void parser___ReduceAction87___action(val_t  self, val_t  param0) {
   variable5 =  variable2 /*nodearraylist2*/;
   variable6 = TAG_Bool(( variable5 /*ptypenode3*/==NIT_NULL) || VAL_ISA( variable5 /*ptypenode3*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable6)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction87___action, LOCATE_parser, 4606); nit_exit(1);}
-  variable7 = NEW_parser_prod___AFormaldef___init_aformaldef( variable4 /*tclassidnode2*/,  variable5 /*ptypenode3*/); /*new AFormaldef*/
+  variable7 = NEW_AFormaldef_parser_prod___AFormaldef___init_aformaldef( variable4 /*tclassidnode2*/,  variable5 /*ptypenode3*/); /*new AFormaldef*/
   variable6 = variable7;
   variable1 =  variable6 /*pformaldefnode1*/ /*node_list=*/;
   variable7 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(9)) /*Parser::go_to*/;
@@ -9523,7 +9530,7 @@ void parser___ReduceAction88___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*ptypenode3*/==NIT_NULL) || VAL_ISA( variable7 /*ptypenode3*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction88___action, LOCATE_parser, 4628); nit_exit(1);}
-  variable9 = NEW_parser_prod___ASuperclass___init_asuperclass( variable6 /*tkwspecialnode2*/,  variable7 /*ptypenode3*/); /*new ASuperclass*/
+  variable9 = NEW_ASuperclass_parser_prod___ASuperclass___init_asuperclass( variable6 /*tkwspecialnode2*/,  variable7 /*ptypenode3*/); /*new ASuperclass*/
   variable8 = variable9;
   variable1 =  variable8 /*psuperclassnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(10)) /*Parser::go_to*/;
@@ -9616,12 +9623,12 @@ void parser___ReduceAction90___action(val_t  self, val_t  param0) {
   variable9 =  variable6 /*nodearraylist2*/;
   variable10 = TAG_Bool(( variable9 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable9 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable10)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction90___action, LOCATE_parser, 4666); nit_exit(1);}
-  variable11 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable9 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable11 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable9 /*tkwreadablenode5*/); /*new AReadAble*/
   variable10 = variable11;
   variable11 =  variable5 /*nodearraylist3*/;
   variable12 = TAG_Bool(( variable11 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable11 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction90___action, LOCATE_parser, 4672); nit_exit(1);}
-  variable13 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable11 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable13 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable11 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable12 = variable13;
   variable13 =  variable4 /*nodearraylist4*/;
   variable14 = TAG_Bool(( variable13 /*pvisibilitynode10*/==NIT_NULL) || VAL_ISA( variable13 /*pvisibilitynode10*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -9632,7 +9639,7 @@ void parser___ReduceAction90___action(val_t  self, val_t  param0) {
   variable15 =  variable2 /*nodearraylist6*/;
   variable16 = TAG_Bool(( variable15 /*tattridnode12*/==NIT_NULL) || VAL_ISA( variable15 /*tattridnode12*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction90___action, LOCATE_parser, 4682); nit_exit(1);}
-  variable17 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable8 /*pdocnode2*/,  variable10 /*pablenode3*/,  variable12 /*pablenode6*/,  NIT_NULL /*null*/,  variable13 /*pvisibilitynode10*/,  variable14 /*tkwattrnode11*/,  variable15 /*tattridnode12*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable17 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable8 /*pdocnode2*/,  variable10 /*pablenode3*/,  variable12 /*pablenode6*/,  NIT_NULL /*null*/,  variable13 /*pvisibilitynode10*/,  variable14 /*tkwattrnode11*/,  variable15 /*tattridnode12*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable16 = variable17;
   variable1 =  variable16 /*ppropdefnode1*/ /*node_list=*/;
   variable17 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -9695,7 +9702,7 @@ void parser___ReduceAction91___action(val_t  self, val_t  param0) {
   variable10 =  variable7 /*nodearraylist2*/;
   variable11 = TAG_Bool(( variable10 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable10 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable11)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction91___action, LOCATE_parser, 4714); nit_exit(1);}
-  variable12 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable10 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable12 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable10 /*tkwreadablenode5*/); /*new AReadAble*/
   variable11 = variable12;
   variable12 =  variable6 /*nodearraylist3*/;
   variable13 = TAG_Bool(( variable12 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable12 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -9703,7 +9710,7 @@ void parser___ReduceAction91___action(val_t  self, val_t  param0) {
   variable13 =  variable5 /*nodearraylist4*/;
   variable14 = TAG_Bool(( variable13 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable13 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction91___action, LOCATE_parser, 4722); nit_exit(1);}
-  variable15 = NEW_parser_prod___AWriteAble___init_awriteable( variable12 /*tkwredefnode7*/,  variable13 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable15 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable12 /*tkwredefnode7*/,  variable13 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable14 = variable15;
   variable15 =  variable4 /*nodearraylist5*/;
   variable16 = TAG_Bool(( variable15 /*pvisibilitynode10*/==NIT_NULL) || VAL_ISA( variable15 /*pvisibilitynode10*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -9714,7 +9721,7 @@ void parser___ReduceAction91___action(val_t  self, val_t  param0) {
   variable17 =  variable2 /*nodearraylist7*/;
   variable18 = TAG_Bool(( variable17 /*tattridnode12*/==NIT_NULL) || VAL_ISA( variable17 /*tattridnode12*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable18)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction91___action, LOCATE_parser, 4732); nit_exit(1);}
-  variable19 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  variable11 /*pablenode3*/,  variable14 /*pablenode6*/,  NIT_NULL /*null*/,  variable15 /*pvisibilitynode10*/,  variable16 /*tkwattrnode11*/,  variable17 /*tattridnode12*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable19 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  variable11 /*pablenode3*/,  variable14 /*pablenode6*/,  NIT_NULL /*null*/,  variable15 /*pvisibilitynode10*/,  variable16 /*tkwattrnode11*/,  variable17 /*tattridnode12*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable18 = variable19;
   variable1 =  variable18 /*ppropdefnode1*/ /*node_list=*/;
   variable19 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -9768,7 +9775,7 @@ void parser___ReduceAction92___action(val_t  self, val_t  param0) {
   variable8 =  variable5 /*nodearraylist2*/;
   variable9 = TAG_Bool(( variable8 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable8 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable9)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction92___action, LOCATE_parser, 4762); nit_exit(1);}
-  variable10 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable8 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable10 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable8 /*tkwreadablenode5*/); /*new AReadAble*/
   variable9 = variable10;
   variable10 =  variable4 /*nodearraylist3*/;
   variable11 = TAG_Bool(( variable10 /*pvisibilitynode8*/==NIT_NULL) || VAL_ISA( variable10 /*pvisibilitynode8*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -9779,7 +9786,7 @@ void parser___ReduceAction92___action(val_t  self, val_t  param0) {
   variable12 =  variable2 /*nodearraylist5*/;
   variable13 = TAG_Bool(( variable12 /*tattridnode10*/==NIT_NULL) || VAL_ISA( variable12 /*tattridnode10*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction92___action, LOCATE_parser, 4772); nit_exit(1);}
-  variable14 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable7 /*pdocnode2*/,  variable9 /*pablenode3*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable10 /*pvisibilitynode8*/,  variable11 /*tkwattrnode9*/,  variable12 /*tattridnode10*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable14 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable7 /*pdocnode2*/,  variable9 /*pablenode3*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable10 /*pvisibilitynode8*/,  variable11 /*tkwattrnode9*/,  variable12 /*tattridnode10*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable13 = variable14;
   variable1 =  variable13 /*ppropdefnode1*/ /*node_list=*/;
   variable14 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -9845,12 +9852,12 @@ void parser___ReduceAction93___action(val_t  self, val_t  param0) {
   variable11 =  variable6 /*nodearraylist3*/;
   variable12 = TAG_Bool(( variable11 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable11 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction93___action, LOCATE_parser, 4806); nit_exit(1);}
-  variable13 = NEW_parser_prod___AReadAble___init_areadable( variable10 /*tkwredefnode4*/,  variable11 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable13 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable10 /*tkwredefnode4*/,  variable11 /*tkwreadablenode5*/); /*new AReadAble*/
   variable12 = variable13;
   variable13 =  variable5 /*nodearraylist4*/;
   variable14 = TAG_Bool(( variable13 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable13 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction93___action, LOCATE_parser, 4812); nit_exit(1);}
-  variable15 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable13 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable15 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable13 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable14 = variable15;
   variable15 =  variable4 /*nodearraylist5*/;
   variable16 = TAG_Bool(( variable15 /*pvisibilitynode10*/==NIT_NULL) || VAL_ISA( variable15 /*pvisibilitynode10*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -9861,7 +9868,7 @@ void parser___ReduceAction93___action(val_t  self, val_t  param0) {
   variable17 =  variable2 /*nodearraylist7*/;
   variable18 = TAG_Bool(( variable17 /*tattridnode12*/==NIT_NULL) || VAL_ISA( variable17 /*tattridnode12*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable18)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction93___action, LOCATE_parser, 4822); nit_exit(1);}
-  variable19 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  variable12 /*pablenode3*/,  variable14 /*pablenode6*/,  NIT_NULL /*null*/,  variable15 /*pvisibilitynode10*/,  variable16 /*tkwattrnode11*/,  variable17 /*tattridnode12*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable19 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  variable12 /*pablenode3*/,  variable14 /*pablenode6*/,  NIT_NULL /*null*/,  variable15 /*pvisibilitynode10*/,  variable16 /*tkwattrnode11*/,  variable17 /*tattridnode12*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable18 = variable19;
   variable1 =  variable18 /*ppropdefnode1*/ /*node_list=*/;
   variable19 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -9931,7 +9938,7 @@ void parser___ReduceAction94___action(val_t  self, val_t  param0) {
   variable12 =  variable7 /*nodearraylist3*/;
   variable13 = TAG_Bool(( variable12 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable12 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction94___action, LOCATE_parser, 4857); nit_exit(1);}
-  variable14 = NEW_parser_prod___AReadAble___init_areadable( variable11 /*tkwredefnode4*/,  variable12 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable14 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable11 /*tkwredefnode4*/,  variable12 /*tkwreadablenode5*/); /*new AReadAble*/
   variable13 = variable14;
   variable14 =  variable6 /*nodearraylist4*/;
   variable15 = TAG_Bool(( variable14 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable14 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -9939,7 +9946,7 @@ void parser___ReduceAction94___action(val_t  self, val_t  param0) {
   variable15 =  variable5 /*nodearraylist5*/;
   variable16 = TAG_Bool(( variable15 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable15 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction94___action, LOCATE_parser, 4865); nit_exit(1);}
-  variable17 = NEW_parser_prod___AWriteAble___init_awriteable( variable14 /*tkwredefnode7*/,  variable15 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable17 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable14 /*tkwredefnode7*/,  variable15 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable16 = variable17;
   variable17 =  variable4 /*nodearraylist6*/;
   variable18 = TAG_Bool(( variable17 /*pvisibilitynode10*/==NIT_NULL) || VAL_ISA( variable17 /*pvisibilitynode10*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -9950,7 +9957,7 @@ void parser___ReduceAction94___action(val_t  self, val_t  param0) {
   variable19 =  variable2 /*nodearraylist8*/;
   variable20 = TAG_Bool(( variable19 /*tattridnode12*/==NIT_NULL) || VAL_ISA( variable19 /*tattridnode12*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable20)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction94___action, LOCATE_parser, 4875); nit_exit(1);}
-  variable21 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  variable13 /*pablenode3*/,  variable16 /*pablenode6*/,  NIT_NULL /*null*/,  variable17 /*pvisibilitynode10*/,  variable18 /*tkwattrnode11*/,  variable19 /*tattridnode12*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable21 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  variable13 /*pablenode3*/,  variable16 /*pablenode6*/,  NIT_NULL /*null*/,  variable17 /*pvisibilitynode10*/,  variable18 /*tkwattrnode11*/,  variable19 /*tattridnode12*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable20 = variable21;
   variable1 =  variable20 /*ppropdefnode1*/ /*node_list=*/;
   variable21 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -10011,7 +10018,7 @@ void parser___ReduceAction95___action(val_t  self, val_t  param0) {
   variable10 =  variable5 /*nodearraylist3*/;
   variable11 = TAG_Bool(( variable10 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable10 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable11)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction95___action, LOCATE_parser, 4908); nit_exit(1);}
-  variable12 = NEW_parser_prod___AReadAble___init_areadable( variable9 /*tkwredefnode4*/,  variable10 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable12 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable9 /*tkwredefnode4*/,  variable10 /*tkwreadablenode5*/); /*new AReadAble*/
   variable11 = variable12;
   variable12 =  variable4 /*nodearraylist4*/;
   variable13 = TAG_Bool(( variable12 /*pvisibilitynode8*/==NIT_NULL) || VAL_ISA( variable12 /*pvisibilitynode8*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -10022,7 +10029,7 @@ void parser___ReduceAction95___action(val_t  self, val_t  param0) {
   variable14 =  variable2 /*nodearraylist6*/;
   variable15 = TAG_Bool(( variable14 /*tattridnode10*/==NIT_NULL) || VAL_ISA( variable14 /*tattridnode10*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction95___action, LOCATE_parser, 4918); nit_exit(1);}
-  variable16 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable8 /*pdocnode2*/,  variable11 /*pablenode3*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable12 /*pvisibilitynode8*/,  variable13 /*tkwattrnode9*/,  variable14 /*tattridnode10*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable16 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable8 /*pdocnode2*/,  variable11 /*pablenode3*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable12 /*pvisibilitynode8*/,  variable13 /*tkwattrnode9*/,  variable14 /*tattridnode10*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable15 = variable16;
   variable1 =  variable15 /*ppropdefnode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -10076,7 +10083,7 @@ void parser___ReduceAction96___action(val_t  self, val_t  param0) {
   variable8 =  variable5 /*nodearraylist2*/;
   variable9 = TAG_Bool(( variable8 /*tkwwritablenode6*/==NIT_NULL) || VAL_ISA( variable8 /*tkwwritablenode6*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable9)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction96___action, LOCATE_parser, 4948); nit_exit(1);}
-  variable10 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable8 /*tkwwritablenode6*/); /*new AWriteAble*/
+  variable10 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable8 /*tkwwritablenode6*/); /*new AWriteAble*/
   variable9 = variable10;
   variable10 =  variable4 /*nodearraylist3*/;
   variable11 = TAG_Bool(( variable10 /*pvisibilitynode8*/==NIT_NULL) || VAL_ISA( variable10 /*pvisibilitynode8*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -10087,7 +10094,7 @@ void parser___ReduceAction96___action(val_t  self, val_t  param0) {
   variable12 =  variable2 /*nodearraylist5*/;
   variable13 = TAG_Bool(( variable12 /*tattridnode10*/==NIT_NULL) || VAL_ISA( variable12 /*tattridnode10*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction96___action, LOCATE_parser, 4958); nit_exit(1);}
-  variable14 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable7 /*pdocnode2*/,  NIT_NULL /*null*/,  variable9 /*pablenode4*/,  NIT_NULL /*null*/,  variable10 /*pvisibilitynode8*/,  variable11 /*tkwattrnode9*/,  variable12 /*tattridnode10*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable14 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable7 /*pdocnode2*/,  NIT_NULL /*null*/,  variable9 /*pablenode4*/,  NIT_NULL /*null*/,  variable10 /*pvisibilitynode8*/,  variable11 /*tkwattrnode9*/,  variable12 /*tattridnode10*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable13 = variable14;
   variable1 =  variable13 /*ppropdefnode1*/ /*node_list=*/;
   variable14 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -10148,7 +10155,7 @@ void parser___ReduceAction97___action(val_t  self, val_t  param0) {
   variable10 =  variable5 /*nodearraylist3*/;
   variable11 = TAG_Bool(( variable10 /*tkwwritablenode6*/==NIT_NULL) || VAL_ISA( variable10 /*tkwwritablenode6*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable11)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction97___action, LOCATE_parser, 4991); nit_exit(1);}
-  variable12 = NEW_parser_prod___AWriteAble___init_awriteable( variable9 /*tkwredefnode5*/,  variable10 /*tkwwritablenode6*/); /*new AWriteAble*/
+  variable12 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable9 /*tkwredefnode5*/,  variable10 /*tkwwritablenode6*/); /*new AWriteAble*/
   variable11 = variable12;
   variable12 =  variable4 /*nodearraylist4*/;
   variable13 = TAG_Bool(( variable12 /*pvisibilitynode8*/==NIT_NULL) || VAL_ISA( variable12 /*pvisibilitynode8*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -10159,7 +10166,7 @@ void parser___ReduceAction97___action(val_t  self, val_t  param0) {
   variable14 =  variable2 /*nodearraylist6*/;
   variable15 = TAG_Bool(( variable14 /*tattridnode10*/==NIT_NULL) || VAL_ISA( variable14 /*tattridnode10*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction97___action, LOCATE_parser, 5001); nit_exit(1);}
-  variable16 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable8 /*pdocnode2*/,  NIT_NULL /*null*/,  variable11 /*pablenode4*/,  NIT_NULL /*null*/,  variable12 /*pvisibilitynode8*/,  variable13 /*tkwattrnode9*/,  variable14 /*tattridnode10*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable16 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable8 /*pdocnode2*/,  NIT_NULL /*null*/,  variable11 /*pablenode4*/,  NIT_NULL /*null*/,  variable12 /*pvisibilitynode8*/,  variable13 /*tkwattrnode9*/,  variable14 /*tattridnode10*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable15 = variable16;
   variable1 =  variable15 /*ppropdefnode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -10214,7 +10221,7 @@ void parser___ReduceAction98___action(val_t  self, val_t  param0) {
   variable9 =  variable2 /*nodearraylist4*/;
   variable10 = TAG_Bool(( variable9 /*tattridnode8*/==NIT_NULL) || VAL_ISA( variable9 /*tattridnode8*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable10)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction98___action, LOCATE_parser, 5034); nit_exit(1);}
-  variable11 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable6 /*pdocnode2*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable7 /*pvisibilitynode6*/,  variable8 /*tkwattrnode7*/,  variable9 /*tattridnode8*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable11 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable6 /*pdocnode2*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable7 /*pvisibilitynode6*/,  variable8 /*tkwattrnode7*/,  variable9 /*tattridnode8*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable10 = variable11;
   variable1 =  variable10 /*ppropdefnode1*/ /*node_list=*/;
   variable11 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -10277,12 +10284,12 @@ void parser___ReduceAction99___action(val_t  self, val_t  param0) {
   variable10 =  variable7 /*nodearraylist2*/;
   variable11 = TAG_Bool(( variable10 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable10 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable11)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction99___action, LOCATE_parser, 5066); nit_exit(1);}
-  variable12 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable10 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable12 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable10 /*tkwreadablenode5*/); /*new AReadAble*/
   variable11 = variable12;
   variable12 =  variable6 /*nodearraylist3*/;
   variable13 = TAG_Bool(( variable12 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable12 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction99___action, LOCATE_parser, 5072); nit_exit(1);}
-  variable14 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable12 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable14 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable12 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable13 = variable14;
   variable14 =  variable5 /*nodearraylist4*/;
   variable15 = TAG_Bool(( variable14 /*tkwredefnode9*/==NIT_NULL) || VAL_ISA( variable14 /*tkwredefnode9*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -10296,7 +10303,7 @@ void parser___ReduceAction99___action(val_t  self, val_t  param0) {
   variable17 =  variable2 /*nodearraylist7*/;
   variable18 = TAG_Bool(( variable17 /*tattridnode12*/==NIT_NULL) || VAL_ISA( variable17 /*tattridnode12*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable18)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction99___action, LOCATE_parser, 5084); nit_exit(1);}
-  variable19 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  variable11 /*pablenode3*/,  variable13 /*pablenode6*/,  variable14 /*tkwredefnode9*/,  variable15 /*pvisibilitynode10*/,  variable16 /*tkwattrnode11*/,  variable17 /*tattridnode12*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable19 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  variable11 /*pablenode3*/,  variable13 /*pablenode6*/,  variable14 /*tkwredefnode9*/,  variable15 /*pvisibilitynode10*/,  variable16 /*tkwattrnode11*/,  variable17 /*tattridnode12*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable18 = variable19;
   variable1 =  variable18 /*ppropdefnode1*/ /*node_list=*/;
   variable19 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -10363,7 +10370,7 @@ void parser___ReduceAction100___action(val_t  self, val_t  param0) {
   variable11 =  variable8 /*nodearraylist2*/;
   variable12 = TAG_Bool(( variable11 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable11 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction100___action, LOCATE_parser, 5117); nit_exit(1);}
-  variable13 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable11 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable13 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable11 /*tkwreadablenode5*/); /*new AReadAble*/
   variable12 = variable13;
   variable13 =  variable7 /*nodearraylist3*/;
   variable14 = TAG_Bool(( variable13 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable13 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -10371,7 +10378,7 @@ void parser___ReduceAction100___action(val_t  self, val_t  param0) {
   variable14 =  variable6 /*nodearraylist4*/;
   variable15 = TAG_Bool(( variable14 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable14 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction100___action, LOCATE_parser, 5125); nit_exit(1);}
-  variable16 = NEW_parser_prod___AWriteAble___init_awriteable( variable13 /*tkwredefnode7*/,  variable14 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable16 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable13 /*tkwredefnode7*/,  variable14 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable15 = variable16;
   variable16 =  variable5 /*nodearraylist5*/;
   variable17 = TAG_Bool(( variable16 /*tkwredefnode9*/==NIT_NULL) || VAL_ISA( variable16 /*tkwredefnode9*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -10385,7 +10392,7 @@ void parser___ReduceAction100___action(val_t  self, val_t  param0) {
   variable19 =  variable2 /*nodearraylist8*/;
   variable20 = TAG_Bool(( variable19 /*tattridnode12*/==NIT_NULL) || VAL_ISA( variable19 /*tattridnode12*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable20)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction100___action, LOCATE_parser, 5137); nit_exit(1);}
-  variable21 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  variable12 /*pablenode3*/,  variable15 /*pablenode6*/,  variable16 /*tkwredefnode9*/,  variable17 /*pvisibilitynode10*/,  variable18 /*tkwattrnode11*/,  variable19 /*tattridnode12*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable21 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  variable12 /*pablenode3*/,  variable15 /*pablenode6*/,  variable16 /*tkwredefnode9*/,  variable17 /*pvisibilitynode10*/,  variable18 /*tkwattrnode11*/,  variable19 /*tattridnode12*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable20 = variable21;
   variable1 =  variable20 /*ppropdefnode1*/ /*node_list=*/;
   variable21 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -10443,7 +10450,7 @@ void parser___ReduceAction101___action(val_t  self, val_t  param0) {
   variable9 =  variable6 /*nodearraylist2*/;
   variable10 = TAG_Bool(( variable9 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable9 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable10)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction101___action, LOCATE_parser, 5168); nit_exit(1);}
-  variable11 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable9 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable11 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable9 /*tkwreadablenode5*/); /*new AReadAble*/
   variable10 = variable11;
   variable11 =  variable5 /*nodearraylist3*/;
   variable12 = TAG_Bool(( variable11 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable11 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -10457,7 +10464,7 @@ void parser___ReduceAction101___action(val_t  self, val_t  param0) {
   variable14 =  variable2 /*nodearraylist6*/;
   variable15 = TAG_Bool(( variable14 /*tattridnode10*/==NIT_NULL) || VAL_ISA( variable14 /*tattridnode10*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction101___action, LOCATE_parser, 5180); nit_exit(1);}
-  variable16 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable8 /*pdocnode2*/,  variable10 /*pablenode3*/,  NIT_NULL /*null*/,  variable11 /*tkwredefnode7*/,  variable12 /*pvisibilitynode8*/,  variable13 /*tkwattrnode9*/,  variable14 /*tattridnode10*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable16 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable8 /*pdocnode2*/,  variable10 /*pablenode3*/,  NIT_NULL /*null*/,  variable11 /*tkwredefnode7*/,  variable12 /*pvisibilitynode8*/,  variable13 /*tkwattrnode9*/,  variable14 /*tattridnode10*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable15 = variable16;
   variable1 =  variable15 /*ppropdefnode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -10527,12 +10534,12 @@ void parser___ReduceAction102___action(val_t  self, val_t  param0) {
   variable12 =  variable7 /*nodearraylist3*/;
   variable13 = TAG_Bool(( variable12 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable12 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction102___action, LOCATE_parser, 5215); nit_exit(1);}
-  variable14 = NEW_parser_prod___AReadAble___init_areadable( variable11 /*tkwredefnode4*/,  variable12 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable14 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable11 /*tkwredefnode4*/,  variable12 /*tkwreadablenode5*/); /*new AReadAble*/
   variable13 = variable14;
   variable14 =  variable6 /*nodearraylist4*/;
   variable15 = TAG_Bool(( variable14 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable14 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction102___action, LOCATE_parser, 5221); nit_exit(1);}
-  variable16 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable14 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable16 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable14 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable15 = variable16;
   variable16 =  variable5 /*nodearraylist5*/;
   variable17 = TAG_Bool(( variable16 /*tkwredefnode9*/==NIT_NULL) || VAL_ISA( variable16 /*tkwredefnode9*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -10546,7 +10553,7 @@ void parser___ReduceAction102___action(val_t  self, val_t  param0) {
   variable19 =  variable2 /*nodearraylist8*/;
   variable20 = TAG_Bool(( variable19 /*tattridnode12*/==NIT_NULL) || VAL_ISA( variable19 /*tattridnode12*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable20)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction102___action, LOCATE_parser, 5233); nit_exit(1);}
-  variable21 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  variable13 /*pablenode3*/,  variable15 /*pablenode6*/,  variable16 /*tkwredefnode9*/,  variable17 /*pvisibilitynode10*/,  variable18 /*tkwattrnode11*/,  variable19 /*tattridnode12*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable21 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  variable13 /*pablenode3*/,  variable15 /*pablenode6*/,  variable16 /*tkwredefnode9*/,  variable17 /*pvisibilitynode10*/,  variable18 /*tkwattrnode11*/,  variable19 /*tattridnode12*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable20 = variable21;
   variable1 =  variable20 /*ppropdefnode1*/ /*node_list=*/;
   variable21 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -10620,7 +10627,7 @@ void parser___ReduceAction103___action(val_t  self, val_t  param0) {
   variable13 =  variable8 /*nodearraylist3*/;
   variable14 = TAG_Bool(( variable13 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable13 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction103___action, LOCATE_parser, 5269); nit_exit(1);}
-  variable15 = NEW_parser_prod___AReadAble___init_areadable( variable12 /*tkwredefnode4*/,  variable13 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable15 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable12 /*tkwredefnode4*/,  variable13 /*tkwreadablenode5*/); /*new AReadAble*/
   variable14 = variable15;
   variable15 =  variable7 /*nodearraylist4*/;
   variable16 = TAG_Bool(( variable15 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable15 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -10628,7 +10635,7 @@ void parser___ReduceAction103___action(val_t  self, val_t  param0) {
   variable16 =  variable6 /*nodearraylist5*/;
   variable17 = TAG_Bool(( variable16 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable16 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction103___action, LOCATE_parser, 5277); nit_exit(1);}
-  variable18 = NEW_parser_prod___AWriteAble___init_awriteable( variable15 /*tkwredefnode7*/,  variable16 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable18 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable15 /*tkwredefnode7*/,  variable16 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable17 = variable18;
   variable18 =  variable5 /*nodearraylist6*/;
   variable19 = TAG_Bool(( variable18 /*tkwredefnode9*/==NIT_NULL) || VAL_ISA( variable18 /*tkwredefnode9*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -10642,7 +10649,7 @@ void parser___ReduceAction103___action(val_t  self, val_t  param0) {
   variable21 =  variable2 /*nodearraylist9*/;
   variable22 = TAG_Bool(( variable21 /*tattridnode12*/==NIT_NULL) || VAL_ISA( variable21 /*tattridnode12*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable22)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction103___action, LOCATE_parser, 5289); nit_exit(1);}
-  variable23 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  variable14 /*pablenode3*/,  variable17 /*pablenode6*/,  variable18 /*tkwredefnode9*/,  variable19 /*pvisibilitynode10*/,  variable20 /*tkwattrnode11*/,  variable21 /*tattridnode12*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable23 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  variable14 /*pablenode3*/,  variable17 /*pablenode6*/,  variable18 /*tkwredefnode9*/,  variable19 /*pvisibilitynode10*/,  variable20 /*tkwattrnode11*/,  variable21 /*tattridnode12*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable22 = variable23;
   variable1 =  variable22 /*ppropdefnode1*/ /*node_list=*/;
   variable23 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -10707,7 +10714,7 @@ void parser___ReduceAction104___action(val_t  self, val_t  param0) {
   variable11 =  variable6 /*nodearraylist3*/;
   variable12 = TAG_Bool(( variable11 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable11 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction104___action, LOCATE_parser, 5323); nit_exit(1);}
-  variable13 = NEW_parser_prod___AReadAble___init_areadable( variable10 /*tkwredefnode4*/,  variable11 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable13 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable10 /*tkwredefnode4*/,  variable11 /*tkwreadablenode5*/); /*new AReadAble*/
   variable12 = variable13;
   variable13 =  variable5 /*nodearraylist4*/;
   variable14 = TAG_Bool(( variable13 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable13 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -10721,7 +10728,7 @@ void parser___ReduceAction104___action(val_t  self, val_t  param0) {
   variable16 =  variable2 /*nodearraylist7*/;
   variable17 = TAG_Bool(( variable16 /*tattridnode10*/==NIT_NULL) || VAL_ISA( variable16 /*tattridnode10*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction104___action, LOCATE_parser, 5335); nit_exit(1);}
-  variable18 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  variable12 /*pablenode3*/,  NIT_NULL /*null*/,  variable13 /*tkwredefnode7*/,  variable14 /*pvisibilitynode8*/,  variable15 /*tkwattrnode9*/,  variable16 /*tattridnode10*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable18 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  variable12 /*pablenode3*/,  NIT_NULL /*null*/,  variable13 /*tkwredefnode7*/,  variable14 /*pvisibilitynode8*/,  variable15 /*tkwattrnode9*/,  variable16 /*tattridnode10*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable17 = variable18;
   variable1 =  variable17 /*ppropdefnode1*/ /*node_list=*/;
   variable18 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -10779,7 +10786,7 @@ void parser___ReduceAction105___action(val_t  self, val_t  param0) {
   variable9 =  variable6 /*nodearraylist2*/;
   variable10 = TAG_Bool(( variable9 /*tkwwritablenode6*/==NIT_NULL) || VAL_ISA( variable9 /*tkwwritablenode6*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable10)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction105___action, LOCATE_parser, 5366); nit_exit(1);}
-  variable11 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable9 /*tkwwritablenode6*/); /*new AWriteAble*/
+  variable11 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable9 /*tkwwritablenode6*/); /*new AWriteAble*/
   variable10 = variable11;
   variable11 =  variable5 /*nodearraylist3*/;
   variable12 = TAG_Bool(( variable11 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable11 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -10793,7 +10800,7 @@ void parser___ReduceAction105___action(val_t  self, val_t  param0) {
   variable14 =  variable2 /*nodearraylist6*/;
   variable15 = TAG_Bool(( variable14 /*tattridnode10*/==NIT_NULL) || VAL_ISA( variable14 /*tattridnode10*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction105___action, LOCATE_parser, 5378); nit_exit(1);}
-  variable16 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable8 /*pdocnode2*/,  NIT_NULL /*null*/,  variable10 /*pablenode4*/,  variable11 /*tkwredefnode7*/,  variable12 /*pvisibilitynode8*/,  variable13 /*tkwattrnode9*/,  variable14 /*tattridnode10*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable16 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable8 /*pdocnode2*/,  NIT_NULL /*null*/,  variable10 /*pablenode4*/,  variable11 /*tkwredefnode7*/,  variable12 /*pvisibilitynode8*/,  variable13 /*tkwattrnode9*/,  variable14 /*tattridnode10*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable15 = variable16;
   variable1 =  variable15 /*ppropdefnode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -10858,7 +10865,7 @@ void parser___ReduceAction106___action(val_t  self, val_t  param0) {
   variable11 =  variable6 /*nodearraylist3*/;
   variable12 = TAG_Bool(( variable11 /*tkwwritablenode6*/==NIT_NULL) || VAL_ISA( variable11 /*tkwwritablenode6*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction106___action, LOCATE_parser, 5412); nit_exit(1);}
-  variable13 = NEW_parser_prod___AWriteAble___init_awriteable( variable10 /*tkwredefnode5*/,  variable11 /*tkwwritablenode6*/); /*new AWriteAble*/
+  variable13 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable10 /*tkwredefnode5*/,  variable11 /*tkwwritablenode6*/); /*new AWriteAble*/
   variable12 = variable13;
   variable13 =  variable5 /*nodearraylist4*/;
   variable14 = TAG_Bool(( variable13 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable13 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -10872,7 +10879,7 @@ void parser___ReduceAction106___action(val_t  self, val_t  param0) {
   variable16 =  variable2 /*nodearraylist7*/;
   variable17 = TAG_Bool(( variable16 /*tattridnode10*/==NIT_NULL) || VAL_ISA( variable16 /*tattridnode10*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction106___action, LOCATE_parser, 5424); nit_exit(1);}
-  variable18 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  NIT_NULL /*null*/,  variable12 /*pablenode4*/,  variable13 /*tkwredefnode7*/,  variable14 /*pvisibilitynode8*/,  variable15 /*tkwattrnode9*/,  variable16 /*tattridnode10*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable18 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  NIT_NULL /*null*/,  variable12 /*pablenode4*/,  variable13 /*tkwredefnode7*/,  variable14 /*pvisibilitynode8*/,  variable15 /*tkwattrnode9*/,  variable16 /*tattridnode10*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable17 = variable18;
   variable1 =  variable17 /*ppropdefnode1*/ /*node_list=*/;
   variable18 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -10934,7 +10941,7 @@ void parser___ReduceAction107___action(val_t  self, val_t  param0) {
   variable11 =  variable2 /*nodearraylist5*/;
   variable12 = TAG_Bool(( variable11 /*tattridnode8*/==NIT_NULL) || VAL_ISA( variable11 /*tattridnode8*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction107___action, LOCATE_parser, 5460); nit_exit(1);}
-  variable13 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable7 /*pdocnode2*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable8 /*tkwredefnode5*/,  variable9 /*pvisibilitynode6*/,  variable10 /*tkwattrnode7*/,  variable11 /*tattridnode8*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable13 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable7 /*pdocnode2*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable8 /*tkwredefnode5*/,  variable9 /*pvisibilitynode6*/,  variable10 /*tkwattrnode7*/,  variable11 /*tattridnode8*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable12 = variable13;
   variable1 =  variable12 /*ppropdefnode1*/ /*node_list=*/;
   variable13 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -10997,12 +11004,12 @@ void parser___ReduceAction108___action(val_t  self, val_t  param0) {
   variable10 =  variable7 /*nodearraylist2*/;
   variable11 = TAG_Bool(( variable10 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable10 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable11)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction108___action, LOCATE_parser, 5492); nit_exit(1);}
-  variable12 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable10 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable12 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable10 /*tkwreadablenode5*/); /*new AReadAble*/
   variable11 = variable12;
   variable12 =  variable6 /*nodearraylist3*/;
   variable13 = TAG_Bool(( variable12 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable12 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction108___action, LOCATE_parser, 5498); nit_exit(1);}
-  variable14 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable12 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable14 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable12 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable13 = variable14;
   variable14 =  variable5 /*nodearraylist4*/;
   variable15 = TAG_Bool(( variable14 /*pvisibilitynode10*/==NIT_NULL) || VAL_ISA( variable14 /*pvisibilitynode10*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -11016,7 +11023,7 @@ void parser___ReduceAction108___action(val_t  self, val_t  param0) {
   variable17 =  variable2 /*nodearraylist7*/;
   variable18 = TAG_Bool(( variable17 /*ptypenode13*/==NIT_NULL) || VAL_ISA( variable17 /*ptypenode13*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable18)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction108___action, LOCATE_parser, 5510); nit_exit(1);}
-  variable19 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  variable11 /*pablenode3*/,  variable13 /*pablenode6*/,  NIT_NULL /*null*/,  variable14 /*pvisibilitynode10*/,  variable15 /*tkwattrnode11*/,  variable16 /*tattridnode12*/,  variable17 /*ptypenode13*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable19 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  variable11 /*pablenode3*/,  variable13 /*pablenode6*/,  NIT_NULL /*null*/,  variable14 /*pvisibilitynode10*/,  variable15 /*tkwattrnode11*/,  variable16 /*tattridnode12*/,  variable17 /*ptypenode13*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable18 = variable19;
   variable1 =  variable18 /*ppropdefnode1*/ /*node_list=*/;
   variable19 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -11083,7 +11090,7 @@ void parser___ReduceAction109___action(val_t  self, val_t  param0) {
   variable11 =  variable8 /*nodearraylist2*/;
   variable12 = TAG_Bool(( variable11 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable11 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction109___action, LOCATE_parser, 5543); nit_exit(1);}
-  variable13 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable11 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable13 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable11 /*tkwreadablenode5*/); /*new AReadAble*/
   variable12 = variable13;
   variable13 =  variable7 /*nodearraylist3*/;
   variable14 = TAG_Bool(( variable13 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable13 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -11091,7 +11098,7 @@ void parser___ReduceAction109___action(val_t  self, val_t  param0) {
   variable14 =  variable6 /*nodearraylist4*/;
   variable15 = TAG_Bool(( variable14 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable14 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction109___action, LOCATE_parser, 5551); nit_exit(1);}
-  variable16 = NEW_parser_prod___AWriteAble___init_awriteable( variable13 /*tkwredefnode7*/,  variable14 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable16 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable13 /*tkwredefnode7*/,  variable14 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable15 = variable16;
   variable16 =  variable5 /*nodearraylist5*/;
   variable17 = TAG_Bool(( variable16 /*pvisibilitynode10*/==NIT_NULL) || VAL_ISA( variable16 /*pvisibilitynode10*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -11105,7 +11112,7 @@ void parser___ReduceAction109___action(val_t  self, val_t  param0) {
   variable19 =  variable2 /*nodearraylist8*/;
   variable20 = TAG_Bool(( variable19 /*ptypenode13*/==NIT_NULL) || VAL_ISA( variable19 /*ptypenode13*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable20)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction109___action, LOCATE_parser, 5563); nit_exit(1);}
-  variable21 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  variable12 /*pablenode3*/,  variable15 /*pablenode6*/,  NIT_NULL /*null*/,  variable16 /*pvisibilitynode10*/,  variable17 /*tkwattrnode11*/,  variable18 /*tattridnode12*/,  variable19 /*ptypenode13*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable21 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  variable12 /*pablenode3*/,  variable15 /*pablenode6*/,  NIT_NULL /*null*/,  variable16 /*pvisibilitynode10*/,  variable17 /*tkwattrnode11*/,  variable18 /*tattridnode12*/,  variable19 /*ptypenode13*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable20 = variable21;
   variable1 =  variable20 /*ppropdefnode1*/ /*node_list=*/;
   variable21 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -11163,7 +11170,7 @@ void parser___ReduceAction110___action(val_t  self, val_t  param0) {
   variable9 =  variable6 /*nodearraylist2*/;
   variable10 = TAG_Bool(( variable9 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable9 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable10)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction110___action, LOCATE_parser, 5594); nit_exit(1);}
-  variable11 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable9 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable11 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable9 /*tkwreadablenode5*/); /*new AReadAble*/
   variable10 = variable11;
   variable11 =  variable5 /*nodearraylist3*/;
   variable12 = TAG_Bool(( variable11 /*pvisibilitynode8*/==NIT_NULL) || VAL_ISA( variable11 /*pvisibilitynode8*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -11177,7 +11184,7 @@ void parser___ReduceAction110___action(val_t  self, val_t  param0) {
   variable14 =  variable2 /*nodearraylist6*/;
   variable15 = TAG_Bool(( variable14 /*ptypenode11*/==NIT_NULL) || VAL_ISA( variable14 /*ptypenode11*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction110___action, LOCATE_parser, 5606); nit_exit(1);}
-  variable16 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable8 /*pdocnode2*/,  variable10 /*pablenode3*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable11 /*pvisibilitynode8*/,  variable12 /*tkwattrnode9*/,  variable13 /*tattridnode10*/,  variable14 /*ptypenode11*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable16 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable8 /*pdocnode2*/,  variable10 /*pablenode3*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable11 /*pvisibilitynode8*/,  variable12 /*tkwattrnode9*/,  variable13 /*tattridnode10*/,  variable14 /*ptypenode11*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable15 = variable16;
   variable1 =  variable15 /*ppropdefnode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -11247,12 +11254,12 @@ void parser___ReduceAction111___action(val_t  self, val_t  param0) {
   variable12 =  variable7 /*nodearraylist3*/;
   variable13 = TAG_Bool(( variable12 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable12 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction111___action, LOCATE_parser, 5641); nit_exit(1);}
-  variable14 = NEW_parser_prod___AReadAble___init_areadable( variable11 /*tkwredefnode4*/,  variable12 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable14 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable11 /*tkwredefnode4*/,  variable12 /*tkwreadablenode5*/); /*new AReadAble*/
   variable13 = variable14;
   variable14 =  variable6 /*nodearraylist4*/;
   variable15 = TAG_Bool(( variable14 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable14 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction111___action, LOCATE_parser, 5647); nit_exit(1);}
-  variable16 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable14 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable16 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable14 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable15 = variable16;
   variable16 =  variable5 /*nodearraylist5*/;
   variable17 = TAG_Bool(( variable16 /*pvisibilitynode10*/==NIT_NULL) || VAL_ISA( variable16 /*pvisibilitynode10*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -11266,7 +11273,7 @@ void parser___ReduceAction111___action(val_t  self, val_t  param0) {
   variable19 =  variable2 /*nodearraylist8*/;
   variable20 = TAG_Bool(( variable19 /*ptypenode13*/==NIT_NULL) || VAL_ISA( variable19 /*ptypenode13*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable20)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction111___action, LOCATE_parser, 5659); nit_exit(1);}
-  variable21 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  variable13 /*pablenode3*/,  variable15 /*pablenode6*/,  NIT_NULL /*null*/,  variable16 /*pvisibilitynode10*/,  variable17 /*tkwattrnode11*/,  variable18 /*tattridnode12*/,  variable19 /*ptypenode13*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable21 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  variable13 /*pablenode3*/,  variable15 /*pablenode6*/,  NIT_NULL /*null*/,  variable16 /*pvisibilitynode10*/,  variable17 /*tkwattrnode11*/,  variable18 /*tattridnode12*/,  variable19 /*ptypenode13*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable20 = variable21;
   variable1 =  variable20 /*ppropdefnode1*/ /*node_list=*/;
   variable21 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -11340,7 +11347,7 @@ void parser___ReduceAction112___action(val_t  self, val_t  param0) {
   variable13 =  variable8 /*nodearraylist3*/;
   variable14 = TAG_Bool(( variable13 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable13 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction112___action, LOCATE_parser, 5695); nit_exit(1);}
-  variable15 = NEW_parser_prod___AReadAble___init_areadable( variable12 /*tkwredefnode4*/,  variable13 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable15 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable12 /*tkwredefnode4*/,  variable13 /*tkwreadablenode5*/); /*new AReadAble*/
   variable14 = variable15;
   variable15 =  variable7 /*nodearraylist4*/;
   variable16 = TAG_Bool(( variable15 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable15 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -11348,7 +11355,7 @@ void parser___ReduceAction112___action(val_t  self, val_t  param0) {
   variable16 =  variable6 /*nodearraylist5*/;
   variable17 = TAG_Bool(( variable16 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable16 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction112___action, LOCATE_parser, 5703); nit_exit(1);}
-  variable18 = NEW_parser_prod___AWriteAble___init_awriteable( variable15 /*tkwredefnode7*/,  variable16 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable18 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable15 /*tkwredefnode7*/,  variable16 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable17 = variable18;
   variable18 =  variable5 /*nodearraylist6*/;
   variable19 = TAG_Bool(( variable18 /*pvisibilitynode10*/==NIT_NULL) || VAL_ISA( variable18 /*pvisibilitynode10*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -11362,7 +11369,7 @@ void parser___ReduceAction112___action(val_t  self, val_t  param0) {
   variable21 =  variable2 /*nodearraylist9*/;
   variable22 = TAG_Bool(( variable21 /*ptypenode13*/==NIT_NULL) || VAL_ISA( variable21 /*ptypenode13*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable22)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction112___action, LOCATE_parser, 5715); nit_exit(1);}
-  variable23 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  variable14 /*pablenode3*/,  variable17 /*pablenode6*/,  NIT_NULL /*null*/,  variable18 /*pvisibilitynode10*/,  variable19 /*tkwattrnode11*/,  variable20 /*tattridnode12*/,  variable21 /*ptypenode13*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable23 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  variable14 /*pablenode3*/,  variable17 /*pablenode6*/,  NIT_NULL /*null*/,  variable18 /*pvisibilitynode10*/,  variable19 /*tkwattrnode11*/,  variable20 /*tattridnode12*/,  variable21 /*ptypenode13*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable22 = variable23;
   variable1 =  variable22 /*ppropdefnode1*/ /*node_list=*/;
   variable23 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -11427,7 +11434,7 @@ void parser___ReduceAction113___action(val_t  self, val_t  param0) {
   variable11 =  variable6 /*nodearraylist3*/;
   variable12 = TAG_Bool(( variable11 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable11 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction113___action, LOCATE_parser, 5749); nit_exit(1);}
-  variable13 = NEW_parser_prod___AReadAble___init_areadable( variable10 /*tkwredefnode4*/,  variable11 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable13 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable10 /*tkwredefnode4*/,  variable11 /*tkwreadablenode5*/); /*new AReadAble*/
   variable12 = variable13;
   variable13 =  variable5 /*nodearraylist4*/;
   variable14 = TAG_Bool(( variable13 /*pvisibilitynode8*/==NIT_NULL) || VAL_ISA( variable13 /*pvisibilitynode8*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -11441,7 +11448,7 @@ void parser___ReduceAction113___action(val_t  self, val_t  param0) {
   variable16 =  variable2 /*nodearraylist7*/;
   variable17 = TAG_Bool(( variable16 /*ptypenode11*/==NIT_NULL) || VAL_ISA( variable16 /*ptypenode11*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction113___action, LOCATE_parser, 5761); nit_exit(1);}
-  variable18 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  variable12 /*pablenode3*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable13 /*pvisibilitynode8*/,  variable14 /*tkwattrnode9*/,  variable15 /*tattridnode10*/,  variable16 /*ptypenode11*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable18 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  variable12 /*pablenode3*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable13 /*pvisibilitynode8*/,  variable14 /*tkwattrnode9*/,  variable15 /*tattridnode10*/,  variable16 /*ptypenode11*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable17 = variable18;
   variable1 =  variable17 /*ppropdefnode1*/ /*node_list=*/;
   variable18 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -11499,7 +11506,7 @@ void parser___ReduceAction114___action(val_t  self, val_t  param0) {
   variable9 =  variable6 /*nodearraylist2*/;
   variable10 = TAG_Bool(( variable9 /*tkwwritablenode6*/==NIT_NULL) || VAL_ISA( variable9 /*tkwwritablenode6*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable10)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction114___action, LOCATE_parser, 5792); nit_exit(1);}
-  variable11 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable9 /*tkwwritablenode6*/); /*new AWriteAble*/
+  variable11 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable9 /*tkwwritablenode6*/); /*new AWriteAble*/
   variable10 = variable11;
   variable11 =  variable5 /*nodearraylist3*/;
   variable12 = TAG_Bool(( variable11 /*pvisibilitynode8*/==NIT_NULL) || VAL_ISA( variable11 /*pvisibilitynode8*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -11513,7 +11520,7 @@ void parser___ReduceAction114___action(val_t  self, val_t  param0) {
   variable14 =  variable2 /*nodearraylist6*/;
   variable15 = TAG_Bool(( variable14 /*ptypenode11*/==NIT_NULL) || VAL_ISA( variable14 /*ptypenode11*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction114___action, LOCATE_parser, 5804); nit_exit(1);}
-  variable16 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable8 /*pdocnode2*/,  NIT_NULL /*null*/,  variable10 /*pablenode4*/,  NIT_NULL /*null*/,  variable11 /*pvisibilitynode8*/,  variable12 /*tkwattrnode9*/,  variable13 /*tattridnode10*/,  variable14 /*ptypenode11*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable16 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable8 /*pdocnode2*/,  NIT_NULL /*null*/,  variable10 /*pablenode4*/,  NIT_NULL /*null*/,  variable11 /*pvisibilitynode8*/,  variable12 /*tkwattrnode9*/,  variable13 /*tattridnode10*/,  variable14 /*ptypenode11*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable15 = variable16;
   variable1 =  variable15 /*ppropdefnode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -11578,7 +11585,7 @@ void parser___ReduceAction115___action(val_t  self, val_t  param0) {
   variable11 =  variable6 /*nodearraylist3*/;
   variable12 = TAG_Bool(( variable11 /*tkwwritablenode6*/==NIT_NULL) || VAL_ISA( variable11 /*tkwwritablenode6*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction115___action, LOCATE_parser, 5838); nit_exit(1);}
-  variable13 = NEW_parser_prod___AWriteAble___init_awriteable( variable10 /*tkwredefnode5*/,  variable11 /*tkwwritablenode6*/); /*new AWriteAble*/
+  variable13 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable10 /*tkwredefnode5*/,  variable11 /*tkwwritablenode6*/); /*new AWriteAble*/
   variable12 = variable13;
   variable13 =  variable5 /*nodearraylist4*/;
   variable14 = TAG_Bool(( variable13 /*pvisibilitynode8*/==NIT_NULL) || VAL_ISA( variable13 /*pvisibilitynode8*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -11592,7 +11599,7 @@ void parser___ReduceAction115___action(val_t  self, val_t  param0) {
   variable16 =  variable2 /*nodearraylist7*/;
   variable17 = TAG_Bool(( variable16 /*ptypenode11*/==NIT_NULL) || VAL_ISA( variable16 /*ptypenode11*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction115___action, LOCATE_parser, 5850); nit_exit(1);}
-  variable18 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  NIT_NULL /*null*/,  variable12 /*pablenode4*/,  NIT_NULL /*null*/,  variable13 /*pvisibilitynode8*/,  variable14 /*tkwattrnode9*/,  variable15 /*tattridnode10*/,  variable16 /*ptypenode11*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable18 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  NIT_NULL /*null*/,  variable12 /*pablenode4*/,  NIT_NULL /*null*/,  variable13 /*pvisibilitynode8*/,  variable14 /*tkwattrnode9*/,  variable15 /*tattridnode10*/,  variable16 /*ptypenode11*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable17 = variable18;
   variable1 =  variable17 /*ppropdefnode1*/ /*node_list=*/;
   variable18 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -11654,7 +11661,7 @@ void parser___ReduceAction116___action(val_t  self, val_t  param0) {
   variable11 =  variable2 /*nodearraylist5*/;
   variable12 = TAG_Bool(( variable11 /*ptypenode9*/==NIT_NULL) || VAL_ISA( variable11 /*ptypenode9*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction116___action, LOCATE_parser, 5886); nit_exit(1);}
-  variable13 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable7 /*pdocnode2*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable8 /*pvisibilitynode6*/,  variable9 /*tkwattrnode7*/,  variable10 /*tattridnode8*/,  variable11 /*ptypenode9*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable13 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable7 /*pdocnode2*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable8 /*pvisibilitynode6*/,  variable9 /*tkwattrnode7*/,  variable10 /*tattridnode8*/,  variable11 /*ptypenode9*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable12 = variable13;
   variable1 =  variable12 /*ppropdefnode1*/ /*node_list=*/;
   variable13 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -11721,12 +11728,12 @@ void parser___ReduceAction117___action(val_t  self, val_t  param0) {
   variable11 =  variable8 /*nodearraylist2*/;
   variable12 = TAG_Bool(( variable11 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable11 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction117___action, LOCATE_parser, 5919); nit_exit(1);}
-  variable13 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable11 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable13 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable11 /*tkwreadablenode5*/); /*new AReadAble*/
   variable12 = variable13;
   variable13 =  variable7 /*nodearraylist3*/;
   variable14 = TAG_Bool(( variable13 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable13 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction117___action, LOCATE_parser, 5925); nit_exit(1);}
-  variable15 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable13 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable15 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable13 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable14 = variable15;
   variable15 =  variable6 /*nodearraylist4*/;
   variable16 = TAG_Bool(( variable15 /*tkwredefnode9*/==NIT_NULL) || VAL_ISA( variable15 /*tkwredefnode9*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -11743,7 +11750,7 @@ void parser___ReduceAction117___action(val_t  self, val_t  param0) {
   variable19 =  variable2 /*nodearraylist8*/;
   variable20 = TAG_Bool(( variable19 /*ptypenode13*/==NIT_NULL) || VAL_ISA( variable19 /*ptypenode13*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable20)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction117___action, LOCATE_parser, 5939); nit_exit(1);}
-  variable21 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  variable12 /*pablenode3*/,  variable14 /*pablenode6*/,  variable15 /*tkwredefnode9*/,  variable16 /*pvisibilitynode10*/,  variable17 /*tkwattrnode11*/,  variable18 /*tattridnode12*/,  variable19 /*ptypenode13*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable21 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  variable12 /*pablenode3*/,  variable14 /*pablenode6*/,  variable15 /*tkwredefnode9*/,  variable16 /*pvisibilitynode10*/,  variable17 /*tkwattrnode11*/,  variable18 /*tattridnode12*/,  variable19 /*ptypenode13*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable20 = variable21;
   variable1 =  variable20 /*ppropdefnode1*/ /*node_list=*/;
   variable21 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -11814,7 +11821,7 @@ void parser___ReduceAction118___action(val_t  self, val_t  param0) {
   variable12 =  variable9 /*nodearraylist2*/;
   variable13 = TAG_Bool(( variable12 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable12 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction118___action, LOCATE_parser, 5973); nit_exit(1);}
-  variable14 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable12 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable14 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable12 /*tkwreadablenode5*/); /*new AReadAble*/
   variable13 = variable14;
   variable14 =  variable8 /*nodearraylist3*/;
   variable15 = TAG_Bool(( variable14 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable14 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -11822,7 +11829,7 @@ void parser___ReduceAction118___action(val_t  self, val_t  param0) {
   variable15 =  variable7 /*nodearraylist4*/;
   variable16 = TAG_Bool(( variable15 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable15 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction118___action, LOCATE_parser, 5981); nit_exit(1);}
-  variable17 = NEW_parser_prod___AWriteAble___init_awriteable( variable14 /*tkwredefnode7*/,  variable15 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable17 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable14 /*tkwredefnode7*/,  variable15 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable16 = variable17;
   variable17 =  variable6 /*nodearraylist5*/;
   variable18 = TAG_Bool(( variable17 /*tkwredefnode9*/==NIT_NULL) || VAL_ISA( variable17 /*tkwredefnode9*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -11839,7 +11846,7 @@ void parser___ReduceAction118___action(val_t  self, val_t  param0) {
   variable21 =  variable2 /*nodearraylist9*/;
   variable22 = TAG_Bool(( variable21 /*ptypenode13*/==NIT_NULL) || VAL_ISA( variable21 /*ptypenode13*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable22)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction118___action, LOCATE_parser, 5995); nit_exit(1);}
-  variable23 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  variable13 /*pablenode3*/,  variable16 /*pablenode6*/,  variable17 /*tkwredefnode9*/,  variable18 /*pvisibilitynode10*/,  variable19 /*tkwattrnode11*/,  variable20 /*tattridnode12*/,  variable21 /*ptypenode13*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable23 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  variable13 /*pablenode3*/,  variable16 /*pablenode6*/,  variable17 /*tkwredefnode9*/,  variable18 /*pvisibilitynode10*/,  variable19 /*tkwattrnode11*/,  variable20 /*tattridnode12*/,  variable21 /*ptypenode13*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable22 = variable23;
   variable1 =  variable22 /*ppropdefnode1*/ /*node_list=*/;
   variable23 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -11901,7 +11908,7 @@ void parser___ReduceAction119___action(val_t  self, val_t  param0) {
   variable10 =  variable7 /*nodearraylist2*/;
   variable11 = TAG_Bool(( variable10 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable10 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable11)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction119___action, LOCATE_parser, 6027); nit_exit(1);}
-  variable12 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable10 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable12 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable10 /*tkwreadablenode5*/); /*new AReadAble*/
   variable11 = variable12;
   variable12 =  variable6 /*nodearraylist3*/;
   variable13 = TAG_Bool(( variable12 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable12 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -11918,7 +11925,7 @@ void parser___ReduceAction119___action(val_t  self, val_t  param0) {
   variable16 =  variable2 /*nodearraylist7*/;
   variable17 = TAG_Bool(( variable16 /*ptypenode11*/==NIT_NULL) || VAL_ISA( variable16 /*ptypenode11*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction119___action, LOCATE_parser, 6041); nit_exit(1);}
-  variable18 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  variable11 /*pablenode3*/,  NIT_NULL /*null*/,  variable12 /*tkwredefnode7*/,  variable13 /*pvisibilitynode8*/,  variable14 /*tkwattrnode9*/,  variable15 /*tattridnode10*/,  variable16 /*ptypenode11*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable18 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  variable11 /*pablenode3*/,  NIT_NULL /*null*/,  variable12 /*tkwredefnode7*/,  variable13 /*pvisibilitynode8*/,  variable14 /*tkwattrnode9*/,  variable15 /*tattridnode10*/,  variable16 /*ptypenode11*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable17 = variable18;
   variable1 =  variable17 /*ppropdefnode1*/ /*node_list=*/;
   variable18 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -11992,12 +11999,12 @@ void parser___ReduceAction120___action(val_t  self, val_t  param0) {
   variable13 =  variable8 /*nodearraylist3*/;
   variable14 = TAG_Bool(( variable13 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable13 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction120___action, LOCATE_parser, 6077); nit_exit(1);}
-  variable15 = NEW_parser_prod___AReadAble___init_areadable( variable12 /*tkwredefnode4*/,  variable13 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable15 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable12 /*tkwredefnode4*/,  variable13 /*tkwreadablenode5*/); /*new AReadAble*/
   variable14 = variable15;
   variable15 =  variable7 /*nodearraylist4*/;
   variable16 = TAG_Bool(( variable15 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable15 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction120___action, LOCATE_parser, 6083); nit_exit(1);}
-  variable17 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable15 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable17 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable15 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable16 = variable17;
   variable17 =  variable6 /*nodearraylist5*/;
   variable18 = TAG_Bool(( variable17 /*tkwredefnode9*/==NIT_NULL) || VAL_ISA( variable17 /*tkwredefnode9*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -12014,7 +12021,7 @@ void parser___ReduceAction120___action(val_t  self, val_t  param0) {
   variable21 =  variable2 /*nodearraylist9*/;
   variable22 = TAG_Bool(( variable21 /*ptypenode13*/==NIT_NULL) || VAL_ISA( variable21 /*ptypenode13*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable22)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction120___action, LOCATE_parser, 6097); nit_exit(1);}
-  variable23 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  variable14 /*pablenode3*/,  variable16 /*pablenode6*/,  variable17 /*tkwredefnode9*/,  variable18 /*pvisibilitynode10*/,  variable19 /*tkwattrnode11*/,  variable20 /*tattridnode12*/,  variable21 /*ptypenode13*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable23 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  variable14 /*pablenode3*/,  variable16 /*pablenode6*/,  variable17 /*tkwredefnode9*/,  variable18 /*pvisibilitynode10*/,  variable19 /*tkwattrnode11*/,  variable20 /*tattridnode12*/,  variable21 /*ptypenode13*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable22 = variable23;
   variable1 =  variable22 /*ppropdefnode1*/ /*node_list=*/;
   variable23 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -12092,7 +12099,7 @@ void parser___ReduceAction121___action(val_t  self, val_t  param0) {
   variable14 =  variable9 /*nodearraylist3*/;
   variable15 = TAG_Bool(( variable14 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable14 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction121___action, LOCATE_parser, 6134); nit_exit(1);}
-  variable16 = NEW_parser_prod___AReadAble___init_areadable( variable13 /*tkwredefnode4*/,  variable14 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable16 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable13 /*tkwredefnode4*/,  variable14 /*tkwreadablenode5*/); /*new AReadAble*/
   variable15 = variable16;
   variable16 =  variable8 /*nodearraylist4*/;
   variable17 = TAG_Bool(( variable16 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable16 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -12100,7 +12107,7 @@ void parser___ReduceAction121___action(val_t  self, val_t  param0) {
   variable17 =  variable7 /*nodearraylist5*/;
   variable18 = TAG_Bool(( variable17 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable17 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable18)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction121___action, LOCATE_parser, 6142); nit_exit(1);}
-  variable19 = NEW_parser_prod___AWriteAble___init_awriteable( variable16 /*tkwredefnode7*/,  variable17 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable19 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable16 /*tkwredefnode7*/,  variable17 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable18 = variable19;
   variable19 =  variable6 /*nodearraylist6*/;
   variable20 = TAG_Bool(( variable19 /*tkwredefnode9*/==NIT_NULL) || VAL_ISA( variable19 /*tkwredefnode9*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -12117,7 +12124,7 @@ void parser___ReduceAction121___action(val_t  self, val_t  param0) {
   variable23 =  variable2 /*nodearraylist10*/;
   variable24 = TAG_Bool(( variable23 /*ptypenode13*/==NIT_NULL) || VAL_ISA( variable23 /*ptypenode13*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable24)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction121___action, LOCATE_parser, 6156); nit_exit(1);}
-  variable25 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  variable15 /*pablenode3*/,  variable18 /*pablenode6*/,  variable19 /*tkwredefnode9*/,  variable20 /*pvisibilitynode10*/,  variable21 /*tkwattrnode11*/,  variable22 /*tattridnode12*/,  variable23 /*ptypenode13*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable25 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  variable15 /*pablenode3*/,  variable18 /*pablenode6*/,  variable19 /*tkwredefnode9*/,  variable20 /*pvisibilitynode10*/,  variable21 /*tkwattrnode11*/,  variable22 /*tattridnode12*/,  variable23 /*ptypenode13*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable24 = variable25;
   variable1 =  variable24 /*ppropdefnode1*/ /*node_list=*/;
   variable25 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -12186,7 +12193,7 @@ void parser___ReduceAction122___action(val_t  self, val_t  param0) {
   variable12 =  variable7 /*nodearraylist3*/;
   variable13 = TAG_Bool(( variable12 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable12 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction122___action, LOCATE_parser, 6191); nit_exit(1);}
-  variable14 = NEW_parser_prod___AReadAble___init_areadable( variable11 /*tkwredefnode4*/,  variable12 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable14 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable11 /*tkwredefnode4*/,  variable12 /*tkwreadablenode5*/); /*new AReadAble*/
   variable13 = variable14;
   variable14 =  variable6 /*nodearraylist4*/;
   variable15 = TAG_Bool(( variable14 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable14 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -12203,7 +12210,7 @@ void parser___ReduceAction122___action(val_t  self, val_t  param0) {
   variable18 =  variable2 /*nodearraylist8*/;
   variable19 = TAG_Bool(( variable18 /*ptypenode11*/==NIT_NULL) || VAL_ISA( variable18 /*ptypenode11*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable19)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction122___action, LOCATE_parser, 6205); nit_exit(1);}
-  variable20 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  variable13 /*pablenode3*/,  NIT_NULL /*null*/,  variable14 /*tkwredefnode7*/,  variable15 /*pvisibilitynode8*/,  variable16 /*tkwattrnode9*/,  variable17 /*tattridnode10*/,  variable18 /*ptypenode11*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable20 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  variable13 /*pablenode3*/,  NIT_NULL /*null*/,  variable14 /*tkwredefnode7*/,  variable15 /*pvisibilitynode8*/,  variable16 /*tkwattrnode9*/,  variable17 /*tattridnode10*/,  variable18 /*ptypenode11*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable19 = variable20;
   variable1 =  variable19 /*ppropdefnode1*/ /*node_list=*/;
   variable20 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -12265,7 +12272,7 @@ void parser___ReduceAction123___action(val_t  self, val_t  param0) {
   variable10 =  variable7 /*nodearraylist2*/;
   variable11 = TAG_Bool(( variable10 /*tkwwritablenode6*/==NIT_NULL) || VAL_ISA( variable10 /*tkwwritablenode6*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable11)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction123___action, LOCATE_parser, 6237); nit_exit(1);}
-  variable12 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable10 /*tkwwritablenode6*/); /*new AWriteAble*/
+  variable12 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable10 /*tkwwritablenode6*/); /*new AWriteAble*/
   variable11 = variable12;
   variable12 =  variable6 /*nodearraylist3*/;
   variable13 = TAG_Bool(( variable12 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable12 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -12282,7 +12289,7 @@ void parser___ReduceAction123___action(val_t  self, val_t  param0) {
   variable16 =  variable2 /*nodearraylist7*/;
   variable17 = TAG_Bool(( variable16 /*ptypenode11*/==NIT_NULL) || VAL_ISA( variable16 /*ptypenode11*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction123___action, LOCATE_parser, 6251); nit_exit(1);}
-  variable18 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  NIT_NULL /*null*/,  variable11 /*pablenode4*/,  variable12 /*tkwredefnode7*/,  variable13 /*pvisibilitynode8*/,  variable14 /*tkwattrnode9*/,  variable15 /*tattridnode10*/,  variable16 /*ptypenode11*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable18 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  NIT_NULL /*null*/,  variable11 /*pablenode4*/,  variable12 /*tkwredefnode7*/,  variable13 /*pvisibilitynode8*/,  variable14 /*tkwattrnode9*/,  variable15 /*tattridnode10*/,  variable16 /*ptypenode11*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable17 = variable18;
   variable1 =  variable17 /*ppropdefnode1*/ /*node_list=*/;
   variable18 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -12351,7 +12358,7 @@ void parser___ReduceAction124___action(val_t  self, val_t  param0) {
   variable12 =  variable7 /*nodearraylist3*/;
   variable13 = TAG_Bool(( variable12 /*tkwwritablenode6*/==NIT_NULL) || VAL_ISA( variable12 /*tkwwritablenode6*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction124___action, LOCATE_parser, 6286); nit_exit(1);}
-  variable14 = NEW_parser_prod___AWriteAble___init_awriteable( variable11 /*tkwredefnode5*/,  variable12 /*tkwwritablenode6*/); /*new AWriteAble*/
+  variable14 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable11 /*tkwredefnode5*/,  variable12 /*tkwwritablenode6*/); /*new AWriteAble*/
   variable13 = variable14;
   variable14 =  variable6 /*nodearraylist4*/;
   variable15 = TAG_Bool(( variable14 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable14 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -12368,7 +12375,7 @@ void parser___ReduceAction124___action(val_t  self, val_t  param0) {
   variable18 =  variable2 /*nodearraylist8*/;
   variable19 = TAG_Bool(( variable18 /*ptypenode11*/==NIT_NULL) || VAL_ISA( variable18 /*ptypenode11*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable19)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction124___action, LOCATE_parser, 6300); nit_exit(1);}
-  variable20 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  variable13 /*pablenode4*/,  variable14 /*tkwredefnode7*/,  variable15 /*pvisibilitynode8*/,  variable16 /*tkwattrnode9*/,  variable17 /*tattridnode10*/,  variable18 /*ptypenode11*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable20 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  variable13 /*pablenode4*/,  variable14 /*tkwredefnode7*/,  variable15 /*pvisibilitynode8*/,  variable16 /*tkwattrnode9*/,  variable17 /*tattridnode10*/,  variable18 /*ptypenode11*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable19 = variable20;
   variable1 =  variable19 /*ppropdefnode1*/ /*node_list=*/;
   variable20 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -12437,7 +12444,7 @@ void parser___ReduceAction125___action(val_t  self, val_t  param0) {
   variable13 =  variable2 /*nodearraylist6*/;
   variable14 = TAG_Bool(( variable13 /*ptypenode9*/==NIT_NULL) || VAL_ISA( variable13 /*ptypenode9*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction125___action, LOCATE_parser, 6339); nit_exit(1);}
-  variable15 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable8 /*pdocnode2*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable9 /*tkwredefnode5*/,  variable10 /*pvisibilitynode6*/,  variable11 /*tkwattrnode7*/,  variable12 /*tattridnode8*/,  variable13 /*ptypenode9*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
+  variable15 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable8 /*pdocnode2*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable9 /*tkwredefnode5*/,  variable10 /*pvisibilitynode6*/,  variable11 /*tkwattrnode7*/,  variable12 /*tattridnode8*/,  variable13 /*ptypenode9*/,  NIT_NULL /*null*/); /*new AAttrPropdef*/
   variable14 = variable15;
   variable1 =  variable14 /*ppropdefnode1*/ /*node_list=*/;
   variable15 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -12506,12 +12513,12 @@ void parser___ReduceAction126___action(val_t  self, val_t  param0) {
   variable12 =  variable9 /*nodearraylist2*/;
   variable13 = TAG_Bool(( variable12 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable12 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction126___action, LOCATE_parser, 6373); nit_exit(1);}
-  variable14 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable12 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable14 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable12 /*tkwreadablenode5*/); /*new AReadAble*/
   variable13 = variable14;
   variable14 =  variable8 /*nodearraylist3*/;
   variable15 = TAG_Bool(( variable14 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable14 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction126___action, LOCATE_parser, 6379); nit_exit(1);}
-  variable16 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable14 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable16 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable14 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable15 = variable16;
   variable16 =  variable7 /*nodearraylist4*/;
   variable17 = TAG_Bool(( variable16 /*pvisibilitynode10*/==NIT_NULL) || VAL_ISA( variable16 /*pvisibilitynode10*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -12525,7 +12532,7 @@ void parser___ReduceAction126___action(val_t  self, val_t  param0) {
   variable19 =  variable2 /*nodearraylist9*/;
   variable20 = TAG_Bool(( variable19 /*pexprnode14*/==NIT_NULL) || VAL_ISA( variable19 /*pexprnode14*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable20)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction126___action, LOCATE_parser, 6391); nit_exit(1);}
-  variable21 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  variable13 /*pablenode3*/,  variable15 /*pablenode6*/,  NIT_NULL /*null*/,  variable16 /*pvisibilitynode10*/,  variable17 /*tkwattrnode11*/,  variable18 /*tattridnode12*/,  NIT_NULL /*null*/,  variable19 /*pexprnode14*/); /*new AAttrPropdef*/
+  variable21 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  variable13 /*pablenode3*/,  variable15 /*pablenode6*/,  NIT_NULL /*null*/,  variable16 /*pvisibilitynode10*/,  variable17 /*tkwattrnode11*/,  variable18 /*tattridnode12*/,  NIT_NULL /*null*/,  variable19 /*pexprnode14*/); /*new AAttrPropdef*/
   variable20 = variable21;
   variable1 =  variable20 /*ppropdefnode1*/ /*node_list=*/;
   variable21 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -12598,7 +12605,7 @@ void parser___ReduceAction127___action(val_t  self, val_t  param0) {
   variable13 =  variable10 /*nodearraylist2*/;
   variable14 = TAG_Bool(( variable13 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable13 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction127___action, LOCATE_parser, 6426); nit_exit(1);}
-  variable15 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable13 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable15 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable13 /*tkwreadablenode5*/); /*new AReadAble*/
   variable14 = variable15;
   variable15 =  variable9 /*nodearraylist3*/;
   variable16 = TAG_Bool(( variable15 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable15 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -12606,7 +12613,7 @@ void parser___ReduceAction127___action(val_t  self, val_t  param0) {
   variable16 =  variable8 /*nodearraylist4*/;
   variable17 = TAG_Bool(( variable16 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable16 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction127___action, LOCATE_parser, 6434); nit_exit(1);}
-  variable18 = NEW_parser_prod___AWriteAble___init_awriteable( variable15 /*tkwredefnode7*/,  variable16 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable18 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable15 /*tkwredefnode7*/,  variable16 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable17 = variable18;
   variable18 =  variable7 /*nodearraylist5*/;
   variable19 = TAG_Bool(( variable18 /*pvisibilitynode10*/==NIT_NULL) || VAL_ISA( variable18 /*pvisibilitynode10*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -12620,7 +12627,7 @@ void parser___ReduceAction127___action(val_t  self, val_t  param0) {
   variable21 =  variable2 /*nodearraylist10*/;
   variable22 = TAG_Bool(( variable21 /*pexprnode14*/==NIT_NULL) || VAL_ISA( variable21 /*pexprnode14*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable22)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction127___action, LOCATE_parser, 6446); nit_exit(1);}
-  variable23 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  variable14 /*pablenode3*/,  variable17 /*pablenode6*/,  NIT_NULL /*null*/,  variable18 /*pvisibilitynode10*/,  variable19 /*tkwattrnode11*/,  variable20 /*tattridnode12*/,  NIT_NULL /*null*/,  variable21 /*pexprnode14*/); /*new AAttrPropdef*/
+  variable23 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  variable14 /*pablenode3*/,  variable17 /*pablenode6*/,  NIT_NULL /*null*/,  variable18 /*pvisibilitynode10*/,  variable19 /*tkwattrnode11*/,  variable20 /*tattridnode12*/,  NIT_NULL /*null*/,  variable21 /*pexprnode14*/); /*new AAttrPropdef*/
   variable22 = variable23;
   variable1 =  variable22 /*ppropdefnode1*/ /*node_list=*/;
   variable23 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -12684,7 +12691,7 @@ void parser___ReduceAction128___action(val_t  self, val_t  param0) {
   variable11 =  variable8 /*nodearraylist2*/;
   variable12 = TAG_Bool(( variable11 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable11 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction128___action, LOCATE_parser, 6479); nit_exit(1);}
-  variable13 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable11 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable13 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable11 /*tkwreadablenode5*/); /*new AReadAble*/
   variable12 = variable13;
   variable13 =  variable7 /*nodearraylist3*/;
   variable14 = TAG_Bool(( variable13 /*pvisibilitynode8*/==NIT_NULL) || VAL_ISA( variable13 /*pvisibilitynode8*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -12698,7 +12705,7 @@ void parser___ReduceAction128___action(val_t  self, val_t  param0) {
   variable16 =  variable2 /*nodearraylist8*/;
   variable17 = TAG_Bool(( variable16 /*pexprnode12*/==NIT_NULL) || VAL_ISA( variable16 /*pexprnode12*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction128___action, LOCATE_parser, 6491); nit_exit(1);}
-  variable18 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  variable12 /*pablenode3*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable13 /*pvisibilitynode8*/,  variable14 /*tkwattrnode9*/,  variable15 /*tattridnode10*/,  NIT_NULL /*null*/,  variable16 /*pexprnode12*/); /*new AAttrPropdef*/
+  variable18 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  variable12 /*pablenode3*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable13 /*pvisibilitynode8*/,  variable14 /*tkwattrnode9*/,  variable15 /*tattridnode10*/,  NIT_NULL /*null*/,  variable16 /*pexprnode12*/); /*new AAttrPropdef*/
   variable17 = variable18;
   variable1 =  variable17 /*ppropdefnode1*/ /*node_list=*/;
   variable18 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -12774,12 +12781,12 @@ void parser___ReduceAction129___action(val_t  self, val_t  param0) {
   variable14 =  variable9 /*nodearraylist3*/;
   variable15 = TAG_Bool(( variable14 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable14 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction129___action, LOCATE_parser, 6528); nit_exit(1);}
-  variable16 = NEW_parser_prod___AReadAble___init_areadable( variable13 /*tkwredefnode4*/,  variable14 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable16 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable13 /*tkwredefnode4*/,  variable14 /*tkwreadablenode5*/); /*new AReadAble*/
   variable15 = variable16;
   variable16 =  variable8 /*nodearraylist4*/;
   variable17 = TAG_Bool(( variable16 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable16 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction129___action, LOCATE_parser, 6534); nit_exit(1);}
-  variable18 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable16 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable18 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable16 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable17 = variable18;
   variable18 =  variable7 /*nodearraylist5*/;
   variable19 = TAG_Bool(( variable18 /*pvisibilitynode10*/==NIT_NULL) || VAL_ISA( variable18 /*pvisibilitynode10*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -12793,7 +12800,7 @@ void parser___ReduceAction129___action(val_t  self, val_t  param0) {
   variable21 =  variable2 /*nodearraylist10*/;
   variable22 = TAG_Bool(( variable21 /*pexprnode14*/==NIT_NULL) || VAL_ISA( variable21 /*pexprnode14*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable22)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction129___action, LOCATE_parser, 6546); nit_exit(1);}
-  variable23 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  variable15 /*pablenode3*/,  variable17 /*pablenode6*/,  NIT_NULL /*null*/,  variable18 /*pvisibilitynode10*/,  variable19 /*tkwattrnode11*/,  variable20 /*tattridnode12*/,  NIT_NULL /*null*/,  variable21 /*pexprnode14*/); /*new AAttrPropdef*/
+  variable23 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  variable15 /*pablenode3*/,  variable17 /*pablenode6*/,  NIT_NULL /*null*/,  variable18 /*pvisibilitynode10*/,  variable19 /*tkwattrnode11*/,  variable20 /*tattridnode12*/,  NIT_NULL /*null*/,  variable21 /*pexprnode14*/); /*new AAttrPropdef*/
   variable22 = variable23;
   variable1 =  variable22 /*ppropdefnode1*/ /*node_list=*/;
   variable23 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -12873,7 +12880,7 @@ void parser___ReduceAction130___action(val_t  self, val_t  param0) {
   variable15 =  variable10 /*nodearraylist3*/;
   variable16 = TAG_Bool(( variable15 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable15 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction130___action, LOCATE_parser, 6584); nit_exit(1);}
-  variable17 = NEW_parser_prod___AReadAble___init_areadable( variable14 /*tkwredefnode4*/,  variable15 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable17 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable14 /*tkwredefnode4*/,  variable15 /*tkwreadablenode5*/); /*new AReadAble*/
   variable16 = variable17;
   variable17 =  variable9 /*nodearraylist4*/;
   variable18 = TAG_Bool(( variable17 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable17 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -12881,7 +12888,7 @@ void parser___ReduceAction130___action(val_t  self, val_t  param0) {
   variable18 =  variable8 /*nodearraylist5*/;
   variable19 = TAG_Bool(( variable18 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable18 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable19)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction130___action, LOCATE_parser, 6592); nit_exit(1);}
-  variable20 = NEW_parser_prod___AWriteAble___init_awriteable( variable17 /*tkwredefnode7*/,  variable18 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable20 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable17 /*tkwredefnode7*/,  variable18 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable19 = variable20;
   variable20 =  variable7 /*nodearraylist6*/;
   variable21 = TAG_Bool(( variable20 /*pvisibilitynode10*/==NIT_NULL) || VAL_ISA( variable20 /*pvisibilitynode10*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -12895,7 +12902,7 @@ void parser___ReduceAction130___action(val_t  self, val_t  param0) {
   variable23 =  variable2 /*nodearraylist11*/;
   variable24 = TAG_Bool(( variable23 /*pexprnode14*/==NIT_NULL) || VAL_ISA( variable23 /*pexprnode14*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable24)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction130___action, LOCATE_parser, 6604); nit_exit(1);}
-  variable25 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable13 /*pdocnode2*/,  variable16 /*pablenode3*/,  variable19 /*pablenode6*/,  NIT_NULL /*null*/,  variable20 /*pvisibilitynode10*/,  variable21 /*tkwattrnode11*/,  variable22 /*tattridnode12*/,  NIT_NULL /*null*/,  variable23 /*pexprnode14*/); /*new AAttrPropdef*/
+  variable25 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable13 /*pdocnode2*/,  variable16 /*pablenode3*/,  variable19 /*pablenode6*/,  NIT_NULL /*null*/,  variable20 /*pvisibilitynode10*/,  variable21 /*tkwattrnode11*/,  variable22 /*tattridnode12*/,  NIT_NULL /*null*/,  variable23 /*pexprnode14*/); /*new AAttrPropdef*/
   variable24 = variable25;
   variable1 =  variable24 /*ppropdefnode1*/ /*node_list=*/;
   variable25 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -12966,7 +12973,7 @@ void parser___ReduceAction131___action(val_t  self, val_t  param0) {
   variable13 =  variable8 /*nodearraylist3*/;
   variable14 = TAG_Bool(( variable13 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable13 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction131___action, LOCATE_parser, 6640); nit_exit(1);}
-  variable15 = NEW_parser_prod___AReadAble___init_areadable( variable12 /*tkwredefnode4*/,  variable13 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable15 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable12 /*tkwredefnode4*/,  variable13 /*tkwreadablenode5*/); /*new AReadAble*/
   variable14 = variable15;
   variable15 =  variable7 /*nodearraylist4*/;
   variable16 = TAG_Bool(( variable15 /*pvisibilitynode8*/==NIT_NULL) || VAL_ISA( variable15 /*pvisibilitynode8*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -12980,7 +12987,7 @@ void parser___ReduceAction131___action(val_t  self, val_t  param0) {
   variable18 =  variable2 /*nodearraylist9*/;
   variable19 = TAG_Bool(( variable18 /*pexprnode12*/==NIT_NULL) || VAL_ISA( variable18 /*pexprnode12*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable19)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction131___action, LOCATE_parser, 6652); nit_exit(1);}
-  variable20 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  variable14 /*pablenode3*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable15 /*pvisibilitynode8*/,  variable16 /*tkwattrnode9*/,  variable17 /*tattridnode10*/,  NIT_NULL /*null*/,  variable18 /*pexprnode12*/); /*new AAttrPropdef*/
+  variable20 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  variable14 /*pablenode3*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable15 /*pvisibilitynode8*/,  variable16 /*tkwattrnode9*/,  variable17 /*tattridnode10*/,  NIT_NULL /*null*/,  variable18 /*pexprnode12*/); /*new AAttrPropdef*/
   variable19 = variable20;
   variable1 =  variable19 /*ppropdefnode1*/ /*node_list=*/;
   variable20 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -13044,7 +13051,7 @@ void parser___ReduceAction132___action(val_t  self, val_t  param0) {
   variable11 =  variable8 /*nodearraylist2*/;
   variable12 = TAG_Bool(( variable11 /*tkwwritablenode6*/==NIT_NULL) || VAL_ISA( variable11 /*tkwwritablenode6*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction132___action, LOCATE_parser, 6685); nit_exit(1);}
-  variable13 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable11 /*tkwwritablenode6*/); /*new AWriteAble*/
+  variable13 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable11 /*tkwwritablenode6*/); /*new AWriteAble*/
   variable12 = variable13;
   variable13 =  variable7 /*nodearraylist3*/;
   variable14 = TAG_Bool(( variable13 /*pvisibilitynode8*/==NIT_NULL) || VAL_ISA( variable13 /*pvisibilitynode8*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -13058,7 +13065,7 @@ void parser___ReduceAction132___action(val_t  self, val_t  param0) {
   variable16 =  variable2 /*nodearraylist8*/;
   variable17 = TAG_Bool(( variable16 /*pexprnode12*/==NIT_NULL) || VAL_ISA( variable16 /*pexprnode12*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction132___action, LOCATE_parser, 6697); nit_exit(1);}
-  variable18 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  variable12 /*pablenode4*/,  NIT_NULL /*null*/,  variable13 /*pvisibilitynode8*/,  variable14 /*tkwattrnode9*/,  variable15 /*tattridnode10*/,  NIT_NULL /*null*/,  variable16 /*pexprnode12*/); /*new AAttrPropdef*/
+  variable18 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  variable12 /*pablenode4*/,  NIT_NULL /*null*/,  variable13 /*pvisibilitynode8*/,  variable14 /*tkwattrnode9*/,  variable15 /*tattridnode10*/,  NIT_NULL /*null*/,  variable16 /*pexprnode12*/); /*new AAttrPropdef*/
   variable17 = variable18;
   variable1 =  variable17 /*ppropdefnode1*/ /*node_list=*/;
   variable18 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -13129,7 +13136,7 @@ void parser___ReduceAction133___action(val_t  self, val_t  param0) {
   variable13 =  variable8 /*nodearraylist3*/;
   variable14 = TAG_Bool(( variable13 /*tkwwritablenode6*/==NIT_NULL) || VAL_ISA( variable13 /*tkwwritablenode6*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction133___action, LOCATE_parser, 6733); nit_exit(1);}
-  variable15 = NEW_parser_prod___AWriteAble___init_awriteable( variable12 /*tkwredefnode5*/,  variable13 /*tkwwritablenode6*/); /*new AWriteAble*/
+  variable15 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable12 /*tkwredefnode5*/,  variable13 /*tkwwritablenode6*/); /*new AWriteAble*/
   variable14 = variable15;
   variable15 =  variable7 /*nodearraylist4*/;
   variable16 = TAG_Bool(( variable15 /*pvisibilitynode8*/==NIT_NULL) || VAL_ISA( variable15 /*pvisibilitynode8*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -13143,7 +13150,7 @@ void parser___ReduceAction133___action(val_t  self, val_t  param0) {
   variable18 =  variable2 /*nodearraylist9*/;
   variable19 = TAG_Bool(( variable18 /*pexprnode12*/==NIT_NULL) || VAL_ISA( variable18 /*pexprnode12*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable19)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction133___action, LOCATE_parser, 6745); nit_exit(1);}
-  variable20 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  NIT_NULL /*null*/,  variable14 /*pablenode4*/,  NIT_NULL /*null*/,  variable15 /*pvisibilitynode8*/,  variable16 /*tkwattrnode9*/,  variable17 /*tattridnode10*/,  NIT_NULL /*null*/,  variable18 /*pexprnode12*/); /*new AAttrPropdef*/
+  variable20 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  NIT_NULL /*null*/,  variable14 /*pablenode4*/,  NIT_NULL /*null*/,  variable15 /*pvisibilitynode8*/,  variable16 /*tkwattrnode9*/,  variable17 /*tattridnode10*/,  NIT_NULL /*null*/,  variable18 /*pexprnode12*/); /*new AAttrPropdef*/
   variable19 = variable20;
   variable1 =  variable19 /*ppropdefnode1*/ /*node_list=*/;
   variable20 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -13211,7 +13218,7 @@ void parser___ReduceAction134___action(val_t  self, val_t  param0) {
   variable13 =  variable2 /*nodearraylist7*/;
   variable14 = TAG_Bool(( variable13 /*pexprnode10*/==NIT_NULL) || VAL_ISA( variable13 /*pexprnode10*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction134___action, LOCATE_parser, 6783); nit_exit(1);}
-  variable15 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable10 /*pvisibilitynode6*/,  variable11 /*tkwattrnode7*/,  variable12 /*tattridnode8*/,  NIT_NULL /*null*/,  variable13 /*pexprnode10*/); /*new AAttrPropdef*/
+  variable15 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable9 /*pdocnode2*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable10 /*pvisibilitynode6*/,  variable11 /*tkwattrnode7*/,  variable12 /*tattridnode8*/,  NIT_NULL /*null*/,  variable13 /*pexprnode10*/); /*new AAttrPropdef*/
   variable14 = variable15;
   variable1 =  variable14 /*ppropdefnode1*/ /*node_list=*/;
   variable15 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -13284,12 +13291,12 @@ void parser___ReduceAction135___action(val_t  self, val_t  param0) {
   variable13 =  variable10 /*nodearraylist2*/;
   variable14 = TAG_Bool(( variable13 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable13 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction135___action, LOCATE_parser, 6818); nit_exit(1);}
-  variable15 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable13 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable15 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable13 /*tkwreadablenode5*/); /*new AReadAble*/
   variable14 = variable15;
   variable15 =  variable9 /*nodearraylist3*/;
   variable16 = TAG_Bool(( variable15 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable15 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction135___action, LOCATE_parser, 6824); nit_exit(1);}
-  variable17 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable15 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable17 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable15 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable16 = variable17;
   variable17 =  variable8 /*nodearraylist4*/;
   variable18 = TAG_Bool(( variable17 /*tkwredefnode9*/==NIT_NULL) || VAL_ISA( variable17 /*tkwredefnode9*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -13306,7 +13313,7 @@ void parser___ReduceAction135___action(val_t  self, val_t  param0) {
   variable21 =  variable2 /*nodearraylist10*/;
   variable22 = TAG_Bool(( variable21 /*pexprnode14*/==NIT_NULL) || VAL_ISA( variable21 /*pexprnode14*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable22)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction135___action, LOCATE_parser, 6838); nit_exit(1);}
-  variable23 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  variable14 /*pablenode3*/,  variable16 /*pablenode6*/,  variable17 /*tkwredefnode9*/,  variable18 /*pvisibilitynode10*/,  variable19 /*tkwattrnode11*/,  variable20 /*tattridnode12*/,  NIT_NULL /*null*/,  variable21 /*pexprnode14*/); /*new AAttrPropdef*/
+  variable23 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  variable14 /*pablenode3*/,  variable16 /*pablenode6*/,  variable17 /*tkwredefnode9*/,  variable18 /*pvisibilitynode10*/,  variable19 /*tkwattrnode11*/,  variable20 /*tattridnode12*/,  NIT_NULL /*null*/,  variable21 /*pexprnode14*/); /*new AAttrPropdef*/
   variable22 = variable23;
   variable1 =  variable22 /*ppropdefnode1*/ /*node_list=*/;
   variable23 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -13383,7 +13390,7 @@ void parser___ReduceAction136___action(val_t  self, val_t  param0) {
   variable14 =  variable11 /*nodearraylist2*/;
   variable15 = TAG_Bool(( variable14 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable14 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction136___action, LOCATE_parser, 6874); nit_exit(1);}
-  variable16 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable14 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable16 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable14 /*tkwreadablenode5*/); /*new AReadAble*/
   variable15 = variable16;
   variable16 =  variable10 /*nodearraylist3*/;
   variable17 = TAG_Bool(( variable16 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable16 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -13391,7 +13398,7 @@ void parser___ReduceAction136___action(val_t  self, val_t  param0) {
   variable17 =  variable9 /*nodearraylist4*/;
   variable18 = TAG_Bool(( variable17 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable17 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable18)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction136___action, LOCATE_parser, 6882); nit_exit(1);}
-  variable19 = NEW_parser_prod___AWriteAble___init_awriteable( variable16 /*tkwredefnode7*/,  variable17 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable19 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable16 /*tkwredefnode7*/,  variable17 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable18 = variable19;
   variable19 =  variable8 /*nodearraylist5*/;
   variable20 = TAG_Bool(( variable19 /*tkwredefnode9*/==NIT_NULL) || VAL_ISA( variable19 /*tkwredefnode9*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -13408,7 +13415,7 @@ void parser___ReduceAction136___action(val_t  self, val_t  param0) {
   variable23 =  variable2 /*nodearraylist11*/;
   variable24 = TAG_Bool(( variable23 /*pexprnode14*/==NIT_NULL) || VAL_ISA( variable23 /*pexprnode14*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable24)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction136___action, LOCATE_parser, 6896); nit_exit(1);}
-  variable25 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable13 /*pdocnode2*/,  variable15 /*pablenode3*/,  variable18 /*pablenode6*/,  variable19 /*tkwredefnode9*/,  variable20 /*pvisibilitynode10*/,  variable21 /*tkwattrnode11*/,  variable22 /*tattridnode12*/,  NIT_NULL /*null*/,  variable23 /*pexprnode14*/); /*new AAttrPropdef*/
+  variable25 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable13 /*pdocnode2*/,  variable15 /*pablenode3*/,  variable18 /*pablenode6*/,  variable19 /*tkwredefnode9*/,  variable20 /*pvisibilitynode10*/,  variable21 /*tkwattrnode11*/,  variable22 /*tattridnode12*/,  NIT_NULL /*null*/,  variable23 /*pexprnode14*/); /*new AAttrPropdef*/
   variable24 = variable25;
   variable1 =  variable24 /*ppropdefnode1*/ /*node_list=*/;
   variable25 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -13476,7 +13483,7 @@ void parser___ReduceAction137___action(val_t  self, val_t  param0) {
   variable12 =  variable9 /*nodearraylist2*/;
   variable13 = TAG_Bool(( variable12 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable12 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction137___action, LOCATE_parser, 6930); nit_exit(1);}
-  variable14 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable12 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable14 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable12 /*tkwreadablenode5*/); /*new AReadAble*/
   variable13 = variable14;
   variable14 =  variable8 /*nodearraylist3*/;
   variable15 = TAG_Bool(( variable14 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable14 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -13493,7 +13500,7 @@ void parser___ReduceAction137___action(val_t  self, val_t  param0) {
   variable18 =  variable2 /*nodearraylist9*/;
   variable19 = TAG_Bool(( variable18 /*pexprnode12*/==NIT_NULL) || VAL_ISA( variable18 /*pexprnode12*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable19)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction137___action, LOCATE_parser, 6944); nit_exit(1);}
-  variable20 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  variable13 /*pablenode3*/,  NIT_NULL /*null*/,  variable14 /*tkwredefnode7*/,  variable15 /*pvisibilitynode8*/,  variable16 /*tkwattrnode9*/,  variable17 /*tattridnode10*/,  NIT_NULL /*null*/,  variable18 /*pexprnode12*/); /*new AAttrPropdef*/
+  variable20 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  variable13 /*pablenode3*/,  NIT_NULL /*null*/,  variable14 /*tkwredefnode7*/,  variable15 /*pvisibilitynode8*/,  variable16 /*tkwattrnode9*/,  variable17 /*tattridnode10*/,  NIT_NULL /*null*/,  variable18 /*pexprnode12*/); /*new AAttrPropdef*/
   variable19 = variable20;
   variable1 =  variable19 /*ppropdefnode1*/ /*node_list=*/;
   variable20 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -13573,12 +13580,12 @@ void parser___ReduceAction138___action(val_t  self, val_t  param0) {
   variable15 =  variable10 /*nodearraylist3*/;
   variable16 = TAG_Bool(( variable15 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable15 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction138___action, LOCATE_parser, 6982); nit_exit(1);}
-  variable17 = NEW_parser_prod___AReadAble___init_areadable( variable14 /*tkwredefnode4*/,  variable15 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable17 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable14 /*tkwredefnode4*/,  variable15 /*tkwreadablenode5*/); /*new AReadAble*/
   variable16 = variable17;
   variable17 =  variable9 /*nodearraylist4*/;
   variable18 = TAG_Bool(( variable17 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable17 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable18)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction138___action, LOCATE_parser, 6988); nit_exit(1);}
-  variable19 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable17 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable19 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable17 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable18 = variable19;
   variable19 =  variable8 /*nodearraylist5*/;
   variable20 = TAG_Bool(( variable19 /*tkwredefnode9*/==NIT_NULL) || VAL_ISA( variable19 /*tkwredefnode9*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -13595,7 +13602,7 @@ void parser___ReduceAction138___action(val_t  self, val_t  param0) {
   variable23 =  variable2 /*nodearraylist11*/;
   variable24 = TAG_Bool(( variable23 /*pexprnode14*/==NIT_NULL) || VAL_ISA( variable23 /*pexprnode14*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable24)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction138___action, LOCATE_parser, 7002); nit_exit(1);}
-  variable25 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable13 /*pdocnode2*/,  variable16 /*pablenode3*/,  variable18 /*pablenode6*/,  variable19 /*tkwredefnode9*/,  variable20 /*pvisibilitynode10*/,  variable21 /*tkwattrnode11*/,  variable22 /*tattridnode12*/,  NIT_NULL /*null*/,  variable23 /*pexprnode14*/); /*new AAttrPropdef*/
+  variable25 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable13 /*pdocnode2*/,  variable16 /*pablenode3*/,  variable18 /*pablenode6*/,  variable19 /*tkwredefnode9*/,  variable20 /*pvisibilitynode10*/,  variable21 /*tkwattrnode11*/,  variable22 /*tattridnode12*/,  NIT_NULL /*null*/,  variable23 /*pexprnode14*/); /*new AAttrPropdef*/
   variable24 = variable25;
   variable1 =  variable24 /*ppropdefnode1*/ /*node_list=*/;
   variable25 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -13679,7 +13686,7 @@ void parser___ReduceAction139___action(val_t  self, val_t  param0) {
   variable16 =  variable11 /*nodearraylist3*/;
   variable17 = TAG_Bool(( variable16 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable16 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction139___action, LOCATE_parser, 7041); nit_exit(1);}
-  variable18 = NEW_parser_prod___AReadAble___init_areadable( variable15 /*tkwredefnode4*/,  variable16 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable18 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable15 /*tkwredefnode4*/,  variable16 /*tkwreadablenode5*/); /*new AReadAble*/
   variable17 = variable18;
   variable18 =  variable10 /*nodearraylist4*/;
   variable19 = TAG_Bool(( variable18 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable18 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -13687,7 +13694,7 @@ void parser___ReduceAction139___action(val_t  self, val_t  param0) {
   variable19 =  variable9 /*nodearraylist5*/;
   variable20 = TAG_Bool(( variable19 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable19 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable20)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction139___action, LOCATE_parser, 7049); nit_exit(1);}
-  variable21 = NEW_parser_prod___AWriteAble___init_awriteable( variable18 /*tkwredefnode7*/,  variable19 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable21 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable18 /*tkwredefnode7*/,  variable19 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable20 = variable21;
   variable21 =  variable8 /*nodearraylist6*/;
   variable22 = TAG_Bool(( variable21 /*tkwredefnode9*/==NIT_NULL) || VAL_ISA( variable21 /*tkwredefnode9*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -13704,7 +13711,7 @@ void parser___ReduceAction139___action(val_t  self, val_t  param0) {
   variable25 =  variable2 /*nodearraylist12*/;
   variable26 = TAG_Bool(( variable25 /*pexprnode14*/==NIT_NULL) || VAL_ISA( variable25 /*pexprnode14*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable26)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction139___action, LOCATE_parser, 7063); nit_exit(1);}
-  variable27 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable14 /*pdocnode2*/,  variable17 /*pablenode3*/,  variable20 /*pablenode6*/,  variable21 /*tkwredefnode9*/,  variable22 /*pvisibilitynode10*/,  variable23 /*tkwattrnode11*/,  variable24 /*tattridnode12*/,  NIT_NULL /*null*/,  variable25 /*pexprnode14*/); /*new AAttrPropdef*/
+  variable27 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable14 /*pdocnode2*/,  variable17 /*pablenode3*/,  variable20 /*pablenode6*/,  variable21 /*tkwredefnode9*/,  variable22 /*pvisibilitynode10*/,  variable23 /*tkwattrnode11*/,  variable24 /*tattridnode12*/,  NIT_NULL /*null*/,  variable25 /*pexprnode14*/); /*new AAttrPropdef*/
   variable26 = variable27;
   variable1 =  variable26 /*ppropdefnode1*/ /*node_list=*/;
   variable27 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -13779,7 +13786,7 @@ void parser___ReduceAction140___action(val_t  self, val_t  param0) {
   variable14 =  variable9 /*nodearraylist3*/;
   variable15 = TAG_Bool(( variable14 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable14 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction140___action, LOCATE_parser, 7100); nit_exit(1);}
-  variable16 = NEW_parser_prod___AReadAble___init_areadable( variable13 /*tkwredefnode4*/,  variable14 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable16 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable13 /*tkwredefnode4*/,  variable14 /*tkwreadablenode5*/); /*new AReadAble*/
   variable15 = variable16;
   variable16 =  variable8 /*nodearraylist4*/;
   variable17 = TAG_Bool(( variable16 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable16 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -13796,7 +13803,7 @@ void parser___ReduceAction140___action(val_t  self, val_t  param0) {
   variable20 =  variable2 /*nodearraylist10*/;
   variable21 = TAG_Bool(( variable20 /*pexprnode12*/==NIT_NULL) || VAL_ISA( variable20 /*pexprnode12*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable21)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction140___action, LOCATE_parser, 7114); nit_exit(1);}
-  variable22 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  variable15 /*pablenode3*/,  NIT_NULL /*null*/,  variable16 /*tkwredefnode7*/,  variable17 /*pvisibilitynode8*/,  variable18 /*tkwattrnode9*/,  variable19 /*tattridnode10*/,  NIT_NULL /*null*/,  variable20 /*pexprnode12*/); /*new AAttrPropdef*/
+  variable22 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  variable15 /*pablenode3*/,  NIT_NULL /*null*/,  variable16 /*tkwredefnode7*/,  variable17 /*pvisibilitynode8*/,  variable18 /*tkwattrnode9*/,  variable19 /*tattridnode10*/,  NIT_NULL /*null*/,  variable20 /*pexprnode12*/); /*new AAttrPropdef*/
   variable21 = variable22;
   variable1 =  variable21 /*ppropdefnode1*/ /*node_list=*/;
   variable22 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -13864,7 +13871,7 @@ void parser___ReduceAction141___action(val_t  self, val_t  param0) {
   variable12 =  variable9 /*nodearraylist2*/;
   variable13 = TAG_Bool(( variable12 /*tkwwritablenode6*/==NIT_NULL) || VAL_ISA( variable12 /*tkwwritablenode6*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction141___action, LOCATE_parser, 7148); nit_exit(1);}
-  variable14 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable12 /*tkwwritablenode6*/); /*new AWriteAble*/
+  variable14 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable12 /*tkwwritablenode6*/); /*new AWriteAble*/
   variable13 = variable14;
   variable14 =  variable8 /*nodearraylist3*/;
   variable15 = TAG_Bool(( variable14 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable14 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -13881,7 +13888,7 @@ void parser___ReduceAction141___action(val_t  self, val_t  param0) {
   variable18 =  variable2 /*nodearraylist9*/;
   variable19 = TAG_Bool(( variable18 /*pexprnode12*/==NIT_NULL) || VAL_ISA( variable18 /*pexprnode12*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable19)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction141___action, LOCATE_parser, 7162); nit_exit(1);}
-  variable20 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  NIT_NULL /*null*/,  variable13 /*pablenode4*/,  variable14 /*tkwredefnode7*/,  variable15 /*pvisibilitynode8*/,  variable16 /*tkwattrnode9*/,  variable17 /*tattridnode10*/,  NIT_NULL /*null*/,  variable18 /*pexprnode12*/); /*new AAttrPropdef*/
+  variable20 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  NIT_NULL /*null*/,  variable13 /*pablenode4*/,  variable14 /*tkwredefnode7*/,  variable15 /*pvisibilitynode8*/,  variable16 /*tkwattrnode9*/,  variable17 /*tattridnode10*/,  NIT_NULL /*null*/,  variable18 /*pexprnode12*/); /*new AAttrPropdef*/
   variable19 = variable20;
   variable1 =  variable19 /*ppropdefnode1*/ /*node_list=*/;
   variable20 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -13956,7 +13963,7 @@ void parser___ReduceAction142___action(val_t  self, val_t  param0) {
   variable14 =  variable9 /*nodearraylist3*/;
   variable15 = TAG_Bool(( variable14 /*tkwwritablenode6*/==NIT_NULL) || VAL_ISA( variable14 /*tkwwritablenode6*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction142___action, LOCATE_parser, 7199); nit_exit(1);}
-  variable16 = NEW_parser_prod___AWriteAble___init_awriteable( variable13 /*tkwredefnode5*/,  variable14 /*tkwwritablenode6*/); /*new AWriteAble*/
+  variable16 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable13 /*tkwredefnode5*/,  variable14 /*tkwwritablenode6*/); /*new AWriteAble*/
   variable15 = variable16;
   variable16 =  variable8 /*nodearraylist4*/;
   variable17 = TAG_Bool(( variable16 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable16 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -13973,7 +13980,7 @@ void parser___ReduceAction142___action(val_t  self, val_t  param0) {
   variable20 =  variable2 /*nodearraylist10*/;
   variable21 = TAG_Bool(( variable20 /*pexprnode12*/==NIT_NULL) || VAL_ISA( variable20 /*pexprnode12*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable21)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction142___action, LOCATE_parser, 7213); nit_exit(1);}
-  variable22 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  NIT_NULL /*null*/,  variable15 /*pablenode4*/,  variable16 /*tkwredefnode7*/,  variable17 /*pvisibilitynode8*/,  variable18 /*tkwattrnode9*/,  variable19 /*tattridnode10*/,  NIT_NULL /*null*/,  variable20 /*pexprnode12*/); /*new AAttrPropdef*/
+  variable22 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  NIT_NULL /*null*/,  variable15 /*pablenode4*/,  variable16 /*tkwredefnode7*/,  variable17 /*pvisibilitynode8*/,  variable18 /*tkwattrnode9*/,  variable19 /*tattridnode10*/,  NIT_NULL /*null*/,  variable20 /*pexprnode12*/); /*new AAttrPropdef*/
   variable21 = variable22;
   variable1 =  variable21 /*ppropdefnode1*/ /*node_list=*/;
   variable22 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -14048,7 +14055,7 @@ void parser___ReduceAction143___action(val_t  self, val_t  param0) {
   variable15 =  variable2 /*nodearraylist8*/;
   variable16 = TAG_Bool(( variable15 /*pexprnode10*/==NIT_NULL) || VAL_ISA( variable15 /*pexprnode10*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction143___action, LOCATE_parser, 7254); nit_exit(1);}
-  variable17 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable11 /*tkwredefnode5*/,  variable12 /*pvisibilitynode6*/,  variable13 /*tkwattrnode7*/,  variable14 /*tattridnode8*/,  NIT_NULL /*null*/,  variable15 /*pexprnode10*/); /*new AAttrPropdef*/
+  variable17 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable11 /*tkwredefnode5*/,  variable12 /*pvisibilitynode6*/,  variable13 /*tkwattrnode7*/,  variable14 /*tattridnode8*/,  NIT_NULL /*null*/,  variable15 /*pexprnode10*/); /*new AAttrPropdef*/
   variable16 = variable17;
   variable1 =  variable16 /*ppropdefnode1*/ /*node_list=*/;
   variable17 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -14121,12 +14128,12 @@ void parser___ReduceAction144___action(val_t  self, val_t  param0) {
   variable13 =  variable10 /*nodearraylist2*/;
   variable14 = TAG_Bool(( variable13 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable13 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction144___action, LOCATE_parser, 7289); nit_exit(1);}
-  variable15 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable13 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable15 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable13 /*tkwreadablenode5*/); /*new AReadAble*/
   variable14 = variable15;
   variable15 =  variable9 /*nodearraylist3*/;
   variable16 = TAG_Bool(( variable15 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable15 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction144___action, LOCATE_parser, 7295); nit_exit(1);}
-  variable17 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable15 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable17 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable15 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable16 = variable17;
   variable17 =  variable8 /*nodearraylist4*/;
   variable18 = TAG_Bool(( variable17 /*pvisibilitynode10*/==NIT_NULL) || VAL_ISA( variable17 /*pvisibilitynode10*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -14143,7 +14150,7 @@ void parser___ReduceAction144___action(val_t  self, val_t  param0) {
   variable21 =  variable2 /*nodearraylist10*/;
   variable22 = TAG_Bool(( variable21 /*pexprnode14*/==NIT_NULL) || VAL_ISA( variable21 /*pexprnode14*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable22)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction144___action, LOCATE_parser, 7309); nit_exit(1);}
-  variable23 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  variable14 /*pablenode3*/,  variable16 /*pablenode6*/,  NIT_NULL /*null*/,  variable17 /*pvisibilitynode10*/,  variable18 /*tkwattrnode11*/,  variable19 /*tattridnode12*/,  variable20 /*ptypenode13*/,  variable21 /*pexprnode14*/); /*new AAttrPropdef*/
+  variable23 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  variable14 /*pablenode3*/,  variable16 /*pablenode6*/,  NIT_NULL /*null*/,  variable17 /*pvisibilitynode10*/,  variable18 /*tkwattrnode11*/,  variable19 /*tattridnode12*/,  variable20 /*ptypenode13*/,  variable21 /*pexprnode14*/); /*new AAttrPropdef*/
   variable22 = variable23;
   variable1 =  variable22 /*ppropdefnode1*/ /*node_list=*/;
   variable23 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -14220,7 +14227,7 @@ void parser___ReduceAction145___action(val_t  self, val_t  param0) {
   variable14 =  variable11 /*nodearraylist2*/;
   variable15 = TAG_Bool(( variable14 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable14 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction145___action, LOCATE_parser, 7345); nit_exit(1);}
-  variable16 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable14 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable16 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable14 /*tkwreadablenode5*/); /*new AReadAble*/
   variable15 = variable16;
   variable16 =  variable10 /*nodearraylist3*/;
   variable17 = TAG_Bool(( variable16 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable16 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -14228,7 +14235,7 @@ void parser___ReduceAction145___action(val_t  self, val_t  param0) {
   variable17 =  variable9 /*nodearraylist4*/;
   variable18 = TAG_Bool(( variable17 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable17 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable18)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction145___action, LOCATE_parser, 7353); nit_exit(1);}
-  variable19 = NEW_parser_prod___AWriteAble___init_awriteable( variable16 /*tkwredefnode7*/,  variable17 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable19 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable16 /*tkwredefnode7*/,  variable17 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable18 = variable19;
   variable19 =  variable8 /*nodearraylist5*/;
   variable20 = TAG_Bool(( variable19 /*pvisibilitynode10*/==NIT_NULL) || VAL_ISA( variable19 /*pvisibilitynode10*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -14245,7 +14252,7 @@ void parser___ReduceAction145___action(val_t  self, val_t  param0) {
   variable23 =  variable2 /*nodearraylist11*/;
   variable24 = TAG_Bool(( variable23 /*pexprnode14*/==NIT_NULL) || VAL_ISA( variable23 /*pexprnode14*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable24)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction145___action, LOCATE_parser, 7367); nit_exit(1);}
-  variable25 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable13 /*pdocnode2*/,  variable15 /*pablenode3*/,  variable18 /*pablenode6*/,  NIT_NULL /*null*/,  variable19 /*pvisibilitynode10*/,  variable20 /*tkwattrnode11*/,  variable21 /*tattridnode12*/,  variable22 /*ptypenode13*/,  variable23 /*pexprnode14*/); /*new AAttrPropdef*/
+  variable25 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable13 /*pdocnode2*/,  variable15 /*pablenode3*/,  variable18 /*pablenode6*/,  NIT_NULL /*null*/,  variable19 /*pvisibilitynode10*/,  variable20 /*tkwattrnode11*/,  variable21 /*tattridnode12*/,  variable22 /*ptypenode13*/,  variable23 /*pexprnode14*/); /*new AAttrPropdef*/
   variable24 = variable25;
   variable1 =  variable24 /*ppropdefnode1*/ /*node_list=*/;
   variable25 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -14313,7 +14320,7 @@ void parser___ReduceAction146___action(val_t  self, val_t  param0) {
   variable12 =  variable9 /*nodearraylist2*/;
   variable13 = TAG_Bool(( variable12 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable12 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction146___action, LOCATE_parser, 7401); nit_exit(1);}
-  variable14 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable12 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable14 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable12 /*tkwreadablenode5*/); /*new AReadAble*/
   variable13 = variable14;
   variable14 =  variable8 /*nodearraylist3*/;
   variable15 = TAG_Bool(( variable14 /*pvisibilitynode8*/==NIT_NULL) || VAL_ISA( variable14 /*pvisibilitynode8*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -14330,7 +14337,7 @@ void parser___ReduceAction146___action(val_t  self, val_t  param0) {
   variable18 =  variable2 /*nodearraylist9*/;
   variable19 = TAG_Bool(( variable18 /*pexprnode12*/==NIT_NULL) || VAL_ISA( variable18 /*pexprnode12*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable19)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction146___action, LOCATE_parser, 7415); nit_exit(1);}
-  variable20 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  variable13 /*pablenode3*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable14 /*pvisibilitynode8*/,  variable15 /*tkwattrnode9*/,  variable16 /*tattridnode10*/,  variable17 /*ptypenode11*/,  variable18 /*pexprnode12*/); /*new AAttrPropdef*/
+  variable20 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  variable13 /*pablenode3*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable14 /*pvisibilitynode8*/,  variable15 /*tkwattrnode9*/,  variable16 /*tattridnode10*/,  variable17 /*ptypenode11*/,  variable18 /*pexprnode12*/); /*new AAttrPropdef*/
   variable19 = variable20;
   variable1 =  variable19 /*ppropdefnode1*/ /*node_list=*/;
   variable20 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -14410,12 +14417,12 @@ void parser___ReduceAction147___action(val_t  self, val_t  param0) {
   variable15 =  variable10 /*nodearraylist3*/;
   variable16 = TAG_Bool(( variable15 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable15 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction147___action, LOCATE_parser, 7453); nit_exit(1);}
-  variable17 = NEW_parser_prod___AReadAble___init_areadable( variable14 /*tkwredefnode4*/,  variable15 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable17 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable14 /*tkwredefnode4*/,  variable15 /*tkwreadablenode5*/); /*new AReadAble*/
   variable16 = variable17;
   variable17 =  variable9 /*nodearraylist4*/;
   variable18 = TAG_Bool(( variable17 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable17 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable18)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction147___action, LOCATE_parser, 7459); nit_exit(1);}
-  variable19 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable17 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable19 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable17 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable18 = variable19;
   variable19 =  variable8 /*nodearraylist5*/;
   variable20 = TAG_Bool(( variable19 /*pvisibilitynode10*/==NIT_NULL) || VAL_ISA( variable19 /*pvisibilitynode10*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -14432,7 +14439,7 @@ void parser___ReduceAction147___action(val_t  self, val_t  param0) {
   variable23 =  variable2 /*nodearraylist11*/;
   variable24 = TAG_Bool(( variable23 /*pexprnode14*/==NIT_NULL) || VAL_ISA( variable23 /*pexprnode14*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable24)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction147___action, LOCATE_parser, 7473); nit_exit(1);}
-  variable25 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable13 /*pdocnode2*/,  variable16 /*pablenode3*/,  variable18 /*pablenode6*/,  NIT_NULL /*null*/,  variable19 /*pvisibilitynode10*/,  variable20 /*tkwattrnode11*/,  variable21 /*tattridnode12*/,  variable22 /*ptypenode13*/,  variable23 /*pexprnode14*/); /*new AAttrPropdef*/
+  variable25 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable13 /*pdocnode2*/,  variable16 /*pablenode3*/,  variable18 /*pablenode6*/,  NIT_NULL /*null*/,  variable19 /*pvisibilitynode10*/,  variable20 /*tkwattrnode11*/,  variable21 /*tattridnode12*/,  variable22 /*ptypenode13*/,  variable23 /*pexprnode14*/); /*new AAttrPropdef*/
   variable24 = variable25;
   variable1 =  variable24 /*ppropdefnode1*/ /*node_list=*/;
   variable25 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -14516,7 +14523,7 @@ void parser___ReduceAction148___action(val_t  self, val_t  param0) {
   variable16 =  variable11 /*nodearraylist3*/;
   variable17 = TAG_Bool(( variable16 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable16 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction148___action, LOCATE_parser, 7512); nit_exit(1);}
-  variable18 = NEW_parser_prod___AReadAble___init_areadable( variable15 /*tkwredefnode4*/,  variable16 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable18 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable15 /*tkwredefnode4*/,  variable16 /*tkwreadablenode5*/); /*new AReadAble*/
   variable17 = variable18;
   variable18 =  variable10 /*nodearraylist4*/;
   variable19 = TAG_Bool(( variable18 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable18 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -14524,7 +14531,7 @@ void parser___ReduceAction148___action(val_t  self, val_t  param0) {
   variable19 =  variable9 /*nodearraylist5*/;
   variable20 = TAG_Bool(( variable19 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable19 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable20)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction148___action, LOCATE_parser, 7520); nit_exit(1);}
-  variable21 = NEW_parser_prod___AWriteAble___init_awriteable( variable18 /*tkwredefnode7*/,  variable19 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable21 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable18 /*tkwredefnode7*/,  variable19 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable20 = variable21;
   variable21 =  variable8 /*nodearraylist6*/;
   variable22 = TAG_Bool(( variable21 /*pvisibilitynode10*/==NIT_NULL) || VAL_ISA( variable21 /*pvisibilitynode10*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -14541,7 +14548,7 @@ void parser___ReduceAction148___action(val_t  self, val_t  param0) {
   variable25 =  variable2 /*nodearraylist12*/;
   variable26 = TAG_Bool(( variable25 /*pexprnode14*/==NIT_NULL) || VAL_ISA( variable25 /*pexprnode14*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable26)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction148___action, LOCATE_parser, 7534); nit_exit(1);}
-  variable27 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable14 /*pdocnode2*/,  variable17 /*pablenode3*/,  variable20 /*pablenode6*/,  NIT_NULL /*null*/,  variable21 /*pvisibilitynode10*/,  variable22 /*tkwattrnode11*/,  variable23 /*tattridnode12*/,  variable24 /*ptypenode13*/,  variable25 /*pexprnode14*/); /*new AAttrPropdef*/
+  variable27 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable14 /*pdocnode2*/,  variable17 /*pablenode3*/,  variable20 /*pablenode6*/,  NIT_NULL /*null*/,  variable21 /*pvisibilitynode10*/,  variable22 /*tkwattrnode11*/,  variable23 /*tattridnode12*/,  variable24 /*ptypenode13*/,  variable25 /*pexprnode14*/); /*new AAttrPropdef*/
   variable26 = variable27;
   variable1 =  variable26 /*ppropdefnode1*/ /*node_list=*/;
   variable27 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -14616,7 +14623,7 @@ void parser___ReduceAction149___action(val_t  self, val_t  param0) {
   variable14 =  variable9 /*nodearraylist3*/;
   variable15 = TAG_Bool(( variable14 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable14 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction149___action, LOCATE_parser, 7571); nit_exit(1);}
-  variable16 = NEW_parser_prod___AReadAble___init_areadable( variable13 /*tkwredefnode4*/,  variable14 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable16 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable13 /*tkwredefnode4*/,  variable14 /*tkwreadablenode5*/); /*new AReadAble*/
   variable15 = variable16;
   variable16 =  variable8 /*nodearraylist4*/;
   variable17 = TAG_Bool(( variable16 /*pvisibilitynode8*/==NIT_NULL) || VAL_ISA( variable16 /*pvisibilitynode8*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -14633,7 +14640,7 @@ void parser___ReduceAction149___action(val_t  self, val_t  param0) {
   variable20 =  variable2 /*nodearraylist10*/;
   variable21 = TAG_Bool(( variable20 /*pexprnode12*/==NIT_NULL) || VAL_ISA( variable20 /*pexprnode12*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable21)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction149___action, LOCATE_parser, 7585); nit_exit(1);}
-  variable22 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  variable15 /*pablenode3*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable16 /*pvisibilitynode8*/,  variable17 /*tkwattrnode9*/,  variable18 /*tattridnode10*/,  variable19 /*ptypenode11*/,  variable20 /*pexprnode12*/); /*new AAttrPropdef*/
+  variable22 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  variable15 /*pablenode3*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable16 /*pvisibilitynode8*/,  variable17 /*tkwattrnode9*/,  variable18 /*tattridnode10*/,  variable19 /*ptypenode11*/,  variable20 /*pexprnode12*/); /*new AAttrPropdef*/
   variable21 = variable22;
   variable1 =  variable21 /*ppropdefnode1*/ /*node_list=*/;
   variable22 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -14701,7 +14708,7 @@ void parser___ReduceAction150___action(val_t  self, val_t  param0) {
   variable12 =  variable9 /*nodearraylist2*/;
   variable13 = TAG_Bool(( variable12 /*tkwwritablenode6*/==NIT_NULL) || VAL_ISA( variable12 /*tkwwritablenode6*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction150___action, LOCATE_parser, 7619); nit_exit(1);}
-  variable14 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable12 /*tkwwritablenode6*/); /*new AWriteAble*/
+  variable14 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable12 /*tkwwritablenode6*/); /*new AWriteAble*/
   variable13 = variable14;
   variable14 =  variable8 /*nodearraylist3*/;
   variable15 = TAG_Bool(( variable14 /*pvisibilitynode8*/==NIT_NULL) || VAL_ISA( variable14 /*pvisibilitynode8*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -14718,7 +14725,7 @@ void parser___ReduceAction150___action(val_t  self, val_t  param0) {
   variable18 =  variable2 /*nodearraylist9*/;
   variable19 = TAG_Bool(( variable18 /*pexprnode12*/==NIT_NULL) || VAL_ISA( variable18 /*pexprnode12*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable19)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction150___action, LOCATE_parser, 7633); nit_exit(1);}
-  variable20 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  NIT_NULL /*null*/,  variable13 /*pablenode4*/,  NIT_NULL /*null*/,  variable14 /*pvisibilitynode8*/,  variable15 /*tkwattrnode9*/,  variable16 /*tattridnode10*/,  variable17 /*ptypenode11*/,  variable18 /*pexprnode12*/); /*new AAttrPropdef*/
+  variable20 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  NIT_NULL /*null*/,  variable13 /*pablenode4*/,  NIT_NULL /*null*/,  variable14 /*pvisibilitynode8*/,  variable15 /*tkwattrnode9*/,  variable16 /*tattridnode10*/,  variable17 /*ptypenode11*/,  variable18 /*pexprnode12*/); /*new AAttrPropdef*/
   variable19 = variable20;
   variable1 =  variable19 /*ppropdefnode1*/ /*node_list=*/;
   variable20 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -14793,7 +14800,7 @@ void parser___ReduceAction151___action(val_t  self, val_t  param0) {
   variable14 =  variable9 /*nodearraylist3*/;
   variable15 = TAG_Bool(( variable14 /*tkwwritablenode6*/==NIT_NULL) || VAL_ISA( variable14 /*tkwwritablenode6*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction151___action, LOCATE_parser, 7670); nit_exit(1);}
-  variable16 = NEW_parser_prod___AWriteAble___init_awriteable( variable13 /*tkwredefnode5*/,  variable14 /*tkwwritablenode6*/); /*new AWriteAble*/
+  variable16 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable13 /*tkwredefnode5*/,  variable14 /*tkwwritablenode6*/); /*new AWriteAble*/
   variable15 = variable16;
   variable16 =  variable8 /*nodearraylist4*/;
   variable17 = TAG_Bool(( variable16 /*pvisibilitynode8*/==NIT_NULL) || VAL_ISA( variable16 /*pvisibilitynode8*/, COLOR_PVisibility, ID_PVisibility)) /*cast PVisibility*/;
@@ -14810,7 +14817,7 @@ void parser___ReduceAction151___action(val_t  self, val_t  param0) {
   variable20 =  variable2 /*nodearraylist10*/;
   variable21 = TAG_Bool(( variable20 /*pexprnode12*/==NIT_NULL) || VAL_ISA( variable20 /*pexprnode12*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable21)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction151___action, LOCATE_parser, 7684); nit_exit(1);}
-  variable22 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  NIT_NULL /*null*/,  variable15 /*pablenode4*/,  NIT_NULL /*null*/,  variable16 /*pvisibilitynode8*/,  variable17 /*tkwattrnode9*/,  variable18 /*tattridnode10*/,  variable19 /*ptypenode11*/,  variable20 /*pexprnode12*/); /*new AAttrPropdef*/
+  variable22 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  NIT_NULL /*null*/,  variable15 /*pablenode4*/,  NIT_NULL /*null*/,  variable16 /*pvisibilitynode8*/,  variable17 /*tkwattrnode9*/,  variable18 /*tattridnode10*/,  variable19 /*ptypenode11*/,  variable20 /*pexprnode12*/); /*new AAttrPropdef*/
   variable21 = variable22;
   variable1 =  variable21 /*ppropdefnode1*/ /*node_list=*/;
   variable22 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -14885,7 +14892,7 @@ void parser___ReduceAction152___action(val_t  self, val_t  param0) {
   variable15 =  variable2 /*nodearraylist8*/;
   variable16 = TAG_Bool(( variable15 /*pexprnode10*/==NIT_NULL) || VAL_ISA( variable15 /*pexprnode10*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction152___action, LOCATE_parser, 7725); nit_exit(1);}
-  variable17 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable11 /*pvisibilitynode6*/,  variable12 /*tkwattrnode7*/,  variable13 /*tattridnode8*/,  variable14 /*ptypenode9*/,  variable15 /*pexprnode10*/); /*new AAttrPropdef*/
+  variable17 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable11 /*pvisibilitynode6*/,  variable12 /*tkwattrnode7*/,  variable13 /*tattridnode8*/,  variable14 /*ptypenode9*/,  variable15 /*pexprnode10*/); /*new AAttrPropdef*/
   variable16 = variable17;
   variable1 =  variable16 /*ppropdefnode1*/ /*node_list=*/;
   variable17 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -14962,12 +14969,12 @@ void parser___ReduceAction153___action(val_t  self, val_t  param0) {
   variable14 =  variable11 /*nodearraylist2*/;
   variable15 = TAG_Bool(( variable14 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable14 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction153___action, LOCATE_parser, 7761); nit_exit(1);}
-  variable16 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable14 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable16 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable14 /*tkwreadablenode5*/); /*new AReadAble*/
   variable15 = variable16;
   variable16 =  variable10 /*nodearraylist3*/;
   variable17 = TAG_Bool(( variable16 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable16 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction153___action, LOCATE_parser, 7767); nit_exit(1);}
-  variable18 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable16 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable18 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable16 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable17 = variable18;
   variable18 =  variable9 /*nodearraylist4*/;
   variable19 = TAG_Bool(( variable18 /*tkwredefnode9*/==NIT_NULL) || VAL_ISA( variable18 /*tkwredefnode9*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -14987,7 +14994,7 @@ void parser___ReduceAction153___action(val_t  self, val_t  param0) {
   variable23 =  variable2 /*nodearraylist11*/;
   variable24 = TAG_Bool(( variable23 /*pexprnode14*/==NIT_NULL) || VAL_ISA( variable23 /*pexprnode14*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable24)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction153___action, LOCATE_parser, 7783); nit_exit(1);}
-  variable25 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable13 /*pdocnode2*/,  variable15 /*pablenode3*/,  variable17 /*pablenode6*/,  variable18 /*tkwredefnode9*/,  variable19 /*pvisibilitynode10*/,  variable20 /*tkwattrnode11*/,  variable21 /*tattridnode12*/,  variable22 /*ptypenode13*/,  variable23 /*pexprnode14*/); /*new AAttrPropdef*/
+  variable25 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable13 /*pdocnode2*/,  variable15 /*pablenode3*/,  variable17 /*pablenode6*/,  variable18 /*tkwredefnode9*/,  variable19 /*pvisibilitynode10*/,  variable20 /*tkwattrnode11*/,  variable21 /*tattridnode12*/,  variable22 /*ptypenode13*/,  variable23 /*pexprnode14*/); /*new AAttrPropdef*/
   variable24 = variable25;
   variable1 =  variable24 /*ppropdefnode1*/ /*node_list=*/;
   variable25 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -15068,7 +15075,7 @@ void parser___ReduceAction154___action(val_t  self, val_t  param0) {
   variable15 =  variable12 /*nodearraylist2*/;
   variable16 = TAG_Bool(( variable15 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable15 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction154___action, LOCATE_parser, 7820); nit_exit(1);}
-  variable17 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable15 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable17 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable15 /*tkwreadablenode5*/); /*new AReadAble*/
   variable16 = variable17;
   variable17 =  variable11 /*nodearraylist3*/;
   variable18 = TAG_Bool(( variable17 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable17 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -15076,7 +15083,7 @@ void parser___ReduceAction154___action(val_t  self, val_t  param0) {
   variable18 =  variable10 /*nodearraylist4*/;
   variable19 = TAG_Bool(( variable18 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable18 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable19)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction154___action, LOCATE_parser, 7828); nit_exit(1);}
-  variable20 = NEW_parser_prod___AWriteAble___init_awriteable( variable17 /*tkwredefnode7*/,  variable18 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable20 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable17 /*tkwredefnode7*/,  variable18 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable19 = variable20;
   variable20 =  variable9 /*nodearraylist5*/;
   variable21 = TAG_Bool(( variable20 /*tkwredefnode9*/==NIT_NULL) || VAL_ISA( variable20 /*tkwredefnode9*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -15096,7 +15103,7 @@ void parser___ReduceAction154___action(val_t  self, val_t  param0) {
   variable25 =  variable2 /*nodearraylist12*/;
   variable26 = TAG_Bool(( variable25 /*pexprnode14*/==NIT_NULL) || VAL_ISA( variable25 /*pexprnode14*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable26)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction154___action, LOCATE_parser, 7844); nit_exit(1);}
-  variable27 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable14 /*pdocnode2*/,  variable16 /*pablenode3*/,  variable19 /*pablenode6*/,  variable20 /*tkwredefnode9*/,  variable21 /*pvisibilitynode10*/,  variable22 /*tkwattrnode11*/,  variable23 /*tattridnode12*/,  variable24 /*ptypenode13*/,  variable25 /*pexprnode14*/); /*new AAttrPropdef*/
+  variable27 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable14 /*pdocnode2*/,  variable16 /*pablenode3*/,  variable19 /*pablenode6*/,  variable20 /*tkwredefnode9*/,  variable21 /*pvisibilitynode10*/,  variable22 /*tkwattrnode11*/,  variable23 /*tattridnode12*/,  variable24 /*ptypenode13*/,  variable25 /*pexprnode14*/); /*new AAttrPropdef*/
   variable26 = variable27;
   variable1 =  variable26 /*ppropdefnode1*/ /*node_list=*/;
   variable27 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -15168,7 +15175,7 @@ void parser___ReduceAction155___action(val_t  self, val_t  param0) {
   variable13 =  variable10 /*nodearraylist2*/;
   variable14 = TAG_Bool(( variable13 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable13 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction155___action, LOCATE_parser, 7879); nit_exit(1);}
-  variable15 = NEW_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable13 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable15 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( NIT_NULL /*null*/,  variable13 /*tkwreadablenode5*/); /*new AReadAble*/
   variable14 = variable15;
   variable15 =  variable9 /*nodearraylist3*/;
   variable16 = TAG_Bool(( variable15 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable15 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -15188,7 +15195,7 @@ void parser___ReduceAction155___action(val_t  self, val_t  param0) {
   variable20 =  variable2 /*nodearraylist10*/;
   variable21 = TAG_Bool(( variable20 /*pexprnode12*/==NIT_NULL) || VAL_ISA( variable20 /*pexprnode12*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable21)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction155___action, LOCATE_parser, 7895); nit_exit(1);}
-  variable22 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  variable14 /*pablenode3*/,  NIT_NULL /*null*/,  variable15 /*tkwredefnode7*/,  variable16 /*pvisibilitynode8*/,  variable17 /*tkwattrnode9*/,  variable18 /*tattridnode10*/,  variable19 /*ptypenode11*/,  variable20 /*pexprnode12*/); /*new AAttrPropdef*/
+  variable22 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  variable14 /*pablenode3*/,  NIT_NULL /*null*/,  variable15 /*tkwredefnode7*/,  variable16 /*pvisibilitynode8*/,  variable17 /*tkwattrnode9*/,  variable18 /*tattridnode10*/,  variable19 /*ptypenode11*/,  variable20 /*pexprnode12*/); /*new AAttrPropdef*/
   variable21 = variable22;
   variable1 =  variable21 /*ppropdefnode1*/ /*node_list=*/;
   variable22 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -15272,12 +15279,12 @@ void parser___ReduceAction156___action(val_t  self, val_t  param0) {
   variable16 =  variable11 /*nodearraylist3*/;
   variable17 = TAG_Bool(( variable16 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable16 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction156___action, LOCATE_parser, 7934); nit_exit(1);}
-  variable18 = NEW_parser_prod___AReadAble___init_areadable( variable15 /*tkwredefnode4*/,  variable16 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable18 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable15 /*tkwredefnode4*/,  variable16 /*tkwreadablenode5*/); /*new AReadAble*/
   variable17 = variable18;
   variable18 =  variable10 /*nodearraylist4*/;
   variable19 = TAG_Bool(( variable18 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable18 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable19)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction156___action, LOCATE_parser, 7940); nit_exit(1);}
-  variable20 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable18 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable20 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable18 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable19 = variable20;
   variable20 =  variable9 /*nodearraylist5*/;
   variable21 = TAG_Bool(( variable20 /*tkwredefnode9*/==NIT_NULL) || VAL_ISA( variable20 /*tkwredefnode9*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -15297,7 +15304,7 @@ void parser___ReduceAction156___action(val_t  self, val_t  param0) {
   variable25 =  variable2 /*nodearraylist12*/;
   variable26 = TAG_Bool(( variable25 /*pexprnode14*/==NIT_NULL) || VAL_ISA( variable25 /*pexprnode14*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable26)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction156___action, LOCATE_parser, 7956); nit_exit(1);}
-  variable27 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable14 /*pdocnode2*/,  variable17 /*pablenode3*/,  variable19 /*pablenode6*/,  variable20 /*tkwredefnode9*/,  variable21 /*pvisibilitynode10*/,  variable22 /*tkwattrnode11*/,  variable23 /*tattridnode12*/,  variable24 /*ptypenode13*/,  variable25 /*pexprnode14*/); /*new AAttrPropdef*/
+  variable27 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable14 /*pdocnode2*/,  variable17 /*pablenode3*/,  variable19 /*pablenode6*/,  variable20 /*tkwredefnode9*/,  variable21 /*pvisibilitynode10*/,  variable22 /*tkwattrnode11*/,  variable23 /*tattridnode12*/,  variable24 /*ptypenode13*/,  variable25 /*pexprnode14*/); /*new AAttrPropdef*/
   variable26 = variable27;
   variable1 =  variable26 /*ppropdefnode1*/ /*node_list=*/;
   variable27 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -15385,7 +15392,7 @@ void parser___ReduceAction157___action(val_t  self, val_t  param0) {
   variable17 =  variable12 /*nodearraylist3*/;
   variable18 = TAG_Bool(( variable17 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable17 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable18)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction157___action, LOCATE_parser, 7996); nit_exit(1);}
-  variable19 = NEW_parser_prod___AReadAble___init_areadable( variable16 /*tkwredefnode4*/,  variable17 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable19 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable16 /*tkwredefnode4*/,  variable17 /*tkwreadablenode5*/); /*new AReadAble*/
   variable18 = variable19;
   variable19 =  variable11 /*nodearraylist4*/;
   variable20 = TAG_Bool(( variable19 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable19 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -15393,7 +15400,7 @@ void parser___ReduceAction157___action(val_t  self, val_t  param0) {
   variable20 =  variable10 /*nodearraylist5*/;
   variable21 = TAG_Bool(( variable20 /*tkwwritablenode8*/==NIT_NULL) || VAL_ISA( variable20 /*tkwwritablenode8*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable21)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction157___action, LOCATE_parser, 8004); nit_exit(1);}
-  variable22 = NEW_parser_prod___AWriteAble___init_awriteable( variable19 /*tkwredefnode7*/,  variable20 /*tkwwritablenode8*/); /*new AWriteAble*/
+  variable22 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable19 /*tkwredefnode7*/,  variable20 /*tkwwritablenode8*/); /*new AWriteAble*/
   variable21 = variable22;
   variable22 =  variable9 /*nodearraylist6*/;
   variable23 = TAG_Bool(( variable22 /*tkwredefnode9*/==NIT_NULL) || VAL_ISA( variable22 /*tkwredefnode9*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -15413,7 +15420,7 @@ void parser___ReduceAction157___action(val_t  self, val_t  param0) {
   variable27 =  variable2 /*nodearraylist13*/;
   variable28 = TAG_Bool(( variable27 /*pexprnode14*/==NIT_NULL) || VAL_ISA( variable27 /*pexprnode14*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable28)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction157___action, LOCATE_parser, 8020); nit_exit(1);}
-  variable29 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable15 /*pdocnode2*/,  variable18 /*pablenode3*/,  variable21 /*pablenode6*/,  variable22 /*tkwredefnode9*/,  variable23 /*pvisibilitynode10*/,  variable24 /*tkwattrnode11*/,  variable25 /*tattridnode12*/,  variable26 /*ptypenode13*/,  variable27 /*pexprnode14*/); /*new AAttrPropdef*/
+  variable29 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable15 /*pdocnode2*/,  variable18 /*pablenode3*/,  variable21 /*pablenode6*/,  variable22 /*tkwredefnode9*/,  variable23 /*pvisibilitynode10*/,  variable24 /*tkwattrnode11*/,  variable25 /*tattridnode12*/,  variable26 /*ptypenode13*/,  variable27 /*pexprnode14*/); /*new AAttrPropdef*/
   variable28 = variable29;
   variable1 =  variable28 /*ppropdefnode1*/ /*node_list=*/;
   variable29 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -15492,7 +15499,7 @@ void parser___ReduceAction158___action(val_t  self, val_t  param0) {
   variable15 =  variable10 /*nodearraylist3*/;
   variable16 = TAG_Bool(( variable15 /*tkwreadablenode5*/==NIT_NULL) || VAL_ISA( variable15 /*tkwreadablenode5*/, COLOR_TKwreadable, ID_TKwreadable)) /*cast TKwreadable*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction158___action, LOCATE_parser, 8058); nit_exit(1);}
-  variable17 = NEW_parser_prod___AReadAble___init_areadable( variable14 /*tkwredefnode4*/,  variable15 /*tkwreadablenode5*/); /*new AReadAble*/
+  variable17 = NEW_AReadAble_parser_prod___AReadAble___init_areadable( variable14 /*tkwredefnode4*/,  variable15 /*tkwreadablenode5*/); /*new AReadAble*/
   variable16 = variable17;
   variable17 =  variable9 /*nodearraylist4*/;
   variable18 = TAG_Bool(( variable17 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable17 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -15512,7 +15519,7 @@ void parser___ReduceAction158___action(val_t  self, val_t  param0) {
   variable22 =  variable2 /*nodearraylist11*/;
   variable23 = TAG_Bool(( variable22 /*pexprnode12*/==NIT_NULL) || VAL_ISA( variable22 /*pexprnode12*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable23)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction158___action, LOCATE_parser, 8074); nit_exit(1);}
-  variable24 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable13 /*pdocnode2*/,  variable16 /*pablenode3*/,  NIT_NULL /*null*/,  variable17 /*tkwredefnode7*/,  variable18 /*pvisibilitynode8*/,  variable19 /*tkwattrnode9*/,  variable20 /*tattridnode10*/,  variable21 /*ptypenode11*/,  variable22 /*pexprnode12*/); /*new AAttrPropdef*/
+  variable24 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable13 /*pdocnode2*/,  variable16 /*pablenode3*/,  NIT_NULL /*null*/,  variable17 /*tkwredefnode7*/,  variable18 /*pvisibilitynode8*/,  variable19 /*tkwattrnode9*/,  variable20 /*tattridnode10*/,  variable21 /*ptypenode11*/,  variable22 /*pexprnode12*/); /*new AAttrPropdef*/
   variable23 = variable24;
   variable1 =  variable23 /*ppropdefnode1*/ /*node_list=*/;
   variable24 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -15584,7 +15591,7 @@ void parser___ReduceAction159___action(val_t  self, val_t  param0) {
   variable13 =  variable10 /*nodearraylist2*/;
   variable14 = TAG_Bool(( variable13 /*tkwwritablenode6*/==NIT_NULL) || VAL_ISA( variable13 /*tkwwritablenode6*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction159___action, LOCATE_parser, 8109); nit_exit(1);}
-  variable15 = NEW_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable13 /*tkwwritablenode6*/); /*new AWriteAble*/
+  variable15 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( NIT_NULL /*null*/,  variable13 /*tkwwritablenode6*/); /*new AWriteAble*/
   variable14 = variable15;
   variable15 =  variable9 /*nodearraylist3*/;
   variable16 = TAG_Bool(( variable15 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable15 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -15604,7 +15611,7 @@ void parser___ReduceAction159___action(val_t  self, val_t  param0) {
   variable20 =  variable2 /*nodearraylist10*/;
   variable21 = TAG_Bool(( variable20 /*pexprnode12*/==NIT_NULL) || VAL_ISA( variable20 /*pexprnode12*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable21)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction159___action, LOCATE_parser, 8125); nit_exit(1);}
-  variable22 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  NIT_NULL /*null*/,  variable14 /*pablenode4*/,  variable15 /*tkwredefnode7*/,  variable16 /*pvisibilitynode8*/,  variable17 /*tkwattrnode9*/,  variable18 /*tattridnode10*/,  variable19 /*ptypenode11*/,  variable20 /*pexprnode12*/); /*new AAttrPropdef*/
+  variable22 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable12 /*pdocnode2*/,  NIT_NULL /*null*/,  variable14 /*pablenode4*/,  variable15 /*tkwredefnode7*/,  variable16 /*pvisibilitynode8*/,  variable17 /*tkwattrnode9*/,  variable18 /*tattridnode10*/,  variable19 /*ptypenode11*/,  variable20 /*pexprnode12*/); /*new AAttrPropdef*/
   variable21 = variable22;
   variable1 =  variable21 /*ppropdefnode1*/ /*node_list=*/;
   variable22 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -15683,7 +15690,7 @@ void parser___ReduceAction160___action(val_t  self, val_t  param0) {
   variable15 =  variable10 /*nodearraylist3*/;
   variable16 = TAG_Bool(( variable15 /*tkwwritablenode6*/==NIT_NULL) || VAL_ISA( variable15 /*tkwwritablenode6*/, COLOR_TKwwritable, ID_TKwwritable)) /*cast TKwwritable*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction160___action, LOCATE_parser, 8163); nit_exit(1);}
-  variable17 = NEW_parser_prod___AWriteAble___init_awriteable( variable14 /*tkwredefnode5*/,  variable15 /*tkwwritablenode6*/); /*new AWriteAble*/
+  variable17 = NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable( variable14 /*tkwredefnode5*/,  variable15 /*tkwwritablenode6*/); /*new AWriteAble*/
   variable16 = variable17;
   variable17 =  variable9 /*nodearraylist4*/;
   variable18 = TAG_Bool(( variable17 /*tkwredefnode7*/==NIT_NULL) || VAL_ISA( variable17 /*tkwredefnode7*/, COLOR_TKwredef, ID_TKwredef)) /*cast TKwredef*/;
@@ -15703,7 +15710,7 @@ void parser___ReduceAction160___action(val_t  self, val_t  param0) {
   variable22 =  variable2 /*nodearraylist11*/;
   variable23 = TAG_Bool(( variable22 /*pexprnode12*/==NIT_NULL) || VAL_ISA( variable22 /*pexprnode12*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable23)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction160___action, LOCATE_parser, 8179); nit_exit(1);}
-  variable24 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable13 /*pdocnode2*/,  NIT_NULL /*null*/,  variable16 /*pablenode4*/,  variable17 /*tkwredefnode7*/,  variable18 /*pvisibilitynode8*/,  variable19 /*tkwattrnode9*/,  variable20 /*tattridnode10*/,  variable21 /*ptypenode11*/,  variable22 /*pexprnode12*/); /*new AAttrPropdef*/
+  variable24 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable13 /*pdocnode2*/,  NIT_NULL /*null*/,  variable16 /*pablenode4*/,  variable17 /*tkwredefnode7*/,  variable18 /*pvisibilitynode8*/,  variable19 /*tkwattrnode9*/,  variable20 /*tattridnode10*/,  variable21 /*ptypenode11*/,  variable22 /*pexprnode12*/); /*new AAttrPropdef*/
   variable23 = variable24;
   variable1 =  variable23 /*ppropdefnode1*/ /*node_list=*/;
   variable24 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -15785,7 +15792,7 @@ void parser___ReduceAction161___action(val_t  self, val_t  param0) {
   variable17 =  variable2 /*nodearraylist9*/;
   variable18 = TAG_Bool(( variable17 /*pexprnode10*/==NIT_NULL) || VAL_ISA( variable17 /*pexprnode10*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable18)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction161___action, LOCATE_parser, 8223); nit_exit(1);}
-  variable19 = NEW_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable12 /*tkwredefnode5*/,  variable13 /*pvisibilitynode6*/,  variable14 /*tkwattrnode7*/,  variable15 /*tattridnode8*/,  variable16 /*ptypenode9*/,  variable17 /*pexprnode10*/); /*new AAttrPropdef*/
+  variable19 = NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef( variable11 /*pdocnode2*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  variable12 /*tkwredefnode5*/,  variable13 /*pvisibilitynode6*/,  variable14 /*tkwattrnode7*/,  variable15 /*tattridnode8*/,  variable16 /*ptypenode9*/,  variable17 /*pexprnode10*/); /*new AAttrPropdef*/
   variable18 = variable19;
   variable1 =  variable18 /*ppropdefnode1*/ /*node_list=*/;
   variable19 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -15853,7 +15860,7 @@ void parser___ReduceAction162___action(val_t  self, val_t  param0) {
   variable13 =  variable4 /*nodearraylist5*/;
   variable14 = TAG_Bool(( variable13 /*psignaturenode7*/==NIT_NULL) || VAL_ISA( variable13 /*psignaturenode7*/, COLOR_PSignature, ID_PSignature)) /*cast PSignature*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction162___action, LOCATE_parser, 8261); nit_exit(1);}
-  variable15 = NEW_parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef( variable9 /*pdocnode2*/,  NIT_NULL /*null*/,  variable10 /*pvisibilitynode4*/,  variable11 /*tkwmethnode5*/,  variable12 /*pmethidnode6*/,  variable13 /*psignaturenode7*/); /*new ADeferredMethPropdef*/
+  variable15 = NEW_ADeferredMethPropdef_parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef( variable9 /*pdocnode2*/,  NIT_NULL /*null*/,  variable10 /*pvisibilitynode4*/,  variable11 /*tkwmethnode5*/,  variable12 /*pmethidnode6*/,  variable13 /*psignaturenode7*/); /*new ADeferredMethPropdef*/
   variable14 = variable15;
   variable1 =  variable14 /*ppropdefnode1*/ /*node_list=*/;
   variable15 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -15928,7 +15935,7 @@ void parser___ReduceAction163___action(val_t  self, val_t  param0) {
   variable15 =  variable4 /*nodearraylist6*/;
   variable16 = TAG_Bool(( variable15 /*psignaturenode7*/==NIT_NULL) || VAL_ISA( variable15 /*psignaturenode7*/, COLOR_PSignature, ID_PSignature)) /*cast PSignature*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction163___action, LOCATE_parser, 8299); nit_exit(1);}
-  variable17 = NEW_parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef( variable10 /*pdocnode2*/,  variable11 /*tkwredefnode3*/,  variable12 /*pvisibilitynode4*/,  variable13 /*tkwmethnode5*/,  variable14 /*pmethidnode6*/,  variable15 /*psignaturenode7*/); /*new ADeferredMethPropdef*/
+  variable17 = NEW_ADeferredMethPropdef_parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef( variable10 /*pdocnode2*/,  variable11 /*tkwredefnode3*/,  variable12 /*pvisibilitynode4*/,  variable13 /*tkwmethnode5*/,  variable14 /*pmethidnode6*/,  variable15 /*psignaturenode7*/); /*new ADeferredMethPropdef*/
   variable16 = variable17;
   variable1 =  variable16 /*ppropdefnode1*/ /*node_list=*/;
   variable17 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -15996,7 +16003,7 @@ void parser___ReduceAction164___action(val_t  self, val_t  param0) {
   variable13 =  variable4 /*nodearraylist5*/;
   variable14 = TAG_Bool(( variable13 /*psignaturenode7*/==NIT_NULL) || VAL_ISA( variable13 /*psignaturenode7*/, COLOR_PSignature, ID_PSignature)) /*cast PSignature*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction164___action, LOCATE_parser, 8334); nit_exit(1);}
-  variable15 = NEW_parser_prod___AInternMethPropdef___init_ainternmethpropdef( variable9 /*pdocnode2*/,  NIT_NULL /*null*/,  variable10 /*pvisibilitynode4*/,  variable11 /*tkwmethnode5*/,  variable12 /*pmethidnode6*/,  variable13 /*psignaturenode7*/); /*new AInternMethPropdef*/
+  variable15 = NEW_AInternMethPropdef_parser_prod___AInternMethPropdef___init_ainternmethpropdef( variable9 /*pdocnode2*/,  NIT_NULL /*null*/,  variable10 /*pvisibilitynode4*/,  variable11 /*tkwmethnode5*/,  variable12 /*pmethidnode6*/,  variable13 /*psignaturenode7*/); /*new AInternMethPropdef*/
   variable14 = variable15;
   variable1 =  variable14 /*ppropdefnode1*/ /*node_list=*/;
   variable15 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -16071,7 +16078,7 @@ void parser___ReduceAction165___action(val_t  self, val_t  param0) {
   variable15 =  variable4 /*nodearraylist6*/;
   variable16 = TAG_Bool(( variable15 /*psignaturenode7*/==NIT_NULL) || VAL_ISA( variable15 /*psignaturenode7*/, COLOR_PSignature, ID_PSignature)) /*cast PSignature*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction165___action, LOCATE_parser, 8372); nit_exit(1);}
-  variable17 = NEW_parser_prod___AInternMethPropdef___init_ainternmethpropdef( variable10 /*pdocnode2*/,  variable11 /*tkwredefnode3*/,  variable12 /*pvisibilitynode4*/,  variable13 /*tkwmethnode5*/,  variable14 /*pmethidnode6*/,  variable15 /*psignaturenode7*/); /*new AInternMethPropdef*/
+  variable17 = NEW_AInternMethPropdef_parser_prod___AInternMethPropdef___init_ainternmethpropdef( variable10 /*pdocnode2*/,  variable11 /*tkwredefnode3*/,  variable12 /*pvisibilitynode4*/,  variable13 /*tkwmethnode5*/,  variable14 /*pmethidnode6*/,  variable15 /*psignaturenode7*/); /*new AInternMethPropdef*/
   variable16 = variable17;
   variable1 =  variable16 /*ppropdefnode1*/ /*node_list=*/;
   variable17 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -16139,7 +16146,7 @@ void parser___ReduceAction166___action(val_t  self, val_t  param0) {
   variable13 =  variable4 /*nodearraylist5*/;
   variable14 = TAG_Bool(( variable13 /*psignaturenode7*/==NIT_NULL) || VAL_ISA( variable13 /*psignaturenode7*/, COLOR_PSignature, ID_PSignature)) /*cast PSignature*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction166___action, LOCATE_parser, 8407); nit_exit(1);}
-  variable15 = NEW_parser_prod___AExternMethPropdef___init_aexternmethpropdef( variable9 /*pdocnode2*/,  NIT_NULL /*null*/,  variable10 /*pvisibilitynode4*/,  variable11 /*tkwmethnode5*/,  variable12 /*pmethidnode6*/,  variable13 /*psignaturenode7*/,  NIT_NULL /*null*/); /*new AExternMethPropdef*/
+  variable15 = NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___init_aexternmethpropdef( variable9 /*pdocnode2*/,  NIT_NULL /*null*/,  variable10 /*pvisibilitynode4*/,  variable11 /*tkwmethnode5*/,  variable12 /*pmethidnode6*/,  variable13 /*psignaturenode7*/,  NIT_NULL /*null*/); /*new AExternMethPropdef*/
   variable14 = variable15;
   variable1 =  variable14 /*ppropdefnode1*/ /*node_list=*/;
   variable15 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -16214,7 +16221,7 @@ void parser___ReduceAction167___action(val_t  self, val_t  param0) {
   variable15 =  variable4 /*nodearraylist6*/;
   variable16 = TAG_Bool(( variable15 /*psignaturenode7*/==NIT_NULL) || VAL_ISA( variable15 /*psignaturenode7*/, COLOR_PSignature, ID_PSignature)) /*cast PSignature*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction167___action, LOCATE_parser, 8446); nit_exit(1);}
-  variable17 = NEW_parser_prod___AExternMethPropdef___init_aexternmethpropdef( variable10 /*pdocnode2*/,  variable11 /*tkwredefnode3*/,  variable12 /*pvisibilitynode4*/,  variable13 /*tkwmethnode5*/,  variable14 /*pmethidnode6*/,  variable15 /*psignaturenode7*/,  NIT_NULL /*null*/); /*new AExternMethPropdef*/
+  variable17 = NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___init_aexternmethpropdef( variable10 /*pdocnode2*/,  variable11 /*tkwredefnode3*/,  variable12 /*pvisibilitynode4*/,  variable13 /*tkwmethnode5*/,  variable14 /*pmethidnode6*/,  variable15 /*psignaturenode7*/,  NIT_NULL /*null*/); /*new AExternMethPropdef*/
   variable16 = variable17;
   variable1 =  variable16 /*ppropdefnode1*/ /*node_list=*/;
   variable17 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -16289,7 +16296,7 @@ void parser___ReduceAction168___action(val_t  self, val_t  param0) {
   variable15 =  variable2 /*nodearraylist8*/;
   variable16 = TAG_Bool(( variable15 /*tstringnode8*/==NIT_NULL) || VAL_ISA( variable15 /*tstringnode8*/, COLOR_TString, ID_TString)) /*cast TString*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction168___action, LOCATE_parser, 8485); nit_exit(1);}
-  variable17 = NEW_parser_prod___AExternMethPropdef___init_aexternmethpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  variable11 /*pvisibilitynode4*/,  variable12 /*tkwmethnode5*/,  variable13 /*pmethidnode6*/,  variable14 /*psignaturenode7*/,  variable15 /*tstringnode8*/); /*new AExternMethPropdef*/
+  variable17 = NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___init_aexternmethpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  variable11 /*pvisibilitynode4*/,  variable12 /*tkwmethnode5*/,  variable13 /*pmethidnode6*/,  variable14 /*psignaturenode7*/,  variable15 /*tstringnode8*/); /*new AExternMethPropdef*/
   variable16 = variable17;
   variable1 =  variable16 /*ppropdefnode1*/ /*node_list=*/;
   variable17 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -16371,7 +16378,7 @@ void parser___ReduceAction169___action(val_t  self, val_t  param0) {
   variable17 =  variable2 /*nodearraylist9*/;
   variable18 = TAG_Bool(( variable17 /*tstringnode8*/==NIT_NULL) || VAL_ISA( variable17 /*tstringnode8*/, COLOR_TString, ID_TString)) /*cast TString*/;
   if (!UNTAG_Bool(variable18)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction169___action, LOCATE_parser, 8527); nit_exit(1);}
-  variable19 = NEW_parser_prod___AExternMethPropdef___init_aexternmethpropdef( variable11 /*pdocnode2*/,  variable12 /*tkwredefnode3*/,  variable13 /*pvisibilitynode4*/,  variable14 /*tkwmethnode5*/,  variable15 /*pmethidnode6*/,  variable16 /*psignaturenode7*/,  variable17 /*tstringnode8*/); /*new AExternMethPropdef*/
+  variable19 = NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___init_aexternmethpropdef( variable11 /*pdocnode2*/,  variable12 /*tkwredefnode3*/,  variable13 /*pvisibilitynode4*/,  variable14 /*tkwmethnode5*/,  variable15 /*pmethidnode6*/,  variable16 /*psignaturenode7*/,  variable17 /*tstringnode8*/); /*new AExternMethPropdef*/
   variable18 = variable19;
   variable1 =  variable18 /*ppropdefnode1*/ /*node_list=*/;
   variable19 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -16446,7 +16453,7 @@ void parser___ReduceAction170___action(val_t  self, val_t  param0) {
   variable15 =  variable2 /*nodearraylist8*/;
   variable16 = TAG_Bool(( variable15 /*pexprnode8*/==NIT_NULL) || VAL_ISA( variable15 /*pexprnode8*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction170___action, LOCATE_parser, 8566); nit_exit(1);}
-  variable17 = NEW_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  variable11 /*pvisibilitynode4*/,  variable12 /*tkwmethnode5*/,  variable13 /*pmethidnode6*/,  variable14 /*psignaturenode7*/,  variable15 /*pexprnode8*/); /*new AConcreteMethPropdef*/
+  variable17 = NEW_AConcreteMethPropdef_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  variable11 /*pvisibilitynode4*/,  variable12 /*tkwmethnode5*/,  variable13 /*pmethidnode6*/,  variable14 /*psignaturenode7*/,  variable15 /*pexprnode8*/); /*new AConcreteMethPropdef*/
   variable16 = variable17;
   variable1 =  variable16 /*ppropdefnode1*/ /*node_list=*/;
   variable17 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -16528,7 +16535,7 @@ void parser___ReduceAction171___action(val_t  self, val_t  param0) {
   variable17 =  variable2 /*nodearraylist9*/;
   variable18 = TAG_Bool(( variable17 /*pexprnode8*/==NIT_NULL) || VAL_ISA( variable17 /*pexprnode8*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable18)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction171___action, LOCATE_parser, 8608); nit_exit(1);}
-  variable19 = NEW_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef( variable11 /*pdocnode2*/,  variable12 /*tkwredefnode3*/,  variable13 /*pvisibilitynode4*/,  variable14 /*tkwmethnode5*/,  variable15 /*pmethidnode6*/,  variable16 /*psignaturenode7*/,  variable17 /*pexprnode8*/); /*new AConcreteMethPropdef*/
+  variable19 = NEW_AConcreteMethPropdef_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef( variable11 /*pdocnode2*/,  variable12 /*tkwredefnode3*/,  variable13 /*pvisibilitynode4*/,  variable14 /*tkwmethnode5*/,  variable15 /*pmethidnode6*/,  variable16 /*psignaturenode7*/,  variable17 /*pexprnode8*/); /*new AConcreteMethPropdef*/
   variable18 = variable19;
   variable1 =  variable18 /*ppropdefnode1*/ /*node_list=*/;
   variable19 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -16606,7 +16613,7 @@ void parser___ReduceAction172___action(val_t  self, val_t  param0) {
   variable16 =  variable3 /*nodearraylist8*/;
   variable17 = TAG_Bool(( variable16 /*pexprnode8*/==NIT_NULL) || VAL_ISA( variable16 /*pexprnode8*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction172___action, LOCATE_parser, 8648); nit_exit(1);}
-  variable18 = NEW_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef( variable11 /*pdocnode2*/,  NIT_NULL /*null*/,  variable12 /*pvisibilitynode4*/,  variable13 /*tkwmethnode5*/,  variable14 /*pmethidnode6*/,  variable15 /*psignaturenode7*/,  variable16 /*pexprnode8*/); /*new AConcreteMethPropdef*/
+  variable18 = NEW_AConcreteMethPropdef_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef( variable11 /*pdocnode2*/,  NIT_NULL /*null*/,  variable12 /*pvisibilitynode4*/,  variable13 /*tkwmethnode5*/,  variable14 /*pmethidnode6*/,  variable15 /*psignaturenode7*/,  variable16 /*pexprnode8*/); /*new AConcreteMethPropdef*/
   variable17 = variable18;
   variable1 =  variable17 /*ppropdefnode1*/ /*node_list=*/;
   variable18 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -16691,7 +16698,7 @@ void parser___ReduceAction173___action(val_t  self, val_t  param0) {
   variable18 =  variable3 /*nodearraylist9*/;
   variable19 = TAG_Bool(( variable18 /*pexprnode8*/==NIT_NULL) || VAL_ISA( variable18 /*pexprnode8*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable19)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction173___action, LOCATE_parser, 8691); nit_exit(1);}
-  variable20 = NEW_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef( variable12 /*pdocnode2*/,  variable13 /*tkwredefnode3*/,  variable14 /*pvisibilitynode4*/,  variable15 /*tkwmethnode5*/,  variable16 /*pmethidnode6*/,  variable17 /*psignaturenode7*/,  variable18 /*pexprnode8*/); /*new AConcreteMethPropdef*/
+  variable20 = NEW_AConcreteMethPropdef_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef( variable12 /*pdocnode2*/,  variable13 /*tkwredefnode3*/,  variable14 /*pvisibilitynode4*/,  variable15 /*tkwmethnode5*/,  variable16 /*pmethidnode6*/,  variable17 /*psignaturenode7*/,  variable18 /*pexprnode8*/); /*new AConcreteMethPropdef*/
   variable19 = variable20;
   variable1 =  variable19 /*ppropdefnode1*/ /*node_list=*/;
   variable20 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -16759,7 +16766,7 @@ void parser___ReduceAction174___action(val_t  self, val_t  param0) {
   variable13 =  variable2 /*nodearraylist7*/;
   variable14 = TAG_Bool(( variable13 /*pexprnode8*/==NIT_NULL) || VAL_ISA( variable13 /*pexprnode8*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction174___action, LOCATE_parser, 8727); nit_exit(1);}
-  variable15 = NEW_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef( variable9 /*pdocnode2*/,  NIT_NULL /*null*/,  variable10 /*pvisibilitynode4*/,  variable11 /*tkwinitnode5*/,  NIT_NULL /*null*/,  variable12 /*psignaturenode7*/,  variable13 /*pexprnode8*/); /*new AConcreteInitPropdef*/
+  variable15 = NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef( variable9 /*pdocnode2*/,  NIT_NULL /*null*/,  variable10 /*pvisibilitynode4*/,  variable11 /*tkwinitnode5*/,  NIT_NULL /*null*/,  variable12 /*psignaturenode7*/,  variable13 /*pexprnode8*/); /*new AConcreteInitPropdef*/
   variable14 = variable15;
   variable1 =  variable14 /*ppropdefnode1*/ /*node_list=*/;
   variable15 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -16834,7 +16841,7 @@ void parser___ReduceAction175___action(val_t  self, val_t  param0) {
   variable15 =  variable2 /*nodearraylist8*/;
   variable16 = TAG_Bool(( variable15 /*pexprnode8*/==NIT_NULL) || VAL_ISA( variable15 /*pexprnode8*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction175___action, LOCATE_parser, 8766); nit_exit(1);}
-  variable17 = NEW_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef( variable10 /*pdocnode2*/,  variable11 /*tkwredefnode3*/,  variable12 /*pvisibilitynode4*/,  variable13 /*tkwinitnode5*/,  NIT_NULL /*null*/,  variable14 /*psignaturenode7*/,  variable15 /*pexprnode8*/); /*new AConcreteInitPropdef*/
+  variable17 = NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef( variable10 /*pdocnode2*/,  variable11 /*tkwredefnode3*/,  variable12 /*pvisibilitynode4*/,  variable13 /*tkwinitnode5*/,  NIT_NULL /*null*/,  variable14 /*psignaturenode7*/,  variable15 /*pexprnode8*/); /*new AConcreteInitPropdef*/
   variable16 = variable17;
   variable1 =  variable16 /*ppropdefnode1*/ /*node_list=*/;
   variable17 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -16909,7 +16916,7 @@ void parser___ReduceAction176___action(val_t  self, val_t  param0) {
   variable15 =  variable2 /*nodearraylist8*/;
   variable16 = TAG_Bool(( variable15 /*pexprnode8*/==NIT_NULL) || VAL_ISA( variable15 /*pexprnode8*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction176___action, LOCATE_parser, 8805); nit_exit(1);}
-  variable17 = NEW_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  variable11 /*pvisibilitynode4*/,  variable12 /*tkwinitnode5*/,  variable13 /*pmethidnode6*/,  variable14 /*psignaturenode7*/,  variable15 /*pexprnode8*/); /*new AConcreteInitPropdef*/
+  variable17 = NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  variable11 /*pvisibilitynode4*/,  variable12 /*tkwinitnode5*/,  variable13 /*pmethidnode6*/,  variable14 /*psignaturenode7*/,  variable15 /*pexprnode8*/); /*new AConcreteInitPropdef*/
   variable16 = variable17;
   variable1 =  variable16 /*ppropdefnode1*/ /*node_list=*/;
   variable17 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -16991,7 +16998,7 @@ void parser___ReduceAction177___action(val_t  self, val_t  param0) {
   variable17 =  variable2 /*nodearraylist9*/;
   variable18 = TAG_Bool(( variable17 /*pexprnode8*/==NIT_NULL) || VAL_ISA( variable17 /*pexprnode8*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable18)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction177___action, LOCATE_parser, 8847); nit_exit(1);}
-  variable19 = NEW_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef( variable11 /*pdocnode2*/,  variable12 /*tkwredefnode3*/,  variable13 /*pvisibilitynode4*/,  variable14 /*tkwinitnode5*/,  variable15 /*pmethidnode6*/,  variable16 /*psignaturenode7*/,  variable17 /*pexprnode8*/); /*new AConcreteInitPropdef*/
+  variable19 = NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef( variable11 /*pdocnode2*/,  variable12 /*tkwredefnode3*/,  variable13 /*pvisibilitynode4*/,  variable14 /*tkwinitnode5*/,  variable15 /*pmethidnode6*/,  variable16 /*psignaturenode7*/,  variable17 /*pexprnode8*/); /*new AConcreteInitPropdef*/
   variable18 = variable19;
   variable1 =  variable18 /*ppropdefnode1*/ /*node_list=*/;
   variable19 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -17062,7 +17069,7 @@ void parser___ReduceAction178___action(val_t  self, val_t  param0) {
   variable14 =  variable3 /*nodearraylist7*/;
   variable15 = TAG_Bool(( variable14 /*pexprnode8*/==NIT_NULL) || VAL_ISA( variable14 /*pexprnode8*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction178___action, LOCATE_parser, 8884); nit_exit(1);}
-  variable16 = NEW_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  variable11 /*pvisibilitynode4*/,  variable12 /*tkwinitnode5*/,  NIT_NULL /*null*/,  variable13 /*psignaturenode7*/,  variable14 /*pexprnode8*/); /*new AConcreteInitPropdef*/
+  variable16 = NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  variable11 /*pvisibilitynode4*/,  variable12 /*tkwinitnode5*/,  NIT_NULL /*null*/,  variable13 /*psignaturenode7*/,  variable14 /*pexprnode8*/); /*new AConcreteInitPropdef*/
   variable15 = variable16;
   variable1 =  variable15 /*ppropdefnode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -17140,7 +17147,7 @@ void parser___ReduceAction179___action(val_t  self, val_t  param0) {
   variable16 =  variable3 /*nodearraylist8*/;
   variable17 = TAG_Bool(( variable16 /*pexprnode8*/==NIT_NULL) || VAL_ISA( variable16 /*pexprnode8*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction179___action, LOCATE_parser, 8924); nit_exit(1);}
-  variable18 = NEW_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef( variable11 /*pdocnode2*/,  variable12 /*tkwredefnode3*/,  variable13 /*pvisibilitynode4*/,  variable14 /*tkwinitnode5*/,  NIT_NULL /*null*/,  variable15 /*psignaturenode7*/,  variable16 /*pexprnode8*/); /*new AConcreteInitPropdef*/
+  variable18 = NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef( variable11 /*pdocnode2*/,  variable12 /*tkwredefnode3*/,  variable13 /*pvisibilitynode4*/,  variable14 /*tkwinitnode5*/,  NIT_NULL /*null*/,  variable15 /*psignaturenode7*/,  variable16 /*pexprnode8*/); /*new AConcreteInitPropdef*/
   variable17 = variable18;
   variable1 =  variable17 /*ppropdefnode1*/ /*node_list=*/;
   variable18 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -17218,7 +17225,7 @@ void parser___ReduceAction180___action(val_t  self, val_t  param0) {
   variable16 =  variable3 /*nodearraylist8*/;
   variable17 = TAG_Bool(( variable16 /*pexprnode8*/==NIT_NULL) || VAL_ISA( variable16 /*pexprnode8*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction180___action, LOCATE_parser, 8964); nit_exit(1);}
-  variable18 = NEW_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef( variable11 /*pdocnode2*/,  NIT_NULL /*null*/,  variable12 /*pvisibilitynode4*/,  variable13 /*tkwinitnode5*/,  variable14 /*pmethidnode6*/,  variable15 /*psignaturenode7*/,  variable16 /*pexprnode8*/); /*new AConcreteInitPropdef*/
+  variable18 = NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef( variable11 /*pdocnode2*/,  NIT_NULL /*null*/,  variable12 /*pvisibilitynode4*/,  variable13 /*tkwinitnode5*/,  variable14 /*pmethidnode6*/,  variable15 /*psignaturenode7*/,  variable16 /*pexprnode8*/); /*new AConcreteInitPropdef*/
   variable17 = variable18;
   variable1 =  variable17 /*ppropdefnode1*/ /*node_list=*/;
   variable18 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -17303,7 +17310,7 @@ void parser___ReduceAction181___action(val_t  self, val_t  param0) {
   variable18 =  variable3 /*nodearraylist9*/;
   variable19 = TAG_Bool(( variable18 /*pexprnode8*/==NIT_NULL) || VAL_ISA( variable18 /*pexprnode8*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable19)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction181___action, LOCATE_parser, 9007); nit_exit(1);}
-  variable20 = NEW_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef( variable12 /*pdocnode2*/,  variable13 /*tkwredefnode3*/,  variable14 /*pvisibilitynode4*/,  variable15 /*tkwinitnode5*/,  variable16 /*pmethidnode6*/,  variable17 /*psignaturenode7*/,  variable18 /*pexprnode8*/); /*new AConcreteInitPropdef*/
+  variable20 = NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef( variable12 /*pdocnode2*/,  variable13 /*tkwredefnode3*/,  variable14 /*pvisibilitynode4*/,  variable15 /*tkwinitnode5*/,  variable16 /*pmethidnode6*/,  variable17 /*psignaturenode7*/,  variable18 /*pexprnode8*/); /*new AConcreteInitPropdef*/
   variable19 = variable20;
   variable1 =  variable19 /*ppropdefnode1*/ /*node_list=*/;
   variable20 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -17365,7 +17372,7 @@ void parser___ReduceAction182___action(val_t  self, val_t  param0) {
   variable11 =  variable2 /*nodearraylist5*/;
   variable12 = TAG_Bool(( variable11 /*ptypenode7*/==NIT_NULL) || VAL_ISA( variable11 /*ptypenode7*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction182___action, LOCATE_parser, 9041); nit_exit(1);}
-  variable13 = NEW_parser_prod___ATypePropdef___init_atypepropdef( variable7 /*pdocnode2*/,  NIT_NULL /*null*/,  variable8 /*pvisibilitynode4*/,  variable9 /*tkwtypenode5*/,  variable10 /*tclassidnode6*/,  variable11 /*ptypenode7*/); /*new ATypePropdef*/
+  variable13 = NEW_ATypePropdef_parser_prod___ATypePropdef___init_atypepropdef( variable7 /*pdocnode2*/,  NIT_NULL /*null*/,  variable8 /*pvisibilitynode4*/,  variable9 /*tkwtypenode5*/,  variable10 /*tclassidnode6*/,  variable11 /*ptypenode7*/); /*new ATypePropdef*/
   variable12 = variable13;
   variable1 =  variable12 /*ppropdefnode1*/ /*node_list=*/;
   variable13 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -17434,7 +17441,7 @@ void parser___ReduceAction183___action(val_t  self, val_t  param0) {
   variable13 =  variable2 /*nodearraylist6*/;
   variable14 = TAG_Bool(( variable13 /*ptypenode7*/==NIT_NULL) || VAL_ISA( variable13 /*ptypenode7*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction183___action, LOCATE_parser, 9077); nit_exit(1);}
-  variable15 = NEW_parser_prod___ATypePropdef___init_atypepropdef( variable8 /*pdocnode2*/,  variable9 /*tkwredefnode3*/,  variable10 /*pvisibilitynode4*/,  variable11 /*tkwtypenode5*/,  variable12 /*tclassidnode6*/,  variable13 /*ptypenode7*/); /*new ATypePropdef*/
+  variable15 = NEW_ATypePropdef_parser_prod___ATypePropdef___init_atypepropdef( variable8 /*pdocnode2*/,  variable9 /*tkwredefnode3*/,  variable10 /*pvisibilitynode4*/,  variable11 /*tkwtypenode5*/,  variable12 /*tclassidnode6*/,  variable13 /*ptypenode7*/); /*new ATypePropdef*/
   variable14 = variable15;
   variable1 =  variable14 /*ppropdefnode1*/ /*node_list=*/;
   variable15 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(12)) /*Parser::go_to*/;
@@ -17536,7 +17543,7 @@ void parser___ReduceAction185___action(val_t  self, val_t  param0) {
   variable13 =  variable4 /*nodearraylist5*/;
   variable14 = TAG_Bool(( variable13 /*psignaturenode7*/==NIT_NULL) || VAL_ISA( variable13 /*psignaturenode7*/, COLOR_PSignature, ID_PSignature)) /*cast PSignature*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction185___action, LOCATE_parser, 9126); nit_exit(1);}
-  variable15 = NEW_parser_prod___AExternMethPropdef___init_aexternmethpropdef( variable9 /*pdocnode2*/,  NIT_NULL /*null*/,  variable10 /*pvisibilitynode4*/,  variable11 /*tkwmethnode5*/,  variable12 /*pmethidnode6*/,  variable13 /*psignaturenode7*/,  NIT_NULL /*null*/); /*new AExternMethPropdef*/
+  variable15 = NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___init_aexternmethpropdef( variable9 /*pdocnode2*/,  NIT_NULL /*null*/,  variable10 /*pvisibilitynode4*/,  variable11 /*tkwmethnode5*/,  variable12 /*pmethidnode6*/,  variable13 /*psignaturenode7*/,  NIT_NULL /*null*/); /*new AExternMethPropdef*/
   variable14 = variable15;
   variable1 =  variable14 /*ppropdefnode1*/ /*node_list=*/;
   variable15 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(14)) /*Parser::go_to*/;
@@ -17611,7 +17618,7 @@ void parser___ReduceAction186___action(val_t  self, val_t  param0) {
   variable15 =  variable4 /*nodearraylist6*/;
   variable16 = TAG_Bool(( variable15 /*psignaturenode7*/==NIT_NULL) || VAL_ISA( variable15 /*psignaturenode7*/, COLOR_PSignature, ID_PSignature)) /*cast PSignature*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction186___action, LOCATE_parser, 9165); nit_exit(1);}
-  variable17 = NEW_parser_prod___AExternMethPropdef___init_aexternmethpropdef( variable10 /*pdocnode2*/,  variable11 /*tkwredefnode3*/,  variable12 /*pvisibilitynode4*/,  variable13 /*tkwmethnode5*/,  variable14 /*pmethidnode6*/,  variable15 /*psignaturenode7*/,  NIT_NULL /*null*/); /*new AExternMethPropdef*/
+  variable17 = NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___init_aexternmethpropdef( variable10 /*pdocnode2*/,  variable11 /*tkwredefnode3*/,  variable12 /*pvisibilitynode4*/,  variable13 /*tkwmethnode5*/,  variable14 /*pmethidnode6*/,  variable15 /*psignaturenode7*/,  NIT_NULL /*null*/); /*new AExternMethPropdef*/
   variable16 = variable17;
   variable1 =  variable16 /*ppropdefnode1*/ /*node_list=*/;
   variable17 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(14)) /*Parser::go_to*/;
@@ -17686,7 +17693,7 @@ void parser___ReduceAction187___action(val_t  self, val_t  param0) {
   variable15 =  variable2 /*nodearraylist8*/;
   variable16 = TAG_Bool(( variable15 /*tstringnode8*/==NIT_NULL) || VAL_ISA( variable15 /*tstringnode8*/, COLOR_TString, ID_TString)) /*cast TString*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction187___action, LOCATE_parser, 9204); nit_exit(1);}
-  variable17 = NEW_parser_prod___AExternMethPropdef___init_aexternmethpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  variable11 /*pvisibilitynode4*/,  variable12 /*tkwmethnode5*/,  variable13 /*pmethidnode6*/,  variable14 /*psignaturenode7*/,  variable15 /*tstringnode8*/); /*new AExternMethPropdef*/
+  variable17 = NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___init_aexternmethpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  variable11 /*pvisibilitynode4*/,  variable12 /*tkwmethnode5*/,  variable13 /*pmethidnode6*/,  variable14 /*psignaturenode7*/,  variable15 /*tstringnode8*/); /*new AExternMethPropdef*/
   variable16 = variable17;
   variable1 =  variable16 /*ppropdefnode1*/ /*node_list=*/;
   variable17 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(14)) /*Parser::go_to*/;
@@ -17768,7 +17775,7 @@ void parser___ReduceAction188___action(val_t  self, val_t  param0) {
   variable17 =  variable2 /*nodearraylist9*/;
   variable18 = TAG_Bool(( variable17 /*tstringnode8*/==NIT_NULL) || VAL_ISA( variable17 /*tstringnode8*/, COLOR_TString, ID_TString)) /*cast TString*/;
   if (!UNTAG_Bool(variable18)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction188___action, LOCATE_parser, 9246); nit_exit(1);}
-  variable19 = NEW_parser_prod___AExternMethPropdef___init_aexternmethpropdef( variable11 /*pdocnode2*/,  variable12 /*tkwredefnode3*/,  variable13 /*pvisibilitynode4*/,  variable14 /*tkwmethnode5*/,  variable15 /*pmethidnode6*/,  variable16 /*psignaturenode7*/,  variable17 /*tstringnode8*/); /*new AExternMethPropdef*/
+  variable19 = NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___init_aexternmethpropdef( variable11 /*pdocnode2*/,  variable12 /*tkwredefnode3*/,  variable13 /*pvisibilitynode4*/,  variable14 /*tkwmethnode5*/,  variable15 /*pmethidnode6*/,  variable16 /*psignaturenode7*/,  variable17 /*tstringnode8*/); /*new AExternMethPropdef*/
   variable18 = variable19;
   variable1 =  variable18 /*ppropdefnode1*/ /*node_list=*/;
   variable19 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(14)) /*Parser::go_to*/;
@@ -17843,7 +17850,7 @@ void parser___ReduceAction189___action(val_t  self, val_t  param0) {
   variable15 =  variable2 /*nodearraylist8*/;
   variable16 = TAG_Bool(( variable15 /*pexprnode8*/==NIT_NULL) || VAL_ISA( variable15 /*pexprnode8*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction189___action, LOCATE_parser, 9285); nit_exit(1);}
-  variable17 = NEW_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  variable11 /*pvisibilitynode4*/,  variable12 /*tkwmethnode5*/,  variable13 /*pmethidnode6*/,  variable14 /*psignaturenode7*/,  variable15 /*pexprnode8*/); /*new AConcreteMethPropdef*/
+  variable17 = NEW_AConcreteMethPropdef_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef( variable10 /*pdocnode2*/,  NIT_NULL /*null*/,  variable11 /*pvisibilitynode4*/,  variable12 /*tkwmethnode5*/,  variable13 /*pmethidnode6*/,  variable14 /*psignaturenode7*/,  variable15 /*pexprnode8*/); /*new AConcreteMethPropdef*/
   variable16 = variable17;
   variable1 =  variable16 /*ppropdefnode1*/ /*node_list=*/;
   variable17 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(14)) /*Parser::go_to*/;
@@ -17925,7 +17932,7 @@ void parser___ReduceAction190___action(val_t  self, val_t  param0) {
   variable17 =  variable2 /*nodearraylist9*/;
   variable18 = TAG_Bool(( variable17 /*pexprnode8*/==NIT_NULL) || VAL_ISA( variable17 /*pexprnode8*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable18)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction190___action, LOCATE_parser, 9327); nit_exit(1);}
-  variable19 = NEW_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef( variable11 /*pdocnode2*/,  variable12 /*tkwredefnode3*/,  variable13 /*pvisibilitynode4*/,  variable14 /*tkwmethnode5*/,  variable15 /*pmethidnode6*/,  variable16 /*psignaturenode7*/,  variable17 /*pexprnode8*/); /*new AConcreteMethPropdef*/
+  variable19 = NEW_AConcreteMethPropdef_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef( variable11 /*pdocnode2*/,  variable12 /*tkwredefnode3*/,  variable13 /*pvisibilitynode4*/,  variable14 /*tkwmethnode5*/,  variable15 /*pmethidnode6*/,  variable16 /*psignaturenode7*/,  variable17 /*pexprnode8*/); /*new AConcreteMethPropdef*/
   variable18 = variable19;
   variable1 =  variable18 /*ppropdefnode1*/ /*node_list=*/;
   variable19 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(14)) /*Parser::go_to*/;
@@ -17952,7 +17959,7 @@ void parser___ReduceAction191___action(val_t  self, val_t  param0) {
   trace.file = LOCATE_parser;
   variable0 =  param0;
   variable1 =  NIT_NULL /*null*/;
-  variable3 = NEW_parser_prod___APublicVisibility___init_apublicvisibility(); /*new APublicVisibility*/
+  variable3 = NEW_APublicVisibility_parser_prod___APublicVisibility___init_apublicvisibility(); /*new APublicVisibility*/
   variable2 = variable3;
   variable1 =  variable2 /*pvisibilitynode1*/ /*node_list=*/;
   variable3 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(15)) /*Parser::go_to*/;
@@ -17989,7 +17996,7 @@ void parser___ReduceAction192___action(val_t  self, val_t  param0) {
   variable4 =  variable3 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*tkwprivatenode2*/==NIT_NULL) || VAL_ISA( variable4 /*tkwprivatenode2*/, COLOR_TKwprivate, ID_TKwprivate)) /*cast TKwprivate*/;
   if (!UNTAG_Bool(variable5)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction192___action, LOCATE_parser, 9362); nit_exit(1);}
-  variable6 = NEW_parser_prod___APrivateVisibility___init_aprivatevisibility( variable4 /*tkwprivatenode2*/); /*new APrivateVisibility*/
+  variable6 = NEW_APrivateVisibility_parser_prod___APrivateVisibility___init_aprivatevisibility( variable4 /*tkwprivatenode2*/); /*new APrivateVisibility*/
   variable5 = variable6;
   variable1 =  variable5 /*pvisibilitynode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(15)) /*Parser::go_to*/;
@@ -18026,7 +18033,7 @@ void parser___ReduceAction193___action(val_t  self, val_t  param0) {
   variable4 =  variable3 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*tkwprotectednode2*/==NIT_NULL) || VAL_ISA( variable4 /*tkwprotectednode2*/, COLOR_TKwprotected, ID_TKwprotected)) /*cast TKwprotected*/;
   if (!UNTAG_Bool(variable5)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction193___action, LOCATE_parser, 9379); nit_exit(1);}
-  variable6 = NEW_parser_prod___AProtectedVisibility___init_aprotectedvisibility( variable4 /*tkwprotectednode2*/); /*new AProtectedVisibility*/
+  variable6 = NEW_AProtectedVisibility_parser_prod___AProtectedVisibility___init_aprotectedvisibility( variable4 /*tkwprotectednode2*/); /*new AProtectedVisibility*/
   variable5 = variable6;
   variable1 =  variable5 /*pvisibilitynode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(15)) /*Parser::go_to*/;
@@ -18063,7 +18070,7 @@ void parser___ReduceAction194___action(val_t  self, val_t  param0) {
   variable4 =  variable3 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*tkwintrudenode2*/==NIT_NULL) || VAL_ISA( variable4 /*tkwintrudenode2*/, COLOR_TKwintrude, ID_TKwintrude)) /*cast TKwintrude*/;
   if (!UNTAG_Bool(variable5)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction194___action, LOCATE_parser, 9396); nit_exit(1);}
-  variable6 = NEW_parser_prod___AIntrudeVisibility___init_aintrudevisibility( variable4 /*tkwintrudenode2*/); /*new AIntrudeVisibility*/
+  variable6 = NEW_AIntrudeVisibility_parser_prod___AIntrudeVisibility___init_aintrudevisibility( variable4 /*tkwintrudenode2*/); /*new AIntrudeVisibility*/
   variable5 = variable6;
   variable1 =  variable5 /*pvisibilitynode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(15)) /*Parser::go_to*/;
@@ -18097,7 +18104,7 @@ void parser___ReduceAction195___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tidnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tidnode2*/, COLOR_TId, ID_TId)) /*cast TId*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction195___action, LOCATE_parser, 9412); nit_exit(1);}
-  variable5 = NEW_parser_prod___AIdMethid___init_aidmethid( variable3 /*tidnode2*/); /*new AIdMethid*/
+  variable5 = NEW_AIdMethid_parser_prod___AIdMethid___init_aidmethid( variable3 /*tidnode2*/); /*new AIdMethid*/
   variable4 = variable5;
   variable1 =  variable4 /*pmethidnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(16)) /*Parser::go_to*/;
@@ -18131,7 +18138,7 @@ void parser___ReduceAction196___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tplusnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tplusnode2*/, COLOR_TPlus, ID_TPlus)) /*cast TPlus*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction196___action, LOCATE_parser, 9428); nit_exit(1);}
-  variable5 = NEW_parser_prod___APlusMethid___init_aplusmethid( variable3 /*tplusnode2*/); /*new APlusMethid*/
+  variable5 = NEW_APlusMethid_parser_prod___APlusMethid___init_aplusmethid( variable3 /*tplusnode2*/); /*new APlusMethid*/
   variable4 = variable5;
   variable1 =  variable4 /*pmethidnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(16)) /*Parser::go_to*/;
@@ -18165,7 +18172,7 @@ void parser___ReduceAction197___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tminusnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tminusnode2*/, COLOR_TMinus, ID_TMinus)) /*cast TMinus*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction197___action, LOCATE_parser, 9444); nit_exit(1);}
-  variable5 = NEW_parser_prod___AMinusMethid___init_aminusmethid( variable3 /*tminusnode2*/); /*new AMinusMethid*/
+  variable5 = NEW_AMinusMethid_parser_prod___AMinusMethid___init_aminusmethid( variable3 /*tminusnode2*/); /*new AMinusMethid*/
   variable4 = variable5;
   variable1 =  variable4 /*pmethidnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(16)) /*Parser::go_to*/;
@@ -18199,7 +18206,7 @@ void parser___ReduceAction198___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tstarnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tstarnode2*/, COLOR_TStar, ID_TStar)) /*cast TStar*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction198___action, LOCATE_parser, 9460); nit_exit(1);}
-  variable5 = NEW_parser_prod___AStarMethid___init_astarmethid( variable3 /*tstarnode2*/); /*new AStarMethid*/
+  variable5 = NEW_AStarMethid_parser_prod___AStarMethid___init_astarmethid( variable3 /*tstarnode2*/); /*new AStarMethid*/
   variable4 = variable5;
   variable1 =  variable4 /*pmethidnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(16)) /*Parser::go_to*/;
@@ -18233,7 +18240,7 @@ void parser___ReduceAction199___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tslashnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tslashnode2*/, COLOR_TSlash, ID_TSlash)) /*cast TSlash*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction199___action, LOCATE_parser, 9476); nit_exit(1);}
-  variable5 = NEW_parser_prod___ASlashMethid___init_aslashmethid( variable3 /*tslashnode2*/); /*new ASlashMethid*/
+  variable5 = NEW_ASlashMethid_parser_prod___ASlashMethid___init_aslashmethid( variable3 /*tslashnode2*/); /*new ASlashMethid*/
   variable4 = variable5;
   variable1 =  variable4 /*pmethidnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(16)) /*Parser::go_to*/;
@@ -18267,7 +18274,7 @@ void parser___ReduceAction200___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tpercentnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tpercentnode2*/, COLOR_TPercent, ID_TPercent)) /*cast TPercent*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction200___action, LOCATE_parser, 9492); nit_exit(1);}
-  variable5 = NEW_parser_prod___APercentMethid___init_apercentmethid( variable3 /*tpercentnode2*/); /*new APercentMethid*/
+  variable5 = NEW_APercentMethid_parser_prod___APercentMethid___init_apercentmethid( variable3 /*tpercentnode2*/); /*new APercentMethid*/
   variable4 = variable5;
   variable1 =  variable4 /*pmethidnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(16)) /*Parser::go_to*/;
@@ -18301,7 +18308,7 @@ void parser___ReduceAction201___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*teqnode2*/==NIT_NULL) || VAL_ISA( variable3 /*teqnode2*/, COLOR_TEq, ID_TEq)) /*cast TEq*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction201___action, LOCATE_parser, 9508); nit_exit(1);}
-  variable5 = NEW_parser_prod___AEqMethid___init_aeqmethid( variable3 /*teqnode2*/); /*new AEqMethid*/
+  variable5 = NEW_AEqMethid_parser_prod___AEqMethid___init_aeqmethid( variable3 /*teqnode2*/); /*new AEqMethid*/
   variable4 = variable5;
   variable1 =  variable4 /*pmethidnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(16)) /*Parser::go_to*/;
@@ -18335,7 +18342,7 @@ void parser___ReduceAction202___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tnenode2*/==NIT_NULL) || VAL_ISA( variable3 /*tnenode2*/, COLOR_TNe, ID_TNe)) /*cast TNe*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction202___action, LOCATE_parser, 9524); nit_exit(1);}
-  variable5 = NEW_parser_prod___ANeMethid___init_anemethid( variable3 /*tnenode2*/); /*new ANeMethid*/
+  variable5 = NEW_ANeMethid_parser_prod___ANeMethid___init_anemethid( variable3 /*tnenode2*/); /*new ANeMethid*/
   variable4 = variable5;
   variable1 =  variable4 /*pmethidnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(16)) /*Parser::go_to*/;
@@ -18369,7 +18376,7 @@ void parser___ReduceAction203___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tlenode2*/==NIT_NULL) || VAL_ISA( variable3 /*tlenode2*/, COLOR_TLe, ID_TLe)) /*cast TLe*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction203___action, LOCATE_parser, 9540); nit_exit(1);}
-  variable5 = NEW_parser_prod___ALeMethid___init_alemethid( variable3 /*tlenode2*/); /*new ALeMethid*/
+  variable5 = NEW_ALeMethid_parser_prod___ALeMethid___init_alemethid( variable3 /*tlenode2*/); /*new ALeMethid*/
   variable4 = variable5;
   variable1 =  variable4 /*pmethidnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(16)) /*Parser::go_to*/;
@@ -18403,7 +18410,7 @@ void parser___ReduceAction204___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tgenode2*/==NIT_NULL) || VAL_ISA( variable3 /*tgenode2*/, COLOR_TGe, ID_TGe)) /*cast TGe*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction204___action, LOCATE_parser, 9556); nit_exit(1);}
-  variable5 = NEW_parser_prod___AGeMethid___init_agemethid( variable3 /*tgenode2*/); /*new AGeMethid*/
+  variable5 = NEW_AGeMethid_parser_prod___AGeMethid___init_agemethid( variable3 /*tgenode2*/); /*new AGeMethid*/
   variable4 = variable5;
   variable1 =  variable4 /*pmethidnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(16)) /*Parser::go_to*/;
@@ -18437,7 +18444,7 @@ void parser___ReduceAction205___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tltnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tltnode2*/, COLOR_TLt, ID_TLt)) /*cast TLt*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction205___action, LOCATE_parser, 9572); nit_exit(1);}
-  variable5 = NEW_parser_prod___ALtMethid___init_altmethid( variable3 /*tltnode2*/); /*new ALtMethid*/
+  variable5 = NEW_ALtMethid_parser_prod___ALtMethid___init_altmethid( variable3 /*tltnode2*/); /*new ALtMethid*/
   variable4 = variable5;
   variable1 =  variable4 /*pmethidnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(16)) /*Parser::go_to*/;
@@ -18471,7 +18478,7 @@ void parser___ReduceAction206___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tgtnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tgtnode2*/, COLOR_TGt, ID_TGt)) /*cast TGt*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction206___action, LOCATE_parser, 9588); nit_exit(1);}
-  variable5 = NEW_parser_prod___AGtMethid___init_agtmethid( variable3 /*tgtnode2*/); /*new AGtMethid*/
+  variable5 = NEW_AGtMethid_parser_prod___AGtMethid___init_agtmethid( variable3 /*tgtnode2*/); /*new AGtMethid*/
   variable4 = variable5;
   variable1 =  variable4 /*pmethidnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(16)) /*Parser::go_to*/;
@@ -18512,7 +18519,7 @@ void parser___ReduceAction207___action(val_t  self, val_t  param0) {
   variable5 =  variable2 /*nodearraylist2*/;
   variable6 = TAG_Bool(( variable5 /*tcbranode3*/==NIT_NULL) || VAL_ISA( variable5 /*tcbranode3*/, COLOR_TCbra, ID_TCbra)) /*cast TCbra*/;
   if (!UNTAG_Bool(variable6)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction207___action, LOCATE_parser, 9607); nit_exit(1);}
-  variable7 = NEW_parser_prod___ABraMethid___init_abramethid( variable4 /*tobranode2*/,  variable5 /*tcbranode3*/); /*new ABraMethid*/
+  variable7 = NEW_ABraMethid_parser_prod___ABraMethid___init_abramethid( variable4 /*tobranode2*/,  variable5 /*tcbranode3*/); /*new ABraMethid*/
   variable6 = variable7;
   variable1 =  variable6 /*pmethidnode1*/ /*node_list=*/;
   variable7 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(16)) /*Parser::go_to*/;
@@ -18546,7 +18553,7 @@ void parser___ReduceAction208___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tstarshipnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tstarshipnode2*/, COLOR_TStarship, ID_TStarship)) /*cast TStarship*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction208___action, LOCATE_parser, 9624); nit_exit(1);}
-  variable5 = NEW_parser_prod___AStarshipMethid___init_astarshipmethid( variable3 /*tstarshipnode2*/); /*new AStarshipMethid*/
+  variable5 = NEW_AStarshipMethid_parser_prod___AStarshipMethid___init_astarshipmethid( variable3 /*tstarshipnode2*/); /*new AStarshipMethid*/
   variable4 = variable5;
   variable1 =  variable4 /*pmethidnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(16)) /*Parser::go_to*/;
@@ -18587,7 +18594,7 @@ void parser___ReduceAction209___action(val_t  self, val_t  param0) {
   variable5 =  variable2 /*nodearraylist2*/;
   variable6 = TAG_Bool(( variable5 /*tassignnode3*/==NIT_NULL) || VAL_ISA( variable5 /*tassignnode3*/, COLOR_TAssign, ID_TAssign)) /*cast TAssign*/;
   if (!UNTAG_Bool(variable6)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction209___action, LOCATE_parser, 9643); nit_exit(1);}
-  variable7 = NEW_parser_prod___AAssignMethid___init_aassignmethid( variable4 /*tidnode2*/,  variable5 /*tassignnode3*/); /*new AAssignMethid*/
+  variable7 = NEW_AAssignMethid_parser_prod___AAssignMethid___init_aassignmethid( variable4 /*tidnode2*/,  variable5 /*tassignnode3*/); /*new AAssignMethid*/
   variable6 = variable7;
   variable1 =  variable6 /*pmethidnode1*/ /*node_list=*/;
   variable7 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(16)) /*Parser::go_to*/;
@@ -18635,7 +18642,7 @@ void parser___ReduceAction210___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist3*/;
   variable8 = TAG_Bool(( variable7 /*tassignnode4*/==NIT_NULL) || VAL_ISA( variable7 /*tassignnode4*/, COLOR_TAssign, ID_TAssign)) /*cast TAssign*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction210___action, LOCATE_parser, 9666); nit_exit(1);}
-  variable9 = NEW_parser_prod___ABraassignMethid___init_abraassignmethid( variable5 /*tobranode2*/,  variable6 /*tcbranode3*/,  variable7 /*tassignnode4*/); /*new ABraassignMethid*/
+  variable9 = NEW_ABraassignMethid_parser_prod___ABraassignMethid___init_abraassignmethid( variable5 /*tobranode2*/,  variable6 /*tcbranode3*/,  variable7 /*tassignnode4*/); /*new ABraassignMethid*/
   variable8 = variable9;
   variable1 =  variable8 /*pmethidnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(16)) /*Parser::go_to*/;
@@ -18663,9 +18670,9 @@ void parser___ReduceAction211___action(val_t  self, val_t  param0) {
   trace.file = LOCATE_parser;
   variable0 =  param0;
   variable1 =  NIT_NULL /*null*/;
-  variable3 = NEW_array___Array___init(); /*new Array[E]*/
+  variable3 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable2 = variable3;
-  variable4 = NEW_parser_prod___ASignature___init_asignature( variable2 /*listnode2*/,  NIT_NULL /*null*/); /*new ASignature*/
+  variable4 = NEW_ASignature_parser_prod___ASignature___init_asignature( variable2 /*listnode2*/,  NIT_NULL /*null*/); /*new ASignature*/
   variable3 = variable4;
   variable1 =  variable3 /*psignaturenode1*/ /*node_list=*/;
   variable4 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(17)) /*Parser::go_to*/;
@@ -18697,7 +18704,7 @@ void parser___ReduceAction212___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*listnode2*/==NIT_NULL) || VAL_ISA( variable4 /*listnode2*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -18711,7 +18718,7 @@ void parser___ReduceAction212___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable3 /*listnode3*/,COLOR_abstract_collection___IndexedCollection___append))( variable3 /*listnode3*/,  variable4 /*listnode2*/) /*IndexedCollection::append*/;
     }
   }
-  variable6 = NEW_parser_prod___ASignature___init_asignature( variable3 /*listnode3*/,  NIT_NULL /*null*/); /*new ASignature*/
+  variable6 = NEW_ASignature_parser_prod___ASignature___init_asignature( variable3 /*listnode3*/,  NIT_NULL /*null*/); /*new ASignature*/
   variable5 = variable6;
   variable1 =  variable5 /*psignaturenode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(17)) /*Parser::go_to*/;
@@ -18743,12 +18750,12 @@ void parser___ReduceAction213___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*ptypenode3*/==NIT_NULL) || VAL_ISA( variable4 /*ptypenode3*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable5)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction213___action, LOCATE_parser, 9725); nit_exit(1);}
-  variable6 = NEW_parser_prod___ASignature___init_asignature( variable3 /*listnode2*/,  variable4 /*ptypenode3*/); /*new ASignature*/
+  variable6 = NEW_ASignature_parser_prod___ASignature___init_asignature( variable3 /*listnode2*/,  variable4 /*ptypenode3*/); /*new ASignature*/
   variable5 = variable6;
   variable1 =  variable5 /*psignaturenode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(17)) /*Parser::go_to*/;
@@ -18784,7 +18791,7 @@ void parser___ReduceAction214___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*listnode2*/==NIT_NULL) || VAL_ISA( variable5 /*listnode2*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -18801,7 +18808,7 @@ void parser___ReduceAction214___action(val_t  self, val_t  param0) {
   variable6 =  variable2 /*nodearraylist2*/;
   variable7 = TAG_Bool(( variable6 /*ptypenode4*/==NIT_NULL) || VAL_ISA( variable6 /*ptypenode4*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable7)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction214___action, LOCATE_parser, 9753); nit_exit(1);}
-  variable8 = NEW_parser_prod___ASignature___init_asignature( variable4 /*listnode3*/,  variable6 /*ptypenode4*/); /*new ASignature*/
+  variable8 = NEW_ASignature_parser_prod___ASignature___init_asignature( variable4 /*listnode3*/,  variable6 /*ptypenode4*/); /*new ASignature*/
   variable7 = variable8;
   variable1 =  variable7 /*psignaturenode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(17)) /*Parser::go_to*/;
@@ -18844,7 +18851,7 @@ void parser___ReduceAction215___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable4 /*nodearraylist3*/;
   variable9 = TAG_Bool(( variable8 /*pparamnode1*/==NIT_NULL) || VAL_ISA( variable8 /*pparamnode1*/, COLOR_PParam, ID_PParam)) /*cast PParam*/;
@@ -18898,7 +18905,7 @@ void parser___ReduceAction216___action(val_t  self, val_t  param0) {
   variable6 = variable7;
   variable8 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable5 /*nodearraylist3*/;
   variable10 = TAG_Bool(( variable9 /*pparamnode1*/==NIT_NULL) || VAL_ISA( variable9 /*pparamnode1*/, COLOR_PParam, ID_PParam)) /*cast PParam*/;
@@ -18953,7 +18960,7 @@ void parser___ReduceAction217___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
   variable1 =  variable5 /*listnode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(18)) /*Parser::go_to*/;
@@ -19024,7 +19031,7 @@ void parser___ReduceAction219___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tidnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tidnode2*/, COLOR_TId, ID_TId)) /*cast TId*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction219___action, LOCATE_parser, 9851); nit_exit(1);}
-  variable5 = NEW_parser_prod___AParam___init_aparam( variable3 /*tidnode2*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AParam*/
+  variable5 = NEW_AParam_parser_prod___AParam___init_aparam( variable3 /*tidnode2*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AParam*/
   variable4 = variable5;
   variable1 =  variable4 /*pparamnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(20)) /*Parser::go_to*/;
@@ -19065,7 +19072,7 @@ void parser___ReduceAction220___action(val_t  self, val_t  param0) {
   variable5 =  variable2 /*nodearraylist2*/;
   variable6 = TAG_Bool(( variable5 /*ptypenode3*/==NIT_NULL) || VAL_ISA( variable5 /*ptypenode3*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable6)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction220___action, LOCATE_parser, 9872); nit_exit(1);}
-  variable7 = NEW_parser_prod___AParam___init_aparam( variable4 /*tidnode2*/,  variable5 /*ptypenode3*/,  NIT_NULL /*null*/); /*new AParam*/
+  variable7 = NEW_AParam_parser_prod___AParam___init_aparam( variable4 /*tidnode2*/,  variable5 /*ptypenode3*/,  NIT_NULL /*null*/); /*new AParam*/
   variable6 = variable7;
   variable1 =  variable6 /*pparamnode1*/ /*node_list=*/;
   variable7 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(20)) /*Parser::go_to*/;
@@ -19113,7 +19120,7 @@ void parser___ReduceAction221___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist3*/;
   variable8 = TAG_Bool(( variable7 /*tdotdotdotnode4*/==NIT_NULL) || VAL_ISA( variable7 /*tdotdotdotnode4*/, COLOR_TDotdotdot, ID_TDotdotdot)) /*cast TDotdotdot*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction221___action, LOCATE_parser, 9896); nit_exit(1);}
-  variable9 = NEW_parser_prod___AParam___init_aparam( variable5 /*tidnode2*/,  variable6 /*ptypenode3*/,  variable7 /*tdotdotdotnode4*/); /*new AParam*/
+  variable9 = NEW_AParam_parser_prod___AParam___init_aparam( variable5 /*tidnode2*/,  variable6 /*ptypenode3*/,  variable7 /*tdotdotdotnode4*/); /*new AParam*/
   variable8 = variable9;
   variable1 =  variable8 /*pparamnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(20)) /*Parser::go_to*/;
@@ -19145,12 +19152,12 @@ void parser___ReduceAction222___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*tclassidnode2*/==NIT_NULL) || VAL_ISA( variable4 /*tclassidnode2*/, COLOR_TClassid, ID_TClassid)) /*cast TClassid*/;
   if (!UNTAG_Bool(variable5)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction222___action, LOCATE_parser, 9915); nit_exit(1);}
-  variable6 = NEW_parser_prod___AType___init_atype( variable4 /*tclassidnode2*/,  variable3 /*listnode3*/); /*new AType*/
+  variable6 = NEW_AType_parser_prod___AType___init_atype( variable4 /*tclassidnode2*/,  variable3 /*listnode3*/); /*new AType*/
   variable5 = variable6;
   variable1 =  variable5 /*ptypenode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(21)) /*Parser::go_to*/;
@@ -19198,7 +19205,7 @@ void parser___ReduceAction223___action(val_t  self, val_t  param0) {
   variable6 = variable7;
   variable8 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable7 /*nodearraylist1*/;
   variable10 = TAG_Bool(( variable9 /*tclassidnode2*/==NIT_NULL) || VAL_ISA( variable9 /*tclassidnode2*/, COLOR_TClassid, ID_TClassid)) /*cast TClassid*/;
@@ -19215,7 +19222,7 @@ void parser___ReduceAction223___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable8 /*listnode4*/,COLOR_abstract_collection___IndexedCollection___append))( variable8 /*listnode4*/,  variable10 /*listnode3*/) /*IndexedCollection::append*/;
     }
   }
-  variable12 = NEW_parser_prod___AType___init_atype( variable9 /*tclassidnode2*/,  variable8 /*listnode4*/); /*new AType*/
+  variable12 = NEW_AType_parser_prod___AType___init_atype( variable9 /*tclassidnode2*/,  variable8 /*listnode4*/); /*new AType*/
   variable11 = variable12;
   variable1 =  variable11 /*ptypenode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(21)) /*Parser::go_to*/;
@@ -19246,7 +19253,7 @@ void parser___ReduceAction224___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*ptypenode1*/==NIT_NULL) || VAL_ISA( variable4 /*ptypenode1*/, COLOR_PType, ID_PType)) /*cast PType*/;
@@ -19288,7 +19295,7 @@ void parser___ReduceAction225___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*ptypenode1*/==NIT_NULL) || VAL_ISA( variable5 /*ptypenode1*/, COLOR_PType, ID_PType)) /*cast PType*/;
@@ -19453,7 +19460,7 @@ void parser___ReduceAction229___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
   variable7 =  variable4 /*nodearraylist2*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -19462,7 +19469,7 @@ void parser___ReduceAction229___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable8)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable6 /*listnode3*/,COLOR_abstract_collection___SimpleCollection___add))( variable6 /*listnode3*/,  variable7 /*pexprnode2*/) /*AbstractArray::add*/;
   }
-  variable9 = NEW_parser_prod___ABlockExpr___init_ablockexpr( variable6 /*listnode3*/); /*new ABlockExpr*/
+  variable9 = NEW_ABlockExpr_parser_prod___ABlockExpr___init_ablockexpr( variable6 /*listnode3*/); /*new ABlockExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(25)) /*Parser::go_to*/;
@@ -19507,7 +19514,7 @@ void parser___ReduceAction230___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable5 /*nodearraylist2*/;
   variable9 = TAG_Bool(( variable8 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable8 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -19528,7 +19535,7 @@ void parser___ReduceAction230___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable7 /*listnode4*/,COLOR_abstract_collection___IndexedCollection___append))( variable7 /*listnode4*/,  variable9 /*listnode3*/) /*IndexedCollection::append*/;
     }
   }
-  variable11 = NEW_parser_prod___ABlockExpr___init_ablockexpr( variable7 /*listnode4*/); /*new ABlockExpr*/
+  variable11 = NEW_ABlockExpr_parser_prod___ABlockExpr___init_ablockexpr( variable7 /*listnode4*/); /*new ABlockExpr*/
   variable10 = variable11;
   variable1 =  variable10 /*pexprnode1*/ /*node_list=*/;
   variable11 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(25)) /*Parser::go_to*/;
@@ -19715,7 +19722,7 @@ void parser___ReduceAction236___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwreturnnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwreturnnode2*/, COLOR_TKwreturn, ID_TKwreturn)) /*cast TKwreturn*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction236___action, LOCATE_parser, 10170); nit_exit(1);}
-  variable5 = NEW_parser_prod___AReturnExpr___init_areturnexpr( variable3 /*tkwreturnnode2*/,  NIT_NULL /*null*/); /*new AReturnExpr*/
+  variable5 = NEW_AReturnExpr_parser_prod___AReturnExpr___init_areturnexpr( variable3 /*tkwreturnnode2*/,  NIT_NULL /*null*/); /*new AReturnExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(27)) /*Parser::go_to*/;
@@ -19756,7 +19763,7 @@ void parser___ReduceAction237___action(val_t  self, val_t  param0) {
   variable5 =  variable2 /*nodearraylist2*/;
   variable6 = TAG_Bool(( variable5 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable5 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable6)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction237___action, LOCATE_parser, 10190); nit_exit(1);}
-  variable7 = NEW_parser_prod___AReturnExpr___init_areturnexpr( variable4 /*tkwreturnnode2*/,  variable5 /*pexprnode3*/); /*new AReturnExpr*/
+  variable7 = NEW_AReturnExpr_parser_prod___AReturnExpr___init_areturnexpr( variable4 /*tkwreturnnode2*/,  variable5 /*pexprnode3*/); /*new AReturnExpr*/
   variable6 = variable7;
   variable1 =  variable6 /*pexprnode1*/ /*node_list=*/;
   variable7 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(27)) /*Parser::go_to*/;
@@ -19790,7 +19797,7 @@ void parser___ReduceAction238___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwbreaknode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwbreaknode2*/, COLOR_TKwbreak, ID_TKwbreak)) /*cast TKwbreak*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction238___action, LOCATE_parser, 10207); nit_exit(1);}
-  variable5 = NEW_parser_prod___ABreakExpr___init_abreakexpr( variable3 /*tkwbreaknode2*/); /*new ABreakExpr*/
+  variable5 = NEW_ABreakExpr_parser_prod___ABreakExpr___init_abreakexpr( variable3 /*tkwbreaknode2*/); /*new ABreakExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(27)) /*Parser::go_to*/;
@@ -19824,7 +19831,7 @@ void parser___ReduceAction239___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwabortnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwabortnode2*/, COLOR_TKwabort, ID_TKwabort)) /*cast TKwabort*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction239___action, LOCATE_parser, 10223); nit_exit(1);}
-  variable5 = NEW_parser_prod___AAbortExpr___init_aabortexpr( variable3 /*tkwabortnode2*/); /*new AAbortExpr*/
+  variable5 = NEW_AAbortExpr_parser_prod___AAbortExpr___init_aabortexpr( variable3 /*tkwabortnode2*/); /*new AAbortExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(27)) /*Parser::go_to*/;
@@ -19858,7 +19865,7 @@ void parser___ReduceAction240___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwcontinuenode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwcontinuenode2*/, COLOR_TKwcontinue, ID_TKwcontinue)) /*cast TKwcontinue*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction240___action, LOCATE_parser, 10239); nit_exit(1);}
-  variable5 = NEW_parser_prod___AContinueExpr___init_acontinueexpr( variable3 /*tkwcontinuenode2*/); /*new AContinueExpr*/
+  variable5 = NEW_AContinueExpr_parser_prod___AContinueExpr___init_acontinueexpr( variable3 /*tkwcontinuenode2*/); /*new AContinueExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(27)) /*Parser::go_to*/;
@@ -20059,7 +20066,7 @@ void parser___ReduceAction246___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable6 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable8 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -20079,7 +20086,7 @@ void parser___ReduceAction246___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable7 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable7 /*listnode5*/,  variable10 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable12 = NEW_parser_prod___ACallExpr___init_acallexpr( variable8 /*pexprnode2*/,  variable9 /*tidnode3*/,  variable7 /*listnode5*/); /*new ACallExpr*/
+  variable12 = NEW_ACallExpr_parser_prod___ACallExpr___init_acallexpr( variable8 /*pexprnode2*/,  variable9 /*tidnode3*/,  variable7 /*listnode5*/); /*new ACallExpr*/
   variable11 = variable12;
   variable1 =  variable11 /*pexprnode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(27)) /*Parser::go_to*/;
@@ -20116,9 +20123,9 @@ void parser___ReduceAction247___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
-  variable6 = NEW_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
+  variable6 = NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
   variable5 = variable6;
   variable6 =  variable3 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*tidnode3*/==NIT_NULL) || VAL_ISA( variable6 /*tidnode3*/, COLOR_TId, ID_TId)) /*cast TId*/;
@@ -20135,7 +20142,7 @@ void parser___ReduceAction247___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode5*/,  variable7 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable9 = NEW_parser_prod___ACallExpr___init_acallexpr( variable5 /*pexprnode2*/,  variable6 /*tidnode3*/,  variable4 /*listnode5*/); /*new ACallExpr*/
+  variable9 = NEW_ACallExpr_parser_prod___ACallExpr___init_acallexpr( variable5 /*pexprnode2*/,  variable6 /*tidnode3*/,  variable4 /*listnode5*/); /*new ACallExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(27)) /*Parser::go_to*/;
@@ -20171,7 +20178,7 @@ void parser___ReduceAction248___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*tkwsupernode3*/==NIT_NULL) || VAL_ISA( variable5 /*tkwsupernode3*/, COLOR_TKwsuper, ID_TKwsuper)) /*cast TKwsuper*/;
@@ -20188,7 +20195,7 @@ void parser___ReduceAction248___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode5*/,  variable6 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable8 = NEW_parser_prod___ASuperExpr___init_asuperexpr( NIT_NULL /*null*/,  variable5 /*tkwsupernode3*/,  variable4 /*listnode5*/); /*new ASuperExpr*/
+  variable8 = NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr( NIT_NULL /*null*/,  variable5 /*tkwsupernode3*/,  variable4 /*listnode5*/); /*new ASuperExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(27)) /*Parser::go_to*/;
@@ -20228,7 +20235,7 @@ void parser___ReduceAction249___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
   variable6 =  variable4 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*pqualifiednode2*/==NIT_NULL) || VAL_ISA( variable6 /*pqualifiednode2*/, COLOR_PQualified, ID_PQualified)) /*cast PQualified*/;
@@ -20248,7 +20255,7 @@ void parser___ReduceAction249___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable5 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable5 /*listnode5*/,  variable8 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable10 = NEW_parser_prod___ASuperExpr___init_asuperexpr( variable6 /*pqualifiednode2*/,  variable7 /*tkwsupernode3*/,  variable5 /*listnode5*/); /*new ASuperExpr*/
+  variable10 = NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr( variable6 /*pqualifiednode2*/,  variable7 /*tkwsupernode3*/,  variable5 /*listnode5*/); /*new ASuperExpr*/
   variable9 = variable10;
   variable1 =  variable9 /*pexprnode1*/ /*node_list=*/;
   variable10 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(27)) /*Parser::go_to*/;
@@ -20294,7 +20301,7 @@ void parser___ReduceAction250___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable6 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable8 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -20314,7 +20321,7 @@ void parser___ReduceAction250___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable7 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable7 /*listnode5*/,  variable10 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable12 = NEW_parser_prod___AInitExpr___init_ainitexpr( variable8 /*pexprnode2*/,  variable9 /*tkwinitnode3*/,  variable7 /*listnode5*/); /*new AInitExpr*/
+  variable12 = NEW_AInitExpr_parser_prod___AInitExpr___init_ainitexpr( variable8 /*pexprnode2*/,  variable9 /*tkwinitnode3*/,  variable7 /*listnode5*/); /*new AInitExpr*/
   variable11 = variable12;
   variable1 =  variable11 /*pexprnode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(27)) /*Parser::go_to*/;
@@ -20351,9 +20358,9 @@ void parser___ReduceAction251___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
-  variable6 = NEW_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
+  variable6 = NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
   variable5 = variable6;
   variable6 =  variable3 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*tkwinitnode3*/==NIT_NULL) || VAL_ISA( variable6 /*tkwinitnode3*/, COLOR_TKwinit, ID_TKwinit)) /*cast TKwinit*/;
@@ -20370,7 +20377,7 @@ void parser___ReduceAction251___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode5*/,  variable7 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable9 = NEW_parser_prod___AInitExpr___init_ainitexpr( variable5 /*pexprnode2*/,  variable6 /*tkwinitnode3*/,  variable4 /*listnode5*/); /*new AInitExpr*/
+  variable9 = NEW_AInitExpr_parser_prod___AInitExpr___init_ainitexpr( variable5 /*pexprnode2*/,  variable6 /*tkwinitnode3*/,  variable4 /*listnode5*/); /*new AInitExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(27)) /*Parser::go_to*/;
@@ -20411,7 +20418,7 @@ void parser___ReduceAction252___action(val_t  self, val_t  param0) {
   variable5 =  variable2 /*nodearraylist2*/;
   variable6 = TAG_Bool(( variable5 /*tidnode3*/==NIT_NULL) || VAL_ISA( variable5 /*tidnode3*/, COLOR_TId, ID_TId)) /*cast TId*/;
   if (!UNTAG_Bool(variable6)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction252___action, LOCATE_parser, 10514); nit_exit(1);}
-  variable7 = NEW_parser_prod___AVardeclExpr___init_avardeclexpr( variable4 /*tkwvarnode2*/,  variable5 /*tidnode3*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AVardeclExpr*/
+  variable7 = NEW_AVardeclExpr_parser_prod___AVardeclExpr___init_avardeclexpr( variable4 /*tkwvarnode2*/,  variable5 /*tidnode3*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AVardeclExpr*/
   variable6 = variable7;
   variable1 =  variable6 /*pexprnode1*/ /*node_list=*/;
   variable7 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(28)) /*Parser::go_to*/;
@@ -20459,7 +20466,7 @@ void parser___ReduceAction253___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist3*/;
   variable8 = TAG_Bool(( variable7 /*ptypenode4*/==NIT_NULL) || VAL_ISA( variable7 /*ptypenode4*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction253___action, LOCATE_parser, 10540); nit_exit(1);}
-  variable9 = NEW_parser_prod___AVardeclExpr___init_avardeclexpr( variable5 /*tkwvarnode2*/,  variable6 /*tidnode3*/,  variable7 /*ptypenode4*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AVardeclExpr*/
+  variable9 = NEW_AVardeclExpr_parser_prod___AVardeclExpr___init_avardeclexpr( variable5 /*tkwvarnode2*/,  variable6 /*tidnode3*/,  variable7 /*ptypenode4*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new AVardeclExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(28)) /*Parser::go_to*/;
@@ -20517,7 +20524,7 @@ void parser___ReduceAction254___action(val_t  self, val_t  param0) {
   variable10 =  variable2 /*nodearraylist5*/;
   variable11 = TAG_Bool(( variable10 /*pexprnode6*/==NIT_NULL) || VAL_ISA( variable10 /*pexprnode6*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable11)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction254___action, LOCATE_parser, 10570); nit_exit(1);}
-  variable12 = NEW_parser_prod___AVardeclExpr___init_avardeclexpr( variable7 /*tkwvarnode2*/,  variable8 /*tidnode3*/,  NIT_NULL /*null*/,  variable9 /*tassignnode5*/,  variable10 /*pexprnode6*/); /*new AVardeclExpr*/
+  variable12 = NEW_AVardeclExpr_parser_prod___AVardeclExpr___init_avardeclexpr( variable7 /*tkwvarnode2*/,  variable8 /*tidnode3*/,  NIT_NULL /*null*/,  variable9 /*tassignnode5*/,  variable10 /*pexprnode6*/); /*new AVardeclExpr*/
   variable11 = variable12;
   variable1 =  variable11 /*pexprnode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(28)) /*Parser::go_to*/;
@@ -20582,7 +20589,7 @@ void parser___ReduceAction255___action(val_t  self, val_t  param0) {
   variable12 =  variable2 /*nodearraylist6*/;
   variable13 = TAG_Bool(( variable12 /*pexprnode6*/==NIT_NULL) || VAL_ISA( variable12 /*pexprnode6*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction255___action, LOCATE_parser, 10603); nit_exit(1);}
-  variable14 = NEW_parser_prod___AVardeclExpr___init_avardeclexpr( variable8 /*tkwvarnode2*/,  variable9 /*tidnode3*/,  variable10 /*ptypenode4*/,  variable11 /*tassignnode5*/,  variable12 /*pexprnode6*/); /*new AVardeclExpr*/
+  variable14 = NEW_AVardeclExpr_parser_prod___AVardeclExpr___init_avardeclexpr( variable8 /*tkwvarnode2*/,  variable9 /*tidnode3*/,  variable10 /*ptypenode4*/,  variable11 /*tassignnode5*/,  variable12 /*pexprnode6*/); /*new AVardeclExpr*/
   variable13 = variable14;
   variable1 =  variable13 /*pexprnode1*/ /*node_list=*/;
   variable14 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(28)) /*Parser::go_to*/;
@@ -20643,7 +20650,7 @@ void parser___ReduceAction256___action(val_t  self, val_t  param0) {
   variable11 =  variable2 /*nodearraylist6*/;
   variable12 = TAG_Bool(( variable11 /*pexprnode5*/==NIT_NULL) || VAL_ISA( variable11 /*pexprnode5*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction256___action, LOCATE_parser, 10634); nit_exit(1);}
-  variable13 = NEW_parser_prod___AAttrAssignExpr___init_aattrassignexpr( variable8 /*pexprnode2*/,  variable9 /*tattridnode3*/,  variable10 /*tassignnode4*/,  variable11 /*pexprnode5*/); /*new AAttrAssignExpr*/
+  variable13 = NEW_AAttrAssignExpr_parser_prod___AAttrAssignExpr___init_aattrassignexpr( variable8 /*pexprnode2*/,  variable9 /*tattridnode3*/,  variable10 /*tassignnode4*/,  variable11 /*pexprnode5*/); /*new AAttrAssignExpr*/
   variable12 = variable13;
   variable1 =  variable12 /*pexprnode1*/ /*node_list=*/;
   variable13 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(29)) /*Parser::go_to*/;
@@ -20683,7 +20690,7 @@ void parser___ReduceAction257___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
+  variable6 = NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
   variable5 = variable6;
   variable6 =  variable4 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*tattridnode3*/==NIT_NULL) || VAL_ISA( variable6 /*tattridnode3*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
@@ -20694,7 +20701,7 @@ void parser___ReduceAction257___action(val_t  self, val_t  param0) {
   variable8 =  variable2 /*nodearraylist3*/;
   variable9 = TAG_Bool(( variable8 /*pexprnode5*/==NIT_NULL) || VAL_ISA( variable8 /*pexprnode5*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable9)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction257___action, LOCATE_parser, 10661); nit_exit(1);}
-  variable10 = NEW_parser_prod___AAttrAssignExpr___init_aattrassignexpr( variable5 /*pexprnode2*/,  variable6 /*tattridnode3*/,  variable7 /*tassignnode4*/,  variable8 /*pexprnode5*/); /*new AAttrAssignExpr*/
+  variable10 = NEW_AAttrAssignExpr_parser_prod___AAttrAssignExpr___init_aattrassignexpr( variable5 /*pexprnode2*/,  variable6 /*tattridnode3*/,  variable7 /*tassignnode4*/,  variable8 /*pexprnode5*/); /*new AAttrAssignExpr*/
   variable9 = variable10;
   variable1 =  variable9 /*pexprnode1*/ /*node_list=*/;
   variable10 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(29)) /*Parser::go_to*/;
@@ -20748,7 +20755,7 @@ void parser___ReduceAction258___action(val_t  self, val_t  param0) {
   variable7 = variable8;
   variable9 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable8 = variable9;
-  variable10 = NEW_array___Array___init(); /*new Array[E]*/
+  variable10 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable9 = variable10;
   variable10 =  variable8 /*nodearraylist1*/;
   variable11 = TAG_Bool(( variable10 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable10 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -20774,7 +20781,7 @@ void parser___ReduceAction258___action(val_t  self, val_t  param0) {
   variable14 =  variable2 /*nodearraylist7*/;
   variable15 = TAG_Bool(( variable14 /*pexprnode7*/==NIT_NULL) || VAL_ISA( variable14 /*pexprnode7*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction258___action, LOCATE_parser, 10702); nit_exit(1);}
-  variable16 = NEW_parser_prod___ACallAssignExpr___init_acallassignexpr( variable10 /*pexprnode2*/,  variable11 /*tidnode3*/,  variable9 /*listnode5*/,  variable13 /*tassignnode6*/,  variable14 /*pexprnode7*/); /*new ACallAssignExpr*/
+  variable16 = NEW_ACallAssignExpr_parser_prod___ACallAssignExpr___init_acallassignexpr( variable10 /*pexprnode2*/,  variable11 /*tidnode3*/,  variable9 /*listnode5*/,  variable13 /*tassignnode6*/,  variable14 /*pexprnode7*/); /*new ACallAssignExpr*/
   variable15 = variable16;
   variable1 =  variable15 /*pexprnode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(29)) /*Parser::go_to*/;
@@ -20819,9 +20826,9 @@ void parser___ReduceAction259___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
-  variable8 = NEW_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
+  variable8 = NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
   variable7 = variable8;
   variable8 =  variable5 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*tidnode3*/==NIT_NULL) || VAL_ISA( variable8 /*tidnode3*/, COLOR_TId, ID_TId)) /*cast TId*/;
@@ -20844,7 +20851,7 @@ void parser___ReduceAction259___action(val_t  self, val_t  param0) {
   variable11 =  variable2 /*nodearraylist4*/;
   variable12 = TAG_Bool(( variable11 /*pexprnode7*/==NIT_NULL) || VAL_ISA( variable11 /*pexprnode7*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction259___action, LOCATE_parser, 10741); nit_exit(1);}
-  variable13 = NEW_parser_prod___ACallAssignExpr___init_acallassignexpr( variable7 /*pexprnode2*/,  variable8 /*tidnode3*/,  variable6 /*listnode5*/,  variable10 /*tassignnode6*/,  variable11 /*pexprnode7*/); /*new ACallAssignExpr*/
+  variable13 = NEW_ACallAssignExpr_parser_prod___ACallAssignExpr___init_acallassignexpr( variable7 /*pexprnode2*/,  variable8 /*tidnode3*/,  variable6 /*listnode5*/,  variable10 /*tassignnode6*/,  variable11 /*pexprnode7*/); /*new ACallAssignExpr*/
   variable12 = variable13;
   variable1 =  variable12 /*pexprnode1*/ /*node_list=*/;
   variable13 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(29)) /*Parser::go_to*/;
@@ -20888,7 +20895,7 @@ void parser___ReduceAction260___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
   variable7 =  variable5 /*nodearraylist1*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -20911,7 +20918,7 @@ void parser___ReduceAction260___action(val_t  self, val_t  param0) {
   variable10 =  variable2 /*nodearraylist4*/;
   variable11 = TAG_Bool(( variable10 /*pexprnode6*/==NIT_NULL) || VAL_ISA( variable10 /*pexprnode6*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable11)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction260___action, LOCATE_parser, 10778); nit_exit(1);}
-  variable12 = NEW_parser_prod___ABraAssignExpr___init_abraassignexpr( variable7 /*pexprnode2*/,  variable6 /*listnode4*/,  variable9 /*tassignnode5*/,  variable10 /*pexprnode6*/); /*new ABraAssignExpr*/
+  variable12 = NEW_ABraAssignExpr_parser_prod___ABraAssignExpr___init_abraassignexpr( variable7 /*pexprnode2*/,  variable6 /*listnode4*/,  variable9 /*tassignnode5*/,  variable10 /*pexprnode6*/); /*new ABraAssignExpr*/
   variable11 = variable12;
   variable1 =  variable11 /*pexprnode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(29)) /*Parser::go_to*/;
@@ -20972,7 +20979,7 @@ void parser___ReduceAction261___action(val_t  self, val_t  param0) {
   variable11 =  variable2 /*nodearraylist6*/;
   variable12 = TAG_Bool(( variable11 /*pexprnode5*/==NIT_NULL) || VAL_ISA( variable11 /*pexprnode5*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction261___action, LOCATE_parser, 10808); nit_exit(1);}
-  variable13 = NEW_parser_prod___AAttrReassignExpr___init_aattrreassignexpr( variable8 /*pexprnode2*/,  variable9 /*tattridnode3*/,  variable10 /*passignopnode4*/,  variable11 /*pexprnode5*/); /*new AAttrReassignExpr*/
+  variable13 = NEW_AAttrReassignExpr_parser_prod___AAttrReassignExpr___init_aattrreassignexpr( variable8 /*pexprnode2*/,  variable9 /*tattridnode3*/,  variable10 /*passignopnode4*/,  variable11 /*pexprnode5*/); /*new AAttrReassignExpr*/
   variable12 = variable13;
   variable1 =  variable12 /*pexprnode1*/ /*node_list=*/;
   variable13 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(29)) /*Parser::go_to*/;
@@ -21012,7 +21019,7 @@ void parser___ReduceAction262___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
+  variable6 = NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
   variable5 = variable6;
   variable6 =  variable4 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*tattridnode3*/==NIT_NULL) || VAL_ISA( variable6 /*tattridnode3*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
@@ -21023,7 +21030,7 @@ void parser___ReduceAction262___action(val_t  self, val_t  param0) {
   variable8 =  variable2 /*nodearraylist3*/;
   variable9 = TAG_Bool(( variable8 /*pexprnode5*/==NIT_NULL) || VAL_ISA( variable8 /*pexprnode5*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable9)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction262___action, LOCATE_parser, 10835); nit_exit(1);}
-  variable10 = NEW_parser_prod___AAttrReassignExpr___init_aattrreassignexpr( variable5 /*pexprnode2*/,  variable6 /*tattridnode3*/,  variable7 /*passignopnode4*/,  variable8 /*pexprnode5*/); /*new AAttrReassignExpr*/
+  variable10 = NEW_AAttrReassignExpr_parser_prod___AAttrReassignExpr___init_aattrreassignexpr( variable5 /*pexprnode2*/,  variable6 /*tattridnode3*/,  variable7 /*passignopnode4*/,  variable8 /*pexprnode5*/); /*new AAttrReassignExpr*/
   variable9 = variable10;
   variable1 =  variable9 /*pexprnode1*/ /*node_list=*/;
   variable10 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(29)) /*Parser::go_to*/;
@@ -21077,7 +21084,7 @@ void parser___ReduceAction263___action(val_t  self, val_t  param0) {
   variable7 = variable8;
   variable9 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable8 = variable9;
-  variable10 = NEW_array___Array___init(); /*new Array[E]*/
+  variable10 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable9 = variable10;
   variable10 =  variable8 /*nodearraylist1*/;
   variable11 = TAG_Bool(( variable10 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable10 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -21103,7 +21110,7 @@ void parser___ReduceAction263___action(val_t  self, val_t  param0) {
   variable14 =  variable2 /*nodearraylist7*/;
   variable15 = TAG_Bool(( variable14 /*pexprnode7*/==NIT_NULL) || VAL_ISA( variable14 /*pexprnode7*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction263___action, LOCATE_parser, 10876); nit_exit(1);}
-  variable16 = NEW_parser_prod___ACallReassignExpr___init_acallreassignexpr( variable10 /*pexprnode2*/,  variable11 /*tidnode3*/,  variable9 /*listnode5*/,  variable13 /*passignopnode6*/,  variable14 /*pexprnode7*/); /*new ACallReassignExpr*/
+  variable16 = NEW_ACallReassignExpr_parser_prod___ACallReassignExpr___init_acallreassignexpr( variable10 /*pexprnode2*/,  variable11 /*tidnode3*/,  variable9 /*listnode5*/,  variable13 /*passignopnode6*/,  variable14 /*pexprnode7*/); /*new ACallReassignExpr*/
   variable15 = variable16;
   variable1 =  variable15 /*pexprnode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(29)) /*Parser::go_to*/;
@@ -21148,9 +21155,9 @@ void parser___ReduceAction264___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
-  variable8 = NEW_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
+  variable8 = NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
   variable7 = variable8;
   variable8 =  variable5 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*tidnode3*/==NIT_NULL) || VAL_ISA( variable8 /*tidnode3*/, COLOR_TId, ID_TId)) /*cast TId*/;
@@ -21173,7 +21180,7 @@ void parser___ReduceAction264___action(val_t  self, val_t  param0) {
   variable11 =  variable2 /*nodearraylist4*/;
   variable12 = TAG_Bool(( variable11 /*pexprnode7*/==NIT_NULL) || VAL_ISA( variable11 /*pexprnode7*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction264___action, LOCATE_parser, 10915); nit_exit(1);}
-  variable13 = NEW_parser_prod___ACallReassignExpr___init_acallreassignexpr( variable7 /*pexprnode2*/,  variable8 /*tidnode3*/,  variable6 /*listnode5*/,  variable10 /*passignopnode6*/,  variable11 /*pexprnode7*/); /*new ACallReassignExpr*/
+  variable13 = NEW_ACallReassignExpr_parser_prod___ACallReassignExpr___init_acallreassignexpr( variable7 /*pexprnode2*/,  variable8 /*tidnode3*/,  variable6 /*listnode5*/,  variable10 /*passignopnode6*/,  variable11 /*pexprnode7*/); /*new ACallReassignExpr*/
   variable12 = variable13;
   variable1 =  variable12 /*pexprnode1*/ /*node_list=*/;
   variable13 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(29)) /*Parser::go_to*/;
@@ -21217,7 +21224,7 @@ void parser___ReduceAction265___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
   variable7 =  variable5 /*nodearraylist1*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -21240,7 +21247,7 @@ void parser___ReduceAction265___action(val_t  self, val_t  param0) {
   variable10 =  variable2 /*nodearraylist4*/;
   variable11 = TAG_Bool(( variable10 /*pexprnode6*/==NIT_NULL) || VAL_ISA( variable10 /*pexprnode6*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable11)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction265___action, LOCATE_parser, 10952); nit_exit(1);}
-  variable12 = NEW_parser_prod___ABraReassignExpr___init_abrareassignexpr( variable7 /*pexprnode2*/,  variable6 /*listnode4*/,  variable9 /*passignopnode5*/,  variable10 /*pexprnode6*/); /*new ABraReassignExpr*/
+  variable12 = NEW_ABraReassignExpr_parser_prod___ABraReassignExpr___init_abrareassignexpr( variable7 /*pexprnode2*/,  variable6 /*listnode4*/,  variable9 /*passignopnode5*/,  variable10 /*pexprnode6*/); /*new ABraReassignExpr*/
   variable11 = variable12;
   variable1 =  variable11 /*pexprnode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(29)) /*Parser::go_to*/;
@@ -21274,7 +21281,7 @@ void parser___ReduceAction266___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tpluseqnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tpluseqnode2*/, COLOR_TPluseq, ID_TPluseq)) /*cast TPluseq*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction266___action, LOCATE_parser, 10971); nit_exit(1);}
-  variable5 = NEW_parser_prod___APlusAssignOp___init_aplusassignop( variable3 /*tpluseqnode2*/); /*new APlusAssignOp*/
+  variable5 = NEW_APlusAssignOp_parser_prod___APlusAssignOp___init_aplusassignop( variable3 /*tpluseqnode2*/); /*new APlusAssignOp*/
   variable4 = variable5;
   variable1 =  variable4 /*passignopnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(30)) /*Parser::go_to*/;
@@ -21308,7 +21315,7 @@ void parser___ReduceAction267___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tminuseqnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tminuseqnode2*/, COLOR_TMinuseq, ID_TMinuseq)) /*cast TMinuseq*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction267___action, LOCATE_parser, 10987); nit_exit(1);}
-  variable5 = NEW_parser_prod___AMinusAssignOp___init_aminusassignop( variable3 /*tminuseqnode2*/); /*new AMinusAssignOp*/
+  variable5 = NEW_AMinusAssignOp_parser_prod___AMinusAssignOp___init_aminusassignop( variable3 /*tminuseqnode2*/); /*new AMinusAssignOp*/
   variable4 = variable5;
   variable1 =  variable4 /*passignopnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(30)) /*Parser::go_to*/;
@@ -21349,7 +21356,7 @@ void parser___ReduceAction268___action(val_t  self, val_t  param0) {
   variable5 =  variable2 /*nodearraylist2*/;
   variable6 = TAG_Bool(( variable5 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable5 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable6)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction268___action, LOCATE_parser, 11006); nit_exit(1);}
-  variable7 = NEW_parser_prod___ADoExpr___init_adoexpr( variable4 /*tkwdonode2*/,  variable5 /*pexprnode3*/); /*new ADoExpr*/
+  variable7 = NEW_ADoExpr_parser_prod___ADoExpr___init_adoexpr( variable4 /*tkwdonode2*/,  variable5 /*pexprnode3*/); /*new ADoExpr*/
   variable6 = variable7;
   variable1 =  variable6 /*pexprnode1*/ /*node_list=*/;
   variable7 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(31)) /*Parser::go_to*/;
@@ -21416,7 +21423,7 @@ void parser___ReduceAction269___action(val_t  self, val_t  param0) {
   variable13 =  variable2 /*nodearraylist8*/;
   variable14 = TAG_Bool(( variable13 /*pexprnode5*/==NIT_NULL) || VAL_ISA( variable13 /*pexprnode5*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction269___action, LOCATE_parser, 11036); nit_exit(1);}
-  variable15 = NEW_parser_prod___AIfExpr___init_aifexpr( variable10 /*tkwifnode2*/,  variable11 /*pexprnode3*/,  variable12 /*pexprnode4*/,  variable13 /*pexprnode5*/); /*new AIfExpr*/
+  variable15 = NEW_AIfExpr_parser_prod___AIfExpr___init_aifexpr( variable10 /*tkwifnode2*/,  variable11 /*pexprnode3*/,  variable12 /*pexprnode4*/,  variable13 /*pexprnode5*/); /*new AIfExpr*/
   variable14 = variable15;
   variable1 =  variable14 /*pexprnode1*/ /*node_list=*/;
   variable15 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(32)) /*Parser::go_to*/;
@@ -21473,7 +21480,7 @@ void parser___ReduceAction270___action(val_t  self, val_t  param0) {
   variable10 =  variable2 /*nodearraylist6*/;
   variable11 = TAG_Bool(( variable10 /*pexprnode4*/==NIT_NULL) || VAL_ISA( variable10 /*pexprnode4*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable11)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction270___action, LOCATE_parser, 11064); nit_exit(1);}
-  variable12 = NEW_parser_prod___AIfExpr___init_aifexpr( variable8 /*tkwifnode2*/,  variable9 /*pexprnode3*/,  variable10 /*pexprnode4*/,  NIT_NULL /*null*/); /*new AIfExpr*/
+  variable12 = NEW_AIfExpr_parser_prod___AIfExpr___init_aifexpr( variable8 /*tkwifnode2*/,  variable9 /*pexprnode3*/,  variable10 /*pexprnode4*/,  NIT_NULL /*null*/); /*new AIfExpr*/
   variable11 = variable12;
   variable1 =  variable11 /*pexprnode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(32)) /*Parser::go_to*/;
@@ -21539,7 +21546,7 @@ void parser___ReduceAction271___action(val_t  self, val_t  param0) {
   variable12 =  variable8 /*nodearraylist3*/;
   variable13 = TAG_Bool(( variable12 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable12 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction271___action, LOCATE_parser, 11093); nit_exit(1);}
-  variable14 = NEW_array___Array___init(); /*new Array[E]*/
+  variable14 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable13 = variable14;
   variable14 =  variable4 /*nodearraylist7*/;
   variable15 = TAG_Bool(( variable14 /*pexprnode5*/==NIT_NULL) || VAL_ISA( variable14 /*pexprnode5*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -21548,12 +21555,12 @@ void parser___ReduceAction271___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable15)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable13 /*listnode6*/,COLOR_abstract_collection___SimpleCollection___add))( variable13 /*listnode6*/,  variable14 /*pexprnode5*/) /*AbstractArray::add*/;
   }
-  variable16 = NEW_parser_prod___ABlockExpr___init_ablockexpr( variable13 /*listnode6*/); /*new ABlockExpr*/
+  variable16 = NEW_ABlockExpr_parser_prod___ABlockExpr___init_ablockexpr( variable13 /*listnode6*/); /*new ABlockExpr*/
   variable15 = variable16;
   variable16 =  variable2 /*nodearraylist9*/;
   variable17 = TAG_Bool(( variable16 /*pexprnode7*/==NIT_NULL) || VAL_ISA( variable16 /*pexprnode7*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable17)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction271___action, LOCATE_parser, 11104); nit_exit(1);}
-  variable18 = NEW_parser_prod___AIfExpr___init_aifexpr( variable11 /*tkwifnode2*/,  variable12 /*pexprnode3*/,  variable15 /*pexprnode4*/,  variable16 /*pexprnode7*/); /*new AIfExpr*/
+  variable18 = NEW_AIfExpr_parser_prod___AIfExpr___init_aifexpr( variable11 /*tkwifnode2*/,  variable12 /*pexprnode3*/,  variable15 /*pexprnode4*/,  variable16 /*pexprnode7*/); /*new AIfExpr*/
   variable17 = variable18;
   variable1 =  variable17 /*pexprnode1*/ /*node_list=*/;
   variable18 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(32)) /*Parser::go_to*/;
@@ -21623,7 +21630,7 @@ void parser___ReduceAction272___action(val_t  self, val_t  param0) {
   variable13 =  variable9 /*nodearraylist3*/;
   variable14 = TAG_Bool(( variable13 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable13 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction272___action, LOCATE_parser, 11134); nit_exit(1);}
-  variable15 = NEW_array___Array___init(); /*new Array[E]*/
+  variable15 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable14 = variable15;
   variable15 =  variable5 /*nodearraylist7*/;
   variable16 = TAG_Bool(( variable15 /*pexprnode5*/==NIT_NULL) || VAL_ISA( variable15 /*pexprnode5*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -21644,12 +21651,12 @@ void parser___ReduceAction272___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable14 /*listnode7*/,COLOR_abstract_collection___IndexedCollection___append))( variable14 /*listnode7*/,  variable16 /*listnode6*/) /*IndexedCollection::append*/;
     }
   }
-  variable18 = NEW_parser_prod___ABlockExpr___init_ablockexpr( variable14 /*listnode7*/); /*new ABlockExpr*/
+  variable18 = NEW_ABlockExpr_parser_prod___ABlockExpr___init_ablockexpr( variable14 /*listnode7*/); /*new ABlockExpr*/
   variable17 = variable18;
   variable18 =  variable2 /*nodearraylist10*/;
   variable19 = TAG_Bool(( variable18 /*pexprnode8*/==NIT_NULL) || VAL_ISA( variable18 /*pexprnode8*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable19)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction272___action, LOCATE_parser, 11154); nit_exit(1);}
-  variable20 = NEW_parser_prod___AIfExpr___init_aifexpr( variable12 /*tkwifnode2*/,  variable13 /*pexprnode3*/,  variable17 /*pexprnode4*/,  variable18 /*pexprnode8*/); /*new AIfExpr*/
+  variable20 = NEW_AIfExpr_parser_prod___AIfExpr___init_aifexpr( variable12 /*tkwifnode2*/,  variable13 /*pexprnode3*/,  variable17 /*pexprnode4*/,  variable18 /*pexprnode8*/); /*new AIfExpr*/
   variable19 = variable20;
   variable1 =  variable19 /*pexprnode1*/ /*node_list=*/;
   variable20 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(32)) /*Parser::go_to*/;
@@ -21706,7 +21713,7 @@ void parser___ReduceAction273___action(val_t  self, val_t  param0) {
   variable10 =  variable2 /*nodearraylist6*/;
   variable11 = TAG_Bool(( variable10 /*pexprnode5*/==NIT_NULL) || VAL_ISA( variable10 /*pexprnode5*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable11)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction273___action, LOCATE_parser, 11182); nit_exit(1);}
-  variable12 = NEW_parser_prod___AIfExpr___init_aifexpr( variable8 /*tkwifnode2*/,  variable9 /*pexprnode3*/,  NIT_NULL /*null*/,  variable10 /*pexprnode5*/); /*new AIfExpr*/
+  variable12 = NEW_AIfExpr_parser_prod___AIfExpr___init_aifexpr( variable8 /*tkwifnode2*/,  variable9 /*pexprnode3*/,  NIT_NULL /*null*/,  variable10 /*pexprnode5*/); /*new AIfExpr*/
   variable11 = variable12;
   variable1 =  variable11 /*pexprnode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(32)) /*Parser::go_to*/;
@@ -21766,7 +21773,7 @@ void parser___ReduceAction274___action(val_t  self, val_t  param0) {
   variable11 =  variable2 /*nodearraylist7*/;
   variable12 = TAG_Bool(( variable11 /*pexprnode5*/==NIT_NULL) || VAL_ISA( variable11 /*pexprnode5*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction274___action, LOCATE_parser, 11211); nit_exit(1);}
-  variable13 = NEW_parser_prod___AIfExpr___init_aifexpr( variable9 /*tkwifnode2*/,  variable10 /*pexprnode3*/,  NIT_NULL /*null*/,  variable11 /*pexprnode5*/); /*new AIfExpr*/
+  variable13 = NEW_AIfExpr_parser_prod___AIfExpr___init_aifexpr( variable9 /*tkwifnode2*/,  variable10 /*pexprnode3*/,  NIT_NULL /*null*/,  variable11 /*pexprnode5*/); /*new AIfExpr*/
   variable12 = variable13;
   variable1 =  variable12 /*pexprnode1*/ /*node_list=*/;
   variable13 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(32)) /*Parser::go_to*/;
@@ -21888,7 +21895,7 @@ void parser___ReduceAction277___action(val_t  self, val_t  param0) {
   variable11 =  variable2 /*nodearraylist6*/;
   variable12 = TAG_Bool(( variable11 /*pexprnode5*/==NIT_NULL) || VAL_ISA( variable11 /*pexprnode5*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction277___action, LOCATE_parser, 11266); nit_exit(1);}
-  variable13 = NEW_parser_prod___AWhileExpr___init_awhileexpr( variable8 /*tkwwhilenode2*/,  variable9 /*pexprnode3*/,  variable10 /*tkwdonode4*/,  variable11 /*pexprnode5*/); /*new AWhileExpr*/
+  variable13 = NEW_AWhileExpr_parser_prod___AWhileExpr___init_awhileexpr( variable8 /*tkwwhilenode2*/,  variable9 /*pexprnode3*/,  variable10 /*tkwdonode4*/,  variable11 /*pexprnode5*/); /*new AWhileExpr*/
   variable12 = variable13;
   variable1 =  variable12 /*pexprnode1*/ /*node_list=*/;
   variable13 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(34)) /*Parser::go_to*/;
@@ -21939,7 +21946,7 @@ void parser___ReduceAction278___action(val_t  self, val_t  param0) {
   variable8 =  variable2 /*nodearraylist4*/;
   variable9 = TAG_Bool(( variable8 /*pexprnode4*/==NIT_NULL) || VAL_ISA( variable8 /*pexprnode4*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable9)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction278___action, LOCATE_parser, 11292); nit_exit(1);}
-  variable10 = NEW_parser_prod___AForExpr___init_aforexpr( variable6 /*pexprnode2*/,  variable7 /*tkwdonode3*/,  variable8 /*pexprnode4*/); /*new AForExpr*/
+  variable10 = NEW_AForExpr_parser_prod___AForExpr___init_aforexpr( variable6 /*pexprnode2*/,  variable7 /*tkwdonode3*/,  variable8 /*pexprnode4*/); /*new AForExpr*/
   variable9 = variable10;
   variable1 =  variable9 /*pexprnode1*/ /*node_list=*/;
   variable10 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(35)) /*Parser::go_to*/;
@@ -21999,7 +22006,7 @@ void parser___ReduceAction279___action(val_t  self, val_t  param0) {
   variable11 =  variable2 /*nodearraylist7*/;
   variable12 = TAG_Bool(( variable11 /*pexprnode4*/==NIT_NULL) || VAL_ISA( variable11 /*pexprnode4*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction279___action, LOCATE_parser, 11320); nit_exit(1);}
-  variable13 = NEW_parser_prod___AForVardeclExpr___init_aforvardeclexpr( variable9 /*tkwfornode2*/,  variable10 /*tidnode3*/,  variable11 /*pexprnode4*/); /*new AForVardeclExpr*/
+  variable13 = NEW_AForVardeclExpr_parser_prod___AForVardeclExpr___init_aforvardeclexpr( variable9 /*tkwfornode2*/,  variable10 /*tidnode3*/,  variable11 /*pexprnode4*/); /*new AForVardeclExpr*/
   variable12 = variable13;
   variable1 =  variable12 /*pexprnode1*/ /*node_list=*/;
   variable13 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(36)) /*Parser::go_to*/;
@@ -22040,7 +22047,7 @@ void parser___ReduceAction280___action(val_t  self, val_t  param0) {
   variable5 =  variable2 /*nodearraylist2*/;
   variable6 = TAG_Bool(( variable5 /*pexprnode4*/==NIT_NULL) || VAL_ISA( variable5 /*pexprnode4*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable6)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction280___action, LOCATE_parser, 11341); nit_exit(1);}
-  variable7 = NEW_parser_prod___AAssertExpr___init_aassertexpr( variable4 /*tkwassertnode2*/,  NIT_NULL /*null*/,  variable5 /*pexprnode4*/); /*new AAssertExpr*/
+  variable7 = NEW_AAssertExpr_parser_prod___AAssertExpr___init_aassertexpr( variable4 /*tkwassertnode2*/,  NIT_NULL /*null*/,  variable5 /*pexprnode4*/); /*new AAssertExpr*/
   variable6 = variable7;
   variable1 =  variable6 /*pexprnode1*/ /*node_list=*/;
   variable7 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(37)) /*Parser::go_to*/;
@@ -22088,7 +22095,7 @@ void parser___ReduceAction281___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist3*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode4*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode4*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction281___action, LOCATE_parser, 11365); nit_exit(1);}
-  variable9 = NEW_parser_prod___AAssertExpr___init_aassertexpr( variable5 /*tkwassertnode2*/,  variable6 /*tidnode3*/,  variable7 /*pexprnode4*/); /*new AAssertExpr*/
+  variable9 = NEW_AAssertExpr_parser_prod___AAssertExpr___init_aassertexpr( variable5 /*tkwassertnode2*/,  variable6 /*tidnode3*/,  variable7 /*pexprnode4*/); /*new AAssertExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(37)) /*Parser::go_to*/;
@@ -22237,7 +22244,7 @@ void parser___ReduceAction284___action(val_t  self, val_t  param0) {
   variable18 =  variable2 /*nodearraylist11*/;
   variable19 = TAG_Bool(( variable18 /*pexprnode7*/==NIT_NULL) || VAL_ISA( variable18 /*pexprnode7*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable19)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction284___action, LOCATE_parser, 11430); nit_exit(1);}
-  variable20 = NEW_parser_prod___AIfexprExpr___init_aifexprexpr( variable13 /*tkwifnode2*/,  variable14 /*pexprnode3*/,  variable15 /*tkwthennode4*/,  variable16 /*pexprnode5*/,  variable17 /*tkwelsenode6*/,  variable18 /*pexprnode7*/); /*new AIfexprExpr*/
+  variable20 = NEW_AIfexprExpr_parser_prod___AIfexprExpr___init_aifexprexpr( variable13 /*tkwifnode2*/,  variable14 /*pexprnode3*/,  variable15 /*tkwthennode4*/,  variable16 /*pexprnode5*/,  variable17 /*tkwelsenode6*/,  variable18 /*pexprnode7*/); /*new AIfexprExpr*/
   variable19 = variable20;
   variable1 =  variable19 /*pexprnode1*/ /*node_list=*/;
   variable20 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(39)) /*Parser::go_to*/;
@@ -22315,7 +22322,7 @@ void parser___ReduceAction286___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction286___action, LOCATE_parser, 11469); nit_exit(1);}
-  variable9 = NEW_parser_prod___AOrExpr___init_aorexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AOrExpr*/
+  variable9 = NEW_AOrExpr_parser_prod___AOrExpr___init_aorexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AOrExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(40)) /*Parser::go_to*/;
@@ -22362,7 +22369,7 @@ void parser___ReduceAction287___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction287___action, LOCATE_parser, 11491); nit_exit(1);}
-  variable9 = NEW_parser_prod___AAndExpr___init_aandexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AAndExpr*/
+  variable9 = NEW_AAndExpr_parser_prod___AAndExpr___init_aandexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AAndExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(40)) /*Parser::go_to*/;
@@ -22437,7 +22444,7 @@ void parser___ReduceAction289___action(val_t  self, val_t  param0) {
   variable6 =  variable2 /*nodearraylist3*/;
   variable7 = TAG_Bool(( variable6 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable6 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable7)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction289___action, LOCATE_parser, 11525); nit_exit(1);}
-  variable8 = NEW_parser_prod___ANotExpr___init_anotexpr( variable5 /*tkwnotnode2*/,  variable6 /*pexprnode3*/); /*new ANotExpr*/
+  variable8 = NEW_ANotExpr_parser_prod___ANotExpr___init_anotexpr( variable5 /*tkwnotnode2*/,  variable6 /*pexprnode3*/); /*new ANotExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(41)) /*Parser::go_to*/;
@@ -22515,7 +22522,7 @@ void parser___ReduceAction291___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction291___action, LOCATE_parser, 11560); nit_exit(1);}
-  variable9 = NEW_parser_prod___AEqExpr___init_aeqexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AEqExpr*/
+  variable9 = NEW_AEqExpr_parser_prod___AEqExpr___init_aeqexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AEqExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(42)) /*Parser::go_to*/;
@@ -22562,7 +22569,7 @@ void parser___ReduceAction292___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction292___action, LOCATE_parser, 11582); nit_exit(1);}
-  variable9 = NEW_parser_prod___AEeExpr___init_aeeexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AEeExpr*/
+  variable9 = NEW_AEeExpr_parser_prod___AEeExpr___init_aeeexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AEeExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(42)) /*Parser::go_to*/;
@@ -22609,7 +22616,7 @@ void parser___ReduceAction293___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction293___action, LOCATE_parser, 11604); nit_exit(1);}
-  variable9 = NEW_parser_prod___ANeExpr___init_aneexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ANeExpr*/
+  variable9 = NEW_ANeExpr_parser_prod___ANeExpr___init_aneexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ANeExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(42)) /*Parser::go_to*/;
@@ -22656,7 +22663,7 @@ void parser___ReduceAction294___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction294___action, LOCATE_parser, 11626); nit_exit(1);}
-  variable9 = NEW_parser_prod___ALtExpr___init_altexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ALtExpr*/
+  variable9 = NEW_ALtExpr_parser_prod___ALtExpr___init_altexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ALtExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(42)) /*Parser::go_to*/;
@@ -22703,7 +22710,7 @@ void parser___ReduceAction295___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction295___action, LOCATE_parser, 11648); nit_exit(1);}
-  variable9 = NEW_parser_prod___ALeExpr___init_aleexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ALeExpr*/
+  variable9 = NEW_ALeExpr_parser_prod___ALeExpr___init_aleexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ALeExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(42)) /*Parser::go_to*/;
@@ -22750,7 +22757,7 @@ void parser___ReduceAction296___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction296___action, LOCATE_parser, 11670); nit_exit(1);}
-  variable9 = NEW_parser_prod___AGtExpr___init_agtexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AGtExpr*/
+  variable9 = NEW_AGtExpr_parser_prod___AGtExpr___init_agtexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AGtExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(42)) /*Parser::go_to*/;
@@ -22797,7 +22804,7 @@ void parser___ReduceAction297___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction297___action, LOCATE_parser, 11692); nit_exit(1);}
-  variable9 = NEW_parser_prod___AGeExpr___init_ageexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AGeExpr*/
+  variable9 = NEW_AGeExpr_parser_prod___AGeExpr___init_ageexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AGeExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(42)) /*Parser::go_to*/;
@@ -22844,7 +22851,7 @@ void parser___ReduceAction298___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction298___action, LOCATE_parser, 11714); nit_exit(1);}
-  variable9 = NEW_parser_prod___AStarshipExpr___init_astarshipexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AStarshipExpr*/
+  variable9 = NEW_AStarshipExpr_parser_prod___AStarshipExpr___init_astarshipexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AStarshipExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(42)) /*Parser::go_to*/;
@@ -22891,7 +22898,7 @@ void parser___ReduceAction299___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*ptypenode3*/==NIT_NULL) || VAL_ISA( variable7 /*ptypenode3*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction299___action, LOCATE_parser, 11736); nit_exit(1);}
-  variable9 = NEW_parser_prod___AIsaExpr___init_aisaexpr( variable6 /*pexprnode2*/,  variable7 /*ptypenode3*/); /*new AIsaExpr*/
+  variable9 = NEW_AIsaExpr_parser_prod___AIsaExpr___init_aisaexpr( variable6 /*pexprnode2*/,  variable7 /*ptypenode3*/); /*new AIsaExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(42)) /*Parser::go_to*/;
@@ -22969,7 +22976,7 @@ void parser___ReduceAction301___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction301___action, LOCATE_parser, 11771); nit_exit(1);}
-  variable9 = NEW_parser_prod___APlusExpr___init_aplusexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new APlusExpr*/
+  variable9 = NEW_APlusExpr_parser_prod___APlusExpr___init_aplusexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new APlusExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(43)) /*Parser::go_to*/;
@@ -23016,7 +23023,7 @@ void parser___ReduceAction302___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction302___action, LOCATE_parser, 11793); nit_exit(1);}
-  variable9 = NEW_parser_prod___AMinusExpr___init_aminusexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AMinusExpr*/
+  variable9 = NEW_AMinusExpr_parser_prod___AMinusExpr___init_aminusexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AMinusExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(43)) /*Parser::go_to*/;
@@ -23094,7 +23101,7 @@ void parser___ReduceAction304___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction304___action, LOCATE_parser, 11828); nit_exit(1);}
-  variable9 = NEW_parser_prod___AStarExpr___init_astarexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AStarExpr*/
+  variable9 = NEW_AStarExpr_parser_prod___AStarExpr___init_astarexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AStarExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(44)) /*Parser::go_to*/;
@@ -23141,7 +23148,7 @@ void parser___ReduceAction305___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction305___action, LOCATE_parser, 11850); nit_exit(1);}
-  variable9 = NEW_parser_prod___ASlashExpr___init_aslashexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ASlashExpr*/
+  variable9 = NEW_ASlashExpr_parser_prod___ASlashExpr___init_aslashexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ASlashExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(44)) /*Parser::go_to*/;
@@ -23188,7 +23195,7 @@ void parser___ReduceAction306___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction306___action, LOCATE_parser, 11872); nit_exit(1);}
-  variable9 = NEW_parser_prod___APercentExpr___init_apercentexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new APercentExpr*/
+  variable9 = NEW_APercentExpr_parser_prod___APercentExpr___init_apercentexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new APercentExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(44)) /*Parser::go_to*/;
@@ -23263,7 +23270,7 @@ void parser___ReduceAction308___action(val_t  self, val_t  param0) {
   variable6 =  variable2 /*nodearraylist3*/;
   variable7 = TAG_Bool(( variable6 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable6 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable7)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction308___action, LOCATE_parser, 11906); nit_exit(1);}
-  variable8 = NEW_parser_prod___AUminusExpr___init_auminusexpr( variable5 /*tminusnode2*/,  variable6 /*pexprnode3*/); /*new AUminusExpr*/
+  variable8 = NEW_AUminusExpr_parser_prod___AUminusExpr___init_auminusexpr( variable5 /*tminusnode2*/,  variable6 /*pexprnode3*/); /*new AUminusExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(45)) /*Parser::go_to*/;
@@ -23307,7 +23314,7 @@ void parser___ReduceAction309___action(val_t  self, val_t  param0) {
   variable6 =  variable2 /*nodearraylist3*/;
   variable7 = TAG_Bool(( variable6 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable6 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable7)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction309___action, LOCATE_parser, 11927); nit_exit(1);}
-  variable8 = NEW_parser_prod___AOnceExpr___init_aonceexpr( variable5 /*tkwoncenode2*/,  variable6 /*pexprnode3*/); /*new AOnceExpr*/
+  variable8 = NEW_AOnceExpr_parser_prod___AOnceExpr___init_aonceexpr( variable5 /*tkwoncenode2*/,  variable6 /*pexprnode3*/); /*new AOnceExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(45)) /*Parser::go_to*/;
@@ -23381,7 +23388,7 @@ void parser___ReduceAction311___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
   variable7 =  variable5 /*nodearraylist1*/;
   variable8 = TAG_Bool(( variable7 /*tkwnewnode2*/==NIT_NULL) || VAL_ISA( variable7 /*tkwnewnode2*/, COLOR_TKwnew, ID_TKwnew)) /*cast TKwnew*/;
@@ -23401,7 +23408,7 @@ void parser___ReduceAction311___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable6 /*listnode6*/,COLOR_abstract_collection___IndexedCollection___append))( variable6 /*listnode6*/,  variable9 /*listnode5*/) /*IndexedCollection::append*/;
     }
   }
-  variable11 = NEW_parser_prod___ANewExpr___init_anewexpr( variable7 /*tkwnewnode2*/,  variable8 /*ptypenode3*/,  NIT_NULL /*null*/,  variable6 /*listnode6*/); /*new ANewExpr*/
+  variable11 = NEW_ANewExpr_parser_prod___ANewExpr___init_anewexpr( variable7 /*tkwnewnode2*/,  variable8 /*ptypenode3*/,  NIT_NULL /*null*/,  variable6 /*listnode6*/); /*new ANewExpr*/
   variable10 = variable11;
   variable1 =  variable10 /*pexprnode1*/ /*node_list=*/;
   variable11 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(46)) /*Parser::go_to*/;
@@ -23448,7 +23455,7 @@ void parser___ReduceAction312___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*tattridnode3*/==NIT_NULL) || VAL_ISA( variable7 /*tattridnode3*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction312___action, LOCATE_parser, 11996); nit_exit(1);}
-  variable9 = NEW_parser_prod___AAttrExpr___init_aattrexpr( variable6 /*pexprnode2*/,  variable7 /*tattridnode3*/); /*new AAttrExpr*/
+  variable9 = NEW_AAttrExpr_parser_prod___AAttrExpr___init_aattrexpr( variable6 /*pexprnode2*/,  variable7 /*tattridnode3*/); /*new AAttrExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -23480,12 +23487,12 @@ void parser___ReduceAction313___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
+  variable4 = NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*tattridnode3*/==NIT_NULL) || VAL_ISA( variable4 /*tattridnode3*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable5)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction313___action, LOCATE_parser, 12015); nit_exit(1);}
-  variable6 = NEW_parser_prod___AAttrExpr___init_aattrexpr( variable3 /*pexprnode2*/,  variable4 /*tattridnode3*/); /*new AAttrExpr*/
+  variable6 = NEW_AAttrExpr_parser_prod___AAttrExpr___init_aattrexpr( variable3 /*pexprnode2*/,  variable4 /*tattridnode3*/); /*new AAttrExpr*/
   variable5 = variable6;
   variable1 =  variable5 /*pexprnode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -23531,7 +23538,7 @@ void parser___ReduceAction314___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable6 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable8 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -23551,7 +23558,7 @@ void parser___ReduceAction314___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable7 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable7 /*listnode5*/,  variable10 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable12 = NEW_parser_prod___ACallExpr___init_acallexpr( variable8 /*pexprnode2*/,  variable9 /*tidnode3*/,  variable7 /*listnode5*/); /*new ACallExpr*/
+  variable12 = NEW_ACallExpr_parser_prod___ACallExpr___init_acallexpr( variable8 /*pexprnode2*/,  variable9 /*tidnode3*/,  variable7 /*listnode5*/); /*new ACallExpr*/
   variable11 = variable12;
   variable1 =  variable11 /*pexprnode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -23588,9 +23595,9 @@ void parser___ReduceAction315___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
-  variable6 = NEW_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
+  variable6 = NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
   variable5 = variable6;
   variable6 =  variable3 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*tidnode3*/==NIT_NULL) || VAL_ISA( variable6 /*tidnode3*/, COLOR_TId, ID_TId)) /*cast TId*/;
@@ -23607,7 +23614,7 @@ void parser___ReduceAction315___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode5*/,  variable7 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable9 = NEW_parser_prod___ACallExpr___init_acallexpr( variable5 /*pexprnode2*/,  variable6 /*tidnode3*/,  variable4 /*listnode5*/); /*new ACallExpr*/
+  variable9 = NEW_ACallExpr_parser_prod___ACallExpr___init_acallexpr( variable5 /*pexprnode2*/,  variable6 /*tidnode3*/,  variable4 /*listnode5*/); /*new ACallExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -23643,7 +23650,7 @@ void parser___ReduceAction316___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*tkwsupernode3*/==NIT_NULL) || VAL_ISA( variable5 /*tkwsupernode3*/, COLOR_TKwsuper, ID_TKwsuper)) /*cast TKwsuper*/;
@@ -23660,7 +23667,7 @@ void parser___ReduceAction316___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode5*/,  variable6 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable8 = NEW_parser_prod___ASuperExpr___init_asuperexpr( NIT_NULL /*null*/,  variable5 /*tkwsupernode3*/,  variable4 /*listnode5*/); /*new ASuperExpr*/
+  variable8 = NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr( NIT_NULL /*null*/,  variable5 /*tkwsupernode3*/,  variable4 /*listnode5*/); /*new ASuperExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -23700,7 +23707,7 @@ void parser___ReduceAction317___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
   variable6 =  variable4 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*pqualifiednode2*/==NIT_NULL) || VAL_ISA( variable6 /*pqualifiednode2*/, COLOR_PQualified, ID_PQualified)) /*cast PQualified*/;
@@ -23720,7 +23727,7 @@ void parser___ReduceAction317___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable5 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable5 /*listnode5*/,  variable8 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable10 = NEW_parser_prod___ASuperExpr___init_asuperexpr( variable6 /*pqualifiednode2*/,  variable7 /*tkwsupernode3*/,  variable5 /*listnode5*/); /*new ASuperExpr*/
+  variable10 = NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr( variable6 /*pqualifiednode2*/,  variable7 /*tkwsupernode3*/,  variable5 /*listnode5*/); /*new ASuperExpr*/
   variable9 = variable10;
   variable1 =  variable9 /*pexprnode1*/ /*node_list=*/;
   variable10 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -23766,7 +23773,7 @@ void parser___ReduceAction318___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable6 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable8 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -23786,7 +23793,7 @@ void parser___ReduceAction318___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable7 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable7 /*listnode5*/,  variable10 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable12 = NEW_parser_prod___AInitExpr___init_ainitexpr( variable8 /*pexprnode2*/,  variable9 /*tkwinitnode3*/,  variable7 /*listnode5*/); /*new AInitExpr*/
+  variable12 = NEW_AInitExpr_parser_prod___AInitExpr___init_ainitexpr( variable8 /*pexprnode2*/,  variable9 /*tkwinitnode3*/,  variable7 /*listnode5*/); /*new AInitExpr*/
   variable11 = variable12;
   variable1 =  variable11 /*pexprnode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -23823,9 +23830,9 @@ void parser___ReduceAction319___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
-  variable6 = NEW_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
+  variable6 = NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
   variable5 = variable6;
   variable6 =  variable3 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*tkwinitnode3*/==NIT_NULL) || VAL_ISA( variable6 /*tkwinitnode3*/, COLOR_TKwinit, ID_TKwinit)) /*cast TKwinit*/;
@@ -23842,7 +23849,7 @@ void parser___ReduceAction319___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode5*/,  variable7 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable9 = NEW_parser_prod___AInitExpr___init_ainitexpr( variable5 /*pexprnode2*/,  variable6 /*tkwinitnode3*/,  variable4 /*listnode5*/); /*new AInitExpr*/
+  variable9 = NEW_AInitExpr_parser_prod___AInitExpr___init_ainitexpr( variable5 /*pexprnode2*/,  variable6 /*tkwinitnode3*/,  variable4 /*listnode5*/); /*new AInitExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -23878,7 +23885,7 @@ void parser___ReduceAction320___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable5 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -23895,7 +23902,7 @@ void parser___ReduceAction320___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode4*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode4*/,  variable6 /*listnode3*/) /*IndexedCollection::append*/;
     }
   }
-  variable8 = NEW_parser_prod___ABraExpr___init_abraexpr( variable5 /*pexprnode2*/,  variable4 /*listnode4*/); /*new ABraExpr*/
+  variable8 = NEW_ABraExpr_parser_prod___ABraExpr___init_abraexpr( variable5 /*pexprnode2*/,  variable4 /*listnode4*/); /*new ABraExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -23948,7 +23955,7 @@ void parser___ReduceAction321___action(val_t  self, val_t  param0) {
   variable7 = variable8;
   variable9 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable8 = variable9;
-  variable10 = NEW_array___Array___init(); /*new Array[E]*/
+  variable10 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable9 = variable10;
   variable10 =  variable8 /*nodearraylist1*/;
   variable11 = TAG_Bool(( variable10 /*tkwnewnode2*/==NIT_NULL) || VAL_ISA( variable10 /*tkwnewnode2*/, COLOR_TKwnew, ID_TKwnew)) /*cast TKwnew*/;
@@ -23971,7 +23978,7 @@ void parser___ReduceAction321___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable9 /*listnode6*/,COLOR_abstract_collection___IndexedCollection___append))( variable9 /*listnode6*/,  variable13 /*listnode5*/) /*IndexedCollection::append*/;
     }
   }
-  variable15 = NEW_parser_prod___ANewExpr___init_anewexpr( variable10 /*tkwnewnode2*/,  variable11 /*ptypenode3*/,  variable12 /*tidnode4*/,  variable9 /*listnode6*/); /*new ANewExpr*/
+  variable15 = NEW_ANewExpr_parser_prod___ANewExpr___init_anewexpr( variable10 /*tkwnewnode2*/,  variable11 /*ptypenode3*/,  variable12 /*tidnode4*/,  variable9 /*listnode6*/); /*new ANewExpr*/
   variable14 = variable15;
   variable1 =  variable14 /*pexprnode1*/ /*node_list=*/;
   variable15 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -24033,7 +24040,7 @@ void parser___ReduceAction322___action(val_t  self, val_t  param0) {
   variable12 =  variable4 /*nodearraylist7*/;
   variable13 = TAG_Bool(( variable12 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable12 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction322___action, LOCATE_parser, 12300); nit_exit(1);}
-  variable14 = NEW_parser_prod___ACrangeExpr___init_acrangeexpr( variable11 /*pexprnode2*/,  variable12 /*pexprnode3*/); /*new ACrangeExpr*/
+  variable14 = NEW_ACrangeExpr_parser_prod___ACrangeExpr___init_acrangeexpr( variable11 /*pexprnode2*/,  variable12 /*pexprnode3*/); /*new ACrangeExpr*/
   variable13 = variable14;
   variable1 =  variable13 /*pexprnode1*/ /*node_list=*/;
   variable14 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -24095,7 +24102,7 @@ void parser___ReduceAction323___action(val_t  self, val_t  param0) {
   variable12 =  variable4 /*nodearraylist7*/;
   variable13 = TAG_Bool(( variable12 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable12 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable13)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction323___action, LOCATE_parser, 12327); nit_exit(1);}
-  variable14 = NEW_parser_prod___AOrangeExpr___init_aorangeexpr( variable11 /*pexprnode2*/,  variable12 /*pexprnode3*/); /*new AOrangeExpr*/
+  variable14 = NEW_AOrangeExpr_parser_prod___AOrangeExpr___init_aorangeexpr( variable11 /*pexprnode2*/,  variable12 /*pexprnode3*/); /*new AOrangeExpr*/
   variable13 = variable14;
   variable1 =  variable13 /*pexprnode1*/ /*node_list=*/;
   variable14 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -24127,7 +24134,7 @@ void parser___ReduceAction324___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*listnode2*/==NIT_NULL) || VAL_ISA( variable4 /*listnode2*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -24141,7 +24148,7 @@ void parser___ReduceAction324___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable3 /*listnode3*/,COLOR_abstract_collection___IndexedCollection___append))( variable3 /*listnode3*/,  variable4 /*listnode2*/) /*IndexedCollection::append*/;
     }
   }
-  variable6 = NEW_parser_prod___AArrayExpr___init_aarrayexpr( variable3 /*listnode3*/); /*new AArrayExpr*/
+  variable6 = NEW_AArrayExpr_parser_prod___AArrayExpr___init_aarrayexpr( variable3 /*listnode3*/); /*new AArrayExpr*/
   variable5 = variable6;
   variable1 =  variable5 /*pexprnode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -24175,7 +24182,7 @@ void parser___ReduceAction325___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwselfnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwselfnode2*/, COLOR_TKwself, ID_TKwself)) /*cast TKwself*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction325___action, LOCATE_parser, 12368); nit_exit(1);}
-  variable5 = NEW_parser_prod___ASelfExpr___init_aselfexpr( variable3 /*tkwselfnode2*/); /*new ASelfExpr*/
+  variable5 = NEW_ASelfExpr_parser_prod___ASelfExpr___init_aselfexpr( variable3 /*tkwselfnode2*/); /*new ASelfExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -24209,7 +24216,7 @@ void parser___ReduceAction326___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwtruenode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwtruenode2*/, COLOR_TKwtrue, ID_TKwtrue)) /*cast TKwtrue*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction326___action, LOCATE_parser, 12384); nit_exit(1);}
-  variable5 = NEW_parser_prod___ATrueExpr___init_atrueexpr( variable3 /*tkwtruenode2*/); /*new ATrueExpr*/
+  variable5 = NEW_ATrueExpr_parser_prod___ATrueExpr___init_atrueexpr( variable3 /*tkwtruenode2*/); /*new ATrueExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -24243,7 +24250,7 @@ void parser___ReduceAction327___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwfalsenode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwfalsenode2*/, COLOR_TKwfalse, ID_TKwfalse)) /*cast TKwfalse*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction327___action, LOCATE_parser, 12400); nit_exit(1);}
-  variable5 = NEW_parser_prod___AFalseExpr___init_afalseexpr( variable3 /*tkwfalsenode2*/); /*new AFalseExpr*/
+  variable5 = NEW_AFalseExpr_parser_prod___AFalseExpr___init_afalseexpr( variable3 /*tkwfalsenode2*/); /*new AFalseExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -24277,7 +24284,7 @@ void parser___ReduceAction328___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwnullnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwnullnode2*/, COLOR_TKwnull, ID_TKwnull)) /*cast TKwnull*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction328___action, LOCATE_parser, 12416); nit_exit(1);}
-  variable5 = NEW_parser_prod___ANullExpr___init_anullexpr( variable3 /*tkwnullnode2*/); /*new ANullExpr*/
+  variable5 = NEW_ANullExpr_parser_prod___ANullExpr___init_anullexpr( variable3 /*tkwnullnode2*/); /*new ANullExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -24311,7 +24318,7 @@ void parser___ReduceAction329___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tnumbernode2*/==NIT_NULL) || VAL_ISA( variable3 /*tnumbernode2*/, COLOR_TNumber, ID_TNumber)) /*cast TNumber*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction329___action, LOCATE_parser, 12432); nit_exit(1);}
-  variable5 = NEW_parser_prod___AIntExpr___init_aintexpr( variable3 /*tnumbernode2*/); /*new AIntExpr*/
+  variable5 = NEW_AIntExpr_parser_prod___AIntExpr___init_aintexpr( variable3 /*tnumbernode2*/); /*new AIntExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -24345,7 +24352,7 @@ void parser___ReduceAction330___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tfloatnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tfloatnode2*/, COLOR_TFloat, ID_TFloat)) /*cast TFloat*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction330___action, LOCATE_parser, 12448); nit_exit(1);}
-  variable5 = NEW_parser_prod___AFloatExpr___init_afloatexpr( variable3 /*tfloatnode2*/); /*new AFloatExpr*/
+  variable5 = NEW_AFloatExpr_parser_prod___AFloatExpr___init_afloatexpr( variable3 /*tfloatnode2*/); /*new AFloatExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -24379,7 +24386,7 @@ void parser___ReduceAction331___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tcharnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tcharnode2*/, COLOR_TChar, ID_TChar)) /*cast TChar*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction331___action, LOCATE_parser, 12464); nit_exit(1);}
-  variable5 = NEW_parser_prod___ACharExpr___init_acharexpr( variable3 /*tcharnode2*/); /*new ACharExpr*/
+  variable5 = NEW_ACharExpr_parser_prod___ACharExpr___init_acharexpr( variable3 /*tcharnode2*/); /*new ACharExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -24413,7 +24420,7 @@ void parser___ReduceAction332___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tstringnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tstringnode2*/, COLOR_TString, ID_TString)) /*cast TString*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction332___action, LOCATE_parser, 12480); nit_exit(1);}
-  variable5 = NEW_parser_prod___AStringExpr___init_astringexpr( variable3 /*tstringnode2*/); /*new AStringExpr*/
+  variable5 = NEW_AStringExpr_parser_prod___AStringExpr___init_astringexpr( variable3 /*tstringnode2*/); /*new AStringExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -24550,7 +24557,7 @@ void parser___ReduceAction335___action(val_t  self, val_t  param0) {
   variable14 =  variable4 /*nodearraylist8*/;
   variable15 = TAG_Bool(( variable14 /*ptypenode4*/==NIT_NULL) || VAL_ISA( variable14 /*ptypenode4*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction335___action, LOCATE_parser, 12537); nit_exit(1);}
-  variable16 = NEW_parser_prod___AAsCastExpr___init_aascastexpr( variable12 /*pexprnode2*/,  variable13 /*tkwasnode3*/,  variable14 /*ptypenode4*/); /*new AAsCastExpr*/
+  variable16 = NEW_AAsCastExpr_parser_prod___AAsCastExpr___init_aascastexpr( variable12 /*pexprnode2*/,  variable13 /*tkwasnode3*/,  variable14 /*ptypenode4*/); /*new AAsCastExpr*/
   variable15 = variable16;
   variable1 =  variable15 /*pexprnode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(47)) /*Parser::go_to*/;
@@ -24586,7 +24593,7 @@ void parser___ReduceAction336___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*listnode2*/==NIT_NULL) || VAL_ISA( variable5 /*listnode2*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -24607,7 +24614,7 @@ void parser___ReduceAction336___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable7)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable4 /*listnode4*/,COLOR_abstract_collection___SimpleCollection___add))( variable4 /*listnode4*/,  variable6 /*pexprnode3*/) /*AbstractArray::add*/;
   }
-  variable8 = NEW_parser_prod___ASuperstringExpr___init_asuperstringexpr( variable4 /*listnode4*/); /*new ASuperstringExpr*/
+  variable8 = NEW_ASuperstringExpr_parser_prod___ASuperstringExpr___init_asuperstringexpr( variable4 /*listnode4*/); /*new ASuperstringExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(48)) /*Parser::go_to*/;
@@ -24647,7 +24654,7 @@ void parser___ReduceAction337___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
   variable6 =  variable4 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*listnode2*/==NIT_NULL) || VAL_ISA( variable6 /*listnode2*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -24680,7 +24687,7 @@ void parser___ReduceAction337___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable9)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable5 /*listnode5*/,COLOR_abstract_collection___SimpleCollection___add))( variable5 /*listnode5*/,  variable8 /*pexprnode4*/) /*AbstractArray::add*/;
   }
-  variable10 = NEW_parser_prod___ASuperstringExpr___init_asuperstringexpr( variable5 /*listnode5*/); /*new ASuperstringExpr*/
+  variable10 = NEW_ASuperstringExpr_parser_prod___ASuperstringExpr___init_asuperstringexpr( variable5 /*listnode5*/); /*new ASuperstringExpr*/
   variable9 = variable10;
   variable1 =  variable9 /*pexprnode1*/ /*node_list=*/;
   variable10 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(48)) /*Parser::go_to*/;
@@ -24721,7 +24728,7 @@ void parser___ReduceAction338___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
   variable7 =  variable5 /*nodearraylist1*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode1*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode1*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -24769,7 +24776,7 @@ void parser___ReduceAction339___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tstartstringnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tstartstringnode2*/, COLOR_TStartString, ID_TStartString)) /*cast TStartString*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction339___action, LOCATE_parser, 12650); nit_exit(1);}
-  variable5 = NEW_parser_prod___AStartStringExpr___init_astartstringexpr( variable3 /*tstartstringnode2*/); /*new AStartStringExpr*/
+  variable5 = NEW_AStartStringExpr_parser_prod___AStartStringExpr___init_astartstringexpr( variable3 /*tstartstringnode2*/); /*new AStartStringExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(50)) /*Parser::go_to*/;
@@ -24810,7 +24817,7 @@ void parser___ReduceAction340___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
   variable7 =  variable5 /*nodearraylist1*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode1*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode1*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -24858,7 +24865,7 @@ void parser___ReduceAction341___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tmidstringnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tmidstringnode2*/, COLOR_TMidString, ID_TMidString)) /*cast TMidString*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction341___action, LOCATE_parser, 12691); nit_exit(1);}
-  variable5 = NEW_parser_prod___AMidStringExpr___init_amidstringexpr( variable3 /*tmidstringnode2*/); /*new AMidStringExpr*/
+  variable5 = NEW_AMidStringExpr_parser_prod___AMidStringExpr___init_amidstringexpr( variable3 /*tmidstringnode2*/); /*new AMidStringExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(52)) /*Parser::go_to*/;
@@ -24892,7 +24899,7 @@ void parser___ReduceAction342___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tendstringnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tendstringnode2*/, COLOR_TEndString, ID_TEndString)) /*cast TEndString*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction342___action, LOCATE_parser, 12707); nit_exit(1);}
-  variable5 = NEW_parser_prod___AEndStringExpr___init_aendstringexpr( variable3 /*tendstringnode2*/); /*new AEndStringExpr*/
+  variable5 = NEW_AEndStringExpr_parser_prod___AEndStringExpr___init_aendstringexpr( variable3 /*tendstringnode2*/); /*new AEndStringExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(53)) /*Parser::go_to*/;
@@ -24935,7 +24942,7 @@ void parser___ReduceAction343___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable4 /*nodearraylist3*/;
   variable9 = TAG_Bool(( variable8 /*pexprnode1*/==NIT_NULL) || VAL_ISA( variable8 /*pexprnode1*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -24989,7 +24996,7 @@ void parser___ReduceAction344___action(val_t  self, val_t  param0) {
   variable6 = variable7;
   variable8 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable5 /*nodearraylist3*/;
   variable10 = TAG_Bool(( variable9 /*pexprnode1*/==NIT_NULL) || VAL_ISA( variable9 /*pexprnode1*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -25044,7 +25051,7 @@ void parser___ReduceAction345___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
   variable1 =  variable5 /*listnode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(54)) /*Parser::go_to*/;
@@ -25071,7 +25078,7 @@ void parser___ReduceAction346___action(val_t  self, val_t  param0) {
   trace.file = LOCATE_parser;
   variable0 =  param0;
   variable1 =  NIT_NULL /*null*/;
-  variable3 = NEW_array___Array___init(); /*new Array[E]*/
+  variable3 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable2 = variable3;
   variable1 =  variable2 /*listnode1*/ /*node_list=*/;
   variable3 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(54)) /*Parser::go_to*/;
@@ -25114,7 +25121,7 @@ void parser___ReduceAction347___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable4 /*nodearraylist3*/;
   variable9 = TAG_Bool(( variable8 /*pexprnode1*/==NIT_NULL) || VAL_ISA( variable8 /*pexprnode1*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -25168,7 +25175,7 @@ void parser___ReduceAction348___action(val_t  self, val_t  param0) {
   variable6 = variable7;
   variable8 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable5 /*nodearraylist3*/;
   variable10 = TAG_Bool(( variable9 /*pexprnode1*/==NIT_NULL) || VAL_ISA( variable9 /*pexprnode1*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -25218,7 +25225,7 @@ void parser___ReduceAction349___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*pexprnode1*/==NIT_NULL) || VAL_ISA( variable4 /*pexprnode1*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -25261,7 +25268,7 @@ void parser___ReduceAction350___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
   variable1 =  variable5 /*listnode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(55)) /*Parser::go_to*/;
@@ -25288,7 +25295,7 @@ void parser___ReduceAction351___action(val_t  self, val_t  param0) {
   trace.file = LOCATE_parser;
   variable0 =  param0;
   variable1 =  NIT_NULL /*null*/;
-  variable3 = NEW_array___Array___init(); /*new Array[E]*/
+  variable3 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable2 = variable3;
   variable1 =  variable2 /*listnode1*/ /*node_list=*/;
   variable3 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(55)) /*Parser::go_to*/;
@@ -25331,7 +25338,7 @@ void parser___ReduceAction352___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable4 /*nodearraylist3*/;
   variable9 = TAG_Bool(( variable8 /*pexprnode1*/==NIT_NULL) || VAL_ISA( variable8 /*pexprnode1*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -25385,7 +25392,7 @@ void parser___ReduceAction353___action(val_t  self, val_t  param0) {
   variable6 = variable7;
   variable8 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable5 /*nodearraylist3*/;
   variable10 = TAG_Bool(( variable9 /*pexprnode1*/==NIT_NULL) || VAL_ISA( variable9 /*pexprnode1*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -25476,12 +25483,12 @@ void parser___ReduceAction355___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*tclassidnode3*/==NIT_NULL) || VAL_ISA( variable4 /*tclassidnode3*/, COLOR_TClassid, ID_TClassid)) /*cast TClassid*/;
   if (!UNTAG_Bool(variable5)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction355___action, LOCATE_parser, 12963); nit_exit(1);}
-  variable6 = NEW_parser_prod___AQualified___init_aqualified( variable3 /*listnode2*/,  variable4 /*tclassidnode3*/); /*new AQualified*/
+  variable6 = NEW_AQualified_parser_prod___AQualified___init_aqualified( variable3 /*listnode2*/,  variable4 /*tclassidnode3*/); /*new AQualified*/
   variable5 = variable6;
   variable1 =  variable5 /*pqualifiednode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(58)) /*Parser::go_to*/;
@@ -25517,7 +25524,7 @@ void parser___ReduceAction356___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*listnode2*/==NIT_NULL) || VAL_ISA( variable5 /*listnode2*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -25534,7 +25541,7 @@ void parser___ReduceAction356___action(val_t  self, val_t  param0) {
   variable6 =  variable2 /*nodearraylist2*/;
   variable7 = TAG_Bool(( variable6 /*tclassidnode4*/==NIT_NULL) || VAL_ISA( variable6 /*tclassidnode4*/, COLOR_TClassid, ID_TClassid)) /*cast TClassid*/;
   if (!UNTAG_Bool(variable7)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction356___action, LOCATE_parser, 12991); nit_exit(1);}
-  variable8 = NEW_parser_prod___AQualified___init_aqualified( variable4 /*listnode3*/,  variable6 /*tclassidnode4*/); /*new AQualified*/
+  variable8 = NEW_AQualified_parser_prod___AQualified___init_aqualified( variable4 /*listnode3*/,  variable6 /*tclassidnode4*/); /*new AQualified*/
   variable7 = variable8;
   variable1 =  variable7 /*pqualifiednode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(58)) /*Parser::go_to*/;
@@ -25566,7 +25573,7 @@ void parser___ReduceAction357___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*listnode2*/==NIT_NULL) || VAL_ISA( variable4 /*listnode2*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -25580,7 +25587,7 @@ void parser___ReduceAction357___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable3 /*listnode3*/,COLOR_abstract_collection___IndexedCollection___append))( variable3 /*listnode3*/,  variable4 /*listnode2*/) /*IndexedCollection::append*/;
     }
   }
-  variable6 = NEW_parser_prod___AQualified___init_aqualified( variable3 /*listnode3*/,  NIT_NULL /*null*/); /*new AQualified*/
+  variable6 = NEW_AQualified_parser_prod___AQualified___init_aqualified( variable3 /*listnode3*/,  NIT_NULL /*null*/); /*new AQualified*/
   variable5 = variable6;
   variable1 =  variable5 /*pqualifiednode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(58)) /*Parser::go_to*/;
@@ -25738,7 +25745,7 @@ void parser___ReduceAction362___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*listnode2*/==NIT_NULL) || VAL_ISA( variable4 /*listnode2*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -25752,7 +25759,7 @@ void parser___ReduceAction362___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable3 /*listnode3*/,COLOR_abstract_collection___IndexedCollection___append))( variable3 /*listnode3*/,  variable4 /*listnode2*/) /*IndexedCollection::append*/;
     }
   }
-  variable6 = NEW_parser_prod___ADoc___init_adoc( variable3 /*listnode3*/); /*new ADoc*/
+  variable6 = NEW_ADoc_parser_prod___ADoc___init_adoc( variable3 /*listnode3*/); /*new ADoc*/
   variable5 = variable6;
   variable1 =  variable5 /*pdocnode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(62)) /*Parser::go_to*/;
@@ -25787,7 +25794,7 @@ void parser___ReduceAction363___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable2 /*nodearraylist2*/;
   variable6 = TAG_Bool(( variable5 /*listnode2*/==NIT_NULL) || VAL_ISA( variable5 /*listnode2*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -25801,7 +25808,7 @@ void parser___ReduceAction363___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode3*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode3*/,  variable5 /*listnode2*/) /*IndexedCollection::append*/;
     }
   }
-  variable7 = NEW_parser_prod___ADoc___init_adoc( variable4 /*listnode3*/); /*new ADoc*/
+  variable7 = NEW_ADoc_parser_prod___ADoc___init_adoc( variable4 /*listnode3*/); /*new ADoc*/
   variable6 = variable7;
   variable1 =  variable6 /*pdocnode1*/ /*node_list=*/;
   variable7 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(62)) /*Parser::go_to*/;
@@ -26002,12 +26009,12 @@ void parser___ReduceAction370___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*tclassidnode2*/==NIT_NULL) || VAL_ISA( variable4 /*tclassidnode2*/, COLOR_TClassid, ID_TClassid)) /*cast TClassid*/;
   if (!UNTAG_Bool(variable5)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction370___action, LOCATE_parser, 13200); nit_exit(1);}
-  variable6 = NEW_parser_prod___AType___init_atype( variable4 /*tclassidnode2*/,  variable3 /*listnode3*/); /*new AType*/
+  variable6 = NEW_AType_parser_prod___AType___init_atype( variable4 /*tclassidnode2*/,  variable3 /*listnode3*/); /*new AType*/
   variable5 = variable6;
   variable1 =  variable5 /*ptypenode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(65)) /*Parser::go_to*/;
@@ -26122,7 +26129,7 @@ void parser___ReduceAction372___action(val_t  self, val_t  param0) {
   variable18 =  variable2 /*nodearraylist11*/;
   variable19 = TAG_Bool(( variable18 /*pexprnode7*/==NIT_NULL) || VAL_ISA( variable18 /*pexprnode7*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable19)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction372___action, LOCATE_parser, 13250); nit_exit(1);}
-  variable20 = NEW_parser_prod___AIfexprExpr___init_aifexprexpr( variable13 /*tkwifnode2*/,  variable14 /*pexprnode3*/,  variable15 /*tkwthennode4*/,  variable16 /*pexprnode5*/,  variable17 /*tkwelsenode6*/,  variable18 /*pexprnode7*/); /*new AIfexprExpr*/
+  variable20 = NEW_AIfexprExpr_parser_prod___AIfexprExpr___init_aifexprexpr( variable13 /*tkwifnode2*/,  variable14 /*pexprnode3*/,  variable15 /*tkwthennode4*/,  variable16 /*pexprnode5*/,  variable17 /*tkwelsenode6*/,  variable18 /*pexprnode7*/); /*new AIfexprExpr*/
   variable19 = variable20;
   variable1 =  variable19 /*pexprnode1*/ /*node_list=*/;
   variable20 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(66)) /*Parser::go_to*/;
@@ -26200,7 +26207,7 @@ void parser___ReduceAction374___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction374___action, LOCATE_parser, 13289); nit_exit(1);}
-  variable9 = NEW_parser_prod___AOrExpr___init_aorexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AOrExpr*/
+  variable9 = NEW_AOrExpr_parser_prod___AOrExpr___init_aorexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AOrExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(67)) /*Parser::go_to*/;
@@ -26247,7 +26254,7 @@ void parser___ReduceAction375___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction375___action, LOCATE_parser, 13311); nit_exit(1);}
-  variable9 = NEW_parser_prod___AAndExpr___init_aandexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AAndExpr*/
+  variable9 = NEW_AAndExpr_parser_prod___AAndExpr___init_aandexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AAndExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(67)) /*Parser::go_to*/;
@@ -26322,7 +26329,7 @@ void parser___ReduceAction377___action(val_t  self, val_t  param0) {
   variable6 =  variable2 /*nodearraylist3*/;
   variable7 = TAG_Bool(( variable6 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable6 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable7)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction377___action, LOCATE_parser, 13345); nit_exit(1);}
-  variable8 = NEW_parser_prod___ANotExpr___init_anotexpr( variable5 /*tkwnotnode2*/,  variable6 /*pexprnode3*/); /*new ANotExpr*/
+  variable8 = NEW_ANotExpr_parser_prod___ANotExpr___init_anotexpr( variable5 /*tkwnotnode2*/,  variable6 /*pexprnode3*/); /*new ANotExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(68)) /*Parser::go_to*/;
@@ -26400,7 +26407,7 @@ void parser___ReduceAction379___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction379___action, LOCATE_parser, 13380); nit_exit(1);}
-  variable9 = NEW_parser_prod___AEqExpr___init_aeqexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AEqExpr*/
+  variable9 = NEW_AEqExpr_parser_prod___AEqExpr___init_aeqexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AEqExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(69)) /*Parser::go_to*/;
@@ -26447,7 +26454,7 @@ void parser___ReduceAction380___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction380___action, LOCATE_parser, 13402); nit_exit(1);}
-  variable9 = NEW_parser_prod___AEeExpr___init_aeeexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AEeExpr*/
+  variable9 = NEW_AEeExpr_parser_prod___AEeExpr___init_aeeexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AEeExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(69)) /*Parser::go_to*/;
@@ -26494,7 +26501,7 @@ void parser___ReduceAction381___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction381___action, LOCATE_parser, 13424); nit_exit(1);}
-  variable9 = NEW_parser_prod___ANeExpr___init_aneexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ANeExpr*/
+  variable9 = NEW_ANeExpr_parser_prod___ANeExpr___init_aneexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ANeExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(69)) /*Parser::go_to*/;
@@ -26541,7 +26548,7 @@ void parser___ReduceAction382___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction382___action, LOCATE_parser, 13446); nit_exit(1);}
-  variable9 = NEW_parser_prod___ALtExpr___init_altexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ALtExpr*/
+  variable9 = NEW_ALtExpr_parser_prod___ALtExpr___init_altexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ALtExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(69)) /*Parser::go_to*/;
@@ -26588,7 +26595,7 @@ void parser___ReduceAction383___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction383___action, LOCATE_parser, 13468); nit_exit(1);}
-  variable9 = NEW_parser_prod___ALeExpr___init_aleexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ALeExpr*/
+  variable9 = NEW_ALeExpr_parser_prod___ALeExpr___init_aleexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ALeExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(69)) /*Parser::go_to*/;
@@ -26635,7 +26642,7 @@ void parser___ReduceAction384___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction384___action, LOCATE_parser, 13490); nit_exit(1);}
-  variable9 = NEW_parser_prod___AGtExpr___init_agtexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AGtExpr*/
+  variable9 = NEW_AGtExpr_parser_prod___AGtExpr___init_agtexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AGtExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(69)) /*Parser::go_to*/;
@@ -26682,7 +26689,7 @@ void parser___ReduceAction385___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction385___action, LOCATE_parser, 13512); nit_exit(1);}
-  variable9 = NEW_parser_prod___AGeExpr___init_ageexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AGeExpr*/
+  variable9 = NEW_AGeExpr_parser_prod___AGeExpr___init_ageexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AGeExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(69)) /*Parser::go_to*/;
@@ -26729,7 +26736,7 @@ void parser___ReduceAction386___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction386___action, LOCATE_parser, 13534); nit_exit(1);}
-  variable9 = NEW_parser_prod___AStarshipExpr___init_astarshipexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AStarshipExpr*/
+  variable9 = NEW_AStarshipExpr_parser_prod___AStarshipExpr___init_astarshipexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AStarshipExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(69)) /*Parser::go_to*/;
@@ -26776,7 +26783,7 @@ void parser___ReduceAction387___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*ptypenode3*/==NIT_NULL) || VAL_ISA( variable7 /*ptypenode3*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction387___action, LOCATE_parser, 13556); nit_exit(1);}
-  variable9 = NEW_parser_prod___AIsaExpr___init_aisaexpr( variable6 /*pexprnode2*/,  variable7 /*ptypenode3*/); /*new AIsaExpr*/
+  variable9 = NEW_AIsaExpr_parser_prod___AIsaExpr___init_aisaexpr( variable6 /*pexprnode2*/,  variable7 /*ptypenode3*/); /*new AIsaExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(69)) /*Parser::go_to*/;
@@ -26854,7 +26861,7 @@ void parser___ReduceAction389___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction389___action, LOCATE_parser, 13591); nit_exit(1);}
-  variable9 = NEW_parser_prod___APlusExpr___init_aplusexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new APlusExpr*/
+  variable9 = NEW_APlusExpr_parser_prod___APlusExpr___init_aplusexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new APlusExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(70)) /*Parser::go_to*/;
@@ -26901,7 +26908,7 @@ void parser___ReduceAction390___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction390___action, LOCATE_parser, 13613); nit_exit(1);}
-  variable9 = NEW_parser_prod___AMinusExpr___init_aminusexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AMinusExpr*/
+  variable9 = NEW_AMinusExpr_parser_prod___AMinusExpr___init_aminusexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AMinusExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(70)) /*Parser::go_to*/;
@@ -26979,7 +26986,7 @@ void parser___ReduceAction392___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction392___action, LOCATE_parser, 13648); nit_exit(1);}
-  variable9 = NEW_parser_prod___AStarExpr___init_astarexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AStarExpr*/
+  variable9 = NEW_AStarExpr_parser_prod___AStarExpr___init_astarexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AStarExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(71)) /*Parser::go_to*/;
@@ -27026,7 +27033,7 @@ void parser___ReduceAction393___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction393___action, LOCATE_parser, 13670); nit_exit(1);}
-  variable9 = NEW_parser_prod___ASlashExpr___init_aslashexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ASlashExpr*/
+  variable9 = NEW_ASlashExpr_parser_prod___ASlashExpr___init_aslashexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ASlashExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(71)) /*Parser::go_to*/;
@@ -27073,7 +27080,7 @@ void parser___ReduceAction394___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction394___action, LOCATE_parser, 13692); nit_exit(1);}
-  variable9 = NEW_parser_prod___APercentExpr___init_apercentexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new APercentExpr*/
+  variable9 = NEW_APercentExpr_parser_prod___APercentExpr___init_apercentexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new APercentExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(71)) /*Parser::go_to*/;
@@ -27148,7 +27155,7 @@ void parser___ReduceAction396___action(val_t  self, val_t  param0) {
   variable6 =  variable2 /*nodearraylist3*/;
   variable7 = TAG_Bool(( variable6 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable6 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable7)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction396___action, LOCATE_parser, 13726); nit_exit(1);}
-  variable8 = NEW_parser_prod___AUminusExpr___init_auminusexpr( variable5 /*tminusnode2*/,  variable6 /*pexprnode3*/); /*new AUminusExpr*/
+  variable8 = NEW_AUminusExpr_parser_prod___AUminusExpr___init_auminusexpr( variable5 /*tminusnode2*/,  variable6 /*pexprnode3*/); /*new AUminusExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(72)) /*Parser::go_to*/;
@@ -27192,7 +27199,7 @@ void parser___ReduceAction397___action(val_t  self, val_t  param0) {
   variable6 =  variable2 /*nodearraylist3*/;
   variable7 = TAG_Bool(( variable6 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable6 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable7)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction397___action, LOCATE_parser, 13747); nit_exit(1);}
-  variable8 = NEW_parser_prod___AOnceExpr___init_aonceexpr( variable5 /*tkwoncenode2*/,  variable6 /*pexprnode3*/); /*new AOnceExpr*/
+  variable8 = NEW_AOnceExpr_parser_prod___AOnceExpr___init_aonceexpr( variable5 /*tkwoncenode2*/,  variable6 /*pexprnode3*/); /*new AOnceExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(72)) /*Parser::go_to*/;
@@ -27266,7 +27273,7 @@ void parser___ReduceAction399___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
   variable7 =  variable5 /*nodearraylist1*/;
   variable8 = TAG_Bool(( variable7 /*tkwnewnode2*/==NIT_NULL) || VAL_ISA( variable7 /*tkwnewnode2*/, COLOR_TKwnew, ID_TKwnew)) /*cast TKwnew*/;
@@ -27286,7 +27293,7 @@ void parser___ReduceAction399___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable6 /*listnode6*/,COLOR_abstract_collection___IndexedCollection___append))( variable6 /*listnode6*/,  variable9 /*listnode5*/) /*IndexedCollection::append*/;
     }
   }
-  variable11 = NEW_parser_prod___ANewExpr___init_anewexpr( variable7 /*tkwnewnode2*/,  variable8 /*ptypenode3*/,  NIT_NULL /*null*/,  variable6 /*listnode6*/); /*new ANewExpr*/
+  variable11 = NEW_ANewExpr_parser_prod___ANewExpr___init_anewexpr( variable7 /*tkwnewnode2*/,  variable8 /*ptypenode3*/,  NIT_NULL /*null*/,  variable6 /*listnode6*/); /*new ANewExpr*/
   variable10 = variable11;
   variable1 =  variable10 /*pexprnode1*/ /*node_list=*/;
   variable11 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(73)) /*Parser::go_to*/;
@@ -27333,7 +27340,7 @@ void parser___ReduceAction400___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*tattridnode3*/==NIT_NULL) || VAL_ISA( variable7 /*tattridnode3*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction400___action, LOCATE_parser, 13816); nit_exit(1);}
-  variable9 = NEW_parser_prod___AAttrExpr___init_aattrexpr( variable6 /*pexprnode2*/,  variable7 /*tattridnode3*/); /*new AAttrExpr*/
+  variable9 = NEW_AAttrExpr_parser_prod___AAttrExpr___init_aattrexpr( variable6 /*pexprnode2*/,  variable7 /*tattridnode3*/); /*new AAttrExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(74)) /*Parser::go_to*/;
@@ -27365,12 +27372,12 @@ void parser___ReduceAction401___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
+  variable4 = NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*tattridnode3*/==NIT_NULL) || VAL_ISA( variable4 /*tattridnode3*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable5)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction401___action, LOCATE_parser, 13835); nit_exit(1);}
-  variable6 = NEW_parser_prod___AAttrExpr___init_aattrexpr( variable3 /*pexprnode2*/,  variable4 /*tattridnode3*/); /*new AAttrExpr*/
+  variable6 = NEW_AAttrExpr_parser_prod___AAttrExpr___init_aattrexpr( variable3 /*pexprnode2*/,  variable4 /*tattridnode3*/); /*new AAttrExpr*/
   variable5 = variable6;
   variable1 =  variable5 /*pexprnode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(74)) /*Parser::go_to*/;
@@ -27416,7 +27423,7 @@ void parser___ReduceAction402___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable6 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable8 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -27436,7 +27443,7 @@ void parser___ReduceAction402___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable7 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable7 /*listnode5*/,  variable10 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable12 = NEW_parser_prod___ACallExpr___init_acallexpr( variable8 /*pexprnode2*/,  variable9 /*tidnode3*/,  variable7 /*listnode5*/); /*new ACallExpr*/
+  variable12 = NEW_ACallExpr_parser_prod___ACallExpr___init_acallexpr( variable8 /*pexprnode2*/,  variable9 /*tidnode3*/,  variable7 /*listnode5*/); /*new ACallExpr*/
   variable11 = variable12;
   variable1 =  variable11 /*pexprnode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(74)) /*Parser::go_to*/;
@@ -27473,9 +27480,9 @@ void parser___ReduceAction403___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
-  variable6 = NEW_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
+  variable6 = NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
   variable5 = variable6;
   variable6 =  variable3 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*tidnode3*/==NIT_NULL) || VAL_ISA( variable6 /*tidnode3*/, COLOR_TId, ID_TId)) /*cast TId*/;
@@ -27492,7 +27499,7 @@ void parser___ReduceAction403___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode5*/,  variable7 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable9 = NEW_parser_prod___ACallExpr___init_acallexpr( variable5 /*pexprnode2*/,  variable6 /*tidnode3*/,  variable4 /*listnode5*/); /*new ACallExpr*/
+  variable9 = NEW_ACallExpr_parser_prod___ACallExpr___init_acallexpr( variable5 /*pexprnode2*/,  variable6 /*tidnode3*/,  variable4 /*listnode5*/); /*new ACallExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(74)) /*Parser::go_to*/;
@@ -27528,7 +27535,7 @@ void parser___ReduceAction404___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*tkwsupernode3*/==NIT_NULL) || VAL_ISA( variable5 /*tkwsupernode3*/, COLOR_TKwsuper, ID_TKwsuper)) /*cast TKwsuper*/;
@@ -27545,7 +27552,7 @@ void parser___ReduceAction404___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode5*/,  variable6 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable8 = NEW_parser_prod___ASuperExpr___init_asuperexpr( NIT_NULL /*null*/,  variable5 /*tkwsupernode3*/,  variable4 /*listnode5*/); /*new ASuperExpr*/
+  variable8 = NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr( NIT_NULL /*null*/,  variable5 /*tkwsupernode3*/,  variable4 /*listnode5*/); /*new ASuperExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(74)) /*Parser::go_to*/;
@@ -27585,7 +27592,7 @@ void parser___ReduceAction405___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
   variable6 =  variable4 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*pqualifiednode2*/==NIT_NULL) || VAL_ISA( variable6 /*pqualifiednode2*/, COLOR_PQualified, ID_PQualified)) /*cast PQualified*/;
@@ -27605,7 +27612,7 @@ void parser___ReduceAction405___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable5 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable5 /*listnode5*/,  variable8 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable10 = NEW_parser_prod___ASuperExpr___init_asuperexpr( variable6 /*pqualifiednode2*/,  variable7 /*tkwsupernode3*/,  variable5 /*listnode5*/); /*new ASuperExpr*/
+  variable10 = NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr( variable6 /*pqualifiednode2*/,  variable7 /*tkwsupernode3*/,  variable5 /*listnode5*/); /*new ASuperExpr*/
   variable9 = variable10;
   variable1 =  variable9 /*pexprnode1*/ /*node_list=*/;
   variable10 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(74)) /*Parser::go_to*/;
@@ -27651,7 +27658,7 @@ void parser___ReduceAction406___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable6 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable8 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -27671,7 +27678,7 @@ void parser___ReduceAction406___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable7 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable7 /*listnode5*/,  variable10 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable12 = NEW_parser_prod___AInitExpr___init_ainitexpr( variable8 /*pexprnode2*/,  variable9 /*tkwinitnode3*/,  variable7 /*listnode5*/); /*new AInitExpr*/
+  variable12 = NEW_AInitExpr_parser_prod___AInitExpr___init_ainitexpr( variable8 /*pexprnode2*/,  variable9 /*tkwinitnode3*/,  variable7 /*listnode5*/); /*new AInitExpr*/
   variable11 = variable12;
   variable1 =  variable11 /*pexprnode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(74)) /*Parser::go_to*/;
@@ -27708,9 +27715,9 @@ void parser___ReduceAction407___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
-  variable6 = NEW_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
+  variable6 = NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
   variable5 = variable6;
   variable6 =  variable3 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*tkwinitnode3*/==NIT_NULL) || VAL_ISA( variable6 /*tkwinitnode3*/, COLOR_TKwinit, ID_TKwinit)) /*cast TKwinit*/;
@@ -27727,7 +27734,7 @@ void parser___ReduceAction407___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode5*/,  variable7 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable9 = NEW_parser_prod___AInitExpr___init_ainitexpr( variable5 /*pexprnode2*/,  variable6 /*tkwinitnode3*/,  variable4 /*listnode5*/); /*new AInitExpr*/
+  variable9 = NEW_AInitExpr_parser_prod___AInitExpr___init_ainitexpr( variable5 /*pexprnode2*/,  variable6 /*tkwinitnode3*/,  variable4 /*listnode5*/); /*new AInitExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(74)) /*Parser::go_to*/;
@@ -27780,7 +27787,7 @@ void parser___ReduceAction408___action(val_t  self, val_t  param0) {
   variable7 = variable8;
   variable9 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable8 = variable9;
-  variable10 = NEW_array___Array___init(); /*new Array[E]*/
+  variable10 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable9 = variable10;
   variable10 =  variable8 /*nodearraylist1*/;
   variable11 = TAG_Bool(( variable10 /*tkwnewnode2*/==NIT_NULL) || VAL_ISA( variable10 /*tkwnewnode2*/, COLOR_TKwnew, ID_TKwnew)) /*cast TKwnew*/;
@@ -27803,7 +27810,7 @@ void parser___ReduceAction408___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable9 /*listnode6*/,COLOR_abstract_collection___IndexedCollection___append))( variable9 /*listnode6*/,  variable13 /*listnode5*/) /*IndexedCollection::append*/;
     }
   }
-  variable15 = NEW_parser_prod___ANewExpr___init_anewexpr( variable10 /*tkwnewnode2*/,  variable11 /*ptypenode3*/,  variable12 /*tidnode4*/,  variable9 /*listnode6*/); /*new ANewExpr*/
+  variable15 = NEW_ANewExpr_parser_prod___ANewExpr___init_anewexpr( variable10 /*tkwnewnode2*/,  variable11 /*ptypenode3*/,  variable12 /*tidnode4*/,  variable9 /*listnode6*/); /*new ANewExpr*/
   variable14 = variable15;
   variable1 =  variable14 /*pexprnode1*/ /*node_list=*/;
   variable15 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(74)) /*Parser::go_to*/;
@@ -27837,7 +27844,7 @@ void parser___ReduceAction409___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwselfnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwselfnode2*/, COLOR_TKwself, ID_TKwself)) /*cast TKwself*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction409___action, LOCATE_parser, 14082); nit_exit(1);}
-  variable5 = NEW_parser_prod___ASelfExpr___init_aselfexpr( variable3 /*tkwselfnode2*/); /*new ASelfExpr*/
+  variable5 = NEW_ASelfExpr_parser_prod___ASelfExpr___init_aselfexpr( variable3 /*tkwselfnode2*/); /*new ASelfExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(74)) /*Parser::go_to*/;
@@ -27871,7 +27878,7 @@ void parser___ReduceAction410___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwtruenode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwtruenode2*/, COLOR_TKwtrue, ID_TKwtrue)) /*cast TKwtrue*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction410___action, LOCATE_parser, 14098); nit_exit(1);}
-  variable5 = NEW_parser_prod___ATrueExpr___init_atrueexpr( variable3 /*tkwtruenode2*/); /*new ATrueExpr*/
+  variable5 = NEW_ATrueExpr_parser_prod___ATrueExpr___init_atrueexpr( variable3 /*tkwtruenode2*/); /*new ATrueExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(74)) /*Parser::go_to*/;
@@ -27905,7 +27912,7 @@ void parser___ReduceAction411___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwfalsenode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwfalsenode2*/, COLOR_TKwfalse, ID_TKwfalse)) /*cast TKwfalse*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction411___action, LOCATE_parser, 14114); nit_exit(1);}
-  variable5 = NEW_parser_prod___AFalseExpr___init_afalseexpr( variable3 /*tkwfalsenode2*/); /*new AFalseExpr*/
+  variable5 = NEW_AFalseExpr_parser_prod___AFalseExpr___init_afalseexpr( variable3 /*tkwfalsenode2*/); /*new AFalseExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(74)) /*Parser::go_to*/;
@@ -27939,7 +27946,7 @@ void parser___ReduceAction412___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwnullnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwnullnode2*/, COLOR_TKwnull, ID_TKwnull)) /*cast TKwnull*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction412___action, LOCATE_parser, 14130); nit_exit(1);}
-  variable5 = NEW_parser_prod___ANullExpr___init_anullexpr( variable3 /*tkwnullnode2*/); /*new ANullExpr*/
+  variable5 = NEW_ANullExpr_parser_prod___ANullExpr___init_anullexpr( variable3 /*tkwnullnode2*/); /*new ANullExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(74)) /*Parser::go_to*/;
@@ -27973,7 +27980,7 @@ void parser___ReduceAction413___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tnumbernode2*/==NIT_NULL) || VAL_ISA( variable3 /*tnumbernode2*/, COLOR_TNumber, ID_TNumber)) /*cast TNumber*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction413___action, LOCATE_parser, 14146); nit_exit(1);}
-  variable5 = NEW_parser_prod___AIntExpr___init_aintexpr( variable3 /*tnumbernode2*/); /*new AIntExpr*/
+  variable5 = NEW_AIntExpr_parser_prod___AIntExpr___init_aintexpr( variable3 /*tnumbernode2*/); /*new AIntExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(74)) /*Parser::go_to*/;
@@ -28007,7 +28014,7 @@ void parser___ReduceAction414___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tfloatnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tfloatnode2*/, COLOR_TFloat, ID_TFloat)) /*cast TFloat*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction414___action, LOCATE_parser, 14162); nit_exit(1);}
-  variable5 = NEW_parser_prod___AFloatExpr___init_afloatexpr( variable3 /*tfloatnode2*/); /*new AFloatExpr*/
+  variable5 = NEW_AFloatExpr_parser_prod___AFloatExpr___init_afloatexpr( variable3 /*tfloatnode2*/); /*new AFloatExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(74)) /*Parser::go_to*/;
@@ -28041,7 +28048,7 @@ void parser___ReduceAction415___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tcharnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tcharnode2*/, COLOR_TChar, ID_TChar)) /*cast TChar*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction415___action, LOCATE_parser, 14178); nit_exit(1);}
-  variable5 = NEW_parser_prod___ACharExpr___init_acharexpr( variable3 /*tcharnode2*/); /*new ACharExpr*/
+  variable5 = NEW_ACharExpr_parser_prod___ACharExpr___init_acharexpr( variable3 /*tcharnode2*/); /*new ACharExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(74)) /*Parser::go_to*/;
@@ -28075,7 +28082,7 @@ void parser___ReduceAction416___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tstringnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tstringnode2*/, COLOR_TString, ID_TString)) /*cast TString*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction416___action, LOCATE_parser, 14194); nit_exit(1);}
-  variable5 = NEW_parser_prod___AStringExpr___init_astringexpr( variable3 /*tstringnode2*/); /*new AStringExpr*/
+  variable5 = NEW_AStringExpr_parser_prod___AStringExpr___init_astringexpr( variable3 /*tstringnode2*/); /*new AStringExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(74)) /*Parser::go_to*/;
@@ -28212,7 +28219,7 @@ void parser___ReduceAction419___action(val_t  self, val_t  param0) {
   variable14 =  variable4 /*nodearraylist8*/;
   variable15 = TAG_Bool(( variable14 /*ptypenode4*/==NIT_NULL) || VAL_ISA( variable14 /*ptypenode4*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction419___action, LOCATE_parser, 14251); nit_exit(1);}
-  variable16 = NEW_parser_prod___AAsCastExpr___init_aascastexpr( variable12 /*pexprnode2*/,  variable13 /*tkwasnode3*/,  variable14 /*ptypenode4*/); /*new AAsCastExpr*/
+  variable16 = NEW_AAsCastExpr_parser_prod___AAsCastExpr___init_aascastexpr( variable12 /*pexprnode2*/,  variable13 /*tkwasnode3*/,  variable14 /*ptypenode4*/); /*new AAsCastExpr*/
   variable15 = variable16;
   variable1 =  variable15 /*pexprnode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(74)) /*Parser::go_to*/;
@@ -28284,7 +28291,7 @@ void parser___ReduceAction421___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
   variable7 =  variable4 /*nodearraylist2*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -28293,7 +28300,7 @@ void parser___ReduceAction421___action(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable8)) { /*if*/
     ((array___AbstractArray___add_t)CALL( variable6 /*listnode3*/,COLOR_abstract_collection___SimpleCollection___add))( variable6 /*listnode3*/,  variable7 /*pexprnode2*/) /*AbstractArray::add*/;
   }
-  variable9 = NEW_parser_prod___ABlockExpr___init_ablockexpr( variable6 /*listnode3*/); /*new ABlockExpr*/
+  variable9 = NEW_ABlockExpr_parser_prod___ABlockExpr___init_ablockexpr( variable6 /*listnode3*/); /*new ABlockExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(75)) /*Parser::go_to*/;
@@ -28338,7 +28345,7 @@ void parser___ReduceAction422___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable5 /*nodearraylist2*/;
   variable9 = TAG_Bool(( variable8 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable8 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -28359,7 +28366,7 @@ void parser___ReduceAction422___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable7 /*listnode4*/,COLOR_abstract_collection___IndexedCollection___append))( variable7 /*listnode4*/,  variable9 /*listnode3*/) /*IndexedCollection::append*/;
     }
   }
-  variable11 = NEW_parser_prod___ABlockExpr___init_ablockexpr( variable7 /*listnode4*/); /*new ABlockExpr*/
+  variable11 = NEW_ABlockExpr_parser_prod___ABlockExpr___init_ablockexpr( variable7 /*listnode4*/); /*new ABlockExpr*/
   variable10 = variable11;
   variable1 =  variable10 /*pexprnode1*/ /*node_list=*/;
   variable11 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(75)) /*Parser::go_to*/;
@@ -28512,7 +28519,7 @@ void parser___ReduceAction427___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwreturnnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwreturnnode2*/, COLOR_TKwreturn, ID_TKwreturn)) /*cast TKwreturn*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction427___action, LOCATE_parser, 14387); nit_exit(1);}
-  variable5 = NEW_parser_prod___AReturnExpr___init_areturnexpr( variable3 /*tkwreturnnode2*/,  NIT_NULL /*null*/); /*new AReturnExpr*/
+  variable5 = NEW_AReturnExpr_parser_prod___AReturnExpr___init_areturnexpr( variable3 /*tkwreturnnode2*/,  NIT_NULL /*null*/); /*new AReturnExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(76)) /*Parser::go_to*/;
@@ -28553,7 +28560,7 @@ void parser___ReduceAction428___action(val_t  self, val_t  param0) {
   variable5 =  variable2 /*nodearraylist2*/;
   variable6 = TAG_Bool(( variable5 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable5 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable6)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction428___action, LOCATE_parser, 14407); nit_exit(1);}
-  variable7 = NEW_parser_prod___AReturnExpr___init_areturnexpr( variable4 /*tkwreturnnode2*/,  variable5 /*pexprnode3*/); /*new AReturnExpr*/
+  variable7 = NEW_AReturnExpr_parser_prod___AReturnExpr___init_areturnexpr( variable4 /*tkwreturnnode2*/,  variable5 /*pexprnode3*/); /*new AReturnExpr*/
   variable6 = variable7;
   variable1 =  variable6 /*pexprnode1*/ /*node_list=*/;
   variable7 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(76)) /*Parser::go_to*/;
@@ -28587,7 +28594,7 @@ void parser___ReduceAction429___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwbreaknode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwbreaknode2*/, COLOR_TKwbreak, ID_TKwbreak)) /*cast TKwbreak*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction429___action, LOCATE_parser, 14424); nit_exit(1);}
-  variable5 = NEW_parser_prod___ABreakExpr___init_abreakexpr( variable3 /*tkwbreaknode2*/); /*new ABreakExpr*/
+  variable5 = NEW_ABreakExpr_parser_prod___ABreakExpr___init_abreakexpr( variable3 /*tkwbreaknode2*/); /*new ABreakExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(76)) /*Parser::go_to*/;
@@ -28621,7 +28628,7 @@ void parser___ReduceAction430___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwabortnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwabortnode2*/, COLOR_TKwabort, ID_TKwabort)) /*cast TKwabort*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction430___action, LOCATE_parser, 14440); nit_exit(1);}
-  variable5 = NEW_parser_prod___AAbortExpr___init_aabortexpr( variable3 /*tkwabortnode2*/); /*new AAbortExpr*/
+  variable5 = NEW_AAbortExpr_parser_prod___AAbortExpr___init_aabortexpr( variable3 /*tkwabortnode2*/); /*new AAbortExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(76)) /*Parser::go_to*/;
@@ -28655,7 +28662,7 @@ void parser___ReduceAction431___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwcontinuenode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwcontinuenode2*/, COLOR_TKwcontinue, ID_TKwcontinue)) /*cast TKwcontinue*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction431___action, LOCATE_parser, 14456); nit_exit(1);}
-  variable5 = NEW_parser_prod___AContinueExpr___init_acontinueexpr( variable3 /*tkwcontinuenode2*/); /*new AContinueExpr*/
+  variable5 = NEW_AContinueExpr_parser_prod___AContinueExpr___init_acontinueexpr( variable3 /*tkwcontinuenode2*/); /*new AContinueExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(76)) /*Parser::go_to*/;
@@ -28856,7 +28863,7 @@ void parser___ReduceAction437___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable6 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable8 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -28876,7 +28883,7 @@ void parser___ReduceAction437___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable7 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable7 /*listnode5*/,  variable10 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable12 = NEW_parser_prod___ACallExpr___init_acallexpr( variable8 /*pexprnode2*/,  variable9 /*tidnode3*/,  variable7 /*listnode5*/); /*new ACallExpr*/
+  variable12 = NEW_ACallExpr_parser_prod___ACallExpr___init_acallexpr( variable8 /*pexprnode2*/,  variable9 /*tidnode3*/,  variable7 /*listnode5*/); /*new ACallExpr*/
   variable11 = variable12;
   variable1 =  variable11 /*pexprnode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(76)) /*Parser::go_to*/;
@@ -28913,9 +28920,9 @@ void parser___ReduceAction438___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
-  variable6 = NEW_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
+  variable6 = NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
   variable5 = variable6;
   variable6 =  variable3 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*tidnode3*/==NIT_NULL) || VAL_ISA( variable6 /*tidnode3*/, COLOR_TId, ID_TId)) /*cast TId*/;
@@ -28932,7 +28939,7 @@ void parser___ReduceAction438___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode5*/,  variable7 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable9 = NEW_parser_prod___ACallExpr___init_acallexpr( variable5 /*pexprnode2*/,  variable6 /*tidnode3*/,  variable4 /*listnode5*/); /*new ACallExpr*/
+  variable9 = NEW_ACallExpr_parser_prod___ACallExpr___init_acallexpr( variable5 /*pexprnode2*/,  variable6 /*tidnode3*/,  variable4 /*listnode5*/); /*new ACallExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(76)) /*Parser::go_to*/;
@@ -28968,7 +28975,7 @@ void parser___ReduceAction439___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*tkwsupernode3*/==NIT_NULL) || VAL_ISA( variable5 /*tkwsupernode3*/, COLOR_TKwsuper, ID_TKwsuper)) /*cast TKwsuper*/;
@@ -28985,7 +28992,7 @@ void parser___ReduceAction439___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode5*/,  variable6 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable8 = NEW_parser_prod___ASuperExpr___init_asuperexpr( NIT_NULL /*null*/,  variable5 /*tkwsupernode3*/,  variable4 /*listnode5*/); /*new ASuperExpr*/
+  variable8 = NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr( NIT_NULL /*null*/,  variable5 /*tkwsupernode3*/,  variable4 /*listnode5*/); /*new ASuperExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(76)) /*Parser::go_to*/;
@@ -29025,7 +29032,7 @@ void parser___ReduceAction440___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
   variable6 =  variable4 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*pqualifiednode2*/==NIT_NULL) || VAL_ISA( variable6 /*pqualifiednode2*/, COLOR_PQualified, ID_PQualified)) /*cast PQualified*/;
@@ -29045,7 +29052,7 @@ void parser___ReduceAction440___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable5 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable5 /*listnode5*/,  variable8 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable10 = NEW_parser_prod___ASuperExpr___init_asuperexpr( variable6 /*pqualifiednode2*/,  variable7 /*tkwsupernode3*/,  variable5 /*listnode5*/); /*new ASuperExpr*/
+  variable10 = NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr( variable6 /*pqualifiednode2*/,  variable7 /*tkwsupernode3*/,  variable5 /*listnode5*/); /*new ASuperExpr*/
   variable9 = variable10;
   variable1 =  variable9 /*pexprnode1*/ /*node_list=*/;
   variable10 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(76)) /*Parser::go_to*/;
@@ -29091,7 +29098,7 @@ void parser___ReduceAction441___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable6 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable8 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -29111,7 +29118,7 @@ void parser___ReduceAction441___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable7 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable7 /*listnode5*/,  variable10 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable12 = NEW_parser_prod___AInitExpr___init_ainitexpr( variable8 /*pexprnode2*/,  variable9 /*tkwinitnode3*/,  variable7 /*listnode5*/); /*new AInitExpr*/
+  variable12 = NEW_AInitExpr_parser_prod___AInitExpr___init_ainitexpr( variable8 /*pexprnode2*/,  variable9 /*tkwinitnode3*/,  variable7 /*listnode5*/); /*new AInitExpr*/
   variable11 = variable12;
   variable1 =  variable11 /*pexprnode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(76)) /*Parser::go_to*/;
@@ -29148,9 +29155,9 @@ void parser___ReduceAction442___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
-  variable6 = NEW_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
+  variable6 = NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
   variable5 = variable6;
   variable6 =  variable3 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*tkwinitnode3*/==NIT_NULL) || VAL_ISA( variable6 /*tkwinitnode3*/, COLOR_TKwinit, ID_TKwinit)) /*cast TKwinit*/;
@@ -29167,7 +29174,7 @@ void parser___ReduceAction442___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode5*/,  variable7 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable9 = NEW_parser_prod___AInitExpr___init_ainitexpr( variable5 /*pexprnode2*/,  variable6 /*tkwinitnode3*/,  variable4 /*listnode5*/); /*new AInitExpr*/
+  variable9 = NEW_AInitExpr_parser_prod___AInitExpr___init_ainitexpr( variable5 /*pexprnode2*/,  variable6 /*tkwinitnode3*/,  variable4 /*listnode5*/); /*new AInitExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(76)) /*Parser::go_to*/;
@@ -29208,7 +29215,7 @@ void parser___ReduceAction443___action(val_t  self, val_t  param0) {
   variable5 =  variable2 /*nodearraylist2*/;
   variable6 = TAG_Bool(( variable5 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable5 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable6)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction443___action, LOCATE_parser, 14731); nit_exit(1);}
-  variable7 = NEW_parser_prod___ADoExpr___init_adoexpr( variable4 /*tkwdonode2*/,  variable5 /*pexprnode3*/); /*new ADoExpr*/
+  variable7 = NEW_ADoExpr_parser_prod___ADoExpr___init_adoexpr( variable4 /*tkwdonode2*/,  variable5 /*pexprnode3*/); /*new ADoExpr*/
   variable6 = variable7;
   variable1 =  variable6 /*pexprnode1*/ /*node_list=*/;
   variable7 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(77)) /*Parser::go_to*/;
@@ -29275,7 +29282,7 @@ void parser___ReduceAction444___action(val_t  self, val_t  param0) {
   variable13 =  variable2 /*nodearraylist8*/;
   variable14 = TAG_Bool(( variable13 /*pexprnode5*/==NIT_NULL) || VAL_ISA( variable13 /*pexprnode5*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable14)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction444___action, LOCATE_parser, 14761); nit_exit(1);}
-  variable15 = NEW_parser_prod___AIfExpr___init_aifexpr( variable10 /*tkwifnode2*/,  variable11 /*pexprnode3*/,  variable12 /*pexprnode4*/,  variable13 /*pexprnode5*/); /*new AIfExpr*/
+  variable15 = NEW_AIfExpr_parser_prod___AIfExpr___init_aifexpr( variable10 /*tkwifnode2*/,  variable11 /*pexprnode3*/,  variable12 /*pexprnode4*/,  variable13 /*pexprnode5*/); /*new AIfExpr*/
   variable14 = variable15;
   variable1 =  variable14 /*pexprnode1*/ /*node_list=*/;
   variable15 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(78)) /*Parser::go_to*/;
@@ -29336,7 +29343,7 @@ void parser___ReduceAction445___action(val_t  self, val_t  param0) {
   variable11 =  variable2 /*nodearraylist6*/;
   variable12 = TAG_Bool(( variable11 /*pexprnode5*/==NIT_NULL) || VAL_ISA( variable11 /*pexprnode5*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable12)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction445___action, LOCATE_parser, 14791); nit_exit(1);}
-  variable13 = NEW_parser_prod___AWhileExpr___init_awhileexpr( variable8 /*tkwwhilenode2*/,  variable9 /*pexprnode3*/,  variable10 /*tkwdonode4*/,  variable11 /*pexprnode5*/); /*new AWhileExpr*/
+  variable13 = NEW_AWhileExpr_parser_prod___AWhileExpr___init_awhileexpr( variable8 /*tkwwhilenode2*/,  variable9 /*pexprnode3*/,  variable10 /*tkwdonode4*/,  variable11 /*pexprnode5*/); /*new AWhileExpr*/
   variable12 = variable13;
   variable1 =  variable12 /*pexprnode1*/ /*node_list=*/;
   variable13 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(79)) /*Parser::go_to*/;
@@ -29387,7 +29394,7 @@ void parser___ReduceAction446___action(val_t  self, val_t  param0) {
   variable8 =  variable2 /*nodearraylist4*/;
   variable9 = TAG_Bool(( variable8 /*pexprnode4*/==NIT_NULL) || VAL_ISA( variable8 /*pexprnode4*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable9)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction446___action, LOCATE_parser, 14817); nit_exit(1);}
-  variable10 = NEW_parser_prod___AForExpr___init_aforexpr( variable6 /*pexprnode2*/,  variable7 /*tkwdonode3*/,  variable8 /*pexprnode4*/); /*new AForExpr*/
+  variable10 = NEW_AForExpr_parser_prod___AForExpr___init_aforexpr( variable6 /*pexprnode2*/,  variable7 /*tkwdonode3*/,  variable8 /*pexprnode4*/); /*new AForExpr*/
   variable9 = variable10;
   variable1 =  variable9 /*pexprnode1*/ /*node_list=*/;
   variable10 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(80)) /*Parser::go_to*/;
@@ -29419,12 +29426,12 @@ void parser___ReduceAction447___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*tclassidnode2*/==NIT_NULL) || VAL_ISA( variable4 /*tclassidnode2*/, COLOR_TClassid, ID_TClassid)) /*cast TClassid*/;
   if (!UNTAG_Bool(variable5)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction447___action, LOCATE_parser, 14836); nit_exit(1);}
-  variable6 = NEW_parser_prod___AType___init_atype( variable4 /*tclassidnode2*/,  variable3 /*listnode3*/); /*new AType*/
+  variable6 = NEW_AType_parser_prod___AType___init_atype( variable4 /*tclassidnode2*/,  variable3 /*listnode3*/); /*new AType*/
   variable5 = variable6;
   variable1 =  variable5 /*ptypenode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(81)) /*Parser::go_to*/;
@@ -29472,7 +29479,7 @@ void parser___ReduceAction448___action(val_t  self, val_t  param0) {
   variable6 = variable7;
   variable8 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable7 = variable8;
-  variable9 = NEW_array___Array___init(); /*new Array[E]*/
+  variable9 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable8 = variable9;
   variable9 =  variable7 /*nodearraylist1*/;
   variable10 = TAG_Bool(( variable9 /*tclassidnode2*/==NIT_NULL) || VAL_ISA( variable9 /*tclassidnode2*/, COLOR_TClassid, ID_TClassid)) /*cast TClassid*/;
@@ -29489,7 +29496,7 @@ void parser___ReduceAction448___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable8 /*listnode4*/,COLOR_abstract_collection___IndexedCollection___append))( variable8 /*listnode4*/,  variable10 /*listnode3*/) /*IndexedCollection::append*/;
     }
   }
-  variable12 = NEW_parser_prod___AType___init_atype( variable9 /*tclassidnode2*/,  variable8 /*listnode4*/); /*new AType*/
+  variable12 = NEW_AType_parser_prod___AType___init_atype( variable9 /*tclassidnode2*/,  variable8 /*listnode4*/); /*new AType*/
   variable11 = variable12;
   variable1 =  variable11 /*ptypenode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(81)) /*Parser::go_to*/;
@@ -29604,7 +29611,7 @@ void parser___ReduceAction450___action(val_t  self, val_t  param0) {
   variable18 =  variable2 /*nodearraylist11*/;
   variable19 = TAG_Bool(( variable18 /*pexprnode7*/==NIT_NULL) || VAL_ISA( variable18 /*pexprnode7*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable19)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction450___action, LOCATE_parser, 14918); nit_exit(1);}
-  variable20 = NEW_parser_prod___AIfexprExpr___init_aifexprexpr( variable13 /*tkwifnode2*/,  variable14 /*pexprnode3*/,  variable15 /*tkwthennode4*/,  variable16 /*pexprnode5*/,  variable17 /*tkwelsenode6*/,  variable18 /*pexprnode7*/); /*new AIfexprExpr*/
+  variable20 = NEW_AIfexprExpr_parser_prod___AIfexprExpr___init_aifexprexpr( variable13 /*tkwifnode2*/,  variable14 /*pexprnode3*/,  variable15 /*tkwthennode4*/,  variable16 /*pexprnode5*/,  variable17 /*tkwelsenode6*/,  variable18 /*pexprnode7*/); /*new AIfexprExpr*/
   variable19 = variable20;
   variable1 =  variable19 /*pexprnode1*/ /*node_list=*/;
   variable20 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(82)) /*Parser::go_to*/;
@@ -29682,7 +29689,7 @@ void parser___ReduceAction452___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction452___action, LOCATE_parser, 14957); nit_exit(1);}
-  variable9 = NEW_parser_prod___AOrExpr___init_aorexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AOrExpr*/
+  variable9 = NEW_AOrExpr_parser_prod___AOrExpr___init_aorexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AOrExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(83)) /*Parser::go_to*/;
@@ -29729,7 +29736,7 @@ void parser___ReduceAction453___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction453___action, LOCATE_parser, 14979); nit_exit(1);}
-  variable9 = NEW_parser_prod___AAndExpr___init_aandexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AAndExpr*/
+  variable9 = NEW_AAndExpr_parser_prod___AAndExpr___init_aandexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AAndExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(83)) /*Parser::go_to*/;
@@ -29804,7 +29811,7 @@ void parser___ReduceAction455___action(val_t  self, val_t  param0) {
   variable6 =  variable2 /*nodearraylist3*/;
   variable7 = TAG_Bool(( variable6 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable6 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable7)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction455___action, LOCATE_parser, 15013); nit_exit(1);}
-  variable8 = NEW_parser_prod___ANotExpr___init_anotexpr( variable5 /*tkwnotnode2*/,  variable6 /*pexprnode3*/); /*new ANotExpr*/
+  variable8 = NEW_ANotExpr_parser_prod___ANotExpr___init_anotexpr( variable5 /*tkwnotnode2*/,  variable6 /*pexprnode3*/); /*new ANotExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(84)) /*Parser::go_to*/;
@@ -29882,7 +29889,7 @@ void parser___ReduceAction457___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction457___action, LOCATE_parser, 15048); nit_exit(1);}
-  variable9 = NEW_parser_prod___AEqExpr___init_aeqexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AEqExpr*/
+  variable9 = NEW_AEqExpr_parser_prod___AEqExpr___init_aeqexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AEqExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(85)) /*Parser::go_to*/;
@@ -29929,7 +29936,7 @@ void parser___ReduceAction458___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction458___action, LOCATE_parser, 15070); nit_exit(1);}
-  variable9 = NEW_parser_prod___AEeExpr___init_aeeexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AEeExpr*/
+  variable9 = NEW_AEeExpr_parser_prod___AEeExpr___init_aeeexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AEeExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(85)) /*Parser::go_to*/;
@@ -29976,7 +29983,7 @@ void parser___ReduceAction459___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction459___action, LOCATE_parser, 15092); nit_exit(1);}
-  variable9 = NEW_parser_prod___ANeExpr___init_aneexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ANeExpr*/
+  variable9 = NEW_ANeExpr_parser_prod___ANeExpr___init_aneexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ANeExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(85)) /*Parser::go_to*/;
@@ -30023,7 +30030,7 @@ void parser___ReduceAction460___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction460___action, LOCATE_parser, 15114); nit_exit(1);}
-  variable9 = NEW_parser_prod___ALtExpr___init_altexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ALtExpr*/
+  variable9 = NEW_ALtExpr_parser_prod___ALtExpr___init_altexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ALtExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(85)) /*Parser::go_to*/;
@@ -30070,7 +30077,7 @@ void parser___ReduceAction461___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction461___action, LOCATE_parser, 15136); nit_exit(1);}
-  variable9 = NEW_parser_prod___ALeExpr___init_aleexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ALeExpr*/
+  variable9 = NEW_ALeExpr_parser_prod___ALeExpr___init_aleexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ALeExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(85)) /*Parser::go_to*/;
@@ -30117,7 +30124,7 @@ void parser___ReduceAction462___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction462___action, LOCATE_parser, 15158); nit_exit(1);}
-  variable9 = NEW_parser_prod___AGtExpr___init_agtexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AGtExpr*/
+  variable9 = NEW_AGtExpr_parser_prod___AGtExpr___init_agtexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AGtExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(85)) /*Parser::go_to*/;
@@ -30164,7 +30171,7 @@ void parser___ReduceAction463___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction463___action, LOCATE_parser, 15180); nit_exit(1);}
-  variable9 = NEW_parser_prod___AGeExpr___init_ageexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AGeExpr*/
+  variable9 = NEW_AGeExpr_parser_prod___AGeExpr___init_ageexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AGeExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(85)) /*Parser::go_to*/;
@@ -30211,7 +30218,7 @@ void parser___ReduceAction464___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction464___action, LOCATE_parser, 15202); nit_exit(1);}
-  variable9 = NEW_parser_prod___AStarshipExpr___init_astarshipexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AStarshipExpr*/
+  variable9 = NEW_AStarshipExpr_parser_prod___AStarshipExpr___init_astarshipexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AStarshipExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(85)) /*Parser::go_to*/;
@@ -30258,7 +30265,7 @@ void parser___ReduceAction465___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*ptypenode3*/==NIT_NULL) || VAL_ISA( variable7 /*ptypenode3*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction465___action, LOCATE_parser, 15224); nit_exit(1);}
-  variable9 = NEW_parser_prod___AIsaExpr___init_aisaexpr( variable6 /*pexprnode2*/,  variable7 /*ptypenode3*/); /*new AIsaExpr*/
+  variable9 = NEW_AIsaExpr_parser_prod___AIsaExpr___init_aisaexpr( variable6 /*pexprnode2*/,  variable7 /*ptypenode3*/); /*new AIsaExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(85)) /*Parser::go_to*/;
@@ -30336,7 +30343,7 @@ void parser___ReduceAction467___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction467___action, LOCATE_parser, 15259); nit_exit(1);}
-  variable9 = NEW_parser_prod___APlusExpr___init_aplusexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new APlusExpr*/
+  variable9 = NEW_APlusExpr_parser_prod___APlusExpr___init_aplusexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new APlusExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(86)) /*Parser::go_to*/;
@@ -30383,7 +30390,7 @@ void parser___ReduceAction468___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction468___action, LOCATE_parser, 15281); nit_exit(1);}
-  variable9 = NEW_parser_prod___AMinusExpr___init_aminusexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AMinusExpr*/
+  variable9 = NEW_AMinusExpr_parser_prod___AMinusExpr___init_aminusexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AMinusExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(86)) /*Parser::go_to*/;
@@ -30461,7 +30468,7 @@ void parser___ReduceAction470___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction470___action, LOCATE_parser, 15316); nit_exit(1);}
-  variable9 = NEW_parser_prod___AStarExpr___init_astarexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AStarExpr*/
+  variable9 = NEW_AStarExpr_parser_prod___AStarExpr___init_astarexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AStarExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(87)) /*Parser::go_to*/;
@@ -30508,7 +30515,7 @@ void parser___ReduceAction471___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction471___action, LOCATE_parser, 15338); nit_exit(1);}
-  variable9 = NEW_parser_prod___ASlashExpr___init_aslashexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ASlashExpr*/
+  variable9 = NEW_ASlashExpr_parser_prod___ASlashExpr___init_aslashexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ASlashExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(87)) /*Parser::go_to*/;
@@ -30555,7 +30562,7 @@ void parser___ReduceAction472___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction472___action, LOCATE_parser, 15360); nit_exit(1);}
-  variable9 = NEW_parser_prod___APercentExpr___init_apercentexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new APercentExpr*/
+  variable9 = NEW_APercentExpr_parser_prod___APercentExpr___init_apercentexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new APercentExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(87)) /*Parser::go_to*/;
@@ -30630,7 +30637,7 @@ void parser___ReduceAction474___action(val_t  self, val_t  param0) {
   variable6 =  variable2 /*nodearraylist3*/;
   variable7 = TAG_Bool(( variable6 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable6 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable7)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction474___action, LOCATE_parser, 15394); nit_exit(1);}
-  variable8 = NEW_parser_prod___AUminusExpr___init_auminusexpr( variable5 /*tminusnode2*/,  variable6 /*pexprnode3*/); /*new AUminusExpr*/
+  variable8 = NEW_AUminusExpr_parser_prod___AUminusExpr___init_auminusexpr( variable5 /*tminusnode2*/,  variable6 /*pexprnode3*/); /*new AUminusExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(88)) /*Parser::go_to*/;
@@ -30674,7 +30681,7 @@ void parser___ReduceAction475___action(val_t  self, val_t  param0) {
   variable6 =  variable2 /*nodearraylist3*/;
   variable7 = TAG_Bool(( variable6 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable6 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable7)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction475___action, LOCATE_parser, 15415); nit_exit(1);}
-  variable8 = NEW_parser_prod___AOnceExpr___init_aonceexpr( variable5 /*tkwoncenode2*/,  variable6 /*pexprnode3*/); /*new AOnceExpr*/
+  variable8 = NEW_AOnceExpr_parser_prod___AOnceExpr___init_aonceexpr( variable5 /*tkwoncenode2*/,  variable6 /*pexprnode3*/); /*new AOnceExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(88)) /*Parser::go_to*/;
@@ -30748,7 +30755,7 @@ void parser___ReduceAction477___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
   variable7 =  variable5 /*nodearraylist1*/;
   variable8 = TAG_Bool(( variable7 /*tkwnewnode2*/==NIT_NULL) || VAL_ISA( variable7 /*tkwnewnode2*/, COLOR_TKwnew, ID_TKwnew)) /*cast TKwnew*/;
@@ -30768,7 +30775,7 @@ void parser___ReduceAction477___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable6 /*listnode6*/,COLOR_abstract_collection___IndexedCollection___append))( variable6 /*listnode6*/,  variable9 /*listnode5*/) /*IndexedCollection::append*/;
     }
   }
-  variable11 = NEW_parser_prod___ANewExpr___init_anewexpr( variable7 /*tkwnewnode2*/,  variable8 /*ptypenode3*/,  NIT_NULL /*null*/,  variable6 /*listnode6*/); /*new ANewExpr*/
+  variable11 = NEW_ANewExpr_parser_prod___ANewExpr___init_anewexpr( variable7 /*tkwnewnode2*/,  variable8 /*ptypenode3*/,  NIT_NULL /*null*/,  variable6 /*listnode6*/); /*new ANewExpr*/
   variable10 = variable11;
   variable1 =  variable10 /*pexprnode1*/ /*node_list=*/;
   variable11 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(89)) /*Parser::go_to*/;
@@ -30815,7 +30822,7 @@ void parser___ReduceAction478___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*tattridnode3*/==NIT_NULL) || VAL_ISA( variable7 /*tattridnode3*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction478___action, LOCATE_parser, 15484); nit_exit(1);}
-  variable9 = NEW_parser_prod___AAttrExpr___init_aattrexpr( variable6 /*pexprnode2*/,  variable7 /*tattridnode3*/); /*new AAttrExpr*/
+  variable9 = NEW_AAttrExpr_parser_prod___AAttrExpr___init_aattrexpr( variable6 /*pexprnode2*/,  variable7 /*tattridnode3*/); /*new AAttrExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(90)) /*Parser::go_to*/;
@@ -30847,12 +30854,12 @@ void parser___ReduceAction479___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
+  variable4 = NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*tattridnode3*/==NIT_NULL) || VAL_ISA( variable4 /*tattridnode3*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable5)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction479___action, LOCATE_parser, 15503); nit_exit(1);}
-  variable6 = NEW_parser_prod___AAttrExpr___init_aattrexpr( variable3 /*pexprnode2*/,  variable4 /*tattridnode3*/); /*new AAttrExpr*/
+  variable6 = NEW_AAttrExpr_parser_prod___AAttrExpr___init_aattrexpr( variable3 /*pexprnode2*/,  variable4 /*tattridnode3*/); /*new AAttrExpr*/
   variable5 = variable6;
   variable1 =  variable5 /*pexprnode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(90)) /*Parser::go_to*/;
@@ -30898,7 +30905,7 @@ void parser___ReduceAction480___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable6 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable8 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -30918,7 +30925,7 @@ void parser___ReduceAction480___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable7 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable7 /*listnode5*/,  variable10 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable12 = NEW_parser_prod___ACallExpr___init_acallexpr( variable8 /*pexprnode2*/,  variable9 /*tidnode3*/,  variable7 /*listnode5*/); /*new ACallExpr*/
+  variable12 = NEW_ACallExpr_parser_prod___ACallExpr___init_acallexpr( variable8 /*pexprnode2*/,  variable9 /*tidnode3*/,  variable7 /*listnode5*/); /*new ACallExpr*/
   variable11 = variable12;
   variable1 =  variable11 /*pexprnode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(90)) /*Parser::go_to*/;
@@ -30955,9 +30962,9 @@ void parser___ReduceAction481___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
-  variable6 = NEW_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
+  variable6 = NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
   variable5 = variable6;
   variable6 =  variable3 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*tidnode3*/==NIT_NULL) || VAL_ISA( variable6 /*tidnode3*/, COLOR_TId, ID_TId)) /*cast TId*/;
@@ -30974,7 +30981,7 @@ void parser___ReduceAction481___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode5*/,  variable7 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable9 = NEW_parser_prod___ACallExpr___init_acallexpr( variable5 /*pexprnode2*/,  variable6 /*tidnode3*/,  variable4 /*listnode5*/); /*new ACallExpr*/
+  variable9 = NEW_ACallExpr_parser_prod___ACallExpr___init_acallexpr( variable5 /*pexprnode2*/,  variable6 /*tidnode3*/,  variable4 /*listnode5*/); /*new ACallExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(90)) /*Parser::go_to*/;
@@ -31010,7 +31017,7 @@ void parser___ReduceAction482___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*tkwsupernode3*/==NIT_NULL) || VAL_ISA( variable5 /*tkwsupernode3*/, COLOR_TKwsuper, ID_TKwsuper)) /*cast TKwsuper*/;
@@ -31027,7 +31034,7 @@ void parser___ReduceAction482___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode5*/,  variable6 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable8 = NEW_parser_prod___ASuperExpr___init_asuperexpr( NIT_NULL /*null*/,  variable5 /*tkwsupernode3*/,  variable4 /*listnode5*/); /*new ASuperExpr*/
+  variable8 = NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr( NIT_NULL /*null*/,  variable5 /*tkwsupernode3*/,  variable4 /*listnode5*/); /*new ASuperExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(90)) /*Parser::go_to*/;
@@ -31067,7 +31074,7 @@ void parser___ReduceAction483___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
   variable6 =  variable4 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*pqualifiednode2*/==NIT_NULL) || VAL_ISA( variable6 /*pqualifiednode2*/, COLOR_PQualified, ID_PQualified)) /*cast PQualified*/;
@@ -31087,7 +31094,7 @@ void parser___ReduceAction483___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable5 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable5 /*listnode5*/,  variable8 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable10 = NEW_parser_prod___ASuperExpr___init_asuperexpr( variable6 /*pqualifiednode2*/,  variable7 /*tkwsupernode3*/,  variable5 /*listnode5*/); /*new ASuperExpr*/
+  variable10 = NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr( variable6 /*pqualifiednode2*/,  variable7 /*tkwsupernode3*/,  variable5 /*listnode5*/); /*new ASuperExpr*/
   variable9 = variable10;
   variable1 =  variable9 /*pexprnode1*/ /*node_list=*/;
   variable10 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(90)) /*Parser::go_to*/;
@@ -31133,7 +31140,7 @@ void parser___ReduceAction484___action(val_t  self, val_t  param0) {
   variable5 = variable6;
   variable7 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable6 = variable7;
-  variable8 = NEW_array___Array___init(); /*new Array[E]*/
+  variable8 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable7 = variable8;
   variable8 =  variable6 /*nodearraylist1*/;
   variable9 = TAG_Bool(( variable8 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable8 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -31153,7 +31160,7 @@ void parser___ReduceAction484___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable7 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable7 /*listnode5*/,  variable10 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable12 = NEW_parser_prod___AInitExpr___init_ainitexpr( variable8 /*pexprnode2*/,  variable9 /*tkwinitnode3*/,  variable7 /*listnode5*/); /*new AInitExpr*/
+  variable12 = NEW_AInitExpr_parser_prod___AInitExpr___init_ainitexpr( variable8 /*pexprnode2*/,  variable9 /*tkwinitnode3*/,  variable7 /*listnode5*/); /*new AInitExpr*/
   variable11 = variable12;
   variable1 =  variable11 /*pexprnode1*/ /*node_list=*/;
   variable12 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(90)) /*Parser::go_to*/;
@@ -31190,9 +31197,9 @@ void parser___ReduceAction485___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
-  variable6 = NEW_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
+  variable6 = NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
   variable5 = variable6;
   variable6 =  variable3 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*tkwinitnode3*/==NIT_NULL) || VAL_ISA( variable6 /*tkwinitnode3*/, COLOR_TKwinit, ID_TKwinit)) /*cast TKwinit*/;
@@ -31209,7 +31216,7 @@ void parser___ReduceAction485___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode5*/,  variable7 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable9 = NEW_parser_prod___AInitExpr___init_ainitexpr( variable5 /*pexprnode2*/,  variable6 /*tkwinitnode3*/,  variable4 /*listnode5*/); /*new AInitExpr*/
+  variable9 = NEW_AInitExpr_parser_prod___AInitExpr___init_ainitexpr( variable5 /*pexprnode2*/,  variable6 /*tkwinitnode3*/,  variable4 /*listnode5*/); /*new AInitExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(90)) /*Parser::go_to*/;
@@ -31262,7 +31269,7 @@ void parser___ReduceAction486___action(val_t  self, val_t  param0) {
   variable7 = variable8;
   variable9 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable8 = variable9;
-  variable10 = NEW_array___Array___init(); /*new Array[E]*/
+  variable10 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable9 = variable10;
   variable10 =  variable8 /*nodearraylist1*/;
   variable11 = TAG_Bool(( variable10 /*tkwnewnode2*/==NIT_NULL) || VAL_ISA( variable10 /*tkwnewnode2*/, COLOR_TKwnew, ID_TKwnew)) /*cast TKwnew*/;
@@ -31285,7 +31292,7 @@ void parser___ReduceAction486___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable9 /*listnode6*/,COLOR_abstract_collection___IndexedCollection___append))( variable9 /*listnode6*/,  variable13 /*listnode5*/) /*IndexedCollection::append*/;
     }
   }
-  variable15 = NEW_parser_prod___ANewExpr___init_anewexpr( variable10 /*tkwnewnode2*/,  variable11 /*ptypenode3*/,  variable12 /*tidnode4*/,  variable9 /*listnode6*/); /*new ANewExpr*/
+  variable15 = NEW_ANewExpr_parser_prod___ANewExpr___init_anewexpr( variable10 /*tkwnewnode2*/,  variable11 /*ptypenode3*/,  variable12 /*tidnode4*/,  variable9 /*listnode6*/); /*new ANewExpr*/
   variable14 = variable15;
   variable1 =  variable14 /*pexprnode1*/ /*node_list=*/;
   variable15 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(90)) /*Parser::go_to*/;
@@ -31319,7 +31326,7 @@ void parser___ReduceAction487___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwselfnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwselfnode2*/, COLOR_TKwself, ID_TKwself)) /*cast TKwself*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction487___action, LOCATE_parser, 15750); nit_exit(1);}
-  variable5 = NEW_parser_prod___ASelfExpr___init_aselfexpr( variable3 /*tkwselfnode2*/); /*new ASelfExpr*/
+  variable5 = NEW_ASelfExpr_parser_prod___ASelfExpr___init_aselfexpr( variable3 /*tkwselfnode2*/); /*new ASelfExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(90)) /*Parser::go_to*/;
@@ -31353,7 +31360,7 @@ void parser___ReduceAction488___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwtruenode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwtruenode2*/, COLOR_TKwtrue, ID_TKwtrue)) /*cast TKwtrue*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction488___action, LOCATE_parser, 15766); nit_exit(1);}
-  variable5 = NEW_parser_prod___ATrueExpr___init_atrueexpr( variable3 /*tkwtruenode2*/); /*new ATrueExpr*/
+  variable5 = NEW_ATrueExpr_parser_prod___ATrueExpr___init_atrueexpr( variable3 /*tkwtruenode2*/); /*new ATrueExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(90)) /*Parser::go_to*/;
@@ -31387,7 +31394,7 @@ void parser___ReduceAction489___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwfalsenode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwfalsenode2*/, COLOR_TKwfalse, ID_TKwfalse)) /*cast TKwfalse*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction489___action, LOCATE_parser, 15782); nit_exit(1);}
-  variable5 = NEW_parser_prod___AFalseExpr___init_afalseexpr( variable3 /*tkwfalsenode2*/); /*new AFalseExpr*/
+  variable5 = NEW_AFalseExpr_parser_prod___AFalseExpr___init_afalseexpr( variable3 /*tkwfalsenode2*/); /*new AFalseExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(90)) /*Parser::go_to*/;
@@ -31421,7 +31428,7 @@ void parser___ReduceAction490___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwnullnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwnullnode2*/, COLOR_TKwnull, ID_TKwnull)) /*cast TKwnull*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction490___action, LOCATE_parser, 15798); nit_exit(1);}
-  variable5 = NEW_parser_prod___ANullExpr___init_anullexpr( variable3 /*tkwnullnode2*/); /*new ANullExpr*/
+  variable5 = NEW_ANullExpr_parser_prod___ANullExpr___init_anullexpr( variable3 /*tkwnullnode2*/); /*new ANullExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(90)) /*Parser::go_to*/;
@@ -31455,7 +31462,7 @@ void parser___ReduceAction491___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tnumbernode2*/==NIT_NULL) || VAL_ISA( variable3 /*tnumbernode2*/, COLOR_TNumber, ID_TNumber)) /*cast TNumber*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction491___action, LOCATE_parser, 15814); nit_exit(1);}
-  variable5 = NEW_parser_prod___AIntExpr___init_aintexpr( variable3 /*tnumbernode2*/); /*new AIntExpr*/
+  variable5 = NEW_AIntExpr_parser_prod___AIntExpr___init_aintexpr( variable3 /*tnumbernode2*/); /*new AIntExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(90)) /*Parser::go_to*/;
@@ -31489,7 +31496,7 @@ void parser___ReduceAction492___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tfloatnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tfloatnode2*/, COLOR_TFloat, ID_TFloat)) /*cast TFloat*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction492___action, LOCATE_parser, 15830); nit_exit(1);}
-  variable5 = NEW_parser_prod___AFloatExpr___init_afloatexpr( variable3 /*tfloatnode2*/); /*new AFloatExpr*/
+  variable5 = NEW_AFloatExpr_parser_prod___AFloatExpr___init_afloatexpr( variable3 /*tfloatnode2*/); /*new AFloatExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(90)) /*Parser::go_to*/;
@@ -31523,7 +31530,7 @@ void parser___ReduceAction493___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tcharnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tcharnode2*/, COLOR_TChar, ID_TChar)) /*cast TChar*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction493___action, LOCATE_parser, 15846); nit_exit(1);}
-  variable5 = NEW_parser_prod___ACharExpr___init_acharexpr( variable3 /*tcharnode2*/); /*new ACharExpr*/
+  variable5 = NEW_ACharExpr_parser_prod___ACharExpr___init_acharexpr( variable3 /*tcharnode2*/); /*new ACharExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(90)) /*Parser::go_to*/;
@@ -31557,7 +31564,7 @@ void parser___ReduceAction494___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tstringnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tstringnode2*/, COLOR_TString, ID_TString)) /*cast TString*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction494___action, LOCATE_parser, 15862); nit_exit(1);}
-  variable5 = NEW_parser_prod___AStringExpr___init_astringexpr( variable3 /*tstringnode2*/); /*new AStringExpr*/
+  variable5 = NEW_AStringExpr_parser_prod___AStringExpr___init_astringexpr( variable3 /*tstringnode2*/); /*new AStringExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(90)) /*Parser::go_to*/;
@@ -31657,7 +31664,7 @@ void parser___ReduceAction496___action(val_t  self, val_t  param0) {
   variable14 =  variable4 /*nodearraylist8*/;
   variable15 = TAG_Bool(( variable14 /*ptypenode4*/==NIT_NULL) || VAL_ISA( variable14 /*ptypenode4*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction496___action, LOCATE_parser, 15904); nit_exit(1);}
-  variable16 = NEW_parser_prod___AAsCastExpr___init_aascastexpr( variable12 /*pexprnode2*/,  variable13 /*tkwasnode3*/,  variable14 /*ptypenode4*/); /*new AAsCastExpr*/
+  variable16 = NEW_AAsCastExpr_parser_prod___AAsCastExpr___init_aascastexpr( variable12 /*pexprnode2*/,  variable13 /*tkwasnode3*/,  variable14 /*ptypenode4*/); /*new AAsCastExpr*/
   variable15 = variable16;
   variable1 =  variable15 /*pexprnode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(90)) /*Parser::go_to*/;
@@ -31689,12 +31696,12 @@ void parser___ReduceAction497___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*tclassidnode2*/==NIT_NULL) || VAL_ISA( variable4 /*tclassidnode2*/, COLOR_TClassid, ID_TClassid)) /*cast TClassid*/;
   if (!UNTAG_Bool(variable5)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction497___action, LOCATE_parser, 15923); nit_exit(1);}
-  variable6 = NEW_parser_prod___AType___init_atype( variable4 /*tclassidnode2*/,  variable3 /*listnode3*/); /*new AType*/
+  variable6 = NEW_AType_parser_prod___AType___init_atype( variable4 /*tclassidnode2*/,  variable3 /*listnode3*/); /*new AType*/
   variable5 = variable6;
   variable1 =  variable5 /*ptypenode1*/ /*node_list=*/;
   variable6 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(91)) /*Parser::go_to*/;
@@ -31809,7 +31816,7 @@ void parser___ReduceAction499___action(val_t  self, val_t  param0) {
   variable18 =  variable2 /*nodearraylist11*/;
   variable19 = TAG_Bool(( variable18 /*pexprnode7*/==NIT_NULL) || VAL_ISA( variable18 /*pexprnode7*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable19)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction499___action, LOCATE_parser, 15973); nit_exit(1);}
-  variable20 = NEW_parser_prod___AIfexprExpr___init_aifexprexpr( variable13 /*tkwifnode2*/,  variable14 /*pexprnode3*/,  variable15 /*tkwthennode4*/,  variable16 /*pexprnode5*/,  variable17 /*tkwelsenode6*/,  variable18 /*pexprnode7*/); /*new AIfexprExpr*/
+  variable20 = NEW_AIfexprExpr_parser_prod___AIfexprExpr___init_aifexprexpr( variable13 /*tkwifnode2*/,  variable14 /*pexprnode3*/,  variable15 /*tkwthennode4*/,  variable16 /*pexprnode5*/,  variable17 /*tkwelsenode6*/,  variable18 /*pexprnode7*/); /*new AIfexprExpr*/
   variable19 = variable20;
   variable1 =  variable19 /*pexprnode1*/ /*node_list=*/;
   variable20 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(92)) /*Parser::go_to*/;
@@ -31887,7 +31894,7 @@ void parser___ReduceAction501___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction501___action, LOCATE_parser, 16012); nit_exit(1);}
-  variable9 = NEW_parser_prod___AOrExpr___init_aorexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AOrExpr*/
+  variable9 = NEW_AOrExpr_parser_prod___AOrExpr___init_aorexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AOrExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(93)) /*Parser::go_to*/;
@@ -31934,7 +31941,7 @@ void parser___ReduceAction502___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction502___action, LOCATE_parser, 16034); nit_exit(1);}
-  variable9 = NEW_parser_prod___AAndExpr___init_aandexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AAndExpr*/
+  variable9 = NEW_AAndExpr_parser_prod___AAndExpr___init_aandexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AAndExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(93)) /*Parser::go_to*/;
@@ -32009,7 +32016,7 @@ void parser___ReduceAction504___action(val_t  self, val_t  param0) {
   variable6 =  variable2 /*nodearraylist3*/;
   variable7 = TAG_Bool(( variable6 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable6 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable7)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction504___action, LOCATE_parser, 16068); nit_exit(1);}
-  variable8 = NEW_parser_prod___ANotExpr___init_anotexpr( variable5 /*tkwnotnode2*/,  variable6 /*pexprnode3*/); /*new ANotExpr*/
+  variable8 = NEW_ANotExpr_parser_prod___ANotExpr___init_anotexpr( variable5 /*tkwnotnode2*/,  variable6 /*pexprnode3*/); /*new ANotExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(94)) /*Parser::go_to*/;
@@ -32087,7 +32094,7 @@ void parser___ReduceAction506___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction506___action, LOCATE_parser, 16103); nit_exit(1);}
-  variable9 = NEW_parser_prod___AEqExpr___init_aeqexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AEqExpr*/
+  variable9 = NEW_AEqExpr_parser_prod___AEqExpr___init_aeqexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AEqExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(95)) /*Parser::go_to*/;
@@ -32134,7 +32141,7 @@ void parser___ReduceAction507___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction507___action, LOCATE_parser, 16125); nit_exit(1);}
-  variable9 = NEW_parser_prod___AEeExpr___init_aeeexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AEeExpr*/
+  variable9 = NEW_AEeExpr_parser_prod___AEeExpr___init_aeeexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AEeExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(95)) /*Parser::go_to*/;
@@ -32181,7 +32188,7 @@ void parser___ReduceAction508___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction508___action, LOCATE_parser, 16147); nit_exit(1);}
-  variable9 = NEW_parser_prod___ANeExpr___init_aneexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ANeExpr*/
+  variable9 = NEW_ANeExpr_parser_prod___ANeExpr___init_aneexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ANeExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(95)) /*Parser::go_to*/;
@@ -32228,7 +32235,7 @@ void parser___ReduceAction509___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction509___action, LOCATE_parser, 16169); nit_exit(1);}
-  variable9 = NEW_parser_prod___ALtExpr___init_altexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ALtExpr*/
+  variable9 = NEW_ALtExpr_parser_prod___ALtExpr___init_altexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ALtExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(95)) /*Parser::go_to*/;
@@ -32275,7 +32282,7 @@ void parser___ReduceAction510___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction510___action, LOCATE_parser, 16191); nit_exit(1);}
-  variable9 = NEW_parser_prod___ALeExpr___init_aleexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ALeExpr*/
+  variable9 = NEW_ALeExpr_parser_prod___ALeExpr___init_aleexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ALeExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(95)) /*Parser::go_to*/;
@@ -32322,7 +32329,7 @@ void parser___ReduceAction511___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction511___action, LOCATE_parser, 16213); nit_exit(1);}
-  variable9 = NEW_parser_prod___AGtExpr___init_agtexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AGtExpr*/
+  variable9 = NEW_AGtExpr_parser_prod___AGtExpr___init_agtexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AGtExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(95)) /*Parser::go_to*/;
@@ -32369,7 +32376,7 @@ void parser___ReduceAction512___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction512___action, LOCATE_parser, 16235); nit_exit(1);}
-  variable9 = NEW_parser_prod___AGeExpr___init_ageexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AGeExpr*/
+  variable9 = NEW_AGeExpr_parser_prod___AGeExpr___init_ageexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AGeExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(95)) /*Parser::go_to*/;
@@ -32416,7 +32423,7 @@ void parser___ReduceAction513___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction513___action, LOCATE_parser, 16257); nit_exit(1);}
-  variable9 = NEW_parser_prod___AStarshipExpr___init_astarshipexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AStarshipExpr*/
+  variable9 = NEW_AStarshipExpr_parser_prod___AStarshipExpr___init_astarshipexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AStarshipExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(95)) /*Parser::go_to*/;
@@ -32463,7 +32470,7 @@ void parser___ReduceAction514___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*ptypenode3*/==NIT_NULL) || VAL_ISA( variable7 /*ptypenode3*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction514___action, LOCATE_parser, 16279); nit_exit(1);}
-  variable9 = NEW_parser_prod___AIsaExpr___init_aisaexpr( variable6 /*pexprnode2*/,  variable7 /*ptypenode3*/); /*new AIsaExpr*/
+  variable9 = NEW_AIsaExpr_parser_prod___AIsaExpr___init_aisaexpr( variable6 /*pexprnode2*/,  variable7 /*ptypenode3*/); /*new AIsaExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(95)) /*Parser::go_to*/;
@@ -32541,7 +32548,7 @@ void parser___ReduceAction516___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction516___action, LOCATE_parser, 16314); nit_exit(1);}
-  variable9 = NEW_parser_prod___APlusExpr___init_aplusexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new APlusExpr*/
+  variable9 = NEW_APlusExpr_parser_prod___APlusExpr___init_aplusexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new APlusExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(96)) /*Parser::go_to*/;
@@ -32588,7 +32595,7 @@ void parser___ReduceAction517___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction517___action, LOCATE_parser, 16336); nit_exit(1);}
-  variable9 = NEW_parser_prod___AMinusExpr___init_aminusexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AMinusExpr*/
+  variable9 = NEW_AMinusExpr_parser_prod___AMinusExpr___init_aminusexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AMinusExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(96)) /*Parser::go_to*/;
@@ -32666,7 +32673,7 @@ void parser___ReduceAction519___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction519___action, LOCATE_parser, 16371); nit_exit(1);}
-  variable9 = NEW_parser_prod___AStarExpr___init_astarexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AStarExpr*/
+  variable9 = NEW_AStarExpr_parser_prod___AStarExpr___init_astarexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new AStarExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(97)) /*Parser::go_to*/;
@@ -32713,7 +32720,7 @@ void parser___ReduceAction520___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction520___action, LOCATE_parser, 16393); nit_exit(1);}
-  variable9 = NEW_parser_prod___ASlashExpr___init_aslashexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ASlashExpr*/
+  variable9 = NEW_ASlashExpr_parser_prod___ASlashExpr___init_aslashexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new ASlashExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(97)) /*Parser::go_to*/;
@@ -32760,7 +32767,7 @@ void parser___ReduceAction521___action(val_t  self, val_t  param0) {
   variable7 =  variable2 /*nodearraylist4*/;
   variable8 = TAG_Bool(( variable7 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable7 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction521___action, LOCATE_parser, 16415); nit_exit(1);}
-  variable9 = NEW_parser_prod___APercentExpr___init_apercentexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new APercentExpr*/
+  variable9 = NEW_APercentExpr_parser_prod___APercentExpr___init_apercentexpr( variable6 /*pexprnode2*/,  variable7 /*pexprnode3*/); /*new APercentExpr*/
   variable8 = variable9;
   variable1 =  variable8 /*pexprnode1*/ /*node_list=*/;
   variable9 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(97)) /*Parser::go_to*/;
@@ -32835,7 +32842,7 @@ void parser___ReduceAction523___action(val_t  self, val_t  param0) {
   variable6 =  variable2 /*nodearraylist3*/;
   variable7 = TAG_Bool(( variable6 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable6 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable7)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction523___action, LOCATE_parser, 16449); nit_exit(1);}
-  variable8 = NEW_parser_prod___AUminusExpr___init_auminusexpr( variable5 /*tminusnode2*/,  variable6 /*pexprnode3*/); /*new AUminusExpr*/
+  variable8 = NEW_AUminusExpr_parser_prod___AUminusExpr___init_auminusexpr( variable5 /*tminusnode2*/,  variable6 /*pexprnode3*/); /*new AUminusExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(98)) /*Parser::go_to*/;
@@ -32879,7 +32886,7 @@ void parser___ReduceAction524___action(val_t  self, val_t  param0) {
   variable6 =  variable2 /*nodearraylist3*/;
   variable7 = TAG_Bool(( variable6 /*pexprnode3*/==NIT_NULL) || VAL_ISA( variable6 /*pexprnode3*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
   if (!UNTAG_Bool(variable7)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction524___action, LOCATE_parser, 16470); nit_exit(1);}
-  variable8 = NEW_parser_prod___AOnceExpr___init_aonceexpr( variable5 /*tkwoncenode2*/,  variable6 /*pexprnode3*/); /*new AOnceExpr*/
+  variable8 = NEW_AOnceExpr_parser_prod___AOnceExpr___init_aonceexpr( variable5 /*tkwoncenode2*/,  variable6 /*pexprnode3*/); /*new AOnceExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(98)) /*Parser::go_to*/;
@@ -32953,7 +32960,7 @@ void parser___ReduceAction526___action(val_t  self, val_t  param0) {
   variable4 = variable5;
   variable6 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable5 = variable6;
-  variable7 = NEW_array___Array___init(); /*new Array[E]*/
+  variable7 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable6 = variable7;
   variable7 =  variable5 /*nodearraylist1*/;
   variable8 = TAG_Bool(( variable7 /*tkwnewnode2*/==NIT_NULL) || VAL_ISA( variable7 /*tkwnewnode2*/, COLOR_TKwnew, ID_TKwnew)) /*cast TKwnew*/;
@@ -32973,7 +32980,7 @@ void parser___ReduceAction526___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable6 /*listnode6*/,COLOR_abstract_collection___IndexedCollection___append))( variable6 /*listnode6*/,  variable9 /*listnode5*/) /*IndexedCollection::append*/;
     }
   }
-  variable11 = NEW_parser_prod___ANewExpr___init_anewexpr( variable7 /*tkwnewnode2*/,  variable8 /*ptypenode3*/,  NIT_NULL /*null*/,  variable6 /*listnode6*/); /*new ANewExpr*/
+  variable11 = NEW_ANewExpr_parser_prod___ANewExpr___init_anewexpr( variable7 /*tkwnewnode2*/,  variable8 /*ptypenode3*/,  NIT_NULL /*null*/,  variable6 /*listnode6*/); /*new ANewExpr*/
   variable10 = variable11;
   variable1 =  variable10 /*pexprnode1*/ /*node_list=*/;
   variable11 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(99)) /*Parser::go_to*/;
@@ -33014,7 +33021,7 @@ void parser___ReduceAction527___action(val_t  self, val_t  param0) {
   variable5 =  variable2 /*nodearraylist2*/;
   variable6 = TAG_Bool(( variable5 /*tattridnode3*/==NIT_NULL) || VAL_ISA( variable5 /*tattridnode3*/, COLOR_TAttrid, ID_TAttrid)) /*cast TAttrid*/;
   if (!UNTAG_Bool(variable6)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction527___action, LOCATE_parser, 16537); nit_exit(1);}
-  variable7 = NEW_parser_prod___AAttrExpr___init_aattrexpr( variable4 /*pexprnode2*/,  variable5 /*tattridnode3*/); /*new AAttrExpr*/
+  variable7 = NEW_AAttrExpr_parser_prod___AAttrExpr___init_aattrexpr( variable4 /*pexprnode2*/,  variable5 /*tattridnode3*/); /*new AAttrExpr*/
   variable6 = variable7;
   variable1 =  variable6 /*pexprnode1*/ /*node_list=*/;
   variable7 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(100)) /*Parser::go_to*/;
@@ -33054,7 +33061,7 @@ void parser___ReduceAction528___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
   variable6 =  variable4 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable6 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -33074,7 +33081,7 @@ void parser___ReduceAction528___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable5 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable5 /*listnode5*/,  variable8 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable10 = NEW_parser_prod___ACallExpr___init_acallexpr( variable6 /*pexprnode2*/,  variable7 /*tidnode3*/,  variable5 /*listnode5*/); /*new ACallExpr*/
+  variable10 = NEW_ACallExpr_parser_prod___ACallExpr___init_acallexpr( variable6 /*pexprnode2*/,  variable7 /*tidnode3*/,  variable5 /*listnode5*/); /*new ACallExpr*/
   variable9 = variable10;
   variable1 =  variable9 /*pexprnode1*/ /*node_list=*/;
   variable10 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(100)) /*Parser::go_to*/;
@@ -33110,7 +33117,7 @@ void parser___ReduceAction529___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*tkwsupernode3*/==NIT_NULL) || VAL_ISA( variable5 /*tkwsupernode3*/, COLOR_TKwsuper, ID_TKwsuper)) /*cast TKwsuper*/;
@@ -33127,7 +33134,7 @@ void parser___ReduceAction529___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable4 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable4 /*listnode5*/,  variable6 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable8 = NEW_parser_prod___ASuperExpr___init_asuperexpr( NIT_NULL /*null*/,  variable5 /*tkwsupernode3*/,  variable4 /*listnode5*/); /*new ASuperExpr*/
+  variable8 = NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr( NIT_NULL /*null*/,  variable5 /*tkwsupernode3*/,  variable4 /*listnode5*/); /*new ASuperExpr*/
   variable7 = variable8;
   variable1 =  variable7 /*pexprnode1*/ /*node_list=*/;
   variable8 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(100)) /*Parser::go_to*/;
@@ -33167,7 +33174,7 @@ void parser___ReduceAction530___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
   variable6 =  variable4 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*pqualifiednode2*/==NIT_NULL) || VAL_ISA( variable6 /*pqualifiednode2*/, COLOR_PQualified, ID_PQualified)) /*cast PQualified*/;
@@ -33187,7 +33194,7 @@ void parser___ReduceAction530___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable5 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable5 /*listnode5*/,  variable8 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable10 = NEW_parser_prod___ASuperExpr___init_asuperexpr( variable6 /*pqualifiednode2*/,  variable7 /*tkwsupernode3*/,  variable5 /*listnode5*/); /*new ASuperExpr*/
+  variable10 = NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr( variable6 /*pqualifiednode2*/,  variable7 /*tkwsupernode3*/,  variable5 /*listnode5*/); /*new ASuperExpr*/
   variable9 = variable10;
   variable1 =  variable9 /*pexprnode1*/ /*node_list=*/;
   variable10 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(100)) /*Parser::go_to*/;
@@ -33227,7 +33234,7 @@ void parser___ReduceAction531___action(val_t  self, val_t  param0) {
   variable3 = variable4;
   variable5 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable4 = variable5;
-  variable6 = NEW_array___Array___init(); /*new Array[E]*/
+  variable6 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable5 = variable6;
   variable6 =  variable4 /*nodearraylist1*/;
   variable7 = TAG_Bool(( variable6 /*pexprnode2*/==NIT_NULL) || VAL_ISA( variable6 /*pexprnode2*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -33247,7 +33254,7 @@ void parser___ReduceAction531___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable5 /*listnode5*/,COLOR_abstract_collection___IndexedCollection___append))( variable5 /*listnode5*/,  variable8 /*listnode4*/) /*IndexedCollection::append*/;
     }
   }
-  variable10 = NEW_parser_prod___AInitExpr___init_ainitexpr( variable6 /*pexprnode2*/,  variable7 /*tkwinitnode3*/,  variable5 /*listnode5*/); /*new AInitExpr*/
+  variable10 = NEW_AInitExpr_parser_prod___AInitExpr___init_ainitexpr( variable6 /*pexprnode2*/,  variable7 /*tkwinitnode3*/,  variable5 /*listnode5*/); /*new AInitExpr*/
   variable9 = variable10;
   variable1 =  variable9 /*pexprnode1*/ /*node_list=*/;
   variable10 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(100)) /*Parser::go_to*/;
@@ -33300,7 +33307,7 @@ void parser___ReduceAction532___action(val_t  self, val_t  param0) {
   variable7 = variable8;
   variable9 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable8 = variable9;
-  variable10 = NEW_array___Array___init(); /*new Array[E]*/
+  variable10 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable9 = variable10;
   variable10 =  variable8 /*nodearraylist1*/;
   variable11 = TAG_Bool(( variable10 /*tkwnewnode2*/==NIT_NULL) || VAL_ISA( variable10 /*tkwnewnode2*/, COLOR_TKwnew, ID_TKwnew)) /*cast TKwnew*/;
@@ -33323,7 +33330,7 @@ void parser___ReduceAction532___action(val_t  self, val_t  param0) {
       ((abstract_collection___IndexedCollection___append_t)CALL( variable9 /*listnode6*/,COLOR_abstract_collection___IndexedCollection___append))( variable9 /*listnode6*/,  variable13 /*listnode5*/) /*IndexedCollection::append*/;
     }
   }
-  variable15 = NEW_parser_prod___ANewExpr___init_anewexpr( variable10 /*tkwnewnode2*/,  variable11 /*ptypenode3*/,  variable12 /*tidnode4*/,  variable9 /*listnode6*/); /*new ANewExpr*/
+  variable15 = NEW_ANewExpr_parser_prod___ANewExpr___init_anewexpr( variable10 /*tkwnewnode2*/,  variable11 /*ptypenode3*/,  variable12 /*tidnode4*/,  variable9 /*listnode6*/); /*new ANewExpr*/
   variable14 = variable15;
   variable1 =  variable14 /*pexprnode1*/ /*node_list=*/;
   variable15 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(100)) /*Parser::go_to*/;
@@ -33357,7 +33364,7 @@ void parser___ReduceAction533___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwselfnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwselfnode2*/, COLOR_TKwself, ID_TKwself)) /*cast TKwself*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction533___action, LOCATE_parser, 16718); nit_exit(1);}
-  variable5 = NEW_parser_prod___ASelfExpr___init_aselfexpr( variable3 /*tkwselfnode2*/); /*new ASelfExpr*/
+  variable5 = NEW_ASelfExpr_parser_prod___ASelfExpr___init_aselfexpr( variable3 /*tkwselfnode2*/); /*new ASelfExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(100)) /*Parser::go_to*/;
@@ -33391,7 +33398,7 @@ void parser___ReduceAction534___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwtruenode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwtruenode2*/, COLOR_TKwtrue, ID_TKwtrue)) /*cast TKwtrue*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction534___action, LOCATE_parser, 16734); nit_exit(1);}
-  variable5 = NEW_parser_prod___ATrueExpr___init_atrueexpr( variable3 /*tkwtruenode2*/); /*new ATrueExpr*/
+  variable5 = NEW_ATrueExpr_parser_prod___ATrueExpr___init_atrueexpr( variable3 /*tkwtruenode2*/); /*new ATrueExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(100)) /*Parser::go_to*/;
@@ -33425,7 +33432,7 @@ void parser___ReduceAction535___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwfalsenode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwfalsenode2*/, COLOR_TKwfalse, ID_TKwfalse)) /*cast TKwfalse*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction535___action, LOCATE_parser, 16750); nit_exit(1);}
-  variable5 = NEW_parser_prod___AFalseExpr___init_afalseexpr( variable3 /*tkwfalsenode2*/); /*new AFalseExpr*/
+  variable5 = NEW_AFalseExpr_parser_prod___AFalseExpr___init_afalseexpr( variable3 /*tkwfalsenode2*/); /*new AFalseExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(100)) /*Parser::go_to*/;
@@ -33459,7 +33466,7 @@ void parser___ReduceAction536___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tkwnullnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tkwnullnode2*/, COLOR_TKwnull, ID_TKwnull)) /*cast TKwnull*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction536___action, LOCATE_parser, 16766); nit_exit(1);}
-  variable5 = NEW_parser_prod___ANullExpr___init_anullexpr( variable3 /*tkwnullnode2*/); /*new ANullExpr*/
+  variable5 = NEW_ANullExpr_parser_prod___ANullExpr___init_anullexpr( variable3 /*tkwnullnode2*/); /*new ANullExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(100)) /*Parser::go_to*/;
@@ -33493,7 +33500,7 @@ void parser___ReduceAction537___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tnumbernode2*/==NIT_NULL) || VAL_ISA( variable3 /*tnumbernode2*/, COLOR_TNumber, ID_TNumber)) /*cast TNumber*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction537___action, LOCATE_parser, 16782); nit_exit(1);}
-  variable5 = NEW_parser_prod___AIntExpr___init_aintexpr( variable3 /*tnumbernode2*/); /*new AIntExpr*/
+  variable5 = NEW_AIntExpr_parser_prod___AIntExpr___init_aintexpr( variable3 /*tnumbernode2*/); /*new AIntExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(100)) /*Parser::go_to*/;
@@ -33527,7 +33534,7 @@ void parser___ReduceAction538___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tfloatnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tfloatnode2*/, COLOR_TFloat, ID_TFloat)) /*cast TFloat*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction538___action, LOCATE_parser, 16798); nit_exit(1);}
-  variable5 = NEW_parser_prod___AFloatExpr___init_afloatexpr( variable3 /*tfloatnode2*/); /*new AFloatExpr*/
+  variable5 = NEW_AFloatExpr_parser_prod___AFloatExpr___init_afloatexpr( variable3 /*tfloatnode2*/); /*new AFloatExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(100)) /*Parser::go_to*/;
@@ -33561,7 +33568,7 @@ void parser___ReduceAction539___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tcharnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tcharnode2*/, COLOR_TChar, ID_TChar)) /*cast TChar*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction539___action, LOCATE_parser, 16814); nit_exit(1);}
-  variable5 = NEW_parser_prod___ACharExpr___init_acharexpr( variable3 /*tcharnode2*/); /*new ACharExpr*/
+  variable5 = NEW_ACharExpr_parser_prod___ACharExpr___init_acharexpr( variable3 /*tcharnode2*/); /*new ACharExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(100)) /*Parser::go_to*/;
@@ -33595,7 +33602,7 @@ void parser___ReduceAction540___action(val_t  self, val_t  param0) {
   variable3 =  variable2 /*nodearraylist1*/;
   variable4 = TAG_Bool(( variable3 /*tstringnode2*/==NIT_NULL) || VAL_ISA( variable3 /*tstringnode2*/, COLOR_TString, ID_TString)) /*cast TString*/;
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction540___action, LOCATE_parser, 16830); nit_exit(1);}
-  variable5 = NEW_parser_prod___AStringExpr___init_astringexpr( variable3 /*tstringnode2*/); /*new AStringExpr*/
+  variable5 = NEW_AStringExpr_parser_prod___AStringExpr___init_astringexpr( variable3 /*tstringnode2*/); /*new AStringExpr*/
   variable4 = variable5;
   variable1 =  variable4 /*pexprnode1*/ /*node_list=*/;
   variable5 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(100)) /*Parser::go_to*/;
@@ -33695,7 +33702,7 @@ void parser___ReduceAction542___action(val_t  self, val_t  param0) {
   variable14 =  variable4 /*nodearraylist8*/;
   variable15 = TAG_Bool(( variable14 /*ptypenode4*/==NIT_NULL) || VAL_ISA( variable14 /*ptypenode4*/, COLOR_PType, ID_PType)) /*cast PType*/;
   if (!UNTAG_Bool(variable15)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_parser___ReduceAction542___action, LOCATE_parser, 16872); nit_exit(1);}
-  variable16 = NEW_parser_prod___AAsCastExpr___init_aascastexpr( variable12 /*pexprnode2*/,  variable13 /*tkwasnode3*/,  variable14 /*ptypenode4*/); /*new AAsCastExpr*/
+  variable16 = NEW_AAsCastExpr_parser_prod___AAsCastExpr___init_aascastexpr( variable12 /*pexprnode2*/,  variable13 /*tkwasnode3*/,  variable14 /*ptypenode4*/); /*new AAsCastExpr*/
   variable15 = variable16;
   variable1 =  variable15 /*pexprnode1*/ /*node_list=*/;
   variable16 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(100)) /*Parser::go_to*/;
@@ -33759,7 +33766,7 @@ void parser___ReduceAction544___action(val_t  self, val_t  param0) {
   trace.file = LOCATE_parser;
   variable0 =  param0;
   variable1 =  NIT_NULL /*null*/;
-  variable3 = NEW_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
+  variable3 = NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(); /*new AImplicitSelfExpr*/
   variable2 = variable3;
   variable1 =  variable2 /*pexprnode1*/ /*node_list=*/;
   variable3 = ((parser___Parser___go_to_t)CALL( variable0 /*p*/,COLOR_parser___Parser___go_to))( variable0 /*p*/,  TAG_Int(101)) /*Parser::go_to*/;
@@ -33790,7 +33797,7 @@ void parser___ReduceAction545___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*pimportnode1*/==NIT_NULL) || VAL_ISA( variable4 /*pimportnode1*/, COLOR_PImport, ID_PImport)) /*cast PImport*/;
@@ -33832,7 +33839,7 @@ void parser___ReduceAction546___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*listnode1*/==NIT_NULL) || VAL_ISA( variable5 /*listnode1*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -33882,7 +33889,7 @@ void parser___ReduceAction547___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*pclassdefnode1*/==NIT_NULL) || VAL_ISA( variable4 /*pclassdefnode1*/, COLOR_PClassdef, ID_PClassdef)) /*cast PClassdef*/;
@@ -33924,7 +33931,7 @@ void parser___ReduceAction548___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*listnode1*/==NIT_NULL) || VAL_ISA( variable5 /*listnode1*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -33974,7 +33981,7 @@ void parser___ReduceAction549___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*psuperclassnode1*/==NIT_NULL) || VAL_ISA( variable4 /*psuperclassnode1*/, COLOR_PSuperclass, ID_PSuperclass)) /*cast PSuperclass*/;
@@ -34016,7 +34023,7 @@ void parser___ReduceAction550___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*listnode1*/==NIT_NULL) || VAL_ISA( variable5 /*listnode1*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -34066,7 +34073,7 @@ void parser___ReduceAction551___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*pformaldefnode1*/==NIT_NULL) || VAL_ISA( variable4 /*pformaldefnode1*/, COLOR_PFormaldef, ID_PFormaldef)) /*cast PFormaldef*/;
@@ -34108,7 +34115,7 @@ void parser___ReduceAction552___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*listnode1*/==NIT_NULL) || VAL_ISA( variable5 /*listnode1*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -34158,7 +34165,7 @@ void parser___ReduceAction553___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*ppropdefnode1*/==NIT_NULL) || VAL_ISA( variable4 /*ppropdefnode1*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -34200,7 +34207,7 @@ void parser___ReduceAction554___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*listnode1*/==NIT_NULL) || VAL_ISA( variable5 /*listnode1*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -34250,7 +34257,7 @@ void parser___ReduceAction555___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*ppropdefnode1*/==NIT_NULL) || VAL_ISA( variable4 /*ppropdefnode1*/, COLOR_PPropdef, ID_PPropdef)) /*cast PPropdef*/;
@@ -34292,7 +34299,7 @@ void parser___ReduceAction556___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*listnode1*/==NIT_NULL) || VAL_ISA( variable5 /*listnode1*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -34342,7 +34349,7 @@ void parser___ReduceAction557___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*pparamnode1*/==NIT_NULL) || VAL_ISA( variable4 /*pparamnode1*/, COLOR_PParam, ID_PParam)) /*cast PParam*/;
@@ -34384,7 +34391,7 @@ void parser___ReduceAction558___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*listnode1*/==NIT_NULL) || VAL_ISA( variable5 /*listnode1*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -34434,7 +34441,7 @@ void parser___ReduceAction559___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*ptypenode1*/==NIT_NULL) || VAL_ISA( variable4 /*ptypenode1*/, COLOR_PType, ID_PType)) /*cast PType*/;
@@ -34476,7 +34483,7 @@ void parser___ReduceAction560___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*listnode1*/==NIT_NULL) || VAL_ISA( variable5 /*listnode1*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -34526,7 +34533,7 @@ void parser___ReduceAction561___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*pexprnode1*/==NIT_NULL) || VAL_ISA( variable4 /*pexprnode1*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -34568,7 +34575,7 @@ void parser___ReduceAction562___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*listnode1*/==NIT_NULL) || VAL_ISA( variable5 /*listnode1*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -34618,7 +34625,7 @@ void parser___ReduceAction563___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*listnode1*/==NIT_NULL) || VAL_ISA( variable4 /*listnode1*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -34665,7 +34672,7 @@ void parser___ReduceAction564___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*listnode1*/==NIT_NULL) || VAL_ISA( variable5 /*listnode1*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -34720,7 +34727,7 @@ void parser___ReduceAction565___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*pexprnode1*/==NIT_NULL) || VAL_ISA( variable4 /*pexprnode1*/, COLOR_PExpr, ID_PExpr)) /*cast PExpr*/;
@@ -34762,7 +34769,7 @@ void parser___ReduceAction566___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*listnode1*/==NIT_NULL) || VAL_ISA( variable5 /*listnode1*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -34812,7 +34819,7 @@ void parser___ReduceAction567___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*tidnode1*/==NIT_NULL) || VAL_ISA( variable4 /*tidnode1*/, COLOR_TId, ID_TId)) /*cast TId*/;
@@ -34854,7 +34861,7 @@ void parser___ReduceAction568___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*listnode1*/==NIT_NULL) || VAL_ISA( variable5 /*listnode1*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -34904,7 +34911,7 @@ void parser___ReduceAction569___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*tcommentnode1*/==NIT_NULL) || VAL_ISA( variable4 /*tcommentnode1*/, COLOR_TComment, ID_TComment)) /*cast TComment*/;
@@ -34946,7 +34953,7 @@ void parser___ReduceAction570___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*listnode1*/==NIT_NULL) || VAL_ISA( variable5 /*listnode1*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;
@@ -34996,7 +35003,7 @@ void parser___ReduceAction571___action(val_t  self, val_t  param0) {
   variable1 =  NIT_NULL /*null*/;
   variable3 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable3 = variable4;
   variable4 =  variable2 /*nodearraylist1*/;
   variable5 = TAG_Bool(( variable4 /*teolnode1*/==NIT_NULL) || VAL_ISA( variable4 /*teolnode1*/, COLOR_TEol, ID_TEol)) /*cast TEol*/;
@@ -35038,7 +35045,7 @@ void parser___ReduceAction572___action(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable4 = ((parser___Parser___pop_t)CALL( variable0 /*p*/,COLOR_parser___Parser___pop))( variable0 /*p*/) /*Parser::pop*/;
   variable3 = variable4;
-  variable5 = NEW_array___Array___init(); /*new Array[E]*/
+  variable5 = NEW_Array_array___Array___init(); /*new Array[Object]*/
   variable4 = variable5;
   variable5 =  variable3 /*nodearraylist1*/;
   variable6 = TAG_Bool(( variable5 /*listnode1*/==NIT_NULL) || VAL_ISA( variable5 /*listnode1*/, COLOR_Array, ID_Array)) /*cast Array[Object]*/;

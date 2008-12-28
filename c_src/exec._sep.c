@@ -113,7 +113,7 @@ void exec___Process___execute(val_t  self, val_t  param0, val_t  param1, val_t  
   variable1 =  param1;
   variable2 =  param2;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Process].i]) return;
-  variable4 = NEW_string___String___init(); /*new String*/
+  variable4 = NEW_String_string___String___init(); /*new String*/
   variable3 = variable4;
   variable4 =  TAG_Int(1);
   ((string___String___append_t)CALL( variable3 /*args*/,COLOR_abstract_collection___IndexedCollection___append))( variable3 /*args*/,  variable0 /*command*/) /*String::append*/;
@@ -198,7 +198,7 @@ void exec___IProcess___init(val_t  self, val_t  param0, val_t  param1, int* init
   ((exec___Process___execute_t)CALL( self,COLOR_exec___Process___execute))( self,  variable0 /*command*/,  variable1 /*arguments*/,  TAG_Int(2), init_table /*YYY*/) /*Process::execute*/;
   variable2 = ATTR_exec___Process____data( self) /*Process::_data*/;
   variable2 = ((exec___NativeProcess___out_fd_t)CALL(variable2,COLOR_exec___NativeProcess___out_fd))(variable2) /*NativeProcess::out_fd*/;
-  variable3 = NEW_stream___FDIStream___init(variable2); /*new FDIStream*/
+  variable3 = NEW_FDIStream_stream___FDIStream___init(variable2); /*new FDIStream*/
   variable2 = variable3;
   ATTR_exec___IProcess____in( self) /*IProcess::_in*/ = variable2;
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IProcess].i] = 1;
@@ -217,7 +217,7 @@ void exec___IProcess___init_(val_t  self, val_t  param0, int* init_table) {
   ((exec___Process___execute_t)CALL( self,COLOR_exec___Process___execute))( self,  variable0 /*command*/,  NIT_NULL /*null*/,  TAG_Int(2), init_table /*YYY*/) /*Process::execute*/;
   variable1 = ATTR_exec___Process____data( self) /*Process::_data*/;
   variable1 = ((exec___NativeProcess___out_fd_t)CALL(variable1,COLOR_exec___NativeProcess___out_fd))(variable1) /*NativeProcess::out_fd*/;
-  variable2 = NEW_stream___FDIStream___init(variable1); /*new FDIStream*/
+  variable2 = NEW_FDIStream_stream___FDIStream___init(variable1); /*new FDIStream*/
   variable1 = variable2;
   ATTR_exec___IProcess____in( self) /*IProcess::_in*/ = variable1;
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IProcess].i] = 1;
@@ -274,7 +274,7 @@ void exec___OProcess___init(val_t  self, val_t  param0, val_t  param1, int* init
   ((exec___Process___execute_t)CALL( self,COLOR_exec___Process___execute))( self,  variable0 /*command*/,  variable1 /*arguments*/,  TAG_Int(1), init_table /*YYY*/) /*Process::execute*/;
   variable2 = ATTR_exec___Process____data( self) /*Process::_data*/;
   variable2 = ((exec___NativeProcess___in_fd_t)CALL(variable2,COLOR_exec___NativeProcess___in_fd))(variable2) /*NativeProcess::in_fd*/;
-  variable3 = NEW_stream___FDOStream___init(variable2); /*new FDOStream*/
+  variable3 = NEW_FDOStream_stream___FDOStream___init(variable2); /*new FDOStream*/
   variable2 = variable3;
   ATTR_exec___OProcess____out( self) /*OProcess::_out*/ = variable2;
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OProcess].i] = 1;
@@ -293,7 +293,7 @@ void exec___OProcess___init_(val_t  self, val_t  param0, int* init_table) {
   ((exec___Process___execute_t)CALL( self,COLOR_exec___Process___execute))( self,  variable0 /*command*/,  NIT_NULL /*null*/,  TAG_Int(1), init_table /*YYY*/) /*Process::execute*/;
   variable1 = ATTR_exec___Process____data( self) /*Process::_data*/;
   variable1 = ((exec___NativeProcess___in_fd_t)CALL(variable1,COLOR_exec___NativeProcess___in_fd))(variable1) /*NativeProcess::in_fd*/;
-  variable2 = NEW_stream___FDOStream___init(variable1); /*new FDOStream*/
+  variable2 = NEW_FDOStream_stream___FDOStream___init(variable1); /*new FDOStream*/
   variable1 = variable2;
   ATTR_exec___OProcess____out( self) /*OProcess::_out*/ = variable1;
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OProcess].i] = 1;
@@ -330,12 +330,12 @@ void exec___IOProcess___init(val_t  self, val_t  param0, val_t  param1, int* ini
   ((exec___OProcess___init_t)CALL( self,COLOR_exec___OProcess___init))( self,  param0,  param1, init_table /*YYY*/) /*OProcess::init*/;
   variable2 = ATTR_exec___Process____data( self) /*Process::_data*/;
   variable2 = ((exec___NativeProcess___out_fd_t)CALL(variable2,COLOR_exec___NativeProcess___out_fd))(variable2) /*NativeProcess::out_fd*/;
-  variable3 = NEW_stream___FDIStream___init(variable2); /*new FDIStream*/
+  variable3 = NEW_FDIStream_stream___FDIStream___init(variable2); /*new FDIStream*/
   variable2 = variable3;
   ATTR_exec___IProcess____in( self) /*IProcess::_in*/ = variable2;
   variable2 = ATTR_exec___Process____data( self) /*Process::_data*/;
   variable2 = ((exec___NativeProcess___in_fd_t)CALL(variable2,COLOR_exec___NativeProcess___in_fd))(variable2) /*NativeProcess::in_fd*/;
-  variable3 = NEW_stream___FDOStream___init(variable2); /*new FDOStream*/
+  variable3 = NEW_FDOStream_stream___FDOStream___init(variable2); /*new FDOStream*/
   variable2 = variable3;
   ATTR_exec___OProcess____out( self) /*OProcess::_out*/ = variable2;
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IOProcess].i] = 1;
@@ -356,12 +356,12 @@ void exec___IOProcess___init_(val_t  self, val_t  param0, int* init_table) {
   ((exec___OProcess___init__t)CALL( self,COLOR_exec___OProcess___init_))( self,  param0, init_table /*YYY*/) /*OProcess::init_*/;
   variable1 = ATTR_exec___Process____data( self) /*Process::_data*/;
   variable1 = ((exec___NativeProcess___out_fd_t)CALL(variable1,COLOR_exec___NativeProcess___out_fd))(variable1) /*NativeProcess::out_fd*/;
-  variable2 = NEW_stream___FDIStream___init(variable1); /*new FDIStream*/
+  variable2 = NEW_FDIStream_stream___FDIStream___init(variable1); /*new FDIStream*/
   variable1 = variable2;
   ATTR_exec___IProcess____in( self) /*IProcess::_in*/ = variable1;
   variable1 = ATTR_exec___Process____data( self) /*Process::_data*/;
   variable1 = ((exec___NativeProcess___in_fd_t)CALL(variable1,COLOR_exec___NativeProcess___in_fd))(variable1) /*NativeProcess::in_fd*/;
-  variable2 = NEW_stream___FDOStream___init(variable1); /*new FDOStream*/
+  variable2 = NEW_FDOStream_stream___FDOStream___init(variable1); /*new FDOStream*/
   variable1 = variable2;
   ATTR_exec___OProcess____out( self) /*OProcess::_out*/ = variable1;
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IOProcess].i] = 1;

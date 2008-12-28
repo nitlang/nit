@@ -325,7 +325,7 @@ val_t abstract_collection___Container___iterator(val_t  self) {
   val_t variable0;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 = NEW_abstract_collection___ContainerIterator___init( self); /*new ContainerIterator[E]*/
+  variable0 = NEW_ContainerIterator_abstract_collection___ContainerIterator___init( self); /*new ContainerIterator[E]*/
   goto return_label16;
   return_label16: while(false);
   tracehead = trace.prev;

@@ -1181,6 +1181,7 @@ extern const int SFT_parser_tables[];
 #define COLOR_parser_tables___ParserTable___build_goto_table SFT_parser_tables[1171]
 #define COLOR_parser_tables___ParserTable___error_messages SFT_parser_tables[1172]
 #define COLOR_parser_tables___ParserTable___errors SFT_parser_tables[1173]
+#define COLOR_parser_tables___ParserTable___init SFT_parser_tables[1174]
 #define ATTR_parser_tables___ParserTable____action_table(recv) ATTR(recv, COLOR_parser_tables___ParserTable____action_table)
 typedef void (* parser_tables___ParserTable___build_action_table_t)(val_t  self);
 void parser_tables___ParserTable___build_action_table(val_t  self);
@@ -4690,4 +4691,8 @@ val_t parser_tables___ParserTable___error_messages(val_t  self);
 typedef val_t (* parser_tables___ParserTable___errors_t)(val_t  self);
 val_t parser_tables___ParserTable___errors(val_t  self);
 #define LOCATE_parser_tables___ParserTable___errors "parser_tables::ParserTable::errors"
+typedef void (* parser_tables___ParserTable___init_t)(val_t  self, int* init_table);
+void parser_tables___ParserTable___init(val_t  self, int* init_table);
+val_t NEW_parser_tables___ParserTable___init();
+#define LOCATE_parser_tables___ParserTable___init "parser_tables::ParserTable::init"
 #endif

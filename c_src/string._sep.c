@@ -149,7 +149,7 @@ val_t string___String_____plus(val_t  self, val_t  param0) {
   variable2 = ((array___AbstractArray___length_t)CALL( self,COLOR_abstract_collection___Collection___length))( self) /*AbstractArray::length*/;
   variable3 = ((array___AbstractArray___length_t)CALL( variable0 /*s*/,COLOR_abstract_collection___Collection___length))( variable0 /*s*/) /*AbstractArray::length*/;
   variable2 = TAG_Int(UNTAG_Int(variable2)+UNTAG_Int(variable3));
-  variable3 = NEW_string___String___with_capacity(variable2); /*new String*/
+  variable3 = NEW_String_string___String___with_capacity(variable2); /*new String*/
   variable2 = variable3;
   variable1 = variable2;
   ((string___String___append_t)CALL( variable1 /*r*/,COLOR_abstract_collection___IndexedCollection___append))( variable1 /*r*/,  self) /*String::append*/;
@@ -173,7 +173,7 @@ val_t string___String_____star(val_t  self, val_t  param0) {
   if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string___String_____star, LOCATE_string, 85); nit_exit(1);}
   variable2 = ((array___AbstractArray___length_t)CALL( self,COLOR_abstract_collection___Collection___length))( self) /*AbstractArray::length*/;
   variable2 = TAG_Int(UNTAG_Int(variable2)*UNTAG_Int( variable0 /*i*/));
-  variable3 = NEW_string___String___with_capacity(variable2); /*new String*/
+  variable3 = NEW_String_string___String___with_capacity(variable2); /*new String*/
   variable2 = variable3;
   variable1 = variable2;
   while (true) { /*while*/
@@ -195,7 +195,7 @@ val_t string___String___to_s(val_t  self) {
   val_t variable0;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string;
-  variable0 = NEW_string___String___from( self); /*new String*/
+  variable0 = NEW_String_string___String___from( self); /*new String*/
   goto return_label9;
   return_label9: while(false);
   tracehead = trace.prev;
@@ -322,7 +322,7 @@ val_t string___String___substring(val_t  self, val_t  param0, val_t  param1) {
   variable2 = TAG_Bool(UNTAG_Int( variable0 /*from*/)<UNTAG_Int( variable1 /*count*/));
   if (UNTAG_Bool(variable2)) { /*if*/
     variable3 = TAG_Int(UNTAG_Int( variable1 /*count*/)-UNTAG_Int( variable0 /*from*/));
-    variable4 = NEW_string___String___with_capacity(variable3); /*new String*/
+    variable4 = NEW_String_string___String___with_capacity(variable3); /*new String*/
     variable3 = variable4;
     variable2 = variable3;
     while (true) { /*while*/
@@ -338,7 +338,7 @@ val_t string___String___substring(val_t  self, val_t  param0, val_t  param1) {
     variable2 =  variable2 /*r*/;
     goto return_label15;
   } else { /*if*/
-    variable2 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable2 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
     goto return_label15;
   }
   return_label15: while(false);
@@ -711,7 +711,7 @@ val_t string___String___to_upper(val_t  self) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string;
   variable1 = ((array___AbstractArray___length_t)CALL( self,COLOR_abstract_collection___Collection___length))( self) /*AbstractArray::length*/;
-  variable2 = NEW_string___String___with_capacity(variable1); /*new String*/
+  variable2 = NEW_String_string___String___with_capacity(variable1); /*new String*/
   variable1 = variable2;
   variable0 = variable1;
   variable1 = ((array___AbstractArray___iterator_t)CALL( self,COLOR_abstract_collection___Collection___iterator))( self) /*AbstractArray::iterator*/;
@@ -740,7 +740,7 @@ val_t string___String___to_lower(val_t  self) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string;
   variable1 = ((array___AbstractArray___length_t)CALL( self,COLOR_abstract_collection___Collection___length))( self) /*AbstractArray::length*/;
-  variable2 = NEW_string___String___with_capacity(variable1); /*new String*/
+  variable2 = NEW_String_string___String___with_capacity(variable1); /*new String*/
   variable1 = variable2;
   variable0 = variable1;
   variable1 = ((array___AbstractArray___iterator_t)CALL( self,COLOR_abstract_collection___Collection___iterator))( self) /*AbstractArray::iterator*/;
@@ -811,15 +811,15 @@ val_t string___Object___inspect_head(val_t  self) {
   val_t variable6;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string;
-  variable0 = NEW_string___String___init(); /*new String*/
-  variable1 = NEW_string___String___with_native(BOX_NativeString("<"), TAG_Int(1)); /*new String*/
+  variable0 = NEW_String_string___String___init(); /*new String*/
+  variable1 = NEW_String_string___String___with_native(BOX_NativeString("<"), TAG_Int(1)); /*new String*/
   variable2 = variable1;
   ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable2) /*String::append*/;
   variable3 = TAG_Int((bigint) self);
   variable3 = ((string___Int___to_hex_t)CALL(variable3,COLOR_string___Int___to_hex))(variable3) /*Int::to_hex*/;
   variable4 = variable3;
   ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable4) /*String::append*/;
-  variable5 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable5 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   variable6 = variable5;
   ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable6) /*String::append*/;
   goto return_label41;
@@ -849,7 +849,7 @@ val_t string___Bool___to_s(val_t  self) {
   if (UNTAG_Bool( self)) { /*if*/
     if (once_bool_variable0_44) variable0 = once_value_variable0_44;
     else {
-      variable0 = NEW_string___String___with_native(BOX_NativeString("true"), TAG_Int(4)); /*new String*/
+      variable0 = NEW_String_string___String___with_native(BOX_NativeString("true"), TAG_Int(4)); /*new String*/
       once_value_variable0_44 = variable0;
       once_bool_variable0_44 = true;
     }
@@ -857,7 +857,7 @@ val_t string___Bool___to_s(val_t  self) {
   } else { /*if*/
     if (once_bool_variable0_45) variable0 = once_value_variable0_45;
     else {
-      variable0 = NEW_string___String___with_native(BOX_NativeString("false"), TAG_Int(5)); /*new String*/
+      variable0 = NEW_String_string___String___with_native(BOX_NativeString("false"), TAG_Int(5)); /*new String*/
       once_value_variable0_45 = variable0;
       once_bool_variable0_45 = true;
     }
@@ -955,7 +955,7 @@ val_t string___Int___to_base(val_t  self, val_t  param0, val_t  param1) {
   variable1 =  param1;
   variable3 = ((kernel___Int___digit_count_t)CALL( self,COLOR_kernel___Int___digit_count))( self,  variable0 /*base*/) /*Int::digit_count*/;
   variable2 = variable3;
-  variable4 = NEW_string___String___filled_with( TAG_Char(' '),  variable2 /*l*/); /*new String*/
+  variable4 = NEW_String_string___String___filled_with( TAG_Char(' '),  variable2 /*l*/); /*new String*/
   variable3 = variable4;
   ((string___Int___fill_string_t)CALL( self,COLOR_string___Int___fill_string))( self,  variable3 /*s*/,  variable0 /*base*/,  variable1 /*signed*/) /*Int::fill_string*/;
   variable2 =  variable3 /*s*/;
@@ -1018,20 +1018,20 @@ val_t string___Float___to_precision(val_t  self, val_t  param0) {
   variable4 = BOX_Float(UNBOX_Float(variable4)*UNBOX_Float( variable2 /*dec*/));
   variable4 = TAG_Int((bigint)UNBOX_Float(variable4));
   variable3 = variable4;
-  variable4 = NEW_string___String___init(); /*new String*/
-  variable5 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable4 = NEW_String_string___String___init(); /*new String*/
+  variable5 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   variable6 = variable5;
   ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable6) /*String::append*/;
   variable7 =  variable1 /*i*/;
   variable7 = ((string___String___to_s_t)CALL(variable7,COLOR_string___Object___to_s))(variable7) /*String::to_s*/;
   ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable7) /*String::append*/;
-  variable8 = NEW_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
+  variable8 = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
   variable9 = variable8;
   ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable9) /*String::append*/;
   variable10 =  variable3 /*d*/;
   variable10 = ((string___String___to_s_t)CALL(variable10,COLOR_string___Object___to_s))(variable10) /*String::to_s*/;
   ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable10) /*String::append*/;
-  variable11 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable11 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   variable12 = variable11;
   ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable12) /*String::append*/;
   variable1 = variable4;
@@ -1046,7 +1046,7 @@ val_t string___Char___to_s(val_t  self) {
   val_t variable1;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string;
-  variable1 = NEW_string___String___with_capacity( TAG_Int(1)); /*new String*/
+  variable1 = NEW_String_string___String___with_capacity( TAG_Int(1)); /*new String*/
   variable0 = variable1;
   ((string___String_____braeq_t)CALL( variable0 /*s*/,COLOR_abstract_collection___Map_____braeq))( variable0 /*s*/,  TAG_Int(0),  self) /*String::[]=*/;
   variable0 =  variable0 /*s*/;
@@ -1063,7 +1063,7 @@ val_t string___Collection___to_s(val_t  self) {
     val_t variable3;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string;
-  variable1 = NEW_string___String___init(); /*new String*/
+  variable1 = NEW_String_string___String___init(); /*new String*/
   variable0 = variable1;
   variable1 = ((abstract_collection___Collection___iterator_t)CALL( self,COLOR_abstract_collection___Collection___iterator))( self) /*Collection::iterator*/;
   while (true) { /*for*/
@@ -1097,10 +1097,10 @@ val_t string___Collection___join(val_t  self, val_t  param0) {
   variable0 =  param0;
   variable1 = ((abstract_collection___Collection___is_empty_t)CALL( self,COLOR_abstract_collection___Collection___is_empty))( self) /*Collection::is_empty*/;
   if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable1 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
     goto return_label57;
   }
-  variable2 = NEW_string___String___init(); /*new String*/
+  variable2 = NEW_String_string___String___init(); /*new String*/
   variable1 = variable2;
   variable3 = ((abstract_collection___Collection___iterator_t)CALL( self,COLOR_abstract_collection___Collection___iterator))( self) /*Collection::iterator*/;
   variable2 = variable3;
@@ -1159,10 +1159,10 @@ val_t string___Map___map_join(val_t  self, val_t  param0, val_t  param1) {
   variable1 =  param1;
   variable2 = ((abstract_collection___Collection___is_empty_t)CALL( self,COLOR_abstract_collection___Collection___is_empty))( self) /*Collection::is_empty*/;
   if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable2 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
     goto return_label59;
   }
-  variable3 = NEW_string___String___init(); /*new String*/
+  variable3 = NEW_String_string___String___init(); /*new String*/
   variable2 = variable3;
   variable4 = ((abstract_collection___Map___iterator_t)CALL( self,COLOR_abstract_collection___Collection___iterator))( self) /*Map::iterator*/;
   variable3 = variable4;
@@ -1172,25 +1172,25 @@ val_t string___Map___map_join(val_t  self, val_t  param0, val_t  param1) {
   variable5 = variable6;
   variable6 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable5 /*e*/ ==  NIT_NULL /*null*/) || (( variable5 /*e*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable5 /*e*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable5 /*e*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable5 /*e*/,COLOR_kernel___Object_____eqeq))( variable5 /*e*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable6)) { /*if*/
-    variable6 = NEW_string___String___init(); /*new String*/
-    variable7 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable6 = NEW_String_string___String___init(); /*new String*/
+    variable7 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
     variable8 = variable7;
     ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable8) /*String::append*/;
     variable9 =  variable4 /*k*/;
     variable9 = ((string___String___to_s_t)CALL(variable9,COLOR_string___Object___to_s))(variable9) /*String::to_s*/;
     ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable9) /*String::append*/;
-    variable10 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable10 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
     variable11 = variable10;
     ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable11) /*String::append*/;
     variable12 =  variable1 /*couple_sep*/;
     ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable12) /*String::append*/;
-    variable13 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable13 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
     variable14 = variable13;
     ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable14) /*String::append*/;
     variable15 =  variable5 /*e*/;
     variable15 = ((string___String___to_s_t)CALL(variable15,COLOR_string___Object___to_s))(variable15) /*String::to_s*/;
     ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable15) /*String::append*/;
-    variable16 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable16 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
     variable17 = variable16;
     ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable17) /*String::append*/;
     ((string___String___append_t)CALL( variable2 /*s*/,COLOR_abstract_collection___IndexedCollection___append))( variable2 /*s*/, variable6) /*String::append*/;
@@ -1206,25 +1206,25 @@ val_t string___Map___map_join(val_t  self, val_t  param0, val_t  param1) {
     variable5 = variable6 /*e=*/;
     variable6 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable5 /*e*/ ==  NIT_NULL /*null*/) || (( variable5 /*e*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable5 /*e*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable5 /*e*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable5 /*e*/,COLOR_kernel___Object_____eqeq))( variable5 /*e*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
     if (UNTAG_Bool(variable6)) { /*if*/
-      variable6 = NEW_string___String___init(); /*new String*/
-      variable7 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+      variable6 = NEW_String_string___String___init(); /*new String*/
+      variable7 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
       variable8 = variable7;
       ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable8) /*String::append*/;
       variable9 =  variable4 /*k*/;
       variable9 = ((string___String___to_s_t)CALL(variable9,COLOR_string___Object___to_s))(variable9) /*String::to_s*/;
       ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable9) /*String::append*/;
-      variable10 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+      variable10 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
       variable11 = variable10;
       ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable11) /*String::append*/;
       variable12 =  variable1 /*couple_sep*/;
       ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable12) /*String::append*/;
-      variable13 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+      variable13 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
       variable14 = variable13;
       ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable14) /*String::append*/;
       variable15 =  variable5 /*e*/;
       variable15 = ((string___String___to_s_t)CALL(variable15,COLOR_string___Object___to_s))(variable15) /*String::to_s*/;
       ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable15) /*String::append*/;
-      variable16 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+      variable16 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
       variable17 = variable16;
       ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable17) /*String::append*/;
       ((string___String___append_t)CALL( variable2 /*s*/,COLOR_abstract_collection___IndexedCollection___append))( variable2 /*s*/, variable6) /*String::append*/;
@@ -1290,12 +1290,26 @@ val_t string___NativeString___atoi(val_t  self) {
   tracehead = trace.prev;
   return TAG_Int(atoi(UNBOX_NativeString( self)));
 }
+void string___NativeString___init(val_t  self, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 0, LOCATE_string___NativeString___init};
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_string;
+  tracehead = trace.prev;
+  return;
+}
 val_t string___StringCapable___calloc_string(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 524, LOCATE_string___StringCapable___calloc_string};
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string;
   tracehead = trace.prev;
   return BOX_NativeString((char*)malloc((UNTAG_Int( param0) * sizeof(char))));
+}
+void string___StringCapable___init(val_t  self, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 0, LOCATE_string___StringCapable___init};
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_string;
+  tracehead = trace.prev;
+  return;
 }
 val_t string___Sys___args(val_t  self) {
   struct trace_t trace = {NULL, NULL, 530, LOCATE_string___Sys___args};
@@ -1320,7 +1334,7 @@ val_t string___Sys___program_name(val_t  self) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string;
   variable0 = ((string___Sys___native_argv_t)CALL( self,COLOR_string___Sys___native_argv))( self,  TAG_Int(0)) /*Sys::native_argv*/;
-  variable1 = NEW_string___String___from_cstring(variable0); /*new String*/
+  variable1 = NEW_String_string___String___from_cstring(variable0); /*new String*/
   variable0 = variable1;
   goto return_label64;
   return_label64: while(false);
@@ -1339,7 +1353,7 @@ void string___Sys___init_args(val_t  self) {
   trace.file = LOCATE_string;
   variable1 = ((string___Sys___native_argc_t)CALL( self,COLOR_string___Sys___native_argc))( self) /*Sys::native_argc*/;
   variable0 = variable1;
-  variable2 = NEW_array___Array___with_capacity( TAG_Int(0)); /*new Array[E]*/
+  variable2 = NEW_Array_array___Array___with_capacity( TAG_Int(0)); /*new Array[String]*/
   variable1 = variable2;
   variable2 =  TAG_Int(1);
   while (true) { /*while*/
@@ -1347,7 +1361,7 @@ void string___Sys___init_args(val_t  self) {
     if (!UNTAG_Bool(variable3)) break; /* while*/
     variable3 = TAG_Int(UNTAG_Int( variable2 /*i*/)-UNTAG_Int( TAG_Int(1)));
     variable4 = ((string___Sys___native_argv_t)CALL( self,COLOR_string___Sys___native_argv))( self,  variable2 /*i*/) /*Sys::native_argv*/;
-    variable5 = NEW_string___String___from_cstring(variable4); /*new String*/
+    variable5 = NEW_String_string___String___from_cstring(variable4); /*new String*/
     variable4 = variable5;
     ((array___Array_____braeq_t)CALL( variable1 /*args*/,COLOR_abstract_collection___Map_____braeq))( variable1 /*args*/, variable3, variable4) /*Array::[]=*/;
     variable2 = TAG_Int(UNTAG_Int(variable2)+UNTAG_Int( TAG_Int(1))) /*i*/;

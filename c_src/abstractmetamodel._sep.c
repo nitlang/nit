@@ -86,9 +86,9 @@ void abstractmetamodel___MMContext___add_local_class(val_t  self, val_t  param0,
   variable1 =  param1;
   variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable1 /*sup*/ ==  NIT_NULL /*null*/) || (( variable1 /*sup*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable1 /*sup*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable1 /*sup*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable1 /*sup*/,COLOR_kernel___Object_____eqeq))( variable1 /*sup*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMContext___add_local_class, LOCATE_abstractmetamodel, 57); nit_exit(1);}
-  variable3 = NEW_array___Array___init(); /*new Array[E]*/
+  variable3 = NEW_Array_array___Array___init(); /*new Array[MMLocalClass]*/
   variable2 = variable3;
-  variable4 = NEW_array___Array___init(); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___init(); /*new Array[String]*/
   variable3 = variable4;
   variable4 = ((array___AbstractArray___iterator_t)CALL( variable1 /*sup*/,COLOR_abstract_collection___Collection___iterator))( variable1 /*sup*/) /*AbstractArray::iterator*/;
   while (true) { /*for*/
@@ -229,21 +229,21 @@ val_t abstractmetamodel___MMDirectory___full_name_for(val_t  self, val_t  param0
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstractmetamodel;
   variable0 =  param0;
-  variable1 = NEW_string___String___init(); /*new String*/
-  variable2 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable1 = NEW_String_string___String___init(); /*new String*/
+  variable2 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   variable3 = variable2;
   ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable3) /*String::append*/;
   variable4 = ((abstractmetamodel___MMDirectory___name_t)CALL( self,COLOR_abstractmetamodel___MMDirectory___name))( self) /*MMDirectory::name*/;
   variable5 = variable4;
   variable5 = ((string___String___to_s_t)CALL(variable5,COLOR_string___Object___to_s))(variable5) /*String::to_s*/;
   ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable5) /*String::append*/;
-  variable6 = NEW_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)); /*new String*/
+  variable6 = NEW_String_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)); /*new String*/
   variable7 = variable6;
   ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable7) /*String::append*/;
   variable8 =  variable0 /*module_name*/;
   variable8 = ((string___String___to_s_t)CALL(variable8,COLOR_string___Object___to_s))(variable8) /*String::to_s*/;
   ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable8) /*String::append*/;
-  variable9 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable9 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   variable10 = variable9;
   ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable10) /*String::append*/;
   variable1 = ((symbol___String___to_symbol_t)CALL(variable1,COLOR_symbol___String___to_symbol))(variable1) /*String::to_symbol*/;
@@ -660,7 +660,7 @@ void abstractmetamodel___MMGlobalClass___register_local_class(val_t  self, val_t
   variable1 = ((abstractmetamodel___MMLocalClass___crhe_t)CALL( variable0 /*c*/,COLOR_abstractmetamodel___MMLocalClass___crhe))( variable0 /*c*/) /*MMLocalClass::crhe*/;
   variable1 = TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMGlobalClass___register_local_class, LOCATE_abstractmetamodel, 314); nit_exit(1);}
-  variable2 = NEW_array___Array___init(); /*new Array[E]*/
+  variable2 = NEW_Array_array___Array___init(); /*new Array[MMLocalClass]*/
   variable1 = variable2;
   variable2 = ((abstractmetamodel___MMGlobalClass___class_refinement_hierarchy_t)CALL( self,COLOR_abstractmetamodel___MMGlobalClass___class_refinement_hierarchy))( self) /*MMGlobalClass::class_refinement_hierarchy*/;
   variable2 = ((partial_order___PartialOrder___iterator_t)CALL(variable2,COLOR_abstract_collection___Collection___iterator))(variable2) /*PartialOrder::iterator*/;
@@ -871,7 +871,7 @@ void abstractmetamodel___MMLocalClass___new_global(val_t  self) {
   val_t variable2;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstractmetamodel;
-  variable1 = NEW_abstractmetamodel___MMGlobalClass___init( self); /*new MMGlobalClass*/
+  variable1 = NEW_MMGlobalClass_abstractmetamodel___MMGlobalClass___init( self); /*new MMGlobalClass*/
   variable0 = variable1;
   variable1 = ATTR_abstractmetamodel___MMLocalClass____module( self) /*MMLocalClass::_module*/;
   variable1 = ATTR_abstractmetamodel___MMModule____global_classes(variable1) /*MMModule::_global_classes*/;
@@ -1056,7 +1056,7 @@ val_t abstractmetamodel___MMLocalClass___super_methods_named(val_t  self, val_t 
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstractmetamodel;
   variable0 =  param0;
-  variable2 = NEW_array___Array___init(); /*new Array[E]*/
+  variable2 = NEW_Array_array___Array___init(); /*new Array[MMLocalClass]*/
   variable1 = variable2;
   variable2 = ((abstractmetamodel___MMLocalClass___cshe_t)CALL( self,COLOR_abstractmetamodel___MMLocalClass___cshe))( self) /*MMLocalClass::cshe*/;
   variable2 = ((partial_order___PartialOrderElement___greaters_t)CALL(variable2,COLOR_partial_order___PartialOrderElement___greaters))(variable2) /*PartialOrderElement::greaters*/;
@@ -1080,7 +1080,7 @@ val_t abstractmetamodel___MMLocalClass___super_methods_named(val_t  self, val_t 
   variable2 = ((partial_order___PartialOrderElement___order_t)CALL(variable2,COLOR_partial_order___PartialOrderElement___order))(variable2) /*PartialOrderElement::order*/;
   variable2 = ((partial_order___PartialOrder___select_smallests_t)CALL(variable2,COLOR_partial_order___PartialOrder___select_smallests))(variable2,  variable1 /*classes*/) /*PartialOrder::select_smallests*/;
   variable1 = variable2 /*classes=*/;
-  variable3 = NEW_array___Array___init(); /*new Array[E]*/
+  variable3 = NEW_Array_array___Array___init(); /*new Array[MMLocalProperty]*/
   variable2 = variable3;
   variable3 = ((array___AbstractArray___iterator_t)CALL( variable1 /*classes*/,COLOR_abstract_collection___Collection___iterator))( variable1 /*classes*/) /*AbstractArray::iterator*/;
   while (true) { /*for*/
@@ -1144,7 +1144,7 @@ void abstractmetamodel___MMLocalClass___register_global_property(val_t  self, va
   variable4 = TAG_Bool(( variable3 /*props*/ ==  NIT_NULL /*null*/) || (( variable3 /*props*/ != NIT_NULL) && UNTAG_Bool(((array___AbstractArray_____eqeq_t)CALL( variable3 /*props*/,COLOR_kernel___Object_____eqeq))( variable3 /*props*/,  NIT_NULL /*null*/) /*AbstractArray::==*/)));
   if (UNTAG_Bool(variable4)) { /*if*/
     variable4 = ATTR_abstractmetamodel___MMLocalClass____properties_by_name( self) /*MMLocalClass::_properties_by_name*/;
-    variable5 = NEW_array___Array___with_capacity(TAG_Int(1)); /*new Array[E]*/
+    variable5 = NEW_Array_array___Array___with_capacity(TAG_Int(1)); /*new Array[MMGlobalProperty]*/
     ((array___AbstractArray___add_t)CALL(variable5,COLOR_abstract_collection___SimpleCollection___add))(variable5,  variable0 /*glob*/) /*AbstractArray::add*/;
     ((abstract_collection___Map_____braeq_t)CALL(variable4,COLOR_abstract_collection___Map_____braeq))(variable4,  variable2 /*name*/, variable5) /*Map::[]=*/;
   } else { /*if*/
@@ -1243,10 +1243,10 @@ void abstractmetamodel___MMGlobalProperty___init(val_t  self, val_t  param0, int
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMGlobalProperty].i]) return;
   variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable0 /*p*/ ==  NIT_NULL /*null*/) || (( variable0 /*p*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable0 /*p*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable0 /*p*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable0 /*p*/,COLOR_kernel___Object_____eqeq))( variable0 /*p*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMGlobalProperty___init, LOCATE_abstractmetamodel, 555); nit_exit(1);}
-  variable1 = NEW_partial_order___PartialOrder___init(); /*new PartialOrder[E]*/
+  variable1 = NEW_PartialOrder_partial_order___PartialOrder___init(); /*new PartialOrder[MMLocalProperty]*/
   ATTR_abstractmetamodel___MMGlobalProperty____property_hierarchy( self) /*MMGlobalProperty::_property_hierarchy*/ = variable1;
   ATTR_abstractmetamodel___MMGlobalProperty____intro( self) /*MMGlobalProperty::_intro*/ =  variable0 /*p*/;
-  variable1 = NEW_array___Array___init(); /*new Array[E]*/
+  variable1 = NEW_Array_array___Array___init(); /*new Array[MMLocalProperty]*/
   ((abstractmetamodel___MMGlobalProperty___add_local_property_t)CALL( self,COLOR_abstractmetamodel___MMGlobalProperty___add_local_property))( self,  variable0 /*p*/, variable1) /*MMGlobalProperty::add_local_property*/;
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMGlobalProperty].i] = 1;
   tracehead = trace.prev;
@@ -1399,8 +1399,8 @@ val_t abstractmetamodel___MMLocalProperty___full_name(val_t  self) {
   variable0 = ((abstractmetamodel___MMLocalProperty___global_t)CALL( self,COLOR_abstractmetamodel___MMLocalProperty___global))( self) /*MMLocalProperty::global*/;
   variable0 = TAG_Bool((variable0 ==  NIT_NULL /*null*/) || ((variable0 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable0, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))(variable0,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable0)) { /*if*/
-    variable0 = NEW_string___String___init(); /*new String*/
-    variable1 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable0 = NEW_String_string___String___init(); /*new String*/
+    variable1 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
     variable2 = variable1;
     ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable2) /*String::append*/;
     variable3 = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL( self,COLOR_abstractmetamodel___MMLocalProperty___local_class))( self) /*MMLocalProperty::local_class*/;
@@ -1408,21 +1408,21 @@ val_t abstractmetamodel___MMLocalProperty___full_name(val_t  self) {
     variable4 = variable3;
     variable4 = ((string___String___to_s_t)CALL(variable4,COLOR_string___Object___to_s))(variable4) /*String::to_s*/;
     ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable4) /*String::append*/;
-    variable5 = NEW_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
+    variable5 = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
     variable6 = variable5;
     ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable6) /*String::append*/;
     variable7 = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL( self,COLOR_abstractmetamodel___MMLocalProperty___local_class))( self) /*MMLocalProperty::local_class*/;
     variable8 = variable7;
     variable8 = ((string___String___to_s_t)CALL(variable8,COLOR_string___Object___to_s))(variable8) /*String::to_s*/;
     ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable8) /*String::append*/;
-    variable9 = NEW_string___String___with_native(BOX_NativeString("::(?::"), TAG_Int(6)); /*new String*/
+    variable9 = NEW_String_string___String___with_native(BOX_NativeString("::(?::"), TAG_Int(6)); /*new String*/
     variable10 = variable9;
     ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable10) /*String::append*/;
     variable11 = ((abstractmetamodel___MMLocalProperty___name_t)CALL( self,COLOR_abstractmetamodel___MMLocalProperty___name))( self) /*MMLocalProperty::name*/;
     variable12 = variable11;
     variable12 = ((string___String___to_s_t)CALL(variable12,COLOR_string___Object___to_s))(variable12) /*String::to_s*/;
     ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable12) /*String::append*/;
-    variable13 = NEW_string___String___with_native(BOX_NativeString(")"), TAG_Int(1)); /*new String*/
+    variable13 = NEW_String_string___String___with_native(BOX_NativeString(")"), TAG_Int(1)); /*new String*/
     variable14 = variable13;
     ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable14) /*String::append*/;
     goto return_label51;
@@ -1431,8 +1431,8 @@ val_t abstractmetamodel___MMLocalProperty___full_name(val_t  self) {
     variable0 = ((abstractmetamodel___MMGlobalProperty___intro_t)CALL(variable0,COLOR_abstractmetamodel___MMGlobalProperty___intro))(variable0) /*MMGlobalProperty::intro*/;
     variable0 = TAG_Bool((variable0 ==  self) || ((variable0 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable0, self)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))(variable0,  self) /*Object::==*/)))));
     if (UNTAG_Bool(variable0)) { /*if*/
-      variable0 = NEW_string___String___init(); /*new String*/
-      variable1 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+      variable0 = NEW_String_string___String___init(); /*new String*/
+      variable1 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
       variable2 = variable1;
       ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable2) /*String::append*/;
       variable3 = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL( self,COLOR_abstractmetamodel___MMLocalProperty___local_class))( self) /*MMLocalProperty::local_class*/;
@@ -1440,27 +1440,27 @@ val_t abstractmetamodel___MMLocalProperty___full_name(val_t  self) {
       variable4 = variable3;
       variable4 = ((string___String___to_s_t)CALL(variable4,COLOR_string___Object___to_s))(variable4) /*String::to_s*/;
       ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable4) /*String::append*/;
-      variable5 = NEW_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
+      variable5 = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
       variable6 = variable5;
       ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable6) /*String::append*/;
       variable7 = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL( self,COLOR_abstractmetamodel___MMLocalProperty___local_class))( self) /*MMLocalProperty::local_class*/;
       variable8 = variable7;
       variable8 = ((string___String___to_s_t)CALL(variable8,COLOR_string___Object___to_s))(variable8) /*String::to_s*/;
       ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable8) /*String::append*/;
-      variable9 = NEW_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
+      variable9 = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
       variable10 = variable9;
       ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable10) /*String::append*/;
       variable11 = ((abstractmetamodel___MMLocalProperty___name_t)CALL( self,COLOR_abstractmetamodel___MMLocalProperty___name))( self) /*MMLocalProperty::name*/;
       variable12 = variable11;
       variable12 = ((string___String___to_s_t)CALL(variable12,COLOR_string___Object___to_s))(variable12) /*String::to_s*/;
       ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable12) /*String::append*/;
-      variable13 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+      variable13 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
       variable14 = variable13;
       ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable14) /*String::append*/;
       goto return_label51;
     } else { /*if*/
-      variable0 = NEW_string___String___init(); /*new String*/
-      variable1 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+      variable0 = NEW_String_string___String___init(); /*new String*/
+      variable1 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
       variable2 = variable1;
       ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable2) /*String::append*/;
       variable3 = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL( self,COLOR_abstractmetamodel___MMLocalProperty___local_class))( self) /*MMLocalProperty::local_class*/;
@@ -1468,14 +1468,14 @@ val_t abstractmetamodel___MMLocalProperty___full_name(val_t  self) {
       variable4 = variable3;
       variable4 = ((string___String___to_s_t)CALL(variable4,COLOR_string___Object___to_s))(variable4) /*String::to_s*/;
       ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable4) /*String::append*/;
-      variable5 = NEW_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
+      variable5 = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
       variable6 = variable5;
       ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable6) /*String::append*/;
       variable7 = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL( self,COLOR_abstractmetamodel___MMLocalProperty___local_class))( self) /*MMLocalProperty::local_class*/;
       variable8 = variable7;
       variable8 = ((string___String___to_s_t)CALL(variable8,COLOR_string___Object___to_s))(variable8) /*String::to_s*/;
       ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable8) /*String::append*/;
-      variable9 = NEW_string___String___with_native(BOX_NativeString("::("), TAG_Int(3)); /*new String*/
+      variable9 = NEW_String_string___String___with_native(BOX_NativeString("::("), TAG_Int(3)); /*new String*/
       variable10 = variable9;
       ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable10) /*String::append*/;
       variable11 = ((abstractmetamodel___MMLocalProperty___global_t)CALL( self,COLOR_abstractmetamodel___MMLocalProperty___global))( self) /*MMLocalProperty::global*/;
@@ -1483,7 +1483,7 @@ val_t abstractmetamodel___MMLocalProperty___full_name(val_t  self) {
       variable11 = ((abstractmetamodel___MMLocalProperty___full_name_t)CALL(variable11,COLOR_abstractmetamodel___MMLocalProperty___full_name))(variable11) /*MMLocalProperty::full_name*/;
       variable12 = variable11;
       ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable12) /*String::append*/;
-      variable13 = NEW_string___String___with_native(BOX_NativeString(")"), TAG_Int(1)); /*new String*/
+      variable13 = NEW_String_string___String___with_native(BOX_NativeString(")"), TAG_Int(1)); /*new String*/
       variable14 = variable13;
       ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable14) /*String::append*/;
       goto return_label51;
@@ -1517,7 +1517,7 @@ void abstractmetamodel___MMLocalProperty___new_global(val_t  self) {
   variable0 = ATTR_abstractmetamodel___MMLocalProperty____global( self) /*MMLocalProperty::_global*/;
   variable0 = TAG_Bool((variable0 ==  NIT_NULL /*null*/) || ((variable0 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable0, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))(variable0,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (!UNTAG_Bool(variable0)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalProperty___new_global, LOCATE_abstractmetamodel, 629); nit_exit(1);}
-  variable0 = NEW_abstractmetamodel___MMGlobalProperty___init( self); /*new MMGlobalProperty*/
+  variable0 = NEW_MMGlobalProperty_abstractmetamodel___MMGlobalProperty___init( self); /*new MMGlobalProperty*/
   ATTR_abstractmetamodel___MMLocalProperty____global( self) /*MMLocalProperty::_global*/ = variable0;
   variable0 = ATTR_abstractmetamodel___MMLocalProperty____local_class( self) /*MMLocalProperty::_local_class*/;
   variable1 = ATTR_abstractmetamodel___MMLocalProperty____global( self) /*MMLocalProperty::_global*/;

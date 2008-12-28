@@ -53,33 +53,35 @@ extern const int SFT_static_type[];
 #define COLOR_static_type___MMAncestor___is_reffinement SFT_static_type[33]
 #define COLOR_static_type___MMAncestor___is_specialisation SFT_static_type[34]
 #define COLOR_static_type___MMAncestor___local_class SFT_static_type[35]
-#define ID_MMType SFT_static_type[36]
-#define COLOR_MMType SFT_static_type[37]
-#define INIT_TABLE_POS_MMType SFT_static_type[38]
-#define COLOR_static_type___MMType___module SFT_static_type[39]
-#define COLOR_static_type___MMType___local_class SFT_static_type[40]
-#define COLOR_static_type___MMType_____l SFT_static_type[41]
-#define COLOR_static_type___MMType___is_supertype SFT_static_type[42]
-#define COLOR_static_type___MMType___for_module SFT_static_type[43]
-#define COLOR_static_type___MMType___adapt_to SFT_static_type[44]
-#define COLOR_static_type___MMType___upcast_for SFT_static_type[45]
-#define COLOR_static_type___MMType___not_for_self SFT_static_type[46]
-#define ID_MMTypeClass SFT_static_type[47]
-#define COLOR_MMTypeClass SFT_static_type[48]
-#define COLOR_static_type___MMTypeClass____local_class SFT_static_type[49]
-#define INIT_TABLE_POS_MMTypeClass SFT_static_type[50]
-#define COLOR_static_type___MMTypeClass___init SFT_static_type[51]
-#define ID_MMTypeSimpleClass SFT_static_type[52]
-#define COLOR_MMTypeSimpleClass SFT_static_type[53]
-#define INIT_TABLE_POS_MMTypeSimpleClass SFT_static_type[54]
-#define COLOR_static_type___MMTypeSimpleClass___init SFT_static_type[55]
-#define ID_MMTypeNone SFT_static_type[56]
-#define COLOR_MMTypeNone SFT_static_type[57]
-#define COLOR_static_type___MMTypeNone____module SFT_static_type[58]
-#define INIT_TABLE_POS_MMTypeNone SFT_static_type[59]
-#define COLOR_static_type___MMTypeNone___init SFT_static_type[60]
-#define COLOR_static_type___MMModule____type_none SFT_static_type[61]
-#define COLOR_static_type___MMModule___type_none SFT_static_type[62]
+#define COLOR_static_type___MMAncestor___init SFT_static_type[36]
+#define ID_MMType SFT_static_type[37]
+#define COLOR_MMType SFT_static_type[38]
+#define INIT_TABLE_POS_MMType SFT_static_type[39]
+#define COLOR_static_type___MMType___module SFT_static_type[40]
+#define COLOR_static_type___MMType___local_class SFT_static_type[41]
+#define COLOR_static_type___MMType_____l SFT_static_type[42]
+#define COLOR_static_type___MMType___is_supertype SFT_static_type[43]
+#define COLOR_static_type___MMType___for_module SFT_static_type[44]
+#define COLOR_static_type___MMType___adapt_to SFT_static_type[45]
+#define COLOR_static_type___MMType___upcast_for SFT_static_type[46]
+#define COLOR_static_type___MMType___not_for_self SFT_static_type[47]
+#define COLOR_static_type___MMType___init SFT_static_type[48]
+#define ID_MMTypeClass SFT_static_type[49]
+#define COLOR_MMTypeClass SFT_static_type[50]
+#define COLOR_static_type___MMTypeClass____local_class SFT_static_type[51]
+#define INIT_TABLE_POS_MMTypeClass SFT_static_type[52]
+#define COLOR_static_type___MMTypeClass___init SFT_static_type[53]
+#define ID_MMTypeSimpleClass SFT_static_type[54]
+#define COLOR_MMTypeSimpleClass SFT_static_type[55]
+#define INIT_TABLE_POS_MMTypeSimpleClass SFT_static_type[56]
+#define COLOR_static_type___MMTypeSimpleClass___init SFT_static_type[57]
+#define ID_MMTypeNone SFT_static_type[58]
+#define COLOR_MMTypeNone SFT_static_type[59]
+#define COLOR_static_type___MMTypeNone____module SFT_static_type[60]
+#define INIT_TABLE_POS_MMTypeNone SFT_static_type[61]
+#define COLOR_static_type___MMTypeNone___init SFT_static_type[62]
+#define COLOR_static_type___MMModule____type_none SFT_static_type[63]
+#define COLOR_static_type___MMModule___type_none SFT_static_type[64]
 #define ATTR_static_type___MMLocalClass____base_type_cache(recv) ATTR(recv, COLOR_static_type___MMLocalClass____base_type_cache)
 typedef val_t (* static_type___MMLocalClass___get_type_t)(val_t  self);
 val_t static_type___MMLocalClass___get_type(val_t  self);
@@ -159,6 +161,10 @@ val_t static_type___MMAncestor___local_class(val_t  self);
 typedef val_t (* static_type___MMAncestor___to_s_t)(val_t  self);
 val_t static_type___MMAncestor___to_s(val_t  self);
 #define LOCATE_static_type___MMAncestor___to_s "static_type::MMAncestor::(string::Object::to_s)"
+typedef void (* static_type___MMAncestor___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void static_type___MMAncestor___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
+val_t NEW_static_type___MMAncestor___init(val_t  param0, val_t  param1);
+#define LOCATE_static_type___MMAncestor___init "static_type::MMAncestor::init"
 typedef val_t (* static_type___MMType___module_t)(val_t  self);
 val_t static_type___MMType___module(val_t  self);
 #define LOCATE_static_type___MMType___module "static_type::MMType::module"
@@ -183,6 +189,10 @@ val_t static_type___MMType___upcast_for(val_t  self, val_t  param0);
 typedef val_t (* static_type___MMType___not_for_self_t)(val_t  self);
 val_t static_type___MMType___not_for_self(val_t  self);
 #define LOCATE_static_type___MMType___not_for_self "static_type::MMType::not_for_self"
+typedef void (* static_type___MMType___init_t)(val_t  self, int* init_table);
+void static_type___MMType___init(val_t  self, int* init_table);
+val_t NEW_static_type___MMType___init();
+#define LOCATE_static_type___MMType___init "static_type::MMType::init"
 #define ATTR_static_type___MMTypeClass____local_class(recv) ATTR(recv, COLOR_static_type___MMTypeClass____local_class)
 typedef val_t (* static_type___MMTypeClass___local_class_t)(val_t  self);
 val_t static_type___MMTypeClass___local_class(val_t  self);

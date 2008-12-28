@@ -211,7 +211,7 @@ void list___List___push(val_t  self, val_t  param0) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
   variable0 =  param0;
-  variable2 = NEW_list___ListNode___init( variable0 /*e*/); /*new ListNode[E]*/
+  variable2 = NEW_ListNode_list___ListNode___init( variable0 /*e*/); /*new ListNode[E]*/
   variable1 = variable2;
   variable2 = ATTR_list___List____tail( self) /*List::_tail*/;
   variable2 = TAG_Bool((variable2 ==  NIT_NULL /*null*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  NIT_NULL /*null*/) /*Object::==*/)))));
@@ -235,7 +235,7 @@ void list___List___unshift(val_t  self, val_t  param0) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
   variable0 =  param0;
-  variable2 = NEW_list___ListNode___init( variable0 /*e*/); /*new ListNode[E]*/
+  variable2 = NEW_ListNode_list___ListNode___init( variable0 /*e*/); /*new ListNode[E]*/
   variable1 = variable2;
   variable2 = ATTR_list___List____head( self) /*List::_head*/;
   variable2 = TAG_Bool((variable2 ==  NIT_NULL /*null*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  NIT_NULL /*null*/) /*Object::==*/)))));
@@ -386,7 +386,7 @@ val_t list___List___iterator(val_t  self) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
   variable0 = ATTR_list___List____head( self) /*List::_head*/;
-  variable1 = NEW_list___ListIterator___init(variable0); /*new ListIterator[E]*/
+  variable1 = NEW_ListIterator_list___ListIterator___init(variable0); /*new ListIterator[E]*/
   variable0 = variable1;
   goto return_label23;
   return_label23: while(false);
@@ -534,7 +534,7 @@ void list___List___insert_before(val_t  self, val_t  param0, val_t  param1) {
   trace.file = LOCATE_list;
   variable0 =  param0;
   variable1 =  param1;
-  variable3 = NEW_list___ListNode___init( variable0 /*element*/); /*new ListNode[E]*/
+  variable3 = NEW_ListNode_list___ListNode___init( variable0 /*element*/); /*new ListNode[E]*/
   variable2 = variable3;
   variable4 = ((list___ListNode___prev_t)CALL( variable1 /*node*/,COLOR_list___ListNode___prev))( variable1 /*node*/) /*ListNode::prev*/;
   variable3 = variable4;

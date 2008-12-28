@@ -9,7 +9,7 @@ val_t inheritance___MMModule___type_any(val_t  self) {
   trace.file = LOCATE_inheritance;
   if (once_bool_variable1_1) variable1 = once_value_variable1_1;
   else {
-    variable1 = NEW_string___String___with_native(BOX_NativeString("Object"), TAG_Int(6)); /*new String*/
+    variable1 = NEW_String_string___String___with_native(BOX_NativeString("Object"), TAG_Int(6)); /*new String*/
     variable1 = ((symbol___String___to_symbol_t)CALL(variable1,COLOR_symbol___String___to_symbol))(variable1) /*String::to_symbol*/;
     once_value_variable1_1 = variable1;
     once_bool_variable1_1 = true;
@@ -34,7 +34,7 @@ void inheritance___MMModule___import_global_classes(val_t  self) {
       val_t variable6;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
-  variable1 = NEW_hash___HashMap___init(); /*new HashMap[K, V]*/
+  variable1 = NEW_HashMap_hash___HashMap___init(); /*new HashMap[MMGlobalClass, HashSet[MMLocalClass]]*/
   variable0 = variable1;
   variable1 = ((abstractmetamodel___MMModule___mhe_t)CALL( self,COLOR_abstractmetamodel___MMModule___mhe))( self) /*MMModule::mhe*/;
   variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))))));
@@ -92,7 +92,7 @@ void inheritance___MMModule___import_local_classes(val_t  self) {
     if (UNTAG_Bool(variable2)) { /*if*/
       goto continue_6;
     }
-    variable3 = NEW_inheritance___MMImplicitLocalClass___init( self,  variable1 /*g*/); /*new MMImplicitLocalClass*/
+    variable3 = NEW_MMImplicitLocalClass_inheritance___MMImplicitLocalClass___init( self,  variable1 /*g*/); /*new MMImplicitLocalClass*/
     variable2 = variable3;
     continue_6: while(0);
     ((array___ArrayIterator___next_t)CALL(variable0,COLOR_abstract_collection___Iterator___next))(variable0) /*ArrayIterator::next*/;
@@ -119,14 +119,14 @@ void inheritance___MMLocalClass___compute_super_classes(val_t  self) {
     variable0 = ATTR_inheritance___MMLocalClass____computing_super( self) /*MMLocalClass::_computing_super*/;
     if (UNTAG_Bool(variable0)) { /*if*/
       variable0 = ((file___Object___stderr_t)CALL( self,COLOR_file___Object___stderr))( self) /*Object::stderr*/;
-      variable1 = NEW_string___String___init(); /*new String*/
-      variable2 = NEW_string___String___with_native(BOX_NativeString("Fatal error: Inheritance loop for class "), TAG_Int(40)); /*new String*/
+      variable1 = NEW_String_string___String___init(); /*new String*/
+      variable2 = NEW_String_string___String___with_native(BOX_NativeString("Fatal error: Inheritance loop for class "), TAG_Int(40)); /*new String*/
       variable3 = variable2;
       ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable3) /*String::append*/;
       variable4 =  self;
       variable4 = ((string___String___to_s_t)CALL(variable4,COLOR_string___Object___to_s))(variable4) /*String::to_s*/;
       ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable4) /*String::append*/;
-      variable5 = NEW_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)); /*new String*/
+      variable5 = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)); /*new String*/
       variable6 = variable5;
       ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable6) /*String::append*/;
       ((file___OFStream___write_t)CALL(variable0,COLOR_stream___OStream___write))(variable0, variable1) /*OFStream::write*/;
@@ -134,13 +134,13 @@ void inheritance___MMLocalClass___compute_super_classes(val_t  self) {
     }
   }
   ATTR_inheritance___MMLocalClass____computing_super( self) /*MMLocalClass::_computing_super*/ =  TAG_Bool(true);
-  variable1 = NEW_array___Array___init(); /*new Array[E]*/
+  variable1 = NEW_Array_array___Array___init(); /*new Array[MMLocalClass]*/
   variable0 = variable1;
   ((inheritance___MMLocalClass___add_explicit_classes_t)CALL( self,COLOR_inheritance___MMLocalClass___add_explicit_classes))( self,  variable0 /*supers*/) /*MMLocalClass::add_explicit_classes*/;
   ((inheritance___MMLocalClass___add_super_classes_t)CALL( self,COLOR_inheritance___MMLocalClass___add_super_classes))( self,  variable0 /*supers*/) /*MMLocalClass::add_super_classes*/;
   ((inheritance___MMLocalClass___add_default_any_class_t)CALL( self,COLOR_inheritance___MMLocalClass___add_default_any_class))( self,  variable0 /*supers*/) /*MMLocalClass::add_default_any_class*/;
   ((inheritance___MMLocalClass___compute_super_parents_t)CALL( self,COLOR_inheritance___MMLocalClass___compute_super_parents))( self,  variable0 /*supers*/) /*MMLocalClass::compute_super_parents*/;
-  variable2 = NEW_hash___HashSet___init(); /*new HashSet[E]*/
+  variable2 = NEW_HashSet_hash___HashSet___init(); /*new HashSet[MMLocalClass]*/
   variable1 = variable2;
   ((abstract_collection___SimpleCollection___add_all_t)CALL( variable1 /*set*/,COLOR_abstract_collection___SimpleCollection___add_all))( variable1 /*set*/,  variable0 /*supers*/) /*SimpleCollection::add_all*/;
   variable3 = ((array___Collection___to_a_t)CALL( variable1 /*set*/,COLOR_array___Collection___to_a))( variable1 /*set*/) /*Collection::to_a*/;
@@ -176,7 +176,7 @@ void inheritance___MMLocalClass___compute_ancestors(val_t  self) {
   variable1 = ((inheritance___MMLocalClass___build_ancestors_t)CALL( self,COLOR_inheritance___MMLocalClass___build_ancestors))( self) /*MMLocalClass::build_ancestors*/;
   variable1 = ((inheritance___MMLocalClass___group_ancestors_t)CALL( self,COLOR_inheritance___MMLocalClass___group_ancestors))( self, variable1) /*MMLocalClass::group_ancestors*/;
   variable0 = variable1;
-  variable1 = NEW_hash___HashMap___init(); /*new HashMap[K, V]*/
+  variable1 = NEW_HashMap_hash___HashMap___init(); /*new HashMap[MMLocalClass, MMAncestor]*/
   ATTR_static_type___MMLocalClass____ancestors( self) /*MMLocalClass::_ancestors*/ = variable1;
   variable1 = ((abstract_collection___Map___iterator_t)CALL( variable0 /*ancestors*/,COLOR_abstract_collection___Collection___iterator))( variable0 /*ancestors*/) /*Map::iterator*/;
   while (true) { /*for*/
@@ -220,11 +220,11 @@ void inheritance___MMLocalClass___inherit_global_properties(val_t  self) {
   if (UNTAG_Bool(variable0)) { /*if*/
     goto return_label10;
   }
-  variable0 = NEW_hash___HashSet___init(); /*new HashSet[E]*/
+  variable0 = NEW_HashSet_hash___HashSet___init(); /*new HashSet[MMGlobalProperty]*/
   ATTR_abstractmetamodel___MMLocalClass____global_properties( self) /*MMLocalClass::_global_properties*/ = variable0;
-  variable0 = NEW_hash___HashMap___init(); /*new HashMap[K, V]*/
+  variable0 = NEW_HashMap_hash___HashMap___init(); /*new HashMap[Symbol, Array[MMGlobalProperty]]*/
   ATTR_abstractmetamodel___MMLocalClass____properties_by_name( self) /*MMLocalClass::_properties_by_name*/ = variable0;
-  variable0 = NEW_hash___HashMap___init(); /*new HashMap[K, V]*/
+  variable0 = NEW_HashMap_hash___HashMap___init(); /*new HashMap[MMGlobalProperty, MMLocalProperty]*/
   ATTR_abstractmetamodel___MMLocalClass____local_property_by_global( self) /*MMLocalClass::_local_property_by_global*/ = variable0;
   variable1 = ATTR_abstractmetamodel___MMLocalClass____properties_by_name( self) /*MMLocalClass::_properties_by_name*/;
   variable0 = variable1;
@@ -261,20 +261,7 @@ void inheritance___MMLocalClass___inherit_global_properties(val_t  self) {
       if (UNTAG_Bool(variable6)) { /*if*/
         goto continue_12;
       }
-      variable7 = ((abstractmetamodel___MMGlobalProperty___intro_t)CALL( variable5 /*glob*/,COLOR_abstractmetamodel___MMGlobalProperty___intro))( variable5 /*glob*/) /*MMGlobalProperty::intro*/;
-      variable7 = ((abstractmetamodel___MMLocalProperty___name_t)CALL(variable7,COLOR_abstractmetamodel___MMLocalProperty___name))(variable7) /*MMLocalProperty::name*/;
-      variable6 = variable7;
-      variable7 = NIT_NULL /*decl variable conf_set*/;
-      variable8 = ((abstract_collection___Map___has_key_t)CALL( variable0 /*names*/,COLOR_abstract_collection___Map___has_key))( variable0 /*names*/,  variable6 /*gname*/) /*Map::has_key*/;
-      if (UNTAG_Bool(variable8)) { /*if*/
-        variable8 = ((abstract_collection___Map_____bra_t)CALL( variable0 /*names*/,COLOR_abstract_collection___Map_____bra))( variable0 /*names*/,  variable6 /*gname*/) /*Map::[]*/;
-        variable7 = variable8 /*conf_set=*/;
-      } else { /*if*/
-        variable8 = NEW_array___Array___init(); /*new Array[E]*/
-        variable7 = variable8 /*conf_set=*/;
-        ((abstract_collection___Map_____braeq_t)CALL( variable0 /*names*/,COLOR_abstract_collection___Map_____braeq))( variable0 /*names*/,  variable6 /*gname*/,  variable7 /*conf_set*/) /*Map::[]=*/;
-      }
-      ((array___AbstractArray___add_t)CALL( variable7 /*conf_set*/,COLOR_abstract_collection___SimpleCollection___add))( variable7 /*conf_set*/,  variable5 /*glob*/) /*AbstractArray::add*/;
+      ((inheritance___MMLocalClass___make_visible_an_inherited_global_property_t)CALL( self,COLOR_inheritance___MMLocalClass___make_visible_an_inherited_global_property))( self,  variable5 /*glob*/) /*MMLocalClass::make_visible_an_inherited_global_property*/;
       continue_12: while(0);
       ((abstract_collection___Iterator___next_t)CALL(variable4,COLOR_abstract_collection___Iterator___next))(variable4) /*Iterator::next*/;
     }
@@ -287,8 +274,37 @@ void inheritance___MMLocalClass___inherit_global_properties(val_t  self) {
   tracehead = trace.prev;
   return;
 }
+void inheritance___MMLocalClass___make_visible_an_inherited_global_property(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 138, LOCATE_inheritance___MMLocalClass___make_visible_an_inherited_global_property};
+  val_t variable0;
+  val_t variable1;
+  val_t variable2;
+  val_t variable3;
+  val_t variable4;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_inheritance;
+  variable0 =  param0;
+  variable2 = ATTR_abstractmetamodel___MMLocalClass____properties_by_name( self) /*MMLocalClass::_properties_by_name*/;
+  variable1 = variable2;
+  variable3 = ((abstractmetamodel___MMGlobalProperty___intro_t)CALL( variable0 /*glob*/,COLOR_abstractmetamodel___MMGlobalProperty___intro))( variable0 /*glob*/) /*MMGlobalProperty::intro*/;
+  variable3 = ((abstractmetamodel___MMLocalProperty___name_t)CALL(variable3,COLOR_abstractmetamodel___MMLocalProperty___name))(variable3) /*MMLocalProperty::name*/;
+  variable2 = variable3;
+  variable3 = NIT_NULL /*decl variable conf_set*/;
+  variable4 = ((abstract_collection___Map___has_key_t)CALL( variable1 /*names*/,COLOR_abstract_collection___Map___has_key))( variable1 /*names*/,  variable2 /*gname*/) /*Map::has_key*/;
+  if (UNTAG_Bool(variable4)) { /*if*/
+    variable4 = ((abstract_collection___Map_____bra_t)CALL( variable1 /*names*/,COLOR_abstract_collection___Map_____bra))( variable1 /*names*/,  variable2 /*gname*/) /*Map::[]*/;
+    variable3 = variable4 /*conf_set=*/;
+  } else { /*if*/
+    variable4 = NEW_Array_array___Array___init(); /*new Array[MMGlobalProperty]*/
+    variable3 = variable4 /*conf_set=*/;
+    ((abstract_collection___Map_____braeq_t)CALL( variable1 /*names*/,COLOR_abstract_collection___Map_____braeq))( variable1 /*names*/,  variable2 /*gname*/,  variable3 /*conf_set*/) /*Map::[]=*/;
+  }
+  ((array___AbstractArray___add_t)CALL( variable3 /*conf_set*/,COLOR_abstract_collection___SimpleCollection___add))( variable3 /*conf_set*/,  variable0 /*glob*/) /*AbstractArray::add*/;
+  tracehead = trace.prev;
+  return;
+}
 void inheritance___MMLocalClass___add_direct_parent(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 146, LOCATE_inheritance___MMLocalClass___add_direct_parent};
+  struct trace_t trace = {NULL, NULL, 153, LOCATE_inheritance___MMLocalClass___add_direct_parent};
   val_t variable0;
   val_t variable1;
   trace.prev = tracehead; tracehead = &trace;
@@ -300,7 +316,7 @@ void inheritance___MMLocalClass___add_direct_parent(val_t  self, val_t  param0) 
   return;
 }
 val_t inheritance___MMLocalClass___computed_super_classes(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 152, LOCATE_inheritance___MMLocalClass___computed_super_classes};
+  struct trace_t trace = {NULL, NULL, 159, LOCATE_inheritance___MMLocalClass___computed_super_classes};
   val_t variable0;
   val_t variable1;
   trace.prev = tracehead; tracehead = &trace;
@@ -313,25 +329,25 @@ val_t inheritance___MMLocalClass___computed_super_classes(val_t  self) {
     variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))))));
   }
   variable0 = variable1;
-  goto return_label14;
-  return_label14: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t inheritance___MMLocalClass___computed_ancestors(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 158, LOCATE_inheritance___MMLocalClass___computed_ancestors};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_inheritance;
-  variable0 = ATTR_static_type___MMLocalClass____ancestors( self) /*MMLocalClass::_ancestors*/;
-  variable0 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable0 ==  NIT_NULL /*null*/) || ((variable0 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable0, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))(variable0,  NIT_NULL /*null*/) /*Object::==*/)))))));
   goto return_label15;
   return_label15: while(false);
   tracehead = trace.prev;
   return variable0;
 }
+val_t inheritance___MMLocalClass___computed_ancestors(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 165, LOCATE_inheritance___MMLocalClass___computed_ancestors};
+  val_t variable0;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_inheritance;
+  variable0 = ATTR_static_type___MMLocalClass____ancestors( self) /*MMLocalClass::_ancestors*/;
+  variable0 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable0 ==  NIT_NULL /*null*/) || ((variable0 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable0, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))(variable0,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  goto return_label16;
+  return_label16: while(false);
+  tracehead = trace.prev;
+  return variable0;
+}
 val_t inheritance___MMLocalClass___ancestor_for(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 164, LOCATE_inheritance___MMLocalClass___ancestor_for};
+  struct trace_t trace = {NULL, NULL, 171, LOCATE_inheritance___MMLocalClass___ancestor_for};
   val_t variable0;
   val_t variable1;
   val_t variable2;
@@ -343,20 +359,20 @@ val_t inheritance___MMLocalClass___ancestor_for(val_t  self, val_t  param0) {
   variable0 =  param0;
   variable1 = ((static_type___MMLocalClass___ancestors_t)CALL( self,COLOR_static_type___MMLocalClass___ancestors))( self) /*MMLocalClass::ancestors*/;
   variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___ancestor_for, LOCATE_inheritance, 168); nit_exit(1);}
+  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___ancestor_for, LOCATE_inheritance, 175); nit_exit(1);}
   variable1 = ATTR_static_type___MMLocalClass____ancestors( self) /*MMLocalClass::_ancestors*/;
   variable1 = ((abstract_collection___Map___has_key_t)CALL(variable1,COLOR_abstract_collection___Map___has_key))(variable1,  variable0 /*c*/) /*Map::has_key*/;
   if (UNTAG_Bool(variable1)) { /*if*/
     variable1 = ATTR_static_type___MMLocalClass____ancestors( self) /*MMLocalClass::_ancestors*/;
     variable1 = ((abstract_collection___Map_____bra_t)CALL(variable1,COLOR_abstract_collection___Map_____bra))(variable1,  variable0 /*c*/) /*Map::[]*/;
-    goto return_label16;
+    goto return_label17;
   }
   variable2 = ((abstractmetamodel___MMLocalClass___module_t)CALL( self,COLOR_abstractmetamodel___MMLocalClass___module))( self) /*MMLocalClass::module*/;
   variable2 = ((abstractmetamodel___MMLocalClass___for_module_t)CALL( variable0 /*c*/,COLOR_abstractmetamodel___MMLocalClass___for_module))( variable0 /*c*/, variable2) /*MMLocalClass::for_module*/;
   variable1 = variable2;
   variable2 = ((abstractmetamodel___MMLocalClass___cshe_t)CALL( self,COLOR_abstractmetamodel___MMLocalClass___cshe))( self) /*MMLocalClass::cshe*/;
   variable2 = ((partial_order___PartialOrderElement_____leq_t)CALL(variable2,COLOR_partial_order___PartialOrderElement_____leq))(variable2,  variable1 /*a*/) /*PartialOrderElement::<=*/;
-  if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___ancestor_for, LOCATE_inheritance, 174); nit_exit(1);}
+  if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___ancestor_for, LOCATE_inheritance, 181); nit_exit(1);}
   variable2 = NIT_NULL /*decl variable ra*/;
   variable3 = ATTR_static_type___MMLocalClass____ancestors( self) /*MMLocalClass::_ancestors*/;
   variable3 = ((abstract_collection___Map___has_key_t)CALL(variable3,COLOR_abstract_collection___Map___has_key))(variable3,  variable1 /*a*/) /*Map::has_key*/;
@@ -369,12 +385,12 @@ val_t inheritance___MMLocalClass___ancestor_for(val_t  self, val_t  param0) {
     variable4 = ATTR_abstractmetamodel___MMLocalClass____global( self) /*MMLocalClass::_global*/;
     variable3 = TAG_Bool((variable3 == variable4) || ((variable3 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable3,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable3,variable4)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable3,COLOR_kernel___Object_____eqeq))(variable3, variable4) /*Object::==*/)))));
     if (UNTAG_Bool(variable3)) { /*if*/
-      variable3 = NEW_inheritance___MMRefineAncestor___init( self,  variable0 /*c*/); /*new MMRefineAncestor*/
+      variable3 = NEW_MMRefineAncestor_inheritance___MMRefineAncestor___init( self,  variable0 /*c*/); /*new MMRefineAncestor*/
       variable2 = variable3 /*ra=*/;
     } else { /*if*/
       variable3 = ((static_type___MMLocalClass___get_type_t)CALL( self,COLOR_static_type___MMLocalClass___get_type))( self) /*MMLocalClass::get_type*/;
       variable4 = ((static_type___MMLocalClass___get_type_t)CALL( variable0 /*c*/,COLOR_static_type___MMLocalClass___get_type))( variable0 /*c*/) /*MMLocalClass::get_type*/;
-      variable5 = NEW_inheritance___MMSpecAncestor___init(variable3, variable4); /*new MMSpecAncestor*/
+      variable5 = NEW_MMSpecAncestor_inheritance___MMSpecAncestor___init(variable3, variable4); /*new MMSpecAncestor*/
       variable3 = variable5;
       variable2 = variable3 /*ra=*/;
     }
@@ -382,13 +398,13 @@ val_t inheritance___MMLocalClass___ancestor_for(val_t  self, val_t  param0) {
   variable3 = ATTR_static_type___MMLocalClass____ancestors( self) /*MMLocalClass::_ancestors*/;
   ((abstract_collection___Map_____braeq_t)CALL(variable3,COLOR_abstract_collection___Map_____braeq))(variable3,  variable0 /*c*/,  variable2 /*ra*/) /*Map::[]=*/;
   variable1 =  variable2 /*ra*/;
-  goto return_label16;
-  return_label16: while(false);
+  goto return_label17;
+  return_label17: while(false);
   tracehead = trace.prev;
   return variable1;
 }
 val_t inheritance___MMLocalClass_____bra(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 187, LOCATE_inheritance___MMLocalClass_____bra};
+  struct trace_t trace = {NULL, NULL, 194, LOCATE_inheritance___MMLocalClass_____bra};
   val_t variable0;
   val_t variable1;
   val_t variable2;
@@ -410,18 +426,18 @@ val_t inheritance___MMLocalClass_____bra(val_t  self, val_t  param0) {
     variable1 = variable2 /*prop=*/;
   }
   variable1 =  variable1 /*prop*/;
-  goto return_label17;
-  return_label17: while(false);
+  goto return_label18;
+  return_label18: while(false);
   tracehead = trace.prev;
   return variable1;
 }
 void inheritance___MMLocalClass___add_default_any_class(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 196, LOCATE_inheritance___MMLocalClass___add_default_any_class};
+  struct trace_t trace = {NULL, NULL, 203, LOCATE_inheritance___MMLocalClass___add_default_any_class};
   val_t variable0;
   val_t variable1;
   val_t variable2;
     val_t variable3;
-    static val_t once_value_variable3_19; static int once_bool_variable3_19;
+    static val_t once_value_variable3_20; static int once_bool_variable3_20;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
   variable0 =  param0;
@@ -429,12 +445,12 @@ void inheritance___MMLocalClass___add_default_any_class(val_t  self, val_t  para
   variable2 = variable1;
   if (UNTAG_Bool(variable2)) { /* and */
     variable2 = ((abstractmetamodel___MMLocalClass___name_t)CALL( self,COLOR_abstractmetamodel___MMLocalClass___name))( self) /*MMLocalClass::name*/;
-    if (once_bool_variable3_19) variable3 = once_value_variable3_19;
+    if (once_bool_variable3_20) variable3 = once_value_variable3_20;
     else {
-      variable3 = NEW_string___String___with_native(BOX_NativeString("Object"), TAG_Int(6)); /*new String*/
+      variable3 = NEW_String_string___String___with_native(BOX_NativeString("Object"), TAG_Int(6)); /*new String*/
       variable3 = ((symbol___String___to_symbol_t)CALL(variable3,COLOR_symbol___String___to_symbol))(variable3) /*String::to_symbol*/;
-      once_value_variable3_19 = variable3;
-      once_bool_variable3_19 = true;
+      once_value_variable3_20 = variable3;
+      once_bool_variable3_20 = true;
     }
     variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable2 == variable3) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2,variable3)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2, variable3) /*Object::==*/)))))));
   }
@@ -445,7 +461,7 @@ void inheritance___MMLocalClass___add_default_any_class(val_t  self, val_t  para
     variable1 = variable2;
     variable2 = ((static_type___MMType___local_class_t)CALL( variable1 /*t_any*/,COLOR_static_type___MMType___local_class))( variable1 /*t_any*/) /*MMType::local_class*/;
     ((array___AbstractArray___add_t)CALL( variable0 /*supers*/,COLOR_abstract_collection___SimpleCollection___add))( variable0 /*supers*/, variable2) /*AbstractArray::add*/;
-    variable3 = NEW_inheritance___MMDefaultAncestor___init( self,  variable1 /*t_any*/); /*new MMDefaultAncestor*/
+    variable3 = NEW_MMDefaultAncestor_inheritance___MMDefaultAncestor___init( self,  variable1 /*t_any*/); /*new MMDefaultAncestor*/
     variable2 = variable3;
     ((inheritance___MMLocalClass___add_direct_parent_t)CALL( self,COLOR_inheritance___MMLocalClass___add_direct_parent))( self,  variable2 /*default*/) /*MMLocalClass::add_direct_parent*/;
   }
@@ -453,7 +469,7 @@ void inheritance___MMLocalClass___add_default_any_class(val_t  self, val_t  para
   return;
 }
 void inheritance___MMLocalClass___add_super_classes(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 207, LOCATE_inheritance___MMLocalClass___add_super_classes};
+  struct trace_t trace = {NULL, NULL, 214, LOCATE_inheritance___MMLocalClass___add_super_classes};
   val_t variable0;
   val_t variable1;
     val_t variable2;
@@ -466,7 +482,7 @@ void inheritance___MMLocalClass___add_super_classes(val_t  self, val_t  param0) 
   variable0 =  param0;
   variable1 = ATTR_abstractmetamodel___MMLocalClass____crhe( self) /*MMLocalClass::_crhe*/;
   variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___add_super_classes, LOCATE_inheritance, 210); nit_exit(1);}
+  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___add_super_classes, LOCATE_inheritance, 217); nit_exit(1);}
   variable1 = ATTR_abstractmetamodel___MMLocalClass____crhe( self) /*MMLocalClass::_crhe*/;
   variable1 = ((partial_order___PartialOrderElement___direct_greaters_t)CALL(variable1,COLOR_partial_order___PartialOrderElement___direct_greaters))(variable1) /*PartialOrderElement::direct_greaters*/;
   variable1 = ((array___AbstractArray___iterator_t)CALL(variable1,COLOR_abstract_collection___Collection___iterator))(variable1) /*AbstractArray::iterator*/;
@@ -476,7 +492,7 @@ void inheritance___MMLocalClass___add_super_classes(val_t  self, val_t  param0) 
     variable2 = ((array___ArrayIterator___item_t)CALL(variable1,COLOR_abstract_collection___Iterator___item))(variable1) /*ArrayIterator::item*/;
     variable3 = ((abstractmetamodel___MMLocalClass___cshe_t)CALL( variable2 /*ref*/,COLOR_abstractmetamodel___MMLocalClass___cshe))( variable2 /*ref*/) /*MMLocalClass::cshe*/;
     variable3 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable3 ==  NIT_NULL /*null*/) || ((variable3 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable3,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable3, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable3,COLOR_kernel___Object_____eqeq))(variable3,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    if (!UNTAG_Bool(variable3)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___add_super_classes, LOCATE_inheritance, 212); nit_exit(1);}
+    if (!UNTAG_Bool(variable3)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___add_super_classes, LOCATE_inheritance, 219); nit_exit(1);}
     variable3 = ((abstractmetamodel___MMLocalClass___cshe_t)CALL( variable2 /*ref*/,COLOR_abstractmetamodel___MMLocalClass___cshe))( variable2 /*ref*/) /*MMLocalClass::cshe*/;
     variable3 = ((partial_order___PartialOrderElement___direct_greaters_t)CALL(variable3,COLOR_partial_order___PartialOrderElement___direct_greaters))(variable3) /*PartialOrderElement::direct_greaters*/;
     variable3 = ((array___AbstractArray___iterator_t)CALL(variable3,COLOR_abstract_collection___Collection___iterator))(variable3) /*AbstractArray::iterator*/;
@@ -488,21 +504,21 @@ void inheritance___MMLocalClass___add_super_classes(val_t  self, val_t  param0) 
       variable6 = ((abstractmetamodel___MMLocalClass___for_module_t)CALL( variable4 /*sup*/,COLOR_abstractmetamodel___MMLocalClass___for_module))( variable4 /*sup*/, variable6) /*MMLocalClass::for_module*/;
       variable5 = variable6;
       variable6 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable5 /*cla*/ ==  NIT_NULL /*null*/) || (( variable5 /*cla*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable5 /*cla*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable5 /*cla*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable5 /*cla*/,COLOR_kernel___Object_____eqeq))( variable5 /*cla*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-      if (!UNTAG_Bool(variable6)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___add_super_classes, LOCATE_inheritance, 215); nit_exit(1);}
+      if (!UNTAG_Bool(variable6)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___add_super_classes, LOCATE_inheritance, 222); nit_exit(1);}
       ((array___AbstractArray___add_t)CALL( variable0 /*supers*/,COLOR_abstract_collection___SimpleCollection___add))( variable0 /*supers*/,  variable5 /*cla*/) /*AbstractArray::add*/;
-      continue_22: while(0);
+      continue_23: while(0);
       ((array___ArrayIterator___next_t)CALL(variable3,COLOR_abstract_collection___Iterator___next))(variable3) /*ArrayIterator::next*/;
     }
-    break_22: while(0);
-    continue_21: while(0);
+    break_23: while(0);
+    continue_22: while(0);
     ((array___ArrayIterator___next_t)CALL(variable1,COLOR_abstract_collection___Iterator___next))(variable1) /*ArrayIterator::next*/;
   }
-  break_21: while(0);
+  break_22: while(0);
   tracehead = trace.prev;
   return;
 }
 void inheritance___MMLocalClass___add_explicit_classes(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 221, LOCATE_inheritance___MMLocalClass___add_explicit_classes};
+  struct trace_t trace = {NULL, NULL, 228, LOCATE_inheritance___MMLocalClass___add_explicit_classes};
   val_t variable0;
   val_t variable1;
     val_t variable2;
@@ -518,15 +534,15 @@ void inheritance___MMLocalClass___add_explicit_classes(val_t  self, val_t  param
     variable2 = ((array___ArrayIterator___item_t)CALL(variable1,COLOR_abstract_collection___Iterator___item))(variable1) /*ArrayIterator::item*/;
     variable3 = ((static_type___MMAncestor___local_class_t)CALL( variable2 /*p*/,COLOR_static_type___MMAncestor___local_class))( variable2 /*p*/) /*MMAncestor::local_class*/;
     ((array___AbstractArray___add_t)CALL( variable0 /*supers*/,COLOR_abstract_collection___SimpleCollection___add))( variable0 /*supers*/, variable3) /*AbstractArray::add*/;
-    continue_24: while(0);
+    continue_25: while(0);
     ((array___ArrayIterator___next_t)CALL(variable1,COLOR_abstract_collection___Iterator___next))(variable1) /*ArrayIterator::next*/;
   }
-  break_24: while(0);
+  break_25: while(0);
   tracehead = trace.prev;
   return;
 }
 void inheritance___MMLocalClass___compute_super_parents(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 229, LOCATE_inheritance___MMLocalClass___compute_super_parents};
+  struct trace_t trace = {NULL, NULL, 236, LOCATE_inheritance___MMLocalClass___compute_super_parents};
   val_t variable0;
   val_t variable1;
     val_t variable2;
@@ -540,17 +556,17 @@ void inheritance___MMLocalClass___compute_super_parents(val_t  self, val_t  para
     if (!UNTAG_Bool(variable2)) break; /*for*/
     variable2 = ((array___ArrayIterator___item_t)CALL(variable1,COLOR_abstract_collection___Iterator___item))(variable1) /*ArrayIterator::item*/;
     variable3 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable2 /*p*/ ==  NIT_NULL /*null*/) || (( variable2 /*p*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable2 /*p*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable2 /*p*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable2 /*p*/,COLOR_kernel___Object_____eqeq))( variable2 /*p*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    if (!UNTAG_Bool(variable3)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___compute_super_parents, LOCATE_inheritance, 233); nit_exit(1);}
+    if (!UNTAG_Bool(variable3)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___compute_super_parents, LOCATE_inheritance, 240); nit_exit(1);}
     ((inheritance___MMLocalClass___compute_super_classes_t)CALL( variable2 /*p*/,COLOR_inheritance___MMLocalClass___compute_super_classes))( variable2 /*p*/) /*MMLocalClass::compute_super_classes*/;
-    continue_26: while(0);
+    continue_27: while(0);
     ((array___ArrayIterator___next_t)CALL(variable1,COLOR_abstract_collection___Iterator___next))(variable1) /*ArrayIterator::next*/;
   }
-  break_26: while(0);
+  break_27: while(0);
   tracehead = trace.prev;
   return;
 }
 val_t inheritance___MMLocalClass___build_ancestors(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 238, LOCATE_inheritance___MMLocalClass___build_ancestors};
+  struct trace_t trace = {NULL, NULL, 245, LOCATE_inheritance___MMLocalClass___build_ancestors};
   val_t variable0;
   val_t variable1;
     val_t variable2;
@@ -558,11 +574,11 @@ val_t inheritance___MMLocalClass___build_ancestors(val_t  self) {
     val_t variable4;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
-  variable1 = NEW_array___Array___init(); /*new Array[E]*/
+  variable1 = NEW_Array_array___Array___init(); /*new Array[MMAncestor]*/
   variable0 = variable1;
   variable1 = ATTR_abstractmetamodel___MMLocalClass____crhe( self) /*MMLocalClass::_crhe*/;
   variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___build_ancestors, LOCATE_inheritance, 243); nit_exit(1);}
+  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___build_ancestors, LOCATE_inheritance, 250); nit_exit(1);}
   variable1 = ATTR_abstractmetamodel___MMLocalClass____crhe( self) /*MMLocalClass::_crhe*/;
   variable1 = ((partial_order___PartialOrderElement___direct_greaters_t)CALL(variable1,COLOR_partial_order___PartialOrderElement___direct_greaters))(variable1) /*PartialOrderElement::direct_greaters*/;
   variable1 = ((array___AbstractArray___iterator_t)CALL(variable1,COLOR_abstract_collection___Collection___iterator))(variable1) /*AbstractArray::iterator*/;
@@ -571,14 +587,14 @@ val_t inheritance___MMLocalClass___build_ancestors(val_t  self) {
     if (!UNTAG_Bool(variable2)) break; /*for*/
     variable2 = ((array___ArrayIterator___item_t)CALL(variable1,COLOR_abstract_collection___Iterator___item))(variable1) /*ArrayIterator::item*/;
     variable3 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable2 /*p*/ ==  self) || (( variable2 /*p*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable2 /*p*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable2 /*p*/, self)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable2 /*p*/,COLOR_kernel___Object_____eqeq))( variable2 /*p*/,  self) /*Object::==*/)))))));
-    if (!UNTAG_Bool(variable3)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___build_ancestors, LOCATE_inheritance, 245); nit_exit(1);}
-    variable4 = NEW_inheritance___MMRefineAncestor___init( self,  variable2 /*p*/); /*new MMRefineAncestor*/
+    if (!UNTAG_Bool(variable3)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___build_ancestors, LOCATE_inheritance, 252); nit_exit(1);}
+    variable4 = NEW_MMRefineAncestor_inheritance___MMRefineAncestor___init( self,  variable2 /*p*/); /*new MMRefineAncestor*/
     variable3 = variable4;
     ((inheritance___MMAncestor___add_in_t)CALL( variable3 /*anc*/,COLOR_inheritance___MMAncestor___add_in))( variable3 /*anc*/,  variable0 /*all_ancestors*/) /*MMAncestor::add_in*/;
-    continue_28: while(0);
+    continue_29: while(0);
     ((array___ArrayIterator___next_t)CALL(variable1,COLOR_abstract_collection___Iterator___next))(variable1) /*ArrayIterator::next*/;
   }
-  break_28: while(0);
+  break_29: while(0);
   variable1 = ATTR_inheritance___MMLocalClass____direct_parents( self) /*MMLocalClass::_direct_parents*/;
   variable1 = ((array___AbstractArray___iterator_t)CALL(variable1,COLOR_abstract_collection___Collection___iterator))(variable1) /*AbstractArray::iterator*/;
   while (true) { /*for*/
@@ -587,20 +603,20 @@ val_t inheritance___MMLocalClass___build_ancestors(val_t  self) {
     variable2 = ((array___ArrayIterator___item_t)CALL(variable1,COLOR_abstract_collection___Iterator___item))(variable1) /*ArrayIterator::item*/;
     variable3 = ((static_type___MMAncestor___local_class_t)CALL( variable2 /*anc*/,COLOR_static_type___MMAncestor___local_class))( variable2 /*anc*/) /*MMAncestor::local_class*/;
     variable3 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable3 ==  self) || ((variable3 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable3,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable3, self)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable3,COLOR_kernel___Object_____eqeq))(variable3,  self) /*Object::==*/)))))));
-    if (!UNTAG_Bool(variable3)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___build_ancestors, LOCATE_inheritance, 250); nit_exit(1);}
+    if (!UNTAG_Bool(variable3)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___build_ancestors, LOCATE_inheritance, 257); nit_exit(1);}
     ((inheritance___MMAncestor___add_in_t)CALL( variable2 /*anc*/,COLOR_inheritance___MMAncestor___add_in))( variable2 /*anc*/,  variable0 /*all_ancestors*/) /*MMAncestor::add_in*/;
-    continue_29: while(0);
+    continue_30: while(0);
     ((array___ArrayIterator___next_t)CALL(variable1,COLOR_abstract_collection___Iterator___next))(variable1) /*ArrayIterator::next*/;
   }
-  break_29: while(0);
+  break_30: while(0);
   variable0 =  variable0 /*all_ancestors*/;
-  goto return_label27;
-  return_label27: while(false);
+  goto return_label28;
+  return_label28: while(false);
   tracehead = trace.prev;
   return variable0;
 }
 val_t inheritance___MMLocalClass___group_ancestors(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 256, LOCATE_inheritance___MMLocalClass___group_ancestors};
+  struct trace_t trace = {NULL, NULL, 263, LOCATE_inheritance___MMLocalClass___group_ancestors};
   val_t variable0;
   val_t variable1;
   val_t variable2;
@@ -611,7 +627,7 @@ val_t inheritance___MMLocalClass___group_ancestors(val_t  self, val_t  param0) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
   variable0 =  param0;
-  variable2 = NEW_hash___HashMap___init(); /*new HashMap[K, V]*/
+  variable2 = NEW_HashMap_hash___HashMap___init(); /*new HashMap[MMLocalClass, Set[MMAncestor]]*/
   variable1 = variable2;
   variable2 = ((array___AbstractArray___iterator_t)CALL( variable0 /*all*/,COLOR_abstract_collection___Collection___iterator))( variable0 /*all*/) /*AbstractArray::iterator*/;
   while (true) { /*for*/
@@ -627,23 +643,23 @@ val_t inheritance___MMLocalClass___group_ancestors(val_t  self, val_t  param0) {
       variable6 = ((abstract_collection___CoupleMap_____bra_t)CALL( variable1 /*map*/,COLOR_abstract_collection___Map_____bra))( variable1 /*map*/,  variable4 /*c*/) /*CoupleMap::[]*/;
       variable5 = variable6 /*set=*/;
     } else { /*if*/
-      variable6 = NEW_hash___HashSet___init(); /*new HashSet[E]*/
+      variable6 = NEW_HashSet_hash___HashSet___init(); /*new HashSet[MMAncestor]*/
       variable5 = variable6 /*set=*/;
       ((hash___HashMap_____braeq_t)CALL( variable1 /*map*/,COLOR_abstract_collection___Map_____braeq))( variable1 /*map*/,  variable4 /*c*/,  variable5 /*set*/) /*HashMap::[]=*/;
     }
     ((abstract_collection___SimpleCollection___add_t)CALL( variable5 /*set*/,COLOR_abstract_collection___SimpleCollection___add))( variable5 /*set*/,  variable3 /*a*/) /*SimpleCollection::add*/;
-    continue_31: while(0);
+    continue_32: while(0);
     ((array___ArrayIterator___next_t)CALL(variable2,COLOR_abstract_collection___Iterator___next))(variable2) /*ArrayIterator::next*/;
   }
-  break_31: while(0);
+  break_32: while(0);
   variable1 =  variable1 /*map*/;
-  goto return_label30;
-  return_label30: while(false);
+  goto return_label31;
+  return_label31: while(false);
   tracehead = trace.prev;
   return variable1;
 }
 val_t inheritance___MMLocalClass___merge_ancestors(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 278, LOCATE_inheritance___MMLocalClass___merge_ancestors};
+  struct trace_t trace = {NULL, NULL, 285, LOCATE_inheritance___MMLocalClass___merge_ancestors};
   val_t variable0;
   val_t variable1;
   val_t variable2;
@@ -662,9 +678,9 @@ val_t inheritance___MMLocalClass___merge_ancestors(val_t  self, val_t  param0) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
   variable0 =  param0;
-  variable2 = NEW_hash___HashSet___init(); /*new HashSet[E]*/
+  variable2 = NEW_HashSet_hash___HashSet___init(); /*new HashSet[MMAncestor]*/
   variable1 = variable2;
-  variable3 = NEW_array___Array___init(); /*new Array[E]*/
+  variable3 = NEW_Array_array___Array___init(); /*new Array[MMAncestor]*/
   variable2 = variable3;
   variable3 = ((abstract_collection___Collection___iterator_t)CALL( variable0 /*set*/,COLOR_abstract_collection___Collection___iterator))( variable0 /*set*/) /*Collection::iterator*/;
   while (true) { /*for*/
@@ -713,37 +729,37 @@ val_t inheritance___MMLocalClass___merge_ancestors(val_t  self, val_t  param0) {
         variable6 =  TAG_Bool(false) /*search=*/;
       }
       ((abstract_collection___Iterator___next_t)CALL( variable5 /*it*/,COLOR_abstract_collection___Iterator___next))( variable5 /*it*/) /*Iterator::next*/;
-      continue_34: while(0);
+      continue_35: while(0);
     }
-    break_34: while(0);
+    break_35: while(0);
     variable7 = ((hash___HashSet___has_t)CALL( variable1 /*marks*/,COLOR_abstract_collection___Collection___has))( variable1 /*marks*/,  variable4 /*t*/) /*HashSet::has*/;
     if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable7)))) { /*if*/
       ((array___AbstractArray___add_t)CALL( variable2 /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable2 /*res*/,  variable4 /*t*/) /*AbstractArray::add*/;
     }
-    continue_33: while(0);
+    continue_34: while(0);
     ((abstract_collection___Iterator___next_t)CALL(variable3,COLOR_abstract_collection___Iterator___next))(variable3) /*Iterator::next*/;
   }
-  break_33: while(0);
+  break_34: while(0);
   variable3 = ((array___AbstractArray___length_t)CALL( variable2 /*res*/,COLOR_abstract_collection___Collection___length))( variable2 /*res*/) /*AbstractArray::length*/;
   variable3 = TAG_Bool(UNTAG_Int(variable3)>UNTAG_Int( TAG_Int(1)));
   if (UNTAG_Bool(variable3)) { /*if*/
     variable3 = ((file___Object___stderr_t)CALL( self,COLOR_file___Object___stderr))( self) /*Object::stderr*/;
-    variable4 = NEW_string___String___init(); /*new String*/
-    variable5 = NEW_string___String___with_native(BOX_NativeString("Fatal error: Incompatibles ancestors for "), TAG_Int(41)); /*new String*/
+    variable4 = NEW_String_string___String___init(); /*new String*/
+    variable5 = NEW_String_string___String___with_native(BOX_NativeString("Fatal error: Incompatibles ancestors for "), TAG_Int(41)); /*new String*/
     variable6 = variable5;
     ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable6) /*String::append*/;
     variable7 = ((abstractmetamodel___MMLocalClass___name_t)CALL( self,COLOR_abstractmetamodel___MMLocalClass___name))( self) /*MMLocalClass::name*/;
     variable8 = variable7;
     variable8 = ((string___String___to_s_t)CALL(variable8,COLOR_string___Object___to_s))(variable8) /*String::to_s*/;
     ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable8) /*String::append*/;
-    variable9 = NEW_string___String___with_native(BOX_NativeString(": "), TAG_Int(2)); /*new String*/
+    variable9 = NEW_String_string___String___with_native(BOX_NativeString(": "), TAG_Int(2)); /*new String*/
     variable10 = variable9;
     ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable10) /*String::append*/;
-    variable11 = NEW_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
+    variable11 = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
     variable11 = ((string___Collection___join_t)CALL( variable2 /*res*/,COLOR_string___Collection___join))( variable2 /*res*/, variable11) /*Collection::join*/;
     variable12 = variable11;
     ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable12) /*String::append*/;
-    variable13 = NEW_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)); /*new String*/
+    variable13 = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)); /*new String*/
     variable14 = variable13;
     ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable14) /*String::append*/;
     ((file___OFStream___write_t)CALL(variable3,COLOR_stream___OStream___write))(variable3, variable4) /*OFStream::write*/;
@@ -751,13 +767,13 @@ val_t inheritance___MMLocalClass___merge_ancestors(val_t  self, val_t  param0) {
   }
   variable3 = ((abstract_collection___IndexedCollection___first_t)CALL( variable2 /*res*/,COLOR_abstract_collection___Collection___first))( variable2 /*res*/) /*IndexedCollection::first*/;
   variable1 = variable3;
-  goto return_label32;
-  return_label32: while(false);
+  goto return_label33;
+  return_label33: while(false);
   tracehead = trace.prev;
   return variable1;
 }
 val_t inheritance___MMLocalClass___inherit_local_property(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 311, LOCATE_inheritance___MMLocalClass___inherit_local_property};
+  struct trace_t trace = {NULL, NULL, 318, LOCATE_inheritance___MMLocalClass___inherit_local_property};
   val_t variable0;
   val_t variable1;
   val_t variable2;
@@ -783,9 +799,9 @@ val_t inheritance___MMLocalClass___inherit_local_property(val_t  self, val_t  pa
   variable0 =  param0;
   variable1 = ATTR_abstractmetamodel___MMLocalClass____local_property_by_global( self) /*MMLocalClass::_local_property_by_global*/;
   variable1 = ((abstract_collection___Map___has_key_t)CALL(variable1,COLOR_abstract_collection___Map___has_key))(variable1,  variable0 /*glob*/) /*Map::has_key*/;
-  if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable1)))) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___inherit_local_property, LOCATE_inheritance, 316); nit_exit(1);}
+  if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable1)))) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___inherit_local_property, LOCATE_inheritance, 323); nit_exit(1);}
   variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable0 /*glob*/ ==  NIT_NULL /*null*/) || (( variable0 /*glob*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable0 /*glob*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable0 /*glob*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable0 /*glob*/,COLOR_kernel___Object_____eqeq))( variable0 /*glob*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___inherit_local_property, LOCATE_inheritance, 317); nit_exit(1);}
+  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___inherit_local_property, LOCATE_inheritance, 324); nit_exit(1);}
   variable1 = NIT_NULL /*decl variable impl*/;
   variable3 = ((abstractmetamodel___MMGlobalProperty___property_hierarchy_t)CALL( variable0 /*glob*/,COLOR_abstractmetamodel___MMGlobalProperty___property_hierarchy))( variable0 /*glob*/) /*MMGlobalProperty::property_hierarchy*/;
   variable2 = variable3;
@@ -805,7 +821,7 @@ val_t inheritance___MMLocalClass___inherit_local_property(val_t  self, val_t  pa
       variable4 = ((inheritance___MMLocalClass_____bra_t)CALL(variable4,COLOR_abstractmetamodel___MMLocalClass_____bra))(variable4,  variable0 /*glob*/) /*MMLocalClass::[]*/;
       variable1 = variable4 /*impl=*/;
     } else { /*if*/
-      variable5 = NEW_array___ArraySet___init(); /*new ArraySet[E]*/
+      variable5 = NEW_ArraySet_array___ArraySet___init(); /*new ArraySet[MMLocalProperty]*/
       variable4 = variable5;
       variable5 = ((array___AbstractArray___iterator_t)CALL( variable3 /*supers*/,COLOR_abstract_collection___Collection___iterator))( variable3 /*supers*/) /*AbstractArray::iterator*/;
       while (true) { /*for*/
@@ -818,40 +834,40 @@ val_t inheritance___MMLocalClass___inherit_local_property(val_t  self, val_t  pa
         if (UNTAG_Bool(variable8)) { /*if*/
           ((array___ArraySet___add_t)CALL( variable4 /*impls*/,COLOR_abstract_collection___SimpleCollection___add))( variable4 /*impls*/,  variable7 /*p*/) /*ArraySet::add*/;
         }
-        continue_36: while(0);
+        continue_37: while(0);
         ((array___ArrayIterator___next_t)CALL(variable5,COLOR_abstract_collection___Iterator___next))(variable5) /*ArrayIterator::next*/;
       }
-      break_36: while(0);
+      break_37: while(0);
       variable6 = ((partial_order___PartialOrder___select_smallests_t)CALL( variable2 /*ghier*/,COLOR_partial_order___PartialOrder___select_smallests))( variable2 /*ghier*/,  variable4 /*impls*/) /*PartialOrder::select_smallests*/;
       variable5 = variable6;
       variable6 = ((array___AbstractArray___length_t)CALL( variable5 /*impls2*/,COLOR_abstract_collection___Collection___length))( variable5 /*impls2*/) /*AbstractArray::length*/;
       variable6 = TAG_Bool((variable6)!=( TAG_Int(1)));
       if (UNTAG_Bool(variable6)) { /*if*/
         variable6 = ((file___Object___stderr_t)CALL( self,COLOR_file___Object___stderr))( self) /*Object::stderr*/;
-        variable7 = NEW_string___String___with_native(BOX_NativeString("Fatal error: inherit_local_property error\n"), TAG_Int(42)); /*new String*/
+        variable7 = NEW_String_string___String___with_native(BOX_NativeString("Fatal error: inherit_local_property error\n"), TAG_Int(42)); /*new String*/
         ((file___OFStream___write_t)CALL(variable6,COLOR_stream___OStream___write))(variable6, variable7) /*OFStream::write*/;
-        variable6 = NEW_string___String___init(); /*new String*/
-        variable7 = NEW_string___String___with_native(BOX_NativeString("------- "), TAG_Int(8)); /*new String*/
+        variable6 = NEW_String_string___String___init(); /*new String*/
+        variable7 = NEW_String_string___String___with_native(BOX_NativeString("------- "), TAG_Int(8)); /*new String*/
         variable8 = variable7;
         ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable8) /*String::append*/;
         variable9 = ((abstractmetamodel___MMLocalClass___module_t)CALL( self,COLOR_abstractmetamodel___MMLocalClass___module))( self) /*MMLocalClass::module*/;
         variable10 = variable9;
         variable10 = ((string___String___to_s_t)CALL(variable10,COLOR_string___Object___to_s))(variable10) /*String::to_s*/;
         ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable10) /*String::append*/;
-        variable11 = NEW_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
+        variable11 = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
         variable12 = variable11;
         ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable12) /*String::append*/;
         variable13 =  self;
         variable13 = ((string___String___to_s_t)CALL(variable13,COLOR_string___Object___to_s))(variable13) /*String::to_s*/;
         ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable13) /*String::append*/;
-        variable14 = NEW_string___String___with_native(BOX_NativeString(" "), TAG_Int(1)); /*new String*/
+        variable14 = NEW_String_string___String___with_native(BOX_NativeString(" "), TAG_Int(1)); /*new String*/
         variable15 = variable14;
         ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable15) /*String::append*/;
         variable16 = ((abstractmetamodel___MMGlobalProperty___intro_t)CALL( variable0 /*glob*/,COLOR_abstractmetamodel___MMGlobalProperty___intro))( variable0 /*glob*/) /*MMGlobalProperty::intro*/;
         variable16 = ((abstractmetamodel___MMLocalProperty___full_name_t)CALL(variable16,COLOR_abstractmetamodel___MMLocalProperty___full_name))(variable16) /*MMLocalProperty::full_name*/;
         variable17 = variable16;
         ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable17) /*String::append*/;
-        variable18 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+        variable18 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
         variable19 = variable18;
         ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable19) /*String::append*/;
         ((file___Object___print_t)CALL( self,COLOR_file___Object___print))( self, variable6) /*Object::print*/;
@@ -860,23 +876,23 @@ val_t inheritance___MMLocalClass___inherit_local_property(val_t  self, val_t  pa
           variable7 = ((array___ArrayIterator___is_ok_t)CALL(variable6,COLOR_abstract_collection___Iterator___is_ok))(variable6) /*ArrayIterator::is_ok*/;
           if (!UNTAG_Bool(variable7)) break; /*for*/
           variable7 = ((array___ArrayIterator___item_t)CALL(variable6,COLOR_abstract_collection___Iterator___item))(variable6) /*ArrayIterator::item*/;
-          variable8 = NEW_string___String___init(); /*new String*/
-          variable9 = NEW_string___String___with_native(BOX_NativeString("   "), TAG_Int(3)); /*new String*/
+          variable8 = NEW_String_string___String___init(); /*new String*/
+          variable9 = NEW_String_string___String___with_native(BOX_NativeString("   "), TAG_Int(3)); /*new String*/
           variable10 = variable9;
           ((string___String___append_t)CALL(variable8,COLOR_abstract_collection___IndexedCollection___append))(variable8, variable10) /*String::append*/;
           variable11 = ((abstractmetamodel___MMLocalProperty___full_name_t)CALL( variable7 /*i*/,COLOR_abstractmetamodel___MMLocalProperty___full_name))( variable7 /*i*/) /*MMLocalProperty::full_name*/;
           variable12 = variable11;
           ((string___String___append_t)CALL(variable8,COLOR_abstract_collection___IndexedCollection___append))(variable8, variable12) /*String::append*/;
-          variable13 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+          variable13 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
           variable14 = variable13;
           ((string___String___append_t)CALL(variable8,COLOR_abstract_collection___IndexedCollection___append))(variable8, variable14) /*String::append*/;
           ((file___Object___print_t)CALL( self,COLOR_file___Object___print))( self, variable8) /*Object::print*/;
-          continue_37: while(0);
+          continue_38: while(0);
           ((array___ArrayIterator___next_t)CALL(variable6,COLOR_abstract_collection___Iterator___next))(variable6) /*ArrayIterator::next*/;
         }
-        break_37: while(0);
-        variable6 = NEW_string___String___init(); /*new String*/
-        variable7 = NEW_string___String___with_native(BOX_NativeString("------- "), TAG_Int(8)); /*new String*/
+        break_38: while(0);
+        variable6 = NEW_String_string___String___init(); /*new String*/
+        variable7 = NEW_String_string___String___with_native(BOX_NativeString("------- "), TAG_Int(8)); /*new String*/
         variable8 = variable7;
         ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable8) /*String::append*/;
         variable9 = ((abstractmetamodel___MMGlobalProperty___property_hierarchy_t)CALL( variable0 /*glob*/,COLOR_abstractmetamodel___MMGlobalProperty___property_hierarchy))( variable0 /*glob*/) /*MMGlobalProperty::property_hierarchy*/;
@@ -884,19 +900,19 @@ val_t inheritance___MMLocalClass___inherit_local_property(val_t  self, val_t  pa
         variable10 = variable9;
         variable10 = ((string___String___to_s_t)CALL(variable10,COLOR_string___Object___to_s))(variable10) /*String::to_s*/;
         ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable10) /*String::append*/;
-        variable11 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+        variable11 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
         variable12 = variable11;
         ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable12) /*String::append*/;
         ((file___Object___print_t)CALL( self,COLOR_file___Object___print))( self, variable6) /*Object::print*/;
-        variable6 = NEW_string___String___init(); /*new String*/
-        variable7 = NEW_string___String___with_native(BOX_NativeString("------- "), TAG_Int(8)); /*new String*/
+        variable6 = NEW_String_string___String___init(); /*new String*/
+        variable7 = NEW_String_string___String___with_native(BOX_NativeString("------- "), TAG_Int(8)); /*new String*/
         variable8 = variable7;
         ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable8) /*String::append*/;
         variable9 = ((abstractmetamodel___MMGlobalProperty___property_hierarchy_t)CALL( variable0 /*glob*/,COLOR_abstractmetamodel___MMGlobalProperty___property_hierarchy))( variable0 /*glob*/) /*MMGlobalProperty::property_hierarchy*/;
         variable9 = ((partial_order___PartialOrder___to_dot_t)CALL(variable9,COLOR_partial_order___PartialOrder___to_dot))(variable9) /*PartialOrder::to_dot*/;
         variable10 = variable9;
         ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable10) /*String::append*/;
-        variable11 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+        variable11 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
         variable12 = variable11;
         ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable12) /*String::append*/;
         ((file___Object___print_t)CALL( self,COLOR_file___Object___print))( self, variable6) /*Object::print*/;
@@ -909,13 +925,13 @@ val_t inheritance___MMLocalClass___inherit_local_property(val_t  self, val_t  pa
   variable4 = ATTR_abstractmetamodel___MMLocalClass____local_property_by_global( self) /*MMLocalClass::_local_property_by_global*/;
   ((abstract_collection___Map_____braeq_t)CALL(variable4,COLOR_abstract_collection___Map_____braeq))(variable4,  variable0 /*glob*/,  variable1 /*impl*/) /*Map::[]=*/;
   variable1 =  variable1 /*impl*/;
-  goto return_label35;
-  return_label35: while(false);
+  goto return_label36;
+  return_label36: while(false);
   tracehead = trace.prev;
   return variable1;
 }
 void inheritance___MMLocalProperty___inherit_global(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 367, LOCATE_inheritance___MMLocalProperty___inherit_global};
+  struct trace_t trace = {NULL, NULL, 374, LOCATE_inheritance___MMLocalProperty___inherit_global};
   val_t variable0;
   val_t variable1;
   val_t variable2;
@@ -926,7 +942,7 @@ void inheritance___MMLocalProperty___inherit_global(val_t  self, val_t  param0) 
   trace.file = LOCATE_inheritance;
   variable0 =  param0;
   ((abstractmetamodel___MMLocalProperty___set_global_t)CALL( self,COLOR_abstractmetamodel___MMLocalProperty___set_global))( self,  variable0 /*g*/) /*MMLocalProperty::set_global*/;
-  variable2 = NEW_array___Array___init(); /*new Array[E]*/
+  variable2 = NEW_Array_array___Array___init(); /*new Array[MMLocalProperty]*/
   variable1 = variable2;
   variable2 = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL( self,COLOR_abstractmetamodel___MMLocalProperty___local_class))( self) /*MMLocalProperty::local_class*/;
   variable2 = ((abstractmetamodel___MMLocalClass___che_t)CALL(variable2,COLOR_abstractmetamodel___MMLocalClass___che))(variable2) /*MMLocalClass::che*/;
@@ -940,19 +956,19 @@ void inheritance___MMLocalProperty___inherit_global(val_t  self, val_t  param0) 
     variable4 = variable5;
     variable5 = TAG_Bool(( variable4 /*p*/ ==  NIT_NULL /*null*/) || (( variable4 /*p*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable4 /*p*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable4 /*p*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable4 /*p*/,COLOR_kernel___Object_____eqeq))( variable4 /*p*/,  NIT_NULL /*null*/) /*Object::==*/)))));
     if (UNTAG_Bool(variable5)) { /*if*/
-      goto continue_39;
+      goto continue_40;
     }
     ((array___AbstractArray___add_t)CALL( variable1 /*impls*/,COLOR_abstract_collection___SimpleCollection___add))( variable1 /*impls*/,  variable4 /*p*/) /*AbstractArray::add*/;
-    continue_39: while(0);
+    continue_40: while(0);
     ((array___ArrayIterator___next_t)CALL(variable2,COLOR_abstract_collection___Iterator___next))(variable2) /*ArrayIterator::next*/;
   }
-  break_39: while(0);
+  break_40: while(0);
   ((abstractmetamodel___MMGlobalProperty___add_local_property_t)CALL( variable0 /*g*/,COLOR_abstractmetamodel___MMGlobalProperty___add_local_property))( variable0 /*g*/,  self,  variable1 /*impls*/) /*MMGlobalProperty::add_local_property*/;
   tracehead = trace.prev;
   return;
 }
 void inheritance___MMAncestor___add_in(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 382, LOCATE_inheritance___MMAncestor___add_in};
+  struct trace_t trace = {NULL, NULL, 389, LOCATE_inheritance___MMAncestor___add_in};
   val_t variable0;
   val_t variable1;
     val_t variable2;
@@ -967,11 +983,11 @@ void inheritance___MMAncestor___add_in(val_t  self, val_t  param0) {
   variable0 =  param0;
   variable1 = ((static_type___MMAncestor___stype_t)CALL( self,COLOR_static_type___MMAncestor___stype))( self) /*MMAncestor::stype*/;
   variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", " 'ancestor' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMAncestor___add_in, LOCATE_inheritance, 385); nit_exit(1);}
+  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", " 'ancestor' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMAncestor___add_in, LOCATE_inheritance, 392); nit_exit(1);}
   variable1 = ((static_type___MMAncestor___stype_t)CALL( self,COLOR_static_type___MMAncestor___stype))( self) /*MMAncestor::stype*/;
   variable1 = ((static_type___MMType___local_class_t)CALL(variable1,COLOR_static_type___MMType___local_class))(variable1) /*MMType::local_class*/;
   variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", " 'local_class' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMAncestor___add_in, LOCATE_inheritance, 386); nit_exit(1);}
+  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", " 'local_class' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMAncestor___add_in, LOCATE_inheritance, 393); nit_exit(1);}
   ((array___AbstractArray___add_t)CALL( variable0 /*tab*/,COLOR_abstract_collection___SimpleCollection___add))( variable0 /*tab*/,  self) /*AbstractArray::add*/;
   variable1 = ((static_type___MMAncestor___stype_t)CALL( self,COLOR_static_type___MMAncestor___stype))( self) /*MMAncestor::stype*/;
   variable1 = ((static_type___MMType___local_class_t)CALL(variable1,COLOR_static_type___MMType___local_class))(variable1) /*MMType::local_class*/;
@@ -1024,25 +1040,25 @@ void inheritance___MMAncestor___add_in(val_t  self, val_t  param0) {
         variable7 = variable8;
         variable6 =  TAG_Bool(!UNTAG_Bool(variable7)) /*b=*/;
         ((array___ArrayIterator___next_t)CALL( variable5 /*it*/,COLOR_abstract_collection___Iterator___next))( variable5 /*it*/) /*ArrayIterator::next*/;
-        continue_42: while(0);
+        continue_43: while(0);
       }
-      break_42: while(0);
+      break_43: while(0);
       if (UNTAG_Bool( variable6 /*b*/)) { /*if*/
         variable7 = ((static_type___MMAncestor___inheriter_t)CALL( self,COLOR_static_type___MMAncestor___inheriter))( self) /*MMAncestor::inheriter*/;
-        variable8 = NEW_inheritance___MMSpecAncestor___init(variable7,  variable4 /*a*/); /*new MMSpecAncestor*/
+        variable8 = NEW_MMSpecAncestor_inheritance___MMSpecAncestor___init(variable7,  variable4 /*a*/); /*new MMSpecAncestor*/
         variable7 = variable8;
         ((array___AbstractArray___add_t)CALL( variable0 /*tab*/,COLOR_abstract_collection___SimpleCollection___add))( variable0 /*tab*/, variable7) /*AbstractArray::add*/;
       }
     }
-    continue_41: while(0);
+    continue_42: while(0);
     ((abstract_collection___Iterator___next_t)CALL(variable1,COLOR_abstract_collection___Iterator___next))(variable1) /*Iterator::next*/;
   }
-  break_41: while(0);
+  break_42: while(0);
   tracehead = trace.prev;
   return;
 }
 void inheritance___MMImplicitLocalClass___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 412, LOCATE_inheritance___MMImplicitLocalClass___init};
+  struct trace_t trace = {NULL, NULL, 419, LOCATE_inheritance___MMImplicitLocalClass___init};
   val_t variable0;
   val_t variable1;
   val_t variable2;
@@ -1065,14 +1081,14 @@ void inheritance___MMImplicitLocalClass___init(val_t  self, val_t  param0, val_t
   return;
 }
 val_t inheritance___MMRefineAncestor___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 423, LOCATE_inheritance___MMRefineAncestor___local_class};
+  struct trace_t trace = {NULL, NULL, 430, LOCATE_inheritance___MMRefineAncestor___local_class};
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
   tracehead = trace.prev;
   return ATTR_inheritance___MMRefineAncestor____local_class( self) /*MMRefineAncestor::_local_class*/;
 }
 void inheritance___MMRefineAncestor___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 425, LOCATE_inheritance___MMRefineAncestor___init};
+  struct trace_t trace = {NULL, NULL, 432, LOCATE_inheritance___MMRefineAncestor___init};
   val_t variable0;
   val_t variable1;
   val_t variable2;
@@ -1092,19 +1108,19 @@ void inheritance___MMRefineAncestor___init(val_t  self, val_t  param0, val_t  pa
   return;
 }
 val_t inheritance___MMSpecAncestor___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 436, LOCATE_inheritance___MMSpecAncestor___local_class};
+  struct trace_t trace = {NULL, NULL, 443, LOCATE_inheritance___MMSpecAncestor___local_class};
   val_t variable0;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
   variable0 = ((static_type___MMAncestor___stype_t)CALL( self,COLOR_static_type___MMAncestor___stype))( self) /*MMAncestor::stype*/;
   variable0 = ((static_type___MMType___local_class_t)CALL(variable0,COLOR_static_type___MMType___local_class))(variable0) /*MMType::local_class*/;
-  goto return_label45;
-  return_label45: while(false);
+  goto return_label46;
+  return_label46: while(false);
   tracehead = trace.prev;
   return variable0;
 }
 void inheritance___MMSpecAncestor___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 438, LOCATE_inheritance___MMSpecAncestor___init};
+  struct trace_t trace = {NULL, NULL, 445, LOCATE_inheritance___MMSpecAncestor___init};
   val_t variable0;
   val_t variable1;
   trace.prev = tracehead; tracehead = &trace;
@@ -1119,19 +1135,19 @@ void inheritance___MMSpecAncestor___init(val_t  self, val_t  param0, val_t  para
   return;
 }
 val_t inheritance___MMDefaultAncestor___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 447, LOCATE_inheritance___MMDefaultAncestor___local_class};
+  struct trace_t trace = {NULL, NULL, 454, LOCATE_inheritance___MMDefaultAncestor___local_class};
   val_t variable0;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
   variable0 = ((static_type___MMAncestor___stype_t)CALL( self,COLOR_static_type___MMAncestor___stype))( self) /*MMAncestor::stype*/;
   variable0 = ((static_type___MMType___local_class_t)CALL(variable0,COLOR_static_type___MMType___local_class))(variable0) /*MMType::local_class*/;
-  goto return_label47;
-  return_label47: while(false);
+  goto return_label48;
+  return_label48: while(false);
   tracehead = trace.prev;
   return variable0;
 }
 void inheritance___MMDefaultAncestor___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 449, LOCATE_inheritance___MMDefaultAncestor___init};
+  struct trace_t trace = {NULL, NULL, 456, LOCATE_inheritance___MMDefaultAncestor___init};
   val_t variable0;
   val_t variable1;
   val_t variable2;
@@ -1141,12 +1157,12 @@ void inheritance___MMDefaultAncestor___init(val_t  self, val_t  param0, val_t  p
   variable1 =  param1;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMDefaultAncestor].i]) return;
   variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable0 /*b*/ ==  NIT_NULL /*null*/) || (( variable0 /*b*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable0 /*b*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable0 /*b*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable0 /*b*/,COLOR_kernel___Object_____eqeq))( variable0 /*b*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMDefaultAncestor___init, LOCATE_inheritance, 451); nit_exit(1);}
+  if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMDefaultAncestor___init, LOCATE_inheritance, 458); nit_exit(1);}
   variable2 = ((abstractmetamodel___MMLocalClass___module_t)CALL( variable0 /*b*/,COLOR_abstractmetamodel___MMLocalClass___module))( variable0 /*b*/) /*MMLocalClass::module*/;
   variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable2 ==  NIT_NULL /*null*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMDefaultAncestor___init, LOCATE_inheritance, 452); nit_exit(1);}
+  if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMDefaultAncestor___init, LOCATE_inheritance, 459); nit_exit(1);}
   variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable1 /*anc*/ ==  NIT_NULL /*null*/) || (( variable1 /*anc*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable1 /*anc*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable1 /*anc*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable1 /*anc*/,COLOR_kernel___Object_____eqeq))( variable1 /*anc*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMDefaultAncestor___init, LOCATE_inheritance, 453); nit_exit(1);}
+  if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMDefaultAncestor___init, LOCATE_inheritance, 460); nit_exit(1);}
   variable2 = ((static_type___MMLocalClass___get_type_t)CALL( variable0 /*b*/,COLOR_static_type___MMLocalClass___get_type))( variable0 /*b*/) /*MMLocalClass::get_type*/;
   ((static_type___MMAncestor___inheriter__eq_t)CALL( self,COLOR_static_type___MMAncestor___inheriter__eq))( self, variable2) /*MMAncestor::inheriter=*/;
   ((static_type___MMAncestor___stype__eq_t)CALL( self,COLOR_static_type___MMAncestor___stype__eq))( self,  variable1 /*anc*/) /*MMAncestor::stype=*/;

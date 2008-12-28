@@ -152,8 +152,8 @@ void compiling_methods___CompilerVisitor___invoke_super_init_calls_after(val_t  
 typedef val_t (* compiling_methods___MMMethod___compile_call_t)(val_t  self, val_t  param0, val_t  param1);
 val_t compiling_methods___MMMethod___compile_call(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_compiling_methods___MMMethod___compile_call "compiling_methods::MMMethod::compile_call"
-typedef val_t (* compiling_methods___MMMethod___compile_constructor_call_t)(val_t  self, val_t  param0, val_t  param1);
-val_t compiling_methods___MMMethod___compile_constructor_call(val_t  self, val_t  param0, val_t  param1);
+typedef val_t (* compiling_methods___MMMethod___compile_constructor_call_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+val_t compiling_methods___MMMethod___compile_constructor_call(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_compiling_methods___MMMethod___compile_constructor_call "compiling_methods::MMMethod::compile_constructor_call"
 typedef val_t (* compiling_methods___MMMethod___compile_super_call_t)(val_t  self, val_t  param0, val_t  param1);
 val_t compiling_methods___MMMethod___compile_super_call(val_t  self, val_t  param0, val_t  param1);
@@ -182,6 +182,9 @@ val_t compiling_methods___MMWriteImplementationMethod___do_compile_inside(val_t 
 typedef val_t (* compiling_methods___MMMethSrcMethod___do_compile_inside_t)(val_t  self, val_t  param0, val_t  param1);
 val_t compiling_methods___MMMethSrcMethod___do_compile_inside(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_compiling_methods___MMMethSrcMethod___do_compile_inside "compiling_methods::MMMethSrcMethod::(compiling_methods::MMSrcMethod::do_compile_inside)"
+typedef val_t (* compiling_methods___MMImplicitInit___do_compile_inside_t)(val_t  self, val_t  param0, val_t  param1);
+val_t compiling_methods___MMImplicitInit___do_compile_inside(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_compiling_methods___MMImplicitInit___do_compile_inside "compiling_methods::MMImplicitInit::(compiling_methods::MMSrcMethod::do_compile_inside)"
 typedef val_t (* compiling_methods___MMType___compile_cast_t)(val_t  self, val_t  param0, val_t  param1);
 val_t compiling_methods___MMType___compile_cast(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_compiling_methods___MMType___compile_cast "compiling_methods::MMType::compile_cast"

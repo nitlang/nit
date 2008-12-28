@@ -18,34 +18,35 @@ extern const int SFT_string_search[];
 #define COLOR_string_search___Pattern___search_in SFT_string_search[4]
 #define COLOR_string_search___Pattern___search_all_in SFT_string_search[5]
 #define COLOR_string_search___Pattern___split_in SFT_string_search[6]
-#define ID_BM_Pattern SFT_string_search[7]
-#define COLOR_BM_Pattern SFT_string_search[8]
-#define COLOR_string_search___BM_Pattern____motif SFT_string_search[9]
-#define COLOR_string_search___BM_Pattern____length SFT_string_search[10]
-#define COLOR_string_search___BM_Pattern____gs SFT_string_search[11]
-#define COLOR_string_search___BM_Pattern____bc_table SFT_string_search[12]
-#define INIT_TABLE_POS_BM_Pattern SFT_string_search[13]
-#define COLOR_string_search___BM_Pattern___init SFT_string_search[14]
-#define COLOR_string_search___BM_Pattern___bc SFT_string_search[15]
-#define COLOR_string_search___BM_Pattern___compute_bc SFT_string_search[16]
-#define COLOR_string_search___BM_Pattern___suffixes SFT_string_search[17]
-#define COLOR_string_search___BM_Pattern___compute_gs SFT_string_search[18]
-#define ID_Match SFT_string_search[19]
-#define COLOR_Match SFT_string_search[20]
-#define COLOR_string_search___Match____string SFT_string_search[21]
-#define COLOR_string_search___Match____from SFT_string_search[22]
-#define COLOR_string_search___Match____length SFT_string_search[23]
-#define INIT_TABLE_POS_Match SFT_string_search[24]
-#define COLOR_string_search___Match___string SFT_string_search[25]
-#define COLOR_string_search___Match___from SFT_string_search[26]
-#define COLOR_string_search___Match___length SFT_string_search[27]
-#define COLOR_string_search___Match___after SFT_string_search[28]
-#define COLOR_string_search___Match___init SFT_string_search[29]
-#define COLOR_string_search___String___search SFT_string_search[30]
-#define COLOR_string_search___String___search_from SFT_string_search[31]
-#define COLOR_string_search___String___search_all SFT_string_search[32]
-#define COLOR_string_search___String___split_with SFT_string_search[33]
-#define COLOR_string_search___String___split SFT_string_search[34]
+#define COLOR_string_search___Pattern___init SFT_string_search[7]
+#define ID_BM_Pattern SFT_string_search[8]
+#define COLOR_BM_Pattern SFT_string_search[9]
+#define COLOR_string_search___BM_Pattern____motif SFT_string_search[10]
+#define COLOR_string_search___BM_Pattern____length SFT_string_search[11]
+#define COLOR_string_search___BM_Pattern____gs SFT_string_search[12]
+#define COLOR_string_search___BM_Pattern____bc_table SFT_string_search[13]
+#define INIT_TABLE_POS_BM_Pattern SFT_string_search[14]
+#define COLOR_string_search___BM_Pattern___init SFT_string_search[15]
+#define COLOR_string_search___BM_Pattern___bc SFT_string_search[16]
+#define COLOR_string_search___BM_Pattern___compute_bc SFT_string_search[17]
+#define COLOR_string_search___BM_Pattern___suffixes SFT_string_search[18]
+#define COLOR_string_search___BM_Pattern___compute_gs SFT_string_search[19]
+#define ID_Match SFT_string_search[20]
+#define COLOR_Match SFT_string_search[21]
+#define COLOR_string_search___Match____string SFT_string_search[22]
+#define COLOR_string_search___Match____from SFT_string_search[23]
+#define COLOR_string_search___Match____length SFT_string_search[24]
+#define INIT_TABLE_POS_Match SFT_string_search[25]
+#define COLOR_string_search___Match___string SFT_string_search[26]
+#define COLOR_string_search___Match___from SFT_string_search[27]
+#define COLOR_string_search___Match___length SFT_string_search[28]
+#define COLOR_string_search___Match___after SFT_string_search[29]
+#define COLOR_string_search___Match___init SFT_string_search[30]
+#define COLOR_string_search___String___search SFT_string_search[31]
+#define COLOR_string_search___String___search_from SFT_string_search[32]
+#define COLOR_string_search___String___search_all SFT_string_search[33]
+#define COLOR_string_search___String___split_with SFT_string_search[34]
+#define COLOR_string_search___String___split SFT_string_search[35]
 typedef val_t (* string_search___Pattern___search_index_in_t)(val_t  self, val_t  param0, val_t  param1);
 val_t string_search___Pattern___search_index_in(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_string_search___Pattern___search_index_in "string_search::Pattern::search_index_in"
@@ -58,6 +59,10 @@ val_t string_search___Pattern___search_all_in(val_t  self, val_t  param0);
 typedef val_t (* string_search___Pattern___split_in_t)(val_t  self, val_t  param0);
 val_t string_search___Pattern___split_in(val_t  self, val_t  param0);
 #define LOCATE_string_search___Pattern___split_in "string_search::Pattern::split_in"
+typedef void (* string_search___Pattern___init_t)(val_t  self, int* init_table);
+void string_search___Pattern___init(val_t  self, int* init_table);
+val_t NEW_string_search___Pattern___init();
+#define LOCATE_string_search___Pattern___init "string_search::Pattern::init"
 typedef val_t (* string_search___BM_Pattern___to_s_t)(val_t  self);
 val_t string_search___BM_Pattern___to_s(val_t  self);
 #define LOCATE_string_search___BM_Pattern___to_s "string_search::BM_Pattern::(string::Object::to_s)"

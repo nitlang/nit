@@ -38,46 +38,48 @@ extern const int SFT_hash[];
 #define COLOR_hash___HashCollection___remove_index SFT_hash[14]
 #define COLOR_hash___HashCollection___raz SFT_hash[15]
 #define COLOR_hash___HashCollection___enlarge SFT_hash[16]
-#define ID_HashNode SFT_hash[17]
-#define COLOR_HashNode SFT_hash[18]
-#define COLOR_hash___HashNode____next_item SFT_hash[19]
-#define COLOR_hash___HashNode____prev_item SFT_hash[20]
-#define INIT_TABLE_POS_HashNode SFT_hash[21]
-#define COLOR_hash___HashNode___key SFT_hash[22]
-#define COLOR_hash___HashNode___next_item SFT_hash[23]
-#define COLOR_hash___HashNode___next_item__eq SFT_hash[24]
-#define COLOR_hash___HashNode___prev_item SFT_hash[25]
-#define COLOR_hash___HashNode___prev_item__eq SFT_hash[26]
-#define ID_HashMap SFT_hash[27]
-#define COLOR_HashMap SFT_hash[28]
-#define INIT_TABLE_POS_HashMap SFT_hash[29]
-#define COLOR_hash___HashMap___init SFT_hash[30]
-#define ID_HashMapNode SFT_hash[31]
-#define COLOR_HashMapNode SFT_hash[32]
-#define INIT_TABLE_POS_HashMapNode SFT_hash[33]
-#define COLOR_hash___HashMapNode___init SFT_hash[34]
-#define ID_HashMapIterator SFT_hash[35]
-#define COLOR_HashMapIterator SFT_hash[36]
-#define COLOR_hash___HashMapIterator____map SFT_hash[37]
-#define COLOR_hash___HashMapIterator____node SFT_hash[38]
-#define INIT_TABLE_POS_HashMapIterator SFT_hash[39]
-#define COLOR_hash___HashMapIterator___init SFT_hash[40]
-#define ID_HashSet SFT_hash[41]
-#define COLOR_HashSet SFT_hash[42]
-#define INIT_TABLE_POS_HashSet SFT_hash[43]
-#define COLOR_hash___HashSet___init SFT_hash[44]
-#define ID_HashSetNode SFT_hash[45]
-#define COLOR_HashSetNode SFT_hash[46]
-#define COLOR_hash___HashSetNode____key SFT_hash[47]
-#define INIT_TABLE_POS_HashSetNode SFT_hash[48]
-#define COLOR_hash___HashSetNode___key__eq SFT_hash[49]
-#define COLOR_hash___HashSetNode___init SFT_hash[50]
-#define ID_HashSetIterator SFT_hash[51]
-#define COLOR_HashSetIterator SFT_hash[52]
-#define COLOR_hash___HashSetIterator____set SFT_hash[53]
-#define COLOR_hash___HashSetIterator____node SFT_hash[54]
-#define INIT_TABLE_POS_HashSetIterator SFT_hash[55]
-#define COLOR_hash___HashSetIterator___init SFT_hash[56]
+#define COLOR_hash___HashCollection___init SFT_hash[17]
+#define ID_HashNode SFT_hash[18]
+#define COLOR_HashNode SFT_hash[19]
+#define COLOR_hash___HashNode____next_item SFT_hash[20]
+#define COLOR_hash___HashNode____prev_item SFT_hash[21]
+#define INIT_TABLE_POS_HashNode SFT_hash[22]
+#define COLOR_hash___HashNode___key SFT_hash[23]
+#define COLOR_hash___HashNode___next_item SFT_hash[24]
+#define COLOR_hash___HashNode___next_item__eq SFT_hash[25]
+#define COLOR_hash___HashNode___prev_item SFT_hash[26]
+#define COLOR_hash___HashNode___prev_item__eq SFT_hash[27]
+#define COLOR_hash___HashNode___init SFT_hash[28]
+#define ID_HashMap SFT_hash[29]
+#define COLOR_HashMap SFT_hash[30]
+#define INIT_TABLE_POS_HashMap SFT_hash[31]
+#define COLOR_hash___HashMap___init SFT_hash[32]
+#define ID_HashMapNode SFT_hash[33]
+#define COLOR_HashMapNode SFT_hash[34]
+#define INIT_TABLE_POS_HashMapNode SFT_hash[35]
+#define COLOR_hash___HashMapNode___init SFT_hash[36]
+#define ID_HashMapIterator SFT_hash[37]
+#define COLOR_HashMapIterator SFT_hash[38]
+#define COLOR_hash___HashMapIterator____map SFT_hash[39]
+#define COLOR_hash___HashMapIterator____node SFT_hash[40]
+#define INIT_TABLE_POS_HashMapIterator SFT_hash[41]
+#define COLOR_hash___HashMapIterator___init SFT_hash[42]
+#define ID_HashSet SFT_hash[43]
+#define COLOR_HashSet SFT_hash[44]
+#define INIT_TABLE_POS_HashSet SFT_hash[45]
+#define COLOR_hash___HashSet___init SFT_hash[46]
+#define ID_HashSetNode SFT_hash[47]
+#define COLOR_HashSetNode SFT_hash[48]
+#define COLOR_hash___HashSetNode____key SFT_hash[49]
+#define INIT_TABLE_POS_HashSetNode SFT_hash[50]
+#define COLOR_hash___HashSetNode___key__eq SFT_hash[51]
+#define COLOR_hash___HashSetNode___init SFT_hash[52]
+#define ID_HashSetIterator SFT_hash[53]
+#define COLOR_HashSetIterator SFT_hash[54]
+#define COLOR_hash___HashSetIterator____set SFT_hash[55]
+#define COLOR_hash___HashSetIterator____node SFT_hash[56]
+#define INIT_TABLE_POS_HashSetIterator SFT_hash[57]
+#define COLOR_hash___HashSetIterator___init SFT_hash[58]
 typedef val_t (* hash___Object___hash_t)(val_t  self);
 val_t hash___Object___hash(val_t  self);
 #define LOCATE_hash___Object___hash "hash::Object::hash"
@@ -121,6 +123,10 @@ void hash___HashCollection___raz(val_t  self);
 typedef void (* hash___HashCollection___enlarge_t)(val_t  self, val_t  param0);
 void hash___HashCollection___enlarge(val_t  self, val_t  param0);
 #define LOCATE_hash___HashCollection___enlarge "hash::HashCollection::enlarge"
+typedef void (* hash___HashCollection___init_t)(val_t  self, int* init_table);
+void hash___HashCollection___init(val_t  self, int* init_table);
+val_t NEW_hash___HashCollection___init();
+#define LOCATE_hash___HashCollection___init "hash::HashCollection::init"
 typedef val_t (* hash___HashNode___key_t)(val_t  self);
 val_t hash___HashNode___key(val_t  self);
 #define LOCATE_hash___HashNode___key "hash::HashNode::key"
@@ -138,6 +144,10 @@ val_t hash___HashNode___prev_item(val_t  self);
 typedef void (* hash___HashNode___prev_item__eq_t)(val_t  self, val_t  param0);
 void hash___HashNode___prev_item__eq(val_t  self, val_t  param0);
 #define LOCATE_hash___HashNode___prev_item__eq "hash::HashNode::prev_item="
+typedef void (* hash___HashNode___init_t)(val_t  self, int* init_table);
+void hash___HashNode___init(val_t  self, int* init_table);
+val_t NEW_hash___HashNode___init();
+#define LOCATE_hash___HashNode___init "hash::HashNode::init"
 typedef val_t (* hash___HashMap___iterator_t)(val_t  self);
 val_t hash___HashMap___iterator(val_t  self);
 #define LOCATE_hash___HashMap___iterator "hash::HashMap::(abstract_collection::Collection::iterator)"

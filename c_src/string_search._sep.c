@@ -29,7 +29,7 @@ val_t string_search___Pattern___search_all_in(val_t  self, val_t  param0) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
   variable0 =  param0;
-  variable2 = NEW_array___Array___init(); /*new Array[E]*/
+  variable2 = NEW_Array_array___Array___init(); /*new Array[Match]*/
   variable1 = variable2;
   variable3 = ((string_search___Pattern___search_in_t)CALL( self,COLOR_string_search___Pattern___search_in))( self,  variable0 /*s*/,  TAG_Int(0)) /*Pattern::search_in*/;
   variable2 = variable3;
@@ -60,7 +60,7 @@ val_t string_search___Pattern___split_in(val_t  self, val_t  param0) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
   variable0 =  param0;
-  variable2 = NEW_array___Array___init(); /*new Array[E]*/
+  variable2 = NEW_Array_array___Array___init(); /*new Array[Match]*/
   variable1 = variable2;
   variable2 =  TAG_Int(0);
   variable4 = ((string_search___Pattern___search_in_t)CALL( self,COLOR_string_search___Pattern___search_in))( self,  variable0 /*s*/,  TAG_Int(0)) /*Pattern::search_in*/;
@@ -71,7 +71,7 @@ val_t string_search___Pattern___split_in(val_t  self, val_t  param0) {
     variable5 = ((string_search___Match___from_t)CALL( variable3 /*match*/,COLOR_string_search___Match___from))( variable3 /*match*/) /*Match::from*/;
     variable5 = TAG_Int(UNTAG_Int(variable5)-UNTAG_Int( variable2 /*i*/));
     variable4 = variable5;
-    variable5 = NEW_string_search___Match___init( variable0 /*s*/,  variable2 /*i*/,  variable4 /*len*/); /*new Match*/
+    variable5 = NEW_Match_string_search___Match___init( variable0 /*s*/,  variable2 /*i*/,  variable4 /*len*/); /*new Match*/
     ((array___AbstractArray___add_t)CALL( variable1 /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable1 /*res*/, variable5) /*AbstractArray::add*/;
     variable5 = ((string_search___Match___after_t)CALL( variable3 /*match*/,COLOR_string_search___Match___after))( variable3 /*match*/) /*Match::after*/;
     variable2 = variable5 /*i=*/;
@@ -82,7 +82,7 @@ val_t string_search___Pattern___split_in(val_t  self, val_t  param0) {
   break_3: while(0);
   variable4 = ((array___AbstractArray___length_t)CALL( variable0 /*s*/,COLOR_abstract_collection___Collection___length))( variable0 /*s*/) /*AbstractArray::length*/;
   variable4 = TAG_Int(UNTAG_Int(variable4)-UNTAG_Int( variable2 /*i*/));
-  variable5 = NEW_string_search___Match___init( variable0 /*s*/,  variable2 /*i*/, variable4); /*new Match*/
+  variable5 = NEW_Match_string_search___Match___init( variable0 /*s*/,  variable2 /*i*/, variable4); /*new Match*/
   variable4 = variable5;
   ((array___AbstractArray___add_t)CALL( variable1 /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable1 /*res*/, variable4) /*AbstractArray::add*/;
   variable1 =  variable1 /*res*/;
@@ -90,6 +90,13 @@ val_t string_search___Pattern___split_in(val_t  self, val_t  param0) {
   return_label2: while(false);
   tracehead = trace.prev;
   return variable1;
+}
+void string_search___Pattern___init(val_t  self, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 0, LOCATE_string_search___Pattern___init};
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_string_search;
+  tracehead = trace.prev;
+  return;
 }
 val_t string_search___BM_Pattern___to_s(val_t  self) {
   struct trace_t trace = {NULL, NULL, 67, LOCATE_string_search___BM_Pattern___to_s};
@@ -215,7 +222,7 @@ val_t string_search___BM_Pattern___search_in(val_t  self, val_t  param0, val_t  
     goto return_label9;
   } else { /*if*/
     variable3 = ATTR_string_search___BM_Pattern____length( self) /*BM_Pattern::_length*/;
-    variable4 = NEW_string_search___Match___init( variable0 /*s*/,  variable2 /*to*/, variable3); /*new Match*/
+    variable4 = NEW_Match_string_search___Match___init( variable0 /*s*/,  variable2 /*to*/, variable3); /*new Match*/
     variable3 = variable4;
     variable2 = variable3;
     goto return_label9;
@@ -237,10 +244,10 @@ void string_search___BM_Pattern___init(val_t  self, val_t  param0, int* init_tab
   variable1 = ((array___AbstractArray___length_t)CALL( variable0 /*motif*/,COLOR_abstract_collection___Collection___length))( variable0 /*motif*/) /*AbstractArray::length*/;
   ATTR_string_search___BM_Pattern____length( self) /*BM_Pattern::_length*/ = variable1;
   variable1 = ATTR_string_search___BM_Pattern____length( self) /*BM_Pattern::_length*/;
-  variable2 = NEW_array___Array___with_capacity(variable1); /*new Array[E]*/
+  variable2 = NEW_Array_array___Array___with_capacity(variable1); /*new Array[Int]*/
   variable1 = variable2;
   ATTR_string_search___BM_Pattern____gs( self) /*BM_Pattern::_gs*/ = variable1;
-  variable1 = NEW_array___ArrayMap___init(); /*new ArrayMap[K, E]*/
+  variable1 = NEW_ArrayMap_array___ArrayMap___init(); /*new ArrayMap[Char, Int]*/
   ATTR_string_search___BM_Pattern____bc_table( self) /*BM_Pattern::_bc_table*/ = variable1;
   ((string_search___BM_Pattern___compute_gs_t)CALL( self,COLOR_string_search___BM_Pattern___compute_gs))( self) /*BM_Pattern::compute_gs*/;
   ((string_search___BM_Pattern___compute_bc_t)CALL( self,COLOR_string_search___BM_Pattern___compute_bc))( self) /*BM_Pattern::compute_bc*/;
@@ -319,7 +326,7 @@ val_t string_search___BM_Pattern___suffixes(val_t  self) {
   variable0 = variable1;
   variable2 = ATTR_string_search___BM_Pattern____length( self) /*BM_Pattern::_length*/;
   variable1 = variable2;
-  variable3 = NEW_array___Array___filled_with( variable1 /*m*/,  variable1 /*m*/); /*new Array[E]*/
+  variable3 = NEW_Array_array___Array___filled_with( variable1 /*m*/,  variable1 /*m*/); /*new Array[Int]*/
   variable2 = variable3;
   variable3 =  TAG_Int(0);
   variable5 = TAG_Int(UNTAG_Int( variable1 /*m*/)-UNTAG_Int( TAG_Int(1)));
@@ -668,7 +675,7 @@ val_t string_search___Char___search_in(val_t  self, val_t  param0, val_t  param1
     variable2 =  NIT_NULL /*null*/;
     goto return_label32;
   } else { /*if*/
-    variable3 = NEW_string_search___Match___init( variable0 /*s*/,  variable2 /*pos*/,  TAG_Int(1)); /*new Match*/
+    variable3 = NEW_Match_string_search___Match___init( variable0 /*s*/,  variable2 /*pos*/,  TAG_Int(1)); /*new Match*/
     variable2 = variable3;
     goto return_label32;
   }
@@ -752,7 +759,7 @@ val_t string_search___String___search_in(val_t  self, val_t  param0, val_t  para
     goto return_label36;
   } else { /*if*/
     variable3 = ((array___AbstractArray___length_t)CALL( self,COLOR_abstract_collection___Collection___length))( self) /*AbstractArray::length*/;
-    variable4 = NEW_string_search___Match___init( variable0 /*s*/,  variable2 /*pos*/, variable3); /*new Match*/
+    variable4 = NEW_Match_string_search___Match___init( variable0 /*s*/,  variable2 /*pos*/, variable3); /*new Match*/
     variable3 = variable4;
     variable2 = variable3;
     goto return_label36;
@@ -816,7 +823,7 @@ val_t string_search___String___split_with(val_t  self, val_t  param0) {
   variable2 = ((string_search___Pattern___split_in_t)CALL( variable0 /*p*/,COLOR_string_search___Pattern___split_in))( variable0 /*p*/,  self) /*Pattern::split_in*/;
   variable1 = variable2;
   variable3 = ((array___AbstractArray___length_t)CALL( variable1 /*matches*/,COLOR_abstract_collection___Collection___length))( variable1 /*matches*/) /*AbstractArray::length*/;
-  variable4 = NEW_array___Array___with_capacity(variable3); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___with_capacity(variable3); /*new Array[String]*/
   variable3 = variable4;
   variable2 = variable3;
   variable3 = ((array___AbstractArray___iterator_t)CALL( variable1 /*matches*/,COLOR_abstract_collection___Collection___iterator))( variable1 /*matches*/) /*AbstractArray::iterator*/;

@@ -8,7 +8,7 @@ void control_flow___MMSrcModule___do_control_flow(val_t  self, val_t  param0) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_control_flow;
   variable0 =  param0;
-  variable2 = NEW_control_flow___ControlFlowVisitor___init( variable0 /*tc*/,  self); /*new ControlFlowVisitor*/
+  variable2 = NEW_ControlFlowVisitor_control_flow___ControlFlowVisitor___init( variable0 /*tc*/,  self); /*new ControlFlowVisitor*/
   variable1 = variable2;
   variable2 = ((syntax_base___MMSrcModule___node_t)CALL( self,COLOR_syntax_base___MMSrcModule___node))( self) /*MMSrcModule::node*/;
   ((control_flow___ControlFlowVisitor___visit_t)CALL( variable1 /*tv*/,COLOR_parser_prod___Visitor___visit))( variable1 /*tv*/, variable2) /*ControlFlowVisitor::visit*/;
@@ -76,14 +76,14 @@ void control_flow___ControlFlowVisitor___check_is_set(val_t  self, val_t  param0
   variable2 = ((control_flow___ControlFlowVisitor___control_flow_ctx_t)CALL( self,COLOR_control_flow___ControlFlowVisitor___control_flow_ctx))( self) /*ControlFlowVisitor::control_flow_ctx*/;
   variable2 = ((control_flow___ControlFlowContext___is_set_t)CALL(variable2,COLOR_control_flow___ControlFlowContext___is_set))(variable2,  variable1 /*v*/) /*ControlFlowContext::is_set*/;
   if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable2)))) { /*if*/
-    variable2 = NEW_string___String___init(); /*new String*/
-    variable3 = NEW_string___String___with_native(BOX_NativeString("Error: variable '"), TAG_Int(17)); /*new String*/
+    variable2 = NEW_String_string___String___init(); /*new String*/
+    variable3 = NEW_String_string___String___with_native(BOX_NativeString("Error: variable '"), TAG_Int(17)); /*new String*/
     variable4 = variable3;
     ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable4) /*String::append*/;
     variable5 =  variable1 /*v*/;
     variable5 = ((string___String___to_s_t)CALL(variable5,COLOR_string___Object___to_s))(variable5) /*String::to_s*/;
     ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable5) /*String::append*/;
-    variable6 = NEW_string___String___with_native(BOX_NativeString("' is possibly unset."), TAG_Int(20)); /*new String*/
+    variable6 = NEW_String_string___String___with_native(BOX_NativeString("' is possibly unset."), TAG_Int(20)); /*new String*/
     variable7 = variable6;
     ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable7) /*String::append*/;
     ((syntax_base___AbsSyntaxVisitor___error_t)CALL( self,COLOR_syntax_base___AbsSyntaxVisitor___error))( self,  variable0 /*n*/, variable2) /*AbsSyntaxVisitor::error*/;
@@ -92,9 +92,9 @@ void control_flow___ControlFlowVisitor___check_is_set(val_t  self, val_t  param0
     while (true) { /*while*/
       variable3 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable2 /*cfc*/ ==  NIT_NULL /*null*/) || (( variable2 /*cfc*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable2 /*cfc*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable2 /*cfc*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable2 /*cfc*/,COLOR_kernel___Object_____eqeq))( variable2 /*cfc*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
       if (!UNTAG_Bool(variable3)) break; /* while*/
-      variable3 = NEW_string___String___with_native(BOX_NativeString("cfc: "), TAG_Int(5)); /*new String*/
+      variable3 = NEW_String_string___String___with_native(BOX_NativeString("cfc: "), TAG_Int(5)); /*new String*/
       variable4 = ((control_flow___ControlFlowContext___set_variables_t)CALL( variable2 /*cfc*/,COLOR_control_flow___ControlFlowContext___set_variables))( variable2 /*cfc*/) /*ControlFlowContext::set_variables*/;
-      variable5 = NEW_string___String___with_native(BOX_NativeString(" "), TAG_Int(1)); /*new String*/
+      variable5 = NEW_String_string___String___with_native(BOX_NativeString(" "), TAG_Int(1)); /*new String*/
       variable4 = ((string___Collection___join_t)CALL(variable4,COLOR_string___Collection___join))(variable4, variable5) /*Collection::join*/;
       variable3 = ((string___String_____plus_t)CALL(variable3,COLOR_string___String_____plus))(variable3, variable4) /*String::+*/;
       ((file___Object___print_t)CALL( self,COLOR_file___Object___print))( self, variable3) /*Object::print*/;
@@ -241,7 +241,7 @@ val_t control_flow___ControlFlowContext___sub(val_t  self) {
   val_t variable0;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_control_flow;
-  variable0 = NEW_control_flow___ControlFlowContext___with( self); /*new ControlFlowContext*/
+  variable0 = NEW_ControlFlowContext_control_flow___ControlFlowContext___with( self); /*new ControlFlowContext*/
   goto return_label7;
   return_label7: while(false);
   tracehead = trace.prev;
@@ -294,7 +294,7 @@ void control_flow___AMethPropdef___accept_control_flow(val_t  self, val_t  param
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_control_flow;
   variable0 =  param0;
-  variable1 = NEW_control_flow___ControlFlowContext___init(); /*new ControlFlowContext*/
+  variable1 = NEW_ControlFlowContext_control_flow___ControlFlowContext___init(); /*new ControlFlowContext*/
   ((control_flow___ControlFlowVisitor___control_flow_ctx__eq_t)CALL( variable0 /*v*/,COLOR_control_flow___ControlFlowVisitor___control_flow_ctx__eq))( variable0 /*v*/, variable1) /*ControlFlowVisitor::control_flow_ctx=*/;
   ((control_flow___AMethPropdef___accept_control_flow_t)CALL( self,COLOR_SUPER_control_flow___AMethPropdef___accept_control_flow))( self,  param0) /*super AMethPropdef::accept_control_flow*/;
   tracehead = trace.prev;
@@ -321,7 +321,7 @@ void control_flow___AConcreteMethPropdef___accept_control_flow(val_t  self, val_
   }
   variable1 = variable2;
   if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = NEW_string___String___with_native(BOX_NativeString("Control error: Reached end of function."), TAG_Int(39)); /*new String*/
+    variable1 = NEW_String_string___String___with_native(BOX_NativeString("Control error: Reached end of function."), TAG_Int(39)); /*new String*/
     ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable1) /*AbsSyntaxVisitor::error*/;
   }
   tracehead = trace.prev;
@@ -385,7 +385,7 @@ void control_flow___ABlockExpr___accept_control_flow(val_t  self, val_t  param0)
     if (UNTAG_Bool(variable3)) { /*if*/
       variable3 = ((control_flow___ControlFlowVisitor___control_flow_ctx_t)CALL( variable0 /*v*/,COLOR_control_flow___ControlFlowVisitor___control_flow_ctx))( variable0 /*v*/) /*ControlFlowVisitor::control_flow_ctx*/;
       ((control_flow___ControlFlowContext___already_unreash__eq_t)CALL(variable3,COLOR_control_flow___ControlFlowContext___already_unreash__eq))(variable3,  TAG_Bool(true)) /*ControlFlowContext::already_unreash=*/;
-      variable3 = NEW_string___String___with_native(BOX_NativeString("Warning: unreachable statement."), TAG_Int(31)); /*new String*/
+      variable3 = NEW_String_string___String___with_native(BOX_NativeString("Warning: unreachable statement."), TAG_Int(31)); /*new String*/
       ((syntax_base___AbsSyntaxVisitor___warning_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___warning))( variable0 /*v*/,  variable2 /*e*/, variable3) /*AbsSyntaxVisitor::warning*/;
     }
     ((control_flow___ControlFlowVisitor___visit_t)CALL( variable0 /*v*/,COLOR_parser_prod___Visitor___visit))( variable0 /*v*/,  variable2 /*e*/) /*ControlFlowVisitor::visit*/;
@@ -432,7 +432,7 @@ void control_flow___ABreakExpr___accept_control_flow(val_t  self, val_t  param0)
   variable1 = variable2;
   variable2 = TAG_Bool(( variable1 /*block*/ ==  NIT_NULL /*null*/) || (( variable1 /*block*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable1 /*block*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable1 /*block*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable1 /*block*/,COLOR_kernel___Object_____eqeq))( variable1 /*block*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = NEW_string___String___with_native(BOX_NativeString("Syntax Error: 'break' statment outside block."), TAG_Int(45)); /*new String*/
+    variable2 = NEW_String_string___String___with_native(BOX_NativeString("Syntax Error: 'break' statment outside block."), TAG_Int(45)); /*new String*/
     ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable2) /*AbsSyntaxVisitor::error*/;
     goto return_label18;
   }
@@ -457,7 +457,7 @@ void control_flow___AContinueExpr___accept_control_flow(val_t  self, val_t  para
   variable1 = variable2;
   variable2 = TAG_Bool(( variable1 /*block*/ ==  NIT_NULL /*null*/) || (( variable1 /*block*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable1 /*block*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable1 /*block*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable1 /*block*/,COLOR_kernel___Object_____eqeq))( variable1 /*block*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = NEW_string___String___with_native(BOX_NativeString("Syntax Error: 'continue' outside block."), TAG_Int(39)); /*new String*/
+    variable2 = NEW_String_string___String___with_native(BOX_NativeString("Syntax Error: 'continue' outside block."), TAG_Int(39)); /*new String*/
     ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable2) /*AbsSyntaxVisitor::error*/;
     goto return_label19;
   }
@@ -645,7 +645,7 @@ void control_flow___AOnceExpr___accept_control_flow(val_t  self, val_t  param0) 
   variable1 = ((control_flow___ControlFlowVisitor___once_count_t)CALL( variable0 /*v*/,COLOR_control_flow___ControlFlowVisitor___once_count))( variable0 /*v*/) /*ControlFlowVisitor::once_count*/;
   variable1 = TAG_Bool(UNTAG_Int(variable1)>UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = NEW_string___String___with_native(BOX_NativeString("Useless once in a once expression."), TAG_Int(34)); /*new String*/
+    variable1 = NEW_String_string___String___with_native(BOX_NativeString("Useless once in a once expression."), TAG_Int(34)); /*new String*/
     ((syntax_base___AbsSyntaxVisitor___warning_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___warning))( variable0 /*v*/,  self, variable1) /*AbsSyntaxVisitor::warning*/;
   }
   variable1 = ((control_flow___ControlFlowVisitor___once_count_t)CALL( variable0 /*v*/,COLOR_control_flow___ControlFlowVisitor___once_count))( variable0 /*v*/) /*ControlFlowVisitor::once_count*/;

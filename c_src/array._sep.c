@@ -374,7 +374,7 @@ val_t array___AbstractArray___reversed(val_t  self) {
   trace.file = LOCATE_array;
   variable1 = ATTR_array___AbstractArray____length( self) /*AbstractArray::_length*/;
   variable0 = variable1;
-  variable2 = NEW_array___Array___with_capacity( variable0 /*cmp*/); /*new Array[E]*/
+  variable2 = NEW_Array_array___Array___with_capacity( variable0 /*cmp*/); /*new Array[E]*/
   variable1 = variable2;
   while (true) { /*while*/
     variable2 = TAG_Bool(UNTAG_Int( variable0 /*cmp*/)>UNTAG_Int( TAG_Int(0)));
@@ -524,7 +524,7 @@ val_t array___AbstractArray___iterator(val_t  self) {
   val_t variable0;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_array;
-  variable0 = NEW_array___ArrayIterator___init( self); /*new ArrayIterator[E]*/
+  variable0 = NEW_ArrayIterator_array___ArrayIterator___init( self); /*new ArrayIterator[E]*/
   goto return_label34;
   return_label34: while(false);
   tracehead = trace.prev;
@@ -579,6 +579,13 @@ val_t array___AbstractArray_____eqeq(val_t  self, val_t  param0) {
   return_label35: while(false);
   tracehead = trace.prev;
   return variable1;
+}
+void array___AbstractArray___init(val_t  self, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 0, LOCATE_array___AbstractArray___init};
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_array;
+  tracehead = trace.prev;
+  return;
 }
 val_t array___Array_____bra(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 227, LOCATE_array___Array_____bra};
@@ -967,7 +974,7 @@ val_t array___ArraySet___iterator(val_t  self) {
   trace.file = LOCATE_array;
   variable0 = ATTR_array___ArraySet____array( self) /*ArraySet::_array*/;
   variable0 = ((array___AbstractArray___iterator_t)CALL(variable0,COLOR_abstract_collection___Collection___iterator))(variable0) /*AbstractArray::iterator*/;
-  variable1 = NEW_array___ArraySetIterator___init(variable0); /*new ArraySetIterator[E]*/
+  variable1 = NEW_ArraySetIterator_array___ArraySetIterator___init(variable0); /*new ArraySetIterator[E]*/
   variable0 = variable1;
   goto return_label60;
   return_label60: while(false);
@@ -1009,7 +1016,7 @@ void array___ArraySet___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_array;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ArraySet].i]) return;
-  variable0 = NEW_array___Array___init(); /*new Array[E]*/
+  variable0 = NEW_Array_array___Array___init(); /*new Array[E]*/
   ATTR_array___ArraySet____array( self) /*ArraySet::_array*/ = variable0;
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ArraySet].i] = 1;
   tracehead = trace.prev;
@@ -1023,7 +1030,7 @@ void array___ArraySet___with_capacity(val_t  self, val_t  param0, int* init_tabl
   trace.file = LOCATE_array;
   variable0 =  param0;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ArraySet].i]) return;
-  variable1 = NEW_array___Array___with_capacity( variable0 /*i*/); /*new Array[E]*/
+  variable1 = NEW_Array_array___Array___with_capacity( variable0 /*i*/); /*new Array[E]*/
   ATTR_array___ArraySet____array( self) /*ArraySet::_array*/ = variable1;
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ArraySet].i] = 1;
   tracehead = trace.prev;
@@ -1155,7 +1162,7 @@ void array___ArrayMap_____braeq(val_t  self, val_t  param0, val_t  param1) {
     ((abstract_collection___Couple___second__eq_t)CALL(variable3,COLOR_abstract_collection___Couple___second__eq))(variable3,  variable1 /*item*/) /*Couple::second=*/;
   } else { /*if*/
     variable3 = ATTR_array___ArrayMap____items( self) /*ArrayMap::_items*/;
-    variable4 = NEW_abstract_collection___Couple___init( variable0 /*key*/,  variable1 /*item*/); /*new Couple[F, S]*/
+    variable4 = NEW_Couple_abstract_collection___Couple___init( variable0 /*key*/,  variable1 /*item*/); /*new Couple[K, E]*/
     ((array___AbstractArray___push_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___push))(variable3, variable4) /*AbstractArray::push*/;
   }
   tracehead = trace.prev;
@@ -1302,7 +1309,7 @@ val_t array___ArrayMap___iterator(val_t  self) {
   trace.file = LOCATE_array;
   variable0 = ATTR_array___ArrayMap____items( self) /*ArrayMap::_items*/;
   variable0 = ((array___AbstractArray___iterator_t)CALL(variable0,COLOR_abstract_collection___Collection___iterator))(variable0) /*AbstractArray::iterator*/;
-  variable1 = NEW_abstract_collection___CoupleMapIterator___init(variable0); /*new CoupleMapIterator[K, E]*/
+  variable1 = NEW_CoupleMapIterator_abstract_collection___CoupleMapIterator___init(variable0); /*new CoupleMapIterator[K, E]*/
   variable0 = variable1;
   goto return_label82;
   return_label82: while(false);
@@ -1606,7 +1613,7 @@ void array___ArrayMap___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_array;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ArrayMap].i]) return;
-  variable0 = NEW_array___Array___init(); /*new Array[E]*/
+  variable0 = NEW_Array_array___Array___init(); /*new Array[Couple[K, E]]*/
   ATTR_array___ArrayMap____items( self) /*ArrayMap::_items*/ = variable0;
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ArrayMap].i] = 1;
   tracehead = trace.prev;
@@ -1618,7 +1625,7 @@ val_t array___Iterator___to_a(val_t  self) {
   val_t variable1;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_array;
-  variable1 = NEW_array___Array___init(); /*new Array[E]*/
+  variable1 = NEW_Array_array___Array___init(); /*new Array[E]*/
   variable0 = variable1;
   while (true) { /*while*/
     variable1 = ((abstract_collection___Iterator___is_ok_t)CALL( self,COLOR_abstract_collection___Iterator___is_ok))( self) /*Iterator::is_ok*/;

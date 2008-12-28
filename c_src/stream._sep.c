@@ -10,6 +10,13 @@ void stream___IOS___close(val_t  self) {
   tracehead = trace.prev;
   return;
 }
+void stream___IOS___init(val_t  self, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 0, LOCATE_stream___IOS___init};
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_stream;
+  tracehead = trace.prev;
+  return;
+}
 val_t stream___IStream___read_char(val_t  self) {
   struct trace_t trace = {NULL, NULL, 27, LOCATE_stream___IStream___read_char};
   trace.prev = tracehead; tracehead = &trace;
@@ -29,7 +36,7 @@ val_t stream___IStream___read(val_t  self, val_t  param0) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
   variable0 =  param0;
-  variable2 = NEW_string___String___with_capacity( variable0 /*i*/); /*new String*/
+  variable2 = NEW_String_string___String___with_capacity( variable0 /*i*/); /*new String*/
   variable1 = variable2;
   while (true) { /*while*/
     variable2 = TAG_Bool(UNTAG_Int( variable0 /*i*/)>UNTAG_Int( TAG_Int(0)));
@@ -65,7 +72,7 @@ val_t stream___IStream___read_line(val_t  self) {
   trace.file = LOCATE_stream;
   variable0 = ((stream___IStream___eof_t)CALL( self,COLOR_stream___IStream___eof))( self) /*IStream::eof*/;
   if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable0)))) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_stream___IStream___read_line, LOCATE_stream, 47); nit_exit(1);}
-  variable1 = NEW_string___String___init(); /*new String*/
+  variable1 = NEW_String_string___String___init(); /*new String*/
   variable0 = variable1;
   ((stream___IStream___append_line_to_t)CALL( self,COLOR_stream___IStream___append_line_to))( self,  variable0 /*s*/) /*IStream::append_line_to*/;
   variable0 =  variable0 /*s*/;
@@ -81,7 +88,7 @@ val_t stream___IStream___read_all(val_t  self) {
     val_t variable2;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
-  variable1 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable1 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   variable0 = variable1;
   while (true) { /*while*/
     variable1 = ((stream___IStream___eof_t)CALL( self,COLOR_stream___IStream___eof))( self) /*IStream::eof*/;
@@ -215,7 +222,7 @@ val_t stream___BufferedIStream___read(val_t  self, val_t  param0) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
   variable0 =  param0;
-  variable2 = NEW_string___String___with_capacity( variable0 /*i*/); /*new String*/
+  variable2 = NEW_String_string___String___with_capacity( variable0 /*i*/); /*new String*/
   variable1 = variable2;
   variable3 = ATTR_stream___BufferedIStream____buffer_pos( self) /*BufferedIStream::_buffer_pos*/;
   variable2 = variable3;
@@ -273,7 +280,7 @@ val_t stream___BufferedIStream___read_all(val_t  self) {
     val_t variable3;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
-  variable1 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable1 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   variable0 = variable1;
   while (true) { /*while*/
     variable1 = ((stream___BufferedIStream___eof_t)CALL( self,COLOR_stream___IStream___eof))( self) /*BufferedIStream::eof*/;
@@ -424,7 +431,7 @@ void stream___BufferedIStream___prepare_buffer(val_t  self, val_t  param0) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
   variable0 =  param0;
-  variable1 = NEW_string___String___with_capacity( variable0 /*capacity*/); /*new String*/
+  variable1 = NEW_String_string___String___with_capacity( variable0 /*capacity*/); /*new String*/
   ATTR_stream___BufferedIStream____buffer( self) /*BufferedIStream::_buffer*/ = variable1;
   ATTR_stream___BufferedIStream____buffer_pos( self) /*BufferedIStream::_buffer_pos*/ =  TAG_Int(0);
   tracehead = trace.prev;
@@ -563,7 +570,7 @@ void stream___FDOStream___init(val_t  self, val_t  param0, int* init_table) {
   return;
 }
 void stream___FDIOStream___init(val_t  self, val_t  param0, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 265, LOCATE_stream___FDIOStream___init};
+  struct trace_t trace = {NULL, NULL, 264, LOCATE_stream___FDIOStream___init};
   val_t variable0;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;

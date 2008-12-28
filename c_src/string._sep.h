@@ -60,15 +60,17 @@ extern const int SFT_string[];
 #define COLOR_string___NativeString___copy_to SFT_string[42]
 #define COLOR_string___NativeString___cstring_length SFT_string[43]
 #define COLOR_string___NativeString___atoi SFT_string[44]
-#define ID_StringCapable SFT_string[45]
-#define COLOR_StringCapable SFT_string[46]
-#define INIT_TABLE_POS_StringCapable SFT_string[47]
-#define COLOR_string___StringCapable___calloc_string SFT_string[48]
-#define COLOR_string___Sys____args_cache SFT_string[49]
-#define COLOR_string___Sys___program_name SFT_string[50]
-#define COLOR_string___Sys___init_args SFT_string[51]
-#define COLOR_string___Sys___native_argc SFT_string[52]
-#define COLOR_string___Sys___native_argv SFT_string[53]
+#define COLOR_string___NativeString___init SFT_string[45]
+#define ID_StringCapable SFT_string[46]
+#define COLOR_StringCapable SFT_string[47]
+#define INIT_TABLE_POS_StringCapable SFT_string[48]
+#define COLOR_string___StringCapable___calloc_string SFT_string[49]
+#define COLOR_string___StringCapable___init SFT_string[50]
+#define COLOR_string___Sys____args_cache SFT_string[51]
+#define COLOR_string___Sys___program_name SFT_string[52]
+#define COLOR_string___Sys___init_args SFT_string[53]
+#define COLOR_string___Sys___native_argc SFT_string[54]
+#define COLOR_string___Sys___native_argv SFT_string[55]
 typedef val_t (* string___String_____bra_t)(val_t  self, val_t  param0);
 val_t string___String_____bra(val_t  self, val_t  param0);
 #define LOCATE_string___String_____bra "string::String::(abstract_collection::Map::[])"
@@ -227,9 +229,17 @@ val_t string___NativeString___cstring_length(val_t  self);
 typedef val_t (* string___NativeString___atoi_t)(val_t  self);
 val_t string___NativeString___atoi(val_t  self);
 #define LOCATE_string___NativeString___atoi "string::NativeString::atoi"
+typedef void (* string___NativeString___init_t)(val_t  self, int* init_table);
+void string___NativeString___init(val_t  self, int* init_table);
+val_t NEW_string___NativeString___init();
+#define LOCATE_string___NativeString___init "string::NativeString::init"
 typedef val_t (* string___StringCapable___calloc_string_t)(val_t  self, val_t  param0);
 val_t string___StringCapable___calloc_string(val_t  self, val_t  param0);
 #define LOCATE_string___StringCapable___calloc_string "string::StringCapable::calloc_string"
+typedef void (* string___StringCapable___init_t)(val_t  self, int* init_table);
+void string___StringCapable___init(val_t  self, int* init_table);
+val_t NEW_string___StringCapable___init();
+#define LOCATE_string___StringCapable___init "string::StringCapable::init"
 #define ATTR_string___Sys____args_cache(recv) ATTR(recv, COLOR_string___Sys____args_cache)
 typedef val_t (* string___Sys___args_t)(val_t  self);
 val_t string___Sys___args(val_t  self);

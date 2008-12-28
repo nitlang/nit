@@ -28,7 +28,7 @@ val_t utils___Object___cmangle(val_t  self, val_t  param0) {
     once_bool_variable2_1 = true;
   }
   variable1 = variable2;
-  variable3 = NEW_string___String___init(); /*new String*/
+  variable3 = NEW_String_string___String___init(); /*new String*/
   variable2 = variable3;
   variable3 = ((array___AbstractArray___iterator_t)CALL( variable0 /*symbols*/,COLOR_abstract_collection___Collection___iterator))( variable0 /*symbols*/) /*AbstractArray::iterator*/;
   while (true) { /*for*/
@@ -125,31 +125,31 @@ val_t utils___Object___cmangle_table(val_t  self) {
   val_t variable1;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_utils;
-  variable1 = NEW_hash___HashMap___init(); /*new HashMap[K, V]*/
+  variable1 = NEW_HashMap_hash___HashMap___init(); /*new HashMap[Char, String]*/
   variable0 = variable1;
-  variable1 = NEW_string___String___with_native(BOX_NativeString("plus"), TAG_Int(4)); /*new String*/
+  variable1 = NEW_String_string___String___with_native(BOX_NativeString("plus"), TAG_Int(4)); /*new String*/
   ((hash___HashMap_____braeq_t)CALL( variable0 /*res*/,COLOR_abstract_collection___Map_____braeq))( variable0 /*res*/,  TAG_Char('+'), variable1) /*HashMap::[]=*/;
-  variable1 = NEW_string___String___with_native(BOX_NativeString("minus"), TAG_Int(5)); /*new String*/
+  variable1 = NEW_String_string___String___with_native(BOX_NativeString("minus"), TAG_Int(5)); /*new String*/
   ((hash___HashMap_____braeq_t)CALL( variable0 /*res*/,COLOR_abstract_collection___Map_____braeq))( variable0 /*res*/,  TAG_Char('-'), variable1) /*HashMap::[]=*/;
-  variable1 = NEW_string___String___with_native(BOX_NativeString("star"), TAG_Int(4)); /*new String*/
+  variable1 = NEW_String_string___String___with_native(BOX_NativeString("star"), TAG_Int(4)); /*new String*/
   ((hash___HashMap_____braeq_t)CALL( variable0 /*res*/,COLOR_abstract_collection___Map_____braeq))( variable0 /*res*/,  TAG_Char('*'), variable1) /*HashMap::[]=*/;
-  variable1 = NEW_string___String___with_native(BOX_NativeString("slash"), TAG_Int(5)); /*new String*/
+  variable1 = NEW_String_string___String___with_native(BOX_NativeString("slash"), TAG_Int(5)); /*new String*/
   ((hash___HashMap_____braeq_t)CALL( variable0 /*res*/,COLOR_abstract_collection___Map_____braeq))( variable0 /*res*/,  TAG_Char('/'), variable1) /*HashMap::[]=*/;
-  variable1 = NEW_string___String___with_native(BOX_NativeString("percent"), TAG_Int(7)); /*new String*/
+  variable1 = NEW_String_string___String___with_native(BOX_NativeString("percent"), TAG_Int(7)); /*new String*/
   ((hash___HashMap_____braeq_t)CALL( variable0 /*res*/,COLOR_abstract_collection___Map_____braeq))( variable0 /*res*/,  TAG_Char('%'), variable1) /*HashMap::[]=*/;
-  variable1 = NEW_string___String___with_native(BOX_NativeString("bra"), TAG_Int(3)); /*new String*/
+  variable1 = NEW_String_string___String___with_native(BOX_NativeString("bra"), TAG_Int(3)); /*new String*/
   ((hash___HashMap_____braeq_t)CALL( variable0 /*res*/,COLOR_abstract_collection___Map_____braeq))( variable0 /*res*/,  TAG_Char('['), variable1) /*HashMap::[]=*/;
-  variable1 = NEW_string___String___with_native(BOX_NativeString("eq"), TAG_Int(2)); /*new String*/
+  variable1 = NEW_String_string___String___with_native(BOX_NativeString("eq"), TAG_Int(2)); /*new String*/
   ((hash___HashMap_____braeq_t)CALL( variable0 /*res*/,COLOR_abstract_collection___Map_____braeq))( variable0 /*res*/,  TAG_Char('='), variable1) /*HashMap::[]=*/;
-  variable1 = NEW_string___String___with_native(BOX_NativeString("l"), TAG_Int(1)); /*new String*/
+  variable1 = NEW_String_string___String___with_native(BOX_NativeString("l"), TAG_Int(1)); /*new String*/
   ((hash___HashMap_____braeq_t)CALL( variable0 /*res*/,COLOR_abstract_collection___Map_____braeq))( variable0 /*res*/,  TAG_Char('<'), variable1) /*HashMap::[]=*/;
-  variable1 = NEW_string___String___with_native(BOX_NativeString("g"), TAG_Int(1)); /*new String*/
+  variable1 = NEW_String_string___String___with_native(BOX_NativeString("g"), TAG_Int(1)); /*new String*/
   ((hash___HashMap_____braeq_t)CALL( variable0 /*res*/,COLOR_abstract_collection___Map_____braeq))( variable0 /*res*/,  TAG_Char('>'), variable1) /*HashMap::[]=*/;
-  variable1 = NEW_string___String___with_native(BOX_NativeString("n"), TAG_Int(1)); /*new String*/
+  variable1 = NEW_String_string___String___with_native(BOX_NativeString("n"), TAG_Int(1)); /*new String*/
   ((hash___HashMap_____braeq_t)CALL( variable0 /*res*/,COLOR_abstract_collection___Map_____braeq))( variable0 /*res*/,  TAG_Char('!'), variable1) /*HashMap::[]=*/;
-  variable1 = NEW_string___String___with_native(BOX_NativeString("u"), TAG_Int(1)); /*new String*/
+  variable1 = NEW_String_string___String___with_native(BOX_NativeString("u"), TAG_Int(1)); /*new String*/
   ((hash___HashMap_____braeq_t)CALL( variable0 /*res*/,COLOR_abstract_collection___Map_____braeq))( variable0 /*res*/,  TAG_Char('_'), variable1) /*HashMap::[]=*/;
-  variable1 = NEW_string___String___with_native(BOX_NativeString("at"), TAG_Int(2)); /*new String*/
+  variable1 = NEW_String_string___String___with_native(BOX_NativeString("at"), TAG_Int(2)); /*new String*/
   ((hash___HashMap_____braeq_t)CALL( variable0 /*res*/,COLOR_abstract_collection___Map_____braeq))( variable0 /*res*/,  TAG_Char('@'), variable1) /*HashMap::[]=*/;
   variable0 =  variable0 /*res*/;
   goto return_label4;

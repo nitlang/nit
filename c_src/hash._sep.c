@@ -388,6 +388,13 @@ void hash___HashCollection___enlarge(val_t  self, val_t  param0) {
   tracehead = trace.prev;
   return;
 }
+void hash___HashCollection___init(val_t  self, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 0, LOCATE_hash___HashCollection___init};
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_hash;
+  tracehead = trace.prev;
+  return;
+}
 val_t hash___HashNode___key(val_t  self) {
   struct trace_t trace = {NULL, NULL, 222, LOCATE_hash___HashNode___key};
   trace.prev = tracehead; tracehead = &trace;
@@ -428,12 +435,19 @@ void hash___HashNode___prev_item__eq(val_t  self, val_t  param0) {
   tracehead = trace.prev;
   return;
 }
+void hash___HashNode___init(val_t  self, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 0, LOCATE_hash___HashNode___init};
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_hash;
+  tracehead = trace.prev;
+  return;
+}
 val_t hash___HashMap___iterator(val_t  self) {
   struct trace_t trace = {NULL, NULL, 232, LOCATE_hash___HashMap___iterator};
   val_t variable0;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 = NEW_hash___HashMapIterator___init( self); /*new HashMapIterator[K, V]*/
+  variable0 = NEW_HashMapIterator_hash___HashMapIterator___init( self); /*new HashMapIterator[K, V]*/
   goto return_label16;
   return_label16: while(false);
   tracehead = trace.prev;
@@ -607,7 +621,7 @@ void hash___HashMap_____braeq(val_t  self, val_t  param0, val_t  param1) {
     ((abstract_collection___Couple___first__eq_t)CALL( variable3 /*c*/,COLOR_abstract_collection___Couple___first__eq))( variable3 /*c*/,  variable0 /*key*/) /*Couple::first=*/;
     ((abstract_collection___Couple___second__eq_t)CALL( variable3 /*c*/,COLOR_abstract_collection___Couple___second__eq))( variable3 /*c*/,  variable1 /*v*/) /*Couple::second=*/;
   } else { /*if*/
-    variable4 = NEW_hash___HashMapNode___init( variable0 /*key*/,  variable1 /*v*/); /*new HashMapNode[K, V]*/
+    variable4 = NEW_HashMapNode_hash___HashMapNode___init( variable0 /*key*/,  variable1 /*v*/); /*new HashMapNode[K, V]*/
     ((hash___HashCollection___store_t)CALL( self,COLOR_hash___HashCollection___store))( self,  variable2 /*i*/, variable4) /*HashCollection::store*/;
   }
   tracehead = trace.prev;
@@ -868,7 +882,7 @@ void hash___HashSet___add(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable3)) { /*if*/
     ((hash___HashSetNode___key__eq_t)CALL( variable2 /*c*/,COLOR_hash___HashSetNode___key__eq))( variable2 /*c*/,  variable0 /*item*/) /*HashSetNode::key=*/;
   } else { /*if*/
-    variable3 = NEW_hash___HashSetNode___init( variable0 /*item*/); /*new HashSetNode[E]*/
+    variable3 = NEW_HashSetNode_hash___HashSetNode___init( variable0 /*item*/); /*new HashSetNode[E]*/
     ((hash___HashCollection___store_t)CALL( self,COLOR_hash___HashCollection___store))( self,  variable1 /*i*/, variable3) /*HashCollection::store*/;
   }
   tracehead = trace.prev;
@@ -899,7 +913,7 @@ val_t hash___HashSet___iterator(val_t  self) {
   val_t variable0;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 = NEW_hash___HashSetIterator___init( self); /*new HashSetIterator[E]*/
+  variable0 = NEW_HashSetIterator_hash___HashSetIterator___init( self); /*new HashSetIterator[E]*/
   goto return_label46;
   return_label46: while(false);
   tracehead = trace.prev;

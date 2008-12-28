@@ -142,7 +142,7 @@ val_t partial_order___PartialOrder___to_dot(val_t  self) {
       val_t variable5;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
-  variable1 = NEW_string___String___init(); /*new String*/
+  variable1 = NEW_String_string___String___init(); /*new String*/
   variable0 = variable1;
   variable1 = ((partial_order___PartialOrder___to_dot_header_t)CALL( self,COLOR_partial_order___PartialOrder___to_dot_header))( self) /*PartialOrder::to_dot_header*/;
   ((string___String___append_t)CALL( variable0 /*s*/,COLOR_abstract_collection___IndexedCollection___append))( variable0 /*s*/, variable1) /*String::append*/;
@@ -172,7 +172,7 @@ val_t partial_order___PartialOrder___to_dot(val_t  self) {
     ((abstract_collection___Iterator___next_t)CALL(variable1,COLOR_abstract_collection___Iterator___next))(variable1) /*Iterator::next*/;
   }
   break_9: while(0);
-  variable1 = NEW_string___String___with_native(BOX_NativeString("}\n"), TAG_Int(2)); /*new String*/
+  variable1 = NEW_String_string___String___with_native(BOX_NativeString("}\n"), TAG_Int(2)); /*new String*/
   ((string___String___append_t)CALL( variable0 /*s*/,COLOR_abstract_collection___IndexedCollection___append))( variable0 /*s*/, variable1) /*String::append*/;
   variable0 =  variable0 /*s*/;
   goto return_label8;
@@ -185,7 +185,7 @@ val_t partial_order___PartialOrder___to_dot_header(val_t  self) {
   val_t variable0;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
-  variable0 = NEW_string___String___with_native(BOX_NativeString("digraph G {\ngraph [rankdir=BT];\n"), TAG_Int(32)); /*new String*/
+  variable0 = NEW_String_string___String___with_native(BOX_NativeString("digraph G {\ngraph [rankdir=BT];\n"), TAG_Int(32)); /*new String*/
   goto return_label11;
   return_label11: while(false);
   tracehead = trace.prev;
@@ -203,14 +203,14 @@ val_t partial_order___PartialOrder___to_dot_node(val_t  self, val_t  param0) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
   variable0 =  param0;
-  variable1 = NEW_string___String___init(); /*new String*/
-  variable2 = NEW_string___String___with_native(BOX_NativeString("\""), TAG_Int(1)); /*new String*/
+  variable1 = NEW_String_string___String___init(); /*new String*/
+  variable2 = NEW_String_string___String___with_native(BOX_NativeString("\""), TAG_Int(1)); /*new String*/
   variable3 = variable2;
   ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable3) /*String::append*/;
   variable4 =  variable0 /*e*/;
   variable4 = ((string___String___to_s_t)CALL(variable4,COLOR_string___Object___to_s))(variable4) /*String::to_s*/;
   ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable4) /*String::append*/;
-  variable5 = NEW_string___String___with_native(BOX_NativeString("\";\n"), TAG_Int(3)); /*new String*/
+  variable5 = NEW_String_string___String___with_native(BOX_NativeString("\";\n"), TAG_Int(3)); /*new String*/
   variable6 = variable5;
   ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable6) /*String::append*/;
   goto return_label12;
@@ -235,20 +235,20 @@ val_t partial_order___PartialOrder___to_dot_edge(val_t  self, val_t  param0, val
   trace.file = LOCATE_partial_order;
   variable0 =  param0;
   variable1 =  param1;
-  variable2 = NEW_string___String___init(); /*new String*/
-  variable3 = NEW_string___String___with_native(BOX_NativeString("\""), TAG_Int(1)); /*new String*/
+  variable2 = NEW_String_string___String___init(); /*new String*/
+  variable3 = NEW_String_string___String___with_native(BOX_NativeString("\""), TAG_Int(1)); /*new String*/
   variable4 = variable3;
   ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable4) /*String::append*/;
   variable5 =  variable0 /*e1*/;
   variable5 = ((string___String___to_s_t)CALL(variable5,COLOR_string___Object___to_s))(variable5) /*String::to_s*/;
   ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable5) /*String::append*/;
-  variable6 = NEW_string___String___with_native(BOX_NativeString("\" -> \""), TAG_Int(6)); /*new String*/
+  variable6 = NEW_String_string___String___with_native(BOX_NativeString("\" -> \""), TAG_Int(6)); /*new String*/
   variable7 = variable6;
   ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable7) /*String::append*/;
   variable8 =  variable1 /*e2*/;
   variable8 = ((string___String___to_s_t)CALL(variable8,COLOR_string___Object___to_s))(variable8) /*String::to_s*/;
   ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable8) /*String::append*/;
-  variable9 = NEW_string___String___with_native(BOX_NativeString("\";\n"), TAG_Int(3)); /*new String*/
+  variable9 = NEW_String_string___String___with_native(BOX_NativeString("\";\n"), TAG_Int(3)); /*new String*/
   variable10 = variable9;
   ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable10) /*String::append*/;
   goto return_label13;
@@ -270,17 +270,17 @@ val_t partial_order___PartialOrder___select_smallests(val_t  self, val_t  param0
   variable0 =  param0;
   variable1 = TAG_Bool(( variable0 /*c*/ ==  NIT_NULL /*null*/) || (( variable0 /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable0 /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable0 /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable0 /*c*/,COLOR_kernel___Object_____eqeq))( variable0 /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = NEW_array___Array___init(); /*new Array[E]*/
+    variable1 = NEW_Array_array___Array___init(); /*new Array[E]*/
     goto return_label14;
   }
   variable1 = ((partial_order___PartialOrder___has_all_t)CALL( self,COLOR_partial_order___PartialOrder___has_all))( self,  variable0 /*c*/) /*PartialOrder::has_all*/;
   if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_partial_order___PartialOrder___select_smallests, LOCATE_partial_order, 105); nit_exit(1);}
   variable2 = ((abstract_collection___Collection___length_t)CALL( variable0 /*c*/,COLOR_abstract_collection___Collection___length))( variable0 /*c*/) /*Collection::length*/;
-  variable3 = NEW_array___Array___with_capacity(variable2); /*new Array[E]*/
+  variable3 = NEW_Array_array___Array___with_capacity(variable2); /*new Array[E]*/
   variable2 = variable3;
   variable1 = variable2;
   variable3 = ((abstract_collection___Collection___length_t)CALL( variable0 /*c*/,COLOR_abstract_collection___Collection___length))( variable0 /*c*/) /*Collection::length*/;
-  variable4 = NEW_array___Array___with_capacity(variable3); /*new Array[E]*/
+  variable4 = NEW_Array_array___Array___with_capacity(variable3); /*new Array[E]*/
   variable3 = variable4;
   variable2 = variable3;
   variable3 = ((abstract_collection___Collection___iterator_t)CALL( variable0 /*c*/,COLOR_abstract_collection___Collection___iterator))( variable0 /*c*/) /*Collection::iterator*/;
@@ -388,7 +388,7 @@ val_t partial_order___PartialOrder___new_poe(val_t  self, val_t  param0, val_t  
   trace.file = LOCATE_partial_order;
   variable0 =  param0;
   variable1 =  param1;
-  variable2 = NEW_partial_order___PartialOrderElement___init( self,  variable0 /*e*/,  variable1 /*directs*/); /*new PartialOrderElement[E]*/
+  variable2 = NEW_PartialOrderElement_partial_order___PartialOrderElement___init( self,  variable0 /*e*/,  variable1 /*directs*/); /*new PartialOrderElement[E]*/
   goto return_label19;
   return_label19: while(false);
   tracehead = trace.prev;
@@ -474,11 +474,11 @@ void partial_order___PartialOrder___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_PartialOrder].i]) return;
-  variable0 = NEW_hash___HashMap___init(); /*new HashMap[K, V]*/
+  variable0 = NEW_HashMap_hash___HashMap___init(); /*new HashMap[E, PartialOrderElement[E]]*/
   ATTR_partial_order___PartialOrder____elements( self) /*PartialOrder::_elements*/ = variable0;
-  variable0 = NEW_array___Array___init(); /*new Array[E]*/
+  variable0 = NEW_Array_array___Array___init(); /*new Array[E]*/
   ATTR_partial_order___PartialOrder____elements_list( self) /*PartialOrder::_elements_list*/ = variable0;
-  variable0 = NEW_array___Array___init(); /*new Array[E]*/
+  variable0 = NEW_Array_array___Array___init(); /*new Array[E]*/
   ATTR_partial_order___PartialOrder____roots( self) /*PartialOrder::_roots*/ = variable0;
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_PartialOrder].i] = 1;
   tracehead = trace.prev;
@@ -587,9 +587,9 @@ val_t partial_order___PartialOrderElement___linear_extension(val_t  self) {
   variable0 = ATTR_partial_order___PartialOrderElement____linear_extension_cache( self) /*PartialOrderElement::_linear_extension_cache*/;
   variable0 = TAG_Bool((variable0 ==  NIT_NULL /*null*/) || ((variable0 != NIT_NULL) && UNTAG_Bool(((array___AbstractArray_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))(variable0,  NIT_NULL /*null*/) /*AbstractArray::==*/)));
   if (UNTAG_Bool(variable0)) { /*if*/
-    variable1 = NEW_array___Array___init(); /*new Array[E]*/
+    variable1 = NEW_Array_array___Array___init(); /*new Array[E]*/
     variable0 = variable1;
-    variable2 = NEW_array___Array___init(); /*new Array[E]*/
+    variable2 = NEW_Array_array___Array___init(); /*new Array[E]*/
     variable1 = variable2;
     variable2 = ((partial_order___PartialOrderElement___value_t)CALL( self,COLOR_partial_order___PartialOrderElement___value))( self) /*PartialOrderElement::value*/;
     ((array___AbstractArray___add_t)CALL( variable0 /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable0 /*res*/, variable2) /*AbstractArray::add*/;
@@ -645,7 +645,7 @@ val_t partial_order___PartialOrderElement___reverse_linear_extension(val_t  self
   variable0 = ATTR_partial_order___PartialOrderElement____reverse_linear_extension_cache( self) /*PartialOrderElement::_reverse_linear_extension_cache*/;
   variable0 = TAG_Bool((variable0 ==  NIT_NULL /*null*/) || ((variable0 != NIT_NULL) && UNTAG_Bool(((array___AbstractArray_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))(variable0,  NIT_NULL /*null*/) /*AbstractArray::==*/)));
   if (UNTAG_Bool(variable0)) { /*if*/
-    variable1 = NEW_hash___HashSet___init(); /*new HashSet[E]*/
+    variable1 = NEW_HashSet_hash___HashSet___init(); /*new HashSet[E]*/
     variable0 = variable1;
     variable1 = ((partial_order___PartialOrderElement___direct_greaters_t)CALL( self,COLOR_partial_order___PartialOrderElement___direct_greaters))( self) /*PartialOrderElement::direct_greaters*/;
     variable1 = ((array___AbstractArray___iterator_t)CALL(variable1,COLOR_abstract_collection___Collection___iterator))(variable1) /*AbstractArray::iterator*/;
@@ -782,11 +782,11 @@ void partial_order___PartialOrderElement___init(val_t  self, val_t  param0, val_
   ATTR_partial_order___PartialOrderElement____order( self) /*PartialOrderElement::_order*/ =  variable0 /*o*/;
   ATTR_partial_order___PartialOrderElement____value( self) /*PartialOrderElement::_value*/ =  variable1 /*e*/;
   ATTR_partial_order___PartialOrderElement____direct_greaters( self) /*PartialOrderElement::_direct_greaters*/ =  variable2 /*directs*/;
-  variable3 = NEW_array___Array___init(); /*new Array[E]*/
+  variable3 = NEW_Array_array___Array___init(); /*new Array[E]*/
   ATTR_partial_order___PartialOrderElement____direct_smallers( self) /*PartialOrderElement::_direct_smallers*/ = variable3;
-  variable3 = NEW_hash___HashSet___init(); /*new HashSet[E]*/
+  variable3 = NEW_HashSet_hash___HashSet___init(); /*new HashSet[E]*/
   ATTR_partial_order___PartialOrderElement____greaters( self) /*PartialOrderElement::_greaters*/ = variable3;
-  variable3 = NEW_hash___HashSet___init(); /*new HashSet[E]*/
+  variable3 = NEW_HashSet_hash___HashSet___init(); /*new HashSet[E]*/
   ATTR_partial_order___PartialOrderElement____smallers_cache( self) /*PartialOrderElement::_smallers_cache*/ = variable3;
   variable4 = ATTR_partial_order___PartialOrderElement____greaters( self) /*PartialOrderElement::_greaters*/;
   variable3 = variable4;

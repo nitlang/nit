@@ -8,7 +8,7 @@ val_t static_type___MMLocalClass___get_type(val_t  self) {
   variable0 = ATTR_static_type___MMLocalClass____base_type_cache( self) /*MMLocalClass::_base_type_cache*/;
   variable0 = TAG_Bool((variable0 ==  NIT_NULL /*null*/) || ((variable0 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable0, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))(variable0,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable0)) { /*if*/
-    variable0 = NEW_static_type___MMTypeSimpleClass___init( self); /*new MMTypeSimpleClass*/
+    variable0 = NEW_MMTypeSimpleClass_static_type___MMTypeSimpleClass___init( self); /*new MMTypeSimpleClass*/
     ATTR_static_type___MMLocalClass____base_type_cache( self) /*MMLocalClass::_base_type_cache*/ = variable0;
   }
   variable0 = ATTR_static_type___MMLocalClass____base_type_cache( self) /*MMLocalClass::_base_type_cache*/;
@@ -200,7 +200,7 @@ val_t static_type___MMSignature_____l(val_t  self, val_t  param0) {
     goto return_label5;
   }
   variable1 = ((static_type___MMSignature___arity_t)CALL( self,COLOR_static_type___MMSignature___arity))( self) /*MMSignature::arity*/;
-  variable2 = NEW_range___Range___without_last( TAG_Int(0), variable1); /*new Range[E]*/
+  variable2 = NEW_Range_range___Range___without_last( TAG_Int(0), variable1); /*new Range[Int]*/
   variable1 = variable2;
   variable1 = ((range___Range___iterator_t)CALL(variable1,COLOR_abstract_collection___Collection___iterator))(variable1) /*Range::iterator*/;
   while (true) { /*for*/
@@ -288,12 +288,12 @@ val_t static_type___MMSignature___to_s(val_t  self) {
     variable1 = NIT_NULL /*decl variable tmp*/;
     variable3 = ATTR_static_type___MMSignature____params( self) /*MMSignature::_params*/;
     variable3 = ((array___AbstractArray___length_t)CALL(variable3,COLOR_abstract_collection___Collection___length))(variable3) /*AbstractArray::length*/;
-    variable4 = NEW_array___Array___with_capacity(variable3); /*new Array[E]*/
+    variable4 = NEW_Array_array___Array___with_capacity(variable3); /*new Array[String]*/
     variable3 = variable4;
     variable2 = variable3;
     variable3 = ATTR_static_type___MMSignature____params( self) /*MMSignature::_params*/;
     variable3 = ((array___AbstractArray___length_t)CALL(variable3,COLOR_abstract_collection___Collection___length))(variable3) /*AbstractArray::length*/;
-    variable4 = NEW_range___Range___without_last( TAG_Int(0), variable3); /*new Range[E]*/
+    variable4 = NEW_Range_range___Range___without_last( TAG_Int(0), variable3); /*new Range[Int]*/
     variable3 = variable4;
     variable3 = ((range___Range___iterator_t)CALL(variable3,COLOR_abstract_collection___Collection___iterator))(variable3) /*Range::iterator*/;
     while (true) { /*for*/
@@ -324,34 +324,34 @@ val_t static_type___MMSignature___to_s(val_t  self) {
       ((abstract_collection___Iterator___next_t)CALL(variable3,COLOR_abstract_collection___Iterator___next))(variable3) /*Iterator::next*/;
     }
     break_10: while(0);
-    variable3 = NEW_string___String___init(); /*new String*/
-    variable4 = NEW_string___String___with_native(BOX_NativeString("("), TAG_Int(1)); /*new String*/
+    variable3 = NEW_String_string___String___init(); /*new String*/
+    variable4 = NEW_String_string___String___with_native(BOX_NativeString("("), TAG_Int(1)); /*new String*/
     variable5 = variable4;
     ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable5) /*String::append*/;
-    variable6 = NEW_string___String___with_native(BOX_NativeString(","), TAG_Int(1)); /*new String*/
+    variable6 = NEW_String_string___String___with_native(BOX_NativeString(","), TAG_Int(1)); /*new String*/
     variable6 = ((string___Collection___join_t)CALL( variable2 /*a*/,COLOR_string___Collection___join))( variable2 /*a*/, variable6) /*Collection::join*/;
     variable7 = variable6;
     ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable7) /*String::append*/;
-    variable8 = NEW_string___String___with_native(BOX_NativeString(")"), TAG_Int(1)); /*new String*/
+    variable8 = NEW_String_string___String___with_native(BOX_NativeString(")"), TAG_Int(1)); /*new String*/
     variable9 = variable8;
     ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable9) /*String::append*/;
     variable0 = variable3 /*s=*/;
   } else { /*if*/
-    variable1 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable1 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
     variable0 = variable1 /*s=*/;
   }
   variable1 = ATTR_static_type___MMSignature____return_type( self) /*MMSignature::_return_type*/;
   variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = NEW_string___String___init(); /*new String*/
-    variable2 = NEW_string___String___with_native(BOX_NativeString(": "), TAG_Int(2)); /*new String*/
+    variable1 = NEW_String_string___String___init(); /*new String*/
+    variable2 = NEW_String_string___String___with_native(BOX_NativeString(": "), TAG_Int(2)); /*new String*/
     variable3 = variable2;
     ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable3) /*String::append*/;
     variable4 = ATTR_static_type___MMSignature____return_type( self) /*MMSignature::_return_type*/;
     variable5 = variable4;
     variable5 = ((string___String___to_s_t)CALL(variable5,COLOR_string___Object___to_s))(variable5) /*String::to_s*/;
     ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable5) /*String::append*/;
-    variable6 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable6 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
     variable7 = variable6;
     ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable7) /*String::append*/;
     ((string___String___append_t)CALL( variable0 /*s*/,COLOR_abstract_collection___IndexedCollection___append))( variable0 /*s*/, variable1) /*String::append*/;
@@ -385,7 +385,7 @@ val_t static_type___MMSignature___adaptation_to(val_t  self, val_t  param0) {
   variable2 = variable3;
   variable3 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable2 /*p*/ ==  NIT_NULL /*null*/) || (( variable2 /*p*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable2 /*p*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable2 /*p*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable2 /*p*/,COLOR_kernel___Object_____eqeq))( variable2 /*p*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable3)) { /*if*/
-    variable3 = NEW_array___Array___init(); /*new Array[E]*/
+    variable3 = NEW_Array_array___Array___init(); /*new Array[MMType]*/
     variable2 = variable3 /*p=*/;
     variable3 = ATTR_static_type___MMSignature____params( self) /*MMSignature::_params*/;
     variable3 = ((array___AbstractArray___iterator_t)CALL(variable3,COLOR_abstract_collection___Collection___iterator))(variable3) /*AbstractArray::iterator*/;
@@ -409,7 +409,7 @@ val_t static_type___MMSignature___adaptation_to(val_t  self, val_t  param0) {
     variable4 = ((static_type___MMType___adapt_to_t)CALL(variable4,COLOR_static_type___MMType___adapt_to))(variable4,  variable0 /*r*/) /*MMType::adapt_to*/;
     variable3 = variable4 /*rv=*/;
   }
-  variable4 = NEW_static_type___MMSignature___init( variable2 /*p*/,  variable3 /*rv*/,  variable0 /*r*/); /*new MMSignature*/
+  variable4 = NEW_MMSignature_static_type___MMSignature___init( variable2 /*p*/,  variable3 /*rv*/,  variable0 /*r*/); /*new MMSignature*/
   variable1 = variable4;
   goto return_label12;
   return_label12: while(false);
@@ -531,6 +531,15 @@ val_t static_type___MMAncestor___to_s(val_t  self) {
   tracehead = trace.prev;
   return variable0;
 }
+void static_type___MMAncestor___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 0, LOCATE_static_type___MMAncestor___init};
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_static_type;
+  ATTR_static_type___MMAncestor____stype( self) /*MMAncestor::_stype*/ =  param0;
+  ATTR_static_type___MMAncestor____inheriter( self) /*MMAncestor::_inheriter*/ =  param1;
+  tracehead = trace.prev;
+  return;
+}
 val_t static_type___MMType___module(val_t  self) {
   struct trace_t trace = {NULL, NULL, 204, LOCATE_static_type___MMType___module};
   trace.prev = tracehead; tracehead = &trace;
@@ -611,6 +620,13 @@ val_t static_type___MMType___not_for_self(val_t  self) {
   return_label18: while(false);
   tracehead = trace.prev;
   return variable0;
+}
+void static_type___MMType___init(val_t  self, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 0, LOCATE_static_type___MMType___init};
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_static_type;
+  tracehead = trace.prev;
+  return;
 }
 val_t static_type___MMTypeClass___local_class(val_t  self) {
   struct trace_t trace = {NULL, NULL, 236, LOCATE_static_type___MMTypeClass___local_class};

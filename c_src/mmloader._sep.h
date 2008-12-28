@@ -55,13 +55,14 @@ extern const int SFT_mmloader[];
 #define COLOR_mmloader___ModuleLoader___load_module SFT_mmloader[42]
 #define COLOR_mmloader___ModuleLoader___parse_file SFT_mmloader[43]
 #define COLOR_mmloader___ModuleLoader___process_metamodel SFT_mmloader[44]
-#define COLOR_mmloader___MMModule____filename SFT_mmloader[45]
-#define COLOR_mmloader___MMModule____mtime SFT_mmloader[46]
-#define COLOR_mmloader___MMModule___filename SFT_mmloader[47]
-#define COLOR_mmloader___MMModule___filename__eq SFT_mmloader[48]
-#define COLOR_mmloader___MMModule___mtime SFT_mmloader[49]
-#define COLOR_mmloader___MMModule___mtime__eq SFT_mmloader[50]
-#define COLOR_mmloader___MMModule___import_supers_modules SFT_mmloader[51]
+#define COLOR_mmloader___ModuleLoader___init SFT_mmloader[45]
+#define COLOR_mmloader___MMModule____filename SFT_mmloader[46]
+#define COLOR_mmloader___MMModule____mtime SFT_mmloader[47]
+#define COLOR_mmloader___MMModule___filename SFT_mmloader[48]
+#define COLOR_mmloader___MMModule___filename__eq SFT_mmloader[49]
+#define COLOR_mmloader___MMModule___mtime SFT_mmloader[50]
+#define COLOR_mmloader___MMModule___mtime__eq SFT_mmloader[51]
+#define COLOR_mmloader___MMModule___import_supers_modules SFT_mmloader[52]
 #define ATTR_mmloader___ToolContext____error_count(recv) ATTR(recv, COLOR_mmloader___ToolContext____error_count)
 typedef val_t (* mmloader___ToolContext___error_count_t)(val_t  self);
 val_t mmloader___ToolContext___error_count(val_t  self);
@@ -154,6 +155,10 @@ val_t mmloader___ModuleLoader___parse_file(val_t  self, val_t  param0, val_t  pa
 typedef void (* mmloader___ModuleLoader___process_metamodel_t)(val_t  self, val_t  param0, val_t  param1);
 void mmloader___ModuleLoader___process_metamodel(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_mmloader___ModuleLoader___process_metamodel "mmloader::ModuleLoader::process_metamodel"
+typedef void (* mmloader___ModuleLoader___init_t)(val_t  self, int* init_table);
+void mmloader___ModuleLoader___init(val_t  self, int* init_table);
+val_t NEW_mmloader___ModuleLoader___init();
+#define LOCATE_mmloader___ModuleLoader___init "mmloader::ModuleLoader::init"
 #define ATTR_mmloader___MMModule____filename(recv) ATTR(recv, COLOR_mmloader___MMModule____filename)
 typedef val_t (* mmloader___MMModule___filename_t)(val_t  self);
 val_t mmloader___MMModule___filename(val_t  self);

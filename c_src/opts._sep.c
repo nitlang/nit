@@ -88,7 +88,7 @@ void opts___Option___init_opt(val_t  self, val_t  param0, val_t  param1, val_t  
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Option].i]) return;
   variable3 = TAG_Bool(( variable2 /*names*/ ==  NIT_NULL /*null*/) || (( variable2 /*names*/ != NIT_NULL) && UNTAG_Bool(((array___AbstractArray_____eqeq_t)CALL( variable2 /*names*/,COLOR_kernel___Object_____eqeq))( variable2 /*names*/,  NIT_NULL /*null*/) /*AbstractArray::==*/)));
   if (UNTAG_Bool(variable3)) { /*if*/
-    variable3 = NEW_array___Array___init(); /*new Array[E]*/
+    variable3 = NEW_Array_array___Array___init(); /*new Array[String]*/
     ATTR_opts___Option____names( self) /*Option::_names*/ = variable3;
   } else { /*if*/
     variable3 = ((array___Collection___to_a_t)CALL( variable2 /*names*/,COLOR_array___Collection___to_a))( variable2 /*names*/) /*Collection::to_a*/;
@@ -135,20 +135,20 @@ val_t opts___Option___pretty(val_t  self, val_t  param0) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
   variable0 =  param0;
-  variable2 = NEW_string___String___with_native(BOX_NativeString("  "), TAG_Int(2)); /*new String*/
+  variable2 = NEW_String_string___String___with_native(BOX_NativeString("  "), TAG_Int(2)); /*new String*/
   variable1 = variable2;
   variable2 = ATTR_opts___Option____names( self) /*Option::_names*/;
-  variable3 = NEW_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
+  variable3 = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
   variable2 = ((string___Collection___join_t)CALL(variable2,COLOR_string___Collection___join))(variable2, variable3) /*Collection::join*/;
   ((string___String___append_t)CALL( variable1 /*text*/,COLOR_abstract_collection___IndexedCollection___append))( variable1 /*text*/, variable2) /*String::append*/;
-  variable2 = NEW_string___String___with_native(BOX_NativeString("  "), TAG_Int(2)); /*new String*/
+  variable2 = NEW_String_string___String___with_native(BOX_NativeString("  "), TAG_Int(2)); /*new String*/
   ((string___String___append_t)CALL( variable1 /*text*/,COLOR_abstract_collection___IndexedCollection___append))( variable1 /*text*/, variable2) /*String::append*/;
   variable3 = ((array___AbstractArray___length_t)CALL( variable1 /*text*/,COLOR_abstract_collection___Collection___length))( variable1 /*text*/) /*AbstractArray::length*/;
   variable3 = TAG_Int(UNTAG_Int( variable0 /*off*/)-UNTAG_Int(variable3));
   variable2 = variable3;
   variable3 = TAG_Bool(UNTAG_Int( variable2 /*rest*/)>UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable3)) { /*if*/
-    variable3 = NEW_string___String___with_native(BOX_NativeString(" "), TAG_Int(1)); /*new String*/
+    variable3 = NEW_String_string___String___with_native(BOX_NativeString(" "), TAG_Int(1)); /*new String*/
     variable3 = ((string___String_____star_t)CALL(variable3,COLOR_string___String_____star))(variable3,  variable2 /*rest*/) /*String::**/;
     ((string___String___append_t)CALL( variable1 /*text*/,COLOR_abstract_collection___IndexedCollection___append))( variable1 /*text*/, variable3) /*String::append*/;
   }
@@ -174,20 +174,20 @@ val_t opts___Option___pretty_default(val_t  self) {
   variable0 = ((opts___Option___default_value_t)CALL( self,COLOR_opts___Option___default_value))( self) /*Option::default_value*/;
   variable0 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable0 ==  NIT_NULL /*null*/) || ((variable0 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable0, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))(variable0,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable0)) { /*if*/
-    variable0 = NEW_string___String___init(); /*new String*/
-    variable1 = NEW_string___String___with_native(BOX_NativeString(" ("), TAG_Int(2)); /*new String*/
+    variable0 = NEW_String_string___String___init(); /*new String*/
+    variable1 = NEW_String_string___String___with_native(BOX_NativeString(" ("), TAG_Int(2)); /*new String*/
     variable2 = variable1;
     ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable2) /*String::append*/;
     variable3 = ((opts___Option___default_value_t)CALL( self,COLOR_opts___Option___default_value))( self) /*Option::default_value*/;
     variable4 = variable3;
     variable4 = ((string___String___to_s_t)CALL(variable4,COLOR_string___Object___to_s))(variable4) /*String::to_s*/;
     ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable4) /*String::append*/;
-    variable5 = NEW_string___String___with_native(BOX_NativeString(")"), TAG_Int(1)); /*new String*/
+    variable5 = NEW_String_string___String___with_native(BOX_NativeString(")"), TAG_Int(1)); /*new String*/
     variable6 = variable5;
     ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable6) /*String::append*/;
     goto return_label4;
   }
-  variable0 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable0 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   goto return_label4;
   return_label4: while(false);
   tracehead = trace.prev;
@@ -375,20 +375,20 @@ void opts___OptionEnum___init(val_t  self, val_t  param0, val_t  param1, val_t  
   if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionEnum___init, LOCATE_opts, 134); nit_exit(1);}
   variable4 = ((array___Collection___to_a_t)CALL( variable0 /*enum*/,COLOR_array___Collection___to_a))( variable0 /*enum*/) /*Collection::to_a*/;
   ATTR_opts___OptionEnum____enum( self) /*OptionEnum::_enum*/ = variable4;
-  variable4 = NEW_string___String___init(); /*new String*/
-  variable5 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable4 = NEW_String_string___String___init(); /*new String*/
+  variable5 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   variable6 = variable5;
   ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable6) /*String::append*/;
   variable7 =  variable1 /*help*/;
   ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable7) /*String::append*/;
-  variable8 = NEW_string___String___with_native(BOX_NativeString(" <"), TAG_Int(2)); /*new String*/
+  variable8 = NEW_String_string___String___with_native(BOX_NativeString(" <"), TAG_Int(2)); /*new String*/
   variable9 = variable8;
   ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable9) /*String::append*/;
-  variable10 = NEW_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
+  variable10 = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
   variable10 = ((string___Collection___join_t)CALL( variable0 /*enum*/,COLOR_string___Collection___join))( variable0 /*enum*/, variable10) /*Collection::join*/;
   variable11 = variable10;
   ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable11) /*String::append*/;
-  variable12 = NEW_string___String___with_native(BOX_NativeString(">"), TAG_Int(1)); /*new String*/
+  variable12 = NEW_String_string___String___with_native(BOX_NativeString(">"), TAG_Int(1)); /*new String*/
   variable13 = variable12;
   ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable13) /*String::append*/;
   ((opts___OptionParameter___init_opt_t)CALL( self,COLOR_opts___OptionParameter___init_opt))( self, variable4,  variable2 /*default*/,  variable3 /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
@@ -428,8 +428,8 @@ val_t opts___OptionEnum___pretty_default(val_t  self) {
   variable0 = ((opts___Option___default_value_t)CALL( self,COLOR_opts___Option___default_value))( self) /*Option::default_value*/;
   variable0 = TAG_Bool((variable0)!=( NIT_NULL /*null*/));
   if (UNTAG_Bool(variable0)) { /*if*/
-    variable0 = NEW_string___String___init(); /*new String*/
-    variable1 = NEW_string___String___with_native(BOX_NativeString(" ("), TAG_Int(2)); /*new String*/
+    variable0 = NEW_String_string___String___init(); /*new String*/
+    variable1 = NEW_String_string___String___with_native(BOX_NativeString(" ("), TAG_Int(2)); /*new String*/
     variable2 = variable1;
     ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable2) /*String::append*/;
     variable3 = ATTR_opts___OptionEnum____enum( self) /*OptionEnum::_enum*/;
@@ -452,12 +452,12 @@ val_t opts___OptionEnum___pretty_default(val_t  self) {
     variable3 = variable6;
     variable4 = variable3;
     ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable4) /*String::append*/;
-    variable5 = NEW_string___String___with_native(BOX_NativeString(")"), TAG_Int(1)); /*new String*/
+    variable5 = NEW_String_string___String___with_native(BOX_NativeString(")"), TAG_Int(1)); /*new String*/
     variable6 = variable5;
     ((string___String___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable6) /*String::append*/;
     goto return_label16;
   } else { /*if*/
-    variable0 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable0 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
     goto return_label16;
   }
   return_label16: while(false);
@@ -507,7 +507,7 @@ void opts___OptionArray___init(val_t  self, val_t  param0, val_t  param1, int* i
   if (( param1!=NIT_NULL) && !VAL_ISA( param1, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionInt___convert, LOCATE_opts, 168); nit_exit(1); } /*cast Array[String]*/;
   variable1 =  param1;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OptionArray].i]) return;
-  variable2 = NEW_array___Array___init(); /*new Array[E]*/
+  variable2 = NEW_Array_array___Array___init(); /*new Array[String]*/
   ATTR_opts___OptionArray____values( self) /*OptionArray::_values*/ = variable2;
   variable2 = ATTR_opts___OptionArray____values( self) /*OptionArray::_values*/;
   ((opts___OptionParameter___init_opt_t)CALL( self,COLOR_opts___OptionParameter___init_opt))( self,  variable0 /*help*/, variable2,  variable1 /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
@@ -636,7 +636,7 @@ void opts___OptionContext___parse_intern(val_t  self, val_t  param0) {
     if (!UNTAG_Bool(variable3)) break; /* while*/
     variable4 = ((abstract_collection___Iterator___item_t)CALL( variable0 /*it*/,COLOR_abstract_collection___Iterator___item))( variable0 /*it*/) /*Iterator::item*/;
     variable3 = variable4;
-    variable4 = NEW_string___String___with_native(BOX_NativeString("--"), TAG_Int(2)); /*new String*/
+    variable4 = NEW_String_string___String___with_native(BOX_NativeString("--"), TAG_Int(2)); /*new String*/
     variable4 = TAG_Bool(( variable3 /*str*/ == variable4) || (( variable3 /*str*/ != NIT_NULL) && UNTAG_Bool(((string___String_____eqeq_t)CALL( variable3 /*str*/,COLOR_kernel___Object_____eqeq))( variable3 /*str*/, variable4) /*String::==*/)));
     if (UNTAG_Bool(variable4)) { /*if*/
       ((abstract_collection___Iterator___next_t)CALL( variable0 /*it*/,COLOR_abstract_collection___Iterator___next))( variable0 /*it*/) /*Iterator::next*/;
@@ -696,11 +696,11 @@ void opts___OptionContext___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OptionContext].i]) return;
-  variable0 = NEW_array___Array___init(); /*new Array[E]*/
+  variable0 = NEW_Array_array___Array___init(); /*new Array[Option]*/
   ATTR_opts___OptionContext____options( self) /*OptionContext::_options*/ = variable0;
-  variable0 = NEW_hash___HashMap___init(); /*new HashMap[K, V]*/
+  variable0 = NEW_HashMap_hash___HashMap___init(); /*new HashMap[String, Option]*/
   ATTR_opts___OptionContext____optmap( self) /*OptionContext::_optmap*/ = variable0;
-  variable0 = NEW_array___Array___init(); /*new Array[E]*/
+  variable0 = NEW_Array_array___Array___init(); /*new Array[String]*/
   ATTR_opts___OptionContext____rest( self) /*OptionContext::_rest*/ = variable0;
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OptionContext].i] = 1;
   tracehead = trace.prev;

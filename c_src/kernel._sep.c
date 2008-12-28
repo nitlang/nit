@@ -75,6 +75,13 @@ void kernel___Sys___main(val_t  self) {
   tracehead = trace.prev;
   return;
 }
+void kernel___Sys___init(val_t  self, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 0, LOCATE_kernel___Sys___init};
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_kernel;
+  tracehead = trace.prev;
+  return;
+}
 val_t kernel___Comparable_____l(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 69, LOCATE_kernel___Comparable_____l};
   trace.prev = tracehead; tracehead = &trace;

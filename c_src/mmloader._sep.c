@@ -28,13 +28,13 @@ void mmloader___ToolContext___error(val_t  self, val_t  param0) {
   trace.file = LOCATE_mmloader;
   variable0 =  param0;
   variable1 = ((file___Object___stderr_t)CALL( self,COLOR_file___Object___stderr))( self) /*Object::stderr*/;
-  variable2 = NEW_string___String___init(); /*new String*/
-  variable3 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable2 = NEW_String_string___String___init(); /*new String*/
+  variable3 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   variable4 = variable3;
   ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable4) /*String::append*/;
   variable5 =  variable0 /*s*/;
   ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable5) /*String::append*/;
-  variable6 = NEW_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)); /*new String*/
+  variable6 = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)); /*new String*/
   variable7 = variable6;
   ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable7) /*String::append*/;
   ((file___OFStream___write_t)CALL(variable1,COLOR_stream___OStream___write))(variable1, variable2) /*OFStream::write*/;
@@ -63,13 +63,13 @@ void mmloader___ToolContext___warning(val_t  self, val_t  param0) {
     goto return_label1;
   }
   variable1 = ((file___Object___stderr_t)CALL( self,COLOR_file___Object___stderr))( self) /*Object::stderr*/;
-  variable2 = NEW_string___String___init(); /*new String*/
-  variable3 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable2 = NEW_String_string___String___init(); /*new String*/
+  variable3 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   variable4 = variable3;
   ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable4) /*String::append*/;
   variable5 =  variable0 /*s*/;
   ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable5) /*String::append*/;
-  variable6 = NEW_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)); /*new String*/
+  variable6 = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)); /*new String*/
   variable7 = variable6;
   ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable7) /*String::append*/;
   ((file___OFStream___write_t)CALL(variable1,COLOR_stream___OStream___write))(variable1, variable2) /*OFStream::write*/;
@@ -151,7 +151,7 @@ void mmloader___ToolContext___init(val_t  self, int* init_table) {
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ToolContext].i]) return;
   ((abstractmetamodel___MMContext___init_t)CALL( self,COLOR_abstractmetamodel___MMContext___init))( self, init_table /*YYY*/) /*MMContext::init*/;
   variable0 = ((mmloader___ToolContext___option_context_t)CALL( self,COLOR_mmloader___ToolContext___option_context))( self) /*ToolContext::option_context*/;
-  variable1 = NEW_array___Array___with_capacity(TAG_Int(6)); /*new Array[E]*/
+  variable1 = NEW_Array_array___Array___with_capacity(TAG_Int(6)); /*new Array[Option]*/
   variable2 = ((mmloader___ToolContext___opt_warn_t)CALL( self,COLOR_mmloader___ToolContext___opt_warn))( self) /*ToolContext::opt_warn*/;
   ((array___AbstractArray___add_t)CALL(variable1,COLOR_abstract_collection___SimpleCollection___add))(variable1, variable2) /*AbstractArray::add*/;
   variable3 = ((mmloader___ToolContext___opt_path_t)CALL( self,COLOR_mmloader___ToolContext___opt_path))( self) /*ToolContext::opt_path*/;
@@ -187,7 +187,7 @@ void mmloader___ToolContext___process_options(val_t  self) {
   variable0 = ((mmloader___ToolContext___option_context_t)CALL( self,COLOR_mmloader___ToolContext___option_context))( self) /*ToolContext::option_context*/;
   variable1 = ((string___Object___args_t)CALL( self,COLOR_string___Object___args))( self) /*Object::args*/;
   ((opts___OptionContext___parse_t)CALL(variable0,COLOR_opts___OptionContext___parse))(variable0, variable1) /*OptionContext::parse*/;
-  variable0 = NEW_array___Array___init(); /*new Array[E]*/
+  variable0 = NEW_Array_array___Array___init(); /*new Array[String]*/
   ATTR_mmloader___ToolContext____paths( self) /*ToolContext::_paths*/ = variable0;
   variable0 = ((mmloader___ToolContext___paths_t)CALL( self,COLOR_mmloader___ToolContext___paths))( self) /*ToolContext::paths*/;
   variable1 = ((mmloader___ToolContext___opt_path_t)CALL( self,COLOR_mmloader___ToolContext___opt_path))( self) /*ToolContext::opt_path*/;
@@ -195,7 +195,7 @@ void mmloader___ToolContext___process_options(val_t  self) {
   ((abstract_collection___IndexedCollection___append_t)CALL(variable0,COLOR_abstract_collection___IndexedCollection___append))(variable0, variable1) /*IndexedCollection::append*/;
   if (once_bool_variable1_4) variable1 = once_value_variable1_4;
   else {
-    variable1 = NEW_string___String___with_native(BOX_NativeString("NIT_PATH"), TAG_Int(8)); /*new String*/
+    variable1 = NEW_String_string___String___with_native(BOX_NativeString("NIT_PATH"), TAG_Int(8)); /*new String*/
     variable1 = ((symbol___String___to_symbol_t)CALL(variable1,COLOR_symbol___String___to_symbol))(variable1) /*String::to_symbol*/;
     variable1 = ((environ___Symbol___environ_t)CALL(variable1,COLOR_environ___Symbol___environ))(variable1) /*Symbol::environ*/;
     once_value_variable1_4 = variable1;
@@ -210,7 +210,7 @@ void mmloader___ToolContext___process_options(val_t  self) {
   }
   if (once_bool_variable1_5) variable1 = once_value_variable1_5;
   else {
-    variable1 = NEW_string___String___with_native(BOX_NativeString("NIT_DIR"), TAG_Int(7)); /*new String*/
+    variable1 = NEW_String_string___String___with_native(BOX_NativeString("NIT_DIR"), TAG_Int(7)); /*new String*/
     variable1 = ((symbol___String___to_symbol_t)CALL(variable1,COLOR_symbol___String___to_symbol))(variable1) /*String::to_symbol*/;
     variable1 = ((environ___Symbol___environ_t)CALL(variable1,COLOR_environ___Symbol___environ))(variable1) /*Symbol::environ*/;
     once_value_variable1_5 = variable1;
@@ -219,13 +219,13 @@ void mmloader___ToolContext___process_options(val_t  self) {
   variable0 = variable1 /*path_env=*/;
   variable1 = ((array___AbstractArray___is_empty_t)CALL( variable0 /*path_env*/,COLOR_abstract_collection___Collection___is_empty))( variable0 /*path_env*/) /*AbstractArray::is_empty*/;
   if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable1)))) { /*if*/
-    variable2 = NEW_string___String___init(); /*new String*/
-    variable3 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable2 = NEW_String_string___String___init(); /*new String*/
+    variable3 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
     variable4 = variable3;
     ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable4) /*String::append*/;
     variable5 =  variable0 /*path_env*/;
     ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable5) /*String::append*/;
-    variable6 = NEW_string___String___with_native(BOX_NativeString("/lib"), TAG_Int(4)); /*new String*/
+    variable6 = NEW_String_string___String___with_native(BOX_NativeString("/lib"), TAG_Int(4)); /*new String*/
     variable7 = variable6;
     ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable7) /*String::append*/;
     variable1 = variable2;
@@ -235,8 +235,8 @@ void mmloader___ToolContext___process_options(val_t  self) {
       ((array___AbstractArray___add_t)CALL(variable2,COLOR_abstract_collection___SimpleCollection___add))(variable2,  variable1 /*libname*/) /*AbstractArray::add*/;
     }
   }
-  variable2 = NEW_string___String___init(); /*new String*/
-  variable3 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable2 = NEW_String_string___String___init(); /*new String*/
+  variable3 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   variable4 = variable3;
   ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable4) /*String::append*/;
   variable5 = (G_sys);
@@ -244,7 +244,7 @@ void mmloader___ToolContext___process_options(val_t  self) {
   variable5 = ((file___String___dirname_t)CALL(variable5,COLOR_file___String___dirname))(variable5) /*String::dirname*/;
   variable6 = variable5;
   ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable6) /*String::append*/;
-  variable7 = NEW_string___String___with_native(BOX_NativeString("/../lib"), TAG_Int(7)); /*new String*/
+  variable7 = NEW_String_string___String___with_native(BOX_NativeString("/../lib"), TAG_Int(7)); /*new String*/
   variable8 = variable7;
   ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable8) /*String::append*/;
   variable1 = variable2;
@@ -317,14 +317,14 @@ val_t mmloader___ToolContext___try_to_load(val_t  self, val_t  param0, val_t  pa
       variable6 = ATTR_mmloader___ToolContext____processing_modules( self) /*ToolContext::_processing_modules*/;
       variable6 = ((hash___HashSet___has_t)CALL(variable6,COLOR_abstract_collection___Collection___has))(variable6,  variable5 /*full_name*/) /*HashSet::has*/;
       if (UNTAG_Bool(variable6)) { /*if*/
-        variable6 = NEW_string___String___init(); /*new String*/
-        variable7 = NEW_string___String___with_native(BOX_NativeString("Error: Dependency loop for module "), TAG_Int(34)); /*new String*/
+        variable6 = NEW_String_string___String___init(); /*new String*/
+        variable7 = NEW_String_string___String___with_native(BOX_NativeString("Error: Dependency loop for module "), TAG_Int(34)); /*new String*/
         variable8 = variable7;
         ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable8) /*String::append*/;
         variable9 =  variable5 /*full_name*/;
         variable9 = ((string___String___to_s_t)CALL(variable9,COLOR_string___Object___to_s))(variable9) /*String::to_s*/;
         ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable9) /*String::append*/;
-        variable10 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+        variable10 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
         variable11 = variable10;
         ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable11) /*String::append*/;
         ((mmloader___ToolContext___error_t)CALL( self,COLOR_mmloader___ToolContext___error))( self, variable6) /*ToolContext::error*/;
@@ -369,7 +369,7 @@ val_t mmloader___ToolContext___get_module_from_filename(val_t  self, val_t  para
   variable0 =  param0;
   variable2 = ((file___String___dirname_t)CALL( variable0 /*filename*/,COLOR_file___String___dirname))( variable0 /*filename*/) /*String::dirname*/;
   variable1 = variable2;
-  variable3 = NEW_string___String___with_native(BOX_NativeString(".nit"), TAG_Int(4)); /*new String*/
+  variable3 = NEW_String_string___String___with_native(BOX_NativeString(".nit"), TAG_Int(4)); /*new String*/
   variable3 = ((file___String___basename_t)CALL( variable0 /*filename*/,COLOR_file___String___basename))( variable0 /*filename*/, variable3) /*String::basename*/;
   variable3 = ((symbol___String___to_symbol_t)CALL(variable3,COLOR_symbol___String___to_symbol))(variable3) /*String::to_symbol*/;
   variable2 = variable3;
@@ -391,13 +391,13 @@ val_t mmloader___ToolContext___get_module_from_filename(val_t  self, val_t  para
   }
   variable4 = ((file___String___file_exists_t)CALL( variable0 /*filename*/,COLOR_file___String___file_exists))( variable0 /*filename*/) /*String::file_exists*/;
   if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable4)))) { /*if*/
-    variable4 = NEW_string___String___init(); /*new String*/
-    variable5 = NEW_string___String___with_native(BOX_NativeString("Error: File "), TAG_Int(12)); /*new String*/
+    variable4 = NEW_String_string___String___init(); /*new String*/
+    variable5 = NEW_String_string___String___with_native(BOX_NativeString("Error: File "), TAG_Int(12)); /*new String*/
     variable6 = variable5;
     ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable6) /*String::append*/;
     variable7 =  variable0 /*filename*/;
     ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable7) /*String::append*/;
-    variable8 = NEW_string___String___with_native(BOX_NativeString(" not found."), TAG_Int(11)); /*new String*/
+    variable8 = NEW_String_string___String___with_native(BOX_NativeString(" not found."), TAG_Int(11)); /*new String*/
     variable9 = variable8;
     ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable9) /*String::append*/;
     ((mmloader___ToolContext___error_t)CALL( self,COLOR_mmloader___ToolContext___error))( self, variable4) /*ToolContext::error*/;
@@ -411,13 +411,13 @@ val_t mmloader___ToolContext___get_module_from_filename(val_t  self, val_t  para
     variable1 =  variable4 /*m*/;
     goto return_label9;
   }
-  variable5 = NEW_string___String___init(); /*new String*/
-  variable6 = NEW_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
+  variable5 = NEW_String_string___String___init(); /*new String*/
+  variable6 = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
   variable7 = variable6;
   ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable7) /*String::append*/;
   variable8 =  variable0 /*filename*/;
   ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable8) /*String::append*/;
-  variable9 = NEW_string___String___with_native(BOX_NativeString(" is not a NIT source module."), TAG_Int(28)); /*new String*/
+  variable9 = NEW_String_string___String___with_native(BOX_NativeString(" is not a NIT source module."), TAG_Int(28)); /*new String*/
   variable10 = variable9;
   ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable10) /*String::append*/;
   ((mmloader___ToolContext___error_t)CALL( self,COLOR_mmloader___ToolContext___error))( self, variable5) /*ToolContext::error*/;
@@ -481,14 +481,14 @@ val_t mmloader___ToolContext___get_module(val_t  self, val_t  param0, val_t  par
     ((array___ArrayIterator___next_t)CALL(variable3,COLOR_abstract_collection___Iterator___next))(variable3) /*ArrayIterator::next*/;
   }
   break_12: while(0);
-  variable3 = NEW_string___String___init(); /*new String*/
-  variable4 = NEW_string___String___with_native(BOX_NativeString("Error: No ressource found for module "), TAG_Int(37)); /*new String*/
+  variable3 = NEW_String_string___String___init(); /*new String*/
+  variable4 = NEW_String_string___String___with_native(BOX_NativeString("Error: No ressource found for module "), TAG_Int(37)); /*new String*/
   variable5 = variable4;
   ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable5) /*String::append*/;
   variable6 =  variable0 /*module_name*/;
   variable6 = ((string___String___to_s_t)CALL(variable6,COLOR_string___Object___to_s))(variable6) /*String::to_s*/;
   ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable6) /*String::append*/;
-  variable7 = NEW_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
+  variable7 = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
   variable8 = variable7;
   ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable8) /*String::append*/;
   ((mmloader___ToolContext___error_t)CALL( self,COLOR_mmloader___ToolContext___error))( self, variable3) /*ToolContext::error*/;
@@ -515,7 +515,7 @@ val_t mmloader___ToolContext___directory_for(val_t  self, val_t  param0) {
     goto return_label13;
   }
   variable2 = ((symbol___String___to_symbol_t)CALL( variable0 /*path*/,COLOR_symbol___String___to_symbol))( variable0 /*path*/) /*String::to_symbol*/;
-  variable3 = NEW_abstractmetamodel___MMDirectory___init(variable2,  variable0 /*path*/,  NIT_NULL /*null*/); /*new MMDirectory*/
+  variable3 = NEW_MMDirectory_abstractmetamodel___MMDirectory___init(variable2,  variable0 /*path*/,  NIT_NULL /*null*/); /*new MMDirectory*/
   variable2 = variable3;
   variable1 = variable2;
   variable2 = ATTR_mmloader___ToolContext____path_dirs( self) /*ToolContext::_path_dirs*/;
@@ -567,20 +567,20 @@ val_t mmloader___ModuleLoader___try_to_load_dir(val_t  self, val_t  param0, val_
   trace.file = LOCATE_mmloader;
   variable0 =  param0;
   variable1 =  param1;
-  variable3 = NEW_string___String___init(); /*new String*/
-  variable4 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable3 = NEW_String_string___String___init(); /*new String*/
+  variable4 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   variable5 = variable4;
   ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable5) /*String::append*/;
   variable6 = ((abstractmetamodel___MMDirectory___path_t)CALL( variable1 /*parent_dir*/,COLOR_abstractmetamodel___MMDirectory___path))( variable1 /*parent_dir*/) /*MMDirectory::path*/;
   variable7 = variable6;
   ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable7) /*String::append*/;
-  variable8 = NEW_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)); /*new String*/
+  variable8 = NEW_String_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)); /*new String*/
   variable9 = variable8;
   ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable9) /*String::append*/;
   variable10 =  variable0 /*dirname*/;
   variable10 = ((string___String___to_s_t)CALL(variable10,COLOR_string___Object___to_s))(variable10) /*String::to_s*/;
   ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable10) /*String::append*/;
-  variable11 = NEW_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)); /*new String*/
+  variable11 = NEW_String_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)); /*new String*/
   variable12 = variable11;
   ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable12) /*String::append*/;
   variable2 = variable3;
@@ -590,7 +590,7 @@ val_t mmloader___ModuleLoader___try_to_load_dir(val_t  self, val_t  param0, val_
     goto return_label15;
   }
   variable4 = ((abstractmetamodel___MMDirectory___full_name_for_t)CALL( variable1 /*parent_dir*/,COLOR_abstractmetamodel___MMDirectory___full_name_for))( variable1 /*parent_dir*/,  variable0 /*dirname*/) /*MMDirectory::full_name_for*/;
-  variable5 = NEW_abstractmetamodel___MMDirectory___init(variable4,  variable2 /*fname*/,  variable1 /*parent_dir*/); /*new MMDirectory*/
+  variable5 = NEW_MMDirectory_abstractmetamodel___MMDirectory___init(variable4,  variable2 /*fname*/,  variable1 /*parent_dir*/); /*new MMDirectory*/
   variable4 = variable5;
   variable3 = variable4;
   variable2 =  variable3 /*dir*/;
@@ -622,26 +622,26 @@ val_t mmloader___ModuleLoader___can_handle(val_t  self, val_t  param0, val_t  pa
   trace.file = LOCATE_mmloader;
   variable0 =  param0;
   variable1 =  param1;
-  variable3 = NEW_string___String___init(); /*new String*/
-  variable4 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable3 = NEW_String_string___String___init(); /*new String*/
+  variable4 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   variable5 = variable4;
   ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable5) /*String::append*/;
   variable6 = ((abstractmetamodel___MMDirectory___path_t)CALL( variable1 /*dir*/,COLOR_abstractmetamodel___MMDirectory___path))( variable1 /*dir*/) /*MMDirectory::path*/;
   variable7 = variable6;
   ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable7) /*String::append*/;
-  variable8 = NEW_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)); /*new String*/
+  variable8 = NEW_String_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)); /*new String*/
   variable9 = variable8;
   ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable9) /*String::append*/;
   variable10 =  variable0 /*module_name*/;
   variable10 = ((string___String___to_s_t)CALL(variable10,COLOR_string___Object___to_s))(variable10) /*String::to_s*/;
   ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable10) /*String::append*/;
-  variable11 = NEW_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
+  variable11 = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
   variable12 = variable11;
   ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable12) /*String::append*/;
   variable13 = ((mmloader___ModuleLoader___file_type_t)CALL( self,COLOR_mmloader___ModuleLoader___file_type))( self) /*ModuleLoader::file_type*/;
   variable14 = variable13;
   ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable14) /*String::append*/;
-  variable15 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable15 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   variable16 = variable15;
   ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable16) /*String::append*/;
   variable2 = variable3;
@@ -681,26 +681,26 @@ val_t mmloader___ModuleLoader___load_and_process_module(val_t  self, val_t  para
   variable0 =  param0;
   variable1 =  param1;
   variable2 =  param2;
-  variable4 = NEW_string___String___init(); /*new String*/
-  variable5 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable4 = NEW_String_string___String___init(); /*new String*/
+  variable5 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   variable6 = variable5;
   ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable6) /*String::append*/;
   variable7 = ((abstractmetamodel___MMDirectory___path_t)CALL( variable2 /*dir*/,COLOR_abstractmetamodel___MMDirectory___path))( variable2 /*dir*/) /*MMDirectory::path*/;
   variable8 = variable7;
   ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable8) /*String::append*/;
-  variable9 = NEW_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)); /*new String*/
+  variable9 = NEW_String_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)); /*new String*/
   variable10 = variable9;
   ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable10) /*String::append*/;
   variable11 =  variable1 /*module_name*/;
   variable11 = ((string___String___to_s_t)CALL(variable11,COLOR_string___Object___to_s))(variable11) /*String::to_s*/;
   ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable11) /*String::append*/;
-  variable12 = NEW_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
+  variable12 = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
   variable13 = variable12;
   ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable13) /*String::append*/;
   variable14 = ((mmloader___ModuleLoader___file_type_t)CALL( self,COLOR_mmloader___ModuleLoader___file_type))( self) /*ModuleLoader::file_type*/;
   variable15 = variable14;
   ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable15) /*String::append*/;
-  variable16 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable16 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   variable17 = variable16;
   ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable17) /*String::append*/;
   variable3 = variable4;
@@ -737,26 +737,26 @@ val_t mmloader___ModuleLoader___load_module(val_t  self, val_t  param0, val_t  p
   variable2 =  param2;
   variable3 =  param3;
   variable4 = NIT_NULL /*decl variable file*/;
-  variable5 = NEW_string___String___with_native(BOX_NativeString("-"), TAG_Int(1)); /*new String*/
+  variable5 = NEW_String_string___String___with_native(BOX_NativeString("-"), TAG_Int(1)); /*new String*/
   variable5 = TAG_Bool(( variable3 /*filename*/ == variable5) || (( variable3 /*filename*/ != NIT_NULL) && UNTAG_Bool(((string___String_____eqeq_t)CALL( variable3 /*filename*/,COLOR_kernel___Object_____eqeq))( variable3 /*filename*/, variable5) /*String::==*/)));
   if (UNTAG_Bool(variable5)) { /*if*/
     variable5 = ((file___Object___stdin_t)CALL( self,COLOR_file___Object___stdin))( self) /*Object::stdin*/;
     variable4 = variable5 /*file=*/;
   } else { /*if*/
     variable5 = ((string___String___to_s_t)CALL( variable3 /*filename*/,COLOR_string___Object___to_s))( variable3 /*filename*/) /*String::to_s*/;
-    variable6 = NEW_file___IFStream___open(variable5); /*new IFStream*/
+    variable6 = NEW_IFStream_file___IFStream___open(variable5); /*new IFStream*/
     variable5 = variable6;
     variable4 = variable5 /*file=*/;
   }
   variable5 = ((stream___BufferedIStream___eof_t)CALL( variable4 /*file*/,COLOR_stream___IStream___eof))( variable4 /*file*/) /*BufferedIStream::eof*/;
   if (UNTAG_Bool(variable5)) { /*if*/
-    variable5 = NEW_string___String___init(); /*new String*/
-    variable6 = NEW_string___String___with_native(BOX_NativeString("Error: Problem in opening file "), TAG_Int(31)); /*new String*/
+    variable5 = NEW_String_string___String___init(); /*new String*/
+    variable6 = NEW_String_string___String___with_native(BOX_NativeString("Error: Problem in opening file "), TAG_Int(31)); /*new String*/
     variable7 = variable6;
     ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable7) /*String::append*/;
     variable8 =  variable3 /*filename*/;
     ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable8) /*String::append*/;
-    variable9 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable9 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
     variable10 = variable9;
     ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable10) /*String::append*/;
     ((mmloader___ToolContext___error_t)CALL( variable0 /*context*/,COLOR_mmloader___ToolContext___error))( variable0 /*context*/, variable5) /*ToolContext::error*/;
@@ -794,6 +794,13 @@ void mmloader___ModuleLoader___process_metamodel(val_t  self, val_t  param0, val
   fprintf(stderr, "Deferred method %s called");
   fprintf(stderr, " in %s (%s:%d)\n", LOCATE_mmloader___ModuleLoader___load_module, LOCATE_mmloader, 288);
   nit_exit(1);
+  tracehead = trace.prev;
+  return;
+}
+void mmloader___ModuleLoader___init(val_t  self, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 0, LOCATE_mmloader___ModuleLoader___init};
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmloader;
   tracehead = trace.prev;
   return;
 }
@@ -843,7 +850,7 @@ void mmloader___MMModule___import_supers_modules(val_t  self, val_t  param0) {
   variable1 = variable2;
   variable2 = TAG_Bool(( variable1 /*c*/==NIT_NULL) || VAL_ISA( variable1 /*c*/, COLOR_ToolContext, ID_ToolContext)) /*cast ToolContext*/;
   if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_mmloader___MMModule___import_supers_modules, LOCATE_mmloader, 303); nit_exit(1);}
-  variable3 = NEW_array___Array___init(); /*new Array[E]*/
+  variable3 = NEW_Array_array___Array___init(); /*new Array[MMModule]*/
   variable2 = variable3;
   variable3 = ((abstract_collection___Collection___iterator_t)CALL( variable0 /*names*/,COLOR_abstract_collection___Collection___iterator))( variable0 /*names*/) /*Collection::iterator*/;
   while (true) { /*for*/

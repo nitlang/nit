@@ -307,6 +307,13 @@ void sorter___AbstractSorter___bubble_sort(val_t  self, val_t  param0, val_t  pa
   tracehead = trace.prev;
   return;
 }
+void sorter___AbstractSorter___init(val_t  self, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 0, LOCATE_sorter___AbstractSorter___init};
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_sorter;
+  tracehead = trace.prev;
+  return;
+}
 val_t sorter___ComparableSorter___compare(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 93, LOCATE_sorter___ComparableSorter___compare};
   val_t variable0;

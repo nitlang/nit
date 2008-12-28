@@ -87,7 +87,7 @@ val_t range___Range___iterator(val_t  self) {
   val_t variable0;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_range;
-  variable0 = NEW_range___IteratorRange___init( self); /*new IteratorRange[E]*/
+  variable0 = NEW_IteratorRange_range___IteratorRange___init( self); /*new IteratorRange[E]*/
   goto return_label3;
   return_label3: while(false);
   tracehead = trace.prev;

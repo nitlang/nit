@@ -10,7 +10,7 @@ val_t symbol___String___to_symbol(val_t  self) {
   trace.file = LOCATE_symbol;
   if (once_bool_variable1_1) variable1 = once_value_variable1_1;
   else {
-    variable1 = NEW_hash___HashMap___init(); /*new HashMap[K, V]*/
+    variable1 = NEW_HashMap_hash___HashMap___init(); /*new HashMap[String, Symbol]*/
     once_value_variable1_1 = variable1;
     once_bool_variable1_1 = true;
   }
@@ -21,7 +21,7 @@ val_t symbol___String___to_symbol(val_t  self) {
     variable0 = variable1;
     goto return_label0;
   } else { /*if*/
-    variable2 = NEW_symbol___Symbol___init( self); /*new Symbol*/
+    variable2 = NEW_Symbol_symbol___Symbol___init( self); /*new Symbol*/
     variable1 = variable2;
     ((hash___HashMap_____braeq_t)CALL( variable0 /*symbol_dictionary*/,COLOR_abstract_collection___Map_____braeq))( variable0 /*symbol_dictionary*/,  self,  variable1 /*symbol*/) /*HashMap::[]=*/;
     variable0 =  variable1 /*symbol*/;

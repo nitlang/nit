@@ -81,7 +81,7 @@ void nitc___NitCompiler___init(val_t  self, int* init_table) {
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_NitCompiler].i]) return;
   ((abstracttool___AbstractCompiler___init_t)CALL( self,COLOR_abstracttool___AbstractCompiler___init))( self, init_table /*YYY*/) /*AbstractCompiler::init*/;
   variable0 = ((mmloader___ToolContext___option_context_t)CALL( self,COLOR_mmloader___ToolContext___option_context))( self) /*ToolContext::option_context*/;
-  variable1 = NEW_array___Array___with_capacity(TAG_Int(9)); /*new Array[E]*/
+  variable1 = NEW_Array_array___Array___with_capacity(TAG_Int(9)); /*new Array[Option]*/
   variable2 = ((nitc___NitCompiler___opt_output_t)CALL( self,COLOR_nitc___NitCompiler___opt_output))( self) /*NitCompiler::opt_output*/;
   ((array___AbstractArray___add_t)CALL(variable1,COLOR_abstract_collection___SimpleCollection___add))(variable1, variable2) /*AbstractArray::add*/;
   variable3 = ((nitc___NitCompiler___opt_boost_t)CALL( self,COLOR_nitc___NitCompiler___opt_boost))( self) /*NitCompiler::opt_boost*/;
@@ -137,7 +137,7 @@ void nitc___NitCompiler___process_options(val_t  self) {
   variable0 = ((compiling_base___ToolContext___ext_prefix_t)CALL( self,COLOR_compiling_base___ToolContext___ext_prefix))( self) /*ToolContext::ext_prefix*/;
   variable0 = TAG_Bool((variable0 ==  NIT_NULL /*null*/) || ((variable0 != NIT_NULL) && UNTAG_Bool(((string___String_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))(variable0,  NIT_NULL /*null*/) /*String::==*/)));
   if (UNTAG_Bool(variable0)) { /*if*/
-    variable0 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable0 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
     ((compiling_base___ToolContext___ext_prefix__eq_t)CALL( self,COLOR_compiling_base___ToolContext___ext_prefix__eq))( self, variable0) /*ToolContext::ext_prefix=*/;
   }
   variable0 = ((nitc___NitCompiler___opt_attr_sim_t)CALL( self,COLOR_nitc___NitCompiler___opt_attr_sim))( self) /*NitCompiler::opt_attr_sim*/;
@@ -154,7 +154,7 @@ void nitc___NitCompiler___process_options(val_t  self) {
   if (UNTAG_Bool(variable0)) { /*if*/
     if (once_bool_variable1_2) variable1 = once_value_variable1_2;
     else {
-      variable1 = NEW_string___String___with_native(BOX_NativeString("NIT_COMPDIR"), TAG_Int(11)); /*new String*/
+      variable1 = NEW_String_string___String___with_native(BOX_NativeString("NIT_COMPDIR"), TAG_Int(11)); /*new String*/
       variable1 = ((symbol___String___to_symbol_t)CALL(variable1,COLOR_symbol___String___to_symbol))(variable1) /*String::to_symbol*/;
       variable1 = ((environ___Symbol___environ_t)CALL(variable1,COLOR_environ___Symbol___environ))(variable1) /*Symbol::environ*/;
       once_value_variable1_2 = variable1;
@@ -168,7 +168,7 @@ void nitc___NitCompiler___process_options(val_t  self) {
     variable1 = ((compiling_base___ToolContext___compdir_t)CALL( self,COLOR_compiling_base___ToolContext___compdir))( self) /*ToolContext::compdir*/;
     variable1 = TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && UNTAG_Bool(((string___String_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*String::==*/)));
     if (UNTAG_Bool(variable1)) { /*if*/
-      variable1 = NEW_string___String___with_native(BOX_NativeString(".nit_compile"), TAG_Int(12)); /*new String*/
+      variable1 = NEW_String_string___String___with_native(BOX_NativeString(".nit_compile"), TAG_Int(12)); /*new String*/
       ((compiling_base___ToolContext___compdir__eq_t)CALL( self,COLOR_compiling_base___ToolContext___compdir__eq))( self, variable1) /*ToolContext::compdir=*/;
     }
   }
@@ -183,7 +183,7 @@ void nitc___NitCompiler___process_options(val_t  self) {
   if (UNTAG_Bool(variable0)) { /*if*/
     if (once_bool_variable1_3) variable1 = once_value_variable1_3;
     else {
-      variable1 = NEW_string___String___with_native(BOX_NativeString("NIT_DIR"), TAG_Int(7)); /*new String*/
+      variable1 = NEW_String_string___String___with_native(BOX_NativeString("NIT_DIR"), TAG_Int(7)); /*new String*/
       variable1 = ((symbol___String___to_symbol_t)CALL(variable1,COLOR_symbol___String___to_symbol))(variable1) /*String::to_symbol*/;
       variable1 = ((environ___Symbol___environ_t)CALL(variable1,COLOR_environ___Symbol___environ))(variable1) /*Symbol::environ*/;
       once_value_variable1_3 = variable1;
@@ -192,8 +192,8 @@ void nitc___NitCompiler___process_options(val_t  self) {
     variable0 = variable1;
     variable1 = ((array___AbstractArray___is_empty_t)CALL( variable0 /*dir*/,COLOR_abstract_collection___Collection___is_empty))( variable0 /*dir*/) /*AbstractArray::is_empty*/;
     if (UNTAG_Bool(variable1)) { /*if*/
-      variable2 = NEW_string___String___init(); /*new String*/
-      variable3 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+      variable2 = NEW_String_string___String___init(); /*new String*/
+      variable3 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
       variable4 = variable3;
       ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable4) /*String::append*/;
       variable5 = (G_sys);
@@ -201,7 +201,7 @@ void nitc___NitCompiler___process_options(val_t  self) {
       variable5 = ((file___String___dirname_t)CALL(variable5,COLOR_file___String___dirname))(variable5) /*String::dirname*/;
       variable6 = variable5;
       ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable6) /*String::append*/;
-      variable7 = NEW_string___String___with_native(BOX_NativeString("/../lib"), TAG_Int(7)); /*new String*/
+      variable7 = NEW_String_string___String___with_native(BOX_NativeString("/../lib"), TAG_Int(7)); /*new String*/
       variable8 = variable7;
       ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable8) /*String::append*/;
       variable1 = variable2;
@@ -210,13 +210,13 @@ void nitc___NitCompiler___process_options(val_t  self) {
         ((compiling_base___ToolContext___clibdir__eq_t)CALL( self,COLOR_compiling_base___ToolContext___clibdir__eq))( self,  variable1 /*dir*/) /*ToolContext::clibdir=*/;
       }
     } else { /*if*/
-      variable1 = NEW_string___String___init(); /*new String*/
-      variable2 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+      variable1 = NEW_String_string___String___init(); /*new String*/
+      variable2 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
       variable3 = variable2;
       ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable3) /*String::append*/;
       variable4 =  variable0 /*dir*/;
       ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable4) /*String::append*/;
-      variable5 = NEW_string___String___with_native(BOX_NativeString("/lib"), TAG_Int(4)); /*new String*/
+      variable5 = NEW_String_string___String___with_native(BOX_NativeString("/lib"), TAG_Int(4)); /*new String*/
       variable6 = variable5;
       ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable6) /*String::append*/;
       variable0 = variable1 /*dir=*/;
@@ -228,7 +228,7 @@ void nitc___NitCompiler___process_options(val_t  self) {
     variable1 = ((compiling_base___ToolContext___clibdir_t)CALL( self,COLOR_compiling_base___ToolContext___clibdir))( self) /*ToolContext::clibdir*/;
     variable1 = TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && UNTAG_Bool(((string___String_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*String::==*/)));
     if (UNTAG_Bool(variable1)) { /*if*/
-      variable1 = NEW_string___String___with_native(BOX_NativeString("Error: Cannot locate NIT C library directory. Uses --clibdir or envvar NIT_DIR."), TAG_Int(79)); /*new String*/
+      variable1 = NEW_String_string___String___with_native(BOX_NativeString("Error: Cannot locate NIT C library directory. Uses --clibdir or envvar NIT_DIR."), TAG_Int(79)); /*new String*/
       ((mmloader___ToolContext___error_t)CALL( self,COLOR_mmloader___ToolContext___error))( self, variable1) /*ToolContext::error*/;
       exit(UNTAG_Int( TAG_Int(1)));
     }
@@ -241,7 +241,7 @@ void nitc___NitCompiler___process_options(val_t  self) {
   if (UNTAG_Bool(variable0)) { /*if*/
     if (once_bool_variable1_4) variable1 = once_value_variable1_4;
     else {
-      variable1 = NEW_string___String___with_native(BOX_NativeString("NIT_DIR"), TAG_Int(7)); /*new String*/
+      variable1 = NEW_String_string___String___with_native(BOX_NativeString("NIT_DIR"), TAG_Int(7)); /*new String*/
       variable1 = ((symbol___String___to_symbol_t)CALL(variable1,COLOR_symbol___String___to_symbol))(variable1) /*String::to_symbol*/;
       variable1 = ((environ___Symbol___environ_t)CALL(variable1,COLOR_environ___Symbol___environ))(variable1) /*Symbol::environ*/;
       once_value_variable1_4 = variable1;
@@ -250,8 +250,8 @@ void nitc___NitCompiler___process_options(val_t  self) {
     variable0 = variable1;
     variable1 = ((array___AbstractArray___is_empty_t)CALL( variable0 /*dir*/,COLOR_abstract_collection___Collection___is_empty))( variable0 /*dir*/) /*AbstractArray::is_empty*/;
     if (UNTAG_Bool(variable1)) { /*if*/
-      variable2 = NEW_string___String___init(); /*new String*/
-      variable3 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+      variable2 = NEW_String_string___String___init(); /*new String*/
+      variable3 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
       variable4 = variable3;
       ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable4) /*String::append*/;
       variable5 = (G_sys);
@@ -259,7 +259,7 @@ void nitc___NitCompiler___process_options(val_t  self) {
       variable5 = ((file___String___dirname_t)CALL(variable5,COLOR_file___String___dirname))(variable5) /*String::dirname*/;
       variable6 = variable5;
       ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable6) /*String::append*/;
-      variable7 = NEW_string___String___with_native(BOX_NativeString("/../bin"), TAG_Int(7)); /*new String*/
+      variable7 = NEW_String_string___String___with_native(BOX_NativeString("/../bin"), TAG_Int(7)); /*new String*/
       variable8 = variable7;
       ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable8) /*String::append*/;
       variable1 = variable2;
@@ -268,13 +268,13 @@ void nitc___NitCompiler___process_options(val_t  self) {
         ((compiling_base___ToolContext___bindir__eq_t)CALL( self,COLOR_compiling_base___ToolContext___bindir__eq))( self,  variable1 /*dir*/) /*ToolContext::bindir=*/;
       }
     } else { /*if*/
-      variable1 = NEW_string___String___init(); /*new String*/
-      variable2 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+      variable1 = NEW_String_string___String___init(); /*new String*/
+      variable2 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
       variable3 = variable2;
       ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable3) /*String::append*/;
       variable4 =  variable0 /*dir*/;
       ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable4) /*String::append*/;
-      variable5 = NEW_string___String___with_native(BOX_NativeString("/bin"), TAG_Int(4)); /*new String*/
+      variable5 = NEW_String_string___String___with_native(BOX_NativeString("/bin"), TAG_Int(4)); /*new String*/
       variable6 = variable5;
       ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable6) /*String::append*/;
       variable0 = variable1 /*dir=*/;
@@ -286,7 +286,7 @@ void nitc___NitCompiler___process_options(val_t  self) {
     variable1 = ((compiling_base___ToolContext___bindir_t)CALL( self,COLOR_compiling_base___ToolContext___bindir))( self) /*ToolContext::bindir*/;
     variable1 = TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && UNTAG_Bool(((string___String_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*String::==*/)));
     if (UNTAG_Bool(variable1)) { /*if*/
-      variable1 = NEW_string___String___with_native(BOX_NativeString("Error: Cannot locate NIT tools directory. Uses --bindir or envvar NIT_DIR."), TAG_Int(74)); /*new String*/
+      variable1 = NEW_String_string___String___with_native(BOX_NativeString("Error: Cannot locate NIT tools directory. Uses --bindir or envvar NIT_DIR."), TAG_Int(74)); /*new String*/
       ((mmloader___ToolContext___error_t)CALL( self,COLOR_mmloader___ToolContext___error))( self, variable1) /*ToolContext::error*/;
       exit(UNTAG_Int( TAG_Int(1)));
     }
@@ -324,7 +324,7 @@ void nitc___Sys___main(val_t  self) {
   val_t variable1;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_nitc;
-  variable1 = NEW_nitc___NitCompiler___init(); /*new NitCompiler*/
+  variable1 = NEW_NitCompiler_nitc___NitCompiler___init(); /*new NitCompiler*/
   variable0 = variable1;
   ((abstracttool___AbstractCompiler___exec_cmd_line_t)CALL( variable0 /*c*/,COLOR_abstracttool___AbstractCompiler___exec_cmd_line))( variable0 /*c*/) /*AbstractCompiler::exec_cmd_line*/;
   tracehead = trace.prev;

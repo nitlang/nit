@@ -5,7 +5,7 @@ val_t syntax___SrcModuleLoader___file_type(val_t  self) {
   val_t variable0;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax;
-  variable0 = NEW_string___String___with_native(BOX_NativeString("nit"), TAG_Int(3)); /*new String*/
+  variable0 = NEW_String_string___String___with_native(BOX_NativeString("nit"), TAG_Int(3)); /*new String*/
   goto return_label0;
   return_label0: while(false);
   tracehead = trace.prev;
@@ -40,9 +40,9 @@ val_t syntax___SrcModuleLoader___parse_file(val_t  self, val_t  param0, val_t  p
   variable2 =  param2;
   variable3 =  param3;
   variable4 =  param4;
-  variable6 = NEW_lexer___Lexer___init( variable1 /*file*/,  variable2 /*filename*/); /*new Lexer*/
+  variable6 = NEW_Lexer_lexer___Lexer___init( variable1 /*file*/,  variable2 /*filename*/); /*new Lexer*/
   variable5 = variable6;
-  variable7 = NEW_parser___Parser___init( variable5 /*lexer*/); /*new Parser*/
+  variable7 = NEW_Parser_parser___Parser___init( variable5 /*lexer*/); /*new Parser*/
   variable6 = variable7;
   variable8 = ((parser___Parser___parse_t)CALL( variable6 /*parser*/,COLOR_parser___Parser___parse))( variable6 /*parser*/) /*Parser::parse*/;
   variable7 = variable8;
@@ -53,20 +53,20 @@ val_t syntax___SrcModuleLoader___parse_file(val_t  self, val_t  param0, val_t  p
     variable8 = variable9;
     variable9 = TAG_Bool(( variable8 /*err*/==NIT_NULL) || VAL_ISA( variable8 /*err*/, COLOR_PError, ID_PError)) /*cast PError*/;
     if (!UNTAG_Bool(variable9)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_syntax___SrcModuleLoader___parse_file, LOCATE_syntax, 40); nit_exit(1);}
-    variable9 = NEW_string___String___init(); /*new String*/
-    variable10 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable9 = NEW_String_string___String___init(); /*new String*/
+    variable10 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
     variable11 = variable10;
     ((string___String___append_t)CALL(variable9,COLOR_abstract_collection___IndexedCollection___append))(variable9, variable11) /*String::append*/;
     variable12 = ((parser_prod___Token___locate_t)CALL( variable8 /*err*/,COLOR_parser_prod___PNode___locate))( variable8 /*err*/) /*Token::locate*/;
     variable13 = variable12;
     ((string___String___append_t)CALL(variable9,COLOR_abstract_collection___IndexedCollection___append))(variable9, variable13) /*String::append*/;
-    variable14 = NEW_string___String___with_native(BOX_NativeString(": "), TAG_Int(2)); /*new String*/
+    variable14 = NEW_String_string___String___with_native(BOX_NativeString(": "), TAG_Int(2)); /*new String*/
     variable15 = variable14;
     ((string___String___append_t)CALL(variable9,COLOR_abstract_collection___IndexedCollection___append))(variable9, variable15) /*String::append*/;
     variable16 = ((lexer___PError___message_t)CALL( variable8 /*err*/,COLOR_lexer___PError___message))( variable8 /*err*/) /*PError::message*/;
     variable17 = variable16;
     ((string___String___append_t)CALL(variable9,COLOR_abstract_collection___IndexedCollection___append))(variable9, variable17) /*String::append*/;
-    variable18 = NEW_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable18 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
     variable19 = variable18;
     ((string___String___append_t)CALL(variable9,COLOR_abstract_collection___IndexedCollection___append))(variable9, variable19) /*String::append*/;
     ((mmloader___ToolContext___error_t)CALL( variable0 /*context*/,COLOR_mmloader___ToolContext___error))( variable0 /*context*/, variable9) /*ToolContext::error*/;
@@ -76,7 +76,7 @@ val_t syntax___SrcModuleLoader___parse_file(val_t  self, val_t  param0, val_t  p
   variable8 = variable9;
   variable9 = TAG_Bool(( variable8 /*node_module*/==NIT_NULL) || VAL_ISA( variable8 /*node_module*/, COLOR_AModule, ID_AModule)) /*cast AModule*/;
   if (!UNTAG_Bool(variable9)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_syntax___SrcModuleLoader___parse_file, LOCATE_syntax, 45); nit_exit(1);}
-  variable10 = NEW_syntax_base___MMSrcModule___init( variable0 /*context*/,  variable8 /*node_module*/,  variable4 /*dir*/,  variable3 /*name*/); /*new MMSrcModule*/
+  variable10 = NEW_MMSrcModule_syntax_base___MMSrcModule___init( variable0 /*context*/,  variable8 /*node_module*/,  variable4 /*dir*/,  variable3 /*name*/); /*new MMSrcModule*/
   variable9 = variable10;
   variable5 =  variable9 /*module*/;
   goto return_label1;

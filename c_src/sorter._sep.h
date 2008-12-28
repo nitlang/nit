@@ -17,10 +17,11 @@ extern const int SFT_sorter[];
 #define COLOR_sorter___AbstractSorter___sub_sort SFT_sorter[5]
 #define COLOR_sorter___AbstractSorter___quick_sort SFT_sorter[6]
 #define COLOR_sorter___AbstractSorter___bubble_sort SFT_sorter[7]
-#define ID_ComparableSorter SFT_sorter[8]
-#define COLOR_ComparableSorter SFT_sorter[9]
-#define INIT_TABLE_POS_ComparableSorter SFT_sorter[10]
-#define COLOR_sorter___ComparableSorter___init SFT_sorter[11]
+#define COLOR_sorter___AbstractSorter___init SFT_sorter[8]
+#define ID_ComparableSorter SFT_sorter[9]
+#define COLOR_ComparableSorter SFT_sorter[10]
+#define INIT_TABLE_POS_ComparableSorter SFT_sorter[11]
+#define COLOR_sorter___ComparableSorter___init SFT_sorter[12]
 typedef val_t (* sorter___AbstractSorter___compare_t)(val_t  self, val_t  param0, val_t  param1);
 val_t sorter___AbstractSorter___compare(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_sorter___AbstractSorter___compare "sorter::AbstractSorter::compare"
@@ -36,6 +37,10 @@ void sorter___AbstractSorter___quick_sort(val_t  self, val_t  param0, val_t  par
 typedef void (* sorter___AbstractSorter___bubble_sort_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 void sorter___AbstractSorter___bubble_sort(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_sorter___AbstractSorter___bubble_sort "sorter::AbstractSorter::bubble_sort"
+typedef void (* sorter___AbstractSorter___init_t)(val_t  self, int* init_table);
+void sorter___AbstractSorter___init(val_t  self, int* init_table);
+val_t NEW_sorter___AbstractSorter___init();
+#define LOCATE_sorter___AbstractSorter___init "sorter::AbstractSorter::init"
 typedef val_t (* sorter___ComparableSorter___compare_t)(val_t  self, val_t  param0, val_t  param1);
 val_t sorter___ComparableSorter___compare(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_sorter___ComparableSorter___compare "sorter::ComparableSorter::(sorter::AbstractSorter::compare)"
