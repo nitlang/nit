@@ -370,21 +370,32 @@ end
 # * Check property conformance
 private class PropertyVerifierVisitor
 special AbsSyntaxVisitor
-	# Current visited parameter types
-	readable writable attr _params: Array[PParam] 
-	
-	# Visited parameters without type information added
-	readable writable attr _untyped_params: Array[PParam]
 
-	# Position of the current star parameter
-	readable writable attr _vararg_rank: Int
-
-	# Current signature
-	readable writable attr _signature: MMSignature 
+	# The signature currently build
+	readable writable attr _signature_builder: SignatureBuilder
 
 	redef meth visit(n) do n.accept_property_verifier(self)
 
-	init(tc, m) do super
+	init(tc, m)
+	do
+		super
+		_signature_builder = new SignatureBuilder
+	end
+end
+
+# Information about a signature currently build
+private class SignatureBuilder
+	# Current visited parameter types
+	readable writable attr _params: Array[PParam] = new Array[PParam]
+	
+	# Visited parameters without type information added
+	readable writable attr _untyped_params: Array[PParam] = new Array[PParam]
+
+	# Position of the current star parameter
+	readable writable attr _vararg_rank: Int = -1
+
+	# Current signature
+	readable writable attr _signature: MMSignature = null 
 end
 
 ###############################################################################
@@ -774,8 +785,8 @@ redef class PPropdef
 			end
 			if prop.signature != null then
 				# ok
-			else if not v.untyped_params.is_empty then
-				v.error(v.untyped_params.first, "Error: Untyped parameter.")
+			else if not v.signature_builder.untyped_params.is_empty then
+				v.error(v.signature_builder.untyped_params.first, "Error: Untyped parameter.")
 			else
 				prop.signature = new MMSignature(new Array[MMType], null, v.local_class.get_type)
 			end
@@ -789,11 +800,11 @@ redef class PPropdef
 			var isig = ip.signature.adaptation_to(v.local_class.get_type)
 
 			if s == null then
-				if v.params.length != isig.arity then
+				if v.signature_builder.params.length != isig.arity then
 					#prop.node.printl("v.params.length {v.params.length} != isig.arity {isig.arity} ; {prop.full_name} vs {ip.full_name}")
 					return
 				end
-				for p in v.params do
+				for p in v.signature_builder.params do
 					var t = isig[p.position]
 					p.stype = t
 					if p.position == isig.vararg_rank then
@@ -832,11 +843,11 @@ redef class PPropdef
 
 			if s == null then
 				#print "{prop.full_name} inherits signature from {ip.full_name}"
-				if v.params.length != isig.arity then
+				if v.signature_builder.params.length != isig.arity then
 					v.error(self, "Redef error: {prop.local_class}::{prop} redefines {ip.local_class}::{ip} with {isig.arity} parameter(s).")
 					return
 				end
-				for p in v.params do
+				for p in v.signature_builder.params do
 					var t = isig[p.position]
 					p.stype = t
 					if p.position == isig.vararg_rank then
@@ -977,17 +988,13 @@ redef class AMethPropdef
 
 	redef meth accept_property_verifier(v)
 	do
-		v.params = new Array[PParam]
-		v.untyped_params = new Array[PParam]
-		v.signature = null
-		v.vararg_rank = -1
-
+		v.signature_builder = new SignatureBuilder
 		super
 
-		if v.signature == null then
+		if v.signature_builder.signature == null then
 			#_method.signature = new MMSignature(new Array[MMType], null, v.local_class.get_type)
 		else
-			_method.signature = v.signature
+			_method.signature = v.signature_builder.signature
 		end
 		var visibility_level = 1
 		if n_visibility != null and n_visibility.level > 1 then
@@ -1084,23 +1091,23 @@ redef class ASignature
 	redef meth accept_property_verifier(v)
 	do
 		super
-		if not v.untyped_params.is_empty then
-			if v.untyped_params.first != v.params.first or n_type != null then
-				v.error(v.untyped_params.first, "Syntax error: untyped parameter.")
+		if not v.signature_builder.untyped_params.is_empty then
+			if v.signature_builder.untyped_params.first != v.signature_builder.params.first or n_type != null then
+				v.error(v.signature_builder.untyped_params.first, "Syntax error: untyped parameter.")
 				return
 			end
-		else if not v.params.is_empty or n_type != null then
+		else if not v.signature_builder.params.is_empty or n_type != null then
 			var pars = new Array[MMType]
-			for p in v.params do
+			for p in v.signature_builder.params do
 				pars.add(p.stype)
 			end
 			var ret: MMType = null
 			if n_type != null then
 				ret = n_type.get_stype(v)
 			end
-			v.signature = new MMSignature(pars, ret, v.local_class.get_type)
-			if v.vararg_rank >= 0 then
-				v.signature.vararg_rank = v.vararg_rank
+			v.signature_builder.signature = new MMSignature(pars, ret, v.local_class.get_type)
+			if v.signature_builder.vararg_rank >= 0 then
+				v.signature_builder.signature.vararg_rank = v.signature_builder.vararg_rank
 			end
 		end
 	end
@@ -1126,17 +1133,17 @@ redef class PParam
 	redef meth accept_property_verifier(v)
 	do
 		super
-		_position = v.params.length
+		_position = v.signature_builder.params.length
 		_variable = new ParamVariable(n_id.to_symbol, self)
-		v.params.add(self)
-		v.untyped_params.add(self)
+		v.signature_builder.params.add(self)
+		v.signature_builder.untyped_params.add(self)
 		if n_type != null then
 			var stype = n_type.get_stype(v)
-			for p in v.untyped_params do
+			for p in v.signature_builder.untyped_params do
 				p.stype = stype
 				if is_vararg then
-					if v.vararg_rank == -1 then
-						v.vararg_rank = p.position
+					if v.signature_builder.vararg_rank == -1 then
+						v.signature_builder.vararg_rank = p.position
 					else
 						v.error(self, "Error: A vararg parameter is already defined.")
 					end
@@ -1144,7 +1151,7 @@ redef class PParam
 				end
 				p.variable.stype = stype
 			end
-			v.untyped_params.clear
+			v.signature_builder.untyped_params.clear
 		end
 	end
 
