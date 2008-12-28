@@ -158,7 +158,7 @@ special ParserTable
 	attr _reduce_table: Array[ReduceAction]
 	private meth build_reduce_table
 	do
-		_reduce_table = new Array[ReduceAction].with(
+		_reduce_table = new Array[ReduceAction].with_items(
 			new ReduceAction0,
 			new ReduceAction1,
 			new ReduceAction2,

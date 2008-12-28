@@ -171,7 +171,7 @@ special ParserTable
 	attr _reduce_table: Array[ReduceAction]
 	private meth build_reduce_table
 	do
-		_reduce_table = new Array[ReduceAction].with(
+		_reduce_table = new Array[ReduceAction].with_items(
 $ foreach {rules/rule}
 			new ReduceAction@index[-sep ','-]
 $ end foreach

@@ -94,14 +94,14 @@ private class ControlFlowContext
 
 	meth sub: ControlFlowContext
 	do
-		return new ControlFlowContext.with(self)
+		return new ControlFlowContext.with_prev(self)
 	end
 
 	init
 	do 
 	end
 
-	init with(p: ControlFlowContext)
+	init with_prev(p: ControlFlowContext)
 	do
 		_prev = p
 		_has_return = p.has_return

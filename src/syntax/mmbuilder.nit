@@ -931,7 +931,7 @@ redef class AAttrPropdef
 			n_type.check_visibility(v, _readmethod)
 		end
 		if n_writable != null then
-			_writemethod.signature = new MMSignature(new Array[MMType].with(t), null, v.local_class.get_type)
+			_writemethod.signature = new MMSignature(new Array[MMType].with_items(t), null, v.local_class.get_type)
 			process_and_check(v, _writemethod, n_writable.n_kwredef != null, visibility_level)
 			n_type.check_visibility(v, _writemethod)
 		end

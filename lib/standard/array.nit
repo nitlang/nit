@@ -261,7 +261,7 @@ special ArrayCapable[E]
 	end
 
 	# Create an array with some `items'.
-	init with(objects: E...)
+	init with_items(objects: E...)
 	do
 		_items = objects._items
 		_capacity = objects._capacity

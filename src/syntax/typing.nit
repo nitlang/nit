@@ -134,13 +134,13 @@ private class VariableContext
 	# Build a new VariableContext
 	meth sub: SubVariableContext
 	do
-		return new SubVariableContext.with(self, null, null)
+		return new SubVariableContext.with_prev(self, null, null)
 	end
 
 	# Build a nested VariableContext with new variable information
 	meth sub_with(v: Variable, t: MMType): SubVariableContext
 	do
-		return new SubVariableContext.with(self, v, t)
+		return new SubVariableContext.with_prev(self, v, t)
 	end
 
 	init
@@ -172,7 +172,7 @@ special VariableContext
 		return prev.stype(v)
 	end
 
-	init with(p: VariableContext, v: Variable, t: MMType)
+	init with_prev(p: VariableContext, v: Variable, t: MMType)
 	do
 		init
 		_prev = p
