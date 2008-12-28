@@ -1,10 +1,12 @@
-syntax: glob
 *.bak
 .nit_compile*
 *.orig
 nitc
 nitdoc
 doc/stdlib
+
+src/nitc
+src/nitc_?
 
 c_src/*.o
 c_src/*.cksum
@@ -14,6 +16,3 @@ tests/*.log
 tests/*.bin
 tests/*.err
 tests/alt
-
-syntax: regexp
-
