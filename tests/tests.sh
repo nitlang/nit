@@ -55,7 +55,7 @@ nok=""
 echo "<tr><td>$MARK</td>" >> $HTM
 
 for ii in "$@"; do
-    for alt in "" `sed -n 's/.*#\(alt[0-9]*\)#.*/\1/p' "$ii" | sort -u`; do
+    for alt in "" `sed -n 's/.*#!*\(alt[0-9]*\)#.*/\1/p' "$ii" | sort -u`; do
 	f=`basename "$ii" .nit`
 	d=`dirname "$ii"`
 	ff="$f"
