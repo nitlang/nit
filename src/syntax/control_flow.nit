@@ -29,6 +29,17 @@ redef class MMSrcModule
 	end
 end
 
+redef class Variable
+	# Is the variable must be set before being used ?
+	meth must_be_set: Bool do return false
+end
+
+redef class VarVariable
+	redef meth must_be_set do return true
+end
+
+
+
 # Control flow visitor
 # * Check reachability in methods
 # * Associate breaks and continues
@@ -48,7 +59,7 @@ special AbsSyntaxVisitor
 
 	meth check_is_set(n: PNode, v: Variable)
 	do
-		if not control_flow_ctx.is_set(v) then
+		if v.must_be_set and not control_flow_ctx.is_set(v) then
 			error(n, "Error: variable '{v}' is possibly unset.")
 			var cfc = control_flow_ctx
 			while cfc != null do
@@ -135,14 +146,6 @@ redef class AConcreteMethPropdef
 		if v.control_flow_ctx.has_return == false and method.signature.return_type != null then
 			v.error(self, "Control error: Reached end of function.")
 		end
-	end
-end
-
-redef class PParam
-	redef meth accept_control_flow(v)
-	do
-		super
-		v.mark_is_set(variable)
 	end
 end
 
@@ -281,15 +284,6 @@ end
 redef class AForExpr
 special AControlableBlock
 end
-
-redef class AForVardeclExpr
-	redef meth accept_control_flow(v)
-	do
-		super
-		v.mark_is_set(variable)
-	end
-end     
-
 
 redef class AVarExpr
 	redef meth accept_control_flow(v)
