@@ -1118,7 +1118,7 @@ end
 redef class PParam
 	redef readable attr _position: Int
 
-	redef readable attr _variable: Variable 
+	redef readable attr _variable: ParamVariable 
 
 	# The type of the parameter in signature
 	readable writable attr _stype: MMType
@@ -1127,7 +1127,7 @@ redef class PParam
 	do
 		super
 		_position = v.params.length
-		_variable = new Variable(n_id.to_symbol, self)
+		_variable = new ParamVariable(n_id.to_symbol, self)
 		v.params.add(self)
 		v.untyped_params.add(self)
 		if n_type != null then

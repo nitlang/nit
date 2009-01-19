@@ -190,8 +190,8 @@ special MMMethSrcMethod
 	end
 end
 
-# Local variable and method parameter
-class Variable
+# Local variables
+abstract class Variable
 	# Name of the variable
 	readable attr _name: Symbol 
 
@@ -203,6 +203,8 @@ class Variable
 
 	redef meth to_s do return _name.to_s
 
+	meth kind: String is abstract
+
 	init(n: Symbol, d: PNode)
 	do
 		assert n != null
@@ -210,6 +212,27 @@ class Variable
 		_name = n
 		_decl = d
 	end
+end
+
+# Variable declared with 'var'
+class VarVariable
+special Variable
+	redef meth kind do return once "variable"
+	init(n: Symbol, d: PNode) do super
+end
+
+# Parameter of method (declared in signature)
+class ParamVariable
+special Variable
+	redef meth kind do return once "parameter"
+	init(n: Symbol, d: PNode) do super
+end
+
+# Automatic variable (like in the 'for' statement)
+class AutoVariable
+special Variable
+	redef meth kind do return once "automatic variable"
+	init(n: Symbol, d: PNode) do super
 end
 
 ###############################################################################
@@ -384,7 +407,7 @@ redef class PParam
 	meth position: Int is abstract
 
 	# Associated local variable
-	meth variable: Variable is abstract 
+	meth variable: ParamVariable is abstract 
 end
 
 redef class PType
@@ -527,12 +550,12 @@ end
 
 redef class AVardeclExpr
 	# Assiociated local variable
-	readable writable attr _variable: Variable
+	readable writable attr _variable: VarVariable
 end
 
 redef class AForVardeclExpr
 	# Associated automatic local variable
-	readable writable attr _variable: Variable
+	readable writable attr _variable: AutoVariable
 end
 
 redef class AVarFormExpr

@@ -303,7 +303,7 @@ end
 redef class AVardeclExpr
 	redef meth after_typing(v)
 	do
-		var va = new Variable(n_id.to_symbol, self)
+		var va = new VarVariable(n_id.to_symbol, self)
 		variable = va
 		v.variable_ctx.add(va)
 
@@ -387,7 +387,7 @@ redef class AForVardeclExpr
 	redef meth after_typing(v)
 	do
 		v.variable_ctx = v.variable_ctx.sub
-		var va = new Variable(n_id.to_symbol, self)
+		var va = new AutoVariable(n_id.to_symbol, self)
 		variable = va
 		v.variable_ctx.add(va)
 
