@@ -872,6 +872,7 @@ redef class MMLocalClass
 				end
 			end
 			v.add_instr("return OBJ2VAL(obj);")
+			v.cfc.generate_var_decls
 			ctx_old.append(v.ctx)
 			v.ctx = ctx_old
 			v.unindent

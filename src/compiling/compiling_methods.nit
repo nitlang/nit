@@ -39,9 +39,6 @@ redef class CompilerVisitor
 		if s[0] == ' ' then
 			return s
 		end
-		if s == cfc.variable(cfc._variable_index-1) then
-			return s
-		end
 		var v = cfc.get_var
 		add_assignment(v, s)
 		return v
@@ -146,7 +143,12 @@ class CFunctionContext
 	attr _variable_index_max: Int = 0
 
 	# Association between nit variable and the corrsponding c variable
-	readable attr _varnames: Map[Variable, String] = new HashMap[Variable, String]
+	attr _varnames: Map[Variable, String] = new HashMap[Variable, String]
+
+	meth varname(v: Variable): String
+	do
+		return _varnames[v]
+	end
 
 	# Return the next available variable
 	meth get_var: String
@@ -154,18 +156,23 @@ class CFunctionContext
 		var v = variable(_variable_index)
 		_variable_index = _variable_index + 1
 		if _variable_index > _variable_index_max then
-			visitor.add_decl("val_t {v};")
 			_variable_index_max = _variable_index 
 		end
 		return v
 	end
 
+	meth register_variable(v: Variable): String
+	do
+		var s = get_var
+		_varnames[v] = "variable[{_variable_index-1}]"
+		return s
+	end
+
 	# Return the ith variable
 	protected meth variable(i: Int): String
 	do
-		return "variable{i}"
+		return "variable[{i}]"
 	end
-
 
 	# Mark the variable available
 	meth free_var(v: String)
@@ -173,6 +180,17 @@ class CFunctionContext
 		# FIXME: So ugly..
 		if v == variable(_variable_index-1) then
 			_variable_index = _variable_index - 1
+		end
+	end
+
+	# Generate the local variable declarations
+	# To use at the end of the C function once all variables are known
+	meth generate_var_decls
+	do
+		if _variable_index_max > 0 then
+			visitor.add_decl("val_t variable[{_variable_index_max}];")
+		else
+			visitor.add_decl("val_t *variable = NULL;")
 		end
 	end
 
@@ -352,6 +370,8 @@ redef class MMSrcMethod
 			v.add_instr("return {s};")
 		end
 
+		v.cfc.generate_var_decls
+
 		ctx_old.append(v.ctx)
 		v.ctx = ctx_old
 		v.unindent
@@ -449,8 +469,7 @@ redef class AConcreteMethPropdef
 			var sig = n_signature
 			assert sig isa ASignature
 			for ap in sig.n_params do
-				var cname = v.cfc.get_var
-				v.cfc.varnames[ap.variable] = cname
+				var cname = v.cfc.register_variable(ap.variable)
 				var orig_type = orig_sig[ap.position]
 				if not orig_type < ap.variable.stype then
 					# FIXME: do not test always
@@ -739,13 +758,12 @@ end
 redef class AVardeclExpr
 	redef meth prepare_compile_stmt(v)
 	do
-		var cname = v.cfc.get_var
-		v.cfc.varnames[variable] = cname
+		v.cfc.register_variable(variable)
 	end
 
 	redef meth compile_stmt(v)
 	do
-		var cname = v.cfc.varnames[variable]
+		var cname = v.cfc.varname(variable)
 		if n_expr == null then
 			var t = variable.stype
 			v.add_assignment(cname, "{t.default_cvalue} /*decl variable {variable.name}*/")
@@ -918,7 +936,8 @@ redef class AForVardeclExpr
 		v.cfc.free_var(ok)
 		var e = prop3.compile_call(v, [iter])
 		e = v.ensure_var(e)
-		v.cfc.varnames[variable] = e
+		var cname = v.cfc.register_variable(variable)
+		v.add_assignment(cname, e)
 		var par = parent
 		assert par isa AForExpr
 		var n_block = par.n_block
@@ -949,7 +968,7 @@ end
 redef class AVarExpr
 	redef meth compile_expr(v)
 	do
-		return " {v.cfc.varnames[variable]} /*{variable.name}*/"
+		return " {v.cfc.varname(variable)} /*{variable.name}*/"
 	end
 end
 
@@ -957,17 +976,17 @@ redef class AVarAssignExpr
 	redef meth compile_stmt(v)
 	do
 		var e = v.compile_expr(n_value)
-		v.add_assignment(v.cfc.varnames[variable], "{e} /*{variable.name}=*/")
+		v.add_assignment(v.cfc.varname(variable), "{e} /*{variable.name}=*/")
 	end
 end
 
 redef class AVarReassignExpr
 	redef meth compile_stmt(v)
 	do
-		var e1 = v.cfc.varnames[variable]
+		var e1 = v.cfc.varname(variable)
 		var e2 = v.compile_expr(n_value)
 		var e3 = assign_method.compile_call(v, [e1, e2])
-		v.add_assignment(v.cfc.varnames[variable], "{e3} /*{variable.name}*/")
+		v.add_assignment(v.cfc.varname(variable), "{e3} /*{variable.name}*/")
 	end
 end
 
@@ -1322,15 +1341,15 @@ redef class AOnceExpr
 	do
 		var i = v.new_number
 		var cvar = v.cfc.get_var
-		v.add_decl("static val_t once_value_{cvar}_{i}; static int once_bool_{cvar}_{i};")
-		v.add_instr("if (once_bool_{cvar}_{i}) {cvar} = once_value_{cvar}_{i};")
+		v.add_decl("static val_t once_value_{i}; static int once_bool_{i}; /* Once value for {cvar}*/")
+		v.add_instr("if (once_bool_{i}) {cvar} = once_value_{i};")
 		v.add_instr("else \{")
 		v.indent
 		v.cfc.free_var(cvar)
 		var e = v.compile_expr(n_expr)
 		v.add_assignment(cvar, e)
-		v.add_instr("once_value_{cvar}_{i} = {cvar};")
-		v.add_instr("once_bool_{cvar}_{i} = true;")
+		v.add_instr("once_value_{i} = {cvar};")
+		v.add_instr("once_bool_{i} = true;")
 		v.unindent
 		v.add_instr("}")
 		return cvar
