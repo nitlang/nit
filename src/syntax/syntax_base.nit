@@ -345,6 +345,26 @@ special Visitor
 		error(n, "Type error: expected {stype}, got {subtype}")
 		return false
 	end
+	
+	# Check that an expression has a static type and that 
+	# Display an error and return false if n is a statement
+	# Require that the static type of n is known
+	meth check_expr(n: PExpr): Bool
+	do
+		# FIXME: The tc.error_count is a workaround since currently there is no way
+		# to distingate statements from buggy expressions: both have a null stype
+		if tc.error_count == 0 and n.stype == null then
+			error(n, "Type error: expected expression.")
+			return false
+		end
+		return true
+	end
+
+	# Combine check_conform and check_expr
+	meth check_conform_expr(n: PExpr, stype: MMType): Bool
+	do
+		if check_expr(n) then return check_conform(n, n.stype, stype) else return false
+	end
 
 
 	protected init(tc: ToolContext, module: MMSrcModule)

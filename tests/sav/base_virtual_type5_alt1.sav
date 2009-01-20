@@ -1,1 +1,1 @@
-alt/base_virtual_type5_alt1.nit:26,1--7: Type error: expected U, got Int
+alt/base_virtual_type5_alt1.nit:26,7--7: Type error: expected U, got Int

@@ -1,1 +1,1 @@
-alt/base_virtual_type4_alt1.nit:24,2--12: Type error: expected U, got T
+alt/base_virtual_type4_alt1.nit:24,8--12: Type error: expected U, got T

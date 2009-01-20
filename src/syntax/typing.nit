@@ -206,7 +206,7 @@ redef class AAttrPropdef
 	do
 		super
 		if n_expr != null then
-			v.check_conform(n_expr, n_expr.stype, prop.signature.return_type)
+			v.check_conform_expr(n_expr, prop.signature.return_type)
 		end
 	end
 end
@@ -310,9 +310,10 @@ redef class AVardeclExpr
 		if n_type != null then
 			va.stype = n_type.stype
 			if n_expr != null then
-				v.check_conform(self, n_expr.stype, va.stype)
+				v.check_conform_expr(n_expr, va.stype)
 			end
 		else
+			v.check_expr(n_expr)
 			va.stype = n_expr.stype
 		end
 	end
@@ -339,7 +340,7 @@ redef class AReturnExpr
 		else if n_expr != null and t == null then
 			v.error(self, "Error: Return with value in a procedure.")
 		else if n_expr != null and t != null then
-			v.check_conform(self, n_expr.stype, t)
+			v.check_conform_expr(n_expr, t)
 		end
 	end
 end
@@ -349,7 +350,7 @@ redef class AIfExpr
 	do
 		var old_var_ctx = v.variable_ctx
 		v.visit(n_expr)
-		v.check_conform(self, n_expr.stype, v.type_bool)
+		v.check_conform_expr(n_expr, v.type_bool)
 
 		if n_expr.if_true_variable_ctx != null then
 			v.variable_ctx = n_expr.if_true_variable_ctx
@@ -369,7 +370,7 @@ end
 redef class AWhileExpr
 	redef meth after_typing(v)
 	do
-		v.check_conform(self, n_expr.stype, v.type_bool)
+		v.check_conform_expr(n_expr, v.type_bool)
 	end
 end
 
@@ -392,7 +393,7 @@ redef class AForVardeclExpr
 		v.variable_ctx.add(va)
 
 		var expr_type = n_expr.stype
-		if not v.check_conform(self, expr_type, v.type_collection) then
+		if not v.check_conform_expr(n_expr, v.type_collection) then
 			return
 		end
 		var prop = expr_type.local_class.select_method(once ("iterator".to_symbol))
@@ -415,7 +416,7 @@ end
 redef class AAssertExpr
 	redef meth after_typing(v)
 	do
-		v.check_conform(self, n_expr.stype, v.type_bool)
+		v.check_conform_expr(n_expr, v.type_bool)
 		if n_expr.if_true_variable_ctx != null then v.variable_ctx = n_expr.if_true_variable_ctx
 	end
 end
@@ -433,7 +434,7 @@ redef class AVarAssignExpr
 	redef meth after_typing(v)
 	do
 		var t = v.variable_ctx.stype(variable)
-		v.check_conform(self, n_value.stype, t)
+		v.check_conform_expr(n_value, t)
 	end
 end
 
@@ -453,7 +454,7 @@ redef class AReassignFormExpr
 		prop.global.check_visibility(v, self, v.module, false)
 		var psig = prop.signature_for(type_lvalue)
 		_assign_method = prop
-		v.check_conform(n_value, n_value.stype, psig[0].not_for_self)
+		v.check_conform_expr(n_value, psig[0].not_for_self)
 		v.check_conform(self, psig.return_type.not_for_self, n_value.stype)
 	end
 
@@ -504,7 +505,9 @@ redef class AIfexprExpr
 		v.variable_ctx = old_var_ctx
 		v.visit(n_else)
 
-		v.check_conform(self, n_expr.stype, v.type_bool)
+		v.check_conform_expr(n_expr, v.type_bool)
+
+		if not v.check_expr(n_then) or not v.check_expr(n_else) then return
 
 		var t = n_then.stype
 		var te = n_else.stype
@@ -529,8 +532,8 @@ end
 redef class AOrExpr
 	redef meth after_typing(v)
 	do
-		v.check_conform(self, n_expr.stype, v.type_bool)
-		v.check_conform(self, n_expr2.stype, v.type_bool)
+		v.check_conform_expr(n_expr, v.type_bool)
+		v.check_conform_expr(n_expr2, v.type_bool)
 		_stype = v.type_bool
 	end
 end
@@ -552,8 +555,8 @@ redef class AAndExpr
 
 		v.variable_ctx = old_var_ctx
 
-		v.check_conform(self, n_expr.stype, v.type_bool)
-		v.check_conform(self, n_expr2.stype, v.type_bool)
+		v.check_conform_expr(n_expr, v.type_bool)
+		v.check_conform_expr(n_expr2, v.type_bool)
 		_stype = v.type_bool
 	end
 end
@@ -561,7 +564,7 @@ end
 redef class ANotExpr
 	redef meth after_typing(v)
 	do
-		v.check_conform(self, n_expr.stype, v.type_bool)
+		v.check_conform_expr(n_expr, v.type_bool)
 		_stype = v.type_bool
 	end
 end
@@ -622,7 +625,7 @@ redef class AArrayExpr
 			end
 		end
 		for n in n_exprs do
-			v.check_conform(self, n.stype, stype)
+			v.check_conform_expr(n, stype)
 		end
 		_stype = v.type_array(stype)
 	end
@@ -643,7 +646,8 @@ redef class ARangeExpr
 			return
 		end
 		var dtype = v.type_discrete
-		v.check_conform(self, ntype, dtype)
+		v.check_conform_expr(n_expr, dtype)
+		v.check_conform_expr(n_expr2, dtype)
 		_stype = v.type_range(ntype)
 	end
 end
@@ -718,10 +722,8 @@ redef class AAttrFormExpr
 	# Compute the attribute accessed
 	private meth do_typing(v: TypingVisitor)
 	do
+		if not v.check_expr(n_expr) then return
 		var type_recv = n_expr.stype
-		if type_recv == null then
-			return
-		end
 		var name = n_id.to_symbol
 		var prop = type_recv.local_class.select_attribute(name)
 		if prop == null then
@@ -755,7 +757,7 @@ redef class AAttrAssignExpr
 		if prop == null then
 			return
 		end
-		v.check_conform(self, n_value.stype, attr_type)
+		v.check_conform_expr(n_value, attr_type)
 	end
 end
 
@@ -840,7 +842,7 @@ special PExpr
 				var star = new Array[PExpr]
 				for i in [0..(raw_arity-par_arity)] do
 					a = raw_args[arg_idx]
-					v.check_conform(self, a.stype, par_type)
+					v.check_conform_expr(a, par_type)
 					star.add(a)
 					arg_idx = arg_idx + 1
 				end
@@ -849,7 +851,7 @@ special PExpr
 				a = aa
 			else
 				a = raw_args[arg_idx]
-				v.check_conform(self, a.stype, par_type)
+				v.check_conform_expr(a, par_type)
 				arg_idx = arg_idx + 1
 			end
 			args.add(a)
@@ -946,6 +948,7 @@ special ASuperInitCall
 
 	private meth do_all_typing(v: TypingVisitor)
 	do
+		if not v.check_expr(n_expr) then return
 		do_typing(v, n_expr.stype, n_expr.is_implicit_self, n_expr.is_self, name, raw_arguments)
 		if prop == null then return
 		if prop.global.is_init then
@@ -969,6 +972,7 @@ special AReassignFormExpr
 	readable attr _read_prop: MMMethod
 	redef meth do_all_typing(v)
 	do
+		if not v.check_expr(n_expr) then return
 		var raw_args = raw_arguments
 		do_typing(v, n_expr.stype, n_expr.is_implicit_self, n_expr.is_self, name, raw_args)
 		if prop == null then return
@@ -1146,8 +1150,8 @@ end
 redef class AAsCastExpr
 	redef meth after_typing(v)
 	do
+		v.check_expr(n_expr)
 		_stype = n_type.stype
-		var et = n_expr.stype
 	end
 end
 

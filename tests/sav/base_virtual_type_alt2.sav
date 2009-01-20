@@ -1,1 +1,1 @@
-alt/base_virtual_type_alt2.nit:40,1--7: Type error: expected T, got Int
+alt/base_virtual_type_alt2.nit:40,7--7: Type error: expected T, got Int
