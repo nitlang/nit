@@ -731,7 +731,259 @@ special ParserTable
 			new ReduceAction569,
 			new ReduceAction570,
 			new ReduceAction571,
-			new ReduceAction572
+			new ReduceAction572,
+			new ReduceAction573,
+			new ReduceAction574,
+			new ReduceAction575,
+			new ReduceAction576,
+			new ReduceAction577,
+			new ReduceAction578,
+			new ReduceAction579,
+			new ReduceAction580,
+			new ReduceAction581,
+			new ReduceAction582,
+			new ReduceAction583,
+			new ReduceAction584,
+			new ReduceAction585,
+			new ReduceAction586,
+			new ReduceAction587,
+			new ReduceAction588,
+			new ReduceAction589,
+			new ReduceAction590,
+			new ReduceAction591,
+			new ReduceAction592,
+			new ReduceAction593,
+			new ReduceAction594,
+			new ReduceAction595,
+			new ReduceAction596,
+			new ReduceAction597,
+			new ReduceAction598,
+			new ReduceAction599,
+			new ReduceAction600,
+			new ReduceAction601,
+			new ReduceAction602,
+			new ReduceAction603,
+			new ReduceAction604,
+			new ReduceAction605,
+			new ReduceAction606,
+			new ReduceAction607,
+			new ReduceAction608,
+			new ReduceAction609,
+			new ReduceAction610,
+			new ReduceAction611,
+			new ReduceAction612,
+			new ReduceAction613,
+			new ReduceAction614,
+			new ReduceAction615,
+			new ReduceAction616,
+			new ReduceAction617,
+			new ReduceAction618,
+			new ReduceAction619,
+			new ReduceAction620,
+			new ReduceAction621,
+			new ReduceAction622,
+			new ReduceAction623,
+			new ReduceAction624,
+			new ReduceAction625,
+			new ReduceAction626,
+			new ReduceAction627,
+			new ReduceAction628,
+			new ReduceAction629,
+			new ReduceAction630,
+			new ReduceAction631,
+			new ReduceAction632,
+			new ReduceAction633,
+			new ReduceAction634,
+			new ReduceAction635,
+			new ReduceAction636,
+			new ReduceAction637,
+			new ReduceAction638,
+			new ReduceAction639,
+			new ReduceAction640,
+			new ReduceAction641,
+			new ReduceAction642,
+			new ReduceAction643,
+			new ReduceAction644,
+			new ReduceAction645,
+			new ReduceAction646,
+			new ReduceAction647,
+			new ReduceAction648,
+			new ReduceAction649,
+			new ReduceAction650,
+			new ReduceAction651,
+			new ReduceAction652,
+			new ReduceAction653,
+			new ReduceAction654,
+			new ReduceAction655,
+			new ReduceAction656,
+			new ReduceAction657,
+			new ReduceAction658,
+			new ReduceAction659,
+			new ReduceAction660,
+			new ReduceAction661,
+			new ReduceAction662,
+			new ReduceAction663,
+			new ReduceAction664,
+			new ReduceAction665,
+			new ReduceAction666,
+			new ReduceAction667,
+			new ReduceAction668,
+			new ReduceAction669,
+			new ReduceAction670,
+			new ReduceAction671,
+			new ReduceAction672,
+			new ReduceAction673,
+			new ReduceAction674,
+			new ReduceAction675,
+			new ReduceAction676,
+			new ReduceAction677,
+			new ReduceAction678,
+			new ReduceAction679,
+			new ReduceAction680,
+			new ReduceAction681,
+			new ReduceAction682,
+			new ReduceAction683,
+			new ReduceAction684,
+			new ReduceAction685,
+			new ReduceAction686,
+			new ReduceAction687,
+			new ReduceAction688,
+			new ReduceAction689,
+			new ReduceAction690,
+			new ReduceAction691,
+			new ReduceAction692,
+			new ReduceAction693,
+			new ReduceAction694,
+			new ReduceAction695,
+			new ReduceAction696,
+			new ReduceAction697,
+			new ReduceAction698,
+			new ReduceAction699,
+			new ReduceAction700,
+			new ReduceAction701,
+			new ReduceAction702,
+			new ReduceAction703,
+			new ReduceAction704,
+			new ReduceAction705,
+			new ReduceAction706,
+			new ReduceAction707,
+			new ReduceAction708,
+			new ReduceAction709,
+			new ReduceAction710,
+			new ReduceAction711,
+			new ReduceAction712,
+			new ReduceAction713,
+			new ReduceAction714,
+			new ReduceAction715,
+			new ReduceAction716,
+			new ReduceAction717,
+			new ReduceAction718,
+			new ReduceAction719,
+			new ReduceAction720,
+			new ReduceAction721,
+			new ReduceAction722,
+			new ReduceAction723,
+			new ReduceAction724,
+			new ReduceAction725,
+			new ReduceAction726,
+			new ReduceAction727,
+			new ReduceAction728,
+			new ReduceAction729,
+			new ReduceAction730,
+			new ReduceAction731,
+			new ReduceAction732,
+			new ReduceAction733,
+			new ReduceAction734,
+			new ReduceAction735,
+			new ReduceAction736,
+			new ReduceAction737,
+			new ReduceAction738,
+			new ReduceAction739,
+			new ReduceAction740,
+			new ReduceAction741,
+			new ReduceAction742,
+			new ReduceAction743,
+			new ReduceAction744,
+			new ReduceAction745,
+			new ReduceAction746,
+			new ReduceAction747,
+			new ReduceAction748,
+			new ReduceAction749,
+			new ReduceAction750,
+			new ReduceAction751,
+			new ReduceAction752,
+			new ReduceAction753,
+			new ReduceAction754,
+			new ReduceAction755,
+			new ReduceAction756,
+			new ReduceAction757,
+			new ReduceAction758,
+			new ReduceAction759,
+			new ReduceAction760,
+			new ReduceAction761,
+			new ReduceAction762,
+			new ReduceAction763,
+			new ReduceAction764,
+			new ReduceAction765,
+			new ReduceAction766,
+			new ReduceAction767,
+			new ReduceAction768,
+			new ReduceAction769,
+			new ReduceAction770,
+			new ReduceAction771,
+			new ReduceAction772,
+			new ReduceAction773,
+			new ReduceAction774,
+			new ReduceAction775,
+			new ReduceAction776,
+			new ReduceAction777,
+			new ReduceAction778,
+			new ReduceAction779,
+			new ReduceAction780,
+			new ReduceAction781,
+			new ReduceAction782,
+			new ReduceAction783,
+			new ReduceAction784,
+			new ReduceAction785,
+			new ReduceAction786,
+			new ReduceAction787,
+			new ReduceAction788,
+			new ReduceAction789,
+			new ReduceAction790,
+			new ReduceAction791,
+			new ReduceAction792,
+			new ReduceAction793,
+			new ReduceAction794,
+			new ReduceAction795,
+			new ReduceAction796,
+			new ReduceAction797,
+			new ReduceAction798,
+			new ReduceAction799,
+			new ReduceAction800,
+			new ReduceAction801,
+			new ReduceAction802,
+			new ReduceAction803,
+			new ReduceAction804,
+			new ReduceAction805,
+			new ReduceAction806,
+			new ReduceAction807,
+			new ReduceAction808,
+			new ReduceAction809,
+			new ReduceAction810,
+			new ReduceAction811,
+			new ReduceAction812,
+			new ReduceAction813,
+			new ReduceAction814,
+			new ReduceAction815,
+			new ReduceAction816,
+			new ReduceAction817,
+			new ReduceAction818,
+			new ReduceAction819,
+			new ReduceAction820,
+			new ReduceAction821,
+			new ReduceAction822,
+			new ReduceAction823,
+			new ReduceAction824
 		)
 	end
 end
@@ -8242,7 +8494,6 @@ special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
-					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -8257,8 +8508,13 @@ special ReduceAction
 					assert tkwmethnode5 isa TKwmeth
 					var pmethidnode6 = nodearraylist4
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
 					var ppropdefnode1 = new ADeferredMethPropdef.init_adeferredmethpropdef(
 						pdocnode2,
 						null,
@@ -8277,7 +8533,6 @@ special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
-					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -8287,19 +8542,31 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
 					assert pdocnode2 isa PDoc
-					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
-					var pvisibilitynode4 = nodearraylist3
+					var pvisibilitynode4 = nodearraylist2
 					assert pvisibilitynode4 isa PVisibility
-					var tkwmethnode5 = nodearraylist4
+					var tkwmethnode5 = nodearraylist3
 					assert tkwmethnode5 isa TKwmeth
-					var pmethidnode6 = nodearraylist5
+					var pmethidnode6 = nodearraylist4
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
 					var ppropdefnode1 = new ADeferredMethPropdef.init_adeferredmethpropdef(
 						pdocnode2,
-						tkwredefnode3,
+						null,
 						pvisibilitynode4,
 						tkwmethnode5,
 						pmethidnode6,
@@ -8330,9 +8597,16 @@ special ReduceAction
 					assert tkwmethnode5 isa TKwmeth
 					var pmethidnode6 = nodearraylist4
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
-					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var ppropdefnode1 = new ADeferredMethPropdef.init_adeferredmethpropdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -8360,19 +8634,33 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
 					assert pdocnode2 isa PDoc
-					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
-					var pvisibilitynode4 = nodearraylist3
+					var pvisibilitynode4 = nodearraylist2
 					assert pvisibilitynode4 isa PVisibility
-					var tkwmethnode5 = nodearraylist4
+					var tkwmethnode5 = nodearraylist3
 					assert tkwmethnode5 isa TKwmeth
-					var pmethidnode6 = nodearraylist5
+					var pmethidnode6 = nodearraylist4
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
-					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var ppropdefnode1 = new ADeferredMethPropdef.init_adeferredmethpropdef(
 						pdocnode2,
-						tkwredefnode3,
+						null,
 						pvisibilitynode4,
 						tkwmethnode5,
 						pmethidnode6,
@@ -8403,16 +8691,29 @@ special ReduceAction
 					assert tkwmethnode5 isa TKwmeth
 					var pmethidnode6 = nodearraylist4
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
-					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist5 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var ppropdefnode1 = new ADeferredMethPropdef.init_adeferredmethpropdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
 						tkwmethnode5,
 						pmethidnode6,
-						psignaturenode7,
-						null
+						psignaturenode7
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(12), node_list)
@@ -8434,24 +8735,44 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
 					assert pdocnode2 isa PDoc
-					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
-					var pvisibilitynode4 = nodearraylist3
+					var pvisibilitynode4 = nodearraylist2
 					assert pvisibilitynode4 isa PVisibility
-					var tkwmethnode5 = nodearraylist4
+					var tkwmethnode5 = nodearraylist3
 					assert tkwmethnode5 isa TKwmeth
-					var pmethidnode6 = nodearraylist5
+					var pmethidnode6 = nodearraylist4
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
-					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist6 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var ppropdefnode1 = new ADeferredMethPropdef.init_adeferredmethpropdef(
 						pdocnode2,
-						tkwredefnode3,
+						null,
 						pvisibilitynode4,
 						tkwmethnode5,
 						pmethidnode6,
-						psignaturenode7,
-						null
+						psignaturenode7
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(12), node_list)
@@ -8479,18 +8800,31 @@ special ReduceAction
 					assert tkwmethnode5 isa TKwmeth
 					var pmethidnode6 = nodearraylist4
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
-					var tstringnode8 = nodearraylist8
-					assert tstringnode8 isa TString
-					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var ppropdefnode1 = new ADeferredMethPropdef.init_adeferredmethpropdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
 						tkwmethnode5,
 						pmethidnode6,
-						psignaturenode7,
-						tstringnode8
+						psignaturenode7
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(12), node_list)
@@ -8513,26 +8847,46 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
 					assert pdocnode2 isa PDoc
-					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
-					var pvisibilitynode4 = nodearraylist3
+					var pvisibilitynode4 = nodearraylist2
 					assert pvisibilitynode4 isa PVisibility
-					var tkwmethnode5 = nodearraylist4
+					var tkwmethnode5 = nodearraylist3
 					assert tkwmethnode5 isa TKwmeth
-					var pmethidnode6 = nodearraylist5
+					var pmethidnode6 = nodearraylist4
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
-					var tstringnode8 = nodearraylist9
-					assert tstringnode8 isa TString
-					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var ppropdefnode1 = new ADeferredMethPropdef.init_adeferredmethpropdef(
 						pdocnode2,
-						tkwredefnode3,
+						null,
 						pvisibilitynode4,
 						tkwmethnode5,
 						pmethidnode6,
-						psignaturenode7,
-						tstringnode8
+						psignaturenode7
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(12), node_list)
@@ -8544,7 +8898,6 @@ special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
-					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -8554,24 +8907,28 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
 					assert pdocnode2 isa PDoc
-					var pvisibilitynode4 = nodearraylist2
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
 					assert pvisibilitynode4 isa PVisibility
-					var tkwmethnode5 = nodearraylist3
+					var tkwmethnode5 = nodearraylist4
 					assert tkwmethnode5 isa TKwmeth
-					var pmethidnode6 = nodearraylist4
+					var pmethidnode6 = nodearraylist5
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
-					var pexprnode8 = nodearraylist8
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
-						pdocnode2,
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
 						null,
+						listnode10
+					)
+					var ppropdefnode1 = new ADeferredMethPropdef.init_adeferredmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
 						pvisibilitynode4,
 						tkwmethnode5,
 						pmethidnode6,
-						psignaturenode7,
-						pexprnode8
+						psignaturenode7
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(12), node_list)
@@ -8583,6 +8940,103 @@ special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var ppropdefnode1 = new ADeferredMethPropdef.init_adeferredmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction172
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var ppropdefnode1 = new ADeferredMethPropdef.init_adeferredmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction173
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -8602,25 +9056,614 @@ special ReduceAction
 					assert tkwmethnode5 isa TKwmeth
 					var pmethidnode6 = nodearraylist5
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
-					var pexprnode8 = nodearraylist9
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var ppropdefnode1 = new ADeferredMethPropdef.init_adeferredmethpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
 						tkwmethnode5,
 						pmethidnode6,
-						psignaturenode7,
-						pexprnode8
+						psignaturenode7
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(12), node_list)
 	end
 init do end
 end
-private class ReduceAction172
+private class ReduceAction174
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var ppropdefnode1 = new ADeferredMethPropdef.init_adeferredmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction175
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var ppropdefnode1 = new ADeferredMethPropdef.init_adeferredmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction176
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist7 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var ppropdefnode1 = new ADeferredMethPropdef.init_adeferredmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction177
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist8 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var ppropdefnode1 = new ADeferredMethPropdef.init_adeferredmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction178
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction179
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction180
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction181
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction182
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist5 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction183
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist6 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction184
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction185
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -8642,25 +9685,410 @@ special ReduceAction
 					assert tkwmethnode5 isa TKwmeth
 					var pmethidnode6 = nodearraylist4
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
-					var pexprnode8 = nodearraylist8
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
 						tkwmethnode5,
 						pmethidnode6,
-						psignaturenode7,
-						pexprnode8
+						psignaturenode7
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(12), node_list)
 	end
 init do end
 end
-private class ReduceAction173
+private class ReduceAction186
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction187
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction188
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction189
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction190
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction191
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction192
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist7 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction193
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -8685,10 +10113,2258 @@ special ReduceAction
 					assert tkwmethnode5 isa TKwmeth
 					var pmethidnode6 = nodearraylist5
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
-					var pexprnode8 = nodearraylist9
-					assert pexprnode8 isa PExpr
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist8 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction194
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction195
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction196
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction197
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction198
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist5 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction199
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist6 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction200
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction201
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction202
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction203
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction204
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction205
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction206
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction207
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction208
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist7 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction209
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist8 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction210
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var tstringnode11 = nodearraylist7
+					assert tstringnode11 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction211
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var tstringnode12 = nodearraylist8
+					assert tstringnode12 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction212
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var tstringnode11 = nodearraylist8
+					assert tstringnode11 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction213
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var tstringnode12 = nodearraylist9
+					assert tstringnode12 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction214
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist5 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var tstringnode12 = nodearraylist8
+					assert tstringnode12 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction215
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist6 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var tstringnode13 = nodearraylist9
+					assert tstringnode13 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction216
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var tstringnode12 = nodearraylist9
+					assert tstringnode12 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction217
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var tstringnode13 = nodearraylist10
+					assert tstringnode13 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction218
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var tstringnode11 = nodearraylist8
+					assert tstringnode11 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction219
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var tstringnode12 = nodearraylist9
+					assert tstringnode12 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction220
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var tstringnode11 = nodearraylist9
+					assert tstringnode11 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction221
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var tstringnode12 = nodearraylist10
+					assert tstringnode12 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction222
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var tstringnode12 = nodearraylist9
+					assert tstringnode12 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction223
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var tstringnode13 = nodearraylist10
+					assert tstringnode13 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction224
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist7 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var tstringnode12 = nodearraylist10
+					assert tstringnode12 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction225
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist8 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var tstringnode13 = nodearraylist11
+					assert tstringnode13 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction226
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist7
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction227
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction228
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist8
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction229
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction230
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist5 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction231
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist6 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist9
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction232
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction233
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist10
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction234
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist8
+					assert pexprnode11 isa PExpr
 					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -8696,14 +12372,1380 @@ special ReduceAction
 						tkwmethnode5,
 						pmethidnode6,
 						psignaturenode7,
-						pexprnode8
+						pexprnode11
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(12), node_list)
 	end
 init do end
 end
-private class ReduceAction174
+private class ReduceAction235
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction236
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist9
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction237
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist10
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction238
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction239
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist10
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction240
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist7 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist10
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction241
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist8 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist11
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction242
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist7
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction243
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction244
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist8
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction245
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction246
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist5 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction247
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist6 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist9
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction248
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction249
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist10
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction250
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist8
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction251
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction252
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist9
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction253
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist10
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction254
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction255
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist10
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction256
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist7 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist10
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction257
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist8 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist11
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction258
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist6
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction259
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -8721,10 +13763,24 @@ special ReduceAction
 					assert pvisibilitynode4 isa PVisibility
 					var tkwinitnode5 = nodearraylist3
 					assert tkwinitnode5 isa TKwinit
-					var psignaturenode7 = nodearraylist4
-					assert psignaturenode7 isa PSignature
-					var pexprnode8 = nodearraylist7
-					assert pexprnode8 isa PExpr
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist4 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist7
+					assert pexprnode12 isa PExpr
 					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						null,
@@ -8732,14 +13788,379 @@ special ReduceAction
 						tkwinitnode5,
 						null,
 						psignaturenode7,
-						pexprnode8
+						pexprnode12
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(12), node_list)
 	end
 init do end
 end
-private class ReduceAction175
+private class ReduceAction260
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist4
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist7
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction261
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist4 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist5
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction262
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist4 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist7
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction263
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist4 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist5 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist8
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction264
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist4
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist5 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction265
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist4 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist5
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist6 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist9
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction266
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist7
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction267
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -8760,10 +14181,24 @@ special ReduceAction
 					assert pvisibilitynode4 isa PVisibility
 					var tkwinitnode5 = nodearraylist4
 					assert tkwinitnode5 isa TKwinit
-					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
-					var pexprnode8 = nodearraylist8
-					assert pexprnode8 isa PExpr
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa PExpr
 					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -8771,14 +14206,397 @@ special ReduceAction
 						tkwinitnode5,
 						null,
 						psignaturenode7,
-						pexprnode8
+						pexprnode12
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(12), node_list)
 	end
 init do end
 end
-private class ReduceAction176
+private class ReduceAction268
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist8
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction269
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction270
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist5 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction271
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist6 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist9
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction272
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction273
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist10
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction274
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist7
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction275
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -8799,10 +14617,24 @@ special ReduceAction
 					assert tkwinitnode5 isa TKwinit
 					var pmethidnode6 = nodearraylist4
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
-					var pexprnode8 = nodearraylist8
-					assert pexprnode8 isa PExpr
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa PExpr
 					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						null,
@@ -8810,14 +14642,400 @@ special ReduceAction
 						tkwinitnode5,
 						pmethidnode6,
 						psignaturenode7,
-						pexprnode8
+						pexprnode12
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(12), node_list)
 	end
 init do end
 end
-private class ReduceAction177
+private class ReduceAction276
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist8
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction277
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction278
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist5 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction279
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist6 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist9
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction280
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction281
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist10
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction282
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist8
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction283
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -8841,10 +15059,24 @@ special ReduceAction
 					assert tkwinitnode5 isa TKwinit
 					var pmethidnode6 = nodearraylist5
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
-					var pexprnode8 = nodearraylist9
-					assert pexprnode8 isa PExpr
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
 					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -8852,51 +15084,14 @@ special ReduceAction
 						tkwinitnode5,
 						pmethidnode6,
 						psignaturenode7,
-						pexprnode8
+						pexprnode12
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(12), node_list)
 	end
 init do end
 end
-private class ReduceAction178
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist8 = p.pop
-					var nodearraylist7 = p.pop
-					var nodearraylist6 = p.pop
-					var nodearraylist5 = p.pop
-					var nodearraylist4 = p.pop
-					var nodearraylist3 = p.pop
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
-					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
-					var tkwinitnode5 = nodearraylist3
-					assert tkwinitnode5 isa TKwinit
-					var psignaturenode7 = nodearraylist4
-					assert psignaturenode7 isa PSignature
-					var pexprnode8 = nodearraylist7
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
-						pdocnode2,
-						null,
-						pvisibilitynode4,
-						tkwinitnode5,
-						null,
-						psignaturenode7,
-						pexprnode8
-					)
-					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
-	end
-init do end
-end
-private class ReduceAction179
+private class ReduceAction284
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -8918,65 +15113,34 @@ special ReduceAction
 					assert pvisibilitynode4 isa PVisibility
 					var tkwinitnode5 = nodearraylist4
 					assert tkwinitnode5 isa TKwinit
-					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
-					var pexprnode8 = nodearraylist8
-					assert pexprnode8 isa PExpr
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist9
+					assert pexprnode11 isa PExpr
 					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
 						tkwinitnode5,
-						null,
-						psignaturenode7,
-						pexprnode8
-					)
-					node_list = ppropdefnode1
-					p.push(p.go_to(12), node_list)
-	end
-init do end
-end
-private class ReduceAction180
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist9 = p.pop
-					var nodearraylist8 = p.pop
-					var nodearraylist7 = p.pop
-					var nodearraylist6 = p.pop
-					var nodearraylist5 = p.pop
-					var nodearraylist4 = p.pop
-					var nodearraylist3 = p.pop
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
-					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
-					var tkwinitnode5 = nodearraylist3
-					assert tkwinitnode5 isa TKwinit
-					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
-					var pexprnode8 = nodearraylist8
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
-						pdocnode2,
-						null,
-						pvisibilitynode4,
-						tkwinitnode5,
 						pmethidnode6,
 						psignaturenode7,
-						pexprnode8
+						pexprnode11
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(12), node_list)
 	end
 init do end
 end
-private class ReduceAction181
+private class ReduceAction285
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9001,10 +15165,26 @@ special ReduceAction
 					assert tkwinitnode5 isa TKwinit
 					var pmethidnode6 = nodearraylist5
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
-					var pexprnode8 = nodearraylist9
-					assert pexprnode8 isa PExpr
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist10
+					assert pexprnode12 isa PExpr
 					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -9012,14 +15192,2040 @@ special ReduceAction
 						tkwinitnode5,
 						pmethidnode6,
 						psignaturenode7,
-						pexprnode8
+						pexprnode12
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(12), node_list)
 	end
 init do end
 end
-private class ReduceAction182
+private class ReduceAction286
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction287
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist10
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction288
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist7 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist10
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction289
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist8 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist11
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction290
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist6
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction291
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist4 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist7
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction292
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist4
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist7
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction293
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist4 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist5
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction294
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist4 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist7
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction295
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist4 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist5 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist8
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction296
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist4
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist5 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction297
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist4 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist5
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist6 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist9
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction298
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist7
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction299
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction300
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist8
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction301
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction302
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist5 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction303
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist6 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist9
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction304
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction305
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist10
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						null,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction306
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist7
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction307
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction308
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist8
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction309
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction310
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist5 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction311
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist6 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist9
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction312
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction313
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist3
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist10
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction314
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist8
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction315
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction316
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist9
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction317
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist10
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction318
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction319
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist10
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction320
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist7 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist10
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction321
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwinitnode5 = nodearraylist4
+					assert tkwinitnode5 isa TKwinit
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist8 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist11
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwinitnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(12), node_list)
+	end
+init do end
+end
+private class ReduceAction322
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9052,7 +17258,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction183
+private class ReduceAction323
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9088,7 +17294,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction184
+private class ReduceAction324
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9102,7 +17308,47 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction185
+private class ReduceAction325
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction326
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9122,8 +17368,22 @@ special ReduceAction
 					assert tkwmethnode5 isa TKwmeth
 					var pmethidnode6 = nodearraylist4
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
 					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
 						pdocnode2,
 						null,
@@ -9138,7 +17398,372 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction186
+private class ReduceAction327
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction328
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction329
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist5 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction330
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist6 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction331
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction332
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction333
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction334
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9161,8 +17786,22 @@ special ReduceAction
 					assert tkwmethnode5 isa TKwmeth
 					var pmethidnode6 = nodearraylist5
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
 					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -9177,7 +17816,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction187
+private class ReduceAction335
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9192,31 +17831,38 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
 					assert pdocnode2 isa PDoc
-					var pvisibilitynode4 = nodearraylist2
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
 					assert pvisibilitynode4 isa PVisibility
-					var tkwmethnode5 = nodearraylist3
+					var tkwmethnode5 = nodearraylist4
 					assert tkwmethnode5 isa TKwmeth
-					var pmethidnode6 = nodearraylist4
+					var pmethidnode6 = nodearraylist5
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
-					var tstringnode8 = nodearraylist8
-					assert tstringnode8 isa TString
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
 					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
 						pdocnode2,
-						null,
+						tkwredefnode3,
 						pvisibilitynode4,
 						tkwmethnode5,
 						pmethidnode6,
 						psignaturenode7,
-						tstringnode8
+						null
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(14), node_list)
 	end
 init do end
 end
-private class ReduceAction188
+private class ReduceAction336
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9240,10 +17886,24 @@ special ReduceAction
 					assert tkwmethnode5 isa TKwmeth
 					var pmethidnode6 = nodearraylist5
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
-					var tstringnode8 = nodearraylist9
-					assert tstringnode8 isa TString
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
 					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -9251,14 +17911,14 @@ special ReduceAction
 						tkwmethnode5,
 						pmethidnode6,
 						psignaturenode7,
-						tstringnode8
+						null
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(14), node_list)
 	end
 init do end
 end
-private class ReduceAction189
+private class ReduceAction337
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9273,31 +17933,45 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
 					assert pdocnode2 isa PDoc
-					var pvisibilitynode4 = nodearraylist2
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
 					assert pvisibilitynode4 isa PVisibility
-					var tkwmethnode5 = nodearraylist3
+					var tkwmethnode5 = nodearraylist4
 					assert tkwmethnode5 isa TKwmeth
-					var pmethidnode6 = nodearraylist4
+					var pmethidnode6 = nodearraylist5
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
-					var pexprnode8 = nodearraylist8
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
-						pdocnode2,
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
 						null,
+						listnode11
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
 						pvisibilitynode4,
 						tkwmethnode5,
 						pmethidnode6,
 						psignaturenode7,
-						pexprnode8
+						null
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(14), node_list)
 	end
 init do end
 end
-private class ReduceAction190
+private class ReduceAction338
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9321,10 +17995,1531 @@ special ReduceAction
 					assert tkwmethnode5 isa TKwmeth
 					var pmethidnode6 = nodearraylist5
 					assert pmethidnode6 isa PMethid
-					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
-					var pexprnode8 = nodearraylist9
-					assert pexprnode8 isa PExpr
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction339
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist7 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction340
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist8 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						null
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction341
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var tstringnode11 = nodearraylist7
+					assert tstringnode11 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction342
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var tstringnode12 = nodearraylist8
+					assert tstringnode12 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction343
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var tstringnode11 = nodearraylist8
+					assert tstringnode11 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction344
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var tstringnode12 = nodearraylist9
+					assert tstringnode12 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction345
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist5 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var tstringnode12 = nodearraylist8
+					assert tstringnode12 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction346
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist6 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var tstringnode13 = nodearraylist9
+					assert tstringnode13 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction347
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var tstringnode12 = nodearraylist9
+					assert tstringnode12 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction348
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var tstringnode13 = nodearraylist10
+					assert tstringnode13 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction349
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var tstringnode11 = nodearraylist8
+					assert tstringnode11 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction350
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var tstringnode12 = nodearraylist9
+					assert tstringnode12 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction351
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var tstringnode11 = nodearraylist9
+					assert tstringnode11 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction352
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var tstringnode12 = nodearraylist10
+					assert tstringnode12 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction353
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var tstringnode12 = nodearraylist9
+					assert tstringnode12 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction354
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var tstringnode13 = nodearraylist10
+					assert tstringnode13 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction355
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist7 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var tstringnode12 = nodearraylist10
+					assert tstringnode12 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction356
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist8 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var tstringnode13 = nodearraylist11
+					assert tstringnode13 isa TString
+					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						tstringnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction357
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist7
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction358
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction359
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist8
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction360
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction361
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist5 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist8
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction362
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist6 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist9
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction363
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist5
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction364
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var pvisibilitynode4 = nodearraylist2
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist3
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist4
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist5 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist6
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist10
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						null,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction365
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist8
+					assert pexprnode11 isa PExpr
 					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
 						pdocnode2,
 						tkwredefnode3,
@@ -9332,14 +19527,428 @@ special ReduceAction
 						tkwmethnode5,
 						pmethidnode6,
 						psignaturenode7,
-						pexprnode8
+						pexprnode11
 					)
 					node_list = ppropdefnode1
 					p.push(p.go_to(14), node_list)
 	end
 init do end
 end
-private class ReduceAction191
+private class ReduceAction366
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction367
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode10 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode10
+					)
+					var pexprnode11 = nodearraylist9
+					assert pexprnode11 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode11
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction368
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist10
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction369
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var listnode10 = nodearraylist6 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						null,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist9
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction370
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var listnode11 = nodearraylist7 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						null,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist10
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction371
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode8 = new Array[Object]
+					var listnode11 = new Array[Object]
+					var ptypenode9 = nodearraylist6
+					assert ptypenode9 isa PType
+					var listnode10 = nodearraylist7 
+					assert listnode10 isa Array[Object]
+					if listnode10 != null then
+						if listnode11.is_empty then
+							listnode11 = listnode10
+						else
+							listnode11.append(listnode10)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode8,
+						ptypenode9,
+						listnode11
+					)
+					var pexprnode12 = nodearraylist10
+					assert pexprnode12 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode12
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction372
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pdocnode2 = nodearraylist1
+					assert pdocnode2 isa PDoc
+					var tkwredefnode3 = nodearraylist2
+					assert tkwredefnode3 isa TKwredef
+					var pvisibilitynode4 = nodearraylist3
+					assert pvisibilitynode4 isa PVisibility
+					var tkwmethnode5 = nodearraylist4
+					assert tkwmethnode5 isa TKwmeth
+					var pmethidnode6 = nodearraylist5
+					assert pmethidnode6 isa PMethid
+					var listnode9 = new Array[Object]
+					var listnode12 = new Array[Object]
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var ptypenode10 = nodearraylist7
+					assert ptypenode10 isa PType
+					var listnode11 = nodearraylist8 
+					assert listnode11 isa Array[Object]
+					if listnode11 != null then
+						if listnode12.is_empty then
+							listnode12 = listnode11
+						else
+							listnode12.append(listnode11)
+						end
+					end
+					var psignaturenode7 = new ASignature.init_asignature(
+						listnode9,
+						ptypenode10,
+						listnode12
+					)
+					var pexprnode13 = nodearraylist11
+					assert pexprnode13 isa PExpr
+					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+						pdocnode2,
+						tkwredefnode3,
+						pvisibilitynode4,
+						tkwmethnode5,
+						pmethidnode6,
+						psignaturenode7,
+						pexprnode13
+					)
+					node_list = ppropdefnode1
+					p.push(p.go_to(14), node_list)
+	end
+init do end
+end
+private class ReduceAction373
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9351,7 +19960,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction192
+private class ReduceAction374
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9368,7 +19977,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction193
+private class ReduceAction375
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9385,7 +19994,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction194
+private class ReduceAction376
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9402,7 +20011,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction195
+private class ReduceAction377
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9418,7 +20027,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction196
+private class ReduceAction378
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9434,7 +20043,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction197
+private class ReduceAction379
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9450,7 +20059,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction198
+private class ReduceAction380
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9466,7 +20075,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction199
+private class ReduceAction381
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9482,7 +20091,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction200
+private class ReduceAction382
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9498,7 +20107,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction201
+private class ReduceAction383
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9514,7 +20123,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction202
+private class ReduceAction384
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9530,7 +20139,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction203
+private class ReduceAction385
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9546,7 +20155,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction204
+private class ReduceAction386
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9562,7 +20171,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction205
+private class ReduceAction387
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9578,7 +20187,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction206
+private class ReduceAction388
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9594,7 +20203,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction207
+private class ReduceAction389
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9614,7 +20223,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction208
+private class ReduceAction390
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9630,7 +20239,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction209
+private class ReduceAction391
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9650,7 +20259,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction210
+private class ReduceAction392
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9674,28 +20283,31 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction211
+private class ReduceAction393
 special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
 					var listnode2 = new Array[Object]
+					var listnode4 = new Array[Object]
 					var psignaturenode1 = new ASignature.init_asignature(
 						listnode2,
-						null
+						null,
+						listnode4
 					)
 					node_list = psignaturenode1
 					p.push(p.go_to(17), node_list)
 	end
 init do end
 end
-private class ReduceAction212
+private class ReduceAction394
 special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
+					var listnode5 = new Array[Object]
 					var listnode2 = nodearraylist1 
 					assert listnode2 isa Array[Object]
 					if listnode2 != null then
@@ -9707,32 +20319,35 @@ special ReduceAction
 					end
 					var psignaturenode1 = new ASignature.init_asignature(
 						listnode3,
-						null
+						null,
+						listnode5
 					)
 					node_list = psignaturenode1
 					p.push(p.go_to(17), node_list)
 	end
 init do end
 end
-private class ReduceAction213
+private class ReduceAction395
 special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
+					var listnode4 = new Array[Object]
 					var ptypenode3 = nodearraylist1
 					assert ptypenode3 isa PType
 					var psignaturenode1 = new ASignature.init_asignature(
 						listnode2,
-						ptypenode3
+						ptypenode3,
+						listnode4
 					)
 					node_list = psignaturenode1
 					p.push(p.go_to(17), node_list)
 	end
 init do end
 end
-private class ReduceAction214
+private class ReduceAction396
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9740,6 +20355,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
+					var listnode5 = new Array[Object]
 					var listnode2 = nodearraylist1 
 					assert listnode2 isa Array[Object]
 					if listnode2 != null then
@@ -9753,14 +20369,15 @@ special ReduceAction
 					assert ptypenode4 isa PType
 					var psignaturenode1 = new ASignature.init_asignature(
 						listnode3,
-						ptypenode4
+						ptypenode4,
+						listnode5
 					)
 					node_list = psignaturenode1
 					p.push(p.go_to(17), node_list)
 	end
 init do end
 end
-private class ReduceAction215
+private class ReduceAction397
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9781,7 +20398,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction216
+private class ReduceAction398
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9812,7 +20429,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction217
+private class ReduceAction399
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9826,7 +20443,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction218
+private class ReduceAction400
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9841,7 +20458,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction219
+private class ReduceAction401
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9859,7 +20476,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction220
+private class ReduceAction402
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9880,7 +20497,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction221
+private class ReduceAction403
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9904,7 +20521,64 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction222
+private class ReduceAction404
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwwithnode2 = nodearraylist2
+					assert tkwwithnode2 isa TKwwith
+					var tidnode4 = nodearraylist4
+					assert tidnode4 isa TId
+					var psignaturenode5 = nodearraylist5
+					assert psignaturenode5 isa PSignature
+					var pclosuredeclnode1 = new AClosureDecl.init_aclosuredecl(
+						tkwwithnode2,
+						null,
+						tidnode4,
+						psignaturenode5
+					)
+					node_list = pclosuredeclnode1
+					p.push(p.go_to(21), node_list)
+	end
+init do end
+end
+private class ReduceAction405
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwwithnode2 = nodearraylist2
+					assert tkwwithnode2 isa TKwwith
+					var tkwbreaknode3 = nodearraylist3
+					assert tkwbreaknode3 isa TKwbreak
+					var tidnode4 = nodearraylist5
+					assert tidnode4 isa TId
+					var psignaturenode5 = nodearraylist6
+					assert psignaturenode5 isa PSignature
+					var pclosuredeclnode1 = new AClosureDecl.init_aclosuredecl(
+						tkwwithnode2,
+						tkwbreaknode3,
+						tidnode4,
+						psignaturenode5
+					)
+					node_list = pclosuredeclnode1
+					p.push(p.go_to(21), node_list)
+	end
+init do end
+end
+private class ReduceAction406
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9918,11 +20592,11 @@ special ReduceAction
 						listnode3
 					)
 					node_list = ptypenode1
-					p.push(p.go_to(21), node_list)
+					p.push(p.go_to(22), node_list)
 	end
 init do end
 end
-private class ReduceAction223
+private class ReduceAction407
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9950,11 +20624,11 @@ special ReduceAction
 						listnode4
 					)
 					node_list = ptypenode1
-					p.push(p.go_to(21), node_list)
+					p.push(p.go_to(22), node_list)
 	end
 init do end
 end
-private class ReduceAction224
+private class ReduceAction408
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9967,11 +20641,11 @@ special ReduceAction
 						listnode2.add(ptypenode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(22), node_list)
+					p.push(p.go_to(23), node_list)
 	end
 init do end
 end
-private class ReduceAction225
+private class ReduceAction409
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -9994,26 +20668,11 @@ special ReduceAction
 						end
 					end
 					node_list = listnode3
-					p.push(p.go_to(22), node_list)
-	end
-init do end
-end
-private class ReduceAction226
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist3 = p.pop
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var ptypenode1 = nodearraylist3
-					assert ptypenode1 isa PType
-					node_list = ptypenode1
 					p.push(p.go_to(23), node_list)
 	end
 init do end
 end
-private class ReduceAction227
+private class ReduceAction410
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10028,7 +20687,22 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction228
+private class ReduceAction411
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var ptypenode1 = nodearraylist3
+					assert ptypenode1 isa PType
+					node_list = ptypenode1
+					p.push(p.go_to(25), node_list)
+	end
+init do end
+end
+private class ReduceAction412
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10037,11 +20711,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(25), node_list)
+					p.push(p.go_to(26), node_list)
 	end
 init do end
 end
-private class ReduceAction229
+private class ReduceAction413
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10060,11 +20734,11 @@ special ReduceAction
 						listnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(25), node_list)
+					p.push(p.go_to(26), node_list)
 	end
 init do end
 end
-private class ReduceAction230
+private class ReduceAction414
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10093,11 +20767,11 @@ special ReduceAction
 						listnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(25), node_list)
+					p.push(p.go_to(26), node_list)
 	end
 init do end
 end
-private class ReduceAction231
+private class ReduceAction415
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10105,22 +20779,22 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					node_list = null
-					p.push(p.go_to(25), node_list)
+					p.push(p.go_to(26), node_list)
 	end
 init do end
 end
-private class ReduceAction232
+private class ReduceAction416
 special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
 					var nodearraylist1 = p.pop
 					node_list = null
-					p.push(p.go_to(25), node_list)
+					p.push(p.go_to(26), node_list)
 	end
 init do end
 end
-private class ReduceAction233
+private class ReduceAction417
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10130,11 +20804,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist2
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(26), node_list)
+					p.push(p.go_to(27), node_list)
 	end
 init do end
 end
-private class ReduceAction234
+private class ReduceAction418
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10143,11 +20817,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(27), node_list)
+					p.push(p.go_to(28), node_list)
 	end
 init do end
 end
-private class ReduceAction235
+private class ReduceAction419
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10156,11 +20830,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(27), node_list)
+					p.push(p.go_to(28), node_list)
 	end
 init do end
 end
-private class ReduceAction236
+private class ReduceAction420
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10173,11 +20847,11 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(27), node_list)
+					p.push(p.go_to(28), node_list)
 	end
 init do end
 end
-private class ReduceAction237
+private class ReduceAction421
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10193,11 +20867,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(27), node_list)
+					p.push(p.go_to(28), node_list)
 	end
 init do end
 end
-private class ReduceAction238
+private class ReduceAction422
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10206,14 +20880,35 @@ special ReduceAction
 					var tkwbreaknode2 = nodearraylist1
 					assert tkwbreaknode2 isa TKwbreak
 					var pexprnode1 = new ABreakExpr.init_abreakexpr(
-						tkwbreaknode2
+						tkwbreaknode2,
+						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(27), node_list)
+					p.push(p.go_to(28), node_list)
 	end
 init do end
 end
-private class ReduceAction239
+private class ReduceAction423
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwbreaknode2 = nodearraylist1
+					assert tkwbreaknode2 isa TKwbreak
+					var pexprnode3 = nodearraylist2
+					assert pexprnode3 isa PExpr
+					var pexprnode1 = new ABreakExpr.init_abreakexpr(
+						tkwbreaknode2,
+						pexprnode3
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(28), node_list)
+	end
+init do end
+end
+private class ReduceAction424
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10225,11 +20920,11 @@ special ReduceAction
 						tkwabortnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(27), node_list)
+					p.push(p.go_to(28), node_list)
 	end
 init do end
 end
-private class ReduceAction240
+private class ReduceAction425
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10238,14 +20933,35 @@ special ReduceAction
 					var tkwcontinuenode2 = nodearraylist1
 					assert tkwcontinuenode2 isa TKwcontinue
 					var pexprnode1 = new AContinueExpr.init_acontinueexpr(
-						tkwcontinuenode2
+						tkwcontinuenode2,
+						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(27), node_list)
+					p.push(p.go_to(28), node_list)
 	end
 init do end
 end
-private class ReduceAction241
+private class ReduceAction426
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwcontinuenode2 = nodearraylist1
+					assert tkwcontinuenode2 isa TKwcontinue
+					var pexprnode3 = nodearraylist2
+					assert pexprnode3 isa PExpr
+					var pexprnode1 = new AContinueExpr.init_acontinueexpr(
+						tkwcontinuenode2,
+						pexprnode3
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(28), node_list)
+	end
+init do end
+end
+private class ReduceAction427
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10254,11 +20970,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(27), node_list)
+					p.push(p.go_to(28), node_list)
 	end
 init do end
 end
-private class ReduceAction242
+private class ReduceAction428
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10267,11 +20983,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(27), node_list)
+					p.push(p.go_to(28), node_list)
 	end
 init do end
 end
-private class ReduceAction243
+private class ReduceAction429
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10280,11 +20996,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(27), node_list)
+					p.push(p.go_to(28), node_list)
 	end
 init do end
 end
-private class ReduceAction244
+private class ReduceAction430
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10293,11 +21009,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(27), node_list)
+					p.push(p.go_to(28), node_list)
 	end
 init do end
 end
-private class ReduceAction245
+private class ReduceAction431
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10306,11 +21022,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(27), node_list)
+					p.push(p.go_to(28), node_list)
 	end
 init do end
 end
-private class ReduceAction246
+private class ReduceAction432
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10321,6 +21037,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
+					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa PExpr
 					var tidnode3 = nodearraylist4
@@ -10337,14 +21054,15 @@ special ReduceAction
 					var pexprnode1 = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
-						listnode5
+						listnode5,
+						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(27), node_list)
+					p.push(p.go_to(28), node_list)
 	end
 init do end
 end
-private class ReduceAction247
+private class ReduceAction433
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10352,6 +21070,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
+					var listnode6 = new Array[Object]
 					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
@@ -10368,14 +21087,104 @@ special ReduceAction
 					var pexprnode1 = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
-						listnode5
+						listnode5,
+						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(27), node_list)
+					p.push(p.go_to(28), node_list)
 	end
 init do end
 end
-private class ReduceAction248
+private class ReduceAction434
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var tidnode3 = nodearraylist4
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist5 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist6 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(28), node_list)
+	end
+init do end
+end
+private class ReduceAction435
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					)
+					var tidnode3 = nodearraylist1
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist2 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist3 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(28), node_list)
+	end
+init do end
+end
+private class ReduceAction436
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10400,11 +21209,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(27), node_list)
+					p.push(p.go_to(28), node_list)
 	end
 init do end
 end
-private class ReduceAction249
+private class ReduceAction437
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10432,11 +21241,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(27), node_list)
+					p.push(p.go_to(28), node_list)
 	end
 init do end
 end
-private class ReduceAction250
+private class ReduceAction438
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10466,11 +21275,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(27), node_list)
+					p.push(p.go_to(28), node_list)
 	end
 init do end
 end
-private class ReduceAction251
+private class ReduceAction439
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10497,11 +21306,355 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(27), node_list)
+					p.push(p.go_to(28), node_list)
 	end
 init do end
 end
-private class ReduceAction252
+private class ReduceAction440
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var listnode2 = new Array[Object]
+					var pclosuredefnode1 = nodearraylist1
+					assert pclosuredefnode1 isa PClosureDef
+					if pclosuredefnode1 != null then
+						listnode2.add(pclosuredefnode1)
+					end
+					node_list = listnode2
+					p.push(p.go_to(29), node_list)
+	end
+init do end
+end
+private class ReduceAction441
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode3 = new Array[Object]
+					var pclosuredefnode1 = nodearraylist1
+					assert pclosuredefnode1 isa PClosureDef
+					var listnode2 = nodearraylist2 
+					assert listnode2 isa Array[Object]
+					if pclosuredefnode1 != null then
+						listnode3.add(pclosuredefnode1)
+					end
+					if listnode2 != null then
+						if listnode3.is_empty then
+							listnode3 = listnode2
+						else
+							listnode3.append(listnode2)
+						end
+					end
+					node_list = listnode3
+					p.push(p.go_to(29), node_list)
+	end
+init do end
+end
+private class ReduceAction442
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode3 = new Array[Object]
+					var tkwwithnode2 = nodearraylist1
+					assert tkwwithnode2 isa TKwwith
+					var tkwdonode4 = nodearraylist2
+					assert tkwdonode4 isa TKwdo
+					var pexprnode5 = nodearraylist3
+					assert pexprnode5 isa PExpr
+					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+						tkwwithnode2,
+						listnode3,
+						tkwdonode4,
+						pexprnode5
+					)
+					node_list = pclosuredefnode1
+					p.push(p.go_to(30), node_list)
+	end
+init do end
+end
+private class ReduceAction443
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode4 = new Array[Object]
+					var tkwwithnode2 = nodearraylist1
+					assert tkwwithnode2 isa TKwwith
+					var listnode3 = nodearraylist2 
+					assert listnode3 isa Array[Object]
+					if listnode3 != null then
+						if listnode4.is_empty then
+							listnode4 = listnode3
+						else
+							listnode4.append(listnode3)
+						end
+					end
+					var tkwdonode5 = nodearraylist3
+					assert tkwdonode5 isa TKwdo
+					var pexprnode6 = nodearraylist4
+					assert pexprnode6 isa PExpr
+					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+						tkwwithnode2,
+						listnode4,
+						tkwdonode5,
+						pexprnode6
+					)
+					node_list = pclosuredefnode1
+					p.push(p.go_to(30), node_list)
+	end
+init do end
+end
+private class ReduceAction444
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode3 = new Array[Object]
+					var tkwwithnode2 = nodearraylist1
+					assert tkwwithnode2 isa TKwwith
+					var tkwdonode4 = nodearraylist2
+					assert tkwdonode4 isa TKwdo
+					var listnode7 = new Array[Object]
+					var pexprnode6 = nodearraylist4
+					assert pexprnode6 isa PExpr
+					if pexprnode6 != null then
+						listnode7.add(pexprnode6)
+					end
+					var pexprnode5 = new ABlockExpr.init_ablockexpr(
+						listnode7
+					)
+					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+						tkwwithnode2,
+						listnode3,
+						tkwdonode4,
+						pexprnode5
+					)
+					node_list = pclosuredefnode1
+					p.push(p.go_to(31), node_list)
+	end
+init do end
+end
+private class ReduceAction445
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode3 = new Array[Object]
+					var tkwwithnode2 = nodearraylist1
+					assert tkwwithnode2 isa TKwwith
+					var tkwdonode4 = nodearraylist2
+					assert tkwdonode4 isa TKwdo
+					var listnode8 = new Array[Object]
+					var pexprnode6 = nodearraylist4
+					assert pexprnode6 isa PExpr
+					var listnode7 = nodearraylist5 
+					assert listnode7 isa Array[Object]
+					if pexprnode6 != null then
+						listnode8.add(pexprnode6)
+					end
+					if listnode7 != null then
+						if listnode8.is_empty then
+							listnode8 = listnode7
+						else
+							listnode8.append(listnode7)
+						end
+					end
+					var pexprnode5 = new ABlockExpr.init_ablockexpr(
+						listnode8
+					)
+					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+						tkwwithnode2,
+						listnode3,
+						tkwdonode4,
+						pexprnode5
+					)
+					node_list = pclosuredefnode1
+					p.push(p.go_to(31), node_list)
+	end
+init do end
+end
+private class ReduceAction446
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode4 = new Array[Object]
+					var tkwwithnode2 = nodearraylist1
+					assert tkwwithnode2 isa TKwwith
+					var listnode3 = nodearraylist2 
+					assert listnode3 isa Array[Object]
+					if listnode3 != null then
+						if listnode4.is_empty then
+							listnode4 = listnode3
+						else
+							listnode4.append(listnode3)
+						end
+					end
+					var tkwdonode5 = nodearraylist3
+					assert tkwdonode5 isa TKwdo
+					var listnode8 = new Array[Object]
+					var pexprnode7 = nodearraylist5
+					assert pexprnode7 isa PExpr
+					if pexprnode7 != null then
+						listnode8.add(pexprnode7)
+					end
+					var pexprnode6 = new ABlockExpr.init_ablockexpr(
+						listnode8
+					)
+					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+						tkwwithnode2,
+						listnode4,
+						tkwdonode5,
+						pexprnode6
+					)
+					node_list = pclosuredefnode1
+					p.push(p.go_to(31), node_list)
+	end
+init do end
+end
+private class ReduceAction447
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode4 = new Array[Object]
+					var tkwwithnode2 = nodearraylist1
+					assert tkwwithnode2 isa TKwwith
+					var listnode3 = nodearraylist2 
+					assert listnode3 isa Array[Object]
+					if listnode3 != null then
+						if listnode4.is_empty then
+							listnode4 = listnode3
+						else
+							listnode4.append(listnode3)
+						end
+					end
+					var tkwdonode5 = nodearraylist3
+					assert tkwdonode5 isa TKwdo
+					var listnode9 = new Array[Object]
+					var pexprnode7 = nodearraylist5
+					assert pexprnode7 isa PExpr
+					var listnode8 = nodearraylist6 
+					assert listnode8 isa Array[Object]
+					if pexprnode7 != null then
+						listnode9.add(pexprnode7)
+					end
+					if listnode8 != null then
+						if listnode9.is_empty then
+							listnode9 = listnode8
+						else
+							listnode9.append(listnode8)
+						end
+					end
+					var pexprnode6 = new ABlockExpr.init_ablockexpr(
+						listnode9
+					)
+					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+						tkwwithnode2,
+						listnode4,
+						tkwdonode5,
+						pexprnode6
+					)
+					node_list = pclosuredefnode1
+					p.push(p.go_to(31), node_list)
+	end
+init do end
+end
+private class ReduceAction448
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode3 = new Array[Object]
+					var tkwwithnode2 = nodearraylist1
+					assert tkwwithnode2 isa TKwwith
+					var tkwdonode4 = nodearraylist2
+					assert tkwdonode4 isa TKwdo
+					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+						tkwwithnode2,
+						listnode3,
+						tkwdonode4,
+						null
+					)
+					node_list = pclosuredefnode1
+					p.push(p.go_to(31), node_list)
+	end
+init do end
+end
+private class ReduceAction449
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode4 = new Array[Object]
+					var tkwwithnode2 = nodearraylist1
+					assert tkwwithnode2 isa TKwwith
+					var listnode3 = nodearraylist2 
+					assert listnode3 isa Array[Object]
+					if listnode3 != null then
+						if listnode4.is_empty then
+							listnode4 = listnode3
+						else
+							listnode4.append(listnode3)
+						end
+					end
+					var tkwdonode5 = nodearraylist3
+					assert tkwdonode5 isa TKwdo
+					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+						tkwwithnode2,
+						listnode4,
+						tkwdonode5,
+						null
+					)
+					node_list = pclosuredefnode1
+					p.push(p.go_to(31), node_list)
+	end
+init do end
+end
+private class ReduceAction450
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10520,11 +21673,11 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(28), node_list)
+					p.push(p.go_to(32), node_list)
 	end
 init do end
 end
-private class ReduceAction253
+private class ReduceAction451
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10546,11 +21699,11 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(28), node_list)
+					p.push(p.go_to(32), node_list)
 	end
 init do end
 end
-private class ReduceAction254
+private class ReduceAction452
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10576,11 +21729,11 @@ special ReduceAction
 						pexprnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(28), node_list)
+					p.push(p.go_to(32), node_list)
 	end
 init do end
 end
-private class ReduceAction255
+private class ReduceAction453
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10609,11 +21762,11 @@ special ReduceAction
 						pexprnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(28), node_list)
+					p.push(p.go_to(32), node_list)
 	end
 init do end
 end
-private class ReduceAction256
+private class ReduceAction454
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10639,11 +21792,11 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(29), node_list)
+					p.push(p.go_to(33), node_list)
 	end
 init do end
 end
-private class ReduceAction257
+private class ReduceAction455
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10666,11 +21819,11 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(29), node_list)
+					p.push(p.go_to(33), node_list)
 	end
 init do end
 end
-private class ReduceAction258
+private class ReduceAction456
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10708,11 +21861,11 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(29), node_list)
+					p.push(p.go_to(33), node_list)
 	end
 init do end
 end
-private class ReduceAction259
+private class ReduceAction457
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10747,11 +21900,11 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(29), node_list)
+					p.push(p.go_to(33), node_list)
 	end
 init do end
 end
-private class ReduceAction260
+private class ReduceAction458
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10783,11 +21936,11 @@ special ReduceAction
 						pexprnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(29), node_list)
+					p.push(p.go_to(33), node_list)
 	end
 init do end
 end
-private class ReduceAction261
+private class ReduceAction459
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10813,11 +21966,11 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(29), node_list)
+					p.push(p.go_to(33), node_list)
 	end
 init do end
 end
-private class ReduceAction262
+private class ReduceAction460
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10840,11 +21993,11 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(29), node_list)
+					p.push(p.go_to(33), node_list)
 	end
 init do end
 end
-private class ReduceAction263
+private class ReduceAction461
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10882,11 +22035,11 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(29), node_list)
+					p.push(p.go_to(33), node_list)
 	end
 init do end
 end
-private class ReduceAction264
+private class ReduceAction462
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10921,11 +22074,11 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(29), node_list)
+					p.push(p.go_to(33), node_list)
 	end
 init do end
 end
-private class ReduceAction265
+private class ReduceAction463
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10957,11 +22110,11 @@ special ReduceAction
 						pexprnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(29), node_list)
+					p.push(p.go_to(33), node_list)
 	end
 init do end
 end
-private class ReduceAction266
+private class ReduceAction464
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10973,11 +22126,11 @@ special ReduceAction
 						tpluseqnode2
 					)
 					node_list = passignopnode1
-					p.push(p.go_to(30), node_list)
+					p.push(p.go_to(34), node_list)
 	end
 init do end
 end
-private class ReduceAction267
+private class ReduceAction465
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -10989,11 +22142,11 @@ special ReduceAction
 						tminuseqnode2
 					)
 					node_list = passignopnode1
-					p.push(p.go_to(30), node_list)
+					p.push(p.go_to(34), node_list)
 	end
 init do end
 end
-private class ReduceAction268
+private class ReduceAction466
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11009,11 +22162,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(31), node_list)
+					p.push(p.go_to(35), node_list)
 	end
 init do end
 end
-private class ReduceAction269
+private class ReduceAction467
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11041,11 +22194,11 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(32), node_list)
+					p.push(p.go_to(36), node_list)
 	end
 init do end
 end
-private class ReduceAction270
+private class ReduceAction468
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11069,11 +22222,11 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(32), node_list)
+					p.push(p.go_to(36), node_list)
 	end
 init do end
 end
-private class ReduceAction271
+private class ReduceAction469
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11109,11 +22262,11 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(32), node_list)
+					p.push(p.go_to(36), node_list)
 	end
 init do end
 end
-private class ReduceAction272
+private class ReduceAction470
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11159,11 +22312,11 @@ special ReduceAction
 						pexprnode8
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(32), node_list)
+					p.push(p.go_to(36), node_list)
 	end
 init do end
 end
-private class ReduceAction273
+private class ReduceAction471
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11187,11 +22340,11 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(32), node_list)
+					p.push(p.go_to(36), node_list)
 	end
 init do end
 end
-private class ReduceAction274
+private class ReduceAction472
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11216,11 +22369,11 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(32), node_list)
+					p.push(p.go_to(36), node_list)
 	end
 init do end
 end
-private class ReduceAction275
+private class ReduceAction473
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11230,22 +22383,22 @@ special ReduceAction
 					var pexprnode1 = nodearraylist2
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(37), node_list)
 	end
 init do end
 end
-private class ReduceAction276
+private class ReduceAction474
 special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
 					var nodearraylist1 = p.pop
 					node_list = null
-					p.push(p.go_to(33), node_list)
+					p.push(p.go_to(37), node_list)
 	end
 init do end
 end
-private class ReduceAction277
+private class ReduceAction475
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11271,11 +22424,11 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(34), node_list)
+					p.push(p.go_to(38), node_list)
 	end
 init do end
 end
-private class ReduceAction278
+private class ReduceAction476
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11296,11 +22449,11 @@ special ReduceAction
 						pexprnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(35), node_list)
+					p.push(p.go_to(39), node_list)
 	end
 init do end
 end
-private class ReduceAction279
+private class ReduceAction477
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11324,11 +22477,11 @@ special ReduceAction
 						pexprnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(36), node_list)
+					p.push(p.go_to(40), node_list)
 	end
 init do end
 end
-private class ReduceAction280
+private class ReduceAction478
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11345,11 +22498,11 @@ special ReduceAction
 						pexprnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(37), node_list)
+					p.push(p.go_to(41), node_list)
 	end
 init do end
 end
-private class ReduceAction281
+private class ReduceAction479
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11369,11 +22522,11 @@ special ReduceAction
 						pexprnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(37), node_list)
+					p.push(p.go_to(41), node_list)
 	end
 init do end
 end
-private class ReduceAction282
+private class ReduceAction480
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11383,11 +22536,11 @@ special ReduceAction
 					var tidnode1 = nodearraylist1
 					assert tidnode1 isa TId
 					node_list = tidnode1
-					p.push(p.go_to(38), node_list)
+					p.push(p.go_to(42), node_list)
 	end
 init do end
 end
-private class ReduceAction283
+private class ReduceAction481
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11396,11 +22549,153 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(39), node_list)
+					p.push(p.go_to(43), node_list)
 	end
 init do end
 end
-private class ReduceAction284
+private class ReduceAction482
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var tidnode3 = nodearraylist4
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist5 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist6 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(43), node_list)
+	end
+init do end
+end
+private class ReduceAction483
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					)
+					var tidnode3 = nodearraylist1
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist2 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist3 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(43), node_list)
+	end
+init do end
+end
+private class ReduceAction484
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode4 = new Array[Object]
+					var listnode6 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var listnode3 = nodearraylist2 
+					assert listnode3 isa Array[Object]
+					if listnode3 != null then
+						if listnode4.is_empty then
+							listnode4 = listnode3
+						else
+							listnode4.append(listnode3)
+						end
+					end
+					var listnode5 = nodearraylist3 
+					assert listnode5 isa Array[Object]
+					if listnode5 != null then
+						if listnode6.is_empty then
+							listnode6 = listnode5
+						else
+							listnode6.append(listnode5)
+						end
+					end
+					var pexprnode1 = new ABraExpr.init_abraexpr(
+						pexprnode2,
+						listnode4,
+						listnode6
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(43), node_list)
+	end
+init do end
+end
+private class ReduceAction485
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var pexprnode1 = nodearraylist1
+					assert pexprnode1 isa PExpr
+					node_list = pexprnode1
+					p.push(p.go_to(44), node_list)
+	end
+init do end
+end
+private class ReduceAction486
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11437,11 +22732,11 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(39), node_list)
+					p.push(p.go_to(44), node_list)
 	end
 init do end
 end
-private class ReduceAction285
+private class ReduceAction487
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11450,11 +22745,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(40), node_list)
+					p.push(p.go_to(45), node_list)
 	end
 init do end
 end
-private class ReduceAction286
+private class ReduceAction488
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11472,11 +22767,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(40), node_list)
+					p.push(p.go_to(45), node_list)
 	end
 init do end
 end
-private class ReduceAction287
+private class ReduceAction489
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11494,11 +22789,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(40), node_list)
+					p.push(p.go_to(45), node_list)
 	end
 init do end
 end
-private class ReduceAction288
+private class ReduceAction490
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11507,11 +22802,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(41), node_list)
+					p.push(p.go_to(46), node_list)
 	end
 init do end
 end
-private class ReduceAction289
+private class ReduceAction491
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11528,11 +22823,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(41), node_list)
+					p.push(p.go_to(46), node_list)
 	end
 init do end
 end
-private class ReduceAction290
+private class ReduceAction492
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11541,11 +22836,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(42), node_list)
+					p.push(p.go_to(47), node_list)
 	end
 init do end
 end
-private class ReduceAction291
+private class ReduceAction493
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11563,11 +22858,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(42), node_list)
+					p.push(p.go_to(47), node_list)
 	end
 init do end
 end
-private class ReduceAction292
+private class ReduceAction494
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11585,11 +22880,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(42), node_list)
+					p.push(p.go_to(47), node_list)
 	end
 init do end
 end
-private class ReduceAction293
+private class ReduceAction495
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11607,11 +22902,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(42), node_list)
+					p.push(p.go_to(47), node_list)
 	end
 init do end
 end
-private class ReduceAction294
+private class ReduceAction496
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11629,11 +22924,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(42), node_list)
+					p.push(p.go_to(47), node_list)
 	end
 init do end
 end
-private class ReduceAction295
+private class ReduceAction497
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11651,11 +22946,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(42), node_list)
+					p.push(p.go_to(47), node_list)
 	end
 init do end
 end
-private class ReduceAction296
+private class ReduceAction498
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11673,11 +22968,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(42), node_list)
+					p.push(p.go_to(47), node_list)
 	end
 init do end
 end
-private class ReduceAction297
+private class ReduceAction499
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11695,11 +22990,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(42), node_list)
+					p.push(p.go_to(47), node_list)
 	end
 init do end
 end
-private class ReduceAction298
+private class ReduceAction500
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11717,11 +23012,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(42), node_list)
+					p.push(p.go_to(47), node_list)
 	end
 init do end
 end
-private class ReduceAction299
+private class ReduceAction501
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11739,11 +23034,11 @@ special ReduceAction
 						ptypenode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(42), node_list)
+					p.push(p.go_to(47), node_list)
 	end
 init do end
 end
-private class ReduceAction300
+private class ReduceAction502
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11752,11 +23047,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(43), node_list)
+					p.push(p.go_to(48), node_list)
 	end
 init do end
 end
-private class ReduceAction301
+private class ReduceAction503
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11774,11 +23069,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(43), node_list)
+					p.push(p.go_to(48), node_list)
 	end
 init do end
 end
-private class ReduceAction302
+private class ReduceAction504
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11796,11 +23091,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(43), node_list)
+					p.push(p.go_to(48), node_list)
 	end
 init do end
 end
-private class ReduceAction303
+private class ReduceAction505
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11809,11 +23104,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(44), node_list)
+					p.push(p.go_to(49), node_list)
 	end
 init do end
 end
-private class ReduceAction304
+private class ReduceAction506
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11831,11 +23126,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(44), node_list)
+					p.push(p.go_to(49), node_list)
 	end
 init do end
 end
-private class ReduceAction305
+private class ReduceAction507
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11853,11 +23148,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(44), node_list)
+					p.push(p.go_to(49), node_list)
 	end
 init do end
 end
-private class ReduceAction306
+private class ReduceAction508
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11875,11 +23170,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(44), node_list)
+					p.push(p.go_to(49), node_list)
 	end
 init do end
 end
-private class ReduceAction307
+private class ReduceAction509
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11888,11 +23183,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(45), node_list)
+					p.push(p.go_to(50), node_list)
 	end
 init do end
 end
-private class ReduceAction308
+private class ReduceAction510
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11909,11 +23204,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(45), node_list)
+					p.push(p.go_to(50), node_list)
 	end
 init do end
 end
-private class ReduceAction309
+private class ReduceAction511
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11930,11 +23225,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(45), node_list)
+					p.push(p.go_to(50), node_list)
 	end
 init do end
 end
-private class ReduceAction310
+private class ReduceAction512
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11943,11 +23238,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(46), node_list)
+					p.push(p.go_to(51), node_list)
 	end
 init do end
 end
-private class ReduceAction311
+private class ReduceAction513
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11977,11 +23272,11 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(46), node_list)
+					p.push(p.go_to(51), node_list)
 	end
 init do end
 end
-private class ReduceAction312
+private class ReduceAction514
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -11999,11 +23294,11 @@ special ReduceAction
 						tattridnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction313
+private class ReduceAction515
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12018,11 +23313,11 @@ special ReduceAction
 						tattridnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction314
+private class ReduceAction516
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12033,6 +23328,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
+					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa PExpr
 					var tidnode3 = nodearraylist4
@@ -12049,14 +23345,15 @@ special ReduceAction
 					var pexprnode1 = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
-						listnode5
+						listnode5,
+						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction315
+private class ReduceAction517
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12064,6 +23361,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
+					var listnode6 = new Array[Object]
 					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
@@ -12080,14 +23378,15 @@ special ReduceAction
 					var pexprnode1 = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
-						listnode5
+						listnode5,
+						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction316
+private class ReduceAction518
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12112,11 +23411,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction317
+private class ReduceAction519
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12144,11 +23443,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction318
+private class ReduceAction520
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12178,11 +23477,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction319
+private class ReduceAction521
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12209,11 +23508,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction320
+private class ReduceAction522
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12221,6 +23520,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
+					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa PExpr
 					var listnode3 = nodearraylist2 
@@ -12234,14 +23534,15 @@ special ReduceAction
 					end
 					var pexprnode1 = new ABraExpr.init_abraexpr(
 						pexprnode2,
-						listnode4
+						listnode4,
+						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction321
+private class ReduceAction523
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12276,11 +23577,11 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction322
+private class ReduceAction524
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12303,11 +23604,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction323
+private class ReduceAction525
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12330,11 +23631,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction324
+private class ReduceAction526
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12354,11 +23655,11 @@ special ReduceAction
 						listnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction325
+private class ReduceAction527
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12370,11 +23671,11 @@ special ReduceAction
 						tkwselfnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction326
+private class ReduceAction528
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12386,11 +23687,11 @@ special ReduceAction
 						tkwtruenode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction327
+private class ReduceAction529
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12402,11 +23703,11 @@ special ReduceAction
 						tkwfalsenode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction328
+private class ReduceAction530
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12418,11 +23719,11 @@ special ReduceAction
 						tkwnullnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction329
+private class ReduceAction531
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12434,11 +23735,11 @@ special ReduceAction
 						tnumbernode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction330
+private class ReduceAction532
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12450,11 +23751,11 @@ special ReduceAction
 						tfloatnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction331
+private class ReduceAction533
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12466,11 +23767,11 @@ special ReduceAction
 						tcharnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction332
+private class ReduceAction534
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12482,11 +23783,11 @@ special ReduceAction
 						tstringnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction333
+private class ReduceAction535
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12495,11 +23796,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction334
+private class ReduceAction536
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12510,11 +23811,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist2
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction335
+private class ReduceAction537
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12541,11 +23842,11 @@ special ReduceAction
 						ptypenode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(47), node_list)
+					p.push(p.go_to(52), node_list)
 	end
 init do end
 end
-private class ReduceAction336
+private class ReduceAction538
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12571,11 +23872,11 @@ special ReduceAction
 						listnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(48), node_list)
+					p.push(p.go_to(53), node_list)
 	end
 init do end
 end
-private class ReduceAction337
+private class ReduceAction539
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12611,11 +23912,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(48), node_list)
+					p.push(p.go_to(53), node_list)
 	end
 init do end
 end
-private class ReduceAction338
+private class ReduceAction540
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12636,11 +23937,11 @@ special ReduceAction
 						listnode3.add(pexprnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(49), node_list)
+					p.push(p.go_to(54), node_list)
 	end
 init do end
 end
-private class ReduceAction339
+private class ReduceAction541
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12652,11 +23953,11 @@ special ReduceAction
 						tstartstringnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(50), node_list)
+					p.push(p.go_to(55), node_list)
 	end
 init do end
 end
-private class ReduceAction340
+private class ReduceAction542
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12677,11 +23978,11 @@ special ReduceAction
 						listnode3.add(pexprnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(51), node_list)
+					p.push(p.go_to(56), node_list)
 	end
 init do end
 end
-private class ReduceAction341
+private class ReduceAction543
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12693,11 +23994,11 @@ special ReduceAction
 						tmidstringnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(52), node_list)
+					p.push(p.go_to(57), node_list)
 	end
 init do end
 end
-private class ReduceAction342
+private class ReduceAction544
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12709,11 +24010,11 @@ special ReduceAction
 						tendstringnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(53), node_list)
+					p.push(p.go_to(58), node_list)
 	end
 init do end
 end
-private class ReduceAction343
+private class ReduceAction545
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12730,11 +24031,11 @@ special ReduceAction
 						listnode2.add(pexprnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(54), node_list)
+					p.push(p.go_to(59), node_list)
 	end
 init do end
 end
-private class ReduceAction344
+private class ReduceAction546
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12761,11 +24062,11 @@ special ReduceAction
 						end
 					end
 					node_list = listnode3
-					p.push(p.go_to(54), node_list)
+					p.push(p.go_to(59), node_list)
 	end
 init do end
 end
-private class ReduceAction345
+private class ReduceAction547
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12775,22 +24076,22 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode1 = new Array[Object]
 					node_list = listnode1
-					p.push(p.go_to(54), node_list)
+					p.push(p.go_to(59), node_list)
 	end
 init do end
 end
-private class ReduceAction346
+private class ReduceAction548
 special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
 					var listnode1 = new Array[Object]
 					node_list = listnode1
-					p.push(p.go_to(54), node_list)
+					p.push(p.go_to(59), node_list)
 	end
 init do end
 end
-private class ReduceAction347
+private class ReduceAction549
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12807,11 +24108,11 @@ special ReduceAction
 						listnode2.add(pexprnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(55), node_list)
+					p.push(p.go_to(60), node_list)
 	end
 init do end
 end
-private class ReduceAction348
+private class ReduceAction550
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12838,11 +24139,11 @@ special ReduceAction
 						end
 					end
 					node_list = listnode3
-					p.push(p.go_to(55), node_list)
+					p.push(p.go_to(60), node_list)
 	end
 init do end
 end
-private class ReduceAction349
+private class ReduceAction551
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12855,11 +24156,11 @@ special ReduceAction
 						listnode2.add(pexprnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(55), node_list)
+					p.push(p.go_to(60), node_list)
 	end
 init do end
 end
-private class ReduceAction350
+private class ReduceAction552
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12869,22 +24170,22 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode1 = new Array[Object]
 					node_list = listnode1
-					p.push(p.go_to(55), node_list)
+					p.push(p.go_to(60), node_list)
 	end
 init do end
 end
-private class ReduceAction351
+private class ReduceAction553
 special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
 					var listnode1 = new Array[Object]
 					node_list = listnode1
-					p.push(p.go_to(55), node_list)
+					p.push(p.go_to(60), node_list)
 	end
 init do end
 end
-private class ReduceAction352
+private class ReduceAction554
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12901,11 +24202,11 @@ special ReduceAction
 						listnode2.add(pexprnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(56), node_list)
+					p.push(p.go_to(61), node_list)
 	end
 init do end
 end
-private class ReduceAction353
+private class ReduceAction555
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12932,11 +24233,11 @@ special ReduceAction
 						end
 					end
 					node_list = listnode3
-					p.push(p.go_to(56), node_list)
+					p.push(p.go_to(61), node_list)
 	end
 init do end
 end
-private class ReduceAction354
+private class ReduceAction556
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12948,11 +24249,58 @@ special ReduceAction
 					var pexprnode1 = nodearraylist3
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(57), node_list)
+					p.push(p.go_to(62), node_list)
 	end
 init do end
 end
-private class ReduceAction355
+private class ReduceAction557
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var listnode2 = new Array[Object]
+					var tidnode1 = nodearraylist1
+					assert tidnode1 isa TId
+					if tidnode1 != null then
+						listnode2.add(tidnode1)
+					end
+					node_list = listnode2
+					p.push(p.go_to(63), node_list)
+	end
+init do end
+end
+private class ReduceAction558
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode3 = new Array[Object]
+					var listnode1 = nodearraylist1 
+					assert listnode1 isa Array[Object]
+					var tidnode2 = nodearraylist5
+					assert tidnode2 isa TId
+					if listnode1 != null then
+						if listnode3.is_empty then
+							listnode3 = listnode1
+						else
+							listnode3.append(listnode1)
+						end
+					end
+					if tidnode2 != null then
+						listnode3.add(tidnode2)
+					end
+					node_list = listnode3
+					p.push(p.go_to(63), node_list)
+	end
+init do end
+end
+private class ReduceAction559
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12966,11 +24314,11 @@ special ReduceAction
 						tclassidnode3
 					)
 					node_list = pqualifiednode1
-					p.push(p.go_to(58), node_list)
+					p.push(p.go_to(64), node_list)
 	end
 init do end
 end
-private class ReduceAction356
+private class ReduceAction560
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -12994,11 +24342,11 @@ special ReduceAction
 						tclassidnode4
 					)
 					node_list = pqualifiednode1
-					p.push(p.go_to(58), node_list)
+					p.push(p.go_to(64), node_list)
 	end
 init do end
 end
-private class ReduceAction357
+private class ReduceAction561
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13019,11 +24367,11 @@ special ReduceAction
 						null
 					)
 					node_list = pqualifiednode1
-					p.push(p.go_to(58), node_list)
+					p.push(p.go_to(64), node_list)
 	end
 init do end
 end
-private class ReduceAction358
+private class ReduceAction562
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13034,11 +24382,11 @@ special ReduceAction
 					var tidnode1 = nodearraylist1
 					assert tidnode1 isa TId
 					node_list = tidnode1
-					p.push(p.go_to(59), node_list)
+					p.push(p.go_to(65), node_list)
 	end
 init do end
 end
-private class ReduceAction359
+private class ReduceAction563
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13049,31 +24397,31 @@ special ReduceAction
 					var tclassidnode1 = nodearraylist1
 					assert tclassidnode1 isa TClassid
 					node_list = tclassidnode1
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(66), node_list)
 	end
 init do end
 end
-private class ReduceAction360
+private class ReduceAction564
 special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
 					var nodearraylist1 = p.pop
-					p.push(p.go_to(61), node_list)
+					p.push(p.go_to(67), node_list)
 	end
 init do end
 end
-private class ReduceAction361
+private class ReduceAction565
 special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
 					var nodearraylist1 = p.pop
-					p.push(p.go_to(61), node_list)
+					p.push(p.go_to(67), node_list)
 	end
 init do end
 end
-private class ReduceAction362
+private class ReduceAction566
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13093,11 +24441,11 @@ special ReduceAction
 						listnode3
 					)
 					node_list = pdocnode1
-					p.push(p.go_to(62), node_list)
+					p.push(p.go_to(68), node_list)
 	end
 init do end
 end
-private class ReduceAction363
+private class ReduceAction567
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13118,32 +24466,32 @@ special ReduceAction
 						listnode3
 					)
 					node_list = pdocnode1
-					p.push(p.go_to(62), node_list)
+					p.push(p.go_to(68), node_list)
 	end
 init do end
 end
-private class ReduceAction364
+private class ReduceAction568
 special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
 					var nodearraylist1 = p.pop
 					node_list = null
-					p.push(p.go_to(62), node_list)
+					p.push(p.go_to(68), node_list)
 	end
 init do end
 end
-private class ReduceAction365
+private class ReduceAction569
 special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
 					node_list = null
-					p.push(p.go_to(63), node_list)
+					p.push(p.go_to(69), node_list)
 	end
 init do end
 end
-private class ReduceAction366
+private class ReduceAction570
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13152,22 +24500,22 @@ special ReduceAction
 					var pdocnode1 = nodearraylist1
 					assert pdocnode1 isa PDoc
 					node_list = pdocnode1
-					p.push(p.go_to(63), node_list)
+					p.push(p.go_to(69), node_list)
 	end
 init do end
 end
-private class ReduceAction367
+private class ReduceAction571
 special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					p.push(p.go_to(64), node_list)
+					p.push(p.go_to(70), node_list)
 	end
 init do end
 end
-private class ReduceAction368
+private class ReduceAction572
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13175,21 +24523,21 @@ special ReduceAction
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					p.push(p.go_to(64), node_list)
+					p.push(p.go_to(70), node_list)
 	end
 init do end
 end
-private class ReduceAction369
+private class ReduceAction573
 special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
 					var nodearraylist1 = p.pop
-					p.push(p.go_to(64), node_list)
+					p.push(p.go_to(70), node_list)
 	end
 init do end
 end
-private class ReduceAction370
+private class ReduceAction574
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13203,11 +24551,11 @@ special ReduceAction
 						listnode3
 					)
 					node_list = ptypenode1
-					p.push(p.go_to(65), node_list)
+					p.push(p.go_to(71), node_list)
 	end
 init do end
 end
-private class ReduceAction371
+private class ReduceAction575
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13216,11 +24564,113 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(66), node_list)
+					p.push(p.go_to(72), node_list)
 	end
 init do end
 end
-private class ReduceAction372
+private class ReduceAction576
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var tidnode3 = nodearraylist4
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist5 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist6 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(72), node_list)
+	end
+init do end
+end
+private class ReduceAction577
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					)
+					var tidnode3 = nodearraylist1
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist2 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist3 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(72), node_list)
+	end
+init do end
+end
+private class ReduceAction578
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var pexprnode1 = nodearraylist1
+					assert pexprnode1 isa PExpr
+					node_list = pexprnode1
+					p.push(p.go_to(73), node_list)
+	end
+init do end
+end
+private class ReduceAction579
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13257,11 +24707,11 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(66), node_list)
+					p.push(p.go_to(73), node_list)
 	end
 init do end
 end
-private class ReduceAction373
+private class ReduceAction580
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13270,11 +24720,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(67), node_list)
+					p.push(p.go_to(74), node_list)
 	end
 init do end
 end
-private class ReduceAction374
+private class ReduceAction581
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13292,11 +24742,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(67), node_list)
+					p.push(p.go_to(74), node_list)
 	end
 init do end
 end
-private class ReduceAction375
+private class ReduceAction582
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13314,11 +24764,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(67), node_list)
+					p.push(p.go_to(74), node_list)
 	end
 init do end
 end
-private class ReduceAction376
+private class ReduceAction583
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13327,11 +24777,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(68), node_list)
+					p.push(p.go_to(75), node_list)
 	end
 init do end
 end
-private class ReduceAction377
+private class ReduceAction584
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13348,11 +24798,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(68), node_list)
+					p.push(p.go_to(75), node_list)
 	end
 init do end
 end
-private class ReduceAction378
+private class ReduceAction585
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13361,11 +24811,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(69), node_list)
+					p.push(p.go_to(76), node_list)
 	end
 init do end
 end
-private class ReduceAction379
+private class ReduceAction586
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13383,11 +24833,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(69), node_list)
+					p.push(p.go_to(76), node_list)
 	end
 init do end
 end
-private class ReduceAction380
+private class ReduceAction587
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13405,11 +24855,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(69), node_list)
+					p.push(p.go_to(76), node_list)
 	end
 init do end
 end
-private class ReduceAction381
+private class ReduceAction588
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13427,11 +24877,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(69), node_list)
+					p.push(p.go_to(76), node_list)
 	end
 init do end
 end
-private class ReduceAction382
+private class ReduceAction589
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13449,11 +24899,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(69), node_list)
+					p.push(p.go_to(76), node_list)
 	end
 init do end
 end
-private class ReduceAction383
+private class ReduceAction590
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13471,11 +24921,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(69), node_list)
+					p.push(p.go_to(76), node_list)
 	end
 init do end
 end
-private class ReduceAction384
+private class ReduceAction591
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13493,11 +24943,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(69), node_list)
+					p.push(p.go_to(76), node_list)
 	end
 init do end
 end
-private class ReduceAction385
+private class ReduceAction592
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13515,11 +24965,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(69), node_list)
+					p.push(p.go_to(76), node_list)
 	end
 init do end
 end
-private class ReduceAction386
+private class ReduceAction593
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13537,11 +24987,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(69), node_list)
+					p.push(p.go_to(76), node_list)
 	end
 init do end
 end
-private class ReduceAction387
+private class ReduceAction594
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13559,11 +25009,11 @@ special ReduceAction
 						ptypenode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(69), node_list)
+					p.push(p.go_to(76), node_list)
 	end
 init do end
 end
-private class ReduceAction388
+private class ReduceAction595
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13572,11 +25022,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(70), node_list)
+					p.push(p.go_to(77), node_list)
 	end
 init do end
 end
-private class ReduceAction389
+private class ReduceAction596
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13594,11 +25044,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(70), node_list)
+					p.push(p.go_to(77), node_list)
 	end
 init do end
 end
-private class ReduceAction390
+private class ReduceAction597
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13616,11 +25066,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(70), node_list)
+					p.push(p.go_to(77), node_list)
 	end
 init do end
 end
-private class ReduceAction391
+private class ReduceAction598
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13629,11 +25079,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(71), node_list)
+					p.push(p.go_to(78), node_list)
 	end
 init do end
 end
-private class ReduceAction392
+private class ReduceAction599
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13651,11 +25101,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(71), node_list)
+					p.push(p.go_to(78), node_list)
 	end
 init do end
 end
-private class ReduceAction393
+private class ReduceAction600
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13673,11 +25123,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(71), node_list)
+					p.push(p.go_to(78), node_list)
 	end
 init do end
 end
-private class ReduceAction394
+private class ReduceAction601
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13695,11 +25145,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(71), node_list)
+					p.push(p.go_to(78), node_list)
 	end
 init do end
 end
-private class ReduceAction395
+private class ReduceAction602
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13708,11 +25158,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(72), node_list)
+					p.push(p.go_to(79), node_list)
 	end
 init do end
 end
-private class ReduceAction396
+private class ReduceAction603
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13729,11 +25179,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(72), node_list)
+					p.push(p.go_to(79), node_list)
 	end
 init do end
 end
-private class ReduceAction397
+private class ReduceAction604
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13750,11 +25200,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(72), node_list)
+					p.push(p.go_to(79), node_list)
 	end
 init do end
 end
-private class ReduceAction398
+private class ReduceAction605
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13763,11 +25213,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(73), node_list)
+					p.push(p.go_to(80), node_list)
 	end
 init do end
 end
-private class ReduceAction399
+private class ReduceAction606
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13797,11 +25247,11 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(73), node_list)
+					p.push(p.go_to(80), node_list)
 	end
 init do end
 end
-private class ReduceAction400
+private class ReduceAction607
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13819,11 +25269,11 @@ special ReduceAction
 						tattridnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction401
+private class ReduceAction608
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13838,11 +25288,11 @@ special ReduceAction
 						tattridnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction402
+private class ReduceAction609
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13853,6 +25303,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
+					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa PExpr
 					var tidnode3 = nodearraylist4
@@ -13869,14 +25320,15 @@ special ReduceAction
 					var pexprnode1 = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
-						listnode5
+						listnode5,
+						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction403
+private class ReduceAction610
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13884,6 +25336,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
+					var listnode6 = new Array[Object]
 					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
@@ -13900,14 +25353,15 @@ special ReduceAction
 					var pexprnode1 = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
-						listnode5
+						listnode5,
+						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction404
+private class ReduceAction611
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13932,11 +25386,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction405
+private class ReduceAction612
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13964,11 +25418,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction406
+private class ReduceAction613
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13998,11 +25452,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction407
+private class ReduceAction614
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14029,11 +25483,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction408
+private class ReduceAction615
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14068,11 +25522,11 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction409
+private class ReduceAction616
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14084,11 +25538,11 @@ special ReduceAction
 						tkwselfnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction410
+private class ReduceAction617
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14100,11 +25554,11 @@ special ReduceAction
 						tkwtruenode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction411
+private class ReduceAction618
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14116,11 +25570,11 @@ special ReduceAction
 						tkwfalsenode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction412
+private class ReduceAction619
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14132,11 +25586,11 @@ special ReduceAction
 						tkwnullnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction413
+private class ReduceAction620
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14148,11 +25602,11 @@ special ReduceAction
 						tnumbernode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction414
+private class ReduceAction621
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14164,11 +25618,11 @@ special ReduceAction
 						tfloatnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction415
+private class ReduceAction622
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14180,11 +25634,11 @@ special ReduceAction
 						tcharnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction416
+private class ReduceAction623
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14196,11 +25650,11 @@ special ReduceAction
 						tstringnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction417
+private class ReduceAction624
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14209,11 +25663,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction418
+private class ReduceAction625
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14224,11 +25678,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist2
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction419
+private class ReduceAction626
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14255,11 +25709,11 @@ special ReduceAction
 						ptypenode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(74), node_list)
+					p.push(p.go_to(81), node_list)
 	end
 init do end
 end
-private class ReduceAction420
+private class ReduceAction627
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14268,11 +25722,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(75), node_list)
+					p.push(p.go_to(82), node_list)
 	end
 init do end
 end
-private class ReduceAction421
+private class ReduceAction628
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14291,11 +25745,11 @@ special ReduceAction
 						listnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(75), node_list)
+					p.push(p.go_to(82), node_list)
 	end
 init do end
 end
-private class ReduceAction422
+private class ReduceAction629
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14324,11 +25778,11 @@ special ReduceAction
 						listnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(75), node_list)
+					p.push(p.go_to(82), node_list)
 	end
 init do end
 end
-private class ReduceAction423
+private class ReduceAction630
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14336,22 +25790,22 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					node_list = null
-					p.push(p.go_to(75), node_list)
+					p.push(p.go_to(82), node_list)
 	end
 init do end
 end
-private class ReduceAction424
+private class ReduceAction631
 special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
 					var nodearraylist1 = p.pop
 					node_list = null
-					p.push(p.go_to(75), node_list)
+					p.push(p.go_to(82), node_list)
 	end
 init do end
 end
-private class ReduceAction425
+private class ReduceAction632
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14360,11 +25814,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
-private class ReduceAction426
+private class ReduceAction633
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14373,11 +25827,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
-private class ReduceAction427
+private class ReduceAction634
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14390,11 +25844,11 @@ special ReduceAction
 						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
-private class ReduceAction428
+private class ReduceAction635
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14410,11 +25864,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
-private class ReduceAction429
+private class ReduceAction636
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14423,14 +25877,35 @@ special ReduceAction
 					var tkwbreaknode2 = nodearraylist1
 					assert tkwbreaknode2 isa TKwbreak
 					var pexprnode1 = new ABreakExpr.init_abreakexpr(
-						tkwbreaknode2
+						tkwbreaknode2,
+						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
-private class ReduceAction430
+private class ReduceAction637
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwbreaknode2 = nodearraylist1
+					assert tkwbreaknode2 isa TKwbreak
+					var pexprnode3 = nodearraylist2
+					assert pexprnode3 isa PExpr
+					var pexprnode1 = new ABreakExpr.init_abreakexpr(
+						tkwbreaknode2,
+						pexprnode3
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(83), node_list)
+	end
+init do end
+end
+private class ReduceAction638
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14442,11 +25917,11 @@ special ReduceAction
 						tkwabortnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
-private class ReduceAction431
+private class ReduceAction639
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14455,14 +25930,35 @@ special ReduceAction
 					var tkwcontinuenode2 = nodearraylist1
 					assert tkwcontinuenode2 isa TKwcontinue
 					var pexprnode1 = new AContinueExpr.init_acontinueexpr(
-						tkwcontinuenode2
+						tkwcontinuenode2,
+						null
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
-private class ReduceAction432
+private class ReduceAction640
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwcontinuenode2 = nodearraylist1
+					assert tkwcontinuenode2 isa TKwcontinue
+					var pexprnode3 = nodearraylist2
+					assert pexprnode3 isa PExpr
+					var pexprnode1 = new AContinueExpr.init_acontinueexpr(
+						tkwcontinuenode2,
+						pexprnode3
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(83), node_list)
+	end
+init do end
+end
+private class ReduceAction641
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14471,11 +25967,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
-private class ReduceAction433
+private class ReduceAction642
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14484,11 +25980,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
-private class ReduceAction434
+private class ReduceAction643
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14497,11 +25993,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
-private class ReduceAction435
+private class ReduceAction644
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14510,11 +26006,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
-private class ReduceAction436
+private class ReduceAction645
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14523,11 +26019,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
-private class ReduceAction437
+private class ReduceAction646
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14538,6 +26034,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
+					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa PExpr
 					var tidnode3 = nodearraylist4
@@ -14554,14 +26051,15 @@ special ReduceAction
 					var pexprnode1 = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
-						listnode5
+						listnode5,
+						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
-private class ReduceAction438
+private class ReduceAction647
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14569,6 +26067,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
+					var listnode6 = new Array[Object]
 					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
@@ -14585,14 +26084,104 @@ special ReduceAction
 					var pexprnode1 = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
-						listnode5
+						listnode5,
+						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
-private class ReduceAction439
+private class ReduceAction648
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var tidnode3 = nodearraylist4
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist5 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist6 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(83), node_list)
+	end
+init do end
+end
+private class ReduceAction649
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					)
+					var tidnode3 = nodearraylist1
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist2 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist3 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(83), node_list)
+	end
+init do end
+end
+private class ReduceAction650
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14617,11 +26206,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
-private class ReduceAction440
+private class ReduceAction651
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14649,11 +26238,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
-private class ReduceAction441
+private class ReduceAction652
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14683,11 +26272,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
-private class ReduceAction442
+private class ReduceAction653
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14714,11 +26303,577 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(76), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
-private class ReduceAction443
+private class ReduceAction654
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var listnode2 = new Array[Object]
+					var pclosuredefnode1 = nodearraylist1
+					assert pclosuredefnode1 isa PClosureDef
+					if pclosuredefnode1 != null then
+						listnode2.add(pclosuredefnode1)
+					end
+					node_list = listnode2
+					p.push(p.go_to(84), node_list)
+	end
+init do end
+end
+private class ReduceAction655
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode3 = new Array[Object]
+					var pclosuredefnode1 = nodearraylist1
+					assert pclosuredefnode1 isa PClosureDef
+					var listnode2 = nodearraylist2 
+					assert listnode2 isa Array[Object]
+					if pclosuredefnode1 != null then
+						listnode3.add(pclosuredefnode1)
+					end
+					if listnode2 != null then
+						if listnode3.is_empty then
+							listnode3 = listnode2
+						else
+							listnode3.append(listnode2)
+						end
+					end
+					node_list = listnode3
+					p.push(p.go_to(84), node_list)
+	end
+init do end
+end
+private class ReduceAction656
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode3 = new Array[Object]
+					var tkwwithnode2 = nodearraylist1
+					assert tkwwithnode2 isa TKwwith
+					var tkwdonode4 = nodearraylist2
+					assert tkwdonode4 isa TKwdo
+					var pexprnode5 = nodearraylist3
+					assert pexprnode5 isa PExpr
+					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+						tkwwithnode2,
+						listnode3,
+						tkwdonode4,
+						pexprnode5
+					)
+					node_list = pclosuredefnode1
+					p.push(p.go_to(85), node_list)
+	end
+init do end
+end
+private class ReduceAction657
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode4 = new Array[Object]
+					var tkwwithnode2 = nodearraylist1
+					assert tkwwithnode2 isa TKwwith
+					var listnode3 = nodearraylist2 
+					assert listnode3 isa Array[Object]
+					if listnode3 != null then
+						if listnode4.is_empty then
+							listnode4 = listnode3
+						else
+							listnode4.append(listnode3)
+						end
+					end
+					var tkwdonode5 = nodearraylist3
+					assert tkwdonode5 isa TKwdo
+					var pexprnode6 = nodearraylist4
+					assert pexprnode6 isa PExpr
+					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+						tkwwithnode2,
+						listnode4,
+						tkwdonode5,
+						pexprnode6
+					)
+					node_list = pclosuredefnode1
+					p.push(p.go_to(85), node_list)
+	end
+init do end
+end
+private class ReduceAction658
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwvarnode2 = nodearraylist1
+					assert tkwvarnode2 isa TKwvar
+					var tidnode3 = nodearraylist2
+					assert tidnode3 isa TId
+					var pexprnode1 = new AVardeclExpr.init_avardeclexpr(
+						tkwvarnode2,
+						tidnode3,
+						null,
+						null,
+						null
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(86), node_list)
+	end
+init do end
+end
+private class ReduceAction659
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwvarnode2 = nodearraylist1
+					assert tkwvarnode2 isa TKwvar
+					var tidnode3 = nodearraylist2
+					assert tidnode3 isa TId
+					var ptypenode4 = nodearraylist3
+					assert ptypenode4 isa PType
+					var pexprnode1 = new AVardeclExpr.init_avardeclexpr(
+						tkwvarnode2,
+						tidnode3,
+						ptypenode4,
+						null,
+						null
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(86), node_list)
+	end
+init do end
+end
+private class ReduceAction660
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwvarnode2 = nodearraylist1
+					assert tkwvarnode2 isa TKwvar
+					var tidnode3 = nodearraylist2
+					assert tidnode3 isa TId
+					var tassignnode5 = nodearraylist3
+					assert tassignnode5 isa TAssign
+					var pexprnode6 = nodearraylist5
+					assert pexprnode6 isa PExpr
+					var pexprnode1 = new AVardeclExpr.init_avardeclexpr(
+						tkwvarnode2,
+						tidnode3,
+						null,
+						tassignnode5,
+						pexprnode6
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(86), node_list)
+	end
+init do end
+end
+private class ReduceAction661
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwvarnode2 = nodearraylist1
+					assert tkwvarnode2 isa TKwvar
+					var tidnode3 = nodearraylist2
+					assert tidnode3 isa TId
+					var ptypenode4 = nodearraylist3
+					assert ptypenode4 isa PType
+					var tassignnode5 = nodearraylist4
+					assert tassignnode5 isa TAssign
+					var pexprnode6 = nodearraylist6
+					assert pexprnode6 isa PExpr
+					var pexprnode1 = new AVardeclExpr.init_avardeclexpr(
+						tkwvarnode2,
+						tidnode3,
+						ptypenode4,
+						tassignnode5,
+						pexprnode6
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(86), node_list)
+	end
+init do end
+end
+private class ReduceAction662
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var tattridnode3 = nodearraylist4
+					assert tattridnode3 isa TAttrid
+					var tassignnode4 = nodearraylist5
+					assert tassignnode4 isa TAssign
+					var pexprnode5 = nodearraylist6
+					assert pexprnode5 isa PExpr
+					var pexprnode1 = new AAttrAssignExpr.init_aattrassignexpr(
+						pexprnode2,
+						tattridnode3,
+						tassignnode4,
+						pexprnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(87), node_list)
+	end
+init do end
+end
+private class ReduceAction663
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					)
+					var tattridnode3 = nodearraylist1
+					assert tattridnode3 isa TAttrid
+					var tassignnode4 = nodearraylist2
+					assert tassignnode4 isa TAssign
+					var pexprnode5 = nodearraylist3
+					assert pexprnode5 isa PExpr
+					var pexprnode1 = new AAttrAssignExpr.init_aattrassignexpr(
+						pexprnode2,
+						tattridnode3,
+						tassignnode4,
+						pexprnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(87), node_list)
+	end
+init do end
+end
+private class ReduceAction664
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var tidnode3 = nodearraylist4
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist5 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var tassignnode6 = nodearraylist6
+					assert tassignnode6 isa TAssign
+					var pexprnode7 = nodearraylist7
+					assert pexprnode7 isa PExpr
+					var pexprnode1 = new ACallAssignExpr.init_acallassignexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						tassignnode6,
+						pexprnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(87), node_list)
+	end
+init do end
+end
+private class ReduceAction665
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					)
+					var tidnode3 = nodearraylist1
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist2 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var tassignnode6 = nodearraylist3
+					assert tassignnode6 isa TAssign
+					var pexprnode7 = nodearraylist4
+					assert pexprnode7 isa PExpr
+					var pexprnode1 = new ACallAssignExpr.init_acallassignexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						tassignnode6,
+						pexprnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(87), node_list)
+	end
+init do end
+end
+private class ReduceAction666
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode4 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var listnode3 = nodearraylist2 
+					assert listnode3 isa Array[Object]
+					if listnode3 != null then
+						if listnode4.is_empty then
+							listnode4 = listnode3
+						else
+							listnode4.append(listnode3)
+						end
+					end
+					var tassignnode5 = nodearraylist3
+					assert tassignnode5 isa TAssign
+					var pexprnode6 = nodearraylist4
+					assert pexprnode6 isa PExpr
+					var pexprnode1 = new ABraAssignExpr.init_abraassignexpr(
+						pexprnode2,
+						listnode4,
+						tassignnode5,
+						pexprnode6
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(87), node_list)
+	end
+init do end
+end
+private class ReduceAction667
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var tattridnode3 = nodearraylist4
+					assert tattridnode3 isa TAttrid
+					var passignopnode4 = nodearraylist5
+					assert passignopnode4 isa PAssignOp
+					var pexprnode5 = nodearraylist6
+					assert pexprnode5 isa PExpr
+					var pexprnode1 = new AAttrReassignExpr.init_aattrreassignexpr(
+						pexprnode2,
+						tattridnode3,
+						passignopnode4,
+						pexprnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(87), node_list)
+	end
+init do end
+end
+private class ReduceAction668
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					)
+					var tattridnode3 = nodearraylist1
+					assert tattridnode3 isa TAttrid
+					var passignopnode4 = nodearraylist2
+					assert passignopnode4 isa PAssignOp
+					var pexprnode5 = nodearraylist3
+					assert pexprnode5 isa PExpr
+					var pexprnode1 = new AAttrReassignExpr.init_aattrreassignexpr(
+						pexprnode2,
+						tattridnode3,
+						passignopnode4,
+						pexprnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(87), node_list)
+	end
+init do end
+end
+private class ReduceAction669
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var tidnode3 = nodearraylist4
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist5 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var passignopnode6 = nodearraylist6
+					assert passignopnode6 isa PAssignOp
+					var pexprnode7 = nodearraylist7
+					assert pexprnode7 isa PExpr
+					var pexprnode1 = new ACallReassignExpr.init_acallreassignexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						passignopnode6,
+						pexprnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(87), node_list)
+	end
+init do end
+end
+private class ReduceAction670
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					)
+					var tidnode3 = nodearraylist1
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist2 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var passignopnode6 = nodearraylist3
+					assert passignopnode6 isa PAssignOp
+					var pexprnode7 = nodearraylist4
+					assert pexprnode7 isa PExpr
+					var pexprnode1 = new ACallReassignExpr.init_acallreassignexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						passignopnode6,
+						pexprnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(87), node_list)
+	end
+init do end
+end
+private class ReduceAction671
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode4 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var listnode3 = nodearraylist2 
+					assert listnode3 isa Array[Object]
+					if listnode3 != null then
+						if listnode4.is_empty then
+							listnode4 = listnode3
+						else
+							listnode4.append(listnode3)
+						end
+					end
+					var passignopnode5 = nodearraylist3
+					assert passignopnode5 isa PAssignOp
+					var pexprnode6 = nodearraylist4
+					assert pexprnode6 isa PExpr
+					var pexprnode1 = new ABraReassignExpr.init_abrareassignexpr(
+						pexprnode2,
+						listnode4,
+						passignopnode5,
+						pexprnode6
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(87), node_list)
+	end
+init do end
+end
+private class ReduceAction672
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14734,11 +26889,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(77), node_list)
+					p.push(p.go_to(88), node_list)
 	end
 init do end
 end
-private class ReduceAction444
+private class ReduceAction673
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14766,11 +26921,11 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(78), node_list)
+					p.push(p.go_to(89), node_list)
 	end
 init do end
 end
-private class ReduceAction445
+private class ReduceAction674
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14796,11 +26951,11 @@ special ReduceAction
 						pexprnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(79), node_list)
+					p.push(p.go_to(90), node_list)
 	end
 init do end
 end
-private class ReduceAction446
+private class ReduceAction675
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14821,11 +26976,300 @@ special ReduceAction
 						pexprnode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(80), node_list)
+					p.push(p.go_to(91), node_list)
 	end
 init do end
 end
-private class ReduceAction447
+private class ReduceAction676
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwassertnode2 = nodearraylist1
+					assert tkwassertnode2 isa TKwassert
+					var pexprnode4 = nodearraylist2
+					assert pexprnode4 isa PExpr
+					var pexprnode1 = new AAssertExpr.init_aassertexpr(
+						tkwassertnode2,
+						null,
+						pexprnode4
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(92), node_list)
+	end
+init do end
+end
+private class ReduceAction677
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwassertnode2 = nodearraylist1
+					assert tkwassertnode2 isa TKwassert
+					var tidnode3 = nodearraylist2
+					assert tidnode3 isa TId
+					var pexprnode4 = nodearraylist3
+					assert pexprnode4 isa PExpr
+					var pexprnode1 = new AAssertExpr.init_aassertexpr(
+						tkwassertnode2,
+						tidnode3,
+						pexprnode4
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(92), node_list)
+	end
+init do end
+end
+private class ReduceAction678
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var pexprnode1 = nodearraylist1
+					assert pexprnode1 isa PExpr
+					node_list = pexprnode1
+					p.push(p.go_to(93), node_list)
+	end
+init do end
+end
+private class ReduceAction679
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var tidnode3 = nodearraylist4
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist5 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist6 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(93), node_list)
+	end
+init do end
+end
+private class ReduceAction680
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					)
+					var tidnode3 = nodearraylist1
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist2 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist3 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(93), node_list)
+	end
+init do end
+end
+private class ReduceAction681
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode4 = new Array[Object]
+					var listnode6 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var listnode3 = nodearraylist2 
+					assert listnode3 isa Array[Object]
+					if listnode3 != null then
+						if listnode4.is_empty then
+							listnode4 = listnode3
+						else
+							listnode4.append(listnode3)
+						end
+					end
+					var listnode5 = nodearraylist3 
+					assert listnode5 isa Array[Object]
+					if listnode5 != null then
+						if listnode6.is_empty then
+							listnode6 = listnode5
+						else
+							listnode6.append(listnode5)
+						end
+					end
+					var pexprnode1 = new ABraExpr.init_abraexpr(
+						pexprnode2,
+						listnode4,
+						listnode6
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(93), node_list)
+	end
+init do end
+end
+private class ReduceAction682
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var pexprnode1 = nodearraylist1
+					assert pexprnode1 isa PExpr
+					node_list = pexprnode1
+					p.push(p.go_to(94), node_list)
+	end
+init do end
+end
+private class ReduceAction683
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var tidnode3 = nodearraylist4
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist5 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist6 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(94), node_list)
+	end
+init do end
+end
+private class ReduceAction684
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					)
+					var tidnode3 = nodearraylist1
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist2 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist3 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(94), node_list)
+	end
+init do end
+end
+private class ReduceAction685
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14839,11 +27283,11 @@ special ReduceAction
 						listnode3
 					)
 					node_list = ptypenode1
-					p.push(p.go_to(81), node_list)
+					p.push(p.go_to(95), node_list)
 	end
 init do end
 end
-private class ReduceAction448
+private class ReduceAction686
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14871,11 +27315,11 @@ special ReduceAction
 						listnode4
 					)
 					node_list = ptypenode1
-					p.push(p.go_to(81), node_list)
+					p.push(p.go_to(95), node_list)
 	end
 init do end
 end
-private class ReduceAction449
+private class ReduceAction687
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14884,11 +27328,113 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(82), node_list)
+					p.push(p.go_to(96), node_list)
 	end
 init do end
 end
-private class ReduceAction450
+private class ReduceAction688
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var tidnode3 = nodearraylist4
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist5 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist6 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(96), node_list)
+	end
+init do end
+end
+private class ReduceAction689
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					)
+					var tidnode3 = nodearraylist1
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist2 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist3 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(96), node_list)
+	end
+init do end
+end
+private class ReduceAction690
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var pexprnode1 = nodearraylist1
+					assert pexprnode1 isa PExpr
+					node_list = pexprnode1
+					p.push(p.go_to(97), node_list)
+	end
+init do end
+end
+private class ReduceAction691
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14925,11 +27471,11 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(82), node_list)
+					p.push(p.go_to(97), node_list)
 	end
 init do end
 end
-private class ReduceAction451
+private class ReduceAction692
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14938,11 +27484,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(83), node_list)
+					p.push(p.go_to(98), node_list)
 	end
 init do end
 end
-private class ReduceAction452
+private class ReduceAction693
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14960,11 +27506,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(83), node_list)
+					p.push(p.go_to(98), node_list)
 	end
 init do end
 end
-private class ReduceAction453
+private class ReduceAction694
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14982,11 +27528,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(83), node_list)
+					p.push(p.go_to(98), node_list)
 	end
 init do end
 end
-private class ReduceAction454
+private class ReduceAction695
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14995,11 +27541,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(84), node_list)
+					p.push(p.go_to(99), node_list)
 	end
 init do end
 end
-private class ReduceAction455
+private class ReduceAction696
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15016,11 +27562,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(84), node_list)
+					p.push(p.go_to(99), node_list)
 	end
 init do end
 end
-private class ReduceAction456
+private class ReduceAction697
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15029,11 +27575,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(85), node_list)
+					p.push(p.go_to(100), node_list)
 	end
 init do end
 end
-private class ReduceAction457
+private class ReduceAction698
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15051,11 +27597,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(85), node_list)
+					p.push(p.go_to(100), node_list)
 	end
 init do end
 end
-private class ReduceAction458
+private class ReduceAction699
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15073,11 +27619,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(85), node_list)
+					p.push(p.go_to(100), node_list)
 	end
 init do end
 end
-private class ReduceAction459
+private class ReduceAction700
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15095,11 +27641,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(85), node_list)
+					p.push(p.go_to(100), node_list)
 	end
 init do end
 end
-private class ReduceAction460
+private class ReduceAction701
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15117,11 +27663,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(85), node_list)
+					p.push(p.go_to(100), node_list)
 	end
 init do end
 end
-private class ReduceAction461
+private class ReduceAction702
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15139,11 +27685,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(85), node_list)
+					p.push(p.go_to(100), node_list)
 	end
 init do end
 end
-private class ReduceAction462
+private class ReduceAction703
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15161,11 +27707,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(85), node_list)
+					p.push(p.go_to(100), node_list)
 	end
 init do end
 end
-private class ReduceAction463
+private class ReduceAction704
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15183,11 +27729,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(85), node_list)
+					p.push(p.go_to(100), node_list)
 	end
 init do end
 end
-private class ReduceAction464
+private class ReduceAction705
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15205,11 +27751,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(85), node_list)
+					p.push(p.go_to(100), node_list)
 	end
 init do end
 end
-private class ReduceAction465
+private class ReduceAction706
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15227,11 +27773,11 @@ special ReduceAction
 						ptypenode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(85), node_list)
+					p.push(p.go_to(100), node_list)
 	end
 init do end
 end
-private class ReduceAction466
+private class ReduceAction707
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15240,11 +27786,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(86), node_list)
+					p.push(p.go_to(101), node_list)
 	end
 init do end
 end
-private class ReduceAction467
+private class ReduceAction708
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15262,11 +27808,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(86), node_list)
+					p.push(p.go_to(101), node_list)
 	end
 init do end
 end
-private class ReduceAction468
+private class ReduceAction709
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15284,11 +27830,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(86), node_list)
+					p.push(p.go_to(101), node_list)
 	end
 init do end
 end
-private class ReduceAction469
+private class ReduceAction710
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15297,11 +27843,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(87), node_list)
+					p.push(p.go_to(102), node_list)
 	end
 init do end
 end
-private class ReduceAction470
+private class ReduceAction711
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15319,11 +27865,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(87), node_list)
+					p.push(p.go_to(102), node_list)
 	end
 init do end
 end
-private class ReduceAction471
+private class ReduceAction712
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15341,11 +27887,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(87), node_list)
+					p.push(p.go_to(102), node_list)
 	end
 init do end
 end
-private class ReduceAction472
+private class ReduceAction713
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15363,11 +27909,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(87), node_list)
+					p.push(p.go_to(102), node_list)
 	end
 init do end
 end
-private class ReduceAction473
+private class ReduceAction714
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15376,11 +27922,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(88), node_list)
+					p.push(p.go_to(103), node_list)
 	end
 init do end
 end
-private class ReduceAction474
+private class ReduceAction715
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15397,11 +27943,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(88), node_list)
+					p.push(p.go_to(103), node_list)
 	end
 init do end
 end
-private class ReduceAction475
+private class ReduceAction716
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15418,11 +27964,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(88), node_list)
+					p.push(p.go_to(103), node_list)
 	end
 init do end
 end
-private class ReduceAction476
+private class ReduceAction717
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15431,11 +27977,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(89), node_list)
+					p.push(p.go_to(104), node_list)
 	end
 init do end
 end
-private class ReduceAction477
+private class ReduceAction718
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15465,11 +28011,11 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(89), node_list)
+					p.push(p.go_to(104), node_list)
 	end
 init do end
 end
-private class ReduceAction478
+private class ReduceAction719
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15487,11 +28033,11 @@ special ReduceAction
 						tattridnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(105), node_list)
 	end
 init do end
 end
-private class ReduceAction479
+private class ReduceAction720
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15506,11 +28052,11 @@ special ReduceAction
 						tattridnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(105), node_list)
 	end
 init do end
 end
-private class ReduceAction480
+private class ReduceAction721
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15521,6 +28067,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
+					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa PExpr
 					var tidnode3 = nodearraylist4
@@ -15537,14 +28084,15 @@ special ReduceAction
 					var pexprnode1 = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
-						listnode5
+						listnode5,
+						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(105), node_list)
 	end
 init do end
 end
-private class ReduceAction481
+private class ReduceAction722
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15552,6 +28100,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
+					var listnode6 = new Array[Object]
 					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
@@ -15568,14 +28117,15 @@ special ReduceAction
 					var pexprnode1 = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
-						listnode5
+						listnode5,
+						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(105), node_list)
 	end
 init do end
 end
-private class ReduceAction482
+private class ReduceAction723
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15600,11 +28150,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(105), node_list)
 	end
 init do end
 end
-private class ReduceAction483
+private class ReduceAction724
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15632,11 +28182,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(105), node_list)
 	end
 init do end
 end
-private class ReduceAction484
+private class ReduceAction725
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15666,11 +28216,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(105), node_list)
 	end
 init do end
 end
-private class ReduceAction485
+private class ReduceAction726
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15697,11 +28247,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(105), node_list)
 	end
 init do end
 end
-private class ReduceAction486
+private class ReduceAction727
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15736,11 +28286,11 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(105), node_list)
 	end
 init do end
 end
-private class ReduceAction487
+private class ReduceAction728
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15752,11 +28302,11 @@ special ReduceAction
 						tkwselfnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(105), node_list)
 	end
 init do end
 end
-private class ReduceAction488
+private class ReduceAction729
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15768,11 +28318,11 @@ special ReduceAction
 						tkwtruenode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(105), node_list)
 	end
 init do end
 end
-private class ReduceAction489
+private class ReduceAction730
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15784,11 +28334,11 @@ special ReduceAction
 						tkwfalsenode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(105), node_list)
 	end
 init do end
 end
-private class ReduceAction490
+private class ReduceAction731
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15800,11 +28350,11 @@ special ReduceAction
 						tkwnullnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(105), node_list)
 	end
 init do end
 end
-private class ReduceAction491
+private class ReduceAction732
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15816,11 +28366,11 @@ special ReduceAction
 						tnumbernode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(105), node_list)
 	end
 init do end
 end
-private class ReduceAction492
+private class ReduceAction733
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15832,11 +28382,11 @@ special ReduceAction
 						tfloatnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(105), node_list)
 	end
 init do end
 end
-private class ReduceAction493
+private class ReduceAction734
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15848,11 +28398,11 @@ special ReduceAction
 						tcharnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(105), node_list)
 	end
 init do end
 end
-private class ReduceAction494
+private class ReduceAction735
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15864,11 +28414,11 @@ special ReduceAction
 						tstringnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(105), node_list)
 	end
 init do end
 end
-private class ReduceAction495
+private class ReduceAction736
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15877,11 +28427,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(105), node_list)
 	end
 init do end
 end
-private class ReduceAction496
+private class ReduceAction737
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15908,11 +28458,11 @@ special ReduceAction
 						ptypenode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(90), node_list)
+					p.push(p.go_to(105), node_list)
 	end
 init do end
 end
-private class ReduceAction497
+private class ReduceAction738
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15926,11 +28476,11 @@ special ReduceAction
 						listnode3
 					)
 					node_list = ptypenode1
-					p.push(p.go_to(91), node_list)
+					p.push(p.go_to(106), node_list)
 	end
 init do end
 end
-private class ReduceAction498
+private class ReduceAction739
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15939,11 +28489,113 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(92), node_list)
+					p.push(p.go_to(107), node_list)
 	end
 init do end
 end
-private class ReduceAction499
+private class ReduceAction740
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var tidnode3 = nodearraylist4
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist5 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist6 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(107), node_list)
+	end
+init do end
+end
+private class ReduceAction741
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					)
+					var tidnode3 = nodearraylist1
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist2 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist3 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(107), node_list)
+	end
+init do end
+end
+private class ReduceAction742
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var pexprnode1 = nodearraylist1
+					assert pexprnode1 isa PExpr
+					node_list = pexprnode1
+					p.push(p.go_to(108), node_list)
+	end
+init do end
+end
+private class ReduceAction743
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15980,11 +28632,11 @@ special ReduceAction
 						pexprnode7
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(92), node_list)
+					p.push(p.go_to(108), node_list)
 	end
 init do end
 end
-private class ReduceAction500
+private class ReduceAction744
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15993,11 +28645,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(109), node_list)
 	end
 init do end
 end
-private class ReduceAction501
+private class ReduceAction745
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16015,11 +28667,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(109), node_list)
 	end
 init do end
 end
-private class ReduceAction502
+private class ReduceAction746
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16037,11 +28689,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(93), node_list)
+					p.push(p.go_to(109), node_list)
 	end
 init do end
 end
-private class ReduceAction503
+private class ReduceAction747
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16050,11 +28702,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(94), node_list)
+					p.push(p.go_to(110), node_list)
 	end
 init do end
 end
-private class ReduceAction504
+private class ReduceAction748
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16071,11 +28723,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(94), node_list)
+					p.push(p.go_to(110), node_list)
 	end
 init do end
 end
-private class ReduceAction505
+private class ReduceAction749
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16084,11 +28736,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(111), node_list)
 	end
 init do end
 end
-private class ReduceAction506
+private class ReduceAction750
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16106,11 +28758,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(111), node_list)
 	end
 init do end
 end
-private class ReduceAction507
+private class ReduceAction751
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16128,11 +28780,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(111), node_list)
 	end
 init do end
 end
-private class ReduceAction508
+private class ReduceAction752
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16150,11 +28802,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(111), node_list)
 	end
 init do end
 end
-private class ReduceAction509
+private class ReduceAction753
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16172,11 +28824,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(111), node_list)
 	end
 init do end
 end
-private class ReduceAction510
+private class ReduceAction754
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16194,11 +28846,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(111), node_list)
 	end
 init do end
 end
-private class ReduceAction511
+private class ReduceAction755
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16216,11 +28868,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(111), node_list)
 	end
 init do end
 end
-private class ReduceAction512
+private class ReduceAction756
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16238,11 +28890,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(111), node_list)
 	end
 init do end
 end
-private class ReduceAction513
+private class ReduceAction757
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16260,11 +28912,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(111), node_list)
 	end
 init do end
 end
-private class ReduceAction514
+private class ReduceAction758
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16282,11 +28934,11 @@ special ReduceAction
 						ptypenode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(95), node_list)
+					p.push(p.go_to(111), node_list)
 	end
 init do end
 end
-private class ReduceAction515
+private class ReduceAction759
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16295,11 +28947,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(96), node_list)
+					p.push(p.go_to(112), node_list)
 	end
 init do end
 end
-private class ReduceAction516
+private class ReduceAction760
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16317,11 +28969,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(96), node_list)
+					p.push(p.go_to(112), node_list)
 	end
 init do end
 end
-private class ReduceAction517
+private class ReduceAction761
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16339,11 +28991,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(96), node_list)
+					p.push(p.go_to(112), node_list)
 	end
 init do end
 end
-private class ReduceAction518
+private class ReduceAction762
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16352,11 +29004,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(97), node_list)
+					p.push(p.go_to(113), node_list)
 	end
 init do end
 end
-private class ReduceAction519
+private class ReduceAction763
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16374,11 +29026,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(97), node_list)
+					p.push(p.go_to(113), node_list)
 	end
 init do end
 end
-private class ReduceAction520
+private class ReduceAction764
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16396,11 +29048,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(97), node_list)
+					p.push(p.go_to(113), node_list)
 	end
 init do end
 end
-private class ReduceAction521
+private class ReduceAction765
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16418,11 +29070,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(97), node_list)
+					p.push(p.go_to(113), node_list)
 	end
 init do end
 end
-private class ReduceAction522
+private class ReduceAction766
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16431,11 +29083,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(98), node_list)
+					p.push(p.go_to(114), node_list)
 	end
 init do end
 end
-private class ReduceAction523
+private class ReduceAction767
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16452,11 +29104,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(98), node_list)
+					p.push(p.go_to(114), node_list)
 	end
 init do end
 end
-private class ReduceAction524
+private class ReduceAction768
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16473,11 +29125,11 @@ special ReduceAction
 						pexprnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(98), node_list)
+					p.push(p.go_to(114), node_list)
 	end
 init do end
 end
-private class ReduceAction525
+private class ReduceAction769
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16486,11 +29138,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(99), node_list)
+					p.push(p.go_to(115), node_list)
 	end
 init do end
 end
-private class ReduceAction526
+private class ReduceAction770
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16520,11 +29172,11 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(99), node_list)
+					p.push(p.go_to(115), node_list)
 	end
 init do end
 end
-private class ReduceAction527
+private class ReduceAction771
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16540,11 +29192,11 @@ special ReduceAction
 						tattridnode3
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(116), node_list)
 	end
 init do end
 end
-private class ReduceAction528
+private class ReduceAction772
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16553,6 +29205,7 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
+					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
 					assert pexprnode2 isa PExpr
 					var tidnode3 = nodearraylist2
@@ -16569,14 +29222,15 @@ special ReduceAction
 					var pexprnode1 = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
-						listnode5
+						listnode5,
+						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(116), node_list)
 	end
 init do end
 end
-private class ReduceAction529
+private class ReduceAction773
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16601,11 +29255,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(116), node_list)
 	end
 init do end
 end
-private class ReduceAction530
+private class ReduceAction774
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16633,11 +29287,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(116), node_list)
 	end
 init do end
 end
-private class ReduceAction531
+private class ReduceAction775
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16665,11 +29319,11 @@ special ReduceAction
 						listnode5
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(116), node_list)
 	end
 init do end
 end
-private class ReduceAction532
+private class ReduceAction776
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16704,11 +29358,11 @@ special ReduceAction
 						listnode6
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(116), node_list)
 	end
 init do end
 end
-private class ReduceAction533
+private class ReduceAction777
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16720,11 +29374,11 @@ special ReduceAction
 						tkwselfnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(116), node_list)
 	end
 init do end
 end
-private class ReduceAction534
+private class ReduceAction778
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16736,11 +29390,11 @@ special ReduceAction
 						tkwtruenode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(116), node_list)
 	end
 init do end
 end
-private class ReduceAction535
+private class ReduceAction779
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16752,11 +29406,11 @@ special ReduceAction
 						tkwfalsenode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(116), node_list)
 	end
 init do end
 end
-private class ReduceAction536
+private class ReduceAction780
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16768,11 +29422,11 @@ special ReduceAction
 						tkwnullnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(116), node_list)
 	end
 init do end
 end
-private class ReduceAction537
+private class ReduceAction781
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16784,11 +29438,11 @@ special ReduceAction
 						tnumbernode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(116), node_list)
 	end
 init do end
 end
-private class ReduceAction538
+private class ReduceAction782
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16800,11 +29454,11 @@ special ReduceAction
 						tfloatnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(116), node_list)
 	end
 init do end
 end
-private class ReduceAction539
+private class ReduceAction783
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16816,11 +29470,11 @@ special ReduceAction
 						tcharnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(116), node_list)
 	end
 init do end
 end
-private class ReduceAction540
+private class ReduceAction784
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16832,11 +29486,11 @@ special ReduceAction
 						tstringnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(116), node_list)
 	end
 init do end
 end
-private class ReduceAction541
+private class ReduceAction785
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16845,11 +29499,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(116), node_list)
 	end
 init do end
 end
-private class ReduceAction542
+private class ReduceAction786
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16876,11 +29530,11 @@ special ReduceAction
 						ptypenode4
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(100), node_list)
+					p.push(p.go_to(116), node_list)
 	end
 init do end
 end
-private class ReduceAction543
+private class ReduceAction787
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16891,11 +29545,11 @@ special ReduceAction
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
-					p.push(p.go_to(101), node_list)
+					p.push(p.go_to(117), node_list)
 	end
 init do end
 end
-private class ReduceAction544
+private class ReduceAction788
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16903,11 +29557,215 @@ special ReduceAction
 					var pexprnode1 = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(101), node_list)
+					p.push(p.go_to(117), node_list)
 	end
 init do end
 end
-private class ReduceAction545
+private class ReduceAction789
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var pexprnode1 = nodearraylist1
+					assert pexprnode1 isa PExpr
+					node_list = pexprnode1
+					p.push(p.go_to(118), node_list)
+	end
+init do end
+end
+private class ReduceAction790
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var tidnode3 = nodearraylist4
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist5 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist6 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(118), node_list)
+	end
+init do end
+end
+private class ReduceAction791
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					)
+					var tidnode3 = nodearraylist1
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist2 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist3 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(118), node_list)
+	end
+init do end
+end
+private class ReduceAction792
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var pexprnode1 = nodearraylist1
+					assert pexprnode1 isa PExpr
+					node_list = pexprnode1
+					p.push(p.go_to(119), node_list)
+	end
+init do end
+end
+private class ReduceAction793
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var tidnode3 = nodearraylist4
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist5 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist6 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(119), node_list)
+	end
+init do end
+end
+private class ReduceAction794
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var listnode7 = new Array[Object]
+					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					)
+					var tidnode3 = nodearraylist1
+					assert tidnode3 isa TId
+					var listnode4 = nodearraylist2 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var listnode6 = nodearraylist3 
+					assert listnode6 isa Array[Object]
+					if listnode6 != null then
+						if listnode7.is_empty then
+							listnode7 = listnode6
+						else
+							listnode7.append(listnode6)
+						end
+					end
+					var pexprnode1 = new ACallExpr.init_acallexpr(
+						pexprnode2,
+						tidnode3,
+						listnode5,
+						listnode7
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(119), node_list)
+	end
+init do end
+end
+private class ReduceAction795
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16920,11 +29778,11 @@ special ReduceAction
 						listnode2.add(pimportnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(102), node_list)
+					p.push(p.go_to(120), node_list)
 	end
 init do end
 end
-private class ReduceAction546
+private class ReduceAction796
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16947,11 +29805,11 @@ special ReduceAction
 						listnode3.add(pimportnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(102), node_list)
+					p.push(p.go_to(120), node_list)
 	end
 init do end
 end
-private class ReduceAction547
+private class ReduceAction797
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16964,11 +29822,11 @@ special ReduceAction
 						listnode2.add(pclassdefnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(103), node_list)
+					p.push(p.go_to(121), node_list)
 	end
 init do end
 end
-private class ReduceAction548
+private class ReduceAction798
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16991,11 +29849,11 @@ special ReduceAction
 						listnode3.add(pclassdefnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(103), node_list)
+					p.push(p.go_to(121), node_list)
 	end
 init do end
 end
-private class ReduceAction549
+private class ReduceAction799
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17008,11 +29866,11 @@ special ReduceAction
 						listnode2.add(psuperclassnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(104), node_list)
+					p.push(p.go_to(122), node_list)
 	end
 init do end
 end
-private class ReduceAction550
+private class ReduceAction800
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17035,11 +29893,11 @@ special ReduceAction
 						listnode3.add(psuperclassnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(104), node_list)
+					p.push(p.go_to(122), node_list)
 	end
 init do end
 end
-private class ReduceAction551
+private class ReduceAction801
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17052,11 +29910,11 @@ special ReduceAction
 						listnode2.add(pformaldefnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(105), node_list)
+					p.push(p.go_to(123), node_list)
 	end
 init do end
 end
-private class ReduceAction552
+private class ReduceAction802
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17079,11 +29937,11 @@ special ReduceAction
 						listnode3.add(pformaldefnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(105), node_list)
+					p.push(p.go_to(123), node_list)
 	end
 init do end
 end
-private class ReduceAction553
+private class ReduceAction803
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17096,11 +29954,11 @@ special ReduceAction
 						listnode2.add(ppropdefnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(106), node_list)
+					p.push(p.go_to(124), node_list)
 	end
 init do end
 end
-private class ReduceAction554
+private class ReduceAction804
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17123,11 +29981,11 @@ special ReduceAction
 						listnode3.add(ppropdefnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(106), node_list)
+					p.push(p.go_to(124), node_list)
 	end
 init do end
 end
-private class ReduceAction555
+private class ReduceAction805
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17140,11 +29998,11 @@ special ReduceAction
 						listnode2.add(ppropdefnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(107), node_list)
+					p.push(p.go_to(125), node_list)
 	end
 init do end
 end
-private class ReduceAction556
+private class ReduceAction806
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17167,11 +30025,55 @@ special ReduceAction
 						listnode3.add(ppropdefnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(107), node_list)
+					p.push(p.go_to(125), node_list)
 	end
 init do end
 end
-private class ReduceAction557
+private class ReduceAction807
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var listnode2 = new Array[Object]
+					var pclosuredeclnode1 = nodearraylist1
+					assert pclosuredeclnode1 isa PClosureDecl
+					if pclosuredeclnode1 != null then
+						listnode2.add(pclosuredeclnode1)
+					end
+					node_list = listnode2
+					p.push(p.go_to(126), node_list)
+	end
+init do end
+end
+private class ReduceAction808
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode3 = new Array[Object]
+					var listnode1 = nodearraylist1 
+					assert listnode1 isa Array[Object]
+					var pclosuredeclnode2 = nodearraylist2
+					assert pclosuredeclnode2 isa PClosureDecl
+					if listnode1 != null then
+						if listnode3.is_empty then
+							listnode3 = listnode1
+						else
+							listnode3.append(listnode1)
+						end
+					end
+					if pclosuredeclnode2 != null then
+						listnode3.add(pclosuredeclnode2)
+					end
+					node_list = listnode3
+					p.push(p.go_to(126), node_list)
+	end
+init do end
+end
+private class ReduceAction809
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17184,11 +30086,11 @@ special ReduceAction
 						listnode2.add(pparamnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(108), node_list)
+					p.push(p.go_to(127), node_list)
 	end
 init do end
 end
-private class ReduceAction558
+private class ReduceAction810
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17211,11 +30113,11 @@ special ReduceAction
 						listnode3.add(pparamnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(108), node_list)
+					p.push(p.go_to(127), node_list)
 	end
 init do end
 end
-private class ReduceAction559
+private class ReduceAction811
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17228,11 +30130,11 @@ special ReduceAction
 						listnode2.add(ptypenode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(109), node_list)
+					p.push(p.go_to(128), node_list)
 	end
 init do end
 end
-private class ReduceAction560
+private class ReduceAction812
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17255,11 +30157,11 @@ special ReduceAction
 						listnode3.add(ptypenode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(109), node_list)
+					p.push(p.go_to(128), node_list)
 	end
 init do end
 end
-private class ReduceAction561
+private class ReduceAction813
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17272,11 +30174,11 @@ special ReduceAction
 						listnode2.add(pexprnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(110), node_list)
+					p.push(p.go_to(129), node_list)
 	end
 init do end
 end
-private class ReduceAction562
+private class ReduceAction814
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17299,11 +30201,11 @@ special ReduceAction
 						listnode3.add(pexprnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(110), node_list)
+					p.push(p.go_to(129), node_list)
 	end
 init do end
 end
-private class ReduceAction563
+private class ReduceAction815
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17320,11 +30222,11 @@ special ReduceAction
 						end
 					end
 					node_list = listnode2
-					p.push(p.go_to(111), node_list)
+					p.push(p.go_to(130), node_list)
 	end
 init do end
 end
-private class ReduceAction564
+private class ReduceAction816
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17351,11 +30253,11 @@ special ReduceAction
 						end
 					end
 					node_list = listnode3
-					p.push(p.go_to(111), node_list)
+					p.push(p.go_to(130), node_list)
 	end
 init do end
 end
-private class ReduceAction565
+private class ReduceAction817
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17368,11 +30270,11 @@ special ReduceAction
 						listnode2.add(pexprnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(112), node_list)
+					p.push(p.go_to(131), node_list)
 	end
 init do end
 end
-private class ReduceAction566
+private class ReduceAction818
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17395,11 +30297,11 @@ special ReduceAction
 						listnode3.add(pexprnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(112), node_list)
+					p.push(p.go_to(131), node_list)
 	end
 init do end
 end
-private class ReduceAction567
+private class ReduceAction819
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17412,11 +30314,11 @@ special ReduceAction
 						listnode2.add(tidnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(113), node_list)
+					p.push(p.go_to(132), node_list)
 	end
 init do end
 end
-private class ReduceAction568
+private class ReduceAction820
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17439,11 +30341,11 @@ special ReduceAction
 						listnode3.add(tidnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(113), node_list)
+					p.push(p.go_to(132), node_list)
 	end
 init do end
 end
-private class ReduceAction569
+private class ReduceAction821
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17456,11 +30358,11 @@ special ReduceAction
 						listnode2.add(tcommentnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(114), node_list)
+					p.push(p.go_to(133), node_list)
 	end
 init do end
 end
-private class ReduceAction570
+private class ReduceAction822
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17483,11 +30385,11 @@ special ReduceAction
 						listnode3.add(tcommentnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(114), node_list)
+					p.push(p.go_to(133), node_list)
 	end
 init do end
 end
-private class ReduceAction571
+private class ReduceAction823
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17500,11 +30402,11 @@ special ReduceAction
 						listnode2.add(teolnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(115), node_list)
+					p.push(p.go_to(134), node_list)
 	end
 init do end
 end
-private class ReduceAction572
+private class ReduceAction824
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17527,7 +30429,7 @@ special ReduceAction
 						listnode3.add(teolnode2)
 					end
 					node_list = listnode3
-					p.push(p.go_to(115), node_list)
+					p.push(p.go_to(134), node_list)
 	end
 init do end
 end

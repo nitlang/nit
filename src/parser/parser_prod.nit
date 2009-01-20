@@ -4301,7 +4301,8 @@ redef class ASignature
 
     init init_asignature (
             n_params: Array[Object] , # Should be Array[PParam]
-            n_type: PType 
+            n_type: PType ,
+            n_closure_decls: Array[Object]  # Should be Array[PClosureDecl]
     )
     do
         empty_init
@@ -4314,6 +4315,12 @@ redef class ASignature
         _n_type = n_type
 	if n_type != null then
 		n_type.parent = self
+	end
+        _n_closure_decls = new List[PClosureDecl]
+	for n in n_closure_decls do
+		assert n isa PClosureDecl
+		_n_closure_decls.add(n)
+		n.parent = self
 	end
     end
 
@@ -4342,6 +4349,18 @@ redef class ASignature
             end
             return
 	end
+        for i in [0.._n_closure_decls.length[ do
+            if _n_closure_decls[i] == old_child then
+                if new_child != null then
+		    assert new_child isa PClosureDecl
+                    _n_closure_decls[i] = new_child
+                    new_child.parent = self
+                else
+                    _n_closure_decls.remove_at(i)
+                end
+                return
+            end
+        end
     end
 
     redef meth visit_all(v: Visitor)
@@ -4352,6 +4371,9 @@ redef class ASignature
         if _n_type != null then
             v.visit(_n_type)
         end
+            for n in _n_closure_decls do
+                v.visit(n)
+	    end
     end
 
     redef meth visit_all_reverse(v: Visitor)
@@ -4366,6 +4388,13 @@ redef class ASignature
         if _n_type != null then
             v.visit(_n_type)
         end
+	do
+	    var i = _n_closure_decls.length
+            while i >= 0 do
+                v.visit(_n_closure_decls[i])
+		i = i - 1
+	    end
+	end
     end
 end
 redef class AParam
@@ -4472,6 +4501,141 @@ redef class AParam
         end
         if _n_dotdotdot != null then
             v.visit(_n_dotdotdot)
+        end
+    end
+end
+redef class AClosureDecl
+    redef meth n_kwwith=(n: TKwwith)
+    do
+        _n_kwwith = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+    redef meth n_kwbreak=(n: TKwbreak)
+    do
+        _n_kwbreak = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+    redef meth n_id=(n: TId)
+    do
+        _n_id = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+    redef meth n_signature=(n: PSignature)
+    do
+        _n_signature = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+
+    private init empty_init do end
+
+    init init_aclosuredecl (
+            n_kwwith: TKwwith ,
+            n_kwbreak: TKwbreak ,
+            n_id: TId ,
+            n_signature: PSignature 
+    )
+    do
+        empty_init
+        _n_kwwith = n_kwwith
+	if n_kwwith != null then
+		n_kwwith.parent = self
+	end
+        _n_kwbreak = n_kwbreak
+	if n_kwbreak != null then
+		n_kwbreak.parent = self
+	end
+        _n_id = n_id
+	if n_id != null then
+		n_id.parent = self
+	end
+        _n_signature = n_signature
+	if n_signature != null then
+		n_signature.parent = self
+	end
+    end
+
+    redef meth replace_child(old_child: PNode, new_child: PNode)
+    do
+        assert old_child != null
+        if _n_kwwith == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwwith
+                _n_kwwith = new_child
+	    else
+		_n_kwwith = null
+            end
+            return
+	end
+        if _n_kwbreak == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwbreak
+                _n_kwbreak = new_child
+	    else
+		_n_kwbreak = null
+            end
+            return
+	end
+        if _n_id == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TId
+                _n_id = new_child
+	    else
+		_n_id = null
+            end
+            return
+	end
+        if _n_signature == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa PSignature
+                _n_signature = new_child
+	    else
+		_n_signature = null
+            end
+            return
+	end
+    end
+
+    redef meth visit_all(v: Visitor)
+    do
+        if _n_kwwith != null then
+            v.visit(_n_kwwith)
+        end
+        if _n_kwbreak != null then
+            v.visit(_n_kwbreak)
+        end
+        if _n_id != null then
+            v.visit(_n_id)
+        end
+        if _n_signature != null then
+            v.visit(_n_signature)
+        end
+    end
+
+    redef meth visit_all_reverse(v: Visitor)
+    do
+        if _n_kwwith != null then
+            v.visit(_n_kwwith)
+        end
+        if _n_kwbreak != null then
+            v.visit(_n_kwbreak)
+        end
+        if _n_id != null then
+            v.visit(_n_id)
+        end
+        if _n_signature != null then
+            v.visit(_n_signature)
         end
     end
 end
@@ -4857,17 +5021,29 @@ redef class ABreakExpr
 	    n.parent = self
         end
     end
+    redef meth n_expr=(n: PExpr)
+    do
+        _n_expr = n
+        if n != null then
+	    n.parent = self
+        end
+    end
 
     private init empty_init do end
 
     init init_abreakexpr (
-            n_kwbreak: TKwbreak 
+            n_kwbreak: TKwbreak ,
+            n_expr: PExpr 
     )
     do
         empty_init
         _n_kwbreak = n_kwbreak
 	if n_kwbreak != null then
 		n_kwbreak.parent = self
+	end
+        _n_expr = n_expr
+	if n_expr != null then
+		n_expr.parent = self
 	end
     end
 
@@ -4884,6 +5060,16 @@ redef class ABreakExpr
             end
             return
 	end
+        if _n_expr == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa PExpr
+                _n_expr = new_child
+	    else
+		_n_expr = null
+            end
+            return
+	end
     end
 
     redef meth visit_all(v: Visitor)
@@ -4891,12 +5077,18 @@ redef class ABreakExpr
         if _n_kwbreak != null then
             v.visit(_n_kwbreak)
         end
+        if _n_expr != null then
+            v.visit(_n_expr)
+        end
     end
 
     redef meth visit_all_reverse(v: Visitor)
     do
         if _n_kwbreak != null then
             v.visit(_n_kwbreak)
+        end
+        if _n_expr != null then
+            v.visit(_n_expr)
         end
     end
 end
@@ -4959,17 +5151,29 @@ redef class AContinueExpr
 	    n.parent = self
         end
     end
+    redef meth n_expr=(n: PExpr)
+    do
+        _n_expr = n
+        if n != null then
+	    n.parent = self
+        end
+    end
 
     private init empty_init do end
 
     init init_acontinueexpr (
-            n_kwcontinue: TKwcontinue 
+            n_kwcontinue: TKwcontinue ,
+            n_expr: PExpr 
     )
     do
         empty_init
         _n_kwcontinue = n_kwcontinue
 	if n_kwcontinue != null then
 		n_kwcontinue.parent = self
+	end
+        _n_expr = n_expr
+	if n_expr != null then
+		n_expr.parent = self
 	end
     end
 
@@ -4986,6 +5190,16 @@ redef class AContinueExpr
             end
             return
 	end
+        if _n_expr == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa PExpr
+                _n_expr = new_child
+	    else
+		_n_expr = null
+            end
+            return
+	end
     end
 
     redef meth visit_all(v: Visitor)
@@ -4993,12 +5207,18 @@ redef class AContinueExpr
         if _n_kwcontinue != null then
             v.visit(_n_kwcontinue)
         end
+        if _n_expr != null then
+            v.visit(_n_expr)
+        end
     end
 
     redef meth visit_all_reverse(v: Visitor)
     do
         if _n_kwcontinue != null then
             v.visit(_n_kwcontinue)
+        end
+        if _n_expr != null then
+            v.visit(_n_expr)
         end
     end
 end
@@ -8000,7 +8220,8 @@ redef class ACallExpr
     init init_acallexpr (
             n_expr: PExpr ,
             n_id: TId ,
-            n_args: Array[Object]  # Should be Array[PExpr]
+            n_args: Array[Object] , # Should be Array[PExpr]
+            n_closure_defs: Array[Object]  # Should be Array[PClosureDef]
     )
     do
         empty_init
@@ -8016,6 +8237,12 @@ redef class ACallExpr
 	for n in n_args do
 		assert n isa PExpr
 		_n_args.add(n)
+		n.parent = self
+	end
+        _n_closure_defs = new List[PClosureDef]
+	for n in n_closure_defs do
+		assert n isa PClosureDef
+		_n_closure_defs.add(n)
 		n.parent = self
 	end
     end
@@ -8055,6 +8282,18 @@ redef class ACallExpr
                 return
             end
         end
+        for i in [0.._n_closure_defs.length[ do
+            if _n_closure_defs[i] == old_child then
+                if new_child != null then
+		    assert new_child isa PClosureDef
+                    _n_closure_defs[i] = new_child
+                    new_child.parent = self
+                else
+                    _n_closure_defs.remove_at(i)
+                end
+                return
+            end
+        end
     end
 
     redef meth visit_all(v: Visitor)
@@ -8066,6 +8305,9 @@ redef class ACallExpr
             v.visit(_n_id)
         end
             for n in _n_args do
+                v.visit(n)
+	    end
+            for n in _n_closure_defs do
                 v.visit(n)
 	    end
     end
@@ -8082,6 +8324,13 @@ redef class ACallExpr
 	    var i = _n_args.length
             while i >= 0 do
                 v.visit(_n_args[i])
+		i = i - 1
+	    end
+	end
+	do
+	    var i = _n_closure_defs.length
+            while i >= 0 do
+                v.visit(_n_closure_defs[i])
 		i = i - 1
 	    end
 	end
@@ -8644,7 +8893,8 @@ redef class ABraExpr
 
     init init_abraexpr (
             n_expr: PExpr ,
-            n_args: Array[Object]  # Should be Array[PExpr]
+            n_args: Array[Object] , # Should be Array[PExpr]
+            n_closure_defs: Array[Object]  # Should be Array[PClosureDef]
     )
     do
         empty_init
@@ -8656,6 +8906,12 @@ redef class ABraExpr
 	for n in n_args do
 		assert n isa PExpr
 		_n_args.add(n)
+		n.parent = self
+	end
+        _n_closure_defs = new List[PClosureDef]
+	for n in n_closure_defs do
+		assert n isa PClosureDef
+		_n_closure_defs.add(n)
 		n.parent = self
 	end
     end
@@ -8685,6 +8941,18 @@ redef class ABraExpr
                 return
             end
         end
+        for i in [0.._n_closure_defs.length[ do
+            if _n_closure_defs[i] == old_child then
+                if new_child != null then
+		    assert new_child isa PClosureDef
+                    _n_closure_defs[i] = new_child
+                    new_child.parent = self
+                else
+                    _n_closure_defs.remove_at(i)
+                end
+                return
+            end
+        end
     end
 
     redef meth visit_all(v: Visitor)
@@ -8693,6 +8961,9 @@ redef class ABraExpr
             v.visit(_n_expr)
         end
             for n in _n_args do
+                v.visit(n)
+	    end
+            for n in _n_closure_defs do
                 v.visit(n)
 	    end
     end
@@ -8706,6 +8977,13 @@ redef class ABraExpr
 	    var i = _n_args.length
             while i >= 0 do
                 v.visit(_n_args[i])
+		i = i - 1
+	    end
+	end
+	do
+	    var i = _n_closure_defs.length
+            while i >= 0 do
+                v.visit(_n_closure_defs[i])
 		i = i - 1
 	    end
 	end
@@ -10429,6 +10707,142 @@ redef class AMinusAssignOp
     do
         if _n_minuseq != null then
             v.visit(_n_minuseq)
+        end
+    end
+end
+redef class AClosureDef
+    redef meth n_kwwith=(n: TKwwith)
+    do
+        _n_kwwith = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+    redef meth n_kwdo=(n: TKwdo)
+    do
+        _n_kwdo = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+    redef meth n_expr=(n: PExpr)
+    do
+        _n_expr = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+
+    private init empty_init do end
+
+    init init_aclosuredef (
+            n_kwwith: TKwwith ,
+            n_id: Array[Object] , # Should be Array[TId]
+            n_kwdo: TKwdo ,
+            n_expr: PExpr 
+    )
+    do
+        empty_init
+        _n_kwwith = n_kwwith
+	if n_kwwith != null then
+		n_kwwith.parent = self
+	end
+        _n_id = new List[TId]
+	for n in n_id do
+		assert n isa TId
+		_n_id.add(n)
+		n.parent = self
+	end
+        _n_kwdo = n_kwdo
+	if n_kwdo != null then
+		n_kwdo.parent = self
+	end
+        _n_expr = n_expr
+	if n_expr != null then
+		n_expr.parent = self
+	end
+    end
+
+    redef meth replace_child(old_child: PNode, new_child: PNode)
+    do
+        assert old_child != null
+        if _n_kwwith == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwwith
+                _n_kwwith = new_child
+	    else
+		_n_kwwith = null
+            end
+            return
+	end
+        for i in [0.._n_id.length[ do
+            if _n_id[i] == old_child then
+                if new_child != null then
+		    assert new_child isa TId
+                    _n_id[i] = new_child
+                    new_child.parent = self
+                else
+                    _n_id.remove_at(i)
+                end
+                return
+            end
+        end
+        if _n_kwdo == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwdo
+                _n_kwdo = new_child
+	    else
+		_n_kwdo = null
+            end
+            return
+	end
+        if _n_expr == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa PExpr
+                _n_expr = new_child
+	    else
+		_n_expr = null
+            end
+            return
+	end
+    end
+
+    redef meth visit_all(v: Visitor)
+    do
+        if _n_kwwith != null then
+            v.visit(_n_kwwith)
+        end
+            for n in _n_id do
+                v.visit(n)
+	    end
+        if _n_kwdo != null then
+            v.visit(_n_kwdo)
+        end
+        if _n_expr != null then
+            v.visit(_n_expr)
+        end
+    end
+
+    redef meth visit_all_reverse(v: Visitor)
+    do
+        if _n_kwwith != null then
+            v.visit(_n_kwwith)
+        end
+	do
+	    var i = _n_id.length
+            while i >= 0 do
+                v.visit(_n_id[i])
+		i = i - 1
+	    end
+	end
+        if _n_kwdo != null then
+            v.visit(_n_kwdo)
+        end
+        if _n_expr != null then
+            v.visit(_n_expr)
         end
     end
 end

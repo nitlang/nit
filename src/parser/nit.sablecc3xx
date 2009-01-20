@@ -103,6 +103,7 @@ kwtrue = 'true';
 kwfalse = 'false';
 kwnull = 'null';
 kwas = 'as';
+kwwith = 'with';
 
 opar = '(';
 cpar = ')';
@@ -256,7 +257,10 @@ methid
 	;
 
 signature
-	= params? typing? {-> New signature([params.param], typing.type)};
+	= params? typing? closure_decl* {-> New signature([params.param], typing.type, [closure_decl])};
+
+signature_noclosures {-> signature}
+	= params? typing? {-> New signature([params.param], typing.type, [])};
 
 params {-> param*} 
 	= opar no param params_tail* [n2]:no cpar {-> [param, params_tail.param]}
@@ -268,6 +272,9 @@ param
 	= {untyped} id {-> New param(id, Null, Null)}
 	| id typing dotdotdot? {-> New param(id, typing.type, dotdotdot)}
 	;
+
+closure_decl
+	= no kwwith kwbreak? [no2]:no id signature_noclosures {-> New closure_decl(kwwith, kwbreak, id, signature_noclosures.signature)};
 
 /* TYPES *********************************************************************/
 type/*B3*//*B*/ {-> type}
@@ -294,35 +301,49 @@ stmts {-> expr}
 stmts_tail {-> expr}
 	= n stmt {-> stmt.expr};
 stmt/*B2*/ {-> expr}
-	= {vardecl} vardecl {-> vardecl.expr}
-	| {assign} assignment {-> assignment.expr}
-	| {return} kwreturn expr? {-> New expr.return(kwreturn, expr)}
-	| {break} kwbreak {-> New expr.break(kwbreak)}
+	= {vardecl} vardecl/*B2*/ {-> vardecl/*B2*/.expr}
+	| {assign} assignment/*B2*/ {-> assignment/*B2*/.expr}
+	| {return} kwreturn expr_final/*B2*/? {-> New expr.return(kwreturn, expr_final/*B2*/.expr)}
+	| {break} kwbreak expr_final/*B2*/? {-> New expr.break(kwbreak, expr_final/*B2*/.expr)}
 	| {abort} kwabort {-> New expr.abort(kwabort)}
-	| {continue} kwcontinue {-> New expr.continue(kwcontinue)}
+	| {continue} kwcontinue expr_final/*B2*/? {-> New expr.continue(kwcontinue, expr_final/*B2*/.expr)}
 	| {do} do/*B2*/ {-> do/*B2*/.expr}
 	| {if} if/*B2*/ {-> if/*B2*/.expr}
 	| {while} while/*B2*/ {-> while/*B2*/.expr}
 	| {for} for/*B2*/ {-> for/*B2*/.expr}
-	| {assert} assert {-> assert.expr}
+	| {assert} assert/*B2*/ {-> assert/*B2*/.expr}
 //	| {expr} expr {-> expr.expr}
-	| {call} recv id args_nopar {-> New expr.call(recv.expr, id, [args_nopar.expr])}
+	| {call} recv id args_nopar closure_defs/*B2*/? {-> New expr.call(recv.expr, id, [args_nopar.expr], [closure_defs/*B2*/.closure_def])}
 	| {super} qualified? kwsuper args_nopar {-> New expr.super(qualified, kwsuper, [args_nopar.expr])}
 	| {init} recv kwinit args_nopar {-> New expr.init(recv.expr, kwinit, [args_nopar.expr])}
 	;
 
-vardecl	{-> expr}
-	= kwvar id typing? {-> New expr.vardecl(kwvar, id, typing.type, Null, Null)}
-	| {assign} kwvar id typing? assign no expr {-> New expr.vardecl(kwvar, id, typing.type, assign, expr)}
+closure_defs/*B2*/ {-> closure_def*}
+	= {one} closure_def_last/*B2*/ {-> [closure_def_last/*B2*/.closure_def]}
+	| closure_def closure_defs/*B2*/ {-> [closure_def, closure_defs/*B2*/.closure_def]}
 	;
 
-assignment {-> expr}
-	= {attr} recv attrid assign expr {-> New expr.attr_assign(recv.expr, attrid, assign, expr)}
-	| {call} recv id args assign expr {-> New expr.call_assign(recv.expr, id, [args.expr], assign, expr)}
-	| {bra} expr_atom braargs assign expr {-> New expr.bra_assign(expr_atom.expr, [braargs.expr], assign, expr)}
-	| {attr_re} recv attrid assign_op expr {-> New expr.attr_reassign(recv.expr, attrid, assign_op, expr)}
-	| {call_re} recv id args assign_op expr {-> New expr.call_reassign(recv.expr, id, [args.expr], assign_op, expr)}
-	| {bra_re} expr_atom braargs assign_op expr {-> New expr.bra_reassign(expr_atom.expr, [braargs.expr], assign_op, expr)}
+closure_def_last/*B2*/ {-> closure_def}
+	= kwwith idlist? kwdo stmtso/*B2*/ {-> New closure_def(kwwith, [idlist.id], kwdo, stmtso/*B2*/.expr)}
+	;
+
+closure_def {-> closure_def}
+	= kwwith idlist? kwdo n stmts [n2]:n {-> New closure_def(kwwith, [idlist.id], kwdo, stmts.expr)}
+	| {empty} kwwith idlist? kwdo n {-> New closure_def(kwwith, [idlist.id], kwdo, Null)}
+	;
+
+vardecl/*B2*/{-> expr}
+	= kwvar id typing? {-> New expr.vardecl(kwvar, id, typing.type, Null, Null)}
+	| {assign} kwvar id typing? assign no expr_final/*B2*/ {-> New expr.vardecl(kwvar, id, typing.type, assign, expr_final/*B2*/.expr)}
+	;
+
+assignment/*B2*/ {-> expr}
+	= {attr} recv attrid assign expr_final/*B2*/ {-> New expr.attr_assign(recv.expr, attrid, assign, expr_final/*B2*/.expr)}
+	| {call} recv id args assign expr_final/*B2*/ {-> New expr.call_assign(recv.expr, id, [args.expr], assign,  expr_final/*B2*/.expr)}
+	| {bra} expr_atom braargs assign expr_final/*B2*/ {-> New expr.bra_assign(expr_atom.expr, [braargs.expr], assign,  expr_final/*B2*/.expr)}
+	| {attr_re} recv attrid assign_op expr_final/*B2*/ {-> New expr.attr_reassign(recv.expr, attrid, assign_op,  expr_final/*B2*/.expr)}
+	| {call_re} recv id args assign_op expr_final/*B2*/ {-> New expr.call_reassign(recv.expr, id, [args.expr], assign_op,  expr_final/*B2*/.expr)}
+	| {bra_re} expr_atom braargs assign_op expr_final/*B2*/ {-> New expr.bra_reassign(expr_atom.expr, [braargs.expr], assign_op,  expr_final/*B2*/.expr)}
 	;
 assign_op
 	= {plus} pluseq
@@ -352,12 +373,18 @@ for/*B2*/ {-> expr}
 for_vardecl {-> expr}
 	= kwfor no id [n2]:no kwin [n3]:no expr {-> New expr.for_vardecl(kwfor, id, expr)};
 
-assert {-> expr}
-	= kwassert assertid? expr {-> New expr.assert(kwassert, assertid.id, expr)};
+assert/*B2*/ {-> expr}
+	= kwassert assertid? expr_final/*B2*/ {-> New expr.assert(kwassert, assertid.id, expr_final/*B2*/.expr)};
 assertid {-> id}
 	= id column {-> id};
 
 /* EXPRESSIONS ***************************************************************/
+expr_final/*B3*//*B2*//*B*/ {-> expr}
+	= expr/*B3*//*B*/ {-> expr/*B3*//*B*/.expr}
+	| {closure_call} recv/*B*/ id args closure_defs/*B2*/ {-> New expr.call(recv/*B*/.expr, id, [args.expr], [closure_defs/*B2*/.closure_def])}
+/*N*//*N3*/	| {closure_bra} expr_atom braargs closure_defs/*B2*/ {-> New expr.bra(expr_atom.expr, [braargs.expr], [closure_defs/*B2*/.closure_def])}
+	;
+
 expr/*B3*//*B*/ {-> expr}
 	= expr_and/*B3*//*B*/ {-> expr_and/*B3*//*B*/.expr}
 	| {ifexpr} kwif [n1]:no expr [n2]:no kwthen [n3]:no [then]:expr [n4]:no kwelse [n5]:no [else]:expr/*B3*//*B*/ {-> New expr.ifexpr(kwif, expr, kwthen, then, kwelse, else.expr)}
@@ -413,10 +440,10 @@ expr_new/*B3*//*B*/ {-> expr}
 
 expr_atom/*B3*//*B*/ {-> expr}
 	= {attr} recv/*B3*//*B*/ attrid {-> New expr.attr(recv/*B3*//*B*/.expr, attrid)}
-	| {call} recv/*B3*//*B*/ id args {-> New expr.call(recv/*B3*//*B*/.expr, id, [args.expr])}
+	| {call} recv/*B3*//*B*/ id args {-> New expr.call(recv/*B3*//*B*/.expr, id, [args.expr], [])}
 	| {super} qualified? kwsuper args {-> New expr.super(qualified, kwsuper, [args.expr])}
 	| {init} recv/*B3*//*B*/ kwinit args {-> New expr.init(recv/*B3*//*B*/.expr, kwinit, [args.expr])}
-/*N*//*N3*/	| {bra} expr_atom braargs {-> New expr.bra(expr_atom.expr, [braargs.expr])}
+/*N*//*N3*/	| {bra} expr_atom braargs {-> New expr.bra(expr_atom.expr, [braargs.expr], [])}
 	| {new} kwnew no type/*B3*//*B*/ dot [n2]:no id args {-> New expr.new(kwnew, type/*B3*//*B*/.type, id, [args.expr])}
 /*N*//*N3*/	| {range} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no cbra {-> New expr.crange(expr, expr2.expr)}
 /*N*//*N3*/	| {orange} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no [cbra]:obra  {-> New expr.orange(expr, expr2.expr)}
@@ -469,6 +496,10 @@ braargs	{-> expr*}
 	= obra no expr [n2]:no args_tail* cbra {-> [expr, args_tail.expr]};
 args_tail {-> expr} 
 	= comma no expr [n2]:no {-> expr};
+idlist {-> id*}
+	= {single} id {-> [id]}
+	| {more} idlist no comma [n2]:no id {-> [idlist.id, id]}
+	;
 
 qualified 
 	= {cla} modquad* classquad {-> New qualified([modquad.id], classquad.classid)}
@@ -554,9 +585,12 @@ able	= {read} kwredef? kwreadable
 
 methid = {id} id | {plus} plus | {minus} minus | {star} star | {slash} slash | {percent} percent | {eq} eq | {ne} ne | {le} le | {ge} ge | {lt} lt | {gt} gt | {bra} obra cbra | {starship} starship | {assign} id assign | {braassign} obra cbra assign;
 
-signature = [params]:param* type?;
+signature = [params]:param* type? [closure_decls]:closure_decl*;
 
 param	= id type? dotdotdot? 
+	;
+
+closure_decl = kwwith kwbreak? id signature
 	;
 
 type	= [id]:classid [types]:type*;
@@ -564,9 +598,9 @@ type	= [id]:classid [types]:type*;
 expr	= {block} expr* 
 	| {vardecl} kwvar id type? assign? expr? 
 	| {return} kwreturn expr? 
-	| {break} kwbreak
+	| {break} kwbreak expr?
 	| {abort} kwabort
-	| {continue} kwcontinue
+	| {continue} kwcontinue expr?
 	| {do} kwdo [block]:expr? 
 	| {if} kwif expr [then]:expr? [else]:expr? 
 	| {ifexpr} kwif expr kwthen [then]:expr kwelse [else]:expr
@@ -599,12 +633,12 @@ expr	= {block} expr*
 	| {attr} expr [id]:attrid 
 	| {attr_assign} expr [id]:attrid assign [value]:expr 
 	| {attr_reassign} expr [id]:attrid assign_op [value]:expr 
-	| {call} expr id [args]:expr*	    
+	| {call} expr id [args]:expr* [closure_defs]:closure_def*
 	| {call_assign} expr id [args]:expr* assign [value]:expr 
 	| {call_reassign} expr id [args]:expr* assign_op [value]:expr 
 	| {super} qualified? kwsuper [args]:expr*
 	| {init} expr kwinit [args]:expr* 
-	| {bra} expr [args]:expr* 
+	| {bra} expr [args]:expr* [closure_defs]:closure_def* 
 	| {bra_assign} expr [args]:expr* assign [value]:expr 
 	| {bra_reassign} expr [args]:expr* assign_op [value]:expr 
 	| {var} id
@@ -633,6 +667,10 @@ expr	= {block} expr*
 assign_op
 	= {plus} pluseq
 	| {minus} minuseq
+	;
+
+closure_def
+	= kwwith id* kwdo expr?
 	;
 
 qualified = id* classid? ;

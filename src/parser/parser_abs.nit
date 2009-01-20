@@ -159,6 +159,9 @@ end
 class TKwas
 special Token
 end
+class TKwwith
+special Token
+end
 class TOpar
 special Token
 end
@@ -286,9 +289,11 @@ class PAble special Prod end
 class PMethid special Prod end
 class PSignature special Prod end
 class PParam special Prod end
+class PClosureDecl special Prod end
 class PType special Prod end
 class PExpr special Prod end
 class PAssignOp special Prod end
+class PClosureDef special Prod end
 class PQualified special Prod end
 class PDoc special Prod end
 
@@ -541,12 +546,20 @@ class ASignature
 special PSignature
     readable writable attr _n_params: List[PParam] = null
     readable writable attr _n_type: PType = null
+    readable writable attr _n_closure_decls: List[PClosureDecl] = null
 end
 class AParam
 special PParam
     readable writable attr _n_id: TId = null
     readable writable attr _n_type: PType = null
     readable writable attr _n_dotdotdot: TDotdotdot = null
+end
+class AClosureDecl
+special PClosureDecl
+    readable writable attr _n_kwwith: TKwwith = null
+    readable writable attr _n_kwbreak: TKwbreak = null
+    readable writable attr _n_id: TId = null
+    readable writable attr _n_signature: PSignature = null
 end
 class AType
 special PType
@@ -573,6 +586,7 @@ end
 class ABreakExpr
 special PExpr
     readable writable attr _n_kwbreak: TKwbreak = null
+    readable writable attr _n_expr: PExpr = null
 end
 class AAbortExpr
 special PExpr
@@ -581,6 +595,7 @@ end
 class AContinueExpr
 special PExpr
     readable writable attr _n_kwcontinue: TKwcontinue = null
+    readable writable attr _n_expr: PExpr = null
 end
 class ADoExpr
 special PExpr
@@ -763,6 +778,7 @@ special PExpr
     readable writable attr _n_expr: PExpr = null
     readable writable attr _n_id: TId = null
     readable writable attr _n_args: List[PExpr] = null
+    readable writable attr _n_closure_defs: List[PClosureDef] = null
 end
 class ACallAssignExpr
 special PExpr
@@ -796,6 +812,7 @@ class ABraExpr
 special PExpr
     readable writable attr _n_expr: PExpr = null
     readable writable attr _n_args: List[PExpr] = null
+    readable writable attr _n_closure_defs: List[PClosureDef] = null
 end
 class ABraAssignExpr
 special PExpr
@@ -914,6 +931,13 @@ end
 class AMinusAssignOp
 special PAssignOp
     readable writable attr _n_minuseq: TMinuseq = null
+end
+class AClosureDef
+special PClosureDef
+    readable writable attr _n_kwwith: TKwwith = null
+    readable writable attr _n_id: List[TId] = null
+    readable writable attr _n_kwdo: TKwdo = null
+    readable writable attr _n_expr: PExpr = null
 end
 class AQualified
 special PQualified
