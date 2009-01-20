@@ -25,24 +25,24 @@ redef class CompilerVisitor
 	meth compile_stmt(n: PExpr)
 	do
 		n.prepare_compile_stmt(self)
-		var i = _variable_index
+		var i = cfc._variable_index
 		n.compile_stmt(self)
-		_variable_index = i
+		cfc._variable_index = i
 	end
 
 	# Compile is expression node
 	meth compile_expr(n: PExpr): String
 	do
-		var i = _variable_index
+		var i = cfc._variable_index
 		var s = n.compile_expr(self)
-		_variable_index = i
+		cfc._variable_index = i
 		if s[0] == ' ' then
 			return s
 		end
-		if s == variable(_variable_index-1) then
+		if s == cfc.variable(cfc._variable_index-1) then
 			return s
 		end
-		var v = get_var
+		var v = cfc.get_var
 		add_assignment(v, s)
 		return v
 	end
@@ -53,7 +53,7 @@ redef class CompilerVisitor
 		if s.substring(0,3) == "variable" then
 			return s
 		end
-		var v = get_var
+		var v = cfc.get_var
 		add_assignment(v, s)
 		return v
 	end
@@ -66,79 +66,17 @@ redef class CompilerVisitor
 		end
 	end
 
-	# Return the ith variable
-	protected meth variable(i: Int): String
-	do
-		return "variable{i}"
-	end
+	readable writable attr _cfc: CFunctionContext
 
-	# Next available variable number
-	attr _variable_index: Int
-
-	# Total number of variable
-	attr _variable_index_max: Int
-
-	# Return the next available variable
-	meth get_var: String
-	do
-		var v = variable(_variable_index)
-		_variable_index = _variable_index + 1
-		if _variable_index > _variable_index_max then
-			add_decl("val_t {v};")
-			_variable_index_max = _variable_index 
-		end
-		return v
-	end
-
-	# Mark the variable available
-	meth free_var(v: String)
-	do
-		# FIXME: So ugly..
-		if v == variable(_variable_index-1) then
-			_variable_index = _variable_index - 1
-		end
-	end
-
-	# Clear all status related to a method body
-	meth clear
-	do
-		_has_return = false
-		indent_level = 0
-		_variable_index = 0
-		_variable_index_max = 0
-	end
-
-	# Association between nit variable and the corrsponding c variable
-	readable attr _varnames: Map[Variable, String] = new HashMap[Variable, String] 
-
-	# Is a "return" found in the method body
-	readable writable attr _has_return: Bool
-
-	# Association between parameters and the corresponding c variables
-	readable writable attr _method_params: Array[String] 
-
-	# Current method compiled
-	readable writable attr _method: MMSrcMethod
-
-	# Where a nit return must branch
-	readable writable attr _return_label: String 
-	
-	# Where a nit break must branch
-	readable writable attr _break_label: String 
-	
-	# Where a nit continue must branch
-	readable writable attr _continue_label: String 
-
-	# Variable where a functionnal nit return must store its value
-	readable writable attr _return_value: String 
+	readable writable attr _nmc: NitMethodContext
 
 	# Generate an fprintf to display an error location
 	meth printf_locate_error(node: PNode): String
 	do
 		var s = "fprintf(stderr, \""
-		if method != null then s.append(" in %s")
+		if nmc != null then s.append(" in %s")
 		s.append(" (%s:%d)\\n\", ")
-		if method != null then s.append("LOCATE_{method.cname}, ")
+		if nmc != null then s.append("LOCATE_{nmc.method.cname}, ")
 		s.append("LOCATE_{module.name}, {node.line_number});")
 		return s
 	end
@@ -146,12 +84,11 @@ redef class CompilerVisitor
 	redef init(module: MMSrcModule)
 	do
 		super
-		clear
 	end
 
 	meth invoke_super_init_calls_after(start_prop: MMMethod)
 	do
-		var n = method.node
+		var n = nmc.method.node
 		assert n isa AConcreteInitPropdef
 
 		if n.super_init_calls.is_empty then return
@@ -180,9 +117,9 @@ redef class CompilerVisitor
 		while i < l do
 			var p = n.super_init_calls[i]
 			if p == stop_prop then break
-			var cargs = method_params
+			var cargs = nmc.method_params
 			if p.signature.arity == 0 then
-				cargs = [method_params[0]]
+				cargs = [nmc.method_params[0]]
 			end
 			#s.append(" {p}")
 			p.compile_call(self, cargs)
@@ -195,6 +132,79 @@ redef class CompilerVisitor
 		#end
 		#if stop_prop != null then s.append(" (stop at {stop_prop})")
 		#n.printl("implicit calls in {n.method}: {s}") 
+	end
+end
+
+# A C function currently written
+class CFunctionContext
+	readable attr _visitor: CompilerVisitor
+
+	# Next available variable number
+	attr _variable_index: Int = 0
+
+	# Total number of variable
+	attr _variable_index_max: Int = 0
+
+	# Association between nit variable and the corrsponding c variable
+	readable attr _varnames: Map[Variable, String] = new HashMap[Variable, String]
+
+	# Return the next available variable
+	meth get_var: String
+	do
+		var v = variable(_variable_index)
+		_variable_index = _variable_index + 1
+		if _variable_index > _variable_index_max then
+			visitor.add_decl("val_t {v};")
+			_variable_index_max = _variable_index 
+		end
+		return v
+	end
+
+	# Return the ith variable
+	protected meth variable(i: Int): String
+	do
+		return "variable{i}"
+	end
+
+
+	# Mark the variable available
+	meth free_var(v: String)
+	do
+		# FIXME: So ugly..
+		if v == variable(_variable_index-1) then
+			_variable_index = _variable_index - 1
+		end
+	end
+
+	init(v: CompilerVisitor) do _visitor = v
+end
+
+# A Nit method currenlty compiled
+class NitMethodContext
+	# Current method compiled
+	readable attr _method: MMSrcMethod
+
+	# Is a "return" found in the method body
+	readable writable attr _has_return: Bool = false
+
+	# Association between parameters and the corresponding c variables
+	readable writable attr _method_params: Array[String] 
+
+	# Where a nit return must branch
+	readable writable attr _return_label: String 
+	
+	# Where a nit break must branch
+	readable writable attr _break_label: String 
+	
+	# Where a nit continue must branch
+	readable writable attr _continue_label: String 
+
+	# Variable where a functionnal nit return must store its value
+	readable writable attr _return_value: String 
+
+	init(method: MMSrcMethod)
+	do
+		_method = method
 	end
 end
 
@@ -249,7 +259,7 @@ redef class MMMethod
 	# Compile a call as constructor with given args
 	meth compile_constructor_call(v: CompilerVisitor, recvtype: MMType, cargs: Array[String]): String
 	do
-		var recv = v.get_var
+		var recv = v.cfc.get_var
 		v.add_instr("{recv} = NEW_{recvtype.local_class}_{global.intro.cname}({cargs.join(", ")}); /*new {recvtype}*/")
 		return recv
 	end
@@ -313,7 +323,8 @@ redef class MMSrcMethod
 
 	redef meth compile_property_to_c(v)
 	do
-		v.clear
+		v.cfc = new CFunctionContext(v)
+
 		var args = new Array[String]
 		args.add(" self")
 		for i in [0..signature.arity[ do
@@ -429,14 +440,17 @@ end
 redef class AConcreteMethPropdef
 	redef meth do_compile_inside(v, method, params)
 	do
+		var old_nmc = v.nmc
+		v.nmc = new NitMethodContext(method)
+
 		var orig_meth: MMLocalProperty = method.global.intro
 		var orig_sig = orig_meth.signature_for(method.signature.recv)
 		if n_signature != null then
 			var sig = n_signature
 			assert sig isa ASignature
 			for ap in sig.n_params do
-				var cname = v.get_var
-				v.varnames[ap.variable] = cname
+				var cname = v.cfc.get_var
+				v.cfc.varnames[ap.variable] = cname
 				var orig_type = orig_sig[ap.position]
 				if not orig_type < ap.variable.stype then
 					# FIXME: do not test always
@@ -447,10 +461,6 @@ redef class AConcreteMethPropdef
 				v.add_assignment(cname, params[ap.position + 1])
 			end
 		end
-		var old_method_params = v.method_params
-		var old_return_label = v.return_label
-		var old_return_value = v.return_value
-		var old_has_return = v.has_return
 
 		var itpos: String = null
 		if self isa AConcreteInitPropdef then
@@ -459,33 +469,29 @@ redef class AConcreteMethPropdef
 			v.add_instr("if (init_table[{itpos}]) return;")
 		end
 
-		v.method_params = params
-		v.has_return = false
-		v.return_label = "return_label{v.new_number}"
+		v.nmc.method_params = params
+		v.nmc.return_label = "return_label{v.new_number}"
 		if method.signature.return_type != null then
-			v.return_value = v.get_var
-			v.free_var(v.return_value)
+			v.nmc.return_value = v.cfc.get_var
+			v.cfc.free_var(v.nmc.return_value)
 		else
-			v.return_value = null
+			v.nmc.return_value = null
 		end
-		v.method = method
 		if self isa AConcreteInitPropdef then
 			v.invoke_super_init_calls_after(null)
 		end
 		if n_block != null then
 			v.compile_stmt(n_block)
 		end
-		if v.has_return then
-			v.add_instr("{v.return_label}: while(false);")
+		if v.nmc.has_return then
+			v.add_instr("{v.nmc.return_label}: while(false);")
 		end
 		if self isa AConcreteInitPropdef then
 			v.add_instr("init_table[{itpos}] = 1;")
 		end
-		var ret = v.return_value
-		v.method_params = old_method_params
-		v.return_label = old_return_label
-		v.return_value = old_return_value
-		v.has_return = old_has_return
+		var ret = v.nmc.return_value
+
+		v.nmc = old_nmc
 		return ret
 	end
 end
@@ -733,13 +739,13 @@ end
 redef class AVardeclExpr
 	redef meth prepare_compile_stmt(v)
 	do
-		var cname = v.get_var
-		v.varnames[variable] = cname
+		var cname = v.cfc.get_var
+		v.cfc.varnames[variable] = cname
 	end
 
 	redef meth compile_stmt(v)
 	do
-		var cname = v.varnames[variable]
+		var cname = v.cfc.varnames[variable]
 		if n_expr == null then
 			var t = variable.stype
 			v.add_assignment(cname, "{t.default_cvalue} /*decl variable {variable.name}*/")
@@ -753,26 +759,26 @@ end
 redef class AReturnExpr
 	redef meth compile_stmt(v)
 	do
-		v.has_return = true
+		v.nmc.has_return = true
 		if n_expr != null then
 			var e = v.compile_expr(n_expr)
-			v.add_assignment(v.return_value, e)
+			v.add_assignment(v.nmc.return_value, e)
 		end
-		v.add_instr("goto {v.return_label};")
+		v.add_instr("goto {v.nmc.return_label};")
 	end
 end
 
 redef class ABreakExpr
 	redef meth compile_stmt(v)
 	do
-		v.add_instr("goto {v.break_label};")
+		v.add_instr("goto {v.nmc.break_label};")
 	end
 end
 
 redef class AContinueExpr
 	redef meth compile_stmt(v)
 	do
-		v.add_instr("goto {v.continue_label};")
+		v.add_instr("goto {v.nmc.continue_label};")
 	end
 end
 
@@ -797,7 +803,7 @@ redef class AIfExpr
 	do
 		var e = v.compile_expr(n_expr)
 		v.add_instr("if (UNTAG_Bool({e})) \{ /*if*/")
-		v.free_var(e)
+		v.cfc.free_var(e)
 		if n_then != null then
 			v.indent
 			v.compile_stmt(n_then)
@@ -818,12 +824,12 @@ redef class AIfexprExpr
 	do
 		var e = v.compile_expr(n_expr)
 		v.add_instr("if (UNTAG_Bool({e})) \{ /*if*/")
-		v.free_var(e)
+		v.cfc.free_var(e)
 		v.indent
 		var e = v.ensure_var(v.compile_expr(n_then))
 		v.unindent
 		v.add_instr("} else \{ /*if*/")
-		v.free_var(e)
+		v.cfc.free_var(e)
 		v.indent
 		var e2 = v.ensure_var(v.compile_expr(n_else))
 		v.add_assignment(e, e2)
@@ -837,17 +843,17 @@ redef class AControlableBlock
 	meth compile_inside_block(v: CompilerVisitor) is abstract
 	redef meth compile_stmt(v)
 	do
-		var old_break_label = v.break_label
-		var old_continue_label = v.continue_label
+		var old_break_label = v.nmc.break_label
+		var old_continue_label = v.nmc.continue_label
 		var id = v.new_number
-		v.break_label = "break_{id}"
-		v.continue_label = "continue_{id}"
+		v.nmc.break_label = "break_{id}"
+		v.nmc.continue_label = "continue_{id}"
 
 		compile_inside_block(v)
 
 
-		v.break_label = old_break_label
-		v.continue_label = old_continue_label
+		v.nmc.break_label = old_break_label
+		v.nmc.continue_label = old_continue_label
 	end
 end
 
@@ -858,14 +864,14 @@ redef class AWhileExpr
 		v.indent
 		var e = v.compile_expr(n_expr)
 		v.add_instr("if (!UNTAG_Bool({e})) break; /* while*/")
-		v.free_var(e)
+		v.cfc.free_var(e)
 		if n_block != null then
 			v.compile_stmt(n_block)
 		end
-		v.add_instr("{v.continue_label}: while(0);")
+		v.add_instr("{v.nmc.continue_label}: while(0);")
 		v.unindent
 		v.add_instr("}")
-		v.add_instr("{v.break_label}: while(0);")
+		v.add_instr("{v.nmc.break_label}: while(0);")
 	end
 end
 
@@ -886,8 +892,8 @@ redef class AForVardeclExpr
 			return
 		end
 		var ittype = prop.signature.return_type
-		v.free_var(e)
-		var iter = v.get_var
+		v.cfc.free_var(e)
+		var iter = v.cfc.get_var
 		v.add_assignment(iter, prop.compile_call(v, [e]))
 		var prop2 = ittype.local_class.select_method(once "is_ok".to_symbol)
 		if prop2 == null then
@@ -906,25 +912,25 @@ redef class AForVardeclExpr
 		end
 		v.add_instr("while (true) \{ /*for*/")
 		v.indent
-		var ok = v.get_var
+		var ok = v.cfc.get_var
 		v.add_assignment(ok, prop2.compile_call(v, [iter]))
 		v.add_instr("if (!UNTAG_Bool({ok})) break; /*for*/")
-		v.free_var(ok)
+		v.cfc.free_var(ok)
 		var e = prop3.compile_call(v, [iter])
 		e = v.ensure_var(e)
-		v.varnames[variable] = e
+		v.cfc.varnames[variable] = e
 		var par = parent
 		assert par isa AForExpr
 		var n_block = par.n_block
 		if n_block != null then
 			v.compile_stmt(n_block)
 		end
-		v.add_instr("{v.continue_label}: while(0);")
+		v.add_instr("{v.nmc.continue_label}: while(0);")
 		e = prop4.compile_call(v, [iter])
 		assert e == null
 		v.unindent
 		v.add_instr("}")
-		v.add_instr("{v.break_label}: while(0);")
+		v.add_instr("{v.nmc.break_label}: while(0);")
 	end
 end
 
@@ -943,7 +949,7 @@ end
 redef class AVarExpr
 	redef meth compile_expr(v)
 	do
-		return " {v.varnames[variable]} /*{variable.name}*/"
+		return " {v.cfc.varnames[variable]} /*{variable.name}*/"
 	end
 end
 
@@ -951,24 +957,24 @@ redef class AVarAssignExpr
 	redef meth compile_stmt(v)
 	do
 		var e = v.compile_expr(n_value)
-		v.add_assignment(v.varnames[variable], "{e} /*{variable.name}=*/")
+		v.add_assignment(v.cfc.varnames[variable], "{e} /*{variable.name}=*/")
 	end
 end
 
 redef class AVarReassignExpr
 	redef meth compile_stmt(v)
 	do
-		var e1 = v.varnames[variable]
+		var e1 = v.cfc.varnames[variable]
 		var e2 = v.compile_expr(n_value)
 		var e3 = assign_method.compile_call(v, [e1, e2])
-		v.add_assignment(v.varnames[variable], "{e3} /*{variable.name}*/")
+		v.add_assignment(v.cfc.varnames[variable], "{e3} /*{variable.name}*/")
 	end
 end
 
 redef class ASelfExpr
 	redef meth compile_expr(v)
 	do
-		return v.method_params[0]
+		return v.nmc.method_params[0]
 	end
 end
 
@@ -977,7 +983,7 @@ redef class AOrExpr
 	do
 		var e = v.ensure_var(v.compile_expr(n_expr))
 		v.add_instr("if (!UNTAG_Bool({e})) \{ /* or */")
-		v.free_var(e)
+		v.cfc.free_var(e)
 		v.indent
 		var e2 = v.compile_expr(n_expr2)
 		v.add_assignment(e, e2)
@@ -992,7 +998,7 @@ redef class AAndExpr
 	do
 		var e = v.ensure_var(v.compile_expr(n_expr))
 		v.add_instr("if (UNTAG_Bool({e})) \{ /* and */")
-		v.free_var(e)
+		v.cfc.free_var(e)
 		v.indent
 		var e2 = v.compile_expr(n_expr2)
 		v.add_assignment(e, e2)
@@ -1197,15 +1203,15 @@ redef class ASuperExpr
 
 	redef meth compile_expr(v)
 	do
-		var arity = v.method_params.length - 1
+		var arity = v.nmc.method_params.length - 1
 		if init_in_superclass != null then
 			arity = init_in_superclass.signature.arity
 		end
 		var args = new Array[String].with_capacity(arity + 1)
-		args.add(v.method_params[0])
+		args.add(v.nmc.method_params[0])
 		if n_args.length != arity then
 			for i in [0..arity[ do
-				args.add(v.method_params[i + 1])
+				args.add(v.nmc.method_params[i + 1])
 			end
 		else
 			for na in n_args do
@@ -1315,12 +1321,12 @@ redef class AOnceExpr
 	redef meth compile_expr(v)
 	do
 		var i = v.new_number
-		var cvar = v.get_var
+		var cvar = v.cfc.get_var
 		v.add_decl("static val_t once_value_{cvar}_{i}; static int once_bool_{cvar}_{i};")
 		v.add_instr("if (once_bool_{cvar}_{i}) {cvar} = once_value_{cvar}_{i};")
 		v.add_instr("else \{")
 		v.indent
-		v.free_var(cvar)
+		v.cfc.free_var(cvar)
 		var e = v.compile_expr(n_expr)
 		v.add_assignment(cvar, e)
 		v.add_instr("once_value_{cvar}_{i} = {cvar};")

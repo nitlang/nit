@@ -837,14 +837,15 @@ redef class MMLocalClass
 
 		var pi = primitive_info
 		if pi == null then
-			v.clear
+			v.cfc = new CFunctionContext(v)
+			v.nmc = new NitMethodContext(null)
 			var s = "val_t NEW_{name}(void)"
 			v.add_instr(s + " \{")
 			v.indent
 			var ctx_old = v.ctx
 			v.ctx = new CContext
 
-			v.method_params = ["OBJ2VAL(obj)"]
+			v.nmc.method_params = ["OBJ2VAL(obj)"]
 
 			v.add_instr("obj_t obj;")
 			v.add_instr("obj = alloc(sizeof(val_t) * {itab.length});")
@@ -883,7 +884,6 @@ redef class MMLocalClass
 				var p = self[g]
 				# FIXME skip invisible constructors
 				if not p.global.is_init then continue
-				v.clear
 				var params = new Array[String]
 				var args = ["self"]
 				for i in [0..p.signature.arity[ do
