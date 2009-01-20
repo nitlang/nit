@@ -281,9 +281,17 @@ end
 redef class PParam
 	redef meth after_typing(v)
 	do
+		# TODO: why the test?
 		if v.variable_ctx != null then
 			v.variable_ctx.add(variable)
 		end
+	end
+end
+
+redef class AClosureDecl
+	redef meth after_typing(v)
+	do
+		v.variable_ctx.add(variable)
 	end
 end
 
@@ -696,7 +704,7 @@ special ASuperInitCall
 			register_super_init_call(v, p)
 			if n_args.length > 0 then
 				var signature = get_signature(v, v.self_var.stype, p, true)
-				_arguments = process_signature(v, signature, p, n_args.to_a)
+				_arguments = process_signature(v, signature, p.name, n_args.to_a)
 			end
 		else
 			v.error(self, "Error: No super method to call for {v.local_property}.")
@@ -787,6 +795,9 @@ end
 
 class AAbsSendExpr
 special PExpr
+	# The signature of the called property
+	readable attr _prop_signature: MMSignature
+
 	# Compute the called global property
 	private meth do_typing(v: TypingVisitor, type_recv: MMType, is_implicit_self: Bool, recv_is_self: Bool, name: Symbol, raw_args: Array[PExpr])
 	do
@@ -794,9 +805,10 @@ special PExpr
 		if prop == null then return
 		var sig = get_signature(v, type_recv, prop, recv_is_self)
 		if sig == null then return
-		var args = process_signature(v, sig, prop, raw_args)
+		var args = process_signature(v, sig, prop.name, raw_args)
 		if args == null then return
 		_prop = prop
+		_prop_signature = sig
 		_arguments = args
 	end
 
@@ -836,14 +848,14 @@ special PExpr
 	end
 	
 	# Check the conformity of a set of arguments `raw_args' to a signature.
-	private meth process_signature(v: TypingVisitor, psig: MMSignature, prop: MMMethod, raw_args: Array[PExpr]): Array[PExpr]
+	private meth process_signature(v: TypingVisitor, psig: MMSignature, name: Symbol, raw_args: Array[PExpr]): Array[PExpr]
 	do
 		var par_vararg = psig.vararg_rank
 		var par_arity = psig.arity
 		var raw_arity: Int
 		if raw_args == null then raw_arity = 0 else raw_arity = raw_args.length
 		if par_arity > raw_arity or (par_arity != raw_arity and par_vararg == -1) then
-			v.error(self, "Error: Method '{prop}' arity missmatch.")
+			v.error(self, "Error: '{name}' arity missmatch.")
 			return null
 		end
 		var arg_idx = 0
@@ -954,6 +966,9 @@ special ASuperInitCall
 	# Raw arguments used (withour star transformation)
 	meth raw_arguments: Array[PExpr] is abstract
 
+	# Closure definitions
+	meth closure_defs: Array[PClosureDef] do return null
+
 	redef meth after_typing(v)
 	do
 		do_all_typing(v)
@@ -964,6 +979,23 @@ special ASuperInitCall
 		if not v.check_expr(n_expr) then return
 		do_typing(v, n_expr.stype, n_expr.is_implicit_self, n_expr.is_self, name, raw_arguments)
 		if prop == null then return
+
+		var cd = closure_defs
+		var cs = _prop_signature.closures # Closure signatures
+		if cd != null then
+			if cs.length == 0 then
+				v.error(self, "Error: property {prop} does not require blocs.")
+			else if cs.length != cd.length then
+				v.error(self, "Error: property {prop} requires {cs.length} blocs, {cd.length} found.")
+			else
+				for i in [0..cs.length[ do
+					cd[i].accept_typing2(v, cs[i])
+				end
+			end
+		else if cs.length != 0 then
+			v.error(self, "Error: property {prop} requires {cs.length} blocs.")
+		end
+
 		if prop.global.is_init then
 			if not v.local_property.global.is_init then
 				v.error(self, "Error: try to invoke constructor {prop} in a method.")
@@ -1067,21 +1099,38 @@ end
 redef class ACallFormExpr
 	redef meth after_typing(v)
 	do
-		if n_expr.is_implicit_self then
+		if n_expr != null and n_expr.is_implicit_self then
 			var name = n_id.to_symbol
 			var variable = v.variable_ctx[name]
 			if variable != null then
-				if not n_args.is_empty then
-					v.error(self, "Error: {name} is variable, not a function.")
+				if variable isa ClosureVariable then
+					var n = new AClosureCallExpr(n_id, n_args, n_closure_defs)
+					replace_with(n)
+					n.variable = variable
+					n.after_typing(v)
+					return
+				else
+					if not n_args.is_empty then
+						v.error(self, "Error: {name} is variable, not a function.")
+					end
+					var vform = variable_create(variable)
+					vform.variable = variable
+					replace_with(vform)
+					vform.after_typing(v)
+					return
 				end
-				var vform = variable_create(variable)
-				vform.variable = variable
-				replace_with(vform)
-				vform.after_typing(v)
-				return
 			end
 		end
 		super
+	end
+	
+	redef meth closure_defs
+	do
+		if n_closure_defs == null or n_closure_defs.is_empty then
+			return null
+		else
+			return n_closure_defs.to_a
+		end
 	end
 
 	# Create a variable acces corresponding to the call form
@@ -1146,6 +1195,55 @@ end
 redef class AInitExpr
 	redef meth name do return once "init".to_symbol
 	redef meth raw_arguments do return n_args.to_a
+end
+
+redef class AClosureCallExpr
+	redef meth after_typing(v)
+	do
+		var va = variable
+		var sig = va.signature 
+		var args = process_signature(v, sig, n_id.to_symbol, n_args.to_a)
+		if args == null then return
+		_prop = null
+		_prop_signature = sig
+		_arguments = args
+		_stype = sig.return_type
+	end
+end
+
+redef class PClosureDef
+	attr _accept_typing2: Bool
+	redef meth accept_typing(v)
+	do
+		# Typing is deferred, wait accept_typing2(v)
+		if _accept_typing2 then super
+	end
+
+	private meth accept_typing2(v: TypingVisitor, sig: MMSignature) is abstract
+end
+
+redef class AClosureDef
+	redef meth accept_typing2(v, sig)
+	do	
+		if sig.arity != n_id.length then
+			v.error(self, "Error: {sig.arity} automatic variable names expected, {n_id.length} found.")
+			return
+		end
+
+		signature = sig
+
+		v.variable_ctx = v.variable_ctx.sub
+		variables = new Array[AutoVariable]
+		for i in [0..n_id.length[ do
+			var va = new AutoVariable(n_id[i].to_symbol, self)
+			variables.add(va)
+			va.stype = sig[i]
+			v.variable_ctx.add(va)
+		end
+
+		_accept_typing2 = true
+		accept_typing(v)
+	end
 end
 
 redef class AIsaExpr

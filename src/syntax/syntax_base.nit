@@ -235,6 +235,22 @@ special Variable
 	init(n: Symbol, d: PNode) do super
 end
 
+# False variable corresponding to closures declared in signatures
+# Lives in the same namespace than variables
+class ClosureVariable
+special Variable
+	redef meth kind do return once "closure"
+
+	# The signature of the closure
+	readable attr _signature: MMSignature
+
+	init(n: Symbol, d: PNode, s: MMSignature)
+	do
+		super(n, d)
+		_signature = s
+	end
+end
+
 ###############################################################################
 
 # Visitor used during the syntax analysis
@@ -433,6 +449,14 @@ redef class PParam
 	meth variable: ParamVariable is abstract 
 end
 
+redef class PClosureDecl
+	# The signature of the declared closure
+	meth signature: MMSignature is abstract
+
+	# Associated bloc variable
+	meth variable: ClosureVariable is abstract
+end
+
 redef class PType
 	# Retrieve the local class corresponding to the type.
 	# Display an error and return null if there is no class
@@ -591,3 +615,15 @@ redef class AVarFormExpr
 	readable writable attr _variable: Variable 
 end
 
+redef class AClosureCallExpr
+	# Associated closure variable
+	readable writable attr _variable: ClosureVariable
+end
+
+redef class PClosureDef
+	# Associated signature
+	readable writable attr _signature: MMSignature
+
+	# Automatic variables
+	readable writable attr _variables: Array[AutoVariable]
+end

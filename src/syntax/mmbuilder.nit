@@ -390,6 +390,9 @@ private class SignatureBuilder
 	# Position of the current star parameter
 	readable writable attr _vararg_rank: Int = -1
 
+	# Current closure declarations
+	readable writable attr _closure_decls: Array[AClosureDecl] = new Array[AClosureDecl]
+
 	# Current signature
 	readable writable attr _signature: MMSignature = null 
 end
@@ -785,6 +788,11 @@ redef class PPropdef
 				v.error(v.signature_builder.untyped_params.first, "Error: Untyped parameter.")
 			else
 				prop.signature = new MMSignature(new Array[MMType], null, v.local_class.get_type)
+				if v.signature_builder.closure_decls != null then
+					for clos in v.signature_builder.closure_decls do
+						prop.signature.closures.add(clos.signature)
+					end
+				end
 			end
 		end
 	end
@@ -1103,6 +1111,9 @@ redef class ASignature
 			if v.signature_builder.vararg_rank >= 0 then
 				v.signature_builder.signature.vararg_rank = v.signature_builder.vararg_rank
 			end
+			for clos in v.signature_builder.closure_decls do
+				v.signature_builder.signature.closures.add(clos.signature)
+			end
 		end
 	end
 
@@ -1154,6 +1165,28 @@ end
 
 redef class AParam
 	redef meth is_vararg do return n_dotdotdot != null
+end
+
+redef class AClosureDecl
+
+	redef readable attr _signature: MMSignature
+
+	redef readable attr _variable: ClosureVariable
+
+	redef meth accept_property_verifier(v)
+	do
+		var old_signature_builder = v.signature_builder
+		v.signature_builder = new SignatureBuilder
+		super
+		var sig = v.signature_builder.signature
+		if sig == null then
+			sig = new MMSignature(new Array[MMType], null, v.local_class.get_type)
+		end
+		_signature = sig
+		v.signature_builder = old_signature_builder
+		old_signature_builder.closure_decls.add(self)
+		_variable = new ClosureVariable(n_id.to_symbol, self, sig)
+	end
 end
 
 redef class PType

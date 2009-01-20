@@ -82,6 +82,9 @@ class MMSignature
 	# The return type
  	readable attr _return_type: MMType 
 
+	# The closure parameters
+ 	readable attr _closures: Array[MMSignature] = new Array[MMSignature]
+
 	# Number of parameters
 	meth arity: Int
 	do
@@ -157,7 +160,11 @@ class MMSignature
 		if rv != null then
 			rv = rv.for_module(mod).adapt_to(r)
 		end
-		return new MMSignature(p,rv,r)
+		var res = new MMSignature(p,rv,r)
+		for clos in _closures do
+			res.closures.add(clos.adaptation_to(r))
+		end
+		return res
 	end
 
 	attr _not_for_self_cache: MMSignature
@@ -188,6 +195,9 @@ class MMSignature
 
 		if need_for_self then
 			res = new MMSignature(p, rv, _recv)
+			for clos in _closures do
+				res.closures.add(clos.not_for_self)
+			end
 		else
 			res = self
 		end
