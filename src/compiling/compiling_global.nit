@@ -845,11 +845,15 @@ redef class MMLocalClass
 			var ctx_old = v.ctx
 			v.ctx = new CContext
 
-			v.nmc.method_params = ["OBJ2VAL(obj)"]
+			var self_var = new ParamVariable(null, null)
+			var self_var_cname = v.cfc.register_variable(self_var)
+			v.nmc.method_params = [self_var]
 
 			v.add_instr("obj_t obj;")
 			v.add_instr("obj = alloc(sizeof(val_t) * {itab.length});")
 			v.add_instr("obj->vft = (classtable_elt_t*)VFT_{name};")
+			v.add_assignment(self_var_cname, "OBJ2VAL(obj)")
+
 			for g in global_properties do
 				var p = self[g]
 				var t = p.signature.return_type

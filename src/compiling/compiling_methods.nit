@@ -114,9 +114,13 @@ redef class CompilerVisitor
 		while i < l do
 			var p = n.super_init_calls[i]
 			if p == stop_prop then break
-			var cargs = nmc.method_params
+			var cargs = new Array[String]
 			if p.signature.arity == 0 then
-				cargs = [nmc.method_params[0]]
+				cargs.add(cfc.varname(nmc.method_params[0]))
+			else
+				for va in nmc.method_params do
+					cargs.add(cfc.varname(va))
+				end
 			end
 			#s.append(" {p}")
 			p.compile_call(self, cargs)
@@ -205,8 +209,8 @@ class NitMethodContext
 	# Is a "return" found in the method body
 	readable writable attr _has_return: Bool = false
 
-	# Association between parameters and the corresponding c variables
-	readable writable attr _method_params: Array[String] 
+	# Association between parameters and the corresponding variables
+	readable writable attr _method_params: Array[ParamVariable] 
 
 	# Where a nit return must branch
 	readable writable attr _return_label: String 
@@ -463,6 +467,10 @@ redef class AConcreteMethPropdef
 		var old_nmc = v.nmc
 		v.nmc = new NitMethodContext(method)
 
+		var cname = v.cfc.register_variable(self_var)
+		v.add_assignment(cname, params[0])
+		v.nmc.method_params = [self_var]
+
 		var orig_meth: MMLocalProperty = method.global.intro
 		var orig_sig = orig_meth.signature_for(method.signature.recv)
 		if n_signature != null then
@@ -470,6 +478,7 @@ redef class AConcreteMethPropdef
 			assert sig isa ASignature
 			for ap in sig.n_params do
 				var cname = v.cfc.register_variable(ap.variable)
+				v.nmc.method_params.add(ap.variable)
 				var orig_type = orig_sig[ap.position]
 				if not orig_type < ap.variable.stype then
 					# FIXME: do not test always
@@ -488,7 +497,6 @@ redef class AConcreteMethPropdef
 			v.add_instr("if (init_table[{itpos}]) return;")
 		end
 
-		v.nmc.method_params = params
 		v.nmc.return_label = "return_label{v.new_number}"
 		if method.signature.return_type != null then
 			v.nmc.return_value = v.cfc.get_var
@@ -993,7 +1001,7 @@ end
 redef class ASelfExpr
 	redef meth compile_expr(v)
 	do
-		return v.nmc.method_params[0]
+		return v.cfc.varname(v.nmc.method_params[0])
 	end
 end
 
@@ -1227,10 +1235,10 @@ redef class ASuperExpr
 			arity = init_in_superclass.signature.arity
 		end
 		var args = new Array[String].with_capacity(arity + 1)
-		args.add(v.nmc.method_params[0])
+		args.add(v.cfc.varname(v.nmc.method_params[0]))
 		if n_args.length != arity then
 			for i in [0..arity[ do
-				args.add(v.nmc.method_params[i + 1])
+				args.add(v.cfc.varname(v.nmc.method_params[i + 1]))
 			end
 		else
 			for na in n_args do

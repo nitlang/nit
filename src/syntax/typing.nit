@@ -44,8 +44,8 @@ special AbsSyntaxVisitor
 	# Current knowledge about variables names and types
 	readable writable attr _variable_ctx: VariableContext
 
-	# Type of the receiver
-	readable writable attr _self_type: MMType
+	# The current reciever
+	readable writable attr _self_var: ParamVariable
 
 	# Block of the current method
 	readable writable attr _top_block: PExpr
@@ -196,7 +196,8 @@ end
 redef class PClassdef
 	redef meth accept_typing(v)
 	do
-		v.self_type = local_class.get_type
+		v.self_var = new ParamVariable("self".to_symbol, self)
+		v.self_var.stype = local_class.get_type
 		super
 	end
 end
@@ -212,9 +213,11 @@ redef class AAttrPropdef
 end
 
 redef class AMethPropdef
+	redef readable attr _self_var: ParamVariable
 	redef meth accept_typing(v)
 	do
 		v.variable_ctx = new VariableContext
+		_self_var = v.self_var
 		super
 	end
 end
@@ -293,8 +296,8 @@ redef class PExpr
 	# Is the expression the current receiver (implicit or explicit)
 	meth is_self: Bool do return false
 
-	# Is the expression a variable access
-	meth is_variable: Bool do return false
+	# The variable accessed is any
+	meth its_variable: Variable do return null
 
 	# The variable type information if current boolean expression is true
 	readable private attr _if_true_variable_ctx: VariableContext
@@ -422,7 +425,7 @@ redef class AAssertExpr
 end
 
 redef class AVarExpr
-	redef meth is_variable do return true
+	redef meth its_variable do return variable
 
 	redef meth after_typing(v)
 	do
@@ -481,10 +484,12 @@ redef class AMinusAssignOp
 end
 
 redef class ASelfExpr
+	redef meth its_variable do return variable
+
 	redef meth after_typing(v)
 	do
-		assert v.self_type != null
-		_stype = v.self_type
+		variable = v.self_var
+		_stype = v.variable_ctx.stype(variable)
 	end
 
         redef meth is_self do return true
@@ -682,7 +687,7 @@ special ASuperInitCall
 			_init_in_superclass = p
 			register_super_init_call(v, p)
 			if n_args.length > 0 then
-				var signature = get_signature(v, v.self_type, p, true)
+				var signature = get_signature(v, v.self_var.stype, p, true)
 				_arguments = process_signature(v, signature, p, n_args.to_a)
 			end
 		else
@@ -690,12 +695,12 @@ special ASuperInitCall
 			return
 		end
 
-		if precs.first.signature_for(v.self_type).return_type != null then
+		if precs.first.signature_for(v.self_var.stype).return_type != null then
 			var stypes = new Array[MMType]
 			var stype: MMType = null
 			for prop in precs do
 				assert prop isa MMMethod
-				var t = prop.signature_for(v.self_type).return_type.for_module(v.module).adapt_to(v.local_property.signature.recv)
+				var t = prop.signature_for(v.self_var.stype).return_type.for_module(v.module).adapt_to(v.local_property.signature.recv)
 				stypes.add(t)
 				if stype == null or stype < t then
 					stype = t
@@ -1138,10 +1143,9 @@ end
 redef class AIsaExpr
 	redef meth after_typing(v)
 	do
-		if n_expr.is_variable then
-			var n = n_expr
-			assert n isa AVarExpr
-			_if_true_variable_ctx = v.variable_ctx.sub_with(n.variable, n_type.stype)
+		var variable = n_expr.its_variable
+		if variable != null then
+			_if_true_variable_ctx = v.variable_ctx.sub_with(variable, n_type.stype)
 		end
 		_stype = v.type_bool
 	end

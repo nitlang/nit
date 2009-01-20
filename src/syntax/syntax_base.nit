@@ -207,8 +207,8 @@ abstract class Variable
 
 	init(n: Symbol, d: PNode)
 	do
-		assert n != null
-		assert d != null
+		#assert n != null
+		#assert d != null
 		_name = n
 		_decl = d
 	end
@@ -415,6 +415,9 @@ end
 redef class AMethPropdef
 	# Associated method (MM entity)
 	meth method: MMMethSrcMethod is abstract
+
+	# Associated 'self' variable
+	meth self_var: ParamVariable is abstract
 end
 
 redef class ATypePropdef
@@ -576,6 +579,11 @@ end
 redef class AForVardeclExpr
 	# Associated automatic local variable
 	readable writable attr _variable: AutoVariable
+end
+
+redef class ASelfExpr
+	# Associated local variable
+	readable writable attr _variable: ParamVariable 
 end
 
 redef class AVarFormExpr
