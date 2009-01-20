@@ -265,9 +265,14 @@ special PExpr
 
 		super
 
+		# Check control flow if any
+		check_control_flow(v)
+
 		# Restore control flow value since all controlable blocks are optionnal
 		v.control_flow_ctx = old_control_flow_ctx
 	end
+
+	private meth check_control_flow(v: ControlFlowVisitor) do end
 end
 
 redef class AWhileExpr
@@ -303,6 +308,21 @@ redef class AVarReassignExpr
 	end
 end
 
+redef class AClosureDef
+special AControlableBlock
+	redef meth accept_control_flow(v)
+	do
+		for va in variables do v.mark_is_set(va)
+		super
+	end
+
+	redef meth check_control_flow(v)
+	do
+		if v.control_flow_ctx.unreash == false and signature.return_type != null then
+			v.error(self, "Control error: Reached end of bloc (a 'continue' with a value was expected).")
+		end
+	end
+end
 
 redef class AOnceExpr
 	redef meth accept_control_flow(v)

@@ -50,6 +50,9 @@ special AbsSyntaxVisitor
 	# Block of the current method
 	readable writable attr _top_block: PExpr
 
+	# Current closure 'return' static type (if any)
+	readable writable attr _closure_stype: MMType
+
 	# List of explicit invocation of constructors of super-classes
 	readable writable attr _explicit_super_init_calls: Array[MMMethod]
 
@@ -358,6 +361,20 @@ redef class AReturnExpr
 			v.error(self, "Error: Return without value in a function.")
 		else if n_expr != null and t == null then
 			v.error(self, "Error: Return with value in a procedure.")
+		else if n_expr != null and t != null then
+			v.check_conform_expr(n_expr, t)
+		end
+	end
+end
+
+redef class AContinueExpr
+	redef meth after_typing(v)
+	do
+		var t = v.closure_stype
+		if n_expr == null and t != null then
+			v.error(self, "Error: continue with a value required in this bloc.")
+		else if n_expr != null and t == null then
+			v.error(self, "Error: continue without value required in this bloc.")
 		else if n_expr != null and t != null then
 			v.check_conform_expr(n_expr, t)
 		end
@@ -1232,6 +1249,9 @@ redef class AClosureDef
 
 		signature = sig
 
+		var old_stype = v.closure_stype
+		v.closure_stype = sig.return_type
+
 		v.variable_ctx = v.variable_ctx.sub
 		variables = new Array[AutoVariable]
 		for i in [0..n_id.length[ do
@@ -1243,6 +1263,8 @@ redef class AClosureDef
 
 		_accept_typing2 = true
 		accept_typing(v)
+
+		v.closure_stype = old_stype
 	end
 end
 
