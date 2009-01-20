@@ -55,7 +55,7 @@ special ToolContext
 			dump_context_info
 		end
 
-		if not to_do.is_empty and not opt_only_metamodel.value then
+		if not to_do.is_empty and not opt_only_metamodel.value and not opt_only_parse.value then
 			perform_work(to_do)
 		end
 	end
