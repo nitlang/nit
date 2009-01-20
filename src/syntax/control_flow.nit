@@ -81,9 +81,6 @@ private class ControlFlowContext
 	# Previous control flow context if any
 	readable attr _prev: ControlFlowContext
 
-	# Is a return met?
-	readable writable attr _has_return: Bool 
-
 	# Is a control flow break met? (return, break, continue)
 	readable writable attr _unreash: Bool
 
@@ -115,7 +112,6 @@ private class ControlFlowContext
 	init with_prev(p: ControlFlowContext)
 	do
 		_prev = p
-		_has_return = p.has_return
 		_unreash = p.unreash
 		_already_unreash = p.already_unreash
 		_base_block = p.base_block
@@ -143,8 +139,8 @@ redef class AConcreteMethPropdef
 	redef meth accept_control_flow(v)
 	do
 		super
-		if v.control_flow_ctx.has_return == false and method.signature.return_type != null then
-			v.error(self, "Control error: Reached end of function.")
+		if v.control_flow_ctx.unreash == false and method.signature.return_type != null then
+			v.error(self, "Control error: Reached end of function (a 'return' with a value was expected).")
 		end
 	end
 end
@@ -174,7 +170,6 @@ redef class AReturnExpr
 	redef meth accept_control_flow(v)
 	do
 		super
-		v.control_flow_ctx.has_return = true
 		v.control_flow_ctx.unreash = true
 	end
 end
@@ -217,7 +212,6 @@ redef class AAbortExpr
 	redef meth accept_control_flow(v)
 	do
 		super
-		v.control_flow_ctx.has_return = true
 		v.control_flow_ctx.unreash = true
 	end
 end
@@ -244,7 +238,6 @@ redef class AIfExpr
 			v.visit(n_else)
 
 			# Merge then and else in the old control_flow
-			old_control_flow_ctx.has_return = v.control_flow_ctx.has_return and then_control_flow_ctx.has_return
 			old_control_flow_ctx.unreash = v.control_flow_ctx.unreash and then_control_flow_ctx.unreash
 
 			if v.control_flow_ctx.unreash then v.control_flow_ctx = then_control_flow_ctx
