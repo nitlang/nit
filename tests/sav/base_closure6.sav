@@ -1,0 +1,2 @@
+./base_closure6.nit:55,25--25: Type error: expected U, got V
+./base_closure6.nit:65,8--8: Type error: expected U, got V
