@@ -53,6 +53,12 @@ special AbsSyntaxVisitor
 	# Current closure 'return' static type (if any)
 	readable writable attr _closure_stype: MMType
 
+	# Current closure method return type (for break) (if any)
+	readable writable attr _closure_break_stype: MMType = null
+
+	# Current closure break expressions (if any)
+	readable writable attr _break_list: Array[PExpr]
+
 	# List of explicit invocation of constructors of super-classes
 	readable writable attr _explicit_super_init_calls: Array[MMMethod]
 
@@ -377,6 +383,21 @@ redef class AContinueExpr
 			v.error(self, "Error: continue without value required in this bloc.")
 		else if n_expr != null and t != null then
 			v.check_conform_expr(n_expr, t)
+		end
+	end
+end
+
+redef class ABreakExpr
+	redef meth after_typing(v)
+	do
+		var t = v.closure_break_stype
+		if n_expr == null and t != null then
+			v.error(self, "Error: break with a value required in this bloc.")
+		else if n_expr != null and t == null then
+			v.error(self, "Error: break without value required in this bloc.")
+		else if n_expr != null and t != null then
+			# Typing check can only be done later
+			v.break_list.add(n_expr)
 		end
 	end
 end
@@ -997,6 +1018,9 @@ special ASuperInitCall
 		do_typing(v, n_expr.stype, n_expr.is_implicit_self, n_expr.is_self, name, raw_arguments)
 		if prop == null then return
 
+		var t = prop.signature_for(n_expr.stype).return_type
+		if t != null and not n_expr.is_self then t = t.not_for_self
+
 		var cd = closure_defs
 		var cs = _prop_signature.closures # Closure signatures
 		if cd != null then
@@ -1005,9 +1029,25 @@ special ASuperInitCall
 			else if cs.length != cd.length then
 				v.error(self, "Error: property {prop} requires {cs.length} blocs, {cd.length} found.")
 			else
+				var old_bbst = v.closure_break_stype
+				var old_bl = v.break_list
+				v.closure_break_stype = t
+				v.break_list = new Array[ABreakExpr]
 				for i in [0..cs.length[ do
 					cd[i].accept_typing2(v, cs[i])
 				end
+				for n in v.break_list do
+					var ntype = n.stype
+					if t == null or (t != null and t < ntype) then
+						t = ntype
+					end
+				end
+				for n in v.break_list do
+					v.check_conform_expr(n, t)
+				end
+
+				v.closure_break_stype = old_bbst
+				v.break_list = old_bl
 			end
 		else if cs.length != 0 then
 			v.error(self, "Error: property {prop} requires {cs.length} blocs.")
@@ -1022,8 +1062,6 @@ special ASuperInitCall
 				register_super_init_call(v, prop)
 			end
 		end
-		var t = prop.signature_for(n_expr.stype).return_type
-		if t != null and not n_expr.is_self then t = t.not_for_self
 		_stype = t
 	end
 end
