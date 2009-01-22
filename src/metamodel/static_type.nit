@@ -220,20 +220,25 @@ class MMClosure
 	# The signature of the closure
 	readable attr _signature: MMSignature
 
+	# Is the closure a brek one
+	# aka is defined with the break keyword thus does not return
+	readable attr _is_break: Bool
+
 	# Adapt the signature to a different receiver
 	meth adaptation_to(r: MMType): MMClosure
 	do
-		return new MMClosure(_signature.adaptation_to(r))
+		return new MMClosure(_signature.adaptation_to(r), _is_break)
 	end
 
-	init(s: MMSignature)
+	init(s: MMSignature, is_break: Bool)
 	do
 		_signature = s
+		_is_break = is_break
 	end
 
 	meth not_for_self: MMClosure
 	do
-		return new MMClosure(_signature.not_for_self)
+		return new MMClosure(_signature.not_for_self, _is_break)
 	end
 end
 

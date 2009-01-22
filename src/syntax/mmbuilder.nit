@@ -1179,7 +1179,10 @@ redef class AClosureDecl
 		if sig == null then
 			sig = new MMSignature(new Array[MMType], null, v.local_class.get_type)
 		end
-		var clos = new MMClosure(sig)
+		if sig.return_type != null and n_kwbreak != null then
+			v.error(self, "Syntax Error: A break bloc cannot have a return value.")
+		end
+		var clos = new MMClosure(sig, n_kwbreak != null)
 		v.signature_builder = old_signature_builder
 		old_signature_builder.closure_decls.add(self)
 		_variable = new ClosureVariable(n_id.to_symbol, self, clos)

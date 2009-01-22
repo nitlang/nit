@@ -1,0 +1,1 @@
+alt/base_closure_break_alt6.nit:40,3--10: Error: 'continue' forbiden in break blocks.

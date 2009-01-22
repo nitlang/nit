@@ -216,6 +216,14 @@ redef class AAbortExpr
 	end
 end
 
+redef class AClosureCallExpr
+	redef meth accept_control_flow(v)
+	do
+		super
+		if variable.closure.is_break then v.control_flow_ctx.unreash = true
+	end
+end
+
 redef class AIfExpr
 	redef meth accept_control_flow(v)
 	do
@@ -318,8 +326,12 @@ special AControlableBlock
 
 	redef meth check_control_flow(v)
 	do
-		if v.control_flow_ctx.unreash == false and closure.signature.return_type != null then
-			v.error(self, "Control error: Reached end of bloc (a 'continue' with a value was expected).")
+		if v.control_flow_ctx.unreash == false then
+			if closure.signature.return_type != null then
+				v.error(self, "Control error: Reached end of bloc (a 'continue' with a value was expected).")
+			else if closure.is_break then
+				v.error(self, "Control error: Reached end of break bloc (a 'break' was expected).")
+			end
 		end
 	end
 end

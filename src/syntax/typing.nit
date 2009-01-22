@@ -50,8 +50,8 @@ special AbsSyntaxVisitor
 	# Block of the current method
 	readable writable attr _top_block: PExpr
 
-	# Current closure 'return' static type (if any)
-	readable writable attr _closure_stype: MMType
+	# Current closure (if any)
+	readable writable attr _closure: MMClosure
 
 	# Current closure method return type (for break) (if any)
 	readable writable attr _closure_break_stype: MMType = null
@@ -376,7 +376,16 @@ end
 redef class AContinueExpr
 	redef meth after_typing(v)
 	do
-		var t = v.closure_stype
+		var c = v.closure
+		var t: MMType = null
+		if c != null then 
+			if c.is_break then
+				v.error(self, "Error: 'continue' forbiden in break blocks.")
+				return
+			end
+			t = c.signature.return_type
+		end
+
 		if n_expr == null and t != null then
 			v.error(self, "Error: continue with a value required in this bloc.")
 		else if n_expr != null and t == null then
@@ -1288,8 +1297,8 @@ redef class AClosureDef
 
 		closure = clos
 
-		var old_stype = v.closure_stype
-		v.closure_stype = sig.return_type
+		var old_clos = v.closure
+		v.closure = clos
 
 		v.variable_ctx = v.variable_ctx.sub
 		variables = new Array[AutoVariable]
@@ -1303,7 +1312,7 @@ redef class AClosureDef
 		_accept_typing2 = true
 		accept_typing(v)
 
-		v.closure_stype = old_stype
+		v.closure = old_clos
 	end
 end
 
