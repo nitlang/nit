@@ -372,7 +372,7 @@ redef class MMSrcMethod
 		var first_closure_index = signature.arity + 1 # Wich parameter is the first closure
 		for i in [0..signature.closures.length[ do
 			var closcn = closure_cname(i)
-			var cs = signature.closures[i] # Closure signature
+			var cs = signature.closures[i].signature # Closure signature
 			var subparams = new Array[String] # Parameters of the closure
 			subparams.add("struct {closcn}*")
 			for j in [0..cs.arity[ do
@@ -1502,7 +1502,7 @@ redef class AClosureDef
 		var cname = "OC_{v.nmc.method.cname}_{v.out_contexts.length}"
 		_cname = cname
 		var args = new Array[String]
-		for i in [0..signature.arity[ do
+		for i in [0..closure.signature.arity[ do
 			args.add(" param{i}")
 		end
 
@@ -1555,12 +1555,12 @@ redef class AClosureDef
 	do
 		var params = new Array[String]
 		params.add("struct {closcn}* closctx")
-		for i in [0..signature.arity[ do
+		for i in [0..closure.signature.arity[ do
 			var p = "val_t {args[i]}"
 			params.add(p)
 		end
 		var ret: String
-		if signature.return_type != null then
+		if closure.signature.return_type != null then
 			ret = "val_t"
 		else
 			ret = "void"
@@ -1593,7 +1593,7 @@ redef class AClosureDef
 		v.add_instr("{v.nmc.continue_label}: while(false);")
 
 		var ret: String = null
-		if signature.return_type != null then ret = v.nmc.continue_value
+		if closure.signature.return_type != null then ret = v.nmc.continue_value
 
 		v.nmc.continue_value = old_cv
 		v.nmc.continue_label = old_cl
@@ -1614,7 +1614,7 @@ redef class AClosureCallExpr
 		end
 		var s = "({ivar}->fun({cargs.join(", ")})) /* Invoke closure {variable} */"
 		var va: String = null
-		if variable.signature.return_type != null then
+		if variable.closure.signature.return_type != null then
 			va = v.cfc.get_var
 			v.add_assignment(va, s)
 		else

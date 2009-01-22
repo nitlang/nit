@@ -1256,7 +1256,7 @@ redef class AClosureCallExpr
 	redef meth after_typing(v)
 	do
 		var va = variable
-		var sig = va.signature 
+		var sig = va.closure.signature 
 		var args = process_signature(v, sig, n_id.to_symbol, n_args.to_a)
 		if args == null then return
 		_prop = null
@@ -1274,18 +1274,19 @@ redef class PClosureDef
 		if _accept_typing2 then super
 	end
 
-	private meth accept_typing2(v: TypingVisitor, sig: MMSignature) is abstract
+	private meth accept_typing2(v: TypingVisitor, clos: MMClosure) is abstract
 end
 
 redef class AClosureDef
-	redef meth accept_typing2(v, sig)
+	redef meth accept_typing2(v, clos)
 	do	
+		var sig = clos.signature
 		if sig.arity != n_id.length then
 			v.error(self, "Error: {sig.arity} automatic variable names expected, {n_id.length} found.")
 			return
 		end
 
-		signature = sig
+		closure = clos
 
 		var old_stype = v.closure_stype
 		v.closure_stype = sig.return_type

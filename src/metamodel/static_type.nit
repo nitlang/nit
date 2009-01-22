@@ -83,7 +83,7 @@ class MMSignature
  	readable attr _return_type: MMType 
 
 	# The closure parameters
- 	readable attr _closures: Array[MMSignature] = new Array[MMSignature]
+ 	readable attr _closures: Array[MMClosure] = new Array[MMClosure]
 
 	# Number of parameters
 	meth arity: Int
@@ -212,6 +212,28 @@ class MMSignature
 		_params = params
 		_return_type = return_type
 		_recv = r
+	end
+end
+
+# A closure in a signature
+class MMClosure
+	# The signature of the closure
+	readable attr _signature: MMSignature
+
+	# Adapt the signature to a different receiver
+	meth adaptation_to(r: MMType): MMClosure
+	do
+		return new MMClosure(_signature.adaptation_to(r))
+	end
+
+	init(s: MMSignature)
+	do
+		_signature = s
+	end
+
+	meth not_for_self: MMClosure
+	do
+		return new MMClosure(_signature.not_for_self)
 	end
 end
 

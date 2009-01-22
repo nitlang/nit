@@ -318,7 +318,7 @@ special AControlableBlock
 
 	redef meth check_control_flow(v)
 	do
-		if v.control_flow_ctx.unreash == false and signature.return_type != null then
+		if v.control_flow_ctx.unreash == false and closure.signature.return_type != null then
 			v.error(self, "Control error: Reached end of bloc (a 'continue' with a value was expected).")
 		end
 	end

@@ -242,12 +242,12 @@ special Variable
 	redef meth kind do return once "closure"
 
 	# The signature of the closure
-	readable attr _signature: MMSignature
+	readable attr _closure: MMClosure
 
-	init(n: Symbol, d: PNode, s: MMSignature)
+	init(n: Symbol, d: PNode, c: MMClosure)
 	do
 		super(n, d)
-		_signature = s
+		_closure = c
 	end
 end
 
@@ -450,10 +450,7 @@ redef class PParam
 end
 
 redef class PClosureDecl
-	# The signature of the declared closure
-	meth signature: MMSignature is abstract
-
-	# Associated bloc variable
+	# Associated closure variable
 	meth variable: ClosureVariable is abstract
 end
 
@@ -621,8 +618,8 @@ redef class AClosureCallExpr
 end
 
 redef class PClosureDef
-	# Associated signature
-	readable writable attr _signature: MMSignature
+	# Associated closure
+	readable writable attr _closure: MMClosure
 
 	# Automatic variables
 	readable writable attr _variables: Array[AutoVariable]
