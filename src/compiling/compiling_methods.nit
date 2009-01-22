@@ -67,6 +67,9 @@ redef class CompilerVisitor
 
 	readable writable attr _nmc: NitMethodContext
 
+	# C outputs written outside the current C function.
+	readable writable attr _out_contexts: Array[CContext] = new Array[CContext]
+
 	# Generate an fprintf to display an error location
 	meth printf_locate_error(node: PNode): String
 	do
@@ -149,9 +152,16 @@ class CFunctionContext
 	# Association between nit variable and the corrsponding c variable
 	attr _varnames: Map[Variable, String] = new HashMap[Variable, String]
 
+	# Are we currenlty in a closure definition?
+	readable writable attr _in_closure: Bool = false
+
 	meth varname(v: Variable): String
 	do
-		return _varnames[v]
+		if _in_closure then
+			return "closctx->{_varnames[v]}"
+		else
+			return _varnames[v]
+		end
 	end
 
 	# Return the next available variable
@@ -160,6 +170,7 @@ class CFunctionContext
 		var v = variable(_variable_index)
 		_variable_index = _variable_index + 1
 		if _variable_index > _variable_index_max then
+			#visitor.add_decl("val_t {v};")
 			_variable_index_max = _variable_index 
 		end
 		return v
@@ -172,10 +183,29 @@ class CFunctionContext
 		return s
 	end
 
+	# Next available closure variable number
+	attr _closurevariable_index: Int = 0
+
+	meth register_closurevariable(v: ClosureVariable): String
+	do
+		var s = "closurevariable[{_closurevariable_index}]"
+		_closurevariable_index += 1
+		_varnames[v] = s
+		if _in_closure then
+			return "(closctx->{s})"
+		else
+			return s
+		end
+	end
+
 	# Return the ith variable
 	protected meth variable(i: Int): String
 	do
-		return "variable[{i}]"
+		if _in_closure then
+			return "(closctx->variable[{i}])"
+		else
+			return "variable[{i}]"
+		end
 	end
 
 	# Mark the variable available
@@ -196,6 +226,11 @@ class CFunctionContext
 		else
 			visitor.add_decl("val_t *variable = NULL;")
 		end
+		if _closurevariable_index > 0 then
+			visitor.add_decl("void *closurevariable[{_closurevariable_index}];")
+		else
+			visitor.add_decl("void **closurevariable = NULL;")
+		end
 	end
 
 	init(v: CompilerVisitor) do _visitor = v
@@ -205,9 +240,6 @@ end
 class NitMethodContext
 	# Current method compiled
 	readable attr _method: MMSrcMethod
-
-	# Is a "return" found in the method body
-	readable writable attr _has_return: Bool = false
 
 	# Association between parameters and the corresponding variables
 	readable writable attr _method_params: Array[ParamVariable] 
@@ -224,6 +256,12 @@ class NitMethodContext
 	# Variable where a functionnal nit return must store its value
 	readable writable attr _return_value: String 
 
+	# Variable where a functionnal nit break must store its value
+	readable writable attr _break_value: String 
+
+	# Variable where a functionnal nit continue must store its value
+	readable writable attr _continue_value: String 
+
 	init(method: MMSrcMethod)
 	do
 		_method = method
@@ -231,6 +269,10 @@ class NitMethodContext
 end
 
 ###############################################################################
+
+redef class ClosureVariable
+	readable writable attr _ctypename: String
+end
 
 redef class MMMethod
 	# Compile a call on self for given arguments
@@ -293,6 +335,12 @@ redef class MMMethod
 		var vcall = "{m}({cargs.join(", ")}) /*super {local_class}::{name}*/"
 		return vcall
 	end
+
+	# Cname of the i-th closure C struct type
+	protected meth closure_cname(i: Int): String
+	do
+		return "WBT_{cname}_{i}"
+	end
 end
 
 redef class MMAttribute
@@ -310,6 +358,7 @@ redef class MMLocalProperty
 end
 
 redef class MMSrcMethod
+
 	# Compile and declare the signature to C
 	protected meth decl_csignature(v: CompilerVisitor, args: Array[String]): String
 	do
@@ -319,15 +368,36 @@ redef class MMSrcMethod
 			var p = "val_t {args[i+1]}"
 			params.add(p)
 		end
+
+		var first_closure_index = signature.arity + 1 # Wich parameter is the first closure
+		for i in [0..signature.closures.length[ do
+			var closcn = closure_cname(i)
+			var cs = signature.closures[i] # Closure signature
+			var subparams = new Array[String] # Parameters of the closure
+			subparams.add("struct {closcn}*")
+			for j in [0..cs.arity[ do
+				var p = "val_t"
+				subparams.add(p)
+			end
+			var r = "void"
+			if cs.return_type != null then r = "val_t"
+			params.add("struct {closcn} *{args[first_closure_index+i]}")
+			v.add_decl("struct {closcn};")
+			v.add_decl("typedef {r} (*F{closcn})({subparams.join(", ")});")
+			v.add_decl("struct {closcn} \{F{closcn} fun; val_t *has_broke; val_t broke_value; val_t *variable; void **closurevariable;\};")
+		end
+
 		if global.is_init then
 			params.add("int* init_table")
 		end
+
 		var ret: String
 		if signature.return_type != null then
 			ret = "val_t"
 		else
 			ret = "void"
 		end
+
 		var p = params.join(", ")
 		var s = "{ret} {cname}({p})"
 		v.add_decl("typedef {ret} (* {cname}_t)({p});")
@@ -344,6 +414,9 @@ redef class MMSrcMethod
 		for i in [0..signature.arity[ do
 			args.add(" param{i}")
 		end
+		for i in [0..signature.closures.length[ do
+			args.add(" wd{i}")
+		end
 		var cs = decl_csignature(v, args)
 		v.add_decl("#define LOCATE_{cname} \"{full_name}\"")
 
@@ -351,6 +424,8 @@ redef class MMSrcMethod
 		v.indent
 		var ctx_old = v.ctx
 		v.ctx = new CContext
+
+		v.out_contexts.clear
 
 		var ln = 0
 		var s = self
@@ -372,6 +447,8 @@ redef class MMSrcMethod
 		v.ctx = ctx_old
 		v.unindent
 		v.add_instr("}")
+
+		for ctx in v.out_contexts do v.ctx.merge(ctx)
 	end
 
 	# Compile the method body inline
@@ -480,6 +557,12 @@ redef class AConcreteMethPropdef
 				end
 				v.add_assignment(cname, params[ap.position + 1])
 			end
+			for i in [0..sig.n_closure_decls.length[ do
+				var wd = sig.n_closure_decls[i]
+				var cname = v.cfc.register_closurevariable(wd.variable)
+				wd.variable.ctypename = "struct {method.closure_cname(i)} *"
+				v.add_assignment(cname, "{params[orig_sig.arity + i + 1]}")
+			end
 		end
 
 		var itpos: String = null
@@ -490,25 +573,22 @@ redef class AConcreteMethPropdef
 		end
 
 		v.nmc.return_label = "return_label{v.new_number}"
-		if method.signature.return_type != null then
-			v.nmc.return_value = v.cfc.get_var
-			v.cfc.free_var(v.nmc.return_value)
-		else
-			v.nmc.return_value = null
-		end
+		v.nmc.return_value = v.cfc.get_var
 		if self isa AConcreteInitPropdef then
 			v.invoke_super_init_calls_after(null)
 		end
 		if n_block != null then
 			v.compile_stmt(n_block)
 		end
-		if v.nmc.has_return then
-			v.add_instr("{v.nmc.return_label}: while(false);")
-		end
+		v.add_instr("{v.nmc.return_label}: while(false);")
 		if self isa AConcreteInitPropdef then
 			v.add_instr("init_table[{itpos}] = 1;")
 		end
-		var ret = v.nmc.return_value
+
+		var ret: String = null
+		if method.signature.return_type != null then
+			ret = v.nmc.return_value
+		end
 
 		v.nmc = old_nmc
 		return ret
@@ -776,11 +856,11 @@ end
 redef class AReturnExpr
 	redef meth compile_stmt(v)
 	do
-		v.nmc.has_return = true
 		if n_expr != null then
 			var e = v.compile_expr(n_expr)
 			v.add_assignment(v.nmc.return_value, e)
 		end
+		if v.cfc.in_closure then v.add_instr("closctx->has_broke = &({v.nmc.return_value});")
 		v.add_instr("goto {v.nmc.return_label};")
 	end
 end
@@ -788,6 +868,11 @@ end
 redef class ABreakExpr
 	redef meth compile_stmt(v)
 	do
+		if n_expr != null then
+			var e = v.compile_expr(n_expr)
+			v.add_assignment(v.nmc.break_value, e)
+		end
+		if v.cfc.in_closure then v.add_instr("closctx->has_broke = &({v.nmc.break_value}); closctx->broke_value = *closctx->has_broke;")
 		v.add_instr("goto {v.nmc.break_label};")
 	end
 end
@@ -795,6 +880,10 @@ end
 redef class AContinueExpr
 	redef meth compile_stmt(v)
 	do
+		if n_expr != null then
+			var e = v.compile_expr(n_expr)
+			v.add_assignment(v.nmc.continue_value, e)
+		end
 		v.add_instr("goto {v.nmc.continue_label};")
 	end
 end
@@ -1283,7 +1372,60 @@ redef class ASendExpr
 			cargs.add(v.compile_expr(a))
 		end
 
-		var e = prop.compile_call(v, cargs)
+		var cd = closure_defs
+		var e: String
+		if cd == null then
+			e = prop.compile_call(v, cargs)
+		else
+			var closcns = new Array[String]
+			var ve: String = null
+
+			# Prepare result value.
+			# In case of procedure, the return value is still used to intercept breaks
+			var old_bv = v.nmc.break_value
+			ve = v.cfc.get_var
+			v.nmc.break_value = ve
+
+			# Compile closure to c function
+			for i in [0..cd.length[ do
+				var cn = cd[i].compile_closure(v, prop.closure_cname(i))
+				closcns.add(cn)
+				cargs.add(cn)
+			end
+
+			v.nmc.break_value = old_bv
+
+			# Call
+			e = prop.compile_call(v, cargs)
+			if e != null then 
+				v.add_assignment(ve, e)
+				e = ve
+			end
+
+			# Intercept returns and breaks
+			for i in [0..cd.length[ do
+				# A break or a return is intercepted
+				v.add_instr("if ({closcns[i]}->has_broke != NULL) \{")
+				v.indent
+				# A passtrought break or a return is intercepted: go the the next closure
+				v.add_instr("if ({closcns[i]}->has_broke != &({ve})) \{")
+				v.indent
+				if v.cfc.in_closure then v.add_instr("closctx->has_broke = {closcns[i]}->has_broke; closctx->broke_value = {closcns[i]}->broke_value;")
+				v.add_instr("goto {v.nmc.return_label};")
+				v.unindent
+				# A direct break is interpected
+				if e != null then
+					# overwrite the returned value in a function
+					v.add_instr("\} else {ve} = {closcns[i]}->broke_value;")
+				else
+					# Do nothing in a procedure
+					v.add_instr("\}")
+				end
+				v.unindent
+				v.add_instr("\}")
+			end
+		end
+
 		if prop.global.is_init then
 			v.invoke_super_init_calls_after(prop)
 		end
@@ -1325,6 +1467,169 @@ redef class ANewExpr
 			cargs.add(v.compile_expr(a))
 		end
 		return prop.compile_constructor_call(v, stype, cargs) 
+	end
+end
+
+redef class PClosureDef
+	# Compile the closure definition as a function in v.out_contexts
+	# Return the cname of the function
+	meth compile_closure(v: CompilerVisitor, closcn: String): String is abstract
+
+	# Compile the closure definition inside the current C function.
+	meth do_compile_inside(v: CompilerVisitor, params: Array[String]): String is abstract
+end
+
+redef class AClosureDef
+	# The cname of the function
+	readable attr _cname: String
+
+	redef meth compile_closure(v, closcn)
+	do
+		var ctx_old = v.ctx
+		v.ctx = new CContext
+		v.out_contexts.add(v.ctx)
+
+		var cfc_old = v.cfc.in_closure
+		v.cfc.in_closure = true
+
+		var old_rv = v.nmc.return_value
+		var old_bv = v.nmc.break_value
+		if not cfc_old then
+			v.nmc.return_value = "closctx->{old_rv}"
+			v.nmc.break_value = "closctx->{old_bv}"
+		end
+
+		var cname = "OC_{v.nmc.method.cname}_{v.out_contexts.length}"
+		_cname = cname
+		var args = new Array[String]
+		for i in [0..signature.arity[ do
+			args.add(" param{i}")
+		end
+
+		var cs = decl_csignature(v, args, closcn)
+
+		v.add_instr("{cs} \{")
+		v.indent
+		var ctx_old2 = v.ctx
+		v.ctx = new CContext
+
+		v.add_decl("struct trace_t trace = \{NULL, NULL, {line_number}, LOCATE_{v.nmc.method.cname}};")
+		v.add_instr("trace.prev = tracehead; tracehead = &trace;")
+		
+		v.add_instr("trace.file = LOCATE_{v.module.name};")
+		var s = do_compile_inside(v, args)
+
+		v.add_instr("{v.nmc.return_label}:")
+		v.add_instr("tracehead = trace.prev;")
+		if s == null then
+			v.add_instr("return;")
+		else
+			v.add_instr("return {s};")
+		end
+
+		ctx_old2.append(v.ctx)
+		v.ctx = ctx_old2
+		v.unindent
+		v.add_instr("}")
+		v.ctx = ctx_old
+
+		v.cfc.in_closure = cfc_old
+		v.nmc.return_value = old_rv
+		v.nmc.break_value = old_bv
+
+		# Build closure
+		var closcnv = "wbclos{v.new_number}"
+		v.add_decl("struct {closcn} {closcnv} = \{{cname}, NULL\};")
+		if cfc_old then 
+			v.add_instr("{closcnv}.variable = closctx->variable;")
+			v.add_instr("{closcnv}.closurevariable = closctx->closurevariable;")
+		else
+			v.add_instr("{closcnv}.variable = variable;")
+			v.add_instr("{closcnv}.closurevariable = closurevariable;")
+		end
+
+		return "(&{closcnv})"
+	end
+
+	protected meth decl_csignature(v: CompilerVisitor, args: Array[String], closcn: String): String
+	do
+		var params = new Array[String]
+		params.add("struct {closcn}* closctx")
+		for i in [0..signature.arity[ do
+			var p = "val_t {args[i]}"
+			params.add(p)
+		end
+		var ret: String
+		if signature.return_type != null then
+			ret = "val_t"
+		else
+			ret = "void"
+		end
+		var p = params.join(", ")
+		var s = "{ret} {cname}({p})"
+		v.add_decl("struct {closcn};")
+		v.add_decl("typedef {ret} (* {cname}_t)({p});")
+		v.add_decl(s + ";")
+		return s
+	end
+
+	redef meth do_compile_inside(v, params)
+	do
+		for i in [0..variables.length[ do
+			var vacname = v.cfc.register_variable(variables[i])
+			v.add_assignment(vacname, params[i])
+		end
+
+		var old_cv = v.nmc.continue_value
+		var old_cl = v.nmc.continue_label
+		var old_bl = v.nmc.break_label
+
+		v.nmc.continue_value = v.cfc.get_var
+		v.nmc.continue_label = "continue_label{v.new_number}"
+		v.nmc.break_label = v.nmc.return_label
+
+		if n_expr != null then v.compile_stmt(n_expr)
+
+		v.add_instr("{v.nmc.continue_label}: while(false);")
+
+		var ret: String = null
+		if signature.return_type != null then ret = v.nmc.continue_value
+
+		v.nmc.continue_value = old_cv
+		v.nmc.continue_label = old_cl
+		v.nmc.break_label = old_bl
+
+		return ret
+	end
+end
+
+redef class AClosureCallExpr
+	redef meth compile_expr(v)
+	do
+		var cargs = new Array[String]
+		var ivar = "(({variable.ctypename})({v.cfc.varname(variable)}))"
+		cargs.add(ivar)
+		for a in arguments do
+			cargs.add(v.compile_expr(a))
+		end
+		var s = "({ivar}->fun({cargs.join(", ")})) /* Invoke closure {variable} */"
+		var va: String = null
+		if variable.signature.return_type != null then
+			va = v.cfc.get_var
+			v.add_assignment(va, s)
+		else
+			v.add_instr("{s};")
+		end
+		v.add_instr("if ({ivar}->has_broke) \{")
+		v.indent
+		if n_closure_defs != null and n_closure_defs.length == 1 then do
+			n_closure_defs.first.do_compile_inside(v, null)
+		end
+		if v.cfc.in_closure then v.add_instr("if ({ivar}->has_broke) \{ closctx->has_broke = {ivar}->has_broke; closctx->broke_value = {ivar}->broke_value;\}")
+		v.add_instr("goto {v.nmc.return_label};")
+		v.unindent
+		v.add_instr("\}")
+		return va
 	end
 end
 

@@ -114,6 +114,12 @@ class CContext
 		_instrs.append(c.decls)
 		_instrs.append(c.instrs)
 	end
+	
+	meth merge(c: CContext)
+	do
+		_decls.append(c.decls)
+		_instrs.append(c.instrs)
+	end
 
 	init do end
 end
