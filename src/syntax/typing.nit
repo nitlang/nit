@@ -846,7 +846,7 @@ special PExpr
 	readable attr _prop_signature: MMSignature
 
 	# Compute the called global property
-	private meth do_typing(v: TypingVisitor, type_recv: MMType, is_implicit_self: Bool, recv_is_self: Bool, name: Symbol, raw_args: Array[PExpr])
+	private meth do_typing(v: TypingVisitor, type_recv: MMType, is_implicit_self: Bool, recv_is_self: Bool, name: Symbol, raw_args: Array[PExpr], closure_defs: Array[PClosureDef])
 	do
 		var prop = get_property(v, type_recv, is_implicit_self, name)
 		if prop == null then return
@@ -854,9 +854,11 @@ special PExpr
 		if sig == null then return
 		var args = process_signature(v, sig, prop.name, raw_args)
 		if args == null then return
+		var rtype = process_closures(v, sig, prop.name, closure_defs)
 		_prop = prop
 		_prop_signature = sig
 		_arguments = args
+		_return_type = rtype
 	end
 
 	private meth get_property(v: TypingVisitor, type_recv: MMType, is_implicit_self: Bool, name: Symbol): MMMethod
@@ -886,6 +888,7 @@ special PExpr
 		return prop
 	end
 
+	# Get the signature for a local property and a receiver
 	private meth get_signature(v: TypingVisitor, type_recv: MMType, prop: MMMethod, recv_is_self: Bool): MMSignature
 	do
 		prop.global.check_visibility(v, self, v.module, recv_is_self)
@@ -893,7 +896,7 @@ special PExpr
 		if not recv_is_self then psig = psig.not_for_self
 		return psig
 	end
-	
+
 	# Check the conformity of a set of arguments `raw_args' to a signature.
 	private meth process_signature(v: TypingVisitor, psig: MMSignature, name: Symbol, raw_args: Array[PExpr]): Array[PExpr]
 	do
@@ -931,11 +934,51 @@ special PExpr
 		return args
 	end
 
+	# Check the conformity of a set of defined closures
+	private meth process_closures(v: TypingVisitor, psig: MMSignature, name: Symbol, cd: Array[PClosureDef]): MMType
+	do
+		var t = psig.return_type
+		var cs = psig.closures # Declared closures
+		if cd != null then
+			if cs.length == 0 then
+				v.error(self, "Error: {name} does not require blocs.")
+			else if cs.length != cd.length then
+				v.error(self, "Error: {name} requires {cs.length} blocs, {cd.length} found.")
+			else
+				var old_bbst = v.closure_break_stype
+				var old_bl = v.break_list
+				v.closure_break_stype = t
+				v.break_list = new Array[ABreakExpr]
+				for i in [0..cs.length[ do
+					cd[i].accept_typing2(v, cs[i])
+				end
+				for n in v.break_list do
+					var ntype = n.stype
+					if t == null or (t != null and t < ntype) then
+						t = ntype
+					end
+				end
+				for n in v.break_list do
+					v.check_conform_expr(n, t)
+				end
+
+				v.closure_break_stype = old_bbst
+				v.break_list = old_bl
+			end
+		else if cs.length != 0 then
+			v.error(self, "Error: {name} requires {cs.length} blocs.")
+		end
+		return t
+	end
+
 	# The invoked method (once computed)
 	readable attr _prop: MMMethod
 
 	# The real arguments used (after star transformation) (once computed)
 	readable attr _arguments: Array[PExpr]
+
+	# The return type (if any) (once computed)
+	readable attr _return_type: MMType
 end
 
 # A possible call of constructor in a super class
@@ -994,7 +1037,7 @@ special AAbsSendExpr
 			name = n_id.to_symbol
 		end
 
-		do_typing(v, t, false, false, name, n_args.to_a)
+		do_typing(v, t, false, false, name, n_args.to_a, null)
 		if prop == null then return
 
 		if not prop.global.is_init then
@@ -1024,43 +1067,8 @@ special ASuperInitCall
 	private meth do_all_typing(v: TypingVisitor)
 	do
 		if not v.check_expr(n_expr) then return
-		do_typing(v, n_expr.stype, n_expr.is_implicit_self, n_expr.is_self, name, raw_arguments)
+		do_typing(v, n_expr.stype, n_expr.is_implicit_self, n_expr.is_self, name, raw_arguments, closure_defs)
 		if prop == null then return
-
-		var t = prop.signature_for(n_expr.stype).return_type
-		if t != null and not n_expr.is_self then t = t.not_for_self
-
-		var cd = closure_defs
-		var cs = _prop_signature.closures # Closure signatures
-		if cd != null then
-			if cs.length == 0 then
-				v.error(self, "Error: property {prop} does not require blocs.")
-			else if cs.length != cd.length then
-				v.error(self, "Error: property {prop} requires {cs.length} blocs, {cd.length} found.")
-			else
-				var old_bbst = v.closure_break_stype
-				var old_bl = v.break_list
-				v.closure_break_stype = t
-				v.break_list = new Array[ABreakExpr]
-				for i in [0..cs.length[ do
-					cd[i].accept_typing2(v, cs[i])
-				end
-				for n in v.break_list do
-					var ntype = n.stype
-					if t == null or (t != null and t < ntype) then
-						t = ntype
-					end
-				end
-				for n in v.break_list do
-					v.check_conform_expr(n, t)
-				end
-
-				v.closure_break_stype = old_bbst
-				v.break_list = old_bl
-			end
-		else if cs.length != 0 then
-			v.error(self, "Error: property {prop} requires {cs.length} blocs.")
-		end
 
 		if prop.global.is_init then
 			if not v.local_property.global.is_init then
@@ -1071,7 +1079,8 @@ special ASuperInitCall
 				register_super_init_call(v, prop)
 			end
 		end
-		_stype = t
+
+		_stype = return_type
 	end
 end
 
@@ -1083,7 +1092,7 @@ special AReassignFormExpr
 	do
 		if not v.check_expr(n_expr) then return
 		var raw_args = raw_arguments
-		do_typing(v, n_expr.stype, n_expr.is_implicit_self, n_expr.is_self, name, raw_args)
+		do_typing(v, n_expr.stype, n_expr.is_implicit_self, n_expr.is_self, name, raw_args, null)
 		if prop == null then return
 		if prop.global.is_init then
 			if not v.local_property.global.is_init then
@@ -1101,7 +1110,7 @@ special AReassignFormExpr
 		var old_args = arguments
 		raw_args.add(n_value)
 
-		do_typing(v, n_expr.stype, n_expr.is_implicit_self, n_expr.is_self, "{name}=".to_symbol, raw_args)
+		do_typing(v, n_expr.stype, n_expr.is_implicit_self, n_expr.is_self, "{name}=".to_symbol, raw_args, null)
 		if prop == null then return
 		if prop.global.is_init then
 			if not v.local_property.global.is_init then
@@ -1265,7 +1274,7 @@ redef class AClosureCallExpr
 	redef meth after_typing(v)
 	do
 		var va = variable
-		var sig = va.closure.signature 
+		var sig = va.closure.signature
 		var args = process_signature(v, sig, n_id.to_symbol, n_args.to_a)
 		if args == null then return
 		_prop = null
