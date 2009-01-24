@@ -37,6 +37,13 @@ redef class MMSignature
 		return s
 	end
 
+	redef meth not_for_self
+	do
+		var s = super
+		s.vararg_rank = _vararg_rank
+		return s
+	end
+
 	redef init(params: Array[MMType], return_type: MMType, r: MMType)
 	do
 		super

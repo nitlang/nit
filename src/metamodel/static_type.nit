@@ -167,7 +167,7 @@ class MMSignature
 		return res
 	end
 
-	attr _not_for_self_cache: MMSignature
+	attr _not_for_self_cache: MMSignature = null
 
 	# Return a type approximation if the reveiver is not self
 	# Useful for virtual types
@@ -183,21 +183,29 @@ class MMSignature
 			for i in _params do
 				var i2 = i.not_for_self
 				if i != i2 then need_for_self = true
-				p.add(i.not_for_self)
+				p.add(i2)
 			end
 		end
 		
 		var rv = _return_type
 		if rv != null then
-			var rv = rv.not_for_self
+			rv = rv.not_for_self
 			if rv != _return_type then need_for_self = true
+		end
+		
+		var clos = _closures
+		if clos != null then
+			clos = new Array[MMClosure]
+			for c in _closures do
+				var c2 = c.not_for_self
+				if c2 != c then need_for_self = true
+				clos.add(c2)
+			end
 		end
 
 		if need_for_self then
 			res = new MMSignature(p, rv, _recv)
-			for clos in _closures do
-				res.closures.add(clos.not_for_self)
-			end
+			res.closures.add_all(clos)
 		else
 			res = self
 		end
@@ -238,7 +246,12 @@ class MMClosure
 
 	meth not_for_self: MMClosure
 	do
-		return new MMClosure(_signature.not_for_self, _is_break)
+		var sig = _signature.not_for_self
+		if sig != _signature then
+			return new MMClosure(sig, _is_break)
+		else
+			return self
+		end
 	end
 end
 
