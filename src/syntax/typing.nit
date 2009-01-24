@@ -1276,6 +1276,9 @@ redef class AClosureCallExpr
 		var va = variable
 		var sig = va.closure.signature
 		var args = process_signature(v, sig, n_id.to_symbol, n_args.to_a)
+		if closure_defs != null then
+			process_closures(v, sig, n_id.to_symbol, closure_defs)
+		end
 		if args == null then return
 		_prop = null
 		_prop_signature = sig

@@ -1182,6 +1182,12 @@ redef class AClosureDecl
 		if sig.return_type != null and n_kwbreak != null then
 			v.error(self, "Syntax Error: A break bloc cannot have a return value.")
 		end
+
+		# Add the finalizer to the closure signature
+		var finalize_sig = new MMSignature(new Array[MMType], null, null)
+		var finalizer_clos = new MMClosure(finalize_sig, false)
+		sig.closures.add(finalizer_clos)
+
 		var clos = new MMClosure(sig, n_kwbreak != null)
 		v.signature_builder = old_signature_builder
 		old_signature_builder.closure_decls.add(self)
