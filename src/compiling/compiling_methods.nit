@@ -526,7 +526,7 @@ end
 redef class ADeferredMethPropdef
 	redef meth do_compile_inside(v, method, params)
 	do
-		v.add_instr("fprintf(stderr, \"Deferred method %s called\");")
+		v.add_instr("fprintf(stderr, \"Deferred method called\");")
 		v.add_instr(v.printf_locate_error(self))
 		v.add_instr("nit_exit(1);")
 		if method.signature.return_type != null then
@@ -576,7 +576,7 @@ redef class AInternMethPropdef
 			else if n == once "unary -".to_symbol then
 				s = "TAG_Int(-UNTAG_Int({p[0]}))"
 			else if n == once "output".to_symbol then
-				v.add_instr("printf(\"%d\\n\", UNTAG_Int({p[0]}));")
+				v.add_instr("printf(\"%ld\\n\", UNTAG_Int({p[0]}));")
 			else if n == once "ascii".to_symbol then
 				s = "TAG_Char(UNTAG_Int({p[0]}))"
 			else if n == once "succ".to_symbol then

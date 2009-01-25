@@ -42,7 +42,9 @@ void exithandler(int s) {
 void prepare_signals(void) {
 #if WITH_LIBGC
 	nolibgc = (getenv("NIT_NOLIBGC") != NULL);
-	if (!nolibgc) GC_INIT();
+	if (!nolibgc) {
+		GC_INIT();
+	}
 #endif
 	signal(SIGINT,exithandler);
 	signal(SIGABRT,exithandler);
