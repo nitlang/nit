@@ -506,19 +506,29 @@ redef class MMSrcModule
 			end
 		end
 		for c in src_local_classes do
-			for p in c.src_local_properties do
-				var pg = p.global
-				if pg.intro == p and p isa MMAttribute then
-					if v.tc.attr_sim then
-						var bc = pg.local_class
-						assert bc isa MMSrcLocalClass
-						var s = bc.base_attr_pos.symbol
-						v.add_decl("#define {pg.attr_access}(recv) ATTRS(recv, {s}, {pg.pos_of})")
-					else
-						v.add_decl("#define {pg.attr_access}(recv) ATTR(recv, {pg.color_id})")
+			for pg in c.global_properties do
+				var p = c[pg]
+				if p.local_class == c then
+					if pg.intro == p and p isa MMAttribute then
+						if v.tc.attr_sim then
+							var bc = pg.local_class
+							assert bc isa MMSrcLocalClass
+							var s = bc.base_attr_pos.symbol
+							v.add_decl("#define {pg.attr_access}(recv) ATTRS(recv, {s}, {pg.pos_of})")
+						else
+							v.add_decl("#define {pg.attr_access}(recv) ATTR(recv, {pg.color_id})")
+						end
 					end
+					p.compile_property_to_c(v)
 				end
-				p.compile_property_to_c(v)
+				if pg.is_init then
+					# Declare constructors
+					var params = new Array[String]
+					for i in [0..p.signature.arity[ do
+						params.add("val_t p{i}")
+					end
+					v.add_decl("val_t NEW_{c}_{p.global.intro.cname}({params.join(", ")});")
+				end
 			end
 		end
 	end
@@ -896,9 +906,8 @@ redef class MMLocalClass
 					args.add("p{i}")
 				end
 				args.add("init_table")
-				var s = "val_t NEW_{self}_{p.global.intro.cname}({params.join(", ")})"
-				v.add_decl(s + ";")
-				v.add_instr(s + " \{")
+				var s = "val_t NEW_{self}_{p.global.intro.cname}({params.join(", ")}) \{"
+				v.add_instr(s)
 				v.indent
 				v.add_instr(init_table_decl)
 				v.add_instr("val_t self = NEW_{name}();")

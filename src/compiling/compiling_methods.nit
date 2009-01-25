@@ -314,15 +314,10 @@ redef class MMSrcMethod
 	protected meth decl_csignature(v: CompilerVisitor, args: Array[String]): String
 	do
 		var params = new Array[String]
-		var params_new: Array[String] = null
-		if global.is_init then
-			params_new = new Array[String]
-		end
 		params.add("val_t {args[0]}")
 		for i in [0..signature.arity[ do
 			var p = "val_t {args[i+1]}"
 			params.add(p)
-			if params_new != null then params_new.add(p)
 		end
 		if global.is_init then
 			params.add("int* init_table")
@@ -337,9 +332,6 @@ redef class MMSrcMethod
 		var s = "{ret} {cname}({p})"
 		v.add_decl("typedef {ret} (* {cname}_t)({p});")
 		v.add_decl(s + ";")
-		if params_new != null then
-			v.add_decl("val_t NEW_{cname}({params_new.join(", ")});")
-		end
 		return s
 	end
 
