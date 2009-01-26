@@ -521,7 +521,7 @@ redef class MMSrcModule
 					end
 					p.compile_property_to_c(v)
 				end
-				if pg.is_init then
+				if pg.is_init_for(c) then
 					# Declare constructors
 					var params = new Array[String]
 					for i in [0..p.signature.arity[ do
@@ -898,7 +898,7 @@ redef class MMLocalClass
 			for g in global_properties do
 				var p = self[g]
 				# FIXME skip invisible constructors
-				if not p.global.is_init then continue
+				if not p.global.is_init_for(self) then continue
 				var params = new Array[String]
 				var args = ["self"]
 				for i in [0..p.signature.arity[ do
