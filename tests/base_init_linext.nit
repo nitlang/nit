@@ -17,16 +17,17 @@
 import kernel
 
 class A
-	init inita do
+	init do
 		'A'.output
 		' '.output
 	end
+	init inita do init
 	meth work do '\n'.output
 end
 
 class B
 special A
-	init initb do
+	init do
 		'B'.output
 		'1'.output
 		' '.output
@@ -35,11 +36,12 @@ special A
 		'2'.output
 		' '.output
 	end
+	init initb do init
 end
 
 class C
 special A
-	init initc do
+	init do
 		'C'.output
 		'1'.output
 		' '.output
@@ -48,12 +50,13 @@ special A
 		'2'.output
 		' '.output
 	end
+	init initc do init
 end
 
 class D
 special B
 special C
-	init initd do
+	init do
 		'D'.output
 		'0'.output
 		' '.output
@@ -122,8 +125,8 @@ special C
 	end
 end
 
-#alt0#(new A.inita).work
-#alt0#(new B.initb).work
-#alt0#(new C.initc).work
-(new D.initd).work
+#alt0#(new A).work
+#alt0#(new B).work
+#alt0#(new C).work
+(new D).work
 #alt0#(new D.inite).work

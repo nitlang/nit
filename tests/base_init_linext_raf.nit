@@ -17,7 +17,7 @@
 import base_init_linext
 
 redef class B
-	redef init initb do
+	redef init do
 		'b'.output
 		'1'.output
 		' '.output
@@ -29,7 +29,7 @@ redef class B
 end
 
 redef class C
-	redef init initc do
+	redef init do
 		'c'.output
 		'1'.output
 		' '.output
@@ -41,7 +41,7 @@ redef class C
 end
 
 redef class D
-	redef init initd do
+	redef init do
 		'd'.output
 		'1'.output
 		' '.output
@@ -52,7 +52,7 @@ redef class D
 	end
 end
 
-(new A.inita).work
-(new B.initb).work
-(new C.initc).work
-(new D.initd).work
+(new A).work
+(new B).work
+(new C).work
+(new D).work
