@@ -247,7 +247,7 @@ special MMTypeFormal
 	init(n: Symbol, p: Int, intro: MMLocalClass)
 	do
 		assert n != null
-		_name = n
+		super(n, null)
 		_position = p
 		_def_class = intro
 	end

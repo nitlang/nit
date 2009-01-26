@@ -208,10 +208,10 @@ end
 # Inheritance relation between two types
 abstract class MMAncestor
 	# The inherited type
-	readable writable attr _stype: MMType 
+	readable writable attr _stype: MMType = null 
 
 	# The inheriter (heir) type
-	readable writable attr _inheriter: MMType 
+	readable writable attr _inheriter: MMType  = null
 
 	meth is_reffinement: Bool do
 		return stype.module != stype.module
