@@ -1,0 +1,4 @@
+./error_init_auto.nit:34,5--9: Error: Method 'init' arity missmatch.
+./error_init_auto.nit:36,5--14: Error: Method 'init' arity missmatch.
+./error_init_auto.nit:37,5--17: Error: Method 'init' arity missmatch.
+./error_init_auto.nit:38,5--15: Error: Method 'foo' doesn't exists in A.
