@@ -153,9 +153,6 @@ redef class MMSrcLocalClass
 		end
 	end
 
-	# A mixin class can be build the same way that one of its superclasses
-	readable attr _is_mixin: Bool = false
-
 	# Introduce or inherit default constructors
 	private meth process_default_constructors(v: PropertyBuilderVisitor)
 	do
@@ -199,8 +196,7 @@ redef class MMSrcLocalClass
 			for gp in super_constructors do
 				var sc = gp.local_class
 				if supers.has(sc) then continue
-				assert sc isa MMSrcLocalClass
-				if not sc.is_mixin then
+				if not sc.global.is_mixin then
 					supers.add(sc)
 				end
 			end
@@ -222,7 +218,7 @@ redef class MMSrcLocalClass
 					make_visible_an_inherited_global_property(gp)
 				end
 			end
-			_is_mixin = true
+			global.mixin_of = superclass.global
 		else
 			# v.error(nodes.first, "Error, constructor required in {self} since no anonimous init found in {sc}.")
 

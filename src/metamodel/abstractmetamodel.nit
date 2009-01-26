@@ -334,6 +334,19 @@ class MMGlobalClass
 	# 1 -> public
 	# 3 -> private
 	readable writable attr _visibility_level: Int
+
+	# Is the global class a mixin class?
+	# A mixin class inherits all constructors from a superclass
+	meth is_mixin: Bool
+	do
+		return _mixin_of != self
+	end
+
+	# Indicate the superclass the class is a mixin of.
+	# If mixin_of == self then the class is not a mixin
+	# Is two classes have the same mixin_of value, then they both belong to the same mixing group
+	readable writable attr _mixin_of: MMGlobalClass = self
+
 end
 
 # Local classes are classes defined, refined or imported in a module
@@ -578,6 +591,15 @@ class MMGlobalProperty
 
 	# Is the global property a constructor (thus also a method)?
 	readable writable attr _is_init: Bool
+
+	# Is the global property a constructor for a given class?
+	meth is_init_for(c: MMLocalClass): Bool
+	do
+		if not is_init then return false
+		var sc = intro.local_class
+		var res = c.che <= sc and c.global.mixin_of == sc.global.mixin_of
+		return res
+	end
 
 	# Visibility of the property
 	# 1 -> public
