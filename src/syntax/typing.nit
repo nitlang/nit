@@ -67,13 +67,13 @@ special AbsSyntaxVisitor
 		var false_candidates = new Array[MMMethod]
 		var parity = prop.signature.arity
 		for g in c.global_properties do
-			if not g.is_init then continue
-			if g.intro.local_class != c then continue
+			if not g.is_init_for(c) then continue
 			var gp = c[g]
+			var gps = gp.signature_for(c.get_type)
 			assert gp isa MMSrcMethod
-			var garity = gp.signature.arity
+			var garity = gps.arity
 			if prop != null and gp.name == prop.name then
-				if garity == 0 or (parity == garity and prop.signature < gp.signature) then
+				if garity == 0 or (parity == garity and prop.signature < gps) then
 					return gp
 				else
 					false_candidates.add(gp)
@@ -88,13 +88,21 @@ special AbsSyntaxVisitor
 		if candidates.length == 1 then
 			return candidates.first
 		else if candidates.length > 0 then
-			v.error(n, "Error: Conflicting default constructor to call for {c}: {candidates.join(", ")}.")
+			var a = new Array[String]
+			for p in candidates do
+				a.add("{p.full_name}{p.signature}")
+			end
+			v.error(n, "Error: Conflicting default constructor to call for {c}: {a.join(", ")}.")
 			return null
 		else if false_candidates.length > 0 then
-			v.error(n, "Error: there is no available compatible constrctor in {c}. discarded candidates are {false_candidates.join(", ")}.")
+			var a = new Array[String]
+			for p in false_candidates do
+				a.add("{p.full_name}{p.signature}")
+			end
+			v.error(n, "Error: there is no available compatible constrctor in {c}. Discarded candidates are {a.join(", ")}.")
 			return null
 		else
-			v.warning(n, "Error: there is no available compatible constrctor in {c}.")
+			v.error(n, "Error: there is no available compatible constrctor in {c}.")
 			return null
 		end
 	end
@@ -231,7 +239,7 @@ redef class AConcreteInitPropdef
 		v.explicit_super_init_calls = explicit_super_init_calls
 		v.explicit_other_init_call = false
 		super
-		if v.explicit_other_init_call then
+		if v.explicit_other_init_call or method.global.intro != method then
 			# TODO: something?
 		else 
 			var i = 0
@@ -240,20 +248,20 @@ redef class AConcreteInitPropdef
 			var cur_c: MMLocalClass = null
 			if i < l then
 				cur_m = explicit_super_init_calls[i]
-				cur_c = cur_m.global.intro.local_class
+				cur_c = cur_m.global.intro.local_class.for_module(v.module)
 			end
 			var j = 0
 			while j < v.local_class.cshe.direct_greaters.length do
 				var c = v.local_class.cshe.direct_greaters[j]
-				if c.global.is_interface or c.global.is_universal then
+				if c.global.is_interface or c.global.is_universal or c.global.is_mixin then
 					j += 1
-				else if cur_c != null and c.cshe <= cur_c then
+				else if cur_c != null and (c.cshe <= cur_c or cur_c.global.is_mixin) then
 					if c == cur_c then j += 1
 					super_init_calls.add(cur_m)
 					i += 1
 					if i < l then
 						cur_m = explicit_super_init_calls[i]
-						cur_c = cur_m.global.intro.local_class
+						cur_c = cur_m.global.intro.local_class.for_module(v.module)
 					else
 						cur_m = null
 						cur_c = null
