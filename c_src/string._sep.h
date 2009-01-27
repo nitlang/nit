@@ -71,6 +71,12 @@ extern const int SFT_string[];
 #define COLOR_string___Sys___init_args SFT_string[53]
 #define COLOR_string___Sys___native_argc SFT_string[54]
 #define COLOR_string___Sys___native_argv SFT_string[55]
+typedef val_t (* string___String_____eqeq_t)(val_t  self, val_t  param0);
+val_t string___String_____eqeq(val_t  self, val_t  param0);
+#define LOCATE_string___String_____eqeq "string::String::(kernel::Object::==)"
+typedef void (* string___String___output_t)(val_t  self);
+void string___String___output(val_t  self);
+#define LOCATE_string___String___output "string::String::(kernel::Object::output)"
 typedef val_t (* string___String_____bra_t)(val_t  self, val_t  param0);
 val_t string___String_____bra(val_t  self, val_t  param0);
 #define LOCATE_string___String_____bra "string::String::(abstract_collection::Map::[])"
@@ -80,21 +86,24 @@ void string___String_____braeq(val_t  self, val_t  param0, val_t  param1);
 typedef void (* string___String___add_t)(val_t  self, val_t  param0);
 void string___String___add(val_t  self, val_t  param0);
 #define LOCATE_string___String___add "string::String::(abstract_collection::SimpleCollection::add)"
-typedef void (* string___String___enlarge_t)(val_t  self, val_t  param0);
-void string___String___enlarge(val_t  self, val_t  param0);
-#define LOCATE_string___String___enlarge "string::String::(array::AbstractArray::enlarge)"
 typedef void (* string___String___append_t)(val_t  self, val_t  param0);
 void string___String___append(val_t  self, val_t  param0);
 #define LOCATE_string___String___append "string::String::(abstract_collection::IndexedCollection::append)"
+typedef void (* string___String___enlarge_t)(val_t  self, val_t  param0);
+void string___String___enlarge(val_t  self, val_t  param0);
+#define LOCATE_string___String___enlarge "string::String::(array::AbstractArray::enlarge)"
+typedef val_t (* string___String___to_s_t)(val_t  self);
+val_t string___String___to_s(val_t  self);
+#define LOCATE_string___String___to_s "string::String::(string::Object::to_s)"
+typedef val_t (* string___String_____l_t)(val_t  self, val_t  param0);
+val_t string___String_____l(val_t  self, val_t  param0);
+#define LOCATE_string___String_____l "string::String::(kernel::Comparable::<)"
 typedef val_t (* string___String_____plus_t)(val_t  self, val_t  param0);
 val_t string___String_____plus(val_t  self, val_t  param0);
 #define LOCATE_string___String_____plus "string::String::+"
 typedef val_t (* string___String_____star_t)(val_t  self, val_t  param0);
 val_t string___String_____star(val_t  self, val_t  param0);
 #define LOCATE_string___String_____star "string::String::*"
-typedef val_t (* string___String___to_s_t)(val_t  self);
-val_t string___String___to_s(val_t  self);
-#define LOCATE_string___String___to_s "string::String::(string::Object::to_s)"
 typedef val_t (* string___String___to_i_t)(val_t  self);
 val_t string___String___to_i(val_t  self);
 #define LOCATE_string___String___to_i "string::String::to_i"
@@ -122,39 +131,30 @@ val_t string___String___has_prefix(val_t  self, val_t  param0);
 typedef val_t (* string___String___has_suffix_t)(val_t  self, val_t  param0);
 val_t string___String___has_suffix(val_t  self, val_t  param0);
 #define LOCATE_string___String___has_suffix "string::String::has_suffix"
-typedef val_t (* string___String_____l_t)(val_t  self, val_t  param0);
-val_t string___String_____l(val_t  self, val_t  param0);
-#define LOCATE_string___String_____l "string::String::(kernel::Comparable::<)"
 typedef void (* string___String___init_t)(val_t  self, int* init_table);
 void string___String___init(val_t  self, int* init_table);
-val_t NEW_string___String___init();
 #define LOCATE_string___String___init "string::String::init"
+val_t NEW_String_string___String___init();
 typedef void (* string___String___from_t)(val_t  self, val_t  param0, int* init_table);
 void string___String___from(val_t  self, val_t  param0, int* init_table);
-val_t NEW_string___String___from(val_t  param0);
 #define LOCATE_string___String___from "string::String::from"
+val_t NEW_String_string___String___from(val_t p0);
 typedef void (* string___String___with_capacity_t)(val_t  self, val_t  param0, int* init_table);
 void string___String___with_capacity(val_t  self, val_t  param0, int* init_table);
-val_t NEW_string___String___with_capacity(val_t  param0);
 #define LOCATE_string___String___with_capacity "string::String::with_capacity"
+val_t NEW_String_string___String___with_capacity(val_t p0);
 typedef void (* string___String___with_native_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void string___String___with_native(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_string___String___with_native(val_t  param0, val_t  param1);
 #define LOCATE_string___String___with_native "string::String::with_native"
+val_t NEW_String_string___String___with_native(val_t p0, val_t p1);
 typedef void (* string___String___from_cstring_t)(val_t  self, val_t  param0, int* init_table);
 void string___String___from_cstring(val_t  self, val_t  param0, int* init_table);
-val_t NEW_string___String___from_cstring(val_t  param0);
 #define LOCATE_string___String___from_cstring "string::String::from_cstring"
+val_t NEW_String_string___String___from_cstring(val_t p0);
 typedef void (* string___String___filled_with_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void string___String___filled_with(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_string___String___filled_with(val_t  param0, val_t  param1);
 #define LOCATE_string___String___filled_with "string::String::filled_with"
-typedef void (* string___String___output_t)(val_t  self);
-void string___String___output(val_t  self);
-#define LOCATE_string___String___output "string::String::(kernel::Object::output)"
-typedef val_t (* string___String_____eqeq_t)(val_t  self, val_t  param0);
-val_t string___String_____eqeq(val_t  self, val_t  param0);
-#define LOCATE_string___String_____eqeq "string::String::(kernel::Object::==)"
+val_t NEW_String_string___String___filled_with(val_t p0, val_t p1);
 typedef val_t (* string___String___to_upper_t)(val_t  self);
 val_t string___String___to_upper(val_t  self);
 #define LOCATE_string___String___to_upper "string::String::to_upper"
@@ -184,12 +184,12 @@ val_t string___Object___args(val_t  self);
 typedef val_t (* string___Bool___to_s_t)(val_t  self);
 val_t string___Bool___to_s(val_t  self);
 #define LOCATE_string___Bool___to_s "string::Bool::(string::Object::to_s)"
-typedef void (* string___Int___fill_string_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
-void string___Int___fill_string(val_t  self, val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_string___Int___fill_string "string::Int::fill_string"
 typedef val_t (* string___Int___to_s_t)(val_t  self);
 val_t string___Int___to_s(val_t  self);
 #define LOCATE_string___Int___to_s "string::Int::(string::Object::to_s)"
+typedef void (* string___Int___fill_string_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+void string___Int___fill_string(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+#define LOCATE_string___Int___fill_string "string::Int::fill_string"
 typedef val_t (* string___Int___to_hex_t)(val_t  self);
 val_t string___Int___to_hex(val_t  self);
 #define LOCATE_string___Int___to_hex "string::Int::to_hex"
@@ -231,19 +231,20 @@ val_t string___NativeString___atoi(val_t  self);
 #define LOCATE_string___NativeString___atoi "string::NativeString::atoi"
 typedef void (* string___NativeString___init_t)(val_t  self, int* init_table);
 void string___NativeString___init(val_t  self, int* init_table);
-val_t NEW_string___NativeString___init();
 #define LOCATE_string___NativeString___init "string::NativeString::init"
+val_t NEW_NativeString_string___NativeString___init();
 typedef val_t (* string___StringCapable___calloc_string_t)(val_t  self, val_t  param0);
 val_t string___StringCapable___calloc_string(val_t  self, val_t  param0);
 #define LOCATE_string___StringCapable___calloc_string "string::StringCapable::calloc_string"
 typedef void (* string___StringCapable___init_t)(val_t  self, int* init_table);
 void string___StringCapable___init(val_t  self, int* init_table);
-val_t NEW_string___StringCapable___init();
 #define LOCATE_string___StringCapable___init "string::StringCapable::init"
-#define ATTR_string___Sys____args_cache(recv) ATTR(recv, COLOR_string___Sys____args_cache)
+val_t NEW_StringCapable_string___StringCapable___init();
+val_t NEW_Sys_kernel___Sys___init();
 typedef val_t (* string___Sys___args_t)(val_t  self);
 val_t string___Sys___args(val_t  self);
 #define LOCATE_string___Sys___args "string::Sys::(string::Object::args)"
+#define ATTR_string___Sys____args_cache(recv) ATTR(recv, COLOR_string___Sys____args_cache)
 typedef val_t (* string___Sys___program_name_t)(val_t  self);
 val_t string___Sys___program_name(val_t  self);
 #define LOCATE_string___Sys___program_name "string::Sys::program_name"

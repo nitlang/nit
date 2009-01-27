@@ -38,6 +38,10 @@ extern const int SFT_genericity[];
 #define COLOR_genericity___MMTypeFormalParameter___bound__eq SFT_genericity[26]
 #define COLOR_genericity___MMTypeFormalParameter___with_bound SFT_genericity[27]
 #define COLOR_genericity___MMTypeFormalParameter___init SFT_genericity[28]
+val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1);
+typedef val_t (* genericity___MMLocalClass___get_type_t)(val_t  self);
+val_t genericity___MMLocalClass___get_type(val_t  self);
+#define LOCATE_genericity___MMLocalClass___get_type "genericity::MMLocalClass::(static_type::MMLocalClass::get_type)"
 typedef val_t (* genericity___MMLocalClass___get_formal_t)(val_t  self, val_t  param0);
 val_t genericity___MMLocalClass___get_formal(val_t  self, val_t  param0);
 #define LOCATE_genericity___MMLocalClass___get_formal "genericity::MMLocalClass::get_formal"
@@ -52,53 +56,65 @@ val_t genericity___MMLocalClass___get_instantiate_type(val_t  self, val_t  param
 typedef val_t (* genericity___MMLocalClass___formals_types_t)(val_t  self);
 val_t genericity___MMLocalClass___formals_types(val_t  self);
 #define LOCATE_genericity___MMLocalClass___formals_types "genericity::MMLocalClass::formals_types"
-typedef val_t (* genericity___MMLocalClass___get_type_t)(val_t  self);
-val_t genericity___MMLocalClass___get_type(val_t  self);
-#define LOCATE_genericity___MMLocalClass___get_type "genericity::MMLocalClass::(static_type::MMLocalClass::get_type)"
 typedef val_t (* genericity___MMLocalClass___is_generic_t)(val_t  self);
 val_t genericity___MMLocalClass___is_generic(val_t  self);
 #define LOCATE_genericity___MMLocalClass___is_generic "genericity::MMLocalClass::is_generic"
+val_t NEW_MMType_static_type___MMType___init();
 typedef val_t (* genericity___MMType___is_generic_t)(val_t  self);
 val_t genericity___MMType___is_generic(val_t  self);
 #define LOCATE_genericity___MMType___is_generic "genericity::MMType::is_generic"
+val_t NEW_MMTypeFormal_type_formal___MMTypeFormal___init(val_t p0, val_t p1);
 typedef val_t (* genericity___MMTypeFormal___is_generic_t)(val_t  self);
 val_t genericity___MMTypeFormal___is_generic(val_t  self);
 #define LOCATE_genericity___MMTypeFormal___is_generic "genericity::MMTypeFormal::(genericity::MMType::is_generic)"
+val_t NEW_MMTypeSimpleClass_static_type___MMTypeSimpleClass___init(val_t p0);
 typedef val_t (* genericity___MMTypeSimpleClass___is_generic_t)(val_t  self);
 val_t genericity___MMTypeSimpleClass___is_generic(val_t  self);
 #define LOCATE_genericity___MMTypeSimpleClass___is_generic "genericity::MMTypeSimpleClass::(genericity::MMType::is_generic)"
-#define ATTR_genericity___MMTypeGeneric____params(recv) ATTR(recv, COLOR_genericity___MMTypeGeneric____params)
-typedef val_t (* genericity___MMTypeGeneric___params_t)(val_t  self);
-val_t genericity___MMTypeGeneric___params(val_t  self);
-#define LOCATE_genericity___MMTypeGeneric___params "genericity::MMTypeGeneric::params"
-typedef val_t (* genericity___MMTypeGeneric___is_generic_t)(val_t  self);
-val_t genericity___MMTypeGeneric___is_generic(val_t  self);
-#define LOCATE_genericity___MMTypeGeneric___is_generic "genericity::MMTypeGeneric::(genericity::MMType::is_generic)"
+typedef val_t (* genericity___MMTypeGeneric___to_s_t)(val_t  self);
+val_t genericity___MMTypeGeneric___to_s(val_t  self);
+#define LOCATE_genericity___MMTypeGeneric___to_s "genericity::MMTypeGeneric::(string::Object::to_s)"
 typedef val_t (* genericity___MMTypeGeneric___is_supertype_t)(val_t  self, val_t  param0);
 val_t genericity___MMTypeGeneric___is_supertype(val_t  self, val_t  param0);
 #define LOCATE_genericity___MMTypeGeneric___is_supertype "genericity::MMTypeGeneric::(static_type::MMType::is_supertype)"
-typedef val_t (* genericity___MMTypeGeneric___upcast_for_t)(val_t  self, val_t  param0);
-val_t genericity___MMTypeGeneric___upcast_for(val_t  self, val_t  param0);
-#define LOCATE_genericity___MMTypeGeneric___upcast_for "genericity::MMTypeGeneric::(static_type::MMType::upcast_for)"
 typedef val_t (* genericity___MMTypeGeneric___for_module_t)(val_t  self, val_t  param0);
 val_t genericity___MMTypeGeneric___for_module(val_t  self, val_t  param0);
 #define LOCATE_genericity___MMTypeGeneric___for_module "genericity::MMTypeGeneric::(static_type::MMType::for_module)"
 typedef val_t (* genericity___MMTypeGeneric___adapt_to_t)(val_t  self, val_t  param0);
 val_t genericity___MMTypeGeneric___adapt_to(val_t  self, val_t  param0);
 #define LOCATE_genericity___MMTypeGeneric___adapt_to "genericity::MMTypeGeneric::(static_type::MMType::adapt_to)"
+typedef val_t (* genericity___MMTypeGeneric___upcast_for_t)(val_t  self, val_t  param0);
+val_t genericity___MMTypeGeneric___upcast_for(val_t  self, val_t  param0);
+#define LOCATE_genericity___MMTypeGeneric___upcast_for "genericity::MMTypeGeneric::(static_type::MMType::upcast_for)"
+typedef val_t (* genericity___MMTypeGeneric___is_generic_t)(val_t  self);
+val_t genericity___MMTypeGeneric___is_generic(val_t  self);
+#define LOCATE_genericity___MMTypeGeneric___is_generic "genericity::MMTypeGeneric::(genericity::MMType::is_generic)"
+#define ATTR_genericity___MMTypeGeneric____params(recv) ATTR(recv, COLOR_genericity___MMTypeGeneric____params)
+typedef val_t (* genericity___MMTypeGeneric___params_t)(val_t  self);
+val_t genericity___MMTypeGeneric___params(val_t  self);
+#define LOCATE_genericity___MMTypeGeneric___params "genericity::MMTypeGeneric::params"
 typedef val_t (* genericity___MMTypeGeneric___params_equals_t)(val_t  self, val_t  param0);
 val_t genericity___MMTypeGeneric___params_equals(val_t  self, val_t  param0);
 #define LOCATE_genericity___MMTypeGeneric___params_equals "genericity::MMTypeGeneric::params_equals"
-typedef val_t (* genericity___MMTypeGeneric___to_s_t)(val_t  self);
-val_t genericity___MMTypeGeneric___to_s(val_t  self);
-#define LOCATE_genericity___MMTypeGeneric___to_s "genericity::MMTypeGeneric::(string::Object::to_s)"
 typedef val_t (* genericity___MMTypeGeneric___is_subtype_t)(val_t  self, val_t  param0);
 val_t genericity___MMTypeGeneric___is_subtype(val_t  self, val_t  param0);
 #define LOCATE_genericity___MMTypeGeneric___is_subtype "genericity::MMTypeGeneric::is_subtype"
 typedef void (* genericity___MMTypeGeneric___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void genericity___MMTypeGeneric___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_genericity___MMTypeGeneric___init(val_t  param0, val_t  param1);
 #define LOCATE_genericity___MMTypeGeneric___init "genericity::MMTypeGeneric::init"
+val_t NEW_MMTypeGeneric_genericity___MMTypeGeneric___init(val_t p0, val_t p1);
+typedef val_t (* genericity___MMTypeFormalParameter___module_t)(val_t  self);
+val_t genericity___MMTypeFormalParameter___module(val_t  self);
+#define LOCATE_genericity___MMTypeFormalParameter___module "genericity::MMTypeFormalParameter::(static_type::MMType::module)"
+typedef val_t (* genericity___MMTypeFormalParameter___for_module_t)(val_t  self, val_t  param0);
+val_t genericity___MMTypeFormalParameter___for_module(val_t  self, val_t  param0);
+#define LOCATE_genericity___MMTypeFormalParameter___for_module "genericity::MMTypeFormalParameter::(static_type::MMType::for_module)"
+typedef val_t (* genericity___MMTypeFormalParameter___adapt_to_t)(val_t  self, val_t  param0);
+val_t genericity___MMTypeFormalParameter___adapt_to(val_t  self, val_t  param0);
+#define LOCATE_genericity___MMTypeFormalParameter___adapt_to "genericity::MMTypeFormalParameter::(static_type::MMType::adapt_to)"
+typedef val_t (* genericity___MMTypeFormalParameter___upcast_for_t)(val_t  self, val_t  param0);
+val_t genericity___MMTypeFormalParameter___upcast_for(val_t  self, val_t  param0);
+#define LOCATE_genericity___MMTypeFormalParameter___upcast_for "genericity::MMTypeFormalParameter::(static_type::MMType::upcast_for)"
 #define ATTR_genericity___MMTypeFormalParameter____def_class(recv) ATTR(recv, COLOR_genericity___MMTypeFormalParameter____def_class)
 typedef val_t (* genericity___MMTypeFormalParameter___def_class_t)(val_t  self);
 val_t genericity___MMTypeFormalParameter___def_class(val_t  self);
@@ -107,36 +123,25 @@ val_t genericity___MMTypeFormalParameter___def_class(val_t  self);
 typedef val_t (* genericity___MMTypeFormalParameter___position_t)(val_t  self);
 val_t genericity___MMTypeFormalParameter___position(val_t  self);
 #define LOCATE_genericity___MMTypeFormalParameter___position "genericity::MMTypeFormalParameter::position"
-typedef val_t (* genericity___MMTypeFormalParameter___module_t)(val_t  self);
-val_t genericity___MMTypeFormalParameter___module(val_t  self);
-#define LOCATE_genericity___MMTypeFormalParameter___module "genericity::MMTypeFormalParameter::(static_type::MMType::module)"
-typedef val_t (* genericity___MMTypeFormalParameter___for_module_t)(val_t  self, val_t  param0);
-val_t genericity___MMTypeFormalParameter___for_module(val_t  self, val_t  param0);
-#define LOCATE_genericity___MMTypeFormalParameter___for_module "genericity::MMTypeFormalParameter::(static_type::MMType::for_module)"
-typedef val_t (* genericity___MMTypeFormalParameter___upcast_for_t)(val_t  self, val_t  param0);
-val_t genericity___MMTypeFormalParameter___upcast_for(val_t  self, val_t  param0);
-#define LOCATE_genericity___MMTypeFormalParameter___upcast_for "genericity::MMTypeFormalParameter::(static_type::MMType::upcast_for)"
 typedef void (* genericity___MMTypeFormalParameter___bound__eq_t)(val_t  self, val_t  param0);
 void genericity___MMTypeFormalParameter___bound__eq(val_t  self, val_t  param0);
 #define LOCATE_genericity___MMTypeFormalParameter___bound__eq "genericity::MMTypeFormalParameter::bound="
-typedef val_t (* genericity___MMTypeFormalParameter___adapt_to_t)(val_t  self, val_t  param0);
-val_t genericity___MMTypeFormalParameter___adapt_to(val_t  self, val_t  param0);
-#define LOCATE_genericity___MMTypeFormalParameter___adapt_to "genericity::MMTypeFormalParameter::(static_type::MMType::adapt_to)"
 typedef void (* genericity___MMTypeFormalParameter___with_bound_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
 void genericity___MMTypeFormalParameter___with_bound(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-val_t NEW_genericity___MMTypeFormalParameter___with_bound(val_t  param0, val_t  param1, val_t  param2, val_t  param3);
 #define LOCATE_genericity___MMTypeFormalParameter___with_bound "genericity::MMTypeFormalParameter::with_bound"
+val_t NEW_MMTypeFormalParameter_genericity___MMTypeFormalParameter___with_bound(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef void (* genericity___MMTypeFormalParameter___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 void genericity___MMTypeFormalParameter___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_genericity___MMTypeFormalParameter___init(val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_genericity___MMTypeFormalParameter___init "genericity::MMTypeFormalParameter::init"
-typedef val_t (* genericity___MMTypeNone___is_generic_t)(val_t  self);
-val_t genericity___MMTypeNone___is_generic(val_t  self);
-#define LOCATE_genericity___MMTypeNone___is_generic "genericity::MMTypeNone::(genericity::MMType::is_generic)"
+val_t NEW_MMTypeFormalParameter_genericity___MMTypeFormalParameter___init(val_t p0, val_t p1, val_t p2);
 typedef val_t (* genericity___MMTypeNone___for_module_t)(val_t  self, val_t  param0);
 val_t genericity___MMTypeNone___for_module(val_t  self, val_t  param0);
 #define LOCATE_genericity___MMTypeNone___for_module "genericity::MMTypeNone::(static_type::MMType::for_module)"
 typedef val_t (* genericity___MMTypeNone___adapt_to_t)(val_t  self, val_t  param0);
 val_t genericity___MMTypeNone___adapt_to(val_t  self, val_t  param0);
 #define LOCATE_genericity___MMTypeNone___adapt_to "genericity::MMTypeNone::(static_type::MMType::adapt_to)"
+val_t NEW_MMTypeNone_static_type___MMTypeNone___init(val_t p0);
+typedef val_t (* genericity___MMTypeNone___is_generic_t)(val_t  self);
+val_t genericity___MMTypeNone___is_generic(val_t  self);
+#define LOCATE_genericity___MMTypeNone___is_generic "genericity::MMTypeNone::(genericity::MMType::is_generic)"
 #endif

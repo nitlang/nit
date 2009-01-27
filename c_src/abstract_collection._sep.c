@@ -2,9 +2,11 @@
 #include "abstract_collection._sep.h"
 val_t abstract_collection___Collection___iterator(val_t  self) {
   struct trace_t trace = {NULL, NULL, 42, LOCATE_abstract_collection___Collection___iterator};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
+  fprintf(stderr, "Deferred method called");
   fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 42);
   nit_exit(1);
   tracehead = trace.prev;
@@ -12,9 +14,11 @@ val_t abstract_collection___Collection___iterator(val_t  self) {
 }
 val_t abstract_collection___Collection___is_empty(val_t  self) {
   struct trace_t trace = {NULL, NULL, 45, LOCATE_abstract_collection___Collection___is_empty};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
+  fprintf(stderr, "Deferred method called");
   fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 45);
   nit_exit(1);
   tracehead = trace.prev;
@@ -22,9 +26,11 @@ val_t abstract_collection___Collection___is_empty(val_t  self) {
 }
 val_t abstract_collection___Collection___length(val_t  self) {
   struct trace_t trace = {NULL, NULL, 48, LOCATE_abstract_collection___Collection___length};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
+  fprintf(stderr, "Deferred method called");
   fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 48);
   nit_exit(1);
   tracehead = trace.prev;
@@ -32,9 +38,11 @@ val_t abstract_collection___Collection___length(val_t  self) {
 }
 val_t abstract_collection___Collection___has(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 51, LOCATE_abstract_collection___Collection___has};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
+  fprintf(stderr, "Deferred method called");
   fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 51);
   nit_exit(1);
   tracehead = trace.prev;
@@ -42,9 +50,11 @@ val_t abstract_collection___Collection___has(val_t  self, val_t  param0) {
 }
 val_t abstract_collection___Collection___has_only(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 55, LOCATE_abstract_collection___Collection___has_only};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
+  fprintf(stderr, "Deferred method called");
   fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 55);
   nit_exit(1);
   tracehead = trace.prev;
@@ -52,9 +62,11 @@ val_t abstract_collection___Collection___has_only(val_t  self, val_t  param0) {
 }
 val_t abstract_collection___Collection___count(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 60, LOCATE_abstract_collection___Collection___count};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
+  fprintf(stderr, "Deferred method called");
   fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 60);
   nit_exit(1);
   tracehead = trace.prev;
@@ -62,9 +74,11 @@ val_t abstract_collection___Collection___count(val_t  self, val_t  param0) {
 }
 val_t abstract_collection___Collection___first(val_t  self) {
   struct trace_t trace = {NULL, NULL, 64, LOCATE_abstract_collection___Collection___first};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
+  fprintf(stderr, "Deferred method called");
   fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 64);
   nit_exit(1);
   tracehead = trace.prev;
@@ -72,279 +86,325 @@ val_t abstract_collection___Collection___first(val_t  self) {
 }
 val_t abstract_collection___NaiveCollection___is_empty(val_t  self) {
   struct trace_t trace = {NULL, NULL, 72, LOCATE_abstract_collection___NaiveCollection___is_empty};
-  val_t variable0;
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 = ((abstract_collection___NaiveCollection___length_t)CALL( self,COLOR_abstract_collection___Collection___length))( self) /*NaiveCollection::length*/;
-  variable0 = TAG_Bool((variable0)==( TAG_Int(0)));
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((abstract_collection___NaiveCollection___length_t)CALL(variable[2],COLOR_abstract_collection___Collection___length))(variable[2]) /*NaiveCollection::length*/;
+  variable[2] = TAG_Bool((variable[2])==( TAG_Int(0)));
+  variable[1] = variable[2];
   goto return_label0;
   return_label0: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t abstract_collection___NaiveCollection___length(val_t  self) {
   struct trace_t trace = {NULL, NULL, 74, LOCATE_abstract_collection___NaiveCollection___length};
-  val_t variable0;
-  val_t variable1;
-    val_t variable2;
+  val_t variable[6];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  TAG_Int(0);
-  variable1 = ((abstract_collection___Collection___iterator_t)CALL( self,COLOR_abstract_collection___Collection___iterator))( self) /*Collection::iterator*/;
+  variable[0] =  self;
+  variable[2] =  TAG_Int(0);
+  variable[3] = variable[0];
+  variable[3] = ((abstract_collection___Collection___iterator_t)CALL(variable[3],COLOR_abstract_collection___Collection___iterator))(variable[3]) /*Collection::iterator*/;
   while (true) { /*for*/
-    variable2 = ((abstract_collection___Iterator___is_ok_t)CALL(variable1,COLOR_abstract_collection___Iterator___is_ok))(variable1) /*Iterator::is_ok*/;
-    if (!UNTAG_Bool(variable2)) break; /*for*/
-    variable2 = ((abstract_collection___Iterator___item_t)CALL(variable1,COLOR_abstract_collection___Iterator___item))(variable1) /*Iterator::item*/;
-    variable0 = TAG_Int(UNTAG_Int(variable0)+UNTAG_Int( variable0 /*nb*/)) /*nb*/;
+    variable[4] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[3],COLOR_abstract_collection___Iterator___is_ok))(variable[3]) /*Iterator::is_ok*/;
+    if (!UNTAG_Bool(variable[4])) break; /*for*/
+    variable[4] = ((abstract_collection___Iterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*Iterator::item*/;
+    variable[5] = variable[4];
+    variable[2] = TAG_Int(UNTAG_Int(variable[2])+UNTAG_Int( variable[2] /*nb*/)) /*nb*/;
     continue_2: while(0);
-    ((abstract_collection___Iterator___next_t)CALL(variable1,COLOR_abstract_collection___Iterator___next))(variable1) /*Iterator::next*/;
+    ((abstract_collection___Iterator___next_t)CALL(variable[3],COLOR_abstract_collection___Iterator___next))(variable[3]) /*Iterator::next*/;
   }
   break_2: while(0);
-  variable0 =  variable0 /*nb*/;
+  variable[1] =  variable[2] /*nb*/;
   goto return_label1;
   return_label1: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t abstract_collection___NaiveCollection___has(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 81, LOCATE_abstract_collection___NaiveCollection___has};
-  val_t variable0;
-  val_t variable1;
-    val_t variable2;
-    val_t variable3;
+  val_t variable[7];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  variable1 = ((abstract_collection___Collection___iterator_t)CALL( self,COLOR_abstract_collection___Collection___iterator))( self) /*Collection::iterator*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((abstract_collection___Collection___iterator_t)CALL(variable[3],COLOR_abstract_collection___Collection___iterator))(variable[3]) /*Collection::iterator*/;
   while (true) { /*for*/
-    variable2 = ((abstract_collection___Iterator___is_ok_t)CALL(variable1,COLOR_abstract_collection___Iterator___is_ok))(variable1) /*Iterator::is_ok*/;
-    if (!UNTAG_Bool(variable2)) break; /*for*/
-    variable2 = ((abstract_collection___Iterator___item_t)CALL(variable1,COLOR_abstract_collection___Iterator___item))(variable1) /*Iterator::item*/;
-    variable3 = TAG_Bool(( variable2 /*i*/ ==  variable0 /*item*/) || (( variable2 /*i*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable2 /*i*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable2 /*i*/, variable0 /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable2 /*i*/,COLOR_kernel___Object_____eqeq))( variable2 /*i*/,  variable0 /*item*/) /*Object::==*/)))));
-    if (UNTAG_Bool(variable3)) { /*if*/
-      variable1 =  TAG_Bool(true);
+    variable[4] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[3],COLOR_abstract_collection___Iterator___is_ok))(variable[3]) /*Iterator::is_ok*/;
+    if (!UNTAG_Bool(variable[4])) break; /*for*/
+    variable[4] = ((abstract_collection___Iterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*Iterator::item*/;
+    variable[5] = variable[4];
+    variable[6] = TAG_Bool(( variable[5] /*i*/ ==  variable[1] /*item*/) || (( variable[5] /*i*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*i*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*i*/, variable[1] /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*i*/,COLOR_kernel___Object_____eqeq))( variable[5] /*i*/,  variable[1] /*item*/) /*Object::==*/)))));
+    if (UNTAG_Bool(variable[6])) { /*if*/
+      variable[2] =  TAG_Bool(true);
       goto return_label3;
     }
     continue_4: while(0);
-    ((abstract_collection___Iterator___next_t)CALL(variable1,COLOR_abstract_collection___Iterator___next))(variable1) /*Iterator::next*/;
+    ((abstract_collection___Iterator___next_t)CALL(variable[3],COLOR_abstract_collection___Iterator___next))(variable[3]) /*Iterator::next*/;
   }
   break_4: while(0);
-  variable1 =  TAG_Bool(false);
+  variable[2] =  TAG_Bool(false);
   goto return_label3;
   return_label3: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 val_t abstract_collection___NaiveCollection___has_only(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 87, LOCATE_abstract_collection___NaiveCollection___has_only};
-  val_t variable0;
-  val_t variable1;
-    val_t variable2;
-    val_t variable3;
+  val_t variable[7];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  variable1 = ((abstract_collection___Collection___iterator_t)CALL( self,COLOR_abstract_collection___Collection___iterator))( self) /*Collection::iterator*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((abstract_collection___Collection___iterator_t)CALL(variable[3],COLOR_abstract_collection___Collection___iterator))(variable[3]) /*Collection::iterator*/;
   while (true) { /*for*/
-    variable2 = ((abstract_collection___Iterator___is_ok_t)CALL(variable1,COLOR_abstract_collection___Iterator___is_ok))(variable1) /*Iterator::is_ok*/;
-    if (!UNTAG_Bool(variable2)) break; /*for*/
-    variable2 = ((abstract_collection___Iterator___item_t)CALL(variable1,COLOR_abstract_collection___Iterator___item))(variable1) /*Iterator::item*/;
-    variable3 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable2 /*i*/ ==  variable0 /*item*/) || (( variable2 /*i*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable2 /*i*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable2 /*i*/, variable0 /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable2 /*i*/,COLOR_kernel___Object_____eqeq))( variable2 /*i*/,  variable0 /*item*/) /*Object::==*/)))))));
-    if (UNTAG_Bool(variable3)) { /*if*/
-      variable1 =  TAG_Bool(false);
+    variable[4] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[3],COLOR_abstract_collection___Iterator___is_ok))(variable[3]) /*Iterator::is_ok*/;
+    if (!UNTAG_Bool(variable[4])) break; /*for*/
+    variable[4] = ((abstract_collection___Iterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*Iterator::item*/;
+    variable[5] = variable[4];
+    variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*i*/ ==  variable[1] /*item*/) || (( variable[5] /*i*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*i*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*i*/, variable[1] /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*i*/,COLOR_kernel___Object_____eqeq))( variable[5] /*i*/,  variable[1] /*item*/) /*Object::==*/)))))));
+    if (UNTAG_Bool(variable[6])) { /*if*/
+      variable[2] =  TAG_Bool(false);
       goto return_label5;
     }
     continue_6: while(0);
-    ((abstract_collection___Iterator___next_t)CALL(variable1,COLOR_abstract_collection___Iterator___next))(variable1) /*Iterator::next*/;
+    ((abstract_collection___Iterator___next_t)CALL(variable[3],COLOR_abstract_collection___Iterator___next))(variable[3]) /*Iterator::next*/;
   }
   break_6: while(0);
-  variable1 =  TAG_Bool(true);
+  variable[2] =  TAG_Bool(true);
   goto return_label5;
   return_label5: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 val_t abstract_collection___NaiveCollection___count(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 93, LOCATE_abstract_collection___NaiveCollection___count};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-    val_t variable3;
-    val_t variable4;
+  val_t variable[8];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  variable1 =  TAG_Int(0);
-  variable2 = ((abstract_collection___Collection___iterator_t)CALL( self,COLOR_abstract_collection___Collection___iterator))( self) /*Collection::iterator*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] =  TAG_Int(0);
+  variable[4] = variable[0];
+  variable[4] = ((abstract_collection___Collection___iterator_t)CALL(variable[4],COLOR_abstract_collection___Collection___iterator))(variable[4]) /*Collection::iterator*/;
   while (true) { /*for*/
-    variable3 = ((abstract_collection___Iterator___is_ok_t)CALL(variable2,COLOR_abstract_collection___Iterator___is_ok))(variable2) /*Iterator::is_ok*/;
-    if (!UNTAG_Bool(variable3)) break; /*for*/
-    variable3 = ((abstract_collection___Iterator___item_t)CALL(variable2,COLOR_abstract_collection___Iterator___item))(variable2) /*Iterator::item*/;
-    variable4 = TAG_Bool(( variable3 /*i*/ ==  variable0 /*item*/) || (( variable3 /*i*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable3 /*i*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable3 /*i*/, variable0 /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable3 /*i*/,COLOR_kernel___Object_____eqeq))( variable3 /*i*/,  variable0 /*item*/) /*Object::==*/)))));
-    if (UNTAG_Bool(variable4)) { /*if*/
-      variable1 = TAG_Int(UNTAG_Int(variable1)+UNTAG_Int( TAG_Int(1))) /*nb*/;
+    variable[5] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[4],COLOR_abstract_collection___Iterator___is_ok))(variable[4]) /*Iterator::is_ok*/;
+    if (!UNTAG_Bool(variable[5])) break; /*for*/
+    variable[5] = ((abstract_collection___Iterator___item_t)CALL(variable[4],COLOR_abstract_collection___Iterator___item))(variable[4]) /*Iterator::item*/;
+    variable[6] = variable[5];
+    variable[7] = TAG_Bool(( variable[6] /*i*/ ==  variable[1] /*item*/) || (( variable[6] /*i*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[6] /*i*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*i*/, variable[1] /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[6] /*i*/,COLOR_kernel___Object_____eqeq))( variable[6] /*i*/,  variable[1] /*item*/) /*Object::==*/)))));
+    if (UNTAG_Bool(variable[7])) { /*if*/
+      variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(1))) /*nb*/;
     }
     continue_8: while(0);
-    ((abstract_collection___Iterator___next_t)CALL(variable2,COLOR_abstract_collection___Iterator___next))(variable2) /*Iterator::next*/;
+    ((abstract_collection___Iterator___next_t)CALL(variable[4],COLOR_abstract_collection___Iterator___next))(variable[4]) /*Iterator::next*/;
   }
   break_8: while(0);
-  variable1 =  variable1 /*nb*/;
+  variable[2] =  variable[3] /*nb*/;
   goto return_label7;
   return_label7: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 val_t abstract_collection___NaiveCollection___first(val_t  self) {
   struct trace_t trace = {NULL, NULL, 100, LOCATE_abstract_collection___NaiveCollection___first};
-  val_t variable0;
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 = ((abstract_collection___NaiveCollection___length_t)CALL( self,COLOR_abstract_collection___Collection___length))( self) /*NaiveCollection::length*/;
-  variable0 = TAG_Bool(UNTAG_Int(variable0)>UNTAG_Int( TAG_Int(0)));
-  if (!UNTAG_Bool(variable0)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___NaiveCollection___first, LOCATE_abstract_collection, 102); nit_exit(1);}
-  variable0 = ((abstract_collection___Collection___iterator_t)CALL( self,COLOR_abstract_collection___Collection___iterator))( self) /*Collection::iterator*/;
-  variable0 = ((abstract_collection___Iterator___item_t)CALL(variable0,COLOR_abstract_collection___Iterator___item))(variable0) /*Iterator::item*/;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((abstract_collection___NaiveCollection___length_t)CALL(variable[2],COLOR_abstract_collection___Collection___length))(variable[2]) /*NaiveCollection::length*/;
+  variable[2] = TAG_Bool(UNTAG_Int(variable[2])>UNTAG_Int( TAG_Int(0)));
+  if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___NaiveCollection___first, LOCATE_abstract_collection, 102); nit_exit(1);}
+  variable[2] = variable[0];
+  variable[2] = ((abstract_collection___Collection___iterator_t)CALL(variable[2],COLOR_abstract_collection___Collection___iterator))(variable[2]) /*Collection::iterator*/;
+  variable[2] = ((abstract_collection___Iterator___item_t)CALL(variable[2],COLOR_abstract_collection___Iterator___item))(variable[2]) /*Iterator::item*/;
+  variable[1] = variable[2];
   goto return_label9;
   return_label9: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t abstract_collection___Iterator___item(val_t  self) {
   struct trace_t trace = {NULL, NULL, 110, LOCATE_abstract_collection___Iterator___item};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___NaiveCollection___first, LOCATE_abstract_collection, 110);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 110);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 void abstract_collection___Iterator___next(val_t  self) {
   struct trace_t trace = {NULL, NULL, 114, LOCATE_abstract_collection___Iterator___next};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___NaiveCollection___first, LOCATE_abstract_collection, 114);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 114);
   nit_exit(1);
   tracehead = trace.prev;
   return;
 }
 val_t abstract_collection___Iterator___is_ok(val_t  self) {
   struct trace_t trace = {NULL, NULL, 118, LOCATE_abstract_collection___Iterator___is_ok};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___NaiveCollection___first, LOCATE_abstract_collection, 118);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 118);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
-val_t abstract_collection___Container___first(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 126, LOCATE_abstract_collection___Container___first};
-  val_t variable0;
+val_t abstract_collection___Container___iterator(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 145, LOCATE_abstract_collection___Container___iterator};
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 = ATTR_abstract_collection___Container____item( self) /*Container::_item*/;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[3] = NEW_ContainerIterator_abstract_collection___ContainerIterator___init(variable[2]); /*new ContainerIterator[E]*/
+  variable[2] = variable[3];
+  variable[1] = variable[2];
   goto return_label10;
   return_label10: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t abstract_collection___Container___is_empty(val_t  self) {
   struct trace_t trace = {NULL, NULL, 128, LOCATE_abstract_collection___Container___is_empty};
-  val_t variable0;
+  val_t variable[2];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  TAG_Bool(false);
+  variable[0] =  self;
+  variable[1] =  TAG_Bool(false);
   goto return_label11;
   return_label11: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t abstract_collection___Container___length(val_t  self) {
   struct trace_t trace = {NULL, NULL, 130, LOCATE_abstract_collection___Container___length};
-  val_t variable0;
+  val_t variable[2];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  TAG_Int(1);
+  variable[0] =  self;
+  variable[1] =  TAG_Int(1);
   goto return_label12;
   return_label12: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t abstract_collection___Container___has(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 132, LOCATE_abstract_collection___Container___has};
-  val_t variable0;
-  val_t variable1;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  variable1 = ATTR_abstract_collection___Container____item( self) /*Container::_item*/;
-  variable1 = TAG_Bool((variable1 ==  variable0 /*an_item*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, variable0 /*an_item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  variable0 /*an_item*/) /*Object::==*/)))));
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ATTR_abstract_collection___Container____item(variable[3]) /*Container::_item*/;
+  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*an_item*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*an_item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  variable[1] /*an_item*/) /*Object::==*/)))));
+  variable[2] = variable[3];
   goto return_label13;
   return_label13: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 val_t abstract_collection___Container___has_only(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 134, LOCATE_abstract_collection___Container___has_only};
-  val_t variable0;
-  val_t variable1;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  variable1 = ATTR_abstract_collection___Container____item( self) /*Container::_item*/;
-  variable1 = TAG_Bool((variable1 ==  variable0 /*an_item*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, variable0 /*an_item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  variable0 /*an_item*/) /*Object::==*/)))));
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ATTR_abstract_collection___Container____item(variable[3]) /*Container::_item*/;
+  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*an_item*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*an_item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  variable[1] /*an_item*/) /*Object::==*/)))));
+  variable[2] = variable[3];
   goto return_label14;
   return_label14: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 val_t abstract_collection___Container___count(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 136, LOCATE_abstract_collection___Container___count};
-  val_t variable0;
-  val_t variable1;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  variable1 = ATTR_abstract_collection___Container____item( self) /*Container::_item*/;
-  variable1 = TAG_Bool((variable1 ==  variable0 /*an_item*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, variable0 /*an_item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  variable0 /*an_item*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 =  TAG_Int(1);
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ATTR_abstract_collection___Container____item(variable[3]) /*Container::_item*/;
+  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*an_item*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*an_item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  variable[1] /*an_item*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[2] =  TAG_Int(1);
     goto return_label15;
   } else { /*if*/
-    variable1 =  TAG_Int(0);
+    variable[2] =  TAG_Int(0);
     goto return_label15;
   }
   return_label15: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
-val_t abstract_collection___Container___iterator(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 145, LOCATE_abstract_collection___Container___iterator};
-  val_t variable0;
+val_t abstract_collection___Container___first(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 126, LOCATE_abstract_collection___Container___first};
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 = NEW_ContainerIterator_abstract_collection___ContainerIterator___init( self); /*new ContainerIterator[E]*/
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_abstract_collection___Container____item(variable[2]) /*Container::_item*/;
+  variable[1] = variable[2];
   goto return_label16;
   return_label16: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 void abstract_collection___Container___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 147, LOCATE_abstract_collection___Container___init};
-  val_t variable0;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
+  variable[0] =  self;
+  variable[1] =  param0;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Container].i]) return;
-  ATTR_abstract_collection___Container____item( self) /*Container::_item*/ =  variable0 /*e*/;
+  variable[3] = variable[0];
+  ATTR_abstract_collection___Container____item(variable[3]) /*Container::_item*/ =  variable[1] /*e*/;
+  return_label17: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Container].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t abstract_collection___Container___item(val_t  self) {
   struct trace_t trace = {NULL, NULL, 150, LOCATE_abstract_collection___Container___item};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   tracehead = trace.prev;
@@ -352,6 +412,8 @@ val_t abstract_collection___Container___item(val_t  self) {
 }
 void abstract_collection___Container___item__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 150, LOCATE_abstract_collection___Container___item__eq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   ATTR_abstract_collection___Container____item( self) /*Container::_item*/ =  param0;
@@ -360,599 +422,726 @@ void abstract_collection___Container___item__eq(val_t  self, val_t  param0) {
 }
 val_t abstract_collection___ContainerIterator___item(val_t  self) {
   struct trace_t trace = {NULL, NULL, 157, LOCATE_abstract_collection___ContainerIterator___item};
-  val_t variable0;
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 = ATTR_abstract_collection___ContainerIterator____container( self) /*ContainerIterator::_container*/;
-  variable0 = ((abstract_collection___Container___item_t)CALL(variable0,COLOR_abstract_collection___Container___item))(variable0) /*Container::item*/;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_abstract_collection___ContainerIterator____container(variable[2]) /*ContainerIterator::_container*/;
+  variable[2] = ((abstract_collection___Container___item_t)CALL(variable[2],COLOR_abstract_collection___Container___item))(variable[2]) /*Container::item*/;
+  variable[1] = variable[2];
   goto return_label18;
   return_label18: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 void abstract_collection___ContainerIterator___next(val_t  self) {
   struct trace_t trace = {NULL, NULL, 159, LOCATE_abstract_collection___ContainerIterator___next};
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  ATTR_abstract_collection___ContainerIterator____is_ok( self) /*ContainerIterator::_is_ok*/ =  TAG_Bool(false);
-  tracehead = trace.prev;
-  return;
-}
-void abstract_collection___ContainerIterator___init(val_t  self, val_t  param0, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 161, LOCATE_abstract_collection___ContainerIterator___init};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ContainerIterator].i]) return;
-  ATTR_abstract_collection___ContainerIterator____container( self) /*ContainerIterator::_container*/ =  variable0 /*c*/;
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ContainerIterator].i] = 1;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  ATTR_abstract_collection___ContainerIterator____is_ok(variable[2]) /*ContainerIterator::_is_ok*/ =  TAG_Bool(false);
+  return_label19: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t abstract_collection___ContainerIterator___is_ok(val_t  self) {
   struct trace_t trace = {NULL, NULL, 163, LOCATE_abstract_collection___ContainerIterator___is_ok};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   tracehead = trace.prev;
   return ATTR_abstract_collection___ContainerIterator____is_ok( self) /*ContainerIterator::_is_ok*/;
 }
-void abstract_collection___RemovableCollection___clear(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 171, LOCATE_abstract_collection___RemovableCollection___clear};
+void abstract_collection___ContainerIterator___init(val_t  self, val_t  param0, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 161, LOCATE_abstract_collection___ContainerIterator___init};
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___ContainerIterator___init, LOCATE_abstract_collection, 171);
+  variable[0] =  self;
+  variable[1] =  param0;
+  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ContainerIterator].i]) return;
+  variable[3] = variable[0];
+  ATTR_abstract_collection___ContainerIterator____container(variable[3]) /*ContainerIterator::_container*/ =  variable[1] /*c*/;
+  return_label20: while(false);
+  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ContainerIterator].i] = 1;
+  tracehead = trace.prev;
+  return;
+}
+void abstract_collection___RemovableCollection___clear(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 171, LOCATE_abstract_collection___RemovableCollection___clear};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_abstract_collection;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 171);
   nit_exit(1);
   tracehead = trace.prev;
   return;
 }
 void abstract_collection___RemovableCollection___remove(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 174, LOCATE_abstract_collection___RemovableCollection___remove};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___ContainerIterator___init, LOCATE_abstract_collection, 174);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 174);
   nit_exit(1);
   tracehead = trace.prev;
   return;
 }
 void abstract_collection___RemovableCollection___remove_all(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 177, LOCATE_abstract_collection___RemovableCollection___remove_all};
-  val_t variable0;
-    val_t variable1;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
+  variable[0] =  self;
+  variable[1] =  param0;
   while (true) { /*while*/
-    variable1 = ((abstract_collection___Collection___has_t)CALL( self,COLOR_abstract_collection___Collection___has))( self,  variable0 /*item*/) /*Collection::has*/;
-    if (!UNTAG_Bool(variable1)) break; /* while*/
-    ((abstract_collection___RemovableCollection___remove_t)CALL( self,COLOR_abstract_collection___RemovableCollection___remove))( self,  variable0 /*item*/) /*RemovableCollection::remove*/;
+    variable[3] = variable[0];
+    variable[3] = ((abstract_collection___Collection___has_t)CALL(variable[3],COLOR_abstract_collection___Collection___has))(variable[3],  variable[1] /*item*/) /*Collection::has*/;
+    if (!UNTAG_Bool(variable[3])) break; /* while*/
+    variable[3] = variable[0];
+    ((abstract_collection___RemovableCollection___remove_t)CALL(variable[3],COLOR_abstract_collection___RemovableCollection___remove))(variable[3],  variable[1] /*item*/) /*RemovableCollection::remove*/;
     continue_22: while(0);
   }
   break_22: while(0);
+  return_label21: while(false);
   tracehead = trace.prev;
   return;
 }
 void abstract_collection___SimpleCollection___add(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 184, LOCATE_abstract_collection___SimpleCollection___add};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___RemovableCollection___remove_all, LOCATE_abstract_collection, 184);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 184);
   nit_exit(1);
   tracehead = trace.prev;
   return;
 }
 void abstract_collection___SimpleCollection___add_all(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 188, LOCATE_abstract_collection___SimpleCollection___add_all};
-  val_t variable0;
-  val_t variable1;
-      val_t variable2;
+  val_t variable[7];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable0 /*coll*/ ==  NIT_NULL /*null*/) || (( variable0 /*coll*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable0 /*coll*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable0 /*coll*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable0 /*coll*/,COLOR_kernel___Object_____eqeq))( variable0 /*coll*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = ((abstract_collection___Collection___iterator_t)CALL( variable0 /*coll*/,COLOR_abstract_collection___Collection___iterator))( variable0 /*coll*/) /*Collection::iterator*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*coll*/ ==  NIT_NULL /*null*/) || (( variable[1] /*coll*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*coll*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*coll*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*coll*/,COLOR_kernel___Object_____eqeq))( variable[1] /*coll*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = ((abstract_collection___Collection___iterator_t)CALL( variable[1] /*coll*/,COLOR_abstract_collection___Collection___iterator))( variable[1] /*coll*/) /*Collection::iterator*/;
     while (true) { /*for*/
-      variable2 = ((abstract_collection___Iterator___is_ok_t)CALL(variable1,COLOR_abstract_collection___Iterator___is_ok))(variable1) /*Iterator::is_ok*/;
-      if (!UNTAG_Bool(variable2)) break; /*for*/
-      variable2 = ((abstract_collection___Iterator___item_t)CALL(variable1,COLOR_abstract_collection___Iterator___item))(variable1) /*Iterator::item*/;
-      ((abstract_collection___SimpleCollection___add_t)CALL( self,COLOR_abstract_collection___SimpleCollection___add))( self,  variable2 /*i*/) /*SimpleCollection::add*/;
+      variable[4] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[3],COLOR_abstract_collection___Iterator___is_ok))(variable[3]) /*Iterator::is_ok*/;
+      if (!UNTAG_Bool(variable[4])) break; /*for*/
+      variable[4] = ((abstract_collection___Iterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*Iterator::item*/;
+      variable[5] = variable[4];
+      variable[6] = variable[0];
+      ((abstract_collection___SimpleCollection___add_t)CALL(variable[6],COLOR_abstract_collection___SimpleCollection___add))(variable[6],  variable[5] /*i*/) /*SimpleCollection::add*/;
       continue_24: while(0);
-      ((abstract_collection___Iterator___next_t)CALL(variable1,COLOR_abstract_collection___Iterator___next))(variable1) /*Iterator::next*/;
+      ((abstract_collection___Iterator___next_t)CALL(variable[3],COLOR_abstract_collection___Iterator___next))(variable[3]) /*Iterator::next*/;
     }
     break_24: while(0);
   }
+  return_label23: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t abstract_collection___Set___has_only(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 204, LOCATE_abstract_collection___Set___has_only};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  variable2 = ((abstract_collection___Collection___length_t)CALL( self,COLOR_abstract_collection___Collection___length))( self) /*Collection::length*/;
-  variable1 = variable2;
-  variable2 = TAG_Bool(( variable1 /*l*/)==( TAG_Int(1)));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = ((abstract_collection___Collection___has_t)CALL( self,COLOR_abstract_collection___Collection___has))( self,  variable0 /*item*/) /*Collection::has*/;
-    variable1 = variable2;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = variable[0];
+  variable[4] = ((abstract_collection___Collection___length_t)CALL(variable[4],COLOR_abstract_collection___Collection___length))(variable[4]) /*Collection::length*/;
+  variable[3] = variable[4];
+  variable[4] = TAG_Bool(( variable[3] /*l*/)==( TAG_Int(1)));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = variable[0];
+    variable[4] = ((abstract_collection___Collection___has_t)CALL(variable[4],COLOR_abstract_collection___Collection___has))(variable[4],  variable[1] /*item*/) /*Collection::has*/;
+    variable[2] = variable[4];
     goto return_label25;
   } else { /*if*/
-    variable2 = TAG_Bool(( variable1 /*l*/)==( TAG_Int(0)));
-    if (UNTAG_Bool(variable2)) { /*if*/
-      variable1 =  TAG_Bool(true);
+    variable[4] = TAG_Bool(( variable[3] /*l*/)==( TAG_Int(0)));
+    if (UNTAG_Bool(variable[4])) { /*if*/
+      variable[2] =  TAG_Bool(true);
       goto return_label25;
     } else { /*if*/
-      variable1 =  TAG_Bool(false);
+      variable[2] =  TAG_Bool(false);
       goto return_label25;
     }
   }
   return_label25: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 val_t abstract_collection___Set___count(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 216, LOCATE_abstract_collection___Set___count};
-  val_t variable0;
-  val_t variable1;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  variable1 = ((abstract_collection___Collection___has_t)CALL( self,COLOR_abstract_collection___Collection___has))( self,  variable0 /*item*/) /*Collection::has*/;
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 =  TAG_Int(1);
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((abstract_collection___Collection___has_t)CALL(variable[3],COLOR_abstract_collection___Collection___has))(variable[3],  variable[1] /*item*/) /*Collection::has*/;
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[2] =  TAG_Int(1);
     goto return_label26;
   } else { /*if*/
-    variable1 =  TAG_Int(0);
+    variable[2] =  TAG_Int(0);
     goto return_label26;
   }
   return_label26: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 void abstract_collection___Set___remove_all(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 226, LOCATE_abstract_collection___Set___remove_all};
-  val_t variable0;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  ((abstract_collection___RemovableCollection___remove_t)CALL( self,COLOR_abstract_collection___RemovableCollection___remove))( self,  variable0 /*item*/) /*RemovableCollection::remove*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  ((abstract_collection___RemovableCollection___remove_t)CALL(variable[3],COLOR_abstract_collection___RemovableCollection___remove))(variable[3],  variable[1] /*item*/) /*RemovableCollection::remove*/;
+  return_label27: while(false);
   tracehead = trace.prev;
   return;
 }
-val_t abstract_collection___Map_____bra(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 244, LOCATE_abstract_collection___Map_____bra};
+val_t abstract_collection___Map___iterator(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 267, LOCATE_abstract_collection___Map___iterator};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___Set___remove_all, LOCATE_abstract_collection, 244);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 267);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t abstract_collection___Map_____bra(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 244, LOCATE_abstract_collection___Map_____bra};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_abstract_collection;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 244);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 void abstract_collection___Map_____braeq(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 247, LOCATE_abstract_collection___Map_____braeq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___Set___remove_all, LOCATE_abstract_collection, 247);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 247);
   nit_exit(1);
   tracehead = trace.prev;
   return;
 }
 val_t abstract_collection___Map___has_key(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 250, LOCATE_abstract_collection___Map___has_key};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___Set___remove_all, LOCATE_abstract_collection, 250);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 250);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 void abstract_collection___Map___remove_at(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 253, LOCATE_abstract_collection___Map___remove_at};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___Set___remove_all, LOCATE_abstract_collection, 253);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 253);
   nit_exit(1);
   tracehead = trace.prev;
   return;
 }
 void abstract_collection___Map___recover_with(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 256, LOCATE_abstract_collection___Map___recover_with};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-    val_t variable3;
+  val_t variable[7];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  variable2 = ((abstract_collection___Map___iterator_t)CALL( variable0 /*map*/,COLOR_abstract_collection___Collection___iterator))( variable0 /*map*/) /*Map::iterator*/;
-  variable1 = variable2;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = ((abstract_collection___Map___iterator_t)CALL( variable[1] /*map*/,COLOR_abstract_collection___Collection___iterator))( variable[1] /*map*/) /*Map::iterator*/;
+  variable[3] = variable[4];
   while (true) { /*while*/
-    variable2 = ((abstract_collection___Iterator___is_ok_t)CALL( variable1 /*i*/,COLOR_abstract_collection___Iterator___is_ok))( variable1 /*i*/) /*Iterator::is_ok*/;
-    if (!UNTAG_Bool(variable2)) break; /* while*/
-    variable2 = ((abstract_collection___MapIterator___key_t)CALL( variable1 /*i*/,COLOR_abstract_collection___MapIterator___key))( variable1 /*i*/) /*MapIterator::key*/;
-    variable3 = ((abstract_collection___Iterator___item_t)CALL( variable1 /*i*/,COLOR_abstract_collection___Iterator___item))( variable1 /*i*/) /*Iterator::item*/;
-    ((abstract_collection___Map_____braeq_t)CALL( self,COLOR_abstract_collection___Map_____braeq))( self, variable2, variable3) /*Map::[]=*/;
-    ((abstract_collection___Iterator___next_t)CALL( variable1 /*i*/,COLOR_abstract_collection___Iterator___next))( variable1 /*i*/) /*Iterator::next*/;
+    variable[4] = ((abstract_collection___Iterator___is_ok_t)CALL( variable[3] /*i*/,COLOR_abstract_collection___Iterator___is_ok))( variable[3] /*i*/) /*Iterator::is_ok*/;
+    if (!UNTAG_Bool(variable[4])) break; /* while*/
+    variable[4] = variable[0];
+    variable[5] = ((abstract_collection___MapIterator___key_t)CALL( variable[3] /*i*/,COLOR_abstract_collection___MapIterator___key))( variable[3] /*i*/) /*MapIterator::key*/;
+    variable[6] = ((abstract_collection___Iterator___item_t)CALL( variable[3] /*i*/,COLOR_abstract_collection___Iterator___item))( variable[3] /*i*/) /*Iterator::item*/;
+    ((abstract_collection___Map_____braeq_t)CALL(variable[4],COLOR_abstract_collection___Map_____braeq))(variable[4], variable[5], variable[6]) /*Map::[]=*/;
+    ((abstract_collection___Iterator___next_t)CALL( variable[3] /*i*/,COLOR_abstract_collection___Iterator___next))( variable[3] /*i*/) /*Iterator::next*/;
     continue_29: while(0);
   }
   break_29: while(0);
+  return_label28: while(false);
   tracehead = trace.prev;
   return;
 }
-val_t abstract_collection___Map___iterator(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 267, LOCATE_abstract_collection___Map___iterator};
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___Map___recover_with, LOCATE_abstract_collection, 267);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return NIT_NULL;
-}
 val_t abstract_collection___MapIterator___key(val_t  self) {
   struct trace_t trace = {NULL, NULL, 273, LOCATE_abstract_collection___MapIterator___key};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___Map___recover_with, LOCATE_abstract_collection, 273);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 273);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 void abstract_collection___MapIterator___item__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 276, LOCATE_abstract_collection___MapIterator___item__eq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___Map___recover_with, LOCATE_abstract_collection, 276);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 276);
   nit_exit(1);
   tracehead = trace.prev;
   return;
 }
-val_t abstract_collection___IndexedCollection___first(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 285, LOCATE_abstract_collection___IndexedCollection___first};
-  val_t variable0;
+val_t abstract_collection___IndexedCollection___iterator(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 349, LOCATE_abstract_collection___IndexedCollection___iterator};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 = ((abstract_collection___Collection___is_empty_t)CALL( self,COLOR_abstract_collection___Collection___is_empty))( self) /*Collection::is_empty*/;
-  if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable0)))) { fprintf(stderr, "Assert%s failed", " 'not_empty' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___IndexedCollection___first, LOCATE_abstract_collection, 289); nit_exit(1);}
-  variable0 = ((abstract_collection___Map_____bra_t)CALL( self,COLOR_abstract_collection___Map_____bra))( self,  TAG_Int(0)) /*Map::[]*/;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 349);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t abstract_collection___IndexedCollection___first(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 285, LOCATE_abstract_collection___IndexedCollection___first};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_abstract_collection;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((abstract_collection___Collection___is_empty_t)CALL(variable[2],COLOR_abstract_collection___Collection___is_empty))(variable[2]) /*Collection::is_empty*/;
+  if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[2])))) { fprintf(stderr, "Assert%s failed", " 'not_empty' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___IndexedCollection___first, LOCATE_abstract_collection, 289); nit_exit(1);}
+  variable[2] = variable[0];
+  variable[2] = ((abstract_collection___Map_____bra_t)CALL(variable[2],COLOR_abstract_collection___Map_____bra))(variable[2],  TAG_Int(0)) /*Map::[]*/;
+  variable[1] = variable[2];
   goto return_label30;
   return_label30: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
+}
+void abstract_collection___IndexedCollection___add(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 318, LOCATE_abstract_collection___IndexedCollection___add};
+  val_t variable[4];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_abstract_collection;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  ((abstract_collection___IndexedCollection___push_t)CALL(variable[3],COLOR_abstract_collection___IndexedCollection___push))(variable[3],  variable[1] /*e*/) /*IndexedCollection::push*/;
+  return_label31: while(false);
+  tracehead = trace.prev;
+  return;
 }
 void abstract_collection___IndexedCollection___first__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 293, LOCATE_abstract_collection___IndexedCollection___first__eq};
-  val_t variable0;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  ((abstract_collection___Map_____braeq_t)CALL( self,COLOR_abstract_collection___Map_____braeq))( self,  TAG_Int(0),  variable0 /*item*/) /*Map::[]=*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  ((abstract_collection___Map_____braeq_t)CALL(variable[3],COLOR_abstract_collection___Map_____braeq))(variable[3],  TAG_Int(0),  variable[1] /*item*/) /*Map::[]=*/;
+  return_label32: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t abstract_collection___IndexedCollection___last(val_t  self) {
   struct trace_t trace = {NULL, NULL, 298, LOCATE_abstract_collection___IndexedCollection___last};
-  val_t variable0;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 = ((abstract_collection___Collection___is_empty_t)CALL( self,COLOR_abstract_collection___Collection___is_empty))( self) /*Collection::is_empty*/;
-  if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable0)))) { fprintf(stderr, "Assert%s failed", " 'not_empty' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___IndexedCollection___last, LOCATE_abstract_collection, 302); nit_exit(1);}
-  variable0 = ((abstract_collection___Collection___length_t)CALL( self,COLOR_abstract_collection___Collection___length))( self) /*Collection::length*/;
-  variable0 = TAG_Int(UNTAG_Int(variable0)-UNTAG_Int( TAG_Int(1)));
-  variable0 = ((abstract_collection___Map_____bra_t)CALL( self,COLOR_abstract_collection___Map_____bra))( self, variable0) /*Map::[]*/;
-  goto return_label32;
-  return_label32: while(false);
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((abstract_collection___Collection___is_empty_t)CALL(variable[2],COLOR_abstract_collection___Collection___is_empty))(variable[2]) /*Collection::is_empty*/;
+  if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[2])))) { fprintf(stderr, "Assert%s failed", " 'not_empty' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___IndexedCollection___last, LOCATE_abstract_collection, 302); nit_exit(1);}
+  variable[2] = variable[0];
+  variable[3] = variable[0];
+  variable[3] = ((abstract_collection___Collection___length_t)CALL(variable[3],COLOR_abstract_collection___Collection___length))(variable[3]) /*Collection::length*/;
+  variable[3] = TAG_Int(UNTAG_Int(variable[3])-UNTAG_Int( TAG_Int(1)));
+  variable[2] = ((abstract_collection___Map_____bra_t)CALL(variable[2],COLOR_abstract_collection___Map_____bra))(variable[2], variable[3]) /*Map::[]*/;
+  variable[1] = variable[2];
+  goto return_label33;
+  return_label33: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 void abstract_collection___IndexedCollection___last__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 306, LOCATE_abstract_collection___IndexedCollection___last__eq};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  val_t variable[6];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  variable2 = ((abstract_collection___Collection___length_t)CALL( self,COLOR_abstract_collection___Collection___length))( self) /*Collection::length*/;
-  variable1 = variable2;
-  variable2 = TAG_Bool(UNTAG_Int( variable1 /*l*/)>UNTAG_Int( TAG_Int(0)));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = TAG_Int(UNTAG_Int( variable1 /*l*/)-UNTAG_Int( TAG_Int(1)));
-    ((abstract_collection___Map_____braeq_t)CALL( self,COLOR_abstract_collection___Map_____braeq))( self, variable2,  variable0 /*item*/) /*Map::[]=*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = variable[0];
+  variable[4] = ((abstract_collection___Collection___length_t)CALL(variable[4],COLOR_abstract_collection___Collection___length))(variable[4]) /*Collection::length*/;
+  variable[3] = variable[4];
+  variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*l*/)>UNTAG_Int( TAG_Int(0)));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = variable[0];
+    variable[5] = TAG_Int(UNTAG_Int( variable[3] /*l*/)-UNTAG_Int( TAG_Int(1)));
+    ((abstract_collection___Map_____braeq_t)CALL(variable[4],COLOR_abstract_collection___Map_____braeq))(variable[4], variable[5],  variable[1] /*item*/) /*Map::[]=*/;
   } else { /*if*/
-    ((abstract_collection___Map_____braeq_t)CALL( self,COLOR_abstract_collection___Map_____braeq))( self,  TAG_Int(0),  variable0 /*item*/) /*Map::[]=*/;
+    variable[4] = variable[0];
+    ((abstract_collection___Map_____braeq_t)CALL(variable[4],COLOR_abstract_collection___Map_____braeq))(variable[4],  TAG_Int(0),  variable[1] /*item*/) /*Map::[]=*/;
   }
-  tracehead = trace.prev;
-  return;
-}
-void abstract_collection___IndexedCollection___add(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 318, LOCATE_abstract_collection___IndexedCollection___add};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  ((abstract_collection___IndexedCollection___push_t)CALL( self,COLOR_abstract_collection___IndexedCollection___push))( self,  variable0 /*e*/) /*IndexedCollection::push*/;
+  return_label34: while(false);
   tracehead = trace.prev;
   return;
 }
 void abstract_collection___IndexedCollection___push(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 321, LOCATE_abstract_collection___IndexedCollection___push};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___IndexedCollection___add, LOCATE_abstract_collection, 321);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 321);
   nit_exit(1);
   tracehead = trace.prev;
   return;
 }
 void abstract_collection___IndexedCollection___append(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 324, LOCATE_abstract_collection___IndexedCollection___append};
-  val_t variable0;
-  val_t variable1;
-      val_t variable2;
+  val_t variable[7];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable0 /*coll*/ ==  NIT_NULL /*null*/) || (( variable0 /*coll*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable0 /*coll*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable0 /*coll*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable0 /*coll*/,COLOR_kernel___Object_____eqeq))( variable0 /*coll*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = ((abstract_collection___Collection___iterator_t)CALL( variable0 /*coll*/,COLOR_abstract_collection___Collection___iterator))( variable0 /*coll*/) /*Collection::iterator*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*coll*/ ==  NIT_NULL /*null*/) || (( variable[1] /*coll*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*coll*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*coll*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*coll*/,COLOR_kernel___Object_____eqeq))( variable[1] /*coll*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = ((abstract_collection___Collection___iterator_t)CALL( variable[1] /*coll*/,COLOR_abstract_collection___Collection___iterator))( variable[1] /*coll*/) /*Collection::iterator*/;
     while (true) { /*for*/
-      variable2 = ((abstract_collection___Iterator___is_ok_t)CALL(variable1,COLOR_abstract_collection___Iterator___is_ok))(variable1) /*Iterator::is_ok*/;
-      if (!UNTAG_Bool(variable2)) break; /*for*/
-      variable2 = ((abstract_collection___Iterator___item_t)CALL(variable1,COLOR_abstract_collection___Iterator___item))(variable1) /*Iterator::item*/;
-      ((abstract_collection___IndexedCollection___push_t)CALL( self,COLOR_abstract_collection___IndexedCollection___push))( self,  variable2 /*i*/) /*IndexedCollection::push*/;
+      variable[4] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[3],COLOR_abstract_collection___Iterator___is_ok))(variable[3]) /*Iterator::is_ok*/;
+      if (!UNTAG_Bool(variable[4])) break; /*for*/
+      variable[4] = ((abstract_collection___Iterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*Iterator::item*/;
+      variable[5] = variable[4];
+      variable[6] = variable[0];
+      ((abstract_collection___IndexedCollection___push_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___push))(variable[6],  variable[5] /*i*/) /*IndexedCollection::push*/;
       continue_36: while(0);
-      ((abstract_collection___Iterator___next_t)CALL(variable1,COLOR_abstract_collection___Iterator___next))(variable1) /*Iterator::next*/;
+      ((abstract_collection___Iterator___next_t)CALL(variable[3],COLOR_abstract_collection___Iterator___next))(variable[3]) /*Iterator::next*/;
     }
     break_36: while(0);
   }
+  return_label35: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t abstract_collection___IndexedCollection___pop(val_t  self) {
   struct trace_t trace = {NULL, NULL, 327, LOCATE_abstract_collection___IndexedCollection___pop};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___IndexedCollection___append, LOCATE_abstract_collection, 327);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 327);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 void abstract_collection___IndexedCollection___unshift(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 330, LOCATE_abstract_collection___IndexedCollection___unshift};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___IndexedCollection___append, LOCATE_abstract_collection, 330);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 330);
   nit_exit(1);
   tracehead = trace.prev;
   return;
 }
 val_t abstract_collection___IndexedCollection___shift(val_t  self) {
   struct trace_t trace = {NULL, NULL, 333, LOCATE_abstract_collection___IndexedCollection___shift};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___IndexedCollection___append, LOCATE_abstract_collection, 333);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 333);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t abstract_collection___IndexedCollection___index_of(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 337, LOCATE_abstract_collection___IndexedCollection___index_of};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  variable2 = ((abstract_collection___IndexedCollection___iterator_t)CALL( self,COLOR_abstract_collection___Collection___iterator))( self) /*IndexedCollection::iterator*/;
-  variable1 = variable2;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = variable[0];
+  variable[4] = ((abstract_collection___IndexedCollection___iterator_t)CALL(variable[4],COLOR_abstract_collection___Collection___iterator))(variable[4]) /*IndexedCollection::iterator*/;
+  variable[3] = variable[4];
   while (true) { /*while*/
-    variable2 = ((abstract_collection___Iterator___is_ok_t)CALL( variable1 /*i*/,COLOR_abstract_collection___Iterator___is_ok))( variable1 /*i*/) /*Iterator::is_ok*/;
-    if (!UNTAG_Bool(variable2)) break; /* while*/
-    variable2 = ((abstract_collection___Iterator___item_t)CALL( variable1 /*i*/,COLOR_abstract_collection___Iterator___item))( variable1 /*i*/) /*Iterator::item*/;
-    variable2 = TAG_Bool((variable2 ==  variable0 /*item*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, variable0 /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  variable0 /*item*/) /*Object::==*/)))));
-    if (UNTAG_Bool(variable2)) { /*if*/
-      variable2 = ((abstract_collection___IndexedIterator___index_t)CALL( variable1 /*i*/,COLOR_abstract_collection___IndexedIterator___index))( variable1 /*i*/) /*IndexedIterator::index*/;
-      variable1 = variable2;
+    variable[4] = ((abstract_collection___Iterator___is_ok_t)CALL( variable[3] /*i*/,COLOR_abstract_collection___Iterator___is_ok))( variable[3] /*i*/) /*Iterator::is_ok*/;
+    if (!UNTAG_Bool(variable[4])) break; /* while*/
+    variable[4] = ((abstract_collection___Iterator___item_t)CALL( variable[3] /*i*/,COLOR_abstract_collection___Iterator___item))( variable[3] /*i*/) /*Iterator::item*/;
+    variable[4] = TAG_Bool((variable[4] ==  variable[1] /*item*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], variable[1] /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  variable[1] /*item*/) /*Object::==*/)))));
+    if (UNTAG_Bool(variable[4])) { /*if*/
+      variable[4] = ((abstract_collection___IndexedIterator___index_t)CALL( variable[3] /*i*/,COLOR_abstract_collection___IndexedIterator___index))( variable[3] /*i*/) /*IndexedIterator::index*/;
+      variable[2] = variable[4];
       goto return_label37;
     }
-    ((abstract_collection___Iterator___next_t)CALL( variable1 /*i*/,COLOR_abstract_collection___Iterator___next))( variable1 /*i*/) /*Iterator::next*/;
+    ((abstract_collection___Iterator___next_t)CALL( variable[3] /*i*/,COLOR_abstract_collection___Iterator___next))( variable[3] /*i*/) /*Iterator::next*/;
     continue_38: while(0);
   }
   break_38: while(0);
-  variable2 = TAG_Int(-UNTAG_Int( TAG_Int(1)));
-  variable1 = variable2;
+  variable[4] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
+  variable[2] = variable[4];
   goto return_label37;
   return_label37: while(false);
   tracehead = trace.prev;
-  return variable1;
-}
-val_t abstract_collection___IndexedCollection___iterator(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 349, LOCATE_abstract_collection___IndexedCollection___iterator};
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___IndexedCollection___index_of, LOCATE_abstract_collection, 349);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return NIT_NULL;
-}
-val_t abstract_collection___IndexedIterator___index(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 355, LOCATE_abstract_collection___IndexedIterator___index};
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___IndexedCollection___index_of, LOCATE_abstract_collection, 355);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return NIT_NULL;
+  return variable[2];
 }
 val_t abstract_collection___IndexedIterator___key(val_t  self) {
   struct trace_t trace = {NULL, NULL, 358, LOCATE_abstract_collection___IndexedIterator___key};
-  val_t variable0;
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 = ((abstract_collection___IndexedIterator___index_t)CALL( self,COLOR_abstract_collection___IndexedIterator___index))( self) /*IndexedIterator::index*/;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((abstract_collection___IndexedIterator___index_t)CALL(variable[2],COLOR_abstract_collection___IndexedIterator___index))(variable[2]) /*IndexedIterator::index*/;
+  variable[1] = variable[2];
   goto return_label39;
   return_label39: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
-val_t abstract_collection___CoupleMap___couple_at(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 365, LOCATE_abstract_collection___CoupleMap___couple_at};
+val_t abstract_collection___IndexedIterator___index(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 355, LOCATE_abstract_collection___IndexedIterator___index};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___IndexedIterator___key, LOCATE_abstract_collection, 365);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 355);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t abstract_collection___CoupleMap_____bra(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 369, LOCATE_abstract_collection___CoupleMap_____bra};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  variable2 = ((abstract_collection___CoupleMap___couple_at_t)CALL( self,COLOR_abstract_collection___CoupleMap___couple_at))( self,  variable0 /*key*/) /*CoupleMap::couple_at*/;
-  variable1 = variable2;
-  variable2 = TAG_Bool(( variable1 /*c*/ ==  NIT_NULL /*null*/) || (( variable1 /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable1 /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable1 /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable1 /*c*/,COLOR_kernel___Object_____eqeq))( variable1 /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable1 =  NIT_NULL /*null*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = variable[0];
+  variable[4] = ((abstract_collection___CoupleMap___couple_at_t)CALL(variable[4],COLOR_abstract_collection___CoupleMap___couple_at))(variable[4],  variable[1] /*key*/) /*CoupleMap::couple_at*/;
+  variable[3] = variable[4];
+  variable[4] = TAG_Bool(( variable[3] /*c*/ ==  NIT_NULL /*null*/) || (( variable[3] /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*c*/,COLOR_kernel___Object_____eqeq))( variable[3] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[2] =  NIT_NULL /*null*/;
     goto return_label40;
   } else { /*if*/
-    variable2 = ((abstract_collection___Couple___second_t)CALL( variable1 /*c*/,COLOR_abstract_collection___Couple___second))( variable1 /*c*/) /*Couple::second*/;
-    variable1 = variable2;
+    variable[4] = ((abstract_collection___Couple___second_t)CALL( variable[3] /*c*/,COLOR_abstract_collection___Couple___second))( variable[3] /*c*/) /*Couple::second*/;
+    variable[2] = variable[4];
     goto return_label40;
   }
   return_label40: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 val_t abstract_collection___CoupleMap___has_key(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 379, LOCATE_abstract_collection___CoupleMap___has_key};
-  val_t variable0;
-  val_t variable1;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  variable1 = ((abstract_collection___CoupleMap___couple_at_t)CALL( self,COLOR_abstract_collection___CoupleMap___couple_at))( self,  variable0 /*key*/) /*CoupleMap::couple_at*/;
-  variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((abstract_collection___CoupleMap___couple_at_t)CALL(variable[3],COLOR_abstract_collection___CoupleMap___couple_at))(variable[3],  variable[1] /*key*/) /*CoupleMap::couple_at*/;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[2] = variable[3];
   goto return_label41;
   return_label41: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
+}
+val_t abstract_collection___CoupleMap___couple_at(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 365, LOCATE_abstract_collection___CoupleMap___couple_at};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_abstract_collection;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 365);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
 }
 val_t abstract_collection___CoupleMapIterator___item(val_t  self) {
   struct trace_t trace = {NULL, NULL, 387, LOCATE_abstract_collection___CoupleMapIterator___item};
-  val_t variable0;
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 = ATTR_abstract_collection___CoupleMapIterator____iter( self) /*CoupleMapIterator::_iter*/;
-  variable0 = ((abstract_collection___Iterator___item_t)CALL(variable0,COLOR_abstract_collection___Iterator___item))(variable0) /*Iterator::item*/;
-  variable0 = ((abstract_collection___Couple___second_t)CALL(variable0,COLOR_abstract_collection___Couple___second))(variable0) /*Couple::second*/;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[2]) /*CoupleMapIterator::_iter*/;
+  variable[2] = ((abstract_collection___Iterator___item_t)CALL(variable[2],COLOR_abstract_collection___Iterator___item))(variable[2]) /*Iterator::item*/;
+  variable[2] = ((abstract_collection___Couple___second_t)CALL(variable[2],COLOR_abstract_collection___Couple___second))(variable[2]) /*Couple::second*/;
+  variable[1] = variable[2];
   goto return_label42;
   return_label42: while(false);
   tracehead = trace.prev;
-  return variable0;
-}
-void abstract_collection___CoupleMapIterator___item__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 389, LOCATE_abstract_collection___CoupleMapIterator___item__eq};
-  val_t variable0;
-  val_t variable1;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  variable1 = ATTR_abstract_collection___CoupleMapIterator____iter( self) /*CoupleMapIterator::_iter*/;
-  variable1 = ((abstract_collection___Iterator___item_t)CALL(variable1,COLOR_abstract_collection___Iterator___item))(variable1) /*Iterator::item*/;
-  ((abstract_collection___Couple___second__eq_t)CALL(variable1,COLOR_abstract_collection___Couple___second__eq))(variable1,  variable0 /*e*/) /*Couple::second=*/;
-  tracehead = trace.prev;
-  return;
-}
-val_t abstract_collection___CoupleMapIterator___key(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 391, LOCATE_abstract_collection___CoupleMapIterator___key};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_abstract_collection;
-  variable0 = ATTR_abstract_collection___CoupleMapIterator____iter( self) /*CoupleMapIterator::_iter*/;
-  variable0 = ((abstract_collection___Iterator___item_t)CALL(variable0,COLOR_abstract_collection___Iterator___item))(variable0) /*Iterator::item*/;
-  variable0 = ((abstract_collection___Couple___first_t)CALL(variable0,COLOR_abstract_collection___Couple___first))(variable0) /*Couple::first*/;
-  goto return_label44;
-  return_label44: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t abstract_collection___CoupleMapIterator___is_ok(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 393, LOCATE_abstract_collection___CoupleMapIterator___is_ok};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_abstract_collection;
-  variable0 = ATTR_abstract_collection___CoupleMapIterator____iter( self) /*CoupleMapIterator::_iter*/;
-  variable0 = ((abstract_collection___Iterator___is_ok_t)CALL(variable0,COLOR_abstract_collection___Iterator___is_ok))(variable0) /*Iterator::is_ok*/;
-  goto return_label45;
-  return_label45: while(false);
-  tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 void abstract_collection___CoupleMapIterator___next(val_t  self) {
   struct trace_t trace = {NULL, NULL, 395, LOCATE_abstract_collection___CoupleMapIterator___next};
-  val_t variable0;
-    val_t variable1;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 = ATTR_abstract_collection___CoupleMapIterator____iter( self) /*CoupleMapIterator::_iter*/;
-  ((abstract_collection___Iterator___next_t)CALL(variable0,COLOR_abstract_collection___Iterator___next))(variable0) /*Iterator::next*/;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[2]) /*CoupleMapIterator::_iter*/;
+  ((abstract_collection___Iterator___next_t)CALL(variable[2],COLOR_abstract_collection___Iterator___next))(variable[2]) /*Iterator::next*/;
   while (true) { /*while*/
-    variable0 = ATTR_abstract_collection___CoupleMapIterator____iter( self) /*CoupleMapIterator::_iter*/;
-    variable0 = ((abstract_collection___Iterator___is_ok_t)CALL(variable0,COLOR_abstract_collection___Iterator___is_ok))(variable0) /*Iterator::is_ok*/;
-    variable1 = variable0;
-    if (UNTAG_Bool(variable1)) { /* and */
-      variable1 = ATTR_abstract_collection___CoupleMapIterator____iter( self) /*CoupleMapIterator::_iter*/;
-      variable1 = ((abstract_collection___Iterator___item_t)CALL(variable1,COLOR_abstract_collection___Iterator___item))(variable1) /*Iterator::item*/;
-      variable1 = TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))));
+    variable[2] = variable[0];
+    variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[2]) /*CoupleMapIterator::_iter*/;
+    variable[2] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[2],COLOR_abstract_collection___Iterator___is_ok))(variable[2]) /*Iterator::is_ok*/;
+    variable[3] = variable[2];
+    if (UNTAG_Bool(variable[3])) { /* and */
+      variable[3] = variable[0];
+      variable[3] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[3]) /*CoupleMapIterator::_iter*/;
+      variable[3] = ((abstract_collection___Iterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*Iterator::item*/;
+      variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
     }
-    variable0 = variable1;
-    if (!UNTAG_Bool(variable0)) break; /* while*/
-    variable0 = ATTR_abstract_collection___CoupleMapIterator____iter( self) /*CoupleMapIterator::_iter*/;
-    ((abstract_collection___Iterator___next_t)CALL(variable0,COLOR_abstract_collection___Iterator___next))(variable0) /*Iterator::next*/;
-    continue_47: while(0);
+    variable[2] = variable[3];
+    if (!UNTAG_Bool(variable[2])) break; /* while*/
+    variable[2] = variable[0];
+    variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[2]) /*CoupleMapIterator::_iter*/;
+    ((abstract_collection___Iterator___next_t)CALL(variable[2],COLOR_abstract_collection___Iterator___next))(variable[2]) /*Iterator::next*/;
+    continue_44: while(0);
   }
-  break_47: while(0);
+  break_44: while(0);
+  return_label43: while(false);
+  tracehead = trace.prev;
+  return;
+}
+val_t abstract_collection___CoupleMapIterator___is_ok(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 393, LOCATE_abstract_collection___CoupleMapIterator___is_ok};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_abstract_collection;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[2]) /*CoupleMapIterator::_iter*/;
+  variable[2] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[2],COLOR_abstract_collection___Iterator___is_ok))(variable[2]) /*Iterator::is_ok*/;
+  variable[1] = variable[2];
+  goto return_label45;
+  return_label45: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t abstract_collection___CoupleMapIterator___key(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 391, LOCATE_abstract_collection___CoupleMapIterator___key};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_abstract_collection;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[2]) /*CoupleMapIterator::_iter*/;
+  variable[2] = ((abstract_collection___Iterator___item_t)CALL(variable[2],COLOR_abstract_collection___Iterator___item))(variable[2]) /*Iterator::item*/;
+  variable[2] = ((abstract_collection___Couple___first_t)CALL(variable[2],COLOR_abstract_collection___Couple___first))(variable[2]) /*Couple::first*/;
+  variable[1] = variable[2];
+  goto return_label46;
+  return_label46: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+void abstract_collection___CoupleMapIterator___item__eq(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 389, LOCATE_abstract_collection___CoupleMapIterator___item__eq};
+  val_t variable[4];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_abstract_collection;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[3]) /*CoupleMapIterator::_iter*/;
+  variable[3] = ((abstract_collection___Iterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*Iterator::item*/;
+  ((abstract_collection___Couple___second__eq_t)CALL(variable[3],COLOR_abstract_collection___Couple___second__eq))(variable[3],  variable[1] /*e*/) /*Couple::second=*/;
+  return_label47: while(false);
   tracehead = trace.prev;
   return;
 }
 void abstract_collection___CoupleMapIterator___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 403, LOCATE_abstract_collection___CoupleMapIterator___init};
-  val_t variable0;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
+  variable[0] =  self;
+  variable[1] =  param0;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_CoupleMapIterator].i]) return;
-  ATTR_abstract_collection___CoupleMapIterator____iter( self) /*CoupleMapIterator::_iter*/ =  variable0 /*i*/;
+  variable[3] = variable[0];
+  ATTR_abstract_collection___CoupleMapIterator____iter(variable[3]) /*CoupleMapIterator::_iter*/ =  variable[1] /*i*/;
+  return_label48: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_CoupleMapIterator].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t abstract_collection___Couple___first(val_t  self) {
   struct trace_t trace = {NULL, NULL, 411, LOCATE_abstract_collection___Couple___first};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   tracehead = trace.prev;
@@ -960,6 +1149,8 @@ val_t abstract_collection___Couple___first(val_t  self) {
 }
 void abstract_collection___Couple___first__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 411, LOCATE_abstract_collection___Couple___first__eq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   ATTR_abstract_collection___Couple____first( self) /*Couple::_first*/ =  param0;
@@ -968,6 +1159,8 @@ void abstract_collection___Couple___first__eq(val_t  self, val_t  param0) {
 }
 val_t abstract_collection___Couple___second(val_t  self) {
   struct trace_t trace = {NULL, NULL, 414, LOCATE_abstract_collection___Couple___second};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   tracehead = trace.prev;
@@ -975,6 +1168,8 @@ val_t abstract_collection___Couple___second(val_t  self) {
 }
 void abstract_collection___Couple___second__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 414, LOCATE_abstract_collection___Couple___second__eq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   ATTR_abstract_collection___Couple____second( self) /*Couple::_second*/ =  param0;
@@ -983,15 +1178,19 @@ void abstract_collection___Couple___second__eq(val_t  self, val_t  param0) {
 }
 void abstract_collection___Couple___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
   struct trace_t trace = {NULL, NULL, 417, LOCATE_abstract_collection___Couple___init};
-  val_t variable0;
-  val_t variable1;
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
-  variable0 =  param0;
-  variable1 =  param1;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Couple].i]) return;
-  ATTR_abstract_collection___Couple____first( self) /*Couple::_first*/ =  variable0 /*f*/;
-  ATTR_abstract_collection___Couple____second( self) /*Couple::_second*/ =  variable1 /*s*/;
+  variable[4] = variable[0];
+  ATTR_abstract_collection___Couple____first(variable[4]) /*Couple::_first*/ =  variable[1] /*f*/;
+  variable[4] = variable[0];
+  ATTR_abstract_collection___Couple____second(variable[4]) /*Couple::_second*/ =  variable[2] /*s*/;
+  return_label49: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Couple].i] = 1;
   tracehead = trace.prev;
   return;

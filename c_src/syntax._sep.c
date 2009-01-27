@@ -2,147 +2,152 @@
 #include "syntax._sep.h"
 val_t syntax___SrcModuleLoader___file_type(val_t  self) {
   struct trace_t trace = {NULL, NULL, 31, LOCATE_syntax___SrcModuleLoader___file_type};
-  val_t variable0;
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax;
-  variable0 = NEW_String_string___String___with_native(BOX_NativeString("nit"), TAG_Int(3)); /*new String*/
+  variable[0] =  self;
+  variable[2] = NEW_String_string___String___with_native(BOX_NativeString("nit"), TAG_Int(3)); /*new String*/
+  variable[1] = variable[2];
   goto return_label0;
   return_label0: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t syntax___SrcModuleLoader___parse_file(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4) {
   struct trace_t trace = {NULL, NULL, 33, LOCATE_syntax___SrcModuleLoader___parse_file};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-  val_t variable5;
-  val_t variable6;
-  val_t variable7;
-  val_t variable8;
-    val_t variable9;
-    val_t variable10;
-    val_t variable11;
-    val_t variable12;
-    val_t variable13;
-    val_t variable14;
-    val_t variable15;
-    val_t variable16;
-    val_t variable17;
-    val_t variable18;
-    val_t variable19;
+  val_t variable[22];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable2 =  param2;
-  variable3 =  param3;
-  variable4 =  param4;
-  variable6 = NEW_Lexer_lexer___Lexer___init( variable1 /*file*/,  variable2 /*filename*/); /*new Lexer*/
-  variable5 = variable6;
-  variable7 = NEW_Parser_parser___Parser___init( variable5 /*lexer*/); /*new Parser*/
-  variable6 = variable7;
-  variable8 = ((parser___Parser___parse_t)CALL( variable6 /*parser*/,COLOR_parser___Parser___parse))( variable6 /*parser*/) /*Parser::parse*/;
-  variable7 = variable8;
-  variable8 = ((parser_nodes___Start___n_base_t)CALL( variable7 /*node_tree*/,COLOR_parser_nodes___Start___n_base))( variable7 /*node_tree*/) /*Start::n_base*/;
-  variable8 = TAG_Bool((variable8 ==  NIT_NULL /*null*/) || ((variable8 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable8,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable8, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable8,COLOR_kernel___Object_____eqeq))(variable8,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable8)) { /*if*/
-    variable9 = ((parser_nodes___Start___n_eof_t)CALL( variable7 /*node_tree*/,COLOR_parser_nodes___Start___n_eof))( variable7 /*node_tree*/) /*Start::n_eof*/;
-    variable8 = variable9;
-    variable9 = TAG_Bool(( variable8 /*err*/==NIT_NULL) || VAL_ISA( variable8 /*err*/, COLOR_PError, ID_PError)) /*cast PError*/;
-    if (!UNTAG_Bool(variable9)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_syntax___SrcModuleLoader___parse_file, LOCATE_syntax, 40); nit_exit(1);}
-    variable9 = NEW_String_string___String___init(); /*new String*/
-    variable10 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-    variable11 = variable10;
-    ((string___String___append_t)CALL(variable9,COLOR_abstract_collection___IndexedCollection___append))(variable9, variable11) /*String::append*/;
-    variable12 = ((parser_prod___Token___locate_t)CALL( variable8 /*err*/,COLOR_parser_prod___PNode___locate))( variable8 /*err*/) /*Token::locate*/;
-    variable13 = variable12;
-    ((string___String___append_t)CALL(variable9,COLOR_abstract_collection___IndexedCollection___append))(variable9, variable13) /*String::append*/;
-    variable14 = NEW_String_string___String___with_native(BOX_NativeString(": "), TAG_Int(2)); /*new String*/
-    variable15 = variable14;
-    ((string___String___append_t)CALL(variable9,COLOR_abstract_collection___IndexedCollection___append))(variable9, variable15) /*String::append*/;
-    variable16 = ((lexer___PError___message_t)CALL( variable8 /*err*/,COLOR_lexer___PError___message))( variable8 /*err*/) /*PError::message*/;
-    variable17 = variable16;
-    ((string___String___append_t)CALL(variable9,COLOR_abstract_collection___IndexedCollection___append))(variable9, variable17) /*String::append*/;
-    variable18 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-    variable19 = variable18;
-    ((string___String___append_t)CALL(variable9,COLOR_abstract_collection___IndexedCollection___append))(variable9, variable19) /*String::append*/;
-    ((mmloader___ToolContext___error_t)CALL( variable0 /*context*/,COLOR_mmloader___ToolContext___error))( variable0 /*context*/, variable9) /*ToolContext::error*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[3] =  param2;
+  variable[4] =  param3;
+  variable[5] =  param4;
+  variable[8] = NEW_Lexer_lexer___Lexer___init( variable[2] /*file*/,  variable[3] /*filename*/); /*new Lexer*/
+  variable[7] = variable[8];
+  variable[9] = NEW_Parser_parser___Parser___init( variable[7] /*lexer*/); /*new Parser*/
+  variable[8] = variable[9];
+  variable[10] = ((parser___Parser___parse_t)CALL( variable[8] /*parser*/,COLOR_parser___Parser___parse))( variable[8] /*parser*/) /*Parser::parse*/;
+  variable[9] = variable[10];
+  variable[10] = ((parser_nodes___Start___n_base_t)CALL( variable[9] /*node_tree*/,COLOR_parser_nodes___Start___n_base))( variable[9] /*node_tree*/) /*Start::n_base*/;
+  variable[10] = TAG_Bool((variable[10] ==  NIT_NULL /*null*/) || ((variable[10] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[10],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[10], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[10],COLOR_kernel___Object_____eqeq))(variable[10],  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[10])) { /*if*/
+    variable[11] = ((parser_nodes___Start___n_eof_t)CALL( variable[9] /*node_tree*/,COLOR_parser_nodes___Start___n_eof))( variable[9] /*node_tree*/) /*Start::n_eof*/;
+    variable[10] = variable[11];
+    variable[11] = TAG_Bool(( variable[10] /*err*/==NIT_NULL) || VAL_ISA( variable[10] /*err*/, COLOR_PError, ID_PError)) /*cast PError*/;
+    if (!UNTAG_Bool(variable[11])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_syntax___SrcModuleLoader___parse_file, LOCATE_syntax, 40); nit_exit(1);}
+    variable[11] = NEW_String_string___String___init(); /*new String*/
+    variable[12] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable[13] = variable[12];
+    ((string___String___append_t)CALL(variable[11],COLOR_abstract_collection___IndexedCollection___append))(variable[11], variable[13]) /*String::append*/;
+    variable[14] = ((parser_prod___Token___locate_t)CALL( variable[10] /*err*/,COLOR_parser_prod___PNode___locate))( variable[10] /*err*/) /*Token::locate*/;
+    variable[15] = variable[14];
+    ((string___String___append_t)CALL(variable[11],COLOR_abstract_collection___IndexedCollection___append))(variable[11], variable[15]) /*String::append*/;
+    variable[16] = NEW_String_string___String___with_native(BOX_NativeString(": "), TAG_Int(2)); /*new String*/
+    variable[17] = variable[16];
+    ((string___String___append_t)CALL(variable[11],COLOR_abstract_collection___IndexedCollection___append))(variable[11], variable[17]) /*String::append*/;
+    variable[18] = ((lexer___PError___message_t)CALL( variable[10] /*err*/,COLOR_lexer___PError___message))( variable[10] /*err*/) /*PError::message*/;
+    variable[19] = variable[18];
+    ((string___String___append_t)CALL(variable[11],COLOR_abstract_collection___IndexedCollection___append))(variable[11], variable[19]) /*String::append*/;
+    variable[20] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable[21] = variable[20];
+    ((string___String___append_t)CALL(variable[11],COLOR_abstract_collection___IndexedCollection___append))(variable[11], variable[21]) /*String::append*/;
+    ((mmloader___ToolContext___error_t)CALL( variable[1] /*context*/,COLOR_mmloader___ToolContext___error))( variable[1] /*context*/, variable[11]) /*ToolContext::error*/;
+    variable[11] = variable[0];
     exit(UNTAG_Int( TAG_Int(1)));
   }
-  variable9 = ((parser_nodes___Start___n_base_t)CALL( variable7 /*node_tree*/,COLOR_parser_nodes___Start___n_base))( variable7 /*node_tree*/) /*Start::n_base*/;
-  variable8 = variable9;
-  variable9 = TAG_Bool(( variable8 /*node_module*/==NIT_NULL) || VAL_ISA( variable8 /*node_module*/, COLOR_AModule, ID_AModule)) /*cast AModule*/;
-  if (!UNTAG_Bool(variable9)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_syntax___SrcModuleLoader___parse_file, LOCATE_syntax, 45); nit_exit(1);}
-  variable10 = NEW_MMSrcModule_syntax_base___MMSrcModule___init( variable0 /*context*/,  variable8 /*node_module*/,  variable4 /*dir*/,  variable3 /*name*/); /*new MMSrcModule*/
-  variable9 = variable10;
-  variable5 =  variable9 /*module*/;
+  variable[11] = ((parser_nodes___Start___n_base_t)CALL( variable[9] /*node_tree*/,COLOR_parser_nodes___Start___n_base))( variable[9] /*node_tree*/) /*Start::n_base*/;
+  variable[10] = variable[11];
+  variable[11] = TAG_Bool(( variable[10] /*node_module*/==NIT_NULL) || VAL_ISA( variable[10] /*node_module*/, COLOR_AModule, ID_AModule)) /*cast AModule*/;
+  if (!UNTAG_Bool(variable[11])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_syntax___SrcModuleLoader___parse_file, LOCATE_syntax, 45); nit_exit(1);}
+  variable[12] = NEW_MMSrcModule_syntax_base___MMSrcModule___init( variable[1] /*context*/,  variable[10] /*node_module*/,  variable[5] /*dir*/,  variable[4] /*name*/); /*new MMSrcModule*/
+  variable[11] = variable[12];
+  variable[6] =  variable[11] /*module*/;
   goto return_label1;
   return_label1: while(false);
   tracehead = trace.prev;
-  return variable5;
+  return variable[6];
 }
 void syntax___SrcModuleLoader___process_metamodel(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 52, LOCATE_syntax___SrcModuleLoader___process_metamodel};
-  val_t variable0;
-  val_t variable1;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax;
-  variable0 =  param0;
-  variable1 =  param1;
-  ((syntax___MMSrcModule___process_supermodules_t)CALL( variable1 /*module*/,COLOR_syntax___MMSrcModule___process_supermodules))( variable1 /*module*/,  variable0 /*context*/) /*MMSrcModule::process_supermodules*/;
-  ((syntax___MMSrcModule___process_syntax_t)CALL( variable1 /*module*/,COLOR_syntax___MMSrcModule___process_syntax))( variable1 /*module*/,  variable0 /*context*/) /*MMSrcModule::process_syntax*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  ((syntax___MMSrcModule___process_supermodules_t)CALL( variable[2] /*module*/,COLOR_syntax___MMSrcModule___process_supermodules))( variable[2] /*module*/,  variable[1] /*context*/) /*MMSrcModule::process_supermodules*/;
+  ((syntax___MMSrcModule___process_syntax_t)CALL( variable[2] /*module*/,COLOR_syntax___MMSrcModule___process_syntax))( variable[2] /*module*/,  variable[1] /*context*/) /*MMSrcModule::process_syntax*/;
+  return_label2: while(false);
   tracehead = trace.prev;
   return;
 }
 void syntax___SrcModuleLoader___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 58, LOCATE_syntax___SrcModuleLoader___init};
+  val_t variable[2];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax;
+  variable[0] =  self;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_SrcModuleLoader].i]) return;
+  return_label3: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_SrcModuleLoader].i] = 1;
   tracehead = trace.prev;
   return;
 }
 void syntax___MMSrcModule___process_supermodules(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 62, LOCATE_syntax___MMSrcModule___process_supermodules};
-  val_t variable0;
-  val_t variable1;
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax;
-  variable0 =  param0;
-  variable1 = ((syntax_base___MMSrcModule___node_t)CALL( self,COLOR_syntax_base___MMSrcModule___node))( self) /*MMSrcModule::node*/;
-  ((mmbuilder___AModule___import_super_modules_t)CALL(variable1,COLOR_mmbuilder___AModule___import_super_modules))(variable1,  variable0 /*tc*/,  self) /*AModule::import_super_modules*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((syntax_base___MMSrcModule___node_t)CALL(variable[3],COLOR_syntax_base___MMSrcModule___node))(variable[3]) /*MMSrcModule::node*/;
+  variable[4] = variable[0];
+  ((mmbuilder___AModule___import_super_modules_t)CALL(variable[3],COLOR_mmbuilder___AModule___import_super_modules))(variable[3],  variable[1] /*tc*/, variable[4]) /*AModule::import_super_modules*/;
+  return_label4: while(false);
   tracehead = trace.prev;
   return;
 }
 void syntax___MMSrcModule___process_syntax(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 69, LOCATE_syntax___MMSrcModule___process_syntax};
-  val_t variable0;
-  val_t variable1;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax;
-  variable0 =  param0;
-  ((mmbuilder___MMSrcModule___do_mmbuilder_t)CALL( self,COLOR_mmbuilder___MMSrcModule___do_mmbuilder))( self,  variable0 /*tc*/) /*MMSrcModule::do_mmbuilder*/;
-  variable1 = ((mmloader___ToolContext___error_count_t)CALL( variable0 /*tc*/,COLOR_mmloader___ToolContext___error_count))( variable0 /*tc*/) /*ToolContext::error_count*/;
-  variable1 = TAG_Bool(UNTAG_Int(variable1)>UNTAG_Int( TAG_Int(0)));
-  if (UNTAG_Bool(variable1)) { /*if*/
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  ((mmbuilder___MMSrcModule___do_mmbuilder_t)CALL(variable[3],COLOR_mmbuilder___MMSrcModule___do_mmbuilder))(variable[3],  variable[1] /*tc*/) /*MMSrcModule::do_mmbuilder*/;
+  variable[3] = ((mmloader___ToolContext___error_count_t)CALL( variable[1] /*tc*/,COLOR_mmloader___ToolContext___error_count))( variable[1] /*tc*/) /*ToolContext::error_count*/;
+  variable[3] = TAG_Bool(UNTAG_Int(variable[3])>UNTAG_Int( TAG_Int(0)));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = variable[0];
     exit(UNTAG_Int( TAG_Int(1)));
   }
-  ((typing___MMSrcModule___do_typing_t)CALL( self,COLOR_typing___MMSrcModule___do_typing))( self,  variable0 /*tc*/) /*MMSrcModule::do_typing*/;
-  variable1 = ((mmloader___ToolContext___error_count_t)CALL( variable0 /*tc*/,COLOR_mmloader___ToolContext___error_count))( variable0 /*tc*/) /*ToolContext::error_count*/;
-  variable1 = TAG_Bool(UNTAG_Int(variable1)>UNTAG_Int( TAG_Int(0)));
-  if (UNTAG_Bool(variable1)) { /*if*/
+  variable[3] = variable[0];
+  ((typing___MMSrcModule___do_typing_t)CALL(variable[3],COLOR_typing___MMSrcModule___do_typing))(variable[3],  variable[1] /*tc*/) /*MMSrcModule::do_typing*/;
+  variable[3] = ((mmloader___ToolContext___error_count_t)CALL( variable[1] /*tc*/,COLOR_mmloader___ToolContext___error_count))( variable[1] /*tc*/) /*ToolContext::error_count*/;
+  variable[3] = TAG_Bool(UNTAG_Int(variable[3])>UNTAG_Int( TAG_Int(0)));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = variable[0];
     exit(UNTAG_Int( TAG_Int(1)));
   }
-  ((control_flow___MMSrcModule___do_control_flow_t)CALL( self,COLOR_control_flow___MMSrcModule___do_control_flow))( self,  variable0 /*tc*/) /*MMSrcModule::do_control_flow*/;
-  variable1 = ((mmloader___ToolContext___error_count_t)CALL( variable0 /*tc*/,COLOR_mmloader___ToolContext___error_count))( variable0 /*tc*/) /*ToolContext::error_count*/;
-  variable1 = TAG_Bool(UNTAG_Int(variable1)>UNTAG_Int( TAG_Int(0)));
-  if (UNTAG_Bool(variable1)) { /*if*/
+  variable[3] = variable[0];
+  ((control_flow___MMSrcModule___do_control_flow_t)CALL(variable[3],COLOR_control_flow___MMSrcModule___do_control_flow))(variable[3],  variable[1] /*tc*/) /*MMSrcModule::do_control_flow*/;
+  variable[3] = ((mmloader___ToolContext___error_count_t)CALL( variable[1] /*tc*/,COLOR_mmloader___ToolContext___error_count))( variable[1] /*tc*/) /*ToolContext::error_count*/;
+  variable[3] = TAG_Bool(UNTAG_Int(variable[3])>UNTAG_Int( TAG_Int(0)));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = variable[0];
     exit(UNTAG_Int( TAG_Int(1)));
   }
+  return_label5: while(false);
   tracehead = trace.prev;
   return;
 }

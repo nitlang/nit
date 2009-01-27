@@ -39,13 +39,13 @@ void sorter___AbstractSorter___bubble_sort(val_t  self, val_t  param0, val_t  pa
 #define LOCATE_sorter___AbstractSorter___bubble_sort "sorter::AbstractSorter::bubble_sort"
 typedef void (* sorter___AbstractSorter___init_t)(val_t  self, int* init_table);
 void sorter___AbstractSorter___init(val_t  self, int* init_table);
-val_t NEW_sorter___AbstractSorter___init();
 #define LOCATE_sorter___AbstractSorter___init "sorter::AbstractSorter::init"
+val_t NEW_AbstractSorter_sorter___AbstractSorter___init();
 typedef val_t (* sorter___ComparableSorter___compare_t)(val_t  self, val_t  param0, val_t  param1);
 val_t sorter___ComparableSorter___compare(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_sorter___ComparableSorter___compare "sorter::ComparableSorter::(sorter::AbstractSorter::compare)"
 typedef void (* sorter___ComparableSorter___init_t)(val_t  self, int* init_table);
 void sorter___ComparableSorter___init(val_t  self, int* init_table);
-val_t NEW_sorter___ComparableSorter___init();
 #define LOCATE_sorter___ComparableSorter___init "sorter::ComparableSorter::init"
+val_t NEW_ComparableSorter_sorter___ComparableSorter___init();
 #endif

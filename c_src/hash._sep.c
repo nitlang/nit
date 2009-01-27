@@ -2,90 +2,106 @@
 #include "hash._sep.h"
 val_t hash___Object___hash(val_t  self) {
   struct trace_t trace = {NULL, NULL, 21, LOCATE_hash___Object___hash};
-  val_t variable0;
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 = TAG_Int((bigint) self);
-  variable0 = TAG_Int(UNTAG_Int(variable0)/UNTAG_Int( TAG_Int(8)));
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = TAG_Int((bigint)variable[2]);
+  variable[2] = TAG_Int(UNTAG_Int(variable[2])/UNTAG_Int( TAG_Int(8)));
+  variable[1] = variable[2];
   goto return_label0;
   return_label0: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t hash___String___hash(val_t  self) {
   struct trace_t trace = {NULL, NULL, 29, LOCATE_hash___String___hash};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-    val_t variable4;
+  val_t variable[7];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 =  TAG_Int(5381);
-  variable2 = ATTR_array___AbstractArray____length( self) /*AbstractArray::_length*/;
-  variable2 = TAG_Int(UNTAG_Int(variable2)-UNTAG_Int( TAG_Int(1)));
-  variable1 = variable2;
-  variable3 = ATTR_string___String____items( self) /*String::_items*/;
-  variable2 = variable3;
+  variable[0] =  self;
+  variable[2] =  TAG_Int(5381);
+  variable[4] = variable[0];
+  variable[4] = ATTR_array___AbstractArray____length(variable[4]) /*AbstractArray::_length*/;
+  variable[4] = TAG_Int(UNTAG_Int(variable[4])-UNTAG_Int( TAG_Int(1)));
+  variable[3] = variable[4];
+  variable[5] = variable[0];
+  variable[5] = ATTR_string___String____items(variable[5]) /*String::_items*/;
+  variable[4] = variable[5];
   while (true) { /*while*/
-    variable3 = TAG_Bool(UNTAG_Int( variable1 /*i*/)>=UNTAG_Int( TAG_Int(0)));
-    if (!UNTAG_Bool(variable3)) break; /* while*/
-    variable3 = TAG_Int(UNTAG_Int( variable0 /*h*/)*UNTAG_Int( TAG_Int(32)));
-    variable3 = TAG_Int(UNTAG_Int(variable3)+UNTAG_Int( variable0 /*h*/));
-    variable4 = TAG_Char(UNBOX_NativeString( variable2 /*it*/)[UNTAG_Int( variable1 /*i*/)]);
-    variable4 = TAG_Int((unsigned char)UNTAG_Char(variable4));
-    variable3 = TAG_Int(UNTAG_Int(variable3)+UNTAG_Int(variable4));
-    variable0 = variable3 /*h=*/;
-    variable1 = TAG_Int(UNTAG_Int(variable1)-UNTAG_Int( TAG_Int(1))) /*i*/;
+    variable[5] = TAG_Bool(UNTAG_Int( variable[3] /*i*/)>=UNTAG_Int( TAG_Int(0)));
+    if (!UNTAG_Bool(variable[5])) break; /* while*/
+    variable[5] = TAG_Int(UNTAG_Int( variable[2] /*h*/)*UNTAG_Int( TAG_Int(32)));
+    variable[5] = TAG_Int(UNTAG_Int(variable[5])+UNTAG_Int( variable[2] /*h*/));
+    variable[6] = TAG_Char(UNBOX_NativeString( variable[4] /*it*/)[UNTAG_Int( variable[3] /*i*/)]);
+    variable[6] = TAG_Int((unsigned char)UNTAG_Char(variable[6]));
+    variable[5] = TAG_Int(UNTAG_Int(variable[5])+UNTAG_Int(variable[6]));
+    variable[2] = variable[5] /*h=*/;
+    variable[3] = TAG_Int(UNTAG_Int(variable[3])-UNTAG_Int( TAG_Int(1))) /*i*/;
     continue_2: while(0);
   }
   break_2: while(0);
-  variable0 =  variable0 /*h*/;
+  variable[1] =  variable[2] /*h*/;
   goto return_label1;
   return_label1: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t hash___Int___hash(val_t  self) {
   struct trace_t trace = {NULL, NULL, 45, LOCATE_hash___Int___hash};
-  val_t variable0;
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 =  self;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[1] = variable[2];
   goto return_label3;
   return_label3: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t hash___Char___hash(val_t  self) {
   struct trace_t trace = {NULL, NULL, 49, LOCATE_hash___Char___hash};
-  val_t variable0;
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 = TAG_Int((unsigned char)UNTAG_Char( self));
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = TAG_Int((unsigned char)UNTAG_Char(variable[2]));
+  variable[1] = variable[2];
   goto return_label4;
   return_label4: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t hash___Bool___hash(val_t  self) {
   struct trace_t trace = {NULL, NULL, 53, LOCATE_hash___Bool___hash};
-  val_t variable0;
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  if (UNTAG_Bool( self)) { /*if*/
-    variable0 =  TAG_Int(1);
+  variable[0] =  self;
+  variable[2] = variable[0];
+  if (UNTAG_Bool(variable[2])) { /*if*/
+    variable[1] =  TAG_Int(1);
     goto return_label5;
   } else { /*if*/
-    variable0 =  TAG_Int(0);
+    variable[1] =  TAG_Int(0);
     goto return_label5;
   }
   return_label5: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t hash___HashCollection___length(val_t  self) {
   struct trace_t trace = {NULL, NULL, 69, LOCATE_hash___HashCollection___length};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   tracehead = trace.prev;
@@ -93,6 +109,8 @@ val_t hash___HashCollection___length(val_t  self) {
 }
 val_t hash___HashCollection___first_item(val_t  self) {
   struct trace_t trace = {NULL, NULL, 71, LOCATE_hash___HashCollection___first_item};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   tracehead = trace.prev;
@@ -100,189 +118,211 @@ val_t hash___HashCollection___first_item(val_t  self) {
 }
 val_t hash___HashCollection___index_at(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 80, LOCATE_hash___HashCollection___index_at};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-    val_t variable5;
-    val_t variable6;
+  val_t variable[9];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 =  param0;
-  variable2 = ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/;
-  variable1 = variable2;
-  variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable0 /*k*/ ==  NIT_NULL /*null*/) || (( variable0 /*k*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable0 /*k*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable0 /*k*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable0 /*k*/,COLOR_kernel___Object_____eqeq))( variable0 /*k*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___index_at, LOCATE_hash, 84); nit_exit(1);}
-  variable2 = ATTR_hash___HashCollection____last_accessed_key( self) /*HashCollection::_last_accessed_key*/;
-  variable2 = TAG_Bool(( variable0 /*k*/ == variable2) || (( variable0 /*k*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable0 /*k*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable0 /*k*/,variable2)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable0 /*k*/,COLOR_kernel___Object_____eqeq))( variable0 /*k*/, variable2) /*Object::==*/)))));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = ATTR_hash___HashCollection____last_accessed_index( self) /*HashCollection::_last_accessed_index*/;
-    variable1 = variable2;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = variable[0];
+  variable[4] = ATTR_hash___HashCollection____array(variable[4]) /*HashCollection::_array*/;
+  variable[3] = variable[4];
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*k*/ ==  NIT_NULL /*null*/) || (( variable[1] /*k*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*k*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*k*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*k*/,COLOR_kernel___Object_____eqeq))( variable[1] /*k*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___index_at, LOCATE_hash, 84); nit_exit(1);}
+  variable[4] = variable[0];
+  variable[4] = ATTR_hash___HashCollection____last_accessed_key(variable[4]) /*HashCollection::_last_accessed_key*/;
+  variable[4] = TAG_Bool(( variable[1] /*k*/ == variable[4]) || (( variable[1] /*k*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*k*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*k*/,variable[4])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*k*/,COLOR_kernel___Object_____eqeq))( variable[1] /*k*/, variable[4]) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = variable[0];
+    variable[4] = ATTR_hash___HashCollection____last_accessed_index(variable[4]) /*HashCollection::_last_accessed_index*/;
+    variable[2] = variable[4];
     goto return_label6;
   }
-  variable3 = ((hash___Object___hash_t)CALL( variable0 /*k*/,COLOR_hash___Object___hash))( variable0 /*k*/) /*Object::hash*/;
-  variable4 = ATTR_hash___HashCollection____capacity( self) /*HashCollection::_capacity*/;
-  variable3 = TAG_Int(UNTAG_Int(variable3)%UNTAG_Int(variable4));
-  variable2 = variable3;
-  variable3 = TAG_Bool(UNTAG_Int( variable2 /*base*/)<UNTAG_Int( TAG_Int(0)));
-  if (UNTAG_Bool(variable3)) { /*if*/
-    variable3 = TAG_Int(-UNTAG_Int( variable2 /*base*/));
-    variable2 = variable3 /*base=*/;
+  variable[5] = ((hash___Object___hash_t)CALL( variable[1] /*k*/,COLOR_hash___Object___hash))( variable[1] /*k*/) /*Object::hash*/;
+  variable[6] = variable[0];
+  variable[6] = ATTR_hash___HashCollection____capacity(variable[6]) /*HashCollection::_capacity*/;
+  variable[5] = TAG_Int(UNTAG_Int(variable[5])%UNTAG_Int(variable[6]));
+  variable[4] = variable[5];
+  variable[5] = TAG_Bool(UNTAG_Int( variable[4] /*base*/)<UNTAG_Int( TAG_Int(0)));
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    variable[5] = TAG_Int(-UNTAG_Int( variable[4] /*base*/));
+    variable[4] = variable[5] /*base=*/;
   }
-  variable3 =  variable2 /*base*/;
+  variable[5] =  variable[4] /*base*/;
   while (true) { /*while*/
     if (!UNTAG_Bool( TAG_Bool(true))) break; /* while*/
-    variable5 = UNBOX_NativeArray( variable1 /*arr*/)[UNTAG_Int( variable3 /*cur*/)];
-    variable4 = variable5;
-    variable5 = TAG_Bool(( variable4 /*c*/ ==  NIT_NULL /*null*/) || (( variable4 /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable4 /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable4 /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable4 /*c*/,COLOR_kernel___Object_____eqeq))( variable4 /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-    variable6 = variable5;
-    if (!UNTAG_Bool(variable6)) { /* or */
-      variable6 = ((hash___HashNode___key_t)CALL( variable4 /*c*/,COLOR_hash___HashNode___key))( variable4 /*c*/) /*HashNode::key*/;
-      variable6 = TAG_Bool((variable6 ==  variable0 /*k*/) || ((variable6 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable6,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable6, variable0 /*k*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable6,COLOR_kernel___Object_____eqeq))(variable6,  variable0 /*k*/) /*Object::==*/)))));
+    variable[7] = UNBOX_NativeArray( variable[3] /*arr*/)[UNTAG_Int( variable[5] /*cur*/)];
+    variable[6] = variable[7];
+    variable[7] = TAG_Bool(( variable[6] /*c*/ ==  NIT_NULL /*null*/) || (( variable[6] /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[6] /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[6] /*c*/,COLOR_kernel___Object_____eqeq))( variable[6] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+    variable[8] = variable[7];
+    if (!UNTAG_Bool(variable[8])) { /* or */
+      variable[8] = ((hash___HashNode___key_t)CALL( variable[6] /*c*/,COLOR_hash___HashNode___key))( variable[6] /*c*/) /*HashNode::key*/;
+      variable[8] = TAG_Bool((variable[8] ==  variable[1] /*k*/) || ((variable[8] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[8],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[8], variable[1] /*k*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[8],COLOR_kernel___Object_____eqeq))(variable[8],  variable[1] /*k*/) /*Object::==*/)))));
     }
-    variable5 = variable6;
-    if (UNTAG_Bool(variable5)) { /*if*/
-      ATTR_hash___HashCollection____last_accessed_index( self) /*HashCollection::_last_accessed_index*/ =  variable3 /*cur*/;
-      ATTR_hash___HashCollection____last_accessed_key( self) /*HashCollection::_last_accessed_key*/ =  variable0 /*k*/;
-      variable1 =  variable3 /*cur*/;
+    variable[7] = variable[8];
+    if (UNTAG_Bool(variable[7])) { /*if*/
+      variable[7] = variable[0];
+      ATTR_hash___HashCollection____last_accessed_index(variable[7]) /*HashCollection::_last_accessed_index*/ =  variable[5] /*cur*/;
+      variable[7] = variable[0];
+      ATTR_hash___HashCollection____last_accessed_key(variable[7]) /*HashCollection::_last_accessed_key*/ =  variable[1] /*k*/;
+      variable[2] =  variable[5] /*cur*/;
       goto return_label6;
     }
-    variable3 = TAG_Int(UNTAG_Int(variable3)-UNTAG_Int( TAG_Int(1))) /*cur*/;
-    variable5 = TAG_Bool(UNTAG_Int( variable3 /*cur*/)<UNTAG_Int( TAG_Int(0)));
-    if (UNTAG_Bool(variable5)) { /*if*/
-      variable5 = ATTR_hash___HashCollection____capacity( self) /*HashCollection::_capacity*/;
-      variable5 = TAG_Int(UNTAG_Int(variable5)-UNTAG_Int( TAG_Int(1)));
-      variable3 = variable5 /*cur=*/;
+    variable[5] = TAG_Int(UNTAG_Int(variable[5])-UNTAG_Int( TAG_Int(1))) /*cur*/;
+    variable[7] = TAG_Bool(UNTAG_Int( variable[5] /*cur*/)<UNTAG_Int( TAG_Int(0)));
+    if (UNTAG_Bool(variable[7])) { /*if*/
+      variable[7] = variable[0];
+      variable[7] = ATTR_hash___HashCollection____capacity(variable[7]) /*HashCollection::_capacity*/;
+      variable[7] = TAG_Int(UNTAG_Int(variable[7])-UNTAG_Int( TAG_Int(1)));
+      variable[5] = variable[7] /*cur=*/;
     }
-    variable5 = TAG_Bool(( variable3 /*cur*/)!=( variable2 /*base*/));
-    if (!UNTAG_Bool(variable5)) { fprintf(stderr, "Assert%s failed", " 'no_loop' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___index_at, LOCATE_hash, 104); nit_exit(1);}
+    variable[7] = TAG_Bool(( variable[5] /*cur*/)!=( variable[4] /*base*/));
+    if (!UNTAG_Bool(variable[7])) { fprintf(stderr, "Assert%s failed", " 'no_loop' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___index_at, LOCATE_hash, 104); nit_exit(1);}
     continue_7: while(0);
   }
   break_7: while(0);
   fprintf(stderr, "Aborted"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___index_at, LOCATE_hash, 106); nit_exit(1);
   return_label6: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 void hash___HashCollection___store(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 109, LOCATE_hash___HashCollection___store};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
+  val_t variable[7];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable2 = ATTR_hash___HashCollection____first_item( self) /*HashCollection::_first_item*/;
-  variable2 = TAG_Bool((variable2 ==  NIT_NULL /*null*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    ATTR_hash___HashCollection____first_item( self) /*HashCollection::_first_item*/ =  variable1 /*node*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[4] = variable[0];
+  variable[4] = ATTR_hash___HashCollection____first_item(variable[4]) /*HashCollection::_first_item*/;
+  variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = variable[0];
+    ATTR_hash___HashCollection____first_item(variable[4]) /*HashCollection::_first_item*/ =  variable[2] /*node*/;
   } else { /*if*/
-    variable2 = ATTR_hash___HashCollection____last_item( self) /*HashCollection::_last_item*/;
-    ((hash___HashNode___next_item__eq_t)CALL(variable2,COLOR_hash___HashNode___next_item__eq))(variable2,  variable1 /*node*/) /*HashNode::next_item=*/;
+    variable[4] = variable[0];
+    variable[4] = ATTR_hash___HashCollection____last_item(variable[4]) /*HashCollection::_last_item*/;
+    ((hash___HashNode___next_item__eq_t)CALL(variable[4],COLOR_hash___HashNode___next_item__eq))(variable[4],  variable[2] /*node*/) /*HashNode::next_item=*/;
   }
-  variable2 = ATTR_hash___HashCollection____last_item( self) /*HashCollection::_last_item*/;
-  ((hash___HashNode___prev_item__eq_t)CALL( variable1 /*node*/,COLOR_hash___HashNode___prev_item__eq))( variable1 /*node*/, variable2) /*HashNode::prev_item=*/;
-  ((hash___HashNode___next_item__eq_t)CALL( variable1 /*node*/,COLOR_hash___HashNode___next_item__eq))( variable1 /*node*/,  NIT_NULL /*null*/) /*HashNode::next_item=*/;
-  ATTR_hash___HashCollection____last_item( self) /*HashCollection::_last_item*/ =  variable1 /*node*/;
-  variable2 = ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/;
-  variable2 = UNBOX_NativeArray(variable2)[UNTAG_Int( variable0 /*index*/)];
-  variable2 = TAG_Bool((variable2 ==  NIT_NULL /*null*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___store, LOCATE_hash, 122); nit_exit(1);}
-  variable2 = ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/;
-  UNBOX_NativeArray(variable2)[UNTAG_Int( variable0 /*index*/)]= variable1 /*node*/;
-  variable3 = ATTR_hash___HashCollection____length( self) /*HashCollection::_length*/;
-  variable2 = variable3;
-  variable3 = TAG_Int(UNTAG_Int( variable2 /*l*/)+UNTAG_Int( TAG_Int(1)));
-  ATTR_hash___HashCollection____length( self) /*HashCollection::_length*/ = variable3;
-  variable3 = TAG_Int(UNTAG_Int( variable2 /*l*/)+UNTAG_Int( TAG_Int(5)));
-  variable3 = TAG_Int(UNTAG_Int(variable3)*UNTAG_Int( TAG_Int(150)));
-  variable3 = TAG_Int(UNTAG_Int(variable3)/UNTAG_Int( TAG_Int(100)));
-  variable2 = variable3 /*l=*/;
-  variable3 = ATTR_hash___HashCollection____capacity( self) /*HashCollection::_capacity*/;
-  variable3 = TAG_Bool(UNTAG_Int( variable2 /*l*/)>=UNTAG_Int(variable3));
-  if (UNTAG_Bool(variable3)) { /*if*/
-    variable3 = TAG_Int(UNTAG_Int( variable2 /*l*/)*UNTAG_Int( TAG_Int(2)));
-    ((hash___HashCollection___enlarge_t)CALL( self,COLOR_hash___HashCollection___enlarge))( self, variable3) /*HashCollection::enlarge*/;
+  variable[4] = variable[0];
+  variable[4] = ATTR_hash___HashCollection____last_item(variable[4]) /*HashCollection::_last_item*/;
+  ((hash___HashNode___prev_item__eq_t)CALL( variable[2] /*node*/,COLOR_hash___HashNode___prev_item__eq))( variable[2] /*node*/, variable[4]) /*HashNode::prev_item=*/;
+  ((hash___HashNode___next_item__eq_t)CALL( variable[2] /*node*/,COLOR_hash___HashNode___next_item__eq))( variable[2] /*node*/,  NIT_NULL /*null*/) /*HashNode::next_item=*/;
+  variable[4] = variable[0];
+  ATTR_hash___HashCollection____last_item(variable[4]) /*HashCollection::_last_item*/ =  variable[2] /*node*/;
+  variable[4] = variable[0];
+  variable[4] = ATTR_hash___HashCollection____array(variable[4]) /*HashCollection::_array*/;
+  variable[4] = UNBOX_NativeArray(variable[4])[UNTAG_Int( variable[1] /*index*/)];
+  variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___store, LOCATE_hash, 122); nit_exit(1);}
+  variable[4] = variable[0];
+  variable[4] = ATTR_hash___HashCollection____array(variable[4]) /*HashCollection::_array*/;
+  UNBOX_NativeArray(variable[4])[UNTAG_Int( variable[1] /*index*/)]= variable[2] /*node*/;
+  variable[5] = variable[0];
+  variable[5] = ATTR_hash___HashCollection____length(variable[5]) /*HashCollection::_length*/;
+  variable[4] = variable[5];
+  variable[5] = variable[0];
+  variable[6] = TAG_Int(UNTAG_Int( variable[4] /*l*/)+UNTAG_Int( TAG_Int(1)));
+  ATTR_hash___HashCollection____length(variable[5]) /*HashCollection::_length*/ = variable[6];
+  variable[5] = TAG_Int(UNTAG_Int( variable[4] /*l*/)+UNTAG_Int( TAG_Int(5)));
+  variable[5] = TAG_Int(UNTAG_Int(variable[5])*UNTAG_Int( TAG_Int(150)));
+  variable[5] = TAG_Int(UNTAG_Int(variable[5])/UNTAG_Int( TAG_Int(100)));
+  variable[4] = variable[5] /*l=*/;
+  variable[5] = variable[0];
+  variable[5] = ATTR_hash___HashCollection____capacity(variable[5]) /*HashCollection::_capacity*/;
+  variable[5] = TAG_Bool(UNTAG_Int( variable[4] /*l*/)>=UNTAG_Int(variable[5]));
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    variable[5] = variable[0];
+    variable[6] = TAG_Int(UNTAG_Int( variable[4] /*l*/)*UNTAG_Int( TAG_Int(2)));
+    ((hash___HashCollection___enlarge_t)CALL(variable[5],COLOR_hash___HashCollection___enlarge))(variable[5], variable[6]) /*HashCollection::enlarge*/;
   }
+  return_label8: while(false);
   tracehead = trace.prev;
   return;
 }
 void hash___HashCollection___remove_index(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 132, LOCATE_hash___HashCollection___remove_index};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-    val_t variable5;
-    val_t variable6;
+  val_t variable[10];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 =  param0;
-  variable1 = TAG_Bool(UNTAG_Int( variable0 /*i*/)>=UNTAG_Int( TAG_Int(0)));
-  variable2 = variable1;
-  if (UNTAG_Bool(variable2)) { /* and */
-    variable2 = ATTR_hash___HashCollection____capacity( self) /*HashCollection::_capacity*/;
-    variable2 = TAG_Bool(UNTAG_Int( variable0 /*i*/)<UNTAG_Int(variable2));
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = TAG_Bool(UNTAG_Int( variable[1] /*i*/)>=UNTAG_Int( TAG_Int(0)));
+  variable[4] = variable[3];
+  if (UNTAG_Bool(variable[4])) { /* and */
+    variable[4] = variable[0];
+    variable[4] = ATTR_hash___HashCollection____capacity(variable[4]) /*HashCollection::_capacity*/;
+    variable[4] = TAG_Bool(UNTAG_Int( variable[1] /*i*/)<UNTAG_Int(variable[4]));
   }
-  variable1 = variable2;
-  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", " 'correct_index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___remove_index, LOCATE_hash, 134); nit_exit(1);}
-  variable2 = ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/;
-  variable2 = UNBOX_NativeArray(variable2)[UNTAG_Int( variable0 /*i*/)];
-  variable1 = variable2;
-  variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable1 /*node*/ ==  NIT_NULL /*null*/) || (( variable1 /*node*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable1 /*node*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable1 /*node*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable1 /*node*/,COLOR_kernel___Object_____eqeq))( variable1 /*node*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", " 'has_couple' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___remove_index, LOCATE_hash, 136); nit_exit(1);}
-  variable3 = ((hash___HashNode___prev_item_t)CALL( variable1 /*node*/,COLOR_hash___HashNode___prev_item))( variable1 /*node*/) /*HashNode::prev_item*/;
-  variable2 = variable3;
-  variable4 = ((hash___HashNode___next_item_t)CALL( variable1 /*node*/,COLOR_hash___HashNode___next_item))( variable1 /*node*/) /*HashNode::next_item*/;
-  variable3 = variable4;
-  variable4 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable2 /*prev*/ ==  NIT_NULL /*null*/) || (( variable2 /*prev*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable2 /*prev*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable2 /*prev*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable2 /*prev*/,COLOR_kernel___Object_____eqeq))( variable2 /*prev*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable4)) { /*if*/
-    ((hash___HashNode___next_item__eq_t)CALL( variable2 /*prev*/,COLOR_hash___HashNode___next_item__eq))( variable2 /*prev*/,  variable3 /*next*/) /*HashNode::next_item=*/;
+  variable[3] = variable[4];
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", " 'correct_index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___remove_index, LOCATE_hash, 134); nit_exit(1);}
+  variable[4] = variable[0];
+  variable[4] = ATTR_hash___HashCollection____array(variable[4]) /*HashCollection::_array*/;
+  variable[4] = UNBOX_NativeArray(variable[4])[UNTAG_Int( variable[1] /*i*/)];
+  variable[3] = variable[4];
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*node*/ ==  NIT_NULL /*null*/) || (( variable[3] /*node*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*node*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*node*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*node*/,COLOR_kernel___Object_____eqeq))( variable[3] /*node*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", " 'has_couple' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___remove_index, LOCATE_hash, 136); nit_exit(1);}
+  variable[5] = ((hash___HashNode___prev_item_t)CALL( variable[3] /*node*/,COLOR_hash___HashNode___prev_item))( variable[3] /*node*/) /*HashNode::prev_item*/;
+  variable[4] = variable[5];
+  variable[6] = ((hash___HashNode___next_item_t)CALL( variable[3] /*node*/,COLOR_hash___HashNode___next_item))( variable[3] /*node*/) /*HashNode::next_item*/;
+  variable[5] = variable[6];
+  variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*prev*/ ==  NIT_NULL /*null*/) || (( variable[4] /*prev*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*prev*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*prev*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*prev*/,COLOR_kernel___Object_____eqeq))( variable[4] /*prev*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[6])) { /*if*/
+    ((hash___HashNode___next_item__eq_t)CALL( variable[4] /*prev*/,COLOR_hash___HashNode___next_item__eq))( variable[4] /*prev*/,  variable[5] /*next*/) /*HashNode::next_item=*/;
   } else { /*if*/
-    ATTR_hash___HashCollection____first_item( self) /*HashCollection::_first_item*/ =  variable3 /*next*/;
+    variable[6] = variable[0];
+    ATTR_hash___HashCollection____first_item(variable[6]) /*HashCollection::_first_item*/ =  variable[5] /*next*/;
   }
-  variable4 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable3 /*next*/ ==  NIT_NULL /*null*/) || (( variable3 /*next*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable3 /*next*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable3 /*next*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable3 /*next*/,COLOR_kernel___Object_____eqeq))( variable3 /*next*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable4)) { /*if*/
-    ((hash___HashNode___prev_item__eq_t)CALL( variable3 /*next*/,COLOR_hash___HashNode___prev_item__eq))( variable3 /*next*/,  variable2 /*prev*/) /*HashNode::prev_item=*/;
+  variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*next*/ ==  NIT_NULL /*null*/) || (( variable[5] /*next*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*next*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*next*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*next*/,COLOR_kernel___Object_____eqeq))( variable[5] /*next*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[6])) { /*if*/
+    ((hash___HashNode___prev_item__eq_t)CALL( variable[5] /*next*/,COLOR_hash___HashNode___prev_item__eq))( variable[5] /*next*/,  variable[4] /*prev*/) /*HashNode::prev_item=*/;
   } else { /*if*/
-    ATTR_hash___HashCollection____last_item( self) /*HashCollection::_last_item*/ =  variable2 /*prev*/;
+    variable[6] = variable[0];
+    ATTR_hash___HashCollection____last_item(variable[6]) /*HashCollection::_last_item*/ =  variable[4] /*prev*/;
   }
-  variable4 = ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/;
-  UNBOX_NativeArray(variable4)[UNTAG_Int( variable0 /*i*/)]= NIT_NULL /*null*/;
-  ATTR_hash___HashCollection____length( self) /*HashCollection::_length*/ = TAG_Int(UNTAG_Int(ATTR_hash___HashCollection____length( self) /*HashCollection::_length*/)-UNTAG_Int( TAG_Int(1)));
+  variable[6] = variable[0];
+  variable[6] = ATTR_hash___HashCollection____array(variable[6]) /*HashCollection::_array*/;
+  UNBOX_NativeArray(variable[6])[UNTAG_Int( variable[1] /*i*/)]= NIT_NULL /*null*/;
+  variable[6] = variable[0];
+  ATTR_hash___HashCollection____length(variable[6]) /*HashCollection::_length*/ = TAG_Int(UNTAG_Int(ATTR_hash___HashCollection____length(variable[6]) /*HashCollection::_length*/)-UNTAG_Int( TAG_Int(1)));
   while (true) { /*while*/
     if (!UNTAG_Bool( TAG_Bool(true))) break; /* while*/
-    variable0 = TAG_Int(UNTAG_Int(variable0)-UNTAG_Int( TAG_Int(1))) /*i*/;
-    variable4 = TAG_Bool(UNTAG_Int( variable0 /*i*/)<UNTAG_Int( TAG_Int(0)));
-    if (UNTAG_Bool(variable4)) { /*if*/
-      variable4 = ATTR_hash___HashCollection____capacity( self) /*HashCollection::_capacity*/;
-      variable4 = TAG_Int(UNTAG_Int(variable4)-UNTAG_Int( TAG_Int(1)));
-      variable0 = variable4 /*i=*/;
+    variable[1] = TAG_Int(UNTAG_Int(variable[1])-UNTAG_Int( TAG_Int(1))) /*i*/;
+    variable[6] = TAG_Bool(UNTAG_Int( variable[1] /*i*/)<UNTAG_Int( TAG_Int(0)));
+    if (UNTAG_Bool(variable[6])) { /*if*/
+      variable[6] = variable[0];
+      variable[6] = ATTR_hash___HashCollection____capacity(variable[6]) /*HashCollection::_capacity*/;
+      variable[6] = TAG_Int(UNTAG_Int(variable[6])-UNTAG_Int( TAG_Int(1)));
+      variable[1] = variable[6] /*i=*/;
     }
-    variable5 = ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/;
-    variable5 = UNBOX_NativeArray(variable5)[UNTAG_Int( variable0 /*i*/)];
-    variable4 = variable5;
-    variable5 = TAG_Bool(( variable4 /*n*/ ==  NIT_NULL /*null*/) || (( variable4 /*n*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable4 /*n*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable4 /*n*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable4 /*n*/,COLOR_kernel___Object_____eqeq))( variable4 /*n*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-    if (UNTAG_Bool(variable5)) { /*if*/
+    variable[7] = variable[0];
+    variable[7] = ATTR_hash___HashCollection____array(variable[7]) /*HashCollection::_array*/;
+    variable[7] = UNBOX_NativeArray(variable[7])[UNTAG_Int( variable[1] /*i*/)];
+    variable[6] = variable[7];
+    variable[7] = TAG_Bool(( variable[6] /*n*/ ==  NIT_NULL /*null*/) || (( variable[6] /*n*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[6] /*n*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*n*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[6] /*n*/,COLOR_kernel___Object_____eqeq))( variable[6] /*n*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+    if (UNTAG_Bool(variable[7])) { /*if*/
       goto return_label9;
     }
-    variable6 = ((hash___HashNode___key_t)CALL( variable4 /*n*/,COLOR_hash___HashNode___key))( variable4 /*n*/) /*HashNode::key*/;
-    variable6 = ((hash___HashCollection___index_at_t)CALL( self,COLOR_hash___HashCollection___index_at))( self, variable6) /*HashCollection::index_at*/;
-    variable5 = variable6;
-    variable6 = TAG_Bool(( variable0 /*i*/)!=( variable5 /*i2*/));
-    if (UNTAG_Bool(variable6)) { /*if*/
-      variable6 = ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/;
-      UNBOX_NativeArray(variable6)[UNTAG_Int( variable0 /*i*/)]= NIT_NULL /*null*/;
-      variable6 = ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/;
-      variable6 = UNBOX_NativeArray(variable6)[UNTAG_Int( variable5 /*i2*/)];
-      variable6 = TAG_Bool((variable6 ==  NIT_NULL /*null*/) || ((variable6 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable6,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable6, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable6,COLOR_kernel___Object_____eqeq))(variable6,  NIT_NULL /*null*/) /*Object::==*/)))));
-      if (!UNTAG_Bool(variable6)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___remove_index, LOCATE_hash, 166); nit_exit(1);}
-      variable6 = ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/;
-      UNBOX_NativeArray(variable6)[UNTAG_Int( variable5 /*i2*/)]= variable4 /*n*/;
+    variable[8] = variable[0];
+    variable[9] = ((hash___HashNode___key_t)CALL( variable[6] /*n*/,COLOR_hash___HashNode___key))( variable[6] /*n*/) /*HashNode::key*/;
+    variable[8] = ((hash___HashCollection___index_at_t)CALL(variable[8],COLOR_hash___HashCollection___index_at))(variable[8], variable[9]) /*HashCollection::index_at*/;
+    variable[7] = variable[8];
+    variable[8] = TAG_Bool(( variable[1] /*i*/)!=( variable[7] /*i2*/));
+    if (UNTAG_Bool(variable[8])) { /*if*/
+      variable[8] = variable[0];
+      variable[8] = ATTR_hash___HashCollection____array(variable[8]) /*HashCollection::_array*/;
+      UNBOX_NativeArray(variable[8])[UNTAG_Int( variable[1] /*i*/)]= NIT_NULL /*null*/;
+      variable[8] = variable[0];
+      variable[8] = ATTR_hash___HashCollection____array(variable[8]) /*HashCollection::_array*/;
+      variable[8] = UNBOX_NativeArray(variable[8])[UNTAG_Int( variable[7] /*i2*/)];
+      variable[8] = TAG_Bool((variable[8] ==  NIT_NULL /*null*/) || ((variable[8] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[8],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[8], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[8],COLOR_kernel___Object_____eqeq))(variable[8],  NIT_NULL /*null*/) /*Object::==*/)))));
+      if (!UNTAG_Bool(variable[8])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___remove_index, LOCATE_hash, 166); nit_exit(1);}
+      variable[8] = variable[0];
+      variable[8] = ATTR_hash___HashCollection____array(variable[8]) /*HashCollection::_array*/;
+      UNBOX_NativeArray(variable[8])[UNTAG_Int( variable[7] /*i2*/)]= variable[6] /*n*/;
     }
     continue_10: while(0);
   }
@@ -293,103 +333,121 @@ void hash___HashCollection___remove_index(val_t  self, val_t  param0) {
 }
 void hash___HashCollection___raz(val_t  self) {
   struct trace_t trace = {NULL, NULL, 172, LOCATE_hash___HashCollection___raz};
-  val_t variable0;
-  val_t variable1;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable1 = ATTR_hash___HashCollection____capacity( self) /*HashCollection::_capacity*/;
-  variable1 = TAG_Int(UNTAG_Int(variable1)-UNTAG_Int( TAG_Int(1)));
-  variable0 = variable1;
+  variable[0] =  self;
+  variable[3] = variable[0];
+  variable[3] = ATTR_hash___HashCollection____capacity(variable[3]) /*HashCollection::_capacity*/;
+  variable[3] = TAG_Int(UNTAG_Int(variable[3])-UNTAG_Int( TAG_Int(1)));
+  variable[2] = variable[3];
   while (true) { /*while*/
-    variable1 = TAG_Bool(UNTAG_Int( variable0 /*i*/)>=UNTAG_Int( TAG_Int(0)));
-    if (!UNTAG_Bool(variable1)) break; /* while*/
-    variable1 = ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/;
-    UNBOX_NativeArray(variable1)[UNTAG_Int( variable0 /*i*/)]= NIT_NULL /*null*/;
-    variable0 = TAG_Int(UNTAG_Int(variable0)-UNTAG_Int( TAG_Int(1))) /*i*/;
+    variable[3] = TAG_Bool(UNTAG_Int( variable[2] /*i*/)>=UNTAG_Int( TAG_Int(0)));
+    if (!UNTAG_Bool(variable[3])) break; /* while*/
+    variable[3] = variable[0];
+    variable[3] = ATTR_hash___HashCollection____array(variable[3]) /*HashCollection::_array*/;
+    UNBOX_NativeArray(variable[3])[UNTAG_Int( variable[2] /*i*/)]= NIT_NULL /*null*/;
+    variable[2] = TAG_Int(UNTAG_Int(variable[2])-UNTAG_Int( TAG_Int(1))) /*i*/;
     continue_12: while(0);
   }
   break_12: while(0);
-  ATTR_hash___HashCollection____length( self) /*HashCollection::_length*/ =  TAG_Int(0);
-  ATTR_hash___HashCollection____first_item( self) /*HashCollection::_first_item*/ =  NIT_NULL /*null*/;
-  ATTR_hash___HashCollection____last_item( self) /*HashCollection::_last_item*/ =  NIT_NULL /*null*/;
-  ATTR_hash___HashCollection____last_accessed_key( self) /*HashCollection::_last_accessed_key*/ =  NIT_NULL /*null*/;
+  variable[3] = variable[0];
+  ATTR_hash___HashCollection____length(variable[3]) /*HashCollection::_length*/ =  TAG_Int(0);
+  variable[3] = variable[0];
+  ATTR_hash___HashCollection____first_item(variable[3]) /*HashCollection::_first_item*/ =  NIT_NULL /*null*/;
+  variable[3] = variable[0];
+  ATTR_hash___HashCollection____last_item(variable[3]) /*HashCollection::_last_item*/ =  NIT_NULL /*null*/;
+  variable[3] = variable[0];
+  ATTR_hash___HashCollection____last_accessed_key(variable[3]) /*HashCollection::_last_accessed_key*/ =  NIT_NULL /*null*/;
+  return_label11: while(false);
   tracehead = trace.prev;
   return;
 }
 void hash___HashCollection___enlarge(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 185, LOCATE_hash___HashCollection___enlarge};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-  val_t variable5;
-  val_t variable6;
-    val_t variable7;
+  val_t variable[11];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 =  param0;
-  variable2 = ATTR_hash___HashCollection____capacity( self) /*HashCollection::_capacity*/;
-  variable1 = variable2;
-  variable2 = ATTR_hash___HashCollection____length( self) /*HashCollection::_length*/;
-  variable2 = TAG_Int(UNTAG_Int(variable2)+UNTAG_Int( TAG_Int(1)));
-  variable2 = TAG_Bool(UNTAG_Int( variable0 /*cap*/)<UNTAG_Int(variable2));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = ATTR_hash___HashCollection____length( self) /*HashCollection::_length*/;
-    variable2 = TAG_Int(UNTAG_Int(variable2)+UNTAG_Int( TAG_Int(1)));
-    variable0 = variable2 /*cap=*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = variable[0];
+  variable[4] = ATTR_hash___HashCollection____capacity(variable[4]) /*HashCollection::_capacity*/;
+  variable[3] = variable[4];
+  variable[4] = variable[0];
+  variable[4] = ATTR_hash___HashCollection____length(variable[4]) /*HashCollection::_length*/;
+  variable[4] = TAG_Int(UNTAG_Int(variable[4])+UNTAG_Int( TAG_Int(1)));
+  variable[4] = TAG_Bool(UNTAG_Int( variable[1] /*cap*/)<UNTAG_Int(variable[4]));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = variable[0];
+    variable[4] = ATTR_hash___HashCollection____length(variable[4]) /*HashCollection::_length*/;
+    variable[4] = TAG_Int(UNTAG_Int(variable[4])+UNTAG_Int( TAG_Int(1)));
+    variable[1] = variable[4] /*cap=*/;
   }
-  variable2 = ATTR_hash___HashCollection____capacity( self) /*HashCollection::_capacity*/;
-  variable2 = TAG_Bool(UNTAG_Int( variable0 /*cap*/)<=UNTAG_Int(variable2));
-  if (UNTAG_Bool(variable2)) { /*if*/
+  variable[4] = variable[0];
+  variable[4] = ATTR_hash___HashCollection____capacity(variable[4]) /*HashCollection::_capacity*/;
+  variable[4] = TAG_Bool(UNTAG_Int( variable[1] /*cap*/)<=UNTAG_Int(variable[4]));
+  if (UNTAG_Bool(variable[4])) { /*if*/
     goto return_label13;
   }
-  ATTR_hash___HashCollection____capacity( self) /*HashCollection::_capacity*/ =  variable0 /*cap*/;
-  ATTR_hash___HashCollection____last_accessed_key( self) /*HashCollection::_last_accessed_key*/ =  NIT_NULL /*null*/;
-  variable3 = BOX_NativeArray((val_t*)malloc((UNTAG_Int( variable0 /*cap*/) * sizeof(val_t))));
-  variable2 = variable3;
-  ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/ =  variable2 /*new_array*/;
-  variable4 = TAG_Int(UNTAG_Int( variable0 /*cap*/)-UNTAG_Int( TAG_Int(1)));
-  variable3 = variable4;
+  variable[4] = variable[0];
+  ATTR_hash___HashCollection____capacity(variable[4]) /*HashCollection::_capacity*/ =  variable[1] /*cap*/;
+  variable[4] = variable[0];
+  ATTR_hash___HashCollection____last_accessed_key(variable[4]) /*HashCollection::_last_accessed_key*/ =  NIT_NULL /*null*/;
+  variable[5] = variable[0];
+  variable[5] = BOX_NativeArray((val_t*)malloc((UNTAG_Int( variable[1] /*cap*/) * sizeof(val_t))));
+  variable[4] = variable[5];
+  variable[5] = variable[0];
+  ATTR_hash___HashCollection____array(variable[5]) /*HashCollection::_array*/ =  variable[4] /*new_array*/;
+  variable[6] = TAG_Int(UNTAG_Int( variable[1] /*cap*/)-UNTAG_Int( TAG_Int(1)));
+  variable[5] = variable[6];
   while (true) { /*while*/
-    variable4 = TAG_Bool(UNTAG_Int( variable3 /*i*/)>=UNTAG_Int( TAG_Int(0)));
-    if (!UNTAG_Bool(variable4)) break; /* while*/
-    UNBOX_NativeArray( variable2 /*new_array*/)[UNTAG_Int( variable3 /*i*/)]= NIT_NULL /*null*/;
-    variable3 = TAG_Int(UNTAG_Int(variable3)-UNTAG_Int( TAG_Int(1))) /*i*/;
+    variable[6] = TAG_Bool(UNTAG_Int( variable[5] /*i*/)>=UNTAG_Int( TAG_Int(0)));
+    if (!UNTAG_Bool(variable[6])) break; /* while*/
+    UNBOX_NativeArray( variable[4] /*new_array*/)[UNTAG_Int( variable[5] /*i*/)]= NIT_NULL /*null*/;
+    variable[5] = TAG_Int(UNTAG_Int(variable[5])-UNTAG_Int( TAG_Int(1))) /*i*/;
     continue_14: while(0);
   }
   break_14: while(0);
-  variable4 = ATTR_hash___HashCollection____capacity( self) /*HashCollection::_capacity*/;
-  variable4 = TAG_Bool(UNTAG_Int(variable4)<=UNTAG_Int( variable1 /*old_cap*/));
-  if (UNTAG_Bool(variable4)) { /*if*/
+  variable[6] = variable[0];
+  variable[6] = ATTR_hash___HashCollection____capacity(variable[6]) /*HashCollection::_capacity*/;
+  variable[6] = TAG_Bool(UNTAG_Int(variable[6])<=UNTAG_Int( variable[3] /*old_cap*/));
+  if (UNTAG_Bool(variable[6])) { /*if*/
     goto return_label13;
   }
-  variable5 = ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/;
-  variable4 = variable5;
-  variable6 = ATTR_hash___HashCollection____first_item( self) /*HashCollection::_first_item*/;
-  variable5 = variable6;
+  variable[7] = variable[0];
+  variable[7] = ATTR_hash___HashCollection____array(variable[7]) /*HashCollection::_array*/;
+  variable[6] = variable[7];
+  variable[8] = variable[0];
+  variable[8] = ATTR_hash___HashCollection____first_item(variable[8]) /*HashCollection::_first_item*/;
+  variable[7] = variable[8];
   while (true) { /*while*/
-    variable6 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable5 /*node*/ ==  NIT_NULL /*null*/) || (( variable5 /*node*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable5 /*node*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable5 /*node*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable5 /*node*/,COLOR_kernel___Object_____eqeq))( variable5 /*node*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    if (!UNTAG_Bool(variable6)) break; /* while*/
-    variable7 = ((hash___HashNode___key_t)CALL( variable5 /*node*/,COLOR_hash___HashNode___key))( variable5 /*node*/) /*HashNode::key*/;
-    variable7 = ((hash___HashCollection___index_at_t)CALL( self,COLOR_hash___HashCollection___index_at))( self, variable7) /*HashCollection::index_at*/;
-    variable6 = variable7;
-    variable7 = UNBOX_NativeArray( variable4 /*new_array*/)[UNTAG_Int( variable6 /*ind*/)];
-    variable7 = TAG_Bool((variable7 ==  NIT_NULL /*null*/) || ((variable7 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable7,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable7, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable7,COLOR_kernel___Object_____eqeq))(variable7,  NIT_NULL /*null*/) /*Object::==*/)))));
-    if (!UNTAG_Bool(variable7)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___enlarge, LOCATE_hash, 213); nit_exit(1);}
-    UNBOX_NativeArray( variable4 /*new_array*/)[UNTAG_Int( variable6 /*ind*/)]= variable5 /*node*/;
-    variable7 = ((hash___HashNode___next_item_t)CALL( variable5 /*node*/,COLOR_hash___HashNode___next_item))( variable5 /*node*/) /*HashNode::next_item*/;
-    variable5 = variable7 /*node=*/;
+    variable[8] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[7] /*node*/ ==  NIT_NULL /*null*/) || (( variable[7] /*node*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[7] /*node*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[7] /*node*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[7] /*node*/,COLOR_kernel___Object_____eqeq))( variable[7] /*node*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    if (!UNTAG_Bool(variable[8])) break; /* while*/
+    variable[9] = variable[0];
+    variable[10] = ((hash___HashNode___key_t)CALL( variable[7] /*node*/,COLOR_hash___HashNode___key))( variable[7] /*node*/) /*HashNode::key*/;
+    variable[9] = ((hash___HashCollection___index_at_t)CALL(variable[9],COLOR_hash___HashCollection___index_at))(variable[9], variable[10]) /*HashCollection::index_at*/;
+    variable[8] = variable[9];
+    variable[9] = UNBOX_NativeArray( variable[6] /*new_array*/)[UNTAG_Int( variable[8] /*ind*/)];
+    variable[9] = TAG_Bool((variable[9] ==  NIT_NULL /*null*/) || ((variable[9] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[9],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[9], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[9],COLOR_kernel___Object_____eqeq))(variable[9],  NIT_NULL /*null*/) /*Object::==*/)))));
+    if (!UNTAG_Bool(variable[9])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___enlarge, LOCATE_hash, 213); nit_exit(1);}
+    UNBOX_NativeArray( variable[6] /*new_array*/)[UNTAG_Int( variable[8] /*ind*/)]= variable[7] /*node*/;
+    variable[9] = ((hash___HashNode___next_item_t)CALL( variable[7] /*node*/,COLOR_hash___HashNode___next_item))( variable[7] /*node*/) /*HashNode::next_item*/;
+    variable[7] = variable[9] /*node=*/;
     continue_15: while(0);
   }
   break_15: while(0);
-  ATTR_hash___HashCollection____last_accessed_key( self) /*HashCollection::_last_accessed_key*/ =  NIT_NULL /*null*/;
+  variable[8] = variable[0];
+  ATTR_hash___HashCollection____last_accessed_key(variable[8]) /*HashCollection::_last_accessed_key*/ =  NIT_NULL /*null*/;
   return_label13: while(false);
   tracehead = trace.prev;
   return;
 }
 void hash___HashCollection___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 0, LOCATE_hash___HashCollection___init};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   tracehead = trace.prev;
@@ -397,16 +455,20 @@ void hash___HashCollection___init(val_t  self, int* init_table) {
 }
 val_t hash___HashNode___key(val_t  self) {
   struct trace_t trace = {NULL, NULL, 222, LOCATE_hash___HashNode___key};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___enlarge, LOCATE_hash, 222);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_hash, 222);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t hash___HashNode___next_item(val_t  self) {
   struct trace_t trace = {NULL, NULL, 224, LOCATE_hash___HashNode___next_item};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   tracehead = trace.prev;
@@ -414,6 +476,8 @@ val_t hash___HashNode___next_item(val_t  self) {
 }
 void hash___HashNode___next_item__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 224, LOCATE_hash___HashNode___next_item__eq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   ATTR_hash___HashNode____next_item( self) /*HashNode::_next_item*/ =  param0;
@@ -422,6 +486,8 @@ void hash___HashNode___next_item__eq(val_t  self, val_t  param0) {
 }
 val_t hash___HashNode___prev_item(val_t  self) {
   struct trace_t trace = {NULL, NULL, 225, LOCATE_hash___HashNode___prev_item};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   tracehead = trace.prev;
@@ -429,6 +495,8 @@ val_t hash___HashNode___prev_item(val_t  self) {
 }
 void hash___HashNode___prev_item__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 225, LOCATE_hash___HashNode___prev_item__eq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   ATTR_hash___HashNode____prev_item( self) /*HashNode::_prev_item*/ =  param0;
@@ -437,6 +505,8 @@ void hash___HashNode___prev_item__eq(val_t  self, val_t  param0) {
 }
 void hash___HashNode___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 0, LOCATE_hash___HashNode___init};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   tracehead = trace.prev;
@@ -444,219 +514,217 @@ void hash___HashNode___init(val_t  self, int* init_table) {
 }
 val_t hash___HashMap___iterator(val_t  self) {
   struct trace_t trace = {NULL, NULL, 232, LOCATE_hash___HashMap___iterator};
-  val_t variable0;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 = NEW_HashMapIterator_hash___HashMapIterator___init( self); /*new HashMapIterator[K, V]*/
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[3] = NEW_HashMapIterator_hash___HashMapIterator___init(variable[2]); /*new HashMapIterator[K, V]*/
+  variable[2] = variable[3];
+  variable[1] = variable[2];
   goto return_label16;
   return_label16: while(false);
   tracehead = trace.prev;
-  return variable0;
-}
-val_t hash___HashMap___first(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 234, LOCATE_hash___HashMap___first};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_hash;
-  variable0 = ATTR_hash___HashCollection____length( self) /*HashCollection::_length*/;
-  variable0 = TAG_Bool(UNTAG_Int(variable0)>UNTAG_Int( TAG_Int(0)));
-  if (!UNTAG_Bool(variable0)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashMap___first, LOCATE_hash, 236); nit_exit(1);}
-  variable0 = ATTR_hash___HashCollection____first_item( self) /*HashCollection::_first_item*/;
-  variable0 = ((abstract_collection___Couple___second_t)CALL(variable0,COLOR_abstract_collection___Couple___second))(variable0) /*Couple::second*/;
-  goto return_label17;
-  return_label17: while(false);
-  tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t hash___HashMap___is_empty(val_t  self) {
   struct trace_t trace = {NULL, NULL, 240, LOCATE_hash___HashMap___is_empty};
-  val_t variable0;
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 = ATTR_hash___HashCollection____length( self) /*HashCollection::_length*/;
-  variable0 = TAG_Bool((variable0)==( TAG_Int(0)));
-  goto return_label18;
-  return_label18: while(false);
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_hash___HashCollection____length(variable[2]) /*HashCollection::_length*/;
+  variable[2] = TAG_Bool((variable[2])==( TAG_Int(0)));
+  variable[1] = variable[2];
+  goto return_label17;
+  return_label17: while(false);
   tracehead = trace.prev;
-  return variable0;
-}
-val_t hash___HashMap___count(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 242, LOCATE_hash___HashMap___count};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-    val_t variable3;
-    val_t variable4;
-    val_t variable5;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_hash;
-  variable0 =  param0;
-  variable1 =  TAG_Int(0);
-  variable2 =  TAG_Int(0);
-  while (true) { /*while*/
-    variable3 = ATTR_hash___HashCollection____capacity( self) /*HashCollection::_capacity*/;
-    variable3 = TAG_Bool(UNTAG_Int( variable2 /*i*/)<UNTAG_Int(variable3));
-    if (!UNTAG_Bool(variable3)) break; /* while*/
-    variable4 = ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/;
-    variable4 = UNBOX_NativeArray(variable4)[UNTAG_Int( variable2 /*i*/)];
-    variable3 = variable4;
-    variable4 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable3 /*c*/ ==  NIT_NULL /*null*/) || (( variable3 /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable3 /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable3 /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable3 /*c*/,COLOR_kernel___Object_____eqeq))( variable3 /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    variable5 = variable4;
-    if (UNTAG_Bool(variable5)) { /* and */
-      variable5 = ((abstract_collection___Couple___second_t)CALL( variable3 /*c*/,COLOR_abstract_collection___Couple___second))( variable3 /*c*/) /*Couple::second*/;
-      variable5 = TAG_Bool((variable5 ==  variable0 /*item*/) || ((variable5 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable5,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable5, variable0 /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable5,COLOR_kernel___Object_____eqeq))(variable5,  variable0 /*item*/) /*Object::==*/)))));
-    }
-    variable4 = variable5;
-    if (UNTAG_Bool(variable4)) { /*if*/
-      variable1 = TAG_Int(UNTAG_Int(variable1)+UNTAG_Int( TAG_Int(1))) /*nb*/;
-    }
-    variable2 = TAG_Int(UNTAG_Int(variable2)+UNTAG_Int( TAG_Int(1))) /*i*/;
-    continue_20: while(0);
-  }
-  break_20: while(0);
-  variable1 =  variable1 /*nb*/;
-  goto return_label19;
-  return_label19: while(false);
-  tracehead = trace.prev;
-  return variable1;
+  return variable[1];
 }
 val_t hash___HashMap___has(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 254, LOCATE_hash___HashMap___has};
-  val_t variable0;
-  val_t variable1;
-    val_t variable2;
-    val_t variable3;
-    val_t variable4;
+  val_t variable[7];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 =  param0;
-  variable1 =  TAG_Int(0);
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] =  TAG_Int(0);
   while (true) { /*while*/
-    variable2 = ATTR_hash___HashCollection____capacity( self) /*HashCollection::_capacity*/;
-    variable2 = TAG_Bool(UNTAG_Int( variable1 /*i*/)<UNTAG_Int(variable2));
-    if (!UNTAG_Bool(variable2)) break; /* while*/
-    variable3 = ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/;
-    variable3 = UNBOX_NativeArray(variable3)[UNTAG_Int( variable1 /*i*/)];
-    variable2 = variable3;
-    variable3 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable2 /*c*/ ==  NIT_NULL /*null*/) || (( variable2 /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable2 /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable2 /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable2 /*c*/,COLOR_kernel___Object_____eqeq))( variable2 /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    variable4 = variable3;
-    if (UNTAG_Bool(variable4)) { /* and */
-      variable4 = ((abstract_collection___Couple___second_t)CALL( variable2 /*c*/,COLOR_abstract_collection___Couple___second))( variable2 /*c*/) /*Couple::second*/;
-      variable4 = TAG_Bool((variable4 ==  variable0 /*item*/) || ((variable4 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable4,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable4, variable0 /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable4,COLOR_kernel___Object_____eqeq))(variable4,  variable0 /*item*/) /*Object::==*/)))));
+    variable[4] = variable[0];
+    variable[4] = ATTR_hash___HashCollection____capacity(variable[4]) /*HashCollection::_capacity*/;
+    variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*i*/)<UNTAG_Int(variable[4]));
+    if (!UNTAG_Bool(variable[4])) break; /* while*/
+    variable[5] = variable[0];
+    variable[5] = ATTR_hash___HashCollection____array(variable[5]) /*HashCollection::_array*/;
+    variable[5] = UNBOX_NativeArray(variable[5])[UNTAG_Int( variable[3] /*i*/)];
+    variable[4] = variable[5];
+    variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*c*/ ==  NIT_NULL /*null*/) || (( variable[4] /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*c*/,COLOR_kernel___Object_____eqeq))( variable[4] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    variable[6] = variable[5];
+    if (UNTAG_Bool(variable[6])) { /* and */
+      variable[6] = ((abstract_collection___Couple___second_t)CALL( variable[4] /*c*/,COLOR_abstract_collection___Couple___second))( variable[4] /*c*/) /*Couple::second*/;
+      variable[6] = TAG_Bool((variable[6] ==  variable[1] /*item*/) || ((variable[6] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[6],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], variable[1] /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[6],COLOR_kernel___Object_____eqeq))(variable[6],  variable[1] /*item*/) /*Object::==*/)))));
     }
-    variable3 = variable4;
-    if (UNTAG_Bool(variable3)) { /*if*/
-      variable1 =  TAG_Bool(true);
-      goto return_label21;
+    variable[5] = variable[6];
+    if (UNTAG_Bool(variable[5])) { /*if*/
+      variable[2] =  TAG_Bool(true);
+      goto return_label18;
     }
-    variable1 = TAG_Int(UNTAG_Int(variable1)+UNTAG_Int( TAG_Int(1))) /*i*/;
-    continue_22: while(0);
+    variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(1))) /*i*/;
+    continue_19: while(0);
   }
-  break_22: while(0);
-  variable1 =  TAG_Bool(false);
-  goto return_label21;
-  return_label21: while(false);
+  break_19: while(0);
+  variable[2] =  TAG_Bool(false);
+  goto return_label18;
+  return_label18: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 val_t hash___HashMap___has_only(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 265, LOCATE_hash___HashMap___has_only};
-  val_t variable0;
-  val_t variable1;
-    val_t variable2;
-    val_t variable3;
-    val_t variable4;
+  val_t variable[7];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 =  param0;
-  variable1 =  TAG_Int(0);
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] =  TAG_Int(0);
   while (true) { /*while*/
-    variable2 = ATTR_hash___HashCollection____capacity( self) /*HashCollection::_capacity*/;
-    variable2 = TAG_Bool(UNTAG_Int( variable1 /*i*/)<UNTAG_Int(variable2));
-    if (!UNTAG_Bool(variable2)) break; /* while*/
-    variable3 = ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/;
-    variable3 = UNBOX_NativeArray(variable3)[UNTAG_Int( variable1 /*i*/)];
-    variable2 = variable3;
-    variable3 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable2 /*c*/ ==  NIT_NULL /*null*/) || (( variable2 /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable2 /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable2 /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable2 /*c*/,COLOR_kernel___Object_____eqeq))( variable2 /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    variable4 = variable3;
-    if (UNTAG_Bool(variable4)) { /* and */
-      variable4 = ((abstract_collection___Couple___second_t)CALL( variable2 /*c*/,COLOR_abstract_collection___Couple___second))( variable2 /*c*/) /*Couple::second*/;
-      variable4 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable4 ==  variable0 /*item*/) || ((variable4 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable4,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable4, variable0 /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable4,COLOR_kernel___Object_____eqeq))(variable4,  variable0 /*item*/) /*Object::==*/)))))));
+    variable[4] = variable[0];
+    variable[4] = ATTR_hash___HashCollection____capacity(variable[4]) /*HashCollection::_capacity*/;
+    variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*i*/)<UNTAG_Int(variable[4]));
+    if (!UNTAG_Bool(variable[4])) break; /* while*/
+    variable[5] = variable[0];
+    variable[5] = ATTR_hash___HashCollection____array(variable[5]) /*HashCollection::_array*/;
+    variable[5] = UNBOX_NativeArray(variable[5])[UNTAG_Int( variable[3] /*i*/)];
+    variable[4] = variable[5];
+    variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*c*/ ==  NIT_NULL /*null*/) || (( variable[4] /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*c*/,COLOR_kernel___Object_____eqeq))( variable[4] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    variable[6] = variable[5];
+    if (UNTAG_Bool(variable[6])) { /* and */
+      variable[6] = ((abstract_collection___Couple___second_t)CALL( variable[4] /*c*/,COLOR_abstract_collection___Couple___second))( variable[4] /*c*/) /*Couple::second*/;
+      variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] ==  variable[1] /*item*/) || ((variable[6] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[6],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], variable[1] /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[6],COLOR_kernel___Object_____eqeq))(variable[6],  variable[1] /*item*/) /*Object::==*/)))))));
     }
-    variable3 = variable4;
-    if (UNTAG_Bool(variable3)) { /*if*/
-      variable1 =  TAG_Bool(false);
-      goto return_label23;
+    variable[5] = variable[6];
+    if (UNTAG_Bool(variable[5])) { /*if*/
+      variable[2] =  TAG_Bool(false);
+      goto return_label20;
     }
-    variable1 = TAG_Int(UNTAG_Int(variable1)+UNTAG_Int( TAG_Int(1))) /*i*/;
-    continue_24: while(0);
+    variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(1))) /*i*/;
+    continue_21: while(0);
   }
-  break_24: while(0);
-  variable1 =  TAG_Bool(true);
-  goto return_label23;
-  return_label23: while(false);
+  break_21: while(0);
+  variable[2] =  TAG_Bool(true);
+  goto return_label20;
+  return_label20: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
-void hash___HashMap_____braeq(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 276, LOCATE_hash___HashMap_____braeq};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
+val_t hash___HashMap___count(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 242, LOCATE_hash___HashMap___count};
+  val_t variable[8];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable0 /*key*/ ==  NIT_NULL /*null*/) || (( variable0 /*key*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable0 /*key*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable0 /*key*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable0 /*key*/,COLOR_kernel___Object_____eqeq))( variable0 /*key*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashMap_____braeq, LOCATE_hash, 278); nit_exit(1);}
-  variable3 = ((hash___HashCollection___index_at_t)CALL( self,COLOR_hash___HashCollection___index_at))( self,  variable0 /*key*/) /*HashCollection::index_at*/;
-  variable2 = variable3;
-  variable4 = ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/;
-  variable4 = UNBOX_NativeArray(variable4)[UNTAG_Int( variable2 /*i*/)];
-  variable3 = variable4;
-  variable4 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable3 /*c*/ ==  NIT_NULL /*null*/) || (( variable3 /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable3 /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable3 /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable3 /*c*/,COLOR_kernel___Object_____eqeq))( variable3 /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable4)) { /*if*/
-    ((abstract_collection___Couple___first__eq_t)CALL( variable3 /*c*/,COLOR_abstract_collection___Couple___first__eq))( variable3 /*c*/,  variable0 /*key*/) /*Couple::first=*/;
-    ((abstract_collection___Couple___second__eq_t)CALL( variable3 /*c*/,COLOR_abstract_collection___Couple___second__eq))( variable3 /*c*/,  variable1 /*v*/) /*Couple::second=*/;
-  } else { /*if*/
-    variable4 = NEW_HashMapNode_hash___HashMapNode___init( variable0 /*key*/,  variable1 /*v*/); /*new HashMapNode[K, V]*/
-    ((hash___HashCollection___store_t)CALL( self,COLOR_hash___HashCollection___store))( self,  variable2 /*i*/, variable4) /*HashCollection::store*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] =  TAG_Int(0);
+  variable[4] =  TAG_Int(0);
+  while (true) { /*while*/
+    variable[5] = variable[0];
+    variable[5] = ATTR_hash___HashCollection____capacity(variable[5]) /*HashCollection::_capacity*/;
+    variable[5] = TAG_Bool(UNTAG_Int( variable[4] /*i*/)<UNTAG_Int(variable[5]));
+    if (!UNTAG_Bool(variable[5])) break; /* while*/
+    variable[6] = variable[0];
+    variable[6] = ATTR_hash___HashCollection____array(variable[6]) /*HashCollection::_array*/;
+    variable[6] = UNBOX_NativeArray(variable[6])[UNTAG_Int( variable[4] /*i*/)];
+    variable[5] = variable[6];
+    variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*c*/ ==  NIT_NULL /*null*/) || (( variable[5] /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*c*/,COLOR_kernel___Object_____eqeq))( variable[5] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    variable[7] = variable[6];
+    if (UNTAG_Bool(variable[7])) { /* and */
+      variable[7] = ((abstract_collection___Couple___second_t)CALL( variable[5] /*c*/,COLOR_abstract_collection___Couple___second))( variable[5] /*c*/) /*Couple::second*/;
+      variable[7] = TAG_Bool((variable[7] ==  variable[1] /*item*/) || ((variable[7] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[7],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[7], variable[1] /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[7],COLOR_kernel___Object_____eqeq))(variable[7],  variable[1] /*item*/) /*Object::==*/)))));
+    }
+    variable[6] = variable[7];
+    if (UNTAG_Bool(variable[6])) { /*if*/
+      variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(1))) /*nb*/;
+    }
+    variable[4] = TAG_Int(UNTAG_Int(variable[4])+UNTAG_Int( TAG_Int(1))) /*i*/;
+    continue_23: while(0);
   }
+  break_23: while(0);
+  variable[2] =  variable[3] /*nb*/;
+  goto return_label22;
+  return_label22: while(false);
+  tracehead = trace.prev;
+  return variable[2];
+}
+val_t hash___HashMap___first(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 234, LOCATE_hash___HashMap___first};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_hash;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_hash___HashCollection____length(variable[2]) /*HashCollection::_length*/;
+  variable[2] = TAG_Bool(UNTAG_Int(variable[2])>UNTAG_Int( TAG_Int(0)));
+  if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashMap___first, LOCATE_hash, 236); nit_exit(1);}
+  variable[2] = variable[0];
+  variable[2] = ATTR_hash___HashCollection____first_item(variable[2]) /*HashCollection::_first_item*/;
+  variable[2] = ((abstract_collection___Couple___second_t)CALL(variable[2],COLOR_abstract_collection___Couple___second))(variable[2]) /*Couple::second*/;
+  variable[1] = variable[2];
+  goto return_label24;
+  return_label24: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+void hash___HashMap___clear(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 304, LOCATE_hash___HashMap___clear};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_hash;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  ((hash___HashCollection___raz_t)CALL(variable[2],COLOR_hash___HashCollection___raz))(variable[2]) /*HashCollection::raz*/;
+  return_label25: while(false);
   tracehead = trace.prev;
   return;
 }
 void hash___HashMap___remove(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 289, LOCATE_hash___HashMap___remove};
-  val_t variable0;
-  val_t variable1;
-    val_t variable2;
-    val_t variable3;
-    val_t variable4;
+  val_t variable[7];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 =  param0;
-  variable1 =  TAG_Int(0);
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] =  TAG_Int(0);
   while (true) { /*while*/
-    variable2 = ATTR_hash___HashCollection____capacity( self) /*HashCollection::_capacity*/;
-    variable2 = TAG_Bool(UNTAG_Int( variable1 /*i*/)<UNTAG_Int(variable2));
-    if (!UNTAG_Bool(variable2)) break; /* while*/
-    variable3 = ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/;
-    variable3 = UNBOX_NativeArray(variable3)[UNTAG_Int( variable1 /*i*/)];
-    variable2 = variable3;
-    variable3 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable2 /*c*/ ==  NIT_NULL /*null*/) || (( variable2 /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable2 /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable2 /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable2 /*c*/,COLOR_kernel___Object_____eqeq))( variable2 /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    variable4 = variable3;
-    if (UNTAG_Bool(variable4)) { /* and */
-      variable4 = ((abstract_collection___Couple___second_t)CALL( variable2 /*c*/,COLOR_abstract_collection___Couple___second))( variable2 /*c*/) /*Couple::second*/;
-      variable4 = TAG_Bool((variable4 ==  variable0 /*item*/) || ((variable4 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable4,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable4, variable0 /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable4,COLOR_kernel___Object_____eqeq))(variable4,  variable0 /*item*/) /*Object::==*/)))));
+    variable[4] = variable[0];
+    variable[4] = ATTR_hash___HashCollection____capacity(variable[4]) /*HashCollection::_capacity*/;
+    variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*i*/)<UNTAG_Int(variable[4]));
+    if (!UNTAG_Bool(variable[4])) break; /* while*/
+    variable[5] = variable[0];
+    variable[5] = ATTR_hash___HashCollection____array(variable[5]) /*HashCollection::_array*/;
+    variable[5] = UNBOX_NativeArray(variable[5])[UNTAG_Int( variable[3] /*i*/)];
+    variable[4] = variable[5];
+    variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*c*/ ==  NIT_NULL /*null*/) || (( variable[4] /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*c*/,COLOR_kernel___Object_____eqeq))( variable[4] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    variable[6] = variable[5];
+    if (UNTAG_Bool(variable[6])) { /* and */
+      variable[6] = ((abstract_collection___Couple___second_t)CALL( variable[4] /*c*/,COLOR_abstract_collection___Couple___second))( variable[4] /*c*/) /*Couple::second*/;
+      variable[6] = TAG_Bool((variable[6] ==  variable[1] /*item*/) || ((variable[6] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[6],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], variable[1] /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[6],COLOR_kernel___Object_____eqeq))(variable[6],  variable[1] /*item*/) /*Object::==*/)))));
     }
-    variable3 = variable4;
-    if (UNTAG_Bool(variable3)) { /*if*/
-      ((hash___HashCollection___remove_index_t)CALL( self,COLOR_hash___HashCollection___remove_index))( self,  variable1 /*i*/) /*HashCollection::remove_index*/;
+    variable[5] = variable[6];
+    if (UNTAG_Bool(variable[5])) { /*if*/
+      variable[5] = variable[0];
+      ((hash___HashCollection___remove_index_t)CALL(variable[5],COLOR_hash___HashCollection___remove_index))(variable[5],  variable[3] /*i*/) /*HashCollection::remove_index*/;
       goto return_label26;
     }
-    variable1 = TAG_Int(UNTAG_Int(variable1)+UNTAG_Int( TAG_Int(1))) /*i*/;
+    variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(1))) /*i*/;
     continue_27: while(0);
   }
   break_27: while(0);
@@ -664,275 +732,387 @@ void hash___HashMap___remove(val_t  self, val_t  param0) {
   tracehead = trace.prev;
   return;
 }
-void hash___HashMap___remove_at(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 302, LOCATE_hash___HashMap___remove_at};
-  val_t variable0;
-  val_t variable1;
+void hash___HashMap_____braeq(val_t  self, val_t  param0, val_t  param1) {
+  struct trace_t trace = {NULL, NULL, 276, LOCATE_hash___HashMap_____braeq};
+  val_t variable[8];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 =  param0;
-  variable1 = ((hash___HashCollection___index_at_t)CALL( self,COLOR_hash___HashCollection___index_at))( self,  variable0 /*key*/) /*HashCollection::index_at*/;
-  ((hash___HashCollection___remove_index_t)CALL( self,COLOR_hash___HashCollection___remove_index))( self, variable1) /*HashCollection::remove_index*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*key*/ ==  NIT_NULL /*null*/) || (( variable[1] /*key*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*key*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*key*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*key*/,COLOR_kernel___Object_____eqeq))( variable[1] /*key*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashMap_____braeq, LOCATE_hash, 278); nit_exit(1);}
+  variable[5] = variable[0];
+  variable[5] = ((hash___HashCollection___index_at_t)CALL(variable[5],COLOR_hash___HashCollection___index_at))(variable[5],  variable[1] /*key*/) /*HashCollection::index_at*/;
+  variable[4] = variable[5];
+  variable[6] = variable[0];
+  variable[6] = ATTR_hash___HashCollection____array(variable[6]) /*HashCollection::_array*/;
+  variable[6] = UNBOX_NativeArray(variable[6])[UNTAG_Int( variable[4] /*i*/)];
+  variable[5] = variable[6];
+  variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*c*/ ==  NIT_NULL /*null*/) || (( variable[5] /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*c*/,COLOR_kernel___Object_____eqeq))( variable[5] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[6])) { /*if*/
+    ((abstract_collection___Couple___first__eq_t)CALL( variable[5] /*c*/,COLOR_abstract_collection___Couple___first__eq))( variable[5] /*c*/,  variable[1] /*key*/) /*Couple::first=*/;
+    ((abstract_collection___Couple___second__eq_t)CALL( variable[5] /*c*/,COLOR_abstract_collection___Couple___second__eq))( variable[5] /*c*/,  variable[2] /*v*/) /*Couple::second=*/;
+  } else { /*if*/
+    variable[6] = variable[0];
+    variable[7] = NEW_HashMapNode_hash___HashMapNode___init( variable[1] /*key*/,  variable[2] /*v*/); /*new HashMapNode[K, V]*/
+    ((hash___HashCollection___store_t)CALL(variable[6],COLOR_hash___HashCollection___store))(variable[6],  variable[4] /*i*/, variable[7]) /*HashCollection::store*/;
+  }
+  return_label28: while(false);
   tracehead = trace.prev;
   return;
 }
-void hash___HashMap___clear(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 304, LOCATE_hash___HashMap___clear};
+void hash___HashMap___remove_at(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 302, LOCATE_hash___HashMap___remove_at};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  ((hash___HashCollection___raz_t)CALL( self,COLOR_hash___HashCollection___raz))( self) /*HashCollection::raz*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[4] = variable[0];
+  variable[4] = ((hash___HashCollection___index_at_t)CALL(variable[4],COLOR_hash___HashCollection___index_at))(variable[4],  variable[1] /*key*/) /*HashCollection::index_at*/;
+  ((hash___HashCollection___remove_index_t)CALL(variable[3],COLOR_hash___HashCollection___remove_index))(variable[3], variable[4]) /*HashCollection::remove_index*/;
+  return_label29: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t hash___HashMap___couple_at(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 306, LOCATE_hash___HashMap___couple_at};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 =  param0;
-  variable1 = ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/;
-  variable2 = ((hash___HashCollection___index_at_t)CALL( self,COLOR_hash___HashCollection___index_at))( self,  variable0 /*key*/) /*HashCollection::index_at*/;
-  variable1 = UNBOX_NativeArray(variable1)[UNTAG_Int(variable2)];
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ATTR_hash___HashCollection____array(variable[3]) /*HashCollection::_array*/;
+  variable[4] = variable[0];
+  variable[4] = ((hash___HashCollection___index_at_t)CALL(variable[4],COLOR_hash___HashCollection___index_at))(variable[4],  variable[1] /*key*/) /*HashCollection::index_at*/;
+  variable[3] = UNBOX_NativeArray(variable[3])[UNTAG_Int(variable[4])];
+  variable[2] = variable[3];
   goto return_label30;
   return_label30: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 void hash___HashMap___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 308, LOCATE_hash___HashMap___init};
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  variable[0] =  self;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashMap].i]) return;
-  ATTR_hash___HashCollection____capacity( self) /*HashCollection::_capacity*/ =  TAG_Int(0);
-  ATTR_hash___HashCollection____length( self) /*HashCollection::_length*/ =  TAG_Int(0);
-  ((hash___HashCollection___enlarge_t)CALL( self,COLOR_hash___HashCollection___enlarge))( self,  TAG_Int(0)) /*HashCollection::enlarge*/;
+  variable[2] = variable[0];
+  ATTR_hash___HashCollection____capacity(variable[2]) /*HashCollection::_capacity*/ =  TAG_Int(0);
+  variable[2] = variable[0];
+  ATTR_hash___HashCollection____length(variable[2]) /*HashCollection::_length*/ =  TAG_Int(0);
+  variable[2] = variable[0];
+  ((hash___HashCollection___enlarge_t)CALL(variable[2],COLOR_hash___HashCollection___enlarge))(variable[2],  TAG_Int(0)) /*HashCollection::enlarge*/;
+  return_label31: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashMap].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t hash___HashMapNode___key(val_t  self) {
   struct trace_t trace = {NULL, NULL, 319, LOCATE_hash___HashMapNode___key};
-  val_t variable0;
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 = ((abstract_collection___Couple___first_t)CALL( self,COLOR_abstract_collection___Couple___first))( self) /*Couple::first*/;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((abstract_collection___Couple___first_t)CALL(variable[2],COLOR_abstract_collection___Couple___first))(variable[2]) /*Couple::first*/;
+  variable[1] = variable[2];
   goto return_label32;
   return_label32: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 void hash___HashMapNode___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
   struct trace_t trace = {NULL, NULL, 322, LOCATE_hash___HashMapNode___init};
-  val_t variable0;
-  val_t variable1;
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 =  param0;
-  variable1 =  param1;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashMapNode].i]) return;
-  ((abstract_collection___Couple___first__eq_t)CALL( self,COLOR_abstract_collection___Couple___first__eq))( self,  variable0 /*k*/) /*Couple::first=*/;
-  ((abstract_collection___Couple___second__eq_t)CALL( self,COLOR_abstract_collection___Couple___second__eq))( self,  variable1 /*v*/) /*Couple::second=*/;
+  ((abstract_collection___Couple___init_t)CALL(variable[0],COLOR_abstract_collection___Couple___init))(variable[0], variable[1], variable[2], init_table /*YYY*/) /*Couple::init*/;
+  variable[4] = variable[0];
+  ((abstract_collection___Couple___first__eq_t)CALL(variable[4],COLOR_abstract_collection___Couple___first__eq))(variable[4],  variable[1] /*k*/) /*Couple::first=*/;
+  variable[4] = variable[0];
+  ((abstract_collection___Couple___second__eq_t)CALL(variable[4],COLOR_abstract_collection___Couple___second__eq))(variable[4],  variable[2] /*v*/) /*Couple::second=*/;
+  return_label33: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashMapNode].i] = 1;
+  tracehead = trace.prev;
+  return;
+}
+val_t hash___HashMapIterator___item(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 333, LOCATE_hash___HashMapIterator___item};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_hash;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((hash___HashMapIterator___is_ok_t)CALL(variable[2],COLOR_abstract_collection___Iterator___is_ok))(variable[2]) /*HashMapIterator::is_ok*/;
+  if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashMapIterator___item, LOCATE_hash, 335); nit_exit(1);}
+  variable[2] = variable[0];
+  variable[2] = ATTR_hash___HashMapIterator____node(variable[2]) /*HashMapIterator::_node*/;
+  variable[2] = ((abstract_collection___Couple___second_t)CALL(variable[2],COLOR_abstract_collection___Couple___second))(variable[2]) /*Couple::second*/;
+  variable[1] = variable[2];
+  goto return_label34;
+  return_label34: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+void hash___HashMapIterator___next(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 351, LOCATE_hash___HashMapIterator___next};
+  val_t variable[4];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_hash;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((hash___HashMapIterator___is_ok_t)CALL(variable[2],COLOR_abstract_collection___Iterator___is_ok))(variable[2]) /*HashMapIterator::is_ok*/;
+  if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashMapIterator___next, LOCATE_hash, 353); nit_exit(1);}
+  variable[2] = variable[0];
+  variable[3] = variable[0];
+  variable[3] = ATTR_hash___HashMapIterator____node(variable[3]) /*HashMapIterator::_node*/;
+  variable[3] = ((hash___HashNode___next_item_t)CALL(variable[3],COLOR_hash___HashNode___next_item))(variable[3]) /*HashNode::next_item*/;
+  ATTR_hash___HashMapIterator____node(variable[2]) /*HashMapIterator::_node*/ = variable[3];
+  return_label35: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t hash___HashMapIterator___is_ok(val_t  self) {
   struct trace_t trace = {NULL, NULL, 331, LOCATE_hash___HashMapIterator___is_ok};
-  val_t variable0;
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 = ATTR_hash___HashMapIterator____node( self) /*HashMapIterator::_node*/;
-  variable0 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable0 ==  NIT_NULL /*null*/) || ((variable0 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable0, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))(variable0,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  goto return_label34;
-  return_label34: while(false);
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_hash___HashMapIterator____node(variable[2]) /*HashMapIterator::_node*/;
+  variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[1] = variable[2];
+  goto return_label36;
+  return_label36: while(false);
   tracehead = trace.prev;
-  return variable0;
-}
-val_t hash___HashMapIterator___item(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 333, LOCATE_hash___HashMapIterator___item};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_hash;
-  variable0 = ((hash___HashMapIterator___is_ok_t)CALL( self,COLOR_abstract_collection___Iterator___is_ok))( self) /*HashMapIterator::is_ok*/;
-  if (!UNTAG_Bool(variable0)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashMapIterator___item, LOCATE_hash, 335); nit_exit(1);}
-  variable0 = ATTR_hash___HashMapIterator____node( self) /*HashMapIterator::_node*/;
-  variable0 = ((abstract_collection___Couple___second_t)CALL(variable0,COLOR_abstract_collection___Couple___second))(variable0) /*Couple::second*/;
-  goto return_label35;
-  return_label35: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-void hash___HashMapIterator___item__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 339, LOCATE_hash___HashMapIterator___item__eq};
-  val_t variable0;
-  val_t variable1;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_hash;
-  variable0 =  param0;
-  variable1 = ((hash___HashMapIterator___is_ok_t)CALL( self,COLOR_abstract_collection___Iterator___is_ok))( self) /*HashMapIterator::is_ok*/;
-  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashMapIterator___item__eq, LOCATE_hash, 341); nit_exit(1);}
-  variable1 = ATTR_hash___HashMapIterator____node( self) /*HashMapIterator::_node*/;
-  ((abstract_collection___Couple___second__eq_t)CALL(variable1,COLOR_abstract_collection___Couple___second__eq))(variable1,  variable0 /*value*/) /*Couple::second=*/;
-  tracehead = trace.prev;
-  return;
+  return variable[1];
 }
 val_t hash___HashMapIterator___key(val_t  self) {
   struct trace_t trace = {NULL, NULL, 345, LOCATE_hash___HashMapIterator___key};
-  val_t variable0;
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 = ((hash___HashMapIterator___is_ok_t)CALL( self,COLOR_abstract_collection___Iterator___is_ok))( self) /*HashMapIterator::is_ok*/;
-  if (!UNTAG_Bool(variable0)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashMapIterator___key, LOCATE_hash, 347); nit_exit(1);}
-  variable0 = ATTR_hash___HashMapIterator____node( self) /*HashMapIterator::_node*/;
-  variable0 = ((abstract_collection___Couple___first_t)CALL(variable0,COLOR_abstract_collection___Couple___first))(variable0) /*Couple::first*/;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((hash___HashMapIterator___is_ok_t)CALL(variable[2],COLOR_abstract_collection___Iterator___is_ok))(variable[2]) /*HashMapIterator::is_ok*/;
+  if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashMapIterator___key, LOCATE_hash, 347); nit_exit(1);}
+  variable[2] = variable[0];
+  variable[2] = ATTR_hash___HashMapIterator____node(variable[2]) /*HashMapIterator::_node*/;
+  variable[2] = ((abstract_collection___Couple___first_t)CALL(variable[2],COLOR_abstract_collection___Couple___first))(variable[2]) /*Couple::first*/;
+  variable[1] = variable[2];
   goto return_label37;
   return_label37: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
-void hash___HashMapIterator___next(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 351, LOCATE_hash___HashMapIterator___next};
-  val_t variable0;
+void hash___HashMapIterator___item__eq(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 339, LOCATE_hash___HashMapIterator___item__eq};
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 = ((hash___HashMapIterator___is_ok_t)CALL( self,COLOR_abstract_collection___Iterator___is_ok))( self) /*HashMapIterator::is_ok*/;
-  if (!UNTAG_Bool(variable0)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashMapIterator___next, LOCATE_hash, 353); nit_exit(1);}
-  variable0 = ATTR_hash___HashMapIterator____node( self) /*HashMapIterator::_node*/;
-  variable0 = ((hash___HashNode___next_item_t)CALL(variable0,COLOR_hash___HashNode___next_item))(variable0) /*HashNode::next_item*/;
-  ATTR_hash___HashMapIterator____node( self) /*HashMapIterator::_node*/ = variable0;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((hash___HashMapIterator___is_ok_t)CALL(variable[3],COLOR_abstract_collection___Iterator___is_ok))(variable[3]) /*HashMapIterator::is_ok*/;
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashMapIterator___item__eq, LOCATE_hash, 341); nit_exit(1);}
+  variable[3] = variable[0];
+  variable[3] = ATTR_hash___HashMapIterator____node(variable[3]) /*HashMapIterator::_node*/;
+  ((abstract_collection___Couple___second__eq_t)CALL(variable[3],COLOR_abstract_collection___Couple___second__eq))(variable[3],  variable[1] /*value*/) /*Couple::second=*/;
+  return_label38: while(false);
   tracehead = trace.prev;
   return;
 }
 void hash___HashMapIterator___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 363, LOCATE_hash___HashMapIterator___init};
-  val_t variable0;
-  val_t variable1;
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 =  param0;
+  variable[0] =  self;
+  variable[1] =  param0;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashMapIterator].i]) return;
-  ATTR_hash___HashMapIterator____map( self) /*HashMapIterator::_map*/ =  variable0 /*map*/;
-  variable1 = ((hash___HashCollection___first_item_t)CALL( variable0 /*map*/,COLOR_hash___HashCollection___first_item))( variable0 /*map*/) /*HashCollection::first_item*/;
-  ATTR_hash___HashMapIterator____node( self) /*HashMapIterator::_node*/ = variable1;
+  variable[3] = variable[0];
+  ATTR_hash___HashMapIterator____map(variable[3]) /*HashMapIterator::_map*/ =  variable[1] /*map*/;
+  variable[3] = variable[0];
+  variable[4] = ((hash___HashCollection___first_item_t)CALL( variable[1] /*map*/,COLOR_hash___HashCollection___first_item))( variable[1] /*map*/) /*HashCollection::first_item*/;
+  ATTR_hash___HashMapIterator____node(variable[3]) /*HashMapIterator::_node*/ = variable[4];
+  return_label39: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashMapIterator].i] = 1;
-  tracehead = trace.prev;
-  return;
-}
-val_t hash___HashSet___is_empty(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 374, LOCATE_hash___HashSet___is_empty};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_hash;
-  variable0 = ATTR_hash___HashCollection____length( self) /*HashCollection::_length*/;
-  variable0 = TAG_Bool((variable0)==( TAG_Int(0)));
-  goto return_label40;
-  return_label40: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t hash___HashSet___first(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 376, LOCATE_hash___HashSet___first};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_hash;
-  variable0 = ATTR_hash___HashCollection____length( self) /*HashCollection::_length*/;
-  variable0 = TAG_Bool(UNTAG_Int(variable0)>UNTAG_Int( TAG_Int(0)));
-  if (!UNTAG_Bool(variable0)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashSet___first, LOCATE_hash, 378); nit_exit(1);}
-  variable0 = ATTR_hash___HashCollection____first_item( self) /*HashCollection::_first_item*/;
-  variable0 = ((hash___HashSetNode___key_t)CALL(variable0,COLOR_hash___HashNode___key))(variable0) /*HashSetNode::key*/;
-  goto return_label41;
-  return_label41: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t hash___HashSet___has(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 382, LOCATE_hash___HashSet___has};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_hash;
-  variable0 =  param0;
-  variable1 = ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/;
-  variable2 = ((hash___HashCollection___index_at_t)CALL( self,COLOR_hash___HashCollection___index_at))( self,  variable0 /*item*/) /*HashCollection::index_at*/;
-  variable1 = UNBOX_NativeArray(variable1)[UNTAG_Int(variable2)];
-  variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  goto return_label42;
-  return_label42: while(false);
-  tracehead = trace.prev;
-  return variable1;
-}
-void hash___HashSet___add(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 387, LOCATE_hash___HashSet___add};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_hash;
-  variable0 =  param0;
-  variable2 = ((hash___HashCollection___index_at_t)CALL( self,COLOR_hash___HashCollection___index_at))( self,  variable0 /*item*/) /*HashCollection::index_at*/;
-  variable1 = variable2;
-  variable3 = ATTR_hash___HashCollection____array( self) /*HashCollection::_array*/;
-  variable3 = UNBOX_NativeArray(variable3)[UNTAG_Int( variable1 /*i*/)];
-  variable2 = variable3;
-  variable3 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable2 /*c*/ ==  NIT_NULL /*null*/) || (( variable2 /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable2 /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable2 /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable2 /*c*/,COLOR_kernel___Object_____eqeq))( variable2 /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable3)) { /*if*/
-    ((hash___HashSetNode___key__eq_t)CALL( variable2 /*c*/,COLOR_hash___HashSetNode___key__eq))( variable2 /*c*/,  variable0 /*item*/) /*HashSetNode::key=*/;
-  } else { /*if*/
-    variable3 = NEW_HashSetNode_hash___HashSetNode___init( variable0 /*item*/); /*new HashSetNode[E]*/
-    ((hash___HashCollection___store_t)CALL( self,COLOR_hash___HashCollection___store))( self,  variable1 /*i*/, variable3) /*HashCollection::store*/;
-  }
-  tracehead = trace.prev;
-  return;
-}
-void hash___HashSet___remove(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 398, LOCATE_hash___HashSet___remove};
-  val_t variable0;
-  val_t variable1;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_hash;
-  variable0 =  param0;
-  variable1 = ((hash___HashCollection___index_at_t)CALL( self,COLOR_hash___HashCollection___index_at))( self,  variable0 /*item*/) /*HashCollection::index_at*/;
-  ((hash___HashCollection___remove_index_t)CALL( self,COLOR_hash___HashCollection___remove_index))( self, variable1) /*HashCollection::remove_index*/;
-  tracehead = trace.prev;
-  return;
-}
-void hash___HashSet___clear(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 400, LOCATE_hash___HashSet___clear};
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_hash;
-  ((hash___HashCollection___raz_t)CALL( self,COLOR_hash___HashCollection___raz))( self) /*HashCollection::raz*/;
   tracehead = trace.prev;
   return;
 }
 val_t hash___HashSet___iterator(val_t  self) {
   struct trace_t trace = {NULL, NULL, 402, LOCATE_hash___HashSet___iterator};
-  val_t variable0;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 = NEW_HashSetIterator_hash___HashSetIterator___init( self); /*new HashSetIterator[E]*/
-  goto return_label46;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[3] = NEW_HashSetIterator_hash___HashSetIterator___init(variable[2]); /*new HashSetIterator[E]*/
+  variable[2] = variable[3];
+  variable[1] = variable[2];
+  goto return_label40;
+  return_label40: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t hash___HashSet___is_empty(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 374, LOCATE_hash___HashSet___is_empty};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_hash;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_hash___HashCollection____length(variable[2]) /*HashCollection::_length*/;
+  variable[2] = TAG_Bool((variable[2])==( TAG_Int(0)));
+  variable[1] = variable[2];
+  goto return_label41;
+  return_label41: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t hash___HashSet___has(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 382, LOCATE_hash___HashSet___has};
+  val_t variable[5];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_hash;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ATTR_hash___HashCollection____array(variable[3]) /*HashCollection::_array*/;
+  variable[4] = variable[0];
+  variable[4] = ((hash___HashCollection___index_at_t)CALL(variable[4],COLOR_hash___HashCollection___index_at))(variable[4],  variable[1] /*item*/) /*HashCollection::index_at*/;
+  variable[3] = UNBOX_NativeArray(variable[3])[UNTAG_Int(variable[4])];
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[2] = variable[3];
+  goto return_label42;
+  return_label42: while(false);
+  tracehead = trace.prev;
+  return variable[2];
+}
+val_t hash___HashSet___first(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 376, LOCATE_hash___HashSet___first};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_hash;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_hash___HashCollection____length(variable[2]) /*HashCollection::_length*/;
+  variable[2] = TAG_Bool(UNTAG_Int(variable[2])>UNTAG_Int( TAG_Int(0)));
+  if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashSet___first, LOCATE_hash, 378); nit_exit(1);}
+  variable[2] = variable[0];
+  variable[2] = ATTR_hash___HashCollection____first_item(variable[2]) /*HashCollection::_first_item*/;
+  variable[2] = ((hash___HashSetNode___key_t)CALL(variable[2],COLOR_hash___HashNode___key))(variable[2]) /*HashSetNode::key*/;
+  variable[1] = variable[2];
+  goto return_label43;
+  return_label43: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+void hash___HashSet___clear(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 400, LOCATE_hash___HashSet___clear};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_hash;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  ((hash___HashCollection___raz_t)CALL(variable[2],COLOR_hash___HashCollection___raz))(variable[2]) /*HashCollection::raz*/;
+  return_label44: while(false);
+  tracehead = trace.prev;
+  return;
+}
+void hash___HashSet___remove(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 398, LOCATE_hash___HashSet___remove};
+  val_t variable[5];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_hash;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[4] = variable[0];
+  variable[4] = ((hash___HashCollection___index_at_t)CALL(variable[4],COLOR_hash___HashCollection___index_at))(variable[4],  variable[1] /*item*/) /*HashCollection::index_at*/;
+  ((hash___HashCollection___remove_index_t)CALL(variable[3],COLOR_hash___HashCollection___remove_index))(variable[3], variable[4]) /*HashCollection::remove_index*/;
+  return_label45: while(false);
+  tracehead = trace.prev;
+  return;
+}
+void hash___HashSet___add(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 387, LOCATE_hash___HashSet___add};
+  val_t variable[7];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_hash;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = variable[0];
+  variable[4] = ((hash___HashCollection___index_at_t)CALL(variable[4],COLOR_hash___HashCollection___index_at))(variable[4],  variable[1] /*item*/) /*HashCollection::index_at*/;
+  variable[3] = variable[4];
+  variable[5] = variable[0];
+  variable[5] = ATTR_hash___HashCollection____array(variable[5]) /*HashCollection::_array*/;
+  variable[5] = UNBOX_NativeArray(variable[5])[UNTAG_Int( variable[3] /*i*/)];
+  variable[4] = variable[5];
+  variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*c*/ ==  NIT_NULL /*null*/) || (( variable[4] /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*c*/,COLOR_kernel___Object_____eqeq))( variable[4] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    ((hash___HashSetNode___key__eq_t)CALL( variable[4] /*c*/,COLOR_hash___HashSetNode___key__eq))( variable[4] /*c*/,  variable[1] /*item*/) /*HashSetNode::key=*/;
+  } else { /*if*/
+    variable[5] = variable[0];
+    variable[6] = NEW_HashSetNode_hash___HashSetNode___init( variable[1] /*item*/); /*new HashSetNode[E]*/
+    ((hash___HashCollection___store_t)CALL(variable[5],COLOR_hash___HashCollection___store))(variable[5],  variable[3] /*i*/, variable[6]) /*HashCollection::store*/;
+  }
   return_label46: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return;
 }
 void hash___HashSet___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 404, LOCATE_hash___HashSet___init};
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  variable[0] =  self;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashSet].i]) return;
-  ATTR_hash___HashCollection____capacity( self) /*HashCollection::_capacity*/ =  TAG_Int(0);
-  ATTR_hash___HashCollection____length( self) /*HashCollection::_length*/ =  TAG_Int(0);
-  ((hash___HashCollection___enlarge_t)CALL( self,COLOR_hash___HashCollection___enlarge))( self,  TAG_Int(0)) /*HashCollection::enlarge*/;
+  variable[2] = variable[0];
+  ATTR_hash___HashCollection____capacity(variable[2]) /*HashCollection::_capacity*/ =  TAG_Int(0);
+  variable[2] = variable[0];
+  ATTR_hash___HashCollection____length(variable[2]) /*HashCollection::_length*/ =  TAG_Int(0);
+  variable[2] = variable[0];
+  ((hash___HashCollection___enlarge_t)CALL(variable[2],COLOR_hash___HashCollection___enlarge))(variable[2],  TAG_Int(0)) /*HashCollection::enlarge*/;
+  return_label47: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashSet].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t hash___HashSetNode___key(val_t  self) {
   struct trace_t trace = {NULL, NULL, 416, LOCATE_hash___HashSetNode___key};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   tracehead = trace.prev;
@@ -940,6 +1120,8 @@ val_t hash___HashSetNode___key(val_t  self) {
 }
 void hash___HashSetNode___key__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 416, LOCATE_hash___HashSetNode___key__eq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   ATTR_hash___HashSetNode____key( self) /*HashSetNode::_key*/ =  param0;
@@ -948,66 +1130,89 @@ void hash___HashSetNode___key__eq(val_t  self, val_t  param0) {
 }
 void hash___HashSetNode___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 418, LOCATE_hash___HashSetNode___init};
-  val_t variable0;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 =  param0;
+  variable[0] =  self;
+  variable[1] =  param0;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashSetNode].i]) return;
-  ATTR_hash___HashSetNode____key( self) /*HashSetNode::_key*/ =  variable0 /*e*/;
+  variable[3] = variable[0];
+  ATTR_hash___HashSetNode____key(variable[3]) /*HashSetNode::_key*/ =  variable[1] /*e*/;
+  return_label48: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashSetNode].i] = 1;
+  tracehead = trace.prev;
+  return;
+}
+val_t hash___HashSetIterator___item(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 428, LOCATE_hash___HashSetIterator___item};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_hash;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((hash___HashSetIterator___is_ok_t)CALL(variable[2],COLOR_abstract_collection___Iterator___is_ok))(variable[2]) /*HashSetIterator::is_ok*/;
+  if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashSetIterator___item, LOCATE_hash, 430); nit_exit(1);}
+  variable[2] = variable[0];
+  variable[2] = ATTR_hash___HashSetIterator____node(variable[2]) /*HashSetIterator::_node*/;
+  variable[2] = ((hash___HashSetNode___key_t)CALL(variable[2],COLOR_hash___HashNode___key))(variable[2]) /*HashSetNode::key*/;
+  variable[1] = variable[2];
+  goto return_label49;
+  return_label49: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+void hash___HashSetIterator___next(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 434, LOCATE_hash___HashSetIterator___next};
+  val_t variable[4];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_hash;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((hash___HashSetIterator___is_ok_t)CALL(variable[2],COLOR_abstract_collection___Iterator___is_ok))(variable[2]) /*HashSetIterator::is_ok*/;
+  if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashSetIterator___next, LOCATE_hash, 436); nit_exit(1);}
+  variable[2] = variable[0];
+  variable[3] = variable[0];
+  variable[3] = ATTR_hash___HashSetIterator____node(variable[3]) /*HashSetIterator::_node*/;
+  variable[3] = ((hash___HashNode___next_item_t)CALL(variable[3],COLOR_hash___HashNode___next_item))(variable[3]) /*HashNode::next_item*/;
+  ATTR_hash___HashSetIterator____node(variable[2]) /*HashSetIterator::_node*/ = variable[3];
+  return_label50: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t hash___HashSetIterator___is_ok(val_t  self) {
   struct trace_t trace = {NULL, NULL, 426, LOCATE_hash___HashSetIterator___is_ok};
-  val_t variable0;
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 = ATTR_hash___HashSetIterator____node( self) /*HashSetIterator::_node*/;
-  variable0 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable0 ==  NIT_NULL /*null*/) || ((variable0 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable0, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))(variable0,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  goto return_label49;
-  return_label49: while(false);
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_hash___HashSetIterator____node(variable[2]) /*HashSetIterator::_node*/;
+  variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[1] = variable[2];
+  goto return_label51;
+  return_label51: while(false);
   tracehead = trace.prev;
-  return variable0;
-}
-val_t hash___HashSetIterator___item(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 428, LOCATE_hash___HashSetIterator___item};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_hash;
-  variable0 = ((hash___HashSetIterator___is_ok_t)CALL( self,COLOR_abstract_collection___Iterator___is_ok))( self) /*HashSetIterator::is_ok*/;
-  if (!UNTAG_Bool(variable0)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashSetIterator___item, LOCATE_hash, 430); nit_exit(1);}
-  variable0 = ATTR_hash___HashSetIterator____node( self) /*HashSetIterator::_node*/;
-  variable0 = ((hash___HashSetNode___key_t)CALL(variable0,COLOR_hash___HashNode___key))(variable0) /*HashSetNode::key*/;
-  goto return_label50;
-  return_label50: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-void hash___HashSetIterator___next(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 434, LOCATE_hash___HashSetIterator___next};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_hash;
-  variable0 = ((hash___HashSetIterator___is_ok_t)CALL( self,COLOR_abstract_collection___Iterator___is_ok))( self) /*HashSetIterator::is_ok*/;
-  if (!UNTAG_Bool(variable0)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashSetIterator___next, LOCATE_hash, 436); nit_exit(1);}
-  variable0 = ATTR_hash___HashSetIterator____node( self) /*HashSetIterator::_node*/;
-  variable0 = ((hash___HashNode___next_item_t)CALL(variable0,COLOR_hash___HashNode___next_item))(variable0) /*HashNode::next_item*/;
-  ATTR_hash___HashSetIterator____node( self) /*HashSetIterator::_node*/ = variable0;
-  tracehead = trace.prev;
-  return;
+  return variable[1];
 }
 void hash___HashSetIterator___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 446, LOCATE_hash___HashSetIterator___init};
-  val_t variable0;
-  val_t variable1;
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
-  variable0 =  param0;
+  variable[0] =  self;
+  variable[1] =  param0;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashSetIterator].i]) return;
-  ATTR_hash___HashSetIterator____set( self) /*HashSetIterator::_set*/ =  variable0 /*set*/;
-  variable1 = ((hash___HashCollection___first_item_t)CALL( variable0 /*set*/,COLOR_hash___HashCollection___first_item))( variable0 /*set*/) /*HashCollection::first_item*/;
-  ATTR_hash___HashSetIterator____node( self) /*HashSetIterator::_node*/ = variable1;
+  variable[3] = variable[0];
+  ATTR_hash___HashSetIterator____set(variable[3]) /*HashSetIterator::_set*/ =  variable[1] /*set*/;
+  variable[3] = variable[0];
+  variable[4] = ((hash___HashCollection___first_item_t)CALL( variable[1] /*set*/,COLOR_hash___HashCollection___first_item))( variable[1] /*set*/) /*HashCollection::first_item*/;
+  ATTR_hash___HashSetIterator____node(variable[3]) /*HashSetIterator::_node*/ = variable[4];
+  return_label52: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashSetIterator].i] = 1;
   tracehead = trace.prev;
   return;

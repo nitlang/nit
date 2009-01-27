@@ -27,6 +27,14 @@ extern const classtable_elt_t VFT_MMImplicitInit[];
 
 extern const classtable_elt_t VFT_Variable[];
 
+extern const classtable_elt_t VFT_VarVariable[];
+
+extern const classtable_elt_t VFT_ParamVariable[];
+
+extern const classtable_elt_t VFT_AutoVariable[];
+
+extern const classtable_elt_t VFT_ClosureVariable[];
+
 extern const classtable_elt_t VFT_AbsSyntaxVisitor[];
 extern const char *LOCATE_syntax_base;
 extern const int SFT_syntax_base[];
@@ -102,63 +110,98 @@ extern const int SFT_syntax_base[];
 #define COLOR_syntax_base___Variable___decl SFT_syntax_base[69]
 #define COLOR_syntax_base___Variable___stype SFT_syntax_base[70]
 #define COLOR_syntax_base___Variable___stype__eq SFT_syntax_base[71]
-#define COLOR_syntax_base___Variable___init SFT_syntax_base[72]
-#define ID_AbsSyntaxVisitor SFT_syntax_base[73]
-#define COLOR_AbsSyntaxVisitor SFT_syntax_base[74]
-#define COLOR_syntax_base___AbsSyntaxVisitor____module SFT_syntax_base[75]
-#define COLOR_syntax_base___AbsSyntaxVisitor____local_class SFT_syntax_base[76]
-#define COLOR_syntax_base___AbsSyntaxVisitor____local_property SFT_syntax_base[77]
-#define COLOR_syntax_base___AbsSyntaxVisitor____tc SFT_syntax_base[78]
-#define INIT_TABLE_POS_AbsSyntaxVisitor SFT_syntax_base[79]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_bool SFT_syntax_base[80]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_int SFT_syntax_base[81]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_float SFT_syntax_base[82]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_char SFT_syntax_base[83]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_string SFT_syntax_base[84]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_collection SFT_syntax_base[85]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_array SFT_syntax_base[86]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_discrete SFT_syntax_base[87]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_range SFT_syntax_base[88]
-#define COLOR_syntax_base___AbsSyntaxVisitor___type_none SFT_syntax_base[89]
-#define COLOR_syntax_base___AbsSyntaxVisitor___module SFT_syntax_base[90]
-#define COLOR_syntax_base___AbsSyntaxVisitor___module__eq SFT_syntax_base[91]
-#define COLOR_syntax_base___AbsSyntaxVisitor___local_class SFT_syntax_base[92]
-#define COLOR_syntax_base___AbsSyntaxVisitor___local_class__eq SFT_syntax_base[93]
-#define COLOR_syntax_base___AbsSyntaxVisitor___local_property SFT_syntax_base[94]
-#define COLOR_syntax_base___AbsSyntaxVisitor___local_property__eq SFT_syntax_base[95]
-#define COLOR_syntax_base___AbsSyntaxVisitor___tc SFT_syntax_base[96]
-#define COLOR_syntax_base___AbsSyntaxVisitor___error SFT_syntax_base[97]
-#define COLOR_syntax_base___AbsSyntaxVisitor___warning SFT_syntax_base[98]
-#define COLOR_syntax_base___AbsSyntaxVisitor___locate SFT_syntax_base[99]
-#define COLOR_syntax_base___AbsSyntaxVisitor___check_conform SFT_syntax_base[100]
-#define COLOR_syntax_base___AbsSyntaxVisitor___init SFT_syntax_base[101]
-#define COLOR_syntax_base___PNode___accept_abs_syntax_visitor SFT_syntax_base[102]
-#define COLOR_syntax_base___Token____symbol SFT_syntax_base[103]
-#define COLOR_syntax_base___Token___to_symbol SFT_syntax_base[104]
-#define COLOR_syntax_base___PClassdef___local_class SFT_syntax_base[105]
-#define COLOR_syntax_base___AAttrPropdef___prop SFT_syntax_base[106]
-#define COLOR_syntax_base___AAttrPropdef___readmethod SFT_syntax_base[107]
-#define COLOR_syntax_base___AAttrPropdef___writemethod SFT_syntax_base[108]
-#define COLOR_syntax_base___AMethPropdef___method SFT_syntax_base[109]
-#define COLOR_syntax_base___ATypePropdef___prop SFT_syntax_base[110]
-#define COLOR_syntax_base___PParam___position SFT_syntax_base[111]
-#define COLOR_syntax_base___PParam___variable SFT_syntax_base[112]
-#define COLOR_syntax_base___PType___get_local_class SFT_syntax_base[113]
-#define COLOR_syntax_base___PType___get_stype SFT_syntax_base[114]
-#define COLOR_syntax_base___PType___get_unchecked_stype SFT_syntax_base[115]
-#define COLOR_syntax_base___PType___check_conform SFT_syntax_base[116]
-#define COLOR_syntax_base___AType____stype_cache SFT_syntax_base[117]
-#define COLOR_syntax_base___AType____stype_cached SFT_syntax_base[118]
-#define COLOR_syntax_base___PExpr___stype SFT_syntax_base[119]
-#define COLOR_syntax_base___AVardeclExpr____variable SFT_syntax_base[120]
-#define COLOR_syntax_base___AVardeclExpr___variable SFT_syntax_base[121]
-#define COLOR_syntax_base___AVardeclExpr___variable__eq SFT_syntax_base[122]
-#define COLOR_syntax_base___AForVardeclExpr____variable SFT_syntax_base[123]
-#define COLOR_syntax_base___AForVardeclExpr___variable SFT_syntax_base[124]
-#define COLOR_syntax_base___AForVardeclExpr___variable__eq SFT_syntax_base[125]
-#define COLOR_syntax_base___AVarFormExpr____variable SFT_syntax_base[126]
-#define COLOR_syntax_base___AVarFormExpr___variable SFT_syntax_base[127]
-#define COLOR_syntax_base___AVarFormExpr___variable__eq SFT_syntax_base[128]
+#define COLOR_syntax_base___Variable___kind SFT_syntax_base[72]
+#define COLOR_syntax_base___Variable___init SFT_syntax_base[73]
+#define ID_VarVariable SFT_syntax_base[74]
+#define COLOR_VarVariable SFT_syntax_base[75]
+#define INIT_TABLE_POS_VarVariable SFT_syntax_base[76]
+#define COLOR_syntax_base___VarVariable___init SFT_syntax_base[77]
+#define ID_ParamVariable SFT_syntax_base[78]
+#define COLOR_ParamVariable SFT_syntax_base[79]
+#define INIT_TABLE_POS_ParamVariable SFT_syntax_base[80]
+#define COLOR_syntax_base___ParamVariable___init SFT_syntax_base[81]
+#define ID_AutoVariable SFT_syntax_base[82]
+#define COLOR_AutoVariable SFT_syntax_base[83]
+#define INIT_TABLE_POS_AutoVariable SFT_syntax_base[84]
+#define COLOR_syntax_base___AutoVariable___init SFT_syntax_base[85]
+#define ID_ClosureVariable SFT_syntax_base[86]
+#define COLOR_ClosureVariable SFT_syntax_base[87]
+#define COLOR_syntax_base___ClosureVariable____closure SFT_syntax_base[88]
+#define INIT_TABLE_POS_ClosureVariable SFT_syntax_base[89]
+#define COLOR_syntax_base___ClosureVariable___closure SFT_syntax_base[90]
+#define COLOR_syntax_base___ClosureVariable___init SFT_syntax_base[91]
+#define ID_AbsSyntaxVisitor SFT_syntax_base[92]
+#define COLOR_AbsSyntaxVisitor SFT_syntax_base[93]
+#define COLOR_syntax_base___AbsSyntaxVisitor____module SFT_syntax_base[94]
+#define COLOR_syntax_base___AbsSyntaxVisitor____local_class SFT_syntax_base[95]
+#define COLOR_syntax_base___AbsSyntaxVisitor____local_property SFT_syntax_base[96]
+#define COLOR_syntax_base___AbsSyntaxVisitor____tc SFT_syntax_base[97]
+#define INIT_TABLE_POS_AbsSyntaxVisitor SFT_syntax_base[98]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_bool SFT_syntax_base[99]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_int SFT_syntax_base[100]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_float SFT_syntax_base[101]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_char SFT_syntax_base[102]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_string SFT_syntax_base[103]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_collection SFT_syntax_base[104]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_array SFT_syntax_base[105]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_discrete SFT_syntax_base[106]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_range SFT_syntax_base[107]
+#define COLOR_syntax_base___AbsSyntaxVisitor___type_none SFT_syntax_base[108]
+#define COLOR_syntax_base___AbsSyntaxVisitor___module SFT_syntax_base[109]
+#define COLOR_syntax_base___AbsSyntaxVisitor___module__eq SFT_syntax_base[110]
+#define COLOR_syntax_base___AbsSyntaxVisitor___local_class SFT_syntax_base[111]
+#define COLOR_syntax_base___AbsSyntaxVisitor___local_class__eq SFT_syntax_base[112]
+#define COLOR_syntax_base___AbsSyntaxVisitor___local_property SFT_syntax_base[113]
+#define COLOR_syntax_base___AbsSyntaxVisitor___local_property__eq SFT_syntax_base[114]
+#define COLOR_syntax_base___AbsSyntaxVisitor___tc SFT_syntax_base[115]
+#define COLOR_syntax_base___AbsSyntaxVisitor___error SFT_syntax_base[116]
+#define COLOR_syntax_base___AbsSyntaxVisitor___warning SFT_syntax_base[117]
+#define COLOR_syntax_base___AbsSyntaxVisitor___locate SFT_syntax_base[118]
+#define COLOR_syntax_base___AbsSyntaxVisitor___check_conform SFT_syntax_base[119]
+#define COLOR_syntax_base___AbsSyntaxVisitor___check_expr SFT_syntax_base[120]
+#define COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr SFT_syntax_base[121]
+#define COLOR_syntax_base___AbsSyntaxVisitor___init SFT_syntax_base[122]
+#define COLOR_syntax_base___PNode___accept_abs_syntax_visitor SFT_syntax_base[123]
+#define COLOR_syntax_base___Token____symbol SFT_syntax_base[124]
+#define COLOR_syntax_base___Token___to_symbol SFT_syntax_base[125]
+#define COLOR_syntax_base___PClassdef___local_class SFT_syntax_base[126]
+#define COLOR_syntax_base___AAttrPropdef___prop SFT_syntax_base[127]
+#define COLOR_syntax_base___AAttrPropdef___readmethod SFT_syntax_base[128]
+#define COLOR_syntax_base___AAttrPropdef___writemethod SFT_syntax_base[129]
+#define COLOR_syntax_base___AMethPropdef___method SFT_syntax_base[130]
+#define COLOR_syntax_base___AMethPropdef___self_var SFT_syntax_base[131]
+#define COLOR_syntax_base___ATypePropdef___prop SFT_syntax_base[132]
+#define COLOR_syntax_base___PParam___position SFT_syntax_base[133]
+#define COLOR_syntax_base___PParam___variable SFT_syntax_base[134]
+#define COLOR_syntax_base___PClosureDecl___variable SFT_syntax_base[135]
+#define COLOR_syntax_base___PType___get_local_class SFT_syntax_base[136]
+#define COLOR_syntax_base___PType___get_stype SFT_syntax_base[137]
+#define COLOR_syntax_base___PType___get_unchecked_stype SFT_syntax_base[138]
+#define COLOR_syntax_base___PType___check_conform SFT_syntax_base[139]
+#define COLOR_syntax_base___AType____stype_cache SFT_syntax_base[140]
+#define COLOR_syntax_base___AType____stype_cached SFT_syntax_base[141]
+#define COLOR_syntax_base___PExpr___stype SFT_syntax_base[142]
+#define COLOR_syntax_base___AVardeclExpr____variable SFT_syntax_base[143]
+#define COLOR_syntax_base___AVardeclExpr___variable SFT_syntax_base[144]
+#define COLOR_syntax_base___AVardeclExpr___variable__eq SFT_syntax_base[145]
+#define COLOR_syntax_base___AForVardeclExpr____variable SFT_syntax_base[146]
+#define COLOR_syntax_base___AForVardeclExpr___variable SFT_syntax_base[147]
+#define COLOR_syntax_base___AForVardeclExpr___variable__eq SFT_syntax_base[148]
+#define COLOR_syntax_base___ASelfExpr____variable SFT_syntax_base[149]
+#define COLOR_syntax_base___ASelfExpr___variable SFT_syntax_base[150]
+#define COLOR_syntax_base___ASelfExpr___variable__eq SFT_syntax_base[151]
+#define COLOR_syntax_base___AVarFormExpr____variable SFT_syntax_base[152]
+#define COLOR_syntax_base___AVarFormExpr___variable SFT_syntax_base[153]
+#define COLOR_syntax_base___AVarFormExpr___variable__eq SFT_syntax_base[154]
+#define COLOR_syntax_base___AClosureCallExpr____variable SFT_syntax_base[155]
+#define COLOR_syntax_base___AClosureCallExpr___variable SFT_syntax_base[156]
+#define COLOR_syntax_base___AClosureCallExpr___variable__eq SFT_syntax_base[157]
+#define COLOR_syntax_base___PClosureDef____closure SFT_syntax_base[158]
+#define COLOR_syntax_base___PClosureDef____variables SFT_syntax_base[159]
+#define COLOR_syntax_base___PClosureDef___closure SFT_syntax_base[160]
+#define COLOR_syntax_base___PClosureDef___closure__eq SFT_syntax_base[161]
+#define COLOR_syntax_base___PClosureDef___variables SFT_syntax_base[162]
+#define COLOR_syntax_base___PClosureDef___variables__eq SFT_syntax_base[163]
 #define ATTR_syntax_base___MMSrcModule____node(recv) ATTR(recv, COLOR_syntax_base___MMSrcModule____node)
 typedef val_t (* syntax_base___MMSrcModule___node_t)(val_t  self);
 val_t syntax_base___MMSrcModule___node(val_t  self);
@@ -169,8 +212,9 @@ val_t syntax_base___MMSrcModule___src_local_classes(val_t  self);
 #define LOCATE_syntax_base___MMSrcModule___src_local_classes "syntax_base::MMSrcModule::src_local_classes"
 typedef void (* syntax_base___MMSrcModule___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
 void syntax_base___MMSrcModule___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-val_t NEW_syntax_base___MMSrcModule___init(val_t  param0, val_t  param1, val_t  param2, val_t  param3);
 #define LOCATE_syntax_base___MMSrcModule___init "syntax_base::MMSrcModule::init"
+val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_MMGlobalClass_abstractmetamodel___MMGlobalClass___init(val_t p0);
 typedef val_t (* syntax_base___MMGlobalClass___check_visibility_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 val_t syntax_base___MMGlobalClass___check_visibility(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_syntax_base___MMGlobalClass___check_visibility "syntax_base::MMGlobalClass::check_visibility"
@@ -191,60 +235,63 @@ val_t syntax_base___MMSrcLocalClass___src_local_properties(val_t  self);
 #define LOCATE_syntax_base___MMSrcLocalClass___src_local_properties "syntax_base::MMSrcLocalClass::src_local_properties"
 typedef void (* syntax_base___MMSrcLocalClass___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 void syntax_base___MMSrcLocalClass___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_syntax_base___MMSrcLocalClass___init(val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_syntax_base___MMSrcLocalClass___init "syntax_base::MMSrcLocalClass::init"
+val_t NEW_MMSrcLocalClass_syntax_base___MMSrcLocalClass___init(val_t p0, val_t p1, val_t p2);
+val_t NEW_MMGlobalProperty_abstractmetamodel___MMGlobalProperty___init(val_t p0);
 typedef val_t (* syntax_base___MMGlobalProperty___check_visibility_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
 val_t syntax_base___MMGlobalProperty___check_visibility(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
 #define LOCATE_syntax_base___MMGlobalProperty___check_visibility "syntax_base::MMGlobalProperty::check_visibility"
+val_t NEW_MMLocalProperty_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
 typedef val_t (* syntax_base___MMLocalProperty___node_t)(val_t  self);
 val_t syntax_base___MMLocalProperty___node(val_t  self);
 #define LOCATE_syntax_base___MMLocalProperty___node "syntax_base::MMLocalProperty::node"
 typedef val_t (* syntax_base___MMLocalProperty___is_init_t)(val_t  self);
 val_t syntax_base___MMLocalProperty___is_init(val_t  self);
 #define LOCATE_syntax_base___MMLocalProperty___is_init "syntax_base::MMLocalProperty::is_init"
-#define ATTR_syntax_base___MMSrcAttribute____node(recv) ATTR(recv, COLOR_syntax_base___MMSrcAttribute____node)
 typedef val_t (* syntax_base___MMSrcAttribute___node_t)(val_t  self);
 val_t syntax_base___MMSrcAttribute___node(val_t  self);
 #define LOCATE_syntax_base___MMSrcAttribute___node "syntax_base::MMSrcAttribute::(syntax_base::MMLocalProperty::node)"
+#define ATTR_syntax_base___MMSrcAttribute____node(recv) ATTR(recv, COLOR_syntax_base___MMSrcAttribute____node)
 typedef void (* syntax_base___MMSrcAttribute___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 void syntax_base___MMSrcAttribute___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_syntax_base___MMSrcAttribute___init(val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_syntax_base___MMSrcAttribute___init "syntax_base::MMSrcAttribute::init"
-#define ATTR_syntax_base___MMAttrImplementationMethod____node(recv) ATTR(recv, COLOR_syntax_base___MMAttrImplementationMethod____node)
+val_t NEW_MMSrcAttribute_syntax_base___MMSrcAttribute___init(val_t p0, val_t p1, val_t p2);
+val_t NEW_MMSrcMethod_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
 typedef val_t (* syntax_base___MMAttrImplementationMethod___node_t)(val_t  self);
 val_t syntax_base___MMAttrImplementationMethod___node(val_t  self);
 #define LOCATE_syntax_base___MMAttrImplementationMethod___node "syntax_base::MMAttrImplementationMethod::(syntax_base::MMLocalProperty::node)"
+#define ATTR_syntax_base___MMAttrImplementationMethod____node(recv) ATTR(recv, COLOR_syntax_base___MMAttrImplementationMethod____node)
 typedef void (* syntax_base___MMAttrImplementationMethod___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 void syntax_base___MMAttrImplementationMethod___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_syntax_base___MMAttrImplementationMethod___init(val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_syntax_base___MMAttrImplementationMethod___init "syntax_base::MMAttrImplementationMethod::init"
+val_t NEW_MMAttrImplementationMethod_syntax_base___MMAttrImplementationMethod___init(val_t p0, val_t p1, val_t p2);
 typedef void (* syntax_base___MMReadImplementationMethod___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 void syntax_base___MMReadImplementationMethod___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_syntax_base___MMReadImplementationMethod___init(val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_syntax_base___MMReadImplementationMethod___init "syntax_base::MMReadImplementationMethod::init"
+val_t NEW_MMReadImplementationMethod_syntax_base___MMReadImplementationMethod___init(val_t p0, val_t p1, val_t p2);
 typedef void (* syntax_base___MMWriteImplementationMethod___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 void syntax_base___MMWriteImplementationMethod___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_syntax_base___MMWriteImplementationMethod___init(val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_syntax_base___MMWriteImplementationMethod___init "syntax_base::MMWriteImplementationMethod::init"
+val_t NEW_MMWriteImplementationMethod_syntax_base___MMWriteImplementationMethod___init(val_t p0, val_t p1, val_t p2);
+typedef val_t (* syntax_base___MMMethSrcMethod___node_t)(val_t  self);
+val_t syntax_base___MMMethSrcMethod___node(val_t  self);
+#define LOCATE_syntax_base___MMMethSrcMethod___node "syntax_base::MMMethSrcMethod::(syntax_base::MMLocalProperty::node)"
 typedef val_t (* syntax_base___MMMethSrcMethod___is_init_t)(val_t  self);
 val_t syntax_base___MMMethSrcMethod___is_init(val_t  self);
 #define LOCATE_syntax_base___MMMethSrcMethod___is_init "syntax_base::MMMethSrcMethod::(syntax_base::MMLocalProperty::is_init)"
 #define ATTR_syntax_base___MMMethSrcMethod____node(recv) ATTR(recv, COLOR_syntax_base___MMMethSrcMethod____node)
-typedef val_t (* syntax_base___MMMethSrcMethod___node_t)(val_t  self);
-val_t syntax_base___MMMethSrcMethod___node(val_t  self);
-#define LOCATE_syntax_base___MMMethSrcMethod___node "syntax_base::MMMethSrcMethod::(syntax_base::MMLocalProperty::node)"
 typedef void (* syntax_base___MMMethSrcMethod___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 void syntax_base___MMMethSrcMethod___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_syntax_base___MMMethSrcMethod___init(val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_syntax_base___MMMethSrcMethod___init "syntax_base::MMMethSrcMethod::init"
-#define ATTR_syntax_base___MMSrcTypeProperty____node(recv) ATTR(recv, COLOR_syntax_base___MMSrcTypeProperty____node)
+val_t NEW_MMMethSrcMethod_syntax_base___MMMethSrcMethod___init(val_t p0, val_t p1, val_t p2);
 typedef val_t (* syntax_base___MMSrcTypeProperty___node_t)(val_t  self);
 val_t syntax_base___MMSrcTypeProperty___node(val_t  self);
 #define LOCATE_syntax_base___MMSrcTypeProperty___node "syntax_base::MMSrcTypeProperty::(syntax_base::MMLocalProperty::node)"
+#define ATTR_syntax_base___MMSrcTypeProperty____node(recv) ATTR(recv, COLOR_syntax_base___MMSrcTypeProperty____node)
 typedef void (* syntax_base___MMSrcTypeProperty___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 void syntax_base___MMSrcTypeProperty___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_syntax_base___MMSrcTypeProperty___init(val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_syntax_base___MMSrcTypeProperty___init "syntax_base::MMSrcTypeProperty::init"
+val_t NEW_MMSrcTypeProperty_syntax_base___MMSrcTypeProperty___init(val_t p0, val_t p1, val_t p2);
 typedef val_t (* syntax_base___MMImplicitInit___is_init_t)(val_t  self);
 val_t syntax_base___MMImplicitInit___is_init(val_t  self);
 #define LOCATE_syntax_base___MMImplicitInit___is_init "syntax_base::MMImplicitInit::(syntax_base::MMLocalProperty::is_init)"
@@ -258,8 +305,11 @@ val_t syntax_base___MMImplicitInit___super_inits(val_t  self);
 #define LOCATE_syntax_base___MMImplicitInit___super_inits "syntax_base::MMImplicitInit::super_inits"
 typedef void (* syntax_base___MMImplicitInit___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 void syntax_base___MMImplicitInit___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_syntax_base___MMImplicitInit___init(val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_syntax_base___MMImplicitInit___init "syntax_base::MMImplicitInit::init"
+val_t NEW_MMImplicitInit_syntax_base___MMImplicitInit___init(val_t p0, val_t p1, val_t p2);
+typedef val_t (* syntax_base___Variable___to_s_t)(val_t  self);
+val_t syntax_base___Variable___to_s(val_t  self);
+#define LOCATE_syntax_base___Variable___to_s "syntax_base::Variable::(string::Object::to_s)"
 #define ATTR_syntax_base___Variable____name(recv) ATTR(recv, COLOR_syntax_base___Variable____name)
 typedef val_t (* syntax_base___Variable___name_t)(val_t  self);
 val_t syntax_base___Variable___name(val_t  self);
@@ -275,13 +325,45 @@ val_t syntax_base___Variable___stype(val_t  self);
 typedef void (* syntax_base___Variable___stype__eq_t)(val_t  self, val_t  param0);
 void syntax_base___Variable___stype__eq(val_t  self, val_t  param0);
 #define LOCATE_syntax_base___Variable___stype__eq "syntax_base::Variable::stype="
-typedef val_t (* syntax_base___Variable___to_s_t)(val_t  self);
-val_t syntax_base___Variable___to_s(val_t  self);
-#define LOCATE_syntax_base___Variable___to_s "syntax_base::Variable::(string::Object::to_s)"
+typedef val_t (* syntax_base___Variable___kind_t)(val_t  self);
+val_t syntax_base___Variable___kind(val_t  self);
+#define LOCATE_syntax_base___Variable___kind "syntax_base::Variable::kind"
 typedef void (* syntax_base___Variable___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void syntax_base___Variable___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_syntax_base___Variable___init(val_t  param0, val_t  param1);
 #define LOCATE_syntax_base___Variable___init "syntax_base::Variable::init"
+val_t NEW_Variable_syntax_base___Variable___init(val_t p0, val_t p1);
+typedef val_t (* syntax_base___VarVariable___kind_t)(val_t  self);
+val_t syntax_base___VarVariable___kind(val_t  self);
+#define LOCATE_syntax_base___VarVariable___kind "syntax_base::VarVariable::(syntax_base::Variable::kind)"
+typedef void (* syntax_base___VarVariable___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void syntax_base___VarVariable___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_syntax_base___VarVariable___init "syntax_base::VarVariable::init"
+val_t NEW_VarVariable_syntax_base___VarVariable___init(val_t p0, val_t p1);
+typedef val_t (* syntax_base___ParamVariable___kind_t)(val_t  self);
+val_t syntax_base___ParamVariable___kind(val_t  self);
+#define LOCATE_syntax_base___ParamVariable___kind "syntax_base::ParamVariable::(syntax_base::Variable::kind)"
+typedef void (* syntax_base___ParamVariable___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void syntax_base___ParamVariable___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_syntax_base___ParamVariable___init "syntax_base::ParamVariable::init"
+val_t NEW_ParamVariable_syntax_base___ParamVariable___init(val_t p0, val_t p1);
+typedef val_t (* syntax_base___AutoVariable___kind_t)(val_t  self);
+val_t syntax_base___AutoVariable___kind(val_t  self);
+#define LOCATE_syntax_base___AutoVariable___kind "syntax_base::AutoVariable::(syntax_base::Variable::kind)"
+typedef void (* syntax_base___AutoVariable___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void syntax_base___AutoVariable___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_syntax_base___AutoVariable___init "syntax_base::AutoVariable::init"
+val_t NEW_AutoVariable_syntax_base___AutoVariable___init(val_t p0, val_t p1);
+typedef val_t (* syntax_base___ClosureVariable___kind_t)(val_t  self);
+val_t syntax_base___ClosureVariable___kind(val_t  self);
+#define LOCATE_syntax_base___ClosureVariable___kind "syntax_base::ClosureVariable::(syntax_base::Variable::kind)"
+#define ATTR_syntax_base___ClosureVariable____closure(recv) ATTR(recv, COLOR_syntax_base___ClosureVariable____closure)
+typedef val_t (* syntax_base___ClosureVariable___closure_t)(val_t  self);
+val_t syntax_base___ClosureVariable___closure(val_t  self);
+#define LOCATE_syntax_base___ClosureVariable___closure "syntax_base::ClosureVariable::closure"
+typedef void (* syntax_base___ClosureVariable___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void syntax_base___ClosureVariable___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_syntax_base___ClosureVariable___init "syntax_base::ClosureVariable::init"
+val_t NEW_ClosureVariable_syntax_base___ClosureVariable___init(val_t p0, val_t p1, val_t p2);
 typedef val_t (* syntax_base___AbsSyntaxVisitor___type_bool_t)(val_t  self);
 val_t syntax_base___AbsSyntaxVisitor___type_bool(val_t  self);
 #define LOCATE_syntax_base___AbsSyntaxVisitor___type_bool "syntax_base::AbsSyntaxVisitor::type_bool"
@@ -349,20 +431,32 @@ val_t syntax_base___AbsSyntaxVisitor___locate(val_t  self, val_t  param0);
 typedef val_t (* syntax_base___AbsSyntaxVisitor___check_conform_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 val_t syntax_base___AbsSyntaxVisitor___check_conform(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_syntax_base___AbsSyntaxVisitor___check_conform "syntax_base::AbsSyntaxVisitor::check_conform"
+typedef val_t (* syntax_base___AbsSyntaxVisitor___check_expr_t)(val_t  self, val_t  param0);
+val_t syntax_base___AbsSyntaxVisitor___check_expr(val_t  self, val_t  param0);
+#define LOCATE_syntax_base___AbsSyntaxVisitor___check_expr "syntax_base::AbsSyntaxVisitor::check_expr"
+typedef val_t (* syntax_base___AbsSyntaxVisitor___check_conform_expr_t)(val_t  self, val_t  param0, val_t  param1);
+val_t syntax_base___AbsSyntaxVisitor___check_conform_expr(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_syntax_base___AbsSyntaxVisitor___check_conform_expr "syntax_base::AbsSyntaxVisitor::check_conform_expr"
 typedef void (* syntax_base___AbsSyntaxVisitor___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void syntax_base___AbsSyntaxVisitor___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_syntax_base___AbsSyntaxVisitor___init(val_t  param0, val_t  param1);
 #define LOCATE_syntax_base___AbsSyntaxVisitor___init "syntax_base::AbsSyntaxVisitor::init"
+val_t NEW_AbsSyntaxVisitor_syntax_base___AbsSyntaxVisitor___init(val_t p0, val_t p1);
+val_t NEW_PNode_parser_nodes___PNode___init();
 typedef void (* syntax_base___PNode___accept_abs_syntax_visitor_t)(val_t  self, val_t  param0);
 void syntax_base___PNode___accept_abs_syntax_visitor(val_t  self, val_t  param0);
 #define LOCATE_syntax_base___PNode___accept_abs_syntax_visitor "syntax_base::PNode::accept_abs_syntax_visitor"
+val_t NEW_Token_parser_nodes___PNode___init();
 #define ATTR_syntax_base___Token____symbol(recv) ATTR(recv, COLOR_syntax_base___Token____symbol)
 typedef val_t (* syntax_base___Token___to_symbol_t)(val_t  self);
 val_t syntax_base___Token___to_symbol(val_t  self);
 #define LOCATE_syntax_base___Token___to_symbol "syntax_base::Token::to_symbol"
+val_t NEW_PClassdef_parser_nodes___PNode___init();
 typedef val_t (* syntax_base___PClassdef___local_class_t)(val_t  self);
 val_t syntax_base___PClassdef___local_class(val_t  self);
 #define LOCATE_syntax_base___PClassdef___local_class "syntax_base::PClassdef::local_class"
+val_t NEW_AAttrPropdef_parser_nodes___PNode___init();
+val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___empty_init();
+val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8);
 typedef val_t (* syntax_base___AAttrPropdef___prop_t)(val_t  self);
 val_t syntax_base___AAttrPropdef___prop(val_t  self);
 #define LOCATE_syntax_base___AAttrPropdef___prop "syntax_base::AAttrPropdef::prop"
@@ -372,18 +466,33 @@ val_t syntax_base___AAttrPropdef___readmethod(val_t  self);
 typedef val_t (* syntax_base___AAttrPropdef___writemethod_t)(val_t  self);
 val_t syntax_base___AAttrPropdef___writemethod(val_t  self);
 #define LOCATE_syntax_base___AAttrPropdef___writemethod "syntax_base::AAttrPropdef::writemethod"
+val_t NEW_AMethPropdef_parser_nodes___PNode___init();
+val_t NEW_AMethPropdef_parser_prod___AMethPropdef___empty_init();
+val_t NEW_AMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 typedef val_t (* syntax_base___AMethPropdef___method_t)(val_t  self);
 val_t syntax_base___AMethPropdef___method(val_t  self);
 #define LOCATE_syntax_base___AMethPropdef___method "syntax_base::AMethPropdef::method"
+typedef val_t (* syntax_base___AMethPropdef___self_var_t)(val_t  self);
+val_t syntax_base___AMethPropdef___self_var(val_t  self);
+#define LOCATE_syntax_base___AMethPropdef___self_var "syntax_base::AMethPropdef::self_var"
+val_t NEW_ATypePropdef_parser_nodes___PNode___init();
+val_t NEW_ATypePropdef_parser_prod___ATypePropdef___empty_init();
+val_t NEW_ATypePropdef_parser_prod___ATypePropdef___init_atypepropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
 typedef val_t (* syntax_base___ATypePropdef___prop_t)(val_t  self);
 val_t syntax_base___ATypePropdef___prop(val_t  self);
 #define LOCATE_syntax_base___ATypePropdef___prop "syntax_base::ATypePropdef::prop"
+val_t NEW_PParam_parser_nodes___PNode___init();
 typedef val_t (* syntax_base___PParam___position_t)(val_t  self);
 val_t syntax_base___PParam___position(val_t  self);
 #define LOCATE_syntax_base___PParam___position "syntax_base::PParam::position"
 typedef val_t (* syntax_base___PParam___variable_t)(val_t  self);
 val_t syntax_base___PParam___variable(val_t  self);
 #define LOCATE_syntax_base___PParam___variable "syntax_base::PParam::variable"
+val_t NEW_PClosureDecl_parser_nodes___PNode___init();
+typedef val_t (* syntax_base___PClosureDecl___variable_t)(val_t  self);
+val_t syntax_base___PClosureDecl___variable(val_t  self);
+#define LOCATE_syntax_base___PClosureDecl___variable "syntax_base::PClosureDecl::variable"
+val_t NEW_PType_parser_nodes___PNode___init();
 typedef val_t (* syntax_base___PType___get_local_class_t)(val_t  self, val_t  param0);
 val_t syntax_base___PType___get_local_class(val_t  self, val_t  param0);
 #define LOCATE_syntax_base___PType___get_local_class "syntax_base::PType::get_local_class"
@@ -396,23 +505,30 @@ val_t syntax_base___PType___get_unchecked_stype(val_t  self, val_t  param0);
 typedef void (* syntax_base___PType___check_conform_t)(val_t  self, val_t  param0);
 void syntax_base___PType___check_conform(val_t  self, val_t  param0);
 #define LOCATE_syntax_base___PType___check_conform "syntax_base::PType::check_conform"
-#define ATTR_syntax_base___AType____stype_cache(recv) ATTR(recv, COLOR_syntax_base___AType____stype_cache)
-#define ATTR_syntax_base___AType____stype_cached(recv) ATTR(recv, COLOR_syntax_base___AType____stype_cached)
+val_t NEW_AType_parser_nodes___PNode___init();
+val_t NEW_AType_parser_prod___AType___empty_init();
+val_t NEW_AType_parser_prod___AType___init_atype(val_t p0, val_t p1);
 typedef val_t (* syntax_base___AType___get_local_class_t)(val_t  self, val_t  param0);
 val_t syntax_base___AType___get_local_class(val_t  self, val_t  param0);
 #define LOCATE_syntax_base___AType___get_local_class "syntax_base::AType::(syntax_base::PType::get_local_class)"
-typedef val_t (* syntax_base___AType___get_unchecked_stype_t)(val_t  self, val_t  param0);
-val_t syntax_base___AType___get_unchecked_stype(val_t  self, val_t  param0);
-#define LOCATE_syntax_base___AType___get_unchecked_stype "syntax_base::AType::(syntax_base::PType::get_unchecked_stype)"
 typedef val_t (* syntax_base___AType___get_stype_t)(val_t  self, val_t  param0);
 val_t syntax_base___AType___get_stype(val_t  self, val_t  param0);
 #define LOCATE_syntax_base___AType___get_stype "syntax_base::AType::(syntax_base::PType::get_stype)"
+typedef val_t (* syntax_base___AType___get_unchecked_stype_t)(val_t  self, val_t  param0);
+val_t syntax_base___AType___get_unchecked_stype(val_t  self, val_t  param0);
+#define LOCATE_syntax_base___AType___get_unchecked_stype "syntax_base::AType::(syntax_base::PType::get_unchecked_stype)"
 typedef void (* syntax_base___AType___check_conform_t)(val_t  self, val_t  param0);
 void syntax_base___AType___check_conform(val_t  self, val_t  param0);
 #define LOCATE_syntax_base___AType___check_conform "syntax_base::AType::(syntax_base::PType::check_conform)"
+#define ATTR_syntax_base___AType____stype_cache(recv) ATTR(recv, COLOR_syntax_base___AType____stype_cache)
+#define ATTR_syntax_base___AType____stype_cached(recv) ATTR(recv, COLOR_syntax_base___AType____stype_cached)
+val_t NEW_PExpr_parser_nodes___PNode___init();
 typedef val_t (* syntax_base___PExpr___stype_t)(val_t  self);
 val_t syntax_base___PExpr___stype(val_t  self);
 #define LOCATE_syntax_base___PExpr___stype "syntax_base::PExpr::stype"
+val_t NEW_AVardeclExpr_parser_nodes___PNode___init();
+val_t NEW_AVardeclExpr_parser_prod___AVardeclExpr___empty_init();
+val_t NEW_AVardeclExpr_parser_prod___AVardeclExpr___init_avardeclexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 #define ATTR_syntax_base___AVardeclExpr____variable(recv) ATTR(recv, COLOR_syntax_base___AVardeclExpr____variable)
 typedef val_t (* syntax_base___AVardeclExpr___variable_t)(val_t  self);
 val_t syntax_base___AVardeclExpr___variable(val_t  self);
@@ -420,6 +536,9 @@ val_t syntax_base___AVardeclExpr___variable(val_t  self);
 typedef void (* syntax_base___AVardeclExpr___variable__eq_t)(val_t  self, val_t  param0);
 void syntax_base___AVardeclExpr___variable__eq(val_t  self, val_t  param0);
 #define LOCATE_syntax_base___AVardeclExpr___variable__eq "syntax_base::AVardeclExpr::variable="
+val_t NEW_AForVardeclExpr_parser_nodes___PNode___init();
+val_t NEW_AForVardeclExpr_parser_prod___AForVardeclExpr___empty_init();
+val_t NEW_AForVardeclExpr_parser_prod___AForVardeclExpr___init_aforvardeclexpr(val_t p0, val_t p1, val_t p2);
 #define ATTR_syntax_base___AForVardeclExpr____variable(recv) ATTR(recv, COLOR_syntax_base___AForVardeclExpr____variable)
 typedef val_t (* syntax_base___AForVardeclExpr___variable_t)(val_t  self);
 val_t syntax_base___AForVardeclExpr___variable(val_t  self);
@@ -427,6 +546,17 @@ val_t syntax_base___AForVardeclExpr___variable(val_t  self);
 typedef void (* syntax_base___AForVardeclExpr___variable__eq_t)(val_t  self, val_t  param0);
 void syntax_base___AForVardeclExpr___variable__eq(val_t  self, val_t  param0);
 #define LOCATE_syntax_base___AForVardeclExpr___variable__eq "syntax_base::AForVardeclExpr::variable="
+val_t NEW_ASelfExpr_parser_nodes___PNode___init();
+val_t NEW_ASelfExpr_parser_prod___ASelfExpr___empty_init();
+val_t NEW_ASelfExpr_parser_prod___ASelfExpr___init_aselfexpr(val_t p0);
+#define ATTR_syntax_base___ASelfExpr____variable(recv) ATTR(recv, COLOR_syntax_base___ASelfExpr____variable)
+typedef val_t (* syntax_base___ASelfExpr___variable_t)(val_t  self);
+val_t syntax_base___ASelfExpr___variable(val_t  self);
+#define LOCATE_syntax_base___ASelfExpr___variable "syntax_base::ASelfExpr::variable"
+typedef void (* syntax_base___ASelfExpr___variable__eq_t)(val_t  self, val_t  param0);
+void syntax_base___ASelfExpr___variable__eq(val_t  self, val_t  param0);
+#define LOCATE_syntax_base___ASelfExpr___variable__eq "syntax_base::ASelfExpr::variable="
+val_t NEW_AVarFormExpr_parser_nodes___PNode___init();
 #define ATTR_syntax_base___AVarFormExpr____variable(recv) ATTR(recv, COLOR_syntax_base___AVarFormExpr____variable)
 typedef val_t (* syntax_base___AVarFormExpr___variable_t)(val_t  self);
 val_t syntax_base___AVarFormExpr___variable(val_t  self);
@@ -434,4 +564,27 @@ val_t syntax_base___AVarFormExpr___variable(val_t  self);
 typedef void (* syntax_base___AVarFormExpr___variable__eq_t)(val_t  self, val_t  param0);
 void syntax_base___AVarFormExpr___variable__eq(val_t  self, val_t  param0);
 #define LOCATE_syntax_base___AVarFormExpr___variable__eq "syntax_base::AVarFormExpr::variable="
+val_t NEW_AClosureCallExpr_parser_nodes___AClosureCallExpr___init(val_t p0, val_t p1, val_t p2);
+#define ATTR_syntax_base___AClosureCallExpr____variable(recv) ATTR(recv, COLOR_syntax_base___AClosureCallExpr____variable)
+typedef val_t (* syntax_base___AClosureCallExpr___variable_t)(val_t  self);
+val_t syntax_base___AClosureCallExpr___variable(val_t  self);
+#define LOCATE_syntax_base___AClosureCallExpr___variable "syntax_base::AClosureCallExpr::variable"
+typedef void (* syntax_base___AClosureCallExpr___variable__eq_t)(val_t  self, val_t  param0);
+void syntax_base___AClosureCallExpr___variable__eq(val_t  self, val_t  param0);
+#define LOCATE_syntax_base___AClosureCallExpr___variable__eq "syntax_base::AClosureCallExpr::variable="
+val_t NEW_PClosureDef_parser_nodes___PNode___init();
+#define ATTR_syntax_base___PClosureDef____closure(recv) ATTR(recv, COLOR_syntax_base___PClosureDef____closure)
+typedef val_t (* syntax_base___PClosureDef___closure_t)(val_t  self);
+val_t syntax_base___PClosureDef___closure(val_t  self);
+#define LOCATE_syntax_base___PClosureDef___closure "syntax_base::PClosureDef::closure"
+typedef void (* syntax_base___PClosureDef___closure__eq_t)(val_t  self, val_t  param0);
+void syntax_base___PClosureDef___closure__eq(val_t  self, val_t  param0);
+#define LOCATE_syntax_base___PClosureDef___closure__eq "syntax_base::PClosureDef::closure="
+#define ATTR_syntax_base___PClosureDef____variables(recv) ATTR(recv, COLOR_syntax_base___PClosureDef____variables)
+typedef val_t (* syntax_base___PClosureDef___variables_t)(val_t  self);
+val_t syntax_base___PClosureDef___variables(val_t  self);
+#define LOCATE_syntax_base___PClosureDef___variables "syntax_base::PClosureDef::variables"
+typedef void (* syntax_base___PClosureDef___variables__eq_t)(val_t  self, val_t  param0);
+void syntax_base___PClosureDef___variables__eq(val_t  self, val_t  param0);
+#define LOCATE_syntax_base___PClosureDef___variables__eq "syntax_base::PClosureDef::variables="
 #endif

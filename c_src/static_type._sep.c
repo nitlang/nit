@@ -2,44 +2,58 @@
 #include "static_type._sep.h"
 val_t static_type___MMLocalClass___get_type(val_t  self) {
   struct trace_t trace = {NULL, NULL, 27, LOCATE_static_type___MMLocalClass___get_type};
-  val_t variable0;
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 = ATTR_static_type___MMLocalClass____base_type_cache( self) /*MMLocalClass::_base_type_cache*/;
-  variable0 = TAG_Bool((variable0 ==  NIT_NULL /*null*/) || ((variable0 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable0, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))(variable0,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable0)) { /*if*/
-    variable0 = NEW_MMTypeSimpleClass_static_type___MMTypeSimpleClass___init( self); /*new MMTypeSimpleClass*/
-    ATTR_static_type___MMLocalClass____base_type_cache( self) /*MMLocalClass::_base_type_cache*/ = variable0;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_static_type___MMLocalClass____base_type_cache(variable[2]) /*MMLocalClass::_base_type_cache*/;
+  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[2])) { /*if*/
+    variable[2] = variable[0];
+    variable[3] = variable[0];
+    variable[4] = NEW_MMTypeSimpleClass_static_type___MMTypeSimpleClass___init(variable[3]); /*new MMTypeSimpleClass*/
+    variable[3] = variable[4];
+    ATTR_static_type___MMLocalClass____base_type_cache(variable[2]) /*MMLocalClass::_base_type_cache*/ = variable[3];
   }
-  variable0 = ATTR_static_type___MMLocalClass____base_type_cache( self) /*MMLocalClass::_base_type_cache*/;
+  variable[2] = variable[0];
+  variable[2] = ATTR_static_type___MMLocalClass____base_type_cache(variable[2]) /*MMLocalClass::_base_type_cache*/;
+  variable[1] = variable[2];
   goto return_label0;
   return_label0: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 void static_type___MMLocalClass___add_ancestor(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 34, LOCATE_static_type___MMLocalClass___add_ancestor};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 =  param0;
-  variable1 = ATTR_static_type___MMLocalClass____ancestors( self) /*MMLocalClass::_ancestors*/;
-  variable2 = ((static_type___MMAncestor___local_class_t)CALL( variable0 /*a*/,COLOR_static_type___MMAncestor___local_class))( variable0 /*a*/) /*MMAncestor::local_class*/;
-  variable1 = ((abstract_collection___Map___has_key_t)CALL(variable1,COLOR_abstract_collection___Map___has_key))(variable1, variable2) /*Map::has_key*/;
-  if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable1)))) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMLocalClass___add_ancestor, LOCATE_static_type, 37); nit_exit(1);}
-  variable1 = ((static_type___MMAncestor___local_class_t)CALL( variable0 /*a*/,COLOR_static_type___MMAncestor___local_class))( variable0 /*a*/) /*MMAncestor::local_class*/;
-  variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  self) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, self)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  self) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMLocalClass___add_ancestor, LOCATE_static_type, 38); nit_exit(1);}
-  variable1 = ATTR_static_type___MMLocalClass____ancestors( self) /*MMLocalClass::_ancestors*/;
-  variable2 = ((static_type___MMAncestor___local_class_t)CALL( variable0 /*a*/,COLOR_static_type___MMAncestor___local_class))( variable0 /*a*/) /*MMAncestor::local_class*/;
-  ((abstract_collection___Map_____braeq_t)CALL(variable1,COLOR_abstract_collection___Map_____braeq))(variable1, variable2,  variable0 /*a*/) /*Map::[]=*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ATTR_static_type___MMLocalClass____ancestors(variable[3]) /*MMLocalClass::_ancestors*/;
+  variable[4] = ((static_type___MMAncestor___local_class_t)CALL( variable[1] /*a*/,COLOR_static_type___MMAncestor___local_class))( variable[1] /*a*/) /*MMAncestor::local_class*/;
+  variable[3] = ((abstract_collection___Map___has_key_t)CALL(variable[3],COLOR_abstract_collection___Map___has_key))(variable[3], variable[4]) /*Map::has_key*/;
+  if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMLocalClass___add_ancestor, LOCATE_static_type, 37); nit_exit(1);}
+  variable[3] = ((static_type___MMAncestor___local_class_t)CALL( variable[1] /*a*/,COLOR_static_type___MMAncestor___local_class))( variable[1] /*a*/) /*MMAncestor::local_class*/;
+  variable[4] = variable[0];
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] == variable[4]) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3],variable[4])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3], variable[4]) /*Object::==*/)))))));
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMLocalClass___add_ancestor, LOCATE_static_type, 38); nit_exit(1);}
+  variable[3] = variable[0];
+  variable[3] = ATTR_static_type___MMLocalClass____ancestors(variable[3]) /*MMLocalClass::_ancestors*/;
+  variable[4] = ((static_type___MMAncestor___local_class_t)CALL( variable[1] /*a*/,COLOR_static_type___MMAncestor___local_class))( variable[1] /*a*/) /*MMAncestor::local_class*/;
+  ((abstract_collection___Map_____braeq_t)CALL(variable[3],COLOR_abstract_collection___Map_____braeq))(variable[3], variable[4],  variable[1] /*a*/) /*Map::[]=*/;
+  return_label1: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t static_type___MMLocalClass___ancestors(val_t  self) {
   struct trace_t trace = {NULL, NULL, 42, LOCATE_static_type___MMLocalClass___ancestors};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   tracehead = trace.prev;
@@ -47,30 +61,37 @@ val_t static_type___MMLocalClass___ancestors(val_t  self) {
 }
 val_t static_type___MMLocalClass___ancestor(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 45, LOCATE_static_type___MMLocalClass___ancestor};
-  val_t variable0;
-  val_t variable1;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 =  param0;
-  variable1 = ATTR_static_type___MMLocalClass____ancestors( self) /*MMLocalClass::_ancestors*/;
-  variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMLocalClass___ancestor, LOCATE_static_type, 48); nit_exit(1);}
-  variable1 = ATTR_static_type___MMLocalClass____ancestors( self) /*MMLocalClass::_ancestors*/;
-  variable1 = ((abstract_collection___Map___has_key_t)CALL(variable1,COLOR_abstract_collection___Map___has_key))(variable1,  variable0 /*c*/) /*Map::has_key*/;
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = ATTR_static_type___MMLocalClass____ancestors( self) /*MMLocalClass::_ancestors*/;
-    variable1 = ((abstract_collection___Map_____bra_t)CALL(variable1,COLOR_abstract_collection___Map_____bra))(variable1,  variable0 /*c*/) /*Map::[]*/;
-    variable1 = ((static_type___MMAncestor___stype_t)CALL(variable1,COLOR_static_type___MMAncestor___stype))(variable1) /*MMAncestor::stype*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ATTR_static_type___MMLocalClass____ancestors(variable[3]) /*MMLocalClass::_ancestors*/;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMLocalClass___ancestor, LOCATE_static_type, 48); nit_exit(1);}
+  variable[3] = variable[0];
+  variable[3] = ATTR_static_type___MMLocalClass____ancestors(variable[3]) /*MMLocalClass::_ancestors*/;
+  variable[3] = ((abstract_collection___Map___has_key_t)CALL(variable[3],COLOR_abstract_collection___Map___has_key))(variable[3],  variable[1] /*c*/) /*Map::has_key*/;
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = variable[0];
+    variable[3] = ATTR_static_type___MMLocalClass____ancestors(variable[3]) /*MMLocalClass::_ancestors*/;
+    variable[3] = ((abstract_collection___Map_____bra_t)CALL(variable[3],COLOR_abstract_collection___Map_____bra))(variable[3],  variable[1] /*c*/) /*Map::[]*/;
+    variable[3] = ((static_type___MMAncestor___stype_t)CALL(variable[3],COLOR_static_type___MMAncestor___stype))(variable[3]) /*MMAncestor::stype*/;
+    variable[2] = variable[3];
     goto return_label2;
   }
-  variable1 =  NIT_NULL /*null*/;
+  variable[2] =  NIT_NULL /*null*/;
   goto return_label2;
   return_label2: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 val_t static_type___MMLocalProperty___signature(val_t  self) {
   struct trace_t trace = {NULL, NULL, 57, LOCATE_static_type___MMLocalProperty___signature};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   tracehead = trace.prev;
@@ -78,6 +99,8 @@ val_t static_type___MMLocalProperty___signature(val_t  self) {
 }
 void static_type___MMLocalProperty___signature__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 57, LOCATE_static_type___MMLocalProperty___signature__eq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   ATTR_static_type___MMLocalProperty____signature( self) /*MMLocalProperty::_signature*/ =  param0;
@@ -86,39 +109,154 @@ void static_type___MMLocalProperty___signature__eq(val_t  self, val_t  param0) {
 }
 val_t static_type___MMLocalProperty___signature_for(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 62, LOCATE_static_type___MMLocalProperty___signature_for};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 =  param0;
-  variable1 = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL( self,COLOR_abstractmetamodel___MMLocalProperty___local_class))( self) /*MMLocalProperty::local_class*/;
-  variable1 = ((static_type___MMLocalClass___get_type_t)CALL(variable1,COLOR_static_type___MMLocalClass___get_type))(variable1) /*MMLocalClass::get_type*/;
-  variable1 = TAG_Bool(( variable0 /*t*/ == variable1) || (( variable0 /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable0 /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable0 /*t*/,variable1)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable0 /*t*/,COLOR_kernel___Object_____eqeq))( variable0 /*t*/, variable1) /*Object::==*/)))));
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = ((static_type___MMLocalProperty___signature_t)CALL( self,COLOR_static_type___MMLocalProperty___signature))( self) /*MMLocalProperty::signature*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL(variable[3],COLOR_abstractmetamodel___MMLocalProperty___local_class))(variable[3]) /*MMLocalProperty::local_class*/;
+  variable[3] = ((static_type___MMLocalClass___get_type_t)CALL(variable[3],COLOR_static_type___MMLocalClass___get_type))(variable[3]) /*MMLocalClass::get_type*/;
+  variable[3] = TAG_Bool(( variable[1] /*t*/ == variable[3]) || (( variable[1] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*t*/,variable[3])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*t*/,COLOR_kernel___Object_____eqeq))( variable[1] /*t*/, variable[3]) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = variable[0];
+    variable[3] = ((static_type___MMLocalProperty___signature_t)CALL(variable[3],COLOR_static_type___MMLocalProperty___signature))(variable[3]) /*MMLocalProperty::signature*/;
+    variable[2] = variable[3];
     goto return_label3;
   }
-  variable1 = ATTR_static_type___MMLocalProperty____signatures_cache( self) /*MMLocalProperty::_signatures_cache*/;
-  variable1 = ((abstract_collection___CoupleMap___has_key_t)CALL(variable1,COLOR_abstract_collection___Map___has_key))(variable1,  variable0 /*t*/) /*CoupleMap::has_key*/;
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = ATTR_static_type___MMLocalProperty____signatures_cache( self) /*MMLocalProperty::_signatures_cache*/;
-    variable1 = ((abstract_collection___CoupleMap_____bra_t)CALL(variable1,COLOR_abstract_collection___Map_____bra))(variable1,  variable0 /*t*/) /*CoupleMap::[]*/;
+  variable[3] = variable[0];
+  variable[3] = ATTR_static_type___MMLocalProperty____signatures_cache(variable[3]) /*MMLocalProperty::_signatures_cache*/;
+  variable[3] = ((abstract_collection___CoupleMap___has_key_t)CALL(variable[3],COLOR_abstract_collection___Map___has_key))(variable[3],  variable[1] /*t*/) /*CoupleMap::has_key*/;
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = variable[0];
+    variable[3] = ATTR_static_type___MMLocalProperty____signatures_cache(variable[3]) /*MMLocalProperty::_signatures_cache*/;
+    variable[3] = ((abstract_collection___CoupleMap_____bra_t)CALL(variable[3],COLOR_abstract_collection___Map_____bra))(variable[3],  variable[1] /*t*/) /*CoupleMap::[]*/;
+    variable[2] = variable[3];
     goto return_label3;
   }
-  variable2 = ((static_type___MMLocalProperty___signature_t)CALL( self,COLOR_static_type___MMLocalProperty___signature))( self) /*MMLocalProperty::signature*/;
-  variable2 = ((static_type___MMSignature___adaptation_to_t)CALL(variable2,COLOR_static_type___MMSignature___adaptation_to))(variable2,  variable0 /*t*/) /*MMSignature::adaptation_to*/;
-  variable1 = variable2;
-  variable2 = ATTR_static_type___MMLocalProperty____signatures_cache( self) /*MMLocalProperty::_signatures_cache*/;
-  ((hash___HashMap_____braeq_t)CALL(variable2,COLOR_abstract_collection___Map_____braeq))(variable2,  variable0 /*t*/,  variable1 /*res*/) /*HashMap::[]=*/;
-  variable1 =  variable1 /*res*/;
+  variable[4] = variable[0];
+  variable[4] = ((static_type___MMLocalProperty___signature_t)CALL(variable[4],COLOR_static_type___MMLocalProperty___signature))(variable[4]) /*MMLocalProperty::signature*/;
+  variable[4] = ((static_type___MMSignature___adaptation_to_t)CALL(variable[4],COLOR_static_type___MMSignature___adaptation_to))(variable[4],  variable[1] /*t*/) /*MMSignature::adaptation_to*/;
+  variable[3] = variable[4];
+  variable[4] = variable[0];
+  variable[4] = ATTR_static_type___MMLocalProperty____signatures_cache(variable[4]) /*MMLocalProperty::_signatures_cache*/;
+  ((hash___HashMap_____braeq_t)CALL(variable[4],COLOR_abstract_collection___Map_____braeq))(variable[4],  variable[1] /*t*/,  variable[3] /*res*/) /*HashMap::[]=*/;
+  variable[2] =  variable[3] /*res*/;
   goto return_label3;
   return_label3: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
+}
+val_t static_type___MMSignature___to_s(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 123, LOCATE_static_type___MMSignature___to_s};
+  val_t variable[15];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_static_type;
+  variable[0] =  self;
+  /*variable[2] is variable s*/
+  variable[3] = variable[0];
+  variable[3] = ATTR_static_type___MMSignature____params(variable[3]) /*MMSignature::_params*/;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[4] = variable[3];
+  if (UNTAG_Bool(variable[4])) { /* and */
+    variable[4] = variable[0];
+    variable[4] = ATTR_static_type___MMSignature____params(variable[4]) /*MMSignature::_params*/;
+    variable[4] = ((array___AbstractArray___length_t)CALL(variable[4],COLOR_abstract_collection___Collection___length))(variable[4]) /*AbstractArray::length*/;
+    variable[4] = TAG_Bool(UNTAG_Int(variable[4])>UNTAG_Int( TAG_Int(0)));
+  }
+  variable[3] = variable[4];
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    /*variable[3] is variable tmp*/
+    variable[5] = variable[0];
+    variable[5] = ATTR_static_type___MMSignature____params(variable[5]) /*MMSignature::_params*/;
+    variable[5] = ((array___AbstractArray___length_t)CALL(variable[5],COLOR_abstract_collection___Collection___length))(variable[5]) /*AbstractArray::length*/;
+    variable[6] = NEW_Array_array___Array___with_capacity(variable[5]); /*new Array[String]*/
+    variable[5] = variable[6];
+    variable[4] = variable[5];
+    variable[5] = variable[0];
+    variable[5] = ATTR_static_type___MMSignature____params(variable[5]) /*MMSignature::_params*/;
+    variable[5] = ((array___AbstractArray___length_t)CALL(variable[5],COLOR_abstract_collection___Collection___length))(variable[5]) /*AbstractArray::length*/;
+    variable[6] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[5]); /*new Range[Int]*/
+    variable[5] = variable[6];
+    variable[5] = ((range___Range___iterator_t)CALL(variable[5],COLOR_abstract_collection___Collection___iterator))(variable[5]) /*Range::iterator*/;
+    while (true) { /*for*/
+      variable[6] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[5],COLOR_abstract_collection___Iterator___is_ok))(variable[5]) /*Iterator::is_ok*/;
+      if (!UNTAG_Bool(variable[6])) break; /*for*/
+      variable[6] = ((abstract_collection___Iterator___item_t)CALL(variable[5],COLOR_abstract_collection___Iterator___item))(variable[5]) /*Iterator::item*/;
+      variable[7] = variable[6];
+      variable[9] = variable[0];
+      variable[9] = ATTR_static_type___MMSignature____params(variable[9]) /*MMSignature::_params*/;
+      variable[10] = variable[9];
+      variable[11] =  variable[7] /*i*/;
+      variable[13] = TAG_Bool(UNTAG_Int( variable[11] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+      variable[14] = variable[13];
+      if (UNTAG_Bool(variable[14])) { /* and */
+        variable[14] = variable[10];
+        variable[14] = ATTR_array___AbstractArray____length(variable[14]) /*AbstractArray::_length*/;
+        variable[14] = TAG_Bool(UNTAG_Int( variable[11] /*index*/)<UNTAG_Int(variable[14]));
+      }
+      variable[13] = variable[14];
+      if (!UNTAG_Bool(variable[13])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_static_type, 229); nit_exit(1);}
+      variable[13] = variable[10];
+      variable[13] = ATTR_array___Array____items(variable[13]) /*Array::_items*/;
+      variable[13] = UNBOX_NativeArray(variable[13])[UNTAG_Int( variable[11] /*index*/)];
+      variable[12] = variable[13];
+      goto return_label6;
+      return_label6: while(false);
+      variable[9] = variable[12];
+      variable[8] = variable[9];
+      variable[9] = ((string___Object___to_s_t)CALL( variable[8] /*p*/,COLOR_string___Object___to_s))( variable[8] /*p*/) /*Object::to_s*/;
+      ((array___AbstractArray___add_t)CALL( variable[4] /*a*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*a*/, variable[9]) /*AbstractArray::add*/;
+      continue_5: while(0);
+      ((abstract_collection___Iterator___next_t)CALL(variable[5],COLOR_abstract_collection___Iterator___next))(variable[5]) /*Iterator::next*/;
+    }
+    break_5: while(0);
+    variable[5] = NEW_String_string___String___init(); /*new String*/
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString("("), TAG_Int(1)); /*new String*/
+    variable[7] = variable[6];
+    ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[7]) /*String::append*/;
+    variable[8] = NEW_String_string___String___with_native(BOX_NativeString(","), TAG_Int(1)); /*new String*/
+    variable[8] = ((string___Collection___join_t)CALL( variable[4] /*a*/,COLOR_string___Collection___join))( variable[4] /*a*/, variable[8]) /*Collection::join*/;
+    variable[9] = variable[8];
+    ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[9]) /*String::append*/;
+    variable[10] = NEW_String_string___String___with_native(BOX_NativeString(")"), TAG_Int(1)); /*new String*/
+    variable[11] = variable[10];
+    ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[11]) /*String::append*/;
+    variable[2] = variable[5] /*s=*/;
+  } else { /*if*/
+    variable[3] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable[2] = variable[3] /*s=*/;
+  }
+  variable[3] = variable[0];
+  variable[3] = ATTR_static_type___MMSignature____return_type(variable[3]) /*MMSignature::_return_type*/;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = NEW_String_string___String___init(); /*new String*/
+    variable[4] = NEW_String_string___String___with_native(BOX_NativeString(": "), TAG_Int(2)); /*new String*/
+    variable[5] = variable[4];
+    ((string___String___append_t)CALL(variable[3],COLOR_abstract_collection___IndexedCollection___append))(variable[3], variable[5]) /*String::append*/;
+    variable[6] = variable[0];
+    variable[6] = ATTR_static_type___MMSignature____return_type(variable[6]) /*MMSignature::_return_type*/;
+    variable[7] = variable[6];
+    variable[7] = ((string___String___to_s_t)CALL(variable[7],COLOR_string___Object___to_s))(variable[7]) /*String::to_s*/;
+    ((string___String___append_t)CALL(variable[3],COLOR_abstract_collection___IndexedCollection___append))(variable[3], variable[7]) /*String::append*/;
+    variable[8] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable[9] = variable[8];
+    ((string___String___append_t)CALL(variable[3],COLOR_abstract_collection___IndexedCollection___append))(variable[3], variable[9]) /*String::append*/;
+    ((string___String___append_t)CALL( variable[2] /*s*/,COLOR_abstract_collection___IndexedCollection___append))( variable[2] /*s*/, variable[3]) /*String::append*/;
+  }
+  variable[1] =  variable[2] /*s*/;
+  goto return_label4;
+  return_label4: while(false);
+  tracehead = trace.prev;
+  return variable[1];
 }
 val_t static_type___MMSignature___recv(val_t  self) {
   struct trace_t trace = {NULL, NULL, 76, LOCATE_static_type___MMSignature___recv};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   tracehead = trace.prev;
@@ -126,326 +264,495 @@ val_t static_type___MMSignature___recv(val_t  self) {
 }
 val_t static_type___MMSignature___return_type(val_t  self) {
   struct trace_t trace = {NULL, NULL, 82, LOCATE_static_type___MMSignature___return_type};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   tracehead = trace.prev;
   return ATTR_static_type___MMSignature____return_type( self) /*MMSignature::_return_type*/;
 }
+val_t static_type___MMSignature___closures(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 85, LOCATE_static_type___MMSignature___closures};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_static_type;
+  tracehead = trace.prev;
+  return ATTR_static_type___MMSignature____closures( self) /*MMSignature::_closures*/;
+}
 val_t static_type___MMSignature___arity(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 85, LOCATE_static_type___MMSignature___arity};
-  val_t variable0;
+  struct trace_t trace = {NULL, NULL, 88, LOCATE_static_type___MMSignature___arity};
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 = ATTR_static_type___MMSignature____params( self) /*MMSignature::_params*/;
-  variable0 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable0 ==  NIT_NULL /*null*/) || ((variable0 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable0, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))(variable0,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable0)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMSignature___arity, LOCATE_static_type, 88); nit_exit(1);}
-  variable0 = ATTR_static_type___MMSignature____params( self) /*MMSignature::_params*/;
-  variable0 = ((array___AbstractArray___length_t)CALL(variable0,COLOR_abstract_collection___Collection___length))(variable0) /*AbstractArray::length*/;
-  goto return_label4;
-  return_label4: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t static_type___MMSignature_____l(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 92, LOCATE_static_type___MMSignature_____l};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-    val_t variable3;
-    val_t variable4;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_static_type;
-  variable0 =  param0;
-  variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable0 /*s*/ ==  NIT_NULL /*null*/) || (( variable0 /*s*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable0 /*s*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable0 /*s*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable0 /*s*/,COLOR_kernel___Object_____eqeq))( variable0 /*s*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMSignature_____l, LOCATE_static_type, 95); nit_exit(1);}
-  variable1 = TAG_Bool(( self ==  variable0 /*s*/) || (( self != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( self,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( self, variable0 /*s*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( self,COLOR_kernel___Object_____eqeq))( self,  variable0 /*s*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 =  TAG_Bool(true);
-    goto return_label5;
-  }
-  variable1 = ATTR_static_type___MMSignature____recv( self) /*MMSignature::_recv*/;
-  variable1 = ((static_type___MMType___module_t)CALL(variable1,COLOR_static_type___MMType___module))(variable1) /*MMType::module*/;
-  variable2 = ((static_type___MMSignature___recv_t)CALL( variable0 /*s*/,COLOR_static_type___MMSignature___recv))( variable0 /*s*/) /*MMSignature::recv*/;
-  variable2 = ((static_type___MMType___module_t)CALL(variable2,COLOR_static_type___MMType___module))(variable2) /*MMType::module*/;
-  variable1 = TAG_Bool((variable1 == variable2) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1,variable2)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1, variable2) /*Object::==*/)))));
-  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMSignature_____l, LOCATE_static_type, 99); nit_exit(1);}
-  variable1 = ((static_type___MMSignature___arity_t)CALL( self,COLOR_static_type___MMSignature___arity))( self) /*MMSignature::arity*/;
-  variable2 = ((static_type___MMSignature___arity_t)CALL( variable0 /*s*/,COLOR_static_type___MMSignature___arity))( variable0 /*s*/) /*MMSignature::arity*/;
-  variable1 = TAG_Bool((variable1)!=(variable2));
-  variable2 = variable1;
-  if (!UNTAG_Bool(variable2)) { /* or */
-    variable2 = ATTR_static_type___MMSignature____return_type( self) /*MMSignature::_return_type*/;
-    variable2 = TAG_Bool((variable2 ==  NIT_NULL /*null*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  NIT_NULL /*null*/) /*Object::==*/)))));
-    variable3 = ((static_type___MMSignature___return_type_t)CALL( variable0 /*s*/,COLOR_static_type___MMSignature___return_type))( variable0 /*s*/) /*MMSignature::return_type*/;
-    variable3 = TAG_Bool((variable3 ==  NIT_NULL /*null*/) || ((variable3 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable3,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable3, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable3,COLOR_kernel___Object_____eqeq))(variable3,  NIT_NULL /*null*/) /*Object::==*/)))));
-    variable2 = TAG_Bool((variable2)!=(variable3));
-  }
-  variable1 = variable2;
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 =  TAG_Bool(false);
-    goto return_label5;
-  }
-  variable1 = ATTR_static_type___MMSignature____return_type( self) /*MMSignature::_return_type*/;
-  variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  variable2 = variable1;
-  if (UNTAG_Bool(variable2)) { /* and */
-    variable2 = ATTR_static_type___MMSignature____return_type( self) /*MMSignature::_return_type*/;
-    variable3 = ((static_type___MMSignature___return_type_t)CALL( variable0 /*s*/,COLOR_static_type___MMSignature___return_type))( variable0 /*s*/) /*MMSignature::return_type*/;
-    variable2 = ((static_type___MMType_____l_t)CALL(variable2,COLOR_static_type___MMType_____l))(variable2, variable3) /*MMType::<*/;
-    variable2 =  TAG_Bool(!UNTAG_Bool(variable2));
-  }
-  variable1 = variable2;
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 =  TAG_Bool(false);
-    goto return_label5;
-  }
-  variable1 = ((static_type___MMSignature___arity_t)CALL( self,COLOR_static_type___MMSignature___arity))( self) /*MMSignature::arity*/;
-  variable2 = NEW_Range_range___Range___without_last( TAG_Int(0), variable1); /*new Range[Int]*/
-  variable1 = variable2;
-  variable1 = ((range___Range___iterator_t)CALL(variable1,COLOR_abstract_collection___Collection___iterator))(variable1) /*Range::iterator*/;
-  while (true) { /*for*/
-    variable2 = ((abstract_collection___Iterator___is_ok_t)CALL(variable1,COLOR_abstract_collection___Iterator___is_ok))(variable1) /*Iterator::is_ok*/;
-    if (!UNTAG_Bool(variable2)) break; /*for*/
-    variable2 = ((abstract_collection___Iterator___item_t)CALL(variable1,COLOR_abstract_collection___Iterator___item))(variable1) /*Iterator::item*/;
-    variable3 = ((static_type___MMSignature_____bra_t)CALL( variable0 /*s*/,COLOR_static_type___MMSignature_____bra))( variable0 /*s*/,  variable2 /*i*/) /*MMSignature::[]*/;
-    variable4 = ((static_type___MMSignature_____bra_t)CALL( self,COLOR_static_type___MMSignature_____bra))( self,  variable2 /*i*/) /*MMSignature::[]*/;
-    variable3 = ((static_type___MMType_____l_t)CALL(variable3,COLOR_static_type___MMType_____l))(variable3, variable4) /*MMType::<*/;
-    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable3)))) { /*if*/
-      variable1 =  TAG_Bool(false);
-      goto return_label5;
-    }
-    continue_6: while(0);
-    ((abstract_collection___Iterator___next_t)CALL(variable1,COLOR_abstract_collection___Iterator___next))(variable1) /*Iterator::next*/;
-  }
-  break_6: while(0);
-  variable1 =  TAG_Bool(true);
-  goto return_label5;
-  return_label5: while(false);
-  tracehead = trace.prev;
-  return variable1;
-}
-val_t static_type___MMSignature_____bra(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 113, LOCATE_static_type___MMSignature_____bra};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_static_type;
-  variable0 =  param0;
-  variable1 = ATTR_static_type___MMSignature____params( self) /*MMSignature::_params*/;
-  variable1 = ((array___AbstractArray___length_t)CALL(variable1,COLOR_abstract_collection___Collection___length))(variable1) /*AbstractArray::length*/;
-  variable1 = TAG_Bool(UNTAG_Int(variable1)>UNTAG_Int( variable0 /*i*/));
-  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMSignature_____bra, LOCATE_static_type, 116); nit_exit(1);}
-  variable1 = ATTR_static_type___MMSignature____params( self) /*MMSignature::_params*/;
-  variable2 =  variable0 /*i*/;
-  variable3 = TAG_Bool(UNTAG_Int( variable2 /*index*/)>=UNTAG_Int( TAG_Int(0)));
-  variable4 = variable3;
-  if (UNTAG_Bool(variable4)) { /* and */
-    variable4 = variable1;
-    variable4 = ATTR_array___AbstractArray____length(variable4) /*AbstractArray::_length*/;
-    variable4 = TAG_Bool(UNTAG_Int( variable2 /*index*/)<UNTAG_Int(variable4));
-  }
-  variable3 = variable4;
-  if (!UNTAG_Bool(variable3)) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_static_type, 229); nit_exit(1);}
-  variable3 = variable1;
-  variable3 = ATTR_array___Array____items(variable3) /*Array::_items*/;
-  variable3 = UNBOX_NativeArray(variable3)[UNTAG_Int( variable2 /*index*/)];
-  goto return_label8;
-  return_label8: while(false);
-  variable1 = variable3;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_static_type___MMSignature____params(variable[2]) /*MMSignature::_params*/;
+  variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMSignature___arity, LOCATE_static_type, 91); nit_exit(1);}
+  variable[2] = variable[0];
+  variable[2] = ATTR_static_type___MMSignature____params(variable[2]) /*MMSignature::_params*/;
+  variable[2] = ((array___AbstractArray___length_t)CALL(variable[2],COLOR_abstract_collection___Collection___length))(variable[2]) /*AbstractArray::length*/;
+  variable[1] = variable[2];
   goto return_label7;
   return_label7: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[1];
 }
-val_t static_type___MMSignature___to_s(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 120, LOCATE_static_type___MMSignature___to_s};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-    val_t variable3;
-    val_t variable4;
-      val_t variable5;
-      val_t variable6;
-      val_t variable7;
-      val_t variable8;
-      val_t variable9;
+val_t static_type___MMSignature_____l(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 95, LOCATE_static_type___MMSignature_____l};
+  val_t variable[8];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 = NIT_NULL /*decl variable s*/;
-  variable1 = ATTR_static_type___MMSignature____params( self) /*MMSignature::_params*/;
-  variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  variable2 = variable1;
-  if (UNTAG_Bool(variable2)) { /* and */
-    variable2 = ATTR_static_type___MMSignature____params( self) /*MMSignature::_params*/;
-    variable2 = ((array___AbstractArray___length_t)CALL(variable2,COLOR_abstract_collection___Collection___length))(variable2) /*AbstractArray::length*/;
-    variable2 = TAG_Bool(UNTAG_Int(variable2)>UNTAG_Int( TAG_Int(0)));
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*s*/ ==  NIT_NULL /*null*/) || (( variable[1] /*s*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*s*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*s*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*s*/,COLOR_kernel___Object_____eqeq))( variable[1] /*s*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMSignature_____l, LOCATE_static_type, 98); nit_exit(1);}
+  variable[3] = variable[0];
+  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*s*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*s*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  variable[1] /*s*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[2] =  TAG_Bool(true);
+    goto return_label8;
   }
-  variable1 = variable2;
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = NIT_NULL /*decl variable tmp*/;
-    variable3 = ATTR_static_type___MMSignature____params( self) /*MMSignature::_params*/;
-    variable3 = ((array___AbstractArray___length_t)CALL(variable3,COLOR_abstract_collection___Collection___length))(variable3) /*AbstractArray::length*/;
-    variable4 = NEW_Array_array___Array___with_capacity(variable3); /*new Array[String]*/
-    variable3 = variable4;
-    variable2 = variable3;
-    variable3 = ATTR_static_type___MMSignature____params( self) /*MMSignature::_params*/;
-    variable3 = ((array___AbstractArray___length_t)CALL(variable3,COLOR_abstract_collection___Collection___length))(variable3) /*AbstractArray::length*/;
-    variable4 = NEW_Range_range___Range___without_last( TAG_Int(0), variable3); /*new Range[Int]*/
-    variable3 = variable4;
-    variable3 = ((range___Range___iterator_t)CALL(variable3,COLOR_abstract_collection___Collection___iterator))(variable3) /*Range::iterator*/;
-    while (true) { /*for*/
-      variable4 = ((abstract_collection___Iterator___is_ok_t)CALL(variable3,COLOR_abstract_collection___Iterator___is_ok))(variable3) /*Iterator::is_ok*/;
-      if (!UNTAG_Bool(variable4)) break; /*for*/
-      variable4 = ((abstract_collection___Iterator___item_t)CALL(variable3,COLOR_abstract_collection___Iterator___item))(variable3) /*Iterator::item*/;
-      variable6 = ATTR_static_type___MMSignature____params( self) /*MMSignature::_params*/;
-      variable7 =  variable4 /*i*/;
-      variable8 = TAG_Bool(UNTAG_Int( variable7 /*index*/)>=UNTAG_Int( TAG_Int(0)));
-      variable9 = variable8;
-      if (UNTAG_Bool(variable9)) { /* and */
-        variable9 = variable6;
-        variable9 = ATTR_array___AbstractArray____length(variable9) /*AbstractArray::_length*/;
-        variable9 = TAG_Bool(UNTAG_Int( variable7 /*index*/)<UNTAG_Int(variable9));
-      }
-      variable8 = variable9;
-      if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_static_type, 229); nit_exit(1);}
-      variable8 = variable6;
-      variable8 = ATTR_array___Array____items(variable8) /*Array::_items*/;
-      variable8 = UNBOX_NativeArray(variable8)[UNTAG_Int( variable7 /*index*/)];
-      goto return_label11;
-      return_label11: while(false);
-      variable6 = variable8;
-      variable5 = variable6;
-      variable6 = ((string___Object___to_s_t)CALL( variable5 /*p*/,COLOR_string___Object___to_s))( variable5 /*p*/) /*Object::to_s*/;
-      ((array___AbstractArray___add_t)CALL( variable2 /*a*/,COLOR_abstract_collection___SimpleCollection___add))( variable2 /*a*/, variable6) /*AbstractArray::add*/;
-      continue_10: while(0);
-      ((abstract_collection___Iterator___next_t)CALL(variable3,COLOR_abstract_collection___Iterator___next))(variable3) /*Iterator::next*/;
+  variable[3] = variable[0];
+  variable[3] = ATTR_static_type___MMSignature____recv(variable[3]) /*MMSignature::_recv*/;
+  variable[3] = ((static_type___MMType___module_t)CALL(variable[3],COLOR_static_type___MMType___module))(variable[3]) /*MMType::module*/;
+  variable[4] = ((static_type___MMSignature___recv_t)CALL( variable[1] /*s*/,COLOR_static_type___MMSignature___recv))( variable[1] /*s*/) /*MMSignature::recv*/;
+  variable[4] = ((static_type___MMType___module_t)CALL(variable[4],COLOR_static_type___MMType___module))(variable[4]) /*MMType::module*/;
+  variable[3] = TAG_Bool((variable[3] == variable[4]) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3],variable[4])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3], variable[4]) /*Object::==*/)))));
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMSignature_____l, LOCATE_static_type, 102); nit_exit(1);}
+  variable[3] = variable[0];
+  variable[3] = ((static_type___MMSignature___arity_t)CALL(variable[3],COLOR_static_type___MMSignature___arity))(variable[3]) /*MMSignature::arity*/;
+  variable[4] = ((static_type___MMSignature___arity_t)CALL( variable[1] /*s*/,COLOR_static_type___MMSignature___arity))( variable[1] /*s*/) /*MMSignature::arity*/;
+  variable[3] = TAG_Bool((variable[3])!=(variable[4]));
+  variable[4] = variable[3];
+  if (!UNTAG_Bool(variable[4])) { /* or */
+    variable[4] = variable[0];
+    variable[4] = ATTR_static_type___MMSignature____return_type(variable[4]) /*MMSignature::_return_type*/;
+    variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
+    variable[5] = ((static_type___MMSignature___return_type_t)CALL( variable[1] /*s*/,COLOR_static_type___MMSignature___return_type))( variable[1] /*s*/) /*MMSignature::return_type*/;
+    variable[5] = TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))));
+    variable[4] = TAG_Bool((variable[4])!=(variable[5]));
+  }
+  variable[3] = variable[4];
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[2] =  TAG_Bool(false);
+    goto return_label8;
+  }
+  variable[3] = variable[0];
+  variable[3] = ATTR_static_type___MMSignature____return_type(variable[3]) /*MMSignature::_return_type*/;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[4] = variable[3];
+  if (UNTAG_Bool(variable[4])) { /* and */
+    variable[4] = variable[0];
+    variable[4] = ATTR_static_type___MMSignature____return_type(variable[4]) /*MMSignature::_return_type*/;
+    variable[5] = ((static_type___MMSignature___return_type_t)CALL( variable[1] /*s*/,COLOR_static_type___MMSignature___return_type))( variable[1] /*s*/) /*MMSignature::return_type*/;
+    variable[4] = ((static_type___MMType_____l_t)CALL(variable[4],COLOR_static_type___MMType_____l))(variable[4], variable[5]) /*MMType::<*/;
+    variable[4] =  TAG_Bool(!UNTAG_Bool(variable[4]));
+  }
+  variable[3] = variable[4];
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[2] =  TAG_Bool(false);
+    goto return_label8;
+  }
+  variable[3] = variable[0];
+  variable[3] = ((static_type___MMSignature___arity_t)CALL(variable[3],COLOR_static_type___MMSignature___arity))(variable[3]) /*MMSignature::arity*/;
+  variable[4] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[3]); /*new Range[Int]*/
+  variable[3] = variable[4];
+  variable[3] = ((range___Range___iterator_t)CALL(variable[3],COLOR_abstract_collection___Collection___iterator))(variable[3]) /*Range::iterator*/;
+  while (true) { /*for*/
+    variable[4] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[3],COLOR_abstract_collection___Iterator___is_ok))(variable[3]) /*Iterator::is_ok*/;
+    if (!UNTAG_Bool(variable[4])) break; /*for*/
+    variable[4] = ((abstract_collection___Iterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*Iterator::item*/;
+    variable[5] = variable[4];
+    variable[6] = ((static_type___MMSignature_____bra_t)CALL( variable[1] /*s*/,COLOR_static_type___MMSignature_____bra))( variable[1] /*s*/,  variable[5] /*i*/) /*MMSignature::[]*/;
+    variable[7] = variable[0];
+    variable[7] = ((static_type___MMSignature_____bra_t)CALL(variable[7],COLOR_static_type___MMSignature_____bra))(variable[7],  variable[5] /*i*/) /*MMSignature::[]*/;
+    variable[6] = ((static_type___MMType_____l_t)CALL(variable[6],COLOR_static_type___MMType_____l))(variable[6], variable[7]) /*MMType::<*/;
+    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[6])))) { /*if*/
+      variable[2] =  TAG_Bool(false);
+      goto return_label8;
     }
-    break_10: while(0);
-    variable3 = NEW_String_string___String___init(); /*new String*/
-    variable4 = NEW_String_string___String___with_native(BOX_NativeString("("), TAG_Int(1)); /*new String*/
-    variable5 = variable4;
-    ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable5) /*String::append*/;
-    variable6 = NEW_String_string___String___with_native(BOX_NativeString(","), TAG_Int(1)); /*new String*/
-    variable6 = ((string___Collection___join_t)CALL( variable2 /*a*/,COLOR_string___Collection___join))( variable2 /*a*/, variable6) /*Collection::join*/;
-    variable7 = variable6;
-    ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable7) /*String::append*/;
-    variable8 = NEW_String_string___String___with_native(BOX_NativeString(")"), TAG_Int(1)); /*new String*/
-    variable9 = variable8;
-    ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable9) /*String::append*/;
-    variable0 = variable3 /*s=*/;
-  } else { /*if*/
-    variable1 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-    variable0 = variable1 /*s=*/;
+    continue_9: while(0);
+    ((abstract_collection___Iterator___next_t)CALL(variable[3],COLOR_abstract_collection___Iterator___next))(variable[3]) /*Iterator::next*/;
   }
-  variable1 = ATTR_static_type___MMSignature____return_type( self) /*MMSignature::_return_type*/;
-  variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = NEW_String_string___String___init(); /*new String*/
-    variable2 = NEW_String_string___String___with_native(BOX_NativeString(": "), TAG_Int(2)); /*new String*/
-    variable3 = variable2;
-    ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable3) /*String::append*/;
-    variable4 = ATTR_static_type___MMSignature____return_type( self) /*MMSignature::_return_type*/;
-    variable5 = variable4;
-    variable5 = ((string___String___to_s_t)CALL(variable5,COLOR_string___Object___to_s))(variable5) /*String::to_s*/;
-    ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable5) /*String::append*/;
-    variable6 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-    variable7 = variable6;
-    ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable7) /*String::append*/;
-    ((string___String___append_t)CALL( variable0 /*s*/,COLOR_abstract_collection___IndexedCollection___append))( variable0 /*s*/, variable1) /*String::append*/;
-  }
-  variable0 =  variable0 /*s*/;
-  goto return_label9;
-  return_label9: while(false);
+  break_9: while(0);
+  variable[2] =  TAG_Bool(true);
+  goto return_label8;
+  return_label8: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[2];
+}
+val_t static_type___MMSignature_____bra(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 116, LOCATE_static_type___MMSignature_____bra};
+  val_t variable[9];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_static_type;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ATTR_static_type___MMSignature____params(variable[3]) /*MMSignature::_params*/;
+  variable[3] = ((array___AbstractArray___length_t)CALL(variable[3],COLOR_abstract_collection___Collection___length))(variable[3]) /*AbstractArray::length*/;
+  variable[3] = TAG_Bool(UNTAG_Int(variable[3])>UNTAG_Int( variable[1] /*i*/));
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMSignature_____bra, LOCATE_static_type, 119); nit_exit(1);}
+  variable[3] = variable[0];
+  variable[3] = ATTR_static_type___MMSignature____params(variable[3]) /*MMSignature::_params*/;
+  variable[4] = variable[3];
+  variable[5] =  variable[1] /*i*/;
+  variable[7] = TAG_Bool(UNTAG_Int( variable[5] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+  variable[8] = variable[7];
+  if (UNTAG_Bool(variable[8])) { /* and */
+    variable[8] = variable[4];
+    variable[8] = ATTR_array___AbstractArray____length(variable[8]) /*AbstractArray::_length*/;
+    variable[8] = TAG_Bool(UNTAG_Int( variable[5] /*index*/)<UNTAG_Int(variable[8]));
+  }
+  variable[7] = variable[8];
+  if (!UNTAG_Bool(variable[7])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_static_type, 229); nit_exit(1);}
+  variable[7] = variable[4];
+  variable[7] = ATTR_array___Array____items(variable[7]) /*Array::_items*/;
+  variable[7] = UNBOX_NativeArray(variable[7])[UNTAG_Int( variable[5] /*index*/)];
+  variable[6] = variable[7];
+  goto return_label11;
+  return_label11: while(false);
+  variable[3] = variable[6];
+  variable[2] = variable[3];
+  goto return_label10;
+  return_label10: while(false);
+  tracehead = trace.prev;
+  return variable[2];
 }
 val_t static_type___MMSignature___adaptation_to(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 142, LOCATE_static_type___MMSignature___adaptation_to};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-      val_t variable4;
-      val_t variable5;
+  struct trace_t trace = {NULL, NULL, 145, LOCATE_static_type___MMSignature___adaptation_to};
+  val_t variable[12];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 =  param0;
-  variable1 = ATTR_static_type___MMSignature____recv( self) /*MMSignature::_recv*/;
-  variable1 = TAG_Bool((variable1 ==  variable0 /*r*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, variable0 /*r*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  variable0 /*r*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 =  self;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ATTR_static_type___MMSignature____recv(variable[3]) /*MMSignature::_recv*/;
+  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*r*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*r*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  variable[1] /*r*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = variable[0];
+    variable[2] = variable[3];
     goto return_label12;
   }
-  variable2 = ((static_type___MMType___module_t)CALL( variable0 /*r*/,COLOR_static_type___MMType___module))( variable0 /*r*/) /*MMType::module*/;
-  variable1 = variable2;
-  variable3 = ATTR_static_type___MMSignature____params( self) /*MMSignature::_params*/;
-  variable2 = variable3;
-  variable3 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable2 /*p*/ ==  NIT_NULL /*null*/) || (( variable2 /*p*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable2 /*p*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable2 /*p*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable2 /*p*/,COLOR_kernel___Object_____eqeq))( variable2 /*p*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable3)) { /*if*/
-    variable3 = NEW_Array_array___Array___init(); /*new Array[MMType]*/
-    variable2 = variable3 /*p=*/;
-    variable3 = ATTR_static_type___MMSignature____params( self) /*MMSignature::_params*/;
-    variable3 = ((array___AbstractArray___iterator_t)CALL(variable3,COLOR_abstract_collection___Collection___iterator))(variable3) /*AbstractArray::iterator*/;
+  variable[4] = ((static_type___MMType___module_t)CALL( variable[1] /*r*/,COLOR_static_type___MMType___module))( variable[1] /*r*/) /*MMType::module*/;
+  variable[3] = variable[4];
+  variable[5] = variable[0];
+  variable[5] = ATTR_static_type___MMSignature____params(variable[5]) /*MMSignature::_params*/;
+  variable[4] = variable[5];
+  variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*p*/ ==  NIT_NULL /*null*/) || (( variable[4] /*p*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*p*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*p*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*p*/,COLOR_kernel___Object_____eqeq))( variable[4] /*p*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    variable[5] = NEW_Array_array___Array___init(); /*new Array[MMType]*/
+    variable[4] = variable[5] /*p=*/;
+    variable[5] = variable[0];
+    variable[5] = ATTR_static_type___MMSignature____params(variable[5]) /*MMSignature::_params*/;
+    variable[5] = ((array___AbstractArray___iterator_t)CALL(variable[5],COLOR_abstract_collection___Collection___iterator))(variable[5]) /*AbstractArray::iterator*/;
     while (true) { /*for*/
-      variable4 = ((array___ArrayIterator___is_ok_t)CALL(variable3,COLOR_abstract_collection___Iterator___is_ok))(variable3) /*ArrayIterator::is_ok*/;
-      if (!UNTAG_Bool(variable4)) break; /*for*/
-      variable4 = ((array___ArrayIterator___item_t)CALL(variable3,COLOR_abstract_collection___Iterator___item))(variable3) /*ArrayIterator::item*/;
-      variable5 = ((static_type___MMType___for_module_t)CALL( variable4 /*i*/,COLOR_static_type___MMType___for_module))( variable4 /*i*/,  variable1 /*mod*/) /*MMType::for_module*/;
-      variable5 = ((static_type___MMType___adapt_to_t)CALL(variable5,COLOR_static_type___MMType___adapt_to))(variable5,  variable0 /*r*/) /*MMType::adapt_to*/;
-      ((array___AbstractArray___add_t)CALL( variable2 /*p*/,COLOR_abstract_collection___SimpleCollection___add))( variable2 /*p*/, variable5) /*AbstractArray::add*/;
+      variable[6] = ((array___ArrayIterator___is_ok_t)CALL(variable[5],COLOR_abstract_collection___Iterator___is_ok))(variable[5]) /*ArrayIterator::is_ok*/;
+      if (!UNTAG_Bool(variable[6])) break; /*for*/
+      variable[6] = ((array___ArrayIterator___item_t)CALL(variable[5],COLOR_abstract_collection___Iterator___item))(variable[5]) /*ArrayIterator::item*/;
+      variable[7] = variable[6];
+      variable[8] = ((static_type___MMType___for_module_t)CALL( variable[7] /*i*/,COLOR_static_type___MMType___for_module))( variable[7] /*i*/,  variable[3] /*mod*/) /*MMType::for_module*/;
+      variable[8] = ((static_type___MMType___adapt_to_t)CALL(variable[8],COLOR_static_type___MMType___adapt_to))(variable[8],  variable[1] /*r*/) /*MMType::adapt_to*/;
+      ((array___AbstractArray___add_t)CALL( variable[4] /*p*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*p*/, variable[8]) /*AbstractArray::add*/;
       continue_13: while(0);
-      ((array___ArrayIterator___next_t)CALL(variable3,COLOR_abstract_collection___Iterator___next))(variable3) /*ArrayIterator::next*/;
+      ((array___ArrayIterator___next_t)CALL(variable[5],COLOR_abstract_collection___Iterator___next))(variable[5]) /*ArrayIterator::next*/;
     }
     break_13: while(0);
   }
-  variable4 = ATTR_static_type___MMSignature____return_type( self) /*MMSignature::_return_type*/;
-  variable3 = variable4;
-  variable4 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable3 /*rv*/ ==  NIT_NULL /*null*/) || (( variable3 /*rv*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable3 /*rv*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable3 /*rv*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable3 /*rv*/,COLOR_kernel___Object_____eqeq))( variable3 /*rv*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable4)) { /*if*/
-    variable4 = ((static_type___MMType___for_module_t)CALL( variable3 /*rv*/,COLOR_static_type___MMType___for_module))( variable3 /*rv*/,  variable1 /*mod*/) /*MMType::for_module*/;
-    variable4 = ((static_type___MMType___adapt_to_t)CALL(variable4,COLOR_static_type___MMType___adapt_to))(variable4,  variable0 /*r*/) /*MMType::adapt_to*/;
-    variable3 = variable4 /*rv=*/;
+  variable[6] = variable[0];
+  variable[6] = ATTR_static_type___MMSignature____return_type(variable[6]) /*MMSignature::_return_type*/;
+  variable[5] = variable[6];
+  variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*rv*/ ==  NIT_NULL /*null*/) || (( variable[5] /*rv*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*rv*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*rv*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*rv*/,COLOR_kernel___Object_____eqeq))( variable[5] /*rv*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[6])) { /*if*/
+    variable[6] = ((static_type___MMType___for_module_t)CALL( variable[5] /*rv*/,COLOR_static_type___MMType___for_module))( variable[5] /*rv*/,  variable[3] /*mod*/) /*MMType::for_module*/;
+    variable[6] = ((static_type___MMType___adapt_to_t)CALL(variable[6],COLOR_static_type___MMType___adapt_to))(variable[6],  variable[1] /*r*/) /*MMType::adapt_to*/;
+    variable[5] = variable[6] /*rv=*/;
   }
-  variable4 = NEW_MMSignature_static_type___MMSignature___init( variable2 /*p*/,  variable3 /*rv*/,  variable0 /*r*/); /*new MMSignature*/
-  variable1 = variable4;
+  variable[7] = NEW_MMSignature_static_type___MMSignature___init( variable[4] /*p*/,  variable[5] /*rv*/,  variable[1] /*r*/); /*new MMSignature*/
+  variable[6] = variable[7];
+  variable[7] = variable[0];
+  variable[7] = ATTR_static_type___MMSignature____closures(variable[7]) /*MMSignature::_closures*/;
+  variable[7] = ((array___AbstractArray___iterator_t)CALL(variable[7],COLOR_abstract_collection___Collection___iterator))(variable[7]) /*AbstractArray::iterator*/;
+  while (true) { /*for*/
+    variable[8] = ((array___ArrayIterator___is_ok_t)CALL(variable[7],COLOR_abstract_collection___Iterator___is_ok))(variable[7]) /*ArrayIterator::is_ok*/;
+    if (!UNTAG_Bool(variable[8])) break; /*for*/
+    variable[8] = ((array___ArrayIterator___item_t)CALL(variable[7],COLOR_abstract_collection___Iterator___item))(variable[7]) /*ArrayIterator::item*/;
+    variable[9] = variable[8];
+    variable[10] = ((static_type___MMSignature___closures_t)CALL( variable[6] /*res*/,COLOR_static_type___MMSignature___closures))( variable[6] /*res*/) /*MMSignature::closures*/;
+    variable[11] = ((static_type___MMClosure___adaptation_to_t)CALL( variable[9] /*clos*/,COLOR_static_type___MMClosure___adaptation_to))( variable[9] /*clos*/,  variable[1] /*r*/) /*MMClosure::adaptation_to*/;
+    ((array___AbstractArray___add_t)CALL(variable[10],COLOR_abstract_collection___SimpleCollection___add))(variable[10], variable[11]) /*AbstractArray::add*/;
+    continue_14: while(0);
+    ((array___ArrayIterator___next_t)CALL(variable[7],COLOR_abstract_collection___Iterator___next))(variable[7]) /*ArrayIterator::next*/;
+  }
+  break_14: while(0);
+  variable[2] =  variable[6] /*res*/;
   goto return_label12;
   return_label12: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
-void static_type___MMSignature___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 163, LOCATE_static_type___MMSignature___init};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
+val_t static_type___MMSignature___not_for_self(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 172, LOCATE_static_type___MMSignature___not_for_self};
+  val_t variable[12];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable2 =  param2;
+  variable[0] =  self;
+  variable[3] = variable[0];
+  variable[3] = ATTR_static_type___MMSignature____not_for_self_cache(variable[3]) /*MMSignature::_not_for_self_cache*/;
+  variable[2] = variable[3];
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[2] /*res*/ ==  NIT_NULL /*null*/) || (( variable[2] /*res*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[2] /*res*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*res*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[2] /*res*/,COLOR_kernel___Object_____eqeq))( variable[2] /*res*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[1] =  variable[2] /*res*/;
+    goto return_label15;
+  }
+  variable[3] =  TAG_Bool(false);
+  variable[5] = variable[0];
+  variable[5] = ATTR_static_type___MMSignature____params(variable[5]) /*MMSignature::_params*/;
+  variable[4] = variable[5];
+  variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*p*/ ==  NIT_NULL /*null*/) || (( variable[4] /*p*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*p*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*p*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*p*/,COLOR_kernel___Object_____eqeq))( variable[4] /*p*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    variable[5] = NEW_Array_array___Array___init(); /*new Array[MMType]*/
+    variable[4] = variable[5] /*p=*/;
+    variable[5] = variable[0];
+    variable[5] = ATTR_static_type___MMSignature____params(variable[5]) /*MMSignature::_params*/;
+    variable[5] = ((array___AbstractArray___iterator_t)CALL(variable[5],COLOR_abstract_collection___Collection___iterator))(variable[5]) /*AbstractArray::iterator*/;
+    while (true) { /*for*/
+      variable[6] = ((array___ArrayIterator___is_ok_t)CALL(variable[5],COLOR_abstract_collection___Iterator___is_ok))(variable[5]) /*ArrayIterator::is_ok*/;
+      if (!UNTAG_Bool(variable[6])) break; /*for*/
+      variable[6] = ((array___ArrayIterator___item_t)CALL(variable[5],COLOR_abstract_collection___Iterator___item))(variable[5]) /*ArrayIterator::item*/;
+      variable[7] = variable[6];
+      variable[9] = ((static_type___MMType___not_for_self_t)CALL( variable[7] /*i*/,COLOR_static_type___MMType___not_for_self))( variable[7] /*i*/) /*MMType::not_for_self*/;
+      variable[8] = variable[9];
+      variable[9] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[7] /*i*/ ==  variable[8] /*i2*/) || (( variable[7] /*i*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[7] /*i*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[7] /*i*/, variable[8] /*i2*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[7] /*i*/,COLOR_kernel___Object_____eqeq))( variable[7] /*i*/,  variable[8] /*i2*/) /*Object::==*/)))))));
+      if (UNTAG_Bool(variable[9])) { /*if*/
+        variable[3] =  TAG_Bool(true) /*need_for_self=*/;
+      }
+      ((array___AbstractArray___add_t)CALL( variable[4] /*p*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*p*/,  variable[8] /*i2*/) /*AbstractArray::add*/;
+      continue_16: while(0);
+      ((array___ArrayIterator___next_t)CALL(variable[5],COLOR_abstract_collection___Iterator___next))(variable[5]) /*ArrayIterator::next*/;
+    }
+    break_16: while(0);
+  }
+  variable[6] = variable[0];
+  variable[6] = ATTR_static_type___MMSignature____return_type(variable[6]) /*MMSignature::_return_type*/;
+  variable[5] = variable[6];
+  variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*rv*/ ==  NIT_NULL /*null*/) || (( variable[5] /*rv*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*rv*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*rv*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*rv*/,COLOR_kernel___Object_____eqeq))( variable[5] /*rv*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[6])) { /*if*/
+    variable[6] = ((static_type___MMType___not_for_self_t)CALL( variable[5] /*rv*/,COLOR_static_type___MMType___not_for_self))( variable[5] /*rv*/) /*MMType::not_for_self*/;
+    variable[5] = variable[6] /*rv=*/;
+    variable[6] = variable[0];
+    variable[6] = ATTR_static_type___MMSignature____return_type(variable[6]) /*MMSignature::_return_type*/;
+    variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*rv*/ == variable[6]) || (( variable[5] /*rv*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*rv*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*rv*/,variable[6])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*rv*/,COLOR_kernel___Object_____eqeq))( variable[5] /*rv*/, variable[6]) /*Object::==*/)))))));
+    if (UNTAG_Bool(variable[6])) { /*if*/
+      variable[3] =  TAG_Bool(true) /*need_for_self=*/;
+    }
+  }
+  variable[7] = variable[0];
+  variable[7] = ATTR_static_type___MMSignature____closures(variable[7]) /*MMSignature::_closures*/;
+  variable[6] = variable[7];
+  variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[6] /*clos*/ ==  NIT_NULL /*null*/) || (( variable[6] /*clos*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[6] /*clos*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*clos*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[6] /*clos*/,COLOR_kernel___Object_____eqeq))( variable[6] /*clos*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[7])) { /*if*/
+    variable[7] = NEW_Array_array___Array___init(); /*new Array[MMClosure]*/
+    variable[6] = variable[7] /*clos=*/;
+    variable[7] = variable[0];
+    variable[7] = ATTR_static_type___MMSignature____closures(variable[7]) /*MMSignature::_closures*/;
+    variable[7] = ((array___AbstractArray___iterator_t)CALL(variable[7],COLOR_abstract_collection___Collection___iterator))(variable[7]) /*AbstractArray::iterator*/;
+    while (true) { /*for*/
+      variable[8] = ((array___ArrayIterator___is_ok_t)CALL(variable[7],COLOR_abstract_collection___Iterator___is_ok))(variable[7]) /*ArrayIterator::is_ok*/;
+      if (!UNTAG_Bool(variable[8])) break; /*for*/
+      variable[8] = ((array___ArrayIterator___item_t)CALL(variable[7],COLOR_abstract_collection___Iterator___item))(variable[7]) /*ArrayIterator::item*/;
+      variable[9] = variable[8];
+      variable[11] = ((static_type___MMClosure___not_for_self_t)CALL( variable[9] /*c*/,COLOR_static_type___MMClosure___not_for_self))( variable[9] /*c*/) /*MMClosure::not_for_self*/;
+      variable[10] = variable[11];
+      variable[11] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[10] /*c2*/ ==  variable[9] /*c*/) || (( variable[10] /*c2*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[10] /*c2*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[10] /*c2*/, variable[9] /*c*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[10] /*c2*/,COLOR_kernel___Object_____eqeq))( variable[10] /*c2*/,  variable[9] /*c*/) /*Object::==*/)))))));
+      if (UNTAG_Bool(variable[11])) { /*if*/
+        variable[3] =  TAG_Bool(true) /*need_for_self=*/;
+      }
+      ((array___AbstractArray___add_t)CALL( variable[6] /*clos*/,COLOR_abstract_collection___SimpleCollection___add))( variable[6] /*clos*/,  variable[10] /*c2*/) /*AbstractArray::add*/;
+      continue_17: while(0);
+      ((array___ArrayIterator___next_t)CALL(variable[7],COLOR_abstract_collection___Iterator___next))(variable[7]) /*ArrayIterator::next*/;
+    }
+    break_17: while(0);
+  }
+  if (UNTAG_Bool( variable[3] /*need_for_self*/)) { /*if*/
+    variable[7] = variable[0];
+    variable[7] = ATTR_static_type___MMSignature____recv(variable[7]) /*MMSignature::_recv*/;
+    variable[8] = NEW_MMSignature_static_type___MMSignature___init( variable[4] /*p*/,  variable[5] /*rv*/, variable[7]); /*new MMSignature*/
+    variable[7] = variable[8];
+    variable[2] = variable[7] /*res=*/;
+    variable[7] = ((static_type___MMSignature___closures_t)CALL( variable[2] /*res*/,COLOR_static_type___MMSignature___closures))( variable[2] /*res*/) /*MMSignature::closures*/;
+    ((abstract_collection___SimpleCollection___add_all_t)CALL(variable[7],COLOR_abstract_collection___SimpleCollection___add_all))(variable[7],  variable[6] /*clos*/) /*SimpleCollection::add_all*/;
+  } else { /*if*/
+    variable[7] = variable[0];
+    variable[2] = variable[7] /*res=*/;
+  }
+  variable[7] = variable[0];
+  ATTR_static_type___MMSignature____not_for_self_cache(variable[7]) /*MMSignature::_not_for_self_cache*/ =  variable[2] /*res*/;
+  variable[1] =  variable[2] /*res*/;
+  goto return_label15;
+  return_label15: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+void static_type___MMSignature___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 217, LOCATE_static_type___MMSignature___init};
+  val_t variable[6];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_static_type;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[3] =  param2;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSignature].i]) return;
-  variable3 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable0 /*params*/ ==  NIT_NULL /*null*/) || (( variable0 /*params*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable0 /*params*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable0 /*params*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable0 /*params*/,COLOR_kernel___Object_____eqeq))( variable0 /*params*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable3)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMSignature___init, LOCATE_static_type, 165); nit_exit(1);}
-  ATTR_static_type___MMSignature____params( self) /*MMSignature::_params*/ =  variable0 /*params*/;
-  ATTR_static_type___MMSignature____return_type( self) /*MMSignature::_return_type*/ =  variable1 /*return_type*/;
-  ATTR_static_type___MMSignature____recv( self) /*MMSignature::_recv*/ =  variable2 /*r*/;
+  variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*params*/ ==  NIT_NULL /*null*/) || (( variable[1] /*params*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*params*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*params*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*params*/,COLOR_kernel___Object_____eqeq))( variable[1] /*params*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMSignature___init, LOCATE_static_type, 219); nit_exit(1);}
+  variable[5] = variable[0];
+  ATTR_static_type___MMSignature____params(variable[5]) /*MMSignature::_params*/ =  variable[1] /*params*/;
+  variable[5] = variable[0];
+  ATTR_static_type___MMSignature____return_type(variable[5]) /*MMSignature::_return_type*/ =  variable[2] /*return_type*/;
+  variable[5] = variable[0];
+  ATTR_static_type___MMSignature____recv(variable[5]) /*MMSignature::_recv*/ =  variable[3] /*r*/;
+  return_label18: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSignature].i] = 1;
   tracehead = trace.prev;
   return;
 }
+val_t static_type___MMClosure___signature(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 228, LOCATE_static_type___MMClosure___signature};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_static_type;
+  tracehead = trace.prev;
+  return ATTR_static_type___MMClosure____signature( self) /*MMClosure::_signature*/;
+}
+val_t static_type___MMClosure___is_break(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 231, LOCATE_static_type___MMClosure___is_break};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_static_type;
+  tracehead = trace.prev;
+  return ATTR_static_type___MMClosure____is_break( self) /*MMClosure::_is_break*/;
+}
+val_t static_type___MMClosure___adaptation_to(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 235, LOCATE_static_type___MMClosure___adaptation_to};
+  val_t variable[6];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_static_type;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ATTR_static_type___MMClosure____signature(variable[3]) /*MMClosure::_signature*/;
+  variable[3] = ((static_type___MMSignature___adaptation_to_t)CALL(variable[3],COLOR_static_type___MMSignature___adaptation_to))(variable[3],  variable[1] /*r*/) /*MMSignature::adaptation_to*/;
+  variable[4] = variable[0];
+  variable[4] = ATTR_static_type___MMClosure____is_break(variable[4]) /*MMClosure::_is_break*/;
+  variable[5] = NEW_MMClosure_static_type___MMClosure___init(variable[3], variable[4]); /*new MMClosure*/
+  variable[3] = variable[5];
+  variable[2] = variable[3];
+  goto return_label19;
+  return_label19: while(false);
+  tracehead = trace.prev;
+  return variable[2];
+}
+void static_type___MMClosure___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 241, LOCATE_static_type___MMClosure___init};
+  val_t variable[5];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_static_type;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMClosure].i]) return;
+  variable[4] = variable[0];
+  ATTR_static_type___MMClosure____signature(variable[4]) /*MMClosure::_signature*/ =  variable[1] /*s*/;
+  variable[4] = variable[0];
+  ATTR_static_type___MMClosure____is_break(variable[4]) /*MMClosure::_is_break*/ =  variable[2] /*is_break*/;
+  return_label20: while(false);
+  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMClosure].i] = 1;
+  tracehead = trace.prev;
+  return;
+}
+val_t static_type___MMClosure___not_for_self(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 247, LOCATE_static_type___MMClosure___not_for_self};
+  val_t variable[5];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_static_type;
+  variable[0] =  self;
+  variable[3] = variable[0];
+  variable[3] = ATTR_static_type___MMClosure____signature(variable[3]) /*MMClosure::_signature*/;
+  variable[3] = ((static_type___MMSignature___not_for_self_t)CALL(variable[3],COLOR_static_type___MMSignature___not_for_self))(variable[3]) /*MMSignature::not_for_self*/;
+  variable[2] = variable[3];
+  variable[3] = variable[0];
+  variable[3] = ATTR_static_type___MMClosure____signature(variable[3]) /*MMClosure::_signature*/;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[2] /*sig*/ == variable[3]) || (( variable[2] /*sig*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[2] /*sig*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*sig*/,variable[3])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[2] /*sig*/,COLOR_kernel___Object_____eqeq))( variable[2] /*sig*/, variable[3]) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = variable[0];
+    variable[3] = ATTR_static_type___MMClosure____is_break(variable[3]) /*MMClosure::_is_break*/;
+    variable[4] = NEW_MMClosure_static_type___MMClosure___init( variable[2] /*sig*/, variable[3]); /*new MMClosure*/
+    variable[3] = variable[4];
+    variable[1] = variable[3];
+    goto return_label21;
+  } else { /*if*/
+    variable[3] = variable[0];
+    variable[1] = variable[3];
+    goto return_label21;
+  }
+  return_label21: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t static_type___MMAncestor___to_s(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 277, LOCATE_static_type___MMAncestor___to_s};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_static_type;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((static_type___MMAncestor___stype_t)CALL(variable[2],COLOR_static_type___MMAncestor___stype))(variable[2]) /*MMAncestor::stype*/;
+  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[2])) { /*if*/
+    variable[2] = variable[0];
+    variable[2] = ((static_type___MMAncestor___local_class_t)CALL(variable[2],COLOR_static_type___MMAncestor___local_class))(variable[2]) /*MMAncestor::local_class*/;
+    variable[2] = ((abstractmetamodel___MMLocalClass___to_s_t)CALL(variable[2],COLOR_string___Object___to_s))(variable[2]) /*MMLocalClass::to_s*/;
+    variable[1] = variable[2];
+    goto return_label22;
+  } else { /*if*/
+    variable[2] = variable[0];
+    variable[2] = ((static_type___MMAncestor___stype_t)CALL(variable[2],COLOR_static_type___MMAncestor___stype))(variable[2]) /*MMAncestor::stype*/;
+    variable[2] = ((string___Object___to_s_t)CALL(variable[2],COLOR_string___Object___to_s))(variable[2]) /*Object::to_s*/;
+    variable[1] = variable[2];
+    goto return_label22;
+  }
+  return_label22: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
 val_t static_type___MMAncestor___stype(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 174, LOCATE_static_type___MMAncestor___stype};
+  struct trace_t trace = {NULL, NULL, 260, LOCATE_static_type___MMAncestor___stype};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   tracehead = trace.prev;
   return ATTR_static_type___MMAncestor____stype( self) /*MMAncestor::_stype*/;
 }
 void static_type___MMAncestor___stype__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 174, LOCATE_static_type___MMAncestor___stype__eq};
+  struct trace_t trace = {NULL, NULL, 260, LOCATE_static_type___MMAncestor___stype__eq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   ATTR_static_type___MMAncestor____stype( self) /*MMAncestor::_stype*/ =  param0;
@@ -453,14 +760,18 @@ void static_type___MMAncestor___stype__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t static_type___MMAncestor___inheriter(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 177, LOCATE_static_type___MMAncestor___inheriter};
+  struct trace_t trace = {NULL, NULL, 263, LOCATE_static_type___MMAncestor___inheriter};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   tracehead = trace.prev;
   return ATTR_static_type___MMAncestor____inheriter( self) /*MMAncestor::_inheriter*/;
 }
 void static_type___MMAncestor___inheriter__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 177, LOCATE_static_type___MMAncestor___inheriter__eq};
+  struct trace_t trace = {NULL, NULL, 263, LOCATE_static_type___MMAncestor___inheriter__eq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   ATTR_static_type___MMAncestor____inheriter( self) /*MMAncestor::_inheriter*/ =  param0;
@@ -468,393 +779,447 @@ void static_type___MMAncestor___inheriter__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t static_type___MMAncestor___is_reffinement(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 180, LOCATE_static_type___MMAncestor___is_reffinement};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 266, LOCATE_static_type___MMAncestor___is_reffinement};
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 = ((static_type___MMAncestor___stype_t)CALL( self,COLOR_static_type___MMAncestor___stype))( self) /*MMAncestor::stype*/;
-  variable0 = ((static_type___MMType___module_t)CALL(variable0,COLOR_static_type___MMType___module))(variable0) /*MMType::module*/;
-  variable1 = ((static_type___MMAncestor___stype_t)CALL( self,COLOR_static_type___MMAncestor___stype))( self) /*MMAncestor::stype*/;
-  variable1 = ((static_type___MMType___module_t)CALL(variable1,COLOR_static_type___MMType___module))(variable1) /*MMType::module*/;
-  variable0 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable0 == variable1) || ((variable0 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable0,variable1)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))(variable0, variable1) /*Object::==*/)))))));
-  goto return_label15;
-  return_label15: while(false);
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((static_type___MMAncestor___stype_t)CALL(variable[2],COLOR_static_type___MMAncestor___stype))(variable[2]) /*MMAncestor::stype*/;
+  variable[2] = ((static_type___MMType___module_t)CALL(variable[2],COLOR_static_type___MMType___module))(variable[2]) /*MMType::module*/;
+  variable[3] = variable[0];
+  variable[3] = ((static_type___MMAncestor___stype_t)CALL(variable[3],COLOR_static_type___MMAncestor___stype))(variable[3]) /*MMAncestor::stype*/;
+  variable[3] = ((static_type___MMType___module_t)CALL(variable[3],COLOR_static_type___MMType___module))(variable[3]) /*MMType::module*/;
+  variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] == variable[3]) || ((variable[2] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2],variable[3])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2], variable[3]) /*Object::==*/)))))));
+  variable[1] = variable[2];
+  goto return_label23;
+  return_label23: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t static_type___MMAncestor___is_specialisation(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 184, LOCATE_static_type___MMAncestor___is_specialisation};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 270, LOCATE_static_type___MMAncestor___is_specialisation};
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 = ((static_type___MMAncestor___stype_t)CALL( self,COLOR_static_type___MMAncestor___stype))( self) /*MMAncestor::stype*/;
-  variable0 = ((static_type___MMType___local_class_t)CALL(variable0,COLOR_static_type___MMType___local_class))(variable0) /*MMType::local_class*/;
-  variable0 = ((abstractmetamodel___MMLocalClass___global_t)CALL(variable0,COLOR_abstractmetamodel___MMLocalClass___global))(variable0) /*MMLocalClass::global*/;
-  variable1 = ((static_type___MMAncestor___inheriter_t)CALL( self,COLOR_static_type___MMAncestor___inheriter))( self) /*MMAncestor::inheriter*/;
-  variable1 = ((static_type___MMType___local_class_t)CALL(variable1,COLOR_static_type___MMType___local_class))(variable1) /*MMType::local_class*/;
-  variable1 = ((abstractmetamodel___MMLocalClass___global_t)CALL(variable1,COLOR_abstractmetamodel___MMLocalClass___global))(variable1) /*MMLocalClass::global*/;
-  variable0 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable0 == variable1) || ((variable0 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable0,variable1)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))(variable0, variable1) /*Object::==*/)))))));
-  goto return_label16;
-  return_label16: while(false);
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((static_type___MMAncestor___stype_t)CALL(variable[2],COLOR_static_type___MMAncestor___stype))(variable[2]) /*MMAncestor::stype*/;
+  variable[2] = ((static_type___MMType___local_class_t)CALL(variable[2],COLOR_static_type___MMType___local_class))(variable[2]) /*MMType::local_class*/;
+  variable[2] = ((abstractmetamodel___MMLocalClass___global_t)CALL(variable[2],COLOR_abstractmetamodel___MMLocalClass___global))(variable[2]) /*MMLocalClass::global*/;
+  variable[3] = variable[0];
+  variable[3] = ((static_type___MMAncestor___inheriter_t)CALL(variable[3],COLOR_static_type___MMAncestor___inheriter))(variable[3]) /*MMAncestor::inheriter*/;
+  variable[3] = ((static_type___MMType___local_class_t)CALL(variable[3],COLOR_static_type___MMType___local_class))(variable[3]) /*MMType::local_class*/;
+  variable[3] = ((abstractmetamodel___MMLocalClass___global_t)CALL(variable[3],COLOR_abstractmetamodel___MMLocalClass___global))(variable[3]) /*MMLocalClass::global*/;
+  variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] == variable[3]) || ((variable[2] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2],variable[3])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2], variable[3]) /*Object::==*/)))))));
+  variable[1] = variable[2];
+  goto return_label24;
+  return_label24: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t static_type___MMAncestor___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 188, LOCATE_static_type___MMAncestor___local_class};
+  struct trace_t trace = {NULL, NULL, 274, LOCATE_static_type___MMAncestor___local_class};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMAncestor___is_specialisation, LOCATE_static_type, 188);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 274);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
-val_t static_type___MMAncestor___to_s(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 191, LOCATE_static_type___MMAncestor___to_s};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_static_type;
-  variable0 = ((static_type___MMAncestor___stype_t)CALL( self,COLOR_static_type___MMAncestor___stype))( self) /*MMAncestor::stype*/;
-  variable0 = TAG_Bool((variable0 ==  NIT_NULL /*null*/) || ((variable0 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable0, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable0,COLOR_kernel___Object_____eqeq))(variable0,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable0)) { /*if*/
-    variable0 = ((static_type___MMAncestor___local_class_t)CALL( self,COLOR_static_type___MMAncestor___local_class))( self) /*MMAncestor::local_class*/;
-    variable0 = ((abstractmetamodel___MMLocalClass___to_s_t)CALL(variable0,COLOR_string___Object___to_s))(variable0) /*MMLocalClass::to_s*/;
-    goto return_label17;
-  } else { /*if*/
-    variable0 = ((static_type___MMAncestor___stype_t)CALL( self,COLOR_static_type___MMAncestor___stype))( self) /*MMAncestor::stype*/;
-    variable0 = ((string___Object___to_s_t)CALL(variable0,COLOR_string___Object___to_s))(variable0) /*Object::to_s*/;
-    goto return_label17;
-  }
-  return_label17: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-void static_type___MMAncestor___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
+void static_type___MMAncestor___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 0, LOCATE_static_type___MMAncestor___init};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  ATTR_static_type___MMAncestor____stype( self) /*MMAncestor::_stype*/ =  param0;
-  ATTR_static_type___MMAncestor____inheriter( self) /*MMAncestor::_inheriter*/ =  param1;
   tracehead = trace.prev;
   return;
 }
 val_t static_type___MMType___module(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 204, LOCATE_static_type___MMType___module};
+  struct trace_t trace = {NULL, NULL, 290, LOCATE_static_type___MMType___module};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMAncestor___to_s, LOCATE_static_type, 204);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 290);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t static_type___MMType___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 207, LOCATE_static_type___MMType___local_class};
+  struct trace_t trace = {NULL, NULL, 293, LOCATE_static_type___MMType___local_class};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMAncestor___to_s, LOCATE_static_type, 207);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 293);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t static_type___MMType_____l(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 210, LOCATE_static_type___MMType_____l};
+  struct trace_t trace = {NULL, NULL, 296, LOCATE_static_type___MMType_____l};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMAncestor___to_s, LOCATE_static_type, 210);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 296);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t static_type___MMType___is_supertype(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 213, LOCATE_static_type___MMType___is_supertype};
+  struct trace_t trace = {NULL, NULL, 299, LOCATE_static_type___MMType___is_supertype};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMAncestor___to_s, LOCATE_static_type, 213);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 299);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t static_type___MMType___for_module(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 218, LOCATE_static_type___MMType___for_module};
+  struct trace_t trace = {NULL, NULL, 304, LOCATE_static_type___MMType___for_module};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMAncestor___to_s, LOCATE_static_type, 218);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 304);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t static_type___MMType___adapt_to(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 221, LOCATE_static_type___MMType___adapt_to};
+  struct trace_t trace = {NULL, NULL, 307, LOCATE_static_type___MMType___adapt_to};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMAncestor___to_s, LOCATE_static_type, 221);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 307);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t static_type___MMType___upcast_for(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 225, LOCATE_static_type___MMType___upcast_for};
+  struct trace_t trace = {NULL, NULL, 311, LOCATE_static_type___MMType___upcast_for};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMAncestor___to_s, LOCATE_static_type, 225);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 311);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t static_type___MMType___not_for_self(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 229, LOCATE_static_type___MMType___not_for_self};
-  val_t variable0;
+  struct trace_t trace = {NULL, NULL, 315, LOCATE_static_type___MMType___not_for_self};
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 =  self;
-  goto return_label18;
-  return_label18: while(false);
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[1] = variable[2];
+  goto return_label25;
+  return_label25: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 void static_type___MMType___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 0, LOCATE_static_type___MMType___init};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   tracehead = trace.prev;
   return;
 }
+val_t static_type___MMTypeClass___to_s(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 326, LOCATE_static_type___MMTypeClass___to_s};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_static_type;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_static_type___MMTypeClass____local_class(variable[2]) /*MMTypeClass::_local_class*/;
+  variable[2] = ((abstractmetamodel___MMLocalClass___to_s_t)CALL(variable[2],COLOR_string___Object___to_s))(variable[2]) /*MMLocalClass::to_s*/;
+  variable[1] = variable[2];
+  goto return_label26;
+  return_label26: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t static_type___MMTypeClass___module(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 323, LOCATE_static_type___MMTypeClass___module};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_static_type;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_static_type___MMTypeClass____local_class(variable[2]) /*MMTypeClass::_local_class*/;
+  variable[2] = ((abstractmetamodel___MMLocalClass___module_t)CALL(variable[2],COLOR_abstractmetamodel___MMLocalClass___module))(variable[2]) /*MMLocalClass::module*/;
+  variable[1] = variable[2];
+  goto return_label27;
+  return_label27: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
 val_t static_type___MMTypeClass___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 236, LOCATE_static_type___MMTypeClass___local_class};
+  struct trace_t trace = {NULL, NULL, 322, LOCATE_static_type___MMTypeClass___local_class};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   tracehead = trace.prev;
   return ATTR_static_type___MMTypeClass____local_class( self) /*MMTypeClass::_local_class*/;
 }
-val_t static_type___MMTypeClass___module(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 237, LOCATE_static_type___MMTypeClass___module};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_static_type;
-  variable0 = ATTR_static_type___MMTypeClass____local_class( self) /*MMTypeClass::_local_class*/;
-  variable0 = ((abstractmetamodel___MMLocalClass___module_t)CALL(variable0,COLOR_abstractmetamodel___MMLocalClass___module))(variable0) /*MMLocalClass::module*/;
-  goto return_label19;
-  return_label19: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
 val_t static_type___MMTypeClass_____l(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 238, LOCATE_static_type___MMTypeClass_____l};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  struct trace_t trace = {NULL, NULL, 324, LOCATE_static_type___MMTypeClass_____l};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 =  param0;
-  variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable0 /*t*/ ==  NIT_NULL /*null*/) || (( variable0 /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable0 /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable0 /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable0 /*t*/,COLOR_kernel___Object_____eqeq))( variable0 /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  variable2 = variable1;
-  if (UNTAG_Bool(variable2)) { /* and */
-    variable2 = ((static_type___MMType___is_supertype_t)CALL( variable0 /*t*/,COLOR_static_type___MMType___is_supertype))( variable0 /*t*/,  self) /*MMType::is_supertype*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*t*/ ==  NIT_NULL /*null*/) || (( variable[1] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*t*/,COLOR_kernel___Object_____eqeq))( variable[1] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[4] = variable[3];
+  if (UNTAG_Bool(variable[4])) { /* and */
+    variable[4] = variable[0];
+    variable[4] = ((static_type___MMType___is_supertype_t)CALL( variable[1] /*t*/,COLOR_static_type___MMType___is_supertype))( variable[1] /*t*/, variable[4]) /*MMType::is_supertype*/;
   }
-  variable1 = variable2;
-  goto return_label20;
-  return_label20: while(false);
+  variable[3] = variable[4];
+  variable[2] = variable[3];
+  goto return_label28;
+  return_label28: while(false);
   tracehead = trace.prev;
-  return variable1;
-}
-val_t static_type___MMTypeClass___to_s(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 240, LOCATE_static_type___MMTypeClass___to_s};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_static_type;
-  variable0 = ATTR_static_type___MMTypeClass____local_class( self) /*MMTypeClass::_local_class*/;
-  variable0 = ((abstractmetamodel___MMLocalClass___to_s_t)CALL(variable0,COLOR_string___Object___to_s))(variable0) /*MMLocalClass::to_s*/;
-  goto return_label21;
-  return_label21: while(false);
-  tracehead = trace.prev;
-  return variable0;
+  return variable[2];
 }
 val_t static_type___MMTypeClass___upcast_for(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 245, LOCATE_static_type___MMTypeClass___upcast_for};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  struct trace_t trace = {NULL, NULL, 331, LOCATE_static_type___MMTypeClass___upcast_for};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 =  param0;
-  variable1 = ATTR_static_type___MMTypeClass____local_class( self) /*MMTypeClass::_local_class*/;
-  variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeClass___upcast_for, LOCATE_static_type, 247); nit_exit(1);}
-  variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable0 /*c*/ ==  NIT_NULL /*null*/) || (( variable0 /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable0 /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable0 /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable0 /*c*/,COLOR_kernel___Object_____eqeq))( variable0 /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeClass___upcast_for, LOCATE_static_type, 248); nit_exit(1);}
-  variable1 =  self;
-  variable2 = ATTR_static_type___MMTypeClass____local_class( self) /*MMTypeClass::_local_class*/;
-  variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable2 ==  variable0 /*c*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, variable0 /*c*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  variable0 /*c*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = ATTR_static_type___MMTypeClass____local_class( self) /*MMTypeClass::_local_class*/;
-    variable2 = ((static_type___MMLocalClass___ancestor_t)CALL(variable2,COLOR_static_type___MMLocalClass___ancestor))(variable2,  variable0 /*c*/) /*MMLocalClass::ancestor*/;
-    variable1 = variable2 /*t=*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ATTR_static_type___MMTypeClass____local_class(variable[3]) /*MMTypeClass::_local_class*/;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeClass___upcast_for, LOCATE_static_type, 333); nit_exit(1);}
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*c*/ ==  NIT_NULL /*null*/) || (( variable[1] /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*c*/,COLOR_kernel___Object_____eqeq))( variable[1] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeClass___upcast_for, LOCATE_static_type, 334); nit_exit(1);}
+  variable[4] = variable[0];
+  variable[3] = variable[4];
+  variable[4] = variable[0];
+  variable[4] = ATTR_static_type___MMTypeClass____local_class(variable[4]) /*MMTypeClass::_local_class*/;
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  variable[1] /*c*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], variable[1] /*c*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  variable[1] /*c*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = variable[0];
+    variable[4] = ATTR_static_type___MMTypeClass____local_class(variable[4]) /*MMTypeClass::_local_class*/;
+    variable[4] = ((static_type___MMLocalClass___ancestor_t)CALL(variable[4],COLOR_static_type___MMLocalClass___ancestor))(variable[4],  variable[1] /*c*/) /*MMLocalClass::ancestor*/;
+    variable[3] = variable[4] /*t=*/;
   }
-  variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable1 /*t*/ ==  NIT_NULL /*null*/) || (( variable1 /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable1 /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable1 /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable1 /*t*/,COLOR_kernel___Object_____eqeq))( variable1 /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeClass___upcast_for, LOCATE_static_type, 254); nit_exit(1);}
-  variable1 =  variable1 /*t*/;
-  goto return_label22;
-  return_label22: while(false);
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeClass___upcast_for, LOCATE_static_type, 340); nit_exit(1);}
+  variable[2] =  variable[3] /*t*/;
+  goto return_label29;
+  return_label29: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 void static_type___MMTypeClass___init(val_t  self, val_t  param0, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 258, LOCATE_static_type___MMTypeClass___init};
-  val_t variable0;
+  struct trace_t trace = {NULL, NULL, 344, LOCATE_static_type___MMTypeClass___init};
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 =  param0;
+  variable[0] =  self;
+  variable[1] =  param0;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeClass].i]) return;
-  ATTR_static_type___MMTypeClass____local_class( self) /*MMTypeClass::_local_class*/ =  variable0 /*c*/;
+  variable[3] = variable[0];
+  ATTR_static_type___MMTypeClass____local_class(variable[3]) /*MMTypeClass::_local_class*/ =  variable[1] /*c*/;
+  return_label30: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeClass].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t static_type___MMTypeSimpleClass___is_supertype(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 266, LOCATE_static_type___MMTypeSimpleClass___is_supertype};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  struct trace_t trace = {NULL, NULL, 352, LOCATE_static_type___MMTypeSimpleClass___is_supertype};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 =  param0;
-  variable1 = ((static_type___MMType___local_class_t)CALL( variable0 /*t*/,COLOR_static_type___MMType___local_class))( variable0 /*t*/) /*MMType::local_class*/;
-  variable1 = ((abstractmetamodel___MMLocalClass___cshe_t)CALL(variable1,COLOR_abstractmetamodel___MMLocalClass___cshe))(variable1) /*MMLocalClass::cshe*/;
-  variable2 = ATTR_static_type___MMTypeClass____local_class( self) /*MMTypeClass::_local_class*/;
-  variable1 = ((partial_order___PartialOrderElement_____leq_t)CALL(variable1,COLOR_partial_order___PartialOrderElement_____leq))(variable1, variable2) /*PartialOrderElement::<=*/;
-  goto return_label24;
-  return_label24: while(false);
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = ((static_type___MMType___local_class_t)CALL( variable[1] /*t*/,COLOR_static_type___MMType___local_class))( variable[1] /*t*/) /*MMType::local_class*/;
+  variable[3] = ((abstractmetamodel___MMLocalClass___cshe_t)CALL(variable[3],COLOR_abstractmetamodel___MMLocalClass___cshe))(variable[3]) /*MMLocalClass::cshe*/;
+  variable[4] = variable[0];
+  variable[4] = ATTR_static_type___MMTypeClass____local_class(variable[4]) /*MMTypeClass::_local_class*/;
+  variable[3] = ((partial_order___PartialOrderElement_____leq_t)CALL(variable[3],COLOR_partial_order___PartialOrderElement_____leq))(variable[3], variable[4]) /*PartialOrderElement::<=*/;
+  variable[2] = variable[3];
+  goto return_label31;
+  return_label31: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 val_t static_type___MMTypeSimpleClass___for_module(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 271, LOCATE_static_type___MMTypeSimpleClass___for_module};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  struct trace_t trace = {NULL, NULL, 357, LOCATE_static_type___MMTypeSimpleClass___for_module};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 =  param0;
-  variable1 =  self;
-  variable2 = ((static_type___MMTypeClass___module_t)CALL( self,COLOR_static_type___MMType___module))( self) /*MMTypeClass::module*/;
-  variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable2 ==  variable0 /*mod*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, variable0 /*mod*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  variable0 /*mod*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = ATTR_static_type___MMTypeClass____local_class( self) /*MMTypeClass::_local_class*/;
-    variable2 = ((abstractmetamodel___MMLocalClass___for_module_t)CALL(variable2,COLOR_abstractmetamodel___MMLocalClass___for_module))(variable2,  variable0 /*mod*/) /*MMLocalClass::for_module*/;
-    variable2 = ((static_type___MMLocalClass___get_type_t)CALL(variable2,COLOR_static_type___MMLocalClass___get_type))(variable2) /*MMLocalClass::get_type*/;
-    variable1 = variable2 /*t=*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = variable[0];
+  variable[3] = variable[4];
+  variable[4] = variable[0];
+  variable[4] = ((static_type___MMTypeClass___module_t)CALL(variable[4],COLOR_static_type___MMType___module))(variable[4]) /*MMTypeClass::module*/;
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  variable[1] /*mod*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], variable[1] /*mod*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  variable[1] /*mod*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = variable[0];
+    variable[4] = ATTR_static_type___MMTypeClass____local_class(variable[4]) /*MMTypeClass::_local_class*/;
+    variable[4] = ((abstractmetamodel___MMLocalClass___for_module_t)CALL(variable[4],COLOR_abstractmetamodel___MMLocalClass___for_module))(variable[4],  variable[1] /*mod*/) /*MMLocalClass::for_module*/;
+    variable[4] = ((static_type___MMLocalClass___get_type_t)CALL(variable[4],COLOR_static_type___MMLocalClass___get_type))(variable[4]) /*MMLocalClass::get_type*/;
+    variable[3] = variable[4] /*t=*/;
   }
-  variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable1 /*t*/ ==  NIT_NULL /*null*/) || (( variable1 /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable1 /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable1 /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable1 /*t*/,COLOR_kernel___Object_____eqeq))( variable1 /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeSimpleClass___for_module, LOCATE_static_type, 277); nit_exit(1);}
-  variable1 =  variable1 /*t*/;
-  goto return_label25;
-  return_label25: while(false);
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeSimpleClass___for_module, LOCATE_static_type, 363); nit_exit(1);}
+  variable[2] =  variable[3] /*t*/;
+  goto return_label32;
+  return_label32: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 val_t static_type___MMTypeSimpleClass___adapt_to(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 281, LOCATE_static_type___MMTypeSimpleClass___adapt_to};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 367, LOCATE_static_type___MMTypeSimpleClass___adapt_to};
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 =  param0;
-  variable1 =  self;
-  goto return_label26;
-  return_label26: while(false);
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[2] = variable[3];
+  goto return_label33;
+  return_label33: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 void static_type___MMTypeSimpleClass___init(val_t  self, val_t  param0, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 283, LOCATE_static_type___MMTypeSimpleClass___init};
-  val_t variable0;
+  struct trace_t trace = {NULL, NULL, 369, LOCATE_static_type___MMTypeSimpleClass___init};
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 =  param0;
+  variable[0] =  self;
+  variable[1] =  param0;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeSimpleClass].i]) return;
-  ((static_type___MMTypeClass___init_t)CALL( self,COLOR_static_type___MMTypeClass___init))( self,  variable0 /*c*/, init_table /*YYY*/) /*MMTypeClass::init*/;
+  ((static_type___MMTypeClass___init_t)CALL(variable[0],COLOR_static_type___MMTypeClass___init))(variable[0],  variable[1] /*c*/, init_table /*YYY*/) /*MMTypeClass::init*/;
+  return_label34: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeSimpleClass].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t static_type___MMTypeNone___module(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 292, LOCATE_static_type___MMTypeNone___module};
+  struct trace_t trace = {NULL, NULL, 378, LOCATE_static_type___MMTypeNone___module};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   tracehead = trace.prev;
   return ATTR_static_type___MMTypeNone____module( self) /*MMTypeNone::_module*/;
 }
-val_t static_type___MMTypeNone_____l(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 293, LOCATE_static_type___MMTypeNone_____l};
-  val_t variable0;
-  val_t variable1;
+val_t static_type___MMTypeNone___local_class(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 381, LOCATE_static_type___MMTypeNone___local_class};
+  val_t variable[2];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 =  param0;
-  variable1 =  TAG_Bool(true);
-  goto return_label28;
-  return_label28: while(false);
+  variable[0] =  self;
+  fprintf(stderr, "Aborted"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeNone___local_class, LOCATE_static_type, 381); nit_exit(1);
+  return_label35: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[1];
+}
+val_t static_type___MMTypeNone_____l(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 379, LOCATE_static_type___MMTypeNone_____l};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_static_type;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  TAG_Bool(true);
+  goto return_label36;
+  return_label36: while(false);
+  tracehead = trace.prev;
+  return variable[2];
 }
 val_t static_type___MMTypeNone___is_supertype(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 294, LOCATE_static_type___MMTypeNone___is_supertype};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 380, LOCATE_static_type___MMTypeNone___is_supertype};
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 =  param0;
-  variable1 =  TAG_Bool(false);
-  goto return_label29;
-  return_label29: while(false);
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  TAG_Bool(false);
+  goto return_label37;
+  return_label37: while(false);
   tracehead = trace.prev;
-  return variable1;
-}
-val_t static_type___MMTypeNone___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 295, LOCATE_static_type___MMTypeNone___local_class};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_static_type;
-  fprintf(stderr, "Aborted"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeNone___local_class, LOCATE_static_type, 295); nit_exit(1);
-  tracehead = trace.prev;
-  return variable0;
+  return variable[2];
 }
 val_t static_type___MMTypeNone___upcast_for(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 296, LOCATE_static_type___MMTypeNone___upcast_for};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 382, LOCATE_static_type___MMTypeNone___upcast_for};
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 =  param0;
-  variable1 =  self;
-  goto return_label31;
-  return_label31: while(false);
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[2] = variable[3];
+  goto return_label38;
+  return_label38: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 void static_type___MMTypeNone___init(val_t  self, val_t  param0, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 298, LOCATE_static_type___MMTypeNone___init};
-  val_t variable0;
+  struct trace_t trace = {NULL, NULL, 384, LOCATE_static_type___MMTypeNone___init};
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
-  variable0 =  param0;
+  variable[0] =  self;
+  variable[1] =  param0;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeNone].i]) return;
-  ATTR_static_type___MMTypeNone____module( self) /*MMTypeNone::_module*/ =  variable0 /*m*/;
+  variable[3] = variable[0];
+  ATTR_static_type___MMTypeNone____module(variable[3]) /*MMTypeNone::_module*/ =  variable[1] /*m*/;
+  return_label39: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeNone].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t static_type___MMModule___type_none(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 302, LOCATE_static_type___MMModule___type_none};
+  struct trace_t trace = {NULL, NULL, 388, LOCATE_static_type___MMModule___type_none};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   tracehead = trace.prev;

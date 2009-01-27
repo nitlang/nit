@@ -31,6 +31,12 @@ extern const int SFT_nitc[];
 #define COLOR_nitc___NitCompiler___opt_extension_prefix SFT_nitc[20]
 #define COLOR_nitc___NitCompiler___init SFT_nitc[21]
 #define COLOR_SUPER_nitc___NitCompiler___process_options SFT_nitc[22]
+typedef void (* nitc___NitCompiler___process_options_t)(val_t  self);
+void nitc___NitCompiler___process_options(val_t  self);
+#define LOCATE_nitc___NitCompiler___process_options "nitc::NitCompiler::(mmloader::ToolContext::process_options)"
+typedef void (* nitc___NitCompiler___perform_work_t)(val_t  self, val_t  param0);
+void nitc___NitCompiler___perform_work(val_t  self, val_t  param0);
+#define LOCATE_nitc___NitCompiler___perform_work "nitc::NitCompiler::(abstracttool::AbstractCompiler::perform_work)"
 #define ATTR_nitc___NitCompiler____opt_output(recv) ATTR(recv, COLOR_nitc___NitCompiler____opt_output)
 typedef val_t (* nitc___NitCompiler___opt_output_t)(val_t  self);
 val_t nitc___NitCompiler___opt_output(val_t  self);
@@ -69,15 +75,10 @@ val_t nitc___NitCompiler___opt_extension_prefix(val_t  self);
 #define LOCATE_nitc___NitCompiler___opt_extension_prefix "nitc::NitCompiler::opt_extension_prefix"
 typedef void (* nitc___NitCompiler___init_t)(val_t  self, int* init_table);
 void nitc___NitCompiler___init(val_t  self, int* init_table);
-val_t NEW_nitc___NitCompiler___init();
 #define LOCATE_nitc___NitCompiler___init "nitc::NitCompiler::init"
-typedef void (* nitc___NitCompiler___process_options_t)(val_t  self);
-void nitc___NitCompiler___process_options(val_t  self);
-#define LOCATE_nitc___NitCompiler___process_options "nitc::NitCompiler::(mmloader::ToolContext::process_options)"
-typedef void (* nitc___NitCompiler___perform_work_t)(val_t  self, val_t  param0);
-void nitc___NitCompiler___perform_work(val_t  self, val_t  param0);
-#define LOCATE_nitc___NitCompiler___perform_work "nitc::NitCompiler::(abstracttool::AbstractCompiler::perform_work)"
+val_t NEW_NitCompiler_nitc___NitCompiler___init();
 typedef void (* nitc___Sys___main_t)(val_t  self);
 void nitc___Sys___main(val_t  self);
 #define LOCATE_nitc___Sys___main "nitc::Sys::(kernel::Sys::main)"
+val_t NEW_Sys_kernel___Sys___init();
 #endif

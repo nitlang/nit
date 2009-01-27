@@ -75,37 +75,39 @@ extern const int SFT_file[];
 #define COLOR_file___Stderr___init SFT_file[41]
 #define COLOR_file___String___file_exists SFT_file[42]
 #define COLOR_file___String___file_stat SFT_file[43]
-#define COLOR_file___String___strip_extension SFT_file[44]
-#define COLOR_file___String___basename SFT_file[45]
-#define COLOR_file___String___dirname SFT_file[46]
-#define COLOR_file___String___file_path SFT_file[47]
-#define COLOR_file___String___mkdir SFT_file[48]
-#define COLOR_file___NativeString___file_exists SFT_file[49]
-#define COLOR_file___NativeString___file_stat SFT_file[50]
-#define COLOR_file___NativeString___file_mkdir SFT_file[51]
-#define ID_FileStat SFT_file[52]
-#define COLOR_FileStat SFT_file[53]
-#define INIT_TABLE_POS_FileStat SFT_file[54]
-#define COLOR_file___FileStat___mode SFT_file[55]
-#define COLOR_file___FileStat___atime SFT_file[56]
-#define COLOR_file___FileStat___ctime SFT_file[57]
-#define COLOR_file___FileStat___mtime SFT_file[58]
-#define COLOR_file___FileStat___size SFT_file[59]
-#define ID_NativeFile SFT_file[60]
-#define COLOR_NativeFile SFT_file[61]
-#define INIT_TABLE_POS_NativeFile SFT_file[62]
-#define COLOR_file___NativeFile___io_read SFT_file[63]
-#define COLOR_file___NativeFile___io_write SFT_file[64]
-#define COLOR_file___NativeFile___io_close SFT_file[65]
-#define COLOR_file___NativeFile___file_stat SFT_file[66]
-#define ID_NativeFileCapable SFT_file[67]
-#define COLOR_NativeFileCapable SFT_file[68]
-#define INIT_TABLE_POS_NativeFileCapable SFT_file[69]
-#define COLOR_file___NativeFileCapable___io_open_read SFT_file[70]
-#define COLOR_file___NativeFileCapable___io_open_write SFT_file[71]
-#define COLOR_file___NativeFileCapable___native_stdin SFT_file[72]
-#define COLOR_file___NativeFileCapable___native_stdout SFT_file[73]
-#define COLOR_file___NativeFileCapable___native_stderr SFT_file[74]
+#define COLOR_file___String___file_delete SFT_file[44]
+#define COLOR_file___String___strip_extension SFT_file[45]
+#define COLOR_file___String___basename SFT_file[46]
+#define COLOR_file___String___dirname SFT_file[47]
+#define COLOR_file___String___file_path SFT_file[48]
+#define COLOR_file___String___mkdir SFT_file[49]
+#define COLOR_file___NativeString___file_exists SFT_file[50]
+#define COLOR_file___NativeString___file_stat SFT_file[51]
+#define COLOR_file___NativeString___file_mkdir SFT_file[52]
+#define COLOR_file___NativeString___file_delete SFT_file[53]
+#define ID_FileStat SFT_file[54]
+#define COLOR_FileStat SFT_file[55]
+#define INIT_TABLE_POS_FileStat SFT_file[56]
+#define COLOR_file___FileStat___mode SFT_file[57]
+#define COLOR_file___FileStat___atime SFT_file[58]
+#define COLOR_file___FileStat___ctime SFT_file[59]
+#define COLOR_file___FileStat___mtime SFT_file[60]
+#define COLOR_file___FileStat___size SFT_file[61]
+#define ID_NativeFile SFT_file[62]
+#define COLOR_NativeFile SFT_file[63]
+#define INIT_TABLE_POS_NativeFile SFT_file[64]
+#define COLOR_file___NativeFile___io_read SFT_file[65]
+#define COLOR_file___NativeFile___io_write SFT_file[66]
+#define COLOR_file___NativeFile___io_close SFT_file[67]
+#define COLOR_file___NativeFile___file_stat SFT_file[68]
+#define ID_NativeFileCapable SFT_file[69]
+#define COLOR_NativeFileCapable SFT_file[70]
+#define INIT_TABLE_POS_NativeFileCapable SFT_file[71]
+#define COLOR_file___NativeFileCapable___io_open_read SFT_file[72]
+#define COLOR_file___NativeFileCapable___io_open_write SFT_file[73]
+#define COLOR_file___NativeFileCapable___native_stdin SFT_file[74]
+#define COLOR_file___NativeFileCapable___native_stdout SFT_file[75]
+#define COLOR_file___NativeFileCapable___native_stderr SFT_file[76]
 typedef void (* file___Object___printn_t)(val_t  self, val_t  param0);
 void file___Object___printn(val_t  self, val_t  param0);
 #define LOCATE_file___Object___printn "file::Object::printn"
@@ -127,6 +129,7 @@ val_t file___Object___stdout(val_t  self);
 typedef val_t (* file___Object___stderr_t)(val_t  self);
 val_t file___Object___stderr(val_t  self);
 #define LOCATE_file___Object___stderr "file::Object::stderr"
+val_t NEW_FStream_stream___IOS___init();
 #define ATTR_file___FStream____path(recv) ATTR(recv, COLOR_file___FStream____path)
 typedef val_t (* file___FStream___path_t)(val_t  self);
 val_t file___FStream___path(val_t  self);
@@ -135,74 +138,83 @@ val_t file___FStream___path(val_t  self);
 typedef val_t (* file___FStream___file_stat_t)(val_t  self);
 val_t file___FStream___file_stat(val_t  self);
 #define LOCATE_file___FStream___file_stat "file::FStream::file_stat"
-typedef void (* file___IFStream___reopen_t)(val_t  self);
-void file___IFStream___reopen(val_t  self);
-#define LOCATE_file___IFStream___reopen "file::IFStream::reopen"
 typedef void (* file___IFStream___close_t)(val_t  self);
 void file___IFStream___close(val_t  self);
 #define LOCATE_file___IFStream___close "file::IFStream::(stream::IOS::close)"
 typedef void (* file___IFStream___fill_buffer_t)(val_t  self);
 void file___IFStream___fill_buffer(val_t  self);
 #define LOCATE_file___IFStream___fill_buffer "file::IFStream::(stream::BufferedIStream::fill_buffer)"
-#define ATTR_file___IFStream____end_reached(recv) ATTR(recv, COLOR_file___IFStream____end_reached)
 typedef val_t (* file___IFStream___end_reached_t)(val_t  self);
 val_t file___IFStream___end_reached(val_t  self);
 #define LOCATE_file___IFStream___end_reached "file::IFStream::(stream::BufferedIStream::end_reached)"
+typedef void (* file___IFStream___reopen_t)(val_t  self);
+void file___IFStream___reopen(val_t  self);
+#define LOCATE_file___IFStream___reopen "file::IFStream::reopen"
+#define ATTR_file___IFStream____end_reached(recv) ATTR(recv, COLOR_file___IFStream____end_reached)
 typedef void (* file___IFStream___open_t)(val_t  self, val_t  param0, int* init_table);
 void file___IFStream___open(val_t  self, val_t  param0, int* init_table);
-val_t NEW_file___IFStream___open(val_t  param0);
 #define LOCATE_file___IFStream___open "file::IFStream::open"
+val_t NEW_IFStream_file___IFStream___open(val_t p0);
 typedef void (* file___IFStream___init_t)(val_t  self, int* init_table);
 void file___IFStream___init(val_t  self, int* init_table);
-val_t NEW_file___IFStream___init();
 #define LOCATE_file___IFStream___init "file::IFStream::init"
+val_t NEW_IFStream_file___IFStream___init();
 typedef void (* file___IFStream___without_file_t)(val_t  self, int* init_table);
 void file___IFStream___without_file(val_t  self, int* init_table);
-val_t NEW_file___IFStream___without_file();
 #define LOCATE_file___IFStream___without_file "file::IFStream::without_file"
+val_t NEW_IFStream_file___IFStream___without_file();
+typedef void (* file___OFStream___close_t)(val_t  self);
+void file___OFStream___close(val_t  self);
+#define LOCATE_file___OFStream___close "file::OFStream::(stream::IOS::close)"
 typedef void (* file___OFStream___write_t)(val_t  self, val_t  param0);
 void file___OFStream___write(val_t  self, val_t  param0);
 #define LOCATE_file___OFStream___write "file::OFStream::(stream::OStream::write)"
 typedef val_t (* file___OFStream___is_writable_t)(val_t  self);
 val_t file___OFStream___is_writable(val_t  self);
 #define LOCATE_file___OFStream___is_writable "file::OFStream::(stream::OStream::is_writable)"
-typedef void (* file___OFStream___close_t)(val_t  self);
-void file___OFStream___close(val_t  self);
-#define LOCATE_file___OFStream___close "file::OFStream::(stream::IOS::close)"
 #define ATTR_file___OFStream____writable(recv) ATTR(recv, COLOR_file___OFStream____writable)
 typedef void (* file___OFStream___write_native_t)(val_t  self, val_t  param0, val_t  param1);
 void file___OFStream___write_native(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_file___OFStream___write_native "file::OFStream::write_native"
 typedef void (* file___OFStream___open_t)(val_t  self, val_t  param0, int* init_table);
 void file___OFStream___open(val_t  self, val_t  param0, int* init_table);
-val_t NEW_file___OFStream___open(val_t  param0);
 #define LOCATE_file___OFStream___open "file::OFStream::open"
+val_t NEW_OFStream_file___OFStream___open(val_t p0);
 typedef void (* file___OFStream___init_t)(val_t  self, int* init_table);
 void file___OFStream___init(val_t  self, int* init_table);
-val_t NEW_file___OFStream___init();
 #define LOCATE_file___OFStream___init "file::OFStream::init"
+val_t NEW_OFStream_file___OFStream___init();
 typedef void (* file___OFStream___without_file_t)(val_t  self, int* init_table);
 void file___OFStream___without_file(val_t  self, int* init_table);
-val_t NEW_file___OFStream___without_file();
 #define LOCATE_file___OFStream___without_file "file::OFStream::without_file"
+val_t NEW_OFStream_file___OFStream___without_file();
 typedef void (* file___Stdin___init_t)(val_t  self, int* init_table);
 void file___Stdin___init(val_t  self, int* init_table);
-val_t NEW_file___Stdin___init();
 #define LOCATE_file___Stdin___init "file::Stdin::init"
+val_t NEW_Stdin_file___Stdin___init();
 typedef void (* file___Stdout___init_t)(val_t  self, int* init_table);
 void file___Stdout___init(val_t  self, int* init_table);
-val_t NEW_file___Stdout___init();
 #define LOCATE_file___Stdout___init "file::Stdout::init"
+val_t NEW_Stdout_file___Stdout___init();
 typedef void (* file___Stderr___init_t)(val_t  self, int* init_table);
 void file___Stderr___init(val_t  self, int* init_table);
-val_t NEW_file___Stderr___init();
 #define LOCATE_file___Stderr___init "file::Stderr::init"
+val_t NEW_Stderr_file___Stderr___init();
+val_t NEW_String_string___String___init();
+val_t NEW_String_string___String___from(val_t p0);
+val_t NEW_String_string___String___with_capacity(val_t p0);
+val_t NEW_String_string___String___with_native(val_t p0, val_t p1);
+val_t NEW_String_string___String___from_cstring(val_t p0);
+val_t NEW_String_string___String___filled_with(val_t p0, val_t p1);
 typedef val_t (* file___String___file_exists_t)(val_t  self);
 val_t file___String___file_exists(val_t  self);
 #define LOCATE_file___String___file_exists "file::String::file_exists"
 typedef val_t (* file___String___file_stat_t)(val_t  self);
 val_t file___String___file_stat(val_t  self);
 #define LOCATE_file___String___file_stat "file::String::file_stat"
+typedef val_t (* file___String___file_delete_t)(val_t  self);
+val_t file___String___file_delete(val_t  self);
+#define LOCATE_file___String___file_delete "file::String::file_delete"
 typedef val_t (* file___String___strip_extension_t)(val_t  self, val_t  param0);
 val_t file___String___strip_extension(val_t  self, val_t  param0);
 #define LOCATE_file___String___strip_extension "file::String::strip_extension"
@@ -218,6 +230,7 @@ val_t file___String___file_path(val_t  self);
 typedef void (* file___String___mkdir_t)(val_t  self);
 void file___String___mkdir(val_t  self);
 #define LOCATE_file___String___mkdir "file::String::mkdir"
+val_t NEW_NativeString_string___NativeString___init();
 typedef val_t (* file___NativeString___file_exists_t)(val_t  self);
 val_t file___NativeString___file_exists(val_t  self);
 #define LOCATE_file___NativeString___file_exists "file::NativeString::file_exists"
@@ -227,6 +240,9 @@ val_t file___NativeString___file_stat(val_t  self);
 typedef val_t (* file___NativeString___file_mkdir_t)(val_t  self);
 val_t file___NativeString___file_mkdir(val_t  self);
 #define LOCATE_file___NativeString___file_mkdir "file::NativeString::file_mkdir"
+typedef val_t (* file___NativeString___file_delete_t)(val_t  self);
+val_t file___NativeString___file_delete(val_t  self);
+#define LOCATE_file___NativeString___file_delete "file::NativeString::file_delete"
 typedef val_t (* file___FileStat___mode_t)(val_t  self);
 val_t file___FileStat___mode(val_t  self);
 #define LOCATE_file___FileStat___mode "file::FileStat::mode"

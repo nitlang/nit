@@ -2,9 +2,11 @@
 #include "string_search._sep.h"
 val_t string_search___Pattern___search_index_in(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 21, LOCATE_string_search___Pattern___search_index_in};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  fprintf(stderr, "Deferred method %s called");
+  fprintf(stderr, "Deferred method called");
   fprintf(stderr, " (%s:%d)\n", LOCATE_string_search, 21);
   nit_exit(1);
   tracehead = trace.prev;
@@ -12,9 +14,11 @@ val_t string_search___Pattern___search_index_in(val_t  self, val_t  param0, val_
 }
 val_t string_search___Pattern___search_in(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 26, LOCATE_string_search___Pattern___search_in};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  fprintf(stderr, "Deferred method %s called");
+  fprintf(stderr, "Deferred method called");
   fprintf(stderr, " (%s:%d)\n", LOCATE_string_search, 26);
   nit_exit(1);
   tracehead = trace.prev;
@@ -22,77 +26,79 @@ val_t string_search___Pattern___search_in(val_t  self, val_t  param0, val_t  par
 }
 val_t string_search___Pattern___search_all_in(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 30, LOCATE_string_search___Pattern___search_all_in};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
+  val_t variable[7];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable0 =  param0;
-  variable2 = NEW_Array_array___Array___init(); /*new Array[Match]*/
-  variable1 = variable2;
-  variable3 = ((string_search___Pattern___search_in_t)CALL( self,COLOR_string_search___Pattern___search_in))( self,  variable0 /*s*/,  TAG_Int(0)) /*Pattern::search_in*/;
-  variable2 = variable3;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = NEW_Array_array___Array___init(); /*new Array[Match]*/
+  variable[3] = variable[4];
+  variable[5] = variable[0];
+  variable[5] = ((string_search___Pattern___search_in_t)CALL(variable[5],COLOR_string_search___Pattern___search_in))(variable[5],  variable[1] /*s*/,  TAG_Int(0)) /*Pattern::search_in*/;
+  variable[4] = variable[5];
   while (true) { /*while*/
-    variable3 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable2 /*match*/ ==  NIT_NULL /*null*/) || (( variable2 /*match*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable2 /*match*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable2 /*match*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable2 /*match*/,COLOR_kernel___Object_____eqeq))( variable2 /*match*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    if (!UNTAG_Bool(variable3)) break; /* while*/
-    ((array___AbstractArray___add_t)CALL( variable1 /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable1 /*res*/,  variable2 /*match*/) /*AbstractArray::add*/;
-    variable3 = ((string_search___Match___after_t)CALL( variable2 /*match*/,COLOR_string_search___Match___after))( variable2 /*match*/) /*Match::after*/;
-    variable3 = ((string_search___Pattern___search_in_t)CALL( self,COLOR_string_search___Pattern___search_in))( self,  variable0 /*s*/, variable3) /*Pattern::search_in*/;
-    variable2 = variable3 /*match=*/;
+    variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*match*/ ==  NIT_NULL /*null*/) || (( variable[4] /*match*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*match*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*match*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*match*/,COLOR_kernel___Object_____eqeq))( variable[4] /*match*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    if (!UNTAG_Bool(variable[5])) break; /* while*/
+    ((array___AbstractArray___add_t)CALL( variable[3] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[3] /*res*/,  variable[4] /*match*/) /*AbstractArray::add*/;
+    variable[5] = variable[0];
+    variable[6] = ((string_search___Match___after_t)CALL( variable[4] /*match*/,COLOR_string_search___Match___after))( variable[4] /*match*/) /*Match::after*/;
+    variable[5] = ((string_search___Pattern___search_in_t)CALL(variable[5],COLOR_string_search___Pattern___search_in))(variable[5],  variable[1] /*s*/, variable[6]) /*Pattern::search_in*/;
+    variable[4] = variable[5] /*match=*/;
     continue_1: while(0);
   }
   break_1: while(0);
-  variable1 =  variable1 /*res*/;
+  variable[2] =  variable[3] /*res*/;
   goto return_label0;
   return_label0: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 val_t string_search___Pattern___split_in(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 42, LOCATE_string_search___Pattern___split_in};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-    val_t variable5;
+  val_t variable[8];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable0 =  param0;
-  variable2 = NEW_Array_array___Array___init(); /*new Array[Match]*/
-  variable1 = variable2;
-  variable2 =  TAG_Int(0);
-  variable4 = ((string_search___Pattern___search_in_t)CALL( self,COLOR_string_search___Pattern___search_in))( self,  variable0 /*s*/,  TAG_Int(0)) /*Pattern::search_in*/;
-  variable3 = variable4;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = NEW_Array_array___Array___init(); /*new Array[Match]*/
+  variable[3] = variable[4];
+  variable[4] =  TAG_Int(0);
+  variable[6] = variable[0];
+  variable[6] = ((string_search___Pattern___search_in_t)CALL(variable[6],COLOR_string_search___Pattern___search_in))(variable[6],  variable[1] /*s*/,  TAG_Int(0)) /*Pattern::search_in*/;
+  variable[5] = variable[6];
   while (true) { /*while*/
-    variable4 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable3 /*match*/ ==  NIT_NULL /*null*/) || (( variable3 /*match*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable3 /*match*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable3 /*match*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable3 /*match*/,COLOR_kernel___Object_____eqeq))( variable3 /*match*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    if (!UNTAG_Bool(variable4)) break; /* while*/
-    variable5 = ((string_search___Match___from_t)CALL( variable3 /*match*/,COLOR_string_search___Match___from))( variable3 /*match*/) /*Match::from*/;
-    variable5 = TAG_Int(UNTAG_Int(variable5)-UNTAG_Int( variable2 /*i*/));
-    variable4 = variable5;
-    variable5 = NEW_Match_string_search___Match___init( variable0 /*s*/,  variable2 /*i*/,  variable4 /*len*/); /*new Match*/
-    ((array___AbstractArray___add_t)CALL( variable1 /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable1 /*res*/, variable5) /*AbstractArray::add*/;
-    variable5 = ((string_search___Match___after_t)CALL( variable3 /*match*/,COLOR_string_search___Match___after))( variable3 /*match*/) /*Match::after*/;
-    variable2 = variable5 /*i=*/;
-    variable5 = ((string_search___Pattern___search_in_t)CALL( self,COLOR_string_search___Pattern___search_in))( self,  variable0 /*s*/,  variable2 /*i*/) /*Pattern::search_in*/;
-    variable3 = variable5 /*match=*/;
+    variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*match*/ ==  NIT_NULL /*null*/) || (( variable[5] /*match*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*match*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*match*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*match*/,COLOR_kernel___Object_____eqeq))( variable[5] /*match*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    if (!UNTAG_Bool(variable[6])) break; /* while*/
+    variable[7] = ((string_search___Match___from_t)CALL( variable[5] /*match*/,COLOR_string_search___Match___from))( variable[5] /*match*/) /*Match::from*/;
+    variable[7] = TAG_Int(UNTAG_Int(variable[7])-UNTAG_Int( variable[4] /*i*/));
+    variable[6] = variable[7];
+    variable[7] = NEW_Match_string_search___Match___init( variable[1] /*s*/,  variable[4] /*i*/,  variable[6] /*len*/); /*new Match*/
+    ((array___AbstractArray___add_t)CALL( variable[3] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[3] /*res*/, variable[7]) /*AbstractArray::add*/;
+    variable[7] = ((string_search___Match___after_t)CALL( variable[5] /*match*/,COLOR_string_search___Match___after))( variable[5] /*match*/) /*Match::after*/;
+    variable[4] = variable[7] /*i=*/;
+    variable[7] = variable[0];
+    variable[7] = ((string_search___Pattern___search_in_t)CALL(variable[7],COLOR_string_search___Pattern___search_in))(variable[7],  variable[1] /*s*/,  variable[4] /*i*/) /*Pattern::search_in*/;
+    variable[5] = variable[7] /*match=*/;
     continue_3: while(0);
   }
   break_3: while(0);
-  variable4 = ((array___AbstractArray___length_t)CALL( variable0 /*s*/,COLOR_abstract_collection___Collection___length))( variable0 /*s*/) /*AbstractArray::length*/;
-  variable4 = TAG_Int(UNTAG_Int(variable4)-UNTAG_Int( variable2 /*i*/));
-  variable5 = NEW_Match_string_search___Match___init( variable0 /*s*/,  variable2 /*i*/, variable4); /*new Match*/
-  variable4 = variable5;
-  ((array___AbstractArray___add_t)CALL( variable1 /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable1 /*res*/, variable4) /*AbstractArray::add*/;
-  variable1 =  variable1 /*res*/;
+  variable[6] = ((array___AbstractArray___length_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Collection___length))( variable[1] /*s*/) /*AbstractArray::length*/;
+  variable[6] = TAG_Int(UNTAG_Int(variable[6])-UNTAG_Int( variable[4] /*i*/));
+  variable[7] = NEW_Match_string_search___Match___init( variable[1] /*s*/,  variable[4] /*i*/, variable[6]); /*new Match*/
+  variable[6] = variable[7];
+  ((array___AbstractArray___add_t)CALL( variable[3] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[3] /*res*/, variable[6]) /*AbstractArray::add*/;
+  variable[2] =  variable[3] /*res*/;
   goto return_label2;
   return_label2: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 void string_search___Pattern___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 0, LOCATE_string_search___Pattern___init};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
   tracehead = trace.prev;
@@ -100,453 +106,505 @@ void string_search___Pattern___init(val_t  self, int* init_table) {
 }
 val_t string_search___BM_Pattern___to_s(val_t  self) {
   struct trace_t trace = {NULL, NULL, 67, LOCATE_string_search___BM_Pattern___to_s};
-  val_t variable0;
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable0 = ATTR_string_search___BM_Pattern____motif( self) /*BM_Pattern::_motif*/;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_string_search___BM_Pattern____motif(variable[2]) /*BM_Pattern::_motif*/;
+  variable[1] = variable[2];
   goto return_label4;
   return_label4: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t string_search___BM_Pattern___search_index_in(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 69, LOCATE_string_search___BM_Pattern___search_index_in};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-    val_t variable5;
-    val_t variable6;
-      val_t variable7;
-        val_t variable8;
-      val_t variable9;
-      val_t variable10;
+  val_t variable[15];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable2 = TAG_Bool(UNTAG_Int( variable1 /*from*/)>=UNTAG_Int( TAG_Int(0)));
-  if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string_search___BM_Pattern___search_index_in, LOCATE_string_search, 72); nit_exit(1);}
-  variable3 = ((array___AbstractArray___length_t)CALL( variable0 /*s*/,COLOR_abstract_collection___Collection___length))( variable0 /*s*/) /*AbstractArray::length*/;
-  variable2 = variable3;
-  variable4 = ATTR_string_search___BM_Pattern____length( self) /*BM_Pattern::_length*/;
-  variable3 = variable4;
-  variable4 =  variable1 /*from*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[4] = TAG_Bool(UNTAG_Int( variable[2] /*from*/)>=UNTAG_Int( TAG_Int(0)));
+  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string_search___BM_Pattern___search_index_in, LOCATE_string_search, 72); nit_exit(1);}
+  variable[5] = ((array___AbstractArray___length_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Collection___length))( variable[1] /*s*/) /*AbstractArray::length*/;
+  variable[4] = variable[5];
+  variable[6] = variable[0];
+  variable[6] = ATTR_string_search___BM_Pattern____length(variable[6]) /*BM_Pattern::_length*/;
+  variable[5] = variable[6];
+  variable[6] =  variable[2] /*from*/;
   while (true) { /*while*/
-    variable5 = TAG_Int(UNTAG_Int( variable2 /*n*/)-UNTAG_Int( variable3 /*m*/));
-    variable5 = TAG_Int(UNTAG_Int(variable5)+UNTAG_Int( TAG_Int(1)));
-    variable5 = TAG_Bool(UNTAG_Int( variable4 /*j*/)<UNTAG_Int(variable5));
-    if (!UNTAG_Bool(variable5)) break; /* while*/
-    variable6 = TAG_Int(UNTAG_Int( variable3 /*m*/)-UNTAG_Int( TAG_Int(1)));
-    variable5 = variable6;
+    variable[7] = TAG_Int(UNTAG_Int( variable[4] /*n*/)-UNTAG_Int( variable[5] /*m*/));
+    variable[7] = TAG_Int(UNTAG_Int(variable[7])+UNTAG_Int( TAG_Int(1)));
+    variable[7] = TAG_Bool(UNTAG_Int( variable[6] /*j*/)<UNTAG_Int(variable[7]));
+    if (!UNTAG_Bool(variable[7])) break; /* while*/
+    variable[8] = TAG_Int(UNTAG_Int( variable[5] /*m*/)-UNTAG_Int( TAG_Int(1)));
+    variable[7] = variable[8];
     while (true) { /*while*/
-      variable6 = TAG_Bool(UNTAG_Int( variable5 /*i*/)>=UNTAG_Int( TAG_Int(0)));
-      variable7 = variable6;
-      if (UNTAG_Bool(variable7)) { /* and */
-        variable7 = ATTR_string_search___BM_Pattern____motif( self) /*BM_Pattern::_motif*/;
-        variable7 = ((string___String_____bra_t)CALL(variable7,COLOR_abstract_collection___Map_____bra))(variable7,  variable5 /*i*/) /*String::[]*/;
-        variable8 = TAG_Int(UNTAG_Int( variable5 /*i*/)+UNTAG_Int( variable4 /*j*/));
-        variable8 = ((string___String_____bra_t)CALL( variable0 /*s*/,COLOR_abstract_collection___Map_____bra))( variable0 /*s*/, variable8) /*String::[]*/;
-        variable7 = TAG_Bool((variable7)==(variable8));
+      variable[8] = TAG_Bool(UNTAG_Int( variable[7] /*i*/)>=UNTAG_Int( TAG_Int(0)));
+      variable[9] = variable[8];
+      if (UNTAG_Bool(variable[9])) { /* and */
+        variable[9] = variable[0];
+        variable[9] = ATTR_string_search___BM_Pattern____motif(variable[9]) /*BM_Pattern::_motif*/;
+        variable[9] = ((string___String_____bra_t)CALL(variable[9],COLOR_abstract_collection___Map_____bra))(variable[9],  variable[7] /*i*/) /*String::[]*/;
+        variable[10] = TAG_Int(UNTAG_Int( variable[7] /*i*/)+UNTAG_Int( variable[6] /*j*/));
+        variable[10] = ((string___String_____bra_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Map_____bra))( variable[1] /*s*/, variable[10]) /*String::[]*/;
+        variable[9] = TAG_Bool((variable[9])==(variable[10]));
       }
-      variable6 = variable7;
-      if (!UNTAG_Bool(variable6)) break; /* while*/
-      variable5 = TAG_Int(UNTAG_Int(variable5)-UNTAG_Int( TAG_Int(1))) /*i*/;
+      variable[8] = variable[9];
+      if (!UNTAG_Bool(variable[8])) break; /* while*/
+      variable[7] = TAG_Int(UNTAG_Int(variable[7])-UNTAG_Int( TAG_Int(1))) /*i*/;
       continue_7: while(0);
     }
     break_7: while(0);
-    variable6 = TAG_Bool(UNTAG_Int( variable5 /*i*/)<UNTAG_Int( TAG_Int(0)));
-    if (UNTAG_Bool(variable6)) { /*if*/
-      variable2 =  variable4 /*j*/;
+    variable[8] = TAG_Bool(UNTAG_Int( variable[7] /*i*/)<UNTAG_Int( TAG_Int(0)));
+    if (UNTAG_Bool(variable[8])) { /*if*/
+      variable[3] =  variable[6] /*j*/;
       goto return_label5;
     } else { /*if*/
-      variable7 = ATTR_string_search___BM_Pattern____gs( self) /*BM_Pattern::_gs*/;
-      variable8 =  variable5 /*i*/;
-      variable9 = TAG_Bool(UNTAG_Int( variable8 /*index*/)>=UNTAG_Int( TAG_Int(0)));
-      variable10 = variable9;
-      if (UNTAG_Bool(variable10)) { /* and */
-        variable10 = variable7;
-        variable10 = ATTR_array___AbstractArray____length(variable10) /*AbstractArray::_length*/;
-        variable10 = TAG_Bool(UNTAG_Int( variable8 /*index*/)<UNTAG_Int(variable10));
+      variable[9] = variable[0];
+      variable[9] = ATTR_string_search___BM_Pattern____gs(variable[9]) /*BM_Pattern::_gs*/;
+      variable[10] = variable[9];
+      variable[11] =  variable[7] /*i*/;
+      variable[13] = TAG_Bool(UNTAG_Int( variable[11] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+      variable[14] = variable[13];
+      if (UNTAG_Bool(variable[14])) { /* and */
+        variable[14] = variable[10];
+        variable[14] = ATTR_array___AbstractArray____length(variable[14]) /*AbstractArray::_length*/;
+        variable[14] = TAG_Bool(UNTAG_Int( variable[11] /*index*/)<UNTAG_Int(variable[14]));
       }
-      variable9 = variable10;
-      if (!UNTAG_Bool(variable9)) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_string_search, 229); nit_exit(1);}
-      variable9 = variable7;
-      variable9 = ATTR_array___Array____items(variable9) /*Array::_items*/;
-      variable9 = UNBOX_NativeArray(variable9)[UNTAG_Int( variable8 /*index*/)];
+      variable[13] = variable[14];
+      if (!UNTAG_Bool(variable[13])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_string_search, 229); nit_exit(1);}
+      variable[13] = variable[10];
+      variable[13] = ATTR_array___Array____items(variable[13]) /*Array::_items*/;
+      variable[13] = UNBOX_NativeArray(variable[13])[UNTAG_Int( variable[11] /*index*/)];
+      variable[12] = variable[13];
       goto return_label8;
       return_label8: while(false);
-      variable7 = variable9;
-      variable6 = variable7;
-      variable8 = TAG_Int(UNTAG_Int( variable5 /*i*/)+UNTAG_Int( variable4 /*j*/));
-      variable8 = ((string___String_____bra_t)CALL( variable0 /*s*/,COLOR_abstract_collection___Map_____bra))( variable0 /*s*/, variable8) /*String::[]*/;
-      variable8 = ((string_search___BM_Pattern___bc_t)CALL( self,COLOR_string_search___BM_Pattern___bc))( self, variable8) /*BM_Pattern::bc*/;
-      variable8 = TAG_Int(UNTAG_Int(variable8)-UNTAG_Int( variable3 /*m*/));
-      variable8 = TAG_Int(UNTAG_Int(variable8)+UNTAG_Int( TAG_Int(1)));
-      variable8 = TAG_Int(UNTAG_Int(variable8)+UNTAG_Int( variable5 /*i*/));
-      variable7 = variable8;
-      variable8 = TAG_Bool(UNTAG_Int( variable6 /*gs*/)>UNTAG_Int( variable7 /*bc*/));
-      if (UNTAG_Bool(variable8)) { /*if*/
-        variable4 = TAG_Int(UNTAG_Int(variable4)+UNTAG_Int( variable6 /*gs*/)) /*j*/;
+      variable[9] = variable[12];
+      variable[8] = variable[9];
+      variable[10] = variable[0];
+      variable[11] = TAG_Int(UNTAG_Int( variable[7] /*i*/)+UNTAG_Int( variable[6] /*j*/));
+      variable[11] = ((string___String_____bra_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Map_____bra))( variable[1] /*s*/, variable[11]) /*String::[]*/;
+      variable[10] = ((string_search___BM_Pattern___bc_t)CALL(variable[10],COLOR_string_search___BM_Pattern___bc))(variable[10], variable[11]) /*BM_Pattern::bc*/;
+      variable[10] = TAG_Int(UNTAG_Int(variable[10])-UNTAG_Int( variable[5] /*m*/));
+      variable[10] = TAG_Int(UNTAG_Int(variable[10])+UNTAG_Int( TAG_Int(1)));
+      variable[10] = TAG_Int(UNTAG_Int(variable[10])+UNTAG_Int( variable[7] /*i*/));
+      variable[9] = variable[10];
+      variable[10] = TAG_Bool(UNTAG_Int( variable[8] /*gs*/)>UNTAG_Int( variable[9] /*bc*/));
+      if (UNTAG_Bool(variable[10])) { /*if*/
+        variable[6] = TAG_Int(UNTAG_Int(variable[6])+UNTAG_Int( variable[8] /*gs*/)) /*j*/;
       } else { /*if*/
-        variable4 = TAG_Int(UNTAG_Int(variable4)+UNTAG_Int( variable7 /*bc*/)) /*j*/;
+        variable[6] = TAG_Int(UNTAG_Int(variable[6])+UNTAG_Int( variable[9] /*bc*/)) /*j*/;
       }
     }
     continue_6: while(0);
   }
   break_6: while(0);
-  variable5 = TAG_Int(-UNTAG_Int( TAG_Int(1)));
-  variable2 = variable5;
+  variable[7] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
+  variable[3] = variable[7];
   goto return_label5;
   return_label5: while(false);
   tracehead = trace.prev;
-  return variable2;
+  return variable[3];
 }
 val_t string_search___BM_Pattern___search_in(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 96, LOCATE_string_search___BM_Pattern___search_in};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-    val_t variable4;
+  val_t variable[7];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable3 = ((string_search___BM_Pattern___search_index_in_t)CALL( self,COLOR_string_search___Pattern___search_index_in))( self,  variable0 /*s*/,  variable1 /*from*/) /*BM_Pattern::search_index_in*/;
-  variable2 = variable3;
-  variable3 = TAG_Bool(UNTAG_Int( variable2 /*to*/)<UNTAG_Int( TAG_Int(0)));
-  if (UNTAG_Bool(variable3)) { /*if*/
-    variable2 =  NIT_NULL /*null*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[5] = variable[0];
+  variable[5] = ((string_search___BM_Pattern___search_index_in_t)CALL(variable[5],COLOR_string_search___Pattern___search_index_in))(variable[5],  variable[1] /*s*/,  variable[2] /*from*/) /*BM_Pattern::search_index_in*/;
+  variable[4] = variable[5];
+  variable[5] = TAG_Bool(UNTAG_Int( variable[4] /*to*/)<UNTAG_Int( TAG_Int(0)));
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    variable[3] =  NIT_NULL /*null*/;
     goto return_label9;
   } else { /*if*/
-    variable3 = ATTR_string_search___BM_Pattern____length( self) /*BM_Pattern::_length*/;
-    variable4 = NEW_Match_string_search___Match___init( variable0 /*s*/,  variable2 /*to*/, variable3); /*new Match*/
-    variable3 = variable4;
-    variable2 = variable3;
+    variable[5] = variable[0];
+    variable[5] = ATTR_string_search___BM_Pattern____length(variable[5]) /*BM_Pattern::_length*/;
+    variable[6] = NEW_Match_string_search___Match___init( variable[1] /*s*/,  variable[4] /*to*/, variable[5]); /*new Match*/
+    variable[5] = variable[6];
+    variable[3] = variable[5];
     goto return_label9;
   }
   return_label9: while(false);
   tracehead = trace.prev;
-  return variable2;
+  return variable[3];
 }
 void string_search___BM_Pattern___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 107, LOCATE_string_search___BM_Pattern___init};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  val_t variable[6];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable0 =  param0;
+  variable[0] =  self;
+  variable[1] =  param0;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_BM_Pattern].i]) return;
-  ATTR_string_search___BM_Pattern____motif( self) /*BM_Pattern::_motif*/ =  variable0 /*motif*/;
-  variable1 = ((array___AbstractArray___length_t)CALL( variable0 /*motif*/,COLOR_abstract_collection___Collection___length))( variable0 /*motif*/) /*AbstractArray::length*/;
-  ATTR_string_search___BM_Pattern____length( self) /*BM_Pattern::_length*/ = variable1;
-  variable1 = ATTR_string_search___BM_Pattern____length( self) /*BM_Pattern::_length*/;
-  variable2 = NEW_Array_array___Array___with_capacity(variable1); /*new Array[Int]*/
-  variable1 = variable2;
-  ATTR_string_search___BM_Pattern____gs( self) /*BM_Pattern::_gs*/ = variable1;
-  variable1 = NEW_ArrayMap_array___ArrayMap___init(); /*new ArrayMap[Char, Int]*/
-  ATTR_string_search___BM_Pattern____bc_table( self) /*BM_Pattern::_bc_table*/ = variable1;
-  ((string_search___BM_Pattern___compute_gs_t)CALL( self,COLOR_string_search___BM_Pattern___compute_gs))( self) /*BM_Pattern::compute_gs*/;
-  ((string_search___BM_Pattern___compute_bc_t)CALL( self,COLOR_string_search___BM_Pattern___compute_bc))( self) /*BM_Pattern::compute_bc*/;
+  variable[3] = variable[0];
+  ATTR_string_search___BM_Pattern____motif(variable[3]) /*BM_Pattern::_motif*/ =  variable[1] /*motif*/;
+  variable[3] = variable[0];
+  variable[4] = ((array___AbstractArray___length_t)CALL( variable[1] /*motif*/,COLOR_abstract_collection___Collection___length))( variable[1] /*motif*/) /*AbstractArray::length*/;
+  ATTR_string_search___BM_Pattern____length(variable[3]) /*BM_Pattern::_length*/ = variable[4];
+  variable[3] = variable[0];
+  variable[4] = variable[0];
+  variable[4] = ATTR_string_search___BM_Pattern____length(variable[4]) /*BM_Pattern::_length*/;
+  variable[5] = NEW_Array_array___Array___with_capacity(variable[4]); /*new Array[Int]*/
+  variable[4] = variable[5];
+  ATTR_string_search___BM_Pattern____gs(variable[3]) /*BM_Pattern::_gs*/ = variable[4];
+  variable[3] = variable[0];
+  variable[4] = NEW_ArrayMap_array___ArrayMap___init(); /*new ArrayMap[Char, Int]*/
+  ATTR_string_search___BM_Pattern____bc_table(variable[3]) /*BM_Pattern::_bc_table*/ = variable[4];
+  variable[3] = variable[0];
+  ((string_search___BM_Pattern___compute_gs_t)CALL(variable[3],COLOR_string_search___BM_Pattern___compute_gs))(variable[3]) /*BM_Pattern::compute_gs*/;
+  variable[3] = variable[0];
+  ((string_search___BM_Pattern___compute_bc_t)CALL(variable[3],COLOR_string_search___BM_Pattern___compute_bc))(variable[3]) /*BM_Pattern::compute_bc*/;
+  return_label10: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_BM_Pattern].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t string_search___BM_Pattern___bc(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 124, LOCATE_string_search___BM_Pattern___bc};
-  val_t variable0;
-  val_t variable1;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable0 =  param0;
-  variable1 = ATTR_string_search___BM_Pattern____bc_table( self) /*BM_Pattern::_bc_table*/;
-  variable1 = ((abstract_collection___Map___has_key_t)CALL(variable1,COLOR_abstract_collection___Map___has_key))(variable1,  variable0 /*e*/) /*Map::has_key*/;
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = ATTR_string_search___BM_Pattern____bc_table( self) /*BM_Pattern::_bc_table*/;
-    variable1 = ((abstract_collection___Map_____bra_t)CALL(variable1,COLOR_abstract_collection___Map_____bra))(variable1,  variable0 /*e*/) /*Map::[]*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ATTR_string_search___BM_Pattern____bc_table(variable[3]) /*BM_Pattern::_bc_table*/;
+  variable[3] = ((abstract_collection___Map___has_key_t)CALL(variable[3],COLOR_abstract_collection___Map___has_key))(variable[3],  variable[1] /*e*/) /*Map::has_key*/;
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = variable[0];
+    variable[3] = ATTR_string_search___BM_Pattern____bc_table(variable[3]) /*BM_Pattern::_bc_table*/;
+    variable[3] = ((abstract_collection___Map_____bra_t)CALL(variable[3],COLOR_abstract_collection___Map_____bra))(variable[3],  variable[1] /*e*/) /*Map::[]*/;
+    variable[2] = variable[3];
     goto return_label11;
   } else { /*if*/
-    variable1 = ATTR_string_search___BM_Pattern____length( self) /*BM_Pattern::_length*/;
+    variable[3] = variable[0];
+    variable[3] = ATTR_string_search___BM_Pattern____length(variable[3]) /*BM_Pattern::_length*/;
+    variable[2] = variable[3];
     goto return_label11;
   }
   return_label11: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 void string_search___BM_Pattern___compute_bc(val_t  self) {
   struct trace_t trace = {NULL, NULL, 139, LOCATE_string_search___BM_Pattern___compute_bc};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-    val_t variable3;
-    val_t variable4;
-    val_t variable5;
+  val_t variable[8];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable1 = ATTR_string_search___BM_Pattern____motif( self) /*BM_Pattern::_motif*/;
-  variable0 = variable1;
-  variable2 = ATTR_string_search___BM_Pattern____length( self) /*BM_Pattern::_length*/;
-  variable1 = variable2;
-  variable2 =  TAG_Int(0);
+  variable[0] =  self;
+  variable[3] = variable[0];
+  variable[3] = ATTR_string_search___BM_Pattern____motif(variable[3]) /*BM_Pattern::_motif*/;
+  variable[2] = variable[3];
+  variable[4] = variable[0];
+  variable[4] = ATTR_string_search___BM_Pattern____length(variable[4]) /*BM_Pattern::_length*/;
+  variable[3] = variable[4];
+  variable[4] =  TAG_Int(0);
   while (true) { /*while*/
-    variable3 = TAG_Int(UNTAG_Int( variable1 /*m*/)-UNTAG_Int( TAG_Int(1)));
-    variable3 = TAG_Bool(UNTAG_Int( variable2 /*i*/)<UNTAG_Int(variable3));
-    if (!UNTAG_Bool(variable3)) break; /* while*/
-    variable3 = ATTR_string_search___BM_Pattern____bc_table( self) /*BM_Pattern::_bc_table*/;
-    variable4 = ((string___String_____bra_t)CALL( variable0 /*x*/,COLOR_abstract_collection___Map_____bra))( variable0 /*x*/,  variable2 /*i*/) /*String::[]*/;
-    variable5 = TAG_Int(UNTAG_Int( variable1 /*m*/)-UNTAG_Int( variable2 /*i*/));
-    variable5 = TAG_Int(UNTAG_Int(variable5)-UNTAG_Int( TAG_Int(1)));
-    ((abstract_collection___Map_____braeq_t)CALL(variable3,COLOR_abstract_collection___Map_____braeq))(variable3, variable4, variable5) /*Map::[]=*/;
-    variable2 = TAG_Int(UNTAG_Int(variable2)+UNTAG_Int( TAG_Int(1))) /*i*/;
+    variable[5] = TAG_Int(UNTAG_Int( variable[3] /*m*/)-UNTAG_Int( TAG_Int(1)));
+    variable[5] = TAG_Bool(UNTAG_Int( variable[4] /*i*/)<UNTAG_Int(variable[5]));
+    if (!UNTAG_Bool(variable[5])) break; /* while*/
+    variable[5] = variable[0];
+    variable[5] = ATTR_string_search___BM_Pattern____bc_table(variable[5]) /*BM_Pattern::_bc_table*/;
+    variable[6] = ((string___String_____bra_t)CALL( variable[2] /*x*/,COLOR_abstract_collection___Map_____bra))( variable[2] /*x*/,  variable[4] /*i*/) /*String::[]*/;
+    variable[7] = TAG_Int(UNTAG_Int( variable[3] /*m*/)-UNTAG_Int( variable[4] /*i*/));
+    variable[7] = TAG_Int(UNTAG_Int(variable[7])-UNTAG_Int( TAG_Int(1)));
+    ((abstract_collection___Map_____braeq_t)CALL(variable[5],COLOR_abstract_collection___Map_____braeq))(variable[5], variable[6], variable[7]) /*Map::[]=*/;
+    variable[4] = TAG_Int(UNTAG_Int(variable[4])+UNTAG_Int( TAG_Int(1))) /*i*/;
     continue_13: while(0);
   }
   break_13: while(0);
+  return_label12: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t string_search___BM_Pattern___suffixes(val_t  self) {
   struct trace_t trace = {NULL, NULL, 150, LOCATE_string_search___BM_Pattern___suffixes};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-  val_t variable5;
-  val_t variable6;
-    val_t variable7;
-      val_t variable8;
-      val_t variable9;
-      val_t variable10;
+  val_t variable[15];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable1 = ATTR_string_search___BM_Pattern____motif( self) /*BM_Pattern::_motif*/;
-  variable0 = variable1;
-  variable2 = ATTR_string_search___BM_Pattern____length( self) /*BM_Pattern::_length*/;
-  variable1 = variable2;
-  variable3 = NEW_Array_array___Array___filled_with( variable1 /*m*/,  variable1 /*m*/); /*new Array[Int]*/
-  variable2 = variable3;
-  variable3 =  TAG_Int(0);
-  variable5 = TAG_Int(UNTAG_Int( variable1 /*m*/)-UNTAG_Int( TAG_Int(1)));
-  variable4 = variable5;
-  variable6 = TAG_Int(UNTAG_Int( variable1 /*m*/)-UNTAG_Int( TAG_Int(2)));
-  variable5 = variable6;
+  variable[0] =  self;
+  variable[3] = variable[0];
+  variable[3] = ATTR_string_search___BM_Pattern____motif(variable[3]) /*BM_Pattern::_motif*/;
+  variable[2] = variable[3];
+  variable[4] = variable[0];
+  variable[4] = ATTR_string_search___BM_Pattern____length(variable[4]) /*BM_Pattern::_length*/;
+  variable[3] = variable[4];
+  variable[5] = NEW_Array_array___Array___filled_with( variable[3] /*m*/,  variable[3] /*m*/); /*new Array[Int]*/
+  variable[4] = variable[5];
+  variable[5] =  TAG_Int(0);
+  variable[7] = TAG_Int(UNTAG_Int( variable[3] /*m*/)-UNTAG_Int( TAG_Int(1)));
+  variable[6] = variable[7];
+  variable[8] = TAG_Int(UNTAG_Int( variable[3] /*m*/)-UNTAG_Int( TAG_Int(2)));
+  variable[7] = variable[8];
   while (true) { /*while*/
-    variable6 = TAG_Bool(UNTAG_Int( variable5 /*i*/)>=UNTAG_Int( TAG_Int(0)));
-    if (!UNTAG_Bool(variable6)) break; /* while*/
-    variable6 = TAG_Bool(UNTAG_Int( variable5 /*i*/)>UNTAG_Int( variable4 /*g*/));
-    variable7 = variable6;
-    if (UNTAG_Bool(variable7)) { /* and */
-      variable7 = TAG_Int(UNTAG_Int( variable5 /*i*/)+UNTAG_Int( variable1 /*m*/));
-      variable7 = TAG_Int(UNTAG_Int(variable7)-UNTAG_Int( TAG_Int(1)));
-      variable7 = TAG_Int(UNTAG_Int(variable7)-UNTAG_Int( variable3 /*f*/));
-      variable8 = variable7;
-      variable9 = TAG_Bool(UNTAG_Int( variable8 /*index*/)>=UNTAG_Int( TAG_Int(0)));
-      variable10 = variable9;
-      if (UNTAG_Bool(variable10)) { /* and */
-        variable10 = ATTR_array___AbstractArray____length( variable2 /*suff*/) /*AbstractArray::_length*/;
-        variable10 = TAG_Bool(UNTAG_Int( variable8 /*index*/)<UNTAG_Int(variable10));
+    variable[8] = TAG_Bool(UNTAG_Int( variable[7] /*i*/)>=UNTAG_Int( TAG_Int(0)));
+    if (!UNTAG_Bool(variable[8])) break; /* while*/
+    variable[8] = TAG_Bool(UNTAG_Int( variable[7] /*i*/)>UNTAG_Int( variable[6] /*g*/));
+    variable[9] = variable[8];
+    if (UNTAG_Bool(variable[9])) { /* and */
+      variable[9] = TAG_Int(UNTAG_Int( variable[7] /*i*/)+UNTAG_Int( variable[3] /*m*/));
+      variable[9] = TAG_Int(UNTAG_Int(variable[9])-UNTAG_Int( TAG_Int(1)));
+      variable[9] = TAG_Int(UNTAG_Int(variable[9])-UNTAG_Int( variable[5] /*f*/));
+      variable[10] =  variable[4] /*suff*/;
+      variable[11] = variable[9];
+      variable[13] = TAG_Bool(UNTAG_Int( variable[11] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+      variable[14] = variable[13];
+      if (UNTAG_Bool(variable[14])) { /* and */
+        variable[14] = variable[10];
+        variable[14] = ATTR_array___AbstractArray____length(variable[14]) /*AbstractArray::_length*/;
+        variable[14] = TAG_Bool(UNTAG_Int( variable[11] /*index*/)<UNTAG_Int(variable[14]));
       }
-      variable9 = variable10;
-      if (!UNTAG_Bool(variable9)) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_string_search, 229); nit_exit(1);}
-      variable9 = ATTR_array___Array____items( variable2 /*suff*/) /*Array::_items*/;
-      variable9 = UNBOX_NativeArray(variable9)[UNTAG_Int( variable8 /*index*/)];
+      variable[13] = variable[14];
+      if (!UNTAG_Bool(variable[13])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_string_search, 229); nit_exit(1);}
+      variable[13] = variable[10];
+      variable[13] = ATTR_array___Array____items(variable[13]) /*Array::_items*/;
+      variable[13] = UNBOX_NativeArray(variable[13])[UNTAG_Int( variable[11] /*index*/)];
+      variable[12] = variable[13];
       goto return_label16;
       return_label16: while(false);
-      variable7 = variable9;
-      variable8 = TAG_Int(UNTAG_Int( variable5 /*i*/)-UNTAG_Int( variable4 /*g*/));
-      variable7 = TAG_Bool(UNTAG_Int(variable7)<UNTAG_Int(variable8));
+      variable[9] = variable[12];
+      variable[10] = TAG_Int(UNTAG_Int( variable[7] /*i*/)-UNTAG_Int( variable[6] /*g*/));
+      variable[9] = TAG_Bool(UNTAG_Int(variable[9])<UNTAG_Int(variable[10]));
     }
-    variable6 = variable7;
-    if (UNTAG_Bool(variable6)) { /*if*/
-      variable6 = TAG_Int(UNTAG_Int( variable5 /*i*/)+UNTAG_Int( variable1 /*m*/));
-      variable6 = TAG_Int(UNTAG_Int(variable6)-UNTAG_Int( TAG_Int(1)));
-      variable6 = TAG_Int(UNTAG_Int(variable6)-UNTAG_Int( variable3 /*f*/));
-      variable7 = variable6;
-      variable8 = TAG_Bool(UNTAG_Int( variable7 /*index*/)>=UNTAG_Int( TAG_Int(0)));
-      variable9 = variable8;
-      if (UNTAG_Bool(variable9)) { /* and */
-        variable9 = ATTR_array___AbstractArray____length( variable2 /*suff*/) /*AbstractArray::_length*/;
-        variable9 = TAG_Bool(UNTAG_Int( variable7 /*index*/)<UNTAG_Int(variable9));
+    variable[8] = variable[9];
+    if (UNTAG_Bool(variable[8])) { /*if*/
+      variable[8] = TAG_Int(UNTAG_Int( variable[7] /*i*/)+UNTAG_Int( variable[3] /*m*/));
+      variable[8] = TAG_Int(UNTAG_Int(variable[8])-UNTAG_Int( TAG_Int(1)));
+      variable[8] = TAG_Int(UNTAG_Int(variable[8])-UNTAG_Int( variable[5] /*f*/));
+      variable[9] =  variable[4] /*suff*/;
+      variable[10] = variable[8];
+      variable[12] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+      variable[13] = variable[12];
+      if (UNTAG_Bool(variable[13])) { /* and */
+        variable[13] = variable[9];
+        variable[13] = ATTR_array___AbstractArray____length(variable[13]) /*AbstractArray::_length*/;
+        variable[13] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)<UNTAG_Int(variable[13]));
       }
-      variable8 = variable9;
-      if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_string_search, 229); nit_exit(1);}
-      variable8 = ATTR_array___Array____items( variable2 /*suff*/) /*Array::_items*/;
-      variable8 = UNBOX_NativeArray(variable8)[UNTAG_Int( variable7 /*index*/)];
+      variable[12] = variable[13];
+      if (!UNTAG_Bool(variable[12])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_string_search, 229); nit_exit(1);}
+      variable[12] = variable[9];
+      variable[12] = ATTR_array___Array____items(variable[12]) /*Array::_items*/;
+      variable[12] = UNBOX_NativeArray(variable[12])[UNTAG_Int( variable[10] /*index*/)];
+      variable[11] = variable[12];
       goto return_label17;
       return_label17: while(false);
-      variable6 = variable8;
-      ((array___Array_____braeq_t)CALL( variable2 /*suff*/,COLOR_abstract_collection___Map_____braeq))( variable2 /*suff*/,  variable5 /*i*/, variable6) /*Array::[]=*/;
+      variable[8] = variable[11];
+      ((array___Array_____braeq_t)CALL( variable[4] /*suff*/,COLOR_abstract_collection___Map_____braeq))( variable[4] /*suff*/,  variable[7] /*i*/, variable[8]) /*Array::[]=*/;
     } else { /*if*/
-      variable6 = TAG_Bool(UNTAG_Int( variable5 /*i*/)<UNTAG_Int( variable4 /*g*/));
-      if (UNTAG_Bool(variable6)) { /*if*/
-        variable4 =  variable5 /*i*/ /*g=*/;
+      variable[8] = TAG_Bool(UNTAG_Int( variable[7] /*i*/)<UNTAG_Int( variable[6] /*g*/));
+      if (UNTAG_Bool(variable[8])) { /*if*/
+        variable[6] =  variable[7] /*i*/ /*g=*/;
       }
-      variable3 =  variable5 /*i*/ /*f=*/;
+      variable[5] =  variable[7] /*i*/ /*f=*/;
       while (true) { /*while*/
-        variable6 = TAG_Bool(UNTAG_Int( variable4 /*g*/)>=UNTAG_Int( TAG_Int(0)));
-        variable7 = variable6;
-        if (UNTAG_Bool(variable7)) { /* and */
-          variable7 = ((string___String_____bra_t)CALL( variable0 /*x*/,COLOR_abstract_collection___Map_____bra))( variable0 /*x*/,  variable4 /*g*/) /*String::[]*/;
-          variable8 = TAG_Int(UNTAG_Int( variable4 /*g*/)+UNTAG_Int( variable1 /*m*/));
-          variable8 = TAG_Int(UNTAG_Int(variable8)-UNTAG_Int( TAG_Int(1)));
-          variable8 = TAG_Int(UNTAG_Int(variable8)-UNTAG_Int( variable3 /*f*/));
-          variable8 = ((string___String_____bra_t)CALL( variable0 /*x*/,COLOR_abstract_collection___Map_____bra))( variable0 /*x*/, variable8) /*String::[]*/;
-          variable7 = TAG_Bool((variable7)==(variable8));
+        variable[8] = TAG_Bool(UNTAG_Int( variable[6] /*g*/)>=UNTAG_Int( TAG_Int(0)));
+        variable[9] = variable[8];
+        if (UNTAG_Bool(variable[9])) { /* and */
+          variable[9] = ((string___String_____bra_t)CALL( variable[2] /*x*/,COLOR_abstract_collection___Map_____bra))( variable[2] /*x*/,  variable[6] /*g*/) /*String::[]*/;
+          variable[10] = TAG_Int(UNTAG_Int( variable[6] /*g*/)+UNTAG_Int( variable[3] /*m*/));
+          variable[10] = TAG_Int(UNTAG_Int(variable[10])-UNTAG_Int( TAG_Int(1)));
+          variable[10] = TAG_Int(UNTAG_Int(variable[10])-UNTAG_Int( variable[5] /*f*/));
+          variable[10] = ((string___String_____bra_t)CALL( variable[2] /*x*/,COLOR_abstract_collection___Map_____bra))( variable[2] /*x*/, variable[10]) /*String::[]*/;
+          variable[9] = TAG_Bool((variable[9])==(variable[10]));
         }
-        variable6 = variable7;
-        if (!UNTAG_Bool(variable6)) break; /* while*/
-        variable4 = TAG_Int(UNTAG_Int(variable4)-UNTAG_Int( TAG_Int(1))) /*g*/;
+        variable[8] = variable[9];
+        if (!UNTAG_Bool(variable[8])) break; /* while*/
+        variable[6] = TAG_Int(UNTAG_Int(variable[6])-UNTAG_Int( TAG_Int(1))) /*g*/;
         continue_18: while(0);
       }
       break_18: while(0);
-      variable6 = TAG_Int(UNTAG_Int( variable3 /*f*/)-UNTAG_Int( variable4 /*g*/));
-      ((array___Array_____braeq_t)CALL( variable2 /*suff*/,COLOR_abstract_collection___Map_____braeq))( variable2 /*suff*/,  variable5 /*i*/, variable6) /*Array::[]=*/;
+      variable[8] = TAG_Int(UNTAG_Int( variable[5] /*f*/)-UNTAG_Int( variable[6] /*g*/));
+      ((array___Array_____braeq_t)CALL( variable[4] /*suff*/,COLOR_abstract_collection___Map_____braeq))( variable[4] /*suff*/,  variable[7] /*i*/, variable[8]) /*Array::[]=*/;
     }
-    variable5 = TAG_Int(UNTAG_Int(variable5)-UNTAG_Int( TAG_Int(1))) /*i*/;
+    variable[7] = TAG_Int(UNTAG_Int(variable[7])-UNTAG_Int( TAG_Int(1))) /*i*/;
     continue_15: while(0);
   }
   break_15: while(0);
-  variable0 =  variable2 /*suff*/;
+  variable[1] =  variable[4] /*suff*/;
   goto return_label14;
   return_label14: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 void string_search___BM_Pattern___compute_gs(val_t  self) {
   struct trace_t trace = {NULL, NULL, 173, LOCATE_string_search___BM_Pattern___compute_gs};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-    val_t variable4;
-  val_t variable5;
-    val_t variable6;
-      val_t variable7;
-      val_t variable8;
-    val_t variable9;
+  val_t variable[14];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable1 = ATTR_string_search___BM_Pattern____motif( self) /*BM_Pattern::_motif*/;
-  variable0 = variable1;
-  variable2 = ATTR_string_search___BM_Pattern____length( self) /*BM_Pattern::_length*/;
-  variable1 = variable2;
-  variable3 = ((string_search___BM_Pattern___suffixes_t)CALL( self,COLOR_string_search___BM_Pattern___suffixes))( self) /*BM_Pattern::suffixes*/;
-  variable2 = variable3;
-  variable3 =  TAG_Int(0);
+  variable[0] =  self;
+  variable[3] = variable[0];
+  variable[3] = ATTR_string_search___BM_Pattern____motif(variable[3]) /*BM_Pattern::_motif*/;
+  variable[2] = variable[3];
+  variable[4] = variable[0];
+  variable[4] = ATTR_string_search___BM_Pattern____length(variable[4]) /*BM_Pattern::_length*/;
+  variable[3] = variable[4];
+  variable[5] = variable[0];
+  variable[5] = ((string_search___BM_Pattern___suffixes_t)CALL(variable[5],COLOR_string_search___BM_Pattern___suffixes))(variable[5]) /*BM_Pattern::suffixes*/;
+  variable[4] = variable[5];
+  variable[5] =  TAG_Int(0);
   while (true) { /*while*/
-    variable4 = TAG_Bool(UNTAG_Int( variable3 /*i*/)<UNTAG_Int( variable1 /*m*/));
-    if (!UNTAG_Bool(variable4)) break; /* while*/
-    variable4 = ATTR_string_search___BM_Pattern____gs( self) /*BM_Pattern::_gs*/;
-    ((array___Array_____braeq_t)CALL(variable4,COLOR_abstract_collection___Map_____braeq))(variable4,  variable3 /*i*/,  variable1 /*m*/) /*Array::[]=*/;
-    variable3 = TAG_Int(UNTAG_Int(variable3)+UNTAG_Int( TAG_Int(1))) /*i*/;
+    variable[6] = TAG_Bool(UNTAG_Int( variable[5] /*i*/)<UNTAG_Int( variable[3] /*m*/));
+    if (!UNTAG_Bool(variable[6])) break; /* while*/
+    variable[6] = variable[0];
+    variable[6] = ATTR_string_search___BM_Pattern____gs(variable[6]) /*BM_Pattern::_gs*/;
+    ((array___Array_____braeq_t)CALL(variable[6],COLOR_abstract_collection___Map_____braeq))(variable[6],  variable[5] /*i*/,  variable[3] /*m*/) /*Array::[]=*/;
+    variable[5] = TAG_Int(UNTAG_Int(variable[5])+UNTAG_Int( TAG_Int(1))) /*i*/;
     continue_20: while(0);
   }
   break_20: while(0);
-  variable4 =  TAG_Int(0);
-  variable5 = TAG_Int(UNTAG_Int( variable1 /*m*/)-UNTAG_Int( TAG_Int(1)));
-  variable3 = variable5 /*i=*/;
+  variable[6] =  TAG_Int(0);
+  variable[7] = TAG_Int(UNTAG_Int( variable[3] /*m*/)-UNTAG_Int( TAG_Int(1)));
+  variable[5] = variable[7] /*i=*/;
   while (true) { /*while*/
-    variable5 = TAG_Int(-UNTAG_Int( TAG_Int(1)));
-    variable5 = TAG_Bool(UNTAG_Int( variable3 /*i*/)>=UNTAG_Int(variable5));
-    if (!UNTAG_Bool(variable5)) break; /* while*/
-    variable5 = TAG_Int(-UNTAG_Int( TAG_Int(1)));
-    variable5 = TAG_Bool(( variable3 /*i*/)==(variable5));
-    variable6 = variable5;
-    if (!UNTAG_Bool(variable6)) { /* or */
-      variable6 =  variable3 /*i*/;
-      variable7 = TAG_Bool(UNTAG_Int( variable6 /*index*/)>=UNTAG_Int( TAG_Int(0)));
-      variable8 = variable7;
-      if (UNTAG_Bool(variable8)) { /* and */
-        variable8 = ATTR_array___AbstractArray____length( variable2 /*suff*/) /*AbstractArray::_length*/;
-        variable8 = TAG_Bool(UNTAG_Int( variable6 /*index*/)<UNTAG_Int(variable8));
+    variable[7] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
+    variable[7] = TAG_Bool(UNTAG_Int( variable[5] /*i*/)>=UNTAG_Int(variable[7]));
+    if (!UNTAG_Bool(variable[7])) break; /* while*/
+    variable[7] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
+    variable[7] = TAG_Bool(( variable[5] /*i*/)==(variable[7]));
+    variable[8] = variable[7];
+    if (!UNTAG_Bool(variable[8])) { /* or */
+      variable[8] =  variable[4] /*suff*/;
+      variable[9] =  variable[5] /*i*/;
+      variable[11] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+      variable[12] = variable[11];
+      if (UNTAG_Bool(variable[12])) { /* and */
+        variable[12] = variable[8];
+        variable[12] = ATTR_array___AbstractArray____length(variable[12]) /*AbstractArray::_length*/;
+        variable[12] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)<UNTAG_Int(variable[12]));
       }
-      variable7 = variable8;
-      if (!UNTAG_Bool(variable7)) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_string_search, 229); nit_exit(1);}
-      variable7 = ATTR_array___Array____items( variable2 /*suff*/) /*Array::_items*/;
-      variable7 = UNBOX_NativeArray(variable7)[UNTAG_Int( variable6 /*index*/)];
+      variable[11] = variable[12];
+      if (!UNTAG_Bool(variable[11])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_string_search, 229); nit_exit(1);}
+      variable[11] = variable[8];
+      variable[11] = ATTR_array___Array____items(variable[11]) /*Array::_items*/;
+      variable[11] = UNBOX_NativeArray(variable[11])[UNTAG_Int( variable[9] /*index*/)];
+      variable[10] = variable[11];
       goto return_label22;
       return_label22: while(false);
-      variable6 = variable7;
-      variable7 = TAG_Int(UNTAG_Int( variable3 /*i*/)+UNTAG_Int( TAG_Int(1)));
-      variable6 = TAG_Bool((variable6)==(variable7));
+      variable[8] = variable[10];
+      variable[9] = TAG_Int(UNTAG_Int( variable[5] /*i*/)+UNTAG_Int( TAG_Int(1)));
+      variable[8] = TAG_Bool((variable[8])==(variable[9]));
     }
-    variable5 = variable6;
-    if (UNTAG_Bool(variable5)) { /*if*/
+    variable[7] = variable[8];
+    if (UNTAG_Bool(variable[7])) { /*if*/
       while (true) { /*while*/
-        variable5 = TAG_Int(UNTAG_Int( variable1 /*m*/)-UNTAG_Int( TAG_Int(1)));
-        variable5 = TAG_Int(UNTAG_Int(variable5)-UNTAG_Int( variable3 /*i*/));
-        variable5 = TAG_Bool(UNTAG_Int( variable4 /*j*/)<UNTAG_Int(variable5));
-        if (!UNTAG_Bool(variable5)) break; /* while*/
-        variable5 = ATTR_string_search___BM_Pattern____gs( self) /*BM_Pattern::_gs*/;
-        variable6 =  variable4 /*j*/;
-        variable7 = TAG_Bool(UNTAG_Int( variable6 /*index*/)>=UNTAG_Int( TAG_Int(0)));
-        variable8 = variable7;
-        if (UNTAG_Bool(variable8)) { /* and */
-          variable8 = variable5;
-          variable8 = ATTR_array___AbstractArray____length(variable8) /*AbstractArray::_length*/;
-          variable8 = TAG_Bool(UNTAG_Int( variable6 /*index*/)<UNTAG_Int(variable8));
+        variable[7] = TAG_Int(UNTAG_Int( variable[3] /*m*/)-UNTAG_Int( TAG_Int(1)));
+        variable[7] = TAG_Int(UNTAG_Int(variable[7])-UNTAG_Int( variable[5] /*i*/));
+        variable[7] = TAG_Bool(UNTAG_Int( variable[6] /*j*/)<UNTAG_Int(variable[7]));
+        if (!UNTAG_Bool(variable[7])) break; /* while*/
+        variable[7] = variable[0];
+        variable[7] = ATTR_string_search___BM_Pattern____gs(variable[7]) /*BM_Pattern::_gs*/;
+        variable[8] = variable[7];
+        variable[9] =  variable[6] /*j*/;
+        variable[11] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+        variable[12] = variable[11];
+        if (UNTAG_Bool(variable[12])) { /* and */
+          variable[12] = variable[8];
+          variable[12] = ATTR_array___AbstractArray____length(variable[12]) /*AbstractArray::_length*/;
+          variable[12] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)<UNTAG_Int(variable[12]));
         }
-        variable7 = variable8;
-        if (!UNTAG_Bool(variable7)) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_string_search, 229); nit_exit(1);}
-        variable7 = variable5;
-        variable7 = ATTR_array___Array____items(variable7) /*Array::_items*/;
-        variable7 = UNBOX_NativeArray(variable7)[UNTAG_Int( variable6 /*index*/)];
+        variable[11] = variable[12];
+        if (!UNTAG_Bool(variable[11])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_string_search, 229); nit_exit(1);}
+        variable[11] = variable[8];
+        variable[11] = ATTR_array___Array____items(variable[11]) /*Array::_items*/;
+        variable[11] = UNBOX_NativeArray(variable[11])[UNTAG_Int( variable[9] /*index*/)];
+        variable[10] = variable[11];
         goto return_label24;
         return_label24: while(false);
-        variable5 = variable7;
-        variable5 = TAG_Bool((variable5)==( variable1 /*m*/));
-        if (UNTAG_Bool(variable5)) { /*if*/
-          variable5 = ATTR_string_search___BM_Pattern____gs( self) /*BM_Pattern::_gs*/;
-          variable6 = TAG_Int(UNTAG_Int( variable1 /*m*/)-UNTAG_Int( TAG_Int(1)));
-          variable6 = TAG_Int(UNTAG_Int(variable6)-UNTAG_Int( variable3 /*i*/));
-          ((array___Array_____braeq_t)CALL(variable5,COLOR_abstract_collection___Map_____braeq))(variable5,  variable4 /*j*/, variable6) /*Array::[]=*/;
+        variable[7] = variable[10];
+        variable[7] = TAG_Bool((variable[7])==( variable[3] /*m*/));
+        if (UNTAG_Bool(variable[7])) { /*if*/
+          variable[7] = variable[0];
+          variable[7] = ATTR_string_search___BM_Pattern____gs(variable[7]) /*BM_Pattern::_gs*/;
+          variable[8] = TAG_Int(UNTAG_Int( variable[3] /*m*/)-UNTAG_Int( TAG_Int(1)));
+          variable[8] = TAG_Int(UNTAG_Int(variable[8])-UNTAG_Int( variable[5] /*i*/));
+          ((array___Array_____braeq_t)CALL(variable[7],COLOR_abstract_collection___Map_____braeq))(variable[7],  variable[6] /*j*/, variable[8]) /*Array::[]=*/;
         }
-        variable4 = TAG_Int(UNTAG_Int(variable4)+UNTAG_Int( TAG_Int(1))) /*j*/;
+        variable[6] = TAG_Int(UNTAG_Int(variable[6])+UNTAG_Int( TAG_Int(1))) /*j*/;
         continue_23: while(0);
       }
       break_23: while(0);
     }
-    variable3 = TAG_Int(UNTAG_Int(variable3)-UNTAG_Int( TAG_Int(1))) /*i*/;
+    variable[5] = TAG_Int(UNTAG_Int(variable[5])-UNTAG_Int( TAG_Int(1))) /*i*/;
     continue_21: while(0);
   }
   break_21: while(0);
-  variable3 =  TAG_Int(0) /*i=*/;
+  variable[5] =  TAG_Int(0) /*i=*/;
   while (true) { /*while*/
-    variable5 = TAG_Int(UNTAG_Int( variable1 /*m*/)-UNTAG_Int( TAG_Int(1)));
-    variable5 = TAG_Bool(UNTAG_Int( variable3 /*i*/)<UNTAG_Int(variable5));
-    if (!UNTAG_Bool(variable5)) break; /* while*/
-    variable5 = ATTR_string_search___BM_Pattern____gs( self) /*BM_Pattern::_gs*/;
-    variable6 = TAG_Int(UNTAG_Int( variable1 /*m*/)-UNTAG_Int( TAG_Int(1)));
-    variable7 =  variable3 /*i*/;
-    variable8 = TAG_Bool(UNTAG_Int( variable7 /*index*/)>=UNTAG_Int( TAG_Int(0)));
-    variable9 = variable8;
-    if (UNTAG_Bool(variable9)) { /* and */
-      variable9 = ATTR_array___AbstractArray____length( variable2 /*suff*/) /*AbstractArray::_length*/;
-      variable9 = TAG_Bool(UNTAG_Int( variable7 /*index*/)<UNTAG_Int(variable9));
+    variable[7] = TAG_Int(UNTAG_Int( variable[3] /*m*/)-UNTAG_Int( TAG_Int(1)));
+    variable[7] = TAG_Bool(UNTAG_Int( variable[5] /*i*/)<UNTAG_Int(variable[7]));
+    if (!UNTAG_Bool(variable[7])) break; /* while*/
+    variable[7] = variable[0];
+    variable[7] = ATTR_string_search___BM_Pattern____gs(variable[7]) /*BM_Pattern::_gs*/;
+    variable[8] = TAG_Int(UNTAG_Int( variable[3] /*m*/)-UNTAG_Int( TAG_Int(1)));
+    variable[9] =  variable[4] /*suff*/;
+    variable[10] =  variable[5] /*i*/;
+    variable[12] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+    variable[13] = variable[12];
+    if (UNTAG_Bool(variable[13])) { /* and */
+      variable[13] = variable[9];
+      variable[13] = ATTR_array___AbstractArray____length(variable[13]) /*AbstractArray::_length*/;
+      variable[13] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)<UNTAG_Int(variable[13]));
     }
-    variable8 = variable9;
-    if (!UNTAG_Bool(variable8)) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_string_search, 229); nit_exit(1);}
-    variable8 = ATTR_array___Array____items( variable2 /*suff*/) /*Array::_items*/;
-    variable8 = UNBOX_NativeArray(variable8)[UNTAG_Int( variable7 /*index*/)];
+    variable[12] = variable[13];
+    if (!UNTAG_Bool(variable[12])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_string_search, 229); nit_exit(1);}
+    variable[12] = variable[9];
+    variable[12] = ATTR_array___Array____items(variable[12]) /*Array::_items*/;
+    variable[12] = UNBOX_NativeArray(variable[12])[UNTAG_Int( variable[10] /*index*/)];
+    variable[11] = variable[12];
     goto return_label26;
     return_label26: while(false);
-    variable7 = variable8;
-    variable6 = TAG_Int(UNTAG_Int(variable6)-UNTAG_Int(variable7));
-    variable7 = TAG_Int(UNTAG_Int( variable1 /*m*/)-UNTAG_Int( TAG_Int(1)));
-    variable7 = TAG_Int(UNTAG_Int(variable7)-UNTAG_Int( variable3 /*i*/));
-    ((array___Array_____braeq_t)CALL(variable5,COLOR_abstract_collection___Map_____braeq))(variable5, variable6, variable7) /*Array::[]=*/;
-    variable3 = TAG_Int(UNTAG_Int(variable3)+UNTAG_Int( TAG_Int(1))) /*i*/;
+    variable[9] = variable[11];
+    variable[8] = TAG_Int(UNTAG_Int(variable[8])-UNTAG_Int(variable[9]));
+    variable[9] = TAG_Int(UNTAG_Int( variable[3] /*m*/)-UNTAG_Int( TAG_Int(1)));
+    variable[9] = TAG_Int(UNTAG_Int(variable[9])-UNTAG_Int( variable[5] /*i*/));
+    ((array___Array_____braeq_t)CALL(variable[7],COLOR_abstract_collection___Map_____braeq))(variable[7], variable[8], variable[9]) /*Array::[]=*/;
+    variable[5] = TAG_Int(UNTAG_Int(variable[5])+UNTAG_Int( TAG_Int(1))) /*i*/;
     continue_25: while(0);
   }
   break_25: while(0);
+  return_label19: while(false);
   tracehead = trace.prev;
   return;
 }
+val_t string_search___Match___to_s(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 217, LOCATE_string_search___Match___to_s};
+  val_t variable[5];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_string_search;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_string_search___Match____string(variable[2]) /*Match::_string*/;
+  variable[3] = variable[0];
+  variable[3] = ATTR_string_search___Match____from(variable[3]) /*Match::_from*/;
+  variable[4] = variable[0];
+  variable[4] = ATTR_string_search___Match____length(variable[4]) /*Match::_length*/;
+  variable[2] = ((string___String___substring_t)CALL(variable[2],COLOR_string___String___substring))(variable[2], variable[3], variable[4]) /*String::substring*/;
+  variable[1] = variable[2];
+  goto return_label27;
+  return_label27: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
 val_t string_search___Match___string(val_t  self) {
   struct trace_t trace = {NULL, NULL, 204, LOCATE_string_search___Match___string};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
   tracehead = trace.prev;
@@ -554,6 +612,8 @@ val_t string_search___Match___string(val_t  self) {
 }
 val_t string_search___Match___from(val_t  self) {
   struct trace_t trace = {NULL, NULL, 207, LOCATE_string_search___Match___from};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
   tracehead = trace.prev;
@@ -561,6 +621,8 @@ val_t string_search___Match___from(val_t  self) {
 }
 val_t string_search___Match___length(val_t  self) {
   struct trace_t trace = {NULL, NULL, 210, LOCATE_string_search___Match___length};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
   tracehead = trace.prev;
@@ -568,289 +630,289 @@ val_t string_search___Match___length(val_t  self) {
 }
 val_t string_search___Match___after(val_t  self) {
   struct trace_t trace = {NULL, NULL, 213, LOCATE_string_search___Match___after};
-  val_t variable0;
-  val_t variable1;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable0 = ATTR_string_search___Match____from( self) /*Match::_from*/;
-  variable1 = ATTR_string_search___Match____length( self) /*Match::_length*/;
-  variable0 = TAG_Int(UNTAG_Int(variable0)+UNTAG_Int(variable1));
-  goto return_label27;
-  return_label27: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t string_search___Match___to_s(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 217, LOCATE_string_search___Match___to_s};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_string_search;
-  variable0 = ATTR_string_search___Match____string( self) /*Match::_string*/;
-  variable1 = ATTR_string_search___Match____from( self) /*Match::_from*/;
-  variable2 = ATTR_string_search___Match____length( self) /*Match::_length*/;
-  variable0 = ((string___String___substring_t)CALL(variable0,COLOR_string___String___substring))(variable0, variable1, variable2) /*String::substring*/;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_string_search___Match____from(variable[2]) /*Match::_from*/;
+  variable[3] = variable[0];
+  variable[3] = ATTR_string_search___Match____length(variable[3]) /*Match::_length*/;
+  variable[2] = TAG_Int(UNTAG_Int(variable[2])+UNTAG_Int(variable[3]));
+  variable[1] = variable[2];
   goto return_label28;
   return_label28: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 void string_search___Match___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
   struct trace_t trace = {NULL, NULL, 220, LOCATE_string_search___Match___init};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
+  val_t variable[7];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable2 =  param2;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[3] =  param2;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Match].i]) return;
-  variable3 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable0 /*s*/ ==  NIT_NULL /*null*/) || (( variable0 /*s*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable0 /*s*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable0 /*s*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable0 /*s*/,COLOR_kernel___Object_____eqeq))( variable0 /*s*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable3)) { fprintf(stderr, "Assert%s failed", " 'non_null_string' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string_search___Match___init, LOCATE_string_search, 223); nit_exit(1);}
-  variable3 = TAG_Bool(UNTAG_Int( variable2 /*len*/)>=UNTAG_Int( TAG_Int(0)));
-  if (!UNTAG_Bool(variable3)) { fprintf(stderr, "Assert%s failed", " 'positive_length' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string_search___Match___init, LOCATE_string_search, 224); nit_exit(1);}
-  variable3 = TAG_Bool(UNTAG_Int( variable1 /*f*/)>=UNTAG_Int( TAG_Int(0)));
-  if (!UNTAG_Bool(variable3)) { fprintf(stderr, "Assert%s failed", " 'valid_from' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string_search___Match___init, LOCATE_string_search, 225); nit_exit(1);}
-  variable3 = TAG_Int(UNTAG_Int( variable1 /*f*/)+UNTAG_Int( variable2 /*len*/));
-  variable4 = ((array___AbstractArray___length_t)CALL( variable0 /*s*/,COLOR_abstract_collection___Collection___length))( variable0 /*s*/) /*AbstractArray::length*/;
-  variable3 = TAG_Bool(UNTAG_Int(variable3)<=UNTAG_Int(variable4));
-  if (!UNTAG_Bool(variable3)) { fprintf(stderr, "Assert%s failed", " 'valid_after' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string_search___Match___init, LOCATE_string_search, 226); nit_exit(1);}
-  ATTR_string_search___Match____string( self) /*Match::_string*/ =  variable0 /*s*/;
-  ATTR_string_search___Match____from( self) /*Match::_from*/ =  variable1 /*f*/;
-  ATTR_string_search___Match____length( self) /*Match::_length*/ =  variable2 /*len*/;
+  variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*s*/ ==  NIT_NULL /*null*/) || (( variable[1] /*s*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*s*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*s*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*s*/,COLOR_kernel___Object_____eqeq))( variable[1] /*s*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", " 'non_null_string' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string_search___Match___init, LOCATE_string_search, 223); nit_exit(1);}
+  variable[5] = TAG_Bool(UNTAG_Int( variable[3] /*len*/)>=UNTAG_Int( TAG_Int(0)));
+  if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", " 'positive_length' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string_search___Match___init, LOCATE_string_search, 224); nit_exit(1);}
+  variable[5] = TAG_Bool(UNTAG_Int( variable[2] /*f*/)>=UNTAG_Int( TAG_Int(0)));
+  if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", " 'valid_from' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string_search___Match___init, LOCATE_string_search, 225); nit_exit(1);}
+  variable[5] = TAG_Int(UNTAG_Int( variable[2] /*f*/)+UNTAG_Int( variable[3] /*len*/));
+  variable[6] = ((array___AbstractArray___length_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Collection___length))( variable[1] /*s*/) /*AbstractArray::length*/;
+  variable[5] = TAG_Bool(UNTAG_Int(variable[5])<=UNTAG_Int(variable[6]));
+  if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", " 'valid_after' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string_search___Match___init, LOCATE_string_search, 226); nit_exit(1);}
+  variable[5] = variable[0];
+  ATTR_string_search___Match____string(variable[5]) /*Match::_string*/ =  variable[1] /*s*/;
+  variable[5] = variable[0];
+  ATTR_string_search___Match____from(variable[5]) /*Match::_from*/ =  variable[2] /*f*/;
+  variable[5] = variable[0];
+  ATTR_string_search___Match____length(variable[5]) /*Match::_length*/ =  variable[3] /*len*/;
+  return_label29: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Match].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t string_search___Char___search_index_in(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 235, LOCATE_string_search___Char___search_index_in};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
+  val_t variable[7];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable3 = ((array___AbstractArray___length_t)CALL( variable0 /*s*/,COLOR_abstract_collection___Collection___length))( variable0 /*s*/) /*AbstractArray::length*/;
-  variable2 = variable3;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[5] = ((array___AbstractArray___length_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Collection___length))( variable[1] /*s*/) /*AbstractArray::length*/;
+  variable[4] = variable[5];
   while (true) { /*while*/
-    variable3 = TAG_Bool(UNTAG_Int( variable1 /*from*/)<UNTAG_Int( variable2 /*stop*/));
-    if (!UNTAG_Bool(variable3)) break; /* while*/
-    variable3 = ((string___String_____bra_t)CALL( variable0 /*s*/,COLOR_abstract_collection___Map_____bra))( variable0 /*s*/,  variable1 /*from*/) /*String::[]*/;
-    variable3 = TAG_Bool((variable3)==( self));
-    if (UNTAG_Bool(variable3)) { /*if*/
-      variable2 =  variable1 /*from*/;
+    variable[5] = TAG_Bool(UNTAG_Int( variable[2] /*from*/)<UNTAG_Int( variable[4] /*stop*/));
+    if (!UNTAG_Bool(variable[5])) break; /* while*/
+    variable[5] = ((string___String_____bra_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Map_____bra))( variable[1] /*s*/,  variable[2] /*from*/) /*String::[]*/;
+    variable[6] = variable[0];
+    variable[5] = TAG_Bool((variable[5])==(variable[6]));
+    if (UNTAG_Bool(variable[5])) { /*if*/
+      variable[3] =  variable[2] /*from*/;
       goto return_label30;
     }
-    variable1 = TAG_Int(UNTAG_Int(variable1)+UNTAG_Int( TAG_Int(1))) /*from*/;
+    variable[2] = TAG_Int(UNTAG_Int(variable[2])+UNTAG_Int( TAG_Int(1))) /*from*/;
     continue_31: while(0);
   }
   break_31: while(0);
-  variable3 = TAG_Int(-UNTAG_Int( TAG_Int(1)));
-  variable2 = variable3;
+  variable[5] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
+  variable[3] = variable[5];
   goto return_label30;
   return_label30: while(false);
   tracehead = trace.prev;
-  return variable2;
+  return variable[3];
 }
 val_t string_search___Char___search_in(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 245, LOCATE_string_search___Char___search_in};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
+  val_t variable[6];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable3 = ((string_search___Char___search_index_in_t)CALL( self,COLOR_string_search___Pattern___search_index_in))( self,  variable0 /*s*/,  variable1 /*from*/) /*Char::search_index_in*/;
-  variable2 = variable3;
-  variable3 = TAG_Bool(UNTAG_Int( variable2 /*pos*/)<UNTAG_Int( TAG_Int(0)));
-  if (UNTAG_Bool(variable3)) { /*if*/
-    variable2 =  NIT_NULL /*null*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[5] = variable[0];
+  variable[5] = ((string_search___Char___search_index_in_t)CALL(variable[5],COLOR_string_search___Pattern___search_index_in))(variable[5],  variable[1] /*s*/,  variable[2] /*from*/) /*Char::search_index_in*/;
+  variable[4] = variable[5];
+  variable[5] = TAG_Bool(UNTAG_Int( variable[4] /*pos*/)<UNTAG_Int( TAG_Int(0)));
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    variable[3] =  NIT_NULL /*null*/;
     goto return_label32;
   } else { /*if*/
-    variable3 = NEW_Match_string_search___Match___init( variable0 /*s*/,  variable2 /*pos*/,  TAG_Int(1)); /*new Match*/
-    variable2 = variable3;
+    variable[5] = NEW_Match_string_search___Match___init( variable[1] /*s*/,  variable[4] /*pos*/,  TAG_Int(1)); /*new Match*/
+    variable[3] = variable[5];
     goto return_label32;
   }
   return_label32: while(false);
   tracehead = trace.prev;
-  return variable2;
+  return variable[3];
 }
 val_t string_search___String___search_index_in(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 258, LOCATE_string_search___String___search_index_in};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-      val_t variable5;
-        val_t variable6;
+  val_t variable[9];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable2 = TAG_Bool(UNTAG_Int( variable1 /*from*/)>=UNTAG_Int( TAG_Int(0)));
-  if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string_search___String___search_index_in, LOCATE_string_search, 260); nit_exit(1);}
-  variable3 = ((array___AbstractArray___length_t)CALL( variable0 /*s*/,COLOR_abstract_collection___Collection___length))( variable0 /*s*/) /*AbstractArray::length*/;
-  variable4 = ((array___AbstractArray___length_t)CALL( self,COLOR_abstract_collection___Collection___length))( self) /*AbstractArray::length*/;
-  variable3 = TAG_Int(UNTAG_Int(variable3)-UNTAG_Int(variable4));
-  variable3 = TAG_Int(UNTAG_Int(variable3)+UNTAG_Int( TAG_Int(1)));
-  variable2 = variable3;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[4] = TAG_Bool(UNTAG_Int( variable[2] /*from*/)>=UNTAG_Int( TAG_Int(0)));
+  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string_search___String___search_index_in, LOCATE_string_search, 260); nit_exit(1);}
+  variable[5] = ((array___AbstractArray___length_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Collection___length))( variable[1] /*s*/) /*AbstractArray::length*/;
+  variable[6] = variable[0];
+  variable[6] = ((array___AbstractArray___length_t)CALL(variable[6],COLOR_abstract_collection___Collection___length))(variable[6]) /*AbstractArray::length*/;
+  variable[5] = TAG_Int(UNTAG_Int(variable[5])-UNTAG_Int(variable[6]));
+  variable[5] = TAG_Int(UNTAG_Int(variable[5])+UNTAG_Int( TAG_Int(1)));
+  variable[4] = variable[5];
   while (true) { /*while*/
-    variable3 = TAG_Bool(UNTAG_Int( variable1 /*from*/)<UNTAG_Int( variable2 /*stop*/));
-    if (!UNTAG_Bool(variable3)) break; /* while*/
-    variable4 = ((array___AbstractArray___length_t)CALL( self,COLOR_abstract_collection___Collection___length))( self) /*AbstractArray::length*/;
-    variable4 = TAG_Int(UNTAG_Int(variable4)-UNTAG_Int( TAG_Int(1)));
-    variable3 = variable4;
+    variable[5] = TAG_Bool(UNTAG_Int( variable[2] /*from*/)<UNTAG_Int( variable[4] /*stop*/));
+    if (!UNTAG_Bool(variable[5])) break; /* while*/
+    variable[6] = variable[0];
+    variable[6] = ((array___AbstractArray___length_t)CALL(variable[6],COLOR_abstract_collection___Collection___length))(variable[6]) /*AbstractArray::length*/;
+    variable[6] = TAG_Int(UNTAG_Int(variable[6])-UNTAG_Int( TAG_Int(1)));
+    variable[5] = variable[6];
     while (true) { /*while*/
-      variable4 = TAG_Bool(UNTAG_Int( variable3 /*i*/)>=UNTAG_Int( TAG_Int(0)));
-      variable5 = variable4;
-      if (UNTAG_Bool(variable5)) { /* and */
-        variable5 = ((string___String_____bra_t)CALL( self,COLOR_abstract_collection___Map_____bra))( self,  variable3 /*i*/) /*String::[]*/;
-        variable6 = TAG_Int(UNTAG_Int( variable3 /*i*/)+UNTAG_Int( variable1 /*from*/));
-        variable6 = ((string___String_____bra_t)CALL( variable0 /*s*/,COLOR_abstract_collection___Map_____bra))( variable0 /*s*/, variable6) /*String::[]*/;
-        variable5 = TAG_Bool((variable5)==(variable6));
+      variable[6] = TAG_Bool(UNTAG_Int( variable[5] /*i*/)>=UNTAG_Int( TAG_Int(0)));
+      variable[7] = variable[6];
+      if (UNTAG_Bool(variable[7])) { /* and */
+        variable[7] = variable[0];
+        variable[7] = ((string___String_____bra_t)CALL(variable[7],COLOR_abstract_collection___Map_____bra))(variable[7],  variable[5] /*i*/) /*String::[]*/;
+        variable[8] = TAG_Int(UNTAG_Int( variable[5] /*i*/)+UNTAG_Int( variable[2] /*from*/));
+        variable[8] = ((string___String_____bra_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Map_____bra))( variable[1] /*s*/, variable[8]) /*String::[]*/;
+        variable[7] = TAG_Bool((variable[7])==(variable[8]));
       }
-      variable4 = variable5;
-      if (!UNTAG_Bool(variable4)) break; /* while*/
-      variable3 = TAG_Int(UNTAG_Int(variable3)-UNTAG_Int( TAG_Int(1))) /*i*/;
+      variable[6] = variable[7];
+      if (!UNTAG_Bool(variable[6])) break; /* while*/
+      variable[5] = TAG_Int(UNTAG_Int(variable[5])-UNTAG_Int( TAG_Int(1))) /*i*/;
       continue_35: while(0);
     }
     break_35: while(0);
-    variable4 = TAG_Bool(UNTAG_Int( variable3 /*i*/)<UNTAG_Int( TAG_Int(0)));
-    if (UNTAG_Bool(variable4)) { /*if*/
-      variable2 =  variable1 /*from*/;
+    variable[6] = TAG_Bool(UNTAG_Int( variable[5] /*i*/)<UNTAG_Int( TAG_Int(0)));
+    if (UNTAG_Bool(variable[6])) { /*if*/
+      variable[3] =  variable[2] /*from*/;
       goto return_label33;
     }
-    variable1 = TAG_Int(UNTAG_Int(variable1)+UNTAG_Int( TAG_Int(1))) /*from*/;
+    variable[2] = TAG_Int(UNTAG_Int(variable[2])+UNTAG_Int( TAG_Int(1))) /*from*/;
     continue_34: while(0);
   }
   break_34: while(0);
-  variable3 = TAG_Int(-UNTAG_Int( TAG_Int(1)));
-  variable2 = variable3;
+  variable[5] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
+  variable[3] = variable[5];
   goto return_label33;
   return_label33: while(false);
   tracehead = trace.prev;
-  return variable2;
+  return variable[3];
 }
 val_t string_search___String___search_in(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 273, LOCATE_string_search___String___search_in};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-    val_t variable4;
+  val_t variable[7];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable3 = ((string_search___String___search_index_in_t)CALL( self,COLOR_string_search___Pattern___search_index_in))( self,  variable0 /*s*/,  variable1 /*from*/) /*String::search_index_in*/;
-  variable2 = variable3;
-  variable3 = TAG_Bool(UNTAG_Int( variable2 /*pos*/)<UNTAG_Int( TAG_Int(0)));
-  if (UNTAG_Bool(variable3)) { /*if*/
-    variable2 =  NIT_NULL /*null*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[5] = variable[0];
+  variable[5] = ((string_search___String___search_index_in_t)CALL(variable[5],COLOR_string_search___Pattern___search_index_in))(variable[5],  variable[1] /*s*/,  variable[2] /*from*/) /*String::search_index_in*/;
+  variable[4] = variable[5];
+  variable[5] = TAG_Bool(UNTAG_Int( variable[4] /*pos*/)<UNTAG_Int( TAG_Int(0)));
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    variable[3] =  NIT_NULL /*null*/;
     goto return_label36;
   } else { /*if*/
-    variable3 = ((array___AbstractArray___length_t)CALL( self,COLOR_abstract_collection___Collection___length))( self) /*AbstractArray::length*/;
-    variable4 = NEW_Match_string_search___Match___init( variable0 /*s*/,  variable2 /*pos*/, variable3); /*new Match*/
-    variable3 = variable4;
-    variable2 = variable3;
+    variable[5] = variable[0];
+    variable[5] = ((array___AbstractArray___length_t)CALL(variable[5],COLOR_abstract_collection___Collection___length))(variable[5]) /*AbstractArray::length*/;
+    variable[6] = NEW_Match_string_search___Match___init( variable[1] /*s*/,  variable[4] /*pos*/, variable[5]); /*new Match*/
+    variable[5] = variable[6];
+    variable[3] = variable[5];
     goto return_label36;
   }
   return_label36: while(false);
   tracehead = trace.prev;
-  return variable2;
+  return variable[3];
 }
 val_t string_search___String___search(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 283, LOCATE_string_search___String___search};
-  val_t variable0;
-  val_t variable1;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable0 =  param0;
-  variable1 = ((string_search___Pattern___search_in_t)CALL( variable0 /*p*/,COLOR_string_search___Pattern___search_in))( variable0 /*p*/,  self,  TAG_Int(0)) /*Pattern::search_in*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((string_search___Pattern___search_in_t)CALL( variable[1] /*p*/,COLOR_string_search___Pattern___search_in))( variable[1] /*p*/, variable[3],  TAG_Int(0)) /*Pattern::search_in*/;
+  variable[2] = variable[3];
   goto return_label37;
   return_label37: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 val_t string_search___String___search_from(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 286, LOCATE_string_search___String___search_from};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable2 = ((string_search___Pattern___search_in_t)CALL( variable0 /*p*/,COLOR_string_search___Pattern___search_in))( variable0 /*p*/,  self,  variable1 /*from*/) /*Pattern::search_in*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[4] = variable[0];
+  variable[4] = ((string_search___Pattern___search_in_t)CALL( variable[1] /*p*/,COLOR_string_search___Pattern___search_in))( variable[1] /*p*/, variable[4],  variable[2] /*from*/) /*Pattern::search_in*/;
+  variable[3] = variable[4];
   goto return_label38;
   return_label38: while(false);
   tracehead = trace.prev;
-  return variable2;
+  return variable[3];
 }
 val_t string_search___String___search_all(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 291, LOCATE_string_search___String___search_all};
-  val_t variable0;
-  val_t variable1;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable0 =  param0;
-  variable1 = ((string_search___Pattern___search_all_in_t)CALL( variable0 /*p*/,COLOR_string_search___Pattern___search_all_in))( variable0 /*p*/,  self) /*Pattern::search_all_in*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((string_search___Pattern___search_all_in_t)CALL( variable[1] /*p*/,COLOR_string_search___Pattern___search_all_in))( variable[1] /*p*/, variable[3]) /*Pattern::search_all_in*/;
+  variable[2] = variable[3];
   goto return_label39;
   return_label39: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 val_t string_search___String___split_with(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 300, LOCATE_string_search___String___split_with};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-    val_t variable5;
+  val_t variable[9];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable0 =  param0;
-  variable2 = ((string_search___Pattern___split_in_t)CALL( variable0 /*p*/,COLOR_string_search___Pattern___split_in))( variable0 /*p*/,  self) /*Pattern::split_in*/;
-  variable1 = variable2;
-  variable3 = ((array___AbstractArray___length_t)CALL( variable1 /*matches*/,COLOR_abstract_collection___Collection___length))( variable1 /*matches*/) /*AbstractArray::length*/;
-  variable4 = NEW_Array_array___Array___with_capacity(variable3); /*new Array[String]*/
-  variable3 = variable4;
-  variable2 = variable3;
-  variable3 = ((array___AbstractArray___iterator_t)CALL( variable1 /*matches*/,COLOR_abstract_collection___Collection___iterator))( variable1 /*matches*/) /*AbstractArray::iterator*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = variable[0];
+  variable[4] = ((string_search___Pattern___split_in_t)CALL( variable[1] /*p*/,COLOR_string_search___Pattern___split_in))( variable[1] /*p*/, variable[4]) /*Pattern::split_in*/;
+  variable[3] = variable[4];
+  variable[5] = ((array___AbstractArray___length_t)CALL( variable[3] /*matches*/,COLOR_abstract_collection___Collection___length))( variable[3] /*matches*/) /*AbstractArray::length*/;
+  variable[6] = NEW_Array_array___Array___with_capacity(variable[5]); /*new Array[String]*/
+  variable[5] = variable[6];
+  variable[4] = variable[5];
+  variable[5] = ((array___AbstractArray___iterator_t)CALL( variable[3] /*matches*/,COLOR_abstract_collection___Collection___iterator))( variable[3] /*matches*/) /*AbstractArray::iterator*/;
   while (true) { /*for*/
-    variable4 = ((array___ArrayIterator___is_ok_t)CALL(variable3,COLOR_abstract_collection___Iterator___is_ok))(variable3) /*ArrayIterator::is_ok*/;
-    if (!UNTAG_Bool(variable4)) break; /*for*/
-    variable4 = ((array___ArrayIterator___item_t)CALL(variable3,COLOR_abstract_collection___Iterator___item))(variable3) /*ArrayIterator::item*/;
-    variable5 = ((string_search___Match___to_s_t)CALL( variable4 /*m*/,COLOR_string___Object___to_s))( variable4 /*m*/) /*Match::to_s*/;
-    ((array___AbstractArray___add_t)CALL( variable2 /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable2 /*res*/, variable5) /*AbstractArray::add*/;
+    variable[6] = ((array___ArrayIterator___is_ok_t)CALL(variable[5],COLOR_abstract_collection___Iterator___is_ok))(variable[5]) /*ArrayIterator::is_ok*/;
+    if (!UNTAG_Bool(variable[6])) break; /*for*/
+    variable[6] = ((array___ArrayIterator___item_t)CALL(variable[5],COLOR_abstract_collection___Iterator___item))(variable[5]) /*ArrayIterator::item*/;
+    variable[7] = variable[6];
+    variable[8] = ((string_search___Match___to_s_t)CALL( variable[7] /*m*/,COLOR_string___Object___to_s))( variable[7] /*m*/) /*Match::to_s*/;
+    ((array___AbstractArray___add_t)CALL( variable[4] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*res*/, variable[8]) /*AbstractArray::add*/;
     continue_41: while(0);
-    ((array___ArrayIterator___next_t)CALL(variable3,COLOR_abstract_collection___Iterator___next))(variable3) /*ArrayIterator::next*/;
+    ((array___ArrayIterator___next_t)CALL(variable[5],COLOR_abstract_collection___Iterator___next))(variable[5]) /*ArrayIterator::next*/;
   }
   break_41: while(0);
-  variable1 =  variable2 /*res*/;
+  variable[2] =  variable[4] /*res*/;
   goto return_label40;
   return_label40: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 val_t string_search___String___split(val_t  self) {
   struct trace_t trace = {NULL, NULL, 310, LOCATE_string_search___String___split};
-  val_t variable0;
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string_search;
-  variable0 = ((string_search___String___split_with_t)CALL( self,COLOR_string_search___String___split_with))( self,  TAG_Char('\n')) /*String::split_with*/;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((string_search___String___split_with_t)CALL(variable[2],COLOR_string_search___String___split_with))(variable[2],  TAG_Char('\n')) /*String::split_with*/;
+  variable[1] = variable[2];
   goto return_label42;
   return_label42: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }

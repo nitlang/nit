@@ -13,15 +13,21 @@ extern const int SFT_symbol[];
 #define COLOR_symbol___Symbol____string SFT_symbol[3]
 #define INIT_TABLE_POS_Symbol SFT_symbol[4]
 #define COLOR_symbol___Symbol___init SFT_symbol[5]
+val_t NEW_String_string___String___init();
+val_t NEW_String_string___String___from(val_t p0);
+val_t NEW_String_string___String___with_capacity(val_t p0);
+val_t NEW_String_string___String___with_native(val_t p0, val_t p1);
+val_t NEW_String_string___String___from_cstring(val_t p0);
+val_t NEW_String_string___String___filled_with(val_t p0, val_t p1);
 typedef val_t (* symbol___String___to_symbol_t)(val_t  self);
 val_t symbol___String___to_symbol(val_t  self);
 #define LOCATE_symbol___String___to_symbol "symbol::String::to_symbol"
-#define ATTR_symbol___Symbol____string(recv) ATTR(recv, COLOR_symbol___Symbol____string)
 typedef val_t (* symbol___Symbol___to_s_t)(val_t  self);
 val_t symbol___Symbol___to_s(val_t  self);
 #define LOCATE_symbol___Symbol___to_s "symbol::Symbol::(string::Object::to_s)"
+#define ATTR_symbol___Symbol____string(recv) ATTR(recv, COLOR_symbol___Symbol____string)
 typedef void (* symbol___Symbol___init_t)(val_t  self, val_t  param0, int* init_table);
 void symbol___Symbol___init(val_t  self, val_t  param0, int* init_table);
-val_t NEW_symbol___Symbol___init(val_t  param0);
 #define LOCATE_symbol___Symbol___init "symbol::Symbol::init"
+val_t NEW_Symbol_symbol___Symbol___init(val_t p0);
 #endif

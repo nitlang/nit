@@ -127,8 +127,8 @@ void kernel___Sys___main(val_t  self);
 #define LOCATE_kernel___Sys___main "kernel::Sys::main"
 typedef void (* kernel___Sys___init_t)(val_t  self, int* init_table);
 void kernel___Sys___init(val_t  self, int* init_table);
-val_t NEW_kernel___Sys___init();
 #define LOCATE_kernel___Sys___init "kernel::Sys::init"
+val_t NEW_Sys_kernel___Sys___init();
 typedef val_t (* kernel___Comparable_____l_t)(val_t  self, val_t  param0);
 val_t kernel___Comparable_____l(val_t  self, val_t  param0);
 #define LOCATE_kernel___Comparable_____l "kernel::Comparable::<"
@@ -228,27 +228,48 @@ val_t kernel___Int_____neq(val_t  self, val_t  param0);
 typedef void (* kernel___Int___output_t)(val_t  self);
 void kernel___Int___output(val_t  self);
 #define LOCATE_kernel___Int___output "kernel::Int::(kernel::Object::output)"
-typedef val_t (* kernel___Int_____leq_t)(val_t  self, val_t  param0);
-val_t kernel___Int_____leq(val_t  self, val_t  param0);
-#define LOCATE_kernel___Int_____leq "kernel::Int::(kernel::Comparable::<=)"
 typedef val_t (* kernel___Int_____l_t)(val_t  self, val_t  param0);
 val_t kernel___Int_____l(val_t  self, val_t  param0);
 #define LOCATE_kernel___Int_____l "kernel::Int::(kernel::Comparable::<)"
+typedef val_t (* kernel___Int_____leq_t)(val_t  self, val_t  param0);
+val_t kernel___Int_____leq(val_t  self, val_t  param0);
+#define LOCATE_kernel___Int_____leq "kernel::Int::(kernel::Comparable::<=)"
 typedef val_t (* kernel___Int_____geq_t)(val_t  self, val_t  param0);
 val_t kernel___Int_____geq(val_t  self, val_t  param0);
 #define LOCATE_kernel___Int_____geq "kernel::Int::(kernel::Comparable::>=)"
 typedef val_t (* kernel___Int_____g_t)(val_t  self, val_t  param0);
 val_t kernel___Int_____g(val_t  self, val_t  param0);
 #define LOCATE_kernel___Int_____g "kernel::Int::(kernel::Comparable::>)"
+typedef val_t (* kernel___Int_____leqg_t)(val_t  self, val_t  param0);
+val_t kernel___Int_____leqg(val_t  self, val_t  param0);
+#define LOCATE_kernel___Int_____leqg "kernel::Int::(kernel::Comparable::<=>)"
+typedef val_t (* kernel___Int___is_between_t)(val_t  self, val_t  param0, val_t  param1);
+val_t kernel___Int___is_between(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_kernel___Int___is_between "kernel::Int::(kernel::Comparable::is_between)"
+typedef val_t (* kernel___Int___max_t)(val_t  self, val_t  param0);
+val_t kernel___Int___max(val_t  self, val_t  param0);
+#define LOCATE_kernel___Int___max "kernel::Int::(kernel::Comparable::max)"
+typedef val_t (* kernel___Int___min_t)(val_t  self, val_t  param0);
+val_t kernel___Int___min(val_t  self, val_t  param0);
+#define LOCATE_kernel___Int___min "kernel::Int::(kernel::Comparable::min)"
+typedef val_t (* kernel___Int___succ_t)(val_t  self);
+val_t kernel___Int___succ(val_t  self);
+#define LOCATE_kernel___Int___succ "kernel::Int::(kernel::Discrete::succ)"
+typedef val_t (* kernel___Int___prec_t)(val_t  self);
+val_t kernel___Int___prec(val_t  self);
+#define LOCATE_kernel___Int___prec "kernel::Int::(kernel::Discrete::prec)"
 typedef val_t (* kernel___Int_____plus_t)(val_t  self, val_t  param0);
 val_t kernel___Int_____plus(val_t  self, val_t  param0);
 #define LOCATE_kernel___Int_____plus "kernel::Int::(kernel::Discrete::+)"
-typedef val_t (* kernel___Int___unary__minus_t)(val_t  self);
-val_t kernel___Int___unary__minus(val_t  self);
-#define LOCATE_kernel___Int___unary__minus "kernel::Int::unary -"
 typedef val_t (* kernel___Int_____minus_t)(val_t  self, val_t  param0);
 val_t kernel___Int_____minus(val_t  self, val_t  param0);
 #define LOCATE_kernel___Int_____minus "kernel::Int::(kernel::Discrete::-)"
+typedef val_t (* kernel___Int___distance_t)(val_t  self, val_t  param0);
+val_t kernel___Int___distance(val_t  self, val_t  param0);
+#define LOCATE_kernel___Int___distance "kernel::Int::(kernel::Discrete::distance)"
+typedef val_t (* kernel___Int___unary__minus_t)(val_t  self);
+val_t kernel___Int___unary__minus(val_t  self);
+#define LOCATE_kernel___Int___unary__minus "kernel::Int::unary -"
 typedef val_t (* kernel___Int_____star_t)(val_t  self, val_t  param0);
 val_t kernel___Int_____star(val_t  self, val_t  param0);
 #define LOCATE_kernel___Int_____star "kernel::Int::*"
@@ -267,27 +288,6 @@ val_t kernel___Int___rshift(val_t  self, val_t  param0);
 typedef val_t (* kernel___Int___to_f_t)(val_t  self);
 val_t kernel___Int___to_f(val_t  self);
 #define LOCATE_kernel___Int___to_f "kernel::Int::to_f"
-typedef val_t (* kernel___Int___succ_t)(val_t  self);
-val_t kernel___Int___succ(val_t  self);
-#define LOCATE_kernel___Int___succ "kernel::Int::(kernel::Discrete::succ)"
-typedef val_t (* kernel___Int___prec_t)(val_t  self);
-val_t kernel___Int___prec(val_t  self);
-#define LOCATE_kernel___Int___prec "kernel::Int::(kernel::Discrete::prec)"
-typedef val_t (* kernel___Int___distance_t)(val_t  self, val_t  param0);
-val_t kernel___Int___distance(val_t  self, val_t  param0);
-#define LOCATE_kernel___Int___distance "kernel::Int::(kernel::Discrete::distance)"
-typedef val_t (* kernel___Int_____leqg_t)(val_t  self, val_t  param0);
-val_t kernel___Int_____leqg(val_t  self, val_t  param0);
-#define LOCATE_kernel___Int_____leqg "kernel::Int::(kernel::Comparable::<=>)"
-typedef val_t (* kernel___Int___is_between_t)(val_t  self, val_t  param0, val_t  param1);
-val_t kernel___Int___is_between(val_t  self, val_t  param0, val_t  param1);
-#define LOCATE_kernel___Int___is_between "kernel::Int::(kernel::Comparable::is_between)"
-typedef val_t (* kernel___Int___max_t)(val_t  self, val_t  param0);
-val_t kernel___Int___max(val_t  self, val_t  param0);
-#define LOCATE_kernel___Int___max "kernel::Int::(kernel::Comparable::max)"
-typedef val_t (* kernel___Int___min_t)(val_t  self, val_t  param0);
-val_t kernel___Int___min(val_t  self, val_t  param0);
-#define LOCATE_kernel___Int___min "kernel::Int::(kernel::Comparable::min)"
 typedef val_t (* kernel___Int___ascii_t)(val_t  self);
 val_t kernel___Int___ascii(val_t  self);
 #define LOCATE_kernel___Int___ascii "kernel::Int::ascii"
@@ -309,12 +309,12 @@ val_t kernel___Char_____neq(val_t  self, val_t  param0);
 typedef void (* kernel___Char___output_t)(val_t  self);
 void kernel___Char___output(val_t  self);
 #define LOCATE_kernel___Char___output "kernel::Char::(kernel::Object::output)"
-typedef val_t (* kernel___Char_____leq_t)(val_t  self, val_t  param0);
-val_t kernel___Char_____leq(val_t  self, val_t  param0);
-#define LOCATE_kernel___Char_____leq "kernel::Char::(kernel::Comparable::<=)"
 typedef val_t (* kernel___Char_____l_t)(val_t  self, val_t  param0);
 val_t kernel___Char_____l(val_t  self, val_t  param0);
 #define LOCATE_kernel___Char_____l "kernel::Char::(kernel::Comparable::<)"
+typedef val_t (* kernel___Char_____leq_t)(val_t  self, val_t  param0);
+val_t kernel___Char_____leq(val_t  self, val_t  param0);
+#define LOCATE_kernel___Char_____leq "kernel::Char::(kernel::Comparable::<=)"
 typedef val_t (* kernel___Char_____geq_t)(val_t  self, val_t  param0);
 val_t kernel___Char_____geq(val_t  self, val_t  param0);
 #define LOCATE_kernel___Char_____geq "kernel::Char::(kernel::Comparable::>=)"
@@ -327,6 +327,12 @@ val_t kernel___Char___succ(val_t  self);
 typedef val_t (* kernel___Char___prec_t)(val_t  self);
 val_t kernel___Char___prec(val_t  self);
 #define LOCATE_kernel___Char___prec "kernel::Char::(kernel::Discrete::prec)"
+typedef val_t (* kernel___Char_____plus_t)(val_t  self, val_t  param0);
+val_t kernel___Char_____plus(val_t  self, val_t  param0);
+#define LOCATE_kernel___Char_____plus "kernel::Char::(kernel::Discrete::+)"
+typedef val_t (* kernel___Char_____minus_t)(val_t  self, val_t  param0);
+val_t kernel___Char_____minus(val_t  self, val_t  param0);
+#define LOCATE_kernel___Char_____minus "kernel::Char::(kernel::Discrete::-)"
 typedef val_t (* kernel___Char___distance_t)(val_t  self, val_t  param0);
 val_t kernel___Char___distance(val_t  self, val_t  param0);
 #define LOCATE_kernel___Char___distance "kernel::Char::(kernel::Discrete::distance)"
@@ -336,12 +342,6 @@ val_t kernel___Char___to_i(val_t  self);
 typedef val_t (* kernel___Char___ascii_t)(val_t  self);
 val_t kernel___Char___ascii(val_t  self);
 #define LOCATE_kernel___Char___ascii "kernel::Char::ascii"
-typedef val_t (* kernel___Char_____plus_t)(val_t  self, val_t  param0);
-val_t kernel___Char_____plus(val_t  self, val_t  param0);
-#define LOCATE_kernel___Char_____plus "kernel::Char::(kernel::Discrete::+)"
-typedef val_t (* kernel___Char_____minus_t)(val_t  self, val_t  param0);
-val_t kernel___Char_____minus(val_t  self, val_t  param0);
-#define LOCATE_kernel___Char_____minus "kernel::Char::(kernel::Discrete::-)"
 typedef val_t (* kernel___Char___to_lower_t)(val_t  self);
 val_t kernel___Char___to_lower(val_t  self);
 #define LOCATE_kernel___Char___to_lower "kernel::Char::to_lower"

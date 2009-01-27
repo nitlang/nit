@@ -83,6 +83,12 @@ extern const int SFT_hash[];
 typedef val_t (* hash___Object___hash_t)(val_t  self);
 val_t hash___Object___hash(val_t  self);
 #define LOCATE_hash___Object___hash "hash::Object::hash"
+val_t NEW_String_string___String___init();
+val_t NEW_String_string___String___from(val_t p0);
+val_t NEW_String_string___String___with_capacity(val_t p0);
+val_t NEW_String_string___String___with_native(val_t p0, val_t p1);
+val_t NEW_String_string___String___from_cstring(val_t p0);
+val_t NEW_String_string___String___filled_with(val_t p0, val_t p1);
 typedef val_t (* hash___String___hash_t)(val_t  self);
 val_t hash___String___hash(val_t  self);
 #define LOCATE_hash___String___hash "hash::String::(hash::Object::hash)"
@@ -95,12 +101,12 @@ val_t hash___Char___hash(val_t  self);
 typedef val_t (* hash___Bool___hash_t)(val_t  self);
 val_t hash___Bool___hash(val_t  self);
 #define LOCATE_hash___Bool___hash "hash::Bool::(hash::Object::hash)"
-#define ATTR_hash___HashCollection____array(recv) ATTR(recv, COLOR_hash___HashCollection____array)
-#define ATTR_hash___HashCollection____capacity(recv) ATTR(recv, COLOR_hash___HashCollection____capacity)
-#define ATTR_hash___HashCollection____length(recv) ATTR(recv, COLOR_hash___HashCollection____length)
 typedef val_t (* hash___HashCollection___length_t)(val_t  self);
 val_t hash___HashCollection___length(val_t  self);
 #define LOCATE_hash___HashCollection___length "hash::HashCollection::(abstract_collection::Collection::length)"
+#define ATTR_hash___HashCollection____array(recv) ATTR(recv, COLOR_hash___HashCollection____array)
+#define ATTR_hash___HashCollection____capacity(recv) ATTR(recv, COLOR_hash___HashCollection____capacity)
+#define ATTR_hash___HashCollection____length(recv) ATTR(recv, COLOR_hash___HashCollection____length)
 #define ATTR_hash___HashCollection____first_item(recv) ATTR(recv, COLOR_hash___HashCollection____first_item)
 typedef val_t (* hash___HashCollection___first_item_t)(val_t  self);
 val_t hash___HashCollection___first_item(val_t  self);
@@ -125,8 +131,8 @@ void hash___HashCollection___enlarge(val_t  self, val_t  param0);
 #define LOCATE_hash___HashCollection___enlarge "hash::HashCollection::enlarge"
 typedef void (* hash___HashCollection___init_t)(val_t  self, int* init_table);
 void hash___HashCollection___init(val_t  self, int* init_table);
-val_t NEW_hash___HashCollection___init();
 #define LOCATE_hash___HashCollection___init "hash::HashCollection::init"
+val_t NEW_HashCollection_hash___HashCollection___init();
 typedef val_t (* hash___HashNode___key_t)(val_t  self);
 val_t hash___HashNode___key(val_t  self);
 #define LOCATE_hash___HashNode___key "hash::HashNode::key"
@@ -146,122 +152,122 @@ void hash___HashNode___prev_item__eq(val_t  self, val_t  param0);
 #define LOCATE_hash___HashNode___prev_item__eq "hash::HashNode::prev_item="
 typedef void (* hash___HashNode___init_t)(val_t  self, int* init_table);
 void hash___HashNode___init(val_t  self, int* init_table);
-val_t NEW_hash___HashNode___init();
 #define LOCATE_hash___HashNode___init "hash::HashNode::init"
+val_t NEW_HashNode_hash___HashNode___init();
 typedef val_t (* hash___HashMap___iterator_t)(val_t  self);
 val_t hash___HashMap___iterator(val_t  self);
 #define LOCATE_hash___HashMap___iterator "hash::HashMap::(abstract_collection::Collection::iterator)"
-typedef val_t (* hash___HashMap___first_t)(val_t  self);
-val_t hash___HashMap___first(val_t  self);
-#define LOCATE_hash___HashMap___first "hash::HashMap::(abstract_collection::Collection::first)"
 typedef val_t (* hash___HashMap___is_empty_t)(val_t  self);
 val_t hash___HashMap___is_empty(val_t  self);
 #define LOCATE_hash___HashMap___is_empty "hash::HashMap::(abstract_collection::Collection::is_empty)"
-typedef val_t (* hash___HashMap___count_t)(val_t  self, val_t  param0);
-val_t hash___HashMap___count(val_t  self, val_t  param0);
-#define LOCATE_hash___HashMap___count "hash::HashMap::(abstract_collection::Collection::count)"
 typedef val_t (* hash___HashMap___has_t)(val_t  self, val_t  param0);
 val_t hash___HashMap___has(val_t  self, val_t  param0);
 #define LOCATE_hash___HashMap___has "hash::HashMap::(abstract_collection::Collection::has)"
 typedef val_t (* hash___HashMap___has_only_t)(val_t  self, val_t  param0);
 val_t hash___HashMap___has_only(val_t  self, val_t  param0);
 #define LOCATE_hash___HashMap___has_only "hash::HashMap::(abstract_collection::Collection::has_only)"
-typedef void (* hash___HashMap_____braeq_t)(val_t  self, val_t  param0, val_t  param1);
-void hash___HashMap_____braeq(val_t  self, val_t  param0, val_t  param1);
-#define LOCATE_hash___HashMap_____braeq "hash::HashMap::(abstract_collection::Map::[]=)"
-typedef void (* hash___HashMap___remove_t)(val_t  self, val_t  param0);
-void hash___HashMap___remove(val_t  self, val_t  param0);
-#define LOCATE_hash___HashMap___remove "hash::HashMap::(abstract_collection::RemovableCollection::remove)"
-typedef void (* hash___HashMap___remove_at_t)(val_t  self, val_t  param0);
-void hash___HashMap___remove_at(val_t  self, val_t  param0);
-#define LOCATE_hash___HashMap___remove_at "hash::HashMap::(abstract_collection::Map::remove_at)"
+typedef val_t (* hash___HashMap___count_t)(val_t  self, val_t  param0);
+val_t hash___HashMap___count(val_t  self, val_t  param0);
+#define LOCATE_hash___HashMap___count "hash::HashMap::(abstract_collection::Collection::count)"
+typedef val_t (* hash___HashMap___first_t)(val_t  self);
+val_t hash___HashMap___first(val_t  self);
+#define LOCATE_hash___HashMap___first "hash::HashMap::(abstract_collection::Collection::first)"
 typedef void (* hash___HashMap___clear_t)(val_t  self);
 void hash___HashMap___clear(val_t  self);
 #define LOCATE_hash___HashMap___clear "hash::HashMap::(abstract_collection::RemovableCollection::clear)"
+typedef void (* hash___HashMap___remove_t)(val_t  self, val_t  param0);
+void hash___HashMap___remove(val_t  self, val_t  param0);
+#define LOCATE_hash___HashMap___remove "hash::HashMap::(abstract_collection::RemovableCollection::remove)"
+typedef void (* hash___HashMap_____braeq_t)(val_t  self, val_t  param0, val_t  param1);
+void hash___HashMap_____braeq(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_hash___HashMap_____braeq "hash::HashMap::(abstract_collection::Map::[]=)"
+typedef void (* hash___HashMap___remove_at_t)(val_t  self, val_t  param0);
+void hash___HashMap___remove_at(val_t  self, val_t  param0);
+#define LOCATE_hash___HashMap___remove_at "hash::HashMap::(abstract_collection::Map::remove_at)"
 typedef val_t (* hash___HashMap___couple_at_t)(val_t  self, val_t  param0);
 val_t hash___HashMap___couple_at(val_t  self, val_t  param0);
 #define LOCATE_hash___HashMap___couple_at "hash::HashMap::(abstract_collection::CoupleMap::couple_at)"
 typedef void (* hash___HashMap___init_t)(val_t  self, int* init_table);
 void hash___HashMap___init(val_t  self, int* init_table);
-val_t NEW_hash___HashMap___init();
 #define LOCATE_hash___HashMap___init "hash::HashMap::init"
+val_t NEW_HashMap_hash___HashMap___init();
 typedef val_t (* hash___HashMapNode___key_t)(val_t  self);
 val_t hash___HashMapNode___key(val_t  self);
 #define LOCATE_hash___HashMapNode___key "hash::HashMapNode::(hash::HashNode::key)"
 typedef void (* hash___HashMapNode___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void hash___HashMapNode___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_hash___HashMapNode___init(val_t  param0, val_t  param1);
 #define LOCATE_hash___HashMapNode___init "hash::HashMapNode::init"
-typedef val_t (* hash___HashMapIterator___is_ok_t)(val_t  self);
-val_t hash___HashMapIterator___is_ok(val_t  self);
-#define LOCATE_hash___HashMapIterator___is_ok "hash::HashMapIterator::(abstract_collection::Iterator::is_ok)"
+val_t NEW_HashMapNode_hash___HashMapNode___init(val_t p0, val_t p1);
 typedef val_t (* hash___HashMapIterator___item_t)(val_t  self);
 val_t hash___HashMapIterator___item(val_t  self);
 #define LOCATE_hash___HashMapIterator___item "hash::HashMapIterator::(abstract_collection::Iterator::item)"
-typedef void (* hash___HashMapIterator___item__eq_t)(val_t  self, val_t  param0);
-void hash___HashMapIterator___item__eq(val_t  self, val_t  param0);
-#define LOCATE_hash___HashMapIterator___item__eq "hash::HashMapIterator::(abstract_collection::MapIterator::item=)"
-typedef val_t (* hash___HashMapIterator___key_t)(val_t  self);
-val_t hash___HashMapIterator___key(val_t  self);
-#define LOCATE_hash___HashMapIterator___key "hash::HashMapIterator::(abstract_collection::MapIterator::key)"
 typedef void (* hash___HashMapIterator___next_t)(val_t  self);
 void hash___HashMapIterator___next(val_t  self);
 #define LOCATE_hash___HashMapIterator___next "hash::HashMapIterator::(abstract_collection::Iterator::next)"
+typedef val_t (* hash___HashMapIterator___is_ok_t)(val_t  self);
+val_t hash___HashMapIterator___is_ok(val_t  self);
+#define LOCATE_hash___HashMapIterator___is_ok "hash::HashMapIterator::(abstract_collection::Iterator::is_ok)"
+typedef val_t (* hash___HashMapIterator___key_t)(val_t  self);
+val_t hash___HashMapIterator___key(val_t  self);
+#define LOCATE_hash___HashMapIterator___key "hash::HashMapIterator::(abstract_collection::MapIterator::key)"
+typedef void (* hash___HashMapIterator___item__eq_t)(val_t  self, val_t  param0);
+void hash___HashMapIterator___item__eq(val_t  self, val_t  param0);
+#define LOCATE_hash___HashMapIterator___item__eq "hash::HashMapIterator::(abstract_collection::MapIterator::item=)"
 #define ATTR_hash___HashMapIterator____map(recv) ATTR(recv, COLOR_hash___HashMapIterator____map)
 #define ATTR_hash___HashMapIterator____node(recv) ATTR(recv, COLOR_hash___HashMapIterator____node)
 typedef void (* hash___HashMapIterator___init_t)(val_t  self, val_t  param0, int* init_table);
 void hash___HashMapIterator___init(val_t  self, val_t  param0, int* init_table);
-val_t NEW_hash___HashMapIterator___init(val_t  param0);
 #define LOCATE_hash___HashMapIterator___init "hash::HashMapIterator::init"
-typedef val_t (* hash___HashSet___is_empty_t)(val_t  self);
-val_t hash___HashSet___is_empty(val_t  self);
-#define LOCATE_hash___HashSet___is_empty "hash::HashSet::(abstract_collection::Collection::is_empty)"
-typedef val_t (* hash___HashSet___first_t)(val_t  self);
-val_t hash___HashSet___first(val_t  self);
-#define LOCATE_hash___HashSet___first "hash::HashSet::(abstract_collection::Collection::first)"
-typedef val_t (* hash___HashSet___has_t)(val_t  self, val_t  param0);
-val_t hash___HashSet___has(val_t  self, val_t  param0);
-#define LOCATE_hash___HashSet___has "hash::HashSet::(abstract_collection::Collection::has)"
-typedef void (* hash___HashSet___add_t)(val_t  self, val_t  param0);
-void hash___HashSet___add(val_t  self, val_t  param0);
-#define LOCATE_hash___HashSet___add "hash::HashSet::(abstract_collection::SimpleCollection::add)"
-typedef void (* hash___HashSet___remove_t)(val_t  self, val_t  param0);
-void hash___HashSet___remove(val_t  self, val_t  param0);
-#define LOCATE_hash___HashSet___remove "hash::HashSet::(abstract_collection::RemovableCollection::remove)"
-typedef void (* hash___HashSet___clear_t)(val_t  self);
-void hash___HashSet___clear(val_t  self);
-#define LOCATE_hash___HashSet___clear "hash::HashSet::(abstract_collection::RemovableCollection::clear)"
+val_t NEW_HashMapIterator_hash___HashMapIterator___init(val_t p0);
 typedef val_t (* hash___HashSet___iterator_t)(val_t  self);
 val_t hash___HashSet___iterator(val_t  self);
 #define LOCATE_hash___HashSet___iterator "hash::HashSet::(abstract_collection::Collection::iterator)"
+typedef val_t (* hash___HashSet___is_empty_t)(val_t  self);
+val_t hash___HashSet___is_empty(val_t  self);
+#define LOCATE_hash___HashSet___is_empty "hash::HashSet::(abstract_collection::Collection::is_empty)"
+typedef val_t (* hash___HashSet___has_t)(val_t  self, val_t  param0);
+val_t hash___HashSet___has(val_t  self, val_t  param0);
+#define LOCATE_hash___HashSet___has "hash::HashSet::(abstract_collection::Collection::has)"
+typedef val_t (* hash___HashSet___first_t)(val_t  self);
+val_t hash___HashSet___first(val_t  self);
+#define LOCATE_hash___HashSet___first "hash::HashSet::(abstract_collection::Collection::first)"
+typedef void (* hash___HashSet___clear_t)(val_t  self);
+void hash___HashSet___clear(val_t  self);
+#define LOCATE_hash___HashSet___clear "hash::HashSet::(abstract_collection::RemovableCollection::clear)"
+typedef void (* hash___HashSet___remove_t)(val_t  self, val_t  param0);
+void hash___HashSet___remove(val_t  self, val_t  param0);
+#define LOCATE_hash___HashSet___remove "hash::HashSet::(abstract_collection::RemovableCollection::remove)"
+typedef void (* hash___HashSet___add_t)(val_t  self, val_t  param0);
+void hash___HashSet___add(val_t  self, val_t  param0);
+#define LOCATE_hash___HashSet___add "hash::HashSet::(abstract_collection::SimpleCollection::add)"
 typedef void (* hash___HashSet___init_t)(val_t  self, int* init_table);
 void hash___HashSet___init(val_t  self, int* init_table);
-val_t NEW_hash___HashSet___init();
 #define LOCATE_hash___HashSet___init "hash::HashSet::init"
-#define ATTR_hash___HashSetNode____key(recv) ATTR(recv, COLOR_hash___HashSetNode____key)
+val_t NEW_HashSet_hash___HashSet___init();
 typedef val_t (* hash___HashSetNode___key_t)(val_t  self);
 val_t hash___HashSetNode___key(val_t  self);
 #define LOCATE_hash___HashSetNode___key "hash::HashSetNode::(hash::HashNode::key)"
+#define ATTR_hash___HashSetNode____key(recv) ATTR(recv, COLOR_hash___HashSetNode____key)
 typedef void (* hash___HashSetNode___key__eq_t)(val_t  self, val_t  param0);
 void hash___HashSetNode___key__eq(val_t  self, val_t  param0);
 #define LOCATE_hash___HashSetNode___key__eq "hash::HashSetNode::key="
 typedef void (* hash___HashSetNode___init_t)(val_t  self, val_t  param0, int* init_table);
 void hash___HashSetNode___init(val_t  self, val_t  param0, int* init_table);
-val_t NEW_hash___HashSetNode___init(val_t  param0);
 #define LOCATE_hash___HashSetNode___init "hash::HashSetNode::init"
-typedef val_t (* hash___HashSetIterator___is_ok_t)(val_t  self);
-val_t hash___HashSetIterator___is_ok(val_t  self);
-#define LOCATE_hash___HashSetIterator___is_ok "hash::HashSetIterator::(abstract_collection::Iterator::is_ok)"
+val_t NEW_HashSetNode_hash___HashSetNode___init(val_t p0);
 typedef val_t (* hash___HashSetIterator___item_t)(val_t  self);
 val_t hash___HashSetIterator___item(val_t  self);
 #define LOCATE_hash___HashSetIterator___item "hash::HashSetIterator::(abstract_collection::Iterator::item)"
 typedef void (* hash___HashSetIterator___next_t)(val_t  self);
 void hash___HashSetIterator___next(val_t  self);
 #define LOCATE_hash___HashSetIterator___next "hash::HashSetIterator::(abstract_collection::Iterator::next)"
+typedef val_t (* hash___HashSetIterator___is_ok_t)(val_t  self);
+val_t hash___HashSetIterator___is_ok(val_t  self);
+#define LOCATE_hash___HashSetIterator___is_ok "hash::HashSetIterator::(abstract_collection::Iterator::is_ok)"
 #define ATTR_hash___HashSetIterator____set(recv) ATTR(recv, COLOR_hash___HashSetIterator____set)
 #define ATTR_hash___HashSetIterator____node(recv) ATTR(recv, COLOR_hash___HashSetIterator____node)
 typedef void (* hash___HashSetIterator___init_t)(val_t  self, val_t  param0, int* init_table);
 void hash___HashSetIterator___init(val_t  self, val_t  param0, int* init_table);
-val_t NEW_hash___HashSetIterator___init(val_t  param0);
 #define LOCATE_hash___HashSetIterator___init "hash::HashSetIterator::init"
+val_t NEW_HashSetIterator_hash___HashSetIterator___init(val_t p0);
 #endif

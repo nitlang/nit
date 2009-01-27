@@ -102,112 +102,117 @@ extern const int SFT_abstractmetamodel[];
 #define COLOR_abstractmetamodel___MMGlobalClass____is_abstract SFT_abstractmetamodel[74]
 #define COLOR_abstractmetamodel___MMGlobalClass____is_universal SFT_abstractmetamodel[75]
 #define COLOR_abstractmetamodel___MMGlobalClass____visibility_level SFT_abstractmetamodel[76]
-#define INIT_TABLE_POS_MMGlobalClass SFT_abstractmetamodel[77]
-#define COLOR_abstractmetamodel___MMGlobalClass___intro SFT_abstractmetamodel[78]
-#define COLOR_abstractmetamodel___MMGlobalClass___class_refinement_hierarchy SFT_abstractmetamodel[79]
-#define COLOR_abstractmetamodel___MMGlobalClass___init SFT_abstractmetamodel[80]
-#define COLOR_abstractmetamodel___MMGlobalClass___name SFT_abstractmetamodel[81]
-#define COLOR_abstractmetamodel___MMGlobalClass___module SFT_abstractmetamodel[82]
-#define COLOR_abstractmetamodel___MMGlobalClass___register_local_class SFT_abstractmetamodel[83]
-#define COLOR_abstractmetamodel___MMGlobalClass___is_interface SFT_abstractmetamodel[84]
-#define COLOR_abstractmetamodel___MMGlobalClass___is_interface__eq SFT_abstractmetamodel[85]
-#define COLOR_abstractmetamodel___MMGlobalClass___is_abstract SFT_abstractmetamodel[86]
-#define COLOR_abstractmetamodel___MMGlobalClass___is_abstract__eq SFT_abstractmetamodel[87]
-#define COLOR_abstractmetamodel___MMGlobalClass___is_universal SFT_abstractmetamodel[88]
-#define COLOR_abstractmetamodel___MMGlobalClass___is_universal__eq SFT_abstractmetamodel[89]
-#define COLOR_abstractmetamodel___MMGlobalClass___visibility_level SFT_abstractmetamodel[90]
-#define COLOR_abstractmetamodel___MMGlobalClass___visibility_level__eq SFT_abstractmetamodel[91]
-#define ID_MMLocalClass SFT_abstractmetamodel[92]
-#define COLOR_MMLocalClass SFT_abstractmetamodel[93]
-#define COLOR_abstractmetamodel___MMLocalClass____name SFT_abstractmetamodel[94]
-#define COLOR_abstractmetamodel___MMLocalClass____arity SFT_abstractmetamodel[95]
-#define COLOR_abstractmetamodel___MMLocalClass____module SFT_abstractmetamodel[96]
-#define COLOR_abstractmetamodel___MMLocalClass____abstract SFT_abstractmetamodel[97]
-#define COLOR_abstractmetamodel___MMLocalClass____global SFT_abstractmetamodel[98]
-#define COLOR_abstractmetamodel___MMLocalClass____crhe SFT_abstractmetamodel[99]
-#define COLOR_abstractmetamodel___MMLocalClass____cshe SFT_abstractmetamodel[100]
-#define COLOR_abstractmetamodel___MMLocalClass____che SFT_abstractmetamodel[101]
-#define COLOR_abstractmetamodel___MMLocalClass____local_property_by_global SFT_abstractmetamodel[102]
-#define COLOR_abstractmetamodel___MMLocalClass____global_properties SFT_abstractmetamodel[103]
-#define COLOR_abstractmetamodel___MMLocalClass____properties_by_name SFT_abstractmetamodel[104]
-#define INIT_TABLE_POS_MMLocalClass SFT_abstractmetamodel[105]
-#define COLOR_abstractmetamodel___MMLocalClass___name SFT_abstractmetamodel[106]
-#define COLOR_abstractmetamodel___MMLocalClass___arity SFT_abstractmetamodel[107]
-#define COLOR_abstractmetamodel___MMLocalClass___module SFT_abstractmetamodel[108]
-#define COLOR_abstractmetamodel___MMLocalClass___abstract SFT_abstractmetamodel[109]
-#define COLOR_abstractmetamodel___MMLocalClass___abstract__eq SFT_abstractmetamodel[110]
-#define COLOR_abstractmetamodel___MMLocalClass___global SFT_abstractmetamodel[111]
-#define COLOR_abstractmetamodel___MMLocalClass___crhe SFT_abstractmetamodel[112]
-#define COLOR_abstractmetamodel___MMLocalClass___cshe SFT_abstractmetamodel[113]
-#define COLOR_abstractmetamodel___MMLocalClass___che SFT_abstractmetamodel[114]
-#define COLOR_abstractmetamodel___MMLocalClass___local_property_by_global SFT_abstractmetamodel[115]
-#define COLOR_abstractmetamodel___MMLocalClass___global_properties SFT_abstractmetamodel[116]
-#define COLOR_abstractmetamodel___MMLocalClass___properties_by_name SFT_abstractmetamodel[117]
-#define COLOR_abstractmetamodel___MMLocalClass___init SFT_abstractmetamodel[118]
-#define COLOR_abstractmetamodel___MMLocalClass___for_module SFT_abstractmetamodel[119]
-#define COLOR_abstractmetamodel___MMLocalClass___new_global SFT_abstractmetamodel[120]
-#define COLOR_abstractmetamodel___MMLocalClass___set_global SFT_abstractmetamodel[121]
-#define COLOR_abstractmetamodel___MMLocalClass___has_global_property_by_name SFT_abstractmetamodel[122]
-#define COLOR_abstractmetamodel___MMLocalClass___get_property_by_name SFT_abstractmetamodel[123]
-#define COLOR_abstractmetamodel___MMLocalClass___attribute SFT_abstractmetamodel[124]
-#define COLOR_abstractmetamodel___MMLocalClass___method SFT_abstractmetamodel[125]
-#define COLOR_abstractmetamodel___MMLocalClass___select_method SFT_abstractmetamodel[126]
-#define COLOR_abstractmetamodel___MMLocalClass___select_attribute SFT_abstractmetamodel[127]
-#define COLOR_abstractmetamodel___MMLocalClass___super_methods_named SFT_abstractmetamodel[128]
-#define COLOR_abstractmetamodel___MMLocalClass___register_local_property SFT_abstractmetamodel[129]
-#define COLOR_abstractmetamodel___MMLocalClass___register_global_property SFT_abstractmetamodel[130]
-#define COLOR_abstractmetamodel___MMLocalClass_____bra SFT_abstractmetamodel[131]
-#define COLOR_abstractmetamodel___MMLocalClass___context SFT_abstractmetamodel[132]
-#define ID_MMGlobalProperty SFT_abstractmetamodel[133]
-#define COLOR_MMGlobalProperty SFT_abstractmetamodel[134]
-#define COLOR_abstractmetamodel___MMGlobalProperty____intro SFT_abstractmetamodel[135]
-#define COLOR_abstractmetamodel___MMGlobalProperty____property_hierarchy SFT_abstractmetamodel[136]
-#define COLOR_abstractmetamodel___MMGlobalProperty____is_init SFT_abstractmetamodel[137]
-#define COLOR_abstractmetamodel___MMGlobalProperty____visibility_level SFT_abstractmetamodel[138]
-#define INIT_TABLE_POS_MMGlobalProperty SFT_abstractmetamodel[139]
-#define COLOR_abstractmetamodel___MMGlobalProperty___intro SFT_abstractmetamodel[140]
-#define COLOR_abstractmetamodel___MMGlobalProperty___local_class SFT_abstractmetamodel[141]
-#define COLOR_abstractmetamodel___MMGlobalProperty___property_hierarchy SFT_abstractmetamodel[142]
-#define COLOR_abstractmetamodel___MMGlobalProperty___init SFT_abstractmetamodel[143]
-#define COLOR_abstractmetamodel___MMGlobalProperty___add_local_property SFT_abstractmetamodel[144]
-#define COLOR_abstractmetamodel___MMGlobalProperty___is_attribute SFT_abstractmetamodel[145]
-#define COLOR_abstractmetamodel___MMGlobalProperty___is_method SFT_abstractmetamodel[146]
-#define COLOR_abstractmetamodel___MMGlobalProperty___is_init SFT_abstractmetamodel[147]
-#define COLOR_abstractmetamodel___MMGlobalProperty___is_init__eq SFT_abstractmetamodel[148]
-#define COLOR_abstractmetamodel___MMGlobalProperty___visibility_level SFT_abstractmetamodel[149]
-#define COLOR_abstractmetamodel___MMGlobalProperty___visibility_level__eq SFT_abstractmetamodel[150]
-#define ID_MMLocalProperty SFT_abstractmetamodel[151]
-#define COLOR_MMLocalProperty SFT_abstractmetamodel[152]
-#define COLOR_abstractmetamodel___MMLocalProperty____name SFT_abstractmetamodel[153]
-#define COLOR_abstractmetamodel___MMLocalProperty____local_class SFT_abstractmetamodel[154]
-#define COLOR_abstractmetamodel___MMLocalProperty____global SFT_abstractmetamodel[155]
-#define COLOR_abstractmetamodel___MMLocalProperty____prhe SFT_abstractmetamodel[156]
-#define COLOR_abstractmetamodel___MMLocalProperty____need_super SFT_abstractmetamodel[157]
-#define INIT_TABLE_POS_MMLocalProperty SFT_abstractmetamodel[158]
-#define COLOR_abstractmetamodel___MMLocalProperty___name SFT_abstractmetamodel[159]
-#define COLOR_abstractmetamodel___MMLocalProperty___local_class SFT_abstractmetamodel[160]
-#define COLOR_abstractmetamodel___MMLocalProperty___global SFT_abstractmetamodel[161]
-#define COLOR_abstractmetamodel___MMLocalProperty___prhe SFT_abstractmetamodel[162]
-#define COLOR_abstractmetamodel___MMLocalProperty___module SFT_abstractmetamodel[163]
-#define COLOR_abstractmetamodel___MMLocalProperty___full_name SFT_abstractmetamodel[164]
-#define COLOR_abstractmetamodel___MMLocalProperty___set_global SFT_abstractmetamodel[165]
-#define COLOR_abstractmetamodel___MMLocalProperty___new_global SFT_abstractmetamodel[166]
-#define COLOR_abstractmetamodel___MMLocalProperty___need_super SFT_abstractmetamodel[167]
-#define COLOR_abstractmetamodel___MMLocalProperty___need_super__eq SFT_abstractmetamodel[168]
-#define COLOR_abstractmetamodel___MMLocalProperty___init SFT_abstractmetamodel[169]
-#define ID_MMAttribute SFT_abstractmetamodel[170]
-#define COLOR_MMAttribute SFT_abstractmetamodel[171]
-#define INIT_TABLE_POS_MMAttribute SFT_abstractmetamodel[172]
-#define ID_MMMethod SFT_abstractmetamodel[173]
-#define COLOR_MMMethod SFT_abstractmetamodel[174]
-#define INIT_TABLE_POS_MMMethod SFT_abstractmetamodel[175]
-#define ID_MMConcreteClass SFT_abstractmetamodel[176]
-#define COLOR_MMConcreteClass SFT_abstractmetamodel[177]
-#define INIT_TABLE_POS_MMConcreteClass SFT_abstractmetamodel[178]
+#define COLOR_abstractmetamodel___MMGlobalClass____mixin_of SFT_abstractmetamodel[77]
+#define INIT_TABLE_POS_MMGlobalClass SFT_abstractmetamodel[78]
+#define COLOR_abstractmetamodel___MMGlobalClass___intro SFT_abstractmetamodel[79]
+#define COLOR_abstractmetamodel___MMGlobalClass___class_refinement_hierarchy SFT_abstractmetamodel[80]
+#define COLOR_abstractmetamodel___MMGlobalClass___init SFT_abstractmetamodel[81]
+#define COLOR_abstractmetamodel___MMGlobalClass___name SFT_abstractmetamodel[82]
+#define COLOR_abstractmetamodel___MMGlobalClass___module SFT_abstractmetamodel[83]
+#define COLOR_abstractmetamodel___MMGlobalClass___register_local_class SFT_abstractmetamodel[84]
+#define COLOR_abstractmetamodel___MMGlobalClass___is_interface SFT_abstractmetamodel[85]
+#define COLOR_abstractmetamodel___MMGlobalClass___is_interface__eq SFT_abstractmetamodel[86]
+#define COLOR_abstractmetamodel___MMGlobalClass___is_abstract SFT_abstractmetamodel[87]
+#define COLOR_abstractmetamodel___MMGlobalClass___is_abstract__eq SFT_abstractmetamodel[88]
+#define COLOR_abstractmetamodel___MMGlobalClass___is_universal SFT_abstractmetamodel[89]
+#define COLOR_abstractmetamodel___MMGlobalClass___is_universal__eq SFT_abstractmetamodel[90]
+#define COLOR_abstractmetamodel___MMGlobalClass___visibility_level SFT_abstractmetamodel[91]
+#define COLOR_abstractmetamodel___MMGlobalClass___visibility_level__eq SFT_abstractmetamodel[92]
+#define COLOR_abstractmetamodel___MMGlobalClass___is_mixin SFT_abstractmetamodel[93]
+#define COLOR_abstractmetamodel___MMGlobalClass___mixin_of SFT_abstractmetamodel[94]
+#define COLOR_abstractmetamodel___MMGlobalClass___mixin_of__eq SFT_abstractmetamodel[95]
+#define ID_MMLocalClass SFT_abstractmetamodel[96]
+#define COLOR_MMLocalClass SFT_abstractmetamodel[97]
+#define COLOR_abstractmetamodel___MMLocalClass____name SFT_abstractmetamodel[98]
+#define COLOR_abstractmetamodel___MMLocalClass____arity SFT_abstractmetamodel[99]
+#define COLOR_abstractmetamodel___MMLocalClass____module SFT_abstractmetamodel[100]
+#define COLOR_abstractmetamodel___MMLocalClass____abstract SFT_abstractmetamodel[101]
+#define COLOR_abstractmetamodel___MMLocalClass____global SFT_abstractmetamodel[102]
+#define COLOR_abstractmetamodel___MMLocalClass____crhe SFT_abstractmetamodel[103]
+#define COLOR_abstractmetamodel___MMLocalClass____cshe SFT_abstractmetamodel[104]
+#define COLOR_abstractmetamodel___MMLocalClass____che SFT_abstractmetamodel[105]
+#define COLOR_abstractmetamodel___MMLocalClass____local_property_by_global SFT_abstractmetamodel[106]
+#define COLOR_abstractmetamodel___MMLocalClass____global_properties SFT_abstractmetamodel[107]
+#define COLOR_abstractmetamodel___MMLocalClass____properties_by_name SFT_abstractmetamodel[108]
+#define INIT_TABLE_POS_MMLocalClass SFT_abstractmetamodel[109]
+#define COLOR_abstractmetamodel___MMLocalClass___name SFT_abstractmetamodel[110]
+#define COLOR_abstractmetamodel___MMLocalClass___arity SFT_abstractmetamodel[111]
+#define COLOR_abstractmetamodel___MMLocalClass___module SFT_abstractmetamodel[112]
+#define COLOR_abstractmetamodel___MMLocalClass___abstract SFT_abstractmetamodel[113]
+#define COLOR_abstractmetamodel___MMLocalClass___abstract__eq SFT_abstractmetamodel[114]
+#define COLOR_abstractmetamodel___MMLocalClass___global SFT_abstractmetamodel[115]
+#define COLOR_abstractmetamodel___MMLocalClass___crhe SFT_abstractmetamodel[116]
+#define COLOR_abstractmetamodel___MMLocalClass___cshe SFT_abstractmetamodel[117]
+#define COLOR_abstractmetamodel___MMLocalClass___che SFT_abstractmetamodel[118]
+#define COLOR_abstractmetamodel___MMLocalClass___local_property_by_global SFT_abstractmetamodel[119]
+#define COLOR_abstractmetamodel___MMLocalClass___global_properties SFT_abstractmetamodel[120]
+#define COLOR_abstractmetamodel___MMLocalClass___properties_by_name SFT_abstractmetamodel[121]
+#define COLOR_abstractmetamodel___MMLocalClass___init SFT_abstractmetamodel[122]
+#define COLOR_abstractmetamodel___MMLocalClass___for_module SFT_abstractmetamodel[123]
+#define COLOR_abstractmetamodel___MMLocalClass___new_global SFT_abstractmetamodel[124]
+#define COLOR_abstractmetamodel___MMLocalClass___set_global SFT_abstractmetamodel[125]
+#define COLOR_abstractmetamodel___MMLocalClass___has_global_property_by_name SFT_abstractmetamodel[126]
+#define COLOR_abstractmetamodel___MMLocalClass___get_property_by_name SFT_abstractmetamodel[127]
+#define COLOR_abstractmetamodel___MMLocalClass___attribute SFT_abstractmetamodel[128]
+#define COLOR_abstractmetamodel___MMLocalClass___method SFT_abstractmetamodel[129]
+#define COLOR_abstractmetamodel___MMLocalClass___select_method SFT_abstractmetamodel[130]
+#define COLOR_abstractmetamodel___MMLocalClass___select_attribute SFT_abstractmetamodel[131]
+#define COLOR_abstractmetamodel___MMLocalClass___super_methods_named SFT_abstractmetamodel[132]
+#define COLOR_abstractmetamodel___MMLocalClass___register_local_property SFT_abstractmetamodel[133]
+#define COLOR_abstractmetamodel___MMLocalClass___register_global_property SFT_abstractmetamodel[134]
+#define COLOR_abstractmetamodel___MMLocalClass_____bra SFT_abstractmetamodel[135]
+#define COLOR_abstractmetamodel___MMLocalClass___context SFT_abstractmetamodel[136]
+#define ID_MMGlobalProperty SFT_abstractmetamodel[137]
+#define COLOR_MMGlobalProperty SFT_abstractmetamodel[138]
+#define COLOR_abstractmetamodel___MMGlobalProperty____intro SFT_abstractmetamodel[139]
+#define COLOR_abstractmetamodel___MMGlobalProperty____property_hierarchy SFT_abstractmetamodel[140]
+#define COLOR_abstractmetamodel___MMGlobalProperty____is_init SFT_abstractmetamodel[141]
+#define COLOR_abstractmetamodel___MMGlobalProperty____visibility_level SFT_abstractmetamodel[142]
+#define INIT_TABLE_POS_MMGlobalProperty SFT_abstractmetamodel[143]
+#define COLOR_abstractmetamodel___MMGlobalProperty___intro SFT_abstractmetamodel[144]
+#define COLOR_abstractmetamodel___MMGlobalProperty___local_class SFT_abstractmetamodel[145]
+#define COLOR_abstractmetamodel___MMGlobalProperty___property_hierarchy SFT_abstractmetamodel[146]
+#define COLOR_abstractmetamodel___MMGlobalProperty___init SFT_abstractmetamodel[147]
+#define COLOR_abstractmetamodel___MMGlobalProperty___add_local_property SFT_abstractmetamodel[148]
+#define COLOR_abstractmetamodel___MMGlobalProperty___is_attribute SFT_abstractmetamodel[149]
+#define COLOR_abstractmetamodel___MMGlobalProperty___is_method SFT_abstractmetamodel[150]
+#define COLOR_abstractmetamodel___MMGlobalProperty___is_init SFT_abstractmetamodel[151]
+#define COLOR_abstractmetamodel___MMGlobalProperty___is_init__eq SFT_abstractmetamodel[152]
+#define COLOR_abstractmetamodel___MMGlobalProperty___is_init_for SFT_abstractmetamodel[153]
+#define COLOR_abstractmetamodel___MMGlobalProperty___visibility_level SFT_abstractmetamodel[154]
+#define COLOR_abstractmetamodel___MMGlobalProperty___visibility_level__eq SFT_abstractmetamodel[155]
+#define ID_MMLocalProperty SFT_abstractmetamodel[156]
+#define COLOR_MMLocalProperty SFT_abstractmetamodel[157]
+#define COLOR_abstractmetamodel___MMLocalProperty____name SFT_abstractmetamodel[158]
+#define COLOR_abstractmetamodel___MMLocalProperty____local_class SFT_abstractmetamodel[159]
+#define COLOR_abstractmetamodel___MMLocalProperty____global SFT_abstractmetamodel[160]
+#define COLOR_abstractmetamodel___MMLocalProperty____prhe SFT_abstractmetamodel[161]
+#define COLOR_abstractmetamodel___MMLocalProperty____need_super SFT_abstractmetamodel[162]
+#define INIT_TABLE_POS_MMLocalProperty SFT_abstractmetamodel[163]
+#define COLOR_abstractmetamodel___MMLocalProperty___name SFT_abstractmetamodel[164]
+#define COLOR_abstractmetamodel___MMLocalProperty___local_class SFT_abstractmetamodel[165]
+#define COLOR_abstractmetamodel___MMLocalProperty___global SFT_abstractmetamodel[166]
+#define COLOR_abstractmetamodel___MMLocalProperty___prhe SFT_abstractmetamodel[167]
+#define COLOR_abstractmetamodel___MMLocalProperty___module SFT_abstractmetamodel[168]
+#define COLOR_abstractmetamodel___MMLocalProperty___full_name SFT_abstractmetamodel[169]
+#define COLOR_abstractmetamodel___MMLocalProperty___set_global SFT_abstractmetamodel[170]
+#define COLOR_abstractmetamodel___MMLocalProperty___new_global SFT_abstractmetamodel[171]
+#define COLOR_abstractmetamodel___MMLocalProperty___need_super SFT_abstractmetamodel[172]
+#define COLOR_abstractmetamodel___MMLocalProperty___need_super__eq SFT_abstractmetamodel[173]
+#define COLOR_abstractmetamodel___MMLocalProperty___init SFT_abstractmetamodel[174]
+#define ID_MMAttribute SFT_abstractmetamodel[175]
+#define COLOR_MMAttribute SFT_abstractmetamodel[176]
+#define INIT_TABLE_POS_MMAttribute SFT_abstractmetamodel[177]
+#define ID_MMMethod SFT_abstractmetamodel[178]
+#define COLOR_MMMethod SFT_abstractmetamodel[179]
+#define INIT_TABLE_POS_MMMethod SFT_abstractmetamodel[180]
+#define ID_MMConcreteClass SFT_abstractmetamodel[181]
+#define COLOR_MMConcreteClass SFT_abstractmetamodel[182]
+#define INIT_TABLE_POS_MMConcreteClass SFT_abstractmetamodel[183]
 typedef void (* abstractmetamodel___MMContext___init_t)(val_t  self, int* init_table);
 void abstractmetamodel___MMContext___init(val_t  self, int* init_table);
-val_t NEW_abstractmetamodel___MMContext___init();
 #define LOCATE_abstractmetamodel___MMContext___init "abstractmetamodel::MMContext::init"
+val_t NEW_MMContext_abstractmetamodel___MMContext___init();
 #define ATTR_abstractmetamodel___MMContext____module_hierarchy(recv) ATTR(recv, COLOR_abstractmetamodel___MMContext____module_hierarchy)
 typedef val_t (* abstractmetamodel___MMContext___module_hierarchy_t)(val_t  self);
 val_t abstractmetamodel___MMContext___module_hierarchy(val_t  self);
@@ -262,11 +267,14 @@ val_t abstractmetamodel___MMDirectory___dhe(val_t  self);
 #define LOCATE_abstractmetamodel___MMDirectory___dhe "abstractmetamodel::MMDirectory::dhe"
 typedef void (* abstractmetamodel___MMDirectory___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 void abstractmetamodel___MMDirectory___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_abstractmetamodel___MMDirectory___init(val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_abstractmetamodel___MMDirectory___init "abstractmetamodel::MMDirectory::init"
+val_t NEW_MMDirectory_abstractmetamodel___MMDirectory___init(val_t p0, val_t p1, val_t p2);
 typedef val_t (* abstractmetamodel___MMDirectory___full_name_for_t)(val_t  self, val_t  param0);
 val_t abstractmetamodel___MMDirectory___full_name_for(val_t  self, val_t  param0);
 #define LOCATE_abstractmetamodel___MMDirectory___full_name_for "abstractmetamodel::MMDirectory::full_name_for"
+typedef val_t (* abstractmetamodel___MMModule___to_s_t)(val_t  self);
+val_t abstractmetamodel___MMModule___to_s(val_t  self);
+#define LOCATE_abstractmetamodel___MMModule___to_s "abstractmetamodel::MMModule::(string::Object::to_s)"
 #define ATTR_abstractmetamodel___MMModule____context(recv) ATTR(recv, COLOR_abstractmetamodel___MMModule____context)
 typedef val_t (* abstractmetamodel___MMModule___context_t)(val_t  self);
 val_t abstractmetamodel___MMModule___context(val_t  self);
@@ -310,8 +318,8 @@ val_t abstractmetamodel___MMModule___explicit_imported_modules(val_t  self);
 #define ATTR_abstractmetamodel___MMModule____global_class_by_name(recv) ATTR(recv, COLOR_abstractmetamodel___MMModule____global_class_by_name)
 typedef void (* abstractmetamodel___MMModule___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 void abstractmetamodel___MMModule___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_abstractmetamodel___MMModule___init(val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_abstractmetamodel___MMModule___init "abstractmetamodel::MMModule::init"
+val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2);
 typedef void (* abstractmetamodel___MMModule___add_super_module_t)(val_t  self, val_t  param0, val_t  param1);
 void abstractmetamodel___MMModule___add_super_module(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_abstractmetamodel___MMModule___add_super_module "abstractmetamodel::MMModule::add_super_module"
@@ -333,15 +341,15 @@ val_t abstractmetamodel___MMModule___has_global_class_named(val_t  self, val_t  
 typedef val_t (* abstractmetamodel___MMModule___global_class_named_t)(val_t  self, val_t  param0);
 val_t abstractmetamodel___MMModule___global_class_named(val_t  self, val_t  param0);
 #define LOCATE_abstractmetamodel___MMModule___global_class_named "abstractmetamodel::MMModule::global_class_named"
-typedef val_t (* abstractmetamodel___MMModule___to_s_t)(val_t  self);
-val_t abstractmetamodel___MMModule___to_s(val_t  self);
-#define LOCATE_abstractmetamodel___MMModule___to_s "abstractmetamodel::MMModule::(string::Object::to_s)"
 typedef void (* abstractmetamodel___MMModule___set_supers_class_t)(val_t  self, val_t  param0, val_t  param1);
 void abstractmetamodel___MMModule___set_supers_class(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_abstractmetamodel___MMModule___set_supers_class "abstractmetamodel::MMModule::set_supers_class"
 typedef void (* abstractmetamodel___MMModule___register_global_class_t)(val_t  self, val_t  param0);
 void abstractmetamodel___MMModule___register_global_class(val_t  self, val_t  param0);
 #define LOCATE_abstractmetamodel___MMModule___register_global_class "abstractmetamodel::MMModule::register_global_class"
+typedef val_t (* abstractmetamodel___MMGlobalClass___to_s_t)(val_t  self);
+val_t abstractmetamodel___MMGlobalClass___to_s(val_t  self);
+#define LOCATE_abstractmetamodel___MMGlobalClass___to_s "abstractmetamodel::MMGlobalClass::(string::Object::to_s)"
 #define ATTR_abstractmetamodel___MMGlobalClass____intro(recv) ATTR(recv, COLOR_abstractmetamodel___MMGlobalClass____intro)
 typedef val_t (* abstractmetamodel___MMGlobalClass___intro_t)(val_t  self);
 val_t abstractmetamodel___MMGlobalClass___intro(val_t  self);
@@ -352,17 +360,14 @@ val_t abstractmetamodel___MMGlobalClass___class_refinement_hierarchy(val_t  self
 #define LOCATE_abstractmetamodel___MMGlobalClass___class_refinement_hierarchy "abstractmetamodel::MMGlobalClass::class_refinement_hierarchy"
 typedef void (* abstractmetamodel___MMGlobalClass___init_t)(val_t  self, val_t  param0, int* init_table);
 void abstractmetamodel___MMGlobalClass___init(val_t  self, val_t  param0, int* init_table);
-val_t NEW_abstractmetamodel___MMGlobalClass___init(val_t  param0);
 #define LOCATE_abstractmetamodel___MMGlobalClass___init "abstractmetamodel::MMGlobalClass::init"
+val_t NEW_MMGlobalClass_abstractmetamodel___MMGlobalClass___init(val_t p0);
 typedef val_t (* abstractmetamodel___MMGlobalClass___name_t)(val_t  self);
 val_t abstractmetamodel___MMGlobalClass___name(val_t  self);
 #define LOCATE_abstractmetamodel___MMGlobalClass___name "abstractmetamodel::MMGlobalClass::name"
 typedef val_t (* abstractmetamodel___MMGlobalClass___module_t)(val_t  self);
 val_t abstractmetamodel___MMGlobalClass___module(val_t  self);
 #define LOCATE_abstractmetamodel___MMGlobalClass___module "abstractmetamodel::MMGlobalClass::module"
-typedef val_t (* abstractmetamodel___MMGlobalClass___to_s_t)(val_t  self);
-val_t abstractmetamodel___MMGlobalClass___to_s(val_t  self);
-#define LOCATE_abstractmetamodel___MMGlobalClass___to_s "abstractmetamodel::MMGlobalClass::(string::Object::to_s)"
 typedef void (* abstractmetamodel___MMGlobalClass___register_local_class_t)(val_t  self, val_t  param0);
 void abstractmetamodel___MMGlobalClass___register_local_class(val_t  self, val_t  param0);
 #define LOCATE_abstractmetamodel___MMGlobalClass___register_local_class "abstractmetamodel::MMGlobalClass::register_local_class"
@@ -394,6 +399,19 @@ val_t abstractmetamodel___MMGlobalClass___visibility_level(val_t  self);
 typedef void (* abstractmetamodel___MMGlobalClass___visibility_level__eq_t)(val_t  self, val_t  param0);
 void abstractmetamodel___MMGlobalClass___visibility_level__eq(val_t  self, val_t  param0);
 #define LOCATE_abstractmetamodel___MMGlobalClass___visibility_level__eq "abstractmetamodel::MMGlobalClass::visibility_level="
+typedef val_t (* abstractmetamodel___MMGlobalClass___is_mixin_t)(val_t  self);
+val_t abstractmetamodel___MMGlobalClass___is_mixin(val_t  self);
+#define LOCATE_abstractmetamodel___MMGlobalClass___is_mixin "abstractmetamodel::MMGlobalClass::is_mixin"
+#define ATTR_abstractmetamodel___MMGlobalClass____mixin_of(recv) ATTR(recv, COLOR_abstractmetamodel___MMGlobalClass____mixin_of)
+typedef val_t (* abstractmetamodel___MMGlobalClass___mixin_of_t)(val_t  self);
+val_t abstractmetamodel___MMGlobalClass___mixin_of(val_t  self);
+#define LOCATE_abstractmetamodel___MMGlobalClass___mixin_of "abstractmetamodel::MMGlobalClass::mixin_of"
+typedef void (* abstractmetamodel___MMGlobalClass___mixin_of__eq_t)(val_t  self, val_t  param0);
+void abstractmetamodel___MMGlobalClass___mixin_of__eq(val_t  self, val_t  param0);
+#define LOCATE_abstractmetamodel___MMGlobalClass___mixin_of__eq "abstractmetamodel::MMGlobalClass::mixin_of="
+typedef val_t (* abstractmetamodel___MMLocalClass___to_s_t)(val_t  self);
+val_t abstractmetamodel___MMLocalClass___to_s(val_t  self);
+#define LOCATE_abstractmetamodel___MMLocalClass___to_s "abstractmetamodel::MMLocalClass::(string::Object::to_s)"
 #define ATTR_abstractmetamodel___MMLocalClass____name(recv) ATTR(recv, COLOR_abstractmetamodel___MMLocalClass____name)
 typedef val_t (* abstractmetamodel___MMLocalClass___name_t)(val_t  self);
 val_t abstractmetamodel___MMLocalClass___name(val_t  self);
@@ -443,8 +461,8 @@ val_t abstractmetamodel___MMLocalClass___properties_by_name(val_t  self);
 #define LOCATE_abstractmetamodel___MMLocalClass___properties_by_name "abstractmetamodel::MMLocalClass::properties_by_name"
 typedef void (* abstractmetamodel___MMLocalClass___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void abstractmetamodel___MMLocalClass___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_abstractmetamodel___MMLocalClass___init(val_t  param0, val_t  param1);
 #define LOCATE_abstractmetamodel___MMLocalClass___init "abstractmetamodel::MMLocalClass::init"
+val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1);
 typedef val_t (* abstractmetamodel___MMLocalClass___for_module_t)(val_t  self, val_t  param0);
 val_t abstractmetamodel___MMLocalClass___for_module(val_t  self, val_t  param0);
 #define LOCATE_abstractmetamodel___MMLocalClass___for_module "abstractmetamodel::MMLocalClass::for_module"
@@ -487,9 +505,9 @@ val_t abstractmetamodel___MMLocalClass_____bra(val_t  self, val_t  param0);
 typedef val_t (* abstractmetamodel___MMLocalClass___context_t)(val_t  self);
 val_t abstractmetamodel___MMLocalClass___context(val_t  self);
 #define LOCATE_abstractmetamodel___MMLocalClass___context "abstractmetamodel::MMLocalClass::context"
-typedef val_t (* abstractmetamodel___MMLocalClass___to_s_t)(val_t  self);
-val_t abstractmetamodel___MMLocalClass___to_s(val_t  self);
-#define LOCATE_abstractmetamodel___MMLocalClass___to_s "abstractmetamodel::MMLocalClass::(string::Object::to_s)"
+typedef val_t (* abstractmetamodel___MMGlobalProperty___to_s_t)(val_t  self);
+val_t abstractmetamodel___MMGlobalProperty___to_s(val_t  self);
+#define LOCATE_abstractmetamodel___MMGlobalProperty___to_s "abstractmetamodel::MMGlobalProperty::(string::Object::to_s)"
 #define ATTR_abstractmetamodel___MMGlobalProperty____intro(recv) ATTR(recv, COLOR_abstractmetamodel___MMGlobalProperty____intro)
 typedef val_t (* abstractmetamodel___MMGlobalProperty___intro_t)(val_t  self);
 val_t abstractmetamodel___MMGlobalProperty___intro(val_t  self);
@@ -503,11 +521,8 @@ val_t abstractmetamodel___MMGlobalProperty___property_hierarchy(val_t  self);
 #define LOCATE_abstractmetamodel___MMGlobalProperty___property_hierarchy "abstractmetamodel::MMGlobalProperty::property_hierarchy"
 typedef void (* abstractmetamodel___MMGlobalProperty___init_t)(val_t  self, val_t  param0, int* init_table);
 void abstractmetamodel___MMGlobalProperty___init(val_t  self, val_t  param0, int* init_table);
-val_t NEW_abstractmetamodel___MMGlobalProperty___init(val_t  param0);
 #define LOCATE_abstractmetamodel___MMGlobalProperty___init "abstractmetamodel::MMGlobalProperty::init"
-typedef val_t (* abstractmetamodel___MMGlobalProperty___to_s_t)(val_t  self);
-val_t abstractmetamodel___MMGlobalProperty___to_s(val_t  self);
-#define LOCATE_abstractmetamodel___MMGlobalProperty___to_s "abstractmetamodel::MMGlobalProperty::(string::Object::to_s)"
+val_t NEW_MMGlobalProperty_abstractmetamodel___MMGlobalProperty___init(val_t p0);
 typedef void (* abstractmetamodel___MMGlobalProperty___add_local_property_t)(val_t  self, val_t  param0, val_t  param1);
 void abstractmetamodel___MMGlobalProperty___add_local_property(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_abstractmetamodel___MMGlobalProperty___add_local_property "abstractmetamodel::MMGlobalProperty::add_local_property"
@@ -524,6 +539,9 @@ val_t abstractmetamodel___MMGlobalProperty___is_init(val_t  self);
 typedef void (* abstractmetamodel___MMGlobalProperty___is_init__eq_t)(val_t  self, val_t  param0);
 void abstractmetamodel___MMGlobalProperty___is_init__eq(val_t  self, val_t  param0);
 #define LOCATE_abstractmetamodel___MMGlobalProperty___is_init__eq "abstractmetamodel::MMGlobalProperty::is_init="
+typedef val_t (* abstractmetamodel___MMGlobalProperty___is_init_for_t)(val_t  self, val_t  param0);
+val_t abstractmetamodel___MMGlobalProperty___is_init_for(val_t  self, val_t  param0);
+#define LOCATE_abstractmetamodel___MMGlobalProperty___is_init_for "abstractmetamodel::MMGlobalProperty::is_init_for"
 #define ATTR_abstractmetamodel___MMGlobalProperty____visibility_level(recv) ATTR(recv, COLOR_abstractmetamodel___MMGlobalProperty____visibility_level)
 typedef val_t (* abstractmetamodel___MMGlobalProperty___visibility_level_t)(val_t  self);
 val_t abstractmetamodel___MMGlobalProperty___visibility_level(val_t  self);
@@ -531,6 +549,9 @@ val_t abstractmetamodel___MMGlobalProperty___visibility_level(val_t  self);
 typedef void (* abstractmetamodel___MMGlobalProperty___visibility_level__eq_t)(val_t  self, val_t  param0);
 void abstractmetamodel___MMGlobalProperty___visibility_level__eq(val_t  self, val_t  param0);
 #define LOCATE_abstractmetamodel___MMGlobalProperty___visibility_level__eq "abstractmetamodel::MMGlobalProperty::visibility_level="
+typedef val_t (* abstractmetamodel___MMLocalProperty___to_s_t)(val_t  self);
+val_t abstractmetamodel___MMLocalProperty___to_s(val_t  self);
+#define LOCATE_abstractmetamodel___MMLocalProperty___to_s "abstractmetamodel::MMLocalProperty::(string::Object::to_s)"
 #define ATTR_abstractmetamodel___MMLocalProperty____name(recv) ATTR(recv, COLOR_abstractmetamodel___MMLocalProperty____name)
 typedef val_t (* abstractmetamodel___MMLocalProperty___name_t)(val_t  self);
 val_t abstractmetamodel___MMLocalProperty___name(val_t  self);
@@ -559,9 +580,6 @@ void abstractmetamodel___MMLocalProperty___set_global(val_t  self, val_t  param0
 typedef void (* abstractmetamodel___MMLocalProperty___new_global_t)(val_t  self);
 void abstractmetamodel___MMLocalProperty___new_global(val_t  self);
 #define LOCATE_abstractmetamodel___MMLocalProperty___new_global "abstractmetamodel::MMLocalProperty::new_global"
-typedef val_t (* abstractmetamodel___MMLocalProperty___to_s_t)(val_t  self);
-val_t abstractmetamodel___MMLocalProperty___to_s(val_t  self);
-#define LOCATE_abstractmetamodel___MMLocalProperty___to_s "abstractmetamodel::MMLocalProperty::(string::Object::to_s)"
 #define ATTR_abstractmetamodel___MMLocalProperty____need_super(recv) ATTR(recv, COLOR_abstractmetamodel___MMLocalProperty____need_super)
 typedef val_t (* abstractmetamodel___MMLocalProperty___need_super_t)(val_t  self);
 val_t abstractmetamodel___MMLocalProperty___need_super(val_t  self);
@@ -571,6 +589,9 @@ void abstractmetamodel___MMLocalProperty___need_super__eq(val_t  self, val_t  pa
 #define LOCATE_abstractmetamodel___MMLocalProperty___need_super__eq "abstractmetamodel::MMLocalProperty::need_super="
 typedef void (* abstractmetamodel___MMLocalProperty___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void abstractmetamodel___MMLocalProperty___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_abstractmetamodel___MMLocalProperty___init(val_t  param0, val_t  param1);
 #define LOCATE_abstractmetamodel___MMLocalProperty___init "abstractmetamodel::MMLocalProperty::init"
+val_t NEW_MMLocalProperty_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
+val_t NEW_MMAttribute_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
+val_t NEW_MMMethod_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
+val_t NEW_MMConcreteClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1);
 #endif

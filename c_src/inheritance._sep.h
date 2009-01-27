@@ -54,6 +54,7 @@ extern const int SFT_inheritance[];
 #define COLOR_MMDefaultAncestor SFT_inheritance[38]
 #define INIT_TABLE_POS_MMDefaultAncestor SFT_inheritance[39]
 #define COLOR_inheritance___MMDefaultAncestor___init SFT_inheritance[40]
+val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2);
 typedef val_t (* inheritance___MMModule___type_any_t)(val_t  self);
 val_t inheritance___MMModule___type_any(val_t  self);
 #define LOCATE_inheritance___MMModule___type_any "inheritance::MMModule::type_any"
@@ -63,6 +64,10 @@ void inheritance___MMModule___import_global_classes(val_t  self);
 typedef void (* inheritance___MMModule___import_local_classes_t)(val_t  self);
 void inheritance___MMModule___import_local_classes(val_t  self);
 #define LOCATE_inheritance___MMModule___import_local_classes "inheritance::MMModule::import_local_classes"
+val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1);
+typedef val_t (* inheritance___MMLocalClass_____bra_t)(val_t  self, val_t  param0);
+val_t inheritance___MMLocalClass_____bra(val_t  self, val_t  param0);
+#define LOCATE_inheritance___MMLocalClass_____bra "inheritance::MMLocalClass::(abstractmetamodel::MMLocalClass::[])"
 #define ATTR_inheritance___MMLocalClass____direct_parents(recv) ATTR(recv, COLOR_inheritance___MMLocalClass____direct_parents)
 #define ATTR_inheritance___MMLocalClass____computing_super(recv) ATTR(recv, COLOR_inheritance___MMLocalClass____computing_super)
 typedef void (* inheritance___MMLocalClass___compute_super_classes_t)(val_t  self);
@@ -89,9 +94,6 @@ val_t inheritance___MMLocalClass___computed_ancestors(val_t  self);
 typedef val_t (* inheritance___MMLocalClass___ancestor_for_t)(val_t  self, val_t  param0);
 val_t inheritance___MMLocalClass___ancestor_for(val_t  self, val_t  param0);
 #define LOCATE_inheritance___MMLocalClass___ancestor_for "inheritance::MMLocalClass::ancestor_for"
-typedef val_t (* inheritance___MMLocalClass_____bra_t)(val_t  self, val_t  param0);
-val_t inheritance___MMLocalClass_____bra(val_t  self, val_t  param0);
-#define LOCATE_inheritance___MMLocalClass_____bra "inheritance::MMLocalClass::(abstractmetamodel::MMLocalClass::[])"
 typedef void (* inheritance___MMLocalClass___add_default_any_class_t)(val_t  self, val_t  param0);
 void inheritance___MMLocalClass___add_default_any_class(val_t  self, val_t  param0);
 #define LOCATE_inheritance___MMLocalClass___add_default_any_class "inheritance::MMLocalClass::add_default_any_class"
@@ -116,36 +118,38 @@ val_t inheritance___MMLocalClass___merge_ancestors(val_t  self, val_t  param0);
 typedef val_t (* inheritance___MMLocalClass___inherit_local_property_t)(val_t  self, val_t  param0);
 val_t inheritance___MMLocalClass___inherit_local_property(val_t  self, val_t  param0);
 #define LOCATE_inheritance___MMLocalClass___inherit_local_property "inheritance::MMLocalClass::inherit_local_property"
+val_t NEW_MMLocalProperty_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
 typedef void (* inheritance___MMLocalProperty___inherit_global_t)(val_t  self, val_t  param0);
 void inheritance___MMLocalProperty___inherit_global(val_t  self, val_t  param0);
 #define LOCATE_inheritance___MMLocalProperty___inherit_global "inheritance::MMLocalProperty::inherit_global"
+val_t NEW_MMAncestor_static_type___MMAncestor___init();
 typedef void (* inheritance___MMAncestor___add_in_t)(val_t  self, val_t  param0);
 void inheritance___MMAncestor___add_in(val_t  self, val_t  param0);
 #define LOCATE_inheritance___MMAncestor___add_in "inheritance::MMAncestor::add_in"
 typedef void (* inheritance___MMImplicitLocalClass___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void inheritance___MMImplicitLocalClass___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_inheritance___MMImplicitLocalClass___init(val_t  param0, val_t  param1);
 #define LOCATE_inheritance___MMImplicitLocalClass___init "inheritance::MMImplicitLocalClass::init"
-#define ATTR_inheritance___MMRefineAncestor____local_class(recv) ATTR(recv, COLOR_inheritance___MMRefineAncestor____local_class)
+val_t NEW_MMImplicitLocalClass_inheritance___MMImplicitLocalClass___init(val_t p0, val_t p1);
 typedef val_t (* inheritance___MMRefineAncestor___local_class_t)(val_t  self);
 val_t inheritance___MMRefineAncestor___local_class(val_t  self);
 #define LOCATE_inheritance___MMRefineAncestor___local_class "inheritance::MMRefineAncestor::(static_type::MMAncestor::local_class)"
+#define ATTR_inheritance___MMRefineAncestor____local_class(recv) ATTR(recv, COLOR_inheritance___MMRefineAncestor____local_class)
 typedef void (* inheritance___MMRefineAncestor___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void inheritance___MMRefineAncestor___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_inheritance___MMRefineAncestor___init(val_t  param0, val_t  param1);
 #define LOCATE_inheritance___MMRefineAncestor___init "inheritance::MMRefineAncestor::init"
+val_t NEW_MMRefineAncestor_inheritance___MMRefineAncestor___init(val_t p0, val_t p1);
 typedef val_t (* inheritance___MMSpecAncestor___local_class_t)(val_t  self);
 val_t inheritance___MMSpecAncestor___local_class(val_t  self);
 #define LOCATE_inheritance___MMSpecAncestor___local_class "inheritance::MMSpecAncestor::(static_type::MMAncestor::local_class)"
 typedef void (* inheritance___MMSpecAncestor___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void inheritance___MMSpecAncestor___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_inheritance___MMSpecAncestor___init(val_t  param0, val_t  param1);
 #define LOCATE_inheritance___MMSpecAncestor___init "inheritance::MMSpecAncestor::init"
+val_t NEW_MMSpecAncestor_inheritance___MMSpecAncestor___init(val_t p0, val_t p1);
 typedef val_t (* inheritance___MMDefaultAncestor___local_class_t)(val_t  self);
 val_t inheritance___MMDefaultAncestor___local_class(val_t  self);
 #define LOCATE_inheritance___MMDefaultAncestor___local_class "inheritance::MMDefaultAncestor::(static_type::MMAncestor::local_class)"
 typedef void (* inheritance___MMDefaultAncestor___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void inheritance___MMDefaultAncestor___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_inheritance___MMDefaultAncestor___init(val_t  param0, val_t  param1);
 #define LOCATE_inheritance___MMDefaultAncestor___init "inheritance::MMDefaultAncestor::init"
+val_t NEW_MMDefaultAncestor_inheritance___MMDefaultAncestor___init(val_t p0, val_t p1);
 #endif

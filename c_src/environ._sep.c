@@ -2,58 +2,57 @@
 #include "environ._sep.h"
 val_t environ___Symbol___environ(val_t  self) {
   struct trace_t trace = {NULL, NULL, 19, LOCATE_environ___Symbol___environ};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  static val_t once_value_variable2_1; static int once_bool_variable2_1;
-    val_t variable3;
-    val_t variable4;
-    val_t variable5;
-    val_t variable6;
-    val_t variable7;
+  static val_t once_value_1; static int once_bool_1; /* Once value for variable[4]*/
+  val_t variable[11];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_environ;
-  variable1 = ((symbol___Symbol___to_s_t)CALL( self,COLOR_string___Object___to_s))( self) /*Symbol::to_s*/;
-  variable1 = ((string___String___to_cstring_t)CALL(variable1,COLOR_string___String___to_cstring))(variable1) /*String::to_cstring*/;
-  variable1 = ((environ___NativeString___get_environ_t)CALL(variable1,COLOR_environ___NativeString___get_environ))(variable1) /*NativeString::get_environ*/;
-  variable0 = variable1;
-  if (once_bool_variable2_1) variable2 = once_value_variable2_1;
+  variable[0] =  self;
+  variable[3] = variable[0];
+  variable[3] = ((symbol___Symbol___to_s_t)CALL(variable[3],COLOR_string___Object___to_s))(variable[3]) /*Symbol::to_s*/;
+  variable[3] = ((string___String___to_cstring_t)CALL(variable[3],COLOR_string___String___to_cstring))(variable[3]) /*String::to_cstring*/;
+  variable[3] = ((environ___NativeString___get_environ_t)CALL(variable[3],COLOR_environ___NativeString___get_environ))(variable[3]) /*NativeString::get_environ*/;
+  variable[2] = variable[3];
+  if (once_bool_1) variable[4] = once_value_1;
   else {
-    variable2 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-    variable2 = ((string___String___to_cstring_t)CALL(variable2,COLOR_string___String___to_cstring))(variable2) /*String::to_cstring*/;
-    variable2 = ((environ___NativeString___get_environ_t)CALL(variable2,COLOR_environ___NativeString___get_environ))(variable2) /*NativeString::get_environ*/;
-    once_value_variable2_1 = variable2;
-    once_bool_variable2_1 = true;
+    variable[4] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable[4] = ((string___String___to_cstring_t)CALL(variable[4],COLOR_string___String___to_cstring))(variable[4]) /*String::to_cstring*/;
+    variable[4] = ((environ___NativeString___get_environ_t)CALL(variable[4],COLOR_environ___NativeString___get_environ))(variable[4]) /*NativeString::get_environ*/;
+    once_value_1 = variable[4];
+    once_bool_1 = true;
   }
-  variable1 = variable2;
-  variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable0 /*res*/ ==  variable1 /*nulstr*/) || (( variable0 /*res*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable0 /*res*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable0 /*res*/, variable1 /*nulstr*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable0 /*res*/,COLOR_kernel___Object_____eqeq))( variable0 /*res*/,  variable1 /*nulstr*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = NEW_String_string___String___init(); /*new String*/
-    variable3 = NEW_String_string___String___with_native(BOX_NativeString("env "), TAG_Int(4)); /*new String*/
-    variable4 = variable3;
-    ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable4) /*String::append*/;
-    variable5 =  self;
-    variable5 = ((string___String___to_s_t)CALL(variable5,COLOR_string___Object___to_s))(variable5) /*String::to_s*/;
-    ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable5) /*String::append*/;
-    variable6 = NEW_String_string___String___with_native(BOX_NativeString("="), TAG_Int(1)); /*new String*/
-    variable7 = variable6;
-    ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable7) /*String::append*/;
-    ((string___String___output_t)CALL(variable2,COLOR_kernel___Object___output))(variable2) /*String::output*/;
-    ((kernel___Object___output_t)CALL( variable0 /*res*/,COLOR_kernel___Object___output))( variable0 /*res*/) /*Object::output*/;
-    variable2 = NEW_String_string___String___from_cstring( variable0 /*res*/); /*new String*/
-    variable0 = variable2;
+  variable[3] = variable[4];
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[2] /*res*/ ==  variable[3] /*nulstr*/) || (( variable[2] /*res*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[2] /*res*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*res*/, variable[3] /*nulstr*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[2] /*res*/,COLOR_kernel___Object_____eqeq))( variable[2] /*res*/,  variable[3] /*nulstr*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = NEW_String_string___String___init(); /*new String*/
+    variable[5] = NEW_String_string___String___with_native(BOX_NativeString("env "), TAG_Int(4)); /*new String*/
+    variable[6] = variable[5];
+    ((string___String___append_t)CALL(variable[4],COLOR_abstract_collection___IndexedCollection___append))(variable[4], variable[6]) /*String::append*/;
+    variable[7] = variable[0];
+    variable[8] = variable[7];
+    variable[8] = ((string___String___to_s_t)CALL(variable[8],COLOR_string___Object___to_s))(variable[8]) /*String::to_s*/;
+    ((string___String___append_t)CALL(variable[4],COLOR_abstract_collection___IndexedCollection___append))(variable[4], variable[8]) /*String::append*/;
+    variable[9] = NEW_String_string___String___with_native(BOX_NativeString("="), TAG_Int(1)); /*new String*/
+    variable[10] = variable[9];
+    ((string___String___append_t)CALL(variable[4],COLOR_abstract_collection___IndexedCollection___append))(variable[4], variable[10]) /*String::append*/;
+    ((string___String___output_t)CALL(variable[4],COLOR_kernel___Object___output))(variable[4]) /*String::output*/;
+    ((kernel___Object___output_t)CALL( variable[2] /*res*/,COLOR_kernel___Object___output))( variable[2] /*res*/) /*Object::output*/;
+    variable[4] = NEW_String_string___String___from_cstring( variable[2] /*res*/); /*new String*/
+    variable[1] = variable[4];
     goto return_label0;
   } else { /*if*/
-    variable2 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-    variable0 = variable2;
+    variable[4] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable[1] = variable[4];
     goto return_label0;
   }
   return_label0: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t environ___NativeString___get_environ(val_t  self) {
   struct trace_t trace = {NULL, NULL, 36, LOCATE_environ___NativeString___get_environ};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_environ;
   tracehead = trace.prev;

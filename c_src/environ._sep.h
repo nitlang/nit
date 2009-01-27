@@ -8,9 +8,11 @@ extern const char *LOCATE_environ;
 extern const int SFT_environ[];
 #define COLOR_environ___Symbol___environ SFT_environ[0]
 #define COLOR_environ___NativeString___get_environ SFT_environ[1]
+val_t NEW_Symbol_symbol___Symbol___init(val_t p0);
 typedef val_t (* environ___Symbol___environ_t)(val_t  self);
 val_t environ___Symbol___environ(val_t  self);
 #define LOCATE_environ___Symbol___environ "environ::Symbol::environ"
+val_t NEW_NativeString_string___NativeString___init();
 typedef val_t (* environ___NativeString___get_environ_t)(val_t  self);
 val_t environ___NativeString___get_environ(val_t  self);
 #define LOCATE_environ___NativeString___get_environ "environ::NativeString::get_environ"

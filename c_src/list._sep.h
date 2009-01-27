@@ -39,24 +39,9 @@ extern const int SFT_list[];
 #define COLOR_list___ListNode___next__eq SFT_list[25]
 #define COLOR_list___ListNode___prev SFT_list[26]
 #define COLOR_list___ListNode___prev__eq SFT_list[27]
-typedef val_t (* list___List_____bra_t)(val_t  self, val_t  param0);
-val_t list___List_____bra(val_t  self, val_t  param0);
-#define LOCATE_list___List_____bra "list::List::(abstract_collection::Map::[])"
-typedef void (* list___List_____braeq_t)(val_t  self, val_t  param0, val_t  param1);
-void list___List_____braeq(val_t  self, val_t  param0, val_t  param1);
-#define LOCATE_list___List_____braeq "list::List::(abstract_collection::Map::[]=)"
-typedef val_t (* list___List___first_t)(val_t  self);
-val_t list___List___first(val_t  self);
-#define LOCATE_list___List___first "list::List::(abstract_collection::Collection::first)"
-typedef void (* list___List___first__eq_t)(val_t  self, val_t  param0);
-void list___List___first__eq(val_t  self, val_t  param0);
-#define LOCATE_list___List___first__eq "list::List::(abstract_collection::IndexedCollection::first=)"
-typedef val_t (* list___List___last_t)(val_t  self);
-val_t list___List___last(val_t  self);
-#define LOCATE_list___List___last "list::List::(abstract_collection::IndexedCollection::last)"
-typedef void (* list___List___last__eq_t)(val_t  self, val_t  param0);
-void list___List___last__eq(val_t  self, val_t  param0);
-#define LOCATE_list___List___last__eq "list::List::(abstract_collection::IndexedCollection::last=)"
+typedef val_t (* list___List___iterator_t)(val_t  self);
+val_t list___List___iterator(val_t  self);
+#define LOCATE_list___List___iterator "list::List::(abstract_collection::Collection::iterator)"
 typedef val_t (* list___List___is_empty_t)(val_t  self);
 val_t list___List___is_empty(val_t  self);
 #define LOCATE_list___List___is_empty "list::List::(abstract_collection::Collection::is_empty)"
@@ -72,44 +57,59 @@ val_t list___List___has_only(val_t  self, val_t  param0);
 typedef val_t (* list___List___count_t)(val_t  self, val_t  param0);
 val_t list___List___count(val_t  self, val_t  param0);
 #define LOCATE_list___List___count "list::List::(abstract_collection::Collection::count)"
-typedef val_t (* list___List___has_key_t)(val_t  self, val_t  param0);
-val_t list___List___has_key(val_t  self, val_t  param0);
-#define LOCATE_list___List___has_key "list::List::(abstract_collection::Map::has_key)"
-typedef void (* list___List___push_t)(val_t  self, val_t  param0);
-void list___List___push(val_t  self, val_t  param0);
-#define LOCATE_list___List___push "list::List::(abstract_collection::IndexedCollection::push)"
-typedef void (* list___List___unshift_t)(val_t  self, val_t  param0);
-void list___List___unshift(val_t  self, val_t  param0);
-#define LOCATE_list___List___unshift "list::List::(abstract_collection::IndexedCollection::unshift)"
-typedef void (* list___List___link_t)(val_t  self, val_t  param0);
-void list___List___link(val_t  self, val_t  param0);
-#define LOCATE_list___List___link "list::List::link"
-typedef val_t (* list___List___pop_t)(val_t  self);
-val_t list___List___pop(val_t  self);
-#define LOCATE_list___List___pop "list::List::(abstract_collection::IndexedCollection::pop)"
-typedef val_t (* list___List___shift_t)(val_t  self);
-val_t list___List___shift(val_t  self);
-#define LOCATE_list___List___shift "list::List::(abstract_collection::IndexedCollection::shift)"
-typedef void (* list___List___remove_t)(val_t  self, val_t  param0);
-void list___List___remove(val_t  self, val_t  param0);
-#define LOCATE_list___List___remove "list::List::(abstract_collection::RemovableCollection::remove)"
-typedef void (* list___List___remove_at_t)(val_t  self, val_t  param0);
-void list___List___remove_at(val_t  self, val_t  param0);
-#define LOCATE_list___List___remove_at "list::List::(abstract_collection::Map::remove_at)"
+typedef val_t (* list___List___first_t)(val_t  self);
+val_t list___List___first(val_t  self);
+#define LOCATE_list___List___first "list::List::(abstract_collection::Collection::first)"
 typedef void (* list___List___clear_t)(val_t  self);
 void list___List___clear(val_t  self);
 #define LOCATE_list___List___clear "list::List::(abstract_collection::RemovableCollection::clear)"
-typedef val_t (* list___List___iterator_t)(val_t  self);
-val_t list___List___iterator(val_t  self);
-#define LOCATE_list___List___iterator "list::List::(abstract_collection::Collection::iterator)"
+typedef void (* list___List___remove_t)(val_t  self, val_t  param0);
+void list___List___remove(val_t  self, val_t  param0);
+#define LOCATE_list___List___remove "list::List::(abstract_collection::RemovableCollection::remove)"
+typedef val_t (* list___List_____bra_t)(val_t  self, val_t  param0);
+val_t list___List_____bra(val_t  self, val_t  param0);
+#define LOCATE_list___List_____bra "list::List::(abstract_collection::Map::[])"
+typedef void (* list___List_____braeq_t)(val_t  self, val_t  param0, val_t  param1);
+void list___List_____braeq(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_list___List_____braeq "list::List::(abstract_collection::Map::[]=)"
+typedef val_t (* list___List___has_key_t)(val_t  self, val_t  param0);
+val_t list___List___has_key(val_t  self, val_t  param0);
+#define LOCATE_list___List___has_key "list::List::(abstract_collection::Map::has_key)"
+typedef void (* list___List___remove_at_t)(val_t  self, val_t  param0);
+void list___List___remove_at(val_t  self, val_t  param0);
+#define LOCATE_list___List___remove_at "list::List::(abstract_collection::Map::remove_at)"
+typedef void (* list___List___first__eq_t)(val_t  self, val_t  param0);
+void list___List___first__eq(val_t  self, val_t  param0);
+#define LOCATE_list___List___first__eq "list::List::(abstract_collection::IndexedCollection::first=)"
+typedef val_t (* list___List___last_t)(val_t  self);
+val_t list___List___last(val_t  self);
+#define LOCATE_list___List___last "list::List::(abstract_collection::IndexedCollection::last)"
+typedef void (* list___List___last__eq_t)(val_t  self, val_t  param0);
+void list___List___last__eq(val_t  self, val_t  param0);
+#define LOCATE_list___List___last__eq "list::List::(abstract_collection::IndexedCollection::last=)"
+typedef void (* list___List___push_t)(val_t  self, val_t  param0);
+void list___List___push(val_t  self, val_t  param0);
+#define LOCATE_list___List___push "list::List::(abstract_collection::IndexedCollection::push)"
+typedef val_t (* list___List___pop_t)(val_t  self);
+val_t list___List___pop(val_t  self);
+#define LOCATE_list___List___pop "list::List::(abstract_collection::IndexedCollection::pop)"
+typedef void (* list___List___unshift_t)(val_t  self, val_t  param0);
+void list___List___unshift(val_t  self, val_t  param0);
+#define LOCATE_list___List___unshift "list::List::(abstract_collection::IndexedCollection::unshift)"
+typedef val_t (* list___List___shift_t)(val_t  self);
+val_t list___List___shift(val_t  self);
+#define LOCATE_list___List___shift "list::List::(abstract_collection::IndexedCollection::shift)"
+typedef void (* list___List___link_t)(val_t  self, val_t  param0);
+void list___List___link(val_t  self, val_t  param0);
+#define LOCATE_list___List___link "list::List::link"
 typedef void (* list___List___init_t)(val_t  self, int* init_table);
 void list___List___init(val_t  self, int* init_table);
-val_t NEW_list___List___init();
 #define LOCATE_list___List___init "list::List::init"
+val_t NEW_List_list___List___init();
 typedef void (* list___List___from_t)(val_t  self, val_t  param0, int* init_table);
 void list___List___from(val_t  self, val_t  param0, int* init_table);
-val_t NEW_list___List___from(val_t  param0);
 #define LOCATE_list___List___from "list::List::from"
+val_t NEW_List_list___List___from(val_t p0);
 #define ATTR_list___List____head(recv) ATTR(recv, COLOR_list___List____head)
 #define ATTR_list___List____tail(recv) ATTR(recv, COLOR_list___List____tail)
 typedef val_t (* list___List___get_node_t)(val_t  self, val_t  param0);
@@ -127,28 +127,28 @@ void list___List___insert_before(val_t  self, val_t  param0, val_t  param1);
 typedef val_t (* list___ListIterator___item_t)(val_t  self);
 val_t list___ListIterator___item(val_t  self);
 #define LOCATE_list___ListIterator___item "list::ListIterator::(abstract_collection::Iterator::item)"
-typedef void (* list___ListIterator___item__eq_t)(val_t  self, val_t  param0);
-void list___ListIterator___item__eq(val_t  self, val_t  param0);
-#define LOCATE_list___ListIterator___item__eq "list::ListIterator::(abstract_collection::MapIterator::item=)"
-typedef val_t (* list___ListIterator___is_ok_t)(val_t  self);
-val_t list___ListIterator___is_ok(val_t  self);
-#define LOCATE_list___ListIterator___is_ok "list::ListIterator::(abstract_collection::Iterator::is_ok)"
 typedef void (* list___ListIterator___next_t)(val_t  self);
 void list___ListIterator___next(val_t  self);
 #define LOCATE_list___ListIterator___next "list::ListIterator::(abstract_collection::Iterator::next)"
-typedef void (* list___ListIterator___init_t)(val_t  self, val_t  param0, int* init_table);
-void list___ListIterator___init(val_t  self, val_t  param0, int* init_table);
-val_t NEW_list___ListIterator___init(val_t  param0);
-#define LOCATE_list___ListIterator___init "list::ListIterator::init"
-#define ATTR_list___ListIterator____node(recv) ATTR(recv, COLOR_list___ListIterator____node)
-#define ATTR_list___ListIterator____index(recv) ATTR(recv, COLOR_list___ListIterator____index)
+typedef val_t (* list___ListIterator___is_ok_t)(val_t  self);
+val_t list___ListIterator___is_ok(val_t  self);
+#define LOCATE_list___ListIterator___is_ok "list::ListIterator::(abstract_collection::Iterator::is_ok)"
+typedef void (* list___ListIterator___item__eq_t)(val_t  self, val_t  param0);
+void list___ListIterator___item__eq(val_t  self, val_t  param0);
+#define LOCATE_list___ListIterator___item__eq "list::ListIterator::(abstract_collection::MapIterator::item=)"
 typedef val_t (* list___ListIterator___index_t)(val_t  self);
 val_t list___ListIterator___index(val_t  self);
 #define LOCATE_list___ListIterator___index "list::ListIterator::(abstract_collection::IndexedIterator::index)"
+typedef void (* list___ListIterator___init_t)(val_t  self, val_t  param0, int* init_table);
+void list___ListIterator___init(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_list___ListIterator___init "list::ListIterator::init"
+val_t NEW_ListIterator_list___ListIterator___init(val_t p0);
+#define ATTR_list___ListIterator____node(recv) ATTR(recv, COLOR_list___ListIterator____node)
+#define ATTR_list___ListIterator____index(recv) ATTR(recv, COLOR_list___ListIterator____index)
 typedef void (* list___ListNode___init_t)(val_t  self, val_t  param0, int* init_table);
 void list___ListNode___init(val_t  self, val_t  param0, int* init_table);
-val_t NEW_list___ListNode___init(val_t  param0);
 #define LOCATE_list___ListNode___init "list::ListNode::init"
+val_t NEW_ListNode_list___ListNode___init(val_t p0);
 #define ATTR_list___ListNode____next(recv) ATTR(recv, COLOR_list___ListNode____next)
 typedef val_t (* list___ListNode___next_t)(val_t  self);
 val_t list___ListNode___next(val_t  self);

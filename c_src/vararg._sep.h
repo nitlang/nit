@@ -10,7 +10,18 @@ extern const int SFT_vararg[];
 #define COLOR_vararg___MMSignature___vararg_rank__eq SFT_vararg[2]
 #define COLOR_vararg___MMSignature___has_vararg SFT_vararg[3]
 #define COLOR_SUPER_vararg___MMSignature___adaptation_to SFT_vararg[4]
-#define COLOR_SUPER_vararg___MMSignature___init SFT_vararg[5]
+#define COLOR_SUPER_vararg___MMSignature___not_for_self SFT_vararg[5]
+#define COLOR_SUPER_vararg___MMSignature___init SFT_vararg[6]
+typedef val_t (* vararg___MMSignature___adaptation_to_t)(val_t  self, val_t  param0);
+val_t vararg___MMSignature___adaptation_to(val_t  self, val_t  param0);
+#define LOCATE_vararg___MMSignature___adaptation_to "vararg::MMSignature::(static_type::MMSignature::adaptation_to)"
+typedef val_t (* vararg___MMSignature___not_for_self_t)(val_t  self);
+val_t vararg___MMSignature___not_for_self(val_t  self);
+#define LOCATE_vararg___MMSignature___not_for_self "vararg::MMSignature::(static_type::MMSignature::not_for_self)"
+typedef void (* vararg___MMSignature___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void vararg___MMSignature___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_vararg___MMSignature___init "vararg::MMSignature::(static_type::MMSignature::init)"
+val_t NEW_MMSignature_static_type___MMSignature___init(val_t p0, val_t p1, val_t p2);
 #define ATTR_vararg___MMSignature____vararg_rank(recv) ATTR(recv, COLOR_vararg___MMSignature____vararg_rank)
 typedef val_t (* vararg___MMSignature___vararg_rank_t)(val_t  self);
 val_t vararg___MMSignature___vararg_rank(val_t  self);
@@ -21,11 +32,4 @@ void vararg___MMSignature___vararg_rank__eq(val_t  self, val_t  param0);
 typedef val_t (* vararg___MMSignature___has_vararg_t)(val_t  self);
 val_t vararg___MMSignature___has_vararg(val_t  self);
 #define LOCATE_vararg___MMSignature___has_vararg "vararg::MMSignature::has_vararg"
-typedef val_t (* vararg___MMSignature___adaptation_to_t)(val_t  self, val_t  param0);
-val_t vararg___MMSignature___adaptation_to(val_t  self, val_t  param0);
-#define LOCATE_vararg___MMSignature___adaptation_to "vararg::MMSignature::(static_type::MMSignature::adaptation_to)"
-typedef void (* vararg___MMSignature___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void vararg___MMSignature___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_vararg___MMSignature___init(val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_vararg___MMSignature___init "vararg::MMSignature::(static_type::MMSignature::init)"
 #endif

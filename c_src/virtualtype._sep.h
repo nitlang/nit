@@ -26,9 +26,11 @@ extern const int SFT_virtualtype[];
 #define COLOR_virtualtype___MMVirtualType___init SFT_virtualtype[14]
 #define COLOR_virtualtype___MMLocalClass___virtual_type SFT_virtualtype[15]
 #define COLOR_virtualtype___MMLocalClass___select_virtual_type SFT_virtualtype[16]
+val_t NEW_MMGlobalProperty_abstractmetamodel___MMGlobalProperty___init(val_t p0);
 typedef val_t (* virtualtype___MMGlobalProperty___is_virtual_type_t)(val_t  self);
 val_t virtualtype___MMGlobalProperty___is_virtual_type(val_t  self);
 #define LOCATE_virtualtype___MMGlobalProperty___is_virtual_type "virtualtype::MMGlobalProperty::is_virtual_type"
+val_t NEW_MMTypeProperty_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
 typedef val_t (* virtualtype___MMTypeProperty___stype_for_t)(val_t  self, val_t  param0);
 val_t virtualtype___MMTypeProperty___stype_for(val_t  self, val_t  param0);
 #define LOCATE_virtualtype___MMTypeProperty___stype_for "virtualtype::MMTypeProperty::stype_for"
@@ -36,6 +38,18 @@ val_t virtualtype___MMTypeProperty___stype_for(val_t  self, val_t  param0);
 typedef val_t (* virtualtype___MMTypeProperty___real_stype_for_t)(val_t  self, val_t  param0);
 val_t virtualtype___MMTypeProperty___real_stype_for(val_t  self, val_t  param0);
 #define LOCATE_virtualtype___MMTypeProperty___real_stype_for "virtualtype::MMTypeProperty::real_stype_for"
+typedef val_t (* virtualtype___MMVirtualType___module_t)(val_t  self);
+val_t virtualtype___MMVirtualType___module(val_t  self);
+#define LOCATE_virtualtype___MMVirtualType___module "virtualtype::MMVirtualType::(static_type::MMType::module)"
+typedef val_t (* virtualtype___MMVirtualType___for_module_t)(val_t  self, val_t  param0);
+val_t virtualtype___MMVirtualType___for_module(val_t  self, val_t  param0);
+#define LOCATE_virtualtype___MMVirtualType___for_module "virtualtype::MMVirtualType::(static_type::MMType::for_module)"
+typedef val_t (* virtualtype___MMVirtualType___adapt_to_t)(val_t  self, val_t  param0);
+val_t virtualtype___MMVirtualType___adapt_to(val_t  self, val_t  param0);
+#define LOCATE_virtualtype___MMVirtualType___adapt_to "virtualtype::MMVirtualType::(static_type::MMType::adapt_to)"
+typedef val_t (* virtualtype___MMVirtualType___not_for_self_t)(val_t  self);
+val_t virtualtype___MMVirtualType___not_for_self(val_t  self);
+#define LOCATE_virtualtype___MMVirtualType___not_for_self "virtualtype::MMVirtualType::(static_type::MMType::not_for_self)"
 #define ATTR_virtualtype___MMVirtualType____property(recv) ATTR(recv, COLOR_virtualtype___MMVirtualType____property)
 typedef val_t (* virtualtype___MMVirtualType___property_t)(val_t  self);
 val_t virtualtype___MMVirtualType___property(val_t  self);
@@ -46,20 +60,9 @@ val_t virtualtype___MMVirtualType___recv(val_t  self);
 #define LOCATE_virtualtype___MMVirtualType___recv "virtualtype::MMVirtualType::recv"
 typedef void (* virtualtype___MMVirtualType___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void virtualtype___MMVirtualType___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_virtualtype___MMVirtualType___init(val_t  param0, val_t  param1);
 #define LOCATE_virtualtype___MMVirtualType___init "virtualtype::MMVirtualType::init"
-typedef val_t (* virtualtype___MMVirtualType___module_t)(val_t  self);
-val_t virtualtype___MMVirtualType___module(val_t  self);
-#define LOCATE_virtualtype___MMVirtualType___module "virtualtype::MMVirtualType::(static_type::MMType::module)"
-typedef val_t (* virtualtype___MMVirtualType___for_module_t)(val_t  self, val_t  param0);
-val_t virtualtype___MMVirtualType___for_module(val_t  self, val_t  param0);
-#define LOCATE_virtualtype___MMVirtualType___for_module "virtualtype::MMVirtualType::(static_type::MMType::for_module)"
-typedef val_t (* virtualtype___MMVirtualType___not_for_self_t)(val_t  self);
-val_t virtualtype___MMVirtualType___not_for_self(val_t  self);
-#define LOCATE_virtualtype___MMVirtualType___not_for_self "virtualtype::MMVirtualType::(static_type::MMType::not_for_self)"
-typedef val_t (* virtualtype___MMVirtualType___adapt_to_t)(val_t  self, val_t  param0);
-val_t virtualtype___MMVirtualType___adapt_to(val_t  self, val_t  param0);
-#define LOCATE_virtualtype___MMVirtualType___adapt_to "virtualtype::MMVirtualType::(static_type::MMType::adapt_to)"
+val_t NEW_MMVirtualType_virtualtype___MMVirtualType___init(val_t p0, val_t p1);
+val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1);
 typedef val_t (* virtualtype___MMLocalClass___virtual_type_t)(val_t  self, val_t  param0);
 val_t virtualtype___MMLocalClass___virtual_type(val_t  self, val_t  param0);
 #define LOCATE_virtualtype___MMLocalClass___virtual_type "virtualtype::MMLocalClass::virtual_type"

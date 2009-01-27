@@ -18,8 +18,8 @@ extern const int SFT_abstracttool[];
 #define COLOR_abstracttool___MMLocalClass___dump_properties SFT_abstracttool[8]
 typedef void (* abstracttool___AbstractCompiler___init_t)(val_t  self, int* init_table);
 void abstracttool___AbstractCompiler___init(val_t  self, int* init_table);
-val_t NEW_abstracttool___AbstractCompiler___init();
 #define LOCATE_abstracttool___AbstractCompiler___init "abstracttool::AbstractCompiler::init"
+val_t NEW_AbstractCompiler_abstracttool___AbstractCompiler___init();
 typedef void (* abstracttool___AbstractCompiler___exec_cmd_line_t)(val_t  self);
 void abstracttool___AbstractCompiler___exec_cmd_line(val_t  self);
 #define LOCATE_abstracttool___AbstractCompiler___exec_cmd_line "abstracttool::AbstractCompiler::exec_cmd_line"
@@ -29,9 +29,11 @@ void abstracttool___AbstractCompiler___perform_work(val_t  self, val_t  param0);
 typedef void (* abstracttool___AbstractCompiler___dump_context_info_t)(val_t  self);
 void abstracttool___AbstractCompiler___dump_context_info(val_t  self);
 #define LOCATE_abstracttool___AbstractCompiler___dump_context_info "abstracttool::AbstractCompiler::dump_context_info"
+val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2);
 typedef void (* abstracttool___MMModule___dump_module_info_t)(val_t  self);
 void abstracttool___MMModule___dump_module_info(val_t  self);
 #define LOCATE_abstracttool___MMModule___dump_module_info "abstracttool::MMModule::dump_module_info"
+val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1);
 typedef void (* abstracttool___MMLocalClass___dump_properties_t)(val_t  self, val_t  param0);
 void abstracttool___MMLocalClass___dump_properties(val_t  self, val_t  param0);
 #define LOCATE_abstracttool___MMLocalClass___dump_properties "abstracttool::MMLocalClass::dump_properties"

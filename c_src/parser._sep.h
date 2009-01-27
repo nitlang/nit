@@ -1158,6 +1158,510 @@ extern const classtable_elt_t VFT_ReduceAction570[];
 extern const classtable_elt_t VFT_ReduceAction571[];
 
 extern const classtable_elt_t VFT_ReduceAction572[];
+
+extern const classtable_elt_t VFT_ReduceAction573[];
+
+extern const classtable_elt_t VFT_ReduceAction574[];
+
+extern const classtable_elt_t VFT_ReduceAction575[];
+
+extern const classtable_elt_t VFT_ReduceAction576[];
+
+extern const classtable_elt_t VFT_ReduceAction577[];
+
+extern const classtable_elt_t VFT_ReduceAction578[];
+
+extern const classtable_elt_t VFT_ReduceAction579[];
+
+extern const classtable_elt_t VFT_ReduceAction580[];
+
+extern const classtable_elt_t VFT_ReduceAction581[];
+
+extern const classtable_elt_t VFT_ReduceAction582[];
+
+extern const classtable_elt_t VFT_ReduceAction583[];
+
+extern const classtable_elt_t VFT_ReduceAction584[];
+
+extern const classtable_elt_t VFT_ReduceAction585[];
+
+extern const classtable_elt_t VFT_ReduceAction586[];
+
+extern const classtable_elt_t VFT_ReduceAction587[];
+
+extern const classtable_elt_t VFT_ReduceAction588[];
+
+extern const classtable_elt_t VFT_ReduceAction589[];
+
+extern const classtable_elt_t VFT_ReduceAction590[];
+
+extern const classtable_elt_t VFT_ReduceAction591[];
+
+extern const classtable_elt_t VFT_ReduceAction592[];
+
+extern const classtable_elt_t VFT_ReduceAction593[];
+
+extern const classtable_elt_t VFT_ReduceAction594[];
+
+extern const classtable_elt_t VFT_ReduceAction595[];
+
+extern const classtable_elt_t VFT_ReduceAction596[];
+
+extern const classtable_elt_t VFT_ReduceAction597[];
+
+extern const classtable_elt_t VFT_ReduceAction598[];
+
+extern const classtable_elt_t VFT_ReduceAction599[];
+
+extern const classtable_elt_t VFT_ReduceAction600[];
+
+extern const classtable_elt_t VFT_ReduceAction601[];
+
+extern const classtable_elt_t VFT_ReduceAction602[];
+
+extern const classtable_elt_t VFT_ReduceAction603[];
+
+extern const classtable_elt_t VFT_ReduceAction604[];
+
+extern const classtable_elt_t VFT_ReduceAction605[];
+
+extern const classtable_elt_t VFT_ReduceAction606[];
+
+extern const classtable_elt_t VFT_ReduceAction607[];
+
+extern const classtable_elt_t VFT_ReduceAction608[];
+
+extern const classtable_elt_t VFT_ReduceAction609[];
+
+extern const classtable_elt_t VFT_ReduceAction610[];
+
+extern const classtable_elt_t VFT_ReduceAction611[];
+
+extern const classtable_elt_t VFT_ReduceAction612[];
+
+extern const classtable_elt_t VFT_ReduceAction613[];
+
+extern const classtable_elt_t VFT_ReduceAction614[];
+
+extern const classtable_elt_t VFT_ReduceAction615[];
+
+extern const classtable_elt_t VFT_ReduceAction616[];
+
+extern const classtable_elt_t VFT_ReduceAction617[];
+
+extern const classtable_elt_t VFT_ReduceAction618[];
+
+extern const classtable_elt_t VFT_ReduceAction619[];
+
+extern const classtable_elt_t VFT_ReduceAction620[];
+
+extern const classtable_elt_t VFT_ReduceAction621[];
+
+extern const classtable_elt_t VFT_ReduceAction622[];
+
+extern const classtable_elt_t VFT_ReduceAction623[];
+
+extern const classtable_elt_t VFT_ReduceAction624[];
+
+extern const classtable_elt_t VFT_ReduceAction625[];
+
+extern const classtable_elt_t VFT_ReduceAction626[];
+
+extern const classtable_elt_t VFT_ReduceAction627[];
+
+extern const classtable_elt_t VFT_ReduceAction628[];
+
+extern const classtable_elt_t VFT_ReduceAction629[];
+
+extern const classtable_elt_t VFT_ReduceAction630[];
+
+extern const classtable_elt_t VFT_ReduceAction631[];
+
+extern const classtable_elt_t VFT_ReduceAction632[];
+
+extern const classtable_elt_t VFT_ReduceAction633[];
+
+extern const classtable_elt_t VFT_ReduceAction634[];
+
+extern const classtable_elt_t VFT_ReduceAction635[];
+
+extern const classtable_elt_t VFT_ReduceAction636[];
+
+extern const classtable_elt_t VFT_ReduceAction637[];
+
+extern const classtable_elt_t VFT_ReduceAction638[];
+
+extern const classtable_elt_t VFT_ReduceAction639[];
+
+extern const classtable_elt_t VFT_ReduceAction640[];
+
+extern const classtable_elt_t VFT_ReduceAction641[];
+
+extern const classtable_elt_t VFT_ReduceAction642[];
+
+extern const classtable_elt_t VFT_ReduceAction643[];
+
+extern const classtable_elt_t VFT_ReduceAction644[];
+
+extern const classtable_elt_t VFT_ReduceAction645[];
+
+extern const classtable_elt_t VFT_ReduceAction646[];
+
+extern const classtable_elt_t VFT_ReduceAction647[];
+
+extern const classtable_elt_t VFT_ReduceAction648[];
+
+extern const classtable_elt_t VFT_ReduceAction649[];
+
+extern const classtable_elt_t VFT_ReduceAction650[];
+
+extern const classtable_elt_t VFT_ReduceAction651[];
+
+extern const classtable_elt_t VFT_ReduceAction652[];
+
+extern const classtable_elt_t VFT_ReduceAction653[];
+
+extern const classtable_elt_t VFT_ReduceAction654[];
+
+extern const classtable_elt_t VFT_ReduceAction655[];
+
+extern const classtable_elt_t VFT_ReduceAction656[];
+
+extern const classtable_elt_t VFT_ReduceAction657[];
+
+extern const classtable_elt_t VFT_ReduceAction658[];
+
+extern const classtable_elt_t VFT_ReduceAction659[];
+
+extern const classtable_elt_t VFT_ReduceAction660[];
+
+extern const classtable_elt_t VFT_ReduceAction661[];
+
+extern const classtable_elt_t VFT_ReduceAction662[];
+
+extern const classtable_elt_t VFT_ReduceAction663[];
+
+extern const classtable_elt_t VFT_ReduceAction664[];
+
+extern const classtable_elt_t VFT_ReduceAction665[];
+
+extern const classtable_elt_t VFT_ReduceAction666[];
+
+extern const classtable_elt_t VFT_ReduceAction667[];
+
+extern const classtable_elt_t VFT_ReduceAction668[];
+
+extern const classtable_elt_t VFT_ReduceAction669[];
+
+extern const classtable_elt_t VFT_ReduceAction670[];
+
+extern const classtable_elt_t VFT_ReduceAction671[];
+
+extern const classtable_elt_t VFT_ReduceAction672[];
+
+extern const classtable_elt_t VFT_ReduceAction673[];
+
+extern const classtable_elt_t VFT_ReduceAction674[];
+
+extern const classtable_elt_t VFT_ReduceAction675[];
+
+extern const classtable_elt_t VFT_ReduceAction676[];
+
+extern const classtable_elt_t VFT_ReduceAction677[];
+
+extern const classtable_elt_t VFT_ReduceAction678[];
+
+extern const classtable_elt_t VFT_ReduceAction679[];
+
+extern const classtable_elt_t VFT_ReduceAction680[];
+
+extern const classtable_elt_t VFT_ReduceAction681[];
+
+extern const classtable_elt_t VFT_ReduceAction682[];
+
+extern const classtable_elt_t VFT_ReduceAction683[];
+
+extern const classtable_elt_t VFT_ReduceAction684[];
+
+extern const classtable_elt_t VFT_ReduceAction685[];
+
+extern const classtable_elt_t VFT_ReduceAction686[];
+
+extern const classtable_elt_t VFT_ReduceAction687[];
+
+extern const classtable_elt_t VFT_ReduceAction688[];
+
+extern const classtable_elt_t VFT_ReduceAction689[];
+
+extern const classtable_elt_t VFT_ReduceAction690[];
+
+extern const classtable_elt_t VFT_ReduceAction691[];
+
+extern const classtable_elt_t VFT_ReduceAction692[];
+
+extern const classtable_elt_t VFT_ReduceAction693[];
+
+extern const classtable_elt_t VFT_ReduceAction694[];
+
+extern const classtable_elt_t VFT_ReduceAction695[];
+
+extern const classtable_elt_t VFT_ReduceAction696[];
+
+extern const classtable_elt_t VFT_ReduceAction697[];
+
+extern const classtable_elt_t VFT_ReduceAction698[];
+
+extern const classtable_elt_t VFT_ReduceAction699[];
+
+extern const classtable_elt_t VFT_ReduceAction700[];
+
+extern const classtable_elt_t VFT_ReduceAction701[];
+
+extern const classtable_elt_t VFT_ReduceAction702[];
+
+extern const classtable_elt_t VFT_ReduceAction703[];
+
+extern const classtable_elt_t VFT_ReduceAction704[];
+
+extern const classtable_elt_t VFT_ReduceAction705[];
+
+extern const classtable_elt_t VFT_ReduceAction706[];
+
+extern const classtable_elt_t VFT_ReduceAction707[];
+
+extern const classtable_elt_t VFT_ReduceAction708[];
+
+extern const classtable_elt_t VFT_ReduceAction709[];
+
+extern const classtable_elt_t VFT_ReduceAction710[];
+
+extern const classtable_elt_t VFT_ReduceAction711[];
+
+extern const classtable_elt_t VFT_ReduceAction712[];
+
+extern const classtable_elt_t VFT_ReduceAction713[];
+
+extern const classtable_elt_t VFT_ReduceAction714[];
+
+extern const classtable_elt_t VFT_ReduceAction715[];
+
+extern const classtable_elt_t VFT_ReduceAction716[];
+
+extern const classtable_elt_t VFT_ReduceAction717[];
+
+extern const classtable_elt_t VFT_ReduceAction718[];
+
+extern const classtable_elt_t VFT_ReduceAction719[];
+
+extern const classtable_elt_t VFT_ReduceAction720[];
+
+extern const classtable_elt_t VFT_ReduceAction721[];
+
+extern const classtable_elt_t VFT_ReduceAction722[];
+
+extern const classtable_elt_t VFT_ReduceAction723[];
+
+extern const classtable_elt_t VFT_ReduceAction724[];
+
+extern const classtable_elt_t VFT_ReduceAction725[];
+
+extern const classtable_elt_t VFT_ReduceAction726[];
+
+extern const classtable_elt_t VFT_ReduceAction727[];
+
+extern const classtable_elt_t VFT_ReduceAction728[];
+
+extern const classtable_elt_t VFT_ReduceAction729[];
+
+extern const classtable_elt_t VFT_ReduceAction730[];
+
+extern const classtable_elt_t VFT_ReduceAction731[];
+
+extern const classtable_elt_t VFT_ReduceAction732[];
+
+extern const classtable_elt_t VFT_ReduceAction733[];
+
+extern const classtable_elt_t VFT_ReduceAction734[];
+
+extern const classtable_elt_t VFT_ReduceAction735[];
+
+extern const classtable_elt_t VFT_ReduceAction736[];
+
+extern const classtable_elt_t VFT_ReduceAction737[];
+
+extern const classtable_elt_t VFT_ReduceAction738[];
+
+extern const classtable_elt_t VFT_ReduceAction739[];
+
+extern const classtable_elt_t VFT_ReduceAction740[];
+
+extern const classtable_elt_t VFT_ReduceAction741[];
+
+extern const classtable_elt_t VFT_ReduceAction742[];
+
+extern const classtable_elt_t VFT_ReduceAction743[];
+
+extern const classtable_elt_t VFT_ReduceAction744[];
+
+extern const classtable_elt_t VFT_ReduceAction745[];
+
+extern const classtable_elt_t VFT_ReduceAction746[];
+
+extern const classtable_elt_t VFT_ReduceAction747[];
+
+extern const classtable_elt_t VFT_ReduceAction748[];
+
+extern const classtable_elt_t VFT_ReduceAction749[];
+
+extern const classtable_elt_t VFT_ReduceAction750[];
+
+extern const classtable_elt_t VFT_ReduceAction751[];
+
+extern const classtable_elt_t VFT_ReduceAction752[];
+
+extern const classtable_elt_t VFT_ReduceAction753[];
+
+extern const classtable_elt_t VFT_ReduceAction754[];
+
+extern const classtable_elt_t VFT_ReduceAction755[];
+
+extern const classtable_elt_t VFT_ReduceAction756[];
+
+extern const classtable_elt_t VFT_ReduceAction757[];
+
+extern const classtable_elt_t VFT_ReduceAction758[];
+
+extern const classtable_elt_t VFT_ReduceAction759[];
+
+extern const classtable_elt_t VFT_ReduceAction760[];
+
+extern const classtable_elt_t VFT_ReduceAction761[];
+
+extern const classtable_elt_t VFT_ReduceAction762[];
+
+extern const classtable_elt_t VFT_ReduceAction763[];
+
+extern const classtable_elt_t VFT_ReduceAction764[];
+
+extern const classtable_elt_t VFT_ReduceAction765[];
+
+extern const classtable_elt_t VFT_ReduceAction766[];
+
+extern const classtable_elt_t VFT_ReduceAction767[];
+
+extern const classtable_elt_t VFT_ReduceAction768[];
+
+extern const classtable_elt_t VFT_ReduceAction769[];
+
+extern const classtable_elt_t VFT_ReduceAction770[];
+
+extern const classtable_elt_t VFT_ReduceAction771[];
+
+extern const classtable_elt_t VFT_ReduceAction772[];
+
+extern const classtable_elt_t VFT_ReduceAction773[];
+
+extern const classtable_elt_t VFT_ReduceAction774[];
+
+extern const classtable_elt_t VFT_ReduceAction775[];
+
+extern const classtable_elt_t VFT_ReduceAction776[];
+
+extern const classtable_elt_t VFT_ReduceAction777[];
+
+extern const classtable_elt_t VFT_ReduceAction778[];
+
+extern const classtable_elt_t VFT_ReduceAction779[];
+
+extern const classtable_elt_t VFT_ReduceAction780[];
+
+extern const classtable_elt_t VFT_ReduceAction781[];
+
+extern const classtable_elt_t VFT_ReduceAction782[];
+
+extern const classtable_elt_t VFT_ReduceAction783[];
+
+extern const classtable_elt_t VFT_ReduceAction784[];
+
+extern const classtable_elt_t VFT_ReduceAction785[];
+
+extern const classtable_elt_t VFT_ReduceAction786[];
+
+extern const classtable_elt_t VFT_ReduceAction787[];
+
+extern const classtable_elt_t VFT_ReduceAction788[];
+
+extern const classtable_elt_t VFT_ReduceAction789[];
+
+extern const classtable_elt_t VFT_ReduceAction790[];
+
+extern const classtable_elt_t VFT_ReduceAction791[];
+
+extern const classtable_elt_t VFT_ReduceAction792[];
+
+extern const classtable_elt_t VFT_ReduceAction793[];
+
+extern const classtable_elt_t VFT_ReduceAction794[];
+
+extern const classtable_elt_t VFT_ReduceAction795[];
+
+extern const classtable_elt_t VFT_ReduceAction796[];
+
+extern const classtable_elt_t VFT_ReduceAction797[];
+
+extern const classtable_elt_t VFT_ReduceAction798[];
+
+extern const classtable_elt_t VFT_ReduceAction799[];
+
+extern const classtable_elt_t VFT_ReduceAction800[];
+
+extern const classtable_elt_t VFT_ReduceAction801[];
+
+extern const classtable_elt_t VFT_ReduceAction802[];
+
+extern const classtable_elt_t VFT_ReduceAction803[];
+
+extern const classtable_elt_t VFT_ReduceAction804[];
+
+extern const classtable_elt_t VFT_ReduceAction805[];
+
+extern const classtable_elt_t VFT_ReduceAction806[];
+
+extern const classtable_elt_t VFT_ReduceAction807[];
+
+extern const classtable_elt_t VFT_ReduceAction808[];
+
+extern const classtable_elt_t VFT_ReduceAction809[];
+
+extern const classtable_elt_t VFT_ReduceAction810[];
+
+extern const classtable_elt_t VFT_ReduceAction811[];
+
+extern const classtable_elt_t VFT_ReduceAction812[];
+
+extern const classtable_elt_t VFT_ReduceAction813[];
+
+extern const classtable_elt_t VFT_ReduceAction814[];
+
+extern const classtable_elt_t VFT_ReduceAction815[];
+
+extern const classtable_elt_t VFT_ReduceAction816[];
+
+extern const classtable_elt_t VFT_ReduceAction817[];
+
+extern const classtable_elt_t VFT_ReduceAction818[];
+
+extern const classtable_elt_t VFT_ReduceAction819[];
+
+extern const classtable_elt_t VFT_ReduceAction820[];
+
+extern const classtable_elt_t VFT_ReduceAction821[];
+
+extern const classtable_elt_t VFT_ReduceAction822[];
+
+extern const classtable_elt_t VFT_ReduceAction823[];
+
+extern const classtable_elt_t VFT_ReduceAction824[];
 extern const char *LOCATE_parser;
 extern const int SFT_parser[];
 #define ID_State SFT_parser[0]
@@ -3487,6 +3991,1014 @@ extern const int SFT_parser[];
 #define COLOR_ReduceAction572 SFT_parser[2324]
 #define INIT_TABLE_POS_ReduceAction572 SFT_parser[2325]
 #define COLOR_parser___ReduceAction572___init SFT_parser[2326]
+#define ID_ReduceAction573 SFT_parser[2327]
+#define COLOR_ReduceAction573 SFT_parser[2328]
+#define INIT_TABLE_POS_ReduceAction573 SFT_parser[2329]
+#define COLOR_parser___ReduceAction573___init SFT_parser[2330]
+#define ID_ReduceAction574 SFT_parser[2331]
+#define COLOR_ReduceAction574 SFT_parser[2332]
+#define INIT_TABLE_POS_ReduceAction574 SFT_parser[2333]
+#define COLOR_parser___ReduceAction574___init SFT_parser[2334]
+#define ID_ReduceAction575 SFT_parser[2335]
+#define COLOR_ReduceAction575 SFT_parser[2336]
+#define INIT_TABLE_POS_ReduceAction575 SFT_parser[2337]
+#define COLOR_parser___ReduceAction575___init SFT_parser[2338]
+#define ID_ReduceAction576 SFT_parser[2339]
+#define COLOR_ReduceAction576 SFT_parser[2340]
+#define INIT_TABLE_POS_ReduceAction576 SFT_parser[2341]
+#define COLOR_parser___ReduceAction576___init SFT_parser[2342]
+#define ID_ReduceAction577 SFT_parser[2343]
+#define COLOR_ReduceAction577 SFT_parser[2344]
+#define INIT_TABLE_POS_ReduceAction577 SFT_parser[2345]
+#define COLOR_parser___ReduceAction577___init SFT_parser[2346]
+#define ID_ReduceAction578 SFT_parser[2347]
+#define COLOR_ReduceAction578 SFT_parser[2348]
+#define INIT_TABLE_POS_ReduceAction578 SFT_parser[2349]
+#define COLOR_parser___ReduceAction578___init SFT_parser[2350]
+#define ID_ReduceAction579 SFT_parser[2351]
+#define COLOR_ReduceAction579 SFT_parser[2352]
+#define INIT_TABLE_POS_ReduceAction579 SFT_parser[2353]
+#define COLOR_parser___ReduceAction579___init SFT_parser[2354]
+#define ID_ReduceAction580 SFT_parser[2355]
+#define COLOR_ReduceAction580 SFT_parser[2356]
+#define INIT_TABLE_POS_ReduceAction580 SFT_parser[2357]
+#define COLOR_parser___ReduceAction580___init SFT_parser[2358]
+#define ID_ReduceAction581 SFT_parser[2359]
+#define COLOR_ReduceAction581 SFT_parser[2360]
+#define INIT_TABLE_POS_ReduceAction581 SFT_parser[2361]
+#define COLOR_parser___ReduceAction581___init SFT_parser[2362]
+#define ID_ReduceAction582 SFT_parser[2363]
+#define COLOR_ReduceAction582 SFT_parser[2364]
+#define INIT_TABLE_POS_ReduceAction582 SFT_parser[2365]
+#define COLOR_parser___ReduceAction582___init SFT_parser[2366]
+#define ID_ReduceAction583 SFT_parser[2367]
+#define COLOR_ReduceAction583 SFT_parser[2368]
+#define INIT_TABLE_POS_ReduceAction583 SFT_parser[2369]
+#define COLOR_parser___ReduceAction583___init SFT_parser[2370]
+#define ID_ReduceAction584 SFT_parser[2371]
+#define COLOR_ReduceAction584 SFT_parser[2372]
+#define INIT_TABLE_POS_ReduceAction584 SFT_parser[2373]
+#define COLOR_parser___ReduceAction584___init SFT_parser[2374]
+#define ID_ReduceAction585 SFT_parser[2375]
+#define COLOR_ReduceAction585 SFT_parser[2376]
+#define INIT_TABLE_POS_ReduceAction585 SFT_parser[2377]
+#define COLOR_parser___ReduceAction585___init SFT_parser[2378]
+#define ID_ReduceAction586 SFT_parser[2379]
+#define COLOR_ReduceAction586 SFT_parser[2380]
+#define INIT_TABLE_POS_ReduceAction586 SFT_parser[2381]
+#define COLOR_parser___ReduceAction586___init SFT_parser[2382]
+#define ID_ReduceAction587 SFT_parser[2383]
+#define COLOR_ReduceAction587 SFT_parser[2384]
+#define INIT_TABLE_POS_ReduceAction587 SFT_parser[2385]
+#define COLOR_parser___ReduceAction587___init SFT_parser[2386]
+#define ID_ReduceAction588 SFT_parser[2387]
+#define COLOR_ReduceAction588 SFT_parser[2388]
+#define INIT_TABLE_POS_ReduceAction588 SFT_parser[2389]
+#define COLOR_parser___ReduceAction588___init SFT_parser[2390]
+#define ID_ReduceAction589 SFT_parser[2391]
+#define COLOR_ReduceAction589 SFT_parser[2392]
+#define INIT_TABLE_POS_ReduceAction589 SFT_parser[2393]
+#define COLOR_parser___ReduceAction589___init SFT_parser[2394]
+#define ID_ReduceAction590 SFT_parser[2395]
+#define COLOR_ReduceAction590 SFT_parser[2396]
+#define INIT_TABLE_POS_ReduceAction590 SFT_parser[2397]
+#define COLOR_parser___ReduceAction590___init SFT_parser[2398]
+#define ID_ReduceAction591 SFT_parser[2399]
+#define COLOR_ReduceAction591 SFT_parser[2400]
+#define INIT_TABLE_POS_ReduceAction591 SFT_parser[2401]
+#define COLOR_parser___ReduceAction591___init SFT_parser[2402]
+#define ID_ReduceAction592 SFT_parser[2403]
+#define COLOR_ReduceAction592 SFT_parser[2404]
+#define INIT_TABLE_POS_ReduceAction592 SFT_parser[2405]
+#define COLOR_parser___ReduceAction592___init SFT_parser[2406]
+#define ID_ReduceAction593 SFT_parser[2407]
+#define COLOR_ReduceAction593 SFT_parser[2408]
+#define INIT_TABLE_POS_ReduceAction593 SFT_parser[2409]
+#define COLOR_parser___ReduceAction593___init SFT_parser[2410]
+#define ID_ReduceAction594 SFT_parser[2411]
+#define COLOR_ReduceAction594 SFT_parser[2412]
+#define INIT_TABLE_POS_ReduceAction594 SFT_parser[2413]
+#define COLOR_parser___ReduceAction594___init SFT_parser[2414]
+#define ID_ReduceAction595 SFT_parser[2415]
+#define COLOR_ReduceAction595 SFT_parser[2416]
+#define INIT_TABLE_POS_ReduceAction595 SFT_parser[2417]
+#define COLOR_parser___ReduceAction595___init SFT_parser[2418]
+#define ID_ReduceAction596 SFT_parser[2419]
+#define COLOR_ReduceAction596 SFT_parser[2420]
+#define INIT_TABLE_POS_ReduceAction596 SFT_parser[2421]
+#define COLOR_parser___ReduceAction596___init SFT_parser[2422]
+#define ID_ReduceAction597 SFT_parser[2423]
+#define COLOR_ReduceAction597 SFT_parser[2424]
+#define INIT_TABLE_POS_ReduceAction597 SFT_parser[2425]
+#define COLOR_parser___ReduceAction597___init SFT_parser[2426]
+#define ID_ReduceAction598 SFT_parser[2427]
+#define COLOR_ReduceAction598 SFT_parser[2428]
+#define INIT_TABLE_POS_ReduceAction598 SFT_parser[2429]
+#define COLOR_parser___ReduceAction598___init SFT_parser[2430]
+#define ID_ReduceAction599 SFT_parser[2431]
+#define COLOR_ReduceAction599 SFT_parser[2432]
+#define INIT_TABLE_POS_ReduceAction599 SFT_parser[2433]
+#define COLOR_parser___ReduceAction599___init SFT_parser[2434]
+#define ID_ReduceAction600 SFT_parser[2435]
+#define COLOR_ReduceAction600 SFT_parser[2436]
+#define INIT_TABLE_POS_ReduceAction600 SFT_parser[2437]
+#define COLOR_parser___ReduceAction600___init SFT_parser[2438]
+#define ID_ReduceAction601 SFT_parser[2439]
+#define COLOR_ReduceAction601 SFT_parser[2440]
+#define INIT_TABLE_POS_ReduceAction601 SFT_parser[2441]
+#define COLOR_parser___ReduceAction601___init SFT_parser[2442]
+#define ID_ReduceAction602 SFT_parser[2443]
+#define COLOR_ReduceAction602 SFT_parser[2444]
+#define INIT_TABLE_POS_ReduceAction602 SFT_parser[2445]
+#define COLOR_parser___ReduceAction602___init SFT_parser[2446]
+#define ID_ReduceAction603 SFT_parser[2447]
+#define COLOR_ReduceAction603 SFT_parser[2448]
+#define INIT_TABLE_POS_ReduceAction603 SFT_parser[2449]
+#define COLOR_parser___ReduceAction603___init SFT_parser[2450]
+#define ID_ReduceAction604 SFT_parser[2451]
+#define COLOR_ReduceAction604 SFT_parser[2452]
+#define INIT_TABLE_POS_ReduceAction604 SFT_parser[2453]
+#define COLOR_parser___ReduceAction604___init SFT_parser[2454]
+#define ID_ReduceAction605 SFT_parser[2455]
+#define COLOR_ReduceAction605 SFT_parser[2456]
+#define INIT_TABLE_POS_ReduceAction605 SFT_parser[2457]
+#define COLOR_parser___ReduceAction605___init SFT_parser[2458]
+#define ID_ReduceAction606 SFT_parser[2459]
+#define COLOR_ReduceAction606 SFT_parser[2460]
+#define INIT_TABLE_POS_ReduceAction606 SFT_parser[2461]
+#define COLOR_parser___ReduceAction606___init SFT_parser[2462]
+#define ID_ReduceAction607 SFT_parser[2463]
+#define COLOR_ReduceAction607 SFT_parser[2464]
+#define INIT_TABLE_POS_ReduceAction607 SFT_parser[2465]
+#define COLOR_parser___ReduceAction607___init SFT_parser[2466]
+#define ID_ReduceAction608 SFT_parser[2467]
+#define COLOR_ReduceAction608 SFT_parser[2468]
+#define INIT_TABLE_POS_ReduceAction608 SFT_parser[2469]
+#define COLOR_parser___ReduceAction608___init SFT_parser[2470]
+#define ID_ReduceAction609 SFT_parser[2471]
+#define COLOR_ReduceAction609 SFT_parser[2472]
+#define INIT_TABLE_POS_ReduceAction609 SFT_parser[2473]
+#define COLOR_parser___ReduceAction609___init SFT_parser[2474]
+#define ID_ReduceAction610 SFT_parser[2475]
+#define COLOR_ReduceAction610 SFT_parser[2476]
+#define INIT_TABLE_POS_ReduceAction610 SFT_parser[2477]
+#define COLOR_parser___ReduceAction610___init SFT_parser[2478]
+#define ID_ReduceAction611 SFT_parser[2479]
+#define COLOR_ReduceAction611 SFT_parser[2480]
+#define INIT_TABLE_POS_ReduceAction611 SFT_parser[2481]
+#define COLOR_parser___ReduceAction611___init SFT_parser[2482]
+#define ID_ReduceAction612 SFT_parser[2483]
+#define COLOR_ReduceAction612 SFT_parser[2484]
+#define INIT_TABLE_POS_ReduceAction612 SFT_parser[2485]
+#define COLOR_parser___ReduceAction612___init SFT_parser[2486]
+#define ID_ReduceAction613 SFT_parser[2487]
+#define COLOR_ReduceAction613 SFT_parser[2488]
+#define INIT_TABLE_POS_ReduceAction613 SFT_parser[2489]
+#define COLOR_parser___ReduceAction613___init SFT_parser[2490]
+#define ID_ReduceAction614 SFT_parser[2491]
+#define COLOR_ReduceAction614 SFT_parser[2492]
+#define INIT_TABLE_POS_ReduceAction614 SFT_parser[2493]
+#define COLOR_parser___ReduceAction614___init SFT_parser[2494]
+#define ID_ReduceAction615 SFT_parser[2495]
+#define COLOR_ReduceAction615 SFT_parser[2496]
+#define INIT_TABLE_POS_ReduceAction615 SFT_parser[2497]
+#define COLOR_parser___ReduceAction615___init SFT_parser[2498]
+#define ID_ReduceAction616 SFT_parser[2499]
+#define COLOR_ReduceAction616 SFT_parser[2500]
+#define INIT_TABLE_POS_ReduceAction616 SFT_parser[2501]
+#define COLOR_parser___ReduceAction616___init SFT_parser[2502]
+#define ID_ReduceAction617 SFT_parser[2503]
+#define COLOR_ReduceAction617 SFT_parser[2504]
+#define INIT_TABLE_POS_ReduceAction617 SFT_parser[2505]
+#define COLOR_parser___ReduceAction617___init SFT_parser[2506]
+#define ID_ReduceAction618 SFT_parser[2507]
+#define COLOR_ReduceAction618 SFT_parser[2508]
+#define INIT_TABLE_POS_ReduceAction618 SFT_parser[2509]
+#define COLOR_parser___ReduceAction618___init SFT_parser[2510]
+#define ID_ReduceAction619 SFT_parser[2511]
+#define COLOR_ReduceAction619 SFT_parser[2512]
+#define INIT_TABLE_POS_ReduceAction619 SFT_parser[2513]
+#define COLOR_parser___ReduceAction619___init SFT_parser[2514]
+#define ID_ReduceAction620 SFT_parser[2515]
+#define COLOR_ReduceAction620 SFT_parser[2516]
+#define INIT_TABLE_POS_ReduceAction620 SFT_parser[2517]
+#define COLOR_parser___ReduceAction620___init SFT_parser[2518]
+#define ID_ReduceAction621 SFT_parser[2519]
+#define COLOR_ReduceAction621 SFT_parser[2520]
+#define INIT_TABLE_POS_ReduceAction621 SFT_parser[2521]
+#define COLOR_parser___ReduceAction621___init SFT_parser[2522]
+#define ID_ReduceAction622 SFT_parser[2523]
+#define COLOR_ReduceAction622 SFT_parser[2524]
+#define INIT_TABLE_POS_ReduceAction622 SFT_parser[2525]
+#define COLOR_parser___ReduceAction622___init SFT_parser[2526]
+#define ID_ReduceAction623 SFT_parser[2527]
+#define COLOR_ReduceAction623 SFT_parser[2528]
+#define INIT_TABLE_POS_ReduceAction623 SFT_parser[2529]
+#define COLOR_parser___ReduceAction623___init SFT_parser[2530]
+#define ID_ReduceAction624 SFT_parser[2531]
+#define COLOR_ReduceAction624 SFT_parser[2532]
+#define INIT_TABLE_POS_ReduceAction624 SFT_parser[2533]
+#define COLOR_parser___ReduceAction624___init SFT_parser[2534]
+#define ID_ReduceAction625 SFT_parser[2535]
+#define COLOR_ReduceAction625 SFT_parser[2536]
+#define INIT_TABLE_POS_ReduceAction625 SFT_parser[2537]
+#define COLOR_parser___ReduceAction625___init SFT_parser[2538]
+#define ID_ReduceAction626 SFT_parser[2539]
+#define COLOR_ReduceAction626 SFT_parser[2540]
+#define INIT_TABLE_POS_ReduceAction626 SFT_parser[2541]
+#define COLOR_parser___ReduceAction626___init SFT_parser[2542]
+#define ID_ReduceAction627 SFT_parser[2543]
+#define COLOR_ReduceAction627 SFT_parser[2544]
+#define INIT_TABLE_POS_ReduceAction627 SFT_parser[2545]
+#define COLOR_parser___ReduceAction627___init SFT_parser[2546]
+#define ID_ReduceAction628 SFT_parser[2547]
+#define COLOR_ReduceAction628 SFT_parser[2548]
+#define INIT_TABLE_POS_ReduceAction628 SFT_parser[2549]
+#define COLOR_parser___ReduceAction628___init SFT_parser[2550]
+#define ID_ReduceAction629 SFT_parser[2551]
+#define COLOR_ReduceAction629 SFT_parser[2552]
+#define INIT_TABLE_POS_ReduceAction629 SFT_parser[2553]
+#define COLOR_parser___ReduceAction629___init SFT_parser[2554]
+#define ID_ReduceAction630 SFT_parser[2555]
+#define COLOR_ReduceAction630 SFT_parser[2556]
+#define INIT_TABLE_POS_ReduceAction630 SFT_parser[2557]
+#define COLOR_parser___ReduceAction630___init SFT_parser[2558]
+#define ID_ReduceAction631 SFT_parser[2559]
+#define COLOR_ReduceAction631 SFT_parser[2560]
+#define INIT_TABLE_POS_ReduceAction631 SFT_parser[2561]
+#define COLOR_parser___ReduceAction631___init SFT_parser[2562]
+#define ID_ReduceAction632 SFT_parser[2563]
+#define COLOR_ReduceAction632 SFT_parser[2564]
+#define INIT_TABLE_POS_ReduceAction632 SFT_parser[2565]
+#define COLOR_parser___ReduceAction632___init SFT_parser[2566]
+#define ID_ReduceAction633 SFT_parser[2567]
+#define COLOR_ReduceAction633 SFT_parser[2568]
+#define INIT_TABLE_POS_ReduceAction633 SFT_parser[2569]
+#define COLOR_parser___ReduceAction633___init SFT_parser[2570]
+#define ID_ReduceAction634 SFT_parser[2571]
+#define COLOR_ReduceAction634 SFT_parser[2572]
+#define INIT_TABLE_POS_ReduceAction634 SFT_parser[2573]
+#define COLOR_parser___ReduceAction634___init SFT_parser[2574]
+#define ID_ReduceAction635 SFT_parser[2575]
+#define COLOR_ReduceAction635 SFT_parser[2576]
+#define INIT_TABLE_POS_ReduceAction635 SFT_parser[2577]
+#define COLOR_parser___ReduceAction635___init SFT_parser[2578]
+#define ID_ReduceAction636 SFT_parser[2579]
+#define COLOR_ReduceAction636 SFT_parser[2580]
+#define INIT_TABLE_POS_ReduceAction636 SFT_parser[2581]
+#define COLOR_parser___ReduceAction636___init SFT_parser[2582]
+#define ID_ReduceAction637 SFT_parser[2583]
+#define COLOR_ReduceAction637 SFT_parser[2584]
+#define INIT_TABLE_POS_ReduceAction637 SFT_parser[2585]
+#define COLOR_parser___ReduceAction637___init SFT_parser[2586]
+#define ID_ReduceAction638 SFT_parser[2587]
+#define COLOR_ReduceAction638 SFT_parser[2588]
+#define INIT_TABLE_POS_ReduceAction638 SFT_parser[2589]
+#define COLOR_parser___ReduceAction638___init SFT_parser[2590]
+#define ID_ReduceAction639 SFT_parser[2591]
+#define COLOR_ReduceAction639 SFT_parser[2592]
+#define INIT_TABLE_POS_ReduceAction639 SFT_parser[2593]
+#define COLOR_parser___ReduceAction639___init SFT_parser[2594]
+#define ID_ReduceAction640 SFT_parser[2595]
+#define COLOR_ReduceAction640 SFT_parser[2596]
+#define INIT_TABLE_POS_ReduceAction640 SFT_parser[2597]
+#define COLOR_parser___ReduceAction640___init SFT_parser[2598]
+#define ID_ReduceAction641 SFT_parser[2599]
+#define COLOR_ReduceAction641 SFT_parser[2600]
+#define INIT_TABLE_POS_ReduceAction641 SFT_parser[2601]
+#define COLOR_parser___ReduceAction641___init SFT_parser[2602]
+#define ID_ReduceAction642 SFT_parser[2603]
+#define COLOR_ReduceAction642 SFT_parser[2604]
+#define INIT_TABLE_POS_ReduceAction642 SFT_parser[2605]
+#define COLOR_parser___ReduceAction642___init SFT_parser[2606]
+#define ID_ReduceAction643 SFT_parser[2607]
+#define COLOR_ReduceAction643 SFT_parser[2608]
+#define INIT_TABLE_POS_ReduceAction643 SFT_parser[2609]
+#define COLOR_parser___ReduceAction643___init SFT_parser[2610]
+#define ID_ReduceAction644 SFT_parser[2611]
+#define COLOR_ReduceAction644 SFT_parser[2612]
+#define INIT_TABLE_POS_ReduceAction644 SFT_parser[2613]
+#define COLOR_parser___ReduceAction644___init SFT_parser[2614]
+#define ID_ReduceAction645 SFT_parser[2615]
+#define COLOR_ReduceAction645 SFT_parser[2616]
+#define INIT_TABLE_POS_ReduceAction645 SFT_parser[2617]
+#define COLOR_parser___ReduceAction645___init SFT_parser[2618]
+#define ID_ReduceAction646 SFT_parser[2619]
+#define COLOR_ReduceAction646 SFT_parser[2620]
+#define INIT_TABLE_POS_ReduceAction646 SFT_parser[2621]
+#define COLOR_parser___ReduceAction646___init SFT_parser[2622]
+#define ID_ReduceAction647 SFT_parser[2623]
+#define COLOR_ReduceAction647 SFT_parser[2624]
+#define INIT_TABLE_POS_ReduceAction647 SFT_parser[2625]
+#define COLOR_parser___ReduceAction647___init SFT_parser[2626]
+#define ID_ReduceAction648 SFT_parser[2627]
+#define COLOR_ReduceAction648 SFT_parser[2628]
+#define INIT_TABLE_POS_ReduceAction648 SFT_parser[2629]
+#define COLOR_parser___ReduceAction648___init SFT_parser[2630]
+#define ID_ReduceAction649 SFT_parser[2631]
+#define COLOR_ReduceAction649 SFT_parser[2632]
+#define INIT_TABLE_POS_ReduceAction649 SFT_parser[2633]
+#define COLOR_parser___ReduceAction649___init SFT_parser[2634]
+#define ID_ReduceAction650 SFT_parser[2635]
+#define COLOR_ReduceAction650 SFT_parser[2636]
+#define INIT_TABLE_POS_ReduceAction650 SFT_parser[2637]
+#define COLOR_parser___ReduceAction650___init SFT_parser[2638]
+#define ID_ReduceAction651 SFT_parser[2639]
+#define COLOR_ReduceAction651 SFT_parser[2640]
+#define INIT_TABLE_POS_ReduceAction651 SFT_parser[2641]
+#define COLOR_parser___ReduceAction651___init SFT_parser[2642]
+#define ID_ReduceAction652 SFT_parser[2643]
+#define COLOR_ReduceAction652 SFT_parser[2644]
+#define INIT_TABLE_POS_ReduceAction652 SFT_parser[2645]
+#define COLOR_parser___ReduceAction652___init SFT_parser[2646]
+#define ID_ReduceAction653 SFT_parser[2647]
+#define COLOR_ReduceAction653 SFT_parser[2648]
+#define INIT_TABLE_POS_ReduceAction653 SFT_parser[2649]
+#define COLOR_parser___ReduceAction653___init SFT_parser[2650]
+#define ID_ReduceAction654 SFT_parser[2651]
+#define COLOR_ReduceAction654 SFT_parser[2652]
+#define INIT_TABLE_POS_ReduceAction654 SFT_parser[2653]
+#define COLOR_parser___ReduceAction654___init SFT_parser[2654]
+#define ID_ReduceAction655 SFT_parser[2655]
+#define COLOR_ReduceAction655 SFT_parser[2656]
+#define INIT_TABLE_POS_ReduceAction655 SFT_parser[2657]
+#define COLOR_parser___ReduceAction655___init SFT_parser[2658]
+#define ID_ReduceAction656 SFT_parser[2659]
+#define COLOR_ReduceAction656 SFT_parser[2660]
+#define INIT_TABLE_POS_ReduceAction656 SFT_parser[2661]
+#define COLOR_parser___ReduceAction656___init SFT_parser[2662]
+#define ID_ReduceAction657 SFT_parser[2663]
+#define COLOR_ReduceAction657 SFT_parser[2664]
+#define INIT_TABLE_POS_ReduceAction657 SFT_parser[2665]
+#define COLOR_parser___ReduceAction657___init SFT_parser[2666]
+#define ID_ReduceAction658 SFT_parser[2667]
+#define COLOR_ReduceAction658 SFT_parser[2668]
+#define INIT_TABLE_POS_ReduceAction658 SFT_parser[2669]
+#define COLOR_parser___ReduceAction658___init SFT_parser[2670]
+#define ID_ReduceAction659 SFT_parser[2671]
+#define COLOR_ReduceAction659 SFT_parser[2672]
+#define INIT_TABLE_POS_ReduceAction659 SFT_parser[2673]
+#define COLOR_parser___ReduceAction659___init SFT_parser[2674]
+#define ID_ReduceAction660 SFT_parser[2675]
+#define COLOR_ReduceAction660 SFT_parser[2676]
+#define INIT_TABLE_POS_ReduceAction660 SFT_parser[2677]
+#define COLOR_parser___ReduceAction660___init SFT_parser[2678]
+#define ID_ReduceAction661 SFT_parser[2679]
+#define COLOR_ReduceAction661 SFT_parser[2680]
+#define INIT_TABLE_POS_ReduceAction661 SFT_parser[2681]
+#define COLOR_parser___ReduceAction661___init SFT_parser[2682]
+#define ID_ReduceAction662 SFT_parser[2683]
+#define COLOR_ReduceAction662 SFT_parser[2684]
+#define INIT_TABLE_POS_ReduceAction662 SFT_parser[2685]
+#define COLOR_parser___ReduceAction662___init SFT_parser[2686]
+#define ID_ReduceAction663 SFT_parser[2687]
+#define COLOR_ReduceAction663 SFT_parser[2688]
+#define INIT_TABLE_POS_ReduceAction663 SFT_parser[2689]
+#define COLOR_parser___ReduceAction663___init SFT_parser[2690]
+#define ID_ReduceAction664 SFT_parser[2691]
+#define COLOR_ReduceAction664 SFT_parser[2692]
+#define INIT_TABLE_POS_ReduceAction664 SFT_parser[2693]
+#define COLOR_parser___ReduceAction664___init SFT_parser[2694]
+#define ID_ReduceAction665 SFT_parser[2695]
+#define COLOR_ReduceAction665 SFT_parser[2696]
+#define INIT_TABLE_POS_ReduceAction665 SFT_parser[2697]
+#define COLOR_parser___ReduceAction665___init SFT_parser[2698]
+#define ID_ReduceAction666 SFT_parser[2699]
+#define COLOR_ReduceAction666 SFT_parser[2700]
+#define INIT_TABLE_POS_ReduceAction666 SFT_parser[2701]
+#define COLOR_parser___ReduceAction666___init SFT_parser[2702]
+#define ID_ReduceAction667 SFT_parser[2703]
+#define COLOR_ReduceAction667 SFT_parser[2704]
+#define INIT_TABLE_POS_ReduceAction667 SFT_parser[2705]
+#define COLOR_parser___ReduceAction667___init SFT_parser[2706]
+#define ID_ReduceAction668 SFT_parser[2707]
+#define COLOR_ReduceAction668 SFT_parser[2708]
+#define INIT_TABLE_POS_ReduceAction668 SFT_parser[2709]
+#define COLOR_parser___ReduceAction668___init SFT_parser[2710]
+#define ID_ReduceAction669 SFT_parser[2711]
+#define COLOR_ReduceAction669 SFT_parser[2712]
+#define INIT_TABLE_POS_ReduceAction669 SFT_parser[2713]
+#define COLOR_parser___ReduceAction669___init SFT_parser[2714]
+#define ID_ReduceAction670 SFT_parser[2715]
+#define COLOR_ReduceAction670 SFT_parser[2716]
+#define INIT_TABLE_POS_ReduceAction670 SFT_parser[2717]
+#define COLOR_parser___ReduceAction670___init SFT_parser[2718]
+#define ID_ReduceAction671 SFT_parser[2719]
+#define COLOR_ReduceAction671 SFT_parser[2720]
+#define INIT_TABLE_POS_ReduceAction671 SFT_parser[2721]
+#define COLOR_parser___ReduceAction671___init SFT_parser[2722]
+#define ID_ReduceAction672 SFT_parser[2723]
+#define COLOR_ReduceAction672 SFT_parser[2724]
+#define INIT_TABLE_POS_ReduceAction672 SFT_parser[2725]
+#define COLOR_parser___ReduceAction672___init SFT_parser[2726]
+#define ID_ReduceAction673 SFT_parser[2727]
+#define COLOR_ReduceAction673 SFT_parser[2728]
+#define INIT_TABLE_POS_ReduceAction673 SFT_parser[2729]
+#define COLOR_parser___ReduceAction673___init SFT_parser[2730]
+#define ID_ReduceAction674 SFT_parser[2731]
+#define COLOR_ReduceAction674 SFT_parser[2732]
+#define INIT_TABLE_POS_ReduceAction674 SFT_parser[2733]
+#define COLOR_parser___ReduceAction674___init SFT_parser[2734]
+#define ID_ReduceAction675 SFT_parser[2735]
+#define COLOR_ReduceAction675 SFT_parser[2736]
+#define INIT_TABLE_POS_ReduceAction675 SFT_parser[2737]
+#define COLOR_parser___ReduceAction675___init SFT_parser[2738]
+#define ID_ReduceAction676 SFT_parser[2739]
+#define COLOR_ReduceAction676 SFT_parser[2740]
+#define INIT_TABLE_POS_ReduceAction676 SFT_parser[2741]
+#define COLOR_parser___ReduceAction676___init SFT_parser[2742]
+#define ID_ReduceAction677 SFT_parser[2743]
+#define COLOR_ReduceAction677 SFT_parser[2744]
+#define INIT_TABLE_POS_ReduceAction677 SFT_parser[2745]
+#define COLOR_parser___ReduceAction677___init SFT_parser[2746]
+#define ID_ReduceAction678 SFT_parser[2747]
+#define COLOR_ReduceAction678 SFT_parser[2748]
+#define INIT_TABLE_POS_ReduceAction678 SFT_parser[2749]
+#define COLOR_parser___ReduceAction678___init SFT_parser[2750]
+#define ID_ReduceAction679 SFT_parser[2751]
+#define COLOR_ReduceAction679 SFT_parser[2752]
+#define INIT_TABLE_POS_ReduceAction679 SFT_parser[2753]
+#define COLOR_parser___ReduceAction679___init SFT_parser[2754]
+#define ID_ReduceAction680 SFT_parser[2755]
+#define COLOR_ReduceAction680 SFT_parser[2756]
+#define INIT_TABLE_POS_ReduceAction680 SFT_parser[2757]
+#define COLOR_parser___ReduceAction680___init SFT_parser[2758]
+#define ID_ReduceAction681 SFT_parser[2759]
+#define COLOR_ReduceAction681 SFT_parser[2760]
+#define INIT_TABLE_POS_ReduceAction681 SFT_parser[2761]
+#define COLOR_parser___ReduceAction681___init SFT_parser[2762]
+#define ID_ReduceAction682 SFT_parser[2763]
+#define COLOR_ReduceAction682 SFT_parser[2764]
+#define INIT_TABLE_POS_ReduceAction682 SFT_parser[2765]
+#define COLOR_parser___ReduceAction682___init SFT_parser[2766]
+#define ID_ReduceAction683 SFT_parser[2767]
+#define COLOR_ReduceAction683 SFT_parser[2768]
+#define INIT_TABLE_POS_ReduceAction683 SFT_parser[2769]
+#define COLOR_parser___ReduceAction683___init SFT_parser[2770]
+#define ID_ReduceAction684 SFT_parser[2771]
+#define COLOR_ReduceAction684 SFT_parser[2772]
+#define INIT_TABLE_POS_ReduceAction684 SFT_parser[2773]
+#define COLOR_parser___ReduceAction684___init SFT_parser[2774]
+#define ID_ReduceAction685 SFT_parser[2775]
+#define COLOR_ReduceAction685 SFT_parser[2776]
+#define INIT_TABLE_POS_ReduceAction685 SFT_parser[2777]
+#define COLOR_parser___ReduceAction685___init SFT_parser[2778]
+#define ID_ReduceAction686 SFT_parser[2779]
+#define COLOR_ReduceAction686 SFT_parser[2780]
+#define INIT_TABLE_POS_ReduceAction686 SFT_parser[2781]
+#define COLOR_parser___ReduceAction686___init SFT_parser[2782]
+#define ID_ReduceAction687 SFT_parser[2783]
+#define COLOR_ReduceAction687 SFT_parser[2784]
+#define INIT_TABLE_POS_ReduceAction687 SFT_parser[2785]
+#define COLOR_parser___ReduceAction687___init SFT_parser[2786]
+#define ID_ReduceAction688 SFT_parser[2787]
+#define COLOR_ReduceAction688 SFT_parser[2788]
+#define INIT_TABLE_POS_ReduceAction688 SFT_parser[2789]
+#define COLOR_parser___ReduceAction688___init SFT_parser[2790]
+#define ID_ReduceAction689 SFT_parser[2791]
+#define COLOR_ReduceAction689 SFT_parser[2792]
+#define INIT_TABLE_POS_ReduceAction689 SFT_parser[2793]
+#define COLOR_parser___ReduceAction689___init SFT_parser[2794]
+#define ID_ReduceAction690 SFT_parser[2795]
+#define COLOR_ReduceAction690 SFT_parser[2796]
+#define INIT_TABLE_POS_ReduceAction690 SFT_parser[2797]
+#define COLOR_parser___ReduceAction690___init SFT_parser[2798]
+#define ID_ReduceAction691 SFT_parser[2799]
+#define COLOR_ReduceAction691 SFT_parser[2800]
+#define INIT_TABLE_POS_ReduceAction691 SFT_parser[2801]
+#define COLOR_parser___ReduceAction691___init SFT_parser[2802]
+#define ID_ReduceAction692 SFT_parser[2803]
+#define COLOR_ReduceAction692 SFT_parser[2804]
+#define INIT_TABLE_POS_ReduceAction692 SFT_parser[2805]
+#define COLOR_parser___ReduceAction692___init SFT_parser[2806]
+#define ID_ReduceAction693 SFT_parser[2807]
+#define COLOR_ReduceAction693 SFT_parser[2808]
+#define INIT_TABLE_POS_ReduceAction693 SFT_parser[2809]
+#define COLOR_parser___ReduceAction693___init SFT_parser[2810]
+#define ID_ReduceAction694 SFT_parser[2811]
+#define COLOR_ReduceAction694 SFT_parser[2812]
+#define INIT_TABLE_POS_ReduceAction694 SFT_parser[2813]
+#define COLOR_parser___ReduceAction694___init SFT_parser[2814]
+#define ID_ReduceAction695 SFT_parser[2815]
+#define COLOR_ReduceAction695 SFT_parser[2816]
+#define INIT_TABLE_POS_ReduceAction695 SFT_parser[2817]
+#define COLOR_parser___ReduceAction695___init SFT_parser[2818]
+#define ID_ReduceAction696 SFT_parser[2819]
+#define COLOR_ReduceAction696 SFT_parser[2820]
+#define INIT_TABLE_POS_ReduceAction696 SFT_parser[2821]
+#define COLOR_parser___ReduceAction696___init SFT_parser[2822]
+#define ID_ReduceAction697 SFT_parser[2823]
+#define COLOR_ReduceAction697 SFT_parser[2824]
+#define INIT_TABLE_POS_ReduceAction697 SFT_parser[2825]
+#define COLOR_parser___ReduceAction697___init SFT_parser[2826]
+#define ID_ReduceAction698 SFT_parser[2827]
+#define COLOR_ReduceAction698 SFT_parser[2828]
+#define INIT_TABLE_POS_ReduceAction698 SFT_parser[2829]
+#define COLOR_parser___ReduceAction698___init SFT_parser[2830]
+#define ID_ReduceAction699 SFT_parser[2831]
+#define COLOR_ReduceAction699 SFT_parser[2832]
+#define INIT_TABLE_POS_ReduceAction699 SFT_parser[2833]
+#define COLOR_parser___ReduceAction699___init SFT_parser[2834]
+#define ID_ReduceAction700 SFT_parser[2835]
+#define COLOR_ReduceAction700 SFT_parser[2836]
+#define INIT_TABLE_POS_ReduceAction700 SFT_parser[2837]
+#define COLOR_parser___ReduceAction700___init SFT_parser[2838]
+#define ID_ReduceAction701 SFT_parser[2839]
+#define COLOR_ReduceAction701 SFT_parser[2840]
+#define INIT_TABLE_POS_ReduceAction701 SFT_parser[2841]
+#define COLOR_parser___ReduceAction701___init SFT_parser[2842]
+#define ID_ReduceAction702 SFT_parser[2843]
+#define COLOR_ReduceAction702 SFT_parser[2844]
+#define INIT_TABLE_POS_ReduceAction702 SFT_parser[2845]
+#define COLOR_parser___ReduceAction702___init SFT_parser[2846]
+#define ID_ReduceAction703 SFT_parser[2847]
+#define COLOR_ReduceAction703 SFT_parser[2848]
+#define INIT_TABLE_POS_ReduceAction703 SFT_parser[2849]
+#define COLOR_parser___ReduceAction703___init SFT_parser[2850]
+#define ID_ReduceAction704 SFT_parser[2851]
+#define COLOR_ReduceAction704 SFT_parser[2852]
+#define INIT_TABLE_POS_ReduceAction704 SFT_parser[2853]
+#define COLOR_parser___ReduceAction704___init SFT_parser[2854]
+#define ID_ReduceAction705 SFT_parser[2855]
+#define COLOR_ReduceAction705 SFT_parser[2856]
+#define INIT_TABLE_POS_ReduceAction705 SFT_parser[2857]
+#define COLOR_parser___ReduceAction705___init SFT_parser[2858]
+#define ID_ReduceAction706 SFT_parser[2859]
+#define COLOR_ReduceAction706 SFT_parser[2860]
+#define INIT_TABLE_POS_ReduceAction706 SFT_parser[2861]
+#define COLOR_parser___ReduceAction706___init SFT_parser[2862]
+#define ID_ReduceAction707 SFT_parser[2863]
+#define COLOR_ReduceAction707 SFT_parser[2864]
+#define INIT_TABLE_POS_ReduceAction707 SFT_parser[2865]
+#define COLOR_parser___ReduceAction707___init SFT_parser[2866]
+#define ID_ReduceAction708 SFT_parser[2867]
+#define COLOR_ReduceAction708 SFT_parser[2868]
+#define INIT_TABLE_POS_ReduceAction708 SFT_parser[2869]
+#define COLOR_parser___ReduceAction708___init SFT_parser[2870]
+#define ID_ReduceAction709 SFT_parser[2871]
+#define COLOR_ReduceAction709 SFT_parser[2872]
+#define INIT_TABLE_POS_ReduceAction709 SFT_parser[2873]
+#define COLOR_parser___ReduceAction709___init SFT_parser[2874]
+#define ID_ReduceAction710 SFT_parser[2875]
+#define COLOR_ReduceAction710 SFT_parser[2876]
+#define INIT_TABLE_POS_ReduceAction710 SFT_parser[2877]
+#define COLOR_parser___ReduceAction710___init SFT_parser[2878]
+#define ID_ReduceAction711 SFT_parser[2879]
+#define COLOR_ReduceAction711 SFT_parser[2880]
+#define INIT_TABLE_POS_ReduceAction711 SFT_parser[2881]
+#define COLOR_parser___ReduceAction711___init SFT_parser[2882]
+#define ID_ReduceAction712 SFT_parser[2883]
+#define COLOR_ReduceAction712 SFT_parser[2884]
+#define INIT_TABLE_POS_ReduceAction712 SFT_parser[2885]
+#define COLOR_parser___ReduceAction712___init SFT_parser[2886]
+#define ID_ReduceAction713 SFT_parser[2887]
+#define COLOR_ReduceAction713 SFT_parser[2888]
+#define INIT_TABLE_POS_ReduceAction713 SFT_parser[2889]
+#define COLOR_parser___ReduceAction713___init SFT_parser[2890]
+#define ID_ReduceAction714 SFT_parser[2891]
+#define COLOR_ReduceAction714 SFT_parser[2892]
+#define INIT_TABLE_POS_ReduceAction714 SFT_parser[2893]
+#define COLOR_parser___ReduceAction714___init SFT_parser[2894]
+#define ID_ReduceAction715 SFT_parser[2895]
+#define COLOR_ReduceAction715 SFT_parser[2896]
+#define INIT_TABLE_POS_ReduceAction715 SFT_parser[2897]
+#define COLOR_parser___ReduceAction715___init SFT_parser[2898]
+#define ID_ReduceAction716 SFT_parser[2899]
+#define COLOR_ReduceAction716 SFT_parser[2900]
+#define INIT_TABLE_POS_ReduceAction716 SFT_parser[2901]
+#define COLOR_parser___ReduceAction716___init SFT_parser[2902]
+#define ID_ReduceAction717 SFT_parser[2903]
+#define COLOR_ReduceAction717 SFT_parser[2904]
+#define INIT_TABLE_POS_ReduceAction717 SFT_parser[2905]
+#define COLOR_parser___ReduceAction717___init SFT_parser[2906]
+#define ID_ReduceAction718 SFT_parser[2907]
+#define COLOR_ReduceAction718 SFT_parser[2908]
+#define INIT_TABLE_POS_ReduceAction718 SFT_parser[2909]
+#define COLOR_parser___ReduceAction718___init SFT_parser[2910]
+#define ID_ReduceAction719 SFT_parser[2911]
+#define COLOR_ReduceAction719 SFT_parser[2912]
+#define INIT_TABLE_POS_ReduceAction719 SFT_parser[2913]
+#define COLOR_parser___ReduceAction719___init SFT_parser[2914]
+#define ID_ReduceAction720 SFT_parser[2915]
+#define COLOR_ReduceAction720 SFT_parser[2916]
+#define INIT_TABLE_POS_ReduceAction720 SFT_parser[2917]
+#define COLOR_parser___ReduceAction720___init SFT_parser[2918]
+#define ID_ReduceAction721 SFT_parser[2919]
+#define COLOR_ReduceAction721 SFT_parser[2920]
+#define INIT_TABLE_POS_ReduceAction721 SFT_parser[2921]
+#define COLOR_parser___ReduceAction721___init SFT_parser[2922]
+#define ID_ReduceAction722 SFT_parser[2923]
+#define COLOR_ReduceAction722 SFT_parser[2924]
+#define INIT_TABLE_POS_ReduceAction722 SFT_parser[2925]
+#define COLOR_parser___ReduceAction722___init SFT_parser[2926]
+#define ID_ReduceAction723 SFT_parser[2927]
+#define COLOR_ReduceAction723 SFT_parser[2928]
+#define INIT_TABLE_POS_ReduceAction723 SFT_parser[2929]
+#define COLOR_parser___ReduceAction723___init SFT_parser[2930]
+#define ID_ReduceAction724 SFT_parser[2931]
+#define COLOR_ReduceAction724 SFT_parser[2932]
+#define INIT_TABLE_POS_ReduceAction724 SFT_parser[2933]
+#define COLOR_parser___ReduceAction724___init SFT_parser[2934]
+#define ID_ReduceAction725 SFT_parser[2935]
+#define COLOR_ReduceAction725 SFT_parser[2936]
+#define INIT_TABLE_POS_ReduceAction725 SFT_parser[2937]
+#define COLOR_parser___ReduceAction725___init SFT_parser[2938]
+#define ID_ReduceAction726 SFT_parser[2939]
+#define COLOR_ReduceAction726 SFT_parser[2940]
+#define INIT_TABLE_POS_ReduceAction726 SFT_parser[2941]
+#define COLOR_parser___ReduceAction726___init SFT_parser[2942]
+#define ID_ReduceAction727 SFT_parser[2943]
+#define COLOR_ReduceAction727 SFT_parser[2944]
+#define INIT_TABLE_POS_ReduceAction727 SFT_parser[2945]
+#define COLOR_parser___ReduceAction727___init SFT_parser[2946]
+#define ID_ReduceAction728 SFT_parser[2947]
+#define COLOR_ReduceAction728 SFT_parser[2948]
+#define INIT_TABLE_POS_ReduceAction728 SFT_parser[2949]
+#define COLOR_parser___ReduceAction728___init SFT_parser[2950]
+#define ID_ReduceAction729 SFT_parser[2951]
+#define COLOR_ReduceAction729 SFT_parser[2952]
+#define INIT_TABLE_POS_ReduceAction729 SFT_parser[2953]
+#define COLOR_parser___ReduceAction729___init SFT_parser[2954]
+#define ID_ReduceAction730 SFT_parser[2955]
+#define COLOR_ReduceAction730 SFT_parser[2956]
+#define INIT_TABLE_POS_ReduceAction730 SFT_parser[2957]
+#define COLOR_parser___ReduceAction730___init SFT_parser[2958]
+#define ID_ReduceAction731 SFT_parser[2959]
+#define COLOR_ReduceAction731 SFT_parser[2960]
+#define INIT_TABLE_POS_ReduceAction731 SFT_parser[2961]
+#define COLOR_parser___ReduceAction731___init SFT_parser[2962]
+#define ID_ReduceAction732 SFT_parser[2963]
+#define COLOR_ReduceAction732 SFT_parser[2964]
+#define INIT_TABLE_POS_ReduceAction732 SFT_parser[2965]
+#define COLOR_parser___ReduceAction732___init SFT_parser[2966]
+#define ID_ReduceAction733 SFT_parser[2967]
+#define COLOR_ReduceAction733 SFT_parser[2968]
+#define INIT_TABLE_POS_ReduceAction733 SFT_parser[2969]
+#define COLOR_parser___ReduceAction733___init SFT_parser[2970]
+#define ID_ReduceAction734 SFT_parser[2971]
+#define COLOR_ReduceAction734 SFT_parser[2972]
+#define INIT_TABLE_POS_ReduceAction734 SFT_parser[2973]
+#define COLOR_parser___ReduceAction734___init SFT_parser[2974]
+#define ID_ReduceAction735 SFT_parser[2975]
+#define COLOR_ReduceAction735 SFT_parser[2976]
+#define INIT_TABLE_POS_ReduceAction735 SFT_parser[2977]
+#define COLOR_parser___ReduceAction735___init SFT_parser[2978]
+#define ID_ReduceAction736 SFT_parser[2979]
+#define COLOR_ReduceAction736 SFT_parser[2980]
+#define INIT_TABLE_POS_ReduceAction736 SFT_parser[2981]
+#define COLOR_parser___ReduceAction736___init SFT_parser[2982]
+#define ID_ReduceAction737 SFT_parser[2983]
+#define COLOR_ReduceAction737 SFT_parser[2984]
+#define INIT_TABLE_POS_ReduceAction737 SFT_parser[2985]
+#define COLOR_parser___ReduceAction737___init SFT_parser[2986]
+#define ID_ReduceAction738 SFT_parser[2987]
+#define COLOR_ReduceAction738 SFT_parser[2988]
+#define INIT_TABLE_POS_ReduceAction738 SFT_parser[2989]
+#define COLOR_parser___ReduceAction738___init SFT_parser[2990]
+#define ID_ReduceAction739 SFT_parser[2991]
+#define COLOR_ReduceAction739 SFT_parser[2992]
+#define INIT_TABLE_POS_ReduceAction739 SFT_parser[2993]
+#define COLOR_parser___ReduceAction739___init SFT_parser[2994]
+#define ID_ReduceAction740 SFT_parser[2995]
+#define COLOR_ReduceAction740 SFT_parser[2996]
+#define INIT_TABLE_POS_ReduceAction740 SFT_parser[2997]
+#define COLOR_parser___ReduceAction740___init SFT_parser[2998]
+#define ID_ReduceAction741 SFT_parser[2999]
+#define COLOR_ReduceAction741 SFT_parser[3000]
+#define INIT_TABLE_POS_ReduceAction741 SFT_parser[3001]
+#define COLOR_parser___ReduceAction741___init SFT_parser[3002]
+#define ID_ReduceAction742 SFT_parser[3003]
+#define COLOR_ReduceAction742 SFT_parser[3004]
+#define INIT_TABLE_POS_ReduceAction742 SFT_parser[3005]
+#define COLOR_parser___ReduceAction742___init SFT_parser[3006]
+#define ID_ReduceAction743 SFT_parser[3007]
+#define COLOR_ReduceAction743 SFT_parser[3008]
+#define INIT_TABLE_POS_ReduceAction743 SFT_parser[3009]
+#define COLOR_parser___ReduceAction743___init SFT_parser[3010]
+#define ID_ReduceAction744 SFT_parser[3011]
+#define COLOR_ReduceAction744 SFT_parser[3012]
+#define INIT_TABLE_POS_ReduceAction744 SFT_parser[3013]
+#define COLOR_parser___ReduceAction744___init SFT_parser[3014]
+#define ID_ReduceAction745 SFT_parser[3015]
+#define COLOR_ReduceAction745 SFT_parser[3016]
+#define INIT_TABLE_POS_ReduceAction745 SFT_parser[3017]
+#define COLOR_parser___ReduceAction745___init SFT_parser[3018]
+#define ID_ReduceAction746 SFT_parser[3019]
+#define COLOR_ReduceAction746 SFT_parser[3020]
+#define INIT_TABLE_POS_ReduceAction746 SFT_parser[3021]
+#define COLOR_parser___ReduceAction746___init SFT_parser[3022]
+#define ID_ReduceAction747 SFT_parser[3023]
+#define COLOR_ReduceAction747 SFT_parser[3024]
+#define INIT_TABLE_POS_ReduceAction747 SFT_parser[3025]
+#define COLOR_parser___ReduceAction747___init SFT_parser[3026]
+#define ID_ReduceAction748 SFT_parser[3027]
+#define COLOR_ReduceAction748 SFT_parser[3028]
+#define INIT_TABLE_POS_ReduceAction748 SFT_parser[3029]
+#define COLOR_parser___ReduceAction748___init SFT_parser[3030]
+#define ID_ReduceAction749 SFT_parser[3031]
+#define COLOR_ReduceAction749 SFT_parser[3032]
+#define INIT_TABLE_POS_ReduceAction749 SFT_parser[3033]
+#define COLOR_parser___ReduceAction749___init SFT_parser[3034]
+#define ID_ReduceAction750 SFT_parser[3035]
+#define COLOR_ReduceAction750 SFT_parser[3036]
+#define INIT_TABLE_POS_ReduceAction750 SFT_parser[3037]
+#define COLOR_parser___ReduceAction750___init SFT_parser[3038]
+#define ID_ReduceAction751 SFT_parser[3039]
+#define COLOR_ReduceAction751 SFT_parser[3040]
+#define INIT_TABLE_POS_ReduceAction751 SFT_parser[3041]
+#define COLOR_parser___ReduceAction751___init SFT_parser[3042]
+#define ID_ReduceAction752 SFT_parser[3043]
+#define COLOR_ReduceAction752 SFT_parser[3044]
+#define INIT_TABLE_POS_ReduceAction752 SFT_parser[3045]
+#define COLOR_parser___ReduceAction752___init SFT_parser[3046]
+#define ID_ReduceAction753 SFT_parser[3047]
+#define COLOR_ReduceAction753 SFT_parser[3048]
+#define INIT_TABLE_POS_ReduceAction753 SFT_parser[3049]
+#define COLOR_parser___ReduceAction753___init SFT_parser[3050]
+#define ID_ReduceAction754 SFT_parser[3051]
+#define COLOR_ReduceAction754 SFT_parser[3052]
+#define INIT_TABLE_POS_ReduceAction754 SFT_parser[3053]
+#define COLOR_parser___ReduceAction754___init SFT_parser[3054]
+#define ID_ReduceAction755 SFT_parser[3055]
+#define COLOR_ReduceAction755 SFT_parser[3056]
+#define INIT_TABLE_POS_ReduceAction755 SFT_parser[3057]
+#define COLOR_parser___ReduceAction755___init SFT_parser[3058]
+#define ID_ReduceAction756 SFT_parser[3059]
+#define COLOR_ReduceAction756 SFT_parser[3060]
+#define INIT_TABLE_POS_ReduceAction756 SFT_parser[3061]
+#define COLOR_parser___ReduceAction756___init SFT_parser[3062]
+#define ID_ReduceAction757 SFT_parser[3063]
+#define COLOR_ReduceAction757 SFT_parser[3064]
+#define INIT_TABLE_POS_ReduceAction757 SFT_parser[3065]
+#define COLOR_parser___ReduceAction757___init SFT_parser[3066]
+#define ID_ReduceAction758 SFT_parser[3067]
+#define COLOR_ReduceAction758 SFT_parser[3068]
+#define INIT_TABLE_POS_ReduceAction758 SFT_parser[3069]
+#define COLOR_parser___ReduceAction758___init SFT_parser[3070]
+#define ID_ReduceAction759 SFT_parser[3071]
+#define COLOR_ReduceAction759 SFT_parser[3072]
+#define INIT_TABLE_POS_ReduceAction759 SFT_parser[3073]
+#define COLOR_parser___ReduceAction759___init SFT_parser[3074]
+#define ID_ReduceAction760 SFT_parser[3075]
+#define COLOR_ReduceAction760 SFT_parser[3076]
+#define INIT_TABLE_POS_ReduceAction760 SFT_parser[3077]
+#define COLOR_parser___ReduceAction760___init SFT_parser[3078]
+#define ID_ReduceAction761 SFT_parser[3079]
+#define COLOR_ReduceAction761 SFT_parser[3080]
+#define INIT_TABLE_POS_ReduceAction761 SFT_parser[3081]
+#define COLOR_parser___ReduceAction761___init SFT_parser[3082]
+#define ID_ReduceAction762 SFT_parser[3083]
+#define COLOR_ReduceAction762 SFT_parser[3084]
+#define INIT_TABLE_POS_ReduceAction762 SFT_parser[3085]
+#define COLOR_parser___ReduceAction762___init SFT_parser[3086]
+#define ID_ReduceAction763 SFT_parser[3087]
+#define COLOR_ReduceAction763 SFT_parser[3088]
+#define INIT_TABLE_POS_ReduceAction763 SFT_parser[3089]
+#define COLOR_parser___ReduceAction763___init SFT_parser[3090]
+#define ID_ReduceAction764 SFT_parser[3091]
+#define COLOR_ReduceAction764 SFT_parser[3092]
+#define INIT_TABLE_POS_ReduceAction764 SFT_parser[3093]
+#define COLOR_parser___ReduceAction764___init SFT_parser[3094]
+#define ID_ReduceAction765 SFT_parser[3095]
+#define COLOR_ReduceAction765 SFT_parser[3096]
+#define INIT_TABLE_POS_ReduceAction765 SFT_parser[3097]
+#define COLOR_parser___ReduceAction765___init SFT_parser[3098]
+#define ID_ReduceAction766 SFT_parser[3099]
+#define COLOR_ReduceAction766 SFT_parser[3100]
+#define INIT_TABLE_POS_ReduceAction766 SFT_parser[3101]
+#define COLOR_parser___ReduceAction766___init SFT_parser[3102]
+#define ID_ReduceAction767 SFT_parser[3103]
+#define COLOR_ReduceAction767 SFT_parser[3104]
+#define INIT_TABLE_POS_ReduceAction767 SFT_parser[3105]
+#define COLOR_parser___ReduceAction767___init SFT_parser[3106]
+#define ID_ReduceAction768 SFT_parser[3107]
+#define COLOR_ReduceAction768 SFT_parser[3108]
+#define INIT_TABLE_POS_ReduceAction768 SFT_parser[3109]
+#define COLOR_parser___ReduceAction768___init SFT_parser[3110]
+#define ID_ReduceAction769 SFT_parser[3111]
+#define COLOR_ReduceAction769 SFT_parser[3112]
+#define INIT_TABLE_POS_ReduceAction769 SFT_parser[3113]
+#define COLOR_parser___ReduceAction769___init SFT_parser[3114]
+#define ID_ReduceAction770 SFT_parser[3115]
+#define COLOR_ReduceAction770 SFT_parser[3116]
+#define INIT_TABLE_POS_ReduceAction770 SFT_parser[3117]
+#define COLOR_parser___ReduceAction770___init SFT_parser[3118]
+#define ID_ReduceAction771 SFT_parser[3119]
+#define COLOR_ReduceAction771 SFT_parser[3120]
+#define INIT_TABLE_POS_ReduceAction771 SFT_parser[3121]
+#define COLOR_parser___ReduceAction771___init SFT_parser[3122]
+#define ID_ReduceAction772 SFT_parser[3123]
+#define COLOR_ReduceAction772 SFT_parser[3124]
+#define INIT_TABLE_POS_ReduceAction772 SFT_parser[3125]
+#define COLOR_parser___ReduceAction772___init SFT_parser[3126]
+#define ID_ReduceAction773 SFT_parser[3127]
+#define COLOR_ReduceAction773 SFT_parser[3128]
+#define INIT_TABLE_POS_ReduceAction773 SFT_parser[3129]
+#define COLOR_parser___ReduceAction773___init SFT_parser[3130]
+#define ID_ReduceAction774 SFT_parser[3131]
+#define COLOR_ReduceAction774 SFT_parser[3132]
+#define INIT_TABLE_POS_ReduceAction774 SFT_parser[3133]
+#define COLOR_parser___ReduceAction774___init SFT_parser[3134]
+#define ID_ReduceAction775 SFT_parser[3135]
+#define COLOR_ReduceAction775 SFT_parser[3136]
+#define INIT_TABLE_POS_ReduceAction775 SFT_parser[3137]
+#define COLOR_parser___ReduceAction775___init SFT_parser[3138]
+#define ID_ReduceAction776 SFT_parser[3139]
+#define COLOR_ReduceAction776 SFT_parser[3140]
+#define INIT_TABLE_POS_ReduceAction776 SFT_parser[3141]
+#define COLOR_parser___ReduceAction776___init SFT_parser[3142]
+#define ID_ReduceAction777 SFT_parser[3143]
+#define COLOR_ReduceAction777 SFT_parser[3144]
+#define INIT_TABLE_POS_ReduceAction777 SFT_parser[3145]
+#define COLOR_parser___ReduceAction777___init SFT_parser[3146]
+#define ID_ReduceAction778 SFT_parser[3147]
+#define COLOR_ReduceAction778 SFT_parser[3148]
+#define INIT_TABLE_POS_ReduceAction778 SFT_parser[3149]
+#define COLOR_parser___ReduceAction778___init SFT_parser[3150]
+#define ID_ReduceAction779 SFT_parser[3151]
+#define COLOR_ReduceAction779 SFT_parser[3152]
+#define INIT_TABLE_POS_ReduceAction779 SFT_parser[3153]
+#define COLOR_parser___ReduceAction779___init SFT_parser[3154]
+#define ID_ReduceAction780 SFT_parser[3155]
+#define COLOR_ReduceAction780 SFT_parser[3156]
+#define INIT_TABLE_POS_ReduceAction780 SFT_parser[3157]
+#define COLOR_parser___ReduceAction780___init SFT_parser[3158]
+#define ID_ReduceAction781 SFT_parser[3159]
+#define COLOR_ReduceAction781 SFT_parser[3160]
+#define INIT_TABLE_POS_ReduceAction781 SFT_parser[3161]
+#define COLOR_parser___ReduceAction781___init SFT_parser[3162]
+#define ID_ReduceAction782 SFT_parser[3163]
+#define COLOR_ReduceAction782 SFT_parser[3164]
+#define INIT_TABLE_POS_ReduceAction782 SFT_parser[3165]
+#define COLOR_parser___ReduceAction782___init SFT_parser[3166]
+#define ID_ReduceAction783 SFT_parser[3167]
+#define COLOR_ReduceAction783 SFT_parser[3168]
+#define INIT_TABLE_POS_ReduceAction783 SFT_parser[3169]
+#define COLOR_parser___ReduceAction783___init SFT_parser[3170]
+#define ID_ReduceAction784 SFT_parser[3171]
+#define COLOR_ReduceAction784 SFT_parser[3172]
+#define INIT_TABLE_POS_ReduceAction784 SFT_parser[3173]
+#define COLOR_parser___ReduceAction784___init SFT_parser[3174]
+#define ID_ReduceAction785 SFT_parser[3175]
+#define COLOR_ReduceAction785 SFT_parser[3176]
+#define INIT_TABLE_POS_ReduceAction785 SFT_parser[3177]
+#define COLOR_parser___ReduceAction785___init SFT_parser[3178]
+#define ID_ReduceAction786 SFT_parser[3179]
+#define COLOR_ReduceAction786 SFT_parser[3180]
+#define INIT_TABLE_POS_ReduceAction786 SFT_parser[3181]
+#define COLOR_parser___ReduceAction786___init SFT_parser[3182]
+#define ID_ReduceAction787 SFT_parser[3183]
+#define COLOR_ReduceAction787 SFT_parser[3184]
+#define INIT_TABLE_POS_ReduceAction787 SFT_parser[3185]
+#define COLOR_parser___ReduceAction787___init SFT_parser[3186]
+#define ID_ReduceAction788 SFT_parser[3187]
+#define COLOR_ReduceAction788 SFT_parser[3188]
+#define INIT_TABLE_POS_ReduceAction788 SFT_parser[3189]
+#define COLOR_parser___ReduceAction788___init SFT_parser[3190]
+#define ID_ReduceAction789 SFT_parser[3191]
+#define COLOR_ReduceAction789 SFT_parser[3192]
+#define INIT_TABLE_POS_ReduceAction789 SFT_parser[3193]
+#define COLOR_parser___ReduceAction789___init SFT_parser[3194]
+#define ID_ReduceAction790 SFT_parser[3195]
+#define COLOR_ReduceAction790 SFT_parser[3196]
+#define INIT_TABLE_POS_ReduceAction790 SFT_parser[3197]
+#define COLOR_parser___ReduceAction790___init SFT_parser[3198]
+#define ID_ReduceAction791 SFT_parser[3199]
+#define COLOR_ReduceAction791 SFT_parser[3200]
+#define INIT_TABLE_POS_ReduceAction791 SFT_parser[3201]
+#define COLOR_parser___ReduceAction791___init SFT_parser[3202]
+#define ID_ReduceAction792 SFT_parser[3203]
+#define COLOR_ReduceAction792 SFT_parser[3204]
+#define INIT_TABLE_POS_ReduceAction792 SFT_parser[3205]
+#define COLOR_parser___ReduceAction792___init SFT_parser[3206]
+#define ID_ReduceAction793 SFT_parser[3207]
+#define COLOR_ReduceAction793 SFT_parser[3208]
+#define INIT_TABLE_POS_ReduceAction793 SFT_parser[3209]
+#define COLOR_parser___ReduceAction793___init SFT_parser[3210]
+#define ID_ReduceAction794 SFT_parser[3211]
+#define COLOR_ReduceAction794 SFT_parser[3212]
+#define INIT_TABLE_POS_ReduceAction794 SFT_parser[3213]
+#define COLOR_parser___ReduceAction794___init SFT_parser[3214]
+#define ID_ReduceAction795 SFT_parser[3215]
+#define COLOR_ReduceAction795 SFT_parser[3216]
+#define INIT_TABLE_POS_ReduceAction795 SFT_parser[3217]
+#define COLOR_parser___ReduceAction795___init SFT_parser[3218]
+#define ID_ReduceAction796 SFT_parser[3219]
+#define COLOR_ReduceAction796 SFT_parser[3220]
+#define INIT_TABLE_POS_ReduceAction796 SFT_parser[3221]
+#define COLOR_parser___ReduceAction796___init SFT_parser[3222]
+#define ID_ReduceAction797 SFT_parser[3223]
+#define COLOR_ReduceAction797 SFT_parser[3224]
+#define INIT_TABLE_POS_ReduceAction797 SFT_parser[3225]
+#define COLOR_parser___ReduceAction797___init SFT_parser[3226]
+#define ID_ReduceAction798 SFT_parser[3227]
+#define COLOR_ReduceAction798 SFT_parser[3228]
+#define INIT_TABLE_POS_ReduceAction798 SFT_parser[3229]
+#define COLOR_parser___ReduceAction798___init SFT_parser[3230]
+#define ID_ReduceAction799 SFT_parser[3231]
+#define COLOR_ReduceAction799 SFT_parser[3232]
+#define INIT_TABLE_POS_ReduceAction799 SFT_parser[3233]
+#define COLOR_parser___ReduceAction799___init SFT_parser[3234]
+#define ID_ReduceAction800 SFT_parser[3235]
+#define COLOR_ReduceAction800 SFT_parser[3236]
+#define INIT_TABLE_POS_ReduceAction800 SFT_parser[3237]
+#define COLOR_parser___ReduceAction800___init SFT_parser[3238]
+#define ID_ReduceAction801 SFT_parser[3239]
+#define COLOR_ReduceAction801 SFT_parser[3240]
+#define INIT_TABLE_POS_ReduceAction801 SFT_parser[3241]
+#define COLOR_parser___ReduceAction801___init SFT_parser[3242]
+#define ID_ReduceAction802 SFT_parser[3243]
+#define COLOR_ReduceAction802 SFT_parser[3244]
+#define INIT_TABLE_POS_ReduceAction802 SFT_parser[3245]
+#define COLOR_parser___ReduceAction802___init SFT_parser[3246]
+#define ID_ReduceAction803 SFT_parser[3247]
+#define COLOR_ReduceAction803 SFT_parser[3248]
+#define INIT_TABLE_POS_ReduceAction803 SFT_parser[3249]
+#define COLOR_parser___ReduceAction803___init SFT_parser[3250]
+#define ID_ReduceAction804 SFT_parser[3251]
+#define COLOR_ReduceAction804 SFT_parser[3252]
+#define INIT_TABLE_POS_ReduceAction804 SFT_parser[3253]
+#define COLOR_parser___ReduceAction804___init SFT_parser[3254]
+#define ID_ReduceAction805 SFT_parser[3255]
+#define COLOR_ReduceAction805 SFT_parser[3256]
+#define INIT_TABLE_POS_ReduceAction805 SFT_parser[3257]
+#define COLOR_parser___ReduceAction805___init SFT_parser[3258]
+#define ID_ReduceAction806 SFT_parser[3259]
+#define COLOR_ReduceAction806 SFT_parser[3260]
+#define INIT_TABLE_POS_ReduceAction806 SFT_parser[3261]
+#define COLOR_parser___ReduceAction806___init SFT_parser[3262]
+#define ID_ReduceAction807 SFT_parser[3263]
+#define COLOR_ReduceAction807 SFT_parser[3264]
+#define INIT_TABLE_POS_ReduceAction807 SFT_parser[3265]
+#define COLOR_parser___ReduceAction807___init SFT_parser[3266]
+#define ID_ReduceAction808 SFT_parser[3267]
+#define COLOR_ReduceAction808 SFT_parser[3268]
+#define INIT_TABLE_POS_ReduceAction808 SFT_parser[3269]
+#define COLOR_parser___ReduceAction808___init SFT_parser[3270]
+#define ID_ReduceAction809 SFT_parser[3271]
+#define COLOR_ReduceAction809 SFT_parser[3272]
+#define INIT_TABLE_POS_ReduceAction809 SFT_parser[3273]
+#define COLOR_parser___ReduceAction809___init SFT_parser[3274]
+#define ID_ReduceAction810 SFT_parser[3275]
+#define COLOR_ReduceAction810 SFT_parser[3276]
+#define INIT_TABLE_POS_ReduceAction810 SFT_parser[3277]
+#define COLOR_parser___ReduceAction810___init SFT_parser[3278]
+#define ID_ReduceAction811 SFT_parser[3279]
+#define COLOR_ReduceAction811 SFT_parser[3280]
+#define INIT_TABLE_POS_ReduceAction811 SFT_parser[3281]
+#define COLOR_parser___ReduceAction811___init SFT_parser[3282]
+#define ID_ReduceAction812 SFT_parser[3283]
+#define COLOR_ReduceAction812 SFT_parser[3284]
+#define INIT_TABLE_POS_ReduceAction812 SFT_parser[3285]
+#define COLOR_parser___ReduceAction812___init SFT_parser[3286]
+#define ID_ReduceAction813 SFT_parser[3287]
+#define COLOR_ReduceAction813 SFT_parser[3288]
+#define INIT_TABLE_POS_ReduceAction813 SFT_parser[3289]
+#define COLOR_parser___ReduceAction813___init SFT_parser[3290]
+#define ID_ReduceAction814 SFT_parser[3291]
+#define COLOR_ReduceAction814 SFT_parser[3292]
+#define INIT_TABLE_POS_ReduceAction814 SFT_parser[3293]
+#define COLOR_parser___ReduceAction814___init SFT_parser[3294]
+#define ID_ReduceAction815 SFT_parser[3295]
+#define COLOR_ReduceAction815 SFT_parser[3296]
+#define INIT_TABLE_POS_ReduceAction815 SFT_parser[3297]
+#define COLOR_parser___ReduceAction815___init SFT_parser[3298]
+#define ID_ReduceAction816 SFT_parser[3299]
+#define COLOR_ReduceAction816 SFT_parser[3300]
+#define INIT_TABLE_POS_ReduceAction816 SFT_parser[3301]
+#define COLOR_parser___ReduceAction816___init SFT_parser[3302]
+#define ID_ReduceAction817 SFT_parser[3303]
+#define COLOR_ReduceAction817 SFT_parser[3304]
+#define INIT_TABLE_POS_ReduceAction817 SFT_parser[3305]
+#define COLOR_parser___ReduceAction817___init SFT_parser[3306]
+#define ID_ReduceAction818 SFT_parser[3307]
+#define COLOR_ReduceAction818 SFT_parser[3308]
+#define INIT_TABLE_POS_ReduceAction818 SFT_parser[3309]
+#define COLOR_parser___ReduceAction818___init SFT_parser[3310]
+#define ID_ReduceAction819 SFT_parser[3311]
+#define COLOR_ReduceAction819 SFT_parser[3312]
+#define INIT_TABLE_POS_ReduceAction819 SFT_parser[3313]
+#define COLOR_parser___ReduceAction819___init SFT_parser[3314]
+#define ID_ReduceAction820 SFT_parser[3315]
+#define COLOR_ReduceAction820 SFT_parser[3316]
+#define INIT_TABLE_POS_ReduceAction820 SFT_parser[3317]
+#define COLOR_parser___ReduceAction820___init SFT_parser[3318]
+#define ID_ReduceAction821 SFT_parser[3319]
+#define COLOR_ReduceAction821 SFT_parser[3320]
+#define INIT_TABLE_POS_ReduceAction821 SFT_parser[3321]
+#define COLOR_parser___ReduceAction821___init SFT_parser[3322]
+#define ID_ReduceAction822 SFT_parser[3323]
+#define COLOR_ReduceAction822 SFT_parser[3324]
+#define INIT_TABLE_POS_ReduceAction822 SFT_parser[3325]
+#define COLOR_parser___ReduceAction822___init SFT_parser[3326]
+#define ID_ReduceAction823 SFT_parser[3327]
+#define COLOR_ReduceAction823 SFT_parser[3328]
+#define INIT_TABLE_POS_ReduceAction823 SFT_parser[3329]
+#define COLOR_parser___ReduceAction823___init SFT_parser[3330]
+#define ID_ReduceAction824 SFT_parser[3331]
+#define COLOR_ReduceAction824 SFT_parser[3332]
+#define INIT_TABLE_POS_ReduceAction824 SFT_parser[3333]
+#define COLOR_parser___ReduceAction824___init SFT_parser[3334]
 #define ATTR_parser___State____state(recv) ATTR(recv, COLOR_parser___State____state)
 typedef val_t (* parser___State___state_t)(val_t  self);
 val_t parser___State___state(val_t  self);
@@ -3503,15 +5015,15 @@ void parser___State___nodes__eq(val_t  self, val_t  param0);
 #define LOCATE_parser___State___nodes__eq "parser::State::nodes="
 typedef void (* parser___State___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void parser___State___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser___State___init(val_t  param0, val_t  param1);
 #define LOCATE_parser___State___init "parser::State::init"
+val_t NEW_State_parser___State___init(val_t p0, val_t p1);
 #define ATTR_parser___Parser____lexer(recv) ATTR(recv, COLOR_parser___Parser____lexer)
 #define ATTR_parser___Parser____stack(recv) ATTR(recv, COLOR_parser___Parser____stack)
 #define ATTR_parser___Parser____stack_pos(recv) ATTR(recv, COLOR_parser___Parser____stack_pos)
 typedef void (* parser___Parser___init_t)(val_t  self, val_t  param0, int* init_table);
 void parser___Parser___init(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser___Parser___init(val_t  param0);
 #define LOCATE_parser___Parser___init "parser::Parser::init"
+val_t NEW_Parser_parser___Parser___init(val_t p0);
 typedef val_t (* parser___Parser___go_to_t)(val_t  self, val_t  param0);
 val_t parser___Parser___go_to(val_t  self, val_t  param0);
 #define LOCATE_parser___Parser___go_to "parser::Parser::go_to"
@@ -3531,4031 +5043,5795 @@ val_t parser___Parser___parse(val_t  self);
 typedef void (* parser___Parser___build_reduce_table_t)(val_t  self);
 void parser___Parser___build_reduce_table(val_t  self);
 #define LOCATE_parser___Parser___build_reduce_table "parser::Parser::build_reduce_table"
-#define ATTR_parser___SearchTokensVisitor____untokenned_nodes(recv) ATTR(recv, COLOR_parser___SearchTokensVisitor____untokenned_nodes)
-#define ATTR_parser___SearchTokensVisitor____last_token(recv) ATTR(recv, COLOR_parser___SearchTokensVisitor____last_token)
 typedef void (* parser___SearchTokensVisitor___visit_t)(val_t  self, val_t  param0);
 void parser___SearchTokensVisitor___visit(val_t  self, val_t  param0);
 #define LOCATE_parser___SearchTokensVisitor___visit "parser::SearchTokensVisitor::(parser_prod::Visitor::visit)"
+#define ATTR_parser___SearchTokensVisitor____untokenned_nodes(recv) ATTR(recv, COLOR_parser___SearchTokensVisitor____untokenned_nodes)
+#define ATTR_parser___SearchTokensVisitor____last_token(recv) ATTR(recv, COLOR_parser___SearchTokensVisitor____last_token)
 typedef void (* parser___SearchTokensVisitor___init_t)(val_t  self, int* init_table);
 void parser___SearchTokensVisitor___init(val_t  self, int* init_table);
-val_t NEW_parser___SearchTokensVisitor___init();
 #define LOCATE_parser___SearchTokensVisitor___init "parser::SearchTokensVisitor::init"
+val_t NEW_SearchTokensVisitor_parser___SearchTokensVisitor___init();
 typedef void (* parser___ReduceAction___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction___action "parser::ReduceAction::action"
 typedef void (* parser___ReduceAction___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction___init();
 #define LOCATE_parser___ReduceAction___init "parser::ReduceAction::init"
+val_t NEW_ReduceAction_parser___ReduceAction___init();
 typedef void (* parser___ReduceAction0___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction0___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction0___action "parser::ReduceAction0::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction0___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction0___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction0___init();
 #define LOCATE_parser___ReduceAction0___init "parser::ReduceAction0::init"
+val_t NEW_ReduceAction0_parser___ReduceAction0___init();
 typedef void (* parser___ReduceAction1___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction1___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction1___action "parser::ReduceAction1::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction1___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction1___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction1___init();
 #define LOCATE_parser___ReduceAction1___init "parser::ReduceAction1::init"
+val_t NEW_ReduceAction1_parser___ReduceAction1___init();
 typedef void (* parser___ReduceAction2___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction2___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction2___action "parser::ReduceAction2::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction2___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction2___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction2___init();
 #define LOCATE_parser___ReduceAction2___init "parser::ReduceAction2::init"
+val_t NEW_ReduceAction2_parser___ReduceAction2___init();
 typedef void (* parser___ReduceAction3___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction3___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction3___action "parser::ReduceAction3::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction3___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction3___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction3___init();
 #define LOCATE_parser___ReduceAction3___init "parser::ReduceAction3::init"
+val_t NEW_ReduceAction3_parser___ReduceAction3___init();
 typedef void (* parser___ReduceAction4___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction4___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction4___action "parser::ReduceAction4::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction4___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction4___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction4___init();
 #define LOCATE_parser___ReduceAction4___init "parser::ReduceAction4::init"
+val_t NEW_ReduceAction4_parser___ReduceAction4___init();
 typedef void (* parser___ReduceAction5___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction5___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction5___action "parser::ReduceAction5::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction5___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction5___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction5___init();
 #define LOCATE_parser___ReduceAction5___init "parser::ReduceAction5::init"
+val_t NEW_ReduceAction5_parser___ReduceAction5___init();
 typedef void (* parser___ReduceAction6___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction6___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction6___action "parser::ReduceAction6::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction6___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction6___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction6___init();
 #define LOCATE_parser___ReduceAction6___init "parser::ReduceAction6::init"
+val_t NEW_ReduceAction6_parser___ReduceAction6___init();
 typedef void (* parser___ReduceAction7___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction7___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction7___action "parser::ReduceAction7::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction7___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction7___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction7___init();
 #define LOCATE_parser___ReduceAction7___init "parser::ReduceAction7::init"
+val_t NEW_ReduceAction7_parser___ReduceAction7___init();
 typedef void (* parser___ReduceAction8___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction8___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction8___action "parser::ReduceAction8::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction8___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction8___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction8___init();
 #define LOCATE_parser___ReduceAction8___init "parser::ReduceAction8::init"
+val_t NEW_ReduceAction8_parser___ReduceAction8___init();
 typedef void (* parser___ReduceAction9___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction9___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction9___action "parser::ReduceAction9::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction9___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction9___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction9___init();
 #define LOCATE_parser___ReduceAction9___init "parser::ReduceAction9::init"
+val_t NEW_ReduceAction9_parser___ReduceAction9___init();
 typedef void (* parser___ReduceAction10___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction10___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction10___action "parser::ReduceAction10::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction10___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction10___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction10___init();
 #define LOCATE_parser___ReduceAction10___init "parser::ReduceAction10::init"
+val_t NEW_ReduceAction10_parser___ReduceAction10___init();
 typedef void (* parser___ReduceAction11___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction11___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction11___action "parser::ReduceAction11::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction11___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction11___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction11___init();
 #define LOCATE_parser___ReduceAction11___init "parser::ReduceAction11::init"
+val_t NEW_ReduceAction11_parser___ReduceAction11___init();
 typedef void (* parser___ReduceAction12___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction12___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction12___action "parser::ReduceAction12::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction12___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction12___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction12___init();
 #define LOCATE_parser___ReduceAction12___init "parser::ReduceAction12::init"
+val_t NEW_ReduceAction12_parser___ReduceAction12___init();
 typedef void (* parser___ReduceAction13___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction13___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction13___action "parser::ReduceAction13::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction13___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction13___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction13___init();
 #define LOCATE_parser___ReduceAction13___init "parser::ReduceAction13::init"
+val_t NEW_ReduceAction13_parser___ReduceAction13___init();
 typedef void (* parser___ReduceAction14___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction14___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction14___action "parser::ReduceAction14::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction14___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction14___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction14___init();
 #define LOCATE_parser___ReduceAction14___init "parser::ReduceAction14::init"
+val_t NEW_ReduceAction14_parser___ReduceAction14___init();
 typedef void (* parser___ReduceAction15___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction15___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction15___action "parser::ReduceAction15::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction15___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction15___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction15___init();
 #define LOCATE_parser___ReduceAction15___init "parser::ReduceAction15::init"
+val_t NEW_ReduceAction15_parser___ReduceAction15___init();
 typedef void (* parser___ReduceAction16___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction16___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction16___action "parser::ReduceAction16::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction16___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction16___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction16___init();
 #define LOCATE_parser___ReduceAction16___init "parser::ReduceAction16::init"
+val_t NEW_ReduceAction16_parser___ReduceAction16___init();
 typedef void (* parser___ReduceAction17___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction17___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction17___action "parser::ReduceAction17::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction17___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction17___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction17___init();
 #define LOCATE_parser___ReduceAction17___init "parser::ReduceAction17::init"
+val_t NEW_ReduceAction17_parser___ReduceAction17___init();
 typedef void (* parser___ReduceAction18___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction18___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction18___action "parser::ReduceAction18::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction18___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction18___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction18___init();
 #define LOCATE_parser___ReduceAction18___init "parser::ReduceAction18::init"
+val_t NEW_ReduceAction18_parser___ReduceAction18___init();
 typedef void (* parser___ReduceAction19___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction19___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction19___action "parser::ReduceAction19::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction19___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction19___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction19___init();
 #define LOCATE_parser___ReduceAction19___init "parser::ReduceAction19::init"
+val_t NEW_ReduceAction19_parser___ReduceAction19___init();
 typedef void (* parser___ReduceAction20___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction20___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction20___action "parser::ReduceAction20::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction20___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction20___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction20___init();
 #define LOCATE_parser___ReduceAction20___init "parser::ReduceAction20::init"
+val_t NEW_ReduceAction20_parser___ReduceAction20___init();
 typedef void (* parser___ReduceAction21___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction21___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction21___action "parser::ReduceAction21::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction21___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction21___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction21___init();
 #define LOCATE_parser___ReduceAction21___init "parser::ReduceAction21::init"
+val_t NEW_ReduceAction21_parser___ReduceAction21___init();
 typedef void (* parser___ReduceAction22___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction22___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction22___action "parser::ReduceAction22::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction22___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction22___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction22___init();
 #define LOCATE_parser___ReduceAction22___init "parser::ReduceAction22::init"
+val_t NEW_ReduceAction22_parser___ReduceAction22___init();
 typedef void (* parser___ReduceAction23___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction23___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction23___action "parser::ReduceAction23::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction23___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction23___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction23___init();
 #define LOCATE_parser___ReduceAction23___init "parser::ReduceAction23::init"
+val_t NEW_ReduceAction23_parser___ReduceAction23___init();
 typedef void (* parser___ReduceAction24___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction24___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction24___action "parser::ReduceAction24::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction24___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction24___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction24___init();
 #define LOCATE_parser___ReduceAction24___init "parser::ReduceAction24::init"
+val_t NEW_ReduceAction24_parser___ReduceAction24___init();
 typedef void (* parser___ReduceAction25___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction25___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction25___action "parser::ReduceAction25::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction25___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction25___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction25___init();
 #define LOCATE_parser___ReduceAction25___init "parser::ReduceAction25::init"
+val_t NEW_ReduceAction25_parser___ReduceAction25___init();
 typedef void (* parser___ReduceAction26___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction26___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction26___action "parser::ReduceAction26::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction26___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction26___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction26___init();
 #define LOCATE_parser___ReduceAction26___init "parser::ReduceAction26::init"
+val_t NEW_ReduceAction26_parser___ReduceAction26___init();
 typedef void (* parser___ReduceAction27___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction27___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction27___action "parser::ReduceAction27::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction27___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction27___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction27___init();
 #define LOCATE_parser___ReduceAction27___init "parser::ReduceAction27::init"
+val_t NEW_ReduceAction27_parser___ReduceAction27___init();
 typedef void (* parser___ReduceAction28___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction28___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction28___action "parser::ReduceAction28::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction28___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction28___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction28___init();
 #define LOCATE_parser___ReduceAction28___init "parser::ReduceAction28::init"
+val_t NEW_ReduceAction28_parser___ReduceAction28___init();
 typedef void (* parser___ReduceAction29___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction29___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction29___action "parser::ReduceAction29::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction29___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction29___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction29___init();
 #define LOCATE_parser___ReduceAction29___init "parser::ReduceAction29::init"
+val_t NEW_ReduceAction29_parser___ReduceAction29___init();
 typedef void (* parser___ReduceAction30___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction30___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction30___action "parser::ReduceAction30::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction30___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction30___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction30___init();
 #define LOCATE_parser___ReduceAction30___init "parser::ReduceAction30::init"
+val_t NEW_ReduceAction30_parser___ReduceAction30___init();
 typedef void (* parser___ReduceAction31___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction31___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction31___action "parser::ReduceAction31::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction31___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction31___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction31___init();
 #define LOCATE_parser___ReduceAction31___init "parser::ReduceAction31::init"
+val_t NEW_ReduceAction31_parser___ReduceAction31___init();
 typedef void (* parser___ReduceAction32___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction32___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction32___action "parser::ReduceAction32::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction32___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction32___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction32___init();
 #define LOCATE_parser___ReduceAction32___init "parser::ReduceAction32::init"
+val_t NEW_ReduceAction32_parser___ReduceAction32___init();
 typedef void (* parser___ReduceAction33___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction33___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction33___action "parser::ReduceAction33::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction33___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction33___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction33___init();
 #define LOCATE_parser___ReduceAction33___init "parser::ReduceAction33::init"
+val_t NEW_ReduceAction33_parser___ReduceAction33___init();
 typedef void (* parser___ReduceAction34___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction34___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction34___action "parser::ReduceAction34::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction34___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction34___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction34___init();
 #define LOCATE_parser___ReduceAction34___init "parser::ReduceAction34::init"
+val_t NEW_ReduceAction34_parser___ReduceAction34___init();
 typedef void (* parser___ReduceAction35___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction35___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction35___action "parser::ReduceAction35::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction35___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction35___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction35___init();
 #define LOCATE_parser___ReduceAction35___init "parser::ReduceAction35::init"
+val_t NEW_ReduceAction35_parser___ReduceAction35___init();
 typedef void (* parser___ReduceAction36___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction36___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction36___action "parser::ReduceAction36::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction36___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction36___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction36___init();
 #define LOCATE_parser___ReduceAction36___init "parser::ReduceAction36::init"
+val_t NEW_ReduceAction36_parser___ReduceAction36___init();
 typedef void (* parser___ReduceAction37___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction37___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction37___action "parser::ReduceAction37::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction37___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction37___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction37___init();
 #define LOCATE_parser___ReduceAction37___init "parser::ReduceAction37::init"
+val_t NEW_ReduceAction37_parser___ReduceAction37___init();
 typedef void (* parser___ReduceAction38___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction38___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction38___action "parser::ReduceAction38::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction38___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction38___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction38___init();
 #define LOCATE_parser___ReduceAction38___init "parser::ReduceAction38::init"
+val_t NEW_ReduceAction38_parser___ReduceAction38___init();
 typedef void (* parser___ReduceAction39___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction39___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction39___action "parser::ReduceAction39::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction39___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction39___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction39___init();
 #define LOCATE_parser___ReduceAction39___init "parser::ReduceAction39::init"
+val_t NEW_ReduceAction39_parser___ReduceAction39___init();
 typedef void (* parser___ReduceAction40___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction40___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction40___action "parser::ReduceAction40::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction40___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction40___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction40___init();
 #define LOCATE_parser___ReduceAction40___init "parser::ReduceAction40::init"
+val_t NEW_ReduceAction40_parser___ReduceAction40___init();
 typedef void (* parser___ReduceAction41___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction41___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction41___action "parser::ReduceAction41::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction41___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction41___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction41___init();
 #define LOCATE_parser___ReduceAction41___init "parser::ReduceAction41::init"
+val_t NEW_ReduceAction41_parser___ReduceAction41___init();
 typedef void (* parser___ReduceAction42___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction42___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction42___action "parser::ReduceAction42::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction42___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction42___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction42___init();
 #define LOCATE_parser___ReduceAction42___init "parser::ReduceAction42::init"
+val_t NEW_ReduceAction42_parser___ReduceAction42___init();
 typedef void (* parser___ReduceAction43___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction43___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction43___action "parser::ReduceAction43::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction43___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction43___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction43___init();
 #define LOCATE_parser___ReduceAction43___init "parser::ReduceAction43::init"
+val_t NEW_ReduceAction43_parser___ReduceAction43___init();
 typedef void (* parser___ReduceAction44___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction44___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction44___action "parser::ReduceAction44::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction44___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction44___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction44___init();
 #define LOCATE_parser___ReduceAction44___init "parser::ReduceAction44::init"
+val_t NEW_ReduceAction44_parser___ReduceAction44___init();
 typedef void (* parser___ReduceAction45___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction45___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction45___action "parser::ReduceAction45::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction45___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction45___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction45___init();
 #define LOCATE_parser___ReduceAction45___init "parser::ReduceAction45::init"
+val_t NEW_ReduceAction45_parser___ReduceAction45___init();
 typedef void (* parser___ReduceAction46___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction46___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction46___action "parser::ReduceAction46::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction46___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction46___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction46___init();
 #define LOCATE_parser___ReduceAction46___init "parser::ReduceAction46::init"
+val_t NEW_ReduceAction46_parser___ReduceAction46___init();
 typedef void (* parser___ReduceAction47___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction47___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction47___action "parser::ReduceAction47::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction47___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction47___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction47___init();
 #define LOCATE_parser___ReduceAction47___init "parser::ReduceAction47::init"
+val_t NEW_ReduceAction47_parser___ReduceAction47___init();
 typedef void (* parser___ReduceAction48___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction48___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction48___action "parser::ReduceAction48::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction48___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction48___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction48___init();
 #define LOCATE_parser___ReduceAction48___init "parser::ReduceAction48::init"
+val_t NEW_ReduceAction48_parser___ReduceAction48___init();
 typedef void (* parser___ReduceAction49___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction49___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction49___action "parser::ReduceAction49::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction49___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction49___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction49___init();
 #define LOCATE_parser___ReduceAction49___init "parser::ReduceAction49::init"
+val_t NEW_ReduceAction49_parser___ReduceAction49___init();
 typedef void (* parser___ReduceAction50___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction50___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction50___action "parser::ReduceAction50::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction50___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction50___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction50___init();
 #define LOCATE_parser___ReduceAction50___init "parser::ReduceAction50::init"
+val_t NEW_ReduceAction50_parser___ReduceAction50___init();
 typedef void (* parser___ReduceAction51___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction51___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction51___action "parser::ReduceAction51::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction51___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction51___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction51___init();
 #define LOCATE_parser___ReduceAction51___init "parser::ReduceAction51::init"
+val_t NEW_ReduceAction51_parser___ReduceAction51___init();
 typedef void (* parser___ReduceAction52___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction52___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction52___action "parser::ReduceAction52::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction52___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction52___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction52___init();
 #define LOCATE_parser___ReduceAction52___init "parser::ReduceAction52::init"
+val_t NEW_ReduceAction52_parser___ReduceAction52___init();
 typedef void (* parser___ReduceAction53___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction53___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction53___action "parser::ReduceAction53::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction53___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction53___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction53___init();
 #define LOCATE_parser___ReduceAction53___init "parser::ReduceAction53::init"
+val_t NEW_ReduceAction53_parser___ReduceAction53___init();
 typedef void (* parser___ReduceAction54___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction54___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction54___action "parser::ReduceAction54::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction54___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction54___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction54___init();
 #define LOCATE_parser___ReduceAction54___init "parser::ReduceAction54::init"
+val_t NEW_ReduceAction54_parser___ReduceAction54___init();
 typedef void (* parser___ReduceAction55___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction55___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction55___action "parser::ReduceAction55::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction55___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction55___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction55___init();
 #define LOCATE_parser___ReduceAction55___init "parser::ReduceAction55::init"
+val_t NEW_ReduceAction55_parser___ReduceAction55___init();
 typedef void (* parser___ReduceAction56___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction56___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction56___action "parser::ReduceAction56::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction56___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction56___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction56___init();
 #define LOCATE_parser___ReduceAction56___init "parser::ReduceAction56::init"
+val_t NEW_ReduceAction56_parser___ReduceAction56___init();
 typedef void (* parser___ReduceAction57___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction57___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction57___action "parser::ReduceAction57::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction57___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction57___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction57___init();
 #define LOCATE_parser___ReduceAction57___init "parser::ReduceAction57::init"
+val_t NEW_ReduceAction57_parser___ReduceAction57___init();
 typedef void (* parser___ReduceAction58___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction58___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction58___action "parser::ReduceAction58::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction58___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction58___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction58___init();
 #define LOCATE_parser___ReduceAction58___init "parser::ReduceAction58::init"
+val_t NEW_ReduceAction58_parser___ReduceAction58___init();
 typedef void (* parser___ReduceAction59___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction59___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction59___action "parser::ReduceAction59::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction59___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction59___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction59___init();
 #define LOCATE_parser___ReduceAction59___init "parser::ReduceAction59::init"
+val_t NEW_ReduceAction59_parser___ReduceAction59___init();
 typedef void (* parser___ReduceAction60___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction60___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction60___action "parser::ReduceAction60::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction60___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction60___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction60___init();
 #define LOCATE_parser___ReduceAction60___init "parser::ReduceAction60::init"
+val_t NEW_ReduceAction60_parser___ReduceAction60___init();
 typedef void (* parser___ReduceAction61___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction61___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction61___action "parser::ReduceAction61::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction61___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction61___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction61___init();
 #define LOCATE_parser___ReduceAction61___init "parser::ReduceAction61::init"
+val_t NEW_ReduceAction61_parser___ReduceAction61___init();
 typedef void (* parser___ReduceAction62___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction62___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction62___action "parser::ReduceAction62::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction62___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction62___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction62___init();
 #define LOCATE_parser___ReduceAction62___init "parser::ReduceAction62::init"
+val_t NEW_ReduceAction62_parser___ReduceAction62___init();
 typedef void (* parser___ReduceAction63___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction63___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction63___action "parser::ReduceAction63::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction63___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction63___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction63___init();
 #define LOCATE_parser___ReduceAction63___init "parser::ReduceAction63::init"
+val_t NEW_ReduceAction63_parser___ReduceAction63___init();
 typedef void (* parser___ReduceAction64___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction64___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction64___action "parser::ReduceAction64::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction64___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction64___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction64___init();
 #define LOCATE_parser___ReduceAction64___init "parser::ReduceAction64::init"
+val_t NEW_ReduceAction64_parser___ReduceAction64___init();
 typedef void (* parser___ReduceAction65___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction65___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction65___action "parser::ReduceAction65::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction65___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction65___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction65___init();
 #define LOCATE_parser___ReduceAction65___init "parser::ReduceAction65::init"
+val_t NEW_ReduceAction65_parser___ReduceAction65___init();
 typedef void (* parser___ReduceAction66___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction66___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction66___action "parser::ReduceAction66::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction66___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction66___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction66___init();
 #define LOCATE_parser___ReduceAction66___init "parser::ReduceAction66::init"
+val_t NEW_ReduceAction66_parser___ReduceAction66___init();
 typedef void (* parser___ReduceAction67___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction67___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction67___action "parser::ReduceAction67::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction67___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction67___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction67___init();
 #define LOCATE_parser___ReduceAction67___init "parser::ReduceAction67::init"
+val_t NEW_ReduceAction67_parser___ReduceAction67___init();
 typedef void (* parser___ReduceAction68___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction68___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction68___action "parser::ReduceAction68::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction68___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction68___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction68___init();
 #define LOCATE_parser___ReduceAction68___init "parser::ReduceAction68::init"
+val_t NEW_ReduceAction68_parser___ReduceAction68___init();
 typedef void (* parser___ReduceAction69___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction69___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction69___action "parser::ReduceAction69::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction69___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction69___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction69___init();
 #define LOCATE_parser___ReduceAction69___init "parser::ReduceAction69::init"
+val_t NEW_ReduceAction69_parser___ReduceAction69___init();
 typedef void (* parser___ReduceAction70___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction70___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction70___action "parser::ReduceAction70::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction70___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction70___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction70___init();
 #define LOCATE_parser___ReduceAction70___init "parser::ReduceAction70::init"
+val_t NEW_ReduceAction70_parser___ReduceAction70___init();
 typedef void (* parser___ReduceAction71___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction71___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction71___action "parser::ReduceAction71::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction71___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction71___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction71___init();
 #define LOCATE_parser___ReduceAction71___init "parser::ReduceAction71::init"
+val_t NEW_ReduceAction71_parser___ReduceAction71___init();
 typedef void (* parser___ReduceAction72___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction72___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction72___action "parser::ReduceAction72::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction72___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction72___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction72___init();
 #define LOCATE_parser___ReduceAction72___init "parser::ReduceAction72::init"
+val_t NEW_ReduceAction72_parser___ReduceAction72___init();
 typedef void (* parser___ReduceAction73___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction73___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction73___action "parser::ReduceAction73::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction73___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction73___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction73___init();
 #define LOCATE_parser___ReduceAction73___init "parser::ReduceAction73::init"
+val_t NEW_ReduceAction73_parser___ReduceAction73___init();
 typedef void (* parser___ReduceAction74___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction74___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction74___action "parser::ReduceAction74::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction74___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction74___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction74___init();
 #define LOCATE_parser___ReduceAction74___init "parser::ReduceAction74::init"
+val_t NEW_ReduceAction74_parser___ReduceAction74___init();
 typedef void (* parser___ReduceAction75___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction75___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction75___action "parser::ReduceAction75::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction75___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction75___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction75___init();
 #define LOCATE_parser___ReduceAction75___init "parser::ReduceAction75::init"
+val_t NEW_ReduceAction75_parser___ReduceAction75___init();
 typedef void (* parser___ReduceAction76___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction76___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction76___action "parser::ReduceAction76::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction76___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction76___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction76___init();
 #define LOCATE_parser___ReduceAction76___init "parser::ReduceAction76::init"
+val_t NEW_ReduceAction76_parser___ReduceAction76___init();
 typedef void (* parser___ReduceAction77___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction77___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction77___action "parser::ReduceAction77::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction77___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction77___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction77___init();
 #define LOCATE_parser___ReduceAction77___init "parser::ReduceAction77::init"
+val_t NEW_ReduceAction77_parser___ReduceAction77___init();
 typedef void (* parser___ReduceAction78___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction78___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction78___action "parser::ReduceAction78::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction78___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction78___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction78___init();
 #define LOCATE_parser___ReduceAction78___init "parser::ReduceAction78::init"
+val_t NEW_ReduceAction78_parser___ReduceAction78___init();
 typedef void (* parser___ReduceAction79___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction79___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction79___action "parser::ReduceAction79::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction79___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction79___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction79___init();
 #define LOCATE_parser___ReduceAction79___init "parser::ReduceAction79::init"
+val_t NEW_ReduceAction79_parser___ReduceAction79___init();
 typedef void (* parser___ReduceAction80___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction80___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction80___action "parser::ReduceAction80::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction80___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction80___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction80___init();
 #define LOCATE_parser___ReduceAction80___init "parser::ReduceAction80::init"
+val_t NEW_ReduceAction80_parser___ReduceAction80___init();
 typedef void (* parser___ReduceAction81___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction81___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction81___action "parser::ReduceAction81::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction81___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction81___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction81___init();
 #define LOCATE_parser___ReduceAction81___init "parser::ReduceAction81::init"
+val_t NEW_ReduceAction81_parser___ReduceAction81___init();
 typedef void (* parser___ReduceAction82___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction82___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction82___action "parser::ReduceAction82::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction82___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction82___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction82___init();
 #define LOCATE_parser___ReduceAction82___init "parser::ReduceAction82::init"
+val_t NEW_ReduceAction82_parser___ReduceAction82___init();
 typedef void (* parser___ReduceAction83___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction83___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction83___action "parser::ReduceAction83::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction83___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction83___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction83___init();
 #define LOCATE_parser___ReduceAction83___init "parser::ReduceAction83::init"
+val_t NEW_ReduceAction83_parser___ReduceAction83___init();
 typedef void (* parser___ReduceAction84___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction84___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction84___action "parser::ReduceAction84::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction84___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction84___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction84___init();
 #define LOCATE_parser___ReduceAction84___init "parser::ReduceAction84::init"
+val_t NEW_ReduceAction84_parser___ReduceAction84___init();
 typedef void (* parser___ReduceAction85___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction85___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction85___action "parser::ReduceAction85::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction85___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction85___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction85___init();
 #define LOCATE_parser___ReduceAction85___init "parser::ReduceAction85::init"
+val_t NEW_ReduceAction85_parser___ReduceAction85___init();
 typedef void (* parser___ReduceAction86___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction86___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction86___action "parser::ReduceAction86::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction86___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction86___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction86___init();
 #define LOCATE_parser___ReduceAction86___init "parser::ReduceAction86::init"
+val_t NEW_ReduceAction86_parser___ReduceAction86___init();
 typedef void (* parser___ReduceAction87___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction87___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction87___action "parser::ReduceAction87::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction87___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction87___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction87___init();
 #define LOCATE_parser___ReduceAction87___init "parser::ReduceAction87::init"
+val_t NEW_ReduceAction87_parser___ReduceAction87___init();
 typedef void (* parser___ReduceAction88___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction88___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction88___action "parser::ReduceAction88::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction88___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction88___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction88___init();
 #define LOCATE_parser___ReduceAction88___init "parser::ReduceAction88::init"
+val_t NEW_ReduceAction88_parser___ReduceAction88___init();
 typedef void (* parser___ReduceAction89___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction89___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction89___action "parser::ReduceAction89::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction89___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction89___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction89___init();
 #define LOCATE_parser___ReduceAction89___init "parser::ReduceAction89::init"
+val_t NEW_ReduceAction89_parser___ReduceAction89___init();
 typedef void (* parser___ReduceAction90___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction90___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction90___action "parser::ReduceAction90::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction90___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction90___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction90___init();
 #define LOCATE_parser___ReduceAction90___init "parser::ReduceAction90::init"
+val_t NEW_ReduceAction90_parser___ReduceAction90___init();
 typedef void (* parser___ReduceAction91___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction91___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction91___action "parser::ReduceAction91::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction91___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction91___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction91___init();
 #define LOCATE_parser___ReduceAction91___init "parser::ReduceAction91::init"
+val_t NEW_ReduceAction91_parser___ReduceAction91___init();
 typedef void (* parser___ReduceAction92___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction92___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction92___action "parser::ReduceAction92::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction92___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction92___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction92___init();
 #define LOCATE_parser___ReduceAction92___init "parser::ReduceAction92::init"
+val_t NEW_ReduceAction92_parser___ReduceAction92___init();
 typedef void (* parser___ReduceAction93___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction93___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction93___action "parser::ReduceAction93::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction93___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction93___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction93___init();
 #define LOCATE_parser___ReduceAction93___init "parser::ReduceAction93::init"
+val_t NEW_ReduceAction93_parser___ReduceAction93___init();
 typedef void (* parser___ReduceAction94___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction94___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction94___action "parser::ReduceAction94::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction94___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction94___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction94___init();
 #define LOCATE_parser___ReduceAction94___init "parser::ReduceAction94::init"
+val_t NEW_ReduceAction94_parser___ReduceAction94___init();
 typedef void (* parser___ReduceAction95___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction95___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction95___action "parser::ReduceAction95::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction95___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction95___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction95___init();
 #define LOCATE_parser___ReduceAction95___init "parser::ReduceAction95::init"
+val_t NEW_ReduceAction95_parser___ReduceAction95___init();
 typedef void (* parser___ReduceAction96___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction96___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction96___action "parser::ReduceAction96::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction96___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction96___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction96___init();
 #define LOCATE_parser___ReduceAction96___init "parser::ReduceAction96::init"
+val_t NEW_ReduceAction96_parser___ReduceAction96___init();
 typedef void (* parser___ReduceAction97___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction97___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction97___action "parser::ReduceAction97::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction97___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction97___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction97___init();
 #define LOCATE_parser___ReduceAction97___init "parser::ReduceAction97::init"
+val_t NEW_ReduceAction97_parser___ReduceAction97___init();
 typedef void (* parser___ReduceAction98___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction98___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction98___action "parser::ReduceAction98::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction98___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction98___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction98___init();
 #define LOCATE_parser___ReduceAction98___init "parser::ReduceAction98::init"
+val_t NEW_ReduceAction98_parser___ReduceAction98___init();
 typedef void (* parser___ReduceAction99___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction99___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction99___action "parser::ReduceAction99::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction99___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction99___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction99___init();
 #define LOCATE_parser___ReduceAction99___init "parser::ReduceAction99::init"
+val_t NEW_ReduceAction99_parser___ReduceAction99___init();
 typedef void (* parser___ReduceAction100___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction100___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction100___action "parser::ReduceAction100::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction100___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction100___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction100___init();
 #define LOCATE_parser___ReduceAction100___init "parser::ReduceAction100::init"
+val_t NEW_ReduceAction100_parser___ReduceAction100___init();
 typedef void (* parser___ReduceAction101___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction101___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction101___action "parser::ReduceAction101::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction101___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction101___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction101___init();
 #define LOCATE_parser___ReduceAction101___init "parser::ReduceAction101::init"
+val_t NEW_ReduceAction101_parser___ReduceAction101___init();
 typedef void (* parser___ReduceAction102___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction102___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction102___action "parser::ReduceAction102::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction102___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction102___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction102___init();
 #define LOCATE_parser___ReduceAction102___init "parser::ReduceAction102::init"
+val_t NEW_ReduceAction102_parser___ReduceAction102___init();
 typedef void (* parser___ReduceAction103___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction103___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction103___action "parser::ReduceAction103::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction103___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction103___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction103___init();
 #define LOCATE_parser___ReduceAction103___init "parser::ReduceAction103::init"
+val_t NEW_ReduceAction103_parser___ReduceAction103___init();
 typedef void (* parser___ReduceAction104___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction104___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction104___action "parser::ReduceAction104::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction104___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction104___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction104___init();
 #define LOCATE_parser___ReduceAction104___init "parser::ReduceAction104::init"
+val_t NEW_ReduceAction104_parser___ReduceAction104___init();
 typedef void (* parser___ReduceAction105___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction105___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction105___action "parser::ReduceAction105::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction105___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction105___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction105___init();
 #define LOCATE_parser___ReduceAction105___init "parser::ReduceAction105::init"
+val_t NEW_ReduceAction105_parser___ReduceAction105___init();
 typedef void (* parser___ReduceAction106___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction106___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction106___action "parser::ReduceAction106::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction106___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction106___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction106___init();
 #define LOCATE_parser___ReduceAction106___init "parser::ReduceAction106::init"
+val_t NEW_ReduceAction106_parser___ReduceAction106___init();
 typedef void (* parser___ReduceAction107___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction107___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction107___action "parser::ReduceAction107::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction107___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction107___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction107___init();
 #define LOCATE_parser___ReduceAction107___init "parser::ReduceAction107::init"
+val_t NEW_ReduceAction107_parser___ReduceAction107___init();
 typedef void (* parser___ReduceAction108___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction108___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction108___action "parser::ReduceAction108::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction108___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction108___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction108___init();
 #define LOCATE_parser___ReduceAction108___init "parser::ReduceAction108::init"
+val_t NEW_ReduceAction108_parser___ReduceAction108___init();
 typedef void (* parser___ReduceAction109___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction109___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction109___action "parser::ReduceAction109::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction109___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction109___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction109___init();
 #define LOCATE_parser___ReduceAction109___init "parser::ReduceAction109::init"
+val_t NEW_ReduceAction109_parser___ReduceAction109___init();
 typedef void (* parser___ReduceAction110___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction110___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction110___action "parser::ReduceAction110::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction110___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction110___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction110___init();
 #define LOCATE_parser___ReduceAction110___init "parser::ReduceAction110::init"
+val_t NEW_ReduceAction110_parser___ReduceAction110___init();
 typedef void (* parser___ReduceAction111___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction111___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction111___action "parser::ReduceAction111::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction111___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction111___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction111___init();
 #define LOCATE_parser___ReduceAction111___init "parser::ReduceAction111::init"
+val_t NEW_ReduceAction111_parser___ReduceAction111___init();
 typedef void (* parser___ReduceAction112___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction112___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction112___action "parser::ReduceAction112::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction112___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction112___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction112___init();
 #define LOCATE_parser___ReduceAction112___init "parser::ReduceAction112::init"
+val_t NEW_ReduceAction112_parser___ReduceAction112___init();
 typedef void (* parser___ReduceAction113___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction113___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction113___action "parser::ReduceAction113::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction113___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction113___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction113___init();
 #define LOCATE_parser___ReduceAction113___init "parser::ReduceAction113::init"
+val_t NEW_ReduceAction113_parser___ReduceAction113___init();
 typedef void (* parser___ReduceAction114___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction114___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction114___action "parser::ReduceAction114::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction114___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction114___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction114___init();
 #define LOCATE_parser___ReduceAction114___init "parser::ReduceAction114::init"
+val_t NEW_ReduceAction114_parser___ReduceAction114___init();
 typedef void (* parser___ReduceAction115___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction115___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction115___action "parser::ReduceAction115::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction115___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction115___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction115___init();
 #define LOCATE_parser___ReduceAction115___init "parser::ReduceAction115::init"
+val_t NEW_ReduceAction115_parser___ReduceAction115___init();
 typedef void (* parser___ReduceAction116___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction116___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction116___action "parser::ReduceAction116::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction116___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction116___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction116___init();
 #define LOCATE_parser___ReduceAction116___init "parser::ReduceAction116::init"
+val_t NEW_ReduceAction116_parser___ReduceAction116___init();
 typedef void (* parser___ReduceAction117___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction117___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction117___action "parser::ReduceAction117::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction117___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction117___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction117___init();
 #define LOCATE_parser___ReduceAction117___init "parser::ReduceAction117::init"
+val_t NEW_ReduceAction117_parser___ReduceAction117___init();
 typedef void (* parser___ReduceAction118___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction118___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction118___action "parser::ReduceAction118::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction118___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction118___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction118___init();
 #define LOCATE_parser___ReduceAction118___init "parser::ReduceAction118::init"
+val_t NEW_ReduceAction118_parser___ReduceAction118___init();
 typedef void (* parser___ReduceAction119___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction119___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction119___action "parser::ReduceAction119::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction119___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction119___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction119___init();
 #define LOCATE_parser___ReduceAction119___init "parser::ReduceAction119::init"
+val_t NEW_ReduceAction119_parser___ReduceAction119___init();
 typedef void (* parser___ReduceAction120___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction120___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction120___action "parser::ReduceAction120::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction120___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction120___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction120___init();
 #define LOCATE_parser___ReduceAction120___init "parser::ReduceAction120::init"
+val_t NEW_ReduceAction120_parser___ReduceAction120___init();
 typedef void (* parser___ReduceAction121___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction121___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction121___action "parser::ReduceAction121::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction121___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction121___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction121___init();
 #define LOCATE_parser___ReduceAction121___init "parser::ReduceAction121::init"
+val_t NEW_ReduceAction121_parser___ReduceAction121___init();
 typedef void (* parser___ReduceAction122___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction122___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction122___action "parser::ReduceAction122::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction122___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction122___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction122___init();
 #define LOCATE_parser___ReduceAction122___init "parser::ReduceAction122::init"
+val_t NEW_ReduceAction122_parser___ReduceAction122___init();
 typedef void (* parser___ReduceAction123___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction123___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction123___action "parser::ReduceAction123::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction123___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction123___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction123___init();
 #define LOCATE_parser___ReduceAction123___init "parser::ReduceAction123::init"
+val_t NEW_ReduceAction123_parser___ReduceAction123___init();
 typedef void (* parser___ReduceAction124___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction124___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction124___action "parser::ReduceAction124::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction124___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction124___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction124___init();
 #define LOCATE_parser___ReduceAction124___init "parser::ReduceAction124::init"
+val_t NEW_ReduceAction124_parser___ReduceAction124___init();
 typedef void (* parser___ReduceAction125___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction125___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction125___action "parser::ReduceAction125::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction125___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction125___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction125___init();
 #define LOCATE_parser___ReduceAction125___init "parser::ReduceAction125::init"
+val_t NEW_ReduceAction125_parser___ReduceAction125___init();
 typedef void (* parser___ReduceAction126___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction126___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction126___action "parser::ReduceAction126::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction126___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction126___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction126___init();
 #define LOCATE_parser___ReduceAction126___init "parser::ReduceAction126::init"
+val_t NEW_ReduceAction126_parser___ReduceAction126___init();
 typedef void (* parser___ReduceAction127___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction127___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction127___action "parser::ReduceAction127::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction127___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction127___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction127___init();
 #define LOCATE_parser___ReduceAction127___init "parser::ReduceAction127::init"
+val_t NEW_ReduceAction127_parser___ReduceAction127___init();
 typedef void (* parser___ReduceAction128___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction128___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction128___action "parser::ReduceAction128::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction128___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction128___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction128___init();
 #define LOCATE_parser___ReduceAction128___init "parser::ReduceAction128::init"
+val_t NEW_ReduceAction128_parser___ReduceAction128___init();
 typedef void (* parser___ReduceAction129___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction129___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction129___action "parser::ReduceAction129::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction129___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction129___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction129___init();
 #define LOCATE_parser___ReduceAction129___init "parser::ReduceAction129::init"
+val_t NEW_ReduceAction129_parser___ReduceAction129___init();
 typedef void (* parser___ReduceAction130___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction130___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction130___action "parser::ReduceAction130::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction130___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction130___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction130___init();
 #define LOCATE_parser___ReduceAction130___init "parser::ReduceAction130::init"
+val_t NEW_ReduceAction130_parser___ReduceAction130___init();
 typedef void (* parser___ReduceAction131___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction131___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction131___action "parser::ReduceAction131::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction131___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction131___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction131___init();
 #define LOCATE_parser___ReduceAction131___init "parser::ReduceAction131::init"
+val_t NEW_ReduceAction131_parser___ReduceAction131___init();
 typedef void (* parser___ReduceAction132___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction132___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction132___action "parser::ReduceAction132::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction132___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction132___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction132___init();
 #define LOCATE_parser___ReduceAction132___init "parser::ReduceAction132::init"
+val_t NEW_ReduceAction132_parser___ReduceAction132___init();
 typedef void (* parser___ReduceAction133___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction133___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction133___action "parser::ReduceAction133::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction133___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction133___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction133___init();
 #define LOCATE_parser___ReduceAction133___init "parser::ReduceAction133::init"
+val_t NEW_ReduceAction133_parser___ReduceAction133___init();
 typedef void (* parser___ReduceAction134___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction134___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction134___action "parser::ReduceAction134::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction134___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction134___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction134___init();
 #define LOCATE_parser___ReduceAction134___init "parser::ReduceAction134::init"
+val_t NEW_ReduceAction134_parser___ReduceAction134___init();
 typedef void (* parser___ReduceAction135___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction135___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction135___action "parser::ReduceAction135::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction135___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction135___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction135___init();
 #define LOCATE_parser___ReduceAction135___init "parser::ReduceAction135::init"
+val_t NEW_ReduceAction135_parser___ReduceAction135___init();
 typedef void (* parser___ReduceAction136___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction136___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction136___action "parser::ReduceAction136::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction136___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction136___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction136___init();
 #define LOCATE_parser___ReduceAction136___init "parser::ReduceAction136::init"
+val_t NEW_ReduceAction136_parser___ReduceAction136___init();
 typedef void (* parser___ReduceAction137___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction137___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction137___action "parser::ReduceAction137::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction137___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction137___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction137___init();
 #define LOCATE_parser___ReduceAction137___init "parser::ReduceAction137::init"
+val_t NEW_ReduceAction137_parser___ReduceAction137___init();
 typedef void (* parser___ReduceAction138___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction138___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction138___action "parser::ReduceAction138::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction138___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction138___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction138___init();
 #define LOCATE_parser___ReduceAction138___init "parser::ReduceAction138::init"
+val_t NEW_ReduceAction138_parser___ReduceAction138___init();
 typedef void (* parser___ReduceAction139___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction139___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction139___action "parser::ReduceAction139::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction139___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction139___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction139___init();
 #define LOCATE_parser___ReduceAction139___init "parser::ReduceAction139::init"
+val_t NEW_ReduceAction139_parser___ReduceAction139___init();
 typedef void (* parser___ReduceAction140___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction140___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction140___action "parser::ReduceAction140::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction140___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction140___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction140___init();
 #define LOCATE_parser___ReduceAction140___init "parser::ReduceAction140::init"
+val_t NEW_ReduceAction140_parser___ReduceAction140___init();
 typedef void (* parser___ReduceAction141___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction141___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction141___action "parser::ReduceAction141::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction141___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction141___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction141___init();
 #define LOCATE_parser___ReduceAction141___init "parser::ReduceAction141::init"
+val_t NEW_ReduceAction141_parser___ReduceAction141___init();
 typedef void (* parser___ReduceAction142___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction142___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction142___action "parser::ReduceAction142::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction142___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction142___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction142___init();
 #define LOCATE_parser___ReduceAction142___init "parser::ReduceAction142::init"
+val_t NEW_ReduceAction142_parser___ReduceAction142___init();
 typedef void (* parser___ReduceAction143___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction143___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction143___action "parser::ReduceAction143::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction143___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction143___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction143___init();
 #define LOCATE_parser___ReduceAction143___init "parser::ReduceAction143::init"
+val_t NEW_ReduceAction143_parser___ReduceAction143___init();
 typedef void (* parser___ReduceAction144___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction144___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction144___action "parser::ReduceAction144::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction144___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction144___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction144___init();
 #define LOCATE_parser___ReduceAction144___init "parser::ReduceAction144::init"
+val_t NEW_ReduceAction144_parser___ReduceAction144___init();
 typedef void (* parser___ReduceAction145___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction145___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction145___action "parser::ReduceAction145::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction145___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction145___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction145___init();
 #define LOCATE_parser___ReduceAction145___init "parser::ReduceAction145::init"
+val_t NEW_ReduceAction145_parser___ReduceAction145___init();
 typedef void (* parser___ReduceAction146___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction146___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction146___action "parser::ReduceAction146::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction146___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction146___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction146___init();
 #define LOCATE_parser___ReduceAction146___init "parser::ReduceAction146::init"
+val_t NEW_ReduceAction146_parser___ReduceAction146___init();
 typedef void (* parser___ReduceAction147___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction147___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction147___action "parser::ReduceAction147::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction147___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction147___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction147___init();
 #define LOCATE_parser___ReduceAction147___init "parser::ReduceAction147::init"
+val_t NEW_ReduceAction147_parser___ReduceAction147___init();
 typedef void (* parser___ReduceAction148___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction148___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction148___action "parser::ReduceAction148::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction148___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction148___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction148___init();
 #define LOCATE_parser___ReduceAction148___init "parser::ReduceAction148::init"
+val_t NEW_ReduceAction148_parser___ReduceAction148___init();
 typedef void (* parser___ReduceAction149___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction149___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction149___action "parser::ReduceAction149::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction149___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction149___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction149___init();
 #define LOCATE_parser___ReduceAction149___init "parser::ReduceAction149::init"
+val_t NEW_ReduceAction149_parser___ReduceAction149___init();
 typedef void (* parser___ReduceAction150___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction150___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction150___action "parser::ReduceAction150::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction150___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction150___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction150___init();
 #define LOCATE_parser___ReduceAction150___init "parser::ReduceAction150::init"
+val_t NEW_ReduceAction150_parser___ReduceAction150___init();
 typedef void (* parser___ReduceAction151___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction151___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction151___action "parser::ReduceAction151::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction151___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction151___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction151___init();
 #define LOCATE_parser___ReduceAction151___init "parser::ReduceAction151::init"
+val_t NEW_ReduceAction151_parser___ReduceAction151___init();
 typedef void (* parser___ReduceAction152___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction152___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction152___action "parser::ReduceAction152::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction152___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction152___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction152___init();
 #define LOCATE_parser___ReduceAction152___init "parser::ReduceAction152::init"
+val_t NEW_ReduceAction152_parser___ReduceAction152___init();
 typedef void (* parser___ReduceAction153___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction153___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction153___action "parser::ReduceAction153::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction153___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction153___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction153___init();
 #define LOCATE_parser___ReduceAction153___init "parser::ReduceAction153::init"
+val_t NEW_ReduceAction153_parser___ReduceAction153___init();
 typedef void (* parser___ReduceAction154___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction154___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction154___action "parser::ReduceAction154::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction154___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction154___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction154___init();
 #define LOCATE_parser___ReduceAction154___init "parser::ReduceAction154::init"
+val_t NEW_ReduceAction154_parser___ReduceAction154___init();
 typedef void (* parser___ReduceAction155___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction155___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction155___action "parser::ReduceAction155::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction155___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction155___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction155___init();
 #define LOCATE_parser___ReduceAction155___init "parser::ReduceAction155::init"
+val_t NEW_ReduceAction155_parser___ReduceAction155___init();
 typedef void (* parser___ReduceAction156___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction156___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction156___action "parser::ReduceAction156::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction156___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction156___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction156___init();
 #define LOCATE_parser___ReduceAction156___init "parser::ReduceAction156::init"
+val_t NEW_ReduceAction156_parser___ReduceAction156___init();
 typedef void (* parser___ReduceAction157___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction157___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction157___action "parser::ReduceAction157::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction157___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction157___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction157___init();
 #define LOCATE_parser___ReduceAction157___init "parser::ReduceAction157::init"
+val_t NEW_ReduceAction157_parser___ReduceAction157___init();
 typedef void (* parser___ReduceAction158___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction158___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction158___action "parser::ReduceAction158::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction158___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction158___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction158___init();
 #define LOCATE_parser___ReduceAction158___init "parser::ReduceAction158::init"
+val_t NEW_ReduceAction158_parser___ReduceAction158___init();
 typedef void (* parser___ReduceAction159___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction159___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction159___action "parser::ReduceAction159::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction159___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction159___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction159___init();
 #define LOCATE_parser___ReduceAction159___init "parser::ReduceAction159::init"
+val_t NEW_ReduceAction159_parser___ReduceAction159___init();
 typedef void (* parser___ReduceAction160___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction160___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction160___action "parser::ReduceAction160::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction160___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction160___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction160___init();
 #define LOCATE_parser___ReduceAction160___init "parser::ReduceAction160::init"
+val_t NEW_ReduceAction160_parser___ReduceAction160___init();
 typedef void (* parser___ReduceAction161___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction161___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction161___action "parser::ReduceAction161::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction161___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction161___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction161___init();
 #define LOCATE_parser___ReduceAction161___init "parser::ReduceAction161::init"
+val_t NEW_ReduceAction161_parser___ReduceAction161___init();
 typedef void (* parser___ReduceAction162___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction162___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction162___action "parser::ReduceAction162::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction162___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction162___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction162___init();
 #define LOCATE_parser___ReduceAction162___init "parser::ReduceAction162::init"
+val_t NEW_ReduceAction162_parser___ReduceAction162___init();
 typedef void (* parser___ReduceAction163___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction163___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction163___action "parser::ReduceAction163::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction163___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction163___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction163___init();
 #define LOCATE_parser___ReduceAction163___init "parser::ReduceAction163::init"
+val_t NEW_ReduceAction163_parser___ReduceAction163___init();
 typedef void (* parser___ReduceAction164___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction164___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction164___action "parser::ReduceAction164::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction164___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction164___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction164___init();
 #define LOCATE_parser___ReduceAction164___init "parser::ReduceAction164::init"
+val_t NEW_ReduceAction164_parser___ReduceAction164___init();
 typedef void (* parser___ReduceAction165___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction165___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction165___action "parser::ReduceAction165::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction165___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction165___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction165___init();
 #define LOCATE_parser___ReduceAction165___init "parser::ReduceAction165::init"
+val_t NEW_ReduceAction165_parser___ReduceAction165___init();
 typedef void (* parser___ReduceAction166___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction166___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction166___action "parser::ReduceAction166::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction166___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction166___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction166___init();
 #define LOCATE_parser___ReduceAction166___init "parser::ReduceAction166::init"
+val_t NEW_ReduceAction166_parser___ReduceAction166___init();
 typedef void (* parser___ReduceAction167___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction167___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction167___action "parser::ReduceAction167::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction167___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction167___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction167___init();
 #define LOCATE_parser___ReduceAction167___init "parser::ReduceAction167::init"
+val_t NEW_ReduceAction167_parser___ReduceAction167___init();
 typedef void (* parser___ReduceAction168___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction168___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction168___action "parser::ReduceAction168::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction168___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction168___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction168___init();
 #define LOCATE_parser___ReduceAction168___init "parser::ReduceAction168::init"
+val_t NEW_ReduceAction168_parser___ReduceAction168___init();
 typedef void (* parser___ReduceAction169___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction169___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction169___action "parser::ReduceAction169::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction169___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction169___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction169___init();
 #define LOCATE_parser___ReduceAction169___init "parser::ReduceAction169::init"
+val_t NEW_ReduceAction169_parser___ReduceAction169___init();
 typedef void (* parser___ReduceAction170___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction170___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction170___action "parser::ReduceAction170::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction170___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction170___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction170___init();
 #define LOCATE_parser___ReduceAction170___init "parser::ReduceAction170::init"
+val_t NEW_ReduceAction170_parser___ReduceAction170___init();
 typedef void (* parser___ReduceAction171___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction171___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction171___action "parser::ReduceAction171::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction171___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction171___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction171___init();
 #define LOCATE_parser___ReduceAction171___init "parser::ReduceAction171::init"
+val_t NEW_ReduceAction171_parser___ReduceAction171___init();
 typedef void (* parser___ReduceAction172___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction172___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction172___action "parser::ReduceAction172::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction172___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction172___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction172___init();
 #define LOCATE_parser___ReduceAction172___init "parser::ReduceAction172::init"
+val_t NEW_ReduceAction172_parser___ReduceAction172___init();
 typedef void (* parser___ReduceAction173___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction173___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction173___action "parser::ReduceAction173::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction173___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction173___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction173___init();
 #define LOCATE_parser___ReduceAction173___init "parser::ReduceAction173::init"
+val_t NEW_ReduceAction173_parser___ReduceAction173___init();
 typedef void (* parser___ReduceAction174___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction174___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction174___action "parser::ReduceAction174::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction174___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction174___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction174___init();
 #define LOCATE_parser___ReduceAction174___init "parser::ReduceAction174::init"
+val_t NEW_ReduceAction174_parser___ReduceAction174___init();
 typedef void (* parser___ReduceAction175___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction175___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction175___action "parser::ReduceAction175::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction175___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction175___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction175___init();
 #define LOCATE_parser___ReduceAction175___init "parser::ReduceAction175::init"
+val_t NEW_ReduceAction175_parser___ReduceAction175___init();
 typedef void (* parser___ReduceAction176___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction176___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction176___action "parser::ReduceAction176::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction176___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction176___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction176___init();
 #define LOCATE_parser___ReduceAction176___init "parser::ReduceAction176::init"
+val_t NEW_ReduceAction176_parser___ReduceAction176___init();
 typedef void (* parser___ReduceAction177___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction177___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction177___action "parser::ReduceAction177::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction177___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction177___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction177___init();
 #define LOCATE_parser___ReduceAction177___init "parser::ReduceAction177::init"
+val_t NEW_ReduceAction177_parser___ReduceAction177___init();
 typedef void (* parser___ReduceAction178___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction178___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction178___action "parser::ReduceAction178::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction178___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction178___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction178___init();
 #define LOCATE_parser___ReduceAction178___init "parser::ReduceAction178::init"
+val_t NEW_ReduceAction178_parser___ReduceAction178___init();
 typedef void (* parser___ReduceAction179___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction179___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction179___action "parser::ReduceAction179::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction179___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction179___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction179___init();
 #define LOCATE_parser___ReduceAction179___init "parser::ReduceAction179::init"
+val_t NEW_ReduceAction179_parser___ReduceAction179___init();
 typedef void (* parser___ReduceAction180___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction180___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction180___action "parser::ReduceAction180::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction180___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction180___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction180___init();
 #define LOCATE_parser___ReduceAction180___init "parser::ReduceAction180::init"
+val_t NEW_ReduceAction180_parser___ReduceAction180___init();
 typedef void (* parser___ReduceAction181___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction181___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction181___action "parser::ReduceAction181::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction181___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction181___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction181___init();
 #define LOCATE_parser___ReduceAction181___init "parser::ReduceAction181::init"
+val_t NEW_ReduceAction181_parser___ReduceAction181___init();
 typedef void (* parser___ReduceAction182___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction182___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction182___action "parser::ReduceAction182::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction182___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction182___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction182___init();
 #define LOCATE_parser___ReduceAction182___init "parser::ReduceAction182::init"
+val_t NEW_ReduceAction182_parser___ReduceAction182___init();
 typedef void (* parser___ReduceAction183___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction183___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction183___action "parser::ReduceAction183::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction183___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction183___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction183___init();
 #define LOCATE_parser___ReduceAction183___init "parser::ReduceAction183::init"
+val_t NEW_ReduceAction183_parser___ReduceAction183___init();
 typedef void (* parser___ReduceAction184___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction184___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction184___action "parser::ReduceAction184::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction184___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction184___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction184___init();
 #define LOCATE_parser___ReduceAction184___init "parser::ReduceAction184::init"
+val_t NEW_ReduceAction184_parser___ReduceAction184___init();
 typedef void (* parser___ReduceAction185___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction185___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction185___action "parser::ReduceAction185::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction185___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction185___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction185___init();
 #define LOCATE_parser___ReduceAction185___init "parser::ReduceAction185::init"
+val_t NEW_ReduceAction185_parser___ReduceAction185___init();
 typedef void (* parser___ReduceAction186___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction186___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction186___action "parser::ReduceAction186::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction186___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction186___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction186___init();
 #define LOCATE_parser___ReduceAction186___init "parser::ReduceAction186::init"
+val_t NEW_ReduceAction186_parser___ReduceAction186___init();
 typedef void (* parser___ReduceAction187___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction187___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction187___action "parser::ReduceAction187::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction187___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction187___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction187___init();
 #define LOCATE_parser___ReduceAction187___init "parser::ReduceAction187::init"
+val_t NEW_ReduceAction187_parser___ReduceAction187___init();
 typedef void (* parser___ReduceAction188___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction188___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction188___action "parser::ReduceAction188::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction188___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction188___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction188___init();
 #define LOCATE_parser___ReduceAction188___init "parser::ReduceAction188::init"
+val_t NEW_ReduceAction188_parser___ReduceAction188___init();
 typedef void (* parser___ReduceAction189___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction189___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction189___action "parser::ReduceAction189::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction189___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction189___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction189___init();
 #define LOCATE_parser___ReduceAction189___init "parser::ReduceAction189::init"
+val_t NEW_ReduceAction189_parser___ReduceAction189___init();
 typedef void (* parser___ReduceAction190___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction190___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction190___action "parser::ReduceAction190::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction190___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction190___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction190___init();
 #define LOCATE_parser___ReduceAction190___init "parser::ReduceAction190::init"
+val_t NEW_ReduceAction190_parser___ReduceAction190___init();
 typedef void (* parser___ReduceAction191___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction191___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction191___action "parser::ReduceAction191::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction191___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction191___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction191___init();
 #define LOCATE_parser___ReduceAction191___init "parser::ReduceAction191::init"
+val_t NEW_ReduceAction191_parser___ReduceAction191___init();
 typedef void (* parser___ReduceAction192___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction192___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction192___action "parser::ReduceAction192::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction192___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction192___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction192___init();
 #define LOCATE_parser___ReduceAction192___init "parser::ReduceAction192::init"
+val_t NEW_ReduceAction192_parser___ReduceAction192___init();
 typedef void (* parser___ReduceAction193___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction193___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction193___action "parser::ReduceAction193::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction193___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction193___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction193___init();
 #define LOCATE_parser___ReduceAction193___init "parser::ReduceAction193::init"
+val_t NEW_ReduceAction193_parser___ReduceAction193___init();
 typedef void (* parser___ReduceAction194___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction194___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction194___action "parser::ReduceAction194::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction194___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction194___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction194___init();
 #define LOCATE_parser___ReduceAction194___init "parser::ReduceAction194::init"
+val_t NEW_ReduceAction194_parser___ReduceAction194___init();
 typedef void (* parser___ReduceAction195___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction195___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction195___action "parser::ReduceAction195::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction195___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction195___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction195___init();
 #define LOCATE_parser___ReduceAction195___init "parser::ReduceAction195::init"
+val_t NEW_ReduceAction195_parser___ReduceAction195___init();
 typedef void (* parser___ReduceAction196___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction196___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction196___action "parser::ReduceAction196::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction196___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction196___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction196___init();
 #define LOCATE_parser___ReduceAction196___init "parser::ReduceAction196::init"
+val_t NEW_ReduceAction196_parser___ReduceAction196___init();
 typedef void (* parser___ReduceAction197___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction197___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction197___action "parser::ReduceAction197::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction197___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction197___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction197___init();
 #define LOCATE_parser___ReduceAction197___init "parser::ReduceAction197::init"
+val_t NEW_ReduceAction197_parser___ReduceAction197___init();
 typedef void (* parser___ReduceAction198___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction198___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction198___action "parser::ReduceAction198::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction198___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction198___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction198___init();
 #define LOCATE_parser___ReduceAction198___init "parser::ReduceAction198::init"
+val_t NEW_ReduceAction198_parser___ReduceAction198___init();
 typedef void (* parser___ReduceAction199___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction199___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction199___action "parser::ReduceAction199::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction199___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction199___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction199___init();
 #define LOCATE_parser___ReduceAction199___init "parser::ReduceAction199::init"
+val_t NEW_ReduceAction199_parser___ReduceAction199___init();
 typedef void (* parser___ReduceAction200___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction200___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction200___action "parser::ReduceAction200::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction200___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction200___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction200___init();
 #define LOCATE_parser___ReduceAction200___init "parser::ReduceAction200::init"
+val_t NEW_ReduceAction200_parser___ReduceAction200___init();
 typedef void (* parser___ReduceAction201___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction201___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction201___action "parser::ReduceAction201::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction201___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction201___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction201___init();
 #define LOCATE_parser___ReduceAction201___init "parser::ReduceAction201::init"
+val_t NEW_ReduceAction201_parser___ReduceAction201___init();
 typedef void (* parser___ReduceAction202___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction202___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction202___action "parser::ReduceAction202::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction202___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction202___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction202___init();
 #define LOCATE_parser___ReduceAction202___init "parser::ReduceAction202::init"
+val_t NEW_ReduceAction202_parser___ReduceAction202___init();
 typedef void (* parser___ReduceAction203___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction203___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction203___action "parser::ReduceAction203::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction203___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction203___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction203___init();
 #define LOCATE_parser___ReduceAction203___init "parser::ReduceAction203::init"
+val_t NEW_ReduceAction203_parser___ReduceAction203___init();
 typedef void (* parser___ReduceAction204___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction204___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction204___action "parser::ReduceAction204::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction204___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction204___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction204___init();
 #define LOCATE_parser___ReduceAction204___init "parser::ReduceAction204::init"
+val_t NEW_ReduceAction204_parser___ReduceAction204___init();
 typedef void (* parser___ReduceAction205___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction205___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction205___action "parser::ReduceAction205::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction205___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction205___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction205___init();
 #define LOCATE_parser___ReduceAction205___init "parser::ReduceAction205::init"
+val_t NEW_ReduceAction205_parser___ReduceAction205___init();
 typedef void (* parser___ReduceAction206___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction206___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction206___action "parser::ReduceAction206::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction206___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction206___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction206___init();
 #define LOCATE_parser___ReduceAction206___init "parser::ReduceAction206::init"
+val_t NEW_ReduceAction206_parser___ReduceAction206___init();
 typedef void (* parser___ReduceAction207___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction207___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction207___action "parser::ReduceAction207::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction207___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction207___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction207___init();
 #define LOCATE_parser___ReduceAction207___init "parser::ReduceAction207::init"
+val_t NEW_ReduceAction207_parser___ReduceAction207___init();
 typedef void (* parser___ReduceAction208___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction208___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction208___action "parser::ReduceAction208::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction208___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction208___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction208___init();
 #define LOCATE_parser___ReduceAction208___init "parser::ReduceAction208::init"
+val_t NEW_ReduceAction208_parser___ReduceAction208___init();
 typedef void (* parser___ReduceAction209___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction209___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction209___action "parser::ReduceAction209::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction209___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction209___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction209___init();
 #define LOCATE_parser___ReduceAction209___init "parser::ReduceAction209::init"
+val_t NEW_ReduceAction209_parser___ReduceAction209___init();
 typedef void (* parser___ReduceAction210___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction210___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction210___action "parser::ReduceAction210::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction210___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction210___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction210___init();
 #define LOCATE_parser___ReduceAction210___init "parser::ReduceAction210::init"
+val_t NEW_ReduceAction210_parser___ReduceAction210___init();
 typedef void (* parser___ReduceAction211___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction211___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction211___action "parser::ReduceAction211::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction211___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction211___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction211___init();
 #define LOCATE_parser___ReduceAction211___init "parser::ReduceAction211::init"
+val_t NEW_ReduceAction211_parser___ReduceAction211___init();
 typedef void (* parser___ReduceAction212___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction212___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction212___action "parser::ReduceAction212::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction212___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction212___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction212___init();
 #define LOCATE_parser___ReduceAction212___init "parser::ReduceAction212::init"
+val_t NEW_ReduceAction212_parser___ReduceAction212___init();
 typedef void (* parser___ReduceAction213___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction213___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction213___action "parser::ReduceAction213::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction213___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction213___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction213___init();
 #define LOCATE_parser___ReduceAction213___init "parser::ReduceAction213::init"
+val_t NEW_ReduceAction213_parser___ReduceAction213___init();
 typedef void (* parser___ReduceAction214___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction214___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction214___action "parser::ReduceAction214::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction214___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction214___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction214___init();
 #define LOCATE_parser___ReduceAction214___init "parser::ReduceAction214::init"
+val_t NEW_ReduceAction214_parser___ReduceAction214___init();
 typedef void (* parser___ReduceAction215___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction215___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction215___action "parser::ReduceAction215::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction215___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction215___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction215___init();
 #define LOCATE_parser___ReduceAction215___init "parser::ReduceAction215::init"
+val_t NEW_ReduceAction215_parser___ReduceAction215___init();
 typedef void (* parser___ReduceAction216___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction216___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction216___action "parser::ReduceAction216::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction216___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction216___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction216___init();
 #define LOCATE_parser___ReduceAction216___init "parser::ReduceAction216::init"
+val_t NEW_ReduceAction216_parser___ReduceAction216___init();
 typedef void (* parser___ReduceAction217___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction217___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction217___action "parser::ReduceAction217::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction217___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction217___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction217___init();
 #define LOCATE_parser___ReduceAction217___init "parser::ReduceAction217::init"
+val_t NEW_ReduceAction217_parser___ReduceAction217___init();
 typedef void (* parser___ReduceAction218___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction218___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction218___action "parser::ReduceAction218::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction218___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction218___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction218___init();
 #define LOCATE_parser___ReduceAction218___init "parser::ReduceAction218::init"
+val_t NEW_ReduceAction218_parser___ReduceAction218___init();
 typedef void (* parser___ReduceAction219___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction219___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction219___action "parser::ReduceAction219::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction219___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction219___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction219___init();
 #define LOCATE_parser___ReduceAction219___init "parser::ReduceAction219::init"
+val_t NEW_ReduceAction219_parser___ReduceAction219___init();
 typedef void (* parser___ReduceAction220___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction220___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction220___action "parser::ReduceAction220::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction220___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction220___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction220___init();
 #define LOCATE_parser___ReduceAction220___init "parser::ReduceAction220::init"
+val_t NEW_ReduceAction220_parser___ReduceAction220___init();
 typedef void (* parser___ReduceAction221___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction221___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction221___action "parser::ReduceAction221::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction221___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction221___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction221___init();
 #define LOCATE_parser___ReduceAction221___init "parser::ReduceAction221::init"
+val_t NEW_ReduceAction221_parser___ReduceAction221___init();
 typedef void (* parser___ReduceAction222___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction222___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction222___action "parser::ReduceAction222::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction222___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction222___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction222___init();
 #define LOCATE_parser___ReduceAction222___init "parser::ReduceAction222::init"
+val_t NEW_ReduceAction222_parser___ReduceAction222___init();
 typedef void (* parser___ReduceAction223___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction223___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction223___action "parser::ReduceAction223::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction223___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction223___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction223___init();
 #define LOCATE_parser___ReduceAction223___init "parser::ReduceAction223::init"
+val_t NEW_ReduceAction223_parser___ReduceAction223___init();
 typedef void (* parser___ReduceAction224___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction224___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction224___action "parser::ReduceAction224::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction224___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction224___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction224___init();
 #define LOCATE_parser___ReduceAction224___init "parser::ReduceAction224::init"
+val_t NEW_ReduceAction224_parser___ReduceAction224___init();
 typedef void (* parser___ReduceAction225___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction225___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction225___action "parser::ReduceAction225::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction225___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction225___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction225___init();
 #define LOCATE_parser___ReduceAction225___init "parser::ReduceAction225::init"
+val_t NEW_ReduceAction225_parser___ReduceAction225___init();
 typedef void (* parser___ReduceAction226___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction226___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction226___action "parser::ReduceAction226::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction226___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction226___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction226___init();
 #define LOCATE_parser___ReduceAction226___init "parser::ReduceAction226::init"
+val_t NEW_ReduceAction226_parser___ReduceAction226___init();
 typedef void (* parser___ReduceAction227___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction227___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction227___action "parser::ReduceAction227::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction227___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction227___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction227___init();
 #define LOCATE_parser___ReduceAction227___init "parser::ReduceAction227::init"
+val_t NEW_ReduceAction227_parser___ReduceAction227___init();
 typedef void (* parser___ReduceAction228___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction228___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction228___action "parser::ReduceAction228::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction228___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction228___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction228___init();
 #define LOCATE_parser___ReduceAction228___init "parser::ReduceAction228::init"
+val_t NEW_ReduceAction228_parser___ReduceAction228___init();
 typedef void (* parser___ReduceAction229___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction229___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction229___action "parser::ReduceAction229::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction229___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction229___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction229___init();
 #define LOCATE_parser___ReduceAction229___init "parser::ReduceAction229::init"
+val_t NEW_ReduceAction229_parser___ReduceAction229___init();
 typedef void (* parser___ReduceAction230___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction230___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction230___action "parser::ReduceAction230::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction230___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction230___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction230___init();
 #define LOCATE_parser___ReduceAction230___init "parser::ReduceAction230::init"
+val_t NEW_ReduceAction230_parser___ReduceAction230___init();
 typedef void (* parser___ReduceAction231___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction231___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction231___action "parser::ReduceAction231::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction231___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction231___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction231___init();
 #define LOCATE_parser___ReduceAction231___init "parser::ReduceAction231::init"
+val_t NEW_ReduceAction231_parser___ReduceAction231___init();
 typedef void (* parser___ReduceAction232___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction232___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction232___action "parser::ReduceAction232::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction232___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction232___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction232___init();
 #define LOCATE_parser___ReduceAction232___init "parser::ReduceAction232::init"
+val_t NEW_ReduceAction232_parser___ReduceAction232___init();
 typedef void (* parser___ReduceAction233___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction233___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction233___action "parser::ReduceAction233::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction233___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction233___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction233___init();
 #define LOCATE_parser___ReduceAction233___init "parser::ReduceAction233::init"
+val_t NEW_ReduceAction233_parser___ReduceAction233___init();
 typedef void (* parser___ReduceAction234___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction234___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction234___action "parser::ReduceAction234::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction234___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction234___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction234___init();
 #define LOCATE_parser___ReduceAction234___init "parser::ReduceAction234::init"
+val_t NEW_ReduceAction234_parser___ReduceAction234___init();
 typedef void (* parser___ReduceAction235___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction235___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction235___action "parser::ReduceAction235::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction235___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction235___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction235___init();
 #define LOCATE_parser___ReduceAction235___init "parser::ReduceAction235::init"
+val_t NEW_ReduceAction235_parser___ReduceAction235___init();
 typedef void (* parser___ReduceAction236___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction236___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction236___action "parser::ReduceAction236::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction236___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction236___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction236___init();
 #define LOCATE_parser___ReduceAction236___init "parser::ReduceAction236::init"
+val_t NEW_ReduceAction236_parser___ReduceAction236___init();
 typedef void (* parser___ReduceAction237___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction237___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction237___action "parser::ReduceAction237::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction237___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction237___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction237___init();
 #define LOCATE_parser___ReduceAction237___init "parser::ReduceAction237::init"
+val_t NEW_ReduceAction237_parser___ReduceAction237___init();
 typedef void (* parser___ReduceAction238___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction238___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction238___action "parser::ReduceAction238::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction238___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction238___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction238___init();
 #define LOCATE_parser___ReduceAction238___init "parser::ReduceAction238::init"
+val_t NEW_ReduceAction238_parser___ReduceAction238___init();
 typedef void (* parser___ReduceAction239___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction239___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction239___action "parser::ReduceAction239::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction239___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction239___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction239___init();
 #define LOCATE_parser___ReduceAction239___init "parser::ReduceAction239::init"
+val_t NEW_ReduceAction239_parser___ReduceAction239___init();
 typedef void (* parser___ReduceAction240___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction240___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction240___action "parser::ReduceAction240::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction240___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction240___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction240___init();
 #define LOCATE_parser___ReduceAction240___init "parser::ReduceAction240::init"
+val_t NEW_ReduceAction240_parser___ReduceAction240___init();
 typedef void (* parser___ReduceAction241___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction241___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction241___action "parser::ReduceAction241::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction241___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction241___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction241___init();
 #define LOCATE_parser___ReduceAction241___init "parser::ReduceAction241::init"
+val_t NEW_ReduceAction241_parser___ReduceAction241___init();
 typedef void (* parser___ReduceAction242___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction242___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction242___action "parser::ReduceAction242::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction242___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction242___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction242___init();
 #define LOCATE_parser___ReduceAction242___init "parser::ReduceAction242::init"
+val_t NEW_ReduceAction242_parser___ReduceAction242___init();
 typedef void (* parser___ReduceAction243___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction243___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction243___action "parser::ReduceAction243::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction243___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction243___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction243___init();
 #define LOCATE_parser___ReduceAction243___init "parser::ReduceAction243::init"
+val_t NEW_ReduceAction243_parser___ReduceAction243___init();
 typedef void (* parser___ReduceAction244___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction244___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction244___action "parser::ReduceAction244::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction244___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction244___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction244___init();
 #define LOCATE_parser___ReduceAction244___init "parser::ReduceAction244::init"
+val_t NEW_ReduceAction244_parser___ReduceAction244___init();
 typedef void (* parser___ReduceAction245___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction245___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction245___action "parser::ReduceAction245::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction245___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction245___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction245___init();
 #define LOCATE_parser___ReduceAction245___init "parser::ReduceAction245::init"
+val_t NEW_ReduceAction245_parser___ReduceAction245___init();
 typedef void (* parser___ReduceAction246___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction246___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction246___action "parser::ReduceAction246::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction246___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction246___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction246___init();
 #define LOCATE_parser___ReduceAction246___init "parser::ReduceAction246::init"
+val_t NEW_ReduceAction246_parser___ReduceAction246___init();
 typedef void (* parser___ReduceAction247___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction247___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction247___action "parser::ReduceAction247::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction247___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction247___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction247___init();
 #define LOCATE_parser___ReduceAction247___init "parser::ReduceAction247::init"
+val_t NEW_ReduceAction247_parser___ReduceAction247___init();
 typedef void (* parser___ReduceAction248___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction248___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction248___action "parser::ReduceAction248::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction248___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction248___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction248___init();
 #define LOCATE_parser___ReduceAction248___init "parser::ReduceAction248::init"
+val_t NEW_ReduceAction248_parser___ReduceAction248___init();
 typedef void (* parser___ReduceAction249___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction249___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction249___action "parser::ReduceAction249::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction249___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction249___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction249___init();
 #define LOCATE_parser___ReduceAction249___init "parser::ReduceAction249::init"
+val_t NEW_ReduceAction249_parser___ReduceAction249___init();
 typedef void (* parser___ReduceAction250___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction250___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction250___action "parser::ReduceAction250::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction250___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction250___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction250___init();
 #define LOCATE_parser___ReduceAction250___init "parser::ReduceAction250::init"
+val_t NEW_ReduceAction250_parser___ReduceAction250___init();
 typedef void (* parser___ReduceAction251___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction251___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction251___action "parser::ReduceAction251::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction251___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction251___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction251___init();
 #define LOCATE_parser___ReduceAction251___init "parser::ReduceAction251::init"
+val_t NEW_ReduceAction251_parser___ReduceAction251___init();
 typedef void (* parser___ReduceAction252___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction252___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction252___action "parser::ReduceAction252::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction252___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction252___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction252___init();
 #define LOCATE_parser___ReduceAction252___init "parser::ReduceAction252::init"
+val_t NEW_ReduceAction252_parser___ReduceAction252___init();
 typedef void (* parser___ReduceAction253___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction253___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction253___action "parser::ReduceAction253::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction253___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction253___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction253___init();
 #define LOCATE_parser___ReduceAction253___init "parser::ReduceAction253::init"
+val_t NEW_ReduceAction253_parser___ReduceAction253___init();
 typedef void (* parser___ReduceAction254___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction254___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction254___action "parser::ReduceAction254::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction254___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction254___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction254___init();
 #define LOCATE_parser___ReduceAction254___init "parser::ReduceAction254::init"
+val_t NEW_ReduceAction254_parser___ReduceAction254___init();
 typedef void (* parser___ReduceAction255___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction255___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction255___action "parser::ReduceAction255::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction255___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction255___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction255___init();
 #define LOCATE_parser___ReduceAction255___init "parser::ReduceAction255::init"
+val_t NEW_ReduceAction255_parser___ReduceAction255___init();
 typedef void (* parser___ReduceAction256___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction256___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction256___action "parser::ReduceAction256::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction256___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction256___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction256___init();
 #define LOCATE_parser___ReduceAction256___init "parser::ReduceAction256::init"
+val_t NEW_ReduceAction256_parser___ReduceAction256___init();
 typedef void (* parser___ReduceAction257___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction257___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction257___action "parser::ReduceAction257::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction257___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction257___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction257___init();
 #define LOCATE_parser___ReduceAction257___init "parser::ReduceAction257::init"
+val_t NEW_ReduceAction257_parser___ReduceAction257___init();
 typedef void (* parser___ReduceAction258___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction258___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction258___action "parser::ReduceAction258::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction258___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction258___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction258___init();
 #define LOCATE_parser___ReduceAction258___init "parser::ReduceAction258::init"
+val_t NEW_ReduceAction258_parser___ReduceAction258___init();
 typedef void (* parser___ReduceAction259___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction259___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction259___action "parser::ReduceAction259::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction259___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction259___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction259___init();
 #define LOCATE_parser___ReduceAction259___init "parser::ReduceAction259::init"
+val_t NEW_ReduceAction259_parser___ReduceAction259___init();
 typedef void (* parser___ReduceAction260___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction260___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction260___action "parser::ReduceAction260::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction260___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction260___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction260___init();
 #define LOCATE_parser___ReduceAction260___init "parser::ReduceAction260::init"
+val_t NEW_ReduceAction260_parser___ReduceAction260___init();
 typedef void (* parser___ReduceAction261___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction261___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction261___action "parser::ReduceAction261::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction261___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction261___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction261___init();
 #define LOCATE_parser___ReduceAction261___init "parser::ReduceAction261::init"
+val_t NEW_ReduceAction261_parser___ReduceAction261___init();
 typedef void (* parser___ReduceAction262___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction262___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction262___action "parser::ReduceAction262::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction262___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction262___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction262___init();
 #define LOCATE_parser___ReduceAction262___init "parser::ReduceAction262::init"
+val_t NEW_ReduceAction262_parser___ReduceAction262___init();
 typedef void (* parser___ReduceAction263___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction263___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction263___action "parser::ReduceAction263::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction263___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction263___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction263___init();
 #define LOCATE_parser___ReduceAction263___init "parser::ReduceAction263::init"
+val_t NEW_ReduceAction263_parser___ReduceAction263___init();
 typedef void (* parser___ReduceAction264___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction264___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction264___action "parser::ReduceAction264::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction264___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction264___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction264___init();
 #define LOCATE_parser___ReduceAction264___init "parser::ReduceAction264::init"
+val_t NEW_ReduceAction264_parser___ReduceAction264___init();
 typedef void (* parser___ReduceAction265___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction265___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction265___action "parser::ReduceAction265::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction265___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction265___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction265___init();
 #define LOCATE_parser___ReduceAction265___init "parser::ReduceAction265::init"
+val_t NEW_ReduceAction265_parser___ReduceAction265___init();
 typedef void (* parser___ReduceAction266___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction266___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction266___action "parser::ReduceAction266::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction266___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction266___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction266___init();
 #define LOCATE_parser___ReduceAction266___init "parser::ReduceAction266::init"
+val_t NEW_ReduceAction266_parser___ReduceAction266___init();
 typedef void (* parser___ReduceAction267___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction267___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction267___action "parser::ReduceAction267::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction267___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction267___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction267___init();
 #define LOCATE_parser___ReduceAction267___init "parser::ReduceAction267::init"
+val_t NEW_ReduceAction267_parser___ReduceAction267___init();
 typedef void (* parser___ReduceAction268___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction268___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction268___action "parser::ReduceAction268::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction268___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction268___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction268___init();
 #define LOCATE_parser___ReduceAction268___init "parser::ReduceAction268::init"
+val_t NEW_ReduceAction268_parser___ReduceAction268___init();
 typedef void (* parser___ReduceAction269___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction269___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction269___action "parser::ReduceAction269::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction269___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction269___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction269___init();
 #define LOCATE_parser___ReduceAction269___init "parser::ReduceAction269::init"
+val_t NEW_ReduceAction269_parser___ReduceAction269___init();
 typedef void (* parser___ReduceAction270___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction270___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction270___action "parser::ReduceAction270::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction270___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction270___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction270___init();
 #define LOCATE_parser___ReduceAction270___init "parser::ReduceAction270::init"
+val_t NEW_ReduceAction270_parser___ReduceAction270___init();
 typedef void (* parser___ReduceAction271___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction271___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction271___action "parser::ReduceAction271::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction271___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction271___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction271___init();
 #define LOCATE_parser___ReduceAction271___init "parser::ReduceAction271::init"
+val_t NEW_ReduceAction271_parser___ReduceAction271___init();
 typedef void (* parser___ReduceAction272___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction272___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction272___action "parser::ReduceAction272::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction272___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction272___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction272___init();
 #define LOCATE_parser___ReduceAction272___init "parser::ReduceAction272::init"
+val_t NEW_ReduceAction272_parser___ReduceAction272___init();
 typedef void (* parser___ReduceAction273___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction273___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction273___action "parser::ReduceAction273::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction273___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction273___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction273___init();
 #define LOCATE_parser___ReduceAction273___init "parser::ReduceAction273::init"
+val_t NEW_ReduceAction273_parser___ReduceAction273___init();
 typedef void (* parser___ReduceAction274___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction274___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction274___action "parser::ReduceAction274::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction274___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction274___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction274___init();
 #define LOCATE_parser___ReduceAction274___init "parser::ReduceAction274::init"
+val_t NEW_ReduceAction274_parser___ReduceAction274___init();
 typedef void (* parser___ReduceAction275___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction275___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction275___action "parser::ReduceAction275::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction275___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction275___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction275___init();
 #define LOCATE_parser___ReduceAction275___init "parser::ReduceAction275::init"
+val_t NEW_ReduceAction275_parser___ReduceAction275___init();
 typedef void (* parser___ReduceAction276___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction276___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction276___action "parser::ReduceAction276::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction276___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction276___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction276___init();
 #define LOCATE_parser___ReduceAction276___init "parser::ReduceAction276::init"
+val_t NEW_ReduceAction276_parser___ReduceAction276___init();
 typedef void (* parser___ReduceAction277___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction277___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction277___action "parser::ReduceAction277::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction277___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction277___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction277___init();
 #define LOCATE_parser___ReduceAction277___init "parser::ReduceAction277::init"
+val_t NEW_ReduceAction277_parser___ReduceAction277___init();
 typedef void (* parser___ReduceAction278___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction278___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction278___action "parser::ReduceAction278::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction278___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction278___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction278___init();
 #define LOCATE_parser___ReduceAction278___init "parser::ReduceAction278::init"
+val_t NEW_ReduceAction278_parser___ReduceAction278___init();
 typedef void (* parser___ReduceAction279___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction279___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction279___action "parser::ReduceAction279::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction279___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction279___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction279___init();
 #define LOCATE_parser___ReduceAction279___init "parser::ReduceAction279::init"
+val_t NEW_ReduceAction279_parser___ReduceAction279___init();
 typedef void (* parser___ReduceAction280___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction280___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction280___action "parser::ReduceAction280::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction280___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction280___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction280___init();
 #define LOCATE_parser___ReduceAction280___init "parser::ReduceAction280::init"
+val_t NEW_ReduceAction280_parser___ReduceAction280___init();
 typedef void (* parser___ReduceAction281___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction281___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction281___action "parser::ReduceAction281::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction281___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction281___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction281___init();
 #define LOCATE_parser___ReduceAction281___init "parser::ReduceAction281::init"
+val_t NEW_ReduceAction281_parser___ReduceAction281___init();
 typedef void (* parser___ReduceAction282___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction282___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction282___action "parser::ReduceAction282::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction282___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction282___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction282___init();
 #define LOCATE_parser___ReduceAction282___init "parser::ReduceAction282::init"
+val_t NEW_ReduceAction282_parser___ReduceAction282___init();
 typedef void (* parser___ReduceAction283___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction283___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction283___action "parser::ReduceAction283::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction283___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction283___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction283___init();
 #define LOCATE_parser___ReduceAction283___init "parser::ReduceAction283::init"
+val_t NEW_ReduceAction283_parser___ReduceAction283___init();
 typedef void (* parser___ReduceAction284___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction284___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction284___action "parser::ReduceAction284::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction284___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction284___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction284___init();
 #define LOCATE_parser___ReduceAction284___init "parser::ReduceAction284::init"
+val_t NEW_ReduceAction284_parser___ReduceAction284___init();
 typedef void (* parser___ReduceAction285___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction285___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction285___action "parser::ReduceAction285::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction285___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction285___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction285___init();
 #define LOCATE_parser___ReduceAction285___init "parser::ReduceAction285::init"
+val_t NEW_ReduceAction285_parser___ReduceAction285___init();
 typedef void (* parser___ReduceAction286___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction286___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction286___action "parser::ReduceAction286::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction286___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction286___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction286___init();
 #define LOCATE_parser___ReduceAction286___init "parser::ReduceAction286::init"
+val_t NEW_ReduceAction286_parser___ReduceAction286___init();
 typedef void (* parser___ReduceAction287___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction287___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction287___action "parser::ReduceAction287::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction287___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction287___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction287___init();
 #define LOCATE_parser___ReduceAction287___init "parser::ReduceAction287::init"
+val_t NEW_ReduceAction287_parser___ReduceAction287___init();
 typedef void (* parser___ReduceAction288___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction288___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction288___action "parser::ReduceAction288::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction288___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction288___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction288___init();
 #define LOCATE_parser___ReduceAction288___init "parser::ReduceAction288::init"
+val_t NEW_ReduceAction288_parser___ReduceAction288___init();
 typedef void (* parser___ReduceAction289___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction289___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction289___action "parser::ReduceAction289::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction289___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction289___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction289___init();
 #define LOCATE_parser___ReduceAction289___init "parser::ReduceAction289::init"
+val_t NEW_ReduceAction289_parser___ReduceAction289___init();
 typedef void (* parser___ReduceAction290___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction290___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction290___action "parser::ReduceAction290::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction290___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction290___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction290___init();
 #define LOCATE_parser___ReduceAction290___init "parser::ReduceAction290::init"
+val_t NEW_ReduceAction290_parser___ReduceAction290___init();
 typedef void (* parser___ReduceAction291___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction291___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction291___action "parser::ReduceAction291::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction291___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction291___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction291___init();
 #define LOCATE_parser___ReduceAction291___init "parser::ReduceAction291::init"
+val_t NEW_ReduceAction291_parser___ReduceAction291___init();
 typedef void (* parser___ReduceAction292___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction292___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction292___action "parser::ReduceAction292::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction292___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction292___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction292___init();
 #define LOCATE_parser___ReduceAction292___init "parser::ReduceAction292::init"
+val_t NEW_ReduceAction292_parser___ReduceAction292___init();
 typedef void (* parser___ReduceAction293___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction293___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction293___action "parser::ReduceAction293::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction293___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction293___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction293___init();
 #define LOCATE_parser___ReduceAction293___init "parser::ReduceAction293::init"
+val_t NEW_ReduceAction293_parser___ReduceAction293___init();
 typedef void (* parser___ReduceAction294___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction294___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction294___action "parser::ReduceAction294::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction294___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction294___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction294___init();
 #define LOCATE_parser___ReduceAction294___init "parser::ReduceAction294::init"
+val_t NEW_ReduceAction294_parser___ReduceAction294___init();
 typedef void (* parser___ReduceAction295___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction295___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction295___action "parser::ReduceAction295::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction295___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction295___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction295___init();
 #define LOCATE_parser___ReduceAction295___init "parser::ReduceAction295::init"
+val_t NEW_ReduceAction295_parser___ReduceAction295___init();
 typedef void (* parser___ReduceAction296___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction296___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction296___action "parser::ReduceAction296::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction296___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction296___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction296___init();
 #define LOCATE_parser___ReduceAction296___init "parser::ReduceAction296::init"
+val_t NEW_ReduceAction296_parser___ReduceAction296___init();
 typedef void (* parser___ReduceAction297___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction297___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction297___action "parser::ReduceAction297::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction297___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction297___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction297___init();
 #define LOCATE_parser___ReduceAction297___init "parser::ReduceAction297::init"
+val_t NEW_ReduceAction297_parser___ReduceAction297___init();
 typedef void (* parser___ReduceAction298___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction298___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction298___action "parser::ReduceAction298::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction298___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction298___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction298___init();
 #define LOCATE_parser___ReduceAction298___init "parser::ReduceAction298::init"
+val_t NEW_ReduceAction298_parser___ReduceAction298___init();
 typedef void (* parser___ReduceAction299___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction299___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction299___action "parser::ReduceAction299::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction299___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction299___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction299___init();
 #define LOCATE_parser___ReduceAction299___init "parser::ReduceAction299::init"
+val_t NEW_ReduceAction299_parser___ReduceAction299___init();
 typedef void (* parser___ReduceAction300___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction300___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction300___action "parser::ReduceAction300::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction300___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction300___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction300___init();
 #define LOCATE_parser___ReduceAction300___init "parser::ReduceAction300::init"
+val_t NEW_ReduceAction300_parser___ReduceAction300___init();
 typedef void (* parser___ReduceAction301___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction301___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction301___action "parser::ReduceAction301::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction301___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction301___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction301___init();
 #define LOCATE_parser___ReduceAction301___init "parser::ReduceAction301::init"
+val_t NEW_ReduceAction301_parser___ReduceAction301___init();
 typedef void (* parser___ReduceAction302___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction302___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction302___action "parser::ReduceAction302::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction302___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction302___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction302___init();
 #define LOCATE_parser___ReduceAction302___init "parser::ReduceAction302::init"
+val_t NEW_ReduceAction302_parser___ReduceAction302___init();
 typedef void (* parser___ReduceAction303___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction303___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction303___action "parser::ReduceAction303::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction303___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction303___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction303___init();
 #define LOCATE_parser___ReduceAction303___init "parser::ReduceAction303::init"
+val_t NEW_ReduceAction303_parser___ReduceAction303___init();
 typedef void (* parser___ReduceAction304___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction304___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction304___action "parser::ReduceAction304::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction304___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction304___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction304___init();
 #define LOCATE_parser___ReduceAction304___init "parser::ReduceAction304::init"
+val_t NEW_ReduceAction304_parser___ReduceAction304___init();
 typedef void (* parser___ReduceAction305___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction305___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction305___action "parser::ReduceAction305::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction305___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction305___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction305___init();
 #define LOCATE_parser___ReduceAction305___init "parser::ReduceAction305::init"
+val_t NEW_ReduceAction305_parser___ReduceAction305___init();
 typedef void (* parser___ReduceAction306___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction306___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction306___action "parser::ReduceAction306::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction306___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction306___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction306___init();
 #define LOCATE_parser___ReduceAction306___init "parser::ReduceAction306::init"
+val_t NEW_ReduceAction306_parser___ReduceAction306___init();
 typedef void (* parser___ReduceAction307___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction307___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction307___action "parser::ReduceAction307::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction307___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction307___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction307___init();
 #define LOCATE_parser___ReduceAction307___init "parser::ReduceAction307::init"
+val_t NEW_ReduceAction307_parser___ReduceAction307___init();
 typedef void (* parser___ReduceAction308___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction308___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction308___action "parser::ReduceAction308::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction308___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction308___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction308___init();
 #define LOCATE_parser___ReduceAction308___init "parser::ReduceAction308::init"
+val_t NEW_ReduceAction308_parser___ReduceAction308___init();
 typedef void (* parser___ReduceAction309___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction309___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction309___action "parser::ReduceAction309::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction309___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction309___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction309___init();
 #define LOCATE_parser___ReduceAction309___init "parser::ReduceAction309::init"
+val_t NEW_ReduceAction309_parser___ReduceAction309___init();
 typedef void (* parser___ReduceAction310___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction310___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction310___action "parser::ReduceAction310::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction310___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction310___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction310___init();
 #define LOCATE_parser___ReduceAction310___init "parser::ReduceAction310::init"
+val_t NEW_ReduceAction310_parser___ReduceAction310___init();
 typedef void (* parser___ReduceAction311___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction311___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction311___action "parser::ReduceAction311::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction311___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction311___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction311___init();
 #define LOCATE_parser___ReduceAction311___init "parser::ReduceAction311::init"
+val_t NEW_ReduceAction311_parser___ReduceAction311___init();
 typedef void (* parser___ReduceAction312___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction312___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction312___action "parser::ReduceAction312::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction312___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction312___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction312___init();
 #define LOCATE_parser___ReduceAction312___init "parser::ReduceAction312::init"
+val_t NEW_ReduceAction312_parser___ReduceAction312___init();
 typedef void (* parser___ReduceAction313___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction313___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction313___action "parser::ReduceAction313::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction313___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction313___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction313___init();
 #define LOCATE_parser___ReduceAction313___init "parser::ReduceAction313::init"
+val_t NEW_ReduceAction313_parser___ReduceAction313___init();
 typedef void (* parser___ReduceAction314___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction314___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction314___action "parser::ReduceAction314::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction314___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction314___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction314___init();
 #define LOCATE_parser___ReduceAction314___init "parser::ReduceAction314::init"
+val_t NEW_ReduceAction314_parser___ReduceAction314___init();
 typedef void (* parser___ReduceAction315___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction315___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction315___action "parser::ReduceAction315::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction315___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction315___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction315___init();
 #define LOCATE_parser___ReduceAction315___init "parser::ReduceAction315::init"
+val_t NEW_ReduceAction315_parser___ReduceAction315___init();
 typedef void (* parser___ReduceAction316___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction316___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction316___action "parser::ReduceAction316::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction316___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction316___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction316___init();
 #define LOCATE_parser___ReduceAction316___init "parser::ReduceAction316::init"
+val_t NEW_ReduceAction316_parser___ReduceAction316___init();
 typedef void (* parser___ReduceAction317___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction317___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction317___action "parser::ReduceAction317::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction317___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction317___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction317___init();
 #define LOCATE_parser___ReduceAction317___init "parser::ReduceAction317::init"
+val_t NEW_ReduceAction317_parser___ReduceAction317___init();
 typedef void (* parser___ReduceAction318___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction318___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction318___action "parser::ReduceAction318::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction318___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction318___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction318___init();
 #define LOCATE_parser___ReduceAction318___init "parser::ReduceAction318::init"
+val_t NEW_ReduceAction318_parser___ReduceAction318___init();
 typedef void (* parser___ReduceAction319___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction319___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction319___action "parser::ReduceAction319::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction319___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction319___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction319___init();
 #define LOCATE_parser___ReduceAction319___init "parser::ReduceAction319::init"
+val_t NEW_ReduceAction319_parser___ReduceAction319___init();
 typedef void (* parser___ReduceAction320___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction320___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction320___action "parser::ReduceAction320::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction320___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction320___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction320___init();
 #define LOCATE_parser___ReduceAction320___init "parser::ReduceAction320::init"
+val_t NEW_ReduceAction320_parser___ReduceAction320___init();
 typedef void (* parser___ReduceAction321___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction321___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction321___action "parser::ReduceAction321::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction321___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction321___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction321___init();
 #define LOCATE_parser___ReduceAction321___init "parser::ReduceAction321::init"
+val_t NEW_ReduceAction321_parser___ReduceAction321___init();
 typedef void (* parser___ReduceAction322___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction322___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction322___action "parser::ReduceAction322::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction322___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction322___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction322___init();
 #define LOCATE_parser___ReduceAction322___init "parser::ReduceAction322::init"
+val_t NEW_ReduceAction322_parser___ReduceAction322___init();
 typedef void (* parser___ReduceAction323___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction323___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction323___action "parser::ReduceAction323::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction323___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction323___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction323___init();
 #define LOCATE_parser___ReduceAction323___init "parser::ReduceAction323::init"
+val_t NEW_ReduceAction323_parser___ReduceAction323___init();
 typedef void (* parser___ReduceAction324___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction324___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction324___action "parser::ReduceAction324::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction324___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction324___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction324___init();
 #define LOCATE_parser___ReduceAction324___init "parser::ReduceAction324::init"
+val_t NEW_ReduceAction324_parser___ReduceAction324___init();
 typedef void (* parser___ReduceAction325___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction325___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction325___action "parser::ReduceAction325::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction325___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction325___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction325___init();
 #define LOCATE_parser___ReduceAction325___init "parser::ReduceAction325::init"
+val_t NEW_ReduceAction325_parser___ReduceAction325___init();
 typedef void (* parser___ReduceAction326___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction326___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction326___action "parser::ReduceAction326::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction326___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction326___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction326___init();
 #define LOCATE_parser___ReduceAction326___init "parser::ReduceAction326::init"
+val_t NEW_ReduceAction326_parser___ReduceAction326___init();
 typedef void (* parser___ReduceAction327___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction327___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction327___action "parser::ReduceAction327::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction327___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction327___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction327___init();
 #define LOCATE_parser___ReduceAction327___init "parser::ReduceAction327::init"
+val_t NEW_ReduceAction327_parser___ReduceAction327___init();
 typedef void (* parser___ReduceAction328___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction328___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction328___action "parser::ReduceAction328::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction328___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction328___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction328___init();
 #define LOCATE_parser___ReduceAction328___init "parser::ReduceAction328::init"
+val_t NEW_ReduceAction328_parser___ReduceAction328___init();
 typedef void (* parser___ReduceAction329___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction329___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction329___action "parser::ReduceAction329::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction329___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction329___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction329___init();
 #define LOCATE_parser___ReduceAction329___init "parser::ReduceAction329::init"
+val_t NEW_ReduceAction329_parser___ReduceAction329___init();
 typedef void (* parser___ReduceAction330___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction330___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction330___action "parser::ReduceAction330::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction330___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction330___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction330___init();
 #define LOCATE_parser___ReduceAction330___init "parser::ReduceAction330::init"
+val_t NEW_ReduceAction330_parser___ReduceAction330___init();
 typedef void (* parser___ReduceAction331___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction331___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction331___action "parser::ReduceAction331::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction331___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction331___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction331___init();
 #define LOCATE_parser___ReduceAction331___init "parser::ReduceAction331::init"
+val_t NEW_ReduceAction331_parser___ReduceAction331___init();
 typedef void (* parser___ReduceAction332___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction332___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction332___action "parser::ReduceAction332::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction332___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction332___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction332___init();
 #define LOCATE_parser___ReduceAction332___init "parser::ReduceAction332::init"
+val_t NEW_ReduceAction332_parser___ReduceAction332___init();
 typedef void (* parser___ReduceAction333___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction333___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction333___action "parser::ReduceAction333::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction333___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction333___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction333___init();
 #define LOCATE_parser___ReduceAction333___init "parser::ReduceAction333::init"
+val_t NEW_ReduceAction333_parser___ReduceAction333___init();
 typedef void (* parser___ReduceAction334___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction334___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction334___action "parser::ReduceAction334::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction334___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction334___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction334___init();
 #define LOCATE_parser___ReduceAction334___init "parser::ReduceAction334::init"
+val_t NEW_ReduceAction334_parser___ReduceAction334___init();
 typedef void (* parser___ReduceAction335___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction335___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction335___action "parser::ReduceAction335::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction335___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction335___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction335___init();
 #define LOCATE_parser___ReduceAction335___init "parser::ReduceAction335::init"
+val_t NEW_ReduceAction335_parser___ReduceAction335___init();
 typedef void (* parser___ReduceAction336___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction336___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction336___action "parser::ReduceAction336::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction336___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction336___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction336___init();
 #define LOCATE_parser___ReduceAction336___init "parser::ReduceAction336::init"
+val_t NEW_ReduceAction336_parser___ReduceAction336___init();
 typedef void (* parser___ReduceAction337___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction337___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction337___action "parser::ReduceAction337::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction337___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction337___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction337___init();
 #define LOCATE_parser___ReduceAction337___init "parser::ReduceAction337::init"
+val_t NEW_ReduceAction337_parser___ReduceAction337___init();
 typedef void (* parser___ReduceAction338___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction338___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction338___action "parser::ReduceAction338::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction338___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction338___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction338___init();
 #define LOCATE_parser___ReduceAction338___init "parser::ReduceAction338::init"
+val_t NEW_ReduceAction338_parser___ReduceAction338___init();
 typedef void (* parser___ReduceAction339___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction339___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction339___action "parser::ReduceAction339::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction339___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction339___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction339___init();
 #define LOCATE_parser___ReduceAction339___init "parser::ReduceAction339::init"
+val_t NEW_ReduceAction339_parser___ReduceAction339___init();
 typedef void (* parser___ReduceAction340___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction340___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction340___action "parser::ReduceAction340::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction340___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction340___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction340___init();
 #define LOCATE_parser___ReduceAction340___init "parser::ReduceAction340::init"
+val_t NEW_ReduceAction340_parser___ReduceAction340___init();
 typedef void (* parser___ReduceAction341___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction341___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction341___action "parser::ReduceAction341::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction341___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction341___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction341___init();
 #define LOCATE_parser___ReduceAction341___init "parser::ReduceAction341::init"
+val_t NEW_ReduceAction341_parser___ReduceAction341___init();
 typedef void (* parser___ReduceAction342___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction342___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction342___action "parser::ReduceAction342::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction342___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction342___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction342___init();
 #define LOCATE_parser___ReduceAction342___init "parser::ReduceAction342::init"
+val_t NEW_ReduceAction342_parser___ReduceAction342___init();
 typedef void (* parser___ReduceAction343___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction343___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction343___action "parser::ReduceAction343::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction343___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction343___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction343___init();
 #define LOCATE_parser___ReduceAction343___init "parser::ReduceAction343::init"
+val_t NEW_ReduceAction343_parser___ReduceAction343___init();
 typedef void (* parser___ReduceAction344___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction344___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction344___action "parser::ReduceAction344::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction344___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction344___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction344___init();
 #define LOCATE_parser___ReduceAction344___init "parser::ReduceAction344::init"
+val_t NEW_ReduceAction344_parser___ReduceAction344___init();
 typedef void (* parser___ReduceAction345___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction345___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction345___action "parser::ReduceAction345::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction345___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction345___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction345___init();
 #define LOCATE_parser___ReduceAction345___init "parser::ReduceAction345::init"
+val_t NEW_ReduceAction345_parser___ReduceAction345___init();
 typedef void (* parser___ReduceAction346___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction346___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction346___action "parser::ReduceAction346::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction346___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction346___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction346___init();
 #define LOCATE_parser___ReduceAction346___init "parser::ReduceAction346::init"
+val_t NEW_ReduceAction346_parser___ReduceAction346___init();
 typedef void (* parser___ReduceAction347___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction347___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction347___action "parser::ReduceAction347::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction347___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction347___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction347___init();
 #define LOCATE_parser___ReduceAction347___init "parser::ReduceAction347::init"
+val_t NEW_ReduceAction347_parser___ReduceAction347___init();
 typedef void (* parser___ReduceAction348___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction348___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction348___action "parser::ReduceAction348::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction348___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction348___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction348___init();
 #define LOCATE_parser___ReduceAction348___init "parser::ReduceAction348::init"
+val_t NEW_ReduceAction348_parser___ReduceAction348___init();
 typedef void (* parser___ReduceAction349___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction349___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction349___action "parser::ReduceAction349::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction349___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction349___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction349___init();
 #define LOCATE_parser___ReduceAction349___init "parser::ReduceAction349::init"
+val_t NEW_ReduceAction349_parser___ReduceAction349___init();
 typedef void (* parser___ReduceAction350___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction350___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction350___action "parser::ReduceAction350::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction350___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction350___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction350___init();
 #define LOCATE_parser___ReduceAction350___init "parser::ReduceAction350::init"
+val_t NEW_ReduceAction350_parser___ReduceAction350___init();
 typedef void (* parser___ReduceAction351___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction351___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction351___action "parser::ReduceAction351::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction351___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction351___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction351___init();
 #define LOCATE_parser___ReduceAction351___init "parser::ReduceAction351::init"
+val_t NEW_ReduceAction351_parser___ReduceAction351___init();
 typedef void (* parser___ReduceAction352___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction352___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction352___action "parser::ReduceAction352::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction352___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction352___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction352___init();
 #define LOCATE_parser___ReduceAction352___init "parser::ReduceAction352::init"
+val_t NEW_ReduceAction352_parser___ReduceAction352___init();
 typedef void (* parser___ReduceAction353___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction353___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction353___action "parser::ReduceAction353::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction353___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction353___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction353___init();
 #define LOCATE_parser___ReduceAction353___init "parser::ReduceAction353::init"
+val_t NEW_ReduceAction353_parser___ReduceAction353___init();
 typedef void (* parser___ReduceAction354___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction354___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction354___action "parser::ReduceAction354::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction354___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction354___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction354___init();
 #define LOCATE_parser___ReduceAction354___init "parser::ReduceAction354::init"
+val_t NEW_ReduceAction354_parser___ReduceAction354___init();
 typedef void (* parser___ReduceAction355___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction355___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction355___action "parser::ReduceAction355::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction355___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction355___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction355___init();
 #define LOCATE_parser___ReduceAction355___init "parser::ReduceAction355::init"
+val_t NEW_ReduceAction355_parser___ReduceAction355___init();
 typedef void (* parser___ReduceAction356___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction356___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction356___action "parser::ReduceAction356::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction356___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction356___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction356___init();
 #define LOCATE_parser___ReduceAction356___init "parser::ReduceAction356::init"
+val_t NEW_ReduceAction356_parser___ReduceAction356___init();
 typedef void (* parser___ReduceAction357___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction357___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction357___action "parser::ReduceAction357::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction357___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction357___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction357___init();
 #define LOCATE_parser___ReduceAction357___init "parser::ReduceAction357::init"
+val_t NEW_ReduceAction357_parser___ReduceAction357___init();
 typedef void (* parser___ReduceAction358___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction358___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction358___action "parser::ReduceAction358::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction358___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction358___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction358___init();
 #define LOCATE_parser___ReduceAction358___init "parser::ReduceAction358::init"
+val_t NEW_ReduceAction358_parser___ReduceAction358___init();
 typedef void (* parser___ReduceAction359___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction359___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction359___action "parser::ReduceAction359::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction359___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction359___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction359___init();
 #define LOCATE_parser___ReduceAction359___init "parser::ReduceAction359::init"
+val_t NEW_ReduceAction359_parser___ReduceAction359___init();
 typedef void (* parser___ReduceAction360___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction360___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction360___action "parser::ReduceAction360::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction360___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction360___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction360___init();
 #define LOCATE_parser___ReduceAction360___init "parser::ReduceAction360::init"
+val_t NEW_ReduceAction360_parser___ReduceAction360___init();
 typedef void (* parser___ReduceAction361___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction361___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction361___action "parser::ReduceAction361::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction361___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction361___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction361___init();
 #define LOCATE_parser___ReduceAction361___init "parser::ReduceAction361::init"
+val_t NEW_ReduceAction361_parser___ReduceAction361___init();
 typedef void (* parser___ReduceAction362___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction362___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction362___action "parser::ReduceAction362::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction362___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction362___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction362___init();
 #define LOCATE_parser___ReduceAction362___init "parser::ReduceAction362::init"
+val_t NEW_ReduceAction362_parser___ReduceAction362___init();
 typedef void (* parser___ReduceAction363___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction363___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction363___action "parser::ReduceAction363::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction363___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction363___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction363___init();
 #define LOCATE_parser___ReduceAction363___init "parser::ReduceAction363::init"
+val_t NEW_ReduceAction363_parser___ReduceAction363___init();
 typedef void (* parser___ReduceAction364___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction364___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction364___action "parser::ReduceAction364::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction364___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction364___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction364___init();
 #define LOCATE_parser___ReduceAction364___init "parser::ReduceAction364::init"
+val_t NEW_ReduceAction364_parser___ReduceAction364___init();
 typedef void (* parser___ReduceAction365___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction365___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction365___action "parser::ReduceAction365::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction365___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction365___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction365___init();
 #define LOCATE_parser___ReduceAction365___init "parser::ReduceAction365::init"
+val_t NEW_ReduceAction365_parser___ReduceAction365___init();
 typedef void (* parser___ReduceAction366___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction366___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction366___action "parser::ReduceAction366::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction366___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction366___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction366___init();
 #define LOCATE_parser___ReduceAction366___init "parser::ReduceAction366::init"
+val_t NEW_ReduceAction366_parser___ReduceAction366___init();
 typedef void (* parser___ReduceAction367___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction367___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction367___action "parser::ReduceAction367::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction367___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction367___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction367___init();
 #define LOCATE_parser___ReduceAction367___init "parser::ReduceAction367::init"
+val_t NEW_ReduceAction367_parser___ReduceAction367___init();
 typedef void (* parser___ReduceAction368___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction368___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction368___action "parser::ReduceAction368::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction368___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction368___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction368___init();
 #define LOCATE_parser___ReduceAction368___init "parser::ReduceAction368::init"
+val_t NEW_ReduceAction368_parser___ReduceAction368___init();
 typedef void (* parser___ReduceAction369___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction369___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction369___action "parser::ReduceAction369::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction369___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction369___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction369___init();
 #define LOCATE_parser___ReduceAction369___init "parser::ReduceAction369::init"
+val_t NEW_ReduceAction369_parser___ReduceAction369___init();
 typedef void (* parser___ReduceAction370___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction370___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction370___action "parser::ReduceAction370::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction370___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction370___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction370___init();
 #define LOCATE_parser___ReduceAction370___init "parser::ReduceAction370::init"
+val_t NEW_ReduceAction370_parser___ReduceAction370___init();
 typedef void (* parser___ReduceAction371___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction371___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction371___action "parser::ReduceAction371::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction371___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction371___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction371___init();
 #define LOCATE_parser___ReduceAction371___init "parser::ReduceAction371::init"
+val_t NEW_ReduceAction371_parser___ReduceAction371___init();
 typedef void (* parser___ReduceAction372___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction372___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction372___action "parser::ReduceAction372::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction372___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction372___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction372___init();
 #define LOCATE_parser___ReduceAction372___init "parser::ReduceAction372::init"
+val_t NEW_ReduceAction372_parser___ReduceAction372___init();
 typedef void (* parser___ReduceAction373___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction373___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction373___action "parser::ReduceAction373::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction373___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction373___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction373___init();
 #define LOCATE_parser___ReduceAction373___init "parser::ReduceAction373::init"
+val_t NEW_ReduceAction373_parser___ReduceAction373___init();
 typedef void (* parser___ReduceAction374___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction374___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction374___action "parser::ReduceAction374::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction374___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction374___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction374___init();
 #define LOCATE_parser___ReduceAction374___init "parser::ReduceAction374::init"
+val_t NEW_ReduceAction374_parser___ReduceAction374___init();
 typedef void (* parser___ReduceAction375___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction375___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction375___action "parser::ReduceAction375::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction375___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction375___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction375___init();
 #define LOCATE_parser___ReduceAction375___init "parser::ReduceAction375::init"
+val_t NEW_ReduceAction375_parser___ReduceAction375___init();
 typedef void (* parser___ReduceAction376___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction376___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction376___action "parser::ReduceAction376::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction376___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction376___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction376___init();
 #define LOCATE_parser___ReduceAction376___init "parser::ReduceAction376::init"
+val_t NEW_ReduceAction376_parser___ReduceAction376___init();
 typedef void (* parser___ReduceAction377___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction377___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction377___action "parser::ReduceAction377::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction377___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction377___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction377___init();
 #define LOCATE_parser___ReduceAction377___init "parser::ReduceAction377::init"
+val_t NEW_ReduceAction377_parser___ReduceAction377___init();
 typedef void (* parser___ReduceAction378___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction378___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction378___action "parser::ReduceAction378::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction378___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction378___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction378___init();
 #define LOCATE_parser___ReduceAction378___init "parser::ReduceAction378::init"
+val_t NEW_ReduceAction378_parser___ReduceAction378___init();
 typedef void (* parser___ReduceAction379___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction379___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction379___action "parser::ReduceAction379::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction379___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction379___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction379___init();
 #define LOCATE_parser___ReduceAction379___init "parser::ReduceAction379::init"
+val_t NEW_ReduceAction379_parser___ReduceAction379___init();
 typedef void (* parser___ReduceAction380___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction380___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction380___action "parser::ReduceAction380::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction380___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction380___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction380___init();
 #define LOCATE_parser___ReduceAction380___init "parser::ReduceAction380::init"
+val_t NEW_ReduceAction380_parser___ReduceAction380___init();
 typedef void (* parser___ReduceAction381___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction381___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction381___action "parser::ReduceAction381::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction381___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction381___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction381___init();
 #define LOCATE_parser___ReduceAction381___init "parser::ReduceAction381::init"
+val_t NEW_ReduceAction381_parser___ReduceAction381___init();
 typedef void (* parser___ReduceAction382___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction382___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction382___action "parser::ReduceAction382::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction382___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction382___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction382___init();
 #define LOCATE_parser___ReduceAction382___init "parser::ReduceAction382::init"
+val_t NEW_ReduceAction382_parser___ReduceAction382___init();
 typedef void (* parser___ReduceAction383___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction383___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction383___action "parser::ReduceAction383::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction383___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction383___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction383___init();
 #define LOCATE_parser___ReduceAction383___init "parser::ReduceAction383::init"
+val_t NEW_ReduceAction383_parser___ReduceAction383___init();
 typedef void (* parser___ReduceAction384___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction384___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction384___action "parser::ReduceAction384::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction384___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction384___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction384___init();
 #define LOCATE_parser___ReduceAction384___init "parser::ReduceAction384::init"
+val_t NEW_ReduceAction384_parser___ReduceAction384___init();
 typedef void (* parser___ReduceAction385___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction385___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction385___action "parser::ReduceAction385::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction385___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction385___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction385___init();
 #define LOCATE_parser___ReduceAction385___init "parser::ReduceAction385::init"
+val_t NEW_ReduceAction385_parser___ReduceAction385___init();
 typedef void (* parser___ReduceAction386___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction386___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction386___action "parser::ReduceAction386::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction386___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction386___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction386___init();
 #define LOCATE_parser___ReduceAction386___init "parser::ReduceAction386::init"
+val_t NEW_ReduceAction386_parser___ReduceAction386___init();
 typedef void (* parser___ReduceAction387___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction387___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction387___action "parser::ReduceAction387::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction387___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction387___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction387___init();
 #define LOCATE_parser___ReduceAction387___init "parser::ReduceAction387::init"
+val_t NEW_ReduceAction387_parser___ReduceAction387___init();
 typedef void (* parser___ReduceAction388___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction388___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction388___action "parser::ReduceAction388::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction388___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction388___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction388___init();
 #define LOCATE_parser___ReduceAction388___init "parser::ReduceAction388::init"
+val_t NEW_ReduceAction388_parser___ReduceAction388___init();
 typedef void (* parser___ReduceAction389___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction389___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction389___action "parser::ReduceAction389::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction389___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction389___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction389___init();
 #define LOCATE_parser___ReduceAction389___init "parser::ReduceAction389::init"
+val_t NEW_ReduceAction389_parser___ReduceAction389___init();
 typedef void (* parser___ReduceAction390___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction390___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction390___action "parser::ReduceAction390::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction390___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction390___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction390___init();
 #define LOCATE_parser___ReduceAction390___init "parser::ReduceAction390::init"
+val_t NEW_ReduceAction390_parser___ReduceAction390___init();
 typedef void (* parser___ReduceAction391___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction391___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction391___action "parser::ReduceAction391::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction391___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction391___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction391___init();
 #define LOCATE_parser___ReduceAction391___init "parser::ReduceAction391::init"
+val_t NEW_ReduceAction391_parser___ReduceAction391___init();
 typedef void (* parser___ReduceAction392___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction392___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction392___action "parser::ReduceAction392::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction392___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction392___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction392___init();
 #define LOCATE_parser___ReduceAction392___init "parser::ReduceAction392::init"
+val_t NEW_ReduceAction392_parser___ReduceAction392___init();
 typedef void (* parser___ReduceAction393___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction393___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction393___action "parser::ReduceAction393::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction393___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction393___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction393___init();
 #define LOCATE_parser___ReduceAction393___init "parser::ReduceAction393::init"
+val_t NEW_ReduceAction393_parser___ReduceAction393___init();
 typedef void (* parser___ReduceAction394___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction394___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction394___action "parser::ReduceAction394::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction394___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction394___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction394___init();
 #define LOCATE_parser___ReduceAction394___init "parser::ReduceAction394::init"
+val_t NEW_ReduceAction394_parser___ReduceAction394___init();
 typedef void (* parser___ReduceAction395___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction395___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction395___action "parser::ReduceAction395::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction395___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction395___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction395___init();
 #define LOCATE_parser___ReduceAction395___init "parser::ReduceAction395::init"
+val_t NEW_ReduceAction395_parser___ReduceAction395___init();
 typedef void (* parser___ReduceAction396___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction396___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction396___action "parser::ReduceAction396::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction396___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction396___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction396___init();
 #define LOCATE_parser___ReduceAction396___init "parser::ReduceAction396::init"
+val_t NEW_ReduceAction396_parser___ReduceAction396___init();
 typedef void (* parser___ReduceAction397___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction397___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction397___action "parser::ReduceAction397::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction397___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction397___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction397___init();
 #define LOCATE_parser___ReduceAction397___init "parser::ReduceAction397::init"
+val_t NEW_ReduceAction397_parser___ReduceAction397___init();
 typedef void (* parser___ReduceAction398___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction398___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction398___action "parser::ReduceAction398::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction398___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction398___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction398___init();
 #define LOCATE_parser___ReduceAction398___init "parser::ReduceAction398::init"
+val_t NEW_ReduceAction398_parser___ReduceAction398___init();
 typedef void (* parser___ReduceAction399___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction399___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction399___action "parser::ReduceAction399::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction399___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction399___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction399___init();
 #define LOCATE_parser___ReduceAction399___init "parser::ReduceAction399::init"
+val_t NEW_ReduceAction399_parser___ReduceAction399___init();
 typedef void (* parser___ReduceAction400___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction400___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction400___action "parser::ReduceAction400::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction400___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction400___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction400___init();
 #define LOCATE_parser___ReduceAction400___init "parser::ReduceAction400::init"
+val_t NEW_ReduceAction400_parser___ReduceAction400___init();
 typedef void (* parser___ReduceAction401___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction401___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction401___action "parser::ReduceAction401::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction401___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction401___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction401___init();
 #define LOCATE_parser___ReduceAction401___init "parser::ReduceAction401::init"
+val_t NEW_ReduceAction401_parser___ReduceAction401___init();
 typedef void (* parser___ReduceAction402___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction402___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction402___action "parser::ReduceAction402::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction402___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction402___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction402___init();
 #define LOCATE_parser___ReduceAction402___init "parser::ReduceAction402::init"
+val_t NEW_ReduceAction402_parser___ReduceAction402___init();
 typedef void (* parser___ReduceAction403___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction403___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction403___action "parser::ReduceAction403::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction403___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction403___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction403___init();
 #define LOCATE_parser___ReduceAction403___init "parser::ReduceAction403::init"
+val_t NEW_ReduceAction403_parser___ReduceAction403___init();
 typedef void (* parser___ReduceAction404___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction404___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction404___action "parser::ReduceAction404::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction404___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction404___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction404___init();
 #define LOCATE_parser___ReduceAction404___init "parser::ReduceAction404::init"
+val_t NEW_ReduceAction404_parser___ReduceAction404___init();
 typedef void (* parser___ReduceAction405___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction405___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction405___action "parser::ReduceAction405::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction405___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction405___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction405___init();
 #define LOCATE_parser___ReduceAction405___init "parser::ReduceAction405::init"
+val_t NEW_ReduceAction405_parser___ReduceAction405___init();
 typedef void (* parser___ReduceAction406___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction406___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction406___action "parser::ReduceAction406::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction406___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction406___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction406___init();
 #define LOCATE_parser___ReduceAction406___init "parser::ReduceAction406::init"
+val_t NEW_ReduceAction406_parser___ReduceAction406___init();
 typedef void (* parser___ReduceAction407___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction407___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction407___action "parser::ReduceAction407::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction407___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction407___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction407___init();
 #define LOCATE_parser___ReduceAction407___init "parser::ReduceAction407::init"
+val_t NEW_ReduceAction407_parser___ReduceAction407___init();
 typedef void (* parser___ReduceAction408___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction408___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction408___action "parser::ReduceAction408::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction408___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction408___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction408___init();
 #define LOCATE_parser___ReduceAction408___init "parser::ReduceAction408::init"
+val_t NEW_ReduceAction408_parser___ReduceAction408___init();
 typedef void (* parser___ReduceAction409___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction409___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction409___action "parser::ReduceAction409::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction409___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction409___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction409___init();
 #define LOCATE_parser___ReduceAction409___init "parser::ReduceAction409::init"
+val_t NEW_ReduceAction409_parser___ReduceAction409___init();
 typedef void (* parser___ReduceAction410___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction410___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction410___action "parser::ReduceAction410::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction410___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction410___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction410___init();
 #define LOCATE_parser___ReduceAction410___init "parser::ReduceAction410::init"
+val_t NEW_ReduceAction410_parser___ReduceAction410___init();
 typedef void (* parser___ReduceAction411___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction411___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction411___action "parser::ReduceAction411::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction411___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction411___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction411___init();
 #define LOCATE_parser___ReduceAction411___init "parser::ReduceAction411::init"
+val_t NEW_ReduceAction411_parser___ReduceAction411___init();
 typedef void (* parser___ReduceAction412___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction412___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction412___action "parser::ReduceAction412::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction412___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction412___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction412___init();
 #define LOCATE_parser___ReduceAction412___init "parser::ReduceAction412::init"
+val_t NEW_ReduceAction412_parser___ReduceAction412___init();
 typedef void (* parser___ReduceAction413___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction413___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction413___action "parser::ReduceAction413::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction413___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction413___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction413___init();
 #define LOCATE_parser___ReduceAction413___init "parser::ReduceAction413::init"
+val_t NEW_ReduceAction413_parser___ReduceAction413___init();
 typedef void (* parser___ReduceAction414___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction414___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction414___action "parser::ReduceAction414::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction414___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction414___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction414___init();
 #define LOCATE_parser___ReduceAction414___init "parser::ReduceAction414::init"
+val_t NEW_ReduceAction414_parser___ReduceAction414___init();
 typedef void (* parser___ReduceAction415___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction415___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction415___action "parser::ReduceAction415::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction415___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction415___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction415___init();
 #define LOCATE_parser___ReduceAction415___init "parser::ReduceAction415::init"
+val_t NEW_ReduceAction415_parser___ReduceAction415___init();
 typedef void (* parser___ReduceAction416___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction416___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction416___action "parser::ReduceAction416::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction416___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction416___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction416___init();
 #define LOCATE_parser___ReduceAction416___init "parser::ReduceAction416::init"
+val_t NEW_ReduceAction416_parser___ReduceAction416___init();
 typedef void (* parser___ReduceAction417___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction417___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction417___action "parser::ReduceAction417::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction417___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction417___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction417___init();
 #define LOCATE_parser___ReduceAction417___init "parser::ReduceAction417::init"
+val_t NEW_ReduceAction417_parser___ReduceAction417___init();
 typedef void (* parser___ReduceAction418___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction418___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction418___action "parser::ReduceAction418::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction418___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction418___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction418___init();
 #define LOCATE_parser___ReduceAction418___init "parser::ReduceAction418::init"
+val_t NEW_ReduceAction418_parser___ReduceAction418___init();
 typedef void (* parser___ReduceAction419___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction419___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction419___action "parser::ReduceAction419::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction419___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction419___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction419___init();
 #define LOCATE_parser___ReduceAction419___init "parser::ReduceAction419::init"
+val_t NEW_ReduceAction419_parser___ReduceAction419___init();
 typedef void (* parser___ReduceAction420___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction420___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction420___action "parser::ReduceAction420::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction420___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction420___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction420___init();
 #define LOCATE_parser___ReduceAction420___init "parser::ReduceAction420::init"
+val_t NEW_ReduceAction420_parser___ReduceAction420___init();
 typedef void (* parser___ReduceAction421___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction421___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction421___action "parser::ReduceAction421::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction421___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction421___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction421___init();
 #define LOCATE_parser___ReduceAction421___init "parser::ReduceAction421::init"
+val_t NEW_ReduceAction421_parser___ReduceAction421___init();
 typedef void (* parser___ReduceAction422___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction422___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction422___action "parser::ReduceAction422::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction422___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction422___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction422___init();
 #define LOCATE_parser___ReduceAction422___init "parser::ReduceAction422::init"
+val_t NEW_ReduceAction422_parser___ReduceAction422___init();
 typedef void (* parser___ReduceAction423___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction423___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction423___action "parser::ReduceAction423::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction423___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction423___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction423___init();
 #define LOCATE_parser___ReduceAction423___init "parser::ReduceAction423::init"
+val_t NEW_ReduceAction423_parser___ReduceAction423___init();
 typedef void (* parser___ReduceAction424___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction424___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction424___action "parser::ReduceAction424::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction424___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction424___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction424___init();
 #define LOCATE_parser___ReduceAction424___init "parser::ReduceAction424::init"
+val_t NEW_ReduceAction424_parser___ReduceAction424___init();
 typedef void (* parser___ReduceAction425___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction425___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction425___action "parser::ReduceAction425::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction425___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction425___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction425___init();
 #define LOCATE_parser___ReduceAction425___init "parser::ReduceAction425::init"
+val_t NEW_ReduceAction425_parser___ReduceAction425___init();
 typedef void (* parser___ReduceAction426___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction426___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction426___action "parser::ReduceAction426::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction426___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction426___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction426___init();
 #define LOCATE_parser___ReduceAction426___init "parser::ReduceAction426::init"
+val_t NEW_ReduceAction426_parser___ReduceAction426___init();
 typedef void (* parser___ReduceAction427___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction427___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction427___action "parser::ReduceAction427::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction427___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction427___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction427___init();
 #define LOCATE_parser___ReduceAction427___init "parser::ReduceAction427::init"
+val_t NEW_ReduceAction427_parser___ReduceAction427___init();
 typedef void (* parser___ReduceAction428___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction428___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction428___action "parser::ReduceAction428::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction428___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction428___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction428___init();
 #define LOCATE_parser___ReduceAction428___init "parser::ReduceAction428::init"
+val_t NEW_ReduceAction428_parser___ReduceAction428___init();
 typedef void (* parser___ReduceAction429___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction429___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction429___action "parser::ReduceAction429::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction429___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction429___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction429___init();
 #define LOCATE_parser___ReduceAction429___init "parser::ReduceAction429::init"
+val_t NEW_ReduceAction429_parser___ReduceAction429___init();
 typedef void (* parser___ReduceAction430___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction430___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction430___action "parser::ReduceAction430::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction430___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction430___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction430___init();
 #define LOCATE_parser___ReduceAction430___init "parser::ReduceAction430::init"
+val_t NEW_ReduceAction430_parser___ReduceAction430___init();
 typedef void (* parser___ReduceAction431___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction431___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction431___action "parser::ReduceAction431::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction431___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction431___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction431___init();
 #define LOCATE_parser___ReduceAction431___init "parser::ReduceAction431::init"
+val_t NEW_ReduceAction431_parser___ReduceAction431___init();
 typedef void (* parser___ReduceAction432___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction432___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction432___action "parser::ReduceAction432::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction432___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction432___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction432___init();
 #define LOCATE_parser___ReduceAction432___init "parser::ReduceAction432::init"
+val_t NEW_ReduceAction432_parser___ReduceAction432___init();
 typedef void (* parser___ReduceAction433___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction433___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction433___action "parser::ReduceAction433::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction433___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction433___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction433___init();
 #define LOCATE_parser___ReduceAction433___init "parser::ReduceAction433::init"
+val_t NEW_ReduceAction433_parser___ReduceAction433___init();
 typedef void (* parser___ReduceAction434___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction434___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction434___action "parser::ReduceAction434::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction434___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction434___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction434___init();
 #define LOCATE_parser___ReduceAction434___init "parser::ReduceAction434::init"
+val_t NEW_ReduceAction434_parser___ReduceAction434___init();
 typedef void (* parser___ReduceAction435___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction435___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction435___action "parser::ReduceAction435::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction435___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction435___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction435___init();
 #define LOCATE_parser___ReduceAction435___init "parser::ReduceAction435::init"
+val_t NEW_ReduceAction435_parser___ReduceAction435___init();
 typedef void (* parser___ReduceAction436___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction436___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction436___action "parser::ReduceAction436::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction436___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction436___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction436___init();
 #define LOCATE_parser___ReduceAction436___init "parser::ReduceAction436::init"
+val_t NEW_ReduceAction436_parser___ReduceAction436___init();
 typedef void (* parser___ReduceAction437___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction437___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction437___action "parser::ReduceAction437::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction437___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction437___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction437___init();
 #define LOCATE_parser___ReduceAction437___init "parser::ReduceAction437::init"
+val_t NEW_ReduceAction437_parser___ReduceAction437___init();
 typedef void (* parser___ReduceAction438___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction438___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction438___action "parser::ReduceAction438::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction438___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction438___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction438___init();
 #define LOCATE_parser___ReduceAction438___init "parser::ReduceAction438::init"
+val_t NEW_ReduceAction438_parser___ReduceAction438___init();
 typedef void (* parser___ReduceAction439___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction439___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction439___action "parser::ReduceAction439::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction439___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction439___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction439___init();
 #define LOCATE_parser___ReduceAction439___init "parser::ReduceAction439::init"
+val_t NEW_ReduceAction439_parser___ReduceAction439___init();
 typedef void (* parser___ReduceAction440___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction440___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction440___action "parser::ReduceAction440::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction440___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction440___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction440___init();
 #define LOCATE_parser___ReduceAction440___init "parser::ReduceAction440::init"
+val_t NEW_ReduceAction440_parser___ReduceAction440___init();
 typedef void (* parser___ReduceAction441___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction441___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction441___action "parser::ReduceAction441::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction441___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction441___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction441___init();
 #define LOCATE_parser___ReduceAction441___init "parser::ReduceAction441::init"
+val_t NEW_ReduceAction441_parser___ReduceAction441___init();
 typedef void (* parser___ReduceAction442___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction442___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction442___action "parser::ReduceAction442::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction442___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction442___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction442___init();
 #define LOCATE_parser___ReduceAction442___init "parser::ReduceAction442::init"
+val_t NEW_ReduceAction442_parser___ReduceAction442___init();
 typedef void (* parser___ReduceAction443___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction443___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction443___action "parser::ReduceAction443::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction443___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction443___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction443___init();
 #define LOCATE_parser___ReduceAction443___init "parser::ReduceAction443::init"
+val_t NEW_ReduceAction443_parser___ReduceAction443___init();
 typedef void (* parser___ReduceAction444___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction444___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction444___action "parser::ReduceAction444::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction444___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction444___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction444___init();
 #define LOCATE_parser___ReduceAction444___init "parser::ReduceAction444::init"
+val_t NEW_ReduceAction444_parser___ReduceAction444___init();
 typedef void (* parser___ReduceAction445___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction445___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction445___action "parser::ReduceAction445::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction445___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction445___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction445___init();
 #define LOCATE_parser___ReduceAction445___init "parser::ReduceAction445::init"
+val_t NEW_ReduceAction445_parser___ReduceAction445___init();
 typedef void (* parser___ReduceAction446___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction446___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction446___action "parser::ReduceAction446::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction446___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction446___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction446___init();
 #define LOCATE_parser___ReduceAction446___init "parser::ReduceAction446::init"
+val_t NEW_ReduceAction446_parser___ReduceAction446___init();
 typedef void (* parser___ReduceAction447___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction447___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction447___action "parser::ReduceAction447::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction447___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction447___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction447___init();
 #define LOCATE_parser___ReduceAction447___init "parser::ReduceAction447::init"
+val_t NEW_ReduceAction447_parser___ReduceAction447___init();
 typedef void (* parser___ReduceAction448___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction448___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction448___action "parser::ReduceAction448::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction448___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction448___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction448___init();
 #define LOCATE_parser___ReduceAction448___init "parser::ReduceAction448::init"
+val_t NEW_ReduceAction448_parser___ReduceAction448___init();
 typedef void (* parser___ReduceAction449___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction449___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction449___action "parser::ReduceAction449::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction449___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction449___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction449___init();
 #define LOCATE_parser___ReduceAction449___init "parser::ReduceAction449::init"
+val_t NEW_ReduceAction449_parser___ReduceAction449___init();
 typedef void (* parser___ReduceAction450___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction450___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction450___action "parser::ReduceAction450::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction450___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction450___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction450___init();
 #define LOCATE_parser___ReduceAction450___init "parser::ReduceAction450::init"
+val_t NEW_ReduceAction450_parser___ReduceAction450___init();
 typedef void (* parser___ReduceAction451___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction451___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction451___action "parser::ReduceAction451::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction451___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction451___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction451___init();
 #define LOCATE_parser___ReduceAction451___init "parser::ReduceAction451::init"
+val_t NEW_ReduceAction451_parser___ReduceAction451___init();
 typedef void (* parser___ReduceAction452___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction452___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction452___action "parser::ReduceAction452::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction452___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction452___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction452___init();
 #define LOCATE_parser___ReduceAction452___init "parser::ReduceAction452::init"
+val_t NEW_ReduceAction452_parser___ReduceAction452___init();
 typedef void (* parser___ReduceAction453___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction453___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction453___action "parser::ReduceAction453::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction453___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction453___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction453___init();
 #define LOCATE_parser___ReduceAction453___init "parser::ReduceAction453::init"
+val_t NEW_ReduceAction453_parser___ReduceAction453___init();
 typedef void (* parser___ReduceAction454___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction454___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction454___action "parser::ReduceAction454::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction454___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction454___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction454___init();
 #define LOCATE_parser___ReduceAction454___init "parser::ReduceAction454::init"
+val_t NEW_ReduceAction454_parser___ReduceAction454___init();
 typedef void (* parser___ReduceAction455___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction455___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction455___action "parser::ReduceAction455::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction455___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction455___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction455___init();
 #define LOCATE_parser___ReduceAction455___init "parser::ReduceAction455::init"
+val_t NEW_ReduceAction455_parser___ReduceAction455___init();
 typedef void (* parser___ReduceAction456___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction456___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction456___action "parser::ReduceAction456::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction456___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction456___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction456___init();
 #define LOCATE_parser___ReduceAction456___init "parser::ReduceAction456::init"
+val_t NEW_ReduceAction456_parser___ReduceAction456___init();
 typedef void (* parser___ReduceAction457___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction457___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction457___action "parser::ReduceAction457::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction457___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction457___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction457___init();
 #define LOCATE_parser___ReduceAction457___init "parser::ReduceAction457::init"
+val_t NEW_ReduceAction457_parser___ReduceAction457___init();
 typedef void (* parser___ReduceAction458___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction458___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction458___action "parser::ReduceAction458::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction458___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction458___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction458___init();
 #define LOCATE_parser___ReduceAction458___init "parser::ReduceAction458::init"
+val_t NEW_ReduceAction458_parser___ReduceAction458___init();
 typedef void (* parser___ReduceAction459___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction459___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction459___action "parser::ReduceAction459::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction459___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction459___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction459___init();
 #define LOCATE_parser___ReduceAction459___init "parser::ReduceAction459::init"
+val_t NEW_ReduceAction459_parser___ReduceAction459___init();
 typedef void (* parser___ReduceAction460___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction460___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction460___action "parser::ReduceAction460::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction460___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction460___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction460___init();
 #define LOCATE_parser___ReduceAction460___init "parser::ReduceAction460::init"
+val_t NEW_ReduceAction460_parser___ReduceAction460___init();
 typedef void (* parser___ReduceAction461___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction461___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction461___action "parser::ReduceAction461::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction461___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction461___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction461___init();
 #define LOCATE_parser___ReduceAction461___init "parser::ReduceAction461::init"
+val_t NEW_ReduceAction461_parser___ReduceAction461___init();
 typedef void (* parser___ReduceAction462___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction462___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction462___action "parser::ReduceAction462::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction462___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction462___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction462___init();
 #define LOCATE_parser___ReduceAction462___init "parser::ReduceAction462::init"
+val_t NEW_ReduceAction462_parser___ReduceAction462___init();
 typedef void (* parser___ReduceAction463___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction463___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction463___action "parser::ReduceAction463::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction463___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction463___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction463___init();
 #define LOCATE_parser___ReduceAction463___init "parser::ReduceAction463::init"
+val_t NEW_ReduceAction463_parser___ReduceAction463___init();
 typedef void (* parser___ReduceAction464___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction464___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction464___action "parser::ReduceAction464::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction464___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction464___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction464___init();
 #define LOCATE_parser___ReduceAction464___init "parser::ReduceAction464::init"
+val_t NEW_ReduceAction464_parser___ReduceAction464___init();
 typedef void (* parser___ReduceAction465___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction465___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction465___action "parser::ReduceAction465::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction465___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction465___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction465___init();
 #define LOCATE_parser___ReduceAction465___init "parser::ReduceAction465::init"
+val_t NEW_ReduceAction465_parser___ReduceAction465___init();
 typedef void (* parser___ReduceAction466___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction466___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction466___action "parser::ReduceAction466::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction466___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction466___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction466___init();
 #define LOCATE_parser___ReduceAction466___init "parser::ReduceAction466::init"
+val_t NEW_ReduceAction466_parser___ReduceAction466___init();
 typedef void (* parser___ReduceAction467___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction467___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction467___action "parser::ReduceAction467::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction467___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction467___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction467___init();
 #define LOCATE_parser___ReduceAction467___init "parser::ReduceAction467::init"
+val_t NEW_ReduceAction467_parser___ReduceAction467___init();
 typedef void (* parser___ReduceAction468___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction468___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction468___action "parser::ReduceAction468::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction468___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction468___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction468___init();
 #define LOCATE_parser___ReduceAction468___init "parser::ReduceAction468::init"
+val_t NEW_ReduceAction468_parser___ReduceAction468___init();
 typedef void (* parser___ReduceAction469___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction469___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction469___action "parser::ReduceAction469::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction469___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction469___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction469___init();
 #define LOCATE_parser___ReduceAction469___init "parser::ReduceAction469::init"
+val_t NEW_ReduceAction469_parser___ReduceAction469___init();
 typedef void (* parser___ReduceAction470___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction470___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction470___action "parser::ReduceAction470::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction470___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction470___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction470___init();
 #define LOCATE_parser___ReduceAction470___init "parser::ReduceAction470::init"
+val_t NEW_ReduceAction470_parser___ReduceAction470___init();
 typedef void (* parser___ReduceAction471___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction471___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction471___action "parser::ReduceAction471::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction471___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction471___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction471___init();
 #define LOCATE_parser___ReduceAction471___init "parser::ReduceAction471::init"
+val_t NEW_ReduceAction471_parser___ReduceAction471___init();
 typedef void (* parser___ReduceAction472___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction472___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction472___action "parser::ReduceAction472::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction472___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction472___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction472___init();
 #define LOCATE_parser___ReduceAction472___init "parser::ReduceAction472::init"
+val_t NEW_ReduceAction472_parser___ReduceAction472___init();
 typedef void (* parser___ReduceAction473___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction473___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction473___action "parser::ReduceAction473::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction473___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction473___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction473___init();
 #define LOCATE_parser___ReduceAction473___init "parser::ReduceAction473::init"
+val_t NEW_ReduceAction473_parser___ReduceAction473___init();
 typedef void (* parser___ReduceAction474___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction474___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction474___action "parser::ReduceAction474::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction474___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction474___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction474___init();
 #define LOCATE_parser___ReduceAction474___init "parser::ReduceAction474::init"
+val_t NEW_ReduceAction474_parser___ReduceAction474___init();
 typedef void (* parser___ReduceAction475___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction475___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction475___action "parser::ReduceAction475::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction475___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction475___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction475___init();
 #define LOCATE_parser___ReduceAction475___init "parser::ReduceAction475::init"
+val_t NEW_ReduceAction475_parser___ReduceAction475___init();
 typedef void (* parser___ReduceAction476___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction476___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction476___action "parser::ReduceAction476::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction476___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction476___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction476___init();
 #define LOCATE_parser___ReduceAction476___init "parser::ReduceAction476::init"
+val_t NEW_ReduceAction476_parser___ReduceAction476___init();
 typedef void (* parser___ReduceAction477___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction477___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction477___action "parser::ReduceAction477::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction477___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction477___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction477___init();
 #define LOCATE_parser___ReduceAction477___init "parser::ReduceAction477::init"
+val_t NEW_ReduceAction477_parser___ReduceAction477___init();
 typedef void (* parser___ReduceAction478___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction478___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction478___action "parser::ReduceAction478::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction478___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction478___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction478___init();
 #define LOCATE_parser___ReduceAction478___init "parser::ReduceAction478::init"
+val_t NEW_ReduceAction478_parser___ReduceAction478___init();
 typedef void (* parser___ReduceAction479___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction479___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction479___action "parser::ReduceAction479::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction479___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction479___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction479___init();
 #define LOCATE_parser___ReduceAction479___init "parser::ReduceAction479::init"
+val_t NEW_ReduceAction479_parser___ReduceAction479___init();
 typedef void (* parser___ReduceAction480___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction480___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction480___action "parser::ReduceAction480::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction480___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction480___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction480___init();
 #define LOCATE_parser___ReduceAction480___init "parser::ReduceAction480::init"
+val_t NEW_ReduceAction480_parser___ReduceAction480___init();
 typedef void (* parser___ReduceAction481___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction481___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction481___action "parser::ReduceAction481::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction481___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction481___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction481___init();
 #define LOCATE_parser___ReduceAction481___init "parser::ReduceAction481::init"
+val_t NEW_ReduceAction481_parser___ReduceAction481___init();
 typedef void (* parser___ReduceAction482___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction482___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction482___action "parser::ReduceAction482::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction482___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction482___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction482___init();
 #define LOCATE_parser___ReduceAction482___init "parser::ReduceAction482::init"
+val_t NEW_ReduceAction482_parser___ReduceAction482___init();
 typedef void (* parser___ReduceAction483___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction483___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction483___action "parser::ReduceAction483::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction483___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction483___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction483___init();
 #define LOCATE_parser___ReduceAction483___init "parser::ReduceAction483::init"
+val_t NEW_ReduceAction483_parser___ReduceAction483___init();
 typedef void (* parser___ReduceAction484___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction484___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction484___action "parser::ReduceAction484::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction484___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction484___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction484___init();
 #define LOCATE_parser___ReduceAction484___init "parser::ReduceAction484::init"
+val_t NEW_ReduceAction484_parser___ReduceAction484___init();
 typedef void (* parser___ReduceAction485___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction485___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction485___action "parser::ReduceAction485::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction485___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction485___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction485___init();
 #define LOCATE_parser___ReduceAction485___init "parser::ReduceAction485::init"
+val_t NEW_ReduceAction485_parser___ReduceAction485___init();
 typedef void (* parser___ReduceAction486___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction486___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction486___action "parser::ReduceAction486::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction486___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction486___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction486___init();
 #define LOCATE_parser___ReduceAction486___init "parser::ReduceAction486::init"
+val_t NEW_ReduceAction486_parser___ReduceAction486___init();
 typedef void (* parser___ReduceAction487___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction487___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction487___action "parser::ReduceAction487::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction487___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction487___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction487___init();
 #define LOCATE_parser___ReduceAction487___init "parser::ReduceAction487::init"
+val_t NEW_ReduceAction487_parser___ReduceAction487___init();
 typedef void (* parser___ReduceAction488___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction488___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction488___action "parser::ReduceAction488::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction488___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction488___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction488___init();
 #define LOCATE_parser___ReduceAction488___init "parser::ReduceAction488::init"
+val_t NEW_ReduceAction488_parser___ReduceAction488___init();
 typedef void (* parser___ReduceAction489___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction489___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction489___action "parser::ReduceAction489::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction489___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction489___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction489___init();
 #define LOCATE_parser___ReduceAction489___init "parser::ReduceAction489::init"
+val_t NEW_ReduceAction489_parser___ReduceAction489___init();
 typedef void (* parser___ReduceAction490___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction490___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction490___action "parser::ReduceAction490::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction490___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction490___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction490___init();
 #define LOCATE_parser___ReduceAction490___init "parser::ReduceAction490::init"
+val_t NEW_ReduceAction490_parser___ReduceAction490___init();
 typedef void (* parser___ReduceAction491___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction491___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction491___action "parser::ReduceAction491::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction491___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction491___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction491___init();
 #define LOCATE_parser___ReduceAction491___init "parser::ReduceAction491::init"
+val_t NEW_ReduceAction491_parser___ReduceAction491___init();
 typedef void (* parser___ReduceAction492___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction492___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction492___action "parser::ReduceAction492::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction492___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction492___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction492___init();
 #define LOCATE_parser___ReduceAction492___init "parser::ReduceAction492::init"
+val_t NEW_ReduceAction492_parser___ReduceAction492___init();
 typedef void (* parser___ReduceAction493___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction493___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction493___action "parser::ReduceAction493::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction493___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction493___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction493___init();
 #define LOCATE_parser___ReduceAction493___init "parser::ReduceAction493::init"
+val_t NEW_ReduceAction493_parser___ReduceAction493___init();
 typedef void (* parser___ReduceAction494___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction494___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction494___action "parser::ReduceAction494::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction494___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction494___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction494___init();
 #define LOCATE_parser___ReduceAction494___init "parser::ReduceAction494::init"
+val_t NEW_ReduceAction494_parser___ReduceAction494___init();
 typedef void (* parser___ReduceAction495___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction495___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction495___action "parser::ReduceAction495::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction495___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction495___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction495___init();
 #define LOCATE_parser___ReduceAction495___init "parser::ReduceAction495::init"
+val_t NEW_ReduceAction495_parser___ReduceAction495___init();
 typedef void (* parser___ReduceAction496___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction496___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction496___action "parser::ReduceAction496::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction496___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction496___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction496___init();
 #define LOCATE_parser___ReduceAction496___init "parser::ReduceAction496::init"
+val_t NEW_ReduceAction496_parser___ReduceAction496___init();
 typedef void (* parser___ReduceAction497___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction497___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction497___action "parser::ReduceAction497::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction497___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction497___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction497___init();
 #define LOCATE_parser___ReduceAction497___init "parser::ReduceAction497::init"
+val_t NEW_ReduceAction497_parser___ReduceAction497___init();
 typedef void (* parser___ReduceAction498___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction498___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction498___action "parser::ReduceAction498::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction498___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction498___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction498___init();
 #define LOCATE_parser___ReduceAction498___init "parser::ReduceAction498::init"
+val_t NEW_ReduceAction498_parser___ReduceAction498___init();
 typedef void (* parser___ReduceAction499___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction499___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction499___action "parser::ReduceAction499::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction499___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction499___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction499___init();
 #define LOCATE_parser___ReduceAction499___init "parser::ReduceAction499::init"
+val_t NEW_ReduceAction499_parser___ReduceAction499___init();
 typedef void (* parser___ReduceAction500___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction500___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction500___action "parser::ReduceAction500::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction500___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction500___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction500___init();
 #define LOCATE_parser___ReduceAction500___init "parser::ReduceAction500::init"
+val_t NEW_ReduceAction500_parser___ReduceAction500___init();
 typedef void (* parser___ReduceAction501___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction501___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction501___action "parser::ReduceAction501::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction501___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction501___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction501___init();
 #define LOCATE_parser___ReduceAction501___init "parser::ReduceAction501::init"
+val_t NEW_ReduceAction501_parser___ReduceAction501___init();
 typedef void (* parser___ReduceAction502___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction502___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction502___action "parser::ReduceAction502::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction502___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction502___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction502___init();
 #define LOCATE_parser___ReduceAction502___init "parser::ReduceAction502::init"
+val_t NEW_ReduceAction502_parser___ReduceAction502___init();
 typedef void (* parser___ReduceAction503___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction503___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction503___action "parser::ReduceAction503::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction503___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction503___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction503___init();
 #define LOCATE_parser___ReduceAction503___init "parser::ReduceAction503::init"
+val_t NEW_ReduceAction503_parser___ReduceAction503___init();
 typedef void (* parser___ReduceAction504___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction504___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction504___action "parser::ReduceAction504::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction504___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction504___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction504___init();
 #define LOCATE_parser___ReduceAction504___init "parser::ReduceAction504::init"
+val_t NEW_ReduceAction504_parser___ReduceAction504___init();
 typedef void (* parser___ReduceAction505___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction505___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction505___action "parser::ReduceAction505::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction505___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction505___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction505___init();
 #define LOCATE_parser___ReduceAction505___init "parser::ReduceAction505::init"
+val_t NEW_ReduceAction505_parser___ReduceAction505___init();
 typedef void (* parser___ReduceAction506___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction506___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction506___action "parser::ReduceAction506::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction506___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction506___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction506___init();
 #define LOCATE_parser___ReduceAction506___init "parser::ReduceAction506::init"
+val_t NEW_ReduceAction506_parser___ReduceAction506___init();
 typedef void (* parser___ReduceAction507___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction507___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction507___action "parser::ReduceAction507::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction507___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction507___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction507___init();
 #define LOCATE_parser___ReduceAction507___init "parser::ReduceAction507::init"
+val_t NEW_ReduceAction507_parser___ReduceAction507___init();
 typedef void (* parser___ReduceAction508___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction508___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction508___action "parser::ReduceAction508::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction508___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction508___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction508___init();
 #define LOCATE_parser___ReduceAction508___init "parser::ReduceAction508::init"
+val_t NEW_ReduceAction508_parser___ReduceAction508___init();
 typedef void (* parser___ReduceAction509___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction509___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction509___action "parser::ReduceAction509::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction509___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction509___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction509___init();
 #define LOCATE_parser___ReduceAction509___init "parser::ReduceAction509::init"
+val_t NEW_ReduceAction509_parser___ReduceAction509___init();
 typedef void (* parser___ReduceAction510___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction510___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction510___action "parser::ReduceAction510::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction510___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction510___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction510___init();
 #define LOCATE_parser___ReduceAction510___init "parser::ReduceAction510::init"
+val_t NEW_ReduceAction510_parser___ReduceAction510___init();
 typedef void (* parser___ReduceAction511___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction511___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction511___action "parser::ReduceAction511::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction511___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction511___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction511___init();
 #define LOCATE_parser___ReduceAction511___init "parser::ReduceAction511::init"
+val_t NEW_ReduceAction511_parser___ReduceAction511___init();
 typedef void (* parser___ReduceAction512___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction512___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction512___action "parser::ReduceAction512::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction512___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction512___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction512___init();
 #define LOCATE_parser___ReduceAction512___init "parser::ReduceAction512::init"
+val_t NEW_ReduceAction512_parser___ReduceAction512___init();
 typedef void (* parser___ReduceAction513___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction513___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction513___action "parser::ReduceAction513::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction513___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction513___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction513___init();
 #define LOCATE_parser___ReduceAction513___init "parser::ReduceAction513::init"
+val_t NEW_ReduceAction513_parser___ReduceAction513___init();
 typedef void (* parser___ReduceAction514___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction514___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction514___action "parser::ReduceAction514::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction514___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction514___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction514___init();
 #define LOCATE_parser___ReduceAction514___init "parser::ReduceAction514::init"
+val_t NEW_ReduceAction514_parser___ReduceAction514___init();
 typedef void (* parser___ReduceAction515___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction515___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction515___action "parser::ReduceAction515::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction515___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction515___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction515___init();
 #define LOCATE_parser___ReduceAction515___init "parser::ReduceAction515::init"
+val_t NEW_ReduceAction515_parser___ReduceAction515___init();
 typedef void (* parser___ReduceAction516___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction516___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction516___action "parser::ReduceAction516::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction516___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction516___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction516___init();
 #define LOCATE_parser___ReduceAction516___init "parser::ReduceAction516::init"
+val_t NEW_ReduceAction516_parser___ReduceAction516___init();
 typedef void (* parser___ReduceAction517___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction517___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction517___action "parser::ReduceAction517::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction517___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction517___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction517___init();
 #define LOCATE_parser___ReduceAction517___init "parser::ReduceAction517::init"
+val_t NEW_ReduceAction517_parser___ReduceAction517___init();
 typedef void (* parser___ReduceAction518___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction518___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction518___action "parser::ReduceAction518::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction518___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction518___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction518___init();
 #define LOCATE_parser___ReduceAction518___init "parser::ReduceAction518::init"
+val_t NEW_ReduceAction518_parser___ReduceAction518___init();
 typedef void (* parser___ReduceAction519___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction519___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction519___action "parser::ReduceAction519::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction519___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction519___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction519___init();
 #define LOCATE_parser___ReduceAction519___init "parser::ReduceAction519::init"
+val_t NEW_ReduceAction519_parser___ReduceAction519___init();
 typedef void (* parser___ReduceAction520___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction520___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction520___action "parser::ReduceAction520::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction520___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction520___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction520___init();
 #define LOCATE_parser___ReduceAction520___init "parser::ReduceAction520::init"
+val_t NEW_ReduceAction520_parser___ReduceAction520___init();
 typedef void (* parser___ReduceAction521___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction521___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction521___action "parser::ReduceAction521::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction521___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction521___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction521___init();
 #define LOCATE_parser___ReduceAction521___init "parser::ReduceAction521::init"
+val_t NEW_ReduceAction521_parser___ReduceAction521___init();
 typedef void (* parser___ReduceAction522___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction522___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction522___action "parser::ReduceAction522::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction522___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction522___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction522___init();
 #define LOCATE_parser___ReduceAction522___init "parser::ReduceAction522::init"
+val_t NEW_ReduceAction522_parser___ReduceAction522___init();
 typedef void (* parser___ReduceAction523___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction523___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction523___action "parser::ReduceAction523::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction523___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction523___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction523___init();
 #define LOCATE_parser___ReduceAction523___init "parser::ReduceAction523::init"
+val_t NEW_ReduceAction523_parser___ReduceAction523___init();
 typedef void (* parser___ReduceAction524___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction524___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction524___action "parser::ReduceAction524::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction524___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction524___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction524___init();
 #define LOCATE_parser___ReduceAction524___init "parser::ReduceAction524::init"
+val_t NEW_ReduceAction524_parser___ReduceAction524___init();
 typedef void (* parser___ReduceAction525___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction525___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction525___action "parser::ReduceAction525::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction525___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction525___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction525___init();
 #define LOCATE_parser___ReduceAction525___init "parser::ReduceAction525::init"
+val_t NEW_ReduceAction525_parser___ReduceAction525___init();
 typedef void (* parser___ReduceAction526___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction526___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction526___action "parser::ReduceAction526::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction526___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction526___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction526___init();
 #define LOCATE_parser___ReduceAction526___init "parser::ReduceAction526::init"
+val_t NEW_ReduceAction526_parser___ReduceAction526___init();
 typedef void (* parser___ReduceAction527___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction527___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction527___action "parser::ReduceAction527::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction527___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction527___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction527___init();
 #define LOCATE_parser___ReduceAction527___init "parser::ReduceAction527::init"
+val_t NEW_ReduceAction527_parser___ReduceAction527___init();
 typedef void (* parser___ReduceAction528___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction528___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction528___action "parser::ReduceAction528::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction528___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction528___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction528___init();
 #define LOCATE_parser___ReduceAction528___init "parser::ReduceAction528::init"
+val_t NEW_ReduceAction528_parser___ReduceAction528___init();
 typedef void (* parser___ReduceAction529___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction529___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction529___action "parser::ReduceAction529::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction529___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction529___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction529___init();
 #define LOCATE_parser___ReduceAction529___init "parser::ReduceAction529::init"
+val_t NEW_ReduceAction529_parser___ReduceAction529___init();
 typedef void (* parser___ReduceAction530___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction530___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction530___action "parser::ReduceAction530::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction530___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction530___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction530___init();
 #define LOCATE_parser___ReduceAction530___init "parser::ReduceAction530::init"
+val_t NEW_ReduceAction530_parser___ReduceAction530___init();
 typedef void (* parser___ReduceAction531___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction531___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction531___action "parser::ReduceAction531::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction531___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction531___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction531___init();
 #define LOCATE_parser___ReduceAction531___init "parser::ReduceAction531::init"
+val_t NEW_ReduceAction531_parser___ReduceAction531___init();
 typedef void (* parser___ReduceAction532___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction532___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction532___action "parser::ReduceAction532::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction532___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction532___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction532___init();
 #define LOCATE_parser___ReduceAction532___init "parser::ReduceAction532::init"
+val_t NEW_ReduceAction532_parser___ReduceAction532___init();
 typedef void (* parser___ReduceAction533___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction533___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction533___action "parser::ReduceAction533::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction533___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction533___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction533___init();
 #define LOCATE_parser___ReduceAction533___init "parser::ReduceAction533::init"
+val_t NEW_ReduceAction533_parser___ReduceAction533___init();
 typedef void (* parser___ReduceAction534___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction534___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction534___action "parser::ReduceAction534::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction534___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction534___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction534___init();
 #define LOCATE_parser___ReduceAction534___init "parser::ReduceAction534::init"
+val_t NEW_ReduceAction534_parser___ReduceAction534___init();
 typedef void (* parser___ReduceAction535___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction535___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction535___action "parser::ReduceAction535::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction535___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction535___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction535___init();
 #define LOCATE_parser___ReduceAction535___init "parser::ReduceAction535::init"
+val_t NEW_ReduceAction535_parser___ReduceAction535___init();
 typedef void (* parser___ReduceAction536___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction536___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction536___action "parser::ReduceAction536::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction536___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction536___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction536___init();
 #define LOCATE_parser___ReduceAction536___init "parser::ReduceAction536::init"
+val_t NEW_ReduceAction536_parser___ReduceAction536___init();
 typedef void (* parser___ReduceAction537___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction537___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction537___action "parser::ReduceAction537::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction537___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction537___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction537___init();
 #define LOCATE_parser___ReduceAction537___init "parser::ReduceAction537::init"
+val_t NEW_ReduceAction537_parser___ReduceAction537___init();
 typedef void (* parser___ReduceAction538___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction538___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction538___action "parser::ReduceAction538::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction538___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction538___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction538___init();
 #define LOCATE_parser___ReduceAction538___init "parser::ReduceAction538::init"
+val_t NEW_ReduceAction538_parser___ReduceAction538___init();
 typedef void (* parser___ReduceAction539___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction539___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction539___action "parser::ReduceAction539::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction539___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction539___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction539___init();
 #define LOCATE_parser___ReduceAction539___init "parser::ReduceAction539::init"
+val_t NEW_ReduceAction539_parser___ReduceAction539___init();
 typedef void (* parser___ReduceAction540___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction540___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction540___action "parser::ReduceAction540::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction540___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction540___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction540___init();
 #define LOCATE_parser___ReduceAction540___init "parser::ReduceAction540::init"
+val_t NEW_ReduceAction540_parser___ReduceAction540___init();
 typedef void (* parser___ReduceAction541___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction541___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction541___action "parser::ReduceAction541::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction541___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction541___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction541___init();
 #define LOCATE_parser___ReduceAction541___init "parser::ReduceAction541::init"
+val_t NEW_ReduceAction541_parser___ReduceAction541___init();
 typedef void (* parser___ReduceAction542___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction542___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction542___action "parser::ReduceAction542::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction542___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction542___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction542___init();
 #define LOCATE_parser___ReduceAction542___init "parser::ReduceAction542::init"
+val_t NEW_ReduceAction542_parser___ReduceAction542___init();
 typedef void (* parser___ReduceAction543___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction543___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction543___action "parser::ReduceAction543::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction543___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction543___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction543___init();
 #define LOCATE_parser___ReduceAction543___init "parser::ReduceAction543::init"
+val_t NEW_ReduceAction543_parser___ReduceAction543___init();
 typedef void (* parser___ReduceAction544___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction544___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction544___action "parser::ReduceAction544::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction544___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction544___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction544___init();
 #define LOCATE_parser___ReduceAction544___init "parser::ReduceAction544::init"
+val_t NEW_ReduceAction544_parser___ReduceAction544___init();
 typedef void (* parser___ReduceAction545___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction545___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction545___action "parser::ReduceAction545::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction545___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction545___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction545___init();
 #define LOCATE_parser___ReduceAction545___init "parser::ReduceAction545::init"
+val_t NEW_ReduceAction545_parser___ReduceAction545___init();
 typedef void (* parser___ReduceAction546___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction546___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction546___action "parser::ReduceAction546::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction546___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction546___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction546___init();
 #define LOCATE_parser___ReduceAction546___init "parser::ReduceAction546::init"
+val_t NEW_ReduceAction546_parser___ReduceAction546___init();
 typedef void (* parser___ReduceAction547___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction547___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction547___action "parser::ReduceAction547::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction547___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction547___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction547___init();
 #define LOCATE_parser___ReduceAction547___init "parser::ReduceAction547::init"
+val_t NEW_ReduceAction547_parser___ReduceAction547___init();
 typedef void (* parser___ReduceAction548___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction548___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction548___action "parser::ReduceAction548::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction548___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction548___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction548___init();
 #define LOCATE_parser___ReduceAction548___init "parser::ReduceAction548::init"
+val_t NEW_ReduceAction548_parser___ReduceAction548___init();
 typedef void (* parser___ReduceAction549___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction549___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction549___action "parser::ReduceAction549::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction549___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction549___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction549___init();
 #define LOCATE_parser___ReduceAction549___init "parser::ReduceAction549::init"
+val_t NEW_ReduceAction549_parser___ReduceAction549___init();
 typedef void (* parser___ReduceAction550___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction550___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction550___action "parser::ReduceAction550::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction550___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction550___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction550___init();
 #define LOCATE_parser___ReduceAction550___init "parser::ReduceAction550::init"
+val_t NEW_ReduceAction550_parser___ReduceAction550___init();
 typedef void (* parser___ReduceAction551___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction551___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction551___action "parser::ReduceAction551::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction551___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction551___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction551___init();
 #define LOCATE_parser___ReduceAction551___init "parser::ReduceAction551::init"
+val_t NEW_ReduceAction551_parser___ReduceAction551___init();
 typedef void (* parser___ReduceAction552___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction552___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction552___action "parser::ReduceAction552::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction552___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction552___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction552___init();
 #define LOCATE_parser___ReduceAction552___init "parser::ReduceAction552::init"
+val_t NEW_ReduceAction552_parser___ReduceAction552___init();
 typedef void (* parser___ReduceAction553___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction553___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction553___action "parser::ReduceAction553::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction553___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction553___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction553___init();
 #define LOCATE_parser___ReduceAction553___init "parser::ReduceAction553::init"
+val_t NEW_ReduceAction553_parser___ReduceAction553___init();
 typedef void (* parser___ReduceAction554___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction554___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction554___action "parser::ReduceAction554::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction554___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction554___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction554___init();
 #define LOCATE_parser___ReduceAction554___init "parser::ReduceAction554::init"
+val_t NEW_ReduceAction554_parser___ReduceAction554___init();
 typedef void (* parser___ReduceAction555___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction555___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction555___action "parser::ReduceAction555::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction555___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction555___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction555___init();
 #define LOCATE_parser___ReduceAction555___init "parser::ReduceAction555::init"
+val_t NEW_ReduceAction555_parser___ReduceAction555___init();
 typedef void (* parser___ReduceAction556___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction556___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction556___action "parser::ReduceAction556::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction556___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction556___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction556___init();
 #define LOCATE_parser___ReduceAction556___init "parser::ReduceAction556::init"
+val_t NEW_ReduceAction556_parser___ReduceAction556___init();
 typedef void (* parser___ReduceAction557___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction557___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction557___action "parser::ReduceAction557::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction557___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction557___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction557___init();
 #define LOCATE_parser___ReduceAction557___init "parser::ReduceAction557::init"
+val_t NEW_ReduceAction557_parser___ReduceAction557___init();
 typedef void (* parser___ReduceAction558___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction558___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction558___action "parser::ReduceAction558::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction558___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction558___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction558___init();
 #define LOCATE_parser___ReduceAction558___init "parser::ReduceAction558::init"
+val_t NEW_ReduceAction558_parser___ReduceAction558___init();
 typedef void (* parser___ReduceAction559___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction559___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction559___action "parser::ReduceAction559::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction559___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction559___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction559___init();
 #define LOCATE_parser___ReduceAction559___init "parser::ReduceAction559::init"
+val_t NEW_ReduceAction559_parser___ReduceAction559___init();
 typedef void (* parser___ReduceAction560___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction560___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction560___action "parser::ReduceAction560::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction560___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction560___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction560___init();
 #define LOCATE_parser___ReduceAction560___init "parser::ReduceAction560::init"
+val_t NEW_ReduceAction560_parser___ReduceAction560___init();
 typedef void (* parser___ReduceAction561___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction561___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction561___action "parser::ReduceAction561::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction561___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction561___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction561___init();
 #define LOCATE_parser___ReduceAction561___init "parser::ReduceAction561::init"
+val_t NEW_ReduceAction561_parser___ReduceAction561___init();
 typedef void (* parser___ReduceAction562___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction562___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction562___action "parser::ReduceAction562::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction562___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction562___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction562___init();
 #define LOCATE_parser___ReduceAction562___init "parser::ReduceAction562::init"
+val_t NEW_ReduceAction562_parser___ReduceAction562___init();
 typedef void (* parser___ReduceAction563___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction563___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction563___action "parser::ReduceAction563::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction563___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction563___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction563___init();
 #define LOCATE_parser___ReduceAction563___init "parser::ReduceAction563::init"
+val_t NEW_ReduceAction563_parser___ReduceAction563___init();
 typedef void (* parser___ReduceAction564___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction564___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction564___action "parser::ReduceAction564::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction564___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction564___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction564___init();
 #define LOCATE_parser___ReduceAction564___init "parser::ReduceAction564::init"
+val_t NEW_ReduceAction564_parser___ReduceAction564___init();
 typedef void (* parser___ReduceAction565___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction565___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction565___action "parser::ReduceAction565::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction565___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction565___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction565___init();
 #define LOCATE_parser___ReduceAction565___init "parser::ReduceAction565::init"
+val_t NEW_ReduceAction565_parser___ReduceAction565___init();
 typedef void (* parser___ReduceAction566___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction566___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction566___action "parser::ReduceAction566::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction566___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction566___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction566___init();
 #define LOCATE_parser___ReduceAction566___init "parser::ReduceAction566::init"
+val_t NEW_ReduceAction566_parser___ReduceAction566___init();
 typedef void (* parser___ReduceAction567___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction567___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction567___action "parser::ReduceAction567::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction567___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction567___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction567___init();
 #define LOCATE_parser___ReduceAction567___init "parser::ReduceAction567::init"
+val_t NEW_ReduceAction567_parser___ReduceAction567___init();
 typedef void (* parser___ReduceAction568___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction568___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction568___action "parser::ReduceAction568::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction568___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction568___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction568___init();
 #define LOCATE_parser___ReduceAction568___init "parser::ReduceAction568::init"
+val_t NEW_ReduceAction568_parser___ReduceAction568___init();
 typedef void (* parser___ReduceAction569___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction569___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction569___action "parser::ReduceAction569::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction569___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction569___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction569___init();
 #define LOCATE_parser___ReduceAction569___init "parser::ReduceAction569::init"
+val_t NEW_ReduceAction569_parser___ReduceAction569___init();
 typedef void (* parser___ReduceAction570___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction570___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction570___action "parser::ReduceAction570::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction570___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction570___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction570___init();
 #define LOCATE_parser___ReduceAction570___init "parser::ReduceAction570::init"
+val_t NEW_ReduceAction570_parser___ReduceAction570___init();
 typedef void (* parser___ReduceAction571___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction571___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction571___action "parser::ReduceAction571::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction571___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction571___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction571___init();
 #define LOCATE_parser___ReduceAction571___init "parser::ReduceAction571::init"
+val_t NEW_ReduceAction571_parser___ReduceAction571___init();
 typedef void (* parser___ReduceAction572___action_t)(val_t  self, val_t  param0);
 void parser___ReduceAction572___action(val_t  self, val_t  param0);
 #define LOCATE_parser___ReduceAction572___action "parser::ReduceAction572::(parser::ReduceAction::action)"
 typedef void (* parser___ReduceAction572___init_t)(val_t  self, int* init_table);
 void parser___ReduceAction572___init(val_t  self, int* init_table);
-val_t NEW_parser___ReduceAction572___init();
 #define LOCATE_parser___ReduceAction572___init "parser::ReduceAction572::init"
+val_t NEW_ReduceAction572_parser___ReduceAction572___init();
+typedef void (* parser___ReduceAction573___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction573___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction573___action "parser::ReduceAction573::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction573___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction573___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction573___init "parser::ReduceAction573::init"
+val_t NEW_ReduceAction573_parser___ReduceAction573___init();
+typedef void (* parser___ReduceAction574___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction574___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction574___action "parser::ReduceAction574::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction574___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction574___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction574___init "parser::ReduceAction574::init"
+val_t NEW_ReduceAction574_parser___ReduceAction574___init();
+typedef void (* parser___ReduceAction575___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction575___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction575___action "parser::ReduceAction575::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction575___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction575___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction575___init "parser::ReduceAction575::init"
+val_t NEW_ReduceAction575_parser___ReduceAction575___init();
+typedef void (* parser___ReduceAction576___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction576___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction576___action "parser::ReduceAction576::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction576___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction576___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction576___init "parser::ReduceAction576::init"
+val_t NEW_ReduceAction576_parser___ReduceAction576___init();
+typedef void (* parser___ReduceAction577___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction577___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction577___action "parser::ReduceAction577::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction577___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction577___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction577___init "parser::ReduceAction577::init"
+val_t NEW_ReduceAction577_parser___ReduceAction577___init();
+typedef void (* parser___ReduceAction578___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction578___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction578___action "parser::ReduceAction578::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction578___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction578___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction578___init "parser::ReduceAction578::init"
+val_t NEW_ReduceAction578_parser___ReduceAction578___init();
+typedef void (* parser___ReduceAction579___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction579___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction579___action "parser::ReduceAction579::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction579___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction579___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction579___init "parser::ReduceAction579::init"
+val_t NEW_ReduceAction579_parser___ReduceAction579___init();
+typedef void (* parser___ReduceAction580___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction580___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction580___action "parser::ReduceAction580::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction580___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction580___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction580___init "parser::ReduceAction580::init"
+val_t NEW_ReduceAction580_parser___ReduceAction580___init();
+typedef void (* parser___ReduceAction581___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction581___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction581___action "parser::ReduceAction581::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction581___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction581___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction581___init "parser::ReduceAction581::init"
+val_t NEW_ReduceAction581_parser___ReduceAction581___init();
+typedef void (* parser___ReduceAction582___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction582___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction582___action "parser::ReduceAction582::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction582___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction582___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction582___init "parser::ReduceAction582::init"
+val_t NEW_ReduceAction582_parser___ReduceAction582___init();
+typedef void (* parser___ReduceAction583___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction583___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction583___action "parser::ReduceAction583::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction583___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction583___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction583___init "parser::ReduceAction583::init"
+val_t NEW_ReduceAction583_parser___ReduceAction583___init();
+typedef void (* parser___ReduceAction584___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction584___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction584___action "parser::ReduceAction584::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction584___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction584___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction584___init "parser::ReduceAction584::init"
+val_t NEW_ReduceAction584_parser___ReduceAction584___init();
+typedef void (* parser___ReduceAction585___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction585___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction585___action "parser::ReduceAction585::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction585___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction585___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction585___init "parser::ReduceAction585::init"
+val_t NEW_ReduceAction585_parser___ReduceAction585___init();
+typedef void (* parser___ReduceAction586___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction586___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction586___action "parser::ReduceAction586::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction586___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction586___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction586___init "parser::ReduceAction586::init"
+val_t NEW_ReduceAction586_parser___ReduceAction586___init();
+typedef void (* parser___ReduceAction587___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction587___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction587___action "parser::ReduceAction587::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction587___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction587___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction587___init "parser::ReduceAction587::init"
+val_t NEW_ReduceAction587_parser___ReduceAction587___init();
+typedef void (* parser___ReduceAction588___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction588___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction588___action "parser::ReduceAction588::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction588___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction588___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction588___init "parser::ReduceAction588::init"
+val_t NEW_ReduceAction588_parser___ReduceAction588___init();
+typedef void (* parser___ReduceAction589___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction589___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction589___action "parser::ReduceAction589::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction589___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction589___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction589___init "parser::ReduceAction589::init"
+val_t NEW_ReduceAction589_parser___ReduceAction589___init();
+typedef void (* parser___ReduceAction590___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction590___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction590___action "parser::ReduceAction590::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction590___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction590___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction590___init "parser::ReduceAction590::init"
+val_t NEW_ReduceAction590_parser___ReduceAction590___init();
+typedef void (* parser___ReduceAction591___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction591___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction591___action "parser::ReduceAction591::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction591___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction591___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction591___init "parser::ReduceAction591::init"
+val_t NEW_ReduceAction591_parser___ReduceAction591___init();
+typedef void (* parser___ReduceAction592___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction592___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction592___action "parser::ReduceAction592::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction592___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction592___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction592___init "parser::ReduceAction592::init"
+val_t NEW_ReduceAction592_parser___ReduceAction592___init();
+typedef void (* parser___ReduceAction593___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction593___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction593___action "parser::ReduceAction593::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction593___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction593___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction593___init "parser::ReduceAction593::init"
+val_t NEW_ReduceAction593_parser___ReduceAction593___init();
+typedef void (* parser___ReduceAction594___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction594___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction594___action "parser::ReduceAction594::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction594___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction594___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction594___init "parser::ReduceAction594::init"
+val_t NEW_ReduceAction594_parser___ReduceAction594___init();
+typedef void (* parser___ReduceAction595___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction595___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction595___action "parser::ReduceAction595::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction595___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction595___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction595___init "parser::ReduceAction595::init"
+val_t NEW_ReduceAction595_parser___ReduceAction595___init();
+typedef void (* parser___ReduceAction596___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction596___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction596___action "parser::ReduceAction596::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction596___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction596___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction596___init "parser::ReduceAction596::init"
+val_t NEW_ReduceAction596_parser___ReduceAction596___init();
+typedef void (* parser___ReduceAction597___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction597___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction597___action "parser::ReduceAction597::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction597___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction597___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction597___init "parser::ReduceAction597::init"
+val_t NEW_ReduceAction597_parser___ReduceAction597___init();
+typedef void (* parser___ReduceAction598___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction598___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction598___action "parser::ReduceAction598::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction598___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction598___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction598___init "parser::ReduceAction598::init"
+val_t NEW_ReduceAction598_parser___ReduceAction598___init();
+typedef void (* parser___ReduceAction599___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction599___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction599___action "parser::ReduceAction599::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction599___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction599___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction599___init "parser::ReduceAction599::init"
+val_t NEW_ReduceAction599_parser___ReduceAction599___init();
+typedef void (* parser___ReduceAction600___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction600___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction600___action "parser::ReduceAction600::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction600___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction600___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction600___init "parser::ReduceAction600::init"
+val_t NEW_ReduceAction600_parser___ReduceAction600___init();
+typedef void (* parser___ReduceAction601___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction601___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction601___action "parser::ReduceAction601::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction601___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction601___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction601___init "parser::ReduceAction601::init"
+val_t NEW_ReduceAction601_parser___ReduceAction601___init();
+typedef void (* parser___ReduceAction602___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction602___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction602___action "parser::ReduceAction602::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction602___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction602___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction602___init "parser::ReduceAction602::init"
+val_t NEW_ReduceAction602_parser___ReduceAction602___init();
+typedef void (* parser___ReduceAction603___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction603___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction603___action "parser::ReduceAction603::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction603___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction603___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction603___init "parser::ReduceAction603::init"
+val_t NEW_ReduceAction603_parser___ReduceAction603___init();
+typedef void (* parser___ReduceAction604___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction604___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction604___action "parser::ReduceAction604::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction604___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction604___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction604___init "parser::ReduceAction604::init"
+val_t NEW_ReduceAction604_parser___ReduceAction604___init();
+typedef void (* parser___ReduceAction605___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction605___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction605___action "parser::ReduceAction605::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction605___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction605___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction605___init "parser::ReduceAction605::init"
+val_t NEW_ReduceAction605_parser___ReduceAction605___init();
+typedef void (* parser___ReduceAction606___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction606___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction606___action "parser::ReduceAction606::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction606___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction606___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction606___init "parser::ReduceAction606::init"
+val_t NEW_ReduceAction606_parser___ReduceAction606___init();
+typedef void (* parser___ReduceAction607___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction607___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction607___action "parser::ReduceAction607::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction607___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction607___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction607___init "parser::ReduceAction607::init"
+val_t NEW_ReduceAction607_parser___ReduceAction607___init();
+typedef void (* parser___ReduceAction608___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction608___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction608___action "parser::ReduceAction608::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction608___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction608___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction608___init "parser::ReduceAction608::init"
+val_t NEW_ReduceAction608_parser___ReduceAction608___init();
+typedef void (* parser___ReduceAction609___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction609___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction609___action "parser::ReduceAction609::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction609___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction609___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction609___init "parser::ReduceAction609::init"
+val_t NEW_ReduceAction609_parser___ReduceAction609___init();
+typedef void (* parser___ReduceAction610___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction610___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction610___action "parser::ReduceAction610::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction610___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction610___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction610___init "parser::ReduceAction610::init"
+val_t NEW_ReduceAction610_parser___ReduceAction610___init();
+typedef void (* parser___ReduceAction611___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction611___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction611___action "parser::ReduceAction611::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction611___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction611___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction611___init "parser::ReduceAction611::init"
+val_t NEW_ReduceAction611_parser___ReduceAction611___init();
+typedef void (* parser___ReduceAction612___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction612___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction612___action "parser::ReduceAction612::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction612___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction612___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction612___init "parser::ReduceAction612::init"
+val_t NEW_ReduceAction612_parser___ReduceAction612___init();
+typedef void (* parser___ReduceAction613___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction613___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction613___action "parser::ReduceAction613::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction613___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction613___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction613___init "parser::ReduceAction613::init"
+val_t NEW_ReduceAction613_parser___ReduceAction613___init();
+typedef void (* parser___ReduceAction614___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction614___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction614___action "parser::ReduceAction614::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction614___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction614___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction614___init "parser::ReduceAction614::init"
+val_t NEW_ReduceAction614_parser___ReduceAction614___init();
+typedef void (* parser___ReduceAction615___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction615___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction615___action "parser::ReduceAction615::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction615___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction615___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction615___init "parser::ReduceAction615::init"
+val_t NEW_ReduceAction615_parser___ReduceAction615___init();
+typedef void (* parser___ReduceAction616___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction616___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction616___action "parser::ReduceAction616::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction616___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction616___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction616___init "parser::ReduceAction616::init"
+val_t NEW_ReduceAction616_parser___ReduceAction616___init();
+typedef void (* parser___ReduceAction617___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction617___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction617___action "parser::ReduceAction617::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction617___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction617___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction617___init "parser::ReduceAction617::init"
+val_t NEW_ReduceAction617_parser___ReduceAction617___init();
+typedef void (* parser___ReduceAction618___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction618___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction618___action "parser::ReduceAction618::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction618___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction618___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction618___init "parser::ReduceAction618::init"
+val_t NEW_ReduceAction618_parser___ReduceAction618___init();
+typedef void (* parser___ReduceAction619___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction619___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction619___action "parser::ReduceAction619::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction619___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction619___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction619___init "parser::ReduceAction619::init"
+val_t NEW_ReduceAction619_parser___ReduceAction619___init();
+typedef void (* parser___ReduceAction620___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction620___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction620___action "parser::ReduceAction620::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction620___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction620___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction620___init "parser::ReduceAction620::init"
+val_t NEW_ReduceAction620_parser___ReduceAction620___init();
+typedef void (* parser___ReduceAction621___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction621___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction621___action "parser::ReduceAction621::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction621___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction621___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction621___init "parser::ReduceAction621::init"
+val_t NEW_ReduceAction621_parser___ReduceAction621___init();
+typedef void (* parser___ReduceAction622___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction622___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction622___action "parser::ReduceAction622::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction622___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction622___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction622___init "parser::ReduceAction622::init"
+val_t NEW_ReduceAction622_parser___ReduceAction622___init();
+typedef void (* parser___ReduceAction623___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction623___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction623___action "parser::ReduceAction623::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction623___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction623___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction623___init "parser::ReduceAction623::init"
+val_t NEW_ReduceAction623_parser___ReduceAction623___init();
+typedef void (* parser___ReduceAction624___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction624___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction624___action "parser::ReduceAction624::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction624___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction624___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction624___init "parser::ReduceAction624::init"
+val_t NEW_ReduceAction624_parser___ReduceAction624___init();
+typedef void (* parser___ReduceAction625___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction625___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction625___action "parser::ReduceAction625::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction625___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction625___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction625___init "parser::ReduceAction625::init"
+val_t NEW_ReduceAction625_parser___ReduceAction625___init();
+typedef void (* parser___ReduceAction626___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction626___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction626___action "parser::ReduceAction626::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction626___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction626___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction626___init "parser::ReduceAction626::init"
+val_t NEW_ReduceAction626_parser___ReduceAction626___init();
+typedef void (* parser___ReduceAction627___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction627___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction627___action "parser::ReduceAction627::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction627___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction627___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction627___init "parser::ReduceAction627::init"
+val_t NEW_ReduceAction627_parser___ReduceAction627___init();
+typedef void (* parser___ReduceAction628___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction628___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction628___action "parser::ReduceAction628::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction628___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction628___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction628___init "parser::ReduceAction628::init"
+val_t NEW_ReduceAction628_parser___ReduceAction628___init();
+typedef void (* parser___ReduceAction629___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction629___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction629___action "parser::ReduceAction629::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction629___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction629___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction629___init "parser::ReduceAction629::init"
+val_t NEW_ReduceAction629_parser___ReduceAction629___init();
+typedef void (* parser___ReduceAction630___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction630___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction630___action "parser::ReduceAction630::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction630___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction630___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction630___init "parser::ReduceAction630::init"
+val_t NEW_ReduceAction630_parser___ReduceAction630___init();
+typedef void (* parser___ReduceAction631___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction631___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction631___action "parser::ReduceAction631::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction631___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction631___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction631___init "parser::ReduceAction631::init"
+val_t NEW_ReduceAction631_parser___ReduceAction631___init();
+typedef void (* parser___ReduceAction632___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction632___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction632___action "parser::ReduceAction632::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction632___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction632___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction632___init "parser::ReduceAction632::init"
+val_t NEW_ReduceAction632_parser___ReduceAction632___init();
+typedef void (* parser___ReduceAction633___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction633___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction633___action "parser::ReduceAction633::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction633___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction633___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction633___init "parser::ReduceAction633::init"
+val_t NEW_ReduceAction633_parser___ReduceAction633___init();
+typedef void (* parser___ReduceAction634___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction634___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction634___action "parser::ReduceAction634::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction634___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction634___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction634___init "parser::ReduceAction634::init"
+val_t NEW_ReduceAction634_parser___ReduceAction634___init();
+typedef void (* parser___ReduceAction635___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction635___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction635___action "parser::ReduceAction635::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction635___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction635___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction635___init "parser::ReduceAction635::init"
+val_t NEW_ReduceAction635_parser___ReduceAction635___init();
+typedef void (* parser___ReduceAction636___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction636___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction636___action "parser::ReduceAction636::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction636___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction636___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction636___init "parser::ReduceAction636::init"
+val_t NEW_ReduceAction636_parser___ReduceAction636___init();
+typedef void (* parser___ReduceAction637___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction637___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction637___action "parser::ReduceAction637::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction637___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction637___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction637___init "parser::ReduceAction637::init"
+val_t NEW_ReduceAction637_parser___ReduceAction637___init();
+typedef void (* parser___ReduceAction638___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction638___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction638___action "parser::ReduceAction638::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction638___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction638___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction638___init "parser::ReduceAction638::init"
+val_t NEW_ReduceAction638_parser___ReduceAction638___init();
+typedef void (* parser___ReduceAction639___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction639___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction639___action "parser::ReduceAction639::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction639___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction639___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction639___init "parser::ReduceAction639::init"
+val_t NEW_ReduceAction639_parser___ReduceAction639___init();
+typedef void (* parser___ReduceAction640___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction640___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction640___action "parser::ReduceAction640::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction640___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction640___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction640___init "parser::ReduceAction640::init"
+val_t NEW_ReduceAction640_parser___ReduceAction640___init();
+typedef void (* parser___ReduceAction641___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction641___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction641___action "parser::ReduceAction641::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction641___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction641___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction641___init "parser::ReduceAction641::init"
+val_t NEW_ReduceAction641_parser___ReduceAction641___init();
+typedef void (* parser___ReduceAction642___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction642___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction642___action "parser::ReduceAction642::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction642___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction642___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction642___init "parser::ReduceAction642::init"
+val_t NEW_ReduceAction642_parser___ReduceAction642___init();
+typedef void (* parser___ReduceAction643___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction643___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction643___action "parser::ReduceAction643::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction643___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction643___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction643___init "parser::ReduceAction643::init"
+val_t NEW_ReduceAction643_parser___ReduceAction643___init();
+typedef void (* parser___ReduceAction644___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction644___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction644___action "parser::ReduceAction644::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction644___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction644___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction644___init "parser::ReduceAction644::init"
+val_t NEW_ReduceAction644_parser___ReduceAction644___init();
+typedef void (* parser___ReduceAction645___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction645___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction645___action "parser::ReduceAction645::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction645___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction645___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction645___init "parser::ReduceAction645::init"
+val_t NEW_ReduceAction645_parser___ReduceAction645___init();
+typedef void (* parser___ReduceAction646___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction646___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction646___action "parser::ReduceAction646::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction646___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction646___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction646___init "parser::ReduceAction646::init"
+val_t NEW_ReduceAction646_parser___ReduceAction646___init();
+typedef void (* parser___ReduceAction647___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction647___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction647___action "parser::ReduceAction647::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction647___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction647___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction647___init "parser::ReduceAction647::init"
+val_t NEW_ReduceAction647_parser___ReduceAction647___init();
+typedef void (* parser___ReduceAction648___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction648___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction648___action "parser::ReduceAction648::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction648___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction648___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction648___init "parser::ReduceAction648::init"
+val_t NEW_ReduceAction648_parser___ReduceAction648___init();
+typedef void (* parser___ReduceAction649___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction649___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction649___action "parser::ReduceAction649::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction649___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction649___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction649___init "parser::ReduceAction649::init"
+val_t NEW_ReduceAction649_parser___ReduceAction649___init();
+typedef void (* parser___ReduceAction650___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction650___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction650___action "parser::ReduceAction650::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction650___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction650___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction650___init "parser::ReduceAction650::init"
+val_t NEW_ReduceAction650_parser___ReduceAction650___init();
+typedef void (* parser___ReduceAction651___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction651___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction651___action "parser::ReduceAction651::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction651___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction651___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction651___init "parser::ReduceAction651::init"
+val_t NEW_ReduceAction651_parser___ReduceAction651___init();
+typedef void (* parser___ReduceAction652___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction652___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction652___action "parser::ReduceAction652::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction652___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction652___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction652___init "parser::ReduceAction652::init"
+val_t NEW_ReduceAction652_parser___ReduceAction652___init();
+typedef void (* parser___ReduceAction653___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction653___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction653___action "parser::ReduceAction653::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction653___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction653___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction653___init "parser::ReduceAction653::init"
+val_t NEW_ReduceAction653_parser___ReduceAction653___init();
+typedef void (* parser___ReduceAction654___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction654___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction654___action "parser::ReduceAction654::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction654___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction654___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction654___init "parser::ReduceAction654::init"
+val_t NEW_ReduceAction654_parser___ReduceAction654___init();
+typedef void (* parser___ReduceAction655___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction655___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction655___action "parser::ReduceAction655::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction655___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction655___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction655___init "parser::ReduceAction655::init"
+val_t NEW_ReduceAction655_parser___ReduceAction655___init();
+typedef void (* parser___ReduceAction656___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction656___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction656___action "parser::ReduceAction656::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction656___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction656___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction656___init "parser::ReduceAction656::init"
+val_t NEW_ReduceAction656_parser___ReduceAction656___init();
+typedef void (* parser___ReduceAction657___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction657___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction657___action "parser::ReduceAction657::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction657___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction657___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction657___init "parser::ReduceAction657::init"
+val_t NEW_ReduceAction657_parser___ReduceAction657___init();
+typedef void (* parser___ReduceAction658___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction658___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction658___action "parser::ReduceAction658::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction658___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction658___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction658___init "parser::ReduceAction658::init"
+val_t NEW_ReduceAction658_parser___ReduceAction658___init();
+typedef void (* parser___ReduceAction659___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction659___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction659___action "parser::ReduceAction659::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction659___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction659___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction659___init "parser::ReduceAction659::init"
+val_t NEW_ReduceAction659_parser___ReduceAction659___init();
+typedef void (* parser___ReduceAction660___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction660___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction660___action "parser::ReduceAction660::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction660___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction660___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction660___init "parser::ReduceAction660::init"
+val_t NEW_ReduceAction660_parser___ReduceAction660___init();
+typedef void (* parser___ReduceAction661___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction661___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction661___action "parser::ReduceAction661::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction661___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction661___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction661___init "parser::ReduceAction661::init"
+val_t NEW_ReduceAction661_parser___ReduceAction661___init();
+typedef void (* parser___ReduceAction662___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction662___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction662___action "parser::ReduceAction662::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction662___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction662___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction662___init "parser::ReduceAction662::init"
+val_t NEW_ReduceAction662_parser___ReduceAction662___init();
+typedef void (* parser___ReduceAction663___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction663___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction663___action "parser::ReduceAction663::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction663___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction663___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction663___init "parser::ReduceAction663::init"
+val_t NEW_ReduceAction663_parser___ReduceAction663___init();
+typedef void (* parser___ReduceAction664___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction664___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction664___action "parser::ReduceAction664::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction664___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction664___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction664___init "parser::ReduceAction664::init"
+val_t NEW_ReduceAction664_parser___ReduceAction664___init();
+typedef void (* parser___ReduceAction665___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction665___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction665___action "parser::ReduceAction665::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction665___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction665___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction665___init "parser::ReduceAction665::init"
+val_t NEW_ReduceAction665_parser___ReduceAction665___init();
+typedef void (* parser___ReduceAction666___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction666___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction666___action "parser::ReduceAction666::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction666___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction666___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction666___init "parser::ReduceAction666::init"
+val_t NEW_ReduceAction666_parser___ReduceAction666___init();
+typedef void (* parser___ReduceAction667___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction667___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction667___action "parser::ReduceAction667::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction667___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction667___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction667___init "parser::ReduceAction667::init"
+val_t NEW_ReduceAction667_parser___ReduceAction667___init();
+typedef void (* parser___ReduceAction668___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction668___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction668___action "parser::ReduceAction668::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction668___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction668___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction668___init "parser::ReduceAction668::init"
+val_t NEW_ReduceAction668_parser___ReduceAction668___init();
+typedef void (* parser___ReduceAction669___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction669___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction669___action "parser::ReduceAction669::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction669___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction669___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction669___init "parser::ReduceAction669::init"
+val_t NEW_ReduceAction669_parser___ReduceAction669___init();
+typedef void (* parser___ReduceAction670___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction670___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction670___action "parser::ReduceAction670::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction670___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction670___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction670___init "parser::ReduceAction670::init"
+val_t NEW_ReduceAction670_parser___ReduceAction670___init();
+typedef void (* parser___ReduceAction671___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction671___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction671___action "parser::ReduceAction671::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction671___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction671___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction671___init "parser::ReduceAction671::init"
+val_t NEW_ReduceAction671_parser___ReduceAction671___init();
+typedef void (* parser___ReduceAction672___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction672___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction672___action "parser::ReduceAction672::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction672___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction672___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction672___init "parser::ReduceAction672::init"
+val_t NEW_ReduceAction672_parser___ReduceAction672___init();
+typedef void (* parser___ReduceAction673___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction673___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction673___action "parser::ReduceAction673::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction673___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction673___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction673___init "parser::ReduceAction673::init"
+val_t NEW_ReduceAction673_parser___ReduceAction673___init();
+typedef void (* parser___ReduceAction674___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction674___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction674___action "parser::ReduceAction674::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction674___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction674___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction674___init "parser::ReduceAction674::init"
+val_t NEW_ReduceAction674_parser___ReduceAction674___init();
+typedef void (* parser___ReduceAction675___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction675___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction675___action "parser::ReduceAction675::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction675___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction675___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction675___init "parser::ReduceAction675::init"
+val_t NEW_ReduceAction675_parser___ReduceAction675___init();
+typedef void (* parser___ReduceAction676___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction676___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction676___action "parser::ReduceAction676::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction676___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction676___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction676___init "parser::ReduceAction676::init"
+val_t NEW_ReduceAction676_parser___ReduceAction676___init();
+typedef void (* parser___ReduceAction677___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction677___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction677___action "parser::ReduceAction677::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction677___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction677___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction677___init "parser::ReduceAction677::init"
+val_t NEW_ReduceAction677_parser___ReduceAction677___init();
+typedef void (* parser___ReduceAction678___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction678___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction678___action "parser::ReduceAction678::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction678___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction678___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction678___init "parser::ReduceAction678::init"
+val_t NEW_ReduceAction678_parser___ReduceAction678___init();
+typedef void (* parser___ReduceAction679___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction679___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction679___action "parser::ReduceAction679::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction679___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction679___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction679___init "parser::ReduceAction679::init"
+val_t NEW_ReduceAction679_parser___ReduceAction679___init();
+typedef void (* parser___ReduceAction680___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction680___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction680___action "parser::ReduceAction680::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction680___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction680___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction680___init "parser::ReduceAction680::init"
+val_t NEW_ReduceAction680_parser___ReduceAction680___init();
+typedef void (* parser___ReduceAction681___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction681___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction681___action "parser::ReduceAction681::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction681___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction681___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction681___init "parser::ReduceAction681::init"
+val_t NEW_ReduceAction681_parser___ReduceAction681___init();
+typedef void (* parser___ReduceAction682___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction682___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction682___action "parser::ReduceAction682::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction682___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction682___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction682___init "parser::ReduceAction682::init"
+val_t NEW_ReduceAction682_parser___ReduceAction682___init();
+typedef void (* parser___ReduceAction683___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction683___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction683___action "parser::ReduceAction683::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction683___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction683___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction683___init "parser::ReduceAction683::init"
+val_t NEW_ReduceAction683_parser___ReduceAction683___init();
+typedef void (* parser___ReduceAction684___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction684___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction684___action "parser::ReduceAction684::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction684___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction684___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction684___init "parser::ReduceAction684::init"
+val_t NEW_ReduceAction684_parser___ReduceAction684___init();
+typedef void (* parser___ReduceAction685___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction685___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction685___action "parser::ReduceAction685::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction685___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction685___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction685___init "parser::ReduceAction685::init"
+val_t NEW_ReduceAction685_parser___ReduceAction685___init();
+typedef void (* parser___ReduceAction686___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction686___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction686___action "parser::ReduceAction686::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction686___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction686___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction686___init "parser::ReduceAction686::init"
+val_t NEW_ReduceAction686_parser___ReduceAction686___init();
+typedef void (* parser___ReduceAction687___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction687___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction687___action "parser::ReduceAction687::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction687___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction687___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction687___init "parser::ReduceAction687::init"
+val_t NEW_ReduceAction687_parser___ReduceAction687___init();
+typedef void (* parser___ReduceAction688___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction688___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction688___action "parser::ReduceAction688::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction688___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction688___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction688___init "parser::ReduceAction688::init"
+val_t NEW_ReduceAction688_parser___ReduceAction688___init();
+typedef void (* parser___ReduceAction689___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction689___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction689___action "parser::ReduceAction689::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction689___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction689___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction689___init "parser::ReduceAction689::init"
+val_t NEW_ReduceAction689_parser___ReduceAction689___init();
+typedef void (* parser___ReduceAction690___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction690___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction690___action "parser::ReduceAction690::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction690___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction690___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction690___init "parser::ReduceAction690::init"
+val_t NEW_ReduceAction690_parser___ReduceAction690___init();
+typedef void (* parser___ReduceAction691___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction691___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction691___action "parser::ReduceAction691::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction691___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction691___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction691___init "parser::ReduceAction691::init"
+val_t NEW_ReduceAction691_parser___ReduceAction691___init();
+typedef void (* parser___ReduceAction692___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction692___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction692___action "parser::ReduceAction692::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction692___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction692___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction692___init "parser::ReduceAction692::init"
+val_t NEW_ReduceAction692_parser___ReduceAction692___init();
+typedef void (* parser___ReduceAction693___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction693___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction693___action "parser::ReduceAction693::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction693___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction693___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction693___init "parser::ReduceAction693::init"
+val_t NEW_ReduceAction693_parser___ReduceAction693___init();
+typedef void (* parser___ReduceAction694___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction694___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction694___action "parser::ReduceAction694::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction694___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction694___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction694___init "parser::ReduceAction694::init"
+val_t NEW_ReduceAction694_parser___ReduceAction694___init();
+typedef void (* parser___ReduceAction695___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction695___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction695___action "parser::ReduceAction695::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction695___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction695___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction695___init "parser::ReduceAction695::init"
+val_t NEW_ReduceAction695_parser___ReduceAction695___init();
+typedef void (* parser___ReduceAction696___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction696___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction696___action "parser::ReduceAction696::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction696___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction696___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction696___init "parser::ReduceAction696::init"
+val_t NEW_ReduceAction696_parser___ReduceAction696___init();
+typedef void (* parser___ReduceAction697___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction697___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction697___action "parser::ReduceAction697::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction697___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction697___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction697___init "parser::ReduceAction697::init"
+val_t NEW_ReduceAction697_parser___ReduceAction697___init();
+typedef void (* parser___ReduceAction698___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction698___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction698___action "parser::ReduceAction698::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction698___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction698___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction698___init "parser::ReduceAction698::init"
+val_t NEW_ReduceAction698_parser___ReduceAction698___init();
+typedef void (* parser___ReduceAction699___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction699___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction699___action "parser::ReduceAction699::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction699___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction699___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction699___init "parser::ReduceAction699::init"
+val_t NEW_ReduceAction699_parser___ReduceAction699___init();
+typedef void (* parser___ReduceAction700___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction700___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction700___action "parser::ReduceAction700::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction700___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction700___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction700___init "parser::ReduceAction700::init"
+val_t NEW_ReduceAction700_parser___ReduceAction700___init();
+typedef void (* parser___ReduceAction701___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction701___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction701___action "parser::ReduceAction701::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction701___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction701___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction701___init "parser::ReduceAction701::init"
+val_t NEW_ReduceAction701_parser___ReduceAction701___init();
+typedef void (* parser___ReduceAction702___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction702___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction702___action "parser::ReduceAction702::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction702___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction702___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction702___init "parser::ReduceAction702::init"
+val_t NEW_ReduceAction702_parser___ReduceAction702___init();
+typedef void (* parser___ReduceAction703___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction703___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction703___action "parser::ReduceAction703::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction703___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction703___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction703___init "parser::ReduceAction703::init"
+val_t NEW_ReduceAction703_parser___ReduceAction703___init();
+typedef void (* parser___ReduceAction704___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction704___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction704___action "parser::ReduceAction704::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction704___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction704___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction704___init "parser::ReduceAction704::init"
+val_t NEW_ReduceAction704_parser___ReduceAction704___init();
+typedef void (* parser___ReduceAction705___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction705___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction705___action "parser::ReduceAction705::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction705___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction705___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction705___init "parser::ReduceAction705::init"
+val_t NEW_ReduceAction705_parser___ReduceAction705___init();
+typedef void (* parser___ReduceAction706___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction706___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction706___action "parser::ReduceAction706::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction706___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction706___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction706___init "parser::ReduceAction706::init"
+val_t NEW_ReduceAction706_parser___ReduceAction706___init();
+typedef void (* parser___ReduceAction707___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction707___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction707___action "parser::ReduceAction707::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction707___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction707___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction707___init "parser::ReduceAction707::init"
+val_t NEW_ReduceAction707_parser___ReduceAction707___init();
+typedef void (* parser___ReduceAction708___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction708___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction708___action "parser::ReduceAction708::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction708___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction708___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction708___init "parser::ReduceAction708::init"
+val_t NEW_ReduceAction708_parser___ReduceAction708___init();
+typedef void (* parser___ReduceAction709___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction709___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction709___action "parser::ReduceAction709::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction709___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction709___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction709___init "parser::ReduceAction709::init"
+val_t NEW_ReduceAction709_parser___ReduceAction709___init();
+typedef void (* parser___ReduceAction710___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction710___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction710___action "parser::ReduceAction710::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction710___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction710___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction710___init "parser::ReduceAction710::init"
+val_t NEW_ReduceAction710_parser___ReduceAction710___init();
+typedef void (* parser___ReduceAction711___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction711___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction711___action "parser::ReduceAction711::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction711___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction711___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction711___init "parser::ReduceAction711::init"
+val_t NEW_ReduceAction711_parser___ReduceAction711___init();
+typedef void (* parser___ReduceAction712___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction712___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction712___action "parser::ReduceAction712::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction712___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction712___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction712___init "parser::ReduceAction712::init"
+val_t NEW_ReduceAction712_parser___ReduceAction712___init();
+typedef void (* parser___ReduceAction713___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction713___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction713___action "parser::ReduceAction713::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction713___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction713___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction713___init "parser::ReduceAction713::init"
+val_t NEW_ReduceAction713_parser___ReduceAction713___init();
+typedef void (* parser___ReduceAction714___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction714___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction714___action "parser::ReduceAction714::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction714___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction714___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction714___init "parser::ReduceAction714::init"
+val_t NEW_ReduceAction714_parser___ReduceAction714___init();
+typedef void (* parser___ReduceAction715___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction715___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction715___action "parser::ReduceAction715::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction715___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction715___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction715___init "parser::ReduceAction715::init"
+val_t NEW_ReduceAction715_parser___ReduceAction715___init();
+typedef void (* parser___ReduceAction716___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction716___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction716___action "parser::ReduceAction716::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction716___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction716___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction716___init "parser::ReduceAction716::init"
+val_t NEW_ReduceAction716_parser___ReduceAction716___init();
+typedef void (* parser___ReduceAction717___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction717___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction717___action "parser::ReduceAction717::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction717___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction717___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction717___init "parser::ReduceAction717::init"
+val_t NEW_ReduceAction717_parser___ReduceAction717___init();
+typedef void (* parser___ReduceAction718___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction718___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction718___action "parser::ReduceAction718::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction718___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction718___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction718___init "parser::ReduceAction718::init"
+val_t NEW_ReduceAction718_parser___ReduceAction718___init();
+typedef void (* parser___ReduceAction719___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction719___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction719___action "parser::ReduceAction719::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction719___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction719___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction719___init "parser::ReduceAction719::init"
+val_t NEW_ReduceAction719_parser___ReduceAction719___init();
+typedef void (* parser___ReduceAction720___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction720___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction720___action "parser::ReduceAction720::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction720___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction720___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction720___init "parser::ReduceAction720::init"
+val_t NEW_ReduceAction720_parser___ReduceAction720___init();
+typedef void (* parser___ReduceAction721___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction721___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction721___action "parser::ReduceAction721::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction721___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction721___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction721___init "parser::ReduceAction721::init"
+val_t NEW_ReduceAction721_parser___ReduceAction721___init();
+typedef void (* parser___ReduceAction722___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction722___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction722___action "parser::ReduceAction722::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction722___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction722___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction722___init "parser::ReduceAction722::init"
+val_t NEW_ReduceAction722_parser___ReduceAction722___init();
+typedef void (* parser___ReduceAction723___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction723___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction723___action "parser::ReduceAction723::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction723___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction723___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction723___init "parser::ReduceAction723::init"
+val_t NEW_ReduceAction723_parser___ReduceAction723___init();
+typedef void (* parser___ReduceAction724___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction724___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction724___action "parser::ReduceAction724::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction724___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction724___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction724___init "parser::ReduceAction724::init"
+val_t NEW_ReduceAction724_parser___ReduceAction724___init();
+typedef void (* parser___ReduceAction725___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction725___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction725___action "parser::ReduceAction725::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction725___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction725___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction725___init "parser::ReduceAction725::init"
+val_t NEW_ReduceAction725_parser___ReduceAction725___init();
+typedef void (* parser___ReduceAction726___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction726___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction726___action "parser::ReduceAction726::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction726___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction726___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction726___init "parser::ReduceAction726::init"
+val_t NEW_ReduceAction726_parser___ReduceAction726___init();
+typedef void (* parser___ReduceAction727___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction727___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction727___action "parser::ReduceAction727::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction727___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction727___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction727___init "parser::ReduceAction727::init"
+val_t NEW_ReduceAction727_parser___ReduceAction727___init();
+typedef void (* parser___ReduceAction728___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction728___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction728___action "parser::ReduceAction728::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction728___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction728___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction728___init "parser::ReduceAction728::init"
+val_t NEW_ReduceAction728_parser___ReduceAction728___init();
+typedef void (* parser___ReduceAction729___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction729___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction729___action "parser::ReduceAction729::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction729___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction729___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction729___init "parser::ReduceAction729::init"
+val_t NEW_ReduceAction729_parser___ReduceAction729___init();
+typedef void (* parser___ReduceAction730___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction730___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction730___action "parser::ReduceAction730::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction730___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction730___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction730___init "parser::ReduceAction730::init"
+val_t NEW_ReduceAction730_parser___ReduceAction730___init();
+typedef void (* parser___ReduceAction731___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction731___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction731___action "parser::ReduceAction731::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction731___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction731___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction731___init "parser::ReduceAction731::init"
+val_t NEW_ReduceAction731_parser___ReduceAction731___init();
+typedef void (* parser___ReduceAction732___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction732___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction732___action "parser::ReduceAction732::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction732___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction732___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction732___init "parser::ReduceAction732::init"
+val_t NEW_ReduceAction732_parser___ReduceAction732___init();
+typedef void (* parser___ReduceAction733___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction733___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction733___action "parser::ReduceAction733::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction733___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction733___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction733___init "parser::ReduceAction733::init"
+val_t NEW_ReduceAction733_parser___ReduceAction733___init();
+typedef void (* parser___ReduceAction734___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction734___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction734___action "parser::ReduceAction734::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction734___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction734___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction734___init "parser::ReduceAction734::init"
+val_t NEW_ReduceAction734_parser___ReduceAction734___init();
+typedef void (* parser___ReduceAction735___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction735___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction735___action "parser::ReduceAction735::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction735___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction735___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction735___init "parser::ReduceAction735::init"
+val_t NEW_ReduceAction735_parser___ReduceAction735___init();
+typedef void (* parser___ReduceAction736___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction736___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction736___action "parser::ReduceAction736::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction736___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction736___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction736___init "parser::ReduceAction736::init"
+val_t NEW_ReduceAction736_parser___ReduceAction736___init();
+typedef void (* parser___ReduceAction737___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction737___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction737___action "parser::ReduceAction737::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction737___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction737___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction737___init "parser::ReduceAction737::init"
+val_t NEW_ReduceAction737_parser___ReduceAction737___init();
+typedef void (* parser___ReduceAction738___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction738___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction738___action "parser::ReduceAction738::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction738___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction738___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction738___init "parser::ReduceAction738::init"
+val_t NEW_ReduceAction738_parser___ReduceAction738___init();
+typedef void (* parser___ReduceAction739___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction739___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction739___action "parser::ReduceAction739::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction739___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction739___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction739___init "parser::ReduceAction739::init"
+val_t NEW_ReduceAction739_parser___ReduceAction739___init();
+typedef void (* parser___ReduceAction740___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction740___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction740___action "parser::ReduceAction740::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction740___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction740___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction740___init "parser::ReduceAction740::init"
+val_t NEW_ReduceAction740_parser___ReduceAction740___init();
+typedef void (* parser___ReduceAction741___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction741___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction741___action "parser::ReduceAction741::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction741___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction741___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction741___init "parser::ReduceAction741::init"
+val_t NEW_ReduceAction741_parser___ReduceAction741___init();
+typedef void (* parser___ReduceAction742___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction742___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction742___action "parser::ReduceAction742::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction742___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction742___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction742___init "parser::ReduceAction742::init"
+val_t NEW_ReduceAction742_parser___ReduceAction742___init();
+typedef void (* parser___ReduceAction743___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction743___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction743___action "parser::ReduceAction743::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction743___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction743___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction743___init "parser::ReduceAction743::init"
+val_t NEW_ReduceAction743_parser___ReduceAction743___init();
+typedef void (* parser___ReduceAction744___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction744___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction744___action "parser::ReduceAction744::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction744___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction744___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction744___init "parser::ReduceAction744::init"
+val_t NEW_ReduceAction744_parser___ReduceAction744___init();
+typedef void (* parser___ReduceAction745___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction745___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction745___action "parser::ReduceAction745::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction745___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction745___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction745___init "parser::ReduceAction745::init"
+val_t NEW_ReduceAction745_parser___ReduceAction745___init();
+typedef void (* parser___ReduceAction746___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction746___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction746___action "parser::ReduceAction746::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction746___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction746___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction746___init "parser::ReduceAction746::init"
+val_t NEW_ReduceAction746_parser___ReduceAction746___init();
+typedef void (* parser___ReduceAction747___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction747___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction747___action "parser::ReduceAction747::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction747___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction747___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction747___init "parser::ReduceAction747::init"
+val_t NEW_ReduceAction747_parser___ReduceAction747___init();
+typedef void (* parser___ReduceAction748___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction748___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction748___action "parser::ReduceAction748::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction748___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction748___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction748___init "parser::ReduceAction748::init"
+val_t NEW_ReduceAction748_parser___ReduceAction748___init();
+typedef void (* parser___ReduceAction749___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction749___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction749___action "parser::ReduceAction749::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction749___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction749___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction749___init "parser::ReduceAction749::init"
+val_t NEW_ReduceAction749_parser___ReduceAction749___init();
+typedef void (* parser___ReduceAction750___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction750___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction750___action "parser::ReduceAction750::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction750___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction750___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction750___init "parser::ReduceAction750::init"
+val_t NEW_ReduceAction750_parser___ReduceAction750___init();
+typedef void (* parser___ReduceAction751___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction751___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction751___action "parser::ReduceAction751::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction751___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction751___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction751___init "parser::ReduceAction751::init"
+val_t NEW_ReduceAction751_parser___ReduceAction751___init();
+typedef void (* parser___ReduceAction752___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction752___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction752___action "parser::ReduceAction752::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction752___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction752___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction752___init "parser::ReduceAction752::init"
+val_t NEW_ReduceAction752_parser___ReduceAction752___init();
+typedef void (* parser___ReduceAction753___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction753___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction753___action "parser::ReduceAction753::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction753___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction753___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction753___init "parser::ReduceAction753::init"
+val_t NEW_ReduceAction753_parser___ReduceAction753___init();
+typedef void (* parser___ReduceAction754___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction754___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction754___action "parser::ReduceAction754::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction754___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction754___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction754___init "parser::ReduceAction754::init"
+val_t NEW_ReduceAction754_parser___ReduceAction754___init();
+typedef void (* parser___ReduceAction755___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction755___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction755___action "parser::ReduceAction755::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction755___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction755___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction755___init "parser::ReduceAction755::init"
+val_t NEW_ReduceAction755_parser___ReduceAction755___init();
+typedef void (* parser___ReduceAction756___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction756___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction756___action "parser::ReduceAction756::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction756___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction756___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction756___init "parser::ReduceAction756::init"
+val_t NEW_ReduceAction756_parser___ReduceAction756___init();
+typedef void (* parser___ReduceAction757___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction757___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction757___action "parser::ReduceAction757::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction757___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction757___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction757___init "parser::ReduceAction757::init"
+val_t NEW_ReduceAction757_parser___ReduceAction757___init();
+typedef void (* parser___ReduceAction758___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction758___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction758___action "parser::ReduceAction758::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction758___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction758___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction758___init "parser::ReduceAction758::init"
+val_t NEW_ReduceAction758_parser___ReduceAction758___init();
+typedef void (* parser___ReduceAction759___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction759___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction759___action "parser::ReduceAction759::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction759___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction759___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction759___init "parser::ReduceAction759::init"
+val_t NEW_ReduceAction759_parser___ReduceAction759___init();
+typedef void (* parser___ReduceAction760___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction760___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction760___action "parser::ReduceAction760::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction760___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction760___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction760___init "parser::ReduceAction760::init"
+val_t NEW_ReduceAction760_parser___ReduceAction760___init();
+typedef void (* parser___ReduceAction761___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction761___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction761___action "parser::ReduceAction761::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction761___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction761___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction761___init "parser::ReduceAction761::init"
+val_t NEW_ReduceAction761_parser___ReduceAction761___init();
+typedef void (* parser___ReduceAction762___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction762___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction762___action "parser::ReduceAction762::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction762___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction762___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction762___init "parser::ReduceAction762::init"
+val_t NEW_ReduceAction762_parser___ReduceAction762___init();
+typedef void (* parser___ReduceAction763___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction763___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction763___action "parser::ReduceAction763::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction763___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction763___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction763___init "parser::ReduceAction763::init"
+val_t NEW_ReduceAction763_parser___ReduceAction763___init();
+typedef void (* parser___ReduceAction764___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction764___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction764___action "parser::ReduceAction764::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction764___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction764___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction764___init "parser::ReduceAction764::init"
+val_t NEW_ReduceAction764_parser___ReduceAction764___init();
+typedef void (* parser___ReduceAction765___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction765___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction765___action "parser::ReduceAction765::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction765___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction765___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction765___init "parser::ReduceAction765::init"
+val_t NEW_ReduceAction765_parser___ReduceAction765___init();
+typedef void (* parser___ReduceAction766___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction766___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction766___action "parser::ReduceAction766::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction766___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction766___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction766___init "parser::ReduceAction766::init"
+val_t NEW_ReduceAction766_parser___ReduceAction766___init();
+typedef void (* parser___ReduceAction767___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction767___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction767___action "parser::ReduceAction767::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction767___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction767___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction767___init "parser::ReduceAction767::init"
+val_t NEW_ReduceAction767_parser___ReduceAction767___init();
+typedef void (* parser___ReduceAction768___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction768___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction768___action "parser::ReduceAction768::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction768___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction768___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction768___init "parser::ReduceAction768::init"
+val_t NEW_ReduceAction768_parser___ReduceAction768___init();
+typedef void (* parser___ReduceAction769___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction769___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction769___action "parser::ReduceAction769::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction769___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction769___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction769___init "parser::ReduceAction769::init"
+val_t NEW_ReduceAction769_parser___ReduceAction769___init();
+typedef void (* parser___ReduceAction770___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction770___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction770___action "parser::ReduceAction770::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction770___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction770___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction770___init "parser::ReduceAction770::init"
+val_t NEW_ReduceAction770_parser___ReduceAction770___init();
+typedef void (* parser___ReduceAction771___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction771___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction771___action "parser::ReduceAction771::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction771___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction771___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction771___init "parser::ReduceAction771::init"
+val_t NEW_ReduceAction771_parser___ReduceAction771___init();
+typedef void (* parser___ReduceAction772___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction772___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction772___action "parser::ReduceAction772::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction772___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction772___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction772___init "parser::ReduceAction772::init"
+val_t NEW_ReduceAction772_parser___ReduceAction772___init();
+typedef void (* parser___ReduceAction773___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction773___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction773___action "parser::ReduceAction773::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction773___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction773___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction773___init "parser::ReduceAction773::init"
+val_t NEW_ReduceAction773_parser___ReduceAction773___init();
+typedef void (* parser___ReduceAction774___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction774___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction774___action "parser::ReduceAction774::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction774___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction774___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction774___init "parser::ReduceAction774::init"
+val_t NEW_ReduceAction774_parser___ReduceAction774___init();
+typedef void (* parser___ReduceAction775___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction775___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction775___action "parser::ReduceAction775::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction775___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction775___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction775___init "parser::ReduceAction775::init"
+val_t NEW_ReduceAction775_parser___ReduceAction775___init();
+typedef void (* parser___ReduceAction776___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction776___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction776___action "parser::ReduceAction776::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction776___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction776___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction776___init "parser::ReduceAction776::init"
+val_t NEW_ReduceAction776_parser___ReduceAction776___init();
+typedef void (* parser___ReduceAction777___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction777___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction777___action "parser::ReduceAction777::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction777___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction777___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction777___init "parser::ReduceAction777::init"
+val_t NEW_ReduceAction777_parser___ReduceAction777___init();
+typedef void (* parser___ReduceAction778___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction778___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction778___action "parser::ReduceAction778::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction778___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction778___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction778___init "parser::ReduceAction778::init"
+val_t NEW_ReduceAction778_parser___ReduceAction778___init();
+typedef void (* parser___ReduceAction779___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction779___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction779___action "parser::ReduceAction779::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction779___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction779___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction779___init "parser::ReduceAction779::init"
+val_t NEW_ReduceAction779_parser___ReduceAction779___init();
+typedef void (* parser___ReduceAction780___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction780___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction780___action "parser::ReduceAction780::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction780___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction780___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction780___init "parser::ReduceAction780::init"
+val_t NEW_ReduceAction780_parser___ReduceAction780___init();
+typedef void (* parser___ReduceAction781___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction781___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction781___action "parser::ReduceAction781::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction781___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction781___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction781___init "parser::ReduceAction781::init"
+val_t NEW_ReduceAction781_parser___ReduceAction781___init();
+typedef void (* parser___ReduceAction782___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction782___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction782___action "parser::ReduceAction782::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction782___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction782___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction782___init "parser::ReduceAction782::init"
+val_t NEW_ReduceAction782_parser___ReduceAction782___init();
+typedef void (* parser___ReduceAction783___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction783___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction783___action "parser::ReduceAction783::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction783___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction783___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction783___init "parser::ReduceAction783::init"
+val_t NEW_ReduceAction783_parser___ReduceAction783___init();
+typedef void (* parser___ReduceAction784___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction784___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction784___action "parser::ReduceAction784::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction784___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction784___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction784___init "parser::ReduceAction784::init"
+val_t NEW_ReduceAction784_parser___ReduceAction784___init();
+typedef void (* parser___ReduceAction785___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction785___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction785___action "parser::ReduceAction785::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction785___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction785___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction785___init "parser::ReduceAction785::init"
+val_t NEW_ReduceAction785_parser___ReduceAction785___init();
+typedef void (* parser___ReduceAction786___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction786___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction786___action "parser::ReduceAction786::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction786___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction786___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction786___init "parser::ReduceAction786::init"
+val_t NEW_ReduceAction786_parser___ReduceAction786___init();
+typedef void (* parser___ReduceAction787___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction787___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction787___action "parser::ReduceAction787::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction787___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction787___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction787___init "parser::ReduceAction787::init"
+val_t NEW_ReduceAction787_parser___ReduceAction787___init();
+typedef void (* parser___ReduceAction788___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction788___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction788___action "parser::ReduceAction788::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction788___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction788___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction788___init "parser::ReduceAction788::init"
+val_t NEW_ReduceAction788_parser___ReduceAction788___init();
+typedef void (* parser___ReduceAction789___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction789___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction789___action "parser::ReduceAction789::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction789___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction789___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction789___init "parser::ReduceAction789::init"
+val_t NEW_ReduceAction789_parser___ReduceAction789___init();
+typedef void (* parser___ReduceAction790___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction790___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction790___action "parser::ReduceAction790::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction790___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction790___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction790___init "parser::ReduceAction790::init"
+val_t NEW_ReduceAction790_parser___ReduceAction790___init();
+typedef void (* parser___ReduceAction791___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction791___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction791___action "parser::ReduceAction791::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction791___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction791___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction791___init "parser::ReduceAction791::init"
+val_t NEW_ReduceAction791_parser___ReduceAction791___init();
+typedef void (* parser___ReduceAction792___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction792___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction792___action "parser::ReduceAction792::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction792___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction792___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction792___init "parser::ReduceAction792::init"
+val_t NEW_ReduceAction792_parser___ReduceAction792___init();
+typedef void (* parser___ReduceAction793___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction793___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction793___action "parser::ReduceAction793::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction793___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction793___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction793___init "parser::ReduceAction793::init"
+val_t NEW_ReduceAction793_parser___ReduceAction793___init();
+typedef void (* parser___ReduceAction794___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction794___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction794___action "parser::ReduceAction794::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction794___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction794___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction794___init "parser::ReduceAction794::init"
+val_t NEW_ReduceAction794_parser___ReduceAction794___init();
+typedef void (* parser___ReduceAction795___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction795___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction795___action "parser::ReduceAction795::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction795___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction795___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction795___init "parser::ReduceAction795::init"
+val_t NEW_ReduceAction795_parser___ReduceAction795___init();
+typedef void (* parser___ReduceAction796___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction796___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction796___action "parser::ReduceAction796::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction796___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction796___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction796___init "parser::ReduceAction796::init"
+val_t NEW_ReduceAction796_parser___ReduceAction796___init();
+typedef void (* parser___ReduceAction797___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction797___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction797___action "parser::ReduceAction797::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction797___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction797___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction797___init "parser::ReduceAction797::init"
+val_t NEW_ReduceAction797_parser___ReduceAction797___init();
+typedef void (* parser___ReduceAction798___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction798___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction798___action "parser::ReduceAction798::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction798___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction798___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction798___init "parser::ReduceAction798::init"
+val_t NEW_ReduceAction798_parser___ReduceAction798___init();
+typedef void (* parser___ReduceAction799___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction799___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction799___action "parser::ReduceAction799::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction799___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction799___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction799___init "parser::ReduceAction799::init"
+val_t NEW_ReduceAction799_parser___ReduceAction799___init();
+typedef void (* parser___ReduceAction800___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction800___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction800___action "parser::ReduceAction800::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction800___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction800___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction800___init "parser::ReduceAction800::init"
+val_t NEW_ReduceAction800_parser___ReduceAction800___init();
+typedef void (* parser___ReduceAction801___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction801___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction801___action "parser::ReduceAction801::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction801___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction801___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction801___init "parser::ReduceAction801::init"
+val_t NEW_ReduceAction801_parser___ReduceAction801___init();
+typedef void (* parser___ReduceAction802___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction802___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction802___action "parser::ReduceAction802::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction802___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction802___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction802___init "parser::ReduceAction802::init"
+val_t NEW_ReduceAction802_parser___ReduceAction802___init();
+typedef void (* parser___ReduceAction803___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction803___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction803___action "parser::ReduceAction803::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction803___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction803___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction803___init "parser::ReduceAction803::init"
+val_t NEW_ReduceAction803_parser___ReduceAction803___init();
+typedef void (* parser___ReduceAction804___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction804___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction804___action "parser::ReduceAction804::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction804___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction804___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction804___init "parser::ReduceAction804::init"
+val_t NEW_ReduceAction804_parser___ReduceAction804___init();
+typedef void (* parser___ReduceAction805___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction805___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction805___action "parser::ReduceAction805::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction805___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction805___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction805___init "parser::ReduceAction805::init"
+val_t NEW_ReduceAction805_parser___ReduceAction805___init();
+typedef void (* parser___ReduceAction806___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction806___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction806___action "parser::ReduceAction806::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction806___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction806___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction806___init "parser::ReduceAction806::init"
+val_t NEW_ReduceAction806_parser___ReduceAction806___init();
+typedef void (* parser___ReduceAction807___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction807___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction807___action "parser::ReduceAction807::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction807___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction807___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction807___init "parser::ReduceAction807::init"
+val_t NEW_ReduceAction807_parser___ReduceAction807___init();
+typedef void (* parser___ReduceAction808___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction808___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction808___action "parser::ReduceAction808::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction808___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction808___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction808___init "parser::ReduceAction808::init"
+val_t NEW_ReduceAction808_parser___ReduceAction808___init();
+typedef void (* parser___ReduceAction809___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction809___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction809___action "parser::ReduceAction809::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction809___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction809___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction809___init "parser::ReduceAction809::init"
+val_t NEW_ReduceAction809_parser___ReduceAction809___init();
+typedef void (* parser___ReduceAction810___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction810___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction810___action "parser::ReduceAction810::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction810___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction810___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction810___init "parser::ReduceAction810::init"
+val_t NEW_ReduceAction810_parser___ReduceAction810___init();
+typedef void (* parser___ReduceAction811___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction811___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction811___action "parser::ReduceAction811::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction811___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction811___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction811___init "parser::ReduceAction811::init"
+val_t NEW_ReduceAction811_parser___ReduceAction811___init();
+typedef void (* parser___ReduceAction812___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction812___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction812___action "parser::ReduceAction812::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction812___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction812___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction812___init "parser::ReduceAction812::init"
+val_t NEW_ReduceAction812_parser___ReduceAction812___init();
+typedef void (* parser___ReduceAction813___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction813___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction813___action "parser::ReduceAction813::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction813___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction813___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction813___init "parser::ReduceAction813::init"
+val_t NEW_ReduceAction813_parser___ReduceAction813___init();
+typedef void (* parser___ReduceAction814___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction814___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction814___action "parser::ReduceAction814::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction814___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction814___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction814___init "parser::ReduceAction814::init"
+val_t NEW_ReduceAction814_parser___ReduceAction814___init();
+typedef void (* parser___ReduceAction815___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction815___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction815___action "parser::ReduceAction815::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction815___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction815___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction815___init "parser::ReduceAction815::init"
+val_t NEW_ReduceAction815_parser___ReduceAction815___init();
+typedef void (* parser___ReduceAction816___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction816___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction816___action "parser::ReduceAction816::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction816___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction816___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction816___init "parser::ReduceAction816::init"
+val_t NEW_ReduceAction816_parser___ReduceAction816___init();
+typedef void (* parser___ReduceAction817___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction817___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction817___action "parser::ReduceAction817::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction817___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction817___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction817___init "parser::ReduceAction817::init"
+val_t NEW_ReduceAction817_parser___ReduceAction817___init();
+typedef void (* parser___ReduceAction818___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction818___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction818___action "parser::ReduceAction818::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction818___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction818___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction818___init "parser::ReduceAction818::init"
+val_t NEW_ReduceAction818_parser___ReduceAction818___init();
+typedef void (* parser___ReduceAction819___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction819___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction819___action "parser::ReduceAction819::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction819___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction819___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction819___init "parser::ReduceAction819::init"
+val_t NEW_ReduceAction819_parser___ReduceAction819___init();
+typedef void (* parser___ReduceAction820___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction820___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction820___action "parser::ReduceAction820::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction820___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction820___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction820___init "parser::ReduceAction820::init"
+val_t NEW_ReduceAction820_parser___ReduceAction820___init();
+typedef void (* parser___ReduceAction821___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction821___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction821___action "parser::ReduceAction821::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction821___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction821___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction821___init "parser::ReduceAction821::init"
+val_t NEW_ReduceAction821_parser___ReduceAction821___init();
+typedef void (* parser___ReduceAction822___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction822___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction822___action "parser::ReduceAction822::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction822___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction822___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction822___init "parser::ReduceAction822::init"
+val_t NEW_ReduceAction822_parser___ReduceAction822___init();
+typedef void (* parser___ReduceAction823___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction823___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction823___action "parser::ReduceAction823::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction823___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction823___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction823___init "parser::ReduceAction823::init"
+val_t NEW_ReduceAction823_parser___ReduceAction823___init();
+typedef void (* parser___ReduceAction824___action_t)(val_t  self, val_t  param0);
+void parser___ReduceAction824___action(val_t  self, val_t  param0);
+#define LOCATE_parser___ReduceAction824___action "parser::ReduceAction824::(parser::ReduceAction::action)"
+typedef void (* parser___ReduceAction824___init_t)(val_t  self, int* init_table);
+void parser___ReduceAction824___init(val_t  self, int* init_table);
+#define LOCATE_parser___ReduceAction824___init "parser::ReduceAction824::init"
+val_t NEW_ReduceAction824_parser___ReduceAction824___init();
 #endif

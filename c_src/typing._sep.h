@@ -21,96 +21,117 @@ extern const int SFT_typing[];
 #define ID_TypingVisitor SFT_typing[1]
 #define COLOR_TypingVisitor SFT_typing[2]
 #define COLOR_typing___TypingVisitor____variable_ctx SFT_typing[3]
-#define COLOR_typing___TypingVisitor____self_type SFT_typing[4]
+#define COLOR_typing___TypingVisitor____self_var SFT_typing[4]
 #define COLOR_typing___TypingVisitor____top_block SFT_typing[5]
-#define COLOR_typing___TypingVisitor____explicit_super_init_calls SFT_typing[6]
-#define COLOR_typing___TypingVisitor____explicit_other_init_call SFT_typing[7]
-#define INIT_TABLE_POS_TypingVisitor SFT_typing[8]
-#define COLOR_typing___TypingVisitor___variable_ctx SFT_typing[9]
-#define COLOR_typing___TypingVisitor___variable_ctx__eq SFT_typing[10]
-#define COLOR_typing___TypingVisitor___self_type SFT_typing[11]
-#define COLOR_typing___TypingVisitor___self_type__eq SFT_typing[12]
-#define COLOR_typing___TypingVisitor___top_block SFT_typing[13]
-#define COLOR_typing___TypingVisitor___top_block__eq SFT_typing[14]
-#define COLOR_typing___TypingVisitor___explicit_super_init_calls SFT_typing[15]
-#define COLOR_typing___TypingVisitor___explicit_super_init_calls__eq SFT_typing[16]
-#define COLOR_typing___TypingVisitor___explicit_other_init_call SFT_typing[17]
-#define COLOR_typing___TypingVisitor___explicit_other_init_call__eq SFT_typing[18]
-#define COLOR_typing___TypingVisitor___init SFT_typing[19]
-#define COLOR_typing___TypingVisitor___get_default_constructor_for SFT_typing[20]
-#define ID_VariableContext SFT_typing[21]
-#define COLOR_VariableContext SFT_typing[22]
-#define COLOR_typing___VariableContext____dico SFT_typing[23]
-#define INIT_TABLE_POS_VariableContext SFT_typing[24]
-#define COLOR_typing___VariableContext_____bra SFT_typing[25]
-#define COLOR_typing___VariableContext___add SFT_typing[26]
-#define COLOR_typing___VariableContext___stype SFT_typing[27]
-#define COLOR_typing___VariableContext___sub SFT_typing[28]
-#define COLOR_typing___VariableContext___sub_with SFT_typing[29]
-#define COLOR_typing___VariableContext___init SFT_typing[30]
-#define ID_SubVariableContext SFT_typing[31]
-#define COLOR_SubVariableContext SFT_typing[32]
-#define COLOR_typing___SubVariableContext____prev SFT_typing[33]
-#define COLOR_typing___SubVariableContext____variable SFT_typing[34]
-#define COLOR_typing___SubVariableContext____var_type SFT_typing[35]
-#define INIT_TABLE_POS_SubVariableContext SFT_typing[36]
-#define COLOR_typing___SubVariableContext___prev SFT_typing[37]
-#define COLOR_typing___SubVariableContext___with SFT_typing[38]
-#define COLOR_typing___PNode___accept_typing SFT_typing[39]
-#define COLOR_typing___PNode___after_typing SFT_typing[40]
-#define COLOR_SUPER_typing___PClassdef___accept_typing SFT_typing[41]
-#define COLOR_SUPER_typing___AAttrPropdef___accept_typing SFT_typing[42]
-#define COLOR_SUPER_typing___AMethPropdef___accept_typing SFT_typing[43]
-#define COLOR_typing___AConcreteInitPropdef____super_init_calls SFT_typing[44]
-#define COLOR_typing___AConcreteInitPropdef____explicit_super_init_calls SFT_typing[45]
-#define COLOR_typing___AConcreteInitPropdef___super_init_calls SFT_typing[46]
-#define COLOR_typing___AConcreteInitPropdef___explicit_super_init_calls SFT_typing[47]
-#define COLOR_SUPER_typing___AConcreteInitPropdef___accept_typing SFT_typing[48]
-#define COLOR_typing___PType____stype SFT_typing[49]
-#define COLOR_typing___PType___stype SFT_typing[50]
-#define COLOR_typing___PExpr____stype SFT_typing[51]
-#define COLOR_typing___PExpr____if_true_variable_ctx SFT_typing[52]
-#define COLOR_typing___PExpr___is_implicit_self SFT_typing[53]
-#define COLOR_typing___PExpr___is_self SFT_typing[54]
-#define COLOR_typing___PExpr___is_variable SFT_typing[55]
-#define COLOR_typing___PExpr___if_true_variable_ctx SFT_typing[56]
-#define COLOR_SUPER_typing___ABlockExpr___accept_typing SFT_typing[57]
-#define COLOR_typing___AReassignFormExpr____assign_method SFT_typing[58]
-#define COLOR_typing___AReassignFormExpr___do_lvalue_typing SFT_typing[59]
-#define COLOR_typing___AReassignFormExpr___assign_method SFT_typing[60]
-#define COLOR_typing___PAssignOp___method_name SFT_typing[61]
-#define COLOR_typing___AArrayExpr___stype__eq SFT_typing[62]
-#define COLOR_typing___ASuperExpr____init_in_superclass SFT_typing[63]
-#define COLOR_typing___ASuperExpr___init_in_superclass SFT_typing[64]
-#define COLOR_typing___AAttrFormExpr____prop SFT_typing[65]
-#define COLOR_typing___AAttrFormExpr____attr_type SFT_typing[66]
-#define COLOR_typing___AAttrFormExpr___prop SFT_typing[67]
-#define COLOR_typing___AAttrFormExpr___attr_type SFT_typing[68]
-#define COLOR_typing___AAttrFormExpr___do_typing SFT_typing[69]
-#define ID_AAbsSendExpr SFT_typing[70]
-#define COLOR_AAbsSendExpr SFT_typing[71]
-#define COLOR_typing___AAbsSendExpr____prop SFT_typing[72]
-#define COLOR_typing___AAbsSendExpr____arguments SFT_typing[73]
-#define INIT_TABLE_POS_AAbsSendExpr SFT_typing[74]
-#define COLOR_typing___AAbsSendExpr___do_typing SFT_typing[75]
-#define COLOR_typing___AAbsSendExpr___get_property SFT_typing[76]
-#define COLOR_typing___AAbsSendExpr___process_signature SFT_typing[77]
-#define COLOR_typing___AAbsSendExpr___prop SFT_typing[78]
-#define COLOR_typing___AAbsSendExpr___arguments SFT_typing[79]
-#define ID_ASuperInitCall SFT_typing[80]
-#define COLOR_ASuperInitCall SFT_typing[81]
-#define INIT_TABLE_POS_ASuperInitCall SFT_typing[82]
-#define COLOR_typing___ASuperInitCall___register_super_init_call SFT_typing[83]
-#define COLOR_typing___ASendExpr___name SFT_typing[84]
-#define COLOR_typing___ASendExpr___raw_arguments SFT_typing[85]
-#define COLOR_typing___ASendExpr___do_all_typing SFT_typing[86]
-#define ID_ASendReassignExpr SFT_typing[87]
-#define COLOR_ASendReassignExpr SFT_typing[88]
-#define COLOR_typing___ASendReassignExpr____read_prop SFT_typing[89]
-#define INIT_TABLE_POS_ASendReassignExpr SFT_typing[90]
-#define COLOR_typing___ASendReassignExpr___read_prop SFT_typing[91]
-#define COLOR_SUPER_typing___ACallFormExpr___after_typing SFT_typing[92]
-#define COLOR_typing___ACallFormExpr___variable_create SFT_typing[93]
+#define COLOR_typing___TypingVisitor____closure SFT_typing[6]
+#define COLOR_typing___TypingVisitor____closure_break_stype SFT_typing[7]
+#define COLOR_typing___TypingVisitor____break_list SFT_typing[8]
+#define COLOR_typing___TypingVisitor____explicit_super_init_calls SFT_typing[9]
+#define COLOR_typing___TypingVisitor____explicit_other_init_call SFT_typing[10]
+#define INIT_TABLE_POS_TypingVisitor SFT_typing[11]
+#define COLOR_typing___TypingVisitor___variable_ctx SFT_typing[12]
+#define COLOR_typing___TypingVisitor___variable_ctx__eq SFT_typing[13]
+#define COLOR_typing___TypingVisitor___self_var SFT_typing[14]
+#define COLOR_typing___TypingVisitor___self_var__eq SFT_typing[15]
+#define COLOR_typing___TypingVisitor___top_block SFT_typing[16]
+#define COLOR_typing___TypingVisitor___top_block__eq SFT_typing[17]
+#define COLOR_typing___TypingVisitor___closure SFT_typing[18]
+#define COLOR_typing___TypingVisitor___closure__eq SFT_typing[19]
+#define COLOR_typing___TypingVisitor___closure_break_stype SFT_typing[20]
+#define COLOR_typing___TypingVisitor___closure_break_stype__eq SFT_typing[21]
+#define COLOR_typing___TypingVisitor___break_list SFT_typing[22]
+#define COLOR_typing___TypingVisitor___break_list__eq SFT_typing[23]
+#define COLOR_typing___TypingVisitor___explicit_super_init_calls SFT_typing[24]
+#define COLOR_typing___TypingVisitor___explicit_super_init_calls__eq SFT_typing[25]
+#define COLOR_typing___TypingVisitor___explicit_other_init_call SFT_typing[26]
+#define COLOR_typing___TypingVisitor___explicit_other_init_call__eq SFT_typing[27]
+#define COLOR_typing___TypingVisitor___init SFT_typing[28]
+#define COLOR_typing___TypingVisitor___get_default_constructor_for SFT_typing[29]
+#define ID_VariableContext SFT_typing[30]
+#define COLOR_VariableContext SFT_typing[31]
+#define COLOR_typing___VariableContext____dico SFT_typing[32]
+#define INIT_TABLE_POS_VariableContext SFT_typing[33]
+#define COLOR_typing___VariableContext_____bra SFT_typing[34]
+#define COLOR_typing___VariableContext___add SFT_typing[35]
+#define COLOR_typing___VariableContext___stype SFT_typing[36]
+#define COLOR_typing___VariableContext___sub SFT_typing[37]
+#define COLOR_typing___VariableContext___sub_with SFT_typing[38]
+#define COLOR_typing___VariableContext___init SFT_typing[39]
+#define ID_SubVariableContext SFT_typing[40]
+#define COLOR_SubVariableContext SFT_typing[41]
+#define COLOR_typing___SubVariableContext____prev SFT_typing[42]
+#define COLOR_typing___SubVariableContext____variable SFT_typing[43]
+#define COLOR_typing___SubVariableContext____var_type SFT_typing[44]
+#define INIT_TABLE_POS_SubVariableContext SFT_typing[45]
+#define COLOR_typing___SubVariableContext___prev SFT_typing[46]
+#define COLOR_typing___SubVariableContext___with_prev SFT_typing[47]
+#define COLOR_typing___PNode___accept_typing SFT_typing[48]
+#define COLOR_typing___PNode___after_typing SFT_typing[49]
+#define COLOR_SUPER_typing___PClassdef___accept_typing SFT_typing[50]
+#define COLOR_SUPER_typing___AAttrPropdef___accept_typing SFT_typing[51]
+#define COLOR_typing___AMethPropdef____self_var SFT_typing[52]
+#define COLOR_SUPER_typing___AMethPropdef___accept_typing SFT_typing[53]
+#define COLOR_typing___AConcreteInitPropdef____super_init_calls SFT_typing[54]
+#define COLOR_typing___AConcreteInitPropdef____explicit_super_init_calls SFT_typing[55]
+#define COLOR_typing___AConcreteInitPropdef___super_init_calls SFT_typing[56]
+#define COLOR_typing___AConcreteInitPropdef___explicit_super_init_calls SFT_typing[57]
+#define COLOR_SUPER_typing___AConcreteInitPropdef___accept_typing SFT_typing[58]
+#define COLOR_typing___PType____stype SFT_typing[59]
+#define COLOR_typing___PType___stype SFT_typing[60]
+#define COLOR_typing___PExpr____stype SFT_typing[61]
+#define COLOR_typing___PExpr____if_true_variable_ctx SFT_typing[62]
+#define COLOR_typing___PExpr___is_implicit_self SFT_typing[63]
+#define COLOR_typing___PExpr___is_self SFT_typing[64]
+#define COLOR_typing___PExpr___its_variable SFT_typing[65]
+#define COLOR_typing___PExpr___if_true_variable_ctx SFT_typing[66]
+#define COLOR_SUPER_typing___ABlockExpr___accept_typing SFT_typing[67]
+#define COLOR_typing___AReassignFormExpr____assign_method SFT_typing[68]
+#define COLOR_typing___AReassignFormExpr___do_lvalue_typing SFT_typing[69]
+#define COLOR_typing___AReassignFormExpr___assign_method SFT_typing[70]
+#define COLOR_typing___PAssignOp___method_name SFT_typing[71]
+#define COLOR_typing___AArrayExpr___stype__eq SFT_typing[72]
+#define COLOR_typing___ASuperExpr____init_in_superclass SFT_typing[73]
+#define COLOR_typing___ASuperExpr___init_in_superclass SFT_typing[74]
+#define COLOR_typing___AAttrFormExpr____prop SFT_typing[75]
+#define COLOR_typing___AAttrFormExpr____attr_type SFT_typing[76]
+#define COLOR_typing___AAttrFormExpr___prop SFT_typing[77]
+#define COLOR_typing___AAttrFormExpr___attr_type SFT_typing[78]
+#define COLOR_typing___AAttrFormExpr___do_typing SFT_typing[79]
+#define ID_AAbsSendExpr SFT_typing[80]
+#define COLOR_AAbsSendExpr SFT_typing[81]
+#define COLOR_typing___AAbsSendExpr____prop_signature SFT_typing[82]
+#define COLOR_typing___AAbsSendExpr____prop SFT_typing[83]
+#define COLOR_typing___AAbsSendExpr____arguments SFT_typing[84]
+#define COLOR_typing___AAbsSendExpr____return_type SFT_typing[85]
+#define INIT_TABLE_POS_AAbsSendExpr SFT_typing[86]
+#define COLOR_typing___AAbsSendExpr___prop_signature SFT_typing[87]
+#define COLOR_typing___AAbsSendExpr___do_typing SFT_typing[88]
+#define COLOR_typing___AAbsSendExpr___get_property SFT_typing[89]
+#define COLOR_typing___AAbsSendExpr___get_signature SFT_typing[90]
+#define COLOR_typing___AAbsSendExpr___process_signature SFT_typing[91]
+#define COLOR_typing___AAbsSendExpr___process_closures SFT_typing[92]
+#define COLOR_typing___AAbsSendExpr___prop SFT_typing[93]
+#define COLOR_typing___AAbsSendExpr___arguments SFT_typing[94]
+#define COLOR_typing___AAbsSendExpr___return_type SFT_typing[95]
+#define ID_ASuperInitCall SFT_typing[96]
+#define COLOR_ASuperInitCall SFT_typing[97]
+#define INIT_TABLE_POS_ASuperInitCall SFT_typing[98]
+#define COLOR_typing___ASuperInitCall___register_super_init_call SFT_typing[99]
+#define COLOR_typing___ASendExpr___name SFT_typing[100]
+#define COLOR_typing___ASendExpr___raw_arguments SFT_typing[101]
+#define COLOR_typing___ASendExpr___closure_defs SFT_typing[102]
+#define COLOR_typing___ASendExpr___do_all_typing SFT_typing[103]
+#define ID_ASendReassignExpr SFT_typing[104]
+#define COLOR_ASendReassignExpr SFT_typing[105]
+#define COLOR_typing___ASendReassignExpr____read_prop SFT_typing[106]
+#define INIT_TABLE_POS_ASendReassignExpr SFT_typing[107]
+#define COLOR_typing___ASendReassignExpr___read_prop SFT_typing[108]
+#define COLOR_SUPER_typing___ACallFormExpr___after_typing SFT_typing[109]
+#define COLOR_typing___ACallFormExpr___variable_create SFT_typing[110]
+#define COLOR_typing___PClosureDef____accept_typing2 SFT_typing[111]
+#define COLOR_SUPER_typing___PClosureDef___accept_typing SFT_typing[112]
+#define COLOR_typing___PClosureDef___accept_typing2 SFT_typing[113]
+val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef void (* typing___MMSrcModule___do_typing_t)(val_t  self, val_t  param0);
 void typing___MMSrcModule___do_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___MMSrcModule___do_typing "typing::MMSrcModule::do_typing"
@@ -124,13 +145,13 @@ val_t typing___TypingVisitor___variable_ctx(val_t  self);
 typedef void (* typing___TypingVisitor___variable_ctx__eq_t)(val_t  self, val_t  param0);
 void typing___TypingVisitor___variable_ctx__eq(val_t  self, val_t  param0);
 #define LOCATE_typing___TypingVisitor___variable_ctx__eq "typing::TypingVisitor::variable_ctx="
-#define ATTR_typing___TypingVisitor____self_type(recv) ATTR(recv, COLOR_typing___TypingVisitor____self_type)
-typedef val_t (* typing___TypingVisitor___self_type_t)(val_t  self);
-val_t typing___TypingVisitor___self_type(val_t  self);
-#define LOCATE_typing___TypingVisitor___self_type "typing::TypingVisitor::self_type"
-typedef void (* typing___TypingVisitor___self_type__eq_t)(val_t  self, val_t  param0);
-void typing___TypingVisitor___self_type__eq(val_t  self, val_t  param0);
-#define LOCATE_typing___TypingVisitor___self_type__eq "typing::TypingVisitor::self_type="
+#define ATTR_typing___TypingVisitor____self_var(recv) ATTR(recv, COLOR_typing___TypingVisitor____self_var)
+typedef val_t (* typing___TypingVisitor___self_var_t)(val_t  self);
+val_t typing___TypingVisitor___self_var(val_t  self);
+#define LOCATE_typing___TypingVisitor___self_var "typing::TypingVisitor::self_var"
+typedef void (* typing___TypingVisitor___self_var__eq_t)(val_t  self, val_t  param0);
+void typing___TypingVisitor___self_var__eq(val_t  self, val_t  param0);
+#define LOCATE_typing___TypingVisitor___self_var__eq "typing::TypingVisitor::self_var="
 #define ATTR_typing___TypingVisitor____top_block(recv) ATTR(recv, COLOR_typing___TypingVisitor____top_block)
 typedef val_t (* typing___TypingVisitor___top_block_t)(val_t  self);
 val_t typing___TypingVisitor___top_block(val_t  self);
@@ -138,6 +159,27 @@ val_t typing___TypingVisitor___top_block(val_t  self);
 typedef void (* typing___TypingVisitor___top_block__eq_t)(val_t  self, val_t  param0);
 void typing___TypingVisitor___top_block__eq(val_t  self, val_t  param0);
 #define LOCATE_typing___TypingVisitor___top_block__eq "typing::TypingVisitor::top_block="
+#define ATTR_typing___TypingVisitor____closure(recv) ATTR(recv, COLOR_typing___TypingVisitor____closure)
+typedef val_t (* typing___TypingVisitor___closure_t)(val_t  self);
+val_t typing___TypingVisitor___closure(val_t  self);
+#define LOCATE_typing___TypingVisitor___closure "typing::TypingVisitor::closure"
+typedef void (* typing___TypingVisitor___closure__eq_t)(val_t  self, val_t  param0);
+void typing___TypingVisitor___closure__eq(val_t  self, val_t  param0);
+#define LOCATE_typing___TypingVisitor___closure__eq "typing::TypingVisitor::closure="
+#define ATTR_typing___TypingVisitor____closure_break_stype(recv) ATTR(recv, COLOR_typing___TypingVisitor____closure_break_stype)
+typedef val_t (* typing___TypingVisitor___closure_break_stype_t)(val_t  self);
+val_t typing___TypingVisitor___closure_break_stype(val_t  self);
+#define LOCATE_typing___TypingVisitor___closure_break_stype "typing::TypingVisitor::closure_break_stype"
+typedef void (* typing___TypingVisitor___closure_break_stype__eq_t)(val_t  self, val_t  param0);
+void typing___TypingVisitor___closure_break_stype__eq(val_t  self, val_t  param0);
+#define LOCATE_typing___TypingVisitor___closure_break_stype__eq "typing::TypingVisitor::closure_break_stype="
+#define ATTR_typing___TypingVisitor____break_list(recv) ATTR(recv, COLOR_typing___TypingVisitor____break_list)
+typedef val_t (* typing___TypingVisitor___break_list_t)(val_t  self);
+val_t typing___TypingVisitor___break_list(val_t  self);
+#define LOCATE_typing___TypingVisitor___break_list "typing::TypingVisitor::break_list"
+typedef void (* typing___TypingVisitor___break_list__eq_t)(val_t  self, val_t  param0);
+void typing___TypingVisitor___break_list__eq(val_t  self, val_t  param0);
+#define LOCATE_typing___TypingVisitor___break_list__eq "typing::TypingVisitor::break_list="
 #define ATTR_typing___TypingVisitor____explicit_super_init_calls(recv) ATTR(recv, COLOR_typing___TypingVisitor____explicit_super_init_calls)
 typedef val_t (* typing___TypingVisitor___explicit_super_init_calls_t)(val_t  self);
 val_t typing___TypingVisitor___explicit_super_init_calls(val_t  self);
@@ -154,8 +196,8 @@ void typing___TypingVisitor___explicit_other_init_call__eq(val_t  self, val_t  p
 #define LOCATE_typing___TypingVisitor___explicit_other_init_call__eq "typing::TypingVisitor::explicit_other_init_call="
 typedef void (* typing___TypingVisitor___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void typing___TypingVisitor___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_typing___TypingVisitor___init(val_t  param0, val_t  param1);
 #define LOCATE_typing___TypingVisitor___init "typing::TypingVisitor::init"
+val_t NEW_TypingVisitor_typing___TypingVisitor___init(val_t p0, val_t p1);
 typedef val_t (* typing___TypingVisitor___get_default_constructor_for_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 val_t typing___TypingVisitor___get_default_constructor_for(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_typing___TypingVisitor___get_default_constructor_for "typing::TypingVisitor::get_default_constructor_for"
@@ -177,39 +219,61 @@ val_t typing___VariableContext___sub_with(val_t  self, val_t  param0, val_t  par
 #define LOCATE_typing___VariableContext___sub_with "typing::VariableContext::sub_with"
 typedef void (* typing___VariableContext___init_t)(val_t  self, int* init_table);
 void typing___VariableContext___init(val_t  self, int* init_table);
-val_t NEW_typing___VariableContext___init();
 #define LOCATE_typing___VariableContext___init "typing::VariableContext::init"
-#define ATTR_typing___SubVariableContext____prev(recv) ATTR(recv, COLOR_typing___SubVariableContext____prev)
-typedef val_t (* typing___SubVariableContext___prev_t)(val_t  self);
-val_t typing___SubVariableContext___prev(val_t  self);
-#define LOCATE_typing___SubVariableContext___prev "typing::SubVariableContext::prev"
-#define ATTR_typing___SubVariableContext____variable(recv) ATTR(recv, COLOR_typing___SubVariableContext____variable)
-#define ATTR_typing___SubVariableContext____var_type(recv) ATTR(recv, COLOR_typing___SubVariableContext____var_type)
+val_t NEW_VariableContext_typing___VariableContext___init();
 typedef val_t (* typing___SubVariableContext_____bra_t)(val_t  self, val_t  param0);
 val_t typing___SubVariableContext_____bra(val_t  self, val_t  param0);
 #define LOCATE_typing___SubVariableContext_____bra "typing::SubVariableContext::(typing::VariableContext::[])"
 typedef val_t (* typing___SubVariableContext___stype_t)(val_t  self, val_t  param0);
 val_t typing___SubVariableContext___stype(val_t  self, val_t  param0);
 #define LOCATE_typing___SubVariableContext___stype "typing::SubVariableContext::(typing::VariableContext::stype)"
-typedef void (* typing___SubVariableContext___with_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void typing___SubVariableContext___with(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_typing___SubVariableContext___with(val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_typing___SubVariableContext___with "typing::SubVariableContext::with"
+#define ATTR_typing___SubVariableContext____prev(recv) ATTR(recv, COLOR_typing___SubVariableContext____prev)
+typedef val_t (* typing___SubVariableContext___prev_t)(val_t  self);
+val_t typing___SubVariableContext___prev(val_t  self);
+#define LOCATE_typing___SubVariableContext___prev "typing::SubVariableContext::prev"
+#define ATTR_typing___SubVariableContext____variable(recv) ATTR(recv, COLOR_typing___SubVariableContext____variable)
+#define ATTR_typing___SubVariableContext____var_type(recv) ATTR(recv, COLOR_typing___SubVariableContext____var_type)
+typedef void (* typing___SubVariableContext___with_prev_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void typing___SubVariableContext___with_prev(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_typing___SubVariableContext___with_prev "typing::SubVariableContext::with_prev"
+val_t NEW_SubVariableContext_typing___SubVariableContext___with_prev(val_t p0, val_t p1, val_t p2);
+val_t NEW_PNode_parser_nodes___PNode___init();
 typedef void (* typing___PNode___accept_typing_t)(val_t  self, val_t  param0);
 void typing___PNode___accept_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___PNode___accept_typing "typing::PNode::accept_typing"
 typedef void (* typing___PNode___after_typing_t)(val_t  self, val_t  param0);
 void typing___PNode___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___PNode___after_typing "typing::PNode::after_typing"
+val_t NEW_PClassdef_parser_nodes___PNode___init();
 typedef void (* typing___PClassdef___accept_typing_t)(val_t  self, val_t  param0);
 void typing___PClassdef___accept_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___PClassdef___accept_typing "typing::PClassdef::(typing::PNode::accept_typing)"
+val_t NEW_AAttrPropdef_parser_nodes___PNode___init();
+val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___empty_init();
+val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8);
 typedef void (* typing___AAttrPropdef___accept_typing_t)(val_t  self, val_t  param0);
 void typing___AAttrPropdef___accept_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AAttrPropdef___accept_typing "typing::AAttrPropdef::(typing::PNode::accept_typing)"
+val_t NEW_AMethPropdef_parser_nodes___PNode___init();
+val_t NEW_AMethPropdef_parser_prod___AMethPropdef___empty_init();
+val_t NEW_AMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+typedef val_t (* typing___AMethPropdef___self_var_t)(val_t  self);
+val_t typing___AMethPropdef___self_var(val_t  self);
+#define LOCATE_typing___AMethPropdef___self_var "typing::AMethPropdef::(syntax_base::AMethPropdef::self_var)"
 typedef void (* typing___AMethPropdef___accept_typing_t)(val_t  self, val_t  param0);
 void typing___AMethPropdef___accept_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AMethPropdef___accept_typing "typing::AMethPropdef::(typing::PNode::accept_typing)"
+#define ATTR_typing___AMethPropdef____self_var(recv) ATTR(recv, COLOR_typing___AMethPropdef____self_var)
+val_t NEW_AConcreteInitPropdef_parser_nodes___PNode___init();
+val_t NEW_AConcreteInitPropdef_parser_prod___AMethPropdef___empty_init();
+val_t NEW_AConcreteInitPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteMethPropdef___empty_init();
+val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
+val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___empty_init();
+val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
+typedef void (* typing___AConcreteInitPropdef___accept_typing_t)(val_t  self, val_t  param0);
+void typing___AConcreteInitPropdef___accept_typing(val_t  self, val_t  param0);
+#define LOCATE_typing___AConcreteInitPropdef___accept_typing "typing::AConcreteInitPropdef::(typing::PNode::accept_typing)"
 #define ATTR_typing___AConcreteInitPropdef____super_init_calls(recv) ATTR(recv, COLOR_typing___AConcreteInitPropdef____super_init_calls)
 typedef val_t (* typing___AConcreteInitPropdef___super_init_calls_t)(val_t  self);
 val_t typing___AConcreteInitPropdef___super_init_calls(val_t  self);
@@ -218,69 +282,118 @@ val_t typing___AConcreteInitPropdef___super_init_calls(val_t  self);
 typedef val_t (* typing___AConcreteInitPropdef___explicit_super_init_calls_t)(val_t  self);
 val_t typing___AConcreteInitPropdef___explicit_super_init_calls(val_t  self);
 #define LOCATE_typing___AConcreteInitPropdef___explicit_super_init_calls "typing::AConcreteInitPropdef::explicit_super_init_calls"
-typedef void (* typing___AConcreteInitPropdef___accept_typing_t)(val_t  self, val_t  param0);
-void typing___AConcreteInitPropdef___accept_typing(val_t  self, val_t  param0);
-#define LOCATE_typing___AConcreteInitPropdef___accept_typing "typing::AConcreteInitPropdef::(typing::PNode::accept_typing)"
+val_t NEW_PParam_parser_nodes___PNode___init();
 typedef void (* typing___PParam___after_typing_t)(val_t  self, val_t  param0);
 void typing___PParam___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___PParam___after_typing "typing::PParam::(typing::PNode::after_typing)"
+val_t NEW_AClosureDecl_parser_nodes___PNode___init();
+val_t NEW_AClosureDecl_parser_prod___AClosureDecl___empty_init();
+val_t NEW_AClosureDecl_parser_prod___AClosureDecl___init_aclosuredecl(val_t p0, val_t p1, val_t p2, val_t p3);
+typedef void (* typing___AClosureDecl___after_typing_t)(val_t  self, val_t  param0);
+void typing___AClosureDecl___after_typing(val_t  self, val_t  param0);
+#define LOCATE_typing___AClosureDecl___after_typing "typing::AClosureDecl::(typing::PNode::after_typing)"
+val_t NEW_PType_parser_nodes___PNode___init();
+typedef void (* typing___PType___after_typing_t)(val_t  self, val_t  param0);
+void typing___PType___after_typing(val_t  self, val_t  param0);
+#define LOCATE_typing___PType___after_typing "typing::PType::(typing::PNode::after_typing)"
 #define ATTR_typing___PType____stype(recv) ATTR(recv, COLOR_typing___PType____stype)
 typedef val_t (* typing___PType___stype_t)(val_t  self);
 val_t typing___PType___stype(val_t  self);
 #define LOCATE_typing___PType___stype "typing::PType::stype"
-typedef void (* typing___PType___after_typing_t)(val_t  self, val_t  param0);
-void typing___PType___after_typing(val_t  self, val_t  param0);
-#define LOCATE_typing___PType___after_typing "typing::PType::(typing::PNode::after_typing)"
-#define ATTR_typing___PExpr____stype(recv) ATTR(recv, COLOR_typing___PExpr____stype)
+val_t NEW_PExpr_parser_nodes___PNode___init();
 typedef val_t (* typing___PExpr___stype_t)(val_t  self);
 val_t typing___PExpr___stype(val_t  self);
 #define LOCATE_typing___PExpr___stype "typing::PExpr::(syntax_base::PExpr::stype)"
+#define ATTR_typing___PExpr____stype(recv) ATTR(recv, COLOR_typing___PExpr____stype)
 typedef val_t (* typing___PExpr___is_implicit_self_t)(val_t  self);
 val_t typing___PExpr___is_implicit_self(val_t  self);
 #define LOCATE_typing___PExpr___is_implicit_self "typing::PExpr::is_implicit_self"
 typedef val_t (* typing___PExpr___is_self_t)(val_t  self);
 val_t typing___PExpr___is_self(val_t  self);
 #define LOCATE_typing___PExpr___is_self "typing::PExpr::is_self"
-typedef val_t (* typing___PExpr___is_variable_t)(val_t  self);
-val_t typing___PExpr___is_variable(val_t  self);
-#define LOCATE_typing___PExpr___is_variable "typing::PExpr::is_variable"
+typedef val_t (* typing___PExpr___its_variable_t)(val_t  self);
+val_t typing___PExpr___its_variable(val_t  self);
+#define LOCATE_typing___PExpr___its_variable "typing::PExpr::its_variable"
 #define ATTR_typing___PExpr____if_true_variable_ctx(recv) ATTR(recv, COLOR_typing___PExpr____if_true_variable_ctx)
 typedef val_t (* typing___PExpr___if_true_variable_ctx_t)(val_t  self);
 val_t typing___PExpr___if_true_variable_ctx(val_t  self);
 #define LOCATE_typing___PExpr___if_true_variable_ctx "typing::PExpr::if_true_variable_ctx"
+val_t NEW_AVardeclExpr_parser_nodes___PNode___init();
+val_t NEW_AVardeclExpr_parser_prod___AVardeclExpr___empty_init();
+val_t NEW_AVardeclExpr_parser_prod___AVardeclExpr___init_avardeclexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 typedef void (* typing___AVardeclExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AVardeclExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AVardeclExpr___after_typing "typing::AVardeclExpr::(typing::PNode::after_typing)"
+val_t NEW_ABlockExpr_parser_nodes___PNode___init();
+val_t NEW_ABlockExpr_parser_prod___ABlockExpr___empty_init();
+val_t NEW_ABlockExpr_parser_prod___ABlockExpr___init_ablockexpr(val_t p0);
 typedef void (* typing___ABlockExpr___accept_typing_t)(val_t  self, val_t  param0);
 void typing___ABlockExpr___accept_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___ABlockExpr___accept_typing "typing::ABlockExpr::(typing::PNode::accept_typing)"
+val_t NEW_AReturnExpr_parser_nodes___PNode___init();
+val_t NEW_AReturnExpr_parser_prod___AReturnExpr___empty_init();
+val_t NEW_AReturnExpr_parser_prod___AReturnExpr___init_areturnexpr(val_t p0, val_t p1);
 typedef void (* typing___AReturnExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AReturnExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AReturnExpr___after_typing "typing::AReturnExpr::(typing::PNode::after_typing)"
+val_t NEW_AContinueExpr_parser_nodes___PNode___init();
+val_t NEW_AContinueExpr_parser_prod___AContinueExpr___empty_init();
+val_t NEW_AContinueExpr_parser_prod___AContinueExpr___init_acontinueexpr(val_t p0, val_t p1);
+typedef void (* typing___AContinueExpr___after_typing_t)(val_t  self, val_t  param0);
+void typing___AContinueExpr___after_typing(val_t  self, val_t  param0);
+#define LOCATE_typing___AContinueExpr___after_typing "typing::AContinueExpr::(typing::PNode::after_typing)"
+val_t NEW_ABreakExpr_parser_nodes___PNode___init();
+val_t NEW_ABreakExpr_parser_prod___ABreakExpr___empty_init();
+val_t NEW_ABreakExpr_parser_prod___ABreakExpr___init_abreakexpr(val_t p0, val_t p1);
+typedef void (* typing___ABreakExpr___after_typing_t)(val_t  self, val_t  param0);
+void typing___ABreakExpr___after_typing(val_t  self, val_t  param0);
+#define LOCATE_typing___ABreakExpr___after_typing "typing::ABreakExpr::(typing::PNode::after_typing)"
+val_t NEW_AIfExpr_parser_nodes___PNode___init();
+val_t NEW_AIfExpr_parser_prod___AIfExpr___empty_init();
+val_t NEW_AIfExpr_parser_prod___AIfExpr___init_aifexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef void (* typing___AIfExpr___accept_typing_t)(val_t  self, val_t  param0);
 void typing___AIfExpr___accept_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AIfExpr___accept_typing "typing::AIfExpr::(typing::PNode::accept_typing)"
+val_t NEW_AWhileExpr_parser_nodes___PNode___init();
+val_t NEW_AWhileExpr_parser_prod___AWhileExpr___empty_init();
+val_t NEW_AWhileExpr_parser_prod___AWhileExpr___init_awhileexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef void (* typing___AWhileExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AWhileExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AWhileExpr___after_typing "typing::AWhileExpr::(typing::PNode::after_typing)"
+val_t NEW_AForExpr_parser_nodes___PNode___init();
+val_t NEW_AForExpr_parser_prod___AForExpr___empty_init();
+val_t NEW_AForExpr_parser_prod___AForExpr___init_aforexpr(val_t p0, val_t p1, val_t p2);
 typedef void (* typing___AForExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AForExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AForExpr___after_typing "typing::AForExpr::(typing::PNode::after_typing)"
+val_t NEW_AForVardeclExpr_parser_nodes___PNode___init();
+val_t NEW_AForVardeclExpr_parser_prod___AForVardeclExpr___empty_init();
+val_t NEW_AForVardeclExpr_parser_prod___AForVardeclExpr___init_aforvardeclexpr(val_t p0, val_t p1, val_t p2);
 typedef void (* typing___AForVardeclExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AForVardeclExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AForVardeclExpr___after_typing "typing::AForVardeclExpr::(typing::PNode::after_typing)"
+val_t NEW_AAssertExpr_parser_nodes___PNode___init();
+val_t NEW_AAssertExpr_parser_prod___AAssertExpr___empty_init();
+val_t NEW_AAssertExpr_parser_prod___AAssertExpr___init_aassertexpr(val_t p0, val_t p1, val_t p2);
 typedef void (* typing___AAssertExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AAssertExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AAssertExpr___after_typing "typing::AAssertExpr::(typing::PNode::after_typing)"
-typedef val_t (* typing___AVarExpr___is_variable_t)(val_t  self);
-val_t typing___AVarExpr___is_variable(val_t  self);
-#define LOCATE_typing___AVarExpr___is_variable "typing::AVarExpr::(typing::PExpr::is_variable)"
+val_t NEW_AVarExpr_parser_nodes___PNode___init();
+val_t NEW_AVarExpr_parser_prod___AVarExpr___empty_init();
+val_t NEW_AVarExpr_parser_prod___AVarExpr___init_avarexpr(val_t p0);
 typedef void (* typing___AVarExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AVarExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AVarExpr___after_typing "typing::AVarExpr::(typing::PNode::after_typing)"
+typedef val_t (* typing___AVarExpr___its_variable_t)(val_t  self);
+val_t typing___AVarExpr___its_variable(val_t  self);
+#define LOCATE_typing___AVarExpr___its_variable "typing::AVarExpr::(typing::PExpr::its_variable)"
+val_t NEW_AVarAssignExpr_parser_nodes___PNode___init();
+val_t NEW_AVarAssignExpr_parser_prod___AVarAssignExpr___empty_init();
+val_t NEW_AVarAssignExpr_parser_prod___AVarAssignExpr___init_avarassignexpr(val_t p0, val_t p1, val_t p2);
 typedef void (* typing___AVarAssignExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AVarAssignExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AVarAssignExpr___after_typing "typing::AVarAssignExpr::(typing::PNode::after_typing)"
+val_t NEW_AReassignFormExpr_parser_nodes___PNode___init();
 typedef void (* typing___AReassignFormExpr___do_lvalue_typing_t)(val_t  self, val_t  param0, val_t  param1);
 void typing___AReassignFormExpr___do_lvalue_typing(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_typing___AReassignFormExpr___do_lvalue_typing "typing::AReassignFormExpr::do_lvalue_typing"
@@ -288,76 +401,136 @@ void typing___AReassignFormExpr___do_lvalue_typing(val_t  self, val_t  param0, v
 typedef val_t (* typing___AReassignFormExpr___assign_method_t)(val_t  self);
 val_t typing___AReassignFormExpr___assign_method(val_t  self);
 #define LOCATE_typing___AReassignFormExpr___assign_method "typing::AReassignFormExpr::assign_method"
+val_t NEW_AVarReassignExpr_parser_nodes___PNode___init();
+val_t NEW_AVarReassignExpr_parser_prod___AVarReassignExpr___empty_init();
+val_t NEW_AVarReassignExpr_parser_prod___AVarReassignExpr___init_avarreassignexpr(val_t p0, val_t p1, val_t p2);
 typedef void (* typing___AVarReassignExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AVarReassignExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AVarReassignExpr___after_typing "typing::AVarReassignExpr::(typing::PNode::after_typing)"
+val_t NEW_PAssignOp_parser_nodes___PNode___init();
 typedef val_t (* typing___PAssignOp___method_name_t)(val_t  self);
 val_t typing___PAssignOp___method_name(val_t  self);
 #define LOCATE_typing___PAssignOp___method_name "typing::PAssignOp::method_name"
+val_t NEW_APlusAssignOp_parser_nodes___PNode___init();
+val_t NEW_APlusAssignOp_parser_prod___APlusAssignOp___empty_init();
+val_t NEW_APlusAssignOp_parser_prod___APlusAssignOp___init_aplusassignop(val_t p0);
 typedef val_t (* typing___APlusAssignOp___method_name_t)(val_t  self);
 val_t typing___APlusAssignOp___method_name(val_t  self);
 #define LOCATE_typing___APlusAssignOp___method_name "typing::APlusAssignOp::(typing::PAssignOp::method_name)"
+val_t NEW_AMinusAssignOp_parser_nodes___PNode___init();
+val_t NEW_AMinusAssignOp_parser_prod___AMinusAssignOp___empty_init();
+val_t NEW_AMinusAssignOp_parser_prod___AMinusAssignOp___init_aminusassignop(val_t p0);
 typedef val_t (* typing___AMinusAssignOp___method_name_t)(val_t  self);
 val_t typing___AMinusAssignOp___method_name(val_t  self);
 #define LOCATE_typing___AMinusAssignOp___method_name "typing::AMinusAssignOp::(typing::PAssignOp::method_name)"
+val_t NEW_ASelfExpr_parser_nodes___PNode___init();
+val_t NEW_ASelfExpr_parser_prod___ASelfExpr___empty_init();
+val_t NEW_ASelfExpr_parser_prod___ASelfExpr___init_aselfexpr(val_t p0);
 typedef void (* typing___ASelfExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___ASelfExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___ASelfExpr___after_typing "typing::ASelfExpr::(typing::PNode::after_typing)"
 typedef val_t (* typing___ASelfExpr___is_self_t)(val_t  self);
 val_t typing___ASelfExpr___is_self(val_t  self);
 #define LOCATE_typing___ASelfExpr___is_self "typing::ASelfExpr::(typing::PExpr::is_self)"
+typedef val_t (* typing___ASelfExpr___its_variable_t)(val_t  self);
+val_t typing___ASelfExpr___its_variable(val_t  self);
+#define LOCATE_typing___ASelfExpr___its_variable "typing::ASelfExpr::(typing::PExpr::its_variable)"
+val_t NEW_AImplicitSelfExpr_parser_nodes___PNode___init();
+val_t NEW_AImplicitSelfExpr_parser_prod___ASelfExpr___empty_init();
+val_t NEW_AImplicitSelfExpr_parser_prod___ASelfExpr___init_aselfexpr(val_t p0);
+val_t NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___empty_init();
+val_t NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr();
 typedef val_t (* typing___AImplicitSelfExpr___is_implicit_self_t)(val_t  self);
 val_t typing___AImplicitSelfExpr___is_implicit_self(val_t  self);
 #define LOCATE_typing___AImplicitSelfExpr___is_implicit_self "typing::AImplicitSelfExpr::(typing::PExpr::is_implicit_self)"
+val_t NEW_AIfexprExpr_parser_nodes___PNode___init();
+val_t NEW_AIfexprExpr_parser_prod___AIfexprExpr___empty_init();
+val_t NEW_AIfexprExpr_parser_prod___AIfexprExpr___init_aifexprexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
 typedef void (* typing___AIfexprExpr___accept_typing_t)(val_t  self, val_t  param0);
 void typing___AIfexprExpr___accept_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AIfexprExpr___accept_typing "typing::AIfexprExpr::(typing::PNode::accept_typing)"
+val_t NEW_ABoolExpr_parser_nodes___PNode___init();
 typedef void (* typing___ABoolExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___ABoolExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___ABoolExpr___after_typing "typing::ABoolExpr::(typing::PNode::after_typing)"
+val_t NEW_AOrExpr_parser_nodes___PNode___init();
+val_t NEW_AOrExpr_parser_prod___AOrExpr___empty_init();
+val_t NEW_AOrExpr_parser_prod___AOrExpr___init_aorexpr(val_t p0, val_t p1);
 typedef void (* typing___AOrExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AOrExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AOrExpr___after_typing "typing::AOrExpr::(typing::PNode::after_typing)"
+val_t NEW_AAndExpr_parser_nodes___PNode___init();
+val_t NEW_AAndExpr_parser_prod___AAndExpr___empty_init();
+val_t NEW_AAndExpr_parser_prod___AAndExpr___init_aandexpr(val_t p0, val_t p1);
 typedef void (* typing___AAndExpr___accept_typing_t)(val_t  self, val_t  param0);
 void typing___AAndExpr___accept_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AAndExpr___accept_typing "typing::AAndExpr::(typing::PNode::accept_typing)"
+val_t NEW_ANotExpr_parser_nodes___PNode___init();
+val_t NEW_ANotExpr_parser_prod___ANotExpr___empty_init();
+val_t NEW_ANotExpr_parser_prod___ANotExpr___init_anotexpr(val_t p0, val_t p1);
 typedef void (* typing___ANotExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___ANotExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___ANotExpr___after_typing "typing::ANotExpr::(typing::PNode::after_typing)"
+val_t NEW_AIntExpr_parser_nodes___PNode___init();
+val_t NEW_AIntExpr_parser_prod___AIntExpr___empty_init();
+val_t NEW_AIntExpr_parser_prod___AIntExpr___init_aintexpr(val_t p0);
 typedef void (* typing___AIntExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AIntExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AIntExpr___after_typing "typing::AIntExpr::(typing::PNode::after_typing)"
+val_t NEW_AFloatExpr_parser_nodes___PNode___init();
+val_t NEW_AFloatExpr_parser_prod___AFloatExpr___empty_init();
+val_t NEW_AFloatExpr_parser_prod___AFloatExpr___init_afloatexpr(val_t p0);
 typedef void (* typing___AFloatExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AFloatExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AFloatExpr___after_typing "typing::AFloatExpr::(typing::PNode::after_typing)"
+val_t NEW_ACharExpr_parser_nodes___PNode___init();
+val_t NEW_ACharExpr_parser_prod___ACharExpr___empty_init();
+val_t NEW_ACharExpr_parser_prod___ACharExpr___init_acharexpr(val_t p0);
 typedef void (* typing___ACharExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___ACharExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___ACharExpr___after_typing "typing::ACharExpr::(typing::PNode::after_typing)"
+val_t NEW_AStringFormExpr_parser_nodes___PNode___init();
 typedef void (* typing___AStringFormExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AStringFormExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AStringFormExpr___after_typing "typing::AStringFormExpr::(typing::PNode::after_typing)"
+val_t NEW_ASuperstringExpr_parser_nodes___PNode___init();
+val_t NEW_ASuperstringExpr_parser_prod___ASuperstringExpr___empty_init();
+val_t NEW_ASuperstringExpr_parser_prod___ASuperstringExpr___init_asuperstringexpr(val_t p0);
 typedef void (* typing___ASuperstringExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___ASuperstringExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___ASuperstringExpr___after_typing "typing::ASuperstringExpr::(typing::PNode::after_typing)"
+val_t NEW_ANullExpr_parser_nodes___PNode___init();
+val_t NEW_ANullExpr_parser_prod___ANullExpr___empty_init();
+val_t NEW_ANullExpr_parser_prod___ANullExpr___init_anullexpr(val_t p0);
 typedef void (* typing___ANullExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___ANullExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___ANullExpr___after_typing "typing::ANullExpr::(typing::PNode::after_typing)"
-typedef void (* typing___AArrayExpr___stype__eq_t)(val_t  self, val_t  param0);
-void typing___AArrayExpr___stype__eq(val_t  self, val_t  param0);
-#define LOCATE_typing___AArrayExpr___stype__eq "typing::AArrayExpr::stype="
+val_t NEW_AArrayExpr_parser_nodes___PNode___init();
+val_t NEW_AArrayExpr_parser_prod___AArrayExpr___empty_init();
+val_t NEW_AArrayExpr_parser_prod___AArrayExpr___init_aarrayexpr(val_t p0);
 typedef void (* typing___AArrayExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AArrayExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AArrayExpr___after_typing "typing::AArrayExpr::(typing::PNode::after_typing)"
+typedef void (* typing___AArrayExpr___stype__eq_t)(val_t  self, val_t  param0);
+void typing___AArrayExpr___stype__eq(val_t  self, val_t  param0);
+#define LOCATE_typing___AArrayExpr___stype__eq "typing::AArrayExpr::stype="
+val_t NEW_ARangeExpr_parser_nodes___PNode___init();
+val_t NEW_ARangeExpr_parser_prod___ARangeExpr___empty_init();
+val_t NEW_ARangeExpr_parser_prod___ARangeExpr___init_arangeexpr(val_t p0, val_t p1);
 typedef void (* typing___ARangeExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___ARangeExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___ARangeExpr___after_typing "typing::ARangeExpr::(typing::PNode::after_typing)"
+val_t NEW_ASuperExpr_parser_nodes___PNode___init();
+val_t NEW_ASuperExpr_parser_prod___ASuperExpr___empty_init();
+val_t NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr(val_t p0, val_t p1, val_t p2);
+typedef void (* typing___ASuperExpr___after_typing_t)(val_t  self, val_t  param0);
+void typing___ASuperExpr___after_typing(val_t  self, val_t  param0);
+#define LOCATE_typing___ASuperExpr___after_typing "typing::ASuperExpr::(typing::PNode::after_typing)"
 #define ATTR_typing___ASuperExpr____init_in_superclass(recv) ATTR(recv, COLOR_typing___ASuperExpr____init_in_superclass)
 typedef val_t (* typing___ASuperExpr___init_in_superclass_t)(val_t  self);
 val_t typing___ASuperExpr___init_in_superclass(val_t  self);
 #define LOCATE_typing___ASuperExpr___init_in_superclass "typing::ASuperExpr::init_in_superclass"
-typedef void (* typing___ASuperExpr___after_typing_t)(val_t  self, val_t  param0);
-void typing___ASuperExpr___after_typing(val_t  self, val_t  param0);
-#define LOCATE_typing___ASuperExpr___after_typing "typing::ASuperExpr::(typing::PNode::after_typing)"
+val_t NEW_AAttrFormExpr_parser_nodes___PNode___init();
 #define ATTR_typing___AAttrFormExpr____prop(recv) ATTR(recv, COLOR_typing___AAttrFormExpr____prop)
 typedef val_t (* typing___AAttrFormExpr___prop_t)(val_t  self);
 val_t typing___AAttrFormExpr___prop(val_t  self);
@@ -369,24 +542,44 @@ val_t typing___AAttrFormExpr___attr_type(val_t  self);
 typedef void (* typing___AAttrFormExpr___do_typing_t)(val_t  self, val_t  param0);
 void typing___AAttrFormExpr___do_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AAttrFormExpr___do_typing "typing::AAttrFormExpr::do_typing"
+val_t NEW_AAttrExpr_parser_nodes___PNode___init();
+val_t NEW_AAttrExpr_parser_prod___AAttrExpr___empty_init();
+val_t NEW_AAttrExpr_parser_prod___AAttrExpr___init_aattrexpr(val_t p0, val_t p1);
 typedef void (* typing___AAttrExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AAttrExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AAttrExpr___after_typing "typing::AAttrExpr::(typing::PNode::after_typing)"
+val_t NEW_AAttrAssignExpr_parser_nodes___PNode___init();
+val_t NEW_AAttrAssignExpr_parser_prod___AAttrAssignExpr___empty_init();
+val_t NEW_AAttrAssignExpr_parser_prod___AAttrAssignExpr___init_aattrassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef void (* typing___AAttrAssignExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AAttrAssignExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AAttrAssignExpr___after_typing "typing::AAttrAssignExpr::(typing::PNode::after_typing)"
+val_t NEW_AAttrReassignExpr_parser_nodes___PNode___init();
+val_t NEW_AAttrReassignExpr_parser_prod___AAttrReassignExpr___empty_init();
+val_t NEW_AAttrReassignExpr_parser_prod___AAttrReassignExpr___init_aattrreassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef void (* typing___AAttrReassignExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AAttrReassignExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AAttrReassignExpr___after_typing "typing::AAttrReassignExpr::(typing::PNode::after_typing)"
-typedef void (* typing___AAbsSendExpr___do_typing_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5);
-void typing___AAbsSendExpr___do_typing(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5);
+val_t NEW_AAbsSendExpr_parser_nodes___PNode___init();
+#define ATTR_typing___AAbsSendExpr____prop_signature(recv) ATTR(recv, COLOR_typing___AAbsSendExpr____prop_signature)
+typedef val_t (* typing___AAbsSendExpr___prop_signature_t)(val_t  self);
+val_t typing___AAbsSendExpr___prop_signature(val_t  self);
+#define LOCATE_typing___AAbsSendExpr___prop_signature "typing::AAbsSendExpr::prop_signature"
+typedef void (* typing___AAbsSendExpr___do_typing_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6);
+void typing___AAbsSendExpr___do_typing(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6);
 #define LOCATE_typing___AAbsSendExpr___do_typing "typing::AAbsSendExpr::do_typing"
 typedef val_t (* typing___AAbsSendExpr___get_property_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
 val_t typing___AAbsSendExpr___get_property(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
 #define LOCATE_typing___AAbsSendExpr___get_property "typing::AAbsSendExpr::get_property"
-typedef val_t (* typing___AAbsSendExpr___process_signature_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4);
-val_t typing___AAbsSendExpr___process_signature(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4);
+typedef val_t (* typing___AAbsSendExpr___get_signature_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
+val_t typing___AAbsSendExpr___get_signature(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
+#define LOCATE_typing___AAbsSendExpr___get_signature "typing::AAbsSendExpr::get_signature"
+typedef val_t (* typing___AAbsSendExpr___process_signature_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
+val_t typing___AAbsSendExpr___process_signature(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
 #define LOCATE_typing___AAbsSendExpr___process_signature "typing::AAbsSendExpr::process_signature"
+typedef val_t (* typing___AAbsSendExpr___process_closures_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
+val_t typing___AAbsSendExpr___process_closures(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
+#define LOCATE_typing___AAbsSendExpr___process_closures "typing::AAbsSendExpr::process_closures"
 #define ATTR_typing___AAbsSendExpr____prop(recv) ATTR(recv, COLOR_typing___AAbsSendExpr____prop)
 typedef val_t (* typing___AAbsSendExpr___prop_t)(val_t  self);
 val_t typing___AAbsSendExpr___prop(val_t  self);
@@ -395,139 +588,316 @@ val_t typing___AAbsSendExpr___prop(val_t  self);
 typedef val_t (* typing___AAbsSendExpr___arguments_t)(val_t  self);
 val_t typing___AAbsSendExpr___arguments(val_t  self);
 #define LOCATE_typing___AAbsSendExpr___arguments "typing::AAbsSendExpr::arguments"
+#define ATTR_typing___AAbsSendExpr____return_type(recv) ATTR(recv, COLOR_typing___AAbsSendExpr____return_type)
+typedef val_t (* typing___AAbsSendExpr___return_type_t)(val_t  self);
+val_t typing___AAbsSendExpr___return_type(val_t  self);
+#define LOCATE_typing___AAbsSendExpr___return_type "typing::AAbsSendExpr::return_type"
+val_t NEW_ASuperInitCall_parser_nodes___PNode___init();
 typedef void (* typing___ASuperInitCall___register_super_init_call_t)(val_t  self, val_t  param0, val_t  param1);
 void typing___ASuperInitCall___register_super_init_call(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_typing___ASuperInitCall___register_super_init_call "typing::ASuperInitCall::register_super_init_call"
+val_t NEW_ANewExpr_parser_nodes___PNode___init();
+val_t NEW_ANewExpr_parser_prod___ANewExpr___empty_init();
+val_t NEW_ANewExpr_parser_prod___ANewExpr___init_anewexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef void (* typing___ANewExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___ANewExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___ANewExpr___after_typing "typing::ANewExpr::(typing::PNode::after_typing)"
+val_t NEW_ASendExpr_parser_nodes___PNode___init();
+val_t NEW_ASendExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ASendExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+typedef void (* typing___ASendExpr___after_typing_t)(val_t  self, val_t  param0);
+void typing___ASendExpr___after_typing(val_t  self, val_t  param0);
+#define LOCATE_typing___ASendExpr___after_typing "typing::ASendExpr::(typing::PNode::after_typing)"
 typedef val_t (* typing___ASendExpr___name_t)(val_t  self);
 val_t typing___ASendExpr___name(val_t  self);
 #define LOCATE_typing___ASendExpr___name "typing::ASendExpr::name"
 typedef val_t (* typing___ASendExpr___raw_arguments_t)(val_t  self);
 val_t typing___ASendExpr___raw_arguments(val_t  self);
 #define LOCATE_typing___ASendExpr___raw_arguments "typing::ASendExpr::raw_arguments"
-typedef void (* typing___ASendExpr___after_typing_t)(val_t  self, val_t  param0);
-void typing___ASendExpr___after_typing(val_t  self, val_t  param0);
-#define LOCATE_typing___ASendExpr___after_typing "typing::ASendExpr::(typing::PNode::after_typing)"
+typedef val_t (* typing___ASendExpr___closure_defs_t)(val_t  self);
+val_t typing___ASendExpr___closure_defs(val_t  self);
+#define LOCATE_typing___ASendExpr___closure_defs "typing::ASendExpr::closure_defs"
 typedef void (* typing___ASendExpr___do_all_typing_t)(val_t  self, val_t  param0);
 void typing___ASendExpr___do_all_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___ASendExpr___do_all_typing "typing::ASendExpr::do_all_typing"
+val_t NEW_ASendReassignExpr_parser_nodes___PNode___init();
+val_t NEW_ASendReassignExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ASendReassignExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+typedef void (* typing___ASendReassignExpr___do_all_typing_t)(val_t  self, val_t  param0);
+void typing___ASendReassignExpr___do_all_typing(val_t  self, val_t  param0);
+#define LOCATE_typing___ASendReassignExpr___do_all_typing "typing::ASendReassignExpr::(typing::ASendExpr::do_all_typing)"
 #define ATTR_typing___ASendReassignExpr____read_prop(recv) ATTR(recv, COLOR_typing___ASendReassignExpr____read_prop)
 typedef val_t (* typing___ASendReassignExpr___read_prop_t)(val_t  self);
 val_t typing___ASendReassignExpr___read_prop(val_t  self);
 #define LOCATE_typing___ASendReassignExpr___read_prop "typing::ASendReassignExpr::read_prop"
-typedef void (* typing___ASendReassignExpr___do_all_typing_t)(val_t  self, val_t  param0);
-void typing___ASendReassignExpr___do_all_typing(val_t  self, val_t  param0);
-#define LOCATE_typing___ASendReassignExpr___do_all_typing "typing::ASendReassignExpr::(typing::ASendExpr::do_all_typing)"
+val_t NEW_ABinopExpr_parser_nodes___PNode___init();
+val_t NEW_ABinopExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ABinopExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ABinopExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_ABinopExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
 typedef val_t (* typing___ABinopExpr___raw_arguments_t)(val_t  self);
 val_t typing___ABinopExpr___raw_arguments(val_t  self);
 #define LOCATE_typing___ABinopExpr___raw_arguments "typing::ABinopExpr::(typing::ASendExpr::raw_arguments)"
+val_t NEW_AEqExpr_parser_nodes___PNode___init();
+val_t NEW_AEqExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_AEqExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_AEqExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_AEqExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+val_t NEW_AEqExpr_parser_prod___AEqExpr___empty_init();
+val_t NEW_AEqExpr_parser_prod___AEqExpr___init_aeqexpr(val_t p0, val_t p1);
 typedef val_t (* typing___AEqExpr___name_t)(val_t  self);
 val_t typing___AEqExpr___name(val_t  self);
 #define LOCATE_typing___AEqExpr___name "typing::AEqExpr::(typing::ASendExpr::name)"
+val_t NEW_ANeExpr_parser_nodes___PNode___init();
+val_t NEW_ANeExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ANeExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ANeExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_ANeExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+val_t NEW_ANeExpr_parser_prod___ANeExpr___empty_init();
+val_t NEW_ANeExpr_parser_prod___ANeExpr___init_aneexpr(val_t p0, val_t p1);
 typedef val_t (* typing___ANeExpr___name_t)(val_t  self);
 val_t typing___ANeExpr___name(val_t  self);
 #define LOCATE_typing___ANeExpr___name "typing::ANeExpr::(typing::ASendExpr::name)"
+val_t NEW_ALtExpr_parser_nodes___PNode___init();
+val_t NEW_ALtExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ALtExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ALtExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_ALtExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+val_t NEW_ALtExpr_parser_prod___ALtExpr___empty_init();
+val_t NEW_ALtExpr_parser_prod___ALtExpr___init_altexpr(val_t p0, val_t p1);
 typedef val_t (* typing___ALtExpr___name_t)(val_t  self);
 val_t typing___ALtExpr___name(val_t  self);
 #define LOCATE_typing___ALtExpr___name "typing::ALtExpr::(typing::ASendExpr::name)"
+val_t NEW_ALeExpr_parser_nodes___PNode___init();
+val_t NEW_ALeExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ALeExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ALeExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_ALeExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+val_t NEW_ALeExpr_parser_prod___ALeExpr___empty_init();
+val_t NEW_ALeExpr_parser_prod___ALeExpr___init_aleexpr(val_t p0, val_t p1);
 typedef val_t (* typing___ALeExpr___name_t)(val_t  self);
 val_t typing___ALeExpr___name(val_t  self);
 #define LOCATE_typing___ALeExpr___name "typing::ALeExpr::(typing::ASendExpr::name)"
+val_t NEW_AGtExpr_parser_nodes___PNode___init();
+val_t NEW_AGtExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_AGtExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_AGtExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_AGtExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+val_t NEW_AGtExpr_parser_prod___AGtExpr___empty_init();
+val_t NEW_AGtExpr_parser_prod___AGtExpr___init_agtexpr(val_t p0, val_t p1);
 typedef val_t (* typing___AGtExpr___name_t)(val_t  self);
 val_t typing___AGtExpr___name(val_t  self);
 #define LOCATE_typing___AGtExpr___name "typing::AGtExpr::(typing::ASendExpr::name)"
+val_t NEW_AGeExpr_parser_nodes___PNode___init();
+val_t NEW_AGeExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_AGeExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_AGeExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_AGeExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+val_t NEW_AGeExpr_parser_prod___AGeExpr___empty_init();
+val_t NEW_AGeExpr_parser_prod___AGeExpr___init_ageexpr(val_t p0, val_t p1);
 typedef val_t (* typing___AGeExpr___name_t)(val_t  self);
 val_t typing___AGeExpr___name(val_t  self);
 #define LOCATE_typing___AGeExpr___name "typing::AGeExpr::(typing::ASendExpr::name)"
+val_t NEW_APlusExpr_parser_nodes___PNode___init();
+val_t NEW_APlusExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_APlusExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_APlusExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_APlusExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+val_t NEW_APlusExpr_parser_prod___APlusExpr___empty_init();
+val_t NEW_APlusExpr_parser_prod___APlusExpr___init_aplusexpr(val_t p0, val_t p1);
 typedef val_t (* typing___APlusExpr___name_t)(val_t  self);
 val_t typing___APlusExpr___name(val_t  self);
 #define LOCATE_typing___APlusExpr___name "typing::APlusExpr::(typing::ASendExpr::name)"
+val_t NEW_AMinusExpr_parser_nodes___PNode___init();
+val_t NEW_AMinusExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_AMinusExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_AMinusExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_AMinusExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+val_t NEW_AMinusExpr_parser_prod___AMinusExpr___empty_init();
+val_t NEW_AMinusExpr_parser_prod___AMinusExpr___init_aminusexpr(val_t p0, val_t p1);
 typedef val_t (* typing___AMinusExpr___name_t)(val_t  self);
 val_t typing___AMinusExpr___name(val_t  self);
 #define LOCATE_typing___AMinusExpr___name "typing::AMinusExpr::(typing::ASendExpr::name)"
+val_t NEW_AStarshipExpr_parser_nodes___PNode___init();
+val_t NEW_AStarshipExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_AStarshipExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_AStarshipExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_AStarshipExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+val_t NEW_AStarshipExpr_parser_prod___AStarshipExpr___empty_init();
+val_t NEW_AStarshipExpr_parser_prod___AStarshipExpr___init_astarshipexpr(val_t p0, val_t p1);
 typedef val_t (* typing___AStarshipExpr___name_t)(val_t  self);
 val_t typing___AStarshipExpr___name(val_t  self);
 #define LOCATE_typing___AStarshipExpr___name "typing::AStarshipExpr::(typing::ASendExpr::name)"
+val_t NEW_AStarExpr_parser_nodes___PNode___init();
+val_t NEW_AStarExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_AStarExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_AStarExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_AStarExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+val_t NEW_AStarExpr_parser_prod___AStarExpr___empty_init();
+val_t NEW_AStarExpr_parser_prod___AStarExpr___init_astarexpr(val_t p0, val_t p1);
 typedef val_t (* typing___AStarExpr___name_t)(val_t  self);
 val_t typing___AStarExpr___name(val_t  self);
 #define LOCATE_typing___AStarExpr___name "typing::AStarExpr::(typing::ASendExpr::name)"
+val_t NEW_ASlashExpr_parser_nodes___PNode___init();
+val_t NEW_ASlashExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ASlashExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ASlashExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_ASlashExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+val_t NEW_ASlashExpr_parser_prod___ASlashExpr___empty_init();
+val_t NEW_ASlashExpr_parser_prod___ASlashExpr___init_aslashexpr(val_t p0, val_t p1);
 typedef val_t (* typing___ASlashExpr___name_t)(val_t  self);
 val_t typing___ASlashExpr___name(val_t  self);
 #define LOCATE_typing___ASlashExpr___name "typing::ASlashExpr::(typing::ASendExpr::name)"
+val_t NEW_APercentExpr_parser_nodes___PNode___init();
+val_t NEW_APercentExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_APercentExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_APercentExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_APercentExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+val_t NEW_APercentExpr_parser_prod___APercentExpr___empty_init();
+val_t NEW_APercentExpr_parser_prod___APercentExpr___init_apercentexpr(val_t p0, val_t p1);
 typedef val_t (* typing___APercentExpr___name_t)(val_t  self);
 val_t typing___APercentExpr___name(val_t  self);
 #define LOCATE_typing___APercentExpr___name "typing::APercentExpr::(typing::ASendExpr::name)"
+val_t NEW_AUminusExpr_parser_nodes___PNode___init();
+val_t NEW_AUminusExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_AUminusExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_AUminusExpr_parser_prod___AUminusExpr___empty_init();
+val_t NEW_AUminusExpr_parser_prod___AUminusExpr___init_auminusexpr(val_t p0, val_t p1);
 typedef val_t (* typing___AUminusExpr___name_t)(val_t  self);
 val_t typing___AUminusExpr___name(val_t  self);
 #define LOCATE_typing___AUminusExpr___name "typing::AUminusExpr::(typing::ASendExpr::name)"
 typedef val_t (* typing___AUminusExpr___raw_arguments_t)(val_t  self);
 val_t typing___AUminusExpr___raw_arguments(val_t  self);
 #define LOCATE_typing___AUminusExpr___raw_arguments "typing::AUminusExpr::(typing::ASendExpr::raw_arguments)"
+val_t NEW_ACallFormExpr_parser_nodes___PNode___init();
+val_t NEW_ACallFormExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ACallFormExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
 typedef void (* typing___ACallFormExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___ACallFormExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___ACallFormExpr___after_typing "typing::ACallFormExpr::(typing::PNode::after_typing)"
+typedef val_t (* typing___ACallFormExpr___closure_defs_t)(val_t  self);
+val_t typing___ACallFormExpr___closure_defs(val_t  self);
+#define LOCATE_typing___ACallFormExpr___closure_defs "typing::ACallFormExpr::(typing::ASendExpr::closure_defs)"
 typedef val_t (* typing___ACallFormExpr___variable_create_t)(val_t  self, val_t  param0);
 val_t typing___ACallFormExpr___variable_create(val_t  self, val_t  param0);
 #define LOCATE_typing___ACallFormExpr___variable_create "typing::ACallFormExpr::variable_create"
-typedef val_t (* typing___ACallExpr___variable_create_t)(val_t  self, val_t  param0);
-val_t typing___ACallExpr___variable_create(val_t  self, val_t  param0);
-#define LOCATE_typing___ACallExpr___variable_create "typing::ACallExpr::(typing::ACallFormExpr::variable_create)"
+val_t NEW_ACallExpr_parser_nodes___PNode___init();
+val_t NEW_ACallExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ACallExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ACallExpr_parser_prod___ACallExpr___empty_init();
+val_t NEW_ACallExpr_parser_prod___ACallExpr___init_acallexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef val_t (* typing___ACallExpr___name_t)(val_t  self);
 val_t typing___ACallExpr___name(val_t  self);
 #define LOCATE_typing___ACallExpr___name "typing::ACallExpr::(typing::ASendExpr::name)"
 typedef val_t (* typing___ACallExpr___raw_arguments_t)(val_t  self);
 val_t typing___ACallExpr___raw_arguments(val_t  self);
 #define LOCATE_typing___ACallExpr___raw_arguments "typing::ACallExpr::(typing::ASendExpr::raw_arguments)"
-typedef val_t (* typing___ACallAssignExpr___variable_create_t)(val_t  self, val_t  param0);
-val_t typing___ACallAssignExpr___variable_create(val_t  self, val_t  param0);
-#define LOCATE_typing___ACallAssignExpr___variable_create "typing::ACallAssignExpr::(typing::ACallFormExpr::variable_create)"
+typedef val_t (* typing___ACallExpr___variable_create_t)(val_t  self, val_t  param0);
+val_t typing___ACallExpr___variable_create(val_t  self, val_t  param0);
+#define LOCATE_typing___ACallExpr___variable_create "typing::ACallExpr::(typing::ACallFormExpr::variable_create)"
+val_t NEW_ACallAssignExpr_parser_nodes___PNode___init();
+val_t NEW_ACallAssignExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ACallAssignExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ACallAssignExpr_parser_prod___ACallAssignExpr___empty_init();
+val_t NEW_ACallAssignExpr_parser_prod___ACallAssignExpr___init_acallassignexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 typedef val_t (* typing___ACallAssignExpr___name_t)(val_t  self);
 val_t typing___ACallAssignExpr___name(val_t  self);
 #define LOCATE_typing___ACallAssignExpr___name "typing::ACallAssignExpr::(typing::ASendExpr::name)"
 typedef val_t (* typing___ACallAssignExpr___raw_arguments_t)(val_t  self);
 val_t typing___ACallAssignExpr___raw_arguments(val_t  self);
 #define LOCATE_typing___ACallAssignExpr___raw_arguments "typing::ACallAssignExpr::(typing::ASendExpr::raw_arguments)"
-typedef val_t (* typing___ACallReassignExpr___variable_create_t)(val_t  self, val_t  param0);
-val_t typing___ACallReassignExpr___variable_create(val_t  self, val_t  param0);
-#define LOCATE_typing___ACallReassignExpr___variable_create "typing::ACallReassignExpr::(typing::ACallFormExpr::variable_create)"
+typedef val_t (* typing___ACallAssignExpr___variable_create_t)(val_t  self, val_t  param0);
+val_t typing___ACallAssignExpr___variable_create(val_t  self, val_t  param0);
+#define LOCATE_typing___ACallAssignExpr___variable_create "typing::ACallAssignExpr::(typing::ACallFormExpr::variable_create)"
+val_t NEW_ACallReassignExpr_parser_nodes___PNode___init();
+val_t NEW_ACallReassignExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ACallReassignExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ACallReassignExpr_parser_prod___ACallReassignExpr___empty_init();
+val_t NEW_ACallReassignExpr_parser_prod___ACallReassignExpr___init_acallreassignexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 typedef val_t (* typing___ACallReassignExpr___name_t)(val_t  self);
 val_t typing___ACallReassignExpr___name(val_t  self);
 #define LOCATE_typing___ACallReassignExpr___name "typing::ACallReassignExpr::(typing::ASendExpr::name)"
 typedef val_t (* typing___ACallReassignExpr___raw_arguments_t)(val_t  self);
 val_t typing___ACallReassignExpr___raw_arguments(val_t  self);
 #define LOCATE_typing___ACallReassignExpr___raw_arguments "typing::ACallReassignExpr::(typing::ASendExpr::raw_arguments)"
+typedef val_t (* typing___ACallReassignExpr___variable_create_t)(val_t  self, val_t  param0);
+val_t typing___ACallReassignExpr___variable_create(val_t  self, val_t  param0);
+#define LOCATE_typing___ACallReassignExpr___variable_create "typing::ACallReassignExpr::(typing::ACallFormExpr::variable_create)"
+val_t NEW_ABraExpr_parser_nodes___PNode___init();
+val_t NEW_ABraExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ABraExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ABraExpr_parser_prod___ABraExpr___empty_init();
+val_t NEW_ABraExpr_parser_prod___ABraExpr___init_abraexpr(val_t p0, val_t p1, val_t p2);
 typedef val_t (* typing___ABraExpr___name_t)(val_t  self);
 val_t typing___ABraExpr___name(val_t  self);
 #define LOCATE_typing___ABraExpr___name "typing::ABraExpr::(typing::ASendExpr::name)"
 typedef val_t (* typing___ABraExpr___raw_arguments_t)(val_t  self);
 val_t typing___ABraExpr___raw_arguments(val_t  self);
 #define LOCATE_typing___ABraExpr___raw_arguments "typing::ABraExpr::(typing::ASendExpr::raw_arguments)"
+val_t NEW_ABraAssignExpr_parser_nodes___PNode___init();
+val_t NEW_ABraAssignExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ABraAssignExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ABraAssignExpr_parser_prod___ABraAssignExpr___empty_init();
+val_t NEW_ABraAssignExpr_parser_prod___ABraAssignExpr___init_abraassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef val_t (* typing___ABraAssignExpr___name_t)(val_t  self);
 val_t typing___ABraAssignExpr___name(val_t  self);
 #define LOCATE_typing___ABraAssignExpr___name "typing::ABraAssignExpr::(typing::ASendExpr::name)"
 typedef val_t (* typing___ABraAssignExpr___raw_arguments_t)(val_t  self);
 val_t typing___ABraAssignExpr___raw_arguments(val_t  self);
 #define LOCATE_typing___ABraAssignExpr___raw_arguments "typing::ABraAssignExpr::(typing::ASendExpr::raw_arguments)"
+val_t NEW_ABraReassignExpr_parser_nodes___PNode___init();
+val_t NEW_ABraReassignExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ABraReassignExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ABraReassignExpr_parser_prod___ABraReassignExpr___empty_init();
+val_t NEW_ABraReassignExpr_parser_prod___ABraReassignExpr___init_abrareassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef val_t (* typing___ABraReassignExpr___name_t)(val_t  self);
 val_t typing___ABraReassignExpr___name(val_t  self);
 #define LOCATE_typing___ABraReassignExpr___name "typing::ABraReassignExpr::(typing::ASendExpr::name)"
 typedef val_t (* typing___ABraReassignExpr___raw_arguments_t)(val_t  self);
 val_t typing___ABraReassignExpr___raw_arguments(val_t  self);
 #define LOCATE_typing___ABraReassignExpr___raw_arguments "typing::ABraReassignExpr::(typing::ASendExpr::raw_arguments)"
+val_t NEW_AInitExpr_parser_nodes___PNode___init();
+val_t NEW_AInitExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_AInitExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_AInitExpr_parser_prod___AInitExpr___empty_init();
+val_t NEW_AInitExpr_parser_prod___AInitExpr___init_ainitexpr(val_t p0, val_t p1, val_t p2);
 typedef val_t (* typing___AInitExpr___name_t)(val_t  self);
 val_t typing___AInitExpr___name(val_t  self);
 #define LOCATE_typing___AInitExpr___name "typing::AInitExpr::(typing::ASendExpr::name)"
 typedef val_t (* typing___AInitExpr___raw_arguments_t)(val_t  self);
 val_t typing___AInitExpr___raw_arguments(val_t  self);
 #define LOCATE_typing___AInitExpr___raw_arguments "typing::AInitExpr::(typing::ASendExpr::raw_arguments)"
+val_t NEW_AClosureCallExpr_parser_nodes___AClosureCallExpr___init(val_t p0, val_t p1, val_t p2);
+typedef void (* typing___AClosureCallExpr___after_typing_t)(val_t  self, val_t  param0);
+void typing___AClosureCallExpr___after_typing(val_t  self, val_t  param0);
+#define LOCATE_typing___AClosureCallExpr___after_typing "typing::AClosureCallExpr::(typing::PNode::after_typing)"
+val_t NEW_PClosureDef_parser_nodes___PNode___init();
+typedef void (* typing___PClosureDef___accept_typing_t)(val_t  self, val_t  param0);
+void typing___PClosureDef___accept_typing(val_t  self, val_t  param0);
+#define LOCATE_typing___PClosureDef___accept_typing "typing::PClosureDef::(typing::PNode::accept_typing)"
+#define ATTR_typing___PClosureDef____accept_typing2(recv) ATTR(recv, COLOR_typing___PClosureDef____accept_typing2)
+typedef void (* typing___PClosureDef___accept_typing2_t)(val_t  self, val_t  param0, val_t  param1);
+void typing___PClosureDef___accept_typing2(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_typing___PClosureDef___accept_typing2 "typing::PClosureDef::accept_typing2"
+val_t NEW_AClosureDef_parser_nodes___PNode___init();
+val_t NEW_AClosureDef_parser_prod___AClosureDef___empty_init();
+val_t NEW_AClosureDef_parser_prod___AClosureDef___init_aclosuredef(val_t p0, val_t p1, val_t p2, val_t p3);
+typedef void (* typing___AClosureDef___accept_typing2_t)(val_t  self, val_t  param0, val_t  param1);
+void typing___AClosureDef___accept_typing2(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_typing___AClosureDef___accept_typing2 "typing::AClosureDef::(typing::PClosureDef::accept_typing2)"
+val_t NEW_AIsaExpr_parser_nodes___PNode___init();
+val_t NEW_AIsaExpr_parser_prod___AIsaExpr___empty_init();
+val_t NEW_AIsaExpr_parser_prod___AIsaExpr___init_aisaexpr(val_t p0, val_t p1);
 typedef void (* typing___AIsaExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AIsaExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AIsaExpr___after_typing "typing::AIsaExpr::(typing::PNode::after_typing)"
+val_t NEW_AAsCastExpr_parser_nodes___PNode___init();
+val_t NEW_AAsCastExpr_parser_prod___AAsCastExpr___empty_init();
+val_t NEW_AAsCastExpr_parser_prod___AAsCastExpr___init_aascastexpr(val_t p0, val_t p1, val_t p2);
 typedef void (* typing___AAsCastExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AAsCastExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AAsCastExpr___after_typing "typing::AAsCastExpr::(typing::PNode::after_typing)"
+val_t NEW_AProxyExpr_parser_nodes___PNode___init();
 typedef void (* typing___AProxyExpr___after_typing_t)(val_t  self, val_t  param0);
 void typing___AProxyExpr___after_typing(val_t  self, val_t  param0);
 #define LOCATE_typing___AProxyExpr___after_typing "typing::AProxyExpr::(typing::PNode::after_typing)"

@@ -112,8 +112,8 @@ val_t mmloader___ToolContext___opt_help(val_t  self);
 #define LOCATE_mmloader___ToolContext___opt_help "mmloader::ToolContext::opt_help"
 typedef void (* mmloader___ToolContext___init_t)(val_t  self, int* init_table);
 void mmloader___ToolContext___init(val_t  self, int* init_table);
-val_t NEW_mmloader___ToolContext___init();
 #define LOCATE_mmloader___ToolContext___init "mmloader::ToolContext::init"
+val_t NEW_ToolContext_mmloader___ToolContext___init();
 typedef void (* mmloader___ToolContext___process_options_t)(val_t  self);
 void mmloader___ToolContext___process_options(val_t  self);
 #define LOCATE_mmloader___ToolContext___process_options "mmloader::ToolContext::process_options"
@@ -157,8 +157,9 @@ void mmloader___ModuleLoader___process_metamodel(val_t  self, val_t  param0, val
 #define LOCATE_mmloader___ModuleLoader___process_metamodel "mmloader::ModuleLoader::process_metamodel"
 typedef void (* mmloader___ModuleLoader___init_t)(val_t  self, int* init_table);
 void mmloader___ModuleLoader___init(val_t  self, int* init_table);
-val_t NEW_mmloader___ModuleLoader___init();
 #define LOCATE_mmloader___ModuleLoader___init "mmloader::ModuleLoader::init"
+val_t NEW_ModuleLoader_mmloader___ModuleLoader___init();
+val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2);
 #define ATTR_mmloader___MMModule____filename(recv) ATTR(recv, COLOR_mmloader___MMModule____filename)
 typedef val_t (* mmloader___MMModule___filename_t)(val_t  self);
 val_t mmloader___MMModule___filename(val_t  self);

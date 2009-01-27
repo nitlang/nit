@@ -83,21 +83,20 @@ void exec___Process___term(val_t  self);
 #define LOCATE_exec___Process___term "exec::Process::term"
 typedef void (* exec___Process___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void exec___Process___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_exec___Process___init(val_t  param0, val_t  param1);
 #define LOCATE_exec___Process___init "exec::Process::init"
+val_t NEW_Process_exec___Process___init(val_t p0, val_t p1);
 typedef void (* exec___Process___init__t)(val_t  self, val_t  param0, int* init_table);
 void exec___Process___init_(val_t  self, val_t  param0, int* init_table);
-val_t NEW_exec___Process___init_(val_t  param0);
 #define LOCATE_exec___Process___init_ "exec::Process::init_"
+val_t NEW_Process_exec___Process___init_(val_t p0);
 typedef void (* exec___Process___execute_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 void exec___Process___execute(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_exec___Process___execute(val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_exec___Process___execute "exec::Process::execute"
+val_t NEW_Process_exec___Process___execute(val_t p0, val_t p1, val_t p2);
 #define ATTR_exec___Process____data(recv) ATTR(recv, COLOR_exec___Process____data)
 typedef val_t (* exec___Process___basic_exec_execute_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
 val_t exec___Process___basic_exec_execute(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
 #define LOCATE_exec___Process___basic_exec_execute "exec::Process::basic_exec_execute"
-#define ATTR_exec___IProcess____in(recv) ATTR(recv, COLOR_exec___IProcess____in)
 typedef void (* exec___IProcess___close_t)(val_t  self);
 void exec___IProcess___close(val_t  self);
 #define LOCATE_exec___IProcess___close "exec::IProcess::(stream::IOS::close)"
@@ -107,46 +106,49 @@ val_t exec___IProcess___read_char(val_t  self);
 typedef val_t (* exec___IProcess___eof_t)(val_t  self);
 val_t exec___IProcess___eof(val_t  self);
 #define LOCATE_exec___IProcess___eof "exec::IProcess::(stream::IStream::eof)"
+#define ATTR_exec___IProcess____in(recv) ATTR(recv, COLOR_exec___IProcess____in)
 typedef void (* exec___IProcess___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void exec___IProcess___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_exec___IProcess___init(val_t  param0, val_t  param1);
 #define LOCATE_exec___IProcess___init "exec::IProcess::init"
+val_t NEW_IProcess_exec___IProcess___init(val_t p0, val_t p1);
 typedef void (* exec___IProcess___init__t)(val_t  self, val_t  param0, int* init_table);
 void exec___IProcess___init_(val_t  self, val_t  param0, int* init_table);
-val_t NEW_exec___IProcess___init_(val_t  param0);
 #define LOCATE_exec___IProcess___init_ "exec::IProcess::init_"
-#define ATTR_exec___OProcess____out(recv) ATTR(recv, COLOR_exec___OProcess____out)
+val_t NEW_IProcess_exec___IProcess___init_(val_t p0);
 typedef void (* exec___OProcess___close_t)(val_t  self);
 void exec___OProcess___close(val_t  self);
 #define LOCATE_exec___OProcess___close "exec::OProcess::(stream::IOS::close)"
-typedef val_t (* exec___OProcess___is_writable_t)(val_t  self);
-val_t exec___OProcess___is_writable(val_t  self);
-#define LOCATE_exec___OProcess___is_writable "exec::OProcess::(stream::OStream::is_writable)"
 typedef void (* exec___OProcess___write_t)(val_t  self, val_t  param0);
 void exec___OProcess___write(val_t  self, val_t  param0);
 #define LOCATE_exec___OProcess___write "exec::OProcess::(stream::OStream::write)"
+typedef val_t (* exec___OProcess___is_writable_t)(val_t  self);
+val_t exec___OProcess___is_writable(val_t  self);
+#define LOCATE_exec___OProcess___is_writable "exec::OProcess::(stream::OStream::is_writable)"
+#define ATTR_exec___OProcess____out(recv) ATTR(recv, COLOR_exec___OProcess____out)
 typedef void (* exec___OProcess___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void exec___OProcess___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_exec___OProcess___init(val_t  param0, val_t  param1);
 #define LOCATE_exec___OProcess___init "exec::OProcess::init"
+val_t NEW_OProcess_exec___OProcess___init(val_t p0, val_t p1);
 typedef void (* exec___OProcess___init__t)(val_t  self, val_t  param0, int* init_table);
 void exec___OProcess___init_(val_t  self, val_t  param0, int* init_table);
-val_t NEW_exec___OProcess___init_(val_t  param0);
 #define LOCATE_exec___OProcess___init_ "exec::OProcess::init_"
+val_t NEW_OProcess_exec___OProcess___init_(val_t p0);
 typedef void (* exec___IOProcess___close_t)(val_t  self);
 void exec___IOProcess___close(val_t  self);
 #define LOCATE_exec___IOProcess___close "exec::IOProcess::(stream::IOS::close)"
 typedef void (* exec___IOProcess___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void exec___IOProcess___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_exec___IOProcess___init(val_t  param0, val_t  param1);
 #define LOCATE_exec___IOProcess___init "exec::IOProcess::init"
+val_t NEW_IOProcess_exec___IOProcess___init(val_t p0, val_t p1);
 typedef void (* exec___IOProcess___init__t)(val_t  self, val_t  param0, int* init_table);
 void exec___IOProcess___init_(val_t  self, val_t  param0, int* init_table);
-val_t NEW_exec___IOProcess___init_(val_t  param0);
 #define LOCATE_exec___IOProcess___init_ "exec::IOProcess::init_"
+val_t NEW_IOProcess_exec___IOProcess___init_(val_t p0);
+val_t NEW_Sys_kernel___Sys___init();
 typedef val_t (* exec___Sys___system_t)(val_t  self, val_t  param0);
 val_t exec___Sys___system(val_t  self, val_t  param0);
 #define LOCATE_exec___Sys___system "exec::Sys::system"
+val_t NEW_NativeString_string___NativeString___init();
 typedef val_t (* exec___NativeString___system_t)(val_t  self);
 val_t exec___NativeString___system(val_t  self);
 #define LOCATE_exec___NativeString___system "exec::NativeString::system"

@@ -42,7 +42,7 @@ extern const int SFT_array[];
 #define COLOR_array___Array____capacity SFT_array[15]
 #define INIT_TABLE_POS_Array SFT_array[16]
 #define COLOR_array___Array___init SFT_array[17]
-#define COLOR_array___Array___with SFT_array[18]
+#define COLOR_array___Array___with_items SFT_array[18]
 #define COLOR_array___Array___with_capacity SFT_array[19]
 #define COLOR_array___Array___filled_with SFT_array[20]
 #define COLOR_array___Array___with_native SFT_array[21]
@@ -86,52 +86,70 @@ extern const int SFT_array[];
 #define COLOR_array___NativeArray_____bra SFT_array[59]
 #define COLOR_array___NativeArray_____braeq SFT_array[60]
 #define COLOR_array___NativeArray___copy_to SFT_array[61]
-typedef void (* array___AbstractArray___enlarge_t)(val_t  self, val_t  param0);
-void array___AbstractArray___enlarge(val_t  self, val_t  param0);
-#define LOCATE_array___AbstractArray___enlarge "array::AbstractArray::enlarge"
-#define ATTR_array___AbstractArray____length(recv) ATTR(recv, COLOR_array___AbstractArray____length)
-typedef val_t (* array___AbstractArray___length_t)(val_t  self);
-val_t array___AbstractArray___length(val_t  self);
-#define LOCATE_array___AbstractArray___length "array::AbstractArray::(abstract_collection::Collection::length)"
+typedef val_t (* array___AbstractArray_____eqeq_t)(val_t  self, val_t  param0);
+val_t array___AbstractArray_____eqeq(val_t  self, val_t  param0);
+#define LOCATE_array___AbstractArray_____eqeq "array::AbstractArray::(kernel::Object::==)"
+typedef void (* array___AbstractArray___output_t)(val_t  self);
+void array___AbstractArray___output(val_t  self);
+#define LOCATE_array___AbstractArray___output "array::AbstractArray::(kernel::Object::output)"
+typedef val_t (* array___AbstractArray___iterator_t)(val_t  self);
+val_t array___AbstractArray___iterator(val_t  self);
+#define LOCATE_array___AbstractArray___iterator "array::AbstractArray::(abstract_collection::Collection::iterator)"
 typedef val_t (* array___AbstractArray___is_empty_t)(val_t  self);
 val_t array___AbstractArray___is_empty(val_t  self);
 #define LOCATE_array___AbstractArray___is_empty "array::AbstractArray::(abstract_collection::Collection::is_empty)"
-typedef void (* array___AbstractArray___push_t)(val_t  self, val_t  param0);
-void array___AbstractArray___push(val_t  self, val_t  param0);
-#define LOCATE_array___AbstractArray___push "array::AbstractArray::(abstract_collection::IndexedCollection::push)"
-typedef val_t (* array___AbstractArray___pop_t)(val_t  self);
-val_t array___AbstractArray___pop(val_t  self);
-#define LOCATE_array___AbstractArray___pop "array::AbstractArray::(abstract_collection::IndexedCollection::pop)"
-typedef val_t (* array___AbstractArray___shift_t)(val_t  self);
-val_t array___AbstractArray___shift(val_t  self);
-#define LOCATE_array___AbstractArray___shift "array::AbstractArray::(abstract_collection::IndexedCollection::shift)"
-typedef void (* array___AbstractArray___unshift_t)(val_t  self, val_t  param0);
-void array___AbstractArray___unshift(val_t  self, val_t  param0);
-#define LOCATE_array___AbstractArray___unshift "array::AbstractArray::(abstract_collection::IndexedCollection::unshift)"
-typedef void (* array___AbstractArray___insert_t)(val_t  self, val_t  param0, val_t  param1);
-void array___AbstractArray___insert(val_t  self, val_t  param0, val_t  param1);
-#define LOCATE_array___AbstractArray___insert "array::AbstractArray::insert"
-typedef void (* array___AbstractArray___add_t)(val_t  self, val_t  param0);
-void array___AbstractArray___add(val_t  self, val_t  param0);
-#define LOCATE_array___AbstractArray___add "array::AbstractArray::(abstract_collection::SimpleCollection::add)"
-typedef void (* array___AbstractArray___clear_t)(val_t  self);
-void array___AbstractArray___clear(val_t  self);
-#define LOCATE_array___AbstractArray___clear "array::AbstractArray::(abstract_collection::RemovableCollection::clear)"
+typedef val_t (* array___AbstractArray___length_t)(val_t  self);
+val_t array___AbstractArray___length(val_t  self);
+#define LOCATE_array___AbstractArray___length "array::AbstractArray::(abstract_collection::Collection::length)"
 typedef val_t (* array___AbstractArray___has_t)(val_t  self, val_t  param0);
 val_t array___AbstractArray___has(val_t  self, val_t  param0);
 #define LOCATE_array___AbstractArray___has "array::AbstractArray::(abstract_collection::Collection::has)"
 typedef val_t (* array___AbstractArray___has_only_t)(val_t  self, val_t  param0);
 val_t array___AbstractArray___has_only(val_t  self, val_t  param0);
 #define LOCATE_array___AbstractArray___has_only "array::AbstractArray::(abstract_collection::Collection::has_only)"
-typedef val_t (* array___AbstractArray___has_key_t)(val_t  self, val_t  param0);
-val_t array___AbstractArray___has_key(val_t  self, val_t  param0);
-#define LOCATE_array___AbstractArray___has_key "array::AbstractArray::(abstract_collection::Map::has_key)"
 typedef val_t (* array___AbstractArray___count_t)(val_t  self, val_t  param0);
 val_t array___AbstractArray___count(val_t  self, val_t  param0);
 #define LOCATE_array___AbstractArray___count "array::AbstractArray::(abstract_collection::Collection::count)"
+typedef void (* array___AbstractArray___clear_t)(val_t  self);
+void array___AbstractArray___clear(val_t  self);
+#define LOCATE_array___AbstractArray___clear "array::AbstractArray::(abstract_collection::RemovableCollection::clear)"
+typedef void (* array___AbstractArray___remove_t)(val_t  self, val_t  param0);
+void array___AbstractArray___remove(val_t  self, val_t  param0);
+#define LOCATE_array___AbstractArray___remove "array::AbstractArray::(abstract_collection::RemovableCollection::remove)"
+typedef void (* array___AbstractArray___remove_all_t)(val_t  self, val_t  param0);
+void array___AbstractArray___remove_all(val_t  self, val_t  param0);
+#define LOCATE_array___AbstractArray___remove_all "array::AbstractArray::(abstract_collection::RemovableCollection::remove_all)"
+typedef val_t (* array___AbstractArray___has_key_t)(val_t  self, val_t  param0);
+val_t array___AbstractArray___has_key(val_t  self, val_t  param0);
+#define LOCATE_array___AbstractArray___has_key "array::AbstractArray::(abstract_collection::Map::has_key)"
+typedef void (* array___AbstractArray___remove_at_t)(val_t  self, val_t  param0);
+void array___AbstractArray___remove_at(val_t  self, val_t  param0);
+#define LOCATE_array___AbstractArray___remove_at "array::AbstractArray::(abstract_collection::Map::remove_at)"
+typedef void (* array___AbstractArray___add_t)(val_t  self, val_t  param0);
+void array___AbstractArray___add(val_t  self, val_t  param0);
+#define LOCATE_array___AbstractArray___add "array::AbstractArray::(abstract_collection::SimpleCollection::add)"
+typedef void (* array___AbstractArray___push_t)(val_t  self, val_t  param0);
+void array___AbstractArray___push(val_t  self, val_t  param0);
+#define LOCATE_array___AbstractArray___push "array::AbstractArray::(abstract_collection::IndexedCollection::push)"
+typedef val_t (* array___AbstractArray___pop_t)(val_t  self);
+val_t array___AbstractArray___pop(val_t  self);
+#define LOCATE_array___AbstractArray___pop "array::AbstractArray::(abstract_collection::IndexedCollection::pop)"
+typedef void (* array___AbstractArray___unshift_t)(val_t  self, val_t  param0);
+void array___AbstractArray___unshift(val_t  self, val_t  param0);
+#define LOCATE_array___AbstractArray___unshift "array::AbstractArray::(abstract_collection::IndexedCollection::unshift)"
+typedef val_t (* array___AbstractArray___shift_t)(val_t  self);
+val_t array___AbstractArray___shift(val_t  self);
+#define LOCATE_array___AbstractArray___shift "array::AbstractArray::(abstract_collection::IndexedCollection::shift)"
 typedef val_t (* array___AbstractArray___index_of_t)(val_t  self, val_t  param0);
 val_t array___AbstractArray___index_of(val_t  self, val_t  param0);
 #define LOCATE_array___AbstractArray___index_of "array::AbstractArray::(abstract_collection::IndexedCollection::index_of)"
+typedef void (* array___AbstractArray___enlarge_t)(val_t  self, val_t  param0);
+void array___AbstractArray___enlarge(val_t  self, val_t  param0);
+#define LOCATE_array___AbstractArray___enlarge "array::AbstractArray::enlarge"
+#define ATTR_array___AbstractArray____length(recv) ATTR(recv, COLOR_array___AbstractArray____length)
+typedef void (* array___AbstractArray___insert_t)(val_t  self, val_t  param0, val_t  param1);
+void array___AbstractArray___insert(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_array___AbstractArray___insert "array::AbstractArray::insert"
 typedef val_t (* array___AbstractArray___last_index_of_t)(val_t  self, val_t  param0);
 val_t array___AbstractArray___last_index_of(val_t  self, val_t  param0);
 #define LOCATE_array___AbstractArray___last_index_of "array::AbstractArray::last_index_of"
@@ -144,31 +162,13 @@ val_t array___AbstractArray___last_index_of_from(val_t  self, val_t  param0, val
 typedef val_t (* array___AbstractArray___reversed_t)(val_t  self);
 val_t array___AbstractArray___reversed(val_t  self);
 #define LOCATE_array___AbstractArray___reversed "array::AbstractArray::reversed"
-typedef void (* array___AbstractArray___remove_t)(val_t  self, val_t  param0);
-void array___AbstractArray___remove(val_t  self, val_t  param0);
-#define LOCATE_array___AbstractArray___remove "array::AbstractArray::(abstract_collection::RemovableCollection::remove)"
-typedef void (* array___AbstractArray___remove_all_t)(val_t  self, val_t  param0);
-void array___AbstractArray___remove_all(val_t  self, val_t  param0);
-#define LOCATE_array___AbstractArray___remove_all "array::AbstractArray::(abstract_collection::RemovableCollection::remove_all)"
-typedef void (* array___AbstractArray___remove_at_t)(val_t  self, val_t  param0);
-void array___AbstractArray___remove_at(val_t  self, val_t  param0);
-#define LOCATE_array___AbstractArray___remove_at "array::AbstractArray::(abstract_collection::Map::remove_at)"
 typedef void (* array___AbstractArray___copy_to_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
 void array___AbstractArray___copy_to(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
 #define LOCATE_array___AbstractArray___copy_to "array::AbstractArray::copy_to"
-typedef void (* array___AbstractArray___output_t)(val_t  self);
-void array___AbstractArray___output(val_t  self);
-#define LOCATE_array___AbstractArray___output "array::AbstractArray::(kernel::Object::output)"
-typedef val_t (* array___AbstractArray___iterator_t)(val_t  self);
-val_t array___AbstractArray___iterator(val_t  self);
-#define LOCATE_array___AbstractArray___iterator "array::AbstractArray::(abstract_collection::Collection::iterator)"
-typedef val_t (* array___AbstractArray_____eqeq_t)(val_t  self, val_t  param0);
-val_t array___AbstractArray_____eqeq(val_t  self, val_t  param0);
-#define LOCATE_array___AbstractArray_____eqeq "array::AbstractArray::(kernel::Object::==)"
 typedef void (* array___AbstractArray___init_t)(val_t  self, int* init_table);
 void array___AbstractArray___init(val_t  self, int* init_table);
-val_t NEW_array___AbstractArray___init();
 #define LOCATE_array___AbstractArray___init "array::AbstractArray::init"
+val_t NEW_AbstractArray_array___AbstractArray___init();
 typedef val_t (* array___Array_____bra_t)(val_t  self, val_t  param0);
 val_t array___Array_____bra(val_t  self, val_t  param0);
 #define LOCATE_array___Array_____bra "array::Array::(abstract_collection::Map::[])"
@@ -180,75 +180,75 @@ void array___Array___enlarge(val_t  self, val_t  param0);
 #define LOCATE_array___Array___enlarge "array::Array::(array::AbstractArray::enlarge)"
 typedef void (* array___Array___init_t)(val_t  self, int* init_table);
 void array___Array___init(val_t  self, int* init_table);
-val_t NEW_array___Array___init();
 #define LOCATE_array___Array___init "array::Array::init"
-typedef void (* array___Array___with_t)(val_t  self, val_t  param0, int* init_table);
-void array___Array___with(val_t  self, val_t  param0, int* init_table);
-val_t NEW_array___Array___with(val_t  param0);
-#define LOCATE_array___Array___with "array::Array::with"
+val_t NEW_Array_array___Array___init();
+typedef void (* array___Array___with_items_t)(val_t  self, val_t  param0, int* init_table);
+void array___Array___with_items(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_array___Array___with_items "array::Array::with_items"
+val_t NEW_Array_array___Array___with_items(val_t p0);
 typedef void (* array___Array___with_capacity_t)(val_t  self, val_t  param0, int* init_table);
 void array___Array___with_capacity(val_t  self, val_t  param0, int* init_table);
-val_t NEW_array___Array___with_capacity(val_t  param0);
 #define LOCATE_array___Array___with_capacity "array::Array::with_capacity"
+val_t NEW_Array_array___Array___with_capacity(val_t p0);
 typedef void (* array___Array___filled_with_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void array___Array___filled_with(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_array___Array___filled_with(val_t  param0, val_t  param1);
 #define LOCATE_array___Array___filled_with "array::Array::filled_with"
+val_t NEW_Array_array___Array___filled_with(val_t p0, val_t p1);
 typedef void (* array___Array___with_native_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void array___Array___with_native(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_array___Array___with_native(val_t  param0, val_t  param1);
 #define LOCATE_array___Array___with_native "array::Array::with_native"
+val_t NEW_Array_array___Array___with_native(val_t p0, val_t p1);
 #define ATTR_array___Array____items(recv) ATTR(recv, COLOR_array___Array____items)
 #define ATTR_array___Array____capacity(recv) ATTR(recv, COLOR_array___Array____capacity)
 typedef val_t (* array___ArrayIterator___item_t)(val_t  self);
 val_t array___ArrayIterator___item(val_t  self);
 #define LOCATE_array___ArrayIterator___item "array::ArrayIterator::(abstract_collection::Iterator::item)"
-typedef void (* array___ArrayIterator___item__eq_t)(val_t  self, val_t  param0);
-void array___ArrayIterator___item__eq(val_t  self, val_t  param0);
-#define LOCATE_array___ArrayIterator___item__eq "array::ArrayIterator::(abstract_collection::MapIterator::item=)"
-typedef val_t (* array___ArrayIterator___is_ok_t)(val_t  self);
-val_t array___ArrayIterator___is_ok(val_t  self);
-#define LOCATE_array___ArrayIterator___is_ok "array::ArrayIterator::(abstract_collection::Iterator::is_ok)"
 typedef void (* array___ArrayIterator___next_t)(val_t  self);
 void array___ArrayIterator___next(val_t  self);
 #define LOCATE_array___ArrayIterator___next "array::ArrayIterator::(abstract_collection::Iterator::next)"
-typedef void (* array___ArrayIterator___init_t)(val_t  self, val_t  param0, int* init_table);
-void array___ArrayIterator___init(val_t  self, val_t  param0, int* init_table);
-val_t NEW_array___ArrayIterator___init(val_t  param0);
-#define LOCATE_array___ArrayIterator___init "array::ArrayIterator::init"
-#define ATTR_array___ArrayIterator____index(recv) ATTR(recv, COLOR_array___ArrayIterator____index)
+typedef val_t (* array___ArrayIterator___is_ok_t)(val_t  self);
+val_t array___ArrayIterator___is_ok(val_t  self);
+#define LOCATE_array___ArrayIterator___is_ok "array::ArrayIterator::(abstract_collection::Iterator::is_ok)"
+typedef void (* array___ArrayIterator___item__eq_t)(val_t  self, val_t  param0);
+void array___ArrayIterator___item__eq(val_t  self, val_t  param0);
+#define LOCATE_array___ArrayIterator___item__eq "array::ArrayIterator::(abstract_collection::MapIterator::item=)"
 typedef val_t (* array___ArrayIterator___index_t)(val_t  self);
 val_t array___ArrayIterator___index(val_t  self);
 #define LOCATE_array___ArrayIterator___index "array::ArrayIterator::(abstract_collection::IndexedIterator::index)"
+typedef void (* array___ArrayIterator___init_t)(val_t  self, val_t  param0, int* init_table);
+void array___ArrayIterator___init(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_array___ArrayIterator___init "array::ArrayIterator::init"
+val_t NEW_ArrayIterator_array___ArrayIterator___init(val_t p0);
+#define ATTR_array___ArrayIterator____index(recv) ATTR(recv, COLOR_array___ArrayIterator____index)
 #define ATTR_array___ArrayIterator____array(recv) ATTR(recv, COLOR_array___ArrayIterator____array)
-#define ATTR_array___ArraySet____array(recv) ATTR(recv, COLOR_array___ArraySet____array)
-typedef val_t (* array___ArraySet___has_t)(val_t  self, val_t  param0);
-val_t array___ArraySet___has(val_t  self, val_t  param0);
-#define LOCATE_array___ArraySet___has "array::ArraySet::(abstract_collection::Collection::has)"
-typedef void (* array___ArraySet___add_t)(val_t  self, val_t  param0);
-void array___ArraySet___add(val_t  self, val_t  param0);
-#define LOCATE_array___ArraySet___add "array::ArraySet::(abstract_collection::SimpleCollection::add)"
+typedef val_t (* array___ArraySet___iterator_t)(val_t  self);
+val_t array___ArraySet___iterator(val_t  self);
+#define LOCATE_array___ArraySet___iterator "array::ArraySet::(abstract_collection::Collection::iterator)"
 typedef val_t (* array___ArraySet___is_empty_t)(val_t  self);
 val_t array___ArraySet___is_empty(val_t  self);
 #define LOCATE_array___ArraySet___is_empty "array::ArraySet::(abstract_collection::Collection::is_empty)"
 typedef val_t (* array___ArraySet___length_t)(val_t  self);
 val_t array___ArraySet___length(val_t  self);
 #define LOCATE_array___ArraySet___length "array::ArraySet::(abstract_collection::Collection::length)"
+typedef val_t (* array___ArraySet___has_t)(val_t  self, val_t  param0);
+val_t array___ArraySet___has(val_t  self, val_t  param0);
+#define LOCATE_array___ArraySet___has "array::ArraySet::(abstract_collection::Collection::has)"
 typedef val_t (* array___ArraySet___first_t)(val_t  self);
 val_t array___ArraySet___first(val_t  self);
 #define LOCATE_array___ArraySet___first "array::ArraySet::(abstract_collection::Collection::first)"
+typedef void (* array___ArraySet___clear_t)(val_t  self);
+void array___ArraySet___clear(val_t  self);
+#define LOCATE_array___ArraySet___clear "array::ArraySet::(abstract_collection::RemovableCollection::clear)"
 typedef void (* array___ArraySet___remove_t)(val_t  self, val_t  param0);
 void array___ArraySet___remove(val_t  self, val_t  param0);
 #define LOCATE_array___ArraySet___remove "array::ArraySet::(abstract_collection::RemovableCollection::remove)"
 typedef void (* array___ArraySet___remove_all_t)(val_t  self, val_t  param0);
 void array___ArraySet___remove_all(val_t  self, val_t  param0);
 #define LOCATE_array___ArraySet___remove_all "array::ArraySet::(abstract_collection::RemovableCollection::remove_all)"
-typedef void (* array___ArraySet___clear_t)(val_t  self);
-void array___ArraySet___clear(val_t  self);
-#define LOCATE_array___ArraySet___clear "array::ArraySet::(abstract_collection::RemovableCollection::clear)"
-typedef val_t (* array___ArraySet___iterator_t)(val_t  self);
-val_t array___ArraySet___iterator(val_t  self);
-#define LOCATE_array___ArraySet___iterator "array::ArraySet::(abstract_collection::Collection::iterator)"
+typedef void (* array___ArraySet___add_t)(val_t  self, val_t  param0);
+void array___ArraySet___add(val_t  self, val_t  param0);
+#define LOCATE_array___ArraySet___add "array::ArraySet::(abstract_collection::SimpleCollection::add)"
+#define ATTR_array___ArraySet____array(recv) ATTR(recv, COLOR_array___ArraySet____array)
 typedef void (* array___ArraySet___enlarge_t)(val_t  self, val_t  param0);
 void array___ArraySet___enlarge(val_t  self, val_t  param0);
 #define LOCATE_array___ArraySet___enlarge "array::ArraySet::enlarge"
@@ -257,26 +257,56 @@ void array___ArraySet___remove_at(val_t  self, val_t  param0);
 #define LOCATE_array___ArraySet___remove_at "array::ArraySet::remove_at"
 typedef void (* array___ArraySet___init_t)(val_t  self, int* init_table);
 void array___ArraySet___init(val_t  self, int* init_table);
-val_t NEW_array___ArraySet___init();
 #define LOCATE_array___ArraySet___init "array::ArraySet::init"
+val_t NEW_ArraySet_array___ArraySet___init();
 typedef void (* array___ArraySet___with_capacity_t)(val_t  self, val_t  param0, int* init_table);
 void array___ArraySet___with_capacity(val_t  self, val_t  param0, int* init_table);
-val_t NEW_array___ArraySet___with_capacity(val_t  param0);
 #define LOCATE_array___ArraySet___with_capacity "array::ArraySet::with_capacity"
-typedef val_t (* array___ArraySetIterator___is_ok_t)(val_t  self);
-val_t array___ArraySetIterator___is_ok(val_t  self);
-#define LOCATE_array___ArraySetIterator___is_ok "array::ArraySetIterator::(abstract_collection::Iterator::is_ok)"
-typedef void (* array___ArraySetIterator___next_t)(val_t  self);
-void array___ArraySetIterator___next(val_t  self);
-#define LOCATE_array___ArraySetIterator___next "array::ArraySetIterator::(abstract_collection::Iterator::next)"
+val_t NEW_ArraySet_array___ArraySet___with_capacity(val_t p0);
 typedef val_t (* array___ArraySetIterator___item_t)(val_t  self);
 val_t array___ArraySetIterator___item(val_t  self);
 #define LOCATE_array___ArraySetIterator___item "array::ArraySetIterator::(abstract_collection::Iterator::item)"
+typedef void (* array___ArraySetIterator___next_t)(val_t  self);
+void array___ArraySetIterator___next(val_t  self);
+#define LOCATE_array___ArraySetIterator___next "array::ArraySetIterator::(abstract_collection::Iterator::next)"
+typedef val_t (* array___ArraySetIterator___is_ok_t)(val_t  self);
+val_t array___ArraySetIterator___is_ok(val_t  self);
+#define LOCATE_array___ArraySetIterator___is_ok "array::ArraySetIterator::(abstract_collection::Iterator::is_ok)"
 typedef void (* array___ArraySetIterator___init_t)(val_t  self, val_t  param0, int* init_table);
 void array___ArraySetIterator___init(val_t  self, val_t  param0, int* init_table);
-val_t NEW_array___ArraySetIterator___init(val_t  param0);
 #define LOCATE_array___ArraySetIterator___init "array::ArraySetIterator::init"
+val_t NEW_ArraySetIterator_array___ArraySetIterator___init(val_t p0);
 #define ATTR_array___ArraySetIterator____iter(recv) ATTR(recv, COLOR_array___ArraySetIterator____iter)
+typedef val_t (* array___ArrayMap___iterator_t)(val_t  self);
+val_t array___ArrayMap___iterator(val_t  self);
+#define LOCATE_array___ArrayMap___iterator "array::ArrayMap::(abstract_collection::Collection::iterator)"
+typedef val_t (* array___ArrayMap___is_empty_t)(val_t  self);
+val_t array___ArrayMap___is_empty(val_t  self);
+#define LOCATE_array___ArrayMap___is_empty "array::ArrayMap::(abstract_collection::Collection::is_empty)"
+typedef val_t (* array___ArrayMap___length_t)(val_t  self);
+val_t array___ArrayMap___length(val_t  self);
+#define LOCATE_array___ArrayMap___length "array::ArrayMap::(abstract_collection::Collection::length)"
+typedef val_t (* array___ArrayMap___has_t)(val_t  self, val_t  param0);
+val_t array___ArrayMap___has(val_t  self, val_t  param0);
+#define LOCATE_array___ArrayMap___has "array::ArrayMap::(abstract_collection::Collection::has)"
+typedef val_t (* array___ArrayMap___has_only_t)(val_t  self, val_t  param0);
+val_t array___ArrayMap___has_only(val_t  self, val_t  param0);
+#define LOCATE_array___ArrayMap___has_only "array::ArrayMap::(abstract_collection::Collection::has_only)"
+typedef val_t (* array___ArrayMap___count_t)(val_t  self, val_t  param0);
+val_t array___ArrayMap___count(val_t  self, val_t  param0);
+#define LOCATE_array___ArrayMap___count "array::ArrayMap::(abstract_collection::Collection::count)"
+typedef val_t (* array___ArrayMap___first_t)(val_t  self);
+val_t array___ArrayMap___first(val_t  self);
+#define LOCATE_array___ArrayMap___first "array::ArrayMap::(abstract_collection::Collection::first)"
+typedef void (* array___ArrayMap___clear_t)(val_t  self);
+void array___ArrayMap___clear(val_t  self);
+#define LOCATE_array___ArrayMap___clear "array::ArrayMap::(abstract_collection::RemovableCollection::clear)"
+typedef void (* array___ArrayMap___remove_t)(val_t  self, val_t  param0);
+void array___ArrayMap___remove(val_t  self, val_t  param0);
+#define LOCATE_array___ArrayMap___remove "array::ArrayMap::(abstract_collection::RemovableCollection::remove)"
+typedef void (* array___ArrayMap___remove_all_t)(val_t  self, val_t  param0);
+void array___ArrayMap___remove_all(val_t  self, val_t  param0);
+#define LOCATE_array___ArrayMap___remove_all "array::ArrayMap::(abstract_collection::RemovableCollection::remove_all)"
 typedef val_t (* array___ArrayMap_____bra_t)(val_t  self, val_t  param0);
 val_t array___ArrayMap_____bra(val_t  self, val_t  param0);
 #define LOCATE_array___ArrayMap_____bra "array::ArrayMap::(abstract_collection::Map::[])"
@@ -286,45 +316,15 @@ void array___ArrayMap_____braeq(val_t  self, val_t  param0, val_t  param1);
 typedef val_t (* array___ArrayMap___has_key_t)(val_t  self, val_t  param0);
 val_t array___ArrayMap___has_key(val_t  self, val_t  param0);
 #define LOCATE_array___ArrayMap___has_key "array::ArrayMap::(abstract_collection::Map::has_key)"
-typedef val_t (* array___ArrayMap___has_t)(val_t  self, val_t  param0);
-val_t array___ArrayMap___has(val_t  self, val_t  param0);
-#define LOCATE_array___ArrayMap___has "array::ArrayMap::(abstract_collection::Collection::has)"
-typedef val_t (* array___ArrayMap___has_only_t)(val_t  self, val_t  param0);
-val_t array___ArrayMap___has_only(val_t  self, val_t  param0);
-#define LOCATE_array___ArrayMap___has_only "array::ArrayMap::(abstract_collection::Collection::has_only)"
-typedef val_t (* array___ArrayMap___length_t)(val_t  self);
-val_t array___ArrayMap___length(val_t  self);
-#define LOCATE_array___ArrayMap___length "array::ArrayMap::(abstract_collection::Collection::length)"
-typedef val_t (* array___ArrayMap___first_t)(val_t  self);
-val_t array___ArrayMap___first(val_t  self);
-#define LOCATE_array___ArrayMap___first "array::ArrayMap::(abstract_collection::Collection::first)"
-typedef val_t (* array___ArrayMap___count_t)(val_t  self, val_t  param0);
-val_t array___ArrayMap___count(val_t  self, val_t  param0);
-#define LOCATE_array___ArrayMap___count "array::ArrayMap::(abstract_collection::Collection::count)"
-typedef val_t (* array___ArrayMap___iterator_t)(val_t  self);
-val_t array___ArrayMap___iterator(val_t  self);
-#define LOCATE_array___ArrayMap___iterator "array::ArrayMap::(abstract_collection::Collection::iterator)"
-typedef val_t (* array___ArrayMap___is_empty_t)(val_t  self);
-val_t array___ArrayMap___is_empty(val_t  self);
-#define LOCATE_array___ArrayMap___is_empty "array::ArrayMap::(abstract_collection::Collection::is_empty)"
-typedef void (* array___ArrayMap___remove_t)(val_t  self, val_t  param0);
-void array___ArrayMap___remove(val_t  self, val_t  param0);
-#define LOCATE_array___ArrayMap___remove "array::ArrayMap::(abstract_collection::RemovableCollection::remove)"
-typedef void (* array___ArrayMap___remove_all_t)(val_t  self, val_t  param0);
-void array___ArrayMap___remove_all(val_t  self, val_t  param0);
-#define LOCATE_array___ArrayMap___remove_all "array::ArrayMap::(abstract_collection::RemovableCollection::remove_all)"
 typedef void (* array___ArrayMap___remove_at_t)(val_t  self, val_t  param0);
 void array___ArrayMap___remove_at(val_t  self, val_t  param0);
 #define LOCATE_array___ArrayMap___remove_at "array::ArrayMap::(abstract_collection::Map::remove_at)"
-typedef void (* array___ArrayMap___clear_t)(val_t  self);
-void array___ArrayMap___clear(val_t  self);
-#define LOCATE_array___ArrayMap___clear "array::ArrayMap::(abstract_collection::RemovableCollection::clear)"
-typedef void (* array___ArrayMap___enlarge_t)(val_t  self, val_t  param0);
-void array___ArrayMap___enlarge(val_t  self, val_t  param0);
-#define LOCATE_array___ArrayMap___enlarge "array::ArrayMap::enlarge"
 typedef val_t (* array___ArrayMap___couple_at_t)(val_t  self, val_t  param0);
 val_t array___ArrayMap___couple_at(val_t  self, val_t  param0);
 #define LOCATE_array___ArrayMap___couple_at "array::ArrayMap::(abstract_collection::CoupleMap::couple_at)"
+typedef void (* array___ArrayMap___enlarge_t)(val_t  self, val_t  param0);
+void array___ArrayMap___enlarge(val_t  self, val_t  param0);
+#define LOCATE_array___ArrayMap___enlarge "array::ArrayMap::enlarge"
 #define ATTR_array___ArrayMap____items(recv) ATTR(recv, COLOR_array___ArrayMap____items)
 typedef void (* array___ArrayMap___remove_at_index_t)(val_t  self, val_t  param0);
 void array___ArrayMap___remove_at_index(val_t  self, val_t  param0);
@@ -335,8 +335,8 @@ val_t array___ArrayMap___index(val_t  self, val_t  param0);
 #define LOCATE_array___ArrayMap___index "array::ArrayMap::index"
 typedef void (* array___ArrayMap___init_t)(val_t  self, int* init_table);
 void array___ArrayMap___init(val_t  self, int* init_table);
-val_t NEW_array___ArrayMap___init();
 #define LOCATE_array___ArrayMap___init "array::ArrayMap::init"
+val_t NEW_ArrayMap_array___ArrayMap___init();
 typedef val_t (* array___Iterator___to_a_t)(val_t  self);
 val_t array___Iterator___to_a(val_t  self);
 #define LOCATE_array___Iterator___to_a "array::Iterator::to_a"

@@ -122,153 +122,158 @@ extern const int SFT_parser_prod[];
 #define COLOR_parser_prod___ASignature___init_asignature SFT_parser_prod[112]
 #define COLOR_parser_prod___AParam___empty_init SFT_parser_prod[113]
 #define COLOR_parser_prod___AParam___init_aparam SFT_parser_prod[114]
-#define COLOR_parser_prod___AType___empty_init SFT_parser_prod[115]
-#define COLOR_parser_prod___AType___init_atype SFT_parser_prod[116]
-#define COLOR_parser_prod___ABlockExpr___empty_init SFT_parser_prod[117]
-#define COLOR_parser_prod___ABlockExpr___init_ablockexpr SFT_parser_prod[118]
-#define COLOR_parser_prod___AVardeclExpr___empty_init SFT_parser_prod[119]
-#define COLOR_parser_prod___AVardeclExpr___init_avardeclexpr SFT_parser_prod[120]
-#define COLOR_parser_prod___AReturnExpr___empty_init SFT_parser_prod[121]
-#define COLOR_parser_prod___AReturnExpr___init_areturnexpr SFT_parser_prod[122]
-#define COLOR_parser_prod___ABreakExpr___empty_init SFT_parser_prod[123]
-#define COLOR_parser_prod___ABreakExpr___init_abreakexpr SFT_parser_prod[124]
-#define COLOR_parser_prod___AAbortExpr___empty_init SFT_parser_prod[125]
-#define COLOR_parser_prod___AAbortExpr___init_aabortexpr SFT_parser_prod[126]
-#define COLOR_parser_prod___AContinueExpr___empty_init SFT_parser_prod[127]
-#define COLOR_parser_prod___AContinueExpr___init_acontinueexpr SFT_parser_prod[128]
-#define COLOR_parser_prod___ADoExpr___empty_init SFT_parser_prod[129]
-#define COLOR_parser_prod___ADoExpr___init_adoexpr SFT_parser_prod[130]
-#define COLOR_parser_prod___AIfExpr___empty_init SFT_parser_prod[131]
-#define COLOR_parser_prod___AIfExpr___init_aifexpr SFT_parser_prod[132]
-#define COLOR_parser_prod___AIfexprExpr___empty_init SFT_parser_prod[133]
-#define COLOR_parser_prod___AIfexprExpr___init_aifexprexpr SFT_parser_prod[134]
-#define COLOR_parser_prod___AWhileExpr___empty_init SFT_parser_prod[135]
-#define COLOR_parser_prod___AWhileExpr___init_awhileexpr SFT_parser_prod[136]
-#define COLOR_parser_prod___AForExpr___empty_init SFT_parser_prod[137]
-#define COLOR_parser_prod___AForExpr___init_aforexpr SFT_parser_prod[138]
-#define COLOR_parser_prod___AForVardeclExpr___empty_init SFT_parser_prod[139]
-#define COLOR_parser_prod___AForVardeclExpr___init_aforvardeclexpr SFT_parser_prod[140]
-#define COLOR_parser_prod___AAssertExpr___empty_init SFT_parser_prod[141]
-#define COLOR_parser_prod___AAssertExpr___init_aassertexpr SFT_parser_prod[142]
-#define COLOR_parser_prod___AOnceExpr___empty_init SFT_parser_prod[143]
-#define COLOR_parser_prod___AOnceExpr___init_aonceexpr SFT_parser_prod[144]
-#define COLOR_parser_prod___ASendExpr___empty_init SFT_parser_prod[145]
-#define COLOR_parser_prod___ASendExpr___init_asendexpr SFT_parser_prod[146]
-#define COLOR_parser_prod___ABinopExpr___empty_init SFT_parser_prod[147]
-#define COLOR_parser_prod___ABinopExpr___init_abinopexpr SFT_parser_prod[148]
-#define COLOR_parser_prod___AOrExpr___empty_init SFT_parser_prod[149]
-#define COLOR_parser_prod___AOrExpr___init_aorexpr SFT_parser_prod[150]
-#define COLOR_parser_prod___AAndExpr___empty_init SFT_parser_prod[151]
-#define COLOR_parser_prod___AAndExpr___init_aandexpr SFT_parser_prod[152]
-#define COLOR_parser_prod___ANotExpr___empty_init SFT_parser_prod[153]
-#define COLOR_parser_prod___ANotExpr___init_anotexpr SFT_parser_prod[154]
-#define COLOR_parser_prod___AEqExpr___empty_init SFT_parser_prod[155]
-#define COLOR_parser_prod___AEqExpr___init_aeqexpr SFT_parser_prod[156]
-#define COLOR_parser_prod___AEeExpr___empty_init SFT_parser_prod[157]
-#define COLOR_parser_prod___AEeExpr___init_aeeexpr SFT_parser_prod[158]
-#define COLOR_parser_prod___ANeExpr___empty_init SFT_parser_prod[159]
-#define COLOR_parser_prod___ANeExpr___init_aneexpr SFT_parser_prod[160]
-#define COLOR_parser_prod___ALtExpr___empty_init SFT_parser_prod[161]
-#define COLOR_parser_prod___ALtExpr___init_altexpr SFT_parser_prod[162]
-#define COLOR_parser_prod___ALeExpr___empty_init SFT_parser_prod[163]
-#define COLOR_parser_prod___ALeExpr___init_aleexpr SFT_parser_prod[164]
-#define COLOR_parser_prod___AGtExpr___empty_init SFT_parser_prod[165]
-#define COLOR_parser_prod___AGtExpr___init_agtexpr SFT_parser_prod[166]
-#define COLOR_parser_prod___AGeExpr___empty_init SFT_parser_prod[167]
-#define COLOR_parser_prod___AGeExpr___init_ageexpr SFT_parser_prod[168]
-#define COLOR_parser_prod___AIsaExpr___empty_init SFT_parser_prod[169]
-#define COLOR_parser_prod___AIsaExpr___init_aisaexpr SFT_parser_prod[170]
-#define COLOR_parser_prod___APlusExpr___empty_init SFT_parser_prod[171]
-#define COLOR_parser_prod___APlusExpr___init_aplusexpr SFT_parser_prod[172]
-#define COLOR_parser_prod___AMinusExpr___empty_init SFT_parser_prod[173]
-#define COLOR_parser_prod___AMinusExpr___init_aminusexpr SFT_parser_prod[174]
-#define COLOR_parser_prod___AStarshipExpr___empty_init SFT_parser_prod[175]
-#define COLOR_parser_prod___AStarshipExpr___init_astarshipexpr SFT_parser_prod[176]
-#define COLOR_parser_prod___AStarExpr___empty_init SFT_parser_prod[177]
-#define COLOR_parser_prod___AStarExpr___init_astarexpr SFT_parser_prod[178]
-#define COLOR_parser_prod___ASlashExpr___empty_init SFT_parser_prod[179]
-#define COLOR_parser_prod___ASlashExpr___init_aslashexpr SFT_parser_prod[180]
-#define COLOR_parser_prod___APercentExpr___empty_init SFT_parser_prod[181]
-#define COLOR_parser_prod___APercentExpr___init_apercentexpr SFT_parser_prod[182]
-#define COLOR_parser_prod___AUminusExpr___empty_init SFT_parser_prod[183]
-#define COLOR_parser_prod___AUminusExpr___init_auminusexpr SFT_parser_prod[184]
-#define COLOR_parser_prod___ANewExpr___empty_init SFT_parser_prod[185]
-#define COLOR_parser_prod___ANewExpr___init_anewexpr SFT_parser_prod[186]
-#define COLOR_parser_prod___AAttrExpr___empty_init SFT_parser_prod[187]
-#define COLOR_parser_prod___AAttrExpr___init_aattrexpr SFT_parser_prod[188]
-#define COLOR_parser_prod___AAttrAssignExpr___empty_init SFT_parser_prod[189]
-#define COLOR_parser_prod___AAttrAssignExpr___init_aattrassignexpr SFT_parser_prod[190]
-#define COLOR_parser_prod___AAttrReassignExpr___empty_init SFT_parser_prod[191]
-#define COLOR_parser_prod___AAttrReassignExpr___init_aattrreassignexpr SFT_parser_prod[192]
-#define COLOR_parser_prod___ACallExpr___empty_init SFT_parser_prod[193]
-#define COLOR_parser_prod___ACallExpr___init_acallexpr SFT_parser_prod[194]
-#define COLOR_parser_prod___ACallAssignExpr___empty_init SFT_parser_prod[195]
-#define COLOR_parser_prod___ACallAssignExpr___init_acallassignexpr SFT_parser_prod[196]
-#define COLOR_parser_prod___ACallReassignExpr___empty_init SFT_parser_prod[197]
-#define COLOR_parser_prod___ACallReassignExpr___init_acallreassignexpr SFT_parser_prod[198]
-#define COLOR_parser_prod___ASuperExpr___empty_init SFT_parser_prod[199]
-#define COLOR_parser_prod___ASuperExpr___init_asuperexpr SFT_parser_prod[200]
-#define COLOR_parser_prod___AInitExpr___empty_init SFT_parser_prod[201]
-#define COLOR_parser_prod___AInitExpr___init_ainitexpr SFT_parser_prod[202]
-#define COLOR_parser_prod___ABraExpr___empty_init SFT_parser_prod[203]
-#define COLOR_parser_prod___ABraExpr___init_abraexpr SFT_parser_prod[204]
-#define COLOR_parser_prod___ABraAssignExpr___empty_init SFT_parser_prod[205]
-#define COLOR_parser_prod___ABraAssignExpr___init_abraassignexpr SFT_parser_prod[206]
-#define COLOR_parser_prod___ABraReassignExpr___empty_init SFT_parser_prod[207]
-#define COLOR_parser_prod___ABraReassignExpr___init_abrareassignexpr SFT_parser_prod[208]
-#define COLOR_parser_prod___AVarExpr___empty_init SFT_parser_prod[209]
-#define COLOR_parser_prod___AVarExpr___init_avarexpr SFT_parser_prod[210]
-#define COLOR_parser_prod___AVarAssignExpr___empty_init SFT_parser_prod[211]
-#define COLOR_parser_prod___AVarAssignExpr___init_avarassignexpr SFT_parser_prod[212]
-#define COLOR_parser_prod___AVarReassignExpr___empty_init SFT_parser_prod[213]
-#define COLOR_parser_prod___AVarReassignExpr___init_avarreassignexpr SFT_parser_prod[214]
-#define COLOR_parser_prod___ARangeExpr___empty_init SFT_parser_prod[215]
-#define COLOR_parser_prod___ARangeExpr___init_arangeexpr SFT_parser_prod[216]
-#define COLOR_parser_prod___ACrangeExpr___empty_init SFT_parser_prod[217]
-#define COLOR_parser_prod___ACrangeExpr___init_acrangeexpr SFT_parser_prod[218]
-#define COLOR_parser_prod___AOrangeExpr___empty_init SFT_parser_prod[219]
-#define COLOR_parser_prod___AOrangeExpr___init_aorangeexpr SFT_parser_prod[220]
-#define COLOR_parser_prod___AArrayExpr___empty_init SFT_parser_prod[221]
-#define COLOR_parser_prod___AArrayExpr___init_aarrayexpr SFT_parser_prod[222]
-#define COLOR_parser_prod___ASelfExpr___empty_init SFT_parser_prod[223]
-#define COLOR_parser_prod___ASelfExpr___init_aselfexpr SFT_parser_prod[224]
-#define COLOR_parser_prod___AImplicitSelfExpr___empty_init SFT_parser_prod[225]
-#define COLOR_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr SFT_parser_prod[226]
-#define COLOR_parser_prod___ATrueExpr___empty_init SFT_parser_prod[227]
-#define COLOR_parser_prod___ATrueExpr___init_atrueexpr SFT_parser_prod[228]
-#define COLOR_parser_prod___AFalseExpr___empty_init SFT_parser_prod[229]
-#define COLOR_parser_prod___AFalseExpr___init_afalseexpr SFT_parser_prod[230]
-#define COLOR_parser_prod___ANullExpr___empty_init SFT_parser_prod[231]
-#define COLOR_parser_prod___ANullExpr___init_anullexpr SFT_parser_prod[232]
-#define COLOR_parser_prod___AIntExpr___empty_init SFT_parser_prod[233]
-#define COLOR_parser_prod___AIntExpr___init_aintexpr SFT_parser_prod[234]
-#define COLOR_parser_prod___AFloatExpr___empty_init SFT_parser_prod[235]
-#define COLOR_parser_prod___AFloatExpr___init_afloatexpr SFT_parser_prod[236]
-#define COLOR_parser_prod___ACharExpr___empty_init SFT_parser_prod[237]
-#define COLOR_parser_prod___ACharExpr___init_acharexpr SFT_parser_prod[238]
-#define COLOR_parser_prod___AStringExpr___empty_init SFT_parser_prod[239]
-#define COLOR_parser_prod___AStringExpr___init_astringexpr SFT_parser_prod[240]
-#define COLOR_parser_prod___AStartStringExpr___empty_init SFT_parser_prod[241]
-#define COLOR_parser_prod___AStartStringExpr___init_astartstringexpr SFT_parser_prod[242]
-#define COLOR_parser_prod___AMidStringExpr___empty_init SFT_parser_prod[243]
-#define COLOR_parser_prod___AMidStringExpr___init_amidstringexpr SFT_parser_prod[244]
-#define COLOR_parser_prod___AEndStringExpr___empty_init SFT_parser_prod[245]
-#define COLOR_parser_prod___AEndStringExpr___init_aendstringexpr SFT_parser_prod[246]
-#define COLOR_parser_prod___ASuperstringExpr___empty_init SFT_parser_prod[247]
-#define COLOR_parser_prod___ASuperstringExpr___init_asuperstringexpr SFT_parser_prod[248]
-#define COLOR_parser_prod___AParExpr___empty_init SFT_parser_prod[249]
-#define COLOR_parser_prod___AParExpr___init_aparexpr SFT_parser_prod[250]
-#define COLOR_parser_prod___AAsCastExpr___empty_init SFT_parser_prod[251]
-#define COLOR_parser_prod___AAsCastExpr___init_aascastexpr SFT_parser_prod[252]
-#define COLOR_parser_prod___APlusAssignOp___empty_init SFT_parser_prod[253]
-#define COLOR_parser_prod___APlusAssignOp___init_aplusassignop SFT_parser_prod[254]
-#define COLOR_parser_prod___AMinusAssignOp___empty_init SFT_parser_prod[255]
-#define COLOR_parser_prod___AMinusAssignOp___init_aminusassignop SFT_parser_prod[256]
-#define COLOR_parser_prod___AQualified___empty_init SFT_parser_prod[257]
-#define COLOR_parser_prod___AQualified___init_aqualified SFT_parser_prod[258]
-#define COLOR_parser_prod___ADoc___empty_init SFT_parser_prod[259]
-#define COLOR_parser_prod___ADoc___init_adoc SFT_parser_prod[260]
-#define COLOR_parser_prod___Start___init SFT_parser_prod[261]
+#define COLOR_parser_prod___AClosureDecl___empty_init SFT_parser_prod[115]
+#define COLOR_parser_prod___AClosureDecl___init_aclosuredecl SFT_parser_prod[116]
+#define COLOR_parser_prod___AType___empty_init SFT_parser_prod[117]
+#define COLOR_parser_prod___AType___init_atype SFT_parser_prod[118]
+#define COLOR_parser_prod___ABlockExpr___empty_init SFT_parser_prod[119]
+#define COLOR_parser_prod___ABlockExpr___init_ablockexpr SFT_parser_prod[120]
+#define COLOR_parser_prod___AVardeclExpr___empty_init SFT_parser_prod[121]
+#define COLOR_parser_prod___AVardeclExpr___init_avardeclexpr SFT_parser_prod[122]
+#define COLOR_parser_prod___AReturnExpr___empty_init SFT_parser_prod[123]
+#define COLOR_parser_prod___AReturnExpr___init_areturnexpr SFT_parser_prod[124]
+#define COLOR_parser_prod___ABreakExpr___empty_init SFT_parser_prod[125]
+#define COLOR_parser_prod___ABreakExpr___init_abreakexpr SFT_parser_prod[126]
+#define COLOR_parser_prod___AAbortExpr___empty_init SFT_parser_prod[127]
+#define COLOR_parser_prod___AAbortExpr___init_aabortexpr SFT_parser_prod[128]
+#define COLOR_parser_prod___AContinueExpr___empty_init SFT_parser_prod[129]
+#define COLOR_parser_prod___AContinueExpr___init_acontinueexpr SFT_parser_prod[130]
+#define COLOR_parser_prod___ADoExpr___empty_init SFT_parser_prod[131]
+#define COLOR_parser_prod___ADoExpr___init_adoexpr SFT_parser_prod[132]
+#define COLOR_parser_prod___AIfExpr___empty_init SFT_parser_prod[133]
+#define COLOR_parser_prod___AIfExpr___init_aifexpr SFT_parser_prod[134]
+#define COLOR_parser_prod___AIfexprExpr___empty_init SFT_parser_prod[135]
+#define COLOR_parser_prod___AIfexprExpr___init_aifexprexpr SFT_parser_prod[136]
+#define COLOR_parser_prod___AWhileExpr___empty_init SFT_parser_prod[137]
+#define COLOR_parser_prod___AWhileExpr___init_awhileexpr SFT_parser_prod[138]
+#define COLOR_parser_prod___AForExpr___empty_init SFT_parser_prod[139]
+#define COLOR_parser_prod___AForExpr___init_aforexpr SFT_parser_prod[140]
+#define COLOR_parser_prod___AForVardeclExpr___empty_init SFT_parser_prod[141]
+#define COLOR_parser_prod___AForVardeclExpr___init_aforvardeclexpr SFT_parser_prod[142]
+#define COLOR_parser_prod___AAssertExpr___empty_init SFT_parser_prod[143]
+#define COLOR_parser_prod___AAssertExpr___init_aassertexpr SFT_parser_prod[144]
+#define COLOR_parser_prod___AOnceExpr___empty_init SFT_parser_prod[145]
+#define COLOR_parser_prod___AOnceExpr___init_aonceexpr SFT_parser_prod[146]
+#define COLOR_parser_prod___ASendExpr___empty_init SFT_parser_prod[147]
+#define COLOR_parser_prod___ASendExpr___init_asendexpr SFT_parser_prod[148]
+#define COLOR_parser_prod___ABinopExpr___empty_init SFT_parser_prod[149]
+#define COLOR_parser_prod___ABinopExpr___init_abinopexpr SFT_parser_prod[150]
+#define COLOR_parser_prod___AOrExpr___empty_init SFT_parser_prod[151]
+#define COLOR_parser_prod___AOrExpr___init_aorexpr SFT_parser_prod[152]
+#define COLOR_parser_prod___AAndExpr___empty_init SFT_parser_prod[153]
+#define COLOR_parser_prod___AAndExpr___init_aandexpr SFT_parser_prod[154]
+#define COLOR_parser_prod___ANotExpr___empty_init SFT_parser_prod[155]
+#define COLOR_parser_prod___ANotExpr___init_anotexpr SFT_parser_prod[156]
+#define COLOR_parser_prod___AEqExpr___empty_init SFT_parser_prod[157]
+#define COLOR_parser_prod___AEqExpr___init_aeqexpr SFT_parser_prod[158]
+#define COLOR_parser_prod___AEeExpr___empty_init SFT_parser_prod[159]
+#define COLOR_parser_prod___AEeExpr___init_aeeexpr SFT_parser_prod[160]
+#define COLOR_parser_prod___ANeExpr___empty_init SFT_parser_prod[161]
+#define COLOR_parser_prod___ANeExpr___init_aneexpr SFT_parser_prod[162]
+#define COLOR_parser_prod___ALtExpr___empty_init SFT_parser_prod[163]
+#define COLOR_parser_prod___ALtExpr___init_altexpr SFT_parser_prod[164]
+#define COLOR_parser_prod___ALeExpr___empty_init SFT_parser_prod[165]
+#define COLOR_parser_prod___ALeExpr___init_aleexpr SFT_parser_prod[166]
+#define COLOR_parser_prod___AGtExpr___empty_init SFT_parser_prod[167]
+#define COLOR_parser_prod___AGtExpr___init_agtexpr SFT_parser_prod[168]
+#define COLOR_parser_prod___AGeExpr___empty_init SFT_parser_prod[169]
+#define COLOR_parser_prod___AGeExpr___init_ageexpr SFT_parser_prod[170]
+#define COLOR_parser_prod___AIsaExpr___empty_init SFT_parser_prod[171]
+#define COLOR_parser_prod___AIsaExpr___init_aisaexpr SFT_parser_prod[172]
+#define COLOR_parser_prod___APlusExpr___empty_init SFT_parser_prod[173]
+#define COLOR_parser_prod___APlusExpr___init_aplusexpr SFT_parser_prod[174]
+#define COLOR_parser_prod___AMinusExpr___empty_init SFT_parser_prod[175]
+#define COLOR_parser_prod___AMinusExpr___init_aminusexpr SFT_parser_prod[176]
+#define COLOR_parser_prod___AStarshipExpr___empty_init SFT_parser_prod[177]
+#define COLOR_parser_prod___AStarshipExpr___init_astarshipexpr SFT_parser_prod[178]
+#define COLOR_parser_prod___AStarExpr___empty_init SFT_parser_prod[179]
+#define COLOR_parser_prod___AStarExpr___init_astarexpr SFT_parser_prod[180]
+#define COLOR_parser_prod___ASlashExpr___empty_init SFT_parser_prod[181]
+#define COLOR_parser_prod___ASlashExpr___init_aslashexpr SFT_parser_prod[182]
+#define COLOR_parser_prod___APercentExpr___empty_init SFT_parser_prod[183]
+#define COLOR_parser_prod___APercentExpr___init_apercentexpr SFT_parser_prod[184]
+#define COLOR_parser_prod___AUminusExpr___empty_init SFT_parser_prod[185]
+#define COLOR_parser_prod___AUminusExpr___init_auminusexpr SFT_parser_prod[186]
+#define COLOR_parser_prod___ANewExpr___empty_init SFT_parser_prod[187]
+#define COLOR_parser_prod___ANewExpr___init_anewexpr SFT_parser_prod[188]
+#define COLOR_parser_prod___AAttrExpr___empty_init SFT_parser_prod[189]
+#define COLOR_parser_prod___AAttrExpr___init_aattrexpr SFT_parser_prod[190]
+#define COLOR_parser_prod___AAttrAssignExpr___empty_init SFT_parser_prod[191]
+#define COLOR_parser_prod___AAttrAssignExpr___init_aattrassignexpr SFT_parser_prod[192]
+#define COLOR_parser_prod___AAttrReassignExpr___empty_init SFT_parser_prod[193]
+#define COLOR_parser_prod___AAttrReassignExpr___init_aattrreassignexpr SFT_parser_prod[194]
+#define COLOR_parser_prod___ACallExpr___empty_init SFT_parser_prod[195]
+#define COLOR_parser_prod___ACallExpr___init_acallexpr SFT_parser_prod[196]
+#define COLOR_parser_prod___ACallAssignExpr___empty_init SFT_parser_prod[197]
+#define COLOR_parser_prod___ACallAssignExpr___init_acallassignexpr SFT_parser_prod[198]
+#define COLOR_parser_prod___ACallReassignExpr___empty_init SFT_parser_prod[199]
+#define COLOR_parser_prod___ACallReassignExpr___init_acallreassignexpr SFT_parser_prod[200]
+#define COLOR_parser_prod___ASuperExpr___empty_init SFT_parser_prod[201]
+#define COLOR_parser_prod___ASuperExpr___init_asuperexpr SFT_parser_prod[202]
+#define COLOR_parser_prod___AInitExpr___empty_init SFT_parser_prod[203]
+#define COLOR_parser_prod___AInitExpr___init_ainitexpr SFT_parser_prod[204]
+#define COLOR_parser_prod___ABraExpr___empty_init SFT_parser_prod[205]
+#define COLOR_parser_prod___ABraExpr___init_abraexpr SFT_parser_prod[206]
+#define COLOR_parser_prod___ABraAssignExpr___empty_init SFT_parser_prod[207]
+#define COLOR_parser_prod___ABraAssignExpr___init_abraassignexpr SFT_parser_prod[208]
+#define COLOR_parser_prod___ABraReassignExpr___empty_init SFT_parser_prod[209]
+#define COLOR_parser_prod___ABraReassignExpr___init_abrareassignexpr SFT_parser_prod[210]
+#define COLOR_parser_prod___AVarExpr___empty_init SFT_parser_prod[211]
+#define COLOR_parser_prod___AVarExpr___init_avarexpr SFT_parser_prod[212]
+#define COLOR_parser_prod___AVarAssignExpr___empty_init SFT_parser_prod[213]
+#define COLOR_parser_prod___AVarAssignExpr___init_avarassignexpr SFT_parser_prod[214]
+#define COLOR_parser_prod___AVarReassignExpr___empty_init SFT_parser_prod[215]
+#define COLOR_parser_prod___AVarReassignExpr___init_avarreassignexpr SFT_parser_prod[216]
+#define COLOR_parser_prod___ARangeExpr___empty_init SFT_parser_prod[217]
+#define COLOR_parser_prod___ARangeExpr___init_arangeexpr SFT_parser_prod[218]
+#define COLOR_parser_prod___ACrangeExpr___empty_init SFT_parser_prod[219]
+#define COLOR_parser_prod___ACrangeExpr___init_acrangeexpr SFT_parser_prod[220]
+#define COLOR_parser_prod___AOrangeExpr___empty_init SFT_parser_prod[221]
+#define COLOR_parser_prod___AOrangeExpr___init_aorangeexpr SFT_parser_prod[222]
+#define COLOR_parser_prod___AArrayExpr___empty_init SFT_parser_prod[223]
+#define COLOR_parser_prod___AArrayExpr___init_aarrayexpr SFT_parser_prod[224]
+#define COLOR_parser_prod___ASelfExpr___empty_init SFT_parser_prod[225]
+#define COLOR_parser_prod___ASelfExpr___init_aselfexpr SFT_parser_prod[226]
+#define COLOR_parser_prod___AImplicitSelfExpr___empty_init SFT_parser_prod[227]
+#define COLOR_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr SFT_parser_prod[228]
+#define COLOR_parser_prod___ATrueExpr___empty_init SFT_parser_prod[229]
+#define COLOR_parser_prod___ATrueExpr___init_atrueexpr SFT_parser_prod[230]
+#define COLOR_parser_prod___AFalseExpr___empty_init SFT_parser_prod[231]
+#define COLOR_parser_prod___AFalseExpr___init_afalseexpr SFT_parser_prod[232]
+#define COLOR_parser_prod___ANullExpr___empty_init SFT_parser_prod[233]
+#define COLOR_parser_prod___ANullExpr___init_anullexpr SFT_parser_prod[234]
+#define COLOR_parser_prod___AIntExpr___empty_init SFT_parser_prod[235]
+#define COLOR_parser_prod___AIntExpr___init_aintexpr SFT_parser_prod[236]
+#define COLOR_parser_prod___AFloatExpr___empty_init SFT_parser_prod[237]
+#define COLOR_parser_prod___AFloatExpr___init_afloatexpr SFT_parser_prod[238]
+#define COLOR_parser_prod___ACharExpr___empty_init SFT_parser_prod[239]
+#define COLOR_parser_prod___ACharExpr___init_acharexpr SFT_parser_prod[240]
+#define COLOR_parser_prod___AStringExpr___empty_init SFT_parser_prod[241]
+#define COLOR_parser_prod___AStringExpr___init_astringexpr SFT_parser_prod[242]
+#define COLOR_parser_prod___AStartStringExpr___empty_init SFT_parser_prod[243]
+#define COLOR_parser_prod___AStartStringExpr___init_astartstringexpr SFT_parser_prod[244]
+#define COLOR_parser_prod___AMidStringExpr___empty_init SFT_parser_prod[245]
+#define COLOR_parser_prod___AMidStringExpr___init_amidstringexpr SFT_parser_prod[246]
+#define COLOR_parser_prod___AEndStringExpr___empty_init SFT_parser_prod[247]
+#define COLOR_parser_prod___AEndStringExpr___init_aendstringexpr SFT_parser_prod[248]
+#define COLOR_parser_prod___ASuperstringExpr___empty_init SFT_parser_prod[249]
+#define COLOR_parser_prod___ASuperstringExpr___init_asuperstringexpr SFT_parser_prod[250]
+#define COLOR_parser_prod___AParExpr___empty_init SFT_parser_prod[251]
+#define COLOR_parser_prod___AParExpr___init_aparexpr SFT_parser_prod[252]
+#define COLOR_parser_prod___AAsCastExpr___empty_init SFT_parser_prod[253]
+#define COLOR_parser_prod___AAsCastExpr___init_aascastexpr SFT_parser_prod[254]
+#define COLOR_parser_prod___APlusAssignOp___empty_init SFT_parser_prod[255]
+#define COLOR_parser_prod___APlusAssignOp___init_aplusassignop SFT_parser_prod[256]
+#define COLOR_parser_prod___AMinusAssignOp___empty_init SFT_parser_prod[257]
+#define COLOR_parser_prod___AMinusAssignOp___init_aminusassignop SFT_parser_prod[258]
+#define COLOR_parser_prod___AClosureDef___empty_init SFT_parser_prod[259]
+#define COLOR_parser_prod___AClosureDef___init_aclosuredef SFT_parser_prod[260]
+#define COLOR_parser_prod___AQualified___empty_init SFT_parser_prod[261]
+#define COLOR_parser_prod___AQualified___init_aqualified SFT_parser_prod[262]
+#define COLOR_parser_prod___ADoc___empty_init SFT_parser_prod[263]
+#define COLOR_parser_prod___ADoc___init_adoc SFT_parser_prod[264]
+#define COLOR_parser_prod___Start___init SFT_parser_prod[265]
+val_t NEW_PNode_parser_nodes___PNode___init();
 #define ATTR_parser_prod___PNode____parent(recv) ATTR(recv, COLOR_parser_prod___PNode____parent)
 typedef val_t (* parser_prod___PNode___parent_t)(val_t  self);
 val_t parser_prod___PNode___parent(val_t  self);
@@ -300,21 +305,32 @@ val_t parser_prod___PNode___line_number(val_t  self);
 typedef void (* parser_prod___PNode___printl_t)(val_t  self, val_t  param0);
 void parser_prod___PNode___printl(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___PNode___printl "parser_prod::PNode::printl"
+val_t NEW_Token_parser_nodes___PNode___init();
+typedef void (* parser_prod___Token___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
+void parser_prod___Token___replace_child(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_parser_prod___Token___replace_child "parser_prod::Token::(parser_prod::PNode::replace_child)"
 typedef void (* parser_prod___Token___visit_all_t)(val_t  self, val_t  param0);
 void parser_prod___Token___visit_all(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___Token___visit_all "parser_prod::Token::(parser_prod::PNode::visit_all)"
 typedef void (* parser_prod___Token___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___Token___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___Token___visit_all_reverse "parser_prod::Token::(parser_prod::PNode::visit_all_reverse)"
-typedef void (* parser_prod___Token___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
-void parser_prod___Token___replace_child(val_t  self, val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___Token___replace_child "parser_prod::Token::(parser_prod::PNode::replace_child)"
 typedef val_t (* parser_prod___Token___locate_t)(val_t  self);
 val_t parser_prod___Token___locate(val_t  self);
 #define LOCATE_parser_prod___Token___locate "parser_prod::Token::(parser_prod::PNode::locate)"
 typedef val_t (* parser_prod___Token___line_number_t)(val_t  self);
 val_t parser_prod___Token___line_number(val_t  self);
 #define LOCATE_parser_prod___Token___line_number "parser_prod::Token::(parser_prod::PNode::line_number)"
+val_t NEW_Prod_parser_nodes___PNode___init();
+typedef void (* parser_prod___Prod___replace_with_t)(val_t  self, val_t  param0);
+void parser_prod___Prod___replace_with(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___Prod___replace_with "parser_prod::Prod::(parser_prod::PNode::replace_with)"
+typedef val_t (* parser_prod___Prod___locate_t)(val_t  self);
+val_t parser_prod___Prod___locate(val_t  self);
+#define LOCATE_parser_prod___Prod___locate "parser_prod::Prod::(parser_prod::PNode::locate)"
+typedef val_t (* parser_prod___Prod___line_number_t)(val_t  self);
+val_t parser_prod___Prod___line_number(val_t  self);
+#define LOCATE_parser_prod___Prod___line_number "parser_prod::Prod::(parser_prod::PNode::line_number)"
 #define ATTR_parser_prod___Prod____first_token(recv) ATTR(recv, COLOR_parser_prod___Prod____first_token)
 typedef val_t (* parser_prod___Prod___first_token_t)(val_t  self);
 val_t parser_prod___Prod___first_token(val_t  self);
@@ -329,33 +345,17 @@ val_t parser_prod___Prod___last_token(val_t  self);
 typedef void (* parser_prod___Prod___last_token__eq_t)(val_t  self, val_t  param0);
 void parser_prod___Prod___last_token__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___Prod___last_token__eq "parser_prod::Prod::last_token="
-typedef val_t (* parser_prod___Prod___locate_t)(val_t  self);
-val_t parser_prod___Prod___locate(val_t  self);
-#define LOCATE_parser_prod___Prod___locate "parser_prod::Prod::(parser_prod::PNode::locate)"
-typedef void (* parser_prod___Prod___replace_with_t)(val_t  self, val_t  param0);
-void parser_prod___Prod___replace_with(val_t  self, val_t  param0);
-#define LOCATE_parser_prod___Prod___replace_with "parser_prod::Prod::(parser_prod::PNode::replace_with)"
-typedef val_t (* parser_prod___Prod___line_number_t)(val_t  self);
-val_t parser_prod___Prod___line_number(val_t  self);
-#define LOCATE_parser_prod___Prod___line_number "parser_prod::Prod::(parser_prod::PNode::line_number)"
 typedef void (* parser_prod___Visitor___visit_t)(val_t  self, val_t  param0);
 void parser_prod___Visitor___visit(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___Visitor___visit "parser_prod::Visitor::visit"
 typedef void (* parser_prod___Visitor___init_t)(val_t  self, int* init_table);
 void parser_prod___Visitor___init(val_t  self, int* init_table);
-val_t NEW_parser_prod___Visitor___init();
 #define LOCATE_parser_prod___Visitor___init "parser_prod::Visitor::init"
+val_t NEW_Visitor_parser_prod___Visitor___init();
+val_t NEW_AModule_parser_nodes___PNode___init();
 typedef void (* parser_prod___AModule___n_packagedecl__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AModule___n_packagedecl__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AModule___n_packagedecl__eq "parser_prod::AModule::(parser_nodes::AModule::n_packagedecl=)"
-typedef void (* parser_prod___AModule___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AModule___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AModule___empty_init();
-#define LOCATE_parser_prod___AModule___empty_init "parser_prod::AModule::empty_init"
-typedef void (* parser_prod___AModule___init_amodule_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void parser_prod___AModule___init_amodule(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_parser_prod___AModule___init_amodule(val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_parser_prod___AModule___init_amodule "parser_prod::AModule::init_amodule"
 typedef void (* parser_prod___AModule___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AModule___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AModule___replace_child "parser_prod::AModule::(parser_prod::PNode::replace_child)"
@@ -365,6 +365,15 @@ void parser_prod___AModule___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AModule___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AModule___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AModule___visit_all_reverse "parser_prod::AModule::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AModule___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AModule___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AModule___empty_init "parser_prod::AModule::empty_init"
+val_t NEW_AModule_parser_prod___AModule___empty_init();
+typedef void (* parser_prod___AModule___init_amodule_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void parser_prod___AModule___init_amodule(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_parser_prod___AModule___init_amodule "parser_prod::AModule::init_amodule"
+val_t NEW_AModule_parser_prod___AModule___init_amodule(val_t p0, val_t p1, val_t p2);
+val_t NEW_APackagedecl_parser_nodes___PNode___init();
 typedef void (* parser_prod___APackagedecl___n_doc__eq_t)(val_t  self, val_t  param0);
 void parser_prod___APackagedecl___n_doc__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___APackagedecl___n_doc__eq "parser_prod::APackagedecl::(parser_nodes::APackagedecl::n_doc=)"
@@ -374,14 +383,6 @@ void parser_prod___APackagedecl___n_kwpackage__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___APackagedecl___n_id__eq_t)(val_t  self, val_t  param0);
 void parser_prod___APackagedecl___n_id__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___APackagedecl___n_id__eq "parser_prod::APackagedecl::(parser_nodes::APackagedecl::n_id=)"
-typedef void (* parser_prod___APackagedecl___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___APackagedecl___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___APackagedecl___empty_init();
-#define LOCATE_parser_prod___APackagedecl___empty_init "parser_prod::APackagedecl::empty_init"
-typedef void (* parser_prod___APackagedecl___init_apackagedecl_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void parser_prod___APackagedecl___init_apackagedecl(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_parser_prod___APackagedecl___init_apackagedecl(val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_parser_prod___APackagedecl___init_apackagedecl "parser_prod::APackagedecl::init_apackagedecl"
 typedef void (* parser_prod___APackagedecl___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___APackagedecl___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___APackagedecl___replace_child "parser_prod::APackagedecl::(parser_prod::PNode::replace_child)"
@@ -391,6 +392,15 @@ void parser_prod___APackagedecl___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___APackagedecl___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___APackagedecl___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___APackagedecl___visit_all_reverse "parser_prod::APackagedecl::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___APackagedecl___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___APackagedecl___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___APackagedecl___empty_init "parser_prod::APackagedecl::empty_init"
+val_t NEW_APackagedecl_parser_prod___APackagedecl___empty_init();
+typedef void (* parser_prod___APackagedecl___init_apackagedecl_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void parser_prod___APackagedecl___init_apackagedecl(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_parser_prod___APackagedecl___init_apackagedecl "parser_prod::APackagedecl::init_apackagedecl"
+val_t NEW_APackagedecl_parser_prod___APackagedecl___init_apackagedecl(val_t p0, val_t p1, val_t p2);
+val_t NEW_AImport_parser_nodes___PNode___init();
 typedef void (* parser_prod___AImport___n_visibility__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AImport___n_visibility__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AImport___n_visibility__eq "parser_prod::AImport::(parser_nodes::AImport::n_visibility=)"
@@ -400,14 +410,6 @@ void parser_prod___AImport___n_kwimport__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___AImport___n_id__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AImport___n_id__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AImport___n_id__eq "parser_prod::AImport::(parser_nodes::AImport::n_id=)"
-typedef void (* parser_prod___AImport___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AImport___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AImport___empty_init();
-#define LOCATE_parser_prod___AImport___empty_init "parser_prod::AImport::empty_init"
-typedef void (* parser_prod___AImport___init_aimport_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void parser_prod___AImport___init_aimport(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_parser_prod___AImport___init_aimport(val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_parser_prod___AImport___init_aimport "parser_prod::AImport::init_aimport"
 typedef void (* parser_prod___AImport___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AImport___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AImport___replace_child "parser_prod::AImport::(parser_prod::PNode::replace_child)"
@@ -417,6 +419,15 @@ void parser_prod___AImport___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AImport___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AImport___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AImport___visit_all_reverse "parser_prod::AImport::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AImport___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AImport___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AImport___empty_init "parser_prod::AImport::empty_init"
+val_t NEW_AImport_parser_prod___AImport___empty_init();
+typedef void (* parser_prod___AImport___init_aimport_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void parser_prod___AImport___init_aimport(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_parser_prod___AImport___init_aimport "parser_prod::AImport::init_aimport"
+val_t NEW_AImport_parser_prod___AImport___init_aimport(val_t p0, val_t p1, val_t p2);
+val_t NEW_ANoImport_parser_nodes___PNode___init();
 typedef void (* parser_prod___ANoImport___n_visibility__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ANoImport___n_visibility__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ANoImport___n_visibility__eq "parser_prod::ANoImport::(parser_nodes::ANoImport::n_visibility=)"
@@ -426,14 +437,6 @@ void parser_prod___ANoImport___n_kwimport__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___ANoImport___n_kwend__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ANoImport___n_kwend__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ANoImport___n_kwend__eq "parser_prod::ANoImport::(parser_nodes::ANoImport::n_kwend=)"
-typedef void (* parser_prod___ANoImport___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ANoImport___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ANoImport___empty_init();
-#define LOCATE_parser_prod___ANoImport___empty_init "parser_prod::ANoImport::empty_init"
-typedef void (* parser_prod___ANoImport___init_anoimport_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void parser_prod___ANoImport___init_anoimport(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_parser_prod___ANoImport___init_anoimport(val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_parser_prod___ANoImport___init_anoimport "parser_prod::ANoImport::init_anoimport"
 typedef void (* parser_prod___ANoImport___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ANoImport___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ANoImport___replace_child "parser_prod::ANoImport::(parser_prod::PNode::replace_child)"
@@ -443,14 +446,15 @@ void parser_prod___ANoImport___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ANoImport___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ANoImport___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ANoImport___visit_all_reverse "parser_prod::ANoImport::(parser_prod::PNode::visit_all_reverse)"
-typedef void (* parser_prod___APublicVisibility___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___APublicVisibility___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___APublicVisibility___empty_init();
-#define LOCATE_parser_prod___APublicVisibility___empty_init "parser_prod::APublicVisibility::empty_init"
-typedef void (* parser_prod___APublicVisibility___init_apublicvisibility_t)(val_t  self, int* init_table);
-void parser_prod___APublicVisibility___init_apublicvisibility(val_t  self, int* init_table);
-val_t NEW_parser_prod___APublicVisibility___init_apublicvisibility();
-#define LOCATE_parser_prod___APublicVisibility___init_apublicvisibility "parser_prod::APublicVisibility::init_apublicvisibility"
+typedef void (* parser_prod___ANoImport___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ANoImport___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ANoImport___empty_init "parser_prod::ANoImport::empty_init"
+val_t NEW_ANoImport_parser_prod___ANoImport___empty_init();
+typedef void (* parser_prod___ANoImport___init_anoimport_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void parser_prod___ANoImport___init_anoimport(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_parser_prod___ANoImport___init_anoimport "parser_prod::ANoImport::init_anoimport"
+val_t NEW_ANoImport_parser_prod___ANoImport___init_anoimport(val_t p0, val_t p1, val_t p2);
+val_t NEW_APublicVisibility_parser_nodes___PNode___init();
 typedef void (* parser_prod___APublicVisibility___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___APublicVisibility___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___APublicVisibility___replace_child "parser_prod::APublicVisibility::(parser_prod::PNode::replace_child)"
@@ -460,17 +464,18 @@ void parser_prod___APublicVisibility___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___APublicVisibility___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___APublicVisibility___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___APublicVisibility___visit_all_reverse "parser_prod::APublicVisibility::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___APublicVisibility___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___APublicVisibility___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___APublicVisibility___empty_init "parser_prod::APublicVisibility::empty_init"
+val_t NEW_APublicVisibility_parser_prod___APublicVisibility___empty_init();
+typedef void (* parser_prod___APublicVisibility___init_apublicvisibility_t)(val_t  self, int* init_table);
+void parser_prod___APublicVisibility___init_apublicvisibility(val_t  self, int* init_table);
+#define LOCATE_parser_prod___APublicVisibility___init_apublicvisibility "parser_prod::APublicVisibility::init_apublicvisibility"
+val_t NEW_APublicVisibility_parser_prod___APublicVisibility___init_apublicvisibility();
+val_t NEW_APrivateVisibility_parser_nodes___PNode___init();
 typedef void (* parser_prod___APrivateVisibility___n_kwprivate__eq_t)(val_t  self, val_t  param0);
 void parser_prod___APrivateVisibility___n_kwprivate__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___APrivateVisibility___n_kwprivate__eq "parser_prod::APrivateVisibility::(parser_nodes::APrivateVisibility::n_kwprivate=)"
-typedef void (* parser_prod___APrivateVisibility___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___APrivateVisibility___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___APrivateVisibility___empty_init();
-#define LOCATE_parser_prod___APrivateVisibility___empty_init "parser_prod::APrivateVisibility::empty_init"
-typedef void (* parser_prod___APrivateVisibility___init_aprivatevisibility_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___APrivateVisibility___init_aprivatevisibility(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___APrivateVisibility___init_aprivatevisibility(val_t  param0);
-#define LOCATE_parser_prod___APrivateVisibility___init_aprivatevisibility "parser_prod::APrivateVisibility::init_aprivatevisibility"
 typedef void (* parser_prod___APrivateVisibility___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___APrivateVisibility___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___APrivateVisibility___replace_child "parser_prod::APrivateVisibility::(parser_prod::PNode::replace_child)"
@@ -480,17 +485,18 @@ void parser_prod___APrivateVisibility___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___APrivateVisibility___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___APrivateVisibility___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___APrivateVisibility___visit_all_reverse "parser_prod::APrivateVisibility::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___APrivateVisibility___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___APrivateVisibility___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___APrivateVisibility___empty_init "parser_prod::APrivateVisibility::empty_init"
+val_t NEW_APrivateVisibility_parser_prod___APrivateVisibility___empty_init();
+typedef void (* parser_prod___APrivateVisibility___init_aprivatevisibility_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___APrivateVisibility___init_aprivatevisibility(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___APrivateVisibility___init_aprivatevisibility "parser_prod::APrivateVisibility::init_aprivatevisibility"
+val_t NEW_APrivateVisibility_parser_prod___APrivateVisibility___init_aprivatevisibility(val_t p0);
+val_t NEW_AProtectedVisibility_parser_nodes___PNode___init();
 typedef void (* parser_prod___AProtectedVisibility___n_kwprotected__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AProtectedVisibility___n_kwprotected__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AProtectedVisibility___n_kwprotected__eq "parser_prod::AProtectedVisibility::(parser_nodes::AProtectedVisibility::n_kwprotected=)"
-typedef void (* parser_prod___AProtectedVisibility___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AProtectedVisibility___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AProtectedVisibility___empty_init();
-#define LOCATE_parser_prod___AProtectedVisibility___empty_init "parser_prod::AProtectedVisibility::empty_init"
-typedef void (* parser_prod___AProtectedVisibility___init_aprotectedvisibility_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AProtectedVisibility___init_aprotectedvisibility(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AProtectedVisibility___init_aprotectedvisibility(val_t  param0);
-#define LOCATE_parser_prod___AProtectedVisibility___init_aprotectedvisibility "parser_prod::AProtectedVisibility::init_aprotectedvisibility"
 typedef void (* parser_prod___AProtectedVisibility___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AProtectedVisibility___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AProtectedVisibility___replace_child "parser_prod::AProtectedVisibility::(parser_prod::PNode::replace_child)"
@@ -500,17 +506,18 @@ void parser_prod___AProtectedVisibility___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AProtectedVisibility___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AProtectedVisibility___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AProtectedVisibility___visit_all_reverse "parser_prod::AProtectedVisibility::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AProtectedVisibility___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AProtectedVisibility___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AProtectedVisibility___empty_init "parser_prod::AProtectedVisibility::empty_init"
+val_t NEW_AProtectedVisibility_parser_prod___AProtectedVisibility___empty_init();
+typedef void (* parser_prod___AProtectedVisibility___init_aprotectedvisibility_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AProtectedVisibility___init_aprotectedvisibility(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AProtectedVisibility___init_aprotectedvisibility "parser_prod::AProtectedVisibility::init_aprotectedvisibility"
+val_t NEW_AProtectedVisibility_parser_prod___AProtectedVisibility___init_aprotectedvisibility(val_t p0);
+val_t NEW_AIntrudeVisibility_parser_nodes___PNode___init();
 typedef void (* parser_prod___AIntrudeVisibility___n_kwintrude__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AIntrudeVisibility___n_kwintrude__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AIntrudeVisibility___n_kwintrude__eq "parser_prod::AIntrudeVisibility::(parser_nodes::AIntrudeVisibility::n_kwintrude=)"
-typedef void (* parser_prod___AIntrudeVisibility___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AIntrudeVisibility___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AIntrudeVisibility___empty_init();
-#define LOCATE_parser_prod___AIntrudeVisibility___empty_init "parser_prod::AIntrudeVisibility::empty_init"
-typedef void (* parser_prod___AIntrudeVisibility___init_aintrudevisibility_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AIntrudeVisibility___init_aintrudevisibility(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AIntrudeVisibility___init_aintrudevisibility(val_t  param0);
-#define LOCATE_parser_prod___AIntrudeVisibility___init_aintrudevisibility "parser_prod::AIntrudeVisibility::init_aintrudevisibility"
 typedef void (* parser_prod___AIntrudeVisibility___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AIntrudeVisibility___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AIntrudeVisibility___replace_child "parser_prod::AIntrudeVisibility::(parser_prod::PNode::replace_child)"
@@ -520,6 +527,15 @@ void parser_prod___AIntrudeVisibility___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AIntrudeVisibility___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AIntrudeVisibility___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AIntrudeVisibility___visit_all_reverse "parser_prod::AIntrudeVisibility::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AIntrudeVisibility___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AIntrudeVisibility___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AIntrudeVisibility___empty_init "parser_prod::AIntrudeVisibility::empty_init"
+val_t NEW_AIntrudeVisibility_parser_prod___AIntrudeVisibility___empty_init();
+typedef void (* parser_prod___AIntrudeVisibility___init_aintrudevisibility_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AIntrudeVisibility___init_aintrudevisibility(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AIntrudeVisibility___init_aintrudevisibility "parser_prod::AIntrudeVisibility::init_aintrudevisibility"
+val_t NEW_AIntrudeVisibility_parser_prod___AIntrudeVisibility___init_aintrudevisibility(val_t p0);
+val_t NEW_AClassdef_parser_nodes___PNode___init();
 typedef void (* parser_prod___AClassdef___n_doc__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AClassdef___n_doc__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AClassdef___n_doc__eq "parser_prod::AClassdef::(parser_nodes::AClassdef::n_doc=)"
@@ -535,14 +551,6 @@ void parser_prod___AClassdef___n_classkind__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___AClassdef___n_id__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AClassdef___n_id__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AClassdef___n_id__eq "parser_prod::AClassdef::(parser_nodes::AClassdef::n_id=)"
-typedef void (* parser_prod___AClassdef___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AClassdef___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AClassdef___empty_init();
-#define LOCATE_parser_prod___AClassdef___empty_init "parser_prod::AClassdef::empty_init"
-typedef void (* parser_prod___AClassdef___init_aclassdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, val_t  param7, int* init_table);
-void parser_prod___AClassdef___init_aclassdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, val_t  param7, int* init_table);
-val_t NEW_parser_prod___AClassdef___init_aclassdef(val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, val_t  param7);
-#define LOCATE_parser_prod___AClassdef___init_aclassdef "parser_prod::AClassdef::init_aclassdef"
 typedef void (* parser_prod___AClassdef___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AClassdef___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AClassdef___replace_child "parser_prod::AClassdef::(parser_prod::PNode::replace_child)"
@@ -552,14 +560,15 @@ void parser_prod___AClassdef___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AClassdef___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AClassdef___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AClassdef___visit_all_reverse "parser_prod::AClassdef::(parser_prod::PNode::visit_all_reverse)"
-typedef void (* parser_prod___ATopClassdef___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ATopClassdef___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ATopClassdef___empty_init();
-#define LOCATE_parser_prod___ATopClassdef___empty_init "parser_prod::ATopClassdef::empty_init"
-typedef void (* parser_prod___ATopClassdef___init_atopclassdef_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___ATopClassdef___init_atopclassdef(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___ATopClassdef___init_atopclassdef(val_t  param0);
-#define LOCATE_parser_prod___ATopClassdef___init_atopclassdef "parser_prod::ATopClassdef::init_atopclassdef"
+typedef void (* parser_prod___AClassdef___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AClassdef___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AClassdef___empty_init "parser_prod::AClassdef::empty_init"
+val_t NEW_AClassdef_parser_prod___AClassdef___empty_init();
+typedef void (* parser_prod___AClassdef___init_aclassdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, val_t  param7, int* init_table);
+void parser_prod___AClassdef___init_aclassdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, val_t  param7, int* init_table);
+#define LOCATE_parser_prod___AClassdef___init_aclassdef "parser_prod::AClassdef::init_aclassdef"
+val_t NEW_AClassdef_parser_prod___AClassdef___init_aclassdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7);
+val_t NEW_ATopClassdef_parser_nodes___PNode___init();
 typedef void (* parser_prod___ATopClassdef___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ATopClassdef___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ATopClassdef___replace_child "parser_prod::ATopClassdef::(parser_prod::PNode::replace_child)"
@@ -569,14 +578,15 @@ void parser_prod___ATopClassdef___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ATopClassdef___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ATopClassdef___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ATopClassdef___visit_all_reverse "parser_prod::ATopClassdef::(parser_prod::PNode::visit_all_reverse)"
-typedef void (* parser_prod___AMainClassdef___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AMainClassdef___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AMainClassdef___empty_init();
-#define LOCATE_parser_prod___AMainClassdef___empty_init "parser_prod::AMainClassdef::empty_init"
-typedef void (* parser_prod___AMainClassdef___init_amainclassdef_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AMainClassdef___init_amainclassdef(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AMainClassdef___init_amainclassdef(val_t  param0);
-#define LOCATE_parser_prod___AMainClassdef___init_amainclassdef "parser_prod::AMainClassdef::init_amainclassdef"
+typedef void (* parser_prod___ATopClassdef___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ATopClassdef___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ATopClassdef___empty_init "parser_prod::ATopClassdef::empty_init"
+val_t NEW_ATopClassdef_parser_prod___ATopClassdef___empty_init();
+typedef void (* parser_prod___ATopClassdef___init_atopclassdef_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___ATopClassdef___init_atopclassdef(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___ATopClassdef___init_atopclassdef "parser_prod::ATopClassdef::init_atopclassdef"
+val_t NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef(val_t p0);
+val_t NEW_AMainClassdef_parser_nodes___PNode___init();
 typedef void (* parser_prod___AMainClassdef___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AMainClassdef___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AMainClassdef___replace_child "parser_prod::AMainClassdef::(parser_prod::PNode::replace_child)"
@@ -586,17 +596,18 @@ void parser_prod___AMainClassdef___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AMainClassdef___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AMainClassdef___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AMainClassdef___visit_all_reverse "parser_prod::AMainClassdef::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AMainClassdef___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AMainClassdef___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AMainClassdef___empty_init "parser_prod::AMainClassdef::empty_init"
+val_t NEW_AMainClassdef_parser_prod___AMainClassdef___empty_init();
+typedef void (* parser_prod___AMainClassdef___init_amainclassdef_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AMainClassdef___init_amainclassdef(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AMainClassdef___init_amainclassdef "parser_prod::AMainClassdef::init_amainclassdef"
+val_t NEW_AMainClassdef_parser_prod___AMainClassdef___init_amainclassdef(val_t p0);
+val_t NEW_AConcreteClasskind_parser_nodes___PNode___init();
 typedef void (* parser_prod___AConcreteClasskind___n_kwclass__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AConcreteClasskind___n_kwclass__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AConcreteClasskind___n_kwclass__eq "parser_prod::AConcreteClasskind::(parser_nodes::AConcreteClasskind::n_kwclass=)"
-typedef void (* parser_prod___AConcreteClasskind___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AConcreteClasskind___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AConcreteClasskind___empty_init();
-#define LOCATE_parser_prod___AConcreteClasskind___empty_init "parser_prod::AConcreteClasskind::empty_init"
-typedef void (* parser_prod___AConcreteClasskind___init_aconcreteclasskind_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AConcreteClasskind___init_aconcreteclasskind(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AConcreteClasskind___init_aconcreteclasskind(val_t  param0);
-#define LOCATE_parser_prod___AConcreteClasskind___init_aconcreteclasskind "parser_prod::AConcreteClasskind::init_aconcreteclasskind"
 typedef void (* parser_prod___AConcreteClasskind___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AConcreteClasskind___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AConcreteClasskind___replace_child "parser_prod::AConcreteClasskind::(parser_prod::PNode::replace_child)"
@@ -606,20 +617,21 @@ void parser_prod___AConcreteClasskind___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AConcreteClasskind___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AConcreteClasskind___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AConcreteClasskind___visit_all_reverse "parser_prod::AConcreteClasskind::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AConcreteClasskind___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AConcreteClasskind___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AConcreteClasskind___empty_init "parser_prod::AConcreteClasskind::empty_init"
+val_t NEW_AConcreteClasskind_parser_prod___AConcreteClasskind___empty_init();
+typedef void (* parser_prod___AConcreteClasskind___init_aconcreteclasskind_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AConcreteClasskind___init_aconcreteclasskind(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AConcreteClasskind___init_aconcreteclasskind "parser_prod::AConcreteClasskind::init_aconcreteclasskind"
+val_t NEW_AConcreteClasskind_parser_prod___AConcreteClasskind___init_aconcreteclasskind(val_t p0);
+val_t NEW_AAbstractClasskind_parser_nodes___PNode___init();
 typedef void (* parser_prod___AAbstractClasskind___n_kwabstract__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAbstractClasskind___n_kwabstract__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAbstractClasskind___n_kwabstract__eq "parser_prod::AAbstractClasskind::(parser_nodes::AAbstractClasskind::n_kwabstract=)"
 typedef void (* parser_prod___AAbstractClasskind___n_kwclass__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAbstractClasskind___n_kwclass__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAbstractClasskind___n_kwclass__eq "parser_prod::AAbstractClasskind::(parser_nodes::AAbstractClasskind::n_kwclass=)"
-typedef void (* parser_prod___AAbstractClasskind___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AAbstractClasskind___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AAbstractClasskind___empty_init();
-#define LOCATE_parser_prod___AAbstractClasskind___empty_init "parser_prod::AAbstractClasskind::empty_init"
-typedef void (* parser_prod___AAbstractClasskind___init_aabstractclasskind_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AAbstractClasskind___init_aabstractclasskind(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AAbstractClasskind___init_aabstractclasskind(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AAbstractClasskind___init_aabstractclasskind "parser_prod::AAbstractClasskind::init_aabstractclasskind"
 typedef void (* parser_prod___AAbstractClasskind___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AAbstractClasskind___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AAbstractClasskind___replace_child "parser_prod::AAbstractClasskind::(parser_prod::PNode::replace_child)"
@@ -629,17 +641,18 @@ void parser_prod___AAbstractClasskind___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AAbstractClasskind___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AAbstractClasskind___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAbstractClasskind___visit_all_reverse "parser_prod::AAbstractClasskind::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AAbstractClasskind___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AAbstractClasskind___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AAbstractClasskind___empty_init "parser_prod::AAbstractClasskind::empty_init"
+val_t NEW_AAbstractClasskind_parser_prod___AAbstractClasskind___empty_init();
+typedef void (* parser_prod___AAbstractClasskind___init_aabstractclasskind_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AAbstractClasskind___init_aabstractclasskind(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AAbstractClasskind___init_aabstractclasskind "parser_prod::AAbstractClasskind::init_aabstractclasskind"
+val_t NEW_AAbstractClasskind_parser_prod___AAbstractClasskind___init_aabstractclasskind(val_t p0, val_t p1);
+val_t NEW_AInterfaceClasskind_parser_nodes___PNode___init();
 typedef void (* parser_prod___AInterfaceClasskind___n_kwinterface__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AInterfaceClasskind___n_kwinterface__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AInterfaceClasskind___n_kwinterface__eq "parser_prod::AInterfaceClasskind::(parser_nodes::AInterfaceClasskind::n_kwinterface=)"
-typedef void (* parser_prod___AInterfaceClasskind___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AInterfaceClasskind___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AInterfaceClasskind___empty_init();
-#define LOCATE_parser_prod___AInterfaceClasskind___empty_init "parser_prod::AInterfaceClasskind::empty_init"
-typedef void (* parser_prod___AInterfaceClasskind___init_ainterfaceclasskind_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AInterfaceClasskind___init_ainterfaceclasskind(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AInterfaceClasskind___init_ainterfaceclasskind(val_t  param0);
-#define LOCATE_parser_prod___AInterfaceClasskind___init_ainterfaceclasskind "parser_prod::AInterfaceClasskind::init_ainterfaceclasskind"
 typedef void (* parser_prod___AInterfaceClasskind___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AInterfaceClasskind___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AInterfaceClasskind___replace_child "parser_prod::AInterfaceClasskind::(parser_prod::PNode::replace_child)"
@@ -649,17 +662,18 @@ void parser_prod___AInterfaceClasskind___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AInterfaceClasskind___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AInterfaceClasskind___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AInterfaceClasskind___visit_all_reverse "parser_prod::AInterfaceClasskind::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AInterfaceClasskind___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AInterfaceClasskind___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AInterfaceClasskind___empty_init "parser_prod::AInterfaceClasskind::empty_init"
+val_t NEW_AInterfaceClasskind_parser_prod___AInterfaceClasskind___empty_init();
+typedef void (* parser_prod___AInterfaceClasskind___init_ainterfaceclasskind_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AInterfaceClasskind___init_ainterfaceclasskind(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AInterfaceClasskind___init_ainterfaceclasskind "parser_prod::AInterfaceClasskind::init_ainterfaceclasskind"
+val_t NEW_AInterfaceClasskind_parser_prod___AInterfaceClasskind___init_ainterfaceclasskind(val_t p0);
+val_t NEW_AUniversalClasskind_parser_nodes___PNode___init();
 typedef void (* parser_prod___AUniversalClasskind___n_kwuniversal__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AUniversalClasskind___n_kwuniversal__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AUniversalClasskind___n_kwuniversal__eq "parser_prod::AUniversalClasskind::(parser_nodes::AUniversalClasskind::n_kwuniversal=)"
-typedef void (* parser_prod___AUniversalClasskind___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AUniversalClasskind___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AUniversalClasskind___empty_init();
-#define LOCATE_parser_prod___AUniversalClasskind___empty_init "parser_prod::AUniversalClasskind::empty_init"
-typedef void (* parser_prod___AUniversalClasskind___init_auniversalclasskind_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AUniversalClasskind___init_auniversalclasskind(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AUniversalClasskind___init_auniversalclasskind(val_t  param0);
-#define LOCATE_parser_prod___AUniversalClasskind___init_auniversalclasskind "parser_prod::AUniversalClasskind::init_auniversalclasskind"
 typedef void (* parser_prod___AUniversalClasskind___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AUniversalClasskind___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AUniversalClasskind___replace_child "parser_prod::AUniversalClasskind::(parser_prod::PNode::replace_child)"
@@ -669,20 +683,21 @@ void parser_prod___AUniversalClasskind___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AUniversalClasskind___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AUniversalClasskind___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AUniversalClasskind___visit_all_reverse "parser_prod::AUniversalClasskind::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AUniversalClasskind___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AUniversalClasskind___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AUniversalClasskind___empty_init "parser_prod::AUniversalClasskind::empty_init"
+val_t NEW_AUniversalClasskind_parser_prod___AUniversalClasskind___empty_init();
+typedef void (* parser_prod___AUniversalClasskind___init_auniversalclasskind_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AUniversalClasskind___init_auniversalclasskind(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AUniversalClasskind___init_auniversalclasskind "parser_prod::AUniversalClasskind::init_auniversalclasskind"
+val_t NEW_AUniversalClasskind_parser_prod___AUniversalClasskind___init_auniversalclasskind(val_t p0);
+val_t NEW_AFormaldef_parser_nodes___PNode___init();
 typedef void (* parser_prod___AFormaldef___n_id__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AFormaldef___n_id__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AFormaldef___n_id__eq "parser_prod::AFormaldef::(parser_nodes::AFormaldef::n_id=)"
 typedef void (* parser_prod___AFormaldef___n_type__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AFormaldef___n_type__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AFormaldef___n_type__eq "parser_prod::AFormaldef::(parser_nodes::AFormaldef::n_type=)"
-typedef void (* parser_prod___AFormaldef___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AFormaldef___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AFormaldef___empty_init();
-#define LOCATE_parser_prod___AFormaldef___empty_init "parser_prod::AFormaldef::empty_init"
-typedef void (* parser_prod___AFormaldef___init_aformaldef_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AFormaldef___init_aformaldef(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AFormaldef___init_aformaldef(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AFormaldef___init_aformaldef "parser_prod::AFormaldef::init_aformaldef"
 typedef void (* parser_prod___AFormaldef___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AFormaldef___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AFormaldef___replace_child "parser_prod::AFormaldef::(parser_prod::PNode::replace_child)"
@@ -692,20 +707,21 @@ void parser_prod___AFormaldef___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AFormaldef___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AFormaldef___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AFormaldef___visit_all_reverse "parser_prod::AFormaldef::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AFormaldef___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AFormaldef___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AFormaldef___empty_init "parser_prod::AFormaldef::empty_init"
+val_t NEW_AFormaldef_parser_prod___AFormaldef___empty_init();
+typedef void (* parser_prod___AFormaldef___init_aformaldef_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AFormaldef___init_aformaldef(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AFormaldef___init_aformaldef "parser_prod::AFormaldef::init_aformaldef"
+val_t NEW_AFormaldef_parser_prod___AFormaldef___init_aformaldef(val_t p0, val_t p1);
+val_t NEW_ASuperclass_parser_nodes___PNode___init();
 typedef void (* parser_prod___ASuperclass___n_kwspecial__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ASuperclass___n_kwspecial__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ASuperclass___n_kwspecial__eq "parser_prod::ASuperclass::(parser_nodes::ASuperclass::n_kwspecial=)"
 typedef void (* parser_prod___ASuperclass___n_type__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ASuperclass___n_type__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ASuperclass___n_type__eq "parser_prod::ASuperclass::(parser_nodes::ASuperclass::n_type=)"
-typedef void (* parser_prod___ASuperclass___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ASuperclass___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ASuperclass___empty_init();
-#define LOCATE_parser_prod___ASuperclass___empty_init "parser_prod::ASuperclass::empty_init"
-typedef void (* parser_prod___ASuperclass___init_asuperclass_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___ASuperclass___init_asuperclass(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___ASuperclass___init_asuperclass(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___ASuperclass___init_asuperclass "parser_prod::ASuperclass::init_asuperclass"
 typedef void (* parser_prod___ASuperclass___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ASuperclass___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ASuperclass___replace_child "parser_prod::ASuperclass::(parser_prod::PNode::replace_child)"
@@ -715,15 +731,18 @@ void parser_prod___ASuperclass___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ASuperclass___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ASuperclass___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ASuperclass___visit_all_reverse "parser_prod::ASuperclass::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ASuperclass___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ASuperclass___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ASuperclass___empty_init "parser_prod::ASuperclass::empty_init"
+val_t NEW_ASuperclass_parser_prod___ASuperclass___empty_init();
+typedef void (* parser_prod___ASuperclass___init_asuperclass_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___ASuperclass___init_asuperclass(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___ASuperclass___init_asuperclass "parser_prod::ASuperclass::init_asuperclass"
+val_t NEW_ASuperclass_parser_prod___ASuperclass___init_asuperclass(val_t p0, val_t p1);
+val_t NEW_AAttrPropdef_parser_nodes___PNode___init();
 typedef void (* parser_prod___AAttrPropdef___n_doc__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAttrPropdef___n_doc__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAttrPropdef___n_doc__eq "parser_prod::AAttrPropdef::(parser_nodes::PPropdef::n_doc=)"
-typedef void (* parser_prod___AAttrPropdef___n_readable__eq_t)(val_t  self, val_t  param0);
-void parser_prod___AAttrPropdef___n_readable__eq(val_t  self, val_t  param0);
-#define LOCATE_parser_prod___AAttrPropdef___n_readable__eq "parser_prod::AAttrPropdef::(parser_nodes::AAttrPropdef::n_readable=)"
-typedef void (* parser_prod___AAttrPropdef___n_writable__eq_t)(val_t  self, val_t  param0);
-void parser_prod___AAttrPropdef___n_writable__eq(val_t  self, val_t  param0);
-#define LOCATE_parser_prod___AAttrPropdef___n_writable__eq "parser_prod::AAttrPropdef::(parser_nodes::AAttrPropdef::n_writable=)"
 typedef void (* parser_prod___AAttrPropdef___n_kwredef__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAttrPropdef___n_kwredef__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAttrPropdef___n_kwredef__eq "parser_prod::AAttrPropdef::(parser_nodes::AAttrPropdef::n_kwredef=)"
@@ -739,17 +758,15 @@ void parser_prod___AAttrPropdef___n_id__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___AAttrPropdef___n_type__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAttrPropdef___n_type__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAttrPropdef___n_type__eq "parser_prod::AAttrPropdef::(parser_nodes::AAttrPropdef::n_type=)"
+typedef void (* parser_prod___AAttrPropdef___n_readable__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AAttrPropdef___n_readable__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AAttrPropdef___n_readable__eq "parser_prod::AAttrPropdef::(parser_nodes::AAttrPropdef::n_readable=)"
+typedef void (* parser_prod___AAttrPropdef___n_writable__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AAttrPropdef___n_writable__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AAttrPropdef___n_writable__eq "parser_prod::AAttrPropdef::(parser_nodes::AAttrPropdef::n_writable=)"
 typedef void (* parser_prod___AAttrPropdef___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAttrPropdef___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAttrPropdef___n_expr__eq "parser_prod::AAttrPropdef::(parser_nodes::AAttrPropdef::n_expr=)"
-typedef void (* parser_prod___AAttrPropdef___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AAttrPropdef___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AAttrPropdef___empty_init();
-#define LOCATE_parser_prod___AAttrPropdef___empty_init "parser_prod::AAttrPropdef::empty_init"
-typedef void (* parser_prod___AAttrPropdef___init_aattrpropdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, val_t  param7, val_t  param8, int* init_table);
-void parser_prod___AAttrPropdef___init_aattrpropdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, val_t  param7, val_t  param8, int* init_table);
-val_t NEW_parser_prod___AAttrPropdef___init_aattrpropdef(val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, val_t  param7, val_t  param8);
-#define LOCATE_parser_prod___AAttrPropdef___init_aattrpropdef "parser_prod::AAttrPropdef::init_aattrpropdef"
 typedef void (* parser_prod___AAttrPropdef___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AAttrPropdef___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AAttrPropdef___replace_child "parser_prod::AAttrPropdef::(parser_prod::PNode::replace_child)"
@@ -759,6 +776,15 @@ void parser_prod___AAttrPropdef___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AAttrPropdef___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AAttrPropdef___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAttrPropdef___visit_all_reverse "parser_prod::AAttrPropdef::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AAttrPropdef___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AAttrPropdef___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AAttrPropdef___empty_init "parser_prod::AAttrPropdef::empty_init"
+val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___empty_init();
+typedef void (* parser_prod___AAttrPropdef___init_aattrpropdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, val_t  param7, val_t  param8, int* init_table);
+void parser_prod___AAttrPropdef___init_aattrpropdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, val_t  param7, val_t  param8, int* init_table);
+#define LOCATE_parser_prod___AAttrPropdef___init_aattrpropdef "parser_prod::AAttrPropdef::init_aattrpropdef"
+val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8);
+val_t NEW_AMethPropdef_parser_nodes___PNode___init();
 typedef void (* parser_prod___AMethPropdef___n_doc__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AMethPropdef___n_doc__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AMethPropdef___n_doc__eq "parser_prod::AMethPropdef::(parser_nodes::PPropdef::n_doc=)"
@@ -774,14 +800,6 @@ void parser_prod___AMethPropdef___n_methid__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___AMethPropdef___n_signature__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AMethPropdef___n_signature__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AMethPropdef___n_signature__eq "parser_prod::AMethPropdef::(parser_nodes::AMethPropdef::n_signature=)"
-typedef void (* parser_prod___AMethPropdef___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AMethPropdef___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AMethPropdef___empty_init();
-#define LOCATE_parser_prod___AMethPropdef___empty_init "parser_prod::AMethPropdef::empty_init"
-typedef void (* parser_prod___AMethPropdef___init_amethpropdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
-void parser_prod___AMethPropdef___init_amethpropdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
-val_t NEW_parser_prod___AMethPropdef___init_amethpropdef(val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4);
-#define LOCATE_parser_prod___AMethPropdef___init_amethpropdef "parser_prod::AMethPropdef::init_amethpropdef"
 typedef void (* parser_prod___AMethPropdef___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AMethPropdef___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AMethPropdef___replace_child "parser_prod::AMethPropdef::(parser_prod::PNode::replace_child)"
@@ -791,6 +809,15 @@ void parser_prod___AMethPropdef___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AMethPropdef___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AMethPropdef___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AMethPropdef___visit_all_reverse "parser_prod::AMethPropdef::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AMethPropdef___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AMethPropdef___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AMethPropdef___empty_init "parser_prod::AMethPropdef::empty_init"
+val_t NEW_AMethPropdef_parser_prod___AMethPropdef___empty_init();
+typedef void (* parser_prod___AMethPropdef___init_amethpropdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
+void parser_prod___AMethPropdef___init_amethpropdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
+#define LOCATE_parser_prod___AMethPropdef___init_amethpropdef "parser_prod::AMethPropdef::init_amethpropdef"
+val_t NEW_AMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+val_t NEW_ADeferredMethPropdef_parser_nodes___PNode___init();
 typedef void (* parser_prod___ADeferredMethPropdef___n_doc__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ADeferredMethPropdef___n_doc__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ADeferredMethPropdef___n_doc__eq "parser_prod::ADeferredMethPropdef::(parser_nodes::PPropdef::n_doc=)"
@@ -800,23 +827,15 @@ void parser_prod___ADeferredMethPropdef___n_kwredef__eq(val_t  self, val_t  para
 typedef void (* parser_prod___ADeferredMethPropdef___n_visibility__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ADeferredMethPropdef___n_visibility__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ADeferredMethPropdef___n_visibility__eq "parser_prod::ADeferredMethPropdef::(parser_nodes::AMethPropdef::n_visibility=)"
-typedef void (* parser_prod___ADeferredMethPropdef___n_kwmeth__eq_t)(val_t  self, val_t  param0);
-void parser_prod___ADeferredMethPropdef___n_kwmeth__eq(val_t  self, val_t  param0);
-#define LOCATE_parser_prod___ADeferredMethPropdef___n_kwmeth__eq "parser_prod::ADeferredMethPropdef::(parser_nodes::ADeferredMethPropdef::n_kwmeth=)"
 typedef void (* parser_prod___ADeferredMethPropdef___n_methid__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ADeferredMethPropdef___n_methid__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ADeferredMethPropdef___n_methid__eq "parser_prod::ADeferredMethPropdef::(parser_nodes::AMethPropdef::n_methid=)"
 typedef void (* parser_prod___ADeferredMethPropdef___n_signature__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ADeferredMethPropdef___n_signature__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ADeferredMethPropdef___n_signature__eq "parser_prod::ADeferredMethPropdef::(parser_nodes::AMethPropdef::n_signature=)"
-typedef void (* parser_prod___ADeferredMethPropdef___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ADeferredMethPropdef___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ADeferredMethPropdef___empty_init();
-#define LOCATE_parser_prod___ADeferredMethPropdef___empty_init "parser_prod::ADeferredMethPropdef::empty_init"
-typedef void (* parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, int* init_table);
-void parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, int* init_table);
-val_t NEW_parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef(val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5);
-#define LOCATE_parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef "parser_prod::ADeferredMethPropdef::init_adeferredmethpropdef"
+typedef void (* parser_prod___ADeferredMethPropdef___n_kwmeth__eq_t)(val_t  self, val_t  param0);
+void parser_prod___ADeferredMethPropdef___n_kwmeth__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___ADeferredMethPropdef___n_kwmeth__eq "parser_prod::ADeferredMethPropdef::(parser_nodes::ADeferredMethPropdef::n_kwmeth=)"
 typedef void (* parser_prod___ADeferredMethPropdef___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ADeferredMethPropdef___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ADeferredMethPropdef___replace_child "parser_prod::ADeferredMethPropdef::(parser_prod::PNode::replace_child)"
@@ -826,6 +845,17 @@ void parser_prod___ADeferredMethPropdef___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ADeferredMethPropdef___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ADeferredMethPropdef___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ADeferredMethPropdef___visit_all_reverse "parser_prod::ADeferredMethPropdef::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_ADeferredMethPropdef_parser_prod___AMethPropdef___empty_init();
+val_t NEW_ADeferredMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+typedef void (* parser_prod___ADeferredMethPropdef___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ADeferredMethPropdef___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ADeferredMethPropdef___empty_init "parser_prod::ADeferredMethPropdef::empty_init"
+val_t NEW_ADeferredMethPropdef_parser_prod___ADeferredMethPropdef___empty_init();
+typedef void (* parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, int* init_table);
+void parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, int* init_table);
+#define LOCATE_parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef "parser_prod::ADeferredMethPropdef::init_adeferredmethpropdef"
+val_t NEW_ADeferredMethPropdef_parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
+val_t NEW_AInternMethPropdef_parser_nodes___PNode___init();
 typedef void (* parser_prod___AInternMethPropdef___n_doc__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AInternMethPropdef___n_doc__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AInternMethPropdef___n_doc__eq "parser_prod::AInternMethPropdef::(parser_nodes::PPropdef::n_doc=)"
@@ -835,23 +865,15 @@ void parser_prod___AInternMethPropdef___n_kwredef__eq(val_t  self, val_t  param0
 typedef void (* parser_prod___AInternMethPropdef___n_visibility__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AInternMethPropdef___n_visibility__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AInternMethPropdef___n_visibility__eq "parser_prod::AInternMethPropdef::(parser_nodes::AMethPropdef::n_visibility=)"
-typedef void (* parser_prod___AInternMethPropdef___n_kwmeth__eq_t)(val_t  self, val_t  param0);
-void parser_prod___AInternMethPropdef___n_kwmeth__eq(val_t  self, val_t  param0);
-#define LOCATE_parser_prod___AInternMethPropdef___n_kwmeth__eq "parser_prod::AInternMethPropdef::(parser_nodes::AInternMethPropdef::n_kwmeth=)"
 typedef void (* parser_prod___AInternMethPropdef___n_methid__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AInternMethPropdef___n_methid__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AInternMethPropdef___n_methid__eq "parser_prod::AInternMethPropdef::(parser_nodes::AMethPropdef::n_methid=)"
 typedef void (* parser_prod___AInternMethPropdef___n_signature__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AInternMethPropdef___n_signature__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AInternMethPropdef___n_signature__eq "parser_prod::AInternMethPropdef::(parser_nodes::AMethPropdef::n_signature=)"
-typedef void (* parser_prod___AInternMethPropdef___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AInternMethPropdef___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AInternMethPropdef___empty_init();
-#define LOCATE_parser_prod___AInternMethPropdef___empty_init "parser_prod::AInternMethPropdef::empty_init"
-typedef void (* parser_prod___AInternMethPropdef___init_ainternmethpropdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, int* init_table);
-void parser_prod___AInternMethPropdef___init_ainternmethpropdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, int* init_table);
-val_t NEW_parser_prod___AInternMethPropdef___init_ainternmethpropdef(val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5);
-#define LOCATE_parser_prod___AInternMethPropdef___init_ainternmethpropdef "parser_prod::AInternMethPropdef::init_ainternmethpropdef"
+typedef void (* parser_prod___AInternMethPropdef___n_kwmeth__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AInternMethPropdef___n_kwmeth__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AInternMethPropdef___n_kwmeth__eq "parser_prod::AInternMethPropdef::(parser_nodes::AInternMethPropdef::n_kwmeth=)"
 typedef void (* parser_prod___AInternMethPropdef___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AInternMethPropdef___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AInternMethPropdef___replace_child "parser_prod::AInternMethPropdef::(parser_prod::PNode::replace_child)"
@@ -861,6 +883,17 @@ void parser_prod___AInternMethPropdef___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AInternMethPropdef___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AInternMethPropdef___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AInternMethPropdef___visit_all_reverse "parser_prod::AInternMethPropdef::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_AInternMethPropdef_parser_prod___AMethPropdef___empty_init();
+val_t NEW_AInternMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+typedef void (* parser_prod___AInternMethPropdef___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AInternMethPropdef___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AInternMethPropdef___empty_init "parser_prod::AInternMethPropdef::empty_init"
+val_t NEW_AInternMethPropdef_parser_prod___AInternMethPropdef___empty_init();
+typedef void (* parser_prod___AInternMethPropdef___init_ainternmethpropdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, int* init_table);
+void parser_prod___AInternMethPropdef___init_ainternmethpropdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, int* init_table);
+#define LOCATE_parser_prod___AInternMethPropdef___init_ainternmethpropdef "parser_prod::AInternMethPropdef::init_ainternmethpropdef"
+val_t NEW_AInternMethPropdef_parser_prod___AInternMethPropdef___init_ainternmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
+val_t NEW_AExternMethPropdef_parser_nodes___PNode___init();
 typedef void (* parser_prod___AExternMethPropdef___n_doc__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AExternMethPropdef___n_doc__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AExternMethPropdef___n_doc__eq "parser_prod::AExternMethPropdef::(parser_nodes::PPropdef::n_doc=)"
@@ -870,26 +903,18 @@ void parser_prod___AExternMethPropdef___n_kwredef__eq(val_t  self, val_t  param0
 typedef void (* parser_prod___AExternMethPropdef___n_visibility__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AExternMethPropdef___n_visibility__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AExternMethPropdef___n_visibility__eq "parser_prod::AExternMethPropdef::(parser_nodes::AMethPropdef::n_visibility=)"
-typedef void (* parser_prod___AExternMethPropdef___n_kwmeth__eq_t)(val_t  self, val_t  param0);
-void parser_prod___AExternMethPropdef___n_kwmeth__eq(val_t  self, val_t  param0);
-#define LOCATE_parser_prod___AExternMethPropdef___n_kwmeth__eq "parser_prod::AExternMethPropdef::(parser_nodes::AExternMethPropdef::n_kwmeth=)"
 typedef void (* parser_prod___AExternMethPropdef___n_methid__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AExternMethPropdef___n_methid__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AExternMethPropdef___n_methid__eq "parser_prod::AExternMethPropdef::(parser_nodes::AMethPropdef::n_methid=)"
 typedef void (* parser_prod___AExternMethPropdef___n_signature__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AExternMethPropdef___n_signature__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AExternMethPropdef___n_signature__eq "parser_prod::AExternMethPropdef::(parser_nodes::AMethPropdef::n_signature=)"
+typedef void (* parser_prod___AExternMethPropdef___n_kwmeth__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AExternMethPropdef___n_kwmeth__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AExternMethPropdef___n_kwmeth__eq "parser_prod::AExternMethPropdef::(parser_nodes::AExternMethPropdef::n_kwmeth=)"
 typedef void (* parser_prod___AExternMethPropdef___n_extern__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AExternMethPropdef___n_extern__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AExternMethPropdef___n_extern__eq "parser_prod::AExternMethPropdef::(parser_nodes::AExternMethPropdef::n_extern=)"
-typedef void (* parser_prod___AExternMethPropdef___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AExternMethPropdef___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AExternMethPropdef___empty_init();
-#define LOCATE_parser_prod___AExternMethPropdef___empty_init "parser_prod::AExternMethPropdef::empty_init"
-typedef void (* parser_prod___AExternMethPropdef___init_aexternmethpropdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, int* init_table);
-void parser_prod___AExternMethPropdef___init_aexternmethpropdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, int* init_table);
-val_t NEW_parser_prod___AExternMethPropdef___init_aexternmethpropdef(val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6);
-#define LOCATE_parser_prod___AExternMethPropdef___init_aexternmethpropdef "parser_prod::AExternMethPropdef::init_aexternmethpropdef"
 typedef void (* parser_prod___AExternMethPropdef___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AExternMethPropdef___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AExternMethPropdef___replace_child "parser_prod::AExternMethPropdef::(parser_prod::PNode::replace_child)"
@@ -899,6 +924,17 @@ void parser_prod___AExternMethPropdef___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AExternMethPropdef___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AExternMethPropdef___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AExternMethPropdef___visit_all_reverse "parser_prod::AExternMethPropdef::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_AExternMethPropdef_parser_prod___AMethPropdef___empty_init();
+val_t NEW_AExternMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+typedef void (* parser_prod___AExternMethPropdef___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AExternMethPropdef___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AExternMethPropdef___empty_init "parser_prod::AExternMethPropdef::empty_init"
+val_t NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___empty_init();
+typedef void (* parser_prod___AExternMethPropdef___init_aexternmethpropdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, int* init_table);
+void parser_prod___AExternMethPropdef___init_aexternmethpropdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, int* init_table);
+#define LOCATE_parser_prod___AExternMethPropdef___init_aexternmethpropdef "parser_prod::AExternMethPropdef::init_aexternmethpropdef"
+val_t NEW_AExternMethPropdef_parser_prod___AExternMethPropdef___init_aexternmethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
+val_t NEW_AConcreteMethPropdef_parser_nodes___PNode___init();
 typedef void (* parser_prod___AConcreteMethPropdef___n_doc__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AConcreteMethPropdef___n_doc__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AConcreteMethPropdef___n_doc__eq "parser_prod::AConcreteMethPropdef::(parser_nodes::PPropdef::n_doc=)"
@@ -908,26 +944,18 @@ void parser_prod___AConcreteMethPropdef___n_kwredef__eq(val_t  self, val_t  para
 typedef void (* parser_prod___AConcreteMethPropdef___n_visibility__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AConcreteMethPropdef___n_visibility__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AConcreteMethPropdef___n_visibility__eq "parser_prod::AConcreteMethPropdef::(parser_nodes::AMethPropdef::n_visibility=)"
-typedef void (* parser_prod___AConcreteMethPropdef___n_kwmeth__eq_t)(val_t  self, val_t  param0);
-void parser_prod___AConcreteMethPropdef___n_kwmeth__eq(val_t  self, val_t  param0);
-#define LOCATE_parser_prod___AConcreteMethPropdef___n_kwmeth__eq "parser_prod::AConcreteMethPropdef::(parser_nodes::AConcreteMethPropdef::n_kwmeth=)"
 typedef void (* parser_prod___AConcreteMethPropdef___n_methid__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AConcreteMethPropdef___n_methid__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AConcreteMethPropdef___n_methid__eq "parser_prod::AConcreteMethPropdef::(parser_nodes::AMethPropdef::n_methid=)"
 typedef void (* parser_prod___AConcreteMethPropdef___n_signature__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AConcreteMethPropdef___n_signature__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AConcreteMethPropdef___n_signature__eq "parser_prod::AConcreteMethPropdef::(parser_nodes::AMethPropdef::n_signature=)"
+typedef void (* parser_prod___AConcreteMethPropdef___n_kwmeth__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AConcreteMethPropdef___n_kwmeth__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AConcreteMethPropdef___n_kwmeth__eq "parser_prod::AConcreteMethPropdef::(parser_nodes::AConcreteMethPropdef::n_kwmeth=)"
 typedef void (* parser_prod___AConcreteMethPropdef___n_block__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AConcreteMethPropdef___n_block__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AConcreteMethPropdef___n_block__eq "parser_prod::AConcreteMethPropdef::(parser_nodes::AConcreteMethPropdef::n_block=)"
-typedef void (* parser_prod___AConcreteMethPropdef___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AConcreteMethPropdef___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AConcreteMethPropdef___empty_init();
-#define LOCATE_parser_prod___AConcreteMethPropdef___empty_init "parser_prod::AConcreteMethPropdef::empty_init"
-typedef void (* parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, int* init_table);
-void parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, int* init_table);
-val_t NEW_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6);
-#define LOCATE_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef "parser_prod::AConcreteMethPropdef::init_aconcretemethpropdef"
 typedef void (* parser_prod___AConcreteMethPropdef___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AConcreteMethPropdef___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AConcreteMethPropdef___replace_child "parser_prod::AConcreteMethPropdef::(parser_prod::PNode::replace_child)"
@@ -937,6 +965,17 @@ void parser_prod___AConcreteMethPropdef___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AConcreteMethPropdef___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AConcreteMethPropdef___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AConcreteMethPropdef___visit_all_reverse "parser_prod::AConcreteMethPropdef::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_AConcreteMethPropdef_parser_prod___AMethPropdef___empty_init();
+val_t NEW_AConcreteMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+typedef void (* parser_prod___AConcreteMethPropdef___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AConcreteMethPropdef___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AConcreteMethPropdef___empty_init "parser_prod::AConcreteMethPropdef::empty_init"
+val_t NEW_AConcreteMethPropdef_parser_prod___AConcreteMethPropdef___empty_init();
+typedef void (* parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, int* init_table);
+void parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, int* init_table);
+#define LOCATE_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef "parser_prod::AConcreteMethPropdef::init_aconcretemethpropdef"
+val_t NEW_AConcreteMethPropdef_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
+val_t NEW_AConcreteInitPropdef_parser_nodes___PNode___init();
 typedef void (* parser_prod___AConcreteInitPropdef___n_doc__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AConcreteInitPropdef___n_doc__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AConcreteInitPropdef___n_doc__eq "parser_prod::AConcreteInitPropdef::(parser_nodes::PPropdef::n_doc=)"
@@ -946,9 +985,6 @@ void parser_prod___AConcreteInitPropdef___n_kwredef__eq(val_t  self, val_t  para
 typedef void (* parser_prod___AConcreteInitPropdef___n_visibility__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AConcreteInitPropdef___n_visibility__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AConcreteInitPropdef___n_visibility__eq "parser_prod::AConcreteInitPropdef::(parser_nodes::AMethPropdef::n_visibility=)"
-typedef void (* parser_prod___AConcreteInitPropdef___n_kwinit__eq_t)(val_t  self, val_t  param0);
-void parser_prod___AConcreteInitPropdef___n_kwinit__eq(val_t  self, val_t  param0);
-#define LOCATE_parser_prod___AConcreteInitPropdef___n_kwinit__eq "parser_prod::AConcreteInitPropdef::(parser_nodes::AConcreteInitPropdef::n_kwinit=)"
 typedef void (* parser_prod___AConcreteInitPropdef___n_methid__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AConcreteInitPropdef___n_methid__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AConcreteInitPropdef___n_methid__eq "parser_prod::AConcreteInitPropdef::(parser_nodes::AMethPropdef::n_methid=)"
@@ -958,14 +994,9 @@ void parser_prod___AConcreteInitPropdef___n_signature__eq(val_t  self, val_t  pa
 typedef void (* parser_prod___AConcreteInitPropdef___n_block__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AConcreteInitPropdef___n_block__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AConcreteInitPropdef___n_block__eq "parser_prod::AConcreteInitPropdef::(parser_nodes::AConcreteMethPropdef::n_block=)"
-typedef void (* parser_prod___AConcreteInitPropdef___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AConcreteInitPropdef___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AConcreteInitPropdef___empty_init();
-#define LOCATE_parser_prod___AConcreteInitPropdef___empty_init "parser_prod::AConcreteInitPropdef::empty_init"
-typedef void (* parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, int* init_table);
-void parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, int* init_table);
-val_t NEW_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef(val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6);
-#define LOCATE_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef "parser_prod::AConcreteInitPropdef::init_aconcreteinitpropdef"
+typedef void (* parser_prod___AConcreteInitPropdef___n_kwinit__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AConcreteInitPropdef___n_kwinit__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AConcreteInitPropdef___n_kwinit__eq "parser_prod::AConcreteInitPropdef::(parser_nodes::AConcreteInitPropdef::n_kwinit=)"
 typedef void (* parser_prod___AConcreteInitPropdef___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AConcreteInitPropdef___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AConcreteInitPropdef___replace_child "parser_prod::AConcreteInitPropdef::(parser_prod::PNode::replace_child)"
@@ -975,20 +1006,25 @@ void parser_prod___AConcreteInitPropdef___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AConcreteInitPropdef___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AConcreteInitPropdef___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AConcreteInitPropdef___visit_all_reverse "parser_prod::AConcreteInitPropdef::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_AConcreteInitPropdef_parser_prod___AMethPropdef___empty_init();
+val_t NEW_AConcreteInitPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteMethPropdef___empty_init();
+val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
+typedef void (* parser_prod___AConcreteInitPropdef___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AConcreteInitPropdef___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AConcreteInitPropdef___empty_init "parser_prod::AConcreteInitPropdef::empty_init"
+val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___empty_init();
+typedef void (* parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, int* init_table);
+void parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, int* init_table);
+#define LOCATE_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef "parser_prod::AConcreteInitPropdef::init_aconcreteinitpropdef"
+val_t NEW_AConcreteInitPropdef_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
+val_t NEW_AMainMethPropdef_parser_nodes___PNode___init();
 typedef void (* parser_prod___AMainMethPropdef___n_kwredef__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AMainMethPropdef___n_kwredef__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AMainMethPropdef___n_kwredef__eq "parser_prod::AMainMethPropdef::(parser_nodes::AMethPropdef::n_kwredef=)"
 typedef void (* parser_prod___AMainMethPropdef___n_block__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AMainMethPropdef___n_block__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AMainMethPropdef___n_block__eq "parser_prod::AMainMethPropdef::(parser_nodes::AConcreteMethPropdef::n_block=)"
-typedef void (* parser_prod___AMainMethPropdef___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AMainMethPropdef___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AMainMethPropdef___empty_init();
-#define LOCATE_parser_prod___AMainMethPropdef___empty_init "parser_prod::AMainMethPropdef::empty_init"
-typedef void (* parser_prod___AMainMethPropdef___init_amainmethpropdef_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AMainMethPropdef___init_amainmethpropdef(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AMainMethPropdef___init_amainmethpropdef(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AMainMethPropdef___init_amainmethpropdef "parser_prod::AMainMethPropdef::init_amainmethpropdef"
 typedef void (* parser_prod___AMainMethPropdef___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AMainMethPropdef___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AMainMethPropdef___replace_child "parser_prod::AMainMethPropdef::(parser_prod::PNode::replace_child)"
@@ -998,6 +1034,19 @@ void parser_prod___AMainMethPropdef___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AMainMethPropdef___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AMainMethPropdef___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AMainMethPropdef___visit_all_reverse "parser_prod::AMainMethPropdef::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_AMainMethPropdef_parser_prod___AMethPropdef___empty_init();
+val_t NEW_AMainMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+val_t NEW_AMainMethPropdef_parser_prod___AConcreteMethPropdef___empty_init();
+val_t NEW_AMainMethPropdef_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
+typedef void (* parser_prod___AMainMethPropdef___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AMainMethPropdef___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AMainMethPropdef___empty_init "parser_prod::AMainMethPropdef::empty_init"
+val_t NEW_AMainMethPropdef_parser_prod___AMainMethPropdef___empty_init();
+typedef void (* parser_prod___AMainMethPropdef___init_amainmethpropdef_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AMainMethPropdef___init_amainmethpropdef(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AMainMethPropdef___init_amainmethpropdef "parser_prod::AMainMethPropdef::init_amainmethpropdef"
+val_t NEW_AMainMethPropdef_parser_prod___AMainMethPropdef___init_amainmethpropdef(val_t p0, val_t p1);
+val_t NEW_ATypePropdef_parser_nodes___PNode___init();
 typedef void (* parser_prod___ATypePropdef___n_doc__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ATypePropdef___n_doc__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ATypePropdef___n_doc__eq "parser_prod::ATypePropdef::(parser_nodes::PPropdef::n_doc=)"
@@ -1016,14 +1065,6 @@ void parser_prod___ATypePropdef___n_id__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___ATypePropdef___n_type__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ATypePropdef___n_type__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ATypePropdef___n_type__eq "parser_prod::ATypePropdef::(parser_nodes::ATypePropdef::n_type=)"
-typedef void (* parser_prod___ATypePropdef___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ATypePropdef___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ATypePropdef___empty_init();
-#define LOCATE_parser_prod___ATypePropdef___empty_init "parser_prod::ATypePropdef::empty_init"
-typedef void (* parser_prod___ATypePropdef___init_atypepropdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, int* init_table);
-void parser_prod___ATypePropdef___init_atypepropdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, int* init_table);
-val_t NEW_parser_prod___ATypePropdef___init_atypepropdef(val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5);
-#define LOCATE_parser_prod___ATypePropdef___init_atypepropdef "parser_prod::ATypePropdef::init_atypepropdef"
 typedef void (* parser_prod___ATypePropdef___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ATypePropdef___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ATypePropdef___replace_child "parser_prod::ATypePropdef::(parser_prod::PNode::replace_child)"
@@ -1033,20 +1074,21 @@ void parser_prod___ATypePropdef___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ATypePropdef___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ATypePropdef___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ATypePropdef___visit_all_reverse "parser_prod::ATypePropdef::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ATypePropdef___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ATypePropdef___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ATypePropdef___empty_init "parser_prod::ATypePropdef::empty_init"
+val_t NEW_ATypePropdef_parser_prod___ATypePropdef___empty_init();
+typedef void (* parser_prod___ATypePropdef___init_atypepropdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, int* init_table);
+void parser_prod___ATypePropdef___init_atypepropdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, int* init_table);
+#define LOCATE_parser_prod___ATypePropdef___init_atypepropdef "parser_prod::ATypePropdef::init_atypepropdef"
+val_t NEW_ATypePropdef_parser_prod___ATypePropdef___init_atypepropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
+val_t NEW_AReadAble_parser_nodes___PNode___init();
 typedef void (* parser_prod___AReadAble___n_kwredef__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AReadAble___n_kwredef__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AReadAble___n_kwredef__eq "parser_prod::AReadAble::(parser_nodes::PAble::n_kwredef=)"
 typedef void (* parser_prod___AReadAble___n_kwreadable__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AReadAble___n_kwreadable__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AReadAble___n_kwreadable__eq "parser_prod::AReadAble::(parser_nodes::AReadAble::n_kwreadable=)"
-typedef void (* parser_prod___AReadAble___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AReadAble___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AReadAble___empty_init();
-#define LOCATE_parser_prod___AReadAble___empty_init "parser_prod::AReadAble::empty_init"
-typedef void (* parser_prod___AReadAble___init_areadable_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AReadAble___init_areadable(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AReadAble___init_areadable(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AReadAble___init_areadable "parser_prod::AReadAble::init_areadable"
 typedef void (* parser_prod___AReadAble___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AReadAble___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AReadAble___replace_child "parser_prod::AReadAble::(parser_prod::PNode::replace_child)"
@@ -1056,20 +1098,21 @@ void parser_prod___AReadAble___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AReadAble___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AReadAble___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AReadAble___visit_all_reverse "parser_prod::AReadAble::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AReadAble___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AReadAble___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AReadAble___empty_init "parser_prod::AReadAble::empty_init"
+val_t NEW_AReadAble_parser_prod___AReadAble___empty_init();
+typedef void (* parser_prod___AReadAble___init_areadable_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AReadAble___init_areadable(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AReadAble___init_areadable "parser_prod::AReadAble::init_areadable"
+val_t NEW_AReadAble_parser_prod___AReadAble___init_areadable(val_t p0, val_t p1);
+val_t NEW_AWriteAble_parser_nodes___PNode___init();
 typedef void (* parser_prod___AWriteAble___n_kwredef__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AWriteAble___n_kwredef__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AWriteAble___n_kwredef__eq "parser_prod::AWriteAble::(parser_nodes::PAble::n_kwredef=)"
 typedef void (* parser_prod___AWriteAble___n_kwwritable__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AWriteAble___n_kwwritable__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AWriteAble___n_kwwritable__eq "parser_prod::AWriteAble::(parser_nodes::AWriteAble::n_kwwritable=)"
-typedef void (* parser_prod___AWriteAble___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AWriteAble___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AWriteAble___empty_init();
-#define LOCATE_parser_prod___AWriteAble___empty_init "parser_prod::AWriteAble::empty_init"
-typedef void (* parser_prod___AWriteAble___init_awriteable_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AWriteAble___init_awriteable(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AWriteAble___init_awriteable(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AWriteAble___init_awriteable "parser_prod::AWriteAble::init_awriteable"
 typedef void (* parser_prod___AWriteAble___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AWriteAble___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AWriteAble___replace_child "parser_prod::AWriteAble::(parser_prod::PNode::replace_child)"
@@ -1079,17 +1122,18 @@ void parser_prod___AWriteAble___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AWriteAble___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AWriteAble___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AWriteAble___visit_all_reverse "parser_prod::AWriteAble::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AWriteAble___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AWriteAble___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AWriteAble___empty_init "parser_prod::AWriteAble::empty_init"
+val_t NEW_AWriteAble_parser_prod___AWriteAble___empty_init();
+typedef void (* parser_prod___AWriteAble___init_awriteable_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AWriteAble___init_awriteable(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AWriteAble___init_awriteable "parser_prod::AWriteAble::init_awriteable"
+val_t NEW_AWriteAble_parser_prod___AWriteAble___init_awriteable(val_t p0, val_t p1);
+val_t NEW_AIdMethid_parser_nodes___PNode___init();
 typedef void (* parser_prod___AIdMethid___n_id__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AIdMethid___n_id__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AIdMethid___n_id__eq "parser_prod::AIdMethid::(parser_nodes::AIdMethid::n_id=)"
-typedef void (* parser_prod___AIdMethid___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AIdMethid___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AIdMethid___empty_init();
-#define LOCATE_parser_prod___AIdMethid___empty_init "parser_prod::AIdMethid::empty_init"
-typedef void (* parser_prod___AIdMethid___init_aidmethid_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AIdMethid___init_aidmethid(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AIdMethid___init_aidmethid(val_t  param0);
-#define LOCATE_parser_prod___AIdMethid___init_aidmethid "parser_prod::AIdMethid::init_aidmethid"
 typedef void (* parser_prod___AIdMethid___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AIdMethid___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AIdMethid___replace_child "parser_prod::AIdMethid::(parser_prod::PNode::replace_child)"
@@ -1099,17 +1143,18 @@ void parser_prod___AIdMethid___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AIdMethid___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AIdMethid___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AIdMethid___visit_all_reverse "parser_prod::AIdMethid::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AIdMethid___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AIdMethid___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AIdMethid___empty_init "parser_prod::AIdMethid::empty_init"
+val_t NEW_AIdMethid_parser_prod___AIdMethid___empty_init();
+typedef void (* parser_prod___AIdMethid___init_aidmethid_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AIdMethid___init_aidmethid(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AIdMethid___init_aidmethid "parser_prod::AIdMethid::init_aidmethid"
+val_t NEW_AIdMethid_parser_prod___AIdMethid___init_aidmethid(val_t p0);
+val_t NEW_APlusMethid_parser_nodes___PNode___init();
 typedef void (* parser_prod___APlusMethid___n_plus__eq_t)(val_t  self, val_t  param0);
 void parser_prod___APlusMethid___n_plus__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___APlusMethid___n_plus__eq "parser_prod::APlusMethid::(parser_nodes::APlusMethid::n_plus=)"
-typedef void (* parser_prod___APlusMethid___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___APlusMethid___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___APlusMethid___empty_init();
-#define LOCATE_parser_prod___APlusMethid___empty_init "parser_prod::APlusMethid::empty_init"
-typedef void (* parser_prod___APlusMethid___init_aplusmethid_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___APlusMethid___init_aplusmethid(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___APlusMethid___init_aplusmethid(val_t  param0);
-#define LOCATE_parser_prod___APlusMethid___init_aplusmethid "parser_prod::APlusMethid::init_aplusmethid"
 typedef void (* parser_prod___APlusMethid___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___APlusMethid___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___APlusMethid___replace_child "parser_prod::APlusMethid::(parser_prod::PNode::replace_child)"
@@ -1119,17 +1164,18 @@ void parser_prod___APlusMethid___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___APlusMethid___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___APlusMethid___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___APlusMethid___visit_all_reverse "parser_prod::APlusMethid::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___APlusMethid___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___APlusMethid___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___APlusMethid___empty_init "parser_prod::APlusMethid::empty_init"
+val_t NEW_APlusMethid_parser_prod___APlusMethid___empty_init();
+typedef void (* parser_prod___APlusMethid___init_aplusmethid_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___APlusMethid___init_aplusmethid(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___APlusMethid___init_aplusmethid "parser_prod::APlusMethid::init_aplusmethid"
+val_t NEW_APlusMethid_parser_prod___APlusMethid___init_aplusmethid(val_t p0);
+val_t NEW_AMinusMethid_parser_nodes___PNode___init();
 typedef void (* parser_prod___AMinusMethid___n_minus__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AMinusMethid___n_minus__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AMinusMethid___n_minus__eq "parser_prod::AMinusMethid::(parser_nodes::AMinusMethid::n_minus=)"
-typedef void (* parser_prod___AMinusMethid___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AMinusMethid___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AMinusMethid___empty_init();
-#define LOCATE_parser_prod___AMinusMethid___empty_init "parser_prod::AMinusMethid::empty_init"
-typedef void (* parser_prod___AMinusMethid___init_aminusmethid_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AMinusMethid___init_aminusmethid(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AMinusMethid___init_aminusmethid(val_t  param0);
-#define LOCATE_parser_prod___AMinusMethid___init_aminusmethid "parser_prod::AMinusMethid::init_aminusmethid"
 typedef void (* parser_prod___AMinusMethid___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AMinusMethid___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AMinusMethid___replace_child "parser_prod::AMinusMethid::(parser_prod::PNode::replace_child)"
@@ -1139,17 +1185,18 @@ void parser_prod___AMinusMethid___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AMinusMethid___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AMinusMethid___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AMinusMethid___visit_all_reverse "parser_prod::AMinusMethid::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AMinusMethid___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AMinusMethid___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AMinusMethid___empty_init "parser_prod::AMinusMethid::empty_init"
+val_t NEW_AMinusMethid_parser_prod___AMinusMethid___empty_init();
+typedef void (* parser_prod___AMinusMethid___init_aminusmethid_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AMinusMethid___init_aminusmethid(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AMinusMethid___init_aminusmethid "parser_prod::AMinusMethid::init_aminusmethid"
+val_t NEW_AMinusMethid_parser_prod___AMinusMethid___init_aminusmethid(val_t p0);
+val_t NEW_AStarMethid_parser_nodes___PNode___init();
 typedef void (* parser_prod___AStarMethid___n_star__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AStarMethid___n_star__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AStarMethid___n_star__eq "parser_prod::AStarMethid::(parser_nodes::AStarMethid::n_star=)"
-typedef void (* parser_prod___AStarMethid___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AStarMethid___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AStarMethid___empty_init();
-#define LOCATE_parser_prod___AStarMethid___empty_init "parser_prod::AStarMethid::empty_init"
-typedef void (* parser_prod___AStarMethid___init_astarmethid_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AStarMethid___init_astarmethid(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AStarMethid___init_astarmethid(val_t  param0);
-#define LOCATE_parser_prod___AStarMethid___init_astarmethid "parser_prod::AStarMethid::init_astarmethid"
 typedef void (* parser_prod___AStarMethid___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AStarMethid___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AStarMethid___replace_child "parser_prod::AStarMethid::(parser_prod::PNode::replace_child)"
@@ -1159,17 +1206,18 @@ void parser_prod___AStarMethid___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AStarMethid___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AStarMethid___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AStarMethid___visit_all_reverse "parser_prod::AStarMethid::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AStarMethid___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AStarMethid___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AStarMethid___empty_init "parser_prod::AStarMethid::empty_init"
+val_t NEW_AStarMethid_parser_prod___AStarMethid___empty_init();
+typedef void (* parser_prod___AStarMethid___init_astarmethid_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AStarMethid___init_astarmethid(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AStarMethid___init_astarmethid "parser_prod::AStarMethid::init_astarmethid"
+val_t NEW_AStarMethid_parser_prod___AStarMethid___init_astarmethid(val_t p0);
+val_t NEW_ASlashMethid_parser_nodes___PNode___init();
 typedef void (* parser_prod___ASlashMethid___n_slash__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ASlashMethid___n_slash__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ASlashMethid___n_slash__eq "parser_prod::ASlashMethid::(parser_nodes::ASlashMethid::n_slash=)"
-typedef void (* parser_prod___ASlashMethid___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ASlashMethid___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ASlashMethid___empty_init();
-#define LOCATE_parser_prod___ASlashMethid___empty_init "parser_prod::ASlashMethid::empty_init"
-typedef void (* parser_prod___ASlashMethid___init_aslashmethid_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___ASlashMethid___init_aslashmethid(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___ASlashMethid___init_aslashmethid(val_t  param0);
-#define LOCATE_parser_prod___ASlashMethid___init_aslashmethid "parser_prod::ASlashMethid::init_aslashmethid"
 typedef void (* parser_prod___ASlashMethid___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ASlashMethid___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ASlashMethid___replace_child "parser_prod::ASlashMethid::(parser_prod::PNode::replace_child)"
@@ -1179,17 +1227,18 @@ void parser_prod___ASlashMethid___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ASlashMethid___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ASlashMethid___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ASlashMethid___visit_all_reverse "parser_prod::ASlashMethid::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ASlashMethid___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ASlashMethid___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ASlashMethid___empty_init "parser_prod::ASlashMethid::empty_init"
+val_t NEW_ASlashMethid_parser_prod___ASlashMethid___empty_init();
+typedef void (* parser_prod___ASlashMethid___init_aslashmethid_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___ASlashMethid___init_aslashmethid(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___ASlashMethid___init_aslashmethid "parser_prod::ASlashMethid::init_aslashmethid"
+val_t NEW_ASlashMethid_parser_prod___ASlashMethid___init_aslashmethid(val_t p0);
+val_t NEW_APercentMethid_parser_nodes___PNode___init();
 typedef void (* parser_prod___APercentMethid___n_percent__eq_t)(val_t  self, val_t  param0);
 void parser_prod___APercentMethid___n_percent__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___APercentMethid___n_percent__eq "parser_prod::APercentMethid::(parser_nodes::APercentMethid::n_percent=)"
-typedef void (* parser_prod___APercentMethid___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___APercentMethid___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___APercentMethid___empty_init();
-#define LOCATE_parser_prod___APercentMethid___empty_init "parser_prod::APercentMethid::empty_init"
-typedef void (* parser_prod___APercentMethid___init_apercentmethid_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___APercentMethid___init_apercentmethid(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___APercentMethid___init_apercentmethid(val_t  param0);
-#define LOCATE_parser_prod___APercentMethid___init_apercentmethid "parser_prod::APercentMethid::init_apercentmethid"
 typedef void (* parser_prod___APercentMethid___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___APercentMethid___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___APercentMethid___replace_child "parser_prod::APercentMethid::(parser_prod::PNode::replace_child)"
@@ -1199,17 +1248,18 @@ void parser_prod___APercentMethid___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___APercentMethid___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___APercentMethid___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___APercentMethid___visit_all_reverse "parser_prod::APercentMethid::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___APercentMethid___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___APercentMethid___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___APercentMethid___empty_init "parser_prod::APercentMethid::empty_init"
+val_t NEW_APercentMethid_parser_prod___APercentMethid___empty_init();
+typedef void (* parser_prod___APercentMethid___init_apercentmethid_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___APercentMethid___init_apercentmethid(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___APercentMethid___init_apercentmethid "parser_prod::APercentMethid::init_apercentmethid"
+val_t NEW_APercentMethid_parser_prod___APercentMethid___init_apercentmethid(val_t p0);
+val_t NEW_AEqMethid_parser_nodes___PNode___init();
 typedef void (* parser_prod___AEqMethid___n_eq__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AEqMethid___n_eq__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AEqMethid___n_eq__eq "parser_prod::AEqMethid::(parser_nodes::AEqMethid::n_eq=)"
-typedef void (* parser_prod___AEqMethid___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AEqMethid___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AEqMethid___empty_init();
-#define LOCATE_parser_prod___AEqMethid___empty_init "parser_prod::AEqMethid::empty_init"
-typedef void (* parser_prod___AEqMethid___init_aeqmethid_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AEqMethid___init_aeqmethid(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AEqMethid___init_aeqmethid(val_t  param0);
-#define LOCATE_parser_prod___AEqMethid___init_aeqmethid "parser_prod::AEqMethid::init_aeqmethid"
 typedef void (* parser_prod___AEqMethid___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AEqMethid___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AEqMethid___replace_child "parser_prod::AEqMethid::(parser_prod::PNode::replace_child)"
@@ -1219,17 +1269,18 @@ void parser_prod___AEqMethid___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AEqMethid___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AEqMethid___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AEqMethid___visit_all_reverse "parser_prod::AEqMethid::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AEqMethid___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AEqMethid___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AEqMethid___empty_init "parser_prod::AEqMethid::empty_init"
+val_t NEW_AEqMethid_parser_prod___AEqMethid___empty_init();
+typedef void (* parser_prod___AEqMethid___init_aeqmethid_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AEqMethid___init_aeqmethid(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AEqMethid___init_aeqmethid "parser_prod::AEqMethid::init_aeqmethid"
+val_t NEW_AEqMethid_parser_prod___AEqMethid___init_aeqmethid(val_t p0);
+val_t NEW_ANeMethid_parser_nodes___PNode___init();
 typedef void (* parser_prod___ANeMethid___n_ne__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ANeMethid___n_ne__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ANeMethid___n_ne__eq "parser_prod::ANeMethid::(parser_nodes::ANeMethid::n_ne=)"
-typedef void (* parser_prod___ANeMethid___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ANeMethid___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ANeMethid___empty_init();
-#define LOCATE_parser_prod___ANeMethid___empty_init "parser_prod::ANeMethid::empty_init"
-typedef void (* parser_prod___ANeMethid___init_anemethid_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___ANeMethid___init_anemethid(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___ANeMethid___init_anemethid(val_t  param0);
-#define LOCATE_parser_prod___ANeMethid___init_anemethid "parser_prod::ANeMethid::init_anemethid"
 typedef void (* parser_prod___ANeMethid___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ANeMethid___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ANeMethid___replace_child "parser_prod::ANeMethid::(parser_prod::PNode::replace_child)"
@@ -1239,17 +1290,18 @@ void parser_prod___ANeMethid___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ANeMethid___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ANeMethid___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ANeMethid___visit_all_reverse "parser_prod::ANeMethid::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ANeMethid___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ANeMethid___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ANeMethid___empty_init "parser_prod::ANeMethid::empty_init"
+val_t NEW_ANeMethid_parser_prod___ANeMethid___empty_init();
+typedef void (* parser_prod___ANeMethid___init_anemethid_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___ANeMethid___init_anemethid(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___ANeMethid___init_anemethid "parser_prod::ANeMethid::init_anemethid"
+val_t NEW_ANeMethid_parser_prod___ANeMethid___init_anemethid(val_t p0);
+val_t NEW_ALeMethid_parser_nodes___PNode___init();
 typedef void (* parser_prod___ALeMethid___n_le__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ALeMethid___n_le__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ALeMethid___n_le__eq "parser_prod::ALeMethid::(parser_nodes::ALeMethid::n_le=)"
-typedef void (* parser_prod___ALeMethid___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ALeMethid___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ALeMethid___empty_init();
-#define LOCATE_parser_prod___ALeMethid___empty_init "parser_prod::ALeMethid::empty_init"
-typedef void (* parser_prod___ALeMethid___init_alemethid_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___ALeMethid___init_alemethid(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___ALeMethid___init_alemethid(val_t  param0);
-#define LOCATE_parser_prod___ALeMethid___init_alemethid "parser_prod::ALeMethid::init_alemethid"
 typedef void (* parser_prod___ALeMethid___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ALeMethid___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ALeMethid___replace_child "parser_prod::ALeMethid::(parser_prod::PNode::replace_child)"
@@ -1259,17 +1311,18 @@ void parser_prod___ALeMethid___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ALeMethid___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ALeMethid___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ALeMethid___visit_all_reverse "parser_prod::ALeMethid::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ALeMethid___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ALeMethid___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ALeMethid___empty_init "parser_prod::ALeMethid::empty_init"
+val_t NEW_ALeMethid_parser_prod___ALeMethid___empty_init();
+typedef void (* parser_prod___ALeMethid___init_alemethid_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___ALeMethid___init_alemethid(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___ALeMethid___init_alemethid "parser_prod::ALeMethid::init_alemethid"
+val_t NEW_ALeMethid_parser_prod___ALeMethid___init_alemethid(val_t p0);
+val_t NEW_AGeMethid_parser_nodes___PNode___init();
 typedef void (* parser_prod___AGeMethid___n_ge__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AGeMethid___n_ge__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AGeMethid___n_ge__eq "parser_prod::AGeMethid::(parser_nodes::AGeMethid::n_ge=)"
-typedef void (* parser_prod___AGeMethid___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AGeMethid___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AGeMethid___empty_init();
-#define LOCATE_parser_prod___AGeMethid___empty_init "parser_prod::AGeMethid::empty_init"
-typedef void (* parser_prod___AGeMethid___init_agemethid_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AGeMethid___init_agemethid(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AGeMethid___init_agemethid(val_t  param0);
-#define LOCATE_parser_prod___AGeMethid___init_agemethid "parser_prod::AGeMethid::init_agemethid"
 typedef void (* parser_prod___AGeMethid___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AGeMethid___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AGeMethid___replace_child "parser_prod::AGeMethid::(parser_prod::PNode::replace_child)"
@@ -1279,17 +1332,18 @@ void parser_prod___AGeMethid___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AGeMethid___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AGeMethid___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AGeMethid___visit_all_reverse "parser_prod::AGeMethid::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AGeMethid___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AGeMethid___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AGeMethid___empty_init "parser_prod::AGeMethid::empty_init"
+val_t NEW_AGeMethid_parser_prod___AGeMethid___empty_init();
+typedef void (* parser_prod___AGeMethid___init_agemethid_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AGeMethid___init_agemethid(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AGeMethid___init_agemethid "parser_prod::AGeMethid::init_agemethid"
+val_t NEW_AGeMethid_parser_prod___AGeMethid___init_agemethid(val_t p0);
+val_t NEW_ALtMethid_parser_nodes___PNode___init();
 typedef void (* parser_prod___ALtMethid___n_lt__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ALtMethid___n_lt__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ALtMethid___n_lt__eq "parser_prod::ALtMethid::(parser_nodes::ALtMethid::n_lt=)"
-typedef void (* parser_prod___ALtMethid___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ALtMethid___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ALtMethid___empty_init();
-#define LOCATE_parser_prod___ALtMethid___empty_init "parser_prod::ALtMethid::empty_init"
-typedef void (* parser_prod___ALtMethid___init_altmethid_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___ALtMethid___init_altmethid(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___ALtMethid___init_altmethid(val_t  param0);
-#define LOCATE_parser_prod___ALtMethid___init_altmethid "parser_prod::ALtMethid::init_altmethid"
 typedef void (* parser_prod___ALtMethid___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ALtMethid___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ALtMethid___replace_child "parser_prod::ALtMethid::(parser_prod::PNode::replace_child)"
@@ -1299,17 +1353,18 @@ void parser_prod___ALtMethid___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ALtMethid___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ALtMethid___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ALtMethid___visit_all_reverse "parser_prod::ALtMethid::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ALtMethid___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ALtMethid___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ALtMethid___empty_init "parser_prod::ALtMethid::empty_init"
+val_t NEW_ALtMethid_parser_prod___ALtMethid___empty_init();
+typedef void (* parser_prod___ALtMethid___init_altmethid_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___ALtMethid___init_altmethid(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___ALtMethid___init_altmethid "parser_prod::ALtMethid::init_altmethid"
+val_t NEW_ALtMethid_parser_prod___ALtMethid___init_altmethid(val_t p0);
+val_t NEW_AGtMethid_parser_nodes___PNode___init();
 typedef void (* parser_prod___AGtMethid___n_gt__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AGtMethid___n_gt__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AGtMethid___n_gt__eq "parser_prod::AGtMethid::(parser_nodes::AGtMethid::n_gt=)"
-typedef void (* parser_prod___AGtMethid___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AGtMethid___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AGtMethid___empty_init();
-#define LOCATE_parser_prod___AGtMethid___empty_init "parser_prod::AGtMethid::empty_init"
-typedef void (* parser_prod___AGtMethid___init_agtmethid_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AGtMethid___init_agtmethid(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AGtMethid___init_agtmethid(val_t  param0);
-#define LOCATE_parser_prod___AGtMethid___init_agtmethid "parser_prod::AGtMethid::init_agtmethid"
 typedef void (* parser_prod___AGtMethid___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AGtMethid___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AGtMethid___replace_child "parser_prod::AGtMethid::(parser_prod::PNode::replace_child)"
@@ -1319,20 +1374,21 @@ void parser_prod___AGtMethid___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AGtMethid___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AGtMethid___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AGtMethid___visit_all_reverse "parser_prod::AGtMethid::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AGtMethid___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AGtMethid___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AGtMethid___empty_init "parser_prod::AGtMethid::empty_init"
+val_t NEW_AGtMethid_parser_prod___AGtMethid___empty_init();
+typedef void (* parser_prod___AGtMethid___init_agtmethid_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AGtMethid___init_agtmethid(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AGtMethid___init_agtmethid "parser_prod::AGtMethid::init_agtmethid"
+val_t NEW_AGtMethid_parser_prod___AGtMethid___init_agtmethid(val_t p0);
+val_t NEW_ABraMethid_parser_nodes___PNode___init();
 typedef void (* parser_prod___ABraMethid___n_obra__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ABraMethid___n_obra__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABraMethid___n_obra__eq "parser_prod::ABraMethid::(parser_nodes::ABraMethid::n_obra=)"
 typedef void (* parser_prod___ABraMethid___n_cbra__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ABraMethid___n_cbra__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABraMethid___n_cbra__eq "parser_prod::ABraMethid::(parser_nodes::ABraMethid::n_cbra=)"
-typedef void (* parser_prod___ABraMethid___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ABraMethid___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ABraMethid___empty_init();
-#define LOCATE_parser_prod___ABraMethid___empty_init "parser_prod::ABraMethid::empty_init"
-typedef void (* parser_prod___ABraMethid___init_abramethid_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___ABraMethid___init_abramethid(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___ABraMethid___init_abramethid(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___ABraMethid___init_abramethid "parser_prod::ABraMethid::init_abramethid"
 typedef void (* parser_prod___ABraMethid___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ABraMethid___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ABraMethid___replace_child "parser_prod::ABraMethid::(parser_prod::PNode::replace_child)"
@@ -1342,17 +1398,18 @@ void parser_prod___ABraMethid___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ABraMethid___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ABraMethid___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABraMethid___visit_all_reverse "parser_prod::ABraMethid::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ABraMethid___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ABraMethid___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ABraMethid___empty_init "parser_prod::ABraMethid::empty_init"
+val_t NEW_ABraMethid_parser_prod___ABraMethid___empty_init();
+typedef void (* parser_prod___ABraMethid___init_abramethid_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___ABraMethid___init_abramethid(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___ABraMethid___init_abramethid "parser_prod::ABraMethid::init_abramethid"
+val_t NEW_ABraMethid_parser_prod___ABraMethid___init_abramethid(val_t p0, val_t p1);
+val_t NEW_AStarshipMethid_parser_nodes___PNode___init();
 typedef void (* parser_prod___AStarshipMethid___n_starship__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AStarshipMethid___n_starship__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AStarshipMethid___n_starship__eq "parser_prod::AStarshipMethid::(parser_nodes::AStarshipMethid::n_starship=)"
-typedef void (* parser_prod___AStarshipMethid___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AStarshipMethid___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AStarshipMethid___empty_init();
-#define LOCATE_parser_prod___AStarshipMethid___empty_init "parser_prod::AStarshipMethid::empty_init"
-typedef void (* parser_prod___AStarshipMethid___init_astarshipmethid_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AStarshipMethid___init_astarshipmethid(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AStarshipMethid___init_astarshipmethid(val_t  param0);
-#define LOCATE_parser_prod___AStarshipMethid___init_astarshipmethid "parser_prod::AStarshipMethid::init_astarshipmethid"
 typedef void (* parser_prod___AStarshipMethid___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AStarshipMethid___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AStarshipMethid___replace_child "parser_prod::AStarshipMethid::(parser_prod::PNode::replace_child)"
@@ -1362,20 +1419,21 @@ void parser_prod___AStarshipMethid___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AStarshipMethid___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AStarshipMethid___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AStarshipMethid___visit_all_reverse "parser_prod::AStarshipMethid::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AStarshipMethid___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AStarshipMethid___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AStarshipMethid___empty_init "parser_prod::AStarshipMethid::empty_init"
+val_t NEW_AStarshipMethid_parser_prod___AStarshipMethid___empty_init();
+typedef void (* parser_prod___AStarshipMethid___init_astarshipmethid_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AStarshipMethid___init_astarshipmethid(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AStarshipMethid___init_astarshipmethid "parser_prod::AStarshipMethid::init_astarshipmethid"
+val_t NEW_AStarshipMethid_parser_prod___AStarshipMethid___init_astarshipmethid(val_t p0);
+val_t NEW_AAssignMethid_parser_nodes___PNode___init();
 typedef void (* parser_prod___AAssignMethid___n_id__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAssignMethid___n_id__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAssignMethid___n_id__eq "parser_prod::AAssignMethid::(parser_nodes::AAssignMethid::n_id=)"
 typedef void (* parser_prod___AAssignMethid___n_assign__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAssignMethid___n_assign__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAssignMethid___n_assign__eq "parser_prod::AAssignMethid::(parser_nodes::AAssignMethid::n_assign=)"
-typedef void (* parser_prod___AAssignMethid___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AAssignMethid___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AAssignMethid___empty_init();
-#define LOCATE_parser_prod___AAssignMethid___empty_init "parser_prod::AAssignMethid::empty_init"
-typedef void (* parser_prod___AAssignMethid___init_aassignmethid_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AAssignMethid___init_aassignmethid(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AAssignMethid___init_aassignmethid(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AAssignMethid___init_aassignmethid "parser_prod::AAssignMethid::init_aassignmethid"
 typedef void (* parser_prod___AAssignMethid___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AAssignMethid___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AAssignMethid___replace_child "parser_prod::AAssignMethid::(parser_prod::PNode::replace_child)"
@@ -1385,6 +1443,15 @@ void parser_prod___AAssignMethid___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AAssignMethid___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AAssignMethid___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAssignMethid___visit_all_reverse "parser_prod::AAssignMethid::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AAssignMethid___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AAssignMethid___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AAssignMethid___empty_init "parser_prod::AAssignMethid::empty_init"
+val_t NEW_AAssignMethid_parser_prod___AAssignMethid___empty_init();
+typedef void (* parser_prod___AAssignMethid___init_aassignmethid_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AAssignMethid___init_aassignmethid(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AAssignMethid___init_aassignmethid "parser_prod::AAssignMethid::init_aassignmethid"
+val_t NEW_AAssignMethid_parser_prod___AAssignMethid___init_aassignmethid(val_t p0, val_t p1);
+val_t NEW_ABraassignMethid_parser_nodes___PNode___init();
 typedef void (* parser_prod___ABraassignMethid___n_obra__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ABraassignMethid___n_obra__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABraassignMethid___n_obra__eq "parser_prod::ABraassignMethid::(parser_nodes::ABraassignMethid::n_obra=)"
@@ -1394,14 +1461,6 @@ void parser_prod___ABraassignMethid___n_cbra__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___ABraassignMethid___n_assign__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ABraassignMethid___n_assign__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABraassignMethid___n_assign__eq "parser_prod::ABraassignMethid::(parser_nodes::ABraassignMethid::n_assign=)"
-typedef void (* parser_prod___ABraassignMethid___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ABraassignMethid___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ABraassignMethid___empty_init();
-#define LOCATE_parser_prod___ABraassignMethid___empty_init "parser_prod::ABraassignMethid::empty_init"
-typedef void (* parser_prod___ABraassignMethid___init_abraassignmethid_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void parser_prod___ABraassignMethid___init_abraassignmethid(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_parser_prod___ABraassignMethid___init_abraassignmethid(val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_parser_prod___ABraassignMethid___init_abraassignmethid "parser_prod::ABraassignMethid::init_abraassignmethid"
 typedef void (* parser_prod___ABraassignMethid___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ABraassignMethid___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ABraassignMethid___replace_child "parser_prod::ABraassignMethid::(parser_prod::PNode::replace_child)"
@@ -1411,17 +1470,18 @@ void parser_prod___ABraassignMethid___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ABraassignMethid___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ABraassignMethid___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABraassignMethid___visit_all_reverse "parser_prod::ABraassignMethid::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ABraassignMethid___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ABraassignMethid___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ABraassignMethid___empty_init "parser_prod::ABraassignMethid::empty_init"
+val_t NEW_ABraassignMethid_parser_prod___ABraassignMethid___empty_init();
+typedef void (* parser_prod___ABraassignMethid___init_abraassignmethid_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void parser_prod___ABraassignMethid___init_abraassignmethid(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_parser_prod___ABraassignMethid___init_abraassignmethid "parser_prod::ABraassignMethid::init_abraassignmethid"
+val_t NEW_ABraassignMethid_parser_prod___ABraassignMethid___init_abraassignmethid(val_t p0, val_t p1, val_t p2);
+val_t NEW_ASignature_parser_nodes___PNode___init();
 typedef void (* parser_prod___ASignature___n_type__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ASignature___n_type__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ASignature___n_type__eq "parser_prod::ASignature::(parser_nodes::ASignature::n_type=)"
-typedef void (* parser_prod___ASignature___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ASignature___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ASignature___empty_init();
-#define LOCATE_parser_prod___ASignature___empty_init "parser_prod::ASignature::empty_init"
-typedef void (* parser_prod___ASignature___init_asignature_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___ASignature___init_asignature(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___ASignature___init_asignature(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___ASignature___init_asignature "parser_prod::ASignature::init_asignature"
 typedef void (* parser_prod___ASignature___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ASignature___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ASignature___replace_child "parser_prod::ASignature::(parser_prod::PNode::replace_child)"
@@ -1431,6 +1491,15 @@ void parser_prod___ASignature___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ASignature___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ASignature___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ASignature___visit_all_reverse "parser_prod::ASignature::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ASignature___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ASignature___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ASignature___empty_init "parser_prod::ASignature::empty_init"
+val_t NEW_ASignature_parser_prod___ASignature___empty_init();
+typedef void (* parser_prod___ASignature___init_asignature_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void parser_prod___ASignature___init_asignature(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_parser_prod___ASignature___init_asignature "parser_prod::ASignature::init_asignature"
+val_t NEW_ASignature_parser_prod___ASignature___init_asignature(val_t p0, val_t p1, val_t p2);
+val_t NEW_AParam_parser_nodes___PNode___init();
 typedef void (* parser_prod___AParam___n_id__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AParam___n_id__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AParam___n_id__eq "parser_prod::AParam::(parser_nodes::PParam::n_id=)"
@@ -1440,14 +1509,6 @@ void parser_prod___AParam___n_type__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___AParam___n_dotdotdot__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AParam___n_dotdotdot__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AParam___n_dotdotdot__eq "parser_prod::AParam::(parser_nodes::AParam::n_dotdotdot=)"
-typedef void (* parser_prod___AParam___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AParam___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AParam___empty_init();
-#define LOCATE_parser_prod___AParam___empty_init "parser_prod::AParam::empty_init"
-typedef void (* parser_prod___AParam___init_aparam_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void parser_prod___AParam___init_aparam(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_parser_prod___AParam___init_aparam(val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_parser_prod___AParam___init_aparam "parser_prod::AParam::init_aparam"
 typedef void (* parser_prod___AParam___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AParam___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AParam___replace_child "parser_prod::AParam::(parser_prod::PNode::replace_child)"
@@ -1457,17 +1518,48 @@ void parser_prod___AParam___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AParam___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AParam___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AParam___visit_all_reverse "parser_prod::AParam::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AParam___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AParam___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AParam___empty_init "parser_prod::AParam::empty_init"
+val_t NEW_AParam_parser_prod___AParam___empty_init();
+typedef void (* parser_prod___AParam___init_aparam_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void parser_prod___AParam___init_aparam(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_parser_prod___AParam___init_aparam "parser_prod::AParam::init_aparam"
+val_t NEW_AParam_parser_prod___AParam___init_aparam(val_t p0, val_t p1, val_t p2);
+val_t NEW_AClosureDecl_parser_nodes___PNode___init();
+typedef void (* parser_prod___AClosureDecl___n_kwwith__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AClosureDecl___n_kwwith__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AClosureDecl___n_kwwith__eq "parser_prod::AClosureDecl::(parser_nodes::AClosureDecl::n_kwwith=)"
+typedef void (* parser_prod___AClosureDecl___n_kwbreak__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AClosureDecl___n_kwbreak__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AClosureDecl___n_kwbreak__eq "parser_prod::AClosureDecl::(parser_nodes::AClosureDecl::n_kwbreak=)"
+typedef void (* parser_prod___AClosureDecl___n_id__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AClosureDecl___n_id__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AClosureDecl___n_id__eq "parser_prod::AClosureDecl::(parser_nodes::AClosureDecl::n_id=)"
+typedef void (* parser_prod___AClosureDecl___n_signature__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AClosureDecl___n_signature__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AClosureDecl___n_signature__eq "parser_prod::AClosureDecl::(parser_nodes::AClosureDecl::n_signature=)"
+typedef void (* parser_prod___AClosureDecl___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
+void parser_prod___AClosureDecl___replace_child(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_parser_prod___AClosureDecl___replace_child "parser_prod::AClosureDecl::(parser_prod::PNode::replace_child)"
+typedef void (* parser_prod___AClosureDecl___visit_all_t)(val_t  self, val_t  param0);
+void parser_prod___AClosureDecl___visit_all(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AClosureDecl___visit_all "parser_prod::AClosureDecl::(parser_prod::PNode::visit_all)"
+typedef void (* parser_prod___AClosureDecl___visit_all_reverse_t)(val_t  self, val_t  param0);
+void parser_prod___AClosureDecl___visit_all_reverse(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AClosureDecl___visit_all_reverse "parser_prod::AClosureDecl::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AClosureDecl___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AClosureDecl___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AClosureDecl___empty_init "parser_prod::AClosureDecl::empty_init"
+val_t NEW_AClosureDecl_parser_prod___AClosureDecl___empty_init();
+typedef void (* parser_prod___AClosureDecl___init_aclosuredecl_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+void parser_prod___AClosureDecl___init_aclosuredecl(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+#define LOCATE_parser_prod___AClosureDecl___init_aclosuredecl "parser_prod::AClosureDecl::init_aclosuredecl"
+val_t NEW_AClosureDecl_parser_prod___AClosureDecl___init_aclosuredecl(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_AType_parser_nodes___PNode___init();
 typedef void (* parser_prod___AType___n_id__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AType___n_id__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AType___n_id__eq "parser_prod::AType::(parser_nodes::AType::n_id=)"
-typedef void (* parser_prod___AType___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AType___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AType___empty_init();
-#define LOCATE_parser_prod___AType___empty_init "parser_prod::AType::empty_init"
-typedef void (* parser_prod___AType___init_atype_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AType___init_atype(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AType___init_atype(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AType___init_atype "parser_prod::AType::init_atype"
 typedef void (* parser_prod___AType___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AType___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AType___replace_child "parser_prod::AType::(parser_prod::PNode::replace_child)"
@@ -1477,14 +1569,15 @@ void parser_prod___AType___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AType___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AType___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AType___visit_all_reverse "parser_prod::AType::(parser_prod::PNode::visit_all_reverse)"
-typedef void (* parser_prod___ABlockExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ABlockExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ABlockExpr___empty_init();
-#define LOCATE_parser_prod___ABlockExpr___empty_init "parser_prod::ABlockExpr::empty_init"
-typedef void (* parser_prod___ABlockExpr___init_ablockexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___ABlockExpr___init_ablockexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___ABlockExpr___init_ablockexpr(val_t  param0);
-#define LOCATE_parser_prod___ABlockExpr___init_ablockexpr "parser_prod::ABlockExpr::init_ablockexpr"
+typedef void (* parser_prod___AType___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AType___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AType___empty_init "parser_prod::AType::empty_init"
+val_t NEW_AType_parser_prod___AType___empty_init();
+typedef void (* parser_prod___AType___init_atype_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AType___init_atype(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AType___init_atype "parser_prod::AType::init_atype"
+val_t NEW_AType_parser_prod___AType___init_atype(val_t p0, val_t p1);
+val_t NEW_ABlockExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ABlockExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ABlockExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ABlockExpr___replace_child "parser_prod::ABlockExpr::(parser_prod::PNode::replace_child)"
@@ -1494,6 +1587,15 @@ void parser_prod___ABlockExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ABlockExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ABlockExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABlockExpr___visit_all_reverse "parser_prod::ABlockExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ABlockExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ABlockExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ABlockExpr___empty_init "parser_prod::ABlockExpr::empty_init"
+val_t NEW_ABlockExpr_parser_prod___ABlockExpr___empty_init();
+typedef void (* parser_prod___ABlockExpr___init_ablockexpr_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___ABlockExpr___init_ablockexpr(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___ABlockExpr___init_ablockexpr "parser_prod::ABlockExpr::init_ablockexpr"
+val_t NEW_ABlockExpr_parser_prod___ABlockExpr___init_ablockexpr(val_t p0);
+val_t NEW_AVardeclExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AVardeclExpr___n_kwvar__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AVardeclExpr___n_kwvar__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AVardeclExpr___n_kwvar__eq "parser_prod::AVardeclExpr::(parser_nodes::AVardeclExpr::n_kwvar=)"
@@ -1509,14 +1611,6 @@ void parser_prod___AVardeclExpr___n_assign__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___AVardeclExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AVardeclExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AVardeclExpr___n_expr__eq "parser_prod::AVardeclExpr::(parser_nodes::AVardeclExpr::n_expr=)"
-typedef void (* parser_prod___AVardeclExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AVardeclExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AVardeclExpr___empty_init();
-#define LOCATE_parser_prod___AVardeclExpr___empty_init "parser_prod::AVardeclExpr::empty_init"
-typedef void (* parser_prod___AVardeclExpr___init_avardeclexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
-void parser_prod___AVardeclExpr___init_avardeclexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
-val_t NEW_parser_prod___AVardeclExpr___init_avardeclexpr(val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4);
-#define LOCATE_parser_prod___AVardeclExpr___init_avardeclexpr "parser_prod::AVardeclExpr::init_avardeclexpr"
 typedef void (* parser_prod___AVardeclExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AVardeclExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AVardeclExpr___replace_child "parser_prod::AVardeclExpr::(parser_prod::PNode::replace_child)"
@@ -1526,20 +1620,21 @@ void parser_prod___AVardeclExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AVardeclExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AVardeclExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AVardeclExpr___visit_all_reverse "parser_prod::AVardeclExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AVardeclExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AVardeclExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AVardeclExpr___empty_init "parser_prod::AVardeclExpr::empty_init"
+val_t NEW_AVardeclExpr_parser_prod___AVardeclExpr___empty_init();
+typedef void (* parser_prod___AVardeclExpr___init_avardeclexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
+void parser_prod___AVardeclExpr___init_avardeclexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
+#define LOCATE_parser_prod___AVardeclExpr___init_avardeclexpr "parser_prod::AVardeclExpr::init_avardeclexpr"
+val_t NEW_AVardeclExpr_parser_prod___AVardeclExpr___init_avardeclexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+val_t NEW_AReturnExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AReturnExpr___n_kwreturn__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AReturnExpr___n_kwreturn__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AReturnExpr___n_kwreturn__eq "parser_prod::AReturnExpr::(parser_nodes::AReturnExpr::n_kwreturn=)"
 typedef void (* parser_prod___AReturnExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AReturnExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AReturnExpr___n_expr__eq "parser_prod::AReturnExpr::(parser_nodes::AReturnExpr::n_expr=)"
-typedef void (* parser_prod___AReturnExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AReturnExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AReturnExpr___empty_init();
-#define LOCATE_parser_prod___AReturnExpr___empty_init "parser_prod::AReturnExpr::empty_init"
-typedef void (* parser_prod___AReturnExpr___init_areturnexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AReturnExpr___init_areturnexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AReturnExpr___init_areturnexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AReturnExpr___init_areturnexpr "parser_prod::AReturnExpr::init_areturnexpr"
 typedef void (* parser_prod___AReturnExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AReturnExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AReturnExpr___replace_child "parser_prod::AReturnExpr::(parser_prod::PNode::replace_child)"
@@ -1549,17 +1644,21 @@ void parser_prod___AReturnExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AReturnExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AReturnExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AReturnExpr___visit_all_reverse "parser_prod::AReturnExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AReturnExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AReturnExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AReturnExpr___empty_init "parser_prod::AReturnExpr::empty_init"
+val_t NEW_AReturnExpr_parser_prod___AReturnExpr___empty_init();
+typedef void (* parser_prod___AReturnExpr___init_areturnexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AReturnExpr___init_areturnexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AReturnExpr___init_areturnexpr "parser_prod::AReturnExpr::init_areturnexpr"
+val_t NEW_AReturnExpr_parser_prod___AReturnExpr___init_areturnexpr(val_t p0, val_t p1);
+val_t NEW_ABreakExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ABreakExpr___n_kwbreak__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ABreakExpr___n_kwbreak__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABreakExpr___n_kwbreak__eq "parser_prod::ABreakExpr::(parser_nodes::ABreakExpr::n_kwbreak=)"
-typedef void (* parser_prod___ABreakExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ABreakExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ABreakExpr___empty_init();
-#define LOCATE_parser_prod___ABreakExpr___empty_init "parser_prod::ABreakExpr::empty_init"
-typedef void (* parser_prod___ABreakExpr___init_abreakexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___ABreakExpr___init_abreakexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___ABreakExpr___init_abreakexpr(val_t  param0);
-#define LOCATE_parser_prod___ABreakExpr___init_abreakexpr "parser_prod::ABreakExpr::init_abreakexpr"
+typedef void (* parser_prod___ABreakExpr___n_expr__eq_t)(val_t  self, val_t  param0);
+void parser_prod___ABreakExpr___n_expr__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___ABreakExpr___n_expr__eq "parser_prod::ABreakExpr::(parser_nodes::ABreakExpr::n_expr=)"
 typedef void (* parser_prod___ABreakExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ABreakExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ABreakExpr___replace_child "parser_prod::ABreakExpr::(parser_prod::PNode::replace_child)"
@@ -1569,17 +1668,18 @@ void parser_prod___ABreakExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ABreakExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ABreakExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABreakExpr___visit_all_reverse "parser_prod::ABreakExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ABreakExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ABreakExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ABreakExpr___empty_init "parser_prod::ABreakExpr::empty_init"
+val_t NEW_ABreakExpr_parser_prod___ABreakExpr___empty_init();
+typedef void (* parser_prod___ABreakExpr___init_abreakexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___ABreakExpr___init_abreakexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___ABreakExpr___init_abreakexpr "parser_prod::ABreakExpr::init_abreakexpr"
+val_t NEW_ABreakExpr_parser_prod___ABreakExpr___init_abreakexpr(val_t p0, val_t p1);
+val_t NEW_AAbortExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AAbortExpr___n_kwabort__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAbortExpr___n_kwabort__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAbortExpr___n_kwabort__eq "parser_prod::AAbortExpr::(parser_nodes::AAbortExpr::n_kwabort=)"
-typedef void (* parser_prod___AAbortExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AAbortExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AAbortExpr___empty_init();
-#define LOCATE_parser_prod___AAbortExpr___empty_init "parser_prod::AAbortExpr::empty_init"
-typedef void (* parser_prod___AAbortExpr___init_aabortexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AAbortExpr___init_aabortexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AAbortExpr___init_aabortexpr(val_t  param0);
-#define LOCATE_parser_prod___AAbortExpr___init_aabortexpr "parser_prod::AAbortExpr::init_aabortexpr"
 typedef void (* parser_prod___AAbortExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AAbortExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AAbortExpr___replace_child "parser_prod::AAbortExpr::(parser_prod::PNode::replace_child)"
@@ -1589,17 +1689,21 @@ void parser_prod___AAbortExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AAbortExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AAbortExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAbortExpr___visit_all_reverse "parser_prod::AAbortExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AAbortExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AAbortExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AAbortExpr___empty_init "parser_prod::AAbortExpr::empty_init"
+val_t NEW_AAbortExpr_parser_prod___AAbortExpr___empty_init();
+typedef void (* parser_prod___AAbortExpr___init_aabortexpr_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AAbortExpr___init_aabortexpr(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AAbortExpr___init_aabortexpr "parser_prod::AAbortExpr::init_aabortexpr"
+val_t NEW_AAbortExpr_parser_prod___AAbortExpr___init_aabortexpr(val_t p0);
+val_t NEW_AContinueExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AContinueExpr___n_kwcontinue__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AContinueExpr___n_kwcontinue__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AContinueExpr___n_kwcontinue__eq "parser_prod::AContinueExpr::(parser_nodes::AContinueExpr::n_kwcontinue=)"
-typedef void (* parser_prod___AContinueExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AContinueExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AContinueExpr___empty_init();
-#define LOCATE_parser_prod___AContinueExpr___empty_init "parser_prod::AContinueExpr::empty_init"
-typedef void (* parser_prod___AContinueExpr___init_acontinueexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AContinueExpr___init_acontinueexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AContinueExpr___init_acontinueexpr(val_t  param0);
-#define LOCATE_parser_prod___AContinueExpr___init_acontinueexpr "parser_prod::AContinueExpr::init_acontinueexpr"
+typedef void (* parser_prod___AContinueExpr___n_expr__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AContinueExpr___n_expr__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AContinueExpr___n_expr__eq "parser_prod::AContinueExpr::(parser_nodes::AContinueExpr::n_expr=)"
 typedef void (* parser_prod___AContinueExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AContinueExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AContinueExpr___replace_child "parser_prod::AContinueExpr::(parser_prod::PNode::replace_child)"
@@ -1609,20 +1713,21 @@ void parser_prod___AContinueExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AContinueExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AContinueExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AContinueExpr___visit_all_reverse "parser_prod::AContinueExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AContinueExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AContinueExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AContinueExpr___empty_init "parser_prod::AContinueExpr::empty_init"
+val_t NEW_AContinueExpr_parser_prod___AContinueExpr___empty_init();
+typedef void (* parser_prod___AContinueExpr___init_acontinueexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AContinueExpr___init_acontinueexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AContinueExpr___init_acontinueexpr "parser_prod::AContinueExpr::init_acontinueexpr"
+val_t NEW_AContinueExpr_parser_prod___AContinueExpr___init_acontinueexpr(val_t p0, val_t p1);
+val_t NEW_ADoExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ADoExpr___n_kwdo__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ADoExpr___n_kwdo__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ADoExpr___n_kwdo__eq "parser_prod::ADoExpr::(parser_nodes::ADoExpr::n_kwdo=)"
 typedef void (* parser_prod___ADoExpr___n_block__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ADoExpr___n_block__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ADoExpr___n_block__eq "parser_prod::ADoExpr::(parser_nodes::ADoExpr::n_block=)"
-typedef void (* parser_prod___ADoExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ADoExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ADoExpr___empty_init();
-#define LOCATE_parser_prod___ADoExpr___empty_init "parser_prod::ADoExpr::empty_init"
-typedef void (* parser_prod___ADoExpr___init_adoexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___ADoExpr___init_adoexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___ADoExpr___init_adoexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___ADoExpr___init_adoexpr "parser_prod::ADoExpr::init_adoexpr"
 typedef void (* parser_prod___ADoExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ADoExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ADoExpr___replace_child "parser_prod::ADoExpr::(parser_prod::PNode::replace_child)"
@@ -1632,6 +1737,15 @@ void parser_prod___ADoExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ADoExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ADoExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ADoExpr___visit_all_reverse "parser_prod::ADoExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ADoExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ADoExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ADoExpr___empty_init "parser_prod::ADoExpr::empty_init"
+val_t NEW_ADoExpr_parser_prod___ADoExpr___empty_init();
+typedef void (* parser_prod___ADoExpr___init_adoexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___ADoExpr___init_adoexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___ADoExpr___init_adoexpr "parser_prod::ADoExpr::init_adoexpr"
+val_t NEW_ADoExpr_parser_prod___ADoExpr___init_adoexpr(val_t p0, val_t p1);
+val_t NEW_AIfExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AIfExpr___n_kwif__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AIfExpr___n_kwif__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AIfExpr___n_kwif__eq "parser_prod::AIfExpr::(parser_nodes::AIfExpr::n_kwif=)"
@@ -1644,14 +1758,6 @@ void parser_prod___AIfExpr___n_then__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___AIfExpr___n_else__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AIfExpr___n_else__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AIfExpr___n_else__eq "parser_prod::AIfExpr::(parser_nodes::AIfExpr::n_else=)"
-typedef void (* parser_prod___AIfExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AIfExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AIfExpr___empty_init();
-#define LOCATE_parser_prod___AIfExpr___empty_init "parser_prod::AIfExpr::empty_init"
-typedef void (* parser_prod___AIfExpr___init_aifexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void parser_prod___AIfExpr___init_aifexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-val_t NEW_parser_prod___AIfExpr___init_aifexpr(val_t  param0, val_t  param1, val_t  param2, val_t  param3);
-#define LOCATE_parser_prod___AIfExpr___init_aifexpr "parser_prod::AIfExpr::init_aifexpr"
 typedef void (* parser_prod___AIfExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AIfExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AIfExpr___replace_child "parser_prod::AIfExpr::(parser_prod::PNode::replace_child)"
@@ -1661,6 +1767,15 @@ void parser_prod___AIfExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AIfExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AIfExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AIfExpr___visit_all_reverse "parser_prod::AIfExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AIfExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AIfExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AIfExpr___empty_init "parser_prod::AIfExpr::empty_init"
+val_t NEW_AIfExpr_parser_prod___AIfExpr___empty_init();
+typedef void (* parser_prod___AIfExpr___init_aifexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+void parser_prod___AIfExpr___init_aifexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+#define LOCATE_parser_prod___AIfExpr___init_aifexpr "parser_prod::AIfExpr::init_aifexpr"
+val_t NEW_AIfExpr_parser_prod___AIfExpr___init_aifexpr(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_AIfexprExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AIfexprExpr___n_kwif__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AIfexprExpr___n_kwif__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AIfexprExpr___n_kwif__eq "parser_prod::AIfexprExpr::(parser_nodes::AIfexprExpr::n_kwif=)"
@@ -1679,14 +1794,6 @@ void parser_prod___AIfexprExpr___n_kwelse__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___AIfexprExpr___n_else__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AIfexprExpr___n_else__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AIfexprExpr___n_else__eq "parser_prod::AIfexprExpr::(parser_nodes::AIfexprExpr::n_else=)"
-typedef void (* parser_prod___AIfexprExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AIfexprExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AIfexprExpr___empty_init();
-#define LOCATE_parser_prod___AIfexprExpr___empty_init "parser_prod::AIfexprExpr::empty_init"
-typedef void (* parser_prod___AIfexprExpr___init_aifexprexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, int* init_table);
-void parser_prod___AIfexprExpr___init_aifexprexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, int* init_table);
-val_t NEW_parser_prod___AIfexprExpr___init_aifexprexpr(val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5);
-#define LOCATE_parser_prod___AIfexprExpr___init_aifexprexpr "parser_prod::AIfexprExpr::init_aifexprexpr"
 typedef void (* parser_prod___AIfexprExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AIfexprExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AIfexprExpr___replace_child "parser_prod::AIfexprExpr::(parser_prod::PNode::replace_child)"
@@ -1696,6 +1803,15 @@ void parser_prod___AIfexprExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AIfexprExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AIfexprExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AIfexprExpr___visit_all_reverse "parser_prod::AIfexprExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AIfexprExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AIfexprExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AIfexprExpr___empty_init "parser_prod::AIfexprExpr::empty_init"
+val_t NEW_AIfexprExpr_parser_prod___AIfexprExpr___empty_init();
+typedef void (* parser_prod___AIfexprExpr___init_aifexprexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, int* init_table);
+void parser_prod___AIfexprExpr___init_aifexprexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, int* init_table);
+#define LOCATE_parser_prod___AIfexprExpr___init_aifexprexpr "parser_prod::AIfexprExpr::init_aifexprexpr"
+val_t NEW_AIfexprExpr_parser_prod___AIfexprExpr___init_aifexprexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5);
+val_t NEW_AWhileExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AWhileExpr___n_kwwhile__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AWhileExpr___n_kwwhile__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AWhileExpr___n_kwwhile__eq "parser_prod::AWhileExpr::(parser_nodes::AWhileExpr::n_kwwhile=)"
@@ -1708,14 +1824,6 @@ void parser_prod___AWhileExpr___n_kwdo__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___AWhileExpr___n_block__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AWhileExpr___n_block__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AWhileExpr___n_block__eq "parser_prod::AWhileExpr::(parser_nodes::AWhileExpr::n_block=)"
-typedef void (* parser_prod___AWhileExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AWhileExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AWhileExpr___empty_init();
-#define LOCATE_parser_prod___AWhileExpr___empty_init "parser_prod::AWhileExpr::empty_init"
-typedef void (* parser_prod___AWhileExpr___init_awhileexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void parser_prod___AWhileExpr___init_awhileexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-val_t NEW_parser_prod___AWhileExpr___init_awhileexpr(val_t  param0, val_t  param1, val_t  param2, val_t  param3);
-#define LOCATE_parser_prod___AWhileExpr___init_awhileexpr "parser_prod::AWhileExpr::init_awhileexpr"
 typedef void (* parser_prod___AWhileExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AWhileExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AWhileExpr___replace_child "parser_prod::AWhileExpr::(parser_prod::PNode::replace_child)"
@@ -1725,6 +1833,15 @@ void parser_prod___AWhileExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AWhileExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AWhileExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AWhileExpr___visit_all_reverse "parser_prod::AWhileExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AWhileExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AWhileExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AWhileExpr___empty_init "parser_prod::AWhileExpr::empty_init"
+val_t NEW_AWhileExpr_parser_prod___AWhileExpr___empty_init();
+typedef void (* parser_prod___AWhileExpr___init_awhileexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+void parser_prod___AWhileExpr___init_awhileexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+#define LOCATE_parser_prod___AWhileExpr___init_awhileexpr "parser_prod::AWhileExpr::init_awhileexpr"
+val_t NEW_AWhileExpr_parser_prod___AWhileExpr___init_awhileexpr(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_AForExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AForExpr___n_vardecl__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AForExpr___n_vardecl__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AForExpr___n_vardecl__eq "parser_prod::AForExpr::(parser_nodes::AForExpr::n_vardecl=)"
@@ -1734,14 +1851,6 @@ void parser_prod___AForExpr___n_kwdo__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___AForExpr___n_block__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AForExpr___n_block__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AForExpr___n_block__eq "parser_prod::AForExpr::(parser_nodes::AForExpr::n_block=)"
-typedef void (* parser_prod___AForExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AForExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AForExpr___empty_init();
-#define LOCATE_parser_prod___AForExpr___empty_init "parser_prod::AForExpr::empty_init"
-typedef void (* parser_prod___AForExpr___init_aforexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void parser_prod___AForExpr___init_aforexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_parser_prod___AForExpr___init_aforexpr(val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_parser_prod___AForExpr___init_aforexpr "parser_prod::AForExpr::init_aforexpr"
 typedef void (* parser_prod___AForExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AForExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AForExpr___replace_child "parser_prod::AForExpr::(parser_prod::PNode::replace_child)"
@@ -1751,6 +1860,15 @@ void parser_prod___AForExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AForExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AForExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AForExpr___visit_all_reverse "parser_prod::AForExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AForExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AForExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AForExpr___empty_init "parser_prod::AForExpr::empty_init"
+val_t NEW_AForExpr_parser_prod___AForExpr___empty_init();
+typedef void (* parser_prod___AForExpr___init_aforexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void parser_prod___AForExpr___init_aforexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_parser_prod___AForExpr___init_aforexpr "parser_prod::AForExpr::init_aforexpr"
+val_t NEW_AForExpr_parser_prod___AForExpr___init_aforexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_AForVardeclExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AForVardeclExpr___n_kwfor__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AForVardeclExpr___n_kwfor__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AForVardeclExpr___n_kwfor__eq "parser_prod::AForVardeclExpr::(parser_nodes::AForVardeclExpr::n_kwfor=)"
@@ -1760,14 +1878,6 @@ void parser_prod___AForVardeclExpr___n_id__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___AForVardeclExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AForVardeclExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AForVardeclExpr___n_expr__eq "parser_prod::AForVardeclExpr::(parser_nodes::AForVardeclExpr::n_expr=)"
-typedef void (* parser_prod___AForVardeclExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AForVardeclExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AForVardeclExpr___empty_init();
-#define LOCATE_parser_prod___AForVardeclExpr___empty_init "parser_prod::AForVardeclExpr::empty_init"
-typedef void (* parser_prod___AForVardeclExpr___init_aforvardeclexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void parser_prod___AForVardeclExpr___init_aforvardeclexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_parser_prod___AForVardeclExpr___init_aforvardeclexpr(val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_parser_prod___AForVardeclExpr___init_aforvardeclexpr "parser_prod::AForVardeclExpr::init_aforvardeclexpr"
 typedef void (* parser_prod___AForVardeclExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AForVardeclExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AForVardeclExpr___replace_child "parser_prod::AForVardeclExpr::(parser_prod::PNode::replace_child)"
@@ -1777,6 +1887,15 @@ void parser_prod___AForVardeclExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AForVardeclExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AForVardeclExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AForVardeclExpr___visit_all_reverse "parser_prod::AForVardeclExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AForVardeclExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AForVardeclExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AForVardeclExpr___empty_init "parser_prod::AForVardeclExpr::empty_init"
+val_t NEW_AForVardeclExpr_parser_prod___AForVardeclExpr___empty_init();
+typedef void (* parser_prod___AForVardeclExpr___init_aforvardeclexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void parser_prod___AForVardeclExpr___init_aforvardeclexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_parser_prod___AForVardeclExpr___init_aforvardeclexpr "parser_prod::AForVardeclExpr::init_aforvardeclexpr"
+val_t NEW_AForVardeclExpr_parser_prod___AForVardeclExpr___init_aforvardeclexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_AAssertExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AAssertExpr___n_kwassert__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAssertExpr___n_kwassert__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAssertExpr___n_kwassert__eq "parser_prod::AAssertExpr::(parser_nodes::AAssertExpr::n_kwassert=)"
@@ -1786,14 +1905,6 @@ void parser_prod___AAssertExpr___n_id__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___AAssertExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAssertExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAssertExpr___n_expr__eq "parser_prod::AAssertExpr::(parser_nodes::AAssertExpr::n_expr=)"
-typedef void (* parser_prod___AAssertExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AAssertExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AAssertExpr___empty_init();
-#define LOCATE_parser_prod___AAssertExpr___empty_init "parser_prod::AAssertExpr::empty_init"
-typedef void (* parser_prod___AAssertExpr___init_aassertexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void parser_prod___AAssertExpr___init_aassertexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_parser_prod___AAssertExpr___init_aassertexpr(val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_parser_prod___AAssertExpr___init_aassertexpr "parser_prod::AAssertExpr::init_aassertexpr"
 typedef void (* parser_prod___AAssertExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AAssertExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AAssertExpr___replace_child "parser_prod::AAssertExpr::(parser_prod::PNode::replace_child)"
@@ -1803,20 +1914,21 @@ void parser_prod___AAssertExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AAssertExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AAssertExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAssertExpr___visit_all_reverse "parser_prod::AAssertExpr::(parser_prod::PNode::visit_all_reverse)"
-typedef void (* parser_prod___AOnceExpr___n_kwonce__eq_t)(val_t  self, val_t  param0);
-void parser_prod___AOnceExpr___n_kwonce__eq(val_t  self, val_t  param0);
-#define LOCATE_parser_prod___AOnceExpr___n_kwonce__eq "parser_prod::AOnceExpr::(parser_nodes::AOnceExpr::n_kwonce=)"
+typedef void (* parser_prod___AAssertExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AAssertExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AAssertExpr___empty_init "parser_prod::AAssertExpr::empty_init"
+val_t NEW_AAssertExpr_parser_prod___AAssertExpr___empty_init();
+typedef void (* parser_prod___AAssertExpr___init_aassertexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void parser_prod___AAssertExpr___init_aassertexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_parser_prod___AAssertExpr___init_aassertexpr "parser_prod::AAssertExpr::init_aassertexpr"
+val_t NEW_AAssertExpr_parser_prod___AAssertExpr___init_aassertexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_AOnceExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AOnceExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AOnceExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AOnceExpr___n_expr__eq "parser_prod::AOnceExpr::(parser_nodes::AProxyExpr::n_expr=)"
-typedef void (* parser_prod___AOnceExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AOnceExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AOnceExpr___empty_init();
-#define LOCATE_parser_prod___AOnceExpr___empty_init "parser_prod::AOnceExpr::empty_init"
-typedef void (* parser_prod___AOnceExpr___init_aonceexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AOnceExpr___init_aonceexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AOnceExpr___init_aonceexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AOnceExpr___init_aonceexpr "parser_prod::AOnceExpr::init_aonceexpr"
+typedef void (* parser_prod___AOnceExpr___n_kwonce__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AOnceExpr___n_kwonce__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AOnceExpr___n_kwonce__eq "parser_prod::AOnceExpr::(parser_nodes::AOnceExpr::n_kwonce=)"
 typedef void (* parser_prod___AOnceExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AOnceExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AOnceExpr___replace_child "parser_prod::AOnceExpr::(parser_prod::PNode::replace_child)"
@@ -1826,17 +1938,18 @@ void parser_prod___AOnceExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AOnceExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AOnceExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AOnceExpr___visit_all_reverse "parser_prod::AOnceExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AOnceExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AOnceExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AOnceExpr___empty_init "parser_prod::AOnceExpr::empty_init"
+val_t NEW_AOnceExpr_parser_prod___AOnceExpr___empty_init();
+typedef void (* parser_prod___AOnceExpr___init_aonceexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AOnceExpr___init_aonceexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AOnceExpr___init_aonceexpr "parser_prod::AOnceExpr::init_aonceexpr"
+val_t NEW_AOnceExpr_parser_prod___AOnceExpr___init_aonceexpr(val_t p0, val_t p1);
+val_t NEW_ASendExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ASendExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ASendExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ASendExpr___n_expr__eq "parser_prod::ASendExpr::(parser_nodes::ASendExpr::n_expr=)"
-typedef void (* parser_prod___ASendExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ASendExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ASendExpr___empty_init();
-#define LOCATE_parser_prod___ASendExpr___empty_init "parser_prod::ASendExpr::empty_init"
-typedef void (* parser_prod___ASendExpr___init_asendexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___ASendExpr___init_asendexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___ASendExpr___init_asendexpr(val_t  param0);
-#define LOCATE_parser_prod___ASendExpr___init_asendexpr "parser_prod::ASendExpr::init_asendexpr"
 typedef void (* parser_prod___ASendExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ASendExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ASendExpr___replace_child "parser_prod::ASendExpr::(parser_prod::PNode::replace_child)"
@@ -1846,20 +1959,21 @@ void parser_prod___ASendExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ASendExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ASendExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ASendExpr___visit_all_reverse "parser_prod::ASendExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ASendExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ASendExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ASendExpr___empty_init "parser_prod::ASendExpr::empty_init"
+val_t NEW_ASendExpr_parser_prod___ASendExpr___empty_init();
+typedef void (* parser_prod___ASendExpr___init_asendexpr_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___ASendExpr___init_asendexpr(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___ASendExpr___init_asendexpr "parser_prod::ASendExpr::init_asendexpr"
+val_t NEW_ASendExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ABinopExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ABinopExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ABinopExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABinopExpr___n_expr__eq "parser_prod::ABinopExpr::(parser_nodes::ASendExpr::n_expr=)"
 typedef void (* parser_prod___ABinopExpr___n_expr2__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ABinopExpr___n_expr2__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABinopExpr___n_expr2__eq "parser_prod::ABinopExpr::(parser_nodes::ABinopExpr::n_expr2=)"
-typedef void (* parser_prod___ABinopExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ABinopExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ABinopExpr___empty_init();
-#define LOCATE_parser_prod___ABinopExpr___empty_init "parser_prod::ABinopExpr::empty_init"
-typedef void (* parser_prod___ABinopExpr___init_abinopexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___ABinopExpr___init_abinopexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___ABinopExpr___init_abinopexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___ABinopExpr___init_abinopexpr "parser_prod::ABinopExpr::init_abinopexpr"
 typedef void (* parser_prod___ABinopExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ABinopExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ABinopExpr___replace_child "parser_prod::ABinopExpr::(parser_prod::PNode::replace_child)"
@@ -1869,20 +1983,23 @@ void parser_prod___ABinopExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ABinopExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ABinopExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABinopExpr___visit_all_reverse "parser_prod::ABinopExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_ABinopExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ABinopExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+typedef void (* parser_prod___ABinopExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ABinopExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ABinopExpr___empty_init "parser_prod::ABinopExpr::empty_init"
+val_t NEW_ABinopExpr_parser_prod___ABinopExpr___empty_init();
+typedef void (* parser_prod___ABinopExpr___init_abinopexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___ABinopExpr___init_abinopexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___ABinopExpr___init_abinopexpr "parser_prod::ABinopExpr::init_abinopexpr"
+val_t NEW_ABinopExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+val_t NEW_AOrExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AOrExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AOrExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AOrExpr___n_expr__eq "parser_prod::AOrExpr::(parser_nodes::AOrExpr::n_expr=)"
 typedef void (* parser_prod___AOrExpr___n_expr2__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AOrExpr___n_expr2__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AOrExpr___n_expr2__eq "parser_prod::AOrExpr::(parser_nodes::AOrExpr::n_expr2=)"
-typedef void (* parser_prod___AOrExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AOrExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AOrExpr___empty_init();
-#define LOCATE_parser_prod___AOrExpr___empty_init "parser_prod::AOrExpr::empty_init"
-typedef void (* parser_prod___AOrExpr___init_aorexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AOrExpr___init_aorexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AOrExpr___init_aorexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AOrExpr___init_aorexpr "parser_prod::AOrExpr::init_aorexpr"
 typedef void (* parser_prod___AOrExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AOrExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AOrExpr___replace_child "parser_prod::AOrExpr::(parser_prod::PNode::replace_child)"
@@ -1892,20 +2009,21 @@ void parser_prod___AOrExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AOrExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AOrExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AOrExpr___visit_all_reverse "parser_prod::AOrExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AOrExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AOrExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AOrExpr___empty_init "parser_prod::AOrExpr::empty_init"
+val_t NEW_AOrExpr_parser_prod___AOrExpr___empty_init();
+typedef void (* parser_prod___AOrExpr___init_aorexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AOrExpr___init_aorexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AOrExpr___init_aorexpr "parser_prod::AOrExpr::init_aorexpr"
+val_t NEW_AOrExpr_parser_prod___AOrExpr___init_aorexpr(val_t p0, val_t p1);
+val_t NEW_AAndExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AAndExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAndExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAndExpr___n_expr__eq "parser_prod::AAndExpr::(parser_nodes::AAndExpr::n_expr=)"
 typedef void (* parser_prod___AAndExpr___n_expr2__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAndExpr___n_expr2__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAndExpr___n_expr2__eq "parser_prod::AAndExpr::(parser_nodes::AAndExpr::n_expr2=)"
-typedef void (* parser_prod___AAndExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AAndExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AAndExpr___empty_init();
-#define LOCATE_parser_prod___AAndExpr___empty_init "parser_prod::AAndExpr::empty_init"
-typedef void (* parser_prod___AAndExpr___init_aandexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AAndExpr___init_aandexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AAndExpr___init_aandexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AAndExpr___init_aandexpr "parser_prod::AAndExpr::init_aandexpr"
 typedef void (* parser_prod___AAndExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AAndExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AAndExpr___replace_child "parser_prod::AAndExpr::(parser_prod::PNode::replace_child)"
@@ -1915,20 +2033,21 @@ void parser_prod___AAndExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AAndExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AAndExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAndExpr___visit_all_reverse "parser_prod::AAndExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AAndExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AAndExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AAndExpr___empty_init "parser_prod::AAndExpr::empty_init"
+val_t NEW_AAndExpr_parser_prod___AAndExpr___empty_init();
+typedef void (* parser_prod___AAndExpr___init_aandexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AAndExpr___init_aandexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AAndExpr___init_aandexpr "parser_prod::AAndExpr::init_aandexpr"
+val_t NEW_AAndExpr_parser_prod___AAndExpr___init_aandexpr(val_t p0, val_t p1);
+val_t NEW_ANotExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ANotExpr___n_kwnot__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ANotExpr___n_kwnot__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ANotExpr___n_kwnot__eq "parser_prod::ANotExpr::(parser_nodes::ANotExpr::n_kwnot=)"
 typedef void (* parser_prod___ANotExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ANotExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ANotExpr___n_expr__eq "parser_prod::ANotExpr::(parser_nodes::ANotExpr::n_expr=)"
-typedef void (* parser_prod___ANotExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ANotExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ANotExpr___empty_init();
-#define LOCATE_parser_prod___ANotExpr___empty_init "parser_prod::ANotExpr::empty_init"
-typedef void (* parser_prod___ANotExpr___init_anotexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___ANotExpr___init_anotexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___ANotExpr___init_anotexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___ANotExpr___init_anotexpr "parser_prod::ANotExpr::init_anotexpr"
 typedef void (* parser_prod___ANotExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ANotExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ANotExpr___replace_child "parser_prod::ANotExpr::(parser_prod::PNode::replace_child)"
@@ -1938,20 +2057,21 @@ void parser_prod___ANotExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ANotExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ANotExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ANotExpr___visit_all_reverse "parser_prod::ANotExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ANotExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ANotExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ANotExpr___empty_init "parser_prod::ANotExpr::empty_init"
+val_t NEW_ANotExpr_parser_prod___ANotExpr___empty_init();
+typedef void (* parser_prod___ANotExpr___init_anotexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___ANotExpr___init_anotexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___ANotExpr___init_anotexpr "parser_prod::ANotExpr::init_anotexpr"
+val_t NEW_ANotExpr_parser_prod___ANotExpr___init_anotexpr(val_t p0, val_t p1);
+val_t NEW_AEqExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AEqExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AEqExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AEqExpr___n_expr__eq "parser_prod::AEqExpr::(parser_nodes::ASendExpr::n_expr=)"
 typedef void (* parser_prod___AEqExpr___n_expr2__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AEqExpr___n_expr2__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AEqExpr___n_expr2__eq "parser_prod::AEqExpr::(parser_nodes::ABinopExpr::n_expr2=)"
-typedef void (* parser_prod___AEqExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AEqExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AEqExpr___empty_init();
-#define LOCATE_parser_prod___AEqExpr___empty_init "parser_prod::AEqExpr::empty_init"
-typedef void (* parser_prod___AEqExpr___init_aeqexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AEqExpr___init_aeqexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AEqExpr___init_aeqexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AEqExpr___init_aeqexpr "parser_prod::AEqExpr::init_aeqexpr"
 typedef void (* parser_prod___AEqExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AEqExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AEqExpr___replace_child "parser_prod::AEqExpr::(parser_prod::PNode::replace_child)"
@@ -1961,20 +2081,25 @@ void parser_prod___AEqExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AEqExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AEqExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AEqExpr___visit_all_reverse "parser_prod::AEqExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_AEqExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_AEqExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_AEqExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_AEqExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+typedef void (* parser_prod___AEqExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AEqExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AEqExpr___empty_init "parser_prod::AEqExpr::empty_init"
+val_t NEW_AEqExpr_parser_prod___AEqExpr___empty_init();
+typedef void (* parser_prod___AEqExpr___init_aeqexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AEqExpr___init_aeqexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AEqExpr___init_aeqexpr "parser_prod::AEqExpr::init_aeqexpr"
+val_t NEW_AEqExpr_parser_prod___AEqExpr___init_aeqexpr(val_t p0, val_t p1);
+val_t NEW_AEeExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AEeExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AEeExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AEeExpr___n_expr__eq "parser_prod::AEeExpr::(parser_nodes::AEeExpr::n_expr=)"
 typedef void (* parser_prod___AEeExpr___n_expr2__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AEeExpr___n_expr2__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AEeExpr___n_expr2__eq "parser_prod::AEeExpr::(parser_nodes::AEeExpr::n_expr2=)"
-typedef void (* parser_prod___AEeExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AEeExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AEeExpr___empty_init();
-#define LOCATE_parser_prod___AEeExpr___empty_init "parser_prod::AEeExpr::empty_init"
-typedef void (* parser_prod___AEeExpr___init_aeeexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AEeExpr___init_aeeexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AEeExpr___init_aeeexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AEeExpr___init_aeeexpr "parser_prod::AEeExpr::init_aeeexpr"
 typedef void (* parser_prod___AEeExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AEeExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AEeExpr___replace_child "parser_prod::AEeExpr::(parser_prod::PNode::replace_child)"
@@ -1984,20 +2109,21 @@ void parser_prod___AEeExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AEeExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AEeExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AEeExpr___visit_all_reverse "parser_prod::AEeExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AEeExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AEeExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AEeExpr___empty_init "parser_prod::AEeExpr::empty_init"
+val_t NEW_AEeExpr_parser_prod___AEeExpr___empty_init();
+typedef void (* parser_prod___AEeExpr___init_aeeexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AEeExpr___init_aeeexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AEeExpr___init_aeeexpr "parser_prod::AEeExpr::init_aeeexpr"
+val_t NEW_AEeExpr_parser_prod___AEeExpr___init_aeeexpr(val_t p0, val_t p1);
+val_t NEW_ANeExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ANeExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ANeExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ANeExpr___n_expr__eq "parser_prod::ANeExpr::(parser_nodes::ASendExpr::n_expr=)"
 typedef void (* parser_prod___ANeExpr___n_expr2__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ANeExpr___n_expr2__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ANeExpr___n_expr2__eq "parser_prod::ANeExpr::(parser_nodes::ABinopExpr::n_expr2=)"
-typedef void (* parser_prod___ANeExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ANeExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ANeExpr___empty_init();
-#define LOCATE_parser_prod___ANeExpr___empty_init "parser_prod::ANeExpr::empty_init"
-typedef void (* parser_prod___ANeExpr___init_aneexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___ANeExpr___init_aneexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___ANeExpr___init_aneexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___ANeExpr___init_aneexpr "parser_prod::ANeExpr::init_aneexpr"
 typedef void (* parser_prod___ANeExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ANeExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ANeExpr___replace_child "parser_prod::ANeExpr::(parser_prod::PNode::replace_child)"
@@ -2007,20 +2133,25 @@ void parser_prod___ANeExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ANeExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ANeExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ANeExpr___visit_all_reverse "parser_prod::ANeExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_ANeExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ANeExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ANeExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_ANeExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+typedef void (* parser_prod___ANeExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ANeExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ANeExpr___empty_init "parser_prod::ANeExpr::empty_init"
+val_t NEW_ANeExpr_parser_prod___ANeExpr___empty_init();
+typedef void (* parser_prod___ANeExpr___init_aneexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___ANeExpr___init_aneexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___ANeExpr___init_aneexpr "parser_prod::ANeExpr::init_aneexpr"
+val_t NEW_ANeExpr_parser_prod___ANeExpr___init_aneexpr(val_t p0, val_t p1);
+val_t NEW_ALtExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ALtExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ALtExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ALtExpr___n_expr__eq "parser_prod::ALtExpr::(parser_nodes::ASendExpr::n_expr=)"
 typedef void (* parser_prod___ALtExpr___n_expr2__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ALtExpr___n_expr2__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ALtExpr___n_expr2__eq "parser_prod::ALtExpr::(parser_nodes::ABinopExpr::n_expr2=)"
-typedef void (* parser_prod___ALtExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ALtExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ALtExpr___empty_init();
-#define LOCATE_parser_prod___ALtExpr___empty_init "parser_prod::ALtExpr::empty_init"
-typedef void (* parser_prod___ALtExpr___init_altexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___ALtExpr___init_altexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___ALtExpr___init_altexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___ALtExpr___init_altexpr "parser_prod::ALtExpr::init_altexpr"
 typedef void (* parser_prod___ALtExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ALtExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ALtExpr___replace_child "parser_prod::ALtExpr::(parser_prod::PNode::replace_child)"
@@ -2030,20 +2161,25 @@ void parser_prod___ALtExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ALtExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ALtExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ALtExpr___visit_all_reverse "parser_prod::ALtExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_ALtExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ALtExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ALtExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_ALtExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+typedef void (* parser_prod___ALtExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ALtExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ALtExpr___empty_init "parser_prod::ALtExpr::empty_init"
+val_t NEW_ALtExpr_parser_prod___ALtExpr___empty_init();
+typedef void (* parser_prod___ALtExpr___init_altexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___ALtExpr___init_altexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___ALtExpr___init_altexpr "parser_prod::ALtExpr::init_altexpr"
+val_t NEW_ALtExpr_parser_prod___ALtExpr___init_altexpr(val_t p0, val_t p1);
+val_t NEW_ALeExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ALeExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ALeExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ALeExpr___n_expr__eq "parser_prod::ALeExpr::(parser_nodes::ASendExpr::n_expr=)"
 typedef void (* parser_prod___ALeExpr___n_expr2__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ALeExpr___n_expr2__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ALeExpr___n_expr2__eq "parser_prod::ALeExpr::(parser_nodes::ABinopExpr::n_expr2=)"
-typedef void (* parser_prod___ALeExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ALeExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ALeExpr___empty_init();
-#define LOCATE_parser_prod___ALeExpr___empty_init "parser_prod::ALeExpr::empty_init"
-typedef void (* parser_prod___ALeExpr___init_aleexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___ALeExpr___init_aleexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___ALeExpr___init_aleexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___ALeExpr___init_aleexpr "parser_prod::ALeExpr::init_aleexpr"
 typedef void (* parser_prod___ALeExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ALeExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ALeExpr___replace_child "parser_prod::ALeExpr::(parser_prod::PNode::replace_child)"
@@ -2053,20 +2189,25 @@ void parser_prod___ALeExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ALeExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ALeExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ALeExpr___visit_all_reverse "parser_prod::ALeExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_ALeExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ALeExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ALeExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_ALeExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+typedef void (* parser_prod___ALeExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ALeExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ALeExpr___empty_init "parser_prod::ALeExpr::empty_init"
+val_t NEW_ALeExpr_parser_prod___ALeExpr___empty_init();
+typedef void (* parser_prod___ALeExpr___init_aleexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___ALeExpr___init_aleexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___ALeExpr___init_aleexpr "parser_prod::ALeExpr::init_aleexpr"
+val_t NEW_ALeExpr_parser_prod___ALeExpr___init_aleexpr(val_t p0, val_t p1);
+val_t NEW_AGtExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AGtExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AGtExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AGtExpr___n_expr__eq "parser_prod::AGtExpr::(parser_nodes::ASendExpr::n_expr=)"
 typedef void (* parser_prod___AGtExpr___n_expr2__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AGtExpr___n_expr2__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AGtExpr___n_expr2__eq "parser_prod::AGtExpr::(parser_nodes::ABinopExpr::n_expr2=)"
-typedef void (* parser_prod___AGtExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AGtExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AGtExpr___empty_init();
-#define LOCATE_parser_prod___AGtExpr___empty_init "parser_prod::AGtExpr::empty_init"
-typedef void (* parser_prod___AGtExpr___init_agtexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AGtExpr___init_agtexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AGtExpr___init_agtexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AGtExpr___init_agtexpr "parser_prod::AGtExpr::init_agtexpr"
 typedef void (* parser_prod___AGtExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AGtExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AGtExpr___replace_child "parser_prod::AGtExpr::(parser_prod::PNode::replace_child)"
@@ -2076,20 +2217,25 @@ void parser_prod___AGtExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AGtExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AGtExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AGtExpr___visit_all_reverse "parser_prod::AGtExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_AGtExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_AGtExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_AGtExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_AGtExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+typedef void (* parser_prod___AGtExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AGtExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AGtExpr___empty_init "parser_prod::AGtExpr::empty_init"
+val_t NEW_AGtExpr_parser_prod___AGtExpr___empty_init();
+typedef void (* parser_prod___AGtExpr___init_agtexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AGtExpr___init_agtexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AGtExpr___init_agtexpr "parser_prod::AGtExpr::init_agtexpr"
+val_t NEW_AGtExpr_parser_prod___AGtExpr___init_agtexpr(val_t p0, val_t p1);
+val_t NEW_AGeExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AGeExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AGeExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AGeExpr___n_expr__eq "parser_prod::AGeExpr::(parser_nodes::ASendExpr::n_expr=)"
 typedef void (* parser_prod___AGeExpr___n_expr2__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AGeExpr___n_expr2__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AGeExpr___n_expr2__eq "parser_prod::AGeExpr::(parser_nodes::ABinopExpr::n_expr2=)"
-typedef void (* parser_prod___AGeExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AGeExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AGeExpr___empty_init();
-#define LOCATE_parser_prod___AGeExpr___empty_init "parser_prod::AGeExpr::empty_init"
-typedef void (* parser_prod___AGeExpr___init_ageexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AGeExpr___init_ageexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AGeExpr___init_ageexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AGeExpr___init_ageexpr "parser_prod::AGeExpr::init_ageexpr"
 typedef void (* parser_prod___AGeExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AGeExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AGeExpr___replace_child "parser_prod::AGeExpr::(parser_prod::PNode::replace_child)"
@@ -2099,20 +2245,25 @@ void parser_prod___AGeExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AGeExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AGeExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AGeExpr___visit_all_reverse "parser_prod::AGeExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_AGeExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_AGeExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_AGeExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_AGeExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+typedef void (* parser_prod___AGeExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AGeExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AGeExpr___empty_init "parser_prod::AGeExpr::empty_init"
+val_t NEW_AGeExpr_parser_prod___AGeExpr___empty_init();
+typedef void (* parser_prod___AGeExpr___init_ageexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AGeExpr___init_ageexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AGeExpr___init_ageexpr "parser_prod::AGeExpr::init_ageexpr"
+val_t NEW_AGeExpr_parser_prod___AGeExpr___init_ageexpr(val_t p0, val_t p1);
+val_t NEW_AIsaExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AIsaExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AIsaExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AIsaExpr___n_expr__eq "parser_prod::AIsaExpr::(parser_nodes::AIsaExpr::n_expr=)"
 typedef void (* parser_prod___AIsaExpr___n_type__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AIsaExpr___n_type__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AIsaExpr___n_type__eq "parser_prod::AIsaExpr::(parser_nodes::AIsaExpr::n_type=)"
-typedef void (* parser_prod___AIsaExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AIsaExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AIsaExpr___empty_init();
-#define LOCATE_parser_prod___AIsaExpr___empty_init "parser_prod::AIsaExpr::empty_init"
-typedef void (* parser_prod___AIsaExpr___init_aisaexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AIsaExpr___init_aisaexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AIsaExpr___init_aisaexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AIsaExpr___init_aisaexpr "parser_prod::AIsaExpr::init_aisaexpr"
 typedef void (* parser_prod___AIsaExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AIsaExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AIsaExpr___replace_child "parser_prod::AIsaExpr::(parser_prod::PNode::replace_child)"
@@ -2122,20 +2273,21 @@ void parser_prod___AIsaExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AIsaExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AIsaExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AIsaExpr___visit_all_reverse "parser_prod::AIsaExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AIsaExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AIsaExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AIsaExpr___empty_init "parser_prod::AIsaExpr::empty_init"
+val_t NEW_AIsaExpr_parser_prod___AIsaExpr___empty_init();
+typedef void (* parser_prod___AIsaExpr___init_aisaexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AIsaExpr___init_aisaexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AIsaExpr___init_aisaexpr "parser_prod::AIsaExpr::init_aisaexpr"
+val_t NEW_AIsaExpr_parser_prod___AIsaExpr___init_aisaexpr(val_t p0, val_t p1);
+val_t NEW_APlusExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___APlusExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___APlusExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___APlusExpr___n_expr__eq "parser_prod::APlusExpr::(parser_nodes::ASendExpr::n_expr=)"
 typedef void (* parser_prod___APlusExpr___n_expr2__eq_t)(val_t  self, val_t  param0);
 void parser_prod___APlusExpr___n_expr2__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___APlusExpr___n_expr2__eq "parser_prod::APlusExpr::(parser_nodes::ABinopExpr::n_expr2=)"
-typedef void (* parser_prod___APlusExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___APlusExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___APlusExpr___empty_init();
-#define LOCATE_parser_prod___APlusExpr___empty_init "parser_prod::APlusExpr::empty_init"
-typedef void (* parser_prod___APlusExpr___init_aplusexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___APlusExpr___init_aplusexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___APlusExpr___init_aplusexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___APlusExpr___init_aplusexpr "parser_prod::APlusExpr::init_aplusexpr"
 typedef void (* parser_prod___APlusExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___APlusExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___APlusExpr___replace_child "parser_prod::APlusExpr::(parser_prod::PNode::replace_child)"
@@ -2145,20 +2297,25 @@ void parser_prod___APlusExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___APlusExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___APlusExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___APlusExpr___visit_all_reverse "parser_prod::APlusExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_APlusExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_APlusExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_APlusExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_APlusExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+typedef void (* parser_prod___APlusExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___APlusExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___APlusExpr___empty_init "parser_prod::APlusExpr::empty_init"
+val_t NEW_APlusExpr_parser_prod___APlusExpr___empty_init();
+typedef void (* parser_prod___APlusExpr___init_aplusexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___APlusExpr___init_aplusexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___APlusExpr___init_aplusexpr "parser_prod::APlusExpr::init_aplusexpr"
+val_t NEW_APlusExpr_parser_prod___APlusExpr___init_aplusexpr(val_t p0, val_t p1);
+val_t NEW_AMinusExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AMinusExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AMinusExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AMinusExpr___n_expr__eq "parser_prod::AMinusExpr::(parser_nodes::ASendExpr::n_expr=)"
 typedef void (* parser_prod___AMinusExpr___n_expr2__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AMinusExpr___n_expr2__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AMinusExpr___n_expr2__eq "parser_prod::AMinusExpr::(parser_nodes::ABinopExpr::n_expr2=)"
-typedef void (* parser_prod___AMinusExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AMinusExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AMinusExpr___empty_init();
-#define LOCATE_parser_prod___AMinusExpr___empty_init "parser_prod::AMinusExpr::empty_init"
-typedef void (* parser_prod___AMinusExpr___init_aminusexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AMinusExpr___init_aminusexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AMinusExpr___init_aminusexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AMinusExpr___init_aminusexpr "parser_prod::AMinusExpr::init_aminusexpr"
 typedef void (* parser_prod___AMinusExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AMinusExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AMinusExpr___replace_child "parser_prod::AMinusExpr::(parser_prod::PNode::replace_child)"
@@ -2168,20 +2325,25 @@ void parser_prod___AMinusExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AMinusExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AMinusExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AMinusExpr___visit_all_reverse "parser_prod::AMinusExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_AMinusExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_AMinusExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_AMinusExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_AMinusExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+typedef void (* parser_prod___AMinusExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AMinusExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AMinusExpr___empty_init "parser_prod::AMinusExpr::empty_init"
+val_t NEW_AMinusExpr_parser_prod___AMinusExpr___empty_init();
+typedef void (* parser_prod___AMinusExpr___init_aminusexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AMinusExpr___init_aminusexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AMinusExpr___init_aminusexpr "parser_prod::AMinusExpr::init_aminusexpr"
+val_t NEW_AMinusExpr_parser_prod___AMinusExpr___init_aminusexpr(val_t p0, val_t p1);
+val_t NEW_AStarshipExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AStarshipExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AStarshipExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AStarshipExpr___n_expr__eq "parser_prod::AStarshipExpr::(parser_nodes::ASendExpr::n_expr=)"
 typedef void (* parser_prod___AStarshipExpr___n_expr2__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AStarshipExpr___n_expr2__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AStarshipExpr___n_expr2__eq "parser_prod::AStarshipExpr::(parser_nodes::ABinopExpr::n_expr2=)"
-typedef void (* parser_prod___AStarshipExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AStarshipExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AStarshipExpr___empty_init();
-#define LOCATE_parser_prod___AStarshipExpr___empty_init "parser_prod::AStarshipExpr::empty_init"
-typedef void (* parser_prod___AStarshipExpr___init_astarshipexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AStarshipExpr___init_astarshipexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AStarshipExpr___init_astarshipexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AStarshipExpr___init_astarshipexpr "parser_prod::AStarshipExpr::init_astarshipexpr"
 typedef void (* parser_prod___AStarshipExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AStarshipExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AStarshipExpr___replace_child "parser_prod::AStarshipExpr::(parser_prod::PNode::replace_child)"
@@ -2191,20 +2353,25 @@ void parser_prod___AStarshipExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AStarshipExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AStarshipExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AStarshipExpr___visit_all_reverse "parser_prod::AStarshipExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_AStarshipExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_AStarshipExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_AStarshipExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_AStarshipExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+typedef void (* parser_prod___AStarshipExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AStarshipExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AStarshipExpr___empty_init "parser_prod::AStarshipExpr::empty_init"
+val_t NEW_AStarshipExpr_parser_prod___AStarshipExpr___empty_init();
+typedef void (* parser_prod___AStarshipExpr___init_astarshipexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AStarshipExpr___init_astarshipexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AStarshipExpr___init_astarshipexpr "parser_prod::AStarshipExpr::init_astarshipexpr"
+val_t NEW_AStarshipExpr_parser_prod___AStarshipExpr___init_astarshipexpr(val_t p0, val_t p1);
+val_t NEW_AStarExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AStarExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AStarExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AStarExpr___n_expr__eq "parser_prod::AStarExpr::(parser_nodes::ASendExpr::n_expr=)"
 typedef void (* parser_prod___AStarExpr___n_expr2__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AStarExpr___n_expr2__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AStarExpr___n_expr2__eq "parser_prod::AStarExpr::(parser_nodes::ABinopExpr::n_expr2=)"
-typedef void (* parser_prod___AStarExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AStarExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AStarExpr___empty_init();
-#define LOCATE_parser_prod___AStarExpr___empty_init "parser_prod::AStarExpr::empty_init"
-typedef void (* parser_prod___AStarExpr___init_astarexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AStarExpr___init_astarexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AStarExpr___init_astarexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AStarExpr___init_astarexpr "parser_prod::AStarExpr::init_astarexpr"
 typedef void (* parser_prod___AStarExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AStarExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AStarExpr___replace_child "parser_prod::AStarExpr::(parser_prod::PNode::replace_child)"
@@ -2214,20 +2381,25 @@ void parser_prod___AStarExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AStarExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AStarExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AStarExpr___visit_all_reverse "parser_prod::AStarExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_AStarExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_AStarExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_AStarExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_AStarExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+typedef void (* parser_prod___AStarExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AStarExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AStarExpr___empty_init "parser_prod::AStarExpr::empty_init"
+val_t NEW_AStarExpr_parser_prod___AStarExpr___empty_init();
+typedef void (* parser_prod___AStarExpr___init_astarexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AStarExpr___init_astarexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AStarExpr___init_astarexpr "parser_prod::AStarExpr::init_astarexpr"
+val_t NEW_AStarExpr_parser_prod___AStarExpr___init_astarexpr(val_t p0, val_t p1);
+val_t NEW_ASlashExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ASlashExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ASlashExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ASlashExpr___n_expr__eq "parser_prod::ASlashExpr::(parser_nodes::ASendExpr::n_expr=)"
 typedef void (* parser_prod___ASlashExpr___n_expr2__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ASlashExpr___n_expr2__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ASlashExpr___n_expr2__eq "parser_prod::ASlashExpr::(parser_nodes::ABinopExpr::n_expr2=)"
-typedef void (* parser_prod___ASlashExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ASlashExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ASlashExpr___empty_init();
-#define LOCATE_parser_prod___ASlashExpr___empty_init "parser_prod::ASlashExpr::empty_init"
-typedef void (* parser_prod___ASlashExpr___init_aslashexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___ASlashExpr___init_aslashexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___ASlashExpr___init_aslashexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___ASlashExpr___init_aslashexpr "parser_prod::ASlashExpr::init_aslashexpr"
 typedef void (* parser_prod___ASlashExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ASlashExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ASlashExpr___replace_child "parser_prod::ASlashExpr::(parser_prod::PNode::replace_child)"
@@ -2237,20 +2409,25 @@ void parser_prod___ASlashExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ASlashExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ASlashExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ASlashExpr___visit_all_reverse "parser_prod::ASlashExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_ASlashExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ASlashExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_ASlashExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_ASlashExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+typedef void (* parser_prod___ASlashExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ASlashExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ASlashExpr___empty_init "parser_prod::ASlashExpr::empty_init"
+val_t NEW_ASlashExpr_parser_prod___ASlashExpr___empty_init();
+typedef void (* parser_prod___ASlashExpr___init_aslashexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___ASlashExpr___init_aslashexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___ASlashExpr___init_aslashexpr "parser_prod::ASlashExpr::init_aslashexpr"
+val_t NEW_ASlashExpr_parser_prod___ASlashExpr___init_aslashexpr(val_t p0, val_t p1);
+val_t NEW_APercentExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___APercentExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___APercentExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___APercentExpr___n_expr__eq "parser_prod::APercentExpr::(parser_nodes::ASendExpr::n_expr=)"
 typedef void (* parser_prod___APercentExpr___n_expr2__eq_t)(val_t  self, val_t  param0);
 void parser_prod___APercentExpr___n_expr2__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___APercentExpr___n_expr2__eq "parser_prod::APercentExpr::(parser_nodes::ABinopExpr::n_expr2=)"
-typedef void (* parser_prod___APercentExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___APercentExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___APercentExpr___empty_init();
-#define LOCATE_parser_prod___APercentExpr___empty_init "parser_prod::APercentExpr::empty_init"
-typedef void (* parser_prod___APercentExpr___init_apercentexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___APercentExpr___init_apercentexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___APercentExpr___init_apercentexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___APercentExpr___init_apercentexpr "parser_prod::APercentExpr::init_apercentexpr"
 typedef void (* parser_prod___APercentExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___APercentExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___APercentExpr___replace_child "parser_prod::APercentExpr::(parser_prod::PNode::replace_child)"
@@ -2260,20 +2437,25 @@ void parser_prod___APercentExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___APercentExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___APercentExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___APercentExpr___visit_all_reverse "parser_prod::APercentExpr::(parser_prod::PNode::visit_all_reverse)"
-typedef void (* parser_prod___AUminusExpr___n_minus__eq_t)(val_t  self, val_t  param0);
-void parser_prod___AUminusExpr___n_minus__eq(val_t  self, val_t  param0);
-#define LOCATE_parser_prod___AUminusExpr___n_minus__eq "parser_prod::AUminusExpr::(parser_nodes::AUminusExpr::n_minus=)"
+val_t NEW_APercentExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_APercentExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+val_t NEW_APercentExpr_parser_prod___ABinopExpr___empty_init();
+val_t NEW_APercentExpr_parser_prod___ABinopExpr___init_abinopexpr(val_t p0, val_t p1);
+typedef void (* parser_prod___APercentExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___APercentExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___APercentExpr___empty_init "parser_prod::APercentExpr::empty_init"
+val_t NEW_APercentExpr_parser_prod___APercentExpr___empty_init();
+typedef void (* parser_prod___APercentExpr___init_apercentexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___APercentExpr___init_apercentexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___APercentExpr___init_apercentexpr "parser_prod::APercentExpr::init_apercentexpr"
+val_t NEW_APercentExpr_parser_prod___APercentExpr___init_apercentexpr(val_t p0, val_t p1);
+val_t NEW_AUminusExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AUminusExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AUminusExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AUminusExpr___n_expr__eq "parser_prod::AUminusExpr::(parser_nodes::ASendExpr::n_expr=)"
-typedef void (* parser_prod___AUminusExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AUminusExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AUminusExpr___empty_init();
-#define LOCATE_parser_prod___AUminusExpr___empty_init "parser_prod::AUminusExpr::empty_init"
-typedef void (* parser_prod___AUminusExpr___init_auminusexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AUminusExpr___init_auminusexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AUminusExpr___init_auminusexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AUminusExpr___init_auminusexpr "parser_prod::AUminusExpr::init_auminusexpr"
+typedef void (* parser_prod___AUminusExpr___n_minus__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AUminusExpr___n_minus__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AUminusExpr___n_minus__eq "parser_prod::AUminusExpr::(parser_nodes::AUminusExpr::n_minus=)"
 typedef void (* parser_prod___AUminusExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AUminusExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AUminusExpr___replace_child "parser_prod::AUminusExpr::(parser_prod::PNode::replace_child)"
@@ -2283,6 +2465,17 @@ void parser_prod___AUminusExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AUminusExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AUminusExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AUminusExpr___visit_all_reverse "parser_prod::AUminusExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_AUminusExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_AUminusExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+typedef void (* parser_prod___AUminusExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AUminusExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AUminusExpr___empty_init "parser_prod::AUminusExpr::empty_init"
+val_t NEW_AUminusExpr_parser_prod___AUminusExpr___empty_init();
+typedef void (* parser_prod___AUminusExpr___init_auminusexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AUminusExpr___init_auminusexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AUminusExpr___init_auminusexpr "parser_prod::AUminusExpr::init_auminusexpr"
+val_t NEW_AUminusExpr_parser_prod___AUminusExpr___init_auminusexpr(val_t p0, val_t p1);
+val_t NEW_ANewExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ANewExpr___n_kwnew__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ANewExpr___n_kwnew__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ANewExpr___n_kwnew__eq "parser_prod::ANewExpr::(parser_nodes::ANewExpr::n_kwnew=)"
@@ -2292,14 +2485,6 @@ void parser_prod___ANewExpr___n_type__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___ANewExpr___n_id__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ANewExpr___n_id__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ANewExpr___n_id__eq "parser_prod::ANewExpr::(parser_nodes::ANewExpr::n_id=)"
-typedef void (* parser_prod___ANewExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ANewExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ANewExpr___empty_init();
-#define LOCATE_parser_prod___ANewExpr___empty_init "parser_prod::ANewExpr::empty_init"
-typedef void (* parser_prod___ANewExpr___init_anewexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void parser_prod___ANewExpr___init_anewexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-val_t NEW_parser_prod___ANewExpr___init_anewexpr(val_t  param0, val_t  param1, val_t  param2, val_t  param3);
-#define LOCATE_parser_prod___ANewExpr___init_anewexpr "parser_prod::ANewExpr::init_anewexpr"
 typedef void (* parser_prod___ANewExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ANewExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ANewExpr___replace_child "parser_prod::ANewExpr::(parser_prod::PNode::replace_child)"
@@ -2309,20 +2494,21 @@ void parser_prod___ANewExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ANewExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ANewExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ANewExpr___visit_all_reverse "parser_prod::ANewExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ANewExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ANewExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ANewExpr___empty_init "parser_prod::ANewExpr::empty_init"
+val_t NEW_ANewExpr_parser_prod___ANewExpr___empty_init();
+typedef void (* parser_prod___ANewExpr___init_anewexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+void parser_prod___ANewExpr___init_anewexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+#define LOCATE_parser_prod___ANewExpr___init_anewexpr "parser_prod::ANewExpr::init_anewexpr"
+val_t NEW_ANewExpr_parser_prod___ANewExpr___init_anewexpr(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_AAttrExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AAttrExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAttrExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAttrExpr___n_expr__eq "parser_prod::AAttrExpr::(parser_nodes::AAttrFormExpr::n_expr=)"
 typedef void (* parser_prod___AAttrExpr___n_id__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAttrExpr___n_id__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAttrExpr___n_id__eq "parser_prod::AAttrExpr::(parser_nodes::AAttrFormExpr::n_id=)"
-typedef void (* parser_prod___AAttrExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AAttrExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AAttrExpr___empty_init();
-#define LOCATE_parser_prod___AAttrExpr___empty_init "parser_prod::AAttrExpr::empty_init"
-typedef void (* parser_prod___AAttrExpr___init_aattrexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AAttrExpr___init_aattrexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AAttrExpr___init_aattrexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AAttrExpr___init_aattrexpr "parser_prod::AAttrExpr::init_aattrexpr"
 typedef void (* parser_prod___AAttrExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AAttrExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AAttrExpr___replace_child "parser_prod::AAttrExpr::(parser_prod::PNode::replace_child)"
@@ -2332,6 +2518,15 @@ void parser_prod___AAttrExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AAttrExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AAttrExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAttrExpr___visit_all_reverse "parser_prod::AAttrExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AAttrExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AAttrExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AAttrExpr___empty_init "parser_prod::AAttrExpr::empty_init"
+val_t NEW_AAttrExpr_parser_prod___AAttrExpr___empty_init();
+typedef void (* parser_prod___AAttrExpr___init_aattrexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AAttrExpr___init_aattrexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AAttrExpr___init_aattrexpr "parser_prod::AAttrExpr::init_aattrexpr"
+val_t NEW_AAttrExpr_parser_prod___AAttrExpr___init_aattrexpr(val_t p0, val_t p1);
+val_t NEW_AAttrAssignExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AAttrAssignExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAttrAssignExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAttrAssignExpr___n_expr__eq "parser_prod::AAttrAssignExpr::(parser_nodes::AAttrFormExpr::n_expr=)"
@@ -2344,14 +2539,6 @@ void parser_prod___AAttrAssignExpr___n_assign__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___AAttrAssignExpr___n_value__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAttrAssignExpr___n_value__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAttrAssignExpr___n_value__eq "parser_prod::AAttrAssignExpr::(parser_nodes::AAssignFormExpr::n_value=)"
-typedef void (* parser_prod___AAttrAssignExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AAttrAssignExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AAttrAssignExpr___empty_init();
-#define LOCATE_parser_prod___AAttrAssignExpr___empty_init "parser_prod::AAttrAssignExpr::empty_init"
-typedef void (* parser_prod___AAttrAssignExpr___init_aattrassignexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void parser_prod___AAttrAssignExpr___init_aattrassignexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-val_t NEW_parser_prod___AAttrAssignExpr___init_aattrassignexpr(val_t  param0, val_t  param1, val_t  param2, val_t  param3);
-#define LOCATE_parser_prod___AAttrAssignExpr___init_aattrassignexpr "parser_prod::AAttrAssignExpr::init_aattrassignexpr"
 typedef void (* parser_prod___AAttrAssignExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AAttrAssignExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AAttrAssignExpr___replace_child "parser_prod::AAttrAssignExpr::(parser_prod::PNode::replace_child)"
@@ -2361,6 +2548,15 @@ void parser_prod___AAttrAssignExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AAttrAssignExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AAttrAssignExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAttrAssignExpr___visit_all_reverse "parser_prod::AAttrAssignExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AAttrAssignExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AAttrAssignExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AAttrAssignExpr___empty_init "parser_prod::AAttrAssignExpr::empty_init"
+val_t NEW_AAttrAssignExpr_parser_prod___AAttrAssignExpr___empty_init();
+typedef void (* parser_prod___AAttrAssignExpr___init_aattrassignexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+void parser_prod___AAttrAssignExpr___init_aattrassignexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+#define LOCATE_parser_prod___AAttrAssignExpr___init_aattrassignexpr "parser_prod::AAttrAssignExpr::init_aattrassignexpr"
+val_t NEW_AAttrAssignExpr_parser_prod___AAttrAssignExpr___init_aattrassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_AAttrReassignExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AAttrReassignExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAttrReassignExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAttrReassignExpr___n_expr__eq "parser_prod::AAttrReassignExpr::(parser_nodes::AAttrFormExpr::n_expr=)"
@@ -2373,14 +2569,6 @@ void parser_prod___AAttrReassignExpr___n_assign_op__eq(val_t  self, val_t  param
 typedef void (* parser_prod___AAttrReassignExpr___n_value__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAttrReassignExpr___n_value__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAttrReassignExpr___n_value__eq "parser_prod::AAttrReassignExpr::(parser_nodes::AReassignFormExpr::n_value=)"
-typedef void (* parser_prod___AAttrReassignExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AAttrReassignExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AAttrReassignExpr___empty_init();
-#define LOCATE_parser_prod___AAttrReassignExpr___empty_init "parser_prod::AAttrReassignExpr::empty_init"
-typedef void (* parser_prod___AAttrReassignExpr___init_aattrreassignexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void parser_prod___AAttrReassignExpr___init_aattrreassignexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-val_t NEW_parser_prod___AAttrReassignExpr___init_aattrreassignexpr(val_t  param0, val_t  param1, val_t  param2, val_t  param3);
-#define LOCATE_parser_prod___AAttrReassignExpr___init_aattrreassignexpr "parser_prod::AAttrReassignExpr::init_aattrreassignexpr"
 typedef void (* parser_prod___AAttrReassignExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AAttrReassignExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AAttrReassignExpr___replace_child "parser_prod::AAttrReassignExpr::(parser_prod::PNode::replace_child)"
@@ -2390,20 +2578,21 @@ void parser_prod___AAttrReassignExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AAttrReassignExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AAttrReassignExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAttrReassignExpr___visit_all_reverse "parser_prod::AAttrReassignExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AAttrReassignExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AAttrReassignExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AAttrReassignExpr___empty_init "parser_prod::AAttrReassignExpr::empty_init"
+val_t NEW_AAttrReassignExpr_parser_prod___AAttrReassignExpr___empty_init();
+typedef void (* parser_prod___AAttrReassignExpr___init_aattrreassignexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+void parser_prod___AAttrReassignExpr___init_aattrreassignexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+#define LOCATE_parser_prod___AAttrReassignExpr___init_aattrreassignexpr "parser_prod::AAttrReassignExpr::init_aattrreassignexpr"
+val_t NEW_AAttrReassignExpr_parser_prod___AAttrReassignExpr___init_aattrreassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_ACallExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ACallExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ACallExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ACallExpr___n_expr__eq "parser_prod::ACallExpr::(parser_nodes::ASendExpr::n_expr=)"
 typedef void (* parser_prod___ACallExpr___n_id__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ACallExpr___n_id__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ACallExpr___n_id__eq "parser_prod::ACallExpr::(parser_nodes::ACallFormExpr::n_id=)"
-typedef void (* parser_prod___ACallExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ACallExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ACallExpr___empty_init();
-#define LOCATE_parser_prod___ACallExpr___empty_init "parser_prod::ACallExpr::empty_init"
-typedef void (* parser_prod___ACallExpr___init_acallexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void parser_prod___ACallExpr___init_acallexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_parser_prod___ACallExpr___init_acallexpr(val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_parser_prod___ACallExpr___init_acallexpr "parser_prod::ACallExpr::init_acallexpr"
 typedef void (* parser_prod___ACallExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ACallExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ACallExpr___replace_child "parser_prod::ACallExpr::(parser_prod::PNode::replace_child)"
@@ -2413,6 +2602,17 @@ void parser_prod___ACallExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ACallExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ACallExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ACallExpr___visit_all_reverse "parser_prod::ACallExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_ACallExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ACallExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+typedef void (* parser_prod___ACallExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ACallExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ACallExpr___empty_init "parser_prod::ACallExpr::empty_init"
+val_t NEW_ACallExpr_parser_prod___ACallExpr___empty_init();
+typedef void (* parser_prod___ACallExpr___init_acallexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+void parser_prod___ACallExpr___init_acallexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+#define LOCATE_parser_prod___ACallExpr___init_acallexpr "parser_prod::ACallExpr::init_acallexpr"
+val_t NEW_ACallExpr_parser_prod___ACallExpr___init_acallexpr(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_ACallAssignExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ACallAssignExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ACallAssignExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ACallAssignExpr___n_expr__eq "parser_prod::ACallAssignExpr::(parser_nodes::ASendExpr::n_expr=)"
@@ -2425,14 +2625,6 @@ void parser_prod___ACallAssignExpr___n_assign__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___ACallAssignExpr___n_value__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ACallAssignExpr___n_value__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ACallAssignExpr___n_value__eq "parser_prod::ACallAssignExpr::(parser_nodes::AAssignFormExpr::n_value=)"
-typedef void (* parser_prod___ACallAssignExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ACallAssignExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ACallAssignExpr___empty_init();
-#define LOCATE_parser_prod___ACallAssignExpr___empty_init "parser_prod::ACallAssignExpr::empty_init"
-typedef void (* parser_prod___ACallAssignExpr___init_acallassignexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
-void parser_prod___ACallAssignExpr___init_acallassignexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
-val_t NEW_parser_prod___ACallAssignExpr___init_acallassignexpr(val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4);
-#define LOCATE_parser_prod___ACallAssignExpr___init_acallassignexpr "parser_prod::ACallAssignExpr::init_acallassignexpr"
 typedef void (* parser_prod___ACallAssignExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ACallAssignExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ACallAssignExpr___replace_child "parser_prod::ACallAssignExpr::(parser_prod::PNode::replace_child)"
@@ -2442,6 +2634,17 @@ void parser_prod___ACallAssignExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ACallAssignExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ACallAssignExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ACallAssignExpr___visit_all_reverse "parser_prod::ACallAssignExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_ACallAssignExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ACallAssignExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+typedef void (* parser_prod___ACallAssignExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ACallAssignExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ACallAssignExpr___empty_init "parser_prod::ACallAssignExpr::empty_init"
+val_t NEW_ACallAssignExpr_parser_prod___ACallAssignExpr___empty_init();
+typedef void (* parser_prod___ACallAssignExpr___init_acallassignexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
+void parser_prod___ACallAssignExpr___init_acallassignexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
+#define LOCATE_parser_prod___ACallAssignExpr___init_acallassignexpr "parser_prod::ACallAssignExpr::init_acallassignexpr"
+val_t NEW_ACallAssignExpr_parser_prod___ACallAssignExpr___init_acallassignexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+val_t NEW_ACallReassignExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ACallReassignExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ACallReassignExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ACallReassignExpr___n_expr__eq "parser_prod::ACallReassignExpr::(parser_nodes::ASendExpr::n_expr=)"
@@ -2454,14 +2657,6 @@ void parser_prod___ACallReassignExpr___n_assign_op__eq(val_t  self, val_t  param
 typedef void (* parser_prod___ACallReassignExpr___n_value__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ACallReassignExpr___n_value__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ACallReassignExpr___n_value__eq "parser_prod::ACallReassignExpr::(parser_nodes::AReassignFormExpr::n_value=)"
-typedef void (* parser_prod___ACallReassignExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ACallReassignExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ACallReassignExpr___empty_init();
-#define LOCATE_parser_prod___ACallReassignExpr___empty_init "parser_prod::ACallReassignExpr::empty_init"
-typedef void (* parser_prod___ACallReassignExpr___init_acallreassignexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
-void parser_prod___ACallReassignExpr___init_acallreassignexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
-val_t NEW_parser_prod___ACallReassignExpr___init_acallreassignexpr(val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4);
-#define LOCATE_parser_prod___ACallReassignExpr___init_acallreassignexpr "parser_prod::ACallReassignExpr::init_acallreassignexpr"
 typedef void (* parser_prod___ACallReassignExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ACallReassignExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ACallReassignExpr___replace_child "parser_prod::ACallReassignExpr::(parser_prod::PNode::replace_child)"
@@ -2471,20 +2666,23 @@ void parser_prod___ACallReassignExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ACallReassignExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ACallReassignExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ACallReassignExpr___visit_all_reverse "parser_prod::ACallReassignExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_ACallReassignExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ACallReassignExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+typedef void (* parser_prod___ACallReassignExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ACallReassignExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ACallReassignExpr___empty_init "parser_prod::ACallReassignExpr::empty_init"
+val_t NEW_ACallReassignExpr_parser_prod___ACallReassignExpr___empty_init();
+typedef void (* parser_prod___ACallReassignExpr___init_acallreassignexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
+void parser_prod___ACallReassignExpr___init_acallreassignexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
+#define LOCATE_parser_prod___ACallReassignExpr___init_acallreassignexpr "parser_prod::ACallReassignExpr::init_acallreassignexpr"
+val_t NEW_ACallReassignExpr_parser_prod___ACallReassignExpr___init_acallreassignexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+val_t NEW_ASuperExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ASuperExpr___n_qualified__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ASuperExpr___n_qualified__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ASuperExpr___n_qualified__eq "parser_prod::ASuperExpr::(parser_nodes::ASuperExpr::n_qualified=)"
 typedef void (* parser_prod___ASuperExpr___n_kwsuper__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ASuperExpr___n_kwsuper__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ASuperExpr___n_kwsuper__eq "parser_prod::ASuperExpr::(parser_nodes::ASuperExpr::n_kwsuper=)"
-typedef void (* parser_prod___ASuperExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ASuperExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ASuperExpr___empty_init();
-#define LOCATE_parser_prod___ASuperExpr___empty_init "parser_prod::ASuperExpr::empty_init"
-typedef void (* parser_prod___ASuperExpr___init_asuperexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void parser_prod___ASuperExpr___init_asuperexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_parser_prod___ASuperExpr___init_asuperexpr(val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_parser_prod___ASuperExpr___init_asuperexpr "parser_prod::ASuperExpr::init_asuperexpr"
 typedef void (* parser_prod___ASuperExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ASuperExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ASuperExpr___replace_child "parser_prod::ASuperExpr::(parser_prod::PNode::replace_child)"
@@ -2494,20 +2692,21 @@ void parser_prod___ASuperExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ASuperExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ASuperExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ASuperExpr___visit_all_reverse "parser_prod::ASuperExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ASuperExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ASuperExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ASuperExpr___empty_init "parser_prod::ASuperExpr::empty_init"
+val_t NEW_ASuperExpr_parser_prod___ASuperExpr___empty_init();
+typedef void (* parser_prod___ASuperExpr___init_asuperexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void parser_prod___ASuperExpr___init_asuperexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_parser_prod___ASuperExpr___init_asuperexpr "parser_prod::ASuperExpr::init_asuperexpr"
+val_t NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_AInitExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AInitExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AInitExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AInitExpr___n_expr__eq "parser_prod::AInitExpr::(parser_nodes::ASendExpr::n_expr=)"
 typedef void (* parser_prod___AInitExpr___n_kwinit__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AInitExpr___n_kwinit__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AInitExpr___n_kwinit__eq "parser_prod::AInitExpr::(parser_nodes::AInitExpr::n_kwinit=)"
-typedef void (* parser_prod___AInitExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AInitExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AInitExpr___empty_init();
-#define LOCATE_parser_prod___AInitExpr___empty_init "parser_prod::AInitExpr::empty_init"
-typedef void (* parser_prod___AInitExpr___init_ainitexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void parser_prod___AInitExpr___init_ainitexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_parser_prod___AInitExpr___init_ainitexpr(val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_parser_prod___AInitExpr___init_ainitexpr "parser_prod::AInitExpr::init_ainitexpr"
 typedef void (* parser_prod___AInitExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AInitExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AInitExpr___replace_child "parser_prod::AInitExpr::(parser_prod::PNode::replace_child)"
@@ -2517,17 +2716,20 @@ void parser_prod___AInitExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AInitExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AInitExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AInitExpr___visit_all_reverse "parser_prod::AInitExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_AInitExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_AInitExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+typedef void (* parser_prod___AInitExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AInitExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AInitExpr___empty_init "parser_prod::AInitExpr::empty_init"
+val_t NEW_AInitExpr_parser_prod___AInitExpr___empty_init();
+typedef void (* parser_prod___AInitExpr___init_ainitexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void parser_prod___AInitExpr___init_ainitexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_parser_prod___AInitExpr___init_ainitexpr "parser_prod::AInitExpr::init_ainitexpr"
+val_t NEW_AInitExpr_parser_prod___AInitExpr___init_ainitexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_ABraExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ABraExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ABraExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABraExpr___n_expr__eq "parser_prod::ABraExpr::(parser_nodes::ASendExpr::n_expr=)"
-typedef void (* parser_prod___ABraExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ABraExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ABraExpr___empty_init();
-#define LOCATE_parser_prod___ABraExpr___empty_init "parser_prod::ABraExpr::empty_init"
-typedef void (* parser_prod___ABraExpr___init_abraexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___ABraExpr___init_abraexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___ABraExpr___init_abraexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___ABraExpr___init_abraexpr "parser_prod::ABraExpr::init_abraexpr"
 typedef void (* parser_prod___ABraExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ABraExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ABraExpr___replace_child "parser_prod::ABraExpr::(parser_prod::PNode::replace_child)"
@@ -2537,6 +2739,17 @@ void parser_prod___ABraExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ABraExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ABraExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABraExpr___visit_all_reverse "parser_prod::ABraExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_ABraExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ABraExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+typedef void (* parser_prod___ABraExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ABraExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ABraExpr___empty_init "parser_prod::ABraExpr::empty_init"
+val_t NEW_ABraExpr_parser_prod___ABraExpr___empty_init();
+typedef void (* parser_prod___ABraExpr___init_abraexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void parser_prod___ABraExpr___init_abraexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_parser_prod___ABraExpr___init_abraexpr "parser_prod::ABraExpr::init_abraexpr"
+val_t NEW_ABraExpr_parser_prod___ABraExpr___init_abraexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_ABraAssignExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ABraAssignExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ABraAssignExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABraAssignExpr___n_expr__eq "parser_prod::ABraAssignExpr::(parser_nodes::ASendExpr::n_expr=)"
@@ -2546,14 +2759,6 @@ void parser_prod___ABraAssignExpr___n_assign__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___ABraAssignExpr___n_value__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ABraAssignExpr___n_value__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABraAssignExpr___n_value__eq "parser_prod::ABraAssignExpr::(parser_nodes::AAssignFormExpr::n_value=)"
-typedef void (* parser_prod___ABraAssignExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ABraAssignExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ABraAssignExpr___empty_init();
-#define LOCATE_parser_prod___ABraAssignExpr___empty_init "parser_prod::ABraAssignExpr::empty_init"
-typedef void (* parser_prod___ABraAssignExpr___init_abraassignexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void parser_prod___ABraAssignExpr___init_abraassignexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-val_t NEW_parser_prod___ABraAssignExpr___init_abraassignexpr(val_t  param0, val_t  param1, val_t  param2, val_t  param3);
-#define LOCATE_parser_prod___ABraAssignExpr___init_abraassignexpr "parser_prod::ABraAssignExpr::init_abraassignexpr"
 typedef void (* parser_prod___ABraAssignExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ABraAssignExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ABraAssignExpr___replace_child "parser_prod::ABraAssignExpr::(parser_prod::PNode::replace_child)"
@@ -2563,6 +2768,17 @@ void parser_prod___ABraAssignExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ABraAssignExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ABraAssignExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABraAssignExpr___visit_all_reverse "parser_prod::ABraAssignExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_ABraAssignExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ABraAssignExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+typedef void (* parser_prod___ABraAssignExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ABraAssignExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ABraAssignExpr___empty_init "parser_prod::ABraAssignExpr::empty_init"
+val_t NEW_ABraAssignExpr_parser_prod___ABraAssignExpr___empty_init();
+typedef void (* parser_prod___ABraAssignExpr___init_abraassignexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+void parser_prod___ABraAssignExpr___init_abraassignexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+#define LOCATE_parser_prod___ABraAssignExpr___init_abraassignexpr "parser_prod::ABraAssignExpr::init_abraassignexpr"
+val_t NEW_ABraAssignExpr_parser_prod___ABraAssignExpr___init_abraassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_ABraReassignExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ABraReassignExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ABraReassignExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABraReassignExpr___n_expr__eq "parser_prod::ABraReassignExpr::(parser_nodes::ASendExpr::n_expr=)"
@@ -2572,14 +2788,6 @@ void parser_prod___ABraReassignExpr___n_assign_op__eq(val_t  self, val_t  param0
 typedef void (* parser_prod___ABraReassignExpr___n_value__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ABraReassignExpr___n_value__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABraReassignExpr___n_value__eq "parser_prod::ABraReassignExpr::(parser_nodes::AReassignFormExpr::n_value=)"
-typedef void (* parser_prod___ABraReassignExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ABraReassignExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ABraReassignExpr___empty_init();
-#define LOCATE_parser_prod___ABraReassignExpr___empty_init "parser_prod::ABraReassignExpr::empty_init"
-typedef void (* parser_prod___ABraReassignExpr___init_abrareassignexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void parser_prod___ABraReassignExpr___init_abrareassignexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-val_t NEW_parser_prod___ABraReassignExpr___init_abrareassignexpr(val_t  param0, val_t  param1, val_t  param2, val_t  param3);
-#define LOCATE_parser_prod___ABraReassignExpr___init_abrareassignexpr "parser_prod::ABraReassignExpr::init_abrareassignexpr"
 typedef void (* parser_prod___ABraReassignExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ABraReassignExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ABraReassignExpr___replace_child "parser_prod::ABraReassignExpr::(parser_prod::PNode::replace_child)"
@@ -2589,17 +2797,20 @@ void parser_prod___ABraReassignExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ABraReassignExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ABraReassignExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ABraReassignExpr___visit_all_reverse "parser_prod::ABraReassignExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_ABraReassignExpr_parser_prod___ASendExpr___empty_init();
+val_t NEW_ABraReassignExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
+typedef void (* parser_prod___ABraReassignExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ABraReassignExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ABraReassignExpr___empty_init "parser_prod::ABraReassignExpr::empty_init"
+val_t NEW_ABraReassignExpr_parser_prod___ABraReassignExpr___empty_init();
+typedef void (* parser_prod___ABraReassignExpr___init_abrareassignexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+void parser_prod___ABraReassignExpr___init_abrareassignexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+#define LOCATE_parser_prod___ABraReassignExpr___init_abrareassignexpr "parser_prod::ABraReassignExpr::init_abrareassignexpr"
+val_t NEW_ABraReassignExpr_parser_prod___ABraReassignExpr___init_abrareassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_AVarExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AVarExpr___n_id__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AVarExpr___n_id__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AVarExpr___n_id__eq "parser_prod::AVarExpr::(parser_nodes::AVarFormExpr::n_id=)"
-typedef void (* parser_prod___AVarExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AVarExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AVarExpr___empty_init();
-#define LOCATE_parser_prod___AVarExpr___empty_init "parser_prod::AVarExpr::empty_init"
-typedef void (* parser_prod___AVarExpr___init_avarexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AVarExpr___init_avarexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AVarExpr___init_avarexpr(val_t  param0);
-#define LOCATE_parser_prod___AVarExpr___init_avarexpr "parser_prod::AVarExpr::init_avarexpr"
 typedef void (* parser_prod___AVarExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AVarExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AVarExpr___replace_child "parser_prod::AVarExpr::(parser_prod::PNode::replace_child)"
@@ -2609,6 +2820,15 @@ void parser_prod___AVarExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AVarExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AVarExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AVarExpr___visit_all_reverse "parser_prod::AVarExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AVarExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AVarExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AVarExpr___empty_init "parser_prod::AVarExpr::empty_init"
+val_t NEW_AVarExpr_parser_prod___AVarExpr___empty_init();
+typedef void (* parser_prod___AVarExpr___init_avarexpr_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AVarExpr___init_avarexpr(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AVarExpr___init_avarexpr "parser_prod::AVarExpr::init_avarexpr"
+val_t NEW_AVarExpr_parser_prod___AVarExpr___init_avarexpr(val_t p0);
+val_t NEW_AVarAssignExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AVarAssignExpr___n_id__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AVarAssignExpr___n_id__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AVarAssignExpr___n_id__eq "parser_prod::AVarAssignExpr::(parser_nodes::AVarFormExpr::n_id=)"
@@ -2618,14 +2838,6 @@ void parser_prod___AVarAssignExpr___n_assign__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___AVarAssignExpr___n_value__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AVarAssignExpr___n_value__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AVarAssignExpr___n_value__eq "parser_prod::AVarAssignExpr::(parser_nodes::AAssignFormExpr::n_value=)"
-typedef void (* parser_prod___AVarAssignExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AVarAssignExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AVarAssignExpr___empty_init();
-#define LOCATE_parser_prod___AVarAssignExpr___empty_init "parser_prod::AVarAssignExpr::empty_init"
-typedef void (* parser_prod___AVarAssignExpr___init_avarassignexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void parser_prod___AVarAssignExpr___init_avarassignexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_parser_prod___AVarAssignExpr___init_avarassignexpr(val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_parser_prod___AVarAssignExpr___init_avarassignexpr "parser_prod::AVarAssignExpr::init_avarassignexpr"
 typedef void (* parser_prod___AVarAssignExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AVarAssignExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AVarAssignExpr___replace_child "parser_prod::AVarAssignExpr::(parser_prod::PNode::replace_child)"
@@ -2635,6 +2847,15 @@ void parser_prod___AVarAssignExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AVarAssignExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AVarAssignExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AVarAssignExpr___visit_all_reverse "parser_prod::AVarAssignExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AVarAssignExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AVarAssignExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AVarAssignExpr___empty_init "parser_prod::AVarAssignExpr::empty_init"
+val_t NEW_AVarAssignExpr_parser_prod___AVarAssignExpr___empty_init();
+typedef void (* parser_prod___AVarAssignExpr___init_avarassignexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void parser_prod___AVarAssignExpr___init_avarassignexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_parser_prod___AVarAssignExpr___init_avarassignexpr "parser_prod::AVarAssignExpr::init_avarassignexpr"
+val_t NEW_AVarAssignExpr_parser_prod___AVarAssignExpr___init_avarassignexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_AVarReassignExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AVarReassignExpr___n_id__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AVarReassignExpr___n_id__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AVarReassignExpr___n_id__eq "parser_prod::AVarReassignExpr::(parser_nodes::AVarFormExpr::n_id=)"
@@ -2644,14 +2865,6 @@ void parser_prod___AVarReassignExpr___n_assign_op__eq(val_t  self, val_t  param0
 typedef void (* parser_prod___AVarReassignExpr___n_value__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AVarReassignExpr___n_value__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AVarReassignExpr___n_value__eq "parser_prod::AVarReassignExpr::(parser_nodes::AReassignFormExpr::n_value=)"
-typedef void (* parser_prod___AVarReassignExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AVarReassignExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AVarReassignExpr___empty_init();
-#define LOCATE_parser_prod___AVarReassignExpr___empty_init "parser_prod::AVarReassignExpr::empty_init"
-typedef void (* parser_prod___AVarReassignExpr___init_avarreassignexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void parser_prod___AVarReassignExpr___init_avarreassignexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_parser_prod___AVarReassignExpr___init_avarreassignexpr(val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_parser_prod___AVarReassignExpr___init_avarreassignexpr "parser_prod::AVarReassignExpr::init_avarreassignexpr"
 typedef void (* parser_prod___AVarReassignExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AVarReassignExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AVarReassignExpr___replace_child "parser_prod::AVarReassignExpr::(parser_prod::PNode::replace_child)"
@@ -2661,20 +2874,21 @@ void parser_prod___AVarReassignExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AVarReassignExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AVarReassignExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AVarReassignExpr___visit_all_reverse "parser_prod::AVarReassignExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AVarReassignExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AVarReassignExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AVarReassignExpr___empty_init "parser_prod::AVarReassignExpr::empty_init"
+val_t NEW_AVarReassignExpr_parser_prod___AVarReassignExpr___empty_init();
+typedef void (* parser_prod___AVarReassignExpr___init_avarreassignexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void parser_prod___AVarReassignExpr___init_avarreassignexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_parser_prod___AVarReassignExpr___init_avarreassignexpr "parser_prod::AVarReassignExpr::init_avarreassignexpr"
+val_t NEW_AVarReassignExpr_parser_prod___AVarReassignExpr___init_avarreassignexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_ARangeExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ARangeExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ARangeExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ARangeExpr___n_expr__eq "parser_prod::ARangeExpr::(parser_nodes::ARangeExpr::n_expr=)"
 typedef void (* parser_prod___ARangeExpr___n_expr2__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ARangeExpr___n_expr2__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ARangeExpr___n_expr2__eq "parser_prod::ARangeExpr::(parser_nodes::ARangeExpr::n_expr2=)"
-typedef void (* parser_prod___ARangeExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ARangeExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ARangeExpr___empty_init();
-#define LOCATE_parser_prod___ARangeExpr___empty_init "parser_prod::ARangeExpr::empty_init"
-typedef void (* parser_prod___ARangeExpr___init_arangeexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___ARangeExpr___init_arangeexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___ARangeExpr___init_arangeexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___ARangeExpr___init_arangeexpr "parser_prod::ARangeExpr::init_arangeexpr"
 typedef void (* parser_prod___ARangeExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ARangeExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ARangeExpr___replace_child "parser_prod::ARangeExpr::(parser_prod::PNode::replace_child)"
@@ -2684,20 +2898,21 @@ void parser_prod___ARangeExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ARangeExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ARangeExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ARangeExpr___visit_all_reverse "parser_prod::ARangeExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ARangeExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ARangeExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ARangeExpr___empty_init "parser_prod::ARangeExpr::empty_init"
+val_t NEW_ARangeExpr_parser_prod___ARangeExpr___empty_init();
+typedef void (* parser_prod___ARangeExpr___init_arangeexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___ARangeExpr___init_arangeexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___ARangeExpr___init_arangeexpr "parser_prod::ARangeExpr::init_arangeexpr"
+val_t NEW_ARangeExpr_parser_prod___ARangeExpr___init_arangeexpr(val_t p0, val_t p1);
+val_t NEW_ACrangeExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ACrangeExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ACrangeExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ACrangeExpr___n_expr__eq "parser_prod::ACrangeExpr::(parser_nodes::ARangeExpr::n_expr=)"
 typedef void (* parser_prod___ACrangeExpr___n_expr2__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ACrangeExpr___n_expr2__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ACrangeExpr___n_expr2__eq "parser_prod::ACrangeExpr::(parser_nodes::ARangeExpr::n_expr2=)"
-typedef void (* parser_prod___ACrangeExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ACrangeExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ACrangeExpr___empty_init();
-#define LOCATE_parser_prod___ACrangeExpr___empty_init "parser_prod::ACrangeExpr::empty_init"
-typedef void (* parser_prod___ACrangeExpr___init_acrangeexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___ACrangeExpr___init_acrangeexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___ACrangeExpr___init_acrangeexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___ACrangeExpr___init_acrangeexpr "parser_prod::ACrangeExpr::init_acrangeexpr"
 typedef void (* parser_prod___ACrangeExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ACrangeExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ACrangeExpr___replace_child "parser_prod::ACrangeExpr::(parser_prod::PNode::replace_child)"
@@ -2707,20 +2922,23 @@ void parser_prod___ACrangeExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ACrangeExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ACrangeExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ACrangeExpr___visit_all_reverse "parser_prod::ACrangeExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_ACrangeExpr_parser_prod___ARangeExpr___empty_init();
+val_t NEW_ACrangeExpr_parser_prod___ARangeExpr___init_arangeexpr(val_t p0, val_t p1);
+typedef void (* parser_prod___ACrangeExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ACrangeExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ACrangeExpr___empty_init "parser_prod::ACrangeExpr::empty_init"
+val_t NEW_ACrangeExpr_parser_prod___ACrangeExpr___empty_init();
+typedef void (* parser_prod___ACrangeExpr___init_acrangeexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___ACrangeExpr___init_acrangeexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___ACrangeExpr___init_acrangeexpr "parser_prod::ACrangeExpr::init_acrangeexpr"
+val_t NEW_ACrangeExpr_parser_prod___ACrangeExpr___init_acrangeexpr(val_t p0, val_t p1);
+val_t NEW_AOrangeExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AOrangeExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AOrangeExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AOrangeExpr___n_expr__eq "parser_prod::AOrangeExpr::(parser_nodes::ARangeExpr::n_expr=)"
 typedef void (* parser_prod___AOrangeExpr___n_expr2__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AOrangeExpr___n_expr2__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AOrangeExpr___n_expr2__eq "parser_prod::AOrangeExpr::(parser_nodes::ARangeExpr::n_expr2=)"
-typedef void (* parser_prod___AOrangeExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AOrangeExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AOrangeExpr___empty_init();
-#define LOCATE_parser_prod___AOrangeExpr___empty_init "parser_prod::AOrangeExpr::empty_init"
-typedef void (* parser_prod___AOrangeExpr___init_aorangeexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AOrangeExpr___init_aorangeexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AOrangeExpr___init_aorangeexpr(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AOrangeExpr___init_aorangeexpr "parser_prod::AOrangeExpr::init_aorangeexpr"
 typedef void (* parser_prod___AOrangeExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AOrangeExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AOrangeExpr___replace_child "parser_prod::AOrangeExpr::(parser_prod::PNode::replace_child)"
@@ -2730,14 +2948,17 @@ void parser_prod___AOrangeExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AOrangeExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AOrangeExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AOrangeExpr___visit_all_reverse "parser_prod::AOrangeExpr::(parser_prod::PNode::visit_all_reverse)"
-typedef void (* parser_prod___AArrayExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AArrayExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AArrayExpr___empty_init();
-#define LOCATE_parser_prod___AArrayExpr___empty_init "parser_prod::AArrayExpr::empty_init"
-typedef void (* parser_prod___AArrayExpr___init_aarrayexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AArrayExpr___init_aarrayexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AArrayExpr___init_aarrayexpr(val_t  param0);
-#define LOCATE_parser_prod___AArrayExpr___init_aarrayexpr "parser_prod::AArrayExpr::init_aarrayexpr"
+val_t NEW_AOrangeExpr_parser_prod___ARangeExpr___empty_init();
+val_t NEW_AOrangeExpr_parser_prod___ARangeExpr___init_arangeexpr(val_t p0, val_t p1);
+typedef void (* parser_prod___AOrangeExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AOrangeExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AOrangeExpr___empty_init "parser_prod::AOrangeExpr::empty_init"
+val_t NEW_AOrangeExpr_parser_prod___AOrangeExpr___empty_init();
+typedef void (* parser_prod___AOrangeExpr___init_aorangeexpr_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AOrangeExpr___init_aorangeexpr(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AOrangeExpr___init_aorangeexpr "parser_prod::AOrangeExpr::init_aorangeexpr"
+val_t NEW_AOrangeExpr_parser_prod___AOrangeExpr___init_aorangeexpr(val_t p0, val_t p1);
+val_t NEW_AArrayExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AArrayExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AArrayExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AArrayExpr___replace_child "parser_prod::AArrayExpr::(parser_prod::PNode::replace_child)"
@@ -2747,17 +2968,18 @@ void parser_prod___AArrayExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AArrayExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AArrayExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AArrayExpr___visit_all_reverse "parser_prod::AArrayExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AArrayExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AArrayExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AArrayExpr___empty_init "parser_prod::AArrayExpr::empty_init"
+val_t NEW_AArrayExpr_parser_prod___AArrayExpr___empty_init();
+typedef void (* parser_prod___AArrayExpr___init_aarrayexpr_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AArrayExpr___init_aarrayexpr(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AArrayExpr___init_aarrayexpr "parser_prod::AArrayExpr::init_aarrayexpr"
+val_t NEW_AArrayExpr_parser_prod___AArrayExpr___init_aarrayexpr(val_t p0);
+val_t NEW_ASelfExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ASelfExpr___n_kwself__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ASelfExpr___n_kwself__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ASelfExpr___n_kwself__eq "parser_prod::ASelfExpr::(parser_nodes::ASelfExpr::n_kwself=)"
-typedef void (* parser_prod___ASelfExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ASelfExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ASelfExpr___empty_init();
-#define LOCATE_parser_prod___ASelfExpr___empty_init "parser_prod::ASelfExpr::empty_init"
-typedef void (* parser_prod___ASelfExpr___init_aselfexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___ASelfExpr___init_aselfexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___ASelfExpr___init_aselfexpr(val_t  param0);
-#define LOCATE_parser_prod___ASelfExpr___init_aselfexpr "parser_prod::ASelfExpr::init_aselfexpr"
 typedef void (* parser_prod___ASelfExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ASelfExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ASelfExpr___replace_child "parser_prod::ASelfExpr::(parser_prod::PNode::replace_child)"
@@ -2767,14 +2989,15 @@ void parser_prod___ASelfExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ASelfExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ASelfExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ASelfExpr___visit_all_reverse "parser_prod::ASelfExpr::(parser_prod::PNode::visit_all_reverse)"
-typedef void (* parser_prod___AImplicitSelfExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AImplicitSelfExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AImplicitSelfExpr___empty_init();
-#define LOCATE_parser_prod___AImplicitSelfExpr___empty_init "parser_prod::AImplicitSelfExpr::empty_init"
-typedef void (* parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr_t)(val_t  self, int* init_table);
-void parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(val_t  self, int* init_table);
-val_t NEW_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr();
-#define LOCATE_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr "parser_prod::AImplicitSelfExpr::init_aimplicitselfexpr"
+typedef void (* parser_prod___ASelfExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ASelfExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ASelfExpr___empty_init "parser_prod::ASelfExpr::empty_init"
+val_t NEW_ASelfExpr_parser_prod___ASelfExpr___empty_init();
+typedef void (* parser_prod___ASelfExpr___init_aselfexpr_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___ASelfExpr___init_aselfexpr(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___ASelfExpr___init_aselfexpr "parser_prod::ASelfExpr::init_aselfexpr"
+val_t NEW_ASelfExpr_parser_prod___ASelfExpr___init_aselfexpr(val_t p0);
+val_t NEW_AImplicitSelfExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AImplicitSelfExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AImplicitSelfExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AImplicitSelfExpr___replace_child "parser_prod::AImplicitSelfExpr::(parser_prod::PNode::replace_child)"
@@ -2784,17 +3007,20 @@ void parser_prod___AImplicitSelfExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AImplicitSelfExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AImplicitSelfExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AImplicitSelfExpr___visit_all_reverse "parser_prod::AImplicitSelfExpr::(parser_prod::PNode::visit_all_reverse)"
+val_t NEW_AImplicitSelfExpr_parser_prod___ASelfExpr___empty_init();
+val_t NEW_AImplicitSelfExpr_parser_prod___ASelfExpr___init_aselfexpr(val_t p0);
+typedef void (* parser_prod___AImplicitSelfExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AImplicitSelfExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AImplicitSelfExpr___empty_init "parser_prod::AImplicitSelfExpr::empty_init"
+val_t NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___empty_init();
+typedef void (* parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr_t)(val_t  self, int* init_table);
+void parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr "parser_prod::AImplicitSelfExpr::init_aimplicitselfexpr"
+val_t NEW_AImplicitSelfExpr_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr();
+val_t NEW_ATrueExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ATrueExpr___n_kwtrue__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ATrueExpr___n_kwtrue__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ATrueExpr___n_kwtrue__eq "parser_prod::ATrueExpr::(parser_nodes::ATrueExpr::n_kwtrue=)"
-typedef void (* parser_prod___ATrueExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ATrueExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ATrueExpr___empty_init();
-#define LOCATE_parser_prod___ATrueExpr___empty_init "parser_prod::ATrueExpr::empty_init"
-typedef void (* parser_prod___ATrueExpr___init_atrueexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___ATrueExpr___init_atrueexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___ATrueExpr___init_atrueexpr(val_t  param0);
-#define LOCATE_parser_prod___ATrueExpr___init_atrueexpr "parser_prod::ATrueExpr::init_atrueexpr"
 typedef void (* parser_prod___ATrueExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ATrueExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ATrueExpr___replace_child "parser_prod::ATrueExpr::(parser_prod::PNode::replace_child)"
@@ -2804,17 +3030,18 @@ void parser_prod___ATrueExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ATrueExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ATrueExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ATrueExpr___visit_all_reverse "parser_prod::ATrueExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ATrueExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ATrueExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ATrueExpr___empty_init "parser_prod::ATrueExpr::empty_init"
+val_t NEW_ATrueExpr_parser_prod___ATrueExpr___empty_init();
+typedef void (* parser_prod___ATrueExpr___init_atrueexpr_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___ATrueExpr___init_atrueexpr(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___ATrueExpr___init_atrueexpr "parser_prod::ATrueExpr::init_atrueexpr"
+val_t NEW_ATrueExpr_parser_prod___ATrueExpr___init_atrueexpr(val_t p0);
+val_t NEW_AFalseExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AFalseExpr___n_kwfalse__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AFalseExpr___n_kwfalse__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AFalseExpr___n_kwfalse__eq "parser_prod::AFalseExpr::(parser_nodes::AFalseExpr::n_kwfalse=)"
-typedef void (* parser_prod___AFalseExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AFalseExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AFalseExpr___empty_init();
-#define LOCATE_parser_prod___AFalseExpr___empty_init "parser_prod::AFalseExpr::empty_init"
-typedef void (* parser_prod___AFalseExpr___init_afalseexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AFalseExpr___init_afalseexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AFalseExpr___init_afalseexpr(val_t  param0);
-#define LOCATE_parser_prod___AFalseExpr___init_afalseexpr "parser_prod::AFalseExpr::init_afalseexpr"
 typedef void (* parser_prod___AFalseExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AFalseExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AFalseExpr___replace_child "parser_prod::AFalseExpr::(parser_prod::PNode::replace_child)"
@@ -2824,17 +3051,18 @@ void parser_prod___AFalseExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AFalseExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AFalseExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AFalseExpr___visit_all_reverse "parser_prod::AFalseExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AFalseExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AFalseExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AFalseExpr___empty_init "parser_prod::AFalseExpr::empty_init"
+val_t NEW_AFalseExpr_parser_prod___AFalseExpr___empty_init();
+typedef void (* parser_prod___AFalseExpr___init_afalseexpr_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AFalseExpr___init_afalseexpr(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AFalseExpr___init_afalseexpr "parser_prod::AFalseExpr::init_afalseexpr"
+val_t NEW_AFalseExpr_parser_prod___AFalseExpr___init_afalseexpr(val_t p0);
+val_t NEW_ANullExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ANullExpr___n_kwnull__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ANullExpr___n_kwnull__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ANullExpr___n_kwnull__eq "parser_prod::ANullExpr::(parser_nodes::ANullExpr::n_kwnull=)"
-typedef void (* parser_prod___ANullExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ANullExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ANullExpr___empty_init();
-#define LOCATE_parser_prod___ANullExpr___empty_init "parser_prod::ANullExpr::empty_init"
-typedef void (* parser_prod___ANullExpr___init_anullexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___ANullExpr___init_anullexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___ANullExpr___init_anullexpr(val_t  param0);
-#define LOCATE_parser_prod___ANullExpr___init_anullexpr "parser_prod::ANullExpr::init_anullexpr"
 typedef void (* parser_prod___ANullExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ANullExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ANullExpr___replace_child "parser_prod::ANullExpr::(parser_prod::PNode::replace_child)"
@@ -2844,17 +3072,18 @@ void parser_prod___ANullExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ANullExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ANullExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ANullExpr___visit_all_reverse "parser_prod::ANullExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ANullExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ANullExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ANullExpr___empty_init "parser_prod::ANullExpr::empty_init"
+val_t NEW_ANullExpr_parser_prod___ANullExpr___empty_init();
+typedef void (* parser_prod___ANullExpr___init_anullexpr_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___ANullExpr___init_anullexpr(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___ANullExpr___init_anullexpr "parser_prod::ANullExpr::init_anullexpr"
+val_t NEW_ANullExpr_parser_prod___ANullExpr___init_anullexpr(val_t p0);
+val_t NEW_AIntExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AIntExpr___n_number__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AIntExpr___n_number__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AIntExpr___n_number__eq "parser_prod::AIntExpr::(parser_nodes::AIntExpr::n_number=)"
-typedef void (* parser_prod___AIntExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AIntExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AIntExpr___empty_init();
-#define LOCATE_parser_prod___AIntExpr___empty_init "parser_prod::AIntExpr::empty_init"
-typedef void (* parser_prod___AIntExpr___init_aintexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AIntExpr___init_aintexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AIntExpr___init_aintexpr(val_t  param0);
-#define LOCATE_parser_prod___AIntExpr___init_aintexpr "parser_prod::AIntExpr::init_aintexpr"
 typedef void (* parser_prod___AIntExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AIntExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AIntExpr___replace_child "parser_prod::AIntExpr::(parser_prod::PNode::replace_child)"
@@ -2864,17 +3093,18 @@ void parser_prod___AIntExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AIntExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AIntExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AIntExpr___visit_all_reverse "parser_prod::AIntExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AIntExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AIntExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AIntExpr___empty_init "parser_prod::AIntExpr::empty_init"
+val_t NEW_AIntExpr_parser_prod___AIntExpr___empty_init();
+typedef void (* parser_prod___AIntExpr___init_aintexpr_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AIntExpr___init_aintexpr(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AIntExpr___init_aintexpr "parser_prod::AIntExpr::init_aintexpr"
+val_t NEW_AIntExpr_parser_prod___AIntExpr___init_aintexpr(val_t p0);
+val_t NEW_AFloatExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AFloatExpr___n_float__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AFloatExpr___n_float__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AFloatExpr___n_float__eq "parser_prod::AFloatExpr::(parser_nodes::AFloatExpr::n_float=)"
-typedef void (* parser_prod___AFloatExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AFloatExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AFloatExpr___empty_init();
-#define LOCATE_parser_prod___AFloatExpr___empty_init "parser_prod::AFloatExpr::empty_init"
-typedef void (* parser_prod___AFloatExpr___init_afloatexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AFloatExpr___init_afloatexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AFloatExpr___init_afloatexpr(val_t  param0);
-#define LOCATE_parser_prod___AFloatExpr___init_afloatexpr "parser_prod::AFloatExpr::init_afloatexpr"
 typedef void (* parser_prod___AFloatExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AFloatExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AFloatExpr___replace_child "parser_prod::AFloatExpr::(parser_prod::PNode::replace_child)"
@@ -2884,17 +3114,18 @@ void parser_prod___AFloatExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AFloatExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AFloatExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AFloatExpr___visit_all_reverse "parser_prod::AFloatExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AFloatExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AFloatExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AFloatExpr___empty_init "parser_prod::AFloatExpr::empty_init"
+val_t NEW_AFloatExpr_parser_prod___AFloatExpr___empty_init();
+typedef void (* parser_prod___AFloatExpr___init_afloatexpr_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AFloatExpr___init_afloatexpr(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AFloatExpr___init_afloatexpr "parser_prod::AFloatExpr::init_afloatexpr"
+val_t NEW_AFloatExpr_parser_prod___AFloatExpr___init_afloatexpr(val_t p0);
+val_t NEW_ACharExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ACharExpr___n_char__eq_t)(val_t  self, val_t  param0);
 void parser_prod___ACharExpr___n_char__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ACharExpr___n_char__eq "parser_prod::ACharExpr::(parser_nodes::ACharExpr::n_char=)"
-typedef void (* parser_prod___ACharExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ACharExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ACharExpr___empty_init();
-#define LOCATE_parser_prod___ACharExpr___empty_init "parser_prod::ACharExpr::empty_init"
-typedef void (* parser_prod___ACharExpr___init_acharexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___ACharExpr___init_acharexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___ACharExpr___init_acharexpr(val_t  param0);
-#define LOCATE_parser_prod___ACharExpr___init_acharexpr "parser_prod::ACharExpr::init_acharexpr"
 typedef void (* parser_prod___ACharExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ACharExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ACharExpr___replace_child "parser_prod::ACharExpr::(parser_prod::PNode::replace_child)"
@@ -2904,17 +3135,18 @@ void parser_prod___ACharExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ACharExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ACharExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ACharExpr___visit_all_reverse "parser_prod::ACharExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ACharExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ACharExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ACharExpr___empty_init "parser_prod::ACharExpr::empty_init"
+val_t NEW_ACharExpr_parser_prod___ACharExpr___empty_init();
+typedef void (* parser_prod___ACharExpr___init_acharexpr_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___ACharExpr___init_acharexpr(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___ACharExpr___init_acharexpr "parser_prod::ACharExpr::init_acharexpr"
+val_t NEW_ACharExpr_parser_prod___ACharExpr___init_acharexpr(val_t p0);
+val_t NEW_AStringExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AStringExpr___n_string__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AStringExpr___n_string__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AStringExpr___n_string__eq "parser_prod::AStringExpr::(parser_nodes::AStringExpr::n_string=)"
-typedef void (* parser_prod___AStringExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AStringExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AStringExpr___empty_init();
-#define LOCATE_parser_prod___AStringExpr___empty_init "parser_prod::AStringExpr::empty_init"
-typedef void (* parser_prod___AStringExpr___init_astringexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AStringExpr___init_astringexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AStringExpr___init_astringexpr(val_t  param0);
-#define LOCATE_parser_prod___AStringExpr___init_astringexpr "parser_prod::AStringExpr::init_astringexpr"
 typedef void (* parser_prod___AStringExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AStringExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AStringExpr___replace_child "parser_prod::AStringExpr::(parser_prod::PNode::replace_child)"
@@ -2924,17 +3156,18 @@ void parser_prod___AStringExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AStringExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AStringExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AStringExpr___visit_all_reverse "parser_prod::AStringExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AStringExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AStringExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AStringExpr___empty_init "parser_prod::AStringExpr::empty_init"
+val_t NEW_AStringExpr_parser_prod___AStringExpr___empty_init();
+typedef void (* parser_prod___AStringExpr___init_astringexpr_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AStringExpr___init_astringexpr(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AStringExpr___init_astringexpr "parser_prod::AStringExpr::init_astringexpr"
+val_t NEW_AStringExpr_parser_prod___AStringExpr___init_astringexpr(val_t p0);
+val_t NEW_AStartStringExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AStartStringExpr___n_string__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AStartStringExpr___n_string__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AStartStringExpr___n_string__eq "parser_prod::AStartStringExpr::(parser_nodes::AStartStringExpr::n_string=)"
-typedef void (* parser_prod___AStartStringExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AStartStringExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AStartStringExpr___empty_init();
-#define LOCATE_parser_prod___AStartStringExpr___empty_init "parser_prod::AStartStringExpr::empty_init"
-typedef void (* parser_prod___AStartStringExpr___init_astartstringexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AStartStringExpr___init_astartstringexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AStartStringExpr___init_astartstringexpr(val_t  param0);
-#define LOCATE_parser_prod___AStartStringExpr___init_astartstringexpr "parser_prod::AStartStringExpr::init_astartstringexpr"
 typedef void (* parser_prod___AStartStringExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AStartStringExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AStartStringExpr___replace_child "parser_prod::AStartStringExpr::(parser_prod::PNode::replace_child)"
@@ -2944,17 +3177,18 @@ void parser_prod___AStartStringExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AStartStringExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AStartStringExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AStartStringExpr___visit_all_reverse "parser_prod::AStartStringExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AStartStringExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AStartStringExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AStartStringExpr___empty_init "parser_prod::AStartStringExpr::empty_init"
+val_t NEW_AStartStringExpr_parser_prod___AStartStringExpr___empty_init();
+typedef void (* parser_prod___AStartStringExpr___init_astartstringexpr_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AStartStringExpr___init_astartstringexpr(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AStartStringExpr___init_astartstringexpr "parser_prod::AStartStringExpr::init_astartstringexpr"
+val_t NEW_AStartStringExpr_parser_prod___AStartStringExpr___init_astartstringexpr(val_t p0);
+val_t NEW_AMidStringExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AMidStringExpr___n_string__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AMidStringExpr___n_string__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AMidStringExpr___n_string__eq "parser_prod::AMidStringExpr::(parser_nodes::AMidStringExpr::n_string=)"
-typedef void (* parser_prod___AMidStringExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AMidStringExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AMidStringExpr___empty_init();
-#define LOCATE_parser_prod___AMidStringExpr___empty_init "parser_prod::AMidStringExpr::empty_init"
-typedef void (* parser_prod___AMidStringExpr___init_amidstringexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AMidStringExpr___init_amidstringexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AMidStringExpr___init_amidstringexpr(val_t  param0);
-#define LOCATE_parser_prod___AMidStringExpr___init_amidstringexpr "parser_prod::AMidStringExpr::init_amidstringexpr"
 typedef void (* parser_prod___AMidStringExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AMidStringExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AMidStringExpr___replace_child "parser_prod::AMidStringExpr::(parser_prod::PNode::replace_child)"
@@ -2964,17 +3198,18 @@ void parser_prod___AMidStringExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AMidStringExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AMidStringExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AMidStringExpr___visit_all_reverse "parser_prod::AMidStringExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AMidStringExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AMidStringExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AMidStringExpr___empty_init "parser_prod::AMidStringExpr::empty_init"
+val_t NEW_AMidStringExpr_parser_prod___AMidStringExpr___empty_init();
+typedef void (* parser_prod___AMidStringExpr___init_amidstringexpr_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AMidStringExpr___init_amidstringexpr(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AMidStringExpr___init_amidstringexpr "parser_prod::AMidStringExpr::init_amidstringexpr"
+val_t NEW_AMidStringExpr_parser_prod___AMidStringExpr___init_amidstringexpr(val_t p0);
+val_t NEW_AEndStringExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AEndStringExpr___n_string__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AEndStringExpr___n_string__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AEndStringExpr___n_string__eq "parser_prod::AEndStringExpr::(parser_nodes::AEndStringExpr::n_string=)"
-typedef void (* parser_prod___AEndStringExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AEndStringExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AEndStringExpr___empty_init();
-#define LOCATE_parser_prod___AEndStringExpr___empty_init "parser_prod::AEndStringExpr::empty_init"
-typedef void (* parser_prod___AEndStringExpr___init_aendstringexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AEndStringExpr___init_aendstringexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AEndStringExpr___init_aendstringexpr(val_t  param0);
-#define LOCATE_parser_prod___AEndStringExpr___init_aendstringexpr "parser_prod::AEndStringExpr::init_aendstringexpr"
 typedef void (* parser_prod___AEndStringExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AEndStringExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AEndStringExpr___replace_child "parser_prod::AEndStringExpr::(parser_prod::PNode::replace_child)"
@@ -2984,14 +3219,15 @@ void parser_prod___AEndStringExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AEndStringExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AEndStringExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AEndStringExpr___visit_all_reverse "parser_prod::AEndStringExpr::(parser_prod::PNode::visit_all_reverse)"
-typedef void (* parser_prod___ASuperstringExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ASuperstringExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ASuperstringExpr___empty_init();
-#define LOCATE_parser_prod___ASuperstringExpr___empty_init "parser_prod::ASuperstringExpr::empty_init"
-typedef void (* parser_prod___ASuperstringExpr___init_asuperstringexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___ASuperstringExpr___init_asuperstringexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___ASuperstringExpr___init_asuperstringexpr(val_t  param0);
-#define LOCATE_parser_prod___ASuperstringExpr___init_asuperstringexpr "parser_prod::ASuperstringExpr::init_asuperstringexpr"
+typedef void (* parser_prod___AEndStringExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AEndStringExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AEndStringExpr___empty_init "parser_prod::AEndStringExpr::empty_init"
+val_t NEW_AEndStringExpr_parser_prod___AEndStringExpr___empty_init();
+typedef void (* parser_prod___AEndStringExpr___init_aendstringexpr_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AEndStringExpr___init_aendstringexpr(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AEndStringExpr___init_aendstringexpr "parser_prod::AEndStringExpr::init_aendstringexpr"
+val_t NEW_AEndStringExpr_parser_prod___AEndStringExpr___init_aendstringexpr(val_t p0);
+val_t NEW_ASuperstringExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ASuperstringExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ASuperstringExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ASuperstringExpr___replace_child "parser_prod::ASuperstringExpr::(parser_prod::PNode::replace_child)"
@@ -3001,17 +3237,18 @@ void parser_prod___ASuperstringExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ASuperstringExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ASuperstringExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ASuperstringExpr___visit_all_reverse "parser_prod::ASuperstringExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___ASuperstringExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ASuperstringExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ASuperstringExpr___empty_init "parser_prod::ASuperstringExpr::empty_init"
+val_t NEW_ASuperstringExpr_parser_prod___ASuperstringExpr___empty_init();
+typedef void (* parser_prod___ASuperstringExpr___init_asuperstringexpr_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___ASuperstringExpr___init_asuperstringexpr(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___ASuperstringExpr___init_asuperstringexpr "parser_prod::ASuperstringExpr::init_asuperstringexpr"
+val_t NEW_ASuperstringExpr_parser_prod___ASuperstringExpr___init_asuperstringexpr(val_t p0);
+val_t NEW_AParExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AParExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AParExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AParExpr___n_expr__eq "parser_prod::AParExpr::(parser_nodes::AProxyExpr::n_expr=)"
-typedef void (* parser_prod___AParExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AParExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AParExpr___empty_init();
-#define LOCATE_parser_prod___AParExpr___empty_init "parser_prod::AParExpr::empty_init"
-typedef void (* parser_prod___AParExpr___init_aparexpr_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AParExpr___init_aparexpr(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AParExpr___init_aparexpr(val_t  param0);
-#define LOCATE_parser_prod___AParExpr___init_aparexpr "parser_prod::AParExpr::init_aparexpr"
 typedef void (* parser_prod___AParExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AParExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AParExpr___replace_child "parser_prod::AParExpr::(parser_prod::PNode::replace_child)"
@@ -3021,6 +3258,15 @@ void parser_prod___AParExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AParExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AParExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AParExpr___visit_all_reverse "parser_prod::AParExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AParExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AParExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AParExpr___empty_init "parser_prod::AParExpr::empty_init"
+val_t NEW_AParExpr_parser_prod___AParExpr___empty_init();
+typedef void (* parser_prod___AParExpr___init_aparexpr_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AParExpr___init_aparexpr(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AParExpr___init_aparexpr "parser_prod::AParExpr::init_aparexpr"
+val_t NEW_AParExpr_parser_prod___AParExpr___init_aparexpr(val_t p0);
+val_t NEW_AAsCastExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AAsCastExpr___n_expr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAsCastExpr___n_expr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAsCastExpr___n_expr__eq "parser_prod::AAsCastExpr::(parser_nodes::AAsCastExpr::n_expr=)"
@@ -3030,14 +3276,6 @@ void parser_prod___AAsCastExpr___n_kwas__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___AAsCastExpr___n_type__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAsCastExpr___n_type__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAsCastExpr___n_type__eq "parser_prod::AAsCastExpr::(parser_nodes::AAsCastExpr::n_type=)"
-typedef void (* parser_prod___AAsCastExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AAsCastExpr___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AAsCastExpr___empty_init();
-#define LOCATE_parser_prod___AAsCastExpr___empty_init "parser_prod::AAsCastExpr::empty_init"
-typedef void (* parser_prod___AAsCastExpr___init_aascastexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void parser_prod___AAsCastExpr___init_aascastexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-val_t NEW_parser_prod___AAsCastExpr___init_aascastexpr(val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_parser_prod___AAsCastExpr___init_aascastexpr "parser_prod::AAsCastExpr::init_aascastexpr"
 typedef void (* parser_prod___AAsCastExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AAsCastExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AAsCastExpr___replace_child "parser_prod::AAsCastExpr::(parser_prod::PNode::replace_child)"
@@ -3047,17 +3285,18 @@ void parser_prod___AAsCastExpr___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AAsCastExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AAsCastExpr___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAsCastExpr___visit_all_reverse "parser_prod::AAsCastExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AAsCastExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AAsCastExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AAsCastExpr___empty_init "parser_prod::AAsCastExpr::empty_init"
+val_t NEW_AAsCastExpr_parser_prod___AAsCastExpr___empty_init();
+typedef void (* parser_prod___AAsCastExpr___init_aascastexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void parser_prod___AAsCastExpr___init_aascastexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_parser_prod___AAsCastExpr___init_aascastexpr "parser_prod::AAsCastExpr::init_aascastexpr"
+val_t NEW_AAsCastExpr_parser_prod___AAsCastExpr___init_aascastexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_APlusAssignOp_parser_nodes___PNode___init();
 typedef void (* parser_prod___APlusAssignOp___n_pluseq__eq_t)(val_t  self, val_t  param0);
 void parser_prod___APlusAssignOp___n_pluseq__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___APlusAssignOp___n_pluseq__eq "parser_prod::APlusAssignOp::(parser_nodes::APlusAssignOp::n_pluseq=)"
-typedef void (* parser_prod___APlusAssignOp___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___APlusAssignOp___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___APlusAssignOp___empty_init();
-#define LOCATE_parser_prod___APlusAssignOp___empty_init "parser_prod::APlusAssignOp::empty_init"
-typedef void (* parser_prod___APlusAssignOp___init_aplusassignop_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___APlusAssignOp___init_aplusassignop(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___APlusAssignOp___init_aplusassignop(val_t  param0);
-#define LOCATE_parser_prod___APlusAssignOp___init_aplusassignop "parser_prod::APlusAssignOp::init_aplusassignop"
 typedef void (* parser_prod___APlusAssignOp___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___APlusAssignOp___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___APlusAssignOp___replace_child "parser_prod::APlusAssignOp::(parser_prod::PNode::replace_child)"
@@ -3067,17 +3306,18 @@ void parser_prod___APlusAssignOp___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___APlusAssignOp___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___APlusAssignOp___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___APlusAssignOp___visit_all_reverse "parser_prod::APlusAssignOp::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___APlusAssignOp___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___APlusAssignOp___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___APlusAssignOp___empty_init "parser_prod::APlusAssignOp::empty_init"
+val_t NEW_APlusAssignOp_parser_prod___APlusAssignOp___empty_init();
+typedef void (* parser_prod___APlusAssignOp___init_aplusassignop_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___APlusAssignOp___init_aplusassignop(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___APlusAssignOp___init_aplusassignop "parser_prod::APlusAssignOp::init_aplusassignop"
+val_t NEW_APlusAssignOp_parser_prod___APlusAssignOp___init_aplusassignop(val_t p0);
+val_t NEW_AMinusAssignOp_parser_nodes___PNode___init();
 typedef void (* parser_prod___AMinusAssignOp___n_minuseq__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AMinusAssignOp___n_minuseq__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AMinusAssignOp___n_minuseq__eq "parser_prod::AMinusAssignOp::(parser_nodes::AMinusAssignOp::n_minuseq=)"
-typedef void (* parser_prod___AMinusAssignOp___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AMinusAssignOp___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AMinusAssignOp___empty_init();
-#define LOCATE_parser_prod___AMinusAssignOp___empty_init "parser_prod::AMinusAssignOp::empty_init"
-typedef void (* parser_prod___AMinusAssignOp___init_aminusassignop_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___AMinusAssignOp___init_aminusassignop(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___AMinusAssignOp___init_aminusassignop(val_t  param0);
-#define LOCATE_parser_prod___AMinusAssignOp___init_aminusassignop "parser_prod::AMinusAssignOp::init_aminusassignop"
 typedef void (* parser_prod___AMinusAssignOp___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AMinusAssignOp___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AMinusAssignOp___replace_child "parser_prod::AMinusAssignOp::(parser_prod::PNode::replace_child)"
@@ -3087,17 +3327,45 @@ void parser_prod___AMinusAssignOp___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AMinusAssignOp___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AMinusAssignOp___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AMinusAssignOp___visit_all_reverse "parser_prod::AMinusAssignOp::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AMinusAssignOp___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AMinusAssignOp___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AMinusAssignOp___empty_init "parser_prod::AMinusAssignOp::empty_init"
+val_t NEW_AMinusAssignOp_parser_prod___AMinusAssignOp___empty_init();
+typedef void (* parser_prod___AMinusAssignOp___init_aminusassignop_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___AMinusAssignOp___init_aminusassignop(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___AMinusAssignOp___init_aminusassignop "parser_prod::AMinusAssignOp::init_aminusassignop"
+val_t NEW_AMinusAssignOp_parser_prod___AMinusAssignOp___init_aminusassignop(val_t p0);
+val_t NEW_AClosureDef_parser_nodes___PNode___init();
+typedef void (* parser_prod___AClosureDef___n_kwwith__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AClosureDef___n_kwwith__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AClosureDef___n_kwwith__eq "parser_prod::AClosureDef::(parser_nodes::AClosureDef::n_kwwith=)"
+typedef void (* parser_prod___AClosureDef___n_kwdo__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AClosureDef___n_kwdo__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AClosureDef___n_kwdo__eq "parser_prod::AClosureDef::(parser_nodes::AClosureDef::n_kwdo=)"
+typedef void (* parser_prod___AClosureDef___n_expr__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AClosureDef___n_expr__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AClosureDef___n_expr__eq "parser_prod::AClosureDef::(parser_nodes::AClosureDef::n_expr=)"
+typedef void (* parser_prod___AClosureDef___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
+void parser_prod___AClosureDef___replace_child(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_parser_prod___AClosureDef___replace_child "parser_prod::AClosureDef::(parser_prod::PNode::replace_child)"
+typedef void (* parser_prod___AClosureDef___visit_all_t)(val_t  self, val_t  param0);
+void parser_prod___AClosureDef___visit_all(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AClosureDef___visit_all "parser_prod::AClosureDef::(parser_prod::PNode::visit_all)"
+typedef void (* parser_prod___AClosureDef___visit_all_reverse_t)(val_t  self, val_t  param0);
+void parser_prod___AClosureDef___visit_all_reverse(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AClosureDef___visit_all_reverse "parser_prod::AClosureDef::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AClosureDef___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AClosureDef___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AClosureDef___empty_init "parser_prod::AClosureDef::empty_init"
+val_t NEW_AClosureDef_parser_prod___AClosureDef___empty_init();
+typedef void (* parser_prod___AClosureDef___init_aclosuredef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+void parser_prod___AClosureDef___init_aclosuredef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+#define LOCATE_parser_prod___AClosureDef___init_aclosuredef "parser_prod::AClosureDef::init_aclosuredef"
+val_t NEW_AClosureDef_parser_prod___AClosureDef___init_aclosuredef(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_AQualified_parser_nodes___PNode___init();
 typedef void (* parser_prod___AQualified___n_classid__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AQualified___n_classid__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AQualified___n_classid__eq "parser_prod::AQualified::(parser_nodes::AQualified::n_classid=)"
-typedef void (* parser_prod___AQualified___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AQualified___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___AQualified___empty_init();
-#define LOCATE_parser_prod___AQualified___empty_init "parser_prod::AQualified::empty_init"
-typedef void (* parser_prod___AQualified___init_aqualified_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AQualified___init_aqualified(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___AQualified___init_aqualified(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AQualified___init_aqualified "parser_prod::AQualified::init_aqualified"
 typedef void (* parser_prod___AQualified___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AQualified___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AQualified___replace_child "parser_prod::AQualified::(parser_prod::PNode::replace_child)"
@@ -3107,14 +3375,15 @@ void parser_prod___AQualified___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___AQualified___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___AQualified___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AQualified___visit_all_reverse "parser_prod::AQualified::(parser_prod::PNode::visit_all_reverse)"
-typedef void (* parser_prod___ADoc___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___ADoc___empty_init(val_t  self, int* init_table);
-val_t NEW_parser_prod___ADoc___empty_init();
-#define LOCATE_parser_prod___ADoc___empty_init "parser_prod::ADoc::empty_init"
-typedef void (* parser_prod___ADoc___init_adoc_t)(val_t  self, val_t  param0, int* init_table);
-void parser_prod___ADoc___init_adoc(val_t  self, val_t  param0, int* init_table);
-val_t NEW_parser_prod___ADoc___init_adoc(val_t  param0);
-#define LOCATE_parser_prod___ADoc___init_adoc "parser_prod::ADoc::init_adoc"
+typedef void (* parser_prod___AQualified___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AQualified___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AQualified___empty_init "parser_prod::AQualified::empty_init"
+val_t NEW_AQualified_parser_prod___AQualified___empty_init();
+typedef void (* parser_prod___AQualified___init_aqualified_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___AQualified___init_aqualified(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___AQualified___init_aqualified "parser_prod::AQualified::init_aqualified"
+val_t NEW_AQualified_parser_prod___AQualified___init_aqualified(val_t p0, val_t p1);
+val_t NEW_ADoc_parser_nodes___PNode___init();
 typedef void (* parser_prod___ADoc___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ADoc___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___ADoc___replace_child "parser_prod::ADoc::(parser_prod::PNode::replace_child)"
@@ -3124,10 +3393,15 @@ void parser_prod___ADoc___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___ADoc___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___ADoc___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___ADoc___visit_all_reverse "parser_prod::ADoc::(parser_prod::PNode::visit_all_reverse)"
-typedef void (* parser_prod___Start___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___Start___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
-val_t NEW_parser_prod___Start___init(val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___Start___init "parser_prod::Start::init"
+typedef void (* parser_prod___ADoc___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___ADoc___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___ADoc___empty_init "parser_prod::ADoc::empty_init"
+val_t NEW_ADoc_parser_prod___ADoc___empty_init();
+typedef void (* parser_prod___ADoc___init_adoc_t)(val_t  self, val_t  param0, int* init_table);
+void parser_prod___ADoc___init_adoc(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_parser_prod___ADoc___init_adoc "parser_prod::ADoc::init_adoc"
+val_t NEW_ADoc_parser_prod___ADoc___init_adoc(val_t p0);
+val_t NEW_Start_parser_nodes___PNode___init();
 typedef void (* parser_prod___Start___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___Start___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___Start___replace_child "parser_prod::Start::(parser_prod::PNode::replace_child)"
@@ -3137,4 +3411,8 @@ void parser_prod___Start___visit_all(val_t  self, val_t  param0);
 typedef void (* parser_prod___Start___visit_all_reverse_t)(val_t  self, val_t  param0);
 void parser_prod___Start___visit_all_reverse(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___Start___visit_all_reverse "parser_prod::Start::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___Start___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void parser_prod___Start___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_parser_prod___Start___init "parser_prod::Start::init"
+val_t NEW_Start_parser_prod___Start___init(val_t p0, val_t p1);
 #endif

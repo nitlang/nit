@@ -69,37 +69,39 @@ extern const int SFT_compiling_base[];
 #define COLOR_compiling_base___CContext___decls SFT_compiling_base[54]
 #define COLOR_compiling_base___CContext___instrs SFT_compiling_base[55]
 #define COLOR_compiling_base___CContext___append SFT_compiling_base[56]
-#define COLOR_compiling_base___CContext___init SFT_compiling_base[57]
-#define COLOR_compiling_base___MMGlobalProperty___meth_call SFT_compiling_base[58]
-#define COLOR_compiling_base___MMGlobalProperty___attr_access SFT_compiling_base[59]
-#define COLOR_compiling_base___MMGlobalProperty___color_id SFT_compiling_base[60]
-#define COLOR_compiling_base___MMGlobalClass___id_id SFT_compiling_base[61]
-#define COLOR_compiling_base___MMGlobalClass___color_id SFT_compiling_base[62]
-#define COLOR_compiling_base___MMGlobalClass___init_table_pos_id SFT_compiling_base[63]
-#define COLOR_compiling_base___MMLocalClass____primitive_info_cache SFT_compiling_base[64]
-#define COLOR_compiling_base___MMLocalClass____primitive_info_b SFT_compiling_base[65]
-#define COLOR_compiling_base___MMLocalClass___primitive_info SFT_compiling_base[66]
-#define COLOR_compiling_base___MMLocalClass___primitive_ctypes SFT_compiling_base[67]
-#define ID_PrimitiveInfo SFT_compiling_base[68]
-#define COLOR_PrimitiveInfo SFT_compiling_base[69]
-#define COLOR_compiling_base___PrimitiveInfo____name SFT_compiling_base[70]
-#define COLOR_compiling_base___PrimitiveInfo____tagged SFT_compiling_base[71]
-#define COLOR_compiling_base___PrimitiveInfo____cname SFT_compiling_base[72]
-#define INIT_TABLE_POS_PrimitiveInfo SFT_compiling_base[73]
-#define COLOR_compiling_base___PrimitiveInfo___name SFT_compiling_base[74]
-#define COLOR_compiling_base___PrimitiveInfo___name__eq SFT_compiling_base[75]
-#define COLOR_compiling_base___PrimitiveInfo___tagged SFT_compiling_base[76]
-#define COLOR_compiling_base___PrimitiveInfo___tagged__eq SFT_compiling_base[77]
-#define COLOR_compiling_base___PrimitiveInfo___cname SFT_compiling_base[78]
-#define COLOR_compiling_base___PrimitiveInfo___cname__eq SFT_compiling_base[79]
-#define COLOR_compiling_base___PrimitiveInfo___init SFT_compiling_base[80]
-#define COLOR_compiling_base___MMType___cname SFT_compiling_base[81]
-#define COLOR_compiling_base___MMType___default_cvalue SFT_compiling_base[82]
-#define COLOR_compiling_base___MMType___boxtype SFT_compiling_base[83]
-#define COLOR_compiling_base___MMType___unboxtype SFT_compiling_base[84]
-#define COLOR_compiling_base___MMLocalProperty____cname_cache SFT_compiling_base[85]
-#define COLOR_compiling_base___MMLocalProperty___cname SFT_compiling_base[86]
-#define COLOR_compiling_base___MMLocalProperty___color_id_for_super SFT_compiling_base[87]
+#define COLOR_compiling_base___CContext___merge SFT_compiling_base[57]
+#define COLOR_compiling_base___CContext___init SFT_compiling_base[58]
+#define COLOR_compiling_base___MMGlobalProperty___meth_call SFT_compiling_base[59]
+#define COLOR_compiling_base___MMGlobalProperty___attr_access SFT_compiling_base[60]
+#define COLOR_compiling_base___MMGlobalProperty___color_id SFT_compiling_base[61]
+#define COLOR_compiling_base___MMGlobalClass___id_id SFT_compiling_base[62]
+#define COLOR_compiling_base___MMGlobalClass___color_id SFT_compiling_base[63]
+#define COLOR_compiling_base___MMGlobalClass___init_table_pos_id SFT_compiling_base[64]
+#define COLOR_compiling_base___MMLocalClass____primitive_info_cache SFT_compiling_base[65]
+#define COLOR_compiling_base___MMLocalClass____primitive_info_b SFT_compiling_base[66]
+#define COLOR_compiling_base___MMLocalClass___primitive_info SFT_compiling_base[67]
+#define COLOR_compiling_base___MMLocalClass___primitive_ctypes SFT_compiling_base[68]
+#define ID_PrimitiveInfo SFT_compiling_base[69]
+#define COLOR_PrimitiveInfo SFT_compiling_base[70]
+#define COLOR_compiling_base___PrimitiveInfo____name SFT_compiling_base[71]
+#define COLOR_compiling_base___PrimitiveInfo____tagged SFT_compiling_base[72]
+#define COLOR_compiling_base___PrimitiveInfo____cname SFT_compiling_base[73]
+#define INIT_TABLE_POS_PrimitiveInfo SFT_compiling_base[74]
+#define COLOR_compiling_base___PrimitiveInfo___name SFT_compiling_base[75]
+#define COLOR_compiling_base___PrimitiveInfo___name__eq SFT_compiling_base[76]
+#define COLOR_compiling_base___PrimitiveInfo___tagged SFT_compiling_base[77]
+#define COLOR_compiling_base___PrimitiveInfo___tagged__eq SFT_compiling_base[78]
+#define COLOR_compiling_base___PrimitiveInfo___cname SFT_compiling_base[79]
+#define COLOR_compiling_base___PrimitiveInfo___cname__eq SFT_compiling_base[80]
+#define COLOR_compiling_base___PrimitiveInfo___init SFT_compiling_base[81]
+#define COLOR_compiling_base___MMType___cname SFT_compiling_base[82]
+#define COLOR_compiling_base___MMType___default_cvalue SFT_compiling_base[83]
+#define COLOR_compiling_base___MMType___boxtype SFT_compiling_base[84]
+#define COLOR_compiling_base___MMType___unboxtype SFT_compiling_base[85]
+#define COLOR_compiling_base___MMLocalProperty____cname_cache SFT_compiling_base[86]
+#define COLOR_compiling_base___MMLocalProperty___cname SFT_compiling_base[87]
+#define COLOR_compiling_base___MMLocalProperty___color_id_for_super SFT_compiling_base[88]
+val_t NEW_ToolContext_mmloader___ToolContext___init();
 #define ATTR_compiling_base___ToolContext____global(recv) ATTR(recv, COLOR_compiling_base___ToolContext____global)
 typedef val_t (* compiling_base___ToolContext___global_t)(val_t  self);
 val_t compiling_base___ToolContext___global(val_t  self);
@@ -163,6 +165,9 @@ val_t compiling_base___ToolContext___ext_prefix(val_t  self);
 typedef void (* compiling_base___ToolContext___ext_prefix__eq_t)(val_t  self, val_t  param0);
 void compiling_base___ToolContext___ext_prefix__eq(val_t  self, val_t  param0);
 #define LOCATE_compiling_base___ToolContext___ext_prefix__eq "compiling_base::ToolContext::ext_prefix="
+typedef val_t (* compiling_base___CompilerVisitor___to_s_t)(val_t  self);
+val_t compiling_base___CompilerVisitor___to_s(val_t  self);
+#define LOCATE_compiling_base___CompilerVisitor___to_s "compiling_base::CompilerVisitor::(string::Object::to_s)"
 typedef void (* compiling_base___CompilerVisitor___add_decl_t)(val_t  self, val_t  param0);
 void compiling_base___CompilerVisitor___add_decl(val_t  self, val_t  param0);
 #define LOCATE_compiling_base___CompilerVisitor___add_decl "compiling_base::CompilerVisitor::add_decl"
@@ -179,9 +184,6 @@ void compiling_base___CompilerVisitor___indent(val_t  self);
 typedef void (* compiling_base___CompilerVisitor___unindent_t)(val_t  self);
 void compiling_base___CompilerVisitor___unindent(val_t  self);
 #define LOCATE_compiling_base___CompilerVisitor___unindent "compiling_base::CompilerVisitor::unindent"
-typedef val_t (* compiling_base___CompilerVisitor___to_s_t)(val_t  self);
-val_t compiling_base___CompilerVisitor___to_s(val_t  self);
-#define LOCATE_compiling_base___CompilerVisitor___to_s "compiling_base::CompilerVisitor::(string::Object::to_s)"
 #define ATTR_compiling_base___CompilerVisitor____module(recv) ATTR(recv, COLOR_compiling_base___CompilerVisitor____module)
 typedef val_t (* compiling_base___CompilerVisitor___module_t)(val_t  self);
 val_t compiling_base___CompilerVisitor___module(val_t  self);
@@ -212,8 +214,8 @@ void compiling_base___CompilerVisitor___tc__eq(val_t  self, val_t  param0);
 #define LOCATE_compiling_base___CompilerVisitor___tc__eq "compiling_base::CompilerVisitor::tc="
 typedef void (* compiling_base___CompilerVisitor___init_t)(val_t  self, val_t  param0, int* init_table);
 void compiling_base___CompilerVisitor___init(val_t  self, val_t  param0, int* init_table);
-val_t NEW_compiling_base___CompilerVisitor___init(val_t  param0);
 #define LOCATE_compiling_base___CompilerVisitor___init "compiling_base::CompilerVisitor::init"
+val_t NEW_CompilerVisitor_compiling_base___CompilerVisitor___init(val_t p0);
 #define ATTR_compiling_base___CContext____decls(recv) ATTR(recv, COLOR_compiling_base___CContext____decls)
 typedef val_t (* compiling_base___CContext___decls_t)(val_t  self);
 val_t compiling_base___CContext___decls(val_t  self);
@@ -225,10 +227,14 @@ val_t compiling_base___CContext___instrs(val_t  self);
 typedef void (* compiling_base___CContext___append_t)(val_t  self, val_t  param0);
 void compiling_base___CContext___append(val_t  self, val_t  param0);
 #define LOCATE_compiling_base___CContext___append "compiling_base::CContext::append"
+typedef void (* compiling_base___CContext___merge_t)(val_t  self, val_t  param0);
+void compiling_base___CContext___merge(val_t  self, val_t  param0);
+#define LOCATE_compiling_base___CContext___merge "compiling_base::CContext::merge"
 typedef void (* compiling_base___CContext___init_t)(val_t  self, int* init_table);
 void compiling_base___CContext___init(val_t  self, int* init_table);
-val_t NEW_compiling_base___CContext___init();
 #define LOCATE_compiling_base___CContext___init "compiling_base::CContext::init"
+val_t NEW_CContext_compiling_base___CContext___init();
+val_t NEW_MMGlobalProperty_abstractmetamodel___MMGlobalProperty___init(val_t p0);
 typedef val_t (* compiling_base___MMGlobalProperty___meth_call_t)(val_t  self);
 val_t compiling_base___MMGlobalProperty___meth_call(val_t  self);
 #define LOCATE_compiling_base___MMGlobalProperty___meth_call "compiling_base::MMGlobalProperty::meth_call"
@@ -238,6 +244,7 @@ val_t compiling_base___MMGlobalProperty___attr_access(val_t  self);
 typedef val_t (* compiling_base___MMGlobalProperty___color_id_t)(val_t  self);
 val_t compiling_base___MMGlobalProperty___color_id(val_t  self);
 #define LOCATE_compiling_base___MMGlobalProperty___color_id "compiling_base::MMGlobalProperty::color_id"
+val_t NEW_MMGlobalClass_abstractmetamodel___MMGlobalClass___init(val_t p0);
 typedef val_t (* compiling_base___MMGlobalClass___id_id_t)(val_t  self);
 val_t compiling_base___MMGlobalClass___id_id(val_t  self);
 #define LOCATE_compiling_base___MMGlobalClass___id_id "compiling_base::MMGlobalClass::id_id"
@@ -247,6 +254,7 @@ val_t compiling_base___MMGlobalClass___color_id(val_t  self);
 typedef val_t (* compiling_base___MMGlobalClass___init_table_pos_id_t)(val_t  self);
 val_t compiling_base___MMGlobalClass___init_table_pos_id(val_t  self);
 #define LOCATE_compiling_base___MMGlobalClass___init_table_pos_id "compiling_base::MMGlobalClass::init_table_pos_id"
+val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1);
 #define ATTR_compiling_base___MMLocalClass____primitive_info_cache(recv) ATTR(recv, COLOR_compiling_base___MMLocalClass____primitive_info_cache)
 #define ATTR_compiling_base___MMLocalClass____primitive_info_b(recv) ATTR(recv, COLOR_compiling_base___MMLocalClass____primitive_info_b)
 typedef val_t (* compiling_base___MMLocalClass___primitive_info_t)(val_t  self);
@@ -278,8 +286,9 @@ void compiling_base___PrimitiveInfo___cname__eq(val_t  self, val_t  param0);
 #define LOCATE_compiling_base___PrimitiveInfo___cname__eq "compiling_base::PrimitiveInfo::cname="
 typedef void (* compiling_base___PrimitiveInfo___init_t)(val_t  self, int* init_table);
 void compiling_base___PrimitiveInfo___init(val_t  self, int* init_table);
-val_t NEW_compiling_base___PrimitiveInfo___init();
 #define LOCATE_compiling_base___PrimitiveInfo___init "compiling_base::PrimitiveInfo::init"
+val_t NEW_PrimitiveInfo_compiling_base___PrimitiveInfo___init();
+val_t NEW_MMType_static_type___MMType___init();
 typedef val_t (* compiling_base___MMType___cname_t)(val_t  self);
 val_t compiling_base___MMType___cname(val_t  self);
 #define LOCATE_compiling_base___MMType___cname "compiling_base::MMType::cname"
@@ -292,6 +301,7 @@ val_t compiling_base___MMType___boxtype(val_t  self, val_t  param0);
 typedef val_t (* compiling_base___MMType___unboxtype_t)(val_t  self, val_t  param0);
 val_t compiling_base___MMType___unboxtype(val_t  self, val_t  param0);
 #define LOCATE_compiling_base___MMType___unboxtype "compiling_base::MMType::unboxtype"
+val_t NEW_MMLocalProperty_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
 #define ATTR_compiling_base___MMLocalProperty____cname_cache(recv) ATTR(recv, COLOR_compiling_base___MMLocalProperty____cname_cache)
 typedef val_t (* compiling_base___MMLocalProperty___cname_t)(val_t  self);
 val_t compiling_base___MMLocalProperty___cname(val_t  self);

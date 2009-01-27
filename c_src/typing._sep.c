@@ -2,35 +2,44 @@
 #include "typing._sep.h"
 void typing___MMSrcModule___do_typing(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 23, LOCATE_typing___MMSrcModule___do_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  val_t variable[6];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable2 = NEW_TypingVisitor_typing___TypingVisitor___init( variable0 /*tc*/,  self); /*new TypingVisitor*/
-  variable1 = variable2;
-  variable2 = ((syntax_base___MMSrcModule___node_t)CALL( self,COLOR_syntax_base___MMSrcModule___node))( self) /*MMSrcModule::node*/;
-  ((typing___TypingVisitor___visit_t)CALL( variable1 /*tv*/,COLOR_parser_prod___Visitor___visit))( variable1 /*tv*/, variable2) /*TypingVisitor::visit*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = variable[0];
+  variable[5] = NEW_TypingVisitor_typing___TypingVisitor___init( variable[1] /*tc*/, variable[4]); /*new TypingVisitor*/
+  variable[4] = variable[5];
+  variable[3] = variable[4];
+  variable[4] = variable[0];
+  variable[4] = ((syntax_base___MMSrcModule___node_t)CALL(variable[4],COLOR_syntax_base___MMSrcModule___node))(variable[4]) /*MMSrcModule::node*/;
+  ((typing___TypingVisitor___visit_t)CALL( variable[3] /*tv*/,COLOR_parser_prod___Visitor___visit))( variable[3] /*tv*/, variable[4]) /*TypingVisitor::visit*/;
+  return_label0: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___TypingVisitor___visit(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 39, LOCATE_typing___TypingVisitor___visit};
-  val_t variable0;
-  val_t variable1;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable0 /*n*/ ==  NIT_NULL /*null*/) || (( variable0 /*n*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable0 /*n*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable0 /*n*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable0 /*n*/,COLOR_kernel___Object_____eqeq))( variable0 /*n*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable1)) { /*if*/
-    ((typing___PNode___accept_typing_t)CALL( variable0 /*n*/,COLOR_typing___PNode___accept_typing))( variable0 /*n*/,  self) /*PNode::accept_typing*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*n*/ ==  NIT_NULL /*null*/) || (( variable[1] /*n*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*n*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*n*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*n*/,COLOR_kernel___Object_____eqeq))( variable[1] /*n*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = variable[0];
+    ((typing___PNode___accept_typing_t)CALL( variable[1] /*n*/,COLOR_typing___PNode___accept_typing))( variable[1] /*n*/, variable[3]) /*PNode::accept_typing*/;
   }
+  return_label1: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t typing___TypingVisitor___variable_ctx(val_t  self) {
   struct trace_t trace = {NULL, NULL, 44, LOCATE_typing___TypingVisitor___variable_ctx};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   tracehead = trace.prev;
@@ -38,29 +47,37 @@ val_t typing___TypingVisitor___variable_ctx(val_t  self) {
 }
 void typing___TypingVisitor___variable_ctx__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 44, LOCATE_typing___TypingVisitor___variable_ctx__eq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   ATTR_typing___TypingVisitor____variable_ctx( self) /*TypingVisitor::_variable_ctx*/ =  param0;
   tracehead = trace.prev;
   return;
 }
-val_t typing___TypingVisitor___self_type(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 47, LOCATE_typing___TypingVisitor___self_type};
+val_t typing___TypingVisitor___self_var(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 47, LOCATE_typing___TypingVisitor___self_var};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   tracehead = trace.prev;
-  return ATTR_typing___TypingVisitor____self_type( self) /*TypingVisitor::_self_type*/;
+  return ATTR_typing___TypingVisitor____self_var( self) /*TypingVisitor::_self_var*/;
 }
-void typing___TypingVisitor___self_type__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 47, LOCATE_typing___TypingVisitor___self_type__eq};
+void typing___TypingVisitor___self_var__eq(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 47, LOCATE_typing___TypingVisitor___self_var__eq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  ATTR_typing___TypingVisitor____self_type( self) /*TypingVisitor::_self_type*/ =  param0;
+  ATTR_typing___TypingVisitor____self_var( self) /*TypingVisitor::_self_var*/ =  param0;
   tracehead = trace.prev;
   return;
 }
 val_t typing___TypingVisitor___top_block(val_t  self) {
   struct trace_t trace = {NULL, NULL, 50, LOCATE_typing___TypingVisitor___top_block};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   tracehead = trace.prev;
@@ -68,21 +85,84 @@ val_t typing___TypingVisitor___top_block(val_t  self) {
 }
 void typing___TypingVisitor___top_block__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 50, LOCATE_typing___TypingVisitor___top_block__eq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   ATTR_typing___TypingVisitor____top_block( self) /*TypingVisitor::_top_block*/ =  param0;
   tracehead = trace.prev;
   return;
 }
+val_t typing___TypingVisitor___closure(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 53, LOCATE_typing___TypingVisitor___closure};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  tracehead = trace.prev;
+  return ATTR_typing___TypingVisitor____closure( self) /*TypingVisitor::_closure*/;
+}
+void typing___TypingVisitor___closure__eq(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 53, LOCATE_typing___TypingVisitor___closure__eq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  ATTR_typing___TypingVisitor____closure( self) /*TypingVisitor::_closure*/ =  param0;
+  tracehead = trace.prev;
+  return;
+}
+val_t typing___TypingVisitor___closure_break_stype(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 56, LOCATE_typing___TypingVisitor___closure_break_stype};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  tracehead = trace.prev;
+  return ATTR_typing___TypingVisitor____closure_break_stype( self) /*TypingVisitor::_closure_break_stype*/;
+}
+void typing___TypingVisitor___closure_break_stype__eq(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 56, LOCATE_typing___TypingVisitor___closure_break_stype__eq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  ATTR_typing___TypingVisitor____closure_break_stype( self) /*TypingVisitor::_closure_break_stype*/ =  param0;
+  tracehead = trace.prev;
+  return;
+}
+val_t typing___TypingVisitor___break_list(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 59, LOCATE_typing___TypingVisitor___break_list};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  tracehead = trace.prev;
+  return ATTR_typing___TypingVisitor____break_list( self) /*TypingVisitor::_break_list*/;
+}
+void typing___TypingVisitor___break_list__eq(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 59, LOCATE_typing___TypingVisitor___break_list__eq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  ATTR_typing___TypingVisitor____break_list( self) /*TypingVisitor::_break_list*/ =  param0;
+  tracehead = trace.prev;
+  return;
+}
 val_t typing___TypingVisitor___explicit_super_init_calls(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 53, LOCATE_typing___TypingVisitor___explicit_super_init_calls};
+  struct trace_t trace = {NULL, NULL, 62, LOCATE_typing___TypingVisitor___explicit_super_init_calls};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   tracehead = trace.prev;
   return ATTR_typing___TypingVisitor____explicit_super_init_calls( self) /*TypingVisitor::_explicit_super_init_calls*/;
 }
 void typing___TypingVisitor___explicit_super_init_calls__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 53, LOCATE_typing___TypingVisitor___explicit_super_init_calls__eq};
+  struct trace_t trace = {NULL, NULL, 62, LOCATE_typing___TypingVisitor___explicit_super_init_calls__eq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   ATTR_typing___TypingVisitor____explicit_super_init_calls( self) /*TypingVisitor::_explicit_super_init_calls*/ =  param0;
@@ -90,14 +170,18 @@ void typing___TypingVisitor___explicit_super_init_calls__eq(val_t  self, val_t  
   return;
 }
 val_t typing___TypingVisitor___explicit_other_init_call(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 56, LOCATE_typing___TypingVisitor___explicit_other_init_call};
+  struct trace_t trace = {NULL, NULL, 65, LOCATE_typing___TypingVisitor___explicit_other_init_call};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   tracehead = trace.prev;
   return ATTR_typing___TypingVisitor____explicit_other_init_call( self) /*TypingVisitor::_explicit_other_init_call*/;
 }
 void typing___TypingVisitor___explicit_other_init_call__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 56, LOCATE_typing___TypingVisitor___explicit_other_init_call__eq};
+  struct trace_t trace = {NULL, NULL, 65, LOCATE_typing___TypingVisitor___explicit_other_init_call__eq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   ATTR_typing___TypingVisitor____explicit_other_init_call( self) /*TypingVisitor::_explicit_other_init_call*/ =  param0;
@@ -105,3499 +189,4574 @@ void typing___TypingVisitor___explicit_other_init_call__eq(val_t  self, val_t  p
   return;
 }
 void typing___TypingVisitor___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 59, LOCATE_typing___TypingVisitor___init};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 68, LOCATE_typing___TypingVisitor___init};
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 =  param1;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TypingVisitor].i]) return;
-  ((syntax_base___AbsSyntaxVisitor___init_t)CALL( self,COLOR_syntax_base___AbsSyntaxVisitor___init))( self,  param0,  param1, init_table /*YYY*/) /*AbsSyntaxVisitor::init*/;
+  ((syntax_base___AbsSyntaxVisitor___init_t)CALL(variable[0],COLOR_syntax_base___AbsSyntaxVisitor___init))(variable[0], variable[1], variable[2], init_table /*YYY*/) /*AbsSyntaxVisitor::init*/;
+  return_label2: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TypingVisitor].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t typing___TypingVisitor___get_default_constructor_for(val_t  self, val_t  param0, val_t  param1, val_t  param2) {
-  struct trace_t trace = {NULL, NULL, 61, LOCATE_typing___TypingVisitor___get_default_constructor_for};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-  val_t variable5;
-  val_t variable6;
-  val_t variable7;
-    val_t variable8;
-    val_t variable9;
-    val_t variable10;
-    val_t variable11;
-    val_t variable12;
-      val_t variable13;
-          val_t variable14;
-        static val_t once_value_variable13_5; static int once_bool_variable13_5;
-      val_t variable15;
-      val_t variable16;
+  struct trace_t trace = {NULL, NULL, 70, LOCATE_typing___TypingVisitor___get_default_constructor_for};
+        static val_t once_value_5; static int once_bool_5; /* Once value for variable[17]*/
+  val_t variable[24];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable2 =  param2;
-  variable3 =  self;
-  variable5 = NEW_Array_array___Array___init(); /*new Array[MMMethod]*/
-  variable4 = variable5;
-  variable6 = NEW_Array_array___Array___init(); /*new Array[MMMethod]*/
-  variable5 = variable6;
-  variable7 = ((static_type___MMLocalProperty___signature_t)CALL( variable2 /*prop*/,COLOR_static_type___MMLocalProperty___signature))( variable2 /*prop*/) /*MMLocalProperty::signature*/;
-  variable7 = ((static_type___MMSignature___arity_t)CALL(variable7,COLOR_static_type___MMSignature___arity))(variable7) /*MMSignature::arity*/;
-  variable6 = variable7;
-  variable7 = ((abstractmetamodel___MMLocalClass___global_properties_t)CALL( variable1 /*c*/,COLOR_abstractmetamodel___MMLocalClass___global_properties))( variable1 /*c*/) /*MMLocalClass::global_properties*/;
-  variable7 = ((abstract_collection___Collection___iterator_t)CALL(variable7,COLOR_abstract_collection___Collection___iterator))(variable7) /*Collection::iterator*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[3] =  param2;
+  variable[6] = variable[0];
+  variable[5] = variable[6];
+  variable[7] = NEW_Array_array___Array___init(); /*new Array[MMMethod]*/
+  variable[6] = variable[7];
+  variable[8] = NEW_Array_array___Array___init(); /*new Array[MMMethod]*/
+  variable[7] = variable[8];
+  variable[9] = ((static_type___MMLocalProperty___signature_t)CALL( variable[3] /*prop*/,COLOR_static_type___MMLocalProperty___signature))( variable[3] /*prop*/) /*MMLocalProperty::signature*/;
+  variable[9] = ((static_type___MMSignature___arity_t)CALL(variable[9],COLOR_static_type___MMSignature___arity))(variable[9]) /*MMSignature::arity*/;
+  variable[8] = variable[9];
+  variable[9] = ((abstractmetamodel___MMLocalClass___global_properties_t)CALL( variable[2] /*c*/,COLOR_abstractmetamodel___MMLocalClass___global_properties))( variable[2] /*c*/) /*MMLocalClass::global_properties*/;
+  variable[9] = ((abstract_collection___Collection___iterator_t)CALL(variable[9],COLOR_abstract_collection___Collection___iterator))(variable[9]) /*Collection::iterator*/;
   while (true) { /*for*/
-    variable8 = ((abstract_collection___Iterator___is_ok_t)CALL(variable7,COLOR_abstract_collection___Iterator___is_ok))(variable7) /*Iterator::is_ok*/;
-    if (!UNTAG_Bool(variable8)) break; /*for*/
-    variable8 = ((abstract_collection___Iterator___item_t)CALL(variable7,COLOR_abstract_collection___Iterator___item))(variable7) /*Iterator::item*/;
-    variable9 = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL( variable8 /*g*/,COLOR_abstractmetamodel___MMGlobalProperty___is_init))( variable8 /*g*/) /*MMGlobalProperty::is_init*/;
-    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable9)))) { /*if*/
+    variable[10] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[9],COLOR_abstract_collection___Iterator___is_ok))(variable[9]) /*Iterator::is_ok*/;
+    if (!UNTAG_Bool(variable[10])) break; /*for*/
+    variable[10] = ((abstract_collection___Iterator___item_t)CALL(variable[9],COLOR_abstract_collection___Iterator___item))(variable[9]) /*Iterator::item*/;
+    variable[11] = variable[10];
+    variable[12] = ((abstractmetamodel___MMGlobalProperty___is_init_for_t)CALL( variable[11] /*g*/,COLOR_abstractmetamodel___MMGlobalProperty___is_init_for))( variable[11] /*g*/,  variable[2] /*c*/) /*MMGlobalProperty::is_init_for*/;
+    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[12])))) { /*if*/
       goto continue_4;
     }
-    variable9 = ((abstractmetamodel___MMGlobalProperty___intro_t)CALL( variable8 /*g*/,COLOR_abstractmetamodel___MMGlobalProperty___intro))( variable8 /*g*/) /*MMGlobalProperty::intro*/;
-    variable9 = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL(variable9,COLOR_abstractmetamodel___MMLocalProperty___local_class))(variable9) /*MMLocalProperty::local_class*/;
-    variable9 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable9 ==  variable1 /*c*/) || ((variable9 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable9,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable9, variable1 /*c*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable9,COLOR_kernel___Object_____eqeq))(variable9,  variable1 /*c*/) /*Object::==*/)))))));
-    if (UNTAG_Bool(variable9)) { /*if*/
-      goto continue_4;
+    variable[13] = ((inheritance___MMLocalClass_____bra_t)CALL( variable[2] /*c*/,COLOR_abstractmetamodel___MMLocalClass_____bra))( variable[2] /*c*/,  variable[11] /*g*/) /*MMLocalClass::[]*/;
+    variable[12] = variable[13];
+    variable[14] = ((genericity___MMLocalClass___get_type_t)CALL( variable[2] /*c*/,COLOR_static_type___MMLocalClass___get_type))( variable[2] /*c*/) /*MMLocalClass::get_type*/;
+    variable[14] = ((static_type___MMLocalProperty___signature_for_t)CALL( variable[12] /*gp*/,COLOR_static_type___MMLocalProperty___signature_for))( variable[12] /*gp*/, variable[14]) /*MMLocalProperty::signature_for*/;
+    variable[13] = variable[14];
+    variable[14] = TAG_Bool(( variable[12] /*gp*/==NIT_NULL) || VAL_ISA( variable[12] /*gp*/, COLOR_MMSrcMethod, ID_MMSrcMethod)) /*cast MMSrcMethod*/;
+    if (!UNTAG_Bool(variable[14])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___TypingVisitor___get_default_constructor_for, LOCATE_typing, 82); nit_exit(1);}
+    variable[15] = ((static_type___MMSignature___arity_t)CALL( variable[13] /*gps*/,COLOR_static_type___MMSignature___arity))( variable[13] /*gps*/) /*MMSignature::arity*/;
+    variable[14] = variable[15];
+    variable[15] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*prop*/ ==  NIT_NULL /*null*/) || (( variable[3] /*prop*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*prop*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*prop*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*prop*/,COLOR_kernel___Object_____eqeq))( variable[3] /*prop*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    variable[16] = variable[15];
+    if (UNTAG_Bool(variable[16])) { /* and */
+      variable[16] = ((abstractmetamodel___MMLocalProperty___name_t)CALL( variable[12] /*gp*/,COLOR_abstractmetamodel___MMLocalProperty___name))( variable[12] /*gp*/) /*MMLocalProperty::name*/;
+      variable[17] = ((abstractmetamodel___MMLocalProperty___name_t)CALL( variable[3] /*prop*/,COLOR_abstractmetamodel___MMLocalProperty___name))( variable[3] /*prop*/) /*MMLocalProperty::name*/;
+      variable[16] = TAG_Bool((variable[16] == variable[17]) || ((variable[16] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[16],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[16],variable[17])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[16],COLOR_kernel___Object_____eqeq))(variable[16], variable[17]) /*Object::==*/)))));
     }
-    variable10 = ((inheritance___MMLocalClass_____bra_t)CALL( variable1 /*c*/,COLOR_abstractmetamodel___MMLocalClass_____bra))( variable1 /*c*/,  variable8 /*g*/) /*MMLocalClass::[]*/;
-    variable9 = variable10;
-    variable10 = TAG_Bool(( variable9 /*gp*/==NIT_NULL) || VAL_ISA( variable9 /*gp*/, COLOR_MMSrcMethod, ID_MMSrcMethod)) /*cast MMSrcMethod*/;
-    if (!UNTAG_Bool(variable10)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___TypingVisitor___get_default_constructor_for, LOCATE_typing, 73); nit_exit(1);}
-    variable11 = ((static_type___MMLocalProperty___signature_t)CALL( variable9 /*gp*/,COLOR_static_type___MMLocalProperty___signature))( variable9 /*gp*/) /*MMLocalProperty::signature*/;
-    variable11 = ((static_type___MMSignature___arity_t)CALL(variable11,COLOR_static_type___MMSignature___arity))(variable11) /*MMSignature::arity*/;
-    variable10 = variable11;
-    variable11 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable2 /*prop*/ ==  NIT_NULL /*null*/) || (( variable2 /*prop*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable2 /*prop*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable2 /*prop*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable2 /*prop*/,COLOR_kernel___Object_____eqeq))( variable2 /*prop*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    variable12 = variable11;
-    if (UNTAG_Bool(variable12)) { /* and */
-      variable12 = ((abstractmetamodel___MMLocalProperty___name_t)CALL( variable9 /*gp*/,COLOR_abstractmetamodel___MMLocalProperty___name))( variable9 /*gp*/) /*MMLocalProperty::name*/;
-      variable13 = ((abstractmetamodel___MMLocalProperty___name_t)CALL( variable2 /*prop*/,COLOR_abstractmetamodel___MMLocalProperty___name))( variable2 /*prop*/) /*MMLocalProperty::name*/;
-      variable12 = TAG_Bool((variable12 == variable13) || ((variable12 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable12,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable12,variable13)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable12,COLOR_kernel___Object_____eqeq))(variable12, variable13) /*Object::==*/)))));
-    }
-    variable11 = variable12;
-    if (UNTAG_Bool(variable11)) { /*if*/
-      variable11 = TAG_Bool(( variable10 /*garity*/)==( TAG_Int(0)));
-      variable12 = variable11;
-      if (!UNTAG_Bool(variable12)) { /* or */
-        variable12 = TAG_Bool(( variable6 /*parity*/)==( variable10 /*garity*/));
-        variable13 = variable12;
-        if (UNTAG_Bool(variable13)) { /* and */
-          variable13 = ((static_type___MMLocalProperty___signature_t)CALL( variable2 /*prop*/,COLOR_static_type___MMLocalProperty___signature))( variable2 /*prop*/) /*MMLocalProperty::signature*/;
-          variable14 = ((static_type___MMLocalProperty___signature_t)CALL( variable9 /*gp*/,COLOR_static_type___MMLocalProperty___signature))( variable9 /*gp*/) /*MMLocalProperty::signature*/;
-          variable13 = ((static_type___MMSignature_____l_t)CALL(variable13,COLOR_static_type___MMSignature_____l))(variable13, variable14) /*MMSignature::<*/;
+    variable[15] = variable[16];
+    if (UNTAG_Bool(variable[15])) { /*if*/
+      variable[15] = TAG_Bool(( variable[14] /*garity*/)==( TAG_Int(0)));
+      variable[16] = variable[15];
+      if (!UNTAG_Bool(variable[16])) { /* or */
+        variable[16] = TAG_Bool(( variable[8] /*parity*/)==( variable[14] /*garity*/));
+        variable[17] = variable[16];
+        if (UNTAG_Bool(variable[17])) { /* and */
+          variable[17] = ((static_type___MMLocalProperty___signature_t)CALL( variable[3] /*prop*/,COLOR_static_type___MMLocalProperty___signature))( variable[3] /*prop*/) /*MMLocalProperty::signature*/;
+          variable[17] = ((static_type___MMSignature_____l_t)CALL(variable[17],COLOR_static_type___MMSignature_____l))(variable[17],  variable[13] /*gps*/) /*MMSignature::<*/;
         }
-        variable12 = variable13;
+        variable[16] = variable[17];
       }
-      variable11 = variable12;
-      if (UNTAG_Bool(variable11)) { /*if*/
-        variable3 =  variable9 /*gp*/;
+      variable[15] = variable[16];
+      if (UNTAG_Bool(variable[15])) { /*if*/
+        variable[4] =  variable[12] /*gp*/;
         goto return_label3;
       } else { /*if*/
-        ((array___AbstractArray___add_t)CALL( variable5 /*false_candidates*/,COLOR_abstract_collection___SimpleCollection___add))( variable5 /*false_candidates*/,  variable9 /*gp*/) /*AbstractArray::add*/;
+        ((array___AbstractArray___add_t)CALL( variable[7] /*false_candidates*/,COLOR_abstract_collection___SimpleCollection___add))( variable[7] /*false_candidates*/,  variable[12] /*gp*/) /*AbstractArray::add*/;
       }
     } else { /*if*/
-      variable11 = TAG_Bool(( variable10 /*garity*/)==( TAG_Int(0)));
-      variable12 = variable11;
-      if (UNTAG_Bool(variable12)) { /* and */
-        variable12 = ((abstractmetamodel___MMLocalProperty___name_t)CALL( variable9 /*gp*/,COLOR_abstractmetamodel___MMLocalProperty___name))( variable9 /*gp*/) /*MMLocalProperty::name*/;
-        if (once_bool_variable13_5) variable13 = once_value_variable13_5;
+      variable[15] = TAG_Bool(( variable[14] /*garity*/)==( TAG_Int(0)));
+      variable[16] = variable[15];
+      if (UNTAG_Bool(variable[16])) { /* and */
+        variable[16] = ((abstractmetamodel___MMLocalProperty___name_t)CALL( variable[12] /*gp*/,COLOR_abstractmetamodel___MMLocalProperty___name))( variable[12] /*gp*/) /*MMLocalProperty::name*/;
+        if (once_bool_5) variable[17] = once_value_5;
         else {
-          variable13 = NEW_String_string___String___with_native(BOX_NativeString("init"), TAG_Int(4)); /*new String*/
-          variable13 = ((symbol___String___to_symbol_t)CALL(variable13,COLOR_symbol___String___to_symbol))(variable13) /*String::to_symbol*/;
-          once_value_variable13_5 = variable13;
-          once_bool_variable13_5 = true;
+          variable[17] = NEW_String_string___String___with_native(BOX_NativeString("init"), TAG_Int(4)); /*new String*/
+          variable[17] = ((symbol___String___to_symbol_t)CALL(variable[17],COLOR_symbol___String___to_symbol))(variable[17]) /*String::to_symbol*/;
+          once_value_5 = variable[17];
+          once_bool_5 = true;
         }
-        variable12 = TAG_Bool((variable12 == variable13) || ((variable12 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable12,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable12,variable13)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable12,COLOR_kernel___Object_____eqeq))(variable12, variable13) /*Object::==*/)))));
+        variable[16] = TAG_Bool((variable[16] == variable[17]) || ((variable[16] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[16],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[16],variable[17])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[16],COLOR_kernel___Object_____eqeq))(variable[16], variable[17]) /*Object::==*/)))));
       }
-      variable11 = variable12;
-      if (UNTAG_Bool(variable11)) { /*if*/
-        ((array___AbstractArray___add_t)CALL( variable4 /*candidates*/,COLOR_abstract_collection___SimpleCollection___add))( variable4 /*candidates*/,  variable9 /*gp*/) /*AbstractArray::add*/;
-        ((array___AbstractArray___add_t)CALL( variable5 /*false_candidates*/,COLOR_abstract_collection___SimpleCollection___add))( variable5 /*false_candidates*/,  variable9 /*gp*/) /*AbstractArray::add*/;
+      variable[15] = variable[16];
+      if (UNTAG_Bool(variable[15])) { /*if*/
+        ((array___AbstractArray___add_t)CALL( variable[6] /*candidates*/,COLOR_abstract_collection___SimpleCollection___add))( variable[6] /*candidates*/,  variable[12] /*gp*/) /*AbstractArray::add*/;
+        ((array___AbstractArray___add_t)CALL( variable[7] /*false_candidates*/,COLOR_abstract_collection___SimpleCollection___add))( variable[7] /*false_candidates*/,  variable[12] /*gp*/) /*AbstractArray::add*/;
       } else { /*if*/
-        ((array___AbstractArray___add_t)CALL( variable5 /*false_candidates*/,COLOR_abstract_collection___SimpleCollection___add))( variable5 /*false_candidates*/,  variable9 /*gp*/) /*AbstractArray::add*/;
+        ((array___AbstractArray___add_t)CALL( variable[7] /*false_candidates*/,COLOR_abstract_collection___SimpleCollection___add))( variable[7] /*false_candidates*/,  variable[12] /*gp*/) /*AbstractArray::add*/;
       }
     }
     continue_4: while(0);
-    ((abstract_collection___Iterator___next_t)CALL(variable7,COLOR_abstract_collection___Iterator___next))(variable7) /*Iterator::next*/;
+    ((abstract_collection___Iterator___next_t)CALL(variable[9],COLOR_abstract_collection___Iterator___next))(variable[9]) /*Iterator::next*/;
   }
   break_4: while(0);
-  variable7 = ((array___AbstractArray___length_t)CALL( variable4 /*candidates*/,COLOR_abstract_collection___Collection___length))( variable4 /*candidates*/) /*AbstractArray::length*/;
-  variable7 = TAG_Bool((variable7)==( TAG_Int(1)));
-  if (UNTAG_Bool(variable7)) { /*if*/
-    variable7 = ((abstract_collection___IndexedCollection___first_t)CALL( variable4 /*candidates*/,COLOR_abstract_collection___Collection___first))( variable4 /*candidates*/) /*IndexedCollection::first*/;
-    variable3 = variable7;
+  variable[9] = ((array___AbstractArray___length_t)CALL( variable[6] /*candidates*/,COLOR_abstract_collection___Collection___length))( variable[6] /*candidates*/) /*AbstractArray::length*/;
+  variable[9] = TAG_Bool((variable[9])==( TAG_Int(1)));
+  if (UNTAG_Bool(variable[9])) { /*if*/
+    variable[9] = ((abstract_collection___IndexedCollection___first_t)CALL( variable[6] /*candidates*/,COLOR_abstract_collection___Collection___first))( variable[6] /*candidates*/) /*IndexedCollection::first*/;
+    variable[4] = variable[9];
     goto return_label3;
   } else { /*if*/
-    variable7 = ((array___AbstractArray___length_t)CALL( variable4 /*candidates*/,COLOR_abstract_collection___Collection___length))( variable4 /*candidates*/) /*AbstractArray::length*/;
-    variable7 = TAG_Bool(UNTAG_Int(variable7)>UNTAG_Int( TAG_Int(0)));
-    if (UNTAG_Bool(variable7)) { /*if*/
-      variable7 = NEW_String_string___String___init(); /*new String*/
-      variable8 = NEW_String_string___String___with_native(BOX_NativeString("Error: Conflicting default constructor to call for "), TAG_Int(51)); /*new String*/
-      variable9 = variable8;
-      ((string___String___append_t)CALL(variable7,COLOR_abstract_collection___IndexedCollection___append))(variable7, variable9) /*String::append*/;
-      variable10 =  variable1 /*c*/;
-      variable10 = ((string___String___to_s_t)CALL(variable10,COLOR_string___Object___to_s))(variable10) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable7,COLOR_abstract_collection___IndexedCollection___append))(variable7, variable10) /*String::append*/;
-      variable11 = NEW_String_string___String___with_native(BOX_NativeString(": "), TAG_Int(2)); /*new String*/
-      variable12 = variable11;
-      ((string___String___append_t)CALL(variable7,COLOR_abstract_collection___IndexedCollection___append))(variable7, variable12) /*String::append*/;
-      variable13 = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
-      variable13 = ((string___Collection___join_t)CALL( variable4 /*candidates*/,COLOR_string___Collection___join))( variable4 /*candidates*/, variable13) /*Collection::join*/;
-      variable14 = variable13;
-      ((string___String___append_t)CALL(variable7,COLOR_abstract_collection___IndexedCollection___append))(variable7, variable14) /*String::append*/;
-      variable15 = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-      variable16 = variable15;
-      ((string___String___append_t)CALL(variable7,COLOR_abstract_collection___IndexedCollection___append))(variable7, variable16) /*String::append*/;
-      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable3 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable3 /*v*/,  variable0 /*n*/, variable7) /*AbsSyntaxVisitor::error*/;
-      variable3 =  NIT_NULL /*null*/;
+    variable[9] = ((array___AbstractArray___length_t)CALL( variable[6] /*candidates*/,COLOR_abstract_collection___Collection___length))( variable[6] /*candidates*/) /*AbstractArray::length*/;
+    variable[9] = TAG_Bool(UNTAG_Int(variable[9])>UNTAG_Int( TAG_Int(0)));
+    if (UNTAG_Bool(variable[9])) { /*if*/
+      variable[10] = NEW_Array_array___Array___init(); /*new Array[String]*/
+      variable[9] = variable[10];
+      variable[10] = ((array___AbstractArray___iterator_t)CALL( variable[6] /*candidates*/,COLOR_abstract_collection___Collection___iterator))( variable[6] /*candidates*/) /*AbstractArray::iterator*/;
+      while (true) { /*for*/
+        variable[11] = ((array___ArrayIterator___is_ok_t)CALL(variable[10],COLOR_abstract_collection___Iterator___is_ok))(variable[10]) /*ArrayIterator::is_ok*/;
+        if (!UNTAG_Bool(variable[11])) break; /*for*/
+        variable[11] = ((array___ArrayIterator___item_t)CALL(variable[10],COLOR_abstract_collection___Iterator___item))(variable[10]) /*ArrayIterator::item*/;
+        variable[12] = variable[11];
+        variable[13] = NEW_String_string___String___init(); /*new String*/
+        variable[14] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+        variable[15] = variable[14];
+        ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[15]) /*String::append*/;
+        variable[16] = ((abstractmetamodel___MMLocalProperty___full_name_t)CALL( variable[12] /*p*/,COLOR_abstractmetamodel___MMLocalProperty___full_name))( variable[12] /*p*/) /*MMLocalProperty::full_name*/;
+        variable[17] = variable[16];
+        ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[17]) /*String::append*/;
+        variable[18] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+        variable[19] = variable[18];
+        ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[19]) /*String::append*/;
+        variable[20] = ((static_type___MMLocalProperty___signature_t)CALL( variable[12] /*p*/,COLOR_static_type___MMLocalProperty___signature))( variable[12] /*p*/) /*MMLocalProperty::signature*/;
+        variable[21] = variable[20];
+        variable[21] = ((string___String___to_s_t)CALL(variable[21],COLOR_string___Object___to_s))(variable[21]) /*String::to_s*/;
+        ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[21]) /*String::append*/;
+        variable[22] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+        variable[23] = variable[22];
+        ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[23]) /*String::append*/;
+        ((array___AbstractArray___add_t)CALL( variable[9] /*a*/,COLOR_abstract_collection___SimpleCollection___add))( variable[9] /*a*/, variable[13]) /*AbstractArray::add*/;
+        continue_6: while(0);
+        ((array___ArrayIterator___next_t)CALL(variable[10],COLOR_abstract_collection___Iterator___next))(variable[10]) /*ArrayIterator::next*/;
+      }
+      break_6: while(0);
+      variable[10] = NEW_String_string___String___init(); /*new String*/
+      variable[11] = NEW_String_string___String___with_native(BOX_NativeString("Error: Conflicting default constructor to call for "), TAG_Int(51)); /*new String*/
+      variable[12] = variable[11];
+      ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[12]) /*String::append*/;
+      variable[13] =  variable[2] /*c*/;
+      variable[13] = ((string___String___to_s_t)CALL(variable[13],COLOR_string___Object___to_s))(variable[13]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[13]) /*String::append*/;
+      variable[14] = NEW_String_string___String___with_native(BOX_NativeString(": "), TAG_Int(2)); /*new String*/
+      variable[15] = variable[14];
+      ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[15]) /*String::append*/;
+      variable[16] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
+      variable[16] = ((string___Collection___join_t)CALL( variable[9] /*a*/,COLOR_string___Collection___join))( variable[9] /*a*/, variable[16]) /*Collection::join*/;
+      variable[17] = variable[16];
+      ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[17]) /*String::append*/;
+      variable[18] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
+      variable[19] = variable[18];
+      ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[19]) /*String::append*/;
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[5] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[5] /*v*/,  variable[1] /*n*/, variable[10]) /*AbsSyntaxVisitor::error*/;
+      variable[4] =  NIT_NULL /*null*/;
       goto return_label3;
     } else { /*if*/
-      variable7 = ((array___AbstractArray___length_t)CALL( variable5 /*false_candidates*/,COLOR_abstract_collection___Collection___length))( variable5 /*false_candidates*/) /*AbstractArray::length*/;
-      variable7 = TAG_Bool(UNTAG_Int(variable7)>UNTAG_Int( TAG_Int(0)));
-      if (UNTAG_Bool(variable7)) { /*if*/
-        variable7 = NEW_String_string___String___init(); /*new String*/
-        variable8 = NEW_String_string___String___with_native(BOX_NativeString("Error: there is no available compatible constrctor in "), TAG_Int(54)); /*new String*/
-        variable9 = variable8;
-        ((string___String___append_t)CALL(variable7,COLOR_abstract_collection___IndexedCollection___append))(variable7, variable9) /*String::append*/;
-        variable10 =  variable1 /*c*/;
-        variable10 = ((string___String___to_s_t)CALL(variable10,COLOR_string___Object___to_s))(variable10) /*String::to_s*/;
-        ((string___String___append_t)CALL(variable7,COLOR_abstract_collection___IndexedCollection___append))(variable7, variable10) /*String::append*/;
-        variable11 = NEW_String_string___String___with_native(BOX_NativeString(". discarded candidates are "), TAG_Int(27)); /*new String*/
-        variable12 = variable11;
-        ((string___String___append_t)CALL(variable7,COLOR_abstract_collection___IndexedCollection___append))(variable7, variable12) /*String::append*/;
-        variable13 = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
-        variable13 = ((string___Collection___join_t)CALL( variable5 /*false_candidates*/,COLOR_string___Collection___join))( variable5 /*false_candidates*/, variable13) /*Collection::join*/;
-        variable14 = variable13;
-        ((string___String___append_t)CALL(variable7,COLOR_abstract_collection___IndexedCollection___append))(variable7, variable14) /*String::append*/;
-        variable15 = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-        variable16 = variable15;
-        ((string___String___append_t)CALL(variable7,COLOR_abstract_collection___IndexedCollection___append))(variable7, variable16) /*String::append*/;
-        ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable3 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable3 /*v*/,  variable0 /*n*/, variable7) /*AbsSyntaxVisitor::error*/;
-        variable3 =  NIT_NULL /*null*/;
+      variable[9] = ((array___AbstractArray___length_t)CALL( variable[7] /*false_candidates*/,COLOR_abstract_collection___Collection___length))( variable[7] /*false_candidates*/) /*AbstractArray::length*/;
+      variable[9] = TAG_Bool(UNTAG_Int(variable[9])>UNTAG_Int( TAG_Int(0)));
+      if (UNTAG_Bool(variable[9])) { /*if*/
+        variable[10] = NEW_Array_array___Array___init(); /*new Array[String]*/
+        variable[9] = variable[10];
+        variable[10] = ((array___AbstractArray___iterator_t)CALL( variable[7] /*false_candidates*/,COLOR_abstract_collection___Collection___iterator))( variable[7] /*false_candidates*/) /*AbstractArray::iterator*/;
+        while (true) { /*for*/
+          variable[11] = ((array___ArrayIterator___is_ok_t)CALL(variable[10],COLOR_abstract_collection___Iterator___is_ok))(variable[10]) /*ArrayIterator::is_ok*/;
+          if (!UNTAG_Bool(variable[11])) break; /*for*/
+          variable[11] = ((array___ArrayIterator___item_t)CALL(variable[10],COLOR_abstract_collection___Iterator___item))(variable[10]) /*ArrayIterator::item*/;
+          variable[12] = variable[11];
+          variable[13] = NEW_String_string___String___init(); /*new String*/
+          variable[14] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+          variable[15] = variable[14];
+          ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[15]) /*String::append*/;
+          variable[16] = ((abstractmetamodel___MMLocalProperty___full_name_t)CALL( variable[12] /*p*/,COLOR_abstractmetamodel___MMLocalProperty___full_name))( variable[12] /*p*/) /*MMLocalProperty::full_name*/;
+          variable[17] = variable[16];
+          ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[17]) /*String::append*/;
+          variable[18] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+          variable[19] = variable[18];
+          ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[19]) /*String::append*/;
+          variable[20] = ((static_type___MMLocalProperty___signature_t)CALL( variable[12] /*p*/,COLOR_static_type___MMLocalProperty___signature))( variable[12] /*p*/) /*MMLocalProperty::signature*/;
+          variable[21] = variable[20];
+          variable[21] = ((string___String___to_s_t)CALL(variable[21],COLOR_string___Object___to_s))(variable[21]) /*String::to_s*/;
+          ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[21]) /*String::append*/;
+          variable[22] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+          variable[23] = variable[22];
+          ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[23]) /*String::append*/;
+          ((array___AbstractArray___add_t)CALL( variable[9] /*a*/,COLOR_abstract_collection___SimpleCollection___add))( variable[9] /*a*/, variable[13]) /*AbstractArray::add*/;
+          continue_7: while(0);
+          ((array___ArrayIterator___next_t)CALL(variable[10],COLOR_abstract_collection___Iterator___next))(variable[10]) /*ArrayIterator::next*/;
+        }
+        break_7: while(0);
+        variable[10] = NEW_String_string___String___init(); /*new String*/
+        variable[11] = NEW_String_string___String___with_native(BOX_NativeString("Error: there is no available compatible constrctor in "), TAG_Int(54)); /*new String*/
+        variable[12] = variable[11];
+        ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[12]) /*String::append*/;
+        variable[13] =  variable[2] /*c*/;
+        variable[13] = ((string___String___to_s_t)CALL(variable[13],COLOR_string___Object___to_s))(variable[13]) /*String::to_s*/;
+        ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[13]) /*String::append*/;
+        variable[14] = NEW_String_string___String___with_native(BOX_NativeString(". Discarded candidates are "), TAG_Int(27)); /*new String*/
+        variable[15] = variable[14];
+        ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[15]) /*String::append*/;
+        variable[16] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
+        variable[16] = ((string___Collection___join_t)CALL( variable[9] /*a*/,COLOR_string___Collection___join))( variable[9] /*a*/, variable[16]) /*Collection::join*/;
+        variable[17] = variable[16];
+        ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[17]) /*String::append*/;
+        variable[18] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
+        variable[19] = variable[18];
+        ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[19]) /*String::append*/;
+        ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[5] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[5] /*v*/,  variable[1] /*n*/, variable[10]) /*AbsSyntaxVisitor::error*/;
+        variable[4] =  NIT_NULL /*null*/;
         goto return_label3;
       } else { /*if*/
-        variable7 = NEW_String_string___String___init(); /*new String*/
-        variable8 = NEW_String_string___String___with_native(BOX_NativeString("Error: there is no available compatible constrctor in "), TAG_Int(54)); /*new String*/
-        variable9 = variable8;
-        ((string___String___append_t)CALL(variable7,COLOR_abstract_collection___IndexedCollection___append))(variable7, variable9) /*String::append*/;
-        variable10 =  variable1 /*c*/;
-        variable10 = ((string___String___to_s_t)CALL(variable10,COLOR_string___Object___to_s))(variable10) /*String::to_s*/;
-        ((string___String___append_t)CALL(variable7,COLOR_abstract_collection___IndexedCollection___append))(variable7, variable10) /*String::append*/;
-        variable11 = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-        variable12 = variable11;
-        ((string___String___append_t)CALL(variable7,COLOR_abstract_collection___IndexedCollection___append))(variable7, variable12) /*String::append*/;
-        ((syntax_base___AbsSyntaxVisitor___warning_t)CALL( variable3 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___warning))( variable3 /*v*/,  variable0 /*n*/, variable7) /*AbsSyntaxVisitor::warning*/;
-        variable3 =  NIT_NULL /*null*/;
+        variable[9] = NEW_String_string___String___init(); /*new String*/
+        variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Error: there is no available compatible constrctor in "), TAG_Int(54)); /*new String*/
+        variable[11] = variable[10];
+        ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[11]) /*String::append*/;
+        variable[12] =  variable[2] /*c*/;
+        variable[12] = ((string___String___to_s_t)CALL(variable[12],COLOR_string___Object___to_s))(variable[12]) /*String::to_s*/;
+        ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[12]) /*String::append*/;
+        variable[13] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
+        variable[14] = variable[13];
+        ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[14]) /*String::append*/;
+        ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[5] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[5] /*v*/,  variable[1] /*n*/, variable[9]) /*AbsSyntaxVisitor::error*/;
+        variable[4] =  NIT_NULL /*null*/;
         goto return_label3;
       }
     }
   }
   return_label3: while(false);
   tracehead = trace.prev;
-  return variable3;
+  return variable[4];
 }
 val_t typing___VariableContext_____bra(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 106, LOCATE_typing___VariableContext_____bra};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 123, LOCATE_typing___VariableContext_____bra};
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ATTR_typing___VariableContext____dico( self) /*VariableContext::_dico*/;
-  variable1 = ((abstract_collection___Map___has_key_t)CALL(variable1,COLOR_abstract_collection___Map___has_key))(variable1,  variable0 /*s*/) /*Map::has_key*/;
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = ATTR_typing___VariableContext____dico( self) /*VariableContext::_dico*/;
-    variable1 = ((abstract_collection___Map_____bra_t)CALL(variable1,COLOR_abstract_collection___Map_____bra))(variable1,  variable0 /*s*/) /*Map::[]*/;
-    goto return_label6;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ATTR_typing___VariableContext____dico(variable[3]) /*VariableContext::_dico*/;
+  variable[3] = ((abstract_collection___Map___has_key_t)CALL(variable[3],COLOR_abstract_collection___Map___has_key))(variable[3],  variable[1] /*s*/) /*Map::has_key*/;
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = variable[0];
+    variable[3] = ATTR_typing___VariableContext____dico(variable[3]) /*VariableContext::_dico*/;
+    variable[3] = ((abstract_collection___Map_____bra_t)CALL(variable[3],COLOR_abstract_collection___Map_____bra))(variable[3],  variable[1] /*s*/) /*Map::[]*/;
+    variable[2] = variable[3];
+    goto return_label8;
   } else { /*if*/
-    variable1 =  NIT_NULL /*null*/;
-    goto return_label6;
+    variable[2] =  NIT_NULL /*null*/;
+    goto return_label8;
   }
-  return_label6: while(false);
+  return_label8: while(false);
   tracehead = trace.prev;
-  return variable1;
+  return variable[2];
 }
 void typing___VariableContext___add(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 117, LOCATE_typing___VariableContext___add};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  struct trace_t trace = {NULL, NULL, 134, LOCATE_typing___VariableContext___add};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ATTR_typing___VariableContext____dico( self) /*VariableContext::_dico*/;
-  variable2 = ((syntax_base___Variable___name_t)CALL( variable0 /*v*/,COLOR_syntax_base___Variable___name))( variable0 /*v*/) /*Variable::name*/;
-  ((abstract_collection___Map_____braeq_t)CALL(variable1,COLOR_abstract_collection___Map_____braeq))(variable1, variable2,  variable0 /*v*/) /*Map::[]=*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ATTR_typing___VariableContext____dico(variable[3]) /*VariableContext::_dico*/;
+  variable[4] = ((syntax_base___Variable___name_t)CALL( variable[1] /*v*/,COLOR_syntax_base___Variable___name))( variable[1] /*v*/) /*Variable::name*/;
+  ((abstract_collection___Map_____braeq_t)CALL(variable[3],COLOR_abstract_collection___Map_____braeq))(variable[3], variable[4],  variable[1] /*v*/) /*Map::[]=*/;
+  return_label9: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t typing___VariableContext___stype(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 124, LOCATE_typing___VariableContext___stype};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 141, LOCATE_typing___VariableContext___stype};
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((syntax_base___Variable___stype_t)CALL( variable0 /*v*/,COLOR_syntax_base___Variable___stype))( variable0 /*v*/) /*Variable::stype*/;
-  goto return_label8;
-  return_label8: while(false);
-  tracehead = trace.prev;
-  return variable1;
-}
-val_t typing___VariableContext___sub(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 134, LOCATE_typing___VariableContext___sub};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 = NEW_SubVariableContext_typing___SubVariableContext___with( self,  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new SubVariableContext*/
-  goto return_label9;
-  return_label9: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t typing___VariableContext___sub_with(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 140, LOCATE_typing___VariableContext___sub_with};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable2 = NEW_SubVariableContext_typing___SubVariableContext___with( self,  variable0 /*v*/,  variable1 /*t*/); /*new SubVariableContext*/
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = ((syntax_base___Variable___stype_t)CALL( variable[1] /*v*/,COLOR_syntax_base___Variable___stype))( variable[1] /*v*/) /*Variable::stype*/;
+  variable[2] = variable[3];
   goto return_label10;
   return_label10: while(false);
   tracehead = trace.prev;
-  return variable2;
+  return variable[2];
 }
-void typing___VariableContext___init(val_t  self, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 146, LOCATE_typing___VariableContext___init};
-  val_t variable0;
+val_t typing___VariableContext___sub(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 151, LOCATE_typing___VariableContext___sub};
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[3] = NEW_SubVariableContext_typing___SubVariableContext___with_prev(variable[2],  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new SubVariableContext*/
+  variable[2] = variable[3];
+  variable[1] = variable[2];
+  goto return_label11;
+  return_label11: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___VariableContext___sub_with(val_t  self, val_t  param0, val_t  param1) {
+  struct trace_t trace = {NULL, NULL, 157, LOCATE_typing___VariableContext___sub_with};
+  val_t variable[6];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[4] = variable[0];
+  variable[5] = NEW_SubVariableContext_typing___SubVariableContext___with_prev(variable[4],  variable[1] /*v*/,  variable[2] /*t*/); /*new SubVariableContext*/
+  variable[4] = variable[5];
+  variable[3] = variable[4];
+  goto return_label12;
+  return_label12: while(false);
+  tracehead = trace.prev;
+  return variable[3];
+}
+void typing___VariableContext___init(val_t  self, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 163, LOCATE_typing___VariableContext___init};
+  val_t variable[4];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_VariableContext].i]) return;
-  variable0 = NEW_HashMap_hash___HashMap___init(); /*new HashMap[Symbol, Variable]*/
-  ATTR_typing___VariableContext____dico( self) /*VariableContext::_dico*/ = variable0;
+  variable[2] = variable[0];
+  variable[3] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[Symbol, Variable]*/
+  ATTR_typing___VariableContext____dico(variable[2]) /*VariableContext::_dico*/ = variable[3];
+  return_label13: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_VariableContext].i] = 1;
   tracehead = trace.prev;
   return;
 }
+val_t typing___SubVariableContext_____bra(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 175, LOCATE_typing___SubVariableContext_____bra};
+  val_t variable[4];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ATTR_typing___VariableContext____dico(variable[3]) /*VariableContext::_dico*/;
+  variable[3] = ((abstract_collection___Map___has_key_t)CALL(variable[3],COLOR_abstract_collection___Map___has_key))(variable[3],  variable[1] /*s*/) /*Map::has_key*/;
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = variable[0];
+    variable[3] = ATTR_typing___VariableContext____dico(variable[3]) /*VariableContext::_dico*/;
+    variable[3] = ((abstract_collection___Map_____bra_t)CALL(variable[3],COLOR_abstract_collection___Map_____bra))(variable[3],  variable[1] /*s*/) /*Map::[]*/;
+    variable[2] = variable[3];
+    goto return_label14;
+  } else { /*if*/
+    variable[3] = variable[0];
+    variable[3] = ((typing___SubVariableContext___prev_t)CALL(variable[3],COLOR_typing___SubVariableContext___prev))(variable[3]) /*SubVariableContext::prev*/;
+    variable[3] = ((typing___VariableContext_____bra_t)CALL(variable[3],COLOR_typing___VariableContext_____bra))(variable[3],  variable[1] /*s*/) /*VariableContext::[]*/;
+    variable[2] = variable[3];
+    goto return_label14;
+  }
+  return_label14: while(false);
+  tracehead = trace.prev;
+  return variable[2];
+}
+val_t typing___SubVariableContext___stype(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 184, LOCATE_typing___SubVariableContext___stype};
+  val_t variable[4];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ATTR_typing___SubVariableContext____variable(variable[3]) /*SubVariableContext::_variable*/;
+  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*v*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*v*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  variable[1] /*v*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = variable[0];
+    variable[3] = ATTR_typing___SubVariableContext____var_type(variable[3]) /*SubVariableContext::_var_type*/;
+    variable[2] = variable[3];
+    goto return_label15;
+  }
+  variable[3] = variable[0];
+  variable[3] = ((typing___SubVariableContext___prev_t)CALL(variable[3],COLOR_typing___SubVariableContext___prev))(variable[3]) /*SubVariableContext::prev*/;
+  variable[3] = ((typing___VariableContext___stype_t)CALL(variable[3],COLOR_typing___VariableContext___stype))(variable[3],  variable[1] /*v*/) /*VariableContext::stype*/;
+  variable[2] = variable[3];
+  goto return_label15;
+  return_label15: while(false);
+  tracehead = trace.prev;
+  return variable[2];
+}
 val_t typing___SubVariableContext___prev(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 154, LOCATE_typing___SubVariableContext___prev};
+  struct trace_t trace = {NULL, NULL, 171, LOCATE_typing___SubVariableContext___prev};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   tracehead = trace.prev;
   return ATTR_typing___SubVariableContext____prev( self) /*SubVariableContext::_prev*/;
 }
-val_t typing___SubVariableContext_____bra(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 158, LOCATE_typing___SubVariableContext_____bra};
-  val_t variable0;
-  val_t variable1;
+void typing___SubVariableContext___with_prev(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 192, LOCATE_typing___SubVariableContext___with_prev};
+  val_t variable[6];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ATTR_typing___VariableContext____dico( self) /*VariableContext::_dico*/;
-  variable1 = ((abstract_collection___Map___has_key_t)CALL(variable1,COLOR_abstract_collection___Map___has_key))(variable1,  variable0 /*s*/) /*Map::has_key*/;
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = ATTR_typing___VariableContext____dico( self) /*VariableContext::_dico*/;
-    variable1 = ((abstract_collection___Map_____bra_t)CALL(variable1,COLOR_abstract_collection___Map_____bra))(variable1,  variable0 /*s*/) /*Map::[]*/;
-    goto return_label12;
-  } else { /*if*/
-    variable1 = ((typing___SubVariableContext___prev_t)CALL( self,COLOR_typing___SubVariableContext___prev))( self) /*SubVariableContext::prev*/;
-    variable1 = ((typing___VariableContext_____bra_t)CALL(variable1,COLOR_typing___VariableContext_____bra))(variable1,  variable0 /*s*/) /*VariableContext::[]*/;
-    goto return_label12;
-  }
-  return_label12: while(false);
-  tracehead = trace.prev;
-  return variable1;
-}
-val_t typing___SubVariableContext___stype(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 167, LOCATE_typing___SubVariableContext___stype};
-  val_t variable0;
-  val_t variable1;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ATTR_typing___SubVariableContext____variable( self) /*SubVariableContext::_variable*/;
-  variable1 = TAG_Bool((variable1 ==  variable0 /*v*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, variable0 /*v*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  variable0 /*v*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = ATTR_typing___SubVariableContext____var_type( self) /*SubVariableContext::_var_type*/;
-    goto return_label13;
-  }
-  variable1 = ((typing___SubVariableContext___prev_t)CALL( self,COLOR_typing___SubVariableContext___prev))( self) /*SubVariableContext::prev*/;
-  variable1 = ((typing___VariableContext___stype_t)CALL(variable1,COLOR_typing___VariableContext___stype))(variable1,  variable0 /*v*/) /*VariableContext::stype*/;
-  goto return_label13;
-  return_label13: while(false);
-  tracehead = trace.prev;
-  return variable1;
-}
-void typing___SubVariableContext___with(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 175, LOCATE_typing___SubVariableContext___with};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable2 =  param2;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[3] =  param2;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_SubVariableContext].i]) return;
-  ((typing___VariableContext___init_t)CALL( self,COLOR_typing___VariableContext___init))( self, init_table /*YYY*/) /*VariableContext::init*/;
-  ATTR_typing___SubVariableContext____prev( self) /*SubVariableContext::_prev*/ =  variable0 /*p*/;
-  ATTR_typing___SubVariableContext____variable( self) /*SubVariableContext::_variable*/ =  variable1 /*v*/;
-  ATTR_typing___SubVariableContext____var_type( self) /*SubVariableContext::_var_type*/ =  variable2 /*t*/;
+  variable[5] = variable[0];
+  ((typing___VariableContext___init_t)CALL(variable[5],COLOR_typing___VariableContext___init))(variable[5], init_table /*YYY*/) /*VariableContext::init*/;
+  variable[5] = variable[0];
+  ATTR_typing___SubVariableContext____prev(variable[5]) /*SubVariableContext::_prev*/ =  variable[1] /*p*/;
+  variable[5] = variable[0];
+  ATTR_typing___SubVariableContext____variable(variable[5]) /*SubVariableContext::_variable*/ =  variable[2] /*v*/;
+  variable[5] = variable[0];
+  ATTR_typing___SubVariableContext____var_type(variable[5]) /*SubVariableContext::_var_type*/ =  variable[3] /*t*/;
+  return_label16: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_SubVariableContext].i] = 1;
   tracehead = trace.prev;
   return;
 }
 void typing___PNode___accept_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 188, LOCATE_typing___PNode___accept_typing};
-  val_t variable0;
+  struct trace_t trace = {NULL, NULL, 205, LOCATE_typing___PNode___accept_typing};
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  ((syntax_base___PNode___accept_abs_syntax_visitor_t)CALL( self,COLOR_syntax_base___PNode___accept_abs_syntax_visitor))( self,  variable0 /*v*/) /*PNode::accept_abs_syntax_visitor*/;
-  ((typing___PNode___after_typing_t)CALL( self,COLOR_typing___PNode___after_typing))( self,  variable0 /*v*/) /*PNode::after_typing*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  ((syntax_base___PNode___accept_abs_syntax_visitor_t)CALL(variable[3],COLOR_syntax_base___PNode___accept_abs_syntax_visitor))(variable[3],  variable[1] /*v*/) /*PNode::accept_abs_syntax_visitor*/;
+  variable[3] = variable[0];
+  ((typing___PNode___after_typing_t)CALL(variable[3],COLOR_typing___PNode___after_typing))(variable[3],  variable[1] /*v*/) /*PNode::after_typing*/;
+  return_label17: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___PNode___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 193, LOCATE_typing___PNode___after_typing};
-  val_t variable0;
+  struct trace_t trace = {NULL, NULL, 210, LOCATE_typing___PNode___after_typing};
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
+  variable[0] =  self;
+  variable[1] =  param0;
+  return_label18: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___PClassdef___accept_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 197, LOCATE_typing___PClassdef___accept_typing};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 214, LOCATE_typing___PClassdef___accept_typing};
+  val_t variable[6];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((syntax_base___PClassdef___local_class_t)CALL( self,COLOR_syntax_base___PClassdef___local_class))( self) /*PClassdef::local_class*/;
-  variable1 = ((genericity___MMLocalClass___get_type_t)CALL(variable1,COLOR_static_type___MMLocalClass___get_type))(variable1) /*MMLocalClass::get_type*/;
-  ((typing___TypingVisitor___self_type__eq_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___self_type__eq))( variable0 /*v*/, variable1) /*TypingVisitor::self_type=*/;
-  ((typing___PClassdef___accept_typing_t)CALL( self,COLOR_SUPER_typing___PClassdef___accept_typing))( self,  param0) /*super PClassdef::accept_typing*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = NEW_String_string___String___with_native(BOX_NativeString("self"), TAG_Int(4)); /*new String*/
+  variable[3] = ((symbol___String___to_symbol_t)CALL(variable[3],COLOR_symbol___String___to_symbol))(variable[3]) /*String::to_symbol*/;
+  variable[4] = variable[0];
+  variable[5] = NEW_ParamVariable_syntax_base___ParamVariable___init(variable[3], variable[4]); /*new ParamVariable*/
+  variable[3] = variable[5];
+  ((typing___TypingVisitor___self_var__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___self_var__eq))( variable[1] /*v*/, variable[3]) /*TypingVisitor::self_var=*/;
+  variable[3] = ((typing___TypingVisitor___self_var_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___self_var))( variable[1] /*v*/) /*TypingVisitor::self_var*/;
+  variable[4] = variable[0];
+  variable[4] = ((syntax_base___PClassdef___local_class_t)CALL(variable[4],COLOR_syntax_base___PClassdef___local_class))(variable[4]) /*PClassdef::local_class*/;
+  variable[4] = ((genericity___MMLocalClass___get_type_t)CALL(variable[4],COLOR_static_type___MMLocalClass___get_type))(variable[4]) /*MMLocalClass::get_type*/;
+  ((syntax_base___Variable___stype__eq_t)CALL(variable[3],COLOR_syntax_base___Variable___stype__eq))(variable[3], variable[4]) /*Variable::stype=*/;
+  ((typing___PClassdef___accept_typing_t)CALL(variable[0],COLOR_SUPER_typing___PClassdef___accept_typing))(variable[0], variable[1]) /*super PClassdef::accept_typing*/;
+  return_label19: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___AAttrPropdef___accept_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 205, LOCATE_typing___AAttrPropdef___accept_typing};
-  val_t variable0;
-  val_t variable1;
-    val_t variable2;
-    val_t variable3;
+  struct trace_t trace = {NULL, NULL, 223, LOCATE_typing___AAttrPropdef___accept_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  ((typing___AAttrPropdef___accept_typing_t)CALL( self,COLOR_SUPER_typing___AAttrPropdef___accept_typing))( self,  param0) /*super AAttrPropdef::accept_typing*/;
-  variable1 = ((parser_nodes___AAttrPropdef___n_expr_t)CALL( self,COLOR_parser_nodes___AAttrPropdef___n_expr))( self) /*AAttrPropdef::n_expr*/;
-  variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = ((parser_nodes___AAttrPropdef___n_expr_t)CALL( self,COLOR_parser_nodes___AAttrPropdef___n_expr))( self) /*AAttrPropdef::n_expr*/;
-    variable2 = ((parser_nodes___AAttrPropdef___n_expr_t)CALL( self,COLOR_parser_nodes___AAttrPropdef___n_expr))( self) /*AAttrPropdef::n_expr*/;
-    variable2 = ((typing___PExpr___stype_t)CALL(variable2,COLOR_syntax_base___PExpr___stype))(variable2) /*PExpr::stype*/;
-    variable3 = ((syntax_base___AAttrPropdef___prop_t)CALL( self,COLOR_syntax_base___AAttrPropdef___prop))( self) /*AAttrPropdef::prop*/;
-    variable3 = ((static_type___MMLocalProperty___signature_t)CALL(variable3,COLOR_static_type___MMLocalProperty___signature))(variable3) /*MMLocalProperty::signature*/;
-    variable3 = ((static_type___MMSignature___return_type_t)CALL(variable3,COLOR_static_type___MMSignature___return_type))(variable3) /*MMSignature::return_type*/;
-    ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/, variable1, variable2, variable3) /*AbsSyntaxVisitor::check_conform*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  ((typing___AAttrPropdef___accept_typing_t)CALL(variable[0],COLOR_SUPER_typing___AAttrPropdef___accept_typing))(variable[0], variable[1]) /*super AAttrPropdef::accept_typing*/;
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___AAttrPropdef___n_expr_t)CALL(variable[3],COLOR_parser_nodes___AAttrPropdef___n_expr))(variable[3]) /*AAttrPropdef::n_expr*/;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = variable[0];
+    variable[3] = ((parser_nodes___AAttrPropdef___n_expr_t)CALL(variable[3],COLOR_parser_nodes___AAttrPropdef___n_expr))(variable[3]) /*AAttrPropdef::n_expr*/;
+    variable[4] = variable[0];
+    variable[4] = ((syntax_base___AAttrPropdef___prop_t)CALL(variable[4],COLOR_syntax_base___AAttrPropdef___prop))(variable[4]) /*AAttrPropdef::prop*/;
+    variable[4] = ((static_type___MMLocalProperty___signature_t)CALL(variable[4],COLOR_static_type___MMLocalProperty___signature))(variable[4]) /*MMLocalProperty::signature*/;
+    variable[4] = ((static_type___MMSignature___return_type_t)CALL(variable[4],COLOR_static_type___MMSignature___return_type))(variable[4]) /*MMSignature::return_type*/;
+    ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/, variable[3], variable[4]) /*AbsSyntaxVisitor::check_conform_expr*/;
   }
+  return_label20: while(false);
   tracehead = trace.prev;
   return;
 }
-void typing___AMethPropdef___accept_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 215, LOCATE_typing___AMethPropdef___accept_typing};
-  val_t variable0;
-  val_t variable1;
+val_t typing___AMethPropdef___self_var(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 233, LOCATE_typing___AMethPropdef___self_var};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = NEW_VariableContext_typing___VariableContext___init(); /*new VariableContext*/
-  ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable0 /*v*/, variable1) /*TypingVisitor::variable_ctx=*/;
-  ((typing___AMethPropdef___accept_typing_t)CALL( self,COLOR_SUPER_typing___AMethPropdef___accept_typing))( self,  param0) /*super AMethPropdef::accept_typing*/;
+  tracehead = trace.prev;
+  return ATTR_typing___AMethPropdef____self_var( self) /*AMethPropdef::_self_var*/;
+}
+void typing___AMethPropdef___accept_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 234, LOCATE_typing___AMethPropdef___accept_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = NEW_VariableContext_typing___VariableContext___init(); /*new VariableContext*/
+  ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable[1] /*v*/, variable[3]) /*TypingVisitor::variable_ctx=*/;
+  variable[3] = variable[0];
+  variable[4] = ((typing___TypingVisitor___self_var_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___self_var))( variable[1] /*v*/) /*TypingVisitor::self_var*/;
+  ATTR_typing___AMethPropdef____self_var(variable[3]) /*AMethPropdef::_self_var*/ = variable[4];
+  ((typing___AMethPropdef___accept_typing_t)CALL(variable[0],COLOR_SUPER_typing___AMethPropdef___accept_typing))(variable[0], variable[1]) /*super AMethPropdef::accept_typing*/;
+  return_label21: while(false);
+  tracehead = trace.prev;
+  return;
+}
+void typing___AConcreteInitPropdef___accept_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 245, LOCATE_typing___AConcreteInitPropdef___accept_typing};
+  val_t variable[15];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___AConcreteMethPropdef___n_block_t)CALL(variable[3],COLOR_parser_nodes___AConcreteMethPropdef___n_block))(variable[3]) /*AConcreteMethPropdef::n_block*/;
+  ((typing___TypingVisitor___top_block__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___top_block__eq))( variable[1] /*v*/, variable[3]) /*TypingVisitor::top_block=*/;
+  variable[3] = variable[0];
+  variable[3] = ((typing___AConcreteInitPropdef___explicit_super_init_calls_t)CALL(variable[3],COLOR_typing___AConcreteInitPropdef___explicit_super_init_calls))(variable[3]) /*AConcreteInitPropdef::explicit_super_init_calls*/;
+  ((typing___TypingVisitor___explicit_super_init_calls__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___explicit_super_init_calls__eq))( variable[1] /*v*/, variable[3]) /*TypingVisitor::explicit_super_init_calls=*/;
+  ((typing___TypingVisitor___explicit_other_init_call__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___explicit_other_init_call__eq))( variable[1] /*v*/,  TAG_Bool(false)) /*TypingVisitor::explicit_other_init_call=*/;
+  ((typing___AConcreteInitPropdef___accept_typing_t)CALL(variable[0],COLOR_SUPER_typing___AConcreteInitPropdef___accept_typing))(variable[0], variable[1]) /*super AConcreteInitPropdef::accept_typing*/;
+  variable[3] = ((typing___TypingVisitor___explicit_other_init_call_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___explicit_other_init_call))( variable[1] /*v*/) /*TypingVisitor::explicit_other_init_call*/;
+  variable[4] = variable[3];
+  if (!UNTAG_Bool(variable[4])) { /* or */
+    variable[4] = variable[0];
+    variable[4] = ((syntax_base___AMethPropdef___method_t)CALL(variable[4],COLOR_syntax_base___AMethPropdef___method))(variable[4]) /*AMethPropdef::method*/;
+    variable[4] = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable[4],COLOR_abstractmetamodel___MMLocalProperty___global))(variable[4]) /*MMLocalProperty::global*/;
+    variable[4] = ((abstractmetamodel___MMGlobalProperty___intro_t)CALL(variable[4],COLOR_abstractmetamodel___MMGlobalProperty___intro))(variable[4]) /*MMGlobalProperty::intro*/;
+    variable[5] = variable[0];
+    variable[5] = ((syntax_base___AMethPropdef___method_t)CALL(variable[5],COLOR_syntax_base___AMethPropdef___method))(variable[5]) /*AMethPropdef::method*/;
+    variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] == variable[5]) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4],variable[5])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4], variable[5]) /*Object::==*/)))))));
+  }
+  variable[3] = variable[4];
+  if (UNTAG_Bool(variable[3])) { /*if*/
+  } else { /*if*/
+    variable[3] =  TAG_Int(0);
+    variable[5] = variable[0];
+    variable[5] = ((typing___AConcreteInitPropdef___explicit_super_init_calls_t)CALL(variable[5],COLOR_typing___AConcreteInitPropdef___explicit_super_init_calls))(variable[5]) /*AConcreteInitPropdef::explicit_super_init_calls*/;
+    variable[5] = ((array___AbstractArray___length_t)CALL(variable[5],COLOR_abstract_collection___Collection___length))(variable[5]) /*AbstractArray::length*/;
+    variable[4] = variable[5];
+    variable[5] =  NIT_NULL /*null*/;
+    variable[6] =  NIT_NULL /*null*/;
+    variable[7] = TAG_Bool(UNTAG_Int( variable[3] /*i*/)<UNTAG_Int( variable[4] /*l*/));
+    if (UNTAG_Bool(variable[7])) { /*if*/
+      variable[7] = variable[0];
+      variable[7] = ((typing___AConcreteInitPropdef___explicit_super_init_calls_t)CALL(variable[7],COLOR_typing___AConcreteInitPropdef___explicit_super_init_calls))(variable[7]) /*AConcreteInitPropdef::explicit_super_init_calls*/;
+      variable[8] = variable[7];
+      variable[9] =  variable[3] /*i*/;
+      variable[11] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+      variable[12] = variable[11];
+      if (UNTAG_Bool(variable[12])) { /* and */
+        variable[12] = variable[8];
+        variable[12] = ATTR_array___AbstractArray____length(variable[12]) /*AbstractArray::_length*/;
+        variable[12] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)<UNTAG_Int(variable[12]));
+      }
+      variable[11] = variable[12];
+      if (!UNTAG_Bool(variable[11])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_typing, 229); nit_exit(1);}
+      variable[11] = variable[8];
+      variable[11] = ATTR_array___Array____items(variable[11]) /*Array::_items*/;
+      variable[11] = UNBOX_NativeArray(variable[11])[UNTAG_Int( variable[9] /*index*/)];
+      variable[10] = variable[11];
+      goto return_label23;
+      return_label23: while(false);
+      variable[7] = variable[10];
+      variable[5] = variable[7] /*cur_m=*/;
+      variable[7] = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable[5] /*cur_m*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable[5] /*cur_m*/) /*MMLocalProperty::global*/;
+      variable[7] = ((abstractmetamodel___MMGlobalProperty___intro_t)CALL(variable[7],COLOR_abstractmetamodel___MMGlobalProperty___intro))(variable[7]) /*MMGlobalProperty::intro*/;
+      variable[7] = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL(variable[7],COLOR_abstractmetamodel___MMLocalProperty___local_class))(variable[7]) /*MMLocalProperty::local_class*/;
+      variable[8] = ((syntax_base___AbsSyntaxVisitor___module_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___module))( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
+      variable[7] = ((abstractmetamodel___MMLocalClass___for_module_t)CALL(variable[7],COLOR_abstractmetamodel___MMLocalClass___for_module))(variable[7], variable[8]) /*MMLocalClass::for_module*/;
+      variable[6] = variable[7] /*cur_c=*/;
+    }
+    variable[7] =  TAG_Int(0);
+    while (true) { /*while*/
+      variable[8] = ((syntax_base___AbsSyntaxVisitor___local_class_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_class))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
+      variable[8] = ((abstractmetamodel___MMLocalClass___cshe_t)CALL(variable[8],COLOR_abstractmetamodel___MMLocalClass___cshe))(variable[8]) /*MMLocalClass::cshe*/;
+      variable[8] = ((partial_order___PartialOrderElement___direct_greaters_t)CALL(variable[8],COLOR_partial_order___PartialOrderElement___direct_greaters))(variable[8]) /*PartialOrderElement::direct_greaters*/;
+      variable[8] = ((array___AbstractArray___length_t)CALL(variable[8],COLOR_abstract_collection___Collection___length))(variable[8]) /*AbstractArray::length*/;
+      variable[8] = TAG_Bool(UNTAG_Int( variable[7] /*j*/)<UNTAG_Int(variable[8]));
+      if (!UNTAG_Bool(variable[8])) break; /* while*/
+      variable[9] = ((syntax_base___AbsSyntaxVisitor___local_class_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_class))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
+      variable[9] = ((abstractmetamodel___MMLocalClass___cshe_t)CALL(variable[9],COLOR_abstractmetamodel___MMLocalClass___cshe))(variable[9]) /*MMLocalClass::cshe*/;
+      variable[9] = ((partial_order___PartialOrderElement___direct_greaters_t)CALL(variable[9],COLOR_partial_order___PartialOrderElement___direct_greaters))(variable[9]) /*PartialOrderElement::direct_greaters*/;
+      variable[10] = variable[9];
+      variable[11] =  variable[7] /*j*/;
+      variable[13] = TAG_Bool(UNTAG_Int( variable[11] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+      variable[14] = variable[13];
+      if (UNTAG_Bool(variable[14])) { /* and */
+        variable[14] = variable[10];
+        variable[14] = ATTR_array___AbstractArray____length(variable[14]) /*AbstractArray::_length*/;
+        variable[14] = TAG_Bool(UNTAG_Int( variable[11] /*index*/)<UNTAG_Int(variable[14]));
+      }
+      variable[13] = variable[14];
+      if (!UNTAG_Bool(variable[13])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_typing, 229); nit_exit(1);}
+      variable[13] = variable[10];
+      variable[13] = ATTR_array___Array____items(variable[13]) /*Array::_items*/;
+      variable[13] = UNBOX_NativeArray(variable[13])[UNTAG_Int( variable[11] /*index*/)];
+      variable[12] = variable[13];
+      goto return_label25;
+      return_label25: while(false);
+      variable[9] = variable[12];
+      variable[8] = variable[9];
+      variable[9] = ((abstractmetamodel___MMLocalClass___global_t)CALL( variable[8] /*c*/,COLOR_abstractmetamodel___MMLocalClass___global))( variable[8] /*c*/) /*MMLocalClass::global*/;
+      variable[9] = ((abstractmetamodel___MMGlobalClass___is_interface_t)CALL(variable[9],COLOR_abstractmetamodel___MMGlobalClass___is_interface))(variable[9]) /*MMGlobalClass::is_interface*/;
+      variable[10] = variable[9];
+      if (!UNTAG_Bool(variable[10])) { /* or */
+        variable[10] = ((abstractmetamodel___MMLocalClass___global_t)CALL( variable[8] /*c*/,COLOR_abstractmetamodel___MMLocalClass___global))( variable[8] /*c*/) /*MMLocalClass::global*/;
+        variable[10] = ((abstractmetamodel___MMGlobalClass___is_universal_t)CALL(variable[10],COLOR_abstractmetamodel___MMGlobalClass___is_universal))(variable[10]) /*MMGlobalClass::is_universal*/;
+      }
+      variable[9] = variable[10];
+      variable[10] = variable[9];
+      if (!UNTAG_Bool(variable[10])) { /* or */
+        variable[10] = ((abstractmetamodel___MMLocalClass___global_t)CALL( variable[8] /*c*/,COLOR_abstractmetamodel___MMLocalClass___global))( variable[8] /*c*/) /*MMLocalClass::global*/;
+        variable[10] = ((abstractmetamodel___MMGlobalClass___is_mixin_t)CALL(variable[10],COLOR_abstractmetamodel___MMGlobalClass___is_mixin))(variable[10]) /*MMGlobalClass::is_mixin*/;
+      }
+      variable[9] = variable[10];
+      if (UNTAG_Bool(variable[9])) { /*if*/
+        variable[7] = TAG_Int(UNTAG_Int(variable[7])+UNTAG_Int( TAG_Int(1))) /*j*/;
+      } else { /*if*/
+        variable[9] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[6] /*cur_c*/ ==  NIT_NULL /*null*/) || (( variable[6] /*cur_c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[6] /*cur_c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*cur_c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[6] /*cur_c*/,COLOR_kernel___Object_____eqeq))( variable[6] /*cur_c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+        variable[10] = variable[9];
+        if (UNTAG_Bool(variable[10])) { /* and */
+          variable[10] = ((abstractmetamodel___MMLocalClass___cshe_t)CALL( variable[8] /*c*/,COLOR_abstractmetamodel___MMLocalClass___cshe))( variable[8] /*c*/) /*MMLocalClass::cshe*/;
+          variable[10] = ((partial_order___PartialOrderElement_____leq_t)CALL(variable[10],COLOR_partial_order___PartialOrderElement_____leq))(variable[10],  variable[6] /*cur_c*/) /*PartialOrderElement::<=*/;
+          variable[11] = variable[10];
+          if (!UNTAG_Bool(variable[11])) { /* or */
+            variable[11] = ((abstractmetamodel___MMLocalClass___global_t)CALL( variable[6] /*cur_c*/,COLOR_abstractmetamodel___MMLocalClass___global))( variable[6] /*cur_c*/) /*MMLocalClass::global*/;
+            variable[11] = ((abstractmetamodel___MMGlobalClass___is_mixin_t)CALL(variable[11],COLOR_abstractmetamodel___MMGlobalClass___is_mixin))(variable[11]) /*MMGlobalClass::is_mixin*/;
+          }
+          variable[10] = variable[11];
+        }
+        variable[9] = variable[10];
+        if (UNTAG_Bool(variable[9])) { /*if*/
+          variable[9] = TAG_Bool(( variable[8] /*c*/ ==  variable[6] /*cur_c*/) || (( variable[8] /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[8] /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[8] /*c*/, variable[6] /*cur_c*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[8] /*c*/,COLOR_kernel___Object_____eqeq))( variable[8] /*c*/,  variable[6] /*cur_c*/) /*Object::==*/)))));
+          if (UNTAG_Bool(variable[9])) { /*if*/
+            variable[7] = TAG_Int(UNTAG_Int(variable[7])+UNTAG_Int( TAG_Int(1))) /*j*/;
+          }
+          variable[9] = variable[0];
+          variable[9] = ((typing___AConcreteInitPropdef___super_init_calls_t)CALL(variable[9],COLOR_typing___AConcreteInitPropdef___super_init_calls))(variable[9]) /*AConcreteInitPropdef::super_init_calls*/;
+          ((array___AbstractArray___add_t)CALL(variable[9],COLOR_abstract_collection___SimpleCollection___add))(variable[9],  variable[5] /*cur_m*/) /*AbstractArray::add*/;
+          variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(1))) /*i*/;
+          variable[9] = TAG_Bool(UNTAG_Int( variable[3] /*i*/)<UNTAG_Int( variable[4] /*l*/));
+          if (UNTAG_Bool(variable[9])) { /*if*/
+            variable[9] = variable[0];
+            variable[9] = ((typing___AConcreteInitPropdef___explicit_super_init_calls_t)CALL(variable[9],COLOR_typing___AConcreteInitPropdef___explicit_super_init_calls))(variable[9]) /*AConcreteInitPropdef::explicit_super_init_calls*/;
+            variable[10] = variable[9];
+            variable[11] =  variable[3] /*i*/;
+            variable[13] = TAG_Bool(UNTAG_Int( variable[11] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+            variable[14] = variable[13];
+            if (UNTAG_Bool(variable[14])) { /* and */
+              variable[14] = variable[10];
+              variable[14] = ATTR_array___AbstractArray____length(variable[14]) /*AbstractArray::_length*/;
+              variable[14] = TAG_Bool(UNTAG_Int( variable[11] /*index*/)<UNTAG_Int(variable[14]));
+            }
+            variable[13] = variable[14];
+            if (!UNTAG_Bool(variable[13])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_typing, 229); nit_exit(1);}
+            variable[13] = variable[10];
+            variable[13] = ATTR_array___Array____items(variable[13]) /*Array::_items*/;
+            variable[13] = UNBOX_NativeArray(variable[13])[UNTAG_Int( variable[11] /*index*/)];
+            variable[12] = variable[13];
+            goto return_label26;
+            return_label26: while(false);
+            variable[9] = variable[12];
+            variable[5] = variable[9] /*cur_m=*/;
+            variable[9] = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable[5] /*cur_m*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable[5] /*cur_m*/) /*MMLocalProperty::global*/;
+            variable[9] = ((abstractmetamodel___MMGlobalProperty___intro_t)CALL(variable[9],COLOR_abstractmetamodel___MMGlobalProperty___intro))(variable[9]) /*MMGlobalProperty::intro*/;
+            variable[9] = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL(variable[9],COLOR_abstractmetamodel___MMLocalProperty___local_class))(variable[9]) /*MMLocalProperty::local_class*/;
+            variable[10] = ((syntax_base___AbsSyntaxVisitor___module_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___module))( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
+            variable[9] = ((abstractmetamodel___MMLocalClass___for_module_t)CALL(variable[9],COLOR_abstractmetamodel___MMLocalClass___for_module))(variable[9], variable[10]) /*MMLocalClass::for_module*/;
+            variable[6] = variable[9] /*cur_c=*/;
+          } else { /*if*/
+            variable[5] =  NIT_NULL /*null*/ /*cur_m=*/;
+            variable[6] =  NIT_NULL /*null*/ /*cur_c=*/;
+          }
+        } else { /*if*/
+          variable[10] = variable[0];
+          variable[11] = variable[0];
+          variable[11] = ((syntax_base___AMethPropdef___method_t)CALL(variable[11],COLOR_syntax_base___AMethPropdef___method))(variable[11]) /*AMethPropdef::method*/;
+          variable[10] = ((typing___TypingVisitor___get_default_constructor_for_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___get_default_constructor_for))( variable[1] /*v*/, variable[10],  variable[8] /*c*/, variable[11]) /*TypingVisitor::get_default_constructor_for*/;
+          variable[9] = variable[10];
+          variable[10] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[9] /*p*/ ==  NIT_NULL /*null*/) || (( variable[9] /*p*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[9] /*p*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[9] /*p*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[9] /*p*/,COLOR_kernel___Object_____eqeq))( variable[9] /*p*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+          if (UNTAG_Bool(variable[10])) { /*if*/
+            variable[10] = variable[0];
+            variable[10] = ((typing___AConcreteInitPropdef___super_init_calls_t)CALL(variable[10],COLOR_typing___AConcreteInitPropdef___super_init_calls))(variable[10]) /*AConcreteInitPropdef::super_init_calls*/;
+            ((array___AbstractArray___add_t)CALL(variable[10],COLOR_abstract_collection___SimpleCollection___add))(variable[10],  variable[9] /*p*/) /*AbstractArray::add*/;
+          }
+          variable[7] = TAG_Int(UNTAG_Int(variable[7])+UNTAG_Int( TAG_Int(1))) /*j*/;
+        }
+      }
+      continue_24: while(0);
+    }
+    break_24: while(0);
+  }
+  return_label22: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t typing___AConcreteInitPropdef___super_init_calls(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 223, LOCATE_typing___AConcreteInitPropdef___super_init_calls};
+  struct trace_t trace = {NULL, NULL, 243, LOCATE_typing___AConcreteInitPropdef___super_init_calls};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   tracehead = trace.prev;
   return ATTR_typing___AConcreteInitPropdef____super_init_calls( self) /*AConcreteInitPropdef::_super_init_calls*/;
 }
 val_t typing___AConcreteInitPropdef___explicit_super_init_calls(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 224, LOCATE_typing___AConcreteInitPropdef___explicit_super_init_calls};
+  struct trace_t trace = {NULL, NULL, 244, LOCATE_typing___AConcreteInitPropdef___explicit_super_init_calls};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   tracehead = trace.prev;
   return ATTR_typing___AConcreteInitPropdef____explicit_super_init_calls( self) /*AConcreteInitPropdef::_explicit_super_init_calls*/;
 }
-void typing___AConcreteInitPropdef___accept_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 225, LOCATE_typing___AConcreteInitPropdef___accept_typing};
-  val_t variable0;
-  val_t variable1;
-    val_t variable2;
-    val_t variable3;
-    val_t variable4;
-    val_t variable5;
-      val_t variable6;
-      val_t variable7;
-      val_t variable8;
-      val_t variable9;
-      val_t variable10;
+void typing___PParam___after_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 291, LOCATE_typing___PParam___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((parser_nodes___AConcreteMethPropdef___n_block_t)CALL( self,COLOR_parser_nodes___AConcreteMethPropdef___n_block))( self) /*AConcreteMethPropdef::n_block*/;
-  ((typing___TypingVisitor___top_block__eq_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___top_block__eq))( variable0 /*v*/, variable1) /*TypingVisitor::top_block=*/;
-  variable1 = ((typing___AConcreteInitPropdef___explicit_super_init_calls_t)CALL( self,COLOR_typing___AConcreteInitPropdef___explicit_super_init_calls))( self) /*AConcreteInitPropdef::explicit_super_init_calls*/;
-  ((typing___TypingVisitor___explicit_super_init_calls__eq_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___explicit_super_init_calls__eq))( variable0 /*v*/, variable1) /*TypingVisitor::explicit_super_init_calls=*/;
-  ((typing___TypingVisitor___explicit_other_init_call__eq_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___explicit_other_init_call__eq))( variable0 /*v*/,  TAG_Bool(false)) /*TypingVisitor::explicit_other_init_call=*/;
-  ((typing___AConcreteInitPropdef___accept_typing_t)CALL( self,COLOR_SUPER_typing___AConcreteInitPropdef___accept_typing))( self,  param0) /*super AConcreteInitPropdef::accept_typing*/;
-  variable1 = ((typing___TypingVisitor___explicit_other_init_call_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___explicit_other_init_call))( variable0 /*v*/) /*TypingVisitor::explicit_other_init_call*/;
-  if (UNTAG_Bool(variable1)) { /*if*/
-  } else { /*if*/
-    variable1 =  TAG_Int(0);
-    variable3 = ((typing___AConcreteInitPropdef___explicit_super_init_calls_t)CALL( self,COLOR_typing___AConcreteInitPropdef___explicit_super_init_calls))( self) /*AConcreteInitPropdef::explicit_super_init_calls*/;
-    variable3 = ((array___AbstractArray___length_t)CALL(variable3,COLOR_abstract_collection___Collection___length))(variable3) /*AbstractArray::length*/;
-    variable2 = variable3;
-    variable3 =  NIT_NULL /*null*/;
-    variable4 =  NIT_NULL /*null*/;
-    variable5 = TAG_Bool(UNTAG_Int( variable1 /*i*/)<UNTAG_Int( variable2 /*l*/));
-    if (UNTAG_Bool(variable5)) { /*if*/
-      variable5 = ((typing___AConcreteInitPropdef___explicit_super_init_calls_t)CALL( self,COLOR_typing___AConcreteInitPropdef___explicit_super_init_calls))( self) /*AConcreteInitPropdef::explicit_super_init_calls*/;
-      variable6 =  variable1 /*i*/;
-      variable7 = TAG_Bool(UNTAG_Int( variable6 /*index*/)>=UNTAG_Int( TAG_Int(0)));
-      variable8 = variable7;
-      if (UNTAG_Bool(variable8)) { /* and */
-        variable8 = variable5;
-        variable8 = ATTR_array___AbstractArray____length(variable8) /*AbstractArray::_length*/;
-        variable8 = TAG_Bool(UNTAG_Int( variable6 /*index*/)<UNTAG_Int(variable8));
-      }
-      variable7 = variable8;
-      if (!UNTAG_Bool(variable7)) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_typing, 229); nit_exit(1);}
-      variable7 = variable5;
-      variable7 = ATTR_array___Array____items(variable7) /*Array::_items*/;
-      variable7 = UNBOX_NativeArray(variable7)[UNTAG_Int( variable6 /*index*/)];
-      goto return_label21;
-      return_label21: while(false);
-      variable5 = variable7;
-      variable3 = variable5 /*cur_m=*/;
-      variable5 = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable3 /*cur_m*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable3 /*cur_m*/) /*MMLocalProperty::global*/;
-      variable5 = ((abstractmetamodel___MMGlobalProperty___intro_t)CALL(variable5,COLOR_abstractmetamodel___MMGlobalProperty___intro))(variable5) /*MMGlobalProperty::intro*/;
-      variable5 = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL(variable5,COLOR_abstractmetamodel___MMLocalProperty___local_class))(variable5) /*MMLocalProperty::local_class*/;
-      variable4 = variable5 /*cur_c=*/;
-    }
-    variable5 =  TAG_Int(0);
-    while (true) { /*while*/
-      variable6 = ((syntax_base___AbsSyntaxVisitor___local_class_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_class))( variable0 /*v*/) /*AbsSyntaxVisitor::local_class*/;
-      variable6 = ((abstractmetamodel___MMLocalClass___cshe_t)CALL(variable6,COLOR_abstractmetamodel___MMLocalClass___cshe))(variable6) /*MMLocalClass::cshe*/;
-      variable6 = ((partial_order___PartialOrderElement___direct_greaters_t)CALL(variable6,COLOR_partial_order___PartialOrderElement___direct_greaters))(variable6) /*PartialOrderElement::direct_greaters*/;
-      variable6 = ((array___AbstractArray___length_t)CALL(variable6,COLOR_abstract_collection___Collection___length))(variable6) /*AbstractArray::length*/;
-      variable6 = TAG_Bool(UNTAG_Int( variable5 /*j*/)<UNTAG_Int(variable6));
-      if (!UNTAG_Bool(variable6)) break; /* while*/
-      variable7 = ((syntax_base___AbsSyntaxVisitor___local_class_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_class))( variable0 /*v*/) /*AbsSyntaxVisitor::local_class*/;
-      variable7 = ((abstractmetamodel___MMLocalClass___cshe_t)CALL(variable7,COLOR_abstractmetamodel___MMLocalClass___cshe))(variable7) /*MMLocalClass::cshe*/;
-      variable7 = ((partial_order___PartialOrderElement___direct_greaters_t)CALL(variable7,COLOR_partial_order___PartialOrderElement___direct_greaters))(variable7) /*PartialOrderElement::direct_greaters*/;
-      variable8 =  variable5 /*j*/;
-      variable9 = TAG_Bool(UNTAG_Int( variable8 /*index*/)>=UNTAG_Int( TAG_Int(0)));
-      variable10 = variable9;
-      if (UNTAG_Bool(variable10)) { /* and */
-        variable10 = variable7;
-        variable10 = ATTR_array___AbstractArray____length(variable10) /*AbstractArray::_length*/;
-        variable10 = TAG_Bool(UNTAG_Int( variable8 /*index*/)<UNTAG_Int(variable10));
-      }
-      variable9 = variable10;
-      if (!UNTAG_Bool(variable9)) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_typing, 229); nit_exit(1);}
-      variable9 = variable7;
-      variable9 = ATTR_array___Array____items(variable9) /*Array::_items*/;
-      variable9 = UNBOX_NativeArray(variable9)[UNTAG_Int( variable8 /*index*/)];
-      goto return_label23;
-      return_label23: while(false);
-      variable7 = variable9;
-      variable6 = variable7;
-      variable7 = ((abstractmetamodel___MMLocalClass___global_t)CALL( variable6 /*c*/,COLOR_abstractmetamodel___MMLocalClass___global))( variable6 /*c*/) /*MMLocalClass::global*/;
-      variable7 = ((abstractmetamodel___MMGlobalClass___is_interface_t)CALL(variable7,COLOR_abstractmetamodel___MMGlobalClass___is_interface))(variable7) /*MMGlobalClass::is_interface*/;
-      variable8 = variable7;
-      if (!UNTAG_Bool(variable8)) { /* or */
-        variable8 = ((abstractmetamodel___MMLocalClass___global_t)CALL( variable6 /*c*/,COLOR_abstractmetamodel___MMLocalClass___global))( variable6 /*c*/) /*MMLocalClass::global*/;
-        variable8 = ((abstractmetamodel___MMGlobalClass___is_universal_t)CALL(variable8,COLOR_abstractmetamodel___MMGlobalClass___is_universal))(variable8) /*MMGlobalClass::is_universal*/;
-      }
-      variable7 = variable8;
-      if (UNTAG_Bool(variable7)) { /*if*/
-        variable5 = TAG_Int(UNTAG_Int(variable5)+UNTAG_Int( TAG_Int(1))) /*j*/;
-      } else { /*if*/
-        variable7 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable4 /*cur_c*/ ==  NIT_NULL /*null*/) || (( variable4 /*cur_c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable4 /*cur_c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable4 /*cur_c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable4 /*cur_c*/,COLOR_kernel___Object_____eqeq))( variable4 /*cur_c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-        variable8 = variable7;
-        if (UNTAG_Bool(variable8)) { /* and */
-          variable8 = ((abstractmetamodel___MMLocalClass___cshe_t)CALL( variable6 /*c*/,COLOR_abstractmetamodel___MMLocalClass___cshe))( variable6 /*c*/) /*MMLocalClass::cshe*/;
-          variable8 = ((partial_order___PartialOrderElement_____leq_t)CALL(variable8,COLOR_partial_order___PartialOrderElement_____leq))(variable8,  variable4 /*cur_c*/) /*PartialOrderElement::<=*/;
-        }
-        variable7 = variable8;
-        if (UNTAG_Bool(variable7)) { /*if*/
-          variable7 = TAG_Bool(( variable6 /*c*/ ==  variable4 /*cur_c*/) || (( variable6 /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable6 /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable6 /*c*/, variable4 /*cur_c*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable6 /*c*/,COLOR_kernel___Object_____eqeq))( variable6 /*c*/,  variable4 /*cur_c*/) /*Object::==*/)))));
-          if (UNTAG_Bool(variable7)) { /*if*/
-            variable5 = TAG_Int(UNTAG_Int(variable5)+UNTAG_Int( TAG_Int(1))) /*j*/;
-          }
-          variable7 = ((typing___AConcreteInitPropdef___super_init_calls_t)CALL( self,COLOR_typing___AConcreteInitPropdef___super_init_calls))( self) /*AConcreteInitPropdef::super_init_calls*/;
-          ((array___AbstractArray___add_t)CALL(variable7,COLOR_abstract_collection___SimpleCollection___add))(variable7,  variable3 /*cur_m*/) /*AbstractArray::add*/;
-          variable1 = TAG_Int(UNTAG_Int(variable1)+UNTAG_Int( TAG_Int(1))) /*i*/;
-          variable7 = TAG_Bool(UNTAG_Int( variable1 /*i*/)<UNTAG_Int( variable2 /*l*/));
-          if (UNTAG_Bool(variable7)) { /*if*/
-            variable7 = ((typing___AConcreteInitPropdef___explicit_super_init_calls_t)CALL( self,COLOR_typing___AConcreteInitPropdef___explicit_super_init_calls))( self) /*AConcreteInitPropdef::explicit_super_init_calls*/;
-            variable8 =  variable1 /*i*/;
-            variable9 = TAG_Bool(UNTAG_Int( variable8 /*index*/)>=UNTAG_Int( TAG_Int(0)));
-            variable10 = variable9;
-            if (UNTAG_Bool(variable10)) { /* and */
-              variable10 = variable7;
-              variable10 = ATTR_array___AbstractArray____length(variable10) /*AbstractArray::_length*/;
-              variable10 = TAG_Bool(UNTAG_Int( variable8 /*index*/)<UNTAG_Int(variable10));
-            }
-            variable9 = variable10;
-            if (!UNTAG_Bool(variable9)) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_typing, 229); nit_exit(1);}
-            variable9 = variable7;
-            variable9 = ATTR_array___Array____items(variable9) /*Array::_items*/;
-            variable9 = UNBOX_NativeArray(variable9)[UNTAG_Int( variable8 /*index*/)];
-            goto return_label24;
-            return_label24: while(false);
-            variable7 = variable9;
-            variable3 = variable7 /*cur_m=*/;
-            variable7 = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable3 /*cur_m*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable3 /*cur_m*/) /*MMLocalProperty::global*/;
-            variable7 = ((abstractmetamodel___MMGlobalProperty___intro_t)CALL(variable7,COLOR_abstractmetamodel___MMGlobalProperty___intro))(variable7) /*MMGlobalProperty::intro*/;
-            variable7 = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL(variable7,COLOR_abstractmetamodel___MMLocalProperty___local_class))(variable7) /*MMLocalProperty::local_class*/;
-            variable4 = variable7 /*cur_c=*/;
-          } else { /*if*/
-            variable3 =  NIT_NULL /*null*/ /*cur_m=*/;
-            variable4 =  NIT_NULL /*null*/ /*cur_c=*/;
-          }
-        } else { /*if*/
-          variable8 = ((syntax_base___AMethPropdef___method_t)CALL( self,COLOR_syntax_base___AMethPropdef___method))( self) /*AMethPropdef::method*/;
-          variable8 = ((typing___TypingVisitor___get_default_constructor_for_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___get_default_constructor_for))( variable0 /*v*/,  self,  variable6 /*c*/, variable8) /*TypingVisitor::get_default_constructor_for*/;
-          variable7 = variable8;
-          variable8 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable7 /*p*/ ==  NIT_NULL /*null*/) || (( variable7 /*p*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable7 /*p*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable7 /*p*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable7 /*p*/,COLOR_kernel___Object_____eqeq))( variable7 /*p*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-          if (UNTAG_Bool(variable8)) { /*if*/
-            variable8 = ((typing___AConcreteInitPropdef___super_init_calls_t)CALL( self,COLOR_typing___AConcreteInitPropdef___super_init_calls))( self) /*AConcreteInitPropdef::super_init_calls*/;
-            ((array___AbstractArray___add_t)CALL(variable8,COLOR_abstract_collection___SimpleCollection___add))(variable8,  variable7 /*p*/) /*AbstractArray::add*/;
-          }
-          variable5 = TAG_Int(UNTAG_Int(variable5)+UNTAG_Int( TAG_Int(1))) /*j*/;
-        }
-      }
-      continue_22: while(0);
-    }
-    break_22: while(0);
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+    variable[4] = variable[0];
+    variable[4] = ((syntax_base___PParam___variable_t)CALL(variable[4],COLOR_syntax_base___PParam___variable))(variable[4]) /*PParam::variable*/;
+    ((typing___VariableContext___add_t)CALL(variable[3],COLOR_typing___VariableContext___add))(variable[3], variable[4]) /*VariableContext::add*/;
   }
+  return_label27: while(false);
   tracehead = trace.prev;
   return;
 }
-void typing___PParam___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 271, LOCATE_typing___PParam___after_typing};
-  val_t variable0;
-  val_t variable1;
-    val_t variable2;
+void typing___AClosureDecl___after_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 301, LOCATE_typing___AClosureDecl___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((typing___TypingVisitor___variable_ctx_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable0 /*v*/) /*TypingVisitor::variable_ctx*/;
-  variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = ((typing___TypingVisitor___variable_ctx_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable0 /*v*/) /*TypingVisitor::variable_ctx*/;
-    variable2 = ((syntax_base___PParam___variable_t)CALL( self,COLOR_syntax_base___PParam___variable))( self) /*PParam::variable*/;
-    ((typing___VariableContext___add_t)CALL(variable1,COLOR_typing___VariableContext___add))(variable1, variable2) /*VariableContext::add*/;
-  }
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+  variable[4] = variable[0];
+  variable[4] = ((syntax_base___PClosureDecl___variable_t)CALL(variable[4],COLOR_syntax_base___PClosureDecl___variable))(variable[4]) /*PClosureDecl::variable*/;
+  ((typing___VariableContext___add_t)CALL(variable[3],COLOR_typing___VariableContext___add))(variable[3], variable[4]) /*VariableContext::add*/;
+  return_label28: while(false);
+  tracehead = trace.prev;
+  return;
+}
+void typing___PType___after_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 309, LOCATE_typing___PType___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[4] = variable[0];
+  variable[4] = ((syntax_base___PType___get_stype_t)CALL(variable[4],COLOR_syntax_base___PType___get_stype))(variable[4],  variable[1] /*v*/) /*PType::get_stype*/;
+  ATTR_typing___PType____stype(variable[3]) /*PType::_stype*/ = variable[4];
+  return_label29: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t typing___PType___stype(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 280, LOCATE_typing___PType___stype};
+  struct trace_t trace = {NULL, NULL, 308, LOCATE_typing___PType___stype};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   tracehead = trace.prev;
   return ATTR_typing___PType____stype( self) /*PType::_stype*/;
 }
-void typing___PType___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 281, LOCATE_typing___PType___after_typing};
-  val_t variable0;
-  val_t variable1;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((syntax_base___PType___get_stype_t)CALL( self,COLOR_syntax_base___PType___get_stype))( self,  variable0 /*v*/) /*PType::get_stype*/;
-  ATTR_typing___PType____stype( self) /*PType::_stype*/ = variable1;
-  tracehead = trace.prev;
-  return;
-}
 val_t typing___PExpr___stype(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 288, LOCATE_typing___PExpr___stype};
+  struct trace_t trace = {NULL, NULL, 316, LOCATE_typing___PExpr___stype};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   tracehead = trace.prev;
   return ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/;
 }
 val_t typing___PExpr___is_implicit_self(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 290, LOCATE_typing___PExpr___is_implicit_self};
-  val_t variable0;
+  struct trace_t trace = {NULL, NULL, 318, LOCATE_typing___PExpr___is_implicit_self};
+  val_t variable[2];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  TAG_Bool(false);
-  goto return_label27;
-  return_label27: while(false);
+  variable[0] =  self;
+  variable[1] =  TAG_Bool(false);
+  goto return_label30;
+  return_label30: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t typing___PExpr___is_self(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 293, LOCATE_typing___PExpr___is_self};
-  val_t variable0;
+  struct trace_t trace = {NULL, NULL, 321, LOCATE_typing___PExpr___is_self};
+  val_t variable[2];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  TAG_Bool(false);
-  goto return_label28;
-  return_label28: while(false);
+  variable[0] =  self;
+  variable[1] =  TAG_Bool(false);
+  goto return_label31;
+  return_label31: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
-val_t typing___PExpr___is_variable(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 296, LOCATE_typing___PExpr___is_variable};
-  val_t variable0;
+val_t typing___PExpr___its_variable(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 324, LOCATE_typing___PExpr___its_variable};
+  val_t variable[2];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  TAG_Bool(false);
-  goto return_label29;
-  return_label29: while(false);
+  variable[0] =  self;
+  variable[1] =  NIT_NULL /*null*/;
+  goto return_label32;
+  return_label32: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t typing___PExpr___if_true_variable_ctx(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 299, LOCATE_typing___PExpr___if_true_variable_ctx};
+  struct trace_t trace = {NULL, NULL, 327, LOCATE_typing___PExpr___if_true_variable_ctx};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   tracehead = trace.prev;
   return ATTR_typing___PExpr____if_true_variable_ctx( self) /*PExpr::_if_true_variable_ctx*/;
 }
 void typing___AVardeclExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 304, LOCATE_typing___AVardeclExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
+  struct trace_t trace = {NULL, NULL, 332, LOCATE_typing___AVardeclExpr___after_typing};
+  val_t variable[7];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable2 = ((parser_nodes___AVardeclExpr___n_id_t)CALL( self,COLOR_parser_nodes___AVardeclExpr___n_id))( self) /*AVardeclExpr::n_id*/;
-  variable2 = ((syntax_base___Token___to_symbol_t)CALL(variable2,COLOR_syntax_base___Token___to_symbol))(variable2) /*Token::to_symbol*/;
-  variable3 = NEW_Variable_syntax_base___Variable___init(variable2,  self); /*new Variable*/
-  variable2 = variable3;
-  variable1 = variable2;
-  ((syntax_base___AVardeclExpr___variable__eq_t)CALL( self,COLOR_syntax_base___AVardeclExpr___variable__eq))( self,  variable1 /*va*/) /*AVardeclExpr::variable=*/;
-  variable2 = ((typing___TypingVisitor___variable_ctx_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable0 /*v*/) /*TypingVisitor::variable_ctx*/;
-  ((typing___VariableContext___add_t)CALL(variable2,COLOR_typing___VariableContext___add))(variable2,  variable1 /*va*/) /*VariableContext::add*/;
-  variable2 = ((parser_nodes___AVardeclExpr___n_type_t)CALL( self,COLOR_parser_nodes___AVardeclExpr___n_type))( self) /*AVardeclExpr::n_type*/;
-  variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable2 ==  NIT_NULL /*null*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = ((parser_nodes___AVardeclExpr___n_type_t)CALL( self,COLOR_parser_nodes___AVardeclExpr___n_type))( self) /*AVardeclExpr::n_type*/;
-    variable2 = ((typing___PType___stype_t)CALL(variable2,COLOR_typing___PType___stype))(variable2) /*PType::stype*/;
-    ((syntax_base___Variable___stype__eq_t)CALL( variable1 /*va*/,COLOR_syntax_base___Variable___stype__eq))( variable1 /*va*/, variable2) /*Variable::stype=*/;
-    variable2 = ((parser_nodes___AVardeclExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AVardeclExpr___n_expr))( self) /*AVardeclExpr::n_expr*/;
-    variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable2 ==  NIT_NULL /*null*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    if (UNTAG_Bool(variable2)) { /*if*/
-      variable2 = ((parser_nodes___AVardeclExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AVardeclExpr___n_expr))( self) /*AVardeclExpr::n_expr*/;
-      variable2 = ((typing___PExpr___stype_t)CALL(variable2,COLOR_syntax_base___PExpr___stype))(variable2) /*PExpr::stype*/;
-      variable3 = ((syntax_base___Variable___stype_t)CALL( variable1 /*va*/,COLOR_syntax_base___Variable___stype))( variable1 /*va*/) /*Variable::stype*/;
-      ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self, variable2, variable3) /*AbsSyntaxVisitor::check_conform*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AVardeclExpr___n_id_t)CALL(variable[4],COLOR_parser_nodes___AVardeclExpr___n_id))(variable[4]) /*AVardeclExpr::n_id*/;
+  variable[4] = ((syntax_base___Token___to_symbol_t)CALL(variable[4],COLOR_syntax_base___Token___to_symbol))(variable[4]) /*Token::to_symbol*/;
+  variable[5] = variable[0];
+  variable[6] = NEW_VarVariable_syntax_base___VarVariable___init(variable[4], variable[5]); /*new VarVariable*/
+  variable[4] = variable[6];
+  variable[3] = variable[4];
+  variable[4] = variable[0];
+  ((syntax_base___AVardeclExpr___variable__eq_t)CALL(variable[4],COLOR_syntax_base___AVardeclExpr___variable__eq))(variable[4],  variable[3] /*va*/) /*AVardeclExpr::variable=*/;
+  variable[4] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+  ((typing___VariableContext___add_t)CALL(variable[4],COLOR_typing___VariableContext___add))(variable[4],  variable[3] /*va*/) /*VariableContext::add*/;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AVardeclExpr___n_type_t)CALL(variable[4],COLOR_parser_nodes___AVardeclExpr___n_type))(variable[4]) /*AVardeclExpr::n_type*/;
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = variable[0];
+    variable[4] = ((parser_nodes___AVardeclExpr___n_type_t)CALL(variable[4],COLOR_parser_nodes___AVardeclExpr___n_type))(variable[4]) /*AVardeclExpr::n_type*/;
+    variable[4] = ((typing___PType___stype_t)CALL(variable[4],COLOR_typing___PType___stype))(variable[4]) /*PType::stype*/;
+    ((syntax_base___Variable___stype__eq_t)CALL( variable[3] /*va*/,COLOR_syntax_base___Variable___stype__eq))( variable[3] /*va*/, variable[4]) /*Variable::stype=*/;
+    variable[4] = variable[0];
+    variable[4] = ((parser_nodes___AVardeclExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AVardeclExpr___n_expr))(variable[4]) /*AVardeclExpr::n_expr*/;
+    variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
+    if (UNTAG_Bool(variable[4])) { /*if*/
+      variable[4] = variable[0];
+      variable[4] = ((parser_nodes___AVardeclExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AVardeclExpr___n_expr))(variable[4]) /*AVardeclExpr::n_expr*/;
+      variable[5] = ((syntax_base___Variable___stype_t)CALL( variable[3] /*va*/,COLOR_syntax_base___Variable___stype))( variable[3] /*va*/) /*Variable::stype*/;
+      ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::check_conform_expr*/;
     }
   } else { /*if*/
-    variable2 = ((parser_nodes___AVardeclExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AVardeclExpr___n_expr))( self) /*AVardeclExpr::n_expr*/;
-    variable2 = ((typing___PExpr___stype_t)CALL(variable2,COLOR_syntax_base___PExpr___stype))(variable2) /*PExpr::stype*/;
-    ((syntax_base___Variable___stype__eq_t)CALL( variable1 /*va*/,COLOR_syntax_base___Variable___stype__eq))( variable1 /*va*/, variable2) /*Variable::stype=*/;
+    variable[4] = variable[0];
+    variable[4] = ((parser_nodes___AVardeclExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AVardeclExpr___n_expr))(variable[4]) /*AVardeclExpr::n_expr*/;
+    ((syntax_base___AbsSyntaxVisitor___check_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_expr))( variable[1] /*v*/, variable[4]) /*AbsSyntaxVisitor::check_expr*/;
+    variable[4] = variable[0];
+    variable[4] = ((parser_nodes___AVardeclExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AVardeclExpr___n_expr))(variable[4]) /*AVardeclExpr::n_expr*/;
+    variable[4] = ((typing___PExpr___stype_t)CALL(variable[4],COLOR_syntax_base___PExpr___stype))(variable[4]) /*PExpr::stype*/;
+    ((syntax_base___Variable___stype__eq_t)CALL( variable[3] /*va*/,COLOR_syntax_base___Variable___stype__eq))( variable[3] /*va*/, variable[4]) /*Variable::stype=*/;
   }
+  return_label33: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___ABlockExpr___accept_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 322, LOCATE_typing___ABlockExpr___accept_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  struct trace_t trace = {NULL, NULL, 351, LOCATE_typing___ABlockExpr___accept_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable2 = ((typing___TypingVisitor___variable_ctx_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable0 /*v*/) /*TypingVisitor::variable_ctx*/;
-  variable1 = variable2;
-  variable2 = ((typing___TypingVisitor___variable_ctx_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable0 /*v*/) /*TypingVisitor::variable_ctx*/;
-  variable2 = ((typing___VariableContext___sub_t)CALL(variable2,COLOR_typing___VariableContext___sub))(variable2) /*VariableContext::sub*/;
-  ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable0 /*v*/, variable2) /*TypingVisitor::variable_ctx=*/;
-  ((typing___ABlockExpr___accept_typing_t)CALL( self,COLOR_SUPER_typing___ABlockExpr___accept_typing))( self,  param0) /*super ABlockExpr::accept_typing*/;
-  ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable0 /*v*/,  variable1 /*old_var_ctx*/) /*TypingVisitor::variable_ctx=*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+  variable[3] = variable[4];
+  variable[4] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+  variable[4] = ((typing___VariableContext___sub_t)CALL(variable[4],COLOR_typing___VariableContext___sub))(variable[4]) /*VariableContext::sub*/;
+  ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable[1] /*v*/, variable[4]) /*TypingVisitor::variable_ctx=*/;
+  ((typing___ABlockExpr___accept_typing_t)CALL(variable[0],COLOR_SUPER_typing___ABlockExpr___accept_typing))(variable[0], variable[1]) /*super ABlockExpr::accept_typing*/;
+  ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable[1] /*v*/,  variable[3] /*old_var_ctx*/) /*TypingVisitor::variable_ctx=*/;
+  return_label34: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___AReturnExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 334, LOCATE_typing___AReturnExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
+  struct trace_t trace = {NULL, NULL, 363, LOCATE_typing___AReturnExpr___after_typing};
+  val_t variable[6];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable2 = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable0 /*v*/) /*AbsSyntaxVisitor::local_property*/;
-  variable2 = ((static_type___MMLocalProperty___signature_t)CALL(variable2,COLOR_static_type___MMLocalProperty___signature))(variable2) /*MMLocalProperty::signature*/;
-  variable2 = ((static_type___MMSignature___return_type_t)CALL(variable2,COLOR_static_type___MMSignature___return_type))(variable2) /*MMSignature::return_type*/;
-  variable1 = variable2;
-  variable2 = ((parser_nodes___AReturnExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AReturnExpr___n_expr))( self) /*AReturnExpr::n_expr*/;
-  variable2 = TAG_Bool((variable2 ==  NIT_NULL /*null*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  NIT_NULL /*null*/) /*Object::==*/)))));
-  variable3 = variable2;
-  if (UNTAG_Bool(variable3)) { /* and */
-    variable3 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable1 /*t*/ ==  NIT_NULL /*null*/) || (( variable1 /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable1 /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable1 /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable1 /*t*/,COLOR_kernel___Object_____eqeq))( variable1 /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_property*/;
+  variable[4] = ((static_type___MMLocalProperty___signature_t)CALL(variable[4],COLOR_static_type___MMLocalProperty___signature))(variable[4]) /*MMLocalProperty::signature*/;
+  variable[4] = ((static_type___MMSignature___return_type_t)CALL(variable[4],COLOR_static_type___MMSignature___return_type))(variable[4]) /*MMSignature::return_type*/;
+  variable[3] = variable[4];
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AReturnExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AReturnExpr___n_expr))(variable[4]) /*AReturnExpr::n_expr*/;
+  variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[5] = variable[4];
+  if (UNTAG_Bool(variable[5])) { /* and */
+    variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   }
-  variable2 = variable3;
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = NEW_String_string___String___with_native(BOX_NativeString("Error: Return without value in a function."), TAG_Int(42)); /*new String*/
-    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable2) /*AbsSyntaxVisitor::error*/;
+  variable[4] = variable[5];
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = variable[0];
+    variable[5] = NEW_String_string___String___with_native(BOX_NativeString("Error: Return without value in a function."), TAG_Int(42)); /*new String*/
+    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::error*/;
   } else { /*if*/
-    variable2 = ((parser_nodes___AReturnExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AReturnExpr___n_expr))( self) /*AReturnExpr::n_expr*/;
-    variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable2 ==  NIT_NULL /*null*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    variable3 = variable2;
-    if (UNTAG_Bool(variable3)) { /* and */
-      variable3 = TAG_Bool(( variable1 /*t*/ ==  NIT_NULL /*null*/) || (( variable1 /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable1 /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable1 /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable1 /*t*/,COLOR_kernel___Object_____eqeq))( variable1 /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+    variable[4] = variable[0];
+    variable[4] = ((parser_nodes___AReturnExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AReturnExpr___n_expr))(variable[4]) /*AReturnExpr::n_expr*/;
+    variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
+    variable[5] = variable[4];
+    if (UNTAG_Bool(variable[5])) { /* and */
+      variable[5] = TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))));
     }
-    variable2 = variable3;
-    if (UNTAG_Bool(variable2)) { /*if*/
-      variable2 = NEW_String_string___String___with_native(BOX_NativeString("Error: Return with value in a procedure."), TAG_Int(40)); /*new String*/
-      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable2) /*AbsSyntaxVisitor::error*/;
+    variable[4] = variable[5];
+    if (UNTAG_Bool(variable[4])) { /*if*/
+      variable[4] = variable[0];
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString("Error: Return with value in a procedure."), TAG_Int(40)); /*new String*/
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::error*/;
     } else { /*if*/
-      variable2 = ((parser_nodes___AReturnExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AReturnExpr___n_expr))( self) /*AReturnExpr::n_expr*/;
-      variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable2 ==  NIT_NULL /*null*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  NIT_NULL /*null*/) /*Object::==*/)))))));
-      variable3 = variable2;
-      if (UNTAG_Bool(variable3)) { /* and */
-        variable3 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable1 /*t*/ ==  NIT_NULL /*null*/) || (( variable1 /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable1 /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable1 /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable1 /*t*/,COLOR_kernel___Object_____eqeq))( variable1 /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+      variable[4] = variable[0];
+      variable[4] = ((parser_nodes___AReturnExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AReturnExpr___n_expr))(variable[4]) /*AReturnExpr::n_expr*/;
+      variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
+      variable[5] = variable[4];
+      if (UNTAG_Bool(variable[5])) { /* and */
+        variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
       }
-      variable2 = variable3;
-      if (UNTAG_Bool(variable2)) { /*if*/
-        variable2 = ((parser_nodes___AReturnExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AReturnExpr___n_expr))( self) /*AReturnExpr::n_expr*/;
-        variable2 = ((typing___PExpr___stype_t)CALL(variable2,COLOR_syntax_base___PExpr___stype))(variable2) /*PExpr::stype*/;
-        ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self, variable2,  variable1 /*t*/) /*AbsSyntaxVisitor::check_conform*/;
+      variable[4] = variable[5];
+      if (UNTAG_Bool(variable[4])) { /*if*/
+        variable[4] = variable[0];
+        variable[4] = ((parser_nodes___AReturnExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AReturnExpr___n_expr))(variable[4]) /*AReturnExpr::n_expr*/;
+        ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/, variable[4],  variable[3] /*t*/) /*AbsSyntaxVisitor::check_conform_expr*/;
       }
     }
   }
+  return_label35: while(false);
   tracehead = trace.prev;
   return;
 }
-void typing___AIfExpr___accept_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 348, LOCATE_typing___AIfExpr___accept_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
+void typing___AContinueExpr___after_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 377, LOCATE_typing___AContinueExpr___after_typing};
+  val_t variable[7];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable2 = ((typing___TypingVisitor___variable_ctx_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable0 /*v*/) /*TypingVisitor::variable_ctx*/;
-  variable1 = variable2;
-  variable2 = ((parser_nodes___AIfExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AIfExpr___n_expr))( self) /*AIfExpr::n_expr*/;
-  ((typing___TypingVisitor___visit_t)CALL( variable0 /*v*/,COLOR_parser_prod___Visitor___visit))( variable0 /*v*/, variable2) /*TypingVisitor::visit*/;
-  variable2 = ((parser_nodes___AIfExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AIfExpr___n_expr))( self) /*AIfExpr::n_expr*/;
-  variable2 = ((typing___PExpr___stype_t)CALL(variable2,COLOR_syntax_base___PExpr___stype))(variable2) /*PExpr::stype*/;
-  variable3 = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable0 /*v*/) /*AbsSyntaxVisitor::type_bool*/;
-  ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self, variable2, variable3) /*AbsSyntaxVisitor::check_conform*/;
-  variable2 = ((parser_nodes___AIfExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AIfExpr___n_expr))( self) /*AIfExpr::n_expr*/;
-  variable2 = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable2,COLOR_typing___PExpr___if_true_variable_ctx))(variable2) /*PExpr::if_true_variable_ctx*/;
-  variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable2 ==  NIT_NULL /*null*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = ((parser_nodes___AIfExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AIfExpr___n_expr))( self) /*AIfExpr::n_expr*/;
-    variable2 = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable2,COLOR_typing___PExpr___if_true_variable_ctx))(variable2) /*PExpr::if_true_variable_ctx*/;
-    ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable0 /*v*/, variable2) /*TypingVisitor::variable_ctx=*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = ((typing___TypingVisitor___closure_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___closure))( variable[1] /*v*/) /*TypingVisitor::closure*/;
+  variable[3] = variable[4];
+  variable[4] =  NIT_NULL /*null*/;
+  variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*c*/ ==  NIT_NULL /*null*/) || (( variable[3] /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*c*/,COLOR_kernel___Object_____eqeq))( variable[3] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    variable[5] = ((static_type___MMClosure___is_break_t)CALL( variable[3] /*c*/,COLOR_static_type___MMClosure___is_break))( variable[3] /*c*/) /*MMClosure::is_break*/;
+    if (UNTAG_Bool(variable[5])) { /*if*/
+      variable[5] = variable[0];
+      variable[6] = NEW_String_string___String___with_native(BOX_NativeString("Error: 'continue' forbiden in break blocks."), TAG_Int(43)); /*new String*/
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[5], variable[6]) /*AbsSyntaxVisitor::error*/;
+      goto return_label36;
+    }
+    variable[5] = ((static_type___MMClosure___signature_t)CALL( variable[3] /*c*/,COLOR_static_type___MMClosure___signature))( variable[3] /*c*/) /*MMClosure::signature*/;
+    variable[5] = ((static_type___MMSignature___return_type_t)CALL(variable[5],COLOR_static_type___MMSignature___return_type))(variable[5]) /*MMSignature::return_type*/;
+    variable[4] = variable[5] /*t=*/;
   }
-  variable2 = ((parser_nodes___AIfExpr___n_then_t)CALL( self,COLOR_parser_nodes___AIfExpr___n_then))( self) /*AIfExpr::n_then*/;
-  ((typing___TypingVisitor___visit_t)CALL( variable0 /*v*/,COLOR_parser_prod___Visitor___visit))( variable0 /*v*/, variable2) /*TypingVisitor::visit*/;
-  ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable0 /*v*/,  variable1 /*old_var_ctx*/) /*TypingVisitor::variable_ctx=*/;
-  variable2 = ((parser_nodes___AIfExpr___n_else_t)CALL( self,COLOR_parser_nodes___AIfExpr___n_else))( self) /*AIfExpr::n_else*/;
-  variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable2 ==  NIT_NULL /*null*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = ((parser_nodes___AIfExpr___n_else_t)CALL( self,COLOR_parser_nodes___AIfExpr___n_else))( self) /*AIfExpr::n_else*/;
-    ((typing___TypingVisitor___visit_t)CALL( variable0 /*v*/,COLOR_parser_prod___Visitor___visit))( variable0 /*v*/, variable2) /*TypingVisitor::visit*/;
-    ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable0 /*v*/,  variable1 /*old_var_ctx*/) /*TypingVisitor::variable_ctx=*/;
+  variable[5] = variable[0];
+  variable[5] = ((parser_nodes___AContinueExpr___n_expr_t)CALL(variable[5],COLOR_parser_nodes___AContinueExpr___n_expr))(variable[5]) /*AContinueExpr::n_expr*/;
+  variable[5] = TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[6] = variable[5];
+  if (UNTAG_Bool(variable[6])) { /* and */
+    variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*t*/ ==  NIT_NULL /*null*/) || (( variable[4] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*t*/,COLOR_kernel___Object_____eqeq))( variable[4] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   }
-  tracehead = trace.prev;
-  return;
-}
-void typing___AWhileExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 370, LOCATE_typing___AWhileExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((parser_nodes___AWhileExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AWhileExpr___n_expr))( self) /*AWhileExpr::n_expr*/;
-  variable1 = ((typing___PExpr___stype_t)CALL(variable1,COLOR_syntax_base___PExpr___stype))(variable1) /*PExpr::stype*/;
-  variable2 = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable0 /*v*/) /*AbsSyntaxVisitor::type_bool*/;
-  ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self, variable1, variable2) /*AbsSyntaxVisitor::check_conform*/;
-  tracehead = trace.prev;
-  return;
-}
-void typing___AForExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 377, LOCATE_typing___AForExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable2 = ((typing___TypingVisitor___variable_ctx_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable0 /*v*/) /*TypingVisitor::variable_ctx*/;
-  variable1 = variable2;
-  variable2 = TAG_Bool(( variable1 /*varctx*/==NIT_NULL) || VAL_ISA( variable1 /*varctx*/, COLOR_SubVariableContext, ID_SubVariableContext)) /*cast SubVariableContext*/;
-  if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___AForExpr___after_typing, LOCATE_typing, 381); nit_exit(1);}
-  variable2 = ((typing___SubVariableContext___prev_t)CALL( variable1 /*varctx*/,COLOR_typing___SubVariableContext___prev))( variable1 /*varctx*/) /*SubVariableContext::prev*/;
-  ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable0 /*v*/, variable2) /*TypingVisitor::variable_ctx=*/;
-  tracehead = trace.prev;
-  return;
-}
-void typing___AForVardeclExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 387, LOCATE_typing___AForVardeclExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-  val_t variable5;
-  static val_t once_value_variable5_37; static int once_bool_variable5_37;
-  val_t variable6;
-  val_t variable7;
-  static val_t once_value_variable7_38; static int once_bool_variable7_38;
-    val_t variable8;
-    val_t variable9;
-    val_t variable10;
-    val_t variable11;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((typing___TypingVisitor___variable_ctx_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable0 /*v*/) /*TypingVisitor::variable_ctx*/;
-  variable1 = ((typing___VariableContext___sub_t)CALL(variable1,COLOR_typing___VariableContext___sub))(variable1) /*VariableContext::sub*/;
-  ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable0 /*v*/, variable1) /*TypingVisitor::variable_ctx=*/;
-  variable2 = ((parser_nodes___AForVardeclExpr___n_id_t)CALL( self,COLOR_parser_nodes___AForVardeclExpr___n_id))( self) /*AForVardeclExpr::n_id*/;
-  variable2 = ((syntax_base___Token___to_symbol_t)CALL(variable2,COLOR_syntax_base___Token___to_symbol))(variable2) /*Token::to_symbol*/;
-  variable3 = NEW_Variable_syntax_base___Variable___init(variable2,  self); /*new Variable*/
-  variable2 = variable3;
-  variable1 = variable2;
-  ((syntax_base___AForVardeclExpr___variable__eq_t)CALL( self,COLOR_syntax_base___AForVardeclExpr___variable__eq))( self,  variable1 /*va*/) /*AForVardeclExpr::variable=*/;
-  variable2 = ((typing___TypingVisitor___variable_ctx_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable0 /*v*/) /*TypingVisitor::variable_ctx*/;
-  ((typing___VariableContext___add_t)CALL(variable2,COLOR_typing___VariableContext___add))(variable2,  variable1 /*va*/) /*VariableContext::add*/;
-  variable3 = ((parser_nodes___AForVardeclExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AForVardeclExpr___n_expr))( self) /*AForVardeclExpr::n_expr*/;
-  variable3 = ((typing___PExpr___stype_t)CALL(variable3,COLOR_syntax_base___PExpr___stype))(variable3) /*PExpr::stype*/;
-  variable2 = variable3;
-  variable3 = ((syntax_base___AbsSyntaxVisitor___type_collection_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_collection))( variable0 /*v*/) /*AbsSyntaxVisitor::type_collection*/;
-  variable3 = ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self,  variable2 /*expr_type*/, variable3) /*AbsSyntaxVisitor::check_conform*/;
-  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable3)))) { /*if*/
-    goto return_label36;
+  variable[5] = variable[6];
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    variable[5] = variable[0];
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString("Error: continue with a value required in this bloc."), TAG_Int(51)); /*new String*/
+    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[5], variable[6]) /*AbsSyntaxVisitor::error*/;
+  } else { /*if*/
+    variable[5] = variable[0];
+    variable[5] = ((parser_nodes___AContinueExpr___n_expr_t)CALL(variable[5],COLOR_parser_nodes___AContinueExpr___n_expr))(variable[5]) /*AContinueExpr::n_expr*/;
+    variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))))));
+    variable[6] = variable[5];
+    if (UNTAG_Bool(variable[6])) { /* and */
+      variable[6] = TAG_Bool(( variable[4] /*t*/ ==  NIT_NULL /*null*/) || (( variable[4] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*t*/,COLOR_kernel___Object_____eqeq))( variable[4] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+    }
+    variable[5] = variable[6];
+    if (UNTAG_Bool(variable[5])) { /*if*/
+      variable[5] = variable[0];
+      variable[6] = NEW_String_string___String___with_native(BOX_NativeString("Error: continue without value required in this bloc."), TAG_Int(52)); /*new String*/
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[5], variable[6]) /*AbsSyntaxVisitor::error*/;
+    } else { /*if*/
+      variable[5] = variable[0];
+      variable[5] = ((parser_nodes___AContinueExpr___n_expr_t)CALL(variable[5],COLOR_parser_nodes___AContinueExpr___n_expr))(variable[5]) /*AContinueExpr::n_expr*/;
+      variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))))));
+      variable[6] = variable[5];
+      if (UNTAG_Bool(variable[6])) { /* and */
+        variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*t*/ ==  NIT_NULL /*null*/) || (( variable[4] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*t*/,COLOR_kernel___Object_____eqeq))( variable[4] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+      }
+      variable[5] = variable[6];
+      if (UNTAG_Bool(variable[5])) { /*if*/
+        variable[5] = variable[0];
+        variable[5] = ((parser_nodes___AContinueExpr___n_expr_t)CALL(variable[5],COLOR_parser_nodes___AContinueExpr___n_expr))(variable[5]) /*AContinueExpr::n_expr*/;
+        ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/, variable[5],  variable[4] /*t*/) /*AbsSyntaxVisitor::check_conform_expr*/;
+      }
+    }
   }
-  variable4 = ((static_type___MMType___local_class_t)CALL( variable2 /*expr_type*/,COLOR_static_type___MMType___local_class))( variable2 /*expr_type*/) /*MMType::local_class*/;
-  if (once_bool_variable5_37) variable5 = once_value_variable5_37;
-  else {
-    variable5 = NEW_String_string___String___with_native(BOX_NativeString("iterator"), TAG_Int(8)); /*new String*/
-    variable5 = ((symbol___String___to_symbol_t)CALL(variable5,COLOR_symbol___String___to_symbol))(variable5) /*String::to_symbol*/;
-    once_value_variable5_37 = variable5;
-    once_bool_variable5_37 = true;
-  }
-  variable4 = ((abstractmetamodel___MMLocalClass___select_method_t)CALL(variable4,COLOR_abstractmetamodel___MMLocalClass___select_method))(variable4, variable5) /*MMLocalClass::select_method*/;
-  variable3 = variable4;
-  variable4 = TAG_Bool(( variable3 /*prop*/ ==  NIT_NULL /*null*/) || (( variable3 /*prop*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable3 /*prop*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable3 /*prop*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable3 /*prop*/,COLOR_kernel___Object_____eqeq))( variable3 /*prop*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable4)) { /*if*/
-    variable4 = NEW_String_string___String___with_native(BOX_NativeString("Error: Collection MUST have an iterate method"), TAG_Int(45)); /*new String*/
-    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable4) /*AbsSyntaxVisitor::error*/;
-    goto return_label36;
-  }
-  variable5 = ((static_type___MMLocalProperty___signature_for_t)CALL( variable3 /*prop*/,COLOR_static_type___MMLocalProperty___signature_for))( variable3 /*prop*/,  variable2 /*expr_type*/) /*MMLocalProperty::signature_for*/;
-  variable5 = ((static_type___MMSignature___return_type_t)CALL(variable5,COLOR_static_type___MMSignature___return_type))(variable5) /*MMSignature::return_type*/;
-  variable4 = variable5;
-  variable6 = ((static_type___MMType___local_class_t)CALL( variable4 /*iter_type*/,COLOR_static_type___MMType___local_class))( variable4 /*iter_type*/) /*MMType::local_class*/;
-  if (once_bool_variable7_38) variable7 = once_value_variable7_38;
-  else {
-    variable7 = NEW_String_string___String___with_native(BOX_NativeString("item"), TAG_Int(4)); /*new String*/
-    variable7 = ((symbol___String___to_symbol_t)CALL(variable7,COLOR_symbol___String___to_symbol))(variable7) /*String::to_symbol*/;
-    once_value_variable7_38 = variable7;
-    once_bool_variable7_38 = true;
-  }
-  variable6 = ((abstractmetamodel___MMLocalClass___select_method_t)CALL(variable6,COLOR_abstractmetamodel___MMLocalClass___select_method))(variable6, variable7) /*MMLocalClass::select_method*/;
-  variable5 = variable6;
-  variable6 = TAG_Bool(( variable5 /*prop2*/ ==  NIT_NULL /*null*/) || (( variable5 /*prop2*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable5 /*prop2*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable5 /*prop2*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable5 /*prop2*/,COLOR_kernel___Object_____eqeq))( variable5 /*prop2*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable6)) { /*if*/
-    variable6 = NEW_String_string___String___init(); /*new String*/
-    variable7 = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
-    variable8 = variable7;
-    ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable8) /*String::append*/;
-    variable9 =  variable4 /*iter_type*/;
-    variable9 = ((string___String___to_s_t)CALL(variable9,COLOR_string___Object___to_s))(variable9) /*String::to_s*/;
-    ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable9) /*String::append*/;
-    variable10 = NEW_String_string___String___with_native(BOX_NativeString(" MUST have an item method"), TAG_Int(25)); /*new String*/
-    variable11 = variable10;
-    ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable11) /*String::append*/;
-    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable6) /*AbsSyntaxVisitor::error*/;
-    goto return_label36;
-  }
-  variable7 = ((static_type___MMLocalProperty___signature_for_t)CALL( variable5 /*prop2*/,COLOR_static_type___MMLocalProperty___signature_for))( variable5 /*prop2*/,  variable4 /*iter_type*/) /*MMLocalProperty::signature_for*/;
-  variable7 = ((static_type___MMSignature___return_type_t)CALL(variable7,COLOR_static_type___MMSignature___return_type))(variable7) /*MMSignature::return_type*/;
-  variable6 = variable7;
-  variable7 = ((parser_nodes___AForVardeclExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AForVardeclExpr___n_expr))( self) /*AForVardeclExpr::n_expr*/;
-  variable7 = ((typing___PExpr___is_self_t)CALL(variable7,COLOR_typing___PExpr___is_self))(variable7) /*PExpr::is_self*/;
-  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable7)))) { /*if*/
-    variable7 = ((static_type___MMType___not_for_self_t)CALL( variable6 /*t*/,COLOR_static_type___MMType___not_for_self))( variable6 /*t*/) /*MMType::not_for_self*/;
-    variable6 = variable7 /*t=*/;
-  }
-  ((syntax_base___Variable___stype__eq_t)CALL( variable1 /*va*/,COLOR_syntax_base___Variable___stype__eq))( variable1 /*va*/,  variable6 /*t*/) /*Variable::stype=*/;
   return_label36: while(false);
   tracehead = trace.prev;
   return;
 }
-void typing___AAssertExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 416, LOCATE_typing___AAssertExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+void typing___ABreakExpr___after_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 400, LOCATE_typing___ABreakExpr___after_typing};
+  val_t variable[6];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((parser_nodes___AAssertExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AAssertExpr___n_expr))( self) /*AAssertExpr::n_expr*/;
-  variable1 = ((typing___PExpr___stype_t)CALL(variable1,COLOR_syntax_base___PExpr___stype))(variable1) /*PExpr::stype*/;
-  variable2 = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable0 /*v*/) /*AbsSyntaxVisitor::type_bool*/;
-  ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self, variable1, variable2) /*AbsSyntaxVisitor::check_conform*/;
-  variable1 = ((parser_nodes___AAssertExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AAssertExpr___n_expr))( self) /*AAssertExpr::n_expr*/;
-  variable1 = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable1,COLOR_typing___PExpr___if_true_variable_ctx))(variable1) /*PExpr::if_true_variable_ctx*/;
-  variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = ((parser_nodes___AAssertExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AAssertExpr___n_expr))( self) /*AAssertExpr::n_expr*/;
-    variable1 = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable1,COLOR_typing___PExpr___if_true_variable_ctx))(variable1) /*PExpr::if_true_variable_ctx*/;
-    ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable0 /*v*/, variable1) /*TypingVisitor::variable_ctx=*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = ((typing___TypingVisitor___closure_break_stype_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___closure_break_stype))( variable[1] /*v*/) /*TypingVisitor::closure_break_stype*/;
+  variable[3] = variable[4];
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___ABreakExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___ABreakExpr___n_expr))(variable[4]) /*ABreakExpr::n_expr*/;
+  variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[5] = variable[4];
+  if (UNTAG_Bool(variable[5])) { /* and */
+    variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   }
+  variable[4] = variable[5];
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = variable[0];
+    variable[5] = NEW_String_string___String___with_native(BOX_NativeString("Error: break with a value required in this bloc."), TAG_Int(48)); /*new String*/
+    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::error*/;
+  } else { /*if*/
+    variable[4] = variable[0];
+    variable[4] = ((parser_nodes___ABreakExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___ABreakExpr___n_expr))(variable[4]) /*ABreakExpr::n_expr*/;
+    variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
+    variable[5] = variable[4];
+    if (UNTAG_Bool(variable[5])) { /* and */
+      variable[5] = TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+    }
+    variable[4] = variable[5];
+    if (UNTAG_Bool(variable[4])) { /*if*/
+      variable[4] = variable[0];
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString("Error: break without value required in this bloc."), TAG_Int(49)); /*new String*/
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::error*/;
+    } else { /*if*/
+      variable[4] = variable[0];
+      variable[4] = ((parser_nodes___ABreakExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___ABreakExpr___n_expr))(variable[4]) /*ABreakExpr::n_expr*/;
+      variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
+      variable[5] = variable[4];
+      if (UNTAG_Bool(variable[5])) { /* and */
+        variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+      }
+      variable[4] = variable[5];
+      if (UNTAG_Bool(variable[4])) { /*if*/
+        variable[4] = ((typing___TypingVisitor___break_list_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___break_list))( variable[1] /*v*/) /*TypingVisitor::break_list*/;
+        variable[5] = variable[0];
+        variable[5] = ((parser_nodes___ABreakExpr___n_expr_t)CALL(variable[5],COLOR_parser_nodes___ABreakExpr___n_expr))(variable[5]) /*ABreakExpr::n_expr*/;
+        ((array___AbstractArray___add_t)CALL(variable[4],COLOR_abstract_collection___SimpleCollection___add))(variable[4], variable[5]) /*AbstractArray::add*/;
+      }
+    }
+  }
+  return_label37: while(false);
   tracehead = trace.prev;
   return;
 }
-val_t typing___AVarExpr___is_variable(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 424, LOCATE_typing___AVarExpr___is_variable};
-  val_t variable0;
+void typing___AIfExpr___accept_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 415, LOCATE_typing___AIfExpr___accept_typing};
+  val_t variable[6];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  TAG_Bool(true);
-  goto return_label40;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+  variable[3] = variable[4];
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AIfExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AIfExpr___n_expr))(variable[4]) /*AIfExpr::n_expr*/;
+  ((typing___TypingVisitor___visit_t)CALL( variable[1] /*v*/,COLOR_parser_prod___Visitor___visit))( variable[1] /*v*/, variable[4]) /*TypingVisitor::visit*/;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AIfExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AIfExpr___n_expr))(variable[4]) /*AIfExpr::n_expr*/;
+  variable[5] = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_bool*/;
+  ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::check_conform_expr*/;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AIfExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AIfExpr___n_expr))(variable[4]) /*AIfExpr::n_expr*/;
+  variable[4] = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable[4],COLOR_typing___PExpr___if_true_variable_ctx))(variable[4]) /*PExpr::if_true_variable_ctx*/;
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = variable[0];
+    variable[4] = ((parser_nodes___AIfExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AIfExpr___n_expr))(variable[4]) /*AIfExpr::n_expr*/;
+    variable[4] = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable[4],COLOR_typing___PExpr___if_true_variable_ctx))(variable[4]) /*PExpr::if_true_variable_ctx*/;
+    ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable[1] /*v*/, variable[4]) /*TypingVisitor::variable_ctx=*/;
+  }
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AIfExpr___n_then_t)CALL(variable[4],COLOR_parser_nodes___AIfExpr___n_then))(variable[4]) /*AIfExpr::n_then*/;
+  ((typing___TypingVisitor___visit_t)CALL( variable[1] /*v*/,COLOR_parser_prod___Visitor___visit))( variable[1] /*v*/, variable[4]) /*TypingVisitor::visit*/;
+  ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable[1] /*v*/,  variable[3] /*old_var_ctx*/) /*TypingVisitor::variable_ctx=*/;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AIfExpr___n_else_t)CALL(variable[4],COLOR_parser_nodes___AIfExpr___n_else))(variable[4]) /*AIfExpr::n_else*/;
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = variable[0];
+    variable[4] = ((parser_nodes___AIfExpr___n_else_t)CALL(variable[4],COLOR_parser_nodes___AIfExpr___n_else))(variable[4]) /*AIfExpr::n_else*/;
+    ((typing___TypingVisitor___visit_t)CALL( variable[1] /*v*/,COLOR_parser_prod___Visitor___visit))( variable[1] /*v*/, variable[4]) /*TypingVisitor::visit*/;
+    ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable[1] /*v*/,  variable[3] /*old_var_ctx*/) /*TypingVisitor::variable_ctx=*/;
+  }
+  return_label38: while(false);
+  tracehead = trace.prev;
+  return;
+}
+void typing___AWhileExpr___after_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 437, LOCATE_typing___AWhileExpr___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___AWhileExpr___n_expr_t)CALL(variable[3],COLOR_parser_nodes___AWhileExpr___n_expr))(variable[3]) /*AWhileExpr::n_expr*/;
+  variable[4] = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_bool*/;
+  ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/, variable[3], variable[4]) /*AbsSyntaxVisitor::check_conform_expr*/;
+  return_label39: while(false);
+  tracehead = trace.prev;
+  return;
+}
+void typing___AForExpr___after_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 444, LOCATE_typing___AForExpr___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+  variable[3] = variable[4];
+  variable[4] = TAG_Bool(( variable[3] /*varctx*/==NIT_NULL) || VAL_ISA( variable[3] /*varctx*/, COLOR_SubVariableContext, ID_SubVariableContext)) /*cast SubVariableContext*/;
+  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___AForExpr___after_typing, LOCATE_typing, 448); nit_exit(1);}
+  variable[4] = ((typing___SubVariableContext___prev_t)CALL( variable[3] /*varctx*/,COLOR_typing___SubVariableContext___prev))( variable[3] /*varctx*/) /*SubVariableContext::prev*/;
+  ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable[1] /*v*/, variable[4]) /*TypingVisitor::variable_ctx=*/;
   return_label40: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return;
 }
-void typing___AVarExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 426, LOCATE_typing___AVarExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+void typing___AForVardeclExpr___after_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 454, LOCATE_typing___AForVardeclExpr___after_typing};
+  static val_t once_value_42; static int once_bool_42; /* Once value for variable[7]*/
+  static val_t once_value_43; static int once_bool_43; /* Once value for variable[9]*/
+  val_t variable[15];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((typing___TypingVisitor___variable_ctx_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable0 /*v*/) /*TypingVisitor::variable_ctx*/;
-  variable2 = ((syntax_base___AVarFormExpr___variable_t)CALL( self,COLOR_syntax_base___AVarFormExpr___variable))( self) /*AVarFormExpr::variable*/;
-  variable1 = ((typing___VariableContext___stype_t)CALL(variable1,COLOR_typing___VariableContext___stype))(variable1, variable2) /*VariableContext::stype*/;
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ = variable1;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+  variable[3] = ((typing___VariableContext___sub_t)CALL(variable[3],COLOR_typing___VariableContext___sub))(variable[3]) /*VariableContext::sub*/;
+  ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable[1] /*v*/, variable[3]) /*TypingVisitor::variable_ctx=*/;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AForVardeclExpr___n_id_t)CALL(variable[4],COLOR_parser_nodes___AForVardeclExpr___n_id))(variable[4]) /*AForVardeclExpr::n_id*/;
+  variable[4] = ((syntax_base___Token___to_symbol_t)CALL(variable[4],COLOR_syntax_base___Token___to_symbol))(variable[4]) /*Token::to_symbol*/;
+  variable[5] = variable[0];
+  variable[6] = NEW_AutoVariable_syntax_base___AutoVariable___init(variable[4], variable[5]); /*new AutoVariable*/
+  variable[4] = variable[6];
+  variable[3] = variable[4];
+  variable[4] = variable[0];
+  ((syntax_base___AForVardeclExpr___variable__eq_t)CALL(variable[4],COLOR_syntax_base___AForVardeclExpr___variable__eq))(variable[4],  variable[3] /*va*/) /*AForVardeclExpr::variable=*/;
+  variable[4] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+  ((typing___VariableContext___add_t)CALL(variable[4],COLOR_typing___VariableContext___add))(variable[4],  variable[3] /*va*/) /*VariableContext::add*/;
+  variable[5] = variable[0];
+  variable[5] = ((parser_nodes___AForVardeclExpr___n_expr_t)CALL(variable[5],COLOR_parser_nodes___AForVardeclExpr___n_expr))(variable[5]) /*AForVardeclExpr::n_expr*/;
+  variable[5] = ((typing___PExpr___stype_t)CALL(variable[5],COLOR_syntax_base___PExpr___stype))(variable[5]) /*PExpr::stype*/;
+  variable[4] = variable[5];
+  variable[5] = variable[0];
+  variable[5] = ((parser_nodes___AForVardeclExpr___n_expr_t)CALL(variable[5],COLOR_parser_nodes___AForVardeclExpr___n_expr))(variable[5]) /*AForVardeclExpr::n_expr*/;
+  variable[6] = ((syntax_base___AbsSyntaxVisitor___type_collection_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_collection))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_collection*/;
+  variable[5] = ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/, variable[5], variable[6]) /*AbsSyntaxVisitor::check_conform_expr*/;
+  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[5])))) { /*if*/
+    goto return_label41;
+  }
+  variable[6] = ((static_type___MMType___local_class_t)CALL( variable[4] /*expr_type*/,COLOR_static_type___MMType___local_class))( variable[4] /*expr_type*/) /*MMType::local_class*/;
+  if (once_bool_42) variable[7] = once_value_42;
+  else {
+    variable[7] = NEW_String_string___String___with_native(BOX_NativeString("iterator"), TAG_Int(8)); /*new String*/
+    variable[7] = ((symbol___String___to_symbol_t)CALL(variable[7],COLOR_symbol___String___to_symbol))(variable[7]) /*String::to_symbol*/;
+    once_value_42 = variable[7];
+    once_bool_42 = true;
+  }
+  variable[6] = ((abstractmetamodel___MMLocalClass___select_method_t)CALL(variable[6],COLOR_abstractmetamodel___MMLocalClass___select_method))(variable[6], variable[7]) /*MMLocalClass::select_method*/;
+  variable[5] = variable[6];
+  variable[6] = TAG_Bool(( variable[5] /*prop*/ ==  NIT_NULL /*null*/) || (( variable[5] /*prop*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*prop*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*prop*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*prop*/,COLOR_kernel___Object_____eqeq))( variable[5] /*prop*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[6])) { /*if*/
+    variable[6] = variable[0];
+    variable[7] = NEW_String_string___String___with_native(BOX_NativeString("Error: Collection MUST have an iterate method"), TAG_Int(45)); /*new String*/
+    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[6], variable[7]) /*AbsSyntaxVisitor::error*/;
+    goto return_label41;
+  }
+  variable[7] = ((static_type___MMLocalProperty___signature_for_t)CALL( variable[5] /*prop*/,COLOR_static_type___MMLocalProperty___signature_for))( variable[5] /*prop*/,  variable[4] /*expr_type*/) /*MMLocalProperty::signature_for*/;
+  variable[7] = ((static_type___MMSignature___return_type_t)CALL(variable[7],COLOR_static_type___MMSignature___return_type))(variable[7]) /*MMSignature::return_type*/;
+  variable[6] = variable[7];
+  variable[8] = ((static_type___MMType___local_class_t)CALL( variable[6] /*iter_type*/,COLOR_static_type___MMType___local_class))( variable[6] /*iter_type*/) /*MMType::local_class*/;
+  if (once_bool_43) variable[9] = once_value_43;
+  else {
+    variable[9] = NEW_String_string___String___with_native(BOX_NativeString("item"), TAG_Int(4)); /*new String*/
+    variable[9] = ((symbol___String___to_symbol_t)CALL(variable[9],COLOR_symbol___String___to_symbol))(variable[9]) /*String::to_symbol*/;
+    once_value_43 = variable[9];
+    once_bool_43 = true;
+  }
+  variable[8] = ((abstractmetamodel___MMLocalClass___select_method_t)CALL(variable[8],COLOR_abstractmetamodel___MMLocalClass___select_method))(variable[8], variable[9]) /*MMLocalClass::select_method*/;
+  variable[7] = variable[8];
+  variable[8] = TAG_Bool(( variable[7] /*prop2*/ ==  NIT_NULL /*null*/) || (( variable[7] /*prop2*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[7] /*prop2*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[7] /*prop2*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[7] /*prop2*/,COLOR_kernel___Object_____eqeq))( variable[7] /*prop2*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[8])) { /*if*/
+    variable[8] = variable[0];
+    variable[9] = NEW_String_string___String___init(); /*new String*/
+    variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
+    variable[11] = variable[10];
+    ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[11]) /*String::append*/;
+    variable[12] =  variable[6] /*iter_type*/;
+    variable[12] = ((string___String___to_s_t)CALL(variable[12],COLOR_string___Object___to_s))(variable[12]) /*String::to_s*/;
+    ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[12]) /*String::append*/;
+    variable[13] = NEW_String_string___String___with_native(BOX_NativeString(" MUST have an item method"), TAG_Int(25)); /*new String*/
+    variable[14] = variable[13];
+    ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[14]) /*String::append*/;
+    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
+    goto return_label41;
+  }
+  variable[9] = ((static_type___MMLocalProperty___signature_for_t)CALL( variable[7] /*prop2*/,COLOR_static_type___MMLocalProperty___signature_for))( variable[7] /*prop2*/,  variable[6] /*iter_type*/) /*MMLocalProperty::signature_for*/;
+  variable[9] = ((static_type___MMSignature___return_type_t)CALL(variable[9],COLOR_static_type___MMSignature___return_type))(variable[9]) /*MMSignature::return_type*/;
+  variable[8] = variable[9];
+  variable[9] = variable[0];
+  variable[9] = ((parser_nodes___AForVardeclExpr___n_expr_t)CALL(variable[9],COLOR_parser_nodes___AForVardeclExpr___n_expr))(variable[9]) /*AForVardeclExpr::n_expr*/;
+  variable[9] = ((typing___PExpr___is_self_t)CALL(variable[9],COLOR_typing___PExpr___is_self))(variable[9]) /*PExpr::is_self*/;
+  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[9])))) { /*if*/
+    variable[9] = ((static_type___MMType___not_for_self_t)CALL( variable[8] /*t*/,COLOR_static_type___MMType___not_for_self))( variable[8] /*t*/) /*MMType::not_for_self*/;
+    variable[8] = variable[9] /*t=*/;
+  }
+  ((syntax_base___Variable___stype__eq_t)CALL( variable[3] /*va*/,COLOR_syntax_base___Variable___stype__eq))( variable[3] /*va*/,  variable[8] /*t*/) /*Variable::stype=*/;
+  return_label41: while(false);
   tracehead = trace.prev;
   return;
 }
-void typing___AVarAssignExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 433, LOCATE_typing___AVarAssignExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
+void typing___AAssertExpr___after_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 483, LOCATE_typing___AAssertExpr___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable2 = ((typing___TypingVisitor___variable_ctx_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable0 /*v*/) /*TypingVisitor::variable_ctx*/;
-  variable3 = ((syntax_base___AVarFormExpr___variable_t)CALL( self,COLOR_syntax_base___AVarFormExpr___variable))( self) /*AVarFormExpr::variable*/;
-  variable2 = ((typing___VariableContext___stype_t)CALL(variable2,COLOR_typing___VariableContext___stype))(variable2, variable3) /*VariableContext::stype*/;
-  variable1 = variable2;
-  variable2 = ((parser_nodes___AAssignFormExpr___n_value_t)CALL( self,COLOR_parser_nodes___AAssignFormExpr___n_value))( self) /*AAssignFormExpr::n_value*/;
-  variable2 = ((typing___PExpr___stype_t)CALL(variable2,COLOR_syntax_base___PExpr___stype))(variable2) /*PExpr::stype*/;
-  ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self, variable2,  variable1 /*t*/) /*AbsSyntaxVisitor::check_conform*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___AAssertExpr___n_expr_t)CALL(variable[3],COLOR_parser_nodes___AAssertExpr___n_expr))(variable[3]) /*AAssertExpr::n_expr*/;
+  variable[4] = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_bool*/;
+  ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/, variable[3], variable[4]) /*AbsSyntaxVisitor::check_conform_expr*/;
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___AAssertExpr___n_expr_t)CALL(variable[3],COLOR_parser_nodes___AAssertExpr___n_expr))(variable[3]) /*AAssertExpr::n_expr*/;
+  variable[3] = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable[3],COLOR_typing___PExpr___if_true_variable_ctx))(variable[3]) /*PExpr::if_true_variable_ctx*/;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = variable[0];
+    variable[3] = ((parser_nodes___AAssertExpr___n_expr_t)CALL(variable[3],COLOR_parser_nodes___AAssertExpr___n_expr))(variable[3]) /*AAssertExpr::n_expr*/;
+    variable[3] = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable[3],COLOR_typing___PExpr___if_true_variable_ctx))(variable[3]) /*PExpr::if_true_variable_ctx*/;
+    ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable[1] /*v*/, variable[3]) /*TypingVisitor::variable_ctx=*/;
+  }
+  return_label44: while(false);
+  tracehead = trace.prev;
+  return;
+}
+void typing___AVarExpr___after_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 493, LOCATE_typing___AVarExpr___after_typing};
+  val_t variable[6];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[4] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+  variable[5] = variable[0];
+  variable[5] = ((syntax_base___AVarFormExpr___variable_t)CALL(variable[5],COLOR_syntax_base___AVarFormExpr___variable))(variable[5]) /*AVarFormExpr::variable*/;
+  variable[4] = ((typing___VariableContext___stype_t)CALL(variable[4],COLOR_typing___VariableContext___stype))(variable[4], variable[5]) /*VariableContext::stype*/;
+  ATTR_typing___PExpr____stype(variable[3]) /*PExpr::_stype*/ = variable[4];
+  return_label45: while(false);
+  tracehead = trace.prev;
+  return;
+}
+val_t typing___AVarExpr___its_variable(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 491, LOCATE_typing___AVarExpr___its_variable};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((syntax_base___AVarFormExpr___variable_t)CALL(variable[2],COLOR_syntax_base___AVarFormExpr___variable))(variable[2]) /*AVarFormExpr::variable*/;
+  variable[1] = variable[2];
+  goto return_label46;
+  return_label46: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+void typing___AVarAssignExpr___after_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 500, LOCATE_typing___AVarAssignExpr___after_typing};
+  val_t variable[6];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+  variable[5] = variable[0];
+  variable[5] = ((syntax_base___AVarFormExpr___variable_t)CALL(variable[5],COLOR_syntax_base___AVarFormExpr___variable))(variable[5]) /*AVarFormExpr::variable*/;
+  variable[4] = ((typing___VariableContext___stype_t)CALL(variable[4],COLOR_typing___VariableContext___stype))(variable[4], variable[5]) /*VariableContext::stype*/;
+  variable[3] = variable[4];
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AAssignFormExpr___n_value_t)CALL(variable[4],COLOR_parser_nodes___AAssignFormExpr___n_value))(variable[4]) /*AAssignFormExpr::n_value*/;
+  ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/, variable[4],  variable[3] /*t*/) /*AbsSyntaxVisitor::check_conform_expr*/;
+  return_label47: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___AReassignFormExpr___do_lvalue_typing(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 441, LOCATE_typing___AReassignFormExpr___do_lvalue_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-    val_t variable5;
-    val_t variable6;
-    val_t variable7;
-    val_t variable8;
-    val_t variable9;
-    val_t variable10;
-    val_t variable11;
-    val_t variable12;
+  struct trace_t trace = {NULL, NULL, 508, LOCATE_typing___AReassignFormExpr___do_lvalue_typing};
+  val_t variable[16];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable2 = TAG_Bool(( variable1 /*type_lvalue*/ ==  NIT_NULL /*null*/) || (( variable1 /*type_lvalue*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable1 /*type_lvalue*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable1 /*type_lvalue*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable1 /*type_lvalue*/,COLOR_kernel___Object_____eqeq))( variable1 /*type_lvalue*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    goto return_label43;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[4] = TAG_Bool(( variable[2] /*type_lvalue*/ ==  NIT_NULL /*null*/) || (( variable[2] /*type_lvalue*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[2] /*type_lvalue*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*type_lvalue*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[2] /*type_lvalue*/,COLOR_kernel___Object_____eqeq))( variable[2] /*type_lvalue*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    goto return_label48;
   }
-  variable3 = ((parser_nodes___AReassignFormExpr___n_assign_op_t)CALL( self,COLOR_parser_nodes___AReassignFormExpr___n_assign_op))( self) /*AReassignFormExpr::n_assign_op*/;
-  variable3 = ((typing___PAssignOp___method_name_t)CALL(variable3,COLOR_typing___PAssignOp___method_name))(variable3) /*PAssignOp::method_name*/;
-  variable2 = variable3;
-  variable4 = ((static_type___MMType___local_class_t)CALL( variable1 /*type_lvalue*/,COLOR_static_type___MMType___local_class))( variable1 /*type_lvalue*/) /*MMType::local_class*/;
-  variable4 = ((abstractmetamodel___MMLocalClass___select_method_t)CALL(variable4,COLOR_abstractmetamodel___MMLocalClass___select_method))(variable4,  variable2 /*name*/) /*MMLocalClass::select_method*/;
-  variable3 = variable4;
-  variable4 = TAG_Bool(( variable3 /*prop*/ ==  NIT_NULL /*null*/) || (( variable3 /*prop*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable3 /*prop*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable3 /*prop*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable3 /*prop*/,COLOR_kernel___Object_____eqeq))( variable3 /*prop*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable4)) { /*if*/
-    variable4 = NEW_String_string___String___init(); /*new String*/
-    variable5 = NEW_String_string___String___with_native(BOX_NativeString("Error: Method '"), TAG_Int(15)); /*new String*/
-    variable6 = variable5;
-    ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable6) /*String::append*/;
-    variable7 =  variable2 /*name*/;
-    variable7 = ((string___String___to_s_t)CALL(variable7,COLOR_string___Object___to_s))(variable7) /*String::to_s*/;
-    ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable7) /*String::append*/;
-    variable8 = NEW_String_string___String___with_native(BOX_NativeString("' doesn't exists in "), TAG_Int(20)); /*new String*/
-    variable9 = variable8;
-    ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable9) /*String::append*/;
-    variable10 =  variable1 /*type_lvalue*/;
-    variable10 = ((string___String___to_s_t)CALL(variable10,COLOR_string___Object___to_s))(variable10) /*String::to_s*/;
-    ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable10) /*String::append*/;
-    variable11 = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-    variable12 = variable11;
-    ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable12) /*String::append*/;
-    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable4) /*AbsSyntaxVisitor::error*/;
-    goto return_label43;
+  variable[5] = variable[0];
+  variable[5] = ((parser_nodes___AReassignFormExpr___n_assign_op_t)CALL(variable[5],COLOR_parser_nodes___AReassignFormExpr___n_assign_op))(variable[5]) /*AReassignFormExpr::n_assign_op*/;
+  variable[5] = ((typing___PAssignOp___method_name_t)CALL(variable[5],COLOR_typing___PAssignOp___method_name))(variable[5]) /*PAssignOp::method_name*/;
+  variable[4] = variable[5];
+  variable[6] = ((static_type___MMType___local_class_t)CALL( variable[2] /*type_lvalue*/,COLOR_static_type___MMType___local_class))( variable[2] /*type_lvalue*/) /*MMType::local_class*/;
+  variable[6] = ((abstractmetamodel___MMLocalClass___select_method_t)CALL(variable[6],COLOR_abstractmetamodel___MMLocalClass___select_method))(variable[6],  variable[4] /*name*/) /*MMLocalClass::select_method*/;
+  variable[5] = variable[6];
+  variable[6] = TAG_Bool(( variable[5] /*prop*/ ==  NIT_NULL /*null*/) || (( variable[5] /*prop*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*prop*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*prop*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*prop*/,COLOR_kernel___Object_____eqeq))( variable[5] /*prop*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[6])) { /*if*/
+    variable[6] = variable[0];
+    variable[7] = NEW_String_string___String___init(); /*new String*/
+    variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Error: Method '"), TAG_Int(15)); /*new String*/
+    variable[9] = variable[8];
+    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[9]) /*String::append*/;
+    variable[10] =  variable[4] /*name*/;
+    variable[10] = ((string___String___to_s_t)CALL(variable[10],COLOR_string___Object___to_s))(variable[10]) /*String::to_s*/;
+    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[10]) /*String::append*/;
+    variable[11] = NEW_String_string___String___with_native(BOX_NativeString("' doesn't exists in "), TAG_Int(20)); /*new String*/
+    variable[12] = variable[11];
+    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[12]) /*String::append*/;
+    variable[13] =  variable[2] /*type_lvalue*/;
+    variable[13] = ((string___String___to_s_t)CALL(variable[13],COLOR_string___Object___to_s))(variable[13]) /*String::to_s*/;
+    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[13]) /*String::append*/;
+    variable[14] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
+    variable[15] = variable[14];
+    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[15]) /*String::append*/;
+    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[6], variable[7]) /*AbsSyntaxVisitor::error*/;
+    goto return_label48;
   }
-  variable4 = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable3 /*prop*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable3 /*prop*/) /*MMLocalProperty::global*/;
-  variable5 = ((syntax_base___AbsSyntaxVisitor___module_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___module))( variable0 /*v*/) /*AbsSyntaxVisitor::module*/;
-  ((syntax_base___MMGlobalProperty___check_visibility_t)CALL(variable4,COLOR_syntax_base___MMGlobalProperty___check_visibility))(variable4,  variable0 /*v*/,  self, variable5,  TAG_Bool(false)) /*MMGlobalProperty::check_visibility*/;
-  variable5 = ((static_type___MMLocalProperty___signature_for_t)CALL( variable3 /*prop*/,COLOR_static_type___MMLocalProperty___signature_for))( variable3 /*prop*/,  variable1 /*type_lvalue*/) /*MMLocalProperty::signature_for*/;
-  variable4 = variable5;
-  ATTR_typing___AReassignFormExpr____assign_method( self) /*AReassignFormExpr::_assign_method*/ =  variable3 /*prop*/;
-  variable5 = ((parser_nodes___AReassignFormExpr___n_value_t)CALL( self,COLOR_parser_nodes___AReassignFormExpr___n_value))( self) /*AReassignFormExpr::n_value*/;
-  variable6 = ((parser_nodes___AReassignFormExpr___n_value_t)CALL( self,COLOR_parser_nodes___AReassignFormExpr___n_value))( self) /*AReassignFormExpr::n_value*/;
-  variable6 = ((typing___PExpr___stype_t)CALL(variable6,COLOR_syntax_base___PExpr___stype))(variable6) /*PExpr::stype*/;
-  variable7 = ((static_type___MMSignature_____bra_t)CALL( variable4 /*psig*/,COLOR_static_type___MMSignature_____bra))( variable4 /*psig*/,  TAG_Int(0)) /*MMSignature::[]*/;
-  variable7 = ((static_type___MMType___not_for_self_t)CALL(variable7,COLOR_static_type___MMType___not_for_self))(variable7) /*MMType::not_for_self*/;
-  ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/, variable5, variable6, variable7) /*AbsSyntaxVisitor::check_conform*/;
-  variable5 = ((static_type___MMSignature___return_type_t)CALL( variable4 /*psig*/,COLOR_static_type___MMSignature___return_type))( variable4 /*psig*/) /*MMSignature::return_type*/;
-  variable5 = ((static_type___MMType___not_for_self_t)CALL(variable5,COLOR_static_type___MMType___not_for_self))(variable5) /*MMType::not_for_self*/;
-  variable6 = ((parser_nodes___AReassignFormExpr___n_value_t)CALL( self,COLOR_parser_nodes___AReassignFormExpr___n_value))( self) /*AReassignFormExpr::n_value*/;
-  variable6 = ((typing___PExpr___stype_t)CALL(variable6,COLOR_syntax_base___PExpr___stype))(variable6) /*PExpr::stype*/;
-  ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self, variable5, variable6) /*AbsSyntaxVisitor::check_conform*/;
-  return_label43: while(false);
+  variable[6] = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable[5] /*prop*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable[5] /*prop*/) /*MMLocalProperty::global*/;
+  variable[7] = variable[0];
+  variable[8] = ((syntax_base___AbsSyntaxVisitor___module_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___module))( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
+  ((syntax_base___MMGlobalProperty___check_visibility_t)CALL(variable[6],COLOR_syntax_base___MMGlobalProperty___check_visibility))(variable[6],  variable[1] /*v*/, variable[7], variable[8],  TAG_Bool(false)) /*MMGlobalProperty::check_visibility*/;
+  variable[7] = ((static_type___MMLocalProperty___signature_for_t)CALL( variable[5] /*prop*/,COLOR_static_type___MMLocalProperty___signature_for))( variable[5] /*prop*/,  variable[2] /*type_lvalue*/) /*MMLocalProperty::signature_for*/;
+  variable[6] = variable[7];
+  variable[7] = variable[0];
+  ATTR_typing___AReassignFormExpr____assign_method(variable[7]) /*AReassignFormExpr::_assign_method*/ =  variable[5] /*prop*/;
+  variable[7] = variable[0];
+  variable[7] = ((parser_nodes___AReassignFormExpr___n_value_t)CALL(variable[7],COLOR_parser_nodes___AReassignFormExpr___n_value))(variable[7]) /*AReassignFormExpr::n_value*/;
+  variable[8] = ((static_type___MMSignature_____bra_t)CALL( variable[6] /*psig*/,COLOR_static_type___MMSignature_____bra))( variable[6] /*psig*/,  TAG_Int(0)) /*MMSignature::[]*/;
+  variable[8] = ((static_type___MMType___not_for_self_t)CALL(variable[8],COLOR_static_type___MMType___not_for_self))(variable[8]) /*MMType::not_for_self*/;
+  ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/, variable[7], variable[8]) /*AbsSyntaxVisitor::check_conform_expr*/;
+  variable[7] = variable[0];
+  variable[8] = ((static_type___MMSignature___return_type_t)CALL( variable[6] /*psig*/,COLOR_static_type___MMSignature___return_type))( variable[6] /*psig*/) /*MMSignature::return_type*/;
+  variable[8] = ((static_type___MMType___not_for_self_t)CALL(variable[8],COLOR_static_type___MMType___not_for_self))(variable[8]) /*MMType::not_for_self*/;
+  variable[9] = variable[0];
+  variable[9] = ((parser_nodes___AReassignFormExpr___n_value_t)CALL(variable[9],COLOR_parser_nodes___AReassignFormExpr___n_value))(variable[9]) /*AReassignFormExpr::n_value*/;
+  variable[9] = ((typing___PExpr___stype_t)CALL(variable[9],COLOR_syntax_base___PExpr___stype))(variable[9]) /*PExpr::stype*/;
+  ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable[1] /*v*/, variable[7], variable[8], variable[9]) /*AbsSyntaxVisitor::check_conform*/;
+  return_label48: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t typing___AReassignFormExpr___assign_method(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 460, LOCATE_typing___AReassignFormExpr___assign_method};
+  struct trace_t trace = {NULL, NULL, 527, LOCATE_typing___AReassignFormExpr___assign_method};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   tracehead = trace.prev;
   return ATTR_typing___AReassignFormExpr____assign_method( self) /*AReassignFormExpr::_assign_method*/;
 }
 void typing___AVarReassignExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 465, LOCATE_typing___AVarReassignExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
+  struct trace_t trace = {NULL, NULL, 532, LOCATE_typing___AVarReassignExpr___after_typing};
+  val_t variable[6];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable2 = ((typing___TypingVisitor___variable_ctx_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable0 /*v*/) /*TypingVisitor::variable_ctx*/;
-  variable3 = ((syntax_base___AVarFormExpr___variable_t)CALL( self,COLOR_syntax_base___AVarFormExpr___variable))( self) /*AVarFormExpr::variable*/;
-  variable2 = ((typing___VariableContext___stype_t)CALL(variable2,COLOR_typing___VariableContext___stype))(variable2, variable3) /*VariableContext::stype*/;
-  variable1 = variable2;
-  ((typing___AReassignFormExpr___do_lvalue_typing_t)CALL( self,COLOR_typing___AReassignFormExpr___do_lvalue_typing))( self,  variable0 /*v*/,  variable1 /*t*/) /*AReassignFormExpr::do_lvalue_typing*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+  variable[5] = variable[0];
+  variable[5] = ((syntax_base___AVarFormExpr___variable_t)CALL(variable[5],COLOR_syntax_base___AVarFormExpr___variable))(variable[5]) /*AVarFormExpr::variable*/;
+  variable[4] = ((typing___VariableContext___stype_t)CALL(variable[4],COLOR_typing___VariableContext___stype))(variable[4], variable[5]) /*VariableContext::stype*/;
+  variable[3] = variable[4];
+  variable[4] = variable[0];
+  ((typing___AReassignFormExpr___do_lvalue_typing_t)CALL(variable[4],COLOR_typing___AReassignFormExpr___do_lvalue_typing))(variable[4],  variable[1] /*v*/,  variable[3] /*t*/) /*AReassignFormExpr::do_lvalue_typing*/;
+  return_label49: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t typing___PAssignOp___method_name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 473, LOCATE_typing___PAssignOp___method_name};
+  struct trace_t trace = {NULL, NULL, 540, LOCATE_typing___PAssignOp___method_name};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___AVarReassignExpr___after_typing, LOCATE_typing, 473);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_typing, 540);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t typing___APlusAssignOp___method_name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 476, LOCATE_typing___APlusAssignOp___method_name};
-  val_t variable0;
-  static val_t once_value_variable0_46; static int once_bool_variable0_46;
+  struct trace_t trace = {NULL, NULL, 543, LOCATE_typing___APlusAssignOp___method_name};
+  static val_t once_value_51; static int once_bool_51; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  if (once_bool_variable0_46) variable0 = once_value_variable0_46;
+  variable[0] =  self;
+  if (once_bool_51) variable[2] = once_value_51;
   else {
-    variable0 = NEW_String_string___String___with_native(BOX_NativeString("+"), TAG_Int(1)); /*new String*/
-    variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-    once_value_variable0_46 = variable0;
-    once_bool_variable0_46 = true;
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("+"), TAG_Int(1)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_51 = variable[2];
+    once_bool_51 = true;
   }
-  goto return_label45;
-  return_label45: while(false);
+  variable[1] = variable[2];
+  goto return_label50;
+  return_label50: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t typing___AMinusAssignOp___method_name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 479, LOCATE_typing___AMinusAssignOp___method_name};
-  val_t variable0;
-  static val_t once_value_variable0_48; static int once_bool_variable0_48;
+  struct trace_t trace = {NULL, NULL, 546, LOCATE_typing___AMinusAssignOp___method_name};
+  static val_t once_value_53; static int once_bool_53; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  if (once_bool_variable0_48) variable0 = once_value_variable0_48;
+  variable[0] =  self;
+  if (once_bool_53) variable[2] = once_value_53;
   else {
-    variable0 = NEW_String_string___String___with_native(BOX_NativeString("-"), TAG_Int(1)); /*new String*/
-    variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-    once_value_variable0_48 = variable0;
-    once_bool_variable0_48 = true;
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("-"), TAG_Int(1)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_53 = variable[2];
+    once_bool_53 = true;
   }
-  goto return_label47;
-  return_label47: while(false);
+  variable[1] = variable[2];
+  goto return_label52;
+  return_label52: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 void typing___ASelfExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 483, LOCATE_typing___ASelfExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 552, LOCATE_typing___ASelfExpr___after_typing};
+  val_t variable[6];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((typing___TypingVisitor___self_type_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___self_type))( variable0 /*v*/) /*TypingVisitor::self_type*/;
-  variable1 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable1)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___ASelfExpr___after_typing, LOCATE_typing, 485); nit_exit(1);}
-  variable1 = ((typing___TypingVisitor___self_type_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___self_type))( variable0 /*v*/) /*TypingVisitor::self_type*/;
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ = variable1;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[4] = ((typing___TypingVisitor___self_var_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___self_var))( variable[1] /*v*/) /*TypingVisitor::self_var*/;
+  ((syntax_base___ASelfExpr___variable__eq_t)CALL(variable[3],COLOR_syntax_base___ASelfExpr___variable__eq))(variable[3], variable[4]) /*ASelfExpr::variable=*/;
+  variable[3] = variable[0];
+  variable[4] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+  variable[5] = variable[0];
+  variable[5] = ((syntax_base___ASelfExpr___variable_t)CALL(variable[5],COLOR_syntax_base___ASelfExpr___variable))(variable[5]) /*ASelfExpr::variable*/;
+  variable[4] = ((typing___VariableContext___stype_t)CALL(variable[4],COLOR_typing___VariableContext___stype))(variable[4], variable[5]) /*VariableContext::stype*/;
+  ATTR_typing___PExpr____stype(variable[3]) /*PExpr::_stype*/ = variable[4];
+  return_label54: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t typing___ASelfExpr___is_self(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 489, LOCATE_typing___ASelfExpr___is_self};
-  val_t variable0;
+  struct trace_t trace = {NULL, NULL, 558, LOCATE_typing___ASelfExpr___is_self};
+  val_t variable[2];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  TAG_Bool(true);
-  goto return_label50;
-  return_label50: while(false);
+  variable[0] =  self;
+  variable[1] =  TAG_Bool(true);
+  goto return_label55;
+  return_label55: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
+}
+val_t typing___ASelfExpr___its_variable(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 550, LOCATE_typing___ASelfExpr___its_variable};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((syntax_base___ASelfExpr___variable_t)CALL(variable[2],COLOR_syntax_base___ASelfExpr___variable))(variable[2]) /*ASelfExpr::variable*/;
+  variable[1] = variable[2];
+  goto return_label56;
+  return_label56: while(false);
+  tracehead = trace.prev;
+  return variable[1];
 }
 val_t typing___AImplicitSelfExpr___is_implicit_self(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 493, LOCATE_typing___AImplicitSelfExpr___is_implicit_self};
-  val_t variable0;
+  struct trace_t trace = {NULL, NULL, 562, LOCATE_typing___AImplicitSelfExpr___is_implicit_self};
+  val_t variable[2];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  TAG_Bool(true);
-  goto return_label51;
-  return_label51: while(false);
+  variable[0] =  self;
+  variable[1] =  TAG_Bool(true);
+  goto return_label57;
+  return_label57: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 void typing___AIfexprExpr___accept_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 497, LOCATE_typing___AIfexprExpr___accept_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-      val_t variable5;
-      val_t variable6;
-      val_t variable7;
-      val_t variable8;
-      val_t variable9;
-      val_t variable10;
-      val_t variable11;
-      val_t variable12;
+  struct trace_t trace = {NULL, NULL, 566, LOCATE_typing___AIfexprExpr___accept_typing};
+  val_t variable[16];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable2 = ((typing___TypingVisitor___variable_ctx_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable0 /*v*/) /*TypingVisitor::variable_ctx*/;
-  variable1 = variable2;
-  variable2 = ((parser_nodes___AIfexprExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AIfexprExpr___n_expr))( self) /*AIfexprExpr::n_expr*/;
-  ((typing___TypingVisitor___visit_t)CALL( variable0 /*v*/,COLOR_parser_prod___Visitor___visit))( variable0 /*v*/, variable2) /*TypingVisitor::visit*/;
-  variable2 = ((parser_nodes___AIfexprExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AIfexprExpr___n_expr))( self) /*AIfexprExpr::n_expr*/;
-  variable2 = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable2,COLOR_typing___PExpr___if_true_variable_ctx))(variable2) /*PExpr::if_true_variable_ctx*/;
-  variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable2 ==  NIT_NULL /*null*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = ((parser_nodes___AIfexprExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AIfexprExpr___n_expr))( self) /*AIfexprExpr::n_expr*/;
-    variable2 = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable2,COLOR_typing___PExpr___if_true_variable_ctx))(variable2) /*PExpr::if_true_variable_ctx*/;
-    ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable0 /*v*/, variable2) /*TypingVisitor::variable_ctx=*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+  variable[3] = variable[4];
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AIfexprExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AIfexprExpr___n_expr))(variable[4]) /*AIfexprExpr::n_expr*/;
+  ((typing___TypingVisitor___visit_t)CALL( variable[1] /*v*/,COLOR_parser_prod___Visitor___visit))( variable[1] /*v*/, variable[4]) /*TypingVisitor::visit*/;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AIfexprExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AIfexprExpr___n_expr))(variable[4]) /*AIfexprExpr::n_expr*/;
+  variable[4] = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable[4],COLOR_typing___PExpr___if_true_variable_ctx))(variable[4]) /*PExpr::if_true_variable_ctx*/;
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = variable[0];
+    variable[4] = ((parser_nodes___AIfexprExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AIfexprExpr___n_expr))(variable[4]) /*AIfexprExpr::n_expr*/;
+    variable[4] = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable[4],COLOR_typing___PExpr___if_true_variable_ctx))(variable[4]) /*PExpr::if_true_variable_ctx*/;
+    ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable[1] /*v*/, variable[4]) /*TypingVisitor::variable_ctx=*/;
   }
-  variable2 = ((parser_nodes___AIfexprExpr___n_then_t)CALL( self,COLOR_parser_nodes___AIfexprExpr___n_then))( self) /*AIfexprExpr::n_then*/;
-  ((typing___TypingVisitor___visit_t)CALL( variable0 /*v*/,COLOR_parser_prod___Visitor___visit))( variable0 /*v*/, variable2) /*TypingVisitor::visit*/;
-  ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable0 /*v*/,  variable1 /*old_var_ctx*/) /*TypingVisitor::variable_ctx=*/;
-  variable2 = ((parser_nodes___AIfexprExpr___n_else_t)CALL( self,COLOR_parser_nodes___AIfexprExpr___n_else))( self) /*AIfexprExpr::n_else*/;
-  ((typing___TypingVisitor___visit_t)CALL( variable0 /*v*/,COLOR_parser_prod___Visitor___visit))( variable0 /*v*/, variable2) /*TypingVisitor::visit*/;
-  variable2 = ((parser_nodes___AIfexprExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AIfexprExpr___n_expr))( self) /*AIfexprExpr::n_expr*/;
-  variable2 = ((typing___PExpr___stype_t)CALL(variable2,COLOR_syntax_base___PExpr___stype))(variable2) /*PExpr::stype*/;
-  variable3 = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable0 /*v*/) /*AbsSyntaxVisitor::type_bool*/;
-  ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self, variable2, variable3) /*AbsSyntaxVisitor::check_conform*/;
-  variable3 = ((parser_nodes___AIfexprExpr___n_then_t)CALL( self,COLOR_parser_nodes___AIfexprExpr___n_then))( self) /*AIfexprExpr::n_then*/;
-  variable3 = ((typing___PExpr___stype_t)CALL(variable3,COLOR_syntax_base___PExpr___stype))(variable3) /*PExpr::stype*/;
-  variable2 = variable3;
-  variable4 = ((parser_nodes___AIfexprExpr___n_else_t)CALL( self,COLOR_parser_nodes___AIfexprExpr___n_else))( self) /*AIfexprExpr::n_else*/;
-  variable4 = ((typing___PExpr___stype_t)CALL(variable4,COLOR_syntax_base___PExpr___stype))(variable4) /*PExpr::stype*/;
-  variable3 = variable4;
-  variable4 = ((static_type___MMType_____l_t)CALL( variable2 /*t*/,COLOR_static_type___MMType_____l))( variable2 /*t*/,  variable3 /*te*/) /*MMType::<*/;
-  if (UNTAG_Bool(variable4)) { /*if*/
-    variable2 =  variable3 /*te*/ /*t=*/;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AIfexprExpr___n_then_t)CALL(variable[4],COLOR_parser_nodes___AIfexprExpr___n_then))(variable[4]) /*AIfexprExpr::n_then*/;
+  ((typing___TypingVisitor___visit_t)CALL( variable[1] /*v*/,COLOR_parser_prod___Visitor___visit))( variable[1] /*v*/, variable[4]) /*TypingVisitor::visit*/;
+  ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable[1] /*v*/,  variable[3] /*old_var_ctx*/) /*TypingVisitor::variable_ctx=*/;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AIfexprExpr___n_else_t)CALL(variable[4],COLOR_parser_nodes___AIfexprExpr___n_else))(variable[4]) /*AIfexprExpr::n_else*/;
+  ((typing___TypingVisitor___visit_t)CALL( variable[1] /*v*/,COLOR_parser_prod___Visitor___visit))( variable[1] /*v*/, variable[4]) /*TypingVisitor::visit*/;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AIfexprExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AIfexprExpr___n_expr))(variable[4]) /*AIfexprExpr::n_expr*/;
+  variable[5] = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_bool*/;
+  ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::check_conform_expr*/;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AIfexprExpr___n_then_t)CALL(variable[4],COLOR_parser_nodes___AIfexprExpr___n_then))(variable[4]) /*AIfexprExpr::n_then*/;
+  variable[4] = ((syntax_base___AbsSyntaxVisitor___check_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_expr))( variable[1] /*v*/, variable[4]) /*AbsSyntaxVisitor::check_expr*/;
+  variable[4] =  TAG_Bool(!UNTAG_Bool(variable[4]));
+  if (!UNTAG_Bool(variable[4])) { /* or */
+    variable[4] = variable[0];
+    variable[4] = ((parser_nodes___AIfexprExpr___n_else_t)CALL(variable[4],COLOR_parser_nodes___AIfexprExpr___n_else))(variable[4]) /*AIfexprExpr::n_else*/;
+    variable[4] = ((syntax_base___AbsSyntaxVisitor___check_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_expr))( variable[1] /*v*/, variable[4]) /*AbsSyntaxVisitor::check_expr*/;
+    variable[4] =  TAG_Bool(!UNTAG_Bool(variable[4]));
+  }
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    goto return_label58;
+  }
+  variable[5] = variable[0];
+  variable[5] = ((parser_nodes___AIfexprExpr___n_then_t)CALL(variable[5],COLOR_parser_nodes___AIfexprExpr___n_then))(variable[5]) /*AIfexprExpr::n_then*/;
+  variable[5] = ((typing___PExpr___stype_t)CALL(variable[5],COLOR_syntax_base___PExpr___stype))(variable[5]) /*PExpr::stype*/;
+  variable[4] = variable[5];
+  variable[6] = variable[0];
+  variable[6] = ((parser_nodes___AIfexprExpr___n_else_t)CALL(variable[6],COLOR_parser_nodes___AIfexprExpr___n_else))(variable[6]) /*AIfexprExpr::n_else*/;
+  variable[6] = ((typing___PExpr___stype_t)CALL(variable[6],COLOR_syntax_base___PExpr___stype))(variable[6]) /*PExpr::stype*/;
+  variable[5] = variable[6];
+  variable[6] = ((static_type___MMType_____l_t)CALL( variable[4] /*t*/,COLOR_static_type___MMType_____l))( variable[4] /*t*/,  variable[5] /*te*/) /*MMType::<*/;
+  if (UNTAG_Bool(variable[6])) { /*if*/
+    variable[4] =  variable[5] /*te*/ /*t=*/;
   } else { /*if*/
-    variable4 = ((static_type___MMType_____l_t)CALL( variable3 /*te*/,COLOR_static_type___MMType_____l))( variable3 /*te*/,  variable2 /*t*/) /*MMType::<*/;
-    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable4)))) { /*if*/
-      variable4 = NEW_String_string___String___init(); /*new String*/
-      variable5 = NEW_String_string___String___with_native(BOX_NativeString("Type error: "), TAG_Int(12)); /*new String*/
-      variable6 = variable5;
-      ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable6) /*String::append*/;
-      variable7 =  variable3 /*te*/;
-      variable7 = ((string___String___to_s_t)CALL(variable7,COLOR_string___Object___to_s))(variable7) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable7) /*String::append*/;
-      variable8 = NEW_String_string___String___with_native(BOX_NativeString(" is not a subtype of "), TAG_Int(21)); /*new String*/
-      variable9 = variable8;
-      ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable9) /*String::append*/;
-      variable10 =  variable2 /*t*/;
-      variable10 = ((string___String___to_s_t)CALL(variable10,COLOR_string___Object___to_s))(variable10) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable10) /*String::append*/;
-      variable11 = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-      variable12 = variable11;
-      ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable12) /*String::append*/;
-      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable4) /*AbsSyntaxVisitor::error*/;
-      goto return_label52;
+    variable[6] = ((static_type___MMType_____l_t)CALL( variable[5] /*te*/,COLOR_static_type___MMType_____l))( variable[5] /*te*/,  variable[4] /*t*/) /*MMType::<*/;
+    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[6])))) { /*if*/
+      variable[6] = variable[0];
+      variable[7] = NEW_String_string___String___init(); /*new String*/
+      variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Type error: "), TAG_Int(12)); /*new String*/
+      variable[9] = variable[8];
+      ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[9]) /*String::append*/;
+      variable[10] =  variable[5] /*te*/;
+      variable[10] = ((string___String___to_s_t)CALL(variable[10],COLOR_string___Object___to_s))(variable[10]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[10]) /*String::append*/;
+      variable[11] = NEW_String_string___String___with_native(BOX_NativeString(" is not a subtype of "), TAG_Int(21)); /*new String*/
+      variable[12] = variable[11];
+      ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[12]) /*String::append*/;
+      variable[13] =  variable[4] /*t*/;
+      variable[13] = ((string___String___to_s_t)CALL(variable[13],COLOR_string___Object___to_s))(variable[13]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[13]) /*String::append*/;
+      variable[14] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
+      variable[15] = variable[14];
+      ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[15]) /*String::append*/;
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[6], variable[7]) /*AbsSyntaxVisitor::error*/;
+      goto return_label58;
     }
   }
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ =  variable2 /*t*/;
-  return_label52: while(false);
+  variable[6] = variable[0];
+  ATTR_typing___PExpr____stype(variable[6]) /*PExpr::_stype*/ =  variable[4] /*t*/;
+  return_label58: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___ABoolExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 523, LOCATE_typing___ABoolExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 594, LOCATE_typing___ABoolExpr___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable0 /*v*/) /*AbsSyntaxVisitor::type_bool*/;
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ = variable1;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[4] = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_bool*/;
+  ATTR_typing___PExpr____stype(variable[3]) /*PExpr::_stype*/ = variable[4];
+  return_label59: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___AOrExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 530, LOCATE_typing___AOrExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  struct trace_t trace = {NULL, NULL, 601, LOCATE_typing___AOrExpr___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((parser_nodes___AOrExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AOrExpr___n_expr))( self) /*AOrExpr::n_expr*/;
-  variable1 = ((typing___PExpr___stype_t)CALL(variable1,COLOR_syntax_base___PExpr___stype))(variable1) /*PExpr::stype*/;
-  variable2 = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable0 /*v*/) /*AbsSyntaxVisitor::type_bool*/;
-  ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self, variable1, variable2) /*AbsSyntaxVisitor::check_conform*/;
-  variable1 = ((parser_nodes___AOrExpr___n_expr2_t)CALL( self,COLOR_parser_nodes___AOrExpr___n_expr2))( self) /*AOrExpr::n_expr2*/;
-  variable1 = ((typing___PExpr___stype_t)CALL(variable1,COLOR_syntax_base___PExpr___stype))(variable1) /*PExpr::stype*/;
-  variable2 = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable0 /*v*/) /*AbsSyntaxVisitor::type_bool*/;
-  ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self, variable1, variable2) /*AbsSyntaxVisitor::check_conform*/;
-  variable1 = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable0 /*v*/) /*AbsSyntaxVisitor::type_bool*/;
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ = variable1;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___AOrExpr___n_expr_t)CALL(variable[3],COLOR_parser_nodes___AOrExpr___n_expr))(variable[3]) /*AOrExpr::n_expr*/;
+  variable[4] = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_bool*/;
+  ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/, variable[3], variable[4]) /*AbsSyntaxVisitor::check_conform_expr*/;
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___AOrExpr___n_expr2_t)CALL(variable[3],COLOR_parser_nodes___AOrExpr___n_expr2))(variable[3]) /*AOrExpr::n_expr2*/;
+  variable[4] = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_bool*/;
+  ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/, variable[3], variable[4]) /*AbsSyntaxVisitor::check_conform_expr*/;
+  variable[3] = variable[0];
+  variable[4] = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_bool*/;
+  ATTR_typing___PExpr____stype(variable[3]) /*PExpr::_stype*/ = variable[4];
+  return_label60: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___AAndExpr___accept_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 539, LOCATE_typing___AAndExpr___accept_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
+  struct trace_t trace = {NULL, NULL, 610, LOCATE_typing___AAndExpr___accept_typing};
+  val_t variable[6];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable2 = ((typing___TypingVisitor___variable_ctx_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable0 /*v*/) /*TypingVisitor::variable_ctx*/;
-  variable1 = variable2;
-  variable2 = ((parser_nodes___AAndExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AAndExpr___n_expr))( self) /*AAndExpr::n_expr*/;
-  ((typing___TypingVisitor___visit_t)CALL( variable0 /*v*/,COLOR_parser_prod___Visitor___visit))( variable0 /*v*/, variable2) /*TypingVisitor::visit*/;
-  variable2 = ((parser_nodes___AAndExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AAndExpr___n_expr))( self) /*AAndExpr::n_expr*/;
-  variable2 = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable2,COLOR_typing___PExpr___if_true_variable_ctx))(variable2) /*PExpr::if_true_variable_ctx*/;
-  variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable2 ==  NIT_NULL /*null*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = ((parser_nodes___AAndExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AAndExpr___n_expr))( self) /*AAndExpr::n_expr*/;
-    variable2 = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable2,COLOR_typing___PExpr___if_true_variable_ctx))(variable2) /*PExpr::if_true_variable_ctx*/;
-    ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable0 /*v*/, variable2) /*TypingVisitor::variable_ctx=*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+  variable[3] = variable[4];
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AAndExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AAndExpr___n_expr))(variable[4]) /*AAndExpr::n_expr*/;
+  ((typing___TypingVisitor___visit_t)CALL( variable[1] /*v*/,COLOR_parser_prod___Visitor___visit))( variable[1] /*v*/, variable[4]) /*TypingVisitor::visit*/;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AAndExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AAndExpr___n_expr))(variable[4]) /*AAndExpr::n_expr*/;
+  variable[4] = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable[4],COLOR_typing___PExpr___if_true_variable_ctx))(variable[4]) /*PExpr::if_true_variable_ctx*/;
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = variable[0];
+    variable[4] = ((parser_nodes___AAndExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AAndExpr___n_expr))(variable[4]) /*AAndExpr::n_expr*/;
+    variable[4] = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable[4],COLOR_typing___PExpr___if_true_variable_ctx))(variable[4]) /*PExpr::if_true_variable_ctx*/;
+    ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable[1] /*v*/, variable[4]) /*TypingVisitor::variable_ctx=*/;
   }
-  variable2 = ((parser_nodes___AAndExpr___n_expr2_t)CALL( self,COLOR_parser_nodes___AAndExpr___n_expr2))( self) /*AAndExpr::n_expr2*/;
-  ((typing___TypingVisitor___visit_t)CALL( variable0 /*v*/,COLOR_parser_prod___Visitor___visit))( variable0 /*v*/, variable2) /*TypingVisitor::visit*/;
-  variable2 = ((parser_nodes___AAndExpr___n_expr2_t)CALL( self,COLOR_parser_nodes___AAndExpr___n_expr2))( self) /*AAndExpr::n_expr2*/;
-  variable2 = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable2,COLOR_typing___PExpr___if_true_variable_ctx))(variable2) /*PExpr::if_true_variable_ctx*/;
-  variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable2 ==  NIT_NULL /*null*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = ((parser_nodes___AAndExpr___n_expr2_t)CALL( self,COLOR_parser_nodes___AAndExpr___n_expr2))( self) /*AAndExpr::n_expr2*/;
-    variable2 = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable2,COLOR_typing___PExpr___if_true_variable_ctx))(variable2) /*PExpr::if_true_variable_ctx*/;
-    ATTR_typing___PExpr____if_true_variable_ctx( self) /*PExpr::_if_true_variable_ctx*/ = variable2;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AAndExpr___n_expr2_t)CALL(variable[4],COLOR_parser_nodes___AAndExpr___n_expr2))(variable[4]) /*AAndExpr::n_expr2*/;
+  ((typing___TypingVisitor___visit_t)CALL( variable[1] /*v*/,COLOR_parser_prod___Visitor___visit))( variable[1] /*v*/, variable[4]) /*TypingVisitor::visit*/;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AAndExpr___n_expr2_t)CALL(variable[4],COLOR_parser_nodes___AAndExpr___n_expr2))(variable[4]) /*AAndExpr::n_expr2*/;
+  variable[4] = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable[4],COLOR_typing___PExpr___if_true_variable_ctx))(variable[4]) /*PExpr::if_true_variable_ctx*/;
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = variable[0];
+    variable[5] = variable[0];
+    variable[5] = ((parser_nodes___AAndExpr___n_expr2_t)CALL(variable[5],COLOR_parser_nodes___AAndExpr___n_expr2))(variable[5]) /*AAndExpr::n_expr2*/;
+    variable[5] = ((typing___PExpr___if_true_variable_ctx_t)CALL(variable[5],COLOR_typing___PExpr___if_true_variable_ctx))(variable[5]) /*PExpr::if_true_variable_ctx*/;
+    ATTR_typing___PExpr____if_true_variable_ctx(variable[4]) /*PExpr::_if_true_variable_ctx*/ = variable[5];
   } else { /*if*/
-    variable2 = ((typing___TypingVisitor___variable_ctx_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable0 /*v*/) /*TypingVisitor::variable_ctx*/;
-    ATTR_typing___PExpr____if_true_variable_ctx( self) /*PExpr::_if_true_variable_ctx*/ = variable2;
+    variable[4] = variable[0];
+    variable[5] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+    ATTR_typing___PExpr____if_true_variable_ctx(variable[4]) /*PExpr::_if_true_variable_ctx*/ = variable[5];
   }
-  ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable0 /*v*/,  variable1 /*old_var_ctx*/) /*TypingVisitor::variable_ctx=*/;
-  variable2 = ((parser_nodes___AAndExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AAndExpr___n_expr))( self) /*AAndExpr::n_expr*/;
-  variable2 = ((typing___PExpr___stype_t)CALL(variable2,COLOR_syntax_base___PExpr___stype))(variable2) /*PExpr::stype*/;
-  variable3 = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable0 /*v*/) /*AbsSyntaxVisitor::type_bool*/;
-  ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self, variable2, variable3) /*AbsSyntaxVisitor::check_conform*/;
-  variable2 = ((parser_nodes___AAndExpr___n_expr2_t)CALL( self,COLOR_parser_nodes___AAndExpr___n_expr2))( self) /*AAndExpr::n_expr2*/;
-  variable2 = ((typing___PExpr___stype_t)CALL(variable2,COLOR_syntax_base___PExpr___stype))(variable2) /*PExpr::stype*/;
-  variable3 = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable0 /*v*/) /*AbsSyntaxVisitor::type_bool*/;
-  ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self, variable2, variable3) /*AbsSyntaxVisitor::check_conform*/;
-  variable2 = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable0 /*v*/) /*AbsSyntaxVisitor::type_bool*/;
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ = variable2;
+  ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable[1] /*v*/,  variable[3] /*old_var_ctx*/) /*TypingVisitor::variable_ctx=*/;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AAndExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AAndExpr___n_expr))(variable[4]) /*AAndExpr::n_expr*/;
+  variable[5] = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_bool*/;
+  ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::check_conform_expr*/;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AAndExpr___n_expr2_t)CALL(variable[4],COLOR_parser_nodes___AAndExpr___n_expr2))(variable[4]) /*AAndExpr::n_expr2*/;
+  variable[5] = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_bool*/;
+  ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::check_conform_expr*/;
+  variable[4] = variable[0];
+  variable[5] = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_bool*/;
+  ATTR_typing___PExpr____stype(variable[4]) /*PExpr::_stype*/ = variable[5];
+  return_label61: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___ANotExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 562, LOCATE_typing___ANotExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  struct trace_t trace = {NULL, NULL, 633, LOCATE_typing___ANotExpr___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((parser_nodes___ANotExpr___n_expr_t)CALL( self,COLOR_parser_nodes___ANotExpr___n_expr))( self) /*ANotExpr::n_expr*/;
-  variable1 = ((typing___PExpr___stype_t)CALL(variable1,COLOR_syntax_base___PExpr___stype))(variable1) /*PExpr::stype*/;
-  variable2 = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable0 /*v*/) /*AbsSyntaxVisitor::type_bool*/;
-  ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self, variable1, variable2) /*AbsSyntaxVisitor::check_conform*/;
-  variable1 = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable0 /*v*/) /*AbsSyntaxVisitor::type_bool*/;
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ = variable1;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___ANotExpr___n_expr_t)CALL(variable[3],COLOR_parser_nodes___ANotExpr___n_expr))(variable[3]) /*ANotExpr::n_expr*/;
+  variable[4] = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_bool*/;
+  ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/, variable[3], variable[4]) /*AbsSyntaxVisitor::check_conform_expr*/;
+  variable[3] = variable[0];
+  variable[4] = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_bool*/;
+  ATTR_typing___PExpr____stype(variable[3]) /*PExpr::_stype*/ = variable[4];
+  return_label62: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___AIntExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 570, LOCATE_typing___AIntExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 641, LOCATE_typing___AIntExpr___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((syntax_base___AbsSyntaxVisitor___type_int_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_int))( variable0 /*v*/) /*AbsSyntaxVisitor::type_int*/;
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ = variable1;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[4] = ((syntax_base___AbsSyntaxVisitor___type_int_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_int))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_int*/;
+  ATTR_typing___PExpr____stype(variable[3]) /*PExpr::_stype*/ = variable[4];
+  return_label63: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___AFloatExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 578, LOCATE_typing___AFloatExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 649, LOCATE_typing___AFloatExpr___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((syntax_base___AbsSyntaxVisitor___type_float_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_float))( variable0 /*v*/) /*AbsSyntaxVisitor::type_float*/;
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ = variable1;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[4] = ((syntax_base___AbsSyntaxVisitor___type_float_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_float))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_float*/;
+  ATTR_typing___PExpr____stype(variable[3]) /*PExpr::_stype*/ = variable[4];
+  return_label64: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___ACharExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 585, LOCATE_typing___ACharExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 656, LOCATE_typing___ACharExpr___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((syntax_base___AbsSyntaxVisitor___type_char_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_char))( variable0 /*v*/) /*AbsSyntaxVisitor::type_char*/;
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ = variable1;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[4] = ((syntax_base___AbsSyntaxVisitor___type_char_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_char))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_char*/;
+  ATTR_typing___PExpr____stype(variable[3]) /*PExpr::_stype*/ = variable[4];
+  return_label65: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___AStringFormExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 592, LOCATE_typing___AStringFormExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 663, LOCATE_typing___AStringFormExpr___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((syntax_base___AbsSyntaxVisitor___type_string_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_string))( variable0 /*v*/) /*AbsSyntaxVisitor::type_string*/;
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ = variable1;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[4] = ((syntax_base___AbsSyntaxVisitor___type_string_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_string))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_string*/;
+  ATTR_typing___PExpr____stype(variable[3]) /*PExpr::_stype*/ = variable[4];
+  return_label66: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___ASuperstringExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 599, LOCATE_typing___ASuperstringExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 670, LOCATE_typing___ASuperstringExpr___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((syntax_base___AbsSyntaxVisitor___type_string_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_string))( variable0 /*v*/) /*AbsSyntaxVisitor::type_string*/;
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ = variable1;
-  tracehead = trace.prev;
-  return;
-}
-void typing___ANullExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 606, LOCATE_typing___ANullExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((syntax_base___AbsSyntaxVisitor___type_none_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_none))( variable0 /*v*/) /*AbsSyntaxVisitor::type_none*/;
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ = variable1;
-  tracehead = trace.prev;
-  return;
-}
-void typing___AArrayExpr___stype__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 613, LOCATE_typing___AArrayExpr___stype__eq};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 =  param0;
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ =  variable0 /*t*/;
-  tracehead = trace.prev;
-  return;
-}
-void typing___AArrayExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 615, LOCATE_typing___AArrayExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-    val_t variable3;
-    val_t variable4;
-    val_t variable5;
-    val_t variable6;
-      val_t variable7;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 =  NIT_NULL /*null*/;
-  variable2 = ((parser_nodes___AArrayExpr___n_exprs_t)CALL( self,COLOR_parser_nodes___AArrayExpr___n_exprs))( self) /*AArrayExpr::n_exprs*/;
-  variable2 = ((list___List___iterator_t)CALL(variable2,COLOR_abstract_collection___Collection___iterator))(variable2) /*List::iterator*/;
-  while (true) { /*for*/
-    variable3 = ((list___ListIterator___is_ok_t)CALL(variable2,COLOR_abstract_collection___Iterator___is_ok))(variable2) /*ListIterator::is_ok*/;
-    if (!UNTAG_Bool(variable3)) break; /*for*/
-    variable3 = ((list___ListIterator___item_t)CALL(variable2,COLOR_abstract_collection___Iterator___item))(variable2) /*ListIterator::item*/;
-    variable5 = ((typing___PExpr___stype_t)CALL( variable3 /*n*/,COLOR_syntax_base___PExpr___stype))( variable3 /*n*/) /*PExpr::stype*/;
-    variable4 = variable5;
-    variable5 = TAG_Bool(( variable1 /*stype*/ ==  NIT_NULL /*null*/) || (( variable1 /*stype*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable1 /*stype*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable1 /*stype*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable1 /*stype*/,COLOR_kernel___Object_____eqeq))( variable1 /*stype*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-    variable6 = variable5;
-    if (!UNTAG_Bool(variable6)) { /* or */
-      variable6 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable4 /*ntype*/ ==  NIT_NULL /*null*/) || (( variable4 /*ntype*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable4 /*ntype*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable4 /*ntype*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable4 /*ntype*/,COLOR_kernel___Object_____eqeq))( variable4 /*ntype*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-      variable7 = variable6;
-      if (UNTAG_Bool(variable7)) { /* and */
-        variable7 = ((static_type___MMType_____l_t)CALL( variable1 /*stype*/,COLOR_static_type___MMType_____l))( variable1 /*stype*/,  variable4 /*ntype*/) /*MMType::<*/;
-      }
-      variable6 = variable7;
-    }
-    variable5 = variable6;
-    if (UNTAG_Bool(variable5)) { /*if*/
-      variable1 =  variable4 /*ntype*/ /*stype=*/;
-    }
-    continue_65: while(0);
-    ((list___ListIterator___next_t)CALL(variable2,COLOR_abstract_collection___Iterator___next))(variable2) /*ListIterator::next*/;
-  }
-  break_65: while(0);
-  variable2 = ((parser_nodes___AArrayExpr___n_exprs_t)CALL( self,COLOR_parser_nodes___AArrayExpr___n_exprs))( self) /*AArrayExpr::n_exprs*/;
-  variable2 = ((list___List___iterator_t)CALL(variable2,COLOR_abstract_collection___Collection___iterator))(variable2) /*List::iterator*/;
-  while (true) { /*for*/
-    variable3 = ((list___ListIterator___is_ok_t)CALL(variable2,COLOR_abstract_collection___Iterator___is_ok))(variable2) /*ListIterator::is_ok*/;
-    if (!UNTAG_Bool(variable3)) break; /*for*/
-    variable3 = ((list___ListIterator___item_t)CALL(variable2,COLOR_abstract_collection___Iterator___item))(variable2) /*ListIterator::item*/;
-    variable4 = ((typing___PExpr___stype_t)CALL( variable3 /*n*/,COLOR_syntax_base___PExpr___stype))( variable3 /*n*/) /*PExpr::stype*/;
-    ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self, variable4,  variable1 /*stype*/) /*AbsSyntaxVisitor::check_conform*/;
-    continue_66: while(0);
-    ((list___ListIterator___next_t)CALL(variable2,COLOR_abstract_collection___Iterator___next))(variable2) /*ListIterator::next*/;
-  }
-  break_66: while(0);
-  variable2 = ((syntax_base___AbsSyntaxVisitor___type_array_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_array))( variable0 /*v*/,  variable1 /*stype*/) /*AbsSyntaxVisitor::type_array*/;
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ = variable2;
-  tracehead = trace.prev;
-  return;
-}
-void typing___ARangeExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 632, LOCATE_typing___ARangeExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-      val_t variable5;
-      val_t variable6;
-      val_t variable7;
-      val_t variable8;
-      val_t variable9;
-      val_t variable10;
-      val_t variable11;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable2 = ((parser_nodes___ARangeExpr___n_expr_t)CALL( self,COLOR_parser_nodes___ARangeExpr___n_expr))( self) /*ARangeExpr::n_expr*/;
-  variable2 = ((typing___PExpr___stype_t)CALL(variable2,COLOR_syntax_base___PExpr___stype))(variable2) /*PExpr::stype*/;
-  variable1 = variable2;
-  variable3 = ((parser_nodes___ARangeExpr___n_expr2_t)CALL( self,COLOR_parser_nodes___ARangeExpr___n_expr2))( self) /*ARangeExpr::n_expr2*/;
-  variable3 = ((typing___PExpr___stype_t)CALL(variable3,COLOR_syntax_base___PExpr___stype))(variable3) /*PExpr::stype*/;
-  variable2 = variable3;
-  variable3 = TAG_Bool(( variable1 /*ntype*/ ==  NIT_NULL /*null*/) || (( variable1 /*ntype*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable1 /*ntype*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable1 /*ntype*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable1 /*ntype*/,COLOR_kernel___Object_____eqeq))( variable1 /*ntype*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  variable4 = variable3;
-  if (!UNTAG_Bool(variable4)) { /* or */
-    variable4 = TAG_Bool(( variable1 /*ntype*/ ==  NIT_NULL /*null*/) || (( variable1 /*ntype*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable1 /*ntype*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable1 /*ntype*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable1 /*ntype*/,COLOR_kernel___Object_____eqeq))( variable1 /*ntype*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  }
-  variable3 = variable4;
-  if (UNTAG_Bool(variable3)) { /*if*/
-    goto return_label67;
-  }
-  variable3 = ((static_type___MMType_____l_t)CALL( variable1 /*ntype*/,COLOR_static_type___MMType_____l))( variable1 /*ntype*/,  variable2 /*ntype2*/) /*MMType::<*/;
-  if (UNTAG_Bool(variable3)) { /*if*/
-    variable1 =  variable2 /*ntype2*/ /*ntype=*/;
-  } else { /*if*/
-    variable3 = ((static_type___MMType_____l_t)CALL( variable2 /*ntype2*/,COLOR_static_type___MMType_____l))( variable2 /*ntype2*/,  variable1 /*ntype*/) /*MMType::<*/;
-    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable3)))) { /*if*/
-      variable3 = NEW_String_string___String___init(); /*new String*/
-      variable4 = NEW_String_string___String___with_native(BOX_NativeString("Type error: "), TAG_Int(12)); /*new String*/
-      variable5 = variable4;
-      ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable5) /*String::append*/;
-      variable6 =  variable1 /*ntype*/;
-      variable6 = ((string___String___to_s_t)CALL(variable6,COLOR_string___Object___to_s))(variable6) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable6) /*String::append*/;
-      variable7 = NEW_String_string___String___with_native(BOX_NativeString(" incompatible with "), TAG_Int(19)); /*new String*/
-      variable8 = variable7;
-      ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable8) /*String::append*/;
-      variable9 =  variable2 /*ntype2*/;
-      variable9 = ((string___String___to_s_t)CALL(variable9,COLOR_string___Object___to_s))(variable9) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable9) /*String::append*/;
-      variable10 = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-      variable11 = variable10;
-      ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable11) /*String::append*/;
-      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable3) /*AbsSyntaxVisitor::error*/;
-      goto return_label67;
-    }
-  }
-  variable4 = ((syntax_base___AbsSyntaxVisitor___type_discrete_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_discrete))( variable0 /*v*/) /*AbsSyntaxVisitor::type_discrete*/;
-  variable3 = variable4;
-  ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self,  variable1 /*ntype*/,  variable3 /*dtype*/) /*AbsSyntaxVisitor::check_conform*/;
-  variable4 = ((syntax_base___AbsSyntaxVisitor___type_range_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_range))( variable0 /*v*/,  variable1 /*ntype*/) /*AbsSyntaxVisitor::type_range*/;
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ = variable4;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[4] = ((syntax_base___AbsSyntaxVisitor___type_string_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_string))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_string*/;
+  ATTR_typing___PExpr____stype(variable[3]) /*PExpr::_stype*/ = variable[4];
   return_label67: while(false);
   tracehead = trace.prev;
   return;
 }
+void typing___ANullExpr___after_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 677, LOCATE_typing___ANullExpr___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[4] = ((syntax_base___AbsSyntaxVisitor___type_none_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_none))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_none*/;
+  ATTR_typing___PExpr____stype(variable[3]) /*PExpr::_stype*/ = variable[4];
+  return_label68: while(false);
+  tracehead = trace.prev;
+  return;
+}
+void typing___AArrayExpr___after_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 686, LOCATE_typing___AArrayExpr___after_typing};
+  val_t variable[11];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] =  NIT_NULL /*null*/;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AArrayExpr___n_exprs_t)CALL(variable[4],COLOR_parser_nodes___AArrayExpr___n_exprs))(variable[4]) /*AArrayExpr::n_exprs*/;
+  variable[4] = ((list___List___iterator_t)CALL(variable[4],COLOR_abstract_collection___Collection___iterator))(variable[4]) /*List::iterator*/;
+  while (true) { /*for*/
+    variable[5] = ((list___ListIterator___is_ok_t)CALL(variable[4],COLOR_abstract_collection___Iterator___is_ok))(variable[4]) /*ListIterator::is_ok*/;
+    if (!UNTAG_Bool(variable[5])) break; /*for*/
+    variable[5] = ((list___ListIterator___item_t)CALL(variable[4],COLOR_abstract_collection___Iterator___item))(variable[4]) /*ListIterator::item*/;
+    variable[6] = variable[5];
+    variable[8] = ((typing___PExpr___stype_t)CALL( variable[6] /*n*/,COLOR_syntax_base___PExpr___stype))( variable[6] /*n*/) /*PExpr::stype*/;
+    variable[7] = variable[8];
+    variable[8] = TAG_Bool(( variable[3] /*stype*/ ==  NIT_NULL /*null*/) || (( variable[3] /*stype*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*stype*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*stype*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*stype*/,COLOR_kernel___Object_____eqeq))( variable[3] /*stype*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+    variable[9] = variable[8];
+    if (!UNTAG_Bool(variable[9])) { /* or */
+      variable[9] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[7] /*ntype*/ ==  NIT_NULL /*null*/) || (( variable[7] /*ntype*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[7] /*ntype*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[7] /*ntype*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[7] /*ntype*/,COLOR_kernel___Object_____eqeq))( variable[7] /*ntype*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+      variable[10] = variable[9];
+      if (UNTAG_Bool(variable[10])) { /* and */
+        variable[10] = ((static_type___MMType_____l_t)CALL( variable[3] /*stype*/,COLOR_static_type___MMType_____l))( variable[3] /*stype*/,  variable[7] /*ntype*/) /*MMType::<*/;
+      }
+      variable[9] = variable[10];
+    }
+    variable[8] = variable[9];
+    if (UNTAG_Bool(variable[8])) { /*if*/
+      variable[3] =  variable[7] /*ntype*/ /*stype=*/;
+    }
+    continue_70: while(0);
+    ((list___ListIterator___next_t)CALL(variable[4],COLOR_abstract_collection___Iterator___next))(variable[4]) /*ListIterator::next*/;
+  }
+  break_70: while(0);
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AArrayExpr___n_exprs_t)CALL(variable[4],COLOR_parser_nodes___AArrayExpr___n_exprs))(variable[4]) /*AArrayExpr::n_exprs*/;
+  variable[4] = ((list___List___iterator_t)CALL(variable[4],COLOR_abstract_collection___Collection___iterator))(variable[4]) /*List::iterator*/;
+  while (true) { /*for*/
+    variable[5] = ((list___ListIterator___is_ok_t)CALL(variable[4],COLOR_abstract_collection___Iterator___is_ok))(variable[4]) /*ListIterator::is_ok*/;
+    if (!UNTAG_Bool(variable[5])) break; /*for*/
+    variable[5] = ((list___ListIterator___item_t)CALL(variable[4],COLOR_abstract_collection___Iterator___item))(variable[4]) /*ListIterator::item*/;
+    variable[6] = variable[5];
+    ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/,  variable[6] /*n*/,  variable[3] /*stype*/) /*AbsSyntaxVisitor::check_conform_expr*/;
+    continue_71: while(0);
+    ((list___ListIterator___next_t)CALL(variable[4],COLOR_abstract_collection___Iterator___next))(variable[4]) /*ListIterator::next*/;
+  }
+  break_71: while(0);
+  variable[4] = variable[0];
+  variable[5] = ((syntax_base___AbsSyntaxVisitor___type_array_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_array))( variable[1] /*v*/,  variable[3] /*stype*/) /*AbsSyntaxVisitor::type_array*/;
+  ATTR_typing___PExpr____stype(variable[4]) /*PExpr::_stype*/ = variable[5];
+  return_label69: while(false);
+  tracehead = trace.prev;
+  return;
+}
+void typing___AArrayExpr___stype__eq(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 684, LOCATE_typing___AArrayExpr___stype__eq};
+  val_t variable[4];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  ATTR_typing___PExpr____stype(variable[3]) /*PExpr::_stype*/ =  variable[1] /*t*/;
+  return_label72: while(false);
+  tracehead = trace.prev;
+  return;
+}
+void typing___ARangeExpr___after_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 703, LOCATE_typing___ARangeExpr___after_typing};
+  val_t variable[15];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___ARangeExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___ARangeExpr___n_expr))(variable[4]) /*ARangeExpr::n_expr*/;
+  variable[4] = ((typing___PExpr___stype_t)CALL(variable[4],COLOR_syntax_base___PExpr___stype))(variable[4]) /*PExpr::stype*/;
+  variable[3] = variable[4];
+  variable[5] = variable[0];
+  variable[5] = ((parser_nodes___ARangeExpr___n_expr2_t)CALL(variable[5],COLOR_parser_nodes___ARangeExpr___n_expr2))(variable[5]) /*ARangeExpr::n_expr2*/;
+  variable[5] = ((typing___PExpr___stype_t)CALL(variable[5],COLOR_syntax_base___PExpr___stype))(variable[5]) /*PExpr::stype*/;
+  variable[4] = variable[5];
+  variable[5] = TAG_Bool(( variable[3] /*ntype*/ ==  NIT_NULL /*null*/) || (( variable[3] /*ntype*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*ntype*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*ntype*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*ntype*/,COLOR_kernel___Object_____eqeq))( variable[3] /*ntype*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[6] = variable[5];
+  if (!UNTAG_Bool(variable[6])) { /* or */
+    variable[6] = TAG_Bool(( variable[3] /*ntype*/ ==  NIT_NULL /*null*/) || (( variable[3] /*ntype*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*ntype*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*ntype*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*ntype*/,COLOR_kernel___Object_____eqeq))( variable[3] /*ntype*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  }
+  variable[5] = variable[6];
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    goto return_label73;
+  }
+  variable[5] = ((static_type___MMType_____l_t)CALL( variable[3] /*ntype*/,COLOR_static_type___MMType_____l))( variable[3] /*ntype*/,  variable[4] /*ntype2*/) /*MMType::<*/;
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    variable[3] =  variable[4] /*ntype2*/ /*ntype=*/;
+  } else { /*if*/
+    variable[5] = ((static_type___MMType_____l_t)CALL( variable[4] /*ntype2*/,COLOR_static_type___MMType_____l))( variable[4] /*ntype2*/,  variable[3] /*ntype*/) /*MMType::<*/;
+    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[5])))) { /*if*/
+      variable[5] = variable[0];
+      variable[6] = NEW_String_string___String___init(); /*new String*/
+      variable[7] = NEW_String_string___String___with_native(BOX_NativeString("Type error: "), TAG_Int(12)); /*new String*/
+      variable[8] = variable[7];
+      ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[8]) /*String::append*/;
+      variable[9] =  variable[3] /*ntype*/;
+      variable[9] = ((string___String___to_s_t)CALL(variable[9],COLOR_string___Object___to_s))(variable[9]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[9]) /*String::append*/;
+      variable[10] = NEW_String_string___String___with_native(BOX_NativeString(" incompatible with "), TAG_Int(19)); /*new String*/
+      variable[11] = variable[10];
+      ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[11]) /*String::append*/;
+      variable[12] =  variable[4] /*ntype2*/;
+      variable[12] = ((string___String___to_s_t)CALL(variable[12],COLOR_string___Object___to_s))(variable[12]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[12]) /*String::append*/;
+      variable[13] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
+      variable[14] = variable[13];
+      ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[14]) /*String::append*/;
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[5], variable[6]) /*AbsSyntaxVisitor::error*/;
+      goto return_label73;
+    }
+  }
+  variable[6] = ((syntax_base___AbsSyntaxVisitor___type_discrete_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_discrete))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_discrete*/;
+  variable[5] = variable[6];
+  variable[6] = variable[0];
+  variable[6] = ((parser_nodes___ARangeExpr___n_expr_t)CALL(variable[6],COLOR_parser_nodes___ARangeExpr___n_expr))(variable[6]) /*ARangeExpr::n_expr*/;
+  ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/, variable[6],  variable[5] /*dtype*/) /*AbsSyntaxVisitor::check_conform_expr*/;
+  variable[6] = variable[0];
+  variable[6] = ((parser_nodes___ARangeExpr___n_expr2_t)CALL(variable[6],COLOR_parser_nodes___ARangeExpr___n_expr2))(variable[6]) /*ARangeExpr::n_expr2*/;
+  ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/, variable[6],  variable[5] /*dtype*/) /*AbsSyntaxVisitor::check_conform_expr*/;
+  variable[6] = variable[0];
+  variable[7] = ((syntax_base___AbsSyntaxVisitor___type_range_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_range))( variable[1] /*v*/,  variable[3] /*ntype*/) /*AbsSyntaxVisitor::type_range*/;
+  ATTR_typing___PExpr____stype(variable[6]) /*PExpr::_stype*/ = variable[7];
+  return_label73: while(false);
+  tracehead = trace.prev;
+  return;
+}
+void typing___ASuperExpr___after_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 727, LOCATE_typing___ASuperExpr___after_typing};
+  val_t variable[19];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_property*/;
+  variable[4] = ((abstractmetamodel___MMLocalProperty___prhe_t)CALL(variable[4],COLOR_abstractmetamodel___MMLocalProperty___prhe))(variable[4]) /*MMLocalProperty::prhe*/;
+  variable[4] = ((partial_order___PartialOrderElement___direct_greaters_t)CALL(variable[4],COLOR_partial_order___PartialOrderElement___direct_greaters))(variable[4]) /*PartialOrderElement::direct_greaters*/;
+  variable[3] = variable[4];
+  variable[4] = ((array___AbstractArray___is_empty_t)CALL( variable[3] /*precs*/,COLOR_abstract_collection___Collection___is_empty))( variable[3] /*precs*/) /*AbstractArray::is_empty*/;
+  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[4])))) { /*if*/
+    variable[4] = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_property*/;
+    ((abstractmetamodel___MMLocalProperty___need_super__eq_t)CALL(variable[4],COLOR_abstractmetamodel___MMLocalProperty___need_super__eq))(variable[4],  TAG_Bool(true)) /*MMLocalProperty::need_super=*/;
+  } else { /*if*/
+    variable[4] = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_property*/;
+    variable[4] = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable[4],COLOR_abstractmetamodel___MMLocalProperty___global))(variable[4]) /*MMLocalProperty::global*/;
+    variable[4] = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable[4],COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable[4]) /*MMGlobalProperty::is_init*/;
+    if (UNTAG_Bool(variable[4])) { /*if*/
+      variable[5] = ((syntax_base___AbsSyntaxVisitor___local_class_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_class))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
+      variable[6] = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_property*/;
+      variable[6] = ((abstractmetamodel___MMLocalProperty___name_t)CALL(variable[6],COLOR_abstractmetamodel___MMLocalProperty___name))(variable[6]) /*MMLocalProperty::name*/;
+      variable[5] = ((abstractmetamodel___MMLocalClass___super_methods_named_t)CALL(variable[5],COLOR_abstractmetamodel___MMLocalClass___super_methods_named))(variable[5], variable[6]) /*MMLocalClass::super_methods_named*/;
+      variable[4] = variable[5];
+      variable[5] = ((array___AbstractArray___iterator_t)CALL( variable[4] /*base_precs*/,COLOR_abstract_collection___Collection___iterator))( variable[4] /*base_precs*/) /*AbstractArray::iterator*/;
+      while (true) { /*for*/
+        variable[6] = ((array___ArrayIterator___is_ok_t)CALL(variable[5],COLOR_abstract_collection___Iterator___is_ok))(variable[5]) /*ArrayIterator::is_ok*/;
+        if (!UNTAG_Bool(variable[6])) break; /*for*/
+        variable[6] = ((array___ArrayIterator___item_t)CALL(variable[5],COLOR_abstract_collection___Iterator___item))(variable[5]) /*ArrayIterator::item*/;
+        variable[7] = variable[6];
+        variable[8] = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable[7] /*p*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable[7] /*p*/) /*MMLocalProperty::global*/;
+        variable[8] = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable[8],COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable[8]) /*MMGlobalProperty::is_init*/;
+        if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[8])))) { /*if*/
+          variable[8] = variable[0];
+          variable[9] = NEW_String_string___String___init(); /*new String*/
+          variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
+          variable[11] = variable[10];
+          ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[11]) /*String::append*/;
+          variable[12] = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL( variable[7] /*p*/,COLOR_abstractmetamodel___MMLocalProperty___local_class))( variable[7] /*p*/) /*MMLocalProperty::local_class*/;
+          variable[13] = variable[12];
+          variable[13] = ((string___String___to_s_t)CALL(variable[13],COLOR_string___Object___to_s))(variable[13]) /*String::to_s*/;
+          ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[13]) /*String::append*/;
+          variable[14] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
+          variable[15] = variable[14];
+          ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[15]) /*String::append*/;
+          variable[16] =  variable[7] /*p*/;
+          variable[16] = ((string___String___to_s_t)CALL(variable[16],COLOR_string___Object___to_s))(variable[16]) /*String::to_s*/;
+          ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[16]) /*String::append*/;
+          variable[17] = NEW_String_string___String___with_native(BOX_NativeString(" is not a constructor."), TAG_Int(22)); /*new String*/
+          variable[18] = variable[17];
+          ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[18]) /*String::append*/;
+          ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
+        } else { /*if*/
+          variable[8] = ((syntax_base___AbsSyntaxVisitor___local_class_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_class))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
+          variable[9] = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable[7] /*p*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable[7] /*p*/) /*MMLocalProperty::global*/;
+          variable[8] = ((inheritance___MMLocalClass_____bra_t)CALL(variable[8],COLOR_abstractmetamodel___MMLocalClass_____bra))(variable[8], variable[9]) /*MMLocalClass::[]*/;
+          ((array___AbstractArray___add_t)CALL( variable[3] /*precs*/,COLOR_abstract_collection___SimpleCollection___add))( variable[3] /*precs*/, variable[8]) /*AbstractArray::add*/;
+        }
+        continue_75: while(0);
+        ((array___ArrayIterator___next_t)CALL(variable[5],COLOR_abstract_collection___Iterator___next))(variable[5]) /*ArrayIterator::next*/;
+      }
+      break_75: while(0);
+      variable[5] = ((array___AbstractArray___is_empty_t)CALL( variable[3] /*precs*/,COLOR_abstract_collection___Collection___is_empty))( variable[3] /*precs*/) /*AbstractArray::is_empty*/;
+      if (UNTAG_Bool(variable[5])) { /*if*/
+        variable[5] = variable[0];
+        variable[6] = NEW_String_string___String___init(); /*new String*/
+        variable[7] = NEW_String_string___String___with_native(BOX_NativeString("Error: No contructor named "), TAG_Int(27)); /*new String*/
+        variable[8] = variable[7];
+        ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[8]) /*String::append*/;
+        variable[9] = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_property*/;
+        variable[9] = ((abstractmetamodel___MMLocalProperty___name_t)CALL(variable[9],COLOR_abstractmetamodel___MMLocalProperty___name))(variable[9]) /*MMLocalProperty::name*/;
+        variable[10] = variable[9];
+        variable[10] = ((string___String___to_s_t)CALL(variable[10],COLOR_string___Object___to_s))(variable[10]) /*String::to_s*/;
+        ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[10]) /*String::append*/;
+        variable[11] = NEW_String_string___String___with_native(BOX_NativeString(" in superclasses."), TAG_Int(17)); /*new String*/
+        variable[12] = variable[11];
+        ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[12]) /*String::append*/;
+        ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[5], variable[6]) /*AbsSyntaxVisitor::error*/;
+        goto return_label74;
+      } else { /*if*/
+        variable[5] = ((array___AbstractArray___length_t)CALL( variable[3] /*precs*/,COLOR_abstract_collection___Collection___length))( variable[3] /*precs*/) /*AbstractArray::length*/;
+        variable[5] = TAG_Bool(UNTAG_Int(variable[5])>UNTAG_Int( TAG_Int(1)));
+        if (UNTAG_Bool(variable[5])) { /*if*/
+          variable[5] = variable[0];
+          variable[6] = NEW_String_string___String___init(); /*new String*/
+          variable[7] = NEW_String_string___String___with_native(BOX_NativeString("Error: Conflicting contructors named "), TAG_Int(37)); /*new String*/
+          variable[8] = variable[7];
+          ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[8]) /*String::append*/;
+          variable[9] = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_property*/;
+          variable[9] = ((abstractmetamodel___MMLocalProperty___name_t)CALL(variable[9],COLOR_abstractmetamodel___MMLocalProperty___name))(variable[9]) /*MMLocalProperty::name*/;
+          variable[10] = variable[9];
+          variable[10] = ((string___String___to_s_t)CALL(variable[10],COLOR_string___Object___to_s))(variable[10]) /*String::to_s*/;
+          ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[10]) /*String::append*/;
+          variable[11] = NEW_String_string___String___with_native(BOX_NativeString(" in superclasses: "), TAG_Int(18)); /*new String*/
+          variable[12] = variable[11];
+          ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[12]) /*String::append*/;
+          variable[13] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
+          variable[13] = ((string___Collection___join_t)CALL( variable[3] /*precs*/,COLOR_string___Collection___join))( variable[3] /*precs*/, variable[13]) /*Collection::join*/;
+          variable[14] = variable[13];
+          ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[14]) /*String::append*/;
+          variable[15] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
+          variable[16] = variable[15];
+          ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[16]) /*String::append*/;
+          ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[5], variable[6]) /*AbsSyntaxVisitor::error*/;
+          goto return_label74;
+        }
+      }
+      variable[6] = ((abstract_collection___IndexedCollection___first_t)CALL( variable[4] /*base_precs*/,COLOR_abstract_collection___Collection___first))( variable[4] /*base_precs*/) /*IndexedCollection::first*/;
+      variable[5] = variable[6];
+      variable[6] = TAG_Bool(( variable[5] /*p*/==NIT_NULL) || VAL_ISA( variable[5] /*p*/, COLOR_MMMethod, ID_MMMethod)) /*cast MMMethod*/;
+      if (!UNTAG_Bool(variable[6])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___ASuperExpr___after_typing, LOCATE_typing, 749); nit_exit(1);}
+      variable[6] = variable[0];
+      ATTR_typing___ASuperExpr____init_in_superclass(variable[6]) /*ASuperExpr::_init_in_superclass*/ =  variable[5] /*p*/;
+      variable[6] = variable[0];
+      ((typing___ASuperInitCall___register_super_init_call_t)CALL(variable[6],COLOR_typing___ASuperInitCall___register_super_init_call))(variable[6],  variable[1] /*v*/,  variable[5] /*p*/) /*ASuperInitCall::register_super_init_call*/;
+      variable[6] = variable[0];
+      variable[6] = ((parser_nodes___ASuperExpr___n_args_t)CALL(variable[6],COLOR_parser_nodes___ASuperExpr___n_args))(variable[6]) /*ASuperExpr::n_args*/;
+      variable[6] = ((list___List___length_t)CALL(variable[6],COLOR_abstract_collection___Collection___length))(variable[6]) /*List::length*/;
+      variable[6] = TAG_Bool(UNTAG_Int(variable[6])>UNTAG_Int( TAG_Int(0)));
+      if (UNTAG_Bool(variable[6])) { /*if*/
+        variable[7] = variable[0];
+        variable[8] = ((typing___TypingVisitor___self_var_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___self_var))( variable[1] /*v*/) /*TypingVisitor::self_var*/;
+        variable[8] = ((syntax_base___Variable___stype_t)CALL(variable[8],COLOR_syntax_base___Variable___stype))(variable[8]) /*Variable::stype*/;
+        variable[7] = ((typing___AAbsSendExpr___get_signature_t)CALL(variable[7],COLOR_typing___AAbsSendExpr___get_signature))(variable[7],  variable[1] /*v*/, variable[8],  variable[5] /*p*/,  TAG_Bool(true)) /*AAbsSendExpr::get_signature*/;
+        variable[6] = variable[7];
+        variable[7] = variable[0];
+        variable[8] = variable[0];
+        variable[9] = ((abstractmetamodel___MMLocalProperty___name_t)CALL( variable[5] /*p*/,COLOR_abstractmetamodel___MMLocalProperty___name))( variable[5] /*p*/) /*MMLocalProperty::name*/;
+        variable[10] = variable[0];
+        variable[10] = ((parser_nodes___ASuperExpr___n_args_t)CALL(variable[10],COLOR_parser_nodes___ASuperExpr___n_args))(variable[10]) /*ASuperExpr::n_args*/;
+        variable[10] = ((array___Collection___to_a_t)CALL(variable[10],COLOR_array___Collection___to_a))(variable[10]) /*Collection::to_a*/;
+        variable[8] = ((typing___AAbsSendExpr___process_signature_t)CALL(variable[8],COLOR_typing___AAbsSendExpr___process_signature))(variable[8],  variable[1] /*v*/,  variable[6] /*signature*/, variable[9], variable[10]) /*AAbsSendExpr::process_signature*/;
+        ATTR_typing___AAbsSendExpr____arguments(variable[7]) /*AAbsSendExpr::_arguments*/ = variable[8];
+      }
+    } else { /*if*/
+      variable[4] = variable[0];
+      variable[5] = NEW_String_string___String___init(); /*new String*/
+      variable[6] = NEW_String_string___String___with_native(BOX_NativeString("Error: No super method to call for "), TAG_Int(35)); /*new String*/
+      variable[7] = variable[6];
+      ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[7]) /*String::append*/;
+      variable[8] = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_property*/;
+      variable[9] = variable[8];
+      variable[9] = ((string___String___to_s_t)CALL(variable[9],COLOR_string___Object___to_s))(variable[9]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[9]) /*String::append*/;
+      variable[10] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
+      variable[11] = variable[10];
+      ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[11]) /*String::append*/;
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::error*/;
+      goto return_label74;
+    }
+  }
+  variable[4] = ((abstract_collection___IndexedCollection___first_t)CALL( variable[3] /*precs*/,COLOR_abstract_collection___Collection___first))( variable[3] /*precs*/) /*IndexedCollection::first*/;
+  variable[5] = ((typing___TypingVisitor___self_var_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___self_var))( variable[1] /*v*/) /*TypingVisitor::self_var*/;
+  variable[5] = ((syntax_base___Variable___stype_t)CALL(variable[5],COLOR_syntax_base___Variable___stype))(variable[5]) /*Variable::stype*/;
+  variable[4] = ((static_type___MMLocalProperty___signature_for_t)CALL(variable[4],COLOR_static_type___MMLocalProperty___signature_for))(variable[4], variable[5]) /*MMLocalProperty::signature_for*/;
+  variable[4] = ((static_type___MMSignature___return_type_t)CALL(variable[4],COLOR_static_type___MMSignature___return_type))(variable[4]) /*MMSignature::return_type*/;
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[5] = NEW_Array_array___Array___init(); /*new Array[MMType]*/
+    variable[4] = variable[5];
+    variable[5] =  NIT_NULL /*null*/;
+    variable[6] = ((array___AbstractArray___iterator_t)CALL( variable[3] /*precs*/,COLOR_abstract_collection___Collection___iterator))( variable[3] /*precs*/) /*AbstractArray::iterator*/;
+    while (true) { /*for*/
+      variable[7] = ((array___ArrayIterator___is_ok_t)CALL(variable[6],COLOR_abstract_collection___Iterator___is_ok))(variable[6]) /*ArrayIterator::is_ok*/;
+      if (!UNTAG_Bool(variable[7])) break; /*for*/
+      variable[7] = ((array___ArrayIterator___item_t)CALL(variable[6],COLOR_abstract_collection___Iterator___item))(variable[6]) /*ArrayIterator::item*/;
+      variable[8] = variable[7];
+      variable[9] = TAG_Bool(( variable[8] /*prop*/==NIT_NULL) || VAL_ISA( variable[8] /*prop*/, COLOR_MMMethod, ID_MMMethod)) /*cast MMMethod*/;
+      if (!UNTAG_Bool(variable[9])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___ASuperExpr___after_typing, LOCATE_typing, 765); nit_exit(1);}
+      variable[10] = ((typing___TypingVisitor___self_var_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___self_var))( variable[1] /*v*/) /*TypingVisitor::self_var*/;
+      variable[10] = ((syntax_base___Variable___stype_t)CALL(variable[10],COLOR_syntax_base___Variable___stype))(variable[10]) /*Variable::stype*/;
+      variable[10] = ((static_type___MMLocalProperty___signature_for_t)CALL( variable[8] /*prop*/,COLOR_static_type___MMLocalProperty___signature_for))( variable[8] /*prop*/, variable[10]) /*MMLocalProperty::signature_for*/;
+      variable[10] = ((static_type___MMSignature___return_type_t)CALL(variable[10],COLOR_static_type___MMSignature___return_type))(variable[10]) /*MMSignature::return_type*/;
+      variable[11] = ((syntax_base___AbsSyntaxVisitor___module_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___module))( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
+      variable[10] = ((static_type___MMType___for_module_t)CALL(variable[10],COLOR_static_type___MMType___for_module))(variable[10], variable[11]) /*MMType::for_module*/;
+      variable[11] = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_property*/;
+      variable[11] = ((static_type___MMLocalProperty___signature_t)CALL(variable[11],COLOR_static_type___MMLocalProperty___signature))(variable[11]) /*MMLocalProperty::signature*/;
+      variable[11] = ((static_type___MMSignature___recv_t)CALL(variable[11],COLOR_static_type___MMSignature___recv))(variable[11]) /*MMSignature::recv*/;
+      variable[10] = ((static_type___MMType___adapt_to_t)CALL(variable[10],COLOR_static_type___MMType___adapt_to))(variable[10], variable[11]) /*MMType::adapt_to*/;
+      variable[9] = variable[10];
+      ((array___AbstractArray___add_t)CALL( variable[4] /*stypes*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*stypes*/,  variable[9] /*t*/) /*AbstractArray::add*/;
+      variable[10] = TAG_Bool(( variable[5] /*stype*/ ==  NIT_NULL /*null*/) || (( variable[5] /*stype*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*stype*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*stype*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*stype*/,COLOR_kernel___Object_____eqeq))( variable[5] /*stype*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+      variable[11] = variable[10];
+      if (!UNTAG_Bool(variable[11])) { /* or */
+        variable[11] = ((static_type___MMType_____l_t)CALL( variable[5] /*stype*/,COLOR_static_type___MMType_____l))( variable[5] /*stype*/,  variable[9] /*t*/) /*MMType::<*/;
+      }
+      variable[10] = variable[11];
+      if (UNTAG_Bool(variable[10])) { /*if*/
+        variable[5] =  variable[9] /*t*/ /*stype=*/;
+      }
+      continue_76: while(0);
+      ((array___ArrayIterator___next_t)CALL(variable[6],COLOR_abstract_collection___Iterator___next))(variable[6]) /*ArrayIterator::next*/;
+    }
+    break_76: while(0);
+    variable[6] = ((array___AbstractArray___iterator_t)CALL( variable[4] /*stypes*/,COLOR_abstract_collection___Collection___iterator))( variable[4] /*stypes*/) /*AbstractArray::iterator*/;
+    while (true) { /*for*/
+      variable[7] = ((array___ArrayIterator___is_ok_t)CALL(variable[6],COLOR_abstract_collection___Iterator___is_ok))(variable[6]) /*ArrayIterator::is_ok*/;
+      if (!UNTAG_Bool(variable[7])) break; /*for*/
+      variable[7] = ((array___ArrayIterator___item_t)CALL(variable[6],COLOR_abstract_collection___Iterator___item))(variable[6]) /*ArrayIterator::item*/;
+      variable[8] = variable[7];
+      variable[9] = variable[0];
+      ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable[1] /*v*/, variable[9],  variable[8] /*t*/,  variable[5] /*stype*/) /*AbsSyntaxVisitor::check_conform*/;
+      continue_77: while(0);
+      ((array___ArrayIterator___next_t)CALL(variable[6],COLOR_abstract_collection___Iterator___next))(variable[6]) /*ArrayIterator::next*/;
+    }
+    break_77: while(0);
+    variable[6] = variable[0];
+    ATTR_typing___PExpr____stype(variable[6]) /*PExpr::_stype*/ =  variable[5] /*stype*/;
+  }
+  variable[5] = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_property*/;
+  variable[4] = variable[5];
+  variable[5] = TAG_Bool(( variable[4] /*p*/==NIT_NULL) || VAL_ISA( variable[4] /*p*/, COLOR_MMSrcMethod, ID_MMSrcMethod)) /*cast MMSrcMethod*/;
+  if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___ASuperExpr___after_typing, LOCATE_typing, 778); nit_exit(1);}
+  variable[5] = variable[0];
+  ATTR_typing___AAbsSendExpr____prop(variable[5]) /*AAbsSendExpr::_prop*/ =  variable[4] /*p*/;
+  return_label74: while(false);
+  tracehead = trace.prev;
+  return;
+}
 val_t typing___ASuperExpr___init_in_superclass(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 653, LOCATE_typing___ASuperExpr___init_in_superclass};
+  struct trace_t trace = {NULL, NULL, 725, LOCATE_typing___ASuperExpr___init_in_superclass};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   tracehead = trace.prev;
   return ATTR_typing___ASuperExpr____init_in_superclass( self) /*ASuperExpr::_init_in_superclass*/;
 }
-void typing___ASuperExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 655, LOCATE_typing___ASuperExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-      val_t variable3;
-      val_t variable4;
-        val_t variable5;
-          val_t variable6;
-          val_t variable7;
-          val_t variable8;
-          val_t variable9;
-          val_t variable10;
-          val_t variable11;
-          val_t variable12;
-          val_t variable13;
-          val_t variable14;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable2 = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable0 /*v*/) /*AbsSyntaxVisitor::local_property*/;
-  variable2 = ((abstractmetamodel___MMLocalProperty___prhe_t)CALL(variable2,COLOR_abstractmetamodel___MMLocalProperty___prhe))(variable2) /*MMLocalProperty::prhe*/;
-  variable2 = ((partial_order___PartialOrderElement___direct_greaters_t)CALL(variable2,COLOR_partial_order___PartialOrderElement___direct_greaters))(variable2) /*PartialOrderElement::direct_greaters*/;
-  variable1 = variable2;
-  variable2 = ((array___AbstractArray___is_empty_t)CALL( variable1 /*precs*/,COLOR_abstract_collection___Collection___is_empty))( variable1 /*precs*/) /*AbstractArray::is_empty*/;
-  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable2)))) { /*if*/
-    variable2 = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable0 /*v*/) /*AbsSyntaxVisitor::local_property*/;
-    ((abstractmetamodel___MMLocalProperty___need_super__eq_t)CALL(variable2,COLOR_abstractmetamodel___MMLocalProperty___need_super__eq))(variable2,  TAG_Bool(true)) /*MMLocalProperty::need_super=*/;
-  } else { /*if*/
-    variable2 = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable0 /*v*/) /*AbsSyntaxVisitor::local_property*/;
-    variable2 = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable2,COLOR_abstractmetamodel___MMLocalProperty___global))(variable2) /*MMLocalProperty::global*/;
-    variable2 = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable2,COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable2) /*MMGlobalProperty::is_init*/;
-    if (UNTAG_Bool(variable2)) { /*if*/
-      variable3 = ((syntax_base___AbsSyntaxVisitor___local_class_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_class))( variable0 /*v*/) /*AbsSyntaxVisitor::local_class*/;
-      variable4 = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable0 /*v*/) /*AbsSyntaxVisitor::local_property*/;
-      variable4 = ((abstractmetamodel___MMLocalProperty___name_t)CALL(variable4,COLOR_abstractmetamodel___MMLocalProperty___name))(variable4) /*MMLocalProperty::name*/;
-      variable3 = ((abstractmetamodel___MMLocalClass___super_methods_named_t)CALL(variable3,COLOR_abstractmetamodel___MMLocalClass___super_methods_named))(variable3, variable4) /*MMLocalClass::super_methods_named*/;
-      variable2 = variable3;
-      variable3 = ((array___AbstractArray___iterator_t)CALL( variable2 /*base_precs*/,COLOR_abstract_collection___Collection___iterator))( variable2 /*base_precs*/) /*AbstractArray::iterator*/;
-      while (true) { /*for*/
-        variable4 = ((array___ArrayIterator___is_ok_t)CALL(variable3,COLOR_abstract_collection___Iterator___is_ok))(variable3) /*ArrayIterator::is_ok*/;
-        if (!UNTAG_Bool(variable4)) break; /*for*/
-        variable4 = ((array___ArrayIterator___item_t)CALL(variable3,COLOR_abstract_collection___Iterator___item))(variable3) /*ArrayIterator::item*/;
-        variable5 = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable4 /*p*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable4 /*p*/) /*MMLocalProperty::global*/;
-        variable5 = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable5,COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable5) /*MMGlobalProperty::is_init*/;
-        if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable5)))) { /*if*/
-          variable5 = NEW_String_string___String___init(); /*new String*/
-          variable6 = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
-          variable7 = variable6;
-          ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable7) /*String::append*/;
-          variable8 = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL( variable4 /*p*/,COLOR_abstractmetamodel___MMLocalProperty___local_class))( variable4 /*p*/) /*MMLocalProperty::local_class*/;
-          variable9 = variable8;
-          variable9 = ((string___String___to_s_t)CALL(variable9,COLOR_string___Object___to_s))(variable9) /*String::to_s*/;
-          ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable9) /*String::append*/;
-          variable10 = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-          variable11 = variable10;
-          ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable11) /*String::append*/;
-          variable12 =  variable4 /*p*/;
-          variable12 = ((string___String___to_s_t)CALL(variable12,COLOR_string___Object___to_s))(variable12) /*String::to_s*/;
-          ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable12) /*String::append*/;
-          variable13 = NEW_String_string___String___with_native(BOX_NativeString(" is not a constructor."), TAG_Int(22)); /*new String*/
-          variable14 = variable13;
-          ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable14) /*String::append*/;
-          ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable5) /*AbsSyntaxVisitor::error*/;
-        } else { /*if*/
-          variable5 = ((syntax_base___AbsSyntaxVisitor___local_class_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_class))( variable0 /*v*/) /*AbsSyntaxVisitor::local_class*/;
-          variable6 = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable4 /*p*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable4 /*p*/) /*MMLocalProperty::global*/;
-          variable5 = ((inheritance___MMLocalClass_____bra_t)CALL(variable5,COLOR_abstractmetamodel___MMLocalClass_____bra))(variable5, variable6) /*MMLocalClass::[]*/;
-          ((array___AbstractArray___add_t)CALL( variable1 /*precs*/,COLOR_abstract_collection___SimpleCollection___add))( variable1 /*precs*/, variable5) /*AbstractArray::add*/;
-        }
-        continue_69: while(0);
-        ((array___ArrayIterator___next_t)CALL(variable3,COLOR_abstract_collection___Iterator___next))(variable3) /*ArrayIterator::next*/;
-      }
-      break_69: while(0);
-      variable3 = ((array___AbstractArray___is_empty_t)CALL( variable1 /*precs*/,COLOR_abstract_collection___Collection___is_empty))( variable1 /*precs*/) /*AbstractArray::is_empty*/;
-      if (UNTAG_Bool(variable3)) { /*if*/
-        variable3 = NEW_String_string___String___init(); /*new String*/
-        variable4 = NEW_String_string___String___with_native(BOX_NativeString("Error: No contructor named "), TAG_Int(27)); /*new String*/
-        variable5 = variable4;
-        ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable5) /*String::append*/;
-        variable6 = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable0 /*v*/) /*AbsSyntaxVisitor::local_property*/;
-        variable6 = ((abstractmetamodel___MMLocalProperty___name_t)CALL(variable6,COLOR_abstractmetamodel___MMLocalProperty___name))(variable6) /*MMLocalProperty::name*/;
-        variable7 = variable6;
-        variable7 = ((string___String___to_s_t)CALL(variable7,COLOR_string___Object___to_s))(variable7) /*String::to_s*/;
-        ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable7) /*String::append*/;
-        variable8 = NEW_String_string___String___with_native(BOX_NativeString(" in superclasses."), TAG_Int(17)); /*new String*/
-        variable9 = variable8;
-        ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable9) /*String::append*/;
-        ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable3) /*AbsSyntaxVisitor::error*/;
-        goto return_label68;
-      } else { /*if*/
-        variable3 = ((array___AbstractArray___length_t)CALL( variable1 /*precs*/,COLOR_abstract_collection___Collection___length))( variable1 /*precs*/) /*AbstractArray::length*/;
-        variable3 = TAG_Bool(UNTAG_Int(variable3)>UNTAG_Int( TAG_Int(1)));
-        if (UNTAG_Bool(variable3)) { /*if*/
-          variable3 = NEW_String_string___String___init(); /*new String*/
-          variable4 = NEW_String_string___String___with_native(BOX_NativeString("Error: Conflicting contructors named "), TAG_Int(37)); /*new String*/
-          variable5 = variable4;
-          ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable5) /*String::append*/;
-          variable6 = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable0 /*v*/) /*AbsSyntaxVisitor::local_property*/;
-          variable6 = ((abstractmetamodel___MMLocalProperty___name_t)CALL(variable6,COLOR_abstractmetamodel___MMLocalProperty___name))(variable6) /*MMLocalProperty::name*/;
-          variable7 = variable6;
-          variable7 = ((string___String___to_s_t)CALL(variable7,COLOR_string___Object___to_s))(variable7) /*String::to_s*/;
-          ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable7) /*String::append*/;
-          variable8 = NEW_String_string___String___with_native(BOX_NativeString(" in superclasses: "), TAG_Int(18)); /*new String*/
-          variable9 = variable8;
-          ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable9) /*String::append*/;
-          variable10 = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
-          variable10 = ((string___Collection___join_t)CALL( variable1 /*precs*/,COLOR_string___Collection___join))( variable1 /*precs*/, variable10) /*Collection::join*/;
-          variable11 = variable10;
-          ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable11) /*String::append*/;
-          variable12 = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-          variable13 = variable12;
-          ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable13) /*String::append*/;
-          ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable3) /*AbsSyntaxVisitor::error*/;
-          goto return_label68;
-        }
-      }
-      variable4 = ((abstract_collection___IndexedCollection___first_t)CALL( variable2 /*base_precs*/,COLOR_abstract_collection___Collection___first))( variable2 /*base_precs*/) /*IndexedCollection::first*/;
-      variable3 = variable4;
-      variable4 = TAG_Bool(( variable3 /*p*/==NIT_NULL) || VAL_ISA( variable3 /*p*/, COLOR_MMMethod, ID_MMMethod)) /*cast MMMethod*/;
-      if (!UNTAG_Bool(variable4)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___ASuperExpr___after_typing, LOCATE_typing, 677); nit_exit(1);}
-      ATTR_typing___ASuperExpr____init_in_superclass( self) /*ASuperExpr::_init_in_superclass*/ =  variable3 /*p*/;
-      ((typing___ASuperInitCall___register_super_init_call_t)CALL( self,COLOR_typing___ASuperInitCall___register_super_init_call))( self,  variable0 /*v*/,  variable3 /*p*/) /*ASuperInitCall::register_super_init_call*/;
-      variable4 = ((parser_nodes___ASuperExpr___n_args_t)CALL( self,COLOR_parser_nodes___ASuperExpr___n_args))( self) /*ASuperExpr::n_args*/;
-      variable4 = ((list___List___length_t)CALL(variable4,COLOR_abstract_collection___Collection___length))(variable4) /*List::length*/;
-      variable4 = TAG_Bool(UNTAG_Int(variable4)>UNTAG_Int( TAG_Int(0)));
-      if (UNTAG_Bool(variable4)) { /*if*/
-        variable4 = ((typing___TypingVisitor___self_type_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___self_type))( variable0 /*v*/) /*TypingVisitor::self_type*/;
-        variable5 = ((parser_nodes___ASuperExpr___n_args_t)CALL( self,COLOR_parser_nodes___ASuperExpr___n_args))( self) /*ASuperExpr::n_args*/;
-        variable5 = ((array___Collection___to_a_t)CALL(variable5,COLOR_array___Collection___to_a))(variable5) /*Collection::to_a*/;
-        variable4 = ((typing___AAbsSendExpr___process_signature_t)CALL( self,COLOR_typing___AAbsSendExpr___process_signature))( self,  variable0 /*v*/, variable4,  variable3 /*p*/,  TAG_Bool(true), variable5) /*AAbsSendExpr::process_signature*/;
-        ATTR_typing___AAbsSendExpr____arguments( self) /*AAbsSendExpr::_arguments*/ = variable4;
-      }
-    } else { /*if*/
-      variable2 = NEW_String_string___String___init(); /*new String*/
-      variable3 = NEW_String_string___String___with_native(BOX_NativeString("Error: No super method to call for "), TAG_Int(35)); /*new String*/
-      variable4 = variable3;
-      ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable4) /*String::append*/;
-      variable5 = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable0 /*v*/) /*AbsSyntaxVisitor::local_property*/;
-      variable6 = variable5;
-      variable6 = ((string___String___to_s_t)CALL(variable6,COLOR_string___Object___to_s))(variable6) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable6) /*String::append*/;
-      variable7 = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-      variable8 = variable7;
-      ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable8) /*String::append*/;
-      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable2) /*AbsSyntaxVisitor::error*/;
-      goto return_label68;
-    }
-  }
-  variable2 = ((abstract_collection___IndexedCollection___first_t)CALL( variable1 /*precs*/,COLOR_abstract_collection___Collection___first))( variable1 /*precs*/) /*IndexedCollection::first*/;
-  variable3 = ((typing___TypingVisitor___self_type_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___self_type))( variable0 /*v*/) /*TypingVisitor::self_type*/;
-  variable2 = ((static_type___MMLocalProperty___signature_for_t)CALL(variable2,COLOR_static_type___MMLocalProperty___signature_for))(variable2, variable3) /*MMLocalProperty::signature_for*/;
-  variable2 = ((static_type___MMSignature___return_type_t)CALL(variable2,COLOR_static_type___MMSignature___return_type))(variable2) /*MMSignature::return_type*/;
-  variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable2 ==  NIT_NULL /*null*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable3 = NEW_Array_array___Array___init(); /*new Array[MMType]*/
-    variable2 = variable3;
-    variable3 =  NIT_NULL /*null*/;
-    variable4 = ((array___AbstractArray___iterator_t)CALL( variable1 /*precs*/,COLOR_abstract_collection___Collection___iterator))( variable1 /*precs*/) /*AbstractArray::iterator*/;
-    while (true) { /*for*/
-      variable5 = ((array___ArrayIterator___is_ok_t)CALL(variable4,COLOR_abstract_collection___Iterator___is_ok))(variable4) /*ArrayIterator::is_ok*/;
-      if (!UNTAG_Bool(variable5)) break; /*for*/
-      variable5 = ((array___ArrayIterator___item_t)CALL(variable4,COLOR_abstract_collection___Iterator___item))(variable4) /*ArrayIterator::item*/;
-      variable6 = TAG_Bool(( variable5 /*prop*/==NIT_NULL) || VAL_ISA( variable5 /*prop*/, COLOR_MMMethod, ID_MMMethod)) /*cast MMMethod*/;
-      if (!UNTAG_Bool(variable6)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___ASuperExpr___after_typing, LOCATE_typing, 692); nit_exit(1);}
-      variable7 = ((typing___TypingVisitor___self_type_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___self_type))( variable0 /*v*/) /*TypingVisitor::self_type*/;
-      variable7 = ((static_type___MMLocalProperty___signature_for_t)CALL( variable5 /*prop*/,COLOR_static_type___MMLocalProperty___signature_for))( variable5 /*prop*/, variable7) /*MMLocalProperty::signature_for*/;
-      variable7 = ((static_type___MMSignature___return_type_t)CALL(variable7,COLOR_static_type___MMSignature___return_type))(variable7) /*MMSignature::return_type*/;
-      variable8 = ((syntax_base___AbsSyntaxVisitor___module_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___module))( variable0 /*v*/) /*AbsSyntaxVisitor::module*/;
-      variable7 = ((static_type___MMType___for_module_t)CALL(variable7,COLOR_static_type___MMType___for_module))(variable7, variable8) /*MMType::for_module*/;
-      variable8 = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable0 /*v*/) /*AbsSyntaxVisitor::local_property*/;
-      variable8 = ((static_type___MMLocalProperty___signature_t)CALL(variable8,COLOR_static_type___MMLocalProperty___signature))(variable8) /*MMLocalProperty::signature*/;
-      variable8 = ((static_type___MMSignature___recv_t)CALL(variable8,COLOR_static_type___MMSignature___recv))(variable8) /*MMSignature::recv*/;
-      variable7 = ((static_type___MMType___adapt_to_t)CALL(variable7,COLOR_static_type___MMType___adapt_to))(variable7, variable8) /*MMType::adapt_to*/;
-      variable6 = variable7;
-      ((array___AbstractArray___add_t)CALL( variable2 /*stypes*/,COLOR_abstract_collection___SimpleCollection___add))( variable2 /*stypes*/,  variable6 /*t*/) /*AbstractArray::add*/;
-      variable7 = TAG_Bool(( variable3 /*stype*/ ==  NIT_NULL /*null*/) || (( variable3 /*stype*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable3 /*stype*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable3 /*stype*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable3 /*stype*/,COLOR_kernel___Object_____eqeq))( variable3 /*stype*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-      variable8 = variable7;
-      if (!UNTAG_Bool(variable8)) { /* or */
-        variable8 = ((static_type___MMType_____l_t)CALL( variable3 /*stype*/,COLOR_static_type___MMType_____l))( variable3 /*stype*/,  variable6 /*t*/) /*MMType::<*/;
-      }
-      variable7 = variable8;
-      if (UNTAG_Bool(variable7)) { /*if*/
-        variable3 =  variable6 /*t*/ /*stype=*/;
-      }
-      continue_70: while(0);
-      ((array___ArrayIterator___next_t)CALL(variable4,COLOR_abstract_collection___Iterator___next))(variable4) /*ArrayIterator::next*/;
-    }
-    break_70: while(0);
-    variable4 = ((array___AbstractArray___iterator_t)CALL( variable2 /*stypes*/,COLOR_abstract_collection___Collection___iterator))( variable2 /*stypes*/) /*AbstractArray::iterator*/;
-    while (true) { /*for*/
-      variable5 = ((array___ArrayIterator___is_ok_t)CALL(variable4,COLOR_abstract_collection___Iterator___is_ok))(variable4) /*ArrayIterator::is_ok*/;
-      if (!UNTAG_Bool(variable5)) break; /*for*/
-      variable5 = ((array___ArrayIterator___item_t)CALL(variable4,COLOR_abstract_collection___Iterator___item))(variable4) /*ArrayIterator::item*/;
-      ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self,  variable5 /*t*/,  variable3 /*stype*/) /*AbsSyntaxVisitor::check_conform*/;
-      continue_71: while(0);
-      ((array___ArrayIterator___next_t)CALL(variable4,COLOR_abstract_collection___Iterator___next))(variable4) /*ArrayIterator::next*/;
-    }
-    break_71: while(0);
-    ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ =  variable3 /*stype*/;
-  }
-  variable3 = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable0 /*v*/) /*AbsSyntaxVisitor::local_property*/;
-  variable2 = variable3;
-  variable3 = TAG_Bool(( variable2 /*p*/==NIT_NULL) || VAL_ISA( variable2 /*p*/, COLOR_MMSrcMethod, ID_MMSrcMethod)) /*cast MMSrcMethod*/;
-  if (!UNTAG_Bool(variable3)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___ASuperExpr___after_typing, LOCATE_typing, 705); nit_exit(1);}
-  ATTR_typing___AAbsSendExpr____prop( self) /*AAbsSendExpr::_prop*/ =  variable2 /*p*/;
-  return_label68: while(false);
-  tracehead = trace.prev;
-  return;
-}
 val_t typing___AAttrFormExpr___prop(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 711, LOCATE_typing___AAttrFormExpr___prop};
+  struct trace_t trace = {NULL, NULL, 784, LOCATE_typing___AAttrFormExpr___prop};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   tracehead = trace.prev;
   return ATTR_typing___AAttrFormExpr____prop( self) /*AAttrFormExpr::_prop*/;
 }
 val_t typing___AAttrFormExpr___attr_type(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 714, LOCATE_typing___AAttrFormExpr___attr_type};
+  struct trace_t trace = {NULL, NULL, 787, LOCATE_typing___AAttrFormExpr___attr_type};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   tracehead = trace.prev;
   return ATTR_typing___AAttrFormExpr____attr_type( self) /*AAttrFormExpr::_attr_type*/;
 }
 void typing___AAttrFormExpr___do_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 717, LOCATE_typing___AAttrFormExpr___do_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-    val_t variable5;
-    val_t variable6;
-    val_t variable7;
-    val_t variable8;
-    val_t variable9;
-    val_t variable10;
-    val_t variable11;
-    val_t variable12;
-      val_t variable13;
-      val_t variable14;
-      val_t variable15;
-      val_t variable16;
-      val_t variable17;
+  struct trace_t trace = {NULL, NULL, 790, LOCATE_typing___AAttrFormExpr___do_typing};
+  val_t variable[21];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable2 = ((parser_nodes___AAttrFormExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AAttrFormExpr___n_expr))( self) /*AAttrFormExpr::n_expr*/;
-  variable2 = ((typing___PExpr___stype_t)CALL(variable2,COLOR_syntax_base___PExpr___stype))(variable2) /*PExpr::stype*/;
-  variable1 = variable2;
-  variable2 = TAG_Bool(( variable1 /*type_recv*/ ==  NIT_NULL /*null*/) || (( variable1 /*type_recv*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable1 /*type_recv*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable1 /*type_recv*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable1 /*type_recv*/,COLOR_kernel___Object_____eqeq))( variable1 /*type_recv*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    goto return_label72;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___AAttrFormExpr___n_expr_t)CALL(variable[3],COLOR_parser_nodes___AAttrFormExpr___n_expr))(variable[3]) /*AAttrFormExpr::n_expr*/;
+  variable[3] = ((syntax_base___AbsSyntaxVisitor___check_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_expr))( variable[1] /*v*/, variable[3]) /*AbsSyntaxVisitor::check_expr*/;
+  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) { /*if*/
+    goto return_label78;
   }
-  variable3 = ((parser_nodes___AAttrFormExpr___n_id_t)CALL( self,COLOR_parser_nodes___AAttrFormExpr___n_id))( self) /*AAttrFormExpr::n_id*/;
-  variable3 = ((syntax_base___Token___to_symbol_t)CALL(variable3,COLOR_syntax_base___Token___to_symbol))(variable3) /*Token::to_symbol*/;
-  variable2 = variable3;
-  variable4 = ((static_type___MMType___local_class_t)CALL( variable1 /*type_recv*/,COLOR_static_type___MMType___local_class))( variable1 /*type_recv*/) /*MMType::local_class*/;
-  variable4 = ((abstractmetamodel___MMLocalClass___select_attribute_t)CALL(variable4,COLOR_abstractmetamodel___MMLocalClass___select_attribute))(variable4,  variable2 /*name*/) /*MMLocalClass::select_attribute*/;
-  variable3 = variable4;
-  variable4 = TAG_Bool(( variable3 /*prop*/ ==  NIT_NULL /*null*/) || (( variable3 /*prop*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable3 /*prop*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable3 /*prop*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable3 /*prop*/,COLOR_kernel___Object_____eqeq))( variable3 /*prop*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable4)) { /*if*/
-    variable4 = NEW_String_string___String___init(); /*new String*/
-    variable5 = NEW_String_string___String___with_native(BOX_NativeString("Error: Attribute "), TAG_Int(17)); /*new String*/
-    variable6 = variable5;
-    ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable6) /*String::append*/;
-    variable7 =  variable2 /*name*/;
-    variable7 = ((string___String___to_s_t)CALL(variable7,COLOR_string___Object___to_s))(variable7) /*String::to_s*/;
-    ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable7) /*String::append*/;
-    variable8 = NEW_String_string___String___with_native(BOX_NativeString(" doesn't exists in "), TAG_Int(19)); /*new String*/
-    variable9 = variable8;
-    ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable9) /*String::append*/;
-    variable10 =  variable1 /*type_recv*/;
-    variable10 = ((string___String___to_s_t)CALL(variable10,COLOR_string___Object___to_s))(variable10) /*String::to_s*/;
-    ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable10) /*String::append*/;
-    variable11 = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-    variable12 = variable11;
-    ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable12) /*String::append*/;
-    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable4) /*AbsSyntaxVisitor::error*/;
-    goto return_label72;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AAttrFormExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AAttrFormExpr___n_expr))(variable[4]) /*AAttrFormExpr::n_expr*/;
+  variable[4] = ((typing___PExpr___stype_t)CALL(variable[4],COLOR_syntax_base___PExpr___stype))(variable[4]) /*PExpr::stype*/;
+  variable[3] = variable[4];
+  variable[5] = variable[0];
+  variable[5] = ((parser_nodes___AAttrFormExpr___n_id_t)CALL(variable[5],COLOR_parser_nodes___AAttrFormExpr___n_id))(variable[5]) /*AAttrFormExpr::n_id*/;
+  variable[5] = ((syntax_base___Token___to_symbol_t)CALL(variable[5],COLOR_syntax_base___Token___to_symbol))(variable[5]) /*Token::to_symbol*/;
+  variable[4] = variable[5];
+  variable[6] = ((static_type___MMType___local_class_t)CALL( variable[3] /*type_recv*/,COLOR_static_type___MMType___local_class))( variable[3] /*type_recv*/) /*MMType::local_class*/;
+  variable[6] = ((abstractmetamodel___MMLocalClass___select_attribute_t)CALL(variable[6],COLOR_abstractmetamodel___MMLocalClass___select_attribute))(variable[6],  variable[4] /*name*/) /*MMLocalClass::select_attribute*/;
+  variable[5] = variable[6];
+  variable[6] = TAG_Bool(( variable[5] /*prop*/ ==  NIT_NULL /*null*/) || (( variable[5] /*prop*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*prop*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*prop*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*prop*/,COLOR_kernel___Object_____eqeq))( variable[5] /*prop*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[6])) { /*if*/
+    variable[6] = variable[0];
+    variable[7] = NEW_String_string___String___init(); /*new String*/
+    variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Error: Attribute "), TAG_Int(17)); /*new String*/
+    variable[9] = variable[8];
+    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[9]) /*String::append*/;
+    variable[10] =  variable[4] /*name*/;
+    variable[10] = ((string___String___to_s_t)CALL(variable[10],COLOR_string___Object___to_s))(variable[10]) /*String::to_s*/;
+    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[10]) /*String::append*/;
+    variable[11] = NEW_String_string___String___with_native(BOX_NativeString(" doesn't exists in "), TAG_Int(19)); /*new String*/
+    variable[12] = variable[11];
+    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[12]) /*String::append*/;
+    variable[13] =  variable[3] /*type_recv*/;
+    variable[13] = ((string___String___to_s_t)CALL(variable[13],COLOR_string___Object___to_s))(variable[13]) /*String::to_s*/;
+    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[13]) /*String::append*/;
+    variable[14] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
+    variable[15] = variable[14];
+    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[15]) /*String::append*/;
+    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[6], variable[7]) /*AbsSyntaxVisitor::error*/;
+    goto return_label78;
   } else { /*if*/
-    variable4 = ((syntax_base___AbsSyntaxVisitor___module_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___module))( variable0 /*v*/) /*AbsSyntaxVisitor::module*/;
-    variable5 = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable3 /*prop*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable3 /*prop*/) /*MMLocalProperty::global*/;
-    variable5 = ((abstractmetamodel___MMGlobalProperty___local_class_t)CALL(variable5,COLOR_abstractmetamodel___MMGlobalProperty___local_class))(variable5) /*MMGlobalProperty::local_class*/;
-    variable5 = ((abstractmetamodel___MMLocalClass___module_t)CALL(variable5,COLOR_abstractmetamodel___MMLocalClass___module))(variable5) /*MMLocalClass::module*/;
-    variable4 = ((abstractmetamodel___MMModule___visibility_for_t)CALL(variable4,COLOR_abstractmetamodel___MMModule___visibility_for))(variable4, variable5) /*MMModule::visibility_for*/;
-    variable4 = TAG_Bool(UNTAG_Int(variable4)<UNTAG_Int( TAG_Int(3)));
-    if (UNTAG_Bool(variable4)) { /*if*/
-      variable4 = NEW_String_string___String___init(); /*new String*/
-      variable5 = NEW_String_string___String___with_native(BOX_NativeString("Error: Attribute "), TAG_Int(17)); /*new String*/
-      variable6 = variable5;
-      ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable6) /*String::append*/;
-      variable7 =  variable2 /*name*/;
-      variable7 = ((string___String___to_s_t)CALL(variable7,COLOR_string___Object___to_s))(variable7) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable7) /*String::append*/;
-      variable8 = NEW_String_string___String___with_native(BOX_NativeString(" from "), TAG_Int(6)); /*new String*/
-      variable9 = variable8;
-      ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable9) /*String::append*/;
-      variable10 = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable3 /*prop*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable3 /*prop*/) /*MMLocalProperty::global*/;
-      variable10 = ((abstractmetamodel___MMGlobalProperty___local_class_t)CALL(variable10,COLOR_abstractmetamodel___MMGlobalProperty___local_class))(variable10) /*MMGlobalProperty::local_class*/;
-      variable10 = ((abstractmetamodel___MMLocalClass___module_t)CALL(variable10,COLOR_abstractmetamodel___MMLocalClass___module))(variable10) /*MMLocalClass::module*/;
-      variable11 = variable10;
-      variable11 = ((string___String___to_s_t)CALL(variable11,COLOR_string___Object___to_s))(variable11) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable11) /*String::append*/;
-      variable12 = NEW_String_string___String___with_native(BOX_NativeString(" is invisible in "), TAG_Int(17)); /*new String*/
-      variable13 = variable12;
-      ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable13) /*String::append*/;
-      variable14 = ((syntax_base___AbsSyntaxVisitor___module_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___module))( variable0 /*v*/) /*AbsSyntaxVisitor::module*/;
-      variable15 = variable14;
-      variable15 = ((string___String___to_s_t)CALL(variable15,COLOR_string___Object___to_s))(variable15) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable15) /*String::append*/;
-      variable16 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-      variable17 = variable16;
-      ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable17) /*String::append*/;
-      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable4) /*AbsSyntaxVisitor::error*/;
+    variable[6] = ((syntax_base___AbsSyntaxVisitor___module_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___module))( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
+    variable[7] = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable[5] /*prop*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable[5] /*prop*/) /*MMLocalProperty::global*/;
+    variable[7] = ((abstractmetamodel___MMGlobalProperty___local_class_t)CALL(variable[7],COLOR_abstractmetamodel___MMGlobalProperty___local_class))(variable[7]) /*MMGlobalProperty::local_class*/;
+    variable[7] = ((abstractmetamodel___MMLocalClass___module_t)CALL(variable[7],COLOR_abstractmetamodel___MMLocalClass___module))(variable[7]) /*MMLocalClass::module*/;
+    variable[6] = ((abstractmetamodel___MMModule___visibility_for_t)CALL(variable[6],COLOR_abstractmetamodel___MMModule___visibility_for))(variable[6], variable[7]) /*MMModule::visibility_for*/;
+    variable[6] = TAG_Bool(UNTAG_Int(variable[6])<UNTAG_Int( TAG_Int(3)));
+    if (UNTAG_Bool(variable[6])) { /*if*/
+      variable[6] = variable[0];
+      variable[7] = NEW_String_string___String___init(); /*new String*/
+      variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Error: Attribute "), TAG_Int(17)); /*new String*/
+      variable[9] = variable[8];
+      ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[9]) /*String::append*/;
+      variable[10] =  variable[4] /*name*/;
+      variable[10] = ((string___String___to_s_t)CALL(variable[10],COLOR_string___Object___to_s))(variable[10]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[10]) /*String::append*/;
+      variable[11] = NEW_String_string___String___with_native(BOX_NativeString(" from "), TAG_Int(6)); /*new String*/
+      variable[12] = variable[11];
+      ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[12]) /*String::append*/;
+      variable[13] = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable[5] /*prop*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable[5] /*prop*/) /*MMLocalProperty::global*/;
+      variable[13] = ((abstractmetamodel___MMGlobalProperty___local_class_t)CALL(variable[13],COLOR_abstractmetamodel___MMGlobalProperty___local_class))(variable[13]) /*MMGlobalProperty::local_class*/;
+      variable[13] = ((abstractmetamodel___MMLocalClass___module_t)CALL(variable[13],COLOR_abstractmetamodel___MMLocalClass___module))(variable[13]) /*MMLocalClass::module*/;
+      variable[14] = variable[13];
+      variable[14] = ((string___String___to_s_t)CALL(variable[14],COLOR_string___Object___to_s))(variable[14]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[14]) /*String::append*/;
+      variable[15] = NEW_String_string___String___with_native(BOX_NativeString(" is invisible in "), TAG_Int(17)); /*new String*/
+      variable[16] = variable[15];
+      ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[16]) /*String::append*/;
+      variable[17] = ((syntax_base___AbsSyntaxVisitor___module_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___module))( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
+      variable[18] = variable[17];
+      variable[18] = ((string___String___to_s_t)CALL(variable[18],COLOR_string___Object___to_s))(variable[18]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[18]) /*String::append*/;
+      variable[19] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+      variable[20] = variable[19];
+      ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[20]) /*String::append*/;
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[6], variable[7]) /*AbsSyntaxVisitor::error*/;
     }
   }
-  ATTR_typing___AAttrFormExpr____prop( self) /*AAttrFormExpr::_prop*/ =  variable3 /*prop*/;
-  variable5 = ((static_type___MMLocalProperty___signature_for_t)CALL( variable3 /*prop*/,COLOR_static_type___MMLocalProperty___signature_for))( variable3 /*prop*/,  variable1 /*type_recv*/) /*MMLocalProperty::signature_for*/;
-  variable5 = ((static_type___MMSignature___return_type_t)CALL(variable5,COLOR_static_type___MMSignature___return_type))(variable5) /*MMSignature::return_type*/;
-  variable4 = variable5;
-  variable5 = ((parser_nodes___AAttrFormExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AAttrFormExpr___n_expr))( self) /*AAttrFormExpr::n_expr*/;
-  variable5 = ((typing___PExpr___is_self_t)CALL(variable5,COLOR_typing___PExpr___is_self))(variable5) /*PExpr::is_self*/;
-  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable5)))) { /*if*/
-    variable5 = ((static_type___MMType___not_for_self_t)CALL( variable4 /*at*/,COLOR_static_type___MMType___not_for_self))( variable4 /*at*/) /*MMType::not_for_self*/;
-    variable4 = variable5 /*at=*/;
+  variable[6] = variable[0];
+  ATTR_typing___AAttrFormExpr____prop(variable[6]) /*AAttrFormExpr::_prop*/ =  variable[5] /*prop*/;
+  variable[7] = ((static_type___MMLocalProperty___signature_for_t)CALL( variable[5] /*prop*/,COLOR_static_type___MMLocalProperty___signature_for))( variable[5] /*prop*/,  variable[3] /*type_recv*/) /*MMLocalProperty::signature_for*/;
+  variable[7] = ((static_type___MMSignature___return_type_t)CALL(variable[7],COLOR_static_type___MMSignature___return_type))(variable[7]) /*MMSignature::return_type*/;
+  variable[6] = variable[7];
+  variable[7] = variable[0];
+  variable[7] = ((parser_nodes___AAttrFormExpr___n_expr_t)CALL(variable[7],COLOR_parser_nodes___AAttrFormExpr___n_expr))(variable[7]) /*AAttrFormExpr::n_expr*/;
+  variable[7] = ((typing___PExpr___is_self_t)CALL(variable[7],COLOR_typing___PExpr___is_self))(variable[7]) /*PExpr::is_self*/;
+  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[7])))) { /*if*/
+    variable[7] = ((static_type___MMType___not_for_self_t)CALL( variable[6] /*at*/,COLOR_static_type___MMType___not_for_self))( variable[6] /*at*/) /*MMType::not_for_self*/;
+    variable[6] = variable[7] /*at=*/;
   }
-  ATTR_typing___AAttrFormExpr____attr_type( self) /*AAttrFormExpr::_attr_type*/ =  variable4 /*at*/;
-  return_label72: while(false);
+  variable[7] = variable[0];
+  ATTR_typing___AAttrFormExpr____attr_type(variable[7]) /*AAttrFormExpr::_attr_type*/ =  variable[6] /*at*/;
+  return_label78: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___AAttrExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 740, LOCATE_typing___AAttrExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 811, LOCATE_typing___AAttrExpr___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  ((typing___AAttrFormExpr___do_typing_t)CALL( self,COLOR_typing___AAttrFormExpr___do_typing))( self,  variable0 /*v*/) /*AAttrFormExpr::do_typing*/;
-  variable1 = ((typing___AAttrFormExpr___prop_t)CALL( self,COLOR_typing___AAttrFormExpr___prop))( self) /*AAttrFormExpr::prop*/;
-  variable1 = TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable1)) { /*if*/
-    goto return_label73;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  ((typing___AAttrFormExpr___do_typing_t)CALL(variable[3],COLOR_typing___AAttrFormExpr___do_typing))(variable[3],  variable[1] /*v*/) /*AAttrFormExpr::do_typing*/;
+  variable[3] = variable[0];
+  variable[3] = ((typing___AAttrFormExpr___prop_t)CALL(variable[3],COLOR_typing___AAttrFormExpr___prop))(variable[3]) /*AAttrFormExpr::prop*/;
+  variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    goto return_label79;
   }
-  variable1 = ((typing___AAttrFormExpr___attr_type_t)CALL( self,COLOR_typing___AAttrFormExpr___attr_type))( self) /*AAttrFormExpr::attr_type*/;
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ = variable1;
-  return_label73: while(false);
+  variable[3] = variable[0];
+  variable[4] = variable[0];
+  variable[4] = ((typing___AAttrFormExpr___attr_type_t)CALL(variable[4],COLOR_typing___AAttrFormExpr___attr_type))(variable[4]) /*AAttrFormExpr::attr_type*/;
+  ATTR_typing___PExpr____stype(variable[3]) /*PExpr::_stype*/ = variable[4];
+  return_label79: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___AAttrAssignExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 751, LOCATE_typing___AAttrAssignExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  struct trace_t trace = {NULL, NULL, 822, LOCATE_typing___AAttrAssignExpr___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  ((typing___AAttrFormExpr___do_typing_t)CALL( self,COLOR_typing___AAttrFormExpr___do_typing))( self,  variable0 /*v*/) /*AAttrFormExpr::do_typing*/;
-  variable1 = ((typing___AAttrFormExpr___prop_t)CALL( self,COLOR_typing___AAttrFormExpr___prop))( self) /*AAttrFormExpr::prop*/;
-  variable1 = TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable1)) { /*if*/
-    goto return_label74;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  ((typing___AAttrFormExpr___do_typing_t)CALL(variable[3],COLOR_typing___AAttrFormExpr___do_typing))(variable[3],  variable[1] /*v*/) /*AAttrFormExpr::do_typing*/;
+  variable[3] = variable[0];
+  variable[3] = ((typing___AAttrFormExpr___prop_t)CALL(variable[3],COLOR_typing___AAttrFormExpr___prop))(variable[3]) /*AAttrFormExpr::prop*/;
+  variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    goto return_label80;
   }
-  variable1 = ((parser_nodes___AAssignFormExpr___n_value_t)CALL( self,COLOR_parser_nodes___AAssignFormExpr___n_value))( self) /*AAssignFormExpr::n_value*/;
-  variable1 = ((typing___PExpr___stype_t)CALL(variable1,COLOR_syntax_base___PExpr___stype))(variable1) /*PExpr::stype*/;
-  variable2 = ((typing___AAttrFormExpr___attr_type_t)CALL( self,COLOR_typing___AAttrFormExpr___attr_type))( self) /*AAttrFormExpr::attr_type*/;
-  ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self, variable1, variable2) /*AbsSyntaxVisitor::check_conform*/;
-  return_label74: while(false);
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___AAssignFormExpr___n_value_t)CALL(variable[3],COLOR_parser_nodes___AAssignFormExpr___n_value))(variable[3]) /*AAssignFormExpr::n_value*/;
+  variable[4] = variable[0];
+  variable[4] = ((typing___AAttrFormExpr___attr_type_t)CALL(variable[4],COLOR_typing___AAttrFormExpr___attr_type))(variable[4]) /*AAttrFormExpr::attr_type*/;
+  ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/, variable[3], variable[4]) /*AbsSyntaxVisitor::check_conform_expr*/;
+  return_label80: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___AAttrReassignExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 762, LOCATE_typing___AAttrReassignExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 833, LOCATE_typing___AAttrReassignExpr___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  ((typing___AAttrFormExpr___do_typing_t)CALL( self,COLOR_typing___AAttrFormExpr___do_typing))( self,  variable0 /*v*/) /*AAttrFormExpr::do_typing*/;
-  variable1 = ((typing___AAttrFormExpr___prop_t)CALL( self,COLOR_typing___AAttrFormExpr___prop))( self) /*AAttrFormExpr::prop*/;
-  variable1 = TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable1)) { /*if*/
-    goto return_label75;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  ((typing___AAttrFormExpr___do_typing_t)CALL(variable[3],COLOR_typing___AAttrFormExpr___do_typing))(variable[3],  variable[1] /*v*/) /*AAttrFormExpr::do_typing*/;
+  variable[3] = variable[0];
+  variable[3] = ((typing___AAttrFormExpr___prop_t)CALL(variable[3],COLOR_typing___AAttrFormExpr___prop))(variable[3]) /*AAttrFormExpr::prop*/;
+  variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    goto return_label81;
   }
-  variable1 = ((typing___AAttrFormExpr___attr_type_t)CALL( self,COLOR_typing___AAttrFormExpr___attr_type))( self) /*AAttrFormExpr::attr_type*/;
-  ((typing___AReassignFormExpr___do_lvalue_typing_t)CALL( self,COLOR_typing___AReassignFormExpr___do_lvalue_typing))( self,  variable0 /*v*/, variable1) /*AReassignFormExpr::do_lvalue_typing*/;
-  return_label75: while(false);
+  variable[3] = variable[0];
+  variable[4] = variable[0];
+  variable[4] = ((typing___AAttrFormExpr___attr_type_t)CALL(variable[4],COLOR_typing___AAttrFormExpr___attr_type))(variable[4]) /*AAttrFormExpr::attr_type*/;
+  ((typing___AReassignFormExpr___do_lvalue_typing_t)CALL(variable[3],COLOR_typing___AReassignFormExpr___do_lvalue_typing))(variable[3],  variable[1] /*v*/, variable[4]) /*AReassignFormExpr::do_lvalue_typing*/;
+  return_label81: while(false);
   tracehead = trace.prev;
   return;
 }
-void typing___AAbsSendExpr___do_typing(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5) {
-  struct trace_t trace = {NULL, NULL, 774, LOCATE_typing___AAbsSendExpr___do_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-  val_t variable5;
-  val_t variable6;
-  val_t variable7;
-  val_t variable8;
+val_t typing___AAbsSendExpr___prop_signature(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 845, LOCATE_typing___AAbsSendExpr___prop_signature};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable2 =  param2;
-  variable3 =  param3;
-  variable4 =  param4;
-  variable5 =  param5;
-  variable7 = ((typing___AAbsSendExpr___get_property_t)CALL( self,COLOR_typing___AAbsSendExpr___get_property))( self,  variable0 /*v*/,  variable1 /*type_recv*/,  variable2 /*is_implicit_self*/,  variable4 /*name*/) /*AAbsSendExpr::get_property*/;
-  variable6 = variable7;
-  variable7 = TAG_Bool(( variable6 /*prop*/ ==  NIT_NULL /*null*/) || (( variable6 /*prop*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable6 /*prop*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable6 /*prop*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable6 /*prop*/,COLOR_kernel___Object_____eqeq))( variable6 /*prop*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable7)) { /*if*/
-    goto return_label76;
+  tracehead = trace.prev;
+  return ATTR_typing___AAbsSendExpr____prop_signature( self) /*AAbsSendExpr::_prop_signature*/;
+}
+void typing___AAbsSendExpr___do_typing(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6) {
+  struct trace_t trace = {NULL, NULL, 848, LOCATE_typing___AAbsSendExpr___do_typing};
+  val_t variable[15];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[3] =  param2;
+  variable[4] =  param3;
+  variable[5] =  param4;
+  variable[6] =  param5;
+  variable[7] =  param6;
+  variable[10] = variable[0];
+  variable[10] = ((typing___AAbsSendExpr___get_property_t)CALL(variable[10],COLOR_typing___AAbsSendExpr___get_property))(variable[10],  variable[1] /*v*/,  variable[2] /*type_recv*/,  variable[3] /*is_implicit_self*/,  variable[5] /*name*/) /*AAbsSendExpr::get_property*/;
+  variable[9] = variable[10];
+  variable[10] = TAG_Bool(( variable[9] /*prop*/ ==  NIT_NULL /*null*/) || (( variable[9] /*prop*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[9] /*prop*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[9] /*prop*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[9] /*prop*/,COLOR_kernel___Object_____eqeq))( variable[9] /*prop*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[10])) { /*if*/
+    goto return_label82;
   }
-  variable8 = ((typing___AAbsSendExpr___process_signature_t)CALL( self,COLOR_typing___AAbsSendExpr___process_signature))( self,  variable0 /*v*/,  variable1 /*type_recv*/,  variable6 /*prop*/,  variable3 /*recv_is_self*/,  variable5 /*raw_args*/) /*AAbsSendExpr::process_signature*/;
-  variable7 = variable8;
-  variable8 = TAG_Bool(( variable7 /*args*/ ==  NIT_NULL /*null*/) || (( variable7 /*args*/ != NIT_NULL) && UNTAG_Bool(((array___AbstractArray_____eqeq_t)CALL( variable7 /*args*/,COLOR_kernel___Object_____eqeq))( variable7 /*args*/,  NIT_NULL /*null*/) /*AbstractArray::==*/)));
-  if (UNTAG_Bool(variable8)) { /*if*/
-    goto return_label76;
+  variable[11] = variable[0];
+  variable[11] = ((typing___AAbsSendExpr___get_signature_t)CALL(variable[11],COLOR_typing___AAbsSendExpr___get_signature))(variable[11],  variable[1] /*v*/,  variable[2] /*type_recv*/,  variable[9] /*prop*/,  variable[4] /*recv_is_self*/) /*AAbsSendExpr::get_signature*/;
+  variable[10] = variable[11];
+  variable[11] = TAG_Bool(( variable[10] /*sig*/ ==  NIT_NULL /*null*/) || (( variable[10] /*sig*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[10] /*sig*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[10] /*sig*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[10] /*sig*/,COLOR_kernel___Object_____eqeq))( variable[10] /*sig*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[11])) { /*if*/
+    goto return_label82;
   }
-  ATTR_typing___AAbsSendExpr____prop( self) /*AAbsSendExpr::_prop*/ =  variable6 /*prop*/;
-  ATTR_typing___AAbsSendExpr____arguments( self) /*AAbsSendExpr::_arguments*/ =  variable7 /*args*/;
-  return_label76: while(false);
+  variable[12] = variable[0];
+  variable[13] = ((abstractmetamodel___MMLocalProperty___name_t)CALL( variable[9] /*prop*/,COLOR_abstractmetamodel___MMLocalProperty___name))( variable[9] /*prop*/) /*MMLocalProperty::name*/;
+  variable[12] = ((typing___AAbsSendExpr___process_signature_t)CALL(variable[12],COLOR_typing___AAbsSendExpr___process_signature))(variable[12],  variable[1] /*v*/,  variable[10] /*sig*/, variable[13],  variable[6] /*raw_args*/) /*AAbsSendExpr::process_signature*/;
+  variable[11] = variable[12];
+  variable[12] = TAG_Bool(( variable[11] /*args*/ ==  NIT_NULL /*null*/) || (( variable[11] /*args*/ != NIT_NULL) && UNTAG_Bool(((array___AbstractArray_____eqeq_t)CALL( variable[11] /*args*/,COLOR_kernel___Object_____eqeq))( variable[11] /*args*/,  NIT_NULL /*null*/) /*AbstractArray::==*/)));
+  if (UNTAG_Bool(variable[12])) { /*if*/
+    goto return_label82;
+  }
+  variable[13] = variable[0];
+  variable[14] = ((abstractmetamodel___MMLocalProperty___name_t)CALL( variable[9] /*prop*/,COLOR_abstractmetamodel___MMLocalProperty___name))( variable[9] /*prop*/) /*MMLocalProperty::name*/;
+  variable[13] = ((typing___AAbsSendExpr___process_closures_t)CALL(variable[13],COLOR_typing___AAbsSendExpr___process_closures))(variable[13],  variable[1] /*v*/,  variable[10] /*sig*/, variable[14],  variable[7] /*closure_defs*/) /*AAbsSendExpr::process_closures*/;
+  variable[12] = variable[13];
+  variable[13] = variable[0];
+  ATTR_typing___AAbsSendExpr____prop(variable[13]) /*AAbsSendExpr::_prop*/ =  variable[9] /*prop*/;
+  variable[13] = variable[0];
+  ATTR_typing___AAbsSendExpr____prop_signature(variable[13]) /*AAbsSendExpr::_prop_signature*/ =  variable[10] /*sig*/;
+  variable[13] = variable[0];
+  ATTR_typing___AAbsSendExpr____arguments(variable[13]) /*AAbsSendExpr::_arguments*/ =  variable[11] /*args*/;
+  variable[13] = variable[0];
+  ATTR_typing___AAbsSendExpr____return_type(variable[13]) /*AAbsSendExpr::_return_type*/ =  variable[12] /*rtype*/;
+  return_label82: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t typing___AAbsSendExpr___get_property(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3) {
-  struct trace_t trace = {NULL, NULL, 785, LOCATE_typing___AAbsSendExpr___get_property};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-  val_t variable5;
-  val_t variable6;
-      val_t variable7;
-      val_t variable8;
-      val_t variable9;
-      val_t variable10;
-      val_t variable11;
-      val_t variable12;
-      val_t variable13;
-      val_t variable14;
-      val_t variable15;
+  struct trace_t trace = {NULL, NULL, 864, LOCATE_typing___AAbsSendExpr___get_property};
+  val_t variable[19];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable2 =  param2;
-  variable3 =  param3;
-  variable4 = TAG_Bool(( variable1 /*type_recv*/ ==  NIT_NULL /*null*/) || (( variable1 /*type_recv*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable1 /*type_recv*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable1 /*type_recv*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable1 /*type_recv*/,COLOR_kernel___Object_____eqeq))( variable1 /*type_recv*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable4)) { /*if*/
-    variable4 =  NIT_NULL /*null*/;
-    goto return_label77;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[3] =  param2;
+  variable[4] =  param3;
+  variable[6] = TAG_Bool(( variable[2] /*type_recv*/ ==  NIT_NULL /*null*/) || (( variable[2] /*type_recv*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[2] /*type_recv*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*type_recv*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[2] /*type_recv*/,COLOR_kernel___Object_____eqeq))( variable[2] /*type_recv*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[6])) { /*if*/
+    variable[5] =  NIT_NULL /*null*/;
+    goto return_label83;
   }
-  variable5 = ((static_type___MMType___local_class_t)CALL( variable1 /*type_recv*/,COLOR_static_type___MMType___local_class))( variable1 /*type_recv*/) /*MMType::local_class*/;
-  variable5 = ((abstractmetamodel___MMLocalClass___select_method_t)CALL(variable5,COLOR_abstractmetamodel___MMLocalClass___select_method))(variable5,  variable3 /*name*/) /*MMLocalClass::select_method*/;
-  variable4 = variable5;
-  variable5 = TAG_Bool(( variable4 /*prop*/ ==  NIT_NULL /*null*/) || (( variable4 /*prop*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable4 /*prop*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable4 /*prop*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable4 /*prop*/,COLOR_kernel___Object_____eqeq))( variable4 /*prop*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  variable6 = variable5;
-  if (UNTAG_Bool(variable6)) { /* and */
-    variable6 = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable0 /*v*/) /*AbsSyntaxVisitor::local_property*/;
-    variable6 = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable6,COLOR_abstractmetamodel___MMLocalProperty___global))(variable6) /*MMLocalProperty::global*/;
-    variable6 = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable6,COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable6) /*MMGlobalProperty::is_init*/;
+  variable[7] = ((static_type___MMType___local_class_t)CALL( variable[2] /*type_recv*/,COLOR_static_type___MMType___local_class))( variable[2] /*type_recv*/) /*MMType::local_class*/;
+  variable[7] = ((abstractmetamodel___MMLocalClass___select_method_t)CALL(variable[7],COLOR_abstractmetamodel___MMLocalClass___select_method))(variable[7],  variable[4] /*name*/) /*MMLocalClass::select_method*/;
+  variable[6] = variable[7];
+  variable[7] = TAG_Bool(( variable[6] /*prop*/ ==  NIT_NULL /*null*/) || (( variable[6] /*prop*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[6] /*prop*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*prop*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[6] /*prop*/,COLOR_kernel___Object_____eqeq))( variable[6] /*prop*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[8] = variable[7];
+  if (UNTAG_Bool(variable[8])) { /* and */
+    variable[8] = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_property*/;
+    variable[8] = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable[8],COLOR_abstractmetamodel___MMLocalProperty___global))(variable[8]) /*MMLocalProperty::global*/;
+    variable[8] = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable[8],COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable[8]) /*MMGlobalProperty::is_init*/;
   }
-  variable5 = variable6;
-  if (UNTAG_Bool(variable5)) { /*if*/
-    variable6 = ((static_type___MMType___local_class_t)CALL( variable1 /*type_recv*/,COLOR_static_type___MMType___local_class))( variable1 /*type_recv*/) /*MMType::local_class*/;
-    variable6 = ((abstractmetamodel___MMLocalClass___super_methods_named_t)CALL(variable6,COLOR_abstractmetamodel___MMLocalClass___super_methods_named))(variable6,  variable3 /*name*/) /*MMLocalClass::super_methods_named*/;
-    variable5 = variable6;
-    variable6 = ((array___AbstractArray___length_t)CALL( variable5 /*props*/,COLOR_abstract_collection___Collection___length))( variable5 /*props*/) /*AbstractArray::length*/;
-    variable6 = TAG_Bool(UNTAG_Int(variable6)>UNTAG_Int( TAG_Int(1)));
-    if (UNTAG_Bool(variable6)) { /*if*/
-      variable6 = NEW_String_string___String___init(); /*new String*/
-      variable7 = NEW_String_string___String___with_native(BOX_NativeString("Error: Ambigous method name '"), TAG_Int(29)); /*new String*/
-      variable8 = variable7;
-      ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable8) /*String::append*/;
-      variable9 =  variable3 /*name*/;
-      variable9 = ((string___String___to_s_t)CALL(variable9,COLOR_string___Object___to_s))(variable9) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable9) /*String::append*/;
-      variable10 = NEW_String_string___String___with_native(BOX_NativeString("' for "), TAG_Int(6)); /*new String*/
-      variable11 = variable10;
-      ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable11) /*String::append*/;
-      variable12 = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
-      variable12 = ((string___Collection___join_t)CALL( variable5 /*props*/,COLOR_string___Collection___join))( variable5 /*props*/, variable12) /*Collection::join*/;
-      variable13 = variable12;
-      ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable13) /*String::append*/;
-      variable14 = NEW_String_string___String___with_native(BOX_NativeString(". Use explicit designation."), TAG_Int(27)); /*new String*/
-      variable15 = variable14;
-      ((string___String___append_t)CALL(variable6,COLOR_abstract_collection___IndexedCollection___append))(variable6, variable15) /*String::append*/;
-      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable6) /*AbsSyntaxVisitor::error*/;
-      variable4 =  NIT_NULL /*null*/;
-      goto return_label77;
+  variable[7] = variable[8];
+  if (UNTAG_Bool(variable[7])) { /*if*/
+    variable[8] = ((static_type___MMType___local_class_t)CALL( variable[2] /*type_recv*/,COLOR_static_type___MMType___local_class))( variable[2] /*type_recv*/) /*MMType::local_class*/;
+    variable[8] = ((abstractmetamodel___MMLocalClass___super_methods_named_t)CALL(variable[8],COLOR_abstractmetamodel___MMLocalClass___super_methods_named))(variable[8],  variable[4] /*name*/) /*MMLocalClass::super_methods_named*/;
+    variable[7] = variable[8];
+    variable[8] = ((array___AbstractArray___length_t)CALL( variable[7] /*props*/,COLOR_abstract_collection___Collection___length))( variable[7] /*props*/) /*AbstractArray::length*/;
+    variable[8] = TAG_Bool(UNTAG_Int(variable[8])>UNTAG_Int( TAG_Int(1)));
+    if (UNTAG_Bool(variable[8])) { /*if*/
+      variable[8] = variable[0];
+      variable[9] = NEW_String_string___String___init(); /*new String*/
+      variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Error: Ambigous method name '"), TAG_Int(29)); /*new String*/
+      variable[11] = variable[10];
+      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[11]) /*String::append*/;
+      variable[12] =  variable[4] /*name*/;
+      variable[12] = ((string___String___to_s_t)CALL(variable[12],COLOR_string___Object___to_s))(variable[12]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[12]) /*String::append*/;
+      variable[13] = NEW_String_string___String___with_native(BOX_NativeString("' for "), TAG_Int(6)); /*new String*/
+      variable[14] = variable[13];
+      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[14]) /*String::append*/;
+      variable[15] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
+      variable[15] = ((string___Collection___join_t)CALL( variable[7] /*props*/,COLOR_string___Collection___join))( variable[7] /*props*/, variable[15]) /*Collection::join*/;
+      variable[16] = variable[15];
+      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[16]) /*String::append*/;
+      variable[17] = NEW_String_string___String___with_native(BOX_NativeString(". Use explicit designation."), TAG_Int(27)); /*new String*/
+      variable[18] = variable[17];
+      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[18]) /*String::append*/;
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
+      variable[5] =  NIT_NULL /*null*/;
+      goto return_label83;
     } else { /*if*/
-      variable6 = ((array___AbstractArray___length_t)CALL( variable5 /*props*/,COLOR_abstract_collection___Collection___length))( variable5 /*props*/) /*AbstractArray::length*/;
-      variable6 = TAG_Bool((variable6)==( TAG_Int(1)));
-      if (UNTAG_Bool(variable6)) { /*if*/
-        variable7 = ((static_type___MMType___local_class_t)CALL( variable1 /*type_recv*/,COLOR_static_type___MMType___local_class))( variable1 /*type_recv*/) /*MMType::local_class*/;
-        variable8 = ((abstract_collection___IndexedCollection___first_t)CALL( variable5 /*props*/,COLOR_abstract_collection___Collection___first))( variable5 /*props*/) /*IndexedCollection::first*/;
-        variable8 = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable8,COLOR_abstractmetamodel___MMLocalProperty___global))(variable8) /*MMLocalProperty::global*/;
-        variable7 = ((inheritance___MMLocalClass_____bra_t)CALL(variable7,COLOR_abstractmetamodel___MMLocalClass_____bra))(variable7, variable8) /*MMLocalClass::[]*/;
-        variable6 = variable7;
-        variable7 = TAG_Bool(( variable6 /*p*/==NIT_NULL) || VAL_ISA( variable6 /*p*/, COLOR_MMMethod, ID_MMMethod)) /*cast MMMethod*/;
-        if (!UNTAG_Bool(variable7)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___AAbsSendExpr___get_property, LOCATE_typing, 796); nit_exit(1);}
-        variable4 =  variable6 /*p*/ /*prop=*/;
+      variable[8] = ((array___AbstractArray___length_t)CALL( variable[7] /*props*/,COLOR_abstract_collection___Collection___length))( variable[7] /*props*/) /*AbstractArray::length*/;
+      variable[8] = TAG_Bool((variable[8])==( TAG_Int(1)));
+      if (UNTAG_Bool(variable[8])) { /*if*/
+        variable[9] = ((static_type___MMType___local_class_t)CALL( variable[2] /*type_recv*/,COLOR_static_type___MMType___local_class))( variable[2] /*type_recv*/) /*MMType::local_class*/;
+        variable[10] = ((abstract_collection___IndexedCollection___first_t)CALL( variable[7] /*props*/,COLOR_abstract_collection___Collection___first))( variable[7] /*props*/) /*IndexedCollection::first*/;
+        variable[10] = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable[10],COLOR_abstractmetamodel___MMLocalProperty___global))(variable[10]) /*MMLocalProperty::global*/;
+        variable[9] = ((inheritance___MMLocalClass_____bra_t)CALL(variable[9],COLOR_abstractmetamodel___MMLocalClass_____bra))(variable[9], variable[10]) /*MMLocalClass::[]*/;
+        variable[8] = variable[9];
+        variable[9] = TAG_Bool(( variable[8] /*p*/==NIT_NULL) || VAL_ISA( variable[8] /*p*/, COLOR_MMMethod, ID_MMMethod)) /*cast MMMethod*/;
+        if (!UNTAG_Bool(variable[9])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___AAbsSendExpr___get_property, LOCATE_typing, 875); nit_exit(1);}
+        variable[6] =  variable[8] /*p*/ /*prop=*/;
       }
     }
   }
-  variable5 = TAG_Bool(( variable4 /*prop*/ ==  NIT_NULL /*null*/) || (( variable4 /*prop*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable4 /*prop*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable4 /*prop*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable4 /*prop*/,COLOR_kernel___Object_____eqeq))( variable4 /*prop*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable5)) { /*if*/
-    if (UNTAG_Bool( variable2 /*is_implicit_self*/)) { /*if*/
-      variable5 = NEW_String_string___String___init(); /*new String*/
-      variable6 = NEW_String_string___String___with_native(BOX_NativeString("Error: Method or variable '"), TAG_Int(27)); /*new String*/
-      variable7 = variable6;
-      ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable7) /*String::append*/;
-      variable8 =  variable3 /*name*/;
-      variable8 = ((string___String___to_s_t)CALL(variable8,COLOR_string___Object___to_s))(variable8) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable8) /*String::append*/;
-      variable9 = NEW_String_string___String___with_native(BOX_NativeString("' unknown in "), TAG_Int(13)); /*new String*/
-      variable10 = variable9;
-      ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable10) /*String::append*/;
-      variable11 =  variable1 /*type_recv*/;
-      variable11 = ((string___String___to_s_t)CALL(variable11,COLOR_string___Object___to_s))(variable11) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable11) /*String::append*/;
-      variable12 = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-      variable13 = variable12;
-      ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable13) /*String::append*/;
-      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable5) /*AbsSyntaxVisitor::error*/;
+  variable[7] = TAG_Bool(( variable[6] /*prop*/ ==  NIT_NULL /*null*/) || (( variable[6] /*prop*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[6] /*prop*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*prop*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[6] /*prop*/,COLOR_kernel___Object_____eqeq))( variable[6] /*prop*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[7])) { /*if*/
+    if (UNTAG_Bool( variable[3] /*is_implicit_self*/)) { /*if*/
+      variable[7] = variable[0];
+      variable[8] = NEW_String_string___String___init(); /*new String*/
+      variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Error: Method or variable '"), TAG_Int(27)); /*new String*/
+      variable[10] = variable[9];
+      ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[10]) /*String::append*/;
+      variable[11] =  variable[4] /*name*/;
+      variable[11] = ((string___String___to_s_t)CALL(variable[11],COLOR_string___Object___to_s))(variable[11]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[11]) /*String::append*/;
+      variable[12] = NEW_String_string___String___with_native(BOX_NativeString("' unknown in "), TAG_Int(13)); /*new String*/
+      variable[13] = variable[12];
+      ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[13]) /*String::append*/;
+      variable[14] =  variable[2] /*type_recv*/;
+      variable[14] = ((string___String___to_s_t)CALL(variable[14],COLOR_string___Object___to_s))(variable[14]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[14]) /*String::append*/;
+      variable[15] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
+      variable[16] = variable[15];
+      ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[16]) /*String::append*/;
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[7], variable[8]) /*AbsSyntaxVisitor::error*/;
     } else { /*if*/
-      variable5 = NEW_String_string___String___init(); /*new String*/
-      variable6 = NEW_String_string___String___with_native(BOX_NativeString("Error: Method '"), TAG_Int(15)); /*new String*/
-      variable7 = variable6;
-      ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable7) /*String::append*/;
-      variable8 =  variable3 /*name*/;
-      variable8 = ((string___String___to_s_t)CALL(variable8,COLOR_string___Object___to_s))(variable8) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable8) /*String::append*/;
-      variable9 = NEW_String_string___String___with_native(BOX_NativeString("' doesn't exists in "), TAG_Int(20)); /*new String*/
-      variable10 = variable9;
-      ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable10) /*String::append*/;
-      variable11 =  variable1 /*type_recv*/;
-      variable11 = ((string___String___to_s_t)CALL(variable11,COLOR_string___Object___to_s))(variable11) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable11) /*String::append*/;
-      variable12 = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-      variable13 = variable12;
-      ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable13) /*String::append*/;
-      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable5) /*AbsSyntaxVisitor::error*/;
+      variable[7] = variable[0];
+      variable[8] = NEW_String_string___String___init(); /*new String*/
+      variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Error: Method '"), TAG_Int(15)); /*new String*/
+      variable[10] = variable[9];
+      ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[10]) /*String::append*/;
+      variable[11] =  variable[4] /*name*/;
+      variable[11] = ((string___String___to_s_t)CALL(variable[11],COLOR_string___Object___to_s))(variable[11]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[11]) /*String::append*/;
+      variable[12] = NEW_String_string___String___with_native(BOX_NativeString("' doesn't exists in "), TAG_Int(20)); /*new String*/
+      variable[13] = variable[12];
+      ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[13]) /*String::append*/;
+      variable[14] =  variable[2] /*type_recv*/;
+      variable[14] = ((string___String___to_s_t)CALL(variable[14],COLOR_string___Object___to_s))(variable[14]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[14]) /*String::append*/;
+      variable[15] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
+      variable[16] = variable[15];
+      ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[16]) /*String::append*/;
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[7], variable[8]) /*AbsSyntaxVisitor::error*/;
     }
-    variable4 =  NIT_NULL /*null*/;
-    goto return_label77;
+    variable[5] =  NIT_NULL /*null*/;
+    goto return_label83;
   }
-  variable4 =  variable4 /*prop*/;
-  goto return_label77;
-  return_label77: while(false);
+  variable[5] =  variable[6] /*prop*/;
+  goto return_label83;
+  return_label83: while(false);
   tracehead = trace.prev;
-  return variable4;
+  return variable[5];
 }
-val_t typing___AAbsSendExpr___process_signature(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4) {
-  struct trace_t trace = {NULL, NULL, 812, LOCATE_typing___AAbsSendExpr___process_signature};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-  val_t variable5;
-  val_t variable6;
-  val_t variable7;
-  val_t variable8;
-  val_t variable9;
-  val_t variable10;
-    val_t variable11;
-    val_t variable12;
-    val_t variable13;
-    val_t variable14;
-    val_t variable15;
-      val_t variable16;
-      val_t variable17;
-        val_t variable18;
-        val_t variable19;
-        val_t variable20;
+val_t typing___AAbsSendExpr___get_signature(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3) {
+  struct trace_t trace = {NULL, NULL, 891, LOCATE_typing___AAbsSendExpr___get_signature};
+  val_t variable[9];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable2 =  param2;
-  variable3 =  param3;
-  variable4 =  param4;
-  variable5 = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable2 /*prop*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable2 /*prop*/) /*MMLocalProperty::global*/;
-  variable6 = ((syntax_base___AbsSyntaxVisitor___module_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___module))( variable0 /*v*/) /*AbsSyntaxVisitor::module*/;
-  ((syntax_base___MMGlobalProperty___check_visibility_t)CALL(variable5,COLOR_syntax_base___MMGlobalProperty___check_visibility))(variable5,  variable0 /*v*/,  self, variable6,  variable3 /*recv_is_self*/) /*MMGlobalProperty::check_visibility*/;
-  variable6 = ((static_type___MMLocalProperty___signature_for_t)CALL( variable2 /*prop*/,COLOR_static_type___MMLocalProperty___signature_for))( variable2 /*prop*/,  variable1 /*type_recv*/) /*MMLocalProperty::signature_for*/;
-  variable5 = variable6;
-  variable7 = ((vararg___MMSignature___vararg_rank_t)CALL( variable5 /*psig*/,COLOR_vararg___MMSignature___vararg_rank))( variable5 /*psig*/) /*MMSignature::vararg_rank*/;
-  variable6 = variable7;
-  variable8 = ((static_type___MMSignature___arity_t)CALL( variable5 /*psig*/,COLOR_static_type___MMSignature___arity))( variable5 /*psig*/) /*MMSignature::arity*/;
-  variable7 = variable8;
-  variable8 = TAG_Int((bigint)0) /*decl variable raw_arity*/;
-  variable9 = TAG_Bool(( variable4 /*raw_args*/ ==  NIT_NULL /*null*/) || (( variable4 /*raw_args*/ != NIT_NULL) && UNTAG_Bool(((array___AbstractArray_____eqeq_t)CALL( variable4 /*raw_args*/,COLOR_kernel___Object_____eqeq))( variable4 /*raw_args*/,  NIT_NULL /*null*/) /*AbstractArray::==*/)));
-  if (UNTAG_Bool(variable9)) { /*if*/
-    variable8 =  TAG_Int(0) /*raw_arity=*/;
-  } else { /*if*/
-    variable9 = ((array___AbstractArray___length_t)CALL( variable4 /*raw_args*/,COLOR_abstract_collection___Collection___length))( variable4 /*raw_args*/) /*AbstractArray::length*/;
-    variable8 = variable9 /*raw_arity=*/;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[3] =  param2;
+  variable[4] =  param3;
+  variable[6] = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable[3] /*prop*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable[3] /*prop*/) /*MMLocalProperty::global*/;
+  variable[7] = variable[0];
+  variable[8] = ((syntax_base___AbsSyntaxVisitor___module_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___module))( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
+  ((syntax_base___MMGlobalProperty___check_visibility_t)CALL(variable[6],COLOR_syntax_base___MMGlobalProperty___check_visibility))(variable[6],  variable[1] /*v*/, variable[7], variable[8],  variable[4] /*recv_is_self*/) /*MMGlobalProperty::check_visibility*/;
+  variable[7] = ((static_type___MMLocalProperty___signature_for_t)CALL( variable[3] /*prop*/,COLOR_static_type___MMLocalProperty___signature_for))( variable[3] /*prop*/,  variable[2] /*type_recv*/) /*MMLocalProperty::signature_for*/;
+  variable[6] = variable[7];
+  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool( variable[4] /*recv_is_self*/)))) { /*if*/
+    variable[7] = ((vararg___MMSignature___not_for_self_t)CALL( variable[6] /*psig*/,COLOR_static_type___MMSignature___not_for_self))( variable[6] /*psig*/) /*MMSignature::not_for_self*/;
+    variable[6] = variable[7] /*psig=*/;
   }
-  variable9 = TAG_Bool(UNTAG_Int( variable7 /*par_arity*/)>UNTAG_Int( variable8 /*raw_arity*/));
-  variable10 = variable9;
-  if (!UNTAG_Bool(variable10)) { /* or */
-    variable10 = TAG_Bool(( variable7 /*par_arity*/)!=( variable8 /*raw_arity*/));
-    variable11 = variable10;
-    if (UNTAG_Bool(variable11)) { /* and */
-      variable11 = TAG_Int(-UNTAG_Int( TAG_Int(1)));
-      variable11 = TAG_Bool(( variable6 /*par_vararg*/)==(variable11));
-    }
-    variable10 = variable11;
-  }
-  variable9 = variable10;
-  if (UNTAG_Bool(variable9)) { /*if*/
-    variable9 = NEW_String_string___String___init(); /*new String*/
-    variable10 = NEW_String_string___String___with_native(BOX_NativeString("Error: Method '"), TAG_Int(15)); /*new String*/
-    variable11 = variable10;
-    ((string___String___append_t)CALL(variable9,COLOR_abstract_collection___IndexedCollection___append))(variable9, variable11) /*String::append*/;
-    variable12 =  variable2 /*prop*/;
-    variable12 = ((string___String___to_s_t)CALL(variable12,COLOR_string___Object___to_s))(variable12) /*String::to_s*/;
-    ((string___String___append_t)CALL(variable9,COLOR_abstract_collection___IndexedCollection___append))(variable9, variable12) /*String::append*/;
-    variable13 = NEW_String_string___String___with_native(BOX_NativeString("' arity missmatch."), TAG_Int(18)); /*new String*/
-    variable14 = variable13;
-    ((string___String___append_t)CALL(variable9,COLOR_abstract_collection___IndexedCollection___append))(variable9, variable14) /*String::append*/;
-    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable9) /*AbsSyntaxVisitor::error*/;
-    variable5 =  NIT_NULL /*null*/;
-    goto return_label78;
-  }
-  variable9 =  TAG_Int(0);
-  variable11 = NEW_Array_array___Array___init(); /*new Array[PExpr]*/
-  variable10 = variable11;
-  variable11 = NEW_Range_range___Range___without_last( TAG_Int(0),  variable7 /*par_arity*/); /*new Range[Int]*/
-  variable11 = ((range___Range___iterator_t)CALL(variable11,COLOR_abstract_collection___Collection___iterator))(variable11) /*Range::iterator*/;
-  while (true) { /*for*/
-    variable12 = ((abstract_collection___Iterator___is_ok_t)CALL(variable11,COLOR_abstract_collection___Iterator___is_ok))(variable11) /*Iterator::is_ok*/;
-    if (!UNTAG_Bool(variable12)) break; /*for*/
-    variable12 = ((abstract_collection___Iterator___item_t)CALL(variable11,COLOR_abstract_collection___Iterator___item))(variable11) /*Iterator::item*/;
-    variable13 = NIT_NULL /*decl variable a*/;
-    variable15 = ((static_type___MMSignature_____bra_t)CALL( variable5 /*psig*/,COLOR_static_type___MMSignature_____bra))( variable5 /*psig*/,  variable12 /*par_idx*/) /*MMSignature::[]*/;
-    variable14 = variable15;
-    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool( variable3 /*recv_is_self*/)))) { /*if*/
-      variable15 = ((static_type___MMType___not_for_self_t)CALL( variable14 /*par_type*/,COLOR_static_type___MMType___not_for_self))( variable14 /*par_type*/) /*MMType::not_for_self*/;
-      variable14 = variable15 /*par_type=*/;
-    }
-    variable15 = TAG_Bool(( variable12 /*par_idx*/)==( variable6 /*par_vararg*/));
-    if (UNTAG_Bool(variable15)) { /*if*/
-      variable16 = NEW_Array_array___Array___init(); /*new Array[PExpr]*/
-      variable15 = variable16;
-      variable16 = TAG_Int(UNTAG_Int( variable8 /*raw_arity*/)-UNTAG_Int( variable7 /*par_arity*/));
-      variable17 = NEW_Range_range___Range___init( TAG_Int(0), variable16); /*new Range[Int]*/
-      variable16 = variable17;
-      variable16 = ((range___Range___iterator_t)CALL(variable16,COLOR_abstract_collection___Collection___iterator))(variable16) /*Range::iterator*/;
-      while (true) { /*for*/
-        variable17 = ((abstract_collection___Iterator___is_ok_t)CALL(variable16,COLOR_abstract_collection___Iterator___is_ok))(variable16) /*Iterator::is_ok*/;
-        if (!UNTAG_Bool(variable17)) break; /*for*/
-        variable17 = ((abstract_collection___Iterator___item_t)CALL(variable16,COLOR_abstract_collection___Iterator___item))(variable16) /*Iterator::item*/;
-        variable18 =  variable9 /*arg_idx*/;
-        variable19 = TAG_Bool(UNTAG_Int( variable18 /*index*/)>=UNTAG_Int( TAG_Int(0)));
-        variable20 = variable19;
-        if (UNTAG_Bool(variable20)) { /* and */
-          variable20 = ATTR_array___AbstractArray____length( variable4 /*raw_args*/) /*AbstractArray::_length*/;
-          variable20 = TAG_Bool(UNTAG_Int( variable18 /*index*/)<UNTAG_Int(variable20));
-        }
-        variable19 = variable20;
-        if (!UNTAG_Bool(variable19)) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_typing, 229); nit_exit(1);}
-        variable19 = ATTR_array___Array____items( variable4 /*raw_args*/) /*Array::_items*/;
-        variable19 = UNBOX_NativeArray(variable19)[UNTAG_Int( variable18 /*index*/)];
-        goto return_label81;
-        return_label81: while(false);
-        variable18 = variable19;
-        variable13 = variable18 /*a=*/;
-        variable18 = ((typing___PExpr___stype_t)CALL( variable13 /*a*/,COLOR_syntax_base___PExpr___stype))( variable13 /*a*/) /*PExpr::stype*/;
-        ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self, variable18,  variable14 /*par_type*/) /*AbsSyntaxVisitor::check_conform*/;
-        ((array___AbstractArray___add_t)CALL( variable15 /*star*/,COLOR_abstract_collection___SimpleCollection___add))( variable15 /*star*/,  variable13 /*a*/) /*AbstractArray::add*/;
-        variable18 = TAG_Int(UNTAG_Int( variable9 /*arg_idx*/)+UNTAG_Int( TAG_Int(1)));
-        variable9 = variable18 /*arg_idx=*/;
-        continue_80: while(0);
-        ((abstract_collection___Iterator___next_t)CALL(variable16,COLOR_abstract_collection___Iterator___next))(variable16) /*Iterator::next*/;
-      }
-      break_80: while(0);
-      variable17 = NEW_AArrayExpr_parser_prod___AArrayExpr___init_aarrayexpr( variable15 /*star*/); /*new AArrayExpr*/
-      variable16 = variable17;
-      variable17 = ((syntax_base___AbsSyntaxVisitor___type_array_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_array))( variable0 /*v*/,  variable14 /*par_type*/) /*AbsSyntaxVisitor::type_array*/;
-      ((typing___AArrayExpr___stype__eq_t)CALL( variable16 /*aa*/,COLOR_typing___AArrayExpr___stype__eq))( variable16 /*aa*/, variable17) /*AArrayExpr::stype=*/;
-      variable13 =  variable16 /*aa*/ /*a=*/;
-    } else { /*if*/
-      variable15 =  variable9 /*arg_idx*/;
-      variable16 = TAG_Bool(UNTAG_Int( variable15 /*index*/)>=UNTAG_Int( TAG_Int(0)));
-      variable17 = variable16;
-      if (UNTAG_Bool(variable17)) { /* and */
-        variable17 = ATTR_array___AbstractArray____length( variable4 /*raw_args*/) /*AbstractArray::_length*/;
-        variable17 = TAG_Bool(UNTAG_Int( variable15 /*index*/)<UNTAG_Int(variable17));
-      }
-      variable16 = variable17;
-      if (!UNTAG_Bool(variable16)) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_typing, 229); nit_exit(1);}
-      variable16 = ATTR_array___Array____items( variable4 /*raw_args*/) /*Array::_items*/;
-      variable16 = UNBOX_NativeArray(variable16)[UNTAG_Int( variable15 /*index*/)];
-      goto return_label82;
-      return_label82: while(false);
-      variable15 = variable16;
-      variable13 = variable15 /*a=*/;
-      variable15 = ((typing___PExpr___stype_t)CALL( variable13 /*a*/,COLOR_syntax_base___PExpr___stype))( variable13 /*a*/) /*PExpr::stype*/;
-      ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform))( variable0 /*v*/,  self, variable15,  variable14 /*par_type*/) /*AbsSyntaxVisitor::check_conform*/;
-      variable15 = TAG_Int(UNTAG_Int( variable9 /*arg_idx*/)+UNTAG_Int( TAG_Int(1)));
-      variable9 = variable15 /*arg_idx=*/;
-    }
-    ((array___AbstractArray___add_t)CALL( variable10 /*args*/,COLOR_abstract_collection___SimpleCollection___add))( variable10 /*args*/,  variable13 /*a*/) /*AbstractArray::add*/;
-    continue_79: while(0);
-    ((abstract_collection___Iterator___next_t)CALL(variable11,COLOR_abstract_collection___Iterator___next))(variable11) /*Iterator::next*/;
-  }
-  break_79: while(0);
-  variable5 =  variable10 /*args*/;
-  goto return_label78;
-  return_label78: while(false);
+  variable[5] =  variable[6] /*psig*/;
+  goto return_label84;
+  return_label84: while(false);
   tracehead = trace.prev;
-  return variable5;
+  return variable[5];
+}
+val_t typing___AAbsSendExpr___process_signature(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3) {
+  struct trace_t trace = {NULL, NULL, 900, LOCATE_typing___AAbsSendExpr___process_signature};
+  val_t variable[25];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[3] =  param2;
+  variable[4] =  param3;
+  variable[7] = ((vararg___MMSignature___vararg_rank_t)CALL( variable[2] /*psig*/,COLOR_vararg___MMSignature___vararg_rank))( variable[2] /*psig*/) /*MMSignature::vararg_rank*/;
+  variable[6] = variable[7];
+  variable[8] = ((static_type___MMSignature___arity_t)CALL( variable[2] /*psig*/,COLOR_static_type___MMSignature___arity))( variable[2] /*psig*/) /*MMSignature::arity*/;
+  variable[7] = variable[8];
+  /*variable[8] is variable raw_arity*/
+  variable[9] = TAG_Bool(( variable[4] /*raw_args*/ ==  NIT_NULL /*null*/) || (( variable[4] /*raw_args*/ != NIT_NULL) && UNTAG_Bool(((array___AbstractArray_____eqeq_t)CALL( variable[4] /*raw_args*/,COLOR_kernel___Object_____eqeq))( variable[4] /*raw_args*/,  NIT_NULL /*null*/) /*AbstractArray::==*/)));
+  if (UNTAG_Bool(variable[9])) { /*if*/
+    variable[8] =  TAG_Int(0) /*raw_arity=*/;
+  } else { /*if*/
+    variable[9] = ((array___AbstractArray___length_t)CALL( variable[4] /*raw_args*/,COLOR_abstract_collection___Collection___length))( variable[4] /*raw_args*/) /*AbstractArray::length*/;
+    variable[8] = variable[9] /*raw_arity=*/;
+  }
+  variable[9] = TAG_Bool(UNTAG_Int( variable[7] /*par_arity*/)>UNTAG_Int( variable[8] /*raw_arity*/));
+  variable[10] = variable[9];
+  if (!UNTAG_Bool(variable[10])) { /* or */
+    variable[10] = TAG_Bool(( variable[7] /*par_arity*/)!=( variable[8] /*raw_arity*/));
+    variable[11] = variable[10];
+    if (UNTAG_Bool(variable[11])) { /* and */
+      variable[11] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
+      variable[11] = TAG_Bool(( variable[6] /*par_vararg*/)==(variable[11]));
+    }
+    variable[10] = variable[11];
+  }
+  variable[9] = variable[10];
+  if (UNTAG_Bool(variable[9])) { /*if*/
+    variable[9] = variable[0];
+    variable[10] = NEW_String_string___String___init(); /*new String*/
+    variable[11] = NEW_String_string___String___with_native(BOX_NativeString("Error: '"), TAG_Int(8)); /*new String*/
+    variable[12] = variable[11];
+    ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[12]) /*String::append*/;
+    variable[13] =  variable[3] /*name*/;
+    variable[13] = ((string___String___to_s_t)CALL(variable[13],COLOR_string___Object___to_s))(variable[13]) /*String::to_s*/;
+    ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[13]) /*String::append*/;
+    variable[14] = NEW_String_string___String___with_native(BOX_NativeString("' arity missmatch."), TAG_Int(18)); /*new String*/
+    variable[15] = variable[14];
+    ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[15]) /*String::append*/;
+    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[9], variable[10]) /*AbsSyntaxVisitor::error*/;
+    variable[5] =  NIT_NULL /*null*/;
+    goto return_label85;
+  }
+  variable[9] =  TAG_Int(0);
+  variable[11] = NEW_Array_array___Array___init(); /*new Array[PExpr]*/
+  variable[10] = variable[11];
+  variable[11] = NEW_Range_range___Range___without_last( TAG_Int(0),  variable[7] /*par_arity*/); /*new Range[Int]*/
+  variable[11] = ((range___Range___iterator_t)CALL(variable[11],COLOR_abstract_collection___Collection___iterator))(variable[11]) /*Range::iterator*/;
+  while (true) { /*for*/
+    variable[12] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[11],COLOR_abstract_collection___Iterator___is_ok))(variable[11]) /*Iterator::is_ok*/;
+    if (!UNTAG_Bool(variable[12])) break; /*for*/
+    variable[12] = ((abstract_collection___Iterator___item_t)CALL(variable[11],COLOR_abstract_collection___Iterator___item))(variable[11]) /*Iterator::item*/;
+    variable[13] = variable[12];
+    /*variable[14] is variable a*/
+    variable[16] = ((static_type___MMSignature_____bra_t)CALL( variable[2] /*psig*/,COLOR_static_type___MMSignature_____bra))( variable[2] /*psig*/,  variable[13] /*par_idx*/) /*MMSignature::[]*/;
+    variable[15] = variable[16];
+    variable[16] = TAG_Bool(( variable[13] /*par_idx*/)==( variable[6] /*par_vararg*/));
+    if (UNTAG_Bool(variable[16])) { /*if*/
+      variable[17] = NEW_Array_array___Array___init(); /*new Array[PExpr]*/
+      variable[16] = variable[17];
+      variable[17] = TAG_Int(UNTAG_Int( variable[8] /*raw_arity*/)-UNTAG_Int( variable[7] /*par_arity*/));
+      variable[18] = NEW_Range_range___Range___init( TAG_Int(0), variable[17]); /*new Range[Int]*/
+      variable[17] = variable[18];
+      variable[17] = ((range___Range___iterator_t)CALL(variable[17],COLOR_abstract_collection___Collection___iterator))(variable[17]) /*Range::iterator*/;
+      while (true) { /*for*/
+        variable[18] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[17],COLOR_abstract_collection___Iterator___is_ok))(variable[17]) /*Iterator::is_ok*/;
+        if (!UNTAG_Bool(variable[18])) break; /*for*/
+        variable[18] = ((abstract_collection___Iterator___item_t)CALL(variable[17],COLOR_abstract_collection___Iterator___item))(variable[17]) /*Iterator::item*/;
+        variable[19] = variable[18];
+        variable[20] =  variable[4] /*raw_args*/;
+        variable[21] =  variable[9] /*arg_idx*/;
+        variable[23] = TAG_Bool(UNTAG_Int( variable[21] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+        variable[24] = variable[23];
+        if (UNTAG_Bool(variable[24])) { /* and */
+          variable[24] = variable[20];
+          variable[24] = ATTR_array___AbstractArray____length(variable[24]) /*AbstractArray::_length*/;
+          variable[24] = TAG_Bool(UNTAG_Int( variable[21] /*index*/)<UNTAG_Int(variable[24]));
+        }
+        variable[23] = variable[24];
+        if (!UNTAG_Bool(variable[23])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_typing, 229); nit_exit(1);}
+        variable[23] = variable[20];
+        variable[23] = ATTR_array___Array____items(variable[23]) /*Array::_items*/;
+        variable[23] = UNBOX_NativeArray(variable[23])[UNTAG_Int( variable[21] /*index*/)];
+        variable[22] = variable[23];
+        goto return_label88;
+        return_label88: while(false);
+        variable[20] = variable[22];
+        variable[14] = variable[20] /*a=*/;
+        ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/,  variable[14] /*a*/,  variable[15] /*par_type*/) /*AbsSyntaxVisitor::check_conform_expr*/;
+        ((array___AbstractArray___add_t)CALL( variable[16] /*star*/,COLOR_abstract_collection___SimpleCollection___add))( variable[16] /*star*/,  variable[14] /*a*/) /*AbstractArray::add*/;
+        variable[20] = TAG_Int(UNTAG_Int( variable[9] /*arg_idx*/)+UNTAG_Int( TAG_Int(1)));
+        variable[9] = variable[20] /*arg_idx=*/;
+        continue_87: while(0);
+        ((abstract_collection___Iterator___next_t)CALL(variable[17],COLOR_abstract_collection___Iterator___next))(variable[17]) /*Iterator::next*/;
+      }
+      break_87: while(0);
+      variable[18] = NEW_AArrayExpr_parser_prod___AArrayExpr___init_aarrayexpr( variable[16] /*star*/); /*new AArrayExpr*/
+      variable[17] = variable[18];
+      variable[18] = ((syntax_base___AbsSyntaxVisitor___type_array_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_array))( variable[1] /*v*/,  variable[15] /*par_type*/) /*AbsSyntaxVisitor::type_array*/;
+      ((typing___AArrayExpr___stype__eq_t)CALL( variable[17] /*aa*/,COLOR_typing___AArrayExpr___stype__eq))( variable[17] /*aa*/, variable[18]) /*AArrayExpr::stype=*/;
+      variable[14] =  variable[17] /*aa*/ /*a=*/;
+    } else { /*if*/
+      variable[16] =  variable[4] /*raw_args*/;
+      variable[17] =  variable[9] /*arg_idx*/;
+      variable[19] = TAG_Bool(UNTAG_Int( variable[17] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+      variable[20] = variable[19];
+      if (UNTAG_Bool(variable[20])) { /* and */
+        variable[20] = variable[16];
+        variable[20] = ATTR_array___AbstractArray____length(variable[20]) /*AbstractArray::_length*/;
+        variable[20] = TAG_Bool(UNTAG_Int( variable[17] /*index*/)<UNTAG_Int(variable[20]));
+      }
+      variable[19] = variable[20];
+      if (!UNTAG_Bool(variable[19])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_typing, 229); nit_exit(1);}
+      variable[19] = variable[16];
+      variable[19] = ATTR_array___Array____items(variable[19]) /*Array::_items*/;
+      variable[19] = UNBOX_NativeArray(variable[19])[UNTAG_Int( variable[17] /*index*/)];
+      variable[18] = variable[19];
+      goto return_label89;
+      return_label89: while(false);
+      variable[16] = variable[18];
+      variable[14] = variable[16] /*a=*/;
+      ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/,  variable[14] /*a*/,  variable[15] /*par_type*/) /*AbsSyntaxVisitor::check_conform_expr*/;
+      variable[16] = TAG_Int(UNTAG_Int( variable[9] /*arg_idx*/)+UNTAG_Int( TAG_Int(1)));
+      variable[9] = variable[16] /*arg_idx=*/;
+    }
+    ((array___AbstractArray___add_t)CALL( variable[10] /*args*/,COLOR_abstract_collection___SimpleCollection___add))( variable[10] /*args*/,  variable[14] /*a*/) /*AbstractArray::add*/;
+    continue_86: while(0);
+    ((abstract_collection___Iterator___next_t)CALL(variable[11],COLOR_abstract_collection___Iterator___next))(variable[11]) /*Iterator::next*/;
+  }
+  break_86: while(0);
+  variable[5] =  variable[10] /*args*/;
+  goto return_label85;
+  return_label85: while(false);
+  tracehead = trace.prev;
+  return variable[5];
+}
+val_t typing___AAbsSendExpr___process_closures(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3) {
+  struct trace_t trace = {NULL, NULL, 937, LOCATE_typing___AAbsSendExpr___process_closures};
+  val_t variable[23];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[3] =  param2;
+  variable[4] =  param3;
+  variable[7] = ((static_type___MMSignature___return_type_t)CALL( variable[2] /*psig*/,COLOR_static_type___MMSignature___return_type))( variable[2] /*psig*/) /*MMSignature::return_type*/;
+  variable[6] = variable[7];
+  variable[8] = ((static_type___MMSignature___closures_t)CALL( variable[2] /*psig*/,COLOR_static_type___MMSignature___closures))( variable[2] /*psig*/) /*MMSignature::closures*/;
+  variable[7] = variable[8];
+  variable[8] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*cd*/ ==  NIT_NULL /*null*/) || (( variable[4] /*cd*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*cd*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*cd*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*cd*/,COLOR_kernel___Object_____eqeq))( variable[4] /*cd*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[8])) { /*if*/
+    variable[8] = ((array___AbstractArray___length_t)CALL( variable[7] /*cs*/,COLOR_abstract_collection___Collection___length))( variable[7] /*cs*/) /*AbstractArray::length*/;
+    variable[8] = TAG_Bool((variable[8])==( TAG_Int(0)));
+    if (UNTAG_Bool(variable[8])) { /*if*/
+      variable[8] = variable[0];
+      variable[9] = NEW_String_string___String___init(); /*new String*/
+      variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
+      variable[11] = variable[10];
+      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[11]) /*String::append*/;
+      variable[12] =  variable[3] /*name*/;
+      variable[12] = ((string___String___to_s_t)CALL(variable[12],COLOR_string___Object___to_s))(variable[12]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[12]) /*String::append*/;
+      variable[13] = NEW_String_string___String___with_native(BOX_NativeString(" does not require blocs."), TAG_Int(24)); /*new String*/
+      variable[14] = variable[13];
+      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[14]) /*String::append*/;
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
+    } else { /*if*/
+      variable[8] = ((array___AbstractArray___length_t)CALL( variable[7] /*cs*/,COLOR_abstract_collection___Collection___length))( variable[7] /*cs*/) /*AbstractArray::length*/;
+      variable[9] = ((array___AbstractArray___length_t)CALL( variable[4] /*cd*/,COLOR_abstract_collection___Collection___length))( variable[4] /*cd*/) /*AbstractArray::length*/;
+      variable[8] = TAG_Bool((variable[8])!=(variable[9]));
+      if (UNTAG_Bool(variable[8])) { /*if*/
+        variable[8] = variable[0];
+        variable[9] = NEW_String_string___String___init(); /*new String*/
+        variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
+        variable[11] = variable[10];
+        ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[11]) /*String::append*/;
+        variable[12] =  variable[3] /*name*/;
+        variable[12] = ((string___String___to_s_t)CALL(variable[12],COLOR_string___Object___to_s))(variable[12]) /*String::to_s*/;
+        ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[12]) /*String::append*/;
+        variable[13] = NEW_String_string___String___with_native(BOX_NativeString(" requires "), TAG_Int(10)); /*new String*/
+        variable[14] = variable[13];
+        ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[14]) /*String::append*/;
+        variable[15] = ((array___AbstractArray___length_t)CALL( variable[7] /*cs*/,COLOR_abstract_collection___Collection___length))( variable[7] /*cs*/) /*AbstractArray::length*/;
+        variable[16] = variable[15];
+        variable[16] = ((string___String___to_s_t)CALL(variable[16],COLOR_string___Object___to_s))(variable[16]) /*String::to_s*/;
+        ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[16]) /*String::append*/;
+        variable[17] = NEW_String_string___String___with_native(BOX_NativeString(" blocs, "), TAG_Int(8)); /*new String*/
+        variable[18] = variable[17];
+        ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[18]) /*String::append*/;
+        variable[19] = ((array___AbstractArray___length_t)CALL( variable[4] /*cd*/,COLOR_abstract_collection___Collection___length))( variable[4] /*cd*/) /*AbstractArray::length*/;
+        variable[20] = variable[19];
+        variable[20] = ((string___String___to_s_t)CALL(variable[20],COLOR_string___Object___to_s))(variable[20]) /*String::to_s*/;
+        ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[20]) /*String::append*/;
+        variable[21] = NEW_String_string___String___with_native(BOX_NativeString(" found."), TAG_Int(7)); /*new String*/
+        variable[22] = variable[21];
+        ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[22]) /*String::append*/;
+        ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
+      } else { /*if*/
+        variable[9] = ((typing___TypingVisitor___closure_break_stype_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___closure_break_stype))( variable[1] /*v*/) /*TypingVisitor::closure_break_stype*/;
+        variable[8] = variable[9];
+        variable[10] = ((typing___TypingVisitor___break_list_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___break_list))( variable[1] /*v*/) /*TypingVisitor::break_list*/;
+        variable[9] = variable[10];
+        ((typing___TypingVisitor___closure_break_stype__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___closure_break_stype__eq))( variable[1] /*v*/,  variable[6] /*t*/) /*TypingVisitor::closure_break_stype=*/;
+        variable[10] = NEW_Array_array___Array___init(); /*new Array[ABreakExpr]*/
+        ((typing___TypingVisitor___break_list__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___break_list__eq))( variable[1] /*v*/, variable[10]) /*TypingVisitor::break_list=*/;
+        variable[10] = ((array___AbstractArray___length_t)CALL( variable[7] /*cs*/,COLOR_abstract_collection___Collection___length))( variable[7] /*cs*/) /*AbstractArray::length*/;
+        variable[11] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[10]); /*new Range[Int]*/
+        variable[10] = variable[11];
+        variable[10] = ((range___Range___iterator_t)CALL(variable[10],COLOR_abstract_collection___Collection___iterator))(variable[10]) /*Range::iterator*/;
+        while (true) { /*for*/
+          variable[11] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[10],COLOR_abstract_collection___Iterator___is_ok))(variable[10]) /*Iterator::is_ok*/;
+          if (!UNTAG_Bool(variable[11])) break; /*for*/
+          variable[11] = ((abstract_collection___Iterator___item_t)CALL(variable[10],COLOR_abstract_collection___Iterator___item))(variable[10]) /*Iterator::item*/;
+          variable[12] = variable[11];
+          variable[13] =  variable[4] /*cd*/;
+          variable[14] =  variable[12] /*i*/;
+          variable[16] = TAG_Bool(UNTAG_Int( variable[14] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+          variable[17] = variable[16];
+          if (UNTAG_Bool(variable[17])) { /* and */
+            variable[17] = variable[13];
+            variable[17] = ATTR_array___AbstractArray____length(variable[17]) /*AbstractArray::_length*/;
+            variable[17] = TAG_Bool(UNTAG_Int( variable[14] /*index*/)<UNTAG_Int(variable[17]));
+          }
+          variable[16] = variable[17];
+          if (!UNTAG_Bool(variable[16])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_typing, 229); nit_exit(1);}
+          variable[16] = variable[13];
+          variable[16] = ATTR_array___Array____items(variable[16]) /*Array::_items*/;
+          variable[16] = UNBOX_NativeArray(variable[16])[UNTAG_Int( variable[14] /*index*/)];
+          variable[15] = variable[16];
+          goto return_label92;
+          return_label92: while(false);
+          variable[13] = variable[15];
+          variable[14] =  variable[7] /*cs*/;
+          variable[15] =  variable[12] /*i*/;
+          variable[17] = TAG_Bool(UNTAG_Int( variable[15] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+          variable[18] = variable[17];
+          if (UNTAG_Bool(variable[18])) { /* and */
+            variable[18] = variable[14];
+            variable[18] = ATTR_array___AbstractArray____length(variable[18]) /*AbstractArray::_length*/;
+            variable[18] = TAG_Bool(UNTAG_Int( variable[15] /*index*/)<UNTAG_Int(variable[18]));
+          }
+          variable[17] = variable[18];
+          if (!UNTAG_Bool(variable[17])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_typing, 229); nit_exit(1);}
+          variable[17] = variable[14];
+          variable[17] = ATTR_array___Array____items(variable[17]) /*Array::_items*/;
+          variable[17] = UNBOX_NativeArray(variable[17])[UNTAG_Int( variable[15] /*index*/)];
+          variable[16] = variable[17];
+          goto return_label93;
+          return_label93: while(false);
+          variable[14] = variable[16];
+          ((typing___PClosureDef___accept_typing2_t)CALL(variable[13],COLOR_typing___PClosureDef___accept_typing2))(variable[13],  variable[1] /*v*/, variable[14]) /*PClosureDef::accept_typing2*/;
+          continue_91: while(0);
+          ((abstract_collection___Iterator___next_t)CALL(variable[10],COLOR_abstract_collection___Iterator___next))(variable[10]) /*Iterator::next*/;
+        }
+        break_91: while(0);
+        variable[10] = ((typing___TypingVisitor___break_list_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___break_list))( variable[1] /*v*/) /*TypingVisitor::break_list*/;
+        variable[10] = ((array___AbstractArray___iterator_t)CALL(variable[10],COLOR_abstract_collection___Collection___iterator))(variable[10]) /*AbstractArray::iterator*/;
+        while (true) { /*for*/
+          variable[11] = ((array___ArrayIterator___is_ok_t)CALL(variable[10],COLOR_abstract_collection___Iterator___is_ok))(variable[10]) /*ArrayIterator::is_ok*/;
+          if (!UNTAG_Bool(variable[11])) break; /*for*/
+          variable[11] = ((array___ArrayIterator___item_t)CALL(variable[10],COLOR_abstract_collection___Iterator___item))(variable[10]) /*ArrayIterator::item*/;
+          variable[12] = variable[11];
+          variable[14] = ((typing___PExpr___stype_t)CALL( variable[12] /*n*/,COLOR_syntax_base___PExpr___stype))( variable[12] /*n*/) /*PExpr::stype*/;
+          variable[13] = variable[14];
+          variable[14] = TAG_Bool(( variable[6] /*t*/ ==  NIT_NULL /*null*/) || (( variable[6] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[6] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[6] /*t*/,COLOR_kernel___Object_____eqeq))( variable[6] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+          variable[15] = variable[14];
+          if (!UNTAG_Bool(variable[15])) { /* or */
+            variable[15] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[6] /*t*/ ==  NIT_NULL /*null*/) || (( variable[6] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[6] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[6] /*t*/,COLOR_kernel___Object_____eqeq))( variable[6] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+            variable[16] = variable[15];
+            if (UNTAG_Bool(variable[16])) { /* and */
+              variable[16] = ((static_type___MMType_____l_t)CALL( variable[6] /*t*/,COLOR_static_type___MMType_____l))( variable[6] /*t*/,  variable[13] /*ntype*/) /*MMType::<*/;
+            }
+            variable[15] = variable[16];
+          }
+          variable[14] = variable[15];
+          if (UNTAG_Bool(variable[14])) { /*if*/
+            variable[6] =  variable[13] /*ntype*/ /*t=*/;
+          }
+          continue_94: while(0);
+          ((array___ArrayIterator___next_t)CALL(variable[10],COLOR_abstract_collection___Iterator___next))(variable[10]) /*ArrayIterator::next*/;
+        }
+        break_94: while(0);
+        variable[10] = ((typing___TypingVisitor___break_list_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___break_list))( variable[1] /*v*/) /*TypingVisitor::break_list*/;
+        variable[10] = ((array___AbstractArray___iterator_t)CALL(variable[10],COLOR_abstract_collection___Collection___iterator))(variable[10]) /*AbstractArray::iterator*/;
+        while (true) { /*for*/
+          variable[11] = ((array___ArrayIterator___is_ok_t)CALL(variable[10],COLOR_abstract_collection___Iterator___is_ok))(variable[10]) /*ArrayIterator::is_ok*/;
+          if (!UNTAG_Bool(variable[11])) break; /*for*/
+          variable[11] = ((array___ArrayIterator___item_t)CALL(variable[10],COLOR_abstract_collection___Iterator___item))(variable[10]) /*ArrayIterator::item*/;
+          variable[12] = variable[11];
+          ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/,  variable[12] /*n*/,  variable[6] /*t*/) /*AbsSyntaxVisitor::check_conform_expr*/;
+          continue_95: while(0);
+          ((array___ArrayIterator___next_t)CALL(variable[10],COLOR_abstract_collection___Iterator___next))(variable[10]) /*ArrayIterator::next*/;
+        }
+        break_95: while(0);
+        ((typing___TypingVisitor___closure_break_stype__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___closure_break_stype__eq))( variable[1] /*v*/,  variable[8] /*old_bbst*/) /*TypingVisitor::closure_break_stype=*/;
+        ((typing___TypingVisitor___break_list__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___break_list__eq))( variable[1] /*v*/,  variable[9] /*old_bl*/) /*TypingVisitor::break_list=*/;
+      }
+    }
+  } else { /*if*/
+    variable[8] = ((array___AbstractArray___length_t)CALL( variable[7] /*cs*/,COLOR_abstract_collection___Collection___length))( variable[7] /*cs*/) /*AbstractArray::length*/;
+    variable[8] = TAG_Bool((variable[8])!=( TAG_Int(0)));
+    if (UNTAG_Bool(variable[8])) { /*if*/
+      variable[8] = variable[0];
+      variable[9] = NEW_String_string___String___init(); /*new String*/
+      variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
+      variable[11] = variable[10];
+      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[11]) /*String::append*/;
+      variable[12] =  variable[3] /*name*/;
+      variable[12] = ((string___String___to_s_t)CALL(variable[12],COLOR_string___Object___to_s))(variable[12]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[12]) /*String::append*/;
+      variable[13] = NEW_String_string___String___with_native(BOX_NativeString(" requires "), TAG_Int(10)); /*new String*/
+      variable[14] = variable[13];
+      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[14]) /*String::append*/;
+      variable[15] = ((array___AbstractArray___length_t)CALL( variable[7] /*cs*/,COLOR_abstract_collection___Collection___length))( variable[7] /*cs*/) /*AbstractArray::length*/;
+      variable[16] = variable[15];
+      variable[16] = ((string___String___to_s_t)CALL(variable[16],COLOR_string___Object___to_s))(variable[16]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[16]) /*String::append*/;
+      variable[17] = NEW_String_string___String___with_native(BOX_NativeString(" blocs."), TAG_Int(7)); /*new String*/
+      variable[18] = variable[17];
+      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[18]) /*String::append*/;
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
+    }
+  }
+  variable[5] =  variable[6] /*t*/;
+  goto return_label90;
+  return_label90: while(false);
+  tracehead = trace.prev;
+  return variable[5];
 }
 val_t typing___AAbsSendExpr___prop(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 851, LOCATE_typing___AAbsSendExpr___prop};
+  struct trace_t trace = {NULL, NULL, 974, LOCATE_typing___AAbsSendExpr___prop};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   tracehead = trace.prev;
   return ATTR_typing___AAbsSendExpr____prop( self) /*AAbsSendExpr::_prop*/;
 }
 val_t typing___AAbsSendExpr___arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 854, LOCATE_typing___AAbsSendExpr___arguments};
+  struct trace_t trace = {NULL, NULL, 977, LOCATE_typing___AAbsSendExpr___arguments};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   tracehead = trace.prev;
   return ATTR_typing___AAbsSendExpr____arguments( self) /*AAbsSendExpr::_arguments*/;
 }
-void typing___ASuperInitCall___register_super_init_call(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 862, LOCATE_typing___ASuperInitCall___register_super_init_call};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-    val_t variable4;
-    val_t variable5;
-    val_t variable6;
-    val_t variable7;
-      val_t variable8;
-      val_t variable9;
-      val_t variable10;
-      val_t variable11;
-      val_t variable12;
-      val_t variable13;
-      val_t variable14;
-		val_t variable15;
-		val_t variable16;
+val_t typing___AAbsSendExpr___return_type(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 980, LOCATE_typing___AAbsSendExpr___return_type};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 =  param1;
-  variable2 = ((parser_prod___PNode___parent_t)CALL( self,COLOR_parser_prod___PNode___parent))( self) /*PNode::parent*/;
-  variable3 = ((typing___TypingVisitor___top_block_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___top_block))( variable0 /*v*/) /*TypingVisitor::top_block*/;
-  variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable2 == variable3) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2,variable3)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2, variable3) /*Object::==*/)))))));
-  variable3 = variable2;
-  if (UNTAG_Bool(variable3)) { /* and */
-    variable3 = ((typing___TypingVisitor___top_block_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___top_block))( variable0 /*v*/) /*TypingVisitor::top_block*/;
-    variable3 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( self == variable3) || (( self != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( self,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( self,variable3)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( self,COLOR_kernel___Object_____eqeq))( self, variable3) /*Object::==*/)))))));
+  tracehead = trace.prev;
+  return ATTR_typing___AAbsSendExpr____return_type( self) /*AAbsSendExpr::_return_type*/;
+}
+void typing___ASuperInitCall___register_super_init_call(val_t  self, val_t  param0, val_t  param1) {
+  struct trace_t trace = {NULL, NULL, 988, LOCATE_typing___ASuperInitCall___register_super_init_call};
+  val_t variable[21];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[4] = variable[0];
+  variable[4] = ((parser_prod___PNode___parent_t)CALL(variable[4],COLOR_parser_prod___PNode___parent))(variable[4]) /*PNode::parent*/;
+  variable[5] = ((typing___TypingVisitor___top_block_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___top_block))( variable[1] /*v*/) /*TypingVisitor::top_block*/;
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] == variable[5]) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4],variable[5])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4], variable[5]) /*Object::==*/)))))));
+  variable[5] = variable[4];
+  if (UNTAG_Bool(variable[5])) { /* and */
+    variable[5] = variable[0];
+    variable[6] = ((typing___TypingVisitor___top_block_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___top_block))( variable[1] /*v*/) /*TypingVisitor::top_block*/;
+    variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[5] == variable[6]) || ((variable[5] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5],variable[6])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))(variable[5], variable[6]) /*Object::==*/)))))));
   }
-  variable2 = variable3;
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = NEW_String_string___String___init(); /*new String*/
-    variable3 = NEW_String_string___String___with_native(BOX_NativeString("Error: Constructor invocation "), TAG_Int(30)); /*new String*/
-    variable4 = variable3;
-    ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable4) /*String::append*/;
-    variable5 =  variable1 /*property*/;
-    variable5 = ((string___String___to_s_t)CALL(variable5,COLOR_string___Object___to_s))(variable5) /*String::to_s*/;
-    ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable5) /*String::append*/;
-    variable6 = NEW_String_string___String___with_native(BOX_NativeString(" must not be in nested block."), TAG_Int(29)); /*new String*/
-    variable7 = variable6;
-    ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable7) /*String::append*/;
-    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable2) /*AbsSyntaxVisitor::error*/;
+  variable[4] = variable[5];
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = variable[0];
+    variable[5] = NEW_String_string___String___init(); /*new String*/
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString("Error: Constructor invocation "), TAG_Int(30)); /*new String*/
+    variable[7] = variable[6];
+    ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[7]) /*String::append*/;
+    variable[8] =  variable[2] /*property*/;
+    variable[8] = ((string___String___to_s_t)CALL(variable[8],COLOR_string___Object___to_s))(variable[8]) /*String::to_s*/;
+    ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[8]) /*String::append*/;
+    variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" must not be in nested block."), TAG_Int(29)); /*new String*/
+    variable[10] = variable[9];
+    ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[10]) /*String::append*/;
+    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::error*/;
   }
-  variable3 = ((syntax_base___AbsSyntaxVisitor___module_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___module))( variable0 /*v*/) /*AbsSyntaxVisitor::module*/;
-  variable4 = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable1 /*property*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable1 /*property*/) /*MMLocalProperty::global*/;
-  variable4 = ((abstractmetamodel___MMGlobalProperty___intro_t)CALL(variable4,COLOR_abstractmetamodel___MMGlobalProperty___intro))(variable4) /*MMGlobalProperty::intro*/;
-  variable4 = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL(variable4,COLOR_abstractmetamodel___MMLocalProperty___local_class))(variable4) /*MMLocalProperty::local_class*/;
-  variable4 = ((abstractmetamodel___MMLocalClass___global_t)CALL(variable4,COLOR_abstractmetamodel___MMLocalClass___global))(variable4) /*MMLocalClass::global*/;
-  variable3 = ((abstractmetamodel___MMModule_____bra_t)CALL(variable3,COLOR_abstractmetamodel___MMModule_____bra))(variable3, variable4) /*MMModule::[]*/;
-  variable2 = variable3;
-  variable3 =  NIT_NULL /*null*/;
-  variable4 = ((typing___TypingVisitor___explicit_super_init_calls_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___explicit_super_init_calls))( variable0 /*v*/) /*TypingVisitor::explicit_super_init_calls*/;
-  variable4 = ((array___AbstractArray___is_empty_t)CALL(variable4,COLOR_abstract_collection___Collection___is_empty))(variable4) /*AbstractArray::is_empty*/;
-  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable4)))) { /*if*/
-    variable4 = ((typing___TypingVisitor___explicit_super_init_calls_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___explicit_super_init_calls))( variable0 /*v*/) /*TypingVisitor::explicit_super_init_calls*/;
-    variable4 = ((abstract_collection___IndexedCollection___last_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___last))(variable4) /*IndexedCollection::last*/;
-    variable4 = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable4,COLOR_abstractmetamodel___MMLocalProperty___global))(variable4) /*MMLocalProperty::global*/;
-    variable4 = ((abstractmetamodel___MMGlobalProperty___intro_t)CALL(variable4,COLOR_abstractmetamodel___MMGlobalProperty___intro))(variable4) /*MMGlobalProperty::intro*/;
-    variable4 = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL(variable4,COLOR_abstractmetamodel___MMLocalProperty___local_class))(variable4) /*MMLocalProperty::local_class*/;
-    variable3 = variable4 /*prev_class=*/;
+  variable[5] = ((syntax_base___AbsSyntaxVisitor___module_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___module))( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
+  variable[6] = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable[2] /*property*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable[2] /*property*/) /*MMLocalProperty::global*/;
+  variable[6] = ((abstractmetamodel___MMGlobalProperty___intro_t)CALL(variable[6],COLOR_abstractmetamodel___MMGlobalProperty___intro))(variable[6]) /*MMGlobalProperty::intro*/;
+  variable[6] = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL(variable[6],COLOR_abstractmetamodel___MMLocalProperty___local_class))(variable[6]) /*MMLocalProperty::local_class*/;
+  variable[6] = ((abstractmetamodel___MMLocalClass___global_t)CALL(variable[6],COLOR_abstractmetamodel___MMLocalClass___global))(variable[6]) /*MMLocalClass::global*/;
+  variable[5] = ((abstractmetamodel___MMModule_____bra_t)CALL(variable[5],COLOR_abstractmetamodel___MMModule_____bra))(variable[5], variable[6]) /*MMModule::[]*/;
+  variable[4] = variable[5];
+  variable[5] =  NIT_NULL /*null*/;
+  variable[6] = ((typing___TypingVisitor___explicit_super_init_calls_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___explicit_super_init_calls))( variable[1] /*v*/) /*TypingVisitor::explicit_super_init_calls*/;
+  variable[6] = ((array___AbstractArray___is_empty_t)CALL(variable[6],COLOR_abstract_collection___Collection___is_empty))(variable[6]) /*AbstractArray::is_empty*/;
+  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[6])))) { /*if*/
+    variable[6] = ((typing___TypingVisitor___explicit_super_init_calls_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___explicit_super_init_calls))( variable[1] /*v*/) /*TypingVisitor::explicit_super_init_calls*/;
+    variable[6] = ((abstract_collection___IndexedCollection___last_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___last))(variable[6]) /*IndexedCollection::last*/;
+    variable[6] = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable[6],COLOR_abstractmetamodel___MMLocalProperty___global))(variable[6]) /*MMLocalProperty::global*/;
+    variable[6] = ((abstractmetamodel___MMGlobalProperty___intro_t)CALL(variable[6],COLOR_abstractmetamodel___MMGlobalProperty___intro))(variable[6]) /*MMGlobalProperty::intro*/;
+    variable[6] = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL(variable[6],COLOR_abstractmetamodel___MMLocalProperty___local_class))(variable[6]) /*MMLocalProperty::local_class*/;
+    variable[5] = variable[6] /*prev_class=*/;
   }
-  variable5 = ((syntax_base___AbsSyntaxVisitor___local_class_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_class))( variable0 /*v*/) /*AbsSyntaxVisitor::local_class*/;
-  variable5 = ((abstractmetamodel___MMLocalClass___cshe_t)CALL(variable5,COLOR_abstractmetamodel___MMLocalClass___cshe))(variable5) /*MMLocalClass::cshe*/;
-  variable5 = ((partial_order___PartialOrderElement___reverse_linear_extension_t)CALL(variable5,COLOR_partial_order___PartialOrderElement___reverse_linear_extension))(variable5) /*PartialOrderElement::reverse_linear_extension*/;
-  variable4 = variable5;
-  variable5 = ((syntax_base___AbsSyntaxVisitor___local_class_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_class))( variable0 /*v*/) /*AbsSyntaxVisitor::local_class*/;
-  variable5 = TAG_Bool(( variable2 /*cla*/ == variable5) || (( variable2 /*cla*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable2 /*cla*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable2 /*cla*/,variable5)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable2 /*cla*/,COLOR_kernel___Object_____eqeq))( variable2 /*cla*/, variable5) /*Object::==*/)))));
-  if (UNTAG_Bool(variable5)) { /*if*/
-    ((typing___TypingVisitor___explicit_other_init_call__eq_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___explicit_other_init_call__eq))( variable0 /*v*/,  TAG_Bool(true)) /*TypingVisitor::explicit_other_init_call=*/;
+  variable[7] = ((syntax_base___AbsSyntaxVisitor___local_class_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_class))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
+  variable[7] = ((abstractmetamodel___MMLocalClass___cshe_t)CALL(variable[7],COLOR_abstractmetamodel___MMLocalClass___cshe))(variable[7]) /*MMLocalClass::cshe*/;
+  variable[7] = ((partial_order___PartialOrderElement___reverse_linear_extension_t)CALL(variable[7],COLOR_partial_order___PartialOrderElement___reverse_linear_extension))(variable[7]) /*PartialOrderElement::reverse_linear_extension*/;
+  variable[6] = variable[7];
+  variable[7] = ((syntax_base___AbsSyntaxVisitor___local_class_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_class))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
+  variable[7] = TAG_Bool(( variable[4] /*cla*/ == variable[7]) || (( variable[4] /*cla*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*cla*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*cla*/,variable[7])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*cla*/,COLOR_kernel___Object_____eqeq))( variable[4] /*cla*/, variable[7]) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[7])) { /*if*/
+    ((typing___TypingVisitor___explicit_other_init_call__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___explicit_other_init_call__eq))( variable[1] /*v*/,  TAG_Bool(true)) /*TypingVisitor::explicit_other_init_call=*/;
   } else { /*if*/
-    variable5 = ((array___AbstractArray___has_t)CALL( variable4 /*order*/,COLOR_abstract_collection___Collection___has))( variable4 /*order*/,  variable2 /*cla*/) /*AbstractArray::has*/;
-    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable5)))) { /*if*/
-      variable5 = NEW_String_string___String___init(); /*new String*/
-      variable6 = NEW_String_string___String___with_native(BOX_NativeString("Error: Constructor of class "), TAG_Int(28)); /*new String*/
-      variable7 = variable6;
-      ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable7) /*String::append*/;
-      variable8 =  variable2 /*cla*/;
-      variable8 = ((string___String___to_s_t)CALL(variable8,COLOR_string___Object___to_s))(variable8) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable8) /*String::append*/;
-      variable9 = NEW_String_string___String___with_native(BOX_NativeString(" must be one in "), TAG_Int(16)); /*new String*/
-      variable10 = variable9;
-      ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable10) /*String::append*/;
-      variable11 = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
-      variable11 = ((string___Collection___join_t)CALL( variable4 /*order*/,COLOR_string___Collection___join))( variable4 /*order*/, variable11) /*Collection::join*/;
-      variable12 = variable11;
-      ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable12) /*String::append*/;
-      variable13 = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-      variable14 = variable13;
-      ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable14) /*String::append*/;
-      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable5) /*AbsSyntaxVisitor::error*/;
+    variable[7] = ((array___AbstractArray___has_t)CALL( variable[6] /*order*/,COLOR_abstract_collection___Collection___has))( variable[6] /*order*/,  variable[4] /*cla*/) /*AbstractArray::has*/;
+    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[7])))) { /*if*/
+      variable[7] = variable[0];
+      variable[8] = NEW_String_string___String___init(); /*new String*/
+      variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Error: Constructor of class "), TAG_Int(28)); /*new String*/
+      variable[10] = variable[9];
+      ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[10]) /*String::append*/;
+      variable[11] =  variable[4] /*cla*/;
+      variable[11] = ((string___String___to_s_t)CALL(variable[11],COLOR_string___Object___to_s))(variable[11]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[11]) /*String::append*/;
+      variable[12] = NEW_String_string___String___with_native(BOX_NativeString(" must be one in "), TAG_Int(16)); /*new String*/
+      variable[13] = variable[12];
+      ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[13]) /*String::append*/;
+      variable[14] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
+      variable[14] = ((string___Collection___join_t)CALL( variable[6] /*order*/,COLOR_string___Collection___join))( variable[6] /*order*/, variable[14]) /*Collection::join*/;
+      variable[15] = variable[14];
+      ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[15]) /*String::append*/;
+      variable[16] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
+      variable[17] = variable[16];
+      ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[17]) /*String::append*/;
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[7], variable[8]) /*AbsSyntaxVisitor::error*/;
     } else { /*if*/
-      variable5 = TAG_Bool(( variable2 /*cla*/ ==  variable3 /*prev_class*/) || (( variable2 /*cla*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable2 /*cla*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable2 /*cla*/, variable3 /*prev_class*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable2 /*cla*/,COLOR_kernel___Object_____eqeq))( variable2 /*cla*/,  variable3 /*prev_class*/) /*Object::==*/)))));
-      if (UNTAG_Bool(variable5)) { /*if*/
-        variable5 = NEW_String_string___String___init(); /*new String*/
-        variable6 = NEW_String_string___String___with_native(BOX_NativeString("Error: Only one super constructor invocation of class "), TAG_Int(54)); /*new String*/
-        variable7 = variable6;
-        ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable7) /*String::append*/;
-        variable8 =  variable2 /*cla*/;
-        variable8 = ((string___String___to_s_t)CALL(variable8,COLOR_string___Object___to_s))(variable8) /*String::to_s*/;
-        ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable8) /*String::append*/;
-        variable9 = NEW_String_string___String___with_native(BOX_NativeString(" is allowed."), TAG_Int(12)); /*new String*/
-        variable10 = variable9;
-        ((string___String___append_t)CALL(variable5,COLOR_abstract_collection___IndexedCollection___append))(variable5, variable10) /*String::append*/;
-        ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable5) /*AbsSyntaxVisitor::error*/;
+      variable[7] = TAG_Bool(( variable[4] /*cla*/ ==  variable[5] /*prev_class*/) || (( variable[4] /*cla*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*cla*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*cla*/, variable[5] /*prev_class*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*cla*/,COLOR_kernel___Object_____eqeq))( variable[4] /*cla*/,  variable[5] /*prev_class*/) /*Object::==*/)))));
+      if (UNTAG_Bool(variable[7])) { /*if*/
+        variable[7] = variable[0];
+        variable[8] = NEW_String_string___String___init(); /*new String*/
+        variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Error: Only one super constructor invocation of class "), TAG_Int(54)); /*new String*/
+        variable[10] = variable[9];
+        ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[10]) /*String::append*/;
+        variable[11] =  variable[4] /*cla*/;
+        variable[11] = ((string___String___to_s_t)CALL(variable[11],COLOR_string___Object___to_s))(variable[11]) /*String::to_s*/;
+        ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[11]) /*String::append*/;
+        variable[12] = NEW_String_string___String___with_native(BOX_NativeString(" is allowed."), TAG_Int(12)); /*new String*/
+        variable[13] = variable[12];
+        ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[13]) /*String::append*/;
+        ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[7], variable[8]) /*AbsSyntaxVisitor::error*/;
       } else { /*if*/
-        variable6 = TAG_Bool(( variable3 /*prev_class*/ ==  NIT_NULL /*null*/) || (( variable3 /*prev_class*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable3 /*prev_class*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable3 /*prev_class*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable3 /*prev_class*/,COLOR_kernel___Object_____eqeq))( variable3 /*prev_class*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-        variable5 = variable6;
-        variable6 = ((array___AbstractArray___iterator_t)CALL( variable4 /*order*/,COLOR_abstract_collection___Collection___iterator))( variable4 /*order*/) /*AbstractArray::iterator*/;
+        variable[8] = TAG_Bool(( variable[5] /*prev_class*/ ==  NIT_NULL /*null*/) || (( variable[5] /*prev_class*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*prev_class*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*prev_class*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*prev_class*/,COLOR_kernel___Object_____eqeq))( variable[5] /*prev_class*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+        variable[7] = variable[8];
+        variable[8] = ((array___AbstractArray___iterator_t)CALL( variable[6] /*order*/,COLOR_abstract_collection___Collection___iterator))( variable[6] /*order*/) /*AbstractArray::iterator*/;
         while (true) { /*for*/
-          variable7 = ((array___ArrayIterator___is_ok_t)CALL(variable6,COLOR_abstract_collection___Iterator___is_ok))(variable6) /*ArrayIterator::is_ok*/;
-          if (!UNTAG_Bool(variable7)) break; /*for*/
-          variable7 = ((array___ArrayIterator___item_t)CALL(variable6,COLOR_abstract_collection___Iterator___item))(variable6) /*ArrayIterator::item*/;
-          variable8 = TAG_Bool(( variable7 /*c*/ ==  variable3 /*prev_class*/) || (( variable7 /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable7 /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable7 /*c*/, variable3 /*prev_class*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable7 /*c*/,COLOR_kernel___Object_____eqeq))( variable7 /*c*/,  variable3 /*prev_class*/) /*Object::==*/)))));
-          if (UNTAG_Bool(variable8)) { /*if*/
-            variable5 =  TAG_Bool(true) /*last_is_found=*/;
+          variable[9] = ((array___ArrayIterator___is_ok_t)CALL(variable[8],COLOR_abstract_collection___Iterator___is_ok))(variable[8]) /*ArrayIterator::is_ok*/;
+          if (!UNTAG_Bool(variable[9])) break; /*for*/
+          variable[9] = ((array___ArrayIterator___item_t)CALL(variable[8],COLOR_abstract_collection___Iterator___item))(variable[8]) /*ArrayIterator::item*/;
+          variable[10] = variable[9];
+          variable[11] = TAG_Bool(( variable[10] /*c*/ ==  variable[5] /*prev_class*/) || (( variable[10] /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[10] /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[10] /*c*/, variable[5] /*prev_class*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[10] /*c*/,COLOR_kernel___Object_____eqeq))( variable[10] /*c*/,  variable[5] /*prev_class*/) /*Object::==*/)))));
+          if (UNTAG_Bool(variable[11])) { /*if*/
+            variable[7] =  TAG_Bool(true) /*last_is_found=*/;
           } else { /*if*/
-            variable8 = TAG_Bool(( variable7 /*c*/ ==  variable2 /*cla*/) || (( variable7 /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable7 /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable7 /*c*/, variable2 /*cla*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable7 /*c*/,COLOR_kernel___Object_____eqeq))( variable7 /*c*/,  variable2 /*cla*/) /*Object::==*/)))));
-            if (UNTAG_Bool(variable8)) { /*if*/
-              if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool( variable5 /*last_is_found*/)))) { /*if*/
-		variable8 = NEW_String_string___String___init(); /*new String*/
-		variable9 = NEW_String_string___String___with_native(BOX_NativeString("Error: Constructor of "), TAG_Int(22)); /*new String*/
-		variable10 = variable9;
-		((string___String___append_t)CALL(variable8,COLOR_abstract_collection___IndexedCollection___append))(variable8, variable10) /*String::append*/;
-		variable11 =  variable7 /*c*/;
-		variable11 = ((string___String___to_s_t)CALL(variable11,COLOR_string___Object___to_s))(variable11) /*String::to_s*/;
-		((string___String___append_t)CALL(variable8,COLOR_abstract_collection___IndexedCollection___append))(variable8, variable11) /*String::append*/;
-		variable12 = NEW_String_string___String___with_native(BOX_NativeString(" must be invoked before constructor of "), TAG_Int(39)); /*new String*/
-		variable13 = variable12;
-		((string___String___append_t)CALL(variable8,COLOR_abstract_collection___IndexedCollection___append))(variable8, variable13) /*String::append*/;
-		variable14 =  variable3 /*prev_class*/;
-		variable14 = ((string___String___to_s_t)CALL(variable14,COLOR_string___Object___to_s))(variable14) /*String::to_s*/;
-		((string___String___append_t)CALL(variable8,COLOR_abstract_collection___IndexedCollection___append))(variable8, variable14) /*String::append*/;
-		variable15 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-		variable16 = variable15;
-		((string___String___append_t)CALL(variable8,COLOR_abstract_collection___IndexedCollection___append))(variable8, variable16) /*String::append*/;
-		((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable8) /*AbsSyntaxVisitor::error*/;
+            variable[11] = TAG_Bool(( variable[10] /*c*/ ==  variable[4] /*cla*/) || (( variable[10] /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[10] /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[10] /*c*/, variable[4] /*cla*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[10] /*c*/,COLOR_kernel___Object_____eqeq))( variable[10] /*c*/,  variable[4] /*cla*/) /*Object::==*/)))));
+            if (UNTAG_Bool(variable[11])) { /*if*/
+              if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool( variable[7] /*last_is_found*/)))) { /*if*/
+		variable[11] = variable[0];
+		variable[12] = NEW_String_string___String___init(); /*new String*/
+		variable[13] = NEW_String_string___String___with_native(BOX_NativeString("Error: Constructor of "), TAG_Int(22)); /*new String*/
+		variable[14] = variable[13];
+		((string___String___append_t)CALL(variable[12],COLOR_abstract_collection___IndexedCollection___append))(variable[12], variable[14]) /*String::append*/;
+		variable[15] =  variable[10] /*c*/;
+		variable[15] = ((string___String___to_s_t)CALL(variable[15],COLOR_string___Object___to_s))(variable[15]) /*String::to_s*/;
+		((string___String___append_t)CALL(variable[12],COLOR_abstract_collection___IndexedCollection___append))(variable[12], variable[15]) /*String::append*/;
+		variable[16] = NEW_String_string___String___with_native(BOX_NativeString(" must be invoked before constructor of "), TAG_Int(39)); /*new String*/
+		variable[17] = variable[16];
+		((string___String___append_t)CALL(variable[12],COLOR_abstract_collection___IndexedCollection___append))(variable[12], variable[17]) /*String::append*/;
+		variable[18] =  variable[5] /*prev_class*/;
+		variable[18] = ((string___String___to_s_t)CALL(variable[18],COLOR_string___Object___to_s))(variable[18]) /*String::to_s*/;
+		((string___String___append_t)CALL(variable[12],COLOR_abstract_collection___IndexedCollection___append))(variable[12], variable[18]) /*String::append*/;
+		variable[19] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+		variable[20] = variable[19];
+		((string___String___append_t)CALL(variable[12],COLOR_abstract_collection___IndexedCollection___append))(variable[12], variable[20]) /*String::append*/;
+		((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[11], variable[12]) /*AbsSyntaxVisitor::error*/;
               }
-              variable8 = ((typing___TypingVisitor___explicit_super_init_calls_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___explicit_super_init_calls))( variable0 /*v*/) /*TypingVisitor::explicit_super_init_calls*/;
-              ((array___AbstractArray___add_t)CALL(variable8,COLOR_abstract_collection___SimpleCollection___add))(variable8,  variable1 /*property*/) /*AbstractArray::add*/;
-              goto break_84;
+              variable[11] = ((typing___TypingVisitor___explicit_super_init_calls_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___explicit_super_init_calls))( variable[1] /*v*/) /*TypingVisitor::explicit_super_init_calls*/;
+              ((array___AbstractArray___add_t)CALL(variable[11],COLOR_abstract_collection___SimpleCollection___add))(variable[11],  variable[2] /*property*/) /*AbstractArray::add*/;
+              goto break_97;
             }
           }
-          continue_84: while(0);
-          ((array___ArrayIterator___next_t)CALL(variable6,COLOR_abstract_collection___Iterator___next))(variable6) /*ArrayIterator::next*/;
+          continue_97: while(0);
+          ((array___ArrayIterator___next_t)CALL(variable[8],COLOR_abstract_collection___Iterator___next))(variable[8]) /*ArrayIterator::next*/;
         }
-        break_84: while(0);
+        break_97: while(0);
       }
     }
   }
+  return_label96: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___ANewExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 899, LOCATE_typing___ANewExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-    val_t variable3;
-    val_t variable4;
-    val_t variable5;
-    val_t variable6;
-    val_t variable7;
-    val_t variable8;
-    static val_t once_value_variable3_86; static int once_bool_variable3_86;
-    val_t variable9;
+  struct trace_t trace = {NULL, NULL, 1025, LOCATE_typing___ANewExpr___after_typing};
+    static val_t once_value_99; static int once_bool_99; /* Once value for variable[5]*/
+  val_t variable[13];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable2 = ((parser_nodes___ANewExpr___n_type_t)CALL( self,COLOR_parser_nodes___ANewExpr___n_type))( self) /*ANewExpr::n_type*/;
-  variable2 = ((typing___PType___stype_t)CALL(variable2,COLOR_typing___PType___stype))(variable2) /*PType::stype*/;
-  variable1 = variable2;
-  variable2 = TAG_Bool(( variable1 /*t*/ ==  NIT_NULL /*null*/) || (( variable1 /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable1 /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable1 /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable1 /*t*/,COLOR_kernel___Object_____eqeq))( variable1 /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    goto return_label85;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___ANewExpr___n_type_t)CALL(variable[4],COLOR_parser_nodes___ANewExpr___n_type))(variable[4]) /*ANewExpr::n_type*/;
+  variable[4] = ((typing___PType___stype_t)CALL(variable[4],COLOR_typing___PType___stype))(variable[4]) /*PType::stype*/;
+  variable[3] = variable[4];
+  variable[4] = TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    goto return_label98;
   }
-  variable2 = ((static_type___MMType___local_class_t)CALL( variable1 /*t*/,COLOR_static_type___MMType___local_class))( variable1 /*t*/) /*MMType::local_class*/;
-  variable2 = ((abstractmetamodel___MMLocalClass___global_t)CALL(variable2,COLOR_abstractmetamodel___MMLocalClass___global))(variable2) /*MMLocalClass::global*/;
-  variable2 = ((abstractmetamodel___MMGlobalClass___is_abstract_t)CALL(variable2,COLOR_abstractmetamodel___MMGlobalClass___is_abstract))(variable2) /*MMGlobalClass::is_abstract*/;
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = NEW_String_string___String___init(); /*new String*/
-    variable3 = NEW_String_string___String___with_native(BOX_NativeString("Error: try to instantiate abstract class "), TAG_Int(41)); /*new String*/
-    variable4 = variable3;
-    ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable4) /*String::append*/;
-    variable5 = ((static_type___MMType___local_class_t)CALL( variable1 /*t*/,COLOR_static_type___MMType___local_class))( variable1 /*t*/) /*MMType::local_class*/;
-    variable6 = variable5;
-    variable6 = ((string___String___to_s_t)CALL(variable6,COLOR_string___Object___to_s))(variable6) /*String::to_s*/;
-    ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable6) /*String::append*/;
-    variable7 = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-    variable8 = variable7;
-    ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable8) /*String::append*/;
-    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable2) /*AbsSyntaxVisitor::error*/;
-    goto return_label85;
+  variable[4] = ((static_type___MMType___local_class_t)CALL( variable[3] /*t*/,COLOR_static_type___MMType___local_class))( variable[3] /*t*/) /*MMType::local_class*/;
+  variable[4] = ((abstractmetamodel___MMLocalClass___global_t)CALL(variable[4],COLOR_abstractmetamodel___MMLocalClass___global))(variable[4]) /*MMLocalClass::global*/;
+  variable[4] = ((abstractmetamodel___MMGlobalClass___is_abstract_t)CALL(variable[4],COLOR_abstractmetamodel___MMGlobalClass___is_abstract))(variable[4]) /*MMGlobalClass::is_abstract*/;
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = variable[0];
+    variable[5] = NEW_String_string___String___init(); /*new String*/
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString("Error: try to instantiate abstract class "), TAG_Int(41)); /*new String*/
+    variable[7] = variable[6];
+    ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[7]) /*String::append*/;
+    variable[8] = ((static_type___MMType___local_class_t)CALL( variable[3] /*t*/,COLOR_static_type___MMType___local_class))( variable[3] /*t*/) /*MMType::local_class*/;
+    variable[9] = variable[8];
+    variable[9] = ((string___String___to_s_t)CALL(variable[9],COLOR_string___Object___to_s))(variable[9]) /*String::to_s*/;
+    ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[9]) /*String::append*/;
+    variable[10] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
+    variable[11] = variable[10];
+    ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[11]) /*String::append*/;
+    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::error*/;
+    goto return_label98;
   }
-  variable2 = NIT_NULL /*decl variable name*/;
-  variable3 = ((parser_nodes___ANewExpr___n_id_t)CALL( self,COLOR_parser_nodes___ANewExpr___n_id))( self) /*ANewExpr::n_id*/;
-  variable3 = TAG_Bool((variable3 ==  NIT_NULL /*null*/) || ((variable3 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable3,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable3, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable3,COLOR_kernel___Object_____eqeq))(variable3,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable3)) { /*if*/
-    if (once_bool_variable3_86) variable3 = once_value_variable3_86;
+  /*variable[4] is variable name*/
+  variable[5] = variable[0];
+  variable[5] = ((parser_nodes___ANewExpr___n_id_t)CALL(variable[5],COLOR_parser_nodes___ANewExpr___n_id))(variable[5]) /*ANewExpr::n_id*/;
+  variable[5] = TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    if (once_bool_99) variable[5] = once_value_99;
     else {
-      variable3 = NEW_String_string___String___with_native(BOX_NativeString("init"), TAG_Int(4)); /*new String*/
-      variable3 = ((symbol___String___to_symbol_t)CALL(variable3,COLOR_symbol___String___to_symbol))(variable3) /*String::to_symbol*/;
-      once_value_variable3_86 = variable3;
-      once_bool_variable3_86 = true;
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString("init"), TAG_Int(4)); /*new String*/
+      variable[5] = ((symbol___String___to_symbol_t)CALL(variable[5],COLOR_symbol___String___to_symbol))(variable[5]) /*String::to_symbol*/;
+      once_value_99 = variable[5];
+      once_bool_99 = true;
     }
-    variable2 = variable3 /*name=*/;
+    variable[4] = variable[5] /*name=*/;
   } else { /*if*/
-    variable3 = ((parser_nodes___ANewExpr___n_id_t)CALL( self,COLOR_parser_nodes___ANewExpr___n_id))( self) /*ANewExpr::n_id*/;
-    variable3 = ((syntax_base___Token___to_symbol_t)CALL(variable3,COLOR_syntax_base___Token___to_symbol))(variable3) /*Token::to_symbol*/;
-    variable2 = variable3 /*name=*/;
+    variable[5] = variable[0];
+    variable[5] = ((parser_nodes___ANewExpr___n_id_t)CALL(variable[5],COLOR_parser_nodes___ANewExpr___n_id))(variable[5]) /*ANewExpr::n_id*/;
+    variable[5] = ((syntax_base___Token___to_symbol_t)CALL(variable[5],COLOR_syntax_base___Token___to_symbol))(variable[5]) /*Token::to_symbol*/;
+    variable[4] = variable[5] /*name=*/;
   }
-  variable3 = ((parser_nodes___ANewExpr___n_args_t)CALL( self,COLOR_parser_nodes___ANewExpr___n_args))( self) /*ANewExpr::n_args*/;
-  variable3 = ((array___Collection___to_a_t)CALL(variable3,COLOR_array___Collection___to_a))(variable3) /*Collection::to_a*/;
-  ((typing___AAbsSendExpr___do_typing_t)CALL( self,COLOR_typing___AAbsSendExpr___do_typing))( self,  variable0 /*v*/,  variable1 /*t*/,  TAG_Bool(false),  TAG_Bool(false),  variable2 /*name*/, variable3) /*AAbsSendExpr::do_typing*/;
-  variable3 = ((typing___AAbsSendExpr___prop_t)CALL( self,COLOR_typing___AAbsSendExpr___prop))( self) /*AAbsSendExpr::prop*/;
-  variable3 = TAG_Bool((variable3 ==  NIT_NULL /*null*/) || ((variable3 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable3,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable3, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable3,COLOR_kernel___Object_____eqeq))(variable3,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable3)) { /*if*/
-    goto return_label85;
+  variable[5] = variable[0];
+  variable[6] = variable[0];
+  variable[6] = ((parser_nodes___ANewExpr___n_args_t)CALL(variable[6],COLOR_parser_nodes___ANewExpr___n_args))(variable[6]) /*ANewExpr::n_args*/;
+  variable[6] = ((array___Collection___to_a_t)CALL(variable[6],COLOR_array___Collection___to_a))(variable[6]) /*Collection::to_a*/;
+  ((typing___AAbsSendExpr___do_typing_t)CALL(variable[5],COLOR_typing___AAbsSendExpr___do_typing))(variable[5],  variable[1] /*v*/,  variable[3] /*t*/,  TAG_Bool(false),  TAG_Bool(false),  variable[4] /*name*/, variable[6],  NIT_NULL /*null*/) /*AAbsSendExpr::do_typing*/;
+  variable[5] = variable[0];
+  variable[5] = ((typing___AAbsSendExpr___prop_t)CALL(variable[5],COLOR_typing___AAbsSendExpr___prop))(variable[5]) /*AAbsSendExpr::prop*/;
+  variable[5] = TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    goto return_label98;
   }
-  variable3 = ((typing___AAbsSendExpr___prop_t)CALL( self,COLOR_typing___AAbsSendExpr___prop))( self) /*AAbsSendExpr::prop*/;
-  variable3 = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable3,COLOR_abstractmetamodel___MMLocalProperty___global))(variable3) /*MMLocalProperty::global*/;
-  variable3 = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable3,COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable3) /*MMGlobalProperty::is_init*/;
-  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable3)))) { /*if*/
-    variable3 = NEW_String_string___String___init(); /*new String*/
-    variable4 = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
-    variable5 = variable4;
-    ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable5) /*String::append*/;
-    variable6 = ((typing___AAbsSendExpr___prop_t)CALL( self,COLOR_typing___AAbsSendExpr___prop))( self) /*AAbsSendExpr::prop*/;
-    variable7 = variable6;
-    variable7 = ((string___String___to_s_t)CALL(variable7,COLOR_string___Object___to_s))(variable7) /*String::to_s*/;
-    ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable7) /*String::append*/;
-    variable8 = NEW_String_string___String___with_native(BOX_NativeString(" is not a constructor."), TAG_Int(22)); /*new String*/
-    variable9 = variable8;
-    ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable9) /*String::append*/;
-    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable3) /*AbsSyntaxVisitor::error*/;
+  variable[5] = variable[0];
+  variable[5] = ((typing___AAbsSendExpr___prop_t)CALL(variable[5],COLOR_typing___AAbsSendExpr___prop))(variable[5]) /*AAbsSendExpr::prop*/;
+  variable[5] = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable[5],COLOR_abstractmetamodel___MMLocalProperty___global))(variable[5]) /*MMLocalProperty::global*/;
+  variable[5] = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable[5],COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable[5]) /*MMGlobalProperty::is_init*/;
+  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[5])))) { /*if*/
+    variable[5] = variable[0];
+    variable[6] = NEW_String_string___String___init(); /*new String*/
+    variable[7] = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
+    variable[8] = variable[7];
+    ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[8]) /*String::append*/;
+    variable[9] = variable[0];
+    variable[9] = ((typing___AAbsSendExpr___prop_t)CALL(variable[9],COLOR_typing___AAbsSendExpr___prop))(variable[9]) /*AAbsSendExpr::prop*/;
+    variable[10] = variable[9];
+    variable[10] = ((string___String___to_s_t)CALL(variable[10],COLOR_string___Object___to_s))(variable[10]) /*String::to_s*/;
+    ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[10]) /*String::append*/;
+    variable[11] = NEW_String_string___String___with_native(BOX_NativeString(" is not a constructor."), TAG_Int(22)); /*new String*/
+    variable[12] = variable[11];
+    ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[12]) /*String::append*/;
+    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[5], variable[6]) /*AbsSyntaxVisitor::error*/;
   }
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ =  variable1 /*t*/;
-  return_label85: while(false);
+  variable[5] = variable[0];
+  ATTR_typing___PExpr____stype(variable[5]) /*PExpr::_stype*/ =  variable[3] /*t*/;
+  return_label98: while(false);
+  tracehead = trace.prev;
+  return;
+}
+void typing___ASendExpr___after_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 1062, LOCATE_typing___ASendExpr___after_typing};
+  val_t variable[4];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  ((typing___ASendExpr___do_all_typing_t)CALL(variable[3],COLOR_typing___ASendExpr___do_all_typing))(variable[3],  variable[1] /*v*/) /*ASendExpr::do_all_typing*/;
+  return_label100: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t typing___ASendExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 927, LOCATE_typing___ASendExpr___name};
+  struct trace_t trace = {NULL, NULL, 1053, LOCATE_typing___ASendExpr___name};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___ANewExpr___after_typing, LOCATE_typing, 927);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_typing, 1053);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t typing___ASendExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 930, LOCATE_typing___ASendExpr___raw_arguments};
+  struct trace_t trace = {NULL, NULL, 1056, LOCATE_typing___ASendExpr___raw_arguments};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___ANewExpr___after_typing, LOCATE_typing, 930);
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_typing, 1056);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
-void typing___ASendExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 933, LOCATE_typing___ASendExpr___after_typing};
-  val_t variable0;
+val_t typing___ASendExpr___closure_defs(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1059, LOCATE_typing___ASendExpr___closure_defs};
+  val_t variable[2];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  ((typing___ASendExpr___do_all_typing_t)CALL( self,COLOR_typing___ASendExpr___do_all_typing))( self,  variable0 /*v*/) /*ASendExpr::do_all_typing*/;
+  variable[0] =  self;
+  variable[1] =  NIT_NULL /*null*/;
+  goto return_label101;
+  return_label101: while(false);
   tracehead = trace.prev;
-  return;
+  return variable[1];
 }
 void typing___ASendExpr___do_all_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 938, LOCATE_typing___ASendExpr___do_all_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-  val_t variable5;
-      val_t variable6;
-      val_t variable7;
+  struct trace_t trace = {NULL, NULL, 1067, LOCATE_typing___ASendExpr___do_all_typing};
+  val_t variable[11];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((parser_nodes___ASendExpr___n_expr_t)CALL( self,COLOR_parser_nodes___ASendExpr___n_expr))( self) /*ASendExpr::n_expr*/;
-  variable1 = ((typing___PExpr___stype_t)CALL(variable1,COLOR_syntax_base___PExpr___stype))(variable1) /*PExpr::stype*/;
-  variable2 = ((parser_nodes___ASendExpr___n_expr_t)CALL( self,COLOR_parser_nodes___ASendExpr___n_expr))( self) /*ASendExpr::n_expr*/;
-  variable2 = ((typing___PExpr___is_implicit_self_t)CALL(variable2,COLOR_typing___PExpr___is_implicit_self))(variable2) /*PExpr::is_implicit_self*/;
-  variable3 = ((parser_nodes___ASendExpr___n_expr_t)CALL( self,COLOR_parser_nodes___ASendExpr___n_expr))( self) /*ASendExpr::n_expr*/;
-  variable3 = ((typing___PExpr___is_self_t)CALL(variable3,COLOR_typing___PExpr___is_self))(variable3) /*PExpr::is_self*/;
-  variable4 = ((typing___ASendExpr___name_t)CALL( self,COLOR_typing___ASendExpr___name))( self) /*ASendExpr::name*/;
-  variable5 = ((typing___ASendExpr___raw_arguments_t)CALL( self,COLOR_typing___ASendExpr___raw_arguments))( self) /*ASendExpr::raw_arguments*/;
-  ((typing___AAbsSendExpr___do_typing_t)CALL( self,COLOR_typing___AAbsSendExpr___do_typing))( self,  variable0 /*v*/, variable1, variable2, variable3, variable4, variable5) /*AAbsSendExpr::do_typing*/;
-  variable1 = ((typing___AAbsSendExpr___prop_t)CALL( self,COLOR_typing___AAbsSendExpr___prop))( self) /*AAbsSendExpr::prop*/;
-  variable1 = TAG_Bool((variable1 ==  NIT_NULL /*null*/) || ((variable1 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable1, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable1,COLOR_kernel___Object_____eqeq))(variable1,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable1)) { /*if*/
-    goto return_label88;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[3],COLOR_parser_nodes___ASendExpr___n_expr))(variable[3]) /*ASendExpr::n_expr*/;
+  variable[3] = ((syntax_base___AbsSyntaxVisitor___check_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_expr))( variable[1] /*v*/, variable[3]) /*AbsSyntaxVisitor::check_expr*/;
+  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) { /*if*/
+    goto return_label102;
   }
-  variable1 = ((typing___AAbsSendExpr___prop_t)CALL( self,COLOR_typing___AAbsSendExpr___prop))( self) /*AAbsSendExpr::prop*/;
-  variable1 = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable1,COLOR_abstractmetamodel___MMLocalProperty___global))(variable1) /*MMLocalProperty::global*/;
-  variable1 = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable1,COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable1) /*MMGlobalProperty::is_init*/;
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable0 /*v*/) /*AbsSyntaxVisitor::local_property*/;
-    variable1 = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable1,COLOR_abstractmetamodel___MMLocalProperty___global))(variable1) /*MMLocalProperty::global*/;
-    variable1 = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable1,COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable1) /*MMGlobalProperty::is_init*/;
-    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable1)))) { /*if*/
-      variable1 = NEW_String_string___String___init(); /*new String*/
-      variable2 = NEW_String_string___String___with_native(BOX_NativeString("Error: try to invoke constructor "), TAG_Int(33)); /*new String*/
-      variable3 = variable2;
-      ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable3) /*String::append*/;
-      variable4 = ((typing___AAbsSendExpr___prop_t)CALL( self,COLOR_typing___AAbsSendExpr___prop))( self) /*AAbsSendExpr::prop*/;
-      variable5 = variable4;
-      variable5 = ((string___String___to_s_t)CALL(variable5,COLOR_string___Object___to_s))(variable5) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable5) /*String::append*/;
-      variable6 = NEW_String_string___String___with_native(BOX_NativeString(" in a method."), TAG_Int(13)); /*new String*/
-      variable7 = variable6;
-      ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable7) /*String::append*/;
-      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable1) /*AbsSyntaxVisitor::error*/;
+  variable[3] = variable[0];
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___ASendExpr___n_expr))(variable[4]) /*ASendExpr::n_expr*/;
+  variable[4] = ((typing___PExpr___stype_t)CALL(variable[4],COLOR_syntax_base___PExpr___stype))(variable[4]) /*PExpr::stype*/;
+  variable[5] = variable[0];
+  variable[5] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[5],COLOR_parser_nodes___ASendExpr___n_expr))(variable[5]) /*ASendExpr::n_expr*/;
+  variable[5] = ((typing___PExpr___is_implicit_self_t)CALL(variable[5],COLOR_typing___PExpr___is_implicit_self))(variable[5]) /*PExpr::is_implicit_self*/;
+  variable[6] = variable[0];
+  variable[6] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[6],COLOR_parser_nodes___ASendExpr___n_expr))(variable[6]) /*ASendExpr::n_expr*/;
+  variable[6] = ((typing___PExpr___is_self_t)CALL(variable[6],COLOR_typing___PExpr___is_self))(variable[6]) /*PExpr::is_self*/;
+  variable[7] = variable[0];
+  variable[7] = ((typing___ASendExpr___name_t)CALL(variable[7],COLOR_typing___ASendExpr___name))(variable[7]) /*ASendExpr::name*/;
+  variable[8] = variable[0];
+  variable[8] = ((typing___ASendExpr___raw_arguments_t)CALL(variable[8],COLOR_typing___ASendExpr___raw_arguments))(variable[8]) /*ASendExpr::raw_arguments*/;
+  variable[9] = variable[0];
+  variable[9] = ((typing___ASendExpr___closure_defs_t)CALL(variable[9],COLOR_typing___ASendExpr___closure_defs))(variable[9]) /*ASendExpr::closure_defs*/;
+  ((typing___AAbsSendExpr___do_typing_t)CALL(variable[3],COLOR_typing___AAbsSendExpr___do_typing))(variable[3],  variable[1] /*v*/, variable[4], variable[5], variable[6], variable[7], variable[8], variable[9]) /*AAbsSendExpr::do_typing*/;
+  variable[3] = variable[0];
+  variable[3] = ((typing___AAbsSendExpr___prop_t)CALL(variable[3],COLOR_typing___AAbsSendExpr___prop))(variable[3]) /*AAbsSendExpr::prop*/;
+  variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    goto return_label102;
+  }
+  variable[3] = variable[0];
+  variable[3] = ((typing___AAbsSendExpr___prop_t)CALL(variable[3],COLOR_typing___AAbsSendExpr___prop))(variable[3]) /*AAbsSendExpr::prop*/;
+  variable[3] = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable[3],COLOR_abstractmetamodel___MMLocalProperty___global))(variable[3]) /*MMLocalProperty::global*/;
+  variable[3] = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable[3],COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable[3]) /*MMGlobalProperty::is_init*/;
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_property*/;
+    variable[3] = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable[3],COLOR_abstractmetamodel___MMLocalProperty___global))(variable[3]) /*MMLocalProperty::global*/;
+    variable[3] = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable[3],COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable[3]) /*MMGlobalProperty::is_init*/;
+    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) { /*if*/
+      variable[3] = variable[0];
+      variable[4] = NEW_String_string___String___init(); /*new String*/
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString("Error: try to invoke constructor "), TAG_Int(33)); /*new String*/
+      variable[6] = variable[5];
+      ((string___String___append_t)CALL(variable[4],COLOR_abstract_collection___IndexedCollection___append))(variable[4], variable[6]) /*String::append*/;
+      variable[7] = variable[0];
+      variable[7] = ((typing___AAbsSendExpr___prop_t)CALL(variable[7],COLOR_typing___AAbsSendExpr___prop))(variable[7]) /*AAbsSendExpr::prop*/;
+      variable[8] = variable[7];
+      variable[8] = ((string___String___to_s_t)CALL(variable[8],COLOR_string___Object___to_s))(variable[8]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[4],COLOR_abstract_collection___IndexedCollection___append))(variable[4], variable[8]) /*String::append*/;
+      variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" in a method."), TAG_Int(13)); /*new String*/
+      variable[10] = variable[9];
+      ((string___String___append_t)CALL(variable[4],COLOR_abstract_collection___IndexedCollection___append))(variable[4], variable[10]) /*String::append*/;
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[3], variable[4]) /*AbsSyntaxVisitor::error*/;
     } else { /*if*/
-      variable1 = ((parser_nodes___ASendExpr___n_expr_t)CALL( self,COLOR_parser_nodes___ASendExpr___n_expr))( self) /*ASendExpr::n_expr*/;
-      variable1 = ((typing___PExpr___is_self_t)CALL(variable1,COLOR_typing___PExpr___is_self))(variable1) /*PExpr::is_self*/;
-      if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable1)))) { /*if*/
-        variable1 = NEW_String_string___String___init(); /*new String*/
-        variable2 = NEW_String_string___String___with_native(BOX_NativeString("Error: constructor "), TAG_Int(19)); /*new String*/
-        variable3 = variable2;
-        ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable3) /*String::append*/;
-        variable4 = ((typing___AAbsSendExpr___prop_t)CALL( self,COLOR_typing___AAbsSendExpr___prop))( self) /*AAbsSendExpr::prop*/;
-        variable5 = variable4;
-        variable5 = ((string___String___to_s_t)CALL(variable5,COLOR_string___Object___to_s))(variable5) /*String::to_s*/;
-        ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable5) /*String::append*/;
-        variable6 = NEW_String_string___String___with_native(BOX_NativeString(" is not invoken on 'self'."), TAG_Int(26)); /*new String*/
-        variable7 = variable6;
-        ((string___String___append_t)CALL(variable1,COLOR_abstract_collection___IndexedCollection___append))(variable1, variable7) /*String::append*/;
-        ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable1) /*AbsSyntaxVisitor::error*/;
+      variable[3] = variable[0];
+      variable[3] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[3],COLOR_parser_nodes___ASendExpr___n_expr))(variable[3]) /*ASendExpr::n_expr*/;
+      variable[3] = ((typing___PExpr___is_self_t)CALL(variable[3],COLOR_typing___PExpr___is_self))(variable[3]) /*PExpr::is_self*/;
+      if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) { /*if*/
+        variable[3] = variable[0];
+        variable[4] = NEW_String_string___String___init(); /*new String*/
+        variable[5] = NEW_String_string___String___with_native(BOX_NativeString("Error: constructor "), TAG_Int(19)); /*new String*/
+        variable[6] = variable[5];
+        ((string___String___append_t)CALL(variable[4],COLOR_abstract_collection___IndexedCollection___append))(variable[4], variable[6]) /*String::append*/;
+        variable[7] = variable[0];
+        variable[7] = ((typing___AAbsSendExpr___prop_t)CALL(variable[7],COLOR_typing___AAbsSendExpr___prop))(variable[7]) /*AAbsSendExpr::prop*/;
+        variable[8] = variable[7];
+        variable[8] = ((string___String___to_s_t)CALL(variable[8],COLOR_string___Object___to_s))(variable[8]) /*String::to_s*/;
+        ((string___String___append_t)CALL(variable[4],COLOR_abstract_collection___IndexedCollection___append))(variable[4], variable[8]) /*String::append*/;
+        variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" is not invoken on 'self'."), TAG_Int(26)); /*new String*/
+        variable[10] = variable[9];
+        ((string___String___append_t)CALL(variable[4],COLOR_abstract_collection___IndexedCollection___append))(variable[4], variable[10]) /*String::append*/;
+        ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[3], variable[4]) /*AbsSyntaxVisitor::error*/;
       } else { /*if*/
-        variable1 = ((typing___AAbsSendExpr___prop_t)CALL( self,COLOR_typing___AAbsSendExpr___prop))( self) /*AAbsSendExpr::prop*/;
-        ((typing___ASuperInitCall___register_super_init_call_t)CALL( self,COLOR_typing___ASuperInitCall___register_super_init_call))( self,  variable0 /*v*/, variable1) /*ASuperInitCall::register_super_init_call*/;
+        variable[3] = variable[0];
+        variable[4] = variable[0];
+        variable[4] = ((typing___AAbsSendExpr___prop_t)CALL(variable[4],COLOR_typing___AAbsSendExpr___prop))(variable[4]) /*AAbsSendExpr::prop*/;
+        ((typing___ASuperInitCall___register_super_init_call_t)CALL(variable[3],COLOR_typing___ASuperInitCall___register_super_init_call))(variable[3],  variable[1] /*v*/, variable[4]) /*ASuperInitCall::register_super_init_call*/;
       }
     }
   }
-  variable2 = ((typing___AAbsSendExpr___prop_t)CALL( self,COLOR_typing___AAbsSendExpr___prop))( self) /*AAbsSendExpr::prop*/;
-  variable3 = ((parser_nodes___ASendExpr___n_expr_t)CALL( self,COLOR_parser_nodes___ASendExpr___n_expr))( self) /*ASendExpr::n_expr*/;
-  variable3 = ((typing___PExpr___stype_t)CALL(variable3,COLOR_syntax_base___PExpr___stype))(variable3) /*PExpr::stype*/;
-  variable2 = ((static_type___MMLocalProperty___signature_for_t)CALL(variable2,COLOR_static_type___MMLocalProperty___signature_for))(variable2, variable3) /*MMLocalProperty::signature_for*/;
-  variable2 = ((static_type___MMSignature___return_type_t)CALL(variable2,COLOR_static_type___MMSignature___return_type))(variable2) /*MMSignature::return_type*/;
-  variable1 = variable2;
-  variable2 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable1 /*t*/ ==  NIT_NULL /*null*/) || (( variable1 /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable1 /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable1 /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable1 /*t*/,COLOR_kernel___Object_____eqeq))( variable1 /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  variable3 = variable2;
-  if (UNTAG_Bool(variable3)) { /* and */
-    variable3 = ((parser_nodes___ASendExpr___n_expr_t)CALL( self,COLOR_parser_nodes___ASendExpr___n_expr))( self) /*ASendExpr::n_expr*/;
-    variable3 = ((typing___PExpr___is_self_t)CALL(variable3,COLOR_typing___PExpr___is_self))(variable3) /*PExpr::is_self*/;
-    variable3 =  TAG_Bool(!UNTAG_Bool(variable3));
+  variable[3] = variable[0];
+  variable[4] = variable[0];
+  variable[4] = ((typing___AAbsSendExpr___return_type_t)CALL(variable[4],COLOR_typing___AAbsSendExpr___return_type))(variable[4]) /*AAbsSendExpr::return_type*/;
+  ATTR_typing___PExpr____stype(variable[3]) /*PExpr::_stype*/ = variable[4];
+  return_label102: while(false);
+  tracehead = trace.prev;
+  return;
+}
+void typing___ASendReassignExpr___do_all_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 1091, LOCATE_typing___ASendReassignExpr___do_all_typing};
+  val_t variable[17];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[3],COLOR_parser_nodes___ASendExpr___n_expr))(variable[3]) /*ASendExpr::n_expr*/;
+  variable[3] = ((syntax_base___AbsSyntaxVisitor___check_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_expr))( variable[1] /*v*/, variable[3]) /*AbsSyntaxVisitor::check_expr*/;
+  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) { /*if*/
+    goto return_label103;
   }
-  variable2 = variable3;
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = ((static_type___MMType___not_for_self_t)CALL( variable1 /*t*/,COLOR_static_type___MMType___not_for_self))( variable1 /*t*/) /*MMType::not_for_self*/;
-    variable1 = variable2 /*t=*/;
+  variable[4] = variable[0];
+  variable[4] = ((typing___ASendExpr___raw_arguments_t)CALL(variable[4],COLOR_typing___ASendExpr___raw_arguments))(variable[4]) /*ASendExpr::raw_arguments*/;
+  variable[3] = variable[4];
+  variable[4] = variable[0];
+  variable[5] = variable[0];
+  variable[5] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[5],COLOR_parser_nodes___ASendExpr___n_expr))(variable[5]) /*ASendExpr::n_expr*/;
+  variable[5] = ((typing___PExpr___stype_t)CALL(variable[5],COLOR_syntax_base___PExpr___stype))(variable[5]) /*PExpr::stype*/;
+  variable[6] = variable[0];
+  variable[6] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[6],COLOR_parser_nodes___ASendExpr___n_expr))(variable[6]) /*ASendExpr::n_expr*/;
+  variable[6] = ((typing___PExpr___is_implicit_self_t)CALL(variable[6],COLOR_typing___PExpr___is_implicit_self))(variable[6]) /*PExpr::is_implicit_self*/;
+  variable[7] = variable[0];
+  variable[7] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[7],COLOR_parser_nodes___ASendExpr___n_expr))(variable[7]) /*ASendExpr::n_expr*/;
+  variable[7] = ((typing___PExpr___is_self_t)CALL(variable[7],COLOR_typing___PExpr___is_self))(variable[7]) /*PExpr::is_self*/;
+  variable[8] = variable[0];
+  variable[8] = ((typing___ASendExpr___name_t)CALL(variable[8],COLOR_typing___ASendExpr___name))(variable[8]) /*ASendExpr::name*/;
+  ((typing___AAbsSendExpr___do_typing_t)CALL(variable[4],COLOR_typing___AAbsSendExpr___do_typing))(variable[4],  variable[1] /*v*/, variable[5], variable[6], variable[7], variable[8],  variable[3] /*raw_args*/,  NIT_NULL /*null*/) /*AAbsSendExpr::do_typing*/;
+  variable[4] = variable[0];
+  variable[4] = ((typing___AAbsSendExpr___prop_t)CALL(variable[4],COLOR_typing___AAbsSendExpr___prop))(variable[4]) /*AAbsSendExpr::prop*/;
+  variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    goto return_label103;
   }
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ =  variable1 /*t*/;
-  return_label88: while(false);
+  variable[4] = variable[0];
+  variable[4] = ((typing___AAbsSendExpr___prop_t)CALL(variable[4],COLOR_typing___AAbsSendExpr___prop))(variable[4]) /*AAbsSendExpr::prop*/;
+  variable[4] = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable[4],COLOR_abstractmetamodel___MMLocalProperty___global))(variable[4]) /*MMLocalProperty::global*/;
+  variable[4] = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable[4],COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable[4]) /*MMGlobalProperty::is_init*/;
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_property*/;
+    variable[4] = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable[4],COLOR_abstractmetamodel___MMLocalProperty___global))(variable[4]) /*MMLocalProperty::global*/;
+    variable[4] = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable[4],COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable[4]) /*MMGlobalProperty::is_init*/;
+    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[4])))) { /*if*/
+      variable[4] = variable[0];
+      variable[5] = NEW_String_string___String___init(); /*new String*/
+      variable[6] = NEW_String_string___String___with_native(BOX_NativeString("Error: try to invoke constructor "), TAG_Int(33)); /*new String*/
+      variable[7] = variable[6];
+      ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[7]) /*String::append*/;
+      variable[8] = variable[0];
+      variable[8] = ((typing___AAbsSendExpr___prop_t)CALL(variable[8],COLOR_typing___AAbsSendExpr___prop))(variable[8]) /*AAbsSendExpr::prop*/;
+      variable[9] = variable[8];
+      variable[9] = ((string___String___to_s_t)CALL(variable[9],COLOR_string___Object___to_s))(variable[9]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[9]) /*String::append*/;
+      variable[10] = NEW_String_string___String___with_native(BOX_NativeString(" in a method."), TAG_Int(13)); /*new String*/
+      variable[11] = variable[10];
+      ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[11]) /*String::append*/;
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::error*/;
+    } else { /*if*/
+      variable[4] = variable[0];
+      variable[4] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___ASendExpr___n_expr))(variable[4]) /*ASendExpr::n_expr*/;
+      variable[4] = ((typing___PExpr___is_self_t)CALL(variable[4],COLOR_typing___PExpr___is_self))(variable[4]) /*PExpr::is_self*/;
+      if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[4])))) { /*if*/
+        variable[4] = variable[0];
+        variable[5] = NEW_String_string___String___init(); /*new String*/
+        variable[6] = NEW_String_string___String___with_native(BOX_NativeString("Error: constructor "), TAG_Int(19)); /*new String*/
+        variable[7] = variable[6];
+        ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[7]) /*String::append*/;
+        variable[8] = variable[0];
+        variable[8] = ((typing___AAbsSendExpr___prop_t)CALL(variable[8],COLOR_typing___AAbsSendExpr___prop))(variable[8]) /*AAbsSendExpr::prop*/;
+        variable[9] = variable[8];
+        variable[9] = ((string___String___to_s_t)CALL(variable[9],COLOR_string___Object___to_s))(variable[9]) /*String::to_s*/;
+        ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[9]) /*String::append*/;
+        variable[10] = NEW_String_string___String___with_native(BOX_NativeString(" is not invoken on 'self'."), TAG_Int(26)); /*new String*/
+        variable[11] = variable[10];
+        ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[11]) /*String::append*/;
+        ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::error*/;
+      }
+    }
+  }
+  variable[5] = variable[0];
+  variable[5] = ((typing___AAbsSendExpr___prop_t)CALL(variable[5],COLOR_typing___AAbsSendExpr___prop))(variable[5]) /*AAbsSendExpr::prop*/;
+  variable[6] = variable[0];
+  variable[6] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[6],COLOR_parser_nodes___ASendExpr___n_expr))(variable[6]) /*ASendExpr::n_expr*/;
+  variable[6] = ((typing___PExpr___stype_t)CALL(variable[6],COLOR_syntax_base___PExpr___stype))(variable[6]) /*PExpr::stype*/;
+  variable[5] = ((static_type___MMLocalProperty___signature_for_t)CALL(variable[5],COLOR_static_type___MMLocalProperty___signature_for))(variable[5], variable[6]) /*MMLocalProperty::signature_for*/;
+  variable[5] = ((static_type___MMSignature___return_type_t)CALL(variable[5],COLOR_static_type___MMSignature___return_type))(variable[5]) /*MMSignature::return_type*/;
+  variable[4] = variable[5];
+  variable[5] = variable[0];
+  variable[5] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[5],COLOR_parser_nodes___ASendExpr___n_expr))(variable[5]) /*ASendExpr::n_expr*/;
+  variable[5] = ((typing___PExpr___is_self_t)CALL(variable[5],COLOR_typing___PExpr___is_self))(variable[5]) /*PExpr::is_self*/;
+  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[5])))) { /*if*/
+    variable[5] = ((static_type___MMType___not_for_self_t)CALL( variable[4] /*t*/,COLOR_static_type___MMType___not_for_self))( variable[4] /*t*/) /*MMType::not_for_self*/;
+    variable[4] = variable[5] /*t=*/;
+  }
+  variable[5] = variable[0];
+  ((typing___AReassignFormExpr___do_lvalue_typing_t)CALL(variable[5],COLOR_typing___AReassignFormExpr___do_lvalue_typing))(variable[5],  variable[1] /*v*/,  variable[4] /*t*/) /*AReassignFormExpr::do_lvalue_typing*/;
+  variable[5] = variable[0];
+  variable[6] = variable[0];
+  variable[6] = ((typing___AAbsSendExpr___prop_t)CALL(variable[6],COLOR_typing___AAbsSendExpr___prop))(variable[6]) /*AAbsSendExpr::prop*/;
+  ATTR_typing___ASendReassignExpr____read_prop(variable[5]) /*ASendReassignExpr::_read_prop*/ = variable[6];
+  variable[6] = variable[0];
+  variable[6] = ((typing___AAbsSendExpr___arguments_t)CALL(variable[6],COLOR_typing___AAbsSendExpr___arguments))(variable[6]) /*AAbsSendExpr::arguments*/;
+  variable[5] = variable[6];
+  variable[6] = variable[0];
+  variable[6] = ((parser_nodes___AReassignFormExpr___n_value_t)CALL(variable[6],COLOR_parser_nodes___AReassignFormExpr___n_value))(variable[6]) /*AReassignFormExpr::n_value*/;
+  ((array___AbstractArray___add_t)CALL( variable[3] /*raw_args*/,COLOR_abstract_collection___SimpleCollection___add))( variable[3] /*raw_args*/, variable[6]) /*AbstractArray::add*/;
+  variable[6] = variable[0];
+  variable[7] = variable[0];
+  variable[7] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[7],COLOR_parser_nodes___ASendExpr___n_expr))(variable[7]) /*ASendExpr::n_expr*/;
+  variable[7] = ((typing___PExpr___stype_t)CALL(variable[7],COLOR_syntax_base___PExpr___stype))(variable[7]) /*PExpr::stype*/;
+  variable[8] = variable[0];
+  variable[8] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[8],COLOR_parser_nodes___ASendExpr___n_expr))(variable[8]) /*ASendExpr::n_expr*/;
+  variable[8] = ((typing___PExpr___is_implicit_self_t)CALL(variable[8],COLOR_typing___PExpr___is_implicit_self))(variable[8]) /*PExpr::is_implicit_self*/;
+  variable[9] = variable[0];
+  variable[9] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[9],COLOR_parser_nodes___ASendExpr___n_expr))(variable[9]) /*ASendExpr::n_expr*/;
+  variable[9] = ((typing___PExpr___is_self_t)CALL(variable[9],COLOR_typing___PExpr___is_self))(variable[9]) /*PExpr::is_self*/;
+  variable[10] = NEW_String_string___String___init(); /*new String*/
+  variable[11] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable[12] = variable[11];
+  ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[12]) /*String::append*/;
+  variable[13] = variable[0];
+  variable[13] = ((typing___ASendExpr___name_t)CALL(variable[13],COLOR_typing___ASendExpr___name))(variable[13]) /*ASendExpr::name*/;
+  variable[14] = variable[13];
+  variable[14] = ((string___String___to_s_t)CALL(variable[14],COLOR_string___Object___to_s))(variable[14]) /*String::to_s*/;
+  ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[14]) /*String::append*/;
+  variable[15] = NEW_String_string___String___with_native(BOX_NativeString("="), TAG_Int(1)); /*new String*/
+  variable[16] = variable[15];
+  ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[16]) /*String::append*/;
+  variable[10] = ((symbol___String___to_symbol_t)CALL(variable[10],COLOR_symbol___String___to_symbol))(variable[10]) /*String::to_symbol*/;
+  ((typing___AAbsSendExpr___do_typing_t)CALL(variable[6],COLOR_typing___AAbsSendExpr___do_typing))(variable[6],  variable[1] /*v*/, variable[7], variable[8], variable[9], variable[10],  variable[3] /*raw_args*/,  NIT_NULL /*null*/) /*AAbsSendExpr::do_typing*/;
+  variable[6] = variable[0];
+  variable[6] = ((typing___AAbsSendExpr___prop_t)CALL(variable[6],COLOR_typing___AAbsSendExpr___prop))(variable[6]) /*AAbsSendExpr::prop*/;
+  variable[6] = TAG_Bool((variable[6] ==  NIT_NULL /*null*/) || ((variable[6] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[6],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[6],COLOR_kernel___Object_____eqeq))(variable[6],  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[6])) { /*if*/
+    goto return_label103;
+  }
+  variable[6] = variable[0];
+  variable[6] = ((typing___AAbsSendExpr___prop_t)CALL(variable[6],COLOR_typing___AAbsSendExpr___prop))(variable[6]) /*AAbsSendExpr::prop*/;
+  variable[6] = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable[6],COLOR_abstractmetamodel___MMLocalProperty___global))(variable[6]) /*MMLocalProperty::global*/;
+  variable[6] = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable[6],COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable[6]) /*MMGlobalProperty::is_init*/;
+  if (UNTAG_Bool(variable[6])) { /*if*/
+    variable[6] = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_property*/;
+    variable[6] = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable[6],COLOR_abstractmetamodel___MMLocalProperty___global))(variable[6]) /*MMLocalProperty::global*/;
+    variable[6] = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable[6],COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable[6]) /*MMGlobalProperty::is_init*/;
+    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[6])))) { /*if*/
+      variable[6] = variable[0];
+      variable[7] = NEW_String_string___String___init(); /*new String*/
+      variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Error: try to invoke constructor "), TAG_Int(33)); /*new String*/
+      variable[9] = variable[8];
+      ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[9]) /*String::append*/;
+      variable[10] = variable[0];
+      variable[10] = ((typing___AAbsSendExpr___prop_t)CALL(variable[10],COLOR_typing___AAbsSendExpr___prop))(variable[10]) /*AAbsSendExpr::prop*/;
+      variable[11] = variable[10];
+      variable[11] = ((string___String___to_s_t)CALL(variable[11],COLOR_string___Object___to_s))(variable[11]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[11]) /*String::append*/;
+      variable[12] = NEW_String_string___String___with_native(BOX_NativeString(" in a method."), TAG_Int(13)); /*new String*/
+      variable[13] = variable[12];
+      ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[13]) /*String::append*/;
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[6], variable[7]) /*AbsSyntaxVisitor::error*/;
+    } else { /*if*/
+      variable[6] = variable[0];
+      variable[6] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[6],COLOR_parser_nodes___ASendExpr___n_expr))(variable[6]) /*ASendExpr::n_expr*/;
+      variable[6] = ((typing___PExpr___is_self_t)CALL(variable[6],COLOR_typing___PExpr___is_self))(variable[6]) /*PExpr::is_self*/;
+      if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[6])))) { /*if*/
+        variable[6] = variable[0];
+        variable[7] = NEW_String_string___String___init(); /*new String*/
+        variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Error: constructor "), TAG_Int(19)); /*new String*/
+        variable[9] = variable[8];
+        ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[9]) /*String::append*/;
+        variable[10] = variable[0];
+        variable[10] = ((typing___AAbsSendExpr___prop_t)CALL(variable[10],COLOR_typing___AAbsSendExpr___prop))(variable[10]) /*AAbsSendExpr::prop*/;
+        variable[11] = variable[10];
+        variable[11] = ((string___String___to_s_t)CALL(variable[11],COLOR_string___Object___to_s))(variable[11]) /*String::to_s*/;
+        ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[11]) /*String::append*/;
+        variable[12] = NEW_String_string___String___with_native(BOX_NativeString(" is not invoken on 'self'."), TAG_Int(26)); /*new String*/
+        variable[13] = variable[12];
+        ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[13]) /*String::append*/;
+        ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[6], variable[7]) /*AbsSyntaxVisitor::error*/;
+      }
+    }
+  }
+  variable[6] = variable[0];
+  ATTR_typing___AAbsSendExpr____arguments(variable[6]) /*AAbsSendExpr::_arguments*/ =  variable[5] /*old_args*/;
+  return_label103: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t typing___ASendReassignExpr___read_prop(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 960, LOCATE_typing___ASendReassignExpr___read_prop};
+  struct trace_t trace = {NULL, NULL, 1090, LOCATE_typing___ASendReassignExpr___read_prop};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   tracehead = trace.prev;
   return ATTR_typing___ASendReassignExpr____read_prop( self) /*ASendReassignExpr::_read_prop*/;
 }
-void typing___ASendReassignExpr___do_all_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 961, LOCATE_typing___ASendReassignExpr___do_all_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-  val_t variable5;
-      val_t variable6;
-      val_t variable7;
-      val_t variable8;
-  val_t variable9;
-  val_t variable10;
-  val_t variable11;
-  val_t variable12;
-  val_t variable13;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable2 = ((typing___ASendExpr___raw_arguments_t)CALL( self,COLOR_typing___ASendExpr___raw_arguments))( self) /*ASendExpr::raw_arguments*/;
-  variable1 = variable2;
-  variable2 = ((parser_nodes___ASendExpr___n_expr_t)CALL( self,COLOR_parser_nodes___ASendExpr___n_expr))( self) /*ASendExpr::n_expr*/;
-  variable2 = ((typing___PExpr___stype_t)CALL(variable2,COLOR_syntax_base___PExpr___stype))(variable2) /*PExpr::stype*/;
-  variable3 = ((parser_nodes___ASendExpr___n_expr_t)CALL( self,COLOR_parser_nodes___ASendExpr___n_expr))( self) /*ASendExpr::n_expr*/;
-  variable3 = ((typing___PExpr___is_implicit_self_t)CALL(variable3,COLOR_typing___PExpr___is_implicit_self))(variable3) /*PExpr::is_implicit_self*/;
-  variable4 = ((parser_nodes___ASendExpr___n_expr_t)CALL( self,COLOR_parser_nodes___ASendExpr___n_expr))( self) /*ASendExpr::n_expr*/;
-  variable4 = ((typing___PExpr___is_self_t)CALL(variable4,COLOR_typing___PExpr___is_self))(variable4) /*PExpr::is_self*/;
-  variable5 = ((typing___ASendExpr___name_t)CALL( self,COLOR_typing___ASendExpr___name))( self) /*ASendExpr::name*/;
-  ((typing___AAbsSendExpr___do_typing_t)CALL( self,COLOR_typing___AAbsSendExpr___do_typing))( self,  variable0 /*v*/, variable2, variable3, variable4, variable5,  variable1 /*raw_args*/) /*AAbsSendExpr::do_typing*/;
-  variable2 = ((typing___AAbsSendExpr___prop_t)CALL( self,COLOR_typing___AAbsSendExpr___prop))( self) /*AAbsSendExpr::prop*/;
-  variable2 = TAG_Bool((variable2 ==  NIT_NULL /*null*/) || ((variable2 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable2, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable2,COLOR_kernel___Object_____eqeq))(variable2,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable2)) { /*if*/
-    goto return_label89;
-  }
-  variable2 = ((typing___AAbsSendExpr___prop_t)CALL( self,COLOR_typing___AAbsSendExpr___prop))( self) /*AAbsSendExpr::prop*/;
-  variable2 = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable2,COLOR_abstractmetamodel___MMLocalProperty___global))(variable2) /*MMLocalProperty::global*/;
-  variable2 = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable2,COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable2) /*MMGlobalProperty::is_init*/;
-  if (UNTAG_Bool(variable2)) { /*if*/
-    variable2 = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable0 /*v*/) /*AbsSyntaxVisitor::local_property*/;
-    variable2 = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable2,COLOR_abstractmetamodel___MMLocalProperty___global))(variable2) /*MMLocalProperty::global*/;
-    variable2 = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable2,COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable2) /*MMGlobalProperty::is_init*/;
-    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable2)))) { /*if*/
-      variable2 = NEW_String_string___String___init(); /*new String*/
-      variable3 = NEW_String_string___String___with_native(BOX_NativeString("Error: try to invoke constructor "), TAG_Int(33)); /*new String*/
-      variable4 = variable3;
-      ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable4) /*String::append*/;
-      variable5 = ((typing___AAbsSendExpr___prop_t)CALL( self,COLOR_typing___AAbsSendExpr___prop))( self) /*AAbsSendExpr::prop*/;
-      variable6 = variable5;
-      variable6 = ((string___String___to_s_t)CALL(variable6,COLOR_string___Object___to_s))(variable6) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable6) /*String::append*/;
-      variable7 = NEW_String_string___String___with_native(BOX_NativeString(" in a method."), TAG_Int(13)); /*new String*/
-      variable8 = variable7;
-      ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable8) /*String::append*/;
-      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable2) /*AbsSyntaxVisitor::error*/;
-    } else { /*if*/
-      variable2 = ((parser_nodes___ASendExpr___n_expr_t)CALL( self,COLOR_parser_nodes___ASendExpr___n_expr))( self) /*ASendExpr::n_expr*/;
-      variable2 = ((typing___PExpr___is_self_t)CALL(variable2,COLOR_typing___PExpr___is_self))(variable2) /*PExpr::is_self*/;
-      if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable2)))) { /*if*/
-        variable2 = NEW_String_string___String___init(); /*new String*/
-        variable3 = NEW_String_string___String___with_native(BOX_NativeString("Error: constructor "), TAG_Int(19)); /*new String*/
-        variable4 = variable3;
-        ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable4) /*String::append*/;
-        variable5 = ((typing___AAbsSendExpr___prop_t)CALL( self,COLOR_typing___AAbsSendExpr___prop))( self) /*AAbsSendExpr::prop*/;
-        variable6 = variable5;
-        variable6 = ((string___String___to_s_t)CALL(variable6,COLOR_string___Object___to_s))(variable6) /*String::to_s*/;
-        ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable6) /*String::append*/;
-        variable7 = NEW_String_string___String___with_native(BOX_NativeString(" is not invoken on 'self'."), TAG_Int(26)); /*new String*/
-        variable8 = variable7;
-        ((string___String___append_t)CALL(variable2,COLOR_abstract_collection___IndexedCollection___append))(variable2, variable8) /*String::append*/;
-        ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable2) /*AbsSyntaxVisitor::error*/;
-      }
-    }
-  }
-  variable3 = ((typing___AAbsSendExpr___prop_t)CALL( self,COLOR_typing___AAbsSendExpr___prop))( self) /*AAbsSendExpr::prop*/;
-  variable4 = ((parser_nodes___ASendExpr___n_expr_t)CALL( self,COLOR_parser_nodes___ASendExpr___n_expr))( self) /*ASendExpr::n_expr*/;
-  variable4 = ((typing___PExpr___stype_t)CALL(variable4,COLOR_syntax_base___PExpr___stype))(variable4) /*PExpr::stype*/;
-  variable3 = ((static_type___MMLocalProperty___signature_for_t)CALL(variable3,COLOR_static_type___MMLocalProperty___signature_for))(variable3, variable4) /*MMLocalProperty::signature_for*/;
-  variable3 = ((static_type___MMSignature___return_type_t)CALL(variable3,COLOR_static_type___MMSignature___return_type))(variable3) /*MMSignature::return_type*/;
-  variable2 = variable3;
-  variable3 = ((parser_nodes___ASendExpr___n_expr_t)CALL( self,COLOR_parser_nodes___ASendExpr___n_expr))( self) /*ASendExpr::n_expr*/;
-  variable3 = ((typing___PExpr___is_self_t)CALL(variable3,COLOR_typing___PExpr___is_self))(variable3) /*PExpr::is_self*/;
-  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable3)))) { /*if*/
-    variable3 = ((static_type___MMType___not_for_self_t)CALL( variable2 /*t*/,COLOR_static_type___MMType___not_for_self))( variable2 /*t*/) /*MMType::not_for_self*/;
-    variable2 = variable3 /*t=*/;
-  }
-  ((typing___AReassignFormExpr___do_lvalue_typing_t)CALL( self,COLOR_typing___AReassignFormExpr___do_lvalue_typing))( self,  variable0 /*v*/,  variable2 /*t*/) /*AReassignFormExpr::do_lvalue_typing*/;
-  variable3 = ((typing___AAbsSendExpr___prop_t)CALL( self,COLOR_typing___AAbsSendExpr___prop))( self) /*AAbsSendExpr::prop*/;
-  ATTR_typing___ASendReassignExpr____read_prop( self) /*ASendReassignExpr::_read_prop*/ = variable3;
-  variable4 = ((typing___AAbsSendExpr___arguments_t)CALL( self,COLOR_typing___AAbsSendExpr___arguments))( self) /*AAbsSendExpr::arguments*/;
-  variable3 = variable4;
-  variable4 = ((parser_nodes___AReassignFormExpr___n_value_t)CALL( self,COLOR_parser_nodes___AReassignFormExpr___n_value))( self) /*AReassignFormExpr::n_value*/;
-  ((array___AbstractArray___add_t)CALL( variable1 /*raw_args*/,COLOR_abstract_collection___SimpleCollection___add))( variable1 /*raw_args*/, variable4) /*AbstractArray::add*/;
-  variable4 = ((parser_nodes___ASendExpr___n_expr_t)CALL( self,COLOR_parser_nodes___ASendExpr___n_expr))( self) /*ASendExpr::n_expr*/;
-  variable4 = ((typing___PExpr___stype_t)CALL(variable4,COLOR_syntax_base___PExpr___stype))(variable4) /*PExpr::stype*/;
-  variable5 = ((parser_nodes___ASendExpr___n_expr_t)CALL( self,COLOR_parser_nodes___ASendExpr___n_expr))( self) /*ASendExpr::n_expr*/;
-  variable5 = ((typing___PExpr___is_implicit_self_t)CALL(variable5,COLOR_typing___PExpr___is_implicit_self))(variable5) /*PExpr::is_implicit_self*/;
-  variable6 = ((parser_nodes___ASendExpr___n_expr_t)CALL( self,COLOR_parser_nodes___ASendExpr___n_expr))( self) /*ASendExpr::n_expr*/;
-  variable6 = ((typing___PExpr___is_self_t)CALL(variable6,COLOR_typing___PExpr___is_self))(variable6) /*PExpr::is_self*/;
-  variable7 = NEW_String_string___String___init(); /*new String*/
-  variable8 = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable9 = variable8;
-  ((string___String___append_t)CALL(variable7,COLOR_abstract_collection___IndexedCollection___append))(variable7, variable9) /*String::append*/;
-  variable10 = ((typing___ASendExpr___name_t)CALL( self,COLOR_typing___ASendExpr___name))( self) /*ASendExpr::name*/;
-  variable11 = variable10;
-  variable11 = ((string___String___to_s_t)CALL(variable11,COLOR_string___Object___to_s))(variable11) /*String::to_s*/;
-  ((string___String___append_t)CALL(variable7,COLOR_abstract_collection___IndexedCollection___append))(variable7, variable11) /*String::append*/;
-  variable12 = NEW_String_string___String___with_native(BOX_NativeString("="), TAG_Int(1)); /*new String*/
-  variable13 = variable12;
-  ((string___String___append_t)CALL(variable7,COLOR_abstract_collection___IndexedCollection___append))(variable7, variable13) /*String::append*/;
-  variable7 = ((symbol___String___to_symbol_t)CALL(variable7,COLOR_symbol___String___to_symbol))(variable7) /*String::to_symbol*/;
-  ((typing___AAbsSendExpr___do_typing_t)CALL( self,COLOR_typing___AAbsSendExpr___do_typing))( self,  variable0 /*v*/, variable4, variable5, variable6, variable7,  variable1 /*raw_args*/) /*AAbsSendExpr::do_typing*/;
-  variable4 = ((typing___AAbsSendExpr___prop_t)CALL( self,COLOR_typing___AAbsSendExpr___prop))( self) /*AAbsSendExpr::prop*/;
-  variable4 = TAG_Bool((variable4 ==  NIT_NULL /*null*/) || ((variable4 != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable4,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable4, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable4,COLOR_kernel___Object_____eqeq))(variable4,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable4)) { /*if*/
-    goto return_label89;
-  }
-  variable4 = ((typing___AAbsSendExpr___prop_t)CALL( self,COLOR_typing___AAbsSendExpr___prop))( self) /*AAbsSendExpr::prop*/;
-  variable4 = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable4,COLOR_abstractmetamodel___MMLocalProperty___global))(variable4) /*MMLocalProperty::global*/;
-  variable4 = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable4,COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable4) /*MMGlobalProperty::is_init*/;
-  if (UNTAG_Bool(variable4)) { /*if*/
-    variable4 = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable0 /*v*/) /*AbsSyntaxVisitor::local_property*/;
-    variable4 = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable4,COLOR_abstractmetamodel___MMLocalProperty___global))(variable4) /*MMLocalProperty::global*/;
-    variable4 = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable4,COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable4) /*MMGlobalProperty::is_init*/;
-    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable4)))) { /*if*/
-      variable4 = NEW_String_string___String___init(); /*new String*/
-      variable5 = NEW_String_string___String___with_native(BOX_NativeString("Error: try to invoke constructor "), TAG_Int(33)); /*new String*/
-      variable6 = variable5;
-      ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable6) /*String::append*/;
-      variable7 = ((typing___AAbsSendExpr___prop_t)CALL( self,COLOR_typing___AAbsSendExpr___prop))( self) /*AAbsSendExpr::prop*/;
-      variable8 = variable7;
-      variable8 = ((string___String___to_s_t)CALL(variable8,COLOR_string___Object___to_s))(variable8) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable8) /*String::append*/;
-      variable9 = NEW_String_string___String___with_native(BOX_NativeString(" in a method."), TAG_Int(13)); /*new String*/
-      variable10 = variable9;
-      ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable10) /*String::append*/;
-      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable4) /*AbsSyntaxVisitor::error*/;
-    } else { /*if*/
-      variable4 = ((parser_nodes___ASendExpr___n_expr_t)CALL( self,COLOR_parser_nodes___ASendExpr___n_expr))( self) /*ASendExpr::n_expr*/;
-      variable4 = ((typing___PExpr___is_self_t)CALL(variable4,COLOR_typing___PExpr___is_self))(variable4) /*PExpr::is_self*/;
-      if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable4)))) { /*if*/
-        variable4 = NEW_String_string___String___init(); /*new String*/
-        variable5 = NEW_String_string___String___with_native(BOX_NativeString("Error: constructor "), TAG_Int(19)); /*new String*/
-        variable6 = variable5;
-        ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable6) /*String::append*/;
-        variable7 = ((typing___AAbsSendExpr___prop_t)CALL( self,COLOR_typing___AAbsSendExpr___prop))( self) /*AAbsSendExpr::prop*/;
-        variable8 = variable7;
-        variable8 = ((string___String___to_s_t)CALL(variable8,COLOR_string___Object___to_s))(variable8) /*String::to_s*/;
-        ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable8) /*String::append*/;
-        variable9 = NEW_String_string___String___with_native(BOX_NativeString(" is not invoken on 'self'."), TAG_Int(26)); /*new String*/
-        variable10 = variable9;
-        ((string___String___append_t)CALL(variable4,COLOR_abstract_collection___IndexedCollection___append))(variable4, variable10) /*String::append*/;
-        ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable4) /*AbsSyntaxVisitor::error*/;
-      }
-    }
-  }
-  ATTR_typing___AAbsSendExpr____arguments( self) /*AAbsSendExpr::_arguments*/ =  variable3 /*old_args*/;
-  return_label89: while(false);
-  tracehead = trace.prev;
-  return;
-}
 val_t typing___ABinopExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 997, LOCATE_typing___ABinopExpr___raw_arguments};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 1128, LOCATE_typing___ABinopExpr___raw_arguments};
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 = NEW_Array_array___Array___with_capacity(TAG_Int(1)); /*new Array[PExpr]*/
-  variable1 = ((parser_nodes___ABinopExpr___n_expr2_t)CALL( self,COLOR_parser_nodes___ABinopExpr___n_expr2))( self) /*ABinopExpr::n_expr2*/;
-  ((array___AbstractArray___add_t)CALL(variable0,COLOR_abstract_collection___SimpleCollection___add))(variable0, variable1) /*AbstractArray::add*/;
-  goto return_label90;
-  return_label90: while(false);
+  variable[0] =  self;
+  variable[2] = NEW_Array_array___Array___with_capacity(TAG_Int(1)); /*new Array[PExpr]*/
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___ABinopExpr___n_expr2_t)CALL(variable[3],COLOR_parser_nodes___ABinopExpr___n_expr2))(variable[3]) /*ABinopExpr::n_expr2*/;
+  ((array___AbstractArray___add_t)CALL(variable[2],COLOR_abstract_collection___SimpleCollection___add))(variable[2], variable[3]) /*AbstractArray::add*/;
+  variable[1] = variable[2];
+  goto return_label104;
+  return_label104: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t typing___AEqExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1000, LOCATE_typing___AEqExpr___name};
-  val_t variable0;
-  static val_t once_value_variable0_92; static int once_bool_variable0_92;
+  struct trace_t trace = {NULL, NULL, 1131, LOCATE_typing___AEqExpr___name};
+  static val_t once_value_106; static int once_bool_106; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  if (once_bool_variable0_92) variable0 = once_value_variable0_92;
+  variable[0] =  self;
+  if (once_bool_106) variable[2] = once_value_106;
   else {
-    variable0 = NEW_String_string___String___with_native(BOX_NativeString("=="), TAG_Int(2)); /*new String*/
-    variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-    once_value_variable0_92 = variable0;
-    once_bool_variable0_92 = true;
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("=="), TAG_Int(2)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_106 = variable[2];
+    once_bool_106 = true;
   }
-  goto return_label91;
-  return_label91: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t typing___ANeExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1003, LOCATE_typing___ANeExpr___name};
-  val_t variable0;
-  static val_t once_value_variable0_94; static int once_bool_variable0_94;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  if (once_bool_variable0_94) variable0 = once_value_variable0_94;
-  else {
-    variable0 = NEW_String_string___String___with_native(BOX_NativeString("!="), TAG_Int(2)); /*new String*/
-    variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-    once_value_variable0_94 = variable0;
-    once_bool_variable0_94 = true;
-  }
-  goto return_label93;
-  return_label93: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t typing___ALtExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1006, LOCATE_typing___ALtExpr___name};
-  val_t variable0;
-  static val_t once_value_variable0_96; static int once_bool_variable0_96;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  if (once_bool_variable0_96) variable0 = once_value_variable0_96;
-  else {
-    variable0 = NEW_String_string___String___with_native(BOX_NativeString("<"), TAG_Int(1)); /*new String*/
-    variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-    once_value_variable0_96 = variable0;
-    once_bool_variable0_96 = true;
-  }
-  goto return_label95;
-  return_label95: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t typing___ALeExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1009, LOCATE_typing___ALeExpr___name};
-  val_t variable0;
-  static val_t once_value_variable0_98; static int once_bool_variable0_98;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  if (once_bool_variable0_98) variable0 = once_value_variable0_98;
-  else {
-    variable0 = NEW_String_string___String___with_native(BOX_NativeString("<="), TAG_Int(2)); /*new String*/
-    variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-    once_value_variable0_98 = variable0;
-    once_bool_variable0_98 = true;
-  }
-  goto return_label97;
-  return_label97: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t typing___AGtExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1012, LOCATE_typing___AGtExpr___name};
-  val_t variable0;
-  static val_t once_value_variable0_100; static int once_bool_variable0_100;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  if (once_bool_variable0_100) variable0 = once_value_variable0_100;
-  else {
-    variable0 = NEW_String_string___String___with_native(BOX_NativeString(">"), TAG_Int(1)); /*new String*/
-    variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-    once_value_variable0_100 = variable0;
-    once_bool_variable0_100 = true;
-  }
-  goto return_label99;
-  return_label99: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t typing___AGeExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1015, LOCATE_typing___AGeExpr___name};
-  val_t variable0;
-  static val_t once_value_variable0_102; static int once_bool_variable0_102;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  if (once_bool_variable0_102) variable0 = once_value_variable0_102;
-  else {
-    variable0 = NEW_String_string___String___with_native(BOX_NativeString(">="), TAG_Int(2)); /*new String*/
-    variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-    once_value_variable0_102 = variable0;
-    once_bool_variable0_102 = true;
-  }
-  goto return_label101;
-  return_label101: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t typing___APlusExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1018, LOCATE_typing___APlusExpr___name};
-  val_t variable0;
-  static val_t once_value_variable0_104; static int once_bool_variable0_104;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  if (once_bool_variable0_104) variable0 = once_value_variable0_104;
-  else {
-    variable0 = NEW_String_string___String___with_native(BOX_NativeString("+"), TAG_Int(1)); /*new String*/
-    variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-    once_value_variable0_104 = variable0;
-    once_bool_variable0_104 = true;
-  }
-  goto return_label103;
-  return_label103: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t typing___AMinusExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1021, LOCATE_typing___AMinusExpr___name};
-  val_t variable0;
-  static val_t once_value_variable0_106; static int once_bool_variable0_106;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  if (once_bool_variable0_106) variable0 = once_value_variable0_106;
-  else {
-    variable0 = NEW_String_string___String___with_native(BOX_NativeString("-"), TAG_Int(1)); /*new String*/
-    variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-    once_value_variable0_106 = variable0;
-    once_bool_variable0_106 = true;
-  }
+  variable[1] = variable[2];
   goto return_label105;
   return_label105: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
-val_t typing___AStarshipExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1024, LOCATE_typing___AStarshipExpr___name};
-  val_t variable0;
-  static val_t once_value_variable0_108; static int once_bool_variable0_108;
+val_t typing___ANeExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1134, LOCATE_typing___ANeExpr___name};
+  static val_t once_value_108; static int once_bool_108; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  if (once_bool_variable0_108) variable0 = once_value_variable0_108;
+  variable[0] =  self;
+  if (once_bool_108) variable[2] = once_value_108;
   else {
-    variable0 = NEW_String_string___String___with_native(BOX_NativeString("<=>"), TAG_Int(3)); /*new String*/
-    variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-    once_value_variable0_108 = variable0;
-    once_bool_variable0_108 = true;
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("!="), TAG_Int(2)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_108 = variable[2];
+    once_bool_108 = true;
   }
+  variable[1] = variable[2];
   goto return_label107;
   return_label107: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
-val_t typing___AStarExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1027, LOCATE_typing___AStarExpr___name};
-  val_t variable0;
-  static val_t once_value_variable0_110; static int once_bool_variable0_110;
+val_t typing___ALtExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1137, LOCATE_typing___ALtExpr___name};
+  static val_t once_value_110; static int once_bool_110; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  if (once_bool_variable0_110) variable0 = once_value_variable0_110;
+  variable[0] =  self;
+  if (once_bool_110) variable[2] = once_value_110;
   else {
-    variable0 = NEW_String_string___String___with_native(BOX_NativeString("*"), TAG_Int(1)); /*new String*/
-    variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-    once_value_variable0_110 = variable0;
-    once_bool_variable0_110 = true;
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("<"), TAG_Int(1)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_110 = variable[2];
+    once_bool_110 = true;
   }
+  variable[1] = variable[2];
   goto return_label109;
   return_label109: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
-val_t typing___ASlashExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1030, LOCATE_typing___ASlashExpr___name};
-  val_t variable0;
-  static val_t once_value_variable0_112; static int once_bool_variable0_112;
+val_t typing___ALeExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1140, LOCATE_typing___ALeExpr___name};
+  static val_t once_value_112; static int once_bool_112; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  if (once_bool_variable0_112) variable0 = once_value_variable0_112;
+  variable[0] =  self;
+  if (once_bool_112) variable[2] = once_value_112;
   else {
-    variable0 = NEW_String_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)); /*new String*/
-    variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-    once_value_variable0_112 = variable0;
-    once_bool_variable0_112 = true;
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("<="), TAG_Int(2)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_112 = variable[2];
+    once_bool_112 = true;
   }
+  variable[1] = variable[2];
   goto return_label111;
   return_label111: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
-val_t typing___APercentExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1033, LOCATE_typing___APercentExpr___name};
-  val_t variable0;
-  static val_t once_value_variable0_114; static int once_bool_variable0_114;
+val_t typing___AGtExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1143, LOCATE_typing___AGtExpr___name};
+  static val_t once_value_114; static int once_bool_114; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  if (once_bool_variable0_114) variable0 = once_value_variable0_114;
+  variable[0] =  self;
+  if (once_bool_114) variable[2] = once_value_114;
   else {
-    variable0 = NEW_String_string___String___with_native(BOX_NativeString("%"), TAG_Int(1)); /*new String*/
-    variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-    once_value_variable0_114 = variable0;
-    once_bool_variable0_114 = true;
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString(">"), TAG_Int(1)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_114 = variable[2];
+    once_bool_114 = true;
   }
+  variable[1] = variable[2];
   goto return_label113;
   return_label113: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
-val_t typing___AUminusExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1037, LOCATE_typing___AUminusExpr___name};
-  val_t variable0;
-  static val_t once_value_variable0_116; static int once_bool_variable0_116;
+val_t typing___AGeExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1146, LOCATE_typing___AGeExpr___name};
+  static val_t once_value_116; static int once_bool_116; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  if (once_bool_variable0_116) variable0 = once_value_variable0_116;
+  variable[0] =  self;
+  if (once_bool_116) variable[2] = once_value_116;
   else {
-    variable0 = NEW_String_string___String___with_native(BOX_NativeString("unary -"), TAG_Int(7)); /*new String*/
-    variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-    once_value_variable0_116 = variable0;
-    once_bool_variable0_116 = true;
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString(">="), TAG_Int(2)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_116 = variable[2];
+    once_bool_116 = true;
   }
+  variable[1] = variable[2];
   goto return_label115;
   return_label115: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
-val_t typing___AUminusExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1038, LOCATE_typing___AUminusExpr___raw_arguments};
-  val_t variable0;
+val_t typing___APlusExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1149, LOCATE_typing___APlusExpr___name};
+  static val_t once_value_118; static int once_bool_118; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  NIT_NULL /*null*/;
+  variable[0] =  self;
+  if (once_bool_118) variable[2] = once_value_118;
+  else {
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("+"), TAG_Int(1)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_118 = variable[2];
+    once_bool_118 = true;
+  }
+  variable[1] = variable[2];
   goto return_label117;
   return_label117: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
-void typing___ACallFormExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1042, LOCATE_typing___ACallFormExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-    val_t variable2;
-    val_t variable3;
-        val_t variable4;
-        val_t variable5;
-        val_t variable6;
-        val_t variable7;
-        val_t variable8;
+val_t typing___AMinusExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1152, LOCATE_typing___AMinusExpr___name};
+  static val_t once_value_120; static int once_bool_120; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((parser_nodes___ASendExpr___n_expr_t)CALL( self,COLOR_parser_nodes___ASendExpr___n_expr))( self) /*ASendExpr::n_expr*/;
-  variable1 = ((typing___PExpr___is_implicit_self_t)CALL(variable1,COLOR_typing___PExpr___is_implicit_self))(variable1) /*PExpr::is_implicit_self*/;
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable2 = ((parser_nodes___ACallFormExpr___n_id_t)CALL( self,COLOR_parser_nodes___ACallFormExpr___n_id))( self) /*ACallFormExpr::n_id*/;
-    variable2 = ((syntax_base___Token___to_symbol_t)CALL(variable2,COLOR_syntax_base___Token___to_symbol))(variable2) /*Token::to_symbol*/;
-    variable1 = variable2;
-    variable3 = ((typing___TypingVisitor___variable_ctx_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable0 /*v*/) /*TypingVisitor::variable_ctx*/;
-    variable3 = ((typing___VariableContext_____bra_t)CALL(variable3,COLOR_typing___VariableContext_____bra))(variable3,  variable1 /*name*/) /*VariableContext::[]*/;
-    variable2 = variable3;
-    variable3 = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable2 /*variable*/ ==  NIT_NULL /*null*/) || (( variable2 /*variable*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable2 /*variable*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable2 /*variable*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable2 /*variable*/,COLOR_kernel___Object_____eqeq))( variable2 /*variable*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    if (UNTAG_Bool(variable3)) { /*if*/
-      variable3 = ((parser_nodes___ACallFormExpr___n_args_t)CALL( self,COLOR_parser_nodes___ACallFormExpr___n_args))( self) /*ACallFormExpr::n_args*/;
-      variable3 = ((list___List___is_empty_t)CALL(variable3,COLOR_abstract_collection___Collection___is_empty))(variable3) /*List::is_empty*/;
-      if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable3)))) { /*if*/
-        variable3 = NEW_String_string___String___init(); /*new String*/
-        variable4 = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
-        variable5 = variable4;
-        ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable5) /*String::append*/;
-        variable6 =  variable1 /*name*/;
-        variable6 = ((string___String___to_s_t)CALL(variable6,COLOR_string___Object___to_s))(variable6) /*String::to_s*/;
-        ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable6) /*String::append*/;
-        variable7 = NEW_String_string___String___with_native(BOX_NativeString(" is variable, not a function."), TAG_Int(29)); /*new String*/
-        variable8 = variable7;
-        ((string___String___append_t)CALL(variable3,COLOR_abstract_collection___IndexedCollection___append))(variable3, variable8) /*String::append*/;
-        ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable0 /*v*/,  self, variable3) /*AbsSyntaxVisitor::error*/;
+  variable[0] =  self;
+  if (once_bool_120) variable[2] = once_value_120;
+  else {
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("-"), TAG_Int(1)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_120 = variable[2];
+    once_bool_120 = true;
+  }
+  variable[1] = variable[2];
+  goto return_label119;
+  return_label119: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___AStarshipExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1155, LOCATE_typing___AStarshipExpr___name};
+  static val_t once_value_122; static int once_bool_122; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  if (once_bool_122) variable[2] = once_value_122;
+  else {
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("<=>"), TAG_Int(3)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_122 = variable[2];
+    once_bool_122 = true;
+  }
+  variable[1] = variable[2];
+  goto return_label121;
+  return_label121: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___AStarExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1158, LOCATE_typing___AStarExpr___name};
+  static val_t once_value_124; static int once_bool_124; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  if (once_bool_124) variable[2] = once_value_124;
+  else {
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("*"), TAG_Int(1)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_124 = variable[2];
+    once_bool_124 = true;
+  }
+  variable[1] = variable[2];
+  goto return_label123;
+  return_label123: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___ASlashExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1161, LOCATE_typing___ASlashExpr___name};
+  static val_t once_value_126; static int once_bool_126; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  if (once_bool_126) variable[2] = once_value_126;
+  else {
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_126 = variable[2];
+    once_bool_126 = true;
+  }
+  variable[1] = variable[2];
+  goto return_label125;
+  return_label125: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___APercentExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1164, LOCATE_typing___APercentExpr___name};
+  static val_t once_value_128; static int once_bool_128; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  if (once_bool_128) variable[2] = once_value_128;
+  else {
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("%"), TAG_Int(1)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_128 = variable[2];
+    once_bool_128 = true;
+  }
+  variable[1] = variable[2];
+  goto return_label127;
+  return_label127: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___AUminusExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1168, LOCATE_typing___AUminusExpr___name};
+  static val_t once_value_130; static int once_bool_130; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  if (once_bool_130) variable[2] = once_value_130;
+  else {
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("unary -"), TAG_Int(7)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_130 = variable[2];
+    once_bool_130 = true;
+  }
+  variable[1] = variable[2];
+  goto return_label129;
+  return_label129: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___AUminusExpr___raw_arguments(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1169, LOCATE_typing___AUminusExpr___raw_arguments};
+  val_t variable[2];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  NIT_NULL /*null*/;
+  goto return_label131;
+  return_label131: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+void typing___ACallFormExpr___after_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 1173, LOCATE_typing___ACallFormExpr___after_typing};
+  val_t variable[12];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[3],COLOR_parser_nodes___ASendExpr___n_expr))(variable[3]) /*ASendExpr::n_expr*/;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[4] = variable[3];
+  if (UNTAG_Bool(variable[4])) { /* and */
+    variable[4] = variable[0];
+    variable[4] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___ASendExpr___n_expr))(variable[4]) /*ASendExpr::n_expr*/;
+    variable[4] = ((typing___PExpr___is_implicit_self_t)CALL(variable[4],COLOR_typing___PExpr___is_implicit_self))(variable[4]) /*PExpr::is_implicit_self*/;
+  }
+  variable[3] = variable[4];
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[4] = variable[0];
+    variable[4] = ((parser_nodes___ACallFormExpr___n_id_t)CALL(variable[4],COLOR_parser_nodes___ACallFormExpr___n_id))(variable[4]) /*ACallFormExpr::n_id*/;
+    variable[4] = ((syntax_base___Token___to_symbol_t)CALL(variable[4],COLOR_syntax_base___Token___to_symbol))(variable[4]) /*Token::to_symbol*/;
+    variable[3] = variable[4];
+    variable[5] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+    variable[5] = ((typing___VariableContext_____bra_t)CALL(variable[5],COLOR_typing___VariableContext_____bra))(variable[5],  variable[3] /*name*/) /*VariableContext::[]*/;
+    variable[4] = variable[5];
+    variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*variable*/ ==  NIT_NULL /*null*/) || (( variable[4] /*variable*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*variable*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*variable*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*variable*/,COLOR_kernel___Object_____eqeq))( variable[4] /*variable*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    if (UNTAG_Bool(variable[5])) { /*if*/
+      variable[5] = TAG_Bool(( variable[4] /*variable*/==NIT_NULL) || VAL_ISA( variable[4] /*variable*/, COLOR_ClosureVariable, ID_ClosureVariable)) /*cast ClosureVariable*/;
+      if (UNTAG_Bool(variable[5])) { /*if*/
+        variable[6] = variable[0];
+        variable[6] = ((parser_nodes___ACallFormExpr___n_id_t)CALL(variable[6],COLOR_parser_nodes___ACallFormExpr___n_id))(variable[6]) /*ACallFormExpr::n_id*/;
+        variable[7] = variable[0];
+        variable[7] = ((parser_nodes___ACallFormExpr___n_args_t)CALL(variable[7],COLOR_parser_nodes___ACallFormExpr___n_args))(variable[7]) /*ACallFormExpr::n_args*/;
+        variable[8] = variable[0];
+        variable[8] = ((parser_nodes___ASendExpr___n_closure_defs_t)CALL(variable[8],COLOR_parser_nodes___ASendExpr___n_closure_defs))(variable[8]) /*ASendExpr::n_closure_defs*/;
+        variable[9] = NEW_AClosureCallExpr_parser_nodes___AClosureCallExpr___init(variable[6], variable[7], variable[8]); /*new AClosureCallExpr*/
+        variable[6] = variable[9];
+        variable[5] = variable[6];
+        variable[6] = variable[0];
+        ((parser_prod___Prod___replace_with_t)CALL(variable[6],COLOR_parser_prod___PNode___replace_with))(variable[6],  variable[5] /*n*/) /*Prod::replace_with*/;
+        ((syntax_base___AClosureCallExpr___variable__eq_t)CALL( variable[5] /*n*/,COLOR_syntax_base___AClosureCallExpr___variable__eq))( variable[5] /*n*/,  variable[4] /*variable*/) /*AClosureCallExpr::variable=*/;
+        ((typing___AClosureCallExpr___after_typing_t)CALL( variable[5] /*n*/,COLOR_typing___PNode___after_typing))( variable[5] /*n*/,  variable[1] /*v*/) /*AClosureCallExpr::after_typing*/;
+        goto return_label132;
+      } else { /*if*/
+        variable[5] = variable[0];
+        variable[5] = ((parser_nodes___ACallFormExpr___n_args_t)CALL(variable[5],COLOR_parser_nodes___ACallFormExpr___n_args))(variable[5]) /*ACallFormExpr::n_args*/;
+        variable[5] = ((list___List___is_empty_t)CALL(variable[5],COLOR_abstract_collection___Collection___is_empty))(variable[5]) /*List::is_empty*/;
+        if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[5])))) { /*if*/
+          variable[5] = variable[0];
+          variable[6] = NEW_String_string___String___init(); /*new String*/
+          variable[7] = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
+          variable[8] = variable[7];
+          ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[8]) /*String::append*/;
+          variable[9] =  variable[3] /*name*/;
+          variable[9] = ((string___String___to_s_t)CALL(variable[9],COLOR_string___Object___to_s))(variable[9]) /*String::to_s*/;
+          ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[9]) /*String::append*/;
+          variable[10] = NEW_String_string___String___with_native(BOX_NativeString(" is variable, not a function."), TAG_Int(29)); /*new String*/
+          variable[11] = variable[10];
+          ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[11]) /*String::append*/;
+          ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[5], variable[6]) /*AbsSyntaxVisitor::error*/;
+        }
+        variable[6] = variable[0];
+        variable[6] = ((typing___ACallFormExpr___variable_create_t)CALL(variable[6],COLOR_typing___ACallFormExpr___variable_create))(variable[6],  variable[4] /*variable*/) /*ACallFormExpr::variable_create*/;
+        variable[5] = variable[6];
+        ((syntax_base___AVarFormExpr___variable__eq_t)CALL( variable[5] /*vform*/,COLOR_syntax_base___AVarFormExpr___variable__eq))( variable[5] /*vform*/,  variable[4] /*variable*/) /*AVarFormExpr::variable=*/;
+        variable[6] = variable[0];
+        ((parser_prod___Prod___replace_with_t)CALL(variable[6],COLOR_parser_prod___PNode___replace_with))(variable[6],  variable[5] /*vform*/) /*Prod::replace_with*/;
+        ((typing___PNode___after_typing_t)CALL( variable[5] /*vform*/,COLOR_typing___PNode___after_typing))( variable[5] /*vform*/,  variable[1] /*v*/) /*PNode::after_typing*/;
+        goto return_label132;
       }
-      variable4 = ((typing___ACallFormExpr___variable_create_t)CALL( self,COLOR_typing___ACallFormExpr___variable_create))( self,  variable2 /*variable*/) /*ACallFormExpr::variable_create*/;
-      variable3 = variable4;
-      ((syntax_base___AVarFormExpr___variable__eq_t)CALL( variable3 /*vform*/,COLOR_syntax_base___AVarFormExpr___variable__eq))( variable3 /*vform*/,  variable2 /*variable*/) /*AVarFormExpr::variable=*/;
-      ((parser_prod___Prod___replace_with_t)CALL( self,COLOR_parser_prod___PNode___replace_with))( self,  variable3 /*vform*/) /*Prod::replace_with*/;
-      ((typing___PNode___after_typing_t)CALL( variable3 /*vform*/,COLOR_typing___PNode___after_typing))( variable3 /*vform*/,  variable0 /*v*/) /*PNode::after_typing*/;
-      goto return_label118;
     }
   }
-  ((typing___ACallFormExpr___after_typing_t)CALL( self,COLOR_SUPER_typing___ACallFormExpr___after_typing))( self,  param0) /*super ACallFormExpr::after_typing*/;
-  return_label118: while(false);
+  ((typing___ACallFormExpr___after_typing_t)CALL(variable[0],COLOR_SUPER_typing___ACallFormExpr___after_typing))(variable[0], variable[1]) /*super ACallFormExpr::after_typing*/;
+  return_label132: while(false);
   tracehead = trace.prev;
   return;
 }
-val_t typing___ACallFormExpr___variable_create(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1061, LOCATE_typing___ACallFormExpr___variable_create};
+val_t typing___ACallFormExpr___closure_defs(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1200, LOCATE_typing___ACallFormExpr___closure_defs};
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  fprintf(stderr, "Deferred method %s called");
-  fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___ACallFormExpr___after_typing, LOCATE_typing, 1061);
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((parser_nodes___ASendExpr___n_closure_defs_t)CALL(variable[2],COLOR_parser_nodes___ASendExpr___n_closure_defs))(variable[2]) /*ASendExpr::n_closure_defs*/;
+  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[3] = variable[2];
+  if (!UNTAG_Bool(variable[3])) { /* or */
+    variable[3] = variable[0];
+    variable[3] = ((parser_nodes___ASendExpr___n_closure_defs_t)CALL(variable[3],COLOR_parser_nodes___ASendExpr___n_closure_defs))(variable[3]) /*ASendExpr::n_closure_defs*/;
+    variable[3] = ((list___List___is_empty_t)CALL(variable[3],COLOR_abstract_collection___Collection___is_empty))(variable[3]) /*List::is_empty*/;
+  }
+  variable[2] = variable[3];
+  if (UNTAG_Bool(variable[2])) { /*if*/
+    variable[1] =  NIT_NULL /*null*/;
+    goto return_label133;
+  } else { /*if*/
+    variable[2] = variable[0];
+    variable[2] = ((parser_nodes___ASendExpr___n_closure_defs_t)CALL(variable[2],COLOR_parser_nodes___ASendExpr___n_closure_defs))(variable[2]) /*ASendExpr::n_closure_defs*/;
+    variable[2] = ((array___Collection___to_a_t)CALL(variable[2],COLOR_array___Collection___to_a))(variable[2]) /*Collection::to_a*/;
+    variable[1] = variable[2];
+    goto return_label133;
+  }
+  return_label133: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___ACallFormExpr___variable_create(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 1209, LOCATE_typing___ACallFormExpr___variable_create};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_typing, 1209);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
-val_t typing___ACallExpr___variable_create(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1066, LOCATE_typing___ACallExpr___variable_create};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((parser_nodes___ACallFormExpr___n_id_t)CALL( self,COLOR_parser_nodes___ACallFormExpr___n_id))( self) /*ACallFormExpr::n_id*/;
-  variable2 = NEW_AVarExpr_parser_prod___AVarExpr___init_avarexpr(variable1); /*new AVarExpr*/
-  variable1 = variable2;
-  goto return_label119;
-  return_label119: while(false);
-  tracehead = trace.prev;
-  return variable1;
-}
 val_t typing___ACallExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1071, LOCATE_typing___ACallExpr___name};
-  val_t variable0;
+  struct trace_t trace = {NULL, NULL, 1219, LOCATE_typing___ACallExpr___name};
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 = ((parser_nodes___ACallFormExpr___n_id_t)CALL( self,COLOR_parser_nodes___ACallFormExpr___n_id))( self) /*ACallFormExpr::n_id*/;
-  variable0 = ((syntax_base___Token___to_symbol_t)CALL(variable0,COLOR_syntax_base___Token___to_symbol))(variable0) /*Token::to_symbol*/;
-  goto return_label120;
-  return_label120: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t typing___ACallExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1072, LOCATE_typing___ACallExpr___raw_arguments};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 = ((parser_nodes___ACallFormExpr___n_args_t)CALL( self,COLOR_parser_nodes___ACallFormExpr___n_args))( self) /*ACallFormExpr::n_args*/;
-  variable0 = ((array___Collection___to_a_t)CALL(variable0,COLOR_array___Collection___to_a))(variable0) /*Collection::to_a*/;
-  goto return_label121;
-  return_label121: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t typing___ACallAssignExpr___variable_create(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1076, LOCATE_typing___ACallAssignExpr___variable_create};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((parser_nodes___ACallFormExpr___n_id_t)CALL( self,COLOR_parser_nodes___ACallFormExpr___n_id))( self) /*ACallFormExpr::n_id*/;
-  variable2 = ((parser_nodes___AAssignFormExpr___n_assign_t)CALL( self,COLOR_parser_nodes___AAssignFormExpr___n_assign))( self) /*AAssignFormExpr::n_assign*/;
-  variable3 = ((parser_nodes___AAssignFormExpr___n_value_t)CALL( self,COLOR_parser_nodes___AAssignFormExpr___n_value))( self) /*AAssignFormExpr::n_value*/;
-  variable4 = NEW_AVarAssignExpr_parser_prod___AVarAssignExpr___init_avarassignexpr(variable1, variable2, variable3); /*new AVarAssignExpr*/
-  variable1 = variable4;
-  goto return_label122;
-  return_label122: while(false);
-  tracehead = trace.prev;
-  return variable1;
-}
-val_t typing___ACallAssignExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1081, LOCATE_typing___ACallAssignExpr___name};
-  val_t variable0;
-  val_t variable1;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 = ((parser_nodes___ACallFormExpr___n_id_t)CALL( self,COLOR_parser_nodes___ACallFormExpr___n_id))( self) /*ACallFormExpr::n_id*/;
-  variable0 = ((lexer___Token___text_t)CALL(variable0,COLOR_lexer___Token___text))(variable0) /*Token::text*/;
-  variable1 = NEW_String_string___String___with_native(BOX_NativeString("="), TAG_Int(1)); /*new String*/
-  variable0 = ((string___String_____plus_t)CALL(variable0,COLOR_string___String_____plus))(variable0, variable1) /*String::+*/;
-  variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-  goto return_label123;
-  return_label123: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t typing___ACallAssignExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1082, LOCATE_typing___ACallAssignExpr___raw_arguments};
-  val_t variable0;
-  val_t variable1;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable1 = ((parser_nodes___ACallFormExpr___n_args_t)CALL( self,COLOR_parser_nodes___ACallFormExpr___n_args))( self) /*ACallFormExpr::n_args*/;
-  variable1 = ((array___Collection___to_a_t)CALL(variable1,COLOR_array___Collection___to_a))(variable1) /*Collection::to_a*/;
-  variable0 = variable1;
-  variable1 = ((parser_nodes___AAssignFormExpr___n_value_t)CALL( self,COLOR_parser_nodes___AAssignFormExpr___n_value))( self) /*AAssignFormExpr::n_value*/;
-  ((array___AbstractArray___add_t)CALL( variable0 /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable0 /*res*/, variable1) /*AbstractArray::add*/;
-  variable0 =  variable0 /*res*/;
-  goto return_label124;
-  return_label124: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t typing___ACallReassignExpr___variable_create(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1091, LOCATE_typing___ACallReassignExpr___variable_create};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
-  val_t variable3;
-  val_t variable4;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((parser_nodes___ACallFormExpr___n_id_t)CALL( self,COLOR_parser_nodes___ACallFormExpr___n_id))( self) /*ACallFormExpr::n_id*/;
-  variable2 = ((parser_nodes___AReassignFormExpr___n_assign_op_t)CALL( self,COLOR_parser_nodes___AReassignFormExpr___n_assign_op))( self) /*AReassignFormExpr::n_assign_op*/;
-  variable3 = ((parser_nodes___AReassignFormExpr___n_value_t)CALL( self,COLOR_parser_nodes___AReassignFormExpr___n_value))( self) /*AReassignFormExpr::n_value*/;
-  variable4 = NEW_AVarReassignExpr_parser_prod___AVarReassignExpr___init_avarreassignexpr(variable1, variable2, variable3); /*new AVarReassignExpr*/
-  variable1 = variable4;
-  goto return_label125;
-  return_label125: while(false);
-  tracehead = trace.prev;
-  return variable1;
-}
-val_t typing___ACallReassignExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1096, LOCATE_typing___ACallReassignExpr___name};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 = ((parser_nodes___ACallFormExpr___n_id_t)CALL( self,COLOR_parser_nodes___ACallFormExpr___n_id))( self) /*ACallFormExpr::n_id*/;
-  variable0 = ((syntax_base___Token___to_symbol_t)CALL(variable0,COLOR_syntax_base___Token___to_symbol))(variable0) /*Token::to_symbol*/;
-  goto return_label126;
-  return_label126: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t typing___ACallReassignExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1097, LOCATE_typing___ACallReassignExpr___raw_arguments};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 = ((parser_nodes___ACallFormExpr___n_args_t)CALL( self,COLOR_parser_nodes___ACallFormExpr___n_args))( self) /*ACallFormExpr::n_args*/;
-  variable0 = ((array___Collection___to_a_t)CALL(variable0,COLOR_array___Collection___to_a))(variable0) /*Collection::to_a*/;
-  goto return_label127;
-  return_label127: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t typing___ABraExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1101, LOCATE_typing___ABraExpr___name};
-  val_t variable0;
-  static val_t once_value_variable0_129; static int once_bool_variable0_129;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  if (once_bool_variable0_129) variable0 = once_value_variable0_129;
-  else {
-    variable0 = NEW_String_string___String___with_native(BOX_NativeString("[]"), TAG_Int(2)); /*new String*/
-    variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-    once_value_variable0_129 = variable0;
-    once_bool_variable0_129 = true;
-  }
-  goto return_label128;
-  return_label128: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t typing___ABraExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1102, LOCATE_typing___ABraExpr___raw_arguments};
-  val_t variable0;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable0 = ((parser_nodes___ABraFormExpr___n_args_t)CALL( self,COLOR_parser_nodes___ABraFormExpr___n_args))( self) /*ABraFormExpr::n_args*/;
-  variable0 = ((array___Collection___to_a_t)CALL(variable0,COLOR_array___Collection___to_a))(variable0) /*Collection::to_a*/;
-  goto return_label130;
-  return_label130: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t typing___ABraAssignExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1106, LOCATE_typing___ABraAssignExpr___name};
-  val_t variable0;
-  static val_t once_value_variable0_132; static int once_bool_variable0_132;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  if (once_bool_variable0_132) variable0 = once_value_variable0_132;
-  else {
-    variable0 = NEW_String_string___String___with_native(BOX_NativeString("[]="), TAG_Int(3)); /*new String*/
-    variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-    once_value_variable0_132 = variable0;
-    once_bool_variable0_132 = true;
-  }
-  goto return_label131;
-  return_label131: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t typing___ABraAssignExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1107, LOCATE_typing___ABraAssignExpr___raw_arguments};
-  val_t variable0;
-  val_t variable1;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable1 = ((parser_nodes___ABraFormExpr___n_args_t)CALL( self,COLOR_parser_nodes___ABraFormExpr___n_args))( self) /*ABraFormExpr::n_args*/;
-  variable1 = ((array___Collection___to_a_t)CALL(variable1,COLOR_array___Collection___to_a))(variable1) /*Collection::to_a*/;
-  variable0 = variable1;
-  variable1 = ((parser_nodes___AAssignFormExpr___n_value_t)CALL( self,COLOR_parser_nodes___AAssignFormExpr___n_value))( self) /*AAssignFormExpr::n_value*/;
-  ((array___AbstractArray___add_t)CALL( variable0 /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable0 /*res*/, variable1) /*AbstractArray::add*/;
-  variable0 =  variable0 /*res*/;
-  goto return_label133;
-  return_label133: while(false);
-  tracehead = trace.prev;
-  return variable0;
-}
-val_t typing___ABraReassignExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1116, LOCATE_typing___ABraReassignExpr___name};
-  val_t variable0;
-  static val_t once_value_variable0_135; static int once_bool_variable0_135;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  if (once_bool_variable0_135) variable0 = once_value_variable0_135;
-  else {
-    variable0 = NEW_String_string___String___with_native(BOX_NativeString("[]"), TAG_Int(2)); /*new String*/
-    variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-    once_value_variable0_135 = variable0;
-    once_bool_variable0_135 = true;
-  }
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((parser_nodes___ACallFormExpr___n_id_t)CALL(variable[2],COLOR_parser_nodes___ACallFormExpr___n_id))(variable[2]) /*ACallFormExpr::n_id*/;
+  variable[2] = ((syntax_base___Token___to_symbol_t)CALL(variable[2],COLOR_syntax_base___Token___to_symbol))(variable[2]) /*Token::to_symbol*/;
+  variable[1] = variable[2];
   goto return_label134;
   return_label134: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
-val_t typing___ABraReassignExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1117, LOCATE_typing___ABraReassignExpr___raw_arguments};
-  val_t variable0;
+val_t typing___ACallExpr___raw_arguments(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1220, LOCATE_typing___ACallExpr___raw_arguments};
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 = ((parser_nodes___ABraFormExpr___n_args_t)CALL( self,COLOR_parser_nodes___ABraFormExpr___n_args))( self) /*ABraFormExpr::n_args*/;
-  variable0 = ((array___Collection___to_a_t)CALL(variable0,COLOR_array___Collection___to_a))(variable0) /*Collection::to_a*/;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((parser_nodes___ACallFormExpr___n_args_t)CALL(variable[2],COLOR_parser_nodes___ACallFormExpr___n_args))(variable[2]) /*ACallFormExpr::n_args*/;
+  variable[2] = ((array___Collection___to_a_t)CALL(variable[2],COLOR_array___Collection___to_a))(variable[2]) /*Collection::to_a*/;
+  variable[1] = variable[2];
+  goto return_label135;
+  return_label135: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___ACallExpr___variable_create(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 1214, LOCATE_typing___ACallExpr___variable_create};
+  val_t variable[5];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___ACallFormExpr___n_id_t)CALL(variable[3],COLOR_parser_nodes___ACallFormExpr___n_id))(variable[3]) /*ACallFormExpr::n_id*/;
+  variable[4] = NEW_AVarExpr_parser_prod___AVarExpr___init_avarexpr(variable[3]); /*new AVarExpr*/
+  variable[3] = variable[4];
+  variable[2] = variable[3];
   goto return_label136;
   return_label136: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[2];
 }
-val_t typing___AInitExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1121, LOCATE_typing___AInitExpr___name};
-  val_t variable0;
-  static val_t once_value_variable0_138; static int once_bool_variable0_138;
+val_t typing___ACallAssignExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1229, LOCATE_typing___ACallAssignExpr___name};
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  if (once_bool_variable0_138) variable0 = once_value_variable0_138;
-  else {
-    variable0 = NEW_String_string___String___with_native(BOX_NativeString("init"), TAG_Int(4)); /*new String*/
-    variable0 = ((symbol___String___to_symbol_t)CALL(variable0,COLOR_symbol___String___to_symbol))(variable0) /*String::to_symbol*/;
-    once_value_variable0_138 = variable0;
-    once_bool_variable0_138 = true;
-  }
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((parser_nodes___ACallFormExpr___n_id_t)CALL(variable[2],COLOR_parser_nodes___ACallFormExpr___n_id))(variable[2]) /*ACallFormExpr::n_id*/;
+  variable[2] = ((lexer___Token___text_t)CALL(variable[2],COLOR_lexer___Token___text))(variable[2]) /*Token::text*/;
+  variable[3] = NEW_String_string___String___with_native(BOX_NativeString("="), TAG_Int(1)); /*new String*/
+  variable[2] = ((string___String_____plus_t)CALL(variable[2],COLOR_string___String_____plus))(variable[2], variable[3]) /*String::+*/;
+  variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+  variable[1] = variable[2];
   goto return_label137;
   return_label137: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
-val_t typing___AInitExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1122, LOCATE_typing___AInitExpr___raw_arguments};
-  val_t variable0;
+val_t typing___ACallAssignExpr___raw_arguments(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1230, LOCATE_typing___ACallAssignExpr___raw_arguments};
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 = ((parser_nodes___AInitExpr___n_args_t)CALL( self,COLOR_parser_nodes___AInitExpr___n_args))( self) /*AInitExpr::n_args*/;
-  variable0 = ((array___Collection___to_a_t)CALL(variable0,COLOR_array___Collection___to_a))(variable0) /*Collection::to_a*/;
+  variable[0] =  self;
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___ACallFormExpr___n_args_t)CALL(variable[3],COLOR_parser_nodes___ACallFormExpr___n_args))(variable[3]) /*ACallFormExpr::n_args*/;
+  variable[3] = ((array___Collection___to_a_t)CALL(variable[3],COLOR_array___Collection___to_a))(variable[3]) /*Collection::to_a*/;
+  variable[2] = variable[3];
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___AAssignFormExpr___n_value_t)CALL(variable[3],COLOR_parser_nodes___AAssignFormExpr___n_value))(variable[3]) /*AAssignFormExpr::n_value*/;
+  ((array___AbstractArray___add_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[2] /*res*/, variable[3]) /*AbstractArray::add*/;
+  variable[1] =  variable[2] /*res*/;
+  goto return_label138;
+  return_label138: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___ACallAssignExpr___variable_create(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 1224, LOCATE_typing___ACallAssignExpr___variable_create};
+  val_t variable[7];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___ACallFormExpr___n_id_t)CALL(variable[3],COLOR_parser_nodes___ACallFormExpr___n_id))(variable[3]) /*ACallFormExpr::n_id*/;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AAssignFormExpr___n_assign_t)CALL(variable[4],COLOR_parser_nodes___AAssignFormExpr___n_assign))(variable[4]) /*AAssignFormExpr::n_assign*/;
+  variable[5] = variable[0];
+  variable[5] = ((parser_nodes___AAssignFormExpr___n_value_t)CALL(variable[5],COLOR_parser_nodes___AAssignFormExpr___n_value))(variable[5]) /*AAssignFormExpr::n_value*/;
+  variable[6] = NEW_AVarAssignExpr_parser_prod___AVarAssignExpr___init_avarassignexpr(variable[3], variable[4], variable[5]); /*new AVarAssignExpr*/
+  variable[3] = variable[6];
+  variable[2] = variable[3];
   goto return_label139;
   return_label139: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[2];
 }
-void typing___AIsaExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1126, LOCATE_typing___AIsaExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-    val_t variable2;
-    val_t variable3;
-    val_t variable4;
+val_t typing___ACallReassignExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1244, LOCATE_typing___ACallReassignExpr___name};
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((parser_nodes___AIsaExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AIsaExpr___n_expr))( self) /*AIsaExpr::n_expr*/;
-  variable1 = ((typing___PExpr___is_variable_t)CALL(variable1,COLOR_typing___PExpr___is_variable))(variable1) /*PExpr::is_variable*/;
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable2 = ((parser_nodes___AIsaExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AIsaExpr___n_expr))( self) /*AIsaExpr::n_expr*/;
-    variable1 = variable2;
-    variable2 = TAG_Bool(( variable1 /*n*/==NIT_NULL) || VAL_ISA( variable1 /*n*/, COLOR_AVarExpr, ID_AVarExpr)) /*cast AVarExpr*/;
-    if (!UNTAG_Bool(variable2)) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___AIsaExpr___after_typing, LOCATE_typing, 1130); nit_exit(1);}
-    variable2 = ((typing___TypingVisitor___variable_ctx_t)CALL( variable0 /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable0 /*v*/) /*TypingVisitor::variable_ctx*/;
-    variable3 = ((syntax_base___AVarFormExpr___variable_t)CALL( variable1 /*n*/,COLOR_syntax_base___AVarFormExpr___variable))( variable1 /*n*/) /*AVarFormExpr::variable*/;
-    variable4 = ((parser_nodes___AIsaExpr___n_type_t)CALL( self,COLOR_parser_nodes___AIsaExpr___n_type))( self) /*AIsaExpr::n_type*/;
-    variable4 = ((typing___PType___stype_t)CALL(variable4,COLOR_typing___PType___stype))(variable4) /*PType::stype*/;
-    variable2 = ((typing___VariableContext___sub_with_t)CALL(variable2,COLOR_typing___VariableContext___sub_with))(variable2, variable3, variable4) /*VariableContext::sub_with*/;
-    ATTR_typing___PExpr____if_true_variable_ctx( self) /*PExpr::_if_true_variable_ctx*/ = variable2;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((parser_nodes___ACallFormExpr___n_id_t)CALL(variable[2],COLOR_parser_nodes___ACallFormExpr___n_id))(variable[2]) /*ACallFormExpr::n_id*/;
+  variable[2] = ((syntax_base___Token___to_symbol_t)CALL(variable[2],COLOR_syntax_base___Token___to_symbol))(variable[2]) /*Token::to_symbol*/;
+  variable[1] = variable[2];
+  goto return_label140;
+  return_label140: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___ACallReassignExpr___raw_arguments(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1245, LOCATE_typing___ACallReassignExpr___raw_arguments};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((parser_nodes___ACallFormExpr___n_args_t)CALL(variable[2],COLOR_parser_nodes___ACallFormExpr___n_args))(variable[2]) /*ACallFormExpr::n_args*/;
+  variable[2] = ((array___Collection___to_a_t)CALL(variable[2],COLOR_array___Collection___to_a))(variable[2]) /*Collection::to_a*/;
+  variable[1] = variable[2];
+  goto return_label141;
+  return_label141: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___ACallReassignExpr___variable_create(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 1239, LOCATE_typing___ACallReassignExpr___variable_create};
+  val_t variable[7];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___ACallFormExpr___n_id_t)CALL(variable[3],COLOR_parser_nodes___ACallFormExpr___n_id))(variable[3]) /*ACallFormExpr::n_id*/;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AReassignFormExpr___n_assign_op_t)CALL(variable[4],COLOR_parser_nodes___AReassignFormExpr___n_assign_op))(variable[4]) /*AReassignFormExpr::n_assign_op*/;
+  variable[5] = variable[0];
+  variable[5] = ((parser_nodes___AReassignFormExpr___n_value_t)CALL(variable[5],COLOR_parser_nodes___AReassignFormExpr___n_value))(variable[5]) /*AReassignFormExpr::n_value*/;
+  variable[6] = NEW_AVarReassignExpr_parser_prod___AVarReassignExpr___init_avarreassignexpr(variable[3], variable[4], variable[5]); /*new AVarReassignExpr*/
+  variable[3] = variable[6];
+  variable[2] = variable[3];
+  goto return_label142;
+  return_label142: while(false);
+  tracehead = trace.prev;
+  return variable[2];
+}
+val_t typing___ABraExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1249, LOCATE_typing___ABraExpr___name};
+  static val_t once_value_144; static int once_bool_144; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  if (once_bool_144) variable[2] = once_value_144;
+  else {
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("[]"), TAG_Int(2)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_144 = variable[2];
+    once_bool_144 = true;
   }
-  variable1 = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable0 /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable0 /*v*/) /*AbsSyntaxVisitor::type_bool*/;
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ = variable1;
+  variable[1] = variable[2];
+  goto return_label143;
+  return_label143: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___ABraExpr___raw_arguments(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1250, LOCATE_typing___ABraExpr___raw_arguments};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((parser_nodes___ABraFormExpr___n_args_t)CALL(variable[2],COLOR_parser_nodes___ABraFormExpr___n_args))(variable[2]) /*ABraFormExpr::n_args*/;
+  variable[2] = ((array___Collection___to_a_t)CALL(variable[2],COLOR_array___Collection___to_a))(variable[2]) /*Collection::to_a*/;
+  variable[1] = variable[2];
+  goto return_label145;
+  return_label145: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___ABraAssignExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1254, LOCATE_typing___ABraAssignExpr___name};
+  static val_t once_value_147; static int once_bool_147; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  if (once_bool_147) variable[2] = once_value_147;
+  else {
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("[]="), TAG_Int(3)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_147 = variable[2];
+    once_bool_147 = true;
+  }
+  variable[1] = variable[2];
+  goto return_label146;
+  return_label146: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___ABraAssignExpr___raw_arguments(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1255, LOCATE_typing___ABraAssignExpr___raw_arguments};
+  val_t variable[4];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___ABraFormExpr___n_args_t)CALL(variable[3],COLOR_parser_nodes___ABraFormExpr___n_args))(variable[3]) /*ABraFormExpr::n_args*/;
+  variable[3] = ((array___Collection___to_a_t)CALL(variable[3],COLOR_array___Collection___to_a))(variable[3]) /*Collection::to_a*/;
+  variable[2] = variable[3];
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___AAssignFormExpr___n_value_t)CALL(variable[3],COLOR_parser_nodes___AAssignFormExpr___n_value))(variable[3]) /*AAssignFormExpr::n_value*/;
+  ((array___AbstractArray___add_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[2] /*res*/, variable[3]) /*AbstractArray::add*/;
+  variable[1] =  variable[2] /*res*/;
+  goto return_label148;
+  return_label148: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___ABraReassignExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1264, LOCATE_typing___ABraReassignExpr___name};
+  static val_t once_value_150; static int once_bool_150; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  if (once_bool_150) variable[2] = once_value_150;
+  else {
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("[]"), TAG_Int(2)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_150 = variable[2];
+    once_bool_150 = true;
+  }
+  variable[1] = variable[2];
+  goto return_label149;
+  return_label149: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___ABraReassignExpr___raw_arguments(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1265, LOCATE_typing___ABraReassignExpr___raw_arguments};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((parser_nodes___ABraFormExpr___n_args_t)CALL(variable[2],COLOR_parser_nodes___ABraFormExpr___n_args))(variable[2]) /*ABraFormExpr::n_args*/;
+  variable[2] = ((array___Collection___to_a_t)CALL(variable[2],COLOR_array___Collection___to_a))(variable[2]) /*Collection::to_a*/;
+  variable[1] = variable[2];
+  goto return_label151;
+  return_label151: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___AInitExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1269, LOCATE_typing___AInitExpr___name};
+  static val_t once_value_153; static int once_bool_153; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  if (once_bool_153) variable[2] = once_value_153;
+  else {
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("init"), TAG_Int(4)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_153 = variable[2];
+    once_bool_153 = true;
+  }
+  variable[1] = variable[2];
+  goto return_label152;
+  return_label152: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___AInitExpr___raw_arguments(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1270, LOCATE_typing___AInitExpr___raw_arguments};
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ((parser_nodes___AInitExpr___n_args_t)CALL(variable[2],COLOR_parser_nodes___AInitExpr___n_args))(variable[2]) /*AInitExpr::n_args*/;
+  variable[2] = ((array___Collection___to_a_t)CALL(variable[2],COLOR_array___Collection___to_a))(variable[2]) /*Collection::to_a*/;
+  variable[1] = variable[2];
+  goto return_label154;
+  return_label154: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+void typing___AClosureCallExpr___after_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 1274, LOCATE_typing___AClosureCallExpr___after_typing};
+  val_t variable[9];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = variable[0];
+  variable[4] = ((syntax_base___AClosureCallExpr___variable_t)CALL(variable[4],COLOR_syntax_base___AClosureCallExpr___variable))(variable[4]) /*AClosureCallExpr::variable*/;
+  variable[3] = variable[4];
+  variable[5] = ((syntax_base___ClosureVariable___closure_t)CALL( variable[3] /*va*/,COLOR_syntax_base___ClosureVariable___closure))( variable[3] /*va*/) /*ClosureVariable::closure*/;
+  variable[5] = ((static_type___MMClosure___signature_t)CALL(variable[5],COLOR_static_type___MMClosure___signature))(variable[5]) /*MMClosure::signature*/;
+  variable[4] = variable[5];
+  variable[6] = variable[0];
+  variable[7] = variable[0];
+  variable[7] = ((parser_nodes___ACallFormExpr___n_id_t)CALL(variable[7],COLOR_parser_nodes___ACallFormExpr___n_id))(variable[7]) /*ACallFormExpr::n_id*/;
+  variable[7] = ((syntax_base___Token___to_symbol_t)CALL(variable[7],COLOR_syntax_base___Token___to_symbol))(variable[7]) /*Token::to_symbol*/;
+  variable[8] = variable[0];
+  variable[8] = ((parser_nodes___ACallFormExpr___n_args_t)CALL(variable[8],COLOR_parser_nodes___ACallFormExpr___n_args))(variable[8]) /*ACallFormExpr::n_args*/;
+  variable[8] = ((array___Collection___to_a_t)CALL(variable[8],COLOR_array___Collection___to_a))(variable[8]) /*Collection::to_a*/;
+  variable[6] = ((typing___AAbsSendExpr___process_signature_t)CALL(variable[6],COLOR_typing___AAbsSendExpr___process_signature))(variable[6],  variable[1] /*v*/,  variable[4] /*sig*/, variable[7], variable[8]) /*AAbsSendExpr::process_signature*/;
+  variable[5] = variable[6];
+  variable[6] = variable[0];
+  variable[6] = ((typing___ACallFormExpr___closure_defs_t)CALL(variable[6],COLOR_typing___ASendExpr___closure_defs))(variable[6]) /*ACallFormExpr::closure_defs*/;
+  variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] ==  NIT_NULL /*null*/) || ((variable[6] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[6],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[6],COLOR_kernel___Object_____eqeq))(variable[6],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[6])) { /*if*/
+    variable[6] = variable[0];
+    variable[7] = variable[0];
+    variable[7] = ((parser_nodes___ACallFormExpr___n_id_t)CALL(variable[7],COLOR_parser_nodes___ACallFormExpr___n_id))(variable[7]) /*ACallFormExpr::n_id*/;
+    variable[7] = ((syntax_base___Token___to_symbol_t)CALL(variable[7],COLOR_syntax_base___Token___to_symbol))(variable[7]) /*Token::to_symbol*/;
+    variable[8] = variable[0];
+    variable[8] = ((typing___ACallFormExpr___closure_defs_t)CALL(variable[8],COLOR_typing___ASendExpr___closure_defs))(variable[8]) /*ACallFormExpr::closure_defs*/;
+    ((typing___AAbsSendExpr___process_closures_t)CALL(variable[6],COLOR_typing___AAbsSendExpr___process_closures))(variable[6],  variable[1] /*v*/,  variable[4] /*sig*/, variable[7], variable[8]) /*AAbsSendExpr::process_closures*/;
+  }
+  variable[6] = TAG_Bool(( variable[5] /*args*/ ==  NIT_NULL /*null*/) || (( variable[5] /*args*/ != NIT_NULL) && UNTAG_Bool(((array___AbstractArray_____eqeq_t)CALL( variable[5] /*args*/,COLOR_kernel___Object_____eqeq))( variable[5] /*args*/,  NIT_NULL /*null*/) /*AbstractArray::==*/)));
+  if (UNTAG_Bool(variable[6])) { /*if*/
+    goto return_label155;
+  }
+  variable[6] = variable[0];
+  ATTR_typing___AAbsSendExpr____prop(variable[6]) /*AAbsSendExpr::_prop*/ =  NIT_NULL /*null*/;
+  variable[6] = variable[0];
+  ATTR_typing___AAbsSendExpr____prop_signature(variable[6]) /*AAbsSendExpr::_prop_signature*/ =  variable[4] /*sig*/;
+  variable[6] = variable[0];
+  ATTR_typing___AAbsSendExpr____arguments(variable[6]) /*AAbsSendExpr::_arguments*/ =  variable[5] /*args*/;
+  variable[6] = variable[0];
+  variable[7] = ((static_type___MMSignature___return_type_t)CALL( variable[4] /*sig*/,COLOR_static_type___MMSignature___return_type))( variable[4] /*sig*/) /*MMSignature::return_type*/;
+  ATTR_typing___PExpr____stype(variable[6]) /*PExpr::_stype*/ = variable[7];
+  return_label155: while(false);
+  tracehead = trace.prev;
+  return;
+}
+void typing___PClosureDef___accept_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 1292, LOCATE_typing___PClosureDef___accept_typing};
+  val_t variable[4];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ATTR_typing___PClosureDef____accept_typing2(variable[3]) /*PClosureDef::_accept_typing2*/;
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    ((typing___PClosureDef___accept_typing_t)CALL(variable[0],COLOR_SUPER_typing___PClosureDef___accept_typing))(variable[0], variable[1]) /*super PClosureDef::accept_typing*/;
+  }
+  return_label156: while(false);
+  tracehead = trace.prev;
+  return;
+}
+void typing___PClosureDef___accept_typing2(val_t  self, val_t  param0, val_t  param1) {
+  struct trace_t trace = {NULL, NULL, 1298, LOCATE_typing___PClosureDef___accept_typing2};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_typing, 1298);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return;
+}
+void typing___AClosureDef___accept_typing2(val_t  self, val_t  param0, val_t  param1) {
+  struct trace_t trace = {NULL, NULL, 1302, LOCATE_typing___AClosureDef___accept_typing2};
+  val_t variable[17];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[5] = ((static_type___MMClosure___signature_t)CALL( variable[2] /*clos*/,COLOR_static_type___MMClosure___signature))( variable[2] /*clos*/) /*MMClosure::signature*/;
+  variable[4] = variable[5];
+  variable[5] = ((static_type___MMSignature___arity_t)CALL( variable[4] /*sig*/,COLOR_static_type___MMSignature___arity))( variable[4] /*sig*/) /*MMSignature::arity*/;
+  variable[6] = variable[0];
+  variable[6] = ((parser_nodes___AClosureDef___n_id_t)CALL(variable[6],COLOR_parser_nodes___AClosureDef___n_id))(variable[6]) /*AClosureDef::n_id*/;
+  variable[6] = ((list___List___length_t)CALL(variable[6],COLOR_abstract_collection___Collection___length))(variable[6]) /*List::length*/;
+  variable[5] = TAG_Bool((variable[5])!=(variable[6]));
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    variable[5] = variable[0];
+    variable[6] = NEW_String_string___String___init(); /*new String*/
+    variable[7] = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
+    variable[8] = variable[7];
+    ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[8]) /*String::append*/;
+    variable[9] = ((static_type___MMSignature___arity_t)CALL( variable[4] /*sig*/,COLOR_static_type___MMSignature___arity))( variable[4] /*sig*/) /*MMSignature::arity*/;
+    variable[10] = variable[9];
+    variable[10] = ((string___String___to_s_t)CALL(variable[10],COLOR_string___Object___to_s))(variable[10]) /*String::to_s*/;
+    ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[10]) /*String::append*/;
+    variable[11] = NEW_String_string___String___with_native(BOX_NativeString(" automatic variable names expected, "), TAG_Int(36)); /*new String*/
+    variable[12] = variable[11];
+    ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[12]) /*String::append*/;
+    variable[13] = variable[0];
+    variable[13] = ((parser_nodes___AClosureDef___n_id_t)CALL(variable[13],COLOR_parser_nodes___AClosureDef___n_id))(variable[13]) /*AClosureDef::n_id*/;
+    variable[13] = ((list___List___length_t)CALL(variable[13],COLOR_abstract_collection___Collection___length))(variable[13]) /*List::length*/;
+    variable[14] = variable[13];
+    variable[14] = ((string___String___to_s_t)CALL(variable[14],COLOR_string___Object___to_s))(variable[14]) /*String::to_s*/;
+    ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[14]) /*String::append*/;
+    variable[15] = NEW_String_string___String___with_native(BOX_NativeString(" found."), TAG_Int(7)); /*new String*/
+    variable[16] = variable[15];
+    ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[16]) /*String::append*/;
+    ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[5], variable[6]) /*AbsSyntaxVisitor::error*/;
+    goto return_label157;
+  }
+  variable[5] = variable[0];
+  ((syntax_base___PClosureDef___closure__eq_t)CALL(variable[5],COLOR_syntax_base___PClosureDef___closure__eq))(variable[5],  variable[2] /*clos*/) /*PClosureDef::closure=*/;
+  variable[6] = ((typing___TypingVisitor___closure_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___closure))( variable[1] /*v*/) /*TypingVisitor::closure*/;
+  variable[5] = variable[6];
+  ((typing___TypingVisitor___closure__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___closure__eq))( variable[1] /*v*/,  variable[2] /*clos*/) /*TypingVisitor::closure=*/;
+  variable[6] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+  variable[6] = ((typing___VariableContext___sub_t)CALL(variable[6],COLOR_typing___VariableContext___sub))(variable[6]) /*VariableContext::sub*/;
+  ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable[1] /*v*/, variable[6]) /*TypingVisitor::variable_ctx=*/;
+  variable[6] = variable[0];
+  variable[7] = NEW_Array_array___Array___init(); /*new Array[AutoVariable]*/
+  ((syntax_base___PClosureDef___variables__eq_t)CALL(variable[6],COLOR_syntax_base___PClosureDef___variables__eq))(variable[6], variable[7]) /*PClosureDef::variables=*/;
+  variable[6] = variable[0];
+  variable[6] = ((parser_nodes___AClosureDef___n_id_t)CALL(variable[6],COLOR_parser_nodes___AClosureDef___n_id))(variable[6]) /*AClosureDef::n_id*/;
+  variable[6] = ((list___List___length_t)CALL(variable[6],COLOR_abstract_collection___Collection___length))(variable[6]) /*List::length*/;
+  variable[7] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[6]); /*new Range[Int]*/
+  variable[6] = variable[7];
+  variable[6] = ((range___Range___iterator_t)CALL(variable[6],COLOR_abstract_collection___Collection___iterator))(variable[6]) /*Range::iterator*/;
+  while (true) { /*for*/
+    variable[7] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[6],COLOR_abstract_collection___Iterator___is_ok))(variable[6]) /*Iterator::is_ok*/;
+    if (!UNTAG_Bool(variable[7])) break; /*for*/
+    variable[7] = ((abstract_collection___Iterator___item_t)CALL(variable[6],COLOR_abstract_collection___Iterator___item))(variable[6]) /*Iterator::item*/;
+    variable[8] = variable[7];
+    variable[10] = variable[0];
+    variable[10] = ((parser_nodes___AClosureDef___n_id_t)CALL(variable[10],COLOR_parser_nodes___AClosureDef___n_id))(variable[10]) /*AClosureDef::n_id*/;
+    variable[10] = ((list___List_____bra_t)CALL(variable[10],COLOR_abstract_collection___Map_____bra))(variable[10],  variable[8] /*i*/) /*List::[]*/;
+    variable[10] = ((syntax_base___Token___to_symbol_t)CALL(variable[10],COLOR_syntax_base___Token___to_symbol))(variable[10]) /*Token::to_symbol*/;
+    variable[11] = variable[0];
+    variable[12] = NEW_AutoVariable_syntax_base___AutoVariable___init(variable[10], variable[11]); /*new AutoVariable*/
+    variable[10] = variable[12];
+    variable[9] = variable[10];
+    variable[10] = variable[0];
+    variable[10] = ((syntax_base___PClosureDef___variables_t)CALL(variable[10],COLOR_syntax_base___PClosureDef___variables))(variable[10]) /*PClosureDef::variables*/;
+    ((array___AbstractArray___add_t)CALL(variable[10],COLOR_abstract_collection___SimpleCollection___add))(variable[10],  variable[9] /*va*/) /*AbstractArray::add*/;
+    variable[10] = ((static_type___MMSignature_____bra_t)CALL( variable[4] /*sig*/,COLOR_static_type___MMSignature_____bra))( variable[4] /*sig*/,  variable[8] /*i*/) /*MMSignature::[]*/;
+    ((syntax_base___Variable___stype__eq_t)CALL( variable[9] /*va*/,COLOR_syntax_base___Variable___stype__eq))( variable[9] /*va*/, variable[10]) /*Variable::stype=*/;
+    variable[10] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+    ((typing___VariableContext___add_t)CALL(variable[10],COLOR_typing___VariableContext___add))(variable[10],  variable[9] /*va*/) /*VariableContext::add*/;
+    continue_158: while(0);
+    ((abstract_collection___Iterator___next_t)CALL(variable[6],COLOR_abstract_collection___Iterator___next))(variable[6]) /*Iterator::next*/;
+  }
+  break_158: while(0);
+  variable[6] = variable[0];
+  ATTR_typing___PClosureDef____accept_typing2(variable[6]) /*PClosureDef::_accept_typing2*/ =  TAG_Bool(true);
+  variable[6] = variable[0];
+  ((typing___PClosureDef___accept_typing_t)CALL(variable[6],COLOR_typing___PNode___accept_typing))(variable[6],  variable[1] /*v*/) /*PClosureDef::accept_typing*/;
+  ((typing___TypingVisitor___closure__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___closure__eq))( variable[1] /*v*/,  variable[5] /*old_clos*/) /*TypingVisitor::closure=*/;
+  return_label157: while(false);
+  tracehead = trace.prev;
+  return;
+}
+void typing___AIsaExpr___after_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 1332, LOCATE_typing___AIsaExpr___after_typing};
+  val_t variable[7];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AIsaExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AIsaExpr___n_expr))(variable[4]) /*AIsaExpr::n_expr*/;
+  variable[4] = ((typing___PExpr___its_variable_t)CALL(variable[4],COLOR_typing___PExpr___its_variable))(variable[4]) /*PExpr::its_variable*/;
+  variable[3] = variable[4];
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*variable*/ ==  NIT_NULL /*null*/) || (( variable[3] /*variable*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*variable*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*variable*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*variable*/,COLOR_kernel___Object_____eqeq))( variable[3] /*variable*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = variable[0];
+    variable[5] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+    variable[6] = variable[0];
+    variable[6] = ((parser_nodes___AIsaExpr___n_type_t)CALL(variable[6],COLOR_parser_nodes___AIsaExpr___n_type))(variable[6]) /*AIsaExpr::n_type*/;
+    variable[6] = ((typing___PType___stype_t)CALL(variable[6],COLOR_typing___PType___stype))(variable[6]) /*PType::stype*/;
+    variable[5] = ((typing___VariableContext___sub_with_t)CALL(variable[5],COLOR_typing___VariableContext___sub_with))(variable[5],  variable[3] /*variable*/, variable[6]) /*VariableContext::sub_with*/;
+    ATTR_typing___PExpr____if_true_variable_ctx(variable[4]) /*PExpr::_if_true_variable_ctx*/ = variable[5];
+  }
+  variable[4] = variable[0];
+  variable[5] = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_bool*/;
+  ATTR_typing___PExpr____stype(variable[4]) /*PExpr::_stype*/ = variable[5];
+  return_label159: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___AAsCastExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1138, LOCATE_typing___AAsCastExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
-  val_t variable2;
+  struct trace_t trace = {NULL, NULL, 1343, LOCATE_typing___AAsCastExpr___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((parser_nodes___AAsCastExpr___n_type_t)CALL( self,COLOR_parser_nodes___AAsCastExpr___n_type))( self) /*AAsCastExpr::n_type*/;
-  variable1 = ((typing___PType___stype_t)CALL(variable1,COLOR_typing___PType___stype))(variable1) /*PType::stype*/;
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ = variable1;
-  variable2 = ((parser_nodes___AAsCastExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AAsCastExpr___n_expr))( self) /*AAsCastExpr::n_expr*/;
-  variable2 = ((typing___PExpr___stype_t)CALL(variable2,COLOR_syntax_base___PExpr___stype))(variable2) /*PExpr::stype*/;
-  variable1 = variable2;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___AAsCastExpr___n_expr_t)CALL(variable[3],COLOR_parser_nodes___AAsCastExpr___n_expr))(variable[3]) /*AAsCastExpr::n_expr*/;
+  ((syntax_base___AbsSyntaxVisitor___check_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_expr))( variable[1] /*v*/, variable[3]) /*AbsSyntaxVisitor::check_expr*/;
+  variable[3] = variable[0];
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AAsCastExpr___n_type_t)CALL(variable[4],COLOR_parser_nodes___AAsCastExpr___n_type))(variable[4]) /*AAsCastExpr::n_type*/;
+  variable[4] = ((typing___PType___stype_t)CALL(variable[4],COLOR_typing___PType___stype))(variable[4]) /*PType::stype*/;
+  ATTR_typing___PExpr____stype(variable[3]) /*PExpr::_stype*/ = variable[4];
+  return_label160: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___AProxyExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1146, LOCATE_typing___AProxyExpr___after_typing};
-  val_t variable0;
-  val_t variable1;
+  struct trace_t trace = {NULL, NULL, 1351, LOCATE_typing___AProxyExpr___after_typing};
+  val_t variable[5];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
-  variable0 =  param0;
-  variable1 = ((parser_nodes___AProxyExpr___n_expr_t)CALL( self,COLOR_parser_nodes___AProxyExpr___n_expr))( self) /*AProxyExpr::n_expr*/;
-  variable1 = ((typing___PExpr___stype_t)CALL(variable1,COLOR_syntax_base___PExpr___stype))(variable1) /*PExpr::stype*/;
-  ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/ = variable1;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AProxyExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AProxyExpr___n_expr))(variable[4]) /*AProxyExpr::n_expr*/;
+  variable[4] = ((typing___PExpr___stype_t)CALL(variable[4],COLOR_syntax_base___PExpr___stype))(variable[4]) /*PExpr::stype*/;
+  ATTR_typing___PExpr____stype(variable[3]) /*PExpr::_stype*/ = variable[4];
+  return_label161: while(false);
   tracehead = trace.prev;
   return;
 }

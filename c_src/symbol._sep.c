@@ -2,55 +2,68 @@
 #include "symbol._sep.h"
 val_t symbol___String___to_symbol(val_t  self) {
   struct trace_t trace = {NULL, NULL, 20, LOCATE_symbol___String___to_symbol};
-  val_t variable0;
-  val_t variable1;
-  static val_t once_value_variable1_1; static int once_bool_variable1_1;
-    val_t variable2;
+  static val_t once_value_1; static int once_bool_1; /* Once value for variable[3]*/
+  val_t variable[6];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_symbol;
-  if (once_bool_variable1_1) variable1 = once_value_variable1_1;
+  variable[0] =  self;
+  if (once_bool_1) variable[3] = once_value_1;
   else {
-    variable1 = NEW_HashMap_hash___HashMap___init(); /*new HashMap[String, Symbol]*/
-    once_value_variable1_1 = variable1;
-    once_bool_variable1_1 = true;
+    variable[3] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[String, Symbol]*/
+    once_value_1 = variable[3];
+    once_bool_1 = true;
   }
-  variable0 = variable1;
-  variable1 = ((abstract_collection___CoupleMap___has_key_t)CALL( variable0 /*symbol_dictionary*/,COLOR_abstract_collection___Map___has_key))( variable0 /*symbol_dictionary*/,  self) /*CoupleMap::has_key*/;
-  if (UNTAG_Bool(variable1)) { /*if*/
-    variable1 = ((abstract_collection___CoupleMap_____bra_t)CALL( variable0 /*symbol_dictionary*/,COLOR_abstract_collection___Map_____bra))( variable0 /*symbol_dictionary*/,  self) /*CoupleMap::[]*/;
-    variable0 = variable1;
+  variable[2] = variable[3];
+  variable[3] = variable[0];
+  variable[3] = ((abstract_collection___CoupleMap___has_key_t)CALL( variable[2] /*symbol_dictionary*/,COLOR_abstract_collection___Map___has_key))( variable[2] /*symbol_dictionary*/, variable[3]) /*CoupleMap::has_key*/;
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[3] = variable[0];
+    variable[3] = ((abstract_collection___CoupleMap_____bra_t)CALL( variable[2] /*symbol_dictionary*/,COLOR_abstract_collection___Map_____bra))( variable[2] /*symbol_dictionary*/, variable[3]) /*CoupleMap::[]*/;
+    variable[1] = variable[3];
     goto return_label0;
   } else { /*if*/
-    variable2 = NEW_Symbol_symbol___Symbol___init( self); /*new Symbol*/
-    variable1 = variable2;
-    ((hash___HashMap_____braeq_t)CALL( variable0 /*symbol_dictionary*/,COLOR_abstract_collection___Map_____braeq))( variable0 /*symbol_dictionary*/,  self,  variable1 /*symbol*/) /*HashMap::[]=*/;
-    variable0 =  variable1 /*symbol*/;
+    variable[4] = variable[0];
+    variable[5] = NEW_Symbol_symbol___Symbol___init(variable[4]); /*new Symbol*/
+    variable[4] = variable[5];
+    variable[3] = variable[4];
+    variable[4] = variable[0];
+    ((hash___HashMap_____braeq_t)CALL( variable[2] /*symbol_dictionary*/,COLOR_abstract_collection___Map_____braeq))( variable[2] /*symbol_dictionary*/, variable[4],  variable[3] /*symbol*/) /*HashMap::[]=*/;
+    variable[1] =  variable[3] /*symbol*/;
     goto return_label0;
   }
   return_label0: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 val_t symbol___Symbol___to_s(val_t  self) {
   struct trace_t trace = {NULL, NULL, 37, LOCATE_symbol___Symbol___to_s};
-  val_t variable0;
+  val_t variable[3];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_symbol;
-  variable0 = ATTR_symbol___Symbol____string( self) /*Symbol::_string*/;
-  variable0 = ((string___String___to_s_t)CALL(variable0,COLOR_string___Object___to_s))(variable0) /*String::to_s*/;
+  variable[0] =  self;
+  variable[2] = variable[0];
+  variable[2] = ATTR_symbol___Symbol____string(variable[2]) /*Symbol::_string*/;
+  variable[2] = ((string___String___to_s_t)CALL(variable[2],COLOR_string___Object___to_s))(variable[2]) /*String::to_s*/;
+  variable[1] = variable[2];
   goto return_label2;
   return_label2: while(false);
   tracehead = trace.prev;
-  return variable0;
+  return variable[1];
 }
 void symbol___Symbol___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 39, LOCATE_symbol___Symbol___init};
-  val_t variable0;
+  val_t variable[4];
+  void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_symbol;
-  variable0 =  param0;
+  variable[0] =  self;
+  variable[1] =  param0;
   if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Symbol].i]) return;
-  ATTR_symbol___Symbol____string( self) /*Symbol::_string*/ =  variable0 /*s*/;
+  variable[3] = variable[0];
+  ATTR_symbol___Symbol____string(variable[3]) /*Symbol::_string*/ =  variable[1] /*s*/;
+  return_label3: while(false);
   init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Symbol].i] = 1;
   tracehead = trace.prev;
   return;
