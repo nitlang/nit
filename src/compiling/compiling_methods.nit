@@ -765,8 +765,7 @@ redef class AVardeclExpr
 	do
 		var cname = v.cfc.varname(variable)
 		if n_expr == null then
-			var t = variable.stype
-			v.add_assignment(cname, "{t.default_cvalue} /*decl variable {variable.name}*/")
+			v.add_instr("/*{cname} is variable {variable.name}*/")
 		else
 			var e = v.compile_expr(n_expr)
 			v.add_assignment(cname, e)
