@@ -1,0 +1,21 @@
+Known big bugs and limitations
+
+= Primitive types and null  =
+
+Currently, the implementation of primitive types expects their values are not null.
+However, the NIT syntax allows null to be assigned to primitive variable and attributes.
+
+Thus, using null and primitive may yield to unexpected results.
+A temporal ugly fix to avoid bad surprises is that primitive attribute are implicitly initialized with a non null default value.
+
+Change required:
+ - wait nullable
+ - remove implicitly initialization
+
+= Closures redefinition =
+
+No checks are done to verify that closure signatures are conform among redefinitions
+
+Change required:
+ - add the checks
+
