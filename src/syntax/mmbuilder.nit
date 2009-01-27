@@ -859,9 +859,7 @@ redef class PPropdef
 			#print "inh signature:   {isig.recv} . {isig}"
 			#print "redef signature: {s.recv} . {s}"
 
-			if glob.is_init and i.local_class.global != prop.local_class.global then
-				# Do not check signature
-			else if s.arity != isig.arity then
+			if s.arity != isig.arity then
 				v.error(self, "Redef error: {prop.local_class}::{prop} redefines {ip.local_class}::{ip} with {isig.arity} parameter(s).")
 			else
 				for i in [0..s.arity[ do
