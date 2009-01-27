@@ -45,6 +45,7 @@ class Option
 		_helptext = help
 		_mandatory = false
 		_default_value = default
+		_value = default 
 	end
 
 	# Add new aliases for this option
