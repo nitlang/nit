@@ -79,7 +79,7 @@ end
 
 class Scheduler
 	attr _time_list: Array[Couple[Int, WakeUpNode]]
-	attr _time: Int # What time is it ?
+	attr _time: Int = 0 # What time is it ?
 	meth add_event(n: WakeUpNode, d: Int)
 	# The node `n' whant to be weaked up in `d' time units
 	do

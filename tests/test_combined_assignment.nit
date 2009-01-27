@@ -15,8 +15,8 @@
 # limitations under the License.
 
 class A
-	readable writable attr _a: Int #!alt1#
-	#alt1#readable writable attr _a: Object
+	readable writable attr _a: Int = 0#!alt1#
+	#alt1#readable writable attr _a: Object = 0
 	init do end
 	meth foo
 	do

@@ -21,14 +21,14 @@ import syntax
 private import utils
 
 redef class ToolContext
-	readable writable attr _global: Bool 
-	readable writable attr _attr_sim: Bool 
+	readable writable attr _global: Bool = false 
+	readable writable attr _attr_sim: Bool = false
 	readable writable attr _compdir: String
 	readable writable attr _clibdir: String
 	readable writable attr _bindir: String
 	readable writable attr _output_file: String
-	readable writable attr _boost: Bool
-	readable writable attr _no_cc: Bool
+	readable writable attr _boost: Bool = false
+	readable writable attr _no_cc: Bool = false
 	readable writable attr _ext_prefix: String 
 end
 
@@ -64,7 +64,7 @@ class CompilerVisitor
 		return res
 	end
 	# next number for new_number
-	attr _number_cpt: Int
+	attr _number_cpt: Int = 0
 
 	# Add an indent level.
 	# New decl and instr will be indented.
@@ -94,7 +94,7 @@ class CompilerVisitor
 	readable writable attr _ctx: CContext = new CContext
 
 	# The current indent lever
-	readable writable attr _indent_level: Int 
+	readable writable attr _indent_level: Int = 0 
 
 	# The current ToolContext
 	readable writable attr _tc: ToolContext 
@@ -164,7 +164,7 @@ redef class MMLocalClass
 	attr _primitive_info_cache: PrimitiveInfo
 
 	# If primitive_info result cached?
-	attr _primitive_info_b: Bool
+	attr _primitive_info_b: Bool = false
 
 	# Return the primitive information of the class.
 	# Return null if the class is not primitive

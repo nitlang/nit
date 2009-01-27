@@ -457,7 +457,7 @@ end
 
 redef class AType
 	attr _stype_cache: MMType
-	attr _stype_cached: Bool
+	attr _stype_cached: Bool = false
 
 	redef meth get_local_class(v)
 	do

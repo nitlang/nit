@@ -52,7 +52,7 @@ special AbsSyntaxVisitor
 	end
 
 	# Number of nested once
-	readable writable attr _once_count: Int
+	readable writable attr _once_count: Int = 0
 
 	# Current knowledge about variables types
 	readable writable attr _control_flow_ctx: ControlFlowContext
@@ -82,11 +82,11 @@ private class ControlFlowContext
 	readable attr _prev: ControlFlowContext
 
 	# Is a control flow break met? (return, break, continue)
-	readable writable attr _unreash: Bool
+	readable writable attr _unreash: Bool = false
 
 	# Is a control flow already broken?
 	# Used to avoid repeating the same error message
-	readable writable attr _already_unreash: Bool
+	readable writable attr _already_unreash: Bool = false
 
 	# Current controlable block (for or while)
 	readable writable attr _base_block: AControlableBlock

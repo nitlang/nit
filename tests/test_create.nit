@@ -31,7 +31,9 @@ class Toto
 	end
 
 	init
-	do end
+	do 
+		_a = 0
+	end
 
 	init foo
 	do

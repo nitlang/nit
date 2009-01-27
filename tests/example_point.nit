@@ -63,6 +63,7 @@ private
 
 	init
 	do
+		moveto(0, 0)
 	end
 
 	init at(x: Int, y: Int)

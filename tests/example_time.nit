@@ -20,7 +20,7 @@
 # The Time class represents a quantity of time
 class Time
 	# Internally, the quantity of time is stored in minutes
-	readable writable attr _min: Int
+	readable writable attr _min: Int = 0
 
 	# The quantity ot time (in hours)
 	meth hour: Int

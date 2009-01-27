@@ -21,7 +21,7 @@
 # * try to change the optimization flags
 # * try to update your gcc version
 class Foo
-	attr _count: Int
+	attr _count: Int = 0
 	meth run: Int
 	do
 		# Under some case gcc produce bad code here and make the if

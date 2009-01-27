@@ -24,10 +24,15 @@ class G[E]
 	readable writable attr _f: F
 	readable writable attr _f2: F2
 
-	init do end
+	init(e: E, f: F, f2: F2)
+	do
+		_e = e
+		_f = f
+		_f2 = f2
+	end
 end
 
-var gi = new G[Int]
+var gi = new G[Int](0, 0, 0)
 
 gi.e = 1 + gi.e
 gi.e = 1 + gi.f

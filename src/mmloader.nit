@@ -25,10 +25,10 @@ import opts
 class ToolContext
 special MMContext
 	# Number of errors
-	readable attr _error_count: Int 
+	readable attr _error_count: Int = 0 
 
 	# Number of warnings
-	readable attr _warning_count: Int 
+	readable attr _warning_count: Int = 0
 
 	# Display an error
 	meth error(s: String)

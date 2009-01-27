@@ -322,18 +322,18 @@ class MMGlobalClass
 	end
 
 	# Is the global class an interface?
-	readable writable attr _is_interface: Bool
+	readable writable attr _is_interface: Bool = false
 
 	# Is the global class an abstract class?
-	readable writable attr _is_abstract: Bool
+	readable writable attr _is_abstract: Bool = false
 
 	# Is the global class a universal class?
-	readable writable attr _is_universal: Bool
+	readable writable attr _is_universal: Bool = false
 
 	# Visibility of the global class
 	# 1 -> public
 	# 3 -> private
-	readable writable attr _visibility_level: Int
+	readable writable attr _visibility_level: Int = 1 # FIXME: why this should be defined ?
 
 	# Is the global class a mixin class?
 	# A mixin class inherits all constructors from a superclass
@@ -605,7 +605,7 @@ class MMGlobalProperty
 	# 1 -> public
 	# 2 -> protected
 	# 3 -> private
-	readable writable attr _visibility_level: Int
+	readable writable attr _visibility_level: Int = 1 # FIXME: why this should be defined ?
 end
 
 # Local properties are properties defined (explicitely or not) in a local class
@@ -656,7 +656,7 @@ class MMLocalProperty
 	redef meth to_s do return name.to_s
 
 	# Is the concrete property contain a `super' in the body?
-	readable writable attr _need_super: Bool
+	readable writable attr _need_super: Bool = false
 
 	protected init(n: Symbol, bc: MMLocalClass)
  	do

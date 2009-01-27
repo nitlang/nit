@@ -59,7 +59,7 @@ redef class MMLocalClass
 
 	# Is the class computing super.
 	# Used to detect specialization loops.
-	attr _computing_super: Bool 
+	attr _computing_super: Bool = false 
 
 	# Compute super classes of a class
 	meth compute_super_classes

@@ -228,7 +228,7 @@ end
 class FDIStream
 special FDStream
 special IStream
-	redef readable attr _eof: Bool
+	redef readable attr _eof: Bool = false
 	
 	redef meth read_char
 	do

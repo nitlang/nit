@@ -1296,7 +1296,7 @@ class Lexer
 	attr _token: Token
 
 	# Lexer current state
-	attr _state: Int
+	attr _state: Int = 0
 
 	# Name of the stream (as given to tokens)
 	readable attr _filename: String 
@@ -1311,16 +1311,16 @@ class Lexer
 	attr _stream_pos: Int
 
 	# Current line number in the input stream
-	attr _line: Int
+	attr _line: Int = 0
 
 	# Current column in the input stream
-	attr _pos: Int
+	attr _pos: Int = 0
 
 	# Was the last character a cariage-return?
-	attr _cr: Bool
+	attr _cr: Bool = false
 
 	# If the end of stream?
-	attr _eof: Bool
+	attr _eof: Bool = false
 
 	# Current working text read from the input stream
 	attr _text: String

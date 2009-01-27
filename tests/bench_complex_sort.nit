@@ -89,7 +89,7 @@ special AbstractSorter[Elt]
 		_is_val1 = not _is_val1
 	end
 	
-	attr _is_val1: Bool
+	attr _is_val1: Bool = false
 
 	init do end
 end

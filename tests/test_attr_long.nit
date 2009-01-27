@@ -15,8 +15,7 @@
 # limitations under the License.
 
 class A
-
-	attr _a_: Int
+	attr _a_: Int = 0
 
 	meth a: Int
 	do

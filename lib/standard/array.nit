@@ -325,7 +325,7 @@ special IndexedIterator[E]
 		_index = 0
 	end
 
-	redef readable attr _index: Int
+	redef readable attr _index: Int = 0
 	attr _array: AbstractArray[E]
 end
 
@@ -510,7 +510,7 @@ special CoupleMap[K, E]
 	end
 
 	# The last positive result given by a index(1) call
-	attr _last_index: Int
+	attr _last_index: Int = 0
 	
 	# Where is the `key' in `_item'?
 	# return -1 if not found

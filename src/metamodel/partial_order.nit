@@ -226,7 +226,7 @@ class PartialOrderElement[E]
 	end
 	
 	# Cached value of _order.length to validade smallers_cache
-	attr _smallers_last_length: Int
+	attr _smallers_last_length: Int = 0
 
 	# Cached result of smallers
 	attr _smallers_cache: Set[E]
