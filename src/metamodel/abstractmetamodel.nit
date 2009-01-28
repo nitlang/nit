@@ -361,9 +361,6 @@ class MMLocalClass
 	# The module of the local class
 	readable attr _module: MMModule
 
-	# Is the class abstract
-	readable writable attr _abstract: Bool
-
 	# The global class of the local class
 	readable attr _global: MMGlobalClass 
 
