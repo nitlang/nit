@@ -533,6 +533,7 @@ special PClosureDecl
     readable writable attr _n_kwbreak: TKwbreak = null
     readable writable attr _n_id: TId = null
     readable writable attr _n_signature: PSignature = null
+    readable writable attr _n_expr: PExpr = null
 end
 class AType
 special PType

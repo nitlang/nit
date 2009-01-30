@@ -205,11 +205,11 @@ propdefs_tail {-> propdef}
 propdef 
 	= {attr} [doc]:no readable writable redef visibility kwattr attrid typing? {-> New propdef.attr(doc.doc, readable.able, writable.able, redef.kwredef, visibility, kwattr, attrid, typing.type, Null)}
 	| {attr2} [doc]:no readable writable redef visibility kwattr attrid typing? assign [n2]:no expr {-> New propdef.attr(doc.doc, readable.able, writable.able, redef.kwredef, visibility, kwattr, attrid, typing.type, expr)}
-	| {deferred} [doc]:no redef visibility kwmeth methid signature kwis kwabstract {-> New propdef.deferred_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature)}
-	| {intern} [doc]:no redef visibility kwmeth methid signature kwis kwintern {-> New propdef.intern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature)}
-	| {extern} [doc]:no redef visibility kwmeth methid signature kwis kwextern string? {-> New propdef.extern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature, string)}
-	| {meth} [doc]:no redef visibility kwmeth methid signature no kwdo stmtso kwend? {-> New propdef.concrete_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature, stmtso.expr)}
-	| {init} [doc]:no redef visibility kwinit methid? signature no kwdo stmtso kwend? {-> New propdef.concrete_init(doc.doc, redef.kwredef, visibility, kwinit, methid, signature, stmtso.expr)}
+	| {deferred} [doc]:no redef visibility kwmeth methid signature kwis kwabstract {-> New propdef.deferred_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature)}
+	| {intern} [doc]:no redef visibility kwmeth methid signature kwis kwintern {-> New propdef.intern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature)}
+	| {extern} [doc]:no redef visibility kwmeth methid signature kwis kwextern string? {-> New propdef.extern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature.signature, string)}
+	| {meth} [doc]:no redef visibility kwmeth methid signature kwdo stmtso kwend? {-> New propdef.concrete_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature, stmtso.expr)}
+	| {init} [doc]:no redef visibility kwinit methid? signature kwdo stmtso kwend? {-> New propdef.concrete_init(doc.doc, redef.kwredef, visibility, kwinit, methid, signature, stmtso.expr)}
 	| {type} [doc]:no redef visibility kwtype classid typing {-> New propdef.type(doc.doc, redef.kwredef, visibility, kwtype, classid, typing.type)}
 	;
 readable {-> able?}
@@ -227,7 +227,7 @@ tl_propdefs_tail {-> propdef}
 	= tl_propdef n1 {-> tl_propdef.propdef};
 tl_propdef {-> propdef}
 	= {extern} [doc]:no redef visibility kwmeth methid signature kwis kwextern string? {-> New propdef.extern_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature, string)}
-	| {meth} [doc]:no redef visibility kwmeth methid signature no kwdo stmtso {-> New propdef.concrete_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature, stmtso.expr)}
+	| {meth} [doc]:no redef visibility kwmeth methid signature kwdo stmtso {-> New propdef.concrete_meth(doc.doc, redef.kwredef, visibility, kwmeth, methid, signature, stmtso.expr)}
 	;
 
 visibility
@@ -257,7 +257,9 @@ methid
 	;
 
 signature
-	= params? typing? closure_decl* {-> New signature([params.param], typing.type, [closure_decl])};
+	= params? typing? closure_decls {-> New signature([params.param], typing.type, [closure_decls.closure_decl])}
+	| {noclosures} params? typing? no {-> New signature([params.param], typing.type, [])}
+	;
 
 signature_noclosures {-> signature}
 	= params? typing? {-> New signature([params.param], typing.type, [])};
@@ -273,8 +275,12 @@ param
 	| id typing dotdotdot? {-> New param(id, typing.type, dotdotdot)}
 	;
 
+closure_decls {->closure_decl*}
+	= no closure_decl+ {-> [closure_decl]};
 closure_decl
-	= no kwwith kwbreak? [no2]:no id signature_noclosures {-> New closure_decl(kwwith, kwbreak, id, signature_noclosures.signature)};
+	= kwwith kwbreak? [no2]:no id signature_noclosures n {-> New closure_decl(kwwith, kwbreak, id, signature_noclosures.signature, Null)}
+	| {optionnal} kwwith kwbreak? [no2]:no id signature_noclosures kwdo stmtso n {-> New closure_decl(kwwith, kwbreak, id, signature_noclosures.signature, stmtso.expr)}
+	;
 
 /* TYPES *********************************************************************/
 type/*B3*//*B*/ {-> type}
@@ -590,7 +596,7 @@ signature = [params]:param* type? [closure_decls]:closure_decl*;
 param	= id type? dotdotdot? 
 	;
 
-closure_decl = kwwith kwbreak? id signature
+closure_decl = kwwith kwbreak? id signature expr?
 	;
 
 type	= [id]:classid [types]:type*;

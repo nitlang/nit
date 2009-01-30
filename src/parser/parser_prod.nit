@@ -4533,6 +4533,13 @@ redef class AClosureDecl
 	    n.parent = self
         end
     end
+    redef meth n_expr=(n: PExpr)
+    do
+        _n_expr = n
+        if n != null then
+	    n.parent = self
+        end
+    end
 
     private init empty_init do end
 
@@ -4540,7 +4547,8 @@ redef class AClosureDecl
             n_kwwith: TKwwith ,
             n_kwbreak: TKwbreak ,
             n_id: TId ,
-            n_signature: PSignature 
+            n_signature: PSignature ,
+            n_expr: PExpr 
     )
     do
         empty_init
@@ -4559,6 +4567,10 @@ redef class AClosureDecl
         _n_signature = n_signature
 	if n_signature != null then
 		n_signature.parent = self
+	end
+        _n_expr = n_expr
+	if n_expr != null then
+		n_expr.parent = self
 	end
     end
 
@@ -4605,6 +4617,16 @@ redef class AClosureDecl
             end
             return
 	end
+        if _n_expr == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa PExpr
+                _n_expr = new_child
+	    else
+		_n_expr = null
+            end
+            return
+	end
     end
 
     redef meth visit_all(v: Visitor)
@@ -4621,6 +4643,9 @@ redef class AClosureDecl
         if _n_signature != null then
             v.visit(_n_signature)
         end
+        if _n_expr != null then
+            v.visit(_n_expr)
+        end
     end
 
     redef meth visit_all_reverse(v: Visitor)
@@ -4636,6 +4661,9 @@ redef class AClosureDecl
         end
         if _n_signature != null then
             v.visit(_n_signature)
+        end
+        if _n_expr != null then
+            v.visit(_n_expr)
         end
     end
 end
