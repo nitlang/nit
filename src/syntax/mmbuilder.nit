@@ -1185,10 +1185,10 @@ redef class AClosureDecl
 
 		# Add the finalizer to the closure signature
 		var finalize_sig = new MMSignature(new Array[MMType], null, null)
-		var finalizer_clos = new MMClosure(finalize_sig, false)
+		var finalizer_clos = new MMClosure(finalize_sig, false, true)
 		sig.closures.add(finalizer_clos)
 
-		var clos = new MMClosure(sig, n_kwbreak != null)
+		var clos = new MMClosure(sig, n_kwbreak != null, n_expr != null)
 		v.signature_builder = old_signature_builder
 		old_signature_builder.closure_decls.add(self)
 		_variable = new ClosureVariable(n_id.to_symbol, self, clos)

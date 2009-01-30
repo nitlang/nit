@@ -1372,11 +1372,13 @@ redef class ASendExpr
 			cargs.add(v.compile_expr(a))
 		end
 
-		var cd = closure_defs
 		var e: String
-		if cd == null then
+		if prop_signature.closures.is_empty then
 			e = prop.compile_call(v, cargs)
 		else
+			var cd = closure_defs
+			var arity = 0
+			if cd != null then arity = cd.length
 			var closcns = new Array[String]
 			var ve: String = null
 
@@ -1387,10 +1389,13 @@ redef class ASendExpr
 			v.nmc.break_value = ve
 
 			# Compile closure to c function
-			for i in [0..cd.length[ do
+			for i in [0..arity[ do
 				var cn = cd[i].compile_closure(v, prop.closure_cname(i))
 				closcns.add(cn)
 				cargs.add(cn)
+			end
+			for i in [arity..prop_signature.closures.length[ do
+				cargs.add("NULL")
 			end
 
 			v.nmc.break_value = old_bv
@@ -1403,7 +1408,7 @@ redef class ASendExpr
 			end
 
 			# Intercept returns and breaks
-			for i in [0..cd.length[ do
+			for i in [0..arity[ do
 				# A break or a return is intercepted
 				v.add_instr("if ({closcns[i]}->has_broke != NULL) \{")
 				v.indent
@@ -1606,6 +1611,17 @@ end
 redef class AClosureCallExpr
 	redef meth compile_expr(v)
 	do
+		if variable.closure.is_optional then
+			v.add_instr("if({v.cfc.varname(variable)}==NULL) \{")
+			v.indent
+			var n = variable.decl
+			assert n isa AClosureDecl
+			v.compile_stmt(n.n_expr)
+			v.unindent
+			v.add_instr("} else \{")
+			v.indent
+		end
+
 		var cargs = new Array[String]
 		var ivar = "(({variable.ctypename})({v.cfc.varname(variable)}))"
 		cargs.add(ivar)
@@ -1629,6 +1645,11 @@ redef class AClosureCallExpr
 		v.add_instr("goto {v.nmc.return_label};")
 		v.unindent
 		v.add_instr("\}")
+
+		if variable.closure.is_optional then
+			v.unindent
+			v.add_instr("\}")
+		end
 		return va
 	end
 end

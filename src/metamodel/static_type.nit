@@ -232,23 +232,28 @@ class MMClosure
 	# aka is defined with the break keyword thus does not return
 	readable attr _is_break: Bool
 
+	# Is the closure optional?
+	# ie is there a default definition
+	readable attr _is_optional: Bool
+
 	# Adapt the signature to a different receiver
 	meth adaptation_to(r: MMType): MMClosure
 	do
-		return new MMClosure(_signature.adaptation_to(r), _is_break)
+		return new MMClosure(_signature.adaptation_to(r), _is_break, _is_optional)
 	end
 
-	init(s: MMSignature, is_break: Bool)
+	init(s: MMSignature, is_break: Bool, is_optional: Bool)
 	do
 		_signature = s
 		_is_break = is_break
+		_is_optional = is_optional
 	end
 
 	meth not_for_self: MMClosure
 	do
 		var sig = _signature.not_for_self
 		if sig != _signature then
-			return new MMClosure(sig, _is_break)
+			return new MMClosure(sig, _is_break, _is_optional)
 		else
 			return self
 		end

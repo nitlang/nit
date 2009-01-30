@@ -939,17 +939,21 @@ special PExpr
 	do
 		var t = psig.return_type
 		var cs = psig.closures # Declared closures
+		var min_arity = 0
+		for c in cs do
+			if not c.is_optional then min_arity += 1
+		end
 		if cd != null then
 			if cs.length == 0 then
 				v.error(self, "Error: {name} does not require blocs.")
-			else if cs.length != cd.length then
+			else if cd.length > cs.length or cd.length < min_arity then
 				v.error(self, "Error: {name} requires {cs.length} blocs, {cd.length} found.")
 			else
 				var old_bbst = v.closure_break_stype
 				var old_bl = v.break_list
 				v.closure_break_stype = t
 				v.break_list = new Array[ABreakExpr]
-				for i in [0..cs.length[ do
+				for i in [0..cd.length[ do
 					cd[i].accept_typing2(v, cs[i])
 				end
 				for n in v.break_list do
@@ -965,7 +969,7 @@ special PExpr
 				v.closure_break_stype = old_bbst
 				v.break_list = old_bl
 			end
-		else if cs.length != 0 then
+		else if min_arity != 0 then
 			v.error(self, "Error: {name} requires {cs.length} blocs.")
 		end
 		return t
