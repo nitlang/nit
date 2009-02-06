@@ -1,4 +1,6 @@
 *.bak
+*~
+
 .nit_compile*
 *.orig
 nitc
@@ -7,6 +9,10 @@ doc/stdlib
 
 src/nitc
 src/nitc_?
+src/parser/nit.sablecc3
+src/parser/nit.sablecc3.dump
+src/parser/parser_abs.patch
+src/parser/parser_nodes.nit.rej
 
 c_src/*.o
 c_src/*.cksum
@@ -15,4 +21,5 @@ tests/*.res
 tests/*.log
 tests/*.bin
 tests/*.err
+tests/*.write
 tests/alt
