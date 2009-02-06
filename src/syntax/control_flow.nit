@@ -89,7 +89,7 @@ private class ControlFlowContext
 	readable writable attr _already_unreash: Bool = false
 
 	# Current controlable block (for or while)
-	readable writable attr _base_block: AControlableBlock
+	readable writable attr _base_block: PNode = null
 
 	# Set of variable that are set (assigned)
 	readable attr _set_variables: HashSet[Variable] = new HashSet[Variable]
@@ -176,7 +176,7 @@ end
 
 class ABlockControler
 special PExpr
-	readable attr _block: AControlableBlock
+	readable attr _block: PNode
 end
 
 redef class ABreakExpr
