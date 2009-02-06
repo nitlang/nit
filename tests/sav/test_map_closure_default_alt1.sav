@@ -1,0 +1,17 @@
+B:
+true
+blue
+R:
+false
+red
+true
+red
+N:
+false
+black
+false
+Aborted in test_map_closure_default_alt1::Map::get (alt/test_map_closure_default_alt1.nit:19)
+,---- Stack trace -- - -  -
+| test_map_closure_default_alt1::Map::get (alt/test_map_closure_default_alt1.nit:18)
+| test_map_closure_default_alt1::Sys::(kernel::Sys::main) (alt/test_map_closure_default_alt1.nit:28)
+`------------------- - -  -
