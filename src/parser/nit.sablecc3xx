@@ -299,8 +299,8 @@ typing {-> type}
 stmtso/*B2*/ {-> expr?}
 	= {oneline} stmt/*B2*/ {-> stmt/*B2*/.expr}
 	| {block} n stmts [n2]:n kwend {-> stmts.expr}
-	| {emptyblock} n kwend {-> Null}
-	| {emptyoneline} kwend {-> Null}
+	| {emptyblock} n kwend {-> New expr.block([])}
+	| {emptyoneline} kwend {-> New expr.block([])}
 	;
 stmts {-> expr}
 	= stmt stmts_tail* {-> New expr.block([stmt.expr, stmts_tail.expr])};

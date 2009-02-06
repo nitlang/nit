@@ -10559,7 +10559,11 @@ special ReduceAction
 					var node_list: Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					node_list = null
+					var listnode2 = new Array[Object]
+					var pexprnode1 = new ABlockExpr.init_ablockexpr(
+						listnode2
+					)
+					node_list = pexprnode1
 					p.push(p.go_to(28), node_list)
 	end
 init do end
@@ -10570,7 +10574,11 @@ special ReduceAction
 	do
 					var node_list: Object = null
 					var nodearraylist1 = p.pop
-					node_list = null
+					var listnode2 = new Array[Object]
+					var pexprnode1 = new ABlockExpr.init_ablockexpr(
+						listnode2
+					)
+					node_list = pexprnode1
 					p.push(p.go_to(28), node_list)
 	end
 init do end
@@ -15570,7 +15578,11 @@ special ReduceAction
 					var node_list: Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					node_list = null
+					var listnode2 = new Array[Object]
+					var pexprnode1 = new ABlockExpr.init_ablockexpr(
+						listnode2
+					)
+					node_list = pexprnode1
 					p.push(p.go_to(84), node_list)
 	end
 init do end
@@ -15581,7 +15593,11 @@ special ReduceAction
 	do
 					var node_list: Object = null
 					var nodearraylist1 = p.pop
-					node_list = null
+					var listnode2 = new Array[Object]
+					var pexprnode1 = new ABlockExpr.init_ablockexpr(
+						listnode2
+					)
+					node_list = pexprnode1
 					p.push(p.go_to(84), node_list)
 	end
 init do end
