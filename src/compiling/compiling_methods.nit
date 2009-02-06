@@ -530,44 +530,54 @@ redef class AMethPropdef
 	meth do_compile_inside(v: CompilerVisitor, method: MMSrcMethod, params: Array[String]): String is abstract
 end
 
+redef class PSignature
+	meth compile_parameters(v: CompilerVisitor, orig_sig: MMSignature, params: Array[String]) is abstract
+end
+
+redef class ASignature
+	redef meth compile_parameters(v: CompilerVisitor, orig_sig: MMSignature, params: Array[String])
+	do
+		for ap in n_params do
+			var cname = v.cfc.register_variable(ap.variable)
+			v.nmc.method_params.add(ap.variable)
+			var orig_type = orig_sig[ap.position]
+			if not orig_type < ap.variable.stype then
+				# FIXME: do not test always
+				# FIXME: handle formal types
+				v.add_instr("/* check if p<{ap.variable.stype} with p:{orig_type} */")
+				ap.variable.stype.compile_type_check(v, params[ap.position], ap)
+			end
+			v.add_assignment(cname, params[ap.position])
+		end
+		for i in [0..n_closure_decls.length[ do
+			var wd = n_closure_decls[i]
+			var cname = v.cfc.register_closurevariable(wd.variable)
+			wd.variable.ctypename = "struct {v.nmc.method.closure_cname(i)} *"
+			v.add_assignment(cname, "{params[orig_sig.arity + i]}")
+		end
+	end
+end
+
 redef class AConcreteMethPropdef
 	redef meth do_compile_inside(v, method, params)
 	do
 		var old_nmc = v.nmc
 		v.nmc = new NitMethodContext(method)
 
-		var cname = v.cfc.register_variable(self_var)
-		v.add_assignment(cname, params[0])
+		var selfcname = v.cfc.register_variable(self_var)
+		v.add_assignment(selfcname, params[0])
+		params.shift
 		v.nmc.method_params = [self_var]
 
-		var orig_meth: MMLocalProperty = method.global.intro
-		var orig_sig = orig_meth.signature_for(method.signature.recv)
 		if n_signature != null then
-			var sig = n_signature
-			assert sig isa ASignature
-			for ap in sig.n_params do
-				var cname = v.cfc.register_variable(ap.variable)
-				v.nmc.method_params.add(ap.variable)
-				var orig_type = orig_sig[ap.position]
-				if not orig_type < ap.variable.stype then
-					# FIXME: do not test always
-					# FIXME: handle formal types
-					v.add_instr("/* check if p<{ap.variable.stype} with p:{orig_type} */")
-					ap.variable.stype.compile_type_check(v, params[ap.position + 1], ap)
-				end
-				v.add_assignment(cname, params[ap.position + 1])
-			end
-			for i in [0..sig.n_closure_decls.length[ do
-				var wd = sig.n_closure_decls[i]
-				var cname = v.cfc.register_closurevariable(wd.variable)
-				wd.variable.ctypename = "struct {method.closure_cname(i)} *"
-				v.add_assignment(cname, "{params[orig_sig.arity + i + 1]}")
-			end
+			var orig_meth: MMLocalProperty = method.global.intro
+			var orig_sig = orig_meth.signature_for(method.signature.recv)
+			n_signature.compile_parameters(v, orig_sig, params)
 		end
 
 		var itpos: String = null
 		if self isa AConcreteInitPropdef then
-			itpos = "VAL2OBJ({params[0]})->vft[{method.local_class.global.init_table_pos_id}].i"
+			itpos = "VAL2OBJ({selfcname})->vft[{method.local_class.global.init_table_pos_id}].i"
 			# v.add_instr("printf(\"{method.full_name}: inittable[%d] = %d\\n\", {itpos}, init_table[{itpos}]);")
 			v.add_instr("if (init_table[{itpos}]) return;")
 		end
@@ -1608,30 +1618,62 @@ redef class AClosureDef
 	end
 end
 
+redef class PClosureDecl
+	meth do_compile_inside(v: CompilerVisitor, params: Array[String]): String is abstract
+end
+redef class AClosureDecl
+	redef meth do_compile_inside(v, params)
+	do
+		if n_signature != null then n_signature.compile_parameters(v, variable.closure.signature, params)
+
+		var old_cv = v.nmc.continue_value
+		var old_cl = v.nmc.continue_label
+		var old_bl = v.nmc.break_label
+
+		v.nmc.continue_value = v.cfc.get_var
+		v.nmc.continue_label = "continue_label{v.new_number}"
+		v.nmc.break_label = v.nmc.return_label
+
+		if n_expr != null then v.compile_stmt(n_expr)
+
+		v.add_instr("{v.nmc.continue_label}: while(false);")
+
+		var ret: String = null
+		if variable.closure.signature.return_type != null then ret = v.nmc.continue_value
+
+		v.nmc.continue_value = old_cv
+		v.nmc.continue_label = old_cl
+		v.nmc.break_label = old_bl
+
+		return ret
+	end
+end
+
 redef class AClosureCallExpr
 	redef meth compile_expr(v)
 	do
+		var cargs = new Array[String]
+		for a in arguments do cargs.add(v.compile_expr(a))
+		var va: String = null
+		if variable.closure.signature.return_type != null then va = v.cfc.get_var
+
 		if variable.closure.is_optional then
 			v.add_instr("if({v.cfc.varname(variable)}==NULL) \{")
 			v.indent
 			var n = variable.decl
 			assert n isa AClosureDecl
-			v.compile_stmt(n.n_expr)
+			var s = n.do_compile_inside(v, cargs)
+			if s != null then v.add_assignment(va, s)
 			v.unindent
 			v.add_instr("} else \{")
 			v.indent
 		end
 
-		var cargs = new Array[String]
 		var ivar = "(({variable.ctypename})({v.cfc.varname(variable)}))"
-		cargs.add(ivar)
-		for a in arguments do
-			cargs.add(v.compile_expr(a))
-		end
-		var s = "({ivar}->fun({cargs.join(", ")})) /* Invoke closure {variable} */"
-		var va: String = null
-		if variable.closure.signature.return_type != null then
-			va = v.cfc.get_var
+		var cargs2 = [ivar]
+		cargs2.append(cargs)
+		var s = "({ivar}->fun({cargs2.join(", ")})) /* Invoke closure {variable} */"
+		if va != null then
 			v.add_assignment(va, s)
 		else
 			v.add_instr("{s};")
