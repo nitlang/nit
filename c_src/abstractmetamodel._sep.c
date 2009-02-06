@@ -7,9 +7,9 @@ void abstractmetamodel___MMContext___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstractmetamodel;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMContext].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMContext].i]) return;
   return_label0: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMContext].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMContext].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -237,7 +237,7 @@ void abstractmetamodel___MMDirectory___init(val_t  self, val_t  param0, val_t  p
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMDirectory].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMDirectory].i]) return;
   variable[5] = variable[0];
   ATTR_abstractmetamodel___MMDirectory____name(variable[5]) /*MMDirectory::_name*/ =  variable[1] /*name*/;
   variable[5] = variable[0];
@@ -245,7 +245,7 @@ void abstractmetamodel___MMDirectory___init(val_t  self, val_t  param0, val_t  p
   variable[5] = variable[0];
   ATTR_abstractmetamodel___MMDirectory____parent(variable[5]) /*MMDirectory::_parent*/ =  variable[3] /*parent*/;
   return_label7: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMDirectory].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMDirectory].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -389,7 +389,7 @@ void abstractmetamodel___MMModule___init(val_t  self, val_t  param0, val_t  para
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMModule].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMModule].i]) return;
   variable[5] = variable[0];
   ATTR_abstractmetamodel___MMModule____name(variable[5]) /*MMModule::_name*/ =  variable[1] /*name*/;
   variable[5] = variable[0];
@@ -406,7 +406,7 @@ void abstractmetamodel___MMModule___init(val_t  self, val_t  param0, val_t  para
     ATTR_abstractmetamodel___MMModule____full_name(variable[5]) /*MMModule::_full_name*/ = variable[6];
   }
   return_label10: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMModule].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMModule].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -716,14 +716,14 @@ void abstractmetamodel___MMGlobalClass___init(val_t  self, val_t  param0, int* i
   trace.file = LOCATE_abstractmetamodel;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMGlobalClass].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMGlobalClass].i]) return;
   variable[3] = variable[0];
   ATTR_abstractmetamodel___MMGlobalClass____intro(variable[3]) /*MMGlobalClass::_intro*/ =  variable[1] /*c*/;
   variable[3] = ((abstractmetamodel___MMLocalClass___context_t)CALL( variable[1] /*c*/,COLOR_abstractmetamodel___MMLocalClass___context))( variable[1] /*c*/) /*MMLocalClass::context*/;
   variable[4] = variable[0];
   ((abstractmetamodel___MMContext___add_global_class_t)CALL(variable[3],COLOR_abstractmetamodel___MMContext___add_global_class))(variable[3], variable[4]) /*MMContext::add_global_class*/;
   return_label21: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMGlobalClass].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMGlobalClass].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -920,7 +920,7 @@ void abstractmetamodel___MMGlobalClass___mixin_of__eq(val_t  self, val_t  param0
   return;
 }
 val_t abstractmetamodel___MMLocalClass___to_s(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 543, LOCATE_abstractmetamodel___MMLocalClass___to_s};
+  struct trace_t trace = {NULL, NULL, 540, LOCATE_abstractmetamodel___MMLocalClass___to_s};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -962,27 +962,8 @@ val_t abstractmetamodel___MMLocalClass___module(val_t  self) {
   tracehead = trace.prev;
   return ATTR_abstractmetamodel___MMLocalClass____module( self) /*MMLocalClass::_module*/;
 }
-val_t abstractmetamodel___MMLocalClass___abstract(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 364, LOCATE_abstractmetamodel___MMLocalClass___abstract};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_abstractmetamodel;
-  tracehead = trace.prev;
-  return ATTR_abstractmetamodel___MMLocalClass____abstract( self) /*MMLocalClass::_abstract*/;
-}
-void abstractmetamodel___MMLocalClass___abstract__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 364, LOCATE_abstractmetamodel___MMLocalClass___abstract__eq};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_abstractmetamodel;
-  ATTR_abstractmetamodel___MMLocalClass____abstract( self) /*MMLocalClass::_abstract*/ =  param0;
-  tracehead = trace.prev;
-  return;
-}
 val_t abstractmetamodel___MMLocalClass___global(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 367, LOCATE_abstractmetamodel___MMLocalClass___global};
+  struct trace_t trace = {NULL, NULL, 364, LOCATE_abstractmetamodel___MMLocalClass___global};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -991,7 +972,7 @@ val_t abstractmetamodel___MMLocalClass___global(val_t  self) {
   return ATTR_abstractmetamodel___MMLocalClass____global( self) /*MMLocalClass::_global*/;
 }
 val_t abstractmetamodel___MMLocalClass___crhe(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 370, LOCATE_abstractmetamodel___MMLocalClass___crhe};
+  struct trace_t trace = {NULL, NULL, 367, LOCATE_abstractmetamodel___MMLocalClass___crhe};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1000,7 +981,7 @@ val_t abstractmetamodel___MMLocalClass___crhe(val_t  self) {
   return ATTR_abstractmetamodel___MMLocalClass____crhe( self) /*MMLocalClass::_crhe*/;
 }
 val_t abstractmetamodel___MMLocalClass___cshe(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 373, LOCATE_abstractmetamodel___MMLocalClass___cshe};
+  struct trace_t trace = {NULL, NULL, 370, LOCATE_abstractmetamodel___MMLocalClass___cshe};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1009,7 +990,7 @@ val_t abstractmetamodel___MMLocalClass___cshe(val_t  self) {
   return ATTR_abstractmetamodel___MMLocalClass____cshe( self) /*MMLocalClass::_cshe*/;
 }
 val_t abstractmetamodel___MMLocalClass___che(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 376, LOCATE_abstractmetamodel___MMLocalClass___che};
+  struct trace_t trace = {NULL, NULL, 373, LOCATE_abstractmetamodel___MMLocalClass___che};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1018,7 +999,7 @@ val_t abstractmetamodel___MMLocalClass___che(val_t  self) {
   return ATTR_abstractmetamodel___MMLocalClass____che( self) /*MMLocalClass::_che*/;
 }
 val_t abstractmetamodel___MMLocalClass___local_property_by_global(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 379, LOCATE_abstractmetamodel___MMLocalClass___local_property_by_global};
+  struct trace_t trace = {NULL, NULL, 376, LOCATE_abstractmetamodel___MMLocalClass___local_property_by_global};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1027,7 +1008,7 @@ val_t abstractmetamodel___MMLocalClass___local_property_by_global(val_t  self) {
   return ATTR_abstractmetamodel___MMLocalClass____local_property_by_global( self) /*MMLocalClass::_local_property_by_global*/;
 }
 val_t abstractmetamodel___MMLocalClass___global_properties(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 382, LOCATE_abstractmetamodel___MMLocalClass___global_properties};
+  struct trace_t trace = {NULL, NULL, 379, LOCATE_abstractmetamodel___MMLocalClass___global_properties};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1036,7 +1017,7 @@ val_t abstractmetamodel___MMLocalClass___global_properties(val_t  self) {
   return ATTR_abstractmetamodel___MMLocalClass____global_properties( self) /*MMLocalClass::_global_properties*/;
 }
 val_t abstractmetamodel___MMLocalClass___properties_by_name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 385, LOCATE_abstractmetamodel___MMLocalClass___properties_by_name};
+  struct trace_t trace = {NULL, NULL, 382, LOCATE_abstractmetamodel___MMLocalClass___properties_by_name};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1045,7 +1026,7 @@ val_t abstractmetamodel___MMLocalClass___properties_by_name(val_t  self) {
   return ATTR_abstractmetamodel___MMLocalClass____properties_by_name( self) /*MMLocalClass::_properties_by_name*/;
 }
 void abstractmetamodel___MMLocalClass___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 388, LOCATE_abstractmetamodel___MMLocalClass___init};
+  struct trace_t trace = {NULL, NULL, 385, LOCATE_abstractmetamodel___MMLocalClass___init};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1053,18 +1034,18 @@ void abstractmetamodel___MMLocalClass___init(val_t  self, val_t  param0, val_t  
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMLocalClass].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMLocalClass].i]) return;
   variable[4] = variable[0];
   ATTR_abstractmetamodel___MMLocalClass____name(variable[4]) /*MMLocalClass::_name*/ =  variable[1] /*name*/;
   variable[4] = variable[0];
   ATTR_abstractmetamodel___MMLocalClass____arity(variable[4]) /*MMLocalClass::_arity*/ =  variable[2] /*arity*/;
   return_label28: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMLocalClass].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMLocalClass].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t abstractmetamodel___MMLocalClass___for_module(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 395, LOCATE_abstractmetamodel___MMLocalClass___for_module};
+  struct trace_t trace = {NULL, NULL, 392, LOCATE_abstractmetamodel___MMLocalClass___for_module};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1081,7 +1062,7 @@ val_t abstractmetamodel___MMLocalClass___for_module(val_t  self, val_t  param0) 
   return variable[2];
 }
 void abstractmetamodel___MMLocalClass___new_global(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 401, LOCATE_abstractmetamodel___MMLocalClass___new_global};
+  struct trace_t trace = {NULL, NULL, 398, LOCATE_abstractmetamodel___MMLocalClass___new_global};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1108,7 +1089,7 @@ void abstractmetamodel___MMLocalClass___new_global(val_t  self) {
   return;
 }
 void abstractmetamodel___MMLocalClass___set_global(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 410, LOCATE_abstractmetamodel___MMLocalClass___set_global};
+  struct trace_t trace = {NULL, NULL, 407, LOCATE_abstractmetamodel___MMLocalClass___set_global};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1116,7 +1097,7 @@ void abstractmetamodel___MMLocalClass___set_global(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*g*/ ==  NIT_NULL /*null*/) || (( variable[1] /*g*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*g*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*g*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*g*/,COLOR_kernel___Object_____eqeq))( variable[1] /*g*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalClass___set_global, LOCATE_abstractmetamodel, 415); nit_exit(1);}
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalClass___set_global, LOCATE_abstractmetamodel, 412); nit_exit(1);}
   variable[3] = variable[0];
   ATTR_abstractmetamodel___MMLocalClass____global(variable[3]) /*MMLocalClass::_global*/ =  variable[1] /*g*/;
   variable[3] = variable[0];
@@ -1132,7 +1113,7 @@ void abstractmetamodel___MMLocalClass___set_global(val_t  self, val_t  param0) {
   return;
 }
 val_t abstractmetamodel___MMLocalClass___has_global_property_by_name(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 421, LOCATE_abstractmetamodel___MMLocalClass___has_global_property_by_name};
+  struct trace_t trace = {NULL, NULL, 418, LOCATE_abstractmetamodel___MMLocalClass___has_global_property_by_name};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1151,7 +1132,7 @@ val_t abstractmetamodel___MMLocalClass___has_global_property_by_name(val_t  self
   return variable[2];
 }
 val_t abstractmetamodel___MMLocalClass___get_property_by_name(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 429, LOCATE_abstractmetamodel___MMLocalClass___get_property_by_name};
+  struct trace_t trace = {NULL, NULL, 426, LOCATE_abstractmetamodel___MMLocalClass___get_property_by_name};
   val_t variable[6];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1181,7 +1162,7 @@ val_t abstractmetamodel___MMLocalClass___get_property_by_name(val_t  self, val_t
   return variable[2];
 }
 val_t abstractmetamodel___MMLocalClass___attribute(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 440, LOCATE_abstractmetamodel___MMLocalClass___attribute};
+  struct trace_t trace = {NULL, NULL, 437, LOCATE_abstractmetamodel___MMLocalClass___attribute};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1197,7 +1178,7 @@ val_t abstractmetamodel___MMLocalClass___attribute(val_t  self, val_t  param0) {
   return variable[2];
 }
 val_t abstractmetamodel___MMLocalClass___method(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 447, LOCATE_abstractmetamodel___MMLocalClass___method};
+  struct trace_t trace = {NULL, NULL, 444, LOCATE_abstractmetamodel___MMLocalClass___method};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1207,7 +1188,7 @@ val_t abstractmetamodel___MMLocalClass___method(val_t  self, val_t  param0) {
   variable[3] = variable[0];
   variable[3] = ATTR_abstractmetamodel___MMLocalClass____properties_by_name(variable[3]) /*MMLocalClass::_properties_by_name*/;
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalClass___method, LOCATE_abstractmetamodel, 451); nit_exit(1);}
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalClass___method, LOCATE_abstractmetamodel, 448); nit_exit(1);}
   variable[4] = variable[0];
   variable[4] = ATTR_abstractmetamodel___MMLocalClass____properties_by_name(variable[4]) /*MMLocalClass::_properties_by_name*/;
   variable[4] = ((abstract_collection___Map_____bra_t)CALL(variable[4],COLOR_abstract_collection___Map_____bra))(variable[4],  variable[1] /*na*/) /*Map::[]*/;
@@ -1225,7 +1206,7 @@ val_t abstractmetamodel___MMLocalClass___method(val_t  self, val_t  param0) {
   return variable[2];
 }
 val_t abstractmetamodel___MMLocalClass___select_method(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 460, LOCATE_abstractmetamodel___MMLocalClass___select_method};
+  struct trace_t trace = {NULL, NULL, 457, LOCATE_abstractmetamodel___MMLocalClass___select_method};
   val_t variable[6];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1233,7 +1214,7 @@ val_t abstractmetamodel___MMLocalClass___select_method(val_t  self, val_t  param
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*name*/ ==  NIT_NULL /*null*/) || (( variable[1] /*name*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*name*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*name*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*name*/,COLOR_kernel___Object_____eqeq))( variable[1] /*name*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalClass___select_method, LOCATE_abstractmetamodel, 464); nit_exit(1);}
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalClass___select_method, LOCATE_abstractmetamodel, 461); nit_exit(1);}
   variable[4] = variable[0];
   variable[4] = ((abstractmetamodel___MMLocalClass___method_t)CALL(variable[4],COLOR_abstractmetamodel___MMLocalClass___method))(variable[4],  variable[1] /*name*/) /*MMLocalClass::method*/;
   variable[3] = variable[4];
@@ -1246,7 +1227,7 @@ val_t abstractmetamodel___MMLocalClass___select_method(val_t  self, val_t  param
   variable[5] = ((abstractmetamodel___MMLocalClass_____bra_t)CALL(variable[5],COLOR_abstractmetamodel___MMLocalClass_____bra))(variable[5],  variable[3] /*gp*/) /*MMLocalClass::[]*/;
   variable[4] = variable[5];
   variable[5] = TAG_Bool(( variable[4] /*res*/==NIT_NULL) || VAL_ISA( variable[4] /*res*/, COLOR_MMMethod, ID_MMMethod)) /*cast MMMethod*/;
-  if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalClass___select_method, LOCATE_abstractmetamodel, 468); nit_exit(1);}
+  if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalClass___select_method, LOCATE_abstractmetamodel, 465); nit_exit(1);}
   variable[2] =  variable[4] /*res*/;
   goto return_label36;
   return_label36: while(false);
@@ -1254,7 +1235,7 @@ val_t abstractmetamodel___MMLocalClass___select_method(val_t  self, val_t  param
   return variable[2];
 }
 val_t abstractmetamodel___MMLocalClass___select_attribute(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 472, LOCATE_abstractmetamodel___MMLocalClass___select_attribute};
+  struct trace_t trace = {NULL, NULL, 469, LOCATE_abstractmetamodel___MMLocalClass___select_attribute};
   val_t variable[6];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1262,7 +1243,7 @@ val_t abstractmetamodel___MMLocalClass___select_attribute(val_t  self, val_t  pa
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*name*/ ==  NIT_NULL /*null*/) || (( variable[1] /*name*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*name*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*name*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*name*/,COLOR_kernel___Object_____eqeq))( variable[1] /*name*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalClass___select_attribute, LOCATE_abstractmetamodel, 476); nit_exit(1);}
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalClass___select_attribute, LOCATE_abstractmetamodel, 473); nit_exit(1);}
   variable[4] = variable[0];
   variable[4] = ((abstractmetamodel___MMLocalClass___attribute_t)CALL(variable[4],COLOR_abstractmetamodel___MMLocalClass___attribute))(variable[4],  variable[1] /*name*/) /*MMLocalClass::attribute*/;
   variable[3] = variable[4];
@@ -1275,7 +1256,7 @@ val_t abstractmetamodel___MMLocalClass___select_attribute(val_t  self, val_t  pa
   variable[5] = ((abstractmetamodel___MMLocalClass_____bra_t)CALL(variable[5],COLOR_abstractmetamodel___MMLocalClass_____bra))(variable[5],  variable[3] /*gp*/) /*MMLocalClass::[]*/;
   variable[4] = variable[5];
   variable[5] = TAG_Bool(( variable[4] /*res*/==NIT_NULL) || VAL_ISA( variable[4] /*res*/, COLOR_MMAttribute, ID_MMAttribute)) /*cast MMAttribute*/;
-  if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalClass___select_attribute, LOCATE_abstractmetamodel, 480); nit_exit(1);}
+  if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalClass___select_attribute, LOCATE_abstractmetamodel, 477); nit_exit(1);}
   variable[2] =  variable[4] /*res*/;
   goto return_label37;
   return_label37: while(false);
@@ -1283,7 +1264,7 @@ val_t abstractmetamodel___MMLocalClass___select_attribute(val_t  self, val_t  pa
   return variable[2];
 }
 val_t abstractmetamodel___MMLocalClass___super_methods_named(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 484, LOCATE_abstractmetamodel___MMLocalClass___super_methods_named};
+  struct trace_t trace = {NULL, NULL, 481, LOCATE_abstractmetamodel___MMLocalClass___super_methods_named};
   val_t variable[10];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1340,7 +1321,7 @@ val_t abstractmetamodel___MMLocalClass___super_methods_named(val_t  self, val_t 
   return variable[2];
 }
 void abstractmetamodel___MMLocalClass___register_local_property(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 504, LOCATE_abstractmetamodel___MMLocalClass___register_local_property};
+  struct trace_t trace = {NULL, NULL, 501, LOCATE_abstractmetamodel___MMLocalClass___register_local_property};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1349,7 +1330,7 @@ void abstractmetamodel___MMLocalClass___register_local_property(val_t  self, val
   variable[1] =  param0;
   variable[3] = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable[1] /*p*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable[1] /*p*/) /*MMLocalProperty::global*/;
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalClass___register_local_property, LOCATE_abstractmetamodel, 507); nit_exit(1);}
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalClass___register_local_property, LOCATE_abstractmetamodel, 504); nit_exit(1);}
   variable[3] = variable[0];
   variable[3] = ATTR_abstractmetamodel___MMLocalClass____local_property_by_global(variable[3]) /*MMLocalClass::_local_property_by_global*/;
   variable[4] = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable[1] /*p*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable[1] /*p*/) /*MMLocalProperty::global*/;
@@ -1365,7 +1346,7 @@ void abstractmetamodel___MMLocalClass___register_local_property(val_t  self, val
   return;
 }
 void abstractmetamodel___MMLocalClass___register_global_property(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 514, LOCATE_abstractmetamodel___MMLocalClass___register_global_property};
+  struct trace_t trace = {NULL, NULL, 511, LOCATE_abstractmetamodel___MMLocalClass___register_global_property};
   val_t variable[8];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1403,7 +1384,7 @@ void abstractmetamodel___MMLocalClass___register_global_property(val_t  self, va
   return;
 }
 val_t abstractmetamodel___MMLocalClass_____bra(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 529, LOCATE_abstractmetamodel___MMLocalClass_____bra};
+  struct trace_t trace = {NULL, NULL, 526, LOCATE_abstractmetamodel___MMLocalClass_____bra};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1413,9 +1394,9 @@ val_t abstractmetamodel___MMLocalClass_____bra(val_t  self, val_t  param0) {
   variable[3] = variable[0];
   variable[3] = ATTR_abstractmetamodel___MMLocalClass____local_property_by_global(variable[3]) /*MMLocalClass::_local_property_by_global*/;
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalClass_____bra, LOCATE_abstractmetamodel, 532); nit_exit(1);}
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalClass_____bra, LOCATE_abstractmetamodel, 529); nit_exit(1);}
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*glob*/ ==  NIT_NULL /*null*/) || (( variable[1] /*glob*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*glob*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*glob*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*glob*/,COLOR_kernel___Object_____eqeq))( variable[1] /*glob*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalClass_____bra, LOCATE_abstractmetamodel, 533); nit_exit(1);}
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalClass_____bra, LOCATE_abstractmetamodel, 530); nit_exit(1);}
   variable[3] = variable[0];
   variable[3] = ATTR_abstractmetamodel___MMLocalClass____local_property_by_global(variable[3]) /*MMLocalClass::_local_property_by_global*/;
   variable[3] = ((abstract_collection___Map___has_key_t)CALL(variable[3],COLOR_abstract_collection___Map___has_key))(variable[3],  variable[1] /*glob*/) /*Map::has_key*/;
@@ -1433,7 +1414,7 @@ val_t abstractmetamodel___MMLocalClass_____bra(val_t  self, val_t  param0) {
   return variable[2];
 }
 val_t abstractmetamodel___MMLocalClass___context(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 540, LOCATE_abstractmetamodel___MMLocalClass___context};
+  struct trace_t trace = {NULL, NULL, 537, LOCATE_abstractmetamodel___MMLocalClass___context};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1449,7 +1430,7 @@ val_t abstractmetamodel___MMLocalClass___context(val_t  self) {
   return variable[1];
 }
 val_t abstractmetamodel___MMGlobalProperty___to_s(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 576, LOCATE_abstractmetamodel___MMGlobalProperty___to_s};
+  struct trace_t trace = {NULL, NULL, 573, LOCATE_abstractmetamodel___MMGlobalProperty___to_s};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1465,7 +1446,7 @@ val_t abstractmetamodel___MMGlobalProperty___to_s(val_t  self) {
   return variable[1];
 }
 val_t abstractmetamodel___MMGlobalProperty___intro(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 553, LOCATE_abstractmetamodel___MMGlobalProperty___intro};
+  struct trace_t trace = {NULL, NULL, 550, LOCATE_abstractmetamodel___MMGlobalProperty___intro};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1474,7 +1455,7 @@ val_t abstractmetamodel___MMGlobalProperty___intro(val_t  self) {
   return ATTR_abstractmetamodel___MMGlobalProperty____intro( self) /*MMGlobalProperty::_intro*/;
 }
 val_t abstractmetamodel___MMGlobalProperty___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 556, LOCATE_abstractmetamodel___MMGlobalProperty___local_class};
+  struct trace_t trace = {NULL, NULL, 553, LOCATE_abstractmetamodel___MMGlobalProperty___local_class};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1490,7 +1471,7 @@ val_t abstractmetamodel___MMGlobalProperty___local_class(val_t  self) {
   return variable[1];
 }
 val_t abstractmetamodel___MMGlobalProperty___property_hierarchy(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 562, LOCATE_abstractmetamodel___MMGlobalProperty___property_hierarchy};
+  struct trace_t trace = {NULL, NULL, 559, LOCATE_abstractmetamodel___MMGlobalProperty___property_hierarchy};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1499,16 +1480,16 @@ val_t abstractmetamodel___MMGlobalProperty___property_hierarchy(val_t  self) {
   return ATTR_abstractmetamodel___MMGlobalProperty____property_hierarchy( self) /*MMGlobalProperty::_property_hierarchy*/;
 }
 void abstractmetamodel___MMGlobalProperty___init(val_t  self, val_t  param0, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 565, LOCATE_abstractmetamodel___MMGlobalProperty___init};
+  struct trace_t trace = {NULL, NULL, 562, LOCATE_abstractmetamodel___MMGlobalProperty___init};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstractmetamodel;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMGlobalProperty].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMGlobalProperty].i]) return;
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*p*/ ==  NIT_NULL /*null*/) || (( variable[1] /*p*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*p*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*p*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*p*/,COLOR_kernel___Object_____eqeq))( variable[1] /*p*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMGlobalProperty___init, LOCATE_abstractmetamodel, 568); nit_exit(1);}
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMGlobalProperty___init, LOCATE_abstractmetamodel, 565); nit_exit(1);}
   variable[3] = variable[0];
   variable[4] = NEW_PartialOrder_partial_order___PartialOrder___init(); /*new PartialOrder[MMLocalProperty]*/
   ATTR_abstractmetamodel___MMGlobalProperty____property_hierarchy(variable[3]) /*MMGlobalProperty::_property_hierarchy*/ = variable[4];
@@ -1518,12 +1499,12 @@ void abstractmetamodel___MMGlobalProperty___init(val_t  self, val_t  param0, int
   variable[4] = NEW_Array_array___Array___init(); /*new Array[MMLocalProperty]*/
   ((abstractmetamodel___MMGlobalProperty___add_local_property_t)CALL(variable[3],COLOR_abstractmetamodel___MMGlobalProperty___add_local_property))(variable[3],  variable[1] /*p*/, variable[4]) /*MMGlobalProperty::add_local_property*/;
   return_label47: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMGlobalProperty].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMGlobalProperty].i] = 1;
   tracehead = trace.prev;
   return;
 }
 void abstractmetamodel___MMGlobalProperty___add_local_property(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 578, LOCATE_abstractmetamodel___MMGlobalProperty___add_local_property};
+  struct trace_t trace = {NULL, NULL, 575, LOCATE_abstractmetamodel___MMGlobalProperty___add_local_property};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1532,9 +1513,9 @@ void abstractmetamodel___MMGlobalProperty___add_local_property(val_t  self, val_
   variable[1] =  param0;
   variable[2] =  param1;
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*i*/ ==  NIT_NULL /*null*/) || (( variable[1] /*i*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*i*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*i*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*i*/,COLOR_kernel___Object_____eqeq))( variable[1] /*i*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMGlobalProperty___add_local_property, LOCATE_abstractmetamodel, 581); nit_exit(1);}
+  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMGlobalProperty___add_local_property, LOCATE_abstractmetamodel, 578); nit_exit(1);}
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[2] /*sup*/ ==  NIT_NULL /*null*/) || (( variable[2] /*sup*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[2] /*sup*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*sup*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[2] /*sup*/,COLOR_kernel___Object_____eqeq))( variable[2] /*sup*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMGlobalProperty___add_local_property, LOCATE_abstractmetamodel, 582); nit_exit(1);}
+  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMGlobalProperty___add_local_property, LOCATE_abstractmetamodel, 579); nit_exit(1);}
   variable[4] = variable[0];
   variable[4] = ATTR_abstractmetamodel___MMGlobalProperty____property_hierarchy(variable[4]) /*MMGlobalProperty::_property_hierarchy*/;
   variable[4] = ((partial_order___PartialOrder___add_t)CALL(variable[4],COLOR_partial_order___PartialOrder___add))(variable[4],  variable[1] /*i*/,  variable[2] /*sup*/) /*PartialOrder::add*/;
@@ -1544,7 +1525,7 @@ void abstractmetamodel___MMGlobalProperty___add_local_property(val_t  self, val_
   return;
 }
 val_t abstractmetamodel___MMGlobalProperty___is_attribute(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 586, LOCATE_abstractmetamodel___MMGlobalProperty___is_attribute};
+  struct trace_t trace = {NULL, NULL, 583, LOCATE_abstractmetamodel___MMGlobalProperty___is_attribute};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1560,7 +1541,7 @@ val_t abstractmetamodel___MMGlobalProperty___is_attribute(val_t  self) {
   return variable[1];
 }
 val_t abstractmetamodel___MMGlobalProperty___is_method(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 589, LOCATE_abstractmetamodel___MMGlobalProperty___is_method};
+  struct trace_t trace = {NULL, NULL, 586, LOCATE_abstractmetamodel___MMGlobalProperty___is_method};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1576,7 +1557,7 @@ val_t abstractmetamodel___MMGlobalProperty___is_method(val_t  self) {
   return variable[1];
 }
 val_t abstractmetamodel___MMGlobalProperty___is_init(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 592, LOCATE_abstractmetamodel___MMGlobalProperty___is_init};
+  struct trace_t trace = {NULL, NULL, 589, LOCATE_abstractmetamodel___MMGlobalProperty___is_init};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1585,7 +1566,7 @@ val_t abstractmetamodel___MMGlobalProperty___is_init(val_t  self) {
   return ATTR_abstractmetamodel___MMGlobalProperty____is_init( self) /*MMGlobalProperty::_is_init*/;
 }
 void abstractmetamodel___MMGlobalProperty___is_init__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 592, LOCATE_abstractmetamodel___MMGlobalProperty___is_init__eq};
+  struct trace_t trace = {NULL, NULL, 589, LOCATE_abstractmetamodel___MMGlobalProperty___is_init__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1595,7 +1576,7 @@ void abstractmetamodel___MMGlobalProperty___is_init__eq(val_t  self, val_t  para
   return;
 }
 val_t abstractmetamodel___MMGlobalProperty___is_init_for(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 595, LOCATE_abstractmetamodel___MMGlobalProperty___is_init_for};
+  struct trace_t trace = {NULL, NULL, 592, LOCATE_abstractmetamodel___MMGlobalProperty___is_init_for};
   val_t variable[8];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1631,7 +1612,7 @@ val_t abstractmetamodel___MMGlobalProperty___is_init_for(val_t  self, val_t  par
   return variable[2];
 }
 val_t abstractmetamodel___MMGlobalProperty___visibility_level(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 604, LOCATE_abstractmetamodel___MMGlobalProperty___visibility_level};
+  struct trace_t trace = {NULL, NULL, 601, LOCATE_abstractmetamodel___MMGlobalProperty___visibility_level};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1640,7 +1621,7 @@ val_t abstractmetamodel___MMGlobalProperty___visibility_level(val_t  self) {
   return ATTR_abstractmetamodel___MMGlobalProperty____visibility_level( self) /*MMGlobalProperty::_visibility_level*/;
 }
 void abstractmetamodel___MMGlobalProperty___visibility_level__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 604, LOCATE_abstractmetamodel___MMGlobalProperty___visibility_level__eq};
+  struct trace_t trace = {NULL, NULL, 601, LOCATE_abstractmetamodel___MMGlobalProperty___visibility_level__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1650,7 +1631,7 @@ void abstractmetamodel___MMGlobalProperty___visibility_level__eq(val_t  self, va
   return;
 }
 val_t abstractmetamodel___MMLocalProperty___to_s(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 656, LOCATE_abstractmetamodel___MMLocalProperty___to_s};
+  struct trace_t trace = {NULL, NULL, 653, LOCATE_abstractmetamodel___MMLocalProperty___to_s};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1666,7 +1647,7 @@ val_t abstractmetamodel___MMLocalProperty___to_s(val_t  self) {
   return variable[1];
 }
 val_t abstractmetamodel___MMLocalProperty___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 613, LOCATE_abstractmetamodel___MMLocalProperty___name};
+  struct trace_t trace = {NULL, NULL, 610, LOCATE_abstractmetamodel___MMLocalProperty___name};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1675,7 +1656,7 @@ val_t abstractmetamodel___MMLocalProperty___name(val_t  self) {
   return ATTR_abstractmetamodel___MMLocalProperty____name( self) /*MMLocalProperty::_name*/;
 }
 val_t abstractmetamodel___MMLocalProperty___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 616, LOCATE_abstractmetamodel___MMLocalProperty___local_class};
+  struct trace_t trace = {NULL, NULL, 613, LOCATE_abstractmetamodel___MMLocalProperty___local_class};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1684,7 +1665,7 @@ val_t abstractmetamodel___MMLocalProperty___local_class(val_t  self) {
   return ATTR_abstractmetamodel___MMLocalProperty____local_class( self) /*MMLocalProperty::_local_class*/;
 }
 val_t abstractmetamodel___MMLocalProperty___global(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 619, LOCATE_abstractmetamodel___MMLocalProperty___global};
+  struct trace_t trace = {NULL, NULL, 616, LOCATE_abstractmetamodel___MMLocalProperty___global};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1693,7 +1674,7 @@ val_t abstractmetamodel___MMLocalProperty___global(val_t  self) {
   return ATTR_abstractmetamodel___MMLocalProperty____global( self) /*MMLocalProperty::_global*/;
 }
 val_t abstractmetamodel___MMLocalProperty___prhe(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 622, LOCATE_abstractmetamodel___MMLocalProperty___prhe};
+  struct trace_t trace = {NULL, NULL, 619, LOCATE_abstractmetamodel___MMLocalProperty___prhe};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1702,7 +1683,7 @@ val_t abstractmetamodel___MMLocalProperty___prhe(val_t  self) {
   return ATTR_abstractmetamodel___MMLocalProperty____prhe( self) /*MMLocalProperty::_prhe*/;
 }
 val_t abstractmetamodel___MMLocalProperty___module(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 625, LOCATE_abstractmetamodel___MMLocalProperty___module};
+  struct trace_t trace = {NULL, NULL, 622, LOCATE_abstractmetamodel___MMLocalProperty___module};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1718,7 +1699,7 @@ val_t abstractmetamodel___MMLocalProperty___module(val_t  self) {
   return variable[1];
 }
 val_t abstractmetamodel___MMLocalProperty___full_name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 628, LOCATE_abstractmetamodel___MMLocalProperty___full_name};
+  struct trace_t trace = {NULL, NULL, 625, LOCATE_abstractmetamodel___MMLocalProperty___full_name};
   val_t variable[17];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1837,7 +1818,7 @@ val_t abstractmetamodel___MMLocalProperty___full_name(val_t  self) {
   return variable[1];
 }
 void abstractmetamodel___MMLocalProperty___set_global(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 640, LOCATE_abstractmetamodel___MMLocalProperty___set_global};
+  struct trace_t trace = {NULL, NULL, 637, LOCATE_abstractmetamodel___MMLocalProperty___set_global};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1845,7 +1826,7 @@ void abstractmetamodel___MMLocalProperty___set_global(val_t  self, val_t  param0
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*g*/ ==  NIT_NULL /*null*/) || (( variable[1] /*g*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*g*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*g*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*g*/,COLOR_kernel___Object_____eqeq))( variable[1] /*g*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalProperty___set_global, LOCATE_abstractmetamodel, 643); nit_exit(1);}
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalProperty___set_global, LOCATE_abstractmetamodel, 640); nit_exit(1);}
   variable[3] = variable[0];
   ATTR_abstractmetamodel___MMLocalProperty____global(variable[3]) /*MMLocalProperty::_global*/ =  variable[1] /*g*/;
   variable[3] = variable[0];
@@ -1857,7 +1838,7 @@ void abstractmetamodel___MMLocalProperty___set_global(val_t  self, val_t  param0
   return;
 }
 void abstractmetamodel___MMLocalProperty___new_global(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 648, LOCATE_abstractmetamodel___MMLocalProperty___new_global};
+  struct trace_t trace = {NULL, NULL, 645, LOCATE_abstractmetamodel___MMLocalProperty___new_global};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1866,7 +1847,7 @@ void abstractmetamodel___MMLocalProperty___new_global(val_t  self) {
   variable[2] = variable[0];
   variable[2] = ATTR_abstractmetamodel___MMLocalProperty____global(variable[2]) /*MMLocalProperty::_global*/;
   variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalProperty___new_global, LOCATE_abstractmetamodel, 651); nit_exit(1);}
+  if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstractmetamodel___MMLocalProperty___new_global, LOCATE_abstractmetamodel, 648); nit_exit(1);}
   variable[2] = variable[0];
   variable[3] = variable[0];
   variable[4] = NEW_MMGlobalProperty_abstractmetamodel___MMGlobalProperty___init(variable[3]); /*new MMGlobalProperty*/
@@ -1882,7 +1863,7 @@ void abstractmetamodel___MMLocalProperty___new_global(val_t  self) {
   return;
 }
 val_t abstractmetamodel___MMLocalProperty___need_super(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 658, LOCATE_abstractmetamodel___MMLocalProperty___need_super};
+  struct trace_t trace = {NULL, NULL, 655, LOCATE_abstractmetamodel___MMLocalProperty___need_super};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1891,7 +1872,7 @@ val_t abstractmetamodel___MMLocalProperty___need_super(val_t  self) {
   return ATTR_abstractmetamodel___MMLocalProperty____need_super( self) /*MMLocalProperty::_need_super*/;
 }
 void abstractmetamodel___MMLocalProperty___need_super__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 658, LOCATE_abstractmetamodel___MMLocalProperty___need_super__eq};
+  struct trace_t trace = {NULL, NULL, 655, LOCATE_abstractmetamodel___MMLocalProperty___need_super__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1901,7 +1882,7 @@ void abstractmetamodel___MMLocalProperty___need_super__eq(val_t  self, val_t  pa
   return;
 }
 void abstractmetamodel___MMLocalProperty___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 661, LOCATE_abstractmetamodel___MMLocalProperty___init};
+  struct trace_t trace = {NULL, NULL, 658, LOCATE_abstractmetamodel___MMLocalProperty___init};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1909,13 +1890,13 @@ void abstractmetamodel___MMLocalProperty___init(val_t  self, val_t  param0, val_
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMLocalProperty].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMLocalProperty].i]) return;
   variable[4] = variable[0];
   ATTR_abstractmetamodel___MMLocalProperty____name(variable[4]) /*MMLocalProperty::_name*/ =  variable[1] /*n*/;
   variable[4] = variable[0];
   ATTR_abstractmetamodel___MMLocalProperty____local_class(variable[4]) /*MMLocalProperty::_local_class*/ =  variable[2] /*bc*/;
   return_label57: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMLocalProperty].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMLocalProperty].i] = 1;
   tracehead = trace.prev;
   return;
 }

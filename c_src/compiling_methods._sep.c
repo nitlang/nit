@@ -8,10 +8,10 @@ void compiling_methods___CompilerVisitor___init(val_t  self, val_t  param0, int*
   trace.file = LOCATE_compiling_methods;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_CompilerVisitor].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_CompilerVisitor].i]) return;
   ((compiling_methods___CompilerVisitor___init_t)CALL(variable[0],COLOR_SUPER_compiling_methods___CompilerVisitor___init))(variable[0], variable[1], init_table) /*super CompilerVisitor::init*/;
   return_label0: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_CompilerVisitor].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_CompilerVisitor].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -764,11 +764,11 @@ void compiling_methods___CFunctionContext___init(val_t  self, val_t  param0, int
   trace.file = LOCATE_compiling_methods;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_CFunctionContext].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_CFunctionContext].i]) return;
   variable[3] = variable[0];
   ATTR_compiling_methods___CFunctionContext____visitor(variable[3]) /*CFunctionContext::_visitor*/ =  variable[1] /*v*/;
   return_label23: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_CFunctionContext].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_CFunctionContext].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -922,11 +922,11 @@ void compiling_methods___NitMethodContext___init(val_t  self, val_t  param0, int
   trace.file = LOCATE_compiling_methods;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_NitMethodContext].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_NitMethodContext].i]) return;
   variable[3] = variable[0];
   ATTR_compiling_methods___NitMethodContext____method(variable[3]) /*NitMethodContext::_method*/ =  variable[1] /*method*/;
   return_label24: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_NitMethodContext].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_NitMethodContext].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2432,9 +2432,191 @@ val_t compiling_methods___AMethPropdef___do_compile_inside(val_t  self, val_t  p
   tracehead = trace.prev;
   return NIT_NULL;
 }
+void compiling_methods___PSignature___compile_parameters(val_t  self, val_t  param0, val_t  param1, val_t  param2) {
+  struct trace_t trace = {NULL, NULL, 534, LOCATE_compiling_methods___PSignature___compile_parameters};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_compiling_methods;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_compiling_methods, 534);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return;
+}
+void compiling_methods___ASignature___compile_parameters(val_t  self, val_t  param0, val_t  param1, val_t  param2) {
+  struct trace_t trace = {NULL, NULL, 538, LOCATE_compiling_methods___ASignature___compile_parameters};
+  val_t variable[20];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_compiling_methods;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[3] =  param2;
+  variable[5] = variable[0];
+  variable[5] = ((parser_nodes___ASignature___n_params_t)CALL(variable[5],COLOR_parser_nodes___ASignature___n_params))(variable[5]) /*ASignature::n_params*/;
+  variable[5] = ((list___List___iterator_t)CALL(variable[5],COLOR_abstract_collection___Collection___iterator))(variable[5]) /*List::iterator*/;
+  while (true) { /*for*/
+    variable[6] = ((list___ListIterator___is_ok_t)CALL(variable[5],COLOR_abstract_collection___Iterator___is_ok))(variable[5]) /*ListIterator::is_ok*/;
+    if (!UNTAG_Bool(variable[6])) break; /*for*/
+    variable[6] = ((list___ListIterator___item_t)CALL(variable[5],COLOR_abstract_collection___Iterator___item))(variable[5]) /*ListIterator::item*/;
+    variable[7] = variable[6];
+    variable[9] = ((compiling_methods___CompilerVisitor___cfc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___cfc))( variable[1] /*v*/) /*CompilerVisitor::cfc*/;
+    variable[10] = ((mmbuilder___PParam___variable_t)CALL( variable[7] /*ap*/,COLOR_syntax_base___PParam___variable))( variable[7] /*ap*/) /*PParam::variable*/;
+    variable[9] = ((compiling_methods___CFunctionContext___register_variable_t)CALL(variable[9],COLOR_compiling_methods___CFunctionContext___register_variable))(variable[9], variable[10]) /*CFunctionContext::register_variable*/;
+    variable[8] = variable[9];
+    variable[9] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+    variable[9] = ((compiling_methods___NitMethodContext___method_params_t)CALL(variable[9],COLOR_compiling_methods___NitMethodContext___method_params))(variable[9]) /*NitMethodContext::method_params*/;
+    variable[10] = ((mmbuilder___PParam___variable_t)CALL( variable[7] /*ap*/,COLOR_syntax_base___PParam___variable))( variable[7] /*ap*/) /*PParam::variable*/;
+    ((array___AbstractArray___add_t)CALL(variable[9],COLOR_abstract_collection___SimpleCollection___add))(variable[9], variable[10]) /*AbstractArray::add*/;
+    variable[10] = ((mmbuilder___PParam___position_t)CALL( variable[7] /*ap*/,COLOR_syntax_base___PParam___position))( variable[7] /*ap*/) /*PParam::position*/;
+    variable[10] = ((static_type___MMSignature_____bra_t)CALL( variable[2] /*orig_sig*/,COLOR_static_type___MMSignature_____bra))( variable[2] /*orig_sig*/, variable[10]) /*MMSignature::[]*/;
+    variable[9] = variable[10];
+    variable[10] = ((mmbuilder___PParam___variable_t)CALL( variable[7] /*ap*/,COLOR_syntax_base___PParam___variable))( variable[7] /*ap*/) /*PParam::variable*/;
+    variable[10] = ((syntax_base___Variable___stype_t)CALL(variable[10],COLOR_syntax_base___Variable___stype))(variable[10]) /*Variable::stype*/;
+    variable[10] = ((static_type___MMType_____l_t)CALL( variable[9] /*orig_type*/,COLOR_static_type___MMType_____l))( variable[9] /*orig_type*/, variable[10]) /*MMType::<*/;
+    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[10])))) { /*if*/
+      variable[10] = NEW_String_string___String___init(); /*new String*/
+      variable[11] = NEW_String_string___String___with_native(BOX_NativeString("/* check if p<"), TAG_Int(14)); /*new String*/
+      variable[12] = variable[11];
+      ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[12]) /*String::append*/;
+      variable[13] = ((mmbuilder___PParam___variable_t)CALL( variable[7] /*ap*/,COLOR_syntax_base___PParam___variable))( variable[7] /*ap*/) /*PParam::variable*/;
+      variable[13] = ((syntax_base___Variable___stype_t)CALL(variable[13],COLOR_syntax_base___Variable___stype))(variable[13]) /*Variable::stype*/;
+      variable[14] = variable[13];
+      variable[14] = ((string___String___to_s_t)CALL(variable[14],COLOR_string___Object___to_s))(variable[14]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[14]) /*String::append*/;
+      variable[15] = NEW_String_string___String___with_native(BOX_NativeString(" with p:"), TAG_Int(8)); /*new String*/
+      variable[16] = variable[15];
+      ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[16]) /*String::append*/;
+      variable[17] =  variable[9] /*orig_type*/;
+      variable[17] = ((string___String___to_s_t)CALL(variable[17],COLOR_string___Object___to_s))(variable[17]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[17]) /*String::append*/;
+      variable[18] = NEW_String_string___String___with_native(BOX_NativeString(" */"), TAG_Int(3)); /*new String*/
+      variable[19] = variable[18];
+      ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[19]) /*String::append*/;
+      ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[10]) /*CompilerVisitor::add_instr*/;
+      variable[10] = ((mmbuilder___PParam___variable_t)CALL( variable[7] /*ap*/,COLOR_syntax_base___PParam___variable))( variable[7] /*ap*/) /*PParam::variable*/;
+      variable[10] = ((syntax_base___Variable___stype_t)CALL(variable[10],COLOR_syntax_base___Variable___stype))(variable[10]) /*Variable::stype*/;
+      variable[11] = ((mmbuilder___PParam___position_t)CALL( variable[7] /*ap*/,COLOR_syntax_base___PParam___position))( variable[7] /*ap*/) /*PParam::position*/;
+      variable[12] =  variable[3] /*params*/;
+      variable[13] = variable[11];
+      variable[15] = TAG_Bool(UNTAG_Int( variable[13] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+      variable[16] = variable[15];
+      if (UNTAG_Bool(variable[16])) { /* and */
+        variable[16] = variable[12];
+        variable[16] = ATTR_array___AbstractArray____length(variable[16]) /*AbstractArray::_length*/;
+        variable[16] = TAG_Bool(UNTAG_Int( variable[13] /*index*/)<UNTAG_Int(variable[16]));
+      }
+      variable[15] = variable[16];
+      if (!UNTAG_Bool(variable[15])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_compiling_methods, 229); nit_exit(1);}
+      variable[15] = variable[12];
+      variable[15] = ATTR_array___Array____items(variable[15]) /*Array::_items*/;
+      variable[15] = UNBOX_NativeArray(variable[15])[UNTAG_Int( variable[13] /*index*/)];
+      variable[14] = variable[15];
+      goto return_label70;
+      return_label70: while(false);
+      variable[11] = variable[14];
+      ((compiling_methods___MMType___compile_type_check_t)CALL(variable[10],COLOR_compiling_methods___MMType___compile_type_check))(variable[10],  variable[1] /*v*/, variable[11],  variable[7] /*ap*/) /*MMType::compile_type_check*/;
+    }
+    variable[10] = ((mmbuilder___PParam___position_t)CALL( variable[7] /*ap*/,COLOR_syntax_base___PParam___position))( variable[7] /*ap*/) /*PParam::position*/;
+    variable[11] =  variable[3] /*params*/;
+    variable[12] = variable[10];
+    variable[14] = TAG_Bool(UNTAG_Int( variable[12] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+    variable[15] = variable[14];
+    if (UNTAG_Bool(variable[15])) { /* and */
+      variable[15] = variable[11];
+      variable[15] = ATTR_array___AbstractArray____length(variable[15]) /*AbstractArray::_length*/;
+      variable[15] = TAG_Bool(UNTAG_Int( variable[12] /*index*/)<UNTAG_Int(variable[15]));
+    }
+    variable[14] = variable[15];
+    if (!UNTAG_Bool(variable[14])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_compiling_methods, 229); nit_exit(1);}
+    variable[14] = variable[11];
+    variable[14] = ATTR_array___Array____items(variable[14]) /*Array::_items*/;
+    variable[14] = UNBOX_NativeArray(variable[14])[UNTAG_Int( variable[12] /*index*/)];
+    variable[13] = variable[14];
+    goto return_label71;
+    return_label71: while(false);
+    variable[10] = variable[13];
+    ((compiling_methods___CompilerVisitor___add_assignment_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___add_assignment))( variable[1] /*v*/,  variable[8] /*cname*/, variable[10]) /*CompilerVisitor::add_assignment*/;
+    continue_69: while(0);
+    ((list___ListIterator___next_t)CALL(variable[5],COLOR_abstract_collection___Iterator___next))(variable[5]) /*ListIterator::next*/;
+  }
+  break_69: while(0);
+  variable[5] = variable[0];
+  variable[5] = ((parser_nodes___ASignature___n_closure_decls_t)CALL(variable[5],COLOR_parser_nodes___ASignature___n_closure_decls))(variable[5]) /*ASignature::n_closure_decls*/;
+  variable[5] = ((list___List___length_t)CALL(variable[5],COLOR_abstract_collection___Collection___length))(variable[5]) /*List::length*/;
+  variable[6] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[5]); /*new Range[Int]*/
+  variable[5] = variable[6];
+  variable[5] = ((range___Range___iterator_t)CALL(variable[5],COLOR_abstract_collection___Collection___iterator))(variable[5]) /*Range::iterator*/;
+  while (true) { /*for*/
+    variable[6] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[5],COLOR_abstract_collection___Iterator___is_ok))(variable[5]) /*Iterator::is_ok*/;
+    if (!UNTAG_Bool(variable[6])) break; /*for*/
+    variable[6] = ((abstract_collection___Iterator___item_t)CALL(variable[5],COLOR_abstract_collection___Iterator___item))(variable[5]) /*Iterator::item*/;
+    variable[7] = variable[6];
+    variable[9] = variable[0];
+    variable[9] = ((parser_nodes___ASignature___n_closure_decls_t)CALL(variable[9],COLOR_parser_nodes___ASignature___n_closure_decls))(variable[9]) /*ASignature::n_closure_decls*/;
+    variable[9] = ((list___List_____bra_t)CALL(variable[9],COLOR_abstract_collection___Map_____bra))(variable[9],  variable[7] /*i*/) /*List::[]*/;
+    variable[8] = variable[9];
+    variable[10] = ((compiling_methods___CompilerVisitor___cfc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___cfc))( variable[1] /*v*/) /*CompilerVisitor::cfc*/;
+    variable[11] = ((syntax_base___PClosureDecl___variable_t)CALL( variable[8] /*wd*/,COLOR_syntax_base___PClosureDecl___variable))( variable[8] /*wd*/) /*PClosureDecl::variable*/;
+    variable[10] = ((compiling_methods___CFunctionContext___register_closurevariable_t)CALL(variable[10],COLOR_compiling_methods___CFunctionContext___register_closurevariable))(variable[10], variable[11]) /*CFunctionContext::register_closurevariable*/;
+    variable[9] = variable[10];
+    variable[10] = ((syntax_base___PClosureDecl___variable_t)CALL( variable[8] /*wd*/,COLOR_syntax_base___PClosureDecl___variable))( variable[8] /*wd*/) /*PClosureDecl::variable*/;
+    variable[11] = NEW_String_string___String___init(); /*new String*/
+    variable[12] = NEW_String_string___String___with_native(BOX_NativeString("struct "), TAG_Int(7)); /*new String*/
+    variable[13] = variable[12];
+    ((string___String___append_t)CALL(variable[11],COLOR_abstract_collection___IndexedCollection___append))(variable[11], variable[13]) /*String::append*/;
+    variable[14] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+    variable[14] = ((compiling_methods___NitMethodContext___method_t)CALL(variable[14],COLOR_compiling_methods___NitMethodContext___method))(variable[14]) /*NitMethodContext::method*/;
+    variable[14] = ((compiling_methods___MMMethod___closure_cname_t)CALL(variable[14],COLOR_compiling_methods___MMMethod___closure_cname))(variable[14],  variable[7] /*i*/) /*MMMethod::closure_cname*/;
+    variable[15] = variable[14];
+    ((string___String___append_t)CALL(variable[11],COLOR_abstract_collection___IndexedCollection___append))(variable[11], variable[15]) /*String::append*/;
+    variable[16] = NEW_String_string___String___with_native(BOX_NativeString(" *"), TAG_Int(2)); /*new String*/
+    variable[17] = variable[16];
+    ((string___String___append_t)CALL(variable[11],COLOR_abstract_collection___IndexedCollection___append))(variable[11], variable[17]) /*String::append*/;
+    ((compiling_methods___ClosureVariable___ctypename__eq_t)CALL(variable[10],COLOR_compiling_methods___ClosureVariable___ctypename__eq))(variable[10], variable[11]) /*ClosureVariable::ctypename=*/;
+    variable[10] = NEW_String_string___String___init(); /*new String*/
+    variable[11] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable[12] = variable[11];
+    ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[12]) /*String::append*/;
+    variable[13] = ((static_type___MMSignature___arity_t)CALL( variable[2] /*orig_sig*/,COLOR_static_type___MMSignature___arity))( variable[2] /*orig_sig*/) /*MMSignature::arity*/;
+    variable[13] = TAG_Int(UNTAG_Int(variable[13])+UNTAG_Int( variable[7] /*i*/));
+    variable[14] =  variable[3] /*params*/;
+    variable[15] = variable[13];
+    variable[17] = TAG_Bool(UNTAG_Int( variable[15] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+    variable[18] = variable[17];
+    if (UNTAG_Bool(variable[18])) { /* and */
+      variable[18] = variable[14];
+      variable[18] = ATTR_array___AbstractArray____length(variable[18]) /*AbstractArray::_length*/;
+      variable[18] = TAG_Bool(UNTAG_Int( variable[15] /*index*/)<UNTAG_Int(variable[18]));
+    }
+    variable[17] = variable[18];
+    if (!UNTAG_Bool(variable[17])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_compiling_methods, 229); nit_exit(1);}
+    variable[17] = variable[14];
+    variable[17] = ATTR_array___Array____items(variable[17]) /*Array::_items*/;
+    variable[17] = UNBOX_NativeArray(variable[17])[UNTAG_Int( variable[15] /*index*/)];
+    variable[16] = variable[17];
+    goto return_label73;
+    return_label73: while(false);
+    variable[13] = variable[16];
+    variable[14] = variable[13];
+    ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[14]) /*String::append*/;
+    variable[15] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable[16] = variable[15];
+    ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[16]) /*String::append*/;
+    ((compiling_methods___CompilerVisitor___add_assignment_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___add_assignment))( variable[1] /*v*/,  variable[9] /*cname*/, variable[10]) /*CompilerVisitor::add_assignment*/;
+    continue_72: while(0);
+    ((abstract_collection___Iterator___next_t)CALL(variable[5],COLOR_abstract_collection___Iterator___next))(variable[5]) /*Iterator::next*/;
+  }
+  break_72: while(0);
+  return_label68: while(false);
+  tracehead = trace.prev;
+  return;
+}
 val_t compiling_methods___AConcreteMethPropdef___do_compile_inside(val_t  self, val_t  param0, val_t  param1, val_t  param2) {
-  struct trace_t trace = {NULL, NULL, 534, LOCATE_compiling_methods___AConcreteMethPropdef___do_compile_inside};
-  val_t variable[25];
+  struct trace_t trace = {NULL, NULL, 562, LOCATE_compiling_methods___AConcreteMethPropdef___do_compile_inside};
+  val_t variable[18];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_compiling_methods;
@@ -2466,312 +2648,139 @@ val_t compiling_methods___AConcreteMethPropdef___do_compile_inside(val_t  self, 
   variable[10] = ATTR_array___Array____items(variable[10]) /*Array::_items*/;
   variable[10] = UNBOX_NativeArray(variable[10])[UNTAG_Int( variable[8] /*index*/)];
   variable[9] = variable[10];
-  goto return_label69;
-  return_label69: while(false);
+  goto return_label75;
+  return_label75: while(false);
   variable[7] = variable[9];
-  ((compiling_methods___CompilerVisitor___add_assignment_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___add_assignment))( variable[1] /*v*/,  variable[6] /*cname*/, variable[7]) /*CompilerVisitor::add_assignment*/;
+  ((compiling_methods___CompilerVisitor___add_assignment_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___add_assignment))( variable[1] /*v*/,  variable[6] /*selfcname*/, variable[7]) /*CompilerVisitor::add_assignment*/;
+  ((array___AbstractArray___shift_t)CALL( variable[3] /*params*/,COLOR_abstract_collection___IndexedCollection___shift))( variable[3] /*params*/) /*AbstractArray::shift*/;
   variable[7] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
   variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(1)); /*new Array[ParamVariable]*/
   variable[9] = variable[0];
   variable[9] = ((typing___AMethPropdef___self_var_t)CALL(variable[9],COLOR_syntax_base___AMethPropdef___self_var))(variable[9]) /*AMethPropdef::self_var*/;
   ((array___AbstractArray___add_t)CALL(variable[8],COLOR_abstract_collection___SimpleCollection___add))(variable[8], variable[9]) /*AbstractArray::add*/;
   ((compiling_methods___NitMethodContext___method_params__eq_t)CALL(variable[7],COLOR_compiling_methods___NitMethodContext___method_params__eq))(variable[7], variable[8]) /*NitMethodContext::method_params=*/;
-  variable[8] = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable[2] /*method*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable[2] /*method*/) /*MMLocalProperty::global*/;
-  variable[8] = ((abstractmetamodel___MMGlobalProperty___intro_t)CALL(variable[8],COLOR_abstractmetamodel___MMGlobalProperty___intro))(variable[8]) /*MMGlobalProperty::intro*/;
-  variable[7] = variable[8];
-  variable[9] = ((static_type___MMLocalProperty___signature_t)CALL( variable[2] /*method*/,COLOR_static_type___MMLocalProperty___signature))( variable[2] /*method*/) /*MMLocalProperty::signature*/;
-  variable[9] = ((static_type___MMSignature___recv_t)CALL(variable[9],COLOR_static_type___MMSignature___recv))(variable[9]) /*MMSignature::recv*/;
-  variable[9] = ((static_type___MMLocalProperty___signature_for_t)CALL( variable[7] /*orig_meth*/,COLOR_static_type___MMLocalProperty___signature_for))( variable[7] /*orig_meth*/, variable[9]) /*MMLocalProperty::signature_for*/;
-  variable[8] = variable[9];
-  variable[9] = variable[0];
-  variable[9] = ((parser_nodes___AMethPropdef___n_signature_t)CALL(variable[9],COLOR_parser_nodes___AMethPropdef___n_signature))(variable[9]) /*AMethPropdef::n_signature*/;
-  variable[9] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[9] ==  NIT_NULL /*null*/) || ((variable[9] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[9],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[9], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[9],COLOR_kernel___Object_____eqeq))(variable[9],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable[9])) { /*if*/
-    variable[10] = variable[0];
-    variable[10] = ((parser_nodes___AMethPropdef___n_signature_t)CALL(variable[10],COLOR_parser_nodes___AMethPropdef___n_signature))(variable[10]) /*AMethPropdef::n_signature*/;
-    variable[9] = variable[10];
-    variable[10] = TAG_Bool(( variable[9] /*sig*/==NIT_NULL) || VAL_ISA( variable[9] /*sig*/, COLOR_ASignature, ID_ASignature)) /*cast ASignature*/;
-    if (!UNTAG_Bool(variable[10])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_compiling_methods___AConcreteMethPropdef___do_compile_inside, LOCATE_compiling_methods, 547); nit_exit(1);}
-    variable[10] = ((parser_nodes___ASignature___n_params_t)CALL( variable[9] /*sig*/,COLOR_parser_nodes___ASignature___n_params))( variable[9] /*sig*/) /*ASignature::n_params*/;
-    variable[10] = ((list___List___iterator_t)CALL(variable[10],COLOR_abstract_collection___Collection___iterator))(variable[10]) /*List::iterator*/;
-    while (true) { /*for*/
-      variable[11] = ((list___ListIterator___is_ok_t)CALL(variable[10],COLOR_abstract_collection___Iterator___is_ok))(variable[10]) /*ListIterator::is_ok*/;
-      if (!UNTAG_Bool(variable[11])) break; /*for*/
-      variable[11] = ((list___ListIterator___item_t)CALL(variable[10],COLOR_abstract_collection___Iterator___item))(variable[10]) /*ListIterator::item*/;
-      variable[12] = variable[11];
-      variable[14] = ((compiling_methods___CompilerVisitor___cfc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___cfc))( variable[1] /*v*/) /*CompilerVisitor::cfc*/;
-      variable[15] = ((mmbuilder___PParam___variable_t)CALL( variable[12] /*ap*/,COLOR_syntax_base___PParam___variable))( variable[12] /*ap*/) /*PParam::variable*/;
-      variable[14] = ((compiling_methods___CFunctionContext___register_variable_t)CALL(variable[14],COLOR_compiling_methods___CFunctionContext___register_variable))(variable[14], variable[15]) /*CFunctionContext::register_variable*/;
-      variable[13] = variable[14];
-      variable[14] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
-      variable[14] = ((compiling_methods___NitMethodContext___method_params_t)CALL(variable[14],COLOR_compiling_methods___NitMethodContext___method_params))(variable[14]) /*NitMethodContext::method_params*/;
-      variable[15] = ((mmbuilder___PParam___variable_t)CALL( variable[12] /*ap*/,COLOR_syntax_base___PParam___variable))( variable[12] /*ap*/) /*PParam::variable*/;
-      ((array___AbstractArray___add_t)CALL(variable[14],COLOR_abstract_collection___SimpleCollection___add))(variable[14], variable[15]) /*AbstractArray::add*/;
-      variable[15] = ((mmbuilder___PParam___position_t)CALL( variable[12] /*ap*/,COLOR_syntax_base___PParam___position))( variable[12] /*ap*/) /*PParam::position*/;
-      variable[15] = ((static_type___MMSignature_____bra_t)CALL( variable[8] /*orig_sig*/,COLOR_static_type___MMSignature_____bra))( variable[8] /*orig_sig*/, variable[15]) /*MMSignature::[]*/;
-      variable[14] = variable[15];
-      variable[15] = ((mmbuilder___PParam___variable_t)CALL( variable[12] /*ap*/,COLOR_syntax_base___PParam___variable))( variable[12] /*ap*/) /*PParam::variable*/;
-      variable[15] = ((syntax_base___Variable___stype_t)CALL(variable[15],COLOR_syntax_base___Variable___stype))(variable[15]) /*Variable::stype*/;
-      variable[15] = ((static_type___MMType_____l_t)CALL( variable[14] /*orig_type*/,COLOR_static_type___MMType_____l))( variable[14] /*orig_type*/, variable[15]) /*MMType::<*/;
-      if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[15])))) { /*if*/
-        variable[15] = NEW_String_string___String___init(); /*new String*/
-        variable[16] = NEW_String_string___String___with_native(BOX_NativeString("/* check if p<"), TAG_Int(14)); /*new String*/
-        variable[17] = variable[16];
-        ((string___String___append_t)CALL(variable[15],COLOR_abstract_collection___IndexedCollection___append))(variable[15], variable[17]) /*String::append*/;
-        variable[18] = ((mmbuilder___PParam___variable_t)CALL( variable[12] /*ap*/,COLOR_syntax_base___PParam___variable))( variable[12] /*ap*/) /*PParam::variable*/;
-        variable[18] = ((syntax_base___Variable___stype_t)CALL(variable[18],COLOR_syntax_base___Variable___stype))(variable[18]) /*Variable::stype*/;
-        variable[19] = variable[18];
-        variable[19] = ((string___String___to_s_t)CALL(variable[19],COLOR_string___Object___to_s))(variable[19]) /*String::to_s*/;
-        ((string___String___append_t)CALL(variable[15],COLOR_abstract_collection___IndexedCollection___append))(variable[15], variable[19]) /*String::append*/;
-        variable[20] = NEW_String_string___String___with_native(BOX_NativeString(" with p:"), TAG_Int(8)); /*new String*/
-        variable[21] = variable[20];
-        ((string___String___append_t)CALL(variable[15],COLOR_abstract_collection___IndexedCollection___append))(variable[15], variable[21]) /*String::append*/;
-        variable[22] =  variable[14] /*orig_type*/;
-        variable[22] = ((string___String___to_s_t)CALL(variable[22],COLOR_string___Object___to_s))(variable[22]) /*String::to_s*/;
-        ((string___String___append_t)CALL(variable[15],COLOR_abstract_collection___IndexedCollection___append))(variable[15], variable[22]) /*String::append*/;
-        variable[23] = NEW_String_string___String___with_native(BOX_NativeString(" */"), TAG_Int(3)); /*new String*/
-        variable[24] = variable[23];
-        ((string___String___append_t)CALL(variable[15],COLOR_abstract_collection___IndexedCollection___append))(variable[15], variable[24]) /*String::append*/;
-        ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[15]) /*CompilerVisitor::add_instr*/;
-        variable[15] = ((mmbuilder___PParam___variable_t)CALL( variable[12] /*ap*/,COLOR_syntax_base___PParam___variable))( variable[12] /*ap*/) /*PParam::variable*/;
-        variable[15] = ((syntax_base___Variable___stype_t)CALL(variable[15],COLOR_syntax_base___Variable___stype))(variable[15]) /*Variable::stype*/;
-        variable[16] = ((mmbuilder___PParam___position_t)CALL( variable[12] /*ap*/,COLOR_syntax_base___PParam___position))( variable[12] /*ap*/) /*PParam::position*/;
-        variable[16] = TAG_Int(UNTAG_Int(variable[16])+UNTAG_Int( TAG_Int(1)));
-        variable[17] =  variable[3] /*params*/;
-        variable[18] = variable[16];
-        variable[20] = TAG_Bool(UNTAG_Int( variable[18] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-        variable[21] = variable[20];
-        if (UNTAG_Bool(variable[21])) { /* and */
-          variable[21] = variable[17];
-          variable[21] = ATTR_array___AbstractArray____length(variable[21]) /*AbstractArray::_length*/;
-          variable[21] = TAG_Bool(UNTAG_Int( variable[18] /*index*/)<UNTAG_Int(variable[21]));
-        }
-        variable[20] = variable[21];
-        if (!UNTAG_Bool(variable[20])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_compiling_methods, 229); nit_exit(1);}
-        variable[20] = variable[17];
-        variable[20] = ATTR_array___Array____items(variable[20]) /*Array::_items*/;
-        variable[20] = UNBOX_NativeArray(variable[20])[UNTAG_Int( variable[18] /*index*/)];
-        variable[19] = variable[20];
-        goto return_label71;
-        return_label71: while(false);
-        variable[16] = variable[19];
-        ((compiling_methods___MMType___compile_type_check_t)CALL(variable[15],COLOR_compiling_methods___MMType___compile_type_check))(variable[15],  variable[1] /*v*/, variable[16],  variable[12] /*ap*/) /*MMType::compile_type_check*/;
-      }
-      variable[15] = ((mmbuilder___PParam___position_t)CALL( variable[12] /*ap*/,COLOR_syntax_base___PParam___position))( variable[12] /*ap*/) /*PParam::position*/;
-      variable[15] = TAG_Int(UNTAG_Int(variable[15])+UNTAG_Int( TAG_Int(1)));
-      variable[16] =  variable[3] /*params*/;
-      variable[17] = variable[15];
-      variable[19] = TAG_Bool(UNTAG_Int( variable[17] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-      variable[20] = variable[19];
-      if (UNTAG_Bool(variable[20])) { /* and */
-        variable[20] = variable[16];
-        variable[20] = ATTR_array___AbstractArray____length(variable[20]) /*AbstractArray::_length*/;
-        variable[20] = TAG_Bool(UNTAG_Int( variable[17] /*index*/)<UNTAG_Int(variable[20]));
-      }
-      variable[19] = variable[20];
-      if (!UNTAG_Bool(variable[19])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_compiling_methods, 229); nit_exit(1);}
-      variable[19] = variable[16];
-      variable[19] = ATTR_array___Array____items(variable[19]) /*Array::_items*/;
-      variable[19] = UNBOX_NativeArray(variable[19])[UNTAG_Int( variable[17] /*index*/)];
-      variable[18] = variable[19];
-      goto return_label72;
-      return_label72: while(false);
-      variable[15] = variable[18];
-      ((compiling_methods___CompilerVisitor___add_assignment_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___add_assignment))( variable[1] /*v*/,  variable[13] /*cname*/, variable[15]) /*CompilerVisitor::add_assignment*/;
-      continue_70: while(0);
-      ((list___ListIterator___next_t)CALL(variable[10],COLOR_abstract_collection___Iterator___next))(variable[10]) /*ListIterator::next*/;
-    }
-    break_70: while(0);
-    variable[10] = ((parser_nodes___ASignature___n_closure_decls_t)CALL( variable[9] /*sig*/,COLOR_parser_nodes___ASignature___n_closure_decls))( variable[9] /*sig*/) /*ASignature::n_closure_decls*/;
-    variable[10] = ((list___List___length_t)CALL(variable[10],COLOR_abstract_collection___Collection___length))(variable[10]) /*List::length*/;
-    variable[11] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[10]); /*new Range[Int]*/
-    variable[10] = variable[11];
-    variable[10] = ((range___Range___iterator_t)CALL(variable[10],COLOR_abstract_collection___Collection___iterator))(variable[10]) /*Range::iterator*/;
-    while (true) { /*for*/
-      variable[11] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[10],COLOR_abstract_collection___Iterator___is_ok))(variable[10]) /*Iterator::is_ok*/;
-      if (!UNTAG_Bool(variable[11])) break; /*for*/
-      variable[11] = ((abstract_collection___Iterator___item_t)CALL(variable[10],COLOR_abstract_collection___Iterator___item))(variable[10]) /*Iterator::item*/;
-      variable[12] = variable[11];
-      variable[14] = ((parser_nodes___ASignature___n_closure_decls_t)CALL( variable[9] /*sig*/,COLOR_parser_nodes___ASignature___n_closure_decls))( variable[9] /*sig*/) /*ASignature::n_closure_decls*/;
-      variable[14] = ((list___List_____bra_t)CALL(variable[14],COLOR_abstract_collection___Map_____bra))(variable[14],  variable[12] /*i*/) /*List::[]*/;
-      variable[13] = variable[14];
-      variable[15] = ((compiling_methods___CompilerVisitor___cfc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___cfc))( variable[1] /*v*/) /*CompilerVisitor::cfc*/;
-      variable[16] = ((syntax_base___PClosureDecl___variable_t)CALL( variable[13] /*wd*/,COLOR_syntax_base___PClosureDecl___variable))( variable[13] /*wd*/) /*PClosureDecl::variable*/;
-      variable[15] = ((compiling_methods___CFunctionContext___register_closurevariable_t)CALL(variable[15],COLOR_compiling_methods___CFunctionContext___register_closurevariable))(variable[15], variable[16]) /*CFunctionContext::register_closurevariable*/;
-      variable[14] = variable[15];
-      variable[15] = ((syntax_base___PClosureDecl___variable_t)CALL( variable[13] /*wd*/,COLOR_syntax_base___PClosureDecl___variable))( variable[13] /*wd*/) /*PClosureDecl::variable*/;
-      variable[16] = NEW_String_string___String___init(); /*new String*/
-      variable[17] = NEW_String_string___String___with_native(BOX_NativeString("struct "), TAG_Int(7)); /*new String*/
-      variable[18] = variable[17];
-      ((string___String___append_t)CALL(variable[16],COLOR_abstract_collection___IndexedCollection___append))(variable[16], variable[18]) /*String::append*/;
-      variable[19] = ((compiling_methods___MMMethod___closure_cname_t)CALL( variable[2] /*method*/,COLOR_compiling_methods___MMMethod___closure_cname))( variable[2] /*method*/,  variable[12] /*i*/) /*MMMethod::closure_cname*/;
-      variable[20] = variable[19];
-      ((string___String___append_t)CALL(variable[16],COLOR_abstract_collection___IndexedCollection___append))(variable[16], variable[20]) /*String::append*/;
-      variable[21] = NEW_String_string___String___with_native(BOX_NativeString(" *"), TAG_Int(2)); /*new String*/
-      variable[22] = variable[21];
-      ((string___String___append_t)CALL(variable[16],COLOR_abstract_collection___IndexedCollection___append))(variable[16], variable[22]) /*String::append*/;
-      ((compiling_methods___ClosureVariable___ctypename__eq_t)CALL(variable[15],COLOR_compiling_methods___ClosureVariable___ctypename__eq))(variable[15], variable[16]) /*ClosureVariable::ctypename=*/;
-      variable[15] = NEW_String_string___String___init(); /*new String*/
-      variable[16] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-      variable[17] = variable[16];
-      ((string___String___append_t)CALL(variable[15],COLOR_abstract_collection___IndexedCollection___append))(variable[15], variable[17]) /*String::append*/;
-      variable[18] = ((static_type___MMSignature___arity_t)CALL( variable[8] /*orig_sig*/,COLOR_static_type___MMSignature___arity))( variable[8] /*orig_sig*/) /*MMSignature::arity*/;
-      variable[18] = TAG_Int(UNTAG_Int(variable[18])+UNTAG_Int( variable[12] /*i*/));
-      variable[18] = TAG_Int(UNTAG_Int(variable[18])+UNTAG_Int( TAG_Int(1)));
-      variable[19] =  variable[3] /*params*/;
-      variable[20] = variable[18];
-      variable[22] = TAG_Bool(UNTAG_Int( variable[20] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-      variable[23] = variable[22];
-      if (UNTAG_Bool(variable[23])) { /* and */
-        variable[23] = variable[19];
-        variable[23] = ATTR_array___AbstractArray____length(variable[23]) /*AbstractArray::_length*/;
-        variable[23] = TAG_Bool(UNTAG_Int( variable[20] /*index*/)<UNTAG_Int(variable[23]));
-      }
-      variable[22] = variable[23];
-      if (!UNTAG_Bool(variable[22])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_compiling_methods, 229); nit_exit(1);}
-      variable[22] = variable[19];
-      variable[22] = ATTR_array___Array____items(variable[22]) /*Array::_items*/;
-      variable[22] = UNBOX_NativeArray(variable[22])[UNTAG_Int( variable[20] /*index*/)];
-      variable[21] = variable[22];
-      goto return_label74;
-      return_label74: while(false);
-      variable[18] = variable[21];
-      variable[19] = variable[18];
-      ((string___String___append_t)CALL(variable[15],COLOR_abstract_collection___IndexedCollection___append))(variable[15], variable[19]) /*String::append*/;
-      variable[20] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-      variable[21] = variable[20];
-      ((string___String___append_t)CALL(variable[15],COLOR_abstract_collection___IndexedCollection___append))(variable[15], variable[21]) /*String::append*/;
-      ((compiling_methods___CompilerVisitor___add_assignment_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___add_assignment))( variable[1] /*v*/,  variable[14] /*cname*/, variable[15]) /*CompilerVisitor::add_assignment*/;
-      continue_73: while(0);
-      ((abstract_collection___Iterator___next_t)CALL(variable[10],COLOR_abstract_collection___Iterator___next))(variable[10]) /*Iterator::next*/;
-    }
-    break_73: while(0);
+  variable[7] = variable[0];
+  variable[7] = ((parser_nodes___AMethPropdef___n_signature_t)CALL(variable[7],COLOR_parser_nodes___AMethPropdef___n_signature))(variable[7]) /*AMethPropdef::n_signature*/;
+  variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[7] ==  NIT_NULL /*null*/) || ((variable[7] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[7],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[7], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[7],COLOR_kernel___Object_____eqeq))(variable[7],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[7])) { /*if*/
+    variable[8] = ((abstractmetamodel___MMLocalProperty___global_t)CALL( variable[2] /*method*/,COLOR_abstractmetamodel___MMLocalProperty___global))( variable[2] /*method*/) /*MMLocalProperty::global*/;
+    variable[8] = ((abstractmetamodel___MMGlobalProperty___intro_t)CALL(variable[8],COLOR_abstractmetamodel___MMGlobalProperty___intro))(variable[8]) /*MMGlobalProperty::intro*/;
+    variable[7] = variable[8];
+    variable[9] = ((static_type___MMLocalProperty___signature_t)CALL( variable[2] /*method*/,COLOR_static_type___MMLocalProperty___signature))( variable[2] /*method*/) /*MMLocalProperty::signature*/;
+    variable[9] = ((static_type___MMSignature___recv_t)CALL(variable[9],COLOR_static_type___MMSignature___recv))(variable[9]) /*MMSignature::recv*/;
+    variable[9] = ((static_type___MMLocalProperty___signature_for_t)CALL( variable[7] /*orig_meth*/,COLOR_static_type___MMLocalProperty___signature_for))( variable[7] /*orig_meth*/, variable[9]) /*MMLocalProperty::signature_for*/;
+    variable[8] = variable[9];
+    variable[9] = variable[0];
+    variable[9] = ((parser_nodes___AMethPropdef___n_signature_t)CALL(variable[9],COLOR_parser_nodes___AMethPropdef___n_signature))(variable[9]) /*AMethPropdef::n_signature*/;
+    ((compiling_methods___PSignature___compile_parameters_t)CALL(variable[9],COLOR_compiling_methods___PSignature___compile_parameters))(variable[9],  variable[1] /*v*/,  variable[8] /*orig_sig*/,  variable[3] /*params*/) /*PSignature::compile_parameters*/;
   }
-  variable[9] =  NIT_NULL /*null*/;
-  variable[10] = variable[0];
-  variable[10] = TAG_Bool((variable[10]==NIT_NULL) || VAL_ISA(variable[10], COLOR_AConcreteInitPropdef, ID_AConcreteInitPropdef)) /*cast AConcreteInitPropdef*/;
-  if (UNTAG_Bool(variable[10])) { /*if*/
-    variable[10] = NEW_String_string___String___init(); /*new String*/
-    variable[11] = NEW_String_string___String___with_native(BOX_NativeString("VAL2OBJ("), TAG_Int(8)); /*new String*/
-    variable[12] = variable[11];
-    ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[12]) /*String::append*/;
-    variable[13] =  variable[3] /*params*/;
-    variable[14] =  TAG_Int(0);
-    variable[16] = TAG_Bool(UNTAG_Int( variable[14] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-    variable[17] = variable[16];
-    if (UNTAG_Bool(variable[17])) { /* and */
-      variable[17] = variable[13];
-      variable[17] = ATTR_array___AbstractArray____length(variable[17]) /*AbstractArray::_length*/;
-      variable[17] = TAG_Bool(UNTAG_Int( variable[14] /*index*/)<UNTAG_Int(variable[17]));
-    }
-    variable[16] = variable[17];
-    if (!UNTAG_Bool(variable[16])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_compiling_methods, 229); nit_exit(1);}
-    variable[16] = variable[13];
-    variable[16] = ATTR_array___Array____items(variable[16]) /*Array::_items*/;
-    variable[16] = UNBOX_NativeArray(variable[16])[UNTAG_Int( variable[14] /*index*/)];
-    variable[15] = variable[16];
-    goto return_label75;
-    return_label75: while(false);
-    variable[13] = variable[15];
-    variable[14] = variable[13];
-    ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[14]) /*String::append*/;
-    variable[15] = NEW_String_string___String___with_native(BOX_NativeString(")->vft["), TAG_Int(7)); /*new String*/
-    variable[16] = variable[15];
-    ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[16]) /*String::append*/;
-    variable[17] = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL( variable[2] /*method*/,COLOR_abstractmetamodel___MMLocalProperty___local_class))( variable[2] /*method*/) /*MMLocalProperty::local_class*/;
-    variable[17] = ((abstractmetamodel___MMLocalClass___global_t)CALL(variable[17],COLOR_abstractmetamodel___MMLocalClass___global))(variable[17]) /*MMLocalClass::global*/;
-    variable[17] = ((compiling_base___MMGlobalClass___init_table_pos_id_t)CALL(variable[17],COLOR_compiling_base___MMGlobalClass___init_table_pos_id))(variable[17]) /*MMGlobalClass::init_table_pos_id*/;
-    variable[18] = variable[17];
-    ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[18]) /*String::append*/;
-    variable[19] = NEW_String_string___String___with_native(BOX_NativeString("].i"), TAG_Int(3)); /*new String*/
-    variable[20] = variable[19];
-    ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[20]) /*String::append*/;
-    variable[9] = variable[10] /*itpos=*/;
-    variable[10] = NEW_String_string___String___init(); /*new String*/
-    variable[11] = NEW_String_string___String___with_native(BOX_NativeString("if (init_table["), TAG_Int(15)); /*new String*/
-    variable[12] = variable[11];
-    ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[12]) /*String::append*/;
-    variable[13] =  variable[9] /*itpos*/;
-    ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[13]) /*String::append*/;
-    variable[14] = NEW_String_string___String___with_native(BOX_NativeString("]) return;"), TAG_Int(10)); /*new String*/
+  variable[7] =  NIT_NULL /*null*/;
+  variable[8] = variable[0];
+  variable[8] = TAG_Bool((variable[8]==NIT_NULL) || VAL_ISA(variable[8], COLOR_AConcreteInitPropdef, ID_AConcreteInitPropdef)) /*cast AConcreteInitPropdef*/;
+  if (UNTAG_Bool(variable[8])) { /*if*/
+    variable[8] = NEW_String_string___String___init(); /*new String*/
+    variable[9] = NEW_String_string___String___with_native(BOX_NativeString("VAL2OBJ("), TAG_Int(8)); /*new String*/
+    variable[10] = variable[9];
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[10]) /*String::append*/;
+    variable[11] =  variable[6] /*selfcname*/;
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[11]) /*String::append*/;
+    variable[12] = NEW_String_string___String___with_native(BOX_NativeString(")->vft["), TAG_Int(7)); /*new String*/
+    variable[13] = variable[12];
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[13]) /*String::append*/;
+    variable[14] = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL( variable[2] /*method*/,COLOR_abstractmetamodel___MMLocalProperty___local_class))( variable[2] /*method*/) /*MMLocalProperty::local_class*/;
+    variable[14] = ((abstractmetamodel___MMLocalClass___global_t)CALL(variable[14],COLOR_abstractmetamodel___MMLocalClass___global))(variable[14]) /*MMLocalClass::global*/;
+    variable[14] = ((compiling_base___MMGlobalClass___init_table_pos_id_t)CALL(variable[14],COLOR_compiling_base___MMGlobalClass___init_table_pos_id))(variable[14]) /*MMGlobalClass::init_table_pos_id*/;
     variable[15] = variable[14];
-    ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[15]) /*String::append*/;
-    ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[10]) /*CompilerVisitor::add_instr*/;
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[15]) /*String::append*/;
+    variable[16] = NEW_String_string___String___with_native(BOX_NativeString("].i"), TAG_Int(3)); /*new String*/
+    variable[17] = variable[16];
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[17]) /*String::append*/;
+    variable[7] = variable[8] /*itpos=*/;
+    variable[8] = NEW_String_string___String___init(); /*new String*/
+    variable[9] = NEW_String_string___String___with_native(BOX_NativeString("if (init_table["), TAG_Int(15)); /*new String*/
+    variable[10] = variable[9];
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[10]) /*String::append*/;
+    variable[11] =  variable[7] /*itpos*/;
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[11]) /*String::append*/;
+    variable[12] = NEW_String_string___String___with_native(BOX_NativeString("]) return;"), TAG_Int(10)); /*new String*/
+    variable[13] = variable[12];
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[13]) /*String::append*/;
+    ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[8]) /*CompilerVisitor::add_instr*/;
   }
-  variable[10] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
-  variable[11] = NEW_String_string___String___init(); /*new String*/
-  variable[12] = NEW_String_string___String___with_native(BOX_NativeString("return_label"), TAG_Int(12)); /*new String*/
+  variable[8] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+  variable[9] = NEW_String_string___String___init(); /*new String*/
+  variable[10] = NEW_String_string___String___with_native(BOX_NativeString("return_label"), TAG_Int(12)); /*new String*/
+  variable[11] = variable[10];
+  ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[11]) /*String::append*/;
+  variable[12] = ((compiling_base___CompilerVisitor___new_number_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___new_number))( variable[1] /*v*/) /*CompilerVisitor::new_number*/;
   variable[13] = variable[12];
-  ((string___String___append_t)CALL(variable[11],COLOR_abstract_collection___IndexedCollection___append))(variable[11], variable[13]) /*String::append*/;
-  variable[14] = ((compiling_base___CompilerVisitor___new_number_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___new_number))( variable[1] /*v*/) /*CompilerVisitor::new_number*/;
+  variable[13] = ((string___String___to_s_t)CALL(variable[13],COLOR_string___Object___to_s))(variable[13]) /*String::to_s*/;
+  ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[13]) /*String::append*/;
+  variable[14] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   variable[15] = variable[14];
-  variable[15] = ((string___String___to_s_t)CALL(variable[15],COLOR_string___Object___to_s))(variable[15]) /*String::to_s*/;
-  ((string___String___append_t)CALL(variable[11],COLOR_abstract_collection___IndexedCollection___append))(variable[11], variable[15]) /*String::append*/;
-  variable[16] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[17] = variable[16];
-  ((string___String___append_t)CALL(variable[11],COLOR_abstract_collection___IndexedCollection___append))(variable[11], variable[17]) /*String::append*/;
-  ((compiling_methods___NitMethodContext___return_label__eq_t)CALL(variable[10],COLOR_compiling_methods___NitMethodContext___return_label__eq))(variable[10], variable[11]) /*NitMethodContext::return_label=*/;
-  variable[10] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
-  variable[11] = ((compiling_methods___CompilerVisitor___cfc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___cfc))( variable[1] /*v*/) /*CompilerVisitor::cfc*/;
-  variable[11] = ((compiling_methods___CFunctionContext___get_var_t)CALL(variable[11],COLOR_compiling_methods___CFunctionContext___get_var))(variable[11]) /*CFunctionContext::get_var*/;
-  ((compiling_methods___NitMethodContext___return_value__eq_t)CALL(variable[10],COLOR_compiling_methods___NitMethodContext___return_value__eq))(variable[10], variable[11]) /*NitMethodContext::return_value=*/;
-  variable[10] = variable[0];
-  variable[10] = TAG_Bool((variable[10]==NIT_NULL) || VAL_ISA(variable[10], COLOR_AConcreteInitPropdef, ID_AConcreteInitPropdef)) /*cast AConcreteInitPropdef*/;
-  if (UNTAG_Bool(variable[10])) { /*if*/
+  ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[15]) /*String::append*/;
+  ((compiling_methods___NitMethodContext___return_label__eq_t)CALL(variable[8],COLOR_compiling_methods___NitMethodContext___return_label__eq))(variable[8], variable[9]) /*NitMethodContext::return_label=*/;
+  variable[8] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+  variable[9] = ((compiling_methods___CompilerVisitor___cfc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___cfc))( variable[1] /*v*/) /*CompilerVisitor::cfc*/;
+  variable[9] = ((compiling_methods___CFunctionContext___get_var_t)CALL(variable[9],COLOR_compiling_methods___CFunctionContext___get_var))(variable[9]) /*CFunctionContext::get_var*/;
+  ((compiling_methods___NitMethodContext___return_value__eq_t)CALL(variable[8],COLOR_compiling_methods___NitMethodContext___return_value__eq))(variable[8], variable[9]) /*NitMethodContext::return_value=*/;
+  variable[8] = variable[0];
+  variable[8] = TAG_Bool((variable[8]==NIT_NULL) || VAL_ISA(variable[8], COLOR_AConcreteInitPropdef, ID_AConcreteInitPropdef)) /*cast AConcreteInitPropdef*/;
+  if (UNTAG_Bool(variable[8])) { /*if*/
     ((compiling_methods___CompilerVisitor___invoke_super_init_calls_after_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___invoke_super_init_calls_after))( variable[1] /*v*/,  NIT_NULL /*null*/) /*CompilerVisitor::invoke_super_init_calls_after*/;
   }
-  variable[10] = variable[0];
-  variable[10] = ((parser_nodes___AConcreteMethPropdef___n_block_t)CALL(variable[10],COLOR_parser_nodes___AConcreteMethPropdef___n_block))(variable[10]) /*AConcreteMethPropdef::n_block*/;
-  variable[10] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[10] ==  NIT_NULL /*null*/) || ((variable[10] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[10],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[10], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[10],COLOR_kernel___Object_____eqeq))(variable[10],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable[10])) { /*if*/
-    variable[10] = variable[0];
-    variable[10] = ((parser_nodes___AConcreteMethPropdef___n_block_t)CALL(variable[10],COLOR_parser_nodes___AConcreteMethPropdef___n_block))(variable[10]) /*AConcreteMethPropdef::n_block*/;
-    ((compiling_methods___CompilerVisitor___compile_stmt_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___compile_stmt))( variable[1] /*v*/, variable[10]) /*CompilerVisitor::compile_stmt*/;
+  variable[8] = variable[0];
+  variable[8] = ((parser_nodes___AConcreteMethPropdef___n_block_t)CALL(variable[8],COLOR_parser_nodes___AConcreteMethPropdef___n_block))(variable[8]) /*AConcreteMethPropdef::n_block*/;
+  variable[8] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[8] ==  NIT_NULL /*null*/) || ((variable[8] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[8],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[8], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[8],COLOR_kernel___Object_____eqeq))(variable[8],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[8])) { /*if*/
+    variable[8] = variable[0];
+    variable[8] = ((parser_nodes___AConcreteMethPropdef___n_block_t)CALL(variable[8],COLOR_parser_nodes___AConcreteMethPropdef___n_block))(variable[8]) /*AConcreteMethPropdef::n_block*/;
+    ((compiling_methods___CompilerVisitor___compile_stmt_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___compile_stmt))( variable[1] /*v*/, variable[8]) /*CompilerVisitor::compile_stmt*/;
   }
-  variable[10] = NEW_String_string___String___init(); /*new String*/
-  variable[11] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable[8] = NEW_String_string___String___init(); /*new String*/
+  variable[9] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable[10] = variable[9];
+  ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[10]) /*String::append*/;
+  variable[11] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+  variable[11] = ((compiling_methods___NitMethodContext___return_label_t)CALL(variable[11],COLOR_compiling_methods___NitMethodContext___return_label))(variable[11]) /*NitMethodContext::return_label*/;
   variable[12] = variable[11];
-  ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[12]) /*String::append*/;
-  variable[13] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
-  variable[13] = ((compiling_methods___NitMethodContext___return_label_t)CALL(variable[13],COLOR_compiling_methods___NitMethodContext___return_label))(variable[13]) /*NitMethodContext::return_label*/;
+  ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[12]) /*String::append*/;
+  variable[13] = NEW_String_string___String___with_native(BOX_NativeString(": while(false);"), TAG_Int(15)); /*new String*/
   variable[14] = variable[13];
-  ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[14]) /*String::append*/;
-  variable[15] = NEW_String_string___String___with_native(BOX_NativeString(": while(false);"), TAG_Int(15)); /*new String*/
-  variable[16] = variable[15];
-  ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[16]) /*String::append*/;
-  ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[10]) /*CompilerVisitor::add_instr*/;
-  variable[10] = variable[0];
-  variable[10] = TAG_Bool((variable[10]==NIT_NULL) || VAL_ISA(variable[10], COLOR_AConcreteInitPropdef, ID_AConcreteInitPropdef)) /*cast AConcreteInitPropdef*/;
-  if (UNTAG_Bool(variable[10])) { /*if*/
-    variable[10] = NEW_String_string___String___init(); /*new String*/
-    variable[11] = NEW_String_string___String___with_native(BOX_NativeString("init_table["), TAG_Int(11)); /*new String*/
-    variable[12] = variable[11];
-    ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[12]) /*String::append*/;
-    variable[13] =  variable[9] /*itpos*/;
-    ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[13]) /*String::append*/;
-    variable[14] = NEW_String_string___String___with_native(BOX_NativeString("] = 1;"), TAG_Int(6)); /*new String*/
-    variable[15] = variable[14];
-    ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[15]) /*String::append*/;
-    ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[10]) /*CompilerVisitor::add_instr*/;
+  ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[14]) /*String::append*/;
+  ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[8]) /*CompilerVisitor::add_instr*/;
+  variable[8] = variable[0];
+  variable[8] = TAG_Bool((variable[8]==NIT_NULL) || VAL_ISA(variable[8], COLOR_AConcreteInitPropdef, ID_AConcreteInitPropdef)) /*cast AConcreteInitPropdef*/;
+  if (UNTAG_Bool(variable[8])) { /*if*/
+    variable[8] = NEW_String_string___String___init(); /*new String*/
+    variable[9] = NEW_String_string___String___with_native(BOX_NativeString("init_table["), TAG_Int(11)); /*new String*/
+    variable[10] = variable[9];
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[10]) /*String::append*/;
+    variable[11] =  variable[7] /*itpos*/;
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[11]) /*String::append*/;
+    variable[12] = NEW_String_string___String___with_native(BOX_NativeString("] = 1;"), TAG_Int(6)); /*new String*/
+    variable[13] = variable[12];
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[13]) /*String::append*/;
+    ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[8]) /*CompilerVisitor::add_instr*/;
   }
-  variable[10] =  NIT_NULL /*null*/;
-  variable[11] = ((static_type___MMLocalProperty___signature_t)CALL( variable[2] /*method*/,COLOR_static_type___MMLocalProperty___signature))( variable[2] /*method*/) /*MMLocalProperty::signature*/;
-  variable[11] = ((static_type___MMSignature___return_type_t)CALL(variable[11],COLOR_static_type___MMSignature___return_type))(variable[11]) /*MMSignature::return_type*/;
-  variable[11] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[11] ==  NIT_NULL /*null*/) || ((variable[11] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[11],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[11], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[11],COLOR_kernel___Object_____eqeq))(variable[11],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable[11])) { /*if*/
-    variable[11] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
-    variable[11] = ((compiling_methods___NitMethodContext___return_value_t)CALL(variable[11],COLOR_compiling_methods___NitMethodContext___return_value))(variable[11]) /*NitMethodContext::return_value*/;
-    variable[10] = variable[11] /*ret=*/;
+  variable[8] =  NIT_NULL /*null*/;
+  variable[9] = ((static_type___MMLocalProperty___signature_t)CALL( variable[2] /*method*/,COLOR_static_type___MMLocalProperty___signature))( variable[2] /*method*/) /*MMLocalProperty::signature*/;
+  variable[9] = ((static_type___MMSignature___return_type_t)CALL(variable[9],COLOR_static_type___MMSignature___return_type))(variable[9]) /*MMSignature::return_type*/;
+  variable[9] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[9] ==  NIT_NULL /*null*/) || ((variable[9] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[9],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[9], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[9],COLOR_kernel___Object_____eqeq))(variable[9],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[9])) { /*if*/
+    variable[9] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+    variable[9] = ((compiling_methods___NitMethodContext___return_value_t)CALL(variable[9],COLOR_compiling_methods___NitMethodContext___return_value))(variable[9]) /*NitMethodContext::return_value*/;
+    variable[8] = variable[9] /*ret=*/;
   }
   ((compiling_methods___CompilerVisitor___nmc__eq_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc__eq))( variable[1] /*v*/,  variable[5] /*old_nmc*/) /*CompilerVisitor::nmc=*/;
-  variable[4] =  variable[10] /*ret*/;
-  goto return_label68;
-  return_label68: while(false);
+  variable[4] =  variable[8] /*ret*/;
+  goto return_label74;
+  return_label74: while(false);
   tracehead = trace.prev;
   return variable[4];
 }
 val_t compiling_methods___ADeferredMethPropdef___do_compile_inside(val_t  self, val_t  param0, val_t  param1, val_t  param2) {
-  struct trace_t trace = {NULL, NULL, 599, LOCATE_compiling_methods___ADeferredMethPropdef___do_compile_inside};
+  struct trace_t trace = {NULL, NULL, 609, LOCATE_compiling_methods___ADeferredMethPropdef___do_compile_inside};
   val_t variable[6];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2803,7 +2812,7 @@ val_t compiling_methods___ADeferredMethPropdef___do_compile_inside(val_t  self, 
   return variable[4];
 }
 val_t compiling_methods___AExternMethPropdef___do_compile_inside(val_t  self, val_t  param0, val_t  param1, val_t  param2) {
-  struct trace_t trace = {NULL, NULL, 613, LOCATE_compiling_methods___AExternMethPropdef___do_compile_inside};
+  struct trace_t trace = {NULL, NULL, 623, LOCATE_compiling_methods___AExternMethPropdef___do_compile_inside};
   val_t variable[29];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2998,7 +3007,7 @@ val_t compiling_methods___AExternMethPropdef___do_compile_inside(val_t  self, va
   return variable[4];
 }
 val_t compiling_methods___AInternMethPropdef___do_compile_inside(val_t  self, val_t  param0, val_t  param1, val_t  param2) {
-  struct trace_t trace = {NULL, NULL, 640, LOCATE_compiling_methods___AInternMethPropdef___do_compile_inside};
+  struct trace_t trace = {NULL, NULL, 650, LOCATE_compiling_methods___AInternMethPropdef___do_compile_inside};
   static val_t once_value_82; static int once_bool_82; /* Once value for variable[8]*/
     static val_t once_value_83; static int once_bool_83; /* Once value for variable[8]*/
       static val_t once_value_85; static int once_bool_85; /* Once value for variable[8]*/
@@ -7044,19 +7053,19 @@ val_t compiling_methods___AInternMethPropdef___do_compile_inside(val_t  self, va
   return variable[4];
 }
 val_t compiling_methods___PExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 815, LOCATE_compiling_methods___PExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 825, LOCATE_compiling_methods___PExpr___compile_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_compiling_methods;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_compiling_methods, 815);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_compiling_methods, 825);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 void compiling_methods___PExpr___prepare_compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 819, LOCATE_compiling_methods___PExpr___prepare_compile_stmt};
+  struct trace_t trace = {NULL, NULL, 829, LOCATE_compiling_methods___PExpr___prepare_compile_stmt};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -7068,7 +7077,7 @@ void compiling_methods___PExpr___prepare_compile_stmt(val_t  self, val_t  param0
   return;
 }
 void compiling_methods___PExpr___compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 824, LOCATE_compiling_methods___PExpr___compile_stmt};
+  struct trace_t trace = {NULL, NULL, 834, LOCATE_compiling_methods___PExpr___compile_stmt};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -7083,7 +7092,7 @@ void compiling_methods___PExpr___compile_stmt(val_t  self, val_t  param0) {
   return;
 }
 void compiling_methods___ABlockExpr___compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 830, LOCATE_compiling_methods___ABlockExpr___compile_stmt};
+  struct trace_t trace = {NULL, NULL, 840, LOCATE_compiling_methods___ABlockExpr___compile_stmt};
   val_t variable[6];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -7108,7 +7117,7 @@ void compiling_methods___ABlockExpr___compile_stmt(val_t  self, val_t  param0) {
   return;
 }
 void compiling_methods___AVardeclExpr___prepare_compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 839, LOCATE_compiling_methods___AVardeclExpr___prepare_compile_stmt};
+  struct trace_t trace = {NULL, NULL, 849, LOCATE_compiling_methods___AVardeclExpr___prepare_compile_stmt};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -7124,7 +7133,7 @@ void compiling_methods___AVardeclExpr___prepare_compile_stmt(val_t  self, val_t 
   return;
 }
 void compiling_methods___AVardeclExpr___compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 844, LOCATE_compiling_methods___AVardeclExpr___compile_stmt};
+  struct trace_t trace = {NULL, NULL, 854, LOCATE_compiling_methods___AVardeclExpr___compile_stmt};
   val_t variable[14];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -7171,7 +7180,7 @@ void compiling_methods___AVardeclExpr___compile_stmt(val_t  self, val_t  param0)
   return;
 }
 void compiling_methods___AReturnExpr___compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 857, LOCATE_compiling_methods___AReturnExpr___compile_stmt};
+  struct trace_t trace = {NULL, NULL, 867, LOCATE_compiling_methods___AReturnExpr___compile_stmt};
   val_t variable[10];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -7223,7 +7232,7 @@ void compiling_methods___AReturnExpr___compile_stmt(val_t  self, val_t  param0) 
   return;
 }
 void compiling_methods___ABreakExpr___compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 869, LOCATE_compiling_methods___ABreakExpr___compile_stmt};
+  struct trace_t trace = {NULL, NULL, 879, LOCATE_compiling_methods___ABreakExpr___compile_stmt};
   val_t variable[10];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -7275,7 +7284,7 @@ void compiling_methods___ABreakExpr___compile_stmt(val_t  self, val_t  param0) {
   return;
 }
 void compiling_methods___AContinueExpr___compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 881, LOCATE_compiling_methods___AContinueExpr___compile_stmt};
+  struct trace_t trace = {NULL, NULL, 891, LOCATE_compiling_methods___AContinueExpr___compile_stmt};
   val_t variable[10];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -7311,7 +7320,7 @@ void compiling_methods___AContinueExpr___compile_stmt(val_t  self, val_t  param0
   return;
 }
 void compiling_methods___AAbortExpr___compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 892, LOCATE_compiling_methods___AAbortExpr___compile_stmt};
+  struct trace_t trace = {NULL, NULL, 902, LOCATE_compiling_methods___AAbortExpr___compile_stmt};
   val_t variable[10];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -7335,7 +7344,7 @@ void compiling_methods___AAbortExpr___compile_stmt(val_t  self, val_t  param0) {
   return;
 }
 void compiling_methods___ADoExpr___compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 899, LOCATE_compiling_methods___ADoExpr___compile_stmt};
+  struct trace_t trace = {NULL, NULL, 909, LOCATE_compiling_methods___ADoExpr___compile_stmt};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -7355,7 +7364,7 @@ void compiling_methods___ADoExpr___compile_stmt(val_t  self, val_t  param0) {
   return;
 }
 void compiling_methods___AIfExpr___compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 908, LOCATE_compiling_methods___AIfExpr___compile_stmt};
+  struct trace_t trace = {NULL, NULL, 918, LOCATE_compiling_methods___AIfExpr___compile_stmt};
   val_t variable[10];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -7407,7 +7416,7 @@ void compiling_methods___AIfExpr___compile_stmt(val_t  self, val_t  param0) {
   return;
 }
 val_t compiling_methods___AIfexprExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 929, LOCATE_compiling_methods___AIfexprExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 939, LOCATE_compiling_methods___AIfexprExpr___compile_expr};
   val_t variable[10];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -7458,7 +7467,7 @@ val_t compiling_methods___AIfexprExpr___compile_expr(val_t  self, val_t  param0)
   return variable[2];
 }
 void compiling_methods___AControlableBlock___compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 950, LOCATE_compiling_methods___AControlableBlock___compile_stmt};
+  struct trace_t trace = {NULL, NULL, 960, LOCATE_compiling_methods___AControlableBlock___compile_stmt};
   val_t variable[13];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -7508,19 +7517,19 @@ void compiling_methods___AControlableBlock___compile_stmt(val_t  self, val_t  pa
   return;
 }
 void compiling_methods___AControlableBlock___compile_inside_block(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 949, LOCATE_compiling_methods___AControlableBlock___compile_inside_block};
+  struct trace_t trace = {NULL, NULL, 959, LOCATE_compiling_methods___AControlableBlock___compile_inside_block};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_compiling_methods;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_compiling_methods, 949);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_compiling_methods, 959);
   nit_exit(1);
   tracehead = trace.prev;
   return;
 }
 void compiling_methods___AWhileExpr___compile_inside_block(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 967, LOCATE_compiling_methods___AWhileExpr___compile_inside_block};
+  struct trace_t trace = {NULL, NULL, 977, LOCATE_compiling_methods___AWhileExpr___compile_inside_block};
   val_t variable[11];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -7586,7 +7595,7 @@ void compiling_methods___AWhileExpr___compile_inside_block(val_t  self, val_t  p
   return;
 }
 void compiling_methods___AForExpr___compile_inside_block(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 985, LOCATE_compiling_methods___AForExpr___compile_inside_block};
+  struct trace_t trace = {NULL, NULL, 995, LOCATE_compiling_methods___AForExpr___compile_inside_block};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -7601,7 +7610,7 @@ void compiling_methods___AForExpr___compile_inside_block(val_t  self, val_t  par
   return;
 }
 void compiling_methods___AForVardeclExpr___compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 992, LOCATE_compiling_methods___AForVardeclExpr___compile_stmt};
+  struct trace_t trace = {NULL, NULL, 1002, LOCATE_compiling_methods___AForVardeclExpr___compile_stmt};
   static val_t once_value_295; static int once_bool_295; /* Once value for variable[6]*/
   static val_t once_value_296; static int once_bool_296; /* Once value for variable[9]*/
   static val_t once_value_297; static int once_bool_297; /* Once value for variable[10]*/
@@ -7737,7 +7746,7 @@ void compiling_methods___AForVardeclExpr___compile_stmt(val_t  self, val_t  para
   variable[14] = ((parser_prod___PNode___parent_t)CALL(variable[14],COLOR_parser_prod___PNode___parent))(variable[14]) /*PNode::parent*/;
   variable[13] = variable[14];
   variable[14] = TAG_Bool(( variable[13] /*par*/==NIT_NULL) || VAL_ISA( variable[13] /*par*/, COLOR_AForExpr, ID_AForExpr)) /*cast AForExpr*/;
-  if (!UNTAG_Bool(variable[14])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_compiling_methods___AForVardeclExpr___compile_stmt, LOCATE_compiling_methods, 1030); nit_exit(1);}
+  if (!UNTAG_Bool(variable[14])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_compiling_methods___AForVardeclExpr___compile_stmt, LOCATE_compiling_methods, 1040); nit_exit(1);}
   variable[15] = ((parser_nodes___AForExpr___n_block_t)CALL( variable[13] /*par*/,COLOR_parser_nodes___AForExpr___n_block))( variable[13] /*par*/) /*AForExpr::n_block*/;
   variable[14] = variable[15];
   variable[15] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[14] /*n_block*/ ==  NIT_NULL /*null*/) || (( variable[14] /*n_block*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[14] /*n_block*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[14] /*n_block*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[14] /*n_block*/,COLOR_kernel___Object_____eqeq))( variable[14] /*n_block*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
@@ -7761,7 +7770,7 @@ void compiling_methods___AForVardeclExpr___compile_stmt(val_t  self, val_t  para
   variable[15] = ((compiling_methods___MMMethod___compile_call_t)CALL( variable[9] /*prop4*/,COLOR_compiling_methods___MMMethod___compile_call))( variable[9] /*prop4*/,  variable[1] /*v*/, variable[15]) /*MMMethod::compile_call*/;
   variable[11] = variable[15] /*e=*/;
   variable[15] = TAG_Bool(( variable[11] /*e*/ ==  NIT_NULL /*null*/) || (( variable[11] /*e*/ != NIT_NULL) && UNTAG_Bool(((string___String_____eqeq_t)CALL( variable[11] /*e*/,COLOR_kernel___Object_____eqeq))( variable[11] /*e*/,  NIT_NULL /*null*/) /*String::==*/)));
-  if (!UNTAG_Bool(variable[15])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_compiling_methods___AForVardeclExpr___compile_stmt, LOCATE_compiling_methods, 1037); nit_exit(1);}
+  if (!UNTAG_Bool(variable[15])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_compiling_methods___AForVardeclExpr___compile_stmt, LOCATE_compiling_methods, 1047); nit_exit(1);}
   ((compiling_base___CompilerVisitor___unindent_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___unindent))( variable[1] /*v*/) /*CompilerVisitor::unindent*/;
   variable[15] = NEW_String_string___String___with_native(BOX_NativeString("}"), TAG_Int(1)); /*new String*/
   ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[15]) /*CompilerVisitor::add_instr*/;
@@ -7782,7 +7791,7 @@ void compiling_methods___AForVardeclExpr___compile_stmt(val_t  self, val_t  para
   return;
 }
 void compiling_methods___AAssertExpr___compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1045, LOCATE_compiling_methods___AAssertExpr___compile_stmt};
+  struct trace_t trace = {NULL, NULL, 1055, LOCATE_compiling_methods___AAssertExpr___compile_stmt};
   val_t variable[18];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -7840,7 +7849,7 @@ void compiling_methods___AAssertExpr___compile_stmt(val_t  self, val_t  param0) 
   return;
 }
 val_t compiling_methods___AVarExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1057, LOCATE_compiling_methods___AVarExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1067, LOCATE_compiling_methods___AVarExpr___compile_expr};
   val_t variable[14];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -7876,7 +7885,7 @@ val_t compiling_methods___AVarExpr___compile_expr(val_t  self, val_t  param0) {
   return variable[2];
 }
 void compiling_methods___AVarAssignExpr___compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1064, LOCATE_compiling_methods___AVarAssignExpr___compile_stmt};
+  struct trace_t trace = {NULL, NULL, 1074, LOCATE_compiling_methods___AVarAssignExpr___compile_stmt};
   val_t variable[15];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -7915,7 +7924,7 @@ void compiling_methods___AVarAssignExpr___compile_stmt(val_t  self, val_t  param
   return;
 }
 void compiling_methods___AVarReassignExpr___compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1072, LOCATE_compiling_methods___AVarReassignExpr___compile_stmt};
+  struct trace_t trace = {NULL, NULL, 1082, LOCATE_compiling_methods___AVarReassignExpr___compile_stmt};
   val_t variable[17];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -7966,7 +7975,7 @@ void compiling_methods___AVarReassignExpr___compile_stmt(val_t  self, val_t  par
   return;
 }
 val_t compiling_methods___ASelfExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1082, LOCATE_compiling_methods___ASelfExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1092, LOCATE_compiling_methods___ASelfExpr___compile_expr};
   val_t variable[10];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8002,7 +8011,7 @@ val_t compiling_methods___ASelfExpr___compile_expr(val_t  self, val_t  param0) {
   return variable[2];
 }
 val_t compiling_methods___AOrExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1089, LOCATE_compiling_methods___AOrExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1099, LOCATE_compiling_methods___AOrExpr___compile_expr};
   val_t variable[10];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8042,7 +8051,7 @@ val_t compiling_methods___AOrExpr___compile_expr(val_t  self, val_t  param0) {
   return variable[2];
 }
 val_t compiling_methods___AAndExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1104, LOCATE_compiling_methods___AAndExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1114, LOCATE_compiling_methods___AAndExpr___compile_expr};
   val_t variable[10];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8082,7 +8091,7 @@ val_t compiling_methods___AAndExpr___compile_expr(val_t  self, val_t  param0) {
   return variable[2];
 }
 val_t compiling_methods___ANotExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1119, LOCATE_compiling_methods___ANotExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1129, LOCATE_compiling_methods___ANotExpr___compile_expr};
   val_t variable[10];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8108,7 +8117,7 @@ val_t compiling_methods___ANotExpr___compile_expr(val_t  self, val_t  param0) {
   return variable[2];
 }
 val_t compiling_methods___AEeExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1126, LOCATE_compiling_methods___AEeExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1136, LOCATE_compiling_methods___AEeExpr___compile_expr};
   val_t variable[14];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8144,7 +8153,7 @@ val_t compiling_methods___AEeExpr___compile_expr(val_t  self, val_t  param0) {
   return variable[2];
 }
 val_t compiling_methods___AIsaExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1135, LOCATE_compiling_methods___AIsaExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1145, LOCATE_compiling_methods___AIsaExpr___compile_expr};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8166,7 +8175,7 @@ val_t compiling_methods___AIsaExpr___compile_expr(val_t  self, val_t  param0) {
   return variable[2];
 }
 val_t compiling_methods___AAsCastExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1143, LOCATE_compiling_methods___AAsCastExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1153, LOCATE_compiling_methods___AAsCastExpr___compile_expr};
   val_t variable[6];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8189,7 +8198,7 @@ val_t compiling_methods___AAsCastExpr___compile_expr(val_t  self, val_t  param0)
   return variable[2];
 }
 val_t compiling_methods___ATrueExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1152, LOCATE_compiling_methods___ATrueExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1162, LOCATE_compiling_methods___ATrueExpr___compile_expr};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8204,7 +8213,7 @@ val_t compiling_methods___ATrueExpr___compile_expr(val_t  self, val_t  param0) {
   return variable[2];
 }
 val_t compiling_methods___AFalseExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1159, LOCATE_compiling_methods___AFalseExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1169, LOCATE_compiling_methods___AFalseExpr___compile_expr};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8219,7 +8228,7 @@ val_t compiling_methods___AFalseExpr___compile_expr(val_t  self, val_t  param0) 
   return variable[2];
 }
 val_t compiling_methods___AIntExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1166, LOCATE_compiling_methods___AIntExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1176, LOCATE_compiling_methods___AIntExpr___compile_expr};
   val_t variable[10];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8245,7 +8254,7 @@ val_t compiling_methods___AIntExpr___compile_expr(val_t  self, val_t  param0) {
   return variable[2];
 }
 val_t compiling_methods___AFloatExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1173, LOCATE_compiling_methods___AFloatExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1183, LOCATE_compiling_methods___AFloatExpr___compile_expr};
   val_t variable[10];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8271,7 +8280,7 @@ val_t compiling_methods___AFloatExpr___compile_expr(val_t  self, val_t  param0) 
   return variable[2];
 }
 val_t compiling_methods___ACharExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1180, LOCATE_compiling_methods___ACharExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1190, LOCATE_compiling_methods___ACharExpr___compile_expr};
   val_t variable[10];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8297,7 +8306,7 @@ val_t compiling_methods___ACharExpr___compile_expr(val_t  self, val_t  param0) {
   return variable[2];
 }
 val_t compiling_methods___AStringFormExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1187, LOCATE_compiling_methods___AStringFormExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1197, LOCATE_compiling_methods___AStringFormExpr___compile_expr};
   static val_t once_value_317; static int once_bool_317; /* Once value for variable[5]*/
   val_t variable[14];
   void **closurevariable = NULL;
@@ -8355,19 +8364,19 @@ val_t compiling_methods___AStringFormExpr___compile_expr(val_t  self, val_t  par
   return variable[2];
 }
 val_t compiling_methods___AStringFormExpr___string_text(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1194, LOCATE_compiling_methods___AStringFormExpr___string_text};
+  struct trace_t trace = {NULL, NULL, 1204, LOCATE_compiling_methods___AStringFormExpr___string_text};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_compiling_methods;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_compiling_methods, 1194);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_compiling_methods, 1204);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 void compiling_methods___AStringFormExpr___compute_string_info(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1203, LOCATE_compiling_methods___AStringFormExpr___compute_string_info};
+  struct trace_t trace = {NULL, NULL, 1213, LOCATE_compiling_methods___AStringFormExpr___compute_string_info};
   val_t variable[10];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8420,7 +8429,7 @@ void compiling_methods___AStringFormExpr___compute_string_info(val_t  self) {
   return;
 }
 val_t compiling_methods___AStringExpr___string_text(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1230, LOCATE_compiling_methods___AStringExpr___string_text};
+  struct trace_t trace = {NULL, NULL, 1240, LOCATE_compiling_methods___AStringExpr___string_text};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8442,7 +8451,7 @@ val_t compiling_methods___AStringExpr___string_text(val_t  self) {
   return variable[1];
 }
 val_t compiling_methods___AStartStringExpr___string_text(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1233, LOCATE_compiling_methods___AStartStringExpr___string_text};
+  struct trace_t trace = {NULL, NULL, 1243, LOCATE_compiling_methods___AStartStringExpr___string_text};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8464,7 +8473,7 @@ val_t compiling_methods___AStartStringExpr___string_text(val_t  self) {
   return variable[1];
 }
 val_t compiling_methods___AMidStringExpr___string_text(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1236, LOCATE_compiling_methods___AMidStringExpr___string_text};
+  struct trace_t trace = {NULL, NULL, 1246, LOCATE_compiling_methods___AMidStringExpr___string_text};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8486,7 +8495,7 @@ val_t compiling_methods___AMidStringExpr___string_text(val_t  self) {
   return variable[1];
 }
 val_t compiling_methods___AEndStringExpr___string_text(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1239, LOCATE_compiling_methods___AEndStringExpr___string_text};
+  struct trace_t trace = {NULL, NULL, 1249, LOCATE_compiling_methods___AEndStringExpr___string_text};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8508,7 +8517,7 @@ val_t compiling_methods___AEndStringExpr___string_text(val_t  self) {
   return variable[1];
 }
 val_t compiling_methods___ASuperstringExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1243, LOCATE_compiling_methods___ASuperstringExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1253, LOCATE_compiling_methods___ASuperstringExpr___compile_expr};
   static val_t once_value_325; static int once_bool_325; /* Once value for variable[5]*/
   static val_t once_value_326; static int once_bool_326; /* Once value for variable[7]*/
   static val_t once_value_327; static int once_bool_327; /* Once value for variable[8]*/
@@ -8595,7 +8604,7 @@ val_t compiling_methods___ASuperstringExpr___compile_expr(val_t  self, val_t  pa
   return variable[2];
 }
 val_t compiling_methods___ANullExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1264, LOCATE_compiling_methods___ANullExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1274, LOCATE_compiling_methods___ANullExpr___compile_expr};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8610,7 +8619,7 @@ val_t compiling_methods___ANullExpr___compile_expr(val_t  self, val_t  param0) {
   return variable[2];
 }
 val_t compiling_methods___AArrayExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1271, LOCATE_compiling_methods___AArrayExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1281, LOCATE_compiling_methods___AArrayExpr___compile_expr};
   static val_t once_value_331; static int once_bool_331; /* Once value for variable[5]*/
   static val_t once_value_332; static int once_bool_332; /* Once value for variable[7]*/
   val_t variable[14];
@@ -8687,7 +8696,7 @@ val_t compiling_methods___AArrayExpr___compile_expr(val_t  self, val_t  param0) 
   return variable[2];
 }
 val_t compiling_methods___ARangeExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1286, LOCATE_compiling_methods___ARangeExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1296, LOCATE_compiling_methods___ARangeExpr___compile_expr};
   val_t variable[8];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8722,19 +8731,19 @@ val_t compiling_methods___ARangeExpr___compile_expr(val_t  self, val_t  param0) 
   return variable[2];
 }
 val_t compiling_methods___ARangeExpr___propname(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1293, LOCATE_compiling_methods___ARangeExpr___propname};
+  struct trace_t trace = {NULL, NULL, 1303, LOCATE_compiling_methods___ARangeExpr___propname};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_compiling_methods;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_compiling_methods, 1293);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_compiling_methods, 1303);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t compiling_methods___ACrangeExpr___propname(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1298, LOCATE_compiling_methods___ACrangeExpr___propname};
+  struct trace_t trace = {NULL, NULL, 1308, LOCATE_compiling_methods___ACrangeExpr___propname};
   static val_t once_value_336; static int once_bool_336; /* Once value for variable[2]*/
   val_t variable[3];
   void **closurevariable = NULL;
@@ -8755,7 +8764,7 @@ val_t compiling_methods___ACrangeExpr___propname(val_t  self) {
   return variable[1];
 }
 val_t compiling_methods___AOrangeExpr___propname(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1301, LOCATE_compiling_methods___AOrangeExpr___propname};
+  struct trace_t trace = {NULL, NULL, 1311, LOCATE_compiling_methods___AOrangeExpr___propname};
   static val_t once_value_338; static int once_bool_338; /* Once value for variable[2]*/
   val_t variable[3];
   void **closurevariable = NULL;
@@ -8776,7 +8785,7 @@ val_t compiling_methods___AOrangeExpr___propname(val_t  self) {
   return variable[1];
 }
 val_t compiling_methods___ASuperExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1311, LOCATE_compiling_methods___ASuperExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1321, LOCATE_compiling_methods___ASuperExpr___compile_expr};
   val_t variable[16];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8910,7 +8919,7 @@ val_t compiling_methods___ASuperExpr___compile_expr(val_t  self, val_t  param0) 
   return variable[2];
 }
 void compiling_methods___ASuperExpr___compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1305, LOCATE_compiling_methods___ASuperExpr___compile_stmt};
+  struct trace_t trace = {NULL, NULL, 1315, LOCATE_compiling_methods___ASuperExpr___compile_stmt};
   val_t variable[10];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8938,7 +8947,7 @@ void compiling_methods___ASuperExpr___compile_stmt(val_t  self, val_t  param0) {
   return;
 }
 val_t compiling_methods___AAttrExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1339, LOCATE_compiling_methods___AAttrExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1349, LOCATE_compiling_methods___AAttrExpr___compile_expr};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8959,7 +8968,7 @@ val_t compiling_methods___AAttrExpr___compile_expr(val_t  self, val_t  param0) {
   return variable[2];
 }
 void compiling_methods___AAttrAssignExpr___compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1347, LOCATE_compiling_methods___AAttrAssignExpr___compile_stmt};
+  struct trace_t trace = {NULL, NULL, 1357, LOCATE_compiling_methods___AAttrAssignExpr___compile_stmt};
   val_t variable[6];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -8983,7 +8992,7 @@ void compiling_methods___AAttrAssignExpr___compile_stmt(val_t  self, val_t  para
   return;
 }
 void compiling_methods___AAttrReassignExpr___compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1355, LOCATE_compiling_methods___AAttrReassignExpr___compile_stmt};
+  struct trace_t trace = {NULL, NULL, 1365, LOCATE_compiling_methods___AAttrReassignExpr___compile_stmt};
   val_t variable[9];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -9015,8 +9024,8 @@ void compiling_methods___AAttrReassignExpr___compile_stmt(val_t  self, val_t  pa
   return;
 }
 val_t compiling_methods___ASendExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1366, LOCATE_compiling_methods___ASendExpr___compile_expr};
-  val_t variable[25];
+  struct trace_t trace = {NULL, NULL, 1376, LOCATE_compiling_methods___ASendExpr___compile_expr};
+  val_t variable[26];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_compiling_methods;
@@ -9043,181 +9052,253 @@ val_t compiling_methods___ASendExpr___compile_expr(val_t  self, val_t  param0) {
     ((array___ArrayIterator___next_t)CALL(variable[5],COLOR_abstract_collection___Iterator___next))(variable[5]) /*ArrayIterator::next*/;
   }
   break_349: while(0);
+  /*variable[5] is variable e*/
   variable[6] = variable[0];
-  variable[6] = ((typing___ASendExpr___closure_defs_t)CALL(variable[6],COLOR_typing___ASendExpr___closure_defs))(variable[6]) /*ASendExpr::closure_defs*/;
-  variable[5] = variable[6];
-  /*variable[6] is variable e*/
-  variable[7] = TAG_Bool(( variable[5] /*cd*/ ==  NIT_NULL /*null*/) || (( variable[5] /*cd*/ != NIT_NULL) && UNTAG_Bool(((array___AbstractArray_____eqeq_t)CALL( variable[5] /*cd*/,COLOR_kernel___Object_____eqeq))( variable[5] /*cd*/,  NIT_NULL /*null*/) /*AbstractArray::==*/)));
-  if (UNTAG_Bool(variable[7])) { /*if*/
-    variable[7] = variable[0];
-    variable[7] = ((typing___AAbsSendExpr___prop_t)CALL(variable[7],COLOR_typing___AAbsSendExpr___prop))(variable[7]) /*AAbsSendExpr::prop*/;
-    variable[7] = ((compiling_methods___MMMethod___compile_call_t)CALL(variable[7],COLOR_compiling_methods___MMMethod___compile_call))(variable[7],  variable[1] /*v*/,  variable[4] /*cargs*/) /*MMMethod::compile_call*/;
-    variable[6] = variable[7] /*e=*/;
+  variable[6] = ((typing___AAbsSendExpr___prop_signature_t)CALL(variable[6],COLOR_typing___AAbsSendExpr___prop_signature))(variable[6]) /*AAbsSendExpr::prop_signature*/;
+  variable[6] = ((static_type___MMSignature___closures_t)CALL(variable[6],COLOR_static_type___MMSignature___closures))(variable[6]) /*MMSignature::closures*/;
+  variable[6] = ((array___AbstractArray___is_empty_t)CALL(variable[6],COLOR_abstract_collection___Collection___is_empty))(variable[6]) /*AbstractArray::is_empty*/;
+  if (UNTAG_Bool(variable[6])) { /*if*/
+    variable[6] = variable[0];
+    variable[6] = ((typing___AAbsSendExpr___prop_t)CALL(variable[6],COLOR_typing___AAbsSendExpr___prop))(variable[6]) /*AAbsSendExpr::prop*/;
+    variable[6] = ((compiling_methods___MMMethod___compile_call_t)CALL(variable[6],COLOR_compiling_methods___MMMethod___compile_call))(variable[6],  variable[1] /*v*/,  variable[4] /*cargs*/) /*MMMethod::compile_call*/;
+    variable[5] = variable[6] /*e=*/;
   } else { /*if*/
-    variable[8] = NEW_Array_array___Array___init(); /*new Array[String]*/
-    variable[7] = variable[8];
-    variable[8] =  NIT_NULL /*null*/;
-    variable[10] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
-    variable[10] = ((compiling_methods___NitMethodContext___break_value_t)CALL(variable[10],COLOR_compiling_methods___NitMethodContext___break_value))(variable[10]) /*NitMethodContext::break_value*/;
-    variable[9] = variable[10];
-    variable[10] = ((compiling_methods___CompilerVisitor___cfc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___cfc))( variable[1] /*v*/) /*CompilerVisitor::cfc*/;
-    variable[10] = ((compiling_methods___CFunctionContext___get_var_t)CALL(variable[10],COLOR_compiling_methods___CFunctionContext___get_var))(variable[10]) /*CFunctionContext::get_var*/;
-    variable[8] = variable[10] /*ve=*/;
-    variable[10] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
-    ((compiling_methods___NitMethodContext___break_value__eq_t)CALL(variable[10],COLOR_compiling_methods___NitMethodContext___break_value__eq))(variable[10],  variable[8] /*ve*/) /*NitMethodContext::break_value=*/;
-    variable[10] = ((array___AbstractArray___length_t)CALL( variable[5] /*cd*/,COLOR_abstract_collection___Collection___length))( variable[5] /*cd*/) /*AbstractArray::length*/;
-    variable[11] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[10]); /*new Range[Int]*/
+    variable[7] = variable[0];
+    variable[7] = ((typing___ASendExpr___closure_defs_t)CALL(variable[7],COLOR_typing___ASendExpr___closure_defs))(variable[7]) /*ASendExpr::closure_defs*/;
+    variable[6] = variable[7];
+    variable[7] =  TAG_Int(0);
+    variable[8] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[6] /*cd*/ ==  NIT_NULL /*null*/) || (( variable[6] /*cd*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[6] /*cd*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*cd*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[6] /*cd*/,COLOR_kernel___Object_____eqeq))( variable[6] /*cd*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    if (UNTAG_Bool(variable[8])) { /*if*/
+      variable[8] = ((array___AbstractArray___length_t)CALL( variable[6] /*cd*/,COLOR_abstract_collection___Collection___length))( variable[6] /*cd*/) /*AbstractArray::length*/;
+      variable[7] = variable[8] /*arity=*/;
+    }
+    variable[9] = NEW_Array_array___Array___init(); /*new Array[String]*/
+    variable[8] = variable[9];
+    variable[9] =  NIT_NULL /*null*/;
+    variable[11] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+    variable[11] = ((compiling_methods___NitMethodContext___break_value_t)CALL(variable[11],COLOR_compiling_methods___NitMethodContext___break_value))(variable[11]) /*NitMethodContext::break_value*/;
     variable[10] = variable[11];
-    variable[10] = ((range___Range___iterator_t)CALL(variable[10],COLOR_abstract_collection___Collection___iterator))(variable[10]) /*Range::iterator*/;
+    variable[11] = ((compiling_methods___CompilerVisitor___cfc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___cfc))( variable[1] /*v*/) /*CompilerVisitor::cfc*/;
+    variable[11] = ((compiling_methods___CFunctionContext___get_var_t)CALL(variable[11],COLOR_compiling_methods___CFunctionContext___get_var))(variable[11]) /*CFunctionContext::get_var*/;
+    variable[9] = variable[11] /*ve=*/;
+    variable[11] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+    ((compiling_methods___NitMethodContext___break_value__eq_t)CALL(variable[11],COLOR_compiling_methods___NitMethodContext___break_value__eq))(variable[11],  variable[9] /*ve*/) /*NitMethodContext::break_value=*/;
+    variable[11] = NEW_Range_range___Range___without_last( TAG_Int(0),  variable[7] /*arity*/); /*new Range[Int]*/
+    variable[11] = ((range___Range___iterator_t)CALL(variable[11],COLOR_abstract_collection___Collection___iterator))(variable[11]) /*Range::iterator*/;
     while (true) { /*for*/
-      variable[11] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[10],COLOR_abstract_collection___Iterator___is_ok))(variable[10]) /*Iterator::is_ok*/;
-      if (!UNTAG_Bool(variable[11])) break; /*for*/
-      variable[11] = ((abstract_collection___Iterator___item_t)CALL(variable[10],COLOR_abstract_collection___Iterator___item))(variable[10]) /*Iterator::item*/;
-      variable[12] = variable[11];
-      variable[14] =  variable[5] /*cd*/;
-      variable[15] =  variable[12] /*i*/;
-      variable[17] = TAG_Bool(UNTAG_Int( variable[15] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-      variable[18] = variable[17];
-      if (UNTAG_Bool(variable[18])) { /* and */
-        variable[18] = variable[14];
-        variable[18] = ATTR_array___AbstractArray____length(variable[18]) /*AbstractArray::_length*/;
-        variable[18] = TAG_Bool(UNTAG_Int( variable[15] /*index*/)<UNTAG_Int(variable[18]));
+      variable[12] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[11],COLOR_abstract_collection___Iterator___is_ok))(variable[11]) /*Iterator::is_ok*/;
+      if (!UNTAG_Bool(variable[12])) break; /*for*/
+      variable[12] = ((abstract_collection___Iterator___item_t)CALL(variable[11],COLOR_abstract_collection___Iterator___item))(variable[11]) /*Iterator::item*/;
+      variable[13] = variable[12];
+      variable[15] =  variable[6] /*cd*/;
+      variable[16] =  variable[13] /*i*/;
+      variable[18] = TAG_Bool(UNTAG_Int( variable[16] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+      variable[19] = variable[18];
+      if (UNTAG_Bool(variable[19])) { /* and */
+        variable[19] = variable[15];
+        variable[19] = ATTR_array___AbstractArray____length(variable[19]) /*AbstractArray::_length*/;
+        variable[19] = TAG_Bool(UNTAG_Int( variable[16] /*index*/)<UNTAG_Int(variable[19]));
       }
+      variable[18] = variable[19];
+      if (!UNTAG_Bool(variable[18])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_compiling_methods, 229); nit_exit(1);}
+      variable[18] = variable[15];
+      variable[18] = ATTR_array___Array____items(variable[18]) /*Array::_items*/;
+      variable[18] = UNBOX_NativeArray(variable[18])[UNTAG_Int( variable[16] /*index*/)];
       variable[17] = variable[18];
-      if (!UNTAG_Bool(variable[17])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_compiling_methods, 229); nit_exit(1);}
-      variable[17] = variable[14];
-      variable[17] = ATTR_array___Array____items(variable[17]) /*Array::_items*/;
-      variable[17] = UNBOX_NativeArray(variable[17])[UNTAG_Int( variable[15] /*index*/)];
-      variable[16] = variable[17];
       goto return_label351;
       return_label351: while(false);
-      variable[14] = variable[16];
-      variable[15] = variable[0];
-      variable[15] = ((typing___AAbsSendExpr___prop_t)CALL(variable[15],COLOR_typing___AAbsSendExpr___prop))(variable[15]) /*AAbsSendExpr::prop*/;
-      variable[15] = ((compiling_methods___MMMethod___closure_cname_t)CALL(variable[15],COLOR_compiling_methods___MMMethod___closure_cname))(variable[15],  variable[12] /*i*/) /*MMMethod::closure_cname*/;
-      variable[14] = ((compiling_methods___PClosureDef___compile_closure_t)CALL(variable[14],COLOR_compiling_methods___PClosureDef___compile_closure))(variable[14],  variable[1] /*v*/, variable[15]) /*PClosureDef::compile_closure*/;
-      variable[13] = variable[14];
-      ((array___AbstractArray___add_t)CALL( variable[7] /*closcns*/,COLOR_abstract_collection___SimpleCollection___add))( variable[7] /*closcns*/,  variable[13] /*cn*/) /*AbstractArray::add*/;
-      ((array___AbstractArray___add_t)CALL( variable[4] /*cargs*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*cargs*/,  variable[13] /*cn*/) /*AbstractArray::add*/;
+      variable[15] = variable[17];
+      variable[16] = variable[0];
+      variable[16] = ((typing___AAbsSendExpr___prop_t)CALL(variable[16],COLOR_typing___AAbsSendExpr___prop))(variable[16]) /*AAbsSendExpr::prop*/;
+      variable[16] = ((compiling_methods___MMMethod___closure_cname_t)CALL(variable[16],COLOR_compiling_methods___MMMethod___closure_cname))(variable[16],  variable[13] /*i*/) /*MMMethod::closure_cname*/;
+      variable[15] = ((compiling_methods___PClosureDef___compile_closure_t)CALL(variable[15],COLOR_compiling_methods___PClosureDef___compile_closure))(variable[15],  variable[1] /*v*/, variable[16]) /*PClosureDef::compile_closure*/;
+      variable[14] = variable[15];
+      ((array___AbstractArray___add_t)CALL( variable[8] /*closcns*/,COLOR_abstract_collection___SimpleCollection___add))( variable[8] /*closcns*/,  variable[14] /*cn*/) /*AbstractArray::add*/;
+      ((array___AbstractArray___add_t)CALL( variable[4] /*cargs*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*cargs*/,  variable[14] /*cn*/) /*AbstractArray::add*/;
       continue_350: while(0);
-      ((abstract_collection___Iterator___next_t)CALL(variable[10],COLOR_abstract_collection___Iterator___next))(variable[10]) /*Iterator::next*/;
+      ((abstract_collection___Iterator___next_t)CALL(variable[11],COLOR_abstract_collection___Iterator___next))(variable[11]) /*Iterator::next*/;
     }
     break_350: while(0);
-    variable[10] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
-    ((compiling_methods___NitMethodContext___break_value__eq_t)CALL(variable[10],COLOR_compiling_methods___NitMethodContext___break_value__eq))(variable[10],  variable[9] /*old_bv*/) /*NitMethodContext::break_value=*/;
-    variable[10] = variable[0];
-    variable[10] = ((typing___AAbsSendExpr___prop_t)CALL(variable[10],COLOR_typing___AAbsSendExpr___prop))(variable[10]) /*AAbsSendExpr::prop*/;
-    variable[10] = ((compiling_methods___MMMethod___compile_call_t)CALL(variable[10],COLOR_compiling_methods___MMMethod___compile_call))(variable[10],  variable[1] /*v*/,  variable[4] /*cargs*/) /*MMMethod::compile_call*/;
-    variable[6] = variable[10] /*e=*/;
-    variable[10] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[6] /*e*/ ==  NIT_NULL /*null*/) || (( variable[6] /*e*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[6] /*e*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*e*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[6] /*e*/,COLOR_kernel___Object_____eqeq))( variable[6] /*e*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    if (UNTAG_Bool(variable[10])) { /*if*/
-      ((compiling_methods___CompilerVisitor___add_assignment_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___add_assignment))( variable[1] /*v*/,  variable[8] /*ve*/,  variable[6] /*e*/) /*CompilerVisitor::add_assignment*/;
-      variable[6] =  variable[8] /*ve*/ /*e=*/;
-    }
-    variable[10] = ((array___AbstractArray___length_t)CALL( variable[5] /*cd*/,COLOR_abstract_collection___Collection___length))( variable[5] /*cd*/) /*AbstractArray::length*/;
-    variable[11] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[10]); /*new Range[Int]*/
-    variable[10] = variable[11];
-    variable[10] = ((range___Range___iterator_t)CALL(variable[10],COLOR_abstract_collection___Collection___iterator))(variable[10]) /*Range::iterator*/;
+    variable[11] = variable[0];
+    variable[11] = ((typing___AAbsSendExpr___prop_signature_t)CALL(variable[11],COLOR_typing___AAbsSendExpr___prop_signature))(variable[11]) /*AAbsSendExpr::prop_signature*/;
+    variable[11] = ((static_type___MMSignature___closures_t)CALL(variable[11],COLOR_static_type___MMSignature___closures))(variable[11]) /*MMSignature::closures*/;
+    variable[11] = ((array___AbstractArray___length_t)CALL(variable[11],COLOR_abstract_collection___Collection___length))(variable[11]) /*AbstractArray::length*/;
+    variable[12] = NEW_Range_range___Range___without_last( variable[7] /*arity*/, variable[11]); /*new Range[Int]*/
+    variable[11] = variable[12];
+    variable[11] = ((range___Range___iterator_t)CALL(variable[11],COLOR_abstract_collection___Collection___iterator))(variable[11]) /*Range::iterator*/;
     while (true) { /*for*/
-      variable[11] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[10],COLOR_abstract_collection___Iterator___is_ok))(variable[10]) /*Iterator::is_ok*/;
-      if (!UNTAG_Bool(variable[11])) break; /*for*/
-      variable[11] = ((abstract_collection___Iterator___item_t)CALL(variable[10],COLOR_abstract_collection___Iterator___item))(variable[10]) /*Iterator::item*/;
-      variable[12] = variable[11];
-      variable[13] = NEW_String_string___String___init(); /*new String*/
-      variable[14] = NEW_String_string___String___with_native(BOX_NativeString("if ("), TAG_Int(4)); /*new String*/
-      variable[15] = variable[14];
-      ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[15]) /*String::append*/;
-      variable[16] =  variable[7] /*closcns*/;
-      variable[17] =  variable[12] /*i*/;
-      variable[19] = TAG_Bool(UNTAG_Int( variable[17] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-      variable[20] = variable[19];
-      if (UNTAG_Bool(variable[20])) { /* and */
-        variable[20] = variable[16];
-        variable[20] = ATTR_array___AbstractArray____length(variable[20]) /*AbstractArray::_length*/;
-        variable[20] = TAG_Bool(UNTAG_Int( variable[17] /*index*/)<UNTAG_Int(variable[20]));
+      variable[12] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[11],COLOR_abstract_collection___Iterator___is_ok))(variable[11]) /*Iterator::is_ok*/;
+      if (!UNTAG_Bool(variable[12])) break; /*for*/
+      variable[12] = ((abstract_collection___Iterator___item_t)CALL(variable[11],COLOR_abstract_collection___Iterator___item))(variable[11]) /*Iterator::item*/;
+      variable[13] = variable[12];
+      variable[14] = NEW_String_string___String___with_native(BOX_NativeString("NULL"), TAG_Int(4)); /*new String*/
+      ((array___AbstractArray___add_t)CALL( variable[4] /*cargs*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*cargs*/, variable[14]) /*AbstractArray::add*/;
+      continue_352: while(0);
+      ((abstract_collection___Iterator___next_t)CALL(variable[11],COLOR_abstract_collection___Iterator___next))(variable[11]) /*Iterator::next*/;
+    }
+    break_352: while(0);
+    variable[11] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+    ((compiling_methods___NitMethodContext___break_value__eq_t)CALL(variable[11],COLOR_compiling_methods___NitMethodContext___break_value__eq))(variable[11],  variable[10] /*old_bv*/) /*NitMethodContext::break_value=*/;
+    variable[11] = variable[0];
+    variable[11] = ((typing___AAbsSendExpr___prop_t)CALL(variable[11],COLOR_typing___AAbsSendExpr___prop))(variable[11]) /*AAbsSendExpr::prop*/;
+    variable[11] = ((compiling_methods___MMMethod___compile_call_t)CALL(variable[11],COLOR_compiling_methods___MMMethod___compile_call))(variable[11],  variable[1] /*v*/,  variable[4] /*cargs*/) /*MMMethod::compile_call*/;
+    variable[5] = variable[11] /*e=*/;
+    variable[11] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*e*/ ==  NIT_NULL /*null*/) || (( variable[5] /*e*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*e*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*e*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*e*/,COLOR_kernel___Object_____eqeq))( variable[5] /*e*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    if (UNTAG_Bool(variable[11])) { /*if*/
+      ((compiling_methods___CompilerVisitor___add_assignment_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___add_assignment))( variable[1] /*v*/,  variable[9] /*ve*/,  variable[5] /*e*/) /*CompilerVisitor::add_assignment*/;
+      variable[5] =  variable[9] /*ve*/ /*e=*/;
+    }
+    variable[11] = NEW_Range_range___Range___without_last( TAG_Int(0),  variable[7] /*arity*/); /*new Range[Int]*/
+    variable[11] = ((range___Range___iterator_t)CALL(variable[11],COLOR_abstract_collection___Collection___iterator))(variable[11]) /*Range::iterator*/;
+    while (true) { /*for*/
+      variable[12] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[11],COLOR_abstract_collection___Iterator___is_ok))(variable[11]) /*Iterator::is_ok*/;
+      if (!UNTAG_Bool(variable[12])) break; /*for*/
+      variable[12] = ((abstract_collection___Iterator___item_t)CALL(variable[11],COLOR_abstract_collection___Iterator___item))(variable[11]) /*Iterator::item*/;
+      variable[13] = variable[12];
+      variable[14] = NEW_String_string___String___init(); /*new String*/
+      variable[15] = NEW_String_string___String___with_native(BOX_NativeString("if ("), TAG_Int(4)); /*new String*/
+      variable[16] = variable[15];
+      ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[16]) /*String::append*/;
+      variable[17] =  variable[8] /*closcns*/;
+      variable[18] =  variable[13] /*i*/;
+      variable[20] = TAG_Bool(UNTAG_Int( variable[18] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+      variable[21] = variable[20];
+      if (UNTAG_Bool(variable[21])) { /* and */
+        variable[21] = variable[17];
+        variable[21] = ATTR_array___AbstractArray____length(variable[21]) /*AbstractArray::_length*/;
+        variable[21] = TAG_Bool(UNTAG_Int( variable[18] /*index*/)<UNTAG_Int(variable[21]));
       }
+      variable[20] = variable[21];
+      if (!UNTAG_Bool(variable[20])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_compiling_methods, 229); nit_exit(1);}
+      variable[20] = variable[17];
+      variable[20] = ATTR_array___Array____items(variable[20]) /*Array::_items*/;
+      variable[20] = UNBOX_NativeArray(variable[20])[UNTAG_Int( variable[18] /*index*/)];
       variable[19] = variable[20];
-      if (!UNTAG_Bool(variable[19])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_compiling_methods, 229); nit_exit(1);}
-      variable[19] = variable[16];
-      variable[19] = ATTR_array___Array____items(variable[19]) /*Array::_items*/;
-      variable[19] = UNBOX_NativeArray(variable[19])[UNTAG_Int( variable[17] /*index*/)];
-      variable[18] = variable[19];
-      goto return_label353;
-      return_label353: while(false);
-      variable[16] = variable[18];
-      variable[17] = variable[16];
-      ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[17]) /*String::append*/;
-      variable[18] = NEW_String_string___String___with_native(BOX_NativeString("->has_broke != NULL) {"), TAG_Int(22)); /*new String*/
-      variable[19] = variable[18];
-      ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[19]) /*String::append*/;
-      ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[13]) /*CompilerVisitor::add_instr*/;
-      ((compiling_base___CompilerVisitor___indent_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___indent))( variable[1] /*v*/) /*CompilerVisitor::indent*/;
-      variable[13] = NEW_String_string___String___init(); /*new String*/
-      variable[14] = NEW_String_string___String___with_native(BOX_NativeString("if ("), TAG_Int(4)); /*new String*/
-      variable[15] = variable[14];
-      ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[15]) /*String::append*/;
-      variable[16] =  variable[7] /*closcns*/;
-      variable[17] =  variable[12] /*i*/;
-      variable[19] = TAG_Bool(UNTAG_Int( variable[17] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-      variable[20] = variable[19];
-      if (UNTAG_Bool(variable[20])) { /* and */
-        variable[20] = variable[16];
-        variable[20] = ATTR_array___AbstractArray____length(variable[20]) /*AbstractArray::_length*/;
-        variable[20] = TAG_Bool(UNTAG_Int( variable[17] /*index*/)<UNTAG_Int(variable[20]));
-      }
-      variable[19] = variable[20];
-      if (!UNTAG_Bool(variable[19])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_compiling_methods, 229); nit_exit(1);}
-      variable[19] = variable[16];
-      variable[19] = ATTR_array___Array____items(variable[19]) /*Array::_items*/;
-      variable[19] = UNBOX_NativeArray(variable[19])[UNTAG_Int( variable[17] /*index*/)];
-      variable[18] = variable[19];
       goto return_label354;
       return_label354: while(false);
-      variable[16] = variable[18];
-      variable[17] = variable[16];
-      ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[17]) /*String::append*/;
-      variable[18] = NEW_String_string___String___with_native(BOX_NativeString("->has_broke != &("), TAG_Int(17)); /*new String*/
-      variable[19] = variable[18];
-      ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[19]) /*String::append*/;
-      variable[20] =  variable[8] /*ve*/;
-      ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[20]) /*String::append*/;
-      variable[21] = NEW_String_string___String___with_native(BOX_NativeString(")) {"), TAG_Int(4)); /*new String*/
-      variable[22] = variable[21];
-      ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[22]) /*String::append*/;
-      ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[13]) /*CompilerVisitor::add_instr*/;
+      variable[17] = variable[19];
+      variable[18] = variable[17];
+      ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[18]) /*String::append*/;
+      variable[19] = NEW_String_string___String___with_native(BOX_NativeString("->has_broke != NULL) {"), TAG_Int(22)); /*new String*/
+      variable[20] = variable[19];
+      ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[20]) /*String::append*/;
+      ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[14]) /*CompilerVisitor::add_instr*/;
       ((compiling_base___CompilerVisitor___indent_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___indent))( variable[1] /*v*/) /*CompilerVisitor::indent*/;
-      variable[13] = ((compiling_methods___CompilerVisitor___cfc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___cfc))( variable[1] /*v*/) /*CompilerVisitor::cfc*/;
-      variable[13] = ((compiling_methods___CFunctionContext___in_closure_t)CALL(variable[13],COLOR_compiling_methods___CFunctionContext___in_closure))(variable[13]) /*CFunctionContext::in_closure*/;
-      if (UNTAG_Bool(variable[13])) { /*if*/
-        variable[13] = NEW_String_string___String___init(); /*new String*/
-        variable[14] = NEW_String_string___String___with_native(BOX_NativeString("closctx->has_broke = "), TAG_Int(21)); /*new String*/
-        variable[15] = variable[14];
-        ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[15]) /*String::append*/;
-        variable[16] =  variable[7] /*closcns*/;
-        variable[17] =  variable[12] /*i*/;
-        variable[19] = TAG_Bool(UNTAG_Int( variable[17] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-        variable[20] = variable[19];
-        if (UNTAG_Bool(variable[20])) { /* and */
-          variable[20] = variable[16];
-          variable[20] = ATTR_array___AbstractArray____length(variable[20]) /*AbstractArray::_length*/;
-          variable[20] = TAG_Bool(UNTAG_Int( variable[17] /*index*/)<UNTAG_Int(variable[20]));
+      variable[14] = NEW_String_string___String___init(); /*new String*/
+      variable[15] = NEW_String_string___String___with_native(BOX_NativeString("if ("), TAG_Int(4)); /*new String*/
+      variable[16] = variable[15];
+      ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[16]) /*String::append*/;
+      variable[17] =  variable[8] /*closcns*/;
+      variable[18] =  variable[13] /*i*/;
+      variable[20] = TAG_Bool(UNTAG_Int( variable[18] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+      variable[21] = variable[20];
+      if (UNTAG_Bool(variable[21])) { /* and */
+        variable[21] = variable[17];
+        variable[21] = ATTR_array___AbstractArray____length(variable[21]) /*AbstractArray::_length*/;
+        variable[21] = TAG_Bool(UNTAG_Int( variable[18] /*index*/)<UNTAG_Int(variable[21]));
+      }
+      variable[20] = variable[21];
+      if (!UNTAG_Bool(variable[20])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_compiling_methods, 229); nit_exit(1);}
+      variable[20] = variable[17];
+      variable[20] = ATTR_array___Array____items(variable[20]) /*Array::_items*/;
+      variable[20] = UNBOX_NativeArray(variable[20])[UNTAG_Int( variable[18] /*index*/)];
+      variable[19] = variable[20];
+      goto return_label355;
+      return_label355: while(false);
+      variable[17] = variable[19];
+      variable[18] = variable[17];
+      ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[18]) /*String::append*/;
+      variable[19] = NEW_String_string___String___with_native(BOX_NativeString("->has_broke != &("), TAG_Int(17)); /*new String*/
+      variable[20] = variable[19];
+      ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[20]) /*String::append*/;
+      variable[21] =  variable[9] /*ve*/;
+      ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[21]) /*String::append*/;
+      variable[22] = NEW_String_string___String___with_native(BOX_NativeString(")) {"), TAG_Int(4)); /*new String*/
+      variable[23] = variable[22];
+      ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[23]) /*String::append*/;
+      ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[14]) /*CompilerVisitor::add_instr*/;
+      ((compiling_base___CompilerVisitor___indent_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___indent))( variable[1] /*v*/) /*CompilerVisitor::indent*/;
+      variable[14] = ((compiling_methods___CompilerVisitor___cfc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___cfc))( variable[1] /*v*/) /*CompilerVisitor::cfc*/;
+      variable[14] = ((compiling_methods___CFunctionContext___in_closure_t)CALL(variable[14],COLOR_compiling_methods___CFunctionContext___in_closure))(variable[14]) /*CFunctionContext::in_closure*/;
+      if (UNTAG_Bool(variable[14])) { /*if*/
+        variable[14] = NEW_String_string___String___init(); /*new String*/
+        variable[15] = NEW_String_string___String___with_native(BOX_NativeString("closctx->has_broke = "), TAG_Int(21)); /*new String*/
+        variable[16] = variable[15];
+        ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[16]) /*String::append*/;
+        variable[17] =  variable[8] /*closcns*/;
+        variable[18] =  variable[13] /*i*/;
+        variable[20] = TAG_Bool(UNTAG_Int( variable[18] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+        variable[21] = variable[20];
+        if (UNTAG_Bool(variable[21])) { /* and */
+          variable[21] = variable[17];
+          variable[21] = ATTR_array___AbstractArray____length(variable[21]) /*AbstractArray::_length*/;
+          variable[21] = TAG_Bool(UNTAG_Int( variable[18] /*index*/)<UNTAG_Int(variable[21]));
         }
+        variable[20] = variable[21];
+        if (!UNTAG_Bool(variable[20])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_compiling_methods, 229); nit_exit(1);}
+        variable[20] = variable[17];
+        variable[20] = ATTR_array___Array____items(variable[20]) /*Array::_items*/;
+        variable[20] = UNBOX_NativeArray(variable[20])[UNTAG_Int( variable[18] /*index*/)];
         variable[19] = variable[20];
-        if (!UNTAG_Bool(variable[19])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_compiling_methods, 229); nit_exit(1);}
-        variable[19] = variable[16];
-        variable[19] = ATTR_array___Array____items(variable[19]) /*Array::_items*/;
-        variable[19] = UNBOX_NativeArray(variable[19])[UNTAG_Int( variable[17] /*index*/)];
-        variable[18] = variable[19];
-        goto return_label355;
-        return_label355: while(false);
-        variable[16] = variable[18];
-        variable[17] = variable[16];
-        ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[17]) /*String::append*/;
-        variable[18] = NEW_String_string___String___with_native(BOX_NativeString("->has_broke; closctx->broke_value = "), TAG_Int(36)); /*new String*/
+        goto return_label356;
+        return_label356: while(false);
+        variable[17] = variable[19];
+        variable[18] = variable[17];
+        ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[18]) /*String::append*/;
+        variable[19] = NEW_String_string___String___with_native(BOX_NativeString("->has_broke; closctx->broke_value = "), TAG_Int(36)); /*new String*/
+        variable[20] = variable[19];
+        ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[20]) /*String::append*/;
+        variable[21] =  variable[8] /*closcns*/;
+        variable[22] =  variable[13] /*i*/;
+        variable[24] = TAG_Bool(UNTAG_Int( variable[22] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+        variable[25] = variable[24];
+        if (UNTAG_Bool(variable[25])) { /* and */
+          variable[25] = variable[21];
+          variable[25] = ATTR_array___AbstractArray____length(variable[25]) /*AbstractArray::_length*/;
+          variable[25] = TAG_Bool(UNTAG_Int( variable[22] /*index*/)<UNTAG_Int(variable[25]));
+        }
+        variable[24] = variable[25];
+        if (!UNTAG_Bool(variable[24])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_compiling_methods, 229); nit_exit(1);}
+        variable[24] = variable[21];
+        variable[24] = ATTR_array___Array____items(variable[24]) /*Array::_items*/;
+        variable[24] = UNBOX_NativeArray(variable[24])[UNTAG_Int( variable[22] /*index*/)];
+        variable[23] = variable[24];
+        goto return_label357;
+        return_label357: while(false);
+        variable[21] = variable[23];
+        variable[22] = variable[21];
+        ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[22]) /*String::append*/;
+        variable[23] = NEW_String_string___String___with_native(BOX_NativeString("->broke_value;"), TAG_Int(14)); /*new String*/
+        variable[24] = variable[23];
+        ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[24]) /*String::append*/;
+        ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[14]) /*CompilerVisitor::add_instr*/;
+      }
+      variable[14] = NEW_String_string___String___init(); /*new String*/
+      variable[15] = NEW_String_string___String___with_native(BOX_NativeString("goto "), TAG_Int(5)); /*new String*/
+      variable[16] = variable[15];
+      ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[16]) /*String::append*/;
+      variable[17] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+      variable[17] = ((compiling_methods___NitMethodContext___return_label_t)CALL(variable[17],COLOR_compiling_methods___NitMethodContext___return_label))(variable[17]) /*NitMethodContext::return_label*/;
+      variable[18] = variable[17];
+      ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[18]) /*String::append*/;
+      variable[19] = NEW_String_string___String___with_native(BOX_NativeString(";"), TAG_Int(1)); /*new String*/
+      variable[20] = variable[19];
+      ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[20]) /*String::append*/;
+      ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[14]) /*CompilerVisitor::add_instr*/;
+      ((compiling_base___CompilerVisitor___unindent_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___unindent))( variable[1] /*v*/) /*CompilerVisitor::unindent*/;
+      variable[14] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*e*/ ==  NIT_NULL /*null*/) || (( variable[5] /*e*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*e*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*e*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*e*/,COLOR_kernel___Object_____eqeq))( variable[5] /*e*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+      if (UNTAG_Bool(variable[14])) { /*if*/
+        variable[14] = NEW_String_string___String___init(); /*new String*/
+        variable[15] = NEW_String_string___String___with_native(BOX_NativeString("} else "), TAG_Int(7)); /*new String*/
+        variable[16] = variable[15];
+        ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[16]) /*String::append*/;
+        variable[17] =  variable[9] /*ve*/;
+        ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[17]) /*String::append*/;
+        variable[18] = NEW_String_string___String___with_native(BOX_NativeString(" = "), TAG_Int(3)); /*new String*/
         variable[19] = variable[18];
-        ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[19]) /*String::append*/;
-        variable[20] =  variable[7] /*closcns*/;
-        variable[21] =  variable[12] /*i*/;
+        ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[19]) /*String::append*/;
+        variable[20] =  variable[8] /*closcns*/;
+        variable[21] =  variable[13] /*i*/;
         variable[23] = TAG_Bool(UNTAG_Int( variable[21] /*index*/)>=UNTAG_Int( TAG_Int(0)));
         variable[24] = variable[23];
         if (UNTAG_Bool(variable[24])) { /* and */
@@ -9231,93 +9312,44 @@ val_t compiling_methods___ASendExpr___compile_expr(val_t  self, val_t  param0) {
         variable[23] = ATTR_array___Array____items(variable[23]) /*Array::_items*/;
         variable[23] = UNBOX_NativeArray(variable[23])[UNTAG_Int( variable[21] /*index*/)];
         variable[22] = variable[23];
-        goto return_label356;
-        return_label356: while(false);
+        goto return_label358;
+        return_label358: while(false);
         variable[20] = variable[22];
         variable[21] = variable[20];
-        ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[21]) /*String::append*/;
+        ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[21]) /*String::append*/;
         variable[22] = NEW_String_string___String___with_native(BOX_NativeString("->broke_value;"), TAG_Int(14)); /*new String*/
         variable[23] = variable[22];
-        ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[23]) /*String::append*/;
-        ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[13]) /*CompilerVisitor::add_instr*/;
-      }
-      variable[13] = NEW_String_string___String___init(); /*new String*/
-      variable[14] = NEW_String_string___String___with_native(BOX_NativeString("goto "), TAG_Int(5)); /*new String*/
-      variable[15] = variable[14];
-      ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[15]) /*String::append*/;
-      variable[16] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
-      variable[16] = ((compiling_methods___NitMethodContext___return_label_t)CALL(variable[16],COLOR_compiling_methods___NitMethodContext___return_label))(variable[16]) /*NitMethodContext::return_label*/;
-      variable[17] = variable[16];
-      ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[17]) /*String::append*/;
-      variable[18] = NEW_String_string___String___with_native(BOX_NativeString(";"), TAG_Int(1)); /*new String*/
-      variable[19] = variable[18];
-      ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[19]) /*String::append*/;
-      ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[13]) /*CompilerVisitor::add_instr*/;
-      ((compiling_base___CompilerVisitor___unindent_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___unindent))( variable[1] /*v*/) /*CompilerVisitor::unindent*/;
-      variable[13] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[6] /*e*/ ==  NIT_NULL /*null*/) || (( variable[6] /*e*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[6] /*e*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*e*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[6] /*e*/,COLOR_kernel___Object_____eqeq))( variable[6] /*e*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-      if (UNTAG_Bool(variable[13])) { /*if*/
-        variable[13] = NEW_String_string___String___init(); /*new String*/
-        variable[14] = NEW_String_string___String___with_native(BOX_NativeString("} else "), TAG_Int(7)); /*new String*/
-        variable[15] = variable[14];
-        ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[15]) /*String::append*/;
-        variable[16] =  variable[8] /*ve*/;
-        ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[16]) /*String::append*/;
-        variable[17] = NEW_String_string___String___with_native(BOX_NativeString(" = "), TAG_Int(3)); /*new String*/
-        variable[18] = variable[17];
-        ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[18]) /*String::append*/;
-        variable[19] =  variable[7] /*closcns*/;
-        variable[20] =  variable[12] /*i*/;
-        variable[22] = TAG_Bool(UNTAG_Int( variable[20] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-        variable[23] = variable[22];
-        if (UNTAG_Bool(variable[23])) { /* and */
-          variable[23] = variable[19];
-          variable[23] = ATTR_array___AbstractArray____length(variable[23]) /*AbstractArray::_length*/;
-          variable[23] = TAG_Bool(UNTAG_Int( variable[20] /*index*/)<UNTAG_Int(variable[23]));
-        }
-        variable[22] = variable[23];
-        if (!UNTAG_Bool(variable[22])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_compiling_methods, 229); nit_exit(1);}
-        variable[22] = variable[19];
-        variable[22] = ATTR_array___Array____items(variable[22]) /*Array::_items*/;
-        variable[22] = UNBOX_NativeArray(variable[22])[UNTAG_Int( variable[20] /*index*/)];
-        variable[21] = variable[22];
-        goto return_label357;
-        return_label357: while(false);
-        variable[19] = variable[21];
-        variable[20] = variable[19];
-        ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[20]) /*String::append*/;
-        variable[21] = NEW_String_string___String___with_native(BOX_NativeString("->broke_value;"), TAG_Int(14)); /*new String*/
-        variable[22] = variable[21];
-        ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[22]) /*String::append*/;
-        ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[13]) /*CompilerVisitor::add_instr*/;
+        ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[23]) /*String::append*/;
+        ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[14]) /*CompilerVisitor::add_instr*/;
       } else { /*if*/
-        variable[13] = NEW_String_string___String___with_native(BOX_NativeString("}"), TAG_Int(1)); /*new String*/
-        ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[13]) /*CompilerVisitor::add_instr*/;
+        variable[14] = NEW_String_string___String___with_native(BOX_NativeString("}"), TAG_Int(1)); /*new String*/
+        ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[14]) /*CompilerVisitor::add_instr*/;
       }
       ((compiling_base___CompilerVisitor___unindent_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___unindent))( variable[1] /*v*/) /*CompilerVisitor::unindent*/;
-      variable[13] = NEW_String_string___String___with_native(BOX_NativeString("}"), TAG_Int(1)); /*new String*/
-      ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[13]) /*CompilerVisitor::add_instr*/;
-      continue_352: while(0);
-      ((abstract_collection___Iterator___next_t)CALL(variable[10],COLOR_abstract_collection___Iterator___next))(variable[10]) /*Iterator::next*/;
+      variable[14] = NEW_String_string___String___with_native(BOX_NativeString("}"), TAG_Int(1)); /*new String*/
+      ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[14]) /*CompilerVisitor::add_instr*/;
+      continue_353: while(0);
+      ((abstract_collection___Iterator___next_t)CALL(variable[11],COLOR_abstract_collection___Iterator___next))(variable[11]) /*Iterator::next*/;
     }
-    break_352: while(0);
+    break_353: while(0);
   }
-  variable[7] = variable[0];
-  variable[7] = ((typing___AAbsSendExpr___prop_t)CALL(variable[7],COLOR_typing___AAbsSendExpr___prop))(variable[7]) /*AAbsSendExpr::prop*/;
-  variable[7] = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable[7],COLOR_abstractmetamodel___MMLocalProperty___global))(variable[7]) /*MMLocalProperty::global*/;
-  variable[7] = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable[7],COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable[7]) /*MMGlobalProperty::is_init*/;
-  if (UNTAG_Bool(variable[7])) { /*if*/
-    variable[7] = variable[0];
-    variable[7] = ((typing___AAbsSendExpr___prop_t)CALL(variable[7],COLOR_typing___AAbsSendExpr___prop))(variable[7]) /*AAbsSendExpr::prop*/;
-    ((compiling_methods___CompilerVisitor___invoke_super_init_calls_after_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___invoke_super_init_calls_after))( variable[1] /*v*/, variable[7]) /*CompilerVisitor::invoke_super_init_calls_after*/;
+  variable[6] = variable[0];
+  variable[6] = ((typing___AAbsSendExpr___prop_t)CALL(variable[6],COLOR_typing___AAbsSendExpr___prop))(variable[6]) /*AAbsSendExpr::prop*/;
+  variable[6] = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable[6],COLOR_abstractmetamodel___MMLocalProperty___global))(variable[6]) /*MMLocalProperty::global*/;
+  variable[6] = ((abstractmetamodel___MMGlobalProperty___is_init_t)CALL(variable[6],COLOR_abstractmetamodel___MMGlobalProperty___is_init))(variable[6]) /*MMGlobalProperty::is_init*/;
+  if (UNTAG_Bool(variable[6])) { /*if*/
+    variable[6] = variable[0];
+    variable[6] = ((typing___AAbsSendExpr___prop_t)CALL(variable[6],COLOR_typing___AAbsSendExpr___prop))(variable[6]) /*AAbsSendExpr::prop*/;
+    ((compiling_methods___CompilerVisitor___invoke_super_init_calls_after_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___invoke_super_init_calls_after))( variable[1] /*v*/, variable[6]) /*CompilerVisitor::invoke_super_init_calls_after*/;
   }
-  variable[2] =  variable[6] /*e*/;
+  variable[2] =  variable[5] /*e*/;
   goto return_label348;
   return_label348: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 void compiling_methods___ASendExpr___compile_stmt(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1435, LOCATE_compiling_methods___ASendExpr___compile_stmt};
+  struct trace_t trace = {NULL, NULL, 1450, LOCATE_compiling_methods___ASendExpr___compile_stmt};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -9333,12 +9365,12 @@ void compiling_methods___ASendExpr___compile_stmt(val_t  self, val_t  param0) {
     variable[4] = ((string___String_____plus_t)CALL( variable[3] /*e*/,COLOR_string___String_____plus))( variable[3] /*e*/, variable[4]) /*String::+*/;
     ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[4]) /*CompilerVisitor::add_instr*/;
   }
-  return_label358: while(false);
+  return_label359: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t compiling_methods___ASendReassignExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1445, LOCATE_compiling_methods___ASendReassignExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1460, LOCATE_compiling_methods___ASendReassignExpr___compile_expr};
   val_t variable[10];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -9362,10 +9394,10 @@ val_t compiling_methods___ASendReassignExpr___compile_expr(val_t  self, val_t  p
     variable[7] = variable[6];
     variable[8] = ((compiling_methods___CompilerVisitor___compile_expr_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___compile_expr))( variable[1] /*v*/,  variable[7] /*a*/) /*CompilerVisitor::compile_expr*/;
     ((array___AbstractArray___add_t)CALL( variable[4] /*cargs*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*cargs*/, variable[8]) /*AbstractArray::add*/;
-    continue_360: while(0);
+    continue_361: while(0);
     ((array___ArrayIterator___next_t)CALL(variable[5],COLOR_abstract_collection___Iterator___next))(variable[5]) /*ArrayIterator::next*/;
   }
-  break_360: while(0);
+  break_361: while(0);
   variable[6] = variable[0];
   variable[6] = ((typing___ASendReassignExpr___read_prop_t)CALL(variable[6],COLOR_typing___ASendReassignExpr___read_prop))(variable[6]) /*ASendReassignExpr::read_prop*/;
   variable[6] = ((compiling_methods___MMMethod___compile_call_t)CALL(variable[6],COLOR_compiling_methods___MMMethod___compile_call))(variable[6],  variable[1] /*v*/,  variable[4] /*cargs*/) /*MMMethod::compile_call*/;
@@ -9386,13 +9418,13 @@ val_t compiling_methods___ASendReassignExpr___compile_expr(val_t  self, val_t  p
   variable[8] = ((typing___AAbsSendExpr___prop_t)CALL(variable[8],COLOR_typing___AAbsSendExpr___prop))(variable[8]) /*AAbsSendExpr::prop*/;
   variable[8] = ((compiling_methods___MMMethod___compile_call_t)CALL(variable[8],COLOR_compiling_methods___MMMethod___compile_call))(variable[8],  variable[1] /*v*/,  variable[4] /*cargs*/) /*MMMethod::compile_call*/;
   variable[2] = variable[8];
-  goto return_label359;
-  return_label359: while(false);
+  goto return_label360;
+  return_label360: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t compiling_methods___ANewExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1463, LOCATE_compiling_methods___ANewExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1478, LOCATE_compiling_methods___ANewExpr___compile_expr};
   val_t variable[8];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -9411,47 +9443,47 @@ val_t compiling_methods___ANewExpr___compile_expr(val_t  self, val_t  param0) {
     variable[6] = variable[5];
     variable[7] = ((compiling_methods___CompilerVisitor___compile_expr_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___compile_expr))( variable[1] /*v*/,  variable[6] /*a*/) /*CompilerVisitor::compile_expr*/;
     ((array___AbstractArray___add_t)CALL( variable[3] /*cargs*/,COLOR_abstract_collection___SimpleCollection___add))( variable[3] /*cargs*/, variable[7]) /*AbstractArray::add*/;
-    continue_362: while(0);
+    continue_363: while(0);
     ((array___ArrayIterator___next_t)CALL(variable[4],COLOR_abstract_collection___Iterator___next))(variable[4]) /*ArrayIterator::next*/;
   }
-  break_362: while(0);
+  break_363: while(0);
   variable[4] = variable[0];
   variable[4] = ((typing___AAbsSendExpr___prop_t)CALL(variable[4],COLOR_typing___AAbsSendExpr___prop))(variable[4]) /*AAbsSendExpr::prop*/;
   variable[5] = variable[0];
   variable[5] = ((typing___PExpr___stype_t)CALL(variable[5],COLOR_syntax_base___PExpr___stype))(variable[5]) /*PExpr::stype*/;
   variable[4] = ((compiling_methods___MMMethod___compile_constructor_call_t)CALL(variable[4],COLOR_compiling_methods___MMMethod___compile_constructor_call))(variable[4],  variable[1] /*v*/, variable[5],  variable[3] /*cargs*/) /*MMMethod::compile_constructor_call*/;
   variable[2] = variable[4];
-  goto return_label361;
-  return_label361: while(false);
+  goto return_label362;
+  return_label362: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t compiling_methods___PClosureDef___compile_closure(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 1474, LOCATE_compiling_methods___PClosureDef___compile_closure};
+  struct trace_t trace = {NULL, NULL, 1489, LOCATE_compiling_methods___PClosureDef___compile_closure};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_compiling_methods;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_compiling_methods, 1474);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_compiling_methods, 1489);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t compiling_methods___PClosureDef___do_compile_inside(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 1478, LOCATE_compiling_methods___PClosureDef___do_compile_inside};
+  struct trace_t trace = {NULL, NULL, 1493, LOCATE_compiling_methods___PClosureDef___do_compile_inside};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_compiling_methods;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_compiling_methods, 1478);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_compiling_methods, 1493);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t compiling_methods___AClosureDef___compile_closure(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 1486, LOCATE_compiling_methods___AClosureDef___compile_closure};
+  struct trace_t trace = {NULL, NULL, 1501, LOCATE_compiling_methods___AClosureDef___compile_closure};
   val_t variable[26];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -9549,10 +9581,10 @@ val_t compiling_methods___AClosureDef___compile_closure(val_t  self, val_t  para
     variable[18] = variable[17];
     ((string___String___append_t)CALL(variable[13],COLOR_abstract_collection___IndexedCollection___append))(variable[13], variable[18]) /*String::append*/;
     ((array___AbstractArray___add_t)CALL( variable[9] /*args*/,COLOR_abstract_collection___SimpleCollection___add))( variable[9] /*args*/, variable[13]) /*AbstractArray::add*/;
-    continue_364: while(0);
+    continue_365: while(0);
     ((abstract_collection___Iterator___next_t)CALL(variable[10],COLOR_abstract_collection___Iterator___next))(variable[10]) /*Iterator::next*/;
   }
-  break_364: while(0);
+  break_365: while(0);
   variable[11] = variable[0];
   variable[11] = ((compiling_methods___AClosureDef___decl_csignature_t)CALL(variable[11],COLOR_compiling_methods___AClosureDef___decl_csignature))(variable[11],  variable[1] /*v*/,  variable[9] /*args*/,  variable[2] /*closcn*/) /*AClosureDef::decl_csignature*/;
   variable[10] = variable[11];
@@ -9738,13 +9770,13 @@ val_t compiling_methods___AClosureDef___compile_closure(val_t  self, val_t  para
   variable[19] = variable[18];
   ((string___String___append_t)CALL(variable[14],COLOR_abstract_collection___IndexedCollection___append))(variable[14], variable[19]) /*String::append*/;
   variable[3] = variable[14];
-  goto return_label363;
-  return_label363: while(false);
+  goto return_label364;
+  return_label364: while(false);
   tracehead = trace.prev;
   return variable[3];
 }
 val_t compiling_methods___AClosureDef___do_compile_inside(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 1576, LOCATE_compiling_methods___AClosureDef___do_compile_inside};
+  struct trace_t trace = {NULL, NULL, 1591, LOCATE_compiling_methods___AClosureDef___do_compile_inside};
   val_t variable[15];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -9781,8 +9813,8 @@ val_t compiling_methods___AClosureDef___do_compile_inside(val_t  self, val_t  pa
     variable[13] = ATTR_array___Array____items(variable[13]) /*Array::_items*/;
     variable[13] = UNBOX_NativeArray(variable[13])[UNTAG_Int( variable[11] /*index*/)];
     variable[12] = variable[13];
-    goto return_label367;
-    return_label367: while(false);
+    goto return_label368;
+    return_label368: while(false);
     variable[9] = variable[12];
     variable[8] = ((compiling_methods___CFunctionContext___register_variable_t)CALL(variable[8],COLOR_compiling_methods___CFunctionContext___register_variable))(variable[8], variable[9]) /*CFunctionContext::register_variable*/;
     variable[7] = variable[8];
@@ -9801,14 +9833,14 @@ val_t compiling_methods___AClosureDef___do_compile_inside(val_t  self, val_t  pa
     variable[11] = ATTR_array___Array____items(variable[11]) /*Array::_items*/;
     variable[11] = UNBOX_NativeArray(variable[11])[UNTAG_Int( variable[9] /*index*/)];
     variable[10] = variable[11];
-    goto return_label368;
-    return_label368: while(false);
+    goto return_label369;
+    return_label369: while(false);
     variable[8] = variable[10];
     ((compiling_methods___CompilerVisitor___add_assignment_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___add_assignment))( variable[1] /*v*/,  variable[7] /*vacname*/, variable[8]) /*CompilerVisitor::add_assignment*/;
-    continue_366: while(0);
+    continue_367: while(0);
     ((abstract_collection___Iterator___next_t)CALL(variable[4],COLOR_abstract_collection___Iterator___next))(variable[4]) /*Iterator::next*/;
   }
-  break_366: while(0);
+  break_367: while(0);
   variable[5] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
   variable[5] = ((compiling_methods___NitMethodContext___continue_value_t)CALL(variable[5],COLOR_compiling_methods___NitMethodContext___continue_value))(variable[5]) /*NitMethodContext::continue_value*/;
   variable[4] = variable[5];
@@ -9877,13 +9909,13 @@ val_t compiling_methods___AClosureDef___do_compile_inside(val_t  self, val_t  pa
   variable[8] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
   ((compiling_methods___NitMethodContext___break_label__eq_t)CALL(variable[8],COLOR_compiling_methods___NitMethodContext___break_label__eq))(variable[8],  variable[6] /*old_bl*/) /*NitMethodContext::break_label=*/;
   variable[3] =  variable[7] /*ret*/;
-  goto return_label365;
-  return_label365: while(false);
+  goto return_label366;
+  return_label366: while(false);
   tracehead = trace.prev;
   return variable[3];
 }
 val_t compiling_methods___AClosureDef___cname(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1483, LOCATE_compiling_methods___AClosureDef___cname};
+  struct trace_t trace = {NULL, NULL, 1498, LOCATE_compiling_methods___AClosureDef___cname};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -9892,7 +9924,7 @@ val_t compiling_methods___AClosureDef___cname(val_t  self) {
   return ATTR_compiling_methods___AClosureDef____cname( self) /*AClosureDef::_cname*/;
 }
 val_t compiling_methods___AClosureDef___decl_csignature(val_t  self, val_t  param0, val_t  param1, val_t  param2) {
-  struct trace_t trace = {NULL, NULL, 1554, LOCATE_compiling_methods___AClosureDef___decl_csignature};
+  struct trace_t trace = {NULL, NULL, 1569, LOCATE_compiling_methods___AClosureDef___decl_csignature};
   val_t variable[22];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -9944,8 +9976,8 @@ val_t compiling_methods___AClosureDef___decl_csignature(val_t  self, val_t  para
     variable[16] = ATTR_array___Array____items(variable[16]) /*Array::_items*/;
     variable[16] = UNBOX_NativeArray(variable[16])[UNTAG_Int( variable[14] /*index*/)];
     variable[15] = variable[16];
-    goto return_label371;
-    return_label371: while(false);
+    goto return_label372;
+    return_label372: while(false);
     variable[13] = variable[15];
     variable[14] = variable[13];
     ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[14]) /*String::append*/;
@@ -9954,10 +9986,10 @@ val_t compiling_methods___AClosureDef___decl_csignature(val_t  self, val_t  para
     ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[16]) /*String::append*/;
     variable[9] = variable[10];
     ((array___AbstractArray___add_t)CALL( variable[5] /*params*/,COLOR_abstract_collection___SimpleCollection___add))( variable[5] /*params*/,  variable[9] /*p*/) /*AbstractArray::add*/;
-    continue_370: while(0);
+    continue_371: while(0);
     ((abstract_collection___Iterator___next_t)CALL(variable[6],COLOR_abstract_collection___Iterator___next))(variable[6]) /*Iterator::next*/;
   }
-  break_370: while(0);
+  break_371: while(0);
   /*variable[6] is variable ret*/
   variable[7] = variable[0];
   variable[7] = ((syntax_base___PClosureDef___closure_t)CALL(variable[7],COLOR_syntax_base___PClosureDef___closure))(variable[7]) /*PClosureDef::closure*/;
@@ -10032,14 +10064,121 @@ val_t compiling_methods___AClosureDef___decl_csignature(val_t  self, val_t  para
   variable[9] = ((string___String_____plus_t)CALL( variable[8] /*s*/,COLOR_string___String_____plus))( variable[8] /*s*/, variable[9]) /*String::+*/;
   ((compiling_base___CompilerVisitor___add_decl_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_decl))( variable[1] /*v*/, variable[9]) /*CompilerVisitor::add_decl*/;
   variable[4] =  variable[8] /*s*/;
-  goto return_label369;
-  return_label369: while(false);
+  goto return_label370;
+  return_label370: while(false);
   tracehead = trace.prev;
   return variable[4];
 }
+val_t compiling_methods___PClosureDecl___do_compile_inside(val_t  self, val_t  param0, val_t  param1) {
+  struct trace_t trace = {NULL, NULL, 1622, LOCATE_compiling_methods___PClosureDecl___do_compile_inside};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_compiling_methods;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_compiling_methods, 1622);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t compiling_methods___AClosureDecl___do_compile_inside(val_t  self, val_t  param0, val_t  param1) {
+  struct trace_t trace = {NULL, NULL, 1625, LOCATE_compiling_methods___AClosureDecl___do_compile_inside};
+  val_t variable[15];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_compiling_methods;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[2] =  param1;
+  variable[4] = variable[0];
+  variable[4] = ((parser_nodes___AClosureDecl___n_signature_t)CALL(variable[4],COLOR_parser_nodes___AClosureDecl___n_signature))(variable[4]) /*AClosureDecl::n_signature*/;
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = variable[0];
+    variable[4] = ((parser_nodes___AClosureDecl___n_signature_t)CALL(variable[4],COLOR_parser_nodes___AClosureDecl___n_signature))(variable[4]) /*AClosureDecl::n_signature*/;
+    variable[5] = variable[0];
+    variable[5] = ((mmbuilder___AClosureDecl___variable_t)CALL(variable[5],COLOR_syntax_base___PClosureDecl___variable))(variable[5]) /*AClosureDecl::variable*/;
+    variable[5] = ((syntax_base___ClosureVariable___closure_t)CALL(variable[5],COLOR_syntax_base___ClosureVariable___closure))(variable[5]) /*ClosureVariable::closure*/;
+    variable[5] = ((static_type___MMClosure___signature_t)CALL(variable[5],COLOR_static_type___MMClosure___signature))(variable[5]) /*MMClosure::signature*/;
+    ((compiling_methods___PSignature___compile_parameters_t)CALL(variable[4],COLOR_compiling_methods___PSignature___compile_parameters))(variable[4],  variable[1] /*v*/, variable[5],  variable[2] /*params*/) /*PSignature::compile_parameters*/;
+  }
+  variable[5] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+  variable[5] = ((compiling_methods___NitMethodContext___continue_value_t)CALL(variable[5],COLOR_compiling_methods___NitMethodContext___continue_value))(variable[5]) /*NitMethodContext::continue_value*/;
+  variable[4] = variable[5];
+  variable[6] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+  variable[6] = ((compiling_methods___NitMethodContext___continue_label_t)CALL(variable[6],COLOR_compiling_methods___NitMethodContext___continue_label))(variable[6]) /*NitMethodContext::continue_label*/;
+  variable[5] = variable[6];
+  variable[7] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+  variable[7] = ((compiling_methods___NitMethodContext___break_label_t)CALL(variable[7],COLOR_compiling_methods___NitMethodContext___break_label))(variable[7]) /*NitMethodContext::break_label*/;
+  variable[6] = variable[7];
+  variable[7] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+  variable[8] = ((compiling_methods___CompilerVisitor___cfc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___cfc))( variable[1] /*v*/) /*CompilerVisitor::cfc*/;
+  variable[8] = ((compiling_methods___CFunctionContext___get_var_t)CALL(variable[8],COLOR_compiling_methods___CFunctionContext___get_var))(variable[8]) /*CFunctionContext::get_var*/;
+  ((compiling_methods___NitMethodContext___continue_value__eq_t)CALL(variable[7],COLOR_compiling_methods___NitMethodContext___continue_value__eq))(variable[7], variable[8]) /*NitMethodContext::continue_value=*/;
+  variable[7] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+  variable[8] = NEW_String_string___String___init(); /*new String*/
+  variable[9] = NEW_String_string___String___with_native(BOX_NativeString("continue_label"), TAG_Int(14)); /*new String*/
+  variable[10] = variable[9];
+  ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[10]) /*String::append*/;
+  variable[11] = ((compiling_base___CompilerVisitor___new_number_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___new_number))( variable[1] /*v*/) /*CompilerVisitor::new_number*/;
+  variable[12] = variable[11];
+  variable[12] = ((string___String___to_s_t)CALL(variable[12],COLOR_string___Object___to_s))(variable[12]) /*String::to_s*/;
+  ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[12]) /*String::append*/;
+  variable[13] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable[14] = variable[13];
+  ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[14]) /*String::append*/;
+  ((compiling_methods___NitMethodContext___continue_label__eq_t)CALL(variable[7],COLOR_compiling_methods___NitMethodContext___continue_label__eq))(variable[7], variable[8]) /*NitMethodContext::continue_label=*/;
+  variable[7] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+  variable[8] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+  variable[8] = ((compiling_methods___NitMethodContext___return_label_t)CALL(variable[8],COLOR_compiling_methods___NitMethodContext___return_label))(variable[8]) /*NitMethodContext::return_label*/;
+  ((compiling_methods___NitMethodContext___break_label__eq_t)CALL(variable[7],COLOR_compiling_methods___NitMethodContext___break_label__eq))(variable[7], variable[8]) /*NitMethodContext::break_label=*/;
+  variable[7] = variable[0];
+  variable[7] = ((parser_nodes___AClosureDecl___n_expr_t)CALL(variable[7],COLOR_parser_nodes___AClosureDecl___n_expr))(variable[7]) /*AClosureDecl::n_expr*/;
+  variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[7] ==  NIT_NULL /*null*/) || ((variable[7] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[7],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[7], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[7],COLOR_kernel___Object_____eqeq))(variable[7],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[7])) { /*if*/
+    variable[7] = variable[0];
+    variable[7] = ((parser_nodes___AClosureDecl___n_expr_t)CALL(variable[7],COLOR_parser_nodes___AClosureDecl___n_expr))(variable[7]) /*AClosureDecl::n_expr*/;
+    ((compiling_methods___CompilerVisitor___compile_stmt_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___compile_stmt))( variable[1] /*v*/, variable[7]) /*CompilerVisitor::compile_stmt*/;
+  }
+  variable[7] = NEW_String_string___String___init(); /*new String*/
+  variable[8] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  variable[9] = variable[8];
+  ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[9]) /*String::append*/;
+  variable[10] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+  variable[10] = ((compiling_methods___NitMethodContext___continue_label_t)CALL(variable[10],COLOR_compiling_methods___NitMethodContext___continue_label))(variable[10]) /*NitMethodContext::continue_label*/;
+  variable[11] = variable[10];
+  ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[11]) /*String::append*/;
+  variable[12] = NEW_String_string___String___with_native(BOX_NativeString(": while(false);"), TAG_Int(15)); /*new String*/
+  variable[13] = variable[12];
+  ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[13]) /*String::append*/;
+  ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[7]) /*CompilerVisitor::add_instr*/;
+  variable[7] =  NIT_NULL /*null*/;
+  variable[8] = variable[0];
+  variable[8] = ((mmbuilder___AClosureDecl___variable_t)CALL(variable[8],COLOR_syntax_base___PClosureDecl___variable))(variable[8]) /*AClosureDecl::variable*/;
+  variable[8] = ((syntax_base___ClosureVariable___closure_t)CALL(variable[8],COLOR_syntax_base___ClosureVariable___closure))(variable[8]) /*ClosureVariable::closure*/;
+  variable[8] = ((static_type___MMClosure___signature_t)CALL(variable[8],COLOR_static_type___MMClosure___signature))(variable[8]) /*MMClosure::signature*/;
+  variable[8] = ((static_type___MMSignature___return_type_t)CALL(variable[8],COLOR_static_type___MMSignature___return_type))(variable[8]) /*MMSignature::return_type*/;
+  variable[8] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[8] ==  NIT_NULL /*null*/) || ((variable[8] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[8],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[8], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[8],COLOR_kernel___Object_____eqeq))(variable[8],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[8])) { /*if*/
+    variable[8] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+    variable[8] = ((compiling_methods___NitMethodContext___continue_value_t)CALL(variable[8],COLOR_compiling_methods___NitMethodContext___continue_value))(variable[8]) /*NitMethodContext::continue_value*/;
+    variable[7] = variable[8] /*ret=*/;
+  }
+  variable[8] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+  ((compiling_methods___NitMethodContext___continue_value__eq_t)CALL(variable[8],COLOR_compiling_methods___NitMethodContext___continue_value__eq))(variable[8],  variable[4] /*old_cv*/) /*NitMethodContext::continue_value=*/;
+  variable[8] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+  ((compiling_methods___NitMethodContext___continue_label__eq_t)CALL(variable[8],COLOR_compiling_methods___NitMethodContext___continue_label__eq))(variable[8],  variable[5] /*old_cl*/) /*NitMethodContext::continue_label=*/;
+  variable[8] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+  ((compiling_methods___NitMethodContext___break_label__eq_t)CALL(variable[8],COLOR_compiling_methods___NitMethodContext___break_label__eq))(variable[8],  variable[6] /*old_bl*/) /*NitMethodContext::break_label=*/;
+  variable[3] =  variable[7] /*ret*/;
+  goto return_label373;
+  return_label373: while(false);
+  tracehead = trace.prev;
+  return variable[3];
+}
 val_t compiling_methods___AClosureCallExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1607, LOCATE_compiling_methods___AClosureCallExpr___compile_expr};
-  val_t variable[20];
+  struct trace_t trace = {NULL, NULL, 1653, LOCATE_compiling_methods___AClosureCallExpr___compile_expr};
+  val_t variable[22];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_compiling_methods;
@@ -10047,167 +10186,219 @@ val_t compiling_methods___AClosureCallExpr___compile_expr(val_t  self, val_t  pa
   variable[1] =  param0;
   variable[4] = NEW_Array_array___Array___init(); /*new Array[String]*/
   variable[3] = variable[4];
-  variable[5] = NEW_String_string___String___init(); /*new String*/
-  variable[6] = NEW_String_string___String___with_native(BOX_NativeString("(("), TAG_Int(2)); /*new String*/
-  variable[7] = variable[6];
-  ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[7]) /*String::append*/;
-  variable[8] = variable[0];
-  variable[8] = ((syntax_base___AClosureCallExpr___variable_t)CALL(variable[8],COLOR_syntax_base___AClosureCallExpr___variable))(variable[8]) /*AClosureCallExpr::variable*/;
-  variable[8] = ((compiling_methods___ClosureVariable___ctypename_t)CALL(variable[8],COLOR_compiling_methods___ClosureVariable___ctypename))(variable[8]) /*ClosureVariable::ctypename*/;
-  variable[9] = variable[8];
-  ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[9]) /*String::append*/;
-  variable[10] = NEW_String_string___String___with_native(BOX_NativeString(")("), TAG_Int(2)); /*new String*/
-  variable[11] = variable[10];
-  ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[11]) /*String::append*/;
-  variable[12] = ((compiling_methods___CompilerVisitor___cfc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___cfc))( variable[1] /*v*/) /*CompilerVisitor::cfc*/;
-  variable[13] = variable[0];
-  variable[13] = ((syntax_base___AClosureCallExpr___variable_t)CALL(variable[13],COLOR_syntax_base___AClosureCallExpr___variable))(variable[13]) /*AClosureCallExpr::variable*/;
-  variable[12] = ((compiling_methods___CFunctionContext___varname_t)CALL(variable[12],COLOR_compiling_methods___CFunctionContext___varname))(variable[12], variable[13]) /*CFunctionContext::varname*/;
-  variable[13] = variable[12];
-  ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[13]) /*String::append*/;
-  variable[14] = NEW_String_string___String___with_native(BOX_NativeString("))"), TAG_Int(2)); /*new String*/
-  variable[15] = variable[14];
-  ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[15]) /*String::append*/;
-  variable[4] = variable[5];
-  ((array___AbstractArray___add_t)CALL( variable[3] /*cargs*/,COLOR_abstract_collection___SimpleCollection___add))( variable[3] /*cargs*/,  variable[4] /*ivar*/) /*AbstractArray::add*/;
-  variable[5] = variable[0];
-  variable[5] = ((typing___AAbsSendExpr___arguments_t)CALL(variable[5],COLOR_typing___AAbsSendExpr___arguments))(variable[5]) /*AAbsSendExpr::arguments*/;
-  variable[5] = ((array___AbstractArray___iterator_t)CALL(variable[5],COLOR_abstract_collection___Collection___iterator))(variable[5]) /*AbstractArray::iterator*/;
+  variable[4] = variable[0];
+  variable[4] = ((typing___AAbsSendExpr___arguments_t)CALL(variable[4],COLOR_typing___AAbsSendExpr___arguments))(variable[4]) /*AAbsSendExpr::arguments*/;
+  variable[4] = ((array___AbstractArray___iterator_t)CALL(variable[4],COLOR_abstract_collection___Collection___iterator))(variable[4]) /*AbstractArray::iterator*/;
   while (true) { /*for*/
-    variable[6] = ((array___ArrayIterator___is_ok_t)CALL(variable[5],COLOR_abstract_collection___Iterator___is_ok))(variable[5]) /*ArrayIterator::is_ok*/;
-    if (!UNTAG_Bool(variable[6])) break; /*for*/
-    variable[6] = ((array___ArrayIterator___item_t)CALL(variable[5],COLOR_abstract_collection___Iterator___item))(variable[5]) /*ArrayIterator::item*/;
-    variable[7] = variable[6];
-    variable[8] = ((compiling_methods___CompilerVisitor___compile_expr_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___compile_expr))( variable[1] /*v*/,  variable[7] /*a*/) /*CompilerVisitor::compile_expr*/;
-    ((array___AbstractArray___add_t)CALL( variable[3] /*cargs*/,COLOR_abstract_collection___SimpleCollection___add))( variable[3] /*cargs*/, variable[8]) /*AbstractArray::add*/;
-    continue_373: while(0);
-    ((array___ArrayIterator___next_t)CALL(variable[5],COLOR_abstract_collection___Iterator___next))(variable[5]) /*ArrayIterator::next*/;
+    variable[5] = ((array___ArrayIterator___is_ok_t)CALL(variable[4],COLOR_abstract_collection___Iterator___is_ok))(variable[4]) /*ArrayIterator::is_ok*/;
+    if (!UNTAG_Bool(variable[5])) break; /*for*/
+    variable[5] = ((array___ArrayIterator___item_t)CALL(variable[4],COLOR_abstract_collection___Iterator___item))(variable[4]) /*ArrayIterator::item*/;
+    variable[6] = variable[5];
+    variable[7] = ((compiling_methods___CompilerVisitor___compile_expr_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___compile_expr))( variable[1] /*v*/,  variable[6] /*a*/) /*CompilerVisitor::compile_expr*/;
+    ((array___AbstractArray___add_t)CALL( variable[3] /*cargs*/,COLOR_abstract_collection___SimpleCollection___add))( variable[3] /*cargs*/, variable[7]) /*AbstractArray::add*/;
+    continue_375: while(0);
+    ((array___ArrayIterator___next_t)CALL(variable[4],COLOR_abstract_collection___Iterator___next))(variable[4]) /*ArrayIterator::next*/;
   }
-  break_373: while(0);
+  break_375: while(0);
+  variable[4] =  NIT_NULL /*null*/;
+  variable[5] = variable[0];
+  variable[5] = ((syntax_base___AClosureCallExpr___variable_t)CALL(variable[5],COLOR_syntax_base___AClosureCallExpr___variable))(variable[5]) /*AClosureCallExpr::variable*/;
+  variable[5] = ((syntax_base___ClosureVariable___closure_t)CALL(variable[5],COLOR_syntax_base___ClosureVariable___closure))(variable[5]) /*ClosureVariable::closure*/;
+  variable[5] = ((static_type___MMClosure___signature_t)CALL(variable[5],COLOR_static_type___MMClosure___signature))(variable[5]) /*MMClosure::signature*/;
+  variable[5] = ((static_type___MMSignature___return_type_t)CALL(variable[5],COLOR_static_type___MMSignature___return_type))(variable[5]) /*MMSignature::return_type*/;
+  variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    variable[5] = ((compiling_methods___CompilerVisitor___cfc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___cfc))( variable[1] /*v*/) /*CompilerVisitor::cfc*/;
+    variable[5] = ((compiling_methods___CFunctionContext___get_var_t)CALL(variable[5],COLOR_compiling_methods___CFunctionContext___get_var))(variable[5]) /*CFunctionContext::get_var*/;
+    variable[4] = variable[5] /*va=*/;
+  }
+  variable[5] = variable[0];
+  variable[5] = ((syntax_base___AClosureCallExpr___variable_t)CALL(variable[5],COLOR_syntax_base___AClosureCallExpr___variable))(variable[5]) /*AClosureCallExpr::variable*/;
+  variable[5] = ((syntax_base___ClosureVariable___closure_t)CALL(variable[5],COLOR_syntax_base___ClosureVariable___closure))(variable[5]) /*ClosureVariable::closure*/;
+  variable[5] = ((static_type___MMClosure___is_optional_t)CALL(variable[5],COLOR_static_type___MMClosure___is_optional))(variable[5]) /*MMClosure::is_optional*/;
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    variable[5] = NEW_String_string___String___init(); /*new String*/
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString("if("), TAG_Int(3)); /*new String*/
+    variable[7] = variable[6];
+    ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[7]) /*String::append*/;
+    variable[8] = ((compiling_methods___CompilerVisitor___cfc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___cfc))( variable[1] /*v*/) /*CompilerVisitor::cfc*/;
+    variable[9] = variable[0];
+    variable[9] = ((syntax_base___AClosureCallExpr___variable_t)CALL(variable[9],COLOR_syntax_base___AClosureCallExpr___variable))(variable[9]) /*AClosureCallExpr::variable*/;
+    variable[8] = ((compiling_methods___CFunctionContext___varname_t)CALL(variable[8],COLOR_compiling_methods___CFunctionContext___varname))(variable[8], variable[9]) /*CFunctionContext::varname*/;
+    variable[9] = variable[8];
+    ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[9]) /*String::append*/;
+    variable[10] = NEW_String_string___String___with_native(BOX_NativeString("==NULL) {"), TAG_Int(9)); /*new String*/
+    variable[11] = variable[10];
+    ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[11]) /*String::append*/;
+    ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[5]) /*CompilerVisitor::add_instr*/;
+    ((compiling_base___CompilerVisitor___indent_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___indent))( variable[1] /*v*/) /*CompilerVisitor::indent*/;
+    variable[6] = variable[0];
+    variable[6] = ((syntax_base___AClosureCallExpr___variable_t)CALL(variable[6],COLOR_syntax_base___AClosureCallExpr___variable))(variable[6]) /*AClosureCallExpr::variable*/;
+    variable[6] = ((syntax_base___Variable___decl_t)CALL(variable[6],COLOR_syntax_base___Variable___decl))(variable[6]) /*Variable::decl*/;
+    variable[5] = variable[6];
+    variable[6] = TAG_Bool(( variable[5] /*n*/==NIT_NULL) || VAL_ISA( variable[5] /*n*/, COLOR_AClosureDecl, ID_AClosureDecl)) /*cast AClosureDecl*/;
+    if (!UNTAG_Bool(variable[6])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_compiling_methods___AClosureCallExpr___compile_expr, LOCATE_compiling_methods, 1664); nit_exit(1);}
+    variable[7] = ((compiling_methods___AClosureDecl___do_compile_inside_t)CALL( variable[5] /*n*/,COLOR_compiling_methods___PClosureDecl___do_compile_inside))( variable[5] /*n*/,  variable[1] /*v*/,  variable[3] /*cargs*/) /*AClosureDecl::do_compile_inside*/;
+    variable[6] = variable[7];
+    variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[6] /*s*/ ==  NIT_NULL /*null*/) || (( variable[6] /*s*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[6] /*s*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*s*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[6] /*s*/,COLOR_kernel___Object_____eqeq))( variable[6] /*s*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    if (UNTAG_Bool(variable[7])) { /*if*/
+      ((compiling_methods___CompilerVisitor___add_assignment_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___add_assignment))( variable[1] /*v*/,  variable[4] /*va*/,  variable[6] /*s*/) /*CompilerVisitor::add_assignment*/;
+    }
+    ((compiling_base___CompilerVisitor___unindent_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___unindent))( variable[1] /*v*/) /*CompilerVisitor::unindent*/;
+    variable[7] = NEW_String_string___String___with_native(BOX_NativeString("} else {"), TAG_Int(8)); /*new String*/
+    ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[7]) /*CompilerVisitor::add_instr*/;
+    ((compiling_base___CompilerVisitor___indent_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___indent))( variable[1] /*v*/) /*CompilerVisitor::indent*/;
+  }
   variable[6] = NEW_String_string___String___init(); /*new String*/
-  variable[7] = NEW_String_string___String___with_native(BOX_NativeString("("), TAG_Int(1)); /*new String*/
+  variable[7] = NEW_String_string___String___with_native(BOX_NativeString("(("), TAG_Int(2)); /*new String*/
   variable[8] = variable[7];
   ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[8]) /*String::append*/;
-  variable[9] =  variable[4] /*ivar*/;
-  ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[9]) /*String::append*/;
-  variable[10] = NEW_String_string___String___with_native(BOX_NativeString("->fun("), TAG_Int(6)); /*new String*/
-  variable[11] = variable[10];
-  ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[11]) /*String::append*/;
-  variable[12] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
-  variable[12] = ((string___Collection___join_t)CALL( variable[3] /*cargs*/,COLOR_string___Collection___join))( variable[3] /*cargs*/, variable[12]) /*Collection::join*/;
-  variable[13] = variable[12];
-  ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[13]) /*String::append*/;
-  variable[14] = NEW_String_string___String___with_native(BOX_NativeString(")) /* Invoke closure "), TAG_Int(21)); /*new String*/
-  variable[15] = variable[14];
-  ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[15]) /*String::append*/;
-  variable[16] = variable[0];
-  variable[16] = ((syntax_base___AClosureCallExpr___variable_t)CALL(variable[16],COLOR_syntax_base___AClosureCallExpr___variable))(variable[16]) /*AClosureCallExpr::variable*/;
-  variable[17] = variable[16];
-  variable[17] = ((string___String___to_s_t)CALL(variable[17],COLOR_string___Object___to_s))(variable[17]) /*String::to_s*/;
-  ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[17]) /*String::append*/;
-  variable[18] = NEW_String_string___String___with_native(BOX_NativeString(" */"), TAG_Int(3)); /*new String*/
-  variable[19] = variable[18];
-  ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[19]) /*String::append*/;
-  variable[5] = variable[6];
-  variable[6] =  NIT_NULL /*null*/;
-  variable[7] = variable[0];
-  variable[7] = ((syntax_base___AClosureCallExpr___variable_t)CALL(variable[7],COLOR_syntax_base___AClosureCallExpr___variable))(variable[7]) /*AClosureCallExpr::variable*/;
-  variable[7] = ((syntax_base___ClosureVariable___closure_t)CALL(variable[7],COLOR_syntax_base___ClosureVariable___closure))(variable[7]) /*ClosureVariable::closure*/;
-  variable[7] = ((static_type___MMClosure___signature_t)CALL(variable[7],COLOR_static_type___MMClosure___signature))(variable[7]) /*MMClosure::signature*/;
-  variable[7] = ((static_type___MMSignature___return_type_t)CALL(variable[7],COLOR_static_type___MMSignature___return_type))(variable[7]) /*MMSignature::return_type*/;
-  variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[7] ==  NIT_NULL /*null*/) || ((variable[7] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[7],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[7], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[7],COLOR_kernel___Object_____eqeq))(variable[7],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable[7])) { /*if*/
-    variable[7] = ((compiling_methods___CompilerVisitor___cfc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___cfc))( variable[1] /*v*/) /*CompilerVisitor::cfc*/;
-    variable[7] = ((compiling_methods___CFunctionContext___get_var_t)CALL(variable[7],COLOR_compiling_methods___CFunctionContext___get_var))(variable[7]) /*CFunctionContext::get_var*/;
-    variable[6] = variable[7] /*va=*/;
-    ((compiling_methods___CompilerVisitor___add_assignment_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___add_assignment))( variable[1] /*v*/,  variable[6] /*va*/,  variable[5] /*s*/) /*CompilerVisitor::add_assignment*/;
-  } else { /*if*/
-    variable[7] = NEW_String_string___String___init(); /*new String*/
-    variable[8] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-    variable[9] = variable[8];
-    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[9]) /*String::append*/;
-    variable[10] =  variable[5] /*s*/;
-    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[10]) /*String::append*/;
-    variable[11] = NEW_String_string___String___with_native(BOX_NativeString(";"), TAG_Int(1)); /*new String*/
-    variable[12] = variable[11];
-    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[12]) /*String::append*/;
-    ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[7]) /*CompilerVisitor::add_instr*/;
-  }
-  variable[7] = NEW_String_string___String___init(); /*new String*/
-  variable[8] = NEW_String_string___String___with_native(BOX_NativeString("if ("), TAG_Int(4)); /*new String*/
-  variable[9] = variable[8];
-  ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[9]) /*String::append*/;
-  variable[10] =  variable[4] /*ivar*/;
-  ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[10]) /*String::append*/;
-  variable[11] = NEW_String_string___String___with_native(BOX_NativeString("->has_broke) {"), TAG_Int(14)); /*new String*/
+  variable[9] = variable[0];
+  variable[9] = ((syntax_base___AClosureCallExpr___variable_t)CALL(variable[9],COLOR_syntax_base___AClosureCallExpr___variable))(variable[9]) /*AClosureCallExpr::variable*/;
+  variable[9] = ((compiling_methods___ClosureVariable___ctypename_t)CALL(variable[9],COLOR_compiling_methods___ClosureVariable___ctypename))(variable[9]) /*ClosureVariable::ctypename*/;
+  variable[10] = variable[9];
+  ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[10]) /*String::append*/;
+  variable[11] = NEW_String_string___String___with_native(BOX_NativeString(")("), TAG_Int(2)); /*new String*/
   variable[12] = variable[11];
-  ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[12]) /*String::append*/;
-  ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[7]) /*CompilerVisitor::add_instr*/;
+  ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[12]) /*String::append*/;
+  variable[13] = ((compiling_methods___CompilerVisitor___cfc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___cfc))( variable[1] /*v*/) /*CompilerVisitor::cfc*/;
+  variable[14] = variable[0];
+  variable[14] = ((syntax_base___AClosureCallExpr___variable_t)CALL(variable[14],COLOR_syntax_base___AClosureCallExpr___variable))(variable[14]) /*AClosureCallExpr::variable*/;
+  variable[13] = ((compiling_methods___CFunctionContext___varname_t)CALL(variable[13],COLOR_compiling_methods___CFunctionContext___varname))(variable[13], variable[14]) /*CFunctionContext::varname*/;
+  variable[14] = variable[13];
+  ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[14]) /*String::append*/;
+  variable[15] = NEW_String_string___String___with_native(BOX_NativeString("))"), TAG_Int(2)); /*new String*/
+  variable[16] = variable[15];
+  ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[16]) /*String::append*/;
+  variable[5] = variable[6];
+  variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(1)); /*new Array[String]*/
+  ((array___AbstractArray___add_t)CALL(variable[7],COLOR_abstract_collection___SimpleCollection___add))(variable[7],  variable[5] /*ivar*/) /*AbstractArray::add*/;
+  variable[6] = variable[7];
+  ((abstract_collection___IndexedCollection___append_t)CALL( variable[6] /*cargs2*/,COLOR_abstract_collection___IndexedCollection___append))( variable[6] /*cargs2*/,  variable[3] /*cargs*/) /*IndexedCollection::append*/;
+  variable[8] = NEW_String_string___String___init(); /*new String*/
+  variable[9] = NEW_String_string___String___with_native(BOX_NativeString("("), TAG_Int(1)); /*new String*/
+  variable[10] = variable[9];
+  ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[10]) /*String::append*/;
+  variable[11] =  variable[5] /*ivar*/;
+  ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[11]) /*String::append*/;
+  variable[12] = NEW_String_string___String___with_native(BOX_NativeString("->fun("), TAG_Int(6)); /*new String*/
+  variable[13] = variable[12];
+  ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[13]) /*String::append*/;
+  variable[14] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
+  variable[14] = ((string___Collection___join_t)CALL( variable[6] /*cargs2*/,COLOR_string___Collection___join))( variable[6] /*cargs2*/, variable[14]) /*Collection::join*/;
+  variable[15] = variable[14];
+  ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[15]) /*String::append*/;
+  variable[16] = NEW_String_string___String___with_native(BOX_NativeString(")) /* Invoke closure "), TAG_Int(21)); /*new String*/
+  variable[17] = variable[16];
+  ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[17]) /*String::append*/;
+  variable[18] = variable[0];
+  variable[18] = ((syntax_base___AClosureCallExpr___variable_t)CALL(variable[18],COLOR_syntax_base___AClosureCallExpr___variable))(variable[18]) /*AClosureCallExpr::variable*/;
+  variable[19] = variable[18];
+  variable[19] = ((string___String___to_s_t)CALL(variable[19],COLOR_string___Object___to_s))(variable[19]) /*String::to_s*/;
+  ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[19]) /*String::append*/;
+  variable[20] = NEW_String_string___String___with_native(BOX_NativeString(" */"), TAG_Int(3)); /*new String*/
+  variable[21] = variable[20];
+  ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[21]) /*String::append*/;
+  variable[7] = variable[8];
+  variable[8] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*va*/ ==  NIT_NULL /*null*/) || (( variable[4] /*va*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*va*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*va*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*va*/,COLOR_kernel___Object_____eqeq))( variable[4] /*va*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[8])) { /*if*/
+    ((compiling_methods___CompilerVisitor___add_assignment_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___add_assignment))( variable[1] /*v*/,  variable[4] /*va*/,  variable[7] /*s*/) /*CompilerVisitor::add_assignment*/;
+  } else { /*if*/
+    variable[8] = NEW_String_string___String___init(); /*new String*/
+    variable[9] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    variable[10] = variable[9];
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[10]) /*String::append*/;
+    variable[11] =  variable[7] /*s*/;
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[11]) /*String::append*/;
+    variable[12] = NEW_String_string___String___with_native(BOX_NativeString(";"), TAG_Int(1)); /*new String*/
+    variable[13] = variable[12];
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[13]) /*String::append*/;
+    ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[8]) /*CompilerVisitor::add_instr*/;
+  }
+  variable[8] = NEW_String_string___String___init(); /*new String*/
+  variable[9] = NEW_String_string___String___with_native(BOX_NativeString("if ("), TAG_Int(4)); /*new String*/
+  variable[10] = variable[9];
+  ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[10]) /*String::append*/;
+  variable[11] =  variable[5] /*ivar*/;
+  ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[11]) /*String::append*/;
+  variable[12] = NEW_String_string___String___with_native(BOX_NativeString("->has_broke) {"), TAG_Int(14)); /*new String*/
+  variable[13] = variable[12];
+  ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[13]) /*String::append*/;
+  ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[8]) /*CompilerVisitor::add_instr*/;
   ((compiling_base___CompilerVisitor___indent_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___indent))( variable[1] /*v*/) /*CompilerVisitor::indent*/;
-  variable[7] = variable[0];
-  variable[7] = ((parser_nodes___ASendExpr___n_closure_defs_t)CALL(variable[7],COLOR_parser_nodes___ASendExpr___n_closure_defs))(variable[7]) /*ASendExpr::n_closure_defs*/;
-  variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[7] ==  NIT_NULL /*null*/) || ((variable[7] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[7],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[7], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[7],COLOR_kernel___Object_____eqeq))(variable[7],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  variable[8] = variable[7];
-  if (UNTAG_Bool(variable[8])) { /* and */
+  variable[8] = variable[0];
+  variable[8] = ((parser_nodes___ASendExpr___n_closure_defs_t)CALL(variable[8],COLOR_parser_nodes___ASendExpr___n_closure_defs))(variable[8]) /*ASendExpr::n_closure_defs*/;
+  variable[8] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[8] ==  NIT_NULL /*null*/) || ((variable[8] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[8],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[8], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[8],COLOR_kernel___Object_____eqeq))(variable[8],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[9] = variable[8];
+  if (UNTAG_Bool(variable[9])) { /* and */
+    variable[9] = variable[0];
+    variable[9] = ((parser_nodes___ASendExpr___n_closure_defs_t)CALL(variable[9],COLOR_parser_nodes___ASendExpr___n_closure_defs))(variable[9]) /*ASendExpr::n_closure_defs*/;
+    variable[9] = ((list___List___length_t)CALL(variable[9],COLOR_abstract_collection___Collection___length))(variable[9]) /*List::length*/;
+    variable[9] = TAG_Bool((variable[9])==( TAG_Int(1)));
+  }
+  variable[8] = variable[9];
+  if (UNTAG_Bool(variable[8])) { /*if*/
     variable[8] = variable[0];
     variable[8] = ((parser_nodes___ASendExpr___n_closure_defs_t)CALL(variable[8],COLOR_parser_nodes___ASendExpr___n_closure_defs))(variable[8]) /*ASendExpr::n_closure_defs*/;
-    variable[8] = ((list___List___length_t)CALL(variable[8],COLOR_abstract_collection___Collection___length))(variable[8]) /*List::length*/;
-    variable[8] = TAG_Bool((variable[8])==( TAG_Int(1)));
+    variable[8] = ((list___List___first_t)CALL(variable[8],COLOR_abstract_collection___Collection___first))(variable[8]) /*List::first*/;
+    ((compiling_methods___PClosureDef___do_compile_inside_t)CALL(variable[8],COLOR_compiling_methods___PClosureDef___do_compile_inside))(variable[8],  variable[1] /*v*/,  NIT_NULL /*null*/) /*PClosureDef::do_compile_inside*/;
   }
-  variable[7] = variable[8];
-  if (UNTAG_Bool(variable[7])) { /*if*/
-    variable[7] = variable[0];
-    variable[7] = ((parser_nodes___ASendExpr___n_closure_defs_t)CALL(variable[7],COLOR_parser_nodes___ASendExpr___n_closure_defs))(variable[7]) /*ASendExpr::n_closure_defs*/;
-    variable[7] = ((list___List___first_t)CALL(variable[7],COLOR_abstract_collection___Collection___first))(variable[7]) /*List::first*/;
-    ((compiling_methods___PClosureDef___do_compile_inside_t)CALL(variable[7],COLOR_compiling_methods___PClosureDef___do_compile_inside))(variable[7],  variable[1] /*v*/,  NIT_NULL /*null*/) /*PClosureDef::do_compile_inside*/;
+  variable[8] = ((compiling_methods___CompilerVisitor___cfc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___cfc))( variable[1] /*v*/) /*CompilerVisitor::cfc*/;
+  variable[8] = ((compiling_methods___CFunctionContext___in_closure_t)CALL(variable[8],COLOR_compiling_methods___CFunctionContext___in_closure))(variable[8]) /*CFunctionContext::in_closure*/;
+  if (UNTAG_Bool(variable[8])) { /*if*/
+    variable[8] = NEW_String_string___String___init(); /*new String*/
+    variable[9] = NEW_String_string___String___with_native(BOX_NativeString("if ("), TAG_Int(4)); /*new String*/
+    variable[10] = variable[9];
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[10]) /*String::append*/;
+    variable[11] =  variable[5] /*ivar*/;
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[11]) /*String::append*/;
+    variable[12] = NEW_String_string___String___with_native(BOX_NativeString("->has_broke) { closctx->has_broke = "), TAG_Int(36)); /*new String*/
+    variable[13] = variable[12];
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[13]) /*String::append*/;
+    variable[14] =  variable[5] /*ivar*/;
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[14]) /*String::append*/;
+    variable[15] = NEW_String_string___String___with_native(BOX_NativeString("->has_broke; closctx->broke_value = "), TAG_Int(36)); /*new String*/
+    variable[16] = variable[15];
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[16]) /*String::append*/;
+    variable[17] =  variable[5] /*ivar*/;
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[17]) /*String::append*/;
+    variable[18] = NEW_String_string___String___with_native(BOX_NativeString("->broke_value;}"), TAG_Int(15)); /*new String*/
+    variable[19] = variable[18];
+    ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[19]) /*String::append*/;
+    ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[8]) /*CompilerVisitor::add_instr*/;
   }
-  variable[7] = ((compiling_methods___CompilerVisitor___cfc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___cfc))( variable[1] /*v*/) /*CompilerVisitor::cfc*/;
-  variable[7] = ((compiling_methods___CFunctionContext___in_closure_t)CALL(variable[7],COLOR_compiling_methods___CFunctionContext___in_closure))(variable[7]) /*CFunctionContext::in_closure*/;
-  if (UNTAG_Bool(variable[7])) { /*if*/
-    variable[7] = NEW_String_string___String___init(); /*new String*/
-    variable[8] = NEW_String_string___String___with_native(BOX_NativeString("if ("), TAG_Int(4)); /*new String*/
-    variable[9] = variable[8];
-    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[9]) /*String::append*/;
-    variable[10] =  variable[4] /*ivar*/;
-    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[10]) /*String::append*/;
-    variable[11] = NEW_String_string___String___with_native(BOX_NativeString("->has_broke) { closctx->has_broke = "), TAG_Int(36)); /*new String*/
-    variable[12] = variable[11];
-    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[12]) /*String::append*/;
-    variable[13] =  variable[4] /*ivar*/;
-    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[13]) /*String::append*/;
-    variable[14] = NEW_String_string___String___with_native(BOX_NativeString("->has_broke; closctx->broke_value = "), TAG_Int(36)); /*new String*/
-    variable[15] = variable[14];
-    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[15]) /*String::append*/;
-    variable[16] =  variable[4] /*ivar*/;
-    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[16]) /*String::append*/;
-    variable[17] = NEW_String_string___String___with_native(BOX_NativeString("->broke_value;}"), TAG_Int(15)); /*new String*/
-    variable[18] = variable[17];
-    ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[18]) /*String::append*/;
-    ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[7]) /*CompilerVisitor::add_instr*/;
-  }
-  variable[7] = NEW_String_string___String___init(); /*new String*/
-  variable[8] = NEW_String_string___String___with_native(BOX_NativeString("goto "), TAG_Int(5)); /*new String*/
-  variable[9] = variable[8];
-  ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[9]) /*String::append*/;
-  variable[10] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
-  variable[10] = ((compiling_methods___NitMethodContext___return_label_t)CALL(variable[10],COLOR_compiling_methods___NitMethodContext___return_label))(variable[10]) /*NitMethodContext::return_label*/;
-  variable[11] = variable[10];
-  ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[11]) /*String::append*/;
-  variable[12] = NEW_String_string___String___with_native(BOX_NativeString(";"), TAG_Int(1)); /*new String*/
-  variable[13] = variable[12];
-  ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[13]) /*String::append*/;
-  ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[7]) /*CompilerVisitor::add_instr*/;
+  variable[8] = NEW_String_string___String___init(); /*new String*/
+  variable[9] = NEW_String_string___String___with_native(BOX_NativeString("goto "), TAG_Int(5)); /*new String*/
+  variable[10] = variable[9];
+  ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[10]) /*String::append*/;
+  variable[11] = ((compiling_methods___CompilerVisitor___nmc_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___nmc))( variable[1] /*v*/) /*CompilerVisitor::nmc*/;
+  variable[11] = ((compiling_methods___NitMethodContext___return_label_t)CALL(variable[11],COLOR_compiling_methods___NitMethodContext___return_label))(variable[11]) /*NitMethodContext::return_label*/;
+  variable[12] = variable[11];
+  ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[12]) /*String::append*/;
+  variable[13] = NEW_String_string___String___with_native(BOX_NativeString(";"), TAG_Int(1)); /*new String*/
+  variable[14] = variable[13];
+  ((string___String___append_t)CALL(variable[8],COLOR_abstract_collection___IndexedCollection___append))(variable[8], variable[14]) /*String::append*/;
+  ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[8]) /*CompilerVisitor::add_instr*/;
   ((compiling_base___CompilerVisitor___unindent_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___unindent))( variable[1] /*v*/) /*CompilerVisitor::unindent*/;
-  variable[7] = NEW_String_string___String___with_native(BOX_NativeString("}"), TAG_Int(1)); /*new String*/
-  ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[7]) /*CompilerVisitor::add_instr*/;
-  variable[2] =  variable[6] /*va*/;
-  goto return_label372;
-  return_label372: while(false);
+  variable[8] = NEW_String_string___String___with_native(BOX_NativeString("}"), TAG_Int(1)); /*new String*/
+  ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[8]) /*CompilerVisitor::add_instr*/;
+  variable[8] = variable[0];
+  variable[8] = ((syntax_base___AClosureCallExpr___variable_t)CALL(variable[8],COLOR_syntax_base___AClosureCallExpr___variable))(variable[8]) /*AClosureCallExpr::variable*/;
+  variable[8] = ((syntax_base___ClosureVariable___closure_t)CALL(variable[8],COLOR_syntax_base___ClosureVariable___closure))(variable[8]) /*ClosureVariable::closure*/;
+  variable[8] = ((static_type___MMClosure___is_optional_t)CALL(variable[8],COLOR_static_type___MMClosure___is_optional))(variable[8]) /*MMClosure::is_optional*/;
+  if (UNTAG_Bool(variable[8])) { /*if*/
+    ((compiling_base___CompilerVisitor___unindent_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___unindent))( variable[1] /*v*/) /*CompilerVisitor::unindent*/;
+    variable[8] = NEW_String_string___String___with_native(BOX_NativeString("}"), TAG_Int(1)); /*new String*/
+    ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[8]) /*CompilerVisitor::add_instr*/;
+  }
+  variable[2] =  variable[4] /*va*/;
+  goto return_label374;
+  return_label374: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t compiling_methods___AProxyExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1637, LOCATE_compiling_methods___AProxyExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1700, LOCATE_compiling_methods___AProxyExpr___compile_expr};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -10218,13 +10409,13 @@ val_t compiling_methods___AProxyExpr___compile_expr(val_t  self, val_t  param0) 
   variable[3] = ((parser_nodes___AProxyExpr___n_expr_t)CALL(variable[3],COLOR_parser_nodes___AProxyExpr___n_expr))(variable[3]) /*AProxyExpr::n_expr*/;
   variable[3] = ((compiling_methods___CompilerVisitor___compile_expr_t)CALL( variable[1] /*v*/,COLOR_compiling_methods___CompilerVisitor___compile_expr))( variable[1] /*v*/, variable[3]) /*CompilerVisitor::compile_expr*/;
   variable[2] = variable[3];
-  goto return_label374;
-  return_label374: while(false);
+  goto return_label376;
+  return_label376: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t compiling_methods___AOnceExpr___compile_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1644, LOCATE_compiling_methods___AOnceExpr___compile_expr};
+  struct trace_t trace = {NULL, NULL, 1707, LOCATE_compiling_methods___AOnceExpr___compile_expr};
   val_t variable[17];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -10321,8 +10512,8 @@ val_t compiling_methods___AOnceExpr___compile_expr(val_t  self, val_t  param0) {
   variable[6] = NEW_String_string___String___with_native(BOX_NativeString("}"), TAG_Int(1)); /*new String*/
   ((compiling_base___CompilerVisitor___add_instr_t)CALL( variable[1] /*v*/,COLOR_compiling_base___CompilerVisitor___add_instr))( variable[1] /*v*/, variable[6]) /*CompilerVisitor::add_instr*/;
   variable[2] =  variable[4] /*cvar*/;
-  goto return_label375;
-  return_label375: while(false);
+  goto return_label377;
+  return_label377: while(false);
   tracehead = trace.prev;
   return variable[2];
 }

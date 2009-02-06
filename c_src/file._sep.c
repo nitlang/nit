@@ -256,7 +256,7 @@ void file___IFStream___open(val_t  self, val_t  param0, int* init_table) {
   trace.file = LOCATE_file;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IFStream].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IFStream].i]) return;
   variable[3] = variable[0];
   ATTR_file___FStream____path(variable[3]) /*FStream::_path*/ =  variable[1] /*path*/;
   variable[3] = variable[0];
@@ -273,7 +273,7 @@ void file___IFStream___open(val_t  self, val_t  param0, int* init_table) {
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", " 'cant_open_file' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_file___IFStream___open, LOCATE_file, 110); nit_exit(1);}
   return_label14: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IFStream].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IFStream].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -284,9 +284,9 @@ void file___IFStream___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_file;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IFStream].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IFStream].i]) return;
   return_label15: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IFStream].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IFStream].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -297,9 +297,9 @@ void file___IFStream___without_file(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_file;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IFStream].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IFStream].i]) return;
   return_label16: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IFStream].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IFStream].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -396,7 +396,7 @@ void file___OFStream___open(val_t  self, val_t  param0, int* init_table) {
   trace.file = LOCATE_file;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OFStream].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OFStream].i]) return;
   variable[3] = variable[0];
   variable[4] = variable[0];
   variable[5] = ((string___String___to_cstring_t)CALL( variable[1] /*path*/,COLOR_string___String___to_cstring))( variable[1] /*path*/) /*String::to_cstring*/;
@@ -411,7 +411,7 @@ void file___OFStream___open(val_t  self, val_t  param0, int* init_table) {
   variable[3] = variable[0];
   ATTR_file___OFStream____writable(variable[3]) /*OFStream::_writable*/ =  TAG_Bool(true);
   return_label21: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OFStream].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OFStream].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -422,9 +422,9 @@ void file___OFStream___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_file;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OFStream].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OFStream].i]) return;
   return_label22: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OFStream].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OFStream].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -435,9 +435,9 @@ void file___OFStream___without_file(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_file;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OFStream].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OFStream].i]) return;
   return_label23: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OFStream].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OFStream].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -448,7 +448,7 @@ void file___Stdin___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_file;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Stdin].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Stdin].i]) return;
   ((file___IFStream___init_t)CALL(variable[0],COLOR_file___IFStream___init))(variable[0], init_table /*YYY*/) /*IFStream::init*/;
   variable[2] = variable[0];
   variable[3] = variable[0];
@@ -460,7 +460,7 @@ void file___Stdin___init(val_t  self, int* init_table) {
   variable[2] = variable[0];
   ((stream___BufferedIStream___prepare_buffer_t)CALL(variable[2],COLOR_stream___BufferedIStream___prepare_buffer))(variable[2],  TAG_Int(1)) /*BufferedIStream::prepare_buffer*/;
   return_label24: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Stdin].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Stdin].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -471,7 +471,7 @@ void file___Stdout___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_file;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Stdout].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Stdout].i]) return;
   ((file___OFStream___init_t)CALL(variable[0],COLOR_file___OFStream___init))(variable[0], init_table /*YYY*/) /*OFStream::init*/;
   variable[2] = variable[0];
   variable[3] = variable[0];
@@ -483,7 +483,7 @@ void file___Stdout___init(val_t  self, int* init_table) {
   variable[2] = variable[0];
   ATTR_file___OFStream____writable(variable[2]) /*OFStream::_writable*/ =  TAG_Bool(true);
   return_label25: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Stdout].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Stdout].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -494,7 +494,7 @@ void file___Stderr___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_file;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Stderr].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Stderr].i]) return;
   ((file___OFStream___init_t)CALL(variable[0],COLOR_file___OFStream___init))(variable[0], init_table /*YYY*/) /*OFStream::init*/;
   variable[2] = variable[0];
   variable[3] = variable[0];
@@ -506,7 +506,7 @@ void file___Stderr___init(val_t  self, int* init_table) {
   variable[2] = variable[0];
   ATTR_file___OFStream____writable(variable[2]) /*OFStream::_writable*/ =  TAG_Bool(true);
   return_label26: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Stderr].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Stderr].i] = 1;
   tracehead = trace.prev;
   return;
 }

@@ -1539,6 +1539,9 @@ void parser_prod___AClosureDecl___n_id__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___AClosureDecl___n_signature__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AClosureDecl___n_signature__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AClosureDecl___n_signature__eq "parser_prod::AClosureDecl::(parser_nodes::AClosureDecl::n_signature=)"
+typedef void (* parser_prod___AClosureDecl___n_expr__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AClosureDecl___n_expr__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AClosureDecl___n_expr__eq "parser_prod::AClosureDecl::(parser_nodes::AClosureDecl::n_expr=)"
 typedef void (* parser_prod___AClosureDecl___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___AClosureDecl___replace_child(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_parser_prod___AClosureDecl___replace_child "parser_prod::AClosureDecl::(parser_prod::PNode::replace_child)"
@@ -1552,10 +1555,10 @@ typedef void (* parser_prod___AClosureDecl___empty_init_t)(val_t  self, int* ini
 void parser_prod___AClosureDecl___empty_init(val_t  self, int* init_table);
 #define LOCATE_parser_prod___AClosureDecl___empty_init "parser_prod::AClosureDecl::empty_init"
 val_t NEW_AClosureDecl_parser_prod___AClosureDecl___empty_init();
-typedef void (* parser_prod___AClosureDecl___init_aclosuredecl_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void parser_prod___AClosureDecl___init_aclosuredecl(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+typedef void (* parser_prod___AClosureDecl___init_aclosuredecl_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
+void parser_prod___AClosureDecl___init_aclosuredecl(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
 #define LOCATE_parser_prod___AClosureDecl___init_aclosuredecl "parser_prod::AClosureDecl::init_aclosuredecl"
-val_t NEW_AClosureDecl_parser_prod___AClosureDecl___init_aclosuredecl(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_AClosureDecl_parser_prod___AClosureDecl___init_aclosuredecl(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 val_t NEW_AType_parser_nodes___PNode___init();
 typedef void (* parser_prod___AType___n_id__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AType___n_id__eq(val_t  self, val_t  param0);

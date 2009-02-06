@@ -611,7 +611,7 @@ void static_type___MMSignature___init(val_t  self, val_t  param0, val_t  param1,
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSignature].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSignature].i]) return;
   variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*params*/ ==  NIT_NULL /*null*/) || (( variable[1] /*params*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*params*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*params*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*params*/,COLOR_kernel___Object_____eqeq))( variable[1] /*params*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMSignature___init, LOCATE_static_type, 219); nit_exit(1);}
   variable[5] = variable[0];
@@ -621,7 +621,7 @@ void static_type___MMSignature___init(val_t  self, val_t  param0, val_t  param1,
   variable[5] = variable[0];
   ATTR_static_type___MMSignature____recv(variable[5]) /*MMSignature::_recv*/ =  variable[3] /*r*/;
   return_label18: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSignature].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSignature].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -643,9 +643,18 @@ val_t static_type___MMClosure___is_break(val_t  self) {
   tracehead = trace.prev;
   return ATTR_static_type___MMClosure____is_break( self) /*MMClosure::_is_break*/;
 }
+val_t static_type___MMClosure___is_optional(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 235, LOCATE_static_type___MMClosure___is_optional};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_static_type;
+  tracehead = trace.prev;
+  return ATTR_static_type___MMClosure____is_optional( self) /*MMClosure::_is_optional*/;
+}
 val_t static_type___MMClosure___adaptation_to(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 235, LOCATE_static_type___MMClosure___adaptation_to};
-  val_t variable[6];
+  struct trace_t trace = {NULL, NULL, 239, LOCATE_static_type___MMClosure___adaptation_to};
+  val_t variable[7];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
@@ -656,36 +665,41 @@ val_t static_type___MMClosure___adaptation_to(val_t  self, val_t  param0) {
   variable[3] = ((static_type___MMSignature___adaptation_to_t)CALL(variable[3],COLOR_static_type___MMSignature___adaptation_to))(variable[3],  variable[1] /*r*/) /*MMSignature::adaptation_to*/;
   variable[4] = variable[0];
   variable[4] = ATTR_static_type___MMClosure____is_break(variable[4]) /*MMClosure::_is_break*/;
-  variable[5] = NEW_MMClosure_static_type___MMClosure___init(variable[3], variable[4]); /*new MMClosure*/
-  variable[3] = variable[5];
+  variable[5] = variable[0];
+  variable[5] = ATTR_static_type___MMClosure____is_optional(variable[5]) /*MMClosure::_is_optional*/;
+  variable[6] = NEW_MMClosure_static_type___MMClosure___init(variable[3], variable[4], variable[5]); /*new MMClosure*/
+  variable[3] = variable[6];
   variable[2] = variable[3];
   goto return_label19;
   return_label19: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
-void static_type___MMClosure___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 241, LOCATE_static_type___MMClosure___init};
-  val_t variable[5];
+void static_type___MMClosure___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 245, LOCATE_static_type___MMClosure___init};
+  val_t variable[6];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMClosure].i]) return;
-  variable[4] = variable[0];
-  ATTR_static_type___MMClosure____signature(variable[4]) /*MMClosure::_signature*/ =  variable[1] /*s*/;
-  variable[4] = variable[0];
-  ATTR_static_type___MMClosure____is_break(variable[4]) /*MMClosure::_is_break*/ =  variable[2] /*is_break*/;
+  variable[3] =  param2;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMClosure].i]) return;
+  variable[5] = variable[0];
+  ATTR_static_type___MMClosure____signature(variable[5]) /*MMClosure::_signature*/ =  variable[1] /*s*/;
+  variable[5] = variable[0];
+  ATTR_static_type___MMClosure____is_break(variable[5]) /*MMClosure::_is_break*/ =  variable[2] /*is_break*/;
+  variable[5] = variable[0];
+  ATTR_static_type___MMClosure____is_optional(variable[5]) /*MMClosure::_is_optional*/ =  variable[3] /*is_optional*/;
   return_label20: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMClosure].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMClosure].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t static_type___MMClosure___not_for_self(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 247, LOCATE_static_type___MMClosure___not_for_self};
-  val_t variable[5];
+  struct trace_t trace = {NULL, NULL, 252, LOCATE_static_type___MMClosure___not_for_self};
+  val_t variable[6];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
@@ -700,8 +714,10 @@ val_t static_type___MMClosure___not_for_self(val_t  self) {
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = variable[0];
     variable[3] = ATTR_static_type___MMClosure____is_break(variable[3]) /*MMClosure::_is_break*/;
-    variable[4] = NEW_MMClosure_static_type___MMClosure___init( variable[2] /*sig*/, variable[3]); /*new MMClosure*/
-    variable[3] = variable[4];
+    variable[4] = variable[0];
+    variable[4] = ATTR_static_type___MMClosure____is_optional(variable[4]) /*MMClosure::_is_optional*/;
+    variable[5] = NEW_MMClosure_static_type___MMClosure___init( variable[2] /*sig*/, variable[3], variable[4]); /*new MMClosure*/
+    variable[3] = variable[5];
     variable[1] = variable[3];
     goto return_label21;
   } else { /*if*/
@@ -714,7 +730,7 @@ val_t static_type___MMClosure___not_for_self(val_t  self) {
   return variable[1];
 }
 val_t static_type___MMAncestor___to_s(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 277, LOCATE_static_type___MMAncestor___to_s};
+  struct trace_t trace = {NULL, NULL, 282, LOCATE_static_type___MMAncestor___to_s};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -741,7 +757,7 @@ val_t static_type___MMAncestor___to_s(val_t  self) {
   return variable[1];
 }
 val_t static_type___MMAncestor___stype(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 260, LOCATE_static_type___MMAncestor___stype};
+  struct trace_t trace = {NULL, NULL, 265, LOCATE_static_type___MMAncestor___stype};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -750,7 +766,7 @@ val_t static_type___MMAncestor___stype(val_t  self) {
   return ATTR_static_type___MMAncestor____stype( self) /*MMAncestor::_stype*/;
 }
 void static_type___MMAncestor___stype__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 260, LOCATE_static_type___MMAncestor___stype__eq};
+  struct trace_t trace = {NULL, NULL, 265, LOCATE_static_type___MMAncestor___stype__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -760,7 +776,7 @@ void static_type___MMAncestor___stype__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t static_type___MMAncestor___inheriter(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 263, LOCATE_static_type___MMAncestor___inheriter};
+  struct trace_t trace = {NULL, NULL, 268, LOCATE_static_type___MMAncestor___inheriter};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -769,7 +785,7 @@ val_t static_type___MMAncestor___inheriter(val_t  self) {
   return ATTR_static_type___MMAncestor____inheriter( self) /*MMAncestor::_inheriter*/;
 }
 void static_type___MMAncestor___inheriter__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 263, LOCATE_static_type___MMAncestor___inheriter__eq};
+  struct trace_t trace = {NULL, NULL, 268, LOCATE_static_type___MMAncestor___inheriter__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -779,7 +795,7 @@ void static_type___MMAncestor___inheriter__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t static_type___MMAncestor___is_reffinement(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 266, LOCATE_static_type___MMAncestor___is_reffinement};
+  struct trace_t trace = {NULL, NULL, 271, LOCATE_static_type___MMAncestor___is_reffinement};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -799,7 +815,7 @@ val_t static_type___MMAncestor___is_reffinement(val_t  self) {
   return variable[1];
 }
 val_t static_type___MMAncestor___is_specialisation(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 270, LOCATE_static_type___MMAncestor___is_specialisation};
+  struct trace_t trace = {NULL, NULL, 275, LOCATE_static_type___MMAncestor___is_specialisation};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -821,13 +837,13 @@ val_t static_type___MMAncestor___is_specialisation(val_t  self) {
   return variable[1];
 }
 val_t static_type___MMAncestor___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 274, LOCATE_static_type___MMAncestor___local_class};
+  struct trace_t trace = {NULL, NULL, 279, LOCATE_static_type___MMAncestor___local_class};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 274);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 279);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
@@ -842,55 +858,43 @@ void static_type___MMAncestor___init(val_t  self, int* init_table) {
   return;
 }
 val_t static_type___MMType___module(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 290, LOCATE_static_type___MMType___module};
+  struct trace_t trace = {NULL, NULL, 295, LOCATE_static_type___MMType___module};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 290);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 295);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t static_type___MMType___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 293, LOCATE_static_type___MMType___local_class};
+  struct trace_t trace = {NULL, NULL, 298, LOCATE_static_type___MMType___local_class};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 293);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 298);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t static_type___MMType_____l(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 296, LOCATE_static_type___MMType_____l};
+  struct trace_t trace = {NULL, NULL, 301, LOCATE_static_type___MMType_____l};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 296);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 301);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t static_type___MMType___is_supertype(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 299, LOCATE_static_type___MMType___is_supertype};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_static_type;
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 299);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return NIT_NULL;
-}
-val_t static_type___MMType___for_module(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 304, LOCATE_static_type___MMType___for_module};
+  struct trace_t trace = {NULL, NULL, 304, LOCATE_static_type___MMType___is_supertype};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -901,32 +905,44 @@ val_t static_type___MMType___for_module(val_t  self, val_t  param0) {
   tracehead = trace.prev;
   return NIT_NULL;
 }
-val_t static_type___MMType___adapt_to(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 307, LOCATE_static_type___MMType___adapt_to};
+val_t static_type___MMType___for_module(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 309, LOCATE_static_type___MMType___for_module};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 307);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 309);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t static_type___MMType___adapt_to(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 312, LOCATE_static_type___MMType___adapt_to};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_static_type;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 312);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t static_type___MMType___upcast_for(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 311, LOCATE_static_type___MMType___upcast_for};
+  struct trace_t trace = {NULL, NULL, 316, LOCATE_static_type___MMType___upcast_for};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 311);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_static_type, 316);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t static_type___MMType___not_for_self(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 315, LOCATE_static_type___MMType___not_for_self};
+  struct trace_t trace = {NULL, NULL, 320, LOCATE_static_type___MMType___not_for_self};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -949,7 +965,7 @@ void static_type___MMType___init(val_t  self, int* init_table) {
   return;
 }
 val_t static_type___MMTypeClass___to_s(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 326, LOCATE_static_type___MMTypeClass___to_s};
+  struct trace_t trace = {NULL, NULL, 331, LOCATE_static_type___MMTypeClass___to_s};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -965,7 +981,7 @@ val_t static_type___MMTypeClass___to_s(val_t  self) {
   return variable[1];
 }
 val_t static_type___MMTypeClass___module(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 323, LOCATE_static_type___MMTypeClass___module};
+  struct trace_t trace = {NULL, NULL, 328, LOCATE_static_type___MMTypeClass___module};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -981,7 +997,7 @@ val_t static_type___MMTypeClass___module(val_t  self) {
   return variable[1];
 }
 val_t static_type___MMTypeClass___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 322, LOCATE_static_type___MMTypeClass___local_class};
+  struct trace_t trace = {NULL, NULL, 327, LOCATE_static_type___MMTypeClass___local_class};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -990,7 +1006,7 @@ val_t static_type___MMTypeClass___local_class(val_t  self) {
   return ATTR_static_type___MMTypeClass____local_class( self) /*MMTypeClass::_local_class*/;
 }
 val_t static_type___MMTypeClass_____l(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 324, LOCATE_static_type___MMTypeClass_____l};
+  struct trace_t trace = {NULL, NULL, 329, LOCATE_static_type___MMTypeClass_____l};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1011,7 +1027,7 @@ val_t static_type___MMTypeClass_____l(val_t  self, val_t  param0) {
   return variable[2];
 }
 val_t static_type___MMTypeClass___upcast_for(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 331, LOCATE_static_type___MMTypeClass___upcast_for};
+  struct trace_t trace = {NULL, NULL, 336, LOCATE_static_type___MMTypeClass___upcast_for};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1021,9 +1037,9 @@ val_t static_type___MMTypeClass___upcast_for(val_t  self, val_t  param0) {
   variable[3] = variable[0];
   variable[3] = ATTR_static_type___MMTypeClass____local_class(variable[3]) /*MMTypeClass::_local_class*/;
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeClass___upcast_for, LOCATE_static_type, 333); nit_exit(1);}
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeClass___upcast_for, LOCATE_static_type, 338); nit_exit(1);}
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*c*/ ==  NIT_NULL /*null*/) || (( variable[1] /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*c*/,COLOR_kernel___Object_____eqeq))( variable[1] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeClass___upcast_for, LOCATE_static_type, 334); nit_exit(1);}
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeClass___upcast_for, LOCATE_static_type, 339); nit_exit(1);}
   variable[4] = variable[0];
   variable[3] = variable[4];
   variable[4] = variable[0];
@@ -1036,7 +1052,7 @@ val_t static_type___MMTypeClass___upcast_for(val_t  self, val_t  param0) {
     variable[3] = variable[4] /*t=*/;
   }
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeClass___upcast_for, LOCATE_static_type, 340); nit_exit(1);}
+  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeClass___upcast_for, LOCATE_static_type, 345); nit_exit(1);}
   variable[2] =  variable[3] /*t*/;
   goto return_label29;
   return_label29: while(false);
@@ -1044,23 +1060,23 @@ val_t static_type___MMTypeClass___upcast_for(val_t  self, val_t  param0) {
   return variable[2];
 }
 void static_type___MMTypeClass___init(val_t  self, val_t  param0, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 344, LOCATE_static_type___MMTypeClass___init};
+  struct trace_t trace = {NULL, NULL, 349, LOCATE_static_type___MMTypeClass___init};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeClass].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeClass].i]) return;
   variable[3] = variable[0];
   ATTR_static_type___MMTypeClass____local_class(variable[3]) /*MMTypeClass::_local_class*/ =  variable[1] /*c*/;
   return_label30: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeClass].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeClass].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t static_type___MMTypeSimpleClass___is_supertype(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 352, LOCATE_static_type___MMTypeSimpleClass___is_supertype};
+  struct trace_t trace = {NULL, NULL, 357, LOCATE_static_type___MMTypeSimpleClass___is_supertype};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1079,7 +1095,7 @@ val_t static_type___MMTypeSimpleClass___is_supertype(val_t  self, val_t  param0)
   return variable[2];
 }
 val_t static_type___MMTypeSimpleClass___for_module(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 357, LOCATE_static_type___MMTypeSimpleClass___for_module};
+  struct trace_t trace = {NULL, NULL, 362, LOCATE_static_type___MMTypeSimpleClass___for_module};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1099,7 +1115,7 @@ val_t static_type___MMTypeSimpleClass___for_module(val_t  self, val_t  param0) {
     variable[3] = variable[4] /*t=*/;
   }
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeSimpleClass___for_module, LOCATE_static_type, 363); nit_exit(1);}
+  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeSimpleClass___for_module, LOCATE_static_type, 368); nit_exit(1);}
   variable[2] =  variable[3] /*t*/;
   goto return_label32;
   return_label32: while(false);
@@ -1107,7 +1123,7 @@ val_t static_type___MMTypeSimpleClass___for_module(val_t  self, val_t  param0) {
   return variable[2];
 }
 val_t static_type___MMTypeSimpleClass___adapt_to(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 367, LOCATE_static_type___MMTypeSimpleClass___adapt_to};
+  struct trace_t trace = {NULL, NULL, 372, LOCATE_static_type___MMTypeSimpleClass___adapt_to};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1122,22 +1138,22 @@ val_t static_type___MMTypeSimpleClass___adapt_to(val_t  self, val_t  param0) {
   return variable[2];
 }
 void static_type___MMTypeSimpleClass___init(val_t  self, val_t  param0, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 369, LOCATE_static_type___MMTypeSimpleClass___init};
+  struct trace_t trace = {NULL, NULL, 374, LOCATE_static_type___MMTypeSimpleClass___init};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeSimpleClass].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeSimpleClass].i]) return;
   ((static_type___MMTypeClass___init_t)CALL(variable[0],COLOR_static_type___MMTypeClass___init))(variable[0],  variable[1] /*c*/, init_table /*YYY*/) /*MMTypeClass::init*/;
   return_label34: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeSimpleClass].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeSimpleClass].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t static_type___MMTypeNone___module(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 378, LOCATE_static_type___MMTypeNone___module};
+  struct trace_t trace = {NULL, NULL, 383, LOCATE_static_type___MMTypeNone___module};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1146,19 +1162,19 @@ val_t static_type___MMTypeNone___module(val_t  self) {
   return ATTR_static_type___MMTypeNone____module( self) /*MMTypeNone::_module*/;
 }
 val_t static_type___MMTypeNone___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 381, LOCATE_static_type___MMTypeNone___local_class};
+  struct trace_t trace = {NULL, NULL, 386, LOCATE_static_type___MMTypeNone___local_class};
   val_t variable[2];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   variable[0] =  self;
-  fprintf(stderr, "Aborted"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeNone___local_class, LOCATE_static_type, 381); nit_exit(1);
+  fprintf(stderr, "Aborted"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeNone___local_class, LOCATE_static_type, 386); nit_exit(1);
   return_label35: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t static_type___MMTypeNone_____l(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 379, LOCATE_static_type___MMTypeNone_____l};
+  struct trace_t trace = {NULL, NULL, 384, LOCATE_static_type___MMTypeNone_____l};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1172,7 +1188,7 @@ val_t static_type___MMTypeNone_____l(val_t  self, val_t  param0) {
   return variable[2];
 }
 val_t static_type___MMTypeNone___is_supertype(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 380, LOCATE_static_type___MMTypeNone___is_supertype};
+  struct trace_t trace = {NULL, NULL, 385, LOCATE_static_type___MMTypeNone___is_supertype};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1186,7 +1202,7 @@ val_t static_type___MMTypeNone___is_supertype(val_t  self, val_t  param0) {
   return variable[2];
 }
 val_t static_type___MMTypeNone___upcast_for(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 382, LOCATE_static_type___MMTypeNone___upcast_for};
+  struct trace_t trace = {NULL, NULL, 387, LOCATE_static_type___MMTypeNone___upcast_for};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1201,23 +1217,23 @@ val_t static_type___MMTypeNone___upcast_for(val_t  self, val_t  param0) {
   return variable[2];
 }
 void static_type___MMTypeNone___init(val_t  self, val_t  param0, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 384, LOCATE_static_type___MMTypeNone___init};
+  struct trace_t trace = {NULL, NULL, 389, LOCATE_static_type___MMTypeNone___init};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_static_type;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeNone].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeNone].i]) return;
   variable[3] = variable[0];
   ATTR_static_type___MMTypeNone____module(variable[3]) /*MMTypeNone::_module*/ =  variable[1] /*m*/;
   return_label39: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeNone].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeNone].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t static_type___MMModule___type_none(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 388, LOCATE_static_type___MMModule___type_none};
+  struct trace_t trace = {NULL, NULL, 393, LOCATE_static_type___MMModule___type_none};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;

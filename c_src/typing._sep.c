@@ -197,10 +197,10 @@ void typing___TypingVisitor___init(val_t  self, val_t  param0, val_t  param1, in
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TypingVisitor].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TypingVisitor].i]) return;
   ((syntax_base___AbsSyntaxVisitor___init_t)CALL(variable[0],COLOR_syntax_base___AbsSyntaxVisitor___init))(variable[0], variable[1], variable[2], init_table /*YYY*/) /*AbsSyntaxVisitor::init*/;
   return_label2: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TypingVisitor].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TypingVisitor].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -529,12 +529,12 @@ void typing___VariableContext___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_VariableContext].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_VariableContext].i]) return;
   variable[2] = variable[0];
   variable[3] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[Symbol, Variable]*/
   ATTR_typing___VariableContext____dico(variable[2]) /*VariableContext::_dico*/ = variable[3];
   return_label13: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_VariableContext].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_VariableContext].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -611,7 +611,7 @@ void typing___SubVariableContext___with_prev(val_t  self, val_t  param0, val_t  
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_SubVariableContext].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_SubVariableContext].i]) return;
   variable[5] = variable[0];
   ((typing___VariableContext___init_t)CALL(variable[5],COLOR_typing___VariableContext___init))(variable[5], init_table /*YYY*/) /*VariableContext::init*/;
   variable[5] = variable[0];
@@ -621,7 +621,7 @@ void typing___SubVariableContext___with_prev(val_t  self, val_t  param0, val_t  
   variable[5] = variable[0];
   ATTR_typing___SubVariableContext____var_type(variable[5]) /*SubVariableContext::_var_type*/ =  variable[3] /*t*/;
   return_label16: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_SubVariableContext].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_SubVariableContext].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -959,8 +959,8 @@ void typing___PParam___after_typing(val_t  self, val_t  param0) {
   tracehead = trace.prev;
   return;
 }
-void typing___AClosureDecl___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 301, LOCATE_typing___AClosureDecl___after_typing};
+void typing___AClosureDecl___accept_typing(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 301, LOCATE_typing___AClosureDecl___accept_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -971,12 +971,24 @@ void typing___AClosureDecl___after_typing(val_t  self, val_t  param0) {
   variable[4] = variable[0];
   variable[4] = ((syntax_base___PClosureDecl___variable_t)CALL(variable[4],COLOR_syntax_base___PClosureDecl___variable))(variable[4]) /*PClosureDecl::variable*/;
   ((typing___VariableContext___add_t)CALL(variable[3],COLOR_typing___VariableContext___add))(variable[3], variable[4]) /*VariableContext::add*/;
+  variable[4] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+  variable[3] = variable[4];
+  variable[4] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
+  variable[4] = ((typing___VariableContext___sub_t)CALL(variable[4],COLOR_typing___VariableContext___sub))(variable[4]) /*VariableContext::sub*/;
+  ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable[1] /*v*/, variable[4]) /*TypingVisitor::variable_ctx=*/;
+  variable[4] = variable[0];
+  variable[4] = ((syntax_base___PClosureDecl___variable_t)CALL(variable[4],COLOR_syntax_base___PClosureDecl___variable))(variable[4]) /*PClosureDecl::variable*/;
+  variable[4] = ((syntax_base___ClosureVariable___closure_t)CALL(variable[4],COLOR_syntax_base___ClosureVariable___closure))(variable[4]) /*ClosureVariable::closure*/;
+  ((typing___TypingVisitor___closure__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___closure__eq))( variable[1] /*v*/, variable[4]) /*TypingVisitor::closure=*/;
+  ((typing___AClosureDecl___accept_typing_t)CALL(variable[0],COLOR_SUPER_typing___AClosureDecl___accept_typing))(variable[0], variable[1]) /*super AClosureDecl::accept_typing*/;
+  ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable[1] /*v*/,  variable[3] /*old_var_ctx*/) /*TypingVisitor::variable_ctx=*/;
+  ((typing___TypingVisitor___closure__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___closure__eq))( variable[1] /*v*/,  NIT_NULL /*null*/) /*TypingVisitor::closure=*/;
   return_label28: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___PType___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 309, LOCATE_typing___PType___after_typing};
+  struct trace_t trace = {NULL, NULL, 319, LOCATE_typing___PType___after_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -992,7 +1004,7 @@ void typing___PType___after_typing(val_t  self, val_t  param0) {
   return;
 }
 val_t typing___PType___stype(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 308, LOCATE_typing___PType___stype};
+  struct trace_t trace = {NULL, NULL, 318, LOCATE_typing___PType___stype};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1001,7 +1013,7 @@ val_t typing___PType___stype(val_t  self) {
   return ATTR_typing___PType____stype( self) /*PType::_stype*/;
 }
 val_t typing___PExpr___stype(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 316, LOCATE_typing___PExpr___stype};
+  struct trace_t trace = {NULL, NULL, 326, LOCATE_typing___PExpr___stype};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1010,7 +1022,7 @@ val_t typing___PExpr___stype(val_t  self) {
   return ATTR_typing___PExpr____stype( self) /*PExpr::_stype*/;
 }
 val_t typing___PExpr___is_implicit_self(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 318, LOCATE_typing___PExpr___is_implicit_self};
+  struct trace_t trace = {NULL, NULL, 328, LOCATE_typing___PExpr___is_implicit_self};
   val_t variable[2];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1023,7 +1035,7 @@ val_t typing___PExpr___is_implicit_self(val_t  self) {
   return variable[1];
 }
 val_t typing___PExpr___is_self(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 321, LOCATE_typing___PExpr___is_self};
+  struct trace_t trace = {NULL, NULL, 331, LOCATE_typing___PExpr___is_self};
   val_t variable[2];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1036,7 +1048,7 @@ val_t typing___PExpr___is_self(val_t  self) {
   return variable[1];
 }
 val_t typing___PExpr___its_variable(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 324, LOCATE_typing___PExpr___its_variable};
+  struct trace_t trace = {NULL, NULL, 334, LOCATE_typing___PExpr___its_variable};
   val_t variable[2];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1049,7 +1061,7 @@ val_t typing___PExpr___its_variable(val_t  self) {
   return variable[1];
 }
 val_t typing___PExpr___if_true_variable_ctx(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 327, LOCATE_typing___PExpr___if_true_variable_ctx};
+  struct trace_t trace = {NULL, NULL, 337, LOCATE_typing___PExpr___if_true_variable_ctx};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1058,7 +1070,7 @@ val_t typing___PExpr___if_true_variable_ctx(val_t  self) {
   return ATTR_typing___PExpr____if_true_variable_ctx( self) /*PExpr::_if_true_variable_ctx*/;
 }
 void typing___AVardeclExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 332, LOCATE_typing___AVardeclExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 342, LOCATE_typing___AVardeclExpr___after_typing};
   val_t variable[7];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1107,7 +1119,7 @@ void typing___AVardeclExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___ABlockExpr___accept_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 351, LOCATE_typing___ABlockExpr___accept_typing};
+  struct trace_t trace = {NULL, NULL, 361, LOCATE_typing___ABlockExpr___accept_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1126,7 +1138,7 @@ void typing___ABlockExpr___accept_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___AReturnExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 363, LOCATE_typing___AReturnExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 373, LOCATE_typing___AReturnExpr___after_typing};
   val_t variable[6];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1183,7 +1195,7 @@ void typing___AReturnExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___AContinueExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 377, LOCATE_typing___AContinueExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 387, LOCATE_typing___AContinueExpr___after_typing};
   val_t variable[7];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1252,7 +1264,7 @@ void typing___AContinueExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___ABreakExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 400, LOCATE_typing___ABreakExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 410, LOCATE_typing___ABreakExpr___after_typing};
   val_t variable[6];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1308,7 +1320,7 @@ void typing___ABreakExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___AIfExpr___accept_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 415, LOCATE_typing___AIfExpr___accept_typing};
+  struct trace_t trace = {NULL, NULL, 425, LOCATE_typing___AIfExpr___accept_typing};
   val_t variable[6];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1352,7 +1364,7 @@ void typing___AIfExpr___accept_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___AWhileExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 437, LOCATE_typing___AWhileExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 447, LOCATE_typing___AWhileExpr___after_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1368,7 +1380,7 @@ void typing___AWhileExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___AForExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 444, LOCATE_typing___AForExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 454, LOCATE_typing___AForExpr___after_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1378,7 +1390,7 @@ void typing___AForExpr___after_typing(val_t  self, val_t  param0) {
   variable[4] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
   variable[3] = variable[4];
   variable[4] = TAG_Bool(( variable[3] /*varctx*/==NIT_NULL) || VAL_ISA( variable[3] /*varctx*/, COLOR_SubVariableContext, ID_SubVariableContext)) /*cast SubVariableContext*/;
-  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___AForExpr___after_typing, LOCATE_typing, 448); nit_exit(1);}
+  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___AForExpr___after_typing, LOCATE_typing, 458); nit_exit(1);}
   variable[4] = ((typing___SubVariableContext___prev_t)CALL( variable[3] /*varctx*/,COLOR_typing___SubVariableContext___prev))( variable[3] /*varctx*/) /*SubVariableContext::prev*/;
   ((typing___TypingVisitor___variable_ctx__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx__eq))( variable[1] /*v*/, variable[4]) /*TypingVisitor::variable_ctx=*/;
   return_label40: while(false);
@@ -1386,7 +1398,7 @@ void typing___AForExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___AForVardeclExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 454, LOCATE_typing___AForVardeclExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 464, LOCATE_typing___AForVardeclExpr___after_typing};
   static val_t once_value_42; static int once_bool_42; /* Once value for variable[7]*/
   static val_t once_value_43; static int once_bool_43; /* Once value for variable[9]*/
   val_t variable[15];
@@ -1482,7 +1494,7 @@ void typing___AForVardeclExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___AAssertExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 483, LOCATE_typing___AAssertExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 493, LOCATE_typing___AAssertExpr___after_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1508,7 +1520,7 @@ void typing___AAssertExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___AVarExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 493, LOCATE_typing___AVarExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 503, LOCATE_typing___AVarExpr___after_typing};
   val_t variable[6];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1526,7 +1538,7 @@ void typing___AVarExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 val_t typing___AVarExpr___its_variable(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 491, LOCATE_typing___AVarExpr___its_variable};
+  struct trace_t trace = {NULL, NULL, 501, LOCATE_typing___AVarExpr___its_variable};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1541,7 +1553,7 @@ val_t typing___AVarExpr___its_variable(val_t  self) {
   return variable[1];
 }
 void typing___AVarAssignExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 500, LOCATE_typing___AVarAssignExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 510, LOCATE_typing___AVarAssignExpr___after_typing};
   val_t variable[6];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1561,7 +1573,7 @@ void typing___AVarAssignExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___AReassignFormExpr___do_lvalue_typing(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 508, LOCATE_typing___AReassignFormExpr___do_lvalue_typing};
+  struct trace_t trace = {NULL, NULL, 518, LOCATE_typing___AReassignFormExpr___do_lvalue_typing};
   val_t variable[16];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1627,7 +1639,7 @@ void typing___AReassignFormExpr___do_lvalue_typing(val_t  self, val_t  param0, v
   return;
 }
 val_t typing___AReassignFormExpr___assign_method(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 527, LOCATE_typing___AReassignFormExpr___assign_method};
+  struct trace_t trace = {NULL, NULL, 537, LOCATE_typing___AReassignFormExpr___assign_method};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1636,7 +1648,7 @@ val_t typing___AReassignFormExpr___assign_method(val_t  self) {
   return ATTR_typing___AReassignFormExpr____assign_method( self) /*AReassignFormExpr::_assign_method*/;
 }
 void typing___AVarReassignExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 532, LOCATE_typing___AVarReassignExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 542, LOCATE_typing___AVarReassignExpr___after_typing};
   val_t variable[6];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1655,19 +1667,19 @@ void typing___AVarReassignExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 val_t typing___PAssignOp___method_name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 540, LOCATE_typing___PAssignOp___method_name};
+  struct trace_t trace = {NULL, NULL, 550, LOCATE_typing___PAssignOp___method_name};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_typing, 540);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_typing, 550);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t typing___APlusAssignOp___method_name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 543, LOCATE_typing___APlusAssignOp___method_name};
+  struct trace_t trace = {NULL, NULL, 553, LOCATE_typing___APlusAssignOp___method_name};
   static val_t once_value_51; static int once_bool_51; /* Once value for variable[2]*/
   val_t variable[3];
   void **closurevariable = NULL;
@@ -1688,7 +1700,7 @@ val_t typing___APlusAssignOp___method_name(val_t  self) {
   return variable[1];
 }
 val_t typing___AMinusAssignOp___method_name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 546, LOCATE_typing___AMinusAssignOp___method_name};
+  struct trace_t trace = {NULL, NULL, 556, LOCATE_typing___AMinusAssignOp___method_name};
   static val_t once_value_53; static int once_bool_53; /* Once value for variable[2]*/
   val_t variable[3];
   void **closurevariable = NULL;
@@ -1709,7 +1721,7 @@ val_t typing___AMinusAssignOp___method_name(val_t  self) {
   return variable[1];
 }
 void typing___ASelfExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 552, LOCATE_typing___ASelfExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 562, LOCATE_typing___ASelfExpr___after_typing};
   val_t variable[6];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1730,7 +1742,7 @@ void typing___ASelfExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 val_t typing___ASelfExpr___is_self(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 558, LOCATE_typing___ASelfExpr___is_self};
+  struct trace_t trace = {NULL, NULL, 568, LOCATE_typing___ASelfExpr___is_self};
   val_t variable[2];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1743,7 +1755,7 @@ val_t typing___ASelfExpr___is_self(val_t  self) {
   return variable[1];
 }
 val_t typing___ASelfExpr___its_variable(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 550, LOCATE_typing___ASelfExpr___its_variable};
+  struct trace_t trace = {NULL, NULL, 560, LOCATE_typing___ASelfExpr___its_variable};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1758,7 +1770,7 @@ val_t typing___ASelfExpr___its_variable(val_t  self) {
   return variable[1];
 }
 val_t typing___AImplicitSelfExpr___is_implicit_self(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 562, LOCATE_typing___AImplicitSelfExpr___is_implicit_self};
+  struct trace_t trace = {NULL, NULL, 572, LOCATE_typing___AImplicitSelfExpr___is_implicit_self};
   val_t variable[2];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1771,7 +1783,7 @@ val_t typing___AImplicitSelfExpr___is_implicit_self(val_t  self) {
   return variable[1];
 }
 void typing___AIfexprExpr___accept_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 566, LOCATE_typing___AIfexprExpr___accept_typing};
+  struct trace_t trace = {NULL, NULL, 576, LOCATE_typing___AIfexprExpr___accept_typing};
   val_t variable[16];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1859,7 +1871,7 @@ void typing___AIfexprExpr___accept_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___ABoolExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 594, LOCATE_typing___ABoolExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 604, LOCATE_typing___ABoolExpr___after_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1874,7 +1886,7 @@ void typing___ABoolExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___AOrExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 601, LOCATE_typing___AOrExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 611, LOCATE_typing___AOrExpr___after_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1897,7 +1909,7 @@ void typing___AOrExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___AAndExpr___accept_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 610, LOCATE_typing___AAndExpr___accept_typing};
+  struct trace_t trace = {NULL, NULL, 620, LOCATE_typing___AAndExpr___accept_typing};
   val_t variable[6];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1954,7 +1966,7 @@ void typing___AAndExpr___accept_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___ANotExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 633, LOCATE_typing___ANotExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 643, LOCATE_typing___ANotExpr___after_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1973,7 +1985,7 @@ void typing___ANotExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___AIntExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 641, LOCATE_typing___AIntExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 651, LOCATE_typing___AIntExpr___after_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1988,7 +2000,7 @@ void typing___AIntExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___AFloatExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 649, LOCATE_typing___AFloatExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 659, LOCATE_typing___AFloatExpr___after_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2003,7 +2015,7 @@ void typing___AFloatExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___ACharExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 656, LOCATE_typing___ACharExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 666, LOCATE_typing___ACharExpr___after_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2018,7 +2030,7 @@ void typing___ACharExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___AStringFormExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 663, LOCATE_typing___AStringFormExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 673, LOCATE_typing___AStringFormExpr___after_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2033,7 +2045,7 @@ void typing___AStringFormExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___ASuperstringExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 670, LOCATE_typing___ASuperstringExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 680, LOCATE_typing___ASuperstringExpr___after_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2048,7 +2060,7 @@ void typing___ASuperstringExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___ANullExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 677, LOCATE_typing___ANullExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 687, LOCATE_typing___ANullExpr___after_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2063,7 +2075,7 @@ void typing___ANullExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___AArrayExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 686, LOCATE_typing___AArrayExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 696, LOCATE_typing___AArrayExpr___after_typing};
   val_t variable[11];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2120,7 +2132,7 @@ void typing___AArrayExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___AArrayExpr___stype__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 684, LOCATE_typing___AArrayExpr___stype__eq};
+  struct trace_t trace = {NULL, NULL, 694, LOCATE_typing___AArrayExpr___stype__eq};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2134,7 +2146,7 @@ void typing___AArrayExpr___stype__eq(val_t  self, val_t  param0) {
   return;
 }
 void typing___ARangeExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 703, LOCATE_typing___ARangeExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 713, LOCATE_typing___ARangeExpr___after_typing};
   val_t variable[15];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2201,7 +2213,7 @@ void typing___ARangeExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___ASuperExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 727, LOCATE_typing___ASuperExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 737, LOCATE_typing___ASuperExpr___after_typing};
   val_t variable[19];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2312,7 +2324,7 @@ void typing___ASuperExpr___after_typing(val_t  self, val_t  param0) {
       variable[6] = ((abstract_collection___IndexedCollection___first_t)CALL( variable[4] /*base_precs*/,COLOR_abstract_collection___Collection___first))( variable[4] /*base_precs*/) /*IndexedCollection::first*/;
       variable[5] = variable[6];
       variable[6] = TAG_Bool(( variable[5] /*p*/==NIT_NULL) || VAL_ISA( variable[5] /*p*/, COLOR_MMMethod, ID_MMMethod)) /*cast MMMethod*/;
-      if (!UNTAG_Bool(variable[6])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___ASuperExpr___after_typing, LOCATE_typing, 749); nit_exit(1);}
+      if (!UNTAG_Bool(variable[6])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___ASuperExpr___after_typing, LOCATE_typing, 759); nit_exit(1);}
       variable[6] = variable[0];
       ATTR_typing___ASuperExpr____init_in_superclass(variable[6]) /*ASuperExpr::_init_in_superclass*/ =  variable[5] /*p*/;
       variable[6] = variable[0];
@@ -2370,7 +2382,7 @@ void typing___ASuperExpr___after_typing(val_t  self, val_t  param0) {
       variable[7] = ((array___ArrayIterator___item_t)CALL(variable[6],COLOR_abstract_collection___Iterator___item))(variable[6]) /*ArrayIterator::item*/;
       variable[8] = variable[7];
       variable[9] = TAG_Bool(( variable[8] /*prop*/==NIT_NULL) || VAL_ISA( variable[8] /*prop*/, COLOR_MMMethod, ID_MMMethod)) /*cast MMMethod*/;
-      if (!UNTAG_Bool(variable[9])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___ASuperExpr___after_typing, LOCATE_typing, 765); nit_exit(1);}
+      if (!UNTAG_Bool(variable[9])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___ASuperExpr___after_typing, LOCATE_typing, 775); nit_exit(1);}
       variable[10] = ((typing___TypingVisitor___self_var_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___self_var))( variable[1] /*v*/) /*TypingVisitor::self_var*/;
       variable[10] = ((syntax_base___Variable___stype_t)CALL(variable[10],COLOR_syntax_base___Variable___stype))(variable[10]) /*Variable::stype*/;
       variable[10] = ((static_type___MMLocalProperty___signature_for_t)CALL( variable[8] /*prop*/,COLOR_static_type___MMLocalProperty___signature_for))( variable[8] /*prop*/, variable[10]) /*MMLocalProperty::signature_for*/;
@@ -2414,7 +2426,7 @@ void typing___ASuperExpr___after_typing(val_t  self, val_t  param0) {
   variable[5] = ((syntax_base___AbsSyntaxVisitor___local_property_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___local_property))( variable[1] /*v*/) /*AbsSyntaxVisitor::local_property*/;
   variable[4] = variable[5];
   variable[5] = TAG_Bool(( variable[4] /*p*/==NIT_NULL) || VAL_ISA( variable[4] /*p*/, COLOR_MMSrcMethod, ID_MMSrcMethod)) /*cast MMSrcMethod*/;
-  if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___ASuperExpr___after_typing, LOCATE_typing, 778); nit_exit(1);}
+  if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___ASuperExpr___after_typing, LOCATE_typing, 788); nit_exit(1);}
   variable[5] = variable[0];
   ATTR_typing___AAbsSendExpr____prop(variable[5]) /*AAbsSendExpr::_prop*/ =  variable[4] /*p*/;
   return_label74: while(false);
@@ -2422,7 +2434,7 @@ void typing___ASuperExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 val_t typing___ASuperExpr___init_in_superclass(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 725, LOCATE_typing___ASuperExpr___init_in_superclass};
+  struct trace_t trace = {NULL, NULL, 735, LOCATE_typing___ASuperExpr___init_in_superclass};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2431,7 +2443,7 @@ val_t typing___ASuperExpr___init_in_superclass(val_t  self) {
   return ATTR_typing___ASuperExpr____init_in_superclass( self) /*ASuperExpr::_init_in_superclass*/;
 }
 val_t typing___AAttrFormExpr___prop(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 784, LOCATE_typing___AAttrFormExpr___prop};
+  struct trace_t trace = {NULL, NULL, 794, LOCATE_typing___AAttrFormExpr___prop};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2440,7 +2452,7 @@ val_t typing___AAttrFormExpr___prop(val_t  self) {
   return ATTR_typing___AAttrFormExpr____prop( self) /*AAttrFormExpr::_prop*/;
 }
 val_t typing___AAttrFormExpr___attr_type(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 787, LOCATE_typing___AAttrFormExpr___attr_type};
+  struct trace_t trace = {NULL, NULL, 797, LOCATE_typing___AAttrFormExpr___attr_type};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2449,7 +2461,7 @@ val_t typing___AAttrFormExpr___attr_type(val_t  self) {
   return ATTR_typing___AAttrFormExpr____attr_type( self) /*AAttrFormExpr::_attr_type*/;
 }
 void typing___AAttrFormExpr___do_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 790, LOCATE_typing___AAttrFormExpr___do_typing};
+  struct trace_t trace = {NULL, NULL, 800, LOCATE_typing___AAttrFormExpr___do_typing};
   val_t variable[21];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2551,7 +2563,7 @@ void typing___AAttrFormExpr___do_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___AAttrExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 811, LOCATE_typing___AAttrExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 821, LOCATE_typing___AAttrExpr___after_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2575,7 +2587,7 @@ void typing___AAttrExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___AAttrAssignExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 822, LOCATE_typing___AAttrAssignExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 832, LOCATE_typing___AAttrAssignExpr___after_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2600,7 +2612,7 @@ void typing___AAttrAssignExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 void typing___AAttrReassignExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 833, LOCATE_typing___AAttrReassignExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 843, LOCATE_typing___AAttrReassignExpr___after_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2624,7 +2636,7 @@ void typing___AAttrReassignExpr___after_typing(val_t  self, val_t  param0) {
   return;
 }
 val_t typing___AAbsSendExpr___prop_signature(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 845, LOCATE_typing___AAbsSendExpr___prop_signature};
+  struct trace_t trace = {NULL, NULL, 855, LOCATE_typing___AAbsSendExpr___prop_signature};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2633,7 +2645,7 @@ val_t typing___AAbsSendExpr___prop_signature(val_t  self) {
   return ATTR_typing___AAbsSendExpr____prop_signature( self) /*AAbsSendExpr::_prop_signature*/;
 }
 void typing___AAbsSendExpr___do_typing(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6) {
-  struct trace_t trace = {NULL, NULL, 848, LOCATE_typing___AAbsSendExpr___do_typing};
+  struct trace_t trace = {NULL, NULL, 858, LOCATE_typing___AAbsSendExpr___do_typing};
   val_t variable[15];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2685,7 +2697,7 @@ void typing___AAbsSendExpr___do_typing(val_t  self, val_t  param0, val_t  param1
   return;
 }
 val_t typing___AAbsSendExpr___get_property(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3) {
-  struct trace_t trace = {NULL, NULL, 864, LOCATE_typing___AAbsSendExpr___get_property};
+  struct trace_t trace = {NULL, NULL, 874, LOCATE_typing___AAbsSendExpr___get_property};
   val_t variable[19];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2749,7 +2761,7 @@ val_t typing___AAbsSendExpr___get_property(val_t  self, val_t  param0, val_t  pa
         variable[9] = ((inheritance___MMLocalClass_____bra_t)CALL(variable[9],COLOR_abstractmetamodel___MMLocalClass_____bra))(variable[9], variable[10]) /*MMLocalClass::[]*/;
         variable[8] = variable[9];
         variable[9] = TAG_Bool(( variable[8] /*p*/==NIT_NULL) || VAL_ISA( variable[8] /*p*/, COLOR_MMMethod, ID_MMMethod)) /*cast MMMethod*/;
-        if (!UNTAG_Bool(variable[9])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___AAbsSendExpr___get_property, LOCATE_typing, 875); nit_exit(1);}
+        if (!UNTAG_Bool(variable[9])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_typing___AAbsSendExpr___get_property, LOCATE_typing, 885); nit_exit(1);}
         variable[6] =  variable[8] /*p*/ /*prop=*/;
       }
     }
@@ -2805,7 +2817,7 @@ val_t typing___AAbsSendExpr___get_property(val_t  self, val_t  param0, val_t  pa
   return variable[5];
 }
 val_t typing___AAbsSendExpr___get_signature(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3) {
-  struct trace_t trace = {NULL, NULL, 891, LOCATE_typing___AAbsSendExpr___get_signature};
+  struct trace_t trace = {NULL, NULL, 901, LOCATE_typing___AAbsSendExpr___get_signature};
   val_t variable[9];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2832,7 +2844,7 @@ val_t typing___AAbsSendExpr___get_signature(val_t  self, val_t  param0, val_t  p
   return variable[5];
 }
 val_t typing___AAbsSendExpr___process_signature(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3) {
-  struct trace_t trace = {NULL, NULL, 900, LOCATE_typing___AAbsSendExpr___process_signature};
+  struct trace_t trace = {NULL, NULL, 910, LOCATE_typing___AAbsSendExpr___process_signature};
   val_t variable[25];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2976,8 +2988,8 @@ val_t typing___AAbsSendExpr___process_signature(val_t  self, val_t  param0, val_
   return variable[5];
 }
 val_t typing___AAbsSendExpr___process_closures(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3) {
-  struct trace_t trace = {NULL, NULL, 937, LOCATE_typing___AAbsSendExpr___process_closures};
-  val_t variable[23];
+  struct trace_t trace = {NULL, NULL, 947, LOCATE_typing___AAbsSendExpr___process_closures};
+  val_t variable[24];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
@@ -2990,91 +3002,94 @@ val_t typing___AAbsSendExpr___process_closures(val_t  self, val_t  param0, val_t
   variable[6] = variable[7];
   variable[8] = ((static_type___MMSignature___closures_t)CALL( variable[2] /*psig*/,COLOR_static_type___MMSignature___closures))( variable[2] /*psig*/) /*MMSignature::closures*/;
   variable[7] = variable[8];
-  variable[8] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*cd*/ ==  NIT_NULL /*null*/) || (( variable[4] /*cd*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*cd*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*cd*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*cd*/,COLOR_kernel___Object_____eqeq))( variable[4] /*cd*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable[8])) { /*if*/
-    variable[8] = ((array___AbstractArray___length_t)CALL( variable[7] /*cs*/,COLOR_abstract_collection___Collection___length))( variable[7] /*cs*/) /*AbstractArray::length*/;
-    variable[8] = TAG_Bool((variable[8])==( TAG_Int(0)));
-    if (UNTAG_Bool(variable[8])) { /*if*/
-      variable[8] = variable[0];
-      variable[9] = NEW_String_string___String___init(); /*new String*/
-      variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
-      variable[11] = variable[10];
-      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[11]) /*String::append*/;
-      variable[12] =  variable[3] /*name*/;
-      variable[12] = ((string___String___to_s_t)CALL(variable[12],COLOR_string___Object___to_s))(variable[12]) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[12]) /*String::append*/;
-      variable[13] = NEW_String_string___String___with_native(BOX_NativeString(" does not require blocs."), TAG_Int(24)); /*new String*/
-      variable[14] = variable[13];
-      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[14]) /*String::append*/;
-      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
+  variable[8] =  TAG_Int(0);
+  variable[9] = ((array___AbstractArray___iterator_t)CALL( variable[7] /*cs*/,COLOR_abstract_collection___Collection___iterator))( variable[7] /*cs*/) /*AbstractArray::iterator*/;
+  while (true) { /*for*/
+    variable[10] = ((array___ArrayIterator___is_ok_t)CALL(variable[9],COLOR_abstract_collection___Iterator___is_ok))(variable[9]) /*ArrayIterator::is_ok*/;
+    if (!UNTAG_Bool(variable[10])) break; /*for*/
+    variable[10] = ((array___ArrayIterator___item_t)CALL(variable[9],COLOR_abstract_collection___Iterator___item))(variable[9]) /*ArrayIterator::item*/;
+    variable[11] = variable[10];
+    variable[12] = ((static_type___MMClosure___is_optional_t)CALL( variable[11] /*c*/,COLOR_static_type___MMClosure___is_optional))( variable[11] /*c*/) /*MMClosure::is_optional*/;
+    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[12])))) { /*if*/
+      variable[8] = TAG_Int(UNTAG_Int(variable[8])+UNTAG_Int( TAG_Int(1))) /*min_arity*/;
+    }
+    continue_91: while(0);
+    ((array___ArrayIterator___next_t)CALL(variable[9],COLOR_abstract_collection___Iterator___next))(variable[9]) /*ArrayIterator::next*/;
+  }
+  break_91: while(0);
+  variable[9] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*cd*/ ==  NIT_NULL /*null*/) || (( variable[4] /*cd*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*cd*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*cd*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*cd*/,COLOR_kernel___Object_____eqeq))( variable[4] /*cd*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[9])) { /*if*/
+    variable[9] = ((array___AbstractArray___length_t)CALL( variable[7] /*cs*/,COLOR_abstract_collection___Collection___length))( variable[7] /*cs*/) /*AbstractArray::length*/;
+    variable[9] = TAG_Bool((variable[9])==( TAG_Int(0)));
+    if (UNTAG_Bool(variable[9])) { /*if*/
+      variable[9] = variable[0];
+      variable[10] = NEW_String_string___String___init(); /*new String*/
+      variable[11] = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
+      variable[12] = variable[11];
+      ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[12]) /*String::append*/;
+      variable[13] =  variable[3] /*name*/;
+      variable[13] = ((string___String___to_s_t)CALL(variable[13],COLOR_string___Object___to_s))(variable[13]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[13]) /*String::append*/;
+      variable[14] = NEW_String_string___String___with_native(BOX_NativeString(" does not require blocs."), TAG_Int(24)); /*new String*/
+      variable[15] = variable[14];
+      ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[15]) /*String::append*/;
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[9], variable[10]) /*AbsSyntaxVisitor::error*/;
     } else { /*if*/
-      variable[8] = ((array___AbstractArray___length_t)CALL( variable[7] /*cs*/,COLOR_abstract_collection___Collection___length))( variable[7] /*cs*/) /*AbstractArray::length*/;
       variable[9] = ((array___AbstractArray___length_t)CALL( variable[4] /*cd*/,COLOR_abstract_collection___Collection___length))( variable[4] /*cd*/) /*AbstractArray::length*/;
-      variable[8] = TAG_Bool((variable[8])!=(variable[9]));
-      if (UNTAG_Bool(variable[8])) { /*if*/
-        variable[8] = variable[0];
-        variable[9] = NEW_String_string___String___init(); /*new String*/
-        variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
-        variable[11] = variable[10];
-        ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[11]) /*String::append*/;
-        variable[12] =  variable[3] /*name*/;
-        variable[12] = ((string___String___to_s_t)CALL(variable[12],COLOR_string___Object___to_s))(variable[12]) /*String::to_s*/;
-        ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[12]) /*String::append*/;
-        variable[13] = NEW_String_string___String___with_native(BOX_NativeString(" requires "), TAG_Int(10)); /*new String*/
-        variable[14] = variable[13];
-        ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[14]) /*String::append*/;
-        variable[15] = ((array___AbstractArray___length_t)CALL( variable[7] /*cs*/,COLOR_abstract_collection___Collection___length))( variable[7] /*cs*/) /*AbstractArray::length*/;
-        variable[16] = variable[15];
-        variable[16] = ((string___String___to_s_t)CALL(variable[16],COLOR_string___Object___to_s))(variable[16]) /*String::to_s*/;
-        ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[16]) /*String::append*/;
-        variable[17] = NEW_String_string___String___with_native(BOX_NativeString(" blocs, "), TAG_Int(8)); /*new String*/
-        variable[18] = variable[17];
-        ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[18]) /*String::append*/;
-        variable[19] = ((array___AbstractArray___length_t)CALL( variable[4] /*cd*/,COLOR_abstract_collection___Collection___length))( variable[4] /*cd*/) /*AbstractArray::length*/;
-        variable[20] = variable[19];
-        variable[20] = ((string___String___to_s_t)CALL(variable[20],COLOR_string___Object___to_s))(variable[20]) /*String::to_s*/;
-        ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[20]) /*String::append*/;
-        variable[21] = NEW_String_string___String___with_native(BOX_NativeString(" found."), TAG_Int(7)); /*new String*/
-        variable[22] = variable[21];
-        ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[22]) /*String::append*/;
-        ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
+      variable[10] = ((array___AbstractArray___length_t)CALL( variable[7] /*cs*/,COLOR_abstract_collection___Collection___length))( variable[7] /*cs*/) /*AbstractArray::length*/;
+      variable[9] = TAG_Bool(UNTAG_Int(variable[9])>UNTAG_Int(variable[10]));
+      variable[10] = variable[9];
+      if (!UNTAG_Bool(variable[10])) { /* or */
+        variable[10] = ((array___AbstractArray___length_t)CALL( variable[4] /*cd*/,COLOR_abstract_collection___Collection___length))( variable[4] /*cd*/) /*AbstractArray::length*/;
+        variable[10] = TAG_Bool(UNTAG_Int(variable[10])<UNTAG_Int( variable[8] /*min_arity*/));
+      }
+      variable[9] = variable[10];
+      if (UNTAG_Bool(variable[9])) { /*if*/
+        variable[9] = variable[0];
+        variable[10] = NEW_String_string___String___init(); /*new String*/
+        variable[11] = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
+        variable[12] = variable[11];
+        ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[12]) /*String::append*/;
+        variable[13] =  variable[3] /*name*/;
+        variable[13] = ((string___String___to_s_t)CALL(variable[13],COLOR_string___Object___to_s))(variable[13]) /*String::to_s*/;
+        ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[13]) /*String::append*/;
+        variable[14] = NEW_String_string___String___with_native(BOX_NativeString(" requires "), TAG_Int(10)); /*new String*/
+        variable[15] = variable[14];
+        ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[15]) /*String::append*/;
+        variable[16] = ((array___AbstractArray___length_t)CALL( variable[7] /*cs*/,COLOR_abstract_collection___Collection___length))( variable[7] /*cs*/) /*AbstractArray::length*/;
+        variable[17] = variable[16];
+        variable[17] = ((string___String___to_s_t)CALL(variable[17],COLOR_string___Object___to_s))(variable[17]) /*String::to_s*/;
+        ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[17]) /*String::append*/;
+        variable[18] = NEW_String_string___String___with_native(BOX_NativeString(" blocs, "), TAG_Int(8)); /*new String*/
+        variable[19] = variable[18];
+        ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[19]) /*String::append*/;
+        variable[20] = ((array___AbstractArray___length_t)CALL( variable[4] /*cd*/,COLOR_abstract_collection___Collection___length))( variable[4] /*cd*/) /*AbstractArray::length*/;
+        variable[21] = variable[20];
+        variable[21] = ((string___String___to_s_t)CALL(variable[21],COLOR_string___Object___to_s))(variable[21]) /*String::to_s*/;
+        ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[21]) /*String::append*/;
+        variable[22] = NEW_String_string___String___with_native(BOX_NativeString(" found."), TAG_Int(7)); /*new String*/
+        variable[23] = variable[22];
+        ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[23]) /*String::append*/;
+        ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[9], variable[10]) /*AbsSyntaxVisitor::error*/;
       } else { /*if*/
-        variable[9] = ((typing___TypingVisitor___closure_break_stype_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___closure_break_stype))( variable[1] /*v*/) /*TypingVisitor::closure_break_stype*/;
-        variable[8] = variable[9];
-        variable[10] = ((typing___TypingVisitor___break_list_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___break_list))( variable[1] /*v*/) /*TypingVisitor::break_list*/;
+        variable[10] = ((typing___TypingVisitor___closure_break_stype_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___closure_break_stype))( variable[1] /*v*/) /*TypingVisitor::closure_break_stype*/;
         variable[9] = variable[10];
-        ((typing___TypingVisitor___closure_break_stype__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___closure_break_stype__eq))( variable[1] /*v*/,  variable[6] /*t*/) /*TypingVisitor::closure_break_stype=*/;
-        variable[10] = NEW_Array_array___Array___init(); /*new Array[ABreakExpr]*/
-        ((typing___TypingVisitor___break_list__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___break_list__eq))( variable[1] /*v*/, variable[10]) /*TypingVisitor::break_list=*/;
-        variable[10] = ((array___AbstractArray___length_t)CALL( variable[7] /*cs*/,COLOR_abstract_collection___Collection___length))( variable[7] /*cs*/) /*AbstractArray::length*/;
-        variable[11] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[10]); /*new Range[Int]*/
+        variable[11] = ((typing___TypingVisitor___break_list_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___break_list))( variable[1] /*v*/) /*TypingVisitor::break_list*/;
         variable[10] = variable[11];
-        variable[10] = ((range___Range___iterator_t)CALL(variable[10],COLOR_abstract_collection___Collection___iterator))(variable[10]) /*Range::iterator*/;
+        ((typing___TypingVisitor___closure_break_stype__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___closure_break_stype__eq))( variable[1] /*v*/,  variable[6] /*t*/) /*TypingVisitor::closure_break_stype=*/;
+        variable[11] = NEW_Array_array___Array___init(); /*new Array[ABreakExpr]*/
+        ((typing___TypingVisitor___break_list__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___break_list__eq))( variable[1] /*v*/, variable[11]) /*TypingVisitor::break_list=*/;
+        variable[11] = ((array___AbstractArray___length_t)CALL( variable[4] /*cd*/,COLOR_abstract_collection___Collection___length))( variable[4] /*cd*/) /*AbstractArray::length*/;
+        variable[12] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[11]); /*new Range[Int]*/
+        variable[11] = variable[12];
+        variable[11] = ((range___Range___iterator_t)CALL(variable[11],COLOR_abstract_collection___Collection___iterator))(variable[11]) /*Range::iterator*/;
         while (true) { /*for*/
-          variable[11] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[10],COLOR_abstract_collection___Iterator___is_ok))(variable[10]) /*Iterator::is_ok*/;
-          if (!UNTAG_Bool(variable[11])) break; /*for*/
-          variable[11] = ((abstract_collection___Iterator___item_t)CALL(variable[10],COLOR_abstract_collection___Iterator___item))(variable[10]) /*Iterator::item*/;
-          variable[12] = variable[11];
-          variable[13] =  variable[4] /*cd*/;
-          variable[14] =  variable[12] /*i*/;
-          variable[16] = TAG_Bool(UNTAG_Int( variable[14] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-          variable[17] = variable[16];
-          if (UNTAG_Bool(variable[17])) { /* and */
-            variable[17] = variable[13];
-            variable[17] = ATTR_array___AbstractArray____length(variable[17]) /*AbstractArray::_length*/;
-            variable[17] = TAG_Bool(UNTAG_Int( variable[14] /*index*/)<UNTAG_Int(variable[17]));
-          }
-          variable[16] = variable[17];
-          if (!UNTAG_Bool(variable[16])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_typing, 229); nit_exit(1);}
-          variable[16] = variable[13];
-          variable[16] = ATTR_array___Array____items(variable[16]) /*Array::_items*/;
-          variable[16] = UNBOX_NativeArray(variable[16])[UNTAG_Int( variable[14] /*index*/)];
-          variable[15] = variable[16];
-          goto return_label92;
-          return_label92: while(false);
-          variable[13] = variable[15];
-          variable[14] =  variable[7] /*cs*/;
-          variable[15] =  variable[12] /*i*/;
+          variable[12] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[11],COLOR_abstract_collection___Iterator___is_ok))(variable[11]) /*Iterator::is_ok*/;
+          if (!UNTAG_Bool(variable[12])) break; /*for*/
+          variable[12] = ((abstract_collection___Iterator___item_t)CALL(variable[11],COLOR_abstract_collection___Iterator___item))(variable[11]) /*Iterator::item*/;
+          variable[13] = variable[12];
+          variable[14] =  variable[4] /*cd*/;
+          variable[15] =  variable[13] /*i*/;
           variable[17] = TAG_Bool(UNTAG_Int( variable[15] /*index*/)>=UNTAG_Int( TAG_Int(0)));
           variable[18] = variable[17];
           if (UNTAG_Bool(variable[18])) { /* and */
@@ -3091,77 +3106,94 @@ val_t typing___AAbsSendExpr___process_closures(val_t  self, val_t  param0, val_t
           goto return_label93;
           return_label93: while(false);
           variable[14] = variable[16];
-          ((typing___PClosureDef___accept_typing2_t)CALL(variable[13],COLOR_typing___PClosureDef___accept_typing2))(variable[13],  variable[1] /*v*/, variable[14]) /*PClosureDef::accept_typing2*/;
-          continue_91: while(0);
-          ((abstract_collection___Iterator___next_t)CALL(variable[10],COLOR_abstract_collection___Iterator___next))(variable[10]) /*Iterator::next*/;
-        }
-        break_91: while(0);
-        variable[10] = ((typing___TypingVisitor___break_list_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___break_list))( variable[1] /*v*/) /*TypingVisitor::break_list*/;
-        variable[10] = ((array___AbstractArray___iterator_t)CALL(variable[10],COLOR_abstract_collection___Collection___iterator))(variable[10]) /*AbstractArray::iterator*/;
-        while (true) { /*for*/
-          variable[11] = ((array___ArrayIterator___is_ok_t)CALL(variable[10],COLOR_abstract_collection___Iterator___is_ok))(variable[10]) /*ArrayIterator::is_ok*/;
-          if (!UNTAG_Bool(variable[11])) break; /*for*/
-          variable[11] = ((array___ArrayIterator___item_t)CALL(variable[10],COLOR_abstract_collection___Iterator___item))(variable[10]) /*ArrayIterator::item*/;
-          variable[12] = variable[11];
-          variable[14] = ((typing___PExpr___stype_t)CALL( variable[12] /*n*/,COLOR_syntax_base___PExpr___stype))( variable[12] /*n*/) /*PExpr::stype*/;
-          variable[13] = variable[14];
-          variable[14] = TAG_Bool(( variable[6] /*t*/ ==  NIT_NULL /*null*/) || (( variable[6] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[6] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[6] /*t*/,COLOR_kernel___Object_____eqeq))( variable[6] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-          variable[15] = variable[14];
-          if (!UNTAG_Bool(variable[15])) { /* or */
-            variable[15] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[6] /*t*/ ==  NIT_NULL /*null*/) || (( variable[6] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[6] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[6] /*t*/,COLOR_kernel___Object_____eqeq))( variable[6] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-            variable[16] = variable[15];
-            if (UNTAG_Bool(variable[16])) { /* and */
-              variable[16] = ((static_type___MMType_____l_t)CALL( variable[6] /*t*/,COLOR_static_type___MMType_____l))( variable[6] /*t*/,  variable[13] /*ntype*/) /*MMType::<*/;
-            }
-            variable[15] = variable[16];
+          variable[15] =  variable[7] /*cs*/;
+          variable[16] =  variable[13] /*i*/;
+          variable[18] = TAG_Bool(UNTAG_Int( variable[16] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+          variable[19] = variable[18];
+          if (UNTAG_Bool(variable[19])) { /* and */
+            variable[19] = variable[15];
+            variable[19] = ATTR_array___AbstractArray____length(variable[19]) /*AbstractArray::_length*/;
+            variable[19] = TAG_Bool(UNTAG_Int( variable[16] /*index*/)<UNTAG_Int(variable[19]));
           }
+          variable[18] = variable[19];
+          if (!UNTAG_Bool(variable[18])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_typing, 229); nit_exit(1);}
+          variable[18] = variable[15];
+          variable[18] = ATTR_array___Array____items(variable[18]) /*Array::_items*/;
+          variable[18] = UNBOX_NativeArray(variable[18])[UNTAG_Int( variable[16] /*index*/)];
+          variable[17] = variable[18];
+          goto return_label94;
+          return_label94: while(false);
+          variable[15] = variable[17];
+          ((typing___PClosureDef___accept_typing2_t)CALL(variable[14],COLOR_typing___PClosureDef___accept_typing2))(variable[14],  variable[1] /*v*/, variable[15]) /*PClosureDef::accept_typing2*/;
+          continue_92: while(0);
+          ((abstract_collection___Iterator___next_t)CALL(variable[11],COLOR_abstract_collection___Iterator___next))(variable[11]) /*Iterator::next*/;
+        }
+        break_92: while(0);
+        variable[11] = ((typing___TypingVisitor___break_list_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___break_list))( variable[1] /*v*/) /*TypingVisitor::break_list*/;
+        variable[11] = ((array___AbstractArray___iterator_t)CALL(variable[11],COLOR_abstract_collection___Collection___iterator))(variable[11]) /*AbstractArray::iterator*/;
+        while (true) { /*for*/
+          variable[12] = ((array___ArrayIterator___is_ok_t)CALL(variable[11],COLOR_abstract_collection___Iterator___is_ok))(variable[11]) /*ArrayIterator::is_ok*/;
+          if (!UNTAG_Bool(variable[12])) break; /*for*/
+          variable[12] = ((array___ArrayIterator___item_t)CALL(variable[11],COLOR_abstract_collection___Iterator___item))(variable[11]) /*ArrayIterator::item*/;
+          variable[13] = variable[12];
+          variable[15] = ((typing___PExpr___stype_t)CALL( variable[13] /*n*/,COLOR_syntax_base___PExpr___stype))( variable[13] /*n*/) /*PExpr::stype*/;
           variable[14] = variable[15];
-          if (UNTAG_Bool(variable[14])) { /*if*/
-            variable[6] =  variable[13] /*ntype*/ /*t=*/;
+          variable[15] = TAG_Bool(( variable[6] /*t*/ ==  NIT_NULL /*null*/) || (( variable[6] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[6] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[6] /*t*/,COLOR_kernel___Object_____eqeq))( variable[6] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+          variable[16] = variable[15];
+          if (!UNTAG_Bool(variable[16])) { /* or */
+            variable[16] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[6] /*t*/ ==  NIT_NULL /*null*/) || (( variable[6] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[6] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[6] /*t*/,COLOR_kernel___Object_____eqeq))( variable[6] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+            variable[17] = variable[16];
+            if (UNTAG_Bool(variable[17])) { /* and */
+              variable[17] = ((static_type___MMType_____l_t)CALL( variable[6] /*t*/,COLOR_static_type___MMType_____l))( variable[6] /*t*/,  variable[14] /*ntype*/) /*MMType::<*/;
+            }
+            variable[16] = variable[17];
           }
-          continue_94: while(0);
-          ((array___ArrayIterator___next_t)CALL(variable[10],COLOR_abstract_collection___Iterator___next))(variable[10]) /*ArrayIterator::next*/;
-        }
-        break_94: while(0);
-        variable[10] = ((typing___TypingVisitor___break_list_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___break_list))( variable[1] /*v*/) /*TypingVisitor::break_list*/;
-        variable[10] = ((array___AbstractArray___iterator_t)CALL(variable[10],COLOR_abstract_collection___Collection___iterator))(variable[10]) /*AbstractArray::iterator*/;
-        while (true) { /*for*/
-          variable[11] = ((array___ArrayIterator___is_ok_t)CALL(variable[10],COLOR_abstract_collection___Iterator___is_ok))(variable[10]) /*ArrayIterator::is_ok*/;
-          if (!UNTAG_Bool(variable[11])) break; /*for*/
-          variable[11] = ((array___ArrayIterator___item_t)CALL(variable[10],COLOR_abstract_collection___Iterator___item))(variable[10]) /*ArrayIterator::item*/;
-          variable[12] = variable[11];
-          ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/,  variable[12] /*n*/,  variable[6] /*t*/) /*AbsSyntaxVisitor::check_conform_expr*/;
+          variable[15] = variable[16];
+          if (UNTAG_Bool(variable[15])) { /*if*/
+            variable[6] =  variable[14] /*ntype*/ /*t=*/;
+          }
           continue_95: while(0);
-          ((array___ArrayIterator___next_t)CALL(variable[10],COLOR_abstract_collection___Iterator___next))(variable[10]) /*ArrayIterator::next*/;
+          ((array___ArrayIterator___next_t)CALL(variable[11],COLOR_abstract_collection___Iterator___next))(variable[11]) /*ArrayIterator::next*/;
         }
         break_95: while(0);
-        ((typing___TypingVisitor___closure_break_stype__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___closure_break_stype__eq))( variable[1] /*v*/,  variable[8] /*old_bbst*/) /*TypingVisitor::closure_break_stype=*/;
-        ((typing___TypingVisitor___break_list__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___break_list__eq))( variable[1] /*v*/,  variable[9] /*old_bl*/) /*TypingVisitor::break_list=*/;
+        variable[11] = ((typing___TypingVisitor___break_list_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___break_list))( variable[1] /*v*/) /*TypingVisitor::break_list*/;
+        variable[11] = ((array___AbstractArray___iterator_t)CALL(variable[11],COLOR_abstract_collection___Collection___iterator))(variable[11]) /*AbstractArray::iterator*/;
+        while (true) { /*for*/
+          variable[12] = ((array___ArrayIterator___is_ok_t)CALL(variable[11],COLOR_abstract_collection___Iterator___is_ok))(variable[11]) /*ArrayIterator::is_ok*/;
+          if (!UNTAG_Bool(variable[12])) break; /*for*/
+          variable[12] = ((array___ArrayIterator___item_t)CALL(variable[11],COLOR_abstract_collection___Iterator___item))(variable[11]) /*ArrayIterator::item*/;
+          variable[13] = variable[12];
+          ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_conform_expr))( variable[1] /*v*/,  variable[13] /*n*/,  variable[6] /*t*/) /*AbsSyntaxVisitor::check_conform_expr*/;
+          continue_96: while(0);
+          ((array___ArrayIterator___next_t)CALL(variable[11],COLOR_abstract_collection___Iterator___next))(variable[11]) /*ArrayIterator::next*/;
+        }
+        break_96: while(0);
+        ((typing___TypingVisitor___closure_break_stype__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___closure_break_stype__eq))( variable[1] /*v*/,  variable[9] /*old_bbst*/) /*TypingVisitor::closure_break_stype=*/;
+        ((typing___TypingVisitor___break_list__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___break_list__eq))( variable[1] /*v*/,  variable[10] /*old_bl*/) /*TypingVisitor::break_list=*/;
       }
     }
   } else { /*if*/
-    variable[8] = ((array___AbstractArray___length_t)CALL( variable[7] /*cs*/,COLOR_abstract_collection___Collection___length))( variable[7] /*cs*/) /*AbstractArray::length*/;
-    variable[8] = TAG_Bool((variable[8])!=( TAG_Int(0)));
-    if (UNTAG_Bool(variable[8])) { /*if*/
-      variable[8] = variable[0];
-      variable[9] = NEW_String_string___String___init(); /*new String*/
-      variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
-      variable[11] = variable[10];
-      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[11]) /*String::append*/;
-      variable[12] =  variable[3] /*name*/;
-      variable[12] = ((string___String___to_s_t)CALL(variable[12],COLOR_string___Object___to_s))(variable[12]) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[12]) /*String::append*/;
-      variable[13] = NEW_String_string___String___with_native(BOX_NativeString(" requires "), TAG_Int(10)); /*new String*/
-      variable[14] = variable[13];
-      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[14]) /*String::append*/;
-      variable[15] = ((array___AbstractArray___length_t)CALL( variable[7] /*cs*/,COLOR_abstract_collection___Collection___length))( variable[7] /*cs*/) /*AbstractArray::length*/;
-      variable[16] = variable[15];
-      variable[16] = ((string___String___to_s_t)CALL(variable[16],COLOR_string___Object___to_s))(variable[16]) /*String::to_s*/;
-      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[16]) /*String::append*/;
-      variable[17] = NEW_String_string___String___with_native(BOX_NativeString(" blocs."), TAG_Int(7)); /*new String*/
-      variable[18] = variable[17];
-      ((string___String___append_t)CALL(variable[9],COLOR_abstract_collection___IndexedCollection___append))(variable[9], variable[18]) /*String::append*/;
-      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
+    variable[9] = TAG_Bool(( variable[8] /*min_arity*/)!=( TAG_Int(0)));
+    if (UNTAG_Bool(variable[9])) { /*if*/
+      variable[9] = variable[0];
+      variable[10] = NEW_String_string___String___init(); /*new String*/
+      variable[11] = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
+      variable[12] = variable[11];
+      ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[12]) /*String::append*/;
+      variable[13] =  variable[3] /*name*/;
+      variable[13] = ((string___String___to_s_t)CALL(variable[13],COLOR_string___Object___to_s))(variable[13]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[13]) /*String::append*/;
+      variable[14] = NEW_String_string___String___with_native(BOX_NativeString(" requires "), TAG_Int(10)); /*new String*/
+      variable[15] = variable[14];
+      ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[15]) /*String::append*/;
+      variable[16] = ((array___AbstractArray___length_t)CALL( variable[7] /*cs*/,COLOR_abstract_collection___Collection___length))( variable[7] /*cs*/) /*AbstractArray::length*/;
+      variable[17] = variable[16];
+      variable[17] = ((string___String___to_s_t)CALL(variable[17],COLOR_string___Object___to_s))(variable[17]) /*String::to_s*/;
+      ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[17]) /*String::append*/;
+      variable[18] = NEW_String_string___String___with_native(BOX_NativeString(" blocs."), TAG_Int(7)); /*new String*/
+      variable[19] = variable[18];
+      ((string___String___append_t)CALL(variable[10],COLOR_abstract_collection___IndexedCollection___append))(variable[10], variable[19]) /*String::append*/;
+      ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[9], variable[10]) /*AbsSyntaxVisitor::error*/;
     }
   }
   variable[5] =  variable[6] /*t*/;
@@ -3171,7 +3203,7 @@ val_t typing___AAbsSendExpr___process_closures(val_t  self, val_t  param0, val_t
   return variable[5];
 }
 val_t typing___AAbsSendExpr___prop(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 974, LOCATE_typing___AAbsSendExpr___prop};
+  struct trace_t trace = {NULL, NULL, 988, LOCATE_typing___AAbsSendExpr___prop};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3180,7 +3212,7 @@ val_t typing___AAbsSendExpr___prop(val_t  self) {
   return ATTR_typing___AAbsSendExpr____prop( self) /*AAbsSendExpr::_prop*/;
 }
 val_t typing___AAbsSendExpr___arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 977, LOCATE_typing___AAbsSendExpr___arguments};
+  struct trace_t trace = {NULL, NULL, 991, LOCATE_typing___AAbsSendExpr___arguments};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3189,7 +3221,7 @@ val_t typing___AAbsSendExpr___arguments(val_t  self) {
   return ATTR_typing___AAbsSendExpr____arguments( self) /*AAbsSendExpr::_arguments*/;
 }
 val_t typing___AAbsSendExpr___return_type(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 980, LOCATE_typing___AAbsSendExpr___return_type};
+  struct trace_t trace = {NULL, NULL, 994, LOCATE_typing___AAbsSendExpr___return_type};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3198,7 +3230,7 @@ val_t typing___AAbsSendExpr___return_type(val_t  self) {
   return ATTR_typing___AAbsSendExpr____return_type( self) /*AAbsSendExpr::_return_type*/;
 }
 void typing___ASuperInitCall___register_super_init_call(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 988, LOCATE_typing___ASuperInitCall___register_super_init_call};
+  struct trace_t trace = {NULL, NULL, 1002, LOCATE_typing___ASuperInitCall___register_super_init_call};
   val_t variable[21];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3331,23 +3363,23 @@ void typing___ASuperInitCall___register_super_init_call(val_t  self, val_t  para
               }
               variable[11] = ((typing___TypingVisitor___explicit_super_init_calls_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___explicit_super_init_calls))( variable[1] /*v*/) /*TypingVisitor::explicit_super_init_calls*/;
               ((array___AbstractArray___add_t)CALL(variable[11],COLOR_abstract_collection___SimpleCollection___add))(variable[11],  variable[2] /*property*/) /*AbstractArray::add*/;
-              goto break_97;
+              goto break_98;
             }
           }
-          continue_97: while(0);
+          continue_98: while(0);
           ((array___ArrayIterator___next_t)CALL(variable[8],COLOR_abstract_collection___Iterator___next))(variable[8]) /*ArrayIterator::next*/;
         }
-        break_97: while(0);
+        break_98: while(0);
       }
     }
   }
-  return_label96: while(false);
+  return_label97: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___ANewExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1025, LOCATE_typing___ANewExpr___after_typing};
-    static val_t once_value_99; static int once_bool_99; /* Once value for variable[5]*/
+  struct trace_t trace = {NULL, NULL, 1039, LOCATE_typing___ANewExpr___after_typing};
+    static val_t once_value_100; static int once_bool_100; /* Once value for variable[5]*/
   val_t variable[13];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3360,7 +3392,7 @@ void typing___ANewExpr___after_typing(val_t  self, val_t  param0) {
   variable[3] = variable[4];
   variable[4] = TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    goto return_label98;
+    goto return_label99;
   }
   variable[4] = ((static_type___MMType___local_class_t)CALL( variable[3] /*t*/,COLOR_static_type___MMType___local_class))( variable[3] /*t*/) /*MMType::local_class*/;
   variable[4] = ((abstractmetamodel___MMLocalClass___global_t)CALL(variable[4],COLOR_abstractmetamodel___MMLocalClass___global))(variable[4]) /*MMLocalClass::global*/;
@@ -3379,19 +3411,19 @@ void typing___ANewExpr___after_typing(val_t  self, val_t  param0) {
     variable[11] = variable[10];
     ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[11]) /*String::append*/;
     ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::error*/;
-    goto return_label98;
+    goto return_label99;
   }
   /*variable[4] is variable name*/
   variable[5] = variable[0];
   variable[5] = ((parser_nodes___ANewExpr___n_id_t)CALL(variable[5],COLOR_parser_nodes___ANewExpr___n_id))(variable[5]) /*ANewExpr::n_id*/;
   variable[5] = TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[5])) { /*if*/
-    if (once_bool_99) variable[5] = once_value_99;
+    if (once_bool_100) variable[5] = once_value_100;
     else {
       variable[5] = NEW_String_string___String___with_native(BOX_NativeString("init"), TAG_Int(4)); /*new String*/
       variable[5] = ((symbol___String___to_symbol_t)CALL(variable[5],COLOR_symbol___String___to_symbol))(variable[5]) /*String::to_symbol*/;
-      once_value_99 = variable[5];
-      once_bool_99 = true;
+      once_value_100 = variable[5];
+      once_bool_100 = true;
     }
     variable[4] = variable[5] /*name=*/;
   } else { /*if*/
@@ -3409,7 +3441,7 @@ void typing___ANewExpr___after_typing(val_t  self, val_t  param0) {
   variable[5] = ((typing___AAbsSendExpr___prop_t)CALL(variable[5],COLOR_typing___AAbsSendExpr___prop))(variable[5]) /*AAbsSendExpr::prop*/;
   variable[5] = TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[5])) { /*if*/
-    goto return_label98;
+    goto return_label99;
   }
   variable[5] = variable[0];
   variable[5] = ((typing___AAbsSendExpr___prop_t)CALL(variable[5],COLOR_typing___AAbsSendExpr___prop))(variable[5]) /*AAbsSendExpr::prop*/;
@@ -3433,12 +3465,12 @@ void typing___ANewExpr___after_typing(val_t  self, val_t  param0) {
   }
   variable[5] = variable[0];
   ATTR_typing___PExpr____stype(variable[5]) /*PExpr::_stype*/ =  variable[3] /*t*/;
-  return_label98: while(false);
+  return_label99: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___ASendExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1062, LOCATE_typing___ASendExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 1076, LOCATE_typing___ASendExpr___after_typing};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3447,49 +3479,49 @@ void typing___ASendExpr___after_typing(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   ((typing___ASendExpr___do_all_typing_t)CALL(variable[3],COLOR_typing___ASendExpr___do_all_typing))(variable[3],  variable[1] /*v*/) /*ASendExpr::do_all_typing*/;
-  return_label100: while(false);
+  return_label101: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t typing___ASendExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1053, LOCATE_typing___ASendExpr___name};
+  struct trace_t trace = {NULL, NULL, 1067, LOCATE_typing___ASendExpr___name};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_typing, 1053);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_typing, 1067);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t typing___ASendExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1056, LOCATE_typing___ASendExpr___raw_arguments};
+  struct trace_t trace = {NULL, NULL, 1070, LOCATE_typing___ASendExpr___raw_arguments};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_typing, 1056);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_typing, 1070);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t typing___ASendExpr___closure_defs(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1059, LOCATE_typing___ASendExpr___closure_defs};
+  struct trace_t trace = {NULL, NULL, 1073, LOCATE_typing___ASendExpr___closure_defs};
   val_t variable[2];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   variable[0] =  self;
   variable[1] =  NIT_NULL /*null*/;
-  goto return_label101;
-  return_label101: while(false);
+  goto return_label102;
+  return_label102: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 void typing___ASendExpr___do_all_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1067, LOCATE_typing___ASendExpr___do_all_typing};
+  struct trace_t trace = {NULL, NULL, 1081, LOCATE_typing___ASendExpr___do_all_typing};
   val_t variable[11];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3500,7 +3532,7 @@ void typing___ASendExpr___do_all_typing(val_t  self, val_t  param0) {
   variable[3] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[3],COLOR_parser_nodes___ASendExpr___n_expr))(variable[3]) /*ASendExpr::n_expr*/;
   variable[3] = ((syntax_base___AbsSyntaxVisitor___check_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_expr))( variable[1] /*v*/, variable[3]) /*AbsSyntaxVisitor::check_expr*/;
   if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) { /*if*/
-    goto return_label102;
+    goto return_label103;
   }
   variable[3] = variable[0];
   variable[4] = variable[0];
@@ -3523,7 +3555,7 @@ void typing___ASendExpr___do_all_typing(val_t  self, val_t  param0) {
   variable[3] = ((typing___AAbsSendExpr___prop_t)CALL(variable[3],COLOR_typing___AAbsSendExpr___prop))(variable[3]) /*AAbsSendExpr::prop*/;
   variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
-    goto return_label102;
+    goto return_label103;
   }
   variable[3] = variable[0];
   variable[3] = ((typing___AAbsSendExpr___prop_t)CALL(variable[3],COLOR_typing___AAbsSendExpr___prop))(variable[3]) /*AAbsSendExpr::prop*/;
@@ -3579,12 +3611,12 @@ void typing___ASendExpr___do_all_typing(val_t  self, val_t  param0) {
   variable[4] = variable[0];
   variable[4] = ((typing___AAbsSendExpr___return_type_t)CALL(variable[4],COLOR_typing___AAbsSendExpr___return_type))(variable[4]) /*AAbsSendExpr::return_type*/;
   ATTR_typing___PExpr____stype(variable[3]) /*PExpr::_stype*/ = variable[4];
-  return_label102: while(false);
+  return_label103: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___ASendReassignExpr___do_all_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1091, LOCATE_typing___ASendReassignExpr___do_all_typing};
+  struct trace_t trace = {NULL, NULL, 1105, LOCATE_typing___ASendReassignExpr___do_all_typing};
   val_t variable[17];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3595,7 +3627,7 @@ void typing___ASendReassignExpr___do_all_typing(val_t  self, val_t  param0) {
   variable[3] = ((parser_nodes___ASendExpr___n_expr_t)CALL(variable[3],COLOR_parser_nodes___ASendExpr___n_expr))(variable[3]) /*ASendExpr::n_expr*/;
   variable[3] = ((syntax_base___AbsSyntaxVisitor___check_expr_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___check_expr))( variable[1] /*v*/, variable[3]) /*AbsSyntaxVisitor::check_expr*/;
   if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) { /*if*/
-    goto return_label103;
+    goto return_label104;
   }
   variable[4] = variable[0];
   variable[4] = ((typing___ASendExpr___raw_arguments_t)CALL(variable[4],COLOR_typing___ASendExpr___raw_arguments))(variable[4]) /*ASendExpr::raw_arguments*/;
@@ -3617,7 +3649,7 @@ void typing___ASendReassignExpr___do_all_typing(val_t  self, val_t  param0) {
   variable[4] = ((typing___AAbsSendExpr___prop_t)CALL(variable[4],COLOR_typing___AAbsSendExpr___prop))(variable[4]) /*AAbsSendExpr::prop*/;
   variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    goto return_label103;
+    goto return_label104;
   }
   variable[4] = variable[0];
   variable[4] = ((typing___AAbsSendExpr___prop_t)CALL(variable[4],COLOR_typing___AAbsSendExpr___prop))(variable[4]) /*AAbsSendExpr::prop*/;
@@ -3719,7 +3751,7 @@ void typing___ASendReassignExpr___do_all_typing(val_t  self, val_t  param0) {
   variable[6] = ((typing___AAbsSendExpr___prop_t)CALL(variable[6],COLOR_typing___AAbsSendExpr___prop))(variable[6]) /*AAbsSendExpr::prop*/;
   variable[6] = TAG_Bool((variable[6] ==  NIT_NULL /*null*/) || ((variable[6] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[6],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[6],COLOR_kernel___Object_____eqeq))(variable[6],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[6])) { /*if*/
-    goto return_label103;
+    goto return_label104;
   }
   variable[6] = variable[0];
   variable[6] = ((typing___AAbsSendExpr___prop_t)CALL(variable[6],COLOR_typing___AAbsSendExpr___prop))(variable[6]) /*AAbsSendExpr::prop*/;
@@ -3768,12 +3800,12 @@ void typing___ASendReassignExpr___do_all_typing(val_t  self, val_t  param0) {
   }
   variable[6] = variable[0];
   ATTR_typing___AAbsSendExpr____arguments(variable[6]) /*AAbsSendExpr::_arguments*/ =  variable[5] /*old_args*/;
-  return_label103: while(false);
+  return_label104: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t typing___ASendReassignExpr___read_prop(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1090, LOCATE_typing___ASendReassignExpr___read_prop};
+  struct trace_t trace = {NULL, NULL, 1104, LOCATE_typing___ASendReassignExpr___read_prop};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3782,7 +3814,7 @@ val_t typing___ASendReassignExpr___read_prop(val_t  self) {
   return ATTR_typing___ASendReassignExpr____read_prop( self) /*ASendReassignExpr::_read_prop*/;
 }
 val_t typing___ABinopExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1128, LOCATE_typing___ABinopExpr___raw_arguments};
+  struct trace_t trace = {NULL, NULL, 1142, LOCATE_typing___ABinopExpr___raw_arguments};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3793,299 +3825,299 @@ val_t typing___ABinopExpr___raw_arguments(val_t  self) {
   variable[3] = ((parser_nodes___ABinopExpr___n_expr2_t)CALL(variable[3],COLOR_parser_nodes___ABinopExpr___n_expr2))(variable[3]) /*ABinopExpr::n_expr2*/;
   ((array___AbstractArray___add_t)CALL(variable[2],COLOR_abstract_collection___SimpleCollection___add))(variable[2], variable[3]) /*AbstractArray::add*/;
   variable[1] = variable[2];
-  goto return_label104;
-  return_label104: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t typing___AEqExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1131, LOCATE_typing___AEqExpr___name};
-  static val_t once_value_106; static int once_bool_106; /* Once value for variable[2]*/
-  val_t variable[3];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable[0] =  self;
-  if (once_bool_106) variable[2] = once_value_106;
-  else {
-    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("=="), TAG_Int(2)); /*new String*/
-    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
-    once_value_106 = variable[2];
-    once_bool_106 = true;
-  }
-  variable[1] = variable[2];
   goto return_label105;
   return_label105: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
-val_t typing___ANeExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1134, LOCATE_typing___ANeExpr___name};
-  static val_t once_value_108; static int once_bool_108; /* Once value for variable[2]*/
+val_t typing___AEqExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1145, LOCATE_typing___AEqExpr___name};
+  static val_t once_value_107; static int once_bool_107; /* Once value for variable[2]*/
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   variable[0] =  self;
-  if (once_bool_108) variable[2] = once_value_108;
+  if (once_bool_107) variable[2] = once_value_107;
+  else {
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("=="), TAG_Int(2)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_107 = variable[2];
+    once_bool_107 = true;
+  }
+  variable[1] = variable[2];
+  goto return_label106;
+  return_label106: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t typing___ANeExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1148, LOCATE_typing___ANeExpr___name};
+  static val_t once_value_109; static int once_bool_109; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  if (once_bool_109) variable[2] = once_value_109;
   else {
     variable[2] = NEW_String_string___String___with_native(BOX_NativeString("!="), TAG_Int(2)); /*new String*/
     variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
-    once_value_108 = variable[2];
-    once_bool_108 = true;
+    once_value_109 = variable[2];
+    once_bool_109 = true;
   }
   variable[1] = variable[2];
-  goto return_label107;
-  return_label107: while(false);
+  goto return_label108;
+  return_label108: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___ALtExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1137, LOCATE_typing___ALtExpr___name};
-  static val_t once_value_110; static int once_bool_110; /* Once value for variable[2]*/
+  struct trace_t trace = {NULL, NULL, 1151, LOCATE_typing___ALtExpr___name};
+  static val_t once_value_111; static int once_bool_111; /* Once value for variable[2]*/
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   variable[0] =  self;
-  if (once_bool_110) variable[2] = once_value_110;
+  if (once_bool_111) variable[2] = once_value_111;
   else {
     variable[2] = NEW_String_string___String___with_native(BOX_NativeString("<"), TAG_Int(1)); /*new String*/
     variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
-    once_value_110 = variable[2];
-    once_bool_110 = true;
+    once_value_111 = variable[2];
+    once_bool_111 = true;
   }
   variable[1] = variable[2];
-  goto return_label109;
-  return_label109: while(false);
+  goto return_label110;
+  return_label110: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___ALeExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1140, LOCATE_typing___ALeExpr___name};
-  static val_t once_value_112; static int once_bool_112; /* Once value for variable[2]*/
+  struct trace_t trace = {NULL, NULL, 1154, LOCATE_typing___ALeExpr___name};
+  static val_t once_value_113; static int once_bool_113; /* Once value for variable[2]*/
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   variable[0] =  self;
-  if (once_bool_112) variable[2] = once_value_112;
+  if (once_bool_113) variable[2] = once_value_113;
   else {
     variable[2] = NEW_String_string___String___with_native(BOX_NativeString("<="), TAG_Int(2)); /*new String*/
     variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
-    once_value_112 = variable[2];
-    once_bool_112 = true;
+    once_value_113 = variable[2];
+    once_bool_113 = true;
   }
   variable[1] = variable[2];
-  goto return_label111;
-  return_label111: while(false);
+  goto return_label112;
+  return_label112: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___AGtExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1143, LOCATE_typing___AGtExpr___name};
-  static val_t once_value_114; static int once_bool_114; /* Once value for variable[2]*/
+  struct trace_t trace = {NULL, NULL, 1157, LOCATE_typing___AGtExpr___name};
+  static val_t once_value_115; static int once_bool_115; /* Once value for variable[2]*/
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   variable[0] =  self;
-  if (once_bool_114) variable[2] = once_value_114;
+  if (once_bool_115) variable[2] = once_value_115;
   else {
     variable[2] = NEW_String_string___String___with_native(BOX_NativeString(">"), TAG_Int(1)); /*new String*/
     variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
-    once_value_114 = variable[2];
-    once_bool_114 = true;
+    once_value_115 = variable[2];
+    once_bool_115 = true;
   }
   variable[1] = variable[2];
-  goto return_label113;
-  return_label113: while(false);
+  goto return_label114;
+  return_label114: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___AGeExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1146, LOCATE_typing___AGeExpr___name};
-  static val_t once_value_116; static int once_bool_116; /* Once value for variable[2]*/
+  struct trace_t trace = {NULL, NULL, 1160, LOCATE_typing___AGeExpr___name};
+  static val_t once_value_117; static int once_bool_117; /* Once value for variable[2]*/
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   variable[0] =  self;
-  if (once_bool_116) variable[2] = once_value_116;
+  if (once_bool_117) variable[2] = once_value_117;
   else {
     variable[2] = NEW_String_string___String___with_native(BOX_NativeString(">="), TAG_Int(2)); /*new String*/
     variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
-    once_value_116 = variable[2];
-    once_bool_116 = true;
+    once_value_117 = variable[2];
+    once_bool_117 = true;
   }
   variable[1] = variable[2];
-  goto return_label115;
-  return_label115: while(false);
+  goto return_label116;
+  return_label116: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___APlusExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1149, LOCATE_typing___APlusExpr___name};
-  static val_t once_value_118; static int once_bool_118; /* Once value for variable[2]*/
+  struct trace_t trace = {NULL, NULL, 1163, LOCATE_typing___APlusExpr___name};
+  static val_t once_value_119; static int once_bool_119; /* Once value for variable[2]*/
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   variable[0] =  self;
-  if (once_bool_118) variable[2] = once_value_118;
+  if (once_bool_119) variable[2] = once_value_119;
   else {
     variable[2] = NEW_String_string___String___with_native(BOX_NativeString("+"), TAG_Int(1)); /*new String*/
     variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
-    once_value_118 = variable[2];
-    once_bool_118 = true;
+    once_value_119 = variable[2];
+    once_bool_119 = true;
   }
   variable[1] = variable[2];
-  goto return_label117;
-  return_label117: while(false);
+  goto return_label118;
+  return_label118: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___AMinusExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1152, LOCATE_typing___AMinusExpr___name};
-  static val_t once_value_120; static int once_bool_120; /* Once value for variable[2]*/
+  struct trace_t trace = {NULL, NULL, 1166, LOCATE_typing___AMinusExpr___name};
+  static val_t once_value_121; static int once_bool_121; /* Once value for variable[2]*/
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   variable[0] =  self;
-  if (once_bool_120) variable[2] = once_value_120;
+  if (once_bool_121) variable[2] = once_value_121;
   else {
     variable[2] = NEW_String_string___String___with_native(BOX_NativeString("-"), TAG_Int(1)); /*new String*/
     variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
-    once_value_120 = variable[2];
-    once_bool_120 = true;
+    once_value_121 = variable[2];
+    once_bool_121 = true;
   }
   variable[1] = variable[2];
-  goto return_label119;
-  return_label119: while(false);
+  goto return_label120;
+  return_label120: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___AStarshipExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1155, LOCATE_typing___AStarshipExpr___name};
-  static val_t once_value_122; static int once_bool_122; /* Once value for variable[2]*/
+  struct trace_t trace = {NULL, NULL, 1169, LOCATE_typing___AStarshipExpr___name};
+  static val_t once_value_123; static int once_bool_123; /* Once value for variable[2]*/
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   variable[0] =  self;
-  if (once_bool_122) variable[2] = once_value_122;
+  if (once_bool_123) variable[2] = once_value_123;
   else {
     variable[2] = NEW_String_string___String___with_native(BOX_NativeString("<=>"), TAG_Int(3)); /*new String*/
     variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
-    once_value_122 = variable[2];
-    once_bool_122 = true;
+    once_value_123 = variable[2];
+    once_bool_123 = true;
   }
   variable[1] = variable[2];
-  goto return_label121;
-  return_label121: while(false);
+  goto return_label122;
+  return_label122: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___AStarExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1158, LOCATE_typing___AStarExpr___name};
-  static val_t once_value_124; static int once_bool_124; /* Once value for variable[2]*/
+  struct trace_t trace = {NULL, NULL, 1172, LOCATE_typing___AStarExpr___name};
+  static val_t once_value_125; static int once_bool_125; /* Once value for variable[2]*/
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   variable[0] =  self;
-  if (once_bool_124) variable[2] = once_value_124;
+  if (once_bool_125) variable[2] = once_value_125;
   else {
     variable[2] = NEW_String_string___String___with_native(BOX_NativeString("*"), TAG_Int(1)); /*new String*/
     variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
-    once_value_124 = variable[2];
-    once_bool_124 = true;
+    once_value_125 = variable[2];
+    once_bool_125 = true;
   }
   variable[1] = variable[2];
-  goto return_label123;
-  return_label123: while(false);
+  goto return_label124;
+  return_label124: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___ASlashExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1161, LOCATE_typing___ASlashExpr___name};
-  static val_t once_value_126; static int once_bool_126; /* Once value for variable[2]*/
+  struct trace_t trace = {NULL, NULL, 1175, LOCATE_typing___ASlashExpr___name};
+  static val_t once_value_127; static int once_bool_127; /* Once value for variable[2]*/
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   variable[0] =  self;
-  if (once_bool_126) variable[2] = once_value_126;
+  if (once_bool_127) variable[2] = once_value_127;
   else {
     variable[2] = NEW_String_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)); /*new String*/
     variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
-    once_value_126 = variable[2];
-    once_bool_126 = true;
+    once_value_127 = variable[2];
+    once_bool_127 = true;
   }
   variable[1] = variable[2];
-  goto return_label125;
-  return_label125: while(false);
+  goto return_label126;
+  return_label126: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___APercentExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1164, LOCATE_typing___APercentExpr___name};
-  static val_t once_value_128; static int once_bool_128; /* Once value for variable[2]*/
+  struct trace_t trace = {NULL, NULL, 1178, LOCATE_typing___APercentExpr___name};
+  static val_t once_value_129; static int once_bool_129; /* Once value for variable[2]*/
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   variable[0] =  self;
-  if (once_bool_128) variable[2] = once_value_128;
+  if (once_bool_129) variable[2] = once_value_129;
   else {
     variable[2] = NEW_String_string___String___with_native(BOX_NativeString("%"), TAG_Int(1)); /*new String*/
     variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
-    once_value_128 = variable[2];
-    once_bool_128 = true;
+    once_value_129 = variable[2];
+    once_bool_129 = true;
   }
   variable[1] = variable[2];
-  goto return_label127;
-  return_label127: while(false);
+  goto return_label128;
+  return_label128: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___AUminusExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1168, LOCATE_typing___AUminusExpr___name};
-  static val_t once_value_130; static int once_bool_130; /* Once value for variable[2]*/
+  struct trace_t trace = {NULL, NULL, 1182, LOCATE_typing___AUminusExpr___name};
+  static val_t once_value_131; static int once_bool_131; /* Once value for variable[2]*/
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   variable[0] =  self;
-  if (once_bool_130) variable[2] = once_value_130;
+  if (once_bool_131) variable[2] = once_value_131;
   else {
     variable[2] = NEW_String_string___String___with_native(BOX_NativeString("unary -"), TAG_Int(7)); /*new String*/
     variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
-    once_value_130 = variable[2];
-    once_bool_130 = true;
+    once_value_131 = variable[2];
+    once_bool_131 = true;
   }
   variable[1] = variable[2];
-  goto return_label129;
-  return_label129: while(false);
+  goto return_label130;
+  return_label130: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___AUminusExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1169, LOCATE_typing___AUminusExpr___raw_arguments};
+  struct trace_t trace = {NULL, NULL, 1183, LOCATE_typing___AUminusExpr___raw_arguments};
   val_t variable[2];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   variable[0] =  self;
   variable[1] =  NIT_NULL /*null*/;
-  goto return_label131;
-  return_label131: while(false);
+  goto return_label132;
+  return_label132: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 void typing___ACallFormExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1173, LOCATE_typing___ACallFormExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 1187, LOCATE_typing___ACallFormExpr___after_typing};
   val_t variable[12];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4127,7 +4159,7 @@ void typing___ACallFormExpr___after_typing(val_t  self, val_t  param0) {
         ((parser_prod___Prod___replace_with_t)CALL(variable[6],COLOR_parser_prod___PNode___replace_with))(variable[6],  variable[5] /*n*/) /*Prod::replace_with*/;
         ((syntax_base___AClosureCallExpr___variable__eq_t)CALL( variable[5] /*n*/,COLOR_syntax_base___AClosureCallExpr___variable__eq))( variable[5] /*n*/,  variable[4] /*variable*/) /*AClosureCallExpr::variable=*/;
         ((typing___AClosureCallExpr___after_typing_t)CALL( variable[5] /*n*/,COLOR_typing___PNode___after_typing))( variable[5] /*n*/,  variable[1] /*v*/) /*AClosureCallExpr::after_typing*/;
-        goto return_label132;
+        goto return_label133;
       } else { /*if*/
         variable[5] = variable[0];
         variable[5] = ((parser_nodes___ACallFormExpr___n_args_t)CALL(variable[5],COLOR_parser_nodes___ACallFormExpr___n_args))(variable[5]) /*ACallFormExpr::n_args*/;
@@ -4153,17 +4185,17 @@ void typing___ACallFormExpr___after_typing(val_t  self, val_t  param0) {
         variable[6] = variable[0];
         ((parser_prod___Prod___replace_with_t)CALL(variable[6],COLOR_parser_prod___PNode___replace_with))(variable[6],  variable[5] /*vform*/) /*Prod::replace_with*/;
         ((typing___PNode___after_typing_t)CALL( variable[5] /*vform*/,COLOR_typing___PNode___after_typing))( variable[5] /*vform*/,  variable[1] /*v*/) /*PNode::after_typing*/;
-        goto return_label132;
+        goto return_label133;
       }
     }
   }
   ((typing___ACallFormExpr___after_typing_t)CALL(variable[0],COLOR_SUPER_typing___ACallFormExpr___after_typing))(variable[0], variable[1]) /*super ACallFormExpr::after_typing*/;
-  return_label132: while(false);
+  return_label133: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t typing___ACallFormExpr___closure_defs(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1200, LOCATE_typing___ACallFormExpr___closure_defs};
+  struct trace_t trace = {NULL, NULL, 1214, LOCATE_typing___ACallFormExpr___closure_defs};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4181,32 +4213,32 @@ val_t typing___ACallFormExpr___closure_defs(val_t  self) {
   variable[2] = variable[3];
   if (UNTAG_Bool(variable[2])) { /*if*/
     variable[1] =  NIT_NULL /*null*/;
-    goto return_label133;
+    goto return_label134;
   } else { /*if*/
     variable[2] = variable[0];
     variable[2] = ((parser_nodes___ASendExpr___n_closure_defs_t)CALL(variable[2],COLOR_parser_nodes___ASendExpr___n_closure_defs))(variable[2]) /*ASendExpr::n_closure_defs*/;
     variable[2] = ((array___Collection___to_a_t)CALL(variable[2],COLOR_array___Collection___to_a))(variable[2]) /*Collection::to_a*/;
     variable[1] = variable[2];
-    goto return_label133;
+    goto return_label134;
   }
-  return_label133: while(false);
+  return_label134: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___ACallFormExpr___variable_create(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1209, LOCATE_typing___ACallFormExpr___variable_create};
+  struct trace_t trace = {NULL, NULL, 1223, LOCATE_typing___ACallFormExpr___variable_create};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_typing, 1209);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_typing, 1223);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t typing___ACallExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1219, LOCATE_typing___ACallExpr___name};
+  struct trace_t trace = {NULL, NULL, 1233, LOCATE_typing___ACallExpr___name};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4216,13 +4248,13 @@ val_t typing___ACallExpr___name(val_t  self) {
   variable[2] = ((parser_nodes___ACallFormExpr___n_id_t)CALL(variable[2],COLOR_parser_nodes___ACallFormExpr___n_id))(variable[2]) /*ACallFormExpr::n_id*/;
   variable[2] = ((syntax_base___Token___to_symbol_t)CALL(variable[2],COLOR_syntax_base___Token___to_symbol))(variable[2]) /*Token::to_symbol*/;
   variable[1] = variable[2];
-  goto return_label134;
-  return_label134: while(false);
+  goto return_label135;
+  return_label135: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___ACallExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1220, LOCATE_typing___ACallExpr___raw_arguments};
+  struct trace_t trace = {NULL, NULL, 1234, LOCATE_typing___ACallExpr___raw_arguments};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4232,13 +4264,13 @@ val_t typing___ACallExpr___raw_arguments(val_t  self) {
   variable[2] = ((parser_nodes___ACallFormExpr___n_args_t)CALL(variable[2],COLOR_parser_nodes___ACallFormExpr___n_args))(variable[2]) /*ACallFormExpr::n_args*/;
   variable[2] = ((array___Collection___to_a_t)CALL(variable[2],COLOR_array___Collection___to_a))(variable[2]) /*Collection::to_a*/;
   variable[1] = variable[2];
-  goto return_label135;
-  return_label135: while(false);
+  goto return_label136;
+  return_label136: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___ACallExpr___variable_create(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1214, LOCATE_typing___ACallExpr___variable_create};
+  struct trace_t trace = {NULL, NULL, 1228, LOCATE_typing___ACallExpr___variable_create};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4250,13 +4282,13 @@ val_t typing___ACallExpr___variable_create(val_t  self, val_t  param0) {
   variable[4] = NEW_AVarExpr_parser_prod___AVarExpr___init_avarexpr(variable[3]); /*new AVarExpr*/
   variable[3] = variable[4];
   variable[2] = variable[3];
-  goto return_label136;
-  return_label136: while(false);
+  goto return_label137;
+  return_label137: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t typing___ACallAssignExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1229, LOCATE_typing___ACallAssignExpr___name};
+  struct trace_t trace = {NULL, NULL, 1243, LOCATE_typing___ACallAssignExpr___name};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4269,13 +4301,13 @@ val_t typing___ACallAssignExpr___name(val_t  self) {
   variable[2] = ((string___String_____plus_t)CALL(variable[2],COLOR_string___String_____plus))(variable[2], variable[3]) /*String::+*/;
   variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
   variable[1] = variable[2];
-  goto return_label137;
-  return_label137: while(false);
+  goto return_label138;
+  return_label138: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___ACallAssignExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1230, LOCATE_typing___ACallAssignExpr___raw_arguments};
+  struct trace_t trace = {NULL, NULL, 1244, LOCATE_typing___ACallAssignExpr___raw_arguments};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4289,13 +4321,13 @@ val_t typing___ACallAssignExpr___raw_arguments(val_t  self) {
   variable[3] = ((parser_nodes___AAssignFormExpr___n_value_t)CALL(variable[3],COLOR_parser_nodes___AAssignFormExpr___n_value))(variable[3]) /*AAssignFormExpr::n_value*/;
   ((array___AbstractArray___add_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[2] /*res*/, variable[3]) /*AbstractArray::add*/;
   variable[1] =  variable[2] /*res*/;
-  goto return_label138;
-  return_label138: while(false);
+  goto return_label139;
+  return_label139: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___ACallAssignExpr___variable_create(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1224, LOCATE_typing___ACallAssignExpr___variable_create};
+  struct trace_t trace = {NULL, NULL, 1238, LOCATE_typing___ACallAssignExpr___variable_create};
   val_t variable[7];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4311,13 +4343,13 @@ val_t typing___ACallAssignExpr___variable_create(val_t  self, val_t  param0) {
   variable[6] = NEW_AVarAssignExpr_parser_prod___AVarAssignExpr___init_avarassignexpr(variable[3], variable[4], variable[5]); /*new AVarAssignExpr*/
   variable[3] = variable[6];
   variable[2] = variable[3];
-  goto return_label139;
-  return_label139: while(false);
+  goto return_label140;
+  return_label140: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t typing___ACallReassignExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1244, LOCATE_typing___ACallReassignExpr___name};
+  struct trace_t trace = {NULL, NULL, 1258, LOCATE_typing___ACallReassignExpr___name};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4327,13 +4359,13 @@ val_t typing___ACallReassignExpr___name(val_t  self) {
   variable[2] = ((parser_nodes___ACallFormExpr___n_id_t)CALL(variable[2],COLOR_parser_nodes___ACallFormExpr___n_id))(variable[2]) /*ACallFormExpr::n_id*/;
   variable[2] = ((syntax_base___Token___to_symbol_t)CALL(variable[2],COLOR_syntax_base___Token___to_symbol))(variable[2]) /*Token::to_symbol*/;
   variable[1] = variable[2];
-  goto return_label140;
-  return_label140: while(false);
+  goto return_label141;
+  return_label141: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___ACallReassignExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1245, LOCATE_typing___ACallReassignExpr___raw_arguments};
+  struct trace_t trace = {NULL, NULL, 1259, LOCATE_typing___ACallReassignExpr___raw_arguments};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4343,13 +4375,13 @@ val_t typing___ACallReassignExpr___raw_arguments(val_t  self) {
   variable[2] = ((parser_nodes___ACallFormExpr___n_args_t)CALL(variable[2],COLOR_parser_nodes___ACallFormExpr___n_args))(variable[2]) /*ACallFormExpr::n_args*/;
   variable[2] = ((array___Collection___to_a_t)CALL(variable[2],COLOR_array___Collection___to_a))(variable[2]) /*Collection::to_a*/;
   variable[1] = variable[2];
-  goto return_label141;
-  return_label141: while(false);
+  goto return_label142;
+  return_label142: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___ACallReassignExpr___variable_create(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1239, LOCATE_typing___ACallReassignExpr___variable_create};
+  struct trace_t trace = {NULL, NULL, 1253, LOCATE_typing___ACallReassignExpr___variable_create};
   val_t variable[7];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4365,34 +4397,34 @@ val_t typing___ACallReassignExpr___variable_create(val_t  self, val_t  param0) {
   variable[6] = NEW_AVarReassignExpr_parser_prod___AVarReassignExpr___init_avarreassignexpr(variable[3], variable[4], variable[5]); /*new AVarReassignExpr*/
   variable[3] = variable[6];
   variable[2] = variable[3];
-  goto return_label142;
-  return_label142: while(false);
+  goto return_label143;
+  return_label143: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t typing___ABraExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1249, LOCATE_typing___ABraExpr___name};
-  static val_t once_value_144; static int once_bool_144; /* Once value for variable[2]*/
+  struct trace_t trace = {NULL, NULL, 1263, LOCATE_typing___ABraExpr___name};
+  static val_t once_value_145; static int once_bool_145; /* Once value for variable[2]*/
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   variable[0] =  self;
-  if (once_bool_144) variable[2] = once_value_144;
+  if (once_bool_145) variable[2] = once_value_145;
   else {
     variable[2] = NEW_String_string___String___with_native(BOX_NativeString("[]"), TAG_Int(2)); /*new String*/
     variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
-    once_value_144 = variable[2];
-    once_bool_144 = true;
+    once_value_145 = variable[2];
+    once_bool_145 = true;
   }
   variable[1] = variable[2];
-  goto return_label143;
-  return_label143: while(false);
+  goto return_label144;
+  return_label144: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t typing___ABraExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1250, LOCATE_typing___ABraExpr___raw_arguments};
+  struct trace_t trace = {NULL, NULL, 1264, LOCATE_typing___ABraExpr___raw_arguments};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4402,34 +4434,34 @@ val_t typing___ABraExpr___raw_arguments(val_t  self) {
   variable[2] = ((parser_nodes___ABraFormExpr___n_args_t)CALL(variable[2],COLOR_parser_nodes___ABraFormExpr___n_args))(variable[2]) /*ABraFormExpr::n_args*/;
   variable[2] = ((array___Collection___to_a_t)CALL(variable[2],COLOR_array___Collection___to_a))(variable[2]) /*Collection::to_a*/;
   variable[1] = variable[2];
-  goto return_label145;
-  return_label145: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t typing___ABraAssignExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1254, LOCATE_typing___ABraAssignExpr___name};
-  static val_t once_value_147; static int once_bool_147; /* Once value for variable[2]*/
-  val_t variable[3];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable[0] =  self;
-  if (once_bool_147) variable[2] = once_value_147;
-  else {
-    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("[]="), TAG_Int(3)); /*new String*/
-    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
-    once_value_147 = variable[2];
-    once_bool_147 = true;
-  }
-  variable[1] = variable[2];
   goto return_label146;
   return_label146: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
+val_t typing___ABraAssignExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1268, LOCATE_typing___ABraAssignExpr___name};
+  static val_t once_value_148; static int once_bool_148; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  if (once_bool_148) variable[2] = once_value_148;
+  else {
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("[]="), TAG_Int(3)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_148 = variable[2];
+    once_bool_148 = true;
+  }
+  variable[1] = variable[2];
+  goto return_label147;
+  return_label147: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
 val_t typing___ABraAssignExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1255, LOCATE_typing___ABraAssignExpr___raw_arguments};
+  struct trace_t trace = {NULL, NULL, 1269, LOCATE_typing___ABraAssignExpr___raw_arguments};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4443,34 +4475,34 @@ val_t typing___ABraAssignExpr___raw_arguments(val_t  self) {
   variable[3] = ((parser_nodes___AAssignFormExpr___n_value_t)CALL(variable[3],COLOR_parser_nodes___AAssignFormExpr___n_value))(variable[3]) /*AAssignFormExpr::n_value*/;
   ((array___AbstractArray___add_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[2] /*res*/, variable[3]) /*AbstractArray::add*/;
   variable[1] =  variable[2] /*res*/;
-  goto return_label148;
-  return_label148: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t typing___ABraReassignExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1264, LOCATE_typing___ABraReassignExpr___name};
-  static val_t once_value_150; static int once_bool_150; /* Once value for variable[2]*/
-  val_t variable[3];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable[0] =  self;
-  if (once_bool_150) variable[2] = once_value_150;
-  else {
-    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("[]"), TAG_Int(2)); /*new String*/
-    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
-    once_value_150 = variable[2];
-    once_bool_150 = true;
-  }
-  variable[1] = variable[2];
   goto return_label149;
   return_label149: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
+val_t typing___ABraReassignExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1278, LOCATE_typing___ABraReassignExpr___name};
+  static val_t once_value_151; static int once_bool_151; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  if (once_bool_151) variable[2] = once_value_151;
+  else {
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("[]"), TAG_Int(2)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_151 = variable[2];
+    once_bool_151 = true;
+  }
+  variable[1] = variable[2];
+  goto return_label150;
+  return_label150: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
 val_t typing___ABraReassignExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1265, LOCATE_typing___ABraReassignExpr___raw_arguments};
+  struct trace_t trace = {NULL, NULL, 1279, LOCATE_typing___ABraReassignExpr___raw_arguments};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4480,34 +4512,34 @@ val_t typing___ABraReassignExpr___raw_arguments(val_t  self) {
   variable[2] = ((parser_nodes___ABraFormExpr___n_args_t)CALL(variable[2],COLOR_parser_nodes___ABraFormExpr___n_args))(variable[2]) /*ABraFormExpr::n_args*/;
   variable[2] = ((array___Collection___to_a_t)CALL(variable[2],COLOR_array___Collection___to_a))(variable[2]) /*Collection::to_a*/;
   variable[1] = variable[2];
-  goto return_label151;
-  return_label151: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t typing___AInitExpr___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1269, LOCATE_typing___AInitExpr___name};
-  static val_t once_value_153; static int once_bool_153; /* Once value for variable[2]*/
-  val_t variable[3];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_typing;
-  variable[0] =  self;
-  if (once_bool_153) variable[2] = once_value_153;
-  else {
-    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("init"), TAG_Int(4)); /*new String*/
-    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
-    once_value_153 = variable[2];
-    once_bool_153 = true;
-  }
-  variable[1] = variable[2];
   goto return_label152;
   return_label152: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
+val_t typing___AInitExpr___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 1283, LOCATE_typing___AInitExpr___name};
+  static val_t once_value_154; static int once_bool_154; /* Once value for variable[2]*/
+  val_t variable[3];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_typing;
+  variable[0] =  self;
+  if (once_bool_154) variable[2] = once_value_154;
+  else {
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("init"), TAG_Int(4)); /*new String*/
+    variable[2] = ((symbol___String___to_symbol_t)CALL(variable[2],COLOR_symbol___String___to_symbol))(variable[2]) /*String::to_symbol*/;
+    once_value_154 = variable[2];
+    once_bool_154 = true;
+  }
+  variable[1] = variable[2];
+  goto return_label153;
+  return_label153: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
 val_t typing___AInitExpr___raw_arguments(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1270, LOCATE_typing___AInitExpr___raw_arguments};
+  struct trace_t trace = {NULL, NULL, 1284, LOCATE_typing___AInitExpr___raw_arguments};
   val_t variable[3];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4517,13 +4549,13 @@ val_t typing___AInitExpr___raw_arguments(val_t  self) {
   variable[2] = ((parser_nodes___AInitExpr___n_args_t)CALL(variable[2],COLOR_parser_nodes___AInitExpr___n_args))(variable[2]) /*AInitExpr::n_args*/;
   variable[2] = ((array___Collection___to_a_t)CALL(variable[2],COLOR_array___Collection___to_a))(variable[2]) /*Collection::to_a*/;
   variable[1] = variable[2];
-  goto return_label154;
-  return_label154: while(false);
+  goto return_label155;
+  return_label155: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 void typing___AClosureCallExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1274, LOCATE_typing___AClosureCallExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 1288, LOCATE_typing___AClosureCallExpr___after_typing};
   val_t variable[9];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4559,7 +4591,7 @@ void typing___AClosureCallExpr___after_typing(val_t  self, val_t  param0) {
   }
   variable[6] = TAG_Bool(( variable[5] /*args*/ ==  NIT_NULL /*null*/) || (( variable[5] /*args*/ != NIT_NULL) && UNTAG_Bool(((array___AbstractArray_____eqeq_t)CALL( variable[5] /*args*/,COLOR_kernel___Object_____eqeq))( variable[5] /*args*/,  NIT_NULL /*null*/) /*AbstractArray::==*/)));
   if (UNTAG_Bool(variable[6])) { /*if*/
-    goto return_label155;
+    goto return_label156;
   }
   variable[6] = variable[0];
   ATTR_typing___AAbsSendExpr____prop(variable[6]) /*AAbsSendExpr::_prop*/ =  NIT_NULL /*null*/;
@@ -4570,12 +4602,12 @@ void typing___AClosureCallExpr___after_typing(val_t  self, val_t  param0) {
   variable[6] = variable[0];
   variable[7] = ((static_type___MMSignature___return_type_t)CALL( variable[4] /*sig*/,COLOR_static_type___MMSignature___return_type))( variable[4] /*sig*/) /*MMSignature::return_type*/;
   ATTR_typing___PExpr____stype(variable[6]) /*PExpr::_stype*/ = variable[7];
-  return_label155: while(false);
+  return_label156: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___PClosureDef___accept_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1292, LOCATE_typing___PClosureDef___accept_typing};
+  struct trace_t trace = {NULL, NULL, 1306, LOCATE_typing___PClosureDef___accept_typing};
   val_t variable[4];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4587,24 +4619,24 @@ void typing___PClosureDef___accept_typing(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable[3])) { /*if*/
     ((typing___PClosureDef___accept_typing_t)CALL(variable[0],COLOR_SUPER_typing___PClosureDef___accept_typing))(variable[0], variable[1]) /*super PClosureDef::accept_typing*/;
   }
-  return_label156: while(false);
+  return_label157: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___PClosureDef___accept_typing2(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 1298, LOCATE_typing___PClosureDef___accept_typing2};
+  struct trace_t trace = {NULL, NULL, 1312, LOCATE_typing___PClosureDef___accept_typing2};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_typing;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_typing, 1298);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_typing, 1312);
   nit_exit(1);
   tracehead = trace.prev;
   return;
 }
 void typing___AClosureDef___accept_typing2(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 1302, LOCATE_typing___AClosureDef___accept_typing2};
+  struct trace_t trace = {NULL, NULL, 1316, LOCATE_typing___AClosureDef___accept_typing2};
   val_t variable[17];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4642,7 +4674,7 @@ void typing___AClosureDef___accept_typing2(val_t  self, val_t  param0, val_t  pa
     variable[16] = variable[15];
     ((string___String___append_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___append))(variable[6], variable[16]) /*String::append*/;
     ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[5], variable[6]) /*AbsSyntaxVisitor::error*/;
-    goto return_label157;
+    goto return_label158;
   }
   variable[5] = variable[0];
   ((syntax_base___PClosureDef___closure__eq_t)CALL(variable[5],COLOR_syntax_base___PClosureDef___closure__eq))(variable[5],  variable[2] /*clos*/) /*PClosureDef::closure=*/;
@@ -4681,21 +4713,21 @@ void typing___AClosureDef___accept_typing2(val_t  self, val_t  param0, val_t  pa
     ((syntax_base___Variable___stype__eq_t)CALL( variable[9] /*va*/,COLOR_syntax_base___Variable___stype__eq))( variable[9] /*va*/, variable[10]) /*Variable::stype=*/;
     variable[10] = ((typing___TypingVisitor___variable_ctx_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___variable_ctx))( variable[1] /*v*/) /*TypingVisitor::variable_ctx*/;
     ((typing___VariableContext___add_t)CALL(variable[10],COLOR_typing___VariableContext___add))(variable[10],  variable[9] /*va*/) /*VariableContext::add*/;
-    continue_158: while(0);
+    continue_159: while(0);
     ((abstract_collection___Iterator___next_t)CALL(variable[6],COLOR_abstract_collection___Iterator___next))(variable[6]) /*Iterator::next*/;
   }
-  break_158: while(0);
+  break_159: while(0);
   variable[6] = variable[0];
   ATTR_typing___PClosureDef____accept_typing2(variable[6]) /*PClosureDef::_accept_typing2*/ =  TAG_Bool(true);
   variable[6] = variable[0];
   ((typing___PClosureDef___accept_typing_t)CALL(variable[6],COLOR_typing___PNode___accept_typing))(variable[6],  variable[1] /*v*/) /*PClosureDef::accept_typing*/;
   ((typing___TypingVisitor___closure__eq_t)CALL( variable[1] /*v*/,COLOR_typing___TypingVisitor___closure__eq))( variable[1] /*v*/,  variable[5] /*old_clos*/) /*TypingVisitor::closure=*/;
-  return_label157: while(false);
+  return_label158: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___AIsaExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1332, LOCATE_typing___AIsaExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 1346, LOCATE_typing___AIsaExpr___after_typing};
   val_t variable[7];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4719,12 +4751,12 @@ void typing___AIsaExpr___after_typing(val_t  self, val_t  param0) {
   variable[4] = variable[0];
   variable[5] = ((syntax_base___AbsSyntaxVisitor___type_bool_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___type_bool))( variable[1] /*v*/) /*AbsSyntaxVisitor::type_bool*/;
   ATTR_typing___PExpr____stype(variable[4]) /*PExpr::_stype*/ = variable[5];
-  return_label159: while(false);
+  return_label160: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___AAsCastExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1343, LOCATE_typing___AAsCastExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 1357, LOCATE_typing___AAsCastExpr___after_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4739,12 +4771,12 @@ void typing___AAsCastExpr___after_typing(val_t  self, val_t  param0) {
   variable[4] = ((parser_nodes___AAsCastExpr___n_type_t)CALL(variable[4],COLOR_parser_nodes___AAsCastExpr___n_type))(variable[4]) /*AAsCastExpr::n_type*/;
   variable[4] = ((typing___PType___stype_t)CALL(variable[4],COLOR_typing___PType___stype))(variable[4]) /*PType::stype*/;
   ATTR_typing___PExpr____stype(variable[3]) /*PExpr::_stype*/ = variable[4];
-  return_label160: while(false);
+  return_label161: while(false);
   tracehead = trace.prev;
   return;
 }
 void typing___AProxyExpr___after_typing(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1351, LOCATE_typing___AProxyExpr___after_typing};
+  struct trace_t trace = {NULL, NULL, 1365, LOCATE_typing___AProxyExpr___after_typing};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -4756,7 +4788,7 @@ void typing___AProxyExpr___after_typing(val_t  self, val_t  param0) {
   variable[4] = ((parser_nodes___AProxyExpr___n_expr_t)CALL(variable[4],COLOR_parser_nodes___AProxyExpr___n_expr))(variable[4]) /*AProxyExpr::n_expr*/;
   variable[4] = ((typing___PExpr___stype_t)CALL(variable[4],COLOR_syntax_base___PExpr___stype))(variable[4]) /*PExpr::stype*/;
   ATTR_typing___PExpr____stype(variable[3]) /*PExpr::_stype*/ = variable[4];
-  return_label161: while(false);
+  return_label162: while(false);
   tracehead = trace.prev;
   return;
 }

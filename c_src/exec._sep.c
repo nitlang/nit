@@ -107,11 +107,11 @@ void exec___Process___init(val_t  self, val_t  param0, val_t  param1, int* init_
   /* check if p<Array[String] with p:String */
   if (( param1!=NIT_NULL) && !VAL_ISA( param1, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_exec___Process___init, LOCATE_exec, 50); nit_exit(1); } /*cast Array[String]*/;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Process].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Process].i]) return;
   variable[4] = variable[0];
   ((exec___Process___execute_t)CALL(variable[4],COLOR_exec___Process___execute))(variable[4],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(0), init_table /*YYY*/) /*Process::execute*/;
   return_label6: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Process].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Process].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -123,11 +123,11 @@ void exec___Process___init_(val_t  self, val_t  param0, int* init_table) {
   trace.file = LOCATE_exec;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Process].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Process].i]) return;
   variable[3] = variable[0];
   ((exec___Process___execute_t)CALL(variable[3],COLOR_exec___Process___execute))(variable[3],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(0), init_table /*YYY*/) /*Process::execute*/;
   return_label7: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Process].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Process].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -141,7 +141,7 @@ void exec___Process___execute(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Process].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Process].i]) return;
   variable[6] = NEW_String_string___String___init(); /*new String*/
   variable[5] = variable[6];
   variable[6] =  TAG_Int(1);
@@ -170,7 +170,7 @@ void exec___Process___execute(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[8] = ((exec___Process___basic_exec_execute_t)CALL(variable[8],COLOR_exec___Process___basic_exec_execute))(variable[8], variable[9], variable[10],  variable[6] /*l*/,  variable[3] /*pipeflags*/) /*Process::basic_exec_execute*/;
   ATTR_exec___Process____data(variable[7]) /*Process::_data*/ = variable[8];
   return_label8: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Process].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Process].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -240,7 +240,7 @@ void exec___IProcess___init(val_t  self, val_t  param0, val_t  param1, int* init
   /* check if p<Array[String] with p:String */
   if (( param1!=NIT_NULL) && !VAL_ISA( param1, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_exec___IProcess___init, LOCATE_exec, 93); nit_exit(1); } /*cast Array[String]*/;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IProcess].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IProcess].i]) return;
   variable[4] = variable[0];
   ((exec___Process___execute_t)CALL(variable[4],COLOR_exec___Process___execute))(variable[4],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(2), init_table /*YYY*/) /*Process::execute*/;
   variable[4] = variable[0];
@@ -251,7 +251,7 @@ void exec___IProcess___init(val_t  self, val_t  param0, val_t  param1, int* init
   variable[5] = variable[6];
   ATTR_exec___IProcess____in(variable[4]) /*IProcess::_in*/ = variable[5];
   return_label13: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IProcess].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IProcess].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -263,7 +263,7 @@ void exec___IProcess___init_(val_t  self, val_t  param0, int* init_table) {
   trace.file = LOCATE_exec;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IProcess].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IProcess].i]) return;
   variable[3] = variable[0];
   ((exec___Process___execute_t)CALL(variable[3],COLOR_exec___Process___execute))(variable[3],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(2), init_table /*YYY*/) /*Process::execute*/;
   variable[3] = variable[0];
@@ -274,7 +274,7 @@ void exec___IProcess___init_(val_t  self, val_t  param0, int* init_table) {
   variable[4] = variable[5];
   ATTR_exec___IProcess____in(variable[3]) /*IProcess::_in*/ = variable[4];
   return_label14: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IProcess].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IProcess].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -334,7 +334,7 @@ void exec___OProcess___init(val_t  self, val_t  param0, val_t  param1, int* init
   /* check if p<Array[String] with p:String */
   if (( param1!=NIT_NULL) && !VAL_ISA( param1, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_exec___OProcess___init, LOCATE_exec, 118); nit_exit(1); } /*cast Array[String]*/;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OProcess].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OProcess].i]) return;
   variable[4] = variable[0];
   ((exec___Process___execute_t)CALL(variable[4],COLOR_exec___Process___execute))(variable[4],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(1), init_table /*YYY*/) /*Process::execute*/;
   variable[4] = variable[0];
@@ -345,7 +345,7 @@ void exec___OProcess___init(val_t  self, val_t  param0, val_t  param1, int* init
   variable[5] = variable[6];
   ATTR_exec___OProcess____out(variable[4]) /*OProcess::_out*/ = variable[5];
   return_label18: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OProcess].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OProcess].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -357,7 +357,7 @@ void exec___OProcess___init_(val_t  self, val_t  param0, int* init_table) {
   trace.file = LOCATE_exec;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OProcess].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OProcess].i]) return;
   variable[3] = variable[0];
   ((exec___Process___execute_t)CALL(variable[3],COLOR_exec___Process___execute))(variable[3],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(1), init_table /*YYY*/) /*Process::execute*/;
   variable[3] = variable[0];
@@ -368,7 +368,7 @@ void exec___OProcess___init_(val_t  self, val_t  param0, int* init_table) {
   variable[4] = variable[5];
   ATTR_exec___OProcess____out(variable[3]) /*OProcess::_out*/ = variable[4];
   return_label19: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OProcess].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OProcess].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -400,7 +400,7 @@ void exec___IOProcess___init(val_t  self, val_t  param0, val_t  param1, int* ini
   /* check if p<Array[String] with p:String */
   if (( param1!=NIT_NULL) && !VAL_ISA( param1, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_exec___IOProcess___init, LOCATE_exec, 143); nit_exit(1); } /*cast Array[String]*/;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IOProcess].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IOProcess].i]) return;
   variable[4] = variable[0];
   ((exec___Process___execute_t)CALL(variable[4],COLOR_exec___Process___execute))(variable[4],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(3), init_table /*YYY*/) /*Process::execute*/;
   ((exec___IProcess___init_t)CALL(variable[0],COLOR_exec___IProcess___init))(variable[0], variable[1], variable[2], init_table /*YYY*/) /*IProcess::init*/;
@@ -420,7 +420,7 @@ void exec___IOProcess___init(val_t  self, val_t  param0, val_t  param1, int* ini
   variable[5] = variable[6];
   ATTR_exec___OProcess____out(variable[4]) /*OProcess::_out*/ = variable[5];
   return_label21: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IOProcess].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IOProcess].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -432,7 +432,7 @@ void exec___IOProcess___init_(val_t  self, val_t  param0, int* init_table) {
   trace.file = LOCATE_exec;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IOProcess].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IOProcess].i]) return;
   variable[3] = variable[0];
   ((exec___Process___execute_t)CALL(variable[3],COLOR_exec___Process___execute))(variable[3],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(3), init_table /*YYY*/) /*Process::execute*/;
   ((exec___IProcess___init__t)CALL(variable[0],COLOR_exec___IProcess___init_))(variable[0], variable[1], init_table /*YYY*/) /*IProcess::init_*/;
@@ -452,7 +452,7 @@ void exec___IOProcess___init_(val_t  self, val_t  param0, int* init_table) {
   variable[4] = variable[5];
   ATTR_exec___OProcess____out(variable[3]) /*OProcess::_out*/ = variable[4];
   return_label22: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IOProcess].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IOProcess].i] = 1;
   tracehead = trace.prev;
   return;
 }

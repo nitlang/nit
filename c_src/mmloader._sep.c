@@ -161,7 +161,7 @@ void mmloader___ToolContext___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ToolContext].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ToolContext].i]) return;
   ((abstractmetamodel___MMContext___init_t)CALL(variable[0],COLOR_abstractmetamodel___MMContext___init))(variable[0], init_table /*YYY*/) /*MMContext::init*/;
   variable[2] = variable[0];
   variable[2] = ((mmloader___ToolContext___option_context_t)CALL(variable[2],COLOR_mmloader___ToolContext___option_context))(variable[2]) /*ToolContext::option_context*/;
@@ -186,7 +186,7 @@ void mmloader___ToolContext___init(val_t  self, int* init_table) {
   ((array___AbstractArray___add_t)CALL(variable[3],COLOR_abstract_collection___SimpleCollection___add))(variable[3], variable[9]) /*AbstractArray::add*/;
   ((opts___OptionContext___add_option_t)CALL(variable[2],COLOR_opts___OptionContext___add_option))(variable[2], variable[3]) /*OptionContext::add_option*/;
   return_label2: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ToolContext].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ToolContext].i] = 1;
   tracehead = trace.prev;
   return;
 }

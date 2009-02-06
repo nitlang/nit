@@ -69,8 +69,9 @@ extern const int SFT_control_flow[];
 #define COLOR_SUPER_control_flow___AVarExpr___accept_control_flow SFT_control_flow[53]
 #define COLOR_SUPER_control_flow___AVarAssignExpr___accept_control_flow SFT_control_flow[54]
 #define COLOR_SUPER_control_flow___AVarReassignExpr___accept_control_flow SFT_control_flow[55]
-#define COLOR_SUPER_control_flow___AClosureDef___accept_control_flow SFT_control_flow[56]
-#define COLOR_SUPER_control_flow___AOnceExpr___accept_control_flow SFT_control_flow[57]
+#define COLOR_SUPER_control_flow___AClosureDecl___accept_control_flow SFT_control_flow[56]
+#define COLOR_SUPER_control_flow___AClosureDef___accept_control_flow SFT_control_flow[57]
+#define COLOR_SUPER_control_flow___AOnceExpr___accept_control_flow SFT_control_flow[58]
 val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef void (* control_flow___MMSrcModule___do_control_flow_t)(val_t  self, val_t  param0);
 void control_flow___MMSrcModule___do_control_flow(val_t  self, val_t  param0);
@@ -253,6 +254,12 @@ val_t NEW_AVarReassignExpr_parser_prod___AVarReassignExpr___init_avarreassignexp
 typedef void (* control_flow___AVarReassignExpr___accept_control_flow_t)(val_t  self, val_t  param0);
 void control_flow___AVarReassignExpr___accept_control_flow(val_t  self, val_t  param0);
 #define LOCATE_control_flow___AVarReassignExpr___accept_control_flow "control_flow::AVarReassignExpr::(control_flow::PNode::accept_control_flow)"
+val_t NEW_AClosureDecl_parser_nodes___PNode___init();
+val_t NEW_AClosureDecl_parser_prod___AClosureDecl___empty_init();
+val_t NEW_AClosureDecl_parser_prod___AClosureDecl___init_aclosuredecl(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+typedef void (* control_flow___AClosureDecl___accept_control_flow_t)(val_t  self, val_t  param0);
+void control_flow___AClosureDecl___accept_control_flow(val_t  self, val_t  param0);
+#define LOCATE_control_flow___AClosureDecl___accept_control_flow "control_flow::AClosureDecl::(control_flow::PNode::accept_control_flow)"
 val_t NEW_AClosureDef_parser_nodes___PNode___init();
 val_t NEW_AClosureDef_parser_prod___AClosureDef___empty_init();
 val_t NEW_AClosureDef_parser_prod___AClosureDef___init_aclosuredef(val_t p0, val_t p1, val_t p2, val_t p3);

@@ -141,13 +141,13 @@ void type_formal___MMTypeFormal___init(val_t  self, val_t  param0, val_t  param1
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeFormal].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeFormal].i]) return;
   variable[4] = variable[0];
   ATTR_type_formal___MMTypeFormal____name(variable[4]) /*MMTypeFormal::_name*/ =  variable[1] /*name*/;
   variable[4] = variable[0];
   ATTR_type_formal___MMTypeFormal____bound(variable[4]) /*MMTypeFormal::_bound*/ =  variable[2] /*bound*/;
   return_label6: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeFormal].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeFormal].i] = 1;
   tracehead = trace.prev;
   return;
 }

@@ -27,9 +27,9 @@ void mmbuilder___CSHSorter___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_CSHSorter].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_CSHSorter].i]) return;
   return_label1: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_CSHSorter].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_CSHSorter].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -816,13 +816,13 @@ void mmbuilder___MMSrcAncestor___init(val_t  self, val_t  param0, val_t  param1,
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSrcAncestor].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcAncestor].i]) return;
   variable[4] = variable[0];
   ATTR_mmbuilder___MMSrcAncestor____node(variable[4]) /*MMSrcAncestor::_node*/ =  variable[1] /*n*/;
   variable[4] = variable[0];
   ATTR_mmbuilder___MMSrcAncestor____local_class(variable[4]) /*MMSrcAncestor::_local_class*/ =  variable[2] /*c*/;
   return_label32: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSrcAncestor].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcAncestor].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -887,10 +887,10 @@ void mmbuilder___ClassBuilderVisitor___init(val_t  self, val_t  param0, val_t  p
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ClassBuilderVisitor].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClassBuilderVisitor].i]) return;
   ((syntax_base___AbsSyntaxVisitor___init_t)CALL(variable[0],COLOR_syntax_base___AbsSyntaxVisitor___init))(variable[0], variable[1], variable[2], init_table /*YYY*/) /*AbsSyntaxVisitor::init*/;
   return_label34: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ClassBuilderVisitor].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClassBuilderVisitor].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -917,10 +917,10 @@ void mmbuilder___ClassSpecializationBuilderVisitor___init(val_t  self, val_t  pa
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ClassSpecializationBuilderVisitor].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClassSpecializationBuilderVisitor].i]) return;
   ((syntax_base___AbsSyntaxVisitor___init_t)CALL(variable[0],COLOR_syntax_base___AbsSyntaxVisitor___init))(variable[0], variable[1], variable[2], init_table /*YYY*/) /*AbsSyntaxVisitor::init*/;
   return_label36: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ClassSpecializationBuilderVisitor].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClassSpecializationBuilderVisitor].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -947,10 +947,10 @@ void mmbuilder___ClassAncestorBuilder___init(val_t  self, val_t  param0, val_t  
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ClassAncestorBuilder].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClassAncestorBuilder].i]) return;
   ((syntax_base___AbsSyntaxVisitor___init_t)CALL(variable[0],COLOR_syntax_base___AbsSyntaxVisitor___init))(variable[0], variable[1], variable[2], init_table /*YYY*/) /*AbsSyntaxVisitor::init*/;
   return_label38: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ClassAncestorBuilder].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClassAncestorBuilder].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -977,10 +977,10 @@ void mmbuilder___ClassVerifierVisitor___init(val_t  self, val_t  param0, val_t  
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ClassVerifierVisitor].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClassVerifierVisitor].i]) return;
   ((syntax_base___AbsSyntaxVisitor___init_t)CALL(variable[0],COLOR_syntax_base___AbsSyntaxVisitor___init))(variable[0], variable[1], variable[2], init_table /*YYY*/) /*AbsSyntaxVisitor::init*/;
   return_label40: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ClassVerifierVisitor].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClassVerifierVisitor].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1007,10 +1007,10 @@ void mmbuilder___PropertyBuilderVisitor___init(val_t  self, val_t  param0, val_t
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_PropertyBuilderVisitor].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PropertyBuilderVisitor].i]) return;
   ((syntax_base___AbsSyntaxVisitor___init_t)CALL(variable[0],COLOR_syntax_base___AbsSyntaxVisitor___init))(variable[0], variable[1], variable[2], init_table /*YYY*/) /*AbsSyntaxVisitor::init*/;
   return_label42: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_PropertyBuilderVisitor].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PropertyBuilderVisitor].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1056,13 +1056,13 @@ void mmbuilder___PropertyVerifierVisitor___init(val_t  self, val_t  param0, val_
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_PropertyVerifierVisitor].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PropertyVerifierVisitor].i]) return;
   ((syntax_base___AbsSyntaxVisitor___init_t)CALL(variable[0],COLOR_syntax_base___AbsSyntaxVisitor___init))(variable[0], variable[1], variable[2], init_table /*YYY*/) /*AbsSyntaxVisitor::init*/;
   variable[4] = variable[0];
   variable[5] = NEW_SignatureBuilder_mmbuilder___SignatureBuilder___init(); /*new SignatureBuilder*/
   ATTR_mmbuilder___PropertyVerifierVisitor____signature_builder(variable[4]) /*PropertyVerifierVisitor::_signature_builder*/ = variable[5];
   return_label44: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_PropertyVerifierVisitor].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PropertyVerifierVisitor].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2152,12 +2152,12 @@ void mmbuilder___MMSrcTypeFormalParameter___init(val_t  self, val_t  param0, val
   variable[2] =  param1;
   variable[3] =  param2;
   variable[4] =  param3;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSrcTypeFormalParameter].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcTypeFormalParameter].i]) return;
   ((genericity___MMTypeFormalParameter___init_t)CALL(variable[0],COLOR_genericity___MMTypeFormalParameter___init))(variable[0],  variable[1] /*name*/,  variable[2] /*pos*/,  variable[3] /*local_class*/, init_table /*YYY*/) /*MMTypeFormalParameter::init*/;
   variable[6] = variable[0];
   ATTR_mmbuilder___MMSrcTypeFormalParameter____node(variable[6]) /*MMSrcTypeFormalParameter::_node*/ =  variable[4] /*n*/;
   return_label82: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSrcTypeFormalParameter].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcTypeFormalParameter].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3776,12 +3776,12 @@ void mmbuilder___MethidAccumulator___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MethidAccumulator].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MethidAccumulator].i]) return;
   variable[2] = variable[0];
   variable[3] = NEW_String_string___String___init(); /*new String*/
   ATTR_mmbuilder___MethidAccumulator____name(variable[2]) /*MethidAccumulator::_name*/ = variable[3];
   return_label113: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MethidAccumulator].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MethidAccumulator].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -4181,15 +4181,18 @@ void mmbuilder___AClosureDecl___accept_property_verifier(val_t  self, val_t  par
   variable[7] = NEW_MMSignature_static_type___MMSignature___init(variable[6],  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new MMSignature*/
   variable[6] = variable[7];
   variable[5] = variable[6];
-  variable[7] = NEW_MMClosure_static_type___MMClosure___init( variable[5] /*finalize_sig*/,  TAG_Bool(false)); /*new MMClosure*/
+  variable[7] = NEW_MMClosure_static_type___MMClosure___init( variable[5] /*finalize_sig*/,  TAG_Bool(false),  TAG_Bool(true)); /*new MMClosure*/
   variable[6] = variable[7];
   variable[7] = ((static_type___MMSignature___closures_t)CALL( variable[4] /*sig*/,COLOR_static_type___MMSignature___closures))( variable[4] /*sig*/) /*MMSignature::closures*/;
   ((array___AbstractArray___add_t)CALL(variable[7],COLOR_abstract_collection___SimpleCollection___add))(variable[7],  variable[6] /*finalizer_clos*/) /*AbstractArray::add*/;
   variable[8] = variable[0];
   variable[8] = ((parser_nodes___AClosureDecl___n_kwbreak_t)CALL(variable[8],COLOR_parser_nodes___AClosureDecl___n_kwbreak))(variable[8]) /*AClosureDecl::n_kwbreak*/;
   variable[8] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[8] ==  NIT_NULL /*null*/) || ((variable[8] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[8],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[8], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[8],COLOR_kernel___Object_____eqeq))(variable[8],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  variable[9] = NEW_MMClosure_static_type___MMClosure___init( variable[4] /*sig*/, variable[8]); /*new MMClosure*/
-  variable[8] = variable[9];
+  variable[9] = variable[0];
+  variable[9] = ((parser_nodes___AClosureDecl___n_expr_t)CALL(variable[9],COLOR_parser_nodes___AClosureDecl___n_expr))(variable[9]) /*AClosureDecl::n_expr*/;
+  variable[9] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[9] ==  NIT_NULL /*null*/) || ((variable[9] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[9],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[9], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[9],COLOR_kernel___Object_____eqeq))(variable[9],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[10] = NEW_MMClosure_static_type___MMClosure___init( variable[4] /*sig*/, variable[8], variable[9]); /*new MMClosure*/
+  variable[8] = variable[10];
   variable[7] = variable[8];
   ((mmbuilder___PropertyVerifierVisitor___signature_builder__eq_t)CALL( variable[1] /*v*/,COLOR_mmbuilder___PropertyVerifierVisitor___signature_builder__eq))( variable[1] /*v*/,  variable[3] /*old_signature_builder*/) /*PropertyVerifierVisitor::signature_builder=*/;
   variable[8] = ((mmbuilder___SignatureBuilder___closure_decls_t)CALL( variable[3] /*old_signature_builder*/,COLOR_mmbuilder___SignatureBuilder___closure_decls))( variable[3] /*old_signature_builder*/) /*SignatureBuilder::closure_decls*/;

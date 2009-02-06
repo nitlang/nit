@@ -106,7 +106,7 @@ void lexer___TEol___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  pa
   variable[2] =  param1;
   variable[3] =  param2;
   variable[4] =  param3;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TEol].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TEol].i]) return;
   variable[6] = variable[0];
   ATTR_lexer___Token____text(variable[6]) /*Token::_text*/ =  variable[1] /*text*/;
   variable[6] = variable[0];
@@ -116,7 +116,7 @@ void lexer___TEol___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  pa
   variable[6] = variable[0];
   ATTR_lexer___Token____pos(variable[6]) /*Token::_pos*/ =  variable[4] /*pos*/;
   return_label2: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TEol].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TEol].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -144,7 +144,7 @@ void lexer___TComment___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[2] =  param1;
   variable[3] =  param2;
   variable[4] =  param3;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TComment].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TComment].i]) return;
   variable[6] = variable[0];
   ATTR_lexer___Token____text(variable[6]) /*Token::_text*/ =  variable[1] /*text*/;
   variable[6] = variable[0];
@@ -154,7 +154,7 @@ void lexer___TComment___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[6] = variable[0];
   ATTR_lexer___Token____pos(variable[6]) /*Token::_pos*/ =  variable[4] /*pos*/;
   return_label4: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TComment].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TComment].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -182,7 +182,7 @@ void lexer___TKwpackage___init_tk(val_t  self, val_t  param0, val_t  param1, val
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwpackage].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwpackage].i]) return;
   variable[5] = variable[0];
   if (once_bool_7) variable[6] = once_value_7;
   else {
@@ -198,7 +198,7 @@ void lexer___TKwpackage___init_tk(val_t  self, val_t  param0, val_t  param1, val
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label6: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwpackage].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwpackage].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -226,7 +226,7 @@ void lexer___TKwimport___init_tk(val_t  self, val_t  param0, val_t  param1, val_
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwimport].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwimport].i]) return;
   variable[5] = variable[0];
   if (once_bool_10) variable[6] = once_value_10;
   else {
@@ -242,7 +242,7 @@ void lexer___TKwimport___init_tk(val_t  self, val_t  param0, val_t  param1, val_
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label9: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwimport].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwimport].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -270,7 +270,7 @@ void lexer___TKwclass___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwclass].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwclass].i]) return;
   variable[5] = variable[0];
   if (once_bool_13) variable[6] = once_value_13;
   else {
@@ -286,7 +286,7 @@ void lexer___TKwclass___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label12: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwclass].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwclass].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -314,7 +314,7 @@ void lexer___TKwabstract___init_tk(val_t  self, val_t  param0, val_t  param1, va
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwabstract].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwabstract].i]) return;
   variable[5] = variable[0];
   if (once_bool_16) variable[6] = once_value_16;
   else {
@@ -330,7 +330,7 @@ void lexer___TKwabstract___init_tk(val_t  self, val_t  param0, val_t  param1, va
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label15: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwabstract].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwabstract].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -358,7 +358,7 @@ void lexer___TKwinterface___init_tk(val_t  self, val_t  param0, val_t  param1, v
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwinterface].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwinterface].i]) return;
   variable[5] = variable[0];
   if (once_bool_19) variable[6] = once_value_19;
   else {
@@ -374,7 +374,7 @@ void lexer___TKwinterface___init_tk(val_t  self, val_t  param0, val_t  param1, v
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label18: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwinterface].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwinterface].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -402,7 +402,7 @@ void lexer___TKwuniversal___init_tk(val_t  self, val_t  param0, val_t  param1, v
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwuniversal].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwuniversal].i]) return;
   variable[5] = variable[0];
   if (once_bool_22) variable[6] = once_value_22;
   else {
@@ -418,7 +418,7 @@ void lexer___TKwuniversal___init_tk(val_t  self, val_t  param0, val_t  param1, v
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label21: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwuniversal].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwuniversal].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -446,7 +446,7 @@ void lexer___TKwspecial___init_tk(val_t  self, val_t  param0, val_t  param1, val
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwspecial].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwspecial].i]) return;
   variable[5] = variable[0];
   if (once_bool_25) variable[6] = once_value_25;
   else {
@@ -462,7 +462,7 @@ void lexer___TKwspecial___init_tk(val_t  self, val_t  param0, val_t  param1, val
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label24: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwspecial].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwspecial].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -490,7 +490,7 @@ void lexer___TKwend___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwend].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwend].i]) return;
   variable[5] = variable[0];
   if (once_bool_28) variable[6] = once_value_28;
   else {
@@ -506,7 +506,7 @@ void lexer___TKwend___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label27: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwend].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwend].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -534,7 +534,7 @@ void lexer___TKwmeth___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwmeth].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwmeth].i]) return;
   variable[5] = variable[0];
   if (once_bool_31) variable[6] = once_value_31;
   else {
@@ -550,7 +550,7 @@ void lexer___TKwmeth___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label30: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwmeth].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwmeth].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -578,7 +578,7 @@ void lexer___TKwtype___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwtype].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwtype].i]) return;
   variable[5] = variable[0];
   if (once_bool_34) variable[6] = once_value_34;
   else {
@@ -594,7 +594,7 @@ void lexer___TKwtype___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label33: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwtype].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwtype].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -622,7 +622,7 @@ void lexer___TKwattr___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwattr].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwattr].i]) return;
   variable[5] = variable[0];
   if (once_bool_37) variable[6] = once_value_37;
   else {
@@ -638,7 +638,7 @@ void lexer___TKwattr___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label36: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwattr].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwattr].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -666,7 +666,7 @@ void lexer___TKwinit___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwinit].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwinit].i]) return;
   variable[5] = variable[0];
   if (once_bool_40) variable[6] = once_value_40;
   else {
@@ -682,7 +682,7 @@ void lexer___TKwinit___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label39: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwinit].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwinit].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -710,7 +710,7 @@ void lexer___TKwredef___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwredef].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwredef].i]) return;
   variable[5] = variable[0];
   if (once_bool_43) variable[6] = once_value_43;
   else {
@@ -726,7 +726,7 @@ void lexer___TKwredef___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label42: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwredef].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwredef].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -754,7 +754,7 @@ void lexer___TKwis___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwis].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwis].i]) return;
   variable[5] = variable[0];
   if (once_bool_46) variable[6] = once_value_46;
   else {
@@ -770,7 +770,7 @@ void lexer___TKwis___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label45: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwis].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwis].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -798,7 +798,7 @@ void lexer___TKwdo___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwdo].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwdo].i]) return;
   variable[5] = variable[0];
   if (once_bool_49) variable[6] = once_value_49;
   else {
@@ -814,7 +814,7 @@ void lexer___TKwdo___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label48: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwdo].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwdo].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -842,7 +842,7 @@ void lexer___TKwreadable___init_tk(val_t  self, val_t  param0, val_t  param1, va
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwreadable].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwreadable].i]) return;
   variable[5] = variable[0];
   if (once_bool_52) variable[6] = once_value_52;
   else {
@@ -858,7 +858,7 @@ void lexer___TKwreadable___init_tk(val_t  self, val_t  param0, val_t  param1, va
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label51: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwreadable].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwreadable].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -886,7 +886,7 @@ void lexer___TKwwritable___init_tk(val_t  self, val_t  param0, val_t  param1, va
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwwritable].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwwritable].i]) return;
   variable[5] = variable[0];
   if (once_bool_55) variable[6] = once_value_55;
   else {
@@ -902,7 +902,7 @@ void lexer___TKwwritable___init_tk(val_t  self, val_t  param0, val_t  param1, va
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label54: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwwritable].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwwritable].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -930,7 +930,7 @@ void lexer___TKwvar___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwvar].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwvar].i]) return;
   variable[5] = variable[0];
   if (once_bool_58) variable[6] = once_value_58;
   else {
@@ -946,7 +946,7 @@ void lexer___TKwvar___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label57: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwvar].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwvar].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -974,7 +974,7 @@ void lexer___TKwintern___init_tk(val_t  self, val_t  param0, val_t  param1, val_
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwintern].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwintern].i]) return;
   variable[5] = variable[0];
   if (once_bool_61) variable[6] = once_value_61;
   else {
@@ -990,7 +990,7 @@ void lexer___TKwintern___init_tk(val_t  self, val_t  param0, val_t  param1, val_
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label60: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwintern].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwintern].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1018,7 +1018,7 @@ void lexer___TKwextern___init_tk(val_t  self, val_t  param0, val_t  param1, val_
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwextern].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwextern].i]) return;
   variable[5] = variable[0];
   if (once_bool_64) variable[6] = once_value_64;
   else {
@@ -1034,7 +1034,7 @@ void lexer___TKwextern___init_tk(val_t  self, val_t  param0, val_t  param1, val_
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label63: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwextern].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwextern].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1062,7 +1062,7 @@ void lexer___TKwprotected___init_tk(val_t  self, val_t  param0, val_t  param1, v
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwprotected].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwprotected].i]) return;
   variable[5] = variable[0];
   if (once_bool_67) variable[6] = once_value_67;
   else {
@@ -1078,7 +1078,7 @@ void lexer___TKwprotected___init_tk(val_t  self, val_t  param0, val_t  param1, v
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label66: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwprotected].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwprotected].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1106,7 +1106,7 @@ void lexer___TKwprivate___init_tk(val_t  self, val_t  param0, val_t  param1, val
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwprivate].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwprivate].i]) return;
   variable[5] = variable[0];
   if (once_bool_70) variable[6] = once_value_70;
   else {
@@ -1122,7 +1122,7 @@ void lexer___TKwprivate___init_tk(val_t  self, val_t  param0, val_t  param1, val
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label69: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwprivate].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwprivate].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1150,7 +1150,7 @@ void lexer___TKwintrude___init_tk(val_t  self, val_t  param0, val_t  param1, val
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwintrude].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwintrude].i]) return;
   variable[5] = variable[0];
   if (once_bool_73) variable[6] = once_value_73;
   else {
@@ -1166,7 +1166,7 @@ void lexer___TKwintrude___init_tk(val_t  self, val_t  param0, val_t  param1, val
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label72: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwintrude].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwintrude].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1194,7 +1194,7 @@ void lexer___TKwif___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwif].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwif].i]) return;
   variable[5] = variable[0];
   if (once_bool_76) variable[6] = once_value_76;
   else {
@@ -1210,7 +1210,7 @@ void lexer___TKwif___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label75: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwif].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwif].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1238,7 +1238,7 @@ void lexer___TKwthen___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwthen].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwthen].i]) return;
   variable[5] = variable[0];
   if (once_bool_79) variable[6] = once_value_79;
   else {
@@ -1254,7 +1254,7 @@ void lexer___TKwthen___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label78: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwthen].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwthen].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1282,7 +1282,7 @@ void lexer___TKwelse___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwelse].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwelse].i]) return;
   variable[5] = variable[0];
   if (once_bool_82) variable[6] = once_value_82;
   else {
@@ -1298,7 +1298,7 @@ void lexer___TKwelse___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label81: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwelse].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwelse].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1326,7 +1326,7 @@ void lexer___TKwwhile___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwwhile].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwwhile].i]) return;
   variable[5] = variable[0];
   if (once_bool_85) variable[6] = once_value_85;
   else {
@@ -1342,7 +1342,7 @@ void lexer___TKwwhile___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label84: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwwhile].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwwhile].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1370,7 +1370,7 @@ void lexer___TKwfor___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwfor].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwfor].i]) return;
   variable[5] = variable[0];
   if (once_bool_88) variable[6] = once_value_88;
   else {
@@ -1386,7 +1386,7 @@ void lexer___TKwfor___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label87: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwfor].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwfor].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1414,7 +1414,7 @@ void lexer___TKwin___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwin].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwin].i]) return;
   variable[5] = variable[0];
   if (once_bool_91) variable[6] = once_value_91;
   else {
@@ -1430,7 +1430,7 @@ void lexer___TKwin___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label90: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwin].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwin].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1458,7 +1458,7 @@ void lexer___TKwand___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwand].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwand].i]) return;
   variable[5] = variable[0];
   if (once_bool_94) variable[6] = once_value_94;
   else {
@@ -1474,7 +1474,7 @@ void lexer___TKwand___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label93: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwand].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwand].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1502,7 +1502,7 @@ void lexer___TKwor___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwor].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwor].i]) return;
   variable[5] = variable[0];
   if (once_bool_97) variable[6] = once_value_97;
   else {
@@ -1518,7 +1518,7 @@ void lexer___TKwor___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label96: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwor].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwor].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1546,7 +1546,7 @@ void lexer___TKwnot___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwnot].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwnot].i]) return;
   variable[5] = variable[0];
   if (once_bool_100) variable[6] = once_value_100;
   else {
@@ -1562,7 +1562,7 @@ void lexer___TKwnot___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label99: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwnot].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwnot].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1590,7 +1590,7 @@ void lexer___TKwreturn___init_tk(val_t  self, val_t  param0, val_t  param1, val_
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwreturn].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwreturn].i]) return;
   variable[5] = variable[0];
   if (once_bool_103) variable[6] = once_value_103;
   else {
@@ -1606,7 +1606,7 @@ void lexer___TKwreturn___init_tk(val_t  self, val_t  param0, val_t  param1, val_
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label102: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwreturn].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwreturn].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1634,7 +1634,7 @@ void lexer___TKwcontinue___init_tk(val_t  self, val_t  param0, val_t  param1, va
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwcontinue].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwcontinue].i]) return;
   variable[5] = variable[0];
   if (once_bool_106) variable[6] = once_value_106;
   else {
@@ -1650,7 +1650,7 @@ void lexer___TKwcontinue___init_tk(val_t  self, val_t  param0, val_t  param1, va
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label105: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwcontinue].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwcontinue].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1678,7 +1678,7 @@ void lexer___TKwbreak___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwbreak].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwbreak].i]) return;
   variable[5] = variable[0];
   if (once_bool_109) variable[6] = once_value_109;
   else {
@@ -1694,7 +1694,7 @@ void lexer___TKwbreak___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label108: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwbreak].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwbreak].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1722,7 +1722,7 @@ void lexer___TKwabort___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwabort].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwabort].i]) return;
   variable[5] = variable[0];
   if (once_bool_112) variable[6] = once_value_112;
   else {
@@ -1738,7 +1738,7 @@ void lexer___TKwabort___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label111: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwabort].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwabort].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1766,7 +1766,7 @@ void lexer___TKwassert___init_tk(val_t  self, val_t  param0, val_t  param1, val_
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwassert].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwassert].i]) return;
   variable[5] = variable[0];
   if (once_bool_115) variable[6] = once_value_115;
   else {
@@ -1782,7 +1782,7 @@ void lexer___TKwassert___init_tk(val_t  self, val_t  param0, val_t  param1, val_
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label114: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwassert].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwassert].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1810,7 +1810,7 @@ void lexer___TKwnew___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwnew].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwnew].i]) return;
   variable[5] = variable[0];
   if (once_bool_118) variable[6] = once_value_118;
   else {
@@ -1826,7 +1826,7 @@ void lexer___TKwnew___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label117: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwnew].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwnew].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1854,7 +1854,7 @@ void lexer___TKwisa___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwisa].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwisa].i]) return;
   variable[5] = variable[0];
   if (once_bool_121) variable[6] = once_value_121;
   else {
@@ -1870,7 +1870,7 @@ void lexer___TKwisa___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label120: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwisa].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwisa].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1898,7 +1898,7 @@ void lexer___TKwonce___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwonce].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwonce].i]) return;
   variable[5] = variable[0];
   if (once_bool_124) variable[6] = once_value_124;
   else {
@@ -1914,7 +1914,7 @@ void lexer___TKwonce___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label123: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwonce].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwonce].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1942,7 +1942,7 @@ void lexer___TKwsuper___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwsuper].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwsuper].i]) return;
   variable[5] = variable[0];
   if (once_bool_127) variable[6] = once_value_127;
   else {
@@ -1958,7 +1958,7 @@ void lexer___TKwsuper___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label126: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwsuper].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwsuper].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1986,7 +1986,7 @@ void lexer___TKwself___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwself].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwself].i]) return;
   variable[5] = variable[0];
   if (once_bool_130) variable[6] = once_value_130;
   else {
@@ -2002,7 +2002,7 @@ void lexer___TKwself___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label129: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwself].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwself].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2030,7 +2030,7 @@ void lexer___TKwtrue___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwtrue].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwtrue].i]) return;
   variable[5] = variable[0];
   if (once_bool_133) variable[6] = once_value_133;
   else {
@@ -2046,7 +2046,7 @@ void lexer___TKwtrue___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label132: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwtrue].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwtrue].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2074,7 +2074,7 @@ void lexer___TKwfalse___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwfalse].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwfalse].i]) return;
   variable[5] = variable[0];
   if (once_bool_136) variable[6] = once_value_136;
   else {
@@ -2090,7 +2090,7 @@ void lexer___TKwfalse___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label135: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwfalse].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwfalse].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2118,7 +2118,7 @@ void lexer___TKwnull___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwnull].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwnull].i]) return;
   variable[5] = variable[0];
   if (once_bool_139) variable[6] = once_value_139;
   else {
@@ -2134,7 +2134,7 @@ void lexer___TKwnull___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label138: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwnull].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwnull].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2162,7 +2162,7 @@ void lexer___TKwas___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwas].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwas].i]) return;
   variable[5] = variable[0];
   if (once_bool_142) variable[6] = once_value_142;
   else {
@@ -2178,7 +2178,7 @@ void lexer___TKwas___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label141: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwas].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwas].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2206,7 +2206,7 @@ void lexer___TKwwith___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwwith].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwwith].i]) return;
   variable[5] = variable[0];
   if (once_bool_145) variable[6] = once_value_145;
   else {
@@ -2222,7 +2222,7 @@ void lexer___TKwwith___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label144: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TKwwith].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TKwwith].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2250,7 +2250,7 @@ void lexer___TOpar___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TOpar].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TOpar].i]) return;
   variable[5] = variable[0];
   if (once_bool_148) variable[6] = once_value_148;
   else {
@@ -2266,7 +2266,7 @@ void lexer___TOpar___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label147: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TOpar].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TOpar].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2294,7 +2294,7 @@ void lexer___TCpar___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TCpar].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TCpar].i]) return;
   variable[5] = variable[0];
   if (once_bool_151) variable[6] = once_value_151;
   else {
@@ -2310,7 +2310,7 @@ void lexer___TCpar___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label150: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TCpar].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TCpar].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2338,7 +2338,7 @@ void lexer___TObra___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TObra].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TObra].i]) return;
   variable[5] = variable[0];
   if (once_bool_154) variable[6] = once_value_154;
   else {
@@ -2354,7 +2354,7 @@ void lexer___TObra___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label153: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TObra].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TObra].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2382,7 +2382,7 @@ void lexer___TCbra___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TCbra].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TCbra].i]) return;
   variable[5] = variable[0];
   if (once_bool_157) variable[6] = once_value_157;
   else {
@@ -2398,7 +2398,7 @@ void lexer___TCbra___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label156: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TCbra].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TCbra].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2426,7 +2426,7 @@ void lexer___TComma___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TComma].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TComma].i]) return;
   variable[5] = variable[0];
   if (once_bool_160) variable[6] = once_value_160;
   else {
@@ -2442,7 +2442,7 @@ void lexer___TComma___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label159: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TComma].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TComma].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2470,7 +2470,7 @@ void lexer___TColumn___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TColumn].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TColumn].i]) return;
   variable[5] = variable[0];
   if (once_bool_163) variable[6] = once_value_163;
   else {
@@ -2486,7 +2486,7 @@ void lexer___TColumn___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label162: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TColumn].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TColumn].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2514,7 +2514,7 @@ void lexer___TQuad___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TQuad].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TQuad].i]) return;
   variable[5] = variable[0];
   if (once_bool_166) variable[6] = once_value_166;
   else {
@@ -2530,7 +2530,7 @@ void lexer___TQuad___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label165: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TQuad].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TQuad].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2558,7 +2558,7 @@ void lexer___TAssign___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TAssign].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TAssign].i]) return;
   variable[5] = variable[0];
   if (once_bool_169) variable[6] = once_value_169;
   else {
@@ -2574,7 +2574,7 @@ void lexer___TAssign___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label168: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TAssign].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TAssign].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2602,7 +2602,7 @@ void lexer___TPluseq___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TPluseq].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TPluseq].i]) return;
   variable[5] = variable[0];
   if (once_bool_172) variable[6] = once_value_172;
   else {
@@ -2618,7 +2618,7 @@ void lexer___TPluseq___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label171: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TPluseq].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TPluseq].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2646,7 +2646,7 @@ void lexer___TMinuseq___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TMinuseq].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TMinuseq].i]) return;
   variable[5] = variable[0];
   if (once_bool_175) variable[6] = once_value_175;
   else {
@@ -2662,7 +2662,7 @@ void lexer___TMinuseq___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label174: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TMinuseq].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TMinuseq].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2690,7 +2690,7 @@ void lexer___TDotdotdot___init_tk(val_t  self, val_t  param0, val_t  param1, val
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TDotdotdot].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TDotdotdot].i]) return;
   variable[5] = variable[0];
   if (once_bool_178) variable[6] = once_value_178;
   else {
@@ -2706,7 +2706,7 @@ void lexer___TDotdotdot___init_tk(val_t  self, val_t  param0, val_t  param1, val
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label177: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TDotdotdot].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TDotdotdot].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2734,7 +2734,7 @@ void lexer___TDotdot___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TDotdot].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TDotdot].i]) return;
   variable[5] = variable[0];
   if (once_bool_181) variable[6] = once_value_181;
   else {
@@ -2750,7 +2750,7 @@ void lexer___TDotdot___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label180: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TDotdot].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TDotdot].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2778,7 +2778,7 @@ void lexer___TDot___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  pa
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TDot].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TDot].i]) return;
   variable[5] = variable[0];
   if (once_bool_184) variable[6] = once_value_184;
   else {
@@ -2794,7 +2794,7 @@ void lexer___TDot___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  pa
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label183: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TDot].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TDot].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2822,7 +2822,7 @@ void lexer___TPlus___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TPlus].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TPlus].i]) return;
   variable[5] = variable[0];
   if (once_bool_187) variable[6] = once_value_187;
   else {
@@ -2838,7 +2838,7 @@ void lexer___TPlus___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label186: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TPlus].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TPlus].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2866,7 +2866,7 @@ void lexer___TMinus___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TMinus].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TMinus].i]) return;
   variable[5] = variable[0];
   if (once_bool_190) variable[6] = once_value_190;
   else {
@@ -2882,7 +2882,7 @@ void lexer___TMinus___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label189: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TMinus].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TMinus].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2910,7 +2910,7 @@ void lexer___TStar___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TStar].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TStar].i]) return;
   variable[5] = variable[0];
   if (once_bool_193) variable[6] = once_value_193;
   else {
@@ -2926,7 +2926,7 @@ void lexer___TStar___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label192: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TStar].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TStar].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2954,7 +2954,7 @@ void lexer___TSlash___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TSlash].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TSlash].i]) return;
   variable[5] = variable[0];
   if (once_bool_196) variable[6] = once_value_196;
   else {
@@ -2970,7 +2970,7 @@ void lexer___TSlash___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label195: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TSlash].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TSlash].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2998,7 +2998,7 @@ void lexer___TPercent___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TPercent].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TPercent].i]) return;
   variable[5] = variable[0];
   if (once_bool_199) variable[6] = once_value_199;
   else {
@@ -3014,7 +3014,7 @@ void lexer___TPercent___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label198: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TPercent].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TPercent].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3042,7 +3042,7 @@ void lexer___TEq___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  par
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TEq].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TEq].i]) return;
   variable[5] = variable[0];
   if (once_bool_202) variable[6] = once_value_202;
   else {
@@ -3058,7 +3058,7 @@ void lexer___TEq___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  par
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label201: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TEq].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TEq].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3086,7 +3086,7 @@ void lexer___TNe___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  par
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TNe].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TNe].i]) return;
   variable[5] = variable[0];
   if (once_bool_205) variable[6] = once_value_205;
   else {
@@ -3102,7 +3102,7 @@ void lexer___TNe___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  par
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label204: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TNe].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TNe].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3130,7 +3130,7 @@ void lexer___TLt___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  par
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TLt].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TLt].i]) return;
   variable[5] = variable[0];
   if (once_bool_208) variable[6] = once_value_208;
   else {
@@ -3146,7 +3146,7 @@ void lexer___TLt___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  par
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label207: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TLt].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TLt].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3174,7 +3174,7 @@ void lexer___TLe___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  par
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TLe].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TLe].i]) return;
   variable[5] = variable[0];
   if (once_bool_211) variable[6] = once_value_211;
   else {
@@ -3190,7 +3190,7 @@ void lexer___TLe___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  par
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label210: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TLe].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TLe].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3218,7 +3218,7 @@ void lexer___TGt___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  par
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TGt].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TGt].i]) return;
   variable[5] = variable[0];
   if (once_bool_214) variable[6] = once_value_214;
   else {
@@ -3234,7 +3234,7 @@ void lexer___TGt___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  par
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label213: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TGt].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TGt].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3262,7 +3262,7 @@ void lexer___TGe___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  par
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TGe].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TGe].i]) return;
   variable[5] = variable[0];
   if (once_bool_217) variable[6] = once_value_217;
   else {
@@ -3278,7 +3278,7 @@ void lexer___TGe___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  par
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label216: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TGe].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TGe].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3306,7 +3306,7 @@ void lexer___TStarship___init_tk(val_t  self, val_t  param0, val_t  param1, val_
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TStarship].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TStarship].i]) return;
   variable[5] = variable[0];
   if (once_bool_220) variable[6] = once_value_220;
   else {
@@ -3322,7 +3322,7 @@ void lexer___TStarship___init_tk(val_t  self, val_t  param0, val_t  param1, val_
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label219: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TStarship].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TStarship].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3350,7 +3350,7 @@ void lexer___TClassid___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[2] =  param1;
   variable[3] =  param2;
   variable[4] =  param3;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TClassid].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TClassid].i]) return;
   variable[6] = variable[0];
   ATTR_lexer___Token____text(variable[6]) /*Token::_text*/ =  variable[1] /*text*/;
   variable[6] = variable[0];
@@ -3360,7 +3360,7 @@ void lexer___TClassid___init_tk(val_t  self, val_t  param0, val_t  param1, val_t
   variable[6] = variable[0];
   ATTR_lexer___Token____pos(variable[6]) /*Token::_pos*/ =  variable[4] /*pos*/;
   return_label222: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TClassid].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TClassid].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3388,7 +3388,7 @@ void lexer___TId___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  par
   variable[2] =  param1;
   variable[3] =  param2;
   variable[4] =  param3;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TId].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TId].i]) return;
   variable[6] = variable[0];
   ATTR_lexer___Token____text(variable[6]) /*Token::_text*/ =  variable[1] /*text*/;
   variable[6] = variable[0];
@@ -3398,7 +3398,7 @@ void lexer___TId___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  par
   variable[6] = variable[0];
   ATTR_lexer___Token____pos(variable[6]) /*Token::_pos*/ =  variable[4] /*pos*/;
   return_label224: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TId].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TId].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3426,7 +3426,7 @@ void lexer___TAttrid___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[2] =  param1;
   variable[3] =  param2;
   variable[4] =  param3;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TAttrid].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TAttrid].i]) return;
   variable[6] = variable[0];
   ATTR_lexer___Token____text(variable[6]) /*Token::_text*/ =  variable[1] /*text*/;
   variable[6] = variable[0];
@@ -3436,7 +3436,7 @@ void lexer___TAttrid___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[6] = variable[0];
   ATTR_lexer___Token____pos(variable[6]) /*Token::_pos*/ =  variable[4] /*pos*/;
   return_label226: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TAttrid].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TAttrid].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3464,7 +3464,7 @@ void lexer___TNumber___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[2] =  param1;
   variable[3] =  param2;
   variable[4] =  param3;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TNumber].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TNumber].i]) return;
   variable[6] = variable[0];
   ATTR_lexer___Token____text(variable[6]) /*Token::_text*/ =  variable[1] /*text*/;
   variable[6] = variable[0];
@@ -3474,7 +3474,7 @@ void lexer___TNumber___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[6] = variable[0];
   ATTR_lexer___Token____pos(variable[6]) /*Token::_pos*/ =  variable[4] /*pos*/;
   return_label228: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TNumber].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TNumber].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3502,7 +3502,7 @@ void lexer___TFloat___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[2] =  param1;
   variable[3] =  param2;
   variable[4] =  param3;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TFloat].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TFloat].i]) return;
   variable[6] = variable[0];
   ATTR_lexer___Token____text(variable[6]) /*Token::_text*/ =  variable[1] /*text*/;
   variable[6] = variable[0];
@@ -3512,7 +3512,7 @@ void lexer___TFloat___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[6] = variable[0];
   ATTR_lexer___Token____pos(variable[6]) /*Token::_pos*/ =  variable[4] /*pos*/;
   return_label230: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TFloat].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TFloat].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3540,7 +3540,7 @@ void lexer___TChar___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[2] =  param1;
   variable[3] =  param2;
   variable[4] =  param3;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TChar].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TChar].i]) return;
   variable[6] = variable[0];
   ATTR_lexer___Token____text(variable[6]) /*Token::_text*/ =  variable[1] /*text*/;
   variable[6] = variable[0];
@@ -3550,7 +3550,7 @@ void lexer___TChar___init_tk(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[6] = variable[0];
   ATTR_lexer___Token____pos(variable[6]) /*Token::_pos*/ =  variable[4] /*pos*/;
   return_label232: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TChar].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TChar].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3578,7 +3578,7 @@ void lexer___TString___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[2] =  param1;
   variable[3] =  param2;
   variable[4] =  param3;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TString].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TString].i]) return;
   variable[6] = variable[0];
   ATTR_lexer___Token____text(variable[6]) /*Token::_text*/ =  variable[1] /*text*/;
   variable[6] = variable[0];
@@ -3588,7 +3588,7 @@ void lexer___TString___init_tk(val_t  self, val_t  param0, val_t  param1, val_t 
   variable[6] = variable[0];
   ATTR_lexer___Token____pos(variable[6]) /*Token::_pos*/ =  variable[4] /*pos*/;
   return_label234: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TString].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TString].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3616,7 +3616,7 @@ void lexer___TStartString___init_tk(val_t  self, val_t  param0, val_t  param1, v
   variable[2] =  param1;
   variable[3] =  param2;
   variable[4] =  param3;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TStartString].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TStartString].i]) return;
   variable[6] = variable[0];
   ATTR_lexer___Token____text(variable[6]) /*Token::_text*/ =  variable[1] /*text*/;
   variable[6] = variable[0];
@@ -3626,7 +3626,7 @@ void lexer___TStartString___init_tk(val_t  self, val_t  param0, val_t  param1, v
   variable[6] = variable[0];
   ATTR_lexer___Token____pos(variable[6]) /*Token::_pos*/ =  variable[4] /*pos*/;
   return_label236: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TStartString].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TStartString].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3654,7 +3654,7 @@ void lexer___TMidString___init_tk(val_t  self, val_t  param0, val_t  param1, val
   variable[2] =  param1;
   variable[3] =  param2;
   variable[4] =  param3;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TMidString].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TMidString].i]) return;
   variable[6] = variable[0];
   ATTR_lexer___Token____text(variable[6]) /*Token::_text*/ =  variable[1] /*text*/;
   variable[6] = variable[0];
@@ -3664,7 +3664,7 @@ void lexer___TMidString___init_tk(val_t  self, val_t  param0, val_t  param1, val
   variable[6] = variable[0];
   ATTR_lexer___Token____pos(variable[6]) /*Token::_pos*/ =  variable[4] /*pos*/;
   return_label238: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TMidString].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TMidString].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3692,7 +3692,7 @@ void lexer___TEndString___init_tk(val_t  self, val_t  param0, val_t  param1, val
   variable[2] =  param1;
   variable[3] =  param2;
   variable[4] =  param3;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TEndString].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TEndString].i]) return;
   variable[6] = variable[0];
   ATTR_lexer___Token____text(variable[6]) /*Token::_text*/ =  variable[1] /*text*/;
   variable[6] = variable[0];
@@ -3702,7 +3702,7 @@ void lexer___TEndString___init_tk(val_t  self, val_t  param0, val_t  param1, val
   variable[6] = variable[0];
   ATTR_lexer___Token____pos(variable[6]) /*Token::_pos*/ =  variable[4] /*pos*/;
   return_label240: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TEndString].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TEndString].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3729,7 +3729,7 @@ void lexer___EOF___init(val_t  self, val_t  param0, val_t  param1, val_t  param2
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_EOF].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_EOF].i]) return;
   variable[5] = variable[0];
   ATTR_lexer___Token____filename(variable[5]) /*Token::_filename*/ =  variable[1] /*fname*/;
   variable[5] = variable[0];
@@ -3740,7 +3740,7 @@ void lexer___EOF___init(val_t  self, val_t  param0, val_t  param1, val_t  param2
   variable[5] = variable[0];
   ATTR_lexer___Token____pos(variable[5]) /*Token::_pos*/ =  variable[3] /*pos*/;
   return_label242: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_EOF].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_EOF].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3774,13 +3774,13 @@ void lexer___PError___init_error(val_t  self, val_t  param0, val_t  param1, val_
   variable[2] =  param1;
   variable[3] =  param2;
   variable[4] =  param3;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_PError].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PError].i]) return;
   variable[6] = variable[0];
   ((lexer___EOF___init_t)CALL(variable[6],COLOR_lexer___EOF___init))(variable[6],  variable[1] /*fname*/,  variable[2] /*line*/,  variable[3] /*pos*/, init_table /*YYY*/) /*EOF::init*/;
   variable[6] = variable[0];
   ATTR_lexer___PError____message(variable[6]) /*PError::_message*/ =  variable[4] /*message*/;
   return_label243: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_PError].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PError].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -3815,7 +3815,7 @@ void lexer___Lexer___init(val_t  self, val_t  param0, val_t  param1, int* init_t
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Lexer].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Lexer].i]) return;
   variable[4] = variable[0];
   ATTR_lexer___Lexer____filename(variable[4]) /*Lexer::_filename*/ =  variable[2] /*fname*/;
   variable[4] = variable[0];
@@ -3834,7 +3834,7 @@ void lexer___Lexer___init(val_t  self, val_t  param0, val_t  param1, int* init_t
   variable[4] = variable[0];
   ((lexer___Lexer___build_accept_table_t)CALL(variable[4],COLOR_lexer___Lexer___build_accept_table))(variable[4]) /*Lexer::build_accept_table*/;
   return_label245: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Lexer].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Lexer].i] = 1;
   tracehead = trace.prev;
   return;
 }

@@ -139,14 +139,14 @@ void compiling_global___GlobalAnalysis___init(val_t  self, val_t  param0, int* i
   trace.file = LOCATE_compiling_global;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_GlobalAnalysis].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_GlobalAnalysis].i]) return;
   variable[3] = variable[0];
   variable[4] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[MMGlobalClass, CompiledClass]*/
   ATTR_compiling_global___GlobalAnalysis____compiled_classes(variable[3]) /*GlobalAnalysis::_compiled_classes*/ = variable[4];
   variable[3] = variable[0];
   ATTR_compiling_global___GlobalAnalysis____module(variable[3]) /*GlobalAnalysis::_module*/ =  variable[1] /*module*/;
   return_label4: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_GlobalAnalysis].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_GlobalAnalysis].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -281,11 +281,11 @@ void compiling_global___CompiledClass___init(val_t  self, val_t  param0, int* in
   trace.file = LOCATE_compiling_global;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_CompiledClass].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_CompiledClass].i]) return;
   variable[3] = variable[0];
   ATTR_compiling_global___CompiledClass____local_class(variable[3]) /*CompiledClass::_local_class*/ =  variable[1] /*c*/;
   return_label5: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_CompiledClass].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_CompiledClass].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1760,11 +1760,11 @@ void compiling_global___TableEltPropPos___init(val_t  self, val_t  param0, int* 
   trace.file = LOCATE_compiling_global;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltPropPos].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltPropPos].i]) return;
   variable[3] = variable[0];
   ATTR_compiling_global___TableEltPropPos____property(variable[3]) /*TableEltPropPos::_property*/ =  variable[1] /*p*/;
   return_label56: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltPropPos].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltPropPos].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1797,10 +1797,10 @@ void compiling_global___TableEltMethPos___init(val_t  self, val_t  param0, int* 
   trace.file = LOCATE_compiling_global;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltMethPos].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltMethPos].i]) return;
   ((compiling_global___TableEltPropPos___init_t)CALL(variable[0],COLOR_compiling_global___TableEltPropPos___init))(variable[0], variable[1], init_table /*YYY*/) /*TableEltPropPos::init*/;
   return_label58: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltMethPos].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltMethPos].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1886,10 +1886,10 @@ void compiling_global___TableEltSuperPos___init(val_t  self, val_t  param0, int*
   trace.file = LOCATE_compiling_global;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltSuperPos].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltSuperPos].i]) return;
   ((compiling_global___TableEltPropPos___init_t)CALL(variable[0],COLOR_compiling_global___TableEltPropPos___init))(variable[0], variable[1], init_table /*YYY*/) /*TableEltPropPos::init*/;
   return_label62: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltSuperPos].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltSuperPos].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1947,10 +1947,10 @@ void compiling_global___TableEltAttrPos___init(val_t  self, val_t  param0, int* 
   trace.file = LOCATE_compiling_global;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltAttrPos].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltAttrPos].i]) return;
   ((compiling_global___TableEltPropPos___init_t)CALL(variable[0],COLOR_compiling_global___TableEltPropPos___init))(variable[0], variable[1], init_table /*YYY*/) /*TableEltPropPos::init*/;
   return_label64: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltAttrPos].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltAttrPos].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1984,11 +1984,11 @@ void compiling_global___TableEltClassPos___init(val_t  self, val_t  param0, int*
   trace.file = LOCATE_compiling_global;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltClassPos].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltClassPos].i]) return;
   variable[3] = variable[0];
   ATTR_compiling_global___TableEltClassPos____local_class(variable[3]) /*TableEltClassPos::_local_class*/ =  variable[1] /*c*/;
   return_label66: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltClassPos].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltClassPos].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2055,10 +2055,10 @@ void compiling_global___TableEltClassIdPos___init(val_t  self, val_t  param0, in
   trace.file = LOCATE_compiling_global;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltClassIdPos].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltClassIdPos].i]) return;
   ((compiling_global___TableEltClassPos___init_t)CALL(variable[0],COLOR_compiling_global___TableEltClassPos___init))(variable[0], variable[1], init_table /*YYY*/) /*TableEltClassPos::init*/;
   return_label69: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltClassIdPos].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltClassIdPos].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2208,10 +2208,10 @@ void compiling_global___TableEltClassInitTablePos___init(val_t  self, val_t  par
   trace.file = LOCATE_compiling_global;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltClassInitTablePos].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltClassInitTablePos].i]) return;
   ((compiling_global___TableEltClassPos___init_t)CALL(variable[0],COLOR_compiling_global___TableEltClassPos___init))(variable[0], variable[1], init_table /*YYY*/) /*TableEltClassPos::init*/;
   return_label75: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltClassInitTablePos].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltClassInitTablePos].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2329,10 +2329,10 @@ void compiling_global___TableEltClassColorPos___init(val_t  self, val_t  param0,
   trace.file = LOCATE_compiling_global;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltClassColorPos].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltClassColorPos].i]) return;
   ((compiling_global___TableEltClassPos___init_t)CALL(variable[0],COLOR_compiling_global___TableEltClassPos___init))(variable[0], variable[1], init_table /*YYY*/) /*TableEltClassPos::init*/;
   return_label79: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltClassColorPos].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltClassColorPos].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2480,11 +2480,11 @@ void compiling_global___TableEltBaseAttrPos___init(val_t  self, val_t  param0, i
   trace.file = LOCATE_compiling_global;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltBaseAttrPos].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltBaseAttrPos].i]) return;
   variable[3] = variable[0];
   ATTR_compiling_global___TableEltBaseAttrPos____local_class(variable[3]) /*TableEltBaseAttrPos::_local_class*/ =  variable[1] /*c*/;
   return_label83: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltBaseAttrPos].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltBaseAttrPos].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2601,7 +2601,7 @@ void compiling_global___TableEltComposite___init(val_t  self, val_t  param0, int
   trace.file = LOCATE_compiling_global;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltComposite].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltComposite].i]) return;
   variable[3] = variable[0];
   ATTR_compiling_global___TableEltComposite____cc(variable[3]) /*TableEltComposite::_cc*/ =  variable[1] /*cc*/;
   variable[3] = variable[0];
@@ -2611,7 +2611,7 @@ void compiling_global___TableEltComposite___init(val_t  self, val_t  param0, int
   variable[4] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[MMLocalClass, Int]*/
   ATTR_compiling_global___TableEltComposite____offsets(variable[3]) /*TableEltComposite::_offsets*/ = variable[4];
   return_label90: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltComposite].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltComposite].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2676,9 +2676,9 @@ void compiling_global___TableEltClassSelfId___init(val_t  self, int* init_table)
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_compiling_global;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltClassSelfId].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltClassSelfId].i]) return;
   return_label93: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltClassSelfId].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltClassSelfId].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2732,9 +2732,9 @@ void compiling_global___TableEltVftPointer___init(val_t  self, int* init_table) 
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_compiling_global;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltVftPointer].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltVftPointer].i]) return;
   return_label96: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_TableEltVftPointer].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_TableEltVftPointer].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -2761,9 +2761,9 @@ void compiling_global___ClassSorter___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_compiling_global;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ClassSorter].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClassSorter].i]) return;
   return_label98: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ClassSorter].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClassSorter].i] = 1;
   tracehead = trace.prev;
   return;
 }

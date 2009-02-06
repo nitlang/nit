@@ -805,7 +805,7 @@ void hash___HashMap___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashMap].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashMap].i]) return;
   variable[2] = variable[0];
   ATTR_hash___HashCollection____capacity(variable[2]) /*HashCollection::_capacity*/ =  TAG_Int(0);
   variable[2] = variable[0];
@@ -813,7 +813,7 @@ void hash___HashMap___init(val_t  self, int* init_table) {
   variable[2] = variable[0];
   ((hash___HashCollection___enlarge_t)CALL(variable[2],COLOR_hash___HashCollection___enlarge))(variable[2],  TAG_Int(0)) /*HashCollection::enlarge*/;
   return_label31: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashMap].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashMap].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -841,14 +841,14 @@ void hash___HashMapNode___init(val_t  self, val_t  param0, val_t  param1, int* i
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashMapNode].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashMapNode].i]) return;
   ((abstract_collection___Couple___init_t)CALL(variable[0],COLOR_abstract_collection___Couple___init))(variable[0], variable[1], variable[2], init_table /*YYY*/) /*Couple::init*/;
   variable[4] = variable[0];
   ((abstract_collection___Couple___first__eq_t)CALL(variable[4],COLOR_abstract_collection___Couple___first__eq))(variable[4],  variable[1] /*k*/) /*Couple::first=*/;
   variable[4] = variable[0];
   ((abstract_collection___Couple___second__eq_t)CALL(variable[4],COLOR_abstract_collection___Couple___second__eq))(variable[4],  variable[2] /*v*/) /*Couple::second=*/;
   return_label33: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashMapNode].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashMapNode].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -951,14 +951,14 @@ void hash___HashMapIterator___init(val_t  self, val_t  param0, int* init_table) 
   trace.file = LOCATE_hash;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashMapIterator].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashMapIterator].i]) return;
   variable[3] = variable[0];
   ATTR_hash___HashMapIterator____map(variable[3]) /*HashMapIterator::_map*/ =  variable[1] /*map*/;
   variable[3] = variable[0];
   variable[4] = ((hash___HashCollection___first_item_t)CALL( variable[1] /*map*/,COLOR_hash___HashCollection___first_item))( variable[1] /*map*/) /*HashCollection::first_item*/;
   ATTR_hash___HashMapIterator____node(variable[3]) /*HashMapIterator::_node*/ = variable[4];
   return_label39: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashMapIterator].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashMapIterator].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1097,7 +1097,7 @@ void hash___HashSet___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashSet].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashSet].i]) return;
   variable[2] = variable[0];
   ATTR_hash___HashCollection____capacity(variable[2]) /*HashCollection::_capacity*/ =  TAG_Int(0);
   variable[2] = variable[0];
@@ -1105,7 +1105,7 @@ void hash___HashSet___init(val_t  self, int* init_table) {
   variable[2] = variable[0];
   ((hash___HashCollection___enlarge_t)CALL(variable[2],COLOR_hash___HashCollection___enlarge))(variable[2],  TAG_Int(0)) /*HashCollection::enlarge*/;
   return_label47: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashSet].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashSet].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1136,11 +1136,11 @@ void hash___HashSetNode___init(val_t  self, val_t  param0, int* init_table) {
   trace.file = LOCATE_hash;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashSetNode].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashSetNode].i]) return;
   variable[3] = variable[0];
   ATTR_hash___HashSetNode____key(variable[3]) /*HashSetNode::_key*/ =  variable[1] /*e*/;
   return_label48: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashSetNode].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashSetNode].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1206,14 +1206,14 @@ void hash___HashSetIterator___init(val_t  self, val_t  param0, int* init_table) 
   trace.file = LOCATE_hash;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashSetIterator].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashSetIterator].i]) return;
   variable[3] = variable[0];
   ATTR_hash___HashSetIterator____set(variable[3]) /*HashSetIterator::_set*/ =  variable[1] /*set*/;
   variable[3] = variable[0];
   variable[4] = ((hash___HashCollection___first_item_t)CALL( variable[1] /*set*/,COLOR_hash___HashCollection___first_item))( variable[1] /*set*/) /*HashCollection::first_item*/;
   ATTR_hash___HashSetIterator____node(variable[3]) /*HashSetIterator::_node*/ = variable[4];
   return_label52: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_HashSetIterator].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashSetIterator].i] = 1;
   tracehead = trace.prev;
   return;
 }

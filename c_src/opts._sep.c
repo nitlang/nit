@@ -119,7 +119,7 @@ void opts___Option___init_opt(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Option].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Option].i]) return;
   variable[5] = TAG_Bool(( variable[3] /*names*/ ==  NIT_NULL /*null*/) || (( variable[3] /*names*/ != NIT_NULL) && UNTAG_Bool(((array___AbstractArray_____eqeq_t)CALL( variable[3] /*names*/,COLOR_kernel___Object_____eqeq))( variable[3] /*names*/,  NIT_NULL /*null*/) /*AbstractArray::==*/)));
   if (UNTAG_Bool(variable[5])) { /*if*/
     variable[5] = variable[0];
@@ -139,7 +139,7 @@ void opts___Option___init_opt(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[5] = variable[0];
   ATTR_opts___Option____value(variable[5]) /*Option::_value*/ =  variable[2] /*default*/;
   return_label1: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Option].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Option].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -279,11 +279,11 @@ void opts___OptionText___init(val_t  self, val_t  param0, int* init_table) {
   trace.file = LOCATE_opts;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OptionText].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionText].i]) return;
   variable[3] = variable[0];
   ((opts___Option___init_opt_t)CALL(variable[3],COLOR_opts___Option___init_opt))(variable[3],  variable[1] /*text*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/, init_table /*YYY*/) /*Option::init_opt*/;
   return_label7: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OptionText].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionText].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -312,11 +312,11 @@ void opts___OptionBool___init(val_t  self, val_t  param0, val_t  param1, int* in
   /* check if p<Array[String] with p:String */
   if (( param1!=NIT_NULL) && !VAL_ISA( param1, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionBool___init, LOCATE_opts, 95); nit_exit(1); } /*cast Array[String]*/;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OptionBool].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionBool].i]) return;
   variable[4] = variable[0];
   ((opts___Option___init_opt_t)CALL(variable[4],COLOR_opts___Option___init_opt))(variable[4],  variable[1] /*help*/,  TAG_Bool(false),  variable[2] /*names*/, init_table /*YYY*/) /*Option::init_opt*/;
   return_label9: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OptionBool].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionBool].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -340,6 +340,7 @@ void opts___OptionParameter___read_param(val_t  self, val_t  param0) {
     variable[4] = ((opts___OptionParameter___convert_t)CALL(variable[4],COLOR_opts___OptionParameter___convert))(variable[4], variable[5]) /*OptionParameter::convert*/;
     ((opts___Option___value__eq_t)CALL(variable[3],COLOR_opts___Option___value__eq))(variable[3], variable[4]) /*Option::value=*/;
     ((abstract_collection___Iterator___next_t)CALL( variable[1] /*it*/,COLOR_abstract_collection___Iterator___next))( variable[1] /*it*/) /*Iterator::next*/;
+  } else { /*if*/
   }
   return_label10: while(false);
   tracehead = trace.prev;
@@ -367,10 +368,10 @@ void opts___OptionParameter___init_opt(val_t  self, val_t  param0, val_t  param1
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OptionParameter].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionParameter].i]) return;
   ((opts___Option___init_opt_t)CALL(variable[0],COLOR_opts___Option___init_opt))(variable[0], variable[1], variable[2], variable[3], init_table /*YYY*/) /*Option::init_opt*/;
   return_label11: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OptionParameter].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionParameter].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -399,11 +400,11 @@ void opts___OptionString___init(val_t  self, val_t  param0, val_t  param1, int* 
   /* check if p<Array[String] with p:String */
   if (( param1!=NIT_NULL) && !VAL_ISA( param1, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionString___init, LOCATE_opts, 123); nit_exit(1); } /*cast Array[String]*/;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OptionString].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionString].i]) return;
   variable[4] = variable[0];
   ((opts___OptionParameter___init_opt_t)CALL(variable[4],COLOR_opts___OptionParameter___init_opt))(variable[4],  variable[1] /*help*/,  NIT_NULL /*null*/,  variable[2] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
   return_label13: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OptionString].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionString].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -491,7 +492,7 @@ void opts___OptionEnum___init(val_t  self, val_t  param0, val_t  param1, val_t  
   /* check if p<Array[String] with p:String */
   if (( param3!=NIT_NULL) && !VAL_ISA( param3, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionEnum___init, LOCATE_opts, 133); nit_exit(1); } /*cast Array[String]*/;
   variable[4] =  param3;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OptionEnum].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionEnum].i]) return;
   variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*enum*/ ==  NIT_NULL /*null*/) || (( variable[1] /*enum*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*enum*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*enum*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*enum*/,COLOR_kernel___Object_____eqeq))( variable[1] /*enum*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   variable[7] = variable[6];
   if (UNTAG_Bool(variable[7])) { /* and */
@@ -522,7 +523,7 @@ void opts___OptionEnum___init(val_t  self, val_t  param0, val_t  param1, val_t  
   ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[16]) /*String::append*/;
   ((opts___OptionParameter___init_opt_t)CALL(variable[6],COLOR_opts___OptionParameter___init_opt))(variable[6], variable[7],  variable[3] /*default*/,  variable[4] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
   return_label17: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OptionEnum].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionEnum].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -553,11 +554,11 @@ void opts___OptionInt___init(val_t  self, val_t  param0, val_t  param1, val_t  p
   /* check if p<Array[String] with p:String */
   if (( param2!=NIT_NULL) && !VAL_ISA( param2, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionInt___init, LOCATE_opts, 160); nit_exit(1); } /*cast Array[String]*/;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OptionInt].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionInt].i]) return;
   variable[5] = variable[0];
   ((opts___OptionParameter___init_opt_t)CALL(variable[5],COLOR_opts___OptionParameter___init_opt))(variable[5],  variable[1] /*help*/,  variable[2] /*default*/,  variable[3] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
   return_label19: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OptionInt].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionInt].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -591,7 +592,7 @@ void opts___OptionArray___init(val_t  self, val_t  param0, val_t  param1, int* i
   /* check if p<Array[String] with p:String */
   if (( param1!=NIT_NULL) && !VAL_ISA( param1, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionArray___init, LOCATE_opts, 169); nit_exit(1); } /*cast Array[String]*/;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OptionArray].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionArray].i]) return;
   variable[4] = variable[0];
   variable[5] = NEW_Array_array___Array___init(); /*new Array[String]*/
   ATTR_opts___OptionArray____values(variable[4]) /*OptionArray::_values*/ = variable[5];
@@ -600,7 +601,7 @@ void opts___OptionArray___init(val_t  self, val_t  param0, val_t  param1, int* i
   variable[5] = ATTR_opts___OptionArray____values(variable[5]) /*OptionArray::_values*/;
   ((opts___OptionParameter___init_opt_t)CALL(variable[4],COLOR_opts___OptionParameter___init_opt))(variable[4],  variable[1] /*help*/, variable[5],  variable[2] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
   return_label21: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OptionArray].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionArray].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -785,7 +786,7 @@ void opts___OptionContext___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OptionContext].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionContext].i]) return;
   variable[2] = variable[0];
   variable[3] = NEW_Array_array___Array___init(); /*new Array[Option]*/
   ATTR_opts___OptionContext____options(variable[2]) /*OptionContext::_options*/ = variable[3];
@@ -796,7 +797,7 @@ void opts___OptionContext___init(val_t  self, int* init_table) {
   variable[3] = NEW_Array_array___Array___init(); /*new Array[String]*/
   ATTR_opts___OptionContext____rest(variable[2]) /*OptionContext::_rest*/ = variable[3];
   return_label31: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_OptionContext].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionContext].i] = 1;
   tracehead = trace.prev;
   return;
 }

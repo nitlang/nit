@@ -29,7 +29,7 @@ void syntax_base___MMSrcModule___init(val_t  self, val_t  param0, val_t  param1,
   variable[2] =  param1;
   variable[3] =  param2;
   variable[4] =  param3;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSrcModule].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcModule].i]) return;
   ((abstractmetamodel___MMModule___init_t)CALL(variable[0],COLOR_abstractmetamodel___MMModule___init))(variable[0],  variable[4] /*name*/,  variable[3] /*dir*/,  variable[1] /*c*/, init_table /*YYY*/) /*MMModule::init*/;
   variable[6] = variable[0];
   ATTR_syntax_base___MMSrcModule____node(variable[6]) /*MMSrcModule::_node*/ =  variable[2] /*source*/;
@@ -37,7 +37,7 @@ void syntax_base___MMSrcModule___init(val_t  self, val_t  param0, val_t  param1,
   variable[7] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[Symbol, MMSrcLocalClass]*/
   ATTR_syntax_base___MMSrcModule____src_local_classes(variable[6]) /*MMSrcModule::_src_local_classes*/ = variable[7];
   return_label0: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSrcModule].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcModule].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -161,7 +161,7 @@ void syntax_base___MMSrcLocalClass___init(val_t  self, val_t  param0, val_t  par
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSrcLocalClass].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcLocalClass].i]) return;
   ((abstractmetamodel___MMLocalClass___init_t)CALL(variable[0],COLOR_abstractmetamodel___MMLocalClass___init))(variable[0],  variable[1] /*n*/,  variable[3] /*a*/, init_table /*YYY*/) /*MMLocalClass::init*/;
   variable[5] = variable[0];
   variable[6] = NEW_Array_array___Array___with_capacity(TAG_Int(1)); /*new Array[PClassdef]*/
@@ -171,7 +171,7 @@ void syntax_base___MMSrcLocalClass___init(val_t  self, val_t  param0, val_t  par
   variable[6] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[Symbol, MMLocalProperty]*/
   ATTR_syntax_base___MMSrcLocalClass____src_local_properties(variable[5]) /*MMSrcLocalClass::_src_local_properties*/ = variable[6];
   return_label2: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSrcLocalClass].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcLocalClass].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -319,12 +319,12 @@ void syntax_base___MMSrcAttribute___init(val_t  self, val_t  param0, val_t  para
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSrcAttribute].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcAttribute].i]) return;
   ((abstractmetamodel___MMLocalProperty___init_t)CALL(variable[0],COLOR_abstractmetamodel___MMLocalProperty___init))(variable[0],  variable[1] /*name*/,  variable[2] /*cla*/, init_table /*YYY*/) /*MMLocalProperty::init*/;
   variable[5] = variable[0];
   ATTR_syntax_base___MMSrcAttribute____node(variable[5]) /*MMSrcAttribute::_node*/ =  variable[3] /*n*/;
   return_label6: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSrcAttribute].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcAttribute].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -347,12 +347,12 @@ void syntax_base___MMAttrImplementationMethod___init(val_t  self, val_t  param0,
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMAttrImplementationMethod].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMAttrImplementationMethod].i]) return;
   ((abstractmetamodel___MMLocalProperty___init_t)CALL(variable[0],COLOR_abstractmetamodel___MMLocalProperty___init))(variable[0],  variable[1] /*name*/,  variable[2] /*cla*/, init_table /*YYY*/) /*MMLocalProperty::init*/;
   variable[5] = variable[0];
   ATTR_syntax_base___MMAttrImplementationMethod____node(variable[5]) /*MMAttrImplementationMethod::_node*/ =  variable[3] /*n*/;
   return_label7: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMAttrImplementationMethod].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMAttrImplementationMethod].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -366,10 +366,10 @@ void syntax_base___MMReadImplementationMethod___init(val_t  self, val_t  param0,
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMReadImplementationMethod].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMReadImplementationMethod].i]) return;
   ((syntax_base___MMAttrImplementationMethod___init_t)CALL(variable[0],COLOR_syntax_base___MMAttrImplementationMethod___init))(variable[0],  variable[1] /*name*/,  variable[2] /*cla*/,  variable[3] /*n*/, init_table /*YYY*/) /*MMAttrImplementationMethod::init*/;
   return_label8: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMReadImplementationMethod].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMReadImplementationMethod].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -383,10 +383,10 @@ void syntax_base___MMWriteImplementationMethod___init(val_t  self, val_t  param0
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMWriteImplementationMethod].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMWriteImplementationMethod].i]) return;
   ((syntax_base___MMAttrImplementationMethod___init_t)CALL(variable[0],COLOR_syntax_base___MMAttrImplementationMethod___init))(variable[0],  variable[1] /*name*/,  variable[2] /*cla*/,  variable[3] /*n*/, init_table /*YYY*/) /*MMAttrImplementationMethod::init*/;
   return_label9: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMWriteImplementationMethod].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMWriteImplementationMethod].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -425,12 +425,12 @@ void syntax_base___MMMethSrcMethod___init(val_t  self, val_t  param0, val_t  par
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMMethSrcMethod].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMMethSrcMethod].i]) return;
   ((abstractmetamodel___MMLocalProperty___init_t)CALL(variable[0],COLOR_abstractmetamodel___MMLocalProperty___init))(variable[0],  variable[1] /*name*/,  variable[2] /*cla*/, init_table /*YYY*/) /*MMLocalProperty::init*/;
   variable[5] = variable[0];
   ATTR_syntax_base___MMMethSrcMethod____node(variable[5]) /*MMMethSrcMethod::_node*/ =  variable[3] /*n*/;
   return_label11: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMMethSrcMethod].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMMethSrcMethod].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -453,12 +453,12 @@ void syntax_base___MMSrcTypeProperty___init(val_t  self, val_t  param0, val_t  p
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSrcTypeProperty].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcTypeProperty].i]) return;
   ((abstractmetamodel___MMLocalProperty___init_t)CALL(variable[0],COLOR_abstractmetamodel___MMLocalProperty___init))(variable[0],  variable[1] /*name*/,  variable[2] /*cla*/, init_table /*YYY*/) /*MMLocalProperty::init*/;
   variable[5] = variable[0];
   ATTR_syntax_base___MMSrcTypeProperty____node(variable[5]) /*MMSrcTypeProperty::_node*/ =  variable[3] /*n*/;
   return_label12: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSrcTypeProperty].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcTypeProperty].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -504,7 +504,7 @@ void syntax_base___MMImplicitInit___init(val_t  self, val_t  param0, val_t  para
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMImplicitInit].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMImplicitInit].i]) return;
   if (once_bool_15) variable[5] = once_value_15;
   else {
     variable[5] = NEW_String_string___String___with_native(BOX_NativeString("init"), TAG_Int(4)); /*new String*/
@@ -518,7 +518,7 @@ void syntax_base___MMImplicitInit___init(val_t  self, val_t  param0, val_t  para
   variable[5] = variable[0];
   ATTR_syntax_base___MMImplicitInit____super_inits(variable[5]) /*MMImplicitInit::_super_inits*/ =  variable[3] /*super_inits*/;
   return_label14: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMImplicitInit].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMImplicitInit].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -596,13 +596,13 @@ void syntax_base___Variable___init(val_t  self, val_t  param0, val_t  param1, in
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Variable].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Variable].i]) return;
   variable[4] = variable[0];
   ATTR_syntax_base___Variable____name(variable[4]) /*Variable::_name*/ =  variable[1] /*n*/;
   variable[4] = variable[0];
   ATTR_syntax_base___Variable____decl(variable[4]) /*Variable::_decl*/ =  variable[2] /*d*/;
   return_label17: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Variable].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Variable].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -635,10 +635,10 @@ void syntax_base___VarVariable___init(val_t  self, val_t  param0, val_t  param1,
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_VarVariable].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_VarVariable].i]) return;
   ((syntax_base___Variable___init_t)CALL(variable[0],COLOR_syntax_base___Variable___init))(variable[0], variable[1], variable[2], init_table /*YYY*/) /*Variable::init*/;
   return_label20: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_VarVariable].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_VarVariable].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -671,10 +671,10 @@ void syntax_base___ParamVariable___init(val_t  self, val_t  param0, val_t  param
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ParamVariable].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ParamVariable].i]) return;
   ((syntax_base___Variable___init_t)CALL(variable[0],COLOR_syntax_base___Variable___init))(variable[0], variable[1], variable[2], init_table /*YYY*/) /*Variable::init*/;
   return_label23: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ParamVariable].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ParamVariable].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -707,10 +707,10 @@ void syntax_base___AutoVariable___init(val_t  self, val_t  param0, val_t  param1
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_AutoVariable].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_AutoVariable].i]) return;
   ((syntax_base___Variable___init_t)CALL(variable[0],COLOR_syntax_base___Variable___init))(variable[0], variable[1], variable[2], init_table /*YYY*/) /*Variable::init*/;
   return_label26: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_AutoVariable].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_AutoVariable].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -753,12 +753,12 @@ void syntax_base___ClosureVariable___init(val_t  self, val_t  param0, val_t  par
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ClosureVariable].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClosureVariable].i]) return;
   ((syntax_base___Variable___init_t)CALL(variable[0],COLOR_syntax_base___Variable___init))(variable[0],  variable[1] /*n*/,  variable[2] /*d*/, init_table /*YYY*/) /*Variable::init*/;
   variable[5] = variable[0];
   ATTR_syntax_base___ClosureVariable____closure(variable[5]) /*ClosureVariable::_closure*/ =  variable[3] /*c*/;
   return_label29: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ClosureVariable].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClosureVariable].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1276,13 +1276,13 @@ void syntax_base___AbsSyntaxVisitor___init(val_t  self, val_t  param0, val_t  pa
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_AbsSyntaxVisitor].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_AbsSyntaxVisitor].i]) return;
   variable[4] = variable[0];
   ATTR_syntax_base___AbsSyntaxVisitor____tc(variable[4]) /*AbsSyntaxVisitor::_tc*/ =  variable[1] /*tc*/;
   variable[4] = variable[0];
   ATTR_syntax_base___AbsSyntaxVisitor____module(variable[4]) /*AbsSyntaxVisitor::_module*/ =  variable[2] /*module*/;
   return_label55: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_AbsSyntaxVisitor].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_AbsSyntaxVisitor].i] = 1;
   tracehead = trace.prev;
   return;
 }

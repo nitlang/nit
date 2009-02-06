@@ -1134,7 +1134,7 @@ void inheritance___MMImplicitLocalClass___init(val_t  self, val_t  param0, val_t
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMImplicitLocalClass].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMImplicitLocalClass].i]) return;
   variable[5] = ((abstractmetamodel___MMGlobalClass___intro_t)CALL( variable[2] /*g*/,COLOR_abstractmetamodel___MMGlobalClass___intro))( variable[2] /*g*/) /*MMGlobalClass::intro*/;
   variable[4] = variable[5];
   variable[5] = ((abstractmetamodel___MMLocalClass___name_t)CALL( variable[4] /*cla*/,COLOR_abstractmetamodel___MMLocalClass___name))( variable[4] /*cla*/) /*MMLocalClass::name*/;
@@ -1145,7 +1145,7 @@ void inheritance___MMImplicitLocalClass___init(val_t  self, val_t  param0, val_t
   variable[5] = variable[0];
   ((abstractmetamodel___MMLocalClass___set_global_t)CALL(variable[5],COLOR_abstractmetamodel___MMLocalClass___set_global))(variable[5],  variable[2] /*g*/) /*MMLocalClass::set_global*/;
   return_label44: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMImplicitLocalClass].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMImplicitLocalClass].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1167,7 +1167,7 @@ void inheritance___MMRefineAncestor___init(val_t  self, val_t  param0, val_t  pa
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMRefineAncestor].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMRefineAncestor].i]) return;
   variable[4] = variable[0];
   ATTR_inheritance___MMRefineAncestor____local_class(variable[4]) /*MMRefineAncestor::_local_class*/ =  variable[2] /*a*/;
   variable[4] = variable[0];
@@ -1179,7 +1179,7 @@ void inheritance___MMRefineAncestor___init(val_t  self, val_t  param0, val_t  pa
   variable[5] = ((static_type___MMLocalClass___get_type_t)CALL(variable[5],COLOR_static_type___MMLocalClass___get_type))(variable[5]) /*MMLocalClass::get_type*/;
   ((static_type___MMAncestor___stype__eq_t)CALL(variable[4],COLOR_static_type___MMAncestor___stype__eq))(variable[4], variable[5]) /*MMAncestor::stype=*/;
   return_label45: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMRefineAncestor].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMRefineAncestor].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1208,13 +1208,13 @@ void inheritance___MMSpecAncestor___init(val_t  self, val_t  param0, val_t  para
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSpecAncestor].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSpecAncestor].i]) return;
   variable[4] = variable[0];
   ATTR_static_type___MMAncestor____inheriter(variable[4]) /*MMAncestor::_inheriter*/ =  variable[1] /*inheriter*/;
   variable[4] = variable[0];
   ATTR_static_type___MMAncestor____stype(variable[4]) /*MMAncestor::_stype*/ =  variable[2] /*stype*/;
   return_label47: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSpecAncestor].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSpecAncestor].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1243,7 +1243,7 @@ void inheritance___MMDefaultAncestor___init(val_t  self, val_t  param0, val_t  p
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMDefaultAncestor].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMDefaultAncestor].i]) return;
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*b*/ ==  NIT_NULL /*null*/) || (( variable[1] /*b*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*b*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*b*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*b*/,COLOR_kernel___Object_____eqeq))( variable[1] /*b*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMDefaultAncestor___init, LOCATE_inheritance, 458); nit_exit(1);}
   variable[4] = ((abstractmetamodel___MMLocalClass___module_t)CALL( variable[1] /*b*/,COLOR_abstractmetamodel___MMLocalClass___module))( variable[1] /*b*/) /*MMLocalClass::module*/;
@@ -1257,7 +1257,7 @@ void inheritance___MMDefaultAncestor___init(val_t  self, val_t  param0, val_t  p
   variable[4] = variable[0];
   ((static_type___MMAncestor___stype__eq_t)CALL(variable[4],COLOR_static_type___MMAncestor___stype__eq))(variable[4],  variable[2] /*anc*/) /*MMAncestor::stype=*/;
   return_label49: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMDefaultAncestor].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMDefaultAncestor].i] = 1;
   tracehead = trace.prev;
   return;
 }

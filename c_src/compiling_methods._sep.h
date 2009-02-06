@@ -86,20 +86,22 @@ extern const int SFT_compiling_methods[];
 #define COLOR_compiling_methods___MMType___compile_cast SFT_compiling_methods[74]
 #define COLOR_compiling_methods___MMType___compile_type_check SFT_compiling_methods[75]
 #define COLOR_compiling_methods___AMethPropdef___do_compile_inside SFT_compiling_methods[76]
-#define COLOR_compiling_methods___PExpr___compile_expr SFT_compiling_methods[77]
-#define COLOR_compiling_methods___PExpr___prepare_compile_stmt SFT_compiling_methods[78]
-#define COLOR_compiling_methods___PExpr___compile_stmt SFT_compiling_methods[79]
-#define COLOR_compiling_methods___AControlableBlock___compile_inside_block SFT_compiling_methods[80]
-#define COLOR_compiling_methods___AStringFormExpr____cstring SFT_compiling_methods[81]
-#define COLOR_compiling_methods___AStringFormExpr____cstring_length SFT_compiling_methods[82]
-#define COLOR_compiling_methods___AStringFormExpr___string_text SFT_compiling_methods[83]
-#define COLOR_compiling_methods___AStringFormExpr___compute_string_info SFT_compiling_methods[84]
-#define COLOR_compiling_methods___ARangeExpr___propname SFT_compiling_methods[85]
-#define COLOR_compiling_methods___PClosureDef___compile_closure SFT_compiling_methods[86]
-#define COLOR_compiling_methods___PClosureDef___do_compile_inside SFT_compiling_methods[87]
-#define COLOR_compiling_methods___AClosureDef____cname SFT_compiling_methods[88]
-#define COLOR_compiling_methods___AClosureDef___cname SFT_compiling_methods[89]
-#define COLOR_compiling_methods___AClosureDef___decl_csignature SFT_compiling_methods[90]
+#define COLOR_compiling_methods___PSignature___compile_parameters SFT_compiling_methods[77]
+#define COLOR_compiling_methods___PExpr___compile_expr SFT_compiling_methods[78]
+#define COLOR_compiling_methods___PExpr___prepare_compile_stmt SFT_compiling_methods[79]
+#define COLOR_compiling_methods___PExpr___compile_stmt SFT_compiling_methods[80]
+#define COLOR_compiling_methods___AControlableBlock___compile_inside_block SFT_compiling_methods[81]
+#define COLOR_compiling_methods___AStringFormExpr____cstring SFT_compiling_methods[82]
+#define COLOR_compiling_methods___AStringFormExpr____cstring_length SFT_compiling_methods[83]
+#define COLOR_compiling_methods___AStringFormExpr___string_text SFT_compiling_methods[84]
+#define COLOR_compiling_methods___AStringFormExpr___compute_string_info SFT_compiling_methods[85]
+#define COLOR_compiling_methods___ARangeExpr___propname SFT_compiling_methods[86]
+#define COLOR_compiling_methods___PClosureDef___compile_closure SFT_compiling_methods[87]
+#define COLOR_compiling_methods___PClosureDef___do_compile_inside SFT_compiling_methods[88]
+#define COLOR_compiling_methods___AClosureDef____cname SFT_compiling_methods[89]
+#define COLOR_compiling_methods___AClosureDef___cname SFT_compiling_methods[90]
+#define COLOR_compiling_methods___AClosureDef___decl_csignature SFT_compiling_methods[91]
+#define COLOR_compiling_methods___PClosureDecl___do_compile_inside SFT_compiling_methods[92]
 typedef void (* compiling_methods___CompilerVisitor___init_t)(val_t  self, val_t  param0, int* init_table);
 void compiling_methods___CompilerVisitor___init(val_t  self, val_t  param0, int* init_table);
 #define LOCATE_compiling_methods___CompilerVisitor___init "compiling_methods::CompilerVisitor::(compiling_base::CompilerVisitor::init)"
@@ -308,6 +310,16 @@ val_t NEW_AMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, 
 typedef val_t (* compiling_methods___AMethPropdef___do_compile_inside_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 val_t compiling_methods___AMethPropdef___do_compile_inside(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_compiling_methods___AMethPropdef___do_compile_inside "compiling_methods::AMethPropdef::do_compile_inside"
+val_t NEW_PSignature_parser_nodes___PNode___init();
+typedef void (* compiling_methods___PSignature___compile_parameters_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+void compiling_methods___PSignature___compile_parameters(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+#define LOCATE_compiling_methods___PSignature___compile_parameters "compiling_methods::PSignature::compile_parameters"
+val_t NEW_ASignature_parser_nodes___PNode___init();
+val_t NEW_ASignature_parser_prod___ASignature___empty_init();
+val_t NEW_ASignature_parser_prod___ASignature___init_asignature(val_t p0, val_t p1, val_t p2);
+typedef void (* compiling_methods___ASignature___compile_parameters_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+void compiling_methods___ASignature___compile_parameters(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+#define LOCATE_compiling_methods___ASignature___compile_parameters "compiling_methods::ASignature::(compiling_methods::PSignature::compile_parameters)"
 val_t NEW_AConcreteMethPropdef_parser_nodes___PNode___init();
 val_t NEW_AConcreteMethPropdef_parser_prod___AMethPropdef___empty_init();
 val_t NEW_AConcreteMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
@@ -678,6 +690,16 @@ val_t compiling_methods___AClosureDef___cname(val_t  self);
 typedef val_t (* compiling_methods___AClosureDef___decl_csignature_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 val_t compiling_methods___AClosureDef___decl_csignature(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_compiling_methods___AClosureDef___decl_csignature "compiling_methods::AClosureDef::decl_csignature"
+val_t NEW_PClosureDecl_parser_nodes___PNode___init();
+typedef val_t (* compiling_methods___PClosureDecl___do_compile_inside_t)(val_t  self, val_t  param0, val_t  param1);
+val_t compiling_methods___PClosureDecl___do_compile_inside(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_compiling_methods___PClosureDecl___do_compile_inside "compiling_methods::PClosureDecl::do_compile_inside"
+val_t NEW_AClosureDecl_parser_nodes___PNode___init();
+val_t NEW_AClosureDecl_parser_prod___AClosureDecl___empty_init();
+val_t NEW_AClosureDecl_parser_prod___AClosureDecl___init_aclosuredecl(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+typedef val_t (* compiling_methods___AClosureDecl___do_compile_inside_t)(val_t  self, val_t  param0, val_t  param1);
+val_t compiling_methods___AClosureDecl___do_compile_inside(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_compiling_methods___AClosureDecl___do_compile_inside "compiling_methods::AClosureDecl::(compiling_methods::PClosureDecl::do_compile_inside)"
 val_t NEW_AClosureCallExpr_parser_nodes___AClosureCallExpr___init(val_t p0, val_t p1, val_t p2);
 typedef val_t (* compiling_methods___AClosureCallExpr___compile_expr_t)(val_t  self, val_t  param0);
 val_t compiling_methods___AClosureCallExpr___compile_expr(val_t  self, val_t  param0);

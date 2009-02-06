@@ -479,9 +479,9 @@ void list___List___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_List].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_List].i]) return;
   return_label24: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_List].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_List].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -493,11 +493,11 @@ void list___List___from(val_t  self, val_t  param0, int* init_table) {
   trace.file = LOCATE_list;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_List].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_List].i]) return;
   variable[3] = variable[0];
   ((abstract_collection___IndexedCollection___append_t)CALL(variable[3],COLOR_abstract_collection___IndexedCollection___append))(variable[3],  variable[1] /*coll*/) /*IndexedCollection::append*/;
   return_label25: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_List].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_List].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -721,13 +721,13 @@ void list___ListIterator___init(val_t  self, val_t  param0, int* init_table) {
   trace.file = LOCATE_list;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ListIterator].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ListIterator].i]) return;
   variable[3] = variable[0];
   ATTR_list___ListIterator____node(variable[3]) /*ListIterator::_node*/ =  variable[1] /*node*/;
   variable[3] = variable[0];
   ATTR_list___ListIterator____index(variable[3]) /*ListIterator::_index*/ =  TAG_Int(0);
   return_label36: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ListIterator].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ListIterator].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -739,12 +739,12 @@ void list___ListNode___init(val_t  self, val_t  param0, int* init_table) {
   trace.file = LOCATE_list;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ListNode].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ListNode].i]) return;
   ((abstract_collection___Container___init_t)CALL(variable[0],COLOR_abstract_collection___Container___init))(variable[0], variable[1], init_table /*YYY*/) /*Container::init*/;
   variable[3] = variable[0];
   ((abstract_collection___Container___item__eq_t)CALL(variable[3],COLOR_abstract_collection___Container___item__eq))(variable[3],  variable[1] /*i*/) /*Container::item=*/;
   return_label37: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ListNode].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ListNode].i] = 1;
   tracehead = trace.prev;
   return;
 }

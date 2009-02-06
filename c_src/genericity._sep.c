@@ -675,12 +675,12 @@ void genericity___MMTypeGeneric___init(val_t  self, val_t  param0, val_t  param1
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeGeneric].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeGeneric].i]) return;
   ((static_type___MMTypeClass___init_t)CALL(variable[0],COLOR_static_type___MMTypeClass___init))(variable[0],  variable[1] /*c*/, init_table /*YYY*/) /*MMTypeClass::init*/;
   variable[4] = variable[0];
   ATTR_genericity___MMTypeGeneric____params(variable[4]) /*MMTypeGeneric::_params*/ =  variable[2] /*p*/;
   return_label31: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeGeneric].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeGeneric].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -839,13 +839,13 @@ void genericity___MMTypeFormalParameter___with_bound(val_t  self, val_t  param0,
   variable[2] =  param1;
   variable[3] =  param2;
   variable[4] =  param3;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeFormalParameter].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeFormalParameter].i]) return;
   variable[6] = variable[0];
   ((genericity___MMTypeFormalParameter___init_t)CALL(variable[6],COLOR_genericity___MMTypeFormalParameter___init))(variable[6],  variable[1] /*n*/,  variable[2] /*p*/,  variable[3] /*intro*/, init_table /*YYY*/) /*MMTypeFormalParameter::init*/;
   variable[6] = variable[0];
   ATTR_type_formal___MMTypeFormal____bound(variable[6]) /*MMTypeFormal::_bound*/ =  variable[4] /*b*/;
   return_label38: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeFormalParameter].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeFormalParameter].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -859,7 +859,7 @@ void genericity___MMTypeFormalParameter___init(val_t  self, val_t  param0, val_t
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeFormalParameter].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeFormalParameter].i]) return;
   variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*n*/ ==  NIT_NULL /*null*/) || (( variable[1] /*n*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*n*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*n*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*n*/,COLOR_kernel___Object_____eqeq))( variable[1] /*n*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_genericity___MMTypeFormalParameter___init, LOCATE_genericity, 249); nit_exit(1);}
   ((type_formal___MMTypeFormal___init_t)CALL(variable[0],COLOR_type_formal___MMTypeFormal___init))(variable[0],  variable[1] /*n*/,  NIT_NULL /*null*/, init_table /*YYY*/) /*MMTypeFormal::init*/;
@@ -868,7 +868,7 @@ void genericity___MMTypeFormalParameter___init(val_t  self, val_t  param0, val_t
   variable[5] = variable[0];
   ATTR_genericity___MMTypeFormalParameter____def_class(variable[5]) /*MMTypeFormalParameter::_def_class*/ =  variable[3] /*intro*/;
   return_label39: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMTypeFormalParameter].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeFormalParameter].i] = 1;
   tracehead = trace.prev;
   return;
 }

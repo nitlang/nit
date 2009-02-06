@@ -47,13 +47,13 @@ void vararg___MMSignature___init(val_t  self, val_t  param0, val_t  param1, val_
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSignature].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSignature].i]) return;
   ((vararg___MMSignature___init_t)CALL(variable[0],COLOR_SUPER_vararg___MMSignature___init))(variable[0], variable[1], variable[2], variable[3], init_table) /*super MMSignature::init*/;
   variable[5] = variable[0];
   variable[6] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
   ATTR_vararg___MMSignature____vararg_rank(variable[5]) /*MMSignature::_vararg_rank*/ = variable[6];
   return_label2: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMSignature].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSignature].i] = 1;
   tracehead = trace.prev;
   return;
 }

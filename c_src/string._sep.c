@@ -644,11 +644,11 @@ void string___String___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_string;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_String].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_String].i]) return;
   variable[2] = variable[0];
   ((string___String___with_capacity_t)CALL(variable[2],COLOR_string___String___with_capacity))(variable[2],  TAG_Int(5), init_table /*YYY*/) /*String::with_capacity*/;
   return_label28: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_String].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_String].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -660,7 +660,7 @@ void string___String___from(val_t  self, val_t  param0, int* init_table) {
   trace.file = LOCATE_string;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_String].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_String].i]) return;
   variable[3] = variable[0];
   variable[4] = ((array___AbstractArray___length_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Collection___length))( variable[1] /*s*/) /*AbstractArray::length*/;
   variable[4] = TAG_Int(UNTAG_Int(variable[4])+UNTAG_Int( TAG_Int(1)));
@@ -681,7 +681,7 @@ void string___String___from(val_t  self, val_t  param0, int* init_table) {
   variable[5] = ATTR_array___AbstractArray____length(variable[5]) /*AbstractArray::_length*/;
   (void)memcpy(UNBOX_NativeString(variable[4])+UNTAG_Int( TAG_Int(0)), UNBOX_NativeString(variable[3])+UNTAG_Int( TAG_Int(0)), UNTAG_Int(variable[5]));
   return_label29: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_String].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_String].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -693,7 +693,7 @@ void string___String___with_capacity(val_t  self, val_t  param0, int* init_table
   trace.file = LOCATE_string;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_String].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_String].i]) return;
   variable[3] = TAG_Bool(UNTAG_Int( variable[1] /*cap*/)>=UNTAG_Int( TAG_Int(0)));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string___String___with_capacity, LOCATE_string, 248); nit_exit(1);}
   variable[3] = variable[0];
@@ -705,7 +705,7 @@ void string___String___with_capacity(val_t  self, val_t  param0, int* init_table
   variable[3] = variable[0];
   ATTR_array___AbstractArray____length(variable[3]) /*AbstractArray::_length*/ =  TAG_Int(0);
   return_label30: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_String].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_String].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -718,7 +718,7 @@ void string___String___with_native(val_t  self, val_t  param0, val_t  param1, in
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_String].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_String].i]) return;
   variable[4] = TAG_Bool(UNTAG_Int( variable[2] /*size*/)>=UNTAG_Int( TAG_Int(0)));
   if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string___String___with_native, LOCATE_string, 258); nit_exit(1);}
   variable[4] = variable[0];
@@ -728,7 +728,7 @@ void string___String___with_native(val_t  self, val_t  param0, val_t  param1, in
   variable[4] = variable[0];
   ATTR_array___AbstractArray____length(variable[4]) /*AbstractArray::_length*/ =  variable[2] /*size*/;
   return_label31: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_String].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_String].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -740,7 +740,7 @@ void string___String___from_cstring(val_t  self, val_t  param0, int* init_table)
   trace.file = LOCATE_string;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_String].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_String].i]) return;
   variable[4] = ((string___NativeString___cstring_length_t)CALL( variable[1] /*str*/,COLOR_string___NativeString___cstring_length))( variable[1] /*str*/) /*NativeString::cstring_length*/;
   variable[3] = variable[4];
   variable[4] = variable[0];
@@ -751,7 +751,7 @@ void string___String___from_cstring(val_t  self, val_t  param0, int* init_table)
   variable[4] = variable[0];
   ATTR_array___AbstractArray____length(variable[4]) /*AbstractArray::_length*/ =  variable[3] /*size*/;
   return_label32: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_String].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_String].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -764,7 +764,7 @@ void string___String___filled_with(val_t  self, val_t  param0, val_t  param1, in
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_String].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_String].i]) return;
   variable[4] = variable[0];
   ((string___String___with_capacity_t)CALL(variable[4],COLOR_string___String___with_capacity))(variable[4],  variable[2] /*count*/, init_table /*YYY*/) /*String::with_capacity*/;
   variable[4] =  TAG_Int(0);
@@ -781,7 +781,7 @@ void string___String___filled_with(val_t  self, val_t  param0, val_t  param1, in
   variable[5] = variable[0];
   ATTR_array___AbstractArray____length(variable[5]) /*AbstractArray::_length*/ =  variable[2] /*count*/;
   return_label33: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_String].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_String].i] = 1;
   tracehead = trace.prev;
   return;
 }

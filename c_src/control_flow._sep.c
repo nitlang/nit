@@ -179,10 +179,10 @@ void control_flow___ControlFlowVisitor___init(val_t  self, val_t  param0, val_t 
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ControlFlowVisitor].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ControlFlowVisitor].i]) return;
   ((syntax_base___AbsSyntaxVisitor___init_t)CALL(variable[0],COLOR_syntax_base___AbsSyntaxVisitor___init))(variable[0], variable[1], variable[2], init_table /*YYY*/) /*AbsSyntaxVisitor::init*/;
   return_label7: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ControlFlowVisitor].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ControlFlowVisitor].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -315,9 +315,9 @@ void control_flow___ControlFlowContext___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_control_flow;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ControlFlowContext].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ControlFlowContext].i]) return;
   return_label10: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ControlFlowContext].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ControlFlowContext].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -329,7 +329,7 @@ void control_flow___ControlFlowContext___with_prev(val_t  self, val_t  param0, i
   trace.file = LOCATE_control_flow;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ControlFlowContext].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ControlFlowContext].i]) return;
   variable[3] = variable[0];
   ATTR_control_flow___ControlFlowContext____prev(variable[3]) /*ControlFlowContext::_prev*/ =  variable[1] /*p*/;
   variable[3] = variable[0];
@@ -342,7 +342,7 @@ void control_flow___ControlFlowContext___with_prev(val_t  self, val_t  param0, i
   variable[4] = ((control_flow___ControlFlowContext___base_block_t)CALL( variable[1] /*p*/,COLOR_control_flow___ControlFlowContext___base_block))( variable[1] /*p*/) /*ControlFlowContext::base_block*/;
   ATTR_control_flow___ControlFlowContext____base_block(variable[3]) /*ControlFlowContext::_base_block*/ = variable[4];
   return_label11: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ControlFlowContext].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ControlFlowContext].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -742,8 +742,62 @@ void control_flow___AVarReassignExpr___accept_control_flow(val_t  self, val_t  p
   tracehead = trace.prev;
   return;
 }
+void control_flow___AClosureDecl___accept_control_flow(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 320, LOCATE_control_flow___AClosureDecl___accept_control_flow};
+  val_t variable[6];
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_control_flow;
+  variable[0] =  self;
+  variable[1] =  param0;
+  variable[3] = variable[0];
+  variable[3] = ((parser_nodes___AClosureDecl___n_expr_t)CALL(variable[3],COLOR_parser_nodes___AClosureDecl___n_expr))(variable[3]) /*AClosureDecl::n_expr*/;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    variable[4] = ((control_flow___ControlFlowVisitor___control_flow_ctx_t)CALL( variable[1] /*v*/,COLOR_control_flow___ControlFlowVisitor___control_flow_ctx))( variable[1] /*v*/) /*ControlFlowVisitor::control_flow_ctx*/;
+    variable[3] = variable[4];
+    variable[4] = ((control_flow___ControlFlowVisitor___control_flow_ctx_t)CALL( variable[1] /*v*/,COLOR_control_flow___ControlFlowVisitor___control_flow_ctx))( variable[1] /*v*/) /*ControlFlowVisitor::control_flow_ctx*/;
+    variable[4] = ((control_flow___ControlFlowContext___sub_t)CALL(variable[4],COLOR_control_flow___ControlFlowContext___sub))(variable[4]) /*ControlFlowContext::sub*/;
+    ((control_flow___ControlFlowVisitor___control_flow_ctx__eq_t)CALL( variable[1] /*v*/,COLOR_control_flow___ControlFlowVisitor___control_flow_ctx__eq))( variable[1] /*v*/, variable[4]) /*ControlFlowVisitor::control_flow_ctx=*/;
+    variable[4] = ((control_flow___ControlFlowVisitor___control_flow_ctx_t)CALL( variable[1] /*v*/,COLOR_control_flow___ControlFlowVisitor___control_flow_ctx))( variable[1] /*v*/) /*ControlFlowVisitor::control_flow_ctx*/;
+    variable[5] = variable[0];
+    variable[5] = ((parser_nodes___AClosureDecl___n_expr_t)CALL(variable[5],COLOR_parser_nodes___AClosureDecl___n_expr))(variable[5]) /*AClosureDecl::n_expr*/;
+    ((control_flow___ControlFlowContext___base_block__eq_t)CALL(variable[4],COLOR_control_flow___ControlFlowContext___base_block__eq))(variable[4], variable[5]) /*ControlFlowContext::base_block=*/;
+    ((control_flow___AClosureDecl___accept_control_flow_t)CALL(variable[0],COLOR_SUPER_control_flow___AClosureDecl___accept_control_flow))(variable[0], variable[1]) /*super AClosureDecl::accept_control_flow*/;
+    variable[4] = ((control_flow___ControlFlowVisitor___control_flow_ctx_t)CALL( variable[1] /*v*/,COLOR_control_flow___ControlFlowVisitor___control_flow_ctx))( variable[1] /*v*/) /*ControlFlowVisitor::control_flow_ctx*/;
+    variable[4] = ((control_flow___ControlFlowContext___unreash_t)CALL(variable[4],COLOR_control_flow___ControlFlowContext___unreash))(variable[4]) /*ControlFlowContext::unreash*/;
+    variable[4] = TAG_Bool((variable[4])==( TAG_Bool(false)));
+    if (UNTAG_Bool(variable[4])) { /*if*/
+      variable[4] = variable[0];
+      variable[4] = ((syntax_base___PClosureDecl___variable_t)CALL(variable[4],COLOR_syntax_base___PClosureDecl___variable))(variable[4]) /*PClosureDecl::variable*/;
+      variable[4] = ((syntax_base___ClosureVariable___closure_t)CALL(variable[4],COLOR_syntax_base___ClosureVariable___closure))(variable[4]) /*ClosureVariable::closure*/;
+      variable[4] = ((static_type___MMClosure___signature_t)CALL(variable[4],COLOR_static_type___MMClosure___signature))(variable[4]) /*MMClosure::signature*/;
+      variable[4] = ((static_type___MMSignature___return_type_t)CALL(variable[4],COLOR_static_type___MMSignature___return_type))(variable[4]) /*MMSignature::return_type*/;
+      variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
+      if (UNTAG_Bool(variable[4])) { /*if*/
+        variable[4] = variable[0];
+        variable[5] = NEW_String_string___String___with_native(BOX_NativeString("Control error: Reached end of bloc (a 'continue' with a value was expected)."), TAG_Int(76)); /*new String*/
+        ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::error*/;
+      } else { /*if*/
+        variable[4] = variable[0];
+        variable[4] = ((syntax_base___PClosureDecl___variable_t)CALL(variable[4],COLOR_syntax_base___PClosureDecl___variable))(variable[4]) /*PClosureDecl::variable*/;
+        variable[4] = ((syntax_base___ClosureVariable___closure_t)CALL(variable[4],COLOR_syntax_base___ClosureVariable___closure))(variable[4]) /*ClosureVariable::closure*/;
+        variable[4] = ((static_type___MMClosure___is_break_t)CALL(variable[4],COLOR_static_type___MMClosure___is_break))(variable[4]) /*MMClosure::is_break*/;
+        if (UNTAG_Bool(variable[4])) { /*if*/
+          variable[4] = variable[0];
+          variable[5] = NEW_String_string___String___with_native(BOX_NativeString("Control error: Reached end of break bloc (an 'abort' was expected)."), TAG_Int(67)); /*new String*/
+          ((syntax_base___AbsSyntaxVisitor___error_t)CALL( variable[1] /*v*/,COLOR_syntax_base___AbsSyntaxVisitor___error))( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::error*/;
+        }
+      }
+    }
+    ((control_flow___ControlFlowVisitor___control_flow_ctx__eq_t)CALL( variable[1] /*v*/,COLOR_control_flow___ControlFlowVisitor___control_flow_ctx__eq))( variable[1] /*v*/,  variable[3] /*old_control_flow_ctx*/) /*ControlFlowVisitor::control_flow_ctx=*/;
+  }
+  return_label30: while(false);
+  tracehead = trace.prev;
+  return;
+}
 void control_flow___AClosureDef___accept_control_flow(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 321, LOCATE_control_flow___AClosureDef___accept_control_flow};
+  struct trace_t trace = {NULL, NULL, 345, LOCATE_control_flow___AClosureDef___accept_control_flow};
   val_t variable[6];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -759,17 +813,17 @@ void control_flow___AClosureDef___accept_control_flow(val_t  self, val_t  param0
     variable[4] = ((array___ArrayIterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*ArrayIterator::item*/;
     variable[5] = variable[4];
     ((control_flow___ControlFlowVisitor___mark_is_set_t)CALL( variable[1] /*v*/,COLOR_control_flow___ControlFlowVisitor___mark_is_set))( variable[1] /*v*/,  variable[5] /*va*/) /*ControlFlowVisitor::mark_is_set*/;
-    continue_31: while(0);
+    continue_32: while(0);
     ((array___ArrayIterator___next_t)CALL(variable[3],COLOR_abstract_collection___Iterator___next))(variable[3]) /*ArrayIterator::next*/;
   }
-  break_31: while(0);
+  break_32: while(0);
   ((control_flow___AClosureDef___accept_control_flow_t)CALL(variable[0],COLOR_SUPER_control_flow___AClosureDef___accept_control_flow))(variable[0], variable[1]) /*super AClosureDef::accept_control_flow*/;
-  return_label30: while(false);
+  return_label31: while(false);
   tracehead = trace.prev;
   return;
 }
 void control_flow___AClosureDef___check_control_flow(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 327, LOCATE_control_flow___AClosureDef___check_control_flow};
+  struct trace_t trace = {NULL, NULL, 351, LOCATE_control_flow___AClosureDef___check_control_flow};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -800,12 +854,12 @@ void control_flow___AClosureDef___check_control_flow(val_t  self, val_t  param0)
       }
     }
   }
-  return_label32: while(false);
+  return_label33: while(false);
   tracehead = trace.prev;
   return;
 }
 void control_flow___AOnceExpr___accept_control_flow(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 340, LOCATE_control_flow___AOnceExpr___accept_control_flow};
+  struct trace_t trace = {NULL, NULL, 364, LOCATE_control_flow___AOnceExpr___accept_control_flow};
   val_t variable[5];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -826,7 +880,7 @@ void control_flow___AOnceExpr___accept_control_flow(val_t  self, val_t  param0) 
   variable[3] = ((control_flow___ControlFlowVisitor___once_count_t)CALL( variable[1] /*v*/,COLOR_control_flow___ControlFlowVisitor___once_count))( variable[1] /*v*/) /*ControlFlowVisitor::once_count*/;
   variable[3] = TAG_Int(UNTAG_Int(variable[3])-UNTAG_Int( TAG_Int(1)));
   ((control_flow___ControlFlowVisitor___once_count__eq_t)CALL( variable[1] /*v*/,COLOR_control_flow___ControlFlowVisitor___once_count__eq))( variable[1] /*v*/, variable[3]) /*ControlFlowVisitor::once_count=*/;
-  return_label33: while(false);
+  return_label34: while(false);
   tracehead = trace.prev;
   return;
 }

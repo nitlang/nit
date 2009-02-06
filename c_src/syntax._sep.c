@@ -93,9 +93,9 @@ void syntax___SrcModuleLoader___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_SrcModuleLoader].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_SrcModuleLoader].i]) return;
   return_label3: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_SrcModuleLoader].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_SrcModuleLoader].i] = 1;
   tracehead = trace.prev;
   return;
 }

@@ -378,9 +378,9 @@ void sorter___ComparableSorter___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_sorter;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ComparableSorter].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ComparableSorter].i]) return;
   return_label20: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ComparableSorter].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ComparableSorter].i] = 1;
   tracehead = trace.prev;
   return;
 }

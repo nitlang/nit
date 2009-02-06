@@ -16,9 +16,9 @@ void parser_nodes___EOF___noinit(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_parser_nodes;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_EOF].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_EOF].i]) return;
   return_label0: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_EOF].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_EOF].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -29,10 +29,10 @@ void parser_nodes___PError___noinit(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_parser_nodes;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_PError].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PError].i]) return;
   ((parser_nodes___EOF___noinit_t)CALL(variable[0],COLOR_parser_nodes___EOF___noinit))(variable[0], init_table /*YYY*/) /*EOF::noinit*/;
   return_label1: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_PError].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PError].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1784,8 +1784,27 @@ void parser_nodes___AClosureDecl___n_signature__eq(val_t  self, val_t  param0) {
   tracehead = trace.prev;
   return;
 }
+val_t parser_nodes___AClosureDecl___n_expr(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 536, LOCATE_parser_nodes___AClosureDecl___n_expr};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_parser_nodes;
+  tracehead = trace.prev;
+  return ATTR_parser_nodes___AClosureDecl____n_expr( self) /*AClosureDecl::_n_expr*/;
+}
+void parser_nodes___AClosureDecl___n_expr__eq(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 536, LOCATE_parser_nodes___AClosureDecl___n_expr__eq};
+  val_t *variable = NULL;
+  void **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_parser_nodes;
+  ATTR_parser_nodes___AClosureDecl____n_expr( self) /*AClosureDecl::_n_expr*/ =  param0;
+  tracehead = trace.prev;
+  return;
+}
 val_t parser_nodes___AType___n_id(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 539, LOCATE_parser_nodes___AType___n_id};
+  struct trace_t trace = {NULL, NULL, 540, LOCATE_parser_nodes___AType___n_id};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1794,7 +1813,7 @@ val_t parser_nodes___AType___n_id(val_t  self) {
   return ATTR_parser_nodes___AType____n_id( self) /*AType::_n_id*/;
 }
 void parser_nodes___AType___n_id__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 539, LOCATE_parser_nodes___AType___n_id__eq};
+  struct trace_t trace = {NULL, NULL, 540, LOCATE_parser_nodes___AType___n_id__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1804,7 +1823,7 @@ void parser_nodes___AType___n_id__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AType___n_types(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 540, LOCATE_parser_nodes___AType___n_types};
+  struct trace_t trace = {NULL, NULL, 541, LOCATE_parser_nodes___AType___n_types};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1813,7 +1832,7 @@ val_t parser_nodes___AType___n_types(val_t  self) {
   return ATTR_parser_nodes___AType____n_types( self) /*AType::_n_types*/;
 }
 void parser_nodes___AType___n_types__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 540, LOCATE_parser_nodes___AType___n_types__eq};
+  struct trace_t trace = {NULL, NULL, 541, LOCATE_parser_nodes___AType___n_types__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1823,7 +1842,7 @@ void parser_nodes___AType___n_types__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ABlockExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 547, LOCATE_parser_nodes___ABlockExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 548, LOCATE_parser_nodes___ABlockExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1832,7 +1851,7 @@ val_t parser_nodes___ABlockExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___ABlockExpr____n_expr( self) /*ABlockExpr::_n_expr*/;
 }
 void parser_nodes___ABlockExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 547, LOCATE_parser_nodes___ABlockExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 548, LOCATE_parser_nodes___ABlockExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1842,7 +1861,7 @@ void parser_nodes___ABlockExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AVardeclExpr___n_kwvar(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 551, LOCATE_parser_nodes___AVardeclExpr___n_kwvar};
+  struct trace_t trace = {NULL, NULL, 552, LOCATE_parser_nodes___AVardeclExpr___n_kwvar};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1851,7 +1870,7 @@ val_t parser_nodes___AVardeclExpr___n_kwvar(val_t  self) {
   return ATTR_parser_nodes___AVardeclExpr____n_kwvar( self) /*AVardeclExpr::_n_kwvar*/;
 }
 void parser_nodes___AVardeclExpr___n_kwvar__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 551, LOCATE_parser_nodes___AVardeclExpr___n_kwvar__eq};
+  struct trace_t trace = {NULL, NULL, 552, LOCATE_parser_nodes___AVardeclExpr___n_kwvar__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1861,7 +1880,7 @@ void parser_nodes___AVardeclExpr___n_kwvar__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AVardeclExpr___n_id(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 552, LOCATE_parser_nodes___AVardeclExpr___n_id};
+  struct trace_t trace = {NULL, NULL, 553, LOCATE_parser_nodes___AVardeclExpr___n_id};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1870,7 +1889,7 @@ val_t parser_nodes___AVardeclExpr___n_id(val_t  self) {
   return ATTR_parser_nodes___AVardeclExpr____n_id( self) /*AVardeclExpr::_n_id*/;
 }
 void parser_nodes___AVardeclExpr___n_id__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 552, LOCATE_parser_nodes___AVardeclExpr___n_id__eq};
+  struct trace_t trace = {NULL, NULL, 553, LOCATE_parser_nodes___AVardeclExpr___n_id__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1880,7 +1899,7 @@ void parser_nodes___AVardeclExpr___n_id__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AVardeclExpr___n_type(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 553, LOCATE_parser_nodes___AVardeclExpr___n_type};
+  struct trace_t trace = {NULL, NULL, 554, LOCATE_parser_nodes___AVardeclExpr___n_type};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1889,7 +1908,7 @@ val_t parser_nodes___AVardeclExpr___n_type(val_t  self) {
   return ATTR_parser_nodes___AVardeclExpr____n_type( self) /*AVardeclExpr::_n_type*/;
 }
 void parser_nodes___AVardeclExpr___n_type__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 553, LOCATE_parser_nodes___AVardeclExpr___n_type__eq};
+  struct trace_t trace = {NULL, NULL, 554, LOCATE_parser_nodes___AVardeclExpr___n_type__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1899,7 +1918,7 @@ void parser_nodes___AVardeclExpr___n_type__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AVardeclExpr___n_assign(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 554, LOCATE_parser_nodes___AVardeclExpr___n_assign};
+  struct trace_t trace = {NULL, NULL, 555, LOCATE_parser_nodes___AVardeclExpr___n_assign};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1908,7 +1927,7 @@ val_t parser_nodes___AVardeclExpr___n_assign(val_t  self) {
   return ATTR_parser_nodes___AVardeclExpr____n_assign( self) /*AVardeclExpr::_n_assign*/;
 }
 void parser_nodes___AVardeclExpr___n_assign__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 554, LOCATE_parser_nodes___AVardeclExpr___n_assign__eq};
+  struct trace_t trace = {NULL, NULL, 555, LOCATE_parser_nodes___AVardeclExpr___n_assign__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1918,7 +1937,7 @@ void parser_nodes___AVardeclExpr___n_assign__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AVardeclExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 555, LOCATE_parser_nodes___AVardeclExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 556, LOCATE_parser_nodes___AVardeclExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1927,7 +1946,7 @@ val_t parser_nodes___AVardeclExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___AVardeclExpr____n_expr( self) /*AVardeclExpr::_n_expr*/;
 }
 void parser_nodes___AVardeclExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 555, LOCATE_parser_nodes___AVardeclExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 556, LOCATE_parser_nodes___AVardeclExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1937,7 +1956,7 @@ void parser_nodes___AVardeclExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AReturnExpr___n_kwreturn(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 559, LOCATE_parser_nodes___AReturnExpr___n_kwreturn};
+  struct trace_t trace = {NULL, NULL, 560, LOCATE_parser_nodes___AReturnExpr___n_kwreturn};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1946,7 +1965,7 @@ val_t parser_nodes___AReturnExpr___n_kwreturn(val_t  self) {
   return ATTR_parser_nodes___AReturnExpr____n_kwreturn( self) /*AReturnExpr::_n_kwreturn*/;
 }
 void parser_nodes___AReturnExpr___n_kwreturn__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 559, LOCATE_parser_nodes___AReturnExpr___n_kwreturn__eq};
+  struct trace_t trace = {NULL, NULL, 560, LOCATE_parser_nodes___AReturnExpr___n_kwreturn__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1956,7 +1975,7 @@ void parser_nodes___AReturnExpr___n_kwreturn__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AReturnExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 560, LOCATE_parser_nodes___AReturnExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 561, LOCATE_parser_nodes___AReturnExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1965,7 +1984,7 @@ val_t parser_nodes___AReturnExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___AReturnExpr____n_expr( self) /*AReturnExpr::_n_expr*/;
 }
 void parser_nodes___AReturnExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 560, LOCATE_parser_nodes___AReturnExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 561, LOCATE_parser_nodes___AReturnExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1975,7 +1994,7 @@ void parser_nodes___AReturnExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ABreakExpr___n_kwbreak(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 564, LOCATE_parser_nodes___ABreakExpr___n_kwbreak};
+  struct trace_t trace = {NULL, NULL, 565, LOCATE_parser_nodes___ABreakExpr___n_kwbreak};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1984,7 +2003,7 @@ val_t parser_nodes___ABreakExpr___n_kwbreak(val_t  self) {
   return ATTR_parser_nodes___ABreakExpr____n_kwbreak( self) /*ABreakExpr::_n_kwbreak*/;
 }
 void parser_nodes___ABreakExpr___n_kwbreak__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 564, LOCATE_parser_nodes___ABreakExpr___n_kwbreak__eq};
+  struct trace_t trace = {NULL, NULL, 565, LOCATE_parser_nodes___ABreakExpr___n_kwbreak__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -1994,7 +2013,7 @@ void parser_nodes___ABreakExpr___n_kwbreak__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ABreakExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 565, LOCATE_parser_nodes___ABreakExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 566, LOCATE_parser_nodes___ABreakExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2003,7 +2022,7 @@ val_t parser_nodes___ABreakExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___ABreakExpr____n_expr( self) /*ABreakExpr::_n_expr*/;
 }
 void parser_nodes___ABreakExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 565, LOCATE_parser_nodes___ABreakExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 566, LOCATE_parser_nodes___ABreakExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2013,7 +2032,7 @@ void parser_nodes___ABreakExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AAbortExpr___n_kwabort(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 569, LOCATE_parser_nodes___AAbortExpr___n_kwabort};
+  struct trace_t trace = {NULL, NULL, 570, LOCATE_parser_nodes___AAbortExpr___n_kwabort};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2022,7 +2041,7 @@ val_t parser_nodes___AAbortExpr___n_kwabort(val_t  self) {
   return ATTR_parser_nodes___AAbortExpr____n_kwabort( self) /*AAbortExpr::_n_kwabort*/;
 }
 void parser_nodes___AAbortExpr___n_kwabort__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 569, LOCATE_parser_nodes___AAbortExpr___n_kwabort__eq};
+  struct trace_t trace = {NULL, NULL, 570, LOCATE_parser_nodes___AAbortExpr___n_kwabort__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2032,7 +2051,7 @@ void parser_nodes___AAbortExpr___n_kwabort__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AContinueExpr___n_kwcontinue(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 573, LOCATE_parser_nodes___AContinueExpr___n_kwcontinue};
+  struct trace_t trace = {NULL, NULL, 574, LOCATE_parser_nodes___AContinueExpr___n_kwcontinue};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2041,7 +2060,7 @@ val_t parser_nodes___AContinueExpr___n_kwcontinue(val_t  self) {
   return ATTR_parser_nodes___AContinueExpr____n_kwcontinue( self) /*AContinueExpr::_n_kwcontinue*/;
 }
 void parser_nodes___AContinueExpr___n_kwcontinue__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 573, LOCATE_parser_nodes___AContinueExpr___n_kwcontinue__eq};
+  struct trace_t trace = {NULL, NULL, 574, LOCATE_parser_nodes___AContinueExpr___n_kwcontinue__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2051,7 +2070,7 @@ void parser_nodes___AContinueExpr___n_kwcontinue__eq(val_t  self, val_t  param0)
   return;
 }
 val_t parser_nodes___AContinueExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 574, LOCATE_parser_nodes___AContinueExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 575, LOCATE_parser_nodes___AContinueExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2060,7 +2079,7 @@ val_t parser_nodes___AContinueExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___AContinueExpr____n_expr( self) /*AContinueExpr::_n_expr*/;
 }
 void parser_nodes___AContinueExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 574, LOCATE_parser_nodes___AContinueExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 575, LOCATE_parser_nodes___AContinueExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2070,7 +2089,7 @@ void parser_nodes___AContinueExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ADoExpr___n_kwdo(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 578, LOCATE_parser_nodes___ADoExpr___n_kwdo};
+  struct trace_t trace = {NULL, NULL, 579, LOCATE_parser_nodes___ADoExpr___n_kwdo};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2079,7 +2098,7 @@ val_t parser_nodes___ADoExpr___n_kwdo(val_t  self) {
   return ATTR_parser_nodes___ADoExpr____n_kwdo( self) /*ADoExpr::_n_kwdo*/;
 }
 void parser_nodes___ADoExpr___n_kwdo__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 578, LOCATE_parser_nodes___ADoExpr___n_kwdo__eq};
+  struct trace_t trace = {NULL, NULL, 579, LOCATE_parser_nodes___ADoExpr___n_kwdo__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2089,7 +2108,7 @@ void parser_nodes___ADoExpr___n_kwdo__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ADoExpr___n_block(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 579, LOCATE_parser_nodes___ADoExpr___n_block};
+  struct trace_t trace = {NULL, NULL, 580, LOCATE_parser_nodes___ADoExpr___n_block};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2098,7 +2117,7 @@ val_t parser_nodes___ADoExpr___n_block(val_t  self) {
   return ATTR_parser_nodes___ADoExpr____n_block( self) /*ADoExpr::_n_block*/;
 }
 void parser_nodes___ADoExpr___n_block__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 579, LOCATE_parser_nodes___ADoExpr___n_block__eq};
+  struct trace_t trace = {NULL, NULL, 580, LOCATE_parser_nodes___ADoExpr___n_block__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2108,7 +2127,7 @@ void parser_nodes___ADoExpr___n_block__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AIfExpr___n_kwif(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 583, LOCATE_parser_nodes___AIfExpr___n_kwif};
+  struct trace_t trace = {NULL, NULL, 584, LOCATE_parser_nodes___AIfExpr___n_kwif};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2117,7 +2136,7 @@ val_t parser_nodes___AIfExpr___n_kwif(val_t  self) {
   return ATTR_parser_nodes___AIfExpr____n_kwif( self) /*AIfExpr::_n_kwif*/;
 }
 void parser_nodes___AIfExpr___n_kwif__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 583, LOCATE_parser_nodes___AIfExpr___n_kwif__eq};
+  struct trace_t trace = {NULL, NULL, 584, LOCATE_parser_nodes___AIfExpr___n_kwif__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2127,7 +2146,7 @@ void parser_nodes___AIfExpr___n_kwif__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AIfExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 584, LOCATE_parser_nodes___AIfExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 585, LOCATE_parser_nodes___AIfExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2136,7 +2155,7 @@ val_t parser_nodes___AIfExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___AIfExpr____n_expr( self) /*AIfExpr::_n_expr*/;
 }
 void parser_nodes___AIfExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 584, LOCATE_parser_nodes___AIfExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 585, LOCATE_parser_nodes___AIfExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2146,7 +2165,7 @@ void parser_nodes___AIfExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AIfExpr___n_then(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 585, LOCATE_parser_nodes___AIfExpr___n_then};
+  struct trace_t trace = {NULL, NULL, 586, LOCATE_parser_nodes___AIfExpr___n_then};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2155,7 +2174,7 @@ val_t parser_nodes___AIfExpr___n_then(val_t  self) {
   return ATTR_parser_nodes___AIfExpr____n_then( self) /*AIfExpr::_n_then*/;
 }
 void parser_nodes___AIfExpr___n_then__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 585, LOCATE_parser_nodes___AIfExpr___n_then__eq};
+  struct trace_t trace = {NULL, NULL, 586, LOCATE_parser_nodes___AIfExpr___n_then__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2165,7 +2184,7 @@ void parser_nodes___AIfExpr___n_then__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AIfExpr___n_else(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 586, LOCATE_parser_nodes___AIfExpr___n_else};
+  struct trace_t trace = {NULL, NULL, 587, LOCATE_parser_nodes___AIfExpr___n_else};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2174,7 +2193,7 @@ val_t parser_nodes___AIfExpr___n_else(val_t  self) {
   return ATTR_parser_nodes___AIfExpr____n_else( self) /*AIfExpr::_n_else*/;
 }
 void parser_nodes___AIfExpr___n_else__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 586, LOCATE_parser_nodes___AIfExpr___n_else__eq};
+  struct trace_t trace = {NULL, NULL, 587, LOCATE_parser_nodes___AIfExpr___n_else__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2184,7 +2203,7 @@ void parser_nodes___AIfExpr___n_else__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AIfexprExpr___n_kwif(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 590, LOCATE_parser_nodes___AIfexprExpr___n_kwif};
+  struct trace_t trace = {NULL, NULL, 591, LOCATE_parser_nodes___AIfexprExpr___n_kwif};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2193,7 +2212,7 @@ val_t parser_nodes___AIfexprExpr___n_kwif(val_t  self) {
   return ATTR_parser_nodes___AIfexprExpr____n_kwif( self) /*AIfexprExpr::_n_kwif*/;
 }
 void parser_nodes___AIfexprExpr___n_kwif__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 590, LOCATE_parser_nodes___AIfexprExpr___n_kwif__eq};
+  struct trace_t trace = {NULL, NULL, 591, LOCATE_parser_nodes___AIfexprExpr___n_kwif__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2203,7 +2222,7 @@ void parser_nodes___AIfexprExpr___n_kwif__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AIfexprExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 591, LOCATE_parser_nodes___AIfexprExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 592, LOCATE_parser_nodes___AIfexprExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2212,7 +2231,7 @@ val_t parser_nodes___AIfexprExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___AIfexprExpr____n_expr( self) /*AIfexprExpr::_n_expr*/;
 }
 void parser_nodes___AIfexprExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 591, LOCATE_parser_nodes___AIfexprExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 592, LOCATE_parser_nodes___AIfexprExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2222,7 +2241,7 @@ void parser_nodes___AIfexprExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AIfexprExpr___n_kwthen(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 592, LOCATE_parser_nodes___AIfexprExpr___n_kwthen};
+  struct trace_t trace = {NULL, NULL, 593, LOCATE_parser_nodes___AIfexprExpr___n_kwthen};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2231,7 +2250,7 @@ val_t parser_nodes___AIfexprExpr___n_kwthen(val_t  self) {
   return ATTR_parser_nodes___AIfexprExpr____n_kwthen( self) /*AIfexprExpr::_n_kwthen*/;
 }
 void parser_nodes___AIfexprExpr___n_kwthen__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 592, LOCATE_parser_nodes___AIfexprExpr___n_kwthen__eq};
+  struct trace_t trace = {NULL, NULL, 593, LOCATE_parser_nodes___AIfexprExpr___n_kwthen__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2241,7 +2260,7 @@ void parser_nodes___AIfexprExpr___n_kwthen__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AIfexprExpr___n_then(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 593, LOCATE_parser_nodes___AIfexprExpr___n_then};
+  struct trace_t trace = {NULL, NULL, 594, LOCATE_parser_nodes___AIfexprExpr___n_then};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2250,7 +2269,7 @@ val_t parser_nodes___AIfexprExpr___n_then(val_t  self) {
   return ATTR_parser_nodes___AIfexprExpr____n_then( self) /*AIfexprExpr::_n_then*/;
 }
 void parser_nodes___AIfexprExpr___n_then__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 593, LOCATE_parser_nodes___AIfexprExpr___n_then__eq};
+  struct trace_t trace = {NULL, NULL, 594, LOCATE_parser_nodes___AIfexprExpr___n_then__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2260,7 +2279,7 @@ void parser_nodes___AIfexprExpr___n_then__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AIfexprExpr___n_kwelse(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 594, LOCATE_parser_nodes___AIfexprExpr___n_kwelse};
+  struct trace_t trace = {NULL, NULL, 595, LOCATE_parser_nodes___AIfexprExpr___n_kwelse};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2269,7 +2288,7 @@ val_t parser_nodes___AIfexprExpr___n_kwelse(val_t  self) {
   return ATTR_parser_nodes___AIfexprExpr____n_kwelse( self) /*AIfexprExpr::_n_kwelse*/;
 }
 void parser_nodes___AIfexprExpr___n_kwelse__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 594, LOCATE_parser_nodes___AIfexprExpr___n_kwelse__eq};
+  struct trace_t trace = {NULL, NULL, 595, LOCATE_parser_nodes___AIfexprExpr___n_kwelse__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2279,7 +2298,7 @@ void parser_nodes___AIfexprExpr___n_kwelse__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AIfexprExpr___n_else(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 595, LOCATE_parser_nodes___AIfexprExpr___n_else};
+  struct trace_t trace = {NULL, NULL, 596, LOCATE_parser_nodes___AIfexprExpr___n_else};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2288,7 +2307,7 @@ val_t parser_nodes___AIfexprExpr___n_else(val_t  self) {
   return ATTR_parser_nodes___AIfexprExpr____n_else( self) /*AIfexprExpr::_n_else*/;
 }
 void parser_nodes___AIfexprExpr___n_else__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 595, LOCATE_parser_nodes___AIfexprExpr___n_else__eq};
+  struct trace_t trace = {NULL, NULL, 596, LOCATE_parser_nodes___AIfexprExpr___n_else__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2298,7 +2317,7 @@ void parser_nodes___AIfexprExpr___n_else__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AWhileExpr___n_kwwhile(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 599, LOCATE_parser_nodes___AWhileExpr___n_kwwhile};
+  struct trace_t trace = {NULL, NULL, 600, LOCATE_parser_nodes___AWhileExpr___n_kwwhile};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2307,7 +2326,7 @@ val_t parser_nodes___AWhileExpr___n_kwwhile(val_t  self) {
   return ATTR_parser_nodes___AWhileExpr____n_kwwhile( self) /*AWhileExpr::_n_kwwhile*/;
 }
 void parser_nodes___AWhileExpr___n_kwwhile__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 599, LOCATE_parser_nodes___AWhileExpr___n_kwwhile__eq};
+  struct trace_t trace = {NULL, NULL, 600, LOCATE_parser_nodes___AWhileExpr___n_kwwhile__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2317,7 +2336,7 @@ void parser_nodes___AWhileExpr___n_kwwhile__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AWhileExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 600, LOCATE_parser_nodes___AWhileExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 601, LOCATE_parser_nodes___AWhileExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2326,7 +2345,7 @@ val_t parser_nodes___AWhileExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___AWhileExpr____n_expr( self) /*AWhileExpr::_n_expr*/;
 }
 void parser_nodes___AWhileExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 600, LOCATE_parser_nodes___AWhileExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 601, LOCATE_parser_nodes___AWhileExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2336,7 +2355,7 @@ void parser_nodes___AWhileExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AWhileExpr___n_kwdo(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 601, LOCATE_parser_nodes___AWhileExpr___n_kwdo};
+  struct trace_t trace = {NULL, NULL, 602, LOCATE_parser_nodes___AWhileExpr___n_kwdo};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2345,7 +2364,7 @@ val_t parser_nodes___AWhileExpr___n_kwdo(val_t  self) {
   return ATTR_parser_nodes___AWhileExpr____n_kwdo( self) /*AWhileExpr::_n_kwdo*/;
 }
 void parser_nodes___AWhileExpr___n_kwdo__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 601, LOCATE_parser_nodes___AWhileExpr___n_kwdo__eq};
+  struct trace_t trace = {NULL, NULL, 602, LOCATE_parser_nodes___AWhileExpr___n_kwdo__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2355,7 +2374,7 @@ void parser_nodes___AWhileExpr___n_kwdo__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AWhileExpr___n_block(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 602, LOCATE_parser_nodes___AWhileExpr___n_block};
+  struct trace_t trace = {NULL, NULL, 603, LOCATE_parser_nodes___AWhileExpr___n_block};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2364,7 +2383,7 @@ val_t parser_nodes___AWhileExpr___n_block(val_t  self) {
   return ATTR_parser_nodes___AWhileExpr____n_block( self) /*AWhileExpr::_n_block*/;
 }
 void parser_nodes___AWhileExpr___n_block__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 602, LOCATE_parser_nodes___AWhileExpr___n_block__eq};
+  struct trace_t trace = {NULL, NULL, 603, LOCATE_parser_nodes___AWhileExpr___n_block__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2374,7 +2393,7 @@ void parser_nodes___AWhileExpr___n_block__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AForExpr___n_vardecl(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 606, LOCATE_parser_nodes___AForExpr___n_vardecl};
+  struct trace_t trace = {NULL, NULL, 607, LOCATE_parser_nodes___AForExpr___n_vardecl};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2383,7 +2402,7 @@ val_t parser_nodes___AForExpr___n_vardecl(val_t  self) {
   return ATTR_parser_nodes___AForExpr____n_vardecl( self) /*AForExpr::_n_vardecl*/;
 }
 void parser_nodes___AForExpr___n_vardecl__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 606, LOCATE_parser_nodes___AForExpr___n_vardecl__eq};
+  struct trace_t trace = {NULL, NULL, 607, LOCATE_parser_nodes___AForExpr___n_vardecl__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2393,7 +2412,7 @@ void parser_nodes___AForExpr___n_vardecl__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AForExpr___n_kwdo(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 607, LOCATE_parser_nodes___AForExpr___n_kwdo};
+  struct trace_t trace = {NULL, NULL, 608, LOCATE_parser_nodes___AForExpr___n_kwdo};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2402,7 +2421,7 @@ val_t parser_nodes___AForExpr___n_kwdo(val_t  self) {
   return ATTR_parser_nodes___AForExpr____n_kwdo( self) /*AForExpr::_n_kwdo*/;
 }
 void parser_nodes___AForExpr___n_kwdo__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 607, LOCATE_parser_nodes___AForExpr___n_kwdo__eq};
+  struct trace_t trace = {NULL, NULL, 608, LOCATE_parser_nodes___AForExpr___n_kwdo__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2412,7 +2431,7 @@ void parser_nodes___AForExpr___n_kwdo__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AForExpr___n_block(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 608, LOCATE_parser_nodes___AForExpr___n_block};
+  struct trace_t trace = {NULL, NULL, 609, LOCATE_parser_nodes___AForExpr___n_block};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2421,7 +2440,7 @@ val_t parser_nodes___AForExpr___n_block(val_t  self) {
   return ATTR_parser_nodes___AForExpr____n_block( self) /*AForExpr::_n_block*/;
 }
 void parser_nodes___AForExpr___n_block__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 608, LOCATE_parser_nodes___AForExpr___n_block__eq};
+  struct trace_t trace = {NULL, NULL, 609, LOCATE_parser_nodes___AForExpr___n_block__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2431,7 +2450,7 @@ void parser_nodes___AForExpr___n_block__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AForVardeclExpr___n_kwfor(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 612, LOCATE_parser_nodes___AForVardeclExpr___n_kwfor};
+  struct trace_t trace = {NULL, NULL, 613, LOCATE_parser_nodes___AForVardeclExpr___n_kwfor};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2440,7 +2459,7 @@ val_t parser_nodes___AForVardeclExpr___n_kwfor(val_t  self) {
   return ATTR_parser_nodes___AForVardeclExpr____n_kwfor( self) /*AForVardeclExpr::_n_kwfor*/;
 }
 void parser_nodes___AForVardeclExpr___n_kwfor__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 612, LOCATE_parser_nodes___AForVardeclExpr___n_kwfor__eq};
+  struct trace_t trace = {NULL, NULL, 613, LOCATE_parser_nodes___AForVardeclExpr___n_kwfor__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2450,7 +2469,7 @@ void parser_nodes___AForVardeclExpr___n_kwfor__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AForVardeclExpr___n_id(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 613, LOCATE_parser_nodes___AForVardeclExpr___n_id};
+  struct trace_t trace = {NULL, NULL, 614, LOCATE_parser_nodes___AForVardeclExpr___n_id};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2459,7 +2478,7 @@ val_t parser_nodes___AForVardeclExpr___n_id(val_t  self) {
   return ATTR_parser_nodes___AForVardeclExpr____n_id( self) /*AForVardeclExpr::_n_id*/;
 }
 void parser_nodes___AForVardeclExpr___n_id__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 613, LOCATE_parser_nodes___AForVardeclExpr___n_id__eq};
+  struct trace_t trace = {NULL, NULL, 614, LOCATE_parser_nodes___AForVardeclExpr___n_id__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2469,7 +2488,7 @@ void parser_nodes___AForVardeclExpr___n_id__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AForVardeclExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 614, LOCATE_parser_nodes___AForVardeclExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 615, LOCATE_parser_nodes___AForVardeclExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2478,7 +2497,7 @@ val_t parser_nodes___AForVardeclExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___AForVardeclExpr____n_expr( self) /*AForVardeclExpr::_n_expr*/;
 }
 void parser_nodes___AForVardeclExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 614, LOCATE_parser_nodes___AForVardeclExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 615, LOCATE_parser_nodes___AForVardeclExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2488,7 +2507,7 @@ void parser_nodes___AForVardeclExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AAssertExpr___n_kwassert(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 618, LOCATE_parser_nodes___AAssertExpr___n_kwassert};
+  struct trace_t trace = {NULL, NULL, 619, LOCATE_parser_nodes___AAssertExpr___n_kwassert};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2497,7 +2516,7 @@ val_t parser_nodes___AAssertExpr___n_kwassert(val_t  self) {
   return ATTR_parser_nodes___AAssertExpr____n_kwassert( self) /*AAssertExpr::_n_kwassert*/;
 }
 void parser_nodes___AAssertExpr___n_kwassert__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 618, LOCATE_parser_nodes___AAssertExpr___n_kwassert__eq};
+  struct trace_t trace = {NULL, NULL, 619, LOCATE_parser_nodes___AAssertExpr___n_kwassert__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2507,7 +2526,7 @@ void parser_nodes___AAssertExpr___n_kwassert__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AAssertExpr___n_id(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 619, LOCATE_parser_nodes___AAssertExpr___n_id};
+  struct trace_t trace = {NULL, NULL, 620, LOCATE_parser_nodes___AAssertExpr___n_id};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2516,7 +2535,7 @@ val_t parser_nodes___AAssertExpr___n_id(val_t  self) {
   return ATTR_parser_nodes___AAssertExpr____n_id( self) /*AAssertExpr::_n_id*/;
 }
 void parser_nodes___AAssertExpr___n_id__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 619, LOCATE_parser_nodes___AAssertExpr___n_id__eq};
+  struct trace_t trace = {NULL, NULL, 620, LOCATE_parser_nodes___AAssertExpr___n_id__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2526,7 +2545,7 @@ void parser_nodes___AAssertExpr___n_id__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AAssertExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 620, LOCATE_parser_nodes___AAssertExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 621, LOCATE_parser_nodes___AAssertExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2535,7 +2554,7 @@ val_t parser_nodes___AAssertExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___AAssertExpr____n_expr( self) /*AAssertExpr::_n_expr*/;
 }
 void parser_nodes___AAssertExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 620, LOCATE_parser_nodes___AAssertExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 621, LOCATE_parser_nodes___AAssertExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2545,7 +2564,7 @@ void parser_nodes___AAssertExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AAssignFormExpr___n_assign(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 624, LOCATE_parser_nodes___AAssignFormExpr___n_assign};
+  struct trace_t trace = {NULL, NULL, 625, LOCATE_parser_nodes___AAssignFormExpr___n_assign};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2554,7 +2573,7 @@ val_t parser_nodes___AAssignFormExpr___n_assign(val_t  self) {
   return ATTR_parser_nodes___AAssignFormExpr____n_assign( self) /*AAssignFormExpr::_n_assign*/;
 }
 void parser_nodes___AAssignFormExpr___n_assign__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 624, LOCATE_parser_nodes___AAssignFormExpr___n_assign__eq};
+  struct trace_t trace = {NULL, NULL, 625, LOCATE_parser_nodes___AAssignFormExpr___n_assign__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2564,7 +2583,7 @@ void parser_nodes___AAssignFormExpr___n_assign__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AAssignFormExpr___n_value(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 625, LOCATE_parser_nodes___AAssignFormExpr___n_value};
+  struct trace_t trace = {NULL, NULL, 626, LOCATE_parser_nodes___AAssignFormExpr___n_value};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2573,7 +2592,7 @@ val_t parser_nodes___AAssignFormExpr___n_value(val_t  self) {
   return ATTR_parser_nodes___AAssignFormExpr____n_value( self) /*AAssignFormExpr::_n_value*/;
 }
 void parser_nodes___AAssignFormExpr___n_value__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 625, LOCATE_parser_nodes___AAssignFormExpr___n_value__eq};
+  struct trace_t trace = {NULL, NULL, 626, LOCATE_parser_nodes___AAssignFormExpr___n_value__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2583,7 +2602,7 @@ void parser_nodes___AAssignFormExpr___n_value__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AReassignFormExpr___n_assign_op(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 629, LOCATE_parser_nodes___AReassignFormExpr___n_assign_op};
+  struct trace_t trace = {NULL, NULL, 630, LOCATE_parser_nodes___AReassignFormExpr___n_assign_op};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2592,7 +2611,7 @@ val_t parser_nodes___AReassignFormExpr___n_assign_op(val_t  self) {
   return ATTR_parser_nodes___AReassignFormExpr____n_assign_op( self) /*AReassignFormExpr::_n_assign_op*/;
 }
 void parser_nodes___AReassignFormExpr___n_assign_op__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 629, LOCATE_parser_nodes___AReassignFormExpr___n_assign_op__eq};
+  struct trace_t trace = {NULL, NULL, 630, LOCATE_parser_nodes___AReassignFormExpr___n_assign_op__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2602,7 +2621,7 @@ void parser_nodes___AReassignFormExpr___n_assign_op__eq(val_t  self, val_t  para
   return;
 }
 val_t parser_nodes___AReassignFormExpr___n_value(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 630, LOCATE_parser_nodes___AReassignFormExpr___n_value};
+  struct trace_t trace = {NULL, NULL, 631, LOCATE_parser_nodes___AReassignFormExpr___n_value};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2611,7 +2630,7 @@ val_t parser_nodes___AReassignFormExpr___n_value(val_t  self) {
   return ATTR_parser_nodes___AReassignFormExpr____n_value( self) /*AReassignFormExpr::_n_value*/;
 }
 void parser_nodes___AReassignFormExpr___n_value__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 630, LOCATE_parser_nodes___AReassignFormExpr___n_value__eq};
+  struct trace_t trace = {NULL, NULL, 631, LOCATE_parser_nodes___AReassignFormExpr___n_value__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2621,7 +2640,7 @@ void parser_nodes___AReassignFormExpr___n_value__eq(val_t  self, val_t  param0) 
   return;
 }
 val_t parser_nodes___AOnceExpr___n_kwonce(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 634, LOCATE_parser_nodes___AOnceExpr___n_kwonce};
+  struct trace_t trace = {NULL, NULL, 635, LOCATE_parser_nodes___AOnceExpr___n_kwonce};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2630,7 +2649,7 @@ val_t parser_nodes___AOnceExpr___n_kwonce(val_t  self) {
   return ATTR_parser_nodes___AOnceExpr____n_kwonce( self) /*AOnceExpr::_n_kwonce*/;
 }
 void parser_nodes___AOnceExpr___n_kwonce__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 634, LOCATE_parser_nodes___AOnceExpr___n_kwonce__eq};
+  struct trace_t trace = {NULL, NULL, 635, LOCATE_parser_nodes___AOnceExpr___n_kwonce__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2640,7 +2659,7 @@ void parser_nodes___AOnceExpr___n_kwonce__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ASendExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 638, LOCATE_parser_nodes___ASendExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 639, LOCATE_parser_nodes___ASendExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2649,7 +2668,7 @@ val_t parser_nodes___ASendExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___ASendExpr____n_expr( self) /*ASendExpr::_n_expr*/;
 }
 void parser_nodes___ASendExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 638, LOCATE_parser_nodes___ASendExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 639, LOCATE_parser_nodes___ASendExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2659,7 +2678,7 @@ void parser_nodes___ASendExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ASendExpr___n_closure_defs(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 639, LOCATE_parser_nodes___ASendExpr___n_closure_defs};
+  struct trace_t trace = {NULL, NULL, 640, LOCATE_parser_nodes___ASendExpr___n_closure_defs};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2668,7 +2687,7 @@ val_t parser_nodes___ASendExpr___n_closure_defs(val_t  self) {
   return ATTR_parser_nodes___ASendExpr____n_closure_defs( self) /*ASendExpr::_n_closure_defs*/;
 }
 void parser_nodes___ASendExpr___n_closure_defs__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 639, LOCATE_parser_nodes___ASendExpr___n_closure_defs__eq};
+  struct trace_t trace = {NULL, NULL, 640, LOCATE_parser_nodes___ASendExpr___n_closure_defs__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2678,7 +2697,7 @@ void parser_nodes___ASendExpr___n_closure_defs__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ABinopExpr___n_expr2(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 643, LOCATE_parser_nodes___ABinopExpr___n_expr2};
+  struct trace_t trace = {NULL, NULL, 644, LOCATE_parser_nodes___ABinopExpr___n_expr2};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2687,7 +2706,7 @@ val_t parser_nodes___ABinopExpr___n_expr2(val_t  self) {
   return ATTR_parser_nodes___ABinopExpr____n_expr2( self) /*ABinopExpr::_n_expr2*/;
 }
 void parser_nodes___ABinopExpr___n_expr2__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 643, LOCATE_parser_nodes___ABinopExpr___n_expr2__eq};
+  struct trace_t trace = {NULL, NULL, 644, LOCATE_parser_nodes___ABinopExpr___n_expr2__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2697,7 +2716,7 @@ void parser_nodes___ABinopExpr___n_expr2__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AOrExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 650, LOCATE_parser_nodes___AOrExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 651, LOCATE_parser_nodes___AOrExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2706,7 +2725,7 @@ val_t parser_nodes___AOrExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___AOrExpr____n_expr( self) /*AOrExpr::_n_expr*/;
 }
 void parser_nodes___AOrExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 650, LOCATE_parser_nodes___AOrExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 651, LOCATE_parser_nodes___AOrExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2716,7 +2735,7 @@ void parser_nodes___AOrExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AOrExpr___n_expr2(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 651, LOCATE_parser_nodes___AOrExpr___n_expr2};
+  struct trace_t trace = {NULL, NULL, 652, LOCATE_parser_nodes___AOrExpr___n_expr2};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2725,7 +2744,7 @@ val_t parser_nodes___AOrExpr___n_expr2(val_t  self) {
   return ATTR_parser_nodes___AOrExpr____n_expr2( self) /*AOrExpr::_n_expr2*/;
 }
 void parser_nodes___AOrExpr___n_expr2__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 651, LOCATE_parser_nodes___AOrExpr___n_expr2__eq};
+  struct trace_t trace = {NULL, NULL, 652, LOCATE_parser_nodes___AOrExpr___n_expr2__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2735,7 +2754,7 @@ void parser_nodes___AOrExpr___n_expr2__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AAndExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 655, LOCATE_parser_nodes___AAndExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 656, LOCATE_parser_nodes___AAndExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2744,7 +2763,7 @@ val_t parser_nodes___AAndExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___AAndExpr____n_expr( self) /*AAndExpr::_n_expr*/;
 }
 void parser_nodes___AAndExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 655, LOCATE_parser_nodes___AAndExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 656, LOCATE_parser_nodes___AAndExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2754,7 +2773,7 @@ void parser_nodes___AAndExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AAndExpr___n_expr2(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 656, LOCATE_parser_nodes___AAndExpr___n_expr2};
+  struct trace_t trace = {NULL, NULL, 657, LOCATE_parser_nodes___AAndExpr___n_expr2};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2763,7 +2782,7 @@ val_t parser_nodes___AAndExpr___n_expr2(val_t  self) {
   return ATTR_parser_nodes___AAndExpr____n_expr2( self) /*AAndExpr::_n_expr2*/;
 }
 void parser_nodes___AAndExpr___n_expr2__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 656, LOCATE_parser_nodes___AAndExpr___n_expr2__eq};
+  struct trace_t trace = {NULL, NULL, 657, LOCATE_parser_nodes___AAndExpr___n_expr2__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2773,7 +2792,7 @@ void parser_nodes___AAndExpr___n_expr2__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ANotExpr___n_kwnot(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 660, LOCATE_parser_nodes___ANotExpr___n_kwnot};
+  struct trace_t trace = {NULL, NULL, 661, LOCATE_parser_nodes___ANotExpr___n_kwnot};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2782,7 +2801,7 @@ val_t parser_nodes___ANotExpr___n_kwnot(val_t  self) {
   return ATTR_parser_nodes___ANotExpr____n_kwnot( self) /*ANotExpr::_n_kwnot*/;
 }
 void parser_nodes___ANotExpr___n_kwnot__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 660, LOCATE_parser_nodes___ANotExpr___n_kwnot__eq};
+  struct trace_t trace = {NULL, NULL, 661, LOCATE_parser_nodes___ANotExpr___n_kwnot__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2792,7 +2811,7 @@ void parser_nodes___ANotExpr___n_kwnot__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ANotExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 661, LOCATE_parser_nodes___ANotExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 662, LOCATE_parser_nodes___ANotExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2801,7 +2820,7 @@ val_t parser_nodes___ANotExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___ANotExpr____n_expr( self) /*ANotExpr::_n_expr*/;
 }
 void parser_nodes___ANotExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 661, LOCATE_parser_nodes___ANotExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 662, LOCATE_parser_nodes___ANotExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2811,7 +2830,7 @@ void parser_nodes___ANotExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AEeExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 668, LOCATE_parser_nodes___AEeExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 669, LOCATE_parser_nodes___AEeExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2820,7 +2839,7 @@ val_t parser_nodes___AEeExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___AEeExpr____n_expr( self) /*AEeExpr::_n_expr*/;
 }
 void parser_nodes___AEeExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 668, LOCATE_parser_nodes___AEeExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 669, LOCATE_parser_nodes___AEeExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2830,7 +2849,7 @@ void parser_nodes___AEeExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AEeExpr___n_expr2(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 669, LOCATE_parser_nodes___AEeExpr___n_expr2};
+  struct trace_t trace = {NULL, NULL, 670, LOCATE_parser_nodes___AEeExpr___n_expr2};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2839,7 +2858,7 @@ val_t parser_nodes___AEeExpr___n_expr2(val_t  self) {
   return ATTR_parser_nodes___AEeExpr____n_expr2( self) /*AEeExpr::_n_expr2*/;
 }
 void parser_nodes___AEeExpr___n_expr2__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 669, LOCATE_parser_nodes___AEeExpr___n_expr2__eq};
+  struct trace_t trace = {NULL, NULL, 670, LOCATE_parser_nodes___AEeExpr___n_expr2__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2849,7 +2868,7 @@ void parser_nodes___AEeExpr___n_expr2__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AIsaExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 688, LOCATE_parser_nodes___AIsaExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 689, LOCATE_parser_nodes___AIsaExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2858,7 +2877,7 @@ val_t parser_nodes___AIsaExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___AIsaExpr____n_expr( self) /*AIsaExpr::_n_expr*/;
 }
 void parser_nodes___AIsaExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 688, LOCATE_parser_nodes___AIsaExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 689, LOCATE_parser_nodes___AIsaExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2868,7 +2887,7 @@ void parser_nodes___AIsaExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AIsaExpr___n_type(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 689, LOCATE_parser_nodes___AIsaExpr___n_type};
+  struct trace_t trace = {NULL, NULL, 690, LOCATE_parser_nodes___AIsaExpr___n_type};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2877,7 +2896,7 @@ val_t parser_nodes___AIsaExpr___n_type(val_t  self) {
   return ATTR_parser_nodes___AIsaExpr____n_type( self) /*AIsaExpr::_n_type*/;
 }
 void parser_nodes___AIsaExpr___n_type__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 689, LOCATE_parser_nodes___AIsaExpr___n_type__eq};
+  struct trace_t trace = {NULL, NULL, 690, LOCATE_parser_nodes___AIsaExpr___n_type__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2887,7 +2906,7 @@ void parser_nodes___AIsaExpr___n_type__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AUminusExpr___n_minus(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 711, LOCATE_parser_nodes___AUminusExpr___n_minus};
+  struct trace_t trace = {NULL, NULL, 712, LOCATE_parser_nodes___AUminusExpr___n_minus};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2896,7 +2915,7 @@ val_t parser_nodes___AUminusExpr___n_minus(val_t  self) {
   return ATTR_parser_nodes___AUminusExpr____n_minus( self) /*AUminusExpr::_n_minus*/;
 }
 void parser_nodes___AUminusExpr___n_minus__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 711, LOCATE_parser_nodes___AUminusExpr___n_minus__eq};
+  struct trace_t trace = {NULL, NULL, 712, LOCATE_parser_nodes___AUminusExpr___n_minus__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2906,7 +2925,7 @@ void parser_nodes___AUminusExpr___n_minus__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ANewExpr___n_kwnew(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 715, LOCATE_parser_nodes___ANewExpr___n_kwnew};
+  struct trace_t trace = {NULL, NULL, 716, LOCATE_parser_nodes___ANewExpr___n_kwnew};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2915,7 +2934,7 @@ val_t parser_nodes___ANewExpr___n_kwnew(val_t  self) {
   return ATTR_parser_nodes___ANewExpr____n_kwnew( self) /*ANewExpr::_n_kwnew*/;
 }
 void parser_nodes___ANewExpr___n_kwnew__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 715, LOCATE_parser_nodes___ANewExpr___n_kwnew__eq};
+  struct trace_t trace = {NULL, NULL, 716, LOCATE_parser_nodes___ANewExpr___n_kwnew__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2925,7 +2944,7 @@ void parser_nodes___ANewExpr___n_kwnew__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ANewExpr___n_type(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 716, LOCATE_parser_nodes___ANewExpr___n_type};
+  struct trace_t trace = {NULL, NULL, 717, LOCATE_parser_nodes___ANewExpr___n_type};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2934,7 +2953,7 @@ val_t parser_nodes___ANewExpr___n_type(val_t  self) {
   return ATTR_parser_nodes___ANewExpr____n_type( self) /*ANewExpr::_n_type*/;
 }
 void parser_nodes___ANewExpr___n_type__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 716, LOCATE_parser_nodes___ANewExpr___n_type__eq};
+  struct trace_t trace = {NULL, NULL, 717, LOCATE_parser_nodes___ANewExpr___n_type__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2944,7 +2963,7 @@ void parser_nodes___ANewExpr___n_type__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ANewExpr___n_id(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 717, LOCATE_parser_nodes___ANewExpr___n_id};
+  struct trace_t trace = {NULL, NULL, 718, LOCATE_parser_nodes___ANewExpr___n_id};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2953,7 +2972,7 @@ val_t parser_nodes___ANewExpr___n_id(val_t  self) {
   return ATTR_parser_nodes___ANewExpr____n_id( self) /*ANewExpr::_n_id*/;
 }
 void parser_nodes___ANewExpr___n_id__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 717, LOCATE_parser_nodes___ANewExpr___n_id__eq};
+  struct trace_t trace = {NULL, NULL, 718, LOCATE_parser_nodes___ANewExpr___n_id__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2963,7 +2982,7 @@ void parser_nodes___ANewExpr___n_id__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ANewExpr___n_args(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 718, LOCATE_parser_nodes___ANewExpr___n_args};
+  struct trace_t trace = {NULL, NULL, 719, LOCATE_parser_nodes___ANewExpr___n_args};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2972,7 +2991,7 @@ val_t parser_nodes___ANewExpr___n_args(val_t  self) {
   return ATTR_parser_nodes___ANewExpr____n_args( self) /*ANewExpr::_n_args*/;
 }
 void parser_nodes___ANewExpr___n_args__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 718, LOCATE_parser_nodes___ANewExpr___n_args__eq};
+  struct trace_t trace = {NULL, NULL, 719, LOCATE_parser_nodes___ANewExpr___n_args__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2982,7 +3001,7 @@ void parser_nodes___ANewExpr___n_args__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AAttrFormExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 722, LOCATE_parser_nodes___AAttrFormExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 723, LOCATE_parser_nodes___AAttrFormExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -2991,7 +3010,7 @@ val_t parser_nodes___AAttrFormExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___AAttrFormExpr____n_expr( self) /*AAttrFormExpr::_n_expr*/;
 }
 void parser_nodes___AAttrFormExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 722, LOCATE_parser_nodes___AAttrFormExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 723, LOCATE_parser_nodes___AAttrFormExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3001,7 +3020,7 @@ void parser_nodes___AAttrFormExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AAttrFormExpr___n_id(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 723, LOCATE_parser_nodes___AAttrFormExpr___n_id};
+  struct trace_t trace = {NULL, NULL, 724, LOCATE_parser_nodes___AAttrFormExpr___n_id};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3010,7 +3029,7 @@ val_t parser_nodes___AAttrFormExpr___n_id(val_t  self) {
   return ATTR_parser_nodes___AAttrFormExpr____n_id( self) /*AAttrFormExpr::_n_id*/;
 }
 void parser_nodes___AAttrFormExpr___n_id__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 723, LOCATE_parser_nodes___AAttrFormExpr___n_id__eq};
+  struct trace_t trace = {NULL, NULL, 724, LOCATE_parser_nodes___AAttrFormExpr___n_id__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3020,7 +3039,7 @@ void parser_nodes___AAttrFormExpr___n_id__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ACallFormExpr___n_id(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 734, LOCATE_parser_nodes___ACallFormExpr___n_id};
+  struct trace_t trace = {NULL, NULL, 735, LOCATE_parser_nodes___ACallFormExpr___n_id};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3029,7 +3048,7 @@ val_t parser_nodes___ACallFormExpr___n_id(val_t  self) {
   return ATTR_parser_nodes___ACallFormExpr____n_id( self) /*ACallFormExpr::_n_id*/;
 }
 void parser_nodes___ACallFormExpr___n_id__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 734, LOCATE_parser_nodes___ACallFormExpr___n_id__eq};
+  struct trace_t trace = {NULL, NULL, 735, LOCATE_parser_nodes___ACallFormExpr___n_id__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3039,7 +3058,7 @@ void parser_nodes___ACallFormExpr___n_id__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ACallFormExpr___n_args(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 735, LOCATE_parser_nodes___ACallFormExpr___n_args};
+  struct trace_t trace = {NULL, NULL, 736, LOCATE_parser_nodes___ACallFormExpr___n_args};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3048,7 +3067,7 @@ val_t parser_nodes___ACallFormExpr___n_args(val_t  self) {
   return ATTR_parser_nodes___ACallFormExpr____n_args( self) /*ACallFormExpr::_n_args*/;
 }
 void parser_nodes___ACallFormExpr___n_args__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 735, LOCATE_parser_nodes___ACallFormExpr___n_args__eq};
+  struct trace_t trace = {NULL, NULL, 736, LOCATE_parser_nodes___ACallFormExpr___n_args__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3058,7 +3077,7 @@ void parser_nodes___ACallFormExpr___n_args__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ASuperExpr___n_qualified(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 756, LOCATE_parser_nodes___ASuperExpr___n_qualified};
+  struct trace_t trace = {NULL, NULL, 757, LOCATE_parser_nodes___ASuperExpr___n_qualified};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3067,7 +3086,7 @@ val_t parser_nodes___ASuperExpr___n_qualified(val_t  self) {
   return ATTR_parser_nodes___ASuperExpr____n_qualified( self) /*ASuperExpr::_n_qualified*/;
 }
 void parser_nodes___ASuperExpr___n_qualified__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 756, LOCATE_parser_nodes___ASuperExpr___n_qualified__eq};
+  struct trace_t trace = {NULL, NULL, 757, LOCATE_parser_nodes___ASuperExpr___n_qualified__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3077,7 +3096,7 @@ void parser_nodes___ASuperExpr___n_qualified__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ASuperExpr___n_kwsuper(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 757, LOCATE_parser_nodes___ASuperExpr___n_kwsuper};
+  struct trace_t trace = {NULL, NULL, 758, LOCATE_parser_nodes___ASuperExpr___n_kwsuper};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3086,7 +3105,7 @@ val_t parser_nodes___ASuperExpr___n_kwsuper(val_t  self) {
   return ATTR_parser_nodes___ASuperExpr____n_kwsuper( self) /*ASuperExpr::_n_kwsuper*/;
 }
 void parser_nodes___ASuperExpr___n_kwsuper__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 757, LOCATE_parser_nodes___ASuperExpr___n_kwsuper__eq};
+  struct trace_t trace = {NULL, NULL, 758, LOCATE_parser_nodes___ASuperExpr___n_kwsuper__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3096,7 +3115,7 @@ void parser_nodes___ASuperExpr___n_kwsuper__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ASuperExpr___n_args(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 758, LOCATE_parser_nodes___ASuperExpr___n_args};
+  struct trace_t trace = {NULL, NULL, 759, LOCATE_parser_nodes___ASuperExpr___n_args};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3105,7 +3124,7 @@ val_t parser_nodes___ASuperExpr___n_args(val_t  self) {
   return ATTR_parser_nodes___ASuperExpr____n_args( self) /*ASuperExpr::_n_args*/;
 }
 void parser_nodes___ASuperExpr___n_args__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 758, LOCATE_parser_nodes___ASuperExpr___n_args__eq};
+  struct trace_t trace = {NULL, NULL, 759, LOCATE_parser_nodes___ASuperExpr___n_args__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3115,7 +3134,7 @@ void parser_nodes___ASuperExpr___n_args__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AInitExpr___n_kwinit(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 762, LOCATE_parser_nodes___AInitExpr___n_kwinit};
+  struct trace_t trace = {NULL, NULL, 763, LOCATE_parser_nodes___AInitExpr___n_kwinit};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3124,7 +3143,7 @@ val_t parser_nodes___AInitExpr___n_kwinit(val_t  self) {
   return ATTR_parser_nodes___AInitExpr____n_kwinit( self) /*AInitExpr::_n_kwinit*/;
 }
 void parser_nodes___AInitExpr___n_kwinit__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 762, LOCATE_parser_nodes___AInitExpr___n_kwinit__eq};
+  struct trace_t trace = {NULL, NULL, 763, LOCATE_parser_nodes___AInitExpr___n_kwinit__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3134,7 +3153,7 @@ void parser_nodes___AInitExpr___n_kwinit__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AInitExpr___n_args(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 763, LOCATE_parser_nodes___AInitExpr___n_args};
+  struct trace_t trace = {NULL, NULL, 764, LOCATE_parser_nodes___AInitExpr___n_args};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3143,7 +3162,7 @@ val_t parser_nodes___AInitExpr___n_args(val_t  self) {
   return ATTR_parser_nodes___AInitExpr____n_args( self) /*AInitExpr::_n_args*/;
 }
 void parser_nodes___AInitExpr___n_args__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 763, LOCATE_parser_nodes___AInitExpr___n_args__eq};
+  struct trace_t trace = {NULL, NULL, 764, LOCATE_parser_nodes___AInitExpr___n_args__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3153,7 +3172,7 @@ void parser_nodes___AInitExpr___n_args__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ABraFormExpr___n_args(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 767, LOCATE_parser_nodes___ABraFormExpr___n_args};
+  struct trace_t trace = {NULL, NULL, 768, LOCATE_parser_nodes___ABraFormExpr___n_args};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3162,7 +3181,7 @@ val_t parser_nodes___ABraFormExpr___n_args(val_t  self) {
   return ATTR_parser_nodes___ABraFormExpr____n_args( self) /*ABraFormExpr::_n_args*/;
 }
 void parser_nodes___ABraFormExpr___n_args__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 767, LOCATE_parser_nodes___ABraFormExpr___n_args__eq};
+  struct trace_t trace = {NULL, NULL, 768, LOCATE_parser_nodes___ABraFormExpr___n_args__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3172,7 +3191,7 @@ void parser_nodes___ABraFormExpr___n_args__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AVarFormExpr___n_id(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 778, LOCATE_parser_nodes___AVarFormExpr___n_id};
+  struct trace_t trace = {NULL, NULL, 779, LOCATE_parser_nodes___AVarFormExpr___n_id};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3181,7 +3200,7 @@ val_t parser_nodes___AVarFormExpr___n_id(val_t  self) {
   return ATTR_parser_nodes___AVarFormExpr____n_id( self) /*AVarFormExpr::_n_id*/;
 }
 void parser_nodes___AVarFormExpr___n_id__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 778, LOCATE_parser_nodes___AVarFormExpr___n_id__eq};
+  struct trace_t trace = {NULL, NULL, 779, LOCATE_parser_nodes___AVarFormExpr___n_id__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3191,7 +3210,7 @@ void parser_nodes___AVarFormExpr___n_id__eq(val_t  self, val_t  param0) {
   return;
 }
 void parser_nodes___AClosureCallExpr___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 797, LOCATE_parser_nodes___AClosureCallExpr___init};
+  struct trace_t trace = {NULL, NULL, 798, LOCATE_parser_nodes___AClosureCallExpr___init};
   val_t variable[6];
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3200,7 +3219,7 @@ void parser_nodes___AClosureCallExpr___init(val_t  self, val_t  param0, val_t  p
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_AClosureCallExpr].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_AClosureCallExpr].i]) return;
   variable[5] = variable[0];
   ATTR_parser_nodes___ACallFormExpr____n_id(variable[5]) /*ACallFormExpr::_n_id*/ =  variable[1] /*i*/;
   variable[5] = variable[0];
@@ -3210,12 +3229,12 @@ void parser_nodes___AClosureCallExpr___init(val_t  self, val_t  param0, val_t  p
   variable[5] = variable[0];
   ATTR_parser_nodes___ASendExpr____n_expr(variable[5]) /*ASendExpr::_n_expr*/ =  NIT_NULL /*null*/;
   return_label2: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_AClosureCallExpr].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_AClosureCallExpr].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t parser_nodes___ARangeExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 807, LOCATE_parser_nodes___ARangeExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 808, LOCATE_parser_nodes___ARangeExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3224,7 +3243,7 @@ val_t parser_nodes___ARangeExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___ARangeExpr____n_expr( self) /*ARangeExpr::_n_expr*/;
 }
 void parser_nodes___ARangeExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 807, LOCATE_parser_nodes___ARangeExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 808, LOCATE_parser_nodes___ARangeExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3234,7 +3253,7 @@ void parser_nodes___ARangeExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ARangeExpr___n_expr2(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 808, LOCATE_parser_nodes___ARangeExpr___n_expr2};
+  struct trace_t trace = {NULL, NULL, 809, LOCATE_parser_nodes___ARangeExpr___n_expr2};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3243,7 +3262,7 @@ val_t parser_nodes___ARangeExpr___n_expr2(val_t  self) {
   return ATTR_parser_nodes___ARangeExpr____n_expr2( self) /*ARangeExpr::_n_expr2*/;
 }
 void parser_nodes___ARangeExpr___n_expr2__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 808, LOCATE_parser_nodes___ARangeExpr___n_expr2__eq};
+  struct trace_t trace = {NULL, NULL, 809, LOCATE_parser_nodes___ARangeExpr___n_expr2__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3253,7 +3272,7 @@ void parser_nodes___ARangeExpr___n_expr2__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AArrayExpr___n_exprs(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 818, LOCATE_parser_nodes___AArrayExpr___n_exprs};
+  struct trace_t trace = {NULL, NULL, 819, LOCATE_parser_nodes___AArrayExpr___n_exprs};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3262,7 +3281,7 @@ val_t parser_nodes___AArrayExpr___n_exprs(val_t  self) {
   return ATTR_parser_nodes___AArrayExpr____n_exprs( self) /*AArrayExpr::_n_exprs*/;
 }
 void parser_nodes___AArrayExpr___n_exprs__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 818, LOCATE_parser_nodes___AArrayExpr___n_exprs__eq};
+  struct trace_t trace = {NULL, NULL, 819, LOCATE_parser_nodes___AArrayExpr___n_exprs__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3272,7 +3291,7 @@ void parser_nodes___AArrayExpr___n_exprs__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ASelfExpr___n_kwself(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 822, LOCATE_parser_nodes___ASelfExpr___n_kwself};
+  struct trace_t trace = {NULL, NULL, 823, LOCATE_parser_nodes___ASelfExpr___n_kwself};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3281,7 +3300,7 @@ val_t parser_nodes___ASelfExpr___n_kwself(val_t  self) {
   return ATTR_parser_nodes___ASelfExpr____n_kwself( self) /*ASelfExpr::_n_kwself*/;
 }
 void parser_nodes___ASelfExpr___n_kwself__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 822, LOCATE_parser_nodes___ASelfExpr___n_kwself__eq};
+  struct trace_t trace = {NULL, NULL, 823, LOCATE_parser_nodes___ASelfExpr___n_kwself__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3291,7 +3310,7 @@ void parser_nodes___ASelfExpr___n_kwself__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ATrueExpr___n_kwtrue(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 829, LOCATE_parser_nodes___ATrueExpr___n_kwtrue};
+  struct trace_t trace = {NULL, NULL, 830, LOCATE_parser_nodes___ATrueExpr___n_kwtrue};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3300,7 +3319,7 @@ val_t parser_nodes___ATrueExpr___n_kwtrue(val_t  self) {
   return ATTR_parser_nodes___ATrueExpr____n_kwtrue( self) /*ATrueExpr::_n_kwtrue*/;
 }
 void parser_nodes___ATrueExpr___n_kwtrue__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 829, LOCATE_parser_nodes___ATrueExpr___n_kwtrue__eq};
+  struct trace_t trace = {NULL, NULL, 830, LOCATE_parser_nodes___ATrueExpr___n_kwtrue__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3310,7 +3329,7 @@ void parser_nodes___ATrueExpr___n_kwtrue__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AFalseExpr___n_kwfalse(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 833, LOCATE_parser_nodes___AFalseExpr___n_kwfalse};
+  struct trace_t trace = {NULL, NULL, 834, LOCATE_parser_nodes___AFalseExpr___n_kwfalse};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3319,7 +3338,7 @@ val_t parser_nodes___AFalseExpr___n_kwfalse(val_t  self) {
   return ATTR_parser_nodes___AFalseExpr____n_kwfalse( self) /*AFalseExpr::_n_kwfalse*/;
 }
 void parser_nodes___AFalseExpr___n_kwfalse__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 833, LOCATE_parser_nodes___AFalseExpr___n_kwfalse__eq};
+  struct trace_t trace = {NULL, NULL, 834, LOCATE_parser_nodes___AFalseExpr___n_kwfalse__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3329,7 +3348,7 @@ void parser_nodes___AFalseExpr___n_kwfalse__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ANullExpr___n_kwnull(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 837, LOCATE_parser_nodes___ANullExpr___n_kwnull};
+  struct trace_t trace = {NULL, NULL, 838, LOCATE_parser_nodes___ANullExpr___n_kwnull};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3338,7 +3357,7 @@ val_t parser_nodes___ANullExpr___n_kwnull(val_t  self) {
   return ATTR_parser_nodes___ANullExpr____n_kwnull( self) /*ANullExpr::_n_kwnull*/;
 }
 void parser_nodes___ANullExpr___n_kwnull__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 837, LOCATE_parser_nodes___ANullExpr___n_kwnull__eq};
+  struct trace_t trace = {NULL, NULL, 838, LOCATE_parser_nodes___ANullExpr___n_kwnull__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3348,7 +3367,7 @@ void parser_nodes___ANullExpr___n_kwnull__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AIntExpr___n_number(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 841, LOCATE_parser_nodes___AIntExpr___n_number};
+  struct trace_t trace = {NULL, NULL, 842, LOCATE_parser_nodes___AIntExpr___n_number};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3357,7 +3376,7 @@ val_t parser_nodes___AIntExpr___n_number(val_t  self) {
   return ATTR_parser_nodes___AIntExpr____n_number( self) /*AIntExpr::_n_number*/;
 }
 void parser_nodes___AIntExpr___n_number__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 841, LOCATE_parser_nodes___AIntExpr___n_number__eq};
+  struct trace_t trace = {NULL, NULL, 842, LOCATE_parser_nodes___AIntExpr___n_number__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3367,7 +3386,7 @@ void parser_nodes___AIntExpr___n_number__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AFloatExpr___n_float(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 845, LOCATE_parser_nodes___AFloatExpr___n_float};
+  struct trace_t trace = {NULL, NULL, 846, LOCATE_parser_nodes___AFloatExpr___n_float};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3376,7 +3395,7 @@ val_t parser_nodes___AFloatExpr___n_float(val_t  self) {
   return ATTR_parser_nodes___AFloatExpr____n_float( self) /*AFloatExpr::_n_float*/;
 }
 void parser_nodes___AFloatExpr___n_float__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 845, LOCATE_parser_nodes___AFloatExpr___n_float__eq};
+  struct trace_t trace = {NULL, NULL, 846, LOCATE_parser_nodes___AFloatExpr___n_float__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3386,7 +3405,7 @@ void parser_nodes___AFloatExpr___n_float__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ACharExpr___n_char(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 849, LOCATE_parser_nodes___ACharExpr___n_char};
+  struct trace_t trace = {NULL, NULL, 850, LOCATE_parser_nodes___ACharExpr___n_char};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3395,7 +3414,7 @@ val_t parser_nodes___ACharExpr___n_char(val_t  self) {
   return ATTR_parser_nodes___ACharExpr____n_char( self) /*ACharExpr::_n_char*/;
 }
 void parser_nodes___ACharExpr___n_char__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 849, LOCATE_parser_nodes___ACharExpr___n_char__eq};
+  struct trace_t trace = {NULL, NULL, 850, LOCATE_parser_nodes___ACharExpr___n_char__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3405,7 +3424,7 @@ void parser_nodes___ACharExpr___n_char__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AStringExpr___n_string(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 856, LOCATE_parser_nodes___AStringExpr___n_string};
+  struct trace_t trace = {NULL, NULL, 857, LOCATE_parser_nodes___AStringExpr___n_string};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3414,7 +3433,7 @@ val_t parser_nodes___AStringExpr___n_string(val_t  self) {
   return ATTR_parser_nodes___AStringExpr____n_string( self) /*AStringExpr::_n_string*/;
 }
 void parser_nodes___AStringExpr___n_string__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 856, LOCATE_parser_nodes___AStringExpr___n_string__eq};
+  struct trace_t trace = {NULL, NULL, 857, LOCATE_parser_nodes___AStringExpr___n_string__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3424,7 +3443,7 @@ void parser_nodes___AStringExpr___n_string__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AStartStringExpr___n_string(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 860, LOCATE_parser_nodes___AStartStringExpr___n_string};
+  struct trace_t trace = {NULL, NULL, 861, LOCATE_parser_nodes___AStartStringExpr___n_string};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3433,7 +3452,7 @@ val_t parser_nodes___AStartStringExpr___n_string(val_t  self) {
   return ATTR_parser_nodes___AStartStringExpr____n_string( self) /*AStartStringExpr::_n_string*/;
 }
 void parser_nodes___AStartStringExpr___n_string__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 860, LOCATE_parser_nodes___AStartStringExpr___n_string__eq};
+  struct trace_t trace = {NULL, NULL, 861, LOCATE_parser_nodes___AStartStringExpr___n_string__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3443,7 +3462,7 @@ void parser_nodes___AStartStringExpr___n_string__eq(val_t  self, val_t  param0) 
   return;
 }
 val_t parser_nodes___AMidStringExpr___n_string(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 864, LOCATE_parser_nodes___AMidStringExpr___n_string};
+  struct trace_t trace = {NULL, NULL, 865, LOCATE_parser_nodes___AMidStringExpr___n_string};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3452,7 +3471,7 @@ val_t parser_nodes___AMidStringExpr___n_string(val_t  self) {
   return ATTR_parser_nodes___AMidStringExpr____n_string( self) /*AMidStringExpr::_n_string*/;
 }
 void parser_nodes___AMidStringExpr___n_string__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 864, LOCATE_parser_nodes___AMidStringExpr___n_string__eq};
+  struct trace_t trace = {NULL, NULL, 865, LOCATE_parser_nodes___AMidStringExpr___n_string__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3462,7 +3481,7 @@ void parser_nodes___AMidStringExpr___n_string__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AEndStringExpr___n_string(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 868, LOCATE_parser_nodes___AEndStringExpr___n_string};
+  struct trace_t trace = {NULL, NULL, 869, LOCATE_parser_nodes___AEndStringExpr___n_string};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3471,7 +3490,7 @@ val_t parser_nodes___AEndStringExpr___n_string(val_t  self) {
   return ATTR_parser_nodes___AEndStringExpr____n_string( self) /*AEndStringExpr::_n_string*/;
 }
 void parser_nodes___AEndStringExpr___n_string__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 868, LOCATE_parser_nodes___AEndStringExpr___n_string__eq};
+  struct trace_t trace = {NULL, NULL, 869, LOCATE_parser_nodes___AEndStringExpr___n_string__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3481,7 +3500,7 @@ void parser_nodes___AEndStringExpr___n_string__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ASuperstringExpr___n_exprs(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 872, LOCATE_parser_nodes___ASuperstringExpr___n_exprs};
+  struct trace_t trace = {NULL, NULL, 873, LOCATE_parser_nodes___ASuperstringExpr___n_exprs};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3490,7 +3509,7 @@ val_t parser_nodes___ASuperstringExpr___n_exprs(val_t  self) {
   return ATTR_parser_nodes___ASuperstringExpr____n_exprs( self) /*ASuperstringExpr::_n_exprs*/;
 }
 void parser_nodes___ASuperstringExpr___n_exprs__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 872, LOCATE_parser_nodes___ASuperstringExpr___n_exprs__eq};
+  struct trace_t trace = {NULL, NULL, 873, LOCATE_parser_nodes___ASuperstringExpr___n_exprs__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3500,7 +3519,7 @@ void parser_nodes___ASuperstringExpr___n_exprs__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AProxyExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 879, LOCATE_parser_nodes___AProxyExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 880, LOCATE_parser_nodes___AProxyExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3509,7 +3528,7 @@ val_t parser_nodes___AProxyExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___AProxyExpr____n_expr( self) /*AProxyExpr::_n_expr*/;
 }
 void parser_nodes___AProxyExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 879, LOCATE_parser_nodes___AProxyExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 880, LOCATE_parser_nodes___AProxyExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3519,7 +3538,7 @@ void parser_nodes___AProxyExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AAsCastExpr___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 883, LOCATE_parser_nodes___AAsCastExpr___n_expr};
+  struct trace_t trace = {NULL, NULL, 884, LOCATE_parser_nodes___AAsCastExpr___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3528,7 +3547,7 @@ val_t parser_nodes___AAsCastExpr___n_expr(val_t  self) {
   return ATTR_parser_nodes___AAsCastExpr____n_expr( self) /*AAsCastExpr::_n_expr*/;
 }
 void parser_nodes___AAsCastExpr___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 883, LOCATE_parser_nodes___AAsCastExpr___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 884, LOCATE_parser_nodes___AAsCastExpr___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3538,7 +3557,7 @@ void parser_nodes___AAsCastExpr___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AAsCastExpr___n_kwas(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 884, LOCATE_parser_nodes___AAsCastExpr___n_kwas};
+  struct trace_t trace = {NULL, NULL, 885, LOCATE_parser_nodes___AAsCastExpr___n_kwas};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3547,7 +3566,7 @@ val_t parser_nodes___AAsCastExpr___n_kwas(val_t  self) {
   return ATTR_parser_nodes___AAsCastExpr____n_kwas( self) /*AAsCastExpr::_n_kwas*/;
 }
 void parser_nodes___AAsCastExpr___n_kwas__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 884, LOCATE_parser_nodes___AAsCastExpr___n_kwas__eq};
+  struct trace_t trace = {NULL, NULL, 885, LOCATE_parser_nodes___AAsCastExpr___n_kwas__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3557,7 +3576,7 @@ void parser_nodes___AAsCastExpr___n_kwas__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AAsCastExpr___n_type(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 885, LOCATE_parser_nodes___AAsCastExpr___n_type};
+  struct trace_t trace = {NULL, NULL, 886, LOCATE_parser_nodes___AAsCastExpr___n_type};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3566,7 +3585,7 @@ val_t parser_nodes___AAsCastExpr___n_type(val_t  self) {
   return ATTR_parser_nodes___AAsCastExpr____n_type( self) /*AAsCastExpr::_n_type*/;
 }
 void parser_nodes___AAsCastExpr___n_type__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 885, LOCATE_parser_nodes___AAsCastExpr___n_type__eq};
+  struct trace_t trace = {NULL, NULL, 886, LOCATE_parser_nodes___AAsCastExpr___n_type__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3576,7 +3595,7 @@ void parser_nodes___AAsCastExpr___n_type__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___APlusAssignOp___n_pluseq(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 889, LOCATE_parser_nodes___APlusAssignOp___n_pluseq};
+  struct trace_t trace = {NULL, NULL, 890, LOCATE_parser_nodes___APlusAssignOp___n_pluseq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3585,7 +3604,7 @@ val_t parser_nodes___APlusAssignOp___n_pluseq(val_t  self) {
   return ATTR_parser_nodes___APlusAssignOp____n_pluseq( self) /*APlusAssignOp::_n_pluseq*/;
 }
 void parser_nodes___APlusAssignOp___n_pluseq__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 889, LOCATE_parser_nodes___APlusAssignOp___n_pluseq__eq};
+  struct trace_t trace = {NULL, NULL, 890, LOCATE_parser_nodes___APlusAssignOp___n_pluseq__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3595,7 +3614,7 @@ void parser_nodes___APlusAssignOp___n_pluseq__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AMinusAssignOp___n_minuseq(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 893, LOCATE_parser_nodes___AMinusAssignOp___n_minuseq};
+  struct trace_t trace = {NULL, NULL, 894, LOCATE_parser_nodes___AMinusAssignOp___n_minuseq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3604,7 +3623,7 @@ val_t parser_nodes___AMinusAssignOp___n_minuseq(val_t  self) {
   return ATTR_parser_nodes___AMinusAssignOp____n_minuseq( self) /*AMinusAssignOp::_n_minuseq*/;
 }
 void parser_nodes___AMinusAssignOp___n_minuseq__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 893, LOCATE_parser_nodes___AMinusAssignOp___n_minuseq__eq};
+  struct trace_t trace = {NULL, NULL, 894, LOCATE_parser_nodes___AMinusAssignOp___n_minuseq__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3614,7 +3633,7 @@ void parser_nodes___AMinusAssignOp___n_minuseq__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AClosureDef___n_kwwith(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 897, LOCATE_parser_nodes___AClosureDef___n_kwwith};
+  struct trace_t trace = {NULL, NULL, 898, LOCATE_parser_nodes___AClosureDef___n_kwwith};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3623,7 +3642,7 @@ val_t parser_nodes___AClosureDef___n_kwwith(val_t  self) {
   return ATTR_parser_nodes___AClosureDef____n_kwwith( self) /*AClosureDef::_n_kwwith*/;
 }
 void parser_nodes___AClosureDef___n_kwwith__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 897, LOCATE_parser_nodes___AClosureDef___n_kwwith__eq};
+  struct trace_t trace = {NULL, NULL, 898, LOCATE_parser_nodes___AClosureDef___n_kwwith__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3633,7 +3652,7 @@ void parser_nodes___AClosureDef___n_kwwith__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AClosureDef___n_id(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 898, LOCATE_parser_nodes___AClosureDef___n_id};
+  struct trace_t trace = {NULL, NULL, 899, LOCATE_parser_nodes___AClosureDef___n_id};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3642,7 +3661,7 @@ val_t parser_nodes___AClosureDef___n_id(val_t  self) {
   return ATTR_parser_nodes___AClosureDef____n_id( self) /*AClosureDef::_n_id*/;
 }
 void parser_nodes___AClosureDef___n_id__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 898, LOCATE_parser_nodes___AClosureDef___n_id__eq};
+  struct trace_t trace = {NULL, NULL, 899, LOCATE_parser_nodes___AClosureDef___n_id__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3652,7 +3671,7 @@ void parser_nodes___AClosureDef___n_id__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AClosureDef___n_kwdo(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 899, LOCATE_parser_nodes___AClosureDef___n_kwdo};
+  struct trace_t trace = {NULL, NULL, 900, LOCATE_parser_nodes___AClosureDef___n_kwdo};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3661,7 +3680,7 @@ val_t parser_nodes___AClosureDef___n_kwdo(val_t  self) {
   return ATTR_parser_nodes___AClosureDef____n_kwdo( self) /*AClosureDef::_n_kwdo*/;
 }
 void parser_nodes___AClosureDef___n_kwdo__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 899, LOCATE_parser_nodes___AClosureDef___n_kwdo__eq};
+  struct trace_t trace = {NULL, NULL, 900, LOCATE_parser_nodes___AClosureDef___n_kwdo__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3671,7 +3690,7 @@ void parser_nodes___AClosureDef___n_kwdo__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AClosureDef___n_expr(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 900, LOCATE_parser_nodes___AClosureDef___n_expr};
+  struct trace_t trace = {NULL, NULL, 901, LOCATE_parser_nodes___AClosureDef___n_expr};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3680,7 +3699,7 @@ val_t parser_nodes___AClosureDef___n_expr(val_t  self) {
   return ATTR_parser_nodes___AClosureDef____n_expr( self) /*AClosureDef::_n_expr*/;
 }
 void parser_nodes___AClosureDef___n_expr__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 900, LOCATE_parser_nodes___AClosureDef___n_expr__eq};
+  struct trace_t trace = {NULL, NULL, 901, LOCATE_parser_nodes___AClosureDef___n_expr__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3690,7 +3709,7 @@ void parser_nodes___AClosureDef___n_expr__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AQualified___n_id(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 904, LOCATE_parser_nodes___AQualified___n_id};
+  struct trace_t trace = {NULL, NULL, 905, LOCATE_parser_nodes___AQualified___n_id};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3699,7 +3718,7 @@ val_t parser_nodes___AQualified___n_id(val_t  self) {
   return ATTR_parser_nodes___AQualified____n_id( self) /*AQualified::_n_id*/;
 }
 void parser_nodes___AQualified___n_id__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 904, LOCATE_parser_nodes___AQualified___n_id__eq};
+  struct trace_t trace = {NULL, NULL, 905, LOCATE_parser_nodes___AQualified___n_id__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3709,7 +3728,7 @@ void parser_nodes___AQualified___n_id__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___AQualified___n_classid(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 905, LOCATE_parser_nodes___AQualified___n_classid};
+  struct trace_t trace = {NULL, NULL, 906, LOCATE_parser_nodes___AQualified___n_classid};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3718,7 +3737,7 @@ val_t parser_nodes___AQualified___n_classid(val_t  self) {
   return ATTR_parser_nodes___AQualified____n_classid( self) /*AQualified::_n_classid*/;
 }
 void parser_nodes___AQualified___n_classid__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 905, LOCATE_parser_nodes___AQualified___n_classid__eq};
+  struct trace_t trace = {NULL, NULL, 906, LOCATE_parser_nodes___AQualified___n_classid__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3728,7 +3747,7 @@ void parser_nodes___AQualified___n_classid__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___ADoc___n_comment(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 909, LOCATE_parser_nodes___ADoc___n_comment};
+  struct trace_t trace = {NULL, NULL, 910, LOCATE_parser_nodes___ADoc___n_comment};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3737,7 +3756,7 @@ val_t parser_nodes___ADoc___n_comment(val_t  self) {
   return ATTR_parser_nodes___ADoc____n_comment( self) /*ADoc::_n_comment*/;
 }
 void parser_nodes___ADoc___n_comment__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 909, LOCATE_parser_nodes___ADoc___n_comment__eq};
+  struct trace_t trace = {NULL, NULL, 910, LOCATE_parser_nodes___ADoc___n_comment__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3747,7 +3766,7 @@ void parser_nodes___ADoc___n_comment__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___Start___n_base(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 914, LOCATE_parser_nodes___Start___n_base};
+  struct trace_t trace = {NULL, NULL, 915, LOCATE_parser_nodes___Start___n_base};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3756,7 +3775,7 @@ val_t parser_nodes___Start___n_base(val_t  self) {
   return ATTR_parser_nodes___Start____n_base( self) /*Start::_n_base*/;
 }
 void parser_nodes___Start___n_base__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 914, LOCATE_parser_nodes___Start___n_base__eq};
+  struct trace_t trace = {NULL, NULL, 915, LOCATE_parser_nodes___Start___n_base__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3766,7 +3785,7 @@ void parser_nodes___Start___n_base__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t parser_nodes___Start___n_eof(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 915, LOCATE_parser_nodes___Start___n_eof};
+  struct trace_t trace = {NULL, NULL, 916, LOCATE_parser_nodes___Start___n_eof};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
@@ -3775,7 +3794,7 @@ val_t parser_nodes___Start___n_eof(val_t  self) {
   return ATTR_parser_nodes___Start____n_eof( self) /*Start::_n_eof*/;
 }
 void parser_nodes___Start___n_eof__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 915, LOCATE_parser_nodes___Start___n_eof__eq};
+  struct trace_t trace = {NULL, NULL, 916, LOCATE_parser_nodes___Start___n_eof__eq};
   val_t *variable = NULL;
   void **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;

@@ -179,7 +179,7 @@ void virtualtype___MMVirtualType___init(val_t  self, val_t  param0, val_t  param
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMVirtualType].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMVirtualType].i]) return;
   variable[4] = ((abstractmetamodel___MMLocalProperty___name_t)CALL( variable[1] /*p*/,COLOR_abstractmetamodel___MMLocalProperty___name))( variable[1] /*p*/) /*MMLocalProperty::name*/;
   variable[5] = ((static_type___MMLocalProperty___signature_for_t)CALL( variable[1] /*p*/,COLOR_static_type___MMLocalProperty___signature_for))( variable[1] /*p*/,  variable[2] /*recv*/) /*MMLocalProperty::signature_for*/;
   variable[5] = ((static_type___MMSignature___return_type_t)CALL(variable[5],COLOR_static_type___MMSignature___return_type))(variable[5]) /*MMSignature::return_type*/;
@@ -189,7 +189,7 @@ void virtualtype___MMVirtualType___init(val_t  self, val_t  param0, val_t  param
   variable[4] = variable[0];
   ATTR_virtualtype___MMVirtualType____recv(variable[4]) /*MMVirtualType::_recv*/ =  variable[2] /*recv*/;
   return_label7: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_MMVirtualType].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMVirtualType].i] = 1;
   tracehead = trace.prev;
   return;
 }

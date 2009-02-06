@@ -393,11 +393,11 @@ void abstract_collection___Container___init(val_t  self, val_t  param0, int* ini
   trace.file = LOCATE_abstract_collection;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Container].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Container].i]) return;
   variable[3] = variable[0];
   ATTR_abstract_collection___Container____item(variable[3]) /*Container::_item*/ =  variable[1] /*e*/;
   return_label17: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Container].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Container].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -466,11 +466,11 @@ void abstract_collection___ContainerIterator___init(val_t  self, val_t  param0, 
   trace.file = LOCATE_abstract_collection;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ContainerIterator].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ContainerIterator].i]) return;
   variable[3] = variable[0];
   ATTR_abstract_collection___ContainerIterator____container(variable[3]) /*ContainerIterator::_container*/ =  variable[1] /*c*/;
   return_label20: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ContainerIterator].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ContainerIterator].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1130,11 +1130,11 @@ void abstract_collection___CoupleMapIterator___init(val_t  self, val_t  param0, 
   trace.file = LOCATE_abstract_collection;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_CoupleMapIterator].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_CoupleMapIterator].i]) return;
   variable[3] = variable[0];
   ATTR_abstract_collection___CoupleMapIterator____iter(variable[3]) /*CoupleMapIterator::_iter*/ =  variable[1] /*i*/;
   return_label48: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_CoupleMapIterator].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_CoupleMapIterator].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1185,13 +1185,13 @@ void abstract_collection___Couple___init(val_t  self, val_t  param0, val_t  para
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Couple].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Couple].i]) return;
   variable[4] = variable[0];
   ATTR_abstract_collection___Couple____first(variable[4]) /*Couple::_first*/ =  variable[1] /*f*/;
   variable[4] = variable[0];
   ATTR_abstract_collection___Couple____second(variable[4]) /*Couple::_second*/ =  variable[2] /*s*/;
   return_label49: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Couple].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Couple].i] = 1;
   tracehead = trace.prev;
   return;
 }

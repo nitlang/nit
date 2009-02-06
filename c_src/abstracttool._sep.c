@@ -7,13 +7,13 @@ void abstracttool___AbstractCompiler___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstracttool;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_AbstractCompiler].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_AbstractCompiler].i]) return;
   ((mmloader___ToolContext___init_t)CALL(variable[0],COLOR_mmloader___ToolContext___init))(variable[0], init_table /*YYY*/) /*ToolContext::init*/;
   variable[2] = variable[0];
   variable[3] = NEW_SrcModuleLoader_syntax___SrcModuleLoader___init(); /*new SrcModuleLoader*/
   ((mmloader___ToolContext___register_loader_t)CALL(variable[2],COLOR_mmloader___ToolContext___register_loader))(variable[2], variable[3]) /*ToolContext::register_loader*/;
   return_label0: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_AbstractCompiler].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_AbstractCompiler].i] = 1;
   tracehead = trace.prev;
   return;
 }

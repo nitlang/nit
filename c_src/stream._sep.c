@@ -559,11 +559,11 @@ void stream___FDStream___init(val_t  self, val_t  param0, int* init_table) {
   trace.file = LOCATE_stream;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_FDStream].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDStream].i]) return;
   variable[3] = variable[0];
   ATTR_stream___FDStream____fd(variable[3]) /*FDStream::_fd*/ =  variable[1] /*fd*/;
   return_label21: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_FDStream].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDStream].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -608,10 +608,10 @@ void stream___FDIStream___init(val_t  self, val_t  param0, int* init_table) {
   trace.file = LOCATE_stream;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_FDIStream].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDIStream].i]) return;
   ((stream___FDStream___init_t)CALL(variable[0],COLOR_stream___FDStream___init))(variable[0], variable[1], init_table /*YYY*/) /*FDStream::init*/;
   return_label23: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_FDIStream].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDIStream].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -657,12 +657,12 @@ void stream___FDOStream___init(val_t  self, val_t  param0, int* init_table) {
   trace.file = LOCATE_stream;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_FDOStream].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDOStream].i]) return;
   ((stream___FDStream___init_t)CALL(variable[0],COLOR_stream___FDStream___init))(variable[0], variable[1], init_table /*YYY*/) /*FDStream::init*/;
   variable[3] = variable[0];
   ATTR_stream___FDOStream____is_writable(variable[3]) /*FDOStream::_is_writable*/ =  TAG_Bool(true);
   return_label25: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_FDOStream].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDOStream].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -674,7 +674,7 @@ void stream___FDIOStream___init(val_t  self, val_t  param0, int* init_table) {
   trace.file = LOCATE_stream;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_FDIOStream].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDIOStream].i]) return;
   ((stream___FDIStream___init_t)CALL(variable[0],COLOR_stream___FDIStream___init))(variable[0], variable[1], init_table /*YYY*/) /*FDIStream::init*/;
   ((stream___FDOStream___init_t)CALL(variable[0],COLOR_stream___FDOStream___init))(variable[0], variable[1], init_table /*YYY*/) /*FDOStream::init*/;
   variable[3] = variable[0];
@@ -682,7 +682,7 @@ void stream___FDIOStream___init(val_t  self, val_t  param0, int* init_table) {
   variable[3] = variable[0];
   ATTR_stream___FDOStream____is_writable(variable[3]) /*FDOStream::_is_writable*/ =  TAG_Bool(true);
   return_label26: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_FDIOStream].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDIOStream].i] = 1;
   tracehead = trace.prev;
   return;
 }

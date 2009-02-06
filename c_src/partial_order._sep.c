@@ -507,7 +507,7 @@ void partial_order___PartialOrder___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_PartialOrder].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PartialOrder].i]) return;
   variable[2] = variable[0];
   variable[3] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[E, PartialOrderElement[E]]*/
   ATTR_partial_order___PartialOrder____elements(variable[2]) /*PartialOrder::_elements*/ = variable[3];
@@ -518,7 +518,7 @@ void partial_order___PartialOrder___init(val_t  self, int* init_table) {
   variable[3] = NEW_Array_array___Array___init(); /*new Array[E]*/
   ATTR_partial_order___PartialOrder____roots(variable[2]) /*PartialOrder::_roots*/ = variable[3];
   return_label24: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_PartialOrder].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PartialOrder].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -864,7 +864,7 @@ void partial_order___PartialOrderElement___init(val_t  self, val_t  param0, val_
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_PartialOrderElement].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PartialOrderElement].i]) return;
   variable[5] = variable[0];
   ATTR_partial_order___PartialOrderElement____order(variable[5]) /*PartialOrderElement::_order*/ =  variable[1] /*o*/;
   variable[5] = variable[0];
@@ -922,7 +922,7 @@ void partial_order___PartialOrderElement___init(val_t  self, val_t  param0, val_
   variable[7] = variable[0];
   ATTR_partial_order___PartialOrderElement____rank(variable[7]) /*PartialOrderElement::_rank*/ =  variable[6] /*r*/;
   return_label37: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_PartialOrderElement].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PartialOrderElement].i] = 1;
   tracehead = trace.prev;
   return;
 }

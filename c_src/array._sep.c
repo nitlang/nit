@@ -777,13 +777,13 @@ void array___Array___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_array;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Array].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Array].i]) return;
   variable[2] = variable[0];
   ATTR_array___Array____capacity(variable[2]) /*Array::_capacity*/ =  TAG_Int(0);
   variable[2] = variable[0];
   ATTR_array___AbstractArray____length(variable[2]) /*AbstractArray::_length*/ =  TAG_Int(0);
   return_label41: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Array].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Array].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -797,7 +797,7 @@ void array___Array___with_items(val_t  self, val_t  param0, int* init_table) {
   /* check if p<Array[E] with p:E */
   if (( param0!=NIT_NULL) && !VAL_ISA( param0, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array___with_items, LOCATE_array, 264); nit_exit(1); } /*cast Array[E]*/;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Array].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Array].i]) return;
   variable[3] = variable[0];
   variable[4] = ATTR_array___Array____items( variable[1] /*objects*/) /*Array::_items*/;
   ATTR_array___Array____items(variable[3]) /*Array::_items*/ = variable[4];
@@ -808,7 +808,7 @@ void array___Array___with_items(val_t  self, val_t  param0, int* init_table) {
   variable[4] = ((array___AbstractArray___length_t)CALL( variable[1] /*objects*/,COLOR_abstract_collection___Collection___length))( variable[1] /*objects*/) /*AbstractArray::length*/;
   ATTR_array___AbstractArray____length(variable[3]) /*AbstractArray::_length*/ = variable[4];
   return_label42: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Array].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Array].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -820,7 +820,7 @@ void array___Array___with_capacity(val_t  self, val_t  param0, int* init_table) 
   trace.file = LOCATE_array;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Array].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Array].i]) return;
   variable[3] = TAG_Bool(UNTAG_Int( variable[1] /*cap*/)>=UNTAG_Int( TAG_Int(0)));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", " 'positive' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array___with_capacity, LOCATE_array, 274); nit_exit(1);}
   variable[3] = variable[0];
@@ -832,7 +832,7 @@ void array___Array___with_capacity(val_t  self, val_t  param0, int* init_table) 
   variable[3] = variable[0];
   ATTR_array___AbstractArray____length(variable[3]) /*AbstractArray::_length*/ =  TAG_Int(0);
   return_label43: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Array].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Array].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -845,7 +845,7 @@ void array___Array___filled_with(val_t  self, val_t  param0, val_t  param1, int*
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Array].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Array].i]) return;
   variable[4] = TAG_Bool(UNTAG_Int( variable[2] /*count*/)>=UNTAG_Int( TAG_Int(0)));
   if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", " 'positive' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array___filled_with, LOCATE_array, 283); nit_exit(1);}
   variable[4] = variable[0];
@@ -867,7 +867,7 @@ void array___Array___filled_with(val_t  self, val_t  param0, val_t  param1, int*
   }
   break_45: while(0);
   return_label44: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Array].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Array].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -880,7 +880,7 @@ void array___Array___with_native(val_t  self, val_t  param0, val_t  param1, int*
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Array].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Array].i]) return;
   variable[4] = TAG_Bool(UNTAG_Int( variable[2] /*size*/)>=UNTAG_Int( TAG_Int(0)));
   if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", " 'positive' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array___with_native, LOCATE_array, 297); nit_exit(1);}
   variable[4] = variable[0];
@@ -890,7 +890,7 @@ void array___Array___with_native(val_t  self, val_t  param0, val_t  param1, int*
   variable[4] = variable[0];
   ATTR_array___AbstractArray____length(variable[4]) /*AbstractArray::_length*/ =  variable[2] /*size*/;
   return_label46: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Array].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Array].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -978,7 +978,7 @@ void array___ArrayIterator___init(val_t  self, val_t  param0, int* init_table) {
   trace.file = LOCATE_array;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ArrayIterator].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ArrayIterator].i]) return;
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*a*/ ==  NIT_NULL /*null*/) || (( variable[1] /*a*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*a*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*a*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*a*/,COLOR_kernel___Object_____eqeq))( variable[1] /*a*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", " 'not_nil' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___ArrayIterator___init, LOCATE_array, 323); nit_exit(1);}
   variable[3] = variable[0];
@@ -986,7 +986,7 @@ void array___ArrayIterator___init(val_t  self, val_t  param0, int* init_table) {
   variable[3] = variable[0];
   ATTR_array___ArrayIterator____index(variable[3]) /*ArrayIterator::_index*/ =  TAG_Int(0);
   return_label51: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ArrayIterator].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ArrayIterator].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1190,12 +1190,12 @@ void array___ArraySet___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_array;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ArraySet].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ArraySet].i]) return;
   variable[2] = variable[0];
   variable[3] = NEW_Array_array___Array___init(); /*new Array[E]*/
   ATTR_array___ArraySet____array(variable[2]) /*ArraySet::_array*/ = variable[3];
   return_label63: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ArraySet].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ArraySet].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1207,12 +1207,12 @@ void array___ArraySet___with_capacity(val_t  self, val_t  param0, int* init_tabl
   trace.file = LOCATE_array;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ArraySet].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ArraySet].i]) return;
   variable[3] = variable[0];
   variable[4] = NEW_Array_array___Array___with_capacity( variable[1] /*i*/); /*new Array[E]*/
   ATTR_array___ArraySet____array(variable[3]) /*ArraySet::_array*/ = variable[4];
   return_label64: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ArraySet].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ArraySet].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1270,11 +1270,11 @@ void array___ArraySetIterator___init(val_t  self, val_t  param0, int* init_table
   trace.file = LOCATE_array;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ArraySetIterator].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ArraySetIterator].i]) return;
   variable[3] = variable[0];
   ATTR_array___ArraySetIterator____iter(variable[3]) /*ArraySetIterator::_iter*/ =  variable[1] /*iter*/;
   return_label68: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ArraySetIterator].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ArraySetIterator].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -1859,12 +1859,12 @@ void array___ArrayMap___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_array;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ArrayMap].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ArrayMap].i]) return;
   variable[2] = variable[0];
   variable[3] = NEW_Array_array___Array___init(); /*new Array[Couple[K, E]]*/
   ATTR_array___ArrayMap____items(variable[2]) /*ArrayMap::_items*/ = variable[3];
   return_label100: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_ArrayMap].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ArrayMap].i] = 1;
   tracehead = trace.prev;
   return;
 }

@@ -247,7 +247,7 @@ void string_search___BM_Pattern___init(val_t  self, val_t  param0, int* init_tab
   trace.file = LOCATE_string_search;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_BM_Pattern].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_BM_Pattern].i]) return;
   variable[3] = variable[0];
   ATTR_string_search___BM_Pattern____motif(variable[3]) /*BM_Pattern::_motif*/ =  variable[1] /*motif*/;
   variable[3] = variable[0];
@@ -267,7 +267,7 @@ void string_search___BM_Pattern___init(val_t  self, val_t  param0, int* init_tab
   variable[3] = variable[0];
   ((string_search___BM_Pattern___compute_bc_t)CALL(variable[3],COLOR_string_search___BM_Pattern___compute_bc))(variable[3]) /*BM_Pattern::compute_bc*/;
   return_label10: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_BM_Pattern].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_BM_Pattern].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -656,7 +656,7 @@ void string_search___Match___init(val_t  self, val_t  param0, val_t  param1, val
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Match].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Match].i]) return;
   variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*s*/ ==  NIT_NULL /*null*/) || (( variable[1] /*s*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*s*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*s*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*s*/,COLOR_kernel___Object_____eqeq))( variable[1] /*s*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", " 'non_null_string' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string_search___Match___init, LOCATE_string_search, 223); nit_exit(1);}
   variable[5] = TAG_Bool(UNTAG_Int( variable[3] /*len*/)>=UNTAG_Int( TAG_Int(0)));
@@ -674,7 +674,7 @@ void string_search___Match___init(val_t  self, val_t  param0, val_t  param1, val
   variable[5] = variable[0];
   ATTR_string_search___Match____length(variable[5]) /*Match::_length*/ =  variable[3] /*len*/;
   return_label29: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Match].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Match].i] = 1;
   tracehead = trace.prev;
   return;
 }

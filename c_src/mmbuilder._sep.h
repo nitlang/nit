@@ -665,7 +665,7 @@ val_t mmbuilder___AParam___is_vararg(val_t  self);
 #define LOCATE_mmbuilder___AParam___is_vararg "mmbuilder::AParam::(mmbuilder::PParam::is_vararg)"
 val_t NEW_AClosureDecl_parser_nodes___PNode___init();
 val_t NEW_AClosureDecl_parser_prod___AClosureDecl___empty_init();
-val_t NEW_AClosureDecl_parser_prod___AClosureDecl___init_aclosuredecl(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_AClosureDecl_parser_prod___AClosureDecl___init_aclosuredecl(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 typedef val_t (* mmbuilder___AClosureDecl___variable_t)(val_t  self);
 val_t mmbuilder___AClosureDecl___variable(val_t  self);
 #define LOCATE_mmbuilder___AClosureDecl___variable "mmbuilder::AClosureDecl::(syntax_base::PClosureDecl::variable)"

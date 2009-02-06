@@ -164,7 +164,7 @@ void range___Range___init(val_t  self, val_t  param0, val_t  param1, int* init_t
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Range].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Range].i]) return;
   variable[4] = variable[0];
   ATTR_range___Range____first(variable[4]) /*Range::_first*/ =  variable[1] /*from*/;
   variable[4] = variable[0];
@@ -173,7 +173,7 @@ void range___Range___init(val_t  self, val_t  param0, val_t  param1, int* init_t
   variable[5] = ((kernel___Discrete___succ_t)CALL( variable[2] /*to*/,COLOR_kernel___Discrete___succ))( variable[2] /*to*/) /*Discrete::succ*/;
   ATTR_range___Range____after(variable[4]) /*Range::_after*/ = variable[5];
   return_label6: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Range].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Range].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -186,7 +186,7 @@ void range___Range___without_last(val_t  self, val_t  param0, val_t  param1, int
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Range].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Range].i]) return;
   variable[4] = variable[0];
   ATTR_range___Range____first(variable[4]) /*Range::_first*/ =  variable[1] /*from*/;
   variable[4] = variable[0];
@@ -195,7 +195,7 @@ void range___Range___without_last(val_t  self, val_t  param0, val_t  param1, int
   variable[4] = variable[0];
   ATTR_range___Range____after(variable[4]) /*Range::_after*/ =  variable[2] /*to*/;
   return_label7: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Range].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Range].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -251,14 +251,14 @@ void range___IteratorRange___init(val_t  self, val_t  param0, int* init_table) {
   trace.file = LOCATE_range;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IteratorRange].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IteratorRange].i]) return;
   variable[3] = variable[0];
   ATTR_range___IteratorRange____range(variable[3]) /*IteratorRange::_range*/ =  variable[1] /*r*/;
   variable[3] = variable[0];
   variable[4] = ((range___Range___first_t)CALL( variable[1] /*r*/,COLOR_abstract_collection___Collection___first))( variable[1] /*r*/) /*Range::first*/;
   ATTR_range___IteratorRange____item(variable[3]) /*IteratorRange::_item*/ = variable[4];
   return_label10: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_IteratorRange].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IteratorRange].i] = 1;
   tracehead = trace.prev;
   return;
 }

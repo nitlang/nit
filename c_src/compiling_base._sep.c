@@ -400,11 +400,11 @@ void compiling_base___CompilerVisitor___init(val_t  self, val_t  param0, int* in
   trace.file = LOCATE_compiling_base;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_CompilerVisitor].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_CompilerVisitor].i]) return;
   variable[3] = variable[0];
   ATTR_compiling_base___CompilerVisitor____module(variable[3]) /*CompilerVisitor::_module*/ =  variable[1] /*module*/;
   return_label6: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_CompilerVisitor].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_CompilerVisitor].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -473,9 +473,9 @@ void compiling_base___CContext___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_compiling_base;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_CContext].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_CContext].i]) return;
   return_label9: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_CContext].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_CContext].i] = 1;
   tracehead = trace.prev;
   return;
 }
@@ -910,9 +910,9 @@ void compiling_base___PrimitiveInfo___init(val_t  self, int* init_table) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_compiling_base;
   variable[0] =  self;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_PrimitiveInfo].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PrimitiveInfo].i]) return;
   return_label24: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_PrimitiveInfo].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PrimitiveInfo].i] = 1;
   tracehead = trace.prev;
   return;
 }

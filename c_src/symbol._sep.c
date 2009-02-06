@@ -60,11 +60,11 @@ void symbol___Symbol___init(val_t  self, val_t  param0, int* init_table) {
   trace.file = LOCATE_symbol;
   variable[0] =  self;
   variable[1] =  param0;
-  if (init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Symbol].i]) return;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Symbol].i]) return;
   variable[3] = variable[0];
   ATTR_symbol___Symbol____string(variable[3]) /*Symbol::_string*/ =  variable[1] /*s*/;
   return_label3: while(false);
-  init_table[VAL2OBJ( self)->vft[INIT_TABLE_POS_Symbol].i] = 1;
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Symbol].i] = 1;
   tracehead = trace.prev;
   return;
 }
