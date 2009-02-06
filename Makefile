@@ -38,7 +38,7 @@ doc/stdlib/index.html: bin/nitdoc
 	@echo '***************************************************************'
 	bin/nitdoc lib/*.nit -d doc/stdlib
 
-c_src/nitc:
+c_src/nitc: c_src/*.c c_src/*.h c_src/nitc._build.sh c_src/Makefile
 	@echo '***************************************************************'
 	@echo '* Compile nitc from C source files                            *'
 	@echo '***************************************************************'
