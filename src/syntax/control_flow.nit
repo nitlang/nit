@@ -316,6 +316,30 @@ redef class AVarReassignExpr
 	end
 end
 
+redef class AClosureDecl
+	redef meth accept_control_flow(v)
+	do
+		if n_expr != null then
+			var old_control_flow_ctx = v.control_flow_ctx
+			v.control_flow_ctx = v.control_flow_ctx.sub
+			# Register the block
+			v.control_flow_ctx.base_block = n_expr
+
+			super
+
+			if v.control_flow_ctx.unreash == false then
+				if variable.closure.signature.return_type != null then
+					v.error(self, "Control error: Reached end of bloc (a 'continue' with a value was expected).")
+				else if variable.closure.is_break then
+					v.error(self, "Control error: Reached end of break bloc (an 'abort' was expected).")
+				end
+			end
+
+			v.control_flow_ctx = old_control_flow_ctx
+		end
+	end
+end
+
 redef class AClosureDef
 special AControlableBlock
 	redef meth accept_control_flow(v)

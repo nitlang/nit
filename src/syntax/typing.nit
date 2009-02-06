@@ -298,9 +298,19 @@ redef class PParam
 end
 
 redef class AClosureDecl
-	redef meth after_typing(v)
+	redef meth accept_typing(v)
 	do
+		# Register the closure for ClosureCallExpr
 		v.variable_ctx.add(variable)
+
+		var old_var_ctx = v.variable_ctx
+		v.variable_ctx = v.variable_ctx.sub
+		v.closure = variable.closure
+
+		super
+
+		v.variable_ctx = old_var_ctx
+		v.closure = null
 	end
 end
 
