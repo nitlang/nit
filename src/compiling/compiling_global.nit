@@ -509,15 +509,22 @@ redef class MMSrcModule
 			for pg in c.global_properties do
 				var p = c[pg]
 				if p.local_class == c then
-					if pg.intro == p and p isa MMAttribute then
-						if v.tc.attr_sim then
-							var bc = pg.local_class
-							assert bc isa MMSrcLocalClass
-							var s = bc.base_attr_pos.symbol
-							v.add_decl("#define {pg.attr_access}(recv) ATTRS(recv, {s}, {pg.pos_of})")
-						else
-							v.add_decl("#define {pg.attr_access}(recv) ATTR(recv, {pg.color_id})")
+					if pg.intro == p then
+						if p isa MMAttribute then
+							if v.tc.attr_sim then
+								var bc = pg.local_class
+								assert bc isa MMSrcLocalClass
+								var s = bc.base_attr_pos.symbol
+								v.add_decl("#define {pg.attr_access}(recv) ATTRS(recv, {s}, {pg.pos_of})")
+							else
+								v.add_decl("#define {pg.attr_access}(recv) ATTR(recv, {pg.color_id})")
+							end
+						else if p isa MMMethod then
+							v.add_decl("#define {pg.meth_call}(recv) (({p.cname}_t)CALL((recv), {pg.color_id}))")
 						end
+					end
+					if p isa MMSrcMethod and p.need_super then
+						v.add_decl("#define {p.super_meth_call}(recv) (({p.cname}_t)CALL((recv), {p.color_id_for_super}))")
 					end
 					p.compile_property_to_c(v)
 				end

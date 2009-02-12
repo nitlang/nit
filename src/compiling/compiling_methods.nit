@@ -302,7 +302,7 @@ redef class MMMethod
 			cargs.add("init_table /*YYY*/")
 		end
 
-		var m = "(({cname}_t)CALL({cargs[0]},{global.color_id}))"
+		var m = "{global.meth_call}({cargs[0]})"
 		var vcall = "{m}({cargs.join(", ")}) /*{local_class}::{name}*/"
 		if name == ee then
 			vcall = "UNTAG_Bool({vcall})"
@@ -331,7 +331,7 @@ redef class MMMethod
 	# Compile a call as call-next-method on self with given args
 	meth compile_super_call(v: CompilerVisitor, cargs: Array[String]): String
 	do
-		var m = "(({cname}_t)CALL({cargs[0]},{color_id_for_super}))"
+		var m = "{super_meth_call}({cargs[0]})"
 		var vcall = "{m}({cargs.join(", ")}) /*super {local_class}::{name}*/"
 		return vcall
 	end

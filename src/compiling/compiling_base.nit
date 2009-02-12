@@ -306,5 +306,11 @@ redef class MMLocalProperty
 	do
 		return "COLOR_SUPER_{cname}"
 	end
+
+	# C macro used to get the function for the call of a super property
+	meth super_meth_call: String
+	do
+		return "CALL_SUPER_{cname}"
+	end
 end
 
