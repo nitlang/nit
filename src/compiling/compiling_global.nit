@@ -103,17 +103,17 @@ redef class MMSrcLocalClass
 	readable attr _class_color_pos: TableEltClassColor
 
 	# The proper local class table part (nor superclasses nor refinments)
-	readable attr _class_layout: Array[LocalTableElt] 
+	readable attr _class_layout: Array[TableElt] 
 
 	# The proper local instance table part (nor superclasses nor refinments)
-	readable attr _instance_layout: Array[LocalTableElt] 
+	readable attr _instance_layout: Array[TableElt] 
 
 	# Build the local layout of the class and feed the module table
 	meth build_layout_in(tc: ToolContext, module_table: Array[LocalTableElt])
 	do
-		var clt = new Array[LocalTableElt]
+		var clt = new Array[TableElt]
 		_class_layout = clt
-		var ilt = new Array[LocalTableElt]
+		var ilt = new Array[TableElt]
 		_instance_layout = ilt
 
 		if global.intro == self then
@@ -135,8 +135,18 @@ redef class MMSrcLocalClass
 				clt.add(new TableEltSuper(p))
 			end
 		end
-		module_table.append(ilt)
-		module_table.append(clt)
+
+		if not ilt.is_empty then
+			var teg = new LocalTableEltGroup
+			teg.elements.append(ilt)
+			module_table.add(teg)
+		end
+
+		if not clt.is_empty then
+			var teg = new LocalTableEltGroup
+			teg.elements.append(clt)
+			module_table.add(teg)
+		end
 	end
 end
 
@@ -528,11 +538,26 @@ special TableElt
 	meth value(ga: GlobalAnalysis): String is abstract
 end
 
-abstract class TableEltProp
+class LocalTableEltGroup
 special LocalTableElt
-	attr _property: MMLocalProperty
+	readable attr _elements: Array[TableElt] = new Array[TableElt]
 
-	redef meth value(ga) do return "{ga.color(self)} /* Property {_property} */"
+	redef meth length do return _elements.length
+	redef meth item(i) do return _elements[i]
+	redef meth value(ga) do return "{ga.color(_elements.first)} /* Group of ? */"
+	redef meth compile_macros(v, value)
+	do
+		var i = 0
+		for e in _elements do
+			e.compile_macros(v, "{value} + {i}")
+			i += 1
+		end
+	end
+end
+
+abstract class TableEltProp
+special TableElt
+	attr _property: MMLocalProperty
 
 	init(p: MMLocalProperty)
 	do
@@ -685,13 +710,13 @@ end
 
 class TableEltComposite
 special TableElt
-	attr _table: Array[LocalTableElt]
+	attr _table: Array[TableElt]
 	attr _cc: CompiledClass
 	attr _offsets: HashMap[MMLocalClass, Int]
 	redef meth length do return _table.length
 	redef meth is_related_to(c) do return c.cshe <= _cc.local_class
 
-	meth add(c: MMLocalClass, tab: Array[LocalTableElt])
+	meth add(c: MMLocalClass, tab: Array[TableElt])
 	do
 		_offsets[c] = _table.length
 		_table.append(tab)
@@ -704,7 +729,7 @@ special TableElt
 	init(cc: CompiledClass)
 	do
 		_cc = cc
-		_table = new Array[LocalTableElt]
+		_table = new Array[TableElt]
 		_offsets = new HashMap[MMLocalClass, Int]
 	end
 end
