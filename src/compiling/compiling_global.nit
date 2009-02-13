@@ -98,12 +98,6 @@ special ColorContext
 	init(c: MMLocalClass) do _local_class = c
 end
 
-redef class MMGlobalProperty
-	# The position of the property in the local class table part
-	# FIXME: It's ugly. store this somewhere else please
-	readable writable attr _pos_of: Int 
-end
-
 redef class MMSrcLocalClass
 	# The table element of the subtype check
 	readable attr _class_color_pos: TableEltClassColor
@@ -117,8 +111,6 @@ redef class MMSrcLocalClass
 	# Build the local layout of the class and feed the module table
 	meth build_layout_in(tc: ToolContext, module_table: Array[LocalTableElt])
 	do
-		var intro_methods = new Array[MMGlobalProperty] # FIXME: Remove this
-		var intro_attributes = new Array[MMGlobalProperty] # FIXME: Remove this
 		var clt = new Array[LocalTableElt]
 		_class_layout = clt
 		var ilt = new Array[LocalTableElt]
@@ -128,19 +120,14 @@ redef class MMSrcLocalClass
 			module_table.add(new TableEltClassId(self))
 			_class_color_pos = new TableEltClassColor(self)
 			module_table.add(_class_color_pos)
-			#clt.add(_class_color_pos)
 			clt.add(new TableEltClassInitTable(self))
 		end
 		for p in src_local_properties do
 			var pg = p.global
 			if pg.intro == p then
 				if p isa MMSrcAttribute then
-					pg.pos_of = intro_attributes.length
-					intro_attributes.add(pg)
 					ilt.add(new TableEltAttr(p))
 				else if p isa MMSrcMethod then
-					pg.pos_of = intro_methods.length
-					intro_methods.add(pg)
 					clt.add(new TableEltMeth(p))
 				end
 			end
