@@ -22,7 +22,6 @@ private import utils
 
 redef class ToolContext
 	readable writable attr _global: Bool = false 
-	readable writable attr _attr_sim: Bool = false
 	readable writable attr _compdir: String
 	readable writable attr _clibdir: String
 	readable writable attr _bindir: String

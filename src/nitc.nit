@@ -26,7 +26,6 @@ special AbstractCompiler
 	readable attr _opt_output: OptionString = new OptionString("Output file", "-o", "--output")
 	readable attr _opt_boost: OptionBool = new OptionBool("Optimize compilation", "-O", "--boost")
 	readable attr _opt_no_cc: OptionBool = new OptionBool("Do not invoke C compiler", "--no_cc")
-	readable attr _opt_attr_sim: OptionBool = new OptionBool("Use attribute simulation", "--attr-sim")
 	readable attr _opt_global: OptionBool = new OptionBool("Use global compilation", "--global")
 	readable attr _opt_clibdir: OptionString = new OptionString("NIT C library directory", "--clibdir")
 	readable attr _opt_bindir: OptionString = new OptionString("NIT tools directory", "--bindir")
@@ -36,7 +35,7 @@ special AbstractCompiler
 	init
 	do
 		super
-		option_context.add_option(opt_output, opt_boost, opt_no_cc, opt_attr_sim, opt_global, opt_clibdir, opt_bindir, opt_compdir, opt_extension_prefix)
+		option_context.add_option(opt_output, opt_boost, opt_no_cc, opt_global, opt_clibdir, opt_bindir, opt_compdir, opt_extension_prefix)
 	end
 
 	redef meth process_options
@@ -47,7 +46,6 @@ special AbstractCompiler
 		no_cc = opt_no_cc.value
 		ext_prefix = opt_extension_prefix.value
 		if ext_prefix == null then ext_prefix = ""
-		attr_sim = opt_attr_sim.value
 		global = opt_global.value
 		compdir = opt_compdir.value
 		if compdir == null then

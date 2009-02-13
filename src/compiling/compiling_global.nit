@@ -105,9 +105,6 @@ redef class MMGlobalProperty
 end
 
 redef class MMSrcLocalClass
-	# The table element of the attribute position (for accessor simulation)
-	readable attr _base_attr_pos: TableEltBaseAttrPos 
-
 	# The table element of the subtype check
 	readable attr _class_color_pos: TableEltClassColorPos
 
@@ -151,12 +148,7 @@ redef class MMSrcLocalClass
 				clt.add(new TableEltSuperPos(p))
 			end
 		end
-		if tc.attr_sim and not intro_attributes.is_empty then
-			_base_attr_pos = new TableEltBaseAttrPos(self)
-			clt.add(_base_attr_pos)
-		else
-			module_table.append(ilt)
-		end
+		module_table.append(ilt)
 		module_table.append(clt)
 	end
 end
@@ -288,7 +280,7 @@ redef class MMSrcModule
 				if cte.length > 0 then
 					ctab.add(cte)
 				end
-				if not cctx.attr_sim and ite.length > 0 then
+				if ite.length > 0 then
 					itab.add(ite)
 				end
 			end
@@ -321,14 +313,6 @@ redef class MMSrcModule
 				append_to_table(ga, cc.class_table, cc.class_layout)
 				cc.instance_table = scc.instance_table.to_a
 				append_to_table(ga, cc.instance_table, cc.instance_layout)
-			end
-
-			if cctx.attr_sim then
-				cc.instance_table = build_tables(ga, c, itab)
-				for sc in c.cshe.greaters_and_self do
-					var scc = ga.compiled_classes[sc.global]
-					append_to_table(cc, cc.instance_table, scc.instance_layout)
-				end
 			end
 		end
 
@@ -511,14 +495,7 @@ redef class MMSrcModule
 				if p.local_class == c then
 					if pg.intro == p then
 						if p isa MMAttribute then
-							if v.tc.attr_sim then
-								var bc = pg.local_class
-								assert bc isa MMSrcLocalClass
-								var s = bc.base_attr_pos.symbol
-								v.add_decl("#define {pg.attr_access}(recv) ATTRS(recv, {s}, {pg.pos_of})")
-							else
-								v.add_decl("#define {pg.attr_access}(recv) ATTR(recv, {pg.color_id})")
-							end
+							v.add_decl("#define {pg.attr_access}(recv) ATTR(recv, {pg.color_id})")
 						else if p isa MMMethod then
 							v.add_decl("#define {pg.meth_call}(recv) (({p.cname}_t)CALL((recv), {pg.color_id}))")
 						end
@@ -697,28 +674,6 @@ special TableEltClassPos
 	end
 
 	init(c) do super
-end
-
-class TableEltBaseAttrPos
-special LocalTableElt
-	attr _local_class: MMSrcLocalClass
-	redef meth symbol do return "COLOR_{_local_class.module}_{_local_class.name}_BASEATTR"
-	redef meth value(ga)
-	do
-		return "{ga.color(self)} /* BaseAttrPos of {_local_class} */"
-	end
-
-	redef meth compile_to_c(v, c)
-	do
-		var ga = v.global_analysis
-		var cc = ga.compiled_classes[c.global]
-		return "{cc.color(_local_class.instance_layout.first)} /* {ga.color(self)}: Base attribut offset of {_local_class.module}::{_local_class} in {c} */"
-	end
-
-	init(c: MMSrcLocalClass)
-	do
-		_local_class = c
-	end
 end
 
 class TableEltComposite
