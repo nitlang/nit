@@ -106,7 +106,7 @@ end
 
 redef class MMSrcLocalClass
 	# The table element of the subtype check
-	readable attr _class_color_pos: TableEltClassColorPos
+	readable attr _class_color_pos: TableEltClassColor
 
 	# The proper local class table part (nor superclasses nor refinments)
 	readable attr _class_layout: Array[LocalTableElt] 
@@ -125,11 +125,11 @@ redef class MMSrcLocalClass
 		_instance_layout = ilt
 
 		if global.intro == self then
-			module_table.add(new TableEltClassIdPos(self))
-			_class_color_pos = new TableEltClassColorPos(self)
+			module_table.add(new TableEltClassId(self))
+			_class_color_pos = new TableEltClassColor(self)
 			module_table.add(_class_color_pos)
 			#clt.add(_class_color_pos)
-			clt.add(new TableEltClassInitTablePos(self))
+			clt.add(new TableEltClassInitTable(self))
 		end
 		for p in src_local_properties do
 			var pg = p.global
@@ -137,15 +137,15 @@ redef class MMSrcLocalClass
 				if p isa MMSrcAttribute then
 					pg.pos_of = intro_attributes.length
 					intro_attributes.add(pg)
-					ilt.add(new TableEltAttrPos(p))
+					ilt.add(new TableEltAttr(p))
 				else if p isa MMSrcMethod then
 					pg.pos_of = intro_methods.length
 					intro_methods.add(pg)
-					clt.add(new TableEltMethPos(p))
+					clt.add(new TableEltMeth(p))
 				end
 			end
 			if p isa MMSrcMethod and p.need_super then
-				clt.add(new TableEltSuperPos(p))
+				clt.add(new TableEltSuper(p))
 			end
 		end
 		module_table.append(ilt)
@@ -482,27 +482,19 @@ redef class MMSrcModule
 		end
 		var i = 0
 		for e in _local_table do
+			var value: String
 			if v.tc.global then
-				v.add_decl("#define {e.symbol} {e.value(v.global_analysis)}")
+				value = "{e.value(v.global_analysis)}"
 			else
-				v.add_decl("#define {e.symbol} SFT_{name}[{i}]")
+				value = "SFT_{name}[{i}]"
 				i = i + 1
 			end
+			e.compile_macros(v, value)
 		end
 		for c in src_local_classes do
 			for pg in c.global_properties do
 				var p = c[pg]
 				if p.local_class == c then
-					if pg.intro == p then
-						if p isa MMAttribute then
-							v.add_decl("#define {pg.attr_access}(recv) ATTR(recv, {pg.color_id})")
-						else if p isa MMMethod then
-							v.add_decl("#define {pg.meth_call}(recv) (({p.cname}_t)CALL((recv), {pg.color_id}))")
-						end
-					end
-					if p isa MMSrcMethod and p.need_super then
-						v.add_decl("#define {p.super_meth_call}(recv) (({p.cname}_t)CALL((recv), {p.color_id_for_super}))")
-					end
 					p.compile_property_to_c(v)
 				end
 				if pg.is_init_for(c) then
@@ -536,23 +528,23 @@ redef class MMSrcModule
 	end
 end
 
-class TableElt
+abstract class TableElt
 	meth is_related_to(c: MMLocalClass): Bool is abstract
 	meth length: Int do return 1
 	meth item(i: Int): TableElt do return self
+	meth compile_macros(v: CompilerVisitor, value: String) is abstract
 	meth compile_to_c(v: CompilerVisitor, c: MMLocalClass): String is abstract
 end
 
-class LocalTableElt
+abstract class LocalTableElt
 special TableElt
-	meth symbol: String is abstract
 	meth value(ga: GlobalAnalysis): String is abstract
 end
 
-class TableEltPropPos
+abstract class TableEltProp
 special LocalTableElt
 	attr _property: MMLocalProperty
-	redef meth symbol do return _property.global.color_id
+
 	redef meth value(ga) do return "{ga.color(self)} /* Property {_property} */"
 
 	init(p: MMLocalProperty)
@@ -561,8 +553,14 @@ special LocalTableElt
 	end
 end
 
-class TableEltMethPos
-special TableEltPropPos
+class TableEltMeth
+special TableEltProp
+	redef meth compile_macros(v, value)
+	do
+		var pg = _property.global
+		v.add_decl("#define {pg.meth_call}(recv) (({pg.intro.cname}_t)CALL((recv), ({value})))")
+	end
+
 	redef meth compile_to_c(v, c)
 	do
 		var p = c[_property.global]
@@ -571,9 +569,14 @@ special TableEltPropPos
 	init(p) do super 
 end
 
-class TableEltSuperPos
-special TableEltPropPos
-	redef meth symbol do return _property.color_id_for_super
+class TableEltSuper
+special TableEltProp
+	redef meth compile_macros(v, value)
+	do
+		var p = _property
+		v.add_decl("#define {p.super_meth_call}(recv) (({p.cname}_t)CALL((recv), ({value})))")
+	end
+
 	redef meth compile_to_c(v, c)
 	do
 		var pc = _property.local_class
@@ -599,8 +602,14 @@ special TableEltPropPos
 	init(p) do super 
 end
 
-class TableEltAttrPos
-special TableEltPropPos
+class TableEltAttr
+special TableEltProp
+	redef meth compile_macros(v, value)
+	do
+		var pg = _property.global
+		v.add_decl("#define {pg.attr_access}(recv) ATTR(recv, ({value}))")
+	end
+
 	redef meth compile_to_c(v, c)
 	do
 		var ga = v.global_analysis
@@ -611,7 +620,7 @@ special TableEltPropPos
 	init(p) do super 
 end
 
-class TableEltClassPos
+class TableEltClass
 special LocalTableElt
 	attr _local_class: MMLocalClass
 	redef meth is_related_to(c)
@@ -624,11 +633,19 @@ special LocalTableElt
 	do
 		_local_class = c
 	end
+
+	meth symbol: String is abstract
+
+	redef meth compile_macros(v, value)
+	do
+		v.add_decl("#define {symbol} ({value})")
+	end
 end
 
-class TableEltClassIdPos
-special TableEltClassPos
+class TableEltClassId
+special TableEltClass
 	redef meth symbol do return _local_class.global.id_id
+
 	redef meth value(ga)
 	do
 		return "{ga.compiled_classes[_local_class.global].id} /* Id of {_local_class} */"
@@ -637,13 +654,15 @@ special TableEltClassPos
 	init(c) do super
 end
 
-class TableEltClassInitTablePos
-special TableEltClassPos
+class TableEltClassInitTable
+special TableEltClass
 	redef meth symbol do return _local_class.global.init_table_pos_id
+
 	redef meth value(ga)
 	do
 		return "{ga.color(self)} /* Color of {_local_class} */"
 	end
+
 	redef meth compile_to_c(v, c)
 	do
 		var ga = v.global_analysis
@@ -659,9 +678,10 @@ special TableEltClassPos
 	init(c) do super
 end
 
-class TableEltClassColorPos
-special TableEltClassPos
+class TableEltClassColor
+special TableEltClass
 	redef meth symbol do return _local_class.global.color_id
+
 	redef meth value(ga)
 	do
 		return "{ga.color(self)} /* Color of {_local_class} */"
