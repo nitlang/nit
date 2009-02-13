@@ -109,7 +109,7 @@ redef class MMSrcLocalClass
 	readable attr _instance_layout: Array[TableElt] 
 
 	# Build the local layout of the class and feed the module table
-	meth build_layout_in(tc: ToolContext, module_table: Array[LocalTableElt])
+	meth build_layout_in(tc: ToolContext, module_table: Array[ModuleTableElt])
 	do
 		var clt = new Array[TableElt]
 		_class_layout = clt
@@ -137,13 +137,13 @@ redef class MMSrcLocalClass
 		end
 
 		if not ilt.is_empty then
-			var teg = new LocalTableEltGroup
+			var teg = new ModuleTableEltGroup
 			teg.elements.append(ilt)
 			module_table.add(teg)
 		end
 
 		if not clt.is_empty then
-			var teg = new LocalTableEltGroup
+			var teg = new ModuleTableEltGroup
 			teg.elements.append(clt)
 			module_table.add(teg)
 		end
@@ -152,12 +152,12 @@ end
 
 redef class MMSrcModule
 	# The local table of the module (refers things introduced in the module)
-	attr _local_table: Array[LocalTableElt]
+	attr _local_table: Array[ModuleTableElt]
 
 	# Builds the local tables and local classes layouts
 	meth local_analysis(tc: ToolContext)
 	do
-		var lt = new Array[LocalTableElt]
+		var lt = new Array[ModuleTableElt]
 		_local_table = lt
 		for c in src_local_classes do
 			c.build_layout_in(tc, lt)
@@ -525,25 +525,44 @@ redef class MMSrcModule
 	end
 end
 
-abstract class TableElt
-	meth is_related_to(c: MMLocalClass): Bool is abstract
-	meth length: Int do return 1
-	meth item(i: Int): TableElt do return self
+###############################################################################
+
+# An element of a class, an instance or a module table
+abstract class AbsTableElt
+	# Compile the macro needed to use the element and other related elements
 	meth compile_macros(v: CompilerVisitor, value: String) is abstract
+end
+
+# An element of a class or an instance table
+# Such an elements represent method function pointers, attribute values, etc.
+abstract class TableElt
+special AbsTableElt
+	# Is the element conflict to class `c' (used for coloring)
+	meth is_related_to(c: MMLocalClass): Bool is abstract
+
+	# Number of sub-elements. 1 if none
+	meth length: Int do return 1
+
+	# Access the ith subelement.
+	meth item(i: Int): TableElt do return self
+
+	# Return the value of the element for a given class
 	meth compile_to_c(v: CompilerVisitor, c: MMLocalClass): String is abstract
 end
 
-abstract class LocalTableElt
-special TableElt
+# An element of a module table
+# Such an elements represent colors or identifiers
+abstract class ModuleTableElt
+special AbsTableElt
+	# Return the value of the element once the global analisys is performed
 	meth value(ga: GlobalAnalysis): String is abstract
 end
 
-class LocalTableEltGroup
-special LocalTableElt
+# An element of a module table that represents a group of TableElt defined in the same local class
+class ModuleTableEltGroup
+special ModuleTableElt
 	readable attr _elements: Array[TableElt] = new Array[TableElt]
 
-	redef meth length do return _elements.length
-	redef meth item(i) do return _elements[i]
 	redef meth value(ga) do return "{ga.color(_elements.first)} /* Group of ? */"
 	redef meth compile_macros(v, value)
 	do
@@ -555,6 +574,7 @@ special LocalTableElt
 	end
 end
 
+# An element that represents a class property
 abstract class TableEltProp
 special TableElt
 	attr _property: MMLocalProperty
@@ -565,6 +585,7 @@ special TableElt
 	end
 end
 
+# An element that represents a function pointer to a global method
 class TableEltMeth
 special TableEltProp
 	redef meth compile_macros(v, value)
@@ -578,9 +599,9 @@ special TableEltProp
 		var p = c[_property.global]
 		return p.cname
 	end
-	init(p) do super 
 end
 
+# An element that represents a function pointer to the super method of a local method
 class TableEltSuper
 special TableEltProp
 	redef meth compile_macros(v, value)
@@ -610,10 +631,9 @@ special TableEltProp
 		assert false
 		return null
 	end
-
-	init(p) do super 
 end
 
+# An element that represents the value stored for a global attribute
 class TableEltAttr
 special TableEltProp
 	redef meth compile_macros(v, value)
@@ -628,24 +648,20 @@ special TableEltProp
 		var p = c[_property.global]
 		return "/* {ga.color(self)}: Attribute {c}::{p} */"
 	end
-
-	init(p) do super 
 end
 
-class TableEltClass
-special LocalTableElt
+# An element representing a class information
+class AbsTableEltClass
+special AbsTableElt
+	# The local class where the information comes from
 	attr _local_class: MMLocalClass
-	redef meth is_related_to(c)
-	do
-		var bc = c.module[_local_class.global]
-		return c.cshe <= bc
-	end
 
 	init(c: MMLocalClass)
 	do
 		_local_class = c
 	end
 
+	# The C macro name refering the value
 	meth symbol: String is abstract
 
 	redef meth compile_macros(v, value)
@@ -654,26 +670,33 @@ special LocalTableElt
 	end
 end
 
+# An element of a class table representing a class information 
+class TableEltClass
+special TableElt
+special AbsTableEltClass
+	redef meth is_related_to(c)
+	do
+		var bc = c.module[_local_class.global]
+		return c.cshe <= bc
+	end
+end
+
+# An element representing the id of a class in a module table 
 class TableEltClassId
-special TableEltClass
+special ModuleTableElt
+special AbsTableEltClass
 	redef meth symbol do return _local_class.global.id_id
 
 	redef meth value(ga)
 	do
 		return "{ga.compiled_classes[_local_class.global].id} /* Id of {_local_class} */"
 	end
-
-	init(c) do super
 end
 
+# An element representing the constructor marker position in a class table
 class TableEltClassInitTable
 special TableEltClass
 	redef meth symbol do return _local_class.global.init_table_pos_id
-
-	redef meth value(ga)
-	do
-		return "{ga.color(self)} /* Color of {_local_class} */"
-	end
 
 	redef meth compile_to_c(v, c)
 	do
@@ -686,28 +709,31 @@ special TableEltClass
 		end
 		return "{i} /* {ga.color(self)}: {c} < {cc.local_class}: superclass init_table position */"
 	end
-
-	init(c) do super
 end
 
+# An element used for a cast
+# Note: this element is both a TableElt and a ModuleTableElt.
+# At the TableElt offset, there is the id of the super-class
+# At the ModuleTableElt offset, there is the TableElt offset (ie. the color of the super-class).
 class TableEltClassColor
 special TableEltClass
+special ModuleTableElt
 	redef meth symbol do return _local_class.global.color_id
 
 	redef meth value(ga)
 	do
 		return "{ga.color(self)} /* Color of {_local_class} */"
 	end
+
 	redef meth compile_to_c(v, c)
 	do
 		var ga = v.global_analysis
 		var cc = ga.compiled_classes[_local_class.global]
 		return "{cc.id} /* {ga.color(self)}: {c} < {cc.local_class}: superclass typecheck marker */"
 	end
-
-	init(c) do super
 end
 
+# A Group of elements introduced in the same global-class that are colored together
 class TableEltComposite
 special TableElt
 	attr _table: Array[TableElt]
@@ -734,6 +760,7 @@ special TableElt
 	end
 end
 
+# The element that represent the class id
 class TableEltClassSelfId
 special TableElt
 	redef meth is_related_to(c) do return true
@@ -742,10 +769,9 @@ special TableElt
 		var ga = v.global_analysis
 		return "{v.global_analysis.compiled_classes[c.global].id} /* {ga.color(self)}: Identity */"
 	end
-
-	init do end
 end
 
+# The element that 
 class TableEltVftPointer
 special TableElt
 	redef meth is_related_to(c) do return true
@@ -754,9 +780,9 @@ special TableElt
 		var ga = v.global_analysis
 		return "/* {ga.color(self)}: Pointer to the classtable */"
 	end
-
-	init do end
 end
+
+###############################################################################
 
 # Used to sort local class in a deterministic total order
 # The total order superset the class refinement and the class specialisation relations
