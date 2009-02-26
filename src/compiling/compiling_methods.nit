@@ -1177,7 +1177,19 @@ redef class AStringFormExpr
 	redef meth compile_expr(v)
 	do
 		compute_string_info
-		return meth_with_native.compile_constructor_call(v, stype , ["BOX_NativeString(\"{_cstring}\")", "TAG_Int({_cstring_length})"])
+		var i = v.new_number
+		var cvar = v.cfc.get_var
+		v.add_decl("static val_t once_value_{i} = NIT_NULL; /* Once value for string {cvar}*/")
+		v.add_instr("if (once_value_{i} != NIT_NULL) {cvar} = once_value_{i};")
+		v.add_instr("else \{")
+		v.indent
+		v.cfc.free_var(cvar)
+		var e = meth_with_native.compile_constructor_call(v, stype , ["BOX_NativeString(\"{_cstring}\")", "TAG_Int({_cstring_length})"])
+		v.add_assignment(cvar, e)
+		v.add_instr("once_value_{i} = {cvar};")
+		v.unindent
+		v.add_instr("}")
+		return cvar
 	end
 
 	# The raw string value
