@@ -135,13 +135,6 @@ redef class MMGlobalProperty
 	do
 		return "ATTR_{intro.cname}"
 	end
-
-	# C symbol refering the color of the global property
-	meth color_id: String
-	do
-		return "COLOR_{intro.cname}"
-	end
-
 end
 
 redef class MMGlobalClass
@@ -298,12 +291,6 @@ redef class MMLocalProperty
 			_cname_cache = cmangle(module.name, local_class.name, name)
 		end
 		return _cname_cache
-	end
-
-	# C symbol refering the color of the super call of a super property
-	meth color_id_for_super: String
-	do
-		return "COLOR_SUPER_{cname}"
 	end
 
 	# C macro used to get the function for the call of a super property
