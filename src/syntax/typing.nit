@@ -694,16 +694,18 @@ redef class AStringFormExpr
 end
 
 redef class ASuperstringExpr
-	readable attr _meth_init: MMMethod
-	readable attr _meth_append: MMMethod
+	readable attr _meth_with_capacity: MMMethod
+	readable attr _meth_add: MMMethod
 	readable attr _meth_to_s: MMMethod
+	readable attr _atype: MMType
 	redef meth after_typing(v)
 	do
 		_stype = v.type_string
-		_meth_init = _stype.local_class.select_method(once "init".to_symbol)
-		if _meth_init == null then v.error(self, "{_stype} MUST have an init method.")
-		_meth_append = _stype.local_class.select_method(once "append".to_symbol)
-		if _meth_append == null then v.error(self, "{_stype} MUST have a append method.")
+		_atype = v.type_array(_stype)
+		_meth_with_capacity = _atype.local_class.select_method(once "with_capacity".to_symbol)
+		if _meth_with_capacity == null then v.error(self, "{_atype} MUST have a with_capacity method.")
+		_meth_add = _atype.local_class.select_method(once "add".to_symbol)
+		if _meth_add == null then v.error(self, "{_atype} MUST have an add method.")
 		_meth_to_s = v.type_object.local_class.select_method(once "to_s".to_symbol)
 		if _meth_to_s == null then v.error(self, "Object MUST have a to_s method.")
 	end

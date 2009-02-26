@@ -1231,17 +1231,17 @@ end
 redef class ASuperstringExpr
 	redef meth compile_expr(v)
 	do
-		var recv = meth_init.compile_constructor_call(v, stype, new Array[String])
+		var array = meth_with_capacity.compile_constructor_call(v, atype, ["TAG_Int({n_exprs.length})"])
 
 		for ne in n_exprs do
 			var e = v.ensure_var(v.compile_expr(ne))
 			if ne.stype != stype then
 				v.add_assignment(e, meth_to_s.compile_call(v, [e]))
 			end
-			meth_append.compile_call(v, [recv, e])
+			meth_add.compile_call(v, [array, e])
 		end
 
-		return recv
+		return meth_to_s.compile_call(v, [array])
 	end
 end
 
