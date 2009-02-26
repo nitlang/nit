@@ -461,6 +461,10 @@ redef class AForExpr
 end
 
 redef class AForVardeclExpr
+	readable attr _meth_iterator: MMMethod
+	readable attr _meth_is_ok: MMMethod
+	readable attr _meth_item: MMMethod
+	readable attr _meth_next: MMMethod
 	redef meth after_typing(v)
 	do
 		v.variable_ctx = v.variable_ctx.sub
@@ -472,18 +476,28 @@ redef class AForVardeclExpr
 		if not v.check_conform_expr(n_expr, v.type_collection) then
 			return
 		end
-		var prop = expr_type.local_class.select_method(once ("iterator".to_symbol))
-		if prop == null then
+		_meth_iterator = expr_type.local_class.select_method(once ("iterator".to_symbol))
+		if _meth_iterator == null then
 			v.error(self, "Error: Collection MUST have an iterate method")
 			return
 		end
-		var iter_type = prop.signature_for(expr_type).return_type
-		var prop2 = iter_type.local_class.select_method(once ("item".to_symbol))
-		if prop2 == null then
+		var iter_type = _meth_iterator.signature_for(expr_type).return_type
+		_meth_is_ok = iter_type.local_class.select_method(once ("is_ok".to_symbol))
+		if _meth_is_ok == null then
+			v.error(self, "Error: {iter_type} MUST have an is_ok method")
+			return
+		end
+		_meth_item = iter_type.local_class.select_method(once ("item".to_symbol))
+		if _meth_item == null then
 			v.error(self, "Error: {iter_type} MUST have an item method")
 			return
 		end
-		var t = prop2.signature_for(iter_type).return_type
+		_meth_next = iter_type.local_class.select_method(once ("next".to_symbol))
+		if _meth_next == null then
+			v.error(self, "Error: {iter_type} MUST have a next method")
+			return
+		end
+		var t = _meth_item.signature_for(iter_type).return_type
 		if not n_expr.is_self then t = t.not_for_self
 		va.stype = t
 	end
@@ -670,16 +684,28 @@ redef class ACharExpr
 end
 
 redef class AStringFormExpr
+	readable attr _meth_with_native: MMMethod
 	redef meth after_typing(v)
 	do
 		_stype = v.type_string
+		_meth_with_native = _stype.local_class.select_method(once "with_native".to_symbol)
+		if _meth_with_native == null then v.error(self, "{_stype} MUST have a with_native method.")
 	end
 end
 
 redef class ASuperstringExpr
+	readable attr _meth_init: MMMethod
+	readable attr _meth_append: MMMethod
+	readable attr _meth_to_s: MMMethod
 	redef meth after_typing(v)
 	do
 		_stype = v.type_string
+		_meth_init = _stype.local_class.select_method(once "init".to_symbol)
+		if _meth_init == null then v.error(self, "{_stype} MUST have an init method.")
+		_meth_append = _stype.local_class.select_method(once "append".to_symbol)
+		if _meth_append == null then v.error(self, "{_stype} MUST have a append method.")
+		_meth_to_s = v.type_object.local_class.select_method(once "to_s".to_symbol)
+		if _meth_to_s == null then v.error(self, "Object MUST have a to_s method.")
 	end
 end
 
@@ -691,7 +717,8 @@ redef class ANullExpr
 end
 
 redef class AArrayExpr
-	private meth stype=(t: MMType) do _stype = t
+	readable attr _meth_with_capacity: MMMethod
+	readable attr _meth_add: MMMethod
 
 	redef meth after_typing(v)
 	do
@@ -705,11 +732,22 @@ redef class AArrayExpr
 		for n in n_exprs do
 			v.check_conform_expr(n, stype)
 		end
-		_stype = v.type_array(stype)
+		do_typing(v, stype)
+	end
+
+	private meth do_typing(v: TypingVisitor, element_type: MMType)
+	do
+		_stype = v.type_array(element_type)
+
+		_meth_with_capacity = _stype.local_class.select_method(once "with_capacity".to_symbol)
+		if _meth_with_capacity == null then v.error(self, "{_stype} MUST have a with_capacity method.")
+		_meth_add = _stype.local_class.select_method(once "add".to_symbol)
+		if _meth_add == null then v.error(self, "{_stype} MUST have an add method.")
 	end
 end
 
 redef class ARangeExpr
+	readable attr _meth_init: MMMethod
 	redef meth after_typing(v)
 	do
 		var ntype = n_expr.stype
@@ -729,6 +767,22 @@ redef class ARangeExpr
 		_stype = v.type_range(ntype)
 	end
 end
+
+redef class ACrangeExpr
+	redef meth after_typing(v)
+	do
+		super
+		_meth_init = stype.local_class.select_method(once "init".to_symbol)
+	end
+end
+redef class AOrangeExpr
+	redef meth after_typing(v)
+	do
+		super
+		_meth_init = stype.local_class.select_method(once "without_last".to_symbol)
+	end
+end
+
 
 redef class ASuperExpr
 special ASuperInitCall
@@ -932,7 +986,7 @@ special PExpr
 					arg_idx = arg_idx + 1
 				end
 				var aa = new AArrayExpr.init_aarrayexpr(star)
-				aa.stype = v.type_array(par_type)
+				aa.do_typing(v, par_type)
 				a = aa
 			else
 				a = raw_args[arg_idx]

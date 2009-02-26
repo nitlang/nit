@@ -1002,37 +1002,17 @@ redef class AForVardeclExpr
 	redef meth compile_stmt(v)
 	do
 		var e = v.compile_expr(n_expr)
-		var prop = n_expr.stype.local_class.select_method(once "iterator".to_symbol)
-		if prop == null then
-			printl("No iterator")
-			return
-		end
-		var ittype = prop.signature.return_type
+		var ittype = meth_iterator.signature.return_type
 		v.cfc.free_var(e)
 		var iter = v.cfc.get_var
-		v.add_assignment(iter, prop.compile_call(v, [e]))
-		var prop2 = ittype.local_class.select_method(once "is_ok".to_symbol)
-		if prop2 == null then
-			printl("No is_ok")
-			return
-		end
-		var prop3 = ittype.local_class.select_method(once "item".to_symbol)
-		if prop3 == null then
-			printl("No item")
-			return
-		end
-		var prop4 = ittype.local_class.select_method(once "next".to_symbol)
-		if prop4 == null then
-			printl("No next")
-			return
-		end
+		v.add_assignment(iter, meth_iterator.compile_call(v, [e]))
 		v.add_instr("while (true) \{ /*for*/")
 		v.indent
 		var ok = v.cfc.get_var
-		v.add_assignment(ok, prop2.compile_call(v, [iter]))
+		v.add_assignment(ok, meth_is_ok.compile_call(v, [iter]))
 		v.add_instr("if (!UNTAG_Bool({ok})) break; /*for*/")
 		v.cfc.free_var(ok)
-		var e = prop3.compile_call(v, [iter])
+		var e = meth_item.compile_call(v, [iter])
 		e = v.ensure_var(e)
 		var cname = v.cfc.register_variable(variable)
 		v.add_assignment(cname, e)
@@ -1043,7 +1023,7 @@ redef class AForVardeclExpr
 			v.compile_stmt(n_block)
 		end
 		v.add_instr("{v.nmc.continue_label}: while(0);")
-		e = prop4.compile_call(v, [iter])
+		e = meth_next.compile_call(v, [iter])
 		assert e == null
 		v.unindent
 		v.add_instr("}")
@@ -1196,9 +1176,8 @@ end
 redef class AStringFormExpr
 	redef meth compile_expr(v)
 	do
-		var prop = stype.local_class.select_method(once "with_native".to_symbol)
 		compute_string_info
-		return prop.compile_constructor_call(v, stype , ["BOX_NativeString(\"{_cstring}\")", "TAG_Int({_cstring_length})"])
+		return meth_with_native.compile_constructor_call(v, stype , ["BOX_NativeString(\"{_cstring}\")", "TAG_Int({_cstring_length})"])
 	end
 
 	# The raw string value
@@ -1252,18 +1231,14 @@ end
 redef class ASuperstringExpr
 	redef meth compile_expr(v)
 	do
-		var prop = stype.local_class.select_method(once "init".to_symbol)
-		var recv = prop.compile_constructor_call(v, stype, new Array[String]) 
+		var recv = meth_init.compile_constructor_call(v, stype, new Array[String])
 
-		var prop2 = stype.local_class.select_method(once "append".to_symbol)
-
-		var prop3 = stype.local_class.select_method(once "to_s".to_symbol)
 		for ne in n_exprs do
 			var e = v.ensure_var(v.compile_expr(ne))
 			if ne.stype != stype then
-				v.add_assignment(e, prop3.compile_call(v, [e]))
+				v.add_assignment(e, meth_to_s.compile_call(v, [e]))
 			end
-			prop2.compile_call(v, [recv, e])
+			meth_append.compile_call(v, [recv, e])
 		end
 
 		return recv
@@ -1280,13 +1255,11 @@ end
 redef class AArrayExpr
 	redef meth compile_expr(v)
 	do
-		var prop = stype.local_class.select_method(once "with_capacity".to_symbol)
-		var recv = prop.compile_constructor_call(v, stype, ["TAG_Int({n_exprs.length})"])
+		var recv = meth_with_capacity.compile_constructor_call(v, stype, ["TAG_Int({n_exprs.length})"])
 
-		var prop2 = stype.local_class.select_method(once "add".to_symbol)
 		for ne in n_exprs do
 			var e = v.compile_expr(ne)
-			prop2.compile_call(v, [recv, e])
+			meth_add.compile_call(v, [recv, e])
 		end
 		return recv
 	end
@@ -1295,20 +1268,10 @@ end
 redef class ARangeExpr
 	redef meth compile_expr(v)
 	do
-		var prop = stype.local_class.select_method(propname)
 		var e = v.compile_expr(n_expr)
 		var e2 = v.compile_expr(n_expr2)
-		return prop.compile_constructor_call(v, stype, [e, e2])
+		return meth_init.compile_constructor_call(v, stype, [e, e2])
 	end
-	# The constructor that must be used for the range
-	protected meth propname: Symbol is abstract
-end
-
-redef class ACrangeExpr
-	redef meth propname do return once "init".to_symbol
-end
-redef class AOrangeExpr
-	redef meth propname do return once "without_last".to_symbol
 end
 
 redef class ASuperExpr

@@ -256,6 +256,12 @@ end
 # Visitor used during the syntax analysis
 class AbsSyntaxVisitor
 special Visitor
+	# The root type Object
+	meth type_object: MMType
+	do
+		return _module.class_by_name(once ("Object".to_symbol)).get_type
+	end
+
 	# The primitive type Bool
 	meth type_bool: MMType
 	do
