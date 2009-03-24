@@ -861,7 +861,12 @@ redef class PPropdef
 				end
 				s = isig
 				prop.signature = s
+				#print "s is null"
 			end
+
+			var nberr = v.tc.error_count
+			#print "Check {prop.local_class}::{prop}{s} vs {ip.local_class}::{ip}{isig}"
+			#print "s={s.object_id} isig={isig.object_id} isigorig={i.signature.object_id}"
 
 			#print "orig signature:  {i.signature.recv} . {i.signature}"
 			#print "inh signature:   {isig.recv} . {isig}"
@@ -885,6 +890,9 @@ redef class PPropdef
 				v.error(self, "Redef error: The function {prop.local_class}::{prop} redefines the procedure {ip.local_class}::{ip}.")
 			else if srt != null and isrt != null and not srt < isrt then
 				v.error(self, "Redef error: Expected {isrt} (as in {ip.local_class}::{ip}), got {srt} in {prop.local_class}::{prop}.")
+			else if not s < isig and nberr == v.tc.error_count then
+				# Systematic fallback for conformance check
+				v.error(self, "Redef error: Incompatible redefinition of {ip.local_class}::{ip} with {prop.local_class}::{prop}")
 			else if srt != null and isrt != null and srt != isrt and prop isa MMAttribute then
 				# FIXME: To remove
 				v.warning(self, "Redef warning: Expected {isrt} (as in {ip.local_class}::{ip}), got {srt} in {prop.local_class}::{prop}.")

@@ -110,6 +110,11 @@ class MMSignature
 				return false
 			end
 		end
+
+		if closures.length != s.closures.length then return false
+		for i in [0..closures.length[ do
+			if not s.closures[i] < closures[i] then return false
+		end
 		return true
 	end
 
@@ -255,6 +260,13 @@ class MMClosure
 		else
 			return self
 		end
+	end
+
+	meth <(c: MMClosure): Bool
+	do
+		if c.is_optional and not is_optional then return false
+		if not c.is_break and is_break then return false
+		return c.signature < signature
 	end
 end
 
