@@ -851,6 +851,10 @@ redef class PPropdef
 					v.error(self, "Redef error: {prop.local_class}::{prop} redefines {ip.local_class}::{ip} with {isig.arity} parameter(s).")
 					return
 				end
+				if v.signature_builder.closure_decls.length != isig.closures.length then
+					v.error(self, "Redef error: {prop.local_class}::{prop} redefines {ip.local_class}::{ip} with {isig.arity} closure(s).")
+					return
+				end
 				for p in v.signature_builder.params do
 					var t = isig[p.position]
 					p.stype = t
