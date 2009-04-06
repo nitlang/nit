@@ -603,7 +603,7 @@ redef class AVardeclExpr
 	readable writable attr _variable: VarVariable
 end
 
-redef class AForVardeclExpr
+redef class AForExpr
 	# Associated automatic local variable
 	readable writable attr _variable: AutoVariable
 end

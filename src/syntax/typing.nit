@@ -451,26 +451,18 @@ redef class AWhileExpr
 end
 
 redef class AForExpr
-	redef meth after_typing(v)
-	do
-		# pop context created in AForVardeclExpr
-		var varctx = v.variable_ctx 
-		assert varctx isa SubVariableContext
-		v.variable_ctx = varctx.prev
-	end
-end
-
-redef class AForVardeclExpr
 	readable attr _meth_iterator: MMMethod
 	readable attr _meth_is_ok: MMMethod
 	readable attr _meth_item: MMMethod
 	readable attr _meth_next: MMMethod
-	redef meth after_typing(v)
+	redef meth accept_typing(v)
 	do
 		v.variable_ctx = v.variable_ctx.sub
 		var va = new AutoVariable(n_id.to_symbol, self)
 		variable = va
 		v.variable_ctx.add(va)
+
+		v.visit(n_expr)
 
 		var expr_type = n_expr.stype
 		if not v.check_conform_expr(n_expr, v.type_collection) then
@@ -500,6 +492,13 @@ redef class AForVardeclExpr
 		var t = _meth_item.signature_for(iter_type).return_type
 		if not n_expr.is_self then t = t.not_for_self
 		va.stype = t
+
+		if n_block != null then v.visit(n_block)
+
+		# pop context
+		var varctx = v.variable_ctx 
+		assert varctx isa SubVariableContext
+		v.variable_ctx = varctx.prev
 	end
 end
 

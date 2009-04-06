@@ -374,9 +374,7 @@ while~withelse {-> expr}
 	= kwwhile no expr [n2]:no kwdo stmtso~withelse {-> New expr.while(kwwhile, expr, kwdo, stmtso~withelse.expr)};
  
 for~withelse {-> expr}
-	= for_vardecl [n4]:no kwdo stmtso~withelse {-> New expr.for(for_vardecl.expr, kwdo, stmtso~withelse.expr)};
-for_vardecl {-> expr}
-	= kwfor no id [n2]:no kwin [n3]:no expr {-> New expr.for_vardecl(kwfor, id, expr)};
+	= kwfor no id [n2]:no kwin [n3]:no expr [n4]:no kwdo stmtso~withelse {-> New expr.for(kwfor, id, expr, kwdo, stmtso~withelse.expr)};
 
 assert~withelse {-> expr}
 	= kwassert assertid? expr_final~withelse {-> New expr.assert(kwassert, assertid.id, expr_final~withelse.expr)};
@@ -601,8 +599,7 @@ expr	= {block} expr*
 	| {if} kwif expr [then]:expr? [else]:expr? 
 	| {ifexpr} kwif expr kwthen [then]:expr kwelse [else]:expr
 	| {while} kwwhile expr kwdo [block]:expr? 
-	| {for} [vardecl]:expr kwdo [block]:expr? 
-	| {for_vardecl} kwfor id expr
+	| {for} kwfor id expr kwdo [block]:expr? 
 	| {assert} kwassert id? expr 
 	| {once} kwonce expr 
 	| {send} expr 

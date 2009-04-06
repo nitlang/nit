@@ -5791,9 +5791,23 @@ redef class AWhileExpr
     end
 end
 redef class AForExpr
-    redef meth n_vardecl=(n: PExpr)
+    redef meth n_kwfor=(n: TKwfor)
     do
-        _n_vardecl = n
+        _n_kwfor = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+    redef meth n_id=(n: TId)
+    do
+        _n_id = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+    redef meth n_expr=(n: PExpr)
+    do
+        _n_expr = n
         if n != null then
 	    n.parent = self
         end
@@ -5816,116 +5830,11 @@ redef class AForExpr
     private init empty_init do end
 
     init init_aforexpr (
-            n_vardecl: PExpr ,
-            n_kwdo: TKwdo ,
-            n_block: PExpr 
-    )
-    do
-        empty_init
-        _n_vardecl = n_vardecl
-	if n_vardecl != null then
-		n_vardecl.parent = self
-	end
-        _n_kwdo = n_kwdo
-	if n_kwdo != null then
-		n_kwdo.parent = self
-	end
-        _n_block = n_block
-	if n_block != null then
-		n_block.parent = self
-	end
-    end
-
-    redef meth replace_child(old_child: PNode, new_child: PNode)
-    do
-        assert old_child != null
-        if _n_vardecl == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa PExpr
-                _n_vardecl = new_child
-	    else
-		_n_vardecl = null
-            end
-            return
-	end
-        if _n_kwdo == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa TKwdo
-                _n_kwdo = new_child
-	    else
-		_n_kwdo = null
-            end
-            return
-	end
-        if _n_block == old_child then
-            if new_child != null then
-                new_child.parent = self
-		assert new_child isa PExpr
-                _n_block = new_child
-	    else
-		_n_block = null
-            end
-            return
-	end
-    end
-
-    redef meth visit_all(v: Visitor)
-    do
-        if _n_vardecl != null then
-            v.visit(_n_vardecl)
-        end
-        if _n_kwdo != null then
-            v.visit(_n_kwdo)
-        end
-        if _n_block != null then
-            v.visit(_n_block)
-        end
-    end
-
-    redef meth visit_all_reverse(v: Visitor)
-    do
-        if _n_vardecl != null then
-            v.visit(_n_vardecl)
-        end
-        if _n_kwdo != null then
-            v.visit(_n_kwdo)
-        end
-        if _n_block != null then
-            v.visit(_n_block)
-        end
-    end
-end
-redef class AForVardeclExpr
-    redef meth n_kwfor=(n: TKwfor)
-    do
-        _n_kwfor = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef meth n_id=(n: TId)
-    do
-        _n_id = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-    redef meth n_expr=(n: PExpr)
-    do
-        _n_expr = n
-        if n != null then
-	    n.parent = self
-        end
-    end
-
-    private init empty_init do end
-
-    init init_aforvardeclexpr (
             n_kwfor: TKwfor ,
             n_id: TId ,
-            n_expr: PExpr 
+            n_expr: PExpr ,
+            n_kwdo: TKwdo ,
+            n_block: PExpr 
     )
     do
         empty_init
@@ -5940,6 +5849,14 @@ redef class AForVardeclExpr
         _n_expr = n_expr
 	if n_expr != null then
 		n_expr.parent = self
+	end
+        _n_kwdo = n_kwdo
+	if n_kwdo != null then
+		n_kwdo.parent = self
+	end
+        _n_block = n_block
+	if n_block != null then
+		n_block.parent = self
 	end
     end
 
@@ -5976,6 +5893,26 @@ redef class AForVardeclExpr
             end
             return
 	end
+        if _n_kwdo == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwdo
+                _n_kwdo = new_child
+	    else
+		_n_kwdo = null
+            end
+            return
+	end
+        if _n_block == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa PExpr
+                _n_block = new_child
+	    else
+		_n_block = null
+            end
+            return
+	end
     end
 
     redef meth visit_all(v: Visitor)
@@ -5989,6 +5926,12 @@ redef class AForVardeclExpr
         if _n_expr != null then
             v.visit(_n_expr)
         end
+        if _n_kwdo != null then
+            v.visit(_n_kwdo)
+        end
+        if _n_block != null then
+            v.visit(_n_block)
+        end
     end
 
     redef meth visit_all_reverse(v: Visitor)
@@ -6001,6 +5944,12 @@ redef class AForVardeclExpr
         end
         if _n_expr != null then
             v.visit(_n_expr)
+        end
+        if _n_kwdo != null then
+            v.visit(_n_kwdo)
+        end
+        if _n_block != null then
+            v.visit(_n_block)
         end
     end
 end

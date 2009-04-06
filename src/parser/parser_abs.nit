@@ -628,15 +628,11 @@ special PExpr
 end
 class AForExpr
 special PExpr
-    readable writable attr _n_vardecl: PExpr = null
-    readable writable attr _n_kwdo: TKwdo = null
-    readable writable attr _n_block: PExpr = null
-end
-class AForVardeclExpr
-special PExpr
     readable writable attr _n_kwfor: TKwfor = null
     readable writable attr _n_id: TId = null
     readable writable attr _n_expr: PExpr = null
+    readable writable attr _n_kwdo: TKwdo = null
+    readable writable attr _n_block: PExpr = null
 end
 class AAssertExpr
 special PExpr

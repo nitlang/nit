@@ -994,13 +994,6 @@ end
 redef class AForExpr
 	redef meth compile_inside_block(v)
 	do
-		v.compile_stmt(n_vardecl)
-	end
-end
-
-redef class AForVardeclExpr
-	redef meth compile_stmt(v)
-	do
 		var e = v.compile_expr(n_expr)
 		var ittype = meth_iterator.signature.return_type
 		v.cfc.free_var(e)
@@ -1016,9 +1009,7 @@ redef class AForVardeclExpr
 		e = v.ensure_var(e)
 		var cname = v.cfc.register_variable(variable)
 		v.add_assignment(cname, e)
-		var par = parent
-		assert par isa AForExpr
-		var n_block = par.n_block
+		var n_block = n_block
 		if n_block != null then
 			v.compile_stmt(n_block)
 		end
