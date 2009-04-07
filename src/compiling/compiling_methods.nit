@@ -320,6 +320,66 @@ redef class MMMethod
 		end
 	end
 
+	# Compile a call on self for given arguments and given closures
+	meth compile_call_and_closures(v: CompilerVisitor, cargs: Array[String], clos_defs: Array[PClosureDef]): String
+	do
+		var ve: String = null
+		var arity = 0
+		if clos_defs != null then arity = clos_defs.length
+
+		# Prepare result value.
+		# In case of procedure, the return value is still used to intercept breaks
+		var old_bv = v.nmc.break_value
+		ve = v.cfc.get_var
+		v.nmc.break_value = ve
+
+		# Compile closure to c function
+		var realcargs = new Array[String] # Args to pass to the C function call
+		var closcns = new Array[String] # Closure C structure names
+		realcargs.add_all(cargs)
+		for i in [0..arity[ do
+			var cn = clos_defs[i].compile_closure(v, closure_cname(i))
+			closcns.add(cn)
+			realcargs.add(cn)
+		end
+		for i in [arity..signature.closures.length[ do
+			realcargs.add("NULL")
+		end
+
+		v.nmc.break_value = old_bv
+
+		# Call
+		var e = compile_call(v, realcargs)
+		if e != null then
+			v.add_assignment(ve, e)
+			e = ve
+		end
+
+		# Intercept returns and breaks
+		for i in [0..arity[ do
+			# A break or a return is intercepted
+			v.add_instr("if ({closcns[i]}->has_broke != NULL) \{")
+			v.indent
+			# A passtrought break or a return is intercepted: go the the next closure
+			v.add_instr("if ({closcns[i]}->has_broke != &({ve})) \{")
+			v.indent
+			if v.cfc.in_closure then v.add_instr("closctx->has_broke = {closcns[i]}->has_broke; closctx->broke_value = {closcns[i]}->broke_value;")
+			v.add_instr("goto {v.nmc.return_label};")
+			v.unindent
+			# A direct break is interpected
+			if e != null then
+				# overwrite the returned value in a function
+				v.add_instr("\} else {ve} = {closcns[i]}->broke_value;")
+			else
+				# Do nothing in a procedure
+				v.add_instr("\}")
+			end
+			v.unindent
+			v.add_instr("\}")
+		end
+		return e
+	end
+
 	# Compile a call as constructor with given args
 	meth compile_constructor_call(v: CompilerVisitor, recvtype: MMType, cargs: Array[String]): String
 	do
@@ -1352,59 +1412,7 @@ redef class ASendExpr
 		if prop_signature.closures.is_empty then
 			e = prop.compile_call(v, cargs)
 		else
-			var cd = closure_defs
-			var arity = 0
-			if cd != null then arity = cd.length
-			var closcns = new Array[String]
-			var ve: String = null
-
-			# Prepare result value.
-			# In case of procedure, the return value is still used to intercept breaks
-			var old_bv = v.nmc.break_value
-			ve = v.cfc.get_var
-			v.nmc.break_value = ve
-
-			# Compile closure to c function
-			for i in [0..arity[ do
-				var cn = cd[i].compile_closure(v, prop.closure_cname(i))
-				closcns.add(cn)
-				cargs.add(cn)
-			end
-			for i in [arity..prop_signature.closures.length[ do
-				cargs.add("NULL")
-			end
-
-			v.nmc.break_value = old_bv
-
-			# Call
-			e = prop.compile_call(v, cargs)
-			if e != null then 
-				v.add_assignment(ve, e)
-				e = ve
-			end
-
-			# Intercept returns and breaks
-			for i in [0..arity[ do
-				# A break or a return is intercepted
-				v.add_instr("if ({closcns[i]}->has_broke != NULL) \{")
-				v.indent
-				# A passtrought break or a return is intercepted: go the the next closure
-				v.add_instr("if ({closcns[i]}->has_broke != &({ve})) \{")
-				v.indent
-				if v.cfc.in_closure then v.add_instr("closctx->has_broke = {closcns[i]}->has_broke; closctx->broke_value = {closcns[i]}->broke_value;")
-				v.add_instr("goto {v.nmc.return_label};")
-				v.unindent
-				# A direct break is interpected
-				if e != null then
-					# overwrite the returned value in a function
-					v.add_instr("\} else {ve} = {closcns[i]}->broke_value;")
-				else
-					# Do nothing in a procedure
-					v.add_instr("\}")
-				end
-				v.unindent
-				v.add_instr("\}")
-			end
+			e = prop.compile_call_and_closures(v, cargs, closure_defs)
 		end
 
 		if prop.global.is_init then
