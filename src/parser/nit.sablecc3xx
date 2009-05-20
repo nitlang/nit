@@ -276,7 +276,7 @@ closure_decl
 	;
 
 /* TYPES *********************************************************************/
-type~nopar~nobra {-> type}
+type~nobra {-> type}
 	= {simple} classid {-> New type(classid, [])}
 !nobra	| {generic} classid obra no types [n2]:no cbra {-> New type(classid, [types.type])}
 	;
@@ -407,7 +407,7 @@ expr_eq~nopar~nobra {-> expr}
 	| {gt} expr_add~nopar~nobra gt no [expr2]:expr_add~nopar~nobra {-> New expr.gt(expr_add~nopar~nobra.expr, expr2.expr)}
 	| {ge} expr_add~nopar~nobra ge no [expr2]:expr_add~nopar~nobra {-> New expr.ge(expr_add~nopar~nobra.expr, expr2.expr)}
 	| {starship} expr_add~nopar~nobra starship no [expr2]:expr_add~nopar~nobra {-> New expr.starship(expr_add~nopar~nobra.expr, expr2.expr)}
-	| {isa} expr_add~nopar~nobra kwisa no type~nopar~nobra {-> New expr.isa(expr_add~nopar~nobra.expr, type~nopar~nobra.type)}
+	| {isa} expr_add~nopar~nobra kwisa no type~nobra {-> New expr.isa(expr_add~nopar~nobra.expr, type~nobra.type)}
 	;
 
 expr_add~nopar~nobra {-> expr}
@@ -431,7 +431,7 @@ expr_minus~nopar~nobra {-> expr}
 
 expr_new~nopar~nobra {-> expr}
 	= expr_atom~nopar~nobra {-> expr_atom~nopar~nobra.expr}
-	| {new} kwnew no type~nopar~nobra args {-> New expr.new(kwnew, type~nopar~nobra.type, Null, [args.expr])}
+	| {new} kwnew no type~nobra args {-> New expr.new(kwnew, type~nobra.type, Null, [args.expr])}
 	;
 
 expr_atom~nopar~nobra {-> expr}
@@ -440,7 +440,7 @@ expr_atom~nopar~nobra {-> expr}
 	| {super} qualified? kwsuper args {-> New expr.super(qualified, kwsuper, [args.expr])}
 	| {init} recv~nopar~nobra kwinit args {-> New expr.init(recv~nopar~nobra.expr, kwinit, [args.expr])}
 !nobra!nopar	| {bra} expr_atom braargs {-> New expr.bra(expr_atom.expr, [braargs.expr], [])}
-	| {new} kwnew no type~nopar~nobra dot [n2]:no id args {-> New expr.new(kwnew, type~nopar~nobra.type, id, [args.expr])}
+	| {new} kwnew no type~nobra dot [n2]:no id args {-> New expr.new(kwnew, type~nobra.type, id, [args.expr])}
 !nobra!nopar	| {range} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no cbra {-> New expr.crange(expr, expr2.expr)}
 !nobra!nopar	| {orange} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no [cbra]:obra  {-> New expr.orange(expr, expr2.expr)}
 !nobra!nopar	| {array} braargs {-> New expr.array([braargs.expr])}
