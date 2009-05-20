@@ -395,6 +395,7 @@ special PPropdef
     readable writable attr _n_kwredef: TKwredef = null
     readable writable attr _n_visibility: PVisibility = null
     readable writable attr _n_kwattr: TKwattr = null
+    readable writable attr _n_kwvar: TKwvar = null
     readable writable attr _n_id: TAttrid = null
     readable writable attr _n_type: PType = null
     readable writable attr _n_readable: PAble = null

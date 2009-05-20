@@ -1498,6 +1498,13 @@ redef class AAttrPropdef
 	    n.parent = self
         end
     end
+    redef meth n_kwvar=(n: TKwvar)
+    do
+        _n_kwvar = n
+        if n != null then
+	    n.parent = self
+        end
+    end
     redef meth n_id=(n: TAttrid)
     do
         _n_id = n
@@ -1529,6 +1536,7 @@ redef class AAttrPropdef
             n_kwredef: TKwredef ,
             n_visibility: PVisibility ,
             n_kwattr: TKwattr ,
+            n_kwvar: TKwvar ,
             n_id: TAttrid ,
             n_type: PType ,
             n_expr: PExpr 
@@ -1558,6 +1566,10 @@ redef class AAttrPropdef
         _n_kwattr = n_kwattr
 	if n_kwattr != null then
 		n_kwattr.parent = self
+	end
+        _n_kwvar = n_kwvar
+	if n_kwvar != null then
+		n_kwvar.parent = self
 	end
         _n_id = n_id
 	if n_id != null then
@@ -1636,6 +1648,16 @@ redef class AAttrPropdef
             end
             return
 	end
+        if _n_kwvar == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwvar
+                _n_kwvar = new_child
+	    else
+		_n_kwvar = null
+            end
+            return
+	end
         if _n_id == old_child then
             if new_child != null then
                 new_child.parent = self
@@ -1688,6 +1710,9 @@ redef class AAttrPropdef
         if _n_kwattr != null then
             v.visit(_n_kwattr)
         end
+        if _n_kwvar != null then
+            v.visit(_n_kwvar)
+        end
         if _n_id != null then
             v.visit(_n_id)
         end
@@ -1718,6 +1743,9 @@ redef class AAttrPropdef
         end
         if _n_kwattr != null then
             v.visit(_n_kwattr)
+        end
+        if _n_kwvar != null then
+            v.visit(_n_kwvar)
         end
         if _n_id != null then
             v.visit(_n_id)
