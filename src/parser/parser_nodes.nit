@@ -327,7 +327,7 @@ special PPackagedecl
     readable writable var _n_kwpackage: TKwpackage
     readable writable var _n_id: TId
 end
-class AImport
+class AStdImport
 special PImport
     readable writable var _n_visibility: PVisibility
     readable writable var _n_kwimport: TKwimport
@@ -354,7 +354,7 @@ class AIntrudeVisibility
 special PVisibility
     readable writable var _n_kwintrude: TKwintrude
 end
-class AClassdef
+class AStdClassdef
 special PClassdef
     readable writable var _n_doc: nullable PDoc = null
     readable writable var _n_kwredef: nullable TKwredef = null

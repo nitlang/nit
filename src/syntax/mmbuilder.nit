@@ -485,7 +485,7 @@ redef class PImport
 	# Visibility level (intrude/public/private)
 	fun visibility_level: Int is abstract
 end
-redef class AImport
+redef class AStdImport
 	redef fun module_name
 	do
 		return n_id.to_symbol
@@ -540,7 +540,7 @@ redef class PClassdef
 		var local_classes = mod.src_local_classes
 		if (local_classes.has_key(name)) then
 			local_class = local_classes[name]
-			if self isa AClassdef then
+			if self isa AStdClassdef then
 				# If we are not a special implicit class then rant
 				v.error(self, "Error: A class {name} is already defined at line {local_class.node.location.line_start}.")
 				return
@@ -594,7 +594,7 @@ redef class AAbstractClasskind
 	redef fun is_abstract do return true
 end
 
-redef class AClassdef
+redef class AStdClassdef
 	redef fun name
 	do
 		return n_id.to_symbol

@@ -164,7 +164,7 @@ packagedecl
 	= [doc]:no kwpackage no id [n2]:n1 {-> New packagedecl(doc.doc, kwpackage, id)};
 
 import
-	= [doc]:no visibility kwimport no id [n2]:n1		{-> New import(visibility, kwimport, id)}
+	= {std} [doc]:no visibility kwimport no id [n2]:n1		{-> New import.std(visibility, kwimport, id)}
 	| {no} [doc]:no visibility kwimport no kwend [n2]:n1	{-> New import.no(visibility, kwimport, kwend)}
 	;
 
@@ -180,7 +180,7 @@ implicit_main_meth {-> propdef}
 
 /* CLASSES *******************************************************************/
 classdef
-	= [doc]:no redef visibility classkind no classid formaldefs? [specials]:special* propdefs? [n2]:no kwend {-> New classdef(doc.doc, redef.kwredef, visibility, classkind, classid, [formaldefs.formaldef], [specials.superclass], [propdefs.propdef])};
+	= [doc]:no redef visibility classkind no classid formaldefs? [specials]:special* propdefs? [n2]:no kwend {-> New classdef.std(doc.doc, redef.kwredef, visibility, classkind, classid, [formaldefs.formaldef], [specials.superclass], [propdefs.propdef])};
 redef {-> kwredef?}
 	= kwredef? {-> kwredef};
 classkind
@@ -536,7 +536,7 @@ module	= packagedecl? [imports]:import* [classdefs]:classdef*;
 packagedecl
 	= doc? kwpackage id;
 
-import	=  visibility kwimport id
+import	= {std} visibility kwimport id
 	| {no} visibility kwimport kwend
 	;
 
@@ -547,7 +547,7 @@ visibility
 	| {intrude} kwintrude
 	;
 
-classdef = doc? kwredef? visibility classkind [id]:classid? [formaldefs]:formaldef* [superclasses]:superclass* [propdefs]:propdef*
+classdef= {std} doc? kwredef? visibility classkind [id]:classid? [formaldefs]:formaldef* [superclasses]:superclass* [propdefs]:propdef*
 	| {top} [propdefs]:propdef*
 	| {main} [propdefs]:propdef*
 	;

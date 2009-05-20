@@ -1074,10 +1074,10 @@ redef class MMSrcLocalClass
 	redef fun doc
 	do
 		var n = node
-		if not n isa AClassdef then
+		if not n isa AStdClassdef then
 			return null
 		end
-		assert n isa AClassdef
+		assert n isa AStdClassdef
 		var d = n.n_doc
 		if d == null then
 			return null

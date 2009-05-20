@@ -142,7 +142,7 @@ special ParserTable
 				var node1 = pop
 				assert node1 isa PModule
 				var node = new Start(node1, node2)
-				(new SearchTokensVisitor).visit(node)
+				(new SearchTokensVisitor).enter_visit(node)
 				return node
 			else if action_type == 3 then # ERROR
 				var location = new Location(lexer.filename, last_line, last_line, last_pos, last_pos)
@@ -3110,7 +3110,7 @@ special ReduceAction
 					assert tkwimportnode3 isa nullable TKwimport
 					var tidnode4 = nodearraylist5
 					assert tidnode4 isa nullable TId
-					var pimportnode1: nullable AImport = new AImport.init_aimport(
+					var pimportnode1: nullable AStdImport = new AStdImport.init_astdimport(
 						pvisibilitynode2,
 						tkwimportnode3,
 						tidnode4
@@ -3263,7 +3263,7 @@ special ReduceAction
 					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist5
 					assert tclassidnode6 isa nullable TClassid
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -3304,7 +3304,7 @@ special ReduceAction
 					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist6
 					assert tclassidnode6 isa nullable TClassid
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -3352,7 +3352,7 @@ special ReduceAction
 							listnode8.append(listnode7)
 						end
 #					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -3403,7 +3403,7 @@ special ReduceAction
 							listnode8.append(listnode7)
 						end
 #					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -3451,7 +3451,7 @@ special ReduceAction
 							listnode9.append(listnode8)
 						end
 #					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -3502,7 +3502,7 @@ special ReduceAction
 							listnode9.append(listnode8)
 						end
 #					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -3560,7 +3560,7 @@ special ReduceAction
 							listnode10.append(listnode9)
 						end
 #					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -3621,7 +3621,7 @@ special ReduceAction
 							listnode10.append(listnode9)
 						end
 #					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -3666,7 +3666,7 @@ special ReduceAction
 					if ppropdefnode9 != null then
 						listnode10.add(ppropdefnode9)
 					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -3721,7 +3721,7 @@ special ReduceAction
 							listnode11.append(listnode10)
 						end
 #					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -3769,7 +3769,7 @@ special ReduceAction
 					if ppropdefnode9 != null then
 						listnode10.add(ppropdefnode9)
 					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -3827,7 +3827,7 @@ special ReduceAction
 							listnode11.append(listnode10)
 						end
 #					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -3882,7 +3882,7 @@ special ReduceAction
 					if ppropdefnode10 != null then
 						listnode11.add(ppropdefnode10)
 					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -3947,7 +3947,7 @@ special ReduceAction
 							listnode12.append(listnode11)
 						end
 #					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -4005,7 +4005,7 @@ special ReduceAction
 					if ppropdefnode10 != null then
 						listnode11.add(ppropdefnode10)
 					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -4073,7 +4073,7 @@ special ReduceAction
 							listnode12.append(listnode11)
 						end
 #					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -4128,7 +4128,7 @@ special ReduceAction
 					if ppropdefnode10 != null then
 						listnode11.add(ppropdefnode10)
 					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -4193,7 +4193,7 @@ special ReduceAction
 							listnode12.append(listnode11)
 						end
 #					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -4251,7 +4251,7 @@ special ReduceAction
 					if ppropdefnode10 != null then
 						listnode11.add(ppropdefnode10)
 					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -4319,7 +4319,7 @@ special ReduceAction
 							listnode12.append(listnode11)
 						end
 #					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -4384,7 +4384,7 @@ special ReduceAction
 					if ppropdefnode11 != null then
 						listnode12.add(ppropdefnode11)
 					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -4459,7 +4459,7 @@ special ReduceAction
 							listnode13.append(listnode12)
 						end
 #					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -4527,7 +4527,7 @@ special ReduceAction
 					if ppropdefnode11 != null then
 						listnode12.add(ppropdefnode11)
 					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -4605,7 +4605,7 @@ special ReduceAction
 							listnode13.append(listnode12)
 						end
 #					end
-					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AStdClassdef = new AStdClassdef.init_astdclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,

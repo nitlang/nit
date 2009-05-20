@@ -285,7 +285,7 @@ redef class APackagedecl
         v.enter_visit(_n_id)
     end
 end
-redef class AImport
+redef class AStdImport
     redef fun n_visibility=(n)
     do
         _n_visibility = n
@@ -304,7 +304,7 @@ redef class AImport
 
     private init empty_init do end
 
-    init init_aimport (
+    init init_astdimport (
             n_visibility: nullable PVisibility ,
             n_kwimport: nullable TKwimport ,
             n_id: nullable TId 
@@ -596,7 +596,7 @@ redef class AIntrudeVisibility
         v.enter_visit(_n_kwintrude)
     end
 end
-redef class AClassdef
+redef class AStdClassdef
     redef fun n_doc=(n)
     do
         _n_doc = n
@@ -631,7 +631,7 @@ redef class AClassdef
 
     private init empty_init do end
 
-    init init_aclassdef (
+    init init_astdclassdef (
             n_doc: nullable PDoc ,
             n_kwredef: nullable TKwredef ,
             n_visibility: nullable PVisibility ,
