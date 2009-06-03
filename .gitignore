@@ -23,3 +23,4 @@ tests/*.bin
 tests/*.err
 tests/*.write
 tests/alt
+tests/errlist

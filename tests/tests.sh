@@ -27,8 +27,22 @@
 # Mark to distinguish files among tests
 # MARK=
 
+# File where error tests are outputed
+# Old ERRLIST is backuped
+ERRLIST=${ERRLIST:-errlist}
+
 if [ $# = 0 ]; then
 	echo "usage: $0 file.nit ..."
+fi
+
+# Backup and initiate new ERRLIST
+if [ "x$ERRLIST" = "x" ]; then
+	ERRLIST=/dev=null
+else
+	if [ -x "$ERRLIST" ]; then
+		mv "$ERRLIST" "${ERRLIST}.bak"
+	fi
+	> "$ERRLIST"
 fi
 
 ok=""
@@ -90,6 +104,7 @@ for ii in "$@"; do
 			else
 				echo "[======= fail $ff.res sav/$ff.sav =======]"
 				nok="$nok $ff"
+				echo "$ii" >> "$ERRLIST"
 			fi
 		else
 			echo "[=== no sav ===] $ff.res"
@@ -102,7 +117,7 @@ echo "ok: " `echo $ok | wc -w` "/" `echo $ok $nok $nos | wc -w`
 
 if [ -n "$nok" ]; then
 	echo "fail: $nok"
-	echo "There were errors !"
+	echo "There were errors ! (see file $ERRLIST)"
 fi
 if [ -n "$nos" ]; then
 	echo "no sav: $nos"
