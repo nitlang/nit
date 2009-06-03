@@ -100,6 +100,9 @@ redef class Prod
 		if first_token == null then
 			return "????"
 		end
+		if last_token == null then
+			return "{first_token.locate}--????"
+		end
 		var lastpos = last_token.pos + last_token.text.length - 1
 		if first_token.line == last_token.line then
 			return "{first_token.locate}--{lastpos}"
