@@ -24,6 +24,7 @@ redef class CompilerVisitor
 	# Compile a statment node
 	meth compile_stmt(n: PExpr)
 	do
+		add_instr("/* Compile stmt {n.locate} */")
 		n.prepare_compile_stmt(self)
 		var i = cfc._variable_index
 		n.compile_stmt(self)
@@ -33,6 +34,7 @@ redef class CompilerVisitor
 	# Compile is expression node
 	meth compile_expr(n: PExpr): String
 	do
+		add_instr("/* Compile expr {n.locate} */")
 		var i = cfc._variable_index
 		var s = n.compile_expr(self)
 		cfc._variable_index = i
