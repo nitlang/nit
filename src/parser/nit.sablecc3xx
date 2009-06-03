@@ -1,7 +1,7 @@
 
 /* This file is part of NIT ( http://www.nitlanguage.org ).
  *
- * Copyright 2008 Jean Privat <jean@pryen.org>
+ * Copyright 2008-2009 Jean Privat <jean@pryen.org>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -283,11 +283,10 @@ closure_decl
 	;
 
 /* TYPES *********************************************************************/
-type/*B3*//*B*/ {-> type}
+type~nopar~nobra {-> type}
 	= {simple} classid {-> New type(classid, [])}
-/*N*/	| {generic} classid obra no types [n2]:no cbra {-> New type(classid, [types.type])}
+!nobra	| {generic} classid obra no types [n2]:no cbra {-> New type(classid, [types.type])}
 	;
-/*E*/
 types {-> type*} 
 	= type types_tail* {-> [type, types_tail.type]};
 types_tail {-> type}
@@ -296,8 +295,8 @@ typing {-> type}
 	= column no type {-> type};
 
 /* STATMENTS *****************************************************************/
-stmtso/*B2*/ {-> expr?}
-	= {oneline} stmt/*B2*/ {-> stmt/*B2*/.expr}
+stmtso~withelse {-> expr?}
+	= {oneline} stmt~withelse {-> stmt~withelse.expr}
 	| {block} n stmts [n2]:n kwend {-> stmts.expr}
 	| {emptyblock} n kwend {-> New expr.block([])}
 	| {emptyoneline} kwend {-> New expr.block([])}
@@ -306,31 +305,31 @@ stmts {-> expr}
 	= stmt stmts_tail* {-> New expr.block([stmt.expr, stmts_tail.expr])};
 stmts_tail {-> expr}
 	= n stmt {-> stmt.expr};
-stmt/*B2*/ {-> expr}
-	= {vardecl} vardecl/*B2*/ {-> vardecl/*B2*/.expr}
-	| {assign} assignment/*B2*/ {-> assignment/*B2*/.expr}
-	| {return} kwreturn expr_final/*B2*/? {-> New expr.return(kwreturn, expr_final/*B2*/.expr)}
-	| {break} kwbreak expr_final/*B2*/? {-> New expr.break(kwbreak, expr_final/*B2*/.expr)}
+stmt~withelse {-> expr}
+	= {vardecl} vardecl~withelse {-> vardecl~withelse.expr}
+	| {assign} assignment~withelse {-> assignment~withelse.expr}
+	| {return} kwreturn expr_final~withelse? {-> New expr.return(kwreturn, expr_final~withelse.expr)}
+	| {break} kwbreak expr_final~withelse? {-> New expr.break(kwbreak, expr_final~withelse.expr)}
 	| {abort} kwabort {-> New expr.abort(kwabort)}
-	| {continue} kwcontinue expr_final/*B2*/? {-> New expr.continue(kwcontinue, expr_final/*B2*/.expr)}
-	| {do} do/*B2*/ {-> do/*B2*/.expr}
-	| {if} if/*B2*/ {-> if/*B2*/.expr}
-	| {while} while/*B2*/ {-> while/*B2*/.expr}
-	| {for} for/*B2*/ {-> for/*B2*/.expr}
-	| {assert} assert/*B2*/ {-> assert/*B2*/.expr}
+	| {continue} kwcontinue expr_final~withelse? {-> New expr.continue(kwcontinue, expr_final~withelse.expr)}
+	| {do} do~withelse {-> do~withelse.expr}
+	| {if} if~withelse {-> if~withelse.expr}
+	| {while} while~withelse {-> while~withelse.expr}
+	| {for} for~withelse {-> for~withelse.expr}
+	| {assert} assert~withelse {-> assert~withelse.expr}
 //	| {expr} expr {-> expr.expr}
-	| {call} recv id args_nopar closure_defs/*B2*/? {-> New expr.call(recv.expr, id, [args_nopar.expr], [closure_defs/*B2*/.closure_def])}
+	| {call} recv id args_nopar closure_defs~withelse? {-> New expr.call(recv.expr, id, [args_nopar.expr], [closure_defs~withelse.closure_def])}
 	| {super} qualified? kwsuper args_nopar {-> New expr.super(qualified, kwsuper, [args_nopar.expr])}
 	| {init} recv kwinit args_nopar {-> New expr.init(recv.expr, kwinit, [args_nopar.expr])}
 	;
 
-closure_defs/*B2*/ {-> closure_def*}
-	= {one} closure_def_last/*B2*/ {-> [closure_def_last/*B2*/.closure_def]}
-	| closure_def closure_defs/*B2*/ {-> [closure_def, closure_defs/*B2*/.closure_def]}
+closure_defs~withelse {-> closure_def*}
+	= {one} closure_def_last~withelse {-> [closure_def_last~withelse.closure_def]}
+	| closure_def closure_defs~withelse {-> [closure_def, closure_defs~withelse.closure_def]}
 	;
 
-closure_def_last/*B2*/ {-> closure_def}
-	= kwwith idlist? kwdo stmtso/*B2*/ {-> New closure_def(kwwith, [idlist.id], kwdo, stmtso/*B2*/.expr)}
+closure_def_last~withelse {-> closure_def}
+	= kwwith idlist? kwdo stmtso~withelse {-> New closure_def(kwwith, [idlist.id], kwdo, stmtso~withelse.expr)}
 	;
 
 closure_def {-> closure_def}
@@ -338,122 +337,122 @@ closure_def {-> closure_def}
 	| {empty} kwwith idlist? kwdo n {-> New closure_def(kwwith, [idlist.id], kwdo, Null)}
 	;
 
-vardecl/*B2*/{-> expr}
+vardecl~withelse{-> expr}
 	= kwvar id typing? {-> New expr.vardecl(kwvar, id, typing.type, Null, Null)}
-	| {assign} kwvar id typing? assign no expr_final/*B2*/ {-> New expr.vardecl(kwvar, id, typing.type, assign, expr_final/*B2*/.expr)}
+	| {assign} kwvar id typing? assign no expr_final~withelse {-> New expr.vardecl(kwvar, id, typing.type, assign, expr_final~withelse.expr)}
 	;
 
-assignment/*B2*/ {-> expr}
-	= {attr} recv attrid assign expr_final/*B2*/ {-> New expr.attr_assign(recv.expr, attrid, assign, expr_final/*B2*/.expr)}
-	| {call} recv id args assign expr_final/*B2*/ {-> New expr.call_assign(recv.expr, id, [args.expr], assign,  expr_final/*B2*/.expr)}
-	| {bra} expr_atom braargs assign expr_final/*B2*/ {-> New expr.bra_assign(expr_atom.expr, [braargs.expr], assign,  expr_final/*B2*/.expr)}
-	| {attr_re} recv attrid assign_op expr_final/*B2*/ {-> New expr.attr_reassign(recv.expr, attrid, assign_op,  expr_final/*B2*/.expr)}
-	| {call_re} recv id args assign_op expr_final/*B2*/ {-> New expr.call_reassign(recv.expr, id, [args.expr], assign_op,  expr_final/*B2*/.expr)}
-	| {bra_re} expr_atom braargs assign_op expr_final/*B2*/ {-> New expr.bra_reassign(expr_atom.expr, [braargs.expr], assign_op,  expr_final/*B2*/.expr)}
+assignment~withelse {-> expr}
+	= {attr} recv attrid assign expr_final~withelse {-> New expr.attr_assign(recv.expr, attrid, assign, expr_final~withelse.expr)}
+	| {call} recv id args assign expr_final~withelse {-> New expr.call_assign(recv.expr, id, [args.expr], assign,  expr_final~withelse.expr)}
+	| {bra} expr_atom braargs assign expr_final~withelse {-> New expr.bra_assign(expr_atom.expr, [braargs.expr], assign,  expr_final~withelse.expr)}
+	| {attr_re} recv attrid assign_op expr_final~withelse {-> New expr.attr_reassign(recv.expr, attrid, assign_op,  expr_final~withelse.expr)}
+	| {call_re} recv id args assign_op expr_final~withelse {-> New expr.call_reassign(recv.expr, id, [args.expr], assign_op,  expr_final~withelse.expr)}
+	| {bra_re} expr_atom braargs assign_op expr_final~withelse {-> New expr.bra_reassign(expr_atom.expr, [braargs.expr], assign_op,  expr_final~withelse.expr)}
 	;
 assign_op
 	= {plus} pluseq
 	| {minus} minuseq
 	;
 
-do/*B2*/ {-> expr}
-	= kwdo stmtso/*B2*/ {-> New expr.do(kwdo, stmtso/*B2*/.expr)}
+do~withelse {-> expr}
+	= kwdo stmtso~withelse {-> New expr.do(kwdo, stmtso~withelse.expr)}
 	;
 
-if/*B2*/ {-> expr}
-	= {onelineelse} kwif no expr [n2]:no kwthen stmt_withelse kwelse stmtso/*B2*/ {-> New expr.if(kwif, expr, stmt_withelse.expr, stmtso/*B2*/.expr)}
-/*N2*/	| {oneline} kwif no expr [n2]:no kwthen stmt {-> New expr.if(kwif, expr, stmt.expr, Null)}
-/*N2*/	| {block} kwif no expr [n2]:no kwthen [n3]:n stmts [n4]:n elsepartblock {-> New expr.if(kwif, expr, stmts.expr, elsepartblock.expr)}
-/*N2*/	| {emptyblock} kwif no expr [n2]:no kwthen [n3]:n? elsepartblock {-> New expr.if(kwif, expr, Null, elsepartblock.expr)}
+if~withelse {-> expr}
+	= {onelineelse} kwif no expr [n2]:no kwthen stmt_withelse kwelse stmtso~withelse {-> New expr.if(kwif, expr, stmt_withelse.expr, stmtso~withelse.expr)}
+!withelse	| {oneline} kwif no expr [n2]:no kwthen stmt {-> New expr.if(kwif, expr, stmt.expr, Null)}
+!withelse	| {block} kwif no expr [n2]:no kwthen [n3]:n stmts [n4]:n elsepartblock {-> New expr.if(kwif, expr, stmts.expr, elsepartblock.expr)}
+!withelse	| {emptyblock} kwif no expr [n2]:no kwthen [n3]:n? elsepartblock {-> New expr.if(kwif, expr, Null, elsepartblock.expr)}
 	;
 elsepartblock {-> expr?}
 	= {else} kwelse stmtso {-> stmtso.expr}
 	| {empty} kwend {-> Null}
 	;
 
-while/*B2*/ {-> expr}
-	= kwwhile no expr [n2]:no kwdo stmtso/*B2*/ {-> New expr.while(kwwhile, expr, kwdo, stmtso/*B2*/.expr)};
+while~withelse {-> expr}
+	= kwwhile no expr [n2]:no kwdo stmtso~withelse {-> New expr.while(kwwhile, expr, kwdo, stmtso~withelse.expr)};
  
-for/*B2*/ {-> expr}
-	= for_vardecl [n4]:no kwdo stmtso/*B2*/ {-> New expr.for(for_vardecl.expr, kwdo, stmtso/*B2*/.expr)};
+for~withelse {-> expr}
+	= for_vardecl [n4]:no kwdo stmtso~withelse {-> New expr.for(for_vardecl.expr, kwdo, stmtso~withelse.expr)};
 for_vardecl {-> expr}
 	= kwfor no id [n2]:no kwin [n3]:no expr {-> New expr.for_vardecl(kwfor, id, expr)};
 
-assert/*B2*/ {-> expr}
-	= kwassert assertid? expr_final/*B2*/ {-> New expr.assert(kwassert, assertid.id, expr_final/*B2*/.expr)};
+assert~withelse {-> expr}
+	= kwassert assertid? expr_final~withelse {-> New expr.assert(kwassert, assertid.id, expr_final~withelse.expr)};
 assertid {-> id}
 	= id column {-> id};
 
 /* EXPRESSIONS ***************************************************************/
-expr_final/*B3*//*B2*//*B*/ {-> expr}
-	= expr/*B3*//*B*/ {-> expr/*B3*//*B*/.expr}
-	| {closure_call} recv/*B*/ id args closure_defs/*B2*/ {-> New expr.call(recv/*B*/.expr, id, [args.expr], [closure_defs/*B2*/.closure_def])}
-/*N*//*N3*/	| {closure_bra} expr_atom braargs closure_defs/*B2*/ {-> New expr.bra(expr_atom.expr, [braargs.expr], [closure_defs/*B2*/.closure_def])}
+expr_final~nopar~withelse~nobra {-> expr}
+	= expr~nopar~nobra {-> expr~nopar~nobra.expr}
+	| {closure_call} recv~nobra id args closure_defs~withelse {-> New expr.call(recv~nobra.expr, id, [args.expr], [closure_defs~withelse.closure_def])}
+!nobra!nopar	| {closure_bra} expr_atom braargs closure_defs~withelse {-> New expr.bra(expr_atom.expr, [braargs.expr], [closure_defs~withelse.closure_def])}
 	;
 
-expr/*B3*//*B*/ {-> expr}
-	= expr_and/*B3*//*B*/ {-> expr_and/*B3*//*B*/.expr}
-	| {ifexpr} kwif [n1]:no expr [n2]:no kwthen [n3]:no [then]:expr [n4]:no kwelse [n5]:no [else]:expr/*B3*//*B*/ {-> New expr.ifexpr(kwif, expr, kwthen, then, kwelse, else.expr)}
+expr~nopar~nobra {-> expr}
+	= expr_and~nopar~nobra {-> expr_and~nopar~nobra.expr}
+	| {ifexpr} kwif [n1]:no expr [n2]:no kwthen [n3]:no [then]:expr [n4]:no kwelse [n5]:no [else]:expr~nopar~nobra {-> New expr.ifexpr(kwif, expr, kwthen, then, kwelse, else.expr)}
 	;
 
-expr_and/*B3*//*B*/ {-> expr}
-	= expr_not/*B3*//*B*/ {-> expr_not/*B3*//*B*/.expr}
-	| {or} expr_and/*B3*//*B*/ kwor no expr_not/*B3*//*B*/ {-> New expr.or(expr_and/*B3*//*B*/.expr, expr_not/*B3*//*B*/.expr)}
-	| {and} expr_and/*B3*//*B*/ kwand no expr_not/*B3*//*B*/ {-> New expr.and(expr_and/*B3*//*B*/.expr, expr_not/*B3*//*B*/.expr)}
+expr_and~nopar~nobra {-> expr}
+	= expr_not~nopar~nobra {-> expr_not~nopar~nobra.expr}
+	| {or} expr_and~nopar~nobra kwor no expr_not~nopar~nobra {-> New expr.or(expr_and~nopar~nobra.expr, expr_not~nopar~nobra.expr)}
+	| {and} expr_and~nopar~nobra kwand no expr_not~nopar~nobra {-> New expr.and(expr_and~nopar~nobra.expr, expr_not~nopar~nobra.expr)}
 	;
 
-expr_not/*B3*//*B*/ {-> expr}
-	= expr_eq/*B3*//*B*/ {-> expr_eq/*B3*//*B*/.expr}
-	| {not} kwnot no expr_not/*B3*//*B*/ {-> New expr.not(kwnot, expr_not/*B3*//*B*/.expr)}
+expr_not~nopar~nobra {-> expr}
+	= expr_eq~nopar~nobra {-> expr_eq~nopar~nobra.expr}
+	| {not} kwnot no expr_not~nopar~nobra {-> New expr.not(kwnot, expr_not~nopar~nobra.expr)}
 	;
 
-expr_eq/*B3*//*B*/ {-> expr}
-	= expr_add/*B3*//*B*/ {-> expr_add/*B3*//*B*/.expr}
-	| {eq} expr_add/*B3*//*B*/ eq no [expr2]:expr_add/*B3*//*B*/ {-> New expr.eq(expr_add/*B3*//*B*/.expr, expr2.expr)}
-	| {ee} expr_add/*B3*//*B*/ kwis no [expr2]:expr_add/*B3*//*B*/ {-> New expr.ee(expr_add/*B3*//*B*/.expr, expr2.expr)}
-	| {ne} expr_add/*B3*//*B*/ ne no [expr2]:expr_add/*B3*//*B*/ {-> New expr.ne(expr_add/*B3*//*B*/.expr, expr2.expr)}
-	| {lt} expr_add/*B3*//*B*/ lt no [expr2]:expr_add/*B3*//*B*/ {-> New expr.lt(expr_add/*B3*//*B*/.expr, expr2.expr)}
-	| {le} expr_add/*B3*//*B*/ le no [expr2]:expr_add/*B3*//*B*/ {-> New expr.le(expr_add/*B3*//*B*/.expr, expr2.expr)}
-	| {gt} expr_add/*B3*//*B*/ gt no [expr2]:expr_add/*B3*//*B*/ {-> New expr.gt(expr_add/*B3*//*B*/.expr, expr2.expr)}
-	| {ge} expr_add/*B3*//*B*/ ge no [expr2]:expr_add/*B3*//*B*/ {-> New expr.ge(expr_add/*B3*//*B*/.expr, expr2.expr)}
-	| {starship} expr_add/*B3*//*B*/ starship no [expr2]:expr_add/*B3*//*B*/ {-> New expr.starship(expr_add/*B3*//*B*/.expr, expr2.expr)}
-	| {isa} expr_add/*B3*//*B*/ kwisa no type/*B3*//*B*/ {-> New expr.isa(expr_add/*B3*//*B*/.expr, type/*B3*//*B*/.type)}
+expr_eq~nopar~nobra {-> expr}
+	= expr_add~nopar~nobra {-> expr_add~nopar~nobra.expr}
+	| {eq} expr_add~nopar~nobra eq no [expr2]:expr_add~nopar~nobra {-> New expr.eq(expr_add~nopar~nobra.expr, expr2.expr)}
+	| {ee} expr_add~nopar~nobra kwis no [expr2]:expr_add~nopar~nobra {-> New expr.ee(expr_add~nopar~nobra.expr, expr2.expr)}
+	| {ne} expr_add~nopar~nobra ne no [expr2]:expr_add~nopar~nobra {-> New expr.ne(expr_add~nopar~nobra.expr, expr2.expr)}
+	| {lt} expr_add~nopar~nobra lt no [expr2]:expr_add~nopar~nobra {-> New expr.lt(expr_add~nopar~nobra.expr, expr2.expr)}
+	| {le} expr_add~nopar~nobra le no [expr2]:expr_add~nopar~nobra {-> New expr.le(expr_add~nopar~nobra.expr, expr2.expr)}
+	| {gt} expr_add~nopar~nobra gt no [expr2]:expr_add~nopar~nobra {-> New expr.gt(expr_add~nopar~nobra.expr, expr2.expr)}
+	| {ge} expr_add~nopar~nobra ge no [expr2]:expr_add~nopar~nobra {-> New expr.ge(expr_add~nopar~nobra.expr, expr2.expr)}
+	| {starship} expr_add~nopar~nobra starship no [expr2]:expr_add~nopar~nobra {-> New expr.starship(expr_add~nopar~nobra.expr, expr2.expr)}
+	| {isa} expr_add~nopar~nobra kwisa no type~nopar~nobra {-> New expr.isa(expr_add~nopar~nobra.expr, type~nopar~nobra.type)}
 	;
 
-expr_add/*B3*//*B*/ {-> expr}
-	=  expr_mul/*B3*//*B*/ {-> expr_mul/*B3*//*B*/.expr}
-	| {plus} expr_add/*B3*//*B*/ plus no [expr2]:expr_mul/*B3*//*B*/ {-> New expr.plus(expr_add/*B3*//*B*/.expr, expr2.expr)}
-	| {minus} expr_add/*B3*//*B*/ minus no [expr2]:expr_mul/*B3*//*B*/ {-> New expr.minus(expr_add/*B3*//*B*/.expr, expr2.expr)}
+expr_add~nopar~nobra {-> expr}
+	=  expr_mul~nopar~nobra {-> expr_mul~nopar~nobra.expr}
+	| {plus} expr_add~nopar~nobra plus no [expr2]:expr_mul~nopar~nobra {-> New expr.plus(expr_add~nopar~nobra.expr, expr2.expr)}
+	| {minus} expr_add~nopar~nobra minus no [expr2]:expr_mul~nopar~nobra {-> New expr.minus(expr_add~nopar~nobra.expr, expr2.expr)}
 	;
 
-expr_mul/*B3*//*B*/ {-> expr}
-	= expr_minus/*B3*//*B*/ {-> expr_minus/*B3*//*B*/.expr}
-	| {star} expr_mul/*B3*//*B*/ star no [expr2]:expr_minus/*B3*//*B*/ {-> New expr.star(expr_mul/*B3*//*B*/.expr, expr2.expr)}
-	| {slash} expr_mul/*B3*//*B*/ slash no [expr2]:expr_minus/*B3*//*B*/ {-> New expr.slash(expr_mul/*B3*//*B*/.expr, expr2.expr)}
-	| {percent} expr_mul/*B3*//*B*/ percent no [expr2]:expr_minus/*B3*//*B*/ {-> New expr.percent(expr_mul/*B3*//*B*/.expr, expr2.expr)}
+expr_mul~nopar~nobra {-> expr}
+	= expr_minus~nopar~nobra {-> expr_minus~nopar~nobra.expr}
+	| {star} expr_mul~nopar~nobra star no [expr2]:expr_minus~nopar~nobra {-> New expr.star(expr_mul~nopar~nobra.expr, expr2.expr)}
+	| {slash} expr_mul~nopar~nobra slash no [expr2]:expr_minus~nopar~nobra {-> New expr.slash(expr_mul~nopar~nobra.expr, expr2.expr)}
+	| {percent} expr_mul~nopar~nobra percent no [expr2]:expr_minus~nopar~nobra {-> New expr.percent(expr_mul~nopar~nobra.expr, expr2.expr)}
 	;
 
-expr_minus/*B3*//*B*/ {-> expr}
-	= expr_new/*B3*//*B*/ {-> expr_new/*B3*//*B*/.expr}
-	| {minus} minus no expr_minus/*B3*//*B*/ {-> New expr.uminus(minus, expr_minus/*B3*//*B*/.expr)}
-	| {once} kwonce no expr_minus/*B3*//*B*/ {-> New expr.once(kwonce, expr_minus/*B3*//*B*/.expr)}
+expr_minus~nopar~nobra {-> expr}
+	= expr_new~nopar~nobra {-> expr_new~nopar~nobra.expr}
+	| {minus} minus no expr_minus~nopar~nobra {-> New expr.uminus(minus, expr_minus~nopar~nobra.expr)}
+	| {once} kwonce no expr_minus~nopar~nobra {-> New expr.once(kwonce, expr_minus~nopar~nobra.expr)}
 	;
 
-expr_new/*B3*//*B*/ {-> expr}
-	= expr_atom/*B3*//*B*/ {-> expr_atom/*B3*//*B*/.expr}
-	| {new} kwnew no type/*B3*//*B*/ args {-> New expr.new(kwnew, type/*B3*//*B*/.type, Null, [args.expr])}
+expr_new~nopar~nobra {-> expr}
+	= expr_atom~nopar~nobra {-> expr_atom~nopar~nobra.expr}
+	| {new} kwnew no type~nopar~nobra args {-> New expr.new(kwnew, type~nopar~nobra.type, Null, [args.expr])}
 	;
 
-expr_atom/*B3*//*B*/ {-> expr}
-	= {attr} recv/*B3*//*B*/ attrid {-> New expr.attr(recv/*B3*//*B*/.expr, attrid)}
-	| {call} recv/*B3*//*B*/ id args {-> New expr.call(recv/*B3*//*B*/.expr, id, [args.expr], [])}
+expr_atom~nopar~nobra {-> expr}
+	= {attr} recv~nopar~nobra attrid {-> New expr.attr(recv~nopar~nobra.expr, attrid)}
+	| {call} recv~nopar~nobra id args {-> New expr.call(recv~nopar~nobra.expr, id, [args.expr], [])}
 	| {super} qualified? kwsuper args {-> New expr.super(qualified, kwsuper, [args.expr])}
-	| {init} recv/*B3*//*B*/ kwinit args {-> New expr.init(recv/*B3*//*B*/.expr, kwinit, [args.expr])}
-/*N*//*N3*/	| {bra} expr_atom braargs {-> New expr.bra(expr_atom.expr, [braargs.expr], [])}
-	| {new} kwnew no type/*B3*//*B*/ dot [n2]:no id args {-> New expr.new(kwnew, type/*B3*//*B*/.type, id, [args.expr])}
-/*N*//*N3*/	| {range} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no cbra {-> New expr.crange(expr, expr2.expr)}
-/*N*//*N3*/	| {orange} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no [cbra]:obra  {-> New expr.orange(expr, expr2.expr)}
-/*N*//*N3*/	| {array} braargs {-> New expr.array([braargs.expr])}
+	| {init} recv~nopar~nobra kwinit args {-> New expr.init(recv~nopar~nobra.expr, kwinit, [args.expr])}
+!nobra!nopar	| {bra} expr_atom braargs {-> New expr.bra(expr_atom.expr, [braargs.expr], [])}
+	| {new} kwnew no type~nopar~nobra dot [n2]:no id args {-> New expr.new(kwnew, type~nopar~nobra.type, id, [args.expr])}
+!nobra!nopar	| {range} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no cbra {-> New expr.crange(expr, expr2.expr)}
+!nobra!nopar	| {orange} obra no expr [n2]:no dotdot [n3]:no [expr2]:expr_nobra [n4]:no [cbra]:obra  {-> New expr.orange(expr, expr2.expr)}
+!nobra!nopar	| {array} braargs {-> New expr.array([braargs.expr])}
 	| {self} kwself {-> New expr.self(kwself)}
 	| {true} kwtrue {-> New expr.true(kwtrue)}
 	| {false} kwfalse {-> New expr.false(kwfalse)}
@@ -463,8 +462,8 @@ expr_atom/*B3*//*B*/ {-> expr}
 	| {char} char  {-> New expr.char(char)}
 	| {string} string  {-> New expr.string(string)}
 	| {superstring} superstring  {-> superstring.expr}
-/*N3*/	| {par} opar expr cpar {-> expr}
-        | {as_cast} expr_atom/*B3*//*B*/ dot no kwas [n2]:no opar [n3]:no type [n4]:no cpar {-> New expr.as_cast(expr_atom/*B3*//*B*/.expr, kwas, type)}
+!nopar	| {par} opar expr cpar {-> expr}
+        | {as_cast} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no type [n4]:no cpar {-> New expr.as_cast(expr_atom~nopar~nobra.expr, kwas, type)}
 	;
 
 superstring {-> expr} 
@@ -482,8 +481,8 @@ superstring_end {-> expr}
 
 /* MISC **********************************************************************/
 
-recv/*B3*//*B*/ {-> expr}
-	= expr_atom/*B3*//*B*/ dot no {-> expr_atom/*B3*//*B*/.expr}
+recv~nopar~nobra {-> expr}
+	= expr_atom~nopar~nobra dot no {-> expr_atom~nopar~nobra.expr}
 	| {implicit} {-> New expr.implicit_self()}
 	;
 
@@ -530,15 +529,6 @@ n2
 	= {a} n2? comment+ eol+
 	| {b} eol+
 	;
-
-/* EXPR NO BRACKETS **********************************************************/
-/* since there is no shift/reduce conflict handling in sablecc, the following
- * is a duplication of previous productions minus some alternative where '['
- * are not protected. */
-
-/*I*/
-/*I2*/
-/*I3*/
 
 /*****************************************************************************/
 Abstract Syntax Tree
