@@ -153,11 +153,11 @@ class CFunctionContext
 	attr _varnames: Map[Variable, String] = new HashMap[Variable, String]
 
 	# Are we currenlty in a closure definition?
-	readable writable attr _in_closure: Bool = false
+	readable writable attr _closure: NitMethodContext = null
 
 	meth varname(v: Variable): String
 	do
-		if _in_closure then
+		if _closure != null then
 			return "closctx->{_varnames[v]}"
 		else
 			return _varnames[v]
@@ -191,7 +191,7 @@ class CFunctionContext
 		var s = "closurevariable[{_closurevariable_index}]"
 		_closurevariable_index += 1
 		_varnames[v] = s
-		if _in_closure then
+		if _closure != null then
 			return "(closctx->{s})"
 		else
 			return s
@@ -201,7 +201,7 @@ class CFunctionContext
 	# Return the ith variable
 	protected meth variable(i: Int): String
 	do
-		if _in_closure then
+		if _closure != null then
 			return "(closctx->variable[{i}])"
 		else
 			return "variable[{i}]"
@@ -363,7 +363,7 @@ redef class MMMethod
 			# A passtrought break or a return is intercepted: go the the next closure
 			v.add_instr("if ({closcns[i]}->has_broke != &({ve})) \{")
 			v.indent
-			if v.cfc.in_closure then v.add_instr("closctx->has_broke = {closcns[i]}->has_broke; closctx->broke_value = {closcns[i]}->broke_value;")
+			if v.cfc.closure == v.nmc then v.add_instr("closctx->has_broke = {closcns[i]}->has_broke; closctx->broke_value = {closcns[i]}->broke_value;")
 			v.add_instr("goto {v.nmc.return_label};")
 			v.unindent
 			# A direct break is interpected
@@ -930,7 +930,7 @@ redef class AReturnExpr
 			var e = v.compile_expr(n_expr)
 			v.add_assignment(v.nmc.return_value, e)
 		end
-		if v.cfc.in_closure then v.add_instr("closctx->has_broke = &({v.nmc.return_value});")
+		if v.cfc.closure == v.nmc then v.add_instr("closctx->has_broke = &({v.nmc.return_value});")
 		v.add_instr("goto {v.nmc.return_label};")
 	end
 end
@@ -942,7 +942,7 @@ redef class ABreakExpr
 			var e = v.compile_expr(n_expr)
 			v.add_assignment(v.nmc.break_value, e)
 		end
-		if v.cfc.in_closure then v.add_instr("closctx->has_broke = &({v.nmc.break_value}); closctx->broke_value = *closctx->has_broke;")
+		if v.cfc.closure == v.nmc then v.add_instr("closctx->has_broke = &({v.nmc.break_value}); closctx->broke_value = *closctx->has_broke;")
 		v.add_instr("goto {v.nmc.break_label};")
 	end
 end
@@ -1478,12 +1478,12 @@ redef class AClosureDef
 		v.ctx = new CContext
 		v.out_contexts.add(v.ctx)
 
-		var cfc_old = v.cfc.in_closure
-		v.cfc.in_closure = true
+		var cfc_old = v.cfc.closure
+		v.cfc.closure = v.nmc
 
 		var old_rv = v.nmc.return_value
 		var old_bv = v.nmc.break_value
-		if not cfc_old then
+		if cfc_old == null then
 			v.nmc.return_value = "closctx->{old_rv}"
 			v.nmc.break_value = "closctx->{old_bv}"
 		end
@@ -1522,7 +1522,7 @@ redef class AClosureDef
 		v.add_instr("}")
 		v.ctx = ctx_old
 
-		v.cfc.in_closure = cfc_old
+		v.cfc.closure = cfc_old
 		v.nmc.return_value = old_rv
 		v.nmc.break_value = old_bv
 
@@ -1531,7 +1531,7 @@ redef class AClosureDef
 		v.add_decl("struct {closcn} {closcnv};")
 		v.add_instr("{closcnv}.fun = {cname};")
 		v.add_instr("{closcnv}.has_broke = NULL;")
-		if cfc_old then 
+		if cfc_old != null then 
 			v.add_instr("{closcnv}.variable = closctx->variable;")
 			v.add_instr("{closcnv}.closurevariable = closctx->closurevariable;")
 		else
@@ -1659,7 +1659,7 @@ redef class AClosureCallExpr
 		if n_closure_defs != null and n_closure_defs.length == 1 then do
 			n_closure_defs.first.do_compile_inside(v, null)
 		end
-		if v.cfc.in_closure then v.add_instr("if ({ivar}->has_broke) \{ closctx->has_broke = {ivar}->has_broke; closctx->broke_value = {ivar}->broke_value;\}")
+		if v.cfc.closure == v.nmc then v.add_instr("if ({ivar}->has_broke) \{ closctx->has_broke = {ivar}->has_broke; closctx->broke_value = {ivar}->broke_value;\}")
 		v.add_instr("goto {v.nmc.return_label};")
 		v.unindent
 		v.add_instr("\}")
