@@ -45,7 +45,7 @@ special AbsSyntaxVisitor
 	# Current knowledge about variables names and types
 	readable writable attr _variable_ctx: VariableContext
 
-	# Current knowledge about escapable blocs
+	# Current knowledge about escapable blocks
 	readable writable attr _escapable_ctx: EscapableContext = new EscapableContext(self)
 
 	# The current reciever
@@ -395,9 +395,9 @@ redef class AContinueExpr
 
 		var t = esc.continue_stype
 		if n_expr == null and t != null then
-			v.error(self, "Error: continue with a value required in this bloc.")
+			v.error(self, "Error: continue with a value required in this block.")
 		else if n_expr != null and t == null then
-			v.error(self, "Error: continue without value required in this bloc.")
+			v.error(self, "Error: continue without value required in this block.")
 		else if n_expr != null and t != null then
 			v.check_conform_expr(n_expr, t)
 		end
@@ -412,9 +412,9 @@ redef class ABreakExpr
 
 		var bl = esc.break_list
 		if n_expr == null and bl != null then
-			v.error(self, "Error: break with a value required in this bloc.")
+			v.error(self, "Error: break with a value required in this block.")
 		else if n_expr != null and bl == null then
-			v.error(self, "Error: break without value required in this bloc.")
+			v.error(self, "Error: break without value required in this block.")
 		else if n_expr != null and bl != null then
 			# Typing check can only be done later
 			bl.add(n_expr)
@@ -1028,9 +1028,9 @@ special PExpr
 		end
 		if cd != null then
 			if cs.length == 0 then
-				v.error(self, "Error: {name} does not require blocs.")
+				v.error(self, "Error: {name} does not require blocks.")
 			else if cd.length > cs.length or cd.length < min_arity then
-				v.error(self, "Error: {name} requires {cs.length} blocs, {cd.length} found.")
+				v.error(self, "Error: {name} requires {cs.length} blocks, {cd.length} found.")
 			else
 				# Initialize the break list if a value is required for breaks (ie. if the method is a function)
 				var break_list: Array[ABreakExpr] = null
@@ -1060,7 +1060,7 @@ special PExpr
 				end
 			end
 		else if min_arity != 0 then
-			v.error(self, "Error: {name} requires {cs.length} blocs.")
+			v.error(self, "Error: {name} requires {cs.length} blocks.")
 		end
 		return t
 	end

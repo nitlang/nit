@@ -1187,7 +1187,7 @@ redef class AClosureDecl
 			sig = new MMSignature(new Array[MMType], null, v.local_class.get_type)
 		end
 		if sig.return_type != null and n_kwbreak != null then
-			v.error(self, "Syntax Error: A break bloc cannot have a return value.")
+			v.error(self, "Syntax Error: A break block cannot have a return value.")
 		end
 
 		# Add the finalizer to the closure signature

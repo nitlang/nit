@@ -301,9 +301,9 @@ redef class AClosureDecl
 
 			if v.control_flow_ctx.unreash == false then
 				if variable.closure.signature.return_type != null then
-					v.error(self, "Control error: Reached end of bloc (a 'continue' with a value was expected).")
+					v.error(self, "Control error: Reached end of block (a 'continue' with a value was expected).")
 				else if variable.closure.is_break then
-					v.error(self, "Control error: Reached end of break bloc (an 'abort' was expected).")
+					v.error(self, "Control error: Reached end of break block (an 'abort' was expected).")
 				end
 			end
 
@@ -324,9 +324,9 @@ special AControlableBlock
 	do
 		if v.control_flow_ctx.unreash == false then
 			if closure.signature.return_type != null then
-				v.error(self, "Control error: Reached end of bloc (a 'continue' with a value was expected).")
+				v.error(self, "Control error: Reached end of block (a 'continue' with a value was expected).")
 			else if closure.is_break then
-				v.error(self, "Control error: Reached end of break bloc (a 'break' was expected).")
+				v.error(self, "Control error: Reached end of break block (a 'break' was expected).")
 			end
 		end
 	end
