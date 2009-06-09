@@ -18,6 +18,7 @@
 package typing
 
 import syntax_base
+import escape
 
 redef class MMSrcModule
 	# Walk trough the module and type statments and expressions
@@ -44,20 +45,14 @@ special AbsSyntaxVisitor
 	# Current knowledge about variables names and types
 	readable writable attr _variable_ctx: VariableContext
 
+	# Current knowledge about escapable blocs
+	readable writable attr _escapable_ctx: EscapableContext = new EscapableContext(self)
+
 	# The current reciever
 	readable writable attr _self_var: ParamVariable
 
 	# Block of the current method
 	readable writable attr _top_block: PExpr
-
-	# Current closure (if any)
-	readable writable attr _closure: MMClosure
-
-	# Current closure method return type (for break) (if any)
-	readable writable attr _closure_break_stype: MMType = null
-
-	# Current closure break expressions (if any)
-	readable writable attr _break_list: Array[PExpr]
 
 	# List of explicit invocation of constructors of super-classes
 	readable writable attr _explicit_super_init_calls: Array[MMMethod]
@@ -198,7 +193,6 @@ special VariableContext
 	end
 end
 
-
 ###############################################################################
 
 redef class PNode
@@ -298,6 +292,9 @@ redef class PParam
 end
 
 redef class AClosureDecl
+	# The corresponding escapable object
+	readable attr _escapable: EscapableBlock
+
 	redef meth accept_typing(v)
 	do
 		# Register the closure for ClosureCallExpr
@@ -305,12 +302,14 @@ redef class AClosureDecl
 
 		var old_var_ctx = v.variable_ctx
 		v.variable_ctx = v.variable_ctx.sub
-		v.closure = variable.closure
+
+		_escapable = new EscapableClosure(self, variable.closure, null)
+		v.escapable_ctx.push(_escapable)
 
 		super
 
 		v.variable_ctx = old_var_ctx
-		v.closure = null
+		v.escapable_ctx.pop
 	end
 end
 
@@ -386,16 +385,15 @@ end
 redef class AContinueExpr
 	redef meth after_typing(v)
 	do
-		var c = v.closure
-		var t: MMType = null
-		if c != null then 
-			if c.is_break then
-				v.error(self, "Error: 'continue' forbiden in break blocks.")
-				return
-			end
-			t = c.signature.return_type
+		var esc = compute_escapable_block(v.escapable_ctx)
+		if esc == null then return
+
+		if esc.is_break_block then
+			v.error(self, "Error: 'continue' forbiden in break blocks.")
+			return
 		end
 
+		var t = esc.continue_stype
 		if n_expr == null and t != null then
 			v.error(self, "Error: continue with a value required in this bloc.")
 		else if n_expr != null and t == null then
@@ -409,14 +407,17 @@ end
 redef class ABreakExpr
 	redef meth after_typing(v)
 	do
-		var t = v.closure_break_stype
-		if n_expr == null and t != null then
+		var esc = compute_escapable_block(v.escapable_ctx)
+		if esc == null then return
+
+		var bl = esc.break_list
+		if n_expr == null and bl != null then
 			v.error(self, "Error: break with a value required in this bloc.")
-		else if n_expr != null and t == null then
+		else if n_expr != null and bl == null then
 			v.error(self, "Error: break without value required in this bloc.")
-		else if n_expr != null and t != null then
+		else if n_expr != null and bl != null then
 			# Typing check can only be done later
-			v.break_list.add(n_expr)
+			bl.add(n_expr)
 		end
 	end
 end
@@ -444,19 +445,34 @@ redef class AIfExpr
 end
 
 redef class AWhileExpr
-	redef meth after_typing(v)
+	# The corresponding escapable block
+	readable attr _escapable: EscapableBlock
+
+	redef meth accept_typing(v)
 	do
+		_escapable = new EscapableBlock(self)
+		v.escapable_ctx.push(_escapable)
+
+		super
+
 		v.check_conform_expr(n_expr, v.type_bool)
+		v.escapable_ctx.pop
 	end
 end
 
 redef class AForExpr
+	# The corresponding escapable block
+	readable attr _escapable: EscapableBlock
+
 	readable attr _meth_iterator: MMMethod
 	readable attr _meth_is_ok: MMMethod
 	readable attr _meth_item: MMMethod
 	readable attr _meth_next: MMMethod
 	redef meth accept_typing(v)
 	do
+		_escapable = new EscapableBlock(self)
+		v.escapable_ctx.push(_escapable)
+
 		v.variable_ctx = v.variable_ctx.sub
 		var va = new AutoVariable(n_id.to_symbol, self)
 		variable = va
@@ -499,6 +515,8 @@ redef class AForExpr
 		var varctx = v.variable_ctx 
 		assert varctx isa SubVariableContext
 		v.variable_ctx = varctx.prev
+
+		v.escapable_ctx.pop
 	end
 end
 
@@ -1014,25 +1032,32 @@ special PExpr
 			else if cd.length > cs.length or cd.length < min_arity then
 				v.error(self, "Error: {name} requires {cs.length} blocs, {cd.length} found.")
 			else
-				var old_bbst = v.closure_break_stype
-				var old_bl = v.break_list
-				v.closure_break_stype = t
-				v.break_list = new Array[ABreakExpr]
+				# Initialize the break list if a value is required for breaks (ie. if the method is a function)
+				var break_list: Array[ABreakExpr] = null
+				if t != null then break_list = new Array[ABreakExpr]
+
+				# Process each closure definition
 				for i in [0..cd.length[ do
-					cd[i].accept_typing2(v, cs[i])
-				end
-				for n in v.break_list do
-					var ntype = n.stype
-					if t == null or (t != null and t < ntype) then
-						t = ntype
-					end
-				end
-				for n in v.break_list do
-					v.check_conform_expr(n, t)
+					var csi = cs[i]
+					var cdi = cd[i]
+					var esc = new EscapableClosure(cdi, csi, break_list)
+					v.escapable_ctx.push(esc)
+					cdi.accept_typing2(v, esc)
+					v.escapable_ctx.pop
 				end
 
-				v.closure_break_stype = old_bbst
-				v.break_list = old_bl
+				# Check break type conformity
+				if break_list != null then
+					for n in break_list do
+						var ntype = n.stype
+						if t == null or (t != null and t < ntype) then
+							t = ntype
+						end
+					end
+					for n in break_list do
+						v.check_conform_expr(n, t)
+					end
+				end
 			end
 		else if min_arity != 0 then
 			v.error(self, "Error: {name} requires {cs.length} blocs.")
@@ -1263,9 +1288,10 @@ redef class ACallFormExpr
 				end
 			end
 		end
+
 		super
 	end
-	
+
 	redef meth closure_defs
 	do
 		if n_closure_defs == null or n_closure_defs.is_empty then
@@ -1357,6 +1383,9 @@ redef class AClosureCallExpr
 end
 
 redef class PClosureDef
+	# The corresponding escapable object
+	readable attr _escapable: EscapableBlock
+
 	attr _accept_typing2: Bool
 	redef meth accept_typing(v)
 	do
@@ -1364,22 +1393,21 @@ redef class PClosureDef
 		if _accept_typing2 then super
 	end
 
-	private meth accept_typing2(v: TypingVisitor, clos: MMClosure) is abstract
+	private meth accept_typing2(v: TypingVisitor, esc: EscapableClosure) is abstract
 end
 
 redef class AClosureDef
-	redef meth accept_typing2(v, clos)
-	do	
-		var sig = clos.signature
+	redef meth accept_typing2(v, esc)
+	do
+		_escapable = esc
+
+		var sig = esc.closure.signature
 		if sig.arity != n_id.length then
 			v.error(self, "Error: {sig.arity} automatic variable names expected, {n_id.length} found.")
 			return
 		end
 
-		closure = clos
-
-		var old_clos = v.closure
-		v.closure = clos
+		closure = esc.closure
 
 		v.variable_ctx = v.variable_ctx.sub
 		variables = new Array[AutoVariable]
@@ -1392,8 +1420,6 @@ redef class AClosureDef
 
 		_accept_typing2 = true
 		accept_typing(v)
-
-		v.closure = old_clos
 	end
 end
 

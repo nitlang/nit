@@ -88,9 +88,6 @@ private class ControlFlowContext
 	# Used to avoid repeating the same error message
 	readable writable attr _already_unreash: Bool = false
 
-	# Current controlable block (for or while)
-	readable writable attr _base_block: PNode = null
-
 	# Set of variable that are set (assigned)
 	readable attr _set_variables: HashSet[Variable] = new HashSet[Variable]
 
@@ -114,7 +111,6 @@ private class ControlFlowContext
 		_prev = p
 		_unreash = p.unreash
 		_already_unreash = p.already_unreash
-		_base_block = p.base_block
 	end
 end
 
@@ -174,36 +170,17 @@ redef class AReturnExpr
 	end
 end
 
-class ABlockControler
-special PExpr
-	readable attr _block: PNode
-end
-
 redef class ABreakExpr
-special ABlockControler
 	redef meth accept_control_flow(v)
 	do
 		super
-		var block = v.control_flow_ctx.base_block
-		if block == null then
-			v.error(self, "Syntax Error: 'break' statment outside block.")
-			return
-		end
-		_block = block
 		v.control_flow_ctx.unreash = true
 	end
 end
 redef class AContinueExpr
-special ABlockControler
 	redef meth accept_control_flow(v)
 	do
 		super
-		var block = v.control_flow_ctx.base_block
-		if block == null then
-			v.error(self, "Syntax Error: 'continue' outside block.")
-			return
-		end
-		_block = block
 		v.control_flow_ctx.unreash = true
 	end
 end
@@ -268,9 +245,6 @@ special PExpr
 		var old_control_flow_ctx = v.control_flow_ctx
 		v.control_flow_ctx = v.control_flow_ctx.sub
 
-		# Register the block
-		v.control_flow_ctx.base_block = self
-
 		super
 
 		# Check control flow if any
@@ -322,8 +296,6 @@ redef class AClosureDecl
 		if n_expr != null then
 			var old_control_flow_ctx = v.control_flow_ctx
 			v.control_flow_ctx = v.control_flow_ctx.sub
-			# Register the block
-			v.control_flow_ctx.base_block = n_expr
 
 			super
 
