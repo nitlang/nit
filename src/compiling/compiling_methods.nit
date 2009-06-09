@@ -1323,8 +1323,10 @@ redef class ASuperstringExpr
 		for ne in n_exprs do
 			var e = v.ensure_var(v.compile_expr(ne), "super-string element")
 			if ne.stype != stype then
-				v.add_assignment(e, meth_to_s.compile_call(v, [e]))
+				v.cfc.free_var(e)
+				e = meth_to_s.compile_call(v, [e])
 			end
+			v.cfc.free_var(e)
 			meth_add.compile_call(v, [array, e])
 		end
 
