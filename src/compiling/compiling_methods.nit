@@ -38,7 +38,7 @@ redef class CompilerVisitor
 		var i = cfc._variable_index
 		var s = n.compile_expr(self)
 		cfc._variable_index = i
-		if s[0] == ' ' then
+		if s[0] == ' ' or cfc.is_valid_variable(s) then
 			return s
 		end
 		var v = cfc.get_var("Result for expr {n.locate}")
@@ -49,7 +49,8 @@ redef class CompilerVisitor
 	# Ensure that a c expression is a var
 	meth ensure_var(s: String, comment: String): String
 	do
-		if s.substring(0,3) == "variable" then
+		if cfc.is_valid_variable(s) then
+			add_instr("/* Ensure var {s}: {comment}*/")
 			return s
 		end
 		var v = cfc.get_var(null)
@@ -233,6 +234,15 @@ class CFunctionContext
 		else
 			return "closurevariable[{i}]"
 		end
+	end
+
+	# Is s a valid variable
+	protected meth is_valid_variable(s: String): Bool
+	do
+		for i in [0.._variable_index[ do
+			if s == variable(i) then return true
+		end
+		return false
 	end
 
 	# Mark the variable available
