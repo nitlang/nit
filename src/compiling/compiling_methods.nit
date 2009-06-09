@@ -41,19 +41,19 @@ redef class CompilerVisitor
 		if s[0] == ' ' then
 			return s
 		end
-		var v = cfc.get_var
+		var v = cfc.get_var("Result for expr {n.locate}")
 		add_assignment(v, s)
 		return v
 	end
 
 	# Ensure that a c expression is a var
-	meth ensure_var(s: String): String
+	meth ensure_var(s: String, comment: String): String
 	do
 		if s.substring(0,3) == "variable" then
 			return s
 		end
-		var v = cfc.get_var
-		add_assignment(v, s)
+		var v = cfc.get_var(null)
+		add_assignment(v, "{s} /* Ensure var: {comment}*/")
 		return v
 	end
 
@@ -167,7 +167,7 @@ class CFunctionContext
 	end
 
 	# Return the next available variable
-	meth get_var: String
+	meth get_var(comment: String): String
 	do
 		var v = variable(_variable_index)
 		_variable_index = _variable_index + 1
@@ -175,12 +175,15 @@ class CFunctionContext
 			#visitor.add_decl("val_t {v};")
 			_variable_index_max = _variable_index 
 		end
+		if comment != null then
+			visitor.add_instr("/* Register {v}: {comment} */")
+		end
 		return v
 	end
 
 	meth register_variable(v: Variable): String
 	do
-		var s = get_var
+		var s = get_var("Local variable")
 		_varnames[v] = "variable[{_variable_index-1}]"
 		return s
 	end
@@ -332,7 +335,7 @@ redef class MMMethod
 		# Prepare result value.
 		# In case of procedure, the return value is still used to intercept breaks
 		var old_bv = v.nmc.break_value
-		ve = v.cfc.get_var
+		ve = v.cfc.get_var("Closure return value and escape marker")
 		v.nmc.break_value = ve
 
 		# Compile closure to c function
@@ -641,7 +644,7 @@ redef class AConcreteMethPropdef
 		end
 
 		v.nmc.return_label = "return_label{v.new_number}"
-		v.nmc.return_value = v.cfc.get_var
+		v.nmc.return_value = v.cfc.get_var("Method return value and escape marker")
 		if self isa AConcreteInitPropdef then
 			v.invoke_super_init_calls_after(null)
 		end
@@ -1000,12 +1003,12 @@ redef class AIfexprExpr
 		v.add_instr("if (UNTAG_Bool({e})) \{ /*if*/")
 		v.cfc.free_var(e)
 		v.indent
-		var e = v.ensure_var(v.compile_expr(n_then))
+		var e = v.ensure_var(v.compile_expr(n_then), "Then value")
 		v.unindent
 		v.add_instr("} else \{ /*if*/")
 		v.cfc.free_var(e)
 		v.indent
-		var e2 = v.ensure_var(v.compile_expr(n_else))
+		var e2 = v.ensure_var(v.compile_expr(n_else), "Else value")
 		v.add_assignment(e, e2)
 		v.unindent
 		v.add_instr("}")
@@ -1055,16 +1058,16 @@ redef class AForExpr
 		var e = v.compile_expr(n_expr)
 		var ittype = meth_iterator.signature.return_type
 		v.cfc.free_var(e)
-		var iter = v.cfc.get_var
+		var iter = v.cfc.get_var("For iterator")
 		v.add_assignment(iter, meth_iterator.compile_call(v, [e]))
 		v.add_instr("while (true) \{ /*for*/")
 		v.indent
-		var ok = v.cfc.get_var
+		var ok = v.cfc.get_var("For 'is_ok' result")
 		v.add_assignment(ok, meth_is_ok.compile_call(v, [iter]))
 		v.add_instr("if (!UNTAG_Bool({ok})) break; /*for*/")
 		v.cfc.free_var(ok)
 		var e = meth_item.compile_call(v, [iter])
-		e = v.ensure_var(e)
+		e = v.ensure_var(e, "For item")
 		var cname = v.cfc.register_variable(variable)
 		v.add_assignment(cname, e)
 		var n_block = n_block
@@ -1127,7 +1130,7 @@ end
 redef class AOrExpr
 	redef meth compile_expr(v)
 	do
-		var e = v.ensure_var(v.compile_expr(n_expr))
+		var e = v.ensure_var(v.compile_expr(n_expr), "Left 'or' operand")
 		v.add_instr("if (!UNTAG_Bool({e})) \{ /* or */")
 		v.cfc.free_var(e)
 		v.indent
@@ -1142,7 +1145,7 @@ end
 redef class AAndExpr
 	redef meth compile_expr(v)
 	do
-		var e = v.ensure_var(v.compile_expr(n_expr))
+		var e = v.ensure_var(v.compile_expr(n_expr), "Left 'and' operand")
 		v.add_instr("if (UNTAG_Bool({e})) \{ /* and */")
 		v.cfc.free_var(e)
 		v.indent
@@ -1227,7 +1230,7 @@ redef class AStringFormExpr
 	do
 		compute_string_info
 		var i = v.new_number
-		var cvar = v.cfc.get_var
+		var cvar = v.cfc.get_var("Once String constant")
 		v.add_decl("static val_t once_value_{i} = NIT_NULL; /* Once value for string {cvar}*/")
 		v.add_instr("if (once_value_{i} != NIT_NULL) {cvar} = once_value_{i};")
 		v.add_instr("else \{")
@@ -1293,10 +1296,10 @@ redef class ASuperstringExpr
 	redef meth compile_expr(v)
 	do
 		var array = meth_with_capacity.compile_constructor_call(v, atype, ["TAG_Int({n_exprs.length})"])
-		array = v.ensure_var(array)
+		array = v.ensure_var(array, "Array (for super-string)")
 
 		for ne in n_exprs do
-			var e = v.ensure_var(v.compile_expr(ne))
+			var e = v.ensure_var(v.compile_expr(ne), "super-string element")
 			if ne.stype != stype then
 				v.add_assignment(e, meth_to_s.compile_call(v, [e]))
 			end
@@ -1318,7 +1321,7 @@ redef class AArrayExpr
 	redef meth compile_expr(v)
 	do
 		var recv = meth_with_capacity.compile_constructor_call(v, stype, ["TAG_Int({n_exprs.length})"])
-		recv = v.ensure_var(recv)
+		recv = v.ensure_var(recv, "Literal array")
 
 		for ne in n_exprs do
 			var e = v.compile_expr(ne)
@@ -1574,7 +1577,7 @@ redef class AClosureDef
 		var old_cl = v.nmc.continue_label
 		var old_bl = v.nmc.break_label
 
-		v.nmc.continue_value = v.cfc.get_var
+		v.nmc.continue_value = v.cfc.get_var("Continue value and escape marker")
 		v.nmc.continue_label = "continue_label{v.new_number}"
 		v.nmc.break_label = v.nmc.return_label
 
@@ -1605,7 +1608,7 @@ redef class AClosureDecl
 		var old_cl = v.nmc.continue_label
 		var old_bl = v.nmc.break_label
 
-		v.nmc.continue_value = v.cfc.get_var
+		v.nmc.continue_value = v.cfc.get_var("Continue value and escape marker")
 		v.nmc.continue_label = "continue_label{v.new_number}"
 		v.nmc.break_label = v.nmc.return_label
 
@@ -1630,7 +1633,7 @@ redef class AClosureCallExpr
 		var cargs = new Array[String]
 		for a in arguments do cargs.add(v.compile_expr(a))
 		var va: String = null
-		if variable.closure.signature.return_type != null then va = v.cfc.get_var
+		if variable.closure.signature.return_type != null then va = v.cfc.get_var("Closure call result value")
 
 		if variable.closure.is_optional then
 			v.add_instr("if({v.cfc.varname(variable)}==NULL) \{")
@@ -1682,7 +1685,7 @@ redef class AOnceExpr
 	redef meth compile_expr(v)
 	do
 		var i = v.new_number
-		var cvar = v.cfc.get_var
+		var cvar = v.cfc.get_var("Once expression result")
 		v.add_decl("static val_t once_value_{i}; static int once_bool_{i}; /* Once value for {cvar}*/")
 		v.add_instr("if (once_bool_{i}) {cvar} = once_value_{i};")
 		v.add_instr("else \{")
