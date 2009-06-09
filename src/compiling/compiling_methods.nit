@@ -229,9 +229,9 @@ class CFunctionContext
 			visitor.add_decl("val_t *variable = NULL;")
 		end
 		if _closurevariable_index > 0 then
-			visitor.add_decl("void *closurevariable[{_closurevariable_index}];")
+			visitor.add_decl("struct WBT_ *closurevariable[{_closurevariable_index}];")
 		else
-			visitor.add_decl("void **closurevariable = NULL;")
+			visitor.add_decl("struct WBT_ **closurevariable = NULL;")
 		end
 	end
 
@@ -401,7 +401,7 @@ redef class MMMethod
 	# Cname of the i-th closure C struct type
 	protected meth closure_cname(i: Int): String
 	do
-		return "WBT_{cname}_{i}"
+		return "FWBT_{cname}_{i}"
 	end
 end
 
@@ -436,17 +436,15 @@ redef class MMSrcMethod
 			var closcn = closure_cname(i)
 			var cs = signature.closures[i].signature # Closure signature
 			var subparams = new Array[String] # Parameters of the closure
-			subparams.add("struct {closcn}*")
+			subparams.add("struct WBT_ *")
 			for j in [0..cs.arity[ do
 				var p = "val_t"
 				subparams.add(p)
 			end
 			var r = "void"
 			if cs.return_type != null then r = "val_t"
-			params.add("struct {closcn} *{args[first_closure_index+i]}")
-			v.add_decl("struct {closcn};")
-			v.add_decl("typedef {r} (*F{closcn})({subparams.join(", ")});")
-			v.add_decl("struct {closcn} \{F{closcn} fun; val_t *has_broke; val_t broke_value; val_t *variable; void **closurevariable;\};")
+			params.add("struct WBT_ *{args[first_closure_index+i]}")
+			v.add_decl("typedef {r} (*{closcn})({subparams.join(", ")});")
 		end
 
 		if global.is_init then
@@ -614,7 +612,7 @@ redef class ASignature
 		for i in [0..n_closure_decls.length[ do
 			var wd = n_closure_decls[i]
 			var cname = v.cfc.register_closurevariable(wd.variable)
-			wd.variable.ctypename = "struct {v.nmc.method.closure_cname(i)} *"
+			wd.variable.ctypename = v.nmc.method.closure_cname(i)
 			v.add_assignment(cname, "{params[orig_sig.arity + i]}")
 		end
 	end
@@ -1530,8 +1528,8 @@ redef class AClosureDef
 
 		# Build closure
 		var closcnv = "wbclos{v.new_number}"
-		v.add_decl("struct {closcn} {closcnv};")
-		v.add_instr("{closcnv}.fun = {cname};")
+		v.add_decl("struct WBT_ {closcnv};")
+		v.add_instr("{closcnv}.fun = (fun_t){cname};")
 		v.add_instr("{closcnv}.has_broke = NULL;")
 		if cfc_old != null then 
 			v.add_instr("{closcnv}.variable = closctx->variable;")
@@ -1547,7 +1545,7 @@ redef class AClosureDef
 	protected meth decl_csignature(v: CompilerVisitor, args: Array[String], closcn: String): String
 	do
 		var params = new Array[String]
-		params.add("struct {closcn}* closctx")
+		params.add("struct WBT_ *closctx")
 		for i in [0..closure.signature.arity[ do
 			var p = "val_t {args[i]}"
 			params.add(p)
@@ -1560,7 +1558,6 @@ redef class AClosureDef
 		end
 		var p = params.join(", ")
 		var s = "{ret} {cname}({p})"
-		v.add_decl("struct {closcn};")
 		v.add_decl("typedef {ret} (* {cname}_t)({p});")
 		v.add_decl(s + ";")
 		return s
@@ -1647,10 +1644,10 @@ redef class AClosureCallExpr
 			v.indent
 		end
 
-		var ivar = "(({variable.ctypename})({v.cfc.varname(variable)}))"
+		var ivar = v.cfc.varname(variable)
 		var cargs2 = [ivar]
 		cargs2.append(cargs)
-		var s = "({ivar}->fun({cargs2.join(", ")})) /* Invoke closure {variable} */"
+		var s = "(({variable.ctypename})({ivar}->fun))({cargs2.join(", ")}) /* Invoke closure {variable} */"
 		if va != null then
 			v.add_assignment(va, s)
 		else

@@ -125,4 +125,9 @@ void nit_exit(int);
 
 void prepare_signals(void);
 extern classtable_t TAG2VFT[4];
+
+/* This structure is used to store closure.
+ * Specific closure use a specific fun parameter.
+ */
+struct WBT_ {fun_t fun; val_t *has_broke; val_t broke_value; val_t *variable; struct WBT_ **closurevariable;};
 #endif
