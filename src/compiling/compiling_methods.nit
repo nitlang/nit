@@ -385,9 +385,7 @@ redef class MMMethod
 	# Compile a call as constructor with given args
 	meth compile_constructor_call(v: CompilerVisitor, recvtype: MMType, cargs: Array[String]): String
 	do
-		var recv = v.cfc.get_var
-		v.add_instr("{recv} = NEW_{recvtype.local_class}_{global.intro.cname}({cargs.join(", ")}); /*new {recvtype}*/")
-		return recv
+		return "NEW_{recvtype.local_class}_{global.intro.cname}({cargs.join(", ")}) /*new {recvtype}*/"
 	end
 
 	# Compile a call as call-next-method on self with given args
@@ -1295,6 +1293,7 @@ redef class ASuperstringExpr
 	redef meth compile_expr(v)
 	do
 		var array = meth_with_capacity.compile_constructor_call(v, atype, ["TAG_Int({n_exprs.length})"])
+		array = v.ensure_var(array)
 
 		for ne in n_exprs do
 			var e = v.ensure_var(v.compile_expr(ne))
@@ -1319,6 +1318,7 @@ redef class AArrayExpr
 	redef meth compile_expr(v)
 	do
 		var recv = meth_with_capacity.compile_constructor_call(v, stype, ["TAG_Int({n_exprs.length})"])
+		recv = v.ensure_var(recv)
 
 		for ne in n_exprs do
 			var e = v.compile_expr(ne)
