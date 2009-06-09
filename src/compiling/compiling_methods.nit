@@ -151,18 +151,19 @@ class CFunctionContext
 	# Total number of variable
 	attr _variable_index_max: Int = 0
 
-	# Association between nit variable and the corrsponding c variable
-	attr _varnames: Map[Variable, String] = new HashMap[Variable, String]
+	# Association between nit variable and the corrsponding c variable index
+	attr _varindexes: Map[Variable, Int] = new HashMap[Variable, Int]
 
 	# Are we currenlty in a closure definition?
 	readable writable attr _closure: NitMethodContext = null
 
+	# Return the cvariable of a Nit variable
 	meth varname(v: Variable): String
 	do
-		if _closure != null then
-			return "closctx->{_varnames[v]}"
+		if v isa ClosureVariable then
+			return closure_variable(_varindexes[v])
 		else
-			return _varnames[v]
+			return variable(_varindexes[v])
 		end
 	end
 
@@ -172,7 +173,6 @@ class CFunctionContext
 		var v = variable(_variable_index)
 		_variable_index = _variable_index + 1
 		if _variable_index > _variable_index_max then
-			#visitor.add_decl("val_t {v};")
 			_variable_index_max = _variable_index 
 		end
 		if comment != null then
@@ -183,8 +183,8 @@ class CFunctionContext
 
 	meth register_variable(v: Variable): String
 	do
+		_varindexes[v] = _variable_index
 		var s = get_var("Local variable")
-		_varnames[v] = "variable[{_variable_index-1}]"
 		return s
 	end
 
@@ -194,8 +194,8 @@ class CFunctionContext
 	meth register_closurevariable(v: ClosureVariable): String
 	do
 		var s = "closurevariable[{_closurevariable_index}]"
+		_varindexes[v] = _closurevariable_index
 		_closurevariable_index += 1
-		_varnames[v] = s
 		if _closure != null then
 			return "(closctx->{s})"
 		else
@@ -203,13 +203,35 @@ class CFunctionContext
 		end
 	end
 
-	# Return the ith variable
+	# Return the ith cvariable
 	protected meth variable(i: Int): String
 	do
-		if _closure != null then
-			return "(closctx->variable[{i}])"
+		if closure != null then
+			var vn = once new Array[String]
+			if vn.length <= i then
+				for j in [vn.length..i] do
+					vn[j] = "(closctx->variable[{j}])"
+				end
+			end
+			return vn[i]
 		else
-			return "variable[{i}]"
+			var vn = once new Array[String]
+			if vn.length <= i then
+				for j in [vn.length..i] do
+					vn[j] = "variable[{j}]"
+				end
+			end
+			return vn[i]
+		end
+	end
+
+	# Return the ith closurevariable
+	protected meth closure_variable(i: Int): String
+	do
+		if closure != null then
+			return "(closctx->closurevariable[{i}])"
+		else
+			return "closurevariable[{i}]"
 		end
 	end
 
