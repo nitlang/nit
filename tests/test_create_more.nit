@@ -47,9 +47,9 @@ class A
 	do
 		var s = _num.to_s
 		if _attribute == null then
-			s.add('\n')
+			s += "\n"
 		else
-			s.append(_attribute.to_s)
+			s += _attribute.to_s
 		end
 		return s
 	end

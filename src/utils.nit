@@ -22,7 +22,7 @@ package utils
 meth cmangle(symbols: Symbol...): String
 do
 	var table = once cmangle_table
-	var res = new String
+	var res = new Buffer
 	for sym in symbols do
 		if not res.is_empty then
 			res.add('_')
@@ -52,7 +52,7 @@ do
 			end
 		end
 	end
-	return res
+	return res.to_s
 end
 
 # Build the table that associates character to mangle to string

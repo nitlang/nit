@@ -17,7 +17,7 @@
 meth nsieve(n: Int): Int
 do
 	var count = 0
-	var array = new String.with_capacity(n)
+	var array = new Buffer.with_capacity(n)
 	for i in [0..n[ do
 		array[i] = 'o'
 	end

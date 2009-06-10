@@ -1320,7 +1320,7 @@ class Lexer
 	attr _stream: IStream
 
 	# Pushback buffer to store unread character
-	attr _stream_buf: String
+	attr _stream_buf: Buffer
 
 	# Number of character stored in the pushback buffer
 	attr _stream_pos: Int
@@ -1338,7 +1338,7 @@ class Lexer
 	attr _eof: Bool = false
 
 	# Current working text read from the input stream
-	attr _text: String
+	attr _text: Buffer
 
 	# Constante state values
 	private meth state_initial: Int do return 0 end
@@ -1347,10 +1347,10 @@ class Lexer
 	init(stream: IStream, fname: String)
 	do
 		_filename = fname
-		_text = new String
+		_text = new Buffer
 		_stream = stream
 		_stream_pos = -1
-		_stream_buf = new String
+		_stream_buf = new Buffer
 		build_goto_table
 		build_accept_table
 	end

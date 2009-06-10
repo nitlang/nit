@@ -101,9 +101,9 @@ private
 	do
 		# Les variables sont déclarées par "var", leur portée va de leur
 		# déclaration jusqu'au "end" correspondant
-		var s: String		# Là où on calcule le résultat
+		var s = new Buffer		# Là où on calcule le résultat
 		# Les chaînes littérales sont déclarées avec des guillemets
-		s = "*** Entrepôt "	# On initialise "s"
+		s.append("*** Entrepôt ")	# On initialise "s"
 		# puis on concatène des chaînes à "s"
 		s.append(_nom_)		# la méthode "append" concatène
 		s.append(" ***\n")
@@ -124,7 +124,7 @@ private
 			s.add('\n')	# "add" ajoute un caractère à la fin.
 			# Comme en C, les caractères sont entre simples cotes.
 		end
-		return s
+		return s.to_s
 	end
 
 
@@ -218,12 +218,13 @@ private
 		# Si une expression est passée comme valeur initiale d'une
 		# variable, le type statique de la variable est implicitement
 		# celui de l'expression.
-		var s = "* Rayon : "
+		var s = new Buffer
+		s.append("* Rayon : ")
 		# Ici, le type statique de s est implicitement String
 
 		s.append(_rubrique)
 		s.add('\n')
-		return s
+		return s.to_s
 	end
 
 	meth cherche_produit(n: String): Produit
@@ -244,7 +245,8 @@ private
 
 	redef meth to_s: String
 	do
-		var s = to_s_head
+		var s = new Buffer
+		s.append(to_s_head)
 		# Les boucles en NIT sont des structures puissantes, toutefois
 		# la manipulation des itérateurs peut être facilité par la
 		# structure "for in"
@@ -261,7 +263,7 @@ private
 			s.append(p.to_s)
 			s.add('\n')
 		end
-		return s
+		return s.to_s
 	end
 
 

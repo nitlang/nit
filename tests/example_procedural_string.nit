@@ -18,13 +18,13 @@
 
 meth first_word(s: String): String
 do
-	var result = new String
+	var result = new Buffer
 	var i = 0
 	while i < s.length and s[i] != ' ' do
 		result.add(s[i])
 		i = i + 1
 	end
-	return result
+	return result.to_s
 end
 
 print(first_word("Hello world!"))

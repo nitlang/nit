@@ -245,7 +245,7 @@ class ListIterator[E]
 special IndexedIterator[E]
 	redef meth item do return _node.item
 
-	redef meth item=(e) do _node.item = e
+	# redef meth item=(e) do _node.item = e
 
 	redef meth is_ok do return not _node == null
 

@@ -28,7 +28,7 @@ print("string:")
 a = "Bonjour"
 print(not a isa Int)
 print(a isa String)
-print(a isa AbstractArray[Char])
+print(a isa AbstractArrayRead[Char])
 print(not a isa Iterator[Int])
 print(not a isa Discrete)
 print(a isa Object)

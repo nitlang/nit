@@ -227,6 +227,17 @@ special SimpleCollection[E]
 	redef meth remove_all(item) do remove(item)
 end
 
+interface MapRead[K, E]
+special Collection[E]
+	# Get the item at `key'.
+	meth [](key: K): E is abstract
+
+	# Is there an item at `key'.
+	meth has_key(key: K): Bool is abstract
+
+	redef meth iterator: MapIterator[K, E] is abstract
+end
+
 # Maps are associative collections: `key' -> `item'.
 #
 # The main operator over maps is [].
@@ -241,14 +252,9 @@ end
 #     map.has_key(u3)    # -> false
 interface Map[K, E]
 special RemovableCollection[E]
-	# Get the item at `key'.    
-	meth [](key: K): E is abstract
-
+special MapRead[K, E]
 	# Set the`item' at `key'.
 	meth []=(key: K, item: E) is abstract
-
-	# Is there an item at `key'.
-	meth has_key(key: K): Bool is abstract
 
 	# Remove the item at `key'
 	meth remove_at(key: K) is abstract
@@ -263,8 +269,6 @@ special RemovableCollection[E]
 			i.next
 		end
 	end
-
-	redef meth iterator: MapIterator[K, E] is abstract
 end
 
 # Iterators for Map.
@@ -274,34 +278,54 @@ special Iterator[E]
 	meth key: K is abstract
 
 	# Set a new `item' at `key'.
-	meth item=(item: E) is abstract
+	#meth item=(item: E) is abstract
+end
+
+# Indexed collection are ordoned collections.
+# The first item is 0. The last is `length'-1.
+interface IndexedCollectionRead[E]
+special MapRead[Int, E]
+	# Get the first item.
+	# Is equivalent with `self'[0].
+	redef meth first
+	do
+		assert not_empty: not is_empty
+		return self[0]
+	end
+	
+	# Get the last item.
+	# Is equivalent with `self'[`length'-1].
+	meth last: E
+	do
+		assert not_empty: not is_empty
+		return self[length-1]
+	end
+
+	# Return the index of the first occurence of `item'.
+	# Return -1 if `item' is not found
+	meth index_of(item: E): Int
+	do
+		var i = iterator
+		while i.is_ok do
+			if i.item == item then return i.index
+			i.next
+		end
+		return -1
+	end
+
+	redef meth iterator: IndexedIterator[E] is abstract
 end
 
 # Indexed collection are ordoned collections.
 # The first item is 0. The last is `length'-1.
 interface IndexedCollection[E]
+special IndexedCollectionRead[E]
 special Map[Int, E]
 special SimpleCollection[E]
-	# Get the first item.
-	# Is equivalent with `self'[0].
-	redef meth first 
-	do 
-		assert not_empty: not is_empty
-		return self[0] 
-	end
-	
 	# Set the first item.
 	# Is equivalent with `self'[0] = `item'.
 	meth first=(item: E)
 	do self[0] = item end
-
-	# Get the last item.
-	# Is equivalent with `self'[`length'-1].
-	meth last: E
-	do 
-		assert not_empty: not is_empty
-		return self[length-1] 
-	end
 
 	# Set the last item.
 	# Is equivalent with `self'[length-1] = `item'.
@@ -334,19 +358,6 @@ special SimpleCollection[E]
 	# The second item become the first.
 	meth shift: E is abstract
 
-	# Return the index of the first occurence of `item'.
-	# Return -1 if `item' is not found
-	meth index_of(item: E): Int
-	do
-		var i = iterator
-		while i.is_ok do
-			if i.item == item then return i.index
-			i.next
-		end
-		return -1
-	end
-
-	redef meth iterator: IndexedIterator[E] is abstract
 end
 
 # Iterators on indexed collections.
@@ -386,7 +397,7 @@ class CoupleMapIterator[K, E]
 special MapIterator[K, E]
 	redef meth item do return _iter.item.second
 	
-	redef meth item=(e) do _iter.item.second = e
+	#redef meth item=(e) do _iter.item.second = e
 
 	redef meth key do return _iter.item.first
 

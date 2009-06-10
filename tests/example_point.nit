@@ -47,11 +47,7 @@ private
 
 	redef meth to_s: String
 	do
-		var s = "("
-		s.append(_x.to_s)
-		s.add(':')
-		s.append(_y.to_s)
-		s.add(')')
+		var s = "({_x}:{_y})"
 		return s
 	end
 

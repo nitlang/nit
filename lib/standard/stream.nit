@@ -30,7 +30,7 @@ special IOS
 	# Read at most i bytes
 	meth read(i: Int): String
 	do
-		var s = new String.with_capacity(i)
+		var s = new Buffer.with_capacity(i)
 		while i > 0 and not eof do
 			var c = read_char
 			if c >= 0 then
@@ -38,31 +38,31 @@ special IOS
 				i -= 1
 			end
 		end
-		return s
+		return s.to_s
 	end
 
 	# Read a string until the end of the line.
 	meth read_line: String
 	do
 		assert not eof
-		var s = new String
+		var s = new Buffer
 		append_line_to(s)
-		return s
+		return s.to_s
 	end
 
 	# Read all the stream until the eof.
 	meth read_all: String
 	do
-		var s = ""
+		var s = new Buffer
 		while not eof do
 			var c = read_char
 			if c >= 0 then s.add(c.ascii)
 		end
-		return s
+		return s.to_s
 	end
 
 	# Read a string until the end of the line and append it to `s'.
-	meth append_line_to(s: String)
+	meth append_line_to(s: Buffer)
 	do
 		while true do
 			var x = read_char
@@ -109,13 +109,13 @@ special IStream
 
 	redef meth read(i)
 	do
-		var s = new String.with_capacity(i)
+		var s = new Buffer.with_capacity(i)
 		var j = _buffer_pos
 		var k = _buffer.length
 		while i > 0 do
 			if j >= k then
 				fill_buffer
-				if eof then return s
+				if eof then return s.to_s
 				j = _buffer_pos
 				k = _buffer.length
 			end
@@ -126,12 +126,12 @@ special IStream
 			end
 		end
 		_buffer_pos = j
-		return s
+		return s.to_s
 	end
 
 	redef meth read_all
 	do
-		var s = ""
+		var s = new Buffer
 		while not eof do
 			var j = _buffer_pos
 			var k = _buffer.length
@@ -142,7 +142,7 @@ special IStream
 			_buffer_pos = j
 			fill_buffer
 		end
-		return s
+		return s.to_s
 	end   
 
 	redef meth append_line_to(s)
@@ -184,7 +184,7 @@ special IStream
 	redef meth eof do return _buffer_pos >= _buffer.length and end_reached
 
 	# The buffer
-	attr _buffer: String = null
+	attr _buffer: Buffer = null
 
 	# The current position in the buffer
 	attr _buffer_pos: Int = 0
@@ -198,7 +198,7 @@ special IStream
 	# Allocate a `_buffer' for a given `capacity'.
 	protected meth prepare_buffer(capacity: Int)
 	do
-		_buffer = new String.with_capacity(capacity)
+		_buffer = new Buffer.with_capacity(capacity)
 		_buffer_pos = 0 # need to read
 	end
 end

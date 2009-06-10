@@ -73,12 +73,12 @@ redef class CompilerVisitor
 	# Generate an fprintf to display an error location
 	meth printf_locate_error(node: PNode): String
 	do
-		var s = "fprintf(stderr, \""
+		var s = new Buffer.from("fprintf(stderr, \"")
 		if nmc != null then s.append(" in %s")
 		s.append(" (%s:%d)\\n\", ")
 		if nmc != null then s.append("LOCATE_{nmc.method.cname}, ")
 		s.append("LOCATE_{module.name}, {node.line_number});")
-		return s
+		return s.to_s
 	end
 
 	redef init(module: MMSrcModule)
@@ -1194,7 +1194,7 @@ redef class AStringFormExpr
 	do
 		var len = 0
 		var str = string_text
-		var res = new String
+		var res = new Buffer
 		var i = 0
 		while i < str.length do
 			var c = str[i]
@@ -1210,7 +1210,7 @@ redef class AStringFormExpr
 			res.add(c)
 			i = i + 1
 		end
-		_cstring = res
+		_cstring = res.to_s
 		_cstring_length = len
 	end
 end

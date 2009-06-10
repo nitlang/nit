@@ -336,11 +336,11 @@ special MapIterator[K, V]
 		return _node.second
 	end
 
-	redef meth item=(value)
-	do
-		assert is_ok
-		_node.second = value
-	end
+	#redef meth item=(value)
+	#do
+	#	assert is_ok
+	#	_node.second = value
+	#end
 
 	redef meth key
 	do

@@ -57,14 +57,14 @@ class Option
 	# A pretty print for this help
 	meth pretty(off: Int): String
 	do
-		var text = "  "
+		var text = new Buffer.from("  ")
 		text.append(_names.join(", "))
 		text.append("  ")
 		var rest = off - text.length
 		if rest > 0 then text.append(" " * rest)
 		text.append(helptext)
 		#text.append(pretty_default)
-		return text
+		return text.to_s
 	end
 
 	meth pretty_default: String

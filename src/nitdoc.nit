@@ -425,7 +425,7 @@ special MMEntity
 
 	redef meth prototype_head(dctx)
 	do
-		var res = ""
+		var res = new Buffer
 		var intro_class = known_intro_class(dctx)
 		var is_redef = local_class != intro_class
 
@@ -444,12 +444,13 @@ special MMEntity
 				res.append(" {intro_class.module.html_link(dctx)}::")
 			end
 		end
-		return res
+		return res.to_s
 	end
 
 	redef meth prototype_body(dctx)
 	do
-		var res = signature.to_html(dctx)
+		var res = new Buffer
+		res.append(signature.to_html(dctx))
 		var s = self
 		if s.node != null then
 			if s.node isa ADeferredMethPropdef then
@@ -458,7 +459,7 @@ special MMEntity
 				res.append(" is intern")
 			end
 		end
-		return res
+		return res.to_s
 	end
 
 	redef meth need_doc(dctx)
@@ -675,11 +676,11 @@ redef class ADoc
 	# Html transcription of the doc
 	meth to_html: String
 	do
-		var res = new String
+		var res = new Buffer
 		for c in n_comment do
 			res.append(c.text.substring_from(1))
 		end
-		return res
+		return res.to_s
 	end
 
 	# Oneliner transcription of the doc
@@ -726,19 +727,19 @@ special MMEntity
 
 	redef meth prototype_head(dctx)
 	do
-		var res = ""
+		var res = new Buffer
 		var ki = known_intro(dctx)
 		var is_redef = ki != self
 		if is_redef then res.append("redef ")
 		if global.visibility_level == 3 then res.append("private ")
 		res.append("class ")
 		if is_redef then res.append("{ki.module.html_link(dctx)}::")
-		return res
+		return res.to_s
 	end
 
 	redef meth prototype_body(dctx)
 	do
-		var res = ""
+		var res = new Buffer
 		if arity > 0 then
 			res.append("[")
 			for i in [0..arity[ do
@@ -749,7 +750,7 @@ special MMEntity
 			end
 			res.append("]")
 		end
-		return res
+		return res.to_s
 	end
 
 	# Extract the doc of a class
@@ -1105,7 +1106,7 @@ redef class MMSignature
 	# Htlm transcription of the signature (with nested links)
 	meth to_html(dctx: DocContext): String
 	do
-		var res = new String
+		var res = new Buffer
 		if arity > 0 then
 			res.append("(")
 			res.append(self[0].html_link(dctx))
@@ -1119,7 +1120,7 @@ redef class MMSignature
 			res.append(": ")
 			res.append(return_type.html_link(dctx))
 		end
-		return res
+		return res.to_s
 	end
 end
 
@@ -1135,7 +1136,8 @@ end
 redef class MMTypeGeneric
 	redef meth html_link(dctx)
 	do
-		var res = local_class.html_link(dctx)
+		var res = new Buffer
+		res.append(local_class.html_link(dctx))
 		res.append("[")
 		res.append(params[0].html_link(dctx))
 		for i in [1..params.length[ do
@@ -1143,7 +1145,7 @@ redef class MMTypeGeneric
 			res.append(params[i].html_link(dctx))
 		end
 		res.append("]")
-		return res
+		return res.to_s
 	end
 end
 

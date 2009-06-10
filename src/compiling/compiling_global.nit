@@ -421,7 +421,7 @@ redef class MMSrcModule
 		for c in local_classes do
 			c.compile_tables_to_c(v)
 		end
-		var s = "classtable_t TAG2VFT[4] = \{NULL"
+		var s = new Buffer.from("classtable_t TAG2VFT[4] = \{NULL")
 		for t in ["Int","Char","Bool"] do
 			if has_global_class_named(t.to_symbol) then
 				s.append(", (const classtable_t)VFT_{t}")
@@ -430,7 +430,7 @@ redef class MMSrcModule
 			end
 		end
 		s.append("};")
-		v.add_instr(s)
+		v.add_instr(s.to_s)
 	end
 
 	# Declare class table (for _sep.h)

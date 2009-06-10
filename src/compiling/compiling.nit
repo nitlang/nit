@@ -48,7 +48,7 @@ redef class MMSrcModule
 			if (native_name + "_nit.h").file_exists then
 				includes.add("-I {native_name.dirname}")
 			end
-			native_name.append("_nit.c")
+			native_name += "_nit.c"
 			if native_name.file_exists then files.add(native_name)
 		end
 
@@ -103,7 +103,7 @@ redef class MMSrcModule
 		v.global_analysis = ga
 		v.add_decl("#include <nit_common.h>")
 		var native_name = filename.strip_extension(".nit")
-		native_name.append("_nit.h")
+		native_name += ("_nit.h")
 		if native_name.file_exists then v.add_decl("#include <{native_name.basename("")}>")
 		declare_class_tables_to_c(v)
 		compile_mod_to_c(v)

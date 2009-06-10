@@ -242,7 +242,7 @@ redef class String
 	meth mkdir
 	do
 		var dirs = self.split_with("/")
-		var path = new String
+		var path = new Buffer
 		if dirs.is_empty then return
 		if dirs[0].is_empty then
 			# it was a starting /
@@ -252,7 +252,7 @@ redef class String
 			if d.is_empty then continue
 			path.append(d)
 			path.add('/')
-			path.to_cstring.file_mkdir
+			path.to_s.to_cstring.file_mkdir
 		end
 	end
 end

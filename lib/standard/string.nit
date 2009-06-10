@@ -20,125 +20,11 @@ intrude import array
 # String                                                                      #
 ###############################################################################
 
-# Strings are arrays of characters.
-class String
-special AbstractArray[Char]
-special Comparable
-special StringCapable
-	
-	redef type OTHER: String
+abstract class AbstractString
+special AbstractArrayRead[Char]
+	readable private attr _items: NativeString
 
 	redef meth [](index) do return _items[index]
-
-	redef meth []=(index, item)
-	do
-		if index == length then
-			add(item)
-			return
-		end
-		assert index >= 0 and index < length
-		_items[index] = item
-	end
-
-	redef meth add(c)
-	do
-		if _capacity <= length then enlarge(length + 5)
-		_items[length] = c
-		_length += 1
-	end
-
-	redef meth enlarge(cap)
-	do
-		var c = _capacity
-		if cap <= c then return
-		while c <= cap do c = c * 2 + 2
-		var a = calloc_string(c)
-		_items.copy_to(a, length, 0, 0)
-		_items = a
-		_capacity = c
-	end
-
-	redef meth append(s)
-	do
-		if s isa String then
-			var sl = s.length
-			if _capacity < length + sl then enlarge(length + sl)
-			s.items.copy_to(_items, sl, 0, length)
-			_length += sl
-		else
-			super
-		end
-	end
-
-	# The concatenation of `self' with `r'
-	meth +(s: String): String
-	do
-		var r = new String.with_capacity(length + s.length)
-		r.append(self)
-		r.append(s)
-		return r
-	end
-	
-	# i repetitions of self
-	meth *(i: Int): String
-	do
-		assert i >= 0
-		var r = new String.with_capacity(length * i)
-		while i > 0 do
-			r.append(self)
-			i -= 1
-		end
-		return r
-	end
-
-	# Clone.
-	redef meth to_s: String do return new String.from(self)
-
-	# If `self' contains only digits, return the corresponding integer
-	meth to_i: Int
-	do
-		# Shortcut
-		return to_cstring.atoi
-	end
-
-	# If `self' contains only digits and alpha <= 'f', return the corresponding integer. 
-	meth to_hex: Int do return a_to(16)
-
-	# If `self' contains only digits and letters, return the corresponding integer in a given base
-	meth a_to(base: Int) : Int
-	do
-		var i = 0
-		var neg = false
-		
-		for c in self
-		do
-			var v = c.to_i
-			if v > base then
-				if neg then
-					return -i
-				else
-					return i
-				end
-			else if v < 0 then
-				neg = true
-			else
-				i = i * base + v
-			end
-		end
-		if neg then
-			return -i
-		else
-			return i
-		end
-	end
-
-	# Return a null terminated char *
-	meth to_cstring: NativeString
-	do
-		self[length] = '\0'
-		_length -= 1
-		return _items
-	end
 
 	# Create a substring.
 	#
@@ -153,12 +39,12 @@ special StringCapable
 		if from < 0 then from = 0
 		if count > length then count = length
 		if from < count then
-			var r = new String.with_capacity(count - from)
+			var r = new Buffer.with_capacity(count - from)
 			while from < count do
 				r.push(_items[from])
 				from += 1
 			end
-			return r
+			return r.to_s
 		else
 			return ""
 		end
@@ -206,6 +92,224 @@ special StringCapable
 	# "abcd".has_suffix("bcd") 	# --> true
 	meth has_suffix(suffix: String): Bool do return has_substring(suffix, length - suffix.length)
 
+	# If `self' contains only digits, return the corresponding integer
+	meth to_i: Int
+	do
+		# Shortcut
+		return to_s.to_cstring.atoi
+	end
+
+	# If `self' contains only digits and alpha <= 'f', return the corresponding integer.
+	meth to_hex: Int do return a_to(16)
+
+	# If `self' contains only digits and letters, return the corresponding integer in a given base
+	meth a_to(base: Int) : Int
+	do
+		var i = 0
+		var neg = false
+
+		for c in self
+		do
+			var v = c.to_i
+			if v > base then
+				if neg then
+					return -i
+				else
+					return i
+				end
+			else if v < 0 then
+				neg = true
+			else
+				i = i * base + v
+			end
+		end
+		if neg then
+			return -i
+		else
+			return i
+		end
+	end
+
+	# String to upper case
+	meth to_upper: String
+	do
+		var s = new Buffer.with_capacity(length)
+		for i in self do s.add(i.to_upper)
+		return s.to_s
+	end
+
+	# String to lower case
+	meth to_lower : String
+	do
+		var s = new Buffer.with_capacity(length)
+		for i in self do s.add(i.to_lower)
+		return s.to_s
+	end
+
+
+	redef meth output
+	do
+		var i = 0
+		while i < length do
+			_items[i].output
+			i += 1
+		end
+	end
+end
+
+
+class String
+special Comparable
+special AbstractString
+	redef type OTHER: String
+
+	# Create a new string from a given char *.
+	init with_native(nat: NativeString, size: Int)
+	do
+		assert size >= 0
+		_items = nat
+		_length = size
+	end
+
+	# Create a new string from a null terminated char *.
+	init from_cstring(str: NativeString)
+	do
+		var size = str.cstring_length
+		_items = str
+		_length = size
+	end
+
+	# Return a null terminated char *
+	meth to_cstring: NativeString
+	do
+		return _items
+	end
+
+	redef meth ==(o)
+	do
+		if not o isa String or o is null then return false
+		assert o isa String
+		var l = length
+		if o.length != l then return false
+		var i = 0
+		var it = _items
+		var oit = o._items
+		while i < l do
+			if it[i] != oit[i] then return false
+			i += 1
+		end
+		return true
+	end
+
+	redef meth <(s)
+	do
+		var i = 0
+		var l1 = length
+		var l2 = s.length
+		var n1 = _items
+		var n2 = s._items
+		while i < l1 and i < l2 do
+			var c1 = n1[i].ascii
+			var c2 = n2[i].ascii
+			if c1 < c2 then
+				return true
+			else if c2 < c1 then
+				return false
+			end
+			i += 1
+		end
+		if l1 < l2 then
+			return true
+		else
+			return false
+		end
+	end
+
+	# The concatenation of `self' with `r'
+	meth +(s: String): String
+	do
+		var r = new Buffer.with_capacity(length + s.length)
+		r.append(self)
+		r.append(s)
+		return r.to_s
+	end
+
+	# i repetitions of self
+	meth *(i: Int): String
+	do
+		assert i >= 0
+		var r = new Buffer.with_capacity(length * i)
+		while i > 0 do
+			r.append(self)
+			i -= 1
+		end
+		return r.to_s
+	end
+
+	redef meth to_s do return self
+end
+
+# Strings are arrays of characters.
+class Buffer
+special AbstractString
+special Comparable
+special StringCapable
+special AbstractArray[Char]
+
+	redef type OTHER: String
+
+	redef meth []=(index, item)
+	do
+		if index == length then
+			add(item)
+			return
+		end
+		assert index >= 0 and index < length
+		_items[index] = item
+	end
+
+	redef meth add(c)
+	do
+		if _capacity <= length then enlarge(length + 5)
+		_items[length] = c
+		_length += 1
+	end
+
+	redef meth enlarge(cap)
+	do
+		var c = _capacity
+		if cap <= c then return
+		while c <= cap do c = c * 2 + 2
+		var a = calloc_string(c+1)
+		_items.copy_to(a, length, 0, 0)
+		_items = a
+		_capacity = c
+	end
+
+	redef meth append(s)
+	do
+		if s isa String then
+			var sl = s.length
+			if _capacity < length + sl then enlarge(length + sl)
+			s.items.copy_to(_items, sl, 0, length)
+			_length += sl
+		else
+			super
+		end
+	end
+
+	redef meth to_s: String
+	do
+		var l = length
+		var a = calloc_string(l+1)
+		_items.copy_to(a, l, 0, 0)
+
+		# Ensure the afterlast byte is '\0' to nul-terminated char *
+		a[length] = '\0'
+
+		return new String.with_native(a, length)
+	end
+
 	redef meth <(s)
 	do
 		var i = 0
@@ -247,54 +351,15 @@ special StringCapable
 	do
 		assert cap >= 0
 		# _items = new NativeString.calloc(cap)
-		_items = calloc_string(cap)
+		_items = calloc_string(cap+1)
 		_capacity = cap
 		_length = 0
 	end
 
-	# Create a new string from a given char *.
-	init with_native(nat: NativeString, size: Int)
-	do
-		assert size >= 0
-		_items = nat
-		_capacity = size
-		_length = size
-	end
-
-	# Create a new string from a null terminated char *.
-	init from_cstring(str: NativeString)
-	do
-		var size = str.cstring_length
-		_items = str
-		_capacity = size + 1 # Since there is a trailing \n
-		_length = size
-	end
-
-	# Create a string of `count' chararter `c'
-	init filled_with(c: Char, count: Int)
-	do
-		with_capacity(count)
-		var i = 0
-		while i < count do
-			_items[i] = c
-			i += 1
-		end
-		_length = count
-	end
-
-	redef meth output
-	do
-		var i = 0
-		while i < length do
-			_items[i].output
-			i += 1
-		end
-	end
-
 	redef meth ==(o)
 	do
-		if not o isa String or o is null then return false
-		assert o isa String
+		if not o isa Buffer or o is null then return false
+		assert o isa Buffer
 		var l = length
 		if o.length != l then return false
 		var i = 0
@@ -307,23 +372,6 @@ special StringCapable
 		return true
 	end
 
-	# String to upper case
-	meth to_upper: String
-	do
-		var s = new String.with_capacity(length)
-		for i in self do s.add(i.to_upper)
-		return s
-	end
-
-	# String to lower case
-	meth to_lower : String
-	do
-		var s = new String.with_capacity(length)
-		for i in self do s.add(i.to_lower)
-		return s
-	end
-
-	readable private attr _items: NativeString 
 	readable private attr _capacity: Int 
 end
 
@@ -342,7 +390,7 @@ redef class Object
 	meth inspect: String
 	do
 		var r = inspect_head
-		r.add('>')
+		# r.add('>')
 		return r
 	end
 
@@ -371,7 +419,7 @@ redef class Bool
 end
 
 redef class Int
-	meth fill_string(s: String, base: Int, signed: Bool)
+	meth fill_buffer(s: Buffer, base: Int, signed: Bool)
 	# Fill `s' with the digits in base 'base' of `self' (and with the '-' sign if 'signed' and negative).
 	# assume < to_c max const of char
 	do
@@ -405,9 +453,9 @@ redef class Int
 	meth to_base(base: Int, signed: Bool): String
 	do
 		var l = digit_count(base)
-		var s = new String.filled_with(' ', l)
-		fill_string(s, base, signed)
-		return s
+		var s = new Buffer.from(" " * l)
+		fill_buffer(s, base, signed)
+		return s.to_s
 	end
 end
 
@@ -433,9 +481,9 @@ end
 redef class Char
 	redef meth to_s
 	do
-		var s = new String.with_capacity(1)
+		var s = new Buffer.with_capacity(1)
 		s[0] = self
-		return s
+		return s.to_s
 	end
 end
 
@@ -443,9 +491,9 @@ redef class Collection[E]
 	# Concatenate elements.
 	redef meth to_s
 	do
-		var s = new String
+		var s = new Buffer
 		for e in self do if e != null then s.append(e.to_s)
-		return s
+		return s.to_s
 	end
 
 	# Concatenate and separate each elements with `sep'. 
@@ -453,7 +501,7 @@ redef class Collection[E]
 	do
 		if is_empty then return ""
 		
-		var s = new String # Result
+		var s = new Buffer # Result
 
 		# Concat first item
 		var i = iterator
@@ -468,7 +516,23 @@ redef class Collection[E]
 			if e != null then s.append(e.to_s)
 			i.next
 		end
-		return s
+		return s.to_s
+	end
+end
+
+redef class Array[E]
+	# Fast implementation
+	redef meth to_s
+	do
+		var s = new Buffer
+		var i = 0
+		var l = length
+		while i < l do
+			var e = self[i]
+			if e != null then s.append(e.to_s)
+			i += 1
+		end
+		return s.to_s
 	end
 end
 
@@ -478,7 +542,7 @@ redef class Map[K,V]
 	do
 		if is_empty then return ""
 		
-		var s = new String # Result
+		var s = new Buffer # Result
 
 		# Concat first item
 		var i = iterator
@@ -495,7 +559,7 @@ redef class Map[K,V]
 			if e != null then s.append("{k}{couple_sep}{e}")
 			i.next
 		end
-		return s
+		return s.to_s
 	end
 end
 

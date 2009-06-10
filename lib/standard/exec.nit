@@ -61,7 +61,7 @@ class Process
 	# Internal code to handle execusion
 	protected init execute(command: String, arguments: Array[String], pipeflags: Int)
 	do
-		var args = new String
+		var args = new Buffer
 		var l = 1 # Number of elements in args
 		args.append(command)
 		if arguments != null then
@@ -71,7 +71,7 @@ class Process
 			end
 			l += arguments.length
 		end
-		_data = basic_exec_execute(command.to_cstring, args.to_cstring, l, pipeflags)
+		_data = basic_exec_execute(command.to_cstring, args.to_s.to_cstring, l, pipeflags)
 	end
 	
 	attr _data: NativeProcess

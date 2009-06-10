@@ -1055,7 +1055,7 @@ end
 # Visitor used to build a full method name from multiple tokens
 private class MethidAccumulator
 special Visitor
-	readable attr _name: String 
+	readable attr _name: Buffer = new Buffer
 	redef meth visit(n)
 	do
 		if n isa Token then
@@ -1063,11 +1063,6 @@ special Visitor
 		else
 			n.visit_all(self)
 		end
-	end
-
-	init
-	do
-		_name = new String
 	end
 end
 
@@ -1079,7 +1074,7 @@ redef class PMethid
 	do
 		var accumulator = new MethidAccumulator
 		accumulator.visit(self)
-		_name = accumulator.name.to_symbol
+		_name = accumulator.name.to_s.to_symbol
 		super
 	end
 end

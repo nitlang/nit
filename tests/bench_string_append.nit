@@ -22,7 +22,7 @@ end
 var s = "*"
 var i = 0
 while i < n do
-	var s2 = "Je dis «"
+	var s2 = new Buffer.from("Je dis «")
 	s2.append(s)
 	s2.append("» et redis «")
 	s2.append(s)
@@ -30,7 +30,7 @@ while i < n do
 	s2.append(s)
 	s2.append(s)
 	s2.append("».\n")
-	s = s2
+	s = s2.to_s
 	i = i + 1
 end
 print("Je dis «Je dis".search_all_in(s).length)

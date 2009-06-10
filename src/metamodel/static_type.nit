@@ -122,7 +122,7 @@ class MMSignature
 
 	redef meth to_s
 	do
-		var s: String
+		var s = new Buffer
 		if _params != null and _params.length > 0 then
 			var tmp: String
 			var a = new Array[String].with_capacity(_params.length)
@@ -132,14 +132,12 @@ class MMSignature
 				#a.add("{pn}: {p}")
 				a.add(p.to_s)
 			end
-			s = "({a.join(",")})"
-		else
-			s = ""
+			s.append("({a.join(",")})")
 		end
 		if _return_type != null then
 			s.append(": {_return_type}")
 		end
-		return s
+		return s.to_s
 	end
 
 	# Adapt the signature to a different receiver

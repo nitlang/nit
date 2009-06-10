@@ -70,7 +70,7 @@ do
     print(a)
 end
 
-var b = "ab"
+var b = new Buffer.from("ab")
 do
     print(b)
     b.add('c')

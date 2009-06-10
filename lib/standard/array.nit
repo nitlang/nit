@@ -17,60 +17,13 @@ package array
 
 import abstract_collection
 
-# Resizeable one dimention array of objects.
-class AbstractArray[E]
-special IndexedCollection[E]
-	meth enlarge(cap: Int) is abstract
-
+# One dimention array of objects.
+class AbstractArrayRead[E]
+special IndexedCollectionRead[E]
 	# The current length
 	redef readable attr _length: Int = 0
-	
+
 	redef meth is_empty do return _length == 0
-
-	redef meth push(item) do add(item)
-	
-	redef meth pop
-	do
-		assert not_empty: not is_empty
-		var r = last
-		_length -= 1
-		return r
-	end
-
-	redef meth shift
-	do
-		assert not_empty: not is_empty
-		var r = first
-		var i = 1
-		var l = length
-		while i < l do
-			self[i-1] = self[i]
-			i += 1
-		end
-		_length = l - 1
-		return r
-	end
-
-	redef meth unshift(item)
-	do
-		var i = length - 1
-		while i > 0 do
-			self[i+1] = self[i]
-			i -= 1
-		end
-		self[0] = item
-	end
-
-	meth insert(item: E, pos: Int)
-	do
-		enlarge(length + 1)
-		copy_to(pos, length-pos, self, pos + 1)
-		self[pos] = item
-	end
-
-	redef meth add(item) do self[length] = item
-
-	redef meth clear do _length = 0
 
 	redef meth has(item)
 	do
@@ -149,30 +102,6 @@ special IndexedCollection[E]
 		return result
 	end
 
-	redef meth remove(item) do remove_at(index_of(item))
-
-	redef meth remove_all(item)
-	do
-		var i = index_of(item)
-		while i >= 0 do
-			remove_at(i)
-			i = index_of_from(item, i)
-		end
-	end
-
-	redef meth remove_at(i)
-	do
-		var l = length
-		if i >= 0 and i < l then
-			var j = i + 1
-			while j < l do
-				self[j-1] = self[j]
-				j += 1
-			end		
-			_length = l - 1 
-		end
-	end
-
 	protected meth copy_to(start: Int, len: Int, dest: AbstractArray[E], new_start: Int)
 	do
 		# TODO native one
@@ -211,7 +140,83 @@ special IndexedCollection[E]
 		return true
 	end
 end
-	
+
+# Resizeable one dimention array of objects.
+class AbstractArray[E]
+special AbstractArrayRead[E]
+special IndexedCollection[E]
+	meth enlarge(cap: Int) is abstract
+
+	redef meth push(item) do add(item)
+
+	redef meth pop
+	do
+		assert not_empty: not is_empty
+		var r = last
+		_length -= 1
+		return r
+	end
+
+	redef meth shift
+	do
+		assert not_empty: not is_empty
+		var r = first
+		var i = 1
+		var l = length
+		while i < l do
+			self[i-1] = self[i]
+			i += 1
+		end
+		_length = l - 1
+		return r
+	end
+
+	redef meth unshift(item)
+	do
+		var i = length - 1
+		while i > 0 do
+			self[i+1] = self[i]
+			i -= 1
+		end
+		self[0] = item
+	end
+
+	meth insert(item: E, pos: Int)
+	do
+		enlarge(length + 1)
+		copy_to(pos, length-pos, self, pos + 1)
+		self[pos] = item
+	end
+
+	redef meth add(item) do self[length] = item
+
+	redef meth clear do _length = 0
+
+	redef meth remove(item) do remove_at(index_of(item))
+
+	redef meth remove_all(item)
+	do
+		var i = index_of(item)
+		while i >= 0 do
+			remove_at(i)
+			i = index_of_from(item, i)
+		end
+	end
+
+	redef meth remove_at(i)
+	do
+		var l = length
+		if i >= 0 and i < l then
+			var j = i + 1
+			while j < l do
+				self[j-1] = self[j]
+				j += 1
+			end
+			_length = l - 1
+		end
+	end
+end
+
 # Resizeable one dimention array of objects.
 #
 # Arrays have a literal representation.
@@ -312,13 +317,13 @@ class ArrayIterator[E]
 special IndexedIterator[E]
 	redef meth item do return _array[_index]
 
-	redef meth item=(e) do _array[_index] = e
+	# redef meth item=(e) do _array[_index] = e
 
 	redef meth is_ok do return _index < _array.length
 
 	redef meth next do _index += 1
 
-	init(a: AbstractArray[E])
+	init(a: AbstractArrayRead[E])
 	do
 		assert not_nil: a != null
 		_array = a
@@ -326,7 +331,7 @@ special IndexedIterator[E]
 	end
 
 	redef readable attr _index: Int = 0
-	attr _array: AbstractArray[E]
+	attr _array: AbstractArrayRead[E]
 end
 
 # Others collections ##########################################################
@@ -397,7 +402,7 @@ end
 
 # Associative arrays implemented with an array of (key, value) pairs.
 class ArrayMap[K, E]
-special CoupleMap[K, E] 
+special CoupleMap[K, E]
 
 	# O(n)
 	redef meth [](key)
@@ -418,7 +423,7 @@ special CoupleMap[K, E]
 			_items[i].second = item
 		else
 			_items.push(new Couple[K,E](key, item))
-		end                
+		end
 	end
 
 	# O(n)
@@ -511,12 +516,12 @@ special CoupleMap[K, E]
 
 	# The last positive result given by a index(1) call
 	attr _last_index: Int = 0
-	
+
 	# Where is the `key' in `_item'?
 	# return -1 if not found
 	private meth index(key: K): Int
 	do
-		var l = _last_index 
+		var l = _last_index
 		if l < _items.length and _items[l].first == key then return l
 
 		var i = 0
@@ -532,7 +537,7 @@ special CoupleMap[K, E]
 
 	# A new empty map.
 	init
-	do 
+	do
 		_items = new Array[Couple[K,E]]
 	end
 end

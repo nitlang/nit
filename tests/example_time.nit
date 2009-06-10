@@ -39,9 +39,7 @@ class Time
 	# The quantity of tyme in human readable form (h:m)
 	redef meth to_s: String
 	do
-		var s = hour.to_s		# Get the h
-		s.add(':')
-		s.append((_min % 60).to_s)	# Append the m
+		var s = "{hour}:{min%60}"
 		return s
 	end
 

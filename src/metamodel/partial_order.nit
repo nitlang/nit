@@ -68,7 +68,7 @@ special Collection[E]
 	# Return a dot representation
 	meth to_dot: String
 	do
-		var s = new String
+		var s = new Buffer
 		s.append(to_dot_header)
 		for e in _elements do
 			s.append(to_dot_node(e.value))
@@ -77,7 +77,7 @@ special Collection[E]
 			end
 		end
 		s.append("}\n")
-		return s
+		return s.to_s
 	end
 
 	# Called to display the header
