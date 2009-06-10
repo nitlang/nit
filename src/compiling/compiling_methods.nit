@@ -1528,7 +1528,9 @@ redef class AClosureDef
 
 		# Build closure
 		var closcnv = "wbclos{v.new_number}"
-		v.add_decl("struct {closcn} {closcnv} = \{{cname}, NULL\};")
+		v.add_decl("struct {closcn} {closcnv};")
+		v.add_instr("{closcnv}.fun = {cname};")
+		v.add_instr("{closcnv}.has_broke = NULL;")
 		if cfc_old then 
 			v.add_instr("{closcnv}.variable = closctx->variable;")
 			v.add_instr("{closcnv}.closurevariable = closctx->closurevariable;")
