@@ -8,7 +8,7 @@ val_t opts___Option___to_s(val_t  self) {
   trace.file = LOCATE_opts;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((opts___Option___pretty_t)CALL(variable[2],COLOR_opts___Option___pretty))(variable[2],  TAG_Int(2)) /*Option::pretty*/;
+  variable[2] = CALL_opts___Option___pretty(variable[2])(variable[2],  TAG_Int(2)) /*Option::pretty*/;
   variable[1] = variable[2];
   goto return_label0;
   return_label0: while(false);
@@ -120,14 +120,14 @@ void opts___Option___init_opt(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[2] =  param1;
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Option].i]) return;
-  variable[5] = TAG_Bool(( variable[3] /*names*/ ==  NIT_NULL /*null*/) || (( variable[3] /*names*/ != NIT_NULL) && UNTAG_Bool(((array___AbstractArray_____eqeq_t)CALL( variable[3] /*names*/,COLOR_kernel___Object_____eqeq))( variable[3] /*names*/,  NIT_NULL /*null*/) /*AbstractArray::==*/)));
+  variable[5] = TAG_Bool(( variable[3] /*names*/ ==  NIT_NULL /*null*/) || (( variable[3] /*names*/ != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*names*/)( variable[3] /*names*/,  NIT_NULL /*null*/) /*AbstractArray::==*/)));
   if (UNTAG_Bool(variable[5])) { /*if*/
     variable[5] = variable[0];
     variable[6] = NEW_Array_array___Array___init(); /*new Array[String]*/
     ATTR_opts___Option____names(variable[5]) /*Option::_names*/ = variable[6];
   } else { /*if*/
     variable[5] = variable[0];
-    variable[6] = ((array___Collection___to_a_t)CALL( variable[3] /*names*/,COLOR_array___Collection___to_a))( variable[3] /*names*/) /*Collection::to_a*/;
+    variable[6] = CALL_array___Collection___to_a( variable[3] /*names*/)( variable[3] /*names*/) /*Collection::to_a*/;
     ATTR_opts___Option____names(variable[5]) /*Option::_names*/ = variable[6];
   }
   variable[5] = variable[0];
@@ -155,7 +155,7 @@ void opts___Option___add_aliases(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_opts___Option____names(variable[3]) /*Option::_names*/;
-  ((abstract_collection___SimpleCollection___add_all_t)CALL(variable[3],COLOR_abstract_collection___SimpleCollection___add_all))(variable[3],  variable[1] /*names*/) /*SimpleCollection::add_all*/;
+  CALL_abstract_collection___SimpleCollection___add_all(variable[3])(variable[3],  variable[1] /*names*/) /*SimpleCollection::add_all*/;
   return_label2: while(false);
   tracehead = trace.prev;
   return;
@@ -173,22 +173,22 @@ val_t opts___Option___pretty(val_t  self, val_t  param0) {
   variable[4] = variable[0];
   variable[4] = ATTR_opts___Option____names(variable[4]) /*Option::_names*/;
   variable[5] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
-  variable[4] = ((string___Collection___join_t)CALL(variable[4],COLOR_string___Collection___join))(variable[4], variable[5]) /*Collection::join*/;
-  ((string___String___append_t)CALL( variable[3] /*text*/,COLOR_abstract_collection___IndexedCollection___append))( variable[3] /*text*/, variable[4]) /*String::append*/;
+  variable[4] = CALL_string___Collection___join(variable[4])(variable[4], variable[5]) /*Collection::join*/;
+  CALL_abstract_collection___IndexedCollection___append( variable[3] /*text*/)( variable[3] /*text*/, variable[4]) /*String::append*/;
   variable[4] = NEW_String_string___String___with_native(BOX_NativeString("  "), TAG_Int(2)); /*new String*/
-  ((string___String___append_t)CALL( variable[3] /*text*/,COLOR_abstract_collection___IndexedCollection___append))( variable[3] /*text*/, variable[4]) /*String::append*/;
-  variable[5] = ((array___AbstractArray___length_t)CALL( variable[3] /*text*/,COLOR_abstract_collection___Collection___length))( variable[3] /*text*/) /*AbstractArray::length*/;
+  CALL_abstract_collection___IndexedCollection___append( variable[3] /*text*/)( variable[3] /*text*/, variable[4]) /*String::append*/;
+  variable[5] = CALL_abstract_collection___Collection___length( variable[3] /*text*/)( variable[3] /*text*/) /*AbstractArray::length*/;
   variable[5] = TAG_Int(UNTAG_Int( variable[1] /*off*/)-UNTAG_Int(variable[5]));
   variable[4] = variable[5];
   variable[5] = TAG_Bool(UNTAG_Int( variable[4] /*rest*/)>UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[5])) { /*if*/
     variable[5] = NEW_String_string___String___with_native(BOX_NativeString(" "), TAG_Int(1)); /*new String*/
-    variable[5] = ((string___String_____star_t)CALL(variable[5],COLOR_string___String_____star))(variable[5],  variable[4] /*rest*/) /*String::**/;
-    ((string___String___append_t)CALL( variable[3] /*text*/,COLOR_abstract_collection___IndexedCollection___append))( variable[3] /*text*/, variable[5]) /*String::append*/;
+    variable[5] = CALL_string___String_____star(variable[5])(variable[5],  variable[4] /*rest*/) /*String::**/;
+    CALL_abstract_collection___IndexedCollection___append( variable[3] /*text*/)( variable[3] /*text*/, variable[5]) /*String::append*/;
   }
   variable[5] = variable[0];
-  variable[5] = ((opts___Option___helptext_t)CALL(variable[5],COLOR_opts___Option___helptext))(variable[5]) /*Option::helptext*/;
-  ((string___String___append_t)CALL( variable[3] /*text*/,COLOR_abstract_collection___IndexedCollection___append))( variable[3] /*text*/, variable[5]) /*String::append*/;
+  variable[5] = CALL_opts___Option___helptext(variable[5])(variable[5]) /*Option::helptext*/;
+  CALL_abstract_collection___IndexedCollection___append( variable[3] /*text*/)( variable[3] /*text*/, variable[5]) /*String::append*/;
   variable[2] =  variable[3] /*text*/;
   goto return_label3;
   return_label3: while(false);
@@ -203,21 +203,22 @@ val_t opts___Option___pretty_default(val_t  self) {
   trace.file = LOCATE_opts;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((opts___Option___default_value_t)CALL(variable[2],COLOR_opts___Option___default_value))(variable[2]) /*Option::default_value*/;
-  variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[2] = CALL_opts___Option___default_value(variable[2])(variable[2]) /*Option::default_value*/;
+  variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[2])) { /*if*/
-    variable[2] = NEW_String_string___String___init(); /*new String*/
+    variable[2] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
     variable[3] = NEW_String_string___String___with_native(BOX_NativeString(" ("), TAG_Int(2)); /*new String*/
     variable[4] = variable[3];
-    ((string___String___append_t)CALL(variable[2],COLOR_abstract_collection___IndexedCollection___append))(variable[2], variable[4]) /*String::append*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[4]) /*AbstractArray::add*/;
     variable[5] = variable[0];
-    variable[5] = ((opts___Option___default_value_t)CALL(variable[5],COLOR_opts___Option___default_value))(variable[5]) /*Option::default_value*/;
+    variable[5] = CALL_opts___Option___default_value(variable[5])(variable[5]) /*Option::default_value*/;
     variable[6] = variable[5];
-    variable[6] = ((string___String___to_s_t)CALL(variable[6],COLOR_string___Object___to_s))(variable[6]) /*String::to_s*/;
-    ((string___String___append_t)CALL(variable[2],COLOR_abstract_collection___IndexedCollection___append))(variable[2], variable[6]) /*String::append*/;
+    variable[6] = CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[6]) /*AbstractArray::add*/;
     variable[7] = NEW_String_string___String___with_native(BOX_NativeString(")"), TAG_Int(1)); /*new String*/
     variable[8] = variable[7];
-    ((string___String___append_t)CALL(variable[2],COLOR_abstract_collection___IndexedCollection___append))(variable[2], variable[8]) /*String::append*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[8]) /*AbstractArray::add*/;
+    variable[2] = CALL_string___Object___to_s(variable[2])(variable[2]) /*Object::to_s*/;
     variable[1] = variable[2];
     goto return_label4;
   }
@@ -248,7 +249,7 @@ val_t opts___OptionText___to_s(val_t  self) {
   trace.file = LOCATE_opts;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((opts___Option___helptext_t)CALL(variable[2],COLOR_opts___Option___helptext))(variable[2]) /*Option::helptext*/;
+  variable[2] = CALL_opts___Option___helptext(variable[2])(variable[2]) /*Option::helptext*/;
   variable[1] = variable[2];
   goto return_label5;
   return_label5: while(false);
@@ -264,7 +265,7 @@ val_t opts___OptionText___pretty(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((opts___OptionText___to_s_t)CALL(variable[3],COLOR_string___Object___to_s))(variable[3]) /*OptionText::to_s*/;
+  variable[3] = CALL_string___Object___to_s(variable[3])(variable[3]) /*OptionText::to_s*/;
   variable[2] = variable[3];
   goto return_label6;
   return_label6: while(false);
@@ -281,7 +282,7 @@ void opts___OptionText___init(val_t  self, val_t  param0, int* init_table) {
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionText].i]) return;
   variable[3] = variable[0];
-  ((opts___Option___init_opt_t)CALL(variable[3],COLOR_opts___Option___init_opt))(variable[3],  variable[1] /*text*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/, init_table /*YYY*/) /*Option::init_opt*/;
+  CALL_opts___Option___init_opt(variable[3])(variable[3],  variable[1] /*text*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/, init_table /*YYY*/) /*Option::init_opt*/;
   return_label7: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionText].i] = 1;
   tracehead = trace.prev;
@@ -296,7 +297,7 @@ void opts___OptionBool___read_param(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  ((opts___Option___value__eq_t)CALL(variable[3],COLOR_opts___Option___value__eq))(variable[3],  TAG_Bool(true)) /*Option::value=*/;
+  CALL_opts___Option___value__eq(variable[3])(variable[3],  TAG_Bool(true)) /*Option::value=*/;
   return_label8: while(false);
   tracehead = trace.prev;
   return;
@@ -314,7 +315,7 @@ void opts___OptionBool___init(val_t  self, val_t  param0, val_t  param1, int* in
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionBool].i]) return;
   variable[4] = variable[0];
-  ((opts___Option___init_opt_t)CALL(variable[4],COLOR_opts___Option___init_opt))(variable[4],  variable[1] /*help*/,  TAG_Bool(false),  variable[2] /*names*/, init_table /*YYY*/) /*Option::init_opt*/;
+  CALL_opts___Option___init_opt(variable[4])(variable[4],  variable[1] /*help*/,  TAG_Bool(false),  variable[2] /*names*/, init_table /*YYY*/) /*Option::init_opt*/;
   return_label9: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionBool].i] = 1;
   tracehead = trace.prev;
@@ -329,17 +330,17 @@ void opts___OptionParameter___read_param(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((opts___Option___context_t)CALL(variable[3],COLOR_opts___Option___context))(variable[3]) /*Option::context*/;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = CALL_opts___Option___context(variable[3])(variable[3]) /*Option::context*/;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionParameter___read_param, LOCATE_opts, 107); nit_exit(1);}
-  variable[3] = ((abstract_collection___Iterator___is_ok_t)CALL( variable[1] /*it*/,COLOR_abstract_collection___Iterator___is_ok))( variable[1] /*it*/) /*Iterator::is_ok*/;
+  variable[3] = CALL_abstract_collection___Iterator___is_ok( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::is_ok*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = variable[0];
     variable[4] = variable[0];
-    variable[5] = ((abstract_collection___Iterator___item_t)CALL( variable[1] /*it*/,COLOR_abstract_collection___Iterator___item))( variable[1] /*it*/) /*Iterator::item*/;
-    variable[4] = ((opts___OptionParameter___convert_t)CALL(variable[4],COLOR_opts___OptionParameter___convert))(variable[4], variable[5]) /*OptionParameter::convert*/;
-    ((opts___Option___value__eq_t)CALL(variable[3],COLOR_opts___Option___value__eq))(variable[3], variable[4]) /*Option::value=*/;
-    ((abstract_collection___Iterator___next_t)CALL( variable[1] /*it*/,COLOR_abstract_collection___Iterator___next))( variable[1] /*it*/) /*Iterator::next*/;
+    variable[5] = CALL_abstract_collection___Iterator___item( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::item*/;
+    variable[4] = CALL_opts___OptionParameter___convert(variable[4])(variable[4], variable[5]) /*OptionParameter::convert*/;
+    CALL_opts___Option___value__eq(variable[3])(variable[3], variable[4]) /*Option::value=*/;
+    CALL_abstract_collection___Iterator___next( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::next*/;
   } else { /*if*/
   }
   return_label10: while(false);
@@ -369,7 +370,7 @@ void opts___OptionParameter___init_opt(val_t  self, val_t  param0, val_t  param1
   variable[2] =  param1;
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionParameter].i]) return;
-  ((opts___Option___init_opt_t)CALL(variable[0],COLOR_opts___Option___init_opt))(variable[0], variable[1], variable[2], variable[3], init_table /*YYY*/) /*Option::init_opt*/;
+  CALL_opts___Option___init_opt(variable[0])(variable[0], variable[1], variable[2], variable[3], init_table /*YYY*/) /*Option::init_opt*/;
   return_label11: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionParameter].i] = 1;
   tracehead = trace.prev;
@@ -402,7 +403,7 @@ void opts___OptionString___init(val_t  self, val_t  param0, val_t  param1, int* 
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionString].i]) return;
   variable[4] = variable[0];
-  ((opts___OptionParameter___init_opt_t)CALL(variable[4],COLOR_opts___OptionParameter___init_opt))(variable[4],  variable[1] /*help*/,  NIT_NULL /*null*/,  variable[2] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
+  CALL_opts___OptionParameter___init_opt(variable[4])(variable[4],  variable[1] /*help*/,  NIT_NULL /*null*/,  variable[2] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
   return_label13: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionString].i] = 1;
   tracehead = trace.prev;
@@ -416,17 +417,17 @@ val_t opts___OptionEnum___pretty_default(val_t  self) {
   trace.file = LOCATE_opts;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((opts___Option___default_value_t)CALL(variable[2],COLOR_opts___Option___default_value))(variable[2]) /*Option::default_value*/;
+  variable[2] = CALL_opts___Option___default_value(variable[2])(variable[2]) /*Option::default_value*/;
   variable[2] = TAG_Bool((variable[2])!=( NIT_NULL /*null*/));
   if (UNTAG_Bool(variable[2])) { /*if*/
-    variable[2] = NEW_String_string___String___init(); /*new String*/
+    variable[2] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
     variable[3] = NEW_String_string___String___with_native(BOX_NativeString(" ("), TAG_Int(2)); /*new String*/
     variable[4] = variable[3];
-    ((string___String___append_t)CALL(variable[2],COLOR_abstract_collection___IndexedCollection___append))(variable[2], variable[4]) /*String::append*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[4]) /*AbstractArray::add*/;
     variable[5] = variable[0];
     variable[5] = ATTR_opts___OptionEnum____enum(variable[5]) /*OptionEnum::_enum*/;
     variable[6] = variable[0];
-    variable[6] = ((opts___Option___default_value_t)CALL(variable[6],COLOR_opts___Option___default_value))(variable[6]) /*Option::default_value*/;
+    variable[6] = CALL_opts___Option___default_value(variable[6])(variable[6]) /*Option::default_value*/;
     variable[7] = variable[5];
     variable[8] = variable[6];
     variable[10] = TAG_Bool(UNTAG_Int( variable[8] /*index*/)>=UNTAG_Int( TAG_Int(0)));
@@ -446,10 +447,11 @@ val_t opts___OptionEnum___pretty_default(val_t  self) {
     return_label15: while(false);
     variable[5] = variable[9];
     variable[6] = variable[5];
-    ((string___String___append_t)CALL(variable[2],COLOR_abstract_collection___IndexedCollection___append))(variable[2], variable[6]) /*String::append*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[6]) /*AbstractArray::add*/;
     variable[7] = NEW_String_string___String___with_native(BOX_NativeString(")"), TAG_Int(1)); /*new String*/
     variable[8] = variable[7];
-    ((string___String___append_t)CALL(variable[2],COLOR_abstract_collection___IndexedCollection___append))(variable[2], variable[8]) /*String::append*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[8]) /*AbstractArray::add*/;
+    variable[2] = CALL_string___Object___to_s(variable[2])(variable[2]) /*Object::to_s*/;
     variable[1] = variable[2];
     goto return_label14;
   } else { /*if*/
@@ -471,7 +473,7 @@ val_t opts___OptionEnum___convert(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[4] = variable[0];
   variable[4] = ATTR_opts___OptionEnum____enum(variable[4]) /*OptionEnum::_enum*/;
-  variable[4] = ((array___AbstractArray___index_of_t)CALL(variable[4],COLOR_abstract_collection___IndexedCollection___index_of))(variable[4],  variable[1] /*str*/) /*AbstractArray::index_of*/;
+  variable[4] = CALL_abstract_collection___IndexedCollection___index_of(variable[4])(variable[4],  variable[1] /*str*/) /*AbstractArray::index_of*/;
   variable[3] = variable[4];
   variable[2] =  variable[3] /*id*/;
   goto return_label16;
@@ -493,35 +495,36 @@ void opts___OptionEnum___init(val_t  self, val_t  param0, val_t  param1, val_t  
   if (( param3!=NIT_NULL) && !VAL_ISA( param3, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionEnum___init, LOCATE_opts, 133); nit_exit(1); } /*cast Array[String]*/;
   variable[4] =  param3;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionEnum].i]) return;
-  variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*enum*/ ==  NIT_NULL /*null*/) || (( variable[1] /*enum*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*enum*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*enum*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*enum*/,COLOR_kernel___Object_____eqeq))( variable[1] /*enum*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*enum*/ ==  NIT_NULL /*null*/) || (( variable[1] /*enum*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*enum*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*enum*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*enum*/)( variable[1] /*enum*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   variable[7] = variable[6];
   if (UNTAG_Bool(variable[7])) { /* and */
-    variable[7] = ((array___AbstractArray___length_t)CALL( variable[1] /*enum*/,COLOR_abstract_collection___Collection___length))( variable[1] /*enum*/) /*AbstractArray::length*/;
+    variable[7] = CALL_abstract_collection___Collection___length( variable[1] /*enum*/)( variable[1] /*enum*/) /*AbstractArray::length*/;
     variable[7] = TAG_Bool(UNTAG_Int(variable[7])>UNTAG_Int( TAG_Int(0)));
   }
   variable[6] = variable[7];
   if (!UNTAG_Bool(variable[6])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionEnum___init, LOCATE_opts, 135); nit_exit(1);}
   variable[6] = variable[0];
-  variable[7] = ((array___Collection___to_a_t)CALL( variable[1] /*enum*/,COLOR_array___Collection___to_a))( variable[1] /*enum*/) /*Collection::to_a*/;
+  variable[7] = CALL_array___Collection___to_a( variable[1] /*enum*/)( variable[1] /*enum*/) /*Collection::to_a*/;
   ATTR_opts___OptionEnum____enum(variable[6]) /*OptionEnum::_enum*/ = variable[7];
   variable[6] = variable[0];
-  variable[7] = NEW_String_string___String___init(); /*new String*/
+  variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
   variable[8] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
   variable[9] = variable[8];
-  ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[9]) /*String::append*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[9]) /*AbstractArray::add*/;
   variable[10] =  variable[2] /*help*/;
-  ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[10]) /*String::append*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[10]) /*AbstractArray::add*/;
   variable[11] = NEW_String_string___String___with_native(BOX_NativeString(" <"), TAG_Int(2)); /*new String*/
   variable[12] = variable[11];
-  ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[12]) /*String::append*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[12]) /*AbstractArray::add*/;
   variable[13] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
-  variable[13] = ((string___Collection___join_t)CALL( variable[1] /*enum*/,COLOR_string___Collection___join))( variable[1] /*enum*/, variable[13]) /*Collection::join*/;
+  variable[13] = CALL_string___Collection___join( variable[1] /*enum*/)( variable[1] /*enum*/, variable[13]) /*Collection::join*/;
   variable[14] = variable[13];
-  ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[14]) /*String::append*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[14]) /*AbstractArray::add*/;
   variable[15] = NEW_String_string___String___with_native(BOX_NativeString(">"), TAG_Int(1)); /*new String*/
   variable[16] = variable[15];
-  ((string___String___append_t)CALL(variable[7],COLOR_abstract_collection___IndexedCollection___append))(variable[7], variable[16]) /*String::append*/;
-  ((opts___OptionParameter___init_opt_t)CALL(variable[6],COLOR_opts___OptionParameter___init_opt))(variable[6], variable[7],  variable[3] /*default*/,  variable[4] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[16]) /*AbstractArray::add*/;
+  variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
+  CALL_opts___OptionParameter___init_opt(variable[6])(variable[6], variable[7],  variable[3] /*default*/,  variable[4] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
   return_label17: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionEnum].i] = 1;
   tracehead = trace.prev;
@@ -535,7 +538,7 @@ val_t opts___OptionInt___convert(val_t  self, val_t  param0) {
   trace.file = LOCATE_opts;
   variable[0] =  self;
   variable[1] =  param0;
-  variable[3] = ((string___String___to_i_t)CALL( variable[1] /*str*/,COLOR_string___String___to_i))( variable[1] /*str*/) /*String::to_i*/;
+  variable[3] = CALL_string___String___to_i( variable[1] /*str*/)( variable[1] /*str*/) /*String::to_i*/;
   variable[2] = variable[3];
   goto return_label18;
   return_label18: while(false);
@@ -556,7 +559,7 @@ void opts___OptionInt___init(val_t  self, val_t  param0, val_t  param1, val_t  p
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionInt].i]) return;
   variable[5] = variable[0];
-  ((opts___OptionParameter___init_opt_t)CALL(variable[5],COLOR_opts___OptionParameter___init_opt))(variable[5],  variable[1] /*help*/,  variable[2] /*default*/,  variable[3] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
+  CALL_opts___OptionParameter___init_opt(variable[5])(variable[5],  variable[1] /*help*/,  variable[2] /*default*/,  variable[3] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
   return_label19: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionInt].i] = 1;
   tracehead = trace.prev;
@@ -572,7 +575,7 @@ val_t opts___OptionArray___convert(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_opts___OptionArray____values(variable[3]) /*OptionArray::_values*/;
-  ((array___AbstractArray___add_t)CALL(variable[3],COLOR_abstract_collection___SimpleCollection___add))(variable[3],  variable[1] /*str*/) /*AbstractArray::add*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3],  variable[1] /*str*/) /*AbstractArray::add*/;
   variable[3] = variable[0];
   variable[3] = ATTR_opts___OptionArray____values(variable[3]) /*OptionArray::_values*/;
   variable[2] = variable[3];
@@ -599,7 +602,7 @@ void opts___OptionArray___init(val_t  self, val_t  param0, val_t  param1, int* i
   variable[4] = variable[0];
   variable[5] = variable[0];
   variable[5] = ATTR_opts___OptionArray____values(variable[5]) /*OptionArray::_values*/;
-  ((opts___OptionParameter___init_opt_t)CALL(variable[4],COLOR_opts___OptionParameter___init_opt))(variable[4],  variable[1] /*help*/, variable[5],  variable[2] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
+  CALL_opts___OptionParameter___init_opt(variable[4])(variable[4],  variable[1] /*help*/, variable[5],  variable[2] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
   return_label21: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionArray].i] = 1;
   tracehead = trace.prev;
@@ -633,25 +636,25 @@ void opts___OptionContext___usage(val_t  self) {
   variable[2] =  TAG_Int(1);
   variable[3] = variable[0];
   variable[3] = ATTR_opts___OptionContext____options(variable[3]) /*OptionContext::_options*/;
-  variable[3] = ((array___AbstractArray___iterator_t)CALL(variable[3],COLOR_abstract_collection___Collection___iterator))(variable[3]) /*AbstractArray::iterator*/;
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArray::iterator*/;
   while (true) { /*for*/
-    variable[4] = ((array___ArrayIterator___is_ok_t)CALL(variable[3],COLOR_abstract_collection___Iterator___is_ok))(variable[3]) /*ArrayIterator::is_ok*/;
+    variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = ((array___ArrayIterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*ArrayIterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/;
     variable[5] = variable[4];
     variable[6] =  TAG_Int(3);
-    variable[7] = ((opts___Option___names_t)CALL( variable[5] /*i*/,COLOR_opts___Option___names))( variable[5] /*i*/) /*Option::names*/;
-    variable[7] = ((array___AbstractArray___iterator_t)CALL(variable[7],COLOR_abstract_collection___Collection___iterator))(variable[7]) /*AbstractArray::iterator*/;
+    variable[7] = CALL_opts___Option___names( variable[5] /*i*/)( variable[5] /*i*/) /*Option::names*/;
+    variable[7] = CALL_abstract_collection___Collection___iterator(variable[7])(variable[7]) /*AbstractArray::iterator*/;
     while (true) { /*for*/
-      variable[8] = ((array___ArrayIterator___is_ok_t)CALL(variable[7],COLOR_abstract_collection___Iterator___is_ok))(variable[7]) /*ArrayIterator::is_ok*/;
+      variable[8] = CALL_abstract_collection___Iterator___is_ok(variable[7])(variable[7]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[8])) break; /*for*/
-      variable[8] = ((array___ArrayIterator___item_t)CALL(variable[7],COLOR_abstract_collection___Iterator___item))(variable[7]) /*ArrayIterator::item*/;
+      variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*ArrayIterator::item*/;
       variable[9] = variable[8];
-      variable[10] = ((array___AbstractArray___length_t)CALL( variable[9] /*n*/,COLOR_abstract_collection___Collection___length))( variable[9] /*n*/) /*AbstractArray::length*/;
+      variable[10] = CALL_abstract_collection___Collection___length( variable[9] /*n*/)( variable[9] /*n*/) /*AbstractArray::length*/;
       variable[10] = TAG_Int(UNTAG_Int(variable[10])+UNTAG_Int( TAG_Int(2)));
       variable[6] = TAG_Int(UNTAG_Int(variable[6])+UNTAG_Int(variable[10])) /*l*/;
       continue_24: while(0);
-      ((array___ArrayIterator___next_t)CALL(variable[7],COLOR_abstract_collection___Iterator___next))(variable[7]) /*ArrayIterator::next*/;
+      CALL_abstract_collection___Iterator___next(variable[7])(variable[7]) /*ArrayIterator::next*/;
     }
     break_24: while(0);
     variable[7] = TAG_Bool(UNTAG_Int( variable[2] /*lmax*/)<UNTAG_Int( variable[6] /*l*/));
@@ -659,22 +662,22 @@ void opts___OptionContext___usage(val_t  self) {
       variable[2] =  variable[6] /*l*/ /*lmax=*/;
     }
     continue_23: while(0);
-    ((array___ArrayIterator___next_t)CALL(variable[3],COLOR_abstract_collection___Iterator___next))(variable[3]) /*ArrayIterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*ArrayIterator::next*/;
   }
   break_23: while(0);
   variable[3] = variable[0];
   variable[3] = ATTR_opts___OptionContext____options(variable[3]) /*OptionContext::_options*/;
-  variable[3] = ((array___AbstractArray___iterator_t)CALL(variable[3],COLOR_abstract_collection___Collection___iterator))(variable[3]) /*AbstractArray::iterator*/;
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArray::iterator*/;
   while (true) { /*for*/
-    variable[4] = ((array___ArrayIterator___is_ok_t)CALL(variable[3],COLOR_abstract_collection___Iterator___is_ok))(variable[3]) /*ArrayIterator::is_ok*/;
+    variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = ((array___ArrayIterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*ArrayIterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/;
     variable[5] = variable[4];
     variable[6] = variable[0];
-    variable[7] = ((opts___Option___pretty_t)CALL( variable[5] /*i*/,COLOR_opts___Option___pretty))( variable[5] /*i*/,  variable[2] /*lmax*/) /*Option::pretty*/;
-    ((file___Object___print_t)CALL(variable[6],COLOR_file___Object___print))(variable[6], variable[7]) /*Object::print*/;
+    variable[7] = CALL_opts___Option___pretty( variable[5] /*i*/)( variable[5] /*i*/,  variable[2] /*lmax*/) /*Option::pretty*/;
+    CALL_file___Object___print(variable[6])(variable[6], variable[7]) /*Object::print*/;
     continue_25: while(0);
-    ((array___ArrayIterator___next_t)CALL(variable[3],COLOR_abstract_collection___Iterator___next))(variable[3]) /*ArrayIterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*ArrayIterator::next*/;
   }
   break_25: while(0);
   return_label22: while(false);
@@ -689,10 +692,10 @@ void opts___OptionContext___parse(val_t  self, val_t  param0) {
   trace.file = LOCATE_opts;
   variable[0] =  self;
   variable[1] =  param0;
-  variable[4] = ((abstract_collection___Collection___iterator_t)CALL( variable[1] /*argv*/,COLOR_abstract_collection___Collection___iterator))( variable[1] /*argv*/) /*Collection::iterator*/;
+  variable[4] = CALL_abstract_collection___Collection___iterator( variable[1] /*argv*/)( variable[1] /*argv*/) /*Collection::iterator*/;
   variable[3] = variable[4];
   variable[4] = variable[0];
-  ((opts___OptionContext___parse_intern_t)CALL(variable[4],COLOR_opts___OptionContext___parse_intern))(variable[4],  variable[3] /*it*/) /*OptionContext::parse_intern*/;
+  CALL_opts___OptionContext___parse_intern(variable[4])(variable[4],  variable[3] /*it*/) /*OptionContext::parse_intern*/;
   return_label26: while(false);
   tracehead = trace.prev;
   return;
@@ -707,40 +710,40 @@ void opts___OptionContext___parse_intern(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] =  TAG_Bool(true);
   variable[4] = variable[0];
-  ((opts___OptionContext___build_t)CALL(variable[4],COLOR_opts___OptionContext___build))(variable[4]) /*OptionContext::build*/;
+  CALL_opts___OptionContext___build(variable[4])(variable[4]) /*OptionContext::build*/;
   variable[5] = variable[0];
   variable[5] = ATTR_opts___OptionContext____rest(variable[5]) /*OptionContext::_rest*/;
   variable[4] = variable[5];
   while (true) { /*while*/
     variable[5] =  variable[3] /*parseargs*/;
     if (UNTAG_Bool(variable[5])) { /* and */
-      variable[5] = ((abstract_collection___Iterator___is_ok_t)CALL( variable[1] /*it*/,COLOR_abstract_collection___Iterator___is_ok))( variable[1] /*it*/) /*Iterator::is_ok*/;
+      variable[5] = CALL_abstract_collection___Iterator___is_ok( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::is_ok*/;
     }
     if (!UNTAG_Bool(variable[5])) break; /* while*/
-    variable[6] = ((abstract_collection___Iterator___item_t)CALL( variable[1] /*it*/,COLOR_abstract_collection___Iterator___item))( variable[1] /*it*/) /*Iterator::item*/;
+    variable[6] = CALL_abstract_collection___Iterator___item( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::item*/;
     variable[5] = variable[6];
     variable[6] = NEW_String_string___String___with_native(BOX_NativeString("--"), TAG_Int(2)); /*new String*/
-    variable[6] = TAG_Bool(( variable[5] /*str*/ == variable[6]) || (( variable[5] /*str*/ != NIT_NULL) && UNTAG_Bool(((string___String_____eqeq_t)CALL( variable[5] /*str*/,COLOR_kernel___Object_____eqeq))( variable[5] /*str*/, variable[6]) /*String::==*/)));
+    variable[6] = TAG_Bool(( variable[5] /*str*/ == variable[6]) || (( variable[5] /*str*/ != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*str*/)( variable[5] /*str*/, variable[6]) /*String::==*/)));
     if (UNTAG_Bool(variable[6])) { /*if*/
-      ((abstract_collection___Iterator___next_t)CALL( variable[1] /*it*/,COLOR_abstract_collection___Iterator___next))( variable[1] /*it*/) /*Iterator::next*/;
-      variable[6] = ((array___Iterator___to_a_t)CALL( variable[1] /*it*/,COLOR_array___Iterator___to_a))( variable[1] /*it*/) /*Iterator::to_a*/;
-      ((abstract_collection___SimpleCollection___add_all_t)CALL( variable[4] /*rest*/,COLOR_abstract_collection___SimpleCollection___add_all))( variable[4] /*rest*/, variable[6]) /*SimpleCollection::add_all*/;
+      CALL_abstract_collection___Iterator___next( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::next*/;
+      variable[6] = CALL_array___Iterator___to_a( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::to_a*/;
+      CALL_abstract_collection___SimpleCollection___add_all( variable[4] /*rest*/)( variable[4] /*rest*/, variable[6]) /*SimpleCollection::add_all*/;
       variable[3] =  TAG_Bool(false) /*parseargs=*/;
     } else { /*if*/
       variable[6] = variable[0];
       variable[6] = ATTR_opts___OptionContext____optmap(variable[6]) /*OptionContext::_optmap*/;
-      variable[6] = ((abstract_collection___Map___has_key_t)CALL(variable[6],COLOR_abstract_collection___Map___has_key))(variable[6],  variable[5] /*str*/) /*Map::has_key*/;
+      variable[6] = CALL_abstract_collection___Map___has_key(variable[6])(variable[6],  variable[5] /*str*/) /*Map::has_key*/;
       if (UNTAG_Bool(variable[6])) { /*if*/
         variable[7] = variable[0];
         variable[7] = ATTR_opts___OptionContext____optmap(variable[7]) /*OptionContext::_optmap*/;
-        variable[7] = ((abstract_collection___Map_____bra_t)CALL(variable[7],COLOR_abstract_collection___Map_____bra))(variable[7],  variable[5] /*str*/) /*Map::[]*/;
+        variable[7] = CALL_abstract_collection___Map_____bra(variable[7])(variable[7],  variable[5] /*str*/) /*Map::[]*/;
         variable[6] = variable[7];
-        ((abstract_collection___Iterator___next_t)CALL( variable[1] /*it*/,COLOR_abstract_collection___Iterator___next))( variable[1] /*it*/) /*Iterator::next*/;
-        ((opts___Option___read_param_t)CALL( variable[6] /*opt*/,COLOR_opts___Option___read_param))( variable[6] /*opt*/,  variable[1] /*it*/) /*Option::read_param*/;
+        CALL_abstract_collection___Iterator___next( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::next*/;
+        CALL_opts___Option___read_param( variable[6] /*opt*/)( variable[6] /*opt*/,  variable[1] /*it*/) /*Option::read_param*/;
       } else { /*if*/
-        variable[6] = ((abstract_collection___Iterator___item_t)CALL( variable[1] /*it*/,COLOR_abstract_collection___Iterator___item))( variable[1] /*it*/) /*Iterator::item*/;
-        ((array___AbstractArray___add_t)CALL( variable[4] /*rest*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*rest*/, variable[6]) /*AbstractArray::add*/;
-        ((abstract_collection___Iterator___next_t)CALL( variable[1] /*it*/,COLOR_abstract_collection___Iterator___next))( variable[1] /*it*/) /*Iterator::next*/;
+        variable[6] = CALL_abstract_collection___Iterator___item( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::item*/;
+        CALL_abstract_collection___SimpleCollection___add( variable[4] /*rest*/)( variable[4] /*rest*/, variable[6]) /*AbstractArray::add*/;
+        CALL_abstract_collection___Iterator___next( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::next*/;
       }
     }
     continue_28: while(0);
@@ -760,19 +763,19 @@ void opts___OptionContext___add_option(val_t  self, val_t  param0) {
   /* check if p<Array[Option] with p:Option */
   if (( param0!=NIT_NULL) && !VAL_ISA( param0, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionContext___add_option, LOCATE_opts, 237); nit_exit(1); } /*cast Array[Option]*/;
   variable[1] =  param0;
-  variable[3] = ((array___AbstractArray___iterator_t)CALL( variable[1] /*opts*/,COLOR_abstract_collection___Collection___iterator))( variable[1] /*opts*/) /*AbstractArray::iterator*/;
+  variable[3] = CALL_abstract_collection___Collection___iterator( variable[1] /*opts*/)( variable[1] /*opts*/) /*AbstractArray::iterator*/;
   while (true) { /*for*/
-    variable[4] = ((array___ArrayIterator___is_ok_t)CALL(variable[3],COLOR_abstract_collection___Iterator___is_ok))(variable[3]) /*ArrayIterator::is_ok*/;
+    variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = ((array___ArrayIterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*ArrayIterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/;
     variable[5] = variable[4];
     variable[6] = variable[0];
-    ((opts___Option___context__eq_t)CALL( variable[5] /*opt*/,COLOR_opts___Option___context__eq))( variable[5] /*opt*/, variable[6]) /*Option::context=*/;
+    CALL_opts___Option___context__eq( variable[5] /*opt*/)( variable[5] /*opt*/, variable[6]) /*Option::context=*/;
     variable[6] = variable[0];
     variable[6] = ATTR_opts___OptionContext____options(variable[6]) /*OptionContext::_options*/;
-    ((array___AbstractArray___add_t)CALL(variable[6],COLOR_abstract_collection___SimpleCollection___add))(variable[6],  variable[5] /*opt*/) /*AbstractArray::add*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6],  variable[5] /*opt*/) /*AbstractArray::add*/;
     continue_30: while(0);
-    ((array___ArrayIterator___next_t)CALL(variable[3],COLOR_abstract_collection___Iterator___next))(variable[3]) /*ArrayIterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*ArrayIterator::next*/;
   }
   break_30: while(0);
   return_label29: while(false);
@@ -810,28 +813,28 @@ void opts___OptionContext___build(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_opts___OptionContext____options(variable[2]) /*OptionContext::_options*/;
-  variable[2] = ((array___AbstractArray___iterator_t)CALL(variable[2],COLOR_abstract_collection___Collection___iterator))(variable[2]) /*AbstractArray::iterator*/;
+  variable[2] = CALL_abstract_collection___Collection___iterator(variable[2])(variable[2]) /*AbstractArray::iterator*/;
   while (true) { /*for*/
-    variable[3] = ((array___ArrayIterator___is_ok_t)CALL(variable[2],COLOR_abstract_collection___Iterator___is_ok))(variable[2]) /*ArrayIterator::is_ok*/;
+    variable[3] = CALL_abstract_collection___Iterator___is_ok(variable[2])(variable[2]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[3])) break; /*for*/
-    variable[3] = ((array___ArrayIterator___item_t)CALL(variable[2],COLOR_abstract_collection___Iterator___item))(variable[2]) /*ArrayIterator::item*/;
+    variable[3] = CALL_abstract_collection___Iterator___item(variable[2])(variable[2]) /*ArrayIterator::item*/;
     variable[4] = variable[3];
-    variable[5] = ((opts___Option___names_t)CALL( variable[4] /*o*/,COLOR_opts___Option___names))( variable[4] /*o*/) /*Option::names*/;
-    variable[5] = ((array___AbstractArray___iterator_t)CALL(variable[5],COLOR_abstract_collection___Collection___iterator))(variable[5]) /*AbstractArray::iterator*/;
+    variable[5] = CALL_opts___Option___names( variable[4] /*o*/)( variable[4] /*o*/) /*Option::names*/;
+    variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*AbstractArray::iterator*/;
     while (true) { /*for*/
-      variable[6] = ((array___ArrayIterator___is_ok_t)CALL(variable[5],COLOR_abstract_collection___Iterator___is_ok))(variable[5]) /*ArrayIterator::is_ok*/;
+      variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[6])) break; /*for*/
-      variable[6] = ((array___ArrayIterator___item_t)CALL(variable[5],COLOR_abstract_collection___Iterator___item))(variable[5]) /*ArrayIterator::item*/;
+      variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/;
       variable[7] = variable[6];
       variable[8] = variable[0];
       variable[8] = ATTR_opts___OptionContext____optmap(variable[8]) /*OptionContext::_optmap*/;
-      ((abstract_collection___Map_____braeq_t)CALL(variable[8],COLOR_abstract_collection___Map_____braeq))(variable[8],  variable[7] /*n*/,  variable[4] /*o*/) /*Map::[]=*/;
+      CALL_abstract_collection___Map_____braeq(variable[8])(variable[8],  variable[7] /*n*/,  variable[4] /*o*/) /*Map::[]=*/;
       continue_34: while(0);
-      ((array___ArrayIterator___next_t)CALL(variable[5],COLOR_abstract_collection___Iterator___next))(variable[5]) /*ArrayIterator::next*/;
+      CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*ArrayIterator::next*/;
     }
     break_34: while(0);
     continue_33: while(0);
-    ((array___ArrayIterator___next_t)CALL(variable[2],COLOR_abstract_collection___Iterator___next))(variable[2]) /*ArrayIterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[2])(variable[2]) /*ArrayIterator::next*/;
   }
   break_33: while(0);
   return_label32: while(false);

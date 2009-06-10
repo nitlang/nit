@@ -14,34 +14,34 @@ val_t utils___Object___cmangle(val_t  self, val_t  param0) {
   if (once_bool_1) variable[4] = once_value_1;
   else {
     variable[4] = variable[0];
-    variable[4] = ((utils___Object___cmangle_table_t)CALL(variable[4],COLOR_utils___Object___cmangle_table))(variable[4]) /*Object::cmangle_table*/;
+    variable[4] = CALL_utils___Object___cmangle_table(variable[4])(variable[4]) /*Object::cmangle_table*/;
     once_value_1 = variable[4];
     once_bool_1 = true;
   }
   variable[3] = variable[4];
   variable[5] = NEW_String_string___String___init(); /*new String*/
   variable[4] = variable[5];
-  variable[5] = ((array___AbstractArray___iterator_t)CALL( variable[1] /*symbols*/,COLOR_abstract_collection___Collection___iterator))( variable[1] /*symbols*/) /*AbstractArray::iterator*/;
+  variable[5] = CALL_abstract_collection___Collection___iterator( variable[1] /*symbols*/)( variable[1] /*symbols*/) /*AbstractArray::iterator*/;
   while (true) { /*for*/
-    variable[6] = ((array___ArrayIterator___is_ok_t)CALL(variable[5],COLOR_abstract_collection___Iterator___is_ok))(variable[5]) /*ArrayIterator::is_ok*/;
+    variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[6])) break; /*for*/
-    variable[6] = ((array___ArrayIterator___item_t)CALL(variable[5],COLOR_abstract_collection___Iterator___item))(variable[5]) /*ArrayIterator::item*/;
+    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/;
     variable[7] = variable[6];
-    variable[8] = ((array___AbstractArray___is_empty_t)CALL( variable[4] /*res*/,COLOR_abstract_collection___Collection___is_empty))( variable[4] /*res*/) /*AbstractArray::is_empty*/;
+    variable[8] = CALL_abstract_collection___Collection___is_empty( variable[4] /*res*/)( variable[4] /*res*/) /*AbstractArray::is_empty*/;
     if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[8])))) { /*if*/
-      ((string___String___add_t)CALL( variable[4] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*res*/,  TAG_Char('_')) /*String::add*/;
-      ((string___String___add_t)CALL( variable[4] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*res*/,  TAG_Char('_')) /*String::add*/;
-      ((string___String___add_t)CALL( variable[4] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*res*/,  TAG_Char('_')) /*String::add*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  TAG_Char('_')) /*String::add*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  TAG_Char('_')) /*String::add*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  TAG_Char('_')) /*String::add*/;
     }
     variable[8] =  TAG_Bool(false);
     variable[9] =  TAG_Bool(true);
-    variable[11] = ((symbol___Symbol___to_s_t)CALL( variable[7] /*sym*/,COLOR_string___Object___to_s))( variable[7] /*sym*/) /*Symbol::to_s*/;
+    variable[11] = CALL_string___Object___to_s( variable[7] /*sym*/)( variable[7] /*sym*/) /*Symbol::to_s*/;
     variable[10] = variable[11];
-    variable[11] = ((array___AbstractArray___iterator_t)CALL( variable[10] /*s*/,COLOR_abstract_collection___Collection___iterator))( variable[10] /*s*/) /*AbstractArray::iterator*/;
+    variable[11] = CALL_abstract_collection___Collection___iterator( variable[10] /*s*/)( variable[10] /*s*/) /*AbstractArray::iterator*/;
     while (true) { /*for*/
-      variable[12] = ((array___ArrayIterator___is_ok_t)CALL(variable[11],COLOR_abstract_collection___Iterator___is_ok))(variable[11]) /*ArrayIterator::is_ok*/;
+      variable[12] = CALL_abstract_collection___Iterator___is_ok(variable[11])(variable[11]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[12])) break; /*for*/
-      variable[12] = ((array___ArrayIterator___item_t)CALL(variable[11],COLOR_abstract_collection___Iterator___item))(variable[11]) /*ArrayIterator::item*/;
+      variable[12] = CALL_abstract_collection___Iterator___item(variable[11])(variable[11]) /*ArrayIterator::item*/;
       variable[13] = variable[12];
       variable[14] = TAG_Bool(UNTAG_Char( variable[13] /*c*/)>=UNTAG_Char( TAG_Char('a')));
       variable[15] = variable[14];
@@ -70,7 +70,7 @@ val_t utils___Object___cmangle(val_t  self, val_t  param0) {
       }
       variable[14] = variable[15];
       if (UNTAG_Bool(variable[14])) { /*if*/
-        ((string___String___add_t)CALL( variable[4] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*res*/,  variable[13] /*c*/) /*String::add*/;
+        CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  variable[13] /*c*/) /*String::add*/;
         variable[8] =  TAG_Bool(false) /*underscore=*/;
         variable[9] =  TAG_Bool(true) /*normal=*/;
       } else { /*if*/
@@ -81,29 +81,29 @@ val_t utils___Object___cmangle(val_t  self, val_t  param0) {
         }
         variable[14] = variable[15];
         if (UNTAG_Bool(variable[14])) { /*if*/
-          ((string___String___add_t)CALL( variable[4] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*res*/,  variable[13] /*c*/) /*String::add*/;
+          CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  variable[13] /*c*/) /*String::add*/;
           variable[8] =  TAG_Bool(true) /*underscore=*/;
           variable[9] =  TAG_Bool(true) /*normal=*/;
         } else { /*if*/
-          variable[14] = ((abstract_collection___CoupleMap___has_key_t)CALL( variable[3] /*table*/,COLOR_abstract_collection___Map___has_key))( variable[3] /*table*/,  variable[13] /*c*/) /*CoupleMap::has_key*/;
+          variable[14] = CALL_abstract_collection___Map___has_key( variable[3] /*table*/)( variable[3] /*table*/,  variable[13] /*c*/) /*CoupleMap::has_key*/;
           if (UNTAG_Bool(variable[14])) { /*if*/
             if (UNTAG_Bool( variable[9] /*normal*/)) { /*if*/
-              ((string___String___add_t)CALL( variable[4] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*res*/,  TAG_Char('_')) /*String::add*/;
-              ((string___String___add_t)CALL( variable[4] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*res*/,  TAG_Char('_')) /*String::add*/;
+              CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  TAG_Char('_')) /*String::add*/;
+              CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  TAG_Char('_')) /*String::add*/;
             }
-            variable[14] = ((abstract_collection___CoupleMap_____bra_t)CALL( variable[3] /*table*/,COLOR_abstract_collection___Map_____bra))( variable[3] /*table*/,  variable[13] /*c*/) /*CoupleMap::[]*/;
-            ((string___String___append_t)CALL( variable[4] /*res*/,COLOR_abstract_collection___IndexedCollection___append))( variable[4] /*res*/, variable[14]) /*String::append*/;
+            variable[14] = CALL_abstract_collection___Map_____bra( variable[3] /*table*/)( variable[3] /*table*/,  variable[13] /*c*/) /*CoupleMap::[]*/;
+            CALL_abstract_collection___IndexedCollection___append( variable[4] /*res*/)( variable[4] /*res*/, variable[14]) /*String::append*/;
             variable[9] =  TAG_Bool(false) /*normal=*/;
             variable[8] =  TAG_Bool(false) /*underscore=*/;
           }
         }
       }
       continue_3: while(0);
-      ((array___ArrayIterator___next_t)CALL(variable[11],COLOR_abstract_collection___Iterator___next))(variable[11]) /*ArrayIterator::next*/;
+      CALL_abstract_collection___Iterator___next(variable[11])(variable[11]) /*ArrayIterator::next*/;
     }
     break_3: while(0);
     continue_2: while(0);
-    ((array___ArrayIterator___next_t)CALL(variable[5],COLOR_abstract_collection___Iterator___next))(variable[5]) /*ArrayIterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*ArrayIterator::next*/;
   }
   break_2: while(0);
   variable[2] =  variable[4] /*res*/;
@@ -122,29 +122,29 @@ val_t utils___Object___cmangle_table(val_t  self) {
   variable[3] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[Char, String]*/
   variable[2] = variable[3];
   variable[3] = NEW_String_string___String___with_native(BOX_NativeString("plus"), TAG_Int(4)); /*new String*/
-  ((hash___HashMap_____braeq_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___Map_____braeq))( variable[2] /*res*/,  TAG_Char('+'), variable[3]) /*HashMap::[]=*/;
+  CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('+'), variable[3]) /*HashMap::[]=*/;
   variable[3] = NEW_String_string___String___with_native(BOX_NativeString("minus"), TAG_Int(5)); /*new String*/
-  ((hash___HashMap_____braeq_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___Map_____braeq))( variable[2] /*res*/,  TAG_Char('-'), variable[3]) /*HashMap::[]=*/;
+  CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('-'), variable[3]) /*HashMap::[]=*/;
   variable[3] = NEW_String_string___String___with_native(BOX_NativeString("star"), TAG_Int(4)); /*new String*/
-  ((hash___HashMap_____braeq_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___Map_____braeq))( variable[2] /*res*/,  TAG_Char('*'), variable[3]) /*HashMap::[]=*/;
+  CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('*'), variable[3]) /*HashMap::[]=*/;
   variable[3] = NEW_String_string___String___with_native(BOX_NativeString("slash"), TAG_Int(5)); /*new String*/
-  ((hash___HashMap_____braeq_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___Map_____braeq))( variable[2] /*res*/,  TAG_Char('/'), variable[3]) /*HashMap::[]=*/;
+  CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('/'), variable[3]) /*HashMap::[]=*/;
   variable[3] = NEW_String_string___String___with_native(BOX_NativeString("percent"), TAG_Int(7)); /*new String*/
-  ((hash___HashMap_____braeq_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___Map_____braeq))( variable[2] /*res*/,  TAG_Char('%'), variable[3]) /*HashMap::[]=*/;
+  CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('%'), variable[3]) /*HashMap::[]=*/;
   variable[3] = NEW_String_string___String___with_native(BOX_NativeString("bra"), TAG_Int(3)); /*new String*/
-  ((hash___HashMap_____braeq_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___Map_____braeq))( variable[2] /*res*/,  TAG_Char('['), variable[3]) /*HashMap::[]=*/;
+  CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('['), variable[3]) /*HashMap::[]=*/;
   variable[3] = NEW_String_string___String___with_native(BOX_NativeString("eq"), TAG_Int(2)); /*new String*/
-  ((hash___HashMap_____braeq_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___Map_____braeq))( variable[2] /*res*/,  TAG_Char('='), variable[3]) /*HashMap::[]=*/;
+  CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('='), variable[3]) /*HashMap::[]=*/;
   variable[3] = NEW_String_string___String___with_native(BOX_NativeString("l"), TAG_Int(1)); /*new String*/
-  ((hash___HashMap_____braeq_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___Map_____braeq))( variable[2] /*res*/,  TAG_Char('<'), variable[3]) /*HashMap::[]=*/;
+  CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('<'), variable[3]) /*HashMap::[]=*/;
   variable[3] = NEW_String_string___String___with_native(BOX_NativeString("g"), TAG_Int(1)); /*new String*/
-  ((hash___HashMap_____braeq_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___Map_____braeq))( variable[2] /*res*/,  TAG_Char('>'), variable[3]) /*HashMap::[]=*/;
+  CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('>'), variable[3]) /*HashMap::[]=*/;
   variable[3] = NEW_String_string___String___with_native(BOX_NativeString("n"), TAG_Int(1)); /*new String*/
-  ((hash___HashMap_____braeq_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___Map_____braeq))( variable[2] /*res*/,  TAG_Char('!'), variable[3]) /*HashMap::[]=*/;
+  CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('!'), variable[3]) /*HashMap::[]=*/;
   variable[3] = NEW_String_string___String___with_native(BOX_NativeString("u"), TAG_Int(1)); /*new String*/
-  ((hash___HashMap_____braeq_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___Map_____braeq))( variable[2] /*res*/,  TAG_Char('_'), variable[3]) /*HashMap::[]=*/;
+  CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('_'), variable[3]) /*HashMap::[]=*/;
   variable[3] = NEW_String_string___String___with_native(BOX_NativeString("at"), TAG_Int(2)); /*new String*/
-  ((hash___HashMap_____braeq_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___Map_____braeq))( variable[2] /*res*/,  TAG_Char('@'), variable[3]) /*HashMap::[]=*/;
+  CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('@'), variable[3]) /*HashMap::[]=*/;
   variable[1] =  variable[2] /*res*/;
   goto return_label4;
   return_label4: while(false);

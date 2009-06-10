@@ -27,7 +27,7 @@ val_t range___Range___is_empty(val_t  self) {
   variable[2] = ATTR_range___Range____first(variable[2]) /*Range::_first*/;
   variable[3] = variable[0];
   variable[3] = ATTR_range___Range____after(variable[3]) /*Range::_after*/;
-  variable[2] = ((kernel___Comparable_____geq_t)CALL(variable[2],COLOR_kernel___Comparable_____geq))(variable[2], variable[3]) /*Comparable::>=*/;
+  variable[2] = CALL_kernel___Comparable_____geq(variable[2])(variable[2], variable[3]) /*Comparable::>=*/;
   variable[1] = variable[2];
   goto return_label1;
   return_label1: while(false);
@@ -45,7 +45,7 @@ val_t range___Range___length(val_t  self) {
   variable[3] = ATTR_range___Range____first(variable[3]) /*Range::_first*/;
   variable[4] = variable[0];
   variable[4] = ATTR_range___Range____after(variable[4]) /*Range::_after*/;
-  variable[3] = ((kernel___Discrete___distance_t)CALL(variable[3],COLOR_kernel___Discrete___distance))(variable[3], variable[4]) /*Discrete::distance*/;
+  variable[3] = CALL_kernel___Discrete___distance(variable[3])(variable[3], variable[4]) /*Discrete::distance*/;
   variable[2] = variable[3];
   variable[3] = TAG_Bool(UNTAG_Int( variable[2] /*nb*/)>UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[3])) { /*if*/
@@ -69,12 +69,12 @@ val_t range___Range___has(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_range___Range____first(variable[3]) /*Range::_first*/;
-  variable[3] = ((kernel___Comparable_____geq_t)CALL( variable[1] /*item*/,COLOR_kernel___Comparable_____geq))( variable[1] /*item*/, variable[3]) /*Comparable::>=*/;
+  variable[3] = CALL_kernel___Comparable_____geq( variable[1] /*item*/)( variable[1] /*item*/, variable[3]) /*Comparable::>=*/;
   variable[4] = variable[3];
   if (UNTAG_Bool(variable[4])) { /* and */
     variable[4] = variable[0];
     variable[4] = ATTR_range___Range____last(variable[4]) /*Range::_last*/;
-    variable[4] = ((kernel___Comparable_____leq_t)CALL( variable[1] /*item*/,COLOR_kernel___Comparable_____leq))( variable[1] /*item*/, variable[4]) /*Comparable::<=*/;
+    variable[4] = CALL_kernel___Comparable_____leq( variable[1] /*item*/)( variable[1] /*item*/, variable[4]) /*Comparable::<=*/;
   }
   variable[3] = variable[4];
   variable[2] = variable[3];
@@ -93,12 +93,12 @@ val_t range___Range___has_only(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_range___Range____first(variable[3]) /*Range::_first*/;
-  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*item*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  variable[1] /*item*/) /*Object::==*/)))));
+  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*item*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  variable[1] /*item*/) /*Object::==*/)))));
   variable[4] = variable[3];
   if (UNTAG_Bool(variable[4])) { /* and */
     variable[4] = variable[0];
     variable[4] = ATTR_range___Range____last(variable[4]) /*Range::_last*/;
-    variable[4] = TAG_Bool(( variable[1] /*item*/ == variable[4]) || (( variable[1] /*item*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*item*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*item*/,variable[4])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*item*/,COLOR_kernel___Object_____eqeq))( variable[1] /*item*/, variable[4]) /*Object::==*/)))));
+    variable[4] = TAG_Bool(( variable[1] /*item*/ == variable[4]) || (( variable[1] /*item*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*item*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*item*/,variable[4])):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*item*/)( variable[1] /*item*/, variable[4]) /*Object::==*/)))));
   }
   variable[3] = variable[4];
   variable[2] = variable[3];
@@ -116,7 +116,7 @@ val_t range___Range___count(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((range___Range___has_t)CALL(variable[3],COLOR_abstract_collection___Collection___has))(variable[3],  variable[1] /*item*/) /*Range::has*/;
+  variable[3] = CALL_abstract_collection___Collection___has(variable[3])(variable[3],  variable[1] /*item*/) /*Range::has*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[2] =  TAG_Int(1);
     goto return_label5;
@@ -170,7 +170,7 @@ void range___Range___init(val_t  self, val_t  param0, val_t  param1, int* init_t
   variable[4] = variable[0];
   ATTR_range___Range____last(variable[4]) /*Range::_last*/ =  variable[2] /*to*/;
   variable[4] = variable[0];
-  variable[5] = ((kernel___Discrete___succ_t)CALL( variable[2] /*to*/,COLOR_kernel___Discrete___succ))( variable[2] /*to*/) /*Discrete::succ*/;
+  variable[5] = CALL_kernel___Discrete___succ( variable[2] /*to*/)( variable[2] /*to*/) /*Discrete::succ*/;
   ATTR_range___Range____after(variable[4]) /*Range::_after*/ = variable[5];
   return_label6: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Range].i] = 1;
@@ -190,7 +190,7 @@ void range___Range___without_last(val_t  self, val_t  param0, val_t  param1, int
   variable[4] = variable[0];
   ATTR_range___Range____first(variable[4]) /*Range::_first*/ =  variable[1] /*from*/;
   variable[4] = variable[0];
-  variable[5] = ((kernel___Discrete___prec_t)CALL( variable[2] /*to*/,COLOR_kernel___Discrete___prec))( variable[2] /*to*/) /*Discrete::prec*/;
+  variable[5] = CALL_kernel___Discrete___prec( variable[2] /*to*/)( variable[2] /*to*/) /*Discrete::prec*/;
   ATTR_range___Range____last(variable[4]) /*Range::_last*/ = variable[5];
   variable[4] = variable[0];
   ATTR_range___Range____after(variable[4]) /*Range::_after*/ =  variable[2] /*to*/;
@@ -218,7 +218,7 @@ void range___IteratorRange___next(val_t  self) {
   variable[2] = variable[0];
   variable[3] = variable[0];
   variable[3] = ATTR_range___IteratorRange____item(variable[3]) /*IteratorRange::_item*/;
-  variable[3] = ((kernel___Discrete___succ_t)CALL(variable[3],COLOR_kernel___Discrete___succ))(variable[3]) /*Discrete::succ*/;
+  variable[3] = CALL_kernel___Discrete___succ(variable[3])(variable[3]) /*Discrete::succ*/;
   ATTR_range___IteratorRange____item(variable[2]) /*IteratorRange::_item*/ = variable[3];
   return_label8: while(false);
   tracehead = trace.prev;
@@ -235,8 +235,8 @@ val_t range___IteratorRange___is_ok(val_t  self) {
   variable[2] = ATTR_range___IteratorRange____item(variable[2]) /*IteratorRange::_item*/;
   variable[3] = variable[0];
   variable[3] = ATTR_range___IteratorRange____range(variable[3]) /*IteratorRange::_range*/;
-  variable[3] = ((range___Range___after_t)CALL(variable[3],COLOR_range___Range___after))(variable[3]) /*Range::after*/;
-  variable[2] = ((kernel___Comparable_____l_t)CALL(variable[2],COLOR_kernel___Comparable_____l))(variable[2], variable[3]) /*Comparable::<*/;
+  variable[3] = CALL_range___Range___after(variable[3])(variable[3]) /*Range::after*/;
+  variable[2] = CALL_kernel___Comparable_____l(variable[2])(variable[2], variable[3]) /*Comparable::<*/;
   variable[1] = variable[2];
   goto return_label9;
   return_label9: while(false);
@@ -255,7 +255,7 @@ void range___IteratorRange___init(val_t  self, val_t  param0, int* init_table) {
   variable[3] = variable[0];
   ATTR_range___IteratorRange____range(variable[3]) /*IteratorRange::_range*/ =  variable[1] /*r*/;
   variable[3] = variable[0];
-  variable[4] = ((range___Range___first_t)CALL( variable[1] /*r*/,COLOR_abstract_collection___Collection___first))( variable[1] /*r*/) /*Range::first*/;
+  variable[4] = CALL_abstract_collection___Collection___first( variable[1] /*r*/)( variable[1] /*r*/) /*Range::first*/;
   ATTR_range___IteratorRange____item(variable[3]) /*IteratorRange::_item*/ = variable[4];
   return_label10: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IteratorRange].i] = 1;

@@ -31,83 +31,83 @@ val_t BOX_NativeFile(void * val);
 extern const classtable_elt_t VFT_NativeFileCapable[];
 extern const char *LOCATE_file;
 extern const int SFT_file[];
-#define COLOR_file___Object___printn SFT_file[0]
-#define COLOR_file___Object___print SFT_file[1]
-#define COLOR_file___Object___getc SFT_file[2]
-#define COLOR_file___Object___gets SFT_file[3]
-#define COLOR_file___Object___stdin SFT_file[4]
-#define COLOR_file___Object___stdout SFT_file[5]
-#define COLOR_file___Object___stderr SFT_file[6]
-#define ID_FStream SFT_file[7]
-#define COLOR_FStream SFT_file[8]
-#define COLOR_file___FStream____path SFT_file[9]
-#define COLOR_file___FStream____file SFT_file[10]
-#define INIT_TABLE_POS_FStream SFT_file[11]
-#define COLOR_file___FStream___path SFT_file[12]
-#define COLOR_file___FStream___file_stat SFT_file[13]
-#define ID_IFStream SFT_file[14]
-#define COLOR_IFStream SFT_file[15]
-#define COLOR_file___IFStream____end_reached SFT_file[16]
-#define INIT_TABLE_POS_IFStream SFT_file[17]
-#define COLOR_file___IFStream___reopen SFT_file[18]
-#define COLOR_file___IFStream___open SFT_file[19]
-#define COLOR_file___IFStream___init SFT_file[20]
-#define COLOR_file___IFStream___without_file SFT_file[21]
-#define ID_OFStream SFT_file[22]
-#define COLOR_OFStream SFT_file[23]
-#define COLOR_file___OFStream____writable SFT_file[24]
-#define INIT_TABLE_POS_OFStream SFT_file[25]
-#define COLOR_file___OFStream___write_native SFT_file[26]
-#define COLOR_file___OFStream___open SFT_file[27]
-#define COLOR_file___OFStream___init SFT_file[28]
-#define COLOR_file___OFStream___without_file SFT_file[29]
-#define ID_Stdin SFT_file[30]
-#define COLOR_Stdin SFT_file[31]
-#define INIT_TABLE_POS_Stdin SFT_file[32]
-#define COLOR_file___Stdin___init SFT_file[33]
-#define ID_Stdout SFT_file[34]
-#define COLOR_Stdout SFT_file[35]
-#define INIT_TABLE_POS_Stdout SFT_file[36]
-#define COLOR_file___Stdout___init SFT_file[37]
-#define ID_Stderr SFT_file[38]
-#define COLOR_Stderr SFT_file[39]
-#define INIT_TABLE_POS_Stderr SFT_file[40]
-#define COLOR_file___Stderr___init SFT_file[41]
-#define COLOR_file___String___file_exists SFT_file[42]
-#define COLOR_file___String___file_stat SFT_file[43]
-#define COLOR_file___String___file_delete SFT_file[44]
-#define COLOR_file___String___strip_extension SFT_file[45]
-#define COLOR_file___String___basename SFT_file[46]
-#define COLOR_file___String___dirname SFT_file[47]
-#define COLOR_file___String___file_path SFT_file[48]
-#define COLOR_file___String___mkdir SFT_file[49]
-#define COLOR_file___NativeString___file_exists SFT_file[50]
-#define COLOR_file___NativeString___file_stat SFT_file[51]
-#define COLOR_file___NativeString___file_mkdir SFT_file[52]
-#define COLOR_file___NativeString___file_delete SFT_file[53]
-#define ID_FileStat SFT_file[54]
-#define COLOR_FileStat SFT_file[55]
-#define INIT_TABLE_POS_FileStat SFT_file[56]
-#define COLOR_file___FileStat___mode SFT_file[57]
-#define COLOR_file___FileStat___atime SFT_file[58]
-#define COLOR_file___FileStat___ctime SFT_file[59]
-#define COLOR_file___FileStat___mtime SFT_file[60]
-#define COLOR_file___FileStat___size SFT_file[61]
-#define ID_NativeFile SFT_file[62]
-#define COLOR_NativeFile SFT_file[63]
-#define INIT_TABLE_POS_NativeFile SFT_file[64]
-#define COLOR_file___NativeFile___io_read SFT_file[65]
-#define COLOR_file___NativeFile___io_write SFT_file[66]
-#define COLOR_file___NativeFile___io_close SFT_file[67]
-#define COLOR_file___NativeFile___file_stat SFT_file[68]
-#define ID_NativeFileCapable SFT_file[69]
-#define COLOR_NativeFileCapable SFT_file[70]
-#define INIT_TABLE_POS_NativeFileCapable SFT_file[71]
-#define COLOR_file___NativeFileCapable___io_open_read SFT_file[72]
-#define COLOR_file___NativeFileCapable___io_open_write SFT_file[73]
-#define COLOR_file___NativeFileCapable___native_stdin SFT_file[74]
-#define COLOR_file___NativeFileCapable___native_stdout SFT_file[75]
-#define COLOR_file___NativeFileCapable___native_stderr SFT_file[76]
+#define CALL_file___Object___printn(recv) ((file___Object___printn_t)CALL((recv), (SFT_file[0] + 0)))
+#define CALL_file___Object___print(recv) ((file___Object___print_t)CALL((recv), (SFT_file[0] + 1)))
+#define CALL_file___Object___getc(recv) ((file___Object___getc_t)CALL((recv), (SFT_file[0] + 2)))
+#define CALL_file___Object___gets(recv) ((file___Object___gets_t)CALL((recv), (SFT_file[0] + 3)))
+#define CALL_file___Object___stdin(recv) ((file___Object___stdin_t)CALL((recv), (SFT_file[0] + 4)))
+#define CALL_file___Object___stdout(recv) ((file___Object___stdout_t)CALL((recv), (SFT_file[0] + 5)))
+#define CALL_file___Object___stderr(recv) ((file___Object___stderr_t)CALL((recv), (SFT_file[0] + 6)))
+#define ID_FStream (SFT_file[1])
+#define COLOR_FStream (SFT_file[2])
+#define ATTR_file___FStream____path(recv) ATTR(recv, (SFT_file[3] + 0))
+#define ATTR_file___FStream____file(recv) ATTR(recv, (SFT_file[3] + 1))
+#define INIT_TABLE_POS_FStream (SFT_file[4] + 0)
+#define CALL_file___FStream___path(recv) ((file___FStream___path_t)CALL((recv), (SFT_file[4] + 1)))
+#define CALL_file___FStream___file_stat(recv) ((file___FStream___file_stat_t)CALL((recv), (SFT_file[4] + 2)))
+#define ID_IFStream (SFT_file[5])
+#define COLOR_IFStream (SFT_file[6])
+#define ATTR_file___IFStream____end_reached(recv) ATTR(recv, (SFT_file[7] + 0))
+#define INIT_TABLE_POS_IFStream (SFT_file[8] + 0)
+#define CALL_file___IFStream___reopen(recv) ((file___IFStream___reopen_t)CALL((recv), (SFT_file[8] + 1)))
+#define CALL_file___IFStream___open(recv) ((file___IFStream___open_t)CALL((recv), (SFT_file[8] + 2)))
+#define CALL_file___IFStream___init(recv) ((file___IFStream___init_t)CALL((recv), (SFT_file[8] + 3)))
+#define CALL_file___IFStream___without_file(recv) ((file___IFStream___without_file_t)CALL((recv), (SFT_file[8] + 4)))
+#define ID_OFStream (SFT_file[9])
+#define COLOR_OFStream (SFT_file[10])
+#define ATTR_file___OFStream____writable(recv) ATTR(recv, (SFT_file[11] + 0))
+#define INIT_TABLE_POS_OFStream (SFT_file[12] + 0)
+#define CALL_file___OFStream___write_native(recv) ((file___OFStream___write_native_t)CALL((recv), (SFT_file[12] + 1)))
+#define CALL_file___OFStream___open(recv) ((file___OFStream___open_t)CALL((recv), (SFT_file[12] + 2)))
+#define CALL_file___OFStream___init(recv) ((file___OFStream___init_t)CALL((recv), (SFT_file[12] + 3)))
+#define CALL_file___OFStream___without_file(recv) ((file___OFStream___without_file_t)CALL((recv), (SFT_file[12] + 4)))
+#define ID_Stdin (SFT_file[13])
+#define COLOR_Stdin (SFT_file[14])
+#define INIT_TABLE_POS_Stdin (SFT_file[15] + 0)
+#define CALL_file___Stdin___init(recv) ((file___Stdin___init_t)CALL((recv), (SFT_file[15] + 1)))
+#define ID_Stdout (SFT_file[16])
+#define COLOR_Stdout (SFT_file[17])
+#define INIT_TABLE_POS_Stdout (SFT_file[18] + 0)
+#define CALL_file___Stdout___init(recv) ((file___Stdout___init_t)CALL((recv), (SFT_file[18] + 1)))
+#define ID_Stderr (SFT_file[19])
+#define COLOR_Stderr (SFT_file[20])
+#define INIT_TABLE_POS_Stderr (SFT_file[21] + 0)
+#define CALL_file___Stderr___init(recv) ((file___Stderr___init_t)CALL((recv), (SFT_file[21] + 1)))
+#define CALL_file___String___file_exists(recv) ((file___String___file_exists_t)CALL((recv), (SFT_file[22] + 0)))
+#define CALL_file___String___file_stat(recv) ((file___String___file_stat_t)CALL((recv), (SFT_file[22] + 1)))
+#define CALL_file___String___file_delete(recv) ((file___String___file_delete_t)CALL((recv), (SFT_file[22] + 2)))
+#define CALL_file___String___strip_extension(recv) ((file___String___strip_extension_t)CALL((recv), (SFT_file[22] + 3)))
+#define CALL_file___String___basename(recv) ((file___String___basename_t)CALL((recv), (SFT_file[22] + 4)))
+#define CALL_file___String___dirname(recv) ((file___String___dirname_t)CALL((recv), (SFT_file[22] + 5)))
+#define CALL_file___String___file_path(recv) ((file___String___file_path_t)CALL((recv), (SFT_file[22] + 6)))
+#define CALL_file___String___mkdir(recv) ((file___String___mkdir_t)CALL((recv), (SFT_file[22] + 7)))
+#define CALL_file___NativeString___file_exists(recv) ((file___NativeString___file_exists_t)CALL((recv), (SFT_file[23] + 0)))
+#define CALL_file___NativeString___file_stat(recv) ((file___NativeString___file_stat_t)CALL((recv), (SFT_file[23] + 1)))
+#define CALL_file___NativeString___file_mkdir(recv) ((file___NativeString___file_mkdir_t)CALL((recv), (SFT_file[23] + 2)))
+#define CALL_file___NativeString___file_delete(recv) ((file___NativeString___file_delete_t)CALL((recv), (SFT_file[23] + 3)))
+#define ID_FileStat (SFT_file[24])
+#define COLOR_FileStat (SFT_file[25])
+#define INIT_TABLE_POS_FileStat (SFT_file[26] + 0)
+#define CALL_file___FileStat___mode(recv) ((file___FileStat___mode_t)CALL((recv), (SFT_file[26] + 1)))
+#define CALL_file___FileStat___atime(recv) ((file___FileStat___atime_t)CALL((recv), (SFT_file[26] + 2)))
+#define CALL_file___FileStat___ctime(recv) ((file___FileStat___ctime_t)CALL((recv), (SFT_file[26] + 3)))
+#define CALL_file___FileStat___mtime(recv) ((file___FileStat___mtime_t)CALL((recv), (SFT_file[26] + 4)))
+#define CALL_file___FileStat___size(recv) ((file___FileStat___size_t)CALL((recv), (SFT_file[26] + 5)))
+#define ID_NativeFile (SFT_file[27])
+#define COLOR_NativeFile (SFT_file[28])
+#define INIT_TABLE_POS_NativeFile (SFT_file[29] + 0)
+#define CALL_file___NativeFile___io_read(recv) ((file___NativeFile___io_read_t)CALL((recv), (SFT_file[29] + 1)))
+#define CALL_file___NativeFile___io_write(recv) ((file___NativeFile___io_write_t)CALL((recv), (SFT_file[29] + 2)))
+#define CALL_file___NativeFile___io_close(recv) ((file___NativeFile___io_close_t)CALL((recv), (SFT_file[29] + 3)))
+#define CALL_file___NativeFile___file_stat(recv) ((file___NativeFile___file_stat_t)CALL((recv), (SFT_file[29] + 4)))
+#define ID_NativeFileCapable (SFT_file[30])
+#define COLOR_NativeFileCapable (SFT_file[31])
+#define INIT_TABLE_POS_NativeFileCapable (SFT_file[32] + 0)
+#define CALL_file___NativeFileCapable___io_open_read(recv) ((file___NativeFileCapable___io_open_read_t)CALL((recv), (SFT_file[32] + 1)))
+#define CALL_file___NativeFileCapable___io_open_write(recv) ((file___NativeFileCapable___io_open_write_t)CALL((recv), (SFT_file[32] + 2)))
+#define CALL_file___NativeFileCapable___native_stdin(recv) ((file___NativeFileCapable___native_stdin_t)CALL((recv), (SFT_file[32] + 3)))
+#define CALL_file___NativeFileCapable___native_stdout(recv) ((file___NativeFileCapable___native_stdout_t)CALL((recv), (SFT_file[32] + 4)))
+#define CALL_file___NativeFileCapable___native_stderr(recv) ((file___NativeFileCapable___native_stderr_t)CALL((recv), (SFT_file[32] + 5)))
 typedef void (* file___Object___printn_t)(val_t  self, val_t  param0);
 void file___Object___printn(val_t  self, val_t  param0);
 #define LOCATE_file___Object___printn "file::Object::printn"
@@ -130,11 +130,9 @@ typedef val_t (* file___Object___stderr_t)(val_t  self);
 val_t file___Object___stderr(val_t  self);
 #define LOCATE_file___Object___stderr "file::Object::stderr"
 val_t NEW_FStream_stream___IOS___init();
-#define ATTR_file___FStream____path(recv) ATTR(recv, COLOR_file___FStream____path)
 typedef val_t (* file___FStream___path_t)(val_t  self);
 val_t file___FStream___path(val_t  self);
 #define LOCATE_file___FStream___path "file::FStream::path"
-#define ATTR_file___FStream____file(recv) ATTR(recv, COLOR_file___FStream____file)
 typedef val_t (* file___FStream___file_stat_t)(val_t  self);
 val_t file___FStream___file_stat(val_t  self);
 #define LOCATE_file___FStream___file_stat "file::FStream::file_stat"
@@ -150,7 +148,6 @@ val_t file___IFStream___end_reached(val_t  self);
 typedef void (* file___IFStream___reopen_t)(val_t  self);
 void file___IFStream___reopen(val_t  self);
 #define LOCATE_file___IFStream___reopen "file::IFStream::reopen"
-#define ATTR_file___IFStream____end_reached(recv) ATTR(recv, COLOR_file___IFStream____end_reached)
 typedef void (* file___IFStream___open_t)(val_t  self, val_t  param0, int* init_table);
 void file___IFStream___open(val_t  self, val_t  param0, int* init_table);
 #define LOCATE_file___IFStream___open "file::IFStream::open"
@@ -172,7 +169,6 @@ void file___OFStream___write(val_t  self, val_t  param0);
 typedef val_t (* file___OFStream___is_writable_t)(val_t  self);
 val_t file___OFStream___is_writable(val_t  self);
 #define LOCATE_file___OFStream___is_writable "file::OFStream::(stream::OStream::is_writable)"
-#define ATTR_file___OFStream____writable(recv) ATTR(recv, COLOR_file___OFStream____writable)
 typedef void (* file___OFStream___write_native_t)(val_t  self, val_t  param0, val_t  param1);
 void file___OFStream___write_native(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_file___OFStream___write_native "file::OFStream::write_native"

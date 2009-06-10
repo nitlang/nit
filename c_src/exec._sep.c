@@ -9,7 +9,7 @@ val_t exec___Process___id(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_exec___Process____data(variable[2]) /*Process::_data*/;
-  variable[2] = ((exec___NativeProcess___id_t)CALL(variable[2],COLOR_exec___NativeProcess___id))(variable[2]) /*NativeProcess::id*/;
+  variable[2] = CALL_exec___NativeProcess___id(variable[2])(variable[2]) /*NativeProcess::id*/;
   variable[1] = variable[2];
   goto return_label0;
   return_label0: while(false);
@@ -25,7 +25,7 @@ val_t exec___Process___is_finished(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_exec___Process____data(variable[2]) /*Process::_data*/;
-  variable[2] = ((exec___NativeProcess___is_finished_t)CALL(variable[2],COLOR_exec___NativeProcess___is_finished))(variable[2]) /*NativeProcess::is_finished*/;
+  variable[2] = CALL_exec___NativeProcess___is_finished(variable[2])(variable[2]) /*NativeProcess::is_finished*/;
   variable[1] = variable[2];
   goto return_label1;
   return_label1: while(false);
@@ -41,9 +41,9 @@ void exec___Process___wait(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_exec___Process____data(variable[2]) /*Process::_data*/;
-  ((exec___NativeProcess___wait_t)CALL(variable[2],COLOR_exec___NativeProcess___wait))(variable[2]) /*NativeProcess::wait*/;
+  CALL_exec___NativeProcess___wait(variable[2])(variable[2]) /*NativeProcess::wait*/;
   variable[2] = variable[0];
-  variable[2] = ((exec___Process___is_finished_t)CALL(variable[2],COLOR_exec___Process___is_finished))(variable[2]) /*Process::is_finished*/;
+  variable[2] = CALL_exec___Process___is_finished(variable[2])(variable[2]) /*Process::is_finished*/;
   if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_exec___Process___wait, LOCATE_exec, 33); nit_exit(1);}
   return_label2: while(false);
   tracehead = trace.prev;
@@ -57,11 +57,11 @@ val_t exec___Process___status(val_t  self) {
   trace.file = LOCATE_exec;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((exec___Process___is_finished_t)CALL(variable[2],COLOR_exec___Process___is_finished))(variable[2]) /*Process::is_finished*/;
+  variable[2] = CALL_exec___Process___is_finished(variable[2])(variable[2]) /*Process::is_finished*/;
   if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_exec___Process___status, LOCATE_exec, 39); nit_exit(1);}
   variable[2] = variable[0];
   variable[2] = ATTR_exec___Process____data(variable[2]) /*Process::_data*/;
-  variable[2] = ((exec___NativeProcess___status_t)CALL(variable[2],COLOR_exec___NativeProcess___status))(variable[2]) /*NativeProcess::status*/;
+  variable[2] = CALL_exec___NativeProcess___status(variable[2])(variable[2]) /*NativeProcess::status*/;
   variable[1] = variable[2];
   goto return_label3;
   return_label3: while(false);
@@ -78,7 +78,7 @@ void exec___Process___kill(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_exec___Process____data(variable[3]) /*Process::_data*/;
-  ((exec___NativeProcess___kill_t)CALL(variable[3],COLOR_exec___NativeProcess___kill))(variable[3],  variable[1] /*signal*/) /*NativeProcess::kill*/;
+  CALL_exec___NativeProcess___kill(variable[3])(variable[3],  variable[1] /*signal*/) /*NativeProcess::kill*/;
   return_label4: while(false);
   tracehead = trace.prev;
   return;
@@ -91,7 +91,7 @@ void exec___Process___term(val_t  self) {
   trace.file = LOCATE_exec;
   variable[0] =  self;
   variable[2] = variable[0];
-  ((exec___Process___kill_t)CALL(variable[2],COLOR_exec___Process___kill))(variable[2],  TAG_Int(15)) /*Process::kill*/;
+  CALL_exec___Process___kill(variable[2])(variable[2],  TAG_Int(15)) /*Process::kill*/;
   return_label5: while(false);
   tracehead = trace.prev;
   return;
@@ -109,7 +109,7 @@ void exec___Process___init(val_t  self, val_t  param0, val_t  param1, int* init_
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Process].i]) return;
   variable[4] = variable[0];
-  ((exec___Process___execute_t)CALL(variable[4],COLOR_exec___Process___execute))(variable[4],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(0), init_table /*YYY*/) /*Process::execute*/;
+  CALL_exec___Process___execute(variable[4])(variable[4],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(0), init_table /*YYY*/) /*Process::execute*/;
   return_label6: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Process].i] = 1;
   tracehead = trace.prev;
@@ -125,7 +125,7 @@ void exec___Process___init_(val_t  self, val_t  param0, int* init_table) {
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Process].i]) return;
   variable[3] = variable[0];
-  ((exec___Process___execute_t)CALL(variable[3],COLOR_exec___Process___execute))(variable[3],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(0), init_table /*YYY*/) /*Process::execute*/;
+  CALL_exec___Process___execute(variable[3])(variable[3],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(0), init_table /*YYY*/) /*Process::execute*/;
   return_label7: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Process].i] = 1;
   tracehead = trace.prev;
@@ -145,29 +145,29 @@ void exec___Process___execute(val_t  self, val_t  param0, val_t  param1, val_t  
   variable[6] = NEW_String_string___String___init(); /*new String*/
   variable[5] = variable[6];
   variable[6] =  TAG_Int(1);
-  ((string___String___append_t)CALL( variable[5] /*args*/,COLOR_abstract_collection___IndexedCollection___append))( variable[5] /*args*/,  variable[1] /*command*/) /*String::append*/;
-  variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[2] /*arguments*/ ==  NIT_NULL /*null*/) || (( variable[2] /*arguments*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[2] /*arguments*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*arguments*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[2] /*arguments*/,COLOR_kernel___Object_____eqeq))( variable[2] /*arguments*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  CALL_abstract_collection___IndexedCollection___append( variable[5] /*args*/)( variable[5] /*args*/,  variable[1] /*command*/) /*String::append*/;
+  variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[2] /*arguments*/ ==  NIT_NULL /*null*/) || (( variable[2] /*arguments*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[2] /*arguments*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*arguments*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[2] /*arguments*/)( variable[2] /*arguments*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[7])) { /*if*/
-    variable[7] = ((array___AbstractArray___iterator_t)CALL( variable[2] /*arguments*/,COLOR_abstract_collection___Collection___iterator))( variable[2] /*arguments*/) /*AbstractArray::iterator*/;
+    variable[7] = CALL_abstract_collection___Collection___iterator( variable[2] /*arguments*/)( variable[2] /*arguments*/) /*AbstractArray::iterator*/;
     while (true) { /*for*/
-      variable[8] = ((array___ArrayIterator___is_ok_t)CALL(variable[7],COLOR_abstract_collection___Iterator___is_ok))(variable[7]) /*ArrayIterator::is_ok*/;
+      variable[8] = CALL_abstract_collection___Iterator___is_ok(variable[7])(variable[7]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[8])) break; /*for*/
-      variable[8] = ((array___ArrayIterator___item_t)CALL(variable[7],COLOR_abstract_collection___Iterator___item))(variable[7]) /*ArrayIterator::item*/;
+      variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*ArrayIterator::item*/;
       variable[9] = variable[8];
-      ((string___String___add_t)CALL( variable[5] /*args*/,COLOR_abstract_collection___SimpleCollection___add))( variable[5] /*args*/,  TAG_Char('\0')) /*String::add*/;
-      ((string___String___append_t)CALL( variable[5] /*args*/,COLOR_abstract_collection___IndexedCollection___append))( variable[5] /*args*/,  variable[9] /*a*/) /*String::append*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[5] /*args*/)( variable[5] /*args*/,  TAG_Char('\0')) /*String::add*/;
+      CALL_abstract_collection___IndexedCollection___append( variable[5] /*args*/)( variable[5] /*args*/,  variable[9] /*a*/) /*String::append*/;
       continue_9: while(0);
-      ((array___ArrayIterator___next_t)CALL(variable[7],COLOR_abstract_collection___Iterator___next))(variable[7]) /*ArrayIterator::next*/;
+      CALL_abstract_collection___Iterator___next(variable[7])(variable[7]) /*ArrayIterator::next*/;
     }
     break_9: while(0);
-    variable[7] = ((array___AbstractArray___length_t)CALL( variable[2] /*arguments*/,COLOR_abstract_collection___Collection___length))( variable[2] /*arguments*/) /*AbstractArray::length*/;
+    variable[7] = CALL_abstract_collection___Collection___length( variable[2] /*arguments*/)( variable[2] /*arguments*/) /*AbstractArray::length*/;
     variable[6] = TAG_Int(UNTAG_Int(variable[6])+UNTAG_Int(variable[7])) /*l*/;
   }
   variable[7] = variable[0];
   variable[8] = variable[0];
-  variable[9] = ((string___String___to_cstring_t)CALL( variable[1] /*command*/,COLOR_string___String___to_cstring))( variable[1] /*command*/) /*String::to_cstring*/;
-  variable[10] = ((string___String___to_cstring_t)CALL( variable[5] /*args*/,COLOR_string___String___to_cstring))( variable[5] /*args*/) /*String::to_cstring*/;
-  variable[8] = ((exec___Process___basic_exec_execute_t)CALL(variable[8],COLOR_exec___Process___basic_exec_execute))(variable[8], variable[9], variable[10],  variable[6] /*l*/,  variable[3] /*pipeflags*/) /*Process::basic_exec_execute*/;
+  variable[9] = CALL_string___String___to_cstring( variable[1] /*command*/)( variable[1] /*command*/) /*String::to_cstring*/;
+  variable[10] = CALL_string___String___to_cstring( variable[5] /*args*/)( variable[5] /*args*/) /*String::to_cstring*/;
+  variable[8] = CALL_exec___Process___basic_exec_execute(variable[8])(variable[8], variable[9], variable[10],  variable[6] /*l*/,  variable[3] /*pipeflags*/) /*Process::basic_exec_execute*/;
   ATTR_exec___Process____data(variable[7]) /*Process::_data*/ = variable[8];
   return_label8: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Process].i] = 1;
@@ -192,7 +192,7 @@ void exec___IProcess___close(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_exec___IProcess____in(variable[2]) /*IProcess::_in*/;
-  ((stream___FDStream___close_t)CALL(variable[2],COLOR_stream___IOS___close))(variable[2]) /*FDStream::close*/;
+  CALL_stream___IOS___close(variable[2])(variable[2]) /*FDStream::close*/;
   return_label10: while(false);
   tracehead = trace.prev;
   return;
@@ -206,7 +206,7 @@ val_t exec___IProcess___read_char(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_exec___IProcess____in(variable[2]) /*IProcess::_in*/;
-  variable[2] = ((stream___FDIStream___read_char_t)CALL(variable[2],COLOR_stream___IStream___read_char))(variable[2]) /*FDIStream::read_char*/;
+  variable[2] = CALL_stream___IStream___read_char(variable[2])(variable[2]) /*FDIStream::read_char*/;
   variable[1] = variable[2];
   goto return_label11;
   return_label11: while(false);
@@ -222,7 +222,7 @@ val_t exec___IProcess___eof(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_exec___IProcess____in(variable[2]) /*IProcess::_in*/;
-  variable[2] = ((stream___FDIStream___eof_t)CALL(variable[2],COLOR_stream___IStream___eof))(variable[2]) /*FDIStream::eof*/;
+  variable[2] = CALL_stream___IStream___eof(variable[2])(variable[2]) /*FDIStream::eof*/;
   variable[1] = variable[2];
   goto return_label12;
   return_label12: while(false);
@@ -242,11 +242,11 @@ void exec___IProcess___init(val_t  self, val_t  param0, val_t  param1, int* init
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IProcess].i]) return;
   variable[4] = variable[0];
-  ((exec___Process___execute_t)CALL(variable[4],COLOR_exec___Process___execute))(variable[4],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(2), init_table /*YYY*/) /*Process::execute*/;
+  CALL_exec___Process___execute(variable[4])(variable[4],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(2), init_table /*YYY*/) /*Process::execute*/;
   variable[4] = variable[0];
   variable[5] = variable[0];
   variable[5] = ATTR_exec___Process____data(variable[5]) /*Process::_data*/;
-  variable[5] = ((exec___NativeProcess___out_fd_t)CALL(variable[5],COLOR_exec___NativeProcess___out_fd))(variable[5]) /*NativeProcess::out_fd*/;
+  variable[5] = CALL_exec___NativeProcess___out_fd(variable[5])(variable[5]) /*NativeProcess::out_fd*/;
   variable[6] = NEW_FDIStream_stream___FDIStream___init(variable[5]); /*new FDIStream*/
   variable[5] = variable[6];
   ATTR_exec___IProcess____in(variable[4]) /*IProcess::_in*/ = variable[5];
@@ -265,11 +265,11 @@ void exec___IProcess___init_(val_t  self, val_t  param0, int* init_table) {
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IProcess].i]) return;
   variable[3] = variable[0];
-  ((exec___Process___execute_t)CALL(variable[3],COLOR_exec___Process___execute))(variable[3],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(2), init_table /*YYY*/) /*Process::execute*/;
+  CALL_exec___Process___execute(variable[3])(variable[3],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(2), init_table /*YYY*/) /*Process::execute*/;
   variable[3] = variable[0];
   variable[4] = variable[0];
   variable[4] = ATTR_exec___Process____data(variable[4]) /*Process::_data*/;
-  variable[4] = ((exec___NativeProcess___out_fd_t)CALL(variable[4],COLOR_exec___NativeProcess___out_fd))(variable[4]) /*NativeProcess::out_fd*/;
+  variable[4] = CALL_exec___NativeProcess___out_fd(variable[4])(variable[4]) /*NativeProcess::out_fd*/;
   variable[5] = NEW_FDIStream_stream___FDIStream___init(variable[4]); /*new FDIStream*/
   variable[4] = variable[5];
   ATTR_exec___IProcess____in(variable[3]) /*IProcess::_in*/ = variable[4];
@@ -287,7 +287,7 @@ void exec___OProcess___close(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_exec___OProcess____out(variable[2]) /*OProcess::_out*/;
-  ((stream___IOS___close_t)CALL(variable[2],COLOR_stream___IOS___close))(variable[2]) /*IOS::close*/;
+  CALL_stream___IOS___close(variable[2])(variable[2]) /*IOS::close*/;
   return_label15: while(false);
   tracehead = trace.prev;
   return;
@@ -302,7 +302,7 @@ void exec___OProcess___write(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_exec___OProcess____out(variable[3]) /*OProcess::_out*/;
-  ((stream___OStream___write_t)CALL(variable[3],COLOR_stream___OStream___write))(variable[3],  variable[1] /*s*/) /*OStream::write*/;
+  CALL_stream___OStream___write(variable[3])(variable[3],  variable[1] /*s*/) /*OStream::write*/;
   return_label16: while(false);
   tracehead = trace.prev;
   return;
@@ -316,7 +316,7 @@ val_t exec___OProcess___is_writable(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_exec___OProcess____out(variable[2]) /*OProcess::_out*/;
-  variable[2] = ((stream___OStream___is_writable_t)CALL(variable[2],COLOR_stream___OStream___is_writable))(variable[2]) /*OStream::is_writable*/;
+  variable[2] = CALL_stream___OStream___is_writable(variable[2])(variable[2]) /*OStream::is_writable*/;
   variable[1] = variable[2];
   goto return_label17;
   return_label17: while(false);
@@ -336,11 +336,11 @@ void exec___OProcess___init(val_t  self, val_t  param0, val_t  param1, int* init
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OProcess].i]) return;
   variable[4] = variable[0];
-  ((exec___Process___execute_t)CALL(variable[4],COLOR_exec___Process___execute))(variable[4],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(1), init_table /*YYY*/) /*Process::execute*/;
+  CALL_exec___Process___execute(variable[4])(variable[4],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(1), init_table /*YYY*/) /*Process::execute*/;
   variable[4] = variable[0];
   variable[5] = variable[0];
   variable[5] = ATTR_exec___Process____data(variable[5]) /*Process::_data*/;
-  variable[5] = ((exec___NativeProcess___in_fd_t)CALL(variable[5],COLOR_exec___NativeProcess___in_fd))(variable[5]) /*NativeProcess::in_fd*/;
+  variable[5] = CALL_exec___NativeProcess___in_fd(variable[5])(variable[5]) /*NativeProcess::in_fd*/;
   variable[6] = NEW_FDOStream_stream___FDOStream___init(variable[5]); /*new FDOStream*/
   variable[5] = variable[6];
   ATTR_exec___OProcess____out(variable[4]) /*OProcess::_out*/ = variable[5];
@@ -359,11 +359,11 @@ void exec___OProcess___init_(val_t  self, val_t  param0, int* init_table) {
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OProcess].i]) return;
   variable[3] = variable[0];
-  ((exec___Process___execute_t)CALL(variable[3],COLOR_exec___Process___execute))(variable[3],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(1), init_table /*YYY*/) /*Process::execute*/;
+  CALL_exec___Process___execute(variable[3])(variable[3],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(1), init_table /*YYY*/) /*Process::execute*/;
   variable[3] = variable[0];
   variable[4] = variable[0];
   variable[4] = ATTR_exec___Process____data(variable[4]) /*Process::_data*/;
-  variable[4] = ((exec___NativeProcess___in_fd_t)CALL(variable[4],COLOR_exec___NativeProcess___in_fd))(variable[4]) /*NativeProcess::in_fd*/;
+  variable[4] = CALL_exec___NativeProcess___in_fd(variable[4])(variable[4]) /*NativeProcess::in_fd*/;
   variable[5] = NEW_FDOStream_stream___FDOStream___init(variable[4]); /*new FDOStream*/
   variable[4] = variable[5];
   ATTR_exec___OProcess____out(variable[3]) /*OProcess::_out*/ = variable[4];
@@ -381,10 +381,10 @@ void exec___IOProcess___close(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_exec___IProcess____in(variable[2]) /*IProcess::_in*/;
-  ((stream___FDStream___close_t)CALL(variable[2],COLOR_stream___IOS___close))(variable[2]) /*FDStream::close*/;
+  CALL_stream___IOS___close(variable[2])(variable[2]) /*FDStream::close*/;
   variable[2] = variable[0];
   variable[2] = ATTR_exec___OProcess____out(variable[2]) /*OProcess::_out*/;
-  ((stream___IOS___close_t)CALL(variable[2],COLOR_stream___IOS___close))(variable[2]) /*IOS::close*/;
+  CALL_stream___IOS___close(variable[2])(variable[2]) /*IOS::close*/;
   return_label20: while(false);
   tracehead = trace.prev;
   return;
@@ -402,20 +402,20 @@ void exec___IOProcess___init(val_t  self, val_t  param0, val_t  param1, int* ini
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IOProcess].i]) return;
   variable[4] = variable[0];
-  ((exec___Process___execute_t)CALL(variable[4],COLOR_exec___Process___execute))(variable[4],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(3), init_table /*YYY*/) /*Process::execute*/;
-  ((exec___IProcess___init_t)CALL(variable[0],COLOR_exec___IProcess___init))(variable[0], variable[1], variable[2], init_table /*YYY*/) /*IProcess::init*/;
-  ((exec___OProcess___init_t)CALL(variable[0],COLOR_exec___OProcess___init))(variable[0], variable[1], variable[2], init_table /*YYY*/) /*OProcess::init*/;
+  CALL_exec___Process___execute(variable[4])(variable[4],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(3), init_table /*YYY*/) /*Process::execute*/;
+  CALL_exec___IProcess___init(variable[0])(variable[0], variable[1], variable[2], init_table /*YYY*/) /*IProcess::init*/;
+  CALL_exec___OProcess___init(variable[0])(variable[0], variable[1], variable[2], init_table /*YYY*/) /*OProcess::init*/;
   variable[4] = variable[0];
   variable[5] = variable[0];
   variable[5] = ATTR_exec___Process____data(variable[5]) /*Process::_data*/;
-  variable[5] = ((exec___NativeProcess___out_fd_t)CALL(variable[5],COLOR_exec___NativeProcess___out_fd))(variable[5]) /*NativeProcess::out_fd*/;
+  variable[5] = CALL_exec___NativeProcess___out_fd(variable[5])(variable[5]) /*NativeProcess::out_fd*/;
   variable[6] = NEW_FDIStream_stream___FDIStream___init(variable[5]); /*new FDIStream*/
   variable[5] = variable[6];
   ATTR_exec___IProcess____in(variable[4]) /*IProcess::_in*/ = variable[5];
   variable[4] = variable[0];
   variable[5] = variable[0];
   variable[5] = ATTR_exec___Process____data(variable[5]) /*Process::_data*/;
-  variable[5] = ((exec___NativeProcess___in_fd_t)CALL(variable[5],COLOR_exec___NativeProcess___in_fd))(variable[5]) /*NativeProcess::in_fd*/;
+  variable[5] = CALL_exec___NativeProcess___in_fd(variable[5])(variable[5]) /*NativeProcess::in_fd*/;
   variable[6] = NEW_FDOStream_stream___FDOStream___init(variable[5]); /*new FDOStream*/
   variable[5] = variable[6];
   ATTR_exec___OProcess____out(variable[4]) /*OProcess::_out*/ = variable[5];
@@ -434,20 +434,20 @@ void exec___IOProcess___init_(val_t  self, val_t  param0, int* init_table) {
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IOProcess].i]) return;
   variable[3] = variable[0];
-  ((exec___Process___execute_t)CALL(variable[3],COLOR_exec___Process___execute))(variable[3],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(3), init_table /*YYY*/) /*Process::execute*/;
-  ((exec___IProcess___init__t)CALL(variable[0],COLOR_exec___IProcess___init_))(variable[0], variable[1], init_table /*YYY*/) /*IProcess::init_*/;
-  ((exec___OProcess___init__t)CALL(variable[0],COLOR_exec___OProcess___init_))(variable[0], variable[1], init_table /*YYY*/) /*OProcess::init_*/;
+  CALL_exec___Process___execute(variable[3])(variable[3],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(3), init_table /*YYY*/) /*Process::execute*/;
+  CALL_exec___IProcess___init_(variable[0])(variable[0], variable[1], init_table /*YYY*/) /*IProcess::init_*/;
+  CALL_exec___OProcess___init_(variable[0])(variable[0], variable[1], init_table /*YYY*/) /*OProcess::init_*/;
   variable[3] = variable[0];
   variable[4] = variable[0];
   variable[4] = ATTR_exec___Process____data(variable[4]) /*Process::_data*/;
-  variable[4] = ((exec___NativeProcess___out_fd_t)CALL(variable[4],COLOR_exec___NativeProcess___out_fd))(variable[4]) /*NativeProcess::out_fd*/;
+  variable[4] = CALL_exec___NativeProcess___out_fd(variable[4])(variable[4]) /*NativeProcess::out_fd*/;
   variable[5] = NEW_FDIStream_stream___FDIStream___init(variable[4]); /*new FDIStream*/
   variable[4] = variable[5];
   ATTR_exec___IProcess____in(variable[3]) /*IProcess::_in*/ = variable[4];
   variable[3] = variable[0];
   variable[4] = variable[0];
   variable[4] = ATTR_exec___Process____data(variable[4]) /*Process::_data*/;
-  variable[4] = ((exec___NativeProcess___in_fd_t)CALL(variable[4],COLOR_exec___NativeProcess___in_fd))(variable[4]) /*NativeProcess::in_fd*/;
+  variable[4] = CALL_exec___NativeProcess___in_fd(variable[4])(variable[4]) /*NativeProcess::in_fd*/;
   variable[5] = NEW_FDOStream_stream___FDOStream___init(variable[4]); /*new FDOStream*/
   variable[4] = variable[5];
   ATTR_exec___OProcess____out(variable[3]) /*OProcess::_out*/ = variable[4];
@@ -464,8 +464,8 @@ val_t exec___Sys___system(val_t  self, val_t  param0) {
   trace.file = LOCATE_exec;
   variable[0] =  self;
   variable[1] =  param0;
-  variable[3] = ((string___String___to_cstring_t)CALL( variable[1] /*command*/,COLOR_string___String___to_cstring))( variable[1] /*command*/) /*String::to_cstring*/;
-  variable[3] = ((exec___NativeString___system_t)CALL(variable[3],COLOR_exec___NativeString___system))(variable[3]) /*NativeString::system*/;
+  variable[3] = CALL_string___String___to_cstring( variable[1] /*command*/)( variable[1] /*command*/) /*String::to_cstring*/;
+  variable[3] = CALL_exec___NativeString___system(variable[3])(variable[3]) /*NativeString::system*/;
   variable[2] = variable[3];
   goto return_label23;
   return_label23: while(false);

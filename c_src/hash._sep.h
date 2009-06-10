@@ -21,65 +21,65 @@ extern const classtable_elt_t VFT_HashSetNode[];
 extern const classtable_elt_t VFT_HashSetIterator[];
 extern const char *LOCATE_hash;
 extern const int SFT_hash[];
-#define COLOR_hash___Object___hash SFT_hash[0]
-#define ID_HashCollection SFT_hash[1]
-#define COLOR_HashCollection SFT_hash[2]
-#define COLOR_hash___HashCollection____array SFT_hash[3]
-#define COLOR_hash___HashCollection____capacity SFT_hash[4]
-#define COLOR_hash___HashCollection____length SFT_hash[5]
-#define COLOR_hash___HashCollection____first_item SFT_hash[6]
-#define COLOR_hash___HashCollection____last_item SFT_hash[7]
-#define COLOR_hash___HashCollection____last_accessed_index SFT_hash[8]
-#define COLOR_hash___HashCollection____last_accessed_key SFT_hash[9]
-#define INIT_TABLE_POS_HashCollection SFT_hash[10]
-#define COLOR_hash___HashCollection___first_item SFT_hash[11]
-#define COLOR_hash___HashCollection___index_at SFT_hash[12]
-#define COLOR_hash___HashCollection___store SFT_hash[13]
-#define COLOR_hash___HashCollection___remove_index SFT_hash[14]
-#define COLOR_hash___HashCollection___raz SFT_hash[15]
-#define COLOR_hash___HashCollection___enlarge SFT_hash[16]
-#define COLOR_hash___HashCollection___init SFT_hash[17]
-#define ID_HashNode SFT_hash[18]
-#define COLOR_HashNode SFT_hash[19]
-#define COLOR_hash___HashNode____next_item SFT_hash[20]
-#define COLOR_hash___HashNode____prev_item SFT_hash[21]
-#define INIT_TABLE_POS_HashNode SFT_hash[22]
-#define COLOR_hash___HashNode___key SFT_hash[23]
-#define COLOR_hash___HashNode___next_item SFT_hash[24]
-#define COLOR_hash___HashNode___next_item__eq SFT_hash[25]
-#define COLOR_hash___HashNode___prev_item SFT_hash[26]
-#define COLOR_hash___HashNode___prev_item__eq SFT_hash[27]
-#define COLOR_hash___HashNode___init SFT_hash[28]
-#define ID_HashMap SFT_hash[29]
-#define COLOR_HashMap SFT_hash[30]
-#define INIT_TABLE_POS_HashMap SFT_hash[31]
-#define COLOR_hash___HashMap___init SFT_hash[32]
-#define ID_HashMapNode SFT_hash[33]
-#define COLOR_HashMapNode SFT_hash[34]
-#define INIT_TABLE_POS_HashMapNode SFT_hash[35]
-#define COLOR_hash___HashMapNode___init SFT_hash[36]
-#define ID_HashMapIterator SFT_hash[37]
-#define COLOR_HashMapIterator SFT_hash[38]
-#define COLOR_hash___HashMapIterator____map SFT_hash[39]
-#define COLOR_hash___HashMapIterator____node SFT_hash[40]
-#define INIT_TABLE_POS_HashMapIterator SFT_hash[41]
-#define COLOR_hash___HashMapIterator___init SFT_hash[42]
-#define ID_HashSet SFT_hash[43]
-#define COLOR_HashSet SFT_hash[44]
-#define INIT_TABLE_POS_HashSet SFT_hash[45]
-#define COLOR_hash___HashSet___init SFT_hash[46]
-#define ID_HashSetNode SFT_hash[47]
-#define COLOR_HashSetNode SFT_hash[48]
-#define COLOR_hash___HashSetNode____key SFT_hash[49]
-#define INIT_TABLE_POS_HashSetNode SFT_hash[50]
-#define COLOR_hash___HashSetNode___key__eq SFT_hash[51]
-#define COLOR_hash___HashSetNode___init SFT_hash[52]
-#define ID_HashSetIterator SFT_hash[53]
-#define COLOR_HashSetIterator SFT_hash[54]
-#define COLOR_hash___HashSetIterator____set SFT_hash[55]
-#define COLOR_hash___HashSetIterator____node SFT_hash[56]
-#define INIT_TABLE_POS_HashSetIterator SFT_hash[57]
-#define COLOR_hash___HashSetIterator___init SFT_hash[58]
+#define CALL_hash___Object___hash(recv) ((hash___Object___hash_t)CALL((recv), (SFT_hash[0] + 0)))
+#define ID_HashCollection (SFT_hash[1])
+#define COLOR_HashCollection (SFT_hash[2])
+#define ATTR_hash___HashCollection____array(recv) ATTR(recv, (SFT_hash[3] + 0))
+#define ATTR_hash___HashCollection____capacity(recv) ATTR(recv, (SFT_hash[3] + 1))
+#define ATTR_hash___HashCollection____length(recv) ATTR(recv, (SFT_hash[3] + 2))
+#define ATTR_hash___HashCollection____first_item(recv) ATTR(recv, (SFT_hash[3] + 3))
+#define ATTR_hash___HashCollection____last_item(recv) ATTR(recv, (SFT_hash[3] + 4))
+#define ATTR_hash___HashCollection____last_accessed_index(recv) ATTR(recv, (SFT_hash[3] + 5))
+#define ATTR_hash___HashCollection____last_accessed_key(recv) ATTR(recv, (SFT_hash[3] + 6))
+#define INIT_TABLE_POS_HashCollection (SFT_hash[4] + 0)
+#define CALL_hash___HashCollection___first_item(recv) ((hash___HashCollection___first_item_t)CALL((recv), (SFT_hash[4] + 1)))
+#define CALL_hash___HashCollection___index_at(recv) ((hash___HashCollection___index_at_t)CALL((recv), (SFT_hash[4] + 2)))
+#define CALL_hash___HashCollection___store(recv) ((hash___HashCollection___store_t)CALL((recv), (SFT_hash[4] + 3)))
+#define CALL_hash___HashCollection___remove_index(recv) ((hash___HashCollection___remove_index_t)CALL((recv), (SFT_hash[4] + 4)))
+#define CALL_hash___HashCollection___raz(recv) ((hash___HashCollection___raz_t)CALL((recv), (SFT_hash[4] + 5)))
+#define CALL_hash___HashCollection___enlarge(recv) ((hash___HashCollection___enlarge_t)CALL((recv), (SFT_hash[4] + 6)))
+#define CALL_hash___HashCollection___init(recv) ((hash___HashCollection___init_t)CALL((recv), (SFT_hash[4] + 7)))
+#define ID_HashNode (SFT_hash[5])
+#define COLOR_HashNode (SFT_hash[6])
+#define ATTR_hash___HashNode____next_item(recv) ATTR(recv, (SFT_hash[7] + 0))
+#define ATTR_hash___HashNode____prev_item(recv) ATTR(recv, (SFT_hash[7] + 1))
+#define INIT_TABLE_POS_HashNode (SFT_hash[8] + 0)
+#define CALL_hash___HashNode___key(recv) ((hash___HashNode___key_t)CALL((recv), (SFT_hash[8] + 1)))
+#define CALL_hash___HashNode___next_item(recv) ((hash___HashNode___next_item_t)CALL((recv), (SFT_hash[8] + 2)))
+#define CALL_hash___HashNode___next_item__eq(recv) ((hash___HashNode___next_item__eq_t)CALL((recv), (SFT_hash[8] + 3)))
+#define CALL_hash___HashNode___prev_item(recv) ((hash___HashNode___prev_item_t)CALL((recv), (SFT_hash[8] + 4)))
+#define CALL_hash___HashNode___prev_item__eq(recv) ((hash___HashNode___prev_item__eq_t)CALL((recv), (SFT_hash[8] + 5)))
+#define CALL_hash___HashNode___init(recv) ((hash___HashNode___init_t)CALL((recv), (SFT_hash[8] + 6)))
+#define ID_HashMap (SFT_hash[9])
+#define COLOR_HashMap (SFT_hash[10])
+#define INIT_TABLE_POS_HashMap (SFT_hash[11] + 0)
+#define CALL_hash___HashMap___init(recv) ((hash___HashMap___init_t)CALL((recv), (SFT_hash[11] + 1)))
+#define ID_HashMapNode (SFT_hash[12])
+#define COLOR_HashMapNode (SFT_hash[13])
+#define INIT_TABLE_POS_HashMapNode (SFT_hash[14] + 0)
+#define CALL_hash___HashMapNode___init(recv) ((hash___HashMapNode___init_t)CALL((recv), (SFT_hash[14] + 1)))
+#define ID_HashMapIterator (SFT_hash[15])
+#define COLOR_HashMapIterator (SFT_hash[16])
+#define ATTR_hash___HashMapIterator____map(recv) ATTR(recv, (SFT_hash[17] + 0))
+#define ATTR_hash___HashMapIterator____node(recv) ATTR(recv, (SFT_hash[17] + 1))
+#define INIT_TABLE_POS_HashMapIterator (SFT_hash[18] + 0)
+#define CALL_hash___HashMapIterator___init(recv) ((hash___HashMapIterator___init_t)CALL((recv), (SFT_hash[18] + 1)))
+#define ID_HashSet (SFT_hash[19])
+#define COLOR_HashSet (SFT_hash[20])
+#define INIT_TABLE_POS_HashSet (SFT_hash[21] + 0)
+#define CALL_hash___HashSet___init(recv) ((hash___HashSet___init_t)CALL((recv), (SFT_hash[21] + 1)))
+#define ID_HashSetNode (SFT_hash[22])
+#define COLOR_HashSetNode (SFT_hash[23])
+#define ATTR_hash___HashSetNode____key(recv) ATTR(recv, (SFT_hash[24] + 0))
+#define INIT_TABLE_POS_HashSetNode (SFT_hash[25] + 0)
+#define CALL_hash___HashSetNode___key__eq(recv) ((hash___HashSetNode___key__eq_t)CALL((recv), (SFT_hash[25] + 1)))
+#define CALL_hash___HashSetNode___init(recv) ((hash___HashSetNode___init_t)CALL((recv), (SFT_hash[25] + 2)))
+#define ID_HashSetIterator (SFT_hash[26])
+#define COLOR_HashSetIterator (SFT_hash[27])
+#define ATTR_hash___HashSetIterator____set(recv) ATTR(recv, (SFT_hash[28] + 0))
+#define ATTR_hash___HashSetIterator____node(recv) ATTR(recv, (SFT_hash[28] + 1))
+#define INIT_TABLE_POS_HashSetIterator (SFT_hash[29] + 0)
+#define CALL_hash___HashSetIterator___init(recv) ((hash___HashSetIterator___init_t)CALL((recv), (SFT_hash[29] + 1)))
 typedef val_t (* hash___Object___hash_t)(val_t  self);
 val_t hash___Object___hash(val_t  self);
 #define LOCATE_hash___Object___hash "hash::Object::hash"
@@ -104,16 +104,9 @@ val_t hash___Bool___hash(val_t  self);
 typedef val_t (* hash___HashCollection___length_t)(val_t  self);
 val_t hash___HashCollection___length(val_t  self);
 #define LOCATE_hash___HashCollection___length "hash::HashCollection::(abstract_collection::Collection::length)"
-#define ATTR_hash___HashCollection____array(recv) ATTR(recv, COLOR_hash___HashCollection____array)
-#define ATTR_hash___HashCollection____capacity(recv) ATTR(recv, COLOR_hash___HashCollection____capacity)
-#define ATTR_hash___HashCollection____length(recv) ATTR(recv, COLOR_hash___HashCollection____length)
-#define ATTR_hash___HashCollection____first_item(recv) ATTR(recv, COLOR_hash___HashCollection____first_item)
 typedef val_t (* hash___HashCollection___first_item_t)(val_t  self);
 val_t hash___HashCollection___first_item(val_t  self);
 #define LOCATE_hash___HashCollection___first_item "hash::HashCollection::first_item"
-#define ATTR_hash___HashCollection____last_item(recv) ATTR(recv, COLOR_hash___HashCollection____last_item)
-#define ATTR_hash___HashCollection____last_accessed_index(recv) ATTR(recv, COLOR_hash___HashCollection____last_accessed_index)
-#define ATTR_hash___HashCollection____last_accessed_key(recv) ATTR(recv, COLOR_hash___HashCollection____last_accessed_key)
 typedef val_t (* hash___HashCollection___index_at_t)(val_t  self, val_t  param0);
 val_t hash___HashCollection___index_at(val_t  self, val_t  param0);
 #define LOCATE_hash___HashCollection___index_at "hash::HashCollection::index_at"
@@ -136,14 +129,12 @@ val_t NEW_HashCollection_hash___HashCollection___init();
 typedef val_t (* hash___HashNode___key_t)(val_t  self);
 val_t hash___HashNode___key(val_t  self);
 #define LOCATE_hash___HashNode___key "hash::HashNode::key"
-#define ATTR_hash___HashNode____next_item(recv) ATTR(recv, COLOR_hash___HashNode____next_item)
 typedef val_t (* hash___HashNode___next_item_t)(val_t  self);
 val_t hash___HashNode___next_item(val_t  self);
 #define LOCATE_hash___HashNode___next_item "hash::HashNode::next_item"
 typedef void (* hash___HashNode___next_item__eq_t)(val_t  self, val_t  param0);
 void hash___HashNode___next_item__eq(val_t  self, val_t  param0);
 #define LOCATE_hash___HashNode___next_item__eq "hash::HashNode::next_item="
-#define ATTR_hash___HashNode____prev_item(recv) ATTR(recv, COLOR_hash___HashNode____prev_item)
 typedef val_t (* hash___HashNode___prev_item_t)(val_t  self);
 val_t hash___HashNode___prev_item(val_t  self);
 #define LOCATE_hash___HashNode___prev_item "hash::HashNode::prev_item"
@@ -213,8 +204,6 @@ val_t hash___HashMapIterator___key(val_t  self);
 typedef void (* hash___HashMapIterator___item__eq_t)(val_t  self, val_t  param0);
 void hash___HashMapIterator___item__eq(val_t  self, val_t  param0);
 #define LOCATE_hash___HashMapIterator___item__eq "hash::HashMapIterator::(abstract_collection::MapIterator::item=)"
-#define ATTR_hash___HashMapIterator____map(recv) ATTR(recv, COLOR_hash___HashMapIterator____map)
-#define ATTR_hash___HashMapIterator____node(recv) ATTR(recv, COLOR_hash___HashMapIterator____node)
 typedef void (* hash___HashMapIterator___init_t)(val_t  self, val_t  param0, int* init_table);
 void hash___HashMapIterator___init(val_t  self, val_t  param0, int* init_table);
 #define LOCATE_hash___HashMapIterator___init "hash::HashMapIterator::init"
@@ -247,7 +236,6 @@ val_t NEW_HashSet_hash___HashSet___init();
 typedef val_t (* hash___HashSetNode___key_t)(val_t  self);
 val_t hash___HashSetNode___key(val_t  self);
 #define LOCATE_hash___HashSetNode___key "hash::HashSetNode::(hash::HashNode::key)"
-#define ATTR_hash___HashSetNode____key(recv) ATTR(recv, COLOR_hash___HashSetNode____key)
 typedef void (* hash___HashSetNode___key__eq_t)(val_t  self, val_t  param0);
 void hash___HashSetNode___key__eq(val_t  self, val_t  param0);
 #define LOCATE_hash___HashSetNode___key__eq "hash::HashSetNode::key="
@@ -264,8 +252,6 @@ void hash___HashSetIterator___next(val_t  self);
 typedef val_t (* hash___HashSetIterator___is_ok_t)(val_t  self);
 val_t hash___HashSetIterator___is_ok(val_t  self);
 #define LOCATE_hash___HashSetIterator___is_ok "hash::HashSetIterator::(abstract_collection::Iterator::is_ok)"
-#define ATTR_hash___HashSetIterator____set(recv) ATTR(recv, COLOR_hash___HashSetIterator____set)
-#define ATTR_hash___HashSetIterator____node(recv) ATTR(recv, COLOR_hash___HashSetIterator____node)
 typedef void (* hash___HashSetIterator___init_t)(val_t  self, val_t  param0, int* init_table);
 void hash___HashSetIterator___init(val_t  self, val_t  param0, int* init_table);
 #define LOCATE_hash___HashSetIterator___init "hash::HashSetIterator::init"

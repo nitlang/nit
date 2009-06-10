@@ -11,42 +11,42 @@ extern const classtable_elt_t VFT_BM_Pattern[];
 extern const classtable_elt_t VFT_Match[];
 extern const char *LOCATE_string_search;
 extern const int SFT_string_search[];
-#define ID_Pattern SFT_string_search[0]
-#define COLOR_Pattern SFT_string_search[1]
-#define INIT_TABLE_POS_Pattern SFT_string_search[2]
-#define COLOR_string_search___Pattern___search_index_in SFT_string_search[3]
-#define COLOR_string_search___Pattern___search_in SFT_string_search[4]
-#define COLOR_string_search___Pattern___search_all_in SFT_string_search[5]
-#define COLOR_string_search___Pattern___split_in SFT_string_search[6]
-#define COLOR_string_search___Pattern___init SFT_string_search[7]
-#define ID_BM_Pattern SFT_string_search[8]
-#define COLOR_BM_Pattern SFT_string_search[9]
-#define COLOR_string_search___BM_Pattern____motif SFT_string_search[10]
-#define COLOR_string_search___BM_Pattern____length SFT_string_search[11]
-#define COLOR_string_search___BM_Pattern____gs SFT_string_search[12]
-#define COLOR_string_search___BM_Pattern____bc_table SFT_string_search[13]
-#define INIT_TABLE_POS_BM_Pattern SFT_string_search[14]
-#define COLOR_string_search___BM_Pattern___init SFT_string_search[15]
-#define COLOR_string_search___BM_Pattern___bc SFT_string_search[16]
-#define COLOR_string_search___BM_Pattern___compute_bc SFT_string_search[17]
-#define COLOR_string_search___BM_Pattern___suffixes SFT_string_search[18]
-#define COLOR_string_search___BM_Pattern___compute_gs SFT_string_search[19]
-#define ID_Match SFT_string_search[20]
-#define COLOR_Match SFT_string_search[21]
-#define COLOR_string_search___Match____string SFT_string_search[22]
-#define COLOR_string_search___Match____from SFT_string_search[23]
-#define COLOR_string_search___Match____length SFT_string_search[24]
-#define INIT_TABLE_POS_Match SFT_string_search[25]
-#define COLOR_string_search___Match___string SFT_string_search[26]
-#define COLOR_string_search___Match___from SFT_string_search[27]
-#define COLOR_string_search___Match___length SFT_string_search[28]
-#define COLOR_string_search___Match___after SFT_string_search[29]
-#define COLOR_string_search___Match___init SFT_string_search[30]
-#define COLOR_string_search___String___search SFT_string_search[31]
-#define COLOR_string_search___String___search_from SFT_string_search[32]
-#define COLOR_string_search___String___search_all SFT_string_search[33]
-#define COLOR_string_search___String___split_with SFT_string_search[34]
-#define COLOR_string_search___String___split SFT_string_search[35]
+#define ID_Pattern (SFT_string_search[0])
+#define COLOR_Pattern (SFT_string_search[1])
+#define INIT_TABLE_POS_Pattern (SFT_string_search[2] + 0)
+#define CALL_string_search___Pattern___search_index_in(recv) ((string_search___Pattern___search_index_in_t)CALL((recv), (SFT_string_search[2] + 1)))
+#define CALL_string_search___Pattern___search_in(recv) ((string_search___Pattern___search_in_t)CALL((recv), (SFT_string_search[2] + 2)))
+#define CALL_string_search___Pattern___search_all_in(recv) ((string_search___Pattern___search_all_in_t)CALL((recv), (SFT_string_search[2] + 3)))
+#define CALL_string_search___Pattern___split_in(recv) ((string_search___Pattern___split_in_t)CALL((recv), (SFT_string_search[2] + 4)))
+#define CALL_string_search___Pattern___init(recv) ((string_search___Pattern___init_t)CALL((recv), (SFT_string_search[2] + 5)))
+#define ID_BM_Pattern (SFT_string_search[3])
+#define COLOR_BM_Pattern (SFT_string_search[4])
+#define ATTR_string_search___BM_Pattern____motif(recv) ATTR(recv, (SFT_string_search[5] + 0))
+#define ATTR_string_search___BM_Pattern____length(recv) ATTR(recv, (SFT_string_search[5] + 1))
+#define ATTR_string_search___BM_Pattern____gs(recv) ATTR(recv, (SFT_string_search[5] + 2))
+#define ATTR_string_search___BM_Pattern____bc_table(recv) ATTR(recv, (SFT_string_search[5] + 3))
+#define INIT_TABLE_POS_BM_Pattern (SFT_string_search[6] + 0)
+#define CALL_string_search___BM_Pattern___init(recv) ((string_search___BM_Pattern___init_t)CALL((recv), (SFT_string_search[6] + 1)))
+#define CALL_string_search___BM_Pattern___bc(recv) ((string_search___BM_Pattern___bc_t)CALL((recv), (SFT_string_search[6] + 2)))
+#define CALL_string_search___BM_Pattern___compute_bc(recv) ((string_search___BM_Pattern___compute_bc_t)CALL((recv), (SFT_string_search[6] + 3)))
+#define CALL_string_search___BM_Pattern___suffixes(recv) ((string_search___BM_Pattern___suffixes_t)CALL((recv), (SFT_string_search[6] + 4)))
+#define CALL_string_search___BM_Pattern___compute_gs(recv) ((string_search___BM_Pattern___compute_gs_t)CALL((recv), (SFT_string_search[6] + 5)))
+#define ID_Match (SFT_string_search[7])
+#define COLOR_Match (SFT_string_search[8])
+#define ATTR_string_search___Match____string(recv) ATTR(recv, (SFT_string_search[9] + 0))
+#define ATTR_string_search___Match____from(recv) ATTR(recv, (SFT_string_search[9] + 1))
+#define ATTR_string_search___Match____length(recv) ATTR(recv, (SFT_string_search[9] + 2))
+#define INIT_TABLE_POS_Match (SFT_string_search[10] + 0)
+#define CALL_string_search___Match___string(recv) ((string_search___Match___string_t)CALL((recv), (SFT_string_search[10] + 1)))
+#define CALL_string_search___Match___from(recv) ((string_search___Match___from_t)CALL((recv), (SFT_string_search[10] + 2)))
+#define CALL_string_search___Match___length(recv) ((string_search___Match___length_t)CALL((recv), (SFT_string_search[10] + 3)))
+#define CALL_string_search___Match___after(recv) ((string_search___Match___after_t)CALL((recv), (SFT_string_search[10] + 4)))
+#define CALL_string_search___Match___init(recv) ((string_search___Match___init_t)CALL((recv), (SFT_string_search[10] + 5)))
+#define CALL_string_search___String___search(recv) ((string_search___String___search_t)CALL((recv), (SFT_string_search[11] + 0)))
+#define CALL_string_search___String___search_from(recv) ((string_search___String___search_from_t)CALL((recv), (SFT_string_search[11] + 1)))
+#define CALL_string_search___String___search_all(recv) ((string_search___String___search_all_t)CALL((recv), (SFT_string_search[11] + 2)))
+#define CALL_string_search___String___split_with(recv) ((string_search___String___split_with_t)CALL((recv), (SFT_string_search[11] + 3)))
+#define CALL_string_search___String___split(recv) ((string_search___String___split_t)CALL((recv), (SFT_string_search[11] + 4)))
 typedef val_t (* string_search___Pattern___search_index_in_t)(val_t  self, val_t  param0, val_t  param1);
 val_t string_search___Pattern___search_index_in(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_string_search___Pattern___search_index_in "string_search::Pattern::search_index_in"
@@ -76,13 +76,9 @@ typedef void (* string_search___BM_Pattern___init_t)(val_t  self, val_t  param0,
 void string_search___BM_Pattern___init(val_t  self, val_t  param0, int* init_table);
 #define LOCATE_string_search___BM_Pattern___init "string_search::BM_Pattern::init"
 val_t NEW_BM_Pattern_string_search___BM_Pattern___init(val_t p0);
-#define ATTR_string_search___BM_Pattern____motif(recv) ATTR(recv, COLOR_string_search___BM_Pattern____motif)
-#define ATTR_string_search___BM_Pattern____length(recv) ATTR(recv, COLOR_string_search___BM_Pattern____length)
 typedef val_t (* string_search___BM_Pattern___bc_t)(val_t  self, val_t  param0);
 val_t string_search___BM_Pattern___bc(val_t  self, val_t  param0);
 #define LOCATE_string_search___BM_Pattern___bc "string_search::BM_Pattern::bc"
-#define ATTR_string_search___BM_Pattern____gs(recv) ATTR(recv, COLOR_string_search___BM_Pattern____gs)
-#define ATTR_string_search___BM_Pattern____bc_table(recv) ATTR(recv, COLOR_string_search___BM_Pattern____bc_table)
 typedef void (* string_search___BM_Pattern___compute_bc_t)(val_t  self);
 void string_search___BM_Pattern___compute_bc(val_t  self);
 #define LOCATE_string_search___BM_Pattern___compute_bc "string_search::BM_Pattern::compute_bc"
@@ -95,15 +91,12 @@ void string_search___BM_Pattern___compute_gs(val_t  self);
 typedef val_t (* string_search___Match___to_s_t)(val_t  self);
 val_t string_search___Match___to_s(val_t  self);
 #define LOCATE_string_search___Match___to_s "string_search::Match::(string::Object::to_s)"
-#define ATTR_string_search___Match____string(recv) ATTR(recv, COLOR_string_search___Match____string)
 typedef val_t (* string_search___Match___string_t)(val_t  self);
 val_t string_search___Match___string(val_t  self);
 #define LOCATE_string_search___Match___string "string_search::Match::string"
-#define ATTR_string_search___Match____from(recv) ATTR(recv, COLOR_string_search___Match____from)
 typedef val_t (* string_search___Match___from_t)(val_t  self);
 val_t string_search___Match___from(val_t  self);
 #define LOCATE_string_search___Match___from "string_search::Match::from"
-#define ATTR_string_search___Match____length(recv) ATTR(recv, COLOR_string_search___Match____length)
 typedef val_t (* string_search___Match___length_t)(val_t  self);
 val_t string_search___Match___length(val_t  self);
 #define LOCATE_string_search___Match___length "string_search::Match::length"

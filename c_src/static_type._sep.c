@@ -9,7 +9,7 @@ val_t static_type___MMLocalClass___get_type(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_static_type___MMLocalClass____base_type_cache(variable[2]) /*MMLocalClass::_base_type_cache*/;
-  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[2])) { /*if*/
     variable[2] = variable[0];
     variable[3] = variable[0];
@@ -35,17 +35,17 @@ void static_type___MMLocalClass___add_ancestor(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_static_type___MMLocalClass____ancestors(variable[3]) /*MMLocalClass::_ancestors*/;
-  variable[4] = ((static_type___MMAncestor___local_class_t)CALL( variable[1] /*a*/,COLOR_static_type___MMAncestor___local_class))( variable[1] /*a*/) /*MMAncestor::local_class*/;
-  variable[3] = ((abstract_collection___Map___has_key_t)CALL(variable[3],COLOR_abstract_collection___Map___has_key))(variable[3], variable[4]) /*Map::has_key*/;
+  variable[4] = CALL_static_type___MMAncestor___local_class( variable[1] /*a*/)( variable[1] /*a*/) /*MMAncestor::local_class*/;
+  variable[3] = CALL_abstract_collection___Map___has_key(variable[3])(variable[3], variable[4]) /*Map::has_key*/;
   if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMLocalClass___add_ancestor, LOCATE_static_type, 37); nit_exit(1);}
-  variable[3] = ((static_type___MMAncestor___local_class_t)CALL( variable[1] /*a*/,COLOR_static_type___MMAncestor___local_class))( variable[1] /*a*/) /*MMAncestor::local_class*/;
+  variable[3] = CALL_static_type___MMAncestor___local_class( variable[1] /*a*/)( variable[1] /*a*/) /*MMAncestor::local_class*/;
   variable[4] = variable[0];
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] == variable[4]) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3],variable[4])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3], variable[4]) /*Object::==*/)))))));
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] == variable[4]) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3],variable[4])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3], variable[4]) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMLocalClass___add_ancestor, LOCATE_static_type, 38); nit_exit(1);}
   variable[3] = variable[0];
   variable[3] = ATTR_static_type___MMLocalClass____ancestors(variable[3]) /*MMLocalClass::_ancestors*/;
-  variable[4] = ((static_type___MMAncestor___local_class_t)CALL( variable[1] /*a*/,COLOR_static_type___MMAncestor___local_class))( variable[1] /*a*/) /*MMAncestor::local_class*/;
-  ((abstract_collection___Map_____braeq_t)CALL(variable[3],COLOR_abstract_collection___Map_____braeq))(variable[3], variable[4],  variable[1] /*a*/) /*Map::[]=*/;
+  variable[4] = CALL_static_type___MMAncestor___local_class( variable[1] /*a*/)( variable[1] /*a*/) /*MMAncestor::local_class*/;
+  CALL_abstract_collection___Map_____braeq(variable[3])(variable[3], variable[4],  variable[1] /*a*/) /*Map::[]=*/;
   return_label1: while(false);
   tracehead = trace.prev;
   return;
@@ -69,16 +69,16 @@ val_t static_type___MMLocalClass___ancestor(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_static_type___MMLocalClass____ancestors(variable[3]) /*MMLocalClass::_ancestors*/;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMLocalClass___ancestor, LOCATE_static_type, 48); nit_exit(1);}
   variable[3] = variable[0];
   variable[3] = ATTR_static_type___MMLocalClass____ancestors(variable[3]) /*MMLocalClass::_ancestors*/;
-  variable[3] = ((abstract_collection___Map___has_key_t)CALL(variable[3],COLOR_abstract_collection___Map___has_key))(variable[3],  variable[1] /*c*/) /*Map::has_key*/;
+  variable[3] = CALL_abstract_collection___Map___has_key(variable[3])(variable[3],  variable[1] /*c*/) /*Map::has_key*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = variable[0];
     variable[3] = ATTR_static_type___MMLocalClass____ancestors(variable[3]) /*MMLocalClass::_ancestors*/;
-    variable[3] = ((abstract_collection___Map_____bra_t)CALL(variable[3],COLOR_abstract_collection___Map_____bra))(variable[3],  variable[1] /*c*/) /*Map::[]*/;
-    variable[3] = ((static_type___MMAncestor___stype_t)CALL(variable[3],COLOR_static_type___MMAncestor___stype))(variable[3]) /*MMAncestor::stype*/;
+    variable[3] = CALL_abstract_collection___Map_____bra(variable[3])(variable[3],  variable[1] /*c*/) /*Map::[]*/;
+    variable[3] = CALL_static_type___MMAncestor___stype(variable[3])(variable[3]) /*MMAncestor::stype*/;
     variable[2] = variable[3];
     goto return_label2;
   }
@@ -116,32 +116,32 @@ val_t static_type___MMLocalProperty___signature_for(val_t  self, val_t  param0) 
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((abstractmetamodel___MMLocalProperty___local_class_t)CALL(variable[3],COLOR_abstractmetamodel___MMLocalProperty___local_class))(variable[3]) /*MMLocalProperty::local_class*/;
-  variable[3] = ((static_type___MMLocalClass___get_type_t)CALL(variable[3],COLOR_static_type___MMLocalClass___get_type))(variable[3]) /*MMLocalClass::get_type*/;
-  variable[3] = TAG_Bool(( variable[1] /*t*/ == variable[3]) || (( variable[1] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*t*/,variable[3])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*t*/,COLOR_kernel___Object_____eqeq))( variable[1] /*t*/, variable[3]) /*Object::==*/)))));
+  variable[3] = CALL_abstractmetamodel___MMLocalProperty___local_class(variable[3])(variable[3]) /*MMLocalProperty::local_class*/;
+  variable[3] = CALL_static_type___MMLocalClass___get_type(variable[3])(variable[3]) /*MMLocalClass::get_type*/;
+  variable[3] = TAG_Bool(( variable[1] /*t*/ == variable[3]) || (( variable[1] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*t*/,variable[3])):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*t*/)( variable[1] /*t*/, variable[3]) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = variable[0];
-    variable[3] = ((static_type___MMLocalProperty___signature_t)CALL(variable[3],COLOR_static_type___MMLocalProperty___signature))(variable[3]) /*MMLocalProperty::signature*/;
+    variable[3] = CALL_static_type___MMLocalProperty___signature(variable[3])(variable[3]) /*MMLocalProperty::signature*/;
     variable[2] = variable[3];
     goto return_label3;
   }
   variable[3] = variable[0];
   variable[3] = ATTR_static_type___MMLocalProperty____signatures_cache(variable[3]) /*MMLocalProperty::_signatures_cache*/;
-  variable[3] = ((abstract_collection___CoupleMap___has_key_t)CALL(variable[3],COLOR_abstract_collection___Map___has_key))(variable[3],  variable[1] /*t*/) /*CoupleMap::has_key*/;
+  variable[3] = CALL_abstract_collection___Map___has_key(variable[3])(variable[3],  variable[1] /*t*/) /*CoupleMap::has_key*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = variable[0];
     variable[3] = ATTR_static_type___MMLocalProperty____signatures_cache(variable[3]) /*MMLocalProperty::_signatures_cache*/;
-    variable[3] = ((abstract_collection___CoupleMap_____bra_t)CALL(variable[3],COLOR_abstract_collection___Map_____bra))(variable[3],  variable[1] /*t*/) /*CoupleMap::[]*/;
+    variable[3] = CALL_abstract_collection___Map_____bra(variable[3])(variable[3],  variable[1] /*t*/) /*CoupleMap::[]*/;
     variable[2] = variable[3];
     goto return_label3;
   }
   variable[4] = variable[0];
-  variable[4] = ((static_type___MMLocalProperty___signature_t)CALL(variable[4],COLOR_static_type___MMLocalProperty___signature))(variable[4]) /*MMLocalProperty::signature*/;
-  variable[4] = ((static_type___MMSignature___adaptation_to_t)CALL(variable[4],COLOR_static_type___MMSignature___adaptation_to))(variable[4],  variable[1] /*t*/) /*MMSignature::adaptation_to*/;
+  variable[4] = CALL_static_type___MMLocalProperty___signature(variable[4])(variable[4]) /*MMLocalProperty::signature*/;
+  variable[4] = CALL_static_type___MMSignature___adaptation_to(variable[4])(variable[4],  variable[1] /*t*/) /*MMSignature::adaptation_to*/;
   variable[3] = variable[4];
   variable[4] = variable[0];
   variable[4] = ATTR_static_type___MMLocalProperty____signatures_cache(variable[4]) /*MMLocalProperty::_signatures_cache*/;
-  ((hash___HashMap_____braeq_t)CALL(variable[4],COLOR_abstract_collection___Map_____braeq))(variable[4],  variable[1] /*t*/,  variable[3] /*res*/) /*HashMap::[]=*/;
+  CALL_abstract_collection___Map_____braeq(variable[4])(variable[4],  variable[1] /*t*/,  variable[3] /*res*/) /*HashMap::[]=*/;
   variable[2] =  variable[3] /*res*/;
   goto return_label3;
   return_label3: while(false);
@@ -158,12 +158,12 @@ val_t static_type___MMSignature___to_s(val_t  self) {
   /*variable[2] is variable s*/
   variable[3] = variable[0];
   variable[3] = ATTR_static_type___MMSignature____params(variable[3]) /*MMSignature::_params*/;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   variable[4] = variable[3];
   if (UNTAG_Bool(variable[4])) { /* and */
     variable[4] = variable[0];
     variable[4] = ATTR_static_type___MMSignature____params(variable[4]) /*MMSignature::_params*/;
-    variable[4] = ((array___AbstractArray___length_t)CALL(variable[4],COLOR_abstract_collection___Collection___length))(variable[4]) /*AbstractArray::length*/;
+    variable[4] = CALL_abstract_collection___Collection___length(variable[4])(variable[4]) /*AbstractArray::length*/;
     variable[4] = TAG_Bool(UNTAG_Int(variable[4])>UNTAG_Int( TAG_Int(0)));
   }
   variable[3] = variable[4];
@@ -171,20 +171,20 @@ val_t static_type___MMSignature___to_s(val_t  self) {
     /*variable[3] is variable tmp*/
     variable[5] = variable[0];
     variable[5] = ATTR_static_type___MMSignature____params(variable[5]) /*MMSignature::_params*/;
-    variable[5] = ((array___AbstractArray___length_t)CALL(variable[5],COLOR_abstract_collection___Collection___length))(variable[5]) /*AbstractArray::length*/;
+    variable[5] = CALL_abstract_collection___Collection___length(variable[5])(variable[5]) /*AbstractArray::length*/;
     variable[6] = NEW_Array_array___Array___with_capacity(variable[5]); /*new Array[String]*/
     variable[5] = variable[6];
     variable[4] = variable[5];
     variable[5] = variable[0];
     variable[5] = ATTR_static_type___MMSignature____params(variable[5]) /*MMSignature::_params*/;
-    variable[5] = ((array___AbstractArray___length_t)CALL(variable[5],COLOR_abstract_collection___Collection___length))(variable[5]) /*AbstractArray::length*/;
+    variable[5] = CALL_abstract_collection___Collection___length(variable[5])(variable[5]) /*AbstractArray::length*/;
     variable[6] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[5]); /*new Range[Int]*/
     variable[5] = variable[6];
-    variable[5] = ((range___Range___iterator_t)CALL(variable[5],COLOR_abstract_collection___Collection___iterator))(variable[5]) /*Range::iterator*/;
+    variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*Range::iterator*/;
     while (true) { /*for*/
-      variable[6] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[5],COLOR_abstract_collection___Iterator___is_ok))(variable[5]) /*Iterator::is_ok*/;
+      variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*Iterator::is_ok*/;
       if (!UNTAG_Bool(variable[6])) break; /*for*/
-      variable[6] = ((abstract_collection___Iterator___item_t)CALL(variable[5],COLOR_abstract_collection___Iterator___item))(variable[5]) /*Iterator::item*/;
+      variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*Iterator::item*/;
       variable[7] = variable[6];
       variable[9] = variable[0];
       variable[9] = ATTR_static_type___MMSignature____params(variable[9]) /*MMSignature::_params*/;
@@ -207,23 +207,24 @@ val_t static_type___MMSignature___to_s(val_t  self) {
       return_label6: while(false);
       variable[9] = variable[12];
       variable[8] = variable[9];
-      variable[9] = ((string___Object___to_s_t)CALL( variable[8] /*p*/,COLOR_string___Object___to_s))( variable[8] /*p*/) /*Object::to_s*/;
-      ((array___AbstractArray___add_t)CALL( variable[4] /*a*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*a*/, variable[9]) /*AbstractArray::add*/;
+      variable[9] = CALL_string___Object___to_s( variable[8] /*p*/)( variable[8] /*p*/) /*Object::to_s*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[4] /*a*/)( variable[4] /*a*/, variable[9]) /*AbstractArray::add*/;
       continue_5: while(0);
-      ((abstract_collection___Iterator___next_t)CALL(variable[5],COLOR_abstract_collection___Iterator___next))(variable[5]) /*Iterator::next*/;
+      CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*Iterator::next*/;
     }
     break_5: while(0);
-    variable[5] = NEW_String_string___String___init(); /*new String*/
+    variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
     variable[6] = NEW_String_string___String___with_native(BOX_NativeString("("), TAG_Int(1)); /*new String*/
     variable[7] = variable[6];
-    ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[7]) /*String::append*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[7]) /*AbstractArray::add*/;
     variable[8] = NEW_String_string___String___with_native(BOX_NativeString(","), TAG_Int(1)); /*new String*/
-    variable[8] = ((string___Collection___join_t)CALL( variable[4] /*a*/,COLOR_string___Collection___join))( variable[4] /*a*/, variable[8]) /*Collection::join*/;
+    variable[8] = CALL_string___Collection___join( variable[4] /*a*/)( variable[4] /*a*/, variable[8]) /*Collection::join*/;
     variable[9] = variable[8];
-    ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[9]) /*String::append*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[9]) /*AbstractArray::add*/;
     variable[10] = NEW_String_string___String___with_native(BOX_NativeString(")"), TAG_Int(1)); /*new String*/
     variable[11] = variable[10];
-    ((string___String___append_t)CALL(variable[5],COLOR_abstract_collection___IndexedCollection___append))(variable[5], variable[11]) /*String::append*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[11]) /*AbstractArray::add*/;
+    variable[5] = CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/;
     variable[2] = variable[5] /*s=*/;
   } else { /*if*/
     variable[3] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
@@ -231,21 +232,22 @@ val_t static_type___MMSignature___to_s(val_t  self) {
   }
   variable[3] = variable[0];
   variable[3] = ATTR_static_type___MMSignature____return_type(variable[3]) /*MMSignature::_return_type*/;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = NEW_String_string___String___init(); /*new String*/
+    variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
     variable[4] = NEW_String_string___String___with_native(BOX_NativeString(": "), TAG_Int(2)); /*new String*/
     variable[5] = variable[4];
-    ((string___String___append_t)CALL(variable[3],COLOR_abstract_collection___IndexedCollection___append))(variable[3], variable[5]) /*String::append*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[5]) /*AbstractArray::add*/;
     variable[6] = variable[0];
     variable[6] = ATTR_static_type___MMSignature____return_type(variable[6]) /*MMSignature::_return_type*/;
     variable[7] = variable[6];
-    variable[7] = ((string___String___to_s_t)CALL(variable[7],COLOR_string___Object___to_s))(variable[7]) /*String::to_s*/;
-    ((string___String___append_t)CALL(variable[3],COLOR_abstract_collection___IndexedCollection___append))(variable[3], variable[7]) /*String::append*/;
+    variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[7]) /*AbstractArray::add*/;
     variable[8] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
     variable[9] = variable[8];
-    ((string___String___append_t)CALL(variable[3],COLOR_abstract_collection___IndexedCollection___append))(variable[3], variable[9]) /*String::append*/;
-    ((string___String___append_t)CALL( variable[2] /*s*/,COLOR_abstract_collection___IndexedCollection___append))( variable[2] /*s*/, variable[3]) /*String::append*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[9]) /*AbstractArray::add*/;
+    variable[3] = CALL_string___Object___to_s(variable[3])(variable[3]) /*Object::to_s*/;
+    CALL_abstract_collection___IndexedCollection___append( variable[2] /*s*/)( variable[2] /*s*/, variable[3]) /*String::append*/;
   }
   variable[1] =  variable[2] /*s*/;
   goto return_label4;
@@ -289,11 +291,11 @@ val_t static_type___MMSignature___arity(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_static_type___MMSignature____params(variable[2]) /*MMSignature::_params*/;
-  variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMSignature___arity, LOCATE_static_type, 91); nit_exit(1);}
   variable[2] = variable[0];
   variable[2] = ATTR_static_type___MMSignature____params(variable[2]) /*MMSignature::_params*/;
-  variable[2] = ((array___AbstractArray___length_t)CALL(variable[2],COLOR_abstract_collection___Collection___length))(variable[2]) /*AbstractArray::length*/;
+  variable[2] = CALL_abstract_collection___Collection___length(variable[2])(variable[2]) /*AbstractArray::length*/;
   variable[1] = variable[2];
   goto return_label7;
   return_label7: while(false);
@@ -308,32 +310,32 @@ val_t static_type___MMSignature_____l(val_t  self, val_t  param0) {
   trace.file = LOCATE_static_type;
   variable[0] =  self;
   variable[1] =  param0;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*s*/ ==  NIT_NULL /*null*/) || (( variable[1] /*s*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*s*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*s*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*s*/,COLOR_kernel___Object_____eqeq))( variable[1] /*s*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*s*/ ==  NIT_NULL /*null*/) || (( variable[1] /*s*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*s*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*s*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*s*/)( variable[1] /*s*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMSignature_____l, LOCATE_static_type, 98); nit_exit(1);}
   variable[3] = variable[0];
-  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*s*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*s*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  variable[1] /*s*/) /*Object::==*/)))));
+  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*s*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*s*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  variable[1] /*s*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[2] =  TAG_Bool(true);
     goto return_label8;
   }
   variable[3] = variable[0];
   variable[3] = ATTR_static_type___MMSignature____recv(variable[3]) /*MMSignature::_recv*/;
-  variable[3] = ((static_type___MMType___module_t)CALL(variable[3],COLOR_static_type___MMType___module))(variable[3]) /*MMType::module*/;
-  variable[4] = ((static_type___MMSignature___recv_t)CALL( variable[1] /*s*/,COLOR_static_type___MMSignature___recv))( variable[1] /*s*/) /*MMSignature::recv*/;
-  variable[4] = ((static_type___MMType___module_t)CALL(variable[4],COLOR_static_type___MMType___module))(variable[4]) /*MMType::module*/;
-  variable[3] = TAG_Bool((variable[3] == variable[4]) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3],variable[4])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3], variable[4]) /*Object::==*/)))));
+  variable[3] = CALL_static_type___MMType___module(variable[3])(variable[3]) /*MMType::module*/;
+  variable[4] = CALL_static_type___MMSignature___recv( variable[1] /*s*/)( variable[1] /*s*/) /*MMSignature::recv*/;
+  variable[4] = CALL_static_type___MMType___module(variable[4])(variable[4]) /*MMType::module*/;
+  variable[3] = TAG_Bool((variable[3] == variable[4]) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3],variable[4])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3], variable[4]) /*Object::==*/)))));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMSignature_____l, LOCATE_static_type, 102); nit_exit(1);}
   variable[3] = variable[0];
-  variable[3] = ((static_type___MMSignature___arity_t)CALL(variable[3],COLOR_static_type___MMSignature___arity))(variable[3]) /*MMSignature::arity*/;
-  variable[4] = ((static_type___MMSignature___arity_t)CALL( variable[1] /*s*/,COLOR_static_type___MMSignature___arity))( variable[1] /*s*/) /*MMSignature::arity*/;
+  variable[3] = CALL_static_type___MMSignature___arity(variable[3])(variable[3]) /*MMSignature::arity*/;
+  variable[4] = CALL_static_type___MMSignature___arity( variable[1] /*s*/)( variable[1] /*s*/) /*MMSignature::arity*/;
   variable[3] = TAG_Bool((variable[3])!=(variable[4]));
   variable[4] = variable[3];
   if (!UNTAG_Bool(variable[4])) { /* or */
     variable[4] = variable[0];
     variable[4] = ATTR_static_type___MMSignature____return_type(variable[4]) /*MMSignature::_return_type*/;
-    variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
-    variable[5] = ((static_type___MMSignature___return_type_t)CALL( variable[1] /*s*/,COLOR_static_type___MMSignature___return_type))( variable[1] /*s*/) /*MMSignature::return_type*/;
-    variable[5] = TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))));
+    variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
+    variable[5] = CALL_static_type___MMSignature___return_type( variable[1] /*s*/)( variable[1] /*s*/) /*MMSignature::return_type*/;
+    variable[5] = TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[5])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[5])(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))));
     variable[4] = TAG_Bool((variable[4])!=(variable[5]));
   }
   variable[3] = variable[4];
@@ -343,13 +345,13 @@ val_t static_type___MMSignature_____l(val_t  self, val_t  param0) {
   }
   variable[3] = variable[0];
   variable[3] = ATTR_static_type___MMSignature____return_type(variable[3]) /*MMSignature::_return_type*/;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   variable[4] = variable[3];
   if (UNTAG_Bool(variable[4])) { /* and */
     variable[4] = variable[0];
     variable[4] = ATTR_static_type___MMSignature____return_type(variable[4]) /*MMSignature::_return_type*/;
-    variable[5] = ((static_type___MMSignature___return_type_t)CALL( variable[1] /*s*/,COLOR_static_type___MMSignature___return_type))( variable[1] /*s*/) /*MMSignature::return_type*/;
-    variable[4] = ((static_type___MMType_____l_t)CALL(variable[4],COLOR_static_type___MMType_____l))(variable[4], variable[5]) /*MMType::<*/;
+    variable[5] = CALL_static_type___MMSignature___return_type( variable[1] /*s*/)( variable[1] /*s*/) /*MMSignature::return_type*/;
+    variable[4] = CALL_static_type___MMType_____l(variable[4])(variable[4], variable[5]) /*MMType::<*/;
     variable[4] =  TAG_Bool(!UNTAG_Bool(variable[4]));
   }
   variable[3] = variable[4];
@@ -358,25 +360,25 @@ val_t static_type___MMSignature_____l(val_t  self, val_t  param0) {
     goto return_label8;
   }
   variable[3] = variable[0];
-  variable[3] = ((static_type___MMSignature___arity_t)CALL(variable[3],COLOR_static_type___MMSignature___arity))(variable[3]) /*MMSignature::arity*/;
+  variable[3] = CALL_static_type___MMSignature___arity(variable[3])(variable[3]) /*MMSignature::arity*/;
   variable[4] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[3]); /*new Range[Int]*/
   variable[3] = variable[4];
-  variable[3] = ((range___Range___iterator_t)CALL(variable[3],COLOR_abstract_collection___Collection___iterator))(variable[3]) /*Range::iterator*/;
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*Range::iterator*/;
   while (true) { /*for*/
-    variable[4] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[3],COLOR_abstract_collection___Iterator___is_ok))(variable[3]) /*Iterator::is_ok*/;
+    variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = ((abstract_collection___Iterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*Iterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
     variable[5] = variable[4];
-    variable[6] = ((static_type___MMSignature_____bra_t)CALL( variable[1] /*s*/,COLOR_static_type___MMSignature_____bra))( variable[1] /*s*/,  variable[5] /*i*/) /*MMSignature::[]*/;
+    variable[6] = CALL_static_type___MMSignature_____bra( variable[1] /*s*/)( variable[1] /*s*/,  variable[5] /*i*/) /*MMSignature::[]*/;
     variable[7] = variable[0];
-    variable[7] = ((static_type___MMSignature_____bra_t)CALL(variable[7],COLOR_static_type___MMSignature_____bra))(variable[7],  variable[5] /*i*/) /*MMSignature::[]*/;
-    variable[6] = ((static_type___MMType_____l_t)CALL(variable[6],COLOR_static_type___MMType_____l))(variable[6], variable[7]) /*MMType::<*/;
+    variable[7] = CALL_static_type___MMSignature_____bra(variable[7])(variable[7],  variable[5] /*i*/) /*MMSignature::[]*/;
+    variable[6] = CALL_static_type___MMType_____l(variable[6])(variable[6], variable[7]) /*MMType::<*/;
     if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[6])))) { /*if*/
       variable[2] =  TAG_Bool(false);
       goto return_label8;
     }
     continue_9: while(0);
-    ((abstract_collection___Iterator___next_t)CALL(variable[3],COLOR_abstract_collection___Iterator___next))(variable[3]) /*Iterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*Iterator::next*/;
   }
   break_9: while(0);
   variable[2] =  TAG_Bool(true);
@@ -395,7 +397,7 @@ val_t static_type___MMSignature_____bra(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_static_type___MMSignature____params(variable[3]) /*MMSignature::_params*/;
-  variable[3] = ((array___AbstractArray___length_t)CALL(variable[3],COLOR_abstract_collection___Collection___length))(variable[3]) /*AbstractArray::length*/;
+  variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*AbstractArray::length*/;
   variable[3] = TAG_Bool(UNTAG_Int(variable[3])>UNTAG_Int( variable[1] /*i*/));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMSignature_____bra, LOCATE_static_type, 119); nit_exit(1);}
   variable[3] = variable[0];
@@ -434,61 +436,61 @@ val_t static_type___MMSignature___adaptation_to(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_static_type___MMSignature____recv(variable[3]) /*MMSignature::_recv*/;
-  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*r*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*r*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  variable[1] /*r*/) /*Object::==*/)))));
+  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*r*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*r*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  variable[1] /*r*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = variable[0];
     variable[2] = variable[3];
     goto return_label12;
   }
-  variable[4] = ((static_type___MMType___module_t)CALL( variable[1] /*r*/,COLOR_static_type___MMType___module))( variable[1] /*r*/) /*MMType::module*/;
+  variable[4] = CALL_static_type___MMType___module( variable[1] /*r*/)( variable[1] /*r*/) /*MMType::module*/;
   variable[3] = variable[4];
   variable[5] = variable[0];
   variable[5] = ATTR_static_type___MMSignature____params(variable[5]) /*MMSignature::_params*/;
   variable[4] = variable[5];
-  variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*p*/ ==  NIT_NULL /*null*/) || (( variable[4] /*p*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*p*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*p*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*p*/,COLOR_kernel___Object_____eqeq))( variable[4] /*p*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*p*/ ==  NIT_NULL /*null*/) || (( variable[4] /*p*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[4] /*p*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*p*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[4] /*p*/)( variable[4] /*p*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[5])) { /*if*/
     variable[5] = NEW_Array_array___Array___init(); /*new Array[MMType]*/
     variable[4] = variable[5] /*p=*/;
     variable[5] = variable[0];
     variable[5] = ATTR_static_type___MMSignature____params(variable[5]) /*MMSignature::_params*/;
-    variable[5] = ((array___AbstractArray___iterator_t)CALL(variable[5],COLOR_abstract_collection___Collection___iterator))(variable[5]) /*AbstractArray::iterator*/;
+    variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*AbstractArray::iterator*/;
     while (true) { /*for*/
-      variable[6] = ((array___ArrayIterator___is_ok_t)CALL(variable[5],COLOR_abstract_collection___Iterator___is_ok))(variable[5]) /*ArrayIterator::is_ok*/;
+      variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[6])) break; /*for*/
-      variable[6] = ((array___ArrayIterator___item_t)CALL(variable[5],COLOR_abstract_collection___Iterator___item))(variable[5]) /*ArrayIterator::item*/;
+      variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/;
       variable[7] = variable[6];
-      variable[8] = ((static_type___MMType___for_module_t)CALL( variable[7] /*i*/,COLOR_static_type___MMType___for_module))( variable[7] /*i*/,  variable[3] /*mod*/) /*MMType::for_module*/;
-      variable[8] = ((static_type___MMType___adapt_to_t)CALL(variable[8],COLOR_static_type___MMType___adapt_to))(variable[8],  variable[1] /*r*/) /*MMType::adapt_to*/;
-      ((array___AbstractArray___add_t)CALL( variable[4] /*p*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*p*/, variable[8]) /*AbstractArray::add*/;
+      variable[8] = CALL_static_type___MMType___for_module( variable[7] /*i*/)( variable[7] /*i*/,  variable[3] /*mod*/) /*MMType::for_module*/;
+      variable[8] = CALL_static_type___MMType___adapt_to(variable[8])(variable[8],  variable[1] /*r*/) /*MMType::adapt_to*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[4] /*p*/)( variable[4] /*p*/, variable[8]) /*AbstractArray::add*/;
       continue_13: while(0);
-      ((array___ArrayIterator___next_t)CALL(variable[5],COLOR_abstract_collection___Iterator___next))(variable[5]) /*ArrayIterator::next*/;
+      CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*ArrayIterator::next*/;
     }
     break_13: while(0);
   }
   variable[6] = variable[0];
   variable[6] = ATTR_static_type___MMSignature____return_type(variable[6]) /*MMSignature::_return_type*/;
   variable[5] = variable[6];
-  variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*rv*/ ==  NIT_NULL /*null*/) || (( variable[5] /*rv*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*rv*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*rv*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*rv*/,COLOR_kernel___Object_____eqeq))( variable[5] /*rv*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*rv*/ ==  NIT_NULL /*null*/) || (( variable[5] /*rv*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*rv*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*rv*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*rv*/)( variable[5] /*rv*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[6])) { /*if*/
-    variable[6] = ((static_type___MMType___for_module_t)CALL( variable[5] /*rv*/,COLOR_static_type___MMType___for_module))( variable[5] /*rv*/,  variable[3] /*mod*/) /*MMType::for_module*/;
-    variable[6] = ((static_type___MMType___adapt_to_t)CALL(variable[6],COLOR_static_type___MMType___adapt_to))(variable[6],  variable[1] /*r*/) /*MMType::adapt_to*/;
+    variable[6] = CALL_static_type___MMType___for_module( variable[5] /*rv*/)( variable[5] /*rv*/,  variable[3] /*mod*/) /*MMType::for_module*/;
+    variable[6] = CALL_static_type___MMType___adapt_to(variable[6])(variable[6],  variable[1] /*r*/) /*MMType::adapt_to*/;
     variable[5] = variable[6] /*rv=*/;
   }
   variable[7] = NEW_MMSignature_static_type___MMSignature___init( variable[4] /*p*/,  variable[5] /*rv*/,  variable[1] /*r*/); /*new MMSignature*/
   variable[6] = variable[7];
   variable[7] = variable[0];
   variable[7] = ATTR_static_type___MMSignature____closures(variable[7]) /*MMSignature::_closures*/;
-  variable[7] = ((array___AbstractArray___iterator_t)CALL(variable[7],COLOR_abstract_collection___Collection___iterator))(variable[7]) /*AbstractArray::iterator*/;
+  variable[7] = CALL_abstract_collection___Collection___iterator(variable[7])(variable[7]) /*AbstractArray::iterator*/;
   while (true) { /*for*/
-    variable[8] = ((array___ArrayIterator___is_ok_t)CALL(variable[7],COLOR_abstract_collection___Iterator___is_ok))(variable[7]) /*ArrayIterator::is_ok*/;
+    variable[8] = CALL_abstract_collection___Iterator___is_ok(variable[7])(variable[7]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[8])) break; /*for*/
-    variable[8] = ((array___ArrayIterator___item_t)CALL(variable[7],COLOR_abstract_collection___Iterator___item))(variable[7]) /*ArrayIterator::item*/;
+    variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*ArrayIterator::item*/;
     variable[9] = variable[8];
-    variable[10] = ((static_type___MMSignature___closures_t)CALL( variable[6] /*res*/,COLOR_static_type___MMSignature___closures))( variable[6] /*res*/) /*MMSignature::closures*/;
-    variable[11] = ((static_type___MMClosure___adaptation_to_t)CALL( variable[9] /*clos*/,COLOR_static_type___MMClosure___adaptation_to))( variable[9] /*clos*/,  variable[1] /*r*/) /*MMClosure::adaptation_to*/;
-    ((array___AbstractArray___add_t)CALL(variable[10],COLOR_abstract_collection___SimpleCollection___add))(variable[10], variable[11]) /*AbstractArray::add*/;
+    variable[10] = CALL_static_type___MMSignature___closures( variable[6] /*res*/)( variable[6] /*res*/) /*MMSignature::closures*/;
+    variable[11] = CALL_static_type___MMClosure___adaptation_to( variable[9] /*clos*/)( variable[9] /*clos*/,  variable[1] /*r*/) /*MMClosure::adaptation_to*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[10])(variable[10], variable[11]) /*AbstractArray::add*/;
     continue_14: while(0);
-    ((array___ArrayIterator___next_t)CALL(variable[7],COLOR_abstract_collection___Iterator___next))(variable[7]) /*ArrayIterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[7])(variable[7]) /*ArrayIterator::next*/;
   }
   break_14: while(0);
   variable[2] =  variable[6] /*res*/;
@@ -507,7 +509,7 @@ val_t static_type___MMSignature___not_for_self(val_t  self) {
   variable[3] = variable[0];
   variable[3] = ATTR_static_type___MMSignature____not_for_self_cache(variable[3]) /*MMSignature::_not_for_self_cache*/;
   variable[2] = variable[3];
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[2] /*res*/ ==  NIT_NULL /*null*/) || (( variable[2] /*res*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[2] /*res*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*res*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[2] /*res*/,COLOR_kernel___Object_____eqeq))( variable[2] /*res*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[2] /*res*/ ==  NIT_NULL /*null*/) || (( variable[2] /*res*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[2] /*res*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*res*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[2] /*res*/)( variable[2] /*res*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[1] =  variable[2] /*res*/;
     goto return_label15;
@@ -516,40 +518,40 @@ val_t static_type___MMSignature___not_for_self(val_t  self) {
   variable[5] = variable[0];
   variable[5] = ATTR_static_type___MMSignature____params(variable[5]) /*MMSignature::_params*/;
   variable[4] = variable[5];
-  variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*p*/ ==  NIT_NULL /*null*/) || (( variable[4] /*p*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*p*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*p*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*p*/,COLOR_kernel___Object_____eqeq))( variable[4] /*p*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*p*/ ==  NIT_NULL /*null*/) || (( variable[4] /*p*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[4] /*p*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*p*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[4] /*p*/)( variable[4] /*p*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[5])) { /*if*/
     variable[5] = NEW_Array_array___Array___init(); /*new Array[MMType]*/
     variable[4] = variable[5] /*p=*/;
     variable[5] = variable[0];
     variable[5] = ATTR_static_type___MMSignature____params(variable[5]) /*MMSignature::_params*/;
-    variable[5] = ((array___AbstractArray___iterator_t)CALL(variable[5],COLOR_abstract_collection___Collection___iterator))(variable[5]) /*AbstractArray::iterator*/;
+    variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*AbstractArray::iterator*/;
     while (true) { /*for*/
-      variable[6] = ((array___ArrayIterator___is_ok_t)CALL(variable[5],COLOR_abstract_collection___Iterator___is_ok))(variable[5]) /*ArrayIterator::is_ok*/;
+      variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[6])) break; /*for*/
-      variable[6] = ((array___ArrayIterator___item_t)CALL(variable[5],COLOR_abstract_collection___Iterator___item))(variable[5]) /*ArrayIterator::item*/;
+      variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/;
       variable[7] = variable[6];
-      variable[9] = ((static_type___MMType___not_for_self_t)CALL( variable[7] /*i*/,COLOR_static_type___MMType___not_for_self))( variable[7] /*i*/) /*MMType::not_for_self*/;
+      variable[9] = CALL_static_type___MMType___not_for_self( variable[7] /*i*/)( variable[7] /*i*/) /*MMType::not_for_self*/;
       variable[8] = variable[9];
-      variable[9] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[7] /*i*/ ==  variable[8] /*i2*/) || (( variable[7] /*i*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[7] /*i*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[7] /*i*/, variable[8] /*i2*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[7] /*i*/,COLOR_kernel___Object_____eqeq))( variable[7] /*i*/,  variable[8] /*i2*/) /*Object::==*/)))))));
+      variable[9] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[7] /*i*/ ==  variable[8] /*i2*/) || (( variable[7] /*i*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[7] /*i*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[7] /*i*/, variable[8] /*i2*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[7] /*i*/)( variable[7] /*i*/,  variable[8] /*i2*/) /*Object::==*/)))))));
       if (UNTAG_Bool(variable[9])) { /*if*/
         variable[3] =  TAG_Bool(true) /*need_for_self=*/;
       }
-      ((array___AbstractArray___add_t)CALL( variable[4] /*p*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*p*/,  variable[8] /*i2*/) /*AbstractArray::add*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[4] /*p*/)( variable[4] /*p*/,  variable[8] /*i2*/) /*AbstractArray::add*/;
       continue_16: while(0);
-      ((array___ArrayIterator___next_t)CALL(variable[5],COLOR_abstract_collection___Iterator___next))(variable[5]) /*ArrayIterator::next*/;
+      CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*ArrayIterator::next*/;
     }
     break_16: while(0);
   }
   variable[6] = variable[0];
   variable[6] = ATTR_static_type___MMSignature____return_type(variable[6]) /*MMSignature::_return_type*/;
   variable[5] = variable[6];
-  variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*rv*/ ==  NIT_NULL /*null*/) || (( variable[5] /*rv*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*rv*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*rv*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*rv*/,COLOR_kernel___Object_____eqeq))( variable[5] /*rv*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*rv*/ ==  NIT_NULL /*null*/) || (( variable[5] /*rv*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*rv*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*rv*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*rv*/)( variable[5] /*rv*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[6])) { /*if*/
-    variable[6] = ((static_type___MMType___not_for_self_t)CALL( variable[5] /*rv*/,COLOR_static_type___MMType___not_for_self))( variable[5] /*rv*/) /*MMType::not_for_self*/;
+    variable[6] = CALL_static_type___MMType___not_for_self( variable[5] /*rv*/)( variable[5] /*rv*/) /*MMType::not_for_self*/;
     variable[5] = variable[6] /*rv=*/;
     variable[6] = variable[0];
     variable[6] = ATTR_static_type___MMSignature____return_type(variable[6]) /*MMSignature::_return_type*/;
-    variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*rv*/ == variable[6]) || (( variable[5] /*rv*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*rv*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*rv*/,variable[6])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*rv*/,COLOR_kernel___Object_____eqeq))( variable[5] /*rv*/, variable[6]) /*Object::==*/)))))));
+    variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*rv*/ == variable[6]) || (( variable[5] /*rv*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*rv*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*rv*/,variable[6])):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*rv*/)( variable[5] /*rv*/, variable[6]) /*Object::==*/)))))));
     if (UNTAG_Bool(variable[6])) { /*if*/
       variable[3] =  TAG_Bool(true) /*need_for_self=*/;
     }
@@ -557,27 +559,27 @@ val_t static_type___MMSignature___not_for_self(val_t  self) {
   variable[7] = variable[0];
   variable[7] = ATTR_static_type___MMSignature____closures(variable[7]) /*MMSignature::_closures*/;
   variable[6] = variable[7];
-  variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[6] /*clos*/ ==  NIT_NULL /*null*/) || (( variable[6] /*clos*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[6] /*clos*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*clos*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[6] /*clos*/,COLOR_kernel___Object_____eqeq))( variable[6] /*clos*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[6] /*clos*/ ==  NIT_NULL /*null*/) || (( variable[6] /*clos*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[6] /*clos*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*clos*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[6] /*clos*/)( variable[6] /*clos*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[7])) { /*if*/
     variable[7] = NEW_Array_array___Array___init(); /*new Array[MMClosure]*/
     variable[6] = variable[7] /*clos=*/;
     variable[7] = variable[0];
     variable[7] = ATTR_static_type___MMSignature____closures(variable[7]) /*MMSignature::_closures*/;
-    variable[7] = ((array___AbstractArray___iterator_t)CALL(variable[7],COLOR_abstract_collection___Collection___iterator))(variable[7]) /*AbstractArray::iterator*/;
+    variable[7] = CALL_abstract_collection___Collection___iterator(variable[7])(variable[7]) /*AbstractArray::iterator*/;
     while (true) { /*for*/
-      variable[8] = ((array___ArrayIterator___is_ok_t)CALL(variable[7],COLOR_abstract_collection___Iterator___is_ok))(variable[7]) /*ArrayIterator::is_ok*/;
+      variable[8] = CALL_abstract_collection___Iterator___is_ok(variable[7])(variable[7]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[8])) break; /*for*/
-      variable[8] = ((array___ArrayIterator___item_t)CALL(variable[7],COLOR_abstract_collection___Iterator___item))(variable[7]) /*ArrayIterator::item*/;
+      variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*ArrayIterator::item*/;
       variable[9] = variable[8];
-      variable[11] = ((static_type___MMClosure___not_for_self_t)CALL( variable[9] /*c*/,COLOR_static_type___MMClosure___not_for_self))( variable[9] /*c*/) /*MMClosure::not_for_self*/;
+      variable[11] = CALL_static_type___MMClosure___not_for_self( variable[9] /*c*/)( variable[9] /*c*/) /*MMClosure::not_for_self*/;
       variable[10] = variable[11];
-      variable[11] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[10] /*c2*/ ==  variable[9] /*c*/) || (( variable[10] /*c2*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[10] /*c2*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[10] /*c2*/, variable[9] /*c*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[10] /*c2*/,COLOR_kernel___Object_____eqeq))( variable[10] /*c2*/,  variable[9] /*c*/) /*Object::==*/)))))));
+      variable[11] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[10] /*c2*/ ==  variable[9] /*c*/) || (( variable[10] /*c2*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[10] /*c2*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[10] /*c2*/, variable[9] /*c*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[10] /*c2*/)( variable[10] /*c2*/,  variable[9] /*c*/) /*Object::==*/)))))));
       if (UNTAG_Bool(variable[11])) { /*if*/
         variable[3] =  TAG_Bool(true) /*need_for_self=*/;
       }
-      ((array___AbstractArray___add_t)CALL( variable[6] /*clos*/,COLOR_abstract_collection___SimpleCollection___add))( variable[6] /*clos*/,  variable[10] /*c2*/) /*AbstractArray::add*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[6] /*clos*/)( variable[6] /*clos*/,  variable[10] /*c2*/) /*AbstractArray::add*/;
       continue_17: while(0);
-      ((array___ArrayIterator___next_t)CALL(variable[7],COLOR_abstract_collection___Iterator___next))(variable[7]) /*ArrayIterator::next*/;
+      CALL_abstract_collection___Iterator___next(variable[7])(variable[7]) /*ArrayIterator::next*/;
     }
     break_17: while(0);
   }
@@ -587,8 +589,8 @@ val_t static_type___MMSignature___not_for_self(val_t  self) {
     variable[8] = NEW_MMSignature_static_type___MMSignature___init( variable[4] /*p*/,  variable[5] /*rv*/, variable[7]); /*new MMSignature*/
     variable[7] = variable[8];
     variable[2] = variable[7] /*res=*/;
-    variable[7] = ((static_type___MMSignature___closures_t)CALL( variable[2] /*res*/,COLOR_static_type___MMSignature___closures))( variable[2] /*res*/) /*MMSignature::closures*/;
-    ((abstract_collection___SimpleCollection___add_all_t)CALL(variable[7],COLOR_abstract_collection___SimpleCollection___add_all))(variable[7],  variable[6] /*clos*/) /*SimpleCollection::add_all*/;
+    variable[7] = CALL_static_type___MMSignature___closures( variable[2] /*res*/)( variable[2] /*res*/) /*MMSignature::closures*/;
+    CALL_abstract_collection___SimpleCollection___add_all(variable[7])(variable[7],  variable[6] /*clos*/) /*SimpleCollection::add_all*/;
   } else { /*if*/
     variable[7] = variable[0];
     variable[2] = variable[7] /*res=*/;
@@ -612,7 +614,7 @@ void static_type___MMSignature___init(val_t  self, val_t  param0, val_t  param1,
   variable[2] =  param1;
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSignature].i]) return;
-  variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*params*/ ==  NIT_NULL /*null*/) || (( variable[1] /*params*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*params*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*params*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*params*/,COLOR_kernel___Object_____eqeq))( variable[1] /*params*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*params*/ ==  NIT_NULL /*null*/) || (( variable[1] /*params*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*params*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*params*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*params*/)( variable[1] /*params*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMSignature___init, LOCATE_static_type, 219); nit_exit(1);}
   variable[5] = variable[0];
   ATTR_static_type___MMSignature____params(variable[5]) /*MMSignature::_params*/ =  variable[1] /*params*/;
@@ -662,7 +664,7 @@ val_t static_type___MMClosure___adaptation_to(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_static_type___MMClosure____signature(variable[3]) /*MMClosure::_signature*/;
-  variable[3] = ((static_type___MMSignature___adaptation_to_t)CALL(variable[3],COLOR_static_type___MMSignature___adaptation_to))(variable[3],  variable[1] /*r*/) /*MMSignature::adaptation_to*/;
+  variable[3] = CALL_static_type___MMSignature___adaptation_to(variable[3])(variable[3],  variable[1] /*r*/) /*MMSignature::adaptation_to*/;
   variable[4] = variable[0];
   variable[4] = ATTR_static_type___MMClosure____is_break(variable[4]) /*MMClosure::_is_break*/;
   variable[5] = variable[0];
@@ -706,11 +708,11 @@ val_t static_type___MMClosure___not_for_self(val_t  self) {
   variable[0] =  self;
   variable[3] = variable[0];
   variable[3] = ATTR_static_type___MMClosure____signature(variable[3]) /*MMClosure::_signature*/;
-  variable[3] = ((static_type___MMSignature___not_for_self_t)CALL(variable[3],COLOR_static_type___MMSignature___not_for_self))(variable[3]) /*MMSignature::not_for_self*/;
+  variable[3] = CALL_static_type___MMSignature___not_for_self(variable[3])(variable[3]) /*MMSignature::not_for_self*/;
   variable[2] = variable[3];
   variable[3] = variable[0];
   variable[3] = ATTR_static_type___MMClosure____signature(variable[3]) /*MMClosure::_signature*/;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[2] /*sig*/ == variable[3]) || (( variable[2] /*sig*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[2] /*sig*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*sig*/,variable[3])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[2] /*sig*/,COLOR_kernel___Object_____eqeq))( variable[2] /*sig*/, variable[3]) /*Object::==*/)))))));
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[2] /*sig*/ == variable[3]) || (( variable[2] /*sig*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[2] /*sig*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*sig*/,variable[3])):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[2] /*sig*/)( variable[2] /*sig*/, variable[3]) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = variable[0];
     variable[3] = ATTR_static_type___MMClosure____is_break(variable[3]) /*MMClosure::_is_break*/;
@@ -737,18 +739,18 @@ val_t static_type___MMAncestor___to_s(val_t  self) {
   trace.file = LOCATE_static_type;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((static_type___MMAncestor___stype_t)CALL(variable[2],COLOR_static_type___MMAncestor___stype))(variable[2]) /*MMAncestor::stype*/;
-  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[2] = CALL_static_type___MMAncestor___stype(variable[2])(variable[2]) /*MMAncestor::stype*/;
+  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[2])) { /*if*/
     variable[2] = variable[0];
-    variable[2] = ((static_type___MMAncestor___local_class_t)CALL(variable[2],COLOR_static_type___MMAncestor___local_class))(variable[2]) /*MMAncestor::local_class*/;
-    variable[2] = ((abstractmetamodel___MMLocalClass___to_s_t)CALL(variable[2],COLOR_string___Object___to_s))(variable[2]) /*MMLocalClass::to_s*/;
+    variable[2] = CALL_static_type___MMAncestor___local_class(variable[2])(variable[2]) /*MMAncestor::local_class*/;
+    variable[2] = CALL_string___Object___to_s(variable[2])(variable[2]) /*MMLocalClass::to_s*/;
     variable[1] = variable[2];
     goto return_label22;
   } else { /*if*/
     variable[2] = variable[0];
-    variable[2] = ((static_type___MMAncestor___stype_t)CALL(variable[2],COLOR_static_type___MMAncestor___stype))(variable[2]) /*MMAncestor::stype*/;
-    variable[2] = ((string___Object___to_s_t)CALL(variable[2],COLOR_string___Object___to_s))(variable[2]) /*Object::to_s*/;
+    variable[2] = CALL_static_type___MMAncestor___stype(variable[2])(variable[2]) /*MMAncestor::stype*/;
+    variable[2] = CALL_string___Object___to_s(variable[2])(variable[2]) /*Object::to_s*/;
     variable[1] = variable[2];
     goto return_label22;
   }
@@ -802,12 +804,12 @@ val_t static_type___MMAncestor___is_reffinement(val_t  self) {
   trace.file = LOCATE_static_type;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((static_type___MMAncestor___stype_t)CALL(variable[2],COLOR_static_type___MMAncestor___stype))(variable[2]) /*MMAncestor::stype*/;
-  variable[2] = ((static_type___MMType___module_t)CALL(variable[2],COLOR_static_type___MMType___module))(variable[2]) /*MMType::module*/;
+  variable[2] = CALL_static_type___MMAncestor___stype(variable[2])(variable[2]) /*MMAncestor::stype*/;
+  variable[2] = CALL_static_type___MMType___module(variable[2])(variable[2]) /*MMType::module*/;
   variable[3] = variable[0];
-  variable[3] = ((static_type___MMAncestor___stype_t)CALL(variable[3],COLOR_static_type___MMAncestor___stype))(variable[3]) /*MMAncestor::stype*/;
-  variable[3] = ((static_type___MMType___module_t)CALL(variable[3],COLOR_static_type___MMType___module))(variable[3]) /*MMType::module*/;
-  variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] == variable[3]) || ((variable[2] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2],variable[3])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2], variable[3]) /*Object::==*/)))))));
+  variable[3] = CALL_static_type___MMAncestor___stype(variable[3])(variable[3]) /*MMAncestor::stype*/;
+  variable[3] = CALL_static_type___MMType___module(variable[3])(variable[3]) /*MMType::module*/;
+  variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] == variable[3]) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2],variable[3])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2], variable[3]) /*Object::==*/)))))));
   variable[1] = variable[2];
   goto return_label23;
   return_label23: while(false);
@@ -822,14 +824,14 @@ val_t static_type___MMAncestor___is_specialisation(val_t  self) {
   trace.file = LOCATE_static_type;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((static_type___MMAncestor___stype_t)CALL(variable[2],COLOR_static_type___MMAncestor___stype))(variable[2]) /*MMAncestor::stype*/;
-  variable[2] = ((static_type___MMType___local_class_t)CALL(variable[2],COLOR_static_type___MMType___local_class))(variable[2]) /*MMType::local_class*/;
-  variable[2] = ((abstractmetamodel___MMLocalClass___global_t)CALL(variable[2],COLOR_abstractmetamodel___MMLocalClass___global))(variable[2]) /*MMLocalClass::global*/;
+  variable[2] = CALL_static_type___MMAncestor___stype(variable[2])(variable[2]) /*MMAncestor::stype*/;
+  variable[2] = CALL_static_type___MMType___local_class(variable[2])(variable[2]) /*MMType::local_class*/;
+  variable[2] = CALL_abstractmetamodel___MMLocalClass___global(variable[2])(variable[2]) /*MMLocalClass::global*/;
   variable[3] = variable[0];
-  variable[3] = ((static_type___MMAncestor___inheriter_t)CALL(variable[3],COLOR_static_type___MMAncestor___inheriter))(variable[3]) /*MMAncestor::inheriter*/;
-  variable[3] = ((static_type___MMType___local_class_t)CALL(variable[3],COLOR_static_type___MMType___local_class))(variable[3]) /*MMType::local_class*/;
-  variable[3] = ((abstractmetamodel___MMLocalClass___global_t)CALL(variable[3],COLOR_abstractmetamodel___MMLocalClass___global))(variable[3]) /*MMLocalClass::global*/;
-  variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] == variable[3]) || ((variable[2] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2],variable[3])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2], variable[3]) /*Object::==*/)))))));
+  variable[3] = CALL_static_type___MMAncestor___inheriter(variable[3])(variable[3]) /*MMAncestor::inheriter*/;
+  variable[3] = CALL_static_type___MMType___local_class(variable[3])(variable[3]) /*MMType::local_class*/;
+  variable[3] = CALL_abstractmetamodel___MMLocalClass___global(variable[3])(variable[3]) /*MMLocalClass::global*/;
+  variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] == variable[3]) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2],variable[3])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2], variable[3]) /*Object::==*/)))))));
   variable[1] = variable[2];
   goto return_label24;
   return_label24: while(false);
@@ -973,7 +975,7 @@ val_t static_type___MMTypeClass___to_s(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_static_type___MMTypeClass____local_class(variable[2]) /*MMTypeClass::_local_class*/;
-  variable[2] = ((abstractmetamodel___MMLocalClass___to_s_t)CALL(variable[2],COLOR_string___Object___to_s))(variable[2]) /*MMLocalClass::to_s*/;
+  variable[2] = CALL_string___Object___to_s(variable[2])(variable[2]) /*MMLocalClass::to_s*/;
   variable[1] = variable[2];
   goto return_label26;
   return_label26: while(false);
@@ -989,7 +991,7 @@ val_t static_type___MMTypeClass___module(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_static_type___MMTypeClass____local_class(variable[2]) /*MMTypeClass::_local_class*/;
-  variable[2] = ((abstractmetamodel___MMLocalClass___module_t)CALL(variable[2],COLOR_abstractmetamodel___MMLocalClass___module))(variable[2]) /*MMLocalClass::module*/;
+  variable[2] = CALL_abstractmetamodel___MMLocalClass___module(variable[2])(variable[2]) /*MMLocalClass::module*/;
   variable[1] = variable[2];
   goto return_label27;
   return_label27: while(false);
@@ -1013,11 +1015,11 @@ val_t static_type___MMTypeClass_____l(val_t  self, val_t  param0) {
   trace.file = LOCATE_static_type;
   variable[0] =  self;
   variable[1] =  param0;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*t*/ ==  NIT_NULL /*null*/) || (( variable[1] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*t*/,COLOR_kernel___Object_____eqeq))( variable[1] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*t*/ ==  NIT_NULL /*null*/) || (( variable[1] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*t*/)( variable[1] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   variable[4] = variable[3];
   if (UNTAG_Bool(variable[4])) { /* and */
     variable[4] = variable[0];
-    variable[4] = ((static_type___MMType___is_supertype_t)CALL( variable[1] /*t*/,COLOR_static_type___MMType___is_supertype))( variable[1] /*t*/, variable[4]) /*MMType::is_supertype*/;
+    variable[4] = CALL_static_type___MMType___is_supertype( variable[1] /*t*/)( variable[1] /*t*/, variable[4]) /*MMType::is_supertype*/;
   }
   variable[3] = variable[4];
   variable[2] = variable[3];
@@ -1036,22 +1038,22 @@ val_t static_type___MMTypeClass___upcast_for(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_static_type___MMTypeClass____local_class(variable[3]) /*MMTypeClass::_local_class*/;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeClass___upcast_for, LOCATE_static_type, 338); nit_exit(1);}
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*c*/ ==  NIT_NULL /*null*/) || (( variable[1] /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*c*/,COLOR_kernel___Object_____eqeq))( variable[1] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*c*/ ==  NIT_NULL /*null*/) || (( variable[1] /*c*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*c*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*c*/)( variable[1] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeClass___upcast_for, LOCATE_static_type, 339); nit_exit(1);}
   variable[4] = variable[0];
   variable[3] = variable[4];
   variable[4] = variable[0];
   variable[4] = ATTR_static_type___MMTypeClass____local_class(variable[4]) /*MMTypeClass::_local_class*/;
-  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  variable[1] /*c*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], variable[1] /*c*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  variable[1] /*c*/) /*Object::==*/)))))));
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  variable[1] /*c*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], variable[1] /*c*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  variable[1] /*c*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[4])) { /*if*/
     variable[4] = variable[0];
     variable[4] = ATTR_static_type___MMTypeClass____local_class(variable[4]) /*MMTypeClass::_local_class*/;
-    variable[4] = ((static_type___MMLocalClass___ancestor_t)CALL(variable[4],COLOR_static_type___MMLocalClass___ancestor))(variable[4],  variable[1] /*c*/) /*MMLocalClass::ancestor*/;
+    variable[4] = CALL_static_type___MMLocalClass___ancestor(variable[4])(variable[4],  variable[1] /*c*/) /*MMLocalClass::ancestor*/;
     variable[3] = variable[4] /*t=*/;
   }
-  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*t*/)( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeClass___upcast_for, LOCATE_static_type, 345); nit_exit(1);}
   variable[2] =  variable[3] /*t*/;
   goto return_label29;
@@ -1083,11 +1085,11 @@ val_t static_type___MMTypeSimpleClass___is_supertype(val_t  self, val_t  param0)
   trace.file = LOCATE_static_type;
   variable[0] =  self;
   variable[1] =  param0;
-  variable[3] = ((static_type___MMType___local_class_t)CALL( variable[1] /*t*/,COLOR_static_type___MMType___local_class))( variable[1] /*t*/) /*MMType::local_class*/;
-  variable[3] = ((abstractmetamodel___MMLocalClass___cshe_t)CALL(variable[3],COLOR_abstractmetamodel___MMLocalClass___cshe))(variable[3]) /*MMLocalClass::cshe*/;
+  variable[3] = CALL_static_type___MMType___local_class( variable[1] /*t*/)( variable[1] /*t*/) /*MMType::local_class*/;
+  variable[3] = CALL_abstractmetamodel___MMLocalClass___cshe(variable[3])(variable[3]) /*MMLocalClass::cshe*/;
   variable[4] = variable[0];
   variable[4] = ATTR_static_type___MMTypeClass____local_class(variable[4]) /*MMTypeClass::_local_class*/;
-  variable[3] = ((partial_order___PartialOrderElement_____leq_t)CALL(variable[3],COLOR_partial_order___PartialOrderElement_____leq))(variable[3], variable[4]) /*PartialOrderElement::<=*/;
+  variable[3] = CALL_partial_order___PartialOrderElement_____leq(variable[3])(variable[3], variable[4]) /*PartialOrderElement::<=*/;
   variable[2] = variable[3];
   goto return_label31;
   return_label31: while(false);
@@ -1105,16 +1107,16 @@ val_t static_type___MMTypeSimpleClass___for_module(val_t  self, val_t  param0) {
   variable[4] = variable[0];
   variable[3] = variable[4];
   variable[4] = variable[0];
-  variable[4] = ((static_type___MMTypeClass___module_t)CALL(variable[4],COLOR_static_type___MMType___module))(variable[4]) /*MMTypeClass::module*/;
-  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  variable[1] /*mod*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], variable[1] /*mod*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  variable[1] /*mod*/) /*Object::==*/)))))));
+  variable[4] = CALL_static_type___MMType___module(variable[4])(variable[4]) /*MMTypeClass::module*/;
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  variable[1] /*mod*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], variable[1] /*mod*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  variable[1] /*mod*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[4])) { /*if*/
     variable[4] = variable[0];
     variable[4] = ATTR_static_type___MMTypeClass____local_class(variable[4]) /*MMTypeClass::_local_class*/;
-    variable[4] = ((abstractmetamodel___MMLocalClass___for_module_t)CALL(variable[4],COLOR_abstractmetamodel___MMLocalClass___for_module))(variable[4],  variable[1] /*mod*/) /*MMLocalClass::for_module*/;
-    variable[4] = ((static_type___MMLocalClass___get_type_t)CALL(variable[4],COLOR_static_type___MMLocalClass___get_type))(variable[4]) /*MMLocalClass::get_type*/;
+    variable[4] = CALL_abstractmetamodel___MMLocalClass___for_module(variable[4])(variable[4],  variable[1] /*mod*/) /*MMLocalClass::for_module*/;
+    variable[4] = CALL_static_type___MMLocalClass___get_type(variable[4])(variable[4]) /*MMLocalClass::get_type*/;
     variable[3] = variable[4] /*t=*/;
   }
-  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*t*/)( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_static_type___MMTypeSimpleClass___for_module, LOCATE_static_type, 368); nit_exit(1);}
   variable[2] =  variable[3] /*t*/;
   goto return_label32;
@@ -1146,7 +1148,7 @@ void static_type___MMTypeSimpleClass___init(val_t  self, val_t  param0, int* ini
   variable[0] =  self;
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeSimpleClass].i]) return;
-  ((static_type___MMTypeClass___init_t)CALL(variable[0],COLOR_static_type___MMTypeClass___init))(variable[0],  variable[1] /*c*/, init_table /*YYY*/) /*MMTypeClass::init*/;
+  CALL_static_type___MMTypeClass___init(variable[0])(variable[0],  variable[1] /*c*/, init_table /*YYY*/) /*MMTypeClass::init*/;
   return_label34: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeSimpleClass].i] = 1;
   tracehead = trace.prev;

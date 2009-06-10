@@ -43,7 +43,7 @@ val_t kernel___Object_____neq(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*other*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*other*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  variable[1] /*other*/) /*Object::==*/)))));
+  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*other*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*other*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  variable[1] /*other*/) /*Object::==*/)))));
   variable[2] =  TAG_Bool(!UNTAG_Bool(variable[3]));
   goto return_label1;
   return_label1: while(false);
@@ -126,7 +126,7 @@ val_t kernel___Comparable_____leq(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((kernel___Comparable_____l_t)CALL( variable[1] /*other*/,COLOR_kernel___Comparable_____l))( variable[1] /*other*/, variable[3]) /*Comparable::<*/;
+  variable[3] = CALL_kernel___Comparable_____l( variable[1] /*other*/)( variable[1] /*other*/, variable[3]) /*Comparable::<*/;
   variable[2] =  TAG_Bool(!UNTAG_Bool(variable[3]));
   goto return_label4;
   return_label4: while(false);
@@ -142,7 +142,7 @@ val_t kernel___Comparable_____geq(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((kernel___Comparable_____l_t)CALL(variable[3],COLOR_kernel___Comparable_____l))(variable[3],  variable[1] /*other*/) /*Comparable::<*/;
+  variable[3] = CALL_kernel___Comparable_____l(variable[3])(variable[3],  variable[1] /*other*/) /*Comparable::<*/;
   variable[2] =  TAG_Bool(!UNTAG_Bool(variable[3]));
   goto return_label5;
   return_label5: while(false);
@@ -158,7 +158,7 @@ val_t kernel___Comparable_____g(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((kernel___Comparable_____l_t)CALL( variable[1] /*other*/,COLOR_kernel___Comparable_____l))( variable[1] /*other*/, variable[3]) /*Comparable::<*/;
+  variable[3] = CALL_kernel___Comparable_____l( variable[1] /*other*/)( variable[1] /*other*/, variable[3]) /*Comparable::<*/;
   variable[2] = variable[3];
   goto return_label6;
   return_label6: while(false);
@@ -174,14 +174,14 @@ val_t kernel___Comparable_____leqg(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((kernel___Comparable_____l_t)CALL(variable[3],COLOR_kernel___Comparable_____l))(variable[3],  variable[1] /*other*/) /*Comparable::<*/;
+  variable[3] = CALL_kernel___Comparable_____l(variable[3])(variable[3],  variable[1] /*other*/) /*Comparable::<*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
     variable[2] = variable[3];
     goto return_label7;
   } else { /*if*/
     variable[3] = variable[0];
-    variable[3] = ((kernel___Comparable_____l_t)CALL( variable[1] /*other*/,COLOR_kernel___Comparable_____l))( variable[1] /*other*/, variable[3]) /*Comparable::<*/;
+    variable[3] = CALL_kernel___Comparable_____l( variable[1] /*other*/)( variable[1] /*other*/, variable[3]) /*Comparable::<*/;
     if (UNTAG_Bool(variable[3])) { /*if*/
       variable[2] =  TAG_Int(1);
       goto return_label7;
@@ -204,11 +204,11 @@ val_t kernel___Comparable___is_between(val_t  self, val_t  param0, val_t  param1
   variable[1] =  param0;
   variable[2] =  param1;
   variable[4] = variable[0];
-  variable[4] = ((kernel___Comparable_____leq_t)CALL( variable[1] /*c*/,COLOR_kernel___Comparable_____leq))( variable[1] /*c*/, variable[4]) /*Comparable::<=*/;
+  variable[4] = CALL_kernel___Comparable_____leq( variable[1] /*c*/)( variable[1] /*c*/, variable[4]) /*Comparable::<=*/;
   variable[5] = variable[4];
   if (UNTAG_Bool(variable[5])) { /* and */
     variable[5] = variable[0];
-    variable[5] = ((kernel___Comparable_____leq_t)CALL(variable[5],COLOR_kernel___Comparable_____leq))(variable[5],  variable[2] /*d*/) /*Comparable::<=*/;
+    variable[5] = CALL_kernel___Comparable_____leq(variable[5])(variable[5],  variable[2] /*d*/) /*Comparable::<=*/;
   }
   variable[4] = variable[5];
   variable[3] = variable[4];
@@ -226,7 +226,7 @@ val_t kernel___Comparable___max(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((kernel___Comparable_____l_t)CALL(variable[3],COLOR_kernel___Comparable_____l))(variable[3],  variable[1] /*other*/) /*Comparable::<*/;
+  variable[3] = CALL_kernel___Comparable_____l(variable[3])(variable[3],  variable[1] /*other*/) /*Comparable::<*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[2] =  variable[1] /*other*/;
     goto return_label9;
@@ -248,7 +248,7 @@ val_t kernel___Comparable___min(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((kernel___Comparable_____l_t)CALL( variable[1] /*c*/,COLOR_kernel___Comparable_____l))( variable[1] /*c*/, variable[3]) /*Comparable::<*/;
+  variable[3] = CALL_kernel___Comparable_____l( variable[1] /*c*/)( variable[1] /*c*/, variable[3]) /*Comparable::<*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[2] =  variable[1] /*c*/;
     goto return_label10;
@@ -269,7 +269,7 @@ val_t kernel___Discrete___succ(val_t  self) {
   trace.file = LOCATE_kernel;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((kernel___Discrete_____plus_t)CALL(variable[2],COLOR_kernel___Discrete_____plus))(variable[2],  TAG_Int(1)) /*Discrete::+*/;
+  variable[2] = CALL_kernel___Discrete_____plus(variable[2])(variable[2],  TAG_Int(1)) /*Discrete::+*/;
   variable[1] = variable[2];
   goto return_label11;
   return_label11: while(false);
@@ -284,7 +284,7 @@ val_t kernel___Discrete___prec(val_t  self) {
   trace.file = LOCATE_kernel;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((kernel___Discrete_____minus_t)CALL(variable[2],COLOR_kernel___Discrete_____minus))(variable[2],  TAG_Int(1)) /*Discrete::-*/;
+  variable[2] = CALL_kernel___Discrete_____minus(variable[2])(variable[2],  TAG_Int(1)) /*Discrete::-*/;
   variable[1] = variable[2];
   goto return_label12;
   return_label12: while(false);
@@ -326,14 +326,14 @@ val_t kernel___Discrete___distance(val_t  self, val_t  param0) {
   /*variable[3] is variable cursor*/
   /*variable[4] is variable stop*/
   variable[5] = variable[0];
-  variable[5] = ((kernel___Comparable_____l_t)CALL(variable[5],COLOR_kernel___Comparable_____l))(variable[5],  variable[1] /*d*/) /*Comparable::<*/;
+  variable[5] = CALL_kernel___Comparable_____l(variable[5])(variable[5],  variable[1] /*d*/) /*Comparable::<*/;
   if (UNTAG_Bool(variable[5])) { /*if*/
     variable[5] = variable[0];
     variable[3] = variable[5] /*cursor=*/;
     variable[4] =  variable[1] /*d*/ /*stop=*/;
   } else { /*if*/
     variable[5] = variable[0];
-    variable[5] = ((kernel___Comparable_____g_t)CALL(variable[5],COLOR_kernel___Comparable_____g))(variable[5],  variable[1] /*d*/) /*Comparable::>*/;
+    variable[5] = CALL_kernel___Comparable_____g(variable[5])(variable[5],  variable[1] /*d*/) /*Comparable::>*/;
     if (UNTAG_Bool(variable[5])) { /*if*/
       variable[3] =  variable[1] /*d*/ /*cursor=*/;
       variable[5] = variable[0];
@@ -345,9 +345,9 @@ val_t kernel___Discrete___distance(val_t  self, val_t  param0) {
   }
   variable[5] =  TAG_Int(0);
   while (true) { /*while*/
-    variable[6] = ((kernel___Comparable_____l_t)CALL( variable[3] /*cursor*/,COLOR_kernel___Comparable_____l))( variable[3] /*cursor*/,  variable[4] /*stop*/) /*Comparable::<*/;
+    variable[6] = CALL_kernel___Comparable_____l( variable[3] /*cursor*/)( variable[3] /*cursor*/,  variable[4] /*stop*/) /*Comparable::<*/;
     if (!UNTAG_Bool(variable[6])) break; /* while*/
-    variable[6] = ((kernel___Discrete___succ_t)CALL( variable[3] /*cursor*/,COLOR_kernel___Discrete___succ))( variable[3] /*cursor*/) /*Discrete::succ*/;
+    variable[6] = CALL_kernel___Discrete___succ( variable[3] /*cursor*/)( variable[3] /*cursor*/) /*Discrete::succ*/;
     variable[3] = variable[6] /*cursor=*/;
     variable[5] = TAG_Int(UNTAG_Int(variable[5])+UNTAG_Int( TAG_Int(1))) /*nb*/;
     continue_14: while(0);
@@ -1059,7 +1059,7 @@ val_t kernel___Char___to_i(val_t  self) {
       goto return_label24;
     } else { /*if*/
       variable[2] = variable[0];
-      variable[2] = ((kernel___Char___to_lower_t)CALL(variable[2],COLOR_kernel___Char___to_lower))(variable[2]) /*Char::to_lower*/;
+      variable[2] = CALL_kernel___Char___to_lower(variable[2])(variable[2]) /*Char::to_lower*/;
       variable[2] = TAG_Int((unsigned char)UNTAG_Char(variable[2]));
       variable[3] = TAG_Int((unsigned char)UNTAG_Char( TAG_Char('a')));
       variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(10)));
@@ -1099,7 +1099,7 @@ val_t kernel___Char___to_lower(val_t  self) {
   if (UNTAG_Bool(variable[2])) { /*if*/
     variable[2] = variable[0];
     variable[2] = TAG_Int((unsigned char)UNTAG_Char(variable[2]));
-    variable[3] = ((kernel___Char___distance_t)CALL( TAG_Char('a'),COLOR_kernel___Discrete___distance))( TAG_Char('a'),  TAG_Char('A')) /*Char::distance*/;
+    variable[3] = CALL_kernel___Discrete___distance( TAG_Char('a'))( TAG_Char('a'),  TAG_Char('A')) /*Char::distance*/;
     variable[2] = TAG_Int(UNTAG_Int(variable[2])+UNTAG_Int(variable[3]));
     variable[2] = TAG_Char(UNTAG_Int(variable[2]));
     variable[1] = variable[2];
@@ -1131,7 +1131,7 @@ val_t kernel___Char___to_upper(val_t  self) {
   if (UNTAG_Bool(variable[2])) { /*if*/
     variable[2] = variable[0];
     variable[2] = TAG_Int((unsigned char)UNTAG_Char(variable[2]));
-    variable[3] = ((kernel___Char___distance_t)CALL( TAG_Char('a'),COLOR_kernel___Discrete___distance))( TAG_Char('a'),  TAG_Char('A')) /*Char::distance*/;
+    variable[3] = CALL_kernel___Discrete___distance( TAG_Char('a'))( TAG_Char('a'),  TAG_Char('A')) /*Char::distance*/;
     variable[2] = TAG_Int(UNTAG_Int(variable[2])-UNTAG_Int(variable[3]));
     variable[2] = TAG_Char(UNTAG_Int(variable[2]));
     variable[1] = variable[2];

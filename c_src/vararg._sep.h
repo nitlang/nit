@@ -5,13 +5,13 @@
 #include <nit_common.h>
 extern const char *LOCATE_vararg;
 extern const int SFT_vararg[];
-#define COLOR_vararg___MMSignature____vararg_rank SFT_vararg[0]
-#define COLOR_vararg___MMSignature___vararg_rank SFT_vararg[1]
-#define COLOR_vararg___MMSignature___vararg_rank__eq SFT_vararg[2]
-#define COLOR_vararg___MMSignature___has_vararg SFT_vararg[3]
-#define COLOR_SUPER_vararg___MMSignature___adaptation_to SFT_vararg[4]
-#define COLOR_SUPER_vararg___MMSignature___not_for_self SFT_vararg[5]
-#define COLOR_SUPER_vararg___MMSignature___init SFT_vararg[6]
+#define ATTR_vararg___MMSignature____vararg_rank(recv) ATTR(recv, (SFT_vararg[0] + 0))
+#define CALL_vararg___MMSignature___vararg_rank(recv) ((vararg___MMSignature___vararg_rank_t)CALL((recv), (SFT_vararg[1] + 0)))
+#define CALL_vararg___MMSignature___vararg_rank__eq(recv) ((vararg___MMSignature___vararg_rank__eq_t)CALL((recv), (SFT_vararg[1] + 1)))
+#define CALL_vararg___MMSignature___has_vararg(recv) ((vararg___MMSignature___has_vararg_t)CALL((recv), (SFT_vararg[1] + 2)))
+#define CALL_SUPER_vararg___MMSignature___adaptation_to(recv) ((vararg___MMSignature___adaptation_to_t)CALL((recv), (SFT_vararg[1] + 3)))
+#define CALL_SUPER_vararg___MMSignature___not_for_self(recv) ((vararg___MMSignature___not_for_self_t)CALL((recv), (SFT_vararg[1] + 4)))
+#define CALL_SUPER_vararg___MMSignature___init(recv) ((vararg___MMSignature___init_t)CALL((recv), (SFT_vararg[1] + 5)))
 typedef val_t (* vararg___MMSignature___adaptation_to_t)(val_t  self, val_t  param0);
 val_t vararg___MMSignature___adaptation_to(val_t  self, val_t  param0);
 #define LOCATE_vararg___MMSignature___adaptation_to "vararg::MMSignature::(static_type::MMSignature::adaptation_to)"
@@ -22,7 +22,6 @@ typedef void (* vararg___MMSignature___init_t)(val_t  self, val_t  param0, val_t
 void vararg___MMSignature___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 #define LOCATE_vararg___MMSignature___init "vararg::MMSignature::(static_type::MMSignature::init)"
 val_t NEW_MMSignature_static_type___MMSignature___init(val_t p0, val_t p1, val_t p2);
-#define ATTR_vararg___MMSignature____vararg_rank(recv) ATTR(recv, COLOR_vararg___MMSignature____vararg_rank)
 typedef val_t (* vararg___MMSignature___vararg_rank_t)(val_t  self);
 val_t vararg___MMSignature___vararg_rank(val_t  self);
 #define LOCATE_vararg___MMSignature___vararg_rank "vararg::MMSignature::vararg_rank"

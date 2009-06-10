@@ -9,12 +9,12 @@
 extern const classtable_elt_t VFT_SrcModuleLoader[];
 extern const char *LOCATE_syntax;
 extern const int SFT_syntax[];
-#define ID_SrcModuleLoader SFT_syntax[0]
-#define COLOR_SrcModuleLoader SFT_syntax[1]
-#define INIT_TABLE_POS_SrcModuleLoader SFT_syntax[2]
-#define COLOR_syntax___SrcModuleLoader___init SFT_syntax[3]
-#define COLOR_syntax___MMSrcModule___process_supermodules SFT_syntax[4]
-#define COLOR_syntax___MMSrcModule___process_syntax SFT_syntax[5]
+#define ID_SrcModuleLoader (SFT_syntax[0])
+#define COLOR_SrcModuleLoader (SFT_syntax[1])
+#define INIT_TABLE_POS_SrcModuleLoader (SFT_syntax[2] + 0)
+#define CALL_syntax___SrcModuleLoader___init(recv) ((syntax___SrcModuleLoader___init_t)CALL((recv), (SFT_syntax[2] + 1)))
+#define CALL_syntax___MMSrcModule___process_supermodules(recv) ((syntax___MMSrcModule___process_supermodules_t)CALL((recv), (SFT_syntax[3] + 0)))
+#define CALL_syntax___MMSrcModule___process_syntax(recv) ((syntax___MMSrcModule___process_syntax_t)CALL((recv), (SFT_syntax[3] + 1)))
 typedef val_t (* syntax___SrcModuleLoader___file_type_t)(val_t  self);
 val_t syntax___SrcModuleLoader___file_type(val_t  self);
 #define LOCATE_syntax___SrcModuleLoader___file_type "syntax::SrcModuleLoader::(mmloader::ModuleLoader::file_type)"

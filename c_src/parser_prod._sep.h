@@ -7,274 +7,273 @@
 extern const classtable_elt_t VFT_Visitor[];
 extern const char *LOCATE_parser_prod;
 extern const int SFT_parser_prod[];
-#define COLOR_parser_prod___PNode____parent SFT_parser_prod[0]
-#define COLOR_parser_prod___PNode___parent SFT_parser_prod[1]
-#define COLOR_parser_prod___PNode___parent__eq SFT_parser_prod[2]
-#define COLOR_parser_prod___PNode___remove_child SFT_parser_prod[3]
-#define COLOR_parser_prod___PNode___replace_child SFT_parser_prod[4]
-#define COLOR_parser_prod___PNode___replace_with SFT_parser_prod[5]
-#define COLOR_parser_prod___PNode___visit_all SFT_parser_prod[6]
-#define COLOR_parser_prod___PNode___visit_all_reverse SFT_parser_prod[7]
-#define COLOR_parser_prod___PNode___locate SFT_parser_prod[8]
-#define COLOR_parser_prod___PNode___line_number SFT_parser_prod[9]
-#define COLOR_parser_prod___PNode___printl SFT_parser_prod[10]
-#define COLOR_parser_prod___Prod____first_token SFT_parser_prod[11]
-#define COLOR_parser_prod___Prod____last_token SFT_parser_prod[12]
-#define COLOR_parser_prod___Prod___first_token SFT_parser_prod[13]
-#define COLOR_parser_prod___Prod___first_token__eq SFT_parser_prod[14]
-#define COLOR_parser_prod___Prod___last_token SFT_parser_prod[15]
-#define COLOR_parser_prod___Prod___last_token__eq SFT_parser_prod[16]
-#define COLOR_SUPER_parser_prod___Prod___replace_with SFT_parser_prod[17]
-#define ID_Visitor SFT_parser_prod[18]
-#define COLOR_Visitor SFT_parser_prod[19]
-#define INIT_TABLE_POS_Visitor SFT_parser_prod[20]
-#define COLOR_parser_prod___Visitor___visit SFT_parser_prod[21]
-#define COLOR_parser_prod___Visitor___init SFT_parser_prod[22]
-#define COLOR_parser_prod___AModule___empty_init SFT_parser_prod[23]
-#define COLOR_parser_prod___AModule___init_amodule SFT_parser_prod[24]
-#define COLOR_parser_prod___APackagedecl___empty_init SFT_parser_prod[25]
-#define COLOR_parser_prod___APackagedecl___init_apackagedecl SFT_parser_prod[26]
-#define COLOR_parser_prod___AImport___empty_init SFT_parser_prod[27]
-#define COLOR_parser_prod___AImport___init_aimport SFT_parser_prod[28]
-#define COLOR_parser_prod___ANoImport___empty_init SFT_parser_prod[29]
-#define COLOR_parser_prod___ANoImport___init_anoimport SFT_parser_prod[30]
-#define COLOR_parser_prod___APublicVisibility___empty_init SFT_parser_prod[31]
-#define COLOR_parser_prod___APublicVisibility___init_apublicvisibility SFT_parser_prod[32]
-#define COLOR_parser_prod___APrivateVisibility___empty_init SFT_parser_prod[33]
-#define COLOR_parser_prod___APrivateVisibility___init_aprivatevisibility SFT_parser_prod[34]
-#define COLOR_parser_prod___AProtectedVisibility___empty_init SFT_parser_prod[35]
-#define COLOR_parser_prod___AProtectedVisibility___init_aprotectedvisibility SFT_parser_prod[36]
-#define COLOR_parser_prod___AIntrudeVisibility___empty_init SFT_parser_prod[37]
-#define COLOR_parser_prod___AIntrudeVisibility___init_aintrudevisibility SFT_parser_prod[38]
-#define COLOR_parser_prod___AClassdef___empty_init SFT_parser_prod[39]
-#define COLOR_parser_prod___AClassdef___init_aclassdef SFT_parser_prod[40]
-#define COLOR_parser_prod___ATopClassdef___empty_init SFT_parser_prod[41]
-#define COLOR_parser_prod___ATopClassdef___init_atopclassdef SFT_parser_prod[42]
-#define COLOR_parser_prod___AMainClassdef___empty_init SFT_parser_prod[43]
-#define COLOR_parser_prod___AMainClassdef___init_amainclassdef SFT_parser_prod[44]
-#define COLOR_parser_prod___AConcreteClasskind___empty_init SFT_parser_prod[45]
-#define COLOR_parser_prod___AConcreteClasskind___init_aconcreteclasskind SFT_parser_prod[46]
-#define COLOR_parser_prod___AAbstractClasskind___empty_init SFT_parser_prod[47]
-#define COLOR_parser_prod___AAbstractClasskind___init_aabstractclasskind SFT_parser_prod[48]
-#define COLOR_parser_prod___AInterfaceClasskind___empty_init SFT_parser_prod[49]
-#define COLOR_parser_prod___AInterfaceClasskind___init_ainterfaceclasskind SFT_parser_prod[50]
-#define COLOR_parser_prod___AUniversalClasskind___empty_init SFT_parser_prod[51]
-#define COLOR_parser_prod___AUniversalClasskind___init_auniversalclasskind SFT_parser_prod[52]
-#define COLOR_parser_prod___AFormaldef___empty_init SFT_parser_prod[53]
-#define COLOR_parser_prod___AFormaldef___init_aformaldef SFT_parser_prod[54]
-#define COLOR_parser_prod___ASuperclass___empty_init SFT_parser_prod[55]
-#define COLOR_parser_prod___ASuperclass___init_asuperclass SFT_parser_prod[56]
-#define COLOR_parser_prod___AAttrPropdef___empty_init SFT_parser_prod[57]
-#define COLOR_parser_prod___AAttrPropdef___init_aattrpropdef SFT_parser_prod[58]
-#define COLOR_parser_prod___AMethPropdef___empty_init SFT_parser_prod[59]
-#define COLOR_parser_prod___AMethPropdef___init_amethpropdef SFT_parser_prod[60]
-#define COLOR_parser_prod___ADeferredMethPropdef___empty_init SFT_parser_prod[61]
-#define COLOR_parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef SFT_parser_prod[62]
-#define COLOR_parser_prod___AInternMethPropdef___empty_init SFT_parser_prod[63]
-#define COLOR_parser_prod___AInternMethPropdef___init_ainternmethpropdef SFT_parser_prod[64]
-#define COLOR_parser_prod___AExternMethPropdef___empty_init SFT_parser_prod[65]
-#define COLOR_parser_prod___AExternMethPropdef___init_aexternmethpropdef SFT_parser_prod[66]
-#define COLOR_parser_prod___AConcreteMethPropdef___empty_init SFT_parser_prod[67]
-#define COLOR_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef SFT_parser_prod[68]
-#define COLOR_parser_prod___AConcreteInitPropdef___empty_init SFT_parser_prod[69]
-#define COLOR_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef SFT_parser_prod[70]
-#define COLOR_parser_prod___AMainMethPropdef___empty_init SFT_parser_prod[71]
-#define COLOR_parser_prod___AMainMethPropdef___init_amainmethpropdef SFT_parser_prod[72]
-#define COLOR_parser_prod___ATypePropdef___empty_init SFT_parser_prod[73]
-#define COLOR_parser_prod___ATypePropdef___init_atypepropdef SFT_parser_prod[74]
-#define COLOR_parser_prod___AReadAble___empty_init SFT_parser_prod[75]
-#define COLOR_parser_prod___AReadAble___init_areadable SFT_parser_prod[76]
-#define COLOR_parser_prod___AWriteAble___empty_init SFT_parser_prod[77]
-#define COLOR_parser_prod___AWriteAble___init_awriteable SFT_parser_prod[78]
-#define COLOR_parser_prod___AIdMethid___empty_init SFT_parser_prod[79]
-#define COLOR_parser_prod___AIdMethid___init_aidmethid SFT_parser_prod[80]
-#define COLOR_parser_prod___APlusMethid___empty_init SFT_parser_prod[81]
-#define COLOR_parser_prod___APlusMethid___init_aplusmethid SFT_parser_prod[82]
-#define COLOR_parser_prod___AMinusMethid___empty_init SFT_parser_prod[83]
-#define COLOR_parser_prod___AMinusMethid___init_aminusmethid SFT_parser_prod[84]
-#define COLOR_parser_prod___AStarMethid___empty_init SFT_parser_prod[85]
-#define COLOR_parser_prod___AStarMethid___init_astarmethid SFT_parser_prod[86]
-#define COLOR_parser_prod___ASlashMethid___empty_init SFT_parser_prod[87]
-#define COLOR_parser_prod___ASlashMethid___init_aslashmethid SFT_parser_prod[88]
-#define COLOR_parser_prod___APercentMethid___empty_init SFT_parser_prod[89]
-#define COLOR_parser_prod___APercentMethid___init_apercentmethid SFT_parser_prod[90]
-#define COLOR_parser_prod___AEqMethid___empty_init SFT_parser_prod[91]
-#define COLOR_parser_prod___AEqMethid___init_aeqmethid SFT_parser_prod[92]
-#define COLOR_parser_prod___ANeMethid___empty_init SFT_parser_prod[93]
-#define COLOR_parser_prod___ANeMethid___init_anemethid SFT_parser_prod[94]
-#define COLOR_parser_prod___ALeMethid___empty_init SFT_parser_prod[95]
-#define COLOR_parser_prod___ALeMethid___init_alemethid SFT_parser_prod[96]
-#define COLOR_parser_prod___AGeMethid___empty_init SFT_parser_prod[97]
-#define COLOR_parser_prod___AGeMethid___init_agemethid SFT_parser_prod[98]
-#define COLOR_parser_prod___ALtMethid___empty_init SFT_parser_prod[99]
-#define COLOR_parser_prod___ALtMethid___init_altmethid SFT_parser_prod[100]
-#define COLOR_parser_prod___AGtMethid___empty_init SFT_parser_prod[101]
-#define COLOR_parser_prod___AGtMethid___init_agtmethid SFT_parser_prod[102]
-#define COLOR_parser_prod___ABraMethid___empty_init SFT_parser_prod[103]
-#define COLOR_parser_prod___ABraMethid___init_abramethid SFT_parser_prod[104]
-#define COLOR_parser_prod___AStarshipMethid___empty_init SFT_parser_prod[105]
-#define COLOR_parser_prod___AStarshipMethid___init_astarshipmethid SFT_parser_prod[106]
-#define COLOR_parser_prod___AAssignMethid___empty_init SFT_parser_prod[107]
-#define COLOR_parser_prod___AAssignMethid___init_aassignmethid SFT_parser_prod[108]
-#define COLOR_parser_prod___ABraassignMethid___empty_init SFT_parser_prod[109]
-#define COLOR_parser_prod___ABraassignMethid___init_abraassignmethid SFT_parser_prod[110]
-#define COLOR_parser_prod___ASignature___empty_init SFT_parser_prod[111]
-#define COLOR_parser_prod___ASignature___init_asignature SFT_parser_prod[112]
-#define COLOR_parser_prod___AParam___empty_init SFT_parser_prod[113]
-#define COLOR_parser_prod___AParam___init_aparam SFT_parser_prod[114]
-#define COLOR_parser_prod___AClosureDecl___empty_init SFT_parser_prod[115]
-#define COLOR_parser_prod___AClosureDecl___init_aclosuredecl SFT_parser_prod[116]
-#define COLOR_parser_prod___AType___empty_init SFT_parser_prod[117]
-#define COLOR_parser_prod___AType___init_atype SFT_parser_prod[118]
-#define COLOR_parser_prod___ABlockExpr___empty_init SFT_parser_prod[119]
-#define COLOR_parser_prod___ABlockExpr___init_ablockexpr SFT_parser_prod[120]
-#define COLOR_parser_prod___AVardeclExpr___empty_init SFT_parser_prod[121]
-#define COLOR_parser_prod___AVardeclExpr___init_avardeclexpr SFT_parser_prod[122]
-#define COLOR_parser_prod___AReturnExpr___empty_init SFT_parser_prod[123]
-#define COLOR_parser_prod___AReturnExpr___init_areturnexpr SFT_parser_prod[124]
-#define COLOR_parser_prod___ABreakExpr___empty_init SFT_parser_prod[125]
-#define COLOR_parser_prod___ABreakExpr___init_abreakexpr SFT_parser_prod[126]
-#define COLOR_parser_prod___AAbortExpr___empty_init SFT_parser_prod[127]
-#define COLOR_parser_prod___AAbortExpr___init_aabortexpr SFT_parser_prod[128]
-#define COLOR_parser_prod___AContinueExpr___empty_init SFT_parser_prod[129]
-#define COLOR_parser_prod___AContinueExpr___init_acontinueexpr SFT_parser_prod[130]
-#define COLOR_parser_prod___ADoExpr___empty_init SFT_parser_prod[131]
-#define COLOR_parser_prod___ADoExpr___init_adoexpr SFT_parser_prod[132]
-#define COLOR_parser_prod___AIfExpr___empty_init SFT_parser_prod[133]
-#define COLOR_parser_prod___AIfExpr___init_aifexpr SFT_parser_prod[134]
-#define COLOR_parser_prod___AIfexprExpr___empty_init SFT_parser_prod[135]
-#define COLOR_parser_prod___AIfexprExpr___init_aifexprexpr SFT_parser_prod[136]
-#define COLOR_parser_prod___AWhileExpr___empty_init SFT_parser_prod[137]
-#define COLOR_parser_prod___AWhileExpr___init_awhileexpr SFT_parser_prod[138]
-#define COLOR_parser_prod___AForExpr___empty_init SFT_parser_prod[139]
-#define COLOR_parser_prod___AForExpr___init_aforexpr SFT_parser_prod[140]
-#define COLOR_parser_prod___AForVardeclExpr___empty_init SFT_parser_prod[141]
-#define COLOR_parser_prod___AForVardeclExpr___init_aforvardeclexpr SFT_parser_prod[142]
-#define COLOR_parser_prod___AAssertExpr___empty_init SFT_parser_prod[143]
-#define COLOR_parser_prod___AAssertExpr___init_aassertexpr SFT_parser_prod[144]
-#define COLOR_parser_prod___AOnceExpr___empty_init SFT_parser_prod[145]
-#define COLOR_parser_prod___AOnceExpr___init_aonceexpr SFT_parser_prod[146]
-#define COLOR_parser_prod___ASendExpr___empty_init SFT_parser_prod[147]
-#define COLOR_parser_prod___ASendExpr___init_asendexpr SFT_parser_prod[148]
-#define COLOR_parser_prod___ABinopExpr___empty_init SFT_parser_prod[149]
-#define COLOR_parser_prod___ABinopExpr___init_abinopexpr SFT_parser_prod[150]
-#define COLOR_parser_prod___AOrExpr___empty_init SFT_parser_prod[151]
-#define COLOR_parser_prod___AOrExpr___init_aorexpr SFT_parser_prod[152]
-#define COLOR_parser_prod___AAndExpr___empty_init SFT_parser_prod[153]
-#define COLOR_parser_prod___AAndExpr___init_aandexpr SFT_parser_prod[154]
-#define COLOR_parser_prod___ANotExpr___empty_init SFT_parser_prod[155]
-#define COLOR_parser_prod___ANotExpr___init_anotexpr SFT_parser_prod[156]
-#define COLOR_parser_prod___AEqExpr___empty_init SFT_parser_prod[157]
-#define COLOR_parser_prod___AEqExpr___init_aeqexpr SFT_parser_prod[158]
-#define COLOR_parser_prod___AEeExpr___empty_init SFT_parser_prod[159]
-#define COLOR_parser_prod___AEeExpr___init_aeeexpr SFT_parser_prod[160]
-#define COLOR_parser_prod___ANeExpr___empty_init SFT_parser_prod[161]
-#define COLOR_parser_prod___ANeExpr___init_aneexpr SFT_parser_prod[162]
-#define COLOR_parser_prod___ALtExpr___empty_init SFT_parser_prod[163]
-#define COLOR_parser_prod___ALtExpr___init_altexpr SFT_parser_prod[164]
-#define COLOR_parser_prod___ALeExpr___empty_init SFT_parser_prod[165]
-#define COLOR_parser_prod___ALeExpr___init_aleexpr SFT_parser_prod[166]
-#define COLOR_parser_prod___AGtExpr___empty_init SFT_parser_prod[167]
-#define COLOR_parser_prod___AGtExpr___init_agtexpr SFT_parser_prod[168]
-#define COLOR_parser_prod___AGeExpr___empty_init SFT_parser_prod[169]
-#define COLOR_parser_prod___AGeExpr___init_ageexpr SFT_parser_prod[170]
-#define COLOR_parser_prod___AIsaExpr___empty_init SFT_parser_prod[171]
-#define COLOR_parser_prod___AIsaExpr___init_aisaexpr SFT_parser_prod[172]
-#define COLOR_parser_prod___APlusExpr___empty_init SFT_parser_prod[173]
-#define COLOR_parser_prod___APlusExpr___init_aplusexpr SFT_parser_prod[174]
-#define COLOR_parser_prod___AMinusExpr___empty_init SFT_parser_prod[175]
-#define COLOR_parser_prod___AMinusExpr___init_aminusexpr SFT_parser_prod[176]
-#define COLOR_parser_prod___AStarshipExpr___empty_init SFT_parser_prod[177]
-#define COLOR_parser_prod___AStarshipExpr___init_astarshipexpr SFT_parser_prod[178]
-#define COLOR_parser_prod___AStarExpr___empty_init SFT_parser_prod[179]
-#define COLOR_parser_prod___AStarExpr___init_astarexpr SFT_parser_prod[180]
-#define COLOR_parser_prod___ASlashExpr___empty_init SFT_parser_prod[181]
-#define COLOR_parser_prod___ASlashExpr___init_aslashexpr SFT_parser_prod[182]
-#define COLOR_parser_prod___APercentExpr___empty_init SFT_parser_prod[183]
-#define COLOR_parser_prod___APercentExpr___init_apercentexpr SFT_parser_prod[184]
-#define COLOR_parser_prod___AUminusExpr___empty_init SFT_parser_prod[185]
-#define COLOR_parser_prod___AUminusExpr___init_auminusexpr SFT_parser_prod[186]
-#define COLOR_parser_prod___ANewExpr___empty_init SFT_parser_prod[187]
-#define COLOR_parser_prod___ANewExpr___init_anewexpr SFT_parser_prod[188]
-#define COLOR_parser_prod___AAttrExpr___empty_init SFT_parser_prod[189]
-#define COLOR_parser_prod___AAttrExpr___init_aattrexpr SFT_parser_prod[190]
-#define COLOR_parser_prod___AAttrAssignExpr___empty_init SFT_parser_prod[191]
-#define COLOR_parser_prod___AAttrAssignExpr___init_aattrassignexpr SFT_parser_prod[192]
-#define COLOR_parser_prod___AAttrReassignExpr___empty_init SFT_parser_prod[193]
-#define COLOR_parser_prod___AAttrReassignExpr___init_aattrreassignexpr SFT_parser_prod[194]
-#define COLOR_parser_prod___ACallExpr___empty_init SFT_parser_prod[195]
-#define COLOR_parser_prod___ACallExpr___init_acallexpr SFT_parser_prod[196]
-#define COLOR_parser_prod___ACallAssignExpr___empty_init SFT_parser_prod[197]
-#define COLOR_parser_prod___ACallAssignExpr___init_acallassignexpr SFT_parser_prod[198]
-#define COLOR_parser_prod___ACallReassignExpr___empty_init SFT_parser_prod[199]
-#define COLOR_parser_prod___ACallReassignExpr___init_acallreassignexpr SFT_parser_prod[200]
-#define COLOR_parser_prod___ASuperExpr___empty_init SFT_parser_prod[201]
-#define COLOR_parser_prod___ASuperExpr___init_asuperexpr SFT_parser_prod[202]
-#define COLOR_parser_prod___AInitExpr___empty_init SFT_parser_prod[203]
-#define COLOR_parser_prod___AInitExpr___init_ainitexpr SFT_parser_prod[204]
-#define COLOR_parser_prod___ABraExpr___empty_init SFT_parser_prod[205]
-#define COLOR_parser_prod___ABraExpr___init_abraexpr SFT_parser_prod[206]
-#define COLOR_parser_prod___ABraAssignExpr___empty_init SFT_parser_prod[207]
-#define COLOR_parser_prod___ABraAssignExpr___init_abraassignexpr SFT_parser_prod[208]
-#define COLOR_parser_prod___ABraReassignExpr___empty_init SFT_parser_prod[209]
-#define COLOR_parser_prod___ABraReassignExpr___init_abrareassignexpr SFT_parser_prod[210]
-#define COLOR_parser_prod___AVarExpr___empty_init SFT_parser_prod[211]
-#define COLOR_parser_prod___AVarExpr___init_avarexpr SFT_parser_prod[212]
-#define COLOR_parser_prod___AVarAssignExpr___empty_init SFT_parser_prod[213]
-#define COLOR_parser_prod___AVarAssignExpr___init_avarassignexpr SFT_parser_prod[214]
-#define COLOR_parser_prod___AVarReassignExpr___empty_init SFT_parser_prod[215]
-#define COLOR_parser_prod___AVarReassignExpr___init_avarreassignexpr SFT_parser_prod[216]
-#define COLOR_parser_prod___ARangeExpr___empty_init SFT_parser_prod[217]
-#define COLOR_parser_prod___ARangeExpr___init_arangeexpr SFT_parser_prod[218]
-#define COLOR_parser_prod___ACrangeExpr___empty_init SFT_parser_prod[219]
-#define COLOR_parser_prod___ACrangeExpr___init_acrangeexpr SFT_parser_prod[220]
-#define COLOR_parser_prod___AOrangeExpr___empty_init SFT_parser_prod[221]
-#define COLOR_parser_prod___AOrangeExpr___init_aorangeexpr SFT_parser_prod[222]
-#define COLOR_parser_prod___AArrayExpr___empty_init SFT_parser_prod[223]
-#define COLOR_parser_prod___AArrayExpr___init_aarrayexpr SFT_parser_prod[224]
-#define COLOR_parser_prod___ASelfExpr___empty_init SFT_parser_prod[225]
-#define COLOR_parser_prod___ASelfExpr___init_aselfexpr SFT_parser_prod[226]
-#define COLOR_parser_prod___AImplicitSelfExpr___empty_init SFT_parser_prod[227]
-#define COLOR_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr SFT_parser_prod[228]
-#define COLOR_parser_prod___ATrueExpr___empty_init SFT_parser_prod[229]
-#define COLOR_parser_prod___ATrueExpr___init_atrueexpr SFT_parser_prod[230]
-#define COLOR_parser_prod___AFalseExpr___empty_init SFT_parser_prod[231]
-#define COLOR_parser_prod___AFalseExpr___init_afalseexpr SFT_parser_prod[232]
-#define COLOR_parser_prod___ANullExpr___empty_init SFT_parser_prod[233]
-#define COLOR_parser_prod___ANullExpr___init_anullexpr SFT_parser_prod[234]
-#define COLOR_parser_prod___AIntExpr___empty_init SFT_parser_prod[235]
-#define COLOR_parser_prod___AIntExpr___init_aintexpr SFT_parser_prod[236]
-#define COLOR_parser_prod___AFloatExpr___empty_init SFT_parser_prod[237]
-#define COLOR_parser_prod___AFloatExpr___init_afloatexpr SFT_parser_prod[238]
-#define COLOR_parser_prod___ACharExpr___empty_init SFT_parser_prod[239]
-#define COLOR_parser_prod___ACharExpr___init_acharexpr SFT_parser_prod[240]
-#define COLOR_parser_prod___AStringExpr___empty_init SFT_parser_prod[241]
-#define COLOR_parser_prod___AStringExpr___init_astringexpr SFT_parser_prod[242]
-#define COLOR_parser_prod___AStartStringExpr___empty_init SFT_parser_prod[243]
-#define COLOR_parser_prod___AStartStringExpr___init_astartstringexpr SFT_parser_prod[244]
-#define COLOR_parser_prod___AMidStringExpr___empty_init SFT_parser_prod[245]
-#define COLOR_parser_prod___AMidStringExpr___init_amidstringexpr SFT_parser_prod[246]
-#define COLOR_parser_prod___AEndStringExpr___empty_init SFT_parser_prod[247]
-#define COLOR_parser_prod___AEndStringExpr___init_aendstringexpr SFT_parser_prod[248]
-#define COLOR_parser_prod___ASuperstringExpr___empty_init SFT_parser_prod[249]
-#define COLOR_parser_prod___ASuperstringExpr___init_asuperstringexpr SFT_parser_prod[250]
-#define COLOR_parser_prod___AParExpr___empty_init SFT_parser_prod[251]
-#define COLOR_parser_prod___AParExpr___init_aparexpr SFT_parser_prod[252]
-#define COLOR_parser_prod___AAsCastExpr___empty_init SFT_parser_prod[253]
-#define COLOR_parser_prod___AAsCastExpr___init_aascastexpr SFT_parser_prod[254]
-#define COLOR_parser_prod___APlusAssignOp___empty_init SFT_parser_prod[255]
-#define COLOR_parser_prod___APlusAssignOp___init_aplusassignop SFT_parser_prod[256]
-#define COLOR_parser_prod___AMinusAssignOp___empty_init SFT_parser_prod[257]
-#define COLOR_parser_prod___AMinusAssignOp___init_aminusassignop SFT_parser_prod[258]
-#define COLOR_parser_prod___AClosureDef___empty_init SFT_parser_prod[259]
-#define COLOR_parser_prod___AClosureDef___init_aclosuredef SFT_parser_prod[260]
-#define COLOR_parser_prod___AQualified___empty_init SFT_parser_prod[261]
-#define COLOR_parser_prod___AQualified___init_aqualified SFT_parser_prod[262]
-#define COLOR_parser_prod___ADoc___empty_init SFT_parser_prod[263]
-#define COLOR_parser_prod___ADoc___init_adoc SFT_parser_prod[264]
-#define COLOR_parser_prod___Start___init SFT_parser_prod[265]
+#define ATTR_parser_prod___PNode____parent(recv) ATTR(recv, (SFT_parser_prod[0] + 0))
+#define CALL_parser_prod___PNode___parent(recv) ((parser_prod___PNode___parent_t)CALL((recv), (SFT_parser_prod[1] + 0)))
+#define CALL_parser_prod___PNode___parent__eq(recv) ((parser_prod___PNode___parent__eq_t)CALL((recv), (SFT_parser_prod[1] + 1)))
+#define CALL_parser_prod___PNode___remove_child(recv) ((parser_prod___PNode___remove_child_t)CALL((recv), (SFT_parser_prod[1] + 2)))
+#define CALL_parser_prod___PNode___replace_child(recv) ((parser_prod___PNode___replace_child_t)CALL((recv), (SFT_parser_prod[1] + 3)))
+#define CALL_parser_prod___PNode___replace_with(recv) ((parser_prod___PNode___replace_with_t)CALL((recv), (SFT_parser_prod[1] + 4)))
+#define CALL_parser_prod___PNode___visit_all(recv) ((parser_prod___PNode___visit_all_t)CALL((recv), (SFT_parser_prod[1] + 5)))
+#define CALL_parser_prod___PNode___visit_all_reverse(recv) ((parser_prod___PNode___visit_all_reverse_t)CALL((recv), (SFT_parser_prod[1] + 6)))
+#define CALL_parser_prod___PNode___locate(recv) ((parser_prod___PNode___locate_t)CALL((recv), (SFT_parser_prod[1] + 7)))
+#define CALL_parser_prod___PNode___line_number(recv) ((parser_prod___PNode___line_number_t)CALL((recv), (SFT_parser_prod[1] + 8)))
+#define CALL_parser_prod___PNode___printl(recv) ((parser_prod___PNode___printl_t)CALL((recv), (SFT_parser_prod[1] + 9)))
+#define ATTR_parser_prod___Prod____first_token(recv) ATTR(recv, (SFT_parser_prod[2] + 0))
+#define ATTR_parser_prod___Prod____last_token(recv) ATTR(recv, (SFT_parser_prod[2] + 1))
+#define CALL_parser_prod___Prod___first_token(recv) ((parser_prod___Prod___first_token_t)CALL((recv), (SFT_parser_prod[3] + 0)))
+#define CALL_parser_prod___Prod___first_token__eq(recv) ((parser_prod___Prod___first_token__eq_t)CALL((recv), (SFT_parser_prod[3] + 1)))
+#define CALL_parser_prod___Prod___last_token(recv) ((parser_prod___Prod___last_token_t)CALL((recv), (SFT_parser_prod[3] + 2)))
+#define CALL_parser_prod___Prod___last_token__eq(recv) ((parser_prod___Prod___last_token__eq_t)CALL((recv), (SFT_parser_prod[3] + 3)))
+#define CALL_SUPER_parser_prod___Prod___replace_with(recv) ((parser_prod___Prod___replace_with_t)CALL((recv), (SFT_parser_prod[3] + 4)))
+#define ID_Visitor (SFT_parser_prod[4])
+#define COLOR_Visitor (SFT_parser_prod[5])
+#define INIT_TABLE_POS_Visitor (SFT_parser_prod[6] + 0)
+#define CALL_parser_prod___Visitor___visit(recv) ((parser_prod___Visitor___visit_t)CALL((recv), (SFT_parser_prod[6] + 1)))
+#define CALL_parser_prod___Visitor___init(recv) ((parser_prod___Visitor___init_t)CALL((recv), (SFT_parser_prod[6] + 2)))
+#define CALL_parser_prod___AModule___empty_init(recv) ((parser_prod___AModule___empty_init_t)CALL((recv), (SFT_parser_prod[7] + 0)))
+#define CALL_parser_prod___AModule___init_amodule(recv) ((parser_prod___AModule___init_amodule_t)CALL((recv), (SFT_parser_prod[7] + 1)))
+#define CALL_parser_prod___APackagedecl___empty_init(recv) ((parser_prod___APackagedecl___empty_init_t)CALL((recv), (SFT_parser_prod[8] + 0)))
+#define CALL_parser_prod___APackagedecl___init_apackagedecl(recv) ((parser_prod___APackagedecl___init_apackagedecl_t)CALL((recv), (SFT_parser_prod[8] + 1)))
+#define CALL_parser_prod___AImport___empty_init(recv) ((parser_prod___AImport___empty_init_t)CALL((recv), (SFT_parser_prod[9] + 0)))
+#define CALL_parser_prod___AImport___init_aimport(recv) ((parser_prod___AImport___init_aimport_t)CALL((recv), (SFT_parser_prod[9] + 1)))
+#define CALL_parser_prod___ANoImport___empty_init(recv) ((parser_prod___ANoImport___empty_init_t)CALL((recv), (SFT_parser_prod[10] + 0)))
+#define CALL_parser_prod___ANoImport___init_anoimport(recv) ((parser_prod___ANoImport___init_anoimport_t)CALL((recv), (SFT_parser_prod[10] + 1)))
+#define CALL_parser_prod___APublicVisibility___empty_init(recv) ((parser_prod___APublicVisibility___empty_init_t)CALL((recv), (SFT_parser_prod[11] + 0)))
+#define CALL_parser_prod___APublicVisibility___init_apublicvisibility(recv) ((parser_prod___APublicVisibility___init_apublicvisibility_t)CALL((recv), (SFT_parser_prod[11] + 1)))
+#define CALL_parser_prod___APrivateVisibility___empty_init(recv) ((parser_prod___APrivateVisibility___empty_init_t)CALL((recv), (SFT_parser_prod[12] + 0)))
+#define CALL_parser_prod___APrivateVisibility___init_aprivatevisibility(recv) ((parser_prod___APrivateVisibility___init_aprivatevisibility_t)CALL((recv), (SFT_parser_prod[12] + 1)))
+#define CALL_parser_prod___AProtectedVisibility___empty_init(recv) ((parser_prod___AProtectedVisibility___empty_init_t)CALL((recv), (SFT_parser_prod[13] + 0)))
+#define CALL_parser_prod___AProtectedVisibility___init_aprotectedvisibility(recv) ((parser_prod___AProtectedVisibility___init_aprotectedvisibility_t)CALL((recv), (SFT_parser_prod[13] + 1)))
+#define CALL_parser_prod___AIntrudeVisibility___empty_init(recv) ((parser_prod___AIntrudeVisibility___empty_init_t)CALL((recv), (SFT_parser_prod[14] + 0)))
+#define CALL_parser_prod___AIntrudeVisibility___init_aintrudevisibility(recv) ((parser_prod___AIntrudeVisibility___init_aintrudevisibility_t)CALL((recv), (SFT_parser_prod[14] + 1)))
+#define CALL_parser_prod___AClassdef___empty_init(recv) ((parser_prod___AClassdef___empty_init_t)CALL((recv), (SFT_parser_prod[15] + 0)))
+#define CALL_parser_prod___AClassdef___init_aclassdef(recv) ((parser_prod___AClassdef___init_aclassdef_t)CALL((recv), (SFT_parser_prod[15] + 1)))
+#define CALL_parser_prod___ATopClassdef___empty_init(recv) ((parser_prod___ATopClassdef___empty_init_t)CALL((recv), (SFT_parser_prod[16] + 0)))
+#define CALL_parser_prod___ATopClassdef___init_atopclassdef(recv) ((parser_prod___ATopClassdef___init_atopclassdef_t)CALL((recv), (SFT_parser_prod[16] + 1)))
+#define CALL_parser_prod___AMainClassdef___empty_init(recv) ((parser_prod___AMainClassdef___empty_init_t)CALL((recv), (SFT_parser_prod[17] + 0)))
+#define CALL_parser_prod___AMainClassdef___init_amainclassdef(recv) ((parser_prod___AMainClassdef___init_amainclassdef_t)CALL((recv), (SFT_parser_prod[17] + 1)))
+#define CALL_parser_prod___AConcreteClasskind___empty_init(recv) ((parser_prod___AConcreteClasskind___empty_init_t)CALL((recv), (SFT_parser_prod[18] + 0)))
+#define CALL_parser_prod___AConcreteClasskind___init_aconcreteclasskind(recv) ((parser_prod___AConcreteClasskind___init_aconcreteclasskind_t)CALL((recv), (SFT_parser_prod[18] + 1)))
+#define CALL_parser_prod___AAbstractClasskind___empty_init(recv) ((parser_prod___AAbstractClasskind___empty_init_t)CALL((recv), (SFT_parser_prod[19] + 0)))
+#define CALL_parser_prod___AAbstractClasskind___init_aabstractclasskind(recv) ((parser_prod___AAbstractClasskind___init_aabstractclasskind_t)CALL((recv), (SFT_parser_prod[19] + 1)))
+#define CALL_parser_prod___AInterfaceClasskind___empty_init(recv) ((parser_prod___AInterfaceClasskind___empty_init_t)CALL((recv), (SFT_parser_prod[20] + 0)))
+#define CALL_parser_prod___AInterfaceClasskind___init_ainterfaceclasskind(recv) ((parser_prod___AInterfaceClasskind___init_ainterfaceclasskind_t)CALL((recv), (SFT_parser_prod[20] + 1)))
+#define CALL_parser_prod___AUniversalClasskind___empty_init(recv) ((parser_prod___AUniversalClasskind___empty_init_t)CALL((recv), (SFT_parser_prod[21] + 0)))
+#define CALL_parser_prod___AUniversalClasskind___init_auniversalclasskind(recv) ((parser_prod___AUniversalClasskind___init_auniversalclasskind_t)CALL((recv), (SFT_parser_prod[21] + 1)))
+#define CALL_parser_prod___AFormaldef___empty_init(recv) ((parser_prod___AFormaldef___empty_init_t)CALL((recv), (SFT_parser_prod[22] + 0)))
+#define CALL_parser_prod___AFormaldef___init_aformaldef(recv) ((parser_prod___AFormaldef___init_aformaldef_t)CALL((recv), (SFT_parser_prod[22] + 1)))
+#define CALL_parser_prod___ASuperclass___empty_init(recv) ((parser_prod___ASuperclass___empty_init_t)CALL((recv), (SFT_parser_prod[23] + 0)))
+#define CALL_parser_prod___ASuperclass___init_asuperclass(recv) ((parser_prod___ASuperclass___init_asuperclass_t)CALL((recv), (SFT_parser_prod[23] + 1)))
+#define CALL_parser_prod___AAttrPropdef___empty_init(recv) ((parser_prod___AAttrPropdef___empty_init_t)CALL((recv), (SFT_parser_prod[24] + 0)))
+#define CALL_parser_prod___AAttrPropdef___init_aattrpropdef(recv) ((parser_prod___AAttrPropdef___init_aattrpropdef_t)CALL((recv), (SFT_parser_prod[24] + 1)))
+#define CALL_parser_prod___AMethPropdef___empty_init(recv) ((parser_prod___AMethPropdef___empty_init_t)CALL((recv), (SFT_parser_prod[25] + 0)))
+#define CALL_parser_prod___AMethPropdef___init_amethpropdef(recv) ((parser_prod___AMethPropdef___init_amethpropdef_t)CALL((recv), (SFT_parser_prod[25] + 1)))
+#define CALL_parser_prod___ADeferredMethPropdef___empty_init(recv) ((parser_prod___ADeferredMethPropdef___empty_init_t)CALL((recv), (SFT_parser_prod[26] + 0)))
+#define CALL_parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef(recv) ((parser_prod___ADeferredMethPropdef___init_adeferredmethpropdef_t)CALL((recv), (SFT_parser_prod[26] + 1)))
+#define CALL_parser_prod___AInternMethPropdef___empty_init(recv) ((parser_prod___AInternMethPropdef___empty_init_t)CALL((recv), (SFT_parser_prod[27] + 0)))
+#define CALL_parser_prod___AInternMethPropdef___init_ainternmethpropdef(recv) ((parser_prod___AInternMethPropdef___init_ainternmethpropdef_t)CALL((recv), (SFT_parser_prod[27] + 1)))
+#define CALL_parser_prod___AExternMethPropdef___empty_init(recv) ((parser_prod___AExternMethPropdef___empty_init_t)CALL((recv), (SFT_parser_prod[28] + 0)))
+#define CALL_parser_prod___AExternMethPropdef___init_aexternmethpropdef(recv) ((parser_prod___AExternMethPropdef___init_aexternmethpropdef_t)CALL((recv), (SFT_parser_prod[28] + 1)))
+#define CALL_parser_prod___AConcreteMethPropdef___empty_init(recv) ((parser_prod___AConcreteMethPropdef___empty_init_t)CALL((recv), (SFT_parser_prod[29] + 0)))
+#define CALL_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(recv) ((parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef_t)CALL((recv), (SFT_parser_prod[29] + 1)))
+#define CALL_parser_prod___AConcreteInitPropdef___empty_init(recv) ((parser_prod___AConcreteInitPropdef___empty_init_t)CALL((recv), (SFT_parser_prod[30] + 0)))
+#define CALL_parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef(recv) ((parser_prod___AConcreteInitPropdef___init_aconcreteinitpropdef_t)CALL((recv), (SFT_parser_prod[30] + 1)))
+#define CALL_parser_prod___AMainMethPropdef___empty_init(recv) ((parser_prod___AMainMethPropdef___empty_init_t)CALL((recv), (SFT_parser_prod[31] + 0)))
+#define CALL_parser_prod___AMainMethPropdef___init_amainmethpropdef(recv) ((parser_prod___AMainMethPropdef___init_amainmethpropdef_t)CALL((recv), (SFT_parser_prod[31] + 1)))
+#define CALL_parser_prod___ATypePropdef___empty_init(recv) ((parser_prod___ATypePropdef___empty_init_t)CALL((recv), (SFT_parser_prod[32] + 0)))
+#define CALL_parser_prod___ATypePropdef___init_atypepropdef(recv) ((parser_prod___ATypePropdef___init_atypepropdef_t)CALL((recv), (SFT_parser_prod[32] + 1)))
+#define CALL_parser_prod___AReadAble___empty_init(recv) ((parser_prod___AReadAble___empty_init_t)CALL((recv), (SFT_parser_prod[33] + 0)))
+#define CALL_parser_prod___AReadAble___init_areadable(recv) ((parser_prod___AReadAble___init_areadable_t)CALL((recv), (SFT_parser_prod[33] + 1)))
+#define CALL_parser_prod___AWriteAble___empty_init(recv) ((parser_prod___AWriteAble___empty_init_t)CALL((recv), (SFT_parser_prod[34] + 0)))
+#define CALL_parser_prod___AWriteAble___init_awriteable(recv) ((parser_prod___AWriteAble___init_awriteable_t)CALL((recv), (SFT_parser_prod[34] + 1)))
+#define CALL_parser_prod___AIdMethid___empty_init(recv) ((parser_prod___AIdMethid___empty_init_t)CALL((recv), (SFT_parser_prod[35] + 0)))
+#define CALL_parser_prod___AIdMethid___init_aidmethid(recv) ((parser_prod___AIdMethid___init_aidmethid_t)CALL((recv), (SFT_parser_prod[35] + 1)))
+#define CALL_parser_prod___APlusMethid___empty_init(recv) ((parser_prod___APlusMethid___empty_init_t)CALL((recv), (SFT_parser_prod[36] + 0)))
+#define CALL_parser_prod___APlusMethid___init_aplusmethid(recv) ((parser_prod___APlusMethid___init_aplusmethid_t)CALL((recv), (SFT_parser_prod[36] + 1)))
+#define CALL_parser_prod___AMinusMethid___empty_init(recv) ((parser_prod___AMinusMethid___empty_init_t)CALL((recv), (SFT_parser_prod[37] + 0)))
+#define CALL_parser_prod___AMinusMethid___init_aminusmethid(recv) ((parser_prod___AMinusMethid___init_aminusmethid_t)CALL((recv), (SFT_parser_prod[37] + 1)))
+#define CALL_parser_prod___AStarMethid___empty_init(recv) ((parser_prod___AStarMethid___empty_init_t)CALL((recv), (SFT_parser_prod[38] + 0)))
+#define CALL_parser_prod___AStarMethid___init_astarmethid(recv) ((parser_prod___AStarMethid___init_astarmethid_t)CALL((recv), (SFT_parser_prod[38] + 1)))
+#define CALL_parser_prod___ASlashMethid___empty_init(recv) ((parser_prod___ASlashMethid___empty_init_t)CALL((recv), (SFT_parser_prod[39] + 0)))
+#define CALL_parser_prod___ASlashMethid___init_aslashmethid(recv) ((parser_prod___ASlashMethid___init_aslashmethid_t)CALL((recv), (SFT_parser_prod[39] + 1)))
+#define CALL_parser_prod___APercentMethid___empty_init(recv) ((parser_prod___APercentMethid___empty_init_t)CALL((recv), (SFT_parser_prod[40] + 0)))
+#define CALL_parser_prod___APercentMethid___init_apercentmethid(recv) ((parser_prod___APercentMethid___init_apercentmethid_t)CALL((recv), (SFT_parser_prod[40] + 1)))
+#define CALL_parser_prod___AEqMethid___empty_init(recv) ((parser_prod___AEqMethid___empty_init_t)CALL((recv), (SFT_parser_prod[41] + 0)))
+#define CALL_parser_prod___AEqMethid___init_aeqmethid(recv) ((parser_prod___AEqMethid___init_aeqmethid_t)CALL((recv), (SFT_parser_prod[41] + 1)))
+#define CALL_parser_prod___ANeMethid___empty_init(recv) ((parser_prod___ANeMethid___empty_init_t)CALL((recv), (SFT_parser_prod[42] + 0)))
+#define CALL_parser_prod___ANeMethid___init_anemethid(recv) ((parser_prod___ANeMethid___init_anemethid_t)CALL((recv), (SFT_parser_prod[42] + 1)))
+#define CALL_parser_prod___ALeMethid___empty_init(recv) ((parser_prod___ALeMethid___empty_init_t)CALL((recv), (SFT_parser_prod[43] + 0)))
+#define CALL_parser_prod___ALeMethid___init_alemethid(recv) ((parser_prod___ALeMethid___init_alemethid_t)CALL((recv), (SFT_parser_prod[43] + 1)))
+#define CALL_parser_prod___AGeMethid___empty_init(recv) ((parser_prod___AGeMethid___empty_init_t)CALL((recv), (SFT_parser_prod[44] + 0)))
+#define CALL_parser_prod___AGeMethid___init_agemethid(recv) ((parser_prod___AGeMethid___init_agemethid_t)CALL((recv), (SFT_parser_prod[44] + 1)))
+#define CALL_parser_prod___ALtMethid___empty_init(recv) ((parser_prod___ALtMethid___empty_init_t)CALL((recv), (SFT_parser_prod[45] + 0)))
+#define CALL_parser_prod___ALtMethid___init_altmethid(recv) ((parser_prod___ALtMethid___init_altmethid_t)CALL((recv), (SFT_parser_prod[45] + 1)))
+#define CALL_parser_prod___AGtMethid___empty_init(recv) ((parser_prod___AGtMethid___empty_init_t)CALL((recv), (SFT_parser_prod[46] + 0)))
+#define CALL_parser_prod___AGtMethid___init_agtmethid(recv) ((parser_prod___AGtMethid___init_agtmethid_t)CALL((recv), (SFT_parser_prod[46] + 1)))
+#define CALL_parser_prod___ABraMethid___empty_init(recv) ((parser_prod___ABraMethid___empty_init_t)CALL((recv), (SFT_parser_prod[47] + 0)))
+#define CALL_parser_prod___ABraMethid___init_abramethid(recv) ((parser_prod___ABraMethid___init_abramethid_t)CALL((recv), (SFT_parser_prod[47] + 1)))
+#define CALL_parser_prod___AStarshipMethid___empty_init(recv) ((parser_prod___AStarshipMethid___empty_init_t)CALL((recv), (SFT_parser_prod[48] + 0)))
+#define CALL_parser_prod___AStarshipMethid___init_astarshipmethid(recv) ((parser_prod___AStarshipMethid___init_astarshipmethid_t)CALL((recv), (SFT_parser_prod[48] + 1)))
+#define CALL_parser_prod___AAssignMethid___empty_init(recv) ((parser_prod___AAssignMethid___empty_init_t)CALL((recv), (SFT_parser_prod[49] + 0)))
+#define CALL_parser_prod___AAssignMethid___init_aassignmethid(recv) ((parser_prod___AAssignMethid___init_aassignmethid_t)CALL((recv), (SFT_parser_prod[49] + 1)))
+#define CALL_parser_prod___ABraassignMethid___empty_init(recv) ((parser_prod___ABraassignMethid___empty_init_t)CALL((recv), (SFT_parser_prod[50] + 0)))
+#define CALL_parser_prod___ABraassignMethid___init_abraassignmethid(recv) ((parser_prod___ABraassignMethid___init_abraassignmethid_t)CALL((recv), (SFT_parser_prod[50] + 1)))
+#define CALL_parser_prod___ASignature___empty_init(recv) ((parser_prod___ASignature___empty_init_t)CALL((recv), (SFT_parser_prod[51] + 0)))
+#define CALL_parser_prod___ASignature___init_asignature(recv) ((parser_prod___ASignature___init_asignature_t)CALL((recv), (SFT_parser_prod[51] + 1)))
+#define CALL_parser_prod___AParam___empty_init(recv) ((parser_prod___AParam___empty_init_t)CALL((recv), (SFT_parser_prod[52] + 0)))
+#define CALL_parser_prod___AParam___init_aparam(recv) ((parser_prod___AParam___init_aparam_t)CALL((recv), (SFT_parser_prod[52] + 1)))
+#define CALL_parser_prod___AClosureDecl___empty_init(recv) ((parser_prod___AClosureDecl___empty_init_t)CALL((recv), (SFT_parser_prod[53] + 0)))
+#define CALL_parser_prod___AClosureDecl___init_aclosuredecl(recv) ((parser_prod___AClosureDecl___init_aclosuredecl_t)CALL((recv), (SFT_parser_prod[53] + 1)))
+#define CALL_parser_prod___AType___empty_init(recv) ((parser_prod___AType___empty_init_t)CALL((recv), (SFT_parser_prod[54] + 0)))
+#define CALL_parser_prod___AType___init_atype(recv) ((parser_prod___AType___init_atype_t)CALL((recv), (SFT_parser_prod[54] + 1)))
+#define CALL_parser_prod___ABlockExpr___empty_init(recv) ((parser_prod___ABlockExpr___empty_init_t)CALL((recv), (SFT_parser_prod[55] + 0)))
+#define CALL_parser_prod___ABlockExpr___init_ablockexpr(recv) ((parser_prod___ABlockExpr___init_ablockexpr_t)CALL((recv), (SFT_parser_prod[55] + 1)))
+#define CALL_parser_prod___AVardeclExpr___empty_init(recv) ((parser_prod___AVardeclExpr___empty_init_t)CALL((recv), (SFT_parser_prod[56] + 0)))
+#define CALL_parser_prod___AVardeclExpr___init_avardeclexpr(recv) ((parser_prod___AVardeclExpr___init_avardeclexpr_t)CALL((recv), (SFT_parser_prod[56] + 1)))
+#define CALL_parser_prod___AReturnExpr___empty_init(recv) ((parser_prod___AReturnExpr___empty_init_t)CALL((recv), (SFT_parser_prod[57] + 0)))
+#define CALL_parser_prod___AReturnExpr___init_areturnexpr(recv) ((parser_prod___AReturnExpr___init_areturnexpr_t)CALL((recv), (SFT_parser_prod[57] + 1)))
+#define CALL_parser_prod___ABreakExpr___empty_init(recv) ((parser_prod___ABreakExpr___empty_init_t)CALL((recv), (SFT_parser_prod[58] + 0)))
+#define CALL_parser_prod___ABreakExpr___init_abreakexpr(recv) ((parser_prod___ABreakExpr___init_abreakexpr_t)CALL((recv), (SFT_parser_prod[58] + 1)))
+#define CALL_parser_prod___AAbortExpr___empty_init(recv) ((parser_prod___AAbortExpr___empty_init_t)CALL((recv), (SFT_parser_prod[59] + 0)))
+#define CALL_parser_prod___AAbortExpr___init_aabortexpr(recv) ((parser_prod___AAbortExpr___init_aabortexpr_t)CALL((recv), (SFT_parser_prod[59] + 1)))
+#define CALL_parser_prod___AContinueExpr___empty_init(recv) ((parser_prod___AContinueExpr___empty_init_t)CALL((recv), (SFT_parser_prod[60] + 0)))
+#define CALL_parser_prod___AContinueExpr___init_acontinueexpr(recv) ((parser_prod___AContinueExpr___init_acontinueexpr_t)CALL((recv), (SFT_parser_prod[60] + 1)))
+#define CALL_parser_prod___ADoExpr___empty_init(recv) ((parser_prod___ADoExpr___empty_init_t)CALL((recv), (SFT_parser_prod[61] + 0)))
+#define CALL_parser_prod___ADoExpr___init_adoexpr(recv) ((parser_prod___ADoExpr___init_adoexpr_t)CALL((recv), (SFT_parser_prod[61] + 1)))
+#define CALL_parser_prod___AIfExpr___empty_init(recv) ((parser_prod___AIfExpr___empty_init_t)CALL((recv), (SFT_parser_prod[62] + 0)))
+#define CALL_parser_prod___AIfExpr___init_aifexpr(recv) ((parser_prod___AIfExpr___init_aifexpr_t)CALL((recv), (SFT_parser_prod[62] + 1)))
+#define CALL_parser_prod___AIfexprExpr___empty_init(recv) ((parser_prod___AIfexprExpr___empty_init_t)CALL((recv), (SFT_parser_prod[63] + 0)))
+#define CALL_parser_prod___AIfexprExpr___init_aifexprexpr(recv) ((parser_prod___AIfexprExpr___init_aifexprexpr_t)CALL((recv), (SFT_parser_prod[63] + 1)))
+#define CALL_parser_prod___AWhileExpr___empty_init(recv) ((parser_prod___AWhileExpr___empty_init_t)CALL((recv), (SFT_parser_prod[64] + 0)))
+#define CALL_parser_prod___AWhileExpr___init_awhileexpr(recv) ((parser_prod___AWhileExpr___init_awhileexpr_t)CALL((recv), (SFT_parser_prod[64] + 1)))
+#define CALL_parser_prod___AForExpr___empty_init(recv) ((parser_prod___AForExpr___empty_init_t)CALL((recv), (SFT_parser_prod[65] + 0)))
+#define CALL_parser_prod___AForExpr___init_aforexpr(recv) ((parser_prod___AForExpr___init_aforexpr_t)CALL((recv), (SFT_parser_prod[65] + 1)))
+#define CALL_parser_prod___AForVardeclExpr___empty_init(recv) ((parser_prod___AForVardeclExpr___empty_init_t)CALL((recv), (SFT_parser_prod[66] + 0)))
+#define CALL_parser_prod___AForVardeclExpr___init_aforvardeclexpr(recv) ((parser_prod___AForVardeclExpr___init_aforvardeclexpr_t)CALL((recv), (SFT_parser_prod[66] + 1)))
+#define CALL_parser_prod___AAssertExpr___empty_init(recv) ((parser_prod___AAssertExpr___empty_init_t)CALL((recv), (SFT_parser_prod[67] + 0)))
+#define CALL_parser_prod___AAssertExpr___init_aassertexpr(recv) ((parser_prod___AAssertExpr___init_aassertexpr_t)CALL((recv), (SFT_parser_prod[67] + 1)))
+#define CALL_parser_prod___AOnceExpr___empty_init(recv) ((parser_prod___AOnceExpr___empty_init_t)CALL((recv), (SFT_parser_prod[68] + 0)))
+#define CALL_parser_prod___AOnceExpr___init_aonceexpr(recv) ((parser_prod___AOnceExpr___init_aonceexpr_t)CALL((recv), (SFT_parser_prod[68] + 1)))
+#define CALL_parser_prod___ASendExpr___empty_init(recv) ((parser_prod___ASendExpr___empty_init_t)CALL((recv), (SFT_parser_prod[69] + 0)))
+#define CALL_parser_prod___ASendExpr___init_asendexpr(recv) ((parser_prod___ASendExpr___init_asendexpr_t)CALL((recv), (SFT_parser_prod[69] + 1)))
+#define CALL_parser_prod___ABinopExpr___empty_init(recv) ((parser_prod___ABinopExpr___empty_init_t)CALL((recv), (SFT_parser_prod[70] + 0)))
+#define CALL_parser_prod___ABinopExpr___init_abinopexpr(recv) ((parser_prod___ABinopExpr___init_abinopexpr_t)CALL((recv), (SFT_parser_prod[70] + 1)))
+#define CALL_parser_prod___AOrExpr___empty_init(recv) ((parser_prod___AOrExpr___empty_init_t)CALL((recv), (SFT_parser_prod[71] + 0)))
+#define CALL_parser_prod___AOrExpr___init_aorexpr(recv) ((parser_prod___AOrExpr___init_aorexpr_t)CALL((recv), (SFT_parser_prod[71] + 1)))
+#define CALL_parser_prod___AAndExpr___empty_init(recv) ((parser_prod___AAndExpr___empty_init_t)CALL((recv), (SFT_parser_prod[72] + 0)))
+#define CALL_parser_prod___AAndExpr___init_aandexpr(recv) ((parser_prod___AAndExpr___init_aandexpr_t)CALL((recv), (SFT_parser_prod[72] + 1)))
+#define CALL_parser_prod___ANotExpr___empty_init(recv) ((parser_prod___ANotExpr___empty_init_t)CALL((recv), (SFT_parser_prod[73] + 0)))
+#define CALL_parser_prod___ANotExpr___init_anotexpr(recv) ((parser_prod___ANotExpr___init_anotexpr_t)CALL((recv), (SFT_parser_prod[73] + 1)))
+#define CALL_parser_prod___AEqExpr___empty_init(recv) ((parser_prod___AEqExpr___empty_init_t)CALL((recv), (SFT_parser_prod[74] + 0)))
+#define CALL_parser_prod___AEqExpr___init_aeqexpr(recv) ((parser_prod___AEqExpr___init_aeqexpr_t)CALL((recv), (SFT_parser_prod[74] + 1)))
+#define CALL_parser_prod___AEeExpr___empty_init(recv) ((parser_prod___AEeExpr___empty_init_t)CALL((recv), (SFT_parser_prod[75] + 0)))
+#define CALL_parser_prod___AEeExpr___init_aeeexpr(recv) ((parser_prod___AEeExpr___init_aeeexpr_t)CALL((recv), (SFT_parser_prod[75] + 1)))
+#define CALL_parser_prod___ANeExpr___empty_init(recv) ((parser_prod___ANeExpr___empty_init_t)CALL((recv), (SFT_parser_prod[76] + 0)))
+#define CALL_parser_prod___ANeExpr___init_aneexpr(recv) ((parser_prod___ANeExpr___init_aneexpr_t)CALL((recv), (SFT_parser_prod[76] + 1)))
+#define CALL_parser_prod___ALtExpr___empty_init(recv) ((parser_prod___ALtExpr___empty_init_t)CALL((recv), (SFT_parser_prod[77] + 0)))
+#define CALL_parser_prod___ALtExpr___init_altexpr(recv) ((parser_prod___ALtExpr___init_altexpr_t)CALL((recv), (SFT_parser_prod[77] + 1)))
+#define CALL_parser_prod___ALeExpr___empty_init(recv) ((parser_prod___ALeExpr___empty_init_t)CALL((recv), (SFT_parser_prod[78] + 0)))
+#define CALL_parser_prod___ALeExpr___init_aleexpr(recv) ((parser_prod___ALeExpr___init_aleexpr_t)CALL((recv), (SFT_parser_prod[78] + 1)))
+#define CALL_parser_prod___AGtExpr___empty_init(recv) ((parser_prod___AGtExpr___empty_init_t)CALL((recv), (SFT_parser_prod[79] + 0)))
+#define CALL_parser_prod___AGtExpr___init_agtexpr(recv) ((parser_prod___AGtExpr___init_agtexpr_t)CALL((recv), (SFT_parser_prod[79] + 1)))
+#define CALL_parser_prod___AGeExpr___empty_init(recv) ((parser_prod___AGeExpr___empty_init_t)CALL((recv), (SFT_parser_prod[80] + 0)))
+#define CALL_parser_prod___AGeExpr___init_ageexpr(recv) ((parser_prod___AGeExpr___init_ageexpr_t)CALL((recv), (SFT_parser_prod[80] + 1)))
+#define CALL_parser_prod___AIsaExpr___empty_init(recv) ((parser_prod___AIsaExpr___empty_init_t)CALL((recv), (SFT_parser_prod[81] + 0)))
+#define CALL_parser_prod___AIsaExpr___init_aisaexpr(recv) ((parser_prod___AIsaExpr___init_aisaexpr_t)CALL((recv), (SFT_parser_prod[81] + 1)))
+#define CALL_parser_prod___APlusExpr___empty_init(recv) ((parser_prod___APlusExpr___empty_init_t)CALL((recv), (SFT_parser_prod[82] + 0)))
+#define CALL_parser_prod___APlusExpr___init_aplusexpr(recv) ((parser_prod___APlusExpr___init_aplusexpr_t)CALL((recv), (SFT_parser_prod[82] + 1)))
+#define CALL_parser_prod___AMinusExpr___empty_init(recv) ((parser_prod___AMinusExpr___empty_init_t)CALL((recv), (SFT_parser_prod[83] + 0)))
+#define CALL_parser_prod___AMinusExpr___init_aminusexpr(recv) ((parser_prod___AMinusExpr___init_aminusexpr_t)CALL((recv), (SFT_parser_prod[83] + 1)))
+#define CALL_parser_prod___AStarshipExpr___empty_init(recv) ((parser_prod___AStarshipExpr___empty_init_t)CALL((recv), (SFT_parser_prod[84] + 0)))
+#define CALL_parser_prod___AStarshipExpr___init_astarshipexpr(recv) ((parser_prod___AStarshipExpr___init_astarshipexpr_t)CALL((recv), (SFT_parser_prod[84] + 1)))
+#define CALL_parser_prod___AStarExpr___empty_init(recv) ((parser_prod___AStarExpr___empty_init_t)CALL((recv), (SFT_parser_prod[85] + 0)))
+#define CALL_parser_prod___AStarExpr___init_astarexpr(recv) ((parser_prod___AStarExpr___init_astarexpr_t)CALL((recv), (SFT_parser_prod[85] + 1)))
+#define CALL_parser_prod___ASlashExpr___empty_init(recv) ((parser_prod___ASlashExpr___empty_init_t)CALL((recv), (SFT_parser_prod[86] + 0)))
+#define CALL_parser_prod___ASlashExpr___init_aslashexpr(recv) ((parser_prod___ASlashExpr___init_aslashexpr_t)CALL((recv), (SFT_parser_prod[86] + 1)))
+#define CALL_parser_prod___APercentExpr___empty_init(recv) ((parser_prod___APercentExpr___empty_init_t)CALL((recv), (SFT_parser_prod[87] + 0)))
+#define CALL_parser_prod___APercentExpr___init_apercentexpr(recv) ((parser_prod___APercentExpr___init_apercentexpr_t)CALL((recv), (SFT_parser_prod[87] + 1)))
+#define CALL_parser_prod___AUminusExpr___empty_init(recv) ((parser_prod___AUminusExpr___empty_init_t)CALL((recv), (SFT_parser_prod[88] + 0)))
+#define CALL_parser_prod___AUminusExpr___init_auminusexpr(recv) ((parser_prod___AUminusExpr___init_auminusexpr_t)CALL((recv), (SFT_parser_prod[88] + 1)))
+#define CALL_parser_prod___ANewExpr___empty_init(recv) ((parser_prod___ANewExpr___empty_init_t)CALL((recv), (SFT_parser_prod[89] + 0)))
+#define CALL_parser_prod___ANewExpr___init_anewexpr(recv) ((parser_prod___ANewExpr___init_anewexpr_t)CALL((recv), (SFT_parser_prod[89] + 1)))
+#define CALL_parser_prod___AAttrExpr___empty_init(recv) ((parser_prod___AAttrExpr___empty_init_t)CALL((recv), (SFT_parser_prod[90] + 0)))
+#define CALL_parser_prod___AAttrExpr___init_aattrexpr(recv) ((parser_prod___AAttrExpr___init_aattrexpr_t)CALL((recv), (SFT_parser_prod[90] + 1)))
+#define CALL_parser_prod___AAttrAssignExpr___empty_init(recv) ((parser_prod___AAttrAssignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[91] + 0)))
+#define CALL_parser_prod___AAttrAssignExpr___init_aattrassignexpr(recv) ((parser_prod___AAttrAssignExpr___init_aattrassignexpr_t)CALL((recv), (SFT_parser_prod[91] + 1)))
+#define CALL_parser_prod___AAttrReassignExpr___empty_init(recv) ((parser_prod___AAttrReassignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[92] + 0)))
+#define CALL_parser_prod___AAttrReassignExpr___init_aattrreassignexpr(recv) ((parser_prod___AAttrReassignExpr___init_aattrreassignexpr_t)CALL((recv), (SFT_parser_prod[92] + 1)))
+#define CALL_parser_prod___ACallExpr___empty_init(recv) ((parser_prod___ACallExpr___empty_init_t)CALL((recv), (SFT_parser_prod[93] + 0)))
+#define CALL_parser_prod___ACallExpr___init_acallexpr(recv) ((parser_prod___ACallExpr___init_acallexpr_t)CALL((recv), (SFT_parser_prod[93] + 1)))
+#define CALL_parser_prod___ACallAssignExpr___empty_init(recv) ((parser_prod___ACallAssignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[94] + 0)))
+#define CALL_parser_prod___ACallAssignExpr___init_acallassignexpr(recv) ((parser_prod___ACallAssignExpr___init_acallassignexpr_t)CALL((recv), (SFT_parser_prod[94] + 1)))
+#define CALL_parser_prod___ACallReassignExpr___empty_init(recv) ((parser_prod___ACallReassignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[95] + 0)))
+#define CALL_parser_prod___ACallReassignExpr___init_acallreassignexpr(recv) ((parser_prod___ACallReassignExpr___init_acallreassignexpr_t)CALL((recv), (SFT_parser_prod[95] + 1)))
+#define CALL_parser_prod___ASuperExpr___empty_init(recv) ((parser_prod___ASuperExpr___empty_init_t)CALL((recv), (SFT_parser_prod[96] + 0)))
+#define CALL_parser_prod___ASuperExpr___init_asuperexpr(recv) ((parser_prod___ASuperExpr___init_asuperexpr_t)CALL((recv), (SFT_parser_prod[96] + 1)))
+#define CALL_parser_prod___AInitExpr___empty_init(recv) ((parser_prod___AInitExpr___empty_init_t)CALL((recv), (SFT_parser_prod[97] + 0)))
+#define CALL_parser_prod___AInitExpr___init_ainitexpr(recv) ((parser_prod___AInitExpr___init_ainitexpr_t)CALL((recv), (SFT_parser_prod[97] + 1)))
+#define CALL_parser_prod___ABraExpr___empty_init(recv) ((parser_prod___ABraExpr___empty_init_t)CALL((recv), (SFT_parser_prod[98] + 0)))
+#define CALL_parser_prod___ABraExpr___init_abraexpr(recv) ((parser_prod___ABraExpr___init_abraexpr_t)CALL((recv), (SFT_parser_prod[98] + 1)))
+#define CALL_parser_prod___ABraAssignExpr___empty_init(recv) ((parser_prod___ABraAssignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[99] + 0)))
+#define CALL_parser_prod___ABraAssignExpr___init_abraassignexpr(recv) ((parser_prod___ABraAssignExpr___init_abraassignexpr_t)CALL((recv), (SFT_parser_prod[99] + 1)))
+#define CALL_parser_prod___ABraReassignExpr___empty_init(recv) ((parser_prod___ABraReassignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[100] + 0)))
+#define CALL_parser_prod___ABraReassignExpr___init_abrareassignexpr(recv) ((parser_prod___ABraReassignExpr___init_abrareassignexpr_t)CALL((recv), (SFT_parser_prod[100] + 1)))
+#define CALL_parser_prod___AVarExpr___empty_init(recv) ((parser_prod___AVarExpr___empty_init_t)CALL((recv), (SFT_parser_prod[101] + 0)))
+#define CALL_parser_prod___AVarExpr___init_avarexpr(recv) ((parser_prod___AVarExpr___init_avarexpr_t)CALL((recv), (SFT_parser_prod[101] + 1)))
+#define CALL_parser_prod___AVarAssignExpr___empty_init(recv) ((parser_prod___AVarAssignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[102] + 0)))
+#define CALL_parser_prod___AVarAssignExpr___init_avarassignexpr(recv) ((parser_prod___AVarAssignExpr___init_avarassignexpr_t)CALL((recv), (SFT_parser_prod[102] + 1)))
+#define CALL_parser_prod___AVarReassignExpr___empty_init(recv) ((parser_prod___AVarReassignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[103] + 0)))
+#define CALL_parser_prod___AVarReassignExpr___init_avarreassignexpr(recv) ((parser_prod___AVarReassignExpr___init_avarreassignexpr_t)CALL((recv), (SFT_parser_prod[103] + 1)))
+#define CALL_parser_prod___ARangeExpr___empty_init(recv) ((parser_prod___ARangeExpr___empty_init_t)CALL((recv), (SFT_parser_prod[104] + 0)))
+#define CALL_parser_prod___ARangeExpr___init_arangeexpr(recv) ((parser_prod___ARangeExpr___init_arangeexpr_t)CALL((recv), (SFT_parser_prod[104] + 1)))
+#define CALL_parser_prod___ACrangeExpr___empty_init(recv) ((parser_prod___ACrangeExpr___empty_init_t)CALL((recv), (SFT_parser_prod[105] + 0)))
+#define CALL_parser_prod___ACrangeExpr___init_acrangeexpr(recv) ((parser_prod___ACrangeExpr___init_acrangeexpr_t)CALL((recv), (SFT_parser_prod[105] + 1)))
+#define CALL_parser_prod___AOrangeExpr___empty_init(recv) ((parser_prod___AOrangeExpr___empty_init_t)CALL((recv), (SFT_parser_prod[106] + 0)))
+#define CALL_parser_prod___AOrangeExpr___init_aorangeexpr(recv) ((parser_prod___AOrangeExpr___init_aorangeexpr_t)CALL((recv), (SFT_parser_prod[106] + 1)))
+#define CALL_parser_prod___AArrayExpr___empty_init(recv) ((parser_prod___AArrayExpr___empty_init_t)CALL((recv), (SFT_parser_prod[107] + 0)))
+#define CALL_parser_prod___AArrayExpr___init_aarrayexpr(recv) ((parser_prod___AArrayExpr___init_aarrayexpr_t)CALL((recv), (SFT_parser_prod[107] + 1)))
+#define CALL_parser_prod___ASelfExpr___empty_init(recv) ((parser_prod___ASelfExpr___empty_init_t)CALL((recv), (SFT_parser_prod[108] + 0)))
+#define CALL_parser_prod___ASelfExpr___init_aselfexpr(recv) ((parser_prod___ASelfExpr___init_aselfexpr_t)CALL((recv), (SFT_parser_prod[108] + 1)))
+#define CALL_parser_prod___AImplicitSelfExpr___empty_init(recv) ((parser_prod___AImplicitSelfExpr___empty_init_t)CALL((recv), (SFT_parser_prod[109] + 0)))
+#define CALL_parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr(recv) ((parser_prod___AImplicitSelfExpr___init_aimplicitselfexpr_t)CALL((recv), (SFT_parser_prod[109] + 1)))
+#define CALL_parser_prod___ATrueExpr___empty_init(recv) ((parser_prod___ATrueExpr___empty_init_t)CALL((recv), (SFT_parser_prod[110] + 0)))
+#define CALL_parser_prod___ATrueExpr___init_atrueexpr(recv) ((parser_prod___ATrueExpr___init_atrueexpr_t)CALL((recv), (SFT_parser_prod[110] + 1)))
+#define CALL_parser_prod___AFalseExpr___empty_init(recv) ((parser_prod___AFalseExpr___empty_init_t)CALL((recv), (SFT_parser_prod[111] + 0)))
+#define CALL_parser_prod___AFalseExpr___init_afalseexpr(recv) ((parser_prod___AFalseExpr___init_afalseexpr_t)CALL((recv), (SFT_parser_prod[111] + 1)))
+#define CALL_parser_prod___ANullExpr___empty_init(recv) ((parser_prod___ANullExpr___empty_init_t)CALL((recv), (SFT_parser_prod[112] + 0)))
+#define CALL_parser_prod___ANullExpr___init_anullexpr(recv) ((parser_prod___ANullExpr___init_anullexpr_t)CALL((recv), (SFT_parser_prod[112] + 1)))
+#define CALL_parser_prod___AIntExpr___empty_init(recv) ((parser_prod___AIntExpr___empty_init_t)CALL((recv), (SFT_parser_prod[113] + 0)))
+#define CALL_parser_prod___AIntExpr___init_aintexpr(recv) ((parser_prod___AIntExpr___init_aintexpr_t)CALL((recv), (SFT_parser_prod[113] + 1)))
+#define CALL_parser_prod___AFloatExpr___empty_init(recv) ((parser_prod___AFloatExpr___empty_init_t)CALL((recv), (SFT_parser_prod[114] + 0)))
+#define CALL_parser_prod___AFloatExpr___init_afloatexpr(recv) ((parser_prod___AFloatExpr___init_afloatexpr_t)CALL((recv), (SFT_parser_prod[114] + 1)))
+#define CALL_parser_prod___ACharExpr___empty_init(recv) ((parser_prod___ACharExpr___empty_init_t)CALL((recv), (SFT_parser_prod[115] + 0)))
+#define CALL_parser_prod___ACharExpr___init_acharexpr(recv) ((parser_prod___ACharExpr___init_acharexpr_t)CALL((recv), (SFT_parser_prod[115] + 1)))
+#define CALL_parser_prod___AStringExpr___empty_init(recv) ((parser_prod___AStringExpr___empty_init_t)CALL((recv), (SFT_parser_prod[116] + 0)))
+#define CALL_parser_prod___AStringExpr___init_astringexpr(recv) ((parser_prod___AStringExpr___init_astringexpr_t)CALL((recv), (SFT_parser_prod[116] + 1)))
+#define CALL_parser_prod___AStartStringExpr___empty_init(recv) ((parser_prod___AStartStringExpr___empty_init_t)CALL((recv), (SFT_parser_prod[117] + 0)))
+#define CALL_parser_prod___AStartStringExpr___init_astartstringexpr(recv) ((parser_prod___AStartStringExpr___init_astartstringexpr_t)CALL((recv), (SFT_parser_prod[117] + 1)))
+#define CALL_parser_prod___AMidStringExpr___empty_init(recv) ((parser_prod___AMidStringExpr___empty_init_t)CALL((recv), (SFT_parser_prod[118] + 0)))
+#define CALL_parser_prod___AMidStringExpr___init_amidstringexpr(recv) ((parser_prod___AMidStringExpr___init_amidstringexpr_t)CALL((recv), (SFT_parser_prod[118] + 1)))
+#define CALL_parser_prod___AEndStringExpr___empty_init(recv) ((parser_prod___AEndStringExpr___empty_init_t)CALL((recv), (SFT_parser_prod[119] + 0)))
+#define CALL_parser_prod___AEndStringExpr___init_aendstringexpr(recv) ((parser_prod___AEndStringExpr___init_aendstringexpr_t)CALL((recv), (SFT_parser_prod[119] + 1)))
+#define CALL_parser_prod___ASuperstringExpr___empty_init(recv) ((parser_prod___ASuperstringExpr___empty_init_t)CALL((recv), (SFT_parser_prod[120] + 0)))
+#define CALL_parser_prod___ASuperstringExpr___init_asuperstringexpr(recv) ((parser_prod___ASuperstringExpr___init_asuperstringexpr_t)CALL((recv), (SFT_parser_prod[120] + 1)))
+#define CALL_parser_prod___AParExpr___empty_init(recv) ((parser_prod___AParExpr___empty_init_t)CALL((recv), (SFT_parser_prod[121] + 0)))
+#define CALL_parser_prod___AParExpr___init_aparexpr(recv) ((parser_prod___AParExpr___init_aparexpr_t)CALL((recv), (SFT_parser_prod[121] + 1)))
+#define CALL_parser_prod___AAsCastExpr___empty_init(recv) ((parser_prod___AAsCastExpr___empty_init_t)CALL((recv), (SFT_parser_prod[122] + 0)))
+#define CALL_parser_prod___AAsCastExpr___init_aascastexpr(recv) ((parser_prod___AAsCastExpr___init_aascastexpr_t)CALL((recv), (SFT_parser_prod[122] + 1)))
+#define CALL_parser_prod___APlusAssignOp___empty_init(recv) ((parser_prod___APlusAssignOp___empty_init_t)CALL((recv), (SFT_parser_prod[123] + 0)))
+#define CALL_parser_prod___APlusAssignOp___init_aplusassignop(recv) ((parser_prod___APlusAssignOp___init_aplusassignop_t)CALL((recv), (SFT_parser_prod[123] + 1)))
+#define CALL_parser_prod___AMinusAssignOp___empty_init(recv) ((parser_prod___AMinusAssignOp___empty_init_t)CALL((recv), (SFT_parser_prod[124] + 0)))
+#define CALL_parser_prod___AMinusAssignOp___init_aminusassignop(recv) ((parser_prod___AMinusAssignOp___init_aminusassignop_t)CALL((recv), (SFT_parser_prod[124] + 1)))
+#define CALL_parser_prod___AClosureDef___empty_init(recv) ((parser_prod___AClosureDef___empty_init_t)CALL((recv), (SFT_parser_prod[125] + 0)))
+#define CALL_parser_prod___AClosureDef___init_aclosuredef(recv) ((parser_prod___AClosureDef___init_aclosuredef_t)CALL((recv), (SFT_parser_prod[125] + 1)))
+#define CALL_parser_prod___AQualified___empty_init(recv) ((parser_prod___AQualified___empty_init_t)CALL((recv), (SFT_parser_prod[126] + 0)))
+#define CALL_parser_prod___AQualified___init_aqualified(recv) ((parser_prod___AQualified___init_aqualified_t)CALL((recv), (SFT_parser_prod[126] + 1)))
+#define CALL_parser_prod___ADoc___empty_init(recv) ((parser_prod___ADoc___empty_init_t)CALL((recv), (SFT_parser_prod[127] + 0)))
+#define CALL_parser_prod___ADoc___init_adoc(recv) ((parser_prod___ADoc___init_adoc_t)CALL((recv), (SFT_parser_prod[127] + 1)))
+#define CALL_parser_prod___Start___init(recv) ((parser_prod___Start___init_t)CALL((recv), (SFT_parser_prod[128] + 0)))
 val_t NEW_PNode_parser_nodes___PNode___init();
-#define ATTR_parser_prod___PNode____parent(recv) ATTR(recv, COLOR_parser_prod___PNode____parent)
 typedef val_t (* parser_prod___PNode___parent_t)(val_t  self);
 val_t parser_prod___PNode___parent(val_t  self);
 #define LOCATE_parser_prod___PNode___parent "parser_prod::PNode::parent"
@@ -331,14 +330,12 @@ val_t parser_prod___Prod___locate(val_t  self);
 typedef val_t (* parser_prod___Prod___line_number_t)(val_t  self);
 val_t parser_prod___Prod___line_number(val_t  self);
 #define LOCATE_parser_prod___Prod___line_number "parser_prod::Prod::(parser_prod::PNode::line_number)"
-#define ATTR_parser_prod___Prod____first_token(recv) ATTR(recv, COLOR_parser_prod___Prod____first_token)
 typedef val_t (* parser_prod___Prod___first_token_t)(val_t  self);
 val_t parser_prod___Prod___first_token(val_t  self);
 #define LOCATE_parser_prod___Prod___first_token "parser_prod::Prod::first_token"
 typedef void (* parser_prod___Prod___first_token__eq_t)(val_t  self, val_t  param0);
 void parser_prod___Prod___first_token__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___Prod___first_token__eq "parser_prod::Prod::first_token="
-#define ATTR_parser_prod___Prod____last_token(recv) ATTR(recv, COLOR_parser_prod___Prod____last_token)
 typedef val_t (* parser_prod___Prod___last_token_t)(val_t  self);
 val_t parser_prod___Prod___last_token(val_t  self);
 #define LOCATE_parser_prod___Prod___last_token "parser_prod::Prod::last_token"

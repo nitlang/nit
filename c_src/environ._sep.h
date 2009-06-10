@@ -6,8 +6,8 @@
 #include <environ_nit.h>
 extern const char *LOCATE_environ;
 extern const int SFT_environ[];
-#define COLOR_environ___Symbol___environ SFT_environ[0]
-#define COLOR_environ___NativeString___get_environ SFT_environ[1]
+#define CALL_environ___Symbol___environ(recv) ((environ___Symbol___environ_t)CALL((recv), (SFT_environ[0] + 0)))
+#define CALL_environ___NativeString___get_environ(recv) ((environ___NativeString___get_environ_t)CALL((recv), (SFT_environ[1] + 0)))
 val_t NEW_Symbol_symbol___Symbol___init(val_t p0);
 typedef val_t (* environ___Symbol___environ_t)(val_t  self);
 val_t environ___Symbol___environ(val_t  self);

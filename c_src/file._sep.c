@@ -11,9 +11,9 @@ void file___Object___printn(val_t  self, val_t  param0) {
   if (( param0!=NIT_NULL) && !VAL_ISA( param0, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_file___Object___printn, LOCATE_file, 26); nit_exit(1); } /*cast Array[Object]*/;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((file___Object___stdout_t)CALL(variable[3],COLOR_file___Object___stdout))(variable[3]) /*Object::stdout*/;
-  variable[4] = ((string___Collection___to_s_t)CALL( variable[1] /*objects*/,COLOR_string___Object___to_s))( variable[1] /*objects*/) /*Collection::to_s*/;
-  ((file___OFStream___write_t)CALL(variable[3],COLOR_stream___OStream___write))(variable[3], variable[4]) /*OFStream::write*/;
+  variable[3] = CALL_file___Object___stdout(variable[3])(variable[3]) /*Object::stdout*/;
+  variable[4] = CALL_string___Object___to_s( variable[1] /*objects*/)( variable[1] /*objects*/) /*Collection::to_s*/;
+  CALL_stream___OStream___write(variable[3])(variable[3], variable[4]) /*OFStream::write*/;
   return_label0: while(false);
   tracehead = trace.prev;
   return;
@@ -26,17 +26,17 @@ void file___Object___print(val_t  self, val_t  param0) {
   trace.file = LOCATE_file;
   variable[0] =  self;
   variable[1] =  param0;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*object*/ ==  NIT_NULL /*null*/) || (( variable[1] /*object*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*object*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*object*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*object*/,COLOR_kernel___Object_____eqeq))( variable[1] /*object*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*object*/ ==  NIT_NULL /*null*/) || (( variable[1] /*object*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*object*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*object*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*object*/)( variable[1] /*object*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = variable[0];
-    variable[3] = ((file___Object___stdout_t)CALL(variable[3],COLOR_file___Object___stdout))(variable[3]) /*Object::stdout*/;
-    variable[4] = ((string___Object___to_s_t)CALL( variable[1] /*object*/,COLOR_string___Object___to_s))( variable[1] /*object*/) /*Object::to_s*/;
-    ((file___OFStream___write_t)CALL(variable[3],COLOR_stream___OStream___write))(variable[3], variable[4]) /*OFStream::write*/;
+    variable[3] = CALL_file___Object___stdout(variable[3])(variable[3]) /*Object::stdout*/;
+    variable[4] = CALL_string___Object___to_s( variable[1] /*object*/)( variable[1] /*object*/) /*Object::to_s*/;
+    CALL_stream___OStream___write(variable[3])(variable[3], variable[4]) /*OFStream::write*/;
   }
   variable[3] = variable[0];
-  variable[3] = ((file___Object___stdout_t)CALL(variable[3],COLOR_file___Object___stdout))(variable[3]) /*Object::stdout*/;
+  variable[3] = CALL_file___Object___stdout(variable[3])(variable[3]) /*Object::stdout*/;
   variable[4] = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)); /*new String*/
-  ((file___OFStream___write_t)CALL(variable[3],COLOR_stream___OStream___write))(variable[3], variable[4]) /*OFStream::write*/;
+  CALL_stream___OStream___write(variable[3])(variable[3], variable[4]) /*OFStream::write*/;
   return_label1: while(false);
   tracehead = trace.prev;
   return;
@@ -49,8 +49,8 @@ val_t file___Object___getc(val_t  self) {
   trace.file = LOCATE_file;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((file___Object___stdin_t)CALL(variable[2],COLOR_file___Object___stdin))(variable[2]) /*Object::stdin*/;
-  variable[2] = ((stream___BufferedIStream___read_char_t)CALL(variable[2],COLOR_stream___IStream___read_char))(variable[2]) /*BufferedIStream::read_char*/;
+  variable[2] = CALL_file___Object___stdin(variable[2])(variable[2]) /*Object::stdin*/;
+  variable[2] = CALL_stream___IStream___read_char(variable[2])(variable[2]) /*BufferedIStream::read_char*/;
   variable[2] = TAG_Char(UNTAG_Int(variable[2]));
   variable[1] = variable[2];
   goto return_label2;
@@ -66,8 +66,8 @@ val_t file___Object___gets(val_t  self) {
   trace.file = LOCATE_file;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((file___Object___stdin_t)CALL(variable[2],COLOR_file___Object___stdin))(variable[2]) /*Object::stdin*/;
-  variable[2] = ((stream___IStream___read_line_t)CALL(variable[2],COLOR_stream___IStream___read_line))(variable[2]) /*IStream::read_line*/;
+  variable[2] = CALL_file___Object___stdin(variable[2])(variable[2]) /*Object::stdin*/;
+  variable[2] = CALL_stream___IStream___read_line(variable[2])(variable[2]) /*IStream::read_line*/;
   variable[1] = variable[2];
   goto return_label3;
   return_label3: while(false);
@@ -152,7 +152,7 @@ val_t file___FStream___file_stat(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_file___FStream____file(variable[2]) /*FStream::_file*/;
-  variable[2] = ((file___NativeFile___file_stat_t)CALL(variable[2],COLOR_file___NativeFile___file_stat))(variable[2]) /*NativeFile::file_stat*/;
+  variable[2] = CALL_file___NativeFile___file_stat(variable[2])(variable[2]) /*NativeFile::file_stat*/;
   variable[1] = variable[2];
   goto return_label10;
   return_label10: while(false);
@@ -168,7 +168,7 @@ void file___IFStream___close(val_t  self) {
   variable[0] =  self;
   variable[3] = variable[0];
   variable[3] = ATTR_file___FStream____file(variable[3]) /*FStream::_file*/;
-  variable[3] = ((file___NativeFile___io_close_t)CALL(variable[3],COLOR_file___NativeFile___io_close))(variable[3]) /*NativeFile::io_close*/;
+  variable[3] = CALL_file___NativeFile___io_close(variable[3])(variable[3]) /*NativeFile::io_close*/;
   variable[2] = variable[3];
   variable[3] = variable[0];
   ATTR_file___IFStream____end_reached(variable[3]) /*IFStream::_end_reached*/ =  TAG_Bool(true);
@@ -191,7 +191,7 @@ void file___IFStream___fill_buffer(val_t  self) {
   variable[5] = variable[0];
   variable[5] = ATTR_stream___BufferedIStream____buffer(variable[5]) /*BufferedIStream::_buffer*/;
   variable[5] = ATTR_string___String____capacity(variable[5]) /*String::_capacity*/;
-  variable[3] = ((file___NativeFile___io_read_t)CALL(variable[3],COLOR_file___NativeFile___io_read))(variable[3], variable[4], variable[5]) /*NativeFile::io_read*/;
+  variable[3] = CALL_file___NativeFile___io_read(variable[3])(variable[3], variable[4], variable[5]) /*NativeFile::io_read*/;
   variable[2] = variable[3];
   variable[3] = TAG_Bool(UNTAG_Int( variable[2] /*nb*/)<=UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[3])) { /*if*/
@@ -225,17 +225,17 @@ void file___IFStream___reopen(val_t  self) {
   trace.file = LOCATE_file;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((stream___BufferedIStream___eof_t)CALL(variable[2],COLOR_stream___IStream___eof))(variable[2]) /*BufferedIStream::eof*/;
+  variable[2] = CALL_stream___IStream___eof(variable[2])(variable[2]) /*BufferedIStream::eof*/;
   if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[2])))) { /*if*/
     variable[2] = variable[0];
-    ((file___IFStream___close_t)CALL(variable[2],COLOR_stream___IOS___close))(variable[2]) /*IFStream::close*/;
+    CALL_stream___IOS___close(variable[2])(variable[2]) /*IFStream::close*/;
   }
   variable[2] = variable[0];
   variable[3] = variable[0];
   variable[4] = variable[0];
   variable[4] = ATTR_file___FStream____path(variable[4]) /*FStream::_path*/;
-  variable[4] = ((string___String___to_cstring_t)CALL(variable[4],COLOR_string___String___to_cstring))(variable[4]) /*String::to_cstring*/;
-  variable[3] = ((file___NativeFileCapable___io_open_read_t)CALL(variable[3],COLOR_file___NativeFileCapable___io_open_read))(variable[3], variable[4]) /*NativeFileCapable::io_open_read*/;
+  variable[4] = CALL_string___String___to_cstring(variable[4])(variable[4]) /*String::to_cstring*/;
+  variable[3] = CALL_file___NativeFileCapable___io_open_read(variable[3])(variable[3], variable[4]) /*NativeFileCapable::io_open_read*/;
   ATTR_file___FStream____file(variable[2]) /*FStream::_file*/ = variable[3];
   variable[2] = variable[0];
   ATTR_file___IFStream____end_reached(variable[2]) /*IFStream::_end_reached*/ =  TAG_Bool(false);
@@ -243,7 +243,7 @@ void file___IFStream___reopen(val_t  self) {
   ATTR_stream___BufferedIStream____buffer_pos(variable[2]) /*BufferedIStream::_buffer_pos*/ =  TAG_Int(0);
   variable[2] = variable[0];
   variable[2] = ATTR_stream___BufferedIStream____buffer(variable[2]) /*BufferedIStream::_buffer*/;
-  ((array___AbstractArray___clear_t)CALL(variable[2],COLOR_abstract_collection___RemovableCollection___clear))(variable[2]) /*AbstractArray::clear*/;
+  CALL_abstract_collection___RemovableCollection___clear(variable[2])(variable[2]) /*AbstractArray::clear*/;
   return_label13: while(false);
   tracehead = trace.prev;
   return;
@@ -260,17 +260,17 @@ void file___IFStream___open(val_t  self, val_t  param0, int* init_table) {
   variable[3] = variable[0];
   ATTR_file___FStream____path(variable[3]) /*FStream::_path*/ =  variable[1] /*path*/;
   variable[3] = variable[0];
-  ((stream___BufferedIStream___prepare_buffer_t)CALL(variable[3],COLOR_stream___BufferedIStream___prepare_buffer))(variable[3],  TAG_Int(10)) /*BufferedIStream::prepare_buffer*/;
+  CALL_stream___BufferedIStream___prepare_buffer(variable[3])(variable[3],  TAG_Int(10)) /*BufferedIStream::prepare_buffer*/;
   variable[3] = variable[0];
   variable[4] = variable[0];
   variable[5] = variable[0];
   variable[5] = ATTR_file___FStream____path(variable[5]) /*FStream::_path*/;
-  variable[5] = ((string___String___to_cstring_t)CALL(variable[5],COLOR_string___String___to_cstring))(variable[5]) /*String::to_cstring*/;
-  variable[4] = ((file___NativeFileCapable___io_open_read_t)CALL(variable[4],COLOR_file___NativeFileCapable___io_open_read))(variable[4], variable[5]) /*NativeFileCapable::io_open_read*/;
+  variable[5] = CALL_string___String___to_cstring(variable[5])(variable[5]) /*String::to_cstring*/;
+  variable[4] = CALL_file___NativeFileCapable___io_open_read(variable[4])(variable[4], variable[5]) /*NativeFileCapable::io_open_read*/;
   ATTR_file___FStream____file(variable[3]) /*FStream::_file*/ = variable[4];
   variable[3] = variable[0];
   variable[3] = ATTR_file___FStream____file(variable[3]) /*FStream::_file*/;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", " 'cant_open_file' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_file___IFStream___open, LOCATE_file, 110); nit_exit(1);}
   return_label14: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IFStream].i] = 1;
@@ -312,7 +312,7 @@ void file___OFStream___close(val_t  self) {
   variable[0] =  self;
   variable[3] = variable[0];
   variable[3] = ATTR_file___FStream____file(variable[3]) /*FStream::_file*/;
-  variable[3] = ((file___NativeFile___io_close_t)CALL(variable[3],COLOR_file___NativeFile___io_close))(variable[3]) /*NativeFile::io_close*/;
+  variable[3] = CALL_file___NativeFile___io_close(variable[3])(variable[3]) /*NativeFile::io_close*/;
   variable[2] = variable[3];
   variable[3] = variable[0];
   ATTR_file___OFStream____writable(variable[3]) /*OFStream::_writable*/ =  TAG_Bool(false);
@@ -332,9 +332,9 @@ void file___OFStream___write(val_t  self, val_t  param0) {
   variable[3] = ATTR_file___OFStream____writable(variable[3]) /*OFStream::_writable*/;
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_file___OFStream___write, LOCATE_file, 125); nit_exit(1);}
   variable[3] = variable[0];
-  variable[4] = ((string___String___to_cstring_t)CALL( variable[1] /*s*/,COLOR_string___String___to_cstring))( variable[1] /*s*/) /*String::to_cstring*/;
-  variable[5] = ((array___AbstractArray___length_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Collection___length))( variable[1] /*s*/) /*AbstractArray::length*/;
-  ((file___OFStream___write_native_t)CALL(variable[3],COLOR_file___OFStream___write_native))(variable[3], variable[4], variable[5]) /*OFStream::write_native*/;
+  variable[4] = CALL_string___String___to_cstring( variable[1] /*s*/)( variable[1] /*s*/) /*String::to_cstring*/;
+  variable[5] = CALL_abstract_collection___Collection___length( variable[1] /*s*/)( variable[1] /*s*/) /*AbstractArray::length*/;
+  CALL_file___OFStream___write_native(variable[3])(variable[3], variable[4], variable[5]) /*OFStream::write_native*/;
   return_label18: while(false);
   tracehead = trace.prev;
   return;
@@ -368,21 +368,21 @@ void file___OFStream___write_native(val_t  self, val_t  param0, val_t  param1) {
   if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_file___OFStream___write_native, LOCATE_file, 143); nit_exit(1);}
   variable[5] = variable[0];
   variable[5] = ATTR_file___FStream____file(variable[5]) /*FStream::_file*/;
-  variable[5] = ((file___NativeFile___io_write_t)CALL(variable[5],COLOR_file___NativeFile___io_write))(variable[5],  variable[1] /*native*/,  variable[2] /*len*/) /*NativeFile::io_write*/;
+  variable[5] = CALL_file___NativeFile___io_write(variable[5])(variable[5],  variable[1] /*native*/,  variable[2] /*len*/) /*NativeFile::io_write*/;
   variable[4] = variable[5];
   variable[5] = TAG_Bool(( variable[4] /*err*/)!=( variable[2] /*len*/));
   if (UNTAG_Bool(variable[5])) { /*if*/
     variable[5] = variable[0];
     variable[6] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[Object]*/
     variable[7] = NEW_String_string___String___with_native(BOX_NativeString("Problem in writing : "), TAG_Int(21)); /*new String*/
-    ((array___AbstractArray___add_t)CALL(variable[6],COLOR_abstract_collection___SimpleCollection___add))(variable[6], variable[7]) /*AbstractArray::add*/;
-    ((array___AbstractArray___add_t)CALL(variable[6],COLOR_abstract_collection___SimpleCollection___add))(variable[6],  variable[4] /*err*/) /*AbstractArray::add*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6],  variable[4] /*err*/) /*AbstractArray::add*/;
     variable[8] = NEW_String_string___String___with_native(BOX_NativeString(" "), TAG_Int(1)); /*new String*/
-    ((array___AbstractArray___add_t)CALL(variable[6],COLOR_abstract_collection___SimpleCollection___add))(variable[6], variable[8]) /*AbstractArray::add*/;
-    ((array___AbstractArray___add_t)CALL(variable[6],COLOR_abstract_collection___SimpleCollection___add))(variable[6],  variable[2] /*len*/) /*AbstractArray::add*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[8]) /*AbstractArray::add*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6],  variable[2] /*len*/) /*AbstractArray::add*/;
     variable[9] = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)); /*new String*/
-    ((array___AbstractArray___add_t)CALL(variable[6],COLOR_abstract_collection___SimpleCollection___add))(variable[6], variable[9]) /*AbstractArray::add*/;
-    ((file___Object___printn_t)CALL(variable[5],COLOR_file___Object___printn))(variable[5], variable[6]) /*Object::printn*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[9]) /*AbstractArray::add*/;
+    CALL_file___Object___printn(variable[5])(variable[5], variable[6]) /*Object::printn*/;
   }
   return_label20: while(false);
   tracehead = trace.prev;
@@ -399,12 +399,12 @@ void file___OFStream___open(val_t  self, val_t  param0, int* init_table) {
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OFStream].i]) return;
   variable[3] = variable[0];
   variable[4] = variable[0];
-  variable[5] = ((string___String___to_cstring_t)CALL( variable[1] /*path*/,COLOR_string___String___to_cstring))( variable[1] /*path*/) /*String::to_cstring*/;
-  variable[4] = ((file___NativeFileCapable___io_open_write_t)CALL(variable[4],COLOR_file___NativeFileCapable___io_open_write))(variable[4], variable[5]) /*NativeFileCapable::io_open_write*/;
+  variable[5] = CALL_string___String___to_cstring( variable[1] /*path*/)( variable[1] /*path*/) /*String::to_cstring*/;
+  variable[4] = CALL_file___NativeFileCapable___io_open_write(variable[4])(variable[4], variable[5]) /*NativeFileCapable::io_open_write*/;
   ATTR_file___FStream____file(variable[3]) /*FStream::_file*/ = variable[4];
   variable[3] = variable[0];
   variable[3] = ATTR_file___FStream____file(variable[3]) /*FStream::_file*/;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", " 'cant_open_file' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_file___OFStream___open, LOCATE_file, 155); nit_exit(1);}
   variable[3] = variable[0];
   ATTR_file___FStream____path(variable[3]) /*FStream::_path*/ =  variable[1] /*path*/;
@@ -449,16 +449,16 @@ void file___Stdin___init(val_t  self, int* init_table) {
   trace.file = LOCATE_file;
   variable[0] =  self;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Stdin].i]) return;
-  ((file___IFStream___init_t)CALL(variable[0],COLOR_file___IFStream___init))(variable[0], init_table /*YYY*/) /*IFStream::init*/;
+  CALL_file___IFStream___init(variable[0])(variable[0], init_table /*YYY*/) /*IFStream::init*/;
   variable[2] = variable[0];
   variable[3] = variable[0];
-  variable[3] = ((file___NativeFileCapable___native_stdin_t)CALL(variable[3],COLOR_file___NativeFileCapable___native_stdin))(variable[3]) /*NativeFileCapable::native_stdin*/;
+  variable[3] = CALL_file___NativeFileCapable___native_stdin(variable[3])(variable[3]) /*NativeFileCapable::native_stdin*/;
   ATTR_file___FStream____file(variable[2]) /*FStream::_file*/ = variable[3];
   variable[2] = variable[0];
   variable[3] = NEW_String_string___String___with_native(BOX_NativeString("/dev/stdin"), TAG_Int(10)); /*new String*/
   ATTR_file___FStream____path(variable[2]) /*FStream::_path*/ = variable[3];
   variable[2] = variable[0];
-  ((stream___BufferedIStream___prepare_buffer_t)CALL(variable[2],COLOR_stream___BufferedIStream___prepare_buffer))(variable[2],  TAG_Int(1)) /*BufferedIStream::prepare_buffer*/;
+  CALL_stream___BufferedIStream___prepare_buffer(variable[2])(variable[2],  TAG_Int(1)) /*BufferedIStream::prepare_buffer*/;
   return_label24: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Stdin].i] = 1;
   tracehead = trace.prev;
@@ -472,10 +472,10 @@ void file___Stdout___init(val_t  self, int* init_table) {
   trace.file = LOCATE_file;
   variable[0] =  self;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Stdout].i]) return;
-  ((file___OFStream___init_t)CALL(variable[0],COLOR_file___OFStream___init))(variable[0], init_table /*YYY*/) /*OFStream::init*/;
+  CALL_file___OFStream___init(variable[0])(variable[0], init_table /*YYY*/) /*OFStream::init*/;
   variable[2] = variable[0];
   variable[3] = variable[0];
-  variable[3] = ((file___NativeFileCapable___native_stdout_t)CALL(variable[3],COLOR_file___NativeFileCapable___native_stdout))(variable[3]) /*NativeFileCapable::native_stdout*/;
+  variable[3] = CALL_file___NativeFileCapable___native_stdout(variable[3])(variable[3]) /*NativeFileCapable::native_stdout*/;
   ATTR_file___FStream____file(variable[2]) /*FStream::_file*/ = variable[3];
   variable[2] = variable[0];
   variable[3] = NEW_String_string___String___with_native(BOX_NativeString("/dev/stdout"), TAG_Int(11)); /*new String*/
@@ -495,10 +495,10 @@ void file___Stderr___init(val_t  self, int* init_table) {
   trace.file = LOCATE_file;
   variable[0] =  self;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Stderr].i]) return;
-  ((file___OFStream___init_t)CALL(variable[0],COLOR_file___OFStream___init))(variable[0], init_table /*YYY*/) /*OFStream::init*/;
+  CALL_file___OFStream___init(variable[0])(variable[0], init_table /*YYY*/) /*OFStream::init*/;
   variable[2] = variable[0];
   variable[3] = variable[0];
-  variable[3] = ((file___NativeFileCapable___native_stderr_t)CALL(variable[3],COLOR_file___NativeFileCapable___native_stderr))(variable[3]) /*NativeFileCapable::native_stderr*/;
+  variable[3] = CALL_file___NativeFileCapable___native_stderr(variable[3])(variable[3]) /*NativeFileCapable::native_stderr*/;
   ATTR_file___FStream____file(variable[2]) /*FStream::_file*/ = variable[3];
   variable[2] = variable[0];
   variable[3] = NEW_String_string___String___with_native(BOX_NativeString("/dev/stderr"), TAG_Int(11)); /*new String*/
@@ -518,8 +518,8 @@ val_t file___String___file_exists(val_t  self) {
   trace.file = LOCATE_file;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((string___String___to_cstring_t)CALL(variable[2],COLOR_string___String___to_cstring))(variable[2]) /*String::to_cstring*/;
-  variable[2] = ((file___NativeString___file_exists_t)CALL(variable[2],COLOR_file___NativeString___file_exists))(variable[2]) /*NativeString::file_exists*/;
+  variable[2] = CALL_string___String___to_cstring(variable[2])(variable[2]) /*String::to_cstring*/;
+  variable[2] = CALL_file___NativeString___file_exists(variable[2])(variable[2]) /*NativeString::file_exists*/;
   variable[1] = variable[2];
   goto return_label27;
   return_label27: while(false);
@@ -534,8 +534,8 @@ val_t file___String___file_stat(val_t  self) {
   trace.file = LOCATE_file;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((string___String___to_cstring_t)CALL(variable[2],COLOR_string___String___to_cstring))(variable[2]) /*String::to_cstring*/;
-  variable[2] = ((file___NativeString___file_stat_t)CALL(variable[2],COLOR_file___NativeString___file_stat))(variable[2]) /*NativeString::file_stat*/;
+  variable[2] = CALL_string___String___to_cstring(variable[2])(variable[2]) /*String::to_cstring*/;
+  variable[2] = CALL_file___NativeString___file_stat(variable[2])(variable[2]) /*NativeString::file_stat*/;
   variable[1] = variable[2];
   goto return_label28;
   return_label28: while(false);
@@ -550,8 +550,8 @@ val_t file___String___file_delete(val_t  self) {
   trace.file = LOCATE_file;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((string___String___to_cstring_t)CALL(variable[2],COLOR_string___String___to_cstring))(variable[2]) /*String::to_cstring*/;
-  variable[2] = ((file___NativeString___file_delete_t)CALL(variable[2],COLOR_file___NativeString___file_delete))(variable[2]) /*NativeString::file_delete*/;
+  variable[2] = CALL_string___String___to_cstring(variable[2])(variable[2]) /*String::to_cstring*/;
+  variable[2] = CALL_file___NativeString___file_delete(variable[2])(variable[2]) /*NativeString::file_delete*/;
   variable[1] = variable[2];
   goto return_label29;
   return_label29: while(false);
@@ -567,14 +567,14 @@ val_t file___String___strip_extension(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((string___String___has_suffix_t)CALL(variable[3],COLOR_string___String___has_suffix))(variable[3],  variable[1] /*ext*/) /*String::has_suffix*/;
+  variable[3] = CALL_string___String___has_suffix(variable[3])(variable[3],  variable[1] /*ext*/) /*String::has_suffix*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = variable[0];
     variable[4] = variable[0];
-    variable[4] = ((array___AbstractArray___length_t)CALL(variable[4],COLOR_abstract_collection___Collection___length))(variable[4]) /*AbstractArray::length*/;
-    variable[5] = ((array___AbstractArray___length_t)CALL( variable[1] /*ext*/,COLOR_abstract_collection___Collection___length))( variable[1] /*ext*/) /*AbstractArray::length*/;
+    variable[4] = CALL_abstract_collection___Collection___length(variable[4])(variable[4]) /*AbstractArray::length*/;
+    variable[5] = CALL_abstract_collection___Collection___length( variable[1] /*ext*/)( variable[1] /*ext*/) /*AbstractArray::length*/;
     variable[4] = TAG_Int(UNTAG_Int(variable[4])-UNTAG_Int(variable[5]));
-    variable[3] = ((string___String___substring_t)CALL(variable[3],COLOR_string___String___substring))(variable[3],  TAG_Int(0), variable[4]) /*String::substring*/;
+    variable[3] = CALL_string___String___substring(variable[3])(variable[3],  TAG_Int(0), variable[4]) /*String::substring*/;
     variable[2] = variable[3];
     goto return_label30;
   }
@@ -597,7 +597,7 @@ val_t file___String___basename(val_t  self, val_t  param0) {
   variable[5] = variable[0];
   variable[5] = ATTR_array___AbstractArray____length(variable[5]) /*AbstractArray::_length*/;
   variable[5] = TAG_Int(UNTAG_Int(variable[5])-UNTAG_Int( TAG_Int(1)));
-  variable[4] = ((array___AbstractArray___last_index_of_from_t)CALL(variable[4],COLOR_array___AbstractArray___last_index_of_from))(variable[4],  TAG_Char('/'), variable[5]) /*AbstractArray::last_index_of_from*/;
+  variable[4] = CALL_array___AbstractArray___last_index_of_from(variable[4])(variable[4],  TAG_Char('/'), variable[5]) /*AbstractArray::last_index_of_from*/;
   variable[3] = variable[4];
   variable[5] = variable[0];
   variable[4] = variable[5];
@@ -605,10 +605,10 @@ val_t file___String___basename(val_t  self, val_t  param0) {
   if (UNTAG_Bool(variable[5])) { /*if*/
     variable[5] = variable[0];
     variable[6] = TAG_Int(UNTAG_Int( variable[3] /*pos*/)+UNTAG_Int( TAG_Int(1)));
-    variable[5] = ((string___String___substring_from_t)CALL(variable[5],COLOR_string___String___substring_from))(variable[5], variable[6]) /*String::substring_from*/;
+    variable[5] = CALL_string___String___substring_from(variable[5])(variable[5], variable[6]) /*String::substring_from*/;
     variable[4] = variable[5] /*n=*/;
   }
-  variable[5] = ((file___String___strip_extension_t)CALL( variable[4] /*n*/,COLOR_file___String___strip_extension))( variable[4] /*n*/,  variable[1] /*ext*/) /*String::strip_extension*/;
+  variable[5] = CALL_file___String___strip_extension( variable[4] /*n*/)( variable[4] /*n*/,  variable[1] /*ext*/) /*String::strip_extension*/;
   variable[2] = variable[5];
   goto return_label31;
   return_label31: while(false);
@@ -626,12 +626,12 @@ val_t file___String___dirname(val_t  self) {
   variable[4] = variable[0];
   variable[4] = ATTR_array___AbstractArray____length(variable[4]) /*AbstractArray::_length*/;
   variable[4] = TAG_Int(UNTAG_Int(variable[4])-UNTAG_Int( TAG_Int(1)));
-  variable[3] = ((array___AbstractArray___last_index_of_from_t)CALL(variable[3],COLOR_array___AbstractArray___last_index_of_from))(variable[3],  TAG_Char('/'), variable[4]) /*AbstractArray::last_index_of_from*/;
+  variable[3] = CALL_array___AbstractArray___last_index_of_from(variable[3])(variable[3],  TAG_Char('/'), variable[4]) /*AbstractArray::last_index_of_from*/;
   variable[2] = variable[3];
   variable[3] = TAG_Bool(UNTAG_Int( variable[2] /*pos*/)>=UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = variable[0];
-    variable[3] = ((string___String___substring_t)CALL(variable[3],COLOR_string___String___substring))(variable[3],  TAG_Int(0),  variable[2] /*pos*/) /*String::substring*/;
+    variable[3] = CALL_string___String___substring(variable[3])(variable[3],  TAG_Int(0),  variable[2] /*pos*/) /*String::substring*/;
     variable[1] = variable[3];
     goto return_label32;
   } else { /*if*/
@@ -655,12 +655,12 @@ val_t file___String___file_path(val_t  self) {
   variable[2] = variable[3];
   variable[4] = variable[0];
   variable[5] = TAG_Int(UNTAG_Int( variable[2] /*l*/)-UNTAG_Int( TAG_Int(1)));
-  variable[4] = ((array___AbstractArray___last_index_of_from_t)CALL(variable[4],COLOR_array___AbstractArray___last_index_of_from))(variable[4],  TAG_Char('/'), variable[5]) /*AbstractArray::last_index_of_from*/;
+  variable[4] = CALL_array___AbstractArray___last_index_of_from(variable[4])(variable[4],  TAG_Char('/'), variable[5]) /*AbstractArray::last_index_of_from*/;
   variable[3] = variable[4];
   variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*pos*/)>=UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[4])) { /*if*/
     variable[4] = variable[0];
-    variable[4] = ((string___String___substring_t)CALL(variable[4],COLOR_string___String___substring))(variable[4],  TAG_Int(0),  variable[3] /*pos*/) /*String::substring*/;
+    variable[4] = CALL_string___String___substring(variable[4])(variable[4],  TAG_Int(0),  variable[3] /*pos*/) /*String::substring*/;
     variable[1] = variable[4];
     goto return_label33;
   }
@@ -680,11 +680,11 @@ void file___String___mkdir(val_t  self) {
   variable[0] =  self;
   variable[3] = variable[0];
   variable[4] = NEW_String_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)); /*new String*/
-  variable[3] = ((string_search___String___split_with_t)CALL(variable[3],COLOR_string_search___String___split_with))(variable[3], variable[4]) /*String::split_with*/;
+  variable[3] = CALL_string_search___String___split_with(variable[3])(variable[3], variable[4]) /*String::split_with*/;
   variable[2] = variable[3];
   variable[4] = NEW_String_string___String___init(); /*new String*/
   variable[3] = variable[4];
-  variable[4] = ((array___AbstractArray___is_empty_t)CALL( variable[2] /*dirs*/,COLOR_abstract_collection___Collection___is_empty))( variable[2] /*dirs*/) /*AbstractArray::is_empty*/;
+  variable[4] = CALL_abstract_collection___Collection___is_empty( variable[2] /*dirs*/)( variable[2] /*dirs*/) /*AbstractArray::is_empty*/;
   if (UNTAG_Bool(variable[4])) { /*if*/
     goto return_label34;
   }
@@ -706,26 +706,26 @@ void file___String___mkdir(val_t  self) {
   goto return_label35;
   return_label35: while(false);
   variable[4] = variable[6];
-  variable[4] = ((array___AbstractArray___is_empty_t)CALL(variable[4],COLOR_abstract_collection___Collection___is_empty))(variable[4]) /*AbstractArray::is_empty*/;
+  variable[4] = CALL_abstract_collection___Collection___is_empty(variable[4])(variable[4]) /*AbstractArray::is_empty*/;
   if (UNTAG_Bool(variable[4])) { /*if*/
-    ((string___String___add_t)CALL( variable[3] /*path*/,COLOR_abstract_collection___SimpleCollection___add))( variable[3] /*path*/,  TAG_Char('/')) /*String::add*/;
+    CALL_abstract_collection___SimpleCollection___add( variable[3] /*path*/)( variable[3] /*path*/,  TAG_Char('/')) /*String::add*/;
   }
-  variable[4] = ((array___AbstractArray___iterator_t)CALL( variable[2] /*dirs*/,COLOR_abstract_collection___Collection___iterator))( variable[2] /*dirs*/) /*AbstractArray::iterator*/;
+  variable[4] = CALL_abstract_collection___Collection___iterator( variable[2] /*dirs*/)( variable[2] /*dirs*/) /*AbstractArray::iterator*/;
   while (true) { /*for*/
-    variable[5] = ((array___ArrayIterator___is_ok_t)CALL(variable[4],COLOR_abstract_collection___Iterator___is_ok))(variable[4]) /*ArrayIterator::is_ok*/;
+    variable[5] = CALL_abstract_collection___Iterator___is_ok(variable[4])(variable[4]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[5])) break; /*for*/
-    variable[5] = ((array___ArrayIterator___item_t)CALL(variable[4],COLOR_abstract_collection___Iterator___item))(variable[4]) /*ArrayIterator::item*/;
+    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/;
     variable[6] = variable[5];
-    variable[7] = ((array___AbstractArray___is_empty_t)CALL( variable[6] /*d*/,COLOR_abstract_collection___Collection___is_empty))( variable[6] /*d*/) /*AbstractArray::is_empty*/;
+    variable[7] = CALL_abstract_collection___Collection___is_empty( variable[6] /*d*/)( variable[6] /*d*/) /*AbstractArray::is_empty*/;
     if (UNTAG_Bool(variable[7])) { /*if*/
       goto continue_36;
     }
-    ((string___String___append_t)CALL( variable[3] /*path*/,COLOR_abstract_collection___IndexedCollection___append))( variable[3] /*path*/,  variable[6] /*d*/) /*String::append*/;
-    ((string___String___add_t)CALL( variable[3] /*path*/,COLOR_abstract_collection___SimpleCollection___add))( variable[3] /*path*/,  TAG_Char('/')) /*String::add*/;
-    variable[7] = ((string___String___to_cstring_t)CALL( variable[3] /*path*/,COLOR_string___String___to_cstring))( variable[3] /*path*/) /*String::to_cstring*/;
-    ((file___NativeString___file_mkdir_t)CALL(variable[7],COLOR_file___NativeString___file_mkdir))(variable[7]) /*NativeString::file_mkdir*/;
+    CALL_abstract_collection___IndexedCollection___append( variable[3] /*path*/)( variable[3] /*path*/,  variable[6] /*d*/) /*String::append*/;
+    CALL_abstract_collection___SimpleCollection___add( variable[3] /*path*/)( variable[3] /*path*/,  TAG_Char('/')) /*String::add*/;
+    variable[7] = CALL_string___String___to_cstring( variable[3] /*path*/)( variable[3] /*path*/) /*String::to_cstring*/;
+    CALL_file___NativeString___file_mkdir(variable[7])(variable[7]) /*NativeString::file_mkdir*/;
     continue_36: while(0);
-    ((array___ArrayIterator___next_t)CALL(variable[4],COLOR_abstract_collection___Iterator___next))(variable[4]) /*ArrayIterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[4])(variable[4]) /*ArrayIterator::next*/;
   }
   break_36: while(0);
   return_label34: while(false);

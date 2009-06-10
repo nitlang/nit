@@ -9,7 +9,7 @@ val_t partial_order___PartialOrder___iterator(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_partial_order___PartialOrder____elements_list(variable[2]) /*PartialOrder::_elements_list*/;
-  variable[2] = ((array___AbstractArray___iterator_t)CALL(variable[2],COLOR_abstract_collection___Collection___iterator))(variable[2]) /*AbstractArray::iterator*/;
+  variable[2] = CALL_abstract_collection___Collection___iterator(variable[2])(variable[2]) /*AbstractArray::iterator*/;
   variable[1] = variable[2];
   goto return_label0;
   return_label0: while(false);
@@ -25,7 +25,7 @@ val_t partial_order___PartialOrder___is_empty(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_partial_order___PartialOrder____elements(variable[2]) /*PartialOrder::_elements*/;
-  variable[2] = ((abstract_collection___Collection___is_empty_t)CALL(variable[2],COLOR_abstract_collection___Collection___is_empty))(variable[2]) /*Collection::is_empty*/;
+  variable[2] = CALL_abstract_collection___Collection___is_empty(variable[2])(variable[2]) /*Collection::is_empty*/;
   variable[1] = variable[2];
   goto return_label1;
   return_label1: while(false);
@@ -41,7 +41,7 @@ val_t partial_order___PartialOrder___length(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_partial_order___PartialOrder____elements(variable[2]) /*PartialOrder::_elements*/;
-  variable[2] = ((abstract_collection___Collection___length_t)CALL(variable[2],COLOR_abstract_collection___Collection___length))(variable[2]) /*Collection::length*/;
+  variable[2] = CALL_abstract_collection___Collection___length(variable[2])(variable[2]) /*Collection::length*/;
   variable[1] = variable[2];
   goto return_label2;
   return_label2: while(false);
@@ -58,7 +58,7 @@ val_t partial_order___PartialOrder___has(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_partial_order___PartialOrder____elements(variable[3]) /*PartialOrder::_elements*/;
-  variable[3] = ((abstract_collection___Map___has_key_t)CALL(variable[3],COLOR_abstract_collection___Map___has_key))(variable[3],  variable[1] /*e*/) /*Map::has_key*/;
+  variable[3] = CALL_abstract_collection___Map___has_key(variable[3])(variable[3],  variable[1] /*e*/) /*Map::has_key*/;
   variable[2] = variable[3];
   goto return_label3;
   return_label3: while(false);
@@ -75,14 +75,14 @@ val_t partial_order___PartialOrder___has_only(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_partial_order___PartialOrder____elements(variable[3]) /*PartialOrder::_elements*/;
-  variable[3] = ((abstract_collection___Collection___length_t)CALL(variable[3],COLOR_abstract_collection___Collection___length))(variable[3]) /*Collection::length*/;
+  variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*Collection::length*/;
   variable[3] = TAG_Bool((variable[3])==( TAG_Int(1)));
   variable[4] = variable[3];
   if (UNTAG_Bool(variable[4])) { /* and */
     variable[4] = variable[0];
     variable[4] = ATTR_partial_order___PartialOrder____elements(variable[4]) /*PartialOrder::_elements*/;
-    variable[4] = ((abstract_collection___Collection___first_t)CALL(variable[4],COLOR_abstract_collection___Collection___first))(variable[4]) /*Collection::first*/;
-    variable[4] = TAG_Bool((variable[4] ==  variable[1] /*e*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], variable[1] /*e*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  variable[1] /*e*/) /*Object::==*/)))));
+    variable[4] = CALL_abstract_collection___Collection___first(variable[4])(variable[4]) /*Collection::first*/;
+    variable[4] = TAG_Bool((variable[4] ==  variable[1] /*e*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], variable[1] /*e*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  variable[1] /*e*/) /*Object::==*/)))));
   }
   variable[3] = variable[4];
   variable[2] = variable[3];
@@ -100,7 +100,7 @@ val_t partial_order___PartialOrder___count(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((partial_order___PartialOrder___has_t)CALL(variable[3],COLOR_abstract_collection___Collection___has))(variable[3],  variable[1] /*e*/) /*PartialOrder::has*/;
+  variable[3] = CALL_abstract_collection___Collection___has(variable[3])(variable[3],  variable[1] /*e*/) /*PartialOrder::has*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[2] =  TAG_Int(1);
     goto return_label5;
@@ -121,7 +121,7 @@ val_t partial_order___PartialOrder___first(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_partial_order___PartialOrder____elements_list(variable[2]) /*PartialOrder::_elements_list*/;
-  variable[2] = ((abstract_collection___IndexedCollection___first_t)CALL(variable[2],COLOR_abstract_collection___Collection___first))(variable[2]) /*IndexedCollection::first*/;
+  variable[2] = CALL_abstract_collection___Collection___first(variable[2])(variable[2]) /*IndexedCollection::first*/;
   variable[1] = variable[2];
   goto return_label6;
   return_label6: while(false);
@@ -147,11 +147,11 @@ val_t partial_order___PartialOrder_____bra(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_partial_order___PartialOrder____elements(variable[3]) /*PartialOrder::_elements*/;
-  variable[3] = ((abstract_collection___Map___has_key_t)CALL(variable[3],COLOR_abstract_collection___Map___has_key))(variable[3],  variable[1] /*e*/) /*Map::has_key*/;
+  variable[3] = CALL_abstract_collection___Map___has_key(variable[3])(variable[3],  variable[1] /*e*/) /*Map::has_key*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = variable[0];
     variable[3] = ATTR_partial_order___PartialOrder____elements(variable[3]) /*PartialOrder::_elements*/;
-    variable[3] = ((abstract_collection___Map_____bra_t)CALL(variable[3],COLOR_abstract_collection___Map_____bra))(variable[3],  variable[1] /*e*/) /*Map::[]*/;
+    variable[3] = CALL_abstract_collection___Map_____bra(variable[3])(variable[3],  variable[1] /*e*/) /*Map::[]*/;
     variable[2] = variable[3];
     goto return_label7;
   } else { /*if*/
@@ -172,41 +172,41 @@ val_t partial_order___PartialOrder___to_dot(val_t  self) {
   variable[3] = NEW_String_string___String___init(); /*new String*/
   variable[2] = variable[3];
   variable[3] = variable[0];
-  variable[3] = ((partial_order___PartialOrder___to_dot_header_t)CALL(variable[3],COLOR_partial_order___PartialOrder___to_dot_header))(variable[3]) /*PartialOrder::to_dot_header*/;
-  ((string___String___append_t)CALL( variable[2] /*s*/,COLOR_abstract_collection___IndexedCollection___append))( variable[2] /*s*/, variable[3]) /*String::append*/;
+  variable[3] = CALL_partial_order___PartialOrder___to_dot_header(variable[3])(variable[3]) /*PartialOrder::to_dot_header*/;
+  CALL_abstract_collection___IndexedCollection___append( variable[2] /*s*/)( variable[2] /*s*/, variable[3]) /*String::append*/;
   variable[3] = variable[0];
   variable[3] = ATTR_partial_order___PartialOrder____elements(variable[3]) /*PartialOrder::_elements*/;
-  variable[3] = ((abstract_collection___Map___iterator_t)CALL(variable[3],COLOR_abstract_collection___Collection___iterator))(variable[3]) /*Map::iterator*/;
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*Map::iterator*/;
   while (true) { /*for*/
-    variable[4] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[3],COLOR_abstract_collection___Iterator___is_ok))(variable[3]) /*Iterator::is_ok*/;
+    variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = ((abstract_collection___Iterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*Iterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
     variable[5] = variable[4];
     variable[6] = variable[0];
-    variable[7] = ((partial_order___PartialOrderElement___value_t)CALL( variable[5] /*e*/,COLOR_partial_order___PartialOrderElement___value))( variable[5] /*e*/) /*PartialOrderElement::value*/;
-    variable[6] = ((partial_order___PartialOrder___to_dot_node_t)CALL(variable[6],COLOR_partial_order___PartialOrder___to_dot_node))(variable[6], variable[7]) /*PartialOrder::to_dot_node*/;
-    ((string___String___append_t)CALL( variable[2] /*s*/,COLOR_abstract_collection___IndexedCollection___append))( variable[2] /*s*/, variable[6]) /*String::append*/;
-    variable[6] = ((partial_order___PartialOrderElement___direct_greaters_t)CALL( variable[5] /*e*/,COLOR_partial_order___PartialOrderElement___direct_greaters))( variable[5] /*e*/) /*PartialOrderElement::direct_greaters*/;
-    variable[6] = ((array___AbstractArray___iterator_t)CALL(variable[6],COLOR_abstract_collection___Collection___iterator))(variable[6]) /*AbstractArray::iterator*/;
+    variable[7] = CALL_partial_order___PartialOrderElement___value( variable[5] /*e*/)( variable[5] /*e*/) /*PartialOrderElement::value*/;
+    variable[6] = CALL_partial_order___PartialOrder___to_dot_node(variable[6])(variable[6], variable[7]) /*PartialOrder::to_dot_node*/;
+    CALL_abstract_collection___IndexedCollection___append( variable[2] /*s*/)( variable[2] /*s*/, variable[6]) /*String::append*/;
+    variable[6] = CALL_partial_order___PartialOrderElement___direct_greaters( variable[5] /*e*/)( variable[5] /*e*/) /*PartialOrderElement::direct_greaters*/;
+    variable[6] = CALL_abstract_collection___Collection___iterator(variable[6])(variable[6]) /*AbstractArray::iterator*/;
     while (true) { /*for*/
-      variable[7] = ((array___ArrayIterator___is_ok_t)CALL(variable[6],COLOR_abstract_collection___Iterator___is_ok))(variable[6]) /*ArrayIterator::is_ok*/;
+      variable[7] = CALL_abstract_collection___Iterator___is_ok(variable[6])(variable[6]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[7])) break; /*for*/
-      variable[7] = ((array___ArrayIterator___item_t)CALL(variable[6],COLOR_abstract_collection___Iterator___item))(variable[6]) /*ArrayIterator::item*/;
+      variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*ArrayIterator::item*/;
       variable[8] = variable[7];
       variable[9] = variable[0];
-      variable[10] = ((partial_order___PartialOrderElement___value_t)CALL( variable[5] /*e*/,COLOR_partial_order___PartialOrderElement___value))( variable[5] /*e*/) /*PartialOrderElement::value*/;
-      variable[9] = ((partial_order___PartialOrder___to_dot_edge_t)CALL(variable[9],COLOR_partial_order___PartialOrder___to_dot_edge))(variable[9], variable[10],  variable[8] /*d*/) /*PartialOrder::to_dot_edge*/;
-      ((string___String___append_t)CALL( variable[2] /*s*/,COLOR_abstract_collection___IndexedCollection___append))( variable[2] /*s*/, variable[9]) /*String::append*/;
+      variable[10] = CALL_partial_order___PartialOrderElement___value( variable[5] /*e*/)( variable[5] /*e*/) /*PartialOrderElement::value*/;
+      variable[9] = CALL_partial_order___PartialOrder___to_dot_edge(variable[9])(variable[9], variable[10],  variable[8] /*d*/) /*PartialOrder::to_dot_edge*/;
+      CALL_abstract_collection___IndexedCollection___append( variable[2] /*s*/)( variable[2] /*s*/, variable[9]) /*String::append*/;
       continue_10: while(0);
-      ((array___ArrayIterator___next_t)CALL(variable[6],COLOR_abstract_collection___Iterator___next))(variable[6]) /*ArrayIterator::next*/;
+      CALL_abstract_collection___Iterator___next(variable[6])(variable[6]) /*ArrayIterator::next*/;
     }
     break_10: while(0);
     continue_9: while(0);
-    ((abstract_collection___Iterator___next_t)CALL(variable[3],COLOR_abstract_collection___Iterator___next))(variable[3]) /*Iterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*Iterator::next*/;
   }
   break_9: while(0);
   variable[3] = NEW_String_string___String___with_native(BOX_NativeString("}\n"), TAG_Int(2)); /*new String*/
-  ((string___String___append_t)CALL( variable[2] /*s*/,COLOR_abstract_collection___IndexedCollection___append))( variable[2] /*s*/, variable[3]) /*String::append*/;
+  CALL_abstract_collection___IndexedCollection___append( variable[2] /*s*/)( variable[2] /*s*/, variable[3]) /*String::append*/;
   variable[1] =  variable[2] /*s*/;
   goto return_label8;
   return_label8: while(false);
@@ -235,16 +235,17 @@ val_t partial_order___PartialOrder___to_dot_node(val_t  self, val_t  param0) {
   trace.file = LOCATE_partial_order;
   variable[0] =  self;
   variable[1] =  param0;
-  variable[3] = NEW_String_string___String___init(); /*new String*/
+  variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
   variable[4] = NEW_String_string___String___with_native(BOX_NativeString("\""), TAG_Int(1)); /*new String*/
   variable[5] = variable[4];
-  ((string___String___append_t)CALL(variable[3],COLOR_abstract_collection___IndexedCollection___append))(variable[3], variable[5]) /*String::append*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[5]) /*AbstractArray::add*/;
   variable[6] =  variable[1] /*e*/;
-  variable[6] = ((string___String___to_s_t)CALL(variable[6],COLOR_string___Object___to_s))(variable[6]) /*String::to_s*/;
-  ((string___String___append_t)CALL(variable[3],COLOR_abstract_collection___IndexedCollection___append))(variable[3], variable[6]) /*String::append*/;
+  variable[6] = CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[6]) /*AbstractArray::add*/;
   variable[7] = NEW_String_string___String___with_native(BOX_NativeString("\";\n"), TAG_Int(3)); /*new String*/
   variable[8] = variable[7];
-  ((string___String___append_t)CALL(variable[3],COLOR_abstract_collection___IndexedCollection___append))(variable[3], variable[8]) /*String::append*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[8]) /*AbstractArray::add*/;
+  variable[3] = CALL_string___Object___to_s(variable[3])(variable[3]) /*Object::to_s*/;
   variable[2] = variable[3];
   goto return_label12;
   return_label12: while(false);
@@ -260,22 +261,23 @@ val_t partial_order___PartialOrder___to_dot_edge(val_t  self, val_t  param0, val
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  variable[4] = NEW_String_string___String___init(); /*new String*/
+  variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
   variable[5] = NEW_String_string___String___with_native(BOX_NativeString("\""), TAG_Int(1)); /*new String*/
   variable[6] = variable[5];
-  ((string___String___append_t)CALL(variable[4],COLOR_abstract_collection___IndexedCollection___append))(variable[4], variable[6]) /*String::append*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[6]) /*AbstractArray::add*/;
   variable[7] =  variable[1] /*e1*/;
-  variable[7] = ((string___String___to_s_t)CALL(variable[7],COLOR_string___Object___to_s))(variable[7]) /*String::to_s*/;
-  ((string___String___append_t)CALL(variable[4],COLOR_abstract_collection___IndexedCollection___append))(variable[4], variable[7]) /*String::append*/;
+  variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[7]) /*AbstractArray::add*/;
   variable[8] = NEW_String_string___String___with_native(BOX_NativeString("\" -> \""), TAG_Int(6)); /*new String*/
   variable[9] = variable[8];
-  ((string___String___append_t)CALL(variable[4],COLOR_abstract_collection___IndexedCollection___append))(variable[4], variable[9]) /*String::append*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[9]) /*AbstractArray::add*/;
   variable[10] =  variable[2] /*e2*/;
-  variable[10] = ((string___String___to_s_t)CALL(variable[10],COLOR_string___Object___to_s))(variable[10]) /*String::to_s*/;
-  ((string___String___append_t)CALL(variable[4],COLOR_abstract_collection___IndexedCollection___append))(variable[4], variable[10]) /*String::append*/;
+  variable[10] = CALL_string___Object___to_s(variable[10])(variable[10]) /*Object::to_s*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[10]) /*AbstractArray::add*/;
   variable[11] = NEW_String_string___String___with_native(BOX_NativeString("\";\n"), TAG_Int(3)); /*new String*/
   variable[12] = variable[11];
-  ((string___String___append_t)CALL(variable[4],COLOR_abstract_collection___IndexedCollection___append))(variable[4], variable[12]) /*String::append*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[12]) /*AbstractArray::add*/;
+  variable[4] = CALL_string___Object___to_s(variable[4])(variable[4]) /*Object::to_s*/;
   variable[3] = variable[4];
   goto return_label13;
   return_label13: while(false);
@@ -290,31 +292,31 @@ val_t partial_order___PartialOrder___select_smallests(val_t  self, val_t  param0
   trace.file = LOCATE_partial_order;
   variable[0] =  self;
   variable[1] =  param0;
-  variable[3] = TAG_Bool(( variable[1] /*c*/ ==  NIT_NULL /*null*/) || (( variable[1] /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*c*/,COLOR_kernel___Object_____eqeq))( variable[1] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[3] = TAG_Bool(( variable[1] /*c*/ ==  NIT_NULL /*null*/) || (( variable[1] /*c*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*c*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*c*/)( variable[1] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = NEW_Array_array___Array___init(); /*new Array[E]*/
     variable[2] = variable[3];
     goto return_label14;
   }
   variable[3] = variable[0];
-  variable[3] = ((partial_order___PartialOrder___has_all_t)CALL(variable[3],COLOR_partial_order___PartialOrder___has_all))(variable[3],  variable[1] /*c*/) /*PartialOrder::has_all*/;
+  variable[3] = CALL_partial_order___PartialOrder___has_all(variable[3])(variable[3],  variable[1] /*c*/) /*PartialOrder::has_all*/;
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_partial_order___PartialOrder___select_smallests, LOCATE_partial_order, 105); nit_exit(1);}
-  variable[4] = ((abstract_collection___Collection___length_t)CALL( variable[1] /*c*/,COLOR_abstract_collection___Collection___length))( variable[1] /*c*/) /*Collection::length*/;
+  variable[4] = CALL_abstract_collection___Collection___length( variable[1] /*c*/)( variable[1] /*c*/) /*Collection::length*/;
   variable[5] = NEW_Array_array___Array___with_capacity(variable[4]); /*new Array[E]*/
   variable[4] = variable[5];
   variable[3] = variable[4];
-  variable[5] = ((abstract_collection___Collection___length_t)CALL( variable[1] /*c*/,COLOR_abstract_collection___Collection___length))( variable[1] /*c*/) /*Collection::length*/;
+  variable[5] = CALL_abstract_collection___Collection___length( variable[1] /*c*/)( variable[1] /*c*/) /*Collection::length*/;
   variable[6] = NEW_Array_array___Array___with_capacity(variable[5]); /*new Array[E]*/
   variable[5] = variable[6];
   variable[4] = variable[5];
-  variable[5] = ((abstract_collection___Collection___iterator_t)CALL( variable[1] /*c*/,COLOR_abstract_collection___Collection___iterator))( variable[1] /*c*/) /*Collection::iterator*/;
+  variable[5] = CALL_abstract_collection___Collection___iterator( variable[1] /*c*/)( variable[1] /*c*/) /*Collection::iterator*/;
   while (true) { /*for*/
-    variable[6] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[5],COLOR_abstract_collection___Iterator___is_ok))(variable[5]) /*Iterator::is_ok*/;
+    variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[6])) break; /*for*/
-    variable[6] = ((abstract_collection___Iterator___item_t)CALL(variable[5],COLOR_abstract_collection___Iterator___item))(variable[5]) /*Iterator::item*/;
+    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*Iterator::item*/;
     variable[7] = variable[6];
     variable[9] = variable[0];
-    variable[9] = ((partial_order___PartialOrder___add_to_smallests_t)CALL(variable[9],COLOR_partial_order___PartialOrder___add_to_smallests))(variable[9],  variable[7] /*e*/,  variable[3] /*res*/,  variable[4] /*tmp*/) /*PartialOrder::add_to_smallests*/;
+    variable[9] = CALL_partial_order___PartialOrder___add_to_smallests(variable[9])(variable[9],  variable[7] /*e*/,  variable[3] /*res*/,  variable[4] /*tmp*/) /*PartialOrder::add_to_smallests*/;
     variable[8] = variable[9];
     if (UNTAG_Bool( variable[8] /*r*/)) { /*if*/
       variable[9] =  variable[4] /*tmp*/;
@@ -322,7 +324,7 @@ val_t partial_order___PartialOrder___select_smallests(val_t  self, val_t  param0
       variable[3] =  variable[9] /*t*/ /*res=*/;
     }
     continue_15: while(0);
-    ((abstract_collection___Iterator___next_t)CALL(variable[5],COLOR_abstract_collection___Iterator___next))(variable[5]) /*Iterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*Iterator::next*/;
   }
   break_15: while(0);
   variable[2] =  variable[3] /*res*/;
@@ -341,38 +343,38 @@ val_t partial_order___PartialOrder___add(val_t  self, val_t  param0, val_t  para
   variable[1] =  param0;
   variable[2] =  param1;
   variable[4] = variable[0];
-  variable[4] = ((partial_order___PartialOrder___has_t)CALL(variable[4],COLOR_abstract_collection___Collection___has))(variable[4],  variable[1] /*e*/) /*PartialOrder::has*/;
+  variable[4] = CALL_abstract_collection___Collection___has(variable[4])(variable[4],  variable[1] /*e*/) /*PartialOrder::has*/;
   if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[4])))) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_partial_order___PartialOrder___add, LOCATE_partial_order, 125); nit_exit(1);}
-  variable[4] = TAG_Bool(( variable[2] /*supers*/ ==  NIT_NULL /*null*/) || (( variable[2] /*supers*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[2] /*supers*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*supers*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[2] /*supers*/,COLOR_kernel___Object_____eqeq))( variable[2] /*supers*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[4] = TAG_Bool(( variable[2] /*supers*/ ==  NIT_NULL /*null*/) || (( variable[2] /*supers*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[2] /*supers*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*supers*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[2] /*supers*/)( variable[2] /*supers*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   variable[5] = variable[4];
   if (!UNTAG_Bool(variable[5])) { /* or */
     variable[5] = variable[0];
-    variable[5] = ((partial_order___PartialOrder___has_all_t)CALL(variable[5],COLOR_partial_order___PartialOrder___has_all))(variable[5],  variable[2] /*supers*/) /*PartialOrder::has_all*/;
+    variable[5] = CALL_partial_order___PartialOrder___has_all(variable[5])(variable[5],  variable[2] /*supers*/) /*PartialOrder::has_all*/;
   }
   variable[4] = variable[5];
   if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_partial_order___PartialOrder___add, LOCATE_partial_order, 126); nit_exit(1);}
   variable[5] = variable[0];
-  variable[5] = ((partial_order___PartialOrder___select_smallests_t)CALL(variable[5],COLOR_partial_order___PartialOrder___select_smallests))(variable[5],  variable[2] /*supers*/) /*PartialOrder::select_smallests*/;
+  variable[5] = CALL_partial_order___PartialOrder___select_smallests(variable[5])(variable[5],  variable[2] /*supers*/) /*PartialOrder::select_smallests*/;
   variable[4] = variable[5];
   variable[6] = variable[0];
-  variable[6] = ((partial_order___PartialOrder___new_poe_t)CALL(variable[6],COLOR_partial_order___PartialOrder___new_poe))(variable[6],  variable[1] /*e*/,  variable[4] /*directs*/) /*PartialOrder::new_poe*/;
+  variable[6] = CALL_partial_order___PartialOrder___new_poe(variable[6])(variable[6],  variable[1] /*e*/,  variable[4] /*directs*/) /*PartialOrder::new_poe*/;
   variable[5] = variable[6];
   variable[6] = variable[0];
   variable[6] = ATTR_partial_order___PartialOrder____elements(variable[6]) /*PartialOrder::_elements*/;
-  ((abstract_collection___Map_____braeq_t)CALL(variable[6],COLOR_abstract_collection___Map_____braeq))(variable[6],  variable[1] /*e*/,  variable[5] /*poe*/) /*Map::[]=*/;
+  CALL_abstract_collection___Map_____braeq(variable[6])(variable[6],  variable[1] /*e*/,  variable[5] /*poe*/) /*Map::[]=*/;
   variable[6] = variable[0];
   variable[6] = ATTR_partial_order___PartialOrder____elements_list(variable[6]) /*PartialOrder::_elements_list*/;
-  ((array___AbstractArray___add_t)CALL(variable[6],COLOR_abstract_collection___SimpleCollection___add))(variable[6],  variable[1] /*e*/) /*AbstractArray::add*/;
-  variable[6] = TAG_Bool(( variable[2] /*supers*/ ==  NIT_NULL /*null*/) || (( variable[2] /*supers*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[2] /*supers*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*supers*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[2] /*supers*/,COLOR_kernel___Object_____eqeq))( variable[2] /*supers*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6],  variable[1] /*e*/) /*AbstractArray::add*/;
+  variable[6] = TAG_Bool(( variable[2] /*supers*/ ==  NIT_NULL /*null*/) || (( variable[2] /*supers*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[2] /*supers*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*supers*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[2] /*supers*/)( variable[2] /*supers*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   variable[7] = variable[6];
   if (!UNTAG_Bool(variable[7])) { /* or */
-    variable[7] = ((abstract_collection___Collection___is_empty_t)CALL( variable[2] /*supers*/,COLOR_abstract_collection___Collection___is_empty))( variable[2] /*supers*/) /*Collection::is_empty*/;
+    variable[7] = CALL_abstract_collection___Collection___is_empty( variable[2] /*supers*/)( variable[2] /*supers*/) /*Collection::is_empty*/;
   }
   variable[6] = variable[7];
   if (UNTAG_Bool(variable[6])) { /*if*/
     variable[6] = variable[0];
     variable[6] = ATTR_partial_order___PartialOrder____roots(variable[6]) /*PartialOrder::_roots*/;
-    ((array___AbstractArray___add_t)CALL(variable[6],COLOR_abstract_collection___SimpleCollection___add))(variable[6],  variable[1] /*e*/) /*AbstractArray::add*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6],  variable[1] /*e*/) /*AbstractArray::add*/;
   }
   variable[3] =  variable[5] /*poe*/;
   goto return_label16;
@@ -388,20 +390,20 @@ val_t partial_order___PartialOrder___has_all(val_t  self, val_t  param0) {
   trace.file = LOCATE_partial_order;
   variable[0] =  self;
   variable[1] =  param0;
-  variable[3] = ((abstract_collection___Collection___iterator_t)CALL( variable[1] /*e*/,COLOR_abstract_collection___Collection___iterator))( variable[1] /*e*/) /*Collection::iterator*/;
+  variable[3] = CALL_abstract_collection___Collection___iterator( variable[1] /*e*/)( variable[1] /*e*/) /*Collection::iterator*/;
   while (true) { /*for*/
-    variable[4] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[3],COLOR_abstract_collection___Iterator___is_ok))(variable[3]) /*Iterator::is_ok*/;
+    variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = ((abstract_collection___Iterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*Iterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
     variable[5] = variable[4];
     variable[6] = variable[0];
-    variable[6] = ((partial_order___PartialOrder___has_t)CALL(variable[6],COLOR_abstract_collection___Collection___has))(variable[6],  variable[5] /*i*/) /*PartialOrder::has*/;
+    variable[6] = CALL_abstract_collection___Collection___has(variable[6])(variable[6],  variable[5] /*i*/) /*PartialOrder::has*/;
     if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[6])))) { /*if*/
       variable[2] =  TAG_Bool(false);
       goto return_label17;
     }
     continue_18: while(0);
-    ((abstract_collection___Iterator___next_t)CALL(variable[3],COLOR_abstract_collection___Iterator___next))(variable[3]) /*Iterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*Iterator::next*/;
   }
   break_18: while(0);
   variable[2] =  TAG_Bool(true);
@@ -438,30 +440,30 @@ val_t partial_order___PartialOrder___add_to_smallests(val_t  self, val_t  param0
   variable[1] =  param0;
   variable[2] =  param1;
   variable[3] =  param2;
-  ((array___AbstractArray___clear_t)CALL( variable[3] /*to*/,COLOR_abstract_collection___RemovableCollection___clear))( variable[3] /*to*/) /*AbstractArray::clear*/;
+  CALL_abstract_collection___RemovableCollection___clear( variable[3] /*to*/)( variable[3] /*to*/) /*AbstractArray::clear*/;
   variable[6] = variable[0];
-  variable[6] = ((partial_order___PartialOrder_____bra_t)CALL(variable[6],COLOR_partial_order___PartialOrder_____bra))(variable[6],  variable[1] /*e*/) /*PartialOrder::[]*/;
+  variable[6] = CALL_partial_order___PartialOrder_____bra(variable[6])(variable[6],  variable[1] /*e*/) /*PartialOrder::[]*/;
   variable[5] = variable[6];
-  variable[6] = ((array___AbstractArray___iterator_t)CALL( variable[2] /*from*/,COLOR_abstract_collection___Collection___iterator))( variable[2] /*from*/) /*AbstractArray::iterator*/;
+  variable[6] = CALL_abstract_collection___Collection___iterator( variable[2] /*from*/)( variable[2] /*from*/) /*AbstractArray::iterator*/;
   while (true) { /*for*/
-    variable[7] = ((array___ArrayIterator___is_ok_t)CALL(variable[6],COLOR_abstract_collection___Iterator___is_ok))(variable[6]) /*ArrayIterator::is_ok*/;
+    variable[7] = CALL_abstract_collection___Iterator___is_ok(variable[6])(variable[6]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[7])) break; /*for*/
-    variable[7] = ((array___ArrayIterator___item_t)CALL(variable[6],COLOR_abstract_collection___Iterator___item))(variable[6]) /*ArrayIterator::item*/;
+    variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*ArrayIterator::item*/;
     variable[8] = variable[7];
-    variable[9] = ((partial_order___PartialOrderElement_____g_t)CALL( variable[5] /*poe*/,COLOR_partial_order___PartialOrderElement_____g))( variable[5] /*poe*/,  variable[8] /*i*/) /*PartialOrderElement::>*/;
+    variable[9] = CALL_partial_order___PartialOrderElement_____g( variable[5] /*poe*/)( variable[5] /*poe*/,  variable[8] /*i*/) /*PartialOrderElement::>*/;
     if (UNTAG_Bool(variable[9])) { /*if*/
       variable[4] =  TAG_Bool(false);
       goto return_label20;
     }
-    variable[9] = ((partial_order___PartialOrderElement_____l_t)CALL( variable[5] /*poe*/,COLOR_partial_order___PartialOrderElement_____l))( variable[5] /*poe*/,  variable[8] /*i*/) /*PartialOrderElement::<*/;
+    variable[9] = CALL_partial_order___PartialOrderElement_____l( variable[5] /*poe*/)( variable[5] /*poe*/,  variable[8] /*i*/) /*PartialOrderElement::<*/;
     if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[9])))) { /*if*/
-      ((array___AbstractArray___add_t)CALL( variable[3] /*to*/,COLOR_abstract_collection___SimpleCollection___add))( variable[3] /*to*/,  variable[8] /*i*/) /*AbstractArray::add*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[3] /*to*/)( variable[3] /*to*/,  variable[8] /*i*/) /*AbstractArray::add*/;
     }
     continue_21: while(0);
-    ((array___ArrayIterator___next_t)CALL(variable[6],COLOR_abstract_collection___Iterator___next))(variable[6]) /*ArrayIterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[6])(variable[6]) /*ArrayIterator::next*/;
   }
   break_21: while(0);
-  ((array___AbstractArray___add_t)CALL( variable[3] /*to*/,COLOR_abstract_collection___SimpleCollection___add))( variable[3] /*to*/,  variable[1] /*e*/) /*AbstractArray::add*/;
+  CALL_abstract_collection___SimpleCollection___add( variable[3] /*to*/)( variable[3] /*to*/,  variable[1] /*e*/) /*AbstractArray::add*/;
   variable[4] =  TAG_Bool(true);
   goto return_label20;
   return_label20: while(false);
@@ -477,23 +479,23 @@ void partial_order___PartialOrder___compute_smallers_for(val_t  self, val_t  par
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  variable[5] = ((partial_order___PartialOrderElement___value_t)CALL( variable[1] /*poe*/,COLOR_partial_order___PartialOrderElement___value))( variable[1] /*poe*/) /*PartialOrderElement::value*/;
+  variable[5] = CALL_partial_order___PartialOrderElement___value( variable[1] /*poe*/)( variable[1] /*poe*/) /*PartialOrderElement::value*/;
   variable[4] = variable[5];
   variable[5] = variable[0];
   variable[5] = ATTR_partial_order___PartialOrder____elements(variable[5]) /*PartialOrder::_elements*/;
-  variable[5] = ((abstract_collection___Map___iterator_t)CALL(variable[5],COLOR_abstract_collection___Collection___iterator))(variable[5]) /*Map::iterator*/;
+  variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*Map::iterator*/;
   while (true) { /*for*/
-    variable[6] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[5],COLOR_abstract_collection___Iterator___is_ok))(variable[5]) /*Iterator::is_ok*/;
+    variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[6])) break; /*for*/
-    variable[6] = ((abstract_collection___Iterator___item_t)CALL(variable[5],COLOR_abstract_collection___Iterator___item))(variable[5]) /*Iterator::item*/;
+    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*Iterator::item*/;
     variable[7] = variable[6];
-    variable[8] = ((partial_order___PartialOrderElement_____l_t)CALL( variable[7] /*s*/,COLOR_partial_order___PartialOrderElement_____l))( variable[7] /*s*/,  variable[4] /*e*/) /*PartialOrderElement::<*/;
+    variable[8] = CALL_partial_order___PartialOrderElement_____l( variable[7] /*s*/)( variable[7] /*s*/,  variable[4] /*e*/) /*PartialOrderElement::<*/;
     if (UNTAG_Bool(variable[8])) { /*if*/
-      variable[8] = ((partial_order___PartialOrderElement___value_t)CALL( variable[7] /*s*/,COLOR_partial_order___PartialOrderElement___value))( variable[7] /*s*/) /*PartialOrderElement::value*/;
-      ((abstract_collection___SimpleCollection___add_t)CALL( variable[2] /*set*/,COLOR_abstract_collection___SimpleCollection___add))( variable[2] /*set*/, variable[8]) /*SimpleCollection::add*/;
+      variable[8] = CALL_partial_order___PartialOrderElement___value( variable[7] /*s*/)( variable[7] /*s*/) /*PartialOrderElement::value*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[2] /*set*/)( variable[2] /*set*/, variable[8]) /*SimpleCollection::add*/;
     }
     continue_23: while(0);
-    ((abstract_collection___Iterator___next_t)CALL(variable[5],COLOR_abstract_collection___Iterator___next))(variable[5]) /*Iterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*Iterator::next*/;
   }
   break_23: while(0);
   return_label22: while(false);
@@ -585,18 +587,18 @@ val_t partial_order___PartialOrderElement___greaters_and_self(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_partial_order___PartialOrderElement____greaters_and_self_cache(variable[2]) /*PartialOrderElement::_greaters_and_self_cache*/;
-  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && UNTAG_Bool(((array___AbstractArray_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2],  NIT_NULL /*null*/) /*AbstractArray::==*/)));
+  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*AbstractArray::==*/)));
   if (UNTAG_Bool(variable[2])) { /*if*/
     variable[2] = variable[0];
     variable[3] = variable[0];
     variable[3] = ATTR_partial_order___PartialOrderElement____greaters(variable[3]) /*PartialOrderElement::_greaters*/;
-    variable[3] = ((array___Collection___to_a_t)CALL(variable[3],COLOR_array___Collection___to_a))(variable[3]) /*Collection::to_a*/;
+    variable[3] = CALL_array___Collection___to_a(variable[3])(variable[3]) /*Collection::to_a*/;
     ATTR_partial_order___PartialOrderElement____greaters_and_self_cache(variable[2]) /*PartialOrderElement::_greaters_and_self_cache*/ = variable[3];
     variable[2] = variable[0];
     variable[2] = ATTR_partial_order___PartialOrderElement____greaters_and_self_cache(variable[2]) /*PartialOrderElement::_greaters_and_self_cache*/;
     variable[3] = variable[0];
     variable[3] = ATTR_partial_order___PartialOrderElement____value(variable[3]) /*PartialOrderElement::_value*/;
-    ((array___AbstractArray___add_t)CALL(variable[2],COLOR_abstract_collection___SimpleCollection___add))(variable[2], variable[3]) /*AbstractArray::add*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[3]) /*AbstractArray::add*/;
   }
   variable[2] = variable[0];
   variable[2] = ATTR_partial_order___PartialOrderElement____greaters_and_self_cache(variable[2]) /*PartialOrderElement::_greaters_and_self_cache*/;
@@ -617,7 +619,7 @@ val_t partial_order___PartialOrderElement___smallers(val_t  self) {
   variable[2] = ATTR_partial_order___PartialOrderElement____smallers_last_length(variable[2]) /*PartialOrderElement::_smallers_last_length*/;
   variable[3] = variable[0];
   variable[3] = ATTR_partial_order___PartialOrderElement____order(variable[3]) /*PartialOrderElement::_order*/;
-  variable[3] = ((partial_order___PartialOrder___length_t)CALL(variable[3],COLOR_abstract_collection___Collection___length))(variable[3]) /*PartialOrder::length*/;
+  variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*PartialOrder::length*/;
   variable[2] = TAG_Bool(UNTAG_Int(variable[2])<UNTAG_Int(variable[3]));
   if (UNTAG_Bool(variable[2])) { /*if*/
     variable[2] = variable[0];
@@ -625,11 +627,11 @@ val_t partial_order___PartialOrderElement___smallers(val_t  self) {
     variable[3] = variable[0];
     variable[4] = variable[0];
     variable[4] = ATTR_partial_order___PartialOrderElement____smallers_cache(variable[4]) /*PartialOrderElement::_smallers_cache*/;
-    ((partial_order___PartialOrder___compute_smallers_for_t)CALL(variable[2],COLOR_partial_order___PartialOrder___compute_smallers_for))(variable[2], variable[3], variable[4]) /*PartialOrder::compute_smallers_for*/;
+    CALL_partial_order___PartialOrder___compute_smallers_for(variable[2])(variable[2], variable[3], variable[4]) /*PartialOrder::compute_smallers_for*/;
     variable[2] = variable[0];
     variable[3] = variable[0];
     variable[3] = ATTR_partial_order___PartialOrderElement____order(variable[3]) /*PartialOrderElement::_order*/;
-    variable[3] = ((partial_order___PartialOrder___length_t)CALL(variable[3],COLOR_abstract_collection___Collection___length))(variable[3]) /*PartialOrder::length*/;
+    variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*PartialOrder::length*/;
     ATTR_partial_order___PartialOrderElement____smallers_last_length(variable[2]) /*PartialOrderElement::_smallers_last_length*/ = variable[3];
   }
   variable[2] = variable[0];
@@ -649,49 +651,49 @@ val_t partial_order___PartialOrderElement___linear_extension(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_partial_order___PartialOrderElement____linear_extension_cache(variable[2]) /*PartialOrderElement::_linear_extension_cache*/;
-  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && UNTAG_Bool(((array___AbstractArray_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2],  NIT_NULL /*null*/) /*AbstractArray::==*/)));
+  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*AbstractArray::==*/)));
   if (UNTAG_Bool(variable[2])) { /*if*/
     variable[3] = NEW_Array_array___Array___init(); /*new Array[E]*/
     variable[2] = variable[3];
     variable[4] = NEW_Array_array___Array___init(); /*new Array[E]*/
     variable[3] = variable[4];
     variable[4] = variable[0];
-    variable[4] = ((partial_order___PartialOrderElement___value_t)CALL(variable[4],COLOR_partial_order___PartialOrderElement___value))(variable[4]) /*PartialOrderElement::value*/;
-    ((array___AbstractArray___add_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[2] /*res*/, variable[4]) /*AbstractArray::add*/;
+    variable[4] = CALL_partial_order___PartialOrderElement___value(variable[4])(variable[4]) /*PartialOrderElement::value*/;
+    CALL_abstract_collection___SimpleCollection___add( variable[2] /*res*/)( variable[2] /*res*/, variable[4]) /*AbstractArray::add*/;
     variable[4] = variable[0];
-    variable[4] = ((partial_order___PartialOrderElement___direct_greaters_t)CALL(variable[4],COLOR_partial_order___PartialOrderElement___direct_greaters))(variable[4]) /*PartialOrderElement::direct_greaters*/;
-    variable[4] = ((array___AbstractArray___iterator_t)CALL(variable[4],COLOR_abstract_collection___Collection___iterator))(variable[4]) /*AbstractArray::iterator*/;
+    variable[4] = CALL_partial_order___PartialOrderElement___direct_greaters(variable[4])(variable[4]) /*PartialOrderElement::direct_greaters*/;
+    variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*AbstractArray::iterator*/;
     while (true) { /*for*/
-      variable[5] = ((array___ArrayIterator___is_ok_t)CALL(variable[4],COLOR_abstract_collection___Iterator___is_ok))(variable[4]) /*ArrayIterator::is_ok*/;
+      variable[5] = CALL_abstract_collection___Iterator___is_ok(variable[4])(variable[4]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[5])) break; /*for*/
-      variable[5] = ((array___ArrayIterator___item_t)CALL(variable[4],COLOR_abstract_collection___Iterator___item))(variable[4]) /*ArrayIterator::item*/;
+      variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/;
       variable[6] = variable[5];
       variable[8] = variable[0];
-      variable[8] = ((partial_order___PartialOrderElement___order_t)CALL(variable[8],COLOR_partial_order___PartialOrderElement___order))(variable[8]) /*PartialOrderElement::order*/;
-      variable[8] = ((partial_order___PartialOrder_____bra_t)CALL(variable[8],COLOR_partial_order___PartialOrder_____bra))(variable[8],  variable[6] /*s*/) /*PartialOrder::[]*/;
-      variable[8] = ((partial_order___PartialOrderElement___linear_extension_t)CALL(variable[8],COLOR_partial_order___PartialOrderElement___linear_extension))(variable[8]) /*PartialOrderElement::linear_extension*/;
+      variable[8] = CALL_partial_order___PartialOrderElement___order(variable[8])(variable[8]) /*PartialOrderElement::order*/;
+      variable[8] = CALL_partial_order___PartialOrder_____bra(variable[8])(variable[8],  variable[6] /*s*/) /*PartialOrder::[]*/;
+      variable[8] = CALL_partial_order___PartialOrderElement___linear_extension(variable[8])(variable[8]) /*PartialOrderElement::linear_extension*/;
       variable[7] = variable[8];
-      ((array___AbstractArray___clear_t)CALL( variable[3] /*res2*/,COLOR_abstract_collection___RemovableCollection___clear))( variable[3] /*res2*/) /*AbstractArray::clear*/;
-      variable[8] = ((array___AbstractArray___iterator_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___Collection___iterator))( variable[2] /*res*/) /*AbstractArray::iterator*/;
+      CALL_abstract_collection___RemovableCollection___clear( variable[3] /*res2*/)( variable[3] /*res2*/) /*AbstractArray::clear*/;
+      variable[8] = CALL_abstract_collection___Collection___iterator( variable[2] /*res*/)( variable[2] /*res*/) /*AbstractArray::iterator*/;
       while (true) { /*for*/
-        variable[9] = ((array___ArrayIterator___is_ok_t)CALL(variable[8],COLOR_abstract_collection___Iterator___is_ok))(variable[8]) /*ArrayIterator::is_ok*/;
+        variable[9] = CALL_abstract_collection___Iterator___is_ok(variable[8])(variable[8]) /*ArrayIterator::is_ok*/;
         if (!UNTAG_Bool(variable[9])) break; /*for*/
-        variable[9] = ((array___ArrayIterator___item_t)CALL(variable[8],COLOR_abstract_collection___Iterator___item))(variable[8]) /*ArrayIterator::item*/;
+        variable[9] = CALL_abstract_collection___Iterator___item(variable[8])(variable[8]) /*ArrayIterator::item*/;
         variable[10] = variable[9];
-        variable[11] = ((array___AbstractArray___has_t)CALL( variable[7] /*sl*/,COLOR_abstract_collection___Collection___has))( variable[7] /*sl*/,  variable[10] /*e*/) /*AbstractArray::has*/;
+        variable[11] = CALL_abstract_collection___Collection___has( variable[7] /*sl*/)( variable[7] /*sl*/,  variable[10] /*e*/) /*AbstractArray::has*/;
         if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[11])))) { /*if*/
-          ((array___AbstractArray___add_t)CALL( variable[3] /*res2*/,COLOR_abstract_collection___SimpleCollection___add))( variable[3] /*res2*/,  variable[10] /*e*/) /*AbstractArray::add*/;
+          CALL_abstract_collection___SimpleCollection___add( variable[3] /*res2*/)( variable[3] /*res2*/,  variable[10] /*e*/) /*AbstractArray::add*/;
         }
         continue_29: while(0);
-        ((array___ArrayIterator___next_t)CALL(variable[8],COLOR_abstract_collection___Iterator___next))(variable[8]) /*ArrayIterator::next*/;
+        CALL_abstract_collection___Iterator___next(variable[8])(variable[8]) /*ArrayIterator::next*/;
       }
       break_29: while(0);
-      ((abstract_collection___IndexedCollection___append_t)CALL( variable[3] /*res2*/,COLOR_abstract_collection___IndexedCollection___append))( variable[3] /*res2*/,  variable[7] /*sl*/) /*IndexedCollection::append*/;
+      CALL_abstract_collection___IndexedCollection___append( variable[3] /*res2*/)( variable[3] /*res2*/,  variable[7] /*sl*/) /*IndexedCollection::append*/;
       variable[8] =  variable[2] /*res*/;
       variable[2] =  variable[3] /*res2*/ /*res=*/;
       variable[3] =  variable[8] /*tmp*/ /*res2=*/;
       continue_28: while(0);
-      ((array___ArrayIterator___next_t)CALL(variable[4],COLOR_abstract_collection___Iterator___next))(variable[4]) /*ArrayIterator::next*/;
+      CALL_abstract_collection___Iterator___next(variable[4])(variable[4]) /*ArrayIterator::next*/;
     }
     break_28: while(0);
     variable[4] = variable[0];
@@ -714,33 +716,33 @@ val_t partial_order___PartialOrderElement___reverse_linear_extension(val_t  self
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_partial_order___PartialOrderElement____reverse_linear_extension_cache(variable[2]) /*PartialOrderElement::_reverse_linear_extension_cache*/;
-  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && UNTAG_Bool(((array___AbstractArray_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2],  NIT_NULL /*null*/) /*AbstractArray::==*/)));
+  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*AbstractArray::==*/)));
   if (UNTAG_Bool(variable[2])) { /*if*/
     variable[3] = NEW_HashSet_hash___HashSet___init(); /*new HashSet[E]*/
     variable[2] = variable[3];
     variable[3] = variable[0];
-    variable[3] = ((partial_order___PartialOrderElement___direct_greaters_t)CALL(variable[3],COLOR_partial_order___PartialOrderElement___direct_greaters))(variable[3]) /*PartialOrderElement::direct_greaters*/;
-    variable[3] = ((array___AbstractArray___iterator_t)CALL(variable[3],COLOR_abstract_collection___Collection___iterator))(variable[3]) /*AbstractArray::iterator*/;
+    variable[3] = CALL_partial_order___PartialOrderElement___direct_greaters(variable[3])(variable[3]) /*PartialOrderElement::direct_greaters*/;
+    variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArray::iterator*/;
     while (true) { /*for*/
-      variable[4] = ((array___ArrayIterator___is_ok_t)CALL(variable[3],COLOR_abstract_collection___Iterator___is_ok))(variable[3]) /*ArrayIterator::is_ok*/;
+      variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[4])) break; /*for*/
-      variable[4] = ((array___ArrayIterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*ArrayIterator::item*/;
+      variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/;
       variable[5] = variable[4];
       variable[7] = variable[0];
-      variable[7] = ((partial_order___PartialOrderElement___order_t)CALL(variable[7],COLOR_partial_order___PartialOrderElement___order))(variable[7]) /*PartialOrderElement::order*/;
-      variable[7] = ((partial_order___PartialOrder_____bra_t)CALL(variable[7],COLOR_partial_order___PartialOrder_____bra))(variable[7],  variable[5] /*s*/) /*PartialOrder::[]*/;
-      variable[7] = ((partial_order___PartialOrderElement___linear_extension_t)CALL(variable[7],COLOR_partial_order___PartialOrderElement___linear_extension))(variable[7]) /*PartialOrderElement::linear_extension*/;
+      variable[7] = CALL_partial_order___PartialOrderElement___order(variable[7])(variable[7]) /*PartialOrderElement::order*/;
+      variable[7] = CALL_partial_order___PartialOrder_____bra(variable[7])(variable[7],  variable[5] /*s*/) /*PartialOrder::[]*/;
+      variable[7] = CALL_partial_order___PartialOrderElement___linear_extension(variable[7])(variable[7]) /*PartialOrderElement::linear_extension*/;
       variable[6] = variable[7];
-      ((abstract_collection___SimpleCollection___add_all_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___SimpleCollection___add_all))( variable[2] /*res*/,  variable[6] /*sl*/) /*SimpleCollection::add_all*/;
+      CALL_abstract_collection___SimpleCollection___add_all( variable[2] /*res*/)( variable[2] /*res*/,  variable[6] /*sl*/) /*SimpleCollection::add_all*/;
       continue_31: while(0);
-      ((array___ArrayIterator___next_t)CALL(variable[3],COLOR_abstract_collection___Iterator___next))(variable[3]) /*ArrayIterator::next*/;
+      CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*ArrayIterator::next*/;
     }
     break_31: while(0);
     variable[3] = variable[0];
-    variable[3] = ((partial_order___PartialOrderElement___value_t)CALL(variable[3],COLOR_partial_order___PartialOrderElement___value))(variable[3]) /*PartialOrderElement::value*/;
-    ((hash___HashSet___add_t)CALL( variable[2] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[2] /*res*/, variable[3]) /*HashSet::add*/;
+    variable[3] = CALL_partial_order___PartialOrderElement___value(variable[3])(variable[3]) /*PartialOrderElement::value*/;
+    CALL_abstract_collection___SimpleCollection___add( variable[2] /*res*/)( variable[2] /*res*/, variable[3]) /*HashSet::add*/;
     variable[3] = variable[0];
-    variable[4] = ((array___Collection___to_a_t)CALL( variable[2] /*res*/,COLOR_array___Collection___to_a))( variable[2] /*res*/) /*Collection::to_a*/;
+    variable[4] = CALL_array___Collection___to_a( variable[2] /*res*/)( variable[2] /*res*/) /*Collection::to_a*/;
     ATTR_partial_order___PartialOrderElement____linear_extension_cache(variable[3]) /*PartialOrderElement::_linear_extension_cache*/ = variable[4];
   }
   variable[2] = variable[0];
@@ -761,7 +763,7 @@ val_t partial_order___PartialOrderElement_____l(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_partial_order___PartialOrderElement____greaters(variable[3]) /*PartialOrderElement::_greaters*/;
-  variable[3] = ((abstract_collection___Collection___has_t)CALL(variable[3],COLOR_abstract_collection___Collection___has))(variable[3],  variable[1] /*o*/) /*Collection::has*/;
+  variable[3] = CALL_abstract_collection___Collection___has(variable[3])(variable[3],  variable[1] /*o*/) /*Collection::has*/;
   variable[2] = variable[3];
   goto return_label32;
   return_label32: while(false);
@@ -778,12 +780,12 @@ val_t partial_order___PartialOrderElement_____leq(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_partial_order___PartialOrderElement____value(variable[3]) /*PartialOrderElement::_value*/;
-  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*o*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*o*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  variable[1] /*o*/) /*Object::==*/)))));
+  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*o*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*o*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  variable[1] /*o*/) /*Object::==*/)))));
   variable[4] = variable[3];
   if (!UNTAG_Bool(variable[4])) { /* or */
     variable[4] = variable[0];
     variable[4] = ATTR_partial_order___PartialOrderElement____greaters(variable[4]) /*PartialOrderElement::_greaters*/;
-    variable[4] = ((abstract_collection___Collection___has_t)CALL(variable[4],COLOR_abstract_collection___Collection___has))(variable[4],  variable[1] /*o*/) /*Collection::has*/;
+    variable[4] = CALL_abstract_collection___Collection___has(variable[4])(variable[4],  variable[1] /*o*/) /*Collection::has*/;
   }
   variable[3] = variable[4];
   variable[2] = variable[3];
@@ -802,10 +804,10 @@ val_t partial_order___PartialOrderElement_____g(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_partial_order___PartialOrderElement____order(variable[3]) /*PartialOrderElement::_order*/;
-  variable[3] = ((partial_order___PartialOrder_____bra_t)CALL(variable[3],COLOR_partial_order___PartialOrder_____bra))(variable[3],  variable[1] /*o*/) /*PartialOrder::[]*/;
+  variable[3] = CALL_partial_order___PartialOrder_____bra(variable[3])(variable[3],  variable[1] /*o*/) /*PartialOrder::[]*/;
   variable[4] = variable[0];
   variable[4] = ATTR_partial_order___PartialOrderElement____value(variable[4]) /*PartialOrderElement::_value*/;
-  variable[3] = ((partial_order___PartialOrderElement_____l_t)CALL(variable[3],COLOR_partial_order___PartialOrderElement_____l))(variable[3], variable[4]) /*PartialOrderElement::<*/;
+  variable[3] = CALL_partial_order___PartialOrderElement_____l(variable[3])(variable[3], variable[4]) /*PartialOrderElement::<*/;
   variable[2] = variable[3];
   goto return_label34;
   return_label34: while(false);
@@ -822,15 +824,15 @@ val_t partial_order___PartialOrderElement_____geq(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_partial_order___PartialOrderElement____value(variable[3]) /*PartialOrderElement::_value*/;
-  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*o*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*o*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  variable[1] /*o*/) /*Object::==*/)))));
+  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*o*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*o*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  variable[1] /*o*/) /*Object::==*/)))));
   variable[4] = variable[3];
   if (!UNTAG_Bool(variable[4])) { /* or */
     variable[4] = variable[0];
     variable[4] = ATTR_partial_order___PartialOrderElement____order(variable[4]) /*PartialOrderElement::_order*/;
-    variable[4] = ((partial_order___PartialOrder_____bra_t)CALL(variable[4],COLOR_partial_order___PartialOrder_____bra))(variable[4],  variable[1] /*o*/) /*PartialOrder::[]*/;
+    variable[4] = CALL_partial_order___PartialOrder_____bra(variable[4])(variable[4],  variable[1] /*o*/) /*PartialOrder::[]*/;
     variable[5] = variable[0];
     variable[5] = ATTR_partial_order___PartialOrderElement____value(variable[5]) /*PartialOrderElement::_value*/;
-    variable[4] = ((partial_order___PartialOrderElement_____l_t)CALL(variable[4],COLOR_partial_order___PartialOrderElement_____l))(variable[4], variable[5]) /*PartialOrderElement::<*/;
+    variable[4] = CALL_partial_order___PartialOrderElement_____l(variable[4])(variable[4], variable[5]) /*PartialOrderElement::<*/;
   }
   variable[3] = variable[4];
   variable[2] = variable[3];
@@ -849,7 +851,7 @@ void partial_order___PartialOrderElement___register_direct_smallers(val_t  self,
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_partial_order___PartialOrderElement____direct_smallers(variable[3]) /*PartialOrderElement::_direct_smallers*/;
-  ((array___AbstractArray___add_t)CALL(variable[3],COLOR_abstract_collection___SimpleCollection___add))(variable[3],  variable[1] /*e*/) /*AbstractArray::add*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3],  variable[1] /*e*/) /*AbstractArray::add*/;
   return_label36: while(false);
   tracehead = trace.prev;
   return;
@@ -884,39 +886,39 @@ void partial_order___PartialOrderElement___init(val_t  self, val_t  param0, val_
   variable[6] = ATTR_partial_order___PartialOrderElement____greaters(variable[6]) /*PartialOrderElement::_greaters*/;
   variable[5] = variable[6];
   variable[6] =  TAG_Int(0);
-  variable[7] = ((array___AbstractArray___iterator_t)CALL( variable[3] /*directs*/,COLOR_abstract_collection___Collection___iterator))( variable[3] /*directs*/) /*AbstractArray::iterator*/;
+  variable[7] = CALL_abstract_collection___Collection___iterator( variable[3] /*directs*/)( variable[3] /*directs*/) /*AbstractArray::iterator*/;
   while (true) { /*for*/
-    variable[8] = ((array___ArrayIterator___is_ok_t)CALL(variable[7],COLOR_abstract_collection___Iterator___is_ok))(variable[7]) /*ArrayIterator::is_ok*/;
+    variable[8] = CALL_abstract_collection___Iterator___is_ok(variable[7])(variable[7]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[8])) break; /*for*/
-    variable[8] = ((array___ArrayIterator___item_t)CALL(variable[7],COLOR_abstract_collection___Iterator___item))(variable[7]) /*ArrayIterator::item*/;
+    variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*ArrayIterator::item*/;
     variable[9] = variable[8];
-    ((abstract_collection___SimpleCollection___add_t)CALL( variable[5] /*g*/,COLOR_abstract_collection___SimpleCollection___add))( variable[5] /*g*/,  variable[9] /*ee*/) /*SimpleCollection::add*/;
+    CALL_abstract_collection___SimpleCollection___add( variable[5] /*g*/)( variable[5] /*g*/,  variable[9] /*ee*/) /*SimpleCollection::add*/;
     variable[11] = variable[0];
     variable[11] = ATTR_partial_order___PartialOrderElement____order(variable[11]) /*PartialOrderElement::_order*/;
-    variable[11] = ((partial_order___PartialOrder_____bra_t)CALL(variable[11],COLOR_partial_order___PartialOrder_____bra))(variable[11],  variable[9] /*ee*/) /*PartialOrder::[]*/;
+    variable[11] = CALL_partial_order___PartialOrder_____bra(variable[11])(variable[11],  variable[9] /*ee*/) /*PartialOrder::[]*/;
     variable[10] = variable[11];
-    variable[11] = ((partial_order___PartialOrderElement___rank_t)CALL( variable[10] /*poee*/,COLOR_partial_order___PartialOrderElement___rank))( variable[10] /*poee*/) /*PartialOrderElement::rank*/;
+    variable[11] = CALL_partial_order___PartialOrderElement___rank( variable[10] /*poee*/)( variable[10] /*poee*/) /*PartialOrderElement::rank*/;
     variable[11] = TAG_Bool(UNTAG_Int(variable[11])>=UNTAG_Int( variable[6] /*r*/));
     if (UNTAG_Bool(variable[11])) { /*if*/
-      variable[11] = ((partial_order___PartialOrderElement___rank_t)CALL( variable[10] /*poee*/,COLOR_partial_order___PartialOrderElement___rank))( variable[10] /*poee*/) /*PartialOrderElement::rank*/;
+      variable[11] = CALL_partial_order___PartialOrderElement___rank( variable[10] /*poee*/)( variable[10] /*poee*/) /*PartialOrderElement::rank*/;
       variable[11] = TAG_Int(UNTAG_Int(variable[11])+UNTAG_Int( TAG_Int(1)));
       variable[6] = variable[11] /*r=*/;
     }
-    ((partial_order___PartialOrderElement___register_direct_smallers_t)CALL( variable[10] /*poee*/,COLOR_partial_order___PartialOrderElement___register_direct_smallers))( variable[10] /*poee*/,  variable[2] /*e*/) /*PartialOrderElement::register_direct_smallers*/;
-    variable[11] = ((partial_order___PartialOrderElement___greaters_t)CALL( variable[10] /*poee*/,COLOR_partial_order___PartialOrderElement___greaters))( variable[10] /*poee*/) /*PartialOrderElement::greaters*/;
-    variable[11] = ((abstract_collection___Collection___iterator_t)CALL(variable[11],COLOR_abstract_collection___Collection___iterator))(variable[11]) /*Collection::iterator*/;
+    CALL_partial_order___PartialOrderElement___register_direct_smallers( variable[10] /*poee*/)( variable[10] /*poee*/,  variable[2] /*e*/) /*PartialOrderElement::register_direct_smallers*/;
+    variable[11] = CALL_partial_order___PartialOrderElement___greaters( variable[10] /*poee*/)( variable[10] /*poee*/) /*PartialOrderElement::greaters*/;
+    variable[11] = CALL_abstract_collection___Collection___iterator(variable[11])(variable[11]) /*Collection::iterator*/;
     while (true) { /*for*/
-      variable[12] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[11],COLOR_abstract_collection___Iterator___is_ok))(variable[11]) /*Iterator::is_ok*/;
+      variable[12] = CALL_abstract_collection___Iterator___is_ok(variable[11])(variable[11]) /*Iterator::is_ok*/;
       if (!UNTAG_Bool(variable[12])) break; /*for*/
-      variable[12] = ((abstract_collection___Iterator___item_t)CALL(variable[11],COLOR_abstract_collection___Iterator___item))(variable[11]) /*Iterator::item*/;
+      variable[12] = CALL_abstract_collection___Iterator___item(variable[11])(variable[11]) /*Iterator::item*/;
       variable[13] = variable[12];
-      ((abstract_collection___SimpleCollection___add_t)CALL( variable[5] /*g*/,COLOR_abstract_collection___SimpleCollection___add))( variable[5] /*g*/,  variable[13] /*eee*/) /*SimpleCollection::add*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[5] /*g*/)( variable[5] /*g*/,  variable[13] /*eee*/) /*SimpleCollection::add*/;
       continue_39: while(0);
-      ((abstract_collection___Iterator___next_t)CALL(variable[11],COLOR_abstract_collection___Iterator___next))(variable[11]) /*Iterator::next*/;
+      CALL_abstract_collection___Iterator___next(variable[11])(variable[11]) /*Iterator::next*/;
     }
     break_39: while(0);
     continue_38: while(0);
-    ((array___ArrayIterator___next_t)CALL(variable[7],COLOR_abstract_collection___Iterator___next))(variable[7]) /*ArrayIterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[7])(variable[7]) /*ArrayIterator::next*/;
   }
   break_38: while(0);
   variable[7] = variable[0];

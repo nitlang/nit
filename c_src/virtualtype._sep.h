@@ -9,23 +9,23 @@ extern const classtable_elt_t VFT_MMTypeProperty[];
 extern const classtable_elt_t VFT_MMVirtualType[];
 extern const char *LOCATE_virtualtype;
 extern const int SFT_virtualtype[];
-#define COLOR_virtualtype___MMGlobalProperty___is_virtual_type SFT_virtualtype[0]
-#define ID_MMTypeProperty SFT_virtualtype[1]
-#define COLOR_MMTypeProperty SFT_virtualtype[2]
-#define COLOR_virtualtype___MMTypeProperty____stypes_cache SFT_virtualtype[3]
-#define INIT_TABLE_POS_MMTypeProperty SFT_virtualtype[4]
-#define COLOR_virtualtype___MMTypeProperty___stype_for SFT_virtualtype[5]
-#define COLOR_virtualtype___MMTypeProperty___real_stype_for SFT_virtualtype[6]
-#define ID_MMVirtualType SFT_virtualtype[7]
-#define COLOR_MMVirtualType SFT_virtualtype[8]
-#define COLOR_virtualtype___MMVirtualType____property SFT_virtualtype[9]
-#define COLOR_virtualtype___MMVirtualType____recv SFT_virtualtype[10]
-#define INIT_TABLE_POS_MMVirtualType SFT_virtualtype[11]
-#define COLOR_virtualtype___MMVirtualType___property SFT_virtualtype[12]
-#define COLOR_virtualtype___MMVirtualType___recv SFT_virtualtype[13]
-#define COLOR_virtualtype___MMVirtualType___init SFT_virtualtype[14]
-#define COLOR_virtualtype___MMLocalClass___virtual_type SFT_virtualtype[15]
-#define COLOR_virtualtype___MMLocalClass___select_virtual_type SFT_virtualtype[16]
+#define CALL_virtualtype___MMGlobalProperty___is_virtual_type(recv) ((virtualtype___MMGlobalProperty___is_virtual_type_t)CALL((recv), (SFT_virtualtype[0] + 0)))
+#define ID_MMTypeProperty (SFT_virtualtype[1])
+#define COLOR_MMTypeProperty (SFT_virtualtype[2])
+#define ATTR_virtualtype___MMTypeProperty____stypes_cache(recv) ATTR(recv, (SFT_virtualtype[3] + 0))
+#define INIT_TABLE_POS_MMTypeProperty (SFT_virtualtype[4] + 0)
+#define CALL_virtualtype___MMTypeProperty___stype_for(recv) ((virtualtype___MMTypeProperty___stype_for_t)CALL((recv), (SFT_virtualtype[4] + 1)))
+#define CALL_virtualtype___MMTypeProperty___real_stype_for(recv) ((virtualtype___MMTypeProperty___real_stype_for_t)CALL((recv), (SFT_virtualtype[4] + 2)))
+#define ID_MMVirtualType (SFT_virtualtype[5])
+#define COLOR_MMVirtualType (SFT_virtualtype[6])
+#define ATTR_virtualtype___MMVirtualType____property(recv) ATTR(recv, (SFT_virtualtype[7] + 0))
+#define ATTR_virtualtype___MMVirtualType____recv(recv) ATTR(recv, (SFT_virtualtype[7] + 1))
+#define INIT_TABLE_POS_MMVirtualType (SFT_virtualtype[8] + 0)
+#define CALL_virtualtype___MMVirtualType___property(recv) ((virtualtype___MMVirtualType___property_t)CALL((recv), (SFT_virtualtype[8] + 1)))
+#define CALL_virtualtype___MMVirtualType___recv(recv) ((virtualtype___MMVirtualType___recv_t)CALL((recv), (SFT_virtualtype[8] + 2)))
+#define CALL_virtualtype___MMVirtualType___init(recv) ((virtualtype___MMVirtualType___init_t)CALL((recv), (SFT_virtualtype[8] + 3)))
+#define CALL_virtualtype___MMLocalClass___virtual_type(recv) ((virtualtype___MMLocalClass___virtual_type_t)CALL((recv), (SFT_virtualtype[9] + 0)))
+#define CALL_virtualtype___MMLocalClass___select_virtual_type(recv) ((virtualtype___MMLocalClass___select_virtual_type_t)CALL((recv), (SFT_virtualtype[9] + 1)))
 val_t NEW_MMGlobalProperty_abstractmetamodel___MMGlobalProperty___init(val_t p0);
 typedef val_t (* virtualtype___MMGlobalProperty___is_virtual_type_t)(val_t  self);
 val_t virtualtype___MMGlobalProperty___is_virtual_type(val_t  self);
@@ -34,7 +34,6 @@ val_t NEW_MMTypeProperty_abstractmetamodel___MMLocalProperty___init(val_t p0, va
 typedef val_t (* virtualtype___MMTypeProperty___stype_for_t)(val_t  self, val_t  param0);
 val_t virtualtype___MMTypeProperty___stype_for(val_t  self, val_t  param0);
 #define LOCATE_virtualtype___MMTypeProperty___stype_for "virtualtype::MMTypeProperty::stype_for"
-#define ATTR_virtualtype___MMTypeProperty____stypes_cache(recv) ATTR(recv, COLOR_virtualtype___MMTypeProperty____stypes_cache)
 typedef val_t (* virtualtype___MMTypeProperty___real_stype_for_t)(val_t  self, val_t  param0);
 val_t virtualtype___MMTypeProperty___real_stype_for(val_t  self, val_t  param0);
 #define LOCATE_virtualtype___MMTypeProperty___real_stype_for "virtualtype::MMTypeProperty::real_stype_for"
@@ -50,11 +49,9 @@ val_t virtualtype___MMVirtualType___adapt_to(val_t  self, val_t  param0);
 typedef val_t (* virtualtype___MMVirtualType___not_for_self_t)(val_t  self);
 val_t virtualtype___MMVirtualType___not_for_self(val_t  self);
 #define LOCATE_virtualtype___MMVirtualType___not_for_self "virtualtype::MMVirtualType::(static_type::MMType::not_for_self)"
-#define ATTR_virtualtype___MMVirtualType____property(recv) ATTR(recv, COLOR_virtualtype___MMVirtualType____property)
 typedef val_t (* virtualtype___MMVirtualType___property_t)(val_t  self);
 val_t virtualtype___MMVirtualType___property(val_t  self);
 #define LOCATE_virtualtype___MMVirtualType___property "virtualtype::MMVirtualType::property"
-#define ATTR_virtualtype___MMVirtualType____recv(recv) ATTR(recv, COLOR_virtualtype___MMVirtualType____recv)
 typedef val_t (* virtualtype___MMVirtualType___recv_t)(val_t  self);
 val_t virtualtype___MMVirtualType___recv(val_t  self);
 #define LOCATE_virtualtype___MMVirtualType___recv "virtualtype::MMVirtualType::recv"

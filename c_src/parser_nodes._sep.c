@@ -30,7 +30,7 @@ void parser_nodes___PError___noinit(val_t  self, int* init_table) {
   trace.file = LOCATE_parser_nodes;
   variable[0] =  self;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PError].i]) return;
-  ((parser_nodes___EOF___noinit_t)CALL(variable[0],COLOR_parser_nodes___EOF___noinit))(variable[0], init_table /*YYY*/) /*EOF::noinit*/;
+  CALL_parser_nodes___EOF___noinit(variable[0])(variable[0], init_table /*YYY*/) /*EOF::noinit*/;
   return_label1: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PError].i] = 1;
   tracehead = trace.prev;

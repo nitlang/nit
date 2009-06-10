@@ -6,22 +6,22 @@
 #include <math_nit.h>
 extern const char *LOCATE_math;
 extern const int SFT_math[];
-#define COLOR_math___Int___rand SFT_math[0]
-#define COLOR_math___Float___sqrt SFT_math[1]
-#define COLOR_math___Float___cos SFT_math[2]
-#define COLOR_math___Float___sin SFT_math[3]
-#define COLOR_math___Float___tan SFT_math[4]
-#define COLOR_math___Float___acos SFT_math[5]
-#define COLOR_math___Float___asin SFT_math[6]
-#define COLOR_math___Float___atan SFT_math[7]
-#define COLOR_math___Float___pow SFT_math[8]
-#define COLOR_math___Float___log SFT_math[9]
-#define COLOR_math___Float___exp SFT_math[10]
-#define COLOR_math___Float___rand SFT_math[11]
-#define COLOR_math___Object___atan2 SFT_math[12]
-#define COLOR_math___Object___pi SFT_math[13]
-#define COLOR_math___Object___srand_from SFT_math[14]
-#define COLOR_math___Object___srand SFT_math[15]
+#define CALL_math___Int___rand(recv) ((math___Int___rand_t)CALL((recv), (SFT_math[0] + 0)))
+#define CALL_math___Float___sqrt(recv) ((math___Float___sqrt_t)CALL((recv), (SFT_math[1] + 0)))
+#define CALL_math___Float___cos(recv) ((math___Float___cos_t)CALL((recv), (SFT_math[1] + 1)))
+#define CALL_math___Float___sin(recv) ((math___Float___sin_t)CALL((recv), (SFT_math[1] + 2)))
+#define CALL_math___Float___tan(recv) ((math___Float___tan_t)CALL((recv), (SFT_math[1] + 3)))
+#define CALL_math___Float___acos(recv) ((math___Float___acos_t)CALL((recv), (SFT_math[1] + 4)))
+#define CALL_math___Float___asin(recv) ((math___Float___asin_t)CALL((recv), (SFT_math[1] + 5)))
+#define CALL_math___Float___atan(recv) ((math___Float___atan_t)CALL((recv), (SFT_math[1] + 6)))
+#define CALL_math___Float___pow(recv) ((math___Float___pow_t)CALL((recv), (SFT_math[1] + 7)))
+#define CALL_math___Float___log(recv) ((math___Float___log_t)CALL((recv), (SFT_math[1] + 8)))
+#define CALL_math___Float___exp(recv) ((math___Float___exp_t)CALL((recv), (SFT_math[1] + 9)))
+#define CALL_math___Float___rand(recv) ((math___Float___rand_t)CALL((recv), (SFT_math[1] + 10)))
+#define CALL_math___Object___atan2(recv) ((math___Object___atan2_t)CALL((recv), (SFT_math[2] + 0)))
+#define CALL_math___Object___pi(recv) ((math___Object___pi_t)CALL((recv), (SFT_math[2] + 1)))
+#define CALL_math___Object___srand_from(recv) ((math___Object___srand_from_t)CALL((recv), (SFT_math[2] + 2)))
+#define CALL_math___Object___srand(recv) ((math___Object___srand_t)CALL((recv), (SFT_math[2] + 3)))
 typedef val_t (* math___Int___rand_t)(val_t  self);
 val_t math___Int___rand(val_t  self);
 #define LOCATE_math___Int___rand "math::Int::rand"

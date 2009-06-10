@@ -6,7 +6,7 @@
 #include <time_nit.h>
 extern const char *LOCATE_time;
 extern const int SFT_time[];
-#define COLOR_time___Object___get_time SFT_time[0]
+#define CALL_time___Object___get_time(recv) ((time___Object___get_time_t)CALL((recv), (SFT_time[0] + 0)))
 typedef val_t (* time___Object___get_time_t)(val_t  self);
 val_t time___Object___get_time(val_t  self);
 #define LOCATE_time___Object___get_time "time::Object::get_time"

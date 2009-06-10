@@ -16,10 +16,10 @@ val_t symbol___String___to_symbol(val_t  self) {
   }
   variable[2] = variable[3];
   variable[3] = variable[0];
-  variable[3] = ((abstract_collection___CoupleMap___has_key_t)CALL( variable[2] /*symbol_dictionary*/,COLOR_abstract_collection___Map___has_key))( variable[2] /*symbol_dictionary*/, variable[3]) /*CoupleMap::has_key*/;
+  variable[3] = CALL_abstract_collection___Map___has_key( variable[2] /*symbol_dictionary*/)( variable[2] /*symbol_dictionary*/, variable[3]) /*CoupleMap::has_key*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = variable[0];
-    variable[3] = ((abstract_collection___CoupleMap_____bra_t)CALL( variable[2] /*symbol_dictionary*/,COLOR_abstract_collection___Map_____bra))( variable[2] /*symbol_dictionary*/, variable[3]) /*CoupleMap::[]*/;
+    variable[3] = CALL_abstract_collection___Map_____bra( variable[2] /*symbol_dictionary*/)( variable[2] /*symbol_dictionary*/, variable[3]) /*CoupleMap::[]*/;
     variable[1] = variable[3];
     goto return_label0;
   } else { /*if*/
@@ -28,7 +28,7 @@ val_t symbol___String___to_symbol(val_t  self) {
     variable[4] = variable[5];
     variable[3] = variable[4];
     variable[4] = variable[0];
-    ((hash___HashMap_____braeq_t)CALL( variable[2] /*symbol_dictionary*/,COLOR_abstract_collection___Map_____braeq))( variable[2] /*symbol_dictionary*/, variable[4],  variable[3] /*symbol*/) /*HashMap::[]=*/;
+    CALL_abstract_collection___Map_____braeq( variable[2] /*symbol_dictionary*/)( variable[2] /*symbol_dictionary*/, variable[4],  variable[3] /*symbol*/) /*HashMap::[]=*/;
     variable[1] =  variable[3] /*symbol*/;
     goto return_label0;
   }
@@ -45,7 +45,7 @@ val_t symbol___Symbol___to_s(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_symbol___Symbol____string(variable[2]) /*Symbol::_string*/;
-  variable[2] = ((string___String___to_s_t)CALL(variable[2],COLOR_string___Object___to_s))(variable[2]) /*String::to_s*/;
+  variable[2] = CALL_string___Object___to_s(variable[2])(variable[2]) /*String::to_s*/;
   variable[1] = variable[2];
   goto return_label2;
   return_label2: while(false);

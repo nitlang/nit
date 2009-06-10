@@ -92,7 +92,7 @@ val_t abstract_collection___NaiveCollection___is_empty(val_t  self) {
   trace.file = LOCATE_abstract_collection;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((abstract_collection___NaiveCollection___length_t)CALL(variable[2],COLOR_abstract_collection___Collection___length))(variable[2]) /*NaiveCollection::length*/;
+  variable[2] = CALL_abstract_collection___Collection___length(variable[2])(variable[2]) /*NaiveCollection::length*/;
   variable[2] = TAG_Bool((variable[2])==( TAG_Int(0)));
   variable[1] = variable[2];
   goto return_label0;
@@ -109,15 +109,15 @@ val_t abstract_collection___NaiveCollection___length(val_t  self) {
   variable[0] =  self;
   variable[2] =  TAG_Int(0);
   variable[3] = variable[0];
-  variable[3] = ((abstract_collection___Collection___iterator_t)CALL(variable[3],COLOR_abstract_collection___Collection___iterator))(variable[3]) /*Collection::iterator*/;
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*Collection::iterator*/;
   while (true) { /*for*/
-    variable[4] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[3],COLOR_abstract_collection___Iterator___is_ok))(variable[3]) /*Iterator::is_ok*/;
+    variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = ((abstract_collection___Iterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*Iterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
     variable[5] = variable[4];
     variable[2] = TAG_Int(UNTAG_Int(variable[2])+UNTAG_Int( variable[2] /*nb*/)) /*nb*/;
     continue_2: while(0);
-    ((abstract_collection___Iterator___next_t)CALL(variable[3],COLOR_abstract_collection___Iterator___next))(variable[3]) /*Iterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*Iterator::next*/;
   }
   break_2: while(0);
   variable[1] =  variable[2] /*nb*/;
@@ -135,19 +135,19 @@ val_t abstract_collection___NaiveCollection___has(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((abstract_collection___Collection___iterator_t)CALL(variable[3],COLOR_abstract_collection___Collection___iterator))(variable[3]) /*Collection::iterator*/;
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*Collection::iterator*/;
   while (true) { /*for*/
-    variable[4] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[3],COLOR_abstract_collection___Iterator___is_ok))(variable[3]) /*Iterator::is_ok*/;
+    variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = ((abstract_collection___Iterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*Iterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
     variable[5] = variable[4];
-    variable[6] = TAG_Bool(( variable[5] /*i*/ ==  variable[1] /*item*/) || (( variable[5] /*i*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*i*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*i*/, variable[1] /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*i*/,COLOR_kernel___Object_____eqeq))( variable[5] /*i*/,  variable[1] /*item*/) /*Object::==*/)))));
+    variable[6] = TAG_Bool(( variable[5] /*i*/ ==  variable[1] /*item*/) || (( variable[5] /*i*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*i*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*i*/, variable[1] /*item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*i*/)( variable[5] /*i*/,  variable[1] /*item*/) /*Object::==*/)))));
     if (UNTAG_Bool(variable[6])) { /*if*/
       variable[2] =  TAG_Bool(true);
       goto return_label3;
     }
     continue_4: while(0);
-    ((abstract_collection___Iterator___next_t)CALL(variable[3],COLOR_abstract_collection___Iterator___next))(variable[3]) /*Iterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*Iterator::next*/;
   }
   break_4: while(0);
   variable[2] =  TAG_Bool(false);
@@ -165,19 +165,19 @@ val_t abstract_collection___NaiveCollection___has_only(val_t  self, val_t  param
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((abstract_collection___Collection___iterator_t)CALL(variable[3],COLOR_abstract_collection___Collection___iterator))(variable[3]) /*Collection::iterator*/;
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*Collection::iterator*/;
   while (true) { /*for*/
-    variable[4] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[3],COLOR_abstract_collection___Iterator___is_ok))(variable[3]) /*Iterator::is_ok*/;
+    variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = ((abstract_collection___Iterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*Iterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
     variable[5] = variable[4];
-    variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*i*/ ==  variable[1] /*item*/) || (( variable[5] /*i*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*i*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*i*/, variable[1] /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*i*/,COLOR_kernel___Object_____eqeq))( variable[5] /*i*/,  variable[1] /*item*/) /*Object::==*/)))))));
+    variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*i*/ ==  variable[1] /*item*/) || (( variable[5] /*i*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*i*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*i*/, variable[1] /*item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*i*/)( variable[5] /*i*/,  variable[1] /*item*/) /*Object::==*/)))))));
     if (UNTAG_Bool(variable[6])) { /*if*/
       variable[2] =  TAG_Bool(false);
       goto return_label5;
     }
     continue_6: while(0);
-    ((abstract_collection___Iterator___next_t)CALL(variable[3],COLOR_abstract_collection___Iterator___next))(variable[3]) /*Iterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*Iterator::next*/;
   }
   break_6: while(0);
   variable[2] =  TAG_Bool(true);
@@ -196,18 +196,18 @@ val_t abstract_collection___NaiveCollection___count(val_t  self, val_t  param0) 
   variable[1] =  param0;
   variable[3] =  TAG_Int(0);
   variable[4] = variable[0];
-  variable[4] = ((abstract_collection___Collection___iterator_t)CALL(variable[4],COLOR_abstract_collection___Collection___iterator))(variable[4]) /*Collection::iterator*/;
+  variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*Collection::iterator*/;
   while (true) { /*for*/
-    variable[5] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[4],COLOR_abstract_collection___Iterator___is_ok))(variable[4]) /*Iterator::is_ok*/;
+    variable[5] = CALL_abstract_collection___Iterator___is_ok(variable[4])(variable[4]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[5])) break; /*for*/
-    variable[5] = ((abstract_collection___Iterator___item_t)CALL(variable[4],COLOR_abstract_collection___Iterator___item))(variable[4]) /*Iterator::item*/;
+    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*Iterator::item*/;
     variable[6] = variable[5];
-    variable[7] = TAG_Bool(( variable[6] /*i*/ ==  variable[1] /*item*/) || (( variable[6] /*i*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[6] /*i*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*i*/, variable[1] /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[6] /*i*/,COLOR_kernel___Object_____eqeq))( variable[6] /*i*/,  variable[1] /*item*/) /*Object::==*/)))));
+    variable[7] = TAG_Bool(( variable[6] /*i*/ ==  variable[1] /*item*/) || (( variable[6] /*i*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[6] /*i*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*i*/, variable[1] /*item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[6] /*i*/)( variable[6] /*i*/,  variable[1] /*item*/) /*Object::==*/)))));
     if (UNTAG_Bool(variable[7])) { /*if*/
       variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(1))) /*nb*/;
     }
     continue_8: while(0);
-    ((abstract_collection___Iterator___next_t)CALL(variable[4],COLOR_abstract_collection___Iterator___next))(variable[4]) /*Iterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[4])(variable[4]) /*Iterator::next*/;
   }
   break_8: while(0);
   variable[2] =  variable[3] /*nb*/;
@@ -224,12 +224,12 @@ val_t abstract_collection___NaiveCollection___first(val_t  self) {
   trace.file = LOCATE_abstract_collection;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((abstract_collection___NaiveCollection___length_t)CALL(variable[2],COLOR_abstract_collection___Collection___length))(variable[2]) /*NaiveCollection::length*/;
+  variable[2] = CALL_abstract_collection___Collection___length(variable[2])(variable[2]) /*NaiveCollection::length*/;
   variable[2] = TAG_Bool(UNTAG_Int(variable[2])>UNTAG_Int( TAG_Int(0)));
   if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___NaiveCollection___first, LOCATE_abstract_collection, 102); nit_exit(1);}
   variable[2] = variable[0];
-  variable[2] = ((abstract_collection___Collection___iterator_t)CALL(variable[2],COLOR_abstract_collection___Collection___iterator))(variable[2]) /*Collection::iterator*/;
-  variable[2] = ((abstract_collection___Iterator___item_t)CALL(variable[2],COLOR_abstract_collection___Iterator___item))(variable[2]) /*Iterator::item*/;
+  variable[2] = CALL_abstract_collection___Collection___iterator(variable[2])(variable[2]) /*Collection::iterator*/;
+  variable[2] = CALL_abstract_collection___Iterator___item(variable[2])(variable[2]) /*Iterator::item*/;
   variable[1] = variable[2];
   goto return_label9;
   return_label9: while(false);
@@ -324,7 +324,7 @@ val_t abstract_collection___Container___has(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_abstract_collection___Container____item(variable[3]) /*Container::_item*/;
-  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*an_item*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*an_item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  variable[1] /*an_item*/) /*Object::==*/)))));
+  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*an_item*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*an_item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  variable[1] /*an_item*/) /*Object::==*/)))));
   variable[2] = variable[3];
   goto return_label13;
   return_label13: while(false);
@@ -341,7 +341,7 @@ val_t abstract_collection___Container___has_only(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_abstract_collection___Container____item(variable[3]) /*Container::_item*/;
-  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*an_item*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*an_item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  variable[1] /*an_item*/) /*Object::==*/)))));
+  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*an_item*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*an_item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  variable[1] /*an_item*/) /*Object::==*/)))));
   variable[2] = variable[3];
   goto return_label14;
   return_label14: while(false);
@@ -358,7 +358,7 @@ val_t abstract_collection___Container___count(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_abstract_collection___Container____item(variable[3]) /*Container::_item*/;
-  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*an_item*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*an_item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  variable[1] /*an_item*/) /*Object::==*/)))));
+  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*an_item*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*an_item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  variable[1] /*an_item*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[2] =  TAG_Int(1);
     goto return_label15;
@@ -429,7 +429,7 @@ val_t abstract_collection___ContainerIterator___item(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_abstract_collection___ContainerIterator____container(variable[2]) /*ContainerIterator::_container*/;
-  variable[2] = ((abstract_collection___Container___item_t)CALL(variable[2],COLOR_abstract_collection___Container___item))(variable[2]) /*Container::item*/;
+  variable[2] = CALL_abstract_collection___Container___item(variable[2])(variable[2]) /*Container::item*/;
   variable[1] = variable[2];
   goto return_label18;
   return_label18: while(false);
@@ -508,10 +508,10 @@ void abstract_collection___RemovableCollection___remove_all(val_t  self, val_t  
   variable[1] =  param0;
   while (true) { /*while*/
     variable[3] = variable[0];
-    variable[3] = ((abstract_collection___Collection___has_t)CALL(variable[3],COLOR_abstract_collection___Collection___has))(variable[3],  variable[1] /*item*/) /*Collection::has*/;
+    variable[3] = CALL_abstract_collection___Collection___has(variable[3])(variable[3],  variable[1] /*item*/) /*Collection::has*/;
     if (!UNTAG_Bool(variable[3])) break; /* while*/
     variable[3] = variable[0];
-    ((abstract_collection___RemovableCollection___remove_t)CALL(variable[3],COLOR_abstract_collection___RemovableCollection___remove))(variable[3],  variable[1] /*item*/) /*RemovableCollection::remove*/;
+    CALL_abstract_collection___RemovableCollection___remove(variable[3])(variable[3],  variable[1] /*item*/) /*RemovableCollection::remove*/;
     continue_22: while(0);
   }
   break_22: while(0);
@@ -539,18 +539,18 @@ void abstract_collection___SimpleCollection___add_all(val_t  self, val_t  param0
   trace.file = LOCATE_abstract_collection;
   variable[0] =  self;
   variable[1] =  param0;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*coll*/ ==  NIT_NULL /*null*/) || (( variable[1] /*coll*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*coll*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*coll*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*coll*/,COLOR_kernel___Object_____eqeq))( variable[1] /*coll*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*coll*/ ==  NIT_NULL /*null*/) || (( variable[1] /*coll*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*coll*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*coll*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*coll*/)( variable[1] /*coll*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = ((abstract_collection___Collection___iterator_t)CALL( variable[1] /*coll*/,COLOR_abstract_collection___Collection___iterator))( variable[1] /*coll*/) /*Collection::iterator*/;
+    variable[3] = CALL_abstract_collection___Collection___iterator( variable[1] /*coll*/)( variable[1] /*coll*/) /*Collection::iterator*/;
     while (true) { /*for*/
-      variable[4] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[3],COLOR_abstract_collection___Iterator___is_ok))(variable[3]) /*Iterator::is_ok*/;
+      variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
       if (!UNTAG_Bool(variable[4])) break; /*for*/
-      variable[4] = ((abstract_collection___Iterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*Iterator::item*/;
+      variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
       variable[5] = variable[4];
       variable[6] = variable[0];
-      ((abstract_collection___SimpleCollection___add_t)CALL(variable[6],COLOR_abstract_collection___SimpleCollection___add))(variable[6],  variable[5] /*i*/) /*SimpleCollection::add*/;
+      CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6],  variable[5] /*i*/) /*SimpleCollection::add*/;
       continue_24: while(0);
-      ((abstract_collection___Iterator___next_t)CALL(variable[3],COLOR_abstract_collection___Iterator___next))(variable[3]) /*Iterator::next*/;
+      CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*Iterator::next*/;
     }
     break_24: while(0);
   }
@@ -567,12 +567,12 @@ val_t abstract_collection___Set___has_only(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[4] = variable[0];
-  variable[4] = ((abstract_collection___Collection___length_t)CALL(variable[4],COLOR_abstract_collection___Collection___length))(variable[4]) /*Collection::length*/;
+  variable[4] = CALL_abstract_collection___Collection___length(variable[4])(variable[4]) /*Collection::length*/;
   variable[3] = variable[4];
   variable[4] = TAG_Bool(( variable[3] /*l*/)==( TAG_Int(1)));
   if (UNTAG_Bool(variable[4])) { /*if*/
     variable[4] = variable[0];
-    variable[4] = ((abstract_collection___Collection___has_t)CALL(variable[4],COLOR_abstract_collection___Collection___has))(variable[4],  variable[1] /*item*/) /*Collection::has*/;
+    variable[4] = CALL_abstract_collection___Collection___has(variable[4])(variable[4],  variable[1] /*item*/) /*Collection::has*/;
     variable[2] = variable[4];
     goto return_label25;
   } else { /*if*/
@@ -598,7 +598,7 @@ val_t abstract_collection___Set___count(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((abstract_collection___Collection___has_t)CALL(variable[3],COLOR_abstract_collection___Collection___has))(variable[3],  variable[1] /*item*/) /*Collection::has*/;
+  variable[3] = CALL_abstract_collection___Collection___has(variable[3])(variable[3],  variable[1] /*item*/) /*Collection::has*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[2] =  TAG_Int(1);
     goto return_label26;
@@ -619,7 +619,7 @@ void abstract_collection___Set___remove_all(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  ((abstract_collection___RemovableCollection___remove_t)CALL(variable[3],COLOR_abstract_collection___RemovableCollection___remove))(variable[3],  variable[1] /*item*/) /*RemovableCollection::remove*/;
+  CALL_abstract_collection___RemovableCollection___remove(variable[3])(variable[3],  variable[1] /*item*/) /*RemovableCollection::remove*/;
   return_label27: while(false);
   tracehead = trace.prev;
   return;
@@ -692,16 +692,16 @@ void abstract_collection___Map___recover_with(val_t  self, val_t  param0) {
   trace.file = LOCATE_abstract_collection;
   variable[0] =  self;
   variable[1] =  param0;
-  variable[4] = ((abstract_collection___Map___iterator_t)CALL( variable[1] /*map*/,COLOR_abstract_collection___Collection___iterator))( variable[1] /*map*/) /*Map::iterator*/;
+  variable[4] = CALL_abstract_collection___Collection___iterator( variable[1] /*map*/)( variable[1] /*map*/) /*Map::iterator*/;
   variable[3] = variable[4];
   while (true) { /*while*/
-    variable[4] = ((abstract_collection___Iterator___is_ok_t)CALL( variable[3] /*i*/,COLOR_abstract_collection___Iterator___is_ok))( variable[3] /*i*/) /*Iterator::is_ok*/;
+    variable[4] = CALL_abstract_collection___Iterator___is_ok( variable[3] /*i*/)( variable[3] /*i*/) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /* while*/
     variable[4] = variable[0];
-    variable[5] = ((abstract_collection___MapIterator___key_t)CALL( variable[3] /*i*/,COLOR_abstract_collection___MapIterator___key))( variable[3] /*i*/) /*MapIterator::key*/;
-    variable[6] = ((abstract_collection___Iterator___item_t)CALL( variable[3] /*i*/,COLOR_abstract_collection___Iterator___item))( variable[3] /*i*/) /*Iterator::item*/;
-    ((abstract_collection___Map_____braeq_t)CALL(variable[4],COLOR_abstract_collection___Map_____braeq))(variable[4], variable[5], variable[6]) /*Map::[]=*/;
-    ((abstract_collection___Iterator___next_t)CALL( variable[3] /*i*/,COLOR_abstract_collection___Iterator___next))( variable[3] /*i*/) /*Iterator::next*/;
+    variable[5] = CALL_abstract_collection___MapIterator___key( variable[3] /*i*/)( variable[3] /*i*/) /*MapIterator::key*/;
+    variable[6] = CALL_abstract_collection___Iterator___item( variable[3] /*i*/)( variable[3] /*i*/) /*Iterator::item*/;
+    CALL_abstract_collection___Map_____braeq(variable[4])(variable[4], variable[5], variable[6]) /*Map::[]=*/;
+    CALL_abstract_collection___Iterator___next( variable[3] /*i*/)( variable[3] /*i*/) /*Iterator::next*/;
     continue_29: while(0);
   }
   break_29: while(0);
@@ -753,10 +753,10 @@ val_t abstract_collection___IndexedCollection___first(val_t  self) {
   trace.file = LOCATE_abstract_collection;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((abstract_collection___Collection___is_empty_t)CALL(variable[2],COLOR_abstract_collection___Collection___is_empty))(variable[2]) /*Collection::is_empty*/;
+  variable[2] = CALL_abstract_collection___Collection___is_empty(variable[2])(variable[2]) /*Collection::is_empty*/;
   if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[2])))) { fprintf(stderr, "Assert%s failed", " 'not_empty' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___IndexedCollection___first, LOCATE_abstract_collection, 289); nit_exit(1);}
   variable[2] = variable[0];
-  variable[2] = ((abstract_collection___Map_____bra_t)CALL(variable[2],COLOR_abstract_collection___Map_____bra))(variable[2],  TAG_Int(0)) /*Map::[]*/;
+  variable[2] = CALL_abstract_collection___Map_____bra(variable[2])(variable[2],  TAG_Int(0)) /*Map::[]*/;
   variable[1] = variable[2];
   goto return_label30;
   return_label30: while(false);
@@ -772,7 +772,7 @@ void abstract_collection___IndexedCollection___add(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  ((abstract_collection___IndexedCollection___push_t)CALL(variable[3],COLOR_abstract_collection___IndexedCollection___push))(variable[3],  variable[1] /*e*/) /*IndexedCollection::push*/;
+  CALL_abstract_collection___IndexedCollection___push(variable[3])(variable[3],  variable[1] /*e*/) /*IndexedCollection::push*/;
   return_label31: while(false);
   tracehead = trace.prev;
   return;
@@ -786,7 +786,7 @@ void abstract_collection___IndexedCollection___first__eq(val_t  self, val_t  par
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  ((abstract_collection___Map_____braeq_t)CALL(variable[3],COLOR_abstract_collection___Map_____braeq))(variable[3],  TAG_Int(0),  variable[1] /*item*/) /*Map::[]=*/;
+  CALL_abstract_collection___Map_____braeq(variable[3])(variable[3],  TAG_Int(0),  variable[1] /*item*/) /*Map::[]=*/;
   return_label32: while(false);
   tracehead = trace.prev;
   return;
@@ -799,13 +799,13 @@ val_t abstract_collection___IndexedCollection___last(val_t  self) {
   trace.file = LOCATE_abstract_collection;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((abstract_collection___Collection___is_empty_t)CALL(variable[2],COLOR_abstract_collection___Collection___is_empty))(variable[2]) /*Collection::is_empty*/;
+  variable[2] = CALL_abstract_collection___Collection___is_empty(variable[2])(variable[2]) /*Collection::is_empty*/;
   if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[2])))) { fprintf(stderr, "Assert%s failed", " 'not_empty' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___IndexedCollection___last, LOCATE_abstract_collection, 302); nit_exit(1);}
   variable[2] = variable[0];
   variable[3] = variable[0];
-  variable[3] = ((abstract_collection___Collection___length_t)CALL(variable[3],COLOR_abstract_collection___Collection___length))(variable[3]) /*Collection::length*/;
+  variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*Collection::length*/;
   variable[3] = TAG_Int(UNTAG_Int(variable[3])-UNTAG_Int( TAG_Int(1)));
-  variable[2] = ((abstract_collection___Map_____bra_t)CALL(variable[2],COLOR_abstract_collection___Map_____bra))(variable[2], variable[3]) /*Map::[]*/;
+  variable[2] = CALL_abstract_collection___Map_____bra(variable[2])(variable[2], variable[3]) /*Map::[]*/;
   variable[1] = variable[2];
   goto return_label33;
   return_label33: while(false);
@@ -821,16 +821,16 @@ void abstract_collection___IndexedCollection___last__eq(val_t  self, val_t  para
   variable[0] =  self;
   variable[1] =  param0;
   variable[4] = variable[0];
-  variable[4] = ((abstract_collection___Collection___length_t)CALL(variable[4],COLOR_abstract_collection___Collection___length))(variable[4]) /*Collection::length*/;
+  variable[4] = CALL_abstract_collection___Collection___length(variable[4])(variable[4]) /*Collection::length*/;
   variable[3] = variable[4];
   variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*l*/)>UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[4])) { /*if*/
     variable[4] = variable[0];
     variable[5] = TAG_Int(UNTAG_Int( variable[3] /*l*/)-UNTAG_Int( TAG_Int(1)));
-    ((abstract_collection___Map_____braeq_t)CALL(variable[4],COLOR_abstract_collection___Map_____braeq))(variable[4], variable[5],  variable[1] /*item*/) /*Map::[]=*/;
+    CALL_abstract_collection___Map_____braeq(variable[4])(variable[4], variable[5],  variable[1] /*item*/) /*Map::[]=*/;
   } else { /*if*/
     variable[4] = variable[0];
-    ((abstract_collection___Map_____braeq_t)CALL(variable[4],COLOR_abstract_collection___Map_____braeq))(variable[4],  TAG_Int(0),  variable[1] /*item*/) /*Map::[]=*/;
+    CALL_abstract_collection___Map_____braeq(variable[4])(variable[4],  TAG_Int(0),  variable[1] /*item*/) /*Map::[]=*/;
   }
   return_label34: while(false);
   tracehead = trace.prev;
@@ -856,18 +856,18 @@ void abstract_collection___IndexedCollection___append(val_t  self, val_t  param0
   trace.file = LOCATE_abstract_collection;
   variable[0] =  self;
   variable[1] =  param0;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*coll*/ ==  NIT_NULL /*null*/) || (( variable[1] /*coll*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*coll*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*coll*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*coll*/,COLOR_kernel___Object_____eqeq))( variable[1] /*coll*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*coll*/ ==  NIT_NULL /*null*/) || (( variable[1] /*coll*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*coll*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*coll*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*coll*/)( variable[1] /*coll*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = ((abstract_collection___Collection___iterator_t)CALL( variable[1] /*coll*/,COLOR_abstract_collection___Collection___iterator))( variable[1] /*coll*/) /*Collection::iterator*/;
+    variable[3] = CALL_abstract_collection___Collection___iterator( variable[1] /*coll*/)( variable[1] /*coll*/) /*Collection::iterator*/;
     while (true) { /*for*/
-      variable[4] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[3],COLOR_abstract_collection___Iterator___is_ok))(variable[3]) /*Iterator::is_ok*/;
+      variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
       if (!UNTAG_Bool(variable[4])) break; /*for*/
-      variable[4] = ((abstract_collection___Iterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*Iterator::item*/;
+      variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
       variable[5] = variable[4];
       variable[6] = variable[0];
-      ((abstract_collection___IndexedCollection___push_t)CALL(variable[6],COLOR_abstract_collection___IndexedCollection___push))(variable[6],  variable[5] /*i*/) /*IndexedCollection::push*/;
+      CALL_abstract_collection___IndexedCollection___push(variable[6])(variable[6],  variable[5] /*i*/) /*IndexedCollection::push*/;
       continue_36: while(0);
-      ((abstract_collection___Iterator___next_t)CALL(variable[3],COLOR_abstract_collection___Iterator___next))(variable[3]) /*Iterator::next*/;
+      CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*Iterator::next*/;
     }
     break_36: while(0);
   }
@@ -920,19 +920,19 @@ val_t abstract_collection___IndexedCollection___index_of(val_t  self, val_t  par
   variable[0] =  self;
   variable[1] =  param0;
   variable[4] = variable[0];
-  variable[4] = ((abstract_collection___IndexedCollection___iterator_t)CALL(variable[4],COLOR_abstract_collection___Collection___iterator))(variable[4]) /*IndexedCollection::iterator*/;
+  variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*IndexedCollection::iterator*/;
   variable[3] = variable[4];
   while (true) { /*while*/
-    variable[4] = ((abstract_collection___Iterator___is_ok_t)CALL( variable[3] /*i*/,COLOR_abstract_collection___Iterator___is_ok))( variable[3] /*i*/) /*Iterator::is_ok*/;
+    variable[4] = CALL_abstract_collection___Iterator___is_ok( variable[3] /*i*/)( variable[3] /*i*/) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /* while*/
-    variable[4] = ((abstract_collection___Iterator___item_t)CALL( variable[3] /*i*/,COLOR_abstract_collection___Iterator___item))( variable[3] /*i*/) /*Iterator::item*/;
-    variable[4] = TAG_Bool((variable[4] ==  variable[1] /*item*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], variable[1] /*item*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  variable[1] /*item*/) /*Object::==*/)))));
+    variable[4] = CALL_abstract_collection___Iterator___item( variable[3] /*i*/)( variable[3] /*i*/) /*Iterator::item*/;
+    variable[4] = TAG_Bool((variable[4] ==  variable[1] /*item*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], variable[1] /*item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  variable[1] /*item*/) /*Object::==*/)))));
     if (UNTAG_Bool(variable[4])) { /*if*/
-      variable[4] = ((abstract_collection___IndexedIterator___index_t)CALL( variable[3] /*i*/,COLOR_abstract_collection___IndexedIterator___index))( variable[3] /*i*/) /*IndexedIterator::index*/;
+      variable[4] = CALL_abstract_collection___IndexedIterator___index( variable[3] /*i*/)( variable[3] /*i*/) /*IndexedIterator::index*/;
       variable[2] = variable[4];
       goto return_label37;
     }
-    ((abstract_collection___Iterator___next_t)CALL( variable[3] /*i*/,COLOR_abstract_collection___Iterator___next))( variable[3] /*i*/) /*Iterator::next*/;
+    CALL_abstract_collection___Iterator___next( variable[3] /*i*/)( variable[3] /*i*/) /*Iterator::next*/;
     continue_38: while(0);
   }
   break_38: while(0);
@@ -951,7 +951,7 @@ val_t abstract_collection___IndexedIterator___key(val_t  self) {
   trace.file = LOCATE_abstract_collection;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((abstract_collection___IndexedIterator___index_t)CALL(variable[2],COLOR_abstract_collection___IndexedIterator___index))(variable[2]) /*IndexedIterator::index*/;
+  variable[2] = CALL_abstract_collection___IndexedIterator___index(variable[2])(variable[2]) /*IndexedIterator::index*/;
   variable[1] = variable[2];
   goto return_label39;
   return_label39: while(false);
@@ -979,14 +979,14 @@ val_t abstract_collection___CoupleMap_____bra(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[4] = variable[0];
-  variable[4] = ((abstract_collection___CoupleMap___couple_at_t)CALL(variable[4],COLOR_abstract_collection___CoupleMap___couple_at))(variable[4],  variable[1] /*key*/) /*CoupleMap::couple_at*/;
+  variable[4] = CALL_abstract_collection___CoupleMap___couple_at(variable[4])(variable[4],  variable[1] /*key*/) /*CoupleMap::couple_at*/;
   variable[3] = variable[4];
-  variable[4] = TAG_Bool(( variable[3] /*c*/ ==  NIT_NULL /*null*/) || (( variable[3] /*c*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*c*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*c*/,COLOR_kernel___Object_____eqeq))( variable[3] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[4] = TAG_Bool(( variable[3] /*c*/ ==  NIT_NULL /*null*/) || (( variable[3] /*c*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*c*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*c*/)( variable[3] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[4])) { /*if*/
     variable[2] =  NIT_NULL /*null*/;
     goto return_label40;
   } else { /*if*/
-    variable[4] = ((abstract_collection___Couple___second_t)CALL( variable[3] /*c*/,COLOR_abstract_collection___Couple___second))( variable[3] /*c*/) /*Couple::second*/;
+    variable[4] = CALL_abstract_collection___Couple___second( variable[3] /*c*/)( variable[3] /*c*/) /*Couple::second*/;
     variable[2] = variable[4];
     goto return_label40;
   }
@@ -1003,8 +1003,8 @@ val_t abstract_collection___CoupleMap___has_key(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((abstract_collection___CoupleMap___couple_at_t)CALL(variable[3],COLOR_abstract_collection___CoupleMap___couple_at))(variable[3],  variable[1] /*key*/) /*CoupleMap::couple_at*/;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = CALL_abstract_collection___CoupleMap___couple_at(variable[3])(variable[3],  variable[1] /*key*/) /*CoupleMap::couple_at*/;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   variable[2] = variable[3];
   goto return_label41;
   return_label41: while(false);
@@ -1032,8 +1032,8 @@ val_t abstract_collection___CoupleMapIterator___item(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[2]) /*CoupleMapIterator::_iter*/;
-  variable[2] = ((abstract_collection___Iterator___item_t)CALL(variable[2],COLOR_abstract_collection___Iterator___item))(variable[2]) /*Iterator::item*/;
-  variable[2] = ((abstract_collection___Couple___second_t)CALL(variable[2],COLOR_abstract_collection___Couple___second))(variable[2]) /*Couple::second*/;
+  variable[2] = CALL_abstract_collection___Iterator___item(variable[2])(variable[2]) /*Iterator::item*/;
+  variable[2] = CALL_abstract_collection___Couple___second(variable[2])(variable[2]) /*Couple::second*/;
   variable[1] = variable[2];
   goto return_label42;
   return_label42: while(false);
@@ -1049,23 +1049,23 @@ void abstract_collection___CoupleMapIterator___next(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[2]) /*CoupleMapIterator::_iter*/;
-  ((abstract_collection___Iterator___next_t)CALL(variable[2],COLOR_abstract_collection___Iterator___next))(variable[2]) /*Iterator::next*/;
+  CALL_abstract_collection___Iterator___next(variable[2])(variable[2]) /*Iterator::next*/;
   while (true) { /*while*/
     variable[2] = variable[0];
     variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[2]) /*CoupleMapIterator::_iter*/;
-    variable[2] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[2],COLOR_abstract_collection___Iterator___is_ok))(variable[2]) /*Iterator::is_ok*/;
+    variable[2] = CALL_abstract_collection___Iterator___is_ok(variable[2])(variable[2]) /*Iterator::is_ok*/;
     variable[3] = variable[2];
     if (UNTAG_Bool(variable[3])) { /* and */
       variable[3] = variable[0];
       variable[3] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[3]) /*CoupleMapIterator::_iter*/;
-      variable[3] = ((abstract_collection___Iterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*Iterator::item*/;
-      variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
+      variable[3] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
+      variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
     }
     variable[2] = variable[3];
     if (!UNTAG_Bool(variable[2])) break; /* while*/
     variable[2] = variable[0];
     variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[2]) /*CoupleMapIterator::_iter*/;
-    ((abstract_collection___Iterator___next_t)CALL(variable[2],COLOR_abstract_collection___Iterator___next))(variable[2]) /*Iterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[2])(variable[2]) /*Iterator::next*/;
     continue_44: while(0);
   }
   break_44: while(0);
@@ -1082,7 +1082,7 @@ val_t abstract_collection___CoupleMapIterator___is_ok(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[2]) /*CoupleMapIterator::_iter*/;
-  variable[2] = ((abstract_collection___Iterator___is_ok_t)CALL(variable[2],COLOR_abstract_collection___Iterator___is_ok))(variable[2]) /*Iterator::is_ok*/;
+  variable[2] = CALL_abstract_collection___Iterator___is_ok(variable[2])(variable[2]) /*Iterator::is_ok*/;
   variable[1] = variable[2];
   goto return_label45;
   return_label45: while(false);
@@ -1098,8 +1098,8 @@ val_t abstract_collection___CoupleMapIterator___key(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[2]) /*CoupleMapIterator::_iter*/;
-  variable[2] = ((abstract_collection___Iterator___item_t)CALL(variable[2],COLOR_abstract_collection___Iterator___item))(variable[2]) /*Iterator::item*/;
-  variable[2] = ((abstract_collection___Couple___first_t)CALL(variable[2],COLOR_abstract_collection___Couple___first))(variable[2]) /*Couple::first*/;
+  variable[2] = CALL_abstract_collection___Iterator___item(variable[2])(variable[2]) /*Iterator::item*/;
+  variable[2] = CALL_abstract_collection___Couple___first(variable[2])(variable[2]) /*Couple::first*/;
   variable[1] = variable[2];
   goto return_label46;
   return_label46: while(false);
@@ -1116,8 +1116,8 @@ void abstract_collection___CoupleMapIterator___item__eq(val_t  self, val_t  para
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[3]) /*CoupleMapIterator::_iter*/;
-  variable[3] = ((abstract_collection___Iterator___item_t)CALL(variable[3],COLOR_abstract_collection___Iterator___item))(variable[3]) /*Iterator::item*/;
-  ((abstract_collection___Couple___second__eq_t)CALL(variable[3],COLOR_abstract_collection___Couple___second__eq))(variable[3],  variable[1] /*e*/) /*Couple::second=*/;
+  variable[3] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
+  CALL_abstract_collection___Couple___second__eq(variable[3])(variable[3],  variable[1] /*e*/) /*Couple::second=*/;
   return_label47: while(false);
   tracehead = trace.prev;
   return;

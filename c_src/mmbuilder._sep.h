@@ -27,152 +27,152 @@ extern const classtable_elt_t VFT_MMSrcTypeFormalParameter[];
 extern const classtable_elt_t VFT_MethidAccumulator[];
 extern const char *LOCATE_mmbuilder;
 extern const int SFT_mmbuilder[];
-#define ID_CSHSorter SFT_mmbuilder[0]
-#define COLOR_CSHSorter SFT_mmbuilder[1]
-#define INIT_TABLE_POS_CSHSorter SFT_mmbuilder[2]
-#define COLOR_mmbuilder___CSHSorter___init SFT_mmbuilder[3]
-#define COLOR_mmbuilder___MMSrcModule___do_mmbuilder SFT_mmbuilder[4]
-#define COLOR_mmbuilder___MMLocalClass___accept_class_visitor SFT_mmbuilder[5]
-#define COLOR_mmbuilder___MMLocalClass___accept_properties_visitor SFT_mmbuilder[6]
-#define COLOR_mmbuilder___MMSrcLocalClass___process_default_constructors SFT_mmbuilder[7]
-#define COLOR_mmbuilder___MMSrcLocalClass___add_src_local_property SFT_mmbuilder[8]
-#define COLOR_mmbuilder___MMLocalProperty___accept_property_visitor SFT_mmbuilder[9]
-#define COLOR_mmbuilder___MMImplicitInit____super_init SFT_mmbuilder[10]
-#define COLOR_mmbuilder___MMImplicitInit___super_init SFT_mmbuilder[11]
-#define ID_MMSrcAncestor SFT_mmbuilder[12]
-#define COLOR_MMSrcAncestor SFT_mmbuilder[13]
-#define COLOR_mmbuilder___MMSrcAncestor____node SFT_mmbuilder[14]
-#define COLOR_mmbuilder___MMSrcAncestor____local_class SFT_mmbuilder[15]
-#define INIT_TABLE_POS_MMSrcAncestor SFT_mmbuilder[16]
-#define COLOR_mmbuilder___MMSrcAncestor___node SFT_mmbuilder[17]
-#define COLOR_mmbuilder___MMSrcAncestor___init SFT_mmbuilder[18]
-#define ID_ClassBuilderVisitor SFT_mmbuilder[19]
-#define COLOR_ClassBuilderVisitor SFT_mmbuilder[20]
-#define COLOR_mmbuilder___ClassBuilderVisitor____local_class_arity SFT_mmbuilder[21]
-#define COLOR_mmbuilder___ClassBuilderVisitor____formals SFT_mmbuilder[22]
-#define INIT_TABLE_POS_ClassBuilderVisitor SFT_mmbuilder[23]
-#define COLOR_mmbuilder___ClassBuilderVisitor___local_class_arity SFT_mmbuilder[24]
-#define COLOR_mmbuilder___ClassBuilderVisitor___local_class_arity__eq SFT_mmbuilder[25]
-#define COLOR_mmbuilder___ClassBuilderVisitor___formals SFT_mmbuilder[26]
-#define COLOR_mmbuilder___ClassBuilderVisitor___formals__eq SFT_mmbuilder[27]
-#define COLOR_mmbuilder___ClassBuilderVisitor___init SFT_mmbuilder[28]
-#define ID_ClassSpecializationBuilderVisitor SFT_mmbuilder[29]
-#define COLOR_ClassSpecializationBuilderVisitor SFT_mmbuilder[30]
-#define INIT_TABLE_POS_ClassSpecializationBuilderVisitor SFT_mmbuilder[31]
-#define COLOR_mmbuilder___ClassSpecializationBuilderVisitor___init SFT_mmbuilder[32]
-#define ID_ClassAncestorBuilder SFT_mmbuilder[33]
-#define COLOR_ClassAncestorBuilder SFT_mmbuilder[34]
-#define INIT_TABLE_POS_ClassAncestorBuilder SFT_mmbuilder[35]
-#define COLOR_mmbuilder___ClassAncestorBuilder___init SFT_mmbuilder[36]
-#define ID_ClassVerifierVisitor SFT_mmbuilder[37]
-#define COLOR_ClassVerifierVisitor SFT_mmbuilder[38]
-#define INIT_TABLE_POS_ClassVerifierVisitor SFT_mmbuilder[39]
-#define COLOR_mmbuilder___ClassVerifierVisitor___init SFT_mmbuilder[40]
-#define ID_PropertyBuilderVisitor SFT_mmbuilder[41]
-#define COLOR_PropertyBuilderVisitor SFT_mmbuilder[42]
-#define INIT_TABLE_POS_PropertyBuilderVisitor SFT_mmbuilder[43]
-#define COLOR_mmbuilder___PropertyBuilderVisitor___init SFT_mmbuilder[44]
-#define ID_PropertyVerifierVisitor SFT_mmbuilder[45]
-#define COLOR_PropertyVerifierVisitor SFT_mmbuilder[46]
-#define COLOR_mmbuilder___PropertyVerifierVisitor____signature_builder SFT_mmbuilder[47]
-#define INIT_TABLE_POS_PropertyVerifierVisitor SFT_mmbuilder[48]
-#define COLOR_mmbuilder___PropertyVerifierVisitor___signature_builder SFT_mmbuilder[49]
-#define COLOR_mmbuilder___PropertyVerifierVisitor___signature_builder__eq SFT_mmbuilder[50]
-#define COLOR_mmbuilder___PropertyVerifierVisitor___init SFT_mmbuilder[51]
-#define ID_SignatureBuilder SFT_mmbuilder[52]
-#define COLOR_SignatureBuilder SFT_mmbuilder[53]
-#define COLOR_mmbuilder___SignatureBuilder____params SFT_mmbuilder[54]
-#define COLOR_mmbuilder___SignatureBuilder____untyped_params SFT_mmbuilder[55]
-#define COLOR_mmbuilder___SignatureBuilder____vararg_rank SFT_mmbuilder[56]
-#define COLOR_mmbuilder___SignatureBuilder____closure_decls SFT_mmbuilder[57]
-#define COLOR_mmbuilder___SignatureBuilder____signature SFT_mmbuilder[58]
-#define INIT_TABLE_POS_SignatureBuilder SFT_mmbuilder[59]
-#define COLOR_mmbuilder___SignatureBuilder___params SFT_mmbuilder[60]
-#define COLOR_mmbuilder___SignatureBuilder___params__eq SFT_mmbuilder[61]
-#define COLOR_mmbuilder___SignatureBuilder___untyped_params SFT_mmbuilder[62]
-#define COLOR_mmbuilder___SignatureBuilder___untyped_params__eq SFT_mmbuilder[63]
-#define COLOR_mmbuilder___SignatureBuilder___vararg_rank SFT_mmbuilder[64]
-#define COLOR_mmbuilder___SignatureBuilder___vararg_rank__eq SFT_mmbuilder[65]
-#define COLOR_mmbuilder___SignatureBuilder___closure_decls SFT_mmbuilder[66]
-#define COLOR_mmbuilder___SignatureBuilder___closure_decls__eq SFT_mmbuilder[67]
-#define COLOR_mmbuilder___SignatureBuilder___signature SFT_mmbuilder[68]
-#define COLOR_mmbuilder___SignatureBuilder___signature__eq SFT_mmbuilder[69]
-#define COLOR_mmbuilder___SignatureBuilder___init SFT_mmbuilder[70]
-#define COLOR_mmbuilder___PNode___accept_class_builder SFT_mmbuilder[71]
-#define COLOR_mmbuilder___PNode___accept_class_specialization_builder SFT_mmbuilder[72]
-#define COLOR_mmbuilder___PNode___accept_class_ancestor_builder SFT_mmbuilder[73]
-#define COLOR_mmbuilder___PNode___accept_class_verifier SFT_mmbuilder[74]
-#define COLOR_mmbuilder___PNode___accept_property_builder SFT_mmbuilder[75]
-#define COLOR_mmbuilder___PNode___accept_property_verifier SFT_mmbuilder[76]
-#define COLOR_mmbuilder___AModule___import_super_modules SFT_mmbuilder[77]
-#define COLOR_mmbuilder___PImport___module_name SFT_mmbuilder[78]
-#define COLOR_mmbuilder___PImport___visibility_level SFT_mmbuilder[79]
-#define COLOR_mmbuilder___PVisibility___level SFT_mmbuilder[80]
-#define COLOR_mmbuilder___PClassdef____local_class SFT_mmbuilder[81]
-#define COLOR_mmbuilder___PClassdef___name SFT_mmbuilder[82]
-#define COLOR_mmbuilder___PClassdef___arity SFT_mmbuilder[83]
-#define COLOR_mmbuilder___PClassdef___visibility_level SFT_mmbuilder[84]
-#define COLOR_SUPER_mmbuilder___PClassdef___accept_class_builder SFT_mmbuilder[85]
-#define COLOR_SUPER_mmbuilder___PClassdef___accept_abs_syntax_visitor SFT_mmbuilder[86]
-#define COLOR_mmbuilder___PClasskind___is_interface SFT_mmbuilder[87]
-#define COLOR_mmbuilder___PClasskind___is_universal SFT_mmbuilder[88]
-#define COLOR_mmbuilder___PClasskind___is_abstract SFT_mmbuilder[89]
-#define COLOR_SUPER_mmbuilder___AClassdef___accept_class_verifier SFT_mmbuilder[90]
-#define ID_MMSrcTypeFormalParameter SFT_mmbuilder[91]
-#define COLOR_MMSrcTypeFormalParameter SFT_mmbuilder[92]
-#define COLOR_mmbuilder___MMSrcTypeFormalParameter____node SFT_mmbuilder[93]
-#define INIT_TABLE_POS_MMSrcTypeFormalParameter SFT_mmbuilder[94]
-#define COLOR_mmbuilder___MMSrcTypeFormalParameter___node SFT_mmbuilder[95]
-#define COLOR_mmbuilder___MMSrcTypeFormalParameter___init SFT_mmbuilder[96]
-#define COLOR_mmbuilder___AFormaldef____formal SFT_mmbuilder[97]
-#define COLOR_SUPER_mmbuilder___AFormaldef___accept_class_builder SFT_mmbuilder[98]
-#define COLOR_SUPER_mmbuilder___AFormaldef___accept_class_verifier SFT_mmbuilder[99]
-#define COLOR_mmbuilder___ASuperclass____ancestor SFT_mmbuilder[100]
-#define COLOR_mmbuilder___ASuperclass___ancestor SFT_mmbuilder[101]
-#define COLOR_SUPER_mmbuilder___ASuperclass___accept_class_specialization_builder SFT_mmbuilder[102]
-#define COLOR_SUPER_mmbuilder___ASuperclass___accept_class_ancestor_builder SFT_mmbuilder[103]
-#define COLOR_SUPER_mmbuilder___ASuperclass___accept_class_verifier SFT_mmbuilder[104]
-#define COLOR_mmbuilder___PPropdef___process_and_check SFT_mmbuilder[105]
-#define COLOR_mmbuilder___PPropdef___do_and_check_intro SFT_mmbuilder[106]
-#define COLOR_mmbuilder___PPropdef___inherit_signature SFT_mmbuilder[107]
-#define COLOR_mmbuilder___PPropdef___do_and_check_redef SFT_mmbuilder[108]
-#define COLOR_mmbuilder___AAttrPropdef____readmethod SFT_mmbuilder[109]
-#define COLOR_mmbuilder___AAttrPropdef____writemethod SFT_mmbuilder[110]
-#define COLOR_mmbuilder___AAttrPropdef____prop SFT_mmbuilder[111]
-#define COLOR_SUPER_mmbuilder___AAttrPropdef___accept_property_builder SFT_mmbuilder[112]
-#define COLOR_SUPER_mmbuilder___AAttrPropdef___accept_property_verifier SFT_mmbuilder[113]
-#define COLOR_SUPER_mmbuilder___AAttrPropdef___accept_abs_syntax_visitor SFT_mmbuilder[114]
-#define COLOR_mmbuilder___AMethPropdef____name SFT_mmbuilder[115]
-#define COLOR_mmbuilder___AMethPropdef____method SFT_mmbuilder[116]
-#define COLOR_mmbuilder___AMethPropdef___name SFT_mmbuilder[117]
-#define COLOR_SUPER_mmbuilder___AMethPropdef___accept_property_builder SFT_mmbuilder[118]
-#define COLOR_SUPER_mmbuilder___AMethPropdef___accept_property_verifier SFT_mmbuilder[119]
-#define COLOR_SUPER_mmbuilder___AMethPropdef___accept_abs_syntax_visitor SFT_mmbuilder[120]
-#define COLOR_mmbuilder___ATypePropdef____prop SFT_mmbuilder[121]
-#define COLOR_SUPER_mmbuilder___ATypePropdef___accept_property_builder SFT_mmbuilder[122]
-#define COLOR_SUPER_mmbuilder___ATypePropdef___accept_property_verifier SFT_mmbuilder[123]
-#define COLOR_SUPER_mmbuilder___ATypePropdef___accept_abs_syntax_visitor SFT_mmbuilder[124]
-#define ID_MethidAccumulator SFT_mmbuilder[125]
-#define COLOR_MethidAccumulator SFT_mmbuilder[126]
-#define COLOR_mmbuilder___MethidAccumulator____name SFT_mmbuilder[127]
-#define INIT_TABLE_POS_MethidAccumulator SFT_mmbuilder[128]
-#define COLOR_mmbuilder___MethidAccumulator___name SFT_mmbuilder[129]
-#define COLOR_mmbuilder___MethidAccumulator___init SFT_mmbuilder[130]
-#define COLOR_mmbuilder___PMethid____name SFT_mmbuilder[131]
-#define COLOR_mmbuilder___PMethid___name SFT_mmbuilder[132]
-#define COLOR_SUPER_mmbuilder___PMethid___accept_property_builder SFT_mmbuilder[133]
-#define COLOR_mmbuilder___PSignature___check_visibility SFT_mmbuilder[134]
-#define COLOR_SUPER_mmbuilder___ASignature___accept_property_verifier SFT_mmbuilder[135]
-#define COLOR_mmbuilder___PParam____position SFT_mmbuilder[136]
-#define COLOR_mmbuilder___PParam____variable SFT_mmbuilder[137]
-#define COLOR_mmbuilder___PParam____stype SFT_mmbuilder[138]
-#define COLOR_mmbuilder___PParam___stype SFT_mmbuilder[139]
-#define COLOR_mmbuilder___PParam___stype__eq SFT_mmbuilder[140]
-#define COLOR_SUPER_mmbuilder___PParam___accept_property_verifier SFT_mmbuilder[141]
-#define COLOR_mmbuilder___PParam___is_vararg SFT_mmbuilder[142]
-#define COLOR_mmbuilder___AClosureDecl____variable SFT_mmbuilder[143]
-#define COLOR_SUPER_mmbuilder___AClosureDecl___accept_property_verifier SFT_mmbuilder[144]
-#define COLOR_mmbuilder___PType___check_visibility SFT_mmbuilder[145]
+#define ID_CSHSorter (SFT_mmbuilder[0])
+#define COLOR_CSHSorter (SFT_mmbuilder[1])
+#define INIT_TABLE_POS_CSHSorter (SFT_mmbuilder[2] + 0)
+#define CALL_mmbuilder___CSHSorter___init(recv) ((mmbuilder___CSHSorter___init_t)CALL((recv), (SFT_mmbuilder[2] + 1)))
+#define CALL_mmbuilder___MMSrcModule___do_mmbuilder(recv) ((mmbuilder___MMSrcModule___do_mmbuilder_t)CALL((recv), (SFT_mmbuilder[3] + 0)))
+#define CALL_mmbuilder___MMLocalClass___accept_class_visitor(recv) ((mmbuilder___MMLocalClass___accept_class_visitor_t)CALL((recv), (SFT_mmbuilder[4] + 0)))
+#define CALL_mmbuilder___MMLocalClass___accept_properties_visitor(recv) ((mmbuilder___MMLocalClass___accept_properties_visitor_t)CALL((recv), (SFT_mmbuilder[4] + 1)))
+#define CALL_mmbuilder___MMSrcLocalClass___process_default_constructors(recv) ((mmbuilder___MMSrcLocalClass___process_default_constructors_t)CALL((recv), (SFT_mmbuilder[5] + 0)))
+#define CALL_mmbuilder___MMSrcLocalClass___add_src_local_property(recv) ((mmbuilder___MMSrcLocalClass___add_src_local_property_t)CALL((recv), (SFT_mmbuilder[5] + 1)))
+#define CALL_mmbuilder___MMLocalProperty___accept_property_visitor(recv) ((mmbuilder___MMLocalProperty___accept_property_visitor_t)CALL((recv), (SFT_mmbuilder[6] + 0)))
+#define ATTR_mmbuilder___MMImplicitInit____super_init(recv) ATTR(recv, (SFT_mmbuilder[7] + 0))
+#define CALL_mmbuilder___MMImplicitInit___super_init(recv) ((mmbuilder___MMImplicitInit___super_init_t)CALL((recv), (SFT_mmbuilder[8] + 0)))
+#define ID_MMSrcAncestor (SFT_mmbuilder[9])
+#define COLOR_MMSrcAncestor (SFT_mmbuilder[10])
+#define ATTR_mmbuilder___MMSrcAncestor____node(recv) ATTR(recv, (SFT_mmbuilder[11] + 0))
+#define ATTR_mmbuilder___MMSrcAncestor____local_class(recv) ATTR(recv, (SFT_mmbuilder[11] + 1))
+#define INIT_TABLE_POS_MMSrcAncestor (SFT_mmbuilder[12] + 0)
+#define CALL_mmbuilder___MMSrcAncestor___node(recv) ((mmbuilder___MMSrcAncestor___node_t)CALL((recv), (SFT_mmbuilder[12] + 1)))
+#define CALL_mmbuilder___MMSrcAncestor___init(recv) ((mmbuilder___MMSrcAncestor___init_t)CALL((recv), (SFT_mmbuilder[12] + 2)))
+#define ID_ClassBuilderVisitor (SFT_mmbuilder[13])
+#define COLOR_ClassBuilderVisitor (SFT_mmbuilder[14])
+#define ATTR_mmbuilder___ClassBuilderVisitor____local_class_arity(recv) ATTR(recv, (SFT_mmbuilder[15] + 0))
+#define ATTR_mmbuilder___ClassBuilderVisitor____formals(recv) ATTR(recv, (SFT_mmbuilder[15] + 1))
+#define INIT_TABLE_POS_ClassBuilderVisitor (SFT_mmbuilder[16] + 0)
+#define CALL_mmbuilder___ClassBuilderVisitor___local_class_arity(recv) ((mmbuilder___ClassBuilderVisitor___local_class_arity_t)CALL((recv), (SFT_mmbuilder[16] + 1)))
+#define CALL_mmbuilder___ClassBuilderVisitor___local_class_arity__eq(recv) ((mmbuilder___ClassBuilderVisitor___local_class_arity__eq_t)CALL((recv), (SFT_mmbuilder[16] + 2)))
+#define CALL_mmbuilder___ClassBuilderVisitor___formals(recv) ((mmbuilder___ClassBuilderVisitor___formals_t)CALL((recv), (SFT_mmbuilder[16] + 3)))
+#define CALL_mmbuilder___ClassBuilderVisitor___formals__eq(recv) ((mmbuilder___ClassBuilderVisitor___formals__eq_t)CALL((recv), (SFT_mmbuilder[16] + 4)))
+#define CALL_mmbuilder___ClassBuilderVisitor___init(recv) ((mmbuilder___ClassBuilderVisitor___init_t)CALL((recv), (SFT_mmbuilder[16] + 5)))
+#define ID_ClassSpecializationBuilderVisitor (SFT_mmbuilder[17])
+#define COLOR_ClassSpecializationBuilderVisitor (SFT_mmbuilder[18])
+#define INIT_TABLE_POS_ClassSpecializationBuilderVisitor (SFT_mmbuilder[19] + 0)
+#define CALL_mmbuilder___ClassSpecializationBuilderVisitor___init(recv) ((mmbuilder___ClassSpecializationBuilderVisitor___init_t)CALL((recv), (SFT_mmbuilder[19] + 1)))
+#define ID_ClassAncestorBuilder (SFT_mmbuilder[20])
+#define COLOR_ClassAncestorBuilder (SFT_mmbuilder[21])
+#define INIT_TABLE_POS_ClassAncestorBuilder (SFT_mmbuilder[22] + 0)
+#define CALL_mmbuilder___ClassAncestorBuilder___init(recv) ((mmbuilder___ClassAncestorBuilder___init_t)CALL((recv), (SFT_mmbuilder[22] + 1)))
+#define ID_ClassVerifierVisitor (SFT_mmbuilder[23])
+#define COLOR_ClassVerifierVisitor (SFT_mmbuilder[24])
+#define INIT_TABLE_POS_ClassVerifierVisitor (SFT_mmbuilder[25] + 0)
+#define CALL_mmbuilder___ClassVerifierVisitor___init(recv) ((mmbuilder___ClassVerifierVisitor___init_t)CALL((recv), (SFT_mmbuilder[25] + 1)))
+#define ID_PropertyBuilderVisitor (SFT_mmbuilder[26])
+#define COLOR_PropertyBuilderVisitor (SFT_mmbuilder[27])
+#define INIT_TABLE_POS_PropertyBuilderVisitor (SFT_mmbuilder[28] + 0)
+#define CALL_mmbuilder___PropertyBuilderVisitor___init(recv) ((mmbuilder___PropertyBuilderVisitor___init_t)CALL((recv), (SFT_mmbuilder[28] + 1)))
+#define ID_PropertyVerifierVisitor (SFT_mmbuilder[29])
+#define COLOR_PropertyVerifierVisitor (SFT_mmbuilder[30])
+#define ATTR_mmbuilder___PropertyVerifierVisitor____signature_builder(recv) ATTR(recv, (SFT_mmbuilder[31] + 0))
+#define INIT_TABLE_POS_PropertyVerifierVisitor (SFT_mmbuilder[32] + 0)
+#define CALL_mmbuilder___PropertyVerifierVisitor___signature_builder(recv) ((mmbuilder___PropertyVerifierVisitor___signature_builder_t)CALL((recv), (SFT_mmbuilder[32] + 1)))
+#define CALL_mmbuilder___PropertyVerifierVisitor___signature_builder__eq(recv) ((mmbuilder___PropertyVerifierVisitor___signature_builder__eq_t)CALL((recv), (SFT_mmbuilder[32] + 2)))
+#define CALL_mmbuilder___PropertyVerifierVisitor___init(recv) ((mmbuilder___PropertyVerifierVisitor___init_t)CALL((recv), (SFT_mmbuilder[32] + 3)))
+#define ID_SignatureBuilder (SFT_mmbuilder[33])
+#define COLOR_SignatureBuilder (SFT_mmbuilder[34])
+#define ATTR_mmbuilder___SignatureBuilder____params(recv) ATTR(recv, (SFT_mmbuilder[35] + 0))
+#define ATTR_mmbuilder___SignatureBuilder____untyped_params(recv) ATTR(recv, (SFT_mmbuilder[35] + 1))
+#define ATTR_mmbuilder___SignatureBuilder____vararg_rank(recv) ATTR(recv, (SFT_mmbuilder[35] + 2))
+#define ATTR_mmbuilder___SignatureBuilder____closure_decls(recv) ATTR(recv, (SFT_mmbuilder[35] + 3))
+#define ATTR_mmbuilder___SignatureBuilder____signature(recv) ATTR(recv, (SFT_mmbuilder[35] + 4))
+#define INIT_TABLE_POS_SignatureBuilder (SFT_mmbuilder[36] + 0)
+#define CALL_mmbuilder___SignatureBuilder___params(recv) ((mmbuilder___SignatureBuilder___params_t)CALL((recv), (SFT_mmbuilder[36] + 1)))
+#define CALL_mmbuilder___SignatureBuilder___params__eq(recv) ((mmbuilder___SignatureBuilder___params__eq_t)CALL((recv), (SFT_mmbuilder[36] + 2)))
+#define CALL_mmbuilder___SignatureBuilder___untyped_params(recv) ((mmbuilder___SignatureBuilder___untyped_params_t)CALL((recv), (SFT_mmbuilder[36] + 3)))
+#define CALL_mmbuilder___SignatureBuilder___untyped_params__eq(recv) ((mmbuilder___SignatureBuilder___untyped_params__eq_t)CALL((recv), (SFT_mmbuilder[36] + 4)))
+#define CALL_mmbuilder___SignatureBuilder___vararg_rank(recv) ((mmbuilder___SignatureBuilder___vararg_rank_t)CALL((recv), (SFT_mmbuilder[36] + 5)))
+#define CALL_mmbuilder___SignatureBuilder___vararg_rank__eq(recv) ((mmbuilder___SignatureBuilder___vararg_rank__eq_t)CALL((recv), (SFT_mmbuilder[36] + 6)))
+#define CALL_mmbuilder___SignatureBuilder___closure_decls(recv) ((mmbuilder___SignatureBuilder___closure_decls_t)CALL((recv), (SFT_mmbuilder[36] + 7)))
+#define CALL_mmbuilder___SignatureBuilder___closure_decls__eq(recv) ((mmbuilder___SignatureBuilder___closure_decls__eq_t)CALL((recv), (SFT_mmbuilder[36] + 8)))
+#define CALL_mmbuilder___SignatureBuilder___signature(recv) ((mmbuilder___SignatureBuilder___signature_t)CALL((recv), (SFT_mmbuilder[36] + 9)))
+#define CALL_mmbuilder___SignatureBuilder___signature__eq(recv) ((mmbuilder___SignatureBuilder___signature__eq_t)CALL((recv), (SFT_mmbuilder[36] + 10)))
+#define CALL_mmbuilder___SignatureBuilder___init(recv) ((mmbuilder___SignatureBuilder___init_t)CALL((recv), (SFT_mmbuilder[36] + 11)))
+#define CALL_mmbuilder___PNode___accept_class_builder(recv) ((mmbuilder___PNode___accept_class_builder_t)CALL((recv), (SFT_mmbuilder[37] + 0)))
+#define CALL_mmbuilder___PNode___accept_class_specialization_builder(recv) ((mmbuilder___PNode___accept_class_specialization_builder_t)CALL((recv), (SFT_mmbuilder[37] + 1)))
+#define CALL_mmbuilder___PNode___accept_class_ancestor_builder(recv) ((mmbuilder___PNode___accept_class_ancestor_builder_t)CALL((recv), (SFT_mmbuilder[37] + 2)))
+#define CALL_mmbuilder___PNode___accept_class_verifier(recv) ((mmbuilder___PNode___accept_class_verifier_t)CALL((recv), (SFT_mmbuilder[37] + 3)))
+#define CALL_mmbuilder___PNode___accept_property_builder(recv) ((mmbuilder___PNode___accept_property_builder_t)CALL((recv), (SFT_mmbuilder[37] + 4)))
+#define CALL_mmbuilder___PNode___accept_property_verifier(recv) ((mmbuilder___PNode___accept_property_verifier_t)CALL((recv), (SFT_mmbuilder[37] + 5)))
+#define CALL_mmbuilder___AModule___import_super_modules(recv) ((mmbuilder___AModule___import_super_modules_t)CALL((recv), (SFT_mmbuilder[38] + 0)))
+#define CALL_mmbuilder___PImport___module_name(recv) ((mmbuilder___PImport___module_name_t)CALL((recv), (SFT_mmbuilder[39] + 0)))
+#define CALL_mmbuilder___PImport___visibility_level(recv) ((mmbuilder___PImport___visibility_level_t)CALL((recv), (SFT_mmbuilder[39] + 1)))
+#define CALL_mmbuilder___PVisibility___level(recv) ((mmbuilder___PVisibility___level_t)CALL((recv), (SFT_mmbuilder[40] + 0)))
+#define ATTR_mmbuilder___PClassdef____local_class(recv) ATTR(recv, (SFT_mmbuilder[41] + 0))
+#define CALL_mmbuilder___PClassdef___name(recv) ((mmbuilder___PClassdef___name_t)CALL((recv), (SFT_mmbuilder[42] + 0)))
+#define CALL_mmbuilder___PClassdef___arity(recv) ((mmbuilder___PClassdef___arity_t)CALL((recv), (SFT_mmbuilder[42] + 1)))
+#define CALL_mmbuilder___PClassdef___visibility_level(recv) ((mmbuilder___PClassdef___visibility_level_t)CALL((recv), (SFT_mmbuilder[42] + 2)))
+#define CALL_SUPER_mmbuilder___PClassdef___accept_class_builder(recv) ((mmbuilder___PClassdef___accept_class_builder_t)CALL((recv), (SFT_mmbuilder[42] + 3)))
+#define CALL_SUPER_mmbuilder___PClassdef___accept_abs_syntax_visitor(recv) ((mmbuilder___PClassdef___accept_abs_syntax_visitor_t)CALL((recv), (SFT_mmbuilder[42] + 4)))
+#define CALL_mmbuilder___PClasskind___is_interface(recv) ((mmbuilder___PClasskind___is_interface_t)CALL((recv), (SFT_mmbuilder[43] + 0)))
+#define CALL_mmbuilder___PClasskind___is_universal(recv) ((mmbuilder___PClasskind___is_universal_t)CALL((recv), (SFT_mmbuilder[43] + 1)))
+#define CALL_mmbuilder___PClasskind___is_abstract(recv) ((mmbuilder___PClasskind___is_abstract_t)CALL((recv), (SFT_mmbuilder[43] + 2)))
+#define CALL_SUPER_mmbuilder___AClassdef___accept_class_verifier(recv) ((mmbuilder___AClassdef___accept_class_verifier_t)CALL((recv), (SFT_mmbuilder[44] + 0)))
+#define ID_MMSrcTypeFormalParameter (SFT_mmbuilder[45])
+#define COLOR_MMSrcTypeFormalParameter (SFT_mmbuilder[46])
+#define ATTR_mmbuilder___MMSrcTypeFormalParameter____node(recv) ATTR(recv, (SFT_mmbuilder[47] + 0))
+#define INIT_TABLE_POS_MMSrcTypeFormalParameter (SFT_mmbuilder[48] + 0)
+#define CALL_mmbuilder___MMSrcTypeFormalParameter___node(recv) ((mmbuilder___MMSrcTypeFormalParameter___node_t)CALL((recv), (SFT_mmbuilder[48] + 1)))
+#define CALL_mmbuilder___MMSrcTypeFormalParameter___init(recv) ((mmbuilder___MMSrcTypeFormalParameter___init_t)CALL((recv), (SFT_mmbuilder[48] + 2)))
+#define ATTR_mmbuilder___AFormaldef____formal(recv) ATTR(recv, (SFT_mmbuilder[49] + 0))
+#define CALL_SUPER_mmbuilder___AFormaldef___accept_class_builder(recv) ((mmbuilder___AFormaldef___accept_class_builder_t)CALL((recv), (SFT_mmbuilder[50] + 0)))
+#define CALL_SUPER_mmbuilder___AFormaldef___accept_class_verifier(recv) ((mmbuilder___AFormaldef___accept_class_verifier_t)CALL((recv), (SFT_mmbuilder[50] + 1)))
+#define ATTR_mmbuilder___ASuperclass____ancestor(recv) ATTR(recv, (SFT_mmbuilder[51] + 0))
+#define CALL_mmbuilder___ASuperclass___ancestor(recv) ((mmbuilder___ASuperclass___ancestor_t)CALL((recv), (SFT_mmbuilder[52] + 0)))
+#define CALL_SUPER_mmbuilder___ASuperclass___accept_class_specialization_builder(recv) ((mmbuilder___ASuperclass___accept_class_specialization_builder_t)CALL((recv), (SFT_mmbuilder[52] + 1)))
+#define CALL_SUPER_mmbuilder___ASuperclass___accept_class_ancestor_builder(recv) ((mmbuilder___ASuperclass___accept_class_ancestor_builder_t)CALL((recv), (SFT_mmbuilder[52] + 2)))
+#define CALL_SUPER_mmbuilder___ASuperclass___accept_class_verifier(recv) ((mmbuilder___ASuperclass___accept_class_verifier_t)CALL((recv), (SFT_mmbuilder[52] + 3)))
+#define CALL_mmbuilder___PPropdef___process_and_check(recv) ((mmbuilder___PPropdef___process_and_check_t)CALL((recv), (SFT_mmbuilder[53] + 0)))
+#define CALL_mmbuilder___PPropdef___do_and_check_intro(recv) ((mmbuilder___PPropdef___do_and_check_intro_t)CALL((recv), (SFT_mmbuilder[53] + 1)))
+#define CALL_mmbuilder___PPropdef___inherit_signature(recv) ((mmbuilder___PPropdef___inherit_signature_t)CALL((recv), (SFT_mmbuilder[53] + 2)))
+#define CALL_mmbuilder___PPropdef___do_and_check_redef(recv) ((mmbuilder___PPropdef___do_and_check_redef_t)CALL((recv), (SFT_mmbuilder[53] + 3)))
+#define ATTR_mmbuilder___AAttrPropdef____readmethod(recv) ATTR(recv, (SFT_mmbuilder[54] + 0))
+#define ATTR_mmbuilder___AAttrPropdef____writemethod(recv) ATTR(recv, (SFT_mmbuilder[54] + 1))
+#define ATTR_mmbuilder___AAttrPropdef____prop(recv) ATTR(recv, (SFT_mmbuilder[54] + 2))
+#define CALL_SUPER_mmbuilder___AAttrPropdef___accept_property_builder(recv) ((mmbuilder___AAttrPropdef___accept_property_builder_t)CALL((recv), (SFT_mmbuilder[55] + 0)))
+#define CALL_SUPER_mmbuilder___AAttrPropdef___accept_property_verifier(recv) ((mmbuilder___AAttrPropdef___accept_property_verifier_t)CALL((recv), (SFT_mmbuilder[55] + 1)))
+#define CALL_SUPER_mmbuilder___AAttrPropdef___accept_abs_syntax_visitor(recv) ((mmbuilder___AAttrPropdef___accept_abs_syntax_visitor_t)CALL((recv), (SFT_mmbuilder[55] + 2)))
+#define ATTR_mmbuilder___AMethPropdef____name(recv) ATTR(recv, (SFT_mmbuilder[56] + 0))
+#define ATTR_mmbuilder___AMethPropdef____method(recv) ATTR(recv, (SFT_mmbuilder[56] + 1))
+#define CALL_mmbuilder___AMethPropdef___name(recv) ((mmbuilder___AMethPropdef___name_t)CALL((recv), (SFT_mmbuilder[57] + 0)))
+#define CALL_SUPER_mmbuilder___AMethPropdef___accept_property_builder(recv) ((mmbuilder___AMethPropdef___accept_property_builder_t)CALL((recv), (SFT_mmbuilder[57] + 1)))
+#define CALL_SUPER_mmbuilder___AMethPropdef___accept_property_verifier(recv) ((mmbuilder___AMethPropdef___accept_property_verifier_t)CALL((recv), (SFT_mmbuilder[57] + 2)))
+#define CALL_SUPER_mmbuilder___AMethPropdef___accept_abs_syntax_visitor(recv) ((mmbuilder___AMethPropdef___accept_abs_syntax_visitor_t)CALL((recv), (SFT_mmbuilder[57] + 3)))
+#define ATTR_mmbuilder___ATypePropdef____prop(recv) ATTR(recv, (SFT_mmbuilder[58] + 0))
+#define CALL_SUPER_mmbuilder___ATypePropdef___accept_property_builder(recv) ((mmbuilder___ATypePropdef___accept_property_builder_t)CALL((recv), (SFT_mmbuilder[59] + 0)))
+#define CALL_SUPER_mmbuilder___ATypePropdef___accept_property_verifier(recv) ((mmbuilder___ATypePropdef___accept_property_verifier_t)CALL((recv), (SFT_mmbuilder[59] + 1)))
+#define CALL_SUPER_mmbuilder___ATypePropdef___accept_abs_syntax_visitor(recv) ((mmbuilder___ATypePropdef___accept_abs_syntax_visitor_t)CALL((recv), (SFT_mmbuilder[59] + 2)))
+#define ID_MethidAccumulator (SFT_mmbuilder[60])
+#define COLOR_MethidAccumulator (SFT_mmbuilder[61])
+#define ATTR_mmbuilder___MethidAccumulator____name(recv) ATTR(recv, (SFT_mmbuilder[62] + 0))
+#define INIT_TABLE_POS_MethidAccumulator (SFT_mmbuilder[63] + 0)
+#define CALL_mmbuilder___MethidAccumulator___name(recv) ((mmbuilder___MethidAccumulator___name_t)CALL((recv), (SFT_mmbuilder[63] + 1)))
+#define CALL_mmbuilder___MethidAccumulator___init(recv) ((mmbuilder___MethidAccumulator___init_t)CALL((recv), (SFT_mmbuilder[63] + 2)))
+#define ATTR_mmbuilder___PMethid____name(recv) ATTR(recv, (SFT_mmbuilder[64] + 0))
+#define CALL_mmbuilder___PMethid___name(recv) ((mmbuilder___PMethid___name_t)CALL((recv), (SFT_mmbuilder[65] + 0)))
+#define CALL_SUPER_mmbuilder___PMethid___accept_property_builder(recv) ((mmbuilder___PMethid___accept_property_builder_t)CALL((recv), (SFT_mmbuilder[65] + 1)))
+#define CALL_mmbuilder___PSignature___check_visibility(recv) ((mmbuilder___PSignature___check_visibility_t)CALL((recv), (SFT_mmbuilder[66] + 0)))
+#define CALL_SUPER_mmbuilder___ASignature___accept_property_verifier(recv) ((mmbuilder___ASignature___accept_property_verifier_t)CALL((recv), (SFT_mmbuilder[67] + 0)))
+#define ATTR_mmbuilder___PParam____position(recv) ATTR(recv, (SFT_mmbuilder[68] + 0))
+#define ATTR_mmbuilder___PParam____variable(recv) ATTR(recv, (SFT_mmbuilder[68] + 1))
+#define ATTR_mmbuilder___PParam____stype(recv) ATTR(recv, (SFT_mmbuilder[68] + 2))
+#define CALL_mmbuilder___PParam___stype(recv) ((mmbuilder___PParam___stype_t)CALL((recv), (SFT_mmbuilder[69] + 0)))
+#define CALL_mmbuilder___PParam___stype__eq(recv) ((mmbuilder___PParam___stype__eq_t)CALL((recv), (SFT_mmbuilder[69] + 1)))
+#define CALL_SUPER_mmbuilder___PParam___accept_property_verifier(recv) ((mmbuilder___PParam___accept_property_verifier_t)CALL((recv), (SFT_mmbuilder[69] + 2)))
+#define CALL_mmbuilder___PParam___is_vararg(recv) ((mmbuilder___PParam___is_vararg_t)CALL((recv), (SFT_mmbuilder[69] + 3)))
+#define ATTR_mmbuilder___AClosureDecl____variable(recv) ATTR(recv, (SFT_mmbuilder[70] + 0))
+#define CALL_SUPER_mmbuilder___AClosureDecl___accept_property_verifier(recv) ((mmbuilder___AClosureDecl___accept_property_verifier_t)CALL((recv), (SFT_mmbuilder[71] + 0)))
+#define CALL_mmbuilder___PType___check_visibility(recv) ((mmbuilder___PType___check_visibility_t)CALL((recv), (SFT_mmbuilder[72] + 0)))
 typedef val_t (* mmbuilder___CSHSorter___compare_t)(val_t  self, val_t  param0, val_t  param1);
 val_t mmbuilder___CSHSorter___compare(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_mmbuilder___CSHSorter___compare "mmbuilder::CSHSorter::(sorter::AbstractSorter::compare)"
@@ -212,18 +212,15 @@ val_t NEW_MMImplicitInit_syntax_base___MMImplicitInit___init(val_t p0, val_t p1,
 typedef void (* mmbuilder___MMImplicitInit___accept_property_visitor_t)(val_t  self, val_t  param0);
 void mmbuilder___MMImplicitInit___accept_property_visitor(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___MMImplicitInit___accept_property_visitor "mmbuilder::MMImplicitInit::(mmbuilder::MMLocalProperty::accept_property_visitor)"
-#define ATTR_mmbuilder___MMImplicitInit____super_init(recv) ATTR(recv, COLOR_mmbuilder___MMImplicitInit____super_init)
 typedef val_t (* mmbuilder___MMImplicitInit___super_init_t)(val_t  self);
 val_t mmbuilder___MMImplicitInit___super_init(val_t  self);
 #define LOCATE_mmbuilder___MMImplicitInit___super_init "mmbuilder::MMImplicitInit::super_init"
 typedef val_t (* mmbuilder___MMSrcAncestor___local_class_t)(val_t  self);
 val_t mmbuilder___MMSrcAncestor___local_class(val_t  self);
 #define LOCATE_mmbuilder___MMSrcAncestor___local_class "mmbuilder::MMSrcAncestor::(static_type::MMAncestor::local_class)"
-#define ATTR_mmbuilder___MMSrcAncestor____node(recv) ATTR(recv, COLOR_mmbuilder___MMSrcAncestor____node)
 typedef val_t (* mmbuilder___MMSrcAncestor___node_t)(val_t  self);
 val_t mmbuilder___MMSrcAncestor___node(val_t  self);
 #define LOCATE_mmbuilder___MMSrcAncestor___node "mmbuilder::MMSrcAncestor::node"
-#define ATTR_mmbuilder___MMSrcAncestor____local_class(recv) ATTR(recv, COLOR_mmbuilder___MMSrcAncestor____local_class)
 typedef void (* mmbuilder___MMSrcAncestor___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void mmbuilder___MMSrcAncestor___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
 #define LOCATE_mmbuilder___MMSrcAncestor___init "mmbuilder::MMSrcAncestor::init"
@@ -231,14 +228,12 @@ val_t NEW_MMSrcAncestor_mmbuilder___MMSrcAncestor___init(val_t p0, val_t p1);
 typedef void (* mmbuilder___ClassBuilderVisitor___visit_t)(val_t  self, val_t  param0);
 void mmbuilder___ClassBuilderVisitor___visit(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___ClassBuilderVisitor___visit "mmbuilder::ClassBuilderVisitor::(parser_prod::Visitor::visit)"
-#define ATTR_mmbuilder___ClassBuilderVisitor____local_class_arity(recv) ATTR(recv, COLOR_mmbuilder___ClassBuilderVisitor____local_class_arity)
 typedef val_t (* mmbuilder___ClassBuilderVisitor___local_class_arity_t)(val_t  self);
 val_t mmbuilder___ClassBuilderVisitor___local_class_arity(val_t  self);
 #define LOCATE_mmbuilder___ClassBuilderVisitor___local_class_arity "mmbuilder::ClassBuilderVisitor::local_class_arity"
 typedef void (* mmbuilder___ClassBuilderVisitor___local_class_arity__eq_t)(val_t  self, val_t  param0);
 void mmbuilder___ClassBuilderVisitor___local_class_arity__eq(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___ClassBuilderVisitor___local_class_arity__eq "mmbuilder::ClassBuilderVisitor::local_class_arity="
-#define ATTR_mmbuilder___ClassBuilderVisitor____formals(recv) ATTR(recv, COLOR_mmbuilder___ClassBuilderVisitor____formals)
 typedef val_t (* mmbuilder___ClassBuilderVisitor___formals_t)(val_t  self);
 val_t mmbuilder___ClassBuilderVisitor___formals(val_t  self);
 #define LOCATE_mmbuilder___ClassBuilderVisitor___formals "mmbuilder::ClassBuilderVisitor::formals"
@@ -280,7 +275,6 @@ val_t NEW_PropertyBuilderVisitor_mmbuilder___PropertyBuilderVisitor___init(val_t
 typedef void (* mmbuilder___PropertyVerifierVisitor___visit_t)(val_t  self, val_t  param0);
 void mmbuilder___PropertyVerifierVisitor___visit(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___PropertyVerifierVisitor___visit "mmbuilder::PropertyVerifierVisitor::(parser_prod::Visitor::visit)"
-#define ATTR_mmbuilder___PropertyVerifierVisitor____signature_builder(recv) ATTR(recv, COLOR_mmbuilder___PropertyVerifierVisitor____signature_builder)
 typedef val_t (* mmbuilder___PropertyVerifierVisitor___signature_builder_t)(val_t  self);
 val_t mmbuilder___PropertyVerifierVisitor___signature_builder(val_t  self);
 #define LOCATE_mmbuilder___PropertyVerifierVisitor___signature_builder "mmbuilder::PropertyVerifierVisitor::signature_builder"
@@ -291,35 +285,30 @@ typedef void (* mmbuilder___PropertyVerifierVisitor___init_t)(val_t  self, val_t
 void mmbuilder___PropertyVerifierVisitor___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
 #define LOCATE_mmbuilder___PropertyVerifierVisitor___init "mmbuilder::PropertyVerifierVisitor::init"
 val_t NEW_PropertyVerifierVisitor_mmbuilder___PropertyVerifierVisitor___init(val_t p0, val_t p1);
-#define ATTR_mmbuilder___SignatureBuilder____params(recv) ATTR(recv, COLOR_mmbuilder___SignatureBuilder____params)
 typedef val_t (* mmbuilder___SignatureBuilder___params_t)(val_t  self);
 val_t mmbuilder___SignatureBuilder___params(val_t  self);
 #define LOCATE_mmbuilder___SignatureBuilder___params "mmbuilder::SignatureBuilder::params"
 typedef void (* mmbuilder___SignatureBuilder___params__eq_t)(val_t  self, val_t  param0);
 void mmbuilder___SignatureBuilder___params__eq(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___SignatureBuilder___params__eq "mmbuilder::SignatureBuilder::params="
-#define ATTR_mmbuilder___SignatureBuilder____untyped_params(recv) ATTR(recv, COLOR_mmbuilder___SignatureBuilder____untyped_params)
 typedef val_t (* mmbuilder___SignatureBuilder___untyped_params_t)(val_t  self);
 val_t mmbuilder___SignatureBuilder___untyped_params(val_t  self);
 #define LOCATE_mmbuilder___SignatureBuilder___untyped_params "mmbuilder::SignatureBuilder::untyped_params"
 typedef void (* mmbuilder___SignatureBuilder___untyped_params__eq_t)(val_t  self, val_t  param0);
 void mmbuilder___SignatureBuilder___untyped_params__eq(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___SignatureBuilder___untyped_params__eq "mmbuilder::SignatureBuilder::untyped_params="
-#define ATTR_mmbuilder___SignatureBuilder____vararg_rank(recv) ATTR(recv, COLOR_mmbuilder___SignatureBuilder____vararg_rank)
 typedef val_t (* mmbuilder___SignatureBuilder___vararg_rank_t)(val_t  self);
 val_t mmbuilder___SignatureBuilder___vararg_rank(val_t  self);
 #define LOCATE_mmbuilder___SignatureBuilder___vararg_rank "mmbuilder::SignatureBuilder::vararg_rank"
 typedef void (* mmbuilder___SignatureBuilder___vararg_rank__eq_t)(val_t  self, val_t  param0);
 void mmbuilder___SignatureBuilder___vararg_rank__eq(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___SignatureBuilder___vararg_rank__eq "mmbuilder::SignatureBuilder::vararg_rank="
-#define ATTR_mmbuilder___SignatureBuilder____closure_decls(recv) ATTR(recv, COLOR_mmbuilder___SignatureBuilder____closure_decls)
 typedef val_t (* mmbuilder___SignatureBuilder___closure_decls_t)(val_t  self);
 val_t mmbuilder___SignatureBuilder___closure_decls(val_t  self);
 #define LOCATE_mmbuilder___SignatureBuilder___closure_decls "mmbuilder::SignatureBuilder::closure_decls"
 typedef void (* mmbuilder___SignatureBuilder___closure_decls__eq_t)(val_t  self, val_t  param0);
 void mmbuilder___SignatureBuilder___closure_decls__eq(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___SignatureBuilder___closure_decls__eq "mmbuilder::SignatureBuilder::closure_decls="
-#define ATTR_mmbuilder___SignatureBuilder____signature(recv) ATTR(recv, COLOR_mmbuilder___SignatureBuilder____signature)
 typedef val_t (* mmbuilder___SignatureBuilder___signature_t)(val_t  self);
 val_t mmbuilder___SignatureBuilder___signature(val_t  self);
 #define LOCATE_mmbuilder___SignatureBuilder___signature "mmbuilder::SignatureBuilder::signature"
@@ -421,7 +410,6 @@ val_t mmbuilder___PClassdef___local_class(val_t  self);
 typedef void (* mmbuilder___PClassdef___accept_class_builder_t)(val_t  self, val_t  param0);
 void mmbuilder___PClassdef___accept_class_builder(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___PClassdef___accept_class_builder "mmbuilder::PClassdef::(mmbuilder::PNode::accept_class_builder)"
-#define ATTR_mmbuilder___PClassdef____local_class(recv) ATTR(recv, COLOR_mmbuilder___PClassdef____local_class)
 typedef val_t (* mmbuilder___PClassdef___name_t)(val_t  self);
 val_t mmbuilder___PClassdef___name(val_t  self);
 #define LOCATE_mmbuilder___PClassdef___name "mmbuilder::PClassdef::name"
@@ -486,7 +474,6 @@ val_t NEW_ATopClassdef_parser_prod___ATopClassdef___init_atopclassdef(val_t p0);
 typedef val_t (* mmbuilder___ATopClassdef___name_t)(val_t  self);
 val_t mmbuilder___ATopClassdef___name(val_t  self);
 #define LOCATE_mmbuilder___ATopClassdef___name "mmbuilder::ATopClassdef::(mmbuilder::PClassdef::name)"
-#define ATTR_mmbuilder___MMSrcTypeFormalParameter____node(recv) ATTR(recv, COLOR_mmbuilder___MMSrcTypeFormalParameter____node)
 typedef val_t (* mmbuilder___MMSrcTypeFormalParameter___node_t)(val_t  self);
 val_t mmbuilder___MMSrcTypeFormalParameter___node(val_t  self);
 #define LOCATE_mmbuilder___MMSrcTypeFormalParameter___node "mmbuilder::MMSrcTypeFormalParameter::node"
@@ -503,7 +490,6 @@ void mmbuilder___AFormaldef___accept_class_builder(val_t  self, val_t  param0);
 typedef void (* mmbuilder___AFormaldef___accept_class_verifier_t)(val_t  self, val_t  param0);
 void mmbuilder___AFormaldef___accept_class_verifier(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___AFormaldef___accept_class_verifier "mmbuilder::AFormaldef::(mmbuilder::PNode::accept_class_verifier)"
-#define ATTR_mmbuilder___AFormaldef____formal(recv) ATTR(recv, COLOR_mmbuilder___AFormaldef____formal)
 val_t NEW_ASuperclass_parser_nodes___PNode___init();
 val_t NEW_ASuperclass_parser_prod___ASuperclass___empty_init();
 val_t NEW_ASuperclass_parser_prod___ASuperclass___init_asuperclass(val_t p0, val_t p1);
@@ -516,7 +502,6 @@ void mmbuilder___ASuperclass___accept_class_ancestor_builder(val_t  self, val_t 
 typedef void (* mmbuilder___ASuperclass___accept_class_verifier_t)(val_t  self, val_t  param0);
 void mmbuilder___ASuperclass___accept_class_verifier(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___ASuperclass___accept_class_verifier "mmbuilder::ASuperclass::(mmbuilder::PNode::accept_class_verifier)"
-#define ATTR_mmbuilder___ASuperclass____ancestor(recv) ATTR(recv, COLOR_mmbuilder___ASuperclass____ancestor)
 typedef val_t (* mmbuilder___ASuperclass___ancestor_t)(val_t  self);
 val_t mmbuilder___ASuperclass___ancestor(val_t  self);
 #define LOCATE_mmbuilder___ASuperclass___ancestor "mmbuilder::ASuperclass::ancestor"
@@ -554,9 +539,6 @@ void mmbuilder___AAttrPropdef___accept_property_builder(val_t  self, val_t  para
 typedef void (* mmbuilder___AAttrPropdef___accept_property_verifier_t)(val_t  self, val_t  param0);
 void mmbuilder___AAttrPropdef___accept_property_verifier(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___AAttrPropdef___accept_property_verifier "mmbuilder::AAttrPropdef::(mmbuilder::PNode::accept_property_verifier)"
-#define ATTR_mmbuilder___AAttrPropdef____readmethod(recv) ATTR(recv, COLOR_mmbuilder___AAttrPropdef____readmethod)
-#define ATTR_mmbuilder___AAttrPropdef____writemethod(recv) ATTR(recv, COLOR_mmbuilder___AAttrPropdef____writemethod)
-#define ATTR_mmbuilder___AAttrPropdef____prop(recv) ATTR(recv, COLOR_mmbuilder___AAttrPropdef____prop)
 val_t NEW_AMethPropdef_parser_nodes___PNode___init();
 val_t NEW_AMethPropdef_parser_prod___AMethPropdef___empty_init();
 val_t NEW_AMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
@@ -572,11 +554,9 @@ void mmbuilder___AMethPropdef___accept_property_builder(val_t  self, val_t  para
 typedef void (* mmbuilder___AMethPropdef___accept_property_verifier_t)(val_t  self, val_t  param0);
 void mmbuilder___AMethPropdef___accept_property_verifier(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___AMethPropdef___accept_property_verifier "mmbuilder::AMethPropdef::(mmbuilder::PNode::accept_property_verifier)"
-#define ATTR_mmbuilder___AMethPropdef____name(recv) ATTR(recv, COLOR_mmbuilder___AMethPropdef____name)
 typedef val_t (* mmbuilder___AMethPropdef___name_t)(val_t  self);
 val_t mmbuilder___AMethPropdef___name(val_t  self);
 #define LOCATE_mmbuilder___AMethPropdef___name "mmbuilder::AMethPropdef::name"
-#define ATTR_mmbuilder___AMethPropdef____method(recv) ATTR(recv, COLOR_mmbuilder___AMethPropdef____method)
 val_t NEW_AMainMethPropdef_parser_nodes___PNode___init();
 val_t NEW_AMainMethPropdef_parser_prod___AMethPropdef___empty_init();
 val_t NEW_AMainMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
@@ -602,11 +582,9 @@ void mmbuilder___ATypePropdef___accept_property_builder(val_t  self, val_t  para
 typedef void (* mmbuilder___ATypePropdef___accept_property_verifier_t)(val_t  self, val_t  param0);
 void mmbuilder___ATypePropdef___accept_property_verifier(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___ATypePropdef___accept_property_verifier "mmbuilder::ATypePropdef::(mmbuilder::PNode::accept_property_verifier)"
-#define ATTR_mmbuilder___ATypePropdef____prop(recv) ATTR(recv, COLOR_mmbuilder___ATypePropdef____prop)
 typedef void (* mmbuilder___MethidAccumulator___visit_t)(val_t  self, val_t  param0);
 void mmbuilder___MethidAccumulator___visit(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___MethidAccumulator___visit "mmbuilder::MethidAccumulator::(parser_prod::Visitor::visit)"
-#define ATTR_mmbuilder___MethidAccumulator____name(recv) ATTR(recv, COLOR_mmbuilder___MethidAccumulator____name)
 typedef val_t (* mmbuilder___MethidAccumulator___name_t)(val_t  self);
 val_t mmbuilder___MethidAccumulator___name(val_t  self);
 #define LOCATE_mmbuilder___MethidAccumulator___name "mmbuilder::MethidAccumulator::name"
@@ -618,7 +596,6 @@ val_t NEW_PMethid_parser_nodes___PNode___init();
 typedef void (* mmbuilder___PMethid___accept_property_builder_t)(val_t  self, val_t  param0);
 void mmbuilder___PMethid___accept_property_builder(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___PMethid___accept_property_builder "mmbuilder::PMethid::(mmbuilder::PNode::accept_property_builder)"
-#define ATTR_mmbuilder___PMethid____name(recv) ATTR(recv, COLOR_mmbuilder___PMethid____name)
 typedef val_t (* mmbuilder___PMethid___name_t)(val_t  self);
 val_t mmbuilder___PMethid___name(val_t  self);
 #define LOCATE_mmbuilder___PMethid___name "mmbuilder::PMethid::name"
@@ -645,9 +622,6 @@ val_t mmbuilder___PParam___variable(val_t  self);
 typedef void (* mmbuilder___PParam___accept_property_verifier_t)(val_t  self, val_t  param0);
 void mmbuilder___PParam___accept_property_verifier(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___PParam___accept_property_verifier "mmbuilder::PParam::(mmbuilder::PNode::accept_property_verifier)"
-#define ATTR_mmbuilder___PParam____position(recv) ATTR(recv, COLOR_mmbuilder___PParam____position)
-#define ATTR_mmbuilder___PParam____variable(recv) ATTR(recv, COLOR_mmbuilder___PParam____variable)
-#define ATTR_mmbuilder___PParam____stype(recv) ATTR(recv, COLOR_mmbuilder___PParam____stype)
 typedef val_t (* mmbuilder___PParam___stype_t)(val_t  self);
 val_t mmbuilder___PParam___stype(val_t  self);
 #define LOCATE_mmbuilder___PParam___stype "mmbuilder::PParam::stype"
@@ -672,7 +646,6 @@ val_t mmbuilder___AClosureDecl___variable(val_t  self);
 typedef void (* mmbuilder___AClosureDecl___accept_property_verifier_t)(val_t  self, val_t  param0);
 void mmbuilder___AClosureDecl___accept_property_verifier(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___AClosureDecl___accept_property_verifier "mmbuilder::AClosureDecl::(mmbuilder::PNode::accept_property_verifier)"
-#define ATTR_mmbuilder___AClosureDecl____variable(recv) ATTR(recv, COLOR_mmbuilder___AClosureDecl____variable)
 val_t NEW_PType_parser_nodes___PNode___init();
 typedef void (* mmbuilder___PType___check_visibility_t)(val_t  self, val_t  param0, val_t  param1);
 void mmbuilder___PType___check_visibility(val_t  self, val_t  param0, val_t  param1);

@@ -8,68 +8,54 @@
 extern const classtable_elt_t VFT_NitCompiler[];
 extern const char *LOCATE_nitc;
 extern const int SFT_nitc[];
-#define ID_NitCompiler SFT_nitc[0]
-#define COLOR_NitCompiler SFT_nitc[1]
-#define COLOR_nitc___NitCompiler____opt_output SFT_nitc[2]
-#define COLOR_nitc___NitCompiler____opt_boost SFT_nitc[3]
-#define COLOR_nitc___NitCompiler____opt_no_cc SFT_nitc[4]
-#define COLOR_nitc___NitCompiler____opt_attr_sim SFT_nitc[5]
-#define COLOR_nitc___NitCompiler____opt_global SFT_nitc[6]
-#define COLOR_nitc___NitCompiler____opt_clibdir SFT_nitc[7]
-#define COLOR_nitc___NitCompiler____opt_bindir SFT_nitc[8]
-#define COLOR_nitc___NitCompiler____opt_compdir SFT_nitc[9]
-#define COLOR_nitc___NitCompiler____opt_extension_prefix SFT_nitc[10]
-#define INIT_TABLE_POS_NitCompiler SFT_nitc[11]
-#define COLOR_nitc___NitCompiler___opt_output SFT_nitc[12]
-#define COLOR_nitc___NitCompiler___opt_boost SFT_nitc[13]
-#define COLOR_nitc___NitCompiler___opt_no_cc SFT_nitc[14]
-#define COLOR_nitc___NitCompiler___opt_attr_sim SFT_nitc[15]
-#define COLOR_nitc___NitCompiler___opt_global SFT_nitc[16]
-#define COLOR_nitc___NitCompiler___opt_clibdir SFT_nitc[17]
-#define COLOR_nitc___NitCompiler___opt_bindir SFT_nitc[18]
-#define COLOR_nitc___NitCompiler___opt_compdir SFT_nitc[19]
-#define COLOR_nitc___NitCompiler___opt_extension_prefix SFT_nitc[20]
-#define COLOR_nitc___NitCompiler___init SFT_nitc[21]
-#define COLOR_SUPER_nitc___NitCompiler___process_options SFT_nitc[22]
+#define ID_NitCompiler (SFT_nitc[0])
+#define COLOR_NitCompiler (SFT_nitc[1])
+#define ATTR_nitc___NitCompiler____opt_output(recv) ATTR(recv, (SFT_nitc[2] + 0))
+#define ATTR_nitc___NitCompiler____opt_boost(recv) ATTR(recv, (SFT_nitc[2] + 1))
+#define ATTR_nitc___NitCompiler____opt_no_cc(recv) ATTR(recv, (SFT_nitc[2] + 2))
+#define ATTR_nitc___NitCompiler____opt_global(recv) ATTR(recv, (SFT_nitc[2] + 3))
+#define ATTR_nitc___NitCompiler____opt_clibdir(recv) ATTR(recv, (SFT_nitc[2] + 4))
+#define ATTR_nitc___NitCompiler____opt_bindir(recv) ATTR(recv, (SFT_nitc[2] + 5))
+#define ATTR_nitc___NitCompiler____opt_compdir(recv) ATTR(recv, (SFT_nitc[2] + 6))
+#define ATTR_nitc___NitCompiler____opt_extension_prefix(recv) ATTR(recv, (SFT_nitc[2] + 7))
+#define INIT_TABLE_POS_NitCompiler (SFT_nitc[3] + 0)
+#define CALL_nitc___NitCompiler___opt_output(recv) ((nitc___NitCompiler___opt_output_t)CALL((recv), (SFT_nitc[3] + 1)))
+#define CALL_nitc___NitCompiler___opt_boost(recv) ((nitc___NitCompiler___opt_boost_t)CALL((recv), (SFT_nitc[3] + 2)))
+#define CALL_nitc___NitCompiler___opt_no_cc(recv) ((nitc___NitCompiler___opt_no_cc_t)CALL((recv), (SFT_nitc[3] + 3)))
+#define CALL_nitc___NitCompiler___opt_global(recv) ((nitc___NitCompiler___opt_global_t)CALL((recv), (SFT_nitc[3] + 4)))
+#define CALL_nitc___NitCompiler___opt_clibdir(recv) ((nitc___NitCompiler___opt_clibdir_t)CALL((recv), (SFT_nitc[3] + 5)))
+#define CALL_nitc___NitCompiler___opt_bindir(recv) ((nitc___NitCompiler___opt_bindir_t)CALL((recv), (SFT_nitc[3] + 6)))
+#define CALL_nitc___NitCompiler___opt_compdir(recv) ((nitc___NitCompiler___opt_compdir_t)CALL((recv), (SFT_nitc[3] + 7)))
+#define CALL_nitc___NitCompiler___opt_extension_prefix(recv) ((nitc___NitCompiler___opt_extension_prefix_t)CALL((recv), (SFT_nitc[3] + 8)))
+#define CALL_nitc___NitCompiler___init(recv) ((nitc___NitCompiler___init_t)CALL((recv), (SFT_nitc[3] + 9)))
+#define CALL_SUPER_nitc___NitCompiler___process_options(recv) ((nitc___NitCompiler___process_options_t)CALL((recv), (SFT_nitc[3] + 10)))
 typedef void (* nitc___NitCompiler___process_options_t)(val_t  self);
 void nitc___NitCompiler___process_options(val_t  self);
 #define LOCATE_nitc___NitCompiler___process_options "nitc::NitCompiler::(mmloader::ToolContext::process_options)"
 typedef void (* nitc___NitCompiler___perform_work_t)(val_t  self, val_t  param0);
 void nitc___NitCompiler___perform_work(val_t  self, val_t  param0);
 #define LOCATE_nitc___NitCompiler___perform_work "nitc::NitCompiler::(abstracttool::AbstractCompiler::perform_work)"
-#define ATTR_nitc___NitCompiler____opt_output(recv) ATTR(recv, COLOR_nitc___NitCompiler____opt_output)
 typedef val_t (* nitc___NitCompiler___opt_output_t)(val_t  self);
 val_t nitc___NitCompiler___opt_output(val_t  self);
 #define LOCATE_nitc___NitCompiler___opt_output "nitc::NitCompiler::opt_output"
-#define ATTR_nitc___NitCompiler____opt_boost(recv) ATTR(recv, COLOR_nitc___NitCompiler____opt_boost)
 typedef val_t (* nitc___NitCompiler___opt_boost_t)(val_t  self);
 val_t nitc___NitCompiler___opt_boost(val_t  self);
 #define LOCATE_nitc___NitCompiler___opt_boost "nitc::NitCompiler::opt_boost"
-#define ATTR_nitc___NitCompiler____opt_no_cc(recv) ATTR(recv, COLOR_nitc___NitCompiler____opt_no_cc)
 typedef val_t (* nitc___NitCompiler___opt_no_cc_t)(val_t  self);
 val_t nitc___NitCompiler___opt_no_cc(val_t  self);
 #define LOCATE_nitc___NitCompiler___opt_no_cc "nitc::NitCompiler::opt_no_cc"
-#define ATTR_nitc___NitCompiler____opt_attr_sim(recv) ATTR(recv, COLOR_nitc___NitCompiler____opt_attr_sim)
-typedef val_t (* nitc___NitCompiler___opt_attr_sim_t)(val_t  self);
-val_t nitc___NitCompiler___opt_attr_sim(val_t  self);
-#define LOCATE_nitc___NitCompiler___opt_attr_sim "nitc::NitCompiler::opt_attr_sim"
-#define ATTR_nitc___NitCompiler____opt_global(recv) ATTR(recv, COLOR_nitc___NitCompiler____opt_global)
 typedef val_t (* nitc___NitCompiler___opt_global_t)(val_t  self);
 val_t nitc___NitCompiler___opt_global(val_t  self);
 #define LOCATE_nitc___NitCompiler___opt_global "nitc::NitCompiler::opt_global"
-#define ATTR_nitc___NitCompiler____opt_clibdir(recv) ATTR(recv, COLOR_nitc___NitCompiler____opt_clibdir)
 typedef val_t (* nitc___NitCompiler___opt_clibdir_t)(val_t  self);
 val_t nitc___NitCompiler___opt_clibdir(val_t  self);
 #define LOCATE_nitc___NitCompiler___opt_clibdir "nitc::NitCompiler::opt_clibdir"
-#define ATTR_nitc___NitCompiler____opt_bindir(recv) ATTR(recv, COLOR_nitc___NitCompiler____opt_bindir)
 typedef val_t (* nitc___NitCompiler___opt_bindir_t)(val_t  self);
 val_t nitc___NitCompiler___opt_bindir(val_t  self);
 #define LOCATE_nitc___NitCompiler___opt_bindir "nitc::NitCompiler::opt_bindir"
-#define ATTR_nitc___NitCompiler____opt_compdir(recv) ATTR(recv, COLOR_nitc___NitCompiler____opt_compdir)
 typedef val_t (* nitc___NitCompiler___opt_compdir_t)(val_t  self);
 val_t nitc___NitCompiler___opt_compdir(val_t  self);
 #define LOCATE_nitc___NitCompiler___opt_compdir "nitc::NitCompiler::opt_compdir"
-#define ATTR_nitc___NitCompiler____opt_extension_prefix(recv) ATTR(recv, COLOR_nitc___NitCompiler____opt_extension_prefix)
 typedef val_t (* nitc___NitCompiler___opt_extension_prefix_t)(val_t  self);
 val_t nitc___NitCompiler___opt_extension_prefix(val_t  self);
 #define LOCATE_nitc___NitCompiler___opt_extension_prefix "nitc::NitCompiler::opt_extension_prefix"

@@ -7,15 +7,15 @@
 extern const classtable_elt_t VFT_MMTypeFormal[];
 extern const char *LOCATE_type_formal;
 extern const int SFT_type_formal[];
-#define COLOR_type_formal___MMType___direct_type SFT_type_formal[0]
-#define ID_MMTypeFormal SFT_type_formal[1]
-#define COLOR_MMTypeFormal SFT_type_formal[2]
-#define COLOR_type_formal___MMTypeFormal____name SFT_type_formal[3]
-#define COLOR_type_formal___MMTypeFormal____bound SFT_type_formal[4]
-#define INIT_TABLE_POS_MMTypeFormal SFT_type_formal[5]
-#define COLOR_type_formal___MMTypeFormal___name SFT_type_formal[6]
-#define COLOR_type_formal___MMTypeFormal___bound SFT_type_formal[7]
-#define COLOR_type_formal___MMTypeFormal___init SFT_type_formal[8]
+#define CALL_type_formal___MMType___direct_type(recv) ((type_formal___MMType___direct_type_t)CALL((recv), (SFT_type_formal[0] + 0)))
+#define ID_MMTypeFormal (SFT_type_formal[1])
+#define COLOR_MMTypeFormal (SFT_type_formal[2])
+#define ATTR_type_formal___MMTypeFormal____name(recv) ATTR(recv, (SFT_type_formal[3] + 0))
+#define ATTR_type_formal___MMTypeFormal____bound(recv) ATTR(recv, (SFT_type_formal[3] + 1))
+#define INIT_TABLE_POS_MMTypeFormal (SFT_type_formal[4] + 0)
+#define CALL_type_formal___MMTypeFormal___name(recv) ((type_formal___MMTypeFormal___name_t)CALL((recv), (SFT_type_formal[4] + 1)))
+#define CALL_type_formal___MMTypeFormal___bound(recv) ((type_formal___MMTypeFormal___bound_t)CALL((recv), (SFT_type_formal[4] + 2)))
+#define CALL_type_formal___MMTypeFormal___init(recv) ((type_formal___MMTypeFormal___init_t)CALL((recv), (SFT_type_formal[4] + 3)))
 val_t NEW_MMType_static_type___MMType___init();
 typedef val_t (* type_formal___MMType___direct_type_t)(val_t  self);
 val_t type_formal___MMType___direct_type(val_t  self);
@@ -35,11 +35,9 @@ val_t type_formal___MMTypeFormal___is_supertype(val_t  self, val_t  param0);
 typedef val_t (* type_formal___MMTypeFormal___direct_type_t)(val_t  self);
 val_t type_formal___MMTypeFormal___direct_type(val_t  self);
 #define LOCATE_type_formal___MMTypeFormal___direct_type "type_formal::MMTypeFormal::(type_formal::MMType::direct_type)"
-#define ATTR_type_formal___MMTypeFormal____name(recv) ATTR(recv, COLOR_type_formal___MMTypeFormal____name)
 typedef val_t (* type_formal___MMTypeFormal___name_t)(val_t  self);
 val_t type_formal___MMTypeFormal___name(val_t  self);
 #define LOCATE_type_formal___MMTypeFormal___name "type_formal::MMTypeFormal::name"
-#define ATTR_type_formal___MMTypeFormal____bound(recv) ATTR(recv, COLOR_type_formal___MMTypeFormal____bound)
 typedef val_t (* type_formal___MMTypeFormal___bound_t)(val_t  self);
 val_t type_formal___MMTypeFormal___bound(val_t  self);
 #define LOCATE_type_formal___MMTypeFormal___bound "type_formal::MMTypeFormal::bound"

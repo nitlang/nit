@@ -24,68 +24,68 @@ val_t BOX_NativeArray(val_t * val);
 #define UNBOX_NativeArray(x) (((struct TBOX_NativeArray *)(VAL2OBJ(x)))->val)
 extern const char *LOCATE_array;
 extern const int SFT_array[];
-#define ID_AbstractArray SFT_array[0]
-#define COLOR_AbstractArray SFT_array[1]
-#define COLOR_array___AbstractArray____length SFT_array[2]
-#define INIT_TABLE_POS_AbstractArray SFT_array[3]
-#define COLOR_array___AbstractArray___enlarge SFT_array[4]
-#define COLOR_array___AbstractArray___insert SFT_array[5]
-#define COLOR_array___AbstractArray___last_index_of SFT_array[6]
-#define COLOR_array___AbstractArray___index_of_from SFT_array[7]
-#define COLOR_array___AbstractArray___last_index_of_from SFT_array[8]
-#define COLOR_array___AbstractArray___reversed SFT_array[9]
-#define COLOR_array___AbstractArray___copy_to SFT_array[10]
-#define COLOR_array___AbstractArray___init SFT_array[11]
-#define ID_Array SFT_array[12]
-#define COLOR_Array SFT_array[13]
-#define COLOR_array___Array____items SFT_array[14]
-#define COLOR_array___Array____capacity SFT_array[15]
-#define INIT_TABLE_POS_Array SFT_array[16]
-#define COLOR_array___Array___init SFT_array[17]
-#define COLOR_array___Array___with_items SFT_array[18]
-#define COLOR_array___Array___with_capacity SFT_array[19]
-#define COLOR_array___Array___filled_with SFT_array[20]
-#define COLOR_array___Array___with_native SFT_array[21]
-#define ID_ArrayIterator SFT_array[22]
-#define COLOR_ArrayIterator SFT_array[23]
-#define COLOR_array___ArrayIterator____index SFT_array[24]
-#define COLOR_array___ArrayIterator____array SFT_array[25]
-#define INIT_TABLE_POS_ArrayIterator SFT_array[26]
-#define COLOR_array___ArrayIterator___init SFT_array[27]
-#define ID_ArraySet SFT_array[28]
-#define COLOR_ArraySet SFT_array[29]
-#define COLOR_array___ArraySet____array SFT_array[30]
-#define INIT_TABLE_POS_ArraySet SFT_array[31]
-#define COLOR_array___ArraySet___enlarge SFT_array[32]
-#define COLOR_array___ArraySet___remove_at SFT_array[33]
-#define COLOR_array___ArraySet___init SFT_array[34]
-#define COLOR_array___ArraySet___with_capacity SFT_array[35]
-#define ID_ArraySetIterator SFT_array[36]
-#define COLOR_ArraySetIterator SFT_array[37]
-#define COLOR_array___ArraySetIterator____iter SFT_array[38]
-#define INIT_TABLE_POS_ArraySetIterator SFT_array[39]
-#define COLOR_array___ArraySetIterator___init SFT_array[40]
-#define ID_ArrayMap SFT_array[41]
-#define COLOR_ArrayMap SFT_array[42]
-#define COLOR_array___ArrayMap____items SFT_array[43]
-#define COLOR_array___ArrayMap____last_index SFT_array[44]
-#define INIT_TABLE_POS_ArrayMap SFT_array[45]
-#define COLOR_array___ArrayMap___enlarge SFT_array[46]
-#define COLOR_array___ArrayMap___remove_at_index SFT_array[47]
-#define COLOR_array___ArrayMap___index SFT_array[48]
-#define COLOR_array___ArrayMap___init SFT_array[49]
-#define COLOR_array___Iterator___to_a SFT_array[50]
-#define COLOR_array___Collection___to_a SFT_array[51]
-#define ID_ArrayCapable SFT_array[52]
-#define COLOR_ArrayCapable SFT_array[53]
-#define INIT_TABLE_POS_ArrayCapable SFT_array[54]
-#define COLOR_array___ArrayCapable___calloc_array SFT_array[55]
-#define ID_NativeArray SFT_array[56]
-#define COLOR_NativeArray SFT_array[57]
-#define INIT_TABLE_POS_NativeArray SFT_array[58]
-#define COLOR_array___NativeArray_____bra SFT_array[59]
-#define COLOR_array___NativeArray_____braeq SFT_array[60]
-#define COLOR_array___NativeArray___copy_to SFT_array[61]
+#define ID_AbstractArray (SFT_array[0])
+#define COLOR_AbstractArray (SFT_array[1])
+#define ATTR_array___AbstractArray____length(recv) ATTR(recv, (SFT_array[2] + 0))
+#define INIT_TABLE_POS_AbstractArray (SFT_array[3] + 0)
+#define CALL_array___AbstractArray___enlarge(recv) ((array___AbstractArray___enlarge_t)CALL((recv), (SFT_array[3] + 1)))
+#define CALL_array___AbstractArray___insert(recv) ((array___AbstractArray___insert_t)CALL((recv), (SFT_array[3] + 2)))
+#define CALL_array___AbstractArray___last_index_of(recv) ((array___AbstractArray___last_index_of_t)CALL((recv), (SFT_array[3] + 3)))
+#define CALL_array___AbstractArray___index_of_from(recv) ((array___AbstractArray___index_of_from_t)CALL((recv), (SFT_array[3] + 4)))
+#define CALL_array___AbstractArray___last_index_of_from(recv) ((array___AbstractArray___last_index_of_from_t)CALL((recv), (SFT_array[3] + 5)))
+#define CALL_array___AbstractArray___reversed(recv) ((array___AbstractArray___reversed_t)CALL((recv), (SFT_array[3] + 6)))
+#define CALL_array___AbstractArray___copy_to(recv) ((array___AbstractArray___copy_to_t)CALL((recv), (SFT_array[3] + 7)))
+#define CALL_array___AbstractArray___init(recv) ((array___AbstractArray___init_t)CALL((recv), (SFT_array[3] + 8)))
+#define ID_Array (SFT_array[4])
+#define COLOR_Array (SFT_array[5])
+#define ATTR_array___Array____items(recv) ATTR(recv, (SFT_array[6] + 0))
+#define ATTR_array___Array____capacity(recv) ATTR(recv, (SFT_array[6] + 1))
+#define INIT_TABLE_POS_Array (SFT_array[7] + 0)
+#define CALL_array___Array___init(recv) ((array___Array___init_t)CALL((recv), (SFT_array[7] + 1)))
+#define CALL_array___Array___with_items(recv) ((array___Array___with_items_t)CALL((recv), (SFT_array[7] + 2)))
+#define CALL_array___Array___with_capacity(recv) ((array___Array___with_capacity_t)CALL((recv), (SFT_array[7] + 3)))
+#define CALL_array___Array___filled_with(recv) ((array___Array___filled_with_t)CALL((recv), (SFT_array[7] + 4)))
+#define CALL_array___Array___with_native(recv) ((array___Array___with_native_t)CALL((recv), (SFT_array[7] + 5)))
+#define ID_ArrayIterator (SFT_array[8])
+#define COLOR_ArrayIterator (SFT_array[9])
+#define ATTR_array___ArrayIterator____index(recv) ATTR(recv, (SFT_array[10] + 0))
+#define ATTR_array___ArrayIterator____array(recv) ATTR(recv, (SFT_array[10] + 1))
+#define INIT_TABLE_POS_ArrayIterator (SFT_array[11] + 0)
+#define CALL_array___ArrayIterator___init(recv) ((array___ArrayIterator___init_t)CALL((recv), (SFT_array[11] + 1)))
+#define ID_ArraySet (SFT_array[12])
+#define COLOR_ArraySet (SFT_array[13])
+#define ATTR_array___ArraySet____array(recv) ATTR(recv, (SFT_array[14] + 0))
+#define INIT_TABLE_POS_ArraySet (SFT_array[15] + 0)
+#define CALL_array___ArraySet___enlarge(recv) ((array___ArraySet___enlarge_t)CALL((recv), (SFT_array[15] + 1)))
+#define CALL_array___ArraySet___remove_at(recv) ((array___ArraySet___remove_at_t)CALL((recv), (SFT_array[15] + 2)))
+#define CALL_array___ArraySet___init(recv) ((array___ArraySet___init_t)CALL((recv), (SFT_array[15] + 3)))
+#define CALL_array___ArraySet___with_capacity(recv) ((array___ArraySet___with_capacity_t)CALL((recv), (SFT_array[15] + 4)))
+#define ID_ArraySetIterator (SFT_array[16])
+#define COLOR_ArraySetIterator (SFT_array[17])
+#define ATTR_array___ArraySetIterator____iter(recv) ATTR(recv, (SFT_array[18] + 0))
+#define INIT_TABLE_POS_ArraySetIterator (SFT_array[19] + 0)
+#define CALL_array___ArraySetIterator___init(recv) ((array___ArraySetIterator___init_t)CALL((recv), (SFT_array[19] + 1)))
+#define ID_ArrayMap (SFT_array[20])
+#define COLOR_ArrayMap (SFT_array[21])
+#define ATTR_array___ArrayMap____items(recv) ATTR(recv, (SFT_array[22] + 0))
+#define ATTR_array___ArrayMap____last_index(recv) ATTR(recv, (SFT_array[22] + 1))
+#define INIT_TABLE_POS_ArrayMap (SFT_array[23] + 0)
+#define CALL_array___ArrayMap___enlarge(recv) ((array___ArrayMap___enlarge_t)CALL((recv), (SFT_array[23] + 1)))
+#define CALL_array___ArrayMap___remove_at_index(recv) ((array___ArrayMap___remove_at_index_t)CALL((recv), (SFT_array[23] + 2)))
+#define CALL_array___ArrayMap___index(recv) ((array___ArrayMap___index_t)CALL((recv), (SFT_array[23] + 3)))
+#define CALL_array___ArrayMap___init(recv) ((array___ArrayMap___init_t)CALL((recv), (SFT_array[23] + 4)))
+#define CALL_array___Iterator___to_a(recv) ((array___Iterator___to_a_t)CALL((recv), (SFT_array[24] + 0)))
+#define CALL_array___Collection___to_a(recv) ((array___Collection___to_a_t)CALL((recv), (SFT_array[25] + 0)))
+#define ID_ArrayCapable (SFT_array[26])
+#define COLOR_ArrayCapable (SFT_array[27])
+#define INIT_TABLE_POS_ArrayCapable (SFT_array[28] + 0)
+#define CALL_array___ArrayCapable___calloc_array(recv) ((array___ArrayCapable___calloc_array_t)CALL((recv), (SFT_array[28] + 1)))
+#define ID_NativeArray (SFT_array[29])
+#define COLOR_NativeArray (SFT_array[30])
+#define INIT_TABLE_POS_NativeArray (SFT_array[31] + 0)
+#define CALL_array___NativeArray_____bra(recv) ((array___NativeArray_____bra_t)CALL((recv), (SFT_array[31] + 1)))
+#define CALL_array___NativeArray_____braeq(recv) ((array___NativeArray_____braeq_t)CALL((recv), (SFT_array[31] + 2)))
+#define CALL_array___NativeArray___copy_to(recv) ((array___NativeArray___copy_to_t)CALL((recv), (SFT_array[31] + 3)))
 typedef val_t (* array___AbstractArray_____eqeq_t)(val_t  self, val_t  param0);
 val_t array___AbstractArray_____eqeq(val_t  self, val_t  param0);
 #define LOCATE_array___AbstractArray_____eqeq "array::AbstractArray::(kernel::Object::==)"
@@ -146,7 +146,6 @@ val_t array___AbstractArray___index_of(val_t  self, val_t  param0);
 typedef void (* array___AbstractArray___enlarge_t)(val_t  self, val_t  param0);
 void array___AbstractArray___enlarge(val_t  self, val_t  param0);
 #define LOCATE_array___AbstractArray___enlarge "array::AbstractArray::enlarge"
-#define ATTR_array___AbstractArray____length(recv) ATTR(recv, COLOR_array___AbstractArray____length)
 typedef void (* array___AbstractArray___insert_t)(val_t  self, val_t  param0, val_t  param1);
 void array___AbstractArray___insert(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_array___AbstractArray___insert "array::AbstractArray::insert"
@@ -198,8 +197,6 @@ typedef void (* array___Array___with_native_t)(val_t  self, val_t  param0, val_t
 void array___Array___with_native(val_t  self, val_t  param0, val_t  param1, int* init_table);
 #define LOCATE_array___Array___with_native "array::Array::with_native"
 val_t NEW_Array_array___Array___with_native(val_t p0, val_t p1);
-#define ATTR_array___Array____items(recv) ATTR(recv, COLOR_array___Array____items)
-#define ATTR_array___Array____capacity(recv) ATTR(recv, COLOR_array___Array____capacity)
 typedef val_t (* array___ArrayIterator___item_t)(val_t  self);
 val_t array___ArrayIterator___item(val_t  self);
 #define LOCATE_array___ArrayIterator___item "array::ArrayIterator::(abstract_collection::Iterator::item)"
@@ -219,8 +216,6 @@ typedef void (* array___ArrayIterator___init_t)(val_t  self, val_t  param0, int*
 void array___ArrayIterator___init(val_t  self, val_t  param0, int* init_table);
 #define LOCATE_array___ArrayIterator___init "array::ArrayIterator::init"
 val_t NEW_ArrayIterator_array___ArrayIterator___init(val_t p0);
-#define ATTR_array___ArrayIterator____index(recv) ATTR(recv, COLOR_array___ArrayIterator____index)
-#define ATTR_array___ArrayIterator____array(recv) ATTR(recv, COLOR_array___ArrayIterator____array)
 typedef val_t (* array___ArraySet___iterator_t)(val_t  self);
 val_t array___ArraySet___iterator(val_t  self);
 #define LOCATE_array___ArraySet___iterator "array::ArraySet::(abstract_collection::Collection::iterator)"
@@ -248,7 +243,6 @@ void array___ArraySet___remove_all(val_t  self, val_t  param0);
 typedef void (* array___ArraySet___add_t)(val_t  self, val_t  param0);
 void array___ArraySet___add(val_t  self, val_t  param0);
 #define LOCATE_array___ArraySet___add "array::ArraySet::(abstract_collection::SimpleCollection::add)"
-#define ATTR_array___ArraySet____array(recv) ATTR(recv, COLOR_array___ArraySet____array)
 typedef void (* array___ArraySet___enlarge_t)(val_t  self, val_t  param0);
 void array___ArraySet___enlarge(val_t  self, val_t  param0);
 #define LOCATE_array___ArraySet___enlarge "array::ArraySet::enlarge"
@@ -276,7 +270,6 @@ typedef void (* array___ArraySetIterator___init_t)(val_t  self, val_t  param0, i
 void array___ArraySetIterator___init(val_t  self, val_t  param0, int* init_table);
 #define LOCATE_array___ArraySetIterator___init "array::ArraySetIterator::init"
 val_t NEW_ArraySetIterator_array___ArraySetIterator___init(val_t p0);
-#define ATTR_array___ArraySetIterator____iter(recv) ATTR(recv, COLOR_array___ArraySetIterator____iter)
 typedef val_t (* array___ArrayMap___iterator_t)(val_t  self);
 val_t array___ArrayMap___iterator(val_t  self);
 #define LOCATE_array___ArrayMap___iterator "array::ArrayMap::(abstract_collection::Collection::iterator)"
@@ -325,11 +318,9 @@ val_t array___ArrayMap___couple_at(val_t  self, val_t  param0);
 typedef void (* array___ArrayMap___enlarge_t)(val_t  self, val_t  param0);
 void array___ArrayMap___enlarge(val_t  self, val_t  param0);
 #define LOCATE_array___ArrayMap___enlarge "array::ArrayMap::enlarge"
-#define ATTR_array___ArrayMap____items(recv) ATTR(recv, COLOR_array___ArrayMap____items)
 typedef void (* array___ArrayMap___remove_at_index_t)(val_t  self, val_t  param0);
 void array___ArrayMap___remove_at_index(val_t  self, val_t  param0);
 #define LOCATE_array___ArrayMap___remove_at_index "array::ArrayMap::remove_at_index"
-#define ATTR_array___ArrayMap____last_index(recv) ATTR(recv, COLOR_array___ArrayMap____last_index)
 typedef val_t (* array___ArrayMap___index_t)(val_t  self, val_t  param0);
 val_t array___ArrayMap___index(val_t  self, val_t  param0);
 #define LOCATE_array___ArrayMap___index "array::ArrayMap::index"

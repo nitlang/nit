@@ -11,34 +11,34 @@ extern const classtable_elt_t VFT_ListIterator[];
 extern const classtable_elt_t VFT_ListNode[];
 extern const char *LOCATE_list;
 extern const int SFT_list[];
-#define ID_List SFT_list[0]
-#define COLOR_List SFT_list[1]
-#define COLOR_list___List____head SFT_list[2]
-#define COLOR_list___List____tail SFT_list[3]
-#define INIT_TABLE_POS_List SFT_list[4]
-#define COLOR_list___List___link SFT_list[5]
-#define COLOR_list___List___init SFT_list[6]
-#define COLOR_list___List___from SFT_list[7]
-#define COLOR_list___List___get_node SFT_list[8]
-#define COLOR_list___List___search_node_after SFT_list[9]
-#define COLOR_list___List___remove_node SFT_list[10]
-#define COLOR_list___List___insert_before SFT_list[11]
-#define ID_ListIterator SFT_list[12]
-#define COLOR_ListIterator SFT_list[13]
-#define COLOR_list___ListIterator____node SFT_list[14]
-#define COLOR_list___ListIterator____index SFT_list[15]
-#define INIT_TABLE_POS_ListIterator SFT_list[16]
-#define COLOR_list___ListIterator___init SFT_list[17]
-#define ID_ListNode SFT_list[18]
-#define COLOR_ListNode SFT_list[19]
-#define COLOR_list___ListNode____next SFT_list[20]
-#define COLOR_list___ListNode____prev SFT_list[21]
-#define INIT_TABLE_POS_ListNode SFT_list[22]
-#define COLOR_list___ListNode___init SFT_list[23]
-#define COLOR_list___ListNode___next SFT_list[24]
-#define COLOR_list___ListNode___next__eq SFT_list[25]
-#define COLOR_list___ListNode___prev SFT_list[26]
-#define COLOR_list___ListNode___prev__eq SFT_list[27]
+#define ID_List (SFT_list[0])
+#define COLOR_List (SFT_list[1])
+#define ATTR_list___List____head(recv) ATTR(recv, (SFT_list[2] + 0))
+#define ATTR_list___List____tail(recv) ATTR(recv, (SFT_list[2] + 1))
+#define INIT_TABLE_POS_List (SFT_list[3] + 0)
+#define CALL_list___List___link(recv) ((list___List___link_t)CALL((recv), (SFT_list[3] + 1)))
+#define CALL_list___List___init(recv) ((list___List___init_t)CALL((recv), (SFT_list[3] + 2)))
+#define CALL_list___List___from(recv) ((list___List___from_t)CALL((recv), (SFT_list[3] + 3)))
+#define CALL_list___List___get_node(recv) ((list___List___get_node_t)CALL((recv), (SFT_list[3] + 4)))
+#define CALL_list___List___search_node_after(recv) ((list___List___search_node_after_t)CALL((recv), (SFT_list[3] + 5)))
+#define CALL_list___List___remove_node(recv) ((list___List___remove_node_t)CALL((recv), (SFT_list[3] + 6)))
+#define CALL_list___List___insert_before(recv) ((list___List___insert_before_t)CALL((recv), (SFT_list[3] + 7)))
+#define ID_ListIterator (SFT_list[4])
+#define COLOR_ListIterator (SFT_list[5])
+#define ATTR_list___ListIterator____node(recv) ATTR(recv, (SFT_list[6] + 0))
+#define ATTR_list___ListIterator____index(recv) ATTR(recv, (SFT_list[6] + 1))
+#define INIT_TABLE_POS_ListIterator (SFT_list[7] + 0)
+#define CALL_list___ListIterator___init(recv) ((list___ListIterator___init_t)CALL((recv), (SFT_list[7] + 1)))
+#define ID_ListNode (SFT_list[8])
+#define COLOR_ListNode (SFT_list[9])
+#define ATTR_list___ListNode____next(recv) ATTR(recv, (SFT_list[10] + 0))
+#define ATTR_list___ListNode____prev(recv) ATTR(recv, (SFT_list[10] + 1))
+#define INIT_TABLE_POS_ListNode (SFT_list[11] + 0)
+#define CALL_list___ListNode___init(recv) ((list___ListNode___init_t)CALL((recv), (SFT_list[11] + 1)))
+#define CALL_list___ListNode___next(recv) ((list___ListNode___next_t)CALL((recv), (SFT_list[11] + 2)))
+#define CALL_list___ListNode___next__eq(recv) ((list___ListNode___next__eq_t)CALL((recv), (SFT_list[11] + 3)))
+#define CALL_list___ListNode___prev(recv) ((list___ListNode___prev_t)CALL((recv), (SFT_list[11] + 4)))
+#define CALL_list___ListNode___prev__eq(recv) ((list___ListNode___prev__eq_t)CALL((recv), (SFT_list[11] + 5)))
 typedef val_t (* list___List___iterator_t)(val_t  self);
 val_t list___List___iterator(val_t  self);
 #define LOCATE_list___List___iterator "list::List::(abstract_collection::Collection::iterator)"
@@ -110,8 +110,6 @@ typedef void (* list___List___from_t)(val_t  self, val_t  param0, int* init_tabl
 void list___List___from(val_t  self, val_t  param0, int* init_table);
 #define LOCATE_list___List___from "list::List::from"
 val_t NEW_List_list___List___from(val_t p0);
-#define ATTR_list___List____head(recv) ATTR(recv, COLOR_list___List____head)
-#define ATTR_list___List____tail(recv) ATTR(recv, COLOR_list___List____tail)
 typedef val_t (* list___List___get_node_t)(val_t  self, val_t  param0);
 val_t list___List___get_node(val_t  self, val_t  param0);
 #define LOCATE_list___List___get_node "list::List::get_node"
@@ -143,20 +141,16 @@ typedef void (* list___ListIterator___init_t)(val_t  self, val_t  param0, int* i
 void list___ListIterator___init(val_t  self, val_t  param0, int* init_table);
 #define LOCATE_list___ListIterator___init "list::ListIterator::init"
 val_t NEW_ListIterator_list___ListIterator___init(val_t p0);
-#define ATTR_list___ListIterator____node(recv) ATTR(recv, COLOR_list___ListIterator____node)
-#define ATTR_list___ListIterator____index(recv) ATTR(recv, COLOR_list___ListIterator____index)
 typedef void (* list___ListNode___init_t)(val_t  self, val_t  param0, int* init_table);
 void list___ListNode___init(val_t  self, val_t  param0, int* init_table);
 #define LOCATE_list___ListNode___init "list::ListNode::init"
 val_t NEW_ListNode_list___ListNode___init(val_t p0);
-#define ATTR_list___ListNode____next(recv) ATTR(recv, COLOR_list___ListNode____next)
 typedef val_t (* list___ListNode___next_t)(val_t  self);
 val_t list___ListNode___next(val_t  self);
 #define LOCATE_list___ListNode___next "list::ListNode::next"
 typedef void (* list___ListNode___next__eq_t)(val_t  self, val_t  param0);
 void list___ListNode___next__eq(val_t  self, val_t  param0);
 #define LOCATE_list___ListNode___next__eq "list::ListNode::next="
-#define ATTR_list___ListNode____prev(recv) ATTR(recv, COLOR_list___ListNode____prev)
 typedef val_t (* list___ListNode___prev_t)(val_t  self);
 val_t list___ListNode___prev(val_t  self);
 #define LOCATE_list___ListNode___prev "list::ListNode::prev"

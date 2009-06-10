@@ -35,15 +35,15 @@ val_t string_search___Pattern___search_all_in(val_t  self, val_t  param0) {
   variable[4] = NEW_Array_array___Array___init(); /*new Array[Match]*/
   variable[3] = variable[4];
   variable[5] = variable[0];
-  variable[5] = ((string_search___Pattern___search_in_t)CALL(variable[5],COLOR_string_search___Pattern___search_in))(variable[5],  variable[1] /*s*/,  TAG_Int(0)) /*Pattern::search_in*/;
+  variable[5] = CALL_string_search___Pattern___search_in(variable[5])(variable[5],  variable[1] /*s*/,  TAG_Int(0)) /*Pattern::search_in*/;
   variable[4] = variable[5];
   while (true) { /*while*/
-    variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*match*/ ==  NIT_NULL /*null*/) || (( variable[4] /*match*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*match*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*match*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*match*/,COLOR_kernel___Object_____eqeq))( variable[4] /*match*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*match*/ ==  NIT_NULL /*null*/) || (( variable[4] /*match*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[4] /*match*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*match*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[4] /*match*/)( variable[4] /*match*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
     if (!UNTAG_Bool(variable[5])) break; /* while*/
-    ((array___AbstractArray___add_t)CALL( variable[3] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[3] /*res*/,  variable[4] /*match*/) /*AbstractArray::add*/;
+    CALL_abstract_collection___SimpleCollection___add( variable[3] /*res*/)( variable[3] /*res*/,  variable[4] /*match*/) /*AbstractArray::add*/;
     variable[5] = variable[0];
-    variable[6] = ((string_search___Match___after_t)CALL( variable[4] /*match*/,COLOR_string_search___Match___after))( variable[4] /*match*/) /*Match::after*/;
-    variable[5] = ((string_search___Pattern___search_in_t)CALL(variable[5],COLOR_string_search___Pattern___search_in))(variable[5],  variable[1] /*s*/, variable[6]) /*Pattern::search_in*/;
+    variable[6] = CALL_string_search___Match___after( variable[4] /*match*/)( variable[4] /*match*/) /*Match::after*/;
+    variable[5] = CALL_string_search___Pattern___search_in(variable[5])(variable[5],  variable[1] /*s*/, variable[6]) /*Pattern::search_in*/;
     variable[4] = variable[5] /*match=*/;
     continue_1: while(0);
   }
@@ -66,29 +66,29 @@ val_t string_search___Pattern___split_in(val_t  self, val_t  param0) {
   variable[3] = variable[4];
   variable[4] =  TAG_Int(0);
   variable[6] = variable[0];
-  variable[6] = ((string_search___Pattern___search_in_t)CALL(variable[6],COLOR_string_search___Pattern___search_in))(variable[6],  variable[1] /*s*/,  TAG_Int(0)) /*Pattern::search_in*/;
+  variable[6] = CALL_string_search___Pattern___search_in(variable[6])(variable[6],  variable[1] /*s*/,  TAG_Int(0)) /*Pattern::search_in*/;
   variable[5] = variable[6];
   while (true) { /*while*/
-    variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*match*/ ==  NIT_NULL /*null*/) || (( variable[5] /*match*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*match*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*match*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*match*/,COLOR_kernel___Object_____eqeq))( variable[5] /*match*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*match*/ ==  NIT_NULL /*null*/) || (( variable[5] /*match*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*match*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*match*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*match*/)( variable[5] /*match*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
     if (!UNTAG_Bool(variable[6])) break; /* while*/
-    variable[7] = ((string_search___Match___from_t)CALL( variable[5] /*match*/,COLOR_string_search___Match___from))( variable[5] /*match*/) /*Match::from*/;
+    variable[7] = CALL_string_search___Match___from( variable[5] /*match*/)( variable[5] /*match*/) /*Match::from*/;
     variable[7] = TAG_Int(UNTAG_Int(variable[7])-UNTAG_Int( variable[4] /*i*/));
     variable[6] = variable[7];
     variable[7] = NEW_Match_string_search___Match___init( variable[1] /*s*/,  variable[4] /*i*/,  variable[6] /*len*/); /*new Match*/
-    ((array___AbstractArray___add_t)CALL( variable[3] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[3] /*res*/, variable[7]) /*AbstractArray::add*/;
-    variable[7] = ((string_search___Match___after_t)CALL( variable[5] /*match*/,COLOR_string_search___Match___after))( variable[5] /*match*/) /*Match::after*/;
+    CALL_abstract_collection___SimpleCollection___add( variable[3] /*res*/)( variable[3] /*res*/, variable[7]) /*AbstractArray::add*/;
+    variable[7] = CALL_string_search___Match___after( variable[5] /*match*/)( variable[5] /*match*/) /*Match::after*/;
     variable[4] = variable[7] /*i=*/;
     variable[7] = variable[0];
-    variable[7] = ((string_search___Pattern___search_in_t)CALL(variable[7],COLOR_string_search___Pattern___search_in))(variable[7],  variable[1] /*s*/,  variable[4] /*i*/) /*Pattern::search_in*/;
+    variable[7] = CALL_string_search___Pattern___search_in(variable[7])(variable[7],  variable[1] /*s*/,  variable[4] /*i*/) /*Pattern::search_in*/;
     variable[5] = variable[7] /*match=*/;
     continue_3: while(0);
   }
   break_3: while(0);
-  variable[6] = ((array___AbstractArray___length_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Collection___length))( variable[1] /*s*/) /*AbstractArray::length*/;
+  variable[6] = CALL_abstract_collection___Collection___length( variable[1] /*s*/)( variable[1] /*s*/) /*AbstractArray::length*/;
   variable[6] = TAG_Int(UNTAG_Int(variable[6])-UNTAG_Int( variable[4] /*i*/));
   variable[7] = NEW_Match_string_search___Match___init( variable[1] /*s*/,  variable[4] /*i*/, variable[6]); /*new Match*/
   variable[6] = variable[7];
-  ((array___AbstractArray___add_t)CALL( variable[3] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[3] /*res*/, variable[6]) /*AbstractArray::add*/;
+  CALL_abstract_collection___SimpleCollection___add( variable[3] /*res*/)( variable[3] /*res*/, variable[6]) /*AbstractArray::add*/;
   variable[2] =  variable[3] /*res*/;
   goto return_label2;
   return_label2: while(false);
@@ -130,7 +130,7 @@ val_t string_search___BM_Pattern___search_index_in(val_t  self, val_t  param0, v
   variable[2] =  param1;
   variable[4] = TAG_Bool(UNTAG_Int( variable[2] /*from*/)>=UNTAG_Int( TAG_Int(0)));
   if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string_search___BM_Pattern___search_index_in, LOCATE_string_search, 72); nit_exit(1);}
-  variable[5] = ((array___AbstractArray___length_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Collection___length))( variable[1] /*s*/) /*AbstractArray::length*/;
+  variable[5] = CALL_abstract_collection___Collection___length( variable[1] /*s*/)( variable[1] /*s*/) /*AbstractArray::length*/;
   variable[4] = variable[5];
   variable[6] = variable[0];
   variable[6] = ATTR_string_search___BM_Pattern____length(variable[6]) /*BM_Pattern::_length*/;
@@ -149,9 +149,9 @@ val_t string_search___BM_Pattern___search_index_in(val_t  self, val_t  param0, v
       if (UNTAG_Bool(variable[9])) { /* and */
         variable[9] = variable[0];
         variable[9] = ATTR_string_search___BM_Pattern____motif(variable[9]) /*BM_Pattern::_motif*/;
-        variable[9] = ((string___String_____bra_t)CALL(variable[9],COLOR_abstract_collection___Map_____bra))(variable[9],  variable[7] /*i*/) /*String::[]*/;
+        variable[9] = CALL_abstract_collection___Map_____bra(variable[9])(variable[9],  variable[7] /*i*/) /*String::[]*/;
         variable[10] = TAG_Int(UNTAG_Int( variable[7] /*i*/)+UNTAG_Int( variable[6] /*j*/));
-        variable[10] = ((string___String_____bra_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Map_____bra))( variable[1] /*s*/, variable[10]) /*String::[]*/;
+        variable[10] = CALL_abstract_collection___Map_____bra( variable[1] /*s*/)( variable[1] /*s*/, variable[10]) /*String::[]*/;
         variable[9] = TAG_Bool((variable[9])==(variable[10]));
       }
       variable[8] = variable[9];
@@ -188,8 +188,8 @@ val_t string_search___BM_Pattern___search_index_in(val_t  self, val_t  param0, v
       variable[8] = variable[9];
       variable[10] = variable[0];
       variable[11] = TAG_Int(UNTAG_Int( variable[7] /*i*/)+UNTAG_Int( variable[6] /*j*/));
-      variable[11] = ((string___String_____bra_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Map_____bra))( variable[1] /*s*/, variable[11]) /*String::[]*/;
-      variable[10] = ((string_search___BM_Pattern___bc_t)CALL(variable[10],COLOR_string_search___BM_Pattern___bc))(variable[10], variable[11]) /*BM_Pattern::bc*/;
+      variable[11] = CALL_abstract_collection___Map_____bra( variable[1] /*s*/)( variable[1] /*s*/, variable[11]) /*String::[]*/;
+      variable[10] = CALL_string_search___BM_Pattern___bc(variable[10])(variable[10], variable[11]) /*BM_Pattern::bc*/;
       variable[10] = TAG_Int(UNTAG_Int(variable[10])-UNTAG_Int( variable[5] /*m*/));
       variable[10] = TAG_Int(UNTAG_Int(variable[10])+UNTAG_Int( TAG_Int(1)));
       variable[10] = TAG_Int(UNTAG_Int(variable[10])+UNTAG_Int( variable[7] /*i*/));
@@ -221,7 +221,7 @@ val_t string_search___BM_Pattern___search_in(val_t  self, val_t  param0, val_t  
   variable[1] =  param0;
   variable[2] =  param1;
   variable[5] = variable[0];
-  variable[5] = ((string_search___BM_Pattern___search_index_in_t)CALL(variable[5],COLOR_string_search___Pattern___search_index_in))(variable[5],  variable[1] /*s*/,  variable[2] /*from*/) /*BM_Pattern::search_index_in*/;
+  variable[5] = CALL_string_search___Pattern___search_index_in(variable[5])(variable[5],  variable[1] /*s*/,  variable[2] /*from*/) /*BM_Pattern::search_index_in*/;
   variable[4] = variable[5];
   variable[5] = TAG_Bool(UNTAG_Int( variable[4] /*to*/)<UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[5])) { /*if*/
@@ -251,7 +251,7 @@ void string_search___BM_Pattern___init(val_t  self, val_t  param0, int* init_tab
   variable[3] = variable[0];
   ATTR_string_search___BM_Pattern____motif(variable[3]) /*BM_Pattern::_motif*/ =  variable[1] /*motif*/;
   variable[3] = variable[0];
-  variable[4] = ((array___AbstractArray___length_t)CALL( variable[1] /*motif*/,COLOR_abstract_collection___Collection___length))( variable[1] /*motif*/) /*AbstractArray::length*/;
+  variable[4] = CALL_abstract_collection___Collection___length( variable[1] /*motif*/)( variable[1] /*motif*/) /*AbstractArray::length*/;
   ATTR_string_search___BM_Pattern____length(variable[3]) /*BM_Pattern::_length*/ = variable[4];
   variable[3] = variable[0];
   variable[4] = variable[0];
@@ -263,9 +263,9 @@ void string_search___BM_Pattern___init(val_t  self, val_t  param0, int* init_tab
   variable[4] = NEW_ArrayMap_array___ArrayMap___init(); /*new ArrayMap[Char, Int]*/
   ATTR_string_search___BM_Pattern____bc_table(variable[3]) /*BM_Pattern::_bc_table*/ = variable[4];
   variable[3] = variable[0];
-  ((string_search___BM_Pattern___compute_gs_t)CALL(variable[3],COLOR_string_search___BM_Pattern___compute_gs))(variable[3]) /*BM_Pattern::compute_gs*/;
+  CALL_string_search___BM_Pattern___compute_gs(variable[3])(variable[3]) /*BM_Pattern::compute_gs*/;
   variable[3] = variable[0];
-  ((string_search___BM_Pattern___compute_bc_t)CALL(variable[3],COLOR_string_search___BM_Pattern___compute_bc))(variable[3]) /*BM_Pattern::compute_bc*/;
+  CALL_string_search___BM_Pattern___compute_bc(variable[3])(variable[3]) /*BM_Pattern::compute_bc*/;
   return_label10: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_BM_Pattern].i] = 1;
   tracehead = trace.prev;
@@ -281,11 +281,11 @@ val_t string_search___BM_Pattern___bc(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_string_search___BM_Pattern____bc_table(variable[3]) /*BM_Pattern::_bc_table*/;
-  variable[3] = ((abstract_collection___Map___has_key_t)CALL(variable[3],COLOR_abstract_collection___Map___has_key))(variable[3],  variable[1] /*e*/) /*Map::has_key*/;
+  variable[3] = CALL_abstract_collection___Map___has_key(variable[3])(variable[3],  variable[1] /*e*/) /*Map::has_key*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = variable[0];
     variable[3] = ATTR_string_search___BM_Pattern____bc_table(variable[3]) /*BM_Pattern::_bc_table*/;
-    variable[3] = ((abstract_collection___Map_____bra_t)CALL(variable[3],COLOR_abstract_collection___Map_____bra))(variable[3],  variable[1] /*e*/) /*Map::[]*/;
+    variable[3] = CALL_abstract_collection___Map_____bra(variable[3])(variable[3],  variable[1] /*e*/) /*Map::[]*/;
     variable[2] = variable[3];
     goto return_label11;
   } else { /*if*/
@@ -318,10 +318,10 @@ void string_search___BM_Pattern___compute_bc(val_t  self) {
     if (!UNTAG_Bool(variable[5])) break; /* while*/
     variable[5] = variable[0];
     variable[5] = ATTR_string_search___BM_Pattern____bc_table(variable[5]) /*BM_Pattern::_bc_table*/;
-    variable[6] = ((string___String_____bra_t)CALL( variable[2] /*x*/,COLOR_abstract_collection___Map_____bra))( variable[2] /*x*/,  variable[4] /*i*/) /*String::[]*/;
+    variable[6] = CALL_abstract_collection___Map_____bra( variable[2] /*x*/)( variable[2] /*x*/,  variable[4] /*i*/) /*String::[]*/;
     variable[7] = TAG_Int(UNTAG_Int( variable[3] /*m*/)-UNTAG_Int( variable[4] /*i*/));
     variable[7] = TAG_Int(UNTAG_Int(variable[7])-UNTAG_Int( TAG_Int(1)));
-    ((abstract_collection___Map_____braeq_t)CALL(variable[5],COLOR_abstract_collection___Map_____braeq))(variable[5], variable[6], variable[7]) /*Map::[]=*/;
+    CALL_abstract_collection___Map_____braeq(variable[5])(variable[5], variable[6], variable[7]) /*Map::[]=*/;
     variable[4] = TAG_Int(UNTAG_Int(variable[4])+UNTAG_Int( TAG_Int(1))) /*i*/;
     continue_13: while(0);
   }
@@ -403,7 +403,7 @@ val_t string_search___BM_Pattern___suffixes(val_t  self) {
       goto return_label17;
       return_label17: while(false);
       variable[8] = variable[11];
-      ((array___Array_____braeq_t)CALL( variable[4] /*suff*/,COLOR_abstract_collection___Map_____braeq))( variable[4] /*suff*/,  variable[7] /*i*/, variable[8]) /*Array::[]=*/;
+      CALL_abstract_collection___Map_____braeq( variable[4] /*suff*/)( variable[4] /*suff*/,  variable[7] /*i*/, variable[8]) /*Array::[]=*/;
     } else { /*if*/
       variable[8] = TAG_Bool(UNTAG_Int( variable[7] /*i*/)<UNTAG_Int( variable[6] /*g*/));
       if (UNTAG_Bool(variable[8])) { /*if*/
@@ -414,11 +414,11 @@ val_t string_search___BM_Pattern___suffixes(val_t  self) {
         variable[8] = TAG_Bool(UNTAG_Int( variable[6] /*g*/)>=UNTAG_Int( TAG_Int(0)));
         variable[9] = variable[8];
         if (UNTAG_Bool(variable[9])) { /* and */
-          variable[9] = ((string___String_____bra_t)CALL( variable[2] /*x*/,COLOR_abstract_collection___Map_____bra))( variable[2] /*x*/,  variable[6] /*g*/) /*String::[]*/;
+          variable[9] = CALL_abstract_collection___Map_____bra( variable[2] /*x*/)( variable[2] /*x*/,  variable[6] /*g*/) /*String::[]*/;
           variable[10] = TAG_Int(UNTAG_Int( variable[6] /*g*/)+UNTAG_Int( variable[3] /*m*/));
           variable[10] = TAG_Int(UNTAG_Int(variable[10])-UNTAG_Int( TAG_Int(1)));
           variable[10] = TAG_Int(UNTAG_Int(variable[10])-UNTAG_Int( variable[5] /*f*/));
-          variable[10] = ((string___String_____bra_t)CALL( variable[2] /*x*/,COLOR_abstract_collection___Map_____bra))( variable[2] /*x*/, variable[10]) /*String::[]*/;
+          variable[10] = CALL_abstract_collection___Map_____bra( variable[2] /*x*/)( variable[2] /*x*/, variable[10]) /*String::[]*/;
           variable[9] = TAG_Bool((variable[9])==(variable[10]));
         }
         variable[8] = variable[9];
@@ -428,7 +428,7 @@ val_t string_search___BM_Pattern___suffixes(val_t  self) {
       }
       break_18: while(0);
       variable[8] = TAG_Int(UNTAG_Int( variable[5] /*f*/)-UNTAG_Int( variable[6] /*g*/));
-      ((array___Array_____braeq_t)CALL( variable[4] /*suff*/,COLOR_abstract_collection___Map_____braeq))( variable[4] /*suff*/,  variable[7] /*i*/, variable[8]) /*Array::[]=*/;
+      CALL_abstract_collection___Map_____braeq( variable[4] /*suff*/)( variable[4] /*suff*/,  variable[7] /*i*/, variable[8]) /*Array::[]=*/;
     }
     variable[7] = TAG_Int(UNTAG_Int(variable[7])-UNTAG_Int( TAG_Int(1))) /*i*/;
     continue_15: while(0);
@@ -454,7 +454,7 @@ void string_search___BM_Pattern___compute_gs(val_t  self) {
   variable[4] = ATTR_string_search___BM_Pattern____length(variable[4]) /*BM_Pattern::_length*/;
   variable[3] = variable[4];
   variable[5] = variable[0];
-  variable[5] = ((string_search___BM_Pattern___suffixes_t)CALL(variable[5],COLOR_string_search___BM_Pattern___suffixes))(variable[5]) /*BM_Pattern::suffixes*/;
+  variable[5] = CALL_string_search___BM_Pattern___suffixes(variable[5])(variable[5]) /*BM_Pattern::suffixes*/;
   variable[4] = variable[5];
   variable[5] =  TAG_Int(0);
   while (true) { /*while*/
@@ -462,7 +462,7 @@ void string_search___BM_Pattern___compute_gs(val_t  self) {
     if (!UNTAG_Bool(variable[6])) break; /* while*/
     variable[6] = variable[0];
     variable[6] = ATTR_string_search___BM_Pattern____gs(variable[6]) /*BM_Pattern::_gs*/;
-    ((array___Array_____braeq_t)CALL(variable[6],COLOR_abstract_collection___Map_____braeq))(variable[6],  variable[5] /*i*/,  variable[3] /*m*/) /*Array::[]=*/;
+    CALL_abstract_collection___Map_____braeq(variable[6])(variable[6],  variable[5] /*i*/,  variable[3] /*m*/) /*Array::[]=*/;
     variable[5] = TAG_Int(UNTAG_Int(variable[5])+UNTAG_Int( TAG_Int(1))) /*i*/;
     continue_20: while(0);
   }
@@ -532,7 +532,7 @@ void string_search___BM_Pattern___compute_gs(val_t  self) {
           variable[7] = ATTR_string_search___BM_Pattern____gs(variable[7]) /*BM_Pattern::_gs*/;
           variable[8] = TAG_Int(UNTAG_Int( variable[3] /*m*/)-UNTAG_Int( TAG_Int(1)));
           variable[8] = TAG_Int(UNTAG_Int(variable[8])-UNTAG_Int( variable[5] /*i*/));
-          ((array___Array_____braeq_t)CALL(variable[7],COLOR_abstract_collection___Map_____braeq))(variable[7],  variable[6] /*j*/, variable[8]) /*Array::[]=*/;
+          CALL_abstract_collection___Map_____braeq(variable[7])(variable[7],  variable[6] /*j*/, variable[8]) /*Array::[]=*/;
         }
         variable[6] = TAG_Int(UNTAG_Int(variable[6])+UNTAG_Int( TAG_Int(1))) /*j*/;
         continue_23: while(0);
@@ -572,7 +572,7 @@ void string_search___BM_Pattern___compute_gs(val_t  self) {
     variable[8] = TAG_Int(UNTAG_Int(variable[8])-UNTAG_Int(variable[9]));
     variable[9] = TAG_Int(UNTAG_Int( variable[3] /*m*/)-UNTAG_Int( TAG_Int(1)));
     variable[9] = TAG_Int(UNTAG_Int(variable[9])-UNTAG_Int( variable[5] /*i*/));
-    ((array___Array_____braeq_t)CALL(variable[7],COLOR_abstract_collection___Map_____braeq))(variable[7], variable[8], variable[9]) /*Array::[]=*/;
+    CALL_abstract_collection___Map_____braeq(variable[7])(variable[7], variable[8], variable[9]) /*Array::[]=*/;
     variable[5] = TAG_Int(UNTAG_Int(variable[5])+UNTAG_Int( TAG_Int(1))) /*i*/;
     continue_25: while(0);
   }
@@ -594,7 +594,7 @@ val_t string_search___Match___to_s(val_t  self) {
   variable[3] = ATTR_string_search___Match____from(variable[3]) /*Match::_from*/;
   variable[4] = variable[0];
   variable[4] = ATTR_string_search___Match____length(variable[4]) /*Match::_length*/;
-  variable[2] = ((string___String___substring_t)CALL(variable[2],COLOR_string___String___substring))(variable[2], variable[3], variable[4]) /*String::substring*/;
+  variable[2] = CALL_string___String___substring(variable[2])(variable[2], variable[3], variable[4]) /*String::substring*/;
   variable[1] = variable[2];
   goto return_label27;
   return_label27: while(false);
@@ -657,14 +657,14 @@ void string_search___Match___init(val_t  self, val_t  param0, val_t  param1, val
   variable[2] =  param1;
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Match].i]) return;
-  variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*s*/ ==  NIT_NULL /*null*/) || (( variable[1] /*s*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*s*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*s*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*s*/,COLOR_kernel___Object_____eqeq))( variable[1] /*s*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*s*/ ==  NIT_NULL /*null*/) || (( variable[1] /*s*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*s*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*s*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*s*/)( variable[1] /*s*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", " 'non_null_string' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string_search___Match___init, LOCATE_string_search, 223); nit_exit(1);}
   variable[5] = TAG_Bool(UNTAG_Int( variable[3] /*len*/)>=UNTAG_Int( TAG_Int(0)));
   if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", " 'positive_length' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string_search___Match___init, LOCATE_string_search, 224); nit_exit(1);}
   variable[5] = TAG_Bool(UNTAG_Int( variable[2] /*f*/)>=UNTAG_Int( TAG_Int(0)));
   if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", " 'valid_from' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string_search___Match___init, LOCATE_string_search, 225); nit_exit(1);}
   variable[5] = TAG_Int(UNTAG_Int( variable[2] /*f*/)+UNTAG_Int( variable[3] /*len*/));
-  variable[6] = ((array___AbstractArray___length_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Collection___length))( variable[1] /*s*/) /*AbstractArray::length*/;
+  variable[6] = CALL_abstract_collection___Collection___length( variable[1] /*s*/)( variable[1] /*s*/) /*AbstractArray::length*/;
   variable[5] = TAG_Bool(UNTAG_Int(variable[5])<=UNTAG_Int(variable[6]));
   if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", " 'valid_after' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string_search___Match___init, LOCATE_string_search, 226); nit_exit(1);}
   variable[5] = variable[0];
@@ -687,12 +687,12 @@ val_t string_search___Char___search_index_in(val_t  self, val_t  param0, val_t  
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  variable[5] = ((array___AbstractArray___length_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Collection___length))( variable[1] /*s*/) /*AbstractArray::length*/;
+  variable[5] = CALL_abstract_collection___Collection___length( variable[1] /*s*/)( variable[1] /*s*/) /*AbstractArray::length*/;
   variable[4] = variable[5];
   while (true) { /*while*/
     variable[5] = TAG_Bool(UNTAG_Int( variable[2] /*from*/)<UNTAG_Int( variable[4] /*stop*/));
     if (!UNTAG_Bool(variable[5])) break; /* while*/
-    variable[5] = ((string___String_____bra_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Map_____bra))( variable[1] /*s*/,  variable[2] /*from*/) /*String::[]*/;
+    variable[5] = CALL_abstract_collection___Map_____bra( variable[1] /*s*/)( variable[1] /*s*/,  variable[2] /*from*/) /*String::[]*/;
     variable[6] = variable[0];
     variable[5] = TAG_Bool((variable[5])==(variable[6]));
     if (UNTAG_Bool(variable[5])) { /*if*/
@@ -720,7 +720,7 @@ val_t string_search___Char___search_in(val_t  self, val_t  param0, val_t  param1
   variable[1] =  param0;
   variable[2] =  param1;
   variable[5] = variable[0];
-  variable[5] = ((string_search___Char___search_index_in_t)CALL(variable[5],COLOR_string_search___Pattern___search_index_in))(variable[5],  variable[1] /*s*/,  variable[2] /*from*/) /*Char::search_index_in*/;
+  variable[5] = CALL_string_search___Pattern___search_index_in(variable[5])(variable[5],  variable[1] /*s*/,  variable[2] /*from*/) /*Char::search_index_in*/;
   variable[4] = variable[5];
   variable[5] = TAG_Bool(UNTAG_Int( variable[4] /*pos*/)<UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[5])) { /*if*/
@@ -746,9 +746,9 @@ val_t string_search___String___search_index_in(val_t  self, val_t  param0, val_t
   variable[2] =  param1;
   variable[4] = TAG_Bool(UNTAG_Int( variable[2] /*from*/)>=UNTAG_Int( TAG_Int(0)));
   if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_string_search___String___search_index_in, LOCATE_string_search, 260); nit_exit(1);}
-  variable[5] = ((array___AbstractArray___length_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Collection___length))( variable[1] /*s*/) /*AbstractArray::length*/;
+  variable[5] = CALL_abstract_collection___Collection___length( variable[1] /*s*/)( variable[1] /*s*/) /*AbstractArray::length*/;
   variable[6] = variable[0];
-  variable[6] = ((array___AbstractArray___length_t)CALL(variable[6],COLOR_abstract_collection___Collection___length))(variable[6]) /*AbstractArray::length*/;
+  variable[6] = CALL_abstract_collection___Collection___length(variable[6])(variable[6]) /*AbstractArray::length*/;
   variable[5] = TAG_Int(UNTAG_Int(variable[5])-UNTAG_Int(variable[6]));
   variable[5] = TAG_Int(UNTAG_Int(variable[5])+UNTAG_Int( TAG_Int(1)));
   variable[4] = variable[5];
@@ -756,7 +756,7 @@ val_t string_search___String___search_index_in(val_t  self, val_t  param0, val_t
     variable[5] = TAG_Bool(UNTAG_Int( variable[2] /*from*/)<UNTAG_Int( variable[4] /*stop*/));
     if (!UNTAG_Bool(variable[5])) break; /* while*/
     variable[6] = variable[0];
-    variable[6] = ((array___AbstractArray___length_t)CALL(variable[6],COLOR_abstract_collection___Collection___length))(variable[6]) /*AbstractArray::length*/;
+    variable[6] = CALL_abstract_collection___Collection___length(variable[6])(variable[6]) /*AbstractArray::length*/;
     variable[6] = TAG_Int(UNTAG_Int(variable[6])-UNTAG_Int( TAG_Int(1)));
     variable[5] = variable[6];
     while (true) { /*while*/
@@ -764,9 +764,9 @@ val_t string_search___String___search_index_in(val_t  self, val_t  param0, val_t
       variable[7] = variable[6];
       if (UNTAG_Bool(variable[7])) { /* and */
         variable[7] = variable[0];
-        variable[7] = ((string___String_____bra_t)CALL(variable[7],COLOR_abstract_collection___Map_____bra))(variable[7],  variable[5] /*i*/) /*String::[]*/;
+        variable[7] = CALL_abstract_collection___Map_____bra(variable[7])(variable[7],  variable[5] /*i*/) /*String::[]*/;
         variable[8] = TAG_Int(UNTAG_Int( variable[5] /*i*/)+UNTAG_Int( variable[2] /*from*/));
-        variable[8] = ((string___String_____bra_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Map_____bra))( variable[1] /*s*/, variable[8]) /*String::[]*/;
+        variable[8] = CALL_abstract_collection___Map_____bra( variable[1] /*s*/)( variable[1] /*s*/, variable[8]) /*String::[]*/;
         variable[7] = TAG_Bool((variable[7])==(variable[8]));
       }
       variable[6] = variable[7];
@@ -801,7 +801,7 @@ val_t string_search___String___search_in(val_t  self, val_t  param0, val_t  para
   variable[1] =  param0;
   variable[2] =  param1;
   variable[5] = variable[0];
-  variable[5] = ((string_search___String___search_index_in_t)CALL(variable[5],COLOR_string_search___Pattern___search_index_in))(variable[5],  variable[1] /*s*/,  variable[2] /*from*/) /*String::search_index_in*/;
+  variable[5] = CALL_string_search___Pattern___search_index_in(variable[5])(variable[5],  variable[1] /*s*/,  variable[2] /*from*/) /*String::search_index_in*/;
   variable[4] = variable[5];
   variable[5] = TAG_Bool(UNTAG_Int( variable[4] /*pos*/)<UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[5])) { /*if*/
@@ -809,7 +809,7 @@ val_t string_search___String___search_in(val_t  self, val_t  param0, val_t  para
     goto return_label36;
   } else { /*if*/
     variable[5] = variable[0];
-    variable[5] = ((array___AbstractArray___length_t)CALL(variable[5],COLOR_abstract_collection___Collection___length))(variable[5]) /*AbstractArray::length*/;
+    variable[5] = CALL_abstract_collection___Collection___length(variable[5])(variable[5]) /*AbstractArray::length*/;
     variable[6] = NEW_Match_string_search___Match___init( variable[1] /*s*/,  variable[4] /*pos*/, variable[5]); /*new Match*/
     variable[5] = variable[6];
     variable[3] = variable[5];
@@ -828,7 +828,7 @@ val_t string_search___String___search(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((string_search___Pattern___search_in_t)CALL( variable[1] /*p*/,COLOR_string_search___Pattern___search_in))( variable[1] /*p*/, variable[3],  TAG_Int(0)) /*Pattern::search_in*/;
+  variable[3] = CALL_string_search___Pattern___search_in( variable[1] /*p*/)( variable[1] /*p*/, variable[3],  TAG_Int(0)) /*Pattern::search_in*/;
   variable[2] = variable[3];
   goto return_label37;
   return_label37: while(false);
@@ -845,7 +845,7 @@ val_t string_search___String___search_from(val_t  self, val_t  param0, val_t  pa
   variable[1] =  param0;
   variable[2] =  param1;
   variable[4] = variable[0];
-  variable[4] = ((string_search___Pattern___search_in_t)CALL( variable[1] /*p*/,COLOR_string_search___Pattern___search_in))( variable[1] /*p*/, variable[4],  variable[2] /*from*/) /*Pattern::search_in*/;
+  variable[4] = CALL_string_search___Pattern___search_in( variable[1] /*p*/)( variable[1] /*p*/, variable[4],  variable[2] /*from*/) /*Pattern::search_in*/;
   variable[3] = variable[4];
   goto return_label38;
   return_label38: while(false);
@@ -861,7 +861,7 @@ val_t string_search___String___search_all(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((string_search___Pattern___search_all_in_t)CALL( variable[1] /*p*/,COLOR_string_search___Pattern___search_all_in))( variable[1] /*p*/, variable[3]) /*Pattern::search_all_in*/;
+  variable[3] = CALL_string_search___Pattern___search_all_in( variable[1] /*p*/)( variable[1] /*p*/, variable[3]) /*Pattern::search_all_in*/;
   variable[2] = variable[3];
   goto return_label39;
   return_label39: while(false);
@@ -877,22 +877,22 @@ val_t string_search___String___split_with(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[4] = variable[0];
-  variable[4] = ((string_search___Pattern___split_in_t)CALL( variable[1] /*p*/,COLOR_string_search___Pattern___split_in))( variable[1] /*p*/, variable[4]) /*Pattern::split_in*/;
+  variable[4] = CALL_string_search___Pattern___split_in( variable[1] /*p*/)( variable[1] /*p*/, variable[4]) /*Pattern::split_in*/;
   variable[3] = variable[4];
-  variable[5] = ((array___AbstractArray___length_t)CALL( variable[3] /*matches*/,COLOR_abstract_collection___Collection___length))( variable[3] /*matches*/) /*AbstractArray::length*/;
+  variable[5] = CALL_abstract_collection___Collection___length( variable[3] /*matches*/)( variable[3] /*matches*/) /*AbstractArray::length*/;
   variable[6] = NEW_Array_array___Array___with_capacity(variable[5]); /*new Array[String]*/
   variable[5] = variable[6];
   variable[4] = variable[5];
-  variable[5] = ((array___AbstractArray___iterator_t)CALL( variable[3] /*matches*/,COLOR_abstract_collection___Collection___iterator))( variable[3] /*matches*/) /*AbstractArray::iterator*/;
+  variable[5] = CALL_abstract_collection___Collection___iterator( variable[3] /*matches*/)( variable[3] /*matches*/) /*AbstractArray::iterator*/;
   while (true) { /*for*/
-    variable[6] = ((array___ArrayIterator___is_ok_t)CALL(variable[5],COLOR_abstract_collection___Iterator___is_ok))(variable[5]) /*ArrayIterator::is_ok*/;
+    variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[6])) break; /*for*/
-    variable[6] = ((array___ArrayIterator___item_t)CALL(variable[5],COLOR_abstract_collection___Iterator___item))(variable[5]) /*ArrayIterator::item*/;
+    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/;
     variable[7] = variable[6];
-    variable[8] = ((string_search___Match___to_s_t)CALL( variable[7] /*m*/,COLOR_string___Object___to_s))( variable[7] /*m*/) /*Match::to_s*/;
-    ((array___AbstractArray___add_t)CALL( variable[4] /*res*/,COLOR_abstract_collection___SimpleCollection___add))( variable[4] /*res*/, variable[8]) /*AbstractArray::add*/;
+    variable[8] = CALL_string___Object___to_s( variable[7] /*m*/)( variable[7] /*m*/) /*Match::to_s*/;
+    CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/, variable[8]) /*AbstractArray::add*/;
     continue_41: while(0);
-    ((array___ArrayIterator___next_t)CALL(variable[5],COLOR_abstract_collection___Iterator___next))(variable[5]) /*ArrayIterator::next*/;
+    CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*ArrayIterator::next*/;
   }
   break_41: while(0);
   variable[2] =  variable[4] /*res*/;
@@ -909,7 +909,7 @@ val_t string_search___String___split(val_t  self) {
   trace.file = LOCATE_string_search;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((string_search___String___split_with_t)CALL(variable[2],COLOR_string_search___String___split_with))(variable[2],  TAG_Char('\n')) /*String::split_with*/;
+  variable[2] = CALL_string_search___String___split_with(variable[2])(variable[2],  TAG_Char('\n')) /*String::split_with*/;
   variable[1] = variable[2];
   goto return_label42;
   return_label42: while(false);

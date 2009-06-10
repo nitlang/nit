@@ -23,7 +23,7 @@ val_t type_formal___MMTypeFormal___to_s(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_type_formal___MMTypeFormal____name(variable[2]) /*MMTypeFormal::_name*/;
-  variable[2] = ((symbol___Symbol___to_s_t)CALL(variable[2],COLOR_string___Object___to_s))(variable[2]) /*Symbol::to_s*/;
+  variable[2] = CALL_string___Object___to_s(variable[2])(variable[2]) /*Symbol::to_s*/;
   variable[1] = variable[2];
   goto return_label1;
   return_label1: while(false);
@@ -39,14 +39,14 @@ val_t type_formal___MMTypeFormal___local_class(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_type_formal___MMTypeFormal____bound(variable[2]) /*MMTypeFormal::_bound*/;
-  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[2])) { /*if*/
     variable[1] =  NIT_NULL /*null*/;
     goto return_label2;
   }
   variable[2] = variable[0];
   variable[2] = ATTR_type_formal___MMTypeFormal____bound(variable[2]) /*MMTypeFormal::_bound*/;
-  variable[2] = ((static_type___MMType___local_class_t)CALL(variable[2],COLOR_static_type___MMType___local_class))(variable[2]) /*MMType::local_class*/;
+  variable[2] = CALL_static_type___MMType___local_class(variable[2])(variable[2]) /*MMType::local_class*/;
   variable[1] = variable[2];
   goto return_label2;
   return_label2: while(false);
@@ -61,16 +61,16 @@ val_t type_formal___MMTypeFormal_____l(val_t  self, val_t  param0) {
   trace.file = LOCATE_type_formal;
   variable[0] =  self;
   variable[1] =  param0;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*t*/ ==  NIT_NULL /*null*/) || (( variable[1] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*t*/,COLOR_kernel___Object_____eqeq))( variable[1] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*t*/ ==  NIT_NULL /*null*/) || (( variable[1] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*t*/)( variable[1] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   variable[4] = variable[3];
   if (UNTAG_Bool(variable[4])) { /* and */
     variable[4] = variable[0];
-    variable[4] = TAG_Bool(( variable[1] /*t*/ == variable[4]) || (( variable[1] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*t*/,variable[4])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*t*/,COLOR_kernel___Object_____eqeq))( variable[1] /*t*/, variable[4]) /*Object::==*/)))));
+    variable[4] = TAG_Bool(( variable[1] /*t*/ == variable[4]) || (( variable[1] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*t*/,variable[4])):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*t*/)( variable[1] /*t*/, variable[4]) /*Object::==*/)))));
     variable[5] = variable[4];
     if (!UNTAG_Bool(variable[5])) { /* or */
       variable[5] = variable[0];
       variable[5] = ATTR_type_formal___MMTypeFormal____bound(variable[5]) /*MMTypeFormal::_bound*/;
-      variable[5] = ((static_type___MMType___is_supertype_t)CALL( variable[1] /*t*/,COLOR_static_type___MMType___is_supertype))( variable[1] /*t*/, variable[5]) /*MMType::is_supertype*/;
+      variable[5] = CALL_static_type___MMType___is_supertype( variable[1] /*t*/)( variable[1] /*t*/, variable[5]) /*MMType::is_supertype*/;
     }
     variable[4] = variable[5];
   }
@@ -91,7 +91,7 @@ val_t type_formal___MMTypeFormal___is_supertype(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_type_formal___MMTypeFormal____bound(variable[3]) /*MMTypeFormal::_bound*/;
-  variable[3] = ((static_type___MMType___is_supertype_t)CALL(variable[3],COLOR_static_type___MMType___is_supertype))(variable[3],  variable[1] /*t*/) /*MMType::is_supertype*/;
+  variable[3] = CALL_static_type___MMType___is_supertype(variable[3])(variable[3],  variable[1] /*t*/) /*MMType::is_supertype*/;
   variable[2] = variable[3];
   goto return_label4;
   return_label4: while(false);
@@ -107,7 +107,7 @@ val_t type_formal___MMTypeFormal___direct_type(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_type_formal___MMTypeFormal____bound(variable[2]) /*MMTypeFormal::_bound*/;
-  variable[2] = ((type_formal___MMType___direct_type_t)CALL(variable[2],COLOR_type_formal___MMType___direct_type))(variable[2]) /*MMType::direct_type*/;
+  variable[2] = CALL_type_formal___MMType___direct_type(variable[2])(variable[2]) /*MMType::direct_type*/;
   variable[1] = variable[2];
   goto return_label5;
   return_label5: while(false);

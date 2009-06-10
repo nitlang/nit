@@ -13,47 +13,47 @@ extern const classtable_elt_t VFT_MMSpecAncestor[];
 extern const classtable_elt_t VFT_MMDefaultAncestor[];
 extern const char *LOCATE_inheritance;
 extern const int SFT_inheritance[];
-#define COLOR_inheritance___MMModule___type_any SFT_inheritance[0]
-#define COLOR_inheritance___MMModule___import_global_classes SFT_inheritance[1]
-#define COLOR_inheritance___MMModule___import_local_classes SFT_inheritance[2]
-#define COLOR_inheritance___MMLocalClass____direct_parents SFT_inheritance[3]
-#define COLOR_inheritance___MMLocalClass____computing_super SFT_inheritance[4]
-#define COLOR_inheritance___MMLocalClass___compute_super_classes SFT_inheritance[5]
-#define COLOR_inheritance___MMLocalClass___compute_ancestors SFT_inheritance[6]
-#define COLOR_inheritance___MMLocalClass___inherit_global_properties SFT_inheritance[7]
-#define COLOR_inheritance___MMLocalClass___make_visible_an_inherited_global_property SFT_inheritance[8]
-#define COLOR_inheritance___MMLocalClass___add_direct_parent SFT_inheritance[9]
-#define COLOR_inheritance___MMLocalClass___computed_super_classes SFT_inheritance[10]
-#define COLOR_inheritance___MMLocalClass___computed_ancestors SFT_inheritance[11]
-#define COLOR_inheritance___MMLocalClass___ancestor_for SFT_inheritance[12]
-#define COLOR_SUPER_inheritance___MMLocalClass_____bra SFT_inheritance[13]
-#define COLOR_inheritance___MMLocalClass___add_default_any_class SFT_inheritance[14]
-#define COLOR_inheritance___MMLocalClass___add_super_classes SFT_inheritance[15]
-#define COLOR_inheritance___MMLocalClass___add_explicit_classes SFT_inheritance[16]
-#define COLOR_inheritance___MMLocalClass___compute_super_parents SFT_inheritance[17]
-#define COLOR_inheritance___MMLocalClass___build_ancestors SFT_inheritance[18]
-#define COLOR_inheritance___MMLocalClass___group_ancestors SFT_inheritance[19]
-#define COLOR_inheritance___MMLocalClass___merge_ancestors SFT_inheritance[20]
-#define COLOR_inheritance___MMLocalClass___inherit_local_property SFT_inheritance[21]
-#define COLOR_inheritance___MMLocalProperty___inherit_global SFT_inheritance[22]
-#define COLOR_inheritance___MMAncestor___add_in SFT_inheritance[23]
-#define ID_MMImplicitLocalClass SFT_inheritance[24]
-#define COLOR_MMImplicitLocalClass SFT_inheritance[25]
-#define INIT_TABLE_POS_MMImplicitLocalClass SFT_inheritance[26]
-#define COLOR_inheritance___MMImplicitLocalClass___init SFT_inheritance[27]
-#define ID_MMRefineAncestor SFT_inheritance[28]
-#define COLOR_MMRefineAncestor SFT_inheritance[29]
-#define COLOR_inheritance___MMRefineAncestor____local_class SFT_inheritance[30]
-#define INIT_TABLE_POS_MMRefineAncestor SFT_inheritance[31]
-#define COLOR_inheritance___MMRefineAncestor___init SFT_inheritance[32]
-#define ID_MMSpecAncestor SFT_inheritance[33]
-#define COLOR_MMSpecAncestor SFT_inheritance[34]
-#define INIT_TABLE_POS_MMSpecAncestor SFT_inheritance[35]
-#define COLOR_inheritance___MMSpecAncestor___init SFT_inheritance[36]
-#define ID_MMDefaultAncestor SFT_inheritance[37]
-#define COLOR_MMDefaultAncestor SFT_inheritance[38]
-#define INIT_TABLE_POS_MMDefaultAncestor SFT_inheritance[39]
-#define COLOR_inheritance___MMDefaultAncestor___init SFT_inheritance[40]
+#define CALL_inheritance___MMModule___type_any(recv) ((inheritance___MMModule___type_any_t)CALL((recv), (SFT_inheritance[0] + 0)))
+#define CALL_inheritance___MMModule___import_global_classes(recv) ((inheritance___MMModule___import_global_classes_t)CALL((recv), (SFT_inheritance[0] + 1)))
+#define CALL_inheritance___MMModule___import_local_classes(recv) ((inheritance___MMModule___import_local_classes_t)CALL((recv), (SFT_inheritance[0] + 2)))
+#define ATTR_inheritance___MMLocalClass____direct_parents(recv) ATTR(recv, (SFT_inheritance[1] + 0))
+#define ATTR_inheritance___MMLocalClass____computing_super(recv) ATTR(recv, (SFT_inheritance[1] + 1))
+#define CALL_inheritance___MMLocalClass___compute_super_classes(recv) ((inheritance___MMLocalClass___compute_super_classes_t)CALL((recv), (SFT_inheritance[2] + 0)))
+#define CALL_inheritance___MMLocalClass___compute_ancestors(recv) ((inheritance___MMLocalClass___compute_ancestors_t)CALL((recv), (SFT_inheritance[2] + 1)))
+#define CALL_inheritance___MMLocalClass___inherit_global_properties(recv) ((inheritance___MMLocalClass___inherit_global_properties_t)CALL((recv), (SFT_inheritance[2] + 2)))
+#define CALL_inheritance___MMLocalClass___make_visible_an_inherited_global_property(recv) ((inheritance___MMLocalClass___make_visible_an_inherited_global_property_t)CALL((recv), (SFT_inheritance[2] + 3)))
+#define CALL_inheritance___MMLocalClass___add_direct_parent(recv) ((inheritance___MMLocalClass___add_direct_parent_t)CALL((recv), (SFT_inheritance[2] + 4)))
+#define CALL_inheritance___MMLocalClass___computed_super_classes(recv) ((inheritance___MMLocalClass___computed_super_classes_t)CALL((recv), (SFT_inheritance[2] + 5)))
+#define CALL_inheritance___MMLocalClass___computed_ancestors(recv) ((inheritance___MMLocalClass___computed_ancestors_t)CALL((recv), (SFT_inheritance[2] + 6)))
+#define CALL_inheritance___MMLocalClass___ancestor_for(recv) ((inheritance___MMLocalClass___ancestor_for_t)CALL((recv), (SFT_inheritance[2] + 7)))
+#define CALL_SUPER_inheritance___MMLocalClass_____bra(recv) ((inheritance___MMLocalClass_____bra_t)CALL((recv), (SFT_inheritance[2] + 8)))
+#define CALL_inheritance___MMLocalClass___add_default_any_class(recv) ((inheritance___MMLocalClass___add_default_any_class_t)CALL((recv), (SFT_inheritance[2] + 9)))
+#define CALL_inheritance___MMLocalClass___add_super_classes(recv) ((inheritance___MMLocalClass___add_super_classes_t)CALL((recv), (SFT_inheritance[2] + 10)))
+#define CALL_inheritance___MMLocalClass___add_explicit_classes(recv) ((inheritance___MMLocalClass___add_explicit_classes_t)CALL((recv), (SFT_inheritance[2] + 11)))
+#define CALL_inheritance___MMLocalClass___compute_super_parents(recv) ((inheritance___MMLocalClass___compute_super_parents_t)CALL((recv), (SFT_inheritance[2] + 12)))
+#define CALL_inheritance___MMLocalClass___build_ancestors(recv) ((inheritance___MMLocalClass___build_ancestors_t)CALL((recv), (SFT_inheritance[2] + 13)))
+#define CALL_inheritance___MMLocalClass___group_ancestors(recv) ((inheritance___MMLocalClass___group_ancestors_t)CALL((recv), (SFT_inheritance[2] + 14)))
+#define CALL_inheritance___MMLocalClass___merge_ancestors(recv) ((inheritance___MMLocalClass___merge_ancestors_t)CALL((recv), (SFT_inheritance[2] + 15)))
+#define CALL_inheritance___MMLocalClass___inherit_local_property(recv) ((inheritance___MMLocalClass___inherit_local_property_t)CALL((recv), (SFT_inheritance[2] + 16)))
+#define CALL_inheritance___MMLocalProperty___inherit_global(recv) ((inheritance___MMLocalProperty___inherit_global_t)CALL((recv), (SFT_inheritance[3] + 0)))
+#define CALL_inheritance___MMAncestor___add_in(recv) ((inheritance___MMAncestor___add_in_t)CALL((recv), (SFT_inheritance[4] + 0)))
+#define ID_MMImplicitLocalClass (SFT_inheritance[5])
+#define COLOR_MMImplicitLocalClass (SFT_inheritance[6])
+#define INIT_TABLE_POS_MMImplicitLocalClass (SFT_inheritance[7] + 0)
+#define CALL_inheritance___MMImplicitLocalClass___init(recv) ((inheritance___MMImplicitLocalClass___init_t)CALL((recv), (SFT_inheritance[7] + 1)))
+#define ID_MMRefineAncestor (SFT_inheritance[8])
+#define COLOR_MMRefineAncestor (SFT_inheritance[9])
+#define ATTR_inheritance___MMRefineAncestor____local_class(recv) ATTR(recv, (SFT_inheritance[10] + 0))
+#define INIT_TABLE_POS_MMRefineAncestor (SFT_inheritance[11] + 0)
+#define CALL_inheritance___MMRefineAncestor___init(recv) ((inheritance___MMRefineAncestor___init_t)CALL((recv), (SFT_inheritance[11] + 1)))
+#define ID_MMSpecAncestor (SFT_inheritance[12])
+#define COLOR_MMSpecAncestor (SFT_inheritance[13])
+#define INIT_TABLE_POS_MMSpecAncestor (SFT_inheritance[14] + 0)
+#define CALL_inheritance___MMSpecAncestor___init(recv) ((inheritance___MMSpecAncestor___init_t)CALL((recv), (SFT_inheritance[14] + 1)))
+#define ID_MMDefaultAncestor (SFT_inheritance[15])
+#define COLOR_MMDefaultAncestor (SFT_inheritance[16])
+#define INIT_TABLE_POS_MMDefaultAncestor (SFT_inheritance[17] + 0)
+#define CALL_inheritance___MMDefaultAncestor___init(recv) ((inheritance___MMDefaultAncestor___init_t)CALL((recv), (SFT_inheritance[17] + 1)))
 val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2);
 typedef val_t (* inheritance___MMModule___type_any_t)(val_t  self);
 val_t inheritance___MMModule___type_any(val_t  self);
@@ -68,8 +68,6 @@ val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p
 typedef val_t (* inheritance___MMLocalClass_____bra_t)(val_t  self, val_t  param0);
 val_t inheritance___MMLocalClass_____bra(val_t  self, val_t  param0);
 #define LOCATE_inheritance___MMLocalClass_____bra "inheritance::MMLocalClass::(abstractmetamodel::MMLocalClass::[])"
-#define ATTR_inheritance___MMLocalClass____direct_parents(recv) ATTR(recv, COLOR_inheritance___MMLocalClass____direct_parents)
-#define ATTR_inheritance___MMLocalClass____computing_super(recv) ATTR(recv, COLOR_inheritance___MMLocalClass____computing_super)
 typedef void (* inheritance___MMLocalClass___compute_super_classes_t)(val_t  self);
 void inheritance___MMLocalClass___compute_super_classes(val_t  self);
 #define LOCATE_inheritance___MMLocalClass___compute_super_classes "inheritance::MMLocalClass::compute_super_classes"
@@ -133,7 +131,6 @@ val_t NEW_MMImplicitLocalClass_inheritance___MMImplicitLocalClass___init(val_t p
 typedef val_t (* inheritance___MMRefineAncestor___local_class_t)(val_t  self);
 val_t inheritance___MMRefineAncestor___local_class(val_t  self);
 #define LOCATE_inheritance___MMRefineAncestor___local_class "inheritance::MMRefineAncestor::(static_type::MMAncestor::local_class)"
-#define ATTR_inheritance___MMRefineAncestor____local_class(recv) ATTR(recv, COLOR_inheritance___MMRefineAncestor____local_class)
 typedef void (* inheritance___MMRefineAncestor___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void inheritance___MMRefineAncestor___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
 #define LOCATE_inheritance___MMRefineAncestor___init "inheritance::MMRefineAncestor::init"

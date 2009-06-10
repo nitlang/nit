@@ -26,7 +26,7 @@ val_t list___List___is_empty(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_list___List____head(variable[2]) /*List::_head*/;
-  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))));
   variable[1] = variable[2];
   goto return_label1;
   return_label1: while(false);
@@ -45,10 +45,10 @@ val_t list___List___length(val_t  self) {
   variable[4] = ATTR_list___List____head(variable[4]) /*List::_head*/;
   variable[3] = variable[4];
   while (true) { /*while*/
-    variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*t*/,COLOR_kernel___Object_____eqeq))( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*t*/)( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
     if (!UNTAG_Bool(variable[4])) break; /* while*/
     variable[2] = TAG_Int(UNTAG_Int(variable[2])+UNTAG_Int( TAG_Int(1))) /*l*/;
-    variable[4] = ((list___ListNode___next_t)CALL( variable[3] /*t*/,COLOR_list___ListNode___next))( variable[3] /*t*/) /*ListNode::next*/;
+    variable[4] = CALL_list___ListNode___next( variable[3] /*t*/)( variable[3] /*t*/) /*ListNode::next*/;
     variable[3] = variable[4] /*t=*/;
     continue_3: while(0);
   }
@@ -70,8 +70,8 @@ val_t list___List___has(val_t  self, val_t  param0) {
   variable[3] = variable[0];
   variable[4] = variable[0];
   variable[4] = ATTR_list___List____head(variable[4]) /*List::_head*/;
-  variable[3] = ((list___List___search_node_after_t)CALL(variable[3],COLOR_list___List___search_node_after))(variable[3],  variable[1] /*e*/, variable[4]) /*List::search_node_after*/;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = CALL_list___List___search_node_after(variable[3])(variable[3],  variable[1] /*e*/, variable[4]) /*List::search_node_after*/;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   variable[2] = variable[3];
   goto return_label4;
   return_label4: while(false);
@@ -90,15 +90,15 @@ val_t list___List___has_only(val_t  self, val_t  param0) {
   variable[4] = ATTR_list___List____head(variable[4]) /*List::_head*/;
   variable[3] = variable[4];
   while (true) { /*while*/
-    variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*node*/ ==  NIT_NULL /*null*/) || (( variable[3] /*node*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*node*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*node*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*node*/,COLOR_kernel___Object_____eqeq))( variable[3] /*node*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*node*/ ==  NIT_NULL /*null*/) || (( variable[3] /*node*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*node*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*node*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*node*/)( variable[3] /*node*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
     if (!UNTAG_Bool(variable[4])) break; /* while*/
-    variable[4] = ((abstract_collection___Container___item_t)CALL( variable[3] /*node*/,COLOR_abstract_collection___Container___item))( variable[3] /*node*/) /*Container::item*/;
-    variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  variable[1] /*e*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], variable[1] /*e*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  variable[1] /*e*/) /*Object::==*/)))))));
+    variable[4] = CALL_abstract_collection___Container___item( variable[3] /*node*/)( variable[3] /*node*/) /*Container::item*/;
+    variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  variable[1] /*e*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], variable[1] /*e*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  variable[1] /*e*/) /*Object::==*/)))))));
     if (UNTAG_Bool(variable[4])) { /*if*/
       variable[2] =  TAG_Bool(false);
       goto return_label5;
     }
-    variable[4] = ((list___ListNode___next_t)CALL( variable[3] /*node*/,COLOR_list___ListNode___next))( variable[3] /*node*/) /*ListNode::next*/;
+    variable[4] = CALL_list___ListNode___next( variable[3] /*node*/)( variable[3] /*node*/) /*ListNode::next*/;
     variable[3] = variable[4] /*node=*/;
     continue_6: while(0);
   }
@@ -122,14 +122,14 @@ val_t list___List___count(val_t  self, val_t  param0) {
   variable[5] = ATTR_list___List____head(variable[5]) /*List::_head*/;
   variable[4] = variable[5];
   while (true) { /*while*/
-    variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*node*/ ==  NIT_NULL /*null*/) || (( variable[4] /*node*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*node*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*node*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*node*/,COLOR_kernel___Object_____eqeq))( variable[4] /*node*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*node*/ ==  NIT_NULL /*null*/) || (( variable[4] /*node*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[4] /*node*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*node*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[4] /*node*/)( variable[4] /*node*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
     if (!UNTAG_Bool(variable[5])) break; /* while*/
-    variable[5] = ((abstract_collection___Container___item_t)CALL( variable[4] /*node*/,COLOR_abstract_collection___Container___item))( variable[4] /*node*/) /*Container::item*/;
-    variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[5] ==  variable[1] /*e*/) || ((variable[5] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], variable[1] /*e*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[5],COLOR_kernel___Object_____eqeq))(variable[5],  variable[1] /*e*/) /*Object::==*/)))))));
+    variable[5] = CALL_abstract_collection___Container___item( variable[4] /*node*/)( variable[4] /*node*/) /*Container::item*/;
+    variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[5] ==  variable[1] /*e*/) || ((variable[5] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[5])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], variable[1] /*e*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[5])(variable[5],  variable[1] /*e*/) /*Object::==*/)))))));
     if (UNTAG_Bool(variable[5])) { /*if*/
       variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(1))) /*nb*/;
     }
-    variable[5] = ((list___ListNode___next_t)CALL( variable[4] /*node*/,COLOR_list___ListNode___next))( variable[4] /*node*/) /*ListNode::next*/;
+    variable[5] = CALL_list___ListNode___next( variable[4] /*node*/)( variable[4] /*node*/) /*ListNode::next*/;
     variable[4] = variable[5] /*node=*/;
     continue_8: while(0);
   }
@@ -149,7 +149,7 @@ val_t list___List___first(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_list___List____head(variable[2]) /*List::_head*/;
-  variable[2] = ((abstract_collection___Container___item_t)CALL(variable[2],COLOR_abstract_collection___Container___item))(variable[2]) /*Container::item*/;
+  variable[2] = CALL_abstract_collection___Container___item(variable[2])(variable[2]) /*Container::item*/;
   variable[1] = variable[2];
   goto return_label9;
   return_label9: while(false);
@@ -182,12 +182,12 @@ void list___List___remove(val_t  self, val_t  param0) {
   variable[4] = variable[0];
   variable[5] = variable[0];
   variable[5] = ATTR_list___List____head(variable[5]) /*List::_head*/;
-  variable[4] = ((list___List___search_node_after_t)CALL(variable[4],COLOR_list___List___search_node_after))(variable[4],  variable[1] /*e*/, variable[5]) /*List::search_node_after*/;
+  variable[4] = CALL_list___List___search_node_after(variable[4])(variable[4],  variable[1] /*e*/, variable[5]) /*List::search_node_after*/;
   variable[3] = variable[4];
-  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*node*/ ==  NIT_NULL /*null*/) || (( variable[3] /*node*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*node*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*node*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*node*/,COLOR_kernel___Object_____eqeq))( variable[3] /*node*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*node*/ ==  NIT_NULL /*null*/) || (( variable[3] /*node*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*node*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*node*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*node*/)( variable[3] /*node*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[4])) { /*if*/
     variable[4] = variable[0];
-    ((list___List___remove_node_t)CALL(variable[4],COLOR_list___List___remove_node))(variable[4],  variable[3] /*node*/) /*List::remove_node*/;
+    CALL_list___List___remove_node(variable[4])(variable[4],  variable[3] /*node*/) /*List::remove_node*/;
   }
   return_label11: while(false);
   tracehead = trace.prev;
@@ -202,8 +202,8 @@ val_t list___List_____bra(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((list___List___get_node_t)CALL(variable[3],COLOR_list___List___get_node))(variable[3],  variable[1] /*index*/) /*List::get_node*/;
-  variable[3] = ((abstract_collection___Container___item_t)CALL(variable[3],COLOR_abstract_collection___Container___item))(variable[3]) /*Container::item*/;
+  variable[3] = CALL_list___List___get_node(variable[3])(variable[3],  variable[1] /*index*/) /*List::get_node*/;
+  variable[3] = CALL_abstract_collection___Container___item(variable[3])(variable[3]) /*Container::item*/;
   variable[2] = variable[3];
   goto return_label12;
   return_label12: while(false);
@@ -220,8 +220,8 @@ void list___List_____braeq(val_t  self, val_t  param0, val_t  param1) {
   variable[1] =  param0;
   variable[2] =  param1;
   variable[4] = variable[0];
-  variable[4] = ((list___List___get_node_t)CALL(variable[4],COLOR_list___List___get_node))(variable[4],  variable[1] /*index*/) /*List::get_node*/;
-  ((abstract_collection___Container___item__eq_t)CALL(variable[4],COLOR_abstract_collection___Container___item__eq))(variable[4],  variable[2] /*item*/) /*Container::item=*/;
+  variable[4] = CALL_list___List___get_node(variable[4])(variable[4],  variable[1] /*index*/) /*List::get_node*/;
+  CALL_abstract_collection___Container___item__eq(variable[4])(variable[4],  variable[2] /*item*/) /*Container::item=*/;
   return_label13: while(false);
   tracehead = trace.prev;
   return;
@@ -235,8 +235,8 @@ val_t list___List___has_key(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((list___List___get_node_t)CALL(variable[3],COLOR_list___List___get_node))(variable[3],  variable[1] /*index*/) /*List::get_node*/;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = CALL_list___List___get_node(variable[3])(variable[3],  variable[1] /*index*/) /*List::get_node*/;
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   variable[2] = variable[3];
   goto return_label14;
   return_label14: while(false);
@@ -252,12 +252,12 @@ void list___List___remove_at(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[4] = variable[0];
-  variable[4] = ((list___List___get_node_t)CALL(variable[4],COLOR_list___List___get_node))(variable[4],  variable[1] /*i*/) /*List::get_node*/;
+  variable[4] = CALL_list___List___get_node(variable[4])(variable[4],  variable[1] /*i*/) /*List::get_node*/;
   variable[3] = variable[4];
-  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*node*/ ==  NIT_NULL /*null*/) || (( variable[3] /*node*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*node*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*node*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*node*/,COLOR_kernel___Object_____eqeq))( variable[3] /*node*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*node*/ ==  NIT_NULL /*null*/) || (( variable[3] /*node*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*node*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*node*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*node*/)( variable[3] /*node*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[4])) { /*if*/
     variable[4] = variable[0];
-    ((list___List___remove_node_t)CALL(variable[4],COLOR_list___List___remove_node))(variable[4],  variable[3] /*node*/) /*List::remove_node*/;
+    CALL_list___List___remove_node(variable[4])(variable[4],  variable[3] /*node*/) /*List::remove_node*/;
   }
   return_label15: while(false);
   tracehead = trace.prev;
@@ -273,7 +273,7 @@ void list___List___first__eq(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_list___List____head(variable[3]) /*List::_head*/;
-  ((abstract_collection___Container___item__eq_t)CALL(variable[3],COLOR_abstract_collection___Container___item__eq))(variable[3],  variable[1] /*e*/) /*Container::item=*/;
+  CALL_abstract_collection___Container___item__eq(variable[3])(variable[3],  variable[1] /*e*/) /*Container::item=*/;
   return_label16: while(false);
   tracehead = trace.prev;
   return;
@@ -287,7 +287,7 @@ val_t list___List___last(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_list___List____tail(variable[2]) /*List::_tail*/;
-  variable[2] = ((abstract_collection___Container___item_t)CALL(variable[2],COLOR_abstract_collection___Container___item))(variable[2]) /*Container::item*/;
+  variable[2] = CALL_abstract_collection___Container___item(variable[2])(variable[2]) /*Container::item*/;
   variable[1] = variable[2];
   goto return_label17;
   return_label17: while(false);
@@ -304,7 +304,7 @@ void list___List___last__eq(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_list___List____tail(variable[3]) /*List::_tail*/;
-  ((abstract_collection___Container___item__eq_t)CALL(variable[3],COLOR_abstract_collection___Container___item__eq))(variable[3],  variable[1] /*e*/) /*Container::item=*/;
+  CALL_abstract_collection___Container___item__eq(variable[3])(variable[3],  variable[1] /*e*/) /*Container::item=*/;
   return_label18: while(false);
   tracehead = trace.prev;
   return;
@@ -321,17 +321,17 @@ void list___List___push(val_t  self, val_t  param0) {
   variable[3] = variable[4];
   variable[4] = variable[0];
   variable[4] = ATTR_list___List____tail(variable[4]) /*List::_tail*/;
-  variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[4])) { /*if*/
     variable[4] = variable[0];
     ATTR_list___List____head(variable[4]) /*List::_head*/ =  variable[3] /*node*/;
   } else { /*if*/
     variable[4] = variable[0];
     variable[4] = ATTR_list___List____tail(variable[4]) /*List::_tail*/;
-    ((list___ListNode___next__eq_t)CALL(variable[4],COLOR_list___ListNode___next__eq))(variable[4],  variable[3] /*node*/) /*ListNode::next=*/;
+    CALL_list___ListNode___next__eq(variable[4])(variable[4],  variable[3] /*node*/) /*ListNode::next=*/;
     variable[4] = variable[0];
     variable[4] = ATTR_list___List____tail(variable[4]) /*List::_tail*/;
-    ((list___ListNode___prev__eq_t)CALL( variable[3] /*node*/,COLOR_list___ListNode___prev__eq))( variable[3] /*node*/, variable[4]) /*ListNode::prev=*/;
+    CALL_list___ListNode___prev__eq( variable[3] /*node*/)( variable[3] /*node*/, variable[4]) /*ListNode::prev=*/;
   }
   variable[4] = variable[0];
   ATTR_list___List____tail(variable[4]) /*List::_tail*/ =  variable[3] /*node*/;
@@ -350,21 +350,21 @@ val_t list___List___pop(val_t  self) {
   variable[3] = ATTR_list___List____tail(variable[3]) /*List::_tail*/;
   variable[2] = variable[3];
   variable[3] = variable[0];
-  variable[4] = ((list___ListNode___prev_t)CALL( variable[2] /*node*/,COLOR_list___ListNode___prev))( variable[2] /*node*/) /*ListNode::prev*/;
+  variable[4] = CALL_list___ListNode___prev( variable[2] /*node*/)( variable[2] /*node*/) /*ListNode::prev*/;
   ATTR_list___List____tail(variable[3]) /*List::_tail*/ = variable[4];
-  ((list___ListNode___prev__eq_t)CALL( variable[2] /*node*/,COLOR_list___ListNode___prev__eq))( variable[2] /*node*/,  NIT_NULL /*null*/) /*ListNode::prev=*/;
+  CALL_list___ListNode___prev__eq( variable[2] /*node*/)( variable[2] /*node*/,  NIT_NULL /*null*/) /*ListNode::prev=*/;
   variable[3] = variable[0];
   variable[3] = ATTR_list___List____tail(variable[3]) /*List::_tail*/;
-  variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = variable[0];
     ATTR_list___List____head(variable[3]) /*List::_head*/ =  NIT_NULL /*null*/;
   } else { /*if*/
     variable[3] = variable[0];
     variable[3] = ATTR_list___List____tail(variable[3]) /*List::_tail*/;
-    ((list___ListNode___next__eq_t)CALL(variable[3],COLOR_list___ListNode___next__eq))(variable[3],  NIT_NULL /*null*/) /*ListNode::next=*/;
+    CALL_list___ListNode___next__eq(variable[3])(variable[3],  NIT_NULL /*null*/) /*ListNode::next=*/;
   }
-  variable[3] = ((abstract_collection___Container___item_t)CALL( variable[2] /*node*/,COLOR_abstract_collection___Container___item))( variable[2] /*node*/) /*Container::item*/;
+  variable[3] = CALL_abstract_collection___Container___item( variable[2] /*node*/)( variable[2] /*node*/) /*Container::item*/;
   variable[1] = variable[3];
   goto return_label20;
   return_label20: while(false);
@@ -383,17 +383,17 @@ void list___List___unshift(val_t  self, val_t  param0) {
   variable[3] = variable[4];
   variable[4] = variable[0];
   variable[4] = ATTR_list___List____head(variable[4]) /*List::_head*/;
-  variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[4],COLOR_kernel___Object_____eqeq))(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[4])) { /*if*/
     variable[4] = variable[0];
     ATTR_list___List____tail(variable[4]) /*List::_tail*/ =  variable[3] /*node*/;
   } else { /*if*/
     variable[4] = variable[0];
     variable[4] = ATTR_list___List____head(variable[4]) /*List::_head*/;
-    ((list___ListNode___next__eq_t)CALL( variable[3] /*node*/,COLOR_list___ListNode___next__eq))( variable[3] /*node*/, variable[4]) /*ListNode::next=*/;
+    CALL_list___ListNode___next__eq( variable[3] /*node*/)( variable[3] /*node*/, variable[4]) /*ListNode::next=*/;
     variable[4] = variable[0];
     variable[4] = ATTR_list___List____head(variable[4]) /*List::_head*/;
-    ((list___ListNode___prev__eq_t)CALL(variable[4],COLOR_list___ListNode___prev__eq))(variable[4],  variable[3] /*node*/) /*ListNode::prev=*/;
+    CALL_list___ListNode___prev__eq(variable[4])(variable[4],  variable[3] /*node*/) /*ListNode::prev=*/;
   }
   variable[4] = variable[0];
   ATTR_list___List____head(variable[4]) /*List::_head*/ =  variable[3] /*node*/;
@@ -412,21 +412,21 @@ val_t list___List___shift(val_t  self) {
   variable[3] = ATTR_list___List____head(variable[3]) /*List::_head*/;
   variable[2] = variable[3];
   variable[3] = variable[0];
-  variable[4] = ((list___ListNode___next_t)CALL( variable[2] /*node*/,COLOR_list___ListNode___next))( variable[2] /*node*/) /*ListNode::next*/;
+  variable[4] = CALL_list___ListNode___next( variable[2] /*node*/)( variable[2] /*node*/) /*ListNode::next*/;
   ATTR_list___List____head(variable[3]) /*List::_head*/ = variable[4];
-  ((list___ListNode___next__eq_t)CALL( variable[2] /*node*/,COLOR_list___ListNode___next__eq))( variable[2] /*node*/,  NIT_NULL /*null*/) /*ListNode::next=*/;
+  CALL_list___ListNode___next__eq( variable[2] /*node*/)( variable[2] /*node*/,  NIT_NULL /*null*/) /*ListNode::next=*/;
   variable[3] = variable[0];
   variable[3] = ATTR_list___List____head(variable[3]) /*List::_head*/;
-  variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = variable[0];
     ATTR_list___List____tail(variable[3]) /*List::_tail*/ =  NIT_NULL /*null*/;
   } else { /*if*/
     variable[3] = variable[0];
     variable[3] = ATTR_list___List____head(variable[3]) /*List::_head*/;
-    ((list___ListNode___prev__eq_t)CALL(variable[3],COLOR_list___ListNode___prev__eq))(variable[3],  NIT_NULL /*null*/) /*ListNode::prev=*/;
+    CALL_list___ListNode___prev__eq(variable[3])(variable[3],  NIT_NULL /*null*/) /*ListNode::prev=*/;
   }
-  variable[3] = ((abstract_collection___Container___item_t)CALL( variable[2] /*node*/,COLOR_abstract_collection___Container___item))( variable[2] /*node*/) /*Container::item*/;
+  variable[3] = CALL_abstract_collection___Container___item( variable[2] /*node*/)( variable[2] /*node*/) /*Container::item*/;
   variable[1] = variable[3];
   goto return_label22;
   return_label22: while(false);
@@ -443,31 +443,31 @@ void list___List___link(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_list___List____tail(variable[3]) /*List::_tail*/;
-  variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = variable[0];
     variable[4] = ATTR_list___List____head( variable[1] /*l*/) /*List::_head*/;
     ATTR_list___List____head(variable[3]) /*List::_head*/ = variable[4];
   } else { /*if*/
     variable[3] = ATTR_list___List____head( variable[1] /*l*/) /*List::_head*/;
-    variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+    variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
     if (UNTAG_Bool(variable[3])) { /*if*/
       variable[3] = variable[0];
       variable[3] = ATTR_list___List____tail(variable[3]) /*List::_tail*/;
       variable[4] = ATTR_list___List____head( variable[1] /*l*/) /*List::_head*/;
-      ((list___ListNode___next__eq_t)CALL(variable[3],COLOR_list___ListNode___next__eq))(variable[3], variable[4]) /*ListNode::next=*/;
+      CALL_list___ListNode___next__eq(variable[3])(variable[3], variable[4]) /*ListNode::next=*/;
       variable[3] = variable[0];
       variable[3] = ATTR_list___List____tail(variable[3]) /*List::_tail*/;
-      variable[3] = ((list___ListNode___next_t)CALL(variable[3],COLOR_list___ListNode___next))(variable[3]) /*ListNode::next*/;
+      variable[3] = CALL_list___ListNode___next(variable[3])(variable[3]) /*ListNode::next*/;
       variable[4] = variable[0];
       variable[4] = ATTR_list___List____tail(variable[4]) /*List::_tail*/;
-      ((list___ListNode___prev__eq_t)CALL(variable[3],COLOR_list___ListNode___prev__eq))(variable[3], variable[4]) /*ListNode::prev=*/;
+      CALL_list___ListNode___prev__eq(variable[3])(variable[3], variable[4]) /*ListNode::prev=*/;
     }
   }
   variable[3] = variable[0];
   variable[4] = ATTR_list___List____tail( variable[1] /*l*/) /*List::_tail*/;
   ATTR_list___List____tail(variable[3]) /*List::_tail*/ = variable[4];
-  ((list___List___clear_t)CALL( variable[1] /*l*/,COLOR_abstract_collection___RemovableCollection___clear))( variable[1] /*l*/) /*List::clear*/;
+  CALL_abstract_collection___RemovableCollection___clear( variable[1] /*l*/)( variable[1] /*l*/) /*List::clear*/;
   return_label23: while(false);
   tracehead = trace.prev;
   return;
@@ -495,7 +495,7 @@ void list___List___from(val_t  self, val_t  param0, int* init_table) {
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_List].i]) return;
   variable[3] = variable[0];
-  ((abstract_collection___IndexedCollection___append_t)CALL(variable[3],COLOR_abstract_collection___IndexedCollection___append))(variable[3],  variable[1] /*coll*/) /*IndexedCollection::append*/;
+  CALL_abstract_collection___IndexedCollection___append(variable[3])(variable[3],  variable[1] /*coll*/) /*IndexedCollection::append*/;
   return_label25: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_List].i] = 1;
   tracehead = trace.prev;
@@ -518,14 +518,14 @@ val_t list___List___get_node(val_t  self, val_t  param0) {
     goto return_label26;
   }
   while (true) { /*while*/
-    variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*n*/ ==  NIT_NULL /*null*/) || (( variable[3] /*n*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*n*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*n*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*n*/,COLOR_kernel___Object_____eqeq))( variable[3] /*n*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*n*/ ==  NIT_NULL /*null*/) || (( variable[3] /*n*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*n*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*n*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*n*/)( variable[3] /*n*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
     variable[5] = variable[4];
     if (UNTAG_Bool(variable[5])) { /* and */
       variable[5] = TAG_Bool(UNTAG_Int( variable[1] /*i*/)>UNTAG_Int( TAG_Int(0)));
     }
     variable[4] = variable[5];
     if (!UNTAG_Bool(variable[4])) break; /* while*/
-    variable[4] = ((list___ListNode___next_t)CALL( variable[3] /*n*/,COLOR_list___ListNode___next))( variable[3] /*n*/) /*ListNode::next*/;
+    variable[4] = CALL_list___ListNode___next( variable[3] /*n*/)( variable[3] /*n*/) /*ListNode::next*/;
     variable[3] = variable[4] /*n=*/;
     variable[1] = TAG_Int(UNTAG_Int(variable[1])-UNTAG_Int( TAG_Int(1))) /*i*/;
     continue_27: while(0);
@@ -548,15 +548,15 @@ val_t list___List___search_node_after(val_t  self, val_t  param0, val_t  param1)
   variable[2] =  param1;
   variable[4] =  variable[2] /*after*/;
   while (true) { /*while*/
-    variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*n*/ ==  NIT_NULL /*null*/) || (( variable[4] /*n*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[4] /*n*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*n*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[4] /*n*/,COLOR_kernel___Object_____eqeq))( variable[4] /*n*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*n*/ ==  NIT_NULL /*null*/) || (( variable[4] /*n*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[4] /*n*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*n*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[4] /*n*/)( variable[4] /*n*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
     variable[6] = variable[5];
     if (UNTAG_Bool(variable[6])) { /* and */
-      variable[6] = ((abstract_collection___Container___item_t)CALL( variable[4] /*n*/,COLOR_abstract_collection___Container___item))( variable[4] /*n*/) /*Container::item*/;
-      variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] ==  variable[1] /*e*/) || ((variable[6] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[6],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], variable[1] /*e*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[6],COLOR_kernel___Object_____eqeq))(variable[6],  variable[1] /*e*/) /*Object::==*/)))))));
+      variable[6] = CALL_abstract_collection___Container___item( variable[4] /*n*/)( variable[4] /*n*/) /*Container::item*/;
+      variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] ==  variable[1] /*e*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], variable[1] /*e*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  variable[1] /*e*/) /*Object::==*/)))))));
     }
     variable[5] = variable[6];
     if (!UNTAG_Bool(variable[5])) break; /* while*/
-    variable[5] = ((list___ListNode___next_t)CALL( variable[4] /*n*/,COLOR_list___ListNode___next))( variable[4] /*n*/) /*ListNode::next*/;
+    variable[5] = CALL_list___ListNode___next( variable[4] /*n*/)( variable[4] /*n*/) /*ListNode::next*/;
     variable[4] = variable[5] /*n=*/;
     continue_29: while(0);
   }
@@ -575,37 +575,37 @@ void list___List___remove_node(val_t  self, val_t  param0) {
   trace.file = LOCATE_list;
   variable[0] =  self;
   variable[1] =  param0;
-  variable[3] = ((list___ListNode___prev_t)CALL( variable[1] /*node*/,COLOR_list___ListNode___prev))( variable[1] /*node*/) /*ListNode::prev*/;
-  variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[3] = CALL_list___ListNode___prev( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::prev*/;
+  variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = variable[0];
-    variable[4] = ((list___ListNode___next_t)CALL( variable[1] /*node*/,COLOR_list___ListNode___next))( variable[1] /*node*/) /*ListNode::next*/;
+    variable[4] = CALL_list___ListNode___next( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::next*/;
     ATTR_list___List____head(variable[3]) /*List::_head*/ = variable[4];
-    variable[3] = ((list___ListNode___next_t)CALL( variable[1] /*node*/,COLOR_list___ListNode___next))( variable[1] /*node*/) /*ListNode::next*/;
-    variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
+    variable[3] = CALL_list___ListNode___next( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::next*/;
+    variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
     if (UNTAG_Bool(variable[3])) { /*if*/
       variable[3] = variable[0];
       ATTR_list___List____tail(variable[3]) /*List::_tail*/ =  NIT_NULL /*null*/;
     } else { /*if*/
-      variable[3] = ((list___ListNode___next_t)CALL( variable[1] /*node*/,COLOR_list___ListNode___next))( variable[1] /*node*/) /*ListNode::next*/;
-      ((list___ListNode___prev__eq_t)CALL(variable[3],COLOR_list___ListNode___prev__eq))(variable[3],  NIT_NULL /*null*/) /*ListNode::prev=*/;
+      variable[3] = CALL_list___ListNode___next( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::next*/;
+      CALL_list___ListNode___prev__eq(variable[3])(variable[3],  NIT_NULL /*null*/) /*ListNode::prev=*/;
     }
   } else { /*if*/
-    variable[3] = ((list___ListNode___next_t)CALL( variable[1] /*node*/,COLOR_list___ListNode___next))( variable[1] /*node*/) /*ListNode::next*/;
-    variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
+    variable[3] = CALL_list___ListNode___next( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::next*/;
+    variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
     if (UNTAG_Bool(variable[3])) { /*if*/
       variable[3] = variable[0];
-      variable[4] = ((list___ListNode___prev_t)CALL( variable[1] /*node*/,COLOR_list___ListNode___prev))( variable[1] /*node*/) /*ListNode::prev*/;
+      variable[4] = CALL_list___ListNode___prev( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::prev*/;
       ATTR_list___List____tail(variable[3]) /*List::_tail*/ = variable[4];
-      variable[3] = ((list___ListNode___prev_t)CALL( variable[1] /*node*/,COLOR_list___ListNode___prev))( variable[1] /*node*/) /*ListNode::prev*/;
-      ((list___ListNode___next__eq_t)CALL(variable[3],COLOR_list___ListNode___next__eq))(variable[3],  NIT_NULL /*null*/) /*ListNode::next=*/;
+      variable[3] = CALL_list___ListNode___prev( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::prev*/;
+      CALL_list___ListNode___next__eq(variable[3])(variable[3],  NIT_NULL /*null*/) /*ListNode::next=*/;
     } else { /*if*/
-      variable[3] = ((list___ListNode___prev_t)CALL( variable[1] /*node*/,COLOR_list___ListNode___prev))( variable[1] /*node*/) /*ListNode::prev*/;
-      variable[4] = ((list___ListNode___next_t)CALL( variable[1] /*node*/,COLOR_list___ListNode___next))( variable[1] /*node*/) /*ListNode::next*/;
-      ((list___ListNode___next__eq_t)CALL(variable[3],COLOR_list___ListNode___next__eq))(variable[3], variable[4]) /*ListNode::next=*/;
-      variable[3] = ((list___ListNode___next_t)CALL( variable[1] /*node*/,COLOR_list___ListNode___next))( variable[1] /*node*/) /*ListNode::next*/;
-      variable[4] = ((list___ListNode___prev_t)CALL( variable[1] /*node*/,COLOR_list___ListNode___prev))( variable[1] /*node*/) /*ListNode::prev*/;
-      ((list___ListNode___prev__eq_t)CALL(variable[3],COLOR_list___ListNode___prev__eq))(variable[3], variable[4]) /*ListNode::prev=*/;
+      variable[3] = CALL_list___ListNode___prev( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::prev*/;
+      variable[4] = CALL_list___ListNode___next( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::next*/;
+      CALL_list___ListNode___next__eq(variable[3])(variable[3], variable[4]) /*ListNode::next=*/;
+      variable[3] = CALL_list___ListNode___next( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::next*/;
+      variable[4] = CALL_list___ListNode___prev( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::prev*/;
+      CALL_list___ListNode___prev__eq(variable[3])(variable[3], variable[4]) /*ListNode::prev=*/;
     }
   }
   return_label30: while(false);
@@ -623,18 +623,18 @@ void list___List___insert_before(val_t  self, val_t  param0, val_t  param1) {
   variable[2] =  param1;
   variable[5] = NEW_ListNode_list___ListNode___init( variable[1] /*element*/); /*new ListNode[E]*/
   variable[4] = variable[5];
-  variable[6] = ((list___ListNode___prev_t)CALL( variable[2] /*node*/,COLOR_list___ListNode___prev))( variable[2] /*node*/) /*ListNode::prev*/;
+  variable[6] = CALL_list___ListNode___prev( variable[2] /*node*/)( variable[2] /*node*/) /*ListNode::prev*/;
   variable[5] = variable[6];
-  variable[6] = TAG_Bool(( variable[5] /*prev*/ ==  NIT_NULL /*null*/) || (( variable[5] /*prev*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[5] /*prev*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*prev*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[5] /*prev*/,COLOR_kernel___Object_____eqeq))( variable[5] /*prev*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[6] = TAG_Bool(( variable[5] /*prev*/ ==  NIT_NULL /*null*/) || (( variable[5] /*prev*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*prev*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*prev*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*prev*/)( variable[5] /*prev*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[6])) { /*if*/
     variable[6] = variable[0];
     ATTR_list___List____head(variable[6]) /*List::_head*/ =  variable[4] /*nnode*/;
   } else { /*if*/
-    ((list___ListNode___next__eq_t)CALL( variable[5] /*prev*/,COLOR_list___ListNode___next__eq))( variable[5] /*prev*/,  variable[4] /*nnode*/) /*ListNode::next=*/;
+    CALL_list___ListNode___next__eq( variable[5] /*prev*/)( variable[5] /*prev*/,  variable[4] /*nnode*/) /*ListNode::next=*/;
   }
-  ((list___ListNode___prev__eq_t)CALL( variable[4] /*nnode*/,COLOR_list___ListNode___prev__eq))( variable[4] /*nnode*/,  variable[5] /*prev*/) /*ListNode::prev=*/;
-  ((list___ListNode___next__eq_t)CALL( variable[4] /*nnode*/,COLOR_list___ListNode___next__eq))( variable[4] /*nnode*/,  variable[2] /*node*/) /*ListNode::next=*/;
-  ((list___ListNode___prev__eq_t)CALL( variable[2] /*node*/,COLOR_list___ListNode___prev__eq))( variable[2] /*node*/,  variable[4] /*nnode*/) /*ListNode::prev=*/;
+  CALL_list___ListNode___prev__eq( variable[4] /*nnode*/)( variable[4] /*nnode*/,  variable[5] /*prev*/) /*ListNode::prev=*/;
+  CALL_list___ListNode___next__eq( variable[4] /*nnode*/)( variable[4] /*nnode*/,  variable[2] /*node*/) /*ListNode::next=*/;
+  CALL_list___ListNode___prev__eq( variable[2] /*node*/)( variable[2] /*node*/,  variable[4] /*nnode*/) /*ListNode::prev=*/;
   return_label31: while(false);
   tracehead = trace.prev;
   return;
@@ -648,7 +648,7 @@ val_t list___ListIterator___item(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_list___ListIterator____node(variable[2]) /*ListIterator::_node*/;
-  variable[2] = ((abstract_collection___Container___item_t)CALL(variable[2],COLOR_abstract_collection___Container___item))(variable[2]) /*Container::item*/;
+  variable[2] = CALL_abstract_collection___Container___item(variable[2])(variable[2]) /*Container::item*/;
   variable[1] = variable[2];
   goto return_label32;
   return_label32: while(false);
@@ -665,7 +665,7 @@ void list___ListIterator___next(val_t  self) {
   variable[2] = variable[0];
   variable[3] = variable[0];
   variable[3] = ATTR_list___ListIterator____node(variable[3]) /*ListIterator::_node*/;
-  variable[3] = ((list___ListNode___next_t)CALL(variable[3],COLOR_list___ListNode___next))(variable[3]) /*ListNode::next*/;
+  variable[3] = CALL_list___ListNode___next(variable[3])(variable[3]) /*ListNode::next*/;
   ATTR_list___ListIterator____node(variable[2]) /*ListIterator::_node*/ = variable[3];
   variable[2] = variable[0];
   ATTR_list___ListIterator____index(variable[2]) /*ListIterator::_index*/ = TAG_Int(UNTAG_Int(ATTR_list___ListIterator____index(variable[2]) /*ListIterator::_index*/)+UNTAG_Int( TAG_Int(1)));
@@ -682,7 +682,7 @@ val_t list___ListIterator___is_ok(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_list___ListIterator____node(variable[2]) /*ListIterator::_node*/;
-  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[2],COLOR_kernel___Object_____eqeq))(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))));
   variable[1] =  TAG_Bool(!UNTAG_Bool(variable[2]));
   goto return_label34;
   return_label34: while(false);
@@ -699,7 +699,7 @@ void list___ListIterator___item__eq(val_t  self, val_t  param0) {
   variable[1] =  param0;
   variable[3] = variable[0];
   variable[3] = ATTR_list___ListIterator____node(variable[3]) /*ListIterator::_node*/;
-  ((abstract_collection___Container___item__eq_t)CALL(variable[3],COLOR_abstract_collection___Container___item__eq))(variable[3],  variable[1] /*e*/) /*Container::item=*/;
+  CALL_abstract_collection___Container___item__eq(variable[3])(variable[3],  variable[1] /*e*/) /*Container::item=*/;
   return_label35: while(false);
   tracehead = trace.prev;
   return;
@@ -740,9 +740,9 @@ void list___ListNode___init(val_t  self, val_t  param0, int* init_table) {
   variable[0] =  self;
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ListNode].i]) return;
-  ((abstract_collection___Container___init_t)CALL(variable[0],COLOR_abstract_collection___Container___init))(variable[0], variable[1], init_table /*YYY*/) /*Container::init*/;
+  CALL_abstract_collection___Container___init(variable[0])(variable[0], variable[1], init_table /*YYY*/) /*Container::init*/;
   variable[3] = variable[0];
-  ((abstract_collection___Container___item__eq_t)CALL(variable[3],COLOR_abstract_collection___Container___item__eq))(variable[3],  variable[1] /*i*/) /*Container::item=*/;
+  CALL_abstract_collection___Container___item__eq(variable[3])(variable[3],  variable[1] /*i*/) /*Container::item=*/;
   return_label37: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ListNode].i] = 1;
   tracehead = trace.prev;

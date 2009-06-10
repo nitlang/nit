@@ -9,19 +9,19 @@ extern const classtable_elt_t VFT_AbstractSorter[];
 extern const classtable_elt_t VFT_ComparableSorter[];
 extern const char *LOCATE_sorter;
 extern const int SFT_sorter[];
-#define ID_AbstractSorter SFT_sorter[0]
-#define COLOR_AbstractSorter SFT_sorter[1]
-#define INIT_TABLE_POS_AbstractSorter SFT_sorter[2]
-#define COLOR_sorter___AbstractSorter___compare SFT_sorter[3]
-#define COLOR_sorter___AbstractSorter___sort SFT_sorter[4]
-#define COLOR_sorter___AbstractSorter___sub_sort SFT_sorter[5]
-#define COLOR_sorter___AbstractSorter___quick_sort SFT_sorter[6]
-#define COLOR_sorter___AbstractSorter___bubble_sort SFT_sorter[7]
-#define COLOR_sorter___AbstractSorter___init SFT_sorter[8]
-#define ID_ComparableSorter SFT_sorter[9]
-#define COLOR_ComparableSorter SFT_sorter[10]
-#define INIT_TABLE_POS_ComparableSorter SFT_sorter[11]
-#define COLOR_sorter___ComparableSorter___init SFT_sorter[12]
+#define ID_AbstractSorter (SFT_sorter[0])
+#define COLOR_AbstractSorter (SFT_sorter[1])
+#define INIT_TABLE_POS_AbstractSorter (SFT_sorter[2] + 0)
+#define CALL_sorter___AbstractSorter___compare(recv) ((sorter___AbstractSorter___compare_t)CALL((recv), (SFT_sorter[2] + 1)))
+#define CALL_sorter___AbstractSorter___sort(recv) ((sorter___AbstractSorter___sort_t)CALL((recv), (SFT_sorter[2] + 2)))
+#define CALL_sorter___AbstractSorter___sub_sort(recv) ((sorter___AbstractSorter___sub_sort_t)CALL((recv), (SFT_sorter[2] + 3)))
+#define CALL_sorter___AbstractSorter___quick_sort(recv) ((sorter___AbstractSorter___quick_sort_t)CALL((recv), (SFT_sorter[2] + 4)))
+#define CALL_sorter___AbstractSorter___bubble_sort(recv) ((sorter___AbstractSorter___bubble_sort_t)CALL((recv), (SFT_sorter[2] + 5)))
+#define CALL_sorter___AbstractSorter___init(recv) ((sorter___AbstractSorter___init_t)CALL((recv), (SFT_sorter[2] + 6)))
+#define ID_ComparableSorter (SFT_sorter[3])
+#define COLOR_ComparableSorter (SFT_sorter[4])
+#define INIT_TABLE_POS_ComparableSorter (SFT_sorter[5] + 0)
+#define CALL_sorter___ComparableSorter___init(recv) ((sorter___ComparableSorter___init_t)CALL((recv), (SFT_sorter[5] + 1)))
 typedef val_t (* sorter___AbstractSorter___compare_t)(val_t  self, val_t  param0, val_t  param1);
 val_t sorter___AbstractSorter___compare(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_sorter___AbstractSorter___compare "sorter::AbstractSorter::compare"

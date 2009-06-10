@@ -8,11 +8,11 @@ val_t vararg___MMSignature___adaptation_to(val_t  self, val_t  param0) {
   trace.file = LOCATE_vararg;
   variable[0] =  self;
   variable[1] =  param0;
-  variable[4] = ((vararg___MMSignature___adaptation_to_t)CALL(variable[0],COLOR_SUPER_vararg___MMSignature___adaptation_to))(variable[0],  variable[1] /*r*/) /*super MMSignature::adaptation_to*/;
+  variable[4] = CALL_SUPER_vararg___MMSignature___adaptation_to(variable[0])(variable[0],  variable[1] /*r*/) /*super MMSignature::adaptation_to*/;
   variable[3] = variable[4];
   variable[4] = variable[0];
   variable[4] = ATTR_vararg___MMSignature____vararg_rank(variable[4]) /*MMSignature::_vararg_rank*/;
-  ((vararg___MMSignature___vararg_rank__eq_t)CALL( variable[3] /*s*/,COLOR_vararg___MMSignature___vararg_rank__eq))( variable[3] /*s*/, variable[4]) /*MMSignature::vararg_rank=*/;
+  CALL_vararg___MMSignature___vararg_rank__eq( variable[3] /*s*/)( variable[3] /*s*/, variable[4]) /*MMSignature::vararg_rank=*/;
   variable[2] =  variable[3] /*s*/;
   goto return_label0;
   return_label0: while(false);
@@ -26,11 +26,11 @@ val_t vararg___MMSignature___not_for_self(val_t  self) {
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_vararg;
   variable[0] =  self;
-  variable[3] = ((vararg___MMSignature___not_for_self_t)CALL(variable[0],COLOR_SUPER_vararg___MMSignature___not_for_self))(variable[0]) /*super MMSignature::not_for_self*/;
+  variable[3] = CALL_SUPER_vararg___MMSignature___not_for_self(variable[0])(variable[0]) /*super MMSignature::not_for_self*/;
   variable[2] = variable[3];
   variable[3] = variable[0];
   variable[3] = ATTR_vararg___MMSignature____vararg_rank(variable[3]) /*MMSignature::_vararg_rank*/;
-  ((vararg___MMSignature___vararg_rank__eq_t)CALL( variable[2] /*s*/,COLOR_vararg___MMSignature___vararg_rank__eq))( variable[2] /*s*/, variable[3]) /*MMSignature::vararg_rank=*/;
+  CALL_vararg___MMSignature___vararg_rank__eq( variable[2] /*s*/)( variable[2] /*s*/, variable[3]) /*MMSignature::vararg_rank=*/;
   variable[1] =  variable[2] /*s*/;
   goto return_label1;
   return_label1: while(false);
@@ -48,7 +48,7 @@ void vararg___MMSignature___init(val_t  self, val_t  param0, val_t  param1, val_
   variable[2] =  param1;
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSignature].i]) return;
-  ((vararg___MMSignature___init_t)CALL(variable[0],COLOR_SUPER_vararg___MMSignature___init))(variable[0], variable[1], variable[2], variable[3], init_table) /*super MMSignature::init*/;
+  CALL_SUPER_vararg___MMSignature___init(variable[0])(variable[0], variable[1], variable[2], variable[3], init_table) /*super MMSignature::init*/;
   variable[5] = variable[0];
   variable[6] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
   ATTR_vararg___MMSignature____vararg_rank(variable[5]) /*MMSignature::_vararg_rank*/ = variable[6];

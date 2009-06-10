@@ -28,79 +28,79 @@ val_t BOX_Pointer(void * val);
 #define UNBOX_Pointer(x) (((struct TBOX_Pointer *)(VAL2OBJ(x)))->val)
 extern const char *LOCATE_kernel;
 extern const int SFT_kernel[];
-#define ID_Object SFT_kernel[0]
-#define COLOR_Object SFT_kernel[1]
-#define INIT_TABLE_POS_Object SFT_kernel[2]
-#define COLOR_kernel___Object___object_id SFT_kernel[3]
-#define COLOR_kernel___Object___is_same_type SFT_kernel[4]
-#define COLOR_kernel___Object_____eqeq SFT_kernel[5]
-#define COLOR_kernel___Object_____neq SFT_kernel[6]
-#define COLOR_kernel___Object___output SFT_kernel[7]
-#define COLOR_kernel___Object___exit SFT_kernel[8]
-#define COLOR_kernel___Object___sys SFT_kernel[9]
-#define ID_Sys SFT_kernel[10]
-#define COLOR_Sys SFT_kernel[11]
-#define INIT_TABLE_POS_Sys SFT_kernel[12]
-#define COLOR_kernel___Sys___main SFT_kernel[13]
-#define COLOR_kernel___Sys___init SFT_kernel[14]
-#define ID_Comparable SFT_kernel[15]
-#define COLOR_Comparable SFT_kernel[16]
-#define INIT_TABLE_POS_Comparable SFT_kernel[17]
-#define COLOR_kernel___Comparable_____l SFT_kernel[18]
-#define COLOR_kernel___Comparable_____leq SFT_kernel[19]
-#define COLOR_kernel___Comparable_____geq SFT_kernel[20]
-#define COLOR_kernel___Comparable_____g SFT_kernel[21]
-#define COLOR_kernel___Comparable_____leqg SFT_kernel[22]
-#define COLOR_kernel___Comparable___is_between SFT_kernel[23]
-#define COLOR_kernel___Comparable___max SFT_kernel[24]
-#define COLOR_kernel___Comparable___min SFT_kernel[25]
-#define ID_Discrete SFT_kernel[26]
-#define COLOR_Discrete SFT_kernel[27]
-#define INIT_TABLE_POS_Discrete SFT_kernel[28]
-#define COLOR_kernel___Discrete___succ SFT_kernel[29]
-#define COLOR_kernel___Discrete___prec SFT_kernel[30]
-#define COLOR_kernel___Discrete_____plus SFT_kernel[31]
-#define COLOR_kernel___Discrete_____minus SFT_kernel[32]
-#define COLOR_kernel___Discrete___distance SFT_kernel[33]
-#define ID_Bool SFT_kernel[34]
-#define COLOR_Bool SFT_kernel[35]
-#define INIT_TABLE_POS_Bool SFT_kernel[36]
-#define ID_Float SFT_kernel[37]
-#define COLOR_Float SFT_kernel[38]
-#define INIT_TABLE_POS_Float SFT_kernel[39]
-#define COLOR_kernel___Float_____leq SFT_kernel[40]
-#define COLOR_kernel___Float_____l SFT_kernel[41]
-#define COLOR_kernel___Float_____geq SFT_kernel[42]
-#define COLOR_kernel___Float_____g SFT_kernel[43]
-#define COLOR_kernel___Float_____plus SFT_kernel[44]
-#define COLOR_kernel___Float___unary__minus SFT_kernel[45]
-#define COLOR_kernel___Float_____minus SFT_kernel[46]
-#define COLOR_kernel___Float_____star SFT_kernel[47]
-#define COLOR_kernel___Float_____slash SFT_kernel[48]
-#define COLOR_kernel___Float___to_i SFT_kernel[49]
-#define ID_Int SFT_kernel[50]
-#define COLOR_Int SFT_kernel[51]
-#define INIT_TABLE_POS_Int SFT_kernel[52]
-#define COLOR_kernel___Int___unary__minus SFT_kernel[53]
-#define COLOR_kernel___Int_____star SFT_kernel[54]
-#define COLOR_kernel___Int_____slash SFT_kernel[55]
-#define COLOR_kernel___Int_____percent SFT_kernel[56]
-#define COLOR_kernel___Int___lshift SFT_kernel[57]
-#define COLOR_kernel___Int___rshift SFT_kernel[58]
-#define COLOR_kernel___Int___to_f SFT_kernel[59]
-#define COLOR_kernel___Int___ascii SFT_kernel[60]
-#define COLOR_kernel___Int___digit_count SFT_kernel[61]
-#define COLOR_kernel___Int___to_c SFT_kernel[62]
-#define ID_Char SFT_kernel[63]
-#define COLOR_Char SFT_kernel[64]
-#define INIT_TABLE_POS_Char SFT_kernel[65]
-#define COLOR_kernel___Char___to_i SFT_kernel[66]
-#define COLOR_kernel___Char___ascii SFT_kernel[67]
-#define COLOR_kernel___Char___to_lower SFT_kernel[68]
-#define COLOR_kernel___Char___to_upper SFT_kernel[69]
-#define ID_Pointer SFT_kernel[70]
-#define COLOR_Pointer SFT_kernel[71]
-#define INIT_TABLE_POS_Pointer SFT_kernel[72]
+#define ID_Object (SFT_kernel[0])
+#define COLOR_Object (SFT_kernel[1])
+#define INIT_TABLE_POS_Object (SFT_kernel[2] + 0)
+#define CALL_kernel___Object___object_id(recv) ((kernel___Object___object_id_t)CALL((recv), (SFT_kernel[2] + 1)))
+#define CALL_kernel___Object___is_same_type(recv) ((kernel___Object___is_same_type_t)CALL((recv), (SFT_kernel[2] + 2)))
+#define CALL_kernel___Object_____eqeq(recv) ((kernel___Object_____eqeq_t)CALL((recv), (SFT_kernel[2] + 3)))
+#define CALL_kernel___Object_____neq(recv) ((kernel___Object_____neq_t)CALL((recv), (SFT_kernel[2] + 4)))
+#define CALL_kernel___Object___output(recv) ((kernel___Object___output_t)CALL((recv), (SFT_kernel[2] + 5)))
+#define CALL_kernel___Object___exit(recv) ((kernel___Object___exit_t)CALL((recv), (SFT_kernel[2] + 6)))
+#define CALL_kernel___Object___sys(recv) ((kernel___Object___sys_t)CALL((recv), (SFT_kernel[2] + 7)))
+#define ID_Sys (SFT_kernel[3])
+#define COLOR_Sys (SFT_kernel[4])
+#define INIT_TABLE_POS_Sys (SFT_kernel[5] + 0)
+#define CALL_kernel___Sys___main(recv) ((kernel___Sys___main_t)CALL((recv), (SFT_kernel[5] + 1)))
+#define CALL_kernel___Sys___init(recv) ((kernel___Sys___init_t)CALL((recv), (SFT_kernel[5] + 2)))
+#define ID_Comparable (SFT_kernel[6])
+#define COLOR_Comparable (SFT_kernel[7])
+#define INIT_TABLE_POS_Comparable (SFT_kernel[8] + 0)
+#define CALL_kernel___Comparable_____l(recv) ((kernel___Comparable_____l_t)CALL((recv), (SFT_kernel[8] + 1)))
+#define CALL_kernel___Comparable_____leq(recv) ((kernel___Comparable_____leq_t)CALL((recv), (SFT_kernel[8] + 2)))
+#define CALL_kernel___Comparable_____geq(recv) ((kernel___Comparable_____geq_t)CALL((recv), (SFT_kernel[8] + 3)))
+#define CALL_kernel___Comparable_____g(recv) ((kernel___Comparable_____g_t)CALL((recv), (SFT_kernel[8] + 4)))
+#define CALL_kernel___Comparable_____leqg(recv) ((kernel___Comparable_____leqg_t)CALL((recv), (SFT_kernel[8] + 5)))
+#define CALL_kernel___Comparable___is_between(recv) ((kernel___Comparable___is_between_t)CALL((recv), (SFT_kernel[8] + 6)))
+#define CALL_kernel___Comparable___max(recv) ((kernel___Comparable___max_t)CALL((recv), (SFT_kernel[8] + 7)))
+#define CALL_kernel___Comparable___min(recv) ((kernel___Comparable___min_t)CALL((recv), (SFT_kernel[8] + 8)))
+#define ID_Discrete (SFT_kernel[9])
+#define COLOR_Discrete (SFT_kernel[10])
+#define INIT_TABLE_POS_Discrete (SFT_kernel[11] + 0)
+#define CALL_kernel___Discrete___succ(recv) ((kernel___Discrete___succ_t)CALL((recv), (SFT_kernel[11] + 1)))
+#define CALL_kernel___Discrete___prec(recv) ((kernel___Discrete___prec_t)CALL((recv), (SFT_kernel[11] + 2)))
+#define CALL_kernel___Discrete_____plus(recv) ((kernel___Discrete_____plus_t)CALL((recv), (SFT_kernel[11] + 3)))
+#define CALL_kernel___Discrete_____minus(recv) ((kernel___Discrete_____minus_t)CALL((recv), (SFT_kernel[11] + 4)))
+#define CALL_kernel___Discrete___distance(recv) ((kernel___Discrete___distance_t)CALL((recv), (SFT_kernel[11] + 5)))
+#define ID_Bool (SFT_kernel[12])
+#define COLOR_Bool (SFT_kernel[13])
+#define INIT_TABLE_POS_Bool (SFT_kernel[14] + 0)
+#define ID_Float (SFT_kernel[15])
+#define COLOR_Float (SFT_kernel[16])
+#define INIT_TABLE_POS_Float (SFT_kernel[17] + 0)
+#define CALL_kernel___Float_____leq(recv) ((kernel___Float_____leq_t)CALL((recv), (SFT_kernel[17] + 1)))
+#define CALL_kernel___Float_____l(recv) ((kernel___Float_____l_t)CALL((recv), (SFT_kernel[17] + 2)))
+#define CALL_kernel___Float_____geq(recv) ((kernel___Float_____geq_t)CALL((recv), (SFT_kernel[17] + 3)))
+#define CALL_kernel___Float_____g(recv) ((kernel___Float_____g_t)CALL((recv), (SFT_kernel[17] + 4)))
+#define CALL_kernel___Float_____plus(recv) ((kernel___Float_____plus_t)CALL((recv), (SFT_kernel[17] + 5)))
+#define CALL_kernel___Float___unary__minus(recv) ((kernel___Float___unary__minus_t)CALL((recv), (SFT_kernel[17] + 6)))
+#define CALL_kernel___Float_____minus(recv) ((kernel___Float_____minus_t)CALL((recv), (SFT_kernel[17] + 7)))
+#define CALL_kernel___Float_____star(recv) ((kernel___Float_____star_t)CALL((recv), (SFT_kernel[17] + 8)))
+#define CALL_kernel___Float_____slash(recv) ((kernel___Float_____slash_t)CALL((recv), (SFT_kernel[17] + 9)))
+#define CALL_kernel___Float___to_i(recv) ((kernel___Float___to_i_t)CALL((recv), (SFT_kernel[17] + 10)))
+#define ID_Int (SFT_kernel[18])
+#define COLOR_Int (SFT_kernel[19])
+#define INIT_TABLE_POS_Int (SFT_kernel[20] + 0)
+#define CALL_kernel___Int___unary__minus(recv) ((kernel___Int___unary__minus_t)CALL((recv), (SFT_kernel[20] + 1)))
+#define CALL_kernel___Int_____star(recv) ((kernel___Int_____star_t)CALL((recv), (SFT_kernel[20] + 2)))
+#define CALL_kernel___Int_____slash(recv) ((kernel___Int_____slash_t)CALL((recv), (SFT_kernel[20] + 3)))
+#define CALL_kernel___Int_____percent(recv) ((kernel___Int_____percent_t)CALL((recv), (SFT_kernel[20] + 4)))
+#define CALL_kernel___Int___lshift(recv) ((kernel___Int___lshift_t)CALL((recv), (SFT_kernel[20] + 5)))
+#define CALL_kernel___Int___rshift(recv) ((kernel___Int___rshift_t)CALL((recv), (SFT_kernel[20] + 6)))
+#define CALL_kernel___Int___to_f(recv) ((kernel___Int___to_f_t)CALL((recv), (SFT_kernel[20] + 7)))
+#define CALL_kernel___Int___ascii(recv) ((kernel___Int___ascii_t)CALL((recv), (SFT_kernel[20] + 8)))
+#define CALL_kernel___Int___digit_count(recv) ((kernel___Int___digit_count_t)CALL((recv), (SFT_kernel[20] + 9)))
+#define CALL_kernel___Int___to_c(recv) ((kernel___Int___to_c_t)CALL((recv), (SFT_kernel[20] + 10)))
+#define ID_Char (SFT_kernel[21])
+#define COLOR_Char (SFT_kernel[22])
+#define INIT_TABLE_POS_Char (SFT_kernel[23] + 0)
+#define CALL_kernel___Char___to_i(recv) ((kernel___Char___to_i_t)CALL((recv), (SFT_kernel[23] + 1)))
+#define CALL_kernel___Char___ascii(recv) ((kernel___Char___ascii_t)CALL((recv), (SFT_kernel[23] + 2)))
+#define CALL_kernel___Char___to_lower(recv) ((kernel___Char___to_lower_t)CALL((recv), (SFT_kernel[23] + 3)))
+#define CALL_kernel___Char___to_upper(recv) ((kernel___Char___to_upper_t)CALL((recv), (SFT_kernel[23] + 4)))
+#define ID_Pointer (SFT_kernel[24])
+#define COLOR_Pointer (SFT_kernel[25])
+#define INIT_TABLE_POS_Pointer (SFT_kernel[26] + 0)
 typedef val_t (* kernel___Object___object_id_t)(val_t  self);
 val_t kernel___Object___object_id(val_t  self);
 #define LOCATE_kernel___Object___object_id "kernel::Object::object_id"

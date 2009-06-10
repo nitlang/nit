@@ -7,152 +7,148 @@
 extern const classtable_elt_t VFT_Lexer[];
 extern const char *LOCATE_lexer;
 extern const int SFT_lexer[];
-#define COLOR_lexer___Token____text SFT_lexer[0]
-#define COLOR_lexer___Token____filename SFT_lexer[1]
-#define COLOR_lexer___Token____line SFT_lexer[2]
-#define COLOR_lexer___Token____pos SFT_lexer[3]
-#define COLOR_lexer___Token___text SFT_lexer[4]
-#define COLOR_lexer___Token___text__eq SFT_lexer[5]
-#define COLOR_lexer___Token___filename SFT_lexer[6]
-#define COLOR_lexer___Token___line SFT_lexer[7]
-#define COLOR_lexer___Token___pos SFT_lexer[8]
-#define COLOR_lexer___Token___parser_index SFT_lexer[9]
-#define COLOR_lexer___TEol___init_tk SFT_lexer[10]
-#define COLOR_lexer___TComment___init_tk SFT_lexer[11]
-#define COLOR_lexer___TKwpackage___init_tk SFT_lexer[12]
-#define COLOR_lexer___TKwimport___init_tk SFT_lexer[13]
-#define COLOR_lexer___TKwclass___init_tk SFT_lexer[14]
-#define COLOR_lexer___TKwabstract___init_tk SFT_lexer[15]
-#define COLOR_lexer___TKwinterface___init_tk SFT_lexer[16]
-#define COLOR_lexer___TKwuniversal___init_tk SFT_lexer[17]
-#define COLOR_lexer___TKwspecial___init_tk SFT_lexer[18]
-#define COLOR_lexer___TKwend___init_tk SFT_lexer[19]
-#define COLOR_lexer___TKwmeth___init_tk SFT_lexer[20]
-#define COLOR_lexer___TKwtype___init_tk SFT_lexer[21]
-#define COLOR_lexer___TKwattr___init_tk SFT_lexer[22]
-#define COLOR_lexer___TKwinit___init_tk SFT_lexer[23]
-#define COLOR_lexer___TKwredef___init_tk SFT_lexer[24]
-#define COLOR_lexer___TKwis___init_tk SFT_lexer[25]
-#define COLOR_lexer___TKwdo___init_tk SFT_lexer[26]
-#define COLOR_lexer___TKwreadable___init_tk SFT_lexer[27]
-#define COLOR_lexer___TKwwritable___init_tk SFT_lexer[28]
-#define COLOR_lexer___TKwvar___init_tk SFT_lexer[29]
-#define COLOR_lexer___TKwintern___init_tk SFT_lexer[30]
-#define COLOR_lexer___TKwextern___init_tk SFT_lexer[31]
-#define COLOR_lexer___TKwprotected___init_tk SFT_lexer[32]
-#define COLOR_lexer___TKwprivate___init_tk SFT_lexer[33]
-#define COLOR_lexer___TKwintrude___init_tk SFT_lexer[34]
-#define COLOR_lexer___TKwif___init_tk SFT_lexer[35]
-#define COLOR_lexer___TKwthen___init_tk SFT_lexer[36]
-#define COLOR_lexer___TKwelse___init_tk SFT_lexer[37]
-#define COLOR_lexer___TKwwhile___init_tk SFT_lexer[38]
-#define COLOR_lexer___TKwfor___init_tk SFT_lexer[39]
-#define COLOR_lexer___TKwin___init_tk SFT_lexer[40]
-#define COLOR_lexer___TKwand___init_tk SFT_lexer[41]
-#define COLOR_lexer___TKwor___init_tk SFT_lexer[42]
-#define COLOR_lexer___TKwnot___init_tk SFT_lexer[43]
-#define COLOR_lexer___TKwreturn___init_tk SFT_lexer[44]
-#define COLOR_lexer___TKwcontinue___init_tk SFT_lexer[45]
-#define COLOR_lexer___TKwbreak___init_tk SFT_lexer[46]
-#define COLOR_lexer___TKwabort___init_tk SFT_lexer[47]
-#define COLOR_lexer___TKwassert___init_tk SFT_lexer[48]
-#define COLOR_lexer___TKwnew___init_tk SFT_lexer[49]
-#define COLOR_lexer___TKwisa___init_tk SFT_lexer[50]
-#define COLOR_lexer___TKwonce___init_tk SFT_lexer[51]
-#define COLOR_lexer___TKwsuper___init_tk SFT_lexer[52]
-#define COLOR_lexer___TKwself___init_tk SFT_lexer[53]
-#define COLOR_lexer___TKwtrue___init_tk SFT_lexer[54]
-#define COLOR_lexer___TKwfalse___init_tk SFT_lexer[55]
-#define COLOR_lexer___TKwnull___init_tk SFT_lexer[56]
-#define COLOR_lexer___TKwas___init_tk SFT_lexer[57]
-#define COLOR_lexer___TKwwith___init_tk SFT_lexer[58]
-#define COLOR_lexer___TOpar___init_tk SFT_lexer[59]
-#define COLOR_lexer___TCpar___init_tk SFT_lexer[60]
-#define COLOR_lexer___TObra___init_tk SFT_lexer[61]
-#define COLOR_lexer___TCbra___init_tk SFT_lexer[62]
-#define COLOR_lexer___TComma___init_tk SFT_lexer[63]
-#define COLOR_lexer___TColumn___init_tk SFT_lexer[64]
-#define COLOR_lexer___TQuad___init_tk SFT_lexer[65]
-#define COLOR_lexer___TAssign___init_tk SFT_lexer[66]
-#define COLOR_lexer___TPluseq___init_tk SFT_lexer[67]
-#define COLOR_lexer___TMinuseq___init_tk SFT_lexer[68]
-#define COLOR_lexer___TDotdotdot___init_tk SFT_lexer[69]
-#define COLOR_lexer___TDotdot___init_tk SFT_lexer[70]
-#define COLOR_lexer___TDot___init_tk SFT_lexer[71]
-#define COLOR_lexer___TPlus___init_tk SFT_lexer[72]
-#define COLOR_lexer___TMinus___init_tk SFT_lexer[73]
-#define COLOR_lexer___TStar___init_tk SFT_lexer[74]
-#define COLOR_lexer___TSlash___init_tk SFT_lexer[75]
-#define COLOR_lexer___TPercent___init_tk SFT_lexer[76]
-#define COLOR_lexer___TEq___init_tk SFT_lexer[77]
-#define COLOR_lexer___TNe___init_tk SFT_lexer[78]
-#define COLOR_lexer___TLt___init_tk SFT_lexer[79]
-#define COLOR_lexer___TLe___init_tk SFT_lexer[80]
-#define COLOR_lexer___TGt___init_tk SFT_lexer[81]
-#define COLOR_lexer___TGe___init_tk SFT_lexer[82]
-#define COLOR_lexer___TStarship___init_tk SFT_lexer[83]
-#define COLOR_lexer___TClassid___init_tk SFT_lexer[84]
-#define COLOR_lexer___TId___init_tk SFT_lexer[85]
-#define COLOR_lexer___TAttrid___init_tk SFT_lexer[86]
-#define COLOR_lexer___TNumber___init_tk SFT_lexer[87]
-#define COLOR_lexer___TFloat___init_tk SFT_lexer[88]
-#define COLOR_lexer___TChar___init_tk SFT_lexer[89]
-#define COLOR_lexer___TString___init_tk SFT_lexer[90]
-#define COLOR_lexer___TStartString___init_tk SFT_lexer[91]
-#define COLOR_lexer___TMidString___init_tk SFT_lexer[92]
-#define COLOR_lexer___TEndString___init_tk SFT_lexer[93]
-#define COLOR_lexer___EOF___init SFT_lexer[94]
-#define COLOR_lexer___PError____message SFT_lexer[95]
-#define COLOR_lexer___PError___message SFT_lexer[96]
-#define COLOR_lexer___PError___message__eq SFT_lexer[97]
-#define COLOR_lexer___PError___init_error SFT_lexer[98]
-#define ID_Lexer SFT_lexer[99]
-#define COLOR_Lexer SFT_lexer[100]
-#define COLOR_lexer___Lexer____token SFT_lexer[101]
-#define COLOR_lexer___Lexer____state SFT_lexer[102]
-#define COLOR_lexer___Lexer____filename SFT_lexer[103]
-#define COLOR_lexer___Lexer____stream SFT_lexer[104]
-#define COLOR_lexer___Lexer____stream_buf SFT_lexer[105]
-#define COLOR_lexer___Lexer____stream_pos SFT_lexer[106]
-#define COLOR_lexer___Lexer____line SFT_lexer[107]
-#define COLOR_lexer___Lexer____pos SFT_lexer[108]
-#define COLOR_lexer___Lexer____cr SFT_lexer[109]
-#define COLOR_lexer___Lexer____eof SFT_lexer[110]
-#define COLOR_lexer___Lexer____text SFT_lexer[111]
-#define COLOR_lexer___Lexer____goto_table SFT_lexer[112]
-#define COLOR_lexer___Lexer____accept_table SFT_lexer[113]
-#define INIT_TABLE_POS_Lexer SFT_lexer[114]
-#define COLOR_lexer___Lexer___filename SFT_lexer[115]
-#define COLOR_lexer___Lexer___state_initial SFT_lexer[116]
-#define COLOR_lexer___Lexer___init SFT_lexer[117]
-#define COLOR_lexer___Lexer___peek SFT_lexer[118]
-#define COLOR_lexer___Lexer___next SFT_lexer[119]
-#define COLOR_lexer___Lexer___get_token SFT_lexer[120]
-#define COLOR_lexer___Lexer___get_char SFT_lexer[121]
-#define COLOR_lexer___Lexer___push_back SFT_lexer[122]
-#define COLOR_lexer___Lexer___build_goto_table SFT_lexer[123]
-#define COLOR_lexer___Lexer___nil_array SFT_lexer[124]
-#define COLOR_lexer___Lexer___build_accept_table SFT_lexer[125]
+#define ATTR_lexer___Token____text(recv) ATTR(recv, (SFT_lexer[0] + 0))
+#define ATTR_lexer___Token____filename(recv) ATTR(recv, (SFT_lexer[0] + 1))
+#define ATTR_lexer___Token____line(recv) ATTR(recv, (SFT_lexer[0] + 2))
+#define ATTR_lexer___Token____pos(recv) ATTR(recv, (SFT_lexer[0] + 3))
+#define CALL_lexer___Token___text(recv) ((lexer___Token___text_t)CALL((recv), (SFT_lexer[1] + 0)))
+#define CALL_lexer___Token___text__eq(recv) ((lexer___Token___text__eq_t)CALL((recv), (SFT_lexer[1] + 1)))
+#define CALL_lexer___Token___filename(recv) ((lexer___Token___filename_t)CALL((recv), (SFT_lexer[1] + 2)))
+#define CALL_lexer___Token___line(recv) ((lexer___Token___line_t)CALL((recv), (SFT_lexer[1] + 3)))
+#define CALL_lexer___Token___pos(recv) ((lexer___Token___pos_t)CALL((recv), (SFT_lexer[1] + 4)))
+#define CALL_lexer___Token___parser_index(recv) ((lexer___Token___parser_index_t)CALL((recv), (SFT_lexer[1] + 5)))
+#define CALL_lexer___TEol___init_tk(recv) ((lexer___TEol___init_tk_t)CALL((recv), (SFT_lexer[2] + 0)))
+#define CALL_lexer___TComment___init_tk(recv) ((lexer___TComment___init_tk_t)CALL((recv), (SFT_lexer[3] + 0)))
+#define CALL_lexer___TKwpackage___init_tk(recv) ((lexer___TKwpackage___init_tk_t)CALL((recv), (SFT_lexer[4] + 0)))
+#define CALL_lexer___TKwimport___init_tk(recv) ((lexer___TKwimport___init_tk_t)CALL((recv), (SFT_lexer[5] + 0)))
+#define CALL_lexer___TKwclass___init_tk(recv) ((lexer___TKwclass___init_tk_t)CALL((recv), (SFT_lexer[6] + 0)))
+#define CALL_lexer___TKwabstract___init_tk(recv) ((lexer___TKwabstract___init_tk_t)CALL((recv), (SFT_lexer[7] + 0)))
+#define CALL_lexer___TKwinterface___init_tk(recv) ((lexer___TKwinterface___init_tk_t)CALL((recv), (SFT_lexer[8] + 0)))
+#define CALL_lexer___TKwuniversal___init_tk(recv) ((lexer___TKwuniversal___init_tk_t)CALL((recv), (SFT_lexer[9] + 0)))
+#define CALL_lexer___TKwspecial___init_tk(recv) ((lexer___TKwspecial___init_tk_t)CALL((recv), (SFT_lexer[10] + 0)))
+#define CALL_lexer___TKwend___init_tk(recv) ((lexer___TKwend___init_tk_t)CALL((recv), (SFT_lexer[11] + 0)))
+#define CALL_lexer___TKwmeth___init_tk(recv) ((lexer___TKwmeth___init_tk_t)CALL((recv), (SFT_lexer[12] + 0)))
+#define CALL_lexer___TKwtype___init_tk(recv) ((lexer___TKwtype___init_tk_t)CALL((recv), (SFT_lexer[13] + 0)))
+#define CALL_lexer___TKwattr___init_tk(recv) ((lexer___TKwattr___init_tk_t)CALL((recv), (SFT_lexer[14] + 0)))
+#define CALL_lexer___TKwinit___init_tk(recv) ((lexer___TKwinit___init_tk_t)CALL((recv), (SFT_lexer[15] + 0)))
+#define CALL_lexer___TKwredef___init_tk(recv) ((lexer___TKwredef___init_tk_t)CALL((recv), (SFT_lexer[16] + 0)))
+#define CALL_lexer___TKwis___init_tk(recv) ((lexer___TKwis___init_tk_t)CALL((recv), (SFT_lexer[17] + 0)))
+#define CALL_lexer___TKwdo___init_tk(recv) ((lexer___TKwdo___init_tk_t)CALL((recv), (SFT_lexer[18] + 0)))
+#define CALL_lexer___TKwreadable___init_tk(recv) ((lexer___TKwreadable___init_tk_t)CALL((recv), (SFT_lexer[19] + 0)))
+#define CALL_lexer___TKwwritable___init_tk(recv) ((lexer___TKwwritable___init_tk_t)CALL((recv), (SFT_lexer[20] + 0)))
+#define CALL_lexer___TKwvar___init_tk(recv) ((lexer___TKwvar___init_tk_t)CALL((recv), (SFT_lexer[21] + 0)))
+#define CALL_lexer___TKwintern___init_tk(recv) ((lexer___TKwintern___init_tk_t)CALL((recv), (SFT_lexer[22] + 0)))
+#define CALL_lexer___TKwextern___init_tk(recv) ((lexer___TKwextern___init_tk_t)CALL((recv), (SFT_lexer[23] + 0)))
+#define CALL_lexer___TKwprotected___init_tk(recv) ((lexer___TKwprotected___init_tk_t)CALL((recv), (SFT_lexer[24] + 0)))
+#define CALL_lexer___TKwprivate___init_tk(recv) ((lexer___TKwprivate___init_tk_t)CALL((recv), (SFT_lexer[25] + 0)))
+#define CALL_lexer___TKwintrude___init_tk(recv) ((lexer___TKwintrude___init_tk_t)CALL((recv), (SFT_lexer[26] + 0)))
+#define CALL_lexer___TKwif___init_tk(recv) ((lexer___TKwif___init_tk_t)CALL((recv), (SFT_lexer[27] + 0)))
+#define CALL_lexer___TKwthen___init_tk(recv) ((lexer___TKwthen___init_tk_t)CALL((recv), (SFT_lexer[28] + 0)))
+#define CALL_lexer___TKwelse___init_tk(recv) ((lexer___TKwelse___init_tk_t)CALL((recv), (SFT_lexer[29] + 0)))
+#define CALL_lexer___TKwwhile___init_tk(recv) ((lexer___TKwwhile___init_tk_t)CALL((recv), (SFT_lexer[30] + 0)))
+#define CALL_lexer___TKwfor___init_tk(recv) ((lexer___TKwfor___init_tk_t)CALL((recv), (SFT_lexer[31] + 0)))
+#define CALL_lexer___TKwin___init_tk(recv) ((lexer___TKwin___init_tk_t)CALL((recv), (SFT_lexer[32] + 0)))
+#define CALL_lexer___TKwand___init_tk(recv) ((lexer___TKwand___init_tk_t)CALL((recv), (SFT_lexer[33] + 0)))
+#define CALL_lexer___TKwor___init_tk(recv) ((lexer___TKwor___init_tk_t)CALL((recv), (SFT_lexer[34] + 0)))
+#define CALL_lexer___TKwnot___init_tk(recv) ((lexer___TKwnot___init_tk_t)CALL((recv), (SFT_lexer[35] + 0)))
+#define CALL_lexer___TKwreturn___init_tk(recv) ((lexer___TKwreturn___init_tk_t)CALL((recv), (SFT_lexer[36] + 0)))
+#define CALL_lexer___TKwcontinue___init_tk(recv) ((lexer___TKwcontinue___init_tk_t)CALL((recv), (SFT_lexer[37] + 0)))
+#define CALL_lexer___TKwbreak___init_tk(recv) ((lexer___TKwbreak___init_tk_t)CALL((recv), (SFT_lexer[38] + 0)))
+#define CALL_lexer___TKwabort___init_tk(recv) ((lexer___TKwabort___init_tk_t)CALL((recv), (SFT_lexer[39] + 0)))
+#define CALL_lexer___TKwassert___init_tk(recv) ((lexer___TKwassert___init_tk_t)CALL((recv), (SFT_lexer[40] + 0)))
+#define CALL_lexer___TKwnew___init_tk(recv) ((lexer___TKwnew___init_tk_t)CALL((recv), (SFT_lexer[41] + 0)))
+#define CALL_lexer___TKwisa___init_tk(recv) ((lexer___TKwisa___init_tk_t)CALL((recv), (SFT_lexer[42] + 0)))
+#define CALL_lexer___TKwonce___init_tk(recv) ((lexer___TKwonce___init_tk_t)CALL((recv), (SFT_lexer[43] + 0)))
+#define CALL_lexer___TKwsuper___init_tk(recv) ((lexer___TKwsuper___init_tk_t)CALL((recv), (SFT_lexer[44] + 0)))
+#define CALL_lexer___TKwself___init_tk(recv) ((lexer___TKwself___init_tk_t)CALL((recv), (SFT_lexer[45] + 0)))
+#define CALL_lexer___TKwtrue___init_tk(recv) ((lexer___TKwtrue___init_tk_t)CALL((recv), (SFT_lexer[46] + 0)))
+#define CALL_lexer___TKwfalse___init_tk(recv) ((lexer___TKwfalse___init_tk_t)CALL((recv), (SFT_lexer[47] + 0)))
+#define CALL_lexer___TKwnull___init_tk(recv) ((lexer___TKwnull___init_tk_t)CALL((recv), (SFT_lexer[48] + 0)))
+#define CALL_lexer___TKwas___init_tk(recv) ((lexer___TKwas___init_tk_t)CALL((recv), (SFT_lexer[49] + 0)))
+#define CALL_lexer___TKwwith___init_tk(recv) ((lexer___TKwwith___init_tk_t)CALL((recv), (SFT_lexer[50] + 0)))
+#define CALL_lexer___TOpar___init_tk(recv) ((lexer___TOpar___init_tk_t)CALL((recv), (SFT_lexer[51] + 0)))
+#define CALL_lexer___TCpar___init_tk(recv) ((lexer___TCpar___init_tk_t)CALL((recv), (SFT_lexer[52] + 0)))
+#define CALL_lexer___TObra___init_tk(recv) ((lexer___TObra___init_tk_t)CALL((recv), (SFT_lexer[53] + 0)))
+#define CALL_lexer___TCbra___init_tk(recv) ((lexer___TCbra___init_tk_t)CALL((recv), (SFT_lexer[54] + 0)))
+#define CALL_lexer___TComma___init_tk(recv) ((lexer___TComma___init_tk_t)CALL((recv), (SFT_lexer[55] + 0)))
+#define CALL_lexer___TColumn___init_tk(recv) ((lexer___TColumn___init_tk_t)CALL((recv), (SFT_lexer[56] + 0)))
+#define CALL_lexer___TQuad___init_tk(recv) ((lexer___TQuad___init_tk_t)CALL((recv), (SFT_lexer[57] + 0)))
+#define CALL_lexer___TAssign___init_tk(recv) ((lexer___TAssign___init_tk_t)CALL((recv), (SFT_lexer[58] + 0)))
+#define CALL_lexer___TPluseq___init_tk(recv) ((lexer___TPluseq___init_tk_t)CALL((recv), (SFT_lexer[59] + 0)))
+#define CALL_lexer___TMinuseq___init_tk(recv) ((lexer___TMinuseq___init_tk_t)CALL((recv), (SFT_lexer[60] + 0)))
+#define CALL_lexer___TDotdotdot___init_tk(recv) ((lexer___TDotdotdot___init_tk_t)CALL((recv), (SFT_lexer[61] + 0)))
+#define CALL_lexer___TDotdot___init_tk(recv) ((lexer___TDotdot___init_tk_t)CALL((recv), (SFT_lexer[62] + 0)))
+#define CALL_lexer___TDot___init_tk(recv) ((lexer___TDot___init_tk_t)CALL((recv), (SFT_lexer[63] + 0)))
+#define CALL_lexer___TPlus___init_tk(recv) ((lexer___TPlus___init_tk_t)CALL((recv), (SFT_lexer[64] + 0)))
+#define CALL_lexer___TMinus___init_tk(recv) ((lexer___TMinus___init_tk_t)CALL((recv), (SFT_lexer[65] + 0)))
+#define CALL_lexer___TStar___init_tk(recv) ((lexer___TStar___init_tk_t)CALL((recv), (SFT_lexer[66] + 0)))
+#define CALL_lexer___TSlash___init_tk(recv) ((lexer___TSlash___init_tk_t)CALL((recv), (SFT_lexer[67] + 0)))
+#define CALL_lexer___TPercent___init_tk(recv) ((lexer___TPercent___init_tk_t)CALL((recv), (SFT_lexer[68] + 0)))
+#define CALL_lexer___TEq___init_tk(recv) ((lexer___TEq___init_tk_t)CALL((recv), (SFT_lexer[69] + 0)))
+#define CALL_lexer___TNe___init_tk(recv) ((lexer___TNe___init_tk_t)CALL((recv), (SFT_lexer[70] + 0)))
+#define CALL_lexer___TLt___init_tk(recv) ((lexer___TLt___init_tk_t)CALL((recv), (SFT_lexer[71] + 0)))
+#define CALL_lexer___TLe___init_tk(recv) ((lexer___TLe___init_tk_t)CALL((recv), (SFT_lexer[72] + 0)))
+#define CALL_lexer___TGt___init_tk(recv) ((lexer___TGt___init_tk_t)CALL((recv), (SFT_lexer[73] + 0)))
+#define CALL_lexer___TGe___init_tk(recv) ((lexer___TGe___init_tk_t)CALL((recv), (SFT_lexer[74] + 0)))
+#define CALL_lexer___TStarship___init_tk(recv) ((lexer___TStarship___init_tk_t)CALL((recv), (SFT_lexer[75] + 0)))
+#define CALL_lexer___TClassid___init_tk(recv) ((lexer___TClassid___init_tk_t)CALL((recv), (SFT_lexer[76] + 0)))
+#define CALL_lexer___TId___init_tk(recv) ((lexer___TId___init_tk_t)CALL((recv), (SFT_lexer[77] + 0)))
+#define CALL_lexer___TAttrid___init_tk(recv) ((lexer___TAttrid___init_tk_t)CALL((recv), (SFT_lexer[78] + 0)))
+#define CALL_lexer___TNumber___init_tk(recv) ((lexer___TNumber___init_tk_t)CALL((recv), (SFT_lexer[79] + 0)))
+#define CALL_lexer___TFloat___init_tk(recv) ((lexer___TFloat___init_tk_t)CALL((recv), (SFT_lexer[80] + 0)))
+#define CALL_lexer___TChar___init_tk(recv) ((lexer___TChar___init_tk_t)CALL((recv), (SFT_lexer[81] + 0)))
+#define CALL_lexer___TString___init_tk(recv) ((lexer___TString___init_tk_t)CALL((recv), (SFT_lexer[82] + 0)))
+#define CALL_lexer___TStartString___init_tk(recv) ((lexer___TStartString___init_tk_t)CALL((recv), (SFT_lexer[83] + 0)))
+#define CALL_lexer___TMidString___init_tk(recv) ((lexer___TMidString___init_tk_t)CALL((recv), (SFT_lexer[84] + 0)))
+#define CALL_lexer___TEndString___init_tk(recv) ((lexer___TEndString___init_tk_t)CALL((recv), (SFT_lexer[85] + 0)))
+#define CALL_lexer___EOF___init(recv) ((lexer___EOF___init_t)CALL((recv), (SFT_lexer[86] + 0)))
+#define ATTR_lexer___PError____message(recv) ATTR(recv, (SFT_lexer[87] + 0))
+#define CALL_lexer___PError___message(recv) ((lexer___PError___message_t)CALL((recv), (SFT_lexer[88] + 0)))
+#define CALL_lexer___PError___message__eq(recv) ((lexer___PError___message__eq_t)CALL((recv), (SFT_lexer[88] + 1)))
+#define CALL_lexer___PError___init_error(recv) ((lexer___PError___init_error_t)CALL((recv), (SFT_lexer[88] + 2)))
+#define ID_Lexer (SFT_lexer[89])
+#define COLOR_Lexer (SFT_lexer[90])
+#define ATTR_lexer___Lexer____token(recv) ATTR(recv, (SFT_lexer[91] + 0))
+#define ATTR_lexer___Lexer____state(recv) ATTR(recv, (SFT_lexer[91] + 1))
+#define ATTR_lexer___Lexer____filename(recv) ATTR(recv, (SFT_lexer[91] + 2))
+#define ATTR_lexer___Lexer____stream(recv) ATTR(recv, (SFT_lexer[91] + 3))
+#define ATTR_lexer___Lexer____stream_buf(recv) ATTR(recv, (SFT_lexer[91] + 4))
+#define ATTR_lexer___Lexer____stream_pos(recv) ATTR(recv, (SFT_lexer[91] + 5))
+#define ATTR_lexer___Lexer____line(recv) ATTR(recv, (SFT_lexer[91] + 6))
+#define ATTR_lexer___Lexer____pos(recv) ATTR(recv, (SFT_lexer[91] + 7))
+#define ATTR_lexer___Lexer____cr(recv) ATTR(recv, (SFT_lexer[91] + 8))
+#define ATTR_lexer___Lexer____eof(recv) ATTR(recv, (SFT_lexer[91] + 9))
+#define ATTR_lexer___Lexer____text(recv) ATTR(recv, (SFT_lexer[91] + 10))
+#define ATTR_lexer___Lexer____goto_table(recv) ATTR(recv, (SFT_lexer[91] + 11))
+#define ATTR_lexer___Lexer____accept_table(recv) ATTR(recv, (SFT_lexer[91] + 12))
+#define INIT_TABLE_POS_Lexer (SFT_lexer[92] + 0)
+#define CALL_lexer___Lexer___filename(recv) ((lexer___Lexer___filename_t)CALL((recv), (SFT_lexer[92] + 1)))
+#define CALL_lexer___Lexer___state_initial(recv) ((lexer___Lexer___state_initial_t)CALL((recv), (SFT_lexer[92] + 2)))
+#define CALL_lexer___Lexer___init(recv) ((lexer___Lexer___init_t)CALL((recv), (SFT_lexer[92] + 3)))
+#define CALL_lexer___Lexer___peek(recv) ((lexer___Lexer___peek_t)CALL((recv), (SFT_lexer[92] + 4)))
+#define CALL_lexer___Lexer___next(recv) ((lexer___Lexer___next_t)CALL((recv), (SFT_lexer[92] + 5)))
+#define CALL_lexer___Lexer___get_token(recv) ((lexer___Lexer___get_token_t)CALL((recv), (SFT_lexer[92] + 6)))
+#define CALL_lexer___Lexer___get_char(recv) ((lexer___Lexer___get_char_t)CALL((recv), (SFT_lexer[92] + 7)))
+#define CALL_lexer___Lexer___push_back(recv) ((lexer___Lexer___push_back_t)CALL((recv), (SFT_lexer[92] + 8)))
+#define CALL_lexer___Lexer___build_goto_table(recv) ((lexer___Lexer___build_goto_table_t)CALL((recv), (SFT_lexer[92] + 9)))
+#define CALL_lexer___Lexer___nil_array(recv) ((lexer___Lexer___nil_array_t)CALL((recv), (SFT_lexer[92] + 10)))
+#define CALL_lexer___Lexer___build_accept_table(recv) ((lexer___Lexer___build_accept_table_t)CALL((recv), (SFT_lexer[92] + 11)))
 typedef val_t (* lexer___Token___to_s_t)(val_t  self);
 val_t lexer___Token___to_s(val_t  self);
 #define LOCATE_lexer___Token___to_s "lexer::Token::(string::Object::to_s)"
 val_t NEW_Token_parser_nodes___PNode___init();
-#define ATTR_lexer___Token____text(recv) ATTR(recv, COLOR_lexer___Token____text)
 typedef val_t (* lexer___Token___text_t)(val_t  self);
 val_t lexer___Token___text(val_t  self);
 #define LOCATE_lexer___Token___text "lexer::Token::text"
 typedef void (* lexer___Token___text__eq_t)(val_t  self, val_t  param0);
 void lexer___Token___text__eq(val_t  self, val_t  param0);
 #define LOCATE_lexer___Token___text__eq "lexer::Token::text="
-#define ATTR_lexer___Token____filename(recv) ATTR(recv, COLOR_lexer___Token____filename)
 typedef val_t (* lexer___Token___filename_t)(val_t  self);
 val_t lexer___Token___filename(val_t  self);
 #define LOCATE_lexer___Token___filename "lexer::Token::filename"
-#define ATTR_lexer___Token____line(recv) ATTR(recv, COLOR_lexer___Token____line)
 typedef val_t (* lexer___Token___line_t)(val_t  self);
 val_t lexer___Token___line(val_t  self);
 #define LOCATE_lexer___Token___line "lexer::Token::line"
-#define ATTR_lexer___Token____pos(recv) ATTR(recv, COLOR_lexer___Token____pos)
 typedef val_t (* lexer___Token___pos_t)(val_t  self);
 val_t lexer___Token___pos(val_t  self);
 #define LOCATE_lexer___Token___pos "lexer::Token::pos"
@@ -840,7 +836,6 @@ void lexer___EOF___init(val_t  self, val_t  param0, val_t  param1, val_t  param2
 #define LOCATE_lexer___EOF___init "lexer::EOF::init"
 val_t NEW_EOF_lexer___EOF___init(val_t p0, val_t p1, val_t p2);
 val_t NEW_PError_parser_nodes___PError___noinit();
-#define ATTR_lexer___PError____message(recv) ATTR(recv, COLOR_lexer___PError____message)
 typedef val_t (* lexer___PError___message_t)(val_t  self);
 val_t lexer___PError___message(val_t  self);
 #define LOCATE_lexer___PError___message "lexer::PError::message"
@@ -851,20 +846,9 @@ typedef void (* lexer___PError___init_error_t)(val_t  self, val_t  param0, val_t
 void lexer___PError___init_error(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
 #define LOCATE_lexer___PError___init_error "lexer::PError::init_error"
 val_t NEW_PError_lexer___PError___init_error(val_t p0, val_t p1, val_t p2, val_t p3);
-#define ATTR_lexer___Lexer____token(recv) ATTR(recv, COLOR_lexer___Lexer____token)
-#define ATTR_lexer___Lexer____state(recv) ATTR(recv, COLOR_lexer___Lexer____state)
-#define ATTR_lexer___Lexer____filename(recv) ATTR(recv, COLOR_lexer___Lexer____filename)
 typedef val_t (* lexer___Lexer___filename_t)(val_t  self);
 val_t lexer___Lexer___filename(val_t  self);
 #define LOCATE_lexer___Lexer___filename "lexer::Lexer::filename"
-#define ATTR_lexer___Lexer____stream(recv) ATTR(recv, COLOR_lexer___Lexer____stream)
-#define ATTR_lexer___Lexer____stream_buf(recv) ATTR(recv, COLOR_lexer___Lexer____stream_buf)
-#define ATTR_lexer___Lexer____stream_pos(recv) ATTR(recv, COLOR_lexer___Lexer____stream_pos)
-#define ATTR_lexer___Lexer____line(recv) ATTR(recv, COLOR_lexer___Lexer____line)
-#define ATTR_lexer___Lexer____pos(recv) ATTR(recv, COLOR_lexer___Lexer____pos)
-#define ATTR_lexer___Lexer____cr(recv) ATTR(recv, COLOR_lexer___Lexer____cr)
-#define ATTR_lexer___Lexer____eof(recv) ATTR(recv, COLOR_lexer___Lexer____eof)
-#define ATTR_lexer___Lexer____text(recv) ATTR(recv, COLOR_lexer___Lexer____text)
 typedef val_t (* lexer___Lexer___state_initial_t)(val_t  self);
 val_t lexer___Lexer___state_initial(val_t  self);
 #define LOCATE_lexer___Lexer___state_initial "lexer::Lexer::state_initial"
@@ -887,14 +871,12 @@ val_t lexer___Lexer___get_char(val_t  self);
 typedef void (* lexer___Lexer___push_back_t)(val_t  self, val_t  param0);
 void lexer___Lexer___push_back(val_t  self, val_t  param0);
 #define LOCATE_lexer___Lexer___push_back "lexer::Lexer::push_back"
-#define ATTR_lexer___Lexer____goto_table(recv) ATTR(recv, COLOR_lexer___Lexer____goto_table)
 typedef void (* lexer___Lexer___build_goto_table_t)(val_t  self);
 void lexer___Lexer___build_goto_table(val_t  self);
 #define LOCATE_lexer___Lexer___build_goto_table "lexer::Lexer::build_goto_table"
 typedef val_t (* lexer___Lexer___nil_array_t)(val_t  self);
 val_t lexer___Lexer___nil_array(val_t  self);
 #define LOCATE_lexer___Lexer___nil_array "lexer::Lexer::nil_array"
-#define ATTR_lexer___Lexer____accept_table(recv) ATTR(recv, COLOR_lexer___Lexer____accept_table)
 typedef void (* lexer___Lexer___build_accept_table_t)(val_t  self);
 void lexer___Lexer___build_accept_table(val_t  self);
 #define LOCATE_lexer___Lexer___build_accept_table "lexer::Lexer::build_accept_table"

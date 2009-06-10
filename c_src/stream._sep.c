@@ -48,18 +48,18 @@ val_t stream___IStream___read(val_t  self, val_t  param0) {
     variable[5] = variable[4];
     if (UNTAG_Bool(variable[5])) { /* and */
       variable[5] = variable[0];
-      variable[5] = ((stream___IStream___eof_t)CALL(variable[5],COLOR_stream___IStream___eof))(variable[5]) /*IStream::eof*/;
+      variable[5] = CALL_stream___IStream___eof(variable[5])(variable[5]) /*IStream::eof*/;
       variable[5] =  TAG_Bool(!UNTAG_Bool(variable[5]));
     }
     variable[4] = variable[5];
     if (!UNTAG_Bool(variable[4])) break; /* while*/
     variable[5] = variable[0];
-    variable[5] = ((stream___IStream___read_char_t)CALL(variable[5],COLOR_stream___IStream___read_char))(variable[5]) /*IStream::read_char*/;
+    variable[5] = CALL_stream___IStream___read_char(variable[5])(variable[5]) /*IStream::read_char*/;
     variable[4] = variable[5];
     variable[5] = TAG_Bool(UNTAG_Int( variable[4] /*c*/)>=UNTAG_Int( TAG_Int(0)));
     if (UNTAG_Bool(variable[5])) { /*if*/
       variable[5] = TAG_Char(UNTAG_Int( variable[4] /*c*/));
-      ((string___String___add_t)CALL( variable[3] /*s*/,COLOR_abstract_collection___SimpleCollection___add))( variable[3] /*s*/, variable[5]) /*String::add*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[3] /*s*/)( variable[3] /*s*/, variable[5]) /*String::add*/;
       variable[1] = TAG_Int(UNTAG_Int(variable[1])-UNTAG_Int( TAG_Int(1))) /*i*/;
     }
     continue_1: while(0);
@@ -79,12 +79,12 @@ val_t stream___IStream___read_line(val_t  self) {
   trace.file = LOCATE_stream;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((stream___IStream___eof_t)CALL(variable[2],COLOR_stream___IStream___eof))(variable[2]) /*IStream::eof*/;
+  variable[2] = CALL_stream___IStream___eof(variable[2])(variable[2]) /*IStream::eof*/;
   if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[2])))) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_stream___IStream___read_line, LOCATE_stream, 47); nit_exit(1);}
   variable[3] = NEW_String_string___String___init(); /*new String*/
   variable[2] = variable[3];
   variable[3] = variable[0];
-  ((stream___IStream___append_line_to_t)CALL(variable[3],COLOR_stream___IStream___append_line_to))(variable[3],  variable[2] /*s*/) /*IStream::append_line_to*/;
+  CALL_stream___IStream___append_line_to(variable[3])(variable[3],  variable[2] /*s*/) /*IStream::append_line_to*/;
   variable[1] =  variable[2] /*s*/;
   goto return_label2;
   return_label2: while(false);
@@ -102,15 +102,15 @@ val_t stream___IStream___read_all(val_t  self) {
   variable[2] = variable[3];
   while (true) { /*while*/
     variable[3] = variable[0];
-    variable[3] = ((stream___IStream___eof_t)CALL(variable[3],COLOR_stream___IStream___eof))(variable[3]) /*IStream::eof*/;
+    variable[3] = CALL_stream___IStream___eof(variable[3])(variable[3]) /*IStream::eof*/;
     if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) break; /* while*/
     variable[4] = variable[0];
-    variable[4] = ((stream___IStream___read_char_t)CALL(variable[4],COLOR_stream___IStream___read_char))(variable[4]) /*IStream::read_char*/;
+    variable[4] = CALL_stream___IStream___read_char(variable[4])(variable[4]) /*IStream::read_char*/;
     variable[3] = variable[4];
     variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*c*/)>=UNTAG_Int( TAG_Int(0)));
     if (UNTAG_Bool(variable[4])) { /*if*/
       variable[4] = TAG_Char(UNTAG_Int( variable[3] /*c*/));
-      ((string___String___add_t)CALL( variable[2] /*s*/,COLOR_abstract_collection___SimpleCollection___add))( variable[2] /*s*/, variable[4]) /*String::add*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[2] /*s*/)( variable[2] /*s*/, variable[4]) /*String::add*/;
     }
     continue_4: while(0);
   }
@@ -132,20 +132,20 @@ void stream___IStream___append_line_to(val_t  self, val_t  param0) {
   while (true) { /*while*/
     if (!UNTAG_Bool( TAG_Bool(true))) break; /* while*/
     variable[4] = variable[0];
-    variable[4] = ((stream___IStream___read_char_t)CALL(variable[4],COLOR_stream___IStream___read_char))(variable[4]) /*IStream::read_char*/;
+    variable[4] = CALL_stream___IStream___read_char(variable[4])(variable[4]) /*IStream::read_char*/;
     variable[3] = variable[4];
     variable[4] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
     variable[4] = TAG_Bool(( variable[3] /*x*/)==(variable[4]));
     if (UNTAG_Bool(variable[4])) { /*if*/
       variable[4] = variable[0];
-      variable[4] = ((stream___IStream___eof_t)CALL(variable[4],COLOR_stream___IStream___eof))(variable[4]) /*IStream::eof*/;
+      variable[4] = CALL_stream___IStream___eof(variable[4])(variable[4]) /*IStream::eof*/;
       if (UNTAG_Bool(variable[4])) { /*if*/
         goto return_label5;
       }
     } else { /*if*/
       variable[5] = TAG_Char(UNTAG_Int( variable[3] /*x*/));
       variable[4] = variable[5];
-      ((array___AbstractArray___push_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___IndexedCollection___push))( variable[1] /*s*/,  variable[4] /*c*/) /*AbstractArray::push*/;
+      CALL_abstract_collection___IndexedCollection___push( variable[1] /*s*/)( variable[1] /*s*/,  variable[4] /*c*/) /*AbstractArray::push*/;
       variable[5] = TAG_Bool(( variable[4] /*c*/)==( TAG_Char('\n')));
       if (UNTAG_Bool(variable[5])) { /*if*/
         goto return_label5;
@@ -202,23 +202,23 @@ val_t stream___BufferedIStream___read_char(val_t  self) {
   trace.file = LOCATE_stream;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((stream___BufferedIStream___eof_t)CALL(variable[2],COLOR_stream___IStream___eof))(variable[2]) /*BufferedIStream::eof*/;
+  variable[2] = CALL_stream___IStream___eof(variable[2])(variable[2]) /*BufferedIStream::eof*/;
   if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[2])))) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_stream___BufferedIStream___read_char, LOCATE_stream, 98); nit_exit(1);}
   variable[2] = variable[0];
   variable[2] = ATTR_stream___BufferedIStream____buffer_pos(variable[2]) /*BufferedIStream::_buffer_pos*/;
   variable[3] = variable[0];
   variable[3] = ATTR_stream___BufferedIStream____buffer(variable[3]) /*BufferedIStream::_buffer*/;
-  variable[3] = ((array___AbstractArray___length_t)CALL(variable[3],COLOR_abstract_collection___Collection___length))(variable[3]) /*AbstractArray::length*/;
+  variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*AbstractArray::length*/;
   variable[2] = TAG_Bool(UNTAG_Int(variable[2])>=UNTAG_Int(variable[3]));
   if (UNTAG_Bool(variable[2])) { /*if*/
     variable[2] = variable[0];
-    ((stream___BufferedIStream___fill_buffer_t)CALL(variable[2],COLOR_stream___BufferedIStream___fill_buffer))(variable[2]) /*BufferedIStream::fill_buffer*/;
+    CALL_stream___BufferedIStream___fill_buffer(variable[2])(variable[2]) /*BufferedIStream::fill_buffer*/;
   }
   variable[2] = variable[0];
   variable[2] = ATTR_stream___BufferedIStream____buffer_pos(variable[2]) /*BufferedIStream::_buffer_pos*/;
   variable[3] = variable[0];
   variable[3] = ATTR_stream___BufferedIStream____buffer(variable[3]) /*BufferedIStream::_buffer*/;
-  variable[3] = ((array___AbstractArray___length_t)CALL(variable[3],COLOR_abstract_collection___Collection___length))(variable[3]) /*AbstractArray::length*/;
+  variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*AbstractArray::length*/;
   variable[2] = TAG_Bool(UNTAG_Int(variable[2])>=UNTAG_Int(variable[3]));
   if (UNTAG_Bool(variable[2])) { /*if*/
     variable[2] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
@@ -229,7 +229,7 @@ val_t stream___BufferedIStream___read_char(val_t  self) {
   variable[3] = ATTR_stream___BufferedIStream____buffer(variable[3]) /*BufferedIStream::_buffer*/;
   variable[4] = variable[0];
   variable[4] = ATTR_stream___BufferedIStream____buffer_pos(variable[4]) /*BufferedIStream::_buffer_pos*/;
-  variable[3] = ((string___String_____bra_t)CALL(variable[3],COLOR_abstract_collection___Map_____bra))(variable[3], variable[4]) /*String::[]*/;
+  variable[3] = CALL_abstract_collection___Map_____bra(variable[3])(variable[3], variable[4]) /*String::[]*/;
   variable[2] = variable[3];
   variable[3] = variable[0];
   ATTR_stream___BufferedIStream____buffer_pos(variable[3]) /*BufferedIStream::_buffer_pos*/ = TAG_Int(UNTAG_Int(ATTR_stream___BufferedIStream____buffer_pos(variable[3]) /*BufferedIStream::_buffer_pos*/)+UNTAG_Int( TAG_Int(1)));
@@ -255,7 +255,7 @@ val_t stream___BufferedIStream___read(val_t  self, val_t  param0) {
   variable[4] = variable[5];
   variable[6] = variable[0];
   variable[6] = ATTR_stream___BufferedIStream____buffer(variable[6]) /*BufferedIStream::_buffer*/;
-  variable[6] = ((array___AbstractArray___length_t)CALL(variable[6],COLOR_abstract_collection___Collection___length))(variable[6]) /*AbstractArray::length*/;
+  variable[6] = CALL_abstract_collection___Collection___length(variable[6])(variable[6]) /*AbstractArray::length*/;
   variable[5] = variable[6];
   while (true) { /*while*/
     variable[6] = TAG_Bool(UNTAG_Int( variable[1] /*i*/)>UNTAG_Int( TAG_Int(0)));
@@ -263,9 +263,9 @@ val_t stream___BufferedIStream___read(val_t  self, val_t  param0) {
     variable[6] = TAG_Bool(UNTAG_Int( variable[4] /*j*/)>=UNTAG_Int( variable[5] /*k*/));
     if (UNTAG_Bool(variable[6])) { /*if*/
       variable[6] = variable[0];
-      ((stream___BufferedIStream___fill_buffer_t)CALL(variable[6],COLOR_stream___BufferedIStream___fill_buffer))(variable[6]) /*BufferedIStream::fill_buffer*/;
+      CALL_stream___BufferedIStream___fill_buffer(variable[6])(variable[6]) /*BufferedIStream::fill_buffer*/;
       variable[6] = variable[0];
-      variable[6] = ((stream___BufferedIStream___eof_t)CALL(variable[6],COLOR_stream___IStream___eof))(variable[6]) /*BufferedIStream::eof*/;
+      variable[6] = CALL_stream___IStream___eof(variable[6])(variable[6]) /*BufferedIStream::eof*/;
       if (UNTAG_Bool(variable[6])) { /*if*/
         variable[2] =  variable[3] /*s*/;
         goto return_label8;
@@ -275,7 +275,7 @@ val_t stream___BufferedIStream___read(val_t  self, val_t  param0) {
       variable[4] = variable[6] /*j=*/;
       variable[6] = variable[0];
       variable[6] = ATTR_stream___BufferedIStream____buffer(variable[6]) /*BufferedIStream::_buffer*/;
-      variable[6] = ((array___AbstractArray___length_t)CALL(variable[6],COLOR_abstract_collection___Collection___length))(variable[6]) /*AbstractArray::length*/;
+      variable[6] = CALL_abstract_collection___Collection___length(variable[6])(variable[6]) /*AbstractArray::length*/;
       variable[5] = variable[6] /*k=*/;
     }
     while (true) { /*while*/
@@ -288,8 +288,8 @@ val_t stream___BufferedIStream___read(val_t  self, val_t  param0) {
       if (!UNTAG_Bool(variable[6])) break; /* while*/
       variable[6] = variable[0];
       variable[6] = ATTR_stream___BufferedIStream____buffer(variable[6]) /*BufferedIStream::_buffer*/;
-      variable[6] = ((string___String_____bra_t)CALL(variable[6],COLOR_abstract_collection___Map_____bra))(variable[6],  variable[4] /*j*/) /*String::[]*/;
-      ((string___String___add_t)CALL( variable[3] /*s*/,COLOR_abstract_collection___SimpleCollection___add))( variable[3] /*s*/, variable[6]) /*String::add*/;
+      variable[6] = CALL_abstract_collection___Map_____bra(variable[6])(variable[6],  variable[4] /*j*/) /*String::[]*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[3] /*s*/)( variable[3] /*s*/, variable[6]) /*String::add*/;
       variable[4] = TAG_Int(UNTAG_Int(variable[4])+UNTAG_Int( TAG_Int(1))) /*j*/;
       variable[1] = TAG_Int(UNTAG_Int(variable[1])-UNTAG_Int( TAG_Int(1))) /*i*/;
       continue_10: while(0);
@@ -317,22 +317,22 @@ val_t stream___BufferedIStream___read_all(val_t  self) {
   variable[2] = variable[3];
   while (true) { /*while*/
     variable[3] = variable[0];
-    variable[3] = ((stream___BufferedIStream___eof_t)CALL(variable[3],COLOR_stream___IStream___eof))(variable[3]) /*BufferedIStream::eof*/;
+    variable[3] = CALL_stream___IStream___eof(variable[3])(variable[3]) /*BufferedIStream::eof*/;
     if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) break; /* while*/
     variable[4] = variable[0];
     variable[4] = ATTR_stream___BufferedIStream____buffer_pos(variable[4]) /*BufferedIStream::_buffer_pos*/;
     variable[3] = variable[4];
     variable[5] = variable[0];
     variable[5] = ATTR_stream___BufferedIStream____buffer(variable[5]) /*BufferedIStream::_buffer*/;
-    variable[5] = ((array___AbstractArray___length_t)CALL(variable[5],COLOR_abstract_collection___Collection___length))(variable[5]) /*AbstractArray::length*/;
+    variable[5] = CALL_abstract_collection___Collection___length(variable[5])(variable[5]) /*AbstractArray::length*/;
     variable[4] = variable[5];
     while (true) { /*while*/
       variable[5] = TAG_Bool(UNTAG_Int( variable[3] /*j*/)<UNTAG_Int( variable[4] /*k*/));
       if (!UNTAG_Bool(variable[5])) break; /* while*/
       variable[5] = variable[0];
       variable[5] = ATTR_stream___BufferedIStream____buffer(variable[5]) /*BufferedIStream::_buffer*/;
-      variable[5] = ((string___String_____bra_t)CALL(variable[5],COLOR_abstract_collection___Map_____bra))(variable[5],  variable[3] /*j*/) /*String::[]*/;
-      ((string___String___add_t)CALL( variable[2] /*s*/,COLOR_abstract_collection___SimpleCollection___add))( variable[2] /*s*/, variable[5]) /*String::add*/;
+      variable[5] = CALL_abstract_collection___Map_____bra(variable[5])(variable[5],  variable[3] /*j*/) /*String::[]*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[2] /*s*/)( variable[2] /*s*/, variable[5]) /*String::add*/;
       variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(1))) /*j*/;
       continue_13: while(0);
     }
@@ -340,7 +340,7 @@ val_t stream___BufferedIStream___read_all(val_t  self) {
     variable[5] = variable[0];
     ATTR_stream___BufferedIStream____buffer_pos(variable[5]) /*BufferedIStream::_buffer_pos*/ =  variable[3] /*j*/;
     variable[5] = variable[0];
-    ((stream___BufferedIStream___fill_buffer_t)CALL(variable[5],COLOR_stream___BufferedIStream___fill_buffer))(variable[5]) /*BufferedIStream::fill_buffer*/;
+    CALL_stream___BufferedIStream___fill_buffer(variable[5])(variable[5]) /*BufferedIStream::fill_buffer*/;
     continue_12: while(0);
   }
   break_12: while(0);
@@ -366,13 +366,13 @@ void stream___BufferedIStream___append_line_to(val_t  self, val_t  param0) {
     while (true) { /*while*/
       variable[4] = variable[0];
       variable[4] = ATTR_stream___BufferedIStream____buffer(variable[4]) /*BufferedIStream::_buffer*/;
-      variable[4] = ((array___AbstractArray___length_t)CALL(variable[4],COLOR_abstract_collection___Collection___length))(variable[4]) /*AbstractArray::length*/;
+      variable[4] = CALL_abstract_collection___Collection___length(variable[4])(variable[4]) /*AbstractArray::length*/;
       variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*i*/)<UNTAG_Int(variable[4]));
       variable[5] = variable[4];
       if (UNTAG_Bool(variable[5])) { /* and */
         variable[5] = variable[0];
         variable[5] = ATTR_stream___BufferedIStream____buffer(variable[5]) /*BufferedIStream::_buffer*/;
-        variable[5] = ((string___String_____bra_t)CALL(variable[5],COLOR_abstract_collection___Map_____bra))(variable[5],  variable[3] /*i*/) /*String::[]*/;
+        variable[5] = CALL_abstract_collection___Map_____bra(variable[5])(variable[5],  variable[3] /*i*/) /*String::[]*/;
         variable[5] = TAG_Bool((variable[5])!=( TAG_Char('\n')));
       }
       variable[4] = variable[5];
@@ -385,12 +385,12 @@ void stream___BufferedIStream___append_line_to(val_t  self, val_t  param0) {
     variable[4] = ATTR_stream___BufferedIStream____buffer_pos(variable[4]) /*BufferedIStream::_buffer_pos*/;
     variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*i*/)>UNTAG_Int(variable[4]));
     if (UNTAG_Bool(variable[4])) { /*if*/
-      variable[4] = ((array___AbstractArray___length_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Collection___length))( variable[1] /*s*/) /*AbstractArray::length*/;
+      variable[4] = CALL_abstract_collection___Collection___length( variable[1] /*s*/)( variable[1] /*s*/) /*AbstractArray::length*/;
       variable[4] = TAG_Int(UNTAG_Int(variable[4])+UNTAG_Int( variable[3] /*i*/));
       variable[5] = variable[0];
       variable[5] = ATTR_stream___BufferedIStream____buffer_pos(variable[5]) /*BufferedIStream::_buffer_pos*/;
       variable[4] = TAG_Int(UNTAG_Int(variable[4])-UNTAG_Int(variable[5]));
-      ((string___String___enlarge_t)CALL( variable[1] /*s*/,COLOR_array___AbstractArray___enlarge))( variable[1] /*s*/, variable[4]) /*String::enlarge*/;
+      CALL_array___AbstractArray___enlarge( variable[1] /*s*/)( variable[1] /*s*/, variable[4]) /*String::enlarge*/;
       variable[5] = variable[0];
       variable[5] = ATTR_stream___BufferedIStream____buffer_pos(variable[5]) /*BufferedIStream::_buffer_pos*/;
       variable[4] = variable[5];
@@ -399,8 +399,8 @@ void stream___BufferedIStream___append_line_to(val_t  self, val_t  param0) {
         if (!UNTAG_Bool(variable[5])) break; /* while*/
         variable[5] = variable[0];
         variable[5] = ATTR_stream___BufferedIStream____buffer(variable[5]) /*BufferedIStream::_buffer*/;
-        variable[5] = ((string___String_____bra_t)CALL(variable[5],COLOR_abstract_collection___Map_____bra))(variable[5],  variable[4] /*j*/) /*String::[]*/;
-        ((string___String___add_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___SimpleCollection___add))( variable[1] /*s*/, variable[5]) /*String::add*/;
+        variable[5] = CALL_abstract_collection___Map_____bra(variable[5])(variable[5],  variable[4] /*j*/) /*String::[]*/;
+        CALL_abstract_collection___SimpleCollection___add( variable[1] /*s*/)( variable[1] /*s*/, variable[5]) /*String::add*/;
         variable[4] = TAG_Int(UNTAG_Int(variable[4])+UNTAG_Int( TAG_Int(1))) /*j*/;
         continue_17: while(0);
       }
@@ -408,7 +408,7 @@ void stream___BufferedIStream___append_line_to(val_t  self, val_t  param0) {
     }
     variable[4] = variable[0];
     variable[4] = ATTR_stream___BufferedIStream____buffer(variable[4]) /*BufferedIStream::_buffer*/;
-    variable[4] = ((array___AbstractArray___length_t)CALL(variable[4],COLOR_abstract_collection___Collection___length))(variable[4]) /*AbstractArray::length*/;
+    variable[4] = CALL_abstract_collection___Collection___length(variable[4])(variable[4]) /*AbstractArray::length*/;
     variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*i*/)<UNTAG_Int(variable[4]));
     if (UNTAG_Bool(variable[4])) { /*if*/
       variable[4] = variable[0];
@@ -419,12 +419,12 @@ void stream___BufferedIStream___append_line_to(val_t  self, val_t  param0) {
       variable[4] = variable[0];
       ATTR_stream___BufferedIStream____buffer_pos(variable[4]) /*BufferedIStream::_buffer_pos*/ =  variable[3] /*i*/;
       variable[4] = variable[0];
-      variable[4] = ((stream___BufferedIStream___end_reached_t)CALL(variable[4],COLOR_stream___BufferedIStream___end_reached))(variable[4]) /*BufferedIStream::end_reached*/;
+      variable[4] = CALL_stream___BufferedIStream___end_reached(variable[4])(variable[4]) /*BufferedIStream::end_reached*/;
       if (UNTAG_Bool(variable[4])) { /*if*/
         goto return_label14;
       } else { /*if*/
         variable[4] = variable[0];
-        ((stream___BufferedIStream___fill_buffer_t)CALL(variable[4],COLOR_stream___BufferedIStream___fill_buffer))(variable[4]) /*BufferedIStream::fill_buffer*/;
+        CALL_stream___BufferedIStream___fill_buffer(variable[4])(variable[4]) /*BufferedIStream::fill_buffer*/;
       }
     }
     continue_15: while(0);
@@ -445,12 +445,12 @@ val_t stream___BufferedIStream___eof(val_t  self) {
   variable[2] = ATTR_stream___BufferedIStream____buffer_pos(variable[2]) /*BufferedIStream::_buffer_pos*/;
   variable[3] = variable[0];
   variable[3] = ATTR_stream___BufferedIStream____buffer(variable[3]) /*BufferedIStream::_buffer*/;
-  variable[3] = ((array___AbstractArray___length_t)CALL(variable[3],COLOR_abstract_collection___Collection___length))(variable[3]) /*AbstractArray::length*/;
+  variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*AbstractArray::length*/;
   variable[2] = TAG_Bool(UNTAG_Int(variable[2])>=UNTAG_Int(variable[3]));
   variable[3] = variable[2];
   if (UNTAG_Bool(variable[3])) { /* and */
     variable[3] = variable[0];
-    variable[3] = ((stream___BufferedIStream___end_reached_t)CALL(variable[3],COLOR_stream___BufferedIStream___end_reached))(variable[3]) /*BufferedIStream::end_reached*/;
+    variable[3] = CALL_stream___BufferedIStream___end_reached(variable[3])(variable[3]) /*BufferedIStream::end_reached*/;
   }
   variable[2] = variable[3];
   variable[1] = variable[2];
@@ -510,7 +510,7 @@ void stream___FDStream___close(val_t  self) {
   variable[2] = variable[0];
   variable[3] = variable[0];
   variable[3] = ATTR_stream___FDStream____fd(variable[3]) /*FDStream::_fd*/;
-  ((stream___FDStream___native_close_t)CALL(variable[2],COLOR_stream___FDStream___native_close))(variable[2], variable[3]) /*FDStream::native_close*/;
+  CALL_stream___FDStream___native_close(variable[2])(variable[2], variable[3]) /*FDStream::native_close*/;
   return_label20: while(false);
   tracehead = trace.prev;
   return;
@@ -577,7 +577,7 @@ val_t stream___FDIStream___read_char(val_t  self) {
   variable[3] = variable[0];
   variable[4] = variable[0];
   variable[4] = ATTR_stream___FDStream____fd(variable[4]) /*FDStream::_fd*/;
-  variable[3] = ((stream___FDStream___native_read_char_t)CALL(variable[3],COLOR_stream___FDStream___native_read_char))(variable[3], variable[4]) /*FDStream::native_read_char*/;
+  variable[3] = CALL_stream___FDStream___native_read_char(variable[3])(variable[3], variable[4]) /*FDStream::native_read_char*/;
   variable[2] = variable[3];
   variable[3] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
   variable[3] = TAG_Bool(( variable[2] /*nb*/)==(variable[3]));
@@ -609,7 +609,7 @@ void stream___FDIStream___init(val_t  self, val_t  param0, int* init_table) {
   variable[0] =  self;
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDIStream].i]) return;
-  ((stream___FDStream___init_t)CALL(variable[0],COLOR_stream___FDStream___init))(variable[0], variable[1], init_table /*YYY*/) /*FDStream::init*/;
+  CALL_stream___FDStream___init(variable[0])(variable[0], variable[1], init_table /*YYY*/) /*FDStream::init*/;
   return_label23: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDIStream].i] = 1;
   tracehead = trace.prev;
@@ -626,11 +626,11 @@ void stream___FDOStream___write(val_t  self, val_t  param0) {
   variable[4] = variable[0];
   variable[5] = variable[0];
   variable[5] = ATTR_stream___FDStream____fd(variable[5]) /*FDStream::_fd*/;
-  variable[6] = ((string___String___to_cstring_t)CALL( variable[1] /*s*/,COLOR_string___String___to_cstring))( variable[1] /*s*/) /*String::to_cstring*/;
-  variable[7] = ((array___AbstractArray___length_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Collection___length))( variable[1] /*s*/) /*AbstractArray::length*/;
-  variable[4] = ((stream___FDStream___native_write_t)CALL(variable[4],COLOR_stream___FDStream___native_write))(variable[4], variable[5], variable[6], variable[7]) /*FDStream::native_write*/;
+  variable[6] = CALL_string___String___to_cstring( variable[1] /*s*/)( variable[1] /*s*/) /*String::to_cstring*/;
+  variable[7] = CALL_abstract_collection___Collection___length( variable[1] /*s*/)( variable[1] /*s*/) /*AbstractArray::length*/;
+  variable[4] = CALL_stream___FDStream___native_write(variable[4])(variable[4], variable[5], variable[6], variable[7]) /*FDStream::native_write*/;
   variable[3] = variable[4];
-  variable[4] = ((array___AbstractArray___length_t)CALL( variable[1] /*s*/,COLOR_abstract_collection___Collection___length))( variable[1] /*s*/) /*AbstractArray::length*/;
+  variable[4] = CALL_abstract_collection___Collection___length( variable[1] /*s*/)( variable[1] /*s*/) /*AbstractArray::length*/;
   variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*nb*/)<UNTAG_Int(variable[4]));
   if (UNTAG_Bool(variable[4])) { /*if*/
     variable[4] = variable[0];
@@ -658,7 +658,7 @@ void stream___FDOStream___init(val_t  self, val_t  param0, int* init_table) {
   variable[0] =  self;
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDOStream].i]) return;
-  ((stream___FDStream___init_t)CALL(variable[0],COLOR_stream___FDStream___init))(variable[0], variable[1], init_table /*YYY*/) /*FDStream::init*/;
+  CALL_stream___FDStream___init(variable[0])(variable[0], variable[1], init_table /*YYY*/) /*FDStream::init*/;
   variable[3] = variable[0];
   ATTR_stream___FDOStream____is_writable(variable[3]) /*FDOStream::_is_writable*/ =  TAG_Bool(true);
   return_label25: while(false);
@@ -675,8 +675,8 @@ void stream___FDIOStream___init(val_t  self, val_t  param0, int* init_table) {
   variable[0] =  self;
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDIOStream].i]) return;
-  ((stream___FDIStream___init_t)CALL(variable[0],COLOR_stream___FDIStream___init))(variable[0], variable[1], init_table /*YYY*/) /*FDIStream::init*/;
-  ((stream___FDOStream___init_t)CALL(variable[0],COLOR_stream___FDOStream___init))(variable[0], variable[1], init_table /*YYY*/) /*FDOStream::init*/;
+  CALL_stream___FDIStream___init(variable[0])(variable[0], variable[1], init_table /*YYY*/) /*FDIStream::init*/;
+  CALL_stream___FDOStream___init(variable[0])(variable[0], variable[1], init_table /*YYY*/) /*FDOStream::init*/;
   variable[3] = variable[0];
   ATTR_stream___FDStream____fd(variable[3]) /*FDStream::_fd*/ =  variable[1] /*fd*/;
   variable[3] = variable[0];

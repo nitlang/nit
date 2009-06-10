@@ -7,15 +7,15 @@
 extern const classtable_elt_t VFT_AbstractCompiler[];
 extern const char *LOCATE_abstracttool;
 extern const int SFT_abstracttool[];
-#define ID_AbstractCompiler SFT_abstracttool[0]
-#define COLOR_AbstractCompiler SFT_abstracttool[1]
-#define INIT_TABLE_POS_AbstractCompiler SFT_abstracttool[2]
-#define COLOR_abstracttool___AbstractCompiler___init SFT_abstracttool[3]
-#define COLOR_abstracttool___AbstractCompiler___exec_cmd_line SFT_abstracttool[4]
-#define COLOR_abstracttool___AbstractCompiler___perform_work SFT_abstracttool[5]
-#define COLOR_abstracttool___AbstractCompiler___dump_context_info SFT_abstracttool[6]
-#define COLOR_abstracttool___MMModule___dump_module_info SFT_abstracttool[7]
-#define COLOR_abstracttool___MMLocalClass___dump_properties SFT_abstracttool[8]
+#define ID_AbstractCompiler (SFT_abstracttool[0])
+#define COLOR_AbstractCompiler (SFT_abstracttool[1])
+#define INIT_TABLE_POS_AbstractCompiler (SFT_abstracttool[2] + 0)
+#define CALL_abstracttool___AbstractCompiler___init(recv) ((abstracttool___AbstractCompiler___init_t)CALL((recv), (SFT_abstracttool[2] + 1)))
+#define CALL_abstracttool___AbstractCompiler___exec_cmd_line(recv) ((abstracttool___AbstractCompiler___exec_cmd_line_t)CALL((recv), (SFT_abstracttool[2] + 2)))
+#define CALL_abstracttool___AbstractCompiler___perform_work(recv) ((abstracttool___AbstractCompiler___perform_work_t)CALL((recv), (SFT_abstracttool[2] + 3)))
+#define CALL_abstracttool___AbstractCompiler___dump_context_info(recv) ((abstracttool___AbstractCompiler___dump_context_info_t)CALL((recv), (SFT_abstracttool[2] + 4)))
+#define CALL_abstracttool___MMModule___dump_module_info(recv) ((abstracttool___MMModule___dump_module_info_t)CALL((recv), (SFT_abstracttool[3] + 0)))
+#define CALL_abstracttool___MMLocalClass___dump_properties(recv) ((abstracttool___MMLocalClass___dump_properties_t)CALL((recv), (SFT_abstracttool[4] + 0)))
 typedef void (* abstracttool___AbstractCompiler___init_t)(val_t  self, int* init_table);
 void abstracttool___AbstractCompiler___init(val_t  self, int* init_table);
 #define LOCATE_abstracttool___AbstractCompiler___init "abstracttool::AbstractCompiler::init"

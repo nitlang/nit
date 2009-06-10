@@ -8,7 +8,7 @@ val_t virtualtype___MMGlobalProperty___is_virtual_type(val_t  self) {
   trace.file = LOCATE_virtualtype;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((abstractmetamodel___MMGlobalProperty___intro_t)CALL(variable[2],COLOR_abstractmetamodel___MMGlobalProperty___intro))(variable[2]) /*MMGlobalProperty::intro*/;
+  variable[2] = CALL_abstractmetamodel___MMGlobalProperty___intro(variable[2])(variable[2]) /*MMGlobalProperty::intro*/;
   variable[2] = TAG_Bool((variable[2]==NIT_NULL) || VAL_ISA(variable[2], COLOR_MMTypeProperty, ID_MMTypeProperty)) /*cast MMTypeProperty*/;
   variable[1] = variable[2];
   goto return_label0;
@@ -24,14 +24,14 @@ val_t virtualtype___MMTypeProperty___stype_for(val_t  self, val_t  param0) {
   trace.file = LOCATE_virtualtype;
   variable[0] =  self;
   variable[1] =  param0;
-  variable[4] = ((static_type___MMType___local_class_t)CALL( variable[1] /*recv*/,COLOR_static_type___MMType___local_class))( variable[1] /*recv*/) /*MMType::local_class*/;
+  variable[4] = CALL_static_type___MMType___local_class( variable[1] /*recv*/)( variable[1] /*recv*/) /*MMType::local_class*/;
   variable[5] = variable[0];
-  variable[5] = ((abstractmetamodel___MMLocalProperty___global_t)CALL(variable[5],COLOR_abstractmetamodel___MMLocalProperty___global))(variable[5]) /*MMLocalProperty::global*/;
-  variable[4] = ((inheritance___MMLocalClass_____bra_t)CALL(variable[4],COLOR_abstractmetamodel___MMLocalClass_____bra))(variable[4], variable[5]) /*MMLocalClass::[]*/;
+  variable[5] = CALL_abstractmetamodel___MMLocalProperty___global(variable[5])(variable[5]) /*MMLocalProperty::global*/;
+  variable[4] = CALL_abstractmetamodel___MMLocalClass_____bra(variable[4])(variable[4], variable[5]) /*MMLocalClass::[]*/;
   variable[3] = variable[4];
   variable[4] = TAG_Bool(( variable[3] /*prop*/==NIT_NULL) || VAL_ISA( variable[3] /*prop*/, COLOR_MMTypeProperty, ID_MMTypeProperty)) /*cast MMTypeProperty*/;
   if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_virtualtype___MMTypeProperty___stype_for, LOCATE_virtualtype, 35); nit_exit(1);}
-  variable[4] = ((virtualtype___MMTypeProperty___real_stype_for_t)CALL( variable[3] /*prop*/,COLOR_virtualtype___MMTypeProperty___real_stype_for))( variable[3] /*prop*/,  variable[1] /*recv*/) /*MMTypeProperty::real_stype_for*/;
+  variable[4] = CALL_virtualtype___MMTypeProperty___real_stype_for( variable[3] /*prop*/)( variable[3] /*prop*/,  variable[1] /*recv*/) /*MMTypeProperty::real_stype_for*/;
   variable[2] = variable[4];
   goto return_label1;
   return_label1: while(false);
@@ -47,19 +47,19 @@ val_t virtualtype___MMTypeProperty___real_stype_for(val_t  self, val_t  param0) 
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((static_type___MMLocalProperty___signature_t)CALL(variable[3],COLOR_static_type___MMLocalProperty___signature))(variable[3]) /*MMLocalProperty::signature*/;
-  variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL(variable[3],COLOR_kernel___Object_____eqeq))(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[3] = CALL_static_type___MMLocalProperty___signature(variable[3])(variable[3]) /*MMLocalProperty::signature*/;
+  variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[2] =  NIT_NULL /*null*/;
     goto return_label2;
   }
   variable[3] = variable[0];
   variable[3] = ATTR_virtualtype___MMTypeProperty____stypes_cache(variable[3]) /*MMTypeProperty::_stypes_cache*/;
-  variable[3] = ((abstract_collection___CoupleMap___has_key_t)CALL(variable[3],COLOR_abstract_collection___Map___has_key))(variable[3],  variable[1] /*recv*/) /*CoupleMap::has_key*/;
+  variable[3] = CALL_abstract_collection___Map___has_key(variable[3])(variable[3],  variable[1] /*recv*/) /*CoupleMap::has_key*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = variable[0];
     variable[3] = ATTR_virtualtype___MMTypeProperty____stypes_cache(variable[3]) /*MMTypeProperty::_stypes_cache*/;
-    variable[3] = ((abstract_collection___CoupleMap_____bra_t)CALL(variable[3],COLOR_abstract_collection___Map_____bra))(variable[3],  variable[1] /*recv*/) /*CoupleMap::[]*/;
+    variable[3] = CALL_abstract_collection___Map_____bra(variable[3])(variable[3],  variable[1] /*recv*/) /*CoupleMap::[]*/;
     variable[2] = variable[3];
     goto return_label2;
   }
@@ -69,7 +69,7 @@ val_t virtualtype___MMTypeProperty___real_stype_for(val_t  self, val_t  param0) 
   variable[3] = variable[4];
   variable[4] = variable[0];
   variable[4] = ATTR_virtualtype___MMTypeProperty____stypes_cache(variable[4]) /*MMTypeProperty::_stypes_cache*/;
-  ((hash___HashMap_____braeq_t)CALL(variable[4],COLOR_abstract_collection___Map_____braeq))(variable[4],  variable[1] /*recv*/,  variable[3] /*res*/) /*HashMap::[]=*/;
+  CALL_abstract_collection___Map_____braeq(variable[4])(variable[4],  variable[1] /*recv*/,  variable[3] /*res*/) /*HashMap::[]=*/;
   variable[2] =  variable[3] /*res*/;
   goto return_label2;
   return_label2: while(false);
@@ -85,7 +85,7 @@ val_t virtualtype___MMVirtualType___module(val_t  self) {
   variable[0] =  self;
   variable[2] = variable[0];
   variable[2] = ATTR_virtualtype___MMVirtualType____recv(variable[2]) /*MMVirtualType::_recv*/;
-  variable[2] = ((static_type___MMType___module_t)CALL(variable[2],COLOR_static_type___MMType___module))(variable[2]) /*MMType::module*/;
+  variable[2] = CALL_static_type___MMType___module(variable[2])(variable[2]) /*MMType::module*/;
   variable[1] = variable[2];
   goto return_label3;
   return_label3: while(false);
@@ -101,8 +101,8 @@ val_t virtualtype___MMVirtualType___for_module(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((virtualtype___MMVirtualType___module_t)CALL(variable[3],COLOR_static_type___MMType___module))(variable[3]) /*MMVirtualType::module*/;
-  variable[3] = TAG_Bool(( variable[1] /*mod*/ == variable[3]) || (( variable[1] /*mod*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*mod*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*mod*/,variable[3])):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*mod*/,COLOR_kernel___Object_____eqeq))( variable[1] /*mod*/, variable[3]) /*Object::==*/)))));
+  variable[3] = CALL_static_type___MMType___module(variable[3])(variable[3]) /*MMVirtualType::module*/;
+  variable[3] = TAG_Bool(( variable[1] /*mod*/ == variable[3]) || (( variable[1] /*mod*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*mod*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*mod*/,variable[3])):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*mod*/)( variable[1] /*mod*/, variable[3]) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[3] = variable[0];
     variable[2] = variable[3];
@@ -110,9 +110,9 @@ val_t virtualtype___MMVirtualType___for_module(val_t  self, val_t  param0) {
   }
   variable[3] = variable[0];
   variable[4] = variable[0];
-  variable[4] = ((virtualtype___MMVirtualType___recv_t)CALL(variable[4],COLOR_virtualtype___MMVirtualType___recv))(variable[4]) /*MMVirtualType::recv*/;
-  variable[4] = ((static_type___MMType___for_module_t)CALL(variable[4],COLOR_static_type___MMType___for_module))(variable[4],  variable[1] /*mod*/) /*MMType::for_module*/;
-  variable[3] = ((virtualtype___MMVirtualType___adapt_to_t)CALL(variable[3],COLOR_static_type___MMType___adapt_to))(variable[3], variable[4]) /*MMVirtualType::adapt_to*/;
+  variable[4] = CALL_virtualtype___MMVirtualType___recv(variable[4])(variable[4]) /*MMVirtualType::recv*/;
+  variable[4] = CALL_static_type___MMType___for_module(variable[4])(variable[4],  variable[1] /*mod*/) /*MMType::for_module*/;
+  variable[3] = CALL_static_type___MMType___adapt_to(variable[3])(variable[3], variable[4]) /*MMVirtualType::adapt_to*/;
   variable[2] = variable[3];
   goto return_label4;
   return_label4: while(false);
@@ -128,8 +128,8 @@ val_t virtualtype___MMVirtualType___adapt_to(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[3] = ((virtualtype___MMVirtualType___property_t)CALL(variable[3],COLOR_virtualtype___MMVirtualType___property))(variable[3]) /*MMVirtualType::property*/;
-  variable[3] = ((virtualtype___MMTypeProperty___stype_for_t)CALL(variable[3],COLOR_virtualtype___MMTypeProperty___stype_for))(variable[3],  variable[1] /*recv*/) /*MMTypeProperty::stype_for*/;
+  variable[3] = CALL_virtualtype___MMVirtualType___property(variable[3])(variable[3]) /*MMVirtualType::property*/;
+  variable[3] = CALL_virtualtype___MMTypeProperty___stype_for(variable[3])(variable[3],  variable[1] /*recv*/) /*MMTypeProperty::stype_for*/;
   variable[2] = variable[3];
   goto return_label5;
   return_label5: while(false);
@@ -144,8 +144,8 @@ val_t virtualtype___MMVirtualType___not_for_self(val_t  self) {
   trace.file = LOCATE_virtualtype;
   variable[0] =  self;
   variable[2] = variable[0];
-  variable[2] = ((type_formal___MMTypeFormal___bound_t)CALL(variable[2],COLOR_type_formal___MMTypeFormal___bound))(variable[2]) /*MMTypeFormal::bound*/;
-  variable[2] = ((static_type___MMType___not_for_self_t)CALL(variable[2],COLOR_static_type___MMType___not_for_self))(variable[2]) /*MMType::not_for_self*/;
+  variable[2] = CALL_type_formal___MMTypeFormal___bound(variable[2])(variable[2]) /*MMTypeFormal::bound*/;
+  variable[2] = CALL_static_type___MMType___not_for_self(variable[2])(variable[2]) /*MMType::not_for_self*/;
   variable[1] = variable[2];
   goto return_label6;
   return_label6: while(false);
@@ -180,10 +180,10 @@ void virtualtype___MMVirtualType___init(val_t  self, val_t  param0, val_t  param
   variable[1] =  param0;
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMVirtualType].i]) return;
-  variable[4] = ((abstractmetamodel___MMLocalProperty___name_t)CALL( variable[1] /*p*/,COLOR_abstractmetamodel___MMLocalProperty___name))( variable[1] /*p*/) /*MMLocalProperty::name*/;
-  variable[5] = ((static_type___MMLocalProperty___signature_for_t)CALL( variable[1] /*p*/,COLOR_static_type___MMLocalProperty___signature_for))( variable[1] /*p*/,  variable[2] /*recv*/) /*MMLocalProperty::signature_for*/;
-  variable[5] = ((static_type___MMSignature___return_type_t)CALL(variable[5],COLOR_static_type___MMSignature___return_type))(variable[5]) /*MMSignature::return_type*/;
-  ((type_formal___MMTypeFormal___init_t)CALL(variable[0],COLOR_type_formal___MMTypeFormal___init))(variable[0], variable[4], variable[5], init_table /*YYY*/) /*MMTypeFormal::init*/;
+  variable[4] = CALL_abstractmetamodel___MMLocalProperty___name( variable[1] /*p*/)( variable[1] /*p*/) /*MMLocalProperty::name*/;
+  variable[5] = CALL_static_type___MMLocalProperty___signature_for( variable[1] /*p*/)( variable[1] /*p*/,  variable[2] /*recv*/) /*MMLocalProperty::signature_for*/;
+  variable[5] = CALL_static_type___MMSignature___return_type(variable[5])(variable[5]) /*MMSignature::return_type*/;
+  CALL_type_formal___MMTypeFormal___init(variable[0])(variable[0], variable[4], variable[5], init_table /*YYY*/) /*MMTypeFormal::init*/;
   variable[4] = variable[0];
   ATTR_virtualtype___MMVirtualType____property(variable[4]) /*MMVirtualType::_property*/ =  variable[1] /*p*/;
   variable[4] = variable[0];
@@ -202,9 +202,9 @@ val_t virtualtype___MMLocalClass___virtual_type(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[4] = variable[0];
-  variable[4] = ((abstractmetamodel___MMLocalClass___get_property_by_name_t)CALL(variable[4],COLOR_abstractmetamodel___MMLocalClass___get_property_by_name))(variable[4],  variable[1] /*s*/) /*MMLocalClass::get_property_by_name*/;
+  variable[4] = CALL_abstractmetamodel___MMLocalClass___get_property_by_name(variable[4])(variable[4],  variable[1] /*s*/) /*MMLocalClass::get_property_by_name*/;
   variable[3] = variable[4];
-  variable[4] = ((virtualtype___MMGlobalProperty___is_virtual_type_t)CALL( variable[3] /*prop*/,COLOR_virtualtype___MMGlobalProperty___is_virtual_type))( variable[3] /*prop*/) /*MMGlobalProperty::is_virtual_type*/;
+  variable[4] = CALL_virtualtype___MMGlobalProperty___is_virtual_type( variable[3] /*prop*/)( variable[3] /*prop*/) /*MMGlobalProperty::is_virtual_type*/;
   if (UNTAG_Bool(variable[4])) { /*if*/
     variable[2] =  variable[3] /*prop*/;
     goto return_label8;
@@ -223,18 +223,18 @@ val_t virtualtype___MMLocalClass___select_virtual_type(val_t  self, val_t  param
   trace.file = LOCATE_virtualtype;
   variable[0] =  self;
   variable[1] =  param0;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*name*/ ==  NIT_NULL /*null*/) || (( variable[1] /*name*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[1] /*name*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*name*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[1] /*name*/,COLOR_kernel___Object_____eqeq))( variable[1] /*name*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*name*/ ==  NIT_NULL /*null*/) || (( variable[1] /*name*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*name*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*name*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*name*/)( variable[1] /*name*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_virtualtype___MMLocalClass___select_virtual_type, LOCATE_virtualtype, 103); nit_exit(1);}
   variable[4] = variable[0];
-  variable[4] = ((virtualtype___MMLocalClass___virtual_type_t)CALL(variable[4],COLOR_virtualtype___MMLocalClass___virtual_type))(variable[4],  variable[1] /*name*/) /*MMLocalClass::virtual_type*/;
+  variable[4] = CALL_virtualtype___MMLocalClass___virtual_type(variable[4])(variable[4],  variable[1] /*name*/) /*MMLocalClass::virtual_type*/;
   variable[3] = variable[4];
-  variable[4] = TAG_Bool(( variable[3] /*gp*/ ==  NIT_NULL /*null*/) || (( variable[3] /*gp*/ != NIT_NULL) && ((((kernel___Object_____eqeq_t)CALL( variable[3] /*gp*/,COLOR_kernel___Object_____eqeq))==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*gp*/, NIT_NULL /*null*/)):(UNTAG_Bool(((kernel___Object_____eqeq_t)CALL( variable[3] /*gp*/,COLOR_kernel___Object_____eqeq))( variable[3] /*gp*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  variable[4] = TAG_Bool(( variable[3] /*gp*/ ==  NIT_NULL /*null*/) || (( variable[3] /*gp*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*gp*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*gp*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*gp*/)( variable[3] /*gp*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[4])) { /*if*/
     variable[2] =  NIT_NULL /*null*/;
     goto return_label9;
   }
   variable[5] = variable[0];
-  variable[5] = ((inheritance___MMLocalClass_____bra_t)CALL(variable[5],COLOR_abstractmetamodel___MMLocalClass_____bra))(variable[5],  variable[3] /*gp*/) /*MMLocalClass::[]*/;
+  variable[5] = CALL_abstractmetamodel___MMLocalClass_____bra(variable[5])(variable[5],  variable[3] /*gp*/) /*MMLocalClass::[]*/;
   variable[4] = variable[5];
   variable[5] = TAG_Bool(( variable[4] /*res*/==NIT_NULL) || VAL_ISA( variable[4] /*res*/, COLOR_MMTypeProperty, ID_MMTypeProperty)) /*cast MMTypeProperty*/;
   if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_virtualtype___MMLocalClass___select_virtual_type, LOCATE_virtualtype, 107); nit_exit(1);}

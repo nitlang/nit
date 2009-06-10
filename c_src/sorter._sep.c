@@ -21,9 +21,9 @@ void sorter___AbstractSorter___sort(val_t  self, val_t  param0) {
   variable[0] =  self;
   variable[1] =  param0;
   variable[3] = variable[0];
-  variable[4] = ((array___AbstractArray___length_t)CALL( variable[1] /*array*/,COLOR_abstract_collection___Collection___length))( variable[1] /*array*/) /*AbstractArray::length*/;
+  variable[4] = CALL_abstract_collection___Collection___length( variable[1] /*array*/)( variable[1] /*array*/) /*AbstractArray::length*/;
   variable[4] = TAG_Int(UNTAG_Int(variable[4])-UNTAG_Int( TAG_Int(1)));
-  ((sorter___AbstractSorter___sub_sort_t)CALL(variable[3],COLOR_sorter___AbstractSorter___sub_sort))(variable[3],  variable[1] /*array*/,  TAG_Int(0), variable[4]) /*AbstractSorter::sub_sort*/;
+  CALL_sorter___AbstractSorter___sub_sort(variable[3])(variable[3],  variable[1] /*array*/,  TAG_Int(0), variable[4]) /*AbstractSorter::sub_sort*/;
   return_label0: while(false);
   tracehead = trace.prev;
   return;
@@ -46,10 +46,10 @@ void sorter___AbstractSorter___sub_sort(val_t  self, val_t  param0, val_t  param
     variable[5] = TAG_Bool(UNTAG_Int(variable[5])<UNTAG_Int( variable[3] /*to*/));
     if (UNTAG_Bool(variable[5])) { /*if*/
       variable[5] = variable[0];
-      ((sorter___AbstractSorter___quick_sort_t)CALL(variable[5],COLOR_sorter___AbstractSorter___quick_sort))(variable[5],  variable[1] /*array*/,  variable[2] /*from*/,  variable[3] /*to*/) /*AbstractSorter::quick_sort*/;
+      CALL_sorter___AbstractSorter___quick_sort(variable[5])(variable[5],  variable[1] /*array*/,  variable[2] /*from*/,  variable[3] /*to*/) /*AbstractSorter::quick_sort*/;
     } else { /*if*/
       variable[5] = variable[0];
-      ((sorter___AbstractSorter___bubble_sort_t)CALL(variable[5],COLOR_sorter___AbstractSorter___bubble_sort))(variable[5],  variable[1] /*array*/,  variable[2] /*from*/,  variable[3] /*to*/) /*AbstractSorter::bubble_sort*/;
+      CALL_sorter___AbstractSorter___bubble_sort(variable[5])(variable[5],  variable[1] /*array*/,  variable[2] /*from*/,  variable[3] /*to*/) /*AbstractSorter::bubble_sort*/;
     }
   }
   return_label1: while(false);
@@ -113,7 +113,7 @@ void sorter___AbstractSorter___quick_sort(val_t  self, val_t  param0, val_t  par
         goto return_label6;
         return_label6: while(false);
         variable[10] = variable[12];
-        variable[9] = ((sorter___AbstractSorter___compare_t)CALL(variable[9],COLOR_sorter___AbstractSorter___compare))(variable[9], variable[10],  variable[5] /*pivot*/) /*AbstractSorter::compare*/;
+        variable[9] = CALL_sorter___AbstractSorter___compare(variable[9])(variable[9], variable[10],  variable[5] /*pivot*/) /*AbstractSorter::compare*/;
         variable[9] = TAG_Bool(UNTAG_Int(variable[9])<=UNTAG_Int( TAG_Int(0)));
       }
       variable[8] = variable[9];
@@ -145,7 +145,7 @@ void sorter___AbstractSorter___quick_sort(val_t  self, val_t  param0, val_t  par
         goto return_label8;
         return_label8: while(false);
         variable[10] = variable[12];
-        variable[9] = ((sorter___AbstractSorter___compare_t)CALL(variable[9],COLOR_sorter___AbstractSorter___compare))(variable[9], variable[10],  variable[5] /*pivot*/) /*AbstractSorter::compare*/;
+        variable[9] = CALL_sorter___AbstractSorter___compare(variable[9])(variable[9], variable[10],  variable[5] /*pivot*/) /*AbstractSorter::compare*/;
         variable[9] = TAG_Bool(UNTAG_Int(variable[9])>=UNTAG_Int( TAG_Int(0)));
       }
       variable[8] = variable[9];
@@ -193,8 +193,8 @@ void sorter___AbstractSorter___quick_sort(val_t  self, val_t  param0, val_t  par
       goto return_label10;
       return_label10: while(false);
       variable[9] = variable[11];
-      ((array___Array_____braeq_t)CALL( variable[1] /*array*/,COLOR_abstract_collection___Map_____braeq))( variable[1] /*array*/,  variable[6] /*i*/, variable[9]) /*Array::[]=*/;
-      ((array___Array_____braeq_t)CALL( variable[1] /*array*/,COLOR_abstract_collection___Map_____braeq))( variable[1] /*array*/,  variable[7] /*j*/,  variable[8] /*t*/) /*Array::[]=*/;
+      CALL_abstract_collection___Map_____braeq( variable[1] /*array*/)( variable[1] /*array*/,  variable[6] /*i*/, variable[9]) /*Array::[]=*/;
+      CALL_abstract_collection___Map_____braeq( variable[1] /*array*/)( variable[1] /*array*/,  variable[7] /*j*/,  variable[8] /*t*/) /*Array::[]=*/;
     }
     continue_4: while(0);
   }
@@ -218,14 +218,14 @@ void sorter___AbstractSorter___quick_sort(val_t  self, val_t  param0, val_t  par
   goto return_label11;
   return_label11: while(false);
   variable[8] = variable[11];
-  ((array___Array_____braeq_t)CALL( variable[1] /*array*/,COLOR_abstract_collection___Map_____braeq))( variable[1] /*array*/,  variable[2] /*from*/, variable[8]) /*Array::[]=*/;
+  CALL_abstract_collection___Map_____braeq( variable[1] /*array*/)( variable[1] /*array*/,  variable[2] /*from*/, variable[8]) /*Array::[]=*/;
   variable[8] = TAG_Int(UNTAG_Int( variable[6] /*i*/)-UNTAG_Int( TAG_Int(1)));
-  ((array___Array_____braeq_t)CALL( variable[1] /*array*/,COLOR_abstract_collection___Map_____braeq))( variable[1] /*array*/, variable[8],  variable[5] /*pivot*/) /*Array::[]=*/;
+  CALL_abstract_collection___Map_____braeq( variable[1] /*array*/)( variable[1] /*array*/, variable[8],  variable[5] /*pivot*/) /*Array::[]=*/;
   variable[8] = variable[0];
   variable[9] = TAG_Int(UNTAG_Int( variable[6] /*i*/)-UNTAG_Int( TAG_Int(2)));
-  ((sorter___AbstractSorter___sub_sort_t)CALL(variable[8],COLOR_sorter___AbstractSorter___sub_sort))(variable[8],  variable[1] /*array*/,  variable[2] /*from*/, variable[9]) /*AbstractSorter::sub_sort*/;
+  CALL_sorter___AbstractSorter___sub_sort(variable[8])(variable[8],  variable[1] /*array*/,  variable[2] /*from*/, variable[9]) /*AbstractSorter::sub_sort*/;
   variable[8] = variable[0];
-  ((sorter___AbstractSorter___sub_sort_t)CALL(variable[8],COLOR_sorter___AbstractSorter___sub_sort))(variable[8],  variable[1] /*array*/,  variable[6] /*i*/,  variable[3] /*to*/) /*AbstractSorter::sub_sort*/;
+  CALL_sorter___AbstractSorter___sub_sort(variable[8])(variable[8],  variable[1] /*array*/,  variable[6] /*i*/,  variable[3] /*to*/) /*AbstractSorter::sub_sort*/;
   return_label2: while(false);
   tracehead = trace.prev;
   return;
@@ -287,7 +287,7 @@ void sorter___AbstractSorter___bubble_sort(val_t  self, val_t  param0, val_t  pa
       goto return_label16;
       return_label16: while(false);
       variable[10] = variable[12];
-      variable[9] = ((sorter___AbstractSorter___compare_t)CALL(variable[9],COLOR_sorter___AbstractSorter___compare))(variable[9],  variable[7] /*min_v*/, variable[10]) /*AbstractSorter::compare*/;
+      variable[9] = CALL_sorter___AbstractSorter___compare(variable[9])(variable[9],  variable[7] /*min_v*/, variable[10]) /*AbstractSorter::compare*/;
       variable[9] = TAG_Bool(UNTAG_Int(variable[9])>UNTAG_Int( TAG_Int(0)));
       if (UNTAG_Bool(variable[9])) { /*if*/
         variable[6] =  variable[8] /*j*/ /*min=*/;
@@ -335,8 +335,8 @@ void sorter___AbstractSorter___bubble_sort(val_t  self, val_t  param0, val_t  pa
       goto return_label18;
       return_label18: while(false);
       variable[9] = variable[11];
-      ((array___Array_____braeq_t)CALL( variable[1] /*array*/,COLOR_abstract_collection___Map_____braeq))( variable[1] /*array*/,  variable[6] /*min*/, variable[9]) /*Array::[]=*/;
-      ((array___Array_____braeq_t)CALL( variable[1] /*array*/,COLOR_abstract_collection___Map_____braeq))( variable[1] /*array*/,  variable[5] /*i*/,  variable[7] /*min_v*/) /*Array::[]=*/;
+      CALL_abstract_collection___Map_____braeq( variable[1] /*array*/)( variable[1] /*array*/,  variable[6] /*min*/, variable[9]) /*Array::[]=*/;
+      CALL_abstract_collection___Map_____braeq( variable[1] /*array*/)( variable[1] /*array*/,  variable[5] /*i*/,  variable[7] /*min_v*/) /*Array::[]=*/;
     }
     variable[5] = TAG_Int(UNTAG_Int(variable[5])+UNTAG_Int( TAG_Int(1))) /*i*/;
     continue_13: while(0);
@@ -364,7 +364,7 @@ val_t sorter___ComparableSorter___compare(val_t  self, val_t  param0, val_t  par
   variable[0] =  self;
   variable[1] =  param0;
   variable[2] =  param1;
-  variable[4] = ((kernel___Comparable_____leqg_t)CALL( variable[1] /*a*/,COLOR_kernel___Comparable_____leqg))( variable[1] /*a*/,  variable[2] /*b*/) /*Comparable::<=>*/;
+  variable[4] = CALL_kernel___Comparable_____leqg( variable[1] /*a*/)( variable[1] /*a*/,  variable[2] /*b*/) /*Comparable::<=>*/;
   variable[3] = variable[4];
   goto return_label19;
   return_label19: while(false);

@@ -9,99 +9,98 @@ extern const classtable_elt_t VFT_CFunctionContext[];
 extern const classtable_elt_t VFT_NitMethodContext[];
 extern const char *LOCATE_compiling_methods;
 extern const int SFT_compiling_methods[];
-#define COLOR_compiling_methods___CompilerVisitor____cfc SFT_compiling_methods[0]
-#define COLOR_compiling_methods___CompilerVisitor____nmc SFT_compiling_methods[1]
-#define COLOR_compiling_methods___CompilerVisitor____out_contexts SFT_compiling_methods[2]
-#define COLOR_compiling_methods___CompilerVisitor___compile_stmt SFT_compiling_methods[3]
-#define COLOR_compiling_methods___CompilerVisitor___compile_expr SFT_compiling_methods[4]
-#define COLOR_compiling_methods___CompilerVisitor___ensure_var SFT_compiling_methods[5]
-#define COLOR_compiling_methods___CompilerVisitor___add_assignment SFT_compiling_methods[6]
-#define COLOR_compiling_methods___CompilerVisitor___cfc SFT_compiling_methods[7]
-#define COLOR_compiling_methods___CompilerVisitor___cfc__eq SFT_compiling_methods[8]
-#define COLOR_compiling_methods___CompilerVisitor___nmc SFT_compiling_methods[9]
-#define COLOR_compiling_methods___CompilerVisitor___nmc__eq SFT_compiling_methods[10]
-#define COLOR_compiling_methods___CompilerVisitor___out_contexts SFT_compiling_methods[11]
-#define COLOR_compiling_methods___CompilerVisitor___out_contexts__eq SFT_compiling_methods[12]
-#define COLOR_compiling_methods___CompilerVisitor___printf_locate_error SFT_compiling_methods[13]
-#define COLOR_SUPER_compiling_methods___CompilerVisitor___init SFT_compiling_methods[14]
-#define COLOR_compiling_methods___CompilerVisitor___invoke_super_init_calls_after SFT_compiling_methods[15]
-#define ID_CFunctionContext SFT_compiling_methods[16]
-#define COLOR_CFunctionContext SFT_compiling_methods[17]
-#define COLOR_compiling_methods___CFunctionContext____visitor SFT_compiling_methods[18]
-#define COLOR_compiling_methods___CFunctionContext____variable_index SFT_compiling_methods[19]
-#define COLOR_compiling_methods___CFunctionContext____variable_index_max SFT_compiling_methods[20]
-#define COLOR_compiling_methods___CFunctionContext____varnames SFT_compiling_methods[21]
-#define COLOR_compiling_methods___CFunctionContext____in_closure SFT_compiling_methods[22]
-#define COLOR_compiling_methods___CFunctionContext____closurevariable_index SFT_compiling_methods[23]
-#define INIT_TABLE_POS_CFunctionContext SFT_compiling_methods[24]
-#define COLOR_compiling_methods___CFunctionContext___visitor SFT_compiling_methods[25]
-#define COLOR_compiling_methods___CFunctionContext___in_closure SFT_compiling_methods[26]
-#define COLOR_compiling_methods___CFunctionContext___in_closure__eq SFT_compiling_methods[27]
-#define COLOR_compiling_methods___CFunctionContext___varname SFT_compiling_methods[28]
-#define COLOR_compiling_methods___CFunctionContext___get_var SFT_compiling_methods[29]
-#define COLOR_compiling_methods___CFunctionContext___register_variable SFT_compiling_methods[30]
-#define COLOR_compiling_methods___CFunctionContext___register_closurevariable SFT_compiling_methods[31]
-#define COLOR_compiling_methods___CFunctionContext___variable SFT_compiling_methods[32]
-#define COLOR_compiling_methods___CFunctionContext___free_var SFT_compiling_methods[33]
-#define COLOR_compiling_methods___CFunctionContext___generate_var_decls SFT_compiling_methods[34]
-#define COLOR_compiling_methods___CFunctionContext___init SFT_compiling_methods[35]
-#define ID_NitMethodContext SFT_compiling_methods[36]
-#define COLOR_NitMethodContext SFT_compiling_methods[37]
-#define COLOR_compiling_methods___NitMethodContext____method SFT_compiling_methods[38]
-#define COLOR_compiling_methods___NitMethodContext____method_params SFT_compiling_methods[39]
-#define COLOR_compiling_methods___NitMethodContext____return_label SFT_compiling_methods[40]
-#define COLOR_compiling_methods___NitMethodContext____break_label SFT_compiling_methods[41]
-#define COLOR_compiling_methods___NitMethodContext____continue_label SFT_compiling_methods[42]
-#define COLOR_compiling_methods___NitMethodContext____return_value SFT_compiling_methods[43]
-#define COLOR_compiling_methods___NitMethodContext____break_value SFT_compiling_methods[44]
-#define COLOR_compiling_methods___NitMethodContext____continue_value SFT_compiling_methods[45]
-#define INIT_TABLE_POS_NitMethodContext SFT_compiling_methods[46]
-#define COLOR_compiling_methods___NitMethodContext___method SFT_compiling_methods[47]
-#define COLOR_compiling_methods___NitMethodContext___method_params SFT_compiling_methods[48]
-#define COLOR_compiling_methods___NitMethodContext___method_params__eq SFT_compiling_methods[49]
-#define COLOR_compiling_methods___NitMethodContext___return_label SFT_compiling_methods[50]
-#define COLOR_compiling_methods___NitMethodContext___return_label__eq SFT_compiling_methods[51]
-#define COLOR_compiling_methods___NitMethodContext___break_label SFT_compiling_methods[52]
-#define COLOR_compiling_methods___NitMethodContext___break_label__eq SFT_compiling_methods[53]
-#define COLOR_compiling_methods___NitMethodContext___continue_label SFT_compiling_methods[54]
-#define COLOR_compiling_methods___NitMethodContext___continue_label__eq SFT_compiling_methods[55]
-#define COLOR_compiling_methods___NitMethodContext___return_value SFT_compiling_methods[56]
-#define COLOR_compiling_methods___NitMethodContext___return_value__eq SFT_compiling_methods[57]
-#define COLOR_compiling_methods___NitMethodContext___break_value SFT_compiling_methods[58]
-#define COLOR_compiling_methods___NitMethodContext___break_value__eq SFT_compiling_methods[59]
-#define COLOR_compiling_methods___NitMethodContext___continue_value SFT_compiling_methods[60]
-#define COLOR_compiling_methods___NitMethodContext___continue_value__eq SFT_compiling_methods[61]
-#define COLOR_compiling_methods___NitMethodContext___init SFT_compiling_methods[62]
-#define COLOR_compiling_methods___ClosureVariable____ctypename SFT_compiling_methods[63]
-#define COLOR_compiling_methods___ClosureVariable___ctypename SFT_compiling_methods[64]
-#define COLOR_compiling_methods___ClosureVariable___ctypename__eq SFT_compiling_methods[65]
-#define COLOR_compiling_methods___MMMethod___compile_call SFT_compiling_methods[66]
-#define COLOR_compiling_methods___MMMethod___compile_constructor_call SFT_compiling_methods[67]
-#define COLOR_compiling_methods___MMMethod___compile_super_call SFT_compiling_methods[68]
-#define COLOR_compiling_methods___MMMethod___closure_cname SFT_compiling_methods[69]
-#define COLOR_compiling_methods___MMAttribute___compile_access SFT_compiling_methods[70]
-#define COLOR_compiling_methods___MMLocalProperty___compile_property_to_c SFT_compiling_methods[71]
-#define COLOR_compiling_methods___MMSrcMethod___decl_csignature SFT_compiling_methods[72]
-#define COLOR_compiling_methods___MMSrcMethod___do_compile_inside SFT_compiling_methods[73]
-#define COLOR_compiling_methods___MMType___compile_cast SFT_compiling_methods[74]
-#define COLOR_compiling_methods___MMType___compile_type_check SFT_compiling_methods[75]
-#define COLOR_compiling_methods___AMethPropdef___do_compile_inside SFT_compiling_methods[76]
-#define COLOR_compiling_methods___PSignature___compile_parameters SFT_compiling_methods[77]
-#define COLOR_compiling_methods___PExpr___compile_expr SFT_compiling_methods[78]
-#define COLOR_compiling_methods___PExpr___prepare_compile_stmt SFT_compiling_methods[79]
-#define COLOR_compiling_methods___PExpr___compile_stmt SFT_compiling_methods[80]
-#define COLOR_compiling_methods___AControlableBlock___compile_inside_block SFT_compiling_methods[81]
-#define COLOR_compiling_methods___AStringFormExpr____cstring SFT_compiling_methods[82]
-#define COLOR_compiling_methods___AStringFormExpr____cstring_length SFT_compiling_methods[83]
-#define COLOR_compiling_methods___AStringFormExpr___string_text SFT_compiling_methods[84]
-#define COLOR_compiling_methods___AStringFormExpr___compute_string_info SFT_compiling_methods[85]
-#define COLOR_compiling_methods___ARangeExpr___propname SFT_compiling_methods[86]
-#define COLOR_compiling_methods___PClosureDef___compile_closure SFT_compiling_methods[87]
-#define COLOR_compiling_methods___PClosureDef___do_compile_inside SFT_compiling_methods[88]
-#define COLOR_compiling_methods___AClosureDef____cname SFT_compiling_methods[89]
-#define COLOR_compiling_methods___AClosureDef___cname SFT_compiling_methods[90]
-#define COLOR_compiling_methods___AClosureDef___decl_csignature SFT_compiling_methods[91]
-#define COLOR_compiling_methods___PClosureDecl___do_compile_inside SFT_compiling_methods[92]
+#define ATTR_compiling_methods___CompilerVisitor____cfc(recv) ATTR(recv, (SFT_compiling_methods[0] + 0))
+#define ATTR_compiling_methods___CompilerVisitor____nmc(recv) ATTR(recv, (SFT_compiling_methods[0] + 1))
+#define ATTR_compiling_methods___CompilerVisitor____out_contexts(recv) ATTR(recv, (SFT_compiling_methods[0] + 2))
+#define CALL_compiling_methods___CompilerVisitor___compile_stmt(recv) ((compiling_methods___CompilerVisitor___compile_stmt_t)CALL((recv), (SFT_compiling_methods[1] + 0)))
+#define CALL_compiling_methods___CompilerVisitor___compile_expr(recv) ((compiling_methods___CompilerVisitor___compile_expr_t)CALL((recv), (SFT_compiling_methods[1] + 1)))
+#define CALL_compiling_methods___CompilerVisitor___ensure_var(recv) ((compiling_methods___CompilerVisitor___ensure_var_t)CALL((recv), (SFT_compiling_methods[1] + 2)))
+#define CALL_compiling_methods___CompilerVisitor___add_assignment(recv) ((compiling_methods___CompilerVisitor___add_assignment_t)CALL((recv), (SFT_compiling_methods[1] + 3)))
+#define CALL_compiling_methods___CompilerVisitor___cfc(recv) ((compiling_methods___CompilerVisitor___cfc_t)CALL((recv), (SFT_compiling_methods[1] + 4)))
+#define CALL_compiling_methods___CompilerVisitor___cfc__eq(recv) ((compiling_methods___CompilerVisitor___cfc__eq_t)CALL((recv), (SFT_compiling_methods[1] + 5)))
+#define CALL_compiling_methods___CompilerVisitor___nmc(recv) ((compiling_methods___CompilerVisitor___nmc_t)CALL((recv), (SFT_compiling_methods[1] + 6)))
+#define CALL_compiling_methods___CompilerVisitor___nmc__eq(recv) ((compiling_methods___CompilerVisitor___nmc__eq_t)CALL((recv), (SFT_compiling_methods[1] + 7)))
+#define CALL_compiling_methods___CompilerVisitor___out_contexts(recv) ((compiling_methods___CompilerVisitor___out_contexts_t)CALL((recv), (SFT_compiling_methods[1] + 8)))
+#define CALL_compiling_methods___CompilerVisitor___out_contexts__eq(recv) ((compiling_methods___CompilerVisitor___out_contexts__eq_t)CALL((recv), (SFT_compiling_methods[1] + 9)))
+#define CALL_compiling_methods___CompilerVisitor___printf_locate_error(recv) ((compiling_methods___CompilerVisitor___printf_locate_error_t)CALL((recv), (SFT_compiling_methods[1] + 10)))
+#define CALL_SUPER_compiling_methods___CompilerVisitor___init(recv) ((compiling_methods___CompilerVisitor___init_t)CALL((recv), (SFT_compiling_methods[1] + 11)))
+#define CALL_compiling_methods___CompilerVisitor___invoke_super_init_calls_after(recv) ((compiling_methods___CompilerVisitor___invoke_super_init_calls_after_t)CALL((recv), (SFT_compiling_methods[1] + 12)))
+#define ID_CFunctionContext (SFT_compiling_methods[2])
+#define COLOR_CFunctionContext (SFT_compiling_methods[3])
+#define ATTR_compiling_methods___CFunctionContext____visitor(recv) ATTR(recv, (SFT_compiling_methods[4] + 0))
+#define ATTR_compiling_methods___CFunctionContext____variable_index(recv) ATTR(recv, (SFT_compiling_methods[4] + 1))
+#define ATTR_compiling_methods___CFunctionContext____variable_index_max(recv) ATTR(recv, (SFT_compiling_methods[4] + 2))
+#define ATTR_compiling_methods___CFunctionContext____varnames(recv) ATTR(recv, (SFT_compiling_methods[4] + 3))
+#define ATTR_compiling_methods___CFunctionContext____in_closure(recv) ATTR(recv, (SFT_compiling_methods[4] + 4))
+#define ATTR_compiling_methods___CFunctionContext____closurevariable_index(recv) ATTR(recv, (SFT_compiling_methods[4] + 5))
+#define INIT_TABLE_POS_CFunctionContext (SFT_compiling_methods[5] + 0)
+#define CALL_compiling_methods___CFunctionContext___visitor(recv) ((compiling_methods___CFunctionContext___visitor_t)CALL((recv), (SFT_compiling_methods[5] + 1)))
+#define CALL_compiling_methods___CFunctionContext___in_closure(recv) ((compiling_methods___CFunctionContext___in_closure_t)CALL((recv), (SFT_compiling_methods[5] + 2)))
+#define CALL_compiling_methods___CFunctionContext___in_closure__eq(recv) ((compiling_methods___CFunctionContext___in_closure__eq_t)CALL((recv), (SFT_compiling_methods[5] + 3)))
+#define CALL_compiling_methods___CFunctionContext___varname(recv) ((compiling_methods___CFunctionContext___varname_t)CALL((recv), (SFT_compiling_methods[5] + 4)))
+#define CALL_compiling_methods___CFunctionContext___get_var(recv) ((compiling_methods___CFunctionContext___get_var_t)CALL((recv), (SFT_compiling_methods[5] + 5)))
+#define CALL_compiling_methods___CFunctionContext___register_variable(recv) ((compiling_methods___CFunctionContext___register_variable_t)CALL((recv), (SFT_compiling_methods[5] + 6)))
+#define CALL_compiling_methods___CFunctionContext___register_closurevariable(recv) ((compiling_methods___CFunctionContext___register_closurevariable_t)CALL((recv), (SFT_compiling_methods[5] + 7)))
+#define CALL_compiling_methods___CFunctionContext___variable(recv) ((compiling_methods___CFunctionContext___variable_t)CALL((recv), (SFT_compiling_methods[5] + 8)))
+#define CALL_compiling_methods___CFunctionContext___free_var(recv) ((compiling_methods___CFunctionContext___free_var_t)CALL((recv), (SFT_compiling_methods[5] + 9)))
+#define CALL_compiling_methods___CFunctionContext___generate_var_decls(recv) ((compiling_methods___CFunctionContext___generate_var_decls_t)CALL((recv), (SFT_compiling_methods[5] + 10)))
+#define CALL_compiling_methods___CFunctionContext___init(recv) ((compiling_methods___CFunctionContext___init_t)CALL((recv), (SFT_compiling_methods[5] + 11)))
+#define ID_NitMethodContext (SFT_compiling_methods[6])
+#define COLOR_NitMethodContext (SFT_compiling_methods[7])
+#define ATTR_compiling_methods___NitMethodContext____method(recv) ATTR(recv, (SFT_compiling_methods[8] + 0))
+#define ATTR_compiling_methods___NitMethodContext____method_params(recv) ATTR(recv, (SFT_compiling_methods[8] + 1))
+#define ATTR_compiling_methods___NitMethodContext____return_label(recv) ATTR(recv, (SFT_compiling_methods[8] + 2))
+#define ATTR_compiling_methods___NitMethodContext____break_label(recv) ATTR(recv, (SFT_compiling_methods[8] + 3))
+#define ATTR_compiling_methods___NitMethodContext____continue_label(recv) ATTR(recv, (SFT_compiling_methods[8] + 4))
+#define ATTR_compiling_methods___NitMethodContext____return_value(recv) ATTR(recv, (SFT_compiling_methods[8] + 5))
+#define ATTR_compiling_methods___NitMethodContext____break_value(recv) ATTR(recv, (SFT_compiling_methods[8] + 6))
+#define ATTR_compiling_methods___NitMethodContext____continue_value(recv) ATTR(recv, (SFT_compiling_methods[8] + 7))
+#define INIT_TABLE_POS_NitMethodContext (SFT_compiling_methods[9] + 0)
+#define CALL_compiling_methods___NitMethodContext___method(recv) ((compiling_methods___NitMethodContext___method_t)CALL((recv), (SFT_compiling_methods[9] + 1)))
+#define CALL_compiling_methods___NitMethodContext___method_params(recv) ((compiling_methods___NitMethodContext___method_params_t)CALL((recv), (SFT_compiling_methods[9] + 2)))
+#define CALL_compiling_methods___NitMethodContext___method_params__eq(recv) ((compiling_methods___NitMethodContext___method_params__eq_t)CALL((recv), (SFT_compiling_methods[9] + 3)))
+#define CALL_compiling_methods___NitMethodContext___return_label(recv) ((compiling_methods___NitMethodContext___return_label_t)CALL((recv), (SFT_compiling_methods[9] + 4)))
+#define CALL_compiling_methods___NitMethodContext___return_label__eq(recv) ((compiling_methods___NitMethodContext___return_label__eq_t)CALL((recv), (SFT_compiling_methods[9] + 5)))
+#define CALL_compiling_methods___NitMethodContext___break_label(recv) ((compiling_methods___NitMethodContext___break_label_t)CALL((recv), (SFT_compiling_methods[9] + 6)))
+#define CALL_compiling_methods___NitMethodContext___break_label__eq(recv) ((compiling_methods___NitMethodContext___break_label__eq_t)CALL((recv), (SFT_compiling_methods[9] + 7)))
+#define CALL_compiling_methods___NitMethodContext___continue_label(recv) ((compiling_methods___NitMethodContext___continue_label_t)CALL((recv), (SFT_compiling_methods[9] + 8)))
+#define CALL_compiling_methods___NitMethodContext___continue_label__eq(recv) ((compiling_methods___NitMethodContext___continue_label__eq_t)CALL((recv), (SFT_compiling_methods[9] + 9)))
+#define CALL_compiling_methods___NitMethodContext___return_value(recv) ((compiling_methods___NitMethodContext___return_value_t)CALL((recv), (SFT_compiling_methods[9] + 10)))
+#define CALL_compiling_methods___NitMethodContext___return_value__eq(recv) ((compiling_methods___NitMethodContext___return_value__eq_t)CALL((recv), (SFT_compiling_methods[9] + 11)))
+#define CALL_compiling_methods___NitMethodContext___break_value(recv) ((compiling_methods___NitMethodContext___break_value_t)CALL((recv), (SFT_compiling_methods[9] + 12)))
+#define CALL_compiling_methods___NitMethodContext___break_value__eq(recv) ((compiling_methods___NitMethodContext___break_value__eq_t)CALL((recv), (SFT_compiling_methods[9] + 13)))
+#define CALL_compiling_methods___NitMethodContext___continue_value(recv) ((compiling_methods___NitMethodContext___continue_value_t)CALL((recv), (SFT_compiling_methods[9] + 14)))
+#define CALL_compiling_methods___NitMethodContext___continue_value__eq(recv) ((compiling_methods___NitMethodContext___continue_value__eq_t)CALL((recv), (SFT_compiling_methods[9] + 15)))
+#define CALL_compiling_methods___NitMethodContext___init(recv) ((compiling_methods___NitMethodContext___init_t)CALL((recv), (SFT_compiling_methods[9] + 16)))
+#define ATTR_compiling_methods___ClosureVariable____ctypename(recv) ATTR(recv, (SFT_compiling_methods[10] + 0))
+#define CALL_compiling_methods___ClosureVariable___ctypename(recv) ((compiling_methods___ClosureVariable___ctypename_t)CALL((recv), (SFT_compiling_methods[11] + 0)))
+#define CALL_compiling_methods___ClosureVariable___ctypename__eq(recv) ((compiling_methods___ClosureVariable___ctypename__eq_t)CALL((recv), (SFT_compiling_methods[11] + 1)))
+#define CALL_compiling_methods___MMMethod___compile_call(recv) ((compiling_methods___MMMethod___compile_call_t)CALL((recv), (SFT_compiling_methods[12] + 0)))
+#define CALL_compiling_methods___MMMethod___compile_constructor_call(recv) ((compiling_methods___MMMethod___compile_constructor_call_t)CALL((recv), (SFT_compiling_methods[12] + 1)))
+#define CALL_compiling_methods___MMMethod___compile_super_call(recv) ((compiling_methods___MMMethod___compile_super_call_t)CALL((recv), (SFT_compiling_methods[12] + 2)))
+#define CALL_compiling_methods___MMMethod___closure_cname(recv) ((compiling_methods___MMMethod___closure_cname_t)CALL((recv), (SFT_compiling_methods[12] + 3)))
+#define CALL_compiling_methods___MMAttribute___compile_access(recv) ((compiling_methods___MMAttribute___compile_access_t)CALL((recv), (SFT_compiling_methods[13] + 0)))
+#define CALL_compiling_methods___MMLocalProperty___compile_property_to_c(recv) ((compiling_methods___MMLocalProperty___compile_property_to_c_t)CALL((recv), (SFT_compiling_methods[14] + 0)))
+#define CALL_compiling_methods___MMSrcMethod___decl_csignature(recv) ((compiling_methods___MMSrcMethod___decl_csignature_t)CALL((recv), (SFT_compiling_methods[15] + 0)))
+#define CALL_compiling_methods___MMSrcMethod___do_compile_inside(recv) ((compiling_methods___MMSrcMethod___do_compile_inside_t)CALL((recv), (SFT_compiling_methods[15] + 1)))
+#define CALL_compiling_methods___MMType___compile_cast(recv) ((compiling_methods___MMType___compile_cast_t)CALL((recv), (SFT_compiling_methods[16] + 0)))
+#define CALL_compiling_methods___MMType___compile_type_check(recv) ((compiling_methods___MMType___compile_type_check_t)CALL((recv), (SFT_compiling_methods[16] + 1)))
+#define CALL_compiling_methods___AMethPropdef___do_compile_inside(recv) ((compiling_methods___AMethPropdef___do_compile_inside_t)CALL((recv), (SFT_compiling_methods[17] + 0)))
+#define CALL_compiling_methods___PSignature___compile_parameters(recv) ((compiling_methods___PSignature___compile_parameters_t)CALL((recv), (SFT_compiling_methods[18] + 0)))
+#define CALL_compiling_methods___PExpr___compile_expr(recv) ((compiling_methods___PExpr___compile_expr_t)CALL((recv), (SFT_compiling_methods[19] + 0)))
+#define CALL_compiling_methods___PExpr___prepare_compile_stmt(recv) ((compiling_methods___PExpr___prepare_compile_stmt_t)CALL((recv), (SFT_compiling_methods[19] + 1)))
+#define CALL_compiling_methods___PExpr___compile_stmt(recv) ((compiling_methods___PExpr___compile_stmt_t)CALL((recv), (SFT_compiling_methods[19] + 2)))
+#define CALL_compiling_methods___AControlableBlock___compile_inside_block(recv) ((compiling_methods___AControlableBlock___compile_inside_block_t)CALL((recv), (SFT_compiling_methods[20] + 0)))
+#define ATTR_compiling_methods___AStringFormExpr____cstring(recv) ATTR(recv, (SFT_compiling_methods[21] + 0))
+#define ATTR_compiling_methods___AStringFormExpr____cstring_length(recv) ATTR(recv, (SFT_compiling_methods[21] + 1))
+#define CALL_compiling_methods___AStringFormExpr___string_text(recv) ((compiling_methods___AStringFormExpr___string_text_t)CALL((recv), (SFT_compiling_methods[22] + 0)))
+#define CALL_compiling_methods___AStringFormExpr___compute_string_info(recv) ((compiling_methods___AStringFormExpr___compute_string_info_t)CALL((recv), (SFT_compiling_methods[22] + 1)))
+#define CALL_compiling_methods___PClosureDef___compile_closure(recv) ((compiling_methods___PClosureDef___compile_closure_t)CALL((recv), (SFT_compiling_methods[23] + 0)))
+#define CALL_compiling_methods___PClosureDef___do_compile_inside(recv) ((compiling_methods___PClosureDef___do_compile_inside_t)CALL((recv), (SFT_compiling_methods[23] + 1)))
+#define ATTR_compiling_methods___AClosureDef____cname(recv) ATTR(recv, (SFT_compiling_methods[24] + 0))
+#define CALL_compiling_methods___AClosureDef___cname(recv) ((compiling_methods___AClosureDef___cname_t)CALL((recv), (SFT_compiling_methods[25] + 0)))
+#define CALL_compiling_methods___AClosureDef___decl_csignature(recv) ((compiling_methods___AClosureDef___decl_csignature_t)CALL((recv), (SFT_compiling_methods[25] + 1)))
+#define CALL_compiling_methods___PClosureDecl___do_compile_inside(recv) ((compiling_methods___PClosureDecl___do_compile_inside_t)CALL((recv), (SFT_compiling_methods[26] + 0)))
 typedef void (* compiling_methods___CompilerVisitor___init_t)(val_t  self, val_t  param0, int* init_table);
 void compiling_methods___CompilerVisitor___init(val_t  self, val_t  param0, int* init_table);
 #define LOCATE_compiling_methods___CompilerVisitor___init "compiling_methods::CompilerVisitor::(compiling_base::CompilerVisitor::init)"
@@ -118,21 +117,18 @@ val_t compiling_methods___CompilerVisitor___ensure_var(val_t  self, val_t  param
 typedef void (* compiling_methods___CompilerVisitor___add_assignment_t)(val_t  self, val_t  param0, val_t  param1);
 void compiling_methods___CompilerVisitor___add_assignment(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_compiling_methods___CompilerVisitor___add_assignment "compiling_methods::CompilerVisitor::add_assignment"
-#define ATTR_compiling_methods___CompilerVisitor____cfc(recv) ATTR(recv, COLOR_compiling_methods___CompilerVisitor____cfc)
 typedef val_t (* compiling_methods___CompilerVisitor___cfc_t)(val_t  self);
 val_t compiling_methods___CompilerVisitor___cfc(val_t  self);
 #define LOCATE_compiling_methods___CompilerVisitor___cfc "compiling_methods::CompilerVisitor::cfc"
 typedef void (* compiling_methods___CompilerVisitor___cfc__eq_t)(val_t  self, val_t  param0);
 void compiling_methods___CompilerVisitor___cfc__eq(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___CompilerVisitor___cfc__eq "compiling_methods::CompilerVisitor::cfc="
-#define ATTR_compiling_methods___CompilerVisitor____nmc(recv) ATTR(recv, COLOR_compiling_methods___CompilerVisitor____nmc)
 typedef val_t (* compiling_methods___CompilerVisitor___nmc_t)(val_t  self);
 val_t compiling_methods___CompilerVisitor___nmc(val_t  self);
 #define LOCATE_compiling_methods___CompilerVisitor___nmc "compiling_methods::CompilerVisitor::nmc"
 typedef void (* compiling_methods___CompilerVisitor___nmc__eq_t)(val_t  self, val_t  param0);
 void compiling_methods___CompilerVisitor___nmc__eq(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___CompilerVisitor___nmc__eq "compiling_methods::CompilerVisitor::nmc="
-#define ATTR_compiling_methods___CompilerVisitor____out_contexts(recv) ATTR(recv, COLOR_compiling_methods___CompilerVisitor____out_contexts)
 typedef val_t (* compiling_methods___CompilerVisitor___out_contexts_t)(val_t  self);
 val_t compiling_methods___CompilerVisitor___out_contexts(val_t  self);
 #define LOCATE_compiling_methods___CompilerVisitor___out_contexts "compiling_methods::CompilerVisitor::out_contexts"
@@ -145,14 +141,9 @@ val_t compiling_methods___CompilerVisitor___printf_locate_error(val_t  self, val
 typedef void (* compiling_methods___CompilerVisitor___invoke_super_init_calls_after_t)(val_t  self, val_t  param0);
 void compiling_methods___CompilerVisitor___invoke_super_init_calls_after(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___CompilerVisitor___invoke_super_init_calls_after "compiling_methods::CompilerVisitor::invoke_super_init_calls_after"
-#define ATTR_compiling_methods___CFunctionContext____visitor(recv) ATTR(recv, COLOR_compiling_methods___CFunctionContext____visitor)
 typedef val_t (* compiling_methods___CFunctionContext___visitor_t)(val_t  self);
 val_t compiling_methods___CFunctionContext___visitor(val_t  self);
 #define LOCATE_compiling_methods___CFunctionContext___visitor "compiling_methods::CFunctionContext::visitor"
-#define ATTR_compiling_methods___CFunctionContext____variable_index(recv) ATTR(recv, COLOR_compiling_methods___CFunctionContext____variable_index)
-#define ATTR_compiling_methods___CFunctionContext____variable_index_max(recv) ATTR(recv, COLOR_compiling_methods___CFunctionContext____variable_index_max)
-#define ATTR_compiling_methods___CFunctionContext____varnames(recv) ATTR(recv, COLOR_compiling_methods___CFunctionContext____varnames)
-#define ATTR_compiling_methods___CFunctionContext____in_closure(recv) ATTR(recv, COLOR_compiling_methods___CFunctionContext____in_closure)
 typedef val_t (* compiling_methods___CFunctionContext___in_closure_t)(val_t  self);
 val_t compiling_methods___CFunctionContext___in_closure(val_t  self);
 #define LOCATE_compiling_methods___CFunctionContext___in_closure "compiling_methods::CFunctionContext::in_closure"
@@ -168,7 +159,6 @@ val_t compiling_methods___CFunctionContext___get_var(val_t  self);
 typedef val_t (* compiling_methods___CFunctionContext___register_variable_t)(val_t  self, val_t  param0);
 val_t compiling_methods___CFunctionContext___register_variable(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___CFunctionContext___register_variable "compiling_methods::CFunctionContext::register_variable"
-#define ATTR_compiling_methods___CFunctionContext____closurevariable_index(recv) ATTR(recv, COLOR_compiling_methods___CFunctionContext____closurevariable_index)
 typedef val_t (* compiling_methods___CFunctionContext___register_closurevariable_t)(val_t  self, val_t  param0);
 val_t compiling_methods___CFunctionContext___register_closurevariable(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___CFunctionContext___register_closurevariable "compiling_methods::CFunctionContext::register_closurevariable"
@@ -185,53 +175,45 @@ typedef void (* compiling_methods___CFunctionContext___init_t)(val_t  self, val_
 void compiling_methods___CFunctionContext___init(val_t  self, val_t  param0, int* init_table);
 #define LOCATE_compiling_methods___CFunctionContext___init "compiling_methods::CFunctionContext::init"
 val_t NEW_CFunctionContext_compiling_methods___CFunctionContext___init(val_t p0);
-#define ATTR_compiling_methods___NitMethodContext____method(recv) ATTR(recv, COLOR_compiling_methods___NitMethodContext____method)
 typedef val_t (* compiling_methods___NitMethodContext___method_t)(val_t  self);
 val_t compiling_methods___NitMethodContext___method(val_t  self);
 #define LOCATE_compiling_methods___NitMethodContext___method "compiling_methods::NitMethodContext::method"
-#define ATTR_compiling_methods___NitMethodContext____method_params(recv) ATTR(recv, COLOR_compiling_methods___NitMethodContext____method_params)
 typedef val_t (* compiling_methods___NitMethodContext___method_params_t)(val_t  self);
 val_t compiling_methods___NitMethodContext___method_params(val_t  self);
 #define LOCATE_compiling_methods___NitMethodContext___method_params "compiling_methods::NitMethodContext::method_params"
 typedef void (* compiling_methods___NitMethodContext___method_params__eq_t)(val_t  self, val_t  param0);
 void compiling_methods___NitMethodContext___method_params__eq(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___NitMethodContext___method_params__eq "compiling_methods::NitMethodContext::method_params="
-#define ATTR_compiling_methods___NitMethodContext____return_label(recv) ATTR(recv, COLOR_compiling_methods___NitMethodContext____return_label)
 typedef val_t (* compiling_methods___NitMethodContext___return_label_t)(val_t  self);
 val_t compiling_methods___NitMethodContext___return_label(val_t  self);
 #define LOCATE_compiling_methods___NitMethodContext___return_label "compiling_methods::NitMethodContext::return_label"
 typedef void (* compiling_methods___NitMethodContext___return_label__eq_t)(val_t  self, val_t  param0);
 void compiling_methods___NitMethodContext___return_label__eq(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___NitMethodContext___return_label__eq "compiling_methods::NitMethodContext::return_label="
-#define ATTR_compiling_methods___NitMethodContext____break_label(recv) ATTR(recv, COLOR_compiling_methods___NitMethodContext____break_label)
 typedef val_t (* compiling_methods___NitMethodContext___break_label_t)(val_t  self);
 val_t compiling_methods___NitMethodContext___break_label(val_t  self);
 #define LOCATE_compiling_methods___NitMethodContext___break_label "compiling_methods::NitMethodContext::break_label"
 typedef void (* compiling_methods___NitMethodContext___break_label__eq_t)(val_t  self, val_t  param0);
 void compiling_methods___NitMethodContext___break_label__eq(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___NitMethodContext___break_label__eq "compiling_methods::NitMethodContext::break_label="
-#define ATTR_compiling_methods___NitMethodContext____continue_label(recv) ATTR(recv, COLOR_compiling_methods___NitMethodContext____continue_label)
 typedef val_t (* compiling_methods___NitMethodContext___continue_label_t)(val_t  self);
 val_t compiling_methods___NitMethodContext___continue_label(val_t  self);
 #define LOCATE_compiling_methods___NitMethodContext___continue_label "compiling_methods::NitMethodContext::continue_label"
 typedef void (* compiling_methods___NitMethodContext___continue_label__eq_t)(val_t  self, val_t  param0);
 void compiling_methods___NitMethodContext___continue_label__eq(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___NitMethodContext___continue_label__eq "compiling_methods::NitMethodContext::continue_label="
-#define ATTR_compiling_methods___NitMethodContext____return_value(recv) ATTR(recv, COLOR_compiling_methods___NitMethodContext____return_value)
 typedef val_t (* compiling_methods___NitMethodContext___return_value_t)(val_t  self);
 val_t compiling_methods___NitMethodContext___return_value(val_t  self);
 #define LOCATE_compiling_methods___NitMethodContext___return_value "compiling_methods::NitMethodContext::return_value"
 typedef void (* compiling_methods___NitMethodContext___return_value__eq_t)(val_t  self, val_t  param0);
 void compiling_methods___NitMethodContext___return_value__eq(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___NitMethodContext___return_value__eq "compiling_methods::NitMethodContext::return_value="
-#define ATTR_compiling_methods___NitMethodContext____break_value(recv) ATTR(recv, COLOR_compiling_methods___NitMethodContext____break_value)
 typedef val_t (* compiling_methods___NitMethodContext___break_value_t)(val_t  self);
 val_t compiling_methods___NitMethodContext___break_value(val_t  self);
 #define LOCATE_compiling_methods___NitMethodContext___break_value "compiling_methods::NitMethodContext::break_value"
 typedef void (* compiling_methods___NitMethodContext___break_value__eq_t)(val_t  self, val_t  param0);
 void compiling_methods___NitMethodContext___break_value__eq(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___NitMethodContext___break_value__eq "compiling_methods::NitMethodContext::break_value="
-#define ATTR_compiling_methods___NitMethodContext____continue_value(recv) ATTR(recv, COLOR_compiling_methods___NitMethodContext____continue_value)
 typedef val_t (* compiling_methods___NitMethodContext___continue_value_t)(val_t  self);
 val_t compiling_methods___NitMethodContext___continue_value(val_t  self);
 #define LOCATE_compiling_methods___NitMethodContext___continue_value "compiling_methods::NitMethodContext::continue_value"
@@ -243,7 +225,6 @@ void compiling_methods___NitMethodContext___init(val_t  self, val_t  param0, int
 #define LOCATE_compiling_methods___NitMethodContext___init "compiling_methods::NitMethodContext::init"
 val_t NEW_NitMethodContext_compiling_methods___NitMethodContext___init(val_t p0);
 val_t NEW_ClosureVariable_syntax_base___ClosureVariable___init(val_t p0, val_t p1, val_t p2);
-#define ATTR_compiling_methods___ClosureVariable____ctypename(recv) ATTR(recv, COLOR_compiling_methods___ClosureVariable____ctypename)
 typedef val_t (* compiling_methods___ClosureVariable___ctypename_t)(val_t  self);
 val_t compiling_methods___ClosureVariable___ctypename(val_t  self);
 #define LOCATE_compiling_methods___ClosureVariable___ctypename "compiling_methods::ClosureVariable::ctypename"
@@ -547,8 +528,6 @@ val_t compiling_methods___AStringFormExpr___compile_expr(val_t  self, val_t  par
 typedef val_t (* compiling_methods___AStringFormExpr___string_text_t)(val_t  self);
 val_t compiling_methods___AStringFormExpr___string_text(val_t  self);
 #define LOCATE_compiling_methods___AStringFormExpr___string_text "compiling_methods::AStringFormExpr::string_text"
-#define ATTR_compiling_methods___AStringFormExpr____cstring(recv) ATTR(recv, COLOR_compiling_methods___AStringFormExpr____cstring)
-#define ATTR_compiling_methods___AStringFormExpr____cstring_length(recv) ATTR(recv, COLOR_compiling_methods___AStringFormExpr____cstring_length)
 typedef void (* compiling_methods___AStringFormExpr___compute_string_info_t)(val_t  self);
 void compiling_methods___AStringFormExpr___compute_string_info(val_t  self);
 #define LOCATE_compiling_methods___AStringFormExpr___compute_string_info "compiling_methods::AStringFormExpr::compute_string_info"
@@ -600,25 +579,6 @@ val_t NEW_ARangeExpr_parser_prod___ARangeExpr___init_arangeexpr(val_t p0, val_t 
 typedef val_t (* compiling_methods___ARangeExpr___compile_expr_t)(val_t  self, val_t  param0);
 val_t compiling_methods___ARangeExpr___compile_expr(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___ARangeExpr___compile_expr "compiling_methods::ARangeExpr::(compiling_methods::PExpr::compile_expr)"
-typedef val_t (* compiling_methods___ARangeExpr___propname_t)(val_t  self);
-val_t compiling_methods___ARangeExpr___propname(val_t  self);
-#define LOCATE_compiling_methods___ARangeExpr___propname "compiling_methods::ARangeExpr::propname"
-val_t NEW_ACrangeExpr_parser_nodes___PNode___init();
-val_t NEW_ACrangeExpr_parser_prod___ARangeExpr___empty_init();
-val_t NEW_ACrangeExpr_parser_prod___ARangeExpr___init_arangeexpr(val_t p0, val_t p1);
-val_t NEW_ACrangeExpr_parser_prod___ACrangeExpr___empty_init();
-val_t NEW_ACrangeExpr_parser_prod___ACrangeExpr___init_acrangeexpr(val_t p0, val_t p1);
-typedef val_t (* compiling_methods___ACrangeExpr___propname_t)(val_t  self);
-val_t compiling_methods___ACrangeExpr___propname(val_t  self);
-#define LOCATE_compiling_methods___ACrangeExpr___propname "compiling_methods::ACrangeExpr::(compiling_methods::ARangeExpr::propname)"
-val_t NEW_AOrangeExpr_parser_nodes___PNode___init();
-val_t NEW_AOrangeExpr_parser_prod___ARangeExpr___empty_init();
-val_t NEW_AOrangeExpr_parser_prod___ARangeExpr___init_arangeexpr(val_t p0, val_t p1);
-val_t NEW_AOrangeExpr_parser_prod___AOrangeExpr___empty_init();
-val_t NEW_AOrangeExpr_parser_prod___AOrangeExpr___init_aorangeexpr(val_t p0, val_t p1);
-typedef val_t (* compiling_methods___AOrangeExpr___propname_t)(val_t  self);
-val_t compiling_methods___AOrangeExpr___propname(val_t  self);
-#define LOCATE_compiling_methods___AOrangeExpr___propname "compiling_methods::AOrangeExpr::(compiling_methods::ARangeExpr::propname)"
 val_t NEW_ASuperExpr_parser_nodes___PNode___init();
 val_t NEW_ASuperExpr_parser_prod___ASuperExpr___empty_init();
 val_t NEW_ASuperExpr_parser_prod___ASuperExpr___init_asuperexpr(val_t p0, val_t p1, val_t p2);
@@ -683,7 +643,6 @@ val_t compiling_methods___AClosureDef___compile_closure(val_t  self, val_t  para
 typedef val_t (* compiling_methods___AClosureDef___do_compile_inside_t)(val_t  self, val_t  param0, val_t  param1);
 val_t compiling_methods___AClosureDef___do_compile_inside(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_compiling_methods___AClosureDef___do_compile_inside "compiling_methods::AClosureDef::(compiling_methods::PClosureDef::do_compile_inside)"
-#define ATTR_compiling_methods___AClosureDef____cname(recv) ATTR(recv, COLOR_compiling_methods___AClosureDef____cname)
 typedef val_t (* compiling_methods___AClosureDef___cname_t)(val_t  self);
 val_t compiling_methods___AClosureDef___cname(val_t  self);
 #define LOCATE_compiling_methods___AClosureDef___cname "compiling_methods::AClosureDef::cname"
