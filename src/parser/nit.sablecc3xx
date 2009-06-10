@@ -104,6 +104,8 @@ kwfalse = 'false';
 kwnull = 'null';
 kwas = 'as';
 kwwith = 'with';
+kwnullable = 'nullable';
+kwisset = 'isset';
 
 opar = '(';
 cpar = ')';
@@ -280,8 +282,8 @@ closure_decl
 
 /* TYPES *********************************************************************/
 type~nobra {-> type}
-	= {simple} classid {-> New type(classid, [])}
-!nobra	| {generic} classid obra no types [n2]:no cbra {-> New type(classid, [types.type])}
+	= {simple} kwnullable? classid {-> New type(kwnullable, classid, [])}
+!nobra	| {generic} kwnullable? classid obra no types [n2]:no cbra {-> New type(kwnullable, classid, [types.type])}
 	;
 types {-> type*} 
 	= type types_tail* {-> [type, types_tail.type]};
@@ -434,6 +436,7 @@ expr_minus~nopar~nobra {-> expr}
 expr_new~nopar~nobra {-> expr}
 	= expr_atom~nopar~nobra {-> expr_atom~nopar~nobra.expr}
 	| {new} kwnew no type~nobra args {-> New expr.new(kwnew, type~nobra.type, Null, [args.expr])}
+	| {isset_attr} kwisset recv~nopar~nobra attrid {-> New expr.isset_attr(kwisset, recv~nopar~nobra.expr, attrid)}
 	;
 
 expr_atom~nopar~nobra {-> expr}
@@ -457,6 +460,7 @@ expr_atom~nopar~nobra {-> expr}
 	| {superstring} superstring  {-> superstring.expr}
 !nopar	| {par} opar expr cpar {-> expr}
         | {as_cast} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no type [n4]:no cpar {-> New expr.as_cast(expr_atom~nopar~nobra.expr, kwas, type)}
+        | {as_notnull} expr_atom~nopar~nobra dot no kwas [n2]:no opar [n3]:no kwnot [n4]:no kwnull [n5]:no cpar {-> New expr.as_notnull(expr_atom~nopar~nobra.expr, kwas, kwnot, kwnull)}
 	;
 
 superstring {-> expr} 
@@ -582,7 +586,7 @@ param	= id type? dotdotdot?
 closure_decl = kwwith kwbreak? id signature expr?
 	;
 
-type	= [id]:classid [types]:type*;
+type	= kwnullable? [id]:classid [types]:type*;
 
 expr	= {block} expr* 
 	| {vardecl} kwvar id type? assign? expr? 
@@ -652,6 +656,8 @@ expr	= {block} expr*
 	| {superstring} [exprs]:expr*
 	| {par} expr 
         | {as_cast} expr kwas type
+        | {as_notnull} expr kwas kwnot kwnull
+	| {isset_attr} kwisset expr [id]:attrid
 	;
 assign_op
 	= {plus} pluseq

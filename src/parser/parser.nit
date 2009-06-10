@@ -882,7 +882,21 @@ special ParserTable
 			new ReduceAction720,
 			new ReduceAction721,
 			new ReduceAction722,
-			new ReduceAction723
+			new ReduceAction723,
+			new ReduceAction724,
+			new ReduceAction725,
+			new ReduceAction726,
+			new ReduceAction727,
+			new ReduceAction728,
+			new ReduceAction729,
+			new ReduceAction730,
+			new ReduceAction731,
+			new ReduceAction732,
+			new ReduceAction733,
+			new ReduceAction734,
+			new ReduceAction735,
+			new ReduceAction736,
+			new ReduceAction737
 		)
 	end
 end
@@ -13918,12 +13932,13 @@ special ReduceAction
 	do
 					var node_list: Object = null
 					var nodearraylist1 = p.pop
-					var listnode3 = new Array[Object]
-					var tclassidnode2 = nodearraylist1
-					assert tclassidnode2 isa TClassid
+					var listnode4 = new Array[Object]
+					var tclassidnode3 = nodearraylist1
+					assert tclassidnode3 isa TClassid
 					var ptypenode1 = new AType.init_atype(
-						tclassidnode2,
-						listnode3
+						null,
+						tclassidnode3,
+						listnode4
 					)
 					node_list = ptypenode1
 					p.push(p.go_to(22), node_list)
@@ -13935,26 +13950,16 @@ special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
-					var nodearraylist6 = p.pop
-					var nodearraylist5 = p.pop
-					var nodearraylist4 = p.pop
-					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
-					var tclassidnode2 = nodearraylist1
-					assert tclassidnode2 isa TClassid
-					var listnode3 = nodearraylist4 
-					assert listnode3 isa Array[Object]
-					if listnode3 != null then
-						if listnode4.is_empty then
-							listnode4 = listnode3
-						else
-							listnode4.append(listnode3)
-						end
-					end
+					var tkwnullablenode2 = nodearraylist1
+					assert tkwnullablenode2 isa TKwnullable
+					var tclassidnode3 = nodearraylist2
+					assert tclassidnode3 isa TClassid
 					var ptypenode1 = new AType.init_atype(
-						tclassidnode2,
+						tkwnullablenode2,
+						tclassidnode3,
 						listnode4
 					)
 					node_list = ptypenode1
@@ -13963,6 +13968,75 @@ special ReduceAction
 init do end
 end
 private class ReduceAction302
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var tclassidnode3 = nodearraylist1
+					assert tclassidnode3 isa TClassid
+					var listnode4 = nodearraylist4 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var ptypenode1 = new AType.init_atype(
+						null,
+						tclassidnode3,
+						listnode5
+					)
+					node_list = ptypenode1
+					p.push(p.go_to(22), node_list)
+	end
+init do end
+end
+private class ReduceAction303
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode5 = new Array[Object]
+					var tkwnullablenode2 = nodearraylist1
+					assert tkwnullablenode2 isa TKwnullable
+					var tclassidnode3 = nodearraylist2
+					assert tclassidnode3 isa TClassid
+					var listnode4 = nodearraylist5 
+					assert listnode4 isa Array[Object]
+					if listnode4 != null then
+						if listnode5.is_empty then
+							listnode5 = listnode4
+						else
+							listnode5.append(listnode4)
+						end
+					end
+					var ptypenode1 = new AType.init_atype(
+						tkwnullablenode2,
+						tclassidnode3,
+						listnode5
+					)
+					node_list = ptypenode1
+					p.push(p.go_to(22), node_list)
+	end
+init do end
+end
+private class ReduceAction304
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -13979,7 +14053,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction303
+private class ReduceAction305
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14006,7 +14080,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction304
+private class ReduceAction306
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14021,7 +14095,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction305
+private class ReduceAction307
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14036,7 +14110,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction306
+private class ReduceAction308
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14049,7 +14123,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction307
+private class ReduceAction309
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14072,7 +14146,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction308
+private class ReduceAction310
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14105,7 +14179,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction309
+private class ReduceAction311
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14121,7 +14195,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction310
+private class ReduceAction312
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14136,7 +14210,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction311
+private class ReduceAction313
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14150,44 +14224,14 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction312
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist1 = p.pop
-					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
-					node_list = pexprnode1
-					p.push(p.go_to(28), node_list)
-	end
-init do end
-end
-private class ReduceAction313
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist1 = p.pop
-					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
-					node_list = pexprnode1
-					p.push(p.go_to(28), node_list)
-	end
-init do end
-end
 private class ReduceAction314
 special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
 					var nodearraylist1 = p.pop
-					var tkwreturnnode2 = nodearraylist1
-					assert tkwreturnnode2 isa TKwreturn
-					var pexprnode1 = new AReturnExpr.init_areturnexpr(
-						tkwreturnnode2,
-						null
-					)
+					var pexprnode1 = nodearraylist1
+					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(28), node_list)
 	end
@@ -14198,16 +14242,9 @@ special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
-					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var tkwreturnnode2 = nodearraylist1
-					assert tkwreturnnode2 isa TKwreturn
-					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AReturnExpr.init_areturnexpr(
-						tkwreturnnode2,
-						pexprnode3
-					)
+					var pexprnode1 = nodearraylist1
+					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(28), node_list)
 	end
@@ -14219,10 +14256,10 @@ special ReduceAction
 	do
 					var node_list: Object = null
 					var nodearraylist1 = p.pop
-					var tkwbreaknode2 = nodearraylist1
-					assert tkwbreaknode2 isa TKwbreak
-					var pexprnode1 = new ABreakExpr.init_abreakexpr(
-						tkwbreaknode2,
+					var tkwreturnnode2 = nodearraylist1
+					assert tkwreturnnode2 isa TKwreturn
+					var pexprnode1 = new AReturnExpr.init_areturnexpr(
+						tkwreturnnode2,
 						null
 					)
 					node_list = pexprnode1
@@ -14237,6 +14274,43 @@ special ReduceAction
 					var node_list: Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
+					var tkwreturnnode2 = nodearraylist1
+					assert tkwreturnnode2 isa TKwreturn
+					var pexprnode3 = nodearraylist2
+					assert pexprnode3 isa PExpr
+					var pexprnode1 = new AReturnExpr.init_areturnexpr(
+						tkwreturnnode2,
+						pexprnode3
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(28), node_list)
+	end
+init do end
+end
+private class ReduceAction318
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var tkwbreaknode2 = nodearraylist1
+					assert tkwbreaknode2 isa TKwbreak
+					var pexprnode1 = new ABreakExpr.init_abreakexpr(
+						tkwbreaknode2,
+						null
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(28), node_list)
+	end
+init do end
+end
+private class ReduceAction319
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
 					var tkwbreaknode2 = nodearraylist1
 					assert tkwbreaknode2 isa TKwbreak
 					var pexprnode3 = nodearraylist2
@@ -14250,7 +14324,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction318
+private class ReduceAction320
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14266,7 +14340,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction319
+private class ReduceAction321
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14283,7 +14357,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction320
+private class ReduceAction322
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14298,32 +14372,6 @@ special ReduceAction
 						tkwcontinuenode2,
 						pexprnode3
 					)
-					node_list = pexprnode1
-					p.push(p.go_to(28), node_list)
-	end
-init do end
-end
-private class ReduceAction321
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist1 = p.pop
-					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
-					node_list = pexprnode1
-					p.push(p.go_to(28), node_list)
-	end
-init do end
-end
-private class ReduceAction322
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist1 = p.pop
-					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(28), node_list)
 	end
@@ -14373,6 +14421,32 @@ special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var pexprnode1 = nodearraylist1
+					assert pexprnode1 isa PExpr
+					node_list = pexprnode1
+					p.push(p.go_to(28), node_list)
+	end
+init do end
+end
+private class ReduceAction327
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var pexprnode1 = nodearraylist1
+					assert pexprnode1 isa PExpr
+					node_list = pexprnode1
+					p.push(p.go_to(28), node_list)
+	end
+init do end
+end
+private class ReduceAction328
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -14404,7 +14478,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction327
+private class ReduceAction329
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14437,7 +14511,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction328
+private class ReduceAction330
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14483,7 +14557,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction329
+private class ReduceAction331
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14526,7 +14600,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction330
+private class ReduceAction332
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14555,7 +14629,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction331
+private class ReduceAction333
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14587,7 +14661,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction332
+private class ReduceAction334
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14621,7 +14695,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction333
+private class ReduceAction335
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14652,7 +14726,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction334
+private class ReduceAction336
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14669,7 +14743,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction335
+private class ReduceAction337
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14696,7 +14770,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction336
+private class ReduceAction338
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14722,7 +14796,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction337
+private class ReduceAction339
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14758,7 +14832,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction338
+private class ReduceAction340
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14793,7 +14867,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction339
+private class ReduceAction341
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14838,7 +14912,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction340
+private class ReduceAction342
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14883,7 +14957,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction341
+private class ReduceAction343
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14938,7 +15012,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction342
+private class ReduceAction344
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14962,7 +15036,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction343
+private class ReduceAction345
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -14996,7 +15070,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction344
+private class ReduceAction346
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15019,7 +15093,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction345
+private class ReduceAction347
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15045,7 +15119,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction346
+private class ReduceAction348
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15075,7 +15149,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction347
+private class ReduceAction349
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15108,7 +15182,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction348
+private class ReduceAction350
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15138,7 +15212,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction349
+private class ReduceAction351
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15165,7 +15239,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction350
+private class ReduceAction352
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15207,7 +15281,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction351
+private class ReduceAction353
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15246,7 +15320,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction352
+private class ReduceAction354
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15282,7 +15356,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction353
+private class ReduceAction355
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15312,7 +15386,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction354
+private class ReduceAction356
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15339,7 +15413,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction355
+private class ReduceAction357
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15381,7 +15455,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction356
+private class ReduceAction358
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15420,7 +15494,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction357
+private class ReduceAction359
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15456,7 +15530,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction358
+private class ReduceAction360
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15472,7 +15546,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction359
+private class ReduceAction361
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15488,7 +15562,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction360
+private class ReduceAction362
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15508,7 +15582,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction361
+private class ReduceAction363
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15540,7 +15614,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction362
+private class ReduceAction364
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15568,7 +15642,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction363
+private class ReduceAction365
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15608,7 +15682,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction364
+private class ReduceAction366
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15658,7 +15732,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction365
+private class ReduceAction367
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15686,7 +15760,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction366
+private class ReduceAction368
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15715,7 +15789,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction367
+private class ReduceAction369
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15729,7 +15803,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction368
+private class ReduceAction370
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15740,7 +15814,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction369
+private class ReduceAction371
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15770,7 +15844,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction370
+private class ReduceAction372
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15807,7 +15881,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction371
+private class ReduceAction373
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15828,7 +15902,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction372
+private class ReduceAction374
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15852,7 +15926,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction373
+private class ReduceAction375
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15866,7 +15940,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction374
+private class ReduceAction376
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15879,7 +15953,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction375
+private class ReduceAction377
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15925,7 +15999,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction376
+private class ReduceAction378
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -15968,7 +16042,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction377
+private class ReduceAction379
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16008,7 +16082,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction378
+private class ReduceAction380
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16021,7 +16095,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction379
+private class ReduceAction381
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16062,7 +16136,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction380
+private class ReduceAction382
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16075,7 +16149,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction381
+private class ReduceAction383
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16097,7 +16171,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction382
+private class ReduceAction384
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16119,7 +16193,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction383
+private class ReduceAction385
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16132,7 +16206,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction384
+private class ReduceAction386
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16153,7 +16227,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction385
+private class ReduceAction387
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16166,7 +16240,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction386
+private class ReduceAction388
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16188,7 +16262,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction387
+private class ReduceAction389
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16210,7 +16284,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction388
+private class ReduceAction390
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16232,7 +16306,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction389
+private class ReduceAction391
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16254,7 +16328,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction390
+private class ReduceAction392
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16276,7 +16350,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction391
+private class ReduceAction393
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16298,7 +16372,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction392
+private class ReduceAction394
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16320,7 +16394,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction393
+private class ReduceAction395
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16342,7 +16416,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction394
+private class ReduceAction396
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16364,7 +16438,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction395
+private class ReduceAction397
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16377,7 +16451,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction396
+private class ReduceAction398
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16399,7 +16473,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction397
+private class ReduceAction399
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16421,7 +16495,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction398
+private class ReduceAction400
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16434,7 +16508,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction399
+private class ReduceAction401
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16456,7 +16530,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction400
+private class ReduceAction402
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16478,7 +16552,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction401
+private class ReduceAction403
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16500,7 +16574,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction402
+private class ReduceAction404
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16513,7 +16587,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction403
+private class ReduceAction405
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16534,7 +16608,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction404
+private class ReduceAction406
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16555,7 +16629,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction405
+private class ReduceAction407
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16568,7 +16642,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction406
+private class ReduceAction408
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16602,7 +16676,56 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction407
+private class ReduceAction409
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwissetnode2 = nodearraylist1
+					assert tkwissetnode2 isa TKwisset
+					var pexprnode3 = nodearraylist2
+					assert pexprnode3 isa PExpr
+					var tattridnode4 = nodearraylist5
+					assert tattridnode4 isa TAttrid
+					var pexprnode1 = new AIssetAttrExpr.init_aissetattrexpr(
+						tkwissetnode2,
+						pexprnode3,
+						tattridnode4
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(50), node_list)
+	end
+init do end
+end
+private class ReduceAction410
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwissetnode2 = nodearraylist1
+					assert tkwissetnode2 isa TKwisset
+					var pexprnode3 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					)
+					var tattridnode4 = nodearraylist2
+					assert tattridnode4 isa TAttrid
+					var pexprnode1 = new AIssetAttrExpr.init_aissetattrexpr(
+						tkwissetnode2,
+						pexprnode3,
+						tattridnode4
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(50), node_list)
+	end
+init do end
+end
+private class ReduceAction411
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16624,7 +16747,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction408
+private class ReduceAction412
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16643,7 +16766,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction409
+private class ReduceAction413
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16679,7 +16802,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction410
+private class ReduceAction414
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16712,7 +16835,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction411
+private class ReduceAction415
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16741,7 +16864,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction412
+private class ReduceAction416
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16773,7 +16896,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction413
+private class ReduceAction417
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16807,7 +16930,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction414
+private class ReduceAction418
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16838,7 +16961,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction415
+private class ReduceAction419
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16868,7 +16991,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction416
+private class ReduceAction420
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16907,7 +17030,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction417
+private class ReduceAction421
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16934,7 +17057,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction418
+private class ReduceAction422
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16961,7 +17084,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction419
+private class ReduceAction423
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -16985,7 +17108,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction420
+private class ReduceAction424
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17001,7 +17124,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction421
+private class ReduceAction425
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17017,7 +17140,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction422
+private class ReduceAction426
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17033,7 +17156,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction423
+private class ReduceAction427
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17049,7 +17172,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction424
+private class ReduceAction428
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17065,7 +17188,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction425
+private class ReduceAction429
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17081,7 +17204,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction426
+private class ReduceAction430
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17097,7 +17220,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction427
+private class ReduceAction431
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17113,7 +17236,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction428
+private class ReduceAction432
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17126,7 +17249,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction429
+private class ReduceAction433
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17141,7 +17264,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction430
+private class ReduceAction434
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17172,7 +17295,43 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction431
+private class ReduceAction435
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var tkwasnode3 = nodearraylist4
+					assert tkwasnode3 isa TKwas
+					var tkwnotnode4 = nodearraylist8
+					assert tkwnotnode4 isa TKwnot
+					var tkwnullnode5 = nodearraylist10
+					assert tkwnullnode5 isa TKwnull
+					var pexprnode1 = new AAsNotnullExpr.init_aasnotnullexpr(
+						pexprnode2,
+						tkwasnode3,
+						tkwnotnode4,
+						tkwnullnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(51), node_list)
+	end
+init do end
+end
+private class ReduceAction436
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17202,7 +17361,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction432
+private class ReduceAction437
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17242,7 +17401,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction433
+private class ReduceAction438
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17267,7 +17426,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction434
+private class ReduceAction439
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17283,7 +17442,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction435
+private class ReduceAction440
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17308,7 +17467,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction436
+private class ReduceAction441
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17324,7 +17483,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction437
+private class ReduceAction442
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17340,132 +17499,24 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction438
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist5 = p.pop
-					var nodearraylist4 = p.pop
-					var nodearraylist3 = p.pop
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var listnode2 = new Array[Object]
-					var pexprnode1 = nodearraylist3
-					assert pexprnode1 isa PExpr
-					if pexprnode1 != null then
-						listnode2.add(pexprnode1)
-					end
-					node_list = listnode2
-					p.push(p.go_to(58), node_list)
-	end
-init do end
-end
-private class ReduceAction439
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist6 = p.pop
-					var nodearraylist5 = p.pop
-					var nodearraylist4 = p.pop
-					var nodearraylist3 = p.pop
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var listnode3 = new Array[Object]
-					var pexprnode1 = nodearraylist3
-					assert pexprnode1 isa PExpr
-					var listnode2 = nodearraylist5 
-					assert listnode2 isa Array[Object]
-					if pexprnode1 != null then
-						listnode3.add(pexprnode1)
-					end
-					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-					end
-					node_list = listnode3
-					p.push(p.go_to(58), node_list)
-	end
-init do end
-end
-private class ReduceAction440
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist3 = p.pop
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var listnode1 = new Array[Object]
-					node_list = listnode1
-					p.push(p.go_to(58), node_list)
-	end
-init do end
-end
-private class ReduceAction441
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var listnode1 = new Array[Object]
-					node_list = listnode1
-					p.push(p.go_to(58), node_list)
-	end
-init do end
-end
-private class ReduceAction442
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist5 = p.pop
-					var nodearraylist4 = p.pop
-					var nodearraylist3 = p.pop
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var listnode2 = new Array[Object]
-					var pexprnode1 = nodearraylist3
-					assert pexprnode1 isa PExpr
-					if pexprnode1 != null then
-						listnode2.add(pexprnode1)
-					end
-					node_list = listnode2
-					p.push(p.go_to(59), node_list)
-	end
-init do end
-end
 private class ReduceAction443
 special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
-					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var listnode3 = new Array[Object]
+					var listnode2 = new Array[Object]
 					var pexprnode1 = nodearraylist3
 					assert pexprnode1 isa PExpr
-					var listnode2 = nodearraylist5 
-					assert listnode2 isa Array[Object]
 					if pexprnode1 != null then
-						listnode3.add(pexprnode1)
+						listnode2.add(pexprnode1)
 					end
-					if listnode2 != null then
-						if listnode3.is_empty then
-							listnode3 = listnode2
-						else
-							listnode3.append(listnode2)
-						end
-					end
-					node_list = listnode3
-					p.push(p.go_to(59), node_list)
+					node_list = listnode2
+					p.push(p.go_to(58), node_list)
 	end
 init do end
 end
@@ -17474,15 +17525,29 @@ special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var listnode2 = new Array[Object]
-					var pexprnode1 = nodearraylist1
+					var listnode3 = new Array[Object]
+					var pexprnode1 = nodearraylist3
 					assert pexprnode1 isa PExpr
+					var listnode2 = nodearraylist5 
+					assert listnode2 isa Array[Object]
 					if pexprnode1 != null then
-						listnode2.add(pexprnode1)
+						listnode3.add(pexprnode1)
 					end
-					node_list = listnode2
-					p.push(p.go_to(59), node_list)
+					if listnode2 != null then
+						if listnode3.is_empty then
+							listnode3 = listnode2
+						else
+							listnode3.append(listnode2)
+						end
+					end
+					node_list = listnode3
+					p.push(p.go_to(58), node_list)
 	end
 init do end
 end
@@ -17496,7 +17561,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode1 = new Array[Object]
 					node_list = listnode1
-					p.push(p.go_to(59), node_list)
+					p.push(p.go_to(58), node_list)
 	end
 init do end
 end
@@ -17507,7 +17572,7 @@ special ReduceAction
 					var node_list: Object = null
 					var listnode1 = new Array[Object]
 					node_list = listnode1
-					p.push(p.go_to(59), node_list)
+					p.push(p.go_to(58), node_list)
 	end
 init do end
 end
@@ -17528,7 +17593,7 @@ special ReduceAction
 						listnode2.add(pexprnode1)
 					end
 					node_list = listnode2
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(59), node_list)
 	end
 init do end
 end
@@ -17559,11 +17624,105 @@ special ReduceAction
 						end
 					end
 					node_list = listnode3
-					p.push(p.go_to(60), node_list)
+					p.push(p.go_to(59), node_list)
 	end
 init do end
 end
 private class ReduceAction449
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var listnode2 = new Array[Object]
+					var pexprnode1 = nodearraylist1
+					assert pexprnode1 isa PExpr
+					if pexprnode1 != null then
+						listnode2.add(pexprnode1)
+					end
+					node_list = listnode2
+					p.push(p.go_to(59), node_list)
+	end
+init do end
+end
+private class ReduceAction450
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode1 = new Array[Object]
+					node_list = listnode1
+					p.push(p.go_to(59), node_list)
+	end
+init do end
+end
+private class ReduceAction451
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var listnode1 = new Array[Object]
+					node_list = listnode1
+					p.push(p.go_to(59), node_list)
+	end
+init do end
+end
+private class ReduceAction452
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode2 = new Array[Object]
+					var pexprnode1 = nodearraylist3
+					assert pexprnode1 isa PExpr
+					if pexprnode1 != null then
+						listnode2.add(pexprnode1)
+					end
+					node_list = listnode2
+					p.push(p.go_to(60), node_list)
+	end
+init do end
+end
+private class ReduceAction453
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode3 = new Array[Object]
+					var pexprnode1 = nodearraylist3
+					assert pexprnode1 isa PExpr
+					var listnode2 = nodearraylist5 
+					assert listnode2 isa Array[Object]
+					if pexprnode1 != null then
+						listnode3.add(pexprnode1)
+					end
+					if listnode2 != null then
+						if listnode3.is_empty then
+							listnode3 = listnode2
+						else
+							listnode3.append(listnode2)
+						end
+					end
+					node_list = listnode3
+					p.push(p.go_to(60), node_list)
+	end
+init do end
+end
+private class ReduceAction454
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17579,7 +17738,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction450
+private class ReduceAction455
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17596,7 +17755,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction451
+private class ReduceAction456
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17626,7 +17785,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction452
+private class ReduceAction457
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17644,7 +17803,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction453
+private class ReduceAction458
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17672,7 +17831,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction454
+private class ReduceAction459
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17697,7 +17856,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction455
+private class ReduceAction460
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17712,7 +17871,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction456
+private class ReduceAction461
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17727,7 +17886,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction457
+private class ReduceAction462
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17737,7 +17896,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction458
+private class ReduceAction463
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17747,7 +17906,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction459
+private class ReduceAction464
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17771,7 +17930,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction460
+private class ReduceAction465
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17796,7 +17955,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction461
+private class ReduceAction466
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17807,7 +17966,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction462
+private class ReduceAction467
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17817,7 +17976,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction463
+private class ReduceAction468
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17830,7 +17989,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction464
+private class ReduceAction469
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17841,7 +18000,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction465
+private class ReduceAction470
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17853,7 +18012,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction466
+private class ReduceAction471
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17863,7 +18022,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction467
+private class ReduceAction472
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17877,7 +18036,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction468
+private class ReduceAction473
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17915,7 +18074,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction469
+private class ReduceAction474
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17956,7 +18115,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction470
+private class ReduceAction475
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -17995,7 +18154,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction471
+private class ReduceAction476
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18037,7 +18196,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction472
+private class ReduceAction477
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18073,7 +18232,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction473
+private class ReduceAction478
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18112,7 +18271,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction474
+private class ReduceAction479
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18151,7 +18310,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction475
+private class ReduceAction480
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18193,25 +18352,48 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction476
+private class ReduceAction481
 special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
 					var nodearraylist1 = p.pop
-					var listnode3 = new Array[Object]
-					var tclassidnode2 = nodearraylist1
-					assert tclassidnode2 isa TClassid
+					var listnode4 = new Array[Object]
+					var tclassidnode3 = nodearraylist1
+					assert tclassidnode3 isa TClassid
 					var ptypenode1 = new AType.init_atype(
-						tclassidnode2,
-						listnode3
+						null,
+						tclassidnode3,
+						listnode4
 					)
 					node_list = ptypenode1
 					p.push(p.go_to(72), node_list)
 	end
 init do end
 end
-private class ReduceAction477
+private class ReduceAction482
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var listnode4 = new Array[Object]
+					var tkwnullablenode2 = nodearraylist1
+					assert tkwnullablenode2 isa TKwnullable
+					var tclassidnode3 = nodearraylist2
+					assert tclassidnode3 isa TClassid
+					var ptypenode1 = new AType.init_atype(
+						tkwnullablenode2,
+						tclassidnode3,
+						listnode4
+					)
+					node_list = ptypenode1
+					p.push(p.go_to(72), node_list)
+	end
+init do end
+end
+private class ReduceAction483
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18224,7 +18406,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction478
+private class ReduceAction484
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18270,7 +18452,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction479
+private class ReduceAction485
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18313,7 +18495,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction480
+private class ReduceAction486
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18326,7 +18508,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction481
+private class ReduceAction487
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18367,7 +18549,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction482
+private class ReduceAction488
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18380,7 +18562,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction483
+private class ReduceAction489
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18402,7 +18584,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction484
+private class ReduceAction490
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18424,7 +18606,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction485
+private class ReduceAction491
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18437,7 +18619,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction486
+private class ReduceAction492
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18458,7 +18640,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction487
+private class ReduceAction493
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18471,7 +18653,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction488
+private class ReduceAction494
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18493,7 +18675,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction489
+private class ReduceAction495
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18515,7 +18697,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction490
+private class ReduceAction496
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18537,7 +18719,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction491
+private class ReduceAction497
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18559,7 +18741,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction492
+private class ReduceAction498
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18581,7 +18763,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction493
+private class ReduceAction499
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18603,7 +18785,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction494
+private class ReduceAction500
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18625,7 +18807,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction495
+private class ReduceAction501
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18647,7 +18829,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction496
+private class ReduceAction502
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18669,7 +18851,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction497
+private class ReduceAction503
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18682,7 +18864,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction498
+private class ReduceAction504
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18704,7 +18886,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction499
+private class ReduceAction505
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18726,7 +18908,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction500
+private class ReduceAction506
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18739,7 +18921,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction501
+private class ReduceAction507
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18761,7 +18943,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction502
+private class ReduceAction508
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18783,7 +18965,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction503
+private class ReduceAction509
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18805,7 +18987,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction504
+private class ReduceAction510
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18818,7 +19000,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction505
+private class ReduceAction511
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18839,7 +19021,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction506
+private class ReduceAction512
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18860,7 +19042,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction507
+private class ReduceAction513
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18873,7 +19055,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction508
+private class ReduceAction514
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18907,7 +19089,56 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction509
+private class ReduceAction515
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwissetnode2 = nodearraylist1
+					assert tkwissetnode2 isa TKwisset
+					var pexprnode3 = nodearraylist2
+					assert pexprnode3 isa PExpr
+					var tattridnode4 = nodearraylist5
+					assert tattridnode4 isa TAttrid
+					var pexprnode1 = new AIssetAttrExpr.init_aissetattrexpr(
+						tkwissetnode2,
+						pexprnode3,
+						tattridnode4
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(81), node_list)
+	end
+init do end
+end
+private class ReduceAction516
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwissetnode2 = nodearraylist1
+					assert tkwissetnode2 isa TKwisset
+					var pexprnode3 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					)
+					var tattridnode4 = nodearraylist2
+					assert tattridnode4 isa TAttrid
+					var pexprnode1 = new AIssetAttrExpr.init_aissetattrexpr(
+						tkwissetnode2,
+						pexprnode3,
+						tattridnode4
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(81), node_list)
+	end
+init do end
+end
+private class ReduceAction517
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18929,7 +19160,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction510
+private class ReduceAction518
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18948,7 +19179,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction511
+private class ReduceAction519
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -18984,7 +19215,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction512
+private class ReduceAction520
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19017,7 +19248,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction513
+private class ReduceAction521
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19046,7 +19277,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction514
+private class ReduceAction522
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19078,7 +19309,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction515
+private class ReduceAction523
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19112,7 +19343,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction516
+private class ReduceAction524
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19143,7 +19374,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction517
+private class ReduceAction525
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19182,7 +19413,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction518
+private class ReduceAction526
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19198,7 +19429,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction519
+private class ReduceAction527
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19214,7 +19445,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction520
+private class ReduceAction528
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19230,7 +19461,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction521
+private class ReduceAction529
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19246,7 +19477,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction522
+private class ReduceAction530
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19262,7 +19493,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction523
+private class ReduceAction531
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19278,7 +19509,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction524
+private class ReduceAction532
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19294,7 +19525,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction525
+private class ReduceAction533
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19310,7 +19541,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction526
+private class ReduceAction534
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19323,7 +19554,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction527
+private class ReduceAction535
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19338,7 +19569,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction528
+private class ReduceAction536
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19369,7 +19600,43 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction529
+private class ReduceAction537
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var tkwasnode3 = nodearraylist4
+					assert tkwasnode3 isa TKwas
+					var tkwnotnode4 = nodearraylist8
+					assert tkwnotnode4 isa TKwnot
+					var tkwnullnode5 = nodearraylist10
+					assert tkwnullnode5 isa TKwnull
+					var pexprnode1 = new AAsNotnullExpr.init_aasnotnullexpr(
+						pexprnode2,
+						tkwasnode3,
+						tkwnotnode4,
+						tkwnullnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(82), node_list)
+	end
+init do end
+end
+private class ReduceAction538
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19382,7 +19649,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction530
+private class ReduceAction539
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19405,7 +19672,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction531
+private class ReduceAction540
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19438,167 +19705,19 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction532
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var listnode2 = new Array[Object]
-					var pexprnode1 = new ABlockExpr.init_ablockexpr(
-						listnode2
-					)
-					node_list = pexprnode1
-					p.push(p.go_to(83), node_list)
-	end
-init do end
-end
-private class ReduceAction533
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist1 = p.pop
-					var listnode2 = new Array[Object]
-					var pexprnode1 = new ABlockExpr.init_ablockexpr(
-						listnode2
-					)
-					node_list = pexprnode1
-					p.push(p.go_to(83), node_list)
-	end
-init do end
-end
-private class ReduceAction534
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist1 = p.pop
-					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
-					node_list = pexprnode1
-					p.push(p.go_to(84), node_list)
-	end
-init do end
-end
-private class ReduceAction535
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist1 = p.pop
-					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
-					node_list = pexprnode1
-					p.push(p.go_to(84), node_list)
-	end
-init do end
-end
-private class ReduceAction536
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist1 = p.pop
-					var tkwreturnnode2 = nodearraylist1
-					assert tkwreturnnode2 isa TKwreturn
-					var pexprnode1 = new AReturnExpr.init_areturnexpr(
-						tkwreturnnode2,
-						null
-					)
-					node_list = pexprnode1
-					p.push(p.go_to(84), node_list)
-	end
-init do end
-end
-private class ReduceAction537
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var tkwreturnnode2 = nodearraylist1
-					assert tkwreturnnode2 isa TKwreturn
-					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AReturnExpr.init_areturnexpr(
-						tkwreturnnode2,
-						pexprnode3
-					)
-					node_list = pexprnode1
-					p.push(p.go_to(84), node_list)
-	end
-init do end
-end
-private class ReduceAction538
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist1 = p.pop
-					var tkwbreaknode2 = nodearraylist1
-					assert tkwbreaknode2 isa TKwbreak
-					var pexprnode1 = new ABreakExpr.init_abreakexpr(
-						tkwbreaknode2,
-						null
-					)
-					node_list = pexprnode1
-					p.push(p.go_to(84), node_list)
-	end
-init do end
-end
-private class ReduceAction539
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist2 = p.pop
-					var nodearraylist1 = p.pop
-					var tkwbreaknode2 = nodearraylist1
-					assert tkwbreaknode2 isa TKwbreak
-					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ABreakExpr.init_abreakexpr(
-						tkwbreaknode2,
-						pexprnode3
-					)
-					node_list = pexprnode1
-					p.push(p.go_to(84), node_list)
-	end
-init do end
-end
-private class ReduceAction540
-special ReduceAction
-	redef meth action(p: Parser)
-	do
-					var node_list: Object = null
-					var nodearraylist1 = p.pop
-					var tkwabortnode2 = nodearraylist1
-					assert tkwabortnode2 isa TKwabort
-					var pexprnode1 = new AAbortExpr.init_aabortexpr(
-						tkwabortnode2
-					)
-					node_list = pexprnode1
-					p.push(p.go_to(84), node_list)
-	end
-init do end
-end
 private class ReduceAction541
 special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
+					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var tkwcontinuenode2 = nodearraylist1
-					assert tkwcontinuenode2 isa TKwcontinue
-					var pexprnode1 = new AContinueExpr.init_acontinueexpr(
-						tkwcontinuenode2,
-						null
+					var listnode2 = new Array[Object]
+					var pexprnode1 = new ABlockExpr.init_ablockexpr(
+						listnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(84), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
@@ -19607,18 +19726,13 @@ special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
-					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var tkwcontinuenode2 = nodearraylist1
-					assert tkwcontinuenode2 isa TKwcontinue
-					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AContinueExpr.init_acontinueexpr(
-						tkwcontinuenode2,
-						pexprnode3
+					var listnode2 = new Array[Object]
+					var pexprnode1 = new ABlockExpr.init_ablockexpr(
+						listnode2
 					)
 					node_list = pexprnode1
-					p.push(p.go_to(84), node_list)
+					p.push(p.go_to(83), node_list)
 	end
 init do end
 end
@@ -19654,8 +19768,12 @@ special ReduceAction
 	do
 					var node_list: Object = null
 					var nodearraylist1 = p.pop
-					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					var tkwreturnnode2 = nodearraylist1
+					assert tkwreturnnode2 isa TKwreturn
+					var pexprnode1 = new AReturnExpr.init_areturnexpr(
+						tkwreturnnode2,
+						null
+					)
 					node_list = pexprnode1
 					p.push(p.go_to(84), node_list)
 	end
@@ -19666,9 +19784,16 @@ special ReduceAction
 	redef meth action(p: Parser)
 	do
 					var node_list: Object = null
+					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					var tkwreturnnode2 = nodearraylist1
+					assert tkwreturnnode2 isa TKwreturn
+					var pexprnode3 = nodearraylist2
+					assert pexprnode3 isa PExpr
+					var pexprnode1 = new AReturnExpr.init_areturnexpr(
+						tkwreturnnode2,
+						pexprnode3
+					)
 					node_list = pexprnode1
 					p.push(p.go_to(84), node_list)
 	end
@@ -19680,6 +19805,96 @@ special ReduceAction
 	do
 					var node_list: Object = null
 					var nodearraylist1 = p.pop
+					var tkwbreaknode2 = nodearraylist1
+					assert tkwbreaknode2 isa TKwbreak
+					var pexprnode1 = new ABreakExpr.init_abreakexpr(
+						tkwbreaknode2,
+						null
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(84), node_list)
+	end
+init do end
+end
+private class ReduceAction548
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwbreaknode2 = nodearraylist1
+					assert tkwbreaknode2 isa TKwbreak
+					var pexprnode3 = nodearraylist2
+					assert pexprnode3 isa PExpr
+					var pexprnode1 = new ABreakExpr.init_abreakexpr(
+						tkwbreaknode2,
+						pexprnode3
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(84), node_list)
+	end
+init do end
+end
+private class ReduceAction549
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var tkwabortnode2 = nodearraylist1
+					assert tkwabortnode2 isa TKwabort
+					var pexprnode1 = new AAbortExpr.init_aabortexpr(
+						tkwabortnode2
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(84), node_list)
+	end
+init do end
+end
+private class ReduceAction550
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var tkwcontinuenode2 = nodearraylist1
+					assert tkwcontinuenode2 isa TKwcontinue
+					var pexprnode1 = new AContinueExpr.init_acontinueexpr(
+						tkwcontinuenode2,
+						null
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(84), node_list)
+	end
+init do end
+end
+private class ReduceAction551
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwcontinuenode2 = nodearraylist1
+					assert tkwcontinuenode2 isa TKwcontinue
+					var pexprnode3 = nodearraylist2
+					assert pexprnode3 isa PExpr
+					var pexprnode1 = new AContinueExpr.init_acontinueexpr(
+						tkwcontinuenode2,
+						pexprnode3
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(84), node_list)
+	end
+init do end
+end
+private class ReduceAction552
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
 					assert pexprnode1 isa PExpr
 					node_list = pexprnode1
@@ -19687,7 +19902,59 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction548
+private class ReduceAction553
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var pexprnode1 = nodearraylist1
+					assert pexprnode1 isa PExpr
+					node_list = pexprnode1
+					p.push(p.go_to(84), node_list)
+	end
+init do end
+end
+private class ReduceAction554
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var pexprnode1 = nodearraylist1
+					assert pexprnode1 isa PExpr
+					node_list = pexprnode1
+					p.push(p.go_to(84), node_list)
+	end
+init do end
+end
+private class ReduceAction555
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var pexprnode1 = nodearraylist1
+					assert pexprnode1 isa PExpr
+					node_list = pexprnode1
+					p.push(p.go_to(84), node_list)
+	end
+init do end
+end
+private class ReduceAction556
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist1 = p.pop
+					var pexprnode1 = nodearraylist1
+					assert pexprnode1 isa PExpr
+					node_list = pexprnode1
+					p.push(p.go_to(84), node_list)
+	end
+init do end
+end
+private class ReduceAction557
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19723,7 +19990,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction549
+private class ReduceAction558
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19756,7 +20023,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction550
+private class ReduceAction559
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19802,7 +20069,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction551
+private class ReduceAction560
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19845,7 +20112,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction552
+private class ReduceAction561
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19874,7 +20141,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction553
+private class ReduceAction562
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19906,7 +20173,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction554
+private class ReduceAction563
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19940,7 +20207,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction555
+private class ReduceAction564
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19971,7 +20238,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction556
+private class ReduceAction565
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -19988,7 +20255,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction557
+private class ReduceAction566
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20015,7 +20282,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction558
+private class ReduceAction567
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20041,7 +20308,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction559
+private class ReduceAction568
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20077,7 +20344,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction560
+private class ReduceAction569
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20100,7 +20367,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction561
+private class ReduceAction570
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20126,7 +20393,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction562
+private class ReduceAction571
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20156,7 +20423,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction563
+private class ReduceAction572
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20189,7 +20456,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction564
+private class ReduceAction573
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20219,7 +20486,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction565
+private class ReduceAction574
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20246,7 +20513,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction566
+private class ReduceAction575
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20288,7 +20555,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction567
+private class ReduceAction576
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20327,7 +20594,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction568
+private class ReduceAction577
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20363,7 +20630,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction569
+private class ReduceAction578
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20393,7 +20660,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction570
+private class ReduceAction579
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20420,7 +20687,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction571
+private class ReduceAction580
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20462,7 +20729,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction572
+private class ReduceAction581
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20501,7 +20768,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction573
+private class ReduceAction582
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20537,7 +20804,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction574
+private class ReduceAction583
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20557,7 +20824,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction575
+private class ReduceAction584
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20589,7 +20856,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction576
+private class ReduceAction585
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20619,7 +20886,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction577
+private class ReduceAction586
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20656,7 +20923,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction578
+private class ReduceAction587
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20677,7 +20944,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction579
+private class ReduceAction588
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20701,7 +20968,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction580
+private class ReduceAction589
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20714,7 +20981,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction581
+private class ReduceAction590
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20760,7 +21027,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction582
+private class ReduceAction591
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20803,7 +21070,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction583
+private class ReduceAction592
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20843,7 +21110,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction584
+private class ReduceAction593
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20856,7 +21123,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction585
+private class ReduceAction594
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20902,7 +21169,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction586
+private class ReduceAction595
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20945,7 +21212,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction587
+private class ReduceAction596
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -20958,7 +21225,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction588
+private class ReduceAction597
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21004,7 +21271,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction589
+private class ReduceAction598
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21047,7 +21314,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction590
+private class ReduceAction599
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21060,7 +21327,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction591
+private class ReduceAction600
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21101,7 +21368,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction592
+private class ReduceAction601
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21114,7 +21381,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction593
+private class ReduceAction602
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21136,7 +21403,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction594
+private class ReduceAction603
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21158,7 +21425,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction595
+private class ReduceAction604
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21171,7 +21438,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction596
+private class ReduceAction605
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21192,7 +21459,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction597
+private class ReduceAction606
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21205,7 +21472,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction598
+private class ReduceAction607
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21227,7 +21494,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction599
+private class ReduceAction608
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21249,7 +21516,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction600
+private class ReduceAction609
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21271,7 +21538,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction601
+private class ReduceAction610
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21293,7 +21560,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction602
+private class ReduceAction611
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21315,7 +21582,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction603
+private class ReduceAction612
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21337,7 +21604,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction604
+private class ReduceAction613
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21359,7 +21626,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction605
+private class ReduceAction614
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21381,7 +21648,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction606
+private class ReduceAction615
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21403,7 +21670,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction607
+private class ReduceAction616
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21416,7 +21683,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction608
+private class ReduceAction617
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21438,7 +21705,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction609
+private class ReduceAction618
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21460,7 +21727,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction610
+private class ReduceAction619
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21473,7 +21740,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction611
+private class ReduceAction620
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21495,7 +21762,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction612
+private class ReduceAction621
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21517,7 +21784,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction613
+private class ReduceAction622
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21539,7 +21806,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction614
+private class ReduceAction623
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21552,7 +21819,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction615
+private class ReduceAction624
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21573,7 +21840,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction616
+private class ReduceAction625
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21594,7 +21861,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction617
+private class ReduceAction626
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21607,7 +21874,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction618
+private class ReduceAction627
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21641,7 +21908,56 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction619
+private class ReduceAction628
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwissetnode2 = nodearraylist1
+					assert tkwissetnode2 isa TKwisset
+					var pexprnode3 = nodearraylist2
+					assert pexprnode3 isa PExpr
+					var tattridnode4 = nodearraylist5
+					assert tattridnode4 isa TAttrid
+					var pexprnode1 = new AIssetAttrExpr.init_aissetattrexpr(
+						tkwissetnode2,
+						pexprnode3,
+						tattridnode4
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(104), node_list)
+	end
+init do end
+end
+private class ReduceAction629
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwissetnode2 = nodearraylist1
+					assert tkwissetnode2 isa TKwisset
+					var pexprnode3 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					)
+					var tattridnode4 = nodearraylist2
+					assert tattridnode4 isa TAttrid
+					var pexprnode1 = new AIssetAttrExpr.init_aissetattrexpr(
+						tkwissetnode2,
+						pexprnode3,
+						tattridnode4
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(104), node_list)
+	end
+init do end
+end
+private class ReduceAction630
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21663,7 +21979,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction620
+private class ReduceAction631
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21682,7 +21998,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction621
+private class ReduceAction632
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21718,7 +22034,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction622
+private class ReduceAction633
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21751,7 +22067,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction623
+private class ReduceAction634
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21780,7 +22096,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction624
+private class ReduceAction635
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21812,7 +22128,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction625
+private class ReduceAction636
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21846,7 +22162,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction626
+private class ReduceAction637
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21877,7 +22193,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction627
+private class ReduceAction638
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21916,7 +22232,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction628
+private class ReduceAction639
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21932,7 +22248,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction629
+private class ReduceAction640
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21948,7 +22264,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction630
+private class ReduceAction641
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21964,7 +22280,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction631
+private class ReduceAction642
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21980,7 +22296,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction632
+private class ReduceAction643
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -21996,7 +22312,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction633
+private class ReduceAction644
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22012,7 +22328,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction634
+private class ReduceAction645
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22028,7 +22344,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction635
+private class ReduceAction646
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22044,7 +22360,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction636
+private class ReduceAction647
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22057,7 +22373,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction637
+private class ReduceAction648
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22088,7 +22404,43 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction638
+private class ReduceAction649
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var tkwasnode3 = nodearraylist4
+					assert tkwasnode3 isa TKwas
+					var tkwnotnode4 = nodearraylist8
+					assert tkwnotnode4 isa TKwnot
+					var tkwnullnode5 = nodearraylist10
+					assert tkwnullnode5 isa TKwnull
+					var pexprnode1 = new AAsNotnullExpr.init_aasnotnullexpr(
+						pexprnode2,
+						tkwasnode3,
+						tkwnotnode4,
+						tkwnullnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(105), node_list)
+	end
+init do end
+end
+private class ReduceAction650
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22101,7 +22453,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction639
+private class ReduceAction651
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22147,7 +22499,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction640
+private class ReduceAction652
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22190,7 +22542,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction641
+private class ReduceAction653
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22203,7 +22555,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction642
+private class ReduceAction654
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22244,7 +22596,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction643
+private class ReduceAction655
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22257,7 +22609,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction644
+private class ReduceAction656
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22279,7 +22631,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction645
+private class ReduceAction657
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22301,7 +22653,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction646
+private class ReduceAction658
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22314,7 +22666,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction647
+private class ReduceAction659
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22335,7 +22687,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction648
+private class ReduceAction660
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22348,7 +22700,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction649
+private class ReduceAction661
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22370,7 +22722,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction650
+private class ReduceAction662
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22392,7 +22744,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction651
+private class ReduceAction663
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22414,7 +22766,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction652
+private class ReduceAction664
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22436,7 +22788,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction653
+private class ReduceAction665
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22458,7 +22810,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction654
+private class ReduceAction666
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22480,7 +22832,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction655
+private class ReduceAction667
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22502,7 +22854,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction656
+private class ReduceAction668
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22524,7 +22876,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction657
+private class ReduceAction669
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22546,7 +22898,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction658
+private class ReduceAction670
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22559,7 +22911,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction659
+private class ReduceAction671
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22581,7 +22933,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction660
+private class ReduceAction672
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22603,7 +22955,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction661
+private class ReduceAction673
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22616,7 +22968,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction662
+private class ReduceAction674
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22638,7 +22990,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction663
+private class ReduceAction675
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22660,7 +23012,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction664
+private class ReduceAction676
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22682,7 +23034,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction665
+private class ReduceAction677
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22695,7 +23047,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction666
+private class ReduceAction678
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22716,7 +23068,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction667
+private class ReduceAction679
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22737,7 +23089,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction668
+private class ReduceAction680
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22750,7 +23102,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction669
+private class ReduceAction681
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22784,7 +23136,31 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction670
+private class ReduceAction682
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var tkwissetnode2 = nodearraylist1
+					assert tkwissetnode2 isa TKwisset
+					var pexprnode3 = nodearraylist2
+					assert pexprnode3 isa PExpr
+					var tattridnode4 = nodearraylist3
+					assert tattridnode4 isa TAttrid
+					var pexprnode1 = new AIssetAttrExpr.init_aissetattrexpr(
+						tkwissetnode2,
+						pexprnode3,
+						tattridnode4
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(114), node_list)
+	end
+init do end
+end
+private class ReduceAction683
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22804,7 +23180,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction671
+private class ReduceAction684
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22838,7 +23214,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction672
+private class ReduceAction685
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22867,7 +23243,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction673
+private class ReduceAction686
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22899,7 +23275,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction674
+private class ReduceAction687
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22931,7 +23307,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction675
+private class ReduceAction688
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22970,7 +23346,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction676
+private class ReduceAction689
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -22986,7 +23362,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction677
+private class ReduceAction690
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23002,7 +23378,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction678
+private class ReduceAction691
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23018,7 +23394,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction679
+private class ReduceAction692
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23034,7 +23410,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction680
+private class ReduceAction693
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23050,7 +23426,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction681
+private class ReduceAction694
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23066,7 +23442,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction682
+private class ReduceAction695
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23082,7 +23458,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction683
+private class ReduceAction696
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23098,7 +23474,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction684
+private class ReduceAction697
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23111,7 +23487,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction685
+private class ReduceAction698
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23142,7 +23518,43 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction686
+private class ReduceAction699
+special ReduceAction
+	redef meth action(p: Parser)
+	do
+					var node_list: Object = null
+					var nodearraylist12 = p.pop
+					var nodearraylist11 = p.pop
+					var nodearraylist10 = p.pop
+					var nodearraylist9 = p.pop
+					var nodearraylist8 = p.pop
+					var nodearraylist7 = p.pop
+					var nodearraylist6 = p.pop
+					var nodearraylist5 = p.pop
+					var nodearraylist4 = p.pop
+					var nodearraylist3 = p.pop
+					var nodearraylist2 = p.pop
+					var nodearraylist1 = p.pop
+					var pexprnode2 = nodearraylist1
+					assert pexprnode2 isa PExpr
+					var tkwasnode3 = nodearraylist4
+					assert tkwasnode3 isa TKwas
+					var tkwnotnode4 = nodearraylist8
+					assert tkwnotnode4 isa TKwnot
+					var tkwnullnode5 = nodearraylist10
+					assert tkwnullnode5 isa TKwnull
+					var pexprnode1 = new AAsNotnullExpr.init_aasnotnullexpr(
+						pexprnode2,
+						tkwasnode3,
+						tkwnotnode4,
+						tkwnullnode5
+					)
+					node_list = pexprnode1
+					p.push(p.go_to(115), node_list)
+	end
+init do end
+end
+private class ReduceAction700
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23157,7 +23569,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction687
+private class ReduceAction701
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23169,7 +23581,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction688
+private class ReduceAction702
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23182,7 +23594,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction689
+private class ReduceAction703
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23228,7 +23640,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction690
+private class ReduceAction704
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23271,7 +23683,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction691
+private class ReduceAction705
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23284,7 +23696,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction692
+private class ReduceAction706
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23330,7 +23742,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction693
+private class ReduceAction707
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23373,7 +23785,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction694
+private class ReduceAction708
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23390,7 +23802,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction695
+private class ReduceAction709
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23417,7 +23829,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction696
+private class ReduceAction710
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23434,7 +23846,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction697
+private class ReduceAction711
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23461,7 +23873,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction698
+private class ReduceAction712
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23478,7 +23890,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction699
+private class ReduceAction713
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23505,7 +23917,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction700
+private class ReduceAction714
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23522,7 +23934,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction701
+private class ReduceAction715
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23549,7 +23961,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction702
+private class ReduceAction716
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23566,7 +23978,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction703
+private class ReduceAction717
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23593,7 +24005,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction704
+private class ReduceAction718
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23610,7 +24022,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction705
+private class ReduceAction719
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23637,7 +24049,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction706
+private class ReduceAction720
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23654,7 +24066,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction707
+private class ReduceAction721
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23681,7 +24093,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction708
+private class ReduceAction722
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23698,7 +24110,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction709
+private class ReduceAction723
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23725,7 +24137,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction710
+private class ReduceAction724
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23742,7 +24154,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction711
+private class ReduceAction725
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23769,7 +24181,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction712
+private class ReduceAction726
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23790,7 +24202,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction713
+private class ReduceAction727
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23821,7 +24233,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction714
+private class ReduceAction728
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23838,7 +24250,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction715
+private class ReduceAction729
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23865,7 +24277,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction716
+private class ReduceAction730
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23882,7 +24294,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction717
+private class ReduceAction731
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23909,7 +24321,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction718
+private class ReduceAction732
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23926,7 +24338,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction719
+private class ReduceAction733
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23953,7 +24365,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction720
+private class ReduceAction734
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23970,7 +24382,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction721
+private class ReduceAction735
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -23997,7 +24409,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction722
+private class ReduceAction736
 special ReduceAction
 	redef meth action(p: Parser)
 	do
@@ -24014,7 +24426,7 @@ special ReduceAction
 	end
 init do end
 end
-private class ReduceAction723
+private class ReduceAction737
 special ReduceAction
 	redef meth action(p: Parser)
 	do

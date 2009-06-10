@@ -4699,6 +4699,13 @@ redef class AClosureDecl
     end
 end
 redef class AType
+    redef meth n_kwnullable=(n: TKwnullable)
+    do
+        _n_kwnullable = n
+        if n != null then
+	    n.parent = self
+        end
+    end
     redef meth n_id=(n: TClassid)
     do
         _n_id = n
@@ -4710,11 +4717,16 @@ redef class AType
     private init empty_init do end
 
     init init_atype (
+            n_kwnullable: TKwnullable ,
             n_id: TClassid ,
             n_types: Collection[Object]  # Should be Collection[PType]
     )
     do
         empty_init
+        _n_kwnullable = n_kwnullable
+	if n_kwnullable != null then
+		n_kwnullable.parent = self
+	end
         _n_id = n_id
 	if n_id != null then
 		n_id.parent = self
@@ -4730,6 +4742,16 @@ redef class AType
     redef meth replace_child(old_child: PNode, new_child: PNode)
     do
         assert old_child != null
+        if _n_kwnullable == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwnullable
+                _n_kwnullable = new_child
+	    else
+		_n_kwnullable = null
+            end
+            return
+	end
         if _n_id == old_child then
             if new_child != null then
                 new_child.parent = self
@@ -4756,6 +4778,9 @@ redef class AType
 
     redef meth visit_all(v: Visitor)
     do
+        if _n_kwnullable != null then
+            v.visit(_n_kwnullable)
+        end
         if _n_id != null then
             v.visit(_n_id)
         end
@@ -4766,6 +4791,9 @@ redef class AType
 
     redef meth visit_all_reverse(v: Visitor)
     do
+        if _n_kwnullable != null then
+            v.visit(_n_kwnullable)
+        end
         if _n_id != null then
             v.visit(_n_id)
         end
@@ -10722,6 +10750,248 @@ redef class AAsCastExpr
         end
         if _n_type != null then
             v.visit(_n_type)
+        end
+    end
+end
+redef class AAsNotnullExpr
+    redef meth n_expr=(n: PExpr)
+    do
+        _n_expr = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+    redef meth n_kwas=(n: TKwas)
+    do
+        _n_kwas = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+    redef meth n_kwnot=(n: TKwnot)
+    do
+        _n_kwnot = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+    redef meth n_kwnull=(n: TKwnull)
+    do
+        _n_kwnull = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+
+    private init empty_init do end
+
+    init init_aasnotnullexpr (
+            n_expr: PExpr ,
+            n_kwas: TKwas ,
+            n_kwnot: TKwnot ,
+            n_kwnull: TKwnull 
+    )
+    do
+        empty_init
+        _n_expr = n_expr
+	if n_expr != null then
+		n_expr.parent = self
+	end
+        _n_kwas = n_kwas
+	if n_kwas != null then
+		n_kwas.parent = self
+	end
+        _n_kwnot = n_kwnot
+	if n_kwnot != null then
+		n_kwnot.parent = self
+	end
+        _n_kwnull = n_kwnull
+	if n_kwnull != null then
+		n_kwnull.parent = self
+	end
+    end
+
+    redef meth replace_child(old_child: PNode, new_child: PNode)
+    do
+        assert old_child != null
+        if _n_expr == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa PExpr
+                _n_expr = new_child
+	    else
+		_n_expr = null
+            end
+            return
+	end
+        if _n_kwas == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwas
+                _n_kwas = new_child
+	    else
+		_n_kwas = null
+            end
+            return
+	end
+        if _n_kwnot == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwnot
+                _n_kwnot = new_child
+	    else
+		_n_kwnot = null
+            end
+            return
+	end
+        if _n_kwnull == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwnull
+                _n_kwnull = new_child
+	    else
+		_n_kwnull = null
+            end
+            return
+	end
+    end
+
+    redef meth visit_all(v: Visitor)
+    do
+        if _n_expr != null then
+            v.visit(_n_expr)
+        end
+        if _n_kwas != null then
+            v.visit(_n_kwas)
+        end
+        if _n_kwnot != null then
+            v.visit(_n_kwnot)
+        end
+        if _n_kwnull != null then
+            v.visit(_n_kwnull)
+        end
+    end
+
+    redef meth visit_all_reverse(v: Visitor)
+    do
+        if _n_expr != null then
+            v.visit(_n_expr)
+        end
+        if _n_kwas != null then
+            v.visit(_n_kwas)
+        end
+        if _n_kwnot != null then
+            v.visit(_n_kwnot)
+        end
+        if _n_kwnull != null then
+            v.visit(_n_kwnull)
+        end
+    end
+end
+redef class AIssetAttrExpr
+    redef meth n_kwisset=(n: TKwisset)
+    do
+        _n_kwisset = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+    redef meth n_expr=(n: PExpr)
+    do
+        _n_expr = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+    redef meth n_id=(n: TAttrid)
+    do
+        _n_id = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+
+    private init empty_init do end
+
+    init init_aissetattrexpr (
+            n_kwisset: TKwisset ,
+            n_expr: PExpr ,
+            n_id: TAttrid 
+    )
+    do
+        empty_init
+        _n_kwisset = n_kwisset
+	if n_kwisset != null then
+		n_kwisset.parent = self
+	end
+        _n_expr = n_expr
+	if n_expr != null then
+		n_expr.parent = self
+	end
+        _n_id = n_id
+	if n_id != null then
+		n_id.parent = self
+	end
+    end
+
+    redef meth replace_child(old_child: PNode, new_child: PNode)
+    do
+        assert old_child != null
+        if _n_kwisset == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TKwisset
+                _n_kwisset = new_child
+	    else
+		_n_kwisset = null
+            end
+            return
+	end
+        if _n_expr == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa PExpr
+                _n_expr = new_child
+	    else
+		_n_expr = null
+            end
+            return
+	end
+        if _n_id == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TAttrid
+                _n_id = new_child
+	    else
+		_n_id = null
+            end
+            return
+	end
+    end
+
+    redef meth visit_all(v: Visitor)
+    do
+        if _n_kwisset != null then
+            v.visit(_n_kwisset)
+        end
+        if _n_expr != null then
+            v.visit(_n_expr)
+        end
+        if _n_id != null then
+            v.visit(_n_id)
+        end
+    end
+
+    redef meth visit_all_reverse(v: Visitor)
+    do
+        if _n_kwisset != null then
+            v.visit(_n_kwisset)
+        end
+        if _n_expr != null then
+            v.visit(_n_expr)
+        end
+        if _n_id != null then
+            v.visit(_n_id)
         end
     end
 end

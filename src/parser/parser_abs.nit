@@ -162,6 +162,12 @@ end
 class TKwwith
 special Token
 end
+class TKwnullable
+special Token
+end
+class TKwisset
+special Token
+end
 class TOpar
 special Token
 end
@@ -565,6 +571,7 @@ special PClosureDecl
 end
 class AType
 special PType
+    readable writable attr _n_kwnullable: TKwnullable = null
     readable writable attr _n_id: TClassid = null
     readable writable attr _n_types: List[PType] = null
 end
@@ -927,6 +934,19 @@ special PExpr
     readable writable attr _n_expr: PExpr = null
     readable writable attr _n_kwas: TKwas = null
     readable writable attr _n_type: PType = null
+end
+class AAsNotnullExpr
+special PExpr
+    readable writable attr _n_expr: PExpr = null
+    readable writable attr _n_kwas: TKwas = null
+    readable writable attr _n_kwnot: TKwnot = null
+    readable writable attr _n_kwnull: TKwnull = null
+end
+class AIssetAttrExpr
+special PExpr
+    readable writable attr _n_kwisset: TKwisset = null
+    readable writable attr _n_expr: PExpr = null
+    readable writable attr _n_id: TAttrid = null
 end
 class APlusAssignOp
 special PAssignOp
