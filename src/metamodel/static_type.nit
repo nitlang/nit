@@ -325,6 +325,24 @@ abstract class MMType
 
 	# Adapt self to another local class context
 	# Useful for genericity
+	# 'c' Must be a super-class of self
+	# Example:
+	#   class A[E]
+	#   class B[F] special A[F]
+	#   class C[G] special B[String]
+	#   class D special C[Float]
+	# 'A[Int]'.upcast_for('A') -> 'A[Int]'
+	# 'A[Int]'.upcast_for('B') -> abort
+	# 'B[Int]'.upcast_for('B') -> 'B[Int]'
+	# 'B[Int]'.upcast_for('A') -> 'A[Int]'
+	# 'B[Int]'.upcast_for('C') -> abort
+	# 'C[Int]'.upcast_for('C') -> 'C[Int]'
+	# 'C[Int]'.upcast_for('B') -> 'B[String]'
+	# 'C[Int]'.upcast_for('A') -> 'A[String]'
+	# 'D'.upcast_for('D') -> 'D'
+	# 'D'.upcast_for('C') -> 'C[Float]'
+	# 'D'.upcast_for('B') -> 'C[String]'
+	# 'D'.upcast_for('A') -> 'A[String]'
 	meth upcast_for(c: MMLocalClass): MMType is abstract
 
 	# Return a type approximation if the reveiver is not self
@@ -390,11 +408,12 @@ end
 # The type of null
 class MMTypeNone
 special MMType
- 	redef readable attr _module: MMModule
- 	redef meth <(t) do return true
- 	redef meth is_supertype(t) do return false
- 	redef meth local_class do abort
- 	redef meth upcast_for(c) do return self
+	redef readable attr _module: MMModule
+	redef meth <(t) do return true
+	redef meth to_s do return "null"
+	redef meth is_supertype(t) do return false
+	redef meth local_class do abort
+	redef meth upcast_for(c) do abort
 
 	private init(m: MMModule) do _module = m
 end

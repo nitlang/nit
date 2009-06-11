@@ -216,7 +216,7 @@ special MMTypeFormal
 		return t
 	end
 
-	redef meth upcast_for(c) do return self
+	redef meth upcast_for(c) do return _bound.upcast_for(c)
 
  	meth bound=(t: MMType)
  	do
