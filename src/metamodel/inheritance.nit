@@ -193,11 +193,13 @@ redef class MMLocalClass
 
 	redef meth [](glob)
 	do
-		var prop = super(glob)
-		if prop == null and _global_properties.has(glob) then
-			prop = inherit_local_property(glob)
+		if _local_property_by_global.has_key(glob) then
+			return _local_property_by_global[glob]
+		else if has_global_property(glob) then
+			return inherit_local_property(glob)
+		else
+			abort
 		end
-		return prop
 	end
 
 	# Add default super class in direct parent and in super classes if this is not the Object class
@@ -338,8 +340,7 @@ redef class MMLocalClass
 			# First compute the set of bottom properties
 			var impls = new ArraySet[MMLocalProperty]
 			for sc in supers do
-				var p = sc[glob]
-				if p != null then impls.add(p)
+				if sc.has_global_property(glob) then impls.add(sc[glob])
 			end
 			# Second, extract most specific
 			var impls2 = ghier.select_smallests(impls)
@@ -377,9 +378,8 @@ redef class MMLocalProperty
 		set_global(g)
 		var impls = new Array[MMLocalProperty]
 		for sc in local_class.che.direct_greaters do
-			var p = sc[g]
-			if p == null then continue
-			impls.add(p)
+			if not sc.has_global_property(g) then continue
+			impls.add(sc[g])
 		end
 		g.add_local_property(self, impls)
 	end

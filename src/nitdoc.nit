@@ -605,10 +605,12 @@ redef class MMSrcModule
 				end
 			else
 				for m in owned_modules do
-					var mc = m[c.global]
-					if mc != null and mc.need_doc(dctx) then 
-						new_classes.add(c)
-						break
+					if m.global_classes.has(c.global) then
+						var mc = m[c.global]
+						if mc.need_doc(dctx) then
+							new_classes.add(c)
+							break
+						end
 					end
 				end
 			end
@@ -714,8 +716,10 @@ special MMEntity
 	redef meth need_doc(dctx) do
 		if module == dctx.module then
 			for m in dctx.owned_modules do
-				var c = m[global]
-				if c != null and c.need_doc(dctx) then return true
+				if m.global_classes.has(global) then
+					var c = m[global]
+					if c.need_doc(dctx) then return true
+				end
 			end
 		end
 		return false
@@ -875,10 +879,12 @@ special MMEntity
 			if p.local_class != self or not p.need_doc(dctx) then
 				var cla = new Array[MMLocalClass]
 				for m in dctx.owned_modules do
+					if not m.global_classes.has(global) then continue
 					var c = m[global]
-					if c == null or not c isa MMConcreteClass then continue
+					if not c isa MMConcreteClass then continue
+					if not c.has_global_property(g) then continue
 					var p2 = c[g]
-					if p2 == null or p2.local_class != c or not p2.need_doc(dctx) then continue
+					if p2.local_class != c or not p2.need_doc(dctx) then continue
 					cla.add(c)
 				end
 				if cla.is_empty then continue

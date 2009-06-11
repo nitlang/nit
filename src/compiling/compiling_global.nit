@@ -621,10 +621,9 @@ special TableEltProp
 			if s == pc then
 				found = true
 			else if found and c.che < s then
-				var p = s[g]
-				if p != null then
+				if s.has_global_property(g) then
 					#print "found {s.module}::{s}::{p}"
-					return p.cname
+					return s[g].cname
 				end
 			end
 		end
