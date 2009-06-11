@@ -411,7 +411,7 @@ special CoupleMap[K, E]
 		if i >= 0 then
 			return _items[i].second
 		else
-			return null
+			abort
 		end
 	end
 

@@ -381,7 +381,7 @@ special Map[K, E]
 	do
 		var c = couple_at(key)
 		if c == null then
-			return null
+			abort
 		else
 			return c.second
 		end
