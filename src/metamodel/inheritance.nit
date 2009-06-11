@@ -47,7 +47,7 @@ redef class MMModule
 	meth import_local_classes
 	do
 		for g in _global_classes do
-			if self[g] != null then continue
+			if _local_class_by_global.has_key(g) then continue
 			var impl = new MMImplicitLocalClass(self, g) 
 		end
 	end

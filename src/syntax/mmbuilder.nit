@@ -526,13 +526,10 @@ redef class PClassdef
 			local_class = new MMSrcLocalClass(name, self, arity)
 			mod.add_local_class(local_class)
 			local_classes[name] = local_class
-			var g = mod.global_class_named(name)
-			if g == null then
-				# Intro
+			if not mod.has_global_class_named(name) then
 				local_class.new_global
-				g = local_class.global
 			else
-				local_class.set_global(g)
+				local_class.set_global(mod.global_class_named(name))
 			end
 
 		end
