@@ -58,11 +58,7 @@ special Collection[E]
 	# Return the element associed with the item
 	meth [](e: E): PartialOrderElement[E]
 	do
-		if _elements.has_key(e) then
-			return _elements[e]
-		else
-			return null
-		end
+		return _elements[e]
 	end
 
 	# Return a dot representation
