@@ -67,7 +67,7 @@ end
 
 # Naive implementation of collections method
 # You only have to define iterator!
-interface NaiveCollection[E: Object]
+interface NaiveCollection[E]
 special Collection[E]
 	redef meth is_empty do return length == 0
 

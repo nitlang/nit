@@ -61,7 +61,7 @@ redef class Bool
 end
 
 # A HashCollection is an array of HashNode[K] indexed by the K hash value
-private class HashCollection[K: Object, N: HashNode[K], E: Object]
+private class HashCollection[K: Object, N: HashNode[K], E]
 special Collection[E]
 special ArrayCapable[N]
 	attr _array: NativeArray[N] = null # Used to store items

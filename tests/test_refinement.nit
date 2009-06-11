@@ -42,7 +42,7 @@ redef class Int
 	end
 end
 
-redef class Array[F: Object]
+redef class Array[F]
     redef meth add(item: F)
 	do
 	    self[length] = item
