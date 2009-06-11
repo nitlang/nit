@@ -419,18 +419,16 @@ class MMLocalClass
 	# TODO: Will disapear when qualified names will be available
 	meth has_global_property_by_name(n: Symbol): Bool
 	do
-		var props = _properties_by_name[n]
-		return props != null
+		return _properties_by_name.has_key(n)
 	end
 
 	# Get a global property by its name
 	# TODO: Will disapear when qualified names will be available
 	meth get_property_by_name(n: Symbol): MMGlobalProperty
 	do
+		if not has_global_property_by_name(n) then return null
 		var props = _properties_by_name[n]
-		if props == null or props.length > 1 then
-			return null
-		end
+		if props.length > 1 then return null
 		return props.first
 	end
 
@@ -446,9 +444,8 @@ class MMLocalClass
 	meth method(na: Symbol): MMGlobalProperty
 	do
 		assert _properties_by_name != null
-		var props = _properties_by_name[na]
-		if props != null then
-			return props.first
+		if _properties_by_name.has_key(na) then
+			return _properties_by_name[na].first
 		end
 
 		return null
@@ -513,11 +510,10 @@ class MMLocalClass
 	do
 		var prop = glob.intro
 		var name = prop.name
-		var  props = _properties_by_name[name]
-		if props == null then
-			_properties_by_name[name] = [glob]
-		else
+		if _properties_by_name.has_key(name) then
 			_properties_by_name[name].add(glob)
+		else
+			_properties_by_name[name] = [glob]
 		end
 		_global_properties.add(glob)
 		register_local_property(prop)
