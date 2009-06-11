@@ -502,6 +502,12 @@ class MMLocalClass
 		register_local_property(prop)
 	end
 
+	# Does the global property belong to the class?
+	meth has_global_property(glob: MMGlobalProperty): Bool
+	do
+		return _global_properties.has(glob)
+	end
+
 	# Get a local proprty by its global property
 	meth [](glob: MMGlobalProperty): MMLocalProperty
 	do
