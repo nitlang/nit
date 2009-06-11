@@ -217,11 +217,7 @@ class MMModule
 	do
 		assert _local_class_by_global != null
 		assert c != null
-		if _local_class_by_global.has_key(c) then
-			return _local_class_by_global[c]
-		else
-			return null
-		end
+		return _local_class_by_global[c]
 	end
 
 	# Register a local class to the module
@@ -247,11 +243,7 @@ class MMModule
 	# Return null if not class match this name
 	meth global_class_named(n: Symbol): MMGlobalClass
 	do
-		if _global_class_by_name.has_key(n) then
-			return _global_class_by_name[n]
-		else
-			return null
-		end
+		return _global_class_by_name[n]
 	end
 
 	redef meth to_s do return name.to_s
@@ -419,16 +411,15 @@ class MMLocalClass
 	# TODO: Will disapear when qualified names will be available
 	meth has_global_property_by_name(n: Symbol): Bool
 	do
-		return _properties_by_name.has_key(n)
+		return _properties_by_name.has_key(n) and _properties_by_name[n].length == 1
 	end
 
 	# Get a global property by its name
 	# TODO: Will disapear when qualified names will be available
 	meth get_property_by_name(n: Symbol): MMGlobalProperty
 	do
-		if not has_global_property_by_name(n) then return null
+		if not has_global_property_by_name(n) then abort
 		var props = _properties_by_name[n]
-		if props.length > 1 then return null
 		return props.first
 	end
 
@@ -444,11 +435,7 @@ class MMLocalClass
 	meth method(na: Symbol): MMGlobalProperty
 	do
 		assert _properties_by_name != null
-		if _properties_by_name.has_key(na) then
-			return _properties_by_name[na].first
-		end
-
-		return null
+		return _properties_by_name[na].first
 	end
 
 	# Select a method from its name
@@ -457,7 +444,6 @@ class MMLocalClass
 	do
 		assert name != null
 		var gp = method(name)
-		if gp == null then return null
 		var res = self[gp]
 		assert res isa MMMethod
 		return res
@@ -469,7 +455,6 @@ class MMLocalClass
 	do
 		assert name != null
 		var gp = attribute(name)
-		if gp == null then return null
 		var res = self[gp]
 		assert res isa MMAttribute
 		return res
@@ -481,9 +466,7 @@ class MMLocalClass
 	do
 		var classes = new Array[MMLocalClass]
 		for c in cshe.greaters do
-			var g = c.method(n)
-			if g == null then continue
-			classes.add(c)
+			if c.has_global_property_by_name(n) then classes.add(c)
 		end
 		classes = cshe.order.select_smallests(classes)
 		var res = new Array[MMLocalProperty]
@@ -522,12 +505,7 @@ class MMLocalClass
 	# Get a local proprty by its global property
 	meth [](glob: MMGlobalProperty): MMLocalProperty
 	do
-		assert _local_property_by_global != null
-		assert glob != null
-		if _local_property_by_global.has_key(glob) then
-			return _local_property_by_global[glob]
-		end
-		return null
+		return _local_property_by_global[glob]
 	end
 
 	# The current MMContext

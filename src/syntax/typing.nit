@@ -553,11 +553,12 @@ redef class AReassignFormExpr
 			return
 		end
 		var name = n_assign_op.method_name
-		var prop = type_lvalue.local_class.select_method(name)
-		if prop == null then
+		var lc = type_lvalue.local_class
+		if not lc.has_global_property_by_name(name) then
 			v.error(self, "Error: Method '{name}' doesn't exists in {type_lvalue}.")
 			return
 		end
+		var prop = lc.select_method(name)
 		prop.global.check_visibility(v, self, v.module, false)
 		var psig = prop.signature_for(type_lvalue)
 		_assign_method = prop
@@ -876,11 +877,13 @@ redef class AAttrFormExpr
 		if not v.check_expr(n_expr) then return
 		var type_recv = n_expr.stype
 		var name = n_id.to_symbol
-		var prop = type_recv.local_class.select_attribute(name)
-		if prop == null then
+		var lc = type_recv.local_class
+		if not lc.has_global_property_by_name(name) then
 			v.error(self, "Error: Attribute {name} doesn't exists in {type_recv}.")
 			return
-		else if v.module.visibility_for(prop.global.local_class.module) < 3 then
+		end
+		var prop = lc.select_attribute(name)
+		if v.module.visibility_for(prop.global.local_class.module) < 3 then
 			v.error(self, "Error: Attribute {name} from {prop.global.local_class.module} is invisible in {v.module}")
 		end
 		_prop = prop
@@ -947,7 +950,9 @@ special PExpr
 	private meth get_property(v: TypingVisitor, type_recv: MMType, is_implicit_self: Bool, name: Symbol): MMMethod
 	do
 		if type_recv == null then return null
-		var prop = type_recv.local_class.select_method(name)
+		var lc = type_recv.local_class
+		var prop: MMMethod = null
+		if lc.has_global_property_by_name(name) then prop = lc.select_method(name)
 		if prop == null and v.local_property.global.is_init then
 			var props = type_recv.local_class.super_methods_named(name)
 			if props.length > 1 then

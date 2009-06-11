@@ -173,8 +173,9 @@ redef class MMSrcLocalClass
 				if not gp.is_init then continue
 				super_constructors.add(gp)
 			end
-			var gp = sc.get_property_by_name(once ("init".to_symbol))
-			if gp != null then
+			var initname = once ("init".to_symbol)
+			if sc.has_global_property_by_name(initname) then
+				var gp = sc.get_property_by_name(initname)
 				super_inits.add(self[gp])
 			end
 		end
