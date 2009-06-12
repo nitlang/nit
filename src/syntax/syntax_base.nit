@@ -401,16 +401,23 @@ special Visitor
 	# Conformance is granted if among them there is a most general type
 	# Return the most general type if a conformance is found
 	# Display an error and return null if no conformance is found
+	# The only allowed combinaison is with the nullable marker
 	# @param stype is a possible additional type (without node)
 	# Examples:
 	#   Int, Int, Object => return Object
 	#   Int, Float => display error, return null
+	#   nullable Int, Object => return nullable Object
 	meth check_conform_multiexpr(stype: MMType, nodes: Collection[PExpr]): MMType
 	do
 		var node: PExpr = null # candidate node
 		for n in nodes do
 			if not check_expr(n) then return null
 			var ntype = n.stype
+			if stype != null and stype.is_nullable != ntype.is_nullable then
+				# nullable combinaison: if one of them is nulable, considers that both are
+				stype = stype.as_nullable
+				ntype = ntype.as_nullable
+			end
 			if stype == null or (ntype != null and stype < ntype) then
 				stype = ntype
 				node = n
