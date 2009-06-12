@@ -292,10 +292,10 @@ special Visitor
 		return _module.class_by_name(once ("String".to_symbol)).get_type
 	end
 
-	# The primitive type Collection[Object]
+	# The primitive type Collection[nullable Object]
 	meth type_collection: MMType
 	do
-		return _module.class_by_name(once ("Collection".to_symbol)).get_type
+		return _module.class_by_name(once ("Collection".to_symbol)).get_instantiate_type([type_object.as_nullable])
 	end
 
 	# The primitive type Array[?]
