@@ -1427,15 +1427,24 @@ redef class AAttrReassignExpr
 	end
 end
 
+redef class AAbsSendExpr
+	# Compile each argument and add them to the array
+	meth compile_arguments_in(v: CompilerVisitor, cargs: Array[String])
+	do
+		for a in arguments do
+			cargs.add(v.compile_expr(a))
+		end
+	end
+
+end
+
 redef class ASendExpr
 	redef meth compile_expr(v)
 	do
 		var recv = v.compile_expr(n_expr)
 		var cargs = new Array[String]
 		cargs.add(recv)
-		for a in arguments do
-			cargs.add(v.compile_expr(a))
-		end
+		compile_arguments_in(v, cargs)
 
 		var e: String
 		if prop_signature.closures.is_empty then
@@ -1465,9 +1474,7 @@ redef class ASendReassignExpr
 		var recv = v.compile_expr(n_expr)
 		var cargs = new Array[String]
 		cargs.add(recv)
-		for a in arguments do
-			cargs.add(v.compile_expr(a))
-		end
+		compile_arguments_in(v, cargs)
 
 		var e2 = read_prop.compile_call(v, cargs)
 		var e3 = v.compile_expr(n_value)
@@ -1481,9 +1488,7 @@ redef class ANewExpr
 	redef meth compile_expr(v)
 	do
 		var cargs = new Array[String]
-		for a in arguments do
-			cargs.add(v.compile_expr(a))
-		end
+		compile_arguments_in(v, cargs)
 		return prop.compile_constructor_call(v, stype, cargs) 
 	end
 end
@@ -1657,7 +1662,7 @@ redef class AClosureCallExpr
 	redef meth compile_expr(v)
 	do
 		var cargs = new Array[String]
-		for a in arguments do cargs.add(v.compile_expr(a))
+		compile_arguments_in(v, cargs)
 		var va: String = null
 		if variable.closure.signature.return_type != null then va = v.cfc.get_var("Closure call result value")
 
