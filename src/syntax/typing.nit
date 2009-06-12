@@ -1560,6 +1560,22 @@ special ATypeCheckExpr
 	end
 end
 
+redef class AAsNotnullExpr
+	redef meth after_typing(v)
+	do
+		if not v.check_expr(n_expr) then return
+		var t = n_expr.stype
+		if t isa MMTypeNone then
+			v.error(n_expr, "Type error: 'as(not null)' on 'null' value.")
+			return
+		else if not t.is_nullable then
+			v.warning(n_expr, "Warning: 'as(not null)' on non nullable type.")
+		end
+		_stype = n_expr.stype.as_notnull
+		_is_typed = true
+	end
+end
+
 redef class AProxyExpr
 	redef meth after_typing(v)
 	do

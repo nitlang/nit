@@ -1,0 +1,14 @@
+1
+2
+3
+4
+5
+6
+
+3
+6
+
+Cast failled in base_as_notnull_alt5::Sys::(kernel::Sys::main) (alt/base_as_notnull_alt5.nit:59)
+,---- Stack trace -- - -  -
+| base_as_notnull_alt5::Sys::(kernel::Sys::main) (alt/base_as_notnull_alt5.nit:32)
+`------------------- - -  -
