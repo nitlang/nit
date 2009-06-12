@@ -60,6 +60,15 @@ special AbsSyntaxVisitor
 	# Is a other constructor of the same class invoked
 	readable writable attr _explicit_other_init_call: Bool
 
+	# Make the if_true_variable_ctx of the expression effective
+	private meth use_if_true_variable_ctx(e: PExpr)
+	do
+		var ctx = e.if_true_variable_ctx
+		if ctx != null then
+			variable_ctx = ctx
+		end
+	end
+
 	init(tc, module) do super
 
 	private meth get_default_constructor_for(n: PNode, c: MMLocalClass, prop: MMSrcMethod): MMMethod
@@ -443,9 +452,7 @@ redef class AIfExpr
 		v.visit(n_expr)
 		v.check_conform_expr(n_expr, v.type_bool)
 
-		if n_expr.if_true_variable_ctx != null then
-			v.variable_ctx = n_expr.if_true_variable_ctx
-		end
+		v.use_if_true_variable_ctx(n_expr)
 
 		v.visit(n_then)
 		# Restore variable ctx
@@ -538,7 +545,7 @@ redef class AAssertExpr
 	redef meth after_typing(v)
 	do
 		v.check_conform_expr(n_expr, v.type_bool)
-		if n_expr.if_true_variable_ctx != null then v.variable_ctx = n_expr.if_true_variable_ctx
+		v.use_if_true_variable_ctx(n_expr)
 	end
 end
 
@@ -624,7 +631,7 @@ redef class AIfexprExpr
 		var old_var_ctx = v.variable_ctx
 
 		v.visit(n_expr)
-		if n_expr.if_true_variable_ctx != null then v.variable_ctx = n_expr.if_true_variable_ctx
+		v.use_if_true_variable_ctx(n_expr)
 		v.visit(n_then)
 		v.variable_ctx = old_var_ctx
 		v.visit(n_else)
@@ -657,7 +664,7 @@ redef class AAndExpr
 		var old_var_ctx = v.variable_ctx
 
 		v.visit(n_expr)
-		if n_expr.if_true_variable_ctx != null then v.variable_ctx = n_expr.if_true_variable_ctx
+		v.use_if_true_variable_ctx(n_expr)
 
 		v.visit(n_expr2)
 		if n_expr2.if_true_variable_ctx != null then 
