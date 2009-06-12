@@ -1,0 +1,13 @@
+0
+0
+0
+
+2
+2
+2
+2
+2
+Cast failled in base_as_cast_alt6::Sys::(kernel::Sys::main) (alt/base_as_cast_alt6.nit:58)
+,---- Stack trace -- - -  -
+| base_as_cast_alt6::Sys::(kernel::Sys::main) (alt/base_as_cast_alt6.nit:39)
+`------------------- - -  -
