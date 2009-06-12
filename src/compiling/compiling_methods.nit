@@ -130,7 +130,7 @@ redef class CompilerVisitor
 				end
 			end
 			#s.append(" {p}")
-			p.compile_call(self, cargs)
+			p.compile_stmt_call(self, cargs)
 			i += 1
 		end
 		#s.append(" ]")
@@ -313,11 +313,30 @@ redef class ClosureVariable
 end
 
 redef class MMMethod
+	# Compile as an expression.
+	# require that signature.return_type != null
+	meth compile_expr_call(v: CompilerVisitor, cargs: Array[String]): String
+	do
+		assert signature.return_type != null
+		var s = intern_compile_call(v, cargs)
+		assert s != null
+		return s
+	end
+
+	# Compile as a statement.
+	# require that signature.return_type == null
+	meth compile_stmt_call(v: CompilerVisitor, cargs: Array[String])
+	do
+		assert signature.return_type == null
+		var s = intern_compile_call(v, cargs)
+		assert s == null
+	end
+
 	# Compile a call on self for given arguments
 	# Most calls are compiled with a table access,
 	# primitive calles are inlined
 	# == and != are guarded and possibly inlined
-	meth compile_call(v: CompilerVisitor, cargs: Array[String]): String
+	private meth intern_compile_call(v: CompilerVisitor, cargs: Array[String]): String
 	do
 		var i = self
 		if i isa MMSrcMethod then
@@ -332,7 +351,7 @@ redef class MMMethod
 		var ne = once "!=".to_symbol
 		if name == ne then
 			var eqp = signature.recv.local_class.select_method(ee)
-			var eqcall = eqp.compile_call(v, cargs)
+			var eqcall = eqp.compile_expr_call(v, cargs)
 			return "TAG_Bool(!UNTAG_Bool({eqcall}))"
 		end
 		if global.is_init then
@@ -387,7 +406,7 @@ redef class MMMethod
 		v.nmc.break_value = old_bv
 
 		# Call
-		var e = compile_call(v, realcargs)
+		var e = intern_compile_call(v, realcargs)
 		if e != null then
 			v.add_assignment(ve, e)
 			e = ve
@@ -585,9 +604,9 @@ redef class MMImplicitInit
 				for i in [1..f[ do
 					args.add(params[i])
 				end
-				sp.compile_call(v, args)
+				sp.compile_stmt_call(v, args)
 			else
-				sp.compile_call(v, args_recv)
+				sp.compile_stmt_call(v, args_recv)
 			end
 		end
 		for i in [f..params.length[ do
@@ -1086,21 +1105,20 @@ redef class AForExpr
 		var ittype = meth_iterator.signature.return_type
 		v.cfc.free_var(e)
 		var iter = v.cfc.get_var("For iterator")
-		v.add_assignment(iter, meth_iterator.compile_call(v, [e]))
+		v.add_assignment(iter, meth_iterator.compile_expr_call(v, [e]))
 		v.add_instr("while (true) \{ /*for*/")
 		v.indent
 		var ok = v.cfc.get_var("For 'is_ok' result")
-		v.add_assignment(ok, meth_is_ok.compile_call(v, [iter]))
+		v.add_assignment(ok, meth_is_ok.compile_expr_call(v, [iter]))
 		v.add_instr("if (!UNTAG_Bool({ok})) break; /*for*/")
 		v.cfc.free_var(ok)
-		var e = meth_item.compile_call(v, [iter])
+		var e = meth_item.compile_expr_call(v, [iter])
 		e = v.ensure_var(e, "For item")
 		var cname = v.cfc.register_variable(variable)
 		v.add_assignment(cname, e)
 		v.compile_stmt(n_block)
 		v.add_instr("{v.nmc.continue_label}: while(0);")
-		e = meth_next.compile_call(v, [iter])
-		assert e == null
+		meth_next.compile_stmt_call(v, [iter])
 		v.unindent
 		v.add_instr("}")
 		v.add_instr("{v.nmc.break_label}: while(0);")
@@ -1139,7 +1157,7 @@ redef class AVarReassignExpr
 	do
 		var e1 = v.cfc.varname(variable)
 		var e2 = v.compile_expr(n_value)
-		var e3 = assign_method.compile_call(v, [e1, e2])
+		var e3 = assign_method.compile_expr_call(v, [e1, e2])
 		v.add_assignment(v.cfc.varname(variable), "{e3} /*{variable.name}*/")
 	end
 end
@@ -1326,13 +1344,13 @@ redef class ASuperstringExpr
 			var e = v.ensure_var(v.compile_expr(ne), "super-string element")
 			if ne.stype != stype then
 				v.cfc.free_var(e)
-				e = meth_to_s.compile_call(v, [e])
+				e = meth_to_s.compile_expr_call(v, [e])
 			end
 			v.cfc.free_var(e)
-			meth_add.compile_call(v, [array, e])
+			meth_add.compile_stmt_call(v, [array, e])
 		end
 
-		return meth_to_s.compile_call(v, [array])
+		return meth_to_s.compile_expr_call(v, [array])
 	end
 end
 
@@ -1351,7 +1369,7 @@ redef class AArrayExpr
 
 		for ne in n_exprs do
 			var e = v.compile_expr(ne)
-			meth_add.compile_call(v, [recv, e])
+			meth_add.compile_stmt_call(v, [recv, e])
 		end
 		return recv
 	end
@@ -1369,11 +1387,20 @@ end
 redef class ASuperExpr
 	redef meth compile_stmt(v)
 	do
-		var e = compile_expr(v)
-		if e != null then v.add_instr("{e};")
+		var e = intern_compile_call(v)
+		if e != null then
+			v.add_instr(e + ";")
+		end
 	end
 
 	redef meth compile_expr(v)
+	do
+		var e = intern_compile_call(v)
+		assert e != null
+		return e
+	end
+
+	private meth intern_compile_call(v: CompilerVisitor): String
 	do
 		var arity = v.nmc.method_params.length - 1
 		if init_in_superclass != null then
@@ -1392,7 +1419,7 @@ redef class ASuperExpr
 		end
 		#return "{prop.cname}({args.join(", ")}) /*super {prop.local_class}::{prop.name}*/"
 		if init_in_superclass != null then
-			return init_in_superclass.compile_call(v, args)
+			return init_in_superclass.intern_compile_call(v, args)
 		else
 			if prop.global.is_init then args.add("init_table")
 			return prop.compile_super_call(v, args)
@@ -1422,7 +1449,7 @@ redef class AAttrReassignExpr
 		var e1 = v.compile_expr(n_expr)
 		var e2 = prop.compile_access(v, e1)
 		var e3 = v.compile_expr(n_value)
-		var e4 = assign_method.compile_call(v, [e2, e3])
+		var e4 = assign_method.compile_expr_call(v, [e2, e3])
 		v.add_assignment(e2, e4)
 	end
 end
@@ -1439,7 +1466,7 @@ redef class AAbsSendExpr
 end
 
 redef class ASendExpr
-	redef meth compile_expr(v)
+	private meth intern_compile_call(v: CompilerVisitor): String
 	do
 		var recv = v.compile_expr(n_expr)
 		var cargs = new Array[String]
@@ -1448,7 +1475,7 @@ redef class ASendExpr
 
 		var e: String
 		if prop_signature.closures.is_empty then
-			e = prop.compile_call(v, cargs)
+			e = prop.intern_compile_call(v, cargs)
 		else
 			e = prop.compile_call_and_closures(v, cargs, closure_defs)
 		end
@@ -1459,9 +1486,16 @@ redef class ASendExpr
 		return e
 	end
 
+	redef meth compile_expr(v)
+	do
+		var e = intern_compile_call(v)
+		assert e != null
+		return e
+	end
+
 	redef meth compile_stmt(v)
 	do
-		var e = compile_expr(v)
+		var e = intern_compile_call(v)
 		if e != null then
 			v.add_instr(e + ";")
 		end
@@ -1469,18 +1503,20 @@ redef class ASendExpr
 end
 
 redef class ASendReassignExpr
-	redef meth compile_expr(v)
+	redef meth compile_expr(v) do abort
+
+	redef meth compile_stmt(v)
 	do
 		var recv = v.compile_expr(n_expr)
 		var cargs = new Array[String]
 		cargs.add(recv)
 		compile_arguments_in(v, cargs)
 
-		var e2 = read_prop.compile_call(v, cargs)
+		var e2 = read_prop.compile_expr_call(v, cargs)
 		var e3 = v.compile_expr(n_value)
-		var e4 = assign_method.compile_call(v, [e2, e3])
+		var e4 = assign_method.compile_expr_call(v, [e2, e3])
 		cargs.add(e4)
-		return prop.compile_call(v, cargs)
+		prop.compile_stmt_call(v, cargs)
 	end
 end
 
@@ -1491,6 +1527,8 @@ redef class ANewExpr
 		compile_arguments_in(v, cargs)
 		return prop.compile_constructor_call(v, stype, cargs) 
 	end
+
+	redef meth compile_stmt(v) do abort
 end
 
 redef class PClosureDef
@@ -1659,7 +1697,7 @@ redef class AClosureDecl
 end
 
 redef class AClosureCallExpr
-	redef meth compile_expr(v)
+	redef meth intern_compile_call(v)
 	do
 		var cargs = new Array[String]
 		compile_arguments_in(v, cargs)
