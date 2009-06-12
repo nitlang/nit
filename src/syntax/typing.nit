@@ -146,13 +146,13 @@ private class VariableContext
 	# Build a new VariableContext
 	meth sub: SubVariableContext
 	do
-		return new SubVariableContext.with_prev(self, null, null)
+		return new SubVariableContext.with_prev(self)
 	end
 
 	# Build a nested VariableContext with new variable information
 	meth sub_with(v: Variable, t: MMType): SubVariableContext
 	do
-		return new SubVariableContext.with_prev(self, v, t)
+		return new CastVariableContext.with_prev(self, v, t)
 	end
 
 	init
@@ -164,8 +164,6 @@ end
 private class SubVariableContext
 special VariableContext
 	readable attr _prev: VariableContext
-	attr _variable: Variable
-	attr _var_type: MMType
 
 	redef meth [](s)
 	do
@@ -178,6 +176,23 @@ special VariableContext
 
 	redef meth stype(v)
 	do
+		return prev.stype(v)
+	end
+
+	init with_prev(p: VariableContext)
+	do
+		init
+		_prev = p
+	end
+end
+
+private class CastVariableContext
+special SubVariableContext
+	attr _variable: Variable
+	attr _var_type: MMType
+
+	redef meth stype(v)
+	do
 		if _variable == v then
 			return _var_type
 		end
@@ -186,8 +201,7 @@ special VariableContext
 
 	init with_prev(p: VariableContext, v: Variable, t: MMType)
 	do
-		init
-		_prev = p
+		super(p)
 		_variable = v
 		_var_type =t
 	end
