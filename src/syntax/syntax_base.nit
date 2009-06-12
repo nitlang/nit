@@ -388,6 +388,37 @@ special Visitor
 		if check_expr(n) then return check_conform(n, n.stype, stype) else return false
 	end
 
+	# Check conformance between multiple expressions and a static type
+	# Conformance is granted if among them there is a most general type
+	# Return the most general type if a conformance is found
+	# Display an error and return null if no conformance is found
+	# @param stype is a possible additional type (without node)
+	# Examples:
+	#   Int, Int, Object => return Object
+	#   Int, Float => display error, return null
+	meth check_conform_multiexpr(stype: MMType, nodes: Collection[PExpr]): MMType
+	do
+		var node: PExpr = null # candidate node
+		for n in nodes do
+			if not check_expr(n) then return null
+			var ntype = n.stype
+			if stype == null or (ntype != null and stype < ntype) then
+				stype = ntype
+				node = n
+			end
+		end
+		for n in nodes do
+			if not n.stype < stype then
+				if node == null then
+					error(n, "Type error: no most general type. Got {n.stype} and {stype}.")
+				else
+					error(n, "Type error: no most general type. Got {n.stype} and {stype} at {node.locate}.")
+				end
+				return null
+			end
+		end
+		return stype
+	end
 
 	protected init(tc: ToolContext, module: MMSrcModule)
 	do

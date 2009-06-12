@@ -1,1 +1,1 @@
-alt/base_if_expr_alt1.nit:39,11--35: Type error: Int is not a subtype of A.
+alt/base_if_expr_alt1.nit:39,35--35: Type error: no most general type. Got Int and A at alt/base_if_expr_alt1.nit:39,24--28.

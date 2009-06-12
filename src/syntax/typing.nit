@@ -617,18 +617,7 @@ redef class AIfexprExpr
 
 		v.check_conform_expr(n_expr, v.type_bool)
 
-		if not v.check_expr(n_then) or not v.check_expr(n_else) then return
-
-		var t = n_then.stype
-		var te = n_else.stype
-		if t < te then
-			t = te
-		else if not te < t then
-			v.error(self, "Type error: {te} is not a subtype of {t}.")
-			return
-		end
-		
-		_stype = t
+		_stype = v.check_conform_multiexpr(null, [n_then, n_else])
 	end
 end
 
@@ -742,16 +731,8 @@ redef class AArrayExpr
 
 	redef meth after_typing(v)
 	do
-		var stype: MMType = null
-		for n in n_exprs do
-			var ntype = n.stype
-			if stype == null or (ntype != null and stype < ntype) then
-				stype = ntype
-			end
-		end
-		for n in n_exprs do
-			v.check_conform_expr(n, stype)
-		end
+		var stype = v.check_conform_multiexpr(null, n_exprs)
+		if stype == null then return
 		do_typing(v, stype)
 	end
 
@@ -1053,15 +1034,7 @@ special PExpr
 
 				# Check break type conformity
 				if break_list != null then
-					for n in break_list do
-						var ntype = n.stype
-						if t == null or (t != null and t < ntype) then
-							t = ntype
-						end
-					end
-					for n in break_list do
-						v.check_conform_expr(n, t)
-					end
+					t = v.check_conform_multiexpr(t, break_list)
 				end
 			end
 		else if min_arity != 0 then
