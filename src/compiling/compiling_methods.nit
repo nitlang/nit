@@ -24,6 +24,7 @@ redef class CompilerVisitor
 	# Compile a statment node
 	meth compile_stmt(n: PExpr)
 	do
+		if n == null then return
 		add_instr("/* Compile stmt {n.locate} */")
 		n.prepare_compile_stmt(self)
 		var i = cfc._variable_index
@@ -680,9 +681,7 @@ redef class AConcreteMethPropdef
 		if self isa AConcreteInitPropdef then
 			v.invoke_super_init_calls_after(null)
 		end
-		if n_block != null then
-			v.compile_stmt(n_block)
-		end
+		v.compile_stmt(n_block)
 		v.add_instr("{v.nmc.return_label}: while(false);")
 		if self isa AConcreteInitPropdef then
 			v.add_instr("init_table[{itpos}] = 1;")
@@ -1001,9 +1000,7 @@ end
 redef class ADoExpr
 	redef meth compile_stmt(v)
 	do
-		 if n_block != null then
-			 v.compile_stmt(n_block)
-		 end
+		v.compile_stmt(n_block)
 	end
 end
 
@@ -1074,9 +1071,7 @@ redef class AWhileExpr
 		var e = v.compile_expr(n_expr)
 		v.add_instr("if (!UNTAG_Bool({e})) break; /* while*/")
 		v.cfc.free_var(e)
-		if n_block != null then
-			v.compile_stmt(n_block)
-		end
+		v.compile_stmt(n_block)
 		v.add_instr("{v.nmc.continue_label}: while(0);")
 		v.unindent
 		v.add_instr("}")
@@ -1102,10 +1097,7 @@ redef class AForExpr
 		e = v.ensure_var(e, "For item")
 		var cname = v.cfc.register_variable(variable)
 		v.add_assignment(cname, e)
-		var n_block = n_block
-		if n_block != null then
-			v.compile_stmt(n_block)
-		end
+		v.compile_stmt(n_block)
 		v.add_instr("{v.nmc.continue_label}: while(0);")
 		e = meth_next.compile_call(v, [iter])
 		assert e == null
@@ -1615,7 +1607,7 @@ redef class AClosureDef
 		v.nmc.continue_label = "continue_label{v.new_number}"
 		v.nmc.break_label = v.nmc.return_label
 
-		if n_expr != null then v.compile_stmt(n_expr)
+		v.compile_stmt(n_expr)
 
 		v.add_instr("{v.nmc.continue_label}: while(false);")
 
@@ -1646,7 +1638,7 @@ redef class AClosureDecl
 		v.nmc.continue_label = "continue_label{v.new_number}"
 		v.nmc.break_label = v.nmc.return_label
 
-		if n_expr != null then v.compile_stmt(n_expr)
+		v.compile_stmt(n_expr)
 
 		v.add_instr("{v.nmc.continue_label}: while(false);")
 
