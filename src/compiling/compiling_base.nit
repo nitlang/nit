@@ -207,10 +207,7 @@ redef class MMLocalClass
 		var cnames = ["bigint", "char", "int",  "float", "char *",       "val_t *",     "void *"]
 		for i in [0..pnames.length[ do
 			var n = pnames[i].to_symbol
-			var pi = new PrimitiveInfo
-			pi.name = n
-			pi.tagged = tagged[i]
-			pi.cname = cnames[i]
+			var pi = new PrimitiveInfo(n, tagged[i], cnames[i])
 			res[n] = pi
 		end
 		return res
@@ -220,15 +217,20 @@ end
 # Information about a primitive class
 class PrimitiveInfo
 	# The name of the class
-	readable writable attr _name: Symbol 
+	readable attr _name: Symbol
 
 	# Is the class tagged (aka not boxed)
-	readable writable attr _tagged: Bool 
+	readable attr _tagged: Bool
 
 	# The corresponding c type for the primitive value
-	readable writable attr _cname: String 
+	readable attr _cname: String
 
-	private init do end
+	private init(n: Symbol, t: Bool, c: String)
+	do
+		_name = n
+		_tagged = t
+		_cname = c
+	end
 end
 
 redef class MMType
