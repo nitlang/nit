@@ -1305,9 +1305,27 @@ redef class ABinopExpr
 end
 redef class AEqExpr
 	redef meth name do return once "==".to_symbol
+	redef meth after_typing(v)
+	do
+		super
+		if not is_typed then return
+		if n_expr.stype isa MMTypeNone and not n_expr2.stype.is_nullable or
+		n_expr2.stype isa MMTypeNone and not n_expr.stype.is_nullable then
+			v.warning(self, "Warning: comparaison between null and a non nullable value.")
+		end
+	end
 end
 redef class ANeExpr
 	redef meth name do return once "!=".to_symbol
+	redef meth after_typing(v)
+	do
+		super
+		if not is_typed then return
+		if n_expr.stype isa MMTypeNone and not n_expr2.stype.is_nullable or
+		n_expr2.stype isa MMTypeNone and not n_expr.stype.is_nullable then
+			v.warning(self, "Warning: comparaison between null and a non nullable value.")
+		end
+	end
 end
 redef class ALtExpr
 	redef meth name do return once "<".to_symbol
