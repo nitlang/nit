@@ -86,20 +86,24 @@ class CompilerVisitor
 		return out.join("\n")
 	end
 
-	# The current module processed
-	readable writable attr _module: MMSrcModule 
+	# The processed module
+	readable attr _module: MMSrcModule
 
 	# Where instr and decl are stored
 	readable writable attr _ctx: CContext = new CContext
 
 	# The current indent lever
-	readable writable attr _indent_level: Int = 0 
+	readable writable attr _indent_level: Int = 0
 
-	# The current ToolContext
-	readable writable attr _tc: ToolContext 
+	# The ToolContext info
+	readable attr _tc: ToolContext
 
 	# Create a new CompilerVisitor based on a module
-	init(module: MMSrcModule) do _module = module
+	init(module: MMSrcModule, tc: ToolContext)
+	do
+		_module = module
+		_tc = tc
+	end
 end
 
 # Where instr and decl are stored for a module

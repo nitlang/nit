@@ -85,11 +85,6 @@ redef class CompilerVisitor
 		return s.to_s
 	end
 
-	redef init(module: MMSrcModule)
-	do
-		super
-	end
-
 	meth invoke_super_init_calls_after(start_prop: MMMethod)
 	do
 		var n = nmc.method.node

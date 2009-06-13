@@ -80,8 +80,7 @@ redef class MMSrcModule
 	# Compile the main file
 	private meth compile_main(tc: ToolContext, ga: GlobalAnalysis)
 	do
-		var v = new CompilerVisitor(self)
-		v.tc = tc
+		var v = new CompilerVisitor(self, tc)
 		v.global_analysis = ga
 		v.add_decl("#include <nit_common.h>")
 		compile_tables_to_c(v)
@@ -98,8 +97,7 @@ redef class MMSrcModule
 	# Compile the sep files (of the current module only)
 	private meth compile_separate_module(tc: ToolContext, ga: GlobalAnalysis)
 	do
-		var v = new CompilerVisitor(self)
-		v.tc = tc
+		var v = new CompilerVisitor(self, tc)
 		v.global_analysis = ga
 		v.add_decl("#include <nit_common.h>")
 		var native_name = filename.strip_extension(".nit")
