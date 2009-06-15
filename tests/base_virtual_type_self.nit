@@ -1,0 +1,51 @@
+# This file is part of NIT ( http://www.nitlanguage.org ).
+#
+# Copyright 2009 Jean Privat <jean@pryen.org>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import kernel
+
+class A[E]
+	type T: E
+	attr _t: T
+	meth foo(t: T) do end
+	meth foo2: T do return _t
+	meth bar(t: A[T]) do end
+	meth bar2: A[T] do return self
+
+	init do end
+end
+
+class B
+#alt3#special A[Int]
+	type U: Int
+
+	meth test
+	do
+		#alt1#var a = new A[Int]
+		#alt2#var a = new A[U]
+		#alt3#var a = self
+		#alt4#var a = new A[A[Int]]
+		#alt5#var a = new A[A[U]]
+
+		var f: Float
+
+		a.foo(f)
+		f = a.foo2
+		a.bar(f)
+		f = a.bar2
+	end
+end
+
+(new B).test
