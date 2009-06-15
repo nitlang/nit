@@ -523,8 +523,7 @@ redef class PClassdef
 			end
 			local_class.nodes.add(self)
 		else
-			local_class = new MMSrcLocalClass(name, self, arity)
-			mod.add_local_class(local_class)
+			local_class = new MMSrcLocalClass(mod, name, self, arity)
 			local_classes[name] = local_class
 			if not mod.has_global_class_named(name) then
 				local_class.new_global

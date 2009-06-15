@@ -220,13 +220,6 @@ class MMModule
 		return _local_class_by_global[c]
 	end
 
-	# Register a local class to the module
-	meth add_local_class(c: MMLocalClass)
-	do
-		c._module = self
-		_local_classes.add(c)
-	end
-
 	# Get a local class by its name
 	meth class_by_name(n: Symbol): MMLocalClass
 	do
@@ -375,10 +368,12 @@ class MMLocalClass
 	readable attr _properties_by_name: Map[Symbol, Array[MMGlobalProperty]]
 
 	# Create a new class with a given name and arity
-	protected init(name: Symbol, arity: Int)
+	protected init(mod: MMModule, name: Symbol, arity: Int)
 	do
+		_module = mod
 		_name = name
 		_arity = arity
+		mod._local_classes.add(self)
 	end
 
 	# The corresponding local class in another module

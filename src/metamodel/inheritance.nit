@@ -419,8 +419,7 @@ special MMLocalClass
 	init(mod: MMModule, g: MMGlobalClass)
 	do
 		var cla = g.intro
-		super(cla.name, cla.arity)
-		mod.add_local_class(self)
+		super(mod, cla.name, cla.arity)
 		set_global(g)
 	end
 end
