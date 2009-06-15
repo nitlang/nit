@@ -615,19 +615,41 @@ end
 redef class MMType
 	# Compile a subtype check to self
 	# Return a NIT Bool
-	meth compile_cast(v: CompilerVisitor, recv: String): String
+	meth compile_cast(v: CompilerVisitor, recv: String, fromtype: MMType): String
 	do
 		# Fixme: handle formaltypes
 		var g = local_class.global
-		return "TAG_Bool(({recv}==NIT_NULL) || VAL_ISA({recv}, {g.color_id}, {g.id_id})) /*cast {self}*/"
+		var s = ""
+		if fromtype.is_nullable then
+			if self.is_nullable then
+				s = "({recv}==NIT_NULL) || "
+			else
+				s = "({recv}!=NIT_NULL) && "
+			end
+		else
+			# FIXME This is used to not break code without the nullable KW
+			s = "({recv}==NIT_NULL) || "
+		end
+		return "TAG_Bool({s}VAL_ISA({recv}, {g.color_id}, {g.id_id})) /*cast {self}*/"
 	end
 
 	# Compile a cast assertion
-	meth compile_type_check(v: CompilerVisitor, recv: String, n: PNode)
+	meth compile_type_check(v: CompilerVisitor, recv: String, n: PNode, fromtype: MMType)
 	do
 		# Fixme: handle formaltypes
 		var g = local_class.global
-		v.add_instr("if (({recv}!=NIT_NULL) && !VAL_ISA({recv}, {g.color_id}, {g.id_id})) \{ fprintf(stderr, \"Cast failled\"); {v.printf_locate_error(n)} nit_exit(1); } /*cast {self}*/;")
+		var s = ""
+		if fromtype.is_nullable then
+			if self.is_nullable then
+				s = "({recv}!=NIT_NULL) && "
+			else
+				s = "({recv}==NIT_NULL) || "
+			end
+		else
+			# FIXME This is used to not break code without the nullable KW
+			s = "({recv}!=NIT_NULL) && "
+		end
+		v.add_instr("if ({s}!VAL_ISA({recv}, {g.color_id}, {g.id_id})) \{ fprintf(stderr, \"Cast failled\"); {v.printf_locate_error(n)} nit_exit(1); } /*cast {self}*/;")
 	end
 
 	# Compile a notnull cast assertion
@@ -661,7 +683,7 @@ redef class ASignature
 				# FIXME: do not test always
 				# FIXME: handle formal types
 				v.add_instr("/* check if p<{ap.variable.stype} with p:{orig_type} */")
-				ap.variable.stype.compile_type_check(v, params[ap.position], ap)
+				ap.variable.stype.compile_type_check(v, params[ap.position], ap, orig_type)
 			end
 			v.add_assignment(cname, params[ap.position])
 		end
@@ -1225,7 +1247,7 @@ redef class AIsaExpr
 	redef meth compile_expr(v)
 	do
 		var e = v.compile_expr(n_expr)
-		return n_type.stype.compile_cast(v, e)
+		return n_type.stype.compile_cast(v, e, n_expr.stype)
 	end
 end
 
@@ -1233,7 +1255,7 @@ redef class AAsCastExpr
 	redef meth compile_expr(v)
 	do
 		var e = v.compile_expr(n_expr)
-		n_type.stype.compile_type_check(v, e, self)
+		n_type.stype.compile_type_check(v, e, self, n_expr.stype)
 		return e
 	end
 end
