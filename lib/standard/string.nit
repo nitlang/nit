@@ -72,10 +72,10 @@ special AbstractArrayRead[Char]
 		var myitems = _items
 		var itsitems = str._items
 		if myindex > length or itsindex > myindex  then return false
-		while itsindex > 0 do
+		while itsindex >= 0 do
 			if myitems[myindex] != itsitems[itsindex] then return false
-			myindex -= myindex
-			itsindex -= itsindex
+			myindex -= 1
+			itsindex -= 1
 		end
 		return true
 	end
