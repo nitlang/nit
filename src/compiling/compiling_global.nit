@@ -911,6 +911,24 @@ redef class MMLocalClass
 			v.unindent
 			v.add_instr("}")
 
+			# Compile CHECKNAME
+			var s = "void CHECKNEW_{name}(val_t self, char *from)"
+			v.add_instr(s + " \{")
+			v.indent
+			var ctx_old = v.ctx
+			v.ctx = new CContext
+			for g in global_properties do
+				var p = self[g]
+				var t = p.signature.return_type
+				if p isa MMAttribute and t != null and not t.is_nullable and v.tc.opt_warn.value > 0 then
+					v.add_instr("if ({p.global.attr_access}(self) == NIT_NULL) fprintf(stderr, \"Uninitialized attribute %s at %s.\\n\", \"{p.full_name}\", from);")
+				end
+			end
+			ctx_old.append(v.ctx)
+			v.ctx = ctx_old
+			v.unindent
+			v.add_instr("}")
+
 			var init_table_size = cshe.greaters.length + 1
 			var init_table_decl = "int init_table[{init_table_size}] = \{0{", 0" * (init_table_size-1)}};"
 
@@ -931,6 +949,7 @@ redef class MMLocalClass
 				v.add_instr(init_table_decl)
 				v.add_instr("val_t self = NEW_{name}();")
 				v.add_instr("{p.cname}({args.join(", ")});")
+				v.add_instr("CHECKNEW_{name}(self, \"{p.full_name} for {self}\");")
 				v.add_instr("return self;")
 				v.unindent
 				v.add_instr("}")
