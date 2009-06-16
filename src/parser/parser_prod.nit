@@ -122,8 +122,8 @@ redef class AModule
 
     init init_amodule (
             n_packagedecl: PPackagedecl ,
-            n_imports: Array[Object] , # Should be Array[PImport]
-            n_classdefs: Array[Object]  # Should be Array[PClassdef]
+            n_imports: Collection[Object] , # Should be Collection[PImport]
+            n_classdefs: Collection[Object]  # Should be Collection[PClassdef]
     )
     do
         empty_init
@@ -759,9 +759,9 @@ redef class AClassdef
             n_visibility: PVisibility ,
             n_classkind: PClasskind ,
             n_id: TClassid ,
-            n_formaldefs: Array[Object] , # Should be Array[PFormaldef]
-            n_superclasses: Array[Object] , # Should be Array[PSuperclass]
-            n_propdefs: Array[Object]  # Should be Array[PPropdef]
+            n_formaldefs: Collection[Object] , # Should be Collection[PFormaldef]
+            n_superclasses: Collection[Object] , # Should be Collection[PSuperclass]
+            n_propdefs: Collection[Object]  # Should be Collection[PPropdef]
     )
     do
         empty_init
@@ -969,7 +969,7 @@ redef class ATopClassdef
     private init empty_init do end
 
     init init_atopclassdef (
-            n_propdefs: Array[Object]  # Should be Array[PPropdef]
+            n_propdefs: Collection[Object]  # Should be Collection[PPropdef]
     )
     do
         empty_init
@@ -1021,7 +1021,7 @@ redef class AMainClassdef
     private init empty_init do end
 
     init init_amainclassdef (
-            n_propdefs: Array[Object]  # Should be Array[PPropdef]
+            n_propdefs: Collection[Object]  # Should be Collection[PPropdef]
     )
     do
         empty_init
@@ -4331,9 +4331,9 @@ redef class ASignature
     private init empty_init do end
 
     init init_asignature (
-            n_params: Array[Object] , # Should be Array[PParam]
+            n_params: Collection[Object] , # Should be Collection[PParam]
             n_type: PType ,
-            n_closure_decls: Array[Object]  # Should be Array[PClosureDecl]
+            n_closure_decls: Collection[Object]  # Should be Collection[PClosureDecl]
     )
     do
         empty_init
@@ -4711,7 +4711,7 @@ redef class AType
 
     init init_atype (
             n_id: TClassid ,
-            n_types: Array[Object]  # Should be Array[PType]
+            n_types: Collection[Object]  # Should be Collection[PType]
     )
     do
         empty_init
@@ -4783,7 +4783,7 @@ redef class ABlockExpr
     private init empty_init do end
 
     init init_ablockexpr (
-            n_expr: Array[Object]  # Should be Array[PExpr]
+            n_expr: Collection[Object]  # Should be Collection[PExpr]
     )
     do
         empty_init
@@ -7751,7 +7751,7 @@ redef class ANewExpr
             n_kwnew: TKwnew ,
             n_type: PType ,
             n_id: TId ,
-            n_args: Array[Object]  # Should be Array[PExpr]
+            n_args: Collection[Object]  # Should be Collection[PExpr]
     )
     do
         empty_init
@@ -8228,8 +8228,8 @@ redef class ACallExpr
     init init_acallexpr (
             n_expr: PExpr ,
             n_id: TId ,
-            n_args: Array[Object] , # Should be Array[PExpr]
-            n_closure_defs: Array[Object]  # Should be Array[PClosureDef]
+            n_args: Collection[Object] , # Should be Collection[PExpr]
+            n_closure_defs: Collection[Object]  # Should be Collection[PClosureDef]
     )
     do
         empty_init
@@ -8379,7 +8379,7 @@ redef class ACallAssignExpr
     init init_acallassignexpr (
             n_expr: PExpr ,
             n_id: TId ,
-            n_args: Array[Object] , # Should be Array[PExpr]
+            n_args: Collection[Object] , # Should be Collection[PExpr]
             n_assign: TAssign ,
             n_value: PExpr 
     )
@@ -8543,7 +8543,7 @@ redef class ACallReassignExpr
     init init_acallreassignexpr (
             n_expr: PExpr ,
             n_id: TId ,
-            n_args: Array[Object] , # Should be Array[PExpr]
+            n_args: Collection[Object] , # Should be Collection[PExpr]
             n_assign_op: PAssignOp ,
             n_value: PExpr 
     )
@@ -8693,7 +8693,7 @@ redef class ASuperExpr
     init init_asuperexpr (
             n_qualified: PQualified ,
             n_kwsuper: TKwsuper ,
-            n_args: Array[Object]  # Should be Array[PExpr]
+            n_args: Collection[Object]  # Should be Collection[PExpr]
     )
     do
         empty_init
@@ -8801,7 +8801,7 @@ redef class AInitExpr
     init init_ainitexpr (
             n_expr: PExpr ,
             n_kwinit: TKwinit ,
-            n_args: Array[Object]  # Should be Array[PExpr]
+            n_args: Collection[Object]  # Should be Collection[PExpr]
     )
     do
         empty_init
@@ -8901,8 +8901,8 @@ redef class ABraExpr
 
     init init_abraexpr (
             n_expr: PExpr ,
-            n_args: Array[Object] , # Should be Array[PExpr]
-            n_closure_defs: Array[Object]  # Should be Array[PClosureDef]
+            n_args: Collection[Object] , # Should be Collection[PExpr]
+            n_closure_defs: Collection[Object]  # Should be Collection[PClosureDef]
     )
     do
         empty_init
@@ -9024,7 +9024,7 @@ redef class ABraAssignExpr
 
     init init_abraassignexpr (
             n_expr: PExpr ,
-            n_args: Array[Object] , # Should be Array[PExpr]
+            n_args: Collection[Object] , # Should be Collection[PExpr]
             n_assign: TAssign ,
             n_value: PExpr 
     )
@@ -9160,7 +9160,7 @@ redef class ABraReassignExpr
 
     init init_abrareassignexpr (
             n_expr: PExpr ,
-            n_args: Array[Object] , # Should be Array[PExpr]
+            n_args: Collection[Object] , # Should be Collection[PExpr]
             n_assign_op: PAssignOp ,
             n_value: PExpr 
     )
@@ -9776,7 +9776,7 @@ redef class AArrayExpr
     private init empty_init do end
 
     init init_aarrayexpr (
-            n_exprs: Array[Object]  # Should be Array[PExpr]
+            n_exprs: Collection[Object]  # Should be Collection[PExpr]
     )
     do
         empty_init
@@ -10411,7 +10411,7 @@ redef class ASuperstringExpr
     private init empty_init do end
 
     init init_asuperstringexpr (
-            n_exprs: Array[Object]  # Should be Array[PExpr]
+            n_exprs: Collection[Object]  # Should be Collection[PExpr]
     )
     do
         empty_init
@@ -10745,7 +10745,7 @@ redef class AClosureDef
 
     init init_aclosuredef (
             n_kwwith: TKwwith ,
-            n_id: Array[Object] , # Should be Array[TId]
+            n_id: Collection[Object] , # Should be Collection[TId]
             n_kwdo: TKwdo ,
             n_expr: PExpr 
     )
@@ -10866,7 +10866,7 @@ redef class AQualified
     private init empty_init do end
 
     init init_aqualified (
-            n_id: Array[Object] , # Should be Array[TId]
+            n_id: Collection[Object] , # Should be Collection[TId]
             n_classid: TClassid 
     )
     do
@@ -10939,7 +10939,7 @@ redef class ADoc
     private init empty_init do end
 
     init init_adoc (
-            n_comment: Array[Object]  # Should be Array[TComment]
+            n_comment: Collection[Object]  # Should be Collection[TComment]
     )
     do
         empty_init
