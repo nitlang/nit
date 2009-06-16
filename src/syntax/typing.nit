@@ -928,64 +928,13 @@ redef class AAttrReassignExpr
 	end
 end
 
-class AAbsSendExpr
+class AAbsAbsSendExpr
 special PExpr
 	# The signature of the called property
 	readable attr _prop_signature: MMSignature
 
-	# Compute the called global property
-	private meth do_typing(v: TypingVisitor, type_recv: MMType, is_implicit_self: Bool, recv_is_self: Bool, name: Symbol, raw_args: Array[PExpr], closure_defs: Array[PClosureDef])
-	do
-		var prop = get_property(v, type_recv, is_implicit_self, name)
-		if prop == null then return
-		var sig = get_signature(v, type_recv, prop, recv_is_self)
-		if sig == null then return
-		var args = process_signature(v, sig, prop.name, raw_args)
-		if args == null then return
-		var rtype = process_closures(v, sig, prop.name, closure_defs)
-		_prop = prop
-		_prop_signature = sig
-		_arguments = args
-		_return_type = rtype
-	end
-
-	private meth get_property(v: TypingVisitor, type_recv: MMType, is_implicit_self: Bool, name: Symbol): MMMethod
-	do
-		if type_recv == null then return null
-		var lc = type_recv.local_class
-		var prop: MMMethod = null
-		if lc.has_global_property_by_name(name) then prop = lc.select_method(name)
-		if prop == null and v.local_property.global.is_init then
-			var props = type_recv.local_class.super_methods_named(name)
-			if props.length > 1 then
-				v.error(self, "Error: Ambigous method name '{name}' for {props.join(", ")}. Use explicit designation.")
-				return null
-			else if props.length == 1 then 
-				var p = type_recv.local_class[props.first.global]
-				assert p isa MMMethod
-				prop = p
-			end
-
-		end
-		if prop == null then
-			if is_implicit_self then
-				v.error(self, "Error: Method or variable '{name}' unknown in {type_recv}.")
-			else
-				v.error(self, "Error: Method '{name}' doesn't exists in {type_recv}.")
-			end
-			return null
-		end
-		return prop
-	end
-
-	# Get the signature for a local property and a receiver
-	private meth get_signature(v: TypingVisitor, type_recv: MMType, prop: MMMethod, recv_is_self: Bool): MMSignature
-	do
-		prop.global.check_visibility(v, self, v.module, recv_is_self)
-		var psig = prop.signature_for(type_recv)
-		if not recv_is_self then psig = psig.not_for_self
-		return psig
-	end
+	# The real arguments used (after star transformation) (once computed)
+	readable attr _arguments: Array[PExpr]
 
 	# Check the conformity of a set of arguments `raw_args' to a signature.
 	private meth process_signature(v: TypingVisitor, psig: MMSignature, name: Symbol, raw_args: Array[PExpr]): Array[PExpr]
@@ -1063,12 +1012,66 @@ special PExpr
 		end
 		return t
 	end
+end
+
+class AAbsSendExpr
+special AAbsAbsSendExpr
+	# Compute the called global property
+	private meth do_typing(v: TypingVisitor, type_recv: MMType, is_implicit_self: Bool, recv_is_self: Bool, name: Symbol, raw_args: Array[PExpr], closure_defs: Array[PClosureDef])
+	do
+		var prop = get_property(v, type_recv, is_implicit_self, name)
+		if prop == null then return
+		var sig = get_signature(v, type_recv, prop, recv_is_self)
+		if sig == null then return
+		var args = process_signature(v, sig, prop.name, raw_args)
+		if args == null then return
+		var rtype = process_closures(v, sig, prop.name, closure_defs)
+		_prop = prop
+		_prop_signature = sig
+		_arguments = args
+		_return_type = rtype
+	end
+
+	private meth get_property(v: TypingVisitor, type_recv: MMType, is_implicit_self: Bool, name: Symbol): MMMethod
+	do
+		if type_recv == null then return null
+		var lc = type_recv.local_class
+		var prop: MMMethod = null
+		if lc.has_global_property_by_name(name) then prop = lc.select_method(name)
+		if prop == null and v.local_property.global.is_init then
+			var props = type_recv.local_class.super_methods_named(name)
+			if props.length > 1 then
+				v.error(self, "Error: Ambigous method name '{name}' for {props.join(", ")}. Use explicit designation.")
+				return null
+			else if props.length == 1 then 
+				var p = type_recv.local_class[props.first.global]
+				assert p isa MMMethod
+				prop = p
+			end
+
+		end
+		if prop == null then
+			if is_implicit_self then
+				v.error(self, "Error: Method or variable '{name}' unknown in {type_recv}.")
+			else
+				v.error(self, "Error: Method '{name}' doesn't exists in {type_recv}.")
+			end
+			return null
+		end
+		return prop
+	end
+
+	# Get the signature for a local property and a receiver
+	private meth get_signature(v: TypingVisitor, type_recv: MMType, prop: MMMethod, recv_is_self: Bool): MMSignature
+	do
+		prop.global.check_visibility(v, self, v.module, recv_is_self)
+		var psig = prop.signature_for(type_recv)
+		if not recv_is_self then psig = psig.not_for_self
+		return psig
+	end
 
 	# The invoked method (once computed)
 	readable attr _prop: MMMethod
-
-	# The real arguments used (after star transformation) (once computed)
-	readable attr _arguments: Array[PExpr]
 
 	# The return type (if any) (once computed)
 	readable attr _return_type: MMType

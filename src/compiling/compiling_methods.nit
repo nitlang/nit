@@ -1449,7 +1449,7 @@ redef class AAttrReassignExpr
 	end
 end
 
-redef class AAbsSendExpr
+redef class AAbsAbsSendExpr
 	# Compile each argument and add them to the array
 	meth compile_arguments_in(v: CompilerVisitor, cargs: Array[String])
 	do
