@@ -9269,6 +9269,115 @@ redef class ABraReassignExpr
         end
     end
 end
+redef class AClosureCallExpr
+    redef meth n_id=(n: TId)
+    do
+        _n_id = n
+        if n != null then
+	    n.parent = self
+        end
+    end
+
+    private init empty_init do end
+
+    init init_aclosurecallexpr (
+            n_id: TId ,
+            n_args: Collection[Object] , # Should be Collection[PExpr]
+            n_closure_defs: Collection[Object]  # Should be Collection[PClosureDef]
+    )
+    do
+        empty_init
+        _n_id = n_id
+	if n_id != null then
+		n_id.parent = self
+	end
+        _n_args = new List[PExpr]
+	for n in n_args do
+		assert n isa PExpr
+		_n_args.add(n)
+		n.parent = self
+	end
+        _n_closure_defs = new List[PClosureDef]
+	for n in n_closure_defs do
+		assert n isa PClosureDef
+		_n_closure_defs.add(n)
+		n.parent = self
+	end
+    end
+
+    redef meth replace_child(old_child: PNode, new_child: PNode)
+    do
+        assert old_child != null
+        if _n_id == old_child then
+            if new_child != null then
+                new_child.parent = self
+		assert new_child isa TId
+                _n_id = new_child
+	    else
+		_n_id = null
+            end
+            return
+	end
+        for i in [0.._n_args.length[ do
+            if _n_args[i] == old_child then
+                if new_child != null then
+		    assert new_child isa PExpr
+                    _n_args[i] = new_child
+                    new_child.parent = self
+                else
+                    _n_args.remove_at(i)
+                end
+                return
+            end
+        end
+        for i in [0.._n_closure_defs.length[ do
+            if _n_closure_defs[i] == old_child then
+                if new_child != null then
+		    assert new_child isa PClosureDef
+                    _n_closure_defs[i] = new_child
+                    new_child.parent = self
+                else
+                    _n_closure_defs.remove_at(i)
+                end
+                return
+            end
+        end
+    end
+
+    redef meth visit_all(v: Visitor)
+    do
+        if _n_id != null then
+            v.visit(_n_id)
+        end
+            for n in _n_args do
+                v.visit(n)
+	    end
+            for n in _n_closure_defs do
+                v.visit(n)
+	    end
+    end
+
+    redef meth visit_all_reverse(v: Visitor)
+    do
+        if _n_id != null then
+            v.visit(_n_id)
+        end
+	do
+	    var i = _n_args.length
+            while i >= 0 do
+                v.visit(_n_args[i])
+		i = i - 1
+	    end
+	end
+	do
+	    var i = _n_closure_defs.length
+            while i >= 0 do
+                v.visit(_n_closure_defs[i])
+		i = i - 1
+	    end
+	end
+    end
+end
 redef class AVarExpr
     redef meth n_id=(n: TId)
     do

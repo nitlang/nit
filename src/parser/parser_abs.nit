@@ -826,6 +826,12 @@ special PExpr
     readable writable attr _n_assign_op: PAssignOp = null
     readable writable attr _n_value: PExpr = null
 end
+class AClosureCallExpr
+special PExpr
+    readable writable attr _n_id: TId = null
+    readable writable attr _n_args: List[PExpr] = null
+    readable writable attr _n_closure_defs: List[PClosureDef] = null
+end
 class AVarExpr
 special PExpr
     readable writable attr _n_id: TId = null

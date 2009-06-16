@@ -779,6 +779,12 @@ class ABraReassignExpr
 special ABraFormExpr
 special AReassignFormExpr 
 end
+class AClosureCallExpr
+special PExpr
+    readable writable attr _n_id: TId = null
+    readable writable attr _n_args: List[PExpr] = null
+    readable writable attr _n_closure_defs: List[PClosureDef] = null
+end
 class AVarExpr
 special AVarFormExpr
 end
@@ -789,16 +795,6 @@ end
 class AVarReassignExpr
 special AVarFormExpr
 special AReassignFormExpr 
-end
-class AClosureCallExpr
-special ACallFormExpr 
-	init(i: TId, a: List[PExpr], c: List[PClosureDef])
-	do
-		_n_id = i
-		_n_args = a
-		_n_closure_defs = c
-		_n_expr = null
-	end
 end
 class ARangeExpr
 special PExpr

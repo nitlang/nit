@@ -1692,7 +1692,7 @@ redef class AClosureDecl
 end
 
 redef class AClosureCallExpr
-	redef meth intern_compile_call(v)
+	meth intern_compile_call(v: CompilerVisitor): String
 	do
 		var cargs = new Array[String]
 		compile_arguments_in(v, cargs)
@@ -1735,6 +1735,21 @@ redef class AClosureCallExpr
 			v.add_instr("\}")
 		end
 		return va
+	end
+
+	redef meth compile_expr(v)
+	do
+		var e = intern_compile_call(v)
+		assert e != null
+		return e
+	end
+
+	redef meth compile_stmt(v)
+	do
+		var e = intern_compile_call(v)
+		if e != null then
+			v.add_instr(e + ";")
+		end
 	end
 end
 

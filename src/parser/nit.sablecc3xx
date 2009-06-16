@@ -629,6 +629,7 @@ expr	= {block} expr*
 	| {bra} expr [args]:expr* [closure_defs]:closure_def* 
 	| {bra_assign} expr [args]:expr* assign [value]:expr 
 	| {bra_reassign} expr [args]:expr* assign_op [value]:expr 
+	| {closure_call} id [args]:expr* [closure_defs]:closure_def*
 	| {var} id
 	| {var_assign} id assign [value]:expr 
 	| {var_reassign} id assign_op [value]:expr 

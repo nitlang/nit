@@ -1273,7 +1273,7 @@ redef class ACallFormExpr
 			var variable = v.variable_ctx[name]
 			if variable != null then
 				if variable isa ClosureVariable then
-					var n = new AClosureCallExpr(n_id, n_args, n_closure_defs)
+					var n = new AClosureCallExpr.init_aclosurecallexpr(n_id, n_args, n_closure_defs)
 					replace_with(n)
 					n.variable = variable
 					n.after_typing(v)
@@ -1368,16 +1368,16 @@ redef class AInitExpr
 end
 
 redef class AClosureCallExpr
+special AAbsAbsSendExpr
 	redef meth after_typing(v)
 	do
 		var va = variable
 		var sig = va.closure.signature
 		var args = process_signature(v, sig, n_id.to_symbol, n_args.to_a)
-		if closure_defs != null then
-			process_closures(v, sig, n_id.to_symbol, closure_defs)
+		if not n_closure_defs.is_empty then
+			process_closures(v, sig, n_id.to_symbol, n_closure_defs.to_a)
 		end
 		if args == null then return
-		_prop = null
 		_prop_signature = sig
 		_arguments = args
 		_stype = sig.return_type
