@@ -345,8 +345,14 @@ redef class PType
 end
 
 redef class PExpr
-	redef readable attr _stype: MMType
-	
+	redef readable attr _is_typed: Bool = true # FIXME: Switch to false once subclasses are adapted
+	redef meth is_statement: Bool do return _stype == null
+	redef meth stype
+	do
+		return _stype
+	end
+	attr _stype: MMType
+
 	# Is the expression the implicit receiver
 	meth is_implicit_self: Bool do return false
 

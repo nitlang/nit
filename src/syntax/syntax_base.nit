@@ -373,9 +373,12 @@ special Visitor
 	# Require that the static type of n is known
 	meth check_expr(n: PExpr): Bool
 	do
-		# FIXME: The tc.error_count is a workaround since currently there is no way
-		# to distingate statements from buggy expressions: both have a null stype
-		if tc.error_count == 0 and n.stype == null then
+		if not n.is_typed then
+			# An error occured in a sub node,
+			# sillently cascade fail
+			return false
+		else if tc.error_count == 0 and n.is_statement then # FIXME remove 'tc.error_count == 0'
+		#if tc.error_count == 0 and n.stype == null then
 			error(n, "Type error: expected expression.")
 			return false
 		end
@@ -624,8 +627,17 @@ redef class AType
 end
 
 redef class PExpr
-	# Static type
-	# Is null for statement and for erronus expression
+	# Is the expression node correcly typed
+	# Return false if typed was not yet computed or
+	# if an error occured during the typing computation
+	meth is_typed: Bool is abstract
+
+	# Is the expression node a statement? (ie has no return value)
+	# require: is_typed
+	meth is_statement: Bool is abstract
+
+	# The static type of the expression
+	# require: is_typed and not is_statement
 	meth stype: MMType is abstract
 end
 
