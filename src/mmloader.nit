@@ -277,7 +277,6 @@ class ModuleLoader
 			abort
 		end
 		var m = parse_file(context, file, filename, module_name, dir)
-		m.filename = filename
 		if file != stdin then file.close
 		return m
 	end
@@ -290,12 +289,6 @@ class ModuleLoader
 end
 
 redef class MMModule
-	# The filename of the module
-	readable writable attr _filename: String
-
-	# Last modification time
-	readable writable attr _mtime: Int 
-
 	# Recurcivelty process an import modules
 	meth import_supers_modules(names: Collection[Symbol])
 	do

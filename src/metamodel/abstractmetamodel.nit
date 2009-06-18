@@ -126,6 +126,9 @@ class MMModule
 	# The directory of the module
 	readable attr _directory: MMDirectory
 
+	# The filename of the module
+	readable attr _filename: String
+
 	# Module dependence hierarchy element
 	readable attr _mhe: PartialOrderElement[MMModule] 
 
@@ -156,7 +159,7 @@ class MMModule
 	# Dictionary of global classes
 	attr _global_class_by_name: Map[Symbol, MMGlobalClass] = new HashMap[Symbol, MMGlobalClass]
 
-	protected init(name: Symbol, dir: MMDirectory, context: MMContext)
+	protected init(name: Symbol, dir: MMDirectory, context: MMContext, filename: String)
 	do
 		_name = name
 		_directory = dir
@@ -167,6 +170,7 @@ class MMModule
 		else
 			_full_name = dir.full_name_for(name)
 		end
+		_filename = filename
 	end
 
 	# Register that a module is imported with a visibility

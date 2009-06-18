@@ -29,9 +29,9 @@ special MMModule
 	# Concrete NIT source local classs by name
 	readable attr _src_local_classes: Map[Symbol, MMSrcLocalClass]
 
-	init(c: MMContext, source: AModule, dir: MMDirectory, name: Symbol)
+	init(c: MMContext, source: AModule, dir: MMDirectory, name: Symbol, filename: String)
 	do
-		super(name, dir, c)
+		super(name, dir, c, filename)
 		_node = source
 		_src_local_classes = new HashMap[Symbol, MMSrcLocalClass]
 	end

@@ -43,9 +43,7 @@ special ModuleLoader
 		end
 		var node_module = node_tree.n_base
 		assert node_module isa AModule
-		var module = new MMSrcModule(context, node_module, dir, name)
-		#module.filename = fname
-		#module.mtime = fname.file_stat.mtime
+		var module = new MMSrcModule(context, node_module, dir, name, filename)
 		return module
 	end
 
