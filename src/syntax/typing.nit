@@ -345,10 +345,18 @@ redef class PType
 end
 
 redef class PExpr
-	redef readable attr _is_typed: Bool = true # FIXME: Switch to false once subclasses are adapted
+	redef readable attr _is_typed: Bool = false
 	redef meth is_statement: Bool do return _stype == null
 	redef meth stype
 	do
+		if not is_typed then
+			print "{locate}: not is_typed"
+			abort
+		end
+		if is_statement then
+			print "{locate}: is_statement"
+			abort
+		end
 		return _stype
 	end
 	attr _stype: MMType
@@ -379,9 +387,10 @@ redef class AVardeclExpr
 				v.check_conform_expr(n_expr, va.stype)
 			end
 		else
-			v.check_expr(n_expr)
+			if not v.check_expr(n_expr) then return
 			va.stype = n_expr.stype
 		end
+		_is_typed = true
 	end
 end
 
@@ -394,6 +403,7 @@ redef class ABlockExpr
 		super
 
 		v.variable_ctx = old_var_ctx
+		_is_typed = true
 	end
 end
 
@@ -408,6 +418,7 @@ redef class AReturnExpr
 		else if n_expr != null and t != null then
 			v.check_conform_expr(n_expr, t)
 		end
+		_is_typed = true
 	end
 end
 
@@ -430,6 +441,7 @@ redef class AContinueExpr
 		else if n_expr != null and t != null then
 			v.check_conform_expr(n_expr, t)
 		end
+		_is_typed = true
 	end
 end
 
@@ -448,6 +460,7 @@ redef class ABreakExpr
 			# Typing check can only be done later
 			bl.add(n_expr)
 		end
+		_is_typed = true
 	end
 end
 
@@ -468,6 +481,7 @@ redef class AIfExpr
 			v.visit(n_else)
 			v.variable_ctx = old_var_ctx
 		end
+		_is_typed = true
 	end
 end
 
@@ -484,6 +498,7 @@ redef class AWhileExpr
 
 		v.check_conform_expr(n_expr, v.type_bool)
 		v.escapable_ctx.pop
+		_is_typed = true
 	end
 end
 
@@ -507,10 +522,8 @@ redef class AForExpr
 
 		v.visit(n_expr)
 
+		if not v.check_conform_expr(n_expr, v.type_collection) then return
 		var expr_type = n_expr.stype
-		if not v.check_conform_expr(n_expr, v.type_collection) then
-			return
-		end
 		_meth_iterator = expr_type.local_class.select_method(once ("iterator".to_symbol))
 		if _meth_iterator == null then
 			v.error(self, "Error: Collection MUST have an iterate method")
@@ -539,11 +552,12 @@ redef class AForExpr
 		if n_block != null then v.visit(n_block)
 
 		# pop context
-		var varctx = v.variable_ctx 
+		var varctx = v.variable_ctx
 		assert varctx isa SubVariableContext
 		v.variable_ctx = varctx.prev
 
 		v.escapable_ctx.pop
+		_is_typed = true
 	end
 end
 
@@ -552,6 +566,7 @@ redef class AAssertExpr
 	do
 		v.check_conform_expr(n_expr, v.type_bool)
 		v.use_if_true_variable_ctx(n_expr)
+		_is_typed = true
 	end
 end
 
@@ -561,6 +576,7 @@ redef class AVarExpr
 	redef meth after_typing(v)
 	do
 		_stype = v.variable_ctx.stype(variable)
+		_is_typed = _stype != null
 	end
 end
 
@@ -569,6 +585,7 @@ redef class AVarAssignExpr
 	do
 		var t = v.variable_ctx.stype(variable)
 		v.check_conform_expr(n_value, t)
+		_is_typed = true
 	end
 end
 
@@ -589,8 +606,8 @@ redef class AReassignFormExpr
 		prop.global.check_visibility(v, self, v.module, false)
 		var psig = prop.signature_for(type_lvalue)
 		_assign_method = prop
-		v.check_conform_expr(n_value, psig[0].not_for_self)
-		v.check_conform(self, psig.return_type.not_for_self, n_value.stype)
+		if not v.check_conform_expr(n_value, psig[0].not_for_self) then return
+		if not v.check_conform(self, psig.return_type.not_for_self, n_value.stype) then return
 	end
 
 	# Method used through the reassigment operator (once computed)
@@ -602,6 +619,7 @@ redef class AVarReassignExpr
 	do
 		var t = v.variable_ctx.stype(variable)
 		do_lvalue_typing(v, t)
+		_is_typed = true
 	end
 end
 
@@ -622,6 +640,7 @@ redef class ASelfExpr
 	do
 		variable = v.self_var
 		_stype = v.variable_ctx.stype(variable)
+		_is_typed = true
 	end
 
         redef meth is_self do return true
@@ -645,6 +664,7 @@ redef class AIfexprExpr
 		v.check_conform_expr(n_expr, v.type_bool)
 
 		_stype = v.check_conform_multiexpr(null, [n_then, n_else])
+		_is_typed = _stype != null
 	end
 end
 
@@ -652,6 +672,7 @@ redef class ABoolExpr
 	redef meth after_typing(v)
 	do
 		_stype = v.type_bool
+		_is_typed = true
 	end
 end
 
@@ -661,6 +682,7 @@ redef class AOrExpr
 		v.check_conform_expr(n_expr, v.type_bool)
 		v.check_conform_expr(n_expr2, v.type_bool)
 		_stype = v.type_bool
+		_is_typed = true
 	end
 end
 
@@ -684,6 +706,7 @@ redef class AAndExpr
 		v.check_conform_expr(n_expr, v.type_bool)
 		v.check_conform_expr(n_expr2, v.type_bool)
 		_stype = v.type_bool
+		_is_typed = true
 	end
 end
 
@@ -692,6 +715,7 @@ redef class ANotExpr
 	do
 		v.check_conform_expr(n_expr, v.type_bool)
 		_stype = v.type_bool
+		_is_typed = true
 	end
 end
 
@@ -699,7 +723,7 @@ redef class AIntExpr
 	redef meth after_typing(v)
 	do
 		_stype = v.type_int
-
+		_is_typed = true
 	end
 end
 
@@ -707,6 +731,7 @@ redef class AFloatExpr
 	redef meth after_typing(v)
 	do
 		_stype = v.type_float
+		_is_typed = true
 	end
 end
 
@@ -714,6 +739,7 @@ redef class ACharExpr
 	redef meth after_typing(v)
 	do
 		_stype = v.type_char
+		_is_typed = true
 	end
 end
 
@@ -722,6 +748,7 @@ redef class AStringFormExpr
 	redef meth after_typing(v)
 	do
 		_stype = v.type_string
+		_is_typed = true
 		_meth_with_native = _stype.local_class.select_method(once "with_native".to_symbol)
 		if _meth_with_native == null then v.error(self, "{_stype} MUST have a with_native method.")
 	end
@@ -742,6 +769,7 @@ redef class ASuperstringExpr
 		if _meth_add == null then v.error(self, "{_atype} MUST have an add method.")
 		_meth_to_s = v.type_object.local_class.select_method(once "to_s".to_symbol)
 		if _meth_to_s == null then v.error(self, "Object MUST have a to_s method.")
+		_is_typed = true
 	end
 end
 
@@ -749,6 +777,7 @@ redef class ANullExpr
 	redef meth after_typing(v)
 	do
 		_stype = v.type_none
+		_is_typed = true
 	end
 end
 
@@ -771,6 +800,8 @@ redef class AArrayExpr
 		if _meth_with_capacity == null then v.error(self, "{_stype} MUST have a with_capacity method.")
 		_meth_add = _stype.local_class.select_method(once "add".to_symbol)
 		if _meth_add == null then v.error(self, "{_stype} MUST have an add method.")
+
+		_is_typed = true
 	end
 end
 
@@ -778,11 +809,9 @@ redef class ARangeExpr
 	readable attr _meth_init: MMMethod
 	redef meth after_typing(v)
 	do
+		if not v.check_expr(n_expr) or not v.check_expr(n_expr2) then return
 		var ntype = n_expr.stype
 		var ntype2 = n_expr2.stype
-		if ntype == null or ntype == null then
-			return
-		end
 		if ntype < ntype2 then
 			ntype = ntype2
 		else if not ntype2 < ntype then
@@ -790,9 +819,9 @@ redef class ARangeExpr
 			return
 		end
 		var dtype = v.type_discrete
-		v.check_conform_expr(n_expr, dtype)
-		v.check_conform_expr(n_expr2, dtype)
+		if not v.check_conform_expr(n_expr, dtype) or not v.check_conform_expr(n_expr2, dtype) then return
 		_stype = v.type_range(ntype)
+		_is_typed = true
 	end
 end
 
@@ -869,6 +898,7 @@ special ASuperInitCall
 		var p = v.local_property
 		assert p isa MMSrcMethod
 		_prop = p
+		_is_typed = true
 	end
 end
 
@@ -905,10 +935,9 @@ redef class AAttrExpr
 	redef meth after_typing(v)
 	do
 		do_typing(v)
-		if prop == null then
-			return
-		end
+		if prop == null then return
 		_stype = attr_type
+		_is_typed = true
 	end
 end
 
@@ -916,10 +945,9 @@ redef class AAttrAssignExpr
 	redef meth after_typing(v)
 	do
 		do_typing(v)
-		if prop == null then
-			return
-		end
-		v.check_conform_expr(n_value, attr_type)
+		if prop == null then return
+		if not v.check_conform_expr(n_value, attr_type) then return
+		_is_typed = true
 	end
 end
 
@@ -927,10 +955,9 @@ redef class AAttrReassignExpr
 	redef meth after_typing(v)
 	do
 		do_typing(v)
-		if prop == null then
-			return
-		end
+		if prop == null then return
 		do_lvalue_typing(v, attr_type)
+		_is_typed = true
 	end
 end
 
@@ -1032,6 +1059,7 @@ special AAbsAbsSendExpr
 		var args = process_signature(v, sig, prop.name, raw_args)
 		if args == null then return
 		var rtype = process_closures(v, sig, prop.name, closure_defs)
+		if rtype == null and sig.return_type != null then return
 		_prop = prop
 		_prop_signature = sig
 		_arguments = args
@@ -1144,8 +1172,10 @@ special AAbsSendExpr
 
 		if not prop.global.is_init then
 			v.error(self, "Error: {prop} is not a constructor.")
+			return
 		end
 		_stype = t
+		_is_typed = true
 	end
 end
 
@@ -1183,6 +1213,7 @@ special ASuperInitCall
 		end
 
 		_stype = return_type
+		_is_typed = true
 	end
 end
 
@@ -1223,6 +1254,7 @@ special AReassignFormExpr
 		end
 
 		_arguments = old_args # FIXME: What if star parameters do not match betwen the two methods?
+		_is_typed = true
 	end
 end
 
@@ -1387,6 +1419,7 @@ special AAbsAbsSendExpr
 		_prop_signature = sig
 		_arguments = args
 		_stype = sig.return_type
+		_is_typed = true
 	end
 end
 
@@ -1439,6 +1472,7 @@ redef class AIsaExpr
 			_if_true_variable_ctx = v.variable_ctx.sub_with(variable, n_type.stype)
 		end
 		_stype = v.type_bool
+		_is_typed = true
 	end
 end
 
@@ -1447,12 +1481,16 @@ redef class AAsCastExpr
 	do
 		v.check_expr(n_expr)
 		_stype = n_type.stype
+		_is_typed = _stype != null
 	end
 end
 
 redef class AProxyExpr
 	redef meth after_typing(v)
 	do
+		if not n_expr.is_typed then return
+		_is_typed = true
+		if n_expr.is_statement then return
 		_stype = n_expr.stype
 	end
 end

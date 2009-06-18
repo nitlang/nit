@@ -374,11 +374,14 @@ special Visitor
 	meth check_expr(n: PExpr): Bool
 	do
 		if not n.is_typed then
+			if tc.error_count == 0 then
+				print("{n.locate} not typed but not error")
+				abort
+			end
 			# An error occured in a sub node,
 			# sillently cascade fail
 			return false
-		else if tc.error_count == 0 and n.is_statement then # FIXME remove 'tc.error_count == 0'
-		#if tc.error_count == 0 and n.stype == null then
+		else if n.is_statement then
 			error(n, "Type error: expected expression.")
 			return false
 		end
