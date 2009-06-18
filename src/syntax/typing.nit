@@ -1464,9 +1464,26 @@ redef class AClosureDef
 	end
 end
 
+class ATypeCheckExpr
+special PExpr
+	private meth check_expr_cast(v: TypingVisitor, n_expr: PExpr, n_type: PType)
+	do
+		if not v.check_expr(n_expr) then return
+		var etype = n_expr.stype
+		var ttype = n_type.stype
+		if etype == ttype then
+			v.warning(self, "Warning: Expression is already a {ttype}.")
+		else if etype < ttype then
+			v.warning(self, "Warning: Expression is already a {ttype} since it is a {etype}.")
+		end
+	end
+end
+
 redef class AIsaExpr
+special ATypeCheckExpr
 	redef meth after_typing(v)
 	do
+		check_expr_cast(v, n_expr, n_type)
 		var variable = n_expr.its_variable
 		if variable != null then
 			_if_true_variable_ctx = v.variable_ctx.sub_with(variable, n_type.stype)
@@ -1477,9 +1494,10 @@ redef class AIsaExpr
 end
 
 redef class AAsCastExpr
+special ATypeCheckExpr
 	redef meth after_typing(v)
 	do
-		v.check_expr(n_expr)
+		check_expr_cast(v, n_expr, n_type)
 		_stype = n_type.stype
 		_is_typed = _stype != null
 	end
