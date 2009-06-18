@@ -28,20 +28,23 @@ end
 # Formal types are named indirect types
 class MMTypeFormal
 special MMType
+	redef meth is_valid do return _bound != null
+
 	# The name of the type
 	readable attr _name: Symbol 
 
 	# The type refered
-	readable attr _bound: MMType 
+	meth bound: MMType
+	do
+		assert is_valid
+		return _bound
+	end
+	attr _bound: MMType
 
 	redef meth <(t) do return t != null and (t == self or t.is_supertype(_bound))
 	redef meth is_supertype(t) do return _bound.is_supertype(t)
 	redef meth direct_type do return _bound.direct_type
-	redef meth local_class
-	do
-		if _bound == null then return null
-		return _bound.local_class
-	end
+	redef meth local_class do return _bound.local_class
 
 	redef meth to_s do return _name.to_s
 

@@ -606,7 +606,9 @@ redef class AType
 	redef meth get_stype(v)
 	do
 		var t = get_unchecked_stype(v)
-		if t != null then check_conform(v)
+		if t == null then return null
+		if not t.is_valid then return null
+		check_conform(v)
 		return t
 	end
 
@@ -620,8 +622,9 @@ redef class AType
 			for i in [0..arity[ do
 				var p = n_types[i]
 				var pt = p.get_stype(v)
-				var bt = local_class.get_formal(i).bound
-				if bt == null then return
+				var b = local_class.get_formal(i)
+				if not b.is_valid then return
+				var bt = b.bound
 				bt = bt.adapt_to(st) # We need to abapt because of F-genericity
 				v.check_conform(p, pt, bt)
 			end

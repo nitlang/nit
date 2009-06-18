@@ -308,6 +308,10 @@ abstract class MMType
 	# The local class that self direclty or indirectly refers to
 	meth local_class: MMLocalClass is abstract
 
+	# Is the type a valid one
+	# For instance, circular dependency on formal types is invalid
+	meth is_valid: Bool do return true
+
 	# Is self a valid subtype of t
 	meth <(t : MMType): Bool is abstract
 
