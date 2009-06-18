@@ -1578,6 +1578,12 @@ special PExpr
 			v.warning(self, "Warning: Expression is already a {ttype}.")
 		else if etype < ttype then
 			v.warning(self, "Warning: Expression is already a {ttype} since it is a {etype}.")
+		else if etype.is_nullable and etype.as_notnull == ttype then
+			if self isa AIsaExpr then
+				v.warning(self, "Warning: Prefer '!= null'.")
+			else
+				v.warning(self, "Warning: Prefer '.as(not null)'.")
+			end
 		end
 	end
 end
