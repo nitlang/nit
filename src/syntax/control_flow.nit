@@ -66,7 +66,18 @@ abstract class VariableContext
 	# May be different from the declaration static type
 	meth stype(v: Variable): MMType
 	do
-		return v.stype
+		if _stypes.has_key(v) then
+			return _stypes[v]
+		else
+			return v.stype
+		end
+	end
+
+	# Set effective static type of a given variable
+	# May be different from the declaration static type
+	meth stype=(v: Variable, t: MMType)
+	do
+		_stypes[v] = t
 	end
 
 	# Variables by name (in the current context only)
@@ -74,6 +85,9 @@ abstract class VariableContext
 
 	# All variables in all contextes
 	attr _all_variables: Set[Variable]
+
+	# Updated static type of variables
+	attr _stypes: Map[Variable, MMType] = new HashMap[Variable, MMType]
 
 	# Build a new VariableContext
 	meth sub(node: PNode): SubVariableContext
@@ -84,7 +98,9 @@ abstract class VariableContext
 	# Build a nested VariableContext with new variable information
 	meth sub_with(node: PNode, v: Variable, t: MMType): SubVariableContext
 	do
-		return new CastVariableContext.with_prev(self, node, v, t)
+		var ctx = sub(node)
+		ctx.stype(v) = t
+		return ctx
 	end
 
 	# The visitor of the context (used to display error)
@@ -171,7 +187,11 @@ special VariableContext
 
 	redef meth stype(v)
 	do
-		return prev.stype(v)
+		if _stypes.has_key(v) then
+			return _stypes[v]
+		else
+			return prev.stype(v)
+		end
 	end
 
 	init with_prev(p: VariableContext, node: PNode)
@@ -184,27 +204,6 @@ special VariableContext
 	redef meth is_set(v)
 	do
 		return _set_variables.has(v) or _prev.is_set(v)
-	end
-end
-
-class CastVariableContext
-special SubVariableContext
-	attr _variable: Variable
-	attr _var_type: MMType
-
-	redef meth stype(v)
-	do
-		if _variable == v then
-			return _var_type
-		end
-		return prev.stype(v)
-	end
-
-	init with_prev(p: VariableContext, node: PNode, v: Variable, t: MMType)
-	do
-		super(p, node)
-		_variable = v
-		_var_type =t
 	end
 end
 
