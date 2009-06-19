@@ -550,24 +550,26 @@ redef class AVarAssignExpr
 end
 
 redef class AReassignFormExpr
-	# Compute and check method used through the reassigment operator 
-	private meth do_lvalue_typing(v: TypingVisitor, type_lvalue: MMType)
+	# Compute and check method used through the reassigment operator
+	# On success return the static type of the result of the reassigment operator
+	# Else display an error and return null
+	private meth do_rvalue_typing(v: TypingVisitor, type_lvalue: MMType): MMType
 	do
 		if type_lvalue == null then
-			return
+			return null
 		end
 		var name = n_assign_op.method_name
 		var lc = type_lvalue.local_class
 		if not lc.has_global_property_by_name(name) then
 			v.error(self, "Error: Method '{name}' doesn't exists in {type_lvalue}.")
-			return
+			return null
 		end
 		var prop = lc.select_method(name)
 		prop.global.check_visibility(v, self, v.module, false)
 		var psig = prop.signature_for(type_lvalue)
 		_assign_method = prop
-		if not v.check_conform_expr(n_value, psig[0].not_for_self) then return
-		if not v.check_conform(self, psig.return_type.not_for_self, n_value.stype) then return
+		if not v.check_conform_expr(n_value, psig[0].not_for_self) then return null
+		return psig.return_type.not_for_self
 	end
 
 	# Method used through the reassigment operator (once computed)
@@ -580,7 +582,9 @@ redef class AVarReassignExpr
 		v.variable_ctx.check_is_set(self, variable)
 		v.variable_ctx.mark_is_set(variable)
 		var t = v.variable_ctx.stype(variable)
-		do_lvalue_typing(v, t)
+		var t2 = do_rvalue_typing(v, t)
+		if t2 == null then return
+		v.check_conform(self, t2, n_value.stype)
 		_is_typed = true
 	end
 end
@@ -918,7 +922,9 @@ redef class AAttrReassignExpr
 	do
 		do_typing(v)
 		if prop == null then return
-		do_lvalue_typing(v, attr_type)
+		var t = do_rvalue_typing(v, attr_type)
+		if t == null then return
+		v.check_conform(self, t, n_value.stype)
 		_is_typed = true
 	end
 end
@@ -1199,7 +1205,9 @@ special AReassignFormExpr
 		var t = prop.signature_for(n_expr.stype).return_type
 		if not n_expr.is_self then t = t.not_for_self
 
-		do_lvalue_typing(v, t)
+		var t2 = do_rvalue_typing(v, t)
+		if t2 == null then return
+		v.check_conform(self, t2, n_value.stype)
 
 		_read_prop = prop
 		var old_args = arguments
