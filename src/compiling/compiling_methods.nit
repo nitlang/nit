@@ -1059,7 +1059,8 @@ redef class AIfexprExpr
 	end
 end
 
-redef class AControlableBlock
+class AControlableBlock
+special PExpr
 	meth compile_inside_block(v: CompilerVisitor) is abstract
 	redef meth compile_stmt(v)
 	do
@@ -1078,6 +1079,7 @@ redef class AControlableBlock
 end
 
 redef class AWhileExpr
+special AControlableBlock
 	redef meth compile_inside_block(v)
 	do
 		v.add_instr("while (true) \{ /*while*/")
@@ -1094,6 +1096,7 @@ redef class AWhileExpr
 end
 
 redef class AForExpr
+special AControlableBlock
 	redef meth compile_inside_block(v)
 	do
 		var e = v.compile_expr(n_expr)

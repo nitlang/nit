@@ -20,7 +20,6 @@ package syntax
 
 import mmloader
 import mmbuilder
-import control_flow
 import typing
 
 # Loader of nit source files
@@ -61,7 +60,6 @@ redef class MMSrcModule
 	private meth process_supermodules(tc: ToolContext)
 	do
 		node.import_super_modules(tc, self)
-		
 	end
 
 	# Syntax analysis and MM construction for the module
@@ -73,11 +71,6 @@ redef class MMSrcModule
 
 		do_typing(tc)
 		if tc.error_count > 0 then exit(1)
-
-		do_control_flow(tc)
-		if tc.error_count > 0 then exit(1)
-
 	end
-
 end
 

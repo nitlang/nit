@@ -69,6 +69,9 @@ special AbsSyntaxVisitor
 		end
 	end
 
+	# Number of nested once
+	readable writable attr _once_count: Int = 0
+
 	init(tc, module) do super
 
 	private meth get_default_constructor_for(n: PNode, c: MMLocalClass, prop: MMSrcMethod): MMMethod
@@ -139,6 +142,29 @@ abstract class VariableContext
 	meth add(v: Variable)
 	do
 		_dico[v.name] = v
+		_all_variables.add(v)
+	end
+
+	meth mark_is_set(v: Variable)
+	do
+		_set_variables.add(v)
+	end
+
+	meth check_is_set(n: PNode, v: Variable)
+	do
+		if v.must_be_set and not is_set(v) then
+			_visitor.error(n, "Error: variable '{v}' is possibly unset.")
+			var x = self
+			while true do
+				print "  {x.node.locate}: {x._set_variables.join(", ")} ; {x._dico.join(", ")}"
+				var x0 = x
+				if x0 isa SubVariableContext then
+					x = x0.prev
+				else
+					break
+				end
+			end
+		end
 	end
 
 	# The effective static type of a given variable
@@ -150,6 +176,9 @@ abstract class VariableContext
 
 	# Variables by name (in the current context only)
 	attr _dico: Map[Symbol, Variable]
+
+	# All variables in all contextes
+	attr _all_variables: Set[Variable]
 
 	# Build a new VariableContext
 	meth sub(node: PNode): SubVariableContext
@@ -175,6 +204,52 @@ abstract class VariableContext
 		_node = node
 		_dico = new HashMap[Symbol, Variable]
 	end
+
+	# Is a control flow break met? (return, break, continue)
+	readable writable attr _unreash: Bool = false
+
+	# Is a control flow already broken?
+	# Used to avoid repeating the same error message
+	readable writable attr _already_unreash: Bool = false
+
+	# Set of variable that are set (assigned)
+	readable attr _set_variables: HashSet[Variable] = new HashSet[Variable]
+
+	# Is a variable set?
+	meth is_set(v: Variable): Bool
+	do
+		return _set_variables.has(v)
+	end
+
+	# Merge back one flow context information
+	meth merge(ctx: VariableContext)
+	do
+		if ctx.unreash then
+			unreash = true
+			if ctx.already_unreash then already_unreash = true
+			return
+		end
+		for v in _all_variables do
+			if not is_set(v) and ctx.is_set(v) then
+				mark_is_set(v)
+			end
+		end
+	end
+
+	# Merge back two alternative flow context informations
+	meth merge2(ctx1, ctx2: VariableContext)
+	do
+		if ctx1.unreash then
+			merge(ctx2)
+		else if ctx2.unreash then
+			merge(ctx1)
+		end
+		for v in _all_variables do
+			if not is_set(v) and ctx1.is_set(v) and ctx2.is_set(v) then
+				mark_is_set(v)
+			end
+		end
+	end
 end
 
 class RootVariableContext
@@ -182,6 +257,7 @@ special VariableContext
 	init(visitor: AbsSyntaxVisitor, node: PNode)
 	do
 		super(visitor, node)
+		_all_variables = new HashSet[Variable]
 	end
 end
 
@@ -207,6 +283,12 @@ special VariableContext
 	do
 		init(p._visitor, node)
 		_prev = p
+		_all_variables = p._all_variables
+	end
+
+	redef meth is_set(v)
+	do
+		return _set_variables.has(v) or _prev.is_set(v)
 	end
 end
 
@@ -230,6 +312,16 @@ special SubVariableContext
 		_var_type =t
 	end
 end
+
+redef class Variable
+	# Is the variable must be set before being used ?
+	meth must_be_set: Bool do return false
+end
+
+redef class VarVariable
+	redef meth must_be_set do return true
+end
+
 
 ###############################################################################
 
@@ -268,6 +360,16 @@ redef class AMethPropdef
 		v.variable_ctx = new RootVariableContext(v, self)
 		_self_var = v.self_var
 		super
+	end
+end
+
+redef class AConcreteMethPropdef
+	redef meth accept_typing(v)
+	do
+		super
+		if v.variable_ctx.unreash == false and method.signature.return_type != null then
+			v.error(self, "Control error: Reached end of function (a 'return' with a value was expected).")
+		end
 	end
 end
 
@@ -346,6 +448,17 @@ redef class AClosureDecl
 
 		super
 
+		if n_expr != null then
+			if v.variable_ctx.unreash == false then
+				if variable.closure.signature.return_type != null then
+					v.error(self, "Control error: Reached end of block (a 'continue' with a value was expected).")
+				else if variable.closure.is_break then
+					v.error(self, "Control error: Reached end of break block (an 'abort' was expected).")
+				end
+			end
+		end
+
+		old_var_ctx.merge(v.variable_ctx)
 		v.variable_ctx = old_var_ctx
 		v.escapable_ctx.pop
 	end
@@ -395,6 +508,7 @@ redef class AVardeclExpr
 		var va = new VarVariable(n_id.to_symbol, self)
 		variable = va
 		v.variable_ctx.add(va)
+		if n_expr != null then v.variable_ctx.mark_is_set(va)
 
 		if n_type != null then
 			va.stype = n_type.stype
@@ -415,8 +529,15 @@ redef class ABlockExpr
 		var old_var_ctx = v.variable_ctx
 		v.variable_ctx = v.variable_ctx.sub(self)
 
-		super
+		for e in n_expr do
+			if v.variable_ctx.unreash and not v.variable_ctx.already_unreash then
+				v.variable_ctx.already_unreash = true
+				v.warning(e, "Warning: unreachable statement.")
+			end
+			v.visit(e)
+		end
 
+		old_var_ctx.merge(v.variable_ctx)
 		v.variable_ctx = old_var_ctx
 		_is_typed = true
 	end
@@ -425,6 +546,7 @@ end
 redef class AReturnExpr
 	redef meth after_typing(v)
 	do
+		v.variable_ctx.unreash = true
 		var t = v.local_property.signature.return_type
 		if n_expr == null and t != null then
 			v.error(self, "Error: Return without value in a function.")
@@ -440,6 +562,7 @@ end
 redef class AContinueExpr
 	redef meth after_typing(v)
 	do
+		v.variable_ctx.unreash = true
 		var esc = compute_escapable_block(v.escapable_ctx)
 		if esc == null then return
 
@@ -463,6 +586,7 @@ end
 redef class ABreakExpr
 	redef meth after_typing(v)
 	do
+		v.variable_ctx.unreash = true
 		var esc = compute_escapable_block(v.escapable_ctx)
 		if esc == null then return
 
@@ -479,6 +603,13 @@ redef class ABreakExpr
 	end
 end
 
+redef class AAbortExpr
+	redef meth after_typing(v)
+	do
+		v.variable_ctx.unreash = true
+	end
+end
+
 redef class AIfExpr
 	redef meth accept_typing(v)
 	do
@@ -487,13 +618,21 @@ redef class AIfExpr
 		v.check_conform_expr(n_expr, v.type_bool)
 
 		v.use_if_true_variable_ctx(n_expr)
+		v.variable_ctx = v.variable_ctx.sub(n_then)
 
 		v.visit(n_then)
-		# Restore variable ctx
-		v.variable_ctx = old_var_ctx
 
-		if n_else != null then
+		if n_else == null then
+			# Restore variable ctx since the 'then' block is optional
+			v.variable_ctx = old_var_ctx
+		else
+			# Remember what appened in the 'then'
+			var then_var_ctx = v.variable_ctx
+			# Reset to process the 'else'
+			v.variable_ctx = old_var_ctx.sub(n_else)
 			v.visit(n_else)
+			# Merge then and else in the old control_flow
+			old_var_ctx.merge2(then_var_ctx, v.variable_ctx)
 			v.variable_ctx = old_var_ctx
 		end
 		_is_typed = true
@@ -591,6 +730,7 @@ redef class AVarExpr
 
 	redef meth after_typing(v)
 	do
+		v.variable_ctx.check_is_set(self, variable)
 		_stype = v.variable_ctx.stype(variable)
 		_is_typed = _stype != null
 	end
@@ -599,6 +739,7 @@ end
 redef class AVarAssignExpr
 	redef meth after_typing(v)
 	do
+		v.variable_ctx.mark_is_set(variable)
 		var t = v.variable_ctx.stype(variable)
 		v.check_conform_expr(n_value, t)
 		_is_typed = true
@@ -633,6 +774,8 @@ end
 redef class AVarReassignExpr
 	redef meth after_typing(v)
 	do
+		v.variable_ctx.check_is_set(self, variable)
+		v.variable_ctx.mark_is_set(variable)
 		var t = v.variable_ctx.stype(variable)
 		do_lvalue_typing(v, t)
 		_is_typed = true
@@ -1427,6 +1570,7 @@ special AAbsAbsSendExpr
 	redef meth after_typing(v)
 	do
 		var va = variable
+		if va.closure.is_break then v.variable_ctx.unreash = true
 		var sig = va.closure.signature
 		var args = process_signature(v, sig, n_id.to_symbol, n_args.to_a)
 		if not n_closure_defs.is_empty then
@@ -1479,6 +1623,14 @@ redef class AClosureDef
 
 		_accept_typing2 = true
 		accept_typing(v)
+
+		if v.variable_ctx.unreash == false then
+			if closure.signature.return_type != null then
+				v.error(self, "Control error: Reached end of block (a 'continue' with a value was expected).")
+			else if closure.is_break then
+				v.error(self, "Control error: Reached end of break block (a 'break' was expected).")
+			end
+		end
 		v.variable_ctx = old_var_ctx
 	end
 end
@@ -1531,3 +1683,18 @@ redef class AProxyExpr
 		_stype = n_expr.stype
 	end
 end
+
+redef class AOnceExpr
+	redef meth accept_typing(v)
+	do
+		if v.once_count > 0 then
+			v.warning(self, "Useless once in a once expression.")
+		end
+		v.once_count = v.once_count + 1
+
+		super
+
+		v.once_count = v.once_count - 1
+	end
+end
+
