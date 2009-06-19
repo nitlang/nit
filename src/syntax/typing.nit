@@ -1335,6 +1335,7 @@ redef class ACallFormExpr
 				else
 					if not n_args.is_empty then
 						v.error(self, "Error: {name} is variable, not a function.")
+						return
 					end
 					var vform = variable_create(variable)
 					vform.variable = variable
