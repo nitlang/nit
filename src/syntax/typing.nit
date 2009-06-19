@@ -544,7 +544,12 @@ redef class AVarAssignExpr
 	do
 		v.variable_ctx.mark_is_set(variable)
 		var t = v.variable_ctx.stype(variable)
-		v.check_conform_expr(n_value, t)
+		if v.check_conform_expr(n_value, variable.stype) then
+			# Fall back to base type if current type does not match
+			if not n_value.stype < t then
+				v.variable_ctx.stype(variable) = variable.stype
+			end
+		end
 		_is_typed = true
 	end
 end
@@ -584,7 +589,12 @@ redef class AVarReassignExpr
 		var t = v.variable_ctx.stype(variable)
 		var t2 = do_rvalue_typing(v, t)
 		if t2 == null then return
-		v.check_conform(self, t2, n_value.stype)
+		if v.check_conform(self, t2, variable.stype) then
+			# Fall back to base type if current type does not match
+			if not t2 < t then
+				v.variable_ctx.stype(variable) = variable.stype
+			end
+		end
 		_is_typed = true
 	end
 end
