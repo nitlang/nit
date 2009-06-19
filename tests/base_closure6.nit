@@ -42,10 +42,10 @@ end
 
 var a = new A
 
-var t: T
-var u: U
-var v: V
-var w: W
+var t: T = new T
+var u: U = new U
+var v: V = new V
+var w: W = new W
 
 var y: Object
 #alt1#var y: U
