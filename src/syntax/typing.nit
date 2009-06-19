@@ -123,7 +123,7 @@ end
 
 # Associate symbols to variable and variables to type
 # Can be nested
-private class VariableContext
+abstract class VariableContext
 	# Look for the variable from its name
 	# Return null if nothing found
 	meth [](s: Symbol): Variable
@@ -141,7 +141,6 @@ private class VariableContext
 		_dico[v.name] = v
 	end
 
-
 	# The effective static type of a given variable
 	# May be different from the declaration static type
 	meth stype(v: Variable): MMType
@@ -153,24 +152,40 @@ private class VariableContext
 	attr _dico: Map[Symbol, Variable]
 
 	# Build a new VariableContext
-	meth sub: SubVariableContext
+	meth sub(node: PNode): SubVariableContext
 	do
-		return new SubVariableContext.with_prev(self)
+		return new SubVariableContext.with_prev(self, node)
 	end
 
 	# Build a nested VariableContext with new variable information
-	meth sub_with(v: Variable, t: MMType): SubVariableContext
+	meth sub_with(node: PNode, v: Variable, t: MMType): SubVariableContext
 	do
-		return new CastVariableContext.with_prev(self, v, t)
+		return new CastVariableContext.with_prev(self, node, v, t)
 	end
 
-	init
-	do 
+	# The visitor of the context (used to display error)
+	attr _visitor: AbsSyntaxVisitor
+
+	# The syntax node that introduced the context
+	readable attr _node: PNode
+
+	init(visitor: AbsSyntaxVisitor, node: PNode)
+	do
+		_visitor = visitor
+		_node = node
 		_dico = new HashMap[Symbol, Variable]
 	end
 end
 
-private class SubVariableContext
+class RootVariableContext
+special VariableContext
+	init(visitor: AbsSyntaxVisitor, node: PNode)
+	do
+		super(visitor, node)
+	end
+end
+
+class SubVariableContext
 special VariableContext
 	readable attr _prev: VariableContext
 
@@ -188,14 +203,14 @@ special VariableContext
 		return prev.stype(v)
 	end
 
-	init with_prev(p: VariableContext)
+	init with_prev(p: VariableContext, node: PNode)
 	do
-		init
+		init(p._visitor, node)
 		_prev = p
 	end
 end
 
-private class CastVariableContext
+class CastVariableContext
 special SubVariableContext
 	attr _variable: Variable
 	attr _var_type: MMType
@@ -208,9 +223,9 @@ special SubVariableContext
 		return prev.stype(v)
 	end
 
-	init with_prev(p: VariableContext, v: Variable, t: MMType)
+	init with_prev(p: VariableContext, node: PNode, v: Variable, t: MMType)
 	do
-		super(p)
+		super(p, node)
 		_variable = v
 		_var_type =t
 	end
@@ -250,7 +265,7 @@ redef class AMethPropdef
 	redef readable attr _self_var: ParamVariable
 	redef meth accept_typing(v)
 	do
-		v.variable_ctx = new VariableContext
+		v.variable_ctx = new RootVariableContext(v, self)
 		_self_var = v.self_var
 		super
 	end
@@ -324,7 +339,7 @@ redef class AClosureDecl
 		v.variable_ctx.add(variable)
 
 		var old_var_ctx = v.variable_ctx
-		v.variable_ctx = v.variable_ctx.sub
+		v.variable_ctx = v.variable_ctx.sub(self)
 
 		_escapable = new EscapableClosure(self, variable.closure, null)
 		v.escapable_ctx.push(_escapable)
@@ -398,7 +413,7 @@ redef class ABlockExpr
 	redef meth accept_typing(v)
 	do
 		var old_var_ctx = v.variable_ctx
-		v.variable_ctx = v.variable_ctx.sub
+		v.variable_ctx = v.variable_ctx.sub(self)
 
 		super
 
@@ -493,10 +508,13 @@ redef class AWhileExpr
 	do
 		_escapable = new EscapableBlock(self)
 		v.escapable_ctx.push(_escapable)
+		var old_var_ctx = v.variable_ctx
+		v.variable_ctx = v.variable_ctx.sub(self)
 
 		super
 
 		v.check_conform_expr(n_expr, v.type_bool)
+		v.variable_ctx = old_var_ctx
 		v.escapable_ctx.pop
 		_is_typed = true
 	end
@@ -515,7 +533,8 @@ redef class AForExpr
 		_escapable = new EscapableBlock(self)
 		v.escapable_ctx.push(_escapable)
 
-		v.variable_ctx = v.variable_ctx.sub
+		var old_var_ctx = v.variable_ctx
+		v.variable_ctx = v.variable_ctx.sub(self)
 		var va = new AutoVariable(n_id.to_symbol, self)
 		variable = va
 		v.variable_ctx.add(va)
@@ -552,10 +571,7 @@ redef class AForExpr
 		if n_block != null then v.visit(n_block)
 
 		# pop context
-		var varctx = v.variable_ctx
-		assert varctx isa SubVariableContext
-		v.variable_ctx = varctx.prev
-
+		v.variable_ctx = old_var_ctx
 		v.escapable_ctx.pop
 		_is_typed = true
 	end
@@ -1450,7 +1466,8 @@ redef class AClosureDef
 
 		closure = esc.closure
 
-		v.variable_ctx = v.variable_ctx.sub
+		var old_var_ctx = v.variable_ctx
+		v.variable_ctx = v.variable_ctx.sub(self)
 		variables = new Array[AutoVariable]
 		for i in [0..n_id.length[ do
 			var va = new AutoVariable(n_id[i].to_symbol, self)
@@ -1461,6 +1478,7 @@ redef class AClosureDef
 
 		_accept_typing2 = true
 		accept_typing(v)
+		v.variable_ctx = old_var_ctx
 	end
 end
 
@@ -1486,7 +1504,7 @@ special ATypeCheckExpr
 		check_expr_cast(v, n_expr, n_type)
 		var variable = n_expr.its_variable
 		if variable != null then
-			_if_true_variable_ctx = v.variable_ctx.sub_with(variable, n_type.stype)
+			_if_true_variable_ctx = v.variable_ctx.sub_with(self, variable, n_type.stype)
 		end
 		_stype = v.type_bool
 		_is_typed = true
