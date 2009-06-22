@@ -477,9 +477,19 @@ redef class AWhileExpr
 		v.base_variable_ctx = v.variable_ctx
 		v.variable_ctx = v.variable_ctx.sub(self)
 
-		super
-
+		# Process condition
+		v.visit(n_expr)
 		v.check_conform_expr(n_expr, v.type_bool)
+
+		# Prepare inside context (assert cond)
+		v.use_if_true_variable_ctx(n_expr)
+
+		# Process inside
+		if n_block != null then
+			v.variable_ctx = v.variable_ctx.sub(n_block)
+			v.visit(n_block)
+		end
+
 		v.variable_ctx = old_var_ctx
 		v.base_variable_ctx = old_base_var_ctx
 		v.escapable_ctx.pop

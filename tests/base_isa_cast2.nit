@@ -47,7 +47,7 @@ end
 a.foo(4)
 a = a0
 while a isa B do
-	#alt8#a.foo(5)
+	a.foo(5)
 	a = new A
 	#alt5#a.foo(-5)
 end
