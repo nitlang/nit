@@ -696,7 +696,7 @@ redef class ABoolExpr
 end
 
 redef class AOrExpr
-	redef meth after_typing(v)
+	redef meth accept_typing(v)
 	do
 		var old_var_ctx = v.variable_ctx
 

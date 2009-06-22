@@ -19,10 +19,10 @@ import kernel
 class A
 	init do end
 end
-
 class B
 special A
 	meth foo(i: Int) do i.output
+	meth bar: Bool do return true
 	init do end
 end
 
@@ -56,5 +56,17 @@ else
 end
 #alt8#a.foo(-8)
 
+if a isa B and a.bar then
+	a.foo(4)
+end
 
+if not a isa B or not a.bar then
+	#alt9# a.foo(-9)
+else
+	a.foo(5)
+end
+
+if not (not a isa B or not a.bar) then
+	a.foo(6)
+end
 
