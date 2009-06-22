@@ -65,9 +65,14 @@ special AbsSyntaxVisitor
 	private meth use_if_true_variable_ctx(e: PExpr)
 	do
 		var ctx = e.if_true_variable_ctx
-		if ctx != null then
-			variable_ctx = ctx
-		end
+		if ctx != null then variable_ctx = ctx
+	end
+
+	# Make the if_false_variable_ctx of the expression effective
+	private meth use_if_false_variable_ctx(e: PExpr)
+	do
+		var ctx = e.if_false_variable_ctx
+		if ctx != null then variable_ctx = ctx
 	end
 
 	# Number of nested once
@@ -303,6 +308,9 @@ redef class PExpr
 
 	# The variable type information if current boolean expression is true
 	readable private attr _if_true_variable_ctx: VariableContext
+
+	# The variable type information if current boolean expression is false
+	readable private attr _if_false_variable_ctx: VariableContext
 end
 
 redef class AVardeclExpr
@@ -420,24 +428,31 @@ redef class AIfExpr
 		v.visit(n_expr)
 		v.check_conform_expr(n_expr, v.type_bool)
 
+		# Prepare 'then' context
 		v.use_if_true_variable_ctx(n_expr)
-		v.variable_ctx = v.variable_ctx.sub(n_then)
 
-		v.visit(n_then)
-
-		if n_else == null then
-			# Restore variable ctx since the 'then' block is optional
-			v.variable_ctx = old_var_ctx
-		else
-			# Remember what appened in the 'then'
-			var then_var_ctx = v.variable_ctx
-			# Reset to process the 'else'
-			v.variable_ctx = old_var_ctx.sub(n_else)
-			v.visit(n_else)
-			# Merge then and else in the old control_flow
-			old_var_ctx.merge2(then_var_ctx, v.variable_ctx)
-			v.variable_ctx = old_var_ctx
+		# Process the 'then'
+		if n_then != null then
+			v.variable_ctx = v.variable_ctx.sub(n_then)
+			v.visit(n_then)
 		end
+
+		# Remember what appened in the 'then'
+		var then_var_ctx = v.variable_ctx
+
+		# Prepare 'else' context
+		v.variable_ctx = old_var_ctx
+		v.use_if_false_variable_ctx(n_expr)
+
+		# Process the 'else'
+		if n_else != null then
+			v.variable_ctx = v.variable_ctx.sub(n_else)
+			v.visit(n_else)
+		end
+
+		# Merge 'then' and 'else' contexts
+		old_var_ctx.merge2(then_var_ctx, v.variable_ctx)
+		v.variable_ctx = old_var_ctx
 		_is_typed = true
 	end
 end
@@ -635,6 +650,7 @@ redef class AIfexprExpr
 		v.use_if_true_variable_ctx(n_expr)
 		v.visit(n_then)
 		v.variable_ctx = old_var_ctx
+		v.use_if_false_variable_ctx(n_expr)
 		v.visit(n_else)
 
 		v.check_conform_expr(n_expr, v.type_bool)
@@ -655,6 +671,20 @@ end
 redef class AOrExpr
 	redef meth after_typing(v)
 	do
+		var old_var_ctx = v.variable_ctx
+
+		v.visit(n_expr)
+		v.use_if_false_variable_ctx(n_expr)
+
+		v.visit(n_expr2)
+		if n_expr2.if_false_variable_ctx != null then 
+			_if_false_variable_ctx = n_expr2.if_false_variable_ctx
+		else
+			_if_false_variable_ctx = v.variable_ctx
+		end
+
+		v.variable_ctx = old_var_ctx
+
 		v.check_conform_expr(n_expr, v.type_bool)
 		v.check_conform_expr(n_expr2, v.type_bool)
 		_stype = v.type_bool
@@ -690,6 +720,11 @@ redef class ANotExpr
 	redef meth after_typing(v)
 	do
 		v.check_conform_expr(n_expr, v.type_bool)
+
+		# Invert if_true/if_false information
+		_if_false_variable_ctx = n_expr._if_true_variable_ctx
+		_if_true_variable_ctx = n_expr._if_false_variable_ctx
+
 		_stype = v.type_bool
 		_is_typed = true
 	end
