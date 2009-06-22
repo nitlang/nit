@@ -161,6 +161,18 @@ abstract class VariableContext
 			end
 		end
 	end
+
+	redef meth to_s
+	do
+		var s = new Buffer
+		s.append(node.locate)
+		for v in _all_variables do
+			var t = stype(v)
+			if t == null then continue
+			s.append(" {v}:{t}")
+		end
+		return s.to_s
+	end
 end
 
 class RootVariableContext
