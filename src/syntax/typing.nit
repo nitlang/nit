@@ -46,6 +46,9 @@ special AbsSyntaxVisitor
 	# Current knowledge about variables names and types
 	readable writable attr _variable_ctx: VariableContext
 
+	# Non-bypassable knowledge about variables names and types
+	readable writable attr _base_variable_ctx: VariableContext
+
 	# Current knowledge about escapable blocks
 	readable writable attr _escapable_ctx: EscapableContext = new EscapableContext(self)
 
@@ -166,6 +169,7 @@ redef class AMethPropdef
 	redef meth accept_typing(v)
 	do
 		v.variable_ctx = new RootVariableContext(v, self)
+		v.base_variable_ctx = v.variable_ctx
 		_self_var = v.self_var
 		super
 	end
@@ -249,6 +253,8 @@ redef class AClosureDecl
 		v.variable_ctx.add(variable)
 
 		var old_var_ctx = v.variable_ctx
+		var old_base_var_ctx = v.base_variable_ctx
+		v.base_variable_ctx = v.variable_ctx
 		v.variable_ctx = v.variable_ctx.sub(self)
 
 		_escapable = new EscapableClosure(self, variable.closure, null)
@@ -268,6 +274,7 @@ redef class AClosureDecl
 
 		old_var_ctx.merge(v.variable_ctx)
 		v.variable_ctx = old_var_ctx
+		v.base_variable_ctx = old_base_var_ctx
 		v.escapable_ctx.pop
 	end
 end
@@ -451,7 +458,7 @@ redef class AIfExpr
 		end
 
 		# Merge 'then' and 'else' contexts
-		old_var_ctx.merge2(then_var_ctx, v.variable_ctx)
+		old_var_ctx.merge2(then_var_ctx, v.variable_ctx, v.base_variable_ctx)
 		v.variable_ctx = old_var_ctx
 		_is_typed = true
 	end
@@ -466,12 +473,15 @@ redef class AWhileExpr
 		_escapable = new EscapableBlock(self)
 		v.escapable_ctx.push(_escapable)
 		var old_var_ctx = v.variable_ctx
+		var old_base_var_ctx = v.base_variable_ctx
+		v.base_variable_ctx = v.variable_ctx
 		v.variable_ctx = v.variable_ctx.sub(self)
 
 		super
 
 		v.check_conform_expr(n_expr, v.type_bool)
 		v.variable_ctx = old_var_ctx
+		v.base_variable_ctx = old_base_var_ctx
 		v.escapable_ctx.pop
 		_is_typed = true
 	end
@@ -491,6 +501,8 @@ redef class AForExpr
 		v.escapable_ctx.push(_escapable)
 
 		var old_var_ctx = v.variable_ctx
+		var old_base_var_ctx = v.base_variable_ctx
+		v.base_variable_ctx = v.variable_ctx
 		v.variable_ctx = v.variable_ctx.sub(self)
 		var va = new AutoVariable(n_id.to_symbol, self)
 		variable = va
@@ -529,6 +541,7 @@ redef class AForExpr
 
 		# pop context
 		v.variable_ctx = old_var_ctx
+		v.base_variable_ctx = old_base_var_ctx
 		v.escapable_ctx.pop
 		_is_typed = true
 	end
@@ -559,12 +572,14 @@ redef class AVarAssignExpr
 	do
 		v.variable_ctx.mark_is_set(variable)
 		var t = v.variable_ctx.stype(variable)
-		if v.check_conform_expr(n_value, variable.stype) then
-			# Fall back to base type if current type does not match
-			if not n_value.stype < t then
-				v.variable_ctx.stype(variable) = variable.stype
-			end
-		end
+
+		# Check the base type
+		var btype = v.base_variable_ctx.stype(variable)
+		if not v.check_conform_expr(n_value, btype) then return
+
+		# Bypasse cast if then current type does not match
+		if not n_value.stype < t then v.variable_ctx.stype(variable) = btype
+
 		_is_typed = true
 	end
 end
@@ -604,12 +619,14 @@ redef class AVarReassignExpr
 		var t = v.variable_ctx.stype(variable)
 		var t2 = do_rvalue_typing(v, t)
 		if t2 == null then return
-		if v.check_conform(self, t2, variable.stype) then
-			# Fall back to base type if current type does not match
-			if not t2 < t then
-				v.variable_ctx.stype(variable) = variable.stype
-			end
-		end
+
+		# Check the base type
+		var btype = v.base_variable_ctx.stype(variable)
+		if not v.check_conform(n_value, t2, btype) then return
+
+		# Bypasse cast if then current type does not match
+		if not t2 < t then v.variable_ctx.stype(variable) = btype
+
 		_is_typed = true
 	end
 end
@@ -1468,6 +1485,8 @@ redef class AClosureDef
 		closure = esc.closure
 
 		var old_var_ctx = v.variable_ctx
+		var old_base_var_ctx = v.base_variable_ctx
+		v.base_variable_ctx = v.variable_ctx
 		v.variable_ctx = v.variable_ctx.sub(self)
 		variables = new Array[AutoVariable]
 		for i in [0..n_id.length[ do
@@ -1488,6 +1507,7 @@ redef class AClosureDef
 			end
 		end
 		v.variable_ctx = old_var_ctx
+		v.base_variable_ctx = old_base_var_ctx
 	end
 end
 

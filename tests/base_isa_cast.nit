@@ -19,21 +19,21 @@ import kernel
 class A
 	init do end
 end
-
 class B
 special A
 	meth foo do 0.output
 	init do end
 end
-
 class C
 special B
 	meth bar do 1.output
 	init do end
 end
 
+
+#alt5# var b: A = new B
 var a: A = new C
-#alt5# a = new B
+#alt5# a = b
 #alt6# a = new A
 if a isa B then
 	a.foo

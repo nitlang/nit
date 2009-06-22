@@ -1,3 +1,2 @@
-alt/base_isa_cast2_alt8.nit:47,1--7: Error: Method 'foo' doesn't exists in A.
 alt/base_isa_cast2_alt8.nit:50,2--8: Error: Method 'foo' doesn't exists in A.
 alt/base_isa_cast2_alt8.nit:62,1--7: Error: Method 'foo' doesn't exists in A.

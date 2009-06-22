@@ -144,11 +144,14 @@ abstract class VariableContext
 			if not is_set(v) and ctx.is_set(v) then
 				mark_is_set(v)
 			end
+			var s = stype(v)
+			var s1 = ctx.stype(v)
+			if s1 != s then stype(v) = s1
 		end
 	end
 
 	# Merge back two alternative flow context informations
-	meth merge2(ctx1, ctx2: VariableContext)
+	meth merge2(ctx1, ctx2, basectx: VariableContext)
 	do
 		if ctx1.unreash then
 			merge(ctx2)
@@ -158,6 +161,21 @@ abstract class VariableContext
 		for v in _all_variables do
 			if not is_set(v) and ctx1.is_set(v) and ctx2.is_set(v) then
 				mark_is_set(v)
+			end
+
+			var s = stype(v)
+			var s1 = ctx1.stype(v)
+			var s2 = ctx2.stype(v)
+			if s1 == s and s2 == s then
+				# NOP
+			else if s1 == s2 then
+				stype(v) = s1
+			else if s1 < s2 then
+				stype(v) = s2
+			else if s2 < s1 then
+				stype(v) = s1
+			else
+				stype(v) = basectx.stype(v)
 			end
 		end
 	end

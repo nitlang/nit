@@ -36,12 +36,12 @@ special A
 	init do end
 end
 
-var a: A
-var ab: A
-var b: B
-a = new A
-ab = new B
-b = new B
+var a: A = new A
+var ab: A = new B
+var b: B = new B
+
+
+
 (not(a == b)).output
 (a == a).output
 (a isa A).output

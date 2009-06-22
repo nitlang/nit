@@ -26,13 +26,13 @@ class B
 	init do end
 end
 
-var a: Object
-var a = new A
-var b = new B
+
+var a: Object = new A
+var b: Object = new B
 (a isa A).output
 (a isa Object).output
 (not a isa B).output
-a = null
-(a isa A).output
-(a isa Object).output
-(a isa B).output
+var c: Object = null
+(c isa A).output
+(c isa Object).output
+(c isa B).output
