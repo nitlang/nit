@@ -587,8 +587,8 @@ redef class AVarAssignExpr
 		var btype = v.base_variable_ctx.stype(variable)
 		if not v.check_conform_expr(n_value, btype) then return
 
-		# Bypasse cast if then current type does not match
-		if not n_value.stype < t then v.variable_ctx.stype(variable) = btype
+		# Always cast
+		v.variable_ctx.stype(variable) = n_value.stype
 
 		_is_typed = true
 	end
@@ -634,8 +634,8 @@ redef class AVarReassignExpr
 		var btype = v.base_variable_ctx.stype(variable)
 		if not v.check_conform(n_value, t2, btype) then return
 
-		# Bypasse cast if then current type does not match
-		if not t2 < t then v.variable_ctx.stype(variable) = btype
+		# Always cast
+		v.variable_ctx.stype(variable) = t2
 
 		_is_typed = true
 	end

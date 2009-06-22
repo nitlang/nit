@@ -20,7 +20,7 @@ class C
 	init do end
 end
 
-var an: Object
+
 var c = new C
 var i = 5
 var a = [c]
@@ -32,30 +32,30 @@ var id4: Int
 
 id1 = c.object_id
 print(c.object_id == id1)
-an = c
-print(an.object_id == id1)
+var an1: Object = c
+print(an1.object_id == id1)
 print((new C).object_id != id1)
 printn('\n')
 
 id2 = i.object_id
 print(id1 != id2)
 print(i.object_id == id2)
-an = i
-print(an.object_id == id2)
+var an2: Object = i
+print(an2.object_id == id2)
 print(5.object_id == id2)
 printn('\n')
 
 id3 = a.object_id
 print(id1 != id3 and id2 != id3)
 print(a.object_id == id3)
-an = a
-print(an.object_id == id3)
+var an3: Object = a
+print(an3.object_id == id3)
 print([c].object_id != id3)
 printn('\n')
 
 id4 = s.object_id
 print(id1 != id4 and id2 != id4 and id3 != id4)
 print(s.object_id == id4)
-an = s
-print(an.object_id == id4)
+var an4: Object = s
+print(an4.object_id == id4)
 print("Bonjour".object_id != id4)

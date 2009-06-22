@@ -14,30 +14,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-var a : Object
+
 print("int:")
-a = 5
-print(a isa Int)
-print(not a isa String)
-print(not a isa AbstractArray[Char])
-print(not a isa Iterator[Int])
-print(a isa Discrete)
-print(a isa Object)
+var a1: Object = 5
+print(a1 isa Int)
+print(not a1 isa String)
+print(not a1 isa AbstractArray[Char])
+print(not a1 isa Iterator[Int])
+print(a1 isa Discrete)
+print(a1 isa Object)
 
 print("string:")
-a = "Bonjour"
-print(not a isa Int)
-print(a isa String)
-print(a isa AbstractArrayRead[Char])
-print(not a isa Iterator[Int])
-print(not a isa Discrete)
-print(a isa Object)
+var a2: Object = "Bonjour"
+print(not a2 isa Int)
+print(a2 isa String)
+print(a2 isa AbstractArrayRead[Char])
+print(not a2 isa Iterator[Int])
+print(not a2 isa Discrete)
+print(a2 isa Object)
 
 print("null:")
-a = null
-print(a isa Int)
-print(a isa String)
-print(a isa AbstractArray[Char])
-print(a isa Iterator[Int])
-print(a isa Discrete)
-print(a isa Object)
+var a3: Object = null
+print(a3 isa Int)
+print(a3 isa String)
+print(a3 isa AbstractArray[Char])
+print(a3 isa Iterator[Int])
+print(a3 isa Discrete)
+print(a3 isa Object)
