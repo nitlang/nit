@@ -21,6 +21,8 @@ NITCOPTS= #"-I parser -I metamodel -I syntax -I compiling -I tmp"
 name=`basename $0`
 case $name in
 	nc) opts="";;
+	nc0) opts="-p 0"; NITC="../c_src/nitc";;
+	nc1) opts="-p 1"; NITC="./nitc_0";;
 	nc2) opts="-p 2"; NITC="./nitc";;
 	nc3) opts="-p 3"; NITC="./nitc_2";;
 	nc4) opts="-p 4"; NITC="./nitc_3";;
