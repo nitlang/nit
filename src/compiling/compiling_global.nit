@@ -54,17 +54,16 @@ end
 class GlobalAnalysis
 special ColorContext
 	# Associate global classes to compiled classes
-	readable attr _compiled_classes: HashMap[MMGlobalClass, CompiledClass] 
+	readable attr _compiled_classes: HashMap[MMGlobalClass, CompiledClass] = new HashMap[MMGlobalClass, CompiledClass]
 
 	# The main module of the program globally analysed
-	readable attr _module: MMModule 
+	readable attr _module: MMModule
 
 	# FIXME: do something better.
 	readable writable attr _max_class_table_length: Int
 
 	init(module: MMSrcModule)
 	do
-		_compiled_classes = new HashMap[MMGlobalClass, CompiledClass]
 		_module = module
 	end
 end
@@ -84,22 +83,22 @@ end
 class CompiledClass
 special ColorContext
 	# The corresponding local class in the main module of the prgram
-	readable attr _local_class: MMLocalClass 
+	readable attr _local_class: MMLocalClass
 
 	# The identifier of the class
-	readable writable attr _id: Int 
+	readable writable attr _id: Int
 
 	# The full class table of the class
-	readable writable attr _class_table: Array[TableElt] 
+	readable attr _class_table: Array[TableElt] = new Array[TableElt]
 
 	# The full instance table of the class
-	readable writable attr _instance_table: Array[TableElt] 
+	readable attr _instance_table: Array[TableElt] = new Array[TableElt]
 
 	# The proper class table part (no superclasses but all refinements)
-	readable writable attr _class_layout: TableEltComposite 
+	readable attr _class_layout: TableEltComposite = new TableEltComposite(self)
 
 	# The proper instance table part (no superclasses but all refinements)
-	readable writable attr _instance_layout: TableEltComposite 
+	readable attr _instance_layout: TableEltComposite = new TableEltComposite(self)
 
 	init(c: MMLocalClass) do _local_class = c
 end
@@ -109,18 +108,16 @@ redef class MMSrcLocalClass
 	readable attr _class_color_pos: TableEltClassColor
 
 	# The proper local class table part (nor superclasses nor refinments)
-	readable attr _class_layout: Array[TableElt] 
+	readable attr _class_layout: Array[TableElt] = new Array[TableElt]
 
 	# The proper local instance table part (nor superclasses nor refinments)
-	readable attr _instance_layout: Array[TableElt] 
+	readable attr _instance_layout: Array[TableElt] = new Array[TableElt]
 
 	# Build the local layout of the class and feed the module table
 	meth build_layout_in(tc: ToolContext, module_table: Array[ModuleTableElt])
 	do
-		var clt = new Array[TableElt]
-		_class_layout = clt
-		var ilt = new Array[TableElt]
-		_instance_layout = ilt
+		var clt = _class_layout
+		var ilt = _instance_layout
 
 		if global.intro == self then
 			module_table.add(new TableEltClassId(self))
@@ -158,15 +155,13 @@ end
 
 redef class MMSrcModule
 	# The local table of the module (refers things introduced in the module)
-	attr _local_table: Array[ModuleTableElt]
+	attr _local_table: Array[ModuleTableElt] = new Array[ModuleTableElt]
 
 	# Builds the local tables and local classes layouts
 	meth local_analysis(tc: ToolContext)
 	do
-		var lt = new Array[ModuleTableElt]
-		_local_table = lt
 		for c in src_local_classes do
-			c.build_layout_in(tc, lt)
+			c.build_layout_in(tc, _local_table)
 		end
 	end
 
@@ -182,7 +177,7 @@ redef class MMSrcModule
 
 		ctab.add(new TableEltClassSelfId)
 		itab.add(new TableEltVftPointer)
-		
+
 		var pclassid = -1
 		var classid = 3
 
@@ -228,7 +223,7 @@ redef class MMSrcModule
 
 		# Compute core and crown classes for colorization
 		var crown_classes = new HashSet[MMLocalClass]
-		var core_classes = new HashSet[MMLocalClass] 
+		var core_classes = new HashSet[MMLocalClass]
 		for c in smallest_classes do
 			while c.cshe.direct_greaters.length == 1 do
 				c = c.cshe.direct_greaters.first
@@ -247,13 +242,14 @@ redef class MMSrcModule
 			var cc = ga.compiled_classes[c.global]
 			if core_classes.has(c) then
 				# For core classes, just build the table
-				cc.class_table = build_tables(ga, c, ctab)
+				build_tables_in(cc.class_table, ga, c, ctab)
 				if maxcolor < cc.class_table.length then maxcolor = cc.class_table.length
 			else
 				# For other classes, it's easier: just append to the parent tables
 				var sc = c.cshe.direct_greaters.first
 				var scc = ga.compiled_classes[sc.global]
-				cc.class_table = scc.class_table.to_a
+				assert cc.class_table.is_empty
+				cc.class_table.add_all(scc.class_table)
 				var bc = c.global.intro
 				assert bc isa MMSrcLocalClass
 				var colpos = bc.class_color_pos
@@ -268,15 +264,13 @@ redef class MMSrcModule
 		# Fill class table and instance tables pools
 		for c in classes do
 			var cc = ga.compiled_classes[c.global]
-			var cte = new TableEltComposite(cc)
-			var ite = new TableEltComposite(cc)
+			var cte = cc.class_layout
+			var ite = cc.instance_layout
 			for sc in c.crhe.greaters_and_self do
 				if sc isa MMSrcLocalClass then
 					cte.add(sc, sc.class_layout)
 					ite.add(sc, sc.instance_layout)
 				end
-				cc.class_layout = cte
-				cc.instance_layout = ite
 			end
 
 			if core_classes.has(c) then
@@ -294,18 +288,19 @@ redef class MMSrcModule
 		colorize(ga, itab, crown_classes, 0)
 
 		# Build class and instance tables now things are colored
-		ga.max_class_table_length = 0 
+		ga.max_class_table_length = 0
 		for c in classes do
 			var cc = ga.compiled_classes[c.global]
 			if core_classes.has(c) then
 				# For core classes, just build the table
-				cc.class_table = build_tables(ga, c, ctab)
-				cc.instance_table = build_tables(ga, c, itab)
+				build_tables_in(cc.class_table, ga, c, ctab)
+				build_tables_in(cc.instance_table, ga, c, itab)
 			else
 				# For other classes, it's easier: just append to the parent tables
 				var sc = c.cshe.direct_greaters.first
 				var scc = ga.compiled_classes[sc.global]
-				cc.class_table = scc.class_table.to_a
+				cc.class_table.clear
+				cc.class_table.add_all(scc.class_table)
 				var bc = c.global.intro
 				assert bc isa MMSrcLocalClass
 				var colpos = bc.class_color_pos
@@ -314,7 +309,8 @@ redef class MMSrcModule
 					cc.class_table.add(null)
 				end
 				append_to_table(ga, cc.class_table, cc.class_layout)
-				cc.instance_table = scc.instance_table.to_a
+				assert cc.instance_table.is_empty
+				cc.instance_table.add_all(scc.instance_table)
 				append_to_table(ga, cc.instance_table, cc.instance_layout)
 			end
 		end
@@ -331,7 +327,7 @@ redef class MMSrcModule
 		end
 	end
 
-	private meth build_tables(ga: GlobalAnalysis, c: MMLocalClass, elts: Array[TableElt]): Array[TableElt]
+	private meth build_tables_in(table: Array[TableElt], ga: GlobalAnalysis, c: MMLocalClass, elts: Array[TableElt])
 	do
 		var tab = new HashMap[Int, TableElt]
 		var len = 0
@@ -345,21 +341,19 @@ redef class MMSrcModule
 				end
 			end
 		end
-		var res = new Array[TableElt]
 		var i = 0
 		while i < len do
 			if tab.has_key(i) then
 				var e = tab[i]
 				for j in [0..e.length[ do
-					res[i] = e.item(j)
+					table[i] = e.item(j)
 					i = i + 1
 				end
 			else
-				res[i] = null
+				table[i] = null
 				i = i + 1
 			end
 		end
-		return res
 	end
 
 	# Perform coloring
@@ -383,7 +377,7 @@ redef class MMSrcModule
 				while trycolor != color do
 					color = trycolor
 					for c in rel_classes do
-						var idx = 0 
+						var idx = 0
 						while idx < len do
 							if colors.has_key(trycolor + idx) and not free_color(colors[trycolor + idx], c) then
 								trycolor = trycolor + idx + 1
@@ -475,8 +469,8 @@ redef class MMSrcModule
 		v.unindent
 		v.add_instr("}")
 	end
-	
-	# Compile sep files 
+
+	# Compile sep files
 	meth compile_mod_to_c(v: GlobalCompilerVisitor)
 	do
 		v.add_decl("extern const char *LOCATE_{name};")
@@ -675,7 +669,7 @@ special AbsTableElt
 	end
 end
 
-# An element of a class table representing a class information 
+# An element of a class table representing a class information
 class TableEltClass
 special TableElt
 special AbsTableEltClass
@@ -686,7 +680,7 @@ special AbsTableEltClass
 	end
 end
 
-# An element representing the id of a class in a module table 
+# An element representing the id of a class in a module table
 class TableEltClassId
 special ModuleTableElt
 special AbsTableEltClass
@@ -776,7 +770,7 @@ special TableElt
 	end
 end
 
-# The element that 
+# The element that
 class TableEltVftPointer
 special TableElt
 	redef meth is_related_to(c) do return true
@@ -841,7 +835,7 @@ redef class MMLocalClass
 	meth compile_tables_to_c(v: GlobalCompilerVisitor)
 	do
 		var cc = v.global_analysis.compiled_classes[self.global]
-		var ctab =  cc.class_table
+		var ctab = cc.class_table
 		var clen = ctab.length
 		if v.global_analysis.max_class_table_length > ctab.length then
 			clen = v.global_analysis.max_class_table_length
