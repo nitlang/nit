@@ -688,7 +688,7 @@ redef class AFormaldef
 		var o = c.global.intro
 		if c == o then
 			if n_type == null then
-				_formal.bound = v.module.type_any
+				_formal.bound = v.module.type_any.as_nullable
 			else
 				_formal.bound = n_type.get_stype(v)
 			end

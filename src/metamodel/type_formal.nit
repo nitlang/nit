@@ -43,6 +43,7 @@ special MMType
 
 	redef meth <(t) do return t != null and (t == self or t.is_supertype(_bound))
 	redef meth is_supertype(t) do return _bound.is_supertype(t)
+	redef meth is_nullable do return _bound.is_nullable
 	redef meth direct_type do return _bound.direct_type
 	redef meth local_class do return _bound.local_class
 

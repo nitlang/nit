@@ -45,11 +45,7 @@ redef class MMLocalClass
 	# The ancestor type for a given superclass
 	meth ancestor(c: MMLocalClass): MMType
 	do
-		assert _ancestors != null
-		if _ancestors.has_key(c) then
-			return _ancestors[c].stype
-		end
-		return null
+		return _ancestors[c].stype
 	end
 end
 
@@ -352,6 +348,74 @@ abstract class MMType
 	# Return a type approximation if the reveiver is not self
 	# Useful for virtual types
 	meth not_for_self: MMType do return self
+
+	# The nullable version of self (if needed)
+	attr _as_nullable_cache: MMType = null
+
+	# IS the type can accept null?
+	meth is_nullable: Bool do return false
+
+	# Return the nullable version of the type
+	# Noop if already nullable
+	meth as_nullable: MMType do
+		var cache = _as_nullable_cache
+		if cache != null then return cache
+		var res = new MMNullableType(self)
+		_as_nullable_cache = res
+		return res
+	end
+
+	# Return the not null version of the type
+	# Noop if already not null
+	meth as_notnull: MMType do return self
+end
+
+class MMNullableType
+special MMType
+	attr _base_type: MMType
+	redef meth is_nullable: Bool do return true
+	redef meth as_notnull do return _base_type
+	redef meth as_nullable do return self
+	init(t: MMType) do _base_type = t
+
+	redef meth module do return _base_type.module
+
+	redef meth local_class do return _base_type.local_class
+
+	redef meth <(t)
+	do
+		return t isa MMNullableType and _base_type < t.as_notnull
+	end
+
+	redef meth to_s
+	do
+		return "nullable {_base_type}"
+	end
+
+	redef meth is_supertype(t)
+	do
+		return _base_type.is_supertype(t)
+	end
+
+	redef meth for_module(mod)
+	do
+		return _base_type.for_module(mod).as_nullable
+	end
+
+	redef meth adapt_to(recv)
+	do
+		return _base_type.adapt_to(recv).as_nullable
+	end
+
+	redef meth upcast_for(c)
+	do
+		return _base_type.upcast_for(c)
+	end
+
+	redef meth not_for_self
+	do
+		return _base_type.not_for_self.as_nullable
+	end
 end
 
 class MMTypeClass 
@@ -413,11 +477,14 @@ end
 class MMTypeNone
 special MMType
 	redef readable attr _module: MMModule
-	redef meth <(t) do return true
+	redef meth is_nullable: Bool do return true
+	redef meth <(t) do return t isa MMTypeNone or t isa MMNullableType
 	redef meth to_s do return "null"
 	redef meth is_supertype(t) do return false
 	redef meth local_class do abort
 	redef meth upcast_for(c) do abort
+	redef meth as_nullable do return self
+	redef meth as_notnull do abort
 
 	private init(m: MMModule) do _module = m
 end

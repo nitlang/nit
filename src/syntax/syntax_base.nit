@@ -362,12 +362,15 @@ special Visitor
 		if subtype < stype then
 			return true
 		end
-		#error(n, "Type error: expected {stype}'{stype.module}, got {subtype}'{subtype.module}")
-		#abort
+		# Do not enforce nullable subtype rules yet
+		if subtype isa MMTypeNone or subtype.as_notnull < stype.as_notnull then
+			warning(n, "Nullable type warning: expected {stype}, got {subtype}")
+			return true
+		end
 		error(n, "Type error: expected {stype}, got {subtype}")
 		return false
 	end
-	
+
 	# Check that an expression has a static type and that 
 	# Display an error and return false if n is a statement
 	# Require that the static type of n is known
@@ -554,15 +557,17 @@ redef class AType
 		var name = n_id.to_symbol
 		var mod = v.module
 		var cla = v.local_class
+		var t: MMType
 
 		if cla.formal_dict.has_key(name) then
 			if n_types.length > 0 then
 				v.error(self, "Type error: formal type {name} cannot have formal parameters.")
 				return null
 			end
-			var formal = cla.formal_dict[name]
-			_stype_cache = formal
-			return formal
+			t = cla.formal_dict[name]
+			if n_kwnullable != null then t = t.as_nullable
+			_stype_cache = t
+			return t
 		end
 
 		if cla.global_properties != null and cla.has_global_property_by_name(name) then
@@ -570,11 +575,12 @@ redef class AType
 				v.error(self, "Type error: formal type {name} cannot have formal parameters.")
 				return null
 			end
-			var t = cla.get_type.local_class.select_virtual_type(name).stype_for(cla.get_type)
+			t = cla.get_type.local_class.select_virtual_type(name).stype_for(cla.get_type)
 			if t == null then
 				v.error(self, "Type error: circular definition in formal type {name}.")
 				return null
 			end
+			if n_kwnullable != null then t = t.as_nullable
 			_stype_cache = t
 			return t
 		end
@@ -593,14 +599,13 @@ redef class AType
 			for p in n_types do
 				tab.add(p.get_unchecked_stype(v))
 			end
-			var t = local_class.get_instantiate_type(tab)
-			_stype_cache = t
-			return t
+			t = local_class.get_instantiate_type(tab)
 		else
-			var t = local_class.get_type
-			_stype_cache = t
-			return t
+			t = local_class.get_type
 		end
+		if n_kwnullable != null then t = t.as_nullable
+		_stype_cache = t
+		return t
 	end
 	
 	redef meth get_stype(v)
