@@ -88,6 +88,13 @@ fi
 
 for i in "$@"; do
 	j=`basename "$i" .c`
+	transformed=`echo "$i" | sed "
+		/\.nit_compile\/.*_sep\.c/s/\.nit_compile\/\(.*\)\._sep\.c/Module \1/
+		/\/nit_main\.c/s/.*\/nit_main\.c/Main/
+		/\.nit_compile\/.*\._tables\.c/s/.*/Tables/
+		/\/\/.*_nit\.c/s/.*\/\/\(.*\)_nit.c/Native \1/
+	"`
+
 	found="false"
 	# We remove starting # to be path independent (after preprocess, there are the only # remainings)
 	cksum=`gcc -E $OPTS $i 2> /dev/null | grep -v "^#" | $CKSUM`
@@ -97,6 +104,9 @@ for i in "$@"; do
 		if [ -f "$cksumfile" -a -f "$o" ]; then
 			cksumtry=`cat $cksumfile`
 			if [ "x$cksum" = "x$cksumtry" ]; then
+				if [ $vverbose = true  ] ; then
+					echo "* $transformed up-to-date"
+				fi
 				found=true
 				break
 			fi
@@ -106,6 +116,8 @@ for i in "$@"; do
 		if [ $verbose = true  ] ; then
 			if [ $vverbose = true  ] ; then
 				echo "* $CC $OPTS -c $i -o $o" >&2
+			else
+				echo "* $transformed"
 			fi
 		fi
 		if $CC $OPTS -c $i -o $o; then

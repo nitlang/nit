@@ -49,6 +49,7 @@ special ModuleLoader
 	redef fun process_metamodel(context, module)
 	do
 		module.process_supermodules(context)
+		context.info("Syntax analysis for module: {module.name}", 2)
 		module.process_syntax(context)
 	end
 

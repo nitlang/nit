@@ -58,7 +58,6 @@ special AbstractCompiler
 	# Write the content to a new file
 	fun write_to(filename: String)
 	do
-		print "Generate {filename}"
 		var f = new OFStream.open(filename)
 		for s in _stage_context.content do
 			f.write(s)
@@ -96,6 +95,7 @@ special AbstractCompiler
 	# Generate common files (frames, index, overview)
 	fun extract_other_doc
 	do
+		info("Generating other files",1)
 		_module = null
 		inside_mode = false
 		intrude_mode = false
@@ -521,6 +521,7 @@ redef class MMSrcModule
 	# Extract and generate html file for the module
 	fun extract_module_doc(dctx: DocContext)
 	do
+		dctx.info("Generating HTML for module {name}",1)
 		dctx.register(self)
 
 		dctx.clear

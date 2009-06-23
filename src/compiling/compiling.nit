@@ -28,11 +28,14 @@ redef class MMSrcModule
 	# Then execute the build.sh
 	fun compile_prog_to_c(tc: ToolContext)
 	do
+		tc.info("Building tables",1)
 		for m in mhe.greaters_and_self do
 			assert m isa MMSrcModule
+			tc.info("Building tables for module: {m.name}",2)
 			m.local_analysis(tc)
 		end
 
+		tc.info("Merging all tables",2)
 		var ga = global_analysis(tc)
 
 		tc.compdir.mkdir
@@ -40,9 +43,11 @@ redef class MMSrcModule
 		var files = new Array[String]
 		var includes = new ArraySet[String]
 		files.add("$CLIBDIR/nit_main.c")
+		tc.info("Generating C code",1)
 		for m in mhe.greaters_and_self do
 			assert m isa MMSrcModule
 			files.add("{tc.compdir}/{m.name}._sep.c")
+			tc.info("Generating C code for module: {m.name}",2)
 			m.compile_separate_module(tc, ga)
 			var native_name = m.filename.strip_extension(".nit")
 			if (native_name + "_nit.h").file_exists then
@@ -52,6 +57,7 @@ redef class MMSrcModule
 			if native_name.file_exists then files.add(native_name)
 		end
 
+		tc.info("Generating main, tables and makefile ...",1)
 		files.add("{tc.compdir}/{name}._tables.c")
 		compile_main(tc, ga)
 
@@ -80,6 +86,7 @@ redef class MMSrcModule
 		f.close
 
 		if not tc.no_cc then 
+			tc.info("Building",1)
 			sys.system("sh {fn}")
 		end
 	end
