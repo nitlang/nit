@@ -97,6 +97,15 @@ special Option
 	redef meth read_param(it) do value = true
 end
 
+class OptionCount
+special Option
+	redef type VALUE: Int
+
+	init(help: String, names: String...) do init_opt(help, 0, names)
+
+	redef meth read_param(it) do value += 1
+end
+
 # Option with one mandatory parameter
 class OptionParameter
 special Option
