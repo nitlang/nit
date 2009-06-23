@@ -1579,7 +1579,13 @@ special PExpr
 		else if etype < ttype then
 			v.warning(self, "Warning: Expression is already a {ttype} since it is a {etype}.")
 		else if etype.is_nullable and etype.as_notnull == ttype then
-			if self isa AIsaExpr then
+			if ttype isa MMTypeFormal and ttype.bound.is_nullable then
+				# No warning in this case since with
+				#   type T: nullable A
+				#   var x: nullable T
+				# 'x.as(not null)' != 'x.as(T)'
+				# 'x != null' != 'x isa T'
+			else if self isa AIsaExpr then
 				v.warning(self, "Warning: Prefer '!= null'.")
 			else
 				v.warning(self, "Warning: Prefer '.as(not null)'.")
