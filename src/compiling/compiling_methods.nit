@@ -25,7 +25,7 @@ redef class CompilerVisitor
 	meth compile_stmt(n: PExpr)
 	do
 		if n == null then return
-		add_instr("/* Compile stmt {n.locate} */")
+		#add_instr("/* Compile stmt {n.locate} */")
 		n.prepare_compile_stmt(self)
 		var i = cfc._variable_index
 		n.compile_stmt(self)
@@ -35,14 +35,14 @@ redef class CompilerVisitor
 	# Compile is expression node
 	meth compile_expr(n: PExpr): String
 	do
-		add_instr("/* Compile expr {n.locate} */")
+		#add_instr("/* Compile expr {n.locate} */")
 		var i = cfc._variable_index
 		var s = n.compile_expr(self)
 		cfc._variable_index = i
 		if s[0] == ' ' or cfc.is_valid_variable(s) then
 			return s
 		end
-		var v = cfc.get_var("Result for expr {n.locate}")
+		var v = cfc.get_var("Result")
 		add_assignment(v, s)
 		return v
 	end
