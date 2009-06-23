@@ -69,9 +69,15 @@ special ColorContext
 	end
 end
 
-redef class CompilerVisitor
-	# The global analysis result, if any
-	readable writable attr _global_analysis: GlobalAnalysis 
+class GlobalCompilerVisitor
+special CompilerVisitor
+	# The global analysis result
+	readable attr _global_analysis: GlobalAnalysis
+	init(m: MMSrcModule, tc: ToolContext, ga: GlobalAnalysis)
+	do
+		super(m, tc)
+		_global_analysis = ga
+	end
 end
 
 # A compiled class is a class in a program
@@ -411,7 +417,7 @@ redef class MMSrcModule
 	end
 
 	# Compile module and class tables
-	meth compile_tables_to_c(v: CompilerVisitor)
+	meth compile_tables_to_c(v: GlobalCompilerVisitor)
 	do
 		for m in mhe.greaters_and_self do
 			assert m isa MMSrcModule
@@ -434,7 +440,7 @@ redef class MMSrcModule
 	end
 
 	# Declare class table (for _sep.h)
-	meth declare_class_tables_to_c(v: CompilerVisitor)
+	meth declare_class_tables_to_c(v: GlobalCompilerVisitor)
 	do
 		for c in local_classes do
 			if c.global.module == self then
@@ -444,7 +450,7 @@ redef class MMSrcModule
 	end
 
 	# Compile main part (for _table.c)
-	meth compile_main_part(v: CompilerVisitor)
+	meth compile_main_part(v: GlobalCompilerVisitor)
 	do
 		v.add_instr("int main(int argc, char **argv) \{")
 		v.indent
@@ -471,7 +477,7 @@ redef class MMSrcModule
 	end
 	
 	# Compile sep files 
-	meth compile_mod_to_c(v: CompilerVisitor)
+	meth compile_mod_to_c(v: GlobalCompilerVisitor)
 	do
 		v.add_decl("extern const char *LOCATE_{name};")
 		if not v.tc.global then
@@ -507,7 +513,7 @@ redef class MMSrcModule
 	end
 
 	# Compile module file for the current module
-	meth compile_local_table_to_c(v: CompilerVisitor)
+	meth compile_local_table_to_c(v: GlobalCompilerVisitor)
 	do
 		v.add_instr("const char *LOCATE_{name} = \"{filename}\";")
 
@@ -530,7 +536,7 @@ end
 # An element of a class, an instance or a module table
 abstract class AbsTableElt
 	# Compile the macro needed to use the element and other related elements
-	meth compile_macros(v: CompilerVisitor, value: String) is abstract
+	meth compile_macros(v: GlobalCompilerVisitor, value: String) is abstract
 end
 
 # An element of a class or an instance table
@@ -547,7 +553,7 @@ special AbsTableElt
 	meth item(i: Int): TableElt do return self
 
 	# Return the value of the element for a given class
-	meth compile_to_c(v: CompilerVisitor, c: MMLocalClass): String is abstract
+	meth compile_to_c(v: GlobalCompilerVisitor, c: MMLocalClass): String is abstract
 end
 
 # An element of a module table
@@ -815,7 +821,7 @@ redef class MMLocalClass
 	end
 
 	# Declaration and macros related to the class table
-	meth declare_tables_to_c(v: CompilerVisitor)
+	meth declare_tables_to_c(v: GlobalCompilerVisitor)
 	do
 		v.add_decl("")
 		var pi = primitive_info
@@ -832,7 +838,7 @@ redef class MMLocalClass
 	end
 
 	# Compilation of table and new (or box)
-	meth compile_tables_to_c(v: CompilerVisitor)
+	meth compile_tables_to_c(v: GlobalCompilerVisitor)
 	do
 		var cc = v.global_analysis.compiled_classes[self.global]
 		var ctab =  cc.class_table
