@@ -40,9 +40,13 @@ special MMContext
 	# Display a warning
 	meth warning(s: String)
 	do
-		if not _opt_warn.value then return
+		if _opt_warn.value == 0 then return
 		stderr.write("{s}\n")
-		_warning_count = _warning_count + 1
+		if _opt_warn.value == 1 then
+			_warning_count = _warning_count + 1
+		else
+			_error_count = _error_count + 1
+		end
 	end
 
 	# Paths where to locate modules files
@@ -55,7 +59,7 @@ special MMContext
 	readable attr _option_context: OptionContext = new OptionContext
 
 	# Option --warn
-	readable attr _opt_warn: OptionBool = new OptionBool("Show warnings", "-W", "--warn")
+	readable attr _opt_warn: OptionCount = new OptionCount("Show warnings", "-W", "--warn")
 
 	# Option --path
 	readable attr _opt_path: OptionArray = new OptionArray("Set include path for loaders (may be used more than once)", "-I", "--path")
