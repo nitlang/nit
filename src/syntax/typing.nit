@@ -1313,6 +1313,20 @@ redef class AEqExpr
 		n_expr2.stype isa MMTypeNone and not n_expr.stype.is_nullable then
 			v.warning(self, "Warning: comparaison between null and a non nullable value.")
 		end
+
+		if n_expr.stype isa MMTypeNone then
+			try_to_isa(v, n_expr2)
+		else if n_expr2.stype isa MMTypeNone then
+			try_to_isa(v, n_expr)
+		end
+	end
+
+	private meth try_to_isa(v: TypingVisitor, n: PExpr)
+	do
+		var variable = n.its_variable
+		if variable != null then
+			_if_false_variable_ctx = v.variable_ctx.sub_with(self, variable, n.stype.as_notnull)
+		end
 	end
 end
 redef class ANeExpr
@@ -1324,6 +1338,20 @@ redef class ANeExpr
 		if n_expr.stype isa MMTypeNone and not n_expr2.stype.is_nullable or
 		n_expr2.stype isa MMTypeNone and not n_expr.stype.is_nullable then
 			v.warning(self, "Warning: comparaison between null and a non nullable value.")
+		end
+
+		if n_expr.stype isa MMTypeNone then
+			try_to_isa(v, n_expr2)
+		else if n_expr2.stype isa MMTypeNone then
+			try_to_isa(v, n_expr)
+		end
+	end
+
+	private meth try_to_isa(v: TypingVisitor, n: PExpr)
+	do
+		var variable = n.its_variable
+		if variable != null then
+			_if_true_variable_ctx = v.variable_ctx.sub_with(self, variable, n.stype.as_notnull)
 		end
 	end
 end
