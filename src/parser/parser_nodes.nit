@@ -893,10 +893,8 @@ special PExpr
     readable writable attr _n_kwnull: TKwnull = null
 end
 class AIssetAttrExpr
-special PExpr
+special AAttrFormExpr
     readable writable attr _n_kwisset: TKwisset = null
-    readable writable attr _n_expr: PExpr = null
-    readable writable attr _n_id: TAttrid = null
 end
 class APlusAssignOp
 special PAssignOp

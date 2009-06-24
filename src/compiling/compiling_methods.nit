@@ -455,6 +455,12 @@ end
 
 redef class MMAttribute
 	# Compile a read acces on selffor a given reciever.
+	meth compile_isset(v: CompilerVisitor, n: PNode, recv: String): String
+	do
+		return "TAG_Bool({global.attr_access}({recv})!=NIT_NULL) /* isset {local_class}::{name}*/"
+	end
+
+	# Compile a read acces on selffor a given reciever.
 	meth compile_read_access(v: CompilerVisitor, n: PNode, recv: String): String
 	do
 		var res = "{global.attr_access}({recv}) /*{local_class}::{name}*/"
@@ -1498,6 +1504,14 @@ redef class AAttrReassignExpr
 		var e3 = v.compile_expr(n_value)
 		var e4 = assign_method.compile_expr_call(v, [e2, e3])
 		prop.compile_write_access(v, n_id, e1, e4)
+	end
+end
+
+redef class AIssetAttrExpr
+	redef meth compile_expr(v)
+	do
+		var e = v.compile_expr(n_expr)
+		return prop.compile_isset(v, n_id, e)
 	end
 end
 

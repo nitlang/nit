@@ -1001,6 +1001,19 @@ redef class AAttrReassignExpr
 	end
 end
 
+redef class AIssetAttrExpr
+	redef meth after_typing(v)
+	do
+		do_typing(v)
+		if prop == null then return
+		if attr_type.is_nullable then
+			v.error(self, "Error: isset on a nullable attribute.")
+		end
+		_stype = v.type_bool
+		_is_typed = true
+	end
+end
+
 class AAbsAbsSendExpr
 special PExpr
 	# The signature of the called property
