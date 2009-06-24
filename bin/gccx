@@ -37,6 +37,8 @@ Usage: $e [options] modulename [options for module execution]
 -o name     Call name the executable
 -d          Create temporary files in a specific directory
 -nolibgc    Do not include libgc
+-v          Verbose (show compilation steps)
+-vv         Verbose+ (show gcc calls)
 -h          This help
 END
 }
@@ -62,6 +64,8 @@ return $res
 }
 
 stop=false
+verbose=false
+vverbose=false
 while [ $stop = false ]; do
 	case $1 in 
 		-O) OPTS="$OPTS -O2" ext="_savo"; shift;;
@@ -71,6 +75,8 @@ while [ $stop = false ]; do
 		-d) dir="$2/"; shift; shift;;
 		--nolibgc) nolibgc=true; shift;;
 		-x) OPTS="$OPTS $2"; shift; shift;;
+		-vv) vverbose=true; verbose=true; shift;;
+		-v) verbose=true; shift;;
 		-h|"") usage; exit;;
 		*) stop=true
 	esac
@@ -97,7 +103,11 @@ for i in "$@"; do
 		fi
 	done
 	if [ $found = false ]; then
-		echo "* $CC $OPTS -c $i -o $o" >&2
+		if [ $verbose = true  ] ; then
+			if [ $vverbose = true  ] ; then
+				echo "* $CC $OPTS -c $i -o $o" >&2
+			fi
+		fi
 		if $CC $OPTS -c $i -o $o; then
 			echo "$cksum" > "$cksumfile"
 		else
@@ -107,5 +117,7 @@ for i in "$@"; do
 	objs="$objs $o"
 done
 
-echo "* $CC $OPTS -lm $objs -o $out" >&2
+if [ $vverbose = true  ] ; then
+	echo "* $CC $OPTS -lm $objs -o $out" >&2
+fi
 $CC $OPTS -lm $objs -o "$out"

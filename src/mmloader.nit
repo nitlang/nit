@@ -49,6 +49,14 @@ special MMContext
 		end
 	end
 
+	# Display an info
+	meth info(s: String, level: Int)
+	do
+		if level <= verbose_level then
+			print "{s}"
+		end
+	end
+
 	# Paths where to locate modules files
 	readable var _paths: Array[String] = new Array[String]
 
@@ -79,10 +87,16 @@ special MMContext
 	# Option --version
 	readable var _opt_version: OptionBool = new OptionBool("Show version and exit", "--version")
 
+	# Option --verbose
+	readable var _opt_verbose: OptionCount = new OptionCount("Verbose", "-v", "--verbose")
+
+	# Verbose level
+	readable var _verbose_level: Int = 0
+
 	init
 	do
 		super
-		option_context.add_option(opt_warn, opt_path, opt_log, opt_only_parse, opt_only_metamodel, opt_help, opt_version)
+		option_context.add_option(opt_warn, opt_path, opt_log, opt_only_parse, opt_only_metamodel, opt_help, opt_version, opt_verbose)
 	end
 
 	# Parse and process the options given on the command line
@@ -90,6 +104,9 @@ special MMContext
 	do
 		# init options
 		option_context.parse(args)
+
+		# Set verbose level
+		_verbose_level = opt_verbose.value
 
 		# Setup the paths value
 		paths.append(opt_path.value)
