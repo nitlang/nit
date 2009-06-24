@@ -895,12 +895,6 @@ redef class MMLocalClass
 					if ne != null then
 						var e = ne.compile_expr(v)
 						v.add_instr("{p.global.attr_access}(obj) = {e};")
-					else
-						var pi = t.local_class.primitive_info
-						if pi != null and pi.tagged then
-							var default = t.default_cvalue
-							v.add_instr("{p.global.attr_access}(obj) = {default};")
-						end
 					end
 				end
 			end
