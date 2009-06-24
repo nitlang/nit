@@ -1,0 +1,7 @@
+1
+Recieved signal 11
+,---- Stack trace -- - -  -
+| base_attr_nullable_alt2::Foo::run (alt/base_attr_nullable_alt2.nit:36)
+| base_attr_nullable_alt2::Foo::init (alt/base_attr_nullable_alt2.nit:48)
+| base_attr_nullable_alt2::Sys::main (alt/base_attr_nullable_alt2.nit:81)
+`------------------- - -  -

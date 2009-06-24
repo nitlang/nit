@@ -1,0 +1,6 @@
+Recieved signal 11
+,---- Stack trace -- - -  -
+| base_attr_nullable_alt3::Bar::(base_attr_nullable_alt3::Foo::run) (alt/base_attr_nullable_alt3.nit:62)
+| base_attr_nullable_alt3::Bar::init (alt/base_attr_nullable_alt3.nit:69)
+| base_attr_nullable_alt3::Sys::main (alt/base_attr_nullable_alt3.nit:81)
+`------------------- - -  -

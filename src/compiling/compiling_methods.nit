@@ -455,13 +455,18 @@ end
 
 redef class MMAttribute
 	# Compile a read acces on selffor a given reciever.
-	meth compile_read_access(v: CompilerVisitor, recv: String): String
+	meth compile_read_access(v: CompilerVisitor, n: PNode, recv: String): String
 	do
-		return "{global.attr_access}({recv}) /*{local_class}::{name}*/"
+		var res = "{global.attr_access}({recv}) /*{local_class}::{name}*/"
+		if not signature.return_type.is_nullable and v.tc.opt_warn.value > 0 then
+			res = v.ensure_var(res, "{local_class}::{name}")
+			v.add_instr("if ({res} == NIT_NULL) \{ fprintf(stderr, \"Uninitialized attribute %s\", \"{name}\"); {v.printf_locate_error(n)} } /* implicit isset */;")
+		end
+		return res
 	end
 
 	# Compile a write acces on selffor a given reciever.
-	meth compile_write_access(v: CompilerVisitor, recv: String, value: String)
+	meth compile_write_access(v: CompilerVisitor, n: PNode, recv: String, value: String)
 	do
 		v.add_instr("{global.attr_access}({recv}) /*{local_class}::{name}*/ = {value};")
 	end
@@ -571,14 +576,14 @@ end
 redef class MMReadImplementationMethod
 	redef meth do_compile_inside(v, params)
 	do
-		return node.prop.compile_read_access(v, params[0])
+		return node.prop.compile_read_access(v, node, params[0])
 	end
 end
 
 redef class MMWriteImplementationMethod
 	redef meth do_compile_inside(v, params)
 	do
-		node.prop.compile_write_access(v, params[0], params[1])
+		node.prop.compile_write_access(v, node, params[0], params[1])
 		return null
 	end
 end
@@ -611,7 +616,7 @@ redef class MMImplicitInit
 		end
 		for i in [f..params.length[ do
 			var attribute = unassigned_attributes[i-f]
-			attribute.compile_write_access(v, recv, params[i])
+			attribute.compile_write_access(v, null, recv, params[i])
 		end
 		return null
 	end
@@ -1473,7 +1478,7 @@ redef class AAttrExpr
 	redef meth compile_expr(v)
 	do
 		var e = v.compile_expr(n_expr)
-		return prop.compile_read_access(v, e)
+		return prop.compile_read_access(v, n_id, e)
 	end
 end
 
@@ -1482,17 +1487,17 @@ redef class AAttrAssignExpr
 	do
 		var e = v.compile_expr(n_expr)
 		var e2 = v.compile_expr(n_value)
-		prop.compile_write_access(v, e, e2)
+		prop.compile_write_access(v, n_id, e, e2)
 	end
 end
 redef class AAttrReassignExpr
 	redef meth compile_stmt(v)
 	do
 		var e1 = v.compile_expr(n_expr)
-		var e2 = prop.compile_read_access(v, e1)
+		var e2 = prop.compile_read_access(v, n_id, e1)
 		var e3 = v.compile_expr(n_value)
 		var e4 = assign_method.compile_expr_call(v, [e2, e3])
-		prop.compile_write_access(v, e1, e4)
+		prop.compile_write_access(v, n_id, e1, e4)
 	end
 end
 
