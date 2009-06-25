@@ -373,6 +373,7 @@ end
 class MMNullableType
 special MMType
 	attr _base_type: MMType
+	redef meth is_valid do return _base_type.is_valid
 	redef meth is_nullable: Bool do return true
 	redef meth as_notnull do return _base_type
 	redef meth as_nullable do return self

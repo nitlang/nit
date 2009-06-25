@@ -28,7 +28,7 @@ end
 # Formal types are named indirect types
 class MMTypeFormal
 special MMType
-	redef meth is_valid do return _bound != null
+	redef meth is_valid do return _bound != null and _bound.is_valid
 
 	# The name of the type
 	readable attr _name: Symbol 
