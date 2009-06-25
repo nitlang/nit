@@ -26,15 +26,14 @@ extern const int SFT_inheritance[];
 #define CALL_inheritance___MMLocalClass___computed_super_classes(recv) ((inheritance___MMLocalClass___computed_super_classes_t)CALL((recv), (SFT_inheritance[2] + 5)))
 #define CALL_inheritance___MMLocalClass___computed_ancestors(recv) ((inheritance___MMLocalClass___computed_ancestors_t)CALL((recv), (SFT_inheritance[2] + 6)))
 #define CALL_inheritance___MMLocalClass___ancestor_for(recv) ((inheritance___MMLocalClass___ancestor_for_t)CALL((recv), (SFT_inheritance[2] + 7)))
-#define CALL_SUPER_inheritance___MMLocalClass_____bra(recv) ((inheritance___MMLocalClass_____bra_t)CALL((recv), (SFT_inheritance[2] + 8)))
-#define CALL_inheritance___MMLocalClass___add_default_any_class(recv) ((inheritance___MMLocalClass___add_default_any_class_t)CALL((recv), (SFT_inheritance[2] + 9)))
-#define CALL_inheritance___MMLocalClass___add_super_classes(recv) ((inheritance___MMLocalClass___add_super_classes_t)CALL((recv), (SFT_inheritance[2] + 10)))
-#define CALL_inheritance___MMLocalClass___add_explicit_classes(recv) ((inheritance___MMLocalClass___add_explicit_classes_t)CALL((recv), (SFT_inheritance[2] + 11)))
-#define CALL_inheritance___MMLocalClass___compute_super_parents(recv) ((inheritance___MMLocalClass___compute_super_parents_t)CALL((recv), (SFT_inheritance[2] + 12)))
-#define CALL_inheritance___MMLocalClass___build_ancestors(recv) ((inheritance___MMLocalClass___build_ancestors_t)CALL((recv), (SFT_inheritance[2] + 13)))
-#define CALL_inheritance___MMLocalClass___group_ancestors(recv) ((inheritance___MMLocalClass___group_ancestors_t)CALL((recv), (SFT_inheritance[2] + 14)))
-#define CALL_inheritance___MMLocalClass___merge_ancestors(recv) ((inheritance___MMLocalClass___merge_ancestors_t)CALL((recv), (SFT_inheritance[2] + 15)))
-#define CALL_inheritance___MMLocalClass___inherit_local_property(recv) ((inheritance___MMLocalClass___inherit_local_property_t)CALL((recv), (SFT_inheritance[2] + 16)))
+#define CALL_inheritance___MMLocalClass___add_default_any_class(recv) ((inheritance___MMLocalClass___add_default_any_class_t)CALL((recv), (SFT_inheritance[2] + 8)))
+#define CALL_inheritance___MMLocalClass___add_super_classes(recv) ((inheritance___MMLocalClass___add_super_classes_t)CALL((recv), (SFT_inheritance[2] + 9)))
+#define CALL_inheritance___MMLocalClass___add_explicit_classes(recv) ((inheritance___MMLocalClass___add_explicit_classes_t)CALL((recv), (SFT_inheritance[2] + 10)))
+#define CALL_inheritance___MMLocalClass___compute_super_parents(recv) ((inheritance___MMLocalClass___compute_super_parents_t)CALL((recv), (SFT_inheritance[2] + 11)))
+#define CALL_inheritance___MMLocalClass___build_ancestors(recv) ((inheritance___MMLocalClass___build_ancestors_t)CALL((recv), (SFT_inheritance[2] + 12)))
+#define CALL_inheritance___MMLocalClass___group_ancestors(recv) ((inheritance___MMLocalClass___group_ancestors_t)CALL((recv), (SFT_inheritance[2] + 13)))
+#define CALL_inheritance___MMLocalClass___merge_ancestors(recv) ((inheritance___MMLocalClass___merge_ancestors_t)CALL((recv), (SFT_inheritance[2] + 14)))
+#define CALL_inheritance___MMLocalClass___inherit_local_property(recv) ((inheritance___MMLocalClass___inherit_local_property_t)CALL((recv), (SFT_inheritance[2] + 15)))
 #define CALL_inheritance___MMLocalProperty___inherit_global(recv) ((inheritance___MMLocalProperty___inherit_global_t)CALL((recv), (SFT_inheritance[3] + 0)))
 #define CALL_inheritance___MMAncestor___add_in(recv) ((inheritance___MMAncestor___add_in_t)CALL((recv), (SFT_inheritance[4] + 0)))
 #define ID_MMImplicitLocalClass (SFT_inheritance[5])
@@ -54,7 +53,7 @@ extern const int SFT_inheritance[];
 #define COLOR_MMDefaultAncestor (SFT_inheritance[16])
 #define INIT_TABLE_POS_MMDefaultAncestor (SFT_inheritance[17] + 0)
 #define CALL_inheritance___MMDefaultAncestor___init(recv) ((inheritance___MMDefaultAncestor___init_t)CALL((recv), (SFT_inheritance[17] + 1)))
-val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2);
+val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef val_t (* inheritance___MMModule___type_any_t)(val_t  self);
 val_t inheritance___MMModule___type_any(val_t  self);
 #define LOCATE_inheritance___MMModule___type_any "inheritance::MMModule::type_any"
@@ -64,7 +63,7 @@ void inheritance___MMModule___import_global_classes(val_t  self);
 typedef void (* inheritance___MMModule___import_local_classes_t)(val_t  self);
 void inheritance___MMModule___import_local_classes(val_t  self);
 #define LOCATE_inheritance___MMModule___import_local_classes "inheritance::MMModule::import_local_classes"
-val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1);
+val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
 typedef val_t (* inheritance___MMLocalClass_____bra_t)(val_t  self, val_t  param0);
 val_t inheritance___MMLocalClass_____bra(val_t  self, val_t  param0);
 #define LOCATE_inheritance___MMLocalClass_____bra "inheritance::MMLocalClass::(abstractmetamodel::MMLocalClass::[])"

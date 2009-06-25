@@ -2,22 +2,36 @@
 #include "inheritance._sep.h"
 val_t inheritance___MMModule___type_any(val_t  self) {
   struct trace_t trace = {NULL, NULL, 24, LOCATE_inheritance___MMModule___type_any};
-  static val_t once_value_1; static int once_bool_1; /* Once value for variable[4]*/
-  val_t variable[5];
-  void **closurevariable = NULL;
+  static val_t once_value_1; static int once_bool_1; /* Once value for variable[3]*/
+    static val_t once_value_2 = NIT_NULL; /* Once value for string variable[3]*/
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[3] = variable[0];
-  if (once_bool_1) variable[4] = once_value_1;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Once expression result */
+  if (once_bool_1) variable[3] = once_value_1;
   else {
-    variable[4] = NEW_String_string___String___with_native(BOX_NativeString("Object"), TAG_Int(6)); /*new String*/
-    variable[4] = CALL_symbol___String___to_symbol(variable[4])(variable[4]) /*String::to_symbol*/;
-    once_value_1 = variable[4];
+    /* Register variable[3]: Once String constant */
+    if (once_value_2 != NIT_NULL) variable[3] = once_value_2;
+    else {
+      variable[3] = NEW_String_string___String___with_native(BOX_NativeString("Object"), TAG_Int(6)) /*new String*/;
+      once_value_2 = variable[3];
+    }
+    /* Register variable[3]: Result */
+    /* Register variable[3]: Result */
+    variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
+    once_value_1 = variable[3];
     once_bool_1 = true;
   }
-  variable[3] = CALL_abstractmetamodel___MMModule___class_by_name(variable[3])(variable[3], variable[4]) /*MMModule::class_by_name*/;
+  /* Register variable[3]: Result */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstractmetamodel___MMModule___class_by_name(variable[0])(variable[0], variable[3]) /*MMModule::class_by_name*/;
   variable[2] = variable[3];
+  /* Register variable[3]: Result */
   variable[3] = CALL_static_type___MMLocalClass___get_type( variable[2] /*c_name*/)( variable[2] /*c_name*/) /*MMLocalClass::get_type*/;
   variable[1] = variable[3];
   goto return_label0;
@@ -28,1241 +42,1661 @@ val_t inheritance___MMModule___type_any(val_t  self) {
 void inheritance___MMModule___import_global_classes(val_t  self) {
   struct trace_t trace = {NULL, NULL, 31, LOCATE_inheritance___MMModule___import_global_classes};
   val_t variable[11];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[3] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[MMGlobalClass, HashSet[MMLocalClass]]*/
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = NEW_HashMap_hash___HashMap___init() /*new HashMap[MMGlobalClass, HashSet[MMLocalClass]]*/;
   variable[2] = variable[3];
-  variable[3] = variable[0];
-  variable[3] = CALL_abstractmetamodel___MMModule___mhe(variable[3])(variable[3]) /*MMModule::mhe*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstractmetamodel___MMModule___mhe(variable[0])(variable[0]) /*MMModule::mhe*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMModule___import_global_classes, LOCATE_inheritance, 35); nit_exit(1);}
-  variable[3] = variable[0];
-  variable[3] = CALL_abstractmetamodel___MMModule___mhe(variable[3])(variable[3]) /*MMModule::mhe*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstractmetamodel___MMModule___mhe(variable[0])(variable[0]) /*MMModule::mhe*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_partial_order___PartialOrderElement___direct_greaters(variable[3])(variable[3]) /*PartialOrderElement::direct_greaters*/;
-  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArray::iterator*/;
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
+    /* Register variable[6]: Result */
     variable[6] = CALL_abstractmetamodel___MMModule___global_classes( variable[5] /*mod*/)( variable[5] /*mod*/) /*MMModule::global_classes*/;
-    variable[6] = CALL_abstract_collection___Collection___iterator(variable[6])(variable[6]) /*AbstractArray::iterator*/;
+    /* Register variable[6]: For iterator */
+    variable[6] = CALL_abstract_collection___Collection___iterator(variable[6])(variable[6]) /*AbstractArrayRead::iterator*/;
     while (true) { /*for*/
+      /* Register variable[7]: For 'is_ok' result */
       variable[7] = CALL_abstract_collection___Iterator___is_ok(variable[6])(variable[6]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[7])) break; /*for*/
-      variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*ArrayIterator::item*/;
+      variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[8]: Local variable */
       variable[8] = variable[7];
-      variable[9] = variable[0];
-      variable[9] = CALL_abstractmetamodel___MMModule___global_classes(variable[9])(variable[9]) /*MMModule::global_classes*/;
-      variable[9] = CALL_abstract_collection___Collection___has(variable[9])(variable[9],  variable[8] /*glob*/) /*AbstractArray::has*/;
+      /* Register variable[9]: Result */
+      variable[9] = CALL_abstractmetamodel___MMModule___global_classes(variable[0])(variable[0]) /*MMModule::global_classes*/;
+      /* Register variable[9]: Result */
+      variable[9] = CALL_abstract_collection___Collection___has(variable[9])(variable[9],  variable[8] /*glob*/) /*AbstractArrayRead::has*/;
       if (UNTAG_Bool(variable[9])) { /*if*/
-        goto continue_4;
+        goto continue_5;
       }
-      variable[9] = variable[0];
-      variable[9] = ATTR_abstractmetamodel___MMModule____global_classes(variable[9]) /*MMModule::_global_classes*/;
+      /* Register variable[9]: Result */
+      variable[9] = ATTR_abstractmetamodel___MMModule____global_classes(variable[0]) /*MMModule::_global_classes*/;
       CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9],  variable[8] /*glob*/) /*AbstractArray::add*/;
-      variable[9] = variable[0];
-      variable[9] = ATTR_abstractmetamodel___MMModule____global_class_by_name(variable[9]) /*MMModule::_global_class_by_name*/;
+      /* Register variable[9]: Result */
+      variable[9] = ATTR_abstractmetamodel___MMModule____global_class_by_name(variable[0]) /*MMModule::_global_class_by_name*/;
+      /* Register variable[10]: Result */
       variable[10] = CALL_abstractmetamodel___MMGlobalClass___name( variable[8] /*glob*/)( variable[8] /*glob*/) /*MMGlobalClass::name*/;
       CALL_abstract_collection___Map_____braeq(variable[9])(variable[9], variable[10],  variable[8] /*glob*/) /*Map::[]=*/;
-      continue_4: while(0);
+      continue_5: while(0);
       CALL_abstract_collection___Iterator___next(variable[6])(variable[6]) /*ArrayIterator::next*/;
     }
-    break_4: while(0);
-    continue_3: while(0);
+    break_5: while(0);
+    continue_4: while(0);
     CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*ArrayIterator::next*/;
   }
-  break_3: while(0);
-  return_label2: while(false);
+  break_4: while(0);
+  return_label3: while(false);
   tracehead = trace.prev;
   return;
 }
 void inheritance___MMModule___import_local_classes(val_t  self) {
   struct trace_t trace = {NULL, NULL, 46, LOCATE_inheritance___MMModule___import_local_classes};
-  val_t variable[8];
-  void **closurevariable = NULL;
+  val_t variable[7];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_abstractmetamodel___MMModule____global_classes(variable[2]) /*MMModule::_global_classes*/;
-  variable[2] = CALL_abstract_collection___Collection___iterator(variable[2])(variable[2]) /*AbstractArray::iterator*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_abstractmetamodel___MMModule____global_classes(variable[0]) /*MMModule::_global_classes*/;
+  /* Register variable[2]: For iterator */
+  variable[2] = CALL_abstract_collection___Collection___iterator(variable[2])(variable[2]) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[3]: For 'is_ok' result */
     variable[3] = CALL_abstract_collection___Iterator___is_ok(variable[2])(variable[2]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[3])) break; /*for*/
-    variable[3] = CALL_abstract_collection___Iterator___item(variable[2])(variable[2]) /*ArrayIterator::item*/;
+    variable[3] = CALL_abstract_collection___Iterator___item(variable[2])(variable[2]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[4]: Local variable */
     variable[4] = variable[3];
-    variable[5] = variable[0];
-    variable[5] = CALL_abstractmetamodel___MMModule_____bra(variable[5])(variable[5],  variable[4] /*g*/) /*MMModule::[]*/;
-    variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[5])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[5])(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))))));
+    /* Register variable[5]: Result */
+    variable[5] = ATTR_abstractmetamodel___MMModule____local_class_by_global(variable[0]) /*MMModule::_local_class_by_global*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_abstract_collection___MapRead___has_key(variable[5])(variable[5],  variable[4] /*g*/) /*MapRead::has_key*/;
     if (UNTAG_Bool(variable[5])) { /*if*/
-      goto continue_6;
+      goto continue_7;
     }
-    variable[6] = variable[0];
-    variable[7] = NEW_MMImplicitLocalClass_inheritance___MMImplicitLocalClass___init(variable[6],  variable[4] /*g*/); /*new MMImplicitLocalClass*/
-    variable[6] = variable[7];
+    /* Register variable[5]: Local variable */
+    /* Register variable[6]: Result */
+    variable[6] = NEW_MMImplicitLocalClass_inheritance___MMImplicitLocalClass___init(variable[0],  variable[4] /*g*/) /*new MMImplicitLocalClass*/;
     variable[5] = variable[6];
-    continue_6: while(0);
+    continue_7: while(0);
     CALL_abstract_collection___Iterator___next(variable[2])(variable[2]) /*ArrayIterator::next*/;
   }
-  break_6: while(0);
-  return_label5: while(false);
+  break_7: while(0);
+  return_label6: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t inheritance___MMLocalClass_____bra(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 194, LOCATE_inheritance___MMLocalClass_____bra};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = CALL_SUPER_inheritance___MMLocalClass_____bra(variable[0])(variable[0],  variable[1] /*glob*/) /*super MMLocalClass::[]*/;
-  variable[3] = variable[4];
-  variable[4] = TAG_Bool(( variable[3] /*prop*/ ==  NIT_NULL /*null*/) || (( variable[3] /*prop*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*prop*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*prop*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*prop*/)( variable[3] /*prop*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  variable[5] = variable[4];
-  if (UNTAG_Bool(variable[5])) { /* and */
-    variable[5] = variable[0];
-    variable[5] = ATTR_abstractmetamodel___MMLocalClass____global_properties(variable[5]) /*MMLocalClass::_global_properties*/;
-    variable[5] = CALL_abstract_collection___Collection___has(variable[5])(variable[5],  variable[1] /*glob*/) /*Collection::has*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_abstractmetamodel___MMLocalClass____local_property_by_global(variable[0]) /*MMLocalClass::_local_property_by_global*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___MapRead___has_key(variable[3])(variable[3],  variable[1] /*glob*/) /*MapRead::has_key*/;
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_abstractmetamodel___MMLocalClass____local_property_by_global(variable[0]) /*MMLocalClass::_local_property_by_global*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_abstract_collection___MapRead_____bra(variable[3])(variable[3],  variable[1] /*glob*/) /*MapRead::[]*/;
+    variable[2] = variable[3];
+    goto return_label8;
+  } else { /*if*/
+    /* Register variable[3]: Result */
+    variable[3] = CALL_abstractmetamodel___MMLocalClass___has_global_property(variable[0])(variable[0],  variable[1] /*glob*/) /*MMLocalClass::has_global_property*/;
+    if (UNTAG_Bool(variable[3])) { /*if*/
+      /* Register variable[3]: Result */
+      variable[3] = CALL_inheritance___MMLocalClass___inherit_local_property(variable[0])(variable[0],  variable[1] /*glob*/) /*MMLocalClass::inherit_local_property*/;
+      variable[2] = variable[3];
+      goto return_label8;
+    } else { /*if*/
+      fprintf(stderr, "Aborted"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass_____bra, LOCATE_inheritance, 201); nit_exit(1);
+    }
   }
-  variable[4] = variable[5];
-  if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    variable[4] = CALL_inheritance___MMLocalClass___inherit_local_property(variable[4])(variable[4],  variable[1] /*glob*/) /*MMLocalClass::inherit_local_property*/;
-    variable[3] = variable[4] /*prop=*/;
-  }
-  variable[2] =  variable[3] /*prop*/;
-  goto return_label7;
-  return_label7: while(false);
+  return_label8: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 void inheritance___MMLocalClass___compute_super_classes(val_t  self) {
   struct trace_t trace = {NULL, NULL, 64, LOCATE_inheritance___MMLocalClass___compute_super_classes};
-  val_t variable[10];
-  void **closurevariable = NULL;
+      static val_t once_value_10 = NIT_NULL; /* Once value for string variable[4]*/
+      static val_t once_value_11 = NIT_NULL; /* Once value for string variable[4]*/
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_inheritance___MMLocalClass___computed_super_classes(variable[2])(variable[2]) /*MMLocalClass::computed_super_classes*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_inheritance___MMLocalClass___computed_super_classes(variable[0])(variable[0]) /*MMLocalClass::computed_super_classes*/;
   if (UNTAG_Bool(variable[2])) { /*if*/
-    goto return_label8;
+    goto return_label9;
   } else { /*if*/
-    variable[2] = variable[0];
-    variable[2] = ATTR_inheritance___MMLocalClass____computing_super(variable[2]) /*MMLocalClass::_computing_super*/;
+    /* Register variable[2]: Result */
+    variable[2] = ATTR_inheritance___MMLocalClass____computing_super(variable[0]) /*MMLocalClass::_computing_super*/;
     if (UNTAG_Bool(variable[2])) { /*if*/
-      variable[2] = variable[0];
-      variable[2] = CALL_file___Object___stderr(variable[2])(variable[2]) /*Object::stderr*/;
-      variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-      variable[4] = NEW_String_string___String___with_native(BOX_NativeString("Fatal error: Inheritance loop for class "), TAG_Int(40)); /*new String*/
-      variable[5] = variable[4];
-      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[5]) /*AbstractArray::add*/;
-      variable[6] = variable[0];
-      variable[7] = variable[6];
-      variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[7]) /*AbstractArray::add*/;
-      variable[8] = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)); /*new String*/
-      variable[9] = variable[8];
-      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[9]) /*AbstractArray::add*/;
+      /* Register variable[2]: Result */
+      variable[2] = CALL_file___Object___stderr(variable[0])(variable[0]) /*Object::stderr*/;
+      variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[4]: Once String constant */
+      if (once_value_10 != NIT_NULL) variable[4] = once_value_10;
+      else {
+        variable[4] = NEW_String_string___String___with_native(BOX_NativeString("Fatal error: Inheritance loop for class "), TAG_Int(40)) /*new String*/;
+        once_value_10 = variable[4];
+      }
+      /* Register variable[4]: Result */
+      /* Ensure var variable[4]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
+      /* Ensure var variable[0]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], CALL_string___Object___to_s(variable[0])(variable[0]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[4]: Once String constant */
+      if (once_value_11 != NIT_NULL) variable[4] = once_value_11;
+      else {
+        variable[4] = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)) /*new String*/;
+        once_value_11 = variable[4];
+      }
+      /* Register variable[4]: Result */
+      /* Ensure var variable[4]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
+      /* Register variable[3]: Result */
       variable[3] = CALL_string___Object___to_s(variable[3])(variable[3]) /*Object::to_s*/;
       CALL_stream___OStream___write(variable[2])(variable[2], variable[3]) /*OFStream::write*/;
-      variable[2] = variable[0];
       exit(UNTAG_Int( TAG_Int(1)));
     }
   }
-  variable[2] = variable[0];
-  ATTR_inheritance___MMLocalClass____computing_super(variable[2]) /*MMLocalClass::_computing_super*/ =  TAG_Bool(true);
-  variable[3] = NEW_Array_array___Array___init(); /*new Array[MMLocalClass]*/
+  ATTR_inheritance___MMLocalClass____computing_super(variable[0]) /*MMLocalClass::_computing_super*/ =  TAG_Bool(true);
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = NEW_Array_array___Array___init() /*new Array[MMLocalClass]*/;
   variable[2] = variable[3];
-  variable[3] = variable[0];
-  CALL_inheritance___MMLocalClass___add_explicit_classes(variable[3])(variable[3],  variable[2] /*supers*/) /*MMLocalClass::add_explicit_classes*/;
-  variable[3] = variable[0];
-  CALL_inheritance___MMLocalClass___add_super_classes(variable[3])(variable[3],  variable[2] /*supers*/) /*MMLocalClass::add_super_classes*/;
-  variable[3] = variable[0];
-  CALL_inheritance___MMLocalClass___add_default_any_class(variable[3])(variable[3],  variable[2] /*supers*/) /*MMLocalClass::add_default_any_class*/;
-  variable[3] = variable[0];
-  CALL_inheritance___MMLocalClass___compute_super_parents(variable[3])(variable[3],  variable[2] /*supers*/) /*MMLocalClass::compute_super_parents*/;
-  variable[4] = NEW_HashSet_hash___HashSet___init(); /*new HashSet[MMLocalClass]*/
+  CALL_inheritance___MMLocalClass___add_explicit_classes(variable[0])(variable[0],  variable[2] /*supers*/) /*MMLocalClass::add_explicit_classes*/;
+  CALL_inheritance___MMLocalClass___add_super_classes(variable[0])(variable[0],  variable[2] /*supers*/) /*MMLocalClass::add_super_classes*/;
+  CALL_inheritance___MMLocalClass___add_default_any_class(variable[0])(variable[0],  variable[2] /*supers*/) /*MMLocalClass::add_default_any_class*/;
+  CALL_inheritance___MMLocalClass___compute_super_parents(variable[0])(variable[0],  variable[2] /*supers*/) /*MMLocalClass::compute_super_parents*/;
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = NEW_HashSet_hash___HashSet___init() /*new HashSet[MMLocalClass]*/;
   variable[3] = variable[4];
   CALL_abstract_collection___SimpleCollection___add_all( variable[3] /*set*/)( variable[3] /*set*/,  variable[2] /*supers*/) /*SimpleCollection::add_all*/;
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
   variable[5] = CALL_array___Collection___to_a( variable[3] /*set*/)( variable[3] /*set*/) /*Collection::to_a*/;
   variable[4] = variable[5];
-  variable[5] = variable[0];
-  variable[5] = CALL_abstractmetamodel___MMLocalClass___module(variable[5])(variable[5]) /*MMLocalClass::module*/;
-  variable[6] = variable[0];
-  CALL_abstractmetamodel___MMModule___set_supers_class(variable[5])(variable[5], variable[6],  variable[4] /*u*/) /*MMModule::set_supers_class*/;
-  variable[5] = variable[0];
-  variable[5] = ATTR_abstractmetamodel___MMLocalClass____crhe(variable[5]) /*MMLocalClass::_crhe*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_abstractmetamodel___MMLocalClass___module(variable[0])(variable[0]) /*MMLocalClass::module*/;
+  CALL_abstractmetamodel___MMModule___set_supers_class(variable[5])(variable[5], variable[0],  variable[4] /*u*/) /*MMModule::set_supers_class*/;
+  /* Register variable[5]: Result */
+  variable[5] = ATTR_abstractmetamodel___MMLocalClass____crhe(variable[0]) /*MMLocalClass::_crhe*/;
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[5])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[5])(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___compute_super_classes, LOCATE_inheritance, 85); nit_exit(1);}
-  variable[5] = variable[0];
-  variable[5] = ATTR_abstractmetamodel___MMLocalClass____cshe(variable[5]) /*MMLocalClass::_cshe*/;
+  /* Register variable[5]: Result */
+  variable[5] = ATTR_abstractmetamodel___MMLocalClass____cshe(variable[0]) /*MMLocalClass::_cshe*/;
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[5])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[5])(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___compute_super_classes, LOCATE_inheritance, 86); nit_exit(1);}
-  variable[5] = variable[0];
-  ATTR_inheritance___MMLocalClass____computing_super(variable[5]) /*MMLocalClass::_computing_super*/ =  TAG_Bool(false);
-  return_label8: while(false);
+  ATTR_inheritance___MMLocalClass____computing_super(variable[0]) /*MMLocalClass::_computing_super*/ =  TAG_Bool(false);
+  return_label9: while(false);
   tracehead = trace.prev;
   return;
 }
 void inheritance___MMLocalClass___compute_ancestors(val_t  self) {
   struct trace_t trace = {NULL, NULL, 90, LOCATE_inheritance___MMLocalClass___compute_ancestors};
-  val_t variable[9];
-  void **closurevariable = NULL;
+  val_t variable[8];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_inheritance___MMLocalClass___computed_super_classes(variable[2])(variable[2]) /*MMLocalClass::computed_super_classes*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_inheritance___MMLocalClass___computed_super_classes(variable[0])(variable[0]) /*MMLocalClass::computed_super_classes*/;
   if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___compute_ancestors, LOCATE_inheritance, 93); nit_exit(1);}
-  variable[2] = variable[0];
-  variable[2] = CALL_inheritance___MMLocalClass___computed_ancestors(variable[2])(variable[2]) /*MMLocalClass::computed_ancestors*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_inheritance___MMLocalClass___computed_ancestors(variable[0])(variable[0]) /*MMLocalClass::computed_ancestors*/;
   if (UNTAG_Bool(variable[2])) { /*if*/
-    goto return_label9;
+    goto return_label12;
   }
-  variable[3] = variable[0];
-  variable[4] = variable[0];
-  variable[4] = CALL_inheritance___MMLocalClass___build_ancestors(variable[4])(variable[4]) /*MMLocalClass::build_ancestors*/;
-  variable[3] = CALL_inheritance___MMLocalClass___group_ancestors(variable[3])(variable[3], variable[4]) /*MMLocalClass::group_ancestors*/;
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_inheritance___MMLocalClass___build_ancestors(variable[0])(variable[0]) /*MMLocalClass::build_ancestors*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_inheritance___MMLocalClass___group_ancestors(variable[0])(variable[0], variable[3]) /*MMLocalClass::group_ancestors*/;
   variable[2] = variable[3];
-  variable[3] = variable[0];
-  variable[4] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[MMLocalClass, MMAncestor]*/
-  ATTR_static_type___MMLocalClass____ancestors(variable[3]) /*MMLocalClass::_ancestors*/ = variable[4];
-  variable[3] = CALL_abstract_collection___Collection___iterator( variable[2] /*ancestors*/)( variable[2] /*ancestors*/) /*Map::iterator*/;
+  /* Register variable[3]: Result */
+  variable[3] = NEW_HashMap_hash___HashMap___init() /*new HashMap[MMLocalClass, MMAncestor]*/;
+  ATTR_static_type___MMLocalClass____ancestors(variable[0]) /*MMLocalClass::_ancestors*/ = variable[3];
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator( variable[2] /*ancestors*/)( variable[2] /*ancestors*/) /*MapRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
+    /* Register variable[6]: Result */
     variable[6] = CALL_abstract_collection___Collection___length( variable[5] /*set*/)( variable[5] /*set*/) /*Collection::length*/;
+    /* Register variable[6]: Result */
     variable[6] = TAG_Bool((variable[6])==( TAG_Int(1)));
     if (UNTAG_Bool(variable[6])) { /*if*/
-      variable[6] = variable[0];
-      variable[7] = CALL_abstract_collection___Collection___first( variable[5] /*set*/)( variable[5] /*set*/) /*Collection::first*/;
-      CALL_static_type___MMLocalClass___add_ancestor(variable[6])(variable[6], variable[7]) /*MMLocalClass::add_ancestor*/;
+      /* Register variable[6]: Result */
+      variable[6] = CALL_abstract_collection___Collection___first( variable[5] /*set*/)( variable[5] /*set*/) /*Collection::first*/;
+      CALL_static_type___MMLocalClass___add_ancestor(variable[0])(variable[0], variable[6]) /*MMLocalClass::add_ancestor*/;
     } else { /*if*/
-      variable[7] = variable[0];
-      variable[7] = CALL_inheritance___MMLocalClass___merge_ancestors(variable[7])(variable[7],  variable[5] /*set*/) /*MMLocalClass::merge_ancestors*/;
+      /* Register variable[6]: Local variable */
+      /* Register variable[7]: Result */
+      variable[7] = CALL_inheritance___MMLocalClass___merge_ancestors(variable[0])(variable[0],  variable[5] /*set*/) /*MMLocalClass::merge_ancestors*/;
       variable[6] = variable[7];
-      variable[7] = variable[0];
-      variable[8] = variable[0];
-      variable[8] = CALL_inheritance___MMLocalClass___merge_ancestors(variable[8])(variable[8],  variable[5] /*set*/) /*MMLocalClass::merge_ancestors*/;
-      CALL_static_type___MMLocalClass___add_ancestor(variable[7])(variable[7], variable[8]) /*MMLocalClass::add_ancestor*/;
+      /* Register variable[7]: Result */
+      variable[7] = CALL_inheritance___MMLocalClass___merge_ancestors(variable[0])(variable[0],  variable[5] /*set*/) /*MMLocalClass::merge_ancestors*/;
+      CALL_static_type___MMLocalClass___add_ancestor(variable[0])(variable[0], variable[7]) /*MMLocalClass::add_ancestor*/;
     }
-    continue_10: while(0);
+    continue_13: while(0);
     CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*Iterator::next*/;
   }
-  break_10: while(0);
-  return_label9: while(false);
+  break_13: while(0);
+  return_label12: while(false);
   tracehead = trace.prev;
   return;
 }
 void inheritance___MMLocalClass___inherit_global_properties(val_t  self) {
   struct trace_t trace = {NULL, NULL, 109, LOCATE_inheritance___MMLocalClass___inherit_global_properties};
-  val_t variable[13];
-  void **closurevariable = NULL;
+  val_t variable[12];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_abstractmetamodel___MMLocalClass____global_properties(variable[2]) /*MMLocalClass::_global_properties*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_abstractmetamodel___MMLocalClass____global_properties(variable[0]) /*MMLocalClass::_global_properties*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[2])) { /*if*/
-    goto return_label11;
+    goto return_label14;
   }
-  variable[2] = variable[0];
-  variable[3] = NEW_HashSet_hash___HashSet___init(); /*new HashSet[MMGlobalProperty]*/
-  ATTR_abstractmetamodel___MMLocalClass____global_properties(variable[2]) /*MMLocalClass::_global_properties*/ = variable[3];
-  variable[2] = variable[0];
-  variable[3] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[Symbol, Array[MMGlobalProperty]]*/
-  ATTR_abstractmetamodel___MMLocalClass____properties_by_name(variable[2]) /*MMLocalClass::_properties_by_name*/ = variable[3];
-  variable[2] = variable[0];
-  variable[3] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[MMGlobalProperty, MMLocalProperty]*/
-  ATTR_abstractmetamodel___MMLocalClass____local_property_by_global(variable[2]) /*MMLocalClass::_local_property_by_global*/ = variable[3];
-  variable[3] = variable[0];
-  variable[3] = ATTR_abstractmetamodel___MMLocalClass____properties_by_name(variable[3]) /*MMLocalClass::_properties_by_name*/;
+  /* Register variable[2]: Result */
+  variable[2] = NEW_HashSet_hash___HashSet___init() /*new HashSet[MMGlobalProperty]*/;
+  ATTR_abstractmetamodel___MMLocalClass____global_properties(variable[0]) /*MMLocalClass::_global_properties*/ = variable[2];
+  /* Register variable[2]: Result */
+  variable[2] = NEW_HashMap_hash___HashMap___init() /*new HashMap[Symbol, Array[MMGlobalProperty]]*/;
+  ATTR_abstractmetamodel___MMLocalClass____properties_by_name(variable[0]) /*MMLocalClass::_properties_by_name*/ = variable[2];
+  /* Register variable[2]: Result */
+  variable[2] = NEW_HashMap_hash___HashMap___init() /*new HashMap[MMGlobalProperty, MMLocalProperty]*/;
+  ATTR_abstractmetamodel___MMLocalClass____local_property_by_global(variable[0]) /*MMLocalClass::_local_property_by_global*/ = variable[2];
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_abstractmetamodel___MMLocalClass____properties_by_name(variable[0]) /*MMLocalClass::_properties_by_name*/;
   variable[2] = variable[3];
-  variable[4] = variable[0];
-  variable[4] = ATTR_abstractmetamodel___MMLocalClass____global_properties(variable[4]) /*MMLocalClass::_global_properties*/;
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_abstractmetamodel___MMLocalClass____global_properties(variable[0]) /*MMLocalClass::_global_properties*/;
   variable[3] = variable[4];
-  variable[4] = variable[0];
-  variable[4] = CALL_abstractmetamodel___MMLocalClass___che(variable[4])(variable[4]) /*MMLocalClass::che*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstractmetamodel___MMLocalClass___che(variable[0])(variable[0]) /*MMLocalClass::che*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_partial_order___PartialOrderElement___direct_greaters(variable[4])(variable[4]) /*PartialOrderElement::direct_greaters*/;
-  variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*AbstractArray::iterator*/;
+  /* Register variable[4]: For iterator */
+  variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[5]: For 'is_ok' result */
     variable[5] = CALL_abstract_collection___Iterator___is_ok(variable[4])(variable[4]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[5])) break; /*for*/
-    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/;
+    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[6]: Local variable */
     variable[6] = variable[5];
+    /* Register variable[7]: Result */
     variable[7] = CALL_abstractmetamodel___MMLocalClass___global_properties( variable[6] /*c*/)( variable[6] /*c*/) /*MMLocalClass::global_properties*/;
+    /* Register variable[7]: For iterator */
     variable[7] = CALL_abstract_collection___Collection___iterator(variable[7])(variable[7]) /*Collection::iterator*/;
     while (true) { /*for*/
+      /* Register variable[8]: For 'is_ok' result */
       variable[8] = CALL_abstract_collection___Iterator___is_ok(variable[7])(variable[7]) /*Iterator::is_ok*/;
       if (!UNTAG_Bool(variable[8])) break; /*for*/
-      variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*Iterator::item*/;
+      variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*Iterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[9]: Local variable */
       variable[9] = variable[8];
+      /* Register variable[10]: Result */
       variable[10] = CALL_abstract_collection___Collection___has( variable[3] /*set*/)( variable[3] /*set*/,  variable[9] /*glob*/) /*Collection::has*/;
       if (UNTAG_Bool(variable[10])) { /*if*/
-        goto continue_13;
+        goto continue_16;
       }
       CALL_abstract_collection___SimpleCollection___add( variable[3] /*set*/)( variable[3] /*set*/,  variable[9] /*glob*/) /*SimpleCollection::add*/;
+      /* Register variable[10]: Result */
       variable[10] = CALL_abstractmetamodel___MMGlobalProperty___is_init( variable[9] /*glob*/)( variable[9] /*glob*/) /*MMGlobalProperty::is_init*/;
-      variable[11] = variable[10];
-      if (UNTAG_Bool(variable[11])) { /* and */
-        variable[11] = CALL_abstractmetamodel___MMGlobalProperty___intro( variable[9] /*glob*/)( variable[9] /*glob*/) /*MMGlobalProperty::intro*/;
-        variable[11] = CALL_abstractmetamodel___MMLocalProperty___local_class(variable[11])(variable[11]) /*MMLocalProperty::local_class*/;
-        variable[11] = CALL_abstractmetamodel___MMLocalClass___global(variable[11])(variable[11]) /*MMLocalClass::global*/;
-        variable[12] = variable[0];
-        variable[12] = CALL_abstractmetamodel___MMLocalClass___global(variable[12])(variable[12]) /*MMLocalClass::global*/;
-        variable[11] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[11] == variable[12]) || ((variable[11] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[11])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[11],variable[12])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[11])(variable[11], variable[12]) /*Object::==*/)))))));
+      /* Ensure var variable[10]: Left 'and' operand*/
+      if (UNTAG_Bool(variable[10])) { /* and */
+        /* Register variable[10]: Result */
+        variable[10] = CALL_abstractmetamodel___MMGlobalProperty___intro( variable[9] /*glob*/)( variable[9] /*glob*/) /*MMGlobalProperty::intro*/;
+        /* Register variable[10]: Result */
+        variable[10] = CALL_abstractmetamodel___MMLocalProperty___local_class(variable[10])(variable[10]) /*MMLocalProperty::local_class*/;
+        /* Register variable[10]: Result */
+        variable[10] = CALL_abstractmetamodel___MMLocalClass___global(variable[10])(variable[10]) /*MMLocalClass::global*/;
+        /* Register variable[11]: Result */
+        variable[11] = CALL_abstractmetamodel___MMLocalClass___global(variable[0])(variable[0]) /*MMLocalClass::global*/;
+        /* Register variable[10]: Result */
+        variable[10] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[10] == variable[11]) || ((variable[10] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[10])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[10],variable[11])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[10])(variable[10], variable[11]) /*Object::==*/)))))));
       }
-      variable[10] = variable[11];
+      /* Register variable[10]: Result */
       if (UNTAG_Bool(variable[10])) { /*if*/
-        goto continue_13;
+        goto continue_16;
       }
-      variable[10] = variable[0];
-      CALL_inheritance___MMLocalClass___make_visible_an_inherited_global_property(variable[10])(variable[10],  variable[9] /*glob*/) /*MMLocalClass::make_visible_an_inherited_global_property*/;
-      continue_13: while(0);
+      CALL_inheritance___MMLocalClass___make_visible_an_inherited_global_property(variable[0])(variable[0],  variable[9] /*glob*/) /*MMLocalClass::make_visible_an_inherited_global_property*/;
+      continue_16: while(0);
       CALL_abstract_collection___Iterator___next(variable[7])(variable[7]) /*Iterator::next*/;
     }
-    break_13: while(0);
-    continue_12: while(0);
+    break_16: while(0);
+    continue_15: while(0);
     CALL_abstract_collection___Iterator___next(variable[4])(variable[4]) /*ArrayIterator::next*/;
   }
-  break_12: while(0);
-  return_label11: while(false);
+  break_15: while(0);
+  return_label14: while(false);
   tracehead = trace.prev;
   return;
 }
 void inheritance___MMLocalClass___make_visible_an_inherited_global_property(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 138, LOCATE_inheritance___MMLocalClass___make_visible_an_inherited_global_property};
   val_t variable[7];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[4] = ATTR_abstractmetamodel___MMLocalClass____properties_by_name(variable[4]) /*MMLocalClass::_properties_by_name*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_abstractmetamodel___MMLocalClass____properties_by_name(variable[0]) /*MMLocalClass::_properties_by_name*/;
   variable[3] = variable[4];
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
   variable[5] = CALL_abstractmetamodel___MMGlobalProperty___intro( variable[1] /*glob*/)( variable[1] /*glob*/) /*MMGlobalProperty::intro*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_abstractmetamodel___MMLocalProperty___name(variable[5])(variable[5]) /*MMLocalProperty::name*/;
   variable[4] = variable[5];
+  /* Register variable[5]: Local variable */
   /*variable[5] is variable conf_set*/
-  variable[6] = CALL_abstract_collection___Map___has_key( variable[3] /*names*/)( variable[3] /*names*/,  variable[4] /*gname*/) /*Map::has_key*/;
+  /* Register variable[6]: Result */
+  variable[6] = CALL_abstract_collection___MapRead___has_key( variable[3] /*names*/)( variable[3] /*names*/,  variable[4] /*gname*/) /*MapRead::has_key*/;
   if (UNTAG_Bool(variable[6])) { /*if*/
-    variable[6] = CALL_abstract_collection___Map_____bra( variable[3] /*names*/)( variable[3] /*names*/,  variable[4] /*gname*/) /*Map::[]*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_abstract_collection___MapRead_____bra( variable[3] /*names*/)( variable[3] /*names*/,  variable[4] /*gname*/) /*MapRead::[]*/;
     variable[5] = variable[6] /*conf_set=*/;
   } else { /*if*/
-    variable[6] = NEW_Array_array___Array___init(); /*new Array[MMGlobalProperty]*/
+    /* Register variable[6]: Result */
+    variable[6] = NEW_Array_array___Array___init() /*new Array[MMGlobalProperty]*/;
     variable[5] = variable[6] /*conf_set=*/;
     CALL_abstract_collection___Map_____braeq( variable[3] /*names*/)( variable[3] /*names*/,  variable[4] /*gname*/,  variable[5] /*conf_set*/) /*Map::[]=*/;
   }
   CALL_abstract_collection___SimpleCollection___add( variable[5] /*conf_set*/)( variable[5] /*conf_set*/,  variable[1] /*glob*/) /*AbstractArray::add*/;
-  return_label14: while(false);
+  return_label17: while(false);
   tracehead = trace.prev;
   return;
 }
 void inheritance___MMLocalClass___add_direct_parent(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 153, LOCATE_inheritance___MMLocalClass___add_direct_parent};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_inheritance___MMLocalClass____direct_parents(variable[3]) /*MMLocalClass::_direct_parents*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_inheritance___MMLocalClass____direct_parents(variable[0]) /*MMLocalClass::_direct_parents*/;
   CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3],  variable[1] /*p*/) /*AbstractArray::add*/;
-  return_label15: while(false);
+  return_label18: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t inheritance___MMLocalClass___computed_super_classes(val_t  self) {
   struct trace_t trace = {NULL, NULL, 159, LOCATE_inheritance___MMLocalClass___computed_super_classes};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_abstractmetamodel___MMLocalClass____crhe(variable[2]) /*MMLocalClass::_crhe*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_abstractmetamodel___MMLocalClass____crhe(variable[0]) /*MMLocalClass::_crhe*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  variable[3] = variable[2];
-  if (UNTAG_Bool(variable[3])) { /* and */
-    variable[3] = variable[0];
-    variable[3] = ATTR_abstractmetamodel___MMLocalClass____cshe(variable[3]) /*MMLocalClass::_cshe*/;
-    variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  /* Ensure var variable[2]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[2])) { /* and */
+    /* Register variable[2]: Result */
+    variable[2] = ATTR_abstractmetamodel___MMLocalClass____cshe(variable[0]) /*MMLocalClass::_cshe*/;
+    /* Register variable[2]: Result */
+    variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))))));
   }
-  variable[2] = variable[3];
+  /* Register variable[2]: Result */
   variable[1] = variable[2];
-  goto return_label16;
-  return_label16: while(false);
+  goto return_label19;
+  return_label19: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t inheritance___MMLocalClass___computed_ancestors(val_t  self) {
   struct trace_t trace = {NULL, NULL, 165, LOCATE_inheritance___MMLocalClass___computed_ancestors};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_static_type___MMLocalClass____ancestors(variable[2]) /*MMLocalClass::_ancestors*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_static_type___MMLocalClass____ancestors(variable[0]) /*MMLocalClass::_ancestors*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))))));
   variable[1] = variable[2];
-  goto return_label17;
-  return_label17: while(false);
+  goto return_label20;
+  return_label20: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t inheritance___MMLocalClass___ancestor_for(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 171, LOCATE_inheritance___MMLocalClass___ancestor_for};
-  val_t variable[8];
-  void **closurevariable = NULL;
+  val_t variable[7];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_static_type___MMLocalClass___ancestors(variable[3])(variable[3]) /*MMLocalClass::ancestors*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_static_type___MMLocalClass___ancestors(variable[0])(variable[0]) /*MMLocalClass::ancestors*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___ancestor_for, LOCATE_inheritance, 175); nit_exit(1);}
-  variable[3] = variable[0];
-  variable[3] = ATTR_static_type___MMLocalClass____ancestors(variable[3]) /*MMLocalClass::_ancestors*/;
-  variable[3] = CALL_abstract_collection___Map___has_key(variable[3])(variable[3],  variable[1] /*c*/) /*Map::has_key*/;
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_static_type___MMLocalClass____ancestors(variable[0]) /*MMLocalClass::_ancestors*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___MapRead___has_key(variable[3])(variable[3],  variable[1] /*c*/) /*MapRead::has_key*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = variable[0];
-    variable[3] = ATTR_static_type___MMLocalClass____ancestors(variable[3]) /*MMLocalClass::_ancestors*/;
-    variable[3] = CALL_abstract_collection___Map_____bra(variable[3])(variable[3],  variable[1] /*c*/) /*Map::[]*/;
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_static_type___MMLocalClass____ancestors(variable[0]) /*MMLocalClass::_ancestors*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_abstract_collection___MapRead_____bra(variable[3])(variable[3],  variable[1] /*c*/) /*MapRead::[]*/;
     variable[2] = variable[3];
-    goto return_label18;
+    goto return_label21;
   }
-  variable[4] = variable[0];
-  variable[4] = CALL_abstractmetamodel___MMLocalClass___module(variable[4])(variable[4]) /*MMLocalClass::module*/;
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstractmetamodel___MMLocalClass___module(variable[0])(variable[0]) /*MMLocalClass::module*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_abstractmetamodel___MMLocalClass___for_module( variable[1] /*c*/)( variable[1] /*c*/, variable[4]) /*MMLocalClass::for_module*/;
   variable[3] = variable[4];
-  variable[4] = variable[0];
-  variable[4] = CALL_abstractmetamodel___MMLocalClass___cshe(variable[4])(variable[4]) /*MMLocalClass::cshe*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstractmetamodel___MMLocalClass___cshe(variable[0])(variable[0]) /*MMLocalClass::cshe*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_partial_order___PartialOrderElement_____leq(variable[4])(variable[4],  variable[3] /*a*/) /*PartialOrderElement::<=*/;
   if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___ancestor_for, LOCATE_inheritance, 181); nit_exit(1);}
+  /* Register variable[4]: Local variable */
   /*variable[4] is variable ra*/
-  variable[5] = variable[0];
-  variable[5] = ATTR_static_type___MMLocalClass____ancestors(variable[5]) /*MMLocalClass::_ancestors*/;
-  variable[5] = CALL_abstract_collection___Map___has_key(variable[5])(variable[5],  variable[3] /*a*/) /*Map::has_key*/;
+  /* Register variable[5]: Result */
+  variable[5] = ATTR_static_type___MMLocalClass____ancestors(variable[0]) /*MMLocalClass::_ancestors*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_abstract_collection___MapRead___has_key(variable[5])(variable[5],  variable[3] /*a*/) /*MapRead::has_key*/;
   if (UNTAG_Bool(variable[5])) { /*if*/
-    variable[5] = variable[0];
-    variable[5] = ATTR_static_type___MMLocalClass____ancestors(variable[5]) /*MMLocalClass::_ancestors*/;
-    variable[5] = CALL_abstract_collection___Map_____bra(variable[5])(variable[5],  variable[3] /*a*/) /*Map::[]*/;
+    /* Register variable[5]: Result */
+    variable[5] = ATTR_static_type___MMLocalClass____ancestors(variable[0]) /*MMLocalClass::_ancestors*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_abstract_collection___MapRead_____bra(variable[5])(variable[5],  variable[3] /*a*/) /*MapRead::[]*/;
     variable[4] = variable[5] /*ra=*/;
   } else { /*if*/
+    /* Register variable[5]: Result */
     variable[5] = CALL_abstractmetamodel___MMLocalClass___global( variable[1] /*c*/)( variable[1] /*c*/) /*MMLocalClass::global*/;
-    variable[6] = variable[0];
-    variable[6] = ATTR_abstractmetamodel___MMLocalClass____global(variable[6]) /*MMLocalClass::_global*/;
+    /* Register variable[6]: Result */
+    variable[6] = ATTR_abstractmetamodel___MMLocalClass____global(variable[0]) /*MMLocalClass::_global*/;
+    /* Register variable[5]: Result */
     variable[5] = TAG_Bool((variable[5] == variable[6]) || ((variable[5] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[5])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5],variable[6])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[5])(variable[5], variable[6]) /*Object::==*/)))));
     if (UNTAG_Bool(variable[5])) { /*if*/
-      variable[5] = variable[0];
-      variable[6] = NEW_MMRefineAncestor_inheritance___MMRefineAncestor___init(variable[5],  variable[1] /*c*/); /*new MMRefineAncestor*/
-      variable[5] = variable[6];
+      /* Register variable[5]: Result */
+      variable[5] = NEW_MMRefineAncestor_inheritance___MMRefineAncestor___init(variable[0],  variable[1] /*c*/) /*new MMRefineAncestor*/;
       variable[4] = variable[5] /*ra=*/;
     } else { /*if*/
-      variable[5] = variable[0];
-      variable[5] = CALL_static_type___MMLocalClass___get_type(variable[5])(variable[5]) /*MMLocalClass::get_type*/;
+      /* Register variable[5]: Result */
+      variable[5] = CALL_static_type___MMLocalClass___get_type(variable[0])(variable[0]) /*MMLocalClass::get_type*/;
+      /* Register variable[6]: Result */
       variable[6] = CALL_static_type___MMLocalClass___get_type( variable[1] /*c*/)( variable[1] /*c*/) /*MMLocalClass::get_type*/;
-      variable[7] = NEW_MMSpecAncestor_inheritance___MMSpecAncestor___init(variable[5], variable[6]); /*new MMSpecAncestor*/
-      variable[5] = variable[7];
+      /* Register variable[5]: Result */
+      variable[5] = NEW_MMSpecAncestor_inheritance___MMSpecAncestor___init(variable[5], variable[6]) /*new MMSpecAncestor*/;
       variable[4] = variable[5] /*ra=*/;
     }
   }
-  variable[5] = variable[0];
-  variable[5] = ATTR_static_type___MMLocalClass____ancestors(variable[5]) /*MMLocalClass::_ancestors*/;
+  /* Register variable[5]: Result */
+  variable[5] = ATTR_static_type___MMLocalClass____ancestors(variable[0]) /*MMLocalClass::_ancestors*/;
   CALL_abstract_collection___Map_____braeq(variable[5])(variable[5],  variable[1] /*c*/,  variable[4] /*ra*/) /*Map::[]=*/;
   variable[2] =  variable[4] /*ra*/;
-  goto return_label18;
-  return_label18: while(false);
+  goto return_label21;
+  return_label21: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 void inheritance___MMLocalClass___add_default_any_class(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 203, LOCATE_inheritance___MMLocalClass___add_default_any_class};
-    static val_t once_value_20; static int once_bool_20; /* Once value for variable[5]*/
-  val_t variable[7];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 205, LOCATE_inheritance___MMLocalClass___add_default_any_class};
+    static val_t once_value_23; static int once_bool_23; /* Once value for variable[4]*/
+      static val_t once_value_24 = NIT_NULL; /* Once value for string variable[4]*/
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = CALL_abstract_collection___Collection___is_empty( variable[1] /*supers*/)( variable[1] /*supers*/) /*AbstractArray::is_empty*/;
-  variable[4] = variable[3];
-  if (UNTAG_Bool(variable[4])) { /* and */
-    variable[4] = variable[0];
-    variable[4] = CALL_abstractmetamodel___MMLocalClass___name(variable[4])(variable[4]) /*MMLocalClass::name*/;
-    if (once_bool_20) variable[5] = once_value_20;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___Collection___is_empty( variable[1] /*supers*/)( variable[1] /*supers*/) /*AbstractArrayRead::is_empty*/;
+  /* Ensure var variable[3]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[3])) { /* and */
+    /* Register variable[3]: Result */
+    variable[3] = CALL_abstractmetamodel___MMLocalClass___name(variable[0])(variable[0]) /*MMLocalClass::name*/;
+    /* Register variable[4]: Once expression result */
+    if (once_bool_23) variable[4] = once_value_23;
     else {
-      variable[5] = NEW_String_string___String___with_native(BOX_NativeString("Object"), TAG_Int(6)); /*new String*/
-      variable[5] = CALL_symbol___String___to_symbol(variable[5])(variable[5]) /*String::to_symbol*/;
-      once_value_20 = variable[5];
-      once_bool_20 = true;
+      /* Register variable[4]: Once String constant */
+      if (once_value_24 != NIT_NULL) variable[4] = once_value_24;
+      else {
+        variable[4] = NEW_String_string___String___with_native(BOX_NativeString("Object"), TAG_Int(6)) /*new String*/;
+        once_value_24 = variable[4];
+      }
+      /* Register variable[4]: Result */
+      /* Register variable[4]: Result */
+      variable[4] = CALL_symbol___String___to_symbol(variable[4])(variable[4]) /*String::to_symbol*/;
+      once_value_23 = variable[4];
+      once_bool_23 = true;
     }
-    variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] == variable[5]) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4],variable[5])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4], variable[5]) /*Object::==*/)))))));
+    /* Register variable[4]: Result */
+    /* Register variable[3]: Result */
+    variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] == variable[4]) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3],variable[4])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3], variable[4]) /*Object::==*/)))))));
   }
-  variable[3] = variable[4];
+  /* Register variable[3]: Result */
   if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[4] = variable[0];
-    variable[4] = CALL_abstractmetamodel___MMLocalClass___module(variable[4])(variable[4]) /*MMLocalClass::module*/;
+    /* Register variable[3]: Local variable */
+    /* Register variable[4]: Result */
+    variable[4] = CALL_abstractmetamodel___MMLocalClass___module(variable[0])(variable[0]) /*MMLocalClass::module*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_inheritance___MMModule___type_any(variable[4])(variable[4]) /*MMModule::type_any*/;
     variable[3] = variable[4];
+    /* Register variable[4]: Result */
     variable[4] = CALL_static_type___MMType___local_class( variable[3] /*t_any*/)( variable[3] /*t_any*/) /*MMType::local_class*/;
     CALL_abstract_collection___SimpleCollection___add( variable[1] /*supers*/)( variable[1] /*supers*/, variable[4]) /*AbstractArray::add*/;
-    variable[5] = variable[0];
-    variable[6] = NEW_MMDefaultAncestor_inheritance___MMDefaultAncestor___init(variable[5],  variable[3] /*t_any*/); /*new MMDefaultAncestor*/
-    variable[5] = variable[6];
+    /* Register variable[4]: Local variable */
+    /* Register variable[5]: Result */
+    variable[5] = NEW_MMDefaultAncestor_inheritance___MMDefaultAncestor___init(variable[0],  variable[3] /*t_any*/) /*new MMDefaultAncestor*/;
     variable[4] = variable[5];
-    variable[5] = variable[0];
-    CALL_inheritance___MMLocalClass___add_direct_parent(variable[5])(variable[5],  variable[4] /*default*/) /*MMLocalClass::add_direct_parent*/;
+    CALL_inheritance___MMLocalClass___add_direct_parent(variable[0])(variable[0],  variable[4] /*default*/) /*MMLocalClass::add_direct_parent*/;
   }
-  return_label19: while(false);
+  return_label22: while(false);
   tracehead = trace.prev;
   return;
 }
 void inheritance___MMLocalClass___add_super_classes(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 214, LOCATE_inheritance___MMLocalClass___add_super_classes};
+  struct trace_t trace = {NULL, NULL, 216, LOCATE_inheritance___MMLocalClass___add_super_classes};
   val_t variable[11];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_abstractmetamodel___MMLocalClass____crhe(variable[3]) /*MMLocalClass::_crhe*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_abstractmetamodel___MMLocalClass____crhe(variable[0]) /*MMLocalClass::_crhe*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___add_super_classes, LOCATE_inheritance, 217); nit_exit(1);}
-  variable[3] = variable[0];
-  variable[3] = ATTR_abstractmetamodel___MMLocalClass____crhe(variable[3]) /*MMLocalClass::_crhe*/;
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___add_super_classes, LOCATE_inheritance, 219); nit_exit(1);}
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_abstractmetamodel___MMLocalClass____crhe(variable[0]) /*MMLocalClass::_crhe*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_partial_order___PartialOrderElement___direct_greaters(variable[3])(variable[3]) /*PartialOrderElement::direct_greaters*/;
-  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArray::iterator*/;
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
+    /* Register variable[6]: Result */
     variable[6] = CALL_abstractmetamodel___MMLocalClass___cshe( variable[5] /*ref*/)( variable[5] /*ref*/) /*MMLocalClass::cshe*/;
+    /* Register variable[6]: Result */
     variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] ==  NIT_NULL /*null*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  NIT_NULL /*null*/) /*Object::==*/)))))));
-    if (!UNTAG_Bool(variable[6])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___add_super_classes, LOCATE_inheritance, 219); nit_exit(1);}
+    if (!UNTAG_Bool(variable[6])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___add_super_classes, LOCATE_inheritance, 221); nit_exit(1);}
+    /* Register variable[6]: Result */
     variable[6] = CALL_abstractmetamodel___MMLocalClass___cshe( variable[5] /*ref*/)( variable[5] /*ref*/) /*MMLocalClass::cshe*/;
+    /* Register variable[6]: Result */
     variable[6] = CALL_partial_order___PartialOrderElement___direct_greaters(variable[6])(variable[6]) /*PartialOrderElement::direct_greaters*/;
-    variable[6] = CALL_abstract_collection___Collection___iterator(variable[6])(variable[6]) /*AbstractArray::iterator*/;
+    /* Register variable[6]: For iterator */
+    variable[6] = CALL_abstract_collection___Collection___iterator(variable[6])(variable[6]) /*AbstractArrayRead::iterator*/;
     while (true) { /*for*/
+      /* Register variable[7]: For 'is_ok' result */
       variable[7] = CALL_abstract_collection___Iterator___is_ok(variable[6])(variable[6]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[7])) break; /*for*/
-      variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*ArrayIterator::item*/;
+      variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[8]: Local variable */
       variable[8] = variable[7];
-      variable[10] = variable[0];
-      variable[10] = ATTR_abstractmetamodel___MMLocalClass____module(variable[10]) /*MMLocalClass::_module*/;
+      /* Register variable[9]: Local variable */
+      /* Register variable[10]: Result */
+      variable[10] = ATTR_abstractmetamodel___MMLocalClass____module(variable[0]) /*MMLocalClass::_module*/;
+      /* Register variable[10]: Result */
       variable[10] = CALL_abstractmetamodel___MMLocalClass___for_module( variable[8] /*sup*/)( variable[8] /*sup*/, variable[10]) /*MMLocalClass::for_module*/;
       variable[9] = variable[10];
+      /* Register variable[10]: Result */
       variable[10] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[9] /*cla*/ ==  NIT_NULL /*null*/) || (( variable[9] /*cla*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[9] /*cla*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[9] /*cla*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[9] /*cla*/)( variable[9] /*cla*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-      if (!UNTAG_Bool(variable[10])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___add_super_classes, LOCATE_inheritance, 222); nit_exit(1);}
+      if (!UNTAG_Bool(variable[10])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___add_super_classes, LOCATE_inheritance, 224); nit_exit(1);}
       CALL_abstract_collection___SimpleCollection___add( variable[1] /*supers*/)( variable[1] /*supers*/,  variable[9] /*cla*/) /*AbstractArray::add*/;
-      continue_23: while(0);
+      continue_27: while(0);
       CALL_abstract_collection___Iterator___next(variable[6])(variable[6]) /*ArrayIterator::next*/;
     }
-    break_23: while(0);
-    continue_22: while(0);
+    break_27: while(0);
+    continue_26: while(0);
     CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*ArrayIterator::next*/;
   }
-  break_22: while(0);
-  return_label21: while(false);
+  break_26: while(0);
+  return_label25: while(false);
   tracehead = trace.prev;
   return;
 }
 void inheritance___MMLocalClass___add_explicit_classes(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 228, LOCATE_inheritance___MMLocalClass___add_explicit_classes};
+  struct trace_t trace = {NULL, NULL, 230, LOCATE_inheritance___MMLocalClass___add_explicit_classes};
   val_t variable[7];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_inheritance___MMLocalClass____direct_parents(variable[3]) /*MMLocalClass::_direct_parents*/;
-  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArray::iterator*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_inheritance___MMLocalClass____direct_parents(variable[0]) /*MMLocalClass::_direct_parents*/;
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
+    /* Register variable[6]: Result */
     variable[6] = CALL_static_type___MMAncestor___local_class( variable[5] /*p*/)( variable[5] /*p*/) /*MMAncestor::local_class*/;
     CALL_abstract_collection___SimpleCollection___add( variable[1] /*supers*/)( variable[1] /*supers*/, variable[6]) /*AbstractArray::add*/;
-    continue_25: while(0);
-    CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*ArrayIterator::next*/;
-  }
-  break_25: while(0);
-  return_label24: while(false);
-  tracehead = trace.prev;
-  return;
-}
-void inheritance___MMLocalClass___compute_super_parents(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 236, LOCATE_inheritance___MMLocalClass___compute_super_parents};
-  val_t variable[7];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_inheritance;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[3] = CALL_abstract_collection___Collection___iterator( variable[1] /*supers*/)( variable[1] /*supers*/) /*AbstractArray::iterator*/;
-  while (true) { /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
-    if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/;
-    variable[5] = variable[4];
-    variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*p*/ ==  NIT_NULL /*null*/) || (( variable[5] /*p*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*p*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*p*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*p*/)( variable[5] /*p*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    if (!UNTAG_Bool(variable[6])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___compute_super_parents, LOCATE_inheritance, 240); nit_exit(1);}
-    CALL_inheritance___MMLocalClass___compute_super_classes( variable[5] /*p*/)( variable[5] /*p*/) /*MMLocalClass::compute_super_classes*/;
-    continue_27: while(0);
-    CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*ArrayIterator::next*/;
-  }
-  break_27: while(0);
-  return_label26: while(false);
-  tracehead = trace.prev;
-  return;
-}
-val_t inheritance___MMLocalClass___build_ancestors(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 245, LOCATE_inheritance___MMLocalClass___build_ancestors};
-  val_t variable[9];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_inheritance;
-  variable[0] =  self;
-  variable[3] = NEW_Array_array___Array___init(); /*new Array[MMAncestor]*/
-  variable[2] = variable[3];
-  variable[3] = variable[0];
-  variable[3] = ATTR_abstractmetamodel___MMLocalClass____crhe(variable[3]) /*MMLocalClass::_crhe*/;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___build_ancestors, LOCATE_inheritance, 250); nit_exit(1);}
-  variable[3] = variable[0];
-  variable[3] = ATTR_abstractmetamodel___MMLocalClass____crhe(variable[3]) /*MMLocalClass::_crhe*/;
-  variable[3] = CALL_partial_order___PartialOrderElement___direct_greaters(variable[3])(variable[3]) /*PartialOrderElement::direct_greaters*/;
-  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArray::iterator*/;
-  while (true) { /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
-    if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/;
-    variable[5] = variable[4];
-    variable[6] = variable[0];
-    variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*p*/ == variable[6]) || (( variable[5] /*p*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*p*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*p*/,variable[6])):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*p*/)( variable[5] /*p*/, variable[6]) /*Object::==*/)))))));
-    if (!UNTAG_Bool(variable[6])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___build_ancestors, LOCATE_inheritance, 252); nit_exit(1);}
-    variable[7] = variable[0];
-    variable[8] = NEW_MMRefineAncestor_inheritance___MMRefineAncestor___init(variable[7],  variable[5] /*p*/); /*new MMRefineAncestor*/
-    variable[7] = variable[8];
-    variable[6] = variable[7];
-    CALL_inheritance___MMAncestor___add_in( variable[6] /*anc*/)( variable[6] /*anc*/,  variable[2] /*all_ancestors*/) /*MMAncestor::add_in*/;
     continue_29: while(0);
     CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*ArrayIterator::next*/;
   }
   break_29: while(0);
-  variable[3] = variable[0];
-  variable[3] = ATTR_inheritance___MMLocalClass____direct_parents(variable[3]) /*MMLocalClass::_direct_parents*/;
-  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArray::iterator*/;
+  return_label28: while(false);
+  tracehead = trace.prev;
+  return;
+}
+void inheritance___MMLocalClass___compute_super_parents(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 238, LOCATE_inheritance___MMLocalClass___compute_super_parents};
+  val_t variable[7];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator( variable[1] /*supers*/)( variable[1] /*supers*/) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
-    variable[6] = CALL_static_type___MMAncestor___local_class( variable[5] /*anc*/)( variable[5] /*anc*/) /*MMAncestor::local_class*/;
-    variable[7] = variable[0];
-    variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] == variable[7]) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6],variable[7])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6], variable[7]) /*Object::==*/)))))));
-    if (!UNTAG_Bool(variable[6])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___build_ancestors, LOCATE_inheritance, 257); nit_exit(1);}
-    CALL_inheritance___MMAncestor___add_in( variable[5] /*anc*/)( variable[5] /*anc*/,  variable[2] /*all_ancestors*/) /*MMAncestor::add_in*/;
-    continue_30: while(0);
+    /* Register variable[6]: Result */
+    variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*p*/ ==  NIT_NULL /*null*/) || (( variable[5] /*p*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*p*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*p*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*p*/)( variable[5] /*p*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    if (!UNTAG_Bool(variable[6])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___compute_super_parents, LOCATE_inheritance, 242); nit_exit(1);}
+    CALL_inheritance___MMLocalClass___compute_super_classes( variable[5] /*p*/)( variable[5] /*p*/) /*MMLocalClass::compute_super_classes*/;
+    continue_31: while(0);
     CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*ArrayIterator::next*/;
   }
-  break_30: while(0);
+  break_31: while(0);
+  return_label30: while(false);
+  tracehead = trace.prev;
+  return;
+}
+val_t inheritance___MMLocalClass___build_ancestors(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 247, LOCATE_inheritance___MMLocalClass___build_ancestors};
+  val_t variable[8];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = NEW_Array_array___Array___init() /*new Array[MMAncestor]*/;
+  variable[2] = variable[3];
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_abstractmetamodel___MMLocalClass____crhe(variable[0]) /*MMLocalClass::_crhe*/;
+  /* Register variable[3]: Result */
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___build_ancestors, LOCATE_inheritance, 252); nit_exit(1);}
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_abstractmetamodel___MMLocalClass____crhe(variable[0]) /*MMLocalClass::_crhe*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_partial_order___PartialOrderElement___direct_greaters(variable[3])(variable[3]) /*PartialOrderElement::direct_greaters*/;
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArrayRead::iterator*/;
+  while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
+    variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
+    if (!UNTAG_Bool(variable[4])) break; /*for*/
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
+    variable[5] = variable[4];
+    /* Register variable[6]: Result */
+    variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*p*/ == variable[0]) || (( variable[5] /*p*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*p*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*p*/,variable[0])):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*p*/)( variable[5] /*p*/, variable[0]) /*Object::==*/)))))));
+    if (!UNTAG_Bool(variable[6])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___build_ancestors, LOCATE_inheritance, 254); nit_exit(1);}
+    /* Register variable[6]: Local variable */
+    /* Register variable[7]: Result */
+    variable[7] = NEW_MMRefineAncestor_inheritance___MMRefineAncestor___init(variable[0],  variable[5] /*p*/) /*new MMRefineAncestor*/;
+    variable[6] = variable[7];
+    CALL_inheritance___MMAncestor___add_in( variable[6] /*anc*/)( variable[6] /*anc*/,  variable[2] /*all_ancestors*/) /*MMAncestor::add_in*/;
+    continue_33: while(0);
+    CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*ArrayIterator::next*/;
+  }
+  break_33: while(0);
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_inheritance___MMLocalClass____direct_parents(variable[0]) /*MMLocalClass::_direct_parents*/;
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArrayRead::iterator*/;
+  while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
+    variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
+    if (!UNTAG_Bool(variable[4])) break; /*for*/
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
+    variable[5] = variable[4];
+    /* Register variable[6]: Result */
+    variable[6] = CALL_static_type___MMAncestor___local_class( variable[5] /*anc*/)( variable[5] /*anc*/) /*MMAncestor::local_class*/;
+    /* Register variable[6]: Result */
+    variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] == variable[0]) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6],variable[0])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6], variable[0]) /*Object::==*/)))))));
+    if (!UNTAG_Bool(variable[6])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___build_ancestors, LOCATE_inheritance, 259); nit_exit(1);}
+    CALL_inheritance___MMAncestor___add_in( variable[5] /*anc*/)( variable[5] /*anc*/,  variable[2] /*all_ancestors*/) /*MMAncestor::add_in*/;
+    continue_34: while(0);
+    CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*ArrayIterator::next*/;
+  }
+  break_34: while(0);
   variable[1] =  variable[2] /*all_ancestors*/;
-  goto return_label28;
-  return_label28: while(false);
+  goto return_label32;
+  return_label32: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t inheritance___MMLocalClass___group_ancestors(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 263, LOCATE_inheritance___MMLocalClass___group_ancestors};
+  struct trace_t trace = {NULL, NULL, 265, LOCATE_inheritance___MMLocalClass___group_ancestors};
   val_t variable[10];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[MMLocalClass, Set[MMAncestor]]*/
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = NEW_HashMap_hash___HashMap___init() /*new HashMap[MMLocalClass, Set[MMAncestor]]*/;
   variable[3] = variable[4];
-  variable[4] = CALL_abstract_collection___Collection___iterator( variable[1] /*all*/)( variable[1] /*all*/) /*AbstractArray::iterator*/;
+  /* Register variable[4]: For iterator */
+  variable[4] = CALL_abstract_collection___Collection___iterator( variable[1] /*all*/)( variable[1] /*all*/) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[5]: For 'is_ok' result */
     variable[5] = CALL_abstract_collection___Iterator___is_ok(variable[4])(variable[4]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[5])) break; /*for*/
-    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/;
+    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[6]: Local variable */
     variable[6] = variable[5];
+    /* Register variable[7]: Local variable */
+    /* Register variable[8]: Result */
     variable[8] = CALL_static_type___MMAncestor___local_class( variable[6] /*a*/)( variable[6] /*a*/) /*MMAncestor::local_class*/;
     variable[7] = variable[8];
+    /* Register variable[8]: Local variable */
     /*variable[8] is variable set*/
     CALL_inheritance___MMLocalClass___compute_ancestors( variable[7] /*c*/)( variable[7] /*c*/) /*MMLocalClass::compute_ancestors*/;
-    variable[9] = CALL_abstract_collection___Map___has_key( variable[3] /*map*/)( variable[3] /*map*/,  variable[7] /*c*/) /*CoupleMap::has_key*/;
+    /* Register variable[9]: Result */
+    variable[9] = CALL_abstract_collection___MapRead___has_key( variable[3] /*map*/)( variable[3] /*map*/,  variable[7] /*c*/) /*CoupleMap::has_key*/;
     if (UNTAG_Bool(variable[9])) { /*if*/
-      variable[9] = CALL_abstract_collection___Map_____bra( variable[3] /*map*/)( variable[3] /*map*/,  variable[7] /*c*/) /*CoupleMap::[]*/;
+      /* Register variable[9]: Result */
+      variable[9] = CALL_abstract_collection___MapRead_____bra( variable[3] /*map*/)( variable[3] /*map*/,  variable[7] /*c*/) /*CoupleMap::[]*/;
       variable[8] = variable[9] /*set=*/;
     } else { /*if*/
-      variable[9] = NEW_HashSet_hash___HashSet___init(); /*new HashSet[MMAncestor]*/
+      /* Register variable[9]: Result */
+      variable[9] = NEW_HashSet_hash___HashSet___init() /*new HashSet[MMAncestor]*/;
       variable[8] = variable[9] /*set=*/;
       CALL_abstract_collection___Map_____braeq( variable[3] /*map*/)( variable[3] /*map*/,  variable[7] /*c*/,  variable[8] /*set*/) /*HashMap::[]=*/;
     }
     CALL_abstract_collection___SimpleCollection___add( variable[8] /*set*/)( variable[8] /*set*/,  variable[6] /*a*/) /*SimpleCollection::add*/;
-    continue_32: while(0);
+    continue_36: while(0);
     CALL_abstract_collection___Iterator___next(variable[4])(variable[4]) /*ArrayIterator::next*/;
   }
-  break_32: while(0);
+  break_36: while(0);
   variable[2] =  variable[3] /*map*/;
-  goto return_label31;
-  return_label31: while(false);
+  goto return_label35;
+  return_label35: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t inheritance___MMLocalClass___merge_ancestors(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 285, LOCATE_inheritance___MMLocalClass___merge_ancestors};
-  val_t variable[17];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 287, LOCATE_inheritance___MMLocalClass___merge_ancestors};
+    static val_t once_value_40 = NIT_NULL; /* Once value for string variable[7]*/
+    static val_t once_value_41 = NIT_NULL; /* Once value for string variable[7]*/
+    static val_t once_value_42 = NIT_NULL; /* Once value for string variable[7]*/
+    static val_t once_value_43 = NIT_NULL; /* Once value for string variable[7]*/
+  val_t variable[13];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = NEW_HashSet_hash___HashSet___init(); /*new HashSet[MMAncestor]*/
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = NEW_HashSet_hash___HashSet___init() /*new HashSet[MMAncestor]*/;
   variable[3] = variable[4];
-  variable[5] = NEW_Array_array___Array___init(); /*new Array[MMAncestor]*/
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = NEW_Array_array___Array___init() /*new Array[MMAncestor]*/;
   variable[4] = variable[5];
+  /* Register variable[5]: For iterator */
   variable[5] = CALL_abstract_collection___Collection___iterator( variable[1] /*set*/)( variable[1] /*set*/) /*Collection::iterator*/;
   while (true) { /*for*/
+    /* Register variable[6]: For 'is_ok' result */
     variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[6])) break; /*for*/
-    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*Iterator::item*/;
+    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[7]: Local variable */
     variable[7] = variable[6];
+    /* Register variable[8]: Local variable */
+    /* Register variable[9]: Result */
     variable[9] = CALL_abstract_collection___Collection___iterator( variable[1] /*set*/)( variable[1] /*set*/) /*Collection::iterator*/;
     variable[8] = variable[9];
+    /* Register variable[9]: Local variable */
     variable[9] =  TAG_Bool(true);
     while (true) { /*while*/
+      /* Register variable[10]: Result */
       variable[10] = CALL_abstract_collection___Iterator___is_ok( variable[8] /*it*/)( variable[8] /*it*/) /*Iterator::is_ok*/;
-      variable[11] = variable[10];
-      if (UNTAG_Bool(variable[11])) { /* and */
-        variable[11] =  variable[9] /*search*/;
+      /* Ensure var variable[10]: Left 'and' operand*/
+      if (UNTAG_Bool(variable[10])) { /* and */
+        variable[10] =  variable[9] /*search*/;
       }
-      variable[10] = variable[11];
+      /* Register variable[10]: Result */
       if (!UNTAG_Bool(variable[10])) break; /* while*/
+      /* Register variable[10]: Local variable */
+      /* Register variable[11]: Result */
       variable[11] = CALL_abstract_collection___Iterator___item( variable[8] /*it*/)( variable[8] /*it*/) /*Iterator::item*/;
+      /* Register variable[11]: Result */
       variable[11] = TAG_Bool(( variable[7] /*t*/ == variable[11]) || (( variable[7] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[7] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[7] /*t*/,variable[11])):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[7] /*t*/)( variable[7] /*t*/, variable[11]) /*Object::==*/)))));
       variable[10] = variable[11];
+      /* Register variable[11]: Result */
       variable[11] = CALL_abstract_collection___Iterator___item( variable[8] /*it*/)( variable[8] /*it*/) /*Iterator::item*/;
+      /* Register variable[11]: Result */
       variable[11] = CALL_abstract_collection___Collection___has( variable[3] /*marks*/)( variable[3] /*marks*/, variable[11]) /*HashSet::has*/;
       variable[10] = variable[11] /*a=*/;
+      /* Register variable[11]: Result */
       variable[11] = CALL_abstract_collection___Iterator___item( variable[8] /*it*/)( variable[8] /*it*/) /*Iterator::item*/;
+      /* Register variable[11]: Result */
       variable[11] = CALL_static_type___MMAncestor___stype(variable[11])(variable[11]) /*MMAncestor::stype*/;
+      /* Register variable[12]: Result */
       variable[12] = CALL_static_type___MMAncestor___stype( variable[7] /*t*/)( variable[7] /*t*/) /*MMAncestor::stype*/;
+      /* Register variable[11]: Result */
       variable[11] = CALL_static_type___MMType_____l(variable[11])(variable[11], variable[12]) /*MMType::<*/;
       variable[10] = variable[11] /*a=*/;
+      /* Register variable[11]: Result */
       variable[11] = CALL_abstract_collection___Iterator___item( variable[8] /*it*/)( variable[8] /*it*/) /*Iterator::item*/;
+      /* Register variable[11]: Result */
       variable[11] = TAG_Bool(( variable[7] /*t*/ == variable[11]) || (( variable[7] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[7] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[7] /*t*/,variable[11])):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[7] /*t*/)( variable[7] /*t*/, variable[11]) /*Object::==*/)))));
-      variable[12] = variable[11];
-      if (!UNTAG_Bool(variable[12])) { /* or */
-        variable[12] = CALL_abstract_collection___Iterator___item( variable[8] /*it*/)( variable[8] /*it*/) /*Iterator::item*/;
-        variable[12] = CALL_abstract_collection___Collection___has( variable[3] /*marks*/)( variable[3] /*marks*/, variable[12]) /*HashSet::has*/;
-      }
-      variable[11] = variable[12];
-      variable[11] =  TAG_Bool(!UNTAG_Bool(variable[11]));
-      if (UNTAG_Bool(variable[11])) { /* and */
+      /* Ensure var variable[11]: Left 'or' operand*/
+      if (!UNTAG_Bool(variable[11])) { /* or */
+        /* Register variable[11]: Result */
         variable[11] = CALL_abstract_collection___Iterator___item( variable[8] /*it*/)( variable[8] /*it*/) /*Iterator::item*/;
+        /* Register variable[11]: Result */
+        variable[11] = CALL_abstract_collection___Collection___has( variable[3] /*marks*/)( variable[3] /*marks*/, variable[11]) /*HashSet::has*/;
+      }
+      /* Register variable[11]: Result */
+      variable[11] =  TAG_Bool(!UNTAG_Bool(variable[11])) /* Ensure var: Left 'and' operand*/;
+      if (UNTAG_Bool(variable[11])) { /* and */
+        /* Register variable[11]: Result */
+        variable[11] = CALL_abstract_collection___Iterator___item( variable[8] /*it*/)( variable[8] /*it*/) /*Iterator::item*/;
+        /* Register variable[11]: Result */
         variable[11] = CALL_static_type___MMAncestor___stype(variable[11])(variable[11]) /*MMAncestor::stype*/;
+        /* Register variable[12]: Result */
         variable[12] = CALL_static_type___MMAncestor___stype( variable[7] /*t*/)( variable[7] /*t*/) /*MMAncestor::stype*/;
+        /* Register variable[11]: Result */
         variable[11] = CALL_static_type___MMType_____l(variable[11])(variable[11], variable[12]) /*MMType::<*/;
       }
+      /* Register variable[11]: Result */
       if (UNTAG_Bool(variable[11])) { /*if*/
         CALL_abstract_collection___SimpleCollection___add( variable[3] /*marks*/)( variable[3] /*marks*/,  variable[7] /*t*/) /*HashSet::add*/;
         variable[9] =  TAG_Bool(false) /*search=*/;
       }
       CALL_abstract_collection___Iterator___next( variable[8] /*it*/)( variable[8] /*it*/) /*Iterator::next*/;
-      continue_35: while(0);
+      continue_39: while(0);
     }
-    break_35: while(0);
+    break_39: while(0);
+    /* Register variable[10]: Result */
     variable[10] = CALL_abstract_collection___Collection___has( variable[3] /*marks*/)( variable[3] /*marks*/,  variable[7] /*t*/) /*HashSet::has*/;
     if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[10])))) { /*if*/
       CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  variable[7] /*t*/) /*AbstractArray::add*/;
     }
-    continue_34: while(0);
+    continue_38: while(0);
     CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*Iterator::next*/;
   }
-  break_34: while(0);
-  variable[5] = CALL_abstract_collection___Collection___length( variable[4] /*res*/)( variable[4] /*res*/) /*AbstractArray::length*/;
+  break_38: while(0);
+  /* Register variable[5]: Result */
+  variable[5] = CALL_abstract_collection___Collection___length( variable[4] /*res*/)( variable[4] /*res*/) /*AbstractArrayRead::length*/;
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool(UNTAG_Int(variable[5])>UNTAG_Int( TAG_Int(1)));
   if (UNTAG_Bool(variable[5])) { /*if*/
-    variable[5] = variable[0];
-    variable[5] = CALL_file___Object___stderr(variable[5])(variable[5]) /*Object::stderr*/;
-    variable[6] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-    variable[7] = NEW_String_string___String___with_native(BOX_NativeString("Fatal error: Incompatibles ancestors for "), TAG_Int(41)); /*new String*/
-    variable[8] = variable[7];
-    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[8]) /*AbstractArray::add*/;
-    variable[9] = variable[0];
-    variable[9] = CALL_abstractmetamodel___MMLocalClass___name(variable[9])(variable[9]) /*MMLocalClass::name*/;
-    variable[10] = variable[9];
-    variable[10] = CALL_string___Object___to_s(variable[10])(variable[10]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[10]) /*AbstractArray::add*/;
-    variable[11] = NEW_String_string___String___with_native(BOX_NativeString(": "), TAG_Int(2)); /*new String*/
-    variable[12] = variable[11];
-    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[12]) /*AbstractArray::add*/;
-    variable[13] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
-    variable[13] = CALL_string___Collection___join( variable[4] /*res*/)( variable[4] /*res*/, variable[13]) /*Collection::join*/;
-    variable[14] = variable[13];
-    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[14]) /*AbstractArray::add*/;
-    variable[15] = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)); /*new String*/
-    variable[16] = variable[15];
-    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[16]) /*AbstractArray::add*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_file___Object___stderr(variable[0])(variable[0]) /*Object::stderr*/;
+    variable[6] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[7]: Once String constant */
+    if (once_value_40 != NIT_NULL) variable[7] = once_value_40;
+    else {
+      variable[7] = NEW_String_string___String___with_native(BOX_NativeString("Fatal error: Incompatibles ancestors for "), TAG_Int(41)) /*new String*/;
+      once_value_40 = variable[7];
+    }
+    /* Register variable[7]: Result */
+    /* Ensure var variable[7]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+    /* Register variable[7]: Result */
+    variable[7] = CALL_abstractmetamodel___MMLocalClass___name(variable[0])(variable[0]) /*MMLocalClass::name*/;
+    /* Ensure var variable[7]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[7]: Once String constant */
+    if (once_value_41 != NIT_NULL) variable[7] = once_value_41;
+    else {
+      variable[7] = NEW_String_string___String___with_native(BOX_NativeString(": "), TAG_Int(2)) /*new String*/;
+      once_value_41 = variable[7];
+    }
+    /* Register variable[7]: Result */
+    /* Ensure var variable[7]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+    /* Register variable[7]: Once String constant */
+    if (once_value_42 != NIT_NULL) variable[7] = once_value_42;
+    else {
+      variable[7] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)) /*new String*/;
+      once_value_42 = variable[7];
+    }
+    /* Register variable[7]: Result */
+    /* Register variable[7]: Result */
+    variable[7] = CALL_string___Collection___join( variable[4] /*res*/)( variable[4] /*res*/, variable[7]) /*Collection::join*/;
+    /* Ensure var variable[7]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+    /* Register variable[7]: Once String constant */
+    if (once_value_43 != NIT_NULL) variable[7] = once_value_43;
+    else {
+      variable[7] = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)) /*new String*/;
+      once_value_43 = variable[7];
+    }
+    /* Register variable[7]: Result */
+    /* Ensure var variable[7]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+    /* Register variable[6]: Result */
     variable[6] = CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/;
     CALL_stream___OStream___write(variable[5])(variable[5], variable[6]) /*OFStream::write*/;
-    variable[5] = variable[0];
     exit(UNTAG_Int( TAG_Int(1)));
   }
-  variable[5] = CALL_abstract_collection___Collection___first( variable[4] /*res*/)( variable[4] /*res*/) /*IndexedCollection::first*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_abstract_collection___Collection___first( variable[4] /*res*/)( variable[4] /*res*/) /*IndexedCollectionRead::first*/;
   variable[2] = variable[5];
-  goto return_label33;
-  return_label33: while(false);
+  goto return_label37;
+  return_label37: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t inheritance___MMLocalClass___inherit_local_property(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 318, LOCATE_inheritance___MMLocalClass___inherit_local_property};
-  val_t variable[24];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 320, LOCATE_inheritance___MMLocalClass___inherit_local_property};
+        static val_t once_value_46 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_47 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_48 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_49 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_50 = NIT_NULL; /* Once value for string variable[9]*/
+          static val_t once_value_52 = NIT_NULL; /* Once value for string variable[12]*/
+          static val_t once_value_53 = NIT_NULL; /* Once value for string variable[12]*/
+        static val_t once_value_54 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_55 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_56 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_57 = NIT_NULL; /* Once value for string variable[9]*/
+  val_t variable[13];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_abstractmetamodel___MMLocalClass____local_property_by_global(variable[3]) /*MMLocalClass::_local_property_by_global*/;
-  variable[3] = CALL_abstract_collection___Map___has_key(variable[3])(variable[3],  variable[1] /*glob*/) /*Map::has_key*/;
-  if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___inherit_local_property, LOCATE_inheritance, 323); nit_exit(1);}
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_abstractmetamodel___MMLocalClass____local_property_by_global(variable[0]) /*MMLocalClass::_local_property_by_global*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___MapRead___has_key(variable[3])(variable[3],  variable[1] /*glob*/) /*MapRead::has_key*/;
+  if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___inherit_local_property, LOCATE_inheritance, 325); nit_exit(1);}
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*glob*/ ==  NIT_NULL /*null*/) || (( variable[1] /*glob*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*glob*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*glob*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*glob*/)( variable[1] /*glob*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___inherit_local_property, LOCATE_inheritance, 324); nit_exit(1);}
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMLocalClass___inherit_local_property, LOCATE_inheritance, 326); nit_exit(1);}
+  /* Register variable[3]: Local variable */
   /*variable[3] is variable impl*/
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
   variable[5] = CALL_abstractmetamodel___MMGlobalProperty___property_hierarchy( variable[1] /*glob*/)( variable[1] /*glob*/) /*MMGlobalProperty::property_hierarchy*/;
   variable[4] = variable[5];
-  variable[6] = variable[0];
-  variable[6] = CALL_abstractmetamodel___MMLocalClass___che(variable[6])(variable[6]) /*MMLocalClass::che*/;
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
+  variable[6] = CALL_abstractmetamodel___MMLocalClass___che(variable[0])(variable[0]) /*MMLocalClass::che*/;
+  /* Register variable[6]: Result */
   variable[6] = CALL_partial_order___PartialOrderElement___direct_greaters(variable[6])(variable[6]) /*PartialOrderElement::direct_greaters*/;
   variable[5] = variable[6];
+  /* Register variable[6]: Result */
   variable[6] = CALL_abstract_collection___Collection___length( variable[4] /*ghier*/)( variable[4] /*ghier*/) /*PartialOrder::length*/;
+  /* Register variable[6]: Result */
   variable[6] = TAG_Bool((variable[6])==( TAG_Int(1)));
   if (UNTAG_Bool(variable[6])) { /*if*/
+    /* Register variable[6]: Result */
     variable[6] = CALL_abstractmetamodel___MMGlobalProperty___intro( variable[1] /*glob*/)( variable[1] /*glob*/) /*MMGlobalProperty::intro*/;
     variable[3] = variable[6] /*impl=*/;
   } else { /*if*/
-    variable[6] = CALL_abstract_collection___Collection___length( variable[5] /*supers*/)( variable[5] /*supers*/) /*AbstractArray::length*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_abstract_collection___Collection___length( variable[5] /*supers*/)( variable[5] /*supers*/) /*AbstractArrayRead::length*/;
+    /* Register variable[6]: Result */
     variable[6] = TAG_Bool((variable[6])==( TAG_Int(1)));
     if (UNTAG_Bool(variable[6])) { /*if*/
-      variable[6] = CALL_abstract_collection___Collection___first( variable[5] /*supers*/)( variable[5] /*supers*/) /*IndexedCollection::first*/;
+      /* Register variable[6]: Result */
+      variable[6] = CALL_abstract_collection___Collection___first( variable[5] /*supers*/)( variable[5] /*supers*/) /*IndexedCollectionRead::first*/;
+      /* Register variable[6]: Result */
       variable[6] = CALL_abstractmetamodel___MMLocalClass_____bra(variable[6])(variable[6],  variable[1] /*glob*/) /*MMLocalClass::[]*/;
       variable[3] = variable[6] /*impl=*/;
     } else { /*if*/
-      variable[7] = NEW_ArraySet_array___ArraySet___init(); /*new ArraySet[MMLocalProperty]*/
+      /* Register variable[6]: Local variable */
+      /* Register variable[7]: Result */
+      variable[7] = NEW_ArraySet_array___ArraySet___init() /*new ArraySet[MMLocalProperty]*/;
       variable[6] = variable[7];
-      variable[7] = CALL_abstract_collection___Collection___iterator( variable[5] /*supers*/)( variable[5] /*supers*/) /*AbstractArray::iterator*/;
+      /* Register variable[7]: For iterator */
+      variable[7] = CALL_abstract_collection___Collection___iterator( variable[5] /*supers*/)( variable[5] /*supers*/) /*AbstractArrayRead::iterator*/;
       while (true) { /*for*/
+        /* Register variable[8]: For 'is_ok' result */
         variable[8] = CALL_abstract_collection___Iterator___is_ok(variable[7])(variable[7]) /*ArrayIterator::is_ok*/;
         if (!UNTAG_Bool(variable[8])) break; /*for*/
-        variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*ArrayIterator::item*/;
+        variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+        /* Register variable[9]: Local variable */
         variable[9] = variable[8];
-        variable[11] = CALL_abstractmetamodel___MMLocalClass_____bra( variable[9] /*sc*/)( variable[9] /*sc*/,  variable[1] /*glob*/) /*MMLocalClass::[]*/;
-        variable[10] = variable[11];
-        variable[11] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[10] /*p*/ ==  NIT_NULL /*null*/) || (( variable[10] /*p*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[10] /*p*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[10] /*p*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[10] /*p*/)( variable[10] /*p*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-        if (UNTAG_Bool(variable[11])) { /*if*/
-          CALL_abstract_collection___SimpleCollection___add( variable[6] /*impls*/)( variable[6] /*impls*/,  variable[10] /*p*/) /*ArraySet::add*/;
+        /* Register variable[10]: Result */
+        variable[10] = CALL_abstractmetamodel___MMLocalClass___has_global_property( variable[9] /*sc*/)( variable[9] /*sc*/,  variable[1] /*glob*/) /*MMLocalClass::has_global_property*/;
+        if (UNTAG_Bool(variable[10])) { /*if*/
+          /* Register variable[10]: Result */
+          variable[10] = CALL_abstractmetamodel___MMLocalClass_____bra( variable[9] /*sc*/)( variable[9] /*sc*/,  variable[1] /*glob*/) /*MMLocalClass::[]*/;
+          CALL_abstract_collection___SimpleCollection___add( variable[6] /*impls*/)( variable[6] /*impls*/, variable[10]) /*ArraySet::add*/;
         }
-        continue_37: while(0);
+        continue_45: while(0);
         CALL_abstract_collection___Iterator___next(variable[7])(variable[7]) /*ArrayIterator::next*/;
       }
-      break_37: while(0);
+      break_45: while(0);
+      /* Register variable[7]: Local variable */
+      /* Register variable[8]: Result */
       variable[8] = CALL_partial_order___PartialOrder___select_smallests( variable[4] /*ghier*/)( variable[4] /*ghier*/,  variable[6] /*impls*/) /*PartialOrder::select_smallests*/;
       variable[7] = variable[8];
-      variable[8] = CALL_abstract_collection___Collection___length( variable[7] /*impls2*/)( variable[7] /*impls2*/) /*AbstractArray::length*/;
+      /* Register variable[8]: Result */
+      variable[8] = CALL_abstract_collection___Collection___length( variable[7] /*impls2*/)( variable[7] /*impls2*/) /*AbstractArrayRead::length*/;
+      /* Register variable[8]: Result */
       variable[8] = TAG_Bool((variable[8])!=( TAG_Int(1)));
       if (UNTAG_Bool(variable[8])) { /*if*/
-        variable[8] = variable[0];
-        variable[8] = CALL_file___Object___stderr(variable[8])(variable[8]) /*Object::stderr*/;
-        variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Fatal error: inherit_local_property error\n"), TAG_Int(42)); /*new String*/
+        /* Register variable[8]: Result */
+        variable[8] = CALL_file___Object___stderr(variable[0])(variable[0]) /*Object::stderr*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_46 != NIT_NULL) variable[9] = once_value_46;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Fatal error: inherit_local_property error\n"), TAG_Int(42)) /*new String*/;
+          once_value_46 = variable[9];
+        }
+        /* Register variable[9]: Result */
         CALL_stream___OStream___write(variable[8])(variable[8], variable[9]) /*OFStream::write*/;
-        variable[8] = variable[0];
-        variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(7)); /*new Array[String]*/
-        variable[10] = NEW_String_string___String___with_native(BOX_NativeString("------- "), TAG_Int(8)); /*new String*/
-        variable[11] = variable[10];
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[11]) /*AbstractArray::add*/;
-        variable[12] = variable[0];
-        variable[12] = CALL_abstractmetamodel___MMLocalClass___module(variable[12])(variable[12]) /*MMLocalClass::module*/;
-        variable[13] = variable[12];
-        variable[13] = CALL_string___Object___to_s(variable[13])(variable[13]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[13]) /*AbstractArray::add*/;
-        variable[14] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-        variable[15] = variable[14];
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[15]) /*AbstractArray::add*/;
-        variable[16] = variable[0];
-        variable[17] = variable[16];
-        variable[17] = CALL_string___Object___to_s(variable[17])(variable[17]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[17]) /*AbstractArray::add*/;
-        variable[18] = NEW_String_string___String___with_native(BOX_NativeString(" "), TAG_Int(1)); /*new String*/
-        variable[19] = variable[18];
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[19]) /*AbstractArray::add*/;
-        variable[20] = CALL_abstractmetamodel___MMGlobalProperty___intro( variable[1] /*glob*/)( variable[1] /*glob*/) /*MMGlobalProperty::intro*/;
-        variable[20] = CALL_abstractmetamodel___MMLocalProperty___full_name(variable[20])(variable[20]) /*MMLocalProperty::full_name*/;
-        variable[21] = variable[20];
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[21]) /*AbstractArray::add*/;
-        variable[22] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-        variable[23] = variable[22];
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[23]) /*AbstractArray::add*/;
-        variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-        CALL_file___Object___print(variable[8])(variable[8], variable[9]) /*Object::print*/;
-        variable[8] = CALL_abstract_collection___Collection___iterator( variable[7] /*impls2*/)( variable[7] /*impls2*/) /*AbstractArray::iterator*/;
+        variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(7)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_47 != NIT_NULL) variable[9] = once_value_47;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString("------- "), TAG_Int(8)) /*new String*/;
+          once_value_47 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[9]: Result */
+        variable[9] = CALL_abstractmetamodel___MMLocalClass___module(variable[0])(variable[0]) /*MMLocalClass::module*/;
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_48 != NIT_NULL) variable[9] = once_value_48;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+          once_value_48 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Ensure var variable[0]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[0])(variable[0]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_49 != NIT_NULL) variable[9] = once_value_49;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" "), TAG_Int(1)) /*new String*/;
+          once_value_49 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[9]: Result */
+        variable[9] = CALL_abstractmetamodel___MMGlobalProperty___intro( variable[1] /*glob*/)( variable[1] /*glob*/) /*MMGlobalProperty::intro*/;
+        /* Register variable[9]: Result */
+        variable[9] = CALL_abstractmetamodel___MMLocalProperty___full_name(variable[9])(variable[9]) /*MMLocalProperty::full_name*/;
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_50 != NIT_NULL) variable[9] = once_value_50;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+          once_value_50 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[8]: Result */
+        variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
+        CALL_file___Object___print(variable[0])(variable[0], variable[8]) /*Object::print*/;
+        /* Register variable[8]: For iterator */
+        variable[8] = CALL_abstract_collection___Collection___iterator( variable[7] /*impls2*/)( variable[7] /*impls2*/) /*AbstractArrayRead::iterator*/;
         while (true) { /*for*/
+          /* Register variable[9]: For 'is_ok' result */
           variable[9] = CALL_abstract_collection___Iterator___is_ok(variable[8])(variable[8]) /*ArrayIterator::is_ok*/;
           if (!UNTAG_Bool(variable[9])) break; /*for*/
-          variable[9] = CALL_abstract_collection___Iterator___item(variable[8])(variable[8]) /*ArrayIterator::item*/;
+          variable[9] = CALL_abstract_collection___Iterator___item(variable[8])(variable[8]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+          /* Register variable[10]: Local variable */
           variable[10] = variable[9];
-          variable[11] = variable[0];
-          variable[12] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-          variable[13] = NEW_String_string___String___with_native(BOX_NativeString("   "), TAG_Int(3)); /*new String*/
-          variable[14] = variable[13];
-          CALL_abstract_collection___SimpleCollection___add(variable[12])(variable[12], variable[14]) /*AbstractArray::add*/;
-          variable[15] = CALL_abstractmetamodel___MMLocalProperty___full_name( variable[10] /*i*/)( variable[10] /*i*/) /*MMLocalProperty::full_name*/;
-          variable[16] = variable[15];
-          CALL_abstract_collection___SimpleCollection___add(variable[12])(variable[12], variable[16]) /*AbstractArray::add*/;
-          variable[17] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-          variable[18] = variable[17];
-          CALL_abstract_collection___SimpleCollection___add(variable[12])(variable[12], variable[18]) /*AbstractArray::add*/;
-          variable[12] = CALL_string___Object___to_s(variable[12])(variable[12]) /*Object::to_s*/;
-          CALL_file___Object___print(variable[11])(variable[11], variable[12]) /*Object::print*/;
-          continue_38: while(0);
+          variable[11] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+          /* Register variable[12]: Once String constant */
+          if (once_value_52 != NIT_NULL) variable[12] = once_value_52;
+          else {
+            variable[12] = NEW_String_string___String___with_native(BOX_NativeString("   "), TAG_Int(3)) /*new String*/;
+            once_value_52 = variable[12];
+          }
+          /* Register variable[12]: Result */
+          /* Ensure var variable[12]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[11])(variable[11], variable[12]) /*AbstractArray::add*/;
+          /* Register variable[12]: Result */
+          variable[12] = CALL_abstractmetamodel___MMLocalProperty___full_name( variable[10] /*i*/)( variable[10] /*i*/) /*MMLocalProperty::full_name*/;
+          /* Ensure var variable[12]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[11])(variable[11], variable[12]) /*AbstractArray::add*/;
+          /* Register variable[12]: Once String constant */
+          if (once_value_53 != NIT_NULL) variable[12] = once_value_53;
+          else {
+            variable[12] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+            once_value_53 = variable[12];
+          }
+          /* Register variable[12]: Result */
+          /* Ensure var variable[12]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[11])(variable[11], variable[12]) /*AbstractArray::add*/;
+          /* Register variable[11]: Result */
+          variable[11] = CALL_string___Object___to_s(variable[11])(variable[11]) /*Object::to_s*/;
+          CALL_file___Object___print(variable[0])(variable[0], variable[11]) /*Object::print*/;
+          continue_51: while(0);
           CALL_abstract_collection___Iterator___next(variable[8])(variable[8]) /*ArrayIterator::next*/;
         }
-        break_38: while(0);
-        variable[8] = variable[0];
-        variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-        variable[10] = NEW_String_string___String___with_native(BOX_NativeString("------- "), TAG_Int(8)); /*new String*/
-        variable[11] = variable[10];
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[11]) /*AbstractArray::add*/;
-        variable[12] = CALL_abstractmetamodel___MMGlobalProperty___property_hierarchy( variable[1] /*glob*/)( variable[1] /*glob*/) /*MMGlobalProperty::property_hierarchy*/;
-        variable[12] = CALL_abstract_collection___Collection___first(variable[12])(variable[12]) /*PartialOrder::first*/;
-        variable[13] = variable[12];
-        variable[13] = CALL_string___Object___to_s(variable[13])(variable[13]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[13]) /*AbstractArray::add*/;
-        variable[14] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-        variable[15] = variable[14];
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[15]) /*AbstractArray::add*/;
-        variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-        CALL_file___Object___print(variable[8])(variable[8], variable[9]) /*Object::print*/;
-        variable[8] = variable[0];
-        variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-        variable[10] = NEW_String_string___String___with_native(BOX_NativeString("------- "), TAG_Int(8)); /*new String*/
-        variable[11] = variable[10];
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[11]) /*AbstractArray::add*/;
-        variable[12] = CALL_abstractmetamodel___MMGlobalProperty___property_hierarchy( variable[1] /*glob*/)( variable[1] /*glob*/) /*MMGlobalProperty::property_hierarchy*/;
-        variable[12] = CALL_partial_order___PartialOrder___to_dot(variable[12])(variable[12]) /*PartialOrder::to_dot*/;
-        variable[13] = variable[12];
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[13]) /*AbstractArray::add*/;
-        variable[14] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-        variable[15] = variable[14];
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[15]) /*AbstractArray::add*/;
-        variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-        CALL_file___Object___print(variable[8])(variable[8], variable[9]) /*Object::print*/;
-        variable[8] = variable[0];
+        break_51: while(0);
+        variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_54 != NIT_NULL) variable[9] = once_value_54;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString("------- "), TAG_Int(8)) /*new String*/;
+          once_value_54 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[9]: Result */
+        variable[9] = CALL_abstractmetamodel___MMGlobalProperty___property_hierarchy( variable[1] /*glob*/)( variable[1] /*glob*/) /*MMGlobalProperty::property_hierarchy*/;
+        /* Register variable[9]: Result */
+        variable[9] = CALL_abstract_collection___Collection___first(variable[9])(variable[9]) /*PartialOrder::first*/;
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_55 != NIT_NULL) variable[9] = once_value_55;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+          once_value_55 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[8]: Result */
+        variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
+        CALL_file___Object___print(variable[0])(variable[0], variable[8]) /*Object::print*/;
+        variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_56 != NIT_NULL) variable[9] = once_value_56;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString("------- "), TAG_Int(8)) /*new String*/;
+          once_value_56 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[9]: Result */
+        variable[9] = CALL_abstractmetamodel___MMGlobalProperty___property_hierarchy( variable[1] /*glob*/)( variable[1] /*glob*/) /*MMGlobalProperty::property_hierarchy*/;
+        /* Register variable[9]: Result */
+        variable[9] = CALL_partial_order___PartialOrder___to_dot(variable[9])(variable[9]) /*PartialOrder::to_dot*/;
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_57 != NIT_NULL) variable[9] = once_value_57;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+          once_value_57 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[8]: Result */
+        variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
+        CALL_file___Object___print(variable[0])(variable[0], variable[8]) /*Object::print*/;
         exit(UNTAG_Int( TAG_Int(1)));
       }
-      variable[8] = CALL_abstract_collection___Collection___first( variable[7] /*impls2*/)( variable[7] /*impls2*/) /*IndexedCollection::first*/;
+      /* Register variable[8]: Result */
+      variable[8] = CALL_abstract_collection___Collection___first( variable[7] /*impls2*/)( variable[7] /*impls2*/) /*IndexedCollectionRead::first*/;
       variable[3] = variable[8] /*impl=*/;
     }
   }
-  variable[6] = variable[0];
-  variable[6] = ATTR_abstractmetamodel___MMLocalClass____local_property_by_global(variable[6]) /*MMLocalClass::_local_property_by_global*/;
+  /* Register variable[6]: Result */
+  variable[6] = ATTR_abstractmetamodel___MMLocalClass____local_property_by_global(variable[0]) /*MMLocalClass::_local_property_by_global*/;
   CALL_abstract_collection___Map_____braeq(variable[6])(variable[6],  variable[1] /*glob*/,  variable[3] /*impl*/) /*Map::[]=*/;
   variable[2] =  variable[3] /*impl*/;
-  goto return_label36;
-  return_label36: while(false);
+  goto return_label44;
+  return_label44: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 void inheritance___MMLocalProperty___inherit_global(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 374, LOCATE_inheritance___MMLocalProperty___inherit_global};
-  val_t variable[9];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 375, LOCATE_inheritance___MMLocalProperty___inherit_global};
+  val_t variable[8];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  CALL_abstractmetamodel___MMLocalProperty___set_global(variable[3])(variable[3],  variable[1] /*g*/) /*MMLocalProperty::set_global*/;
-  variable[4] = NEW_Array_array___Array___init(); /*new Array[MMLocalProperty]*/
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_abstractmetamodel___MMLocalProperty___set_global(variable[0])(variable[0],  variable[1] /*g*/) /*MMLocalProperty::set_global*/;
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = NEW_Array_array___Array___init() /*new Array[MMLocalProperty]*/;
   variable[3] = variable[4];
-  variable[4] = variable[0];
-  variable[4] = CALL_abstractmetamodel___MMLocalProperty___local_class(variable[4])(variable[4]) /*MMLocalProperty::local_class*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstractmetamodel___MMLocalProperty___local_class(variable[0])(variable[0]) /*MMLocalProperty::local_class*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_abstractmetamodel___MMLocalClass___che(variable[4])(variable[4]) /*MMLocalClass::che*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_partial_order___PartialOrderElement___direct_greaters(variable[4])(variable[4]) /*PartialOrderElement::direct_greaters*/;
-  variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*AbstractArray::iterator*/;
+  /* Register variable[4]: For iterator */
+  variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[5]: For 'is_ok' result */
     variable[5] = CALL_abstract_collection___Iterator___is_ok(variable[4])(variable[4]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[5])) break; /*for*/
-    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/;
+    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[6]: Local variable */
     variable[6] = variable[5];
-    variable[8] = CALL_abstractmetamodel___MMLocalClass_____bra( variable[6] /*sc*/)( variable[6] /*sc*/,  variable[1] /*g*/) /*MMLocalClass::[]*/;
-    variable[7] = variable[8];
-    variable[8] = TAG_Bool(( variable[7] /*p*/ ==  NIT_NULL /*null*/) || (( variable[7] /*p*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[7] /*p*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[7] /*p*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[7] /*p*/)( variable[7] /*p*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-    if (UNTAG_Bool(variable[8])) { /*if*/
-      goto continue_40;
+    /* Register variable[7]: Result */
+    variable[7] = CALL_abstractmetamodel___MMLocalClass___has_global_property( variable[6] /*sc*/)( variable[6] /*sc*/,  variable[1] /*g*/) /*MMLocalClass::has_global_property*/;
+    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[7])))) { /*if*/
+      goto continue_59;
     }
-    CALL_abstract_collection___SimpleCollection___add( variable[3] /*impls*/)( variable[3] /*impls*/,  variable[7] /*p*/) /*AbstractArray::add*/;
-    continue_40: while(0);
+    /* Register variable[7]: Result */
+    variable[7] = CALL_abstractmetamodel___MMLocalClass_____bra( variable[6] /*sc*/)( variable[6] /*sc*/,  variable[1] /*g*/) /*MMLocalClass::[]*/;
+    CALL_abstract_collection___SimpleCollection___add( variable[3] /*impls*/)( variable[3] /*impls*/, variable[7]) /*AbstractArray::add*/;
+    continue_59: while(0);
     CALL_abstract_collection___Iterator___next(variable[4])(variable[4]) /*ArrayIterator::next*/;
   }
-  break_40: while(0);
-  variable[4] = variable[0];
-  CALL_abstractmetamodel___MMGlobalProperty___add_local_property( variable[1] /*g*/)( variable[1] /*g*/, variable[4],  variable[3] /*impls*/) /*MMGlobalProperty::add_local_property*/;
-  return_label39: while(false);
+  break_59: while(0);
+  CALL_abstractmetamodel___MMGlobalProperty___add_local_property( variable[1] /*g*/)( variable[1] /*g*/, variable[0],  variable[3] /*impls*/) /*MMGlobalProperty::add_local_property*/;
+  return_label58: while(false);
   tracehead = trace.prev;
   return;
 }
 void inheritance___MMAncestor___add_in(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 389, LOCATE_inheritance___MMAncestor___add_in};
   val_t variable[12];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_static_type___MMAncestor___stype(variable[3])(variable[3]) /*MMAncestor::stype*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_static_type___MMAncestor___stype(variable[0])(variable[0]) /*MMAncestor::stype*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", " 'ancestor' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMAncestor___add_in, LOCATE_inheritance, 392); nit_exit(1);}
-  variable[3] = variable[0];
-  variable[3] = CALL_static_type___MMAncestor___stype(variable[3])(variable[3]) /*MMAncestor::stype*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_static_type___MMAncestor___stype(variable[0])(variable[0]) /*MMAncestor::stype*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_static_type___MMType___local_class(variable[3])(variable[3]) /*MMType::local_class*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", " 'local_class' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMAncestor___add_in, LOCATE_inheritance, 393); nit_exit(1);}
-  variable[3] = variable[0];
-  CALL_abstract_collection___SimpleCollection___add( variable[1] /*tab*/)( variable[1] /*tab*/, variable[3]) /*AbstractArray::add*/;
-  variable[3] = variable[0];
-  variable[3] = CALL_static_type___MMAncestor___stype(variable[3])(variable[3]) /*MMAncestor::stype*/;
+  CALL_abstract_collection___SimpleCollection___add( variable[1] /*tab*/)( variable[1] /*tab*/, variable[0]) /*AbstractArray::add*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_static_type___MMAncestor___stype(variable[0])(variable[0]) /*MMAncestor::stype*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_static_type___MMType___local_class(variable[3])(variable[3]) /*MMType::local_class*/;
   CALL_inheritance___MMLocalClass___compute_ancestors(variable[3])(variable[3]) /*MMLocalClass::compute_ancestors*/;
-  variable[3] = variable[0];
-  variable[3] = CALL_static_type___MMAncestor___stype(variable[3])(variable[3]) /*MMAncestor::stype*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_static_type___MMAncestor___stype(variable[0])(variable[0]) /*MMAncestor::stype*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_static_type___MMType___local_class(variable[3])(variable[3]) /*MMType::local_class*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_static_type___MMLocalClass___ancestors(variable[3])(variable[3]) /*MMLocalClass::ancestors*/;
-  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*Map::iterator*/;
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*MapRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
+    /* Register variable[6]: Local variable */
+    /* Register variable[7]: Result */
     variable[7] = CALL_static_type___MMAncestor___stype( variable[5] /*anc*/)( variable[5] /*anc*/) /*MMAncestor::stype*/;
-    variable[8] = variable[0];
-    variable[8] = CALL_static_type___MMAncestor___stype(variable[8])(variable[8]) /*MMAncestor::stype*/;
+    /* Register variable[8]: Result */
+    variable[8] = CALL_static_type___MMAncestor___stype(variable[0])(variable[0]) /*MMAncestor::stype*/;
+    /* Register variable[8]: Result */
     variable[8] = CALL_static_type___MMType___module(variable[8])(variable[8]) /*MMType::module*/;
+    /* Register variable[7]: Result */
     variable[7] = CALL_static_type___MMType___for_module(variable[7])(variable[7], variable[8]) /*MMType::for_module*/;
     variable[6] = variable[7];
-    variable[8] = variable[0];
-    variable[8] = CALL_static_type___MMAncestor___stype(variable[8])(variable[8]) /*MMAncestor::stype*/;
+    /* Register variable[7]: Local variable */
+    /* Register variable[8]: Result */
+    variable[8] = CALL_static_type___MMAncestor___stype(variable[0])(variable[0]) /*MMAncestor::stype*/;
+    /* Register variable[8]: Result */
     variable[8] = CALL_static_type___MMType___adapt_to( variable[6] /*aaa*/)( variable[6] /*aaa*/, variable[8]) /*MMType::adapt_to*/;
-    variable[9] = variable[0];
-    variable[9] = CALL_static_type___MMAncestor___inheriter(variable[9])(variable[9]) /*MMAncestor::inheriter*/;
+    /* Register variable[9]: Result */
+    variable[9] = CALL_static_type___MMAncestor___inheriter(variable[0])(variable[0]) /*MMAncestor::inheriter*/;
+    /* Register variable[9]: Result */
     variable[9] = CALL_static_type___MMType___module(variable[9])(variable[9]) /*MMType::module*/;
+    /* Register variable[8]: Result */
     variable[8] = CALL_static_type___MMType___for_module(variable[8])(variable[8], variable[9]) /*MMType::for_module*/;
     variable[7] = variable[8];
+    /* Register variable[8]: Result */
     variable[8] = CALL_static_type___MMType___local_class( variable[7] /*a*/)( variable[7] /*a*/) /*MMType::local_class*/;
-    variable[9] = variable[0];
-    variable[9] = CALL_static_type___MMAncestor___inheriter(variable[9])(variable[9]) /*MMAncestor::inheriter*/;
+    /* Register variable[9]: Result */
+    variable[9] = CALL_static_type___MMAncestor___inheriter(variable[0])(variable[0]) /*MMAncestor::inheriter*/;
+    /* Register variable[9]: Result */
     variable[9] = CALL_static_type___MMType___local_class(variable[9])(variable[9]) /*MMType::local_class*/;
+    /* Register variable[8]: Result */
     variable[8] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[8] == variable[9]) || ((variable[8] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[8])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[8],variable[9])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[8])(variable[8], variable[9]) /*Object::==*/)))))));
     if (UNTAG_Bool(variable[8])) { /*if*/
-      variable[9] = CALL_abstract_collection___Collection___iterator( variable[1] /*tab*/)( variable[1] /*tab*/) /*AbstractArray::iterator*/;
+      /* Register variable[8]: Local variable */
+      /* Register variable[9]: Result */
+      variable[9] = CALL_abstract_collection___Collection___iterator( variable[1] /*tab*/)( variable[1] /*tab*/) /*AbstractArrayRead::iterator*/;
       variable[8] = variable[9];
+      /* Register variable[9]: Local variable */
       variable[9] =  TAG_Bool(true);
       while (true) { /*while*/
+        /* Register variable[10]: Result */
         variable[10] = CALL_abstract_collection___Iterator___is_ok( variable[8] /*it*/)( variable[8] /*it*/) /*ArrayIterator::is_ok*/;
-        variable[11] = variable[10];
-        if (UNTAG_Bool(variable[11])) { /* and */
-          variable[11] =  variable[9] /*b*/;
+        /* Ensure var variable[10]: Left 'and' operand*/
+        if (UNTAG_Bool(variable[10])) { /* and */
+          variable[10] =  variable[9] /*b*/;
         }
-        variable[10] = variable[11];
+        /* Register variable[10]: Result */
         if (!UNTAG_Bool(variable[10])) break; /* while*/
+        /* Register variable[10]: Result */
         variable[10] = CALL_abstract_collection___Iterator___item( variable[8] /*it*/)( variable[8] /*it*/) /*ArrayIterator::item*/;
+        /* Register variable[10]: Result */
         variable[10] = CALL_static_type___MMAncestor___inheriter(variable[10])(variable[10]) /*MMAncestor::inheriter*/;
-        variable[11] = variable[0];
-        variable[11] = CALL_static_type___MMAncestor___inheriter(variable[11])(variable[11]) /*MMAncestor::inheriter*/;
+        /* Register variable[11]: Result */
+        variable[11] = CALL_static_type___MMAncestor___inheriter(variable[0])(variable[0]) /*MMAncestor::inheriter*/;
+        /* Register variable[10]: Result */
         variable[10] = TAG_Bool((variable[10] == variable[11]) || ((variable[10] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[10])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[10],variable[11])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[10])(variable[10], variable[11]) /*Object::==*/)))));
-        variable[11] = variable[10];
-        if (UNTAG_Bool(variable[11])) { /* and */
-          variable[11] = CALL_abstract_collection___Iterator___item( variable[8] /*it*/)( variable[8] /*it*/) /*ArrayIterator::item*/;
-          variable[11] = CALL_static_type___MMAncestor___stype(variable[11])(variable[11]) /*MMAncestor::stype*/;
-          variable[11] = TAG_Bool((variable[11] ==  variable[7] /*a*/) || ((variable[11] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[11])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[11], variable[7] /*a*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[11])(variable[11],  variable[7] /*a*/) /*Object::==*/)))));
+        /* Ensure var variable[10]: Left 'and' operand*/
+        if (UNTAG_Bool(variable[10])) { /* and */
+          /* Register variable[10]: Result */
+          variable[10] = CALL_abstract_collection___Iterator___item( variable[8] /*it*/)( variable[8] /*it*/) /*ArrayIterator::item*/;
+          /* Register variable[10]: Result */
+          variable[10] = CALL_static_type___MMAncestor___stype(variable[10])(variable[10]) /*MMAncestor::stype*/;
+          /* Register variable[10]: Result */
+          variable[10] = TAG_Bool((variable[10] ==  variable[7] /*a*/) || ((variable[10] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[10])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[10], variable[7] /*a*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[10])(variable[10],  variable[7] /*a*/) /*Object::==*/)))));
         }
-        variable[10] = variable[11];
+        /* Register variable[10]: Result */
         variable[9] =  TAG_Bool(!UNTAG_Bool(variable[10])) /*b=*/;
         CALL_abstract_collection___Iterator___next( variable[8] /*it*/)( variable[8] /*it*/) /*ArrayIterator::next*/;
-        continue_43: while(0);
+        continue_62: while(0);
       }
-      break_43: while(0);
+      break_62: while(0);
       if (UNTAG_Bool( variable[9] /*b*/)) { /*if*/
-        variable[10] = variable[0];
-        variable[10] = CALL_static_type___MMAncestor___inheriter(variable[10])(variable[10]) /*MMAncestor::inheriter*/;
-        variable[11] = NEW_MMSpecAncestor_inheritance___MMSpecAncestor___init(variable[10],  variable[7] /*a*/); /*new MMSpecAncestor*/
-        variable[10] = variable[11];
+        /* Register variable[10]: Result */
+        variable[10] = CALL_static_type___MMAncestor___inheriter(variable[0])(variable[0]) /*MMAncestor::inheriter*/;
+        /* Register variable[10]: Result */
+        variable[10] = NEW_MMSpecAncestor_inheritance___MMSpecAncestor___init(variable[10],  variable[7] /*a*/) /*new MMSpecAncestor*/;
         CALL_abstract_collection___SimpleCollection___add( variable[1] /*tab*/)( variable[1] /*tab*/, variable[10]) /*AbstractArray::add*/;
       }
     }
-    continue_42: while(0);
+    continue_61: while(0);
     CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*Iterator::next*/;
   }
-  break_42: while(0);
-  return_label41: while(false);
+  break_61: while(0);
+  return_label60: while(false);
   tracehead = trace.prev;
   return;
 }
 void inheritance___MMImplicitLocalClass___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
   struct trace_t trace = {NULL, NULL, 419, LOCATE_inheritance___MMImplicitLocalClass___init};
   val_t variable[7];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMImplicitLocalClass].i]) return;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
   variable[5] = CALL_abstractmetamodel___MMGlobalClass___intro( variable[2] /*g*/)( variable[2] /*g*/) /*MMGlobalClass::intro*/;
   variable[4] = variable[5];
+  /* Register variable[5]: Result */
   variable[5] = CALL_abstractmetamodel___MMLocalClass___name( variable[4] /*cla*/)( variable[4] /*cla*/) /*MMLocalClass::name*/;
+  /* Register variable[6]: Result */
   variable[6] = CALL_abstractmetamodel___MMLocalClass___arity( variable[4] /*cla*/)( variable[4] /*cla*/) /*MMLocalClass::arity*/;
-  CALL_abstractmetamodel___MMLocalClass___init(variable[0])(variable[0], variable[5], variable[6], init_table /*YYY*/) /*MMLocalClass::init*/;
-  variable[5] = variable[0];
-  CALL_abstractmetamodel___MMModule___add_local_class( variable[1] /*mod*/)( variable[1] /*mod*/, variable[5]) /*MMModule::add_local_class*/;
-  variable[5] = variable[0];
-  CALL_abstractmetamodel___MMLocalClass___set_global(variable[5])(variable[5],  variable[2] /*g*/) /*MMLocalClass::set_global*/;
-  return_label44: while(false);
+  CALL_abstractmetamodel___MMLocalClass___init(variable[0])(variable[0],  variable[1] /*mod*/, variable[5], variable[6], init_table /*YYY*/) /*MMLocalClass::init*/;
+  CALL_abstractmetamodel___MMLocalClass___set_global(variable[0])(variable[0],  variable[2] /*g*/) /*MMLocalClass::set_global*/;
+  return_label63: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMImplicitLocalClass].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t inheritance___MMRefineAncestor___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 430, LOCATE_inheritance___MMRefineAncestor___local_class};
+  struct trace_t trace = {NULL, NULL, 429, LOCATE_inheritance___MMRefineAncestor___local_class};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
   tracehead = trace.prev;
   return ATTR_inheritance___MMRefineAncestor____local_class( self) /*MMRefineAncestor::_local_class*/;
 }
 void inheritance___MMRefineAncestor___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 432, LOCATE_inheritance___MMRefineAncestor___init};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 431, LOCATE_inheritance___MMRefineAncestor___init};
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMRefineAncestor].i]) return;
-  variable[4] = variable[0];
-  ATTR_inheritance___MMRefineAncestor____local_class(variable[4]) /*MMRefineAncestor::_local_class*/ =  variable[2] /*a*/;
-  variable[4] = variable[0];
-  variable[5] = CALL_static_type___MMLocalClass___get_type( variable[1] /*b*/)( variable[1] /*b*/) /*MMLocalClass::get_type*/;
-  CALL_static_type___MMAncestor___inheriter__eq(variable[4])(variable[4], variable[5]) /*MMAncestor::inheriter=*/;
-  variable[4] = variable[0];
-  variable[5] = variable[0];
-  variable[5] = ATTR_inheritance___MMRefineAncestor____local_class(variable[5]) /*MMRefineAncestor::_local_class*/;
-  variable[5] = CALL_static_type___MMLocalClass___get_type(variable[5])(variable[5]) /*MMLocalClass::get_type*/;
-  CALL_static_type___MMAncestor___stype__eq(variable[4])(variable[4], variable[5]) /*MMAncestor::stype=*/;
-  return_label45: while(false);
+  /* Register variable[3]: Method return value and escape marker */
+  ATTR_inheritance___MMRefineAncestor____local_class(variable[0]) /*MMRefineAncestor::_local_class*/ =  variable[2] /*a*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_static_type___MMLocalClass___get_type( variable[1] /*b*/)( variable[1] /*b*/) /*MMLocalClass::get_type*/;
+  CALL_static_type___MMAncestor___inheriter__eq(variable[0])(variable[0], variable[4]) /*MMAncestor::inheriter=*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_inheritance___MMRefineAncestor____local_class(variable[0]) /*MMRefineAncestor::_local_class*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_static_type___MMLocalClass___get_type(variable[4])(variable[4]) /*MMLocalClass::get_type*/;
+  CALL_static_type___MMAncestor___stype__eq(variable[0])(variable[0], variable[4]) /*MMAncestor::stype=*/;
+  return_label64: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMRefineAncestor].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t inheritance___MMSpecAncestor___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 443, LOCATE_inheritance___MMSpecAncestor___local_class};
+  struct trace_t trace = {NULL, NULL, 442, LOCATE_inheritance___MMSpecAncestor___local_class};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_static_type___MMAncestor___stype(variable[2])(variable[2]) /*MMAncestor::stype*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_static_type___MMAncestor___stype(variable[0])(variable[0]) /*MMAncestor::stype*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_static_type___MMType___local_class(variable[2])(variable[2]) /*MMType::local_class*/;
   variable[1] = variable[2];
-  goto return_label46;
-  return_label46: while(false);
+  goto return_label65;
+  return_label65: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 void inheritance___MMSpecAncestor___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 445, LOCATE_inheritance___MMSpecAncestor___init};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 444, LOCATE_inheritance___MMSpecAncestor___init};
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSpecAncestor].i]) return;
-  variable[4] = variable[0];
-  ATTR_static_type___MMAncestor____inheriter(variable[4]) /*MMAncestor::_inheriter*/ =  variable[1] /*inheriter*/;
-  variable[4] = variable[0];
-  ATTR_static_type___MMAncestor____stype(variable[4]) /*MMAncestor::_stype*/ =  variable[2] /*stype*/;
-  return_label47: while(false);
+  /* Register variable[3]: Method return value and escape marker */
+  ATTR_static_type___MMAncestor____inheriter(variable[0]) /*MMAncestor::_inheriter*/ =  variable[1] /*inheriter*/;
+  ATTR_static_type___MMAncestor____stype(variable[0]) /*MMAncestor::_stype*/ =  variable[2] /*stype*/;
+  return_label66: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSpecAncestor].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t inheritance___MMDefaultAncestor___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 454, LOCATE_inheritance___MMDefaultAncestor___local_class};
+  struct trace_t trace = {NULL, NULL, 453, LOCATE_inheritance___MMDefaultAncestor___local_class};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_static_type___MMAncestor___stype(variable[2])(variable[2]) /*MMAncestor::stype*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_static_type___MMAncestor___stype(variable[0])(variable[0]) /*MMAncestor::stype*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_static_type___MMType___local_class(variable[2])(variable[2]) /*MMType::local_class*/;
   variable[1] = variable[2];
-  goto return_label48;
-  return_label48: while(false);
+  goto return_label67;
+  return_label67: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 void inheritance___MMDefaultAncestor___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 456, LOCATE_inheritance___MMDefaultAncestor___init};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 455, LOCATE_inheritance___MMDefaultAncestor___init};
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_inheritance;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMDefaultAncestor].i]) return;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*b*/ ==  NIT_NULL /*null*/) || (( variable[1] /*b*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*b*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*b*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*b*/)( variable[1] /*b*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMDefaultAncestor___init, LOCATE_inheritance, 458); nit_exit(1);}
+  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMDefaultAncestor___init, LOCATE_inheritance, 457); nit_exit(1);}
+  /* Register variable[4]: Result */
   variable[4] = CALL_abstractmetamodel___MMLocalClass___module( variable[1] /*b*/)( variable[1] /*b*/) /*MMLocalClass::module*/;
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMDefaultAncestor___init, LOCATE_inheritance, 459); nit_exit(1);}
+  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMDefaultAncestor___init, LOCATE_inheritance, 458); nit_exit(1);}
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[2] /*anc*/ ==  NIT_NULL /*null*/) || (( variable[2] /*anc*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[2] /*anc*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*anc*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[2] /*anc*/)( variable[2] /*anc*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMDefaultAncestor___init, LOCATE_inheritance, 460); nit_exit(1);}
-  variable[4] = variable[0];
-  variable[5] = CALL_static_type___MMLocalClass___get_type( variable[1] /*b*/)( variable[1] /*b*/) /*MMLocalClass::get_type*/;
-  CALL_static_type___MMAncestor___inheriter__eq(variable[4])(variable[4], variable[5]) /*MMAncestor::inheriter=*/;
-  variable[4] = variable[0];
-  CALL_static_type___MMAncestor___stype__eq(variable[4])(variable[4],  variable[2] /*anc*/) /*MMAncestor::stype=*/;
-  return_label49: while(false);
+  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_inheritance___MMDefaultAncestor___init, LOCATE_inheritance, 459); nit_exit(1);}
+  /* Register variable[4]: Result */
+  variable[4] = CALL_static_type___MMLocalClass___get_type( variable[1] /*b*/)( variable[1] /*b*/) /*MMLocalClass::get_type*/;
+  CALL_static_type___MMAncestor___inheriter__eq(variable[0])(variable[0], variable[4]) /*MMAncestor::inheriter=*/;
+  CALL_static_type___MMAncestor___stype__eq(variable[0])(variable[0],  variable[2] /*anc*/) /*MMAncestor::stype=*/;
+  return_label68: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMDefaultAncestor].i] = 1;
   tracehead = trace.prev;
   return;

@@ -2,16 +2,18 @@
 #include "abstracttool._sep.h"
 void abstracttool___AbstractCompiler___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 28, LOCATE_abstracttool___AbstractCompiler___init};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstracttool;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_AbstractCompiler].i]) return;
+  /* Register variable[1]: Method return value and escape marker */
   CALL_mmloader___ToolContext___init(variable[0])(variable[0], init_table /*YYY*/) /*ToolContext::init*/;
-  variable[2] = variable[0];
-  variable[3] = NEW_SrcModuleLoader_syntax___SrcModuleLoader___init(); /*new SrcModuleLoader*/
-  CALL_mmloader___ToolContext___register_loader(variable[2])(variable[2], variable[3]) /*ToolContext::register_loader*/;
+  /* Register variable[2]: Result */
+  variable[2] = NEW_SrcModuleLoader_syntax___SrcModuleLoader___init() /*new SrcModuleLoader*/;
+  CALL_mmloader___ToolContext___register_loader(variable[0])(variable[0], variable[2]) /*ToolContext::register_loader*/;
   return_label0: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_AbstractCompiler].i] = 1;
   tracehead = trace.prev;
@@ -19,102 +21,124 @@ void abstracttool___AbstractCompiler___init(val_t  self, int* init_table) {
 }
 void abstracttool___AbstractCompiler___exec_cmd_line(val_t  self) {
   struct trace_t trace = {NULL, NULL, 34, LOCATE_abstracttool___AbstractCompiler___exec_cmd_line};
-  val_t variable[14];
-  void **closurevariable = NULL;
+  val_t variable[12];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstracttool;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  CALL_mmloader___ToolContext___process_options(variable[2])(variable[2]) /*ToolContext::process_options*/;
-  variable[2] = variable[0];
-  variable[2] = CALL_mmloader___ToolContext___opt_help(variable[2])(variable[2]) /*ToolContext::opt_help*/;
+  /* Register variable[1]: Method return value and escape marker */
+  CALL_mmloader___ToolContext___process_options(variable[0])(variable[0]) /*ToolContext::process_options*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_mmloader___ToolContext___opt_help(variable[0])(variable[0]) /*ToolContext::opt_help*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_opts___Option___value(variable[2])(variable[2]) /*Option::value*/;
   if (UNTAG_Bool(variable[2])) { /*if*/
-    variable[2] = variable[0];
-    variable[2] = CALL_mmloader___ToolContext___option_context(variable[2])(variable[2]) /*ToolContext::option_context*/;
+    /* Register variable[2]: Result */
+    variable[2] = CALL_mmloader___ToolContext___option_context(variable[0])(variable[0]) /*ToolContext::option_context*/;
     CALL_opts___OptionContext___usage(variable[2])(variable[2]) /*OptionContext::usage*/;
-    variable[2] = variable[0];
     exit(UNTAG_Int( TAG_Int(0)));
   }
-  variable[2] = variable[0];
-  variable[2] = CALL_mmloader___ToolContext___option_context(variable[2])(variable[2]) /*ToolContext::option_context*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_mmloader___ToolContext___option_context(variable[0])(variable[0]) /*ToolContext::option_context*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_opts___OptionContext___rest(variable[2])(variable[2]) /*OptionContext::rest*/;
-  variable[2] = CALL_abstract_collection___Collection___length(variable[2])(variable[2]) /*AbstractArray::length*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___Collection___length(variable[2])(variable[2]) /*AbstractArrayRead::length*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool((variable[2])==( TAG_Int(0)));
   if (UNTAG_Bool(variable[2])) { /*if*/
-    variable[2] = variable[0];
-    variable[2] = CALL_mmloader___ToolContext___option_context(variable[2])(variable[2]) /*ToolContext::option_context*/;
+    /* Register variable[2]: Result */
+    variable[2] = CALL_mmloader___ToolContext___option_context(variable[0])(variable[0]) /*ToolContext::option_context*/;
     CALL_opts___OptionContext___usage(variable[2])(variable[2]) /*OptionContext::usage*/;
-    variable[2] = variable[0];
     exit(UNTAG_Int( TAG_Int(1)));
   }
-  variable[3] = variable[0];
-  variable[3] = CALL_mmloader___ToolContext___option_context(variable[3])(variable[3]) /*ToolContext::option_context*/;
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_mmloader___ToolContext___option_context(variable[0])(variable[0]) /*ToolContext::option_context*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_opts___OptionContext___rest(variable[3])(variable[3]) /*OptionContext::rest*/;
   variable[2] = variable[3];
-  variable[4] = NEW_Array_array___Array___init(); /*new Array[MMModule]*/
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = NEW_Array_array___Array___init() /*new Array[MMModule]*/;
   variable[3] = variable[4];
-  variable[4] = CALL_abstract_collection___Collection___length( variable[2] /*rest*/)( variable[2] /*rest*/) /*AbstractArray::length*/;
-  variable[5] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[4]); /*new Range[Int]*/
-  variable[4] = variable[5];
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstract_collection___Collection___length( variable[2] /*rest*/)( variable[2] /*rest*/) /*AbstractArrayRead::length*/;
+  /* Register variable[4]: Result */
+  variable[4] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[4]) /*new Range[Int]*/;
+  /* Register variable[4]: For iterator */
   variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*Range::iterator*/;
   while (true) { /*for*/
+    /* Register variable[5]: For 'is_ok' result */
     variable[5] = CALL_abstract_collection___Iterator___is_ok(variable[4])(variable[4]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[5])) break; /*for*/
-    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*Iterator::item*/;
+    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[6]: Local variable */
     variable[6] = variable[5];
-    variable[8] = variable[0];
-    variable[9] =  variable[2] /*rest*/;
-    variable[10] =  variable[6] /*i*/;
-    variable[12] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-    variable[13] = variable[12];
-    if (UNTAG_Bool(variable[13])) { /* and */
-      variable[13] = variable[9];
-      variable[13] = ATTR_array___AbstractArray____length(variable[13]) /*AbstractArray::_length*/;
-      variable[13] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)<UNTAG_Int(variable[13]));
+    /* Register variable[7]: Local variable */
+    /* Register variable[8]: Local variable */
+    variable[8] =  variable[2] /*rest*/;
+    /* Register variable[9]: Local variable */
+    variable[9] =  variable[6] /*i*/;
+    /* Register variable[10]: Method return value and escape marker */
+    /* Register variable[11]: Result */
+    variable[11] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+    /* Ensure var variable[11]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[11])) { /* and */
+      /* Register variable[11]: Result */
+      variable[11] = ATTR_array___AbstractArrayRead____length(variable[8]) /*AbstractArrayRead::_length*/;
+      /* Register variable[11]: Result */
+      variable[11] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)<UNTAG_Int(variable[11]));
     }
-    variable[12] = variable[13];
-    if (!UNTAG_Bool(variable[12])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_abstracttool, 229); nit_exit(1);}
-    variable[12] = variable[9];
-    variable[12] = ATTR_array___Array____items(variable[12]) /*Array::_items*/;
-    variable[12] = UNBOX_NativeArray(variable[12])[UNTAG_Int( variable[10] /*index*/)];
-    variable[11] = variable[12];
+    /* Register variable[11]: Result */
+    if (!UNTAG_Bool(variable[11])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_abstracttool, 234); nit_exit(1);}
+    /* Register variable[11]: Result */
+    variable[11] = ATTR_array___Array____items(variable[8]) /*Array::_items*/;
+    /* Register variable[11]: Result */
+    variable[11] = UNBOX_NativeArray(variable[11])[UNTAG_Int( variable[9] /*index*/)];
+    variable[10] = variable[11];
     goto return_label3;
     return_label3: while(false);
-    variable[9] = variable[11];
-    variable[8] = CALL_mmloader___ToolContext___get_module_from_filename(variable[8])(variable[8], variable[9]) /*ToolContext::get_module_from_filename*/;
+    /* Register variable[8]: Result */
+    variable[8] = variable[10];
+    /* Register variable[8]: Result */
+    variable[8] = CALL_mmloader___ToolContext___get_module_from_filename(variable[0])(variable[0], variable[8]) /*ToolContext::get_module_from_filename*/;
     variable[7] = variable[8];
     CALL_abstract_collection___SimpleCollection___add( variable[3] /*to_do*/)( variable[3] /*to_do*/,  variable[7] /*mod*/) /*AbstractArray::add*/;
     continue_2: while(0);
     CALL_abstract_collection___Iterator___next(variable[4])(variable[4]) /*Iterator::next*/;
   }
   break_2: while(0);
-  variable[4] = variable[0];
-  variable[4] = CALL_mmloader___ToolContext___opt_log(variable[4])(variable[4]) /*ToolContext::opt_log*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_mmloader___ToolContext___opt_log(variable[0])(variable[0]) /*ToolContext::opt_log*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_opts___Option___value(variable[4])(variable[4]) /*Option::value*/;
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    CALL_abstracttool___AbstractCompiler___dump_context_info(variable[4])(variable[4]) /*AbstractCompiler::dump_context_info*/;
+    CALL_abstracttool___AbstractCompiler___dump_context_info(variable[0])(variable[0]) /*AbstractCompiler::dump_context_info*/;
   }
-  variable[4] = CALL_abstract_collection___Collection___is_empty( variable[3] /*to_do*/)( variable[3] /*to_do*/) /*AbstractArray::is_empty*/;
-  variable[4] =  TAG_Bool(!UNTAG_Bool(variable[4]));
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstract_collection___Collection___is_empty( variable[3] /*to_do*/)( variable[3] /*to_do*/) /*AbstractArrayRead::is_empty*/;
+  variable[4] =  TAG_Bool(!UNTAG_Bool(variable[4])) /* Ensure var: Left 'and' operand*/;
   if (UNTAG_Bool(variable[4])) { /* and */
-    variable[4] = variable[0];
-    variable[4] = CALL_mmloader___ToolContext___opt_only_metamodel(variable[4])(variable[4]) /*ToolContext::opt_only_metamodel*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_mmloader___ToolContext___opt_only_metamodel(variable[0])(variable[0]) /*ToolContext::opt_only_metamodel*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_opts___Option___value(variable[4])(variable[4]) /*Option::value*/;
     variable[4] =  TAG_Bool(!UNTAG_Bool(variable[4]));
   }
-  variable[5] = variable[4];
-  if (UNTAG_Bool(variable[5])) { /* and */
-    variable[5] = variable[0];
-    variable[5] = CALL_mmloader___ToolContext___opt_only_parse(variable[5])(variable[5]) /*ToolContext::opt_only_parse*/;
-    variable[5] = CALL_opts___Option___value(variable[5])(variable[5]) /*Option::value*/;
-    variable[5] =  TAG_Bool(!UNTAG_Bool(variable[5]));
+  /* Register variable[4]: Result */
+  /* Ensure var variable[4]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[4])) { /* and */
+    /* Register variable[4]: Result */
+    variable[4] = CALL_mmloader___ToolContext___opt_only_parse(variable[0])(variable[0]) /*ToolContext::opt_only_parse*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_opts___Option___value(variable[4])(variable[4]) /*Option::value*/;
+    variable[4] =  TAG_Bool(!UNTAG_Bool(variable[4]));
   }
-  variable[4] = variable[5];
+  /* Register variable[4]: Result */
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    CALL_abstracttool___AbstractCompiler___perform_work(variable[4])(variable[4],  variable[3] /*to_do*/) /*AbstractCompiler::perform_work*/;
+    CALL_abstracttool___AbstractCompiler___perform_work(variable[0])(variable[0],  variable[3] /*to_do*/) /*AbstractCompiler::perform_work*/;
   }
   return_label1: while(false);
   tracehead = trace.prev;
@@ -123,7 +147,7 @@ void abstracttool___AbstractCompiler___exec_cmd_line(val_t  self) {
 void abstracttool___AbstractCompiler___perform_work(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 63, LOCATE_abstracttool___AbstractCompiler___perform_work};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstracttool;
   fprintf(stderr, "Deferred method called");
@@ -134,68 +158,118 @@ void abstracttool___AbstractCompiler___perform_work(val_t  self, val_t  param0) 
 }
 void abstracttool___AbstractCompiler___dump_context_info(val_t  self) {
   struct trace_t trace = {NULL, NULL, 65, LOCATE_abstracttool___AbstractCompiler___dump_context_info};
-  val_t variable[11];
-  void **closurevariable = NULL;
+  static val_t once_value_6 = NIT_NULL; /* Once value for string variable[5]*/
+  static val_t once_value_7 = NIT_NULL; /* Once value for string variable[6]*/
+  static val_t once_value_8 = NIT_NULL; /* Once value for string variable[6]*/
+  static val_t once_value_9 = NIT_NULL; /* Once value for string variable[6]*/
+  static val_t once_value_10 = NIT_NULL; /* Once value for string variable[6]*/
+  val_t variable[7];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstracttool;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_abstractmetamodel___MMContext___module_hierarchy(variable[2])(variable[2]) /*MMContext::module_hierarchy*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstractmetamodel___MMContext___module_hierarchy(variable[0])(variable[0]) /*MMContext::module_hierarchy*/;
+  /* Register variable[2]: For iterator */
   variable[2] = CALL_abstract_collection___Collection___iterator(variable[2])(variable[2]) /*PartialOrder::iterator*/;
   while (true) { /*for*/
+    /* Register variable[3]: For 'is_ok' result */
     variable[3] = CALL_abstract_collection___Iterator___is_ok(variable[2])(variable[2]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[3])) break; /*for*/
-    variable[3] = CALL_abstract_collection___Iterator___item(variable[2])(variable[2]) /*Iterator::item*/;
+    variable[3] = CALL_abstract_collection___Iterator___item(variable[2])(variable[2]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[4]: Local variable */
     variable[4] = variable[3];
     CALL_abstracttool___MMModule___dump_module_info( variable[4] /*mod*/)( variable[4] /*mod*/) /*MMModule::dump_module_info*/;
     continue_5: while(0);
     CALL_abstract_collection___Iterator___next(variable[2])(variable[2]) /*Iterator::next*/;
   }
   break_5: while(0);
-  variable[3] = NEW_Array_array___Array___init(); /*new Array[MMModule]*/
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = NEW_Array_array___Array___init() /*new Array[MMModule]*/;
   variable[2] = variable[3];
-  variable[3] = variable[0];
-  variable[3] = CALL_abstractmetamodel___MMContext___module_hierarchy(variable[3])(variable[3]) /*MMContext::module_hierarchy*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstractmetamodel___MMContext___module_hierarchy(variable[0])(variable[0]) /*MMContext::module_hierarchy*/;
   CALL_abstract_collection___SimpleCollection___add_all( variable[2] /*tab*/)( variable[2] /*tab*/, variable[3]) /*SimpleCollection::add_all*/;
-  variable[4] = variable[0];
-  variable[4] = CALL_abstractmetamodel___MMContext___module_hierarchy(variable[4])(variable[4]) /*MMContext::module_hierarchy*/;
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstractmetamodel___MMContext___module_hierarchy(variable[0])(variable[0]) /*MMContext::module_hierarchy*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_partial_order___PartialOrder___select_smallests(variable[4])(variable[4],  variable[2] /*tab*/) /*PartialOrder::select_smallests*/;
-  variable[5] = NEW_String_string___String___with_native(BOX_NativeString("-"), TAG_Int(1)); /*new String*/
+  /* Register variable[5]: Once String constant */
+  if (once_value_6 != NIT_NULL) variable[5] = once_value_6;
+  else {
+    variable[5] = NEW_String_string___String___with_native(BOX_NativeString("-"), TAG_Int(1)) /*new String*/;
+    once_value_6 = variable[5];
+  }
+  /* Register variable[5]: Result */
+  /* Register variable[4]: Result */
   variable[4] = CALL_string___Collection___join(variable[4])(variable[4], variable[5]) /*Collection::join*/;
   variable[3] = variable[4];
-  variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-  variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[7] = variable[6];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[7]) /*AbstractArray::add*/;
-  variable[8] =  variable[3] /*name*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[8]) /*AbstractArray::add*/;
-  variable[9] = NEW_String_string___String___with_native(BOX_NativeString(".full_class_hierarchy.new.dot"), TAG_Int(29)); /*new String*/
-  variable[10] = variable[9];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[10]) /*AbstractArray::add*/;
+  /* Register variable[4]: Local variable */
+  variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_7 != NIT_NULL) variable[6] = once_value_7;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_7 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  variable[6] =  variable[3] /*name*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_8 != NIT_NULL) variable[6] = once_value_8;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString(".full_class_hierarchy.new.dot"), TAG_Int(29)) /*new String*/;
+    once_value_8 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/;
-  variable[6] = NEW_OFStream_file___OFStream___open(variable[5]); /*new OFStream*/
-  variable[5] = variable[6];
+  /* Register variable[5]: Result */
+  variable[5] = NEW_OFStream_file___OFStream___open(variable[5]) /*new OFStream*/;
   variable[4] = variable[5];
-  variable[5] = variable[0];
-  variable[5] = CALL_abstractmetamodel___MMContext___class_hierarchy(variable[5])(variable[5]) /*MMContext::class_hierarchy*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_abstractmetamodel___MMContext___class_hierarchy(variable[0])(variable[0]) /*MMContext::class_hierarchy*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_partial_order___PartialOrder___to_dot(variable[5])(variable[5]) /*PartialOrder::to_dot*/;
   CALL_stream___OStream___write( variable[4] /*f*/)( variable[4] /*f*/, variable[5]) /*OFStream::write*/;
   CALL_stream___IOS___close( variable[4] /*f*/)( variable[4] /*f*/) /*OFStream::close*/;
-  variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-  variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[7] = variable[6];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[7]) /*AbstractArray::add*/;
-  variable[8] =  variable[3] /*name*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[8]) /*AbstractArray::add*/;
-  variable[9] = NEW_String_string___String___with_native(BOX_NativeString(".module_hierarchy.new.dot"), TAG_Int(25)); /*new String*/
-  variable[10] = variable[9];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[10]) /*AbstractArray::add*/;
+  variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_9 != NIT_NULL) variable[6] = once_value_9;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_9 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  variable[6] =  variable[3] /*name*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_10 != NIT_NULL) variable[6] = once_value_10;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString(".module_hierarchy.new.dot"), TAG_Int(25)) /*new String*/;
+    once_value_10 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/;
-  variable[6] = NEW_OFStream_file___OFStream___open(variable[5]); /*new OFStream*/
-  variable[5] = variable[6];
+  /* Register variable[5]: Result */
+  variable[5] = NEW_OFStream_file___OFStream___open(variable[5]) /*new OFStream*/;
   variable[4] = variable[5] /*f=*/;
-  variable[5] = variable[0];
-  variable[5] = CALL_abstractmetamodel___MMContext___module_hierarchy(variable[5])(variable[5]) /*MMContext::module_hierarchy*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_abstractmetamodel___MMContext___module_hierarchy(variable[0])(variable[0]) /*MMContext::module_hierarchy*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_partial_order___PartialOrder___to_dot(variable[5])(variable[5]) /*PartialOrder::to_dot*/;
   CALL_stream___OStream___write( variable[4] /*f*/)( variable[4] /*f*/, variable[5]) /*OFStream::write*/;
   CALL_stream___IOS___close( variable[4] /*f*/)( variable[4] /*f*/) /*OFStream::close*/;
@@ -205,156 +279,278 @@ void abstracttool___AbstractCompiler___dump_context_info(val_t  self) {
 }
 void abstracttool___MMModule___dump_module_info(val_t  self) {
   struct trace_t trace = {NULL, NULL, 85, LOCATE_abstracttool___MMModule___dump_module_info};
-  val_t variable[14];
-  void **closurevariable = NULL;
+  static val_t once_value_12 = NIT_NULL; /* Once value for string variable[5]*/
+  static val_t once_value_13 = NIT_NULL; /* Once value for string variable[5]*/
+  static val_t once_value_14 = NIT_NULL; /* Once value for string variable[5]*/
+  static val_t once_value_15 = NIT_NULL; /* Once value for string variable[6]*/
+  static val_t once_value_16 = NIT_NULL; /* Once value for string variable[6]*/
+  static val_t once_value_17 = NIT_NULL; /* Once value for string variable[6]*/
+  static val_t once_value_18 = NIT_NULL; /* Once value for string variable[6]*/
+    static val_t once_value_20 = NIT_NULL; /* Once value for string variable[8]*/
+  val_t variable[9];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstracttool;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[3] = variable[0];
-  variable[3] = CALL_mmloader___MMModule___filename(variable[3])(variable[3]) /*MMModule::filename*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstractmetamodel___MMModule___filename(variable[0])(variable[0]) /*MMModule::filename*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_file___String___file_path(variable[3])(variable[3]) /*String::file_path*/;
   variable[2] = variable[3];
-  variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-  variable[5] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[6] = variable[5];
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[6]) /*AbstractArray::add*/;
-  variable[7] =  variable[2] /*p*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[7]) /*AbstractArray::add*/;
-  variable[8] = NEW_String_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)); /*new String*/
-  variable[9] = variable[8];
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[9]) /*AbstractArray::add*/;
-  variable[10] = variable[0];
-  variable[10] = CALL_abstractmetamodel___MMModule___name(variable[10])(variable[10]) /*MMModule::name*/;
-  variable[11] = variable[10];
-  variable[11] = CALL_string___Object___to_s(variable[11])(variable[11]) /*Object::to_s*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[11]) /*AbstractArray::add*/;
-  variable[12] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[13] = variable[12];
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[13]) /*AbstractArray::add*/;
+  /* Register variable[3]: Local variable */
+  variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[5]: Once String constant */
+  if (once_value_12 != NIT_NULL) variable[5] = once_value_12;
+  else {
+    variable[5] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_12 = variable[5];
+  }
+  /* Register variable[5]: Result */
+  /* Ensure var variable[5]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+  variable[5] =  variable[2] /*p*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+  /* Register variable[5]: Once String constant */
+  if (once_value_13 != NIT_NULL) variable[5] = once_value_13;
+  else {
+    variable[5] = NEW_String_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)) /*new String*/;
+    once_value_13 = variable[5];
+  }
+  /* Register variable[5]: Result */
+  /* Ensure var variable[5]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_abstractmetamodel___MMModule___name(variable[0])(variable[0]) /*MMModule::name*/;
+  /* Ensure var variable[5]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/) /*AbstractArray::add*/;
+  /* Register variable[5]: Once String constant */
+  if (once_value_14 != NIT_NULL) variable[5] = once_value_14;
+  else {
+    variable[5] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_14 = variable[5];
+  }
+  /* Register variable[5]: Result */
+  /* Ensure var variable[5]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_string___Object___to_s(variable[4])(variable[4]) /*Object::to_s*/;
   variable[3] = variable[4];
-  variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-  variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[7] = variable[6];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[7]) /*AbstractArray::add*/;
-  variable[8] =  variable[3] /*fname*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[8]) /*AbstractArray::add*/;
-  variable[9] = NEW_String_string___String___with_native(BOX_NativeString(".class_hierarchy.new.dot"), TAG_Int(24)); /*new String*/
-  variable[10] = variable[9];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[10]) /*AbstractArray::add*/;
+  /* Register variable[4]: Local variable */
+  variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_15 != NIT_NULL) variable[6] = once_value_15;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_15 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  variable[6] =  variable[3] /*fname*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_16 != NIT_NULL) variable[6] = once_value_16;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString(".class_hierarchy.new.dot"), TAG_Int(24)) /*new String*/;
+    once_value_16 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/;
-  variable[6] = NEW_OFStream_file___OFStream___open(variable[5]); /*new OFStream*/
-  variable[5] = variable[6];
+  /* Register variable[5]: Result */
+  variable[5] = NEW_OFStream_file___OFStream___open(variable[5]) /*new OFStream*/;
   variable[4] = variable[5];
-  variable[5] = variable[0];
-  variable[5] = CALL_abstractmetamodel___MMModule___class_specialization_hierarchy(variable[5])(variable[5]) /*MMModule::class_specialization_hierarchy*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_abstractmetamodel___MMModule___class_specialization_hierarchy(variable[0])(variable[0]) /*MMModule::class_specialization_hierarchy*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_partial_order___PartialOrder___to_dot(variable[5])(variable[5]) /*PartialOrder::to_dot*/;
   CALL_stream___OStream___write( variable[4] /*f*/)( variable[4] /*f*/, variable[5]) /*OFStream::write*/;
   CALL_stream___IOS___close( variable[4] /*f*/)( variable[4] /*f*/) /*OFStream::close*/;
-  variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-  variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[7] = variable[6];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[7]) /*AbstractArray::add*/;
-  variable[8] =  variable[3] /*fname*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[8]) /*AbstractArray::add*/;
-  variable[9] = NEW_String_string___String___with_native(BOX_NativeString(".properties.log"), TAG_Int(15)); /*new String*/
-  variable[10] = variable[9];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[10]) /*AbstractArray::add*/;
+  variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_17 != NIT_NULL) variable[6] = once_value_17;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_17 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  variable[6] =  variable[3] /*fname*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_18 != NIT_NULL) variable[6] = once_value_18;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString(".properties.log"), TAG_Int(15)) /*new String*/;
+    once_value_18 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/;
-  variable[6] = NEW_OFStream_file___OFStream___open(variable[5]); /*new OFStream*/
-  variable[5] = variable[6];
+  /* Register variable[5]: Result */
+  variable[5] = NEW_OFStream_file___OFStream___open(variable[5]) /*new OFStream*/;
   variable[4] = variable[5] /*f=*/;
-  variable[5] = variable[0];
-  variable[5] = CALL_abstractmetamodel___MMModule___local_classes(variable[5])(variable[5]) /*MMModule::local_classes*/;
-  variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*AbstractArray::iterator*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_abstractmetamodel___MMModule___local_classes(variable[0])(variable[0]) /*MMModule::local_classes*/;
+  /* Register variable[5]: For iterator */
+  variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[6]: For 'is_ok' result */
     variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[6])) break; /*for*/
-    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/;
+    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[7]: Local variable */
     variable[7] = variable[6];
     CALL_abstracttool___MMLocalClass___dump_properties( variable[7] /*cla*/)( variable[7] /*cla*/,  variable[4] /*f*/) /*MMLocalClass::dump_properties*/;
-    variable[8] = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)); /*new String*/
+    /* Register variable[8]: Once String constant */
+    if (once_value_20 != NIT_NULL) variable[8] = once_value_20;
+    else {
+      variable[8] = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)) /*new String*/;
+      once_value_20 = variable[8];
+    }
+    /* Register variable[8]: Result */
     CALL_stream___OStream___write( variable[4] /*f*/)( variable[4] /*f*/, variable[8]) /*OFStream::write*/;
-    continue_7: while(0);
+    continue_19: while(0);
     CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*ArrayIterator::next*/;
   }
-  break_7: while(0);
+  break_19: while(0);
   CALL_stream___IOS___close( variable[4] /*f*/)( variable[4] /*f*/) /*OFStream::close*/;
-  return_label6: while(false);
+  return_label11: while(false);
   tracehead = trace.prev;
   return;
 }
 void abstracttool___MMLocalClass___dump_properties(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 103, LOCATE_abstracttool___MMLocalClass___dump_properties};
-  val_t variable[17];
-  void **closurevariable = NULL;
+  static val_t once_value_22 = NIT_NULL; /* Once value for string variable[4]*/
+  static val_t once_value_23 = NIT_NULL; /* Once value for string variable[4]*/
+    static val_t once_value_25 = NIT_NULL; /* Once value for string variable[8]*/
+    static val_t once_value_26 = NIT_NULL; /* Once value for string variable[8]*/
+    static val_t once_value_27 = NIT_NULL; /* Once value for string variable[8]*/
+  static val_t once_value_28 = NIT_NULL; /* Once value for string variable[4]*/
+  static val_t once_value_29 = NIT_NULL; /* Once value for string variable[4]*/
+  val_t variable[9];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstracttool;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-  variable[4] = NEW_String_string___String___with_native(BOX_NativeString("class "), TAG_Int(6)); /*new String*/
-  variable[5] = variable[4];
-  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[5]) /*AbstractArray::add*/;
-  variable[6] = variable[0];
-  variable[7] = variable[6];
-  variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[7]) /*AbstractArray::add*/;
-  variable[8] = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)); /*new String*/
-  variable[9] = variable[8];
-  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[9]) /*AbstractArray::add*/;
+  /* Register variable[2]: Method return value and escape marker */
+  variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[4]: Once String constant */
+  if (once_value_22 != NIT_NULL) variable[4] = once_value_22;
+  else {
+    variable[4] = NEW_String_string___String___with_native(BOX_NativeString("class "), TAG_Int(6)) /*new String*/;
+    once_value_22 = variable[4];
+  }
+  /* Register variable[4]: Result */
+  /* Ensure var variable[4]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
+  /* Ensure var variable[0]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], CALL_string___Object___to_s(variable[0])(variable[0]) /*Object::to_s*/) /*AbstractArray::add*/;
+  /* Register variable[4]: Once String constant */
+  if (once_value_23 != NIT_NULL) variable[4] = once_value_23;
+  else {
+    variable[4] = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)) /*new String*/;
+    once_value_23 = variable[4];
+  }
+  /* Register variable[4]: Result */
+  /* Ensure var variable[4]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_string___Object___to_s(variable[3])(variable[3]) /*Object::to_s*/;
   CALL_stream___OStream___write( variable[1] /*file*/)( variable[1] /*file*/, variable[3]) /*OStream::write*/;
-  variable[3] = variable[0];
-  variable[3] = CALL_abstractmetamodel___MMLocalClass___global_properties(variable[3])(variable[3]) /*MMLocalClass::global_properties*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstractmetamodel___MMLocalClass___global_properties(variable[0])(variable[0]) /*MMLocalClass::global_properties*/;
+  /* Register variable[3]: For iterator */
   variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*Collection::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
-    variable[7] = variable[0];
-    variable[7] = CALL_abstractmetamodel___MMLocalClass_____bra(variable[7])(variable[7],  variable[5] /*p*/) /*MMLocalClass::[]*/;
+    /* Register variable[6]: Local variable */
+    /* Register variable[7]: Result */
+    variable[7] = CALL_abstractmetamodel___MMLocalClass_____bra(variable[0])(variable[0],  variable[5] /*p*/) /*MMLocalClass::[]*/;
     variable[6] = variable[7];
-    variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-    variable[8] = NEW_String_string___String___with_native(BOX_NativeString("\t"), TAG_Int(1)); /*new String*/
-    variable[9] = variable[8];
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[9]) /*AbstractArray::add*/;
-    variable[10] =  variable[6] /*lp*/;
-    variable[10] = CALL_string___Object___to_s(variable[10])(variable[10]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[10]) /*AbstractArray::add*/;
-    variable[11] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-    variable[12] = variable[11];
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[12]) /*AbstractArray::add*/;
-    variable[13] = variable[0];
-    variable[13] = CALL_static_type___MMLocalClass___get_type(variable[13])(variable[13]) /*MMLocalClass::get_type*/;
-    variable[13] = CALL_static_type___MMLocalProperty___signature_for( variable[6] /*lp*/)( variable[6] /*lp*/, variable[13]) /*MMLocalProperty::signature_for*/;
-    variable[14] = variable[13];
-    variable[14] = CALL_string___Object___to_s(variable[14])(variable[14]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[14]) /*AbstractArray::add*/;
-    variable[15] = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)); /*new String*/
-    variable[16] = variable[15];
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[16]) /*AbstractArray::add*/;
+    variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[8]: Once String constant */
+    if (once_value_25 != NIT_NULL) variable[8] = once_value_25;
+    else {
+      variable[8] = NEW_String_string___String___with_native(BOX_NativeString("\t"), TAG_Int(1)) /*new String*/;
+      once_value_25 = variable[8];
+    }
+    /* Register variable[8]: Result */
+    /* Ensure var variable[8]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+    variable[8] =  variable[6] /*lp*/ /* Ensure var: super-string element*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[8]: Once String constant */
+    if (once_value_26 != NIT_NULL) variable[8] = once_value_26;
+    else {
+      variable[8] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+      once_value_26 = variable[8];
+    }
+    /* Register variable[8]: Result */
+    /* Ensure var variable[8]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+    /* Register variable[8]: Result */
+    variable[8] = CALL_static_type___MMLocalClass___get_type(variable[0])(variable[0]) /*MMLocalClass::get_type*/;
+    /* Register variable[8]: Result */
+    variable[8] = CALL_static_type___MMLocalProperty___signature_for( variable[6] /*lp*/)( variable[6] /*lp*/, variable[8]) /*MMLocalProperty::signature_for*/;
+    /* Ensure var variable[8]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[8]: Once String constant */
+    if (once_value_27 != NIT_NULL) variable[8] = once_value_27;
+    else {
+      variable[8] = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)) /*new String*/;
+      once_value_27 = variable[8];
+    }
+    /* Register variable[8]: Result */
+    /* Ensure var variable[8]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+    /* Register variable[7]: Result */
     variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
     CALL_stream___OStream___write( variable[1] /*file*/)( variable[1] /*file*/, variable[7]) /*OStream::write*/;
-    continue_9: while(0);
+    continue_24: while(0);
     CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*Iterator::next*/;
   }
-  break_9: while(0);
-  variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-  variable[4] = NEW_String_string___String___with_native(BOX_NativeString("end # "), TAG_Int(6)); /*new String*/
-  variable[5] = variable[4];
-  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[5]) /*AbstractArray::add*/;
-  variable[6] = variable[0];
-  variable[7] = variable[6];
-  variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[7]) /*AbstractArray::add*/;
-  variable[8] = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)); /*new String*/
-  variable[9] = variable[8];
-  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[9]) /*AbstractArray::add*/;
+  break_24: while(0);
+  variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[4]: Once String constant */
+  if (once_value_28 != NIT_NULL) variable[4] = once_value_28;
+  else {
+    variable[4] = NEW_String_string___String___with_native(BOX_NativeString("end # "), TAG_Int(6)) /*new String*/;
+    once_value_28 = variable[4];
+  }
+  /* Register variable[4]: Result */
+  /* Ensure var variable[4]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
+  /* Ensure var variable[0]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], CALL_string___Object___to_s(variable[0])(variable[0]) /*Object::to_s*/) /*AbstractArray::add*/;
+  /* Register variable[4]: Once String constant */
+  if (once_value_29 != NIT_NULL) variable[4] = once_value_29;
+  else {
+    variable[4] = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)) /*new String*/;
+    once_value_29 = variable[4];
+  }
+  /* Register variable[4]: Result */
+  /* Ensure var variable[4]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_string___Object___to_s(variable[3])(variable[3]) /*Object::to_s*/;
   CALL_stream___OStream___write( variable[1] /*file*/)( variable[1] /*file*/, variable[3]) /*OStream::write*/;
-  return_label8: while(false);
+  return_label21: while(false);
   tracehead = trace.prev;
   return;
 }

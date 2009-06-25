@@ -50,14 +50,12 @@ extern const int SFT_compiling_base[];
 #define CALL_compiling_base___CompilerVisitor___indent(recv) ((compiling_base___CompilerVisitor___indent_t)CALL((recv), (SFT_compiling_base[5] + 4)))
 #define CALL_compiling_base___CompilerVisitor___unindent(recv) ((compiling_base___CompilerVisitor___unindent_t)CALL((recv), (SFT_compiling_base[5] + 5)))
 #define CALL_compiling_base___CompilerVisitor___module(recv) ((compiling_base___CompilerVisitor___module_t)CALL((recv), (SFT_compiling_base[5] + 6)))
-#define CALL_compiling_base___CompilerVisitor___module__eq(recv) ((compiling_base___CompilerVisitor___module__eq_t)CALL((recv), (SFT_compiling_base[5] + 7)))
-#define CALL_compiling_base___CompilerVisitor___ctx(recv) ((compiling_base___CompilerVisitor___ctx_t)CALL((recv), (SFT_compiling_base[5] + 8)))
-#define CALL_compiling_base___CompilerVisitor___ctx__eq(recv) ((compiling_base___CompilerVisitor___ctx__eq_t)CALL((recv), (SFT_compiling_base[5] + 9)))
-#define CALL_compiling_base___CompilerVisitor___indent_level(recv) ((compiling_base___CompilerVisitor___indent_level_t)CALL((recv), (SFT_compiling_base[5] + 10)))
-#define CALL_compiling_base___CompilerVisitor___indent_level__eq(recv) ((compiling_base___CompilerVisitor___indent_level__eq_t)CALL((recv), (SFT_compiling_base[5] + 11)))
-#define CALL_compiling_base___CompilerVisitor___tc(recv) ((compiling_base___CompilerVisitor___tc_t)CALL((recv), (SFT_compiling_base[5] + 12)))
-#define CALL_compiling_base___CompilerVisitor___tc__eq(recv) ((compiling_base___CompilerVisitor___tc__eq_t)CALL((recv), (SFT_compiling_base[5] + 13)))
-#define CALL_compiling_base___CompilerVisitor___init(recv) ((compiling_base___CompilerVisitor___init_t)CALL((recv), (SFT_compiling_base[5] + 14)))
+#define CALL_compiling_base___CompilerVisitor___ctx(recv) ((compiling_base___CompilerVisitor___ctx_t)CALL((recv), (SFT_compiling_base[5] + 7)))
+#define CALL_compiling_base___CompilerVisitor___ctx__eq(recv) ((compiling_base___CompilerVisitor___ctx__eq_t)CALL((recv), (SFT_compiling_base[5] + 8)))
+#define CALL_compiling_base___CompilerVisitor___indent_level(recv) ((compiling_base___CompilerVisitor___indent_level_t)CALL((recv), (SFT_compiling_base[5] + 9)))
+#define CALL_compiling_base___CompilerVisitor___indent_level__eq(recv) ((compiling_base___CompilerVisitor___indent_level__eq_t)CALL((recv), (SFT_compiling_base[5] + 10)))
+#define CALL_compiling_base___CompilerVisitor___tc(recv) ((compiling_base___CompilerVisitor___tc_t)CALL((recv), (SFT_compiling_base[5] + 11)))
+#define CALL_compiling_base___CompilerVisitor___init(recv) ((compiling_base___CompilerVisitor___init_t)CALL((recv), (SFT_compiling_base[5] + 12)))
 #define ID_CContext (SFT_compiling_base[6])
 #define COLOR_CContext (SFT_compiling_base[7])
 #define ATTR_compiling_base___CContext____decls(recv) ATTR(recv, (SFT_compiling_base[8] + 0))
@@ -84,12 +82,9 @@ extern const int SFT_compiling_base[];
 #define ATTR_compiling_base___PrimitiveInfo____cname(recv) ATTR(recv, (SFT_compiling_base[16] + 2))
 #define INIT_TABLE_POS_PrimitiveInfo (SFT_compiling_base[17] + 0)
 #define CALL_compiling_base___PrimitiveInfo___name(recv) ((compiling_base___PrimitiveInfo___name_t)CALL((recv), (SFT_compiling_base[17] + 1)))
-#define CALL_compiling_base___PrimitiveInfo___name__eq(recv) ((compiling_base___PrimitiveInfo___name__eq_t)CALL((recv), (SFT_compiling_base[17] + 2)))
-#define CALL_compiling_base___PrimitiveInfo___tagged(recv) ((compiling_base___PrimitiveInfo___tagged_t)CALL((recv), (SFT_compiling_base[17] + 3)))
-#define CALL_compiling_base___PrimitiveInfo___tagged__eq(recv) ((compiling_base___PrimitiveInfo___tagged__eq_t)CALL((recv), (SFT_compiling_base[17] + 4)))
-#define CALL_compiling_base___PrimitiveInfo___cname(recv) ((compiling_base___PrimitiveInfo___cname_t)CALL((recv), (SFT_compiling_base[17] + 5)))
-#define CALL_compiling_base___PrimitiveInfo___cname__eq(recv) ((compiling_base___PrimitiveInfo___cname__eq_t)CALL((recv), (SFT_compiling_base[17] + 6)))
-#define CALL_compiling_base___PrimitiveInfo___init(recv) ((compiling_base___PrimitiveInfo___init_t)CALL((recv), (SFT_compiling_base[17] + 7)))
+#define CALL_compiling_base___PrimitiveInfo___tagged(recv) ((compiling_base___PrimitiveInfo___tagged_t)CALL((recv), (SFT_compiling_base[17] + 2)))
+#define CALL_compiling_base___PrimitiveInfo___cname(recv) ((compiling_base___PrimitiveInfo___cname_t)CALL((recv), (SFT_compiling_base[17] + 3)))
+#define CALL_compiling_base___PrimitiveInfo___init(recv) ((compiling_base___PrimitiveInfo___init_t)CALL((recv), (SFT_compiling_base[17] + 4)))
 #define CALL_compiling_base___MMType___cname(recv) ((compiling_base___MMType___cname_t)CALL((recv), (SFT_compiling_base[18] + 0)))
 #define CALL_compiling_base___MMType___default_cvalue(recv) ((compiling_base___MMType___default_cvalue_t)CALL((recv), (SFT_compiling_base[18] + 1)))
 #define CALL_compiling_base___MMType___boxtype(recv) ((compiling_base___MMType___boxtype_t)CALL((recv), (SFT_compiling_base[18] + 2)))
@@ -167,9 +162,6 @@ void compiling_base___CompilerVisitor___unindent(val_t  self);
 typedef val_t (* compiling_base___CompilerVisitor___module_t)(val_t  self);
 val_t compiling_base___CompilerVisitor___module(val_t  self);
 #define LOCATE_compiling_base___CompilerVisitor___module "compiling_base::CompilerVisitor::module"
-typedef void (* compiling_base___CompilerVisitor___module__eq_t)(val_t  self, val_t  param0);
-void compiling_base___CompilerVisitor___module__eq(val_t  self, val_t  param0);
-#define LOCATE_compiling_base___CompilerVisitor___module__eq "compiling_base::CompilerVisitor::module="
 typedef val_t (* compiling_base___CompilerVisitor___ctx_t)(val_t  self);
 val_t compiling_base___CompilerVisitor___ctx(val_t  self);
 #define LOCATE_compiling_base___CompilerVisitor___ctx "compiling_base::CompilerVisitor::ctx"
@@ -185,13 +177,10 @@ void compiling_base___CompilerVisitor___indent_level__eq(val_t  self, val_t  par
 typedef val_t (* compiling_base___CompilerVisitor___tc_t)(val_t  self);
 val_t compiling_base___CompilerVisitor___tc(val_t  self);
 #define LOCATE_compiling_base___CompilerVisitor___tc "compiling_base::CompilerVisitor::tc"
-typedef void (* compiling_base___CompilerVisitor___tc__eq_t)(val_t  self, val_t  param0);
-void compiling_base___CompilerVisitor___tc__eq(val_t  self, val_t  param0);
-#define LOCATE_compiling_base___CompilerVisitor___tc__eq "compiling_base::CompilerVisitor::tc="
-typedef void (* compiling_base___CompilerVisitor___init_t)(val_t  self, val_t  param0, int* init_table);
-void compiling_base___CompilerVisitor___init(val_t  self, val_t  param0, int* init_table);
+typedef void (* compiling_base___CompilerVisitor___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void compiling_base___CompilerVisitor___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
 #define LOCATE_compiling_base___CompilerVisitor___init "compiling_base::CompilerVisitor::init"
-val_t NEW_CompilerVisitor_compiling_base___CompilerVisitor___init(val_t p0);
+val_t NEW_CompilerVisitor_compiling_base___CompilerVisitor___init(val_t p0, val_t p1);
 typedef val_t (* compiling_base___CContext___decls_t)(val_t  self);
 val_t compiling_base___CContext___decls(val_t  self);
 #define LOCATE_compiling_base___CContext___decls "compiling_base::CContext::decls"
@@ -225,7 +214,7 @@ val_t compiling_base___MMGlobalClass___color_id(val_t  self);
 typedef val_t (* compiling_base___MMGlobalClass___init_table_pos_id_t)(val_t  self);
 val_t compiling_base___MMGlobalClass___init_table_pos_id(val_t  self);
 #define LOCATE_compiling_base___MMGlobalClass___init_table_pos_id "compiling_base::MMGlobalClass::init_table_pos_id"
-val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1);
+val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
 typedef val_t (* compiling_base___MMLocalClass___primitive_info_t)(val_t  self);
 val_t compiling_base___MMLocalClass___primitive_info(val_t  self);
 #define LOCATE_compiling_base___MMLocalClass___primitive_info "compiling_base::MMLocalClass::primitive_info"
@@ -235,25 +224,16 @@ val_t compiling_base___MMLocalClass___primitive_ctypes(val_t  self);
 typedef val_t (* compiling_base___PrimitiveInfo___name_t)(val_t  self);
 val_t compiling_base___PrimitiveInfo___name(val_t  self);
 #define LOCATE_compiling_base___PrimitiveInfo___name "compiling_base::PrimitiveInfo::name"
-typedef void (* compiling_base___PrimitiveInfo___name__eq_t)(val_t  self, val_t  param0);
-void compiling_base___PrimitiveInfo___name__eq(val_t  self, val_t  param0);
-#define LOCATE_compiling_base___PrimitiveInfo___name__eq "compiling_base::PrimitiveInfo::name="
 typedef val_t (* compiling_base___PrimitiveInfo___tagged_t)(val_t  self);
 val_t compiling_base___PrimitiveInfo___tagged(val_t  self);
 #define LOCATE_compiling_base___PrimitiveInfo___tagged "compiling_base::PrimitiveInfo::tagged"
-typedef void (* compiling_base___PrimitiveInfo___tagged__eq_t)(val_t  self, val_t  param0);
-void compiling_base___PrimitiveInfo___tagged__eq(val_t  self, val_t  param0);
-#define LOCATE_compiling_base___PrimitiveInfo___tagged__eq "compiling_base::PrimitiveInfo::tagged="
 typedef val_t (* compiling_base___PrimitiveInfo___cname_t)(val_t  self);
 val_t compiling_base___PrimitiveInfo___cname(val_t  self);
 #define LOCATE_compiling_base___PrimitiveInfo___cname "compiling_base::PrimitiveInfo::cname"
-typedef void (* compiling_base___PrimitiveInfo___cname__eq_t)(val_t  self, val_t  param0);
-void compiling_base___PrimitiveInfo___cname__eq(val_t  self, val_t  param0);
-#define LOCATE_compiling_base___PrimitiveInfo___cname__eq "compiling_base::PrimitiveInfo::cname="
-typedef void (* compiling_base___PrimitiveInfo___init_t)(val_t  self, int* init_table);
-void compiling_base___PrimitiveInfo___init(val_t  self, int* init_table);
+typedef void (* compiling_base___PrimitiveInfo___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void compiling_base___PrimitiveInfo___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 #define LOCATE_compiling_base___PrimitiveInfo___init "compiling_base::PrimitiveInfo::init"
-val_t NEW_PrimitiveInfo_compiling_base___PrimitiveInfo___init();
+val_t NEW_PrimitiveInfo_compiling_base___PrimitiveInfo___init(val_t p0, val_t p1, val_t p2);
 val_t NEW_MMType_static_type___MMType___init();
 typedef val_t (* compiling_base___MMType___cname_t)(val_t  self);
 val_t compiling_base___MMType___cname(val_t  self);

@@ -3,46 +3,85 @@
 val_t environ___Symbol___environ(val_t  self) {
   struct trace_t trace = {NULL, NULL, 19, LOCATE_environ___Symbol___environ};
   static val_t once_value_1; static int once_bool_1; /* Once value for variable[4]*/
-  val_t variable[11];
-  void **closurevariable = NULL;
+    static val_t once_value_2 = NIT_NULL; /* Once value for string variable[4]*/
+    static val_t once_value_3 = NIT_NULL; /* Once value for string variable[5]*/
+    static val_t once_value_4 = NIT_NULL; /* Once value for string variable[5]*/
+    static val_t once_value_5 = NIT_NULL; /* Once value for string variable[4]*/
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_environ;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[3] = variable[0];
-  variable[3] = CALL_string___Object___to_s(variable[3])(variable[3]) /*Symbol::to_s*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_string___Object___to_s(variable[0])(variable[0]) /*Symbol::to_s*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_string___String___to_cstring(variable[3])(variable[3]) /*String::to_cstring*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_environ___NativeString___get_environ(variable[3])(variable[3]) /*NativeString::get_environ*/;
   variable[2] = variable[3];
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Once expression result */
   if (once_bool_1) variable[4] = once_value_1;
   else {
-    variable[4] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    /* Register variable[4]: Once String constant */
+    if (once_value_2 != NIT_NULL) variable[4] = once_value_2;
+    else {
+      variable[4] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+      once_value_2 = variable[4];
+    }
+    /* Register variable[4]: Result */
+    /* Register variable[4]: Result */
     variable[4] = CALL_string___String___to_cstring(variable[4])(variable[4]) /*String::to_cstring*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_environ___NativeString___get_environ(variable[4])(variable[4]) /*NativeString::get_environ*/;
     once_value_1 = variable[4];
     once_bool_1 = true;
   }
+  /* Register variable[4]: Result */
   variable[3] = variable[4];
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[2] /*res*/ ==  variable[3] /*nulstr*/) || (( variable[2] /*res*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[2] /*res*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*res*/, variable[3] /*nulstr*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[2] /*res*/)( variable[2] /*res*/,  variable[3] /*nulstr*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-    variable[5] = NEW_String_string___String___with_native(BOX_NativeString("env "), TAG_Int(4)); /*new String*/
-    variable[6] = variable[5];
-    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[6]) /*AbstractArray::add*/;
-    variable[7] = variable[0];
-    variable[8] = variable[7];
-    variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[8]) /*AbstractArray::add*/;
-    variable[9] = NEW_String_string___String___with_native(BOX_NativeString("="), TAG_Int(1)); /*new String*/
-    variable[10] = variable[9];
-    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[10]) /*AbstractArray::add*/;
+    variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[5]: Once String constant */
+    if (once_value_3 != NIT_NULL) variable[5] = once_value_3;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString("env "), TAG_Int(4)) /*new String*/;
+      once_value_3 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+    /* Ensure var variable[0]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], CALL_string___Object___to_s(variable[0])(variable[0]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[5]: Once String constant */
+    if (once_value_4 != NIT_NULL) variable[5] = once_value_4;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString("="), TAG_Int(1)) /*new String*/;
+      once_value_4 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_string___Object___to_s(variable[4])(variable[4]) /*Object::to_s*/;
-    CALL_kernel___Object___output(variable[4])(variable[4]) /*String::output*/;
+    CALL_kernel___Object___output(variable[4])(variable[4]) /*AbstractString::output*/;
     CALL_kernel___Object___output( variable[2] /*res*/)( variable[2] /*res*/) /*Object::output*/;
-    variable[4] = NEW_String_string___String___from_cstring( variable[2] /*res*/); /*new String*/
+    /* Register variable[4]: Result */
+    variable[4] = NEW_String_string___String___from_cstring( variable[2] /*res*/) /*new String*/;
     variable[1] = variable[4];
     goto return_label0;
   } else { /*if*/
-    variable[4] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    /* Register variable[4]: Once String constant */
+    if (once_value_5 != NIT_NULL) variable[4] = once_value_5;
+    else {
+      variable[4] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+      once_value_5 = variable[4];
+    }
+    /* Register variable[4]: Result */
     variable[1] = variable[4];
     goto return_label0;
   }
@@ -53,7 +92,7 @@ val_t environ___Symbol___environ(val_t  self) {
 val_t environ___NativeString___get_environ(val_t  self) {
   struct trace_t trace = {NULL, NULL, 36, LOCATE_environ___NativeString___get_environ};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_environ;
   tracehead = trace.prev;

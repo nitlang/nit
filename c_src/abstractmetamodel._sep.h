@@ -64,31 +64,32 @@ extern const int SFT_abstractmetamodel[];
 #define ATTR_abstractmetamodel___MMModule____name(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 1))
 #define ATTR_abstractmetamodel___MMModule____full_name(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 2))
 #define ATTR_abstractmetamodel___MMModule____directory(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 3))
-#define ATTR_abstractmetamodel___MMModule____mhe(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 4))
-#define ATTR_abstractmetamodel___MMModule____global_classes(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 5))
-#define ATTR_abstractmetamodel___MMModule____local_classes(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 6))
-#define ATTR_abstractmetamodel___MMModule____class_specialization_hierarchy(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 7))
-#define ATTR_abstractmetamodel___MMModule____intrude_modules(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 8))
-#define ATTR_abstractmetamodel___MMModule____public_modules(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 9))
-#define ATTR_abstractmetamodel___MMModule____private_modules(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 10))
-#define ATTR_abstractmetamodel___MMModule____explicit_imported_modules(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 11))
-#define ATTR_abstractmetamodel___MMModule____local_class_by_global(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 12))
-#define ATTR_abstractmetamodel___MMModule____global_class_by_name(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 13))
+#define ATTR_abstractmetamodel___MMModule____filename(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 4))
+#define ATTR_abstractmetamodel___MMModule____mhe(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 5))
+#define ATTR_abstractmetamodel___MMModule____global_classes(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 6))
+#define ATTR_abstractmetamodel___MMModule____local_classes(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 7))
+#define ATTR_abstractmetamodel___MMModule____class_specialization_hierarchy(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 8))
+#define ATTR_abstractmetamodel___MMModule____intrude_modules(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 9))
+#define ATTR_abstractmetamodel___MMModule____public_modules(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 10))
+#define ATTR_abstractmetamodel___MMModule____private_modules(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 11))
+#define ATTR_abstractmetamodel___MMModule____explicit_imported_modules(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 12))
+#define ATTR_abstractmetamodel___MMModule____local_class_by_global(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 13))
+#define ATTR_abstractmetamodel___MMModule____global_class_by_name(recv) ATTR(recv, (SFT_abstractmetamodel[10] + 14))
 #define INIT_TABLE_POS_MMModule (SFT_abstractmetamodel[11] + 0)
 #define CALL_abstractmetamodel___MMModule___context(recv) ((abstractmetamodel___MMModule___context_t)CALL((recv), (SFT_abstractmetamodel[11] + 1)))
 #define CALL_abstractmetamodel___MMModule___name(recv) ((abstractmetamodel___MMModule___name_t)CALL((recv), (SFT_abstractmetamodel[11] + 2)))
 #define CALL_abstractmetamodel___MMModule___full_name(recv) ((abstractmetamodel___MMModule___full_name_t)CALL((recv), (SFT_abstractmetamodel[11] + 3)))
 #define CALL_abstractmetamodel___MMModule___directory(recv) ((abstractmetamodel___MMModule___directory_t)CALL((recv), (SFT_abstractmetamodel[11] + 4)))
-#define CALL_abstractmetamodel___MMModule___mhe(recv) ((abstractmetamodel___MMModule___mhe_t)CALL((recv), (SFT_abstractmetamodel[11] + 5)))
-#define CALL_abstractmetamodel___MMModule___global_classes(recv) ((abstractmetamodel___MMModule___global_classes_t)CALL((recv), (SFT_abstractmetamodel[11] + 6)))
-#define CALL_abstractmetamodel___MMModule___local_classes(recv) ((abstractmetamodel___MMModule___local_classes_t)CALL((recv), (SFT_abstractmetamodel[11] + 7)))
-#define CALL_abstractmetamodel___MMModule___class_specialization_hierarchy(recv) ((abstractmetamodel___MMModule___class_specialization_hierarchy_t)CALL((recv), (SFT_abstractmetamodel[11] + 8)))
-#define CALL_abstractmetamodel___MMModule___explicit_imported_modules(recv) ((abstractmetamodel___MMModule___explicit_imported_modules_t)CALL((recv), (SFT_abstractmetamodel[11] + 9)))
-#define CALL_abstractmetamodel___MMModule___init(recv) ((abstractmetamodel___MMModule___init_t)CALL((recv), (SFT_abstractmetamodel[11] + 10)))
-#define CALL_abstractmetamodel___MMModule___add_super_module(recv) ((abstractmetamodel___MMModule___add_super_module_t)CALL((recv), (SFT_abstractmetamodel[11] + 11)))
-#define CALL_abstractmetamodel___MMModule___visibility_for(recv) ((abstractmetamodel___MMModule___visibility_for_t)CALL((recv), (SFT_abstractmetamodel[11] + 12)))
-#define CALL_abstractmetamodel___MMModule_____bra(recv) ((abstractmetamodel___MMModule_____bra_t)CALL((recv), (SFT_abstractmetamodel[11] + 13)))
-#define CALL_abstractmetamodel___MMModule___add_local_class(recv) ((abstractmetamodel___MMModule___add_local_class_t)CALL((recv), (SFT_abstractmetamodel[11] + 14)))
+#define CALL_abstractmetamodel___MMModule___filename(recv) ((abstractmetamodel___MMModule___filename_t)CALL((recv), (SFT_abstractmetamodel[11] + 5)))
+#define CALL_abstractmetamodel___MMModule___mhe(recv) ((abstractmetamodel___MMModule___mhe_t)CALL((recv), (SFT_abstractmetamodel[11] + 6)))
+#define CALL_abstractmetamodel___MMModule___global_classes(recv) ((abstractmetamodel___MMModule___global_classes_t)CALL((recv), (SFT_abstractmetamodel[11] + 7)))
+#define CALL_abstractmetamodel___MMModule___local_classes(recv) ((abstractmetamodel___MMModule___local_classes_t)CALL((recv), (SFT_abstractmetamodel[11] + 8)))
+#define CALL_abstractmetamodel___MMModule___class_specialization_hierarchy(recv) ((abstractmetamodel___MMModule___class_specialization_hierarchy_t)CALL((recv), (SFT_abstractmetamodel[11] + 9)))
+#define CALL_abstractmetamodel___MMModule___explicit_imported_modules(recv) ((abstractmetamodel___MMModule___explicit_imported_modules_t)CALL((recv), (SFT_abstractmetamodel[11] + 10)))
+#define CALL_abstractmetamodel___MMModule___init(recv) ((abstractmetamodel___MMModule___init_t)CALL((recv), (SFT_abstractmetamodel[11] + 11)))
+#define CALL_abstractmetamodel___MMModule___add_super_module(recv) ((abstractmetamodel___MMModule___add_super_module_t)CALL((recv), (SFT_abstractmetamodel[11] + 12)))
+#define CALL_abstractmetamodel___MMModule___visibility_for(recv) ((abstractmetamodel___MMModule___visibility_for_t)CALL((recv), (SFT_abstractmetamodel[11] + 13)))
+#define CALL_abstractmetamodel___MMModule_____bra(recv) ((abstractmetamodel___MMModule_____bra_t)CALL((recv), (SFT_abstractmetamodel[11] + 14)))
 #define CALL_abstractmetamodel___MMModule___class_by_name(recv) ((abstractmetamodel___MMModule___class_by_name_t)CALL((recv), (SFT_abstractmetamodel[11] + 15)))
 #define CALL_abstractmetamodel___MMModule___has_global_class_named(recv) ((abstractmetamodel___MMModule___has_global_class_named_t)CALL((recv), (SFT_abstractmetamodel[11] + 16)))
 #define CALL_abstractmetamodel___MMModule___global_class_named(recv) ((abstractmetamodel___MMModule___global_class_named_t)CALL((recv), (SFT_abstractmetamodel[11] + 17)))
@@ -157,8 +158,9 @@ extern const int SFT_abstractmetamodel[];
 #define CALL_abstractmetamodel___MMLocalClass___super_methods_named(recv) ((abstractmetamodel___MMLocalClass___super_methods_named_t)CALL((recv), (SFT_abstractmetamodel[19] + 21)))
 #define CALL_abstractmetamodel___MMLocalClass___register_local_property(recv) ((abstractmetamodel___MMLocalClass___register_local_property_t)CALL((recv), (SFT_abstractmetamodel[19] + 22)))
 #define CALL_abstractmetamodel___MMLocalClass___register_global_property(recv) ((abstractmetamodel___MMLocalClass___register_global_property_t)CALL((recv), (SFT_abstractmetamodel[19] + 23)))
-#define CALL_abstractmetamodel___MMLocalClass_____bra(recv) ((abstractmetamodel___MMLocalClass_____bra_t)CALL((recv), (SFT_abstractmetamodel[19] + 24)))
-#define CALL_abstractmetamodel___MMLocalClass___context(recv) ((abstractmetamodel___MMLocalClass___context_t)CALL((recv), (SFT_abstractmetamodel[19] + 25)))
+#define CALL_abstractmetamodel___MMLocalClass___has_global_property(recv) ((abstractmetamodel___MMLocalClass___has_global_property_t)CALL((recv), (SFT_abstractmetamodel[19] + 24)))
+#define CALL_abstractmetamodel___MMLocalClass_____bra(recv) ((abstractmetamodel___MMLocalClass_____bra_t)CALL((recv), (SFT_abstractmetamodel[19] + 25)))
+#define CALL_abstractmetamodel___MMLocalClass___context(recv) ((abstractmetamodel___MMLocalClass___context_t)CALL((recv), (SFT_abstractmetamodel[19] + 26)))
 #define ID_MMGlobalProperty (SFT_abstractmetamodel[20])
 #define COLOR_MMGlobalProperty (SFT_abstractmetamodel[21])
 #define ATTR_abstractmetamodel___MMGlobalProperty____intro(recv) ATTR(recv, (SFT_abstractmetamodel[22] + 0))
@@ -274,6 +276,9 @@ val_t abstractmetamodel___MMModule___full_name(val_t  self);
 typedef val_t (* abstractmetamodel___MMModule___directory_t)(val_t  self);
 val_t abstractmetamodel___MMModule___directory(val_t  self);
 #define LOCATE_abstractmetamodel___MMModule___directory "abstractmetamodel::MMModule::directory"
+typedef val_t (* abstractmetamodel___MMModule___filename_t)(val_t  self);
+val_t abstractmetamodel___MMModule___filename(val_t  self);
+#define LOCATE_abstractmetamodel___MMModule___filename "abstractmetamodel::MMModule::filename"
 typedef val_t (* abstractmetamodel___MMModule___mhe_t)(val_t  self);
 val_t abstractmetamodel___MMModule___mhe(val_t  self);
 #define LOCATE_abstractmetamodel___MMModule___mhe "abstractmetamodel::MMModule::mhe"
@@ -289,10 +294,10 @@ val_t abstractmetamodel___MMModule___class_specialization_hierarchy(val_t  self)
 typedef val_t (* abstractmetamodel___MMModule___explicit_imported_modules_t)(val_t  self);
 val_t abstractmetamodel___MMModule___explicit_imported_modules(val_t  self);
 #define LOCATE_abstractmetamodel___MMModule___explicit_imported_modules "abstractmetamodel::MMModule::explicit_imported_modules"
-typedef void (* abstractmetamodel___MMModule___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void abstractmetamodel___MMModule___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+typedef void (* abstractmetamodel___MMModule___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+void abstractmetamodel___MMModule___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
 #define LOCATE_abstractmetamodel___MMModule___init "abstractmetamodel::MMModule::init"
-val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2);
+val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef void (* abstractmetamodel___MMModule___add_super_module_t)(val_t  self, val_t  param0, val_t  param1);
 void abstractmetamodel___MMModule___add_super_module(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_abstractmetamodel___MMModule___add_super_module "abstractmetamodel::MMModule::add_super_module"
@@ -302,9 +307,6 @@ val_t abstractmetamodel___MMModule___visibility_for(val_t  self, val_t  param0);
 typedef val_t (* abstractmetamodel___MMModule_____bra_t)(val_t  self, val_t  param0);
 val_t abstractmetamodel___MMModule_____bra(val_t  self, val_t  param0);
 #define LOCATE_abstractmetamodel___MMModule_____bra "abstractmetamodel::MMModule::[]"
-typedef void (* abstractmetamodel___MMModule___add_local_class_t)(val_t  self, val_t  param0);
-void abstractmetamodel___MMModule___add_local_class(val_t  self, val_t  param0);
-#define LOCATE_abstractmetamodel___MMModule___add_local_class "abstractmetamodel::MMModule::add_local_class"
 typedef val_t (* abstractmetamodel___MMModule___class_by_name_t)(val_t  self, val_t  param0);
 val_t abstractmetamodel___MMModule___class_by_name(val_t  self, val_t  param0);
 #define LOCATE_abstractmetamodel___MMModule___class_by_name "abstractmetamodel::MMModule::class_by_name"
@@ -408,10 +410,10 @@ val_t abstractmetamodel___MMLocalClass___global_properties(val_t  self);
 typedef val_t (* abstractmetamodel___MMLocalClass___properties_by_name_t)(val_t  self);
 val_t abstractmetamodel___MMLocalClass___properties_by_name(val_t  self);
 #define LOCATE_abstractmetamodel___MMLocalClass___properties_by_name "abstractmetamodel::MMLocalClass::properties_by_name"
-typedef void (* abstractmetamodel___MMLocalClass___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void abstractmetamodel___MMLocalClass___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
+typedef void (* abstractmetamodel___MMLocalClass___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void abstractmetamodel___MMLocalClass___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 #define LOCATE_abstractmetamodel___MMLocalClass___init "abstractmetamodel::MMLocalClass::init"
-val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1);
+val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
 typedef val_t (* abstractmetamodel___MMLocalClass___for_module_t)(val_t  self, val_t  param0);
 val_t abstractmetamodel___MMLocalClass___for_module(val_t  self, val_t  param0);
 #define LOCATE_abstractmetamodel___MMLocalClass___for_module "abstractmetamodel::MMLocalClass::for_module"
@@ -448,6 +450,9 @@ void abstractmetamodel___MMLocalClass___register_local_property(val_t  self, val
 typedef void (* abstractmetamodel___MMLocalClass___register_global_property_t)(val_t  self, val_t  param0);
 void abstractmetamodel___MMLocalClass___register_global_property(val_t  self, val_t  param0);
 #define LOCATE_abstractmetamodel___MMLocalClass___register_global_property "abstractmetamodel::MMLocalClass::register_global_property"
+typedef val_t (* abstractmetamodel___MMLocalClass___has_global_property_t)(val_t  self, val_t  param0);
+val_t abstractmetamodel___MMLocalClass___has_global_property(val_t  self, val_t  param0);
+#define LOCATE_abstractmetamodel___MMLocalClass___has_global_property "abstractmetamodel::MMLocalClass::has_global_property"
 typedef val_t (* abstractmetamodel___MMLocalClass_____bra_t)(val_t  self, val_t  param0);
 val_t abstractmetamodel___MMLocalClass_____bra(val_t  self, val_t  param0);
 #define LOCATE_abstractmetamodel___MMLocalClass_____bra "abstractmetamodel::MMLocalClass::[]"
@@ -533,5 +538,5 @@ void abstractmetamodel___MMLocalProperty___init(val_t  self, val_t  param0, val_
 val_t NEW_MMLocalProperty_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
 val_t NEW_MMAttribute_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
 val_t NEW_MMMethod_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
-val_t NEW_MMConcreteClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1);
+val_t NEW_MMConcreteClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
 #endif

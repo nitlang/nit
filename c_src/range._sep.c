@@ -2,14 +2,15 @@
 #include "range._sep.h"
 val_t range___Range___iterator(val_t  self) {
   struct trace_t trace = {NULL, NULL, 43, LOCATE_range___Range___iterator};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_range;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[3] = NEW_IteratorRange_range___IteratorRange___init(variable[2]); /*new IteratorRange[E]*/
-  variable[2] = variable[3];
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = NEW_IteratorRange_range___IteratorRange___init(variable[0]) /*new IteratorRange[E]*/;
   variable[1] = variable[2];
   goto return_label0;
   return_label0: while(false);
@@ -19,14 +20,17 @@ val_t range___Range___iterator(val_t  self) {
 val_t range___Range___is_empty(val_t  self) {
   struct trace_t trace = {NULL, NULL, 55, LOCATE_range___Range___is_empty};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_range;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_range___Range____first(variable[2]) /*Range::_first*/;
-  variable[3] = variable[0];
-  variable[3] = ATTR_range___Range____after(variable[3]) /*Range::_after*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_range___Range____first(variable[0]) /*Range::_first*/;
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_range___Range____after(variable[0]) /*Range::_after*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_kernel___Comparable_____geq(variable[2])(variable[2], variable[3]) /*Comparable::>=*/;
   variable[1] = variable[2];
   goto return_label1;
@@ -37,16 +41,21 @@ val_t range___Range___is_empty(val_t  self) {
 val_t range___Range___length(val_t  self) {
   struct trace_t trace = {NULL, NULL, 45, LOCATE_range___Range___length};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_range;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[3] = variable[0];
-  variable[3] = ATTR_range___Range____first(variable[3]) /*Range::_first*/;
-  variable[4] = variable[0];
-  variable[4] = ATTR_range___Range____after(variable[4]) /*Range::_after*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_range___Range____first(variable[0]) /*Range::_first*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_range___Range____after(variable[0]) /*Range::_after*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_kernel___Discrete___distance(variable[3])(variable[3], variable[4]) /*Discrete::distance*/;
   variable[2] = variable[3];
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(UNTAG_Int( variable[2] /*nb*/)>UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[1] =  variable[2] /*nb*/;
@@ -61,22 +70,27 @@ val_t range___Range___length(val_t  self) {
 }
 val_t range___Range___has(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 30, LOCATE_range___Range___has};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_range;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_range___Range____first(variable[3]) /*Range::_first*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_range___Range____first(variable[0]) /*Range::_first*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_kernel___Comparable_____geq( variable[1] /*item*/)( variable[1] /*item*/, variable[3]) /*Comparable::>=*/;
-  variable[4] = variable[3];
-  if (UNTAG_Bool(variable[4])) { /* and */
-    variable[4] = variable[0];
-    variable[4] = ATTR_range___Range____last(variable[4]) /*Range::_last*/;
-    variable[4] = CALL_kernel___Comparable_____leq( variable[1] /*item*/)( variable[1] /*item*/, variable[4]) /*Comparable::<=*/;
+  /* Ensure var variable[3]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[3])) { /* and */
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_range___Range____last(variable[0]) /*Range::_last*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_kernel___Comparable_____leq( variable[1] /*item*/)( variable[1] /*item*/, variable[3]) /*Comparable::<=*/;
   }
-  variable[3] = variable[4];
+  /* Register variable[3]: Result */
   variable[2] = variable[3];
   goto return_label3;
   return_label3: while(false);
@@ -85,22 +99,27 @@ val_t range___Range___has(val_t  self, val_t  param0) {
 }
 val_t range___Range___has_only(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 32, LOCATE_range___Range___has_only};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_range;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_range___Range____first(variable[3]) /*Range::_first*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_range___Range____first(variable[0]) /*Range::_first*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool((variable[3] ==  variable[1] /*item*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  variable[1] /*item*/) /*Object::==*/)))));
-  variable[4] = variable[3];
-  if (UNTAG_Bool(variable[4])) { /* and */
-    variable[4] = variable[0];
-    variable[4] = ATTR_range___Range____last(variable[4]) /*Range::_last*/;
-    variable[4] = TAG_Bool(( variable[1] /*item*/ == variable[4]) || (( variable[1] /*item*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*item*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*item*/,variable[4])):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*item*/)( variable[1] /*item*/, variable[4]) /*Object::==*/)))));
+  /* Ensure var variable[3]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[3])) { /* and */
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_range___Range____last(variable[0]) /*Range::_last*/;
+    /* Register variable[3]: Result */
+    variable[3] = TAG_Bool(( variable[1] /*item*/ == variable[3]) || (( variable[1] /*item*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*item*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*item*/,variable[3])):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*item*/)( variable[1] /*item*/, variable[3]) /*Object::==*/)))));
   }
-  variable[3] = variable[4];
+  /* Register variable[3]: Result */
   variable[2] = variable[3];
   goto return_label4;
   return_label4: while(false);
@@ -110,13 +129,16 @@ val_t range___Range___has_only(val_t  self, val_t  param0) {
 val_t range___Range___count(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 34, LOCATE_range___Range___count};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_range;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_abstract_collection___Collection___has(variable[3])(variable[3],  variable[1] /*item*/) /*Range::has*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___Collection___has(variable[0])(variable[0],  variable[1] /*item*/) /*Range::has*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[2] =  TAG_Int(1);
     goto return_label5;
@@ -131,7 +153,7 @@ val_t range___Range___count(val_t  self, val_t  param0) {
 val_t range___Range___first(val_t  self) {
   struct trace_t trace = {NULL, NULL, 22, LOCATE_range___Range___first};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_range;
   tracehead = trace.prev;
@@ -140,7 +162,7 @@ val_t range___Range___first(val_t  self) {
 val_t range___Range___last(val_t  self) {
   struct trace_t trace = {NULL, NULL, 24, LOCATE_range___Range___last};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_range;
   tracehead = trace.prev;
@@ -149,7 +171,7 @@ val_t range___Range___last(val_t  self) {
 val_t range___Range___after(val_t  self) {
   struct trace_t trace = {NULL, NULL, 27, LOCATE_range___Range___after};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_range;
   tracehead = trace.prev;
@@ -157,21 +179,23 @@ val_t range___Range___after(val_t  self) {
 }
 void range___Range___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
   struct trace_t trace = {NULL, NULL, 57, LOCATE_range___Range___init};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_range;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Range].i]) return;
-  variable[4] = variable[0];
-  ATTR_range___Range____first(variable[4]) /*Range::_first*/ =  variable[1] /*from*/;
-  variable[4] = variable[0];
-  ATTR_range___Range____last(variable[4]) /*Range::_last*/ =  variable[2] /*to*/;
-  variable[4] = variable[0];
-  variable[5] = CALL_kernel___Discrete___succ( variable[2] /*to*/)( variable[2] /*to*/) /*Discrete::succ*/;
-  ATTR_range___Range____after(variable[4]) /*Range::_after*/ = variable[5];
+  /* Register variable[3]: Method return value and escape marker */
+  ATTR_range___Range____first(variable[0]) /*Range::_first*/ =  variable[1] /*from*/;
+  ATTR_range___Range____last(variable[0]) /*Range::_last*/ =  variable[2] /*to*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_kernel___Discrete___succ( variable[2] /*to*/)( variable[2] /*to*/) /*Discrete::succ*/;
+  ATTR_range___Range____after(variable[0]) /*Range::_after*/ = variable[4];
   return_label6: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Range].i] = 1;
   tracehead = trace.prev;
@@ -179,21 +203,23 @@ void range___Range___init(val_t  self, val_t  param0, val_t  param1, int* init_t
 }
 void range___Range___without_last(val_t  self, val_t  param0, val_t  param1, int* init_table) {
   struct trace_t trace = {NULL, NULL, 66, LOCATE_range___Range___without_last};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_range;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Range].i]) return;
-  variable[4] = variable[0];
-  ATTR_range___Range____first(variable[4]) /*Range::_first*/ =  variable[1] /*from*/;
-  variable[4] = variable[0];
-  variable[5] = CALL_kernel___Discrete___prec( variable[2] /*to*/)( variable[2] /*to*/) /*Discrete::prec*/;
-  ATTR_range___Range____last(variable[4]) /*Range::_last*/ = variable[5];
-  variable[4] = variable[0];
-  ATTR_range___Range____after(variable[4]) /*Range::_after*/ =  variable[2] /*to*/;
+  /* Register variable[3]: Method return value and escape marker */
+  ATTR_range___Range____first(variable[0]) /*Range::_first*/ =  variable[1] /*from*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_kernel___Discrete___prec( variable[2] /*to*/)( variable[2] /*to*/) /*Discrete::prec*/;
+  ATTR_range___Range____last(variable[0]) /*Range::_last*/ = variable[4];
+  ATTR_range___Range____after(variable[0]) /*Range::_after*/ =  variable[2] /*to*/;
   return_label7: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Range].i] = 1;
   tracehead = trace.prev;
@@ -202,7 +228,7 @@ void range___Range___without_last(val_t  self, val_t  param0, val_t  param1, int
 val_t range___IteratorRange___item(val_t  self) {
   struct trace_t trace = {NULL, NULL, 80, LOCATE_range___IteratorRange___item};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_range;
   tracehead = trace.prev;
@@ -210,16 +236,18 @@ val_t range___IteratorRange___item(val_t  self) {
 }
 void range___IteratorRange___next(val_t  self) {
   struct trace_t trace = {NULL, NULL, 84, LOCATE_range___IteratorRange___next};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_range;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[3] = variable[0];
-  variable[3] = ATTR_range___IteratorRange____item(variable[3]) /*IteratorRange::_item*/;
-  variable[3] = CALL_kernel___Discrete___succ(variable[3])(variable[3]) /*Discrete::succ*/;
-  ATTR_range___IteratorRange____item(variable[2]) /*IteratorRange::_item*/ = variable[3];
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_range___IteratorRange____item(variable[0]) /*IteratorRange::_item*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_kernel___Discrete___succ(variable[2])(variable[2]) /*Discrete::succ*/;
+  ATTR_range___IteratorRange____item(variable[0]) /*IteratorRange::_item*/ = variable[2];
   return_label8: while(false);
   tracehead = trace.prev;
   return;
@@ -227,15 +255,19 @@ void range___IteratorRange___next(val_t  self) {
 val_t range___IteratorRange___is_ok(val_t  self) {
   struct trace_t trace = {NULL, NULL, 82, LOCATE_range___IteratorRange___is_ok};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_range;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_range___IteratorRange____item(variable[2]) /*IteratorRange::_item*/;
-  variable[3] = variable[0];
-  variable[3] = ATTR_range___IteratorRange____range(variable[3]) /*IteratorRange::_range*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_range___IteratorRange____item(variable[0]) /*IteratorRange::_item*/;
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_range___IteratorRange____range(variable[0]) /*IteratorRange::_range*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_range___Range___after(variable[3])(variable[3]) /*Range::after*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_kernel___Comparable_____l(variable[2])(variable[2], variable[3]) /*Comparable::<*/;
   variable[1] = variable[2];
   goto return_label9;
@@ -245,18 +277,20 @@ val_t range___IteratorRange___is_ok(val_t  self) {
 }
 void range___IteratorRange___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 86, LOCATE_range___IteratorRange___init};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_range;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IteratorRange].i]) return;
-  variable[3] = variable[0];
-  ATTR_range___IteratorRange____range(variable[3]) /*IteratorRange::_range*/ =  variable[1] /*r*/;
-  variable[3] = variable[0];
-  variable[4] = CALL_abstract_collection___Collection___first( variable[1] /*r*/)( variable[1] /*r*/) /*Range::first*/;
-  ATTR_range___IteratorRange____item(variable[3]) /*IteratorRange::_item*/ = variable[4];
+  /* Register variable[2]: Method return value and escape marker */
+  ATTR_range___IteratorRange____range(variable[0]) /*IteratorRange::_range*/ =  variable[1] /*r*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___Collection___first( variable[1] /*r*/)( variable[1] /*r*/) /*Range::first*/;
+  ATTR_range___IteratorRange____item(variable[0]) /*IteratorRange::_item*/ = variable[3];
   return_label10: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IteratorRange].i] = 1;
   tracehead = trace.prev;

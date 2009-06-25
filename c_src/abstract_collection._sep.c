@@ -3,7 +3,7 @@
 val_t abstract_collection___Collection___iterator(val_t  self) {
   struct trace_t trace = {NULL, NULL, 42, LOCATE_abstract_collection___Collection___iterator};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
@@ -15,7 +15,7 @@ val_t abstract_collection___Collection___iterator(val_t  self) {
 val_t abstract_collection___Collection___is_empty(val_t  self) {
   struct trace_t trace = {NULL, NULL, 45, LOCATE_abstract_collection___Collection___is_empty};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
@@ -27,7 +27,7 @@ val_t abstract_collection___Collection___is_empty(val_t  self) {
 val_t abstract_collection___Collection___length(val_t  self) {
   struct trace_t trace = {NULL, NULL, 48, LOCATE_abstract_collection___Collection___length};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
@@ -39,7 +39,7 @@ val_t abstract_collection___Collection___length(val_t  self) {
 val_t abstract_collection___Collection___has(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 51, LOCATE_abstract_collection___Collection___has};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
@@ -51,7 +51,7 @@ val_t abstract_collection___Collection___has(val_t  self, val_t  param0) {
 val_t abstract_collection___Collection___has_only(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 55, LOCATE_abstract_collection___Collection___has_only};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
@@ -63,7 +63,7 @@ val_t abstract_collection___Collection___has_only(val_t  self, val_t  param0) {
 val_t abstract_collection___Collection___count(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 60, LOCATE_abstract_collection___Collection___count};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
@@ -75,7 +75,7 @@ val_t abstract_collection___Collection___count(val_t  self, val_t  param0) {
 val_t abstract_collection___Collection___first(val_t  self) {
   struct trace_t trace = {NULL, NULL, 64, LOCATE_abstract_collection___Collection___first};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
@@ -87,12 +87,15 @@ val_t abstract_collection___Collection___first(val_t  self) {
 val_t abstract_collection___NaiveCollection___is_empty(val_t  self) {
   struct trace_t trace = {NULL, NULL, 72, LOCATE_abstract_collection___NaiveCollection___is_empty};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_abstract_collection___Collection___length(variable[2])(variable[2]) /*NaiveCollection::length*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___Collection___length(variable[0])(variable[0]) /*NaiveCollection::length*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool((variable[2])==( TAG_Int(0)));
   variable[1] = variable[2];
   goto return_label0;
@@ -103,17 +106,22 @@ val_t abstract_collection___NaiveCollection___is_empty(val_t  self) {
 val_t abstract_collection___NaiveCollection___length(val_t  self) {
   struct trace_t trace = {NULL, NULL, 74, LOCATE_abstract_collection___NaiveCollection___length};
   val_t variable[6];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
   variable[2] =  TAG_Int(0);
-  variable[3] = variable[0];
-  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*Collection::iterator*/;
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[0])(variable[0]) /*Collection::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
     variable[2] = TAG_Int(UNTAG_Int(variable[2])+UNTAG_Int( variable[2] /*nb*/)) /*nb*/;
     continue_2: while(0);
@@ -129,18 +137,24 @@ val_t abstract_collection___NaiveCollection___length(val_t  self) {
 val_t abstract_collection___NaiveCollection___has(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 81, LOCATE_abstract_collection___NaiveCollection___has};
   val_t variable[7];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*Collection::iterator*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[0])(variable[0]) /*Collection::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
+    /* Register variable[6]: Result */
     variable[6] = TAG_Bool(( variable[5] /*i*/ ==  variable[1] /*item*/) || (( variable[5] /*i*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*i*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*i*/, variable[1] /*item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*i*/)( variable[5] /*i*/,  variable[1] /*item*/) /*Object::==*/)))));
     if (UNTAG_Bool(variable[6])) { /*if*/
       variable[2] =  TAG_Bool(true);
@@ -159,18 +173,24 @@ val_t abstract_collection___NaiveCollection___has(val_t  self, val_t  param0) {
 val_t abstract_collection___NaiveCollection___has_only(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 87, LOCATE_abstract_collection___NaiveCollection___has_only};
   val_t variable[7];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*Collection::iterator*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[0])(variable[0]) /*Collection::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
+    /* Register variable[6]: Result */
     variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*i*/ ==  variable[1] /*item*/) || (( variable[5] /*i*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*i*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*i*/, variable[1] /*item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*i*/)( variable[5] /*i*/,  variable[1] /*item*/) /*Object::==*/)))))));
     if (UNTAG_Bool(variable[6])) { /*if*/
       variable[2] =  TAG_Bool(false);
@@ -189,19 +209,26 @@ val_t abstract_collection___NaiveCollection___has_only(val_t  self, val_t  param
 val_t abstract_collection___NaiveCollection___count(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 93, LOCATE_abstract_collection___NaiveCollection___count};
   val_t variable[8];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
   variable[3] =  TAG_Int(0);
-  variable[4] = variable[0];
-  variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*Collection::iterator*/;
+  /* Register variable[4]: For iterator */
+  variable[4] = CALL_abstract_collection___Collection___iterator(variable[0])(variable[0]) /*Collection::iterator*/;
   while (true) { /*for*/
+    /* Register variable[5]: For 'is_ok' result */
     variable[5] = CALL_abstract_collection___Iterator___is_ok(variable[4])(variable[4]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[5])) break; /*for*/
-    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*Iterator::item*/;
+    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[6]: Local variable */
     variable[6] = variable[5];
+    /* Register variable[7]: Result */
     variable[7] = TAG_Bool(( variable[6] /*i*/ ==  variable[1] /*item*/) || (( variable[6] /*i*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[6] /*i*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*i*/, variable[1] /*item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[6] /*i*/)( variable[6] /*i*/,  variable[1] /*item*/) /*Object::==*/)))));
     if (UNTAG_Bool(variable[7])) { /*if*/
       variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(1))) /*nb*/;
@@ -219,16 +246,20 @@ val_t abstract_collection___NaiveCollection___count(val_t  self, val_t  param0) 
 val_t abstract_collection___NaiveCollection___first(val_t  self) {
   struct trace_t trace = {NULL, NULL, 100, LOCATE_abstract_collection___NaiveCollection___first};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_abstract_collection___Collection___length(variable[2])(variable[2]) /*NaiveCollection::length*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___Collection___length(variable[0])(variable[0]) /*NaiveCollection::length*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool(UNTAG_Int(variable[2])>UNTAG_Int( TAG_Int(0)));
   if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___NaiveCollection___first, LOCATE_abstract_collection, 102); nit_exit(1);}
-  variable[2] = variable[0];
-  variable[2] = CALL_abstract_collection___Collection___iterator(variable[2])(variable[2]) /*Collection::iterator*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___Collection___iterator(variable[0])(variable[0]) /*Collection::iterator*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_abstract_collection___Iterator___item(variable[2])(variable[2]) /*Iterator::item*/;
   variable[1] = variable[2];
   goto return_label9;
@@ -239,7 +270,7 @@ val_t abstract_collection___NaiveCollection___first(val_t  self) {
 val_t abstract_collection___Iterator___item(val_t  self) {
   struct trace_t trace = {NULL, NULL, 110, LOCATE_abstract_collection___Iterator___item};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
@@ -251,7 +282,7 @@ val_t abstract_collection___Iterator___item(val_t  self) {
 void abstract_collection___Iterator___next(val_t  self) {
   struct trace_t trace = {NULL, NULL, 114, LOCATE_abstract_collection___Iterator___next};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
@@ -263,7 +294,7 @@ void abstract_collection___Iterator___next(val_t  self) {
 val_t abstract_collection___Iterator___is_ok(val_t  self) {
   struct trace_t trace = {NULL, NULL, 118, LOCATE_abstract_collection___Iterator___is_ok};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
@@ -274,14 +305,15 @@ val_t abstract_collection___Iterator___is_ok(val_t  self) {
 }
 val_t abstract_collection___Container___iterator(val_t  self) {
   struct trace_t trace = {NULL, NULL, 145, LOCATE_abstract_collection___Container___iterator};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[3] = NEW_ContainerIterator_abstract_collection___ContainerIterator___init(variable[2]); /*new ContainerIterator[E]*/
-  variable[2] = variable[3];
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = NEW_ContainerIterator_abstract_collection___ContainerIterator___init(variable[0]) /*new ContainerIterator[E]*/;
   variable[1] = variable[2];
   goto return_label10;
   return_label10: while(false);
@@ -291,10 +323,12 @@ val_t abstract_collection___Container___iterator(val_t  self) {
 val_t abstract_collection___Container___is_empty(val_t  self) {
   struct trace_t trace = {NULL, NULL, 128, LOCATE_abstract_collection___Container___is_empty};
   val_t variable[2];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
   variable[1] =  TAG_Bool(false);
   goto return_label11;
   return_label11: while(false);
@@ -304,10 +338,12 @@ val_t abstract_collection___Container___is_empty(val_t  self) {
 val_t abstract_collection___Container___length(val_t  self) {
   struct trace_t trace = {NULL, NULL, 130, LOCATE_abstract_collection___Container___length};
   val_t variable[2];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
   variable[1] =  TAG_Int(1);
   goto return_label12;
   return_label12: while(false);
@@ -317,13 +353,17 @@ val_t abstract_collection___Container___length(val_t  self) {
 val_t abstract_collection___Container___has(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 132, LOCATE_abstract_collection___Container___has};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_abstract_collection___Container____item(variable[3]) /*Container::_item*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_abstract_collection___Container____item(variable[0]) /*Container::_item*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool((variable[3] ==  variable[1] /*an_item*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*an_item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  variable[1] /*an_item*/) /*Object::==*/)))));
   variable[2] = variable[3];
   goto return_label13;
@@ -334,13 +374,17 @@ val_t abstract_collection___Container___has(val_t  self, val_t  param0) {
 val_t abstract_collection___Container___has_only(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 134, LOCATE_abstract_collection___Container___has_only};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_abstract_collection___Container____item(variable[3]) /*Container::_item*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_abstract_collection___Container____item(variable[0]) /*Container::_item*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool((variable[3] ==  variable[1] /*an_item*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*an_item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  variable[1] /*an_item*/) /*Object::==*/)))));
   variable[2] = variable[3];
   goto return_label14;
@@ -351,13 +395,17 @@ val_t abstract_collection___Container___has_only(val_t  self, val_t  param0) {
 val_t abstract_collection___Container___count(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 136, LOCATE_abstract_collection___Container___count};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_abstract_collection___Container____item(variable[3]) /*Container::_item*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_abstract_collection___Container____item(variable[0]) /*Container::_item*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool((variable[3] ==  variable[1] /*an_item*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*an_item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  variable[1] /*an_item*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[2] =  TAG_Int(1);
@@ -373,12 +421,14 @@ val_t abstract_collection___Container___count(val_t  self, val_t  param0) {
 val_t abstract_collection___Container___first(val_t  self) {
   struct trace_t trace = {NULL, NULL, 126, LOCATE_abstract_collection___Container___first};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_abstract_collection___Container____item(variable[2]) /*Container::_item*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_abstract_collection___Container____item(variable[0]) /*Container::_item*/;
   variable[1] = variable[2];
   goto return_label16;
   return_label16: while(false);
@@ -387,15 +437,17 @@ val_t abstract_collection___Container___first(val_t  self) {
 }
 void abstract_collection___Container___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 147, LOCATE_abstract_collection___Container___init};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Container].i]) return;
-  variable[3] = variable[0];
-  ATTR_abstract_collection___Container____item(variable[3]) /*Container::_item*/ =  variable[1] /*e*/;
+  /* Register variable[2]: Method return value and escape marker */
+  ATTR_abstract_collection___Container____item(variable[0]) /*Container::_item*/ =  variable[1] /*e*/;
   return_label17: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Container].i] = 1;
   tracehead = trace.prev;
@@ -404,7 +456,7 @@ void abstract_collection___Container___init(val_t  self, val_t  param0, int* ini
 val_t abstract_collection___Container___item(val_t  self) {
   struct trace_t trace = {NULL, NULL, 150, LOCATE_abstract_collection___Container___item};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   tracehead = trace.prev;
@@ -413,7 +465,7 @@ val_t abstract_collection___Container___item(val_t  self) {
 void abstract_collection___Container___item__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 150, LOCATE_abstract_collection___Container___item__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   ATTR_abstract_collection___Container____item( self) /*Container::_item*/ =  param0;
@@ -423,12 +475,15 @@ void abstract_collection___Container___item__eq(val_t  self, val_t  param0) {
 val_t abstract_collection___ContainerIterator___item(val_t  self) {
   struct trace_t trace = {NULL, NULL, 157, LOCATE_abstract_collection___ContainerIterator___item};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_abstract_collection___ContainerIterator____container(variable[2]) /*ContainerIterator::_container*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_abstract_collection___ContainerIterator____container(variable[0]) /*ContainerIterator::_container*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_abstract_collection___Container___item(variable[2])(variable[2]) /*Container::item*/;
   variable[1] = variable[2];
   goto return_label18;
@@ -438,13 +493,14 @@ val_t abstract_collection___ContainerIterator___item(val_t  self) {
 }
 void abstract_collection___ContainerIterator___next(val_t  self) {
   struct trace_t trace = {NULL, NULL, 159, LOCATE_abstract_collection___ContainerIterator___next};
-  val_t variable[3];
-  void **closurevariable = NULL;
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  ATTR_abstract_collection___ContainerIterator____is_ok(variable[2]) /*ContainerIterator::_is_ok*/ =  TAG_Bool(false);
+  /* Register variable[1]: Method return value and escape marker */
+  ATTR_abstract_collection___ContainerIterator____is_ok(variable[0]) /*ContainerIterator::_is_ok*/ =  TAG_Bool(false);
   return_label19: while(false);
   tracehead = trace.prev;
   return;
@@ -452,7 +508,7 @@ void abstract_collection___ContainerIterator___next(val_t  self) {
 val_t abstract_collection___ContainerIterator___is_ok(val_t  self) {
   struct trace_t trace = {NULL, NULL, 163, LOCATE_abstract_collection___ContainerIterator___is_ok};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   tracehead = trace.prev;
@@ -460,15 +516,17 @@ val_t abstract_collection___ContainerIterator___is_ok(val_t  self) {
 }
 void abstract_collection___ContainerIterator___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 161, LOCATE_abstract_collection___ContainerIterator___init};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ContainerIterator].i]) return;
-  variable[3] = variable[0];
-  ATTR_abstract_collection___ContainerIterator____container(variable[3]) /*ContainerIterator::_container*/ =  variable[1] /*c*/;
+  /* Register variable[2]: Method return value and escape marker */
+  ATTR_abstract_collection___ContainerIterator____container(variable[0]) /*ContainerIterator::_container*/ =  variable[1] /*c*/;
   return_label20: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ContainerIterator].i] = 1;
   tracehead = trace.prev;
@@ -477,7 +535,7 @@ void abstract_collection___ContainerIterator___init(val_t  self, val_t  param0, 
 void abstract_collection___RemovableCollection___clear(val_t  self) {
   struct trace_t trace = {NULL, NULL, 171, LOCATE_abstract_collection___RemovableCollection___clear};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
@@ -489,7 +547,7 @@ void abstract_collection___RemovableCollection___clear(val_t  self) {
 void abstract_collection___RemovableCollection___remove(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 174, LOCATE_abstract_collection___RemovableCollection___remove};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
@@ -501,17 +559,19 @@ void abstract_collection___RemovableCollection___remove(val_t  self, val_t  para
 void abstract_collection___RemovableCollection___remove_all(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 177, LOCATE_abstract_collection___RemovableCollection___remove_all};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
   while (true) { /*while*/
-    variable[3] = variable[0];
-    variable[3] = CALL_abstract_collection___Collection___has(variable[3])(variable[3],  variable[1] /*item*/) /*Collection::has*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_abstract_collection___Collection___has(variable[0])(variable[0],  variable[1] /*item*/) /*Collection::has*/;
     if (!UNTAG_Bool(variable[3])) break; /* while*/
-    variable[3] = variable[0];
-    CALL_abstract_collection___RemovableCollection___remove(variable[3])(variable[3],  variable[1] /*item*/) /*RemovableCollection::remove*/;
+    CALL_abstract_collection___RemovableCollection___remove(variable[0])(variable[0],  variable[1] /*item*/) /*RemovableCollection::remove*/;
     continue_22: while(0);
   }
   break_22: while(0);
@@ -522,7 +582,7 @@ void abstract_collection___RemovableCollection___remove_all(val_t  self, val_t  
 void abstract_collection___SimpleCollection___add(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 184, LOCATE_abstract_collection___SimpleCollection___add};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
@@ -533,22 +593,28 @@ void abstract_collection___SimpleCollection___add(val_t  self, val_t  param0) {
 }
 void abstract_collection___SimpleCollection___add_all(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 188, LOCATE_abstract_collection___SimpleCollection___add_all};
-  val_t variable[7];
-  void **closurevariable = NULL;
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*coll*/ ==  NIT_NULL /*null*/) || (( variable[1] /*coll*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*coll*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*coll*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*coll*/)( variable[1] /*coll*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[3])) { /*if*/
+    /* Register variable[3]: For iterator */
     variable[3] = CALL_abstract_collection___Collection___iterator( variable[1] /*coll*/)( variable[1] /*coll*/) /*Collection::iterator*/;
     while (true) { /*for*/
+      /* Register variable[4]: For 'is_ok' result */
       variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
       if (!UNTAG_Bool(variable[4])) break; /*for*/
-      variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
+      variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[5]: Local variable */
       variable[5] = variable[4];
-      variable[6] = variable[0];
-      CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6],  variable[5] /*i*/) /*SimpleCollection::add*/;
+      CALL_abstract_collection___SimpleCollection___add(variable[0])(variable[0],  variable[5] /*i*/) /*SimpleCollection::add*/;
       continue_24: while(0);
       CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*Iterator::next*/;
     }
@@ -561,21 +627,27 @@ void abstract_collection___SimpleCollection___add_all(val_t  self, val_t  param0
 val_t abstract_collection___Set___has_only(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 204, LOCATE_abstract_collection___Set___has_only};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[4] = CALL_abstract_collection___Collection___length(variable[4])(variable[4]) /*Collection::length*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstract_collection___Collection___length(variable[0])(variable[0]) /*Collection::length*/;
   variable[3] = variable[4];
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(( variable[3] /*l*/)==( TAG_Int(1)));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    variable[4] = CALL_abstract_collection___Collection___has(variable[4])(variable[4],  variable[1] /*item*/) /*Collection::has*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_abstract_collection___Collection___has(variable[0])(variable[0],  variable[1] /*item*/) /*Collection::has*/;
     variable[2] = variable[4];
     goto return_label25;
   } else { /*if*/
+    /* Register variable[4]: Result */
     variable[4] = TAG_Bool(( variable[3] /*l*/)==( TAG_Int(0)));
     if (UNTAG_Bool(variable[4])) { /*if*/
       variable[2] =  TAG_Bool(true);
@@ -592,13 +664,16 @@ val_t abstract_collection___Set___has_only(val_t  self, val_t  param0) {
 val_t abstract_collection___Set___count(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 216, LOCATE_abstract_collection___Set___count};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_abstract_collection___Collection___has(variable[3])(variable[3],  variable[1] /*item*/) /*Collection::has*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___Collection___has(variable[0])(variable[0],  variable[1] /*item*/) /*Collection::has*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[2] =  TAG_Int(1);
     goto return_label26;
@@ -612,95 +687,104 @@ val_t abstract_collection___Set___count(val_t  self, val_t  param0) {
 }
 void abstract_collection___Set___remove_all(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 226, LOCATE_abstract_collection___Set___remove_all};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  CALL_abstract_collection___RemovableCollection___remove(variable[3])(variable[3],  variable[1] /*item*/) /*RemovableCollection::remove*/;
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_abstract_collection___RemovableCollection___remove(variable[0])(variable[0],  variable[1] /*item*/) /*RemovableCollection::remove*/;
   return_label27: while(false);
   tracehead = trace.prev;
   return;
 }
-val_t abstract_collection___Map___iterator(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 267, LOCATE_abstract_collection___Map___iterator};
+val_t abstract_collection___MapRead___iterator(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 238, LOCATE_abstract_collection___MapRead___iterator};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 267);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 238);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
-val_t abstract_collection___Map_____bra(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 244, LOCATE_abstract_collection___Map_____bra};
+val_t abstract_collection___MapRead_____bra(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 232, LOCATE_abstract_collection___MapRead_____bra};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 244);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 232);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t abstract_collection___MapRead___has_key(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 235, LOCATE_abstract_collection___MapRead___has_key};
+  val_t *variable = NULL;
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_abstract_collection;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 235);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 void abstract_collection___Map_____braeq(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 247, LOCATE_abstract_collection___Map_____braeq};
+  struct trace_t trace = {NULL, NULL, 256, LOCATE_abstract_collection___Map_____braeq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 247);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 256);
   nit_exit(1);
   tracehead = trace.prev;
   return;
 }
-val_t abstract_collection___Map___has_key(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 250, LOCATE_abstract_collection___Map___has_key};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 250);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return NIT_NULL;
-}
 void abstract_collection___Map___remove_at(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 253, LOCATE_abstract_collection___Map___remove_at};
+  struct trace_t trace = {NULL, NULL, 259, LOCATE_abstract_collection___Map___remove_at};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 253);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 259);
   nit_exit(1);
   tracehead = trace.prev;
   return;
 }
 void abstract_collection___Map___recover_with(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 256, LOCATE_abstract_collection___Map___recover_with};
-  val_t variable[7];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 262, LOCATE_abstract_collection___Map___recover_with};
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = CALL_abstract_collection___Collection___iterator( variable[1] /*map*/)( variable[1] /*map*/) /*Map::iterator*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstract_collection___Collection___iterator( variable[1] /*map*/)( variable[1] /*map*/) /*MapRead::iterator*/;
   variable[3] = variable[4];
   while (true) { /*while*/
+    /* Register variable[4]: Result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok( variable[3] /*i*/)( variable[3] /*i*/) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /* while*/
-    variable[4] = variable[0];
-    variable[5] = CALL_abstract_collection___MapIterator___key( variable[3] /*i*/)( variable[3] /*i*/) /*MapIterator::key*/;
-    variable[6] = CALL_abstract_collection___Iterator___item( variable[3] /*i*/)( variable[3] /*i*/) /*Iterator::item*/;
-    CALL_abstract_collection___Map_____braeq(variable[4])(variable[4], variable[5], variable[6]) /*Map::[]=*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_abstract_collection___MapIterator___key( variable[3] /*i*/)( variable[3] /*i*/) /*MapIterator::key*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_abstract_collection___Iterator___item( variable[3] /*i*/)( variable[3] /*i*/) /*Iterator::item*/;
+    CALL_abstract_collection___Map_____braeq(variable[0])(variable[0], variable[4], variable[5]) /*Map::[]=*/;
     CALL_abstract_collection___Iterator___next( variable[3] /*i*/)( variable[3] /*i*/) /*Iterator::next*/;
     continue_29: while(0);
   }
@@ -710,248 +794,266 @@ void abstract_collection___Map___recover_with(val_t  self, val_t  param0) {
   return;
 }
 val_t abstract_collection___MapIterator___key(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 273, LOCATE_abstract_collection___MapIterator___key};
+  struct trace_t trace = {NULL, NULL, 277, LOCATE_abstract_collection___MapIterator___key};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 273);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 277);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
-void abstract_collection___MapIterator___item__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 276, LOCATE_abstract_collection___MapIterator___item__eq};
+val_t abstract_collection___IndexedCollectionRead___iterator(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 316, LOCATE_abstract_collection___IndexedCollectionRead___iterator};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 276);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return;
-}
-val_t abstract_collection___IndexedCollection___iterator(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 349, LOCATE_abstract_collection___IndexedCollection___iterator};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_abstract_collection;
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 349);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 316);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
-val_t abstract_collection___IndexedCollection___first(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 285, LOCATE_abstract_collection___IndexedCollection___first};
+val_t abstract_collection___IndexedCollectionRead___first(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 288, LOCATE_abstract_collection___IndexedCollectionRead___first};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_abstract_collection___Collection___is_empty(variable[2])(variable[2]) /*Collection::is_empty*/;
-  if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[2])))) { fprintf(stderr, "Assert%s failed", " 'not_empty' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___IndexedCollection___first, LOCATE_abstract_collection, 289); nit_exit(1);}
-  variable[2] = variable[0];
-  variable[2] = CALL_abstract_collection___Map_____bra(variable[2])(variable[2],  TAG_Int(0)) /*Map::[]*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___Collection___is_empty(variable[0])(variable[0]) /*Collection::is_empty*/;
+  if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[2])))) { fprintf(stderr, "Assert%s failed", " 'not_empty' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___IndexedCollectionRead___first, LOCATE_abstract_collection, 292); nit_exit(1);}
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___MapRead_____bra(variable[0])(variable[0],  TAG_Int(0)) /*MapRead::[]*/;
   variable[1] = variable[2];
   goto return_label30;
   return_label30: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
-void abstract_collection___IndexedCollection___add(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 318, LOCATE_abstract_collection___IndexedCollection___add};
-  val_t variable[4];
-  void **closurevariable = NULL;
+val_t abstract_collection___IndexedCollectionRead___last(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 296, LOCATE_abstract_collection___IndexedCollectionRead___last};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[1] =  param0;
-  variable[3] = variable[0];
-  CALL_abstract_collection___IndexedCollection___push(variable[3])(variable[3],  variable[1] /*e*/) /*IndexedCollection::push*/;
-  return_label31: while(false);
-  tracehead = trace.prev;
-  return;
-}
-void abstract_collection___IndexedCollection___first__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 293, LOCATE_abstract_collection___IndexedCollection___first__eq};
-  val_t variable[4];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_abstract_collection;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[3] = variable[0];
-  CALL_abstract_collection___Map_____braeq(variable[3])(variable[3],  TAG_Int(0),  variable[1] /*item*/) /*Map::[]=*/;
-  return_label32: while(false);
-  tracehead = trace.prev;
-  return;
-}
-val_t abstract_collection___IndexedCollection___last(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 298, LOCATE_abstract_collection___IndexedCollection___last};
-  val_t variable[4];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_abstract_collection;
-  variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_abstract_collection___Collection___is_empty(variable[2])(variable[2]) /*Collection::is_empty*/;
-  if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[2])))) { fprintf(stderr, "Assert%s failed", " 'not_empty' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___IndexedCollection___last, LOCATE_abstract_collection, 302); nit_exit(1);}
-  variable[2] = variable[0];
-  variable[3] = variable[0];
-  variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*Collection::length*/;
-  variable[3] = TAG_Int(UNTAG_Int(variable[3])-UNTAG_Int( TAG_Int(1)));
-  variable[2] = CALL_abstract_collection___Map_____bra(variable[2])(variable[2], variable[3]) /*Map::[]*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___Collection___is_empty(variable[0])(variable[0]) /*Collection::is_empty*/;
+  if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[2])))) { fprintf(stderr, "Assert%s failed", " 'not_empty' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___IndexedCollectionRead___last, LOCATE_abstract_collection, 300); nit_exit(1);}
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___Collection___length(variable[0])(variable[0]) /*Collection::length*/;
+  /* Register variable[2]: Result */
+  variable[2] = TAG_Int(UNTAG_Int(variable[2])-UNTAG_Int( TAG_Int(1)));
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___MapRead_____bra(variable[0])(variable[0], variable[2]) /*MapRead::[]*/;
   variable[1] = variable[2];
-  goto return_label33;
-  return_label33: while(false);
+  goto return_label31;
+  return_label31: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
-void abstract_collection___IndexedCollection___last__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 306, LOCATE_abstract_collection___IndexedCollection___last__eq};
-  val_t variable[6];
-  void **closurevariable = NULL;
+val_t abstract_collection___IndexedCollectionRead___index_of(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 304, LOCATE_abstract_collection___IndexedCollectionRead___index_of};
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[4] = CALL_abstract_collection___Collection___length(variable[4])(variable[4]) /*Collection::length*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstract_collection___Collection___iterator(variable[0])(variable[0]) /*IndexedCollectionRead::iterator*/;
   variable[3] = variable[4];
-  variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*l*/)>UNTAG_Int( TAG_Int(0)));
-  if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    variable[5] = TAG_Int(UNTAG_Int( variable[3] /*l*/)-UNTAG_Int( TAG_Int(1)));
-    CALL_abstract_collection___Map_____braeq(variable[4])(variable[4], variable[5],  variable[1] /*item*/) /*Map::[]=*/;
-  } else { /*if*/
-    variable[4] = variable[0];
-    CALL_abstract_collection___Map_____braeq(variable[4])(variable[4],  TAG_Int(0),  variable[1] /*item*/) /*Map::[]=*/;
+  while (true) { /*while*/
+    /* Register variable[4]: Result */
+    variable[4] = CALL_abstract_collection___Iterator___is_ok( variable[3] /*i*/)( variable[3] /*i*/) /*Iterator::is_ok*/;
+    if (!UNTAG_Bool(variable[4])) break; /* while*/
+    /* Register variable[4]: Result */
+    variable[4] = CALL_abstract_collection___Iterator___item( variable[3] /*i*/)( variable[3] /*i*/) /*Iterator::item*/;
+    /* Register variable[4]: Result */
+    variable[4] = TAG_Bool((variable[4] ==  variable[1] /*item*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], variable[1] /*item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  variable[1] /*item*/) /*Object::==*/)))));
+    if (UNTAG_Bool(variable[4])) { /*if*/
+      /* Register variable[4]: Result */
+      variable[4] = CALL_abstract_collection___IndexedIterator___index( variable[3] /*i*/)( variable[3] /*i*/) /*IndexedIterator::index*/;
+      variable[2] = variable[4];
+      goto return_label32;
+    }
+    CALL_abstract_collection___Iterator___next( variable[3] /*i*/)( variable[3] /*i*/) /*Iterator::next*/;
+    continue_33: while(0);
   }
+  break_33: while(0);
+  /* Register variable[4]: Result */
+  variable[4] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
+  variable[2] = variable[4];
+  goto return_label32;
+  return_label32: while(false);
+  tracehead = trace.prev;
+  return variable[2];
+}
+void abstract_collection___IndexedCollection___add(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 342, LOCATE_abstract_collection___IndexedCollection___add};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_abstract_collection___IndexedCollection___push(variable[0])(variable[0],  variable[1] /*e*/) /*IndexedCollection::push*/;
   return_label34: while(false);
   tracehead = trace.prev;
   return;
 }
+void abstract_collection___IndexedCollection___first__eq(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 325, LOCATE_abstract_collection___IndexedCollection___first__eq};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_abstract_collection___Map_____braeq(variable[0])(variable[0],  TAG_Int(0),  variable[1] /*item*/) /*Map::[]=*/;
+  return_label35: while(false);
+  tracehead = trace.prev;
+  return;
+}
+void abstract_collection___IndexedCollection___last__eq(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 330, LOCATE_abstract_collection___IndexedCollection___last__eq};
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstract_collection___Collection___length(variable[0])(variable[0]) /*Collection::length*/;
+  variable[3] = variable[4];
+  /* Register variable[4]: Result */
+  variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*l*/)>UNTAG_Int( TAG_Int(0)));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    /* Register variable[4]: Result */
+    variable[4] = TAG_Int(UNTAG_Int( variable[3] /*l*/)-UNTAG_Int( TAG_Int(1)));
+    CALL_abstract_collection___Map_____braeq(variable[0])(variable[0], variable[4],  variable[1] /*item*/) /*Map::[]=*/;
+  } else { /*if*/
+    CALL_abstract_collection___Map_____braeq(variable[0])(variable[0],  TAG_Int(0),  variable[1] /*item*/) /*Map::[]=*/;
+  }
+  return_label36: while(false);
+  tracehead = trace.prev;
+  return;
+}
 void abstract_collection___IndexedCollection___push(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 321, LOCATE_abstract_collection___IndexedCollection___push};
+  struct trace_t trace = {NULL, NULL, 345, LOCATE_abstract_collection___IndexedCollection___push};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 321);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 345);
   nit_exit(1);
   tracehead = trace.prev;
   return;
 }
 void abstract_collection___IndexedCollection___append(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 324, LOCATE_abstract_collection___IndexedCollection___append};
-  val_t variable[7];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 348, LOCATE_abstract_collection___IndexedCollection___append};
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*coll*/ ==  NIT_NULL /*null*/) || (( variable[1] /*coll*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*coll*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*coll*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*coll*/)( variable[1] /*coll*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[3])) { /*if*/
+    /* Register variable[3]: For iterator */
     variable[3] = CALL_abstract_collection___Collection___iterator( variable[1] /*coll*/)( variable[1] /*coll*/) /*Collection::iterator*/;
     while (true) { /*for*/
+      /* Register variable[4]: For 'is_ok' result */
       variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
       if (!UNTAG_Bool(variable[4])) break; /*for*/
-      variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
+      variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[5]: Local variable */
       variable[5] = variable[4];
-      variable[6] = variable[0];
-      CALL_abstract_collection___IndexedCollection___push(variable[6])(variable[6],  variable[5] /*i*/) /*IndexedCollection::push*/;
-      continue_36: while(0);
+      CALL_abstract_collection___IndexedCollection___push(variable[0])(variable[0],  variable[5] /*i*/) /*IndexedCollection::push*/;
+      continue_38: while(0);
       CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*Iterator::next*/;
     }
-    break_36: while(0);
+    break_38: while(0);
   }
-  return_label35: while(false);
+  return_label37: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t abstract_collection___IndexedCollection___pop(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 327, LOCATE_abstract_collection___IndexedCollection___pop};
+  struct trace_t trace = {NULL, NULL, 351, LOCATE_abstract_collection___IndexedCollection___pop};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 327);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 351);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 void abstract_collection___IndexedCollection___unshift(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 330, LOCATE_abstract_collection___IndexedCollection___unshift};
+  struct trace_t trace = {NULL, NULL, 354, LOCATE_abstract_collection___IndexedCollection___unshift};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 330);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 354);
   nit_exit(1);
   tracehead = trace.prev;
   return;
 }
 val_t abstract_collection___IndexedCollection___shift(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 333, LOCATE_abstract_collection___IndexedCollection___shift};
+  struct trace_t trace = {NULL, NULL, 357, LOCATE_abstract_collection___IndexedCollection___shift};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 333);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 357);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
-val_t abstract_collection___IndexedCollection___index_of(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 337, LOCATE_abstract_collection___IndexedCollection___index_of};
-  val_t variable[5];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_abstract_collection;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*IndexedCollection::iterator*/;
-  variable[3] = variable[4];
-  while (true) { /*while*/
-    variable[4] = CALL_abstract_collection___Iterator___is_ok( variable[3] /*i*/)( variable[3] /*i*/) /*Iterator::is_ok*/;
-    if (!UNTAG_Bool(variable[4])) break; /* while*/
-    variable[4] = CALL_abstract_collection___Iterator___item( variable[3] /*i*/)( variable[3] /*i*/) /*Iterator::item*/;
-    variable[4] = TAG_Bool((variable[4] ==  variable[1] /*item*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], variable[1] /*item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  variable[1] /*item*/) /*Object::==*/)))));
-    if (UNTAG_Bool(variable[4])) { /*if*/
-      variable[4] = CALL_abstract_collection___IndexedIterator___index( variable[3] /*i*/)( variable[3] /*i*/) /*IndexedIterator::index*/;
-      variable[2] = variable[4];
-      goto return_label37;
-    }
-    CALL_abstract_collection___Iterator___next( variable[3] /*i*/)( variable[3] /*i*/) /*Iterator::next*/;
-    continue_38: while(0);
-  }
-  break_38: while(0);
-  variable[4] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
-  variable[2] = variable[4];
-  goto return_label37;
-  return_label37: while(false);
-  tracehead = trace.prev;
-  return variable[2];
-}
 val_t abstract_collection___IndexedIterator___key(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 358, LOCATE_abstract_collection___IndexedIterator___key};
+  struct trace_t trace = {NULL, NULL, 369, LOCATE_abstract_collection___IndexedIterator___key};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_abstract_collection___IndexedIterator___index(variable[2])(variable[2]) /*IndexedIterator::index*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___IndexedIterator___index(variable[0])(variable[0]) /*IndexedIterator::index*/;
   variable[1] = variable[2];
   goto return_label39;
   return_label39: while(false);
@@ -959,33 +1061,38 @@ val_t abstract_collection___IndexedIterator___key(val_t  self) {
   return variable[1];
 }
 val_t abstract_collection___IndexedIterator___index(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 355, LOCATE_abstract_collection___IndexedIterator___index};
+  struct trace_t trace = {NULL, NULL, 366, LOCATE_abstract_collection___IndexedIterator___index};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 355);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 366);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t abstract_collection___CoupleMap_____bra(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 369, LOCATE_abstract_collection___CoupleMap_____bra};
+  struct trace_t trace = {NULL, NULL, 380, LOCATE_abstract_collection___CoupleMap_____bra};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[4] = CALL_abstract_collection___CoupleMap___couple_at(variable[4])(variable[4],  variable[1] /*key*/) /*CoupleMap::couple_at*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstract_collection___CoupleMap___couple_at(variable[0])(variable[0],  variable[1] /*key*/) /*CoupleMap::couple_at*/;
   variable[3] = variable[4];
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(( variable[3] /*c*/ ==  NIT_NULL /*null*/) || (( variable[3] /*c*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*c*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*c*/)( variable[3] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[2] =  NIT_NULL /*null*/;
-    goto return_label40;
+    fprintf(stderr, "Aborted"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_abstract_collection___CoupleMap_____bra, LOCATE_abstract_collection, 384); nit_exit(1);
   } else { /*if*/
+    /* Register variable[4]: Result */
     variable[4] = CALL_abstract_collection___Couple___second( variable[3] /*c*/)( variable[3] /*c*/) /*Couple::second*/;
     variable[2] = variable[4];
     goto return_label40;
@@ -995,15 +1102,19 @@ val_t abstract_collection___CoupleMap_____bra(val_t  self, val_t  param0) {
   return variable[2];
 }
 val_t abstract_collection___CoupleMap___has_key(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 379, LOCATE_abstract_collection___CoupleMap___has_key};
+  struct trace_t trace = {NULL, NULL, 390, LOCATE_abstract_collection___CoupleMap___has_key};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_abstract_collection___CoupleMap___couple_at(variable[3])(variable[3],  variable[1] /*key*/) /*CoupleMap::couple_at*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___CoupleMap___couple_at(variable[0])(variable[0],  variable[1] /*key*/) /*CoupleMap::couple_at*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   variable[2] = variable[3];
   goto return_label41;
@@ -1012,27 +1123,31 @@ val_t abstract_collection___CoupleMap___has_key(val_t  self, val_t  param0) {
   return variable[2];
 }
 val_t abstract_collection___CoupleMap___couple_at(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 365, LOCATE_abstract_collection___CoupleMap___couple_at};
+  struct trace_t trace = {NULL, NULL, 376, LOCATE_abstract_collection___CoupleMap___couple_at};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 365);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_abstract_collection, 376);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t abstract_collection___CoupleMapIterator___item(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 387, LOCATE_abstract_collection___CoupleMapIterator___item};
+  struct trace_t trace = {NULL, NULL, 398, LOCATE_abstract_collection___CoupleMapIterator___item};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[2]) /*CoupleMapIterator::_iter*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[0]) /*CoupleMapIterator::_iter*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_abstract_collection___Iterator___item(variable[2])(variable[2]) /*Iterator::item*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_abstract_collection___Couple___second(variable[2])(variable[2]) /*Couple::second*/;
   variable[1] = variable[2];
   goto return_label42;
@@ -1041,30 +1156,35 @@ val_t abstract_collection___CoupleMapIterator___item(val_t  self) {
   return variable[1];
 }
 void abstract_collection___CoupleMapIterator___next(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 395, LOCATE_abstract_collection___CoupleMapIterator___next};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 406, LOCATE_abstract_collection___CoupleMapIterator___next};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[2]) /*CoupleMapIterator::_iter*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[0]) /*CoupleMapIterator::_iter*/;
   CALL_abstract_collection___Iterator___next(variable[2])(variable[2]) /*Iterator::next*/;
   while (true) { /*while*/
-    variable[2] = variable[0];
-    variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[2]) /*CoupleMapIterator::_iter*/;
+    /* Register variable[2]: Result */
+    variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[0]) /*CoupleMapIterator::_iter*/;
+    /* Register variable[2]: Result */
     variable[2] = CALL_abstract_collection___Iterator___is_ok(variable[2])(variable[2]) /*Iterator::is_ok*/;
-    variable[3] = variable[2];
-    if (UNTAG_Bool(variable[3])) { /* and */
-      variable[3] = variable[0];
-      variable[3] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[3]) /*CoupleMapIterator::_iter*/;
-      variable[3] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
-      variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
+    /* Ensure var variable[2]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[2])) { /* and */
+      /* Register variable[2]: Result */
+      variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[0]) /*CoupleMapIterator::_iter*/;
+      /* Register variable[2]: Result */
+      variable[2] = CALL_abstract_collection___Iterator___item(variable[2])(variable[2]) /*Iterator::item*/;
+      /* Register variable[2]: Result */
+      variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))));
     }
-    variable[2] = variable[3];
+    /* Register variable[2]: Result */
     if (!UNTAG_Bool(variable[2])) break; /* while*/
-    variable[2] = variable[0];
-    variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[2]) /*CoupleMapIterator::_iter*/;
+    /* Register variable[2]: Result */
+    variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[0]) /*CoupleMapIterator::_iter*/;
     CALL_abstract_collection___Iterator___next(variable[2])(variable[2]) /*Iterator::next*/;
     continue_44: while(0);
   }
@@ -1074,14 +1194,17 @@ void abstract_collection___CoupleMapIterator___next(val_t  self) {
   return;
 }
 val_t abstract_collection___CoupleMapIterator___is_ok(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 393, LOCATE_abstract_collection___CoupleMapIterator___is_ok};
+  struct trace_t trace = {NULL, NULL, 404, LOCATE_abstract_collection___CoupleMapIterator___is_ok};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[2]) /*CoupleMapIterator::_iter*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[0]) /*CoupleMapIterator::_iter*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_abstract_collection___Iterator___is_ok(variable[2])(variable[2]) /*Iterator::is_ok*/;
   variable[1] = variable[2];
   goto return_label45;
@@ -1090,15 +1213,19 @@ val_t abstract_collection___CoupleMapIterator___is_ok(val_t  self) {
   return variable[1];
 }
 val_t abstract_collection___CoupleMapIterator___key(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 391, LOCATE_abstract_collection___CoupleMapIterator___key};
+  struct trace_t trace = {NULL, NULL, 402, LOCATE_abstract_collection___CoupleMapIterator___key};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[2]) /*CoupleMapIterator::_iter*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[0]) /*CoupleMapIterator::_iter*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_abstract_collection___Iterator___item(variable[2])(variable[2]) /*Iterator::item*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_abstract_collection___Couple___first(variable[2])(variable[2]) /*Couple::first*/;
   variable[1] = variable[2];
   goto return_label46;
@@ -1106,51 +1233,37 @@ val_t abstract_collection___CoupleMapIterator___key(val_t  self) {
   tracehead = trace.prev;
   return variable[1];
 }
-void abstract_collection___CoupleMapIterator___item__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 389, LOCATE_abstract_collection___CoupleMapIterator___item__eq};
-  val_t variable[4];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_abstract_collection;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_abstract_collection___CoupleMapIterator____iter(variable[3]) /*CoupleMapIterator::_iter*/;
-  variable[3] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
-  CALL_abstract_collection___Couple___second__eq(variable[3])(variable[3],  variable[1] /*e*/) /*Couple::second=*/;
-  return_label47: while(false);
-  tracehead = trace.prev;
-  return;
-}
 void abstract_collection___CoupleMapIterator___init(val_t  self, val_t  param0, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 403, LOCATE_abstract_collection___CoupleMapIterator___init};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 414, LOCATE_abstract_collection___CoupleMapIterator___init};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_CoupleMapIterator].i]) return;
-  variable[3] = variable[0];
-  ATTR_abstract_collection___CoupleMapIterator____iter(variable[3]) /*CoupleMapIterator::_iter*/ =  variable[1] /*i*/;
-  return_label48: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  ATTR_abstract_collection___CoupleMapIterator____iter(variable[0]) /*CoupleMapIterator::_iter*/ =  variable[1] /*i*/;
+  return_label47: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_CoupleMapIterator].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t abstract_collection___Couple___first(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 411, LOCATE_abstract_collection___Couple___first};
+  struct trace_t trace = {NULL, NULL, 422, LOCATE_abstract_collection___Couple___first};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   tracehead = trace.prev;
   return ATTR_abstract_collection___Couple____first( self) /*Couple::_first*/;
 }
 void abstract_collection___Couple___first__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 411, LOCATE_abstract_collection___Couple___first__eq};
+  struct trace_t trace = {NULL, NULL, 422, LOCATE_abstract_collection___Couple___first__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   ATTR_abstract_collection___Couple____first( self) /*Couple::_first*/ =  param0;
@@ -1158,18 +1271,18 @@ void abstract_collection___Couple___first__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t abstract_collection___Couple___second(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 414, LOCATE_abstract_collection___Couple___second};
+  struct trace_t trace = {NULL, NULL, 425, LOCATE_abstract_collection___Couple___second};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   tracehead = trace.prev;
   return ATTR_abstract_collection___Couple____second( self) /*Couple::_second*/;
 }
 void abstract_collection___Couple___second__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 414, LOCATE_abstract_collection___Couple___second__eq};
+  struct trace_t trace = {NULL, NULL, 425, LOCATE_abstract_collection___Couple___second__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
   ATTR_abstract_collection___Couple____second( self) /*Couple::_second*/ =  param0;
@@ -1177,20 +1290,22 @@ void abstract_collection___Couple___second__eq(val_t  self, val_t  param0) {
   return;
 }
 void abstract_collection___Couple___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 417, LOCATE_abstract_collection___Couple___init};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 428, LOCATE_abstract_collection___Couple___init};
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_abstract_collection;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Couple].i]) return;
-  variable[4] = variable[0];
-  ATTR_abstract_collection___Couple____first(variable[4]) /*Couple::_first*/ =  variable[1] /*f*/;
-  variable[4] = variable[0];
-  ATTR_abstract_collection___Couple____second(variable[4]) /*Couple::_second*/ =  variable[2] /*s*/;
-  return_label49: while(false);
+  /* Register variable[3]: Method return value and escape marker */
+  ATTR_abstract_collection___Couple____first(variable[0]) /*Couple::_first*/ =  variable[1] /*f*/;
+  ATTR_abstract_collection___Couple____second(variable[0]) /*Couple::_second*/ =  variable[2] /*s*/;
+  return_label48: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Couple].i] = 1;
   tracehead = trace.prev;
   return;

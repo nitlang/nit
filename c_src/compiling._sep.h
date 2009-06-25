@@ -8,7 +8,7 @@ extern const int SFT_compiling[];
 #define CALL_compiling___MMSrcModule___compile_prog_to_c(recv) ((compiling___MMSrcModule___compile_prog_to_c_t)CALL((recv), (SFT_compiling[0] + 0)))
 #define CALL_compiling___MMSrcModule___compile_main(recv) ((compiling___MMSrcModule___compile_main_t)CALL((recv), (SFT_compiling[0] + 1)))
 #define CALL_compiling___MMSrcModule___compile_separate_module(recv) ((compiling___MMSrcModule___compile_separate_module_t)CALL((recv), (SFT_compiling[0] + 2)))
-val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 typedef void (* compiling___MMSrcModule___compile_prog_to_c_t)(val_t  self, val_t  param0);
 void compiling___MMSrcModule___compile_prog_to_c(val_t  self, val_t  param0);
 #define LOCATE_compiling___MMSrcModule___compile_prog_to_c "compiling::MMSrcModule::compile_prog_to_c"

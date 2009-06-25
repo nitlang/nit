@@ -3,7 +3,7 @@
 val_t mmloader___ToolContext___error_count(val_t  self) {
   struct trace_t trace = {NULL, NULL, 27, LOCATE_mmloader___ToolContext___error_count};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
   tracehead = trace.prev;
@@ -12,7 +12,7 @@ val_t mmloader___ToolContext___error_count(val_t  self) {
 val_t mmloader___ToolContext___warning_count(val_t  self) {
   struct trace_t trace = {NULL, NULL, 30, LOCATE_mmloader___ToolContext___warning_count};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
   tracehead = trace.prev;
@@ -20,791 +20,1169 @@ val_t mmloader___ToolContext___warning_count(val_t  self) {
 }
 void mmloader___ToolContext___error(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 33, LOCATE_mmloader___ToolContext___error};
-  val_t variable[10];
-  void **closurevariable = NULL;
+  static val_t once_value_1 = NIT_NULL; /* Once value for string variable[5]*/
+  static val_t once_value_2 = NIT_NULL; /* Once value for string variable[5]*/
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_file___Object___stderr(variable[3])(variable[3]) /*Object::stderr*/;
-  variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-  variable[5] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[6] = variable[5];
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[6]) /*AbstractArray::add*/;
-  variable[7] =  variable[1] /*s*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[7]) /*AbstractArray::add*/;
-  variable[8] = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)); /*new String*/
-  variable[9] = variable[8];
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[9]) /*AbstractArray::add*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_file___Object___stderr(variable[0])(variable[0]) /*Object::stderr*/;
+  variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[5]: Once String constant */
+  if (once_value_1 != NIT_NULL) variable[5] = once_value_1;
+  else {
+    variable[5] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_1 = variable[5];
+  }
+  /* Register variable[5]: Result */
+  /* Ensure var variable[5]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+  variable[5] =  variable[1] /*s*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+  /* Register variable[5]: Once String constant */
+  if (once_value_2 != NIT_NULL) variable[5] = once_value_2;
+  else {
+    variable[5] = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)) /*new String*/;
+    once_value_2 = variable[5];
+  }
+  /* Register variable[5]: Result */
+  /* Ensure var variable[5]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_string___Object___to_s(variable[4])(variable[4]) /*Object::to_s*/;
   CALL_stream___OStream___write(variable[3])(variable[3], variable[4]) /*OFStream::write*/;
-  variable[3] = variable[0];
-  variable[4] = variable[0];
-  variable[4] = ATTR_mmloader___ToolContext____error_count(variable[4]) /*ToolContext::_error_count*/;
-  variable[4] = TAG_Int(UNTAG_Int(variable[4])+UNTAG_Int( TAG_Int(1)));
-  ATTR_mmloader___ToolContext____error_count(variable[3]) /*ToolContext::_error_count*/ = variable[4];
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_mmloader___ToolContext____error_count(variable[0]) /*ToolContext::_error_count*/;
+  /* Register variable[3]: Result */
+  variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(1)));
+  ATTR_mmloader___ToolContext____error_count(variable[0]) /*ToolContext::_error_count*/ = variable[3];
   return_label0: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmloader___ToolContext___warning(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 40, LOCATE_mmloader___ToolContext___warning};
-  val_t variable[10];
-  void **closurevariable = NULL;
+  static val_t once_value_4 = NIT_NULL; /* Once value for string variable[5]*/
+  static val_t once_value_5 = NIT_NULL; /* Once value for string variable[5]*/
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_mmloader___ToolContext____opt_warn(variable[3]) /*ToolContext::_opt_warn*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_mmloader___ToolContext____opt_warn(variable[0]) /*ToolContext::_opt_warn*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_opts___Option___value(variable[3])(variable[3]) /*Option::value*/;
-  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) { /*if*/
-    goto return_label1;
+  /* Register variable[3]: Result */
+  variable[3] = TAG_Bool((variable[3])==( TAG_Int(0)));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    goto return_label3;
   }
-  variable[3] = variable[0];
-  variable[3] = CALL_file___Object___stderr(variable[3])(variable[3]) /*Object::stderr*/;
-  variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-  variable[5] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[6] = variable[5];
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[6]) /*AbstractArray::add*/;
-  variable[7] =  variable[1] /*s*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[7]) /*AbstractArray::add*/;
-  variable[8] = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)); /*new String*/
-  variable[9] = variable[8];
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[9]) /*AbstractArray::add*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_file___Object___stderr(variable[0])(variable[0]) /*Object::stderr*/;
+  variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[5]: Once String constant */
+  if (once_value_4 != NIT_NULL) variable[5] = once_value_4;
+  else {
+    variable[5] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_4 = variable[5];
+  }
+  /* Register variable[5]: Result */
+  /* Ensure var variable[5]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+  variable[5] =  variable[1] /*s*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+  /* Register variable[5]: Once String constant */
+  if (once_value_5 != NIT_NULL) variable[5] = once_value_5;
+  else {
+    variable[5] = NEW_String_string___String___with_native(BOX_NativeString("\n"), TAG_Int(1)) /*new String*/;
+    once_value_5 = variable[5];
+  }
+  /* Register variable[5]: Result */
+  /* Ensure var variable[5]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_string___Object___to_s(variable[4])(variable[4]) /*Object::to_s*/;
   CALL_stream___OStream___write(variable[3])(variable[3], variable[4]) /*OFStream::write*/;
-  variable[3] = variable[0];
-  variable[4] = variable[0];
-  variable[4] = ATTR_mmloader___ToolContext____warning_count(variable[4]) /*ToolContext::_warning_count*/;
-  variable[4] = TAG_Int(UNTAG_Int(variable[4])+UNTAG_Int( TAG_Int(1)));
-  ATTR_mmloader___ToolContext____warning_count(variable[3]) /*ToolContext::_warning_count*/ = variable[4];
-  return_label1: while(false);
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_mmloader___ToolContext____opt_warn(variable[0]) /*ToolContext::_opt_warn*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_opts___Option___value(variable[3])(variable[3]) /*Option::value*/;
+  /* Register variable[3]: Result */
+  variable[3] = TAG_Bool((variable[3])==( TAG_Int(1)));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_mmloader___ToolContext____warning_count(variable[0]) /*ToolContext::_warning_count*/;
+    /* Register variable[3]: Result */
+    variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(1)));
+    ATTR_mmloader___ToolContext____warning_count(variable[0]) /*ToolContext::_warning_count*/ = variable[3];
+  } else { /*if*/
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_mmloader___ToolContext____error_count(variable[0]) /*ToolContext::_error_count*/;
+    /* Register variable[3]: Result */
+    variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(1)));
+    ATTR_mmloader___ToolContext____error_count(variable[0]) /*ToolContext::_error_count*/ = variable[3];
+  }
+  return_label3: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t mmloader___ToolContext___paths(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 48, LOCATE_mmloader___ToolContext___paths};
+  struct trace_t trace = {NULL, NULL, 52, LOCATE_mmloader___ToolContext___paths};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
   tracehead = trace.prev;
   return ATTR_mmloader___ToolContext____paths( self) /*ToolContext::_paths*/;
 }
 val_t mmloader___ToolContext___option_context(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 54, LOCATE_mmloader___ToolContext___option_context};
+  struct trace_t trace = {NULL, NULL, 58, LOCATE_mmloader___ToolContext___option_context};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
   tracehead = trace.prev;
   return ATTR_mmloader___ToolContext____option_context( self) /*ToolContext::_option_context*/;
 }
 val_t mmloader___ToolContext___opt_warn(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 57, LOCATE_mmloader___ToolContext___opt_warn};
+  struct trace_t trace = {NULL, NULL, 61, LOCATE_mmloader___ToolContext___opt_warn};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
   tracehead = trace.prev;
   return ATTR_mmloader___ToolContext____opt_warn( self) /*ToolContext::_opt_warn*/;
 }
 val_t mmloader___ToolContext___opt_path(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 60, LOCATE_mmloader___ToolContext___opt_path};
+  struct trace_t trace = {NULL, NULL, 64, LOCATE_mmloader___ToolContext___opt_path};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
   tracehead = trace.prev;
   return ATTR_mmloader___ToolContext____opt_path( self) /*ToolContext::_opt_path*/;
 }
 val_t mmloader___ToolContext___opt_log(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 63, LOCATE_mmloader___ToolContext___opt_log};
+  struct trace_t trace = {NULL, NULL, 67, LOCATE_mmloader___ToolContext___opt_log};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
   tracehead = trace.prev;
   return ATTR_mmloader___ToolContext____opt_log( self) /*ToolContext::_opt_log*/;
 }
 val_t mmloader___ToolContext___opt_only_metamodel(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 66, LOCATE_mmloader___ToolContext___opt_only_metamodel};
+  struct trace_t trace = {NULL, NULL, 70, LOCATE_mmloader___ToolContext___opt_only_metamodel};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
   tracehead = trace.prev;
   return ATTR_mmloader___ToolContext____opt_only_metamodel( self) /*ToolContext::_opt_only_metamodel*/;
 }
 val_t mmloader___ToolContext___opt_only_parse(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 69, LOCATE_mmloader___ToolContext___opt_only_parse};
+  struct trace_t trace = {NULL, NULL, 73, LOCATE_mmloader___ToolContext___opt_only_parse};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
   tracehead = trace.prev;
   return ATTR_mmloader___ToolContext____opt_only_parse( self) /*ToolContext::_opt_only_parse*/;
 }
 val_t mmloader___ToolContext___opt_help(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 72, LOCATE_mmloader___ToolContext___opt_help};
+  struct trace_t trace = {NULL, NULL, 76, LOCATE_mmloader___ToolContext___opt_help};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
   tracehead = trace.prev;
   return ATTR_mmloader___ToolContext____opt_help( self) /*ToolContext::_opt_help*/;
 }
 void mmloader___ToolContext___init(val_t  self, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 75, LOCATE_mmloader___ToolContext___init};
+  struct trace_t trace = {NULL, NULL, 79, LOCATE_mmloader___ToolContext___init};
   val_t variable[10];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ToolContext].i]) return;
+  /* Register variable[1]: Method return value and escape marker */
   CALL_abstractmetamodel___MMContext___init(variable[0])(variable[0], init_table /*YYY*/) /*MMContext::init*/;
-  variable[2] = variable[0];
-  variable[2] = CALL_mmloader___ToolContext___option_context(variable[2])(variable[2]) /*ToolContext::option_context*/;
-  variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(6)); /*new Array[Option]*/
-  variable[4] = variable[0];
-  variable[4] = CALL_mmloader___ToolContext___opt_warn(variable[4])(variable[4]) /*ToolContext::opt_warn*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_mmloader___ToolContext___option_context(variable[0])(variable[0]) /*ToolContext::option_context*/;
+  variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(6)) /*new Array[Option]*/ /* Ensure var: Literal array*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_mmloader___ToolContext___opt_warn(variable[0])(variable[0]) /*ToolContext::opt_warn*/;
   CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
-  variable[5] = variable[0];
-  variable[5] = CALL_mmloader___ToolContext___opt_path(variable[5])(variable[5]) /*ToolContext::opt_path*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_mmloader___ToolContext___opt_path(variable[0])(variable[0]) /*ToolContext::opt_path*/;
   CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[5]) /*AbstractArray::add*/;
-  variable[6] = variable[0];
-  variable[6] = CALL_mmloader___ToolContext___opt_log(variable[6])(variable[6]) /*ToolContext::opt_log*/;
+  /* Register variable[6]: Result */
+  variable[6] = CALL_mmloader___ToolContext___opt_log(variable[0])(variable[0]) /*ToolContext::opt_log*/;
   CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[6]) /*AbstractArray::add*/;
-  variable[7] = variable[0];
-  variable[7] = CALL_mmloader___ToolContext___opt_only_parse(variable[7])(variable[7]) /*ToolContext::opt_only_parse*/;
+  /* Register variable[7]: Result */
+  variable[7] = CALL_mmloader___ToolContext___opt_only_parse(variable[0])(variable[0]) /*ToolContext::opt_only_parse*/;
   CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[7]) /*AbstractArray::add*/;
-  variable[8] = variable[0];
-  variable[8] = CALL_mmloader___ToolContext___opt_only_metamodel(variable[8])(variable[8]) /*ToolContext::opt_only_metamodel*/;
+  /* Register variable[8]: Result */
+  variable[8] = CALL_mmloader___ToolContext___opt_only_metamodel(variable[0])(variable[0]) /*ToolContext::opt_only_metamodel*/;
   CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[8]) /*AbstractArray::add*/;
-  variable[9] = variable[0];
-  variable[9] = CALL_mmloader___ToolContext___opt_help(variable[9])(variable[9]) /*ToolContext::opt_help*/;
+  /* Register variable[9]: Result */
+  variable[9] = CALL_mmloader___ToolContext___opt_help(variable[0])(variable[0]) /*ToolContext::opt_help*/;
   CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[9]) /*AbstractArray::add*/;
+  /* Register variable[3]: Result */
   CALL_opts___OptionContext___add_option(variable[2])(variable[2], variable[3]) /*OptionContext::add_option*/;
-  return_label2: while(false);
+  return_label6: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ToolContext].i] = 1;
   tracehead = trace.prev;
   return;
 }
 void mmloader___ToolContext___process_options(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 81, LOCATE_mmloader___ToolContext___process_options};
-  static val_t once_value_4; static int once_bool_4; /* Once value for variable[3]*/
-  static val_t once_value_5; static int once_bool_5; /* Once value for variable[3]*/
-  val_t variable[11];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 85, LOCATE_mmloader___ToolContext___process_options};
+  static val_t once_value_8; static int once_bool_8; /* Once value for variable[3]*/
+    static val_t once_value_9 = NIT_NULL; /* Once value for string variable[3]*/
+  static val_t once_value_10; static int once_bool_10; /* Once value for variable[3]*/
+    static val_t once_value_11 = NIT_NULL; /* Once value for string variable[3]*/
+    static val_t once_value_12 = NIT_NULL; /* Once value for string variable[5]*/
+    static val_t once_value_13 = NIT_NULL; /* Once value for string variable[5]*/
+  static val_t once_value_14 = NIT_NULL; /* Once value for string variable[5]*/
+  static val_t once_value_15 = NIT_NULL; /* Once value for string variable[5]*/
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_mmloader___ToolContext___option_context(variable[2])(variable[2]) /*ToolContext::option_context*/;
-  variable[3] = variable[0];
-  variable[3] = CALL_string___Object___args(variable[3])(variable[3]) /*Object::args*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_mmloader___ToolContext___option_context(variable[0])(variable[0]) /*ToolContext::option_context*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_string___Object___args(variable[0])(variable[0]) /*Object::args*/;
   CALL_opts___OptionContext___parse(variable[2])(variable[2], variable[3]) /*OptionContext::parse*/;
-  variable[2] = variable[0];
-  variable[3] = NEW_Array_array___Array___init(); /*new Array[String]*/
-  ATTR_mmloader___ToolContext____paths(variable[2]) /*ToolContext::_paths*/ = variable[3];
-  variable[2] = variable[0];
-  variable[2] = CALL_mmloader___ToolContext___paths(variable[2])(variable[2]) /*ToolContext::paths*/;
-  variable[3] = variable[0];
-  variable[3] = CALL_mmloader___ToolContext___opt_path(variable[3])(variable[3]) /*ToolContext::opt_path*/;
+  /* Register variable[2]: Result */
+  variable[2] = NEW_Array_array___Array___init() /*new Array[String]*/;
+  ATTR_mmloader___ToolContext____paths(variable[0]) /*ToolContext::_paths*/ = variable[2];
+  /* Register variable[2]: Result */
+  variable[2] = CALL_mmloader___ToolContext___paths(variable[0])(variable[0]) /*ToolContext::paths*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_mmloader___ToolContext___opt_path(variable[0])(variable[0]) /*ToolContext::opt_path*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_opts___Option___value(variable[3])(variable[3]) /*Option::value*/;
   CALL_abstract_collection___IndexedCollection___append(variable[2])(variable[2], variable[3]) /*IndexedCollection::append*/;
-  if (once_bool_4) variable[3] = once_value_4;
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Once expression result */
+  if (once_bool_8) variable[3] = once_value_8;
   else {
-    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("NIT_PATH"), TAG_Int(8)); /*new String*/
+    /* Register variable[3]: Once String constant */
+    if (once_value_9 != NIT_NULL) variable[3] = once_value_9;
+    else {
+      variable[3] = NEW_String_string___String___with_native(BOX_NativeString("NIT_PATH"), TAG_Int(8)) /*new String*/;
+      once_value_9 = variable[3];
+    }
+    /* Register variable[3]: Result */
+    /* Register variable[3]: Result */
     variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
+    /* Register variable[3]: Result */
     variable[3] = CALL_environ___Symbol___environ(variable[3])(variable[3]) /*Symbol::environ*/;
-    once_value_4 = variable[3];
-    once_bool_4 = true;
+    once_value_8 = variable[3];
+    once_bool_8 = true;
   }
+  /* Register variable[3]: Result */
   variable[2] = variable[3];
-  variable[3] = CALL_abstract_collection___Collection___is_empty( variable[2] /*path_env*/)( variable[2] /*path_env*/) /*AbstractArray::is_empty*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___Collection___is_empty( variable[2] /*path_env*/)( variable[2] /*path_env*/) /*AbstractArrayRead::is_empty*/;
   if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) { /*if*/
-    variable[3] = variable[0];
-    variable[3] = CALL_mmloader___ToolContext___paths(variable[3])(variable[3]) /*ToolContext::paths*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_mmloader___ToolContext___paths(variable[0])(variable[0]) /*ToolContext::paths*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_string_search___String___split_with( variable[2] /*path_env*/)( variable[2] /*path_env*/,  TAG_Char(':')) /*String::split_with*/;
     CALL_abstract_collection___IndexedCollection___append(variable[3])(variable[3], variable[4]) /*IndexedCollection::append*/;
   }
-  if (once_bool_5) variable[3] = once_value_5;
+  /* Register variable[3]: Once expression result */
+  if (once_bool_10) variable[3] = once_value_10;
   else {
-    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("NIT_DIR"), TAG_Int(7)); /*new String*/
+    /* Register variable[3]: Once String constant */
+    if (once_value_11 != NIT_NULL) variable[3] = once_value_11;
+    else {
+      variable[3] = NEW_String_string___String___with_native(BOX_NativeString("NIT_DIR"), TAG_Int(7)) /*new String*/;
+      once_value_11 = variable[3];
+    }
+    /* Register variable[3]: Result */
+    /* Register variable[3]: Result */
     variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
+    /* Register variable[3]: Result */
     variable[3] = CALL_environ___Symbol___environ(variable[3])(variable[3]) /*Symbol::environ*/;
-    once_value_5 = variable[3];
-    once_bool_5 = true;
+    once_value_10 = variable[3];
+    once_bool_10 = true;
   }
+  /* Register variable[3]: Result */
   variable[2] = variable[3] /*path_env=*/;
-  variable[3] = CALL_abstract_collection___Collection___is_empty( variable[2] /*path_env*/)( variable[2] /*path_env*/) /*AbstractArray::is_empty*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___Collection___is_empty( variable[2] /*path_env*/)( variable[2] /*path_env*/) /*AbstractArrayRead::is_empty*/;
   if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) { /*if*/
-    variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-    variable[5] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-    variable[6] = variable[5];
-    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[6]) /*AbstractArray::add*/;
-    variable[7] =  variable[2] /*path_env*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[7]) /*AbstractArray::add*/;
-    variable[8] = NEW_String_string___String___with_native(BOX_NativeString("/lib"), TAG_Int(4)); /*new String*/
-    variable[9] = variable[8];
-    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[9]) /*AbstractArray::add*/;
+    /* Register variable[3]: Local variable */
+    variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[5]: Once String constant */
+    if (once_value_12 != NIT_NULL) variable[5] = once_value_12;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+      once_value_12 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+    variable[5] =  variable[2] /*path_env*/ /* Ensure var: super-string element*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+    /* Register variable[5]: Once String constant */
+    if (once_value_13 != NIT_NULL) variable[5] = once_value_13;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString("/lib"), TAG_Int(4)) /*new String*/;
+      once_value_13 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_string___Object___to_s(variable[4])(variable[4]) /*Object::to_s*/;
     variable[3] = variable[4];
+    /* Register variable[4]: Result */
     variable[4] = CALL_file___String___file_exists( variable[3] /*libname*/)( variable[3] /*libname*/) /*String::file_exists*/;
     if (UNTAG_Bool(variable[4])) { /*if*/
-      variable[4] = variable[0];
-      variable[4] = CALL_mmloader___ToolContext___paths(variable[4])(variable[4]) /*ToolContext::paths*/;
+      /* Register variable[4]: Result */
+      variable[4] = CALL_mmloader___ToolContext___paths(variable[0])(variable[0]) /*ToolContext::paths*/;
       CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4],  variable[3] /*libname*/) /*AbstractArray::add*/;
     }
   }
-  variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-  variable[5] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[6] = variable[5];
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[6]) /*AbstractArray::add*/;
-  variable[7] = variable[0];
-  variable[7] = (G_sys);
-  variable[7] = CALL_string___Sys___program_name(variable[7])(variable[7]) /*Sys::program_name*/;
-  variable[7] = CALL_file___String___dirname(variable[7])(variable[7]) /*String::dirname*/;
-  variable[8] = variable[7];
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[8]) /*AbstractArray::add*/;
-  variable[9] = NEW_String_string___String___with_native(BOX_NativeString("/../lib"), TAG_Int(7)); /*new String*/
-  variable[10] = variable[9];
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[10]) /*AbstractArray::add*/;
+  /* Register variable[3]: Local variable */
+  variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[5]: Once String constant */
+  if (once_value_14 != NIT_NULL) variable[5] = once_value_14;
+  else {
+    variable[5] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_14 = variable[5];
+  }
+  /* Register variable[5]: Result */
+  /* Ensure var variable[5]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+  /* Register variable[5]: Result */
+  variable[5] = (G_sys);
+  /* Register variable[5]: Result */
+  variable[5] = CALL_string___Sys___program_name(variable[5])(variable[5]) /*Sys::program_name*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_file___String___dirname(variable[5])(variable[5]) /*String::dirname*/;
+  /* Ensure var variable[5]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+  /* Register variable[5]: Once String constant */
+  if (once_value_15 != NIT_NULL) variable[5] = once_value_15;
+  else {
+    variable[5] = NEW_String_string___String___with_native(BOX_NativeString("/../lib"), TAG_Int(7)) /*new String*/;
+    once_value_15 = variable[5];
+  }
+  /* Register variable[5]: Result */
+  /* Ensure var variable[5]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_string___Object___to_s(variable[4])(variable[4]) /*Object::to_s*/;
   variable[3] = variable[4];
+  /* Register variable[4]: Result */
   variable[4] = CALL_file___String___file_exists( variable[3] /*libname*/)( variable[3] /*libname*/) /*String::file_exists*/;
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    variable[4] = CALL_mmloader___ToolContext___paths(variable[4])(variable[4]) /*ToolContext::paths*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_mmloader___ToolContext___paths(variable[0])(variable[0]) /*ToolContext::paths*/;
     CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4],  variable[3] /*libname*/) /*AbstractArray::add*/;
   }
-  return_label3: while(false);
+  return_label7: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t mmloader___ToolContext___try_to_load(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 106, LOCATE_mmloader___ToolContext___try_to_load};
-  val_t variable[16];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 110, LOCATE_mmloader___ToolContext___try_to_load};
+        static val_t once_value_19 = NIT_NULL; /* Once value for string variable[10]*/
+        static val_t once_value_20 = NIT_NULL; /* Once value for string variable[10]*/
+  val_t variable[11];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Result */
   variable[4] = CALL_abstractmetamodel___MMDirectory___modules( variable[2] /*dir*/)( variable[2] /*dir*/) /*MMDirectory::modules*/;
-  variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*Map::iterator*/;
+  /* Register variable[4]: For iterator */
+  variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*MapRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[5]: For 'is_ok' result */
     variable[5] = CALL_abstract_collection___Iterator___is_ok(variable[4])(variable[4]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[5])) break; /*for*/
-    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*Iterator::item*/;
+    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[6]: Local variable */
     variable[6] = variable[5];
+    /* Register variable[7]: Result */
     variable[7] = CALL_abstractmetamodel___MMModule___name( variable[6] /*m*/)( variable[6] /*m*/) /*MMModule::name*/;
+    /* Register variable[7]: Result */
     variable[7] = TAG_Bool((variable[7] ==  variable[1] /*module_name*/) || ((variable[7] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[7])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[7], variable[1] /*module_name*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[7])(variable[7],  variable[1] /*module_name*/) /*Object::==*/)))));
     if (UNTAG_Bool(variable[7])) { /*if*/
       variable[3] =  variable[6] /*m*/;
-      goto return_label6;
+      goto return_label16;
     }
-    continue_7: while(0);
+    continue_17: while(0);
     CALL_abstract_collection___Iterator___next(variable[4])(variable[4]) /*Iterator::next*/;
   }
-  break_7: while(0);
-  variable[4] = variable[0];
-  variable[4] = ATTR_mmloader___ToolContext____loaders(variable[4]) /*ToolContext::_loaders*/;
-  variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*AbstractArray::iterator*/;
+  break_17: while(0);
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_mmloader___ToolContext____loaders(variable[0]) /*ToolContext::_loaders*/;
+  /* Register variable[4]: For iterator */
+  variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[5]: For 'is_ok' result */
     variable[5] = CALL_abstract_collection___Iterator___is_ok(variable[4])(variable[4]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[5])) break; /*for*/
-    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/;
+    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[6]: Local variable */
     variable[6] = variable[5];
+    /* Register variable[7]: Local variable */
+    /* Register variable[8]: Result */
     variable[8] = CALL_mmloader___ModuleLoader___try_to_load_dir( variable[6] /*l*/)( variable[6] /*l*/,  variable[1] /*module_name*/,  variable[2] /*dir*/) /*ModuleLoader::try_to_load_dir*/;
     variable[7] = variable[8];
+    /* Register variable[8]: Result */
     variable[8] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[7] /*dir2*/ ==  NIT_NULL /*null*/) || (( variable[7] /*dir2*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[7] /*dir2*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[7] /*dir2*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[7] /*dir2*/)( variable[7] /*dir2*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
     if (UNTAG_Bool(variable[8])) { /*if*/
-      variable[9] = variable[0];
-      variable[9] = CALL_mmloader___ToolContext___try_to_load(variable[9])(variable[9],  variable[1] /*module_name*/,  variable[7] /*dir2*/) /*ToolContext::try_to_load*/;
+      /* Register variable[8]: Local variable */
+      /* Register variable[9]: Result */
+      variable[9] = CALL_mmloader___ToolContext___try_to_load(variable[0])(variable[0],  variable[1] /*module_name*/,  variable[7] /*dir2*/) /*ToolContext::try_to_load*/;
       variable[8] = variable[9];
+      /* Register variable[9]: Result */
       variable[9] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[8] /*m*/ ==  NIT_NULL /*null*/) || (( variable[8] /*m*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[8] /*m*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[8] /*m*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[8] /*m*/)( variable[8] /*m*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
       if (UNTAG_Bool(variable[9])) { /*if*/
         CALL_abstractmetamodel___MMDirectory___owner__eq( variable[7] /*dir2*/)( variable[7] /*dir2*/,  variable[8] /*m*/) /*MMDirectory::owner=*/;
         CALL_abstractmetamodel___MMDirectory___add_module( variable[2] /*dir*/)( variable[2] /*dir*/,  variable[8] /*m*/) /*MMDirectory::add_module*/;
         variable[3] =  variable[8] /*m*/;
-        goto return_label6;
+        goto return_label16;
       }
     }
+    /* Register variable[8]: Result */
     variable[8] = CALL_mmloader___ModuleLoader___can_handle( variable[6] /*l*/)( variable[6] /*l*/,  variable[1] /*module_name*/,  variable[2] /*dir*/) /*ModuleLoader::can_handle*/;
     if (UNTAG_Bool(variable[8])) { /*if*/
+      /* Register variable[8]: Local variable */
+      /* Register variable[9]: Result */
       variable[9] = CALL_abstractmetamodel___MMDirectory___full_name_for( variable[2] /*dir*/)( variable[2] /*dir*/,  variable[1] /*module_name*/) /*MMDirectory::full_name_for*/;
       variable[8] = variable[9];
-      variable[9] = variable[0];
-      variable[9] = ATTR_mmloader___ToolContext____processing_modules(variable[9]) /*ToolContext::_processing_modules*/;
+      /* Register variable[9]: Result */
+      variable[9] = ATTR_mmloader___ToolContext____processing_modules(variable[0]) /*ToolContext::_processing_modules*/;
+      /* Register variable[9]: Result */
       variable[9] = CALL_abstract_collection___Collection___has(variable[9])(variable[9],  variable[8] /*full_name*/) /*HashSet::has*/;
       if (UNTAG_Bool(variable[9])) { /*if*/
-        variable[9] = variable[0];
-        variable[10] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-        variable[11] = NEW_String_string___String___with_native(BOX_NativeString("Error: Dependency loop for module "), TAG_Int(34)); /*new String*/
-        variable[12] = variable[11];
-        CALL_abstract_collection___SimpleCollection___add(variable[10])(variable[10], variable[12]) /*AbstractArray::add*/;
-        variable[13] =  variable[8] /*full_name*/;
-        variable[13] = CALL_string___Object___to_s(variable[13])(variable[13]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[10])(variable[10], variable[13]) /*AbstractArray::add*/;
-        variable[14] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-        variable[15] = variable[14];
-        CALL_abstract_collection___SimpleCollection___add(variable[10])(variable[10], variable[15]) /*AbstractArray::add*/;
-        variable[10] = CALL_string___Object___to_s(variable[10])(variable[10]) /*Object::to_s*/;
-        CALL_mmloader___ToolContext___error(variable[9])(variable[9], variable[10]) /*ToolContext::error*/;
-        variable[9] = variable[0];
+        variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+        /* Register variable[10]: Once String constant */
+        if (once_value_19 != NIT_NULL) variable[10] = once_value_19;
+        else {
+          variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Error: Dependency loop for module "), TAG_Int(34)) /*new String*/;
+          once_value_19 = variable[10];
+        }
+        /* Register variable[10]: Result */
+        /* Ensure var variable[10]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[10]) /*AbstractArray::add*/;
+        variable[10] =  variable[8] /*full_name*/ /* Ensure var: super-string element*/;
+        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], CALL_string___Object___to_s(variable[10])(variable[10]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[10]: Once String constant */
+        if (once_value_20 != NIT_NULL) variable[10] = once_value_20;
+        else {
+          variable[10] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+          once_value_20 = variable[10];
+        }
+        /* Register variable[10]: Result */
+        /* Ensure var variable[10]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[10]) /*AbstractArray::add*/;
+        /* Register variable[9]: Result */
+        variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
+        CALL_mmloader___ToolContext___error(variable[0])(variable[0], variable[9]) /*ToolContext::error*/;
         exit(UNTAG_Int( TAG_Int(1)));
-        fprintf(stderr, "Aborted"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_mmloader___ToolContext___try_to_load, LOCATE_mmloader, 135); nit_exit(1);
+        fprintf(stderr, "Aborted"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_mmloader___ToolContext___try_to_load, LOCATE_mmloader, 139); nit_exit(1);
       }
-      variable[9] = variable[0];
-      variable[9] = ATTR_mmloader___ToolContext____processing_modules(variable[9]) /*ToolContext::_processing_modules*/;
+      /* Register variable[9]: Result */
+      variable[9] = ATTR_mmloader___ToolContext____processing_modules(variable[0]) /*ToolContext::_processing_modules*/;
       CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9],  variable[8] /*full_name*/) /*HashSet::add*/;
-      variable[10] = variable[0];
-      variable[10] = CALL_mmloader___ModuleLoader___load_and_process_module( variable[6] /*l*/)( variable[6] /*l*/, variable[10],  variable[1] /*module_name*/,  variable[2] /*dir*/) /*ModuleLoader::load_and_process_module*/;
+      /* Register variable[9]: Local variable */
+      /* Register variable[10]: Result */
+      variable[10] = CALL_mmloader___ModuleLoader___load_and_process_module( variable[6] /*l*/)( variable[6] /*l*/, variable[0],  variable[1] /*module_name*/,  variable[2] /*dir*/) /*ModuleLoader::load_and_process_module*/;
       variable[9] = variable[10];
-      variable[10] = variable[0];
-      variable[10] = ATTR_mmloader___ToolContext____processing_modules(variable[10]) /*ToolContext::_processing_modules*/;
+      /* Register variable[10]: Result */
+      variable[10] = ATTR_mmloader___ToolContext____processing_modules(variable[0]) /*ToolContext::_processing_modules*/;
       CALL_abstract_collection___RemovableCollection___remove(variable[10])(variable[10],  variable[8] /*full_name*/) /*HashSet::remove*/;
       CALL_abstractmetamodel___MMDirectory___add_module( variable[2] /*dir*/)( variable[2] /*dir*/,  variable[9] /*m*/) /*MMDirectory::add_module*/;
       variable[3] =  variable[9] /*m*/;
-      goto return_label6;
+      goto return_label16;
     }
-    continue_8: while(0);
+    continue_18: while(0);
     CALL_abstract_collection___Iterator___next(variable[4])(variable[4]) /*ArrayIterator::next*/;
   }
-  break_8: while(0);
+  break_18: while(0);
   variable[3] =  NIT_NULL /*null*/;
-  goto return_label6;
-  return_label6: while(false);
-  tracehead = trace.prev;
-  return variable[3];
-}
-val_t mmloader___ToolContext___get_module_from_filename(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 152, LOCATE_mmloader___ToolContext___get_module_from_filename};
-  val_t variable[14];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmloader;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[4] = CALL_file___String___dirname( variable[1] /*filename*/)( variable[1] /*filename*/) /*String::dirname*/;
-  variable[3] = variable[4];
-  variable[5] = NEW_String_string___String___with_native(BOX_NativeString(".nit"), TAG_Int(4)); /*new String*/
-  variable[5] = CALL_file___String___basename( variable[1] /*filename*/)( variable[1] /*filename*/, variable[5]) /*String::basename*/;
-  variable[5] = CALL_symbol___String___to_symbol(variable[5])(variable[5]) /*String::to_symbol*/;
-  variable[4] = variable[5];
-  variable[6] = variable[0];
-  variable[6] = CALL_mmloader___ToolContext___directory_for(variable[6])(variable[6],  variable[3] /*path*/) /*ToolContext::directory_for*/;
-  variable[5] = variable[6];
-  variable[6] = CALL_string___Object___to_s( variable[4] /*module_name*/)( variable[4] /*module_name*/) /*Symbol::to_s*/;
-  variable[6] = TAG_Bool((variable[6] ==  variable[1] /*filename*/) || ((variable[6] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  variable[1] /*filename*/) /*String::==*/)));
-  if (UNTAG_Bool(variable[6])) { /*if*/
-    variable[7] = variable[0];
-    variable[7] = CALL_mmloader___ToolContext___try_to_load(variable[7])(variable[7],  variable[4] /*module_name*/,  variable[5] /*dir*/) /*ToolContext::try_to_load*/;
-    variable[6] = variable[7];
-    variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[6] /*m*/ ==  NIT_NULL /*null*/) || (( variable[6] /*m*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[6] /*m*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*m*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[6] /*m*/)( variable[6] /*m*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    if (UNTAG_Bool(variable[7])) { /*if*/
-      variable[2] =  variable[6] /*m*/;
-      goto return_label9;
-    }
-    variable[7] = variable[0];
-    variable[7] = CALL_mmloader___ToolContext___get_module(variable[7])(variable[7],  variable[4] /*module_name*/,  NIT_NULL /*null*/) /*ToolContext::get_module*/;
-    variable[2] = variable[7];
-    goto return_label9;
-  }
-  variable[6] = CALL_file___String___file_exists( variable[1] /*filename*/)( variable[1] /*filename*/) /*String::file_exists*/;
-  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[6])))) { /*if*/
-    variable[6] = variable[0];
-    variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-    variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Error: File "), TAG_Int(12)); /*new String*/
-    variable[9] = variable[8];
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[9]) /*AbstractArray::add*/;
-    variable[10] =  variable[1] /*filename*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[10]) /*AbstractArray::add*/;
-    variable[11] = NEW_String_string___String___with_native(BOX_NativeString(" not found."), TAG_Int(11)); /*new String*/
-    variable[12] = variable[11];
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[12]) /*AbstractArray::add*/;
-    variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
-    CALL_mmloader___ToolContext___error(variable[6])(variable[6], variable[7]) /*ToolContext::error*/;
-    variable[6] = variable[0];
-    exit(UNTAG_Int( TAG_Int(1)));
-    fprintf(stderr, "Aborted"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_mmloader___ToolContext___get_module_from_filename, LOCATE_mmloader, 175); nit_exit(1);
-  }
-  variable[7] = variable[0];
-  variable[7] = CALL_mmloader___ToolContext___try_to_load(variable[7])(variable[7],  variable[4] /*module_name*/,  variable[5] /*dir*/) /*ToolContext::try_to_load*/;
-  variable[6] = variable[7];
-  variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[6] /*m*/ ==  NIT_NULL /*null*/) || (( variable[6] /*m*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[6] /*m*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*m*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[6] /*m*/)( variable[6] /*m*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable[7])) { /*if*/
-    variable[2] =  variable[6] /*m*/;
-    goto return_label9;
-  }
-  variable[7] = variable[0];
-  variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-  variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)); /*new String*/
-  variable[10] = variable[9];
-  CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[10]) /*AbstractArray::add*/;
-  variable[11] =  variable[1] /*filename*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[11]) /*AbstractArray::add*/;
-  variable[12] = NEW_String_string___String___with_native(BOX_NativeString(" is not a NIT source module."), TAG_Int(28)); /*new String*/
-  variable[13] = variable[12];
-  CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[13]) /*AbstractArray::add*/;
-  variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
-  CALL_mmloader___ToolContext___error(variable[7])(variable[7], variable[8]) /*ToolContext::error*/;
-  variable[7] = variable[0];
-  exit(UNTAG_Int( TAG_Int(1)));
-  fprintf(stderr, "Aborted"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_mmloader___ToolContext___get_module_from_filename, LOCATE_mmloader, 184); nit_exit(1);
-  return_label9: while(false);
-  tracehead = trace.prev;
-  return variable[2];
-}
-val_t mmloader___ToolContext___get_module(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 187, LOCATE_mmloader___ToolContext___get_module};
-  val_t variable[12];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmloader;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[2] =  param1;
-  /*variable[4] is variable m*/
-  variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[2] /*from*/ ==  NIT_NULL /*null*/) || (( variable[2] /*from*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[2] /*from*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*from*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[2] /*from*/)( variable[2] /*from*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable[5])) { /*if*/
-    variable[6] = CALL_abstractmetamodel___MMModule___directory( variable[2] /*from*/)( variable[2] /*from*/) /*MMModule::directory*/;
-    variable[5] = variable[6];
-    while (true) { /*while*/
-      variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*dir*/ ==  NIT_NULL /*null*/) || (( variable[5] /*dir*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*dir*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*dir*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*dir*/)( variable[5] /*dir*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-      if (!UNTAG_Bool(variable[6])) break; /* while*/
-      variable[7] = variable[0];
-      variable[7] = CALL_mmloader___ToolContext___try_to_load(variable[7])(variable[7],  variable[1] /*module_name*/,  variable[5] /*dir*/) /*ToolContext::try_to_load*/;
-      variable[6] = variable[7];
-      variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[6] /*m*/ ==  NIT_NULL /*null*/) || (( variable[6] /*m*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[6] /*m*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*m*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[6] /*m*/)( variable[6] /*m*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-      if (UNTAG_Bool(variable[7])) { /*if*/
-        variable[3] =  variable[6] /*m*/;
-        goto return_label10;
-      }
-      variable[7] = CALL_abstractmetamodel___MMDirectory___parent( variable[5] /*dir*/)( variable[5] /*dir*/) /*MMDirectory::parent*/;
-      variable[5] = variable[7] /*dir=*/;
-      continue_11: while(0);
-    }
-    break_11: while(0);
-  }
-  variable[5] = variable[0];
-  variable[5] = CALL_mmloader___ToolContext___paths(variable[5])(variable[5]) /*ToolContext::paths*/;
-  variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*AbstractArray::iterator*/;
-  while (true) { /*for*/
-    variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*ArrayIterator::is_ok*/;
-    if (!UNTAG_Bool(variable[6])) break; /*for*/
-    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/;
-    variable[7] = variable[6];
-    variable[9] = variable[0];
-    variable[10] = variable[0];
-    variable[10] = CALL_mmloader___ToolContext___directory_for(variable[10])(variable[10],  variable[7] /*p*/) /*ToolContext::directory_for*/;
-    variable[9] = CALL_mmloader___ToolContext___try_to_load(variable[9])(variable[9],  variable[1] /*module_name*/, variable[10]) /*ToolContext::try_to_load*/;
-    variable[8] = variable[9];
-    variable[9] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[8] /*m*/ ==  NIT_NULL /*null*/) || (( variable[8] /*m*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[8] /*m*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[8] /*m*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[8] /*m*/)( variable[8] /*m*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    if (UNTAG_Bool(variable[9])) { /*if*/
-      variable[3] =  variable[8] /*m*/;
-      goto return_label10;
-    }
-    continue_12: while(0);
-    CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*ArrayIterator::next*/;
-  }
-  break_12: while(0);
-  variable[5] = variable[0];
-  variable[6] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-  variable[7] = NEW_String_string___String___with_native(BOX_NativeString("Error: No ressource found for module "), TAG_Int(37)); /*new String*/
-  variable[8] = variable[7];
-  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[8]) /*AbstractArray::add*/;
-  variable[9] =  variable[1] /*module_name*/;
-  variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[9]) /*AbstractArray::add*/;
-  variable[10] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-  variable[11] = variable[10];
-  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[11]) /*AbstractArray::add*/;
-  variable[6] = CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/;
-  CALL_mmloader___ToolContext___error(variable[5])(variable[5], variable[6]) /*ToolContext::error*/;
-  variable[5] = variable[0];
-  exit(UNTAG_Int( TAG_Int(1)));
-  fprintf(stderr, "Aborted"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_mmloader___ToolContext___get_module, LOCATE_mmloader, 208); nit_exit(1);
-  return_label10: while(false);
-  tracehead = trace.prev;
-  return variable[3];
-}
-val_t mmloader___ToolContext___directory_for(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 211, LOCATE_mmloader___ToolContext___directory_for};
-  val_t variable[6];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmloader;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_mmloader___ToolContext____path_dirs(variable[3]) /*ToolContext::_path_dirs*/;
-  variable[3] = CALL_abstract_collection___Map___has_key(variable[3])(variable[3],  variable[1] /*path*/) /*Map::has_key*/;
-  if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = variable[0];
-    variable[3] = ATTR_mmloader___ToolContext____path_dirs(variable[3]) /*ToolContext::_path_dirs*/;
-    variable[3] = CALL_abstract_collection___Map_____bra(variable[3])(variable[3],  variable[1] /*path*/) /*Map::[]*/;
-    variable[2] = variable[3];
-    goto return_label13;
-  }
-  variable[4] = CALL_symbol___String___to_symbol( variable[1] /*path*/)( variable[1] /*path*/) /*String::to_symbol*/;
-  variable[5] = NEW_MMDirectory_abstractmetamodel___MMDirectory___init(variable[4],  variable[1] /*path*/,  NIT_NULL /*null*/); /*new MMDirectory*/
-  variable[4] = variable[5];
-  variable[3] = variable[4];
-  variable[4] = variable[0];
-  variable[4] = ATTR_mmloader___ToolContext____path_dirs(variable[4]) /*ToolContext::_path_dirs*/;
-  CALL_abstract_collection___Map_____braeq(variable[4])(variable[4],  variable[1] /*path*/,  variable[3] /*dir*/) /*Map::[]=*/;
-  variable[2] =  variable[3] /*dir*/;
-  goto return_label13;
-  return_label13: while(false);
-  tracehead = trace.prev;
-  return variable[2];
-}
-void mmloader___ToolContext___register_loader(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 223, LOCATE_mmloader___ToolContext___register_loader};
-  val_t variable[4];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmloader;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_mmloader___ToolContext____loaders(variable[3]) /*ToolContext::_loaders*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3],  variable[1] /*ml*/) /*AbstractArray::add*/;
-  return_label14: while(false);
-  tracehead = trace.prev;
-  return;
-}
-val_t mmloader___ModuleLoader___file_type(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 232, LOCATE_mmloader___ModuleLoader___file_type};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmloader;
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_mmloader, 232);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return NIT_NULL;
-}
-val_t mmloader___ModuleLoader___try_to_load_dir(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 235, LOCATE_mmloader___ModuleLoader___try_to_load_dir};
-  val_t variable[15];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmloader;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[2] =  param1;
-  variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-  variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[7] = variable[6];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[7]) /*AbstractArray::add*/;
-  variable[8] = CALL_abstractmetamodel___MMDirectory___path( variable[2] /*parent_dir*/)( variable[2] /*parent_dir*/) /*MMDirectory::path*/;
-  variable[9] = variable[8];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[9]) /*AbstractArray::add*/;
-  variable[10] = NEW_String_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)); /*new String*/
-  variable[11] = variable[10];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[11]) /*AbstractArray::add*/;
-  variable[12] =  variable[1] /*dirname*/;
-  variable[12] = CALL_string___Object___to_s(variable[12])(variable[12]) /*Object::to_s*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[12]) /*AbstractArray::add*/;
-  variable[13] = NEW_String_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)); /*new String*/
-  variable[14] = variable[13];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[14]) /*AbstractArray::add*/;
-  variable[5] = CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/;
-  variable[4] = variable[5];
-  variable[5] = CALL_file___String___file_exists( variable[4] /*fname*/)( variable[4] /*fname*/) /*String::file_exists*/;
-  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[5])))) { /*if*/
-    variable[3] =  NIT_NULL /*null*/;
-    goto return_label15;
-  }
-  variable[6] = CALL_abstractmetamodel___MMDirectory___full_name_for( variable[2] /*parent_dir*/)( variable[2] /*parent_dir*/,  variable[1] /*dirname*/) /*MMDirectory::full_name_for*/;
-  variable[7] = NEW_MMDirectory_abstractmetamodel___MMDirectory___init(variable[6],  variable[4] /*fname*/,  variable[2] /*parent_dir*/); /*new MMDirectory*/
-  variable[6] = variable[7];
-  variable[5] = variable[6];
-  variable[3] =  variable[5] /*dir*/;
-  goto return_label15;
-  return_label15: while(false);
-  tracehead = trace.prev;
-  return variable[3];
-}
-val_t mmloader___ModuleLoader___can_handle(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 245, LOCATE_mmloader___ModuleLoader___can_handle};
-  val_t variable[19];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmloader;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[2] =  param1;
-  variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(7)); /*new Array[String]*/
-  variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[7] = variable[6];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[7]) /*AbstractArray::add*/;
-  variable[8] = CALL_abstractmetamodel___MMDirectory___path( variable[2] /*dir*/)( variable[2] /*dir*/) /*MMDirectory::path*/;
-  variable[9] = variable[8];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[9]) /*AbstractArray::add*/;
-  variable[10] = NEW_String_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)); /*new String*/
-  variable[11] = variable[10];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[11]) /*AbstractArray::add*/;
-  variable[12] =  variable[1] /*module_name*/;
-  variable[12] = CALL_string___Object___to_s(variable[12])(variable[12]) /*Object::to_s*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[12]) /*AbstractArray::add*/;
-  variable[13] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-  variable[14] = variable[13];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[14]) /*AbstractArray::add*/;
-  variable[15] = variable[0];
-  variable[15] = CALL_mmloader___ModuleLoader___file_type(variable[15])(variable[15]) /*ModuleLoader::file_type*/;
-  variable[16] = variable[15];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[16]) /*AbstractArray::add*/;
-  variable[17] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[18] = variable[17];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[18]) /*AbstractArray::add*/;
-  variable[5] = CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/;
-  variable[4] = variable[5];
-  variable[5] = CALL_file___String___file_exists( variable[4] /*fname*/)( variable[4] /*fname*/) /*String::file_exists*/;
-  if (UNTAG_Bool(variable[5])) { /*if*/
-    variable[3] =  TAG_Bool(true);
-    goto return_label16;
-  }
-  variable[3] =  TAG_Bool(false);
   goto return_label16;
   return_label16: while(false);
   tracehead = trace.prev;
   return variable[3];
 }
-val_t mmloader___ModuleLoader___load_and_process_module(val_t  self, val_t  param0, val_t  param1, val_t  param2) {
-  struct trace_t trace = {NULL, NULL, 254, LOCATE_mmloader___ModuleLoader___load_and_process_module};
-  val_t variable[20];
-  void **closurevariable = NULL;
+val_t mmloader___ToolContext___get_module_from_filename(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 156, LOCATE_mmloader___ToolContext___get_module_from_filename};
+  static val_t once_value_22 = NIT_NULL; /* Once value for string variable[5]*/
+    static val_t once_value_23 = NIT_NULL; /* Once value for string variable[7]*/
+    static val_t once_value_24 = NIT_NULL; /* Once value for string variable[7]*/
+  static val_t once_value_25 = NIT_NULL; /* Once value for string variable[8]*/
+  static val_t once_value_26 = NIT_NULL; /* Once value for string variable[8]*/
+  val_t variable[9];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_file___String___dirname( variable[1] /*filename*/)( variable[1] /*filename*/) /*String::dirname*/;
+  variable[3] = variable[4];
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Once String constant */
+  if (once_value_22 != NIT_NULL) variable[5] = once_value_22;
+  else {
+    variable[5] = NEW_String_string___String___with_native(BOX_NativeString(".nit"), TAG_Int(4)) /*new String*/;
+    once_value_22 = variable[5];
+  }
+  /* Register variable[5]: Result */
+  /* Register variable[5]: Result */
+  variable[5] = CALL_file___String___basename( variable[1] /*filename*/)( variable[1] /*filename*/, variable[5]) /*String::basename*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_symbol___String___to_symbol(variable[5])(variable[5]) /*String::to_symbol*/;
+  variable[4] = variable[5];
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
+  variable[6] = CALL_mmloader___ToolContext___directory_for(variable[0])(variable[0],  variable[3] /*path*/) /*ToolContext::directory_for*/;
+  variable[5] = variable[6];
+  /* Register variable[6]: Result */
+  variable[6] = CALL_string___Object___to_s( variable[4] /*module_name*/)( variable[4] /*module_name*/) /*Symbol::to_s*/;
+  /* Register variable[6]: Result */
+  variable[6] = TAG_Bool((variable[6] ==  variable[1] /*filename*/) || ((variable[6] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  variable[1] /*filename*/) /*String::==*/)));
+  if (UNTAG_Bool(variable[6])) { /*if*/
+    /* Register variable[6]: Local variable */
+    /* Register variable[7]: Result */
+    variable[7] = CALL_mmloader___ToolContext___try_to_load(variable[0])(variable[0],  variable[4] /*module_name*/,  variable[5] /*dir*/) /*ToolContext::try_to_load*/;
+    variable[6] = variable[7];
+    /* Register variable[7]: Result */
+    variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[6] /*m*/ ==  NIT_NULL /*null*/) || (( variable[6] /*m*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[6] /*m*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*m*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[6] /*m*/)( variable[6] /*m*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    if (UNTAG_Bool(variable[7])) { /*if*/
+      variable[2] =  variable[6] /*m*/;
+      goto return_label21;
+    }
+    /* Register variable[7]: Result */
+    variable[7] = CALL_mmloader___ToolContext___get_module(variable[0])(variable[0],  variable[4] /*module_name*/,  NIT_NULL /*null*/) /*ToolContext::get_module*/;
+    variable[2] = variable[7];
+    goto return_label21;
+  }
+  /* Register variable[6]: Result */
+  variable[6] = CALL_file___String___file_exists( variable[1] /*filename*/)( variable[1] /*filename*/) /*String::file_exists*/;
+  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[6])))) { /*if*/
+    variable[6] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[7]: Once String constant */
+    if (once_value_23 != NIT_NULL) variable[7] = once_value_23;
+    else {
+      variable[7] = NEW_String_string___String___with_native(BOX_NativeString("Error: File "), TAG_Int(12)) /*new String*/;
+      once_value_23 = variable[7];
+    }
+    /* Register variable[7]: Result */
+    /* Ensure var variable[7]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+    variable[7] =  variable[1] /*filename*/ /* Ensure var: super-string element*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+    /* Register variable[7]: Once String constant */
+    if (once_value_24 != NIT_NULL) variable[7] = once_value_24;
+    else {
+      variable[7] = NEW_String_string___String___with_native(BOX_NativeString(" not found."), TAG_Int(11)) /*new String*/;
+      once_value_24 = variable[7];
+    }
+    /* Register variable[7]: Result */
+    /* Ensure var variable[7]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/;
+    CALL_mmloader___ToolContext___error(variable[0])(variable[0], variable[6]) /*ToolContext::error*/;
+    exit(UNTAG_Int( TAG_Int(1)));
+    fprintf(stderr, "Aborted"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_mmloader___ToolContext___get_module_from_filename, LOCATE_mmloader, 179); nit_exit(1);
+  }
+  /* Register variable[6]: Local variable */
+  /* Register variable[7]: Result */
+  variable[7] = CALL_mmloader___ToolContext___try_to_load(variable[0])(variable[0],  variable[4] /*module_name*/,  variable[5] /*dir*/) /*ToolContext::try_to_load*/;
+  variable[6] = variable[7];
+  /* Register variable[7]: Result */
+  variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[6] /*m*/ ==  NIT_NULL /*null*/) || (( variable[6] /*m*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[6] /*m*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*m*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[6] /*m*/)( variable[6] /*m*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[7])) { /*if*/
+    variable[2] =  variable[6] /*m*/;
+    goto return_label21;
+  }
+  variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[8]: Once String constant */
+  if (once_value_25 != NIT_NULL) variable[8] = once_value_25;
+  else {
+    variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Error: "), TAG_Int(7)) /*new String*/;
+    once_value_25 = variable[8];
+  }
+  /* Register variable[8]: Result */
+  /* Ensure var variable[8]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+  variable[8] =  variable[1] /*filename*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+  /* Register variable[8]: Once String constant */
+  if (once_value_26 != NIT_NULL) variable[8] = once_value_26;
+  else {
+    variable[8] = NEW_String_string___String___with_native(BOX_NativeString(" is not a NIT source module."), TAG_Int(28)) /*new String*/;
+    once_value_26 = variable[8];
+  }
+  /* Register variable[8]: Result */
+  /* Ensure var variable[8]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+  /* Register variable[7]: Result */
+  variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
+  CALL_mmloader___ToolContext___error(variable[0])(variable[0], variable[7]) /*ToolContext::error*/;
+  exit(UNTAG_Int( TAG_Int(1)));
+  fprintf(stderr, "Aborted"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_mmloader___ToolContext___get_module_from_filename, LOCATE_mmloader, 188); nit_exit(1);
+  return_label21: while(false);
+  tracehead = trace.prev;
+  return variable[2];
+}
+val_t mmloader___ToolContext___get_module(val_t  self, val_t  param0, val_t  param1) {
+  struct trace_t trace = {NULL, NULL, 191, LOCATE_mmloader___ToolContext___get_module};
+  static val_t once_value_30 = NIT_NULL; /* Once value for string variable[6]*/
+  static val_t once_value_31 = NIT_NULL; /* Once value for string variable[6]*/
+  val_t variable[10];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmloader;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Local variable */
+  /*variable[4] is variable m*/
+  /* Register variable[5]: Result */
+  variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[2] /*from*/ ==  NIT_NULL /*null*/) || (( variable[2] /*from*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[2] /*from*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*from*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[2] /*from*/)( variable[2] /*from*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    /* Register variable[5]: Local variable */
+    /* Register variable[6]: Result */
+    variable[6] = CALL_abstractmetamodel___MMModule___directory( variable[2] /*from*/)( variable[2] /*from*/) /*MMModule::directory*/;
+    variable[5] = variable[6];
+    while (true) { /*while*/
+      /* Register variable[6]: Result */
+      variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*dir*/ ==  NIT_NULL /*null*/) || (( variable[5] /*dir*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*dir*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*dir*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*dir*/)( variable[5] /*dir*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+      if (!UNTAG_Bool(variable[6])) break; /* while*/
+      /* Register variable[6]: Local variable */
+      /* Register variable[7]: Result */
+      variable[7] = CALL_mmloader___ToolContext___try_to_load(variable[0])(variable[0],  variable[1] /*module_name*/,  variable[5] /*dir*/) /*ToolContext::try_to_load*/;
+      variable[6] = variable[7];
+      /* Register variable[7]: Result */
+      variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[6] /*m*/ ==  NIT_NULL /*null*/) || (( variable[6] /*m*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[6] /*m*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*m*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[6] /*m*/)( variable[6] /*m*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+      if (UNTAG_Bool(variable[7])) { /*if*/
+        variable[3] =  variable[6] /*m*/;
+        goto return_label27;
+      }
+      /* Register variable[7]: Result */
+      variable[7] = CALL_abstractmetamodel___MMDirectory___parent( variable[5] /*dir*/)( variable[5] /*dir*/) /*MMDirectory::parent*/;
+      variable[5] = variable[7] /*dir=*/;
+      continue_28: while(0);
+    }
+    break_28: while(0);
+  }
+  /* Register variable[5]: Result */
+  variable[5] = CALL_mmloader___ToolContext___paths(variable[0])(variable[0]) /*ToolContext::paths*/;
+  /* Register variable[5]: For iterator */
+  variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*AbstractArrayRead::iterator*/;
+  while (true) { /*for*/
+    /* Register variable[6]: For 'is_ok' result */
+    variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*ArrayIterator::is_ok*/;
+    if (!UNTAG_Bool(variable[6])) break; /*for*/
+    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[7]: Local variable */
+    variable[7] = variable[6];
+    /* Register variable[8]: Local variable */
+    /* Register variable[9]: Result */
+    variable[9] = CALL_mmloader___ToolContext___directory_for(variable[0])(variable[0],  variable[7] /*p*/) /*ToolContext::directory_for*/;
+    /* Register variable[9]: Result */
+    variable[9] = CALL_mmloader___ToolContext___try_to_load(variable[0])(variable[0],  variable[1] /*module_name*/, variable[9]) /*ToolContext::try_to_load*/;
+    variable[8] = variable[9];
+    /* Register variable[9]: Result */
+    variable[9] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[8] /*m*/ ==  NIT_NULL /*null*/) || (( variable[8] /*m*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[8] /*m*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[8] /*m*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[8] /*m*/)( variable[8] /*m*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    if (UNTAG_Bool(variable[9])) { /*if*/
+      variable[3] =  variable[8] /*m*/;
+      goto return_label27;
+    }
+    continue_29: while(0);
+    CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*ArrayIterator::next*/;
+  }
+  break_29: while(0);
+  variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_30 != NIT_NULL) variable[6] = once_value_30;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString("Error: No ressource found for module "), TAG_Int(37)) /*new String*/;
+    once_value_30 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  variable[6] =  variable[1] /*module_name*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/) /*AbstractArray::add*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_31 != NIT_NULL) variable[6] = once_value_31;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+    once_value_31 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/;
+  CALL_mmloader___ToolContext___error(variable[0])(variable[0], variable[5]) /*ToolContext::error*/;
+  exit(UNTAG_Int( TAG_Int(1)));
+  fprintf(stderr, "Aborted"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_mmloader___ToolContext___get_module, LOCATE_mmloader, 212); nit_exit(1);
+  return_label27: while(false);
+  tracehead = trace.prev;
+  return variable[3];
+}
+val_t mmloader___ToolContext___directory_for(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 215, LOCATE_mmloader___ToolContext___directory_for};
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmloader;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_mmloader___ToolContext____path_dirs(variable[0]) /*ToolContext::_path_dirs*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___MapRead___has_key(variable[3])(variable[3],  variable[1] /*path*/) /*MapRead::has_key*/;
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_mmloader___ToolContext____path_dirs(variable[0]) /*ToolContext::_path_dirs*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_abstract_collection___MapRead_____bra(variable[3])(variable[3],  variable[1] /*path*/) /*MapRead::[]*/;
+    variable[2] = variable[3];
+    goto return_label32;
+  }
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_symbol___String___to_symbol( variable[1] /*path*/)( variable[1] /*path*/) /*String::to_symbol*/;
+  /* Register variable[4]: Result */
+  variable[4] = NEW_MMDirectory_abstractmetamodel___MMDirectory___init(variable[4],  variable[1] /*path*/,  NIT_NULL /*null*/) /*new MMDirectory*/;
+  variable[3] = variable[4];
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_mmloader___ToolContext____path_dirs(variable[0]) /*ToolContext::_path_dirs*/;
+  CALL_abstract_collection___Map_____braeq(variable[4])(variable[4],  variable[1] /*path*/,  variable[3] /*dir*/) /*Map::[]=*/;
+  variable[2] =  variable[3] /*dir*/;
+  goto return_label32;
+  return_label32: while(false);
+  tracehead = trace.prev;
+  return variable[2];
+}
+void mmloader___ToolContext___register_loader(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 227, LOCATE_mmloader___ToolContext___register_loader};
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmloader;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_mmloader___ToolContext____loaders(variable[0]) /*ToolContext::_loaders*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3],  variable[1] /*ml*/) /*AbstractArray::add*/;
+  return_label33: while(false);
+  tracehead = trace.prev;
+  return;
+}
+val_t mmloader___ModuleLoader___file_type(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 236, LOCATE_mmloader___ModuleLoader___file_type};
+  val_t *variable = NULL;
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmloader;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_mmloader, 236);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t mmloader___ModuleLoader___try_to_load_dir(val_t  self, val_t  param0, val_t  param1) {
+  struct trace_t trace = {NULL, NULL, 239, LOCATE_mmloader___ModuleLoader___try_to_load_dir};
+  static val_t once_value_35 = NIT_NULL; /* Once value for string variable[6]*/
+  static val_t once_value_36 = NIT_NULL; /* Once value for string variable[6]*/
+  static val_t once_value_37 = NIT_NULL; /* Once value for string variable[6]*/
+  val_t variable[7];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmloader;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Local variable */
+  variable[2] =  param1;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Local variable */
+  variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_35 != NIT_NULL) variable[6] = once_value_35;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_35 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[6]: Result */
+  variable[6] = CALL_abstractmetamodel___MMDirectory___path( variable[2] /*parent_dir*/)( variable[2] /*parent_dir*/) /*MMDirectory::path*/;
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_36 != NIT_NULL) variable[6] = once_value_36;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)) /*new String*/;
+    once_value_36 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  variable[6] =  variable[1] /*dirname*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/) /*AbstractArray::add*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_37 != NIT_NULL) variable[6] = once_value_37;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)) /*new String*/;
+    once_value_37 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/;
+  variable[4] = variable[5];
+  /* Register variable[5]: Result */
+  variable[5] = CALL_file___String___file_exists( variable[4] /*fname*/)( variable[4] /*fname*/) /*String::file_exists*/;
+  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[5])))) { /*if*/
+    variable[3] =  NIT_NULL /*null*/;
+    goto return_label34;
+  }
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
+  variable[6] = CALL_abstractmetamodel___MMDirectory___full_name_for( variable[2] /*parent_dir*/)( variable[2] /*parent_dir*/,  variable[1] /*dirname*/) /*MMDirectory::full_name_for*/;
+  /* Register variable[6]: Result */
+  variable[6] = NEW_MMDirectory_abstractmetamodel___MMDirectory___init(variable[6],  variable[4] /*fname*/,  variable[2] /*parent_dir*/) /*new MMDirectory*/;
+  variable[5] = variable[6];
+  variable[3] =  variable[5] /*dir*/;
+  goto return_label34;
+  return_label34: while(false);
+  tracehead = trace.prev;
+  return variable[3];
+}
+val_t mmloader___ModuleLoader___can_handle(val_t  self, val_t  param0, val_t  param1) {
+  struct trace_t trace = {NULL, NULL, 249, LOCATE_mmloader___ModuleLoader___can_handle};
+  static val_t once_value_39 = NIT_NULL; /* Once value for string variable[6]*/
+  static val_t once_value_40 = NIT_NULL; /* Once value for string variable[6]*/
+  static val_t once_value_41 = NIT_NULL; /* Once value for string variable[6]*/
+  static val_t once_value_42 = NIT_NULL; /* Once value for string variable[6]*/
+  val_t variable[7];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmloader;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Local variable */
+  variable[2] =  param1;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Local variable */
+  variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(7)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_39 != NIT_NULL) variable[6] = once_value_39;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_39 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[6]: Result */
+  variable[6] = CALL_abstractmetamodel___MMDirectory___path( variable[2] /*dir*/)( variable[2] /*dir*/) /*MMDirectory::path*/;
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_40 != NIT_NULL) variable[6] = once_value_40;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)) /*new String*/;
+    once_value_40 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  variable[6] =  variable[1] /*module_name*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/) /*AbstractArray::add*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_41 != NIT_NULL) variable[6] = once_value_41;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+    once_value_41 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[6]: Result */
+  variable[6] = CALL_mmloader___ModuleLoader___file_type(variable[0])(variable[0]) /*ModuleLoader::file_type*/;
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_42 != NIT_NULL) variable[6] = once_value_42;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_42 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/;
+  variable[4] = variable[5];
+  /* Register variable[5]: Result */
+  variable[5] = CALL_file___String___file_exists( variable[4] /*fname*/)( variable[4] /*fname*/) /*String::file_exists*/;
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    variable[3] =  TAG_Bool(true);
+    goto return_label38;
+  }
+  variable[3] =  TAG_Bool(false);
+  goto return_label38;
+  return_label38: while(false);
+  tracehead = trace.prev;
+  return variable[3];
+}
+val_t mmloader___ModuleLoader___load_and_process_module(val_t  self, val_t  param0, val_t  param1, val_t  param2) {
+  struct trace_t trace = {NULL, NULL, 258, LOCATE_mmloader___ModuleLoader___load_and_process_module};
+  static val_t once_value_44 = NIT_NULL; /* Once value for string variable[7]*/
+  static val_t once_value_45 = NIT_NULL; /* Once value for string variable[7]*/
+  static val_t once_value_46 = NIT_NULL; /* Once value for string variable[7]*/
+  static val_t once_value_47 = NIT_NULL; /* Once value for string variable[7]*/
+  val_t variable[8];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmloader;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Local variable */
+  variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
-  variable[6] = NEW_Array_array___Array___with_capacity(TAG_Int(7)); /*new Array[String]*/
-  variable[7] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[8] = variable[7];
-  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[8]) /*AbstractArray::add*/;
-  variable[9] = CALL_abstractmetamodel___MMDirectory___path( variable[3] /*dir*/)( variable[3] /*dir*/) /*MMDirectory::path*/;
-  variable[10] = variable[9];
-  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[10]) /*AbstractArray::add*/;
-  variable[11] = NEW_String_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)); /*new String*/
-  variable[12] = variable[11];
-  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[12]) /*AbstractArray::add*/;
-  variable[13] =  variable[2] /*module_name*/;
-  variable[13] = CALL_string___Object___to_s(variable[13])(variable[13]) /*Object::to_s*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[13]) /*AbstractArray::add*/;
-  variable[14] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-  variable[15] = variable[14];
-  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[15]) /*AbstractArray::add*/;
-  variable[16] = variable[0];
-  variable[16] = CALL_mmloader___ModuleLoader___file_type(variable[16])(variable[16]) /*ModuleLoader::file_type*/;
-  variable[17] = variable[16];
-  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[17]) /*AbstractArray::add*/;
-  variable[18] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[19] = variable[18];
-  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[19]) /*AbstractArray::add*/;
+  /* Register variable[4]: Method return value and escape marker */
+  /* Register variable[5]: Local variable */
+  variable[6] = NEW_Array_array___Array___with_capacity(TAG_Int(7)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[7]: Once String constant */
+  if (once_value_44 != NIT_NULL) variable[7] = once_value_44;
+  else {
+    variable[7] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_44 = variable[7];
+  }
+  /* Register variable[7]: Result */
+  /* Ensure var variable[7]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+  /* Register variable[7]: Result */
+  variable[7] = CALL_abstractmetamodel___MMDirectory___path( variable[3] /*dir*/)( variable[3] /*dir*/) /*MMDirectory::path*/;
+  /* Ensure var variable[7]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+  /* Register variable[7]: Once String constant */
+  if (once_value_45 != NIT_NULL) variable[7] = once_value_45;
+  else {
+    variable[7] = NEW_String_string___String___with_native(BOX_NativeString("/"), TAG_Int(1)) /*new String*/;
+    once_value_45 = variable[7];
+  }
+  /* Register variable[7]: Result */
+  /* Ensure var variable[7]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+  variable[7] =  variable[2] /*module_name*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/) /*AbstractArray::add*/;
+  /* Register variable[7]: Once String constant */
+  if (once_value_46 != NIT_NULL) variable[7] = once_value_46;
+  else {
+    variable[7] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+    once_value_46 = variable[7];
+  }
+  /* Register variable[7]: Result */
+  /* Ensure var variable[7]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+  /* Register variable[7]: Result */
+  variable[7] = CALL_mmloader___ModuleLoader___file_type(variable[0])(variable[0]) /*ModuleLoader::file_type*/;
+  /* Ensure var variable[7]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+  /* Register variable[7]: Once String constant */
+  if (once_value_47 != NIT_NULL) variable[7] = once_value_47;
+  else {
+    variable[7] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_47 = variable[7];
+  }
+  /* Register variable[7]: Result */
+  /* Ensure var variable[7]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+  /* Register variable[6]: Result */
   variable[6] = CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/;
   variable[5] = variable[6];
-  variable[7] = variable[0];
-  variable[7] = CALL_mmloader___ModuleLoader___load_module(variable[7])(variable[7],  variable[1] /*context*/,  variable[2] /*module_name*/,  variable[3] /*dir*/,  variable[5] /*filename*/) /*ModuleLoader::load_module*/;
+  /* Register variable[6]: Local variable */
+  /* Register variable[7]: Result */
+  variable[7] = CALL_mmloader___ModuleLoader___load_module(variable[0])(variable[0],  variable[1] /*context*/,  variable[2] /*module_name*/,  variable[3] /*dir*/,  variable[5] /*filename*/) /*ModuleLoader::load_module*/;
   variable[6] = variable[7];
+  /* Register variable[7]: Result */
   variable[7] = CALL_mmloader___ToolContext___opt_only_parse( variable[1] /*context*/)( variable[1] /*context*/) /*ToolContext::opt_only_parse*/;
+  /* Register variable[7]: Result */
   variable[7] = CALL_opts___Option___value(variable[7])(variable[7]) /*Option::value*/;
   if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[7])))) { /*if*/
-    variable[7] = variable[0];
-    CALL_mmloader___ModuleLoader___process_metamodel(variable[7])(variable[7],  variable[1] /*context*/,  variable[6] /*m*/) /*ModuleLoader::process_metamodel*/;
+    CALL_mmloader___ModuleLoader___process_metamodel(variable[0])(variable[0],  variable[1] /*context*/,  variable[6] /*m*/) /*ModuleLoader::process_metamodel*/;
   }
   variable[4] =  variable[6] /*m*/;
-  goto return_label17;
-  return_label17: while(false);
+  goto return_label43;
+  return_label43: while(false);
   tracehead = trace.prev;
   return variable[4];
 }
 val_t mmloader___ModuleLoader___load_module(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3) {
-  struct trace_t trace = {NULL, NULL, 264, LOCATE_mmloader___ModuleLoader___load_module};
-  val_t variable[13];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 268, LOCATE_mmloader___ModuleLoader___load_module};
+  static val_t once_value_49 = NIT_NULL; /* Once value for string variable[7]*/
+    static val_t once_value_50 = NIT_NULL; /* Once value for string variable[8]*/
+    static val_t once_value_51 = NIT_NULL; /* Once value for string variable[8]*/
+  val_t variable[9];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
+  /* Register variable[4]: Local variable */
   variable[4] =  param3;
+  /* Register variable[5]: Method return value and escape marker */
+  /* Register variable[6]: Local variable */
   /*variable[6] is variable file*/
-  variable[7] = NEW_String_string___String___with_native(BOX_NativeString("-"), TAG_Int(1)); /*new String*/
+  /* Register variable[7]: Once String constant */
+  if (once_value_49 != NIT_NULL) variable[7] = once_value_49;
+  else {
+    variable[7] = NEW_String_string___String___with_native(BOX_NativeString("-"), TAG_Int(1)) /*new String*/;
+    once_value_49 = variable[7];
+  }
+  /* Register variable[7]: Result */
+  /* Register variable[7]: Result */
   variable[7] = TAG_Bool(( variable[4] /*filename*/ == variable[7]) || (( variable[4] /*filename*/ != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[4] /*filename*/)( variable[4] /*filename*/, variable[7]) /*String::==*/)));
   if (UNTAG_Bool(variable[7])) { /*if*/
-    variable[7] = variable[0];
-    variable[7] = CALL_file___Object___stdin(variable[7])(variable[7]) /*Object::stdin*/;
+    /* Register variable[7]: Result */
+    variable[7] = CALL_file___Object___stdin(variable[0])(variable[0]) /*Object::stdin*/;
     variable[6] = variable[7] /*file=*/;
   } else { /*if*/
+    /* Register variable[7]: Result */
     variable[7] = CALL_string___Object___to_s( variable[4] /*filename*/)( variable[4] /*filename*/) /*String::to_s*/;
-    variable[8] = NEW_IFStream_file___IFStream___open(variable[7]); /*new IFStream*/
-    variable[7] = variable[8];
+    /* Register variable[7]: Result */
+    variable[7] = NEW_IFStream_file___IFStream___open(variable[7]) /*new IFStream*/;
     variable[6] = variable[7] /*file=*/;
   }
+  /* Register variable[7]: Result */
   variable[7] = CALL_stream___IStream___eof( variable[6] /*file*/)( variable[6] /*file*/) /*BufferedIStream::eof*/;
   if (UNTAG_Bool(variable[7])) { /*if*/
-    variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-    variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Error: Problem in opening file "), TAG_Int(31)); /*new String*/
-    variable[9] = variable[8];
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[9]) /*AbstractArray::add*/;
-    variable[10] =  variable[4] /*filename*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[10]) /*AbstractArray::add*/;
-    variable[11] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-    variable[12] = variable[11];
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[12]) /*AbstractArray::add*/;
+    variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[8]: Once String constant */
+    if (once_value_50 != NIT_NULL) variable[8] = once_value_50;
+    else {
+      variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Error: Problem in opening file "), TAG_Int(31)) /*new String*/;
+      once_value_50 = variable[8];
+    }
+    /* Register variable[8]: Result */
+    /* Ensure var variable[8]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+    variable[8] =  variable[4] /*filename*/ /* Ensure var: super-string element*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+    /* Register variable[8]: Once String constant */
+    if (once_value_51 != NIT_NULL) variable[8] = once_value_51;
+    else {
+      variable[8] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+      once_value_51 = variable[8];
+    }
+    /* Register variable[8]: Result */
+    /* Ensure var variable[8]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+    /* Register variable[7]: Result */
     variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
     CALL_mmloader___ToolContext___error( variable[1] /*context*/)( variable[1] /*context*/, variable[7]) /*ToolContext::error*/;
-    variable[7] = variable[0];
     exit(UNTAG_Int( TAG_Int(1)));
-    fprintf(stderr, "Aborted"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_mmloader___ModuleLoader___load_module, LOCATE_mmloader, 277); nit_exit(1);
+    fprintf(stderr, "Aborted"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_mmloader___ModuleLoader___load_module, LOCATE_mmloader, 281); nit_exit(1);
   }
-  variable[8] = variable[0];
-  variable[8] = CALL_mmloader___ModuleLoader___parse_file(variable[8])(variable[8],  variable[1] /*context*/,  variable[6] /*file*/,  variable[4] /*filename*/,  variable[2] /*module_name*/,  variable[3] /*dir*/) /*ModuleLoader::parse_file*/;
+  /* Register variable[7]: Local variable */
+  /* Register variable[8]: Result */
+  variable[8] = CALL_mmloader___ModuleLoader___parse_file(variable[0])(variable[0],  variable[1] /*context*/,  variable[6] /*file*/,  variable[4] /*filename*/,  variable[2] /*module_name*/,  variable[3] /*dir*/) /*ModuleLoader::parse_file*/;
   variable[7] = variable[8];
-  CALL_mmloader___MMModule___filename__eq( variable[7] /*m*/)( variable[7] /*m*/,  variable[4] /*filename*/) /*MMModule::filename=*/;
-  variable[8] = variable[0];
-  variable[8] = CALL_file___Object___stdin(variable[8])(variable[8]) /*Object::stdin*/;
+  /* Register variable[8]: Result */
+  variable[8] = CALL_file___Object___stdin(variable[0])(variable[0]) /*Object::stdin*/;
+  /* Register variable[8]: Result */
   variable[8] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[6] /*file*/ == variable[8]) || (( variable[6] /*file*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[6] /*file*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*file*/,variable[8])):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[6] /*file*/)( variable[6] /*file*/, variable[8]) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[8])) { /*if*/
     CALL_stream___IOS___close( variable[6] /*file*/)( variable[6] /*file*/) /*IFStream::close*/;
   }
   variable[5] =  variable[7] /*m*/;
-  goto return_label18;
-  return_label18: while(false);
+  goto return_label48;
+  return_label48: while(false);
   tracehead = trace.prev;
   return variable[5];
 }
 val_t mmloader___ModuleLoader___parse_file(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4) {
-  struct trace_t trace = {NULL, NULL, 285, LOCATE_mmloader___ModuleLoader___parse_file};
+  struct trace_t trace = {NULL, NULL, 288, LOCATE_mmloader___ModuleLoader___parse_file};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_mmloader, 285);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_mmloader, 288);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 void mmloader___ModuleLoader___process_metamodel(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 288, LOCATE_mmloader___ModuleLoader___process_metamodel};
+  struct trace_t trace = {NULL, NULL, 291, LOCATE_mmloader___ModuleLoader___process_metamodel};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_mmloader, 288);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_mmloader, 291);
   nit_exit(1);
   tracehead = trace.prev;
   return;
@@ -812,82 +1190,54 @@ void mmloader___ModuleLoader___process_metamodel(val_t  self, val_t  param0, val
 void mmloader___ModuleLoader___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 0, LOCATE_mmloader___ModuleLoader___init};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
-  tracehead = trace.prev;
-  return;
-}
-val_t mmloader___MMModule___filename(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 293, LOCATE_mmloader___MMModule___filename};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmloader;
-  tracehead = trace.prev;
-  return ATTR_mmloader___MMModule____filename( self) /*MMModule::_filename*/;
-}
-void mmloader___MMModule___filename__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 293, LOCATE_mmloader___MMModule___filename__eq};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmloader;
-  ATTR_mmloader___MMModule____filename( self) /*MMModule::_filename*/ =  param0;
-  tracehead = trace.prev;
-  return;
-}
-val_t mmloader___MMModule___mtime(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 296, LOCATE_mmloader___MMModule___mtime};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmloader;
-  tracehead = trace.prev;
-  return ATTR_mmloader___MMModule____mtime( self) /*MMModule::_mtime*/;
-}
-void mmloader___MMModule___mtime__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 296, LOCATE_mmloader___MMModule___mtime__eq};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmloader;
-  ATTR_mmloader___MMModule____mtime( self) /*MMModule::_mtime*/ =  param0;
   tracehead = trace.prev;
   return;
 }
 void mmloader___MMModule___import_supers_modules(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 299, LOCATE_mmloader___MMModule___import_supers_modules};
+  struct trace_t trace = {NULL, NULL, 296, LOCATE_mmloader___MMModule___import_supers_modules};
   val_t variable[10];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmloader;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[4] = CALL_abstractmetamodel___MMModule___context(variable[4])(variable[4]) /*MMModule::context*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstractmetamodel___MMModule___context(variable[0])(variable[0]) /*MMModule::context*/;
   variable[3] = variable[4];
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(( variable[3] /*c*/==NIT_NULL) || VAL_ISA( variable[3] /*c*/, COLOR_ToolContext, ID_ToolContext)) /*cast ToolContext*/;
-  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_mmloader___MMModule___import_supers_modules, LOCATE_mmloader, 303); nit_exit(1);}
-  variable[5] = NEW_Array_array___Array___init(); /*new Array[MMModule]*/
+  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_mmloader___MMModule___import_supers_modules, LOCATE_mmloader, 300); nit_exit(1);}
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = NEW_Array_array___Array___init() /*new Array[MMModule]*/;
   variable[4] = variable[5];
+  /* Register variable[5]: For iterator */
   variable[5] = CALL_abstract_collection___Collection___iterator( variable[1] /*names*/)( variable[1] /*names*/) /*Collection::iterator*/;
   while (true) { /*for*/
+    /* Register variable[6]: For 'is_ok' result */
     variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[6])) break; /*for*/
-    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*Iterator::item*/;
+    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[7]: Local variable */
     variable[7] = variable[6];
-    variable[9] = variable[0];
-    variable[9] = CALL_mmloader___ToolContext___get_module( variable[3] /*c*/)( variable[3] /*c*/,  variable[7] /*n*/, variable[9]) /*ToolContext::get_module*/;
+    /* Register variable[8]: Local variable */
+    /* Register variable[9]: Result */
+    variable[9] = CALL_mmloader___ToolContext___get_module( variable[3] /*c*/)( variable[3] /*c*/,  variable[7] /*n*/, variable[0]) /*ToolContext::get_module*/;
     variable[8] = variable[9];
     CALL_abstract_collection___SimpleCollection___add( variable[4] /*supers*/)( variable[4] /*supers*/,  variable[8] /*m*/) /*AbstractArray::add*/;
-    continue_20: while(0);
+    continue_53: while(0);
     CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*Iterator::next*/;
   }
-  break_20: while(0);
-  variable[5] = variable[0];
-  CALL_abstractmetamodel___MMContext___add_module( variable[3] /*c*/)( variable[3] /*c*/, variable[5],  variable[4] /*supers*/) /*MMContext::add_module*/;
-  return_label19: while(false);
+  break_53: while(0);
+  CALL_abstractmetamodel___MMContext___add_module( variable[3] /*c*/)( variable[3] /*c*/, variable[0],  variable[4] /*supers*/) /*MMContext::add_module*/;
+  return_label52: while(false);
   tracehead = trace.prev;
   return;
 }

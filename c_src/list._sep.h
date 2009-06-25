@@ -60,30 +60,30 @@ val_t list___List___count(val_t  self, val_t  param0);
 typedef val_t (* list___List___first_t)(val_t  self);
 val_t list___List___first(val_t  self);
 #define LOCATE_list___List___first "list::List::(abstract_collection::Collection::first)"
+typedef val_t (* list___List_____bra_t)(val_t  self, val_t  param0);
+val_t list___List_____bra(val_t  self, val_t  param0);
+#define LOCATE_list___List_____bra "list::List::(abstract_collection::MapRead::[])"
+typedef val_t (* list___List___has_key_t)(val_t  self, val_t  param0);
+val_t list___List___has_key(val_t  self, val_t  param0);
+#define LOCATE_list___List___has_key "list::List::(abstract_collection::MapRead::has_key)"
+typedef val_t (* list___List___last_t)(val_t  self);
+val_t list___List___last(val_t  self);
+#define LOCATE_list___List___last "list::List::(abstract_collection::IndexedCollectionRead::last)"
 typedef void (* list___List___clear_t)(val_t  self);
 void list___List___clear(val_t  self);
 #define LOCATE_list___List___clear "list::List::(abstract_collection::RemovableCollection::clear)"
 typedef void (* list___List___remove_t)(val_t  self, val_t  param0);
 void list___List___remove(val_t  self, val_t  param0);
 #define LOCATE_list___List___remove "list::List::(abstract_collection::RemovableCollection::remove)"
-typedef val_t (* list___List_____bra_t)(val_t  self, val_t  param0);
-val_t list___List_____bra(val_t  self, val_t  param0);
-#define LOCATE_list___List_____bra "list::List::(abstract_collection::Map::[])"
 typedef void (* list___List_____braeq_t)(val_t  self, val_t  param0, val_t  param1);
 void list___List_____braeq(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_list___List_____braeq "list::List::(abstract_collection::Map::[]=)"
-typedef val_t (* list___List___has_key_t)(val_t  self, val_t  param0);
-val_t list___List___has_key(val_t  self, val_t  param0);
-#define LOCATE_list___List___has_key "list::List::(abstract_collection::Map::has_key)"
 typedef void (* list___List___remove_at_t)(val_t  self, val_t  param0);
 void list___List___remove_at(val_t  self, val_t  param0);
 #define LOCATE_list___List___remove_at "list::List::(abstract_collection::Map::remove_at)"
 typedef void (* list___List___first__eq_t)(val_t  self, val_t  param0);
 void list___List___first__eq(val_t  self, val_t  param0);
 #define LOCATE_list___List___first__eq "list::List::(abstract_collection::IndexedCollection::first=)"
-typedef val_t (* list___List___last_t)(val_t  self);
-val_t list___List___last(val_t  self);
-#define LOCATE_list___List___last "list::List::(abstract_collection::IndexedCollection::last)"
 typedef void (* list___List___last__eq_t)(val_t  self, val_t  param0);
 void list___List___last__eq(val_t  self, val_t  param0);
 #define LOCATE_list___List___last__eq "list::List::(abstract_collection::IndexedCollection::last=)"
@@ -131,9 +131,6 @@ void list___ListIterator___next(val_t  self);
 typedef val_t (* list___ListIterator___is_ok_t)(val_t  self);
 val_t list___ListIterator___is_ok(val_t  self);
 #define LOCATE_list___ListIterator___is_ok "list::ListIterator::(abstract_collection::Iterator::is_ok)"
-typedef void (* list___ListIterator___item__eq_t)(val_t  self, val_t  param0);
-void list___ListIterator___item__eq(val_t  self, val_t  param0);
-#define LOCATE_list___ListIterator___item__eq "list::ListIterator::(abstract_collection::MapIterator::item=)"
 typedef val_t (* list___ListIterator___index_t)(val_t  self);
 val_t list___ListIterator___index(val_t  self);
 #define LOCATE_list___ListIterator___index "list::ListIterator::(abstract_collection::IndexedIterator::index)"

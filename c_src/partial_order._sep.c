@@ -3,13 +3,16 @@
 val_t partial_order___PartialOrder___iterator(val_t  self) {
   struct trace_t trace = {NULL, NULL, 54, LOCATE_partial_order___PartialOrder___iterator};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_partial_order___PartialOrder____elements_list(variable[2]) /*PartialOrder::_elements_list*/;
-  variable[2] = CALL_abstract_collection___Collection___iterator(variable[2])(variable[2]) /*AbstractArray::iterator*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_partial_order___PartialOrder____elements_list(variable[0]) /*PartialOrder::_elements_list*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___Collection___iterator(variable[2])(variable[2]) /*AbstractArrayRead::iterator*/;
   variable[1] = variable[2];
   goto return_label0;
   return_label0: while(false);
@@ -19,12 +22,15 @@ val_t partial_order___PartialOrder___iterator(val_t  self) {
 val_t partial_order___PartialOrder___is_empty(val_t  self) {
   struct trace_t trace = {NULL, NULL, 35, LOCATE_partial_order___PartialOrder___is_empty};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_partial_order___PartialOrder____elements(variable[2]) /*PartialOrder::_elements*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_partial_order___PartialOrder____elements(variable[0]) /*PartialOrder::_elements*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_abstract_collection___Collection___is_empty(variable[2])(variable[2]) /*Collection::is_empty*/;
   variable[1] = variable[2];
   goto return_label1;
@@ -35,12 +41,15 @@ val_t partial_order___PartialOrder___is_empty(val_t  self) {
 val_t partial_order___PartialOrder___length(val_t  self) {
   struct trace_t trace = {NULL, NULL, 37, LOCATE_partial_order___PartialOrder___length};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_partial_order___PartialOrder____elements(variable[2]) /*PartialOrder::_elements*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_partial_order___PartialOrder____elements(variable[0]) /*PartialOrder::_elements*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_abstract_collection___Collection___length(variable[2])(variable[2]) /*Collection::length*/;
   variable[1] = variable[2];
   goto return_label2;
@@ -51,14 +60,18 @@ val_t partial_order___PartialOrder___length(val_t  self) {
 val_t partial_order___PartialOrder___has(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 41, LOCATE_partial_order___PartialOrder___has};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_partial_order___PartialOrder____elements(variable[3]) /*PartialOrder::_elements*/;
-  variable[3] = CALL_abstract_collection___Map___has_key(variable[3])(variable[3],  variable[1] /*e*/) /*Map::has_key*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_partial_order___PartialOrder____elements(variable[0]) /*PartialOrder::_elements*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___MapRead___has_key(variable[3])(variable[3],  variable[1] /*e*/) /*MapRead::has_key*/;
   variable[2] = variable[3];
   goto return_label3;
   return_label3: while(false);
@@ -67,24 +80,31 @@ val_t partial_order___PartialOrder___has(val_t  self, val_t  param0) {
 }
 val_t partial_order___PartialOrder___has_only(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 43, LOCATE_partial_order___PartialOrder___has_only};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_partial_order___PartialOrder____elements(variable[3]) /*PartialOrder::_elements*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_partial_order___PartialOrder____elements(variable[0]) /*PartialOrder::_elements*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*Collection::length*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool((variable[3])==( TAG_Int(1)));
-  variable[4] = variable[3];
-  if (UNTAG_Bool(variable[4])) { /* and */
-    variable[4] = variable[0];
-    variable[4] = ATTR_partial_order___PartialOrder____elements(variable[4]) /*PartialOrder::_elements*/;
-    variable[4] = CALL_abstract_collection___Collection___first(variable[4])(variable[4]) /*Collection::first*/;
-    variable[4] = TAG_Bool((variable[4] ==  variable[1] /*e*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], variable[1] /*e*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  variable[1] /*e*/) /*Object::==*/)))));
+  /* Ensure var variable[3]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[3])) { /* and */
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_partial_order___PartialOrder____elements(variable[0]) /*PartialOrder::_elements*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_abstract_collection___Collection___first(variable[3])(variable[3]) /*Collection::first*/;
+    /* Register variable[3]: Result */
+    variable[3] = TAG_Bool((variable[3] ==  variable[1] /*e*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*e*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  variable[1] /*e*/) /*Object::==*/)))));
   }
-  variable[3] = variable[4];
+  /* Register variable[3]: Result */
   variable[2] = variable[3];
   goto return_label4;
   return_label4: while(false);
@@ -94,13 +114,16 @@ val_t partial_order___PartialOrder___has_only(val_t  self, val_t  param0) {
 val_t partial_order___PartialOrder___count(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 45, LOCATE_partial_order___PartialOrder___count};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_abstract_collection___Collection___has(variable[3])(variable[3],  variable[1] /*e*/) /*PartialOrder::has*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___Collection___has(variable[0])(variable[0],  variable[1] /*e*/) /*PartialOrder::has*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[2] =  TAG_Int(1);
     goto return_label5;
@@ -115,13 +138,16 @@ val_t partial_order___PartialOrder___count(val_t  self, val_t  param0) {
 val_t partial_order___PartialOrder___first(val_t  self) {
   struct trace_t trace = {NULL, NULL, 39, LOCATE_partial_order___PartialOrder___first};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_partial_order___PartialOrder____elements_list(variable[2]) /*PartialOrder::_elements_list*/;
-  variable[2] = CALL_abstract_collection___Collection___first(variable[2])(variable[2]) /*IndexedCollection::first*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_partial_order___PartialOrder____elements_list(variable[0]) /*PartialOrder::_elements_list*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___Collection___first(variable[2])(variable[2]) /*IndexedCollectionRead::first*/;
   variable[1] = variable[2];
   goto return_label6;
   return_label6: while(false);
@@ -131,7 +157,7 @@ val_t partial_order___PartialOrder___first(val_t  self) {
 val_t partial_order___PartialOrder___roots(val_t  self) {
   struct trace_t trace = {NULL, NULL, 30, LOCATE_partial_order___PartialOrder___roots};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
   tracehead = trace.prev;
@@ -140,63 +166,73 @@ val_t partial_order___PartialOrder___roots(val_t  self) {
 val_t partial_order___PartialOrder_____bra(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 58, LOCATE_partial_order___PartialOrder_____bra};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_partial_order___PartialOrder____elements(variable[3]) /*PartialOrder::_elements*/;
-  variable[3] = CALL_abstract_collection___Map___has_key(variable[3])(variable[3],  variable[1] /*e*/) /*Map::has_key*/;
-  if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = variable[0];
-    variable[3] = ATTR_partial_order___PartialOrder____elements(variable[3]) /*PartialOrder::_elements*/;
-    variable[3] = CALL_abstract_collection___Map_____bra(variable[3])(variable[3],  variable[1] /*e*/) /*Map::[]*/;
-    variable[2] = variable[3];
-    goto return_label7;
-  } else { /*if*/
-    variable[2] =  NIT_NULL /*null*/;
-    goto return_label7;
-  }
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_partial_order___PartialOrder____elements(variable[0]) /*PartialOrder::_elements*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___MapRead_____bra(variable[3])(variable[3],  variable[1] /*e*/) /*MapRead::[]*/;
+  variable[2] = variable[3];
+  goto return_label7;
   return_label7: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t partial_order___PartialOrder___to_dot(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 68, LOCATE_partial_order___PartialOrder___to_dot};
-  val_t variable[11];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 64, LOCATE_partial_order___PartialOrder___to_dot};
+  static val_t once_value_11 = NIT_NULL; /* Once value for string variable[3]*/
+  val_t variable[10];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[3] = NEW_String_string___String___init(); /*new String*/
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = NEW_Buffer_string___Buffer___init() /*new Buffer*/;
   variable[2] = variable[3];
-  variable[3] = variable[0];
-  variable[3] = CALL_partial_order___PartialOrder___to_dot_header(variable[3])(variable[3]) /*PartialOrder::to_dot_header*/;
-  CALL_abstract_collection___IndexedCollection___append( variable[2] /*s*/)( variable[2] /*s*/, variable[3]) /*String::append*/;
-  variable[3] = variable[0];
-  variable[3] = ATTR_partial_order___PartialOrder____elements(variable[3]) /*PartialOrder::_elements*/;
-  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*Map::iterator*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_partial_order___PartialOrder___to_dot_header(variable[0])(variable[0]) /*PartialOrder::to_dot_header*/;
+  CALL_abstract_collection___IndexedCollection___append( variable[2] /*s*/)( variable[2] /*s*/, variable[3]) /*Buffer::append*/;
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_partial_order___PartialOrder____elements(variable[0]) /*PartialOrder::_elements*/;
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*MapRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
-    variable[6] = variable[0];
-    variable[7] = CALL_partial_order___PartialOrderElement___value( variable[5] /*e*/)( variable[5] /*e*/) /*PartialOrderElement::value*/;
-    variable[6] = CALL_partial_order___PartialOrder___to_dot_node(variable[6])(variable[6], variable[7]) /*PartialOrder::to_dot_node*/;
-    CALL_abstract_collection___IndexedCollection___append( variable[2] /*s*/)( variable[2] /*s*/, variable[6]) /*String::append*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_partial_order___PartialOrderElement___value( variable[5] /*e*/)( variable[5] /*e*/) /*PartialOrderElement::value*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_partial_order___PartialOrder___to_dot_node(variable[0])(variable[0], variable[6]) /*PartialOrder::to_dot_node*/;
+    CALL_abstract_collection___IndexedCollection___append( variable[2] /*s*/)( variable[2] /*s*/, variable[6]) /*Buffer::append*/;
+    /* Register variable[6]: Result */
     variable[6] = CALL_partial_order___PartialOrderElement___direct_greaters( variable[5] /*e*/)( variable[5] /*e*/) /*PartialOrderElement::direct_greaters*/;
-    variable[6] = CALL_abstract_collection___Collection___iterator(variable[6])(variable[6]) /*AbstractArray::iterator*/;
+    /* Register variable[6]: For iterator */
+    variable[6] = CALL_abstract_collection___Collection___iterator(variable[6])(variable[6]) /*AbstractArrayRead::iterator*/;
     while (true) { /*for*/
+      /* Register variable[7]: For 'is_ok' result */
       variable[7] = CALL_abstract_collection___Iterator___is_ok(variable[6])(variable[6]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[7])) break; /*for*/
-      variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*ArrayIterator::item*/;
+      variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[8]: Local variable */
       variable[8] = variable[7];
-      variable[9] = variable[0];
-      variable[10] = CALL_partial_order___PartialOrderElement___value( variable[5] /*e*/)( variable[5] /*e*/) /*PartialOrderElement::value*/;
-      variable[9] = CALL_partial_order___PartialOrder___to_dot_edge(variable[9])(variable[9], variable[10],  variable[8] /*d*/) /*PartialOrder::to_dot_edge*/;
-      CALL_abstract_collection___IndexedCollection___append( variable[2] /*s*/)( variable[2] /*s*/, variable[9]) /*String::append*/;
+      /* Register variable[9]: Result */
+      variable[9] = CALL_partial_order___PartialOrderElement___value( variable[5] /*e*/)( variable[5] /*e*/) /*PartialOrderElement::value*/;
+      /* Register variable[9]: Result */
+      variable[9] = CALL_partial_order___PartialOrder___to_dot_edge(variable[0])(variable[0], variable[9],  variable[8] /*d*/) /*PartialOrder::to_dot_edge*/;
+      CALL_abstract_collection___IndexedCollection___append( variable[2] /*s*/)( variable[2] /*s*/, variable[9]) /*Buffer::append*/;
       continue_10: while(0);
       CALL_abstract_collection___Iterator___next(variable[6])(variable[6]) /*ArrayIterator::next*/;
     }
@@ -205,725 +241,912 @@ val_t partial_order___PartialOrder___to_dot(val_t  self) {
     CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*Iterator::next*/;
   }
   break_9: while(0);
-  variable[3] = NEW_String_string___String___with_native(BOX_NativeString("}\n"), TAG_Int(2)); /*new String*/
-  CALL_abstract_collection___IndexedCollection___append( variable[2] /*s*/)( variable[2] /*s*/, variable[3]) /*String::append*/;
-  variable[1] =  variable[2] /*s*/;
+  /* Register variable[3]: Once String constant */
+  if (once_value_11 != NIT_NULL) variable[3] = once_value_11;
+  else {
+    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("}\n"), TAG_Int(2)) /*new String*/;
+    once_value_11 = variable[3];
+  }
+  /* Register variable[3]: Result */
+  CALL_abstract_collection___IndexedCollection___append( variable[2] /*s*/)( variable[2] /*s*/, variable[3]) /*Buffer::append*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_string___Object___to_s( variable[2] /*s*/)( variable[2] /*s*/) /*Buffer::to_s*/;
+  variable[1] = variable[3];
   goto return_label8;
   return_label8: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t partial_order___PartialOrder___to_dot_header(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 83, LOCATE_partial_order___PartialOrder___to_dot_header};
+  struct trace_t trace = {NULL, NULL, 79, LOCATE_partial_order___PartialOrder___to_dot_header};
+  static val_t once_value_13 = NIT_NULL; /* Once value for string variable[2]*/
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = NEW_String_string___String___with_native(BOX_NativeString("digraph G {\ngraph [rankdir=BT];\n"), TAG_Int(32)); /*new String*/
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Once String constant */
+  if (once_value_13 != NIT_NULL) variable[2] = once_value_13;
+  else {
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("digraph G {\ngraph [rankdir=BT];\n"), TAG_Int(32)) /*new String*/;
+    once_value_13 = variable[2];
+  }
+  /* Register variable[2]: Result */
   variable[1] = variable[2];
-  goto return_label11;
-  return_label11: while(false);
+  goto return_label12;
+  return_label12: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t partial_order___PartialOrder___to_dot_node(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 89, LOCATE_partial_order___PartialOrder___to_dot_node};
-  val_t variable[9];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 85, LOCATE_partial_order___PartialOrder___to_dot_node};
+  static val_t once_value_15 = NIT_NULL; /* Once value for string variable[4]*/
+  static val_t once_value_16 = NIT_NULL; /* Once value for string variable[4]*/
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-  variable[4] = NEW_String_string___String___with_native(BOX_NativeString("\""), TAG_Int(1)); /*new String*/
-  variable[5] = variable[4];
-  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[5]) /*AbstractArray::add*/;
-  variable[6] =  variable[1] /*e*/;
-  variable[6] = CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[6]) /*AbstractArray::add*/;
-  variable[7] = NEW_String_string___String___with_native(BOX_NativeString("\";\n"), TAG_Int(3)); /*new String*/
-  variable[8] = variable[7];
-  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[8]) /*AbstractArray::add*/;
+  /* Register variable[2]: Method return value and escape marker */
+  variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[4]: Once String constant */
+  if (once_value_15 != NIT_NULL) variable[4] = once_value_15;
+  else {
+    variable[4] = NEW_String_string___String___with_native(BOX_NativeString("\""), TAG_Int(1)) /*new String*/;
+    once_value_15 = variable[4];
+  }
+  /* Register variable[4]: Result */
+  /* Ensure var variable[4]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
+  variable[4] =  variable[1] /*e*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], CALL_string___Object___to_s(variable[4])(variable[4]) /*Object::to_s*/) /*AbstractArray::add*/;
+  /* Register variable[4]: Once String constant */
+  if (once_value_16 != NIT_NULL) variable[4] = once_value_16;
+  else {
+    variable[4] = NEW_String_string___String___with_native(BOX_NativeString("\";\n"), TAG_Int(3)) /*new String*/;
+    once_value_16 = variable[4];
+  }
+  /* Register variable[4]: Result */
+  /* Ensure var variable[4]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_string___Object___to_s(variable[3])(variable[3]) /*Object::to_s*/;
   variable[2] = variable[3];
-  goto return_label12;
-  return_label12: while(false);
-  tracehead = trace.prev;
-  return variable[2];
-}
-val_t partial_order___PartialOrder___to_dot_edge(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 95, LOCATE_partial_order___PartialOrder___to_dot_edge};
-  val_t variable[13];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_partial_order;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[2] =  param1;
-  variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-  variable[5] = NEW_String_string___String___with_native(BOX_NativeString("\""), TAG_Int(1)); /*new String*/
-  variable[6] = variable[5];
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[6]) /*AbstractArray::add*/;
-  variable[7] =  variable[1] /*e1*/;
-  variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[7]) /*AbstractArray::add*/;
-  variable[8] = NEW_String_string___String___with_native(BOX_NativeString("\" -> \""), TAG_Int(6)); /*new String*/
-  variable[9] = variable[8];
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[9]) /*AbstractArray::add*/;
-  variable[10] =  variable[2] /*e2*/;
-  variable[10] = CALL_string___Object___to_s(variable[10])(variable[10]) /*Object::to_s*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[10]) /*AbstractArray::add*/;
-  variable[11] = NEW_String_string___String___with_native(BOX_NativeString("\";\n"), TAG_Int(3)); /*new String*/
-  variable[12] = variable[11];
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[12]) /*AbstractArray::add*/;
-  variable[4] = CALL_string___Object___to_s(variable[4])(variable[4]) /*Object::to_s*/;
-  variable[3] = variable[4];
-  goto return_label13;
-  return_label13: while(false);
-  tracehead = trace.prev;
-  return variable[3];
-}
-val_t partial_order___PartialOrder___select_smallests(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 101, LOCATE_partial_order___PartialOrder___select_smallests};
-  val_t variable[10];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_partial_order;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[3] = TAG_Bool(( variable[1] /*c*/ ==  NIT_NULL /*null*/) || (( variable[1] /*c*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*c*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*c*/)( variable[1] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = NEW_Array_array___Array___init(); /*new Array[E]*/
-    variable[2] = variable[3];
-    goto return_label14;
-  }
-  variable[3] = variable[0];
-  variable[3] = CALL_partial_order___PartialOrder___has_all(variable[3])(variable[3],  variable[1] /*c*/) /*PartialOrder::has_all*/;
-  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_partial_order___PartialOrder___select_smallests, LOCATE_partial_order, 105); nit_exit(1);}
-  variable[4] = CALL_abstract_collection___Collection___length( variable[1] /*c*/)( variable[1] /*c*/) /*Collection::length*/;
-  variable[5] = NEW_Array_array___Array___with_capacity(variable[4]); /*new Array[E]*/
-  variable[4] = variable[5];
-  variable[3] = variable[4];
-  variable[5] = CALL_abstract_collection___Collection___length( variable[1] /*c*/)( variable[1] /*c*/) /*Collection::length*/;
-  variable[6] = NEW_Array_array___Array___with_capacity(variable[5]); /*new Array[E]*/
-  variable[5] = variable[6];
-  variable[4] = variable[5];
-  variable[5] = CALL_abstract_collection___Collection___iterator( variable[1] /*c*/)( variable[1] /*c*/) /*Collection::iterator*/;
-  while (true) { /*for*/
-    variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*Iterator::is_ok*/;
-    if (!UNTAG_Bool(variable[6])) break; /*for*/
-    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*Iterator::item*/;
-    variable[7] = variable[6];
-    variable[9] = variable[0];
-    variable[9] = CALL_partial_order___PartialOrder___add_to_smallests(variable[9])(variable[9],  variable[7] /*e*/,  variable[3] /*res*/,  variable[4] /*tmp*/) /*PartialOrder::add_to_smallests*/;
-    variable[8] = variable[9];
-    if (UNTAG_Bool( variable[8] /*r*/)) { /*if*/
-      variable[9] =  variable[4] /*tmp*/;
-      variable[4] =  variable[3] /*res*/ /*tmp=*/;
-      variable[3] =  variable[9] /*t*/ /*res=*/;
-    }
-    continue_15: while(0);
-    CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*Iterator::next*/;
-  }
-  break_15: while(0);
-  variable[2] =  variable[3] /*res*/;
   goto return_label14;
   return_label14: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
-val_t partial_order___PartialOrder___add(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 122, LOCATE_partial_order___PartialOrder___add};
-  val_t variable[8];
-  void **closurevariable = NULL;
+val_t partial_order___PartialOrder___to_dot_edge(val_t  self, val_t  param0, val_t  param1) {
+  struct trace_t trace = {NULL, NULL, 91, LOCATE_partial_order___PartialOrder___to_dot_edge};
+  static val_t once_value_18 = NIT_NULL; /* Once value for string variable[5]*/
+  static val_t once_value_19 = NIT_NULL; /* Once value for string variable[5]*/
+  static val_t once_value_20 = NIT_NULL; /* Once value for string variable[5]*/
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
-  variable[4] = variable[0];
-  variable[4] = CALL_abstract_collection___Collection___has(variable[4])(variable[4],  variable[1] /*e*/) /*PartialOrder::has*/;
-  if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[4])))) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_partial_order___PartialOrder___add, LOCATE_partial_order, 125); nit_exit(1);}
+  /* Register variable[3]: Method return value and escape marker */
+  variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[5]: Once String constant */
+  if (once_value_18 != NIT_NULL) variable[5] = once_value_18;
+  else {
+    variable[5] = NEW_String_string___String___with_native(BOX_NativeString("\""), TAG_Int(1)) /*new String*/;
+    once_value_18 = variable[5];
+  }
+  /* Register variable[5]: Result */
+  /* Ensure var variable[5]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+  variable[5] =  variable[1] /*e1*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/) /*AbstractArray::add*/;
+  /* Register variable[5]: Once String constant */
+  if (once_value_19 != NIT_NULL) variable[5] = once_value_19;
+  else {
+    variable[5] = NEW_String_string___String___with_native(BOX_NativeString("\" -> \""), TAG_Int(6)) /*new String*/;
+    once_value_19 = variable[5];
+  }
+  /* Register variable[5]: Result */
+  /* Ensure var variable[5]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+  variable[5] =  variable[2] /*e2*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/) /*AbstractArray::add*/;
+  /* Register variable[5]: Once String constant */
+  if (once_value_20 != NIT_NULL) variable[5] = once_value_20;
+  else {
+    variable[5] = NEW_String_string___String___with_native(BOX_NativeString("\";\n"), TAG_Int(3)) /*new String*/;
+    once_value_20 = variable[5];
+  }
+  /* Register variable[5]: Result */
+  /* Ensure var variable[5]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_string___Object___to_s(variable[4])(variable[4]) /*Object::to_s*/;
+  variable[3] = variable[4];
+  goto return_label17;
+  return_label17: while(false);
+  tracehead = trace.prev;
+  return variable[3];
+}
+val_t partial_order___PartialOrder___select_smallests(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 97, LOCATE_partial_order___PartialOrder___select_smallests};
+  val_t variable[10];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = TAG_Bool(( variable[1] /*c*/ ==  NIT_NULL /*null*/) || (( variable[1] /*c*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*c*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*c*/)( variable[1] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[3])) { /*if*/
+    /* Register variable[3]: Result */
+    variable[3] = NEW_Array_array___Array___init() /*new Array[E]*/;
+    variable[2] = variable[3];
+    goto return_label21;
+  }
+  /* Register variable[3]: Result */
+  variable[3] = CALL_partial_order___PartialOrder___has_all(variable[0])(variable[0],  variable[1] /*c*/) /*PartialOrder::has_all*/;
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_partial_order___PartialOrder___select_smallests, LOCATE_partial_order, 101); nit_exit(1);}
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstract_collection___Collection___length( variable[1] /*c*/)( variable[1] /*c*/) /*Collection::length*/;
+  /* Register variable[4]: Result */
+  variable[4] = NEW_Array_array___Array___with_capacity(variable[4]) /*new Array[E]*/;
+  variable[3] = variable[4];
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = CALL_abstract_collection___Collection___length( variable[1] /*c*/)( variable[1] /*c*/) /*Collection::length*/;
+  /* Register variable[5]: Result */
+  variable[5] = NEW_Array_array___Array___with_capacity(variable[5]) /*new Array[E]*/;
+  variable[4] = variable[5];
+  /* Register variable[5]: For iterator */
+  variable[5] = CALL_abstract_collection___Collection___iterator( variable[1] /*c*/)( variable[1] /*c*/) /*Collection::iterator*/;
+  while (true) { /*for*/
+    /* Register variable[6]: For 'is_ok' result */
+    variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*Iterator::is_ok*/;
+    if (!UNTAG_Bool(variable[6])) break; /*for*/
+    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[7]: Local variable */
+    variable[7] = variable[6];
+    /* Register variable[8]: Local variable */
+    /* Register variable[9]: Result */
+    variable[9] = CALL_partial_order___PartialOrder___add_to_smallests(variable[0])(variable[0],  variable[7] /*e*/,  variable[3] /*res*/,  variable[4] /*tmp*/) /*PartialOrder::add_to_smallests*/;
+    variable[8] = variable[9];
+    if (UNTAG_Bool( variable[8] /*r*/)) { /*if*/
+      /* Register variable[9]: Local variable */
+      variable[9] =  variable[4] /*tmp*/;
+      variable[4] =  variable[3] /*res*/ /*tmp=*/;
+      variable[3] =  variable[9] /*t*/ /*res=*/;
+    }
+    continue_22: while(0);
+    CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*Iterator::next*/;
+  }
+  break_22: while(0);
+  variable[2] =  variable[3] /*res*/;
+  goto return_label21;
+  return_label21: while(false);
+  tracehead = trace.prev;
+  return variable[2];
+}
+val_t partial_order___PartialOrder___add(val_t  self, val_t  param0, val_t  param1) {
+  struct trace_t trace = {NULL, NULL, 118, LOCATE_partial_order___PartialOrder___add};
+  val_t variable[7];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Local variable */
+  variable[2] =  param1;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstract_collection___Collection___has(variable[0])(variable[0],  variable[1] /*e*/) /*PartialOrder::has*/;
+  if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[4])))) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_partial_order___PartialOrder___add, LOCATE_partial_order, 121); nit_exit(1);}
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(( variable[2] /*supers*/ ==  NIT_NULL /*null*/) || (( variable[2] /*supers*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[2] /*supers*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*supers*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[2] /*supers*/)( variable[2] /*supers*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  variable[5] = variable[4];
-  if (!UNTAG_Bool(variable[5])) { /* or */
-    variable[5] = variable[0];
-    variable[5] = CALL_partial_order___PartialOrder___has_all(variable[5])(variable[5],  variable[2] /*supers*/) /*PartialOrder::has_all*/;
+  /* Ensure var variable[4]: Left 'or' operand*/
+  if (!UNTAG_Bool(variable[4])) { /* or */
+    /* Register variable[4]: Result */
+    variable[4] = CALL_partial_order___PartialOrder___has_all(variable[0])(variable[0],  variable[2] /*supers*/) /*PartialOrder::has_all*/;
   }
+  /* Register variable[4]: Result */
+  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_partial_order___PartialOrder___add, LOCATE_partial_order, 122); nit_exit(1);}
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = CALL_partial_order___PartialOrder___select_smallests(variable[0])(variable[0],  variable[2] /*supers*/) /*PartialOrder::select_smallests*/;
   variable[4] = variable[5];
-  if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_partial_order___PartialOrder___add, LOCATE_partial_order, 126); nit_exit(1);}
-  variable[5] = variable[0];
-  variable[5] = CALL_partial_order___PartialOrder___select_smallests(variable[5])(variable[5],  variable[2] /*supers*/) /*PartialOrder::select_smallests*/;
-  variable[4] = variable[5];
-  variable[6] = variable[0];
-  variable[6] = CALL_partial_order___PartialOrder___new_poe(variable[6])(variable[6],  variable[1] /*e*/,  variable[4] /*directs*/) /*PartialOrder::new_poe*/;
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
+  variable[6] = CALL_partial_order___PartialOrder___new_poe(variable[0])(variable[0],  variable[1] /*e*/,  variable[4] /*directs*/) /*PartialOrder::new_poe*/;
   variable[5] = variable[6];
-  variable[6] = variable[0];
-  variable[6] = ATTR_partial_order___PartialOrder____elements(variable[6]) /*PartialOrder::_elements*/;
+  /* Register variable[6]: Result */
+  variable[6] = ATTR_partial_order___PartialOrder____elements(variable[0]) /*PartialOrder::_elements*/;
   CALL_abstract_collection___Map_____braeq(variable[6])(variable[6],  variable[1] /*e*/,  variable[5] /*poe*/) /*Map::[]=*/;
-  variable[6] = variable[0];
-  variable[6] = ATTR_partial_order___PartialOrder____elements_list(variable[6]) /*PartialOrder::_elements_list*/;
+  /* Register variable[6]: Result */
+  variable[6] = ATTR_partial_order___PartialOrder____elements_list(variable[0]) /*PartialOrder::_elements_list*/;
   CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6],  variable[1] /*e*/) /*AbstractArray::add*/;
+  /* Register variable[6]: Result */
   variable[6] = TAG_Bool(( variable[2] /*supers*/ ==  NIT_NULL /*null*/) || (( variable[2] /*supers*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[2] /*supers*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*supers*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[2] /*supers*/)( variable[2] /*supers*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  variable[7] = variable[6];
-  if (!UNTAG_Bool(variable[7])) { /* or */
-    variable[7] = CALL_abstract_collection___Collection___is_empty( variable[2] /*supers*/)( variable[2] /*supers*/) /*Collection::is_empty*/;
+  /* Ensure var variable[6]: Left 'or' operand*/
+  if (!UNTAG_Bool(variable[6])) { /* or */
+    /* Register variable[6]: Result */
+    variable[6] = CALL_abstract_collection___Collection___is_empty( variable[2] /*supers*/)( variable[2] /*supers*/) /*Collection::is_empty*/;
   }
-  variable[6] = variable[7];
+  /* Register variable[6]: Result */
   if (UNTAG_Bool(variable[6])) { /*if*/
-    variable[6] = variable[0];
-    variable[6] = ATTR_partial_order___PartialOrder____roots(variable[6]) /*PartialOrder::_roots*/;
+    /* Register variable[6]: Result */
+    variable[6] = ATTR_partial_order___PartialOrder____roots(variable[0]) /*PartialOrder::_roots*/;
     CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6],  variable[1] /*e*/) /*AbstractArray::add*/;
   }
   variable[3] =  variable[5] /*poe*/;
-  goto return_label16;
-  return_label16: while(false);
+  goto return_label23;
+  return_label23: while(false);
   tracehead = trace.prev;
   return variable[3];
 }
 val_t partial_order___PartialOrder___has_all(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 137, LOCATE_partial_order___PartialOrder___has_all};
+  struct trace_t trace = {NULL, NULL, 133, LOCATE_partial_order___PartialOrder___has_all};
   val_t variable[7];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: For iterator */
   variable[3] = CALL_abstract_collection___Collection___iterator( variable[1] /*e*/)( variable[1] /*e*/) /*Collection::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
-    variable[6] = variable[0];
-    variable[6] = CALL_abstract_collection___Collection___has(variable[6])(variable[6],  variable[5] /*i*/) /*PartialOrder::has*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_abstract_collection___Collection___has(variable[0])(variable[0],  variable[5] /*i*/) /*PartialOrder::has*/;
     if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[6])))) { /*if*/
       variable[2] =  TAG_Bool(false);
-      goto return_label17;
+      goto return_label24;
     }
-    continue_18: while(0);
+    continue_25: while(0);
     CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*Iterator::next*/;
   }
-  break_18: while(0);
+  break_25: while(0);
   variable[2] =  TAG_Bool(true);
-  goto return_label17;
-  return_label17: while(false);
+  goto return_label24;
+  return_label24: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t partial_order___PartialOrder___new_poe(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 148, LOCATE_partial_order___PartialOrder___new_poe};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 144, LOCATE_partial_order___PartialOrder___new_poe};
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
-  variable[4] = variable[0];
-  variable[5] = NEW_PartialOrderElement_partial_order___PartialOrderElement___init(variable[4],  variable[1] /*e*/,  variable[2] /*directs*/); /*new PartialOrderElement[E]*/
-  variable[4] = variable[5];
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Result */
+  variable[4] = NEW_PartialOrderElement_partial_order___PartialOrderElement___init(variable[0],  variable[1] /*e*/,  variable[2] /*directs*/) /*new PartialOrderElement[E]*/;
   variable[3] = variable[4];
-  goto return_label19;
-  return_label19: while(false);
+  goto return_label26;
+  return_label26: while(false);
   tracehead = trace.prev;
   return variable[3];
 }
 val_t partial_order___PartialOrder___add_to_smallests(val_t  self, val_t  param0, val_t  param1, val_t  param2) {
-  struct trace_t trace = {NULL, NULL, 154, LOCATE_partial_order___PartialOrder___add_to_smallests};
+  struct trace_t trace = {NULL, NULL, 150, LOCATE_partial_order___PartialOrder___add_to_smallests};
   val_t variable[10];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
+  /* Register variable[4]: Method return value and escape marker */
   CALL_abstract_collection___RemovableCollection___clear( variable[3] /*to*/)( variable[3] /*to*/) /*AbstractArray::clear*/;
-  variable[6] = variable[0];
-  variable[6] = CALL_partial_order___PartialOrder_____bra(variable[6])(variable[6],  variable[1] /*e*/) /*PartialOrder::[]*/;
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
+  variable[6] = CALL_partial_order___PartialOrder_____bra(variable[0])(variable[0],  variable[1] /*e*/) /*PartialOrder::[]*/;
   variable[5] = variable[6];
-  variable[6] = CALL_abstract_collection___Collection___iterator( variable[2] /*from*/)( variable[2] /*from*/) /*AbstractArray::iterator*/;
+  /* Register variable[6]: For iterator */
+  variable[6] = CALL_abstract_collection___Collection___iterator( variable[2] /*from*/)( variable[2] /*from*/) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[7]: For 'is_ok' result */
     variable[7] = CALL_abstract_collection___Iterator___is_ok(variable[6])(variable[6]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[7])) break; /*for*/
-    variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*ArrayIterator::item*/;
+    variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[8]: Local variable */
     variable[8] = variable[7];
+    /* Register variable[9]: Result */
     variable[9] = CALL_partial_order___PartialOrderElement_____g( variable[5] /*poe*/)( variable[5] /*poe*/,  variable[8] /*i*/) /*PartialOrderElement::>*/;
     if (UNTAG_Bool(variable[9])) { /*if*/
       variable[4] =  TAG_Bool(false);
-      goto return_label20;
+      goto return_label27;
     }
+    /* Register variable[9]: Result */
     variable[9] = CALL_partial_order___PartialOrderElement_____l( variable[5] /*poe*/)( variable[5] /*poe*/,  variable[8] /*i*/) /*PartialOrderElement::<*/;
     if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[9])))) { /*if*/
       CALL_abstract_collection___SimpleCollection___add( variable[3] /*to*/)( variable[3] /*to*/,  variable[8] /*i*/) /*AbstractArray::add*/;
     }
-    continue_21: while(0);
+    continue_28: while(0);
     CALL_abstract_collection___Iterator___next(variable[6])(variable[6]) /*ArrayIterator::next*/;
   }
-  break_21: while(0);
+  break_28: while(0);
   CALL_abstract_collection___SimpleCollection___add( variable[3] /*to*/)( variable[3] /*to*/,  variable[1] /*e*/) /*AbstractArray::add*/;
   variable[4] =  TAG_Bool(true);
-  goto return_label20;
-  return_label20: while(false);
+  goto return_label27;
+  return_label27: while(false);
   tracehead = trace.prev;
   return variable[4];
 }
 void partial_order___PartialOrder___compute_smallers_for(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 175, LOCATE_partial_order___PartialOrder___compute_smallers_for};
+  struct trace_t trace = {NULL, NULL, 171, LOCATE_partial_order___PartialOrder___compute_smallers_for};
   val_t variable[9];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
   variable[5] = CALL_partial_order___PartialOrderElement___value( variable[1] /*poe*/)( variable[1] /*poe*/) /*PartialOrderElement::value*/;
   variable[4] = variable[5];
-  variable[5] = variable[0];
-  variable[5] = ATTR_partial_order___PartialOrder____elements(variable[5]) /*PartialOrder::_elements*/;
-  variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*Map::iterator*/;
+  /* Register variable[5]: Result */
+  variable[5] = ATTR_partial_order___PartialOrder____elements(variable[0]) /*PartialOrder::_elements*/;
+  /* Register variable[5]: For iterator */
+  variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*MapRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[6]: For 'is_ok' result */
     variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[6])) break; /*for*/
-    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*Iterator::item*/;
+    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[7]: Local variable */
     variable[7] = variable[6];
+    /* Register variable[8]: Result */
     variable[8] = CALL_partial_order___PartialOrderElement_____l( variable[7] /*s*/)( variable[7] /*s*/,  variable[4] /*e*/) /*PartialOrderElement::<*/;
     if (UNTAG_Bool(variable[8])) { /*if*/
+      /* Register variable[8]: Result */
       variable[8] = CALL_partial_order___PartialOrderElement___value( variable[7] /*s*/)( variable[7] /*s*/) /*PartialOrderElement::value*/;
       CALL_abstract_collection___SimpleCollection___add( variable[2] /*set*/)( variable[2] /*set*/, variable[8]) /*SimpleCollection::add*/;
     }
-    continue_23: while(0);
+    continue_30: while(0);
     CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*Iterator::next*/;
   }
-  break_23: while(0);
-  return_label22: while(false);
+  break_30: while(0);
+  return_label29: while(false);
   tracehead = trace.prev;
   return;
 }
 void partial_order___PartialOrder___init(val_t  self, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 185, LOCATE_partial_order___PartialOrder___init};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 181, LOCATE_partial_order___PartialOrder___init};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PartialOrder].i]) return;
-  variable[2] = variable[0];
-  variable[3] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[E, PartialOrderElement[E]]*/
-  ATTR_partial_order___PartialOrder____elements(variable[2]) /*PartialOrder::_elements*/ = variable[3];
-  variable[2] = variable[0];
-  variable[3] = NEW_Array_array___Array___init(); /*new Array[E]*/
-  ATTR_partial_order___PartialOrder____elements_list(variable[2]) /*PartialOrder::_elements_list*/ = variable[3];
-  variable[2] = variable[0];
-  variable[3] = NEW_Array_array___Array___init(); /*new Array[E]*/
-  ATTR_partial_order___PartialOrder____roots(variable[2]) /*PartialOrder::_roots*/ = variable[3];
-  return_label24: while(false);
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = NEW_HashMap_hash___HashMap___init() /*new HashMap[E, PartialOrderElement[E]]*/;
+  ATTR_partial_order___PartialOrder____elements(variable[0]) /*PartialOrder::_elements*/ = variable[2];
+  /* Register variable[2]: Result */
+  variable[2] = NEW_Array_array___Array___init() /*new Array[E]*/;
+  ATTR_partial_order___PartialOrder____elements_list(variable[0]) /*PartialOrder::_elements_list*/ = variable[2];
+  /* Register variable[2]: Result */
+  variable[2] = NEW_Array_array___Array___init() /*new Array[E]*/;
+  ATTR_partial_order___PartialOrder____roots(variable[0]) /*PartialOrder::_roots*/ = variable[2];
+  return_label31: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PartialOrder].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t partial_order___PartialOrderElement___order(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 194, LOCATE_partial_order___PartialOrderElement___order};
+  struct trace_t trace = {NULL, NULL, 190, LOCATE_partial_order___PartialOrderElement___order};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
   tracehead = trace.prev;
   return ATTR_partial_order___PartialOrderElement____order( self) /*PartialOrderElement::_order*/;
 }
 val_t partial_order___PartialOrderElement___value(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 197, LOCATE_partial_order___PartialOrderElement___value};
+  struct trace_t trace = {NULL, NULL, 193, LOCATE_partial_order___PartialOrderElement___value};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
   tracehead = trace.prev;
   return ATTR_partial_order___PartialOrderElement____value( self) /*PartialOrderElement::_value*/;
 }
 val_t partial_order___PartialOrderElement___rank(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 200, LOCATE_partial_order___PartialOrderElement___rank};
+  struct trace_t trace = {NULL, NULL, 196, LOCATE_partial_order___PartialOrderElement___rank};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
   tracehead = trace.prev;
   return ATTR_partial_order___PartialOrderElement____rank( self) /*PartialOrderElement::_rank*/;
 }
 val_t partial_order___PartialOrderElement___direct_greaters(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 206, LOCATE_partial_order___PartialOrderElement___direct_greaters};
+  struct trace_t trace = {NULL, NULL, 202, LOCATE_partial_order___PartialOrderElement___direct_greaters};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
   tracehead = trace.prev;
   return ATTR_partial_order___PartialOrderElement____direct_greaters( self) /*PartialOrderElement::_direct_greaters*/;
 }
 val_t partial_order___PartialOrderElement___direct_smallers(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 209, LOCATE_partial_order___PartialOrderElement___direct_smallers};
+  struct trace_t trace = {NULL, NULL, 205, LOCATE_partial_order___PartialOrderElement___direct_smallers};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
   tracehead = trace.prev;
   return ATTR_partial_order___PartialOrderElement____direct_smallers( self) /*PartialOrderElement::_direct_smallers*/;
 }
 val_t partial_order___PartialOrderElement___greaters(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 212, LOCATE_partial_order___PartialOrderElement___greaters};
+  struct trace_t trace = {NULL, NULL, 208, LOCATE_partial_order___PartialOrderElement___greaters};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
   tracehead = trace.prev;
   return ATTR_partial_order___PartialOrderElement____greaters( self) /*PartialOrderElement::_greaters*/;
 }
 val_t partial_order___PartialOrderElement___greaters_and_self(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 218, LOCATE_partial_order___PartialOrderElement___greaters_and_self};
+  struct trace_t trace = {NULL, NULL, 214, LOCATE_partial_order___PartialOrderElement___greaters_and_self};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_partial_order___PartialOrderElement____greaters_and_self_cache(variable[2]) /*PartialOrderElement::_greaters_and_self_cache*/;
-  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*AbstractArray::==*/)));
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_partial_order___PartialOrderElement____greaters_and_self_cache(variable[0]) /*PartialOrderElement::_greaters_and_self_cache*/;
+  /* Register variable[2]: Result */
+  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*AbstractArrayRead::==*/)));
   if (UNTAG_Bool(variable[2])) { /*if*/
-    variable[2] = variable[0];
-    variable[3] = variable[0];
-    variable[3] = ATTR_partial_order___PartialOrderElement____greaters(variable[3]) /*PartialOrderElement::_greaters*/;
-    variable[3] = CALL_array___Collection___to_a(variable[3])(variable[3]) /*Collection::to_a*/;
-    ATTR_partial_order___PartialOrderElement____greaters_and_self_cache(variable[2]) /*PartialOrderElement::_greaters_and_self_cache*/ = variable[3];
-    variable[2] = variable[0];
-    variable[2] = ATTR_partial_order___PartialOrderElement____greaters_and_self_cache(variable[2]) /*PartialOrderElement::_greaters_and_self_cache*/;
-    variable[3] = variable[0];
-    variable[3] = ATTR_partial_order___PartialOrderElement____value(variable[3]) /*PartialOrderElement::_value*/;
+    /* Register variable[2]: Result */
+    variable[2] = ATTR_partial_order___PartialOrderElement____greaters(variable[0]) /*PartialOrderElement::_greaters*/;
+    /* Register variable[2]: Result */
+    variable[2] = CALL_array___Collection___to_a(variable[2])(variable[2]) /*Collection::to_a*/;
+    ATTR_partial_order___PartialOrderElement____greaters_and_self_cache(variable[0]) /*PartialOrderElement::_greaters_and_self_cache*/ = variable[2];
+    /* Register variable[2]: Result */
+    variable[2] = ATTR_partial_order___PartialOrderElement____greaters_and_self_cache(variable[0]) /*PartialOrderElement::_greaters_and_self_cache*/;
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_partial_order___PartialOrderElement____value(variable[0]) /*PartialOrderElement::_value*/;
     CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[3]) /*AbstractArray::add*/;
   }
-  variable[2] = variable[0];
-  variable[2] = ATTR_partial_order___PartialOrderElement____greaters_and_self_cache(variable[2]) /*PartialOrderElement::_greaters_and_self_cache*/;
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_partial_order___PartialOrderElement____greaters_and_self_cache(variable[0]) /*PartialOrderElement::_greaters_and_self_cache*/;
   variable[1] = variable[2];
-  goto return_label25;
-  return_label25: while(false);
+  goto return_label32;
+  return_label32: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t partial_order___PartialOrderElement___smallers(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 234, LOCATE_partial_order___PartialOrderElement___smallers};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 230, LOCATE_partial_order___PartialOrderElement___smallers};
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_partial_order___PartialOrderElement____smallers_last_length(variable[2]) /*PartialOrderElement::_smallers_last_length*/;
-  variable[3] = variable[0];
-  variable[3] = ATTR_partial_order___PartialOrderElement____order(variable[3]) /*PartialOrderElement::_order*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_partial_order___PartialOrderElement____smallers_last_length(variable[0]) /*PartialOrderElement::_smallers_last_length*/;
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_partial_order___PartialOrderElement____order(variable[0]) /*PartialOrderElement::_order*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*PartialOrder::length*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool(UNTAG_Int(variable[2])<UNTAG_Int(variable[3]));
   if (UNTAG_Bool(variable[2])) { /*if*/
-    variable[2] = variable[0];
-    variable[2] = ATTR_partial_order___PartialOrderElement____order(variable[2]) /*PartialOrderElement::_order*/;
-    variable[3] = variable[0];
-    variable[4] = variable[0];
-    variable[4] = ATTR_partial_order___PartialOrderElement____smallers_cache(variable[4]) /*PartialOrderElement::_smallers_cache*/;
-    CALL_partial_order___PartialOrder___compute_smallers_for(variable[2])(variable[2], variable[3], variable[4]) /*PartialOrder::compute_smallers_for*/;
-    variable[2] = variable[0];
-    variable[3] = variable[0];
-    variable[3] = ATTR_partial_order___PartialOrderElement____order(variable[3]) /*PartialOrderElement::_order*/;
-    variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*PartialOrder::length*/;
-    ATTR_partial_order___PartialOrderElement____smallers_last_length(variable[2]) /*PartialOrderElement::_smallers_last_length*/ = variable[3];
+    /* Register variable[2]: Result */
+    variable[2] = ATTR_partial_order___PartialOrderElement____order(variable[0]) /*PartialOrderElement::_order*/;
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_partial_order___PartialOrderElement____smallers_cache(variable[0]) /*PartialOrderElement::_smallers_cache*/;
+    CALL_partial_order___PartialOrder___compute_smallers_for(variable[2])(variable[2], variable[0], variable[3]) /*PartialOrder::compute_smallers_for*/;
+    /* Register variable[2]: Result */
+    variable[2] = ATTR_partial_order___PartialOrderElement____order(variable[0]) /*PartialOrderElement::_order*/;
+    /* Register variable[2]: Result */
+    variable[2] = CALL_abstract_collection___Collection___length(variable[2])(variable[2]) /*PartialOrder::length*/;
+    ATTR_partial_order___PartialOrderElement____smallers_last_length(variable[0]) /*PartialOrderElement::_smallers_last_length*/ = variable[2];
   }
-  variable[2] = variable[0];
-  variable[2] = ATTR_partial_order___PartialOrderElement____smallers_cache(variable[2]) /*PartialOrderElement::_smallers_cache*/;
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_partial_order___PartialOrderElement____smallers_cache(variable[0]) /*PartialOrderElement::_smallers_cache*/;
   variable[1] = variable[2];
-  goto return_label26;
-  return_label26: while(false);
+  goto return_label33;
+  return_label33: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t partial_order___PartialOrderElement___linear_extension(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 247, LOCATE_partial_order___PartialOrderElement___linear_extension};
+  struct trace_t trace = {NULL, NULL, 243, LOCATE_partial_order___PartialOrderElement___linear_extension};
   val_t variable[12];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_partial_order___PartialOrderElement____linear_extension_cache(variable[2]) /*PartialOrderElement::_linear_extension_cache*/;
-  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*AbstractArray::==*/)));
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_partial_order___PartialOrderElement____linear_extension_cache(variable[0]) /*PartialOrderElement::_linear_extension_cache*/;
+  /* Register variable[2]: Result */
+  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*AbstractArrayRead::==*/)));
   if (UNTAG_Bool(variable[2])) { /*if*/
-    variable[3] = NEW_Array_array___Array___init(); /*new Array[E]*/
+    /* Register variable[2]: Local variable */
+    /* Register variable[3]: Result */
+    variable[3] = NEW_Array_array___Array___init() /*new Array[E]*/;
     variable[2] = variable[3];
-    variable[4] = NEW_Array_array___Array___init(); /*new Array[E]*/
+    /* Register variable[3]: Local variable */
+    /* Register variable[4]: Result */
+    variable[4] = NEW_Array_array___Array___init() /*new Array[E]*/;
     variable[3] = variable[4];
-    variable[4] = variable[0];
-    variable[4] = CALL_partial_order___PartialOrderElement___value(variable[4])(variable[4]) /*PartialOrderElement::value*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_partial_order___PartialOrderElement___value(variable[0])(variable[0]) /*PartialOrderElement::value*/;
     CALL_abstract_collection___SimpleCollection___add( variable[2] /*res*/)( variable[2] /*res*/, variable[4]) /*AbstractArray::add*/;
-    variable[4] = variable[0];
-    variable[4] = CALL_partial_order___PartialOrderElement___direct_greaters(variable[4])(variable[4]) /*PartialOrderElement::direct_greaters*/;
-    variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*AbstractArray::iterator*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_partial_order___PartialOrderElement___direct_greaters(variable[0])(variable[0]) /*PartialOrderElement::direct_greaters*/;
+    /* Register variable[4]: For iterator */
+    variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*AbstractArrayRead::iterator*/;
     while (true) { /*for*/
+      /* Register variable[5]: For 'is_ok' result */
       variable[5] = CALL_abstract_collection___Iterator___is_ok(variable[4])(variable[4]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[5])) break; /*for*/
-      variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/;
+      variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[6]: Local variable */
       variable[6] = variable[5];
-      variable[8] = variable[0];
-      variable[8] = CALL_partial_order___PartialOrderElement___order(variable[8])(variable[8]) /*PartialOrderElement::order*/;
+      /* Register variable[7]: Local variable */
+      /* Register variable[8]: Result */
+      variable[8] = CALL_partial_order___PartialOrderElement___order(variable[0])(variable[0]) /*PartialOrderElement::order*/;
+      /* Register variable[8]: Result */
       variable[8] = CALL_partial_order___PartialOrder_____bra(variable[8])(variable[8],  variable[6] /*s*/) /*PartialOrder::[]*/;
+      /* Register variable[8]: Result */
       variable[8] = CALL_partial_order___PartialOrderElement___linear_extension(variable[8])(variable[8]) /*PartialOrderElement::linear_extension*/;
       variable[7] = variable[8];
       CALL_abstract_collection___RemovableCollection___clear( variable[3] /*res2*/)( variable[3] /*res2*/) /*AbstractArray::clear*/;
-      variable[8] = CALL_abstract_collection___Collection___iterator( variable[2] /*res*/)( variable[2] /*res*/) /*AbstractArray::iterator*/;
+      /* Register variable[8]: For iterator */
+      variable[8] = CALL_abstract_collection___Collection___iterator( variable[2] /*res*/)( variable[2] /*res*/) /*AbstractArrayRead::iterator*/;
       while (true) { /*for*/
+        /* Register variable[9]: For 'is_ok' result */
         variable[9] = CALL_abstract_collection___Iterator___is_ok(variable[8])(variable[8]) /*ArrayIterator::is_ok*/;
         if (!UNTAG_Bool(variable[9])) break; /*for*/
-        variable[9] = CALL_abstract_collection___Iterator___item(variable[8])(variable[8]) /*ArrayIterator::item*/;
+        variable[9] = CALL_abstract_collection___Iterator___item(variable[8])(variable[8]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+        /* Register variable[10]: Local variable */
         variable[10] = variable[9];
-        variable[11] = CALL_abstract_collection___Collection___has( variable[7] /*sl*/)( variable[7] /*sl*/,  variable[10] /*e*/) /*AbstractArray::has*/;
+        /* Register variable[11]: Result */
+        variable[11] = CALL_abstract_collection___Collection___has( variable[7] /*sl*/)( variable[7] /*sl*/,  variable[10] /*e*/) /*AbstractArrayRead::has*/;
         if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[11])))) { /*if*/
           CALL_abstract_collection___SimpleCollection___add( variable[3] /*res2*/)( variable[3] /*res2*/,  variable[10] /*e*/) /*AbstractArray::add*/;
         }
-        continue_29: while(0);
+        continue_36: while(0);
         CALL_abstract_collection___Iterator___next(variable[8])(variable[8]) /*ArrayIterator::next*/;
       }
-      break_29: while(0);
+      break_36: while(0);
       CALL_abstract_collection___IndexedCollection___append( variable[3] /*res2*/)( variable[3] /*res2*/,  variable[7] /*sl*/) /*IndexedCollection::append*/;
+      /* Register variable[8]: Local variable */
       variable[8] =  variable[2] /*res*/;
       variable[2] =  variable[3] /*res2*/ /*res=*/;
       variable[3] =  variable[8] /*tmp*/ /*res2=*/;
-      continue_28: while(0);
+      continue_35: while(0);
       CALL_abstract_collection___Iterator___next(variable[4])(variable[4]) /*ArrayIterator::next*/;
     }
-    break_28: while(0);
-    variable[4] = variable[0];
-    ATTR_partial_order___PartialOrderElement____linear_extension_cache(variable[4]) /*PartialOrderElement::_linear_extension_cache*/ =  variable[2] /*res*/;
+    break_35: while(0);
+    ATTR_partial_order___PartialOrderElement____linear_extension_cache(variable[0]) /*PartialOrderElement::_linear_extension_cache*/ =  variable[2] /*res*/;
   }
-  variable[2] = variable[0];
-  variable[2] = ATTR_partial_order___PartialOrderElement____linear_extension_cache(variable[2]) /*PartialOrderElement::_linear_extension_cache*/;
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_partial_order___PartialOrderElement____linear_extension_cache(variable[0]) /*PartialOrderElement::_linear_extension_cache*/;
   variable[1] = variable[2];
-  goto return_label27;
-  return_label27: while(false);
+  goto return_label34;
+  return_label34: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t partial_order___PartialOrderElement___reverse_linear_extension(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 275, LOCATE_partial_order___PartialOrderElement___reverse_linear_extension};
+  struct trace_t trace = {NULL, NULL, 271, LOCATE_partial_order___PartialOrderElement___reverse_linear_extension};
   val_t variable[8];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_partial_order___PartialOrderElement____reverse_linear_extension_cache(variable[2]) /*PartialOrderElement::_reverse_linear_extension_cache*/;
-  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*AbstractArray::==*/)));
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_partial_order___PartialOrderElement____reverse_linear_extension_cache(variable[0]) /*PartialOrderElement::_reverse_linear_extension_cache*/;
+  /* Register variable[2]: Result */
+  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*AbstractArrayRead::==*/)));
   if (UNTAG_Bool(variable[2])) { /*if*/
-    variable[3] = NEW_HashSet_hash___HashSet___init(); /*new HashSet[E]*/
+    /* Register variable[2]: Local variable */
+    /* Register variable[3]: Result */
+    variable[3] = NEW_HashSet_hash___HashSet___init() /*new HashSet[E]*/;
     variable[2] = variable[3];
-    variable[3] = variable[0];
-    variable[3] = CALL_partial_order___PartialOrderElement___direct_greaters(variable[3])(variable[3]) /*PartialOrderElement::direct_greaters*/;
-    variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArray::iterator*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_partial_order___PartialOrderElement___direct_greaters(variable[0])(variable[0]) /*PartialOrderElement::direct_greaters*/;
+    /* Register variable[3]: For iterator */
+    variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArrayRead::iterator*/;
     while (true) { /*for*/
+      /* Register variable[4]: For 'is_ok' result */
       variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[4])) break; /*for*/
-      variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/;
+      variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[5]: Local variable */
       variable[5] = variable[4];
-      variable[7] = variable[0];
-      variable[7] = CALL_partial_order___PartialOrderElement___order(variable[7])(variable[7]) /*PartialOrderElement::order*/;
+      /* Register variable[6]: Local variable */
+      /* Register variable[7]: Result */
+      variable[7] = CALL_partial_order___PartialOrderElement___order(variable[0])(variable[0]) /*PartialOrderElement::order*/;
+      /* Register variable[7]: Result */
       variable[7] = CALL_partial_order___PartialOrder_____bra(variable[7])(variable[7],  variable[5] /*s*/) /*PartialOrder::[]*/;
+      /* Register variable[7]: Result */
       variable[7] = CALL_partial_order___PartialOrderElement___linear_extension(variable[7])(variable[7]) /*PartialOrderElement::linear_extension*/;
       variable[6] = variable[7];
       CALL_abstract_collection___SimpleCollection___add_all( variable[2] /*res*/)( variable[2] /*res*/,  variable[6] /*sl*/) /*SimpleCollection::add_all*/;
-      continue_31: while(0);
+      continue_38: while(0);
       CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*ArrayIterator::next*/;
     }
-    break_31: while(0);
-    variable[3] = variable[0];
-    variable[3] = CALL_partial_order___PartialOrderElement___value(variable[3])(variable[3]) /*PartialOrderElement::value*/;
+    break_38: while(0);
+    /* Register variable[3]: Result */
+    variable[3] = CALL_partial_order___PartialOrderElement___value(variable[0])(variable[0]) /*PartialOrderElement::value*/;
     CALL_abstract_collection___SimpleCollection___add( variable[2] /*res*/)( variable[2] /*res*/, variable[3]) /*HashSet::add*/;
-    variable[3] = variable[0];
-    variable[4] = CALL_array___Collection___to_a( variable[2] /*res*/)( variable[2] /*res*/) /*Collection::to_a*/;
-    ATTR_partial_order___PartialOrderElement____linear_extension_cache(variable[3]) /*PartialOrderElement::_linear_extension_cache*/ = variable[4];
+    /* Register variable[3]: Result */
+    variable[3] = CALL_array___Collection___to_a( variable[2] /*res*/)( variable[2] /*res*/) /*Collection::to_a*/;
+    ATTR_partial_order___PartialOrderElement____linear_extension_cache(variable[0]) /*PartialOrderElement::_linear_extension_cache*/ = variable[3];
   }
-  variable[2] = variable[0];
-  variable[2] = ATTR_partial_order___PartialOrderElement____linear_extension_cache(variable[2]) /*PartialOrderElement::_linear_extension_cache*/;
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_partial_order___PartialOrderElement____linear_extension_cache(variable[0]) /*PartialOrderElement::_linear_extension_cache*/;
   variable[1] = variable[2];
-  goto return_label30;
-  return_label30: while(false);
+  goto return_label37;
+  return_label37: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t partial_order___PartialOrderElement_____l(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 291, LOCATE_partial_order___PartialOrderElement_____l};
+  struct trace_t trace = {NULL, NULL, 287, LOCATE_partial_order___PartialOrderElement_____l};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_partial_order___PartialOrderElement____greaters(variable[3]) /*PartialOrderElement::_greaters*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_partial_order___PartialOrderElement____greaters(variable[0]) /*PartialOrderElement::_greaters*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_abstract_collection___Collection___has(variable[3])(variable[3],  variable[1] /*o*/) /*Collection::has*/;
   variable[2] = variable[3];
-  goto return_label32;
-  return_label32: while(false);
+  goto return_label39;
+  return_label39: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t partial_order___PartialOrderElement_____leq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 297, LOCATE_partial_order___PartialOrderElement_____leq};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 293, LOCATE_partial_order___PartialOrderElement_____leq};
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_partial_order___PartialOrderElement____value(variable[3]) /*PartialOrderElement::_value*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_partial_order___PartialOrderElement____value(variable[0]) /*PartialOrderElement::_value*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool((variable[3] ==  variable[1] /*o*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*o*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  variable[1] /*o*/) /*Object::==*/)))));
-  variable[4] = variable[3];
-  if (!UNTAG_Bool(variable[4])) { /* or */
-    variable[4] = variable[0];
-    variable[4] = ATTR_partial_order___PartialOrderElement____greaters(variable[4]) /*PartialOrderElement::_greaters*/;
-    variable[4] = CALL_abstract_collection___Collection___has(variable[4])(variable[4],  variable[1] /*o*/) /*Collection::has*/;
+  /* Ensure var variable[3]: Left 'or' operand*/
+  if (!UNTAG_Bool(variable[3])) { /* or */
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_partial_order___PartialOrderElement____greaters(variable[0]) /*PartialOrderElement::_greaters*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_abstract_collection___Collection___has(variable[3])(variable[3],  variable[1] /*o*/) /*Collection::has*/;
   }
-  variable[3] = variable[4];
+  /* Register variable[3]: Result */
   variable[2] = variable[3];
-  goto return_label33;
-  return_label33: while(false);
+  goto return_label40;
+  return_label40: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t partial_order___PartialOrderElement_____g(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 303, LOCATE_partial_order___PartialOrderElement_____g};
+  struct trace_t trace = {NULL, NULL, 299, LOCATE_partial_order___PartialOrderElement_____g};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_partial_order___PartialOrderElement____order(variable[3]) /*PartialOrderElement::_order*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_partial_order___PartialOrderElement____order(variable[0]) /*PartialOrderElement::_order*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_partial_order___PartialOrder_____bra(variable[3])(variable[3],  variable[1] /*o*/) /*PartialOrder::[]*/;
-  variable[4] = variable[0];
-  variable[4] = ATTR_partial_order___PartialOrderElement____value(variable[4]) /*PartialOrderElement::_value*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_partial_order___PartialOrderElement____value(variable[0]) /*PartialOrderElement::_value*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_partial_order___PartialOrderElement_____l(variable[3])(variable[3], variable[4]) /*PartialOrderElement::<*/;
   variable[2] = variable[3];
-  goto return_label34;
-  return_label34: while(false);
+  goto return_label41;
+  return_label41: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t partial_order___PartialOrderElement_____geq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 309, LOCATE_partial_order___PartialOrderElement_____geq};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 305, LOCATE_partial_order___PartialOrderElement_____geq};
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_partial_order___PartialOrderElement____value(variable[3]) /*PartialOrderElement::_value*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_partial_order___PartialOrderElement____value(variable[0]) /*PartialOrderElement::_value*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool((variable[3] ==  variable[1] /*o*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*o*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  variable[1] /*o*/) /*Object::==*/)))));
-  variable[4] = variable[3];
-  if (!UNTAG_Bool(variable[4])) { /* or */
-    variable[4] = variable[0];
-    variable[4] = ATTR_partial_order___PartialOrderElement____order(variable[4]) /*PartialOrderElement::_order*/;
-    variable[4] = CALL_partial_order___PartialOrder_____bra(variable[4])(variable[4],  variable[1] /*o*/) /*PartialOrder::[]*/;
-    variable[5] = variable[0];
-    variable[5] = ATTR_partial_order___PartialOrderElement____value(variable[5]) /*PartialOrderElement::_value*/;
-    variable[4] = CALL_partial_order___PartialOrderElement_____l(variable[4])(variable[4], variable[5]) /*PartialOrderElement::<*/;
+  /* Ensure var variable[3]: Left 'or' operand*/
+  if (!UNTAG_Bool(variable[3])) { /* or */
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_partial_order___PartialOrderElement____order(variable[0]) /*PartialOrderElement::_order*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_partial_order___PartialOrder_____bra(variable[3])(variable[3],  variable[1] /*o*/) /*PartialOrder::[]*/;
+    /* Register variable[4]: Result */
+    variable[4] = ATTR_partial_order___PartialOrderElement____value(variable[0]) /*PartialOrderElement::_value*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_partial_order___PartialOrderElement_____l(variable[3])(variable[3], variable[4]) /*PartialOrderElement::<*/;
   }
-  variable[3] = variable[4];
+  /* Register variable[3]: Result */
   variable[2] = variable[3];
-  goto return_label35;
-  return_label35: while(false);
+  goto return_label42;
+  return_label42: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 void partial_order___PartialOrderElement___register_direct_smallers(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 315, LOCATE_partial_order___PartialOrderElement___register_direct_smallers};
+  struct trace_t trace = {NULL, NULL, 311, LOCATE_partial_order___PartialOrderElement___register_direct_smallers};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_partial_order___PartialOrderElement____direct_smallers(variable[3]) /*PartialOrderElement::_direct_smallers*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_partial_order___PartialOrderElement____direct_smallers(variable[0]) /*PartialOrderElement::_direct_smallers*/;
   CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3],  variable[1] /*e*/) /*AbstractArray::add*/;
-  return_label36: while(false);
+  return_label43: while(false);
   tracehead = trace.prev;
   return;
 }
 void partial_order___PartialOrderElement___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 320, LOCATE_partial_order___PartialOrderElement___init};
+  struct trace_t trace = {NULL, NULL, 316, LOCATE_partial_order___PartialOrderElement___init};
   val_t variable[14];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_partial_order;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PartialOrderElement].i]) return;
-  variable[5] = variable[0];
-  ATTR_partial_order___PartialOrderElement____order(variable[5]) /*PartialOrderElement::_order*/ =  variable[1] /*o*/;
-  variable[5] = variable[0];
-  ATTR_partial_order___PartialOrderElement____value(variable[5]) /*PartialOrderElement::_value*/ =  variable[2] /*e*/;
-  variable[5] = variable[0];
-  ATTR_partial_order___PartialOrderElement____direct_greaters(variable[5]) /*PartialOrderElement::_direct_greaters*/ =  variable[3] /*directs*/;
-  variable[5] = variable[0];
-  variable[6] = NEW_Array_array___Array___init(); /*new Array[E]*/
-  ATTR_partial_order___PartialOrderElement____direct_smallers(variable[5]) /*PartialOrderElement::_direct_smallers*/ = variable[6];
-  variable[5] = variable[0];
-  variable[6] = NEW_HashSet_hash___HashSet___init(); /*new HashSet[E]*/
-  ATTR_partial_order___PartialOrderElement____greaters(variable[5]) /*PartialOrderElement::_greaters*/ = variable[6];
-  variable[5] = variable[0];
-  variable[6] = NEW_HashSet_hash___HashSet___init(); /*new HashSet[E]*/
-  ATTR_partial_order___PartialOrderElement____smallers_cache(variable[5]) /*PartialOrderElement::_smallers_cache*/ = variable[6];
-  variable[6] = variable[0];
-  variable[6] = ATTR_partial_order___PartialOrderElement____greaters(variable[6]) /*PartialOrderElement::_greaters*/;
+  /* Register variable[4]: Method return value and escape marker */
+  ATTR_partial_order___PartialOrderElement____order(variable[0]) /*PartialOrderElement::_order*/ =  variable[1] /*o*/;
+  ATTR_partial_order___PartialOrderElement____value(variable[0]) /*PartialOrderElement::_value*/ =  variable[2] /*e*/;
+  ATTR_partial_order___PartialOrderElement____direct_greaters(variable[0]) /*PartialOrderElement::_direct_greaters*/ =  variable[3] /*directs*/;
+  /* Register variable[5]: Result */
+  variable[5] = NEW_Array_array___Array___init() /*new Array[E]*/;
+  ATTR_partial_order___PartialOrderElement____direct_smallers(variable[0]) /*PartialOrderElement::_direct_smallers*/ = variable[5];
+  /* Register variable[5]: Result */
+  variable[5] = NEW_HashSet_hash___HashSet___init() /*new HashSet[E]*/;
+  ATTR_partial_order___PartialOrderElement____greaters(variable[0]) /*PartialOrderElement::_greaters*/ = variable[5];
+  /* Register variable[5]: Result */
+  variable[5] = NEW_HashSet_hash___HashSet___init() /*new HashSet[E]*/;
+  ATTR_partial_order___PartialOrderElement____smallers_cache(variable[0]) /*PartialOrderElement::_smallers_cache*/ = variable[5];
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
+  variable[6] = ATTR_partial_order___PartialOrderElement____greaters(variable[0]) /*PartialOrderElement::_greaters*/;
   variable[5] = variable[6];
+  /* Register variable[6]: Local variable */
   variable[6] =  TAG_Int(0);
-  variable[7] = CALL_abstract_collection___Collection___iterator( variable[3] /*directs*/)( variable[3] /*directs*/) /*AbstractArray::iterator*/;
+  /* Register variable[7]: For iterator */
+  variable[7] = CALL_abstract_collection___Collection___iterator( variable[3] /*directs*/)( variable[3] /*directs*/) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[8]: For 'is_ok' result */
     variable[8] = CALL_abstract_collection___Iterator___is_ok(variable[7])(variable[7]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[8])) break; /*for*/
-    variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*ArrayIterator::item*/;
+    variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[9]: Local variable */
     variable[9] = variable[8];
     CALL_abstract_collection___SimpleCollection___add( variable[5] /*g*/)( variable[5] /*g*/,  variable[9] /*ee*/) /*SimpleCollection::add*/;
-    variable[11] = variable[0];
-    variable[11] = ATTR_partial_order___PartialOrderElement____order(variable[11]) /*PartialOrderElement::_order*/;
+    /* Register variable[10]: Local variable */
+    /* Register variable[11]: Result */
+    variable[11] = ATTR_partial_order___PartialOrderElement____order(variable[0]) /*PartialOrderElement::_order*/;
+    /* Register variable[11]: Result */
     variable[11] = CALL_partial_order___PartialOrder_____bra(variable[11])(variable[11],  variable[9] /*ee*/) /*PartialOrder::[]*/;
     variable[10] = variable[11];
+    /* Register variable[11]: Result */
     variable[11] = CALL_partial_order___PartialOrderElement___rank( variable[10] /*poee*/)( variable[10] /*poee*/) /*PartialOrderElement::rank*/;
+    /* Register variable[11]: Result */
     variable[11] = TAG_Bool(UNTAG_Int(variable[11])>=UNTAG_Int( variable[6] /*r*/));
     if (UNTAG_Bool(variable[11])) { /*if*/
+      /* Register variable[11]: Result */
       variable[11] = CALL_partial_order___PartialOrderElement___rank( variable[10] /*poee*/)( variable[10] /*poee*/) /*PartialOrderElement::rank*/;
+      /* Register variable[11]: Result */
       variable[11] = TAG_Int(UNTAG_Int(variable[11])+UNTAG_Int( TAG_Int(1)));
       variable[6] = variable[11] /*r=*/;
     }
     CALL_partial_order___PartialOrderElement___register_direct_smallers( variable[10] /*poee*/)( variable[10] /*poee*/,  variable[2] /*e*/) /*PartialOrderElement::register_direct_smallers*/;
+    /* Register variable[11]: Result */
     variable[11] = CALL_partial_order___PartialOrderElement___greaters( variable[10] /*poee*/)( variable[10] /*poee*/) /*PartialOrderElement::greaters*/;
+    /* Register variable[11]: For iterator */
     variable[11] = CALL_abstract_collection___Collection___iterator(variable[11])(variable[11]) /*Collection::iterator*/;
     while (true) { /*for*/
+      /* Register variable[12]: For 'is_ok' result */
       variable[12] = CALL_abstract_collection___Iterator___is_ok(variable[11])(variable[11]) /*Iterator::is_ok*/;
       if (!UNTAG_Bool(variable[12])) break; /*for*/
-      variable[12] = CALL_abstract_collection___Iterator___item(variable[11])(variable[11]) /*Iterator::item*/;
+      variable[12] = CALL_abstract_collection___Iterator___item(variable[11])(variable[11]) /*Iterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[13]: Local variable */
       variable[13] = variable[12];
       CALL_abstract_collection___SimpleCollection___add( variable[5] /*g*/)( variable[5] /*g*/,  variable[13] /*eee*/) /*SimpleCollection::add*/;
-      continue_39: while(0);
+      continue_46: while(0);
       CALL_abstract_collection___Iterator___next(variable[11])(variable[11]) /*Iterator::next*/;
     }
-    break_39: while(0);
-    continue_38: while(0);
+    break_46: while(0);
+    continue_45: while(0);
     CALL_abstract_collection___Iterator___next(variable[7])(variable[7]) /*ArrayIterator::next*/;
   }
-  break_38: while(0);
-  variable[7] = variable[0];
-  ATTR_partial_order___PartialOrderElement____rank(variable[7]) /*PartialOrderElement::_rank*/ =  variable[6] /*r*/;
-  return_label37: while(false);
+  break_45: while(0);
+  ATTR_partial_order___PartialOrderElement____rank(variable[0]) /*PartialOrderElement::_rank*/ =  variable[6] /*r*/;
+  return_label44: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PartialOrderElement].i] = 1;
   tracehead = trace.prev;
   return;

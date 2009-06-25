@@ -3,12 +3,15 @@
 val_t hash___Object___hash(val_t  self) {
   struct trace_t trace = {NULL, NULL, 21, LOCATE_hash___Object___hash};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = TAG_Int((bigint)variable[2]);
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = TAG_Int((bigint)variable[0]);
+  /* Register variable[2]: Result */
   variable[2] = TAG_Int(UNTAG_Int(variable[2])/UNTAG_Int( TAG_Int(8)));
   variable[1] = variable[2];
   goto return_label0;
@@ -19,25 +22,37 @@ val_t hash___Object___hash(val_t  self) {
 val_t hash___String___hash(val_t  self) {
   struct trace_t trace = {NULL, NULL, 29, LOCATE_hash___String___hash};
   val_t variable[7];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
   variable[2] =  TAG_Int(5381);
-  variable[4] = variable[0];
-  variable[4] = ATTR_array___AbstractArray____length(variable[4]) /*AbstractArray::_length*/;
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_array___AbstractArrayRead____length(variable[0]) /*AbstractArrayRead::_length*/;
+  /* Register variable[4]: Result */
   variable[4] = TAG_Int(UNTAG_Int(variable[4])-UNTAG_Int( TAG_Int(1)));
   variable[3] = variable[4];
-  variable[5] = variable[0];
-  variable[5] = ATTR_string___String____items(variable[5]) /*String::_items*/;
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = ATTR_string___AbstractString____items(variable[0]) /*AbstractString::_items*/;
   variable[4] = variable[5];
   while (true) { /*while*/
+    /* Register variable[5]: Result */
     variable[5] = TAG_Bool(UNTAG_Int( variable[3] /*i*/)>=UNTAG_Int( TAG_Int(0)));
     if (!UNTAG_Bool(variable[5])) break; /* while*/
+    /* Register variable[5]: Result */
     variable[5] = TAG_Int(UNTAG_Int( variable[2] /*h*/)*UNTAG_Int( TAG_Int(32)));
+    /* Register variable[5]: Result */
     variable[5] = TAG_Int(UNTAG_Int(variable[5])+UNTAG_Int( variable[2] /*h*/));
+    /* Register variable[6]: Result */
     variable[6] = TAG_Char(UNBOX_NativeString( variable[4] /*it*/)[UNTAG_Int( variable[3] /*i*/)]);
+    /* Register variable[6]: Result */
     variable[6] = TAG_Int((unsigned char)UNTAG_Char(variable[6]));
+    /* Register variable[5]: Result */
     variable[5] = TAG_Int(UNTAG_Int(variable[5])+UNTAG_Int(variable[6]));
     variable[2] = variable[5] /*h=*/;
     variable[3] = TAG_Int(UNTAG_Int(variable[3])-UNTAG_Int( TAG_Int(1))) /*i*/;
@@ -52,13 +67,14 @@ val_t hash___String___hash(val_t  self) {
 }
 val_t hash___Int___hash(val_t  self) {
   struct trace_t trace = {NULL, NULL, 45, LOCATE_hash___Int___hash};
-  val_t variable[3];
-  void **closurevariable = NULL;
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[1] = variable[2];
+  /* Register variable[1]: Method return value and escape marker */
+  variable[1] = variable[0];
   goto return_label3;
   return_label3: while(false);
   tracehead = trace.prev;
@@ -67,12 +83,14 @@ val_t hash___Int___hash(val_t  self) {
 val_t hash___Char___hash(val_t  self) {
   struct trace_t trace = {NULL, NULL, 49, LOCATE_hash___Char___hash};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = TAG_Int((unsigned char)UNTAG_Char(variable[2]));
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = TAG_Int((unsigned char)UNTAG_Char(variable[0]));
   variable[1] = variable[2];
   goto return_label4;
   return_label4: while(false);
@@ -81,13 +99,14 @@ val_t hash___Char___hash(val_t  self) {
 }
 val_t hash___Bool___hash(val_t  self) {
   struct trace_t trace = {NULL, NULL, 53, LOCATE_hash___Bool___hash};
-  val_t variable[3];
-  void **closurevariable = NULL;
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  if (UNTAG_Bool(variable[2])) { /*if*/
+  /* Register variable[1]: Method return value and escape marker */
+  if (UNTAG_Bool(variable[0])) { /*if*/
     variable[1] =  TAG_Int(1);
     goto return_label5;
   } else { /*if*/
@@ -101,7 +120,7 @@ val_t hash___Bool___hash(val_t  self) {
 val_t hash___HashCollection___length(val_t  self) {
   struct trace_t trace = {NULL, NULL, 69, LOCATE_hash___HashCollection___length};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   tracehead = trace.prev;
@@ -110,7 +129,7 @@ val_t hash___HashCollection___length(val_t  self) {
 val_t hash___HashCollection___first_item(val_t  self) {
   struct trace_t trace = {NULL, NULL, 71, LOCATE_hash___HashCollection___first_item};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   tracehead = trace.prev;
@@ -118,64 +137,82 @@ val_t hash___HashCollection___first_item(val_t  self) {
 }
 val_t hash___HashCollection___index_at(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 80, LOCATE_hash___HashCollection___index_at};
-  val_t variable[9];
-  void **closurevariable = NULL;
+  val_t variable[8];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[4] = ATTR_hash___HashCollection____array(variable[4]) /*HashCollection::_array*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/;
   variable[3] = variable[4];
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*k*/ ==  NIT_NULL /*null*/) || (( variable[1] /*k*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*k*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*k*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*k*/)( variable[1] /*k*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___index_at, LOCATE_hash, 84); nit_exit(1);}
-  variable[4] = variable[0];
-  variable[4] = ATTR_hash___HashCollection____last_accessed_key(variable[4]) /*HashCollection::_last_accessed_key*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_hash___HashCollection____last_accessed_key(variable[0]) /*HashCollection::_last_accessed_key*/;
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(( variable[1] /*k*/ == variable[4]) || (( variable[1] /*k*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*k*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*k*/,variable[4])):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*k*/)( variable[1] /*k*/, variable[4]) /*Object::==*/)))));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    variable[4] = ATTR_hash___HashCollection____last_accessed_index(variable[4]) /*HashCollection::_last_accessed_index*/;
+    /* Register variable[4]: Result */
+    variable[4] = ATTR_hash___HashCollection____last_accessed_index(variable[0]) /*HashCollection::_last_accessed_index*/;
     variable[2] = variable[4];
     goto return_label6;
   }
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
   variable[5] = CALL_hash___Object___hash( variable[1] /*k*/)( variable[1] /*k*/) /*Object::hash*/;
-  variable[6] = variable[0];
-  variable[6] = ATTR_hash___HashCollection____capacity(variable[6]) /*HashCollection::_capacity*/;
+  /* Register variable[6]: Result */
+  variable[6] = ATTR_hash___HashCollection____capacity(variable[0]) /*HashCollection::_capacity*/;
+  /* Register variable[5]: Result */
   variable[5] = TAG_Int(UNTAG_Int(variable[5])%UNTAG_Int(variable[6]));
   variable[4] = variable[5];
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool(UNTAG_Int( variable[4] /*base*/)<UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[5])) { /*if*/
+    /* Register variable[5]: Result */
     variable[5] = TAG_Int(-UNTAG_Int( variable[4] /*base*/));
     variable[4] = variable[5] /*base=*/;
   }
+  /* Register variable[5]: Local variable */
   variable[5] =  variable[4] /*base*/;
   while (true) { /*while*/
     if (!UNTAG_Bool( TAG_Bool(true))) break; /* while*/
+    /* Register variable[6]: Local variable */
+    /* Register variable[7]: Result */
     variable[7] = UNBOX_NativeArray( variable[3] /*arr*/)[UNTAG_Int( variable[5] /*cur*/)];
     variable[6] = variable[7];
+    /* Register variable[7]: Result */
     variable[7] = TAG_Bool(( variable[6] /*c*/ ==  NIT_NULL /*null*/) || (( variable[6] /*c*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[6] /*c*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[6] /*c*/)( variable[6] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-    variable[8] = variable[7];
-    if (!UNTAG_Bool(variable[8])) { /* or */
-      variable[8] = CALL_hash___HashNode___key( variable[6] /*c*/)( variable[6] /*c*/) /*HashNode::key*/;
-      variable[8] = TAG_Bool((variable[8] ==  variable[1] /*k*/) || ((variable[8] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[8])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[8], variable[1] /*k*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[8])(variable[8],  variable[1] /*k*/) /*Object::==*/)))));
+    /* Ensure var variable[7]: Left 'or' operand*/
+    if (!UNTAG_Bool(variable[7])) { /* or */
+      /* Register variable[7]: Result */
+      variable[7] = CALL_hash___HashNode___key( variable[6] /*c*/)( variable[6] /*c*/) /*HashNode::key*/;
+      /* Register variable[7]: Result */
+      variable[7] = TAG_Bool((variable[7] ==  variable[1] /*k*/) || ((variable[7] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[7])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[7], variable[1] /*k*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[7])(variable[7],  variable[1] /*k*/) /*Object::==*/)))));
     }
-    variable[7] = variable[8];
+    /* Register variable[7]: Result */
     if (UNTAG_Bool(variable[7])) { /*if*/
-      variable[7] = variable[0];
-      ATTR_hash___HashCollection____last_accessed_index(variable[7]) /*HashCollection::_last_accessed_index*/ =  variable[5] /*cur*/;
-      variable[7] = variable[0];
-      ATTR_hash___HashCollection____last_accessed_key(variable[7]) /*HashCollection::_last_accessed_key*/ =  variable[1] /*k*/;
+      ATTR_hash___HashCollection____last_accessed_index(variable[0]) /*HashCollection::_last_accessed_index*/ =  variable[5] /*cur*/;
+      ATTR_hash___HashCollection____last_accessed_key(variable[0]) /*HashCollection::_last_accessed_key*/ =  variable[1] /*k*/;
       variable[2] =  variable[5] /*cur*/;
       goto return_label6;
     }
     variable[5] = TAG_Int(UNTAG_Int(variable[5])-UNTAG_Int( TAG_Int(1))) /*cur*/;
+    /* Register variable[7]: Result */
     variable[7] = TAG_Bool(UNTAG_Int( variable[5] /*cur*/)<UNTAG_Int( TAG_Int(0)));
     if (UNTAG_Bool(variable[7])) { /*if*/
-      variable[7] = variable[0];
-      variable[7] = ATTR_hash___HashCollection____capacity(variable[7]) /*HashCollection::_capacity*/;
+      /* Register variable[7]: Result */
+      variable[7] = ATTR_hash___HashCollection____capacity(variable[0]) /*HashCollection::_capacity*/;
+      /* Register variable[7]: Result */
       variable[7] = TAG_Int(UNTAG_Int(variable[7])-UNTAG_Int( TAG_Int(1)));
       variable[5] = variable[7] /*cur=*/;
     }
+    /* Register variable[7]: Result */
     variable[7] = TAG_Bool(( variable[5] /*cur*/)!=( variable[4] /*base*/));
     if (!UNTAG_Bool(variable[7])) { fprintf(stderr, "Assert%s failed", " 'no_loop' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___index_at, LOCATE_hash, 104); nit_exit(1);}
     continue_7: while(0);
@@ -188,55 +225,65 @@ val_t hash___HashCollection___index_at(val_t  self, val_t  param0) {
 }
 void hash___HashCollection___store(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 109, LOCATE_hash___HashCollection___store};
-  val_t variable[7];
-  void **closurevariable = NULL;
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
-  variable[4] = variable[0];
-  variable[4] = ATTR_hash___HashCollection____first_item(variable[4]) /*HashCollection::_first_item*/;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_hash___HashCollection____first_item(variable[0]) /*HashCollection::_first_item*/;
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    ATTR_hash___HashCollection____first_item(variable[4]) /*HashCollection::_first_item*/ =  variable[2] /*node*/;
+    ATTR_hash___HashCollection____first_item(variable[0]) /*HashCollection::_first_item*/ =  variable[2] /*node*/;
   } else { /*if*/
-    variable[4] = variable[0];
-    variable[4] = ATTR_hash___HashCollection____last_item(variable[4]) /*HashCollection::_last_item*/;
+    /* Register variable[4]: Result */
+    variable[4] = ATTR_hash___HashCollection____last_item(variable[0]) /*HashCollection::_last_item*/;
     CALL_hash___HashNode___next_item__eq(variable[4])(variable[4],  variable[2] /*node*/) /*HashNode::next_item=*/;
   }
-  variable[4] = variable[0];
-  variable[4] = ATTR_hash___HashCollection____last_item(variable[4]) /*HashCollection::_last_item*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_hash___HashCollection____last_item(variable[0]) /*HashCollection::_last_item*/;
   CALL_hash___HashNode___prev_item__eq( variable[2] /*node*/)( variable[2] /*node*/, variable[4]) /*HashNode::prev_item=*/;
   CALL_hash___HashNode___next_item__eq( variable[2] /*node*/)( variable[2] /*node*/,  NIT_NULL /*null*/) /*HashNode::next_item=*/;
-  variable[4] = variable[0];
-  ATTR_hash___HashCollection____last_item(variable[4]) /*HashCollection::_last_item*/ =  variable[2] /*node*/;
-  variable[4] = variable[0];
-  variable[4] = ATTR_hash___HashCollection____array(variable[4]) /*HashCollection::_array*/;
+  ATTR_hash___HashCollection____last_item(variable[0]) /*HashCollection::_last_item*/ =  variable[2] /*node*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/;
+  /* Register variable[4]: Result */
   variable[4] = UNBOX_NativeArray(variable[4])[UNTAG_Int( variable[1] /*index*/)];
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___store, LOCATE_hash, 122); nit_exit(1);}
-  variable[4] = variable[0];
-  variable[4] = ATTR_hash___HashCollection____array(variable[4]) /*HashCollection::_array*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/;
   UNBOX_NativeArray(variable[4])[UNTAG_Int( variable[1] /*index*/)]= variable[2] /*node*/;
-  variable[5] = variable[0];
-  variable[5] = ATTR_hash___HashCollection____length(variable[5]) /*HashCollection::_length*/;
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = ATTR_hash___HashCollection____length(variable[0]) /*HashCollection::_length*/;
   variable[4] = variable[5];
-  variable[5] = variable[0];
-  variable[6] = TAG_Int(UNTAG_Int( variable[4] /*l*/)+UNTAG_Int( TAG_Int(1)));
-  ATTR_hash___HashCollection____length(variable[5]) /*HashCollection::_length*/ = variable[6];
+  /* Register variable[5]: Result */
+  variable[5] = TAG_Int(UNTAG_Int( variable[4] /*l*/)+UNTAG_Int( TAG_Int(1)));
+  ATTR_hash___HashCollection____length(variable[0]) /*HashCollection::_length*/ = variable[5];
+  /* Register variable[5]: Result */
   variable[5] = TAG_Int(UNTAG_Int( variable[4] /*l*/)+UNTAG_Int( TAG_Int(5)));
+  /* Register variable[5]: Result */
   variable[5] = TAG_Int(UNTAG_Int(variable[5])*UNTAG_Int( TAG_Int(150)));
+  /* Register variable[5]: Result */
   variable[5] = TAG_Int(UNTAG_Int(variable[5])/UNTAG_Int( TAG_Int(100)));
   variable[4] = variable[5] /*l=*/;
-  variable[5] = variable[0];
-  variable[5] = ATTR_hash___HashCollection____capacity(variable[5]) /*HashCollection::_capacity*/;
+  /* Register variable[5]: Result */
+  variable[5] = ATTR_hash___HashCollection____capacity(variable[0]) /*HashCollection::_capacity*/;
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool(UNTAG_Int( variable[4] /*l*/)>=UNTAG_Int(variable[5]));
   if (UNTAG_Bool(variable[5])) { /*if*/
-    variable[5] = variable[0];
-    variable[6] = TAG_Int(UNTAG_Int( variable[4] /*l*/)*UNTAG_Int( TAG_Int(2)));
-    CALL_hash___HashCollection___enlarge(variable[5])(variable[5], variable[6]) /*HashCollection::enlarge*/;
+    /* Register variable[5]: Result */
+    variable[5] = TAG_Int(UNTAG_Int( variable[4] /*l*/)*UNTAG_Int( TAG_Int(2)));
+    CALL_hash___HashCollection___enlarge(variable[0])(variable[0], variable[5]) /*HashCollection::enlarge*/;
   }
   return_label8: while(false);
   tracehead = trace.prev;
@@ -244,84 +291,105 @@ void hash___HashCollection___store(val_t  self, val_t  param0, val_t  param1) {
 }
 void hash___HashCollection___remove_index(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 132, LOCATE_hash___HashCollection___remove_index};
-  val_t variable[10];
-  void **closurevariable = NULL;
+  val_t variable[9];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(UNTAG_Int( variable[1] /*i*/)>=UNTAG_Int( TAG_Int(0)));
-  variable[4] = variable[3];
-  if (UNTAG_Bool(variable[4])) { /* and */
-    variable[4] = variable[0];
-    variable[4] = ATTR_hash___HashCollection____capacity(variable[4]) /*HashCollection::_capacity*/;
-    variable[4] = TAG_Bool(UNTAG_Int( variable[1] /*i*/)<UNTAG_Int(variable[4]));
+  /* Ensure var variable[3]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[3])) { /* and */
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_hash___HashCollection____capacity(variable[0]) /*HashCollection::_capacity*/;
+    /* Register variable[3]: Result */
+    variable[3] = TAG_Bool(UNTAG_Int( variable[1] /*i*/)<UNTAG_Int(variable[3]));
   }
-  variable[3] = variable[4];
+  /* Register variable[3]: Result */
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", " 'correct_index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___remove_index, LOCATE_hash, 134); nit_exit(1);}
-  variable[4] = variable[0];
-  variable[4] = ATTR_hash___HashCollection____array(variable[4]) /*HashCollection::_array*/;
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/;
+  /* Register variable[4]: Result */
   variable[4] = UNBOX_NativeArray(variable[4])[UNTAG_Int( variable[1] /*i*/)];
   variable[3] = variable[4];
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*node*/ ==  NIT_NULL /*null*/) || (( variable[3] /*node*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*node*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*node*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*node*/)( variable[3] /*node*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", " 'has_couple' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___remove_index, LOCATE_hash, 136); nit_exit(1);}
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
   variable[5] = CALL_hash___HashNode___prev_item( variable[3] /*node*/)( variable[3] /*node*/) /*HashNode::prev_item*/;
   variable[4] = variable[5];
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
   variable[6] = CALL_hash___HashNode___next_item( variable[3] /*node*/)( variable[3] /*node*/) /*HashNode::next_item*/;
   variable[5] = variable[6];
+  /* Register variable[6]: Result */
   variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*prev*/ ==  NIT_NULL /*null*/) || (( variable[4] /*prev*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[4] /*prev*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*prev*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[4] /*prev*/)( variable[4] /*prev*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[6])) { /*if*/
     CALL_hash___HashNode___next_item__eq( variable[4] /*prev*/)( variable[4] /*prev*/,  variable[5] /*next*/) /*HashNode::next_item=*/;
   } else { /*if*/
-    variable[6] = variable[0];
-    ATTR_hash___HashCollection____first_item(variable[6]) /*HashCollection::_first_item*/ =  variable[5] /*next*/;
+    ATTR_hash___HashCollection____first_item(variable[0]) /*HashCollection::_first_item*/ =  variable[5] /*next*/;
   }
+  /* Register variable[6]: Result */
   variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*next*/ ==  NIT_NULL /*null*/) || (( variable[5] /*next*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*next*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*next*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*next*/)( variable[5] /*next*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[6])) { /*if*/
     CALL_hash___HashNode___prev_item__eq( variable[5] /*next*/)( variable[5] /*next*/,  variable[4] /*prev*/) /*HashNode::prev_item=*/;
   } else { /*if*/
-    variable[6] = variable[0];
-    ATTR_hash___HashCollection____last_item(variable[6]) /*HashCollection::_last_item*/ =  variable[4] /*prev*/;
+    ATTR_hash___HashCollection____last_item(variable[0]) /*HashCollection::_last_item*/ =  variable[4] /*prev*/;
   }
-  variable[6] = variable[0];
-  variable[6] = ATTR_hash___HashCollection____array(variable[6]) /*HashCollection::_array*/;
+  /* Register variable[6]: Result */
+  variable[6] = ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/;
   UNBOX_NativeArray(variable[6])[UNTAG_Int( variable[1] /*i*/)]= NIT_NULL /*null*/;
-  variable[6] = variable[0];
-  ATTR_hash___HashCollection____length(variable[6]) /*HashCollection::_length*/ = TAG_Int(UNTAG_Int(ATTR_hash___HashCollection____length(variable[6]) /*HashCollection::_length*/)-UNTAG_Int( TAG_Int(1)));
+  ATTR_hash___HashCollection____length(variable[0]) /*HashCollection::_length*/ = TAG_Int(UNTAG_Int(ATTR_hash___HashCollection____length(variable[0]) /*HashCollection::_length*/)-UNTAG_Int( TAG_Int(1)));
   while (true) { /*while*/
     if (!UNTAG_Bool( TAG_Bool(true))) break; /* while*/
     variable[1] = TAG_Int(UNTAG_Int(variable[1])-UNTAG_Int( TAG_Int(1))) /*i*/;
+    /* Register variable[6]: Result */
     variable[6] = TAG_Bool(UNTAG_Int( variable[1] /*i*/)<UNTAG_Int( TAG_Int(0)));
     if (UNTAG_Bool(variable[6])) { /*if*/
-      variable[6] = variable[0];
-      variable[6] = ATTR_hash___HashCollection____capacity(variable[6]) /*HashCollection::_capacity*/;
+      /* Register variable[6]: Result */
+      variable[6] = ATTR_hash___HashCollection____capacity(variable[0]) /*HashCollection::_capacity*/;
+      /* Register variable[6]: Result */
       variable[6] = TAG_Int(UNTAG_Int(variable[6])-UNTAG_Int( TAG_Int(1)));
       variable[1] = variable[6] /*i=*/;
     }
-    variable[7] = variable[0];
-    variable[7] = ATTR_hash___HashCollection____array(variable[7]) /*HashCollection::_array*/;
+    /* Register variable[6]: Local variable */
+    /* Register variable[7]: Result */
+    variable[7] = ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/;
+    /* Register variable[7]: Result */
     variable[7] = UNBOX_NativeArray(variable[7])[UNTAG_Int( variable[1] /*i*/)];
     variable[6] = variable[7];
+    /* Register variable[7]: Result */
     variable[7] = TAG_Bool(( variable[6] /*n*/ ==  NIT_NULL /*null*/) || (( variable[6] /*n*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[6] /*n*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*n*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[6] /*n*/)( variable[6] /*n*/,  NIT_NULL /*null*/) /*Object::==*/)))));
     if (UNTAG_Bool(variable[7])) { /*if*/
       goto return_label9;
     }
-    variable[8] = variable[0];
-    variable[9] = CALL_hash___HashNode___key( variable[6] /*n*/)( variable[6] /*n*/) /*HashNode::key*/;
-    variable[8] = CALL_hash___HashCollection___index_at(variable[8])(variable[8], variable[9]) /*HashCollection::index_at*/;
+    /* Register variable[7]: Local variable */
+    /* Register variable[8]: Result */
+    variable[8] = CALL_hash___HashNode___key( variable[6] /*n*/)( variable[6] /*n*/) /*HashNode::key*/;
+    /* Register variable[8]: Result */
+    variable[8] = CALL_hash___HashCollection___index_at(variable[0])(variable[0], variable[8]) /*HashCollection::index_at*/;
     variable[7] = variable[8];
+    /* Register variable[8]: Result */
     variable[8] = TAG_Bool(( variable[1] /*i*/)!=( variable[7] /*i2*/));
     if (UNTAG_Bool(variable[8])) { /*if*/
-      variable[8] = variable[0];
-      variable[8] = ATTR_hash___HashCollection____array(variable[8]) /*HashCollection::_array*/;
+      /* Register variable[8]: Result */
+      variable[8] = ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/;
       UNBOX_NativeArray(variable[8])[UNTAG_Int( variable[1] /*i*/)]= NIT_NULL /*null*/;
-      variable[8] = variable[0];
-      variable[8] = ATTR_hash___HashCollection____array(variable[8]) /*HashCollection::_array*/;
+      /* Register variable[8]: Result */
+      variable[8] = ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/;
+      /* Register variable[8]: Result */
       variable[8] = UNBOX_NativeArray(variable[8])[UNTAG_Int( variable[7] /*i2*/)];
+      /* Register variable[8]: Result */
       variable[8] = TAG_Bool((variable[8] ==  NIT_NULL /*null*/) || ((variable[8] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[8])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[8], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[8])(variable[8],  NIT_NULL /*null*/) /*Object::==*/)))));
       if (!UNTAG_Bool(variable[8])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___remove_index, LOCATE_hash, 166); nit_exit(1);}
-      variable[8] = variable[0];
-      variable[8] = ATTR_hash___HashCollection____array(variable[8]) /*HashCollection::_array*/;
+      /* Register variable[8]: Result */
+      variable[8] = ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/;
       UNBOX_NativeArray(variable[8])[UNTAG_Int( variable[7] /*i2*/)]= variable[6] /*n*/;
     }
     continue_10: while(0);
@@ -334,75 +402,85 @@ void hash___HashCollection___remove_index(val_t  self, val_t  param0) {
 void hash___HashCollection___raz(val_t  self) {
   struct trace_t trace = {NULL, NULL, 172, LOCATE_hash___HashCollection___raz};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[3] = variable[0];
-  variable[3] = ATTR_hash___HashCollection____capacity(variable[3]) /*HashCollection::_capacity*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_hash___HashCollection____capacity(variable[0]) /*HashCollection::_capacity*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Int(UNTAG_Int(variable[3])-UNTAG_Int( TAG_Int(1)));
   variable[2] = variable[3];
   while (true) { /*while*/
+    /* Register variable[3]: Result */
     variable[3] = TAG_Bool(UNTAG_Int( variable[2] /*i*/)>=UNTAG_Int( TAG_Int(0)));
     if (!UNTAG_Bool(variable[3])) break; /* while*/
-    variable[3] = variable[0];
-    variable[3] = ATTR_hash___HashCollection____array(variable[3]) /*HashCollection::_array*/;
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/;
     UNBOX_NativeArray(variable[3])[UNTAG_Int( variable[2] /*i*/)]= NIT_NULL /*null*/;
     variable[2] = TAG_Int(UNTAG_Int(variable[2])-UNTAG_Int( TAG_Int(1))) /*i*/;
     continue_12: while(0);
   }
   break_12: while(0);
-  variable[3] = variable[0];
-  ATTR_hash___HashCollection____length(variable[3]) /*HashCollection::_length*/ =  TAG_Int(0);
-  variable[3] = variable[0];
-  ATTR_hash___HashCollection____first_item(variable[3]) /*HashCollection::_first_item*/ =  NIT_NULL /*null*/;
-  variable[3] = variable[0];
-  ATTR_hash___HashCollection____last_item(variable[3]) /*HashCollection::_last_item*/ =  NIT_NULL /*null*/;
-  variable[3] = variable[0];
-  ATTR_hash___HashCollection____last_accessed_key(variable[3]) /*HashCollection::_last_accessed_key*/ =  NIT_NULL /*null*/;
+  ATTR_hash___HashCollection____length(variable[0]) /*HashCollection::_length*/ =  TAG_Int(0);
+  ATTR_hash___HashCollection____first_item(variable[0]) /*HashCollection::_first_item*/ =  NIT_NULL /*null*/;
+  ATTR_hash___HashCollection____last_item(variable[0]) /*HashCollection::_last_item*/ =  NIT_NULL /*null*/;
+  ATTR_hash___HashCollection____last_accessed_key(variable[0]) /*HashCollection::_last_accessed_key*/ =  NIT_NULL /*null*/;
   return_label11: while(false);
   tracehead = trace.prev;
   return;
 }
 void hash___HashCollection___enlarge(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 185, LOCATE_hash___HashCollection___enlarge};
-  val_t variable[11];
-  void **closurevariable = NULL;
+  val_t variable[10];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[4] = ATTR_hash___HashCollection____capacity(variable[4]) /*HashCollection::_capacity*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_hash___HashCollection____capacity(variable[0]) /*HashCollection::_capacity*/;
   variable[3] = variable[4];
-  variable[4] = variable[0];
-  variable[4] = ATTR_hash___HashCollection____length(variable[4]) /*HashCollection::_length*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_hash___HashCollection____length(variable[0]) /*HashCollection::_length*/;
+  /* Register variable[4]: Result */
   variable[4] = TAG_Int(UNTAG_Int(variable[4])+UNTAG_Int( TAG_Int(1)));
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(UNTAG_Int( variable[1] /*cap*/)<UNTAG_Int(variable[4]));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    variable[4] = ATTR_hash___HashCollection____length(variable[4]) /*HashCollection::_length*/;
+    /* Register variable[4]: Result */
+    variable[4] = ATTR_hash___HashCollection____length(variable[0]) /*HashCollection::_length*/;
+    /* Register variable[4]: Result */
     variable[4] = TAG_Int(UNTAG_Int(variable[4])+UNTAG_Int( TAG_Int(1)));
     variable[1] = variable[4] /*cap=*/;
   }
-  variable[4] = variable[0];
-  variable[4] = ATTR_hash___HashCollection____capacity(variable[4]) /*HashCollection::_capacity*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_hash___HashCollection____capacity(variable[0]) /*HashCollection::_capacity*/;
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(UNTAG_Int( variable[1] /*cap*/)<=UNTAG_Int(variable[4]));
   if (UNTAG_Bool(variable[4])) { /*if*/
     goto return_label13;
   }
-  variable[4] = variable[0];
-  ATTR_hash___HashCollection____capacity(variable[4]) /*HashCollection::_capacity*/ =  variable[1] /*cap*/;
-  variable[4] = variable[0];
-  ATTR_hash___HashCollection____last_accessed_key(variable[4]) /*HashCollection::_last_accessed_key*/ =  NIT_NULL /*null*/;
-  variable[5] = variable[0];
+  ATTR_hash___HashCollection____capacity(variable[0]) /*HashCollection::_capacity*/ =  variable[1] /*cap*/;
+  ATTR_hash___HashCollection____last_accessed_key(variable[0]) /*HashCollection::_last_accessed_key*/ =  NIT_NULL /*null*/;
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
   variable[5] = BOX_NativeArray((val_t*)malloc((UNTAG_Int( variable[1] /*cap*/) * sizeof(val_t))));
   variable[4] = variable[5];
-  variable[5] = variable[0];
-  ATTR_hash___HashCollection____array(variable[5]) /*HashCollection::_array*/ =  variable[4] /*new_array*/;
+  ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/ =  variable[4] /*new_array*/;
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
   variable[6] = TAG_Int(UNTAG_Int( variable[1] /*cap*/)-UNTAG_Int( TAG_Int(1)));
   variable[5] = variable[6];
   while (true) { /*while*/
+    /* Register variable[6]: Result */
     variable[6] = TAG_Bool(UNTAG_Int( variable[5] /*i*/)>=UNTAG_Int( TAG_Int(0)));
     if (!UNTAG_Bool(variable[6])) break; /* while*/
     UNBOX_NativeArray( variable[4] /*new_array*/)[UNTAG_Int( variable[5] /*i*/)]= NIT_NULL /*null*/;
@@ -410,36 +488,44 @@ void hash___HashCollection___enlarge(val_t  self, val_t  param0) {
     continue_14: while(0);
   }
   break_14: while(0);
-  variable[6] = variable[0];
-  variable[6] = ATTR_hash___HashCollection____capacity(variable[6]) /*HashCollection::_capacity*/;
+  /* Register variable[6]: Result */
+  variable[6] = ATTR_hash___HashCollection____capacity(variable[0]) /*HashCollection::_capacity*/;
+  /* Register variable[6]: Result */
   variable[6] = TAG_Bool(UNTAG_Int(variable[6])<=UNTAG_Int( variable[3] /*old_cap*/));
   if (UNTAG_Bool(variable[6])) { /*if*/
     goto return_label13;
   }
-  variable[7] = variable[0];
-  variable[7] = ATTR_hash___HashCollection____array(variable[7]) /*HashCollection::_array*/;
+  /* Register variable[6]: Local variable */
+  /* Register variable[7]: Result */
+  variable[7] = ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/;
   variable[6] = variable[7];
-  variable[8] = variable[0];
-  variable[8] = ATTR_hash___HashCollection____first_item(variable[8]) /*HashCollection::_first_item*/;
+  /* Register variable[7]: Local variable */
+  /* Register variable[8]: Result */
+  variable[8] = ATTR_hash___HashCollection____first_item(variable[0]) /*HashCollection::_first_item*/;
   variable[7] = variable[8];
   while (true) { /*while*/
+    /* Register variable[8]: Result */
     variable[8] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[7] /*node*/ ==  NIT_NULL /*null*/) || (( variable[7] /*node*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[7] /*node*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[7] /*node*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[7] /*node*/)( variable[7] /*node*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
     if (!UNTAG_Bool(variable[8])) break; /* while*/
-    variable[9] = variable[0];
-    variable[10] = CALL_hash___HashNode___key( variable[7] /*node*/)( variable[7] /*node*/) /*HashNode::key*/;
-    variable[9] = CALL_hash___HashCollection___index_at(variable[9])(variable[9], variable[10]) /*HashCollection::index_at*/;
+    /* Register variable[8]: Local variable */
+    /* Register variable[9]: Result */
+    variable[9] = CALL_hash___HashNode___key( variable[7] /*node*/)( variable[7] /*node*/) /*HashNode::key*/;
+    /* Register variable[9]: Result */
+    variable[9] = CALL_hash___HashCollection___index_at(variable[0])(variable[0], variable[9]) /*HashCollection::index_at*/;
     variable[8] = variable[9];
+    /* Register variable[9]: Result */
     variable[9] = UNBOX_NativeArray( variable[6] /*new_array*/)[UNTAG_Int( variable[8] /*ind*/)];
+    /* Register variable[9]: Result */
     variable[9] = TAG_Bool((variable[9] ==  NIT_NULL /*null*/) || ((variable[9] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[9])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[9], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[9])(variable[9],  NIT_NULL /*null*/) /*Object::==*/)))));
     if (!UNTAG_Bool(variable[9])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashCollection___enlarge, LOCATE_hash, 213); nit_exit(1);}
     UNBOX_NativeArray( variable[6] /*new_array*/)[UNTAG_Int( variable[8] /*ind*/)]= variable[7] /*node*/;
+    /* Register variable[9]: Result */
     variable[9] = CALL_hash___HashNode___next_item( variable[7] /*node*/)( variable[7] /*node*/) /*HashNode::next_item*/;
     variable[7] = variable[9] /*node=*/;
     continue_15: while(0);
   }
   break_15: while(0);
-  variable[8] = variable[0];
-  ATTR_hash___HashCollection____last_accessed_key(variable[8]) /*HashCollection::_last_accessed_key*/ =  NIT_NULL /*null*/;
+  ATTR_hash___HashCollection____last_accessed_key(variable[0]) /*HashCollection::_last_accessed_key*/ =  NIT_NULL /*null*/;
   return_label13: while(false);
   tracehead = trace.prev;
   return;
@@ -447,7 +533,7 @@ void hash___HashCollection___enlarge(val_t  self, val_t  param0) {
 void hash___HashCollection___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 0, LOCATE_hash___HashCollection___init};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   tracehead = trace.prev;
@@ -456,7 +542,7 @@ void hash___HashCollection___init(val_t  self, int* init_table) {
 val_t hash___HashNode___key(val_t  self) {
   struct trace_t trace = {NULL, NULL, 222, LOCATE_hash___HashNode___key};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   fprintf(stderr, "Deferred method called");
@@ -468,7 +554,7 @@ val_t hash___HashNode___key(val_t  self) {
 val_t hash___HashNode___next_item(val_t  self) {
   struct trace_t trace = {NULL, NULL, 224, LOCATE_hash___HashNode___next_item};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   tracehead = trace.prev;
@@ -477,7 +563,7 @@ val_t hash___HashNode___next_item(val_t  self) {
 void hash___HashNode___next_item__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 224, LOCATE_hash___HashNode___next_item__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   ATTR_hash___HashNode____next_item( self) /*HashNode::_next_item*/ =  param0;
@@ -487,7 +573,7 @@ void hash___HashNode___next_item__eq(val_t  self, val_t  param0) {
 val_t hash___HashNode___prev_item(val_t  self) {
   struct trace_t trace = {NULL, NULL, 225, LOCATE_hash___HashNode___prev_item};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   tracehead = trace.prev;
@@ -496,7 +582,7 @@ val_t hash___HashNode___prev_item(val_t  self) {
 void hash___HashNode___prev_item__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 225, LOCATE_hash___HashNode___prev_item__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   ATTR_hash___HashNode____prev_item( self) /*HashNode::_prev_item*/ =  param0;
@@ -506,7 +592,7 @@ void hash___HashNode___prev_item__eq(val_t  self, val_t  param0) {
 void hash___HashNode___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 0, LOCATE_hash___HashNode___init};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   tracehead = trace.prev;
@@ -514,14 +600,15 @@ void hash___HashNode___init(val_t  self, int* init_table) {
 }
 val_t hash___HashMap___iterator(val_t  self) {
   struct trace_t trace = {NULL, NULL, 232, LOCATE_hash___HashMap___iterator};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[3] = NEW_HashMapIterator_hash___HashMapIterator___init(variable[2]); /*new HashMapIterator[K, V]*/
-  variable[2] = variable[3];
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = NEW_HashMapIterator_hash___HashMapIterator___init(variable[0]) /*new HashMapIterator[K, V]*/;
   variable[1] = variable[2];
   goto return_label16;
   return_label16: while(false);
@@ -531,12 +618,15 @@ val_t hash___HashMap___iterator(val_t  self) {
 val_t hash___HashMap___is_empty(val_t  self) {
   struct trace_t trace = {NULL, NULL, 240, LOCATE_hash___HashMap___is_empty};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_hash___HashCollection____length(variable[2]) /*HashCollection::_length*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_hash___HashCollection____length(variable[0]) /*HashCollection::_length*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool((variable[2])==( TAG_Int(0)));
   variable[1] = variable[2];
   goto return_label17;
@@ -546,29 +636,39 @@ val_t hash___HashMap___is_empty(val_t  self) {
 }
 val_t hash___HashMap___has(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 254, LOCATE_hash___HashMap___has};
-  val_t variable[7];
-  void **closurevariable = NULL;
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
   variable[3] =  TAG_Int(0);
   while (true) { /*while*/
-    variable[4] = variable[0];
-    variable[4] = ATTR_hash___HashCollection____capacity(variable[4]) /*HashCollection::_capacity*/;
+    /* Register variable[4]: Result */
+    variable[4] = ATTR_hash___HashCollection____capacity(variable[0]) /*HashCollection::_capacity*/;
+    /* Register variable[4]: Result */
     variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*i*/)<UNTAG_Int(variable[4]));
     if (!UNTAG_Bool(variable[4])) break; /* while*/
-    variable[5] = variable[0];
-    variable[5] = ATTR_hash___HashCollection____array(variable[5]) /*HashCollection::_array*/;
+    /* Register variable[4]: Local variable */
+    /* Register variable[5]: Result */
+    variable[5] = ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/;
+    /* Register variable[5]: Result */
     variable[5] = UNBOX_NativeArray(variable[5])[UNTAG_Int( variable[3] /*i*/)];
     variable[4] = variable[5];
+    /* Register variable[5]: Result */
     variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*c*/ ==  NIT_NULL /*null*/) || (( variable[4] /*c*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[4] /*c*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[4] /*c*/)( variable[4] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    variable[6] = variable[5];
-    if (UNTAG_Bool(variable[6])) { /* and */
-      variable[6] = CALL_abstract_collection___Couple___second( variable[4] /*c*/)( variable[4] /*c*/) /*Couple::second*/;
-      variable[6] = TAG_Bool((variable[6] ==  variable[1] /*item*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], variable[1] /*item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  variable[1] /*item*/) /*Object::==*/)))));
+    /* Ensure var variable[5]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[5])) { /* and */
+      /* Register variable[5]: Result */
+      variable[5] = CALL_abstract_collection___Couple___second( variable[4] /*c*/)( variable[4] /*c*/) /*Couple::second*/;
+      /* Register variable[5]: Result */
+      variable[5] = TAG_Bool((variable[5] ==  variable[1] /*item*/) || ((variable[5] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[5])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], variable[1] /*item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[5])(variable[5],  variable[1] /*item*/) /*Object::==*/)))));
     }
-    variable[5] = variable[6];
+    /* Register variable[5]: Result */
     if (UNTAG_Bool(variable[5])) { /*if*/
       variable[2] =  TAG_Bool(true);
       goto return_label18;
@@ -585,29 +685,39 @@ val_t hash___HashMap___has(val_t  self, val_t  param0) {
 }
 val_t hash___HashMap___has_only(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 265, LOCATE_hash___HashMap___has_only};
-  val_t variable[7];
-  void **closurevariable = NULL;
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
   variable[3] =  TAG_Int(0);
   while (true) { /*while*/
-    variable[4] = variable[0];
-    variable[4] = ATTR_hash___HashCollection____capacity(variable[4]) /*HashCollection::_capacity*/;
+    /* Register variable[4]: Result */
+    variable[4] = ATTR_hash___HashCollection____capacity(variable[0]) /*HashCollection::_capacity*/;
+    /* Register variable[4]: Result */
     variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*i*/)<UNTAG_Int(variable[4]));
     if (!UNTAG_Bool(variable[4])) break; /* while*/
-    variable[5] = variable[0];
-    variable[5] = ATTR_hash___HashCollection____array(variable[5]) /*HashCollection::_array*/;
+    /* Register variable[4]: Local variable */
+    /* Register variable[5]: Result */
+    variable[5] = ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/;
+    /* Register variable[5]: Result */
     variable[5] = UNBOX_NativeArray(variable[5])[UNTAG_Int( variable[3] /*i*/)];
     variable[4] = variable[5];
+    /* Register variable[5]: Result */
     variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*c*/ ==  NIT_NULL /*null*/) || (( variable[4] /*c*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[4] /*c*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[4] /*c*/)( variable[4] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    variable[6] = variable[5];
-    if (UNTAG_Bool(variable[6])) { /* and */
-      variable[6] = CALL_abstract_collection___Couple___second( variable[4] /*c*/)( variable[4] /*c*/) /*Couple::second*/;
-      variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] ==  variable[1] /*item*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], variable[1] /*item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  variable[1] /*item*/) /*Object::==*/)))))));
+    /* Ensure var variable[5]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[5])) { /* and */
+      /* Register variable[5]: Result */
+      variable[5] = CALL_abstract_collection___Couple___second( variable[4] /*c*/)( variable[4] /*c*/) /*Couple::second*/;
+      /* Register variable[5]: Result */
+      variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[5] ==  variable[1] /*item*/) || ((variable[5] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[5])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], variable[1] /*item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[5])(variable[5],  variable[1] /*item*/) /*Object::==*/)))))));
     }
-    variable[5] = variable[6];
+    /* Register variable[5]: Result */
     if (UNTAG_Bool(variable[5])) { /*if*/
       variable[2] =  TAG_Bool(false);
       goto return_label20;
@@ -624,30 +734,41 @@ val_t hash___HashMap___has_only(val_t  self, val_t  param0) {
 }
 val_t hash___HashMap___count(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 242, LOCATE_hash___HashMap___count};
-  val_t variable[8];
-  void **closurevariable = NULL;
+  val_t variable[7];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
   variable[3] =  TAG_Int(0);
+  /* Register variable[4]: Local variable */
   variable[4] =  TAG_Int(0);
   while (true) { /*while*/
-    variable[5] = variable[0];
-    variable[5] = ATTR_hash___HashCollection____capacity(variable[5]) /*HashCollection::_capacity*/;
+    /* Register variable[5]: Result */
+    variable[5] = ATTR_hash___HashCollection____capacity(variable[0]) /*HashCollection::_capacity*/;
+    /* Register variable[5]: Result */
     variable[5] = TAG_Bool(UNTAG_Int( variable[4] /*i*/)<UNTAG_Int(variable[5]));
     if (!UNTAG_Bool(variable[5])) break; /* while*/
-    variable[6] = variable[0];
-    variable[6] = ATTR_hash___HashCollection____array(variable[6]) /*HashCollection::_array*/;
+    /* Register variable[5]: Local variable */
+    /* Register variable[6]: Result */
+    variable[6] = ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/;
+    /* Register variable[6]: Result */
     variable[6] = UNBOX_NativeArray(variable[6])[UNTAG_Int( variable[4] /*i*/)];
     variable[5] = variable[6];
+    /* Register variable[6]: Result */
     variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*c*/ ==  NIT_NULL /*null*/) || (( variable[5] /*c*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*c*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*c*/)( variable[5] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    variable[7] = variable[6];
-    if (UNTAG_Bool(variable[7])) { /* and */
-      variable[7] = CALL_abstract_collection___Couple___second( variable[5] /*c*/)( variable[5] /*c*/) /*Couple::second*/;
-      variable[7] = TAG_Bool((variable[7] ==  variable[1] /*item*/) || ((variable[7] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[7])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[7], variable[1] /*item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[7])(variable[7],  variable[1] /*item*/) /*Object::==*/)))));
+    /* Ensure var variable[6]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[6])) { /* and */
+      /* Register variable[6]: Result */
+      variable[6] = CALL_abstract_collection___Couple___second( variable[5] /*c*/)( variable[5] /*c*/) /*Couple::second*/;
+      /* Register variable[6]: Result */
+      variable[6] = TAG_Bool((variable[6] ==  variable[1] /*item*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], variable[1] /*item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  variable[1] /*item*/) /*Object::==*/)))));
     }
-    variable[6] = variable[7];
+    /* Register variable[6]: Result */
     if (UNTAG_Bool(variable[6])) { /*if*/
       variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(1))) /*nb*/;
     }
@@ -664,16 +785,20 @@ val_t hash___HashMap___count(val_t  self, val_t  param0) {
 val_t hash___HashMap___first(val_t  self) {
   struct trace_t trace = {NULL, NULL, 234, LOCATE_hash___HashMap___first};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_hash___HashCollection____length(variable[2]) /*HashCollection::_length*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_hash___HashCollection____length(variable[0]) /*HashCollection::_length*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool(UNTAG_Int(variable[2])>UNTAG_Int( TAG_Int(0)));
   if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashMap___first, LOCATE_hash, 236); nit_exit(1);}
-  variable[2] = variable[0];
-  variable[2] = ATTR_hash___HashCollection____first_item(variable[2]) /*HashCollection::_first_item*/;
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_hash___HashCollection____first_item(variable[0]) /*HashCollection::_first_item*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_abstract_collection___Couple___second(variable[2])(variable[2]) /*Couple::second*/;
   variable[1] = variable[2];
   goto return_label24;
@@ -683,45 +808,55 @@ val_t hash___HashMap___first(val_t  self) {
 }
 void hash___HashMap___clear(val_t  self) {
   struct trace_t trace = {NULL, NULL, 304, LOCATE_hash___HashMap___clear};
-  val_t variable[3];
-  void **closurevariable = NULL;
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  CALL_hash___HashCollection___raz(variable[2])(variable[2]) /*HashCollection::raz*/;
+  /* Register variable[1]: Method return value and escape marker */
+  CALL_hash___HashCollection___raz(variable[0])(variable[0]) /*HashCollection::raz*/;
   return_label25: while(false);
   tracehead = trace.prev;
   return;
 }
 void hash___HashMap___remove(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 289, LOCATE_hash___HashMap___remove};
-  val_t variable[7];
-  void **closurevariable = NULL;
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
   variable[3] =  TAG_Int(0);
   while (true) { /*while*/
-    variable[4] = variable[0];
-    variable[4] = ATTR_hash___HashCollection____capacity(variable[4]) /*HashCollection::_capacity*/;
+    /* Register variable[4]: Result */
+    variable[4] = ATTR_hash___HashCollection____capacity(variable[0]) /*HashCollection::_capacity*/;
+    /* Register variable[4]: Result */
     variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*i*/)<UNTAG_Int(variable[4]));
     if (!UNTAG_Bool(variable[4])) break; /* while*/
-    variable[5] = variable[0];
-    variable[5] = ATTR_hash___HashCollection____array(variable[5]) /*HashCollection::_array*/;
+    /* Register variable[4]: Local variable */
+    /* Register variable[5]: Result */
+    variable[5] = ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/;
+    /* Register variable[5]: Result */
     variable[5] = UNBOX_NativeArray(variable[5])[UNTAG_Int( variable[3] /*i*/)];
     variable[4] = variable[5];
+    /* Register variable[5]: Result */
     variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*c*/ ==  NIT_NULL /*null*/) || (( variable[4] /*c*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[4] /*c*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[4] /*c*/)( variable[4] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    variable[6] = variable[5];
-    if (UNTAG_Bool(variable[6])) { /* and */
-      variable[6] = CALL_abstract_collection___Couple___second( variable[4] /*c*/)( variable[4] /*c*/) /*Couple::second*/;
-      variable[6] = TAG_Bool((variable[6] ==  variable[1] /*item*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], variable[1] /*item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  variable[1] /*item*/) /*Object::==*/)))));
+    /* Ensure var variable[5]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[5])) { /* and */
+      /* Register variable[5]: Result */
+      variable[5] = CALL_abstract_collection___Couple___second( variable[4] /*c*/)( variable[4] /*c*/) /*Couple::second*/;
+      /* Register variable[5]: Result */
+      variable[5] = TAG_Bool((variable[5] ==  variable[1] /*item*/) || ((variable[5] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[5])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], variable[1] /*item*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[5])(variable[5],  variable[1] /*item*/) /*Object::==*/)))));
     }
-    variable[5] = variable[6];
+    /* Register variable[5]: Result */
     if (UNTAG_Bool(variable[5])) { /*if*/
-      variable[5] = variable[0];
-      CALL_hash___HashCollection___remove_index(variable[5])(variable[5],  variable[3] /*i*/) /*HashCollection::remove_index*/;
+      CALL_hash___HashCollection___remove_index(variable[0])(variable[0],  variable[3] /*i*/) /*HashCollection::remove_index*/;
       goto return_label26;
     }
     variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(1))) /*i*/;
@@ -734,30 +869,39 @@ void hash___HashMap___remove(val_t  self, val_t  param0) {
 }
 void hash___HashMap_____braeq(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 276, LOCATE_hash___HashMap_____braeq};
-  val_t variable[8];
-  void **closurevariable = NULL;
+  val_t variable[7];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*key*/ ==  NIT_NULL /*null*/) || (( variable[1] /*key*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*key*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*key*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*key*/)( variable[1] /*key*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashMap_____braeq, LOCATE_hash, 278); nit_exit(1);}
-  variable[5] = variable[0];
-  variable[5] = CALL_hash___HashCollection___index_at(variable[5])(variable[5],  variable[1] /*key*/) /*HashCollection::index_at*/;
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = CALL_hash___HashCollection___index_at(variable[0])(variable[0],  variable[1] /*key*/) /*HashCollection::index_at*/;
   variable[4] = variable[5];
-  variable[6] = variable[0];
-  variable[6] = ATTR_hash___HashCollection____array(variable[6]) /*HashCollection::_array*/;
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
+  variable[6] = ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/;
+  /* Register variable[6]: Result */
   variable[6] = UNBOX_NativeArray(variable[6])[UNTAG_Int( variable[4] /*i*/)];
   variable[5] = variable[6];
+  /* Register variable[6]: Result */
   variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[5] /*c*/ ==  NIT_NULL /*null*/) || (( variable[5] /*c*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*c*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*c*/)( variable[5] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[6])) { /*if*/
     CALL_abstract_collection___Couple___first__eq( variable[5] /*c*/)( variable[5] /*c*/,  variable[1] /*key*/) /*Couple::first=*/;
     CALL_abstract_collection___Couple___second__eq( variable[5] /*c*/)( variable[5] /*c*/,  variable[2] /*v*/) /*Couple::second=*/;
   } else { /*if*/
-    variable[6] = variable[0];
-    variable[7] = NEW_HashMapNode_hash___HashMapNode___init( variable[1] /*key*/,  variable[2] /*v*/); /*new HashMapNode[K, V]*/
-    CALL_hash___HashCollection___store(variable[6])(variable[6],  variable[4] /*i*/, variable[7]) /*HashCollection::store*/;
+    /* Register variable[6]: Result */
+    variable[6] = NEW_HashMapNode_hash___HashMapNode___init( variable[1] /*key*/,  variable[2] /*v*/) /*new HashMapNode[K, V]*/;
+    CALL_hash___HashCollection___store(variable[0])(variable[0],  variable[4] /*i*/, variable[6]) /*HashCollection::store*/;
   }
   return_label28: while(false);
   tracehead = trace.prev;
@@ -765,16 +909,18 @@ void hash___HashMap_____braeq(val_t  self, val_t  param0, val_t  param1) {
 }
 void hash___HashMap___remove_at(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 302, LOCATE_hash___HashMap___remove_at};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[4] = variable[0];
-  variable[4] = CALL_hash___HashCollection___index_at(variable[4])(variable[4],  variable[1] /*key*/) /*HashCollection::index_at*/;
-  CALL_hash___HashCollection___remove_index(variable[3])(variable[3], variable[4]) /*HashCollection::remove_index*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_hash___HashCollection___index_at(variable[0])(variable[0],  variable[1] /*key*/) /*HashCollection::index_at*/;
+  CALL_hash___HashCollection___remove_index(variable[0])(variable[0], variable[3]) /*HashCollection::remove_index*/;
   return_label29: while(false);
   tracehead = trace.prev;
   return;
@@ -782,15 +928,19 @@ void hash___HashMap___remove_at(val_t  self, val_t  param0) {
 val_t hash___HashMap___couple_at(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 306, LOCATE_hash___HashMap___couple_at};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_hash___HashCollection____array(variable[3]) /*HashCollection::_array*/;
-  variable[4] = variable[0];
-  variable[4] = CALL_hash___HashCollection___index_at(variable[4])(variable[4],  variable[1] /*key*/) /*HashCollection::index_at*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_hash___HashCollection___index_at(variable[0])(variable[0],  variable[1] /*key*/) /*HashCollection::index_at*/;
+  /* Register variable[3]: Result */
   variable[3] = UNBOX_NativeArray(variable[3])[UNTAG_Int(variable[4])];
   variable[2] = variable[3];
   goto return_label30;
@@ -800,18 +950,17 @@ val_t hash___HashMap___couple_at(val_t  self, val_t  param0) {
 }
 void hash___HashMap___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 308, LOCATE_hash___HashMap___init};
-  val_t variable[3];
-  void **closurevariable = NULL;
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashMap].i]) return;
-  variable[2] = variable[0];
-  ATTR_hash___HashCollection____capacity(variable[2]) /*HashCollection::_capacity*/ =  TAG_Int(0);
-  variable[2] = variable[0];
-  ATTR_hash___HashCollection____length(variable[2]) /*HashCollection::_length*/ =  TAG_Int(0);
-  variable[2] = variable[0];
-  CALL_hash___HashCollection___enlarge(variable[2])(variable[2],  TAG_Int(0)) /*HashCollection::enlarge*/;
+  /* Register variable[1]: Method return value and escape marker */
+  ATTR_hash___HashCollection____capacity(variable[0]) /*HashCollection::_capacity*/ =  TAG_Int(0);
+  ATTR_hash___HashCollection____length(variable[0]) /*HashCollection::_length*/ =  TAG_Int(0);
+  CALL_hash___HashCollection___enlarge(variable[0])(variable[0],  TAG_Int(0)) /*HashCollection::enlarge*/;
   return_label31: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashMap].i] = 1;
   tracehead = trace.prev;
@@ -820,12 +969,14 @@ void hash___HashMap___init(val_t  self, int* init_table) {
 val_t hash___HashMapNode___key(val_t  self) {
   struct trace_t trace = {NULL, NULL, 319, LOCATE_hash___HashMapNode___key};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_abstract_collection___Couple___first(variable[2])(variable[2]) /*Couple::first*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___Couple___first(variable[0])(variable[0]) /*Couple::first*/;
   variable[1] = variable[2];
   goto return_label32;
   return_label32: while(false);
@@ -834,19 +985,21 @@ val_t hash___HashMapNode___key(val_t  self) {
 }
 void hash___HashMapNode___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
   struct trace_t trace = {NULL, NULL, 322, LOCATE_hash___HashMapNode___init};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashMapNode].i]) return;
+  /* Register variable[3]: Method return value and escape marker */
   CALL_abstract_collection___Couple___init(variable[0])(variable[0], variable[1], variable[2], init_table /*YYY*/) /*Couple::init*/;
-  variable[4] = variable[0];
-  CALL_abstract_collection___Couple___first__eq(variable[4])(variable[4],  variable[1] /*k*/) /*Couple::first=*/;
-  variable[4] = variable[0];
-  CALL_abstract_collection___Couple___second__eq(variable[4])(variable[4],  variable[2] /*v*/) /*Couple::second=*/;
+  CALL_abstract_collection___Couple___first__eq(variable[0])(variable[0],  variable[1] /*k*/) /*Couple::first=*/;
+  CALL_abstract_collection___Couple___second__eq(variable[0])(variable[0],  variable[2] /*v*/) /*Couple::second=*/;
   return_label33: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashMapNode].i] = 1;
   tracehead = trace.prev;
@@ -855,15 +1008,18 @@ void hash___HashMapNode___init(val_t  self, val_t  param0, val_t  param1, int* i
 val_t hash___HashMapIterator___item(val_t  self) {
   struct trace_t trace = {NULL, NULL, 333, LOCATE_hash___HashMapIterator___item};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_abstract_collection___Iterator___is_ok(variable[2])(variable[2]) /*HashMapIterator::is_ok*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___Iterator___is_ok(variable[0])(variable[0]) /*HashMapIterator::is_ok*/;
   if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashMapIterator___item, LOCATE_hash, 335); nit_exit(1);}
-  variable[2] = variable[0];
-  variable[2] = ATTR_hash___HashMapIterator____node(variable[2]) /*HashMapIterator::_node*/;
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_hash___HashMapIterator____node(variable[0]) /*HashMapIterator::_node*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_abstract_collection___Couple___second(variable[2])(variable[2]) /*Couple::second*/;
   variable[1] = variable[2];
   goto return_label34;
@@ -873,19 +1029,21 @@ val_t hash___HashMapIterator___item(val_t  self) {
 }
 void hash___HashMapIterator___next(val_t  self) {
   struct trace_t trace = {NULL, NULL, 351, LOCATE_hash___HashMapIterator___next};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_abstract_collection___Iterator___is_ok(variable[2])(variable[2]) /*HashMapIterator::is_ok*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___Iterator___is_ok(variable[0])(variable[0]) /*HashMapIterator::is_ok*/;
   if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashMapIterator___next, LOCATE_hash, 353); nit_exit(1);}
-  variable[2] = variable[0];
-  variable[3] = variable[0];
-  variable[3] = ATTR_hash___HashMapIterator____node(variable[3]) /*HashMapIterator::_node*/;
-  variable[3] = CALL_hash___HashNode___next_item(variable[3])(variable[3]) /*HashNode::next_item*/;
-  ATTR_hash___HashMapIterator____node(variable[2]) /*HashMapIterator::_node*/ = variable[3];
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_hash___HashMapIterator____node(variable[0]) /*HashMapIterator::_node*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_hash___HashNode___next_item(variable[2])(variable[2]) /*HashNode::next_item*/;
+  ATTR_hash___HashMapIterator____node(variable[0]) /*HashMapIterator::_node*/ = variable[2];
   return_label35: while(false);
   tracehead = trace.prev;
   return;
@@ -893,12 +1051,15 @@ void hash___HashMapIterator___next(val_t  self) {
 val_t hash___HashMapIterator___is_ok(val_t  self) {
   struct trace_t trace = {NULL, NULL, 331, LOCATE_hash___HashMapIterator___is_ok};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_hash___HashMapIterator____node(variable[2]) /*HashMapIterator::_node*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_hash___HashMapIterator____node(variable[0]) /*HashMapIterator::_node*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))))));
   variable[1] = variable[2];
   goto return_label36;
@@ -909,15 +1070,18 @@ val_t hash___HashMapIterator___is_ok(val_t  self) {
 val_t hash___HashMapIterator___key(val_t  self) {
   struct trace_t trace = {NULL, NULL, 345, LOCATE_hash___HashMapIterator___key};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_abstract_collection___Iterator___is_ok(variable[2])(variable[2]) /*HashMapIterator::is_ok*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___Iterator___is_ok(variable[0])(variable[0]) /*HashMapIterator::is_ok*/;
   if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashMapIterator___key, LOCATE_hash, 347); nit_exit(1);}
-  variable[2] = variable[0];
-  variable[2] = ATTR_hash___HashMapIterator____node(variable[2]) /*HashMapIterator::_node*/;
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_hash___HashMapIterator____node(variable[0]) /*HashMapIterator::_node*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_abstract_collection___Couple___first(variable[2])(variable[2]) /*Couple::first*/;
   variable[1] = variable[2];
   goto return_label37;
@@ -925,186 +1089,192 @@ val_t hash___HashMapIterator___key(val_t  self) {
   tracehead = trace.prev;
   return variable[1];
 }
-void hash___HashMapIterator___item__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 339, LOCATE_hash___HashMapIterator___item__eq};
-  val_t variable[4];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_hash;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*HashMapIterator::is_ok*/;
-  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashMapIterator___item__eq, LOCATE_hash, 341); nit_exit(1);}
-  variable[3] = variable[0];
-  variable[3] = ATTR_hash___HashMapIterator____node(variable[3]) /*HashMapIterator::_node*/;
-  CALL_abstract_collection___Couple___second__eq(variable[3])(variable[3],  variable[1] /*value*/) /*Couple::second=*/;
-  return_label38: while(false);
-  tracehead = trace.prev;
-  return;
-}
 void hash___HashMapIterator___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 363, LOCATE_hash___HashMapIterator___init};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashMapIterator].i]) return;
-  variable[3] = variable[0];
-  ATTR_hash___HashMapIterator____map(variable[3]) /*HashMapIterator::_map*/ =  variable[1] /*map*/;
-  variable[3] = variable[0];
-  variable[4] = CALL_hash___HashCollection___first_item( variable[1] /*map*/)( variable[1] /*map*/) /*HashCollection::first_item*/;
-  ATTR_hash___HashMapIterator____node(variable[3]) /*HashMapIterator::_node*/ = variable[4];
-  return_label39: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  ATTR_hash___HashMapIterator____map(variable[0]) /*HashMapIterator::_map*/ =  variable[1] /*map*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_hash___HashCollection___first_item( variable[1] /*map*/)( variable[1] /*map*/) /*HashCollection::first_item*/;
+  ATTR_hash___HashMapIterator____node(variable[0]) /*HashMapIterator::_node*/ = variable[3];
+  return_label38: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashMapIterator].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t hash___HashSet___iterator(val_t  self) {
   struct trace_t trace = {NULL, NULL, 402, LOCATE_hash___HashSet___iterator};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[3] = NEW_HashSetIterator_hash___HashSetIterator___init(variable[2]); /*new HashSetIterator[E]*/
-  variable[2] = variable[3];
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = NEW_HashSetIterator_hash___HashSetIterator___init(variable[0]) /*new HashSetIterator[E]*/;
   variable[1] = variable[2];
-  goto return_label40;
-  return_label40: while(false);
+  goto return_label39;
+  return_label39: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t hash___HashSet___is_empty(val_t  self) {
   struct trace_t trace = {NULL, NULL, 374, LOCATE_hash___HashSet___is_empty};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_hash___HashCollection____length(variable[2]) /*HashCollection::_length*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_hash___HashCollection____length(variable[0]) /*HashCollection::_length*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool((variable[2])==( TAG_Int(0)));
   variable[1] = variable[2];
-  goto return_label41;
-  return_label41: while(false);
+  goto return_label40;
+  return_label40: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t hash___HashSet___has(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 382, LOCATE_hash___HashSet___has};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_hash___HashCollection____array(variable[3]) /*HashCollection::_array*/;
-  variable[4] = variable[0];
-  variable[4] = CALL_hash___HashCollection___index_at(variable[4])(variable[4],  variable[1] /*item*/) /*HashCollection::index_at*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_hash___HashCollection___index_at(variable[0])(variable[0],  variable[1] /*item*/) /*HashCollection::index_at*/;
+  /* Register variable[3]: Result */
   variable[3] = UNBOX_NativeArray(variable[3])[UNTAG_Int(variable[4])];
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   variable[2] = variable[3];
-  goto return_label42;
-  return_label42: while(false);
+  goto return_label41;
+  return_label41: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t hash___HashSet___first(val_t  self) {
   struct trace_t trace = {NULL, NULL, 376, LOCATE_hash___HashSet___first};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_hash___HashCollection____length(variable[2]) /*HashCollection::_length*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_hash___HashCollection____length(variable[0]) /*HashCollection::_length*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool(UNTAG_Int(variable[2])>UNTAG_Int( TAG_Int(0)));
   if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashSet___first, LOCATE_hash, 378); nit_exit(1);}
-  variable[2] = variable[0];
-  variable[2] = ATTR_hash___HashCollection____first_item(variable[2]) /*HashCollection::_first_item*/;
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_hash___HashCollection____first_item(variable[0]) /*HashCollection::_first_item*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_hash___HashNode___key(variable[2])(variable[2]) /*HashSetNode::key*/;
   variable[1] = variable[2];
-  goto return_label43;
-  return_label43: while(false);
+  goto return_label42;
+  return_label42: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 void hash___HashSet___clear(val_t  self) {
   struct trace_t trace = {NULL, NULL, 400, LOCATE_hash___HashSet___clear};
-  val_t variable[3];
-  void **closurevariable = NULL;
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  CALL_hash___HashCollection___raz(variable[2])(variable[2]) /*HashCollection::raz*/;
-  return_label44: while(false);
+  /* Register variable[1]: Method return value and escape marker */
+  CALL_hash___HashCollection___raz(variable[0])(variable[0]) /*HashCollection::raz*/;
+  return_label43: while(false);
   tracehead = trace.prev;
   return;
 }
 void hash___HashSet___remove(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 398, LOCATE_hash___HashSet___remove};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[4] = variable[0];
-  variable[4] = CALL_hash___HashCollection___index_at(variable[4])(variable[4],  variable[1] /*item*/) /*HashCollection::index_at*/;
-  CALL_hash___HashCollection___remove_index(variable[3])(variable[3], variable[4]) /*HashCollection::remove_index*/;
-  return_label45: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_hash___HashCollection___index_at(variable[0])(variable[0],  variable[1] /*item*/) /*HashCollection::index_at*/;
+  CALL_hash___HashCollection___remove_index(variable[0])(variable[0], variable[3]) /*HashCollection::remove_index*/;
+  return_label44: while(false);
   tracehead = trace.prev;
   return;
 }
 void hash___HashSet___add(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 387, LOCATE_hash___HashSet___add};
-  val_t variable[7];
-  void **closurevariable = NULL;
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[4] = CALL_hash___HashCollection___index_at(variable[4])(variable[4],  variable[1] /*item*/) /*HashCollection::index_at*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_hash___HashCollection___index_at(variable[0])(variable[0],  variable[1] /*item*/) /*HashCollection::index_at*/;
   variable[3] = variable[4];
-  variable[5] = variable[0];
-  variable[5] = ATTR_hash___HashCollection____array(variable[5]) /*HashCollection::_array*/;
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = ATTR_hash___HashCollection____array(variable[0]) /*HashCollection::_array*/;
+  /* Register variable[5]: Result */
   variable[5] = UNBOX_NativeArray(variable[5])[UNTAG_Int( variable[3] /*i*/)];
   variable[4] = variable[5];
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*c*/ ==  NIT_NULL /*null*/) || (( variable[4] /*c*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[4] /*c*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*c*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[4] /*c*/)( variable[4] /*c*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[5])) { /*if*/
     CALL_hash___HashSetNode___key__eq( variable[4] /*c*/)( variable[4] /*c*/,  variable[1] /*item*/) /*HashSetNode::key=*/;
   } else { /*if*/
-    variable[5] = variable[0];
-    variable[6] = NEW_HashSetNode_hash___HashSetNode___init( variable[1] /*item*/); /*new HashSetNode[E]*/
-    CALL_hash___HashCollection___store(variable[5])(variable[5],  variable[3] /*i*/, variable[6]) /*HashCollection::store*/;
+    /* Register variable[5]: Result */
+    variable[5] = NEW_HashSetNode_hash___HashSetNode___init( variable[1] /*item*/) /*new HashSetNode[E]*/;
+    CALL_hash___HashCollection___store(variable[0])(variable[0],  variable[3] /*i*/, variable[5]) /*HashCollection::store*/;
   }
-  return_label46: while(false);
+  return_label45: while(false);
   tracehead = trace.prev;
   return;
 }
 void hash___HashSet___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 404, LOCATE_hash___HashSet___init};
-  val_t variable[3];
-  void **closurevariable = NULL;
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashSet].i]) return;
-  variable[2] = variable[0];
-  ATTR_hash___HashCollection____capacity(variable[2]) /*HashCollection::_capacity*/ =  TAG_Int(0);
-  variable[2] = variable[0];
-  ATTR_hash___HashCollection____length(variable[2]) /*HashCollection::_length*/ =  TAG_Int(0);
-  variable[2] = variable[0];
-  CALL_hash___HashCollection___enlarge(variable[2])(variable[2],  TAG_Int(0)) /*HashCollection::enlarge*/;
-  return_label47: while(false);
+  /* Register variable[1]: Method return value and escape marker */
+  ATTR_hash___HashCollection____capacity(variable[0]) /*HashCollection::_capacity*/ =  TAG_Int(0);
+  ATTR_hash___HashCollection____length(variable[0]) /*HashCollection::_length*/ =  TAG_Int(0);
+  CALL_hash___HashCollection___enlarge(variable[0])(variable[0],  TAG_Int(0)) /*HashCollection::enlarge*/;
+  return_label46: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashSet].i] = 1;
   tracehead = trace.prev;
   return;
@@ -1112,7 +1282,7 @@ void hash___HashSet___init(val_t  self, int* init_table) {
 val_t hash___HashSetNode___key(val_t  self) {
   struct trace_t trace = {NULL, NULL, 416, LOCATE_hash___HashSetNode___key};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   tracehead = trace.prev;
@@ -1121,7 +1291,7 @@ val_t hash___HashSetNode___key(val_t  self) {
 void hash___HashSetNode___key__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 416, LOCATE_hash___HashSetNode___key__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
   ATTR_hash___HashSetNode____key( self) /*HashSetNode::_key*/ =  param0;
@@ -1130,16 +1300,18 @@ void hash___HashSetNode___key__eq(val_t  self, val_t  param0) {
 }
 void hash___HashSetNode___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 418, LOCATE_hash___HashSetNode___init};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashSetNode].i]) return;
-  variable[3] = variable[0];
-  ATTR_hash___HashSetNode____key(variable[3]) /*HashSetNode::_key*/ =  variable[1] /*e*/;
-  return_label48: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  ATTR_hash___HashSetNode____key(variable[0]) /*HashSetNode::_key*/ =  variable[1] /*e*/;
+  return_label47: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashSetNode].i] = 1;
   tracehead = trace.prev;
   return;
@@ -1147,72 +1319,82 @@ void hash___HashSetNode___init(val_t  self, val_t  param0, int* init_table) {
 val_t hash___HashSetIterator___item(val_t  self) {
   struct trace_t trace = {NULL, NULL, 428, LOCATE_hash___HashSetIterator___item};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_abstract_collection___Iterator___is_ok(variable[2])(variable[2]) /*HashSetIterator::is_ok*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___Iterator___is_ok(variable[0])(variable[0]) /*HashSetIterator::is_ok*/;
   if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashSetIterator___item, LOCATE_hash, 430); nit_exit(1);}
-  variable[2] = variable[0];
-  variable[2] = ATTR_hash___HashSetIterator____node(variable[2]) /*HashSetIterator::_node*/;
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_hash___HashSetIterator____node(variable[0]) /*HashSetIterator::_node*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_hash___HashNode___key(variable[2])(variable[2]) /*HashSetNode::key*/;
   variable[1] = variable[2];
-  goto return_label49;
-  return_label49: while(false);
+  goto return_label48;
+  return_label48: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 void hash___HashSetIterator___next(val_t  self) {
   struct trace_t trace = {NULL, NULL, 434, LOCATE_hash___HashSetIterator___next};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_abstract_collection___Iterator___is_ok(variable[2])(variable[2]) /*HashSetIterator::is_ok*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___Iterator___is_ok(variable[0])(variable[0]) /*HashSetIterator::is_ok*/;
   if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_hash___HashSetIterator___next, LOCATE_hash, 436); nit_exit(1);}
-  variable[2] = variable[0];
-  variable[3] = variable[0];
-  variable[3] = ATTR_hash___HashSetIterator____node(variable[3]) /*HashSetIterator::_node*/;
-  variable[3] = CALL_hash___HashNode___next_item(variable[3])(variable[3]) /*HashNode::next_item*/;
-  ATTR_hash___HashSetIterator____node(variable[2]) /*HashSetIterator::_node*/ = variable[3];
-  return_label50: while(false);
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_hash___HashSetIterator____node(variable[0]) /*HashSetIterator::_node*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_hash___HashNode___next_item(variable[2])(variable[2]) /*HashNode::next_item*/;
+  ATTR_hash___HashSetIterator____node(variable[0]) /*HashSetIterator::_node*/ = variable[2];
+  return_label49: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t hash___HashSetIterator___is_ok(val_t  self) {
   struct trace_t trace = {NULL, NULL, 426, LOCATE_hash___HashSetIterator___is_ok};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_hash___HashSetIterator____node(variable[2]) /*HashSetIterator::_node*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_hash___HashSetIterator____node(variable[0]) /*HashSetIterator::_node*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))))));
   variable[1] = variable[2];
-  goto return_label51;
-  return_label51: while(false);
+  goto return_label50;
+  return_label50: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 void hash___HashSetIterator___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 446, LOCATE_hash___HashSetIterator___init};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_hash;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashSetIterator].i]) return;
-  variable[3] = variable[0];
-  ATTR_hash___HashSetIterator____set(variable[3]) /*HashSetIterator::_set*/ =  variable[1] /*set*/;
-  variable[3] = variable[0];
-  variable[4] = CALL_hash___HashCollection___first_item( variable[1] /*set*/)( variable[1] /*set*/) /*HashCollection::first_item*/;
-  ATTR_hash___HashSetIterator____node(variable[3]) /*HashSetIterator::_node*/ = variable[4];
-  return_label52: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  ATTR_hash___HashSetIterator____set(variable[0]) /*HashSetIterator::_set*/ =  variable[1] /*set*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_hash___HashCollection___first_item( variable[1] /*set*/)( variable[1] /*set*/) /*HashCollection::first_item*/;
+  ATTR_hash___HashSetIterator____node(variable[0]) /*HashSetIterator::_node*/ = variable[3];
+  return_label51: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_HashSetIterator].i] = 1;
   tracehead = trace.prev;
   return;

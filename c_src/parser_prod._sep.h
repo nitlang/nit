@@ -148,76 +148,76 @@ extern const int SFT_parser_prod[];
 #define CALL_parser_prod___AWhileExpr___init_awhileexpr(recv) ((parser_prod___AWhileExpr___init_awhileexpr_t)CALL((recv), (SFT_parser_prod[64] + 1)))
 #define CALL_parser_prod___AForExpr___empty_init(recv) ((parser_prod___AForExpr___empty_init_t)CALL((recv), (SFT_parser_prod[65] + 0)))
 #define CALL_parser_prod___AForExpr___init_aforexpr(recv) ((parser_prod___AForExpr___init_aforexpr_t)CALL((recv), (SFT_parser_prod[65] + 1)))
-#define CALL_parser_prod___AForVardeclExpr___empty_init(recv) ((parser_prod___AForVardeclExpr___empty_init_t)CALL((recv), (SFT_parser_prod[66] + 0)))
-#define CALL_parser_prod___AForVardeclExpr___init_aforvardeclexpr(recv) ((parser_prod___AForVardeclExpr___init_aforvardeclexpr_t)CALL((recv), (SFT_parser_prod[66] + 1)))
-#define CALL_parser_prod___AAssertExpr___empty_init(recv) ((parser_prod___AAssertExpr___empty_init_t)CALL((recv), (SFT_parser_prod[67] + 0)))
-#define CALL_parser_prod___AAssertExpr___init_aassertexpr(recv) ((parser_prod___AAssertExpr___init_aassertexpr_t)CALL((recv), (SFT_parser_prod[67] + 1)))
-#define CALL_parser_prod___AOnceExpr___empty_init(recv) ((parser_prod___AOnceExpr___empty_init_t)CALL((recv), (SFT_parser_prod[68] + 0)))
-#define CALL_parser_prod___AOnceExpr___init_aonceexpr(recv) ((parser_prod___AOnceExpr___init_aonceexpr_t)CALL((recv), (SFT_parser_prod[68] + 1)))
-#define CALL_parser_prod___ASendExpr___empty_init(recv) ((parser_prod___ASendExpr___empty_init_t)CALL((recv), (SFT_parser_prod[69] + 0)))
-#define CALL_parser_prod___ASendExpr___init_asendexpr(recv) ((parser_prod___ASendExpr___init_asendexpr_t)CALL((recv), (SFT_parser_prod[69] + 1)))
-#define CALL_parser_prod___ABinopExpr___empty_init(recv) ((parser_prod___ABinopExpr___empty_init_t)CALL((recv), (SFT_parser_prod[70] + 0)))
-#define CALL_parser_prod___ABinopExpr___init_abinopexpr(recv) ((parser_prod___ABinopExpr___init_abinopexpr_t)CALL((recv), (SFT_parser_prod[70] + 1)))
-#define CALL_parser_prod___AOrExpr___empty_init(recv) ((parser_prod___AOrExpr___empty_init_t)CALL((recv), (SFT_parser_prod[71] + 0)))
-#define CALL_parser_prod___AOrExpr___init_aorexpr(recv) ((parser_prod___AOrExpr___init_aorexpr_t)CALL((recv), (SFT_parser_prod[71] + 1)))
-#define CALL_parser_prod___AAndExpr___empty_init(recv) ((parser_prod___AAndExpr___empty_init_t)CALL((recv), (SFT_parser_prod[72] + 0)))
-#define CALL_parser_prod___AAndExpr___init_aandexpr(recv) ((parser_prod___AAndExpr___init_aandexpr_t)CALL((recv), (SFT_parser_prod[72] + 1)))
-#define CALL_parser_prod___ANotExpr___empty_init(recv) ((parser_prod___ANotExpr___empty_init_t)CALL((recv), (SFT_parser_prod[73] + 0)))
-#define CALL_parser_prod___ANotExpr___init_anotexpr(recv) ((parser_prod___ANotExpr___init_anotexpr_t)CALL((recv), (SFT_parser_prod[73] + 1)))
-#define CALL_parser_prod___AEqExpr___empty_init(recv) ((parser_prod___AEqExpr___empty_init_t)CALL((recv), (SFT_parser_prod[74] + 0)))
-#define CALL_parser_prod___AEqExpr___init_aeqexpr(recv) ((parser_prod___AEqExpr___init_aeqexpr_t)CALL((recv), (SFT_parser_prod[74] + 1)))
-#define CALL_parser_prod___AEeExpr___empty_init(recv) ((parser_prod___AEeExpr___empty_init_t)CALL((recv), (SFT_parser_prod[75] + 0)))
-#define CALL_parser_prod___AEeExpr___init_aeeexpr(recv) ((parser_prod___AEeExpr___init_aeeexpr_t)CALL((recv), (SFT_parser_prod[75] + 1)))
-#define CALL_parser_prod___ANeExpr___empty_init(recv) ((parser_prod___ANeExpr___empty_init_t)CALL((recv), (SFT_parser_prod[76] + 0)))
-#define CALL_parser_prod___ANeExpr___init_aneexpr(recv) ((parser_prod___ANeExpr___init_aneexpr_t)CALL((recv), (SFT_parser_prod[76] + 1)))
-#define CALL_parser_prod___ALtExpr___empty_init(recv) ((parser_prod___ALtExpr___empty_init_t)CALL((recv), (SFT_parser_prod[77] + 0)))
-#define CALL_parser_prod___ALtExpr___init_altexpr(recv) ((parser_prod___ALtExpr___init_altexpr_t)CALL((recv), (SFT_parser_prod[77] + 1)))
-#define CALL_parser_prod___ALeExpr___empty_init(recv) ((parser_prod___ALeExpr___empty_init_t)CALL((recv), (SFT_parser_prod[78] + 0)))
-#define CALL_parser_prod___ALeExpr___init_aleexpr(recv) ((parser_prod___ALeExpr___init_aleexpr_t)CALL((recv), (SFT_parser_prod[78] + 1)))
-#define CALL_parser_prod___AGtExpr___empty_init(recv) ((parser_prod___AGtExpr___empty_init_t)CALL((recv), (SFT_parser_prod[79] + 0)))
-#define CALL_parser_prod___AGtExpr___init_agtexpr(recv) ((parser_prod___AGtExpr___init_agtexpr_t)CALL((recv), (SFT_parser_prod[79] + 1)))
-#define CALL_parser_prod___AGeExpr___empty_init(recv) ((parser_prod___AGeExpr___empty_init_t)CALL((recv), (SFT_parser_prod[80] + 0)))
-#define CALL_parser_prod___AGeExpr___init_ageexpr(recv) ((parser_prod___AGeExpr___init_ageexpr_t)CALL((recv), (SFT_parser_prod[80] + 1)))
-#define CALL_parser_prod___AIsaExpr___empty_init(recv) ((parser_prod___AIsaExpr___empty_init_t)CALL((recv), (SFT_parser_prod[81] + 0)))
-#define CALL_parser_prod___AIsaExpr___init_aisaexpr(recv) ((parser_prod___AIsaExpr___init_aisaexpr_t)CALL((recv), (SFT_parser_prod[81] + 1)))
-#define CALL_parser_prod___APlusExpr___empty_init(recv) ((parser_prod___APlusExpr___empty_init_t)CALL((recv), (SFT_parser_prod[82] + 0)))
-#define CALL_parser_prod___APlusExpr___init_aplusexpr(recv) ((parser_prod___APlusExpr___init_aplusexpr_t)CALL((recv), (SFT_parser_prod[82] + 1)))
-#define CALL_parser_prod___AMinusExpr___empty_init(recv) ((parser_prod___AMinusExpr___empty_init_t)CALL((recv), (SFT_parser_prod[83] + 0)))
-#define CALL_parser_prod___AMinusExpr___init_aminusexpr(recv) ((parser_prod___AMinusExpr___init_aminusexpr_t)CALL((recv), (SFT_parser_prod[83] + 1)))
-#define CALL_parser_prod___AStarshipExpr___empty_init(recv) ((parser_prod___AStarshipExpr___empty_init_t)CALL((recv), (SFT_parser_prod[84] + 0)))
-#define CALL_parser_prod___AStarshipExpr___init_astarshipexpr(recv) ((parser_prod___AStarshipExpr___init_astarshipexpr_t)CALL((recv), (SFT_parser_prod[84] + 1)))
-#define CALL_parser_prod___AStarExpr___empty_init(recv) ((parser_prod___AStarExpr___empty_init_t)CALL((recv), (SFT_parser_prod[85] + 0)))
-#define CALL_parser_prod___AStarExpr___init_astarexpr(recv) ((parser_prod___AStarExpr___init_astarexpr_t)CALL((recv), (SFT_parser_prod[85] + 1)))
-#define CALL_parser_prod___ASlashExpr___empty_init(recv) ((parser_prod___ASlashExpr___empty_init_t)CALL((recv), (SFT_parser_prod[86] + 0)))
-#define CALL_parser_prod___ASlashExpr___init_aslashexpr(recv) ((parser_prod___ASlashExpr___init_aslashexpr_t)CALL((recv), (SFT_parser_prod[86] + 1)))
-#define CALL_parser_prod___APercentExpr___empty_init(recv) ((parser_prod___APercentExpr___empty_init_t)CALL((recv), (SFT_parser_prod[87] + 0)))
-#define CALL_parser_prod___APercentExpr___init_apercentexpr(recv) ((parser_prod___APercentExpr___init_apercentexpr_t)CALL((recv), (SFT_parser_prod[87] + 1)))
-#define CALL_parser_prod___AUminusExpr___empty_init(recv) ((parser_prod___AUminusExpr___empty_init_t)CALL((recv), (SFT_parser_prod[88] + 0)))
-#define CALL_parser_prod___AUminusExpr___init_auminusexpr(recv) ((parser_prod___AUminusExpr___init_auminusexpr_t)CALL((recv), (SFT_parser_prod[88] + 1)))
-#define CALL_parser_prod___ANewExpr___empty_init(recv) ((parser_prod___ANewExpr___empty_init_t)CALL((recv), (SFT_parser_prod[89] + 0)))
-#define CALL_parser_prod___ANewExpr___init_anewexpr(recv) ((parser_prod___ANewExpr___init_anewexpr_t)CALL((recv), (SFT_parser_prod[89] + 1)))
-#define CALL_parser_prod___AAttrExpr___empty_init(recv) ((parser_prod___AAttrExpr___empty_init_t)CALL((recv), (SFT_parser_prod[90] + 0)))
-#define CALL_parser_prod___AAttrExpr___init_aattrexpr(recv) ((parser_prod___AAttrExpr___init_aattrexpr_t)CALL((recv), (SFT_parser_prod[90] + 1)))
-#define CALL_parser_prod___AAttrAssignExpr___empty_init(recv) ((parser_prod___AAttrAssignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[91] + 0)))
-#define CALL_parser_prod___AAttrAssignExpr___init_aattrassignexpr(recv) ((parser_prod___AAttrAssignExpr___init_aattrassignexpr_t)CALL((recv), (SFT_parser_prod[91] + 1)))
-#define CALL_parser_prod___AAttrReassignExpr___empty_init(recv) ((parser_prod___AAttrReassignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[92] + 0)))
-#define CALL_parser_prod___AAttrReassignExpr___init_aattrreassignexpr(recv) ((parser_prod___AAttrReassignExpr___init_aattrreassignexpr_t)CALL((recv), (SFT_parser_prod[92] + 1)))
-#define CALL_parser_prod___ACallExpr___empty_init(recv) ((parser_prod___ACallExpr___empty_init_t)CALL((recv), (SFT_parser_prod[93] + 0)))
-#define CALL_parser_prod___ACallExpr___init_acallexpr(recv) ((parser_prod___ACallExpr___init_acallexpr_t)CALL((recv), (SFT_parser_prod[93] + 1)))
-#define CALL_parser_prod___ACallAssignExpr___empty_init(recv) ((parser_prod___ACallAssignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[94] + 0)))
-#define CALL_parser_prod___ACallAssignExpr___init_acallassignexpr(recv) ((parser_prod___ACallAssignExpr___init_acallassignexpr_t)CALL((recv), (SFT_parser_prod[94] + 1)))
-#define CALL_parser_prod___ACallReassignExpr___empty_init(recv) ((parser_prod___ACallReassignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[95] + 0)))
-#define CALL_parser_prod___ACallReassignExpr___init_acallreassignexpr(recv) ((parser_prod___ACallReassignExpr___init_acallreassignexpr_t)CALL((recv), (SFT_parser_prod[95] + 1)))
-#define CALL_parser_prod___ASuperExpr___empty_init(recv) ((parser_prod___ASuperExpr___empty_init_t)CALL((recv), (SFT_parser_prod[96] + 0)))
-#define CALL_parser_prod___ASuperExpr___init_asuperexpr(recv) ((parser_prod___ASuperExpr___init_asuperexpr_t)CALL((recv), (SFT_parser_prod[96] + 1)))
-#define CALL_parser_prod___AInitExpr___empty_init(recv) ((parser_prod___AInitExpr___empty_init_t)CALL((recv), (SFT_parser_prod[97] + 0)))
-#define CALL_parser_prod___AInitExpr___init_ainitexpr(recv) ((parser_prod___AInitExpr___init_ainitexpr_t)CALL((recv), (SFT_parser_prod[97] + 1)))
-#define CALL_parser_prod___ABraExpr___empty_init(recv) ((parser_prod___ABraExpr___empty_init_t)CALL((recv), (SFT_parser_prod[98] + 0)))
-#define CALL_parser_prod___ABraExpr___init_abraexpr(recv) ((parser_prod___ABraExpr___init_abraexpr_t)CALL((recv), (SFT_parser_prod[98] + 1)))
-#define CALL_parser_prod___ABraAssignExpr___empty_init(recv) ((parser_prod___ABraAssignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[99] + 0)))
-#define CALL_parser_prod___ABraAssignExpr___init_abraassignexpr(recv) ((parser_prod___ABraAssignExpr___init_abraassignexpr_t)CALL((recv), (SFT_parser_prod[99] + 1)))
-#define CALL_parser_prod___ABraReassignExpr___empty_init(recv) ((parser_prod___ABraReassignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[100] + 0)))
-#define CALL_parser_prod___ABraReassignExpr___init_abrareassignexpr(recv) ((parser_prod___ABraReassignExpr___init_abrareassignexpr_t)CALL((recv), (SFT_parser_prod[100] + 1)))
+#define CALL_parser_prod___AAssertExpr___empty_init(recv) ((parser_prod___AAssertExpr___empty_init_t)CALL((recv), (SFT_parser_prod[66] + 0)))
+#define CALL_parser_prod___AAssertExpr___init_aassertexpr(recv) ((parser_prod___AAssertExpr___init_aassertexpr_t)CALL((recv), (SFT_parser_prod[66] + 1)))
+#define CALL_parser_prod___AOnceExpr___empty_init(recv) ((parser_prod___AOnceExpr___empty_init_t)CALL((recv), (SFT_parser_prod[67] + 0)))
+#define CALL_parser_prod___AOnceExpr___init_aonceexpr(recv) ((parser_prod___AOnceExpr___init_aonceexpr_t)CALL((recv), (SFT_parser_prod[67] + 1)))
+#define CALL_parser_prod___ASendExpr___empty_init(recv) ((parser_prod___ASendExpr___empty_init_t)CALL((recv), (SFT_parser_prod[68] + 0)))
+#define CALL_parser_prod___ASendExpr___init_asendexpr(recv) ((parser_prod___ASendExpr___init_asendexpr_t)CALL((recv), (SFT_parser_prod[68] + 1)))
+#define CALL_parser_prod___ABinopExpr___empty_init(recv) ((parser_prod___ABinopExpr___empty_init_t)CALL((recv), (SFT_parser_prod[69] + 0)))
+#define CALL_parser_prod___ABinopExpr___init_abinopexpr(recv) ((parser_prod___ABinopExpr___init_abinopexpr_t)CALL((recv), (SFT_parser_prod[69] + 1)))
+#define CALL_parser_prod___AOrExpr___empty_init(recv) ((parser_prod___AOrExpr___empty_init_t)CALL((recv), (SFT_parser_prod[70] + 0)))
+#define CALL_parser_prod___AOrExpr___init_aorexpr(recv) ((parser_prod___AOrExpr___init_aorexpr_t)CALL((recv), (SFT_parser_prod[70] + 1)))
+#define CALL_parser_prod___AAndExpr___empty_init(recv) ((parser_prod___AAndExpr___empty_init_t)CALL((recv), (SFT_parser_prod[71] + 0)))
+#define CALL_parser_prod___AAndExpr___init_aandexpr(recv) ((parser_prod___AAndExpr___init_aandexpr_t)CALL((recv), (SFT_parser_prod[71] + 1)))
+#define CALL_parser_prod___ANotExpr___empty_init(recv) ((parser_prod___ANotExpr___empty_init_t)CALL((recv), (SFT_parser_prod[72] + 0)))
+#define CALL_parser_prod___ANotExpr___init_anotexpr(recv) ((parser_prod___ANotExpr___init_anotexpr_t)CALL((recv), (SFT_parser_prod[72] + 1)))
+#define CALL_parser_prod___AEqExpr___empty_init(recv) ((parser_prod___AEqExpr___empty_init_t)CALL((recv), (SFT_parser_prod[73] + 0)))
+#define CALL_parser_prod___AEqExpr___init_aeqexpr(recv) ((parser_prod___AEqExpr___init_aeqexpr_t)CALL((recv), (SFT_parser_prod[73] + 1)))
+#define CALL_parser_prod___AEeExpr___empty_init(recv) ((parser_prod___AEeExpr___empty_init_t)CALL((recv), (SFT_parser_prod[74] + 0)))
+#define CALL_parser_prod___AEeExpr___init_aeeexpr(recv) ((parser_prod___AEeExpr___init_aeeexpr_t)CALL((recv), (SFT_parser_prod[74] + 1)))
+#define CALL_parser_prod___ANeExpr___empty_init(recv) ((parser_prod___ANeExpr___empty_init_t)CALL((recv), (SFT_parser_prod[75] + 0)))
+#define CALL_parser_prod___ANeExpr___init_aneexpr(recv) ((parser_prod___ANeExpr___init_aneexpr_t)CALL((recv), (SFT_parser_prod[75] + 1)))
+#define CALL_parser_prod___ALtExpr___empty_init(recv) ((parser_prod___ALtExpr___empty_init_t)CALL((recv), (SFT_parser_prod[76] + 0)))
+#define CALL_parser_prod___ALtExpr___init_altexpr(recv) ((parser_prod___ALtExpr___init_altexpr_t)CALL((recv), (SFT_parser_prod[76] + 1)))
+#define CALL_parser_prod___ALeExpr___empty_init(recv) ((parser_prod___ALeExpr___empty_init_t)CALL((recv), (SFT_parser_prod[77] + 0)))
+#define CALL_parser_prod___ALeExpr___init_aleexpr(recv) ((parser_prod___ALeExpr___init_aleexpr_t)CALL((recv), (SFT_parser_prod[77] + 1)))
+#define CALL_parser_prod___AGtExpr___empty_init(recv) ((parser_prod___AGtExpr___empty_init_t)CALL((recv), (SFT_parser_prod[78] + 0)))
+#define CALL_parser_prod___AGtExpr___init_agtexpr(recv) ((parser_prod___AGtExpr___init_agtexpr_t)CALL((recv), (SFT_parser_prod[78] + 1)))
+#define CALL_parser_prod___AGeExpr___empty_init(recv) ((parser_prod___AGeExpr___empty_init_t)CALL((recv), (SFT_parser_prod[79] + 0)))
+#define CALL_parser_prod___AGeExpr___init_ageexpr(recv) ((parser_prod___AGeExpr___init_ageexpr_t)CALL((recv), (SFT_parser_prod[79] + 1)))
+#define CALL_parser_prod___AIsaExpr___empty_init(recv) ((parser_prod___AIsaExpr___empty_init_t)CALL((recv), (SFT_parser_prod[80] + 0)))
+#define CALL_parser_prod___AIsaExpr___init_aisaexpr(recv) ((parser_prod___AIsaExpr___init_aisaexpr_t)CALL((recv), (SFT_parser_prod[80] + 1)))
+#define CALL_parser_prod___APlusExpr___empty_init(recv) ((parser_prod___APlusExpr___empty_init_t)CALL((recv), (SFT_parser_prod[81] + 0)))
+#define CALL_parser_prod___APlusExpr___init_aplusexpr(recv) ((parser_prod___APlusExpr___init_aplusexpr_t)CALL((recv), (SFT_parser_prod[81] + 1)))
+#define CALL_parser_prod___AMinusExpr___empty_init(recv) ((parser_prod___AMinusExpr___empty_init_t)CALL((recv), (SFT_parser_prod[82] + 0)))
+#define CALL_parser_prod___AMinusExpr___init_aminusexpr(recv) ((parser_prod___AMinusExpr___init_aminusexpr_t)CALL((recv), (SFT_parser_prod[82] + 1)))
+#define CALL_parser_prod___AStarshipExpr___empty_init(recv) ((parser_prod___AStarshipExpr___empty_init_t)CALL((recv), (SFT_parser_prod[83] + 0)))
+#define CALL_parser_prod___AStarshipExpr___init_astarshipexpr(recv) ((parser_prod___AStarshipExpr___init_astarshipexpr_t)CALL((recv), (SFT_parser_prod[83] + 1)))
+#define CALL_parser_prod___AStarExpr___empty_init(recv) ((parser_prod___AStarExpr___empty_init_t)CALL((recv), (SFT_parser_prod[84] + 0)))
+#define CALL_parser_prod___AStarExpr___init_astarexpr(recv) ((parser_prod___AStarExpr___init_astarexpr_t)CALL((recv), (SFT_parser_prod[84] + 1)))
+#define CALL_parser_prod___ASlashExpr___empty_init(recv) ((parser_prod___ASlashExpr___empty_init_t)CALL((recv), (SFT_parser_prod[85] + 0)))
+#define CALL_parser_prod___ASlashExpr___init_aslashexpr(recv) ((parser_prod___ASlashExpr___init_aslashexpr_t)CALL((recv), (SFT_parser_prod[85] + 1)))
+#define CALL_parser_prod___APercentExpr___empty_init(recv) ((parser_prod___APercentExpr___empty_init_t)CALL((recv), (SFT_parser_prod[86] + 0)))
+#define CALL_parser_prod___APercentExpr___init_apercentexpr(recv) ((parser_prod___APercentExpr___init_apercentexpr_t)CALL((recv), (SFT_parser_prod[86] + 1)))
+#define CALL_parser_prod___AUminusExpr___empty_init(recv) ((parser_prod___AUminusExpr___empty_init_t)CALL((recv), (SFT_parser_prod[87] + 0)))
+#define CALL_parser_prod___AUminusExpr___init_auminusexpr(recv) ((parser_prod___AUminusExpr___init_auminusexpr_t)CALL((recv), (SFT_parser_prod[87] + 1)))
+#define CALL_parser_prod___ANewExpr___empty_init(recv) ((parser_prod___ANewExpr___empty_init_t)CALL((recv), (SFT_parser_prod[88] + 0)))
+#define CALL_parser_prod___ANewExpr___init_anewexpr(recv) ((parser_prod___ANewExpr___init_anewexpr_t)CALL((recv), (SFT_parser_prod[88] + 1)))
+#define CALL_parser_prod___AAttrExpr___empty_init(recv) ((parser_prod___AAttrExpr___empty_init_t)CALL((recv), (SFT_parser_prod[89] + 0)))
+#define CALL_parser_prod___AAttrExpr___init_aattrexpr(recv) ((parser_prod___AAttrExpr___init_aattrexpr_t)CALL((recv), (SFT_parser_prod[89] + 1)))
+#define CALL_parser_prod___AAttrAssignExpr___empty_init(recv) ((parser_prod___AAttrAssignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[90] + 0)))
+#define CALL_parser_prod___AAttrAssignExpr___init_aattrassignexpr(recv) ((parser_prod___AAttrAssignExpr___init_aattrassignexpr_t)CALL((recv), (SFT_parser_prod[90] + 1)))
+#define CALL_parser_prod___AAttrReassignExpr___empty_init(recv) ((parser_prod___AAttrReassignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[91] + 0)))
+#define CALL_parser_prod___AAttrReassignExpr___init_aattrreassignexpr(recv) ((parser_prod___AAttrReassignExpr___init_aattrreassignexpr_t)CALL((recv), (SFT_parser_prod[91] + 1)))
+#define CALL_parser_prod___ACallExpr___empty_init(recv) ((parser_prod___ACallExpr___empty_init_t)CALL((recv), (SFT_parser_prod[92] + 0)))
+#define CALL_parser_prod___ACallExpr___init_acallexpr(recv) ((parser_prod___ACallExpr___init_acallexpr_t)CALL((recv), (SFT_parser_prod[92] + 1)))
+#define CALL_parser_prod___ACallAssignExpr___empty_init(recv) ((parser_prod___ACallAssignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[93] + 0)))
+#define CALL_parser_prod___ACallAssignExpr___init_acallassignexpr(recv) ((parser_prod___ACallAssignExpr___init_acallassignexpr_t)CALL((recv), (SFT_parser_prod[93] + 1)))
+#define CALL_parser_prod___ACallReassignExpr___empty_init(recv) ((parser_prod___ACallReassignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[94] + 0)))
+#define CALL_parser_prod___ACallReassignExpr___init_acallreassignexpr(recv) ((parser_prod___ACallReassignExpr___init_acallreassignexpr_t)CALL((recv), (SFT_parser_prod[94] + 1)))
+#define CALL_parser_prod___ASuperExpr___empty_init(recv) ((parser_prod___ASuperExpr___empty_init_t)CALL((recv), (SFT_parser_prod[95] + 0)))
+#define CALL_parser_prod___ASuperExpr___init_asuperexpr(recv) ((parser_prod___ASuperExpr___init_asuperexpr_t)CALL((recv), (SFT_parser_prod[95] + 1)))
+#define CALL_parser_prod___AInitExpr___empty_init(recv) ((parser_prod___AInitExpr___empty_init_t)CALL((recv), (SFT_parser_prod[96] + 0)))
+#define CALL_parser_prod___AInitExpr___init_ainitexpr(recv) ((parser_prod___AInitExpr___init_ainitexpr_t)CALL((recv), (SFT_parser_prod[96] + 1)))
+#define CALL_parser_prod___ABraExpr___empty_init(recv) ((parser_prod___ABraExpr___empty_init_t)CALL((recv), (SFT_parser_prod[97] + 0)))
+#define CALL_parser_prod___ABraExpr___init_abraexpr(recv) ((parser_prod___ABraExpr___init_abraexpr_t)CALL((recv), (SFT_parser_prod[97] + 1)))
+#define CALL_parser_prod___ABraAssignExpr___empty_init(recv) ((parser_prod___ABraAssignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[98] + 0)))
+#define CALL_parser_prod___ABraAssignExpr___init_abraassignexpr(recv) ((parser_prod___ABraAssignExpr___init_abraassignexpr_t)CALL((recv), (SFT_parser_prod[98] + 1)))
+#define CALL_parser_prod___ABraReassignExpr___empty_init(recv) ((parser_prod___ABraReassignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[99] + 0)))
+#define CALL_parser_prod___ABraReassignExpr___init_abrareassignexpr(recv) ((parser_prod___ABraReassignExpr___init_abrareassignexpr_t)CALL((recv), (SFT_parser_prod[99] + 1)))
+#define CALL_parser_prod___AClosureCallExpr___empty_init(recv) ((parser_prod___AClosureCallExpr___empty_init_t)CALL((recv), (SFT_parser_prod[100] + 0)))
+#define CALL_parser_prod___AClosureCallExpr___init_aclosurecallexpr(recv) ((parser_prod___AClosureCallExpr___init_aclosurecallexpr_t)CALL((recv), (SFT_parser_prod[100] + 1)))
 #define CALL_parser_prod___AVarExpr___empty_init(recv) ((parser_prod___AVarExpr___empty_init_t)CALL((recv), (SFT_parser_prod[101] + 0)))
 #define CALL_parser_prod___AVarExpr___init_avarexpr(recv) ((parser_prod___AVarExpr___init_avarexpr_t)CALL((recv), (SFT_parser_prod[101] + 1)))
 #define CALL_parser_prod___AVarAssignExpr___empty_init(recv) ((parser_prod___AVarAssignExpr___empty_init_t)CALL((recv), (SFT_parser_prod[102] + 0)))
@@ -262,17 +262,21 @@ extern const int SFT_parser_prod[];
 #define CALL_parser_prod___AParExpr___init_aparexpr(recv) ((parser_prod___AParExpr___init_aparexpr_t)CALL((recv), (SFT_parser_prod[121] + 1)))
 #define CALL_parser_prod___AAsCastExpr___empty_init(recv) ((parser_prod___AAsCastExpr___empty_init_t)CALL((recv), (SFT_parser_prod[122] + 0)))
 #define CALL_parser_prod___AAsCastExpr___init_aascastexpr(recv) ((parser_prod___AAsCastExpr___init_aascastexpr_t)CALL((recv), (SFT_parser_prod[122] + 1)))
-#define CALL_parser_prod___APlusAssignOp___empty_init(recv) ((parser_prod___APlusAssignOp___empty_init_t)CALL((recv), (SFT_parser_prod[123] + 0)))
-#define CALL_parser_prod___APlusAssignOp___init_aplusassignop(recv) ((parser_prod___APlusAssignOp___init_aplusassignop_t)CALL((recv), (SFT_parser_prod[123] + 1)))
-#define CALL_parser_prod___AMinusAssignOp___empty_init(recv) ((parser_prod___AMinusAssignOp___empty_init_t)CALL((recv), (SFT_parser_prod[124] + 0)))
-#define CALL_parser_prod___AMinusAssignOp___init_aminusassignop(recv) ((parser_prod___AMinusAssignOp___init_aminusassignop_t)CALL((recv), (SFT_parser_prod[124] + 1)))
-#define CALL_parser_prod___AClosureDef___empty_init(recv) ((parser_prod___AClosureDef___empty_init_t)CALL((recv), (SFT_parser_prod[125] + 0)))
-#define CALL_parser_prod___AClosureDef___init_aclosuredef(recv) ((parser_prod___AClosureDef___init_aclosuredef_t)CALL((recv), (SFT_parser_prod[125] + 1)))
-#define CALL_parser_prod___AQualified___empty_init(recv) ((parser_prod___AQualified___empty_init_t)CALL((recv), (SFT_parser_prod[126] + 0)))
-#define CALL_parser_prod___AQualified___init_aqualified(recv) ((parser_prod___AQualified___init_aqualified_t)CALL((recv), (SFT_parser_prod[126] + 1)))
-#define CALL_parser_prod___ADoc___empty_init(recv) ((parser_prod___ADoc___empty_init_t)CALL((recv), (SFT_parser_prod[127] + 0)))
-#define CALL_parser_prod___ADoc___init_adoc(recv) ((parser_prod___ADoc___init_adoc_t)CALL((recv), (SFT_parser_prod[127] + 1)))
-#define CALL_parser_prod___Start___init(recv) ((parser_prod___Start___init_t)CALL((recv), (SFT_parser_prod[128] + 0)))
+#define CALL_parser_prod___AAsNotnullExpr___empty_init(recv) ((parser_prod___AAsNotnullExpr___empty_init_t)CALL((recv), (SFT_parser_prod[123] + 0)))
+#define CALL_parser_prod___AAsNotnullExpr___init_aasnotnullexpr(recv) ((parser_prod___AAsNotnullExpr___init_aasnotnullexpr_t)CALL((recv), (SFT_parser_prod[123] + 1)))
+#define CALL_parser_prod___AIssetAttrExpr___empty_init(recv) ((parser_prod___AIssetAttrExpr___empty_init_t)CALL((recv), (SFT_parser_prod[124] + 0)))
+#define CALL_parser_prod___AIssetAttrExpr___init_aissetattrexpr(recv) ((parser_prod___AIssetAttrExpr___init_aissetattrexpr_t)CALL((recv), (SFT_parser_prod[124] + 1)))
+#define CALL_parser_prod___APlusAssignOp___empty_init(recv) ((parser_prod___APlusAssignOp___empty_init_t)CALL((recv), (SFT_parser_prod[125] + 0)))
+#define CALL_parser_prod___APlusAssignOp___init_aplusassignop(recv) ((parser_prod___APlusAssignOp___init_aplusassignop_t)CALL((recv), (SFT_parser_prod[125] + 1)))
+#define CALL_parser_prod___AMinusAssignOp___empty_init(recv) ((parser_prod___AMinusAssignOp___empty_init_t)CALL((recv), (SFT_parser_prod[126] + 0)))
+#define CALL_parser_prod___AMinusAssignOp___init_aminusassignop(recv) ((parser_prod___AMinusAssignOp___init_aminusassignop_t)CALL((recv), (SFT_parser_prod[126] + 1)))
+#define CALL_parser_prod___AClosureDef___empty_init(recv) ((parser_prod___AClosureDef___empty_init_t)CALL((recv), (SFT_parser_prod[127] + 0)))
+#define CALL_parser_prod___AClosureDef___init_aclosuredef(recv) ((parser_prod___AClosureDef___init_aclosuredef_t)CALL((recv), (SFT_parser_prod[127] + 1)))
+#define CALL_parser_prod___AQualified___empty_init(recv) ((parser_prod___AQualified___empty_init_t)CALL((recv), (SFT_parser_prod[128] + 0)))
+#define CALL_parser_prod___AQualified___init_aqualified(recv) ((parser_prod___AQualified___init_aqualified_t)CALL((recv), (SFT_parser_prod[128] + 1)))
+#define CALL_parser_prod___ADoc___empty_init(recv) ((parser_prod___ADoc___empty_init_t)CALL((recv), (SFT_parser_prod[129] + 0)))
+#define CALL_parser_prod___ADoc___init_adoc(recv) ((parser_prod___ADoc___init_adoc_t)CALL((recv), (SFT_parser_prod[129] + 1)))
+#define CALL_parser_prod___Start___init(recv) ((parser_prod___Start___init_t)CALL((recv), (SFT_parser_prod[130] + 0)))
 val_t NEW_PNode_parser_nodes___PNode___init();
 typedef val_t (* parser_prod___PNode___parent_t)(val_t  self);
 val_t parser_prod___PNode___parent(val_t  self);
@@ -749,6 +753,9 @@ void parser_prod___AAttrPropdef___n_visibility__eq(val_t  self, val_t  param0);
 typedef void (* parser_prod___AAttrPropdef___n_kwattr__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAttrPropdef___n_kwattr__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAttrPropdef___n_kwattr__eq "parser_prod::AAttrPropdef::(parser_nodes::AAttrPropdef::n_kwattr=)"
+typedef void (* parser_prod___AAttrPropdef___n_kwvar__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AAttrPropdef___n_kwvar__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AAttrPropdef___n_kwvar__eq "parser_prod::AAttrPropdef::(parser_nodes::AAttrPropdef::n_kwvar=)"
 typedef void (* parser_prod___AAttrPropdef___n_id__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAttrPropdef___n_id__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AAttrPropdef___n_id__eq "parser_prod::AAttrPropdef::(parser_nodes::AAttrPropdef::n_id=)"
@@ -777,10 +784,10 @@ typedef void (* parser_prod___AAttrPropdef___empty_init_t)(val_t  self, int* ini
 void parser_prod___AAttrPropdef___empty_init(val_t  self, int* init_table);
 #define LOCATE_parser_prod___AAttrPropdef___empty_init "parser_prod::AAttrPropdef::empty_init"
 val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___empty_init();
-typedef void (* parser_prod___AAttrPropdef___init_aattrpropdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, val_t  param7, val_t  param8, int* init_table);
-void parser_prod___AAttrPropdef___init_aattrpropdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, val_t  param7, val_t  param8, int* init_table);
+typedef void (* parser_prod___AAttrPropdef___init_aattrpropdef_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, val_t  param7, val_t  param8, val_t  param9, int* init_table);
+void parser_prod___AAttrPropdef___init_aattrpropdef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, val_t  param5, val_t  param6, val_t  param7, val_t  param8, val_t  param9, int* init_table);
 #define LOCATE_parser_prod___AAttrPropdef___init_aattrpropdef "parser_prod::AAttrPropdef::init_aattrpropdef"
-val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8);
+val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8, val_t p9);
 val_t NEW_AMethPropdef_parser_nodes___PNode___init();
 typedef void (* parser_prod___AMethPropdef___n_doc__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AMethPropdef___n_doc__eq(val_t  self, val_t  param0);
@@ -1557,6 +1564,9 @@ void parser_prod___AClosureDecl___init_aclosuredecl(val_t  self, val_t  param0, 
 #define LOCATE_parser_prod___AClosureDecl___init_aclosuredecl "parser_prod::AClosureDecl::init_aclosuredecl"
 val_t NEW_AClosureDecl_parser_prod___AClosureDecl___init_aclosuredecl(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 val_t NEW_AType_parser_nodes___PNode___init();
+typedef void (* parser_prod___AType___n_kwnullable__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AType___n_kwnullable__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AType___n_kwnullable__eq "parser_prod::AType::(parser_nodes::AType::n_kwnullable=)"
 typedef void (* parser_prod___AType___n_id__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AType___n_id__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AType___n_id__eq "parser_prod::AType::(parser_nodes::AType::n_id=)"
@@ -1573,10 +1583,10 @@ typedef void (* parser_prod___AType___empty_init_t)(val_t  self, int* init_table
 void parser_prod___AType___empty_init(val_t  self, int* init_table);
 #define LOCATE_parser_prod___AType___empty_init "parser_prod::AType::empty_init"
 val_t NEW_AType_parser_prod___AType___empty_init();
-typedef void (* parser_prod___AType___init_atype_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void parser_prod___AType___init_atype(val_t  self, val_t  param0, val_t  param1, int* init_table);
+typedef void (* parser_prod___AType___init_atype_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void parser_prod___AType___init_atype(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 #define LOCATE_parser_prod___AType___init_atype "parser_prod::AType::init_atype"
-val_t NEW_AType_parser_prod___AType___init_atype(val_t p0, val_t p1);
+val_t NEW_AType_parser_prod___AType___init_atype(val_t p0, val_t p1, val_t p2);
 val_t NEW_ABlockExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___ABlockExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
 void parser_prod___ABlockExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
@@ -1842,9 +1852,15 @@ void parser_prod___AWhileExpr___init_awhileexpr(val_t  self, val_t  param0, val_
 #define LOCATE_parser_prod___AWhileExpr___init_awhileexpr "parser_prod::AWhileExpr::init_awhileexpr"
 val_t NEW_AWhileExpr_parser_prod___AWhileExpr___init_awhileexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 val_t NEW_AForExpr_parser_nodes___PNode___init();
-typedef void (* parser_prod___AForExpr___n_vardecl__eq_t)(val_t  self, val_t  param0);
-void parser_prod___AForExpr___n_vardecl__eq(val_t  self, val_t  param0);
-#define LOCATE_parser_prod___AForExpr___n_vardecl__eq "parser_prod::AForExpr::(parser_nodes::AForExpr::n_vardecl=)"
+typedef void (* parser_prod___AForExpr___n_kwfor__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AForExpr___n_kwfor__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AForExpr___n_kwfor__eq "parser_prod::AForExpr::(parser_nodes::AForExpr::n_kwfor=)"
+typedef void (* parser_prod___AForExpr___n_id__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AForExpr___n_id__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AForExpr___n_id__eq "parser_prod::AForExpr::(parser_nodes::AForExpr::n_id=)"
+typedef void (* parser_prod___AForExpr___n_expr__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AForExpr___n_expr__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AForExpr___n_expr__eq "parser_prod::AForExpr::(parser_nodes::AForExpr::n_expr=)"
 typedef void (* parser_prod___AForExpr___n_kwdo__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AForExpr___n_kwdo__eq(val_t  self, val_t  param0);
 #define LOCATE_parser_prod___AForExpr___n_kwdo__eq "parser_prod::AForExpr::(parser_nodes::AForExpr::n_kwdo=)"
@@ -1864,37 +1880,10 @@ typedef void (* parser_prod___AForExpr___empty_init_t)(val_t  self, int* init_ta
 void parser_prod___AForExpr___empty_init(val_t  self, int* init_table);
 #define LOCATE_parser_prod___AForExpr___empty_init "parser_prod::AForExpr::empty_init"
 val_t NEW_AForExpr_parser_prod___AForExpr___empty_init();
-typedef void (* parser_prod___AForExpr___init_aforexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void parser_prod___AForExpr___init_aforexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+typedef void (* parser_prod___AForExpr___init_aforexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
+void parser_prod___AForExpr___init_aforexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
 #define LOCATE_parser_prod___AForExpr___init_aforexpr "parser_prod::AForExpr::init_aforexpr"
-val_t NEW_AForExpr_parser_prod___AForExpr___init_aforexpr(val_t p0, val_t p1, val_t p2);
-val_t NEW_AForVardeclExpr_parser_nodes___PNode___init();
-typedef void (* parser_prod___AForVardeclExpr___n_kwfor__eq_t)(val_t  self, val_t  param0);
-void parser_prod___AForVardeclExpr___n_kwfor__eq(val_t  self, val_t  param0);
-#define LOCATE_parser_prod___AForVardeclExpr___n_kwfor__eq "parser_prod::AForVardeclExpr::(parser_nodes::AForVardeclExpr::n_kwfor=)"
-typedef void (* parser_prod___AForVardeclExpr___n_id__eq_t)(val_t  self, val_t  param0);
-void parser_prod___AForVardeclExpr___n_id__eq(val_t  self, val_t  param0);
-#define LOCATE_parser_prod___AForVardeclExpr___n_id__eq "parser_prod::AForVardeclExpr::(parser_nodes::AForVardeclExpr::n_id=)"
-typedef void (* parser_prod___AForVardeclExpr___n_expr__eq_t)(val_t  self, val_t  param0);
-void parser_prod___AForVardeclExpr___n_expr__eq(val_t  self, val_t  param0);
-#define LOCATE_parser_prod___AForVardeclExpr___n_expr__eq "parser_prod::AForVardeclExpr::(parser_nodes::AForVardeclExpr::n_expr=)"
-typedef void (* parser_prod___AForVardeclExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
-void parser_prod___AForVardeclExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
-#define LOCATE_parser_prod___AForVardeclExpr___replace_child "parser_prod::AForVardeclExpr::(parser_prod::PNode::replace_child)"
-typedef void (* parser_prod___AForVardeclExpr___visit_all_t)(val_t  self, val_t  param0);
-void parser_prod___AForVardeclExpr___visit_all(val_t  self, val_t  param0);
-#define LOCATE_parser_prod___AForVardeclExpr___visit_all "parser_prod::AForVardeclExpr::(parser_prod::PNode::visit_all)"
-typedef void (* parser_prod___AForVardeclExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
-void parser_prod___AForVardeclExpr___visit_all_reverse(val_t  self, val_t  param0);
-#define LOCATE_parser_prod___AForVardeclExpr___visit_all_reverse "parser_prod::AForVardeclExpr::(parser_prod::PNode::visit_all_reverse)"
-typedef void (* parser_prod___AForVardeclExpr___empty_init_t)(val_t  self, int* init_table);
-void parser_prod___AForVardeclExpr___empty_init(val_t  self, int* init_table);
-#define LOCATE_parser_prod___AForVardeclExpr___empty_init "parser_prod::AForVardeclExpr::empty_init"
-val_t NEW_AForVardeclExpr_parser_prod___AForVardeclExpr___empty_init();
-typedef void (* parser_prod___AForVardeclExpr___init_aforvardeclexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void parser_prod___AForVardeclExpr___init_aforvardeclexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-#define LOCATE_parser_prod___AForVardeclExpr___init_aforvardeclexpr "parser_prod::AForVardeclExpr::init_aforvardeclexpr"
-val_t NEW_AForVardeclExpr_parser_prod___AForVardeclExpr___init_aforvardeclexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_AForExpr_parser_prod___AForExpr___init_aforexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 val_t NEW_AAssertExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AAssertExpr___n_kwassert__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AAssertExpr___n_kwassert__eq(val_t  self, val_t  param0);
@@ -2807,6 +2796,27 @@ typedef void (* parser_prod___ABraReassignExpr___init_abrareassignexpr_t)(val_t 
 void parser_prod___ABraReassignExpr___init_abrareassignexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
 #define LOCATE_parser_prod___ABraReassignExpr___init_abrareassignexpr "parser_prod::ABraReassignExpr::init_abrareassignexpr"
 val_t NEW_ABraReassignExpr_parser_prod___ABraReassignExpr___init_abrareassignexpr(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_AClosureCallExpr_parser_nodes___PNode___init();
+typedef void (* parser_prod___AClosureCallExpr___n_id__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AClosureCallExpr___n_id__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AClosureCallExpr___n_id__eq "parser_prod::AClosureCallExpr::(parser_nodes::AClosureCallExpr::n_id=)"
+typedef void (* parser_prod___AClosureCallExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
+void parser_prod___AClosureCallExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_parser_prod___AClosureCallExpr___replace_child "parser_prod::AClosureCallExpr::(parser_prod::PNode::replace_child)"
+typedef void (* parser_prod___AClosureCallExpr___visit_all_t)(val_t  self, val_t  param0);
+void parser_prod___AClosureCallExpr___visit_all(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AClosureCallExpr___visit_all "parser_prod::AClosureCallExpr::(parser_prod::PNode::visit_all)"
+typedef void (* parser_prod___AClosureCallExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
+void parser_prod___AClosureCallExpr___visit_all_reverse(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AClosureCallExpr___visit_all_reverse "parser_prod::AClosureCallExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AClosureCallExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AClosureCallExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AClosureCallExpr___empty_init "parser_prod::AClosureCallExpr::empty_init"
+val_t NEW_AClosureCallExpr_parser_prod___AClosureCallExpr___empty_init();
+typedef void (* parser_prod___AClosureCallExpr___init_aclosurecallexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void parser_prod___AClosureCallExpr___init_aclosurecallexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_parser_prod___AClosureCallExpr___init_aclosurecallexpr "parser_prod::AClosureCallExpr::init_aclosurecallexpr"
+val_t NEW_AClosureCallExpr_parser_prod___AClosureCallExpr___init_aclosurecallexpr(val_t p0, val_t p1, val_t p2);
 val_t NEW_AVarExpr_parser_nodes___PNode___init();
 typedef void (* parser_prod___AVarExpr___n_id__eq_t)(val_t  self, val_t  param0);
 void parser_prod___AVarExpr___n_id__eq(val_t  self, val_t  param0);
@@ -3293,6 +3303,63 @@ typedef void (* parser_prod___AAsCastExpr___init_aascastexpr_t)(val_t  self, val
 void parser_prod___AAsCastExpr___init_aascastexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
 #define LOCATE_parser_prod___AAsCastExpr___init_aascastexpr "parser_prod::AAsCastExpr::init_aascastexpr"
 val_t NEW_AAsCastExpr_parser_prod___AAsCastExpr___init_aascastexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_AAsNotnullExpr_parser_nodes___PNode___init();
+typedef void (* parser_prod___AAsNotnullExpr___n_expr__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AAsNotnullExpr___n_expr__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AAsNotnullExpr___n_expr__eq "parser_prod::AAsNotnullExpr::(parser_nodes::AAsNotnullExpr::n_expr=)"
+typedef void (* parser_prod___AAsNotnullExpr___n_kwas__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AAsNotnullExpr___n_kwas__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AAsNotnullExpr___n_kwas__eq "parser_prod::AAsNotnullExpr::(parser_nodes::AAsNotnullExpr::n_kwas=)"
+typedef void (* parser_prod___AAsNotnullExpr___n_kwnot__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AAsNotnullExpr___n_kwnot__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AAsNotnullExpr___n_kwnot__eq "parser_prod::AAsNotnullExpr::(parser_nodes::AAsNotnullExpr::n_kwnot=)"
+typedef void (* parser_prod___AAsNotnullExpr___n_kwnull__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AAsNotnullExpr___n_kwnull__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AAsNotnullExpr___n_kwnull__eq "parser_prod::AAsNotnullExpr::(parser_nodes::AAsNotnullExpr::n_kwnull=)"
+typedef void (* parser_prod___AAsNotnullExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
+void parser_prod___AAsNotnullExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_parser_prod___AAsNotnullExpr___replace_child "parser_prod::AAsNotnullExpr::(parser_prod::PNode::replace_child)"
+typedef void (* parser_prod___AAsNotnullExpr___visit_all_t)(val_t  self, val_t  param0);
+void parser_prod___AAsNotnullExpr___visit_all(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AAsNotnullExpr___visit_all "parser_prod::AAsNotnullExpr::(parser_prod::PNode::visit_all)"
+typedef void (* parser_prod___AAsNotnullExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
+void parser_prod___AAsNotnullExpr___visit_all_reverse(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AAsNotnullExpr___visit_all_reverse "parser_prod::AAsNotnullExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AAsNotnullExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AAsNotnullExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AAsNotnullExpr___empty_init "parser_prod::AAsNotnullExpr::empty_init"
+val_t NEW_AAsNotnullExpr_parser_prod___AAsNotnullExpr___empty_init();
+typedef void (* parser_prod___AAsNotnullExpr___init_aasnotnullexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+void parser_prod___AAsNotnullExpr___init_aasnotnullexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+#define LOCATE_parser_prod___AAsNotnullExpr___init_aasnotnullexpr "parser_prod::AAsNotnullExpr::init_aasnotnullexpr"
+val_t NEW_AAsNotnullExpr_parser_prod___AAsNotnullExpr___init_aasnotnullexpr(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_AIssetAttrExpr_parser_nodes___PNode___init();
+typedef void (* parser_prod___AIssetAttrExpr___n_expr__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AIssetAttrExpr___n_expr__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AIssetAttrExpr___n_expr__eq "parser_prod::AIssetAttrExpr::(parser_nodes::AAttrFormExpr::n_expr=)"
+typedef void (* parser_prod___AIssetAttrExpr___n_id__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AIssetAttrExpr___n_id__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AIssetAttrExpr___n_id__eq "parser_prod::AIssetAttrExpr::(parser_nodes::AAttrFormExpr::n_id=)"
+typedef void (* parser_prod___AIssetAttrExpr___n_kwisset__eq_t)(val_t  self, val_t  param0);
+void parser_prod___AIssetAttrExpr___n_kwisset__eq(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AIssetAttrExpr___n_kwisset__eq "parser_prod::AIssetAttrExpr::(parser_nodes::AIssetAttrExpr::n_kwisset=)"
+typedef void (* parser_prod___AIssetAttrExpr___replace_child_t)(val_t  self, val_t  param0, val_t  param1);
+void parser_prod___AIssetAttrExpr___replace_child(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_parser_prod___AIssetAttrExpr___replace_child "parser_prod::AIssetAttrExpr::(parser_prod::PNode::replace_child)"
+typedef void (* parser_prod___AIssetAttrExpr___visit_all_t)(val_t  self, val_t  param0);
+void parser_prod___AIssetAttrExpr___visit_all(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AIssetAttrExpr___visit_all "parser_prod::AIssetAttrExpr::(parser_prod::PNode::visit_all)"
+typedef void (* parser_prod___AIssetAttrExpr___visit_all_reverse_t)(val_t  self, val_t  param0);
+void parser_prod___AIssetAttrExpr___visit_all_reverse(val_t  self, val_t  param0);
+#define LOCATE_parser_prod___AIssetAttrExpr___visit_all_reverse "parser_prod::AIssetAttrExpr::(parser_prod::PNode::visit_all_reverse)"
+typedef void (* parser_prod___AIssetAttrExpr___empty_init_t)(val_t  self, int* init_table);
+void parser_prod___AIssetAttrExpr___empty_init(val_t  self, int* init_table);
+#define LOCATE_parser_prod___AIssetAttrExpr___empty_init "parser_prod::AIssetAttrExpr::empty_init"
+val_t NEW_AIssetAttrExpr_parser_prod___AIssetAttrExpr___empty_init();
+typedef void (* parser_prod___AIssetAttrExpr___init_aissetattrexpr_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void parser_prod___AIssetAttrExpr___init_aissetattrexpr(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_parser_prod___AIssetAttrExpr___init_aissetattrexpr "parser_prod::AIssetAttrExpr::init_aissetattrexpr"
+val_t NEW_AIssetAttrExpr_parser_prod___AIssetAttrExpr___init_aissetattrexpr(val_t p0, val_t p1, val_t p2);
 val_t NEW_APlusAssignOp_parser_nodes___PNode___init();
 typedef void (* parser_prod___APlusAssignOp___n_pluseq__eq_t)(val_t  self, val_t  param0);
 void parser_prod___APlusAssignOp___n_pluseq__eq(val_t  self, val_t  param0);

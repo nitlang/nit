@@ -3,32 +3,37 @@
 val_t symbol___String___to_symbol(val_t  self) {
   struct trace_t trace = {NULL, NULL, 20, LOCATE_symbol___String___to_symbol};
   static val_t once_value_1; static int once_bool_1; /* Once value for variable[3]*/
-  val_t variable[6];
-  void **closurevariable = NULL;
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_symbol;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Once expression result */
   if (once_bool_1) variable[3] = once_value_1;
   else {
-    variable[3] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[String, Symbol]*/
+    /* Register variable[3]: Result */
+    variable[3] = NEW_HashMap_hash___HashMap___init() /*new HashMap[String, Symbol]*/;
     once_value_1 = variable[3];
     once_bool_1 = true;
   }
+  /* Register variable[3]: Result */
   variable[2] = variable[3];
-  variable[3] = variable[0];
-  variable[3] = CALL_abstract_collection___Map___has_key( variable[2] /*symbol_dictionary*/)( variable[2] /*symbol_dictionary*/, variable[3]) /*CoupleMap::has_key*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___MapRead___has_key( variable[2] /*symbol_dictionary*/)( variable[2] /*symbol_dictionary*/, variable[0]) /*CoupleMap::has_key*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = variable[0];
-    variable[3] = CALL_abstract_collection___Map_____bra( variable[2] /*symbol_dictionary*/)( variable[2] /*symbol_dictionary*/, variable[3]) /*CoupleMap::[]*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_abstract_collection___MapRead_____bra( variable[2] /*symbol_dictionary*/)( variable[2] /*symbol_dictionary*/, variable[0]) /*CoupleMap::[]*/;
     variable[1] = variable[3];
     goto return_label0;
   } else { /*if*/
-    variable[4] = variable[0];
-    variable[5] = NEW_Symbol_symbol___Symbol___init(variable[4]); /*new Symbol*/
-    variable[4] = variable[5];
+    /* Register variable[3]: Local variable */
+    /* Register variable[4]: Result */
+    variable[4] = NEW_Symbol_symbol___Symbol___init(variable[0]) /*new Symbol*/;
     variable[3] = variable[4];
-    variable[4] = variable[0];
-    CALL_abstract_collection___Map_____braeq( variable[2] /*symbol_dictionary*/)( variable[2] /*symbol_dictionary*/, variable[4],  variable[3] /*symbol*/) /*HashMap::[]=*/;
+    CALL_abstract_collection___Map_____braeq( variable[2] /*symbol_dictionary*/)( variable[2] /*symbol_dictionary*/, variable[0],  variable[3] /*symbol*/) /*HashMap::[]=*/;
     variable[1] =  variable[3] /*symbol*/;
     goto return_label0;
   }
@@ -39,12 +44,15 @@ val_t symbol___String___to_symbol(val_t  self) {
 val_t symbol___Symbol___to_s(val_t  self) {
   struct trace_t trace = {NULL, NULL, 37, LOCATE_symbol___Symbol___to_s};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_symbol;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_symbol___Symbol____string(variable[2]) /*Symbol::_string*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_symbol___Symbol____string(variable[0]) /*Symbol::_string*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_string___Object___to_s(variable[2])(variable[2]) /*String::to_s*/;
   variable[1] = variable[2];
   goto return_label2;
@@ -54,15 +62,17 @@ val_t symbol___Symbol___to_s(val_t  self) {
 }
 void symbol___Symbol___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 39, LOCATE_symbol___Symbol___init};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_symbol;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Symbol].i]) return;
-  variable[3] = variable[0];
-  ATTR_symbol___Symbol____string(variable[3]) /*Symbol::_string*/ =  variable[1] /*s*/;
+  /* Register variable[2]: Method return value and escape marker */
+  ATTR_symbol___Symbol____string(variable[0]) /*Symbol::_string*/ =  variable[1] /*s*/;
   return_label3: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Symbol].i] = 1;
   tracehead = trace.prev;

@@ -2,32 +2,35 @@
 #include "genericity._sep.h"
 val_t genericity___MMLocalClass___get_type(val_t  self) {
   struct trace_t trace = {NULL, NULL, 80, LOCATE_genericity___MMLocalClass___get_type};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_static_type___MMLocalClass____base_type_cache(variable[2]) /*MMLocalClass::_base_type_cache*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_static_type___MMLocalClass____base_type_cache(variable[0]) /*MMLocalClass::_base_type_cache*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))));
-  variable[3] = variable[2];
-  if (UNTAG_Bool(variable[3])) { /* and */
-    variable[3] = variable[0];
-    variable[3] = CALL_genericity___MMLocalClass___is_generic(variable[3])(variable[3]) /*MMLocalClass::is_generic*/;
+  /* Ensure var variable[2]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[2])) { /* and */
+    /* Register variable[2]: Result */
+    variable[2] = CALL_genericity___MMLocalClass___is_generic(variable[0])(variable[0]) /*MMLocalClass::is_generic*/;
   }
-  variable[2] = variable[3];
+  /* Register variable[2]: Result */
   if (UNTAG_Bool(variable[2])) { /*if*/
-    variable[2] = variable[0];
-    variable[3] = variable[0];
-    variable[4] = variable[0];
-    variable[4] = CALL_genericity___MMLocalClass___formals_types(variable[4])(variable[4]) /*MMLocalClass::formals_types*/;
-    variable[3] = CALL_genericity___MMLocalClass___get_instantiate_type(variable[3])(variable[3], variable[4]) /*MMLocalClass::get_instantiate_type*/;
-    ATTR_static_type___MMLocalClass____base_type_cache(variable[2]) /*MMLocalClass::_base_type_cache*/ = variable[3];
-    variable[2] = variable[0];
-    variable[2] = ATTR_static_type___MMLocalClass____base_type_cache(variable[2]) /*MMLocalClass::_base_type_cache*/;
+    /* Register variable[2]: Result */
+    variable[2] = CALL_genericity___MMLocalClass___formals_types(variable[0])(variable[0]) /*MMLocalClass::formals_types*/;
+    /* Register variable[2]: Result */
+    variable[2] = CALL_genericity___MMLocalClass___get_instantiate_type(variable[0])(variable[0], variable[2]) /*MMLocalClass::get_instantiate_type*/;
+    ATTR_static_type___MMLocalClass____base_type_cache(variable[0]) /*MMLocalClass::_base_type_cache*/ = variable[2];
+    /* Register variable[2]: Result */
+    variable[2] = ATTR_static_type___MMLocalClass____base_type_cache(variable[0]) /*MMLocalClass::_base_type_cache*/;
     variable[1] = variable[2];
     goto return_label0;
   } else { /*if*/
+    /* Register variable[2]: Result */
     variable[2] = CALL_SUPER_genericity___MMLocalClass___get_type(variable[0])(variable[0]) /*super MMLocalClass::get_type*/;
     variable[1] = variable[2];
     goto return_label0;
@@ -38,31 +41,41 @@ val_t genericity___MMLocalClass___get_type(val_t  self) {
 }
 val_t genericity___MMLocalClass___get_formal(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 25, LOCATE_genericity___MMLocalClass___get_formal};
-  val_t variable[9];
-  void **closurevariable = NULL;
+  val_t variable[8];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_genericity___MMLocalClass___formals_types(variable[3])(variable[3]) /*MMLocalClass::formals_types*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_genericity___MMLocalClass___formals_types(variable[0])(variable[0]) /*MMLocalClass::formals_types*/;
+  /* Register variable[4]: Local variable */
   variable[4] = variable[3];
+  /* Register variable[5]: Local variable */
   variable[5] =  variable[1] /*pos*/;
+  /* Register variable[6]: Method return value and escape marker */
+  /* Register variable[7]: Result */
   variable[7] = TAG_Bool(UNTAG_Int( variable[5] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-  variable[8] = variable[7];
-  if (UNTAG_Bool(variable[8])) { /* and */
-    variable[8] = variable[4];
-    variable[8] = ATTR_array___AbstractArray____length(variable[8]) /*AbstractArray::_length*/;
-    variable[8] = TAG_Bool(UNTAG_Int( variable[5] /*index*/)<UNTAG_Int(variable[8]));
+  /* Ensure var variable[7]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[7])) { /* and */
+    /* Register variable[7]: Result */
+    variable[7] = ATTR_array___AbstractArrayRead____length(variable[4]) /*AbstractArrayRead::_length*/;
+    /* Register variable[7]: Result */
+    variable[7] = TAG_Bool(UNTAG_Int( variable[5] /*index*/)<UNTAG_Int(variable[7]));
   }
-  variable[7] = variable[8];
-  if (!UNTAG_Bool(variable[7])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_genericity, 229); nit_exit(1);}
-  variable[7] = variable[4];
-  variable[7] = ATTR_array___Array____items(variable[7]) /*Array::_items*/;
+  /* Register variable[7]: Result */
+  if (!UNTAG_Bool(variable[7])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_genericity, 234); nit_exit(1);}
+  /* Register variable[7]: Result */
+  variable[7] = ATTR_array___Array____items(variable[4]) /*Array::_items*/;
+  /* Register variable[7]: Result */
   variable[7] = UNBOX_NativeArray(variable[7])[UNTAG_Int( variable[5] /*index*/)];
   variable[6] = variable[7];
   goto return_label2;
   return_label2: while(false);
+  /* Register variable[3]: Result */
   variable[3] = variable[6];
   variable[2] = variable[3];
   goto return_label1;
@@ -73,23 +86,30 @@ val_t genericity___MMLocalClass___get_formal(val_t  self, val_t  param0) {
 void genericity___MMLocalClass___register_formal(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 31, LOCATE_genericity___MMLocalClass___register_formal};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
   variable[3] = CALL_genericity___MMTypeFormalParameter___def_class( variable[1] /*f*/)( variable[1] /*f*/) /*MMTypeFormalParameter::def_class*/;
-  variable[4] = variable[0];
-  variable[3] = TAG_Bool((variable[3] == variable[4]) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3],variable[4])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3], variable[4]) /*Object::==*/)))));
+  /* Register variable[3]: Result */
+  variable[3] = TAG_Bool((variable[3] == variable[0]) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3],variable[0])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3], variable[0]) /*Object::==*/)))));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_genericity___MMLocalClass___register_formal, LOCATE_genericity, 35); nit_exit(1);}
+  /* Register variable[3]: Result */
   variable[3] = CALL_genericity___MMTypeFormalParameter___position( variable[1] /*f*/)( variable[1] /*f*/) /*MMTypeFormalParameter::position*/;
-  variable[4] = variable[0];
-  variable[4] = ATTR_genericity___MMLocalClass____formals_types(variable[4]) /*MMLocalClass::_formals_types*/;
-  variable[4] = CALL_abstract_collection___Collection___length(variable[4])(variable[4]) /*AbstractArray::length*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_genericity___MMLocalClass____formals_types(variable[0]) /*MMLocalClass::_formals_types*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstract_collection___Collection___length(variable[4])(variable[4]) /*AbstractArrayRead::length*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool((variable[3])==(variable[4]));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_genericity___MMLocalClass___register_formal, LOCATE_genericity, 36); nit_exit(1);}
-  variable[3] = variable[0];
-  variable[3] = ATTR_genericity___MMLocalClass____formals_types(variable[3]) /*MMLocalClass::_formals_types*/;
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_genericity___MMLocalClass____formals_types(variable[0]) /*MMLocalClass::_formals_types*/;
   CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3],  variable[1] /*f*/) /*AbstractArray::add*/;
   return_label3: while(false);
   tracehead = trace.prev;
@@ -98,19 +118,26 @@ void genericity___MMLocalClass___register_formal(val_t  self, val_t  param0) {
 val_t genericity___MMLocalClass___get_instantiate_type(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 43, LOCATE_genericity___MMLocalClass___get_instantiate_type};
   val_t variable[7];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_genericity___MMLocalClass____types(variable[3]) /*MMLocalClass::_types*/;
-  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArray::iterator*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_genericity___MMLocalClass____types(variable[0]) /*MMLocalClass::_types*/;
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
+    /* Register variable[6]: Result */
     variable[6] = CALL_genericity___MMTypeGeneric___params_equals( variable[5] /*g*/)( variable[5] /*g*/,  variable[1] /*t*/) /*MMTypeGeneric::params_equals*/;
     if (UNTAG_Bool(variable[6])) { /*if*/
       variable[2] =  variable[5] /*g*/;
@@ -120,12 +147,12 @@ val_t genericity___MMLocalClass___get_instantiate_type(val_t  self, val_t  param
     CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*ArrayIterator::next*/;
   }
   break_5: while(0);
-  variable[4] = variable[0];
-  variable[5] = NEW_MMTypeGeneric_genericity___MMTypeGeneric___init(variable[4],  variable[1] /*t*/); /*new MMTypeGeneric*/
-  variable[4] = variable[5];
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = NEW_MMTypeGeneric_genericity___MMTypeGeneric___init(variable[0],  variable[1] /*t*/) /*new MMTypeGeneric*/;
   variable[3] = variable[4];
-  variable[4] = variable[0];
-  variable[4] = ATTR_genericity___MMLocalClass____types(variable[4]) /*MMLocalClass::_types*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_genericity___MMLocalClass____types(variable[0]) /*MMLocalClass::_types*/;
   CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4],  variable[3] /*g*/) /*AbstractArray::add*/;
   variable[2] =  variable[3] /*g*/;
   goto return_label4;
@@ -135,83 +162,108 @@ val_t genericity___MMLocalClass___get_instantiate_type(val_t  self, val_t  param
 }
 val_t genericity___MMLocalClass___formals_types(val_t  self) {
   struct trace_t trace = {NULL, NULL, 57, LOCATE_genericity___MMLocalClass___formals_types};
-  val_t variable[13];
-  void **closurevariable = NULL;
+  val_t variable[12];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_genericity___MMLocalClass____formals_types(variable[2]) /*MMLocalClass::_formals_types*/;
-  variable[2] = CALL_abstract_collection___Collection___is_empty(variable[2])(variable[2]) /*AbstractArray::is_empty*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_genericity___MMLocalClass____formals_types(variable[0]) /*MMLocalClass::_formals_types*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___Collection___is_empty(variable[2])(variable[2]) /*AbstractArrayRead::is_empty*/;
   if (UNTAG_Bool(variable[2])) { /*if*/
-    variable[2] = variable[0];
-    variable[2] = TAG_Bool((variable[2]==NIT_NULL) || VAL_ISA(variable[2], COLOR_MMConcreteClass, ID_MMConcreteClass)) /*cast MMConcreteClass*/;
+    /* Register variable[2]: Result */
+    variable[2] = TAG_Bool((variable[0]==NIT_NULL) || VAL_ISA(variable[0], COLOR_MMConcreteClass, ID_MMConcreteClass)) /*cast MMConcreteClass*/;
     if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[2])))) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_genericity___MMLocalClass___formals_types, LOCATE_genericity, 62); nit_exit(1);}
-    variable[2] = variable[0];
-    variable[2] = CALL_abstractmetamodel___MMLocalClass___arity(variable[2])(variable[2]) /*MMLocalClass::arity*/;
-    variable[3] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[2]); /*new Range[Int]*/
-    variable[2] = variable[3];
+    /* Register variable[2]: Result */
+    variable[2] = CALL_abstractmetamodel___MMLocalClass___arity(variable[0])(variable[0]) /*MMLocalClass::arity*/;
+    /* Register variable[2]: Result */
+    variable[2] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[2]) /*new Range[Int]*/;
+    /* Register variable[2]: For iterator */
     variable[2] = CALL_abstract_collection___Collection___iterator(variable[2])(variable[2]) /*Range::iterator*/;
     while (true) { /*for*/
+      /* Register variable[3]: For 'is_ok' result */
       variable[3] = CALL_abstract_collection___Iterator___is_ok(variable[2])(variable[2]) /*Iterator::is_ok*/;
       if (!UNTAG_Bool(variable[3])) break; /*for*/
-      variable[3] = CALL_abstract_collection___Iterator___item(variable[2])(variable[2]) /*Iterator::item*/;
+      variable[3] = CALL_abstract_collection___Iterator___item(variable[2])(variable[2]) /*Iterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[4]: Local variable */
       variable[4] = variable[3];
-      variable[6] = variable[0];
-      variable[6] = CALL_abstractmetamodel___MMLocalClass___global(variable[6])(variable[6]) /*MMLocalClass::global*/;
+      /* Register variable[5]: Local variable */
+      /* Register variable[6]: Result */
+      variable[6] = CALL_abstractmetamodel___MMLocalClass___global(variable[0])(variable[0]) /*MMLocalClass::global*/;
+      /* Register variable[6]: Result */
       variable[6] = CALL_abstractmetamodel___MMGlobalClass___intro(variable[6])(variable[6]) /*MMGlobalClass::intro*/;
+      /* Register variable[6]: Result */
       variable[6] = CALL_genericity___MMLocalClass___get_formal(variable[6])(variable[6],  variable[4] /*i*/) /*MMLocalClass::get_formal*/;
       variable[5] = variable[6];
+      /* Register variable[6]: Local variable */
+      /* Register variable[7]: Result */
       variable[7] = CALL_type_formal___MMTypeFormal___name( variable[5] /*oft*/)( variable[5] /*oft*/) /*MMTypeFormal::name*/;
-      variable[8] = variable[0];
-      variable[9] = NEW_MMTypeFormalParameter_genericity___MMTypeFormalParameter___init(variable[7],  variable[4] /*i*/, variable[8]); /*new MMTypeFormalParameter*/
-      variable[7] = variable[9];
+      /* Register variable[7]: Result */
+      variable[7] = NEW_MMTypeFormalParameter_genericity___MMTypeFormalParameter___init(variable[7],  variable[4] /*i*/, variable[0]) /*new MMTypeFormalParameter*/;
       variable[6] = variable[7];
-      variable[7] = variable[0];
-      CALL_genericity___MMLocalClass___register_formal(variable[7])(variable[7],  variable[6] /*ft*/) /*MMLocalClass::register_formal*/;
+      CALL_genericity___MMLocalClass___register_formal(variable[0])(variable[0],  variable[6] /*ft*/) /*MMLocalClass::register_formal*/;
       continue_7: while(0);
       CALL_abstract_collection___Iterator___next(variable[2])(variable[2]) /*Iterator::next*/;
     }
     break_7: while(0);
-    variable[2] = variable[0];
-    variable[2] = CALL_abstractmetamodel___MMLocalClass___arity(variable[2])(variable[2]) /*MMLocalClass::arity*/;
-    variable[3] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[2]); /*new Range[Int]*/
-    variable[2] = variable[3];
+    /* Register variable[2]: Result */
+    variable[2] = CALL_abstractmetamodel___MMLocalClass___arity(variable[0])(variable[0]) /*MMLocalClass::arity*/;
+    /* Register variable[2]: Result */
+    variable[2] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[2]) /*new Range[Int]*/;
+    /* Register variable[2]: For iterator */
     variable[2] = CALL_abstract_collection___Collection___iterator(variable[2])(variable[2]) /*Range::iterator*/;
     while (true) { /*for*/
+      /* Register variable[3]: For 'is_ok' result */
       variable[3] = CALL_abstract_collection___Iterator___is_ok(variable[2])(variable[2]) /*Iterator::is_ok*/;
       if (!UNTAG_Bool(variable[3])) break; /*for*/
-      variable[3] = CALL_abstract_collection___Iterator___item(variable[2])(variable[2]) /*Iterator::item*/;
+      variable[3] = CALL_abstract_collection___Iterator___item(variable[2])(variable[2]) /*Iterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[4]: Local variable */
       variable[4] = variable[3];
-      variable[6] = variable[0];
-      variable[6] = CALL_abstractmetamodel___MMLocalClass___global(variable[6])(variable[6]) /*MMLocalClass::global*/;
+      /* Register variable[5]: Local variable */
+      /* Register variable[6]: Result */
+      variable[6] = CALL_abstractmetamodel___MMLocalClass___global(variable[0])(variable[0]) /*MMLocalClass::global*/;
+      /* Register variable[6]: Result */
       variable[6] = CALL_abstractmetamodel___MMGlobalClass___intro(variable[6])(variable[6]) /*MMGlobalClass::intro*/;
+      /* Register variable[6]: Result */
       variable[6] = CALL_genericity___MMLocalClass___get_formal(variable[6])(variable[6],  variable[4] /*i*/) /*MMLocalClass::get_formal*/;
       variable[5] = variable[6];
-      variable[7] = variable[0];
-      variable[7] = ATTR_genericity___MMLocalClass____formals_types(variable[7]) /*MMLocalClass::_formals_types*/;
+      /* Register variable[6]: Local variable */
+      /* Register variable[7]: Result */
+      variable[7] = ATTR_genericity___MMLocalClass____formals_types(variable[0]) /*MMLocalClass::_formals_types*/;
+      /* Register variable[8]: Local variable */
       variable[8] = variable[7];
+      /* Register variable[9]: Local variable */
       variable[9] =  variable[4] /*i*/;
+      /* Register variable[10]: Method return value and escape marker */
+      /* Register variable[11]: Result */
       variable[11] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-      variable[12] = variable[11];
-      if (UNTAG_Bool(variable[12])) { /* and */
-        variable[12] = variable[8];
-        variable[12] = ATTR_array___AbstractArray____length(variable[12]) /*AbstractArray::_length*/;
-        variable[12] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)<UNTAG_Int(variable[12]));
+      /* Ensure var variable[11]: Left 'and' operand*/
+      if (UNTAG_Bool(variable[11])) { /* and */
+        /* Register variable[11]: Result */
+        variable[11] = ATTR_array___AbstractArrayRead____length(variable[8]) /*AbstractArrayRead::_length*/;
+        /* Register variable[11]: Result */
+        variable[11] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)<UNTAG_Int(variable[11]));
       }
-      variable[11] = variable[12];
-      if (!UNTAG_Bool(variable[11])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_genericity, 229); nit_exit(1);}
-      variable[11] = variable[8];
-      variable[11] = ATTR_array___Array____items(variable[11]) /*Array::_items*/;
+      /* Register variable[11]: Result */
+      if (!UNTAG_Bool(variable[11])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_genericity, 234); nit_exit(1);}
+      /* Register variable[11]: Result */
+      variable[11] = ATTR_array___Array____items(variable[8]) /*Array::_items*/;
+      /* Register variable[11]: Result */
       variable[11] = UNBOX_NativeArray(variable[11])[UNTAG_Int( variable[9] /*index*/)];
       variable[10] = variable[11];
       goto return_label9;
       return_label9: while(false);
+      /* Register variable[7]: Result */
       variable[7] = variable[10];
       variable[6] = variable[7];
+      /* Register variable[7]: Result */
       variable[7] = CALL_type_formal___MMTypeFormal___bound( variable[5] /*oft*/)( variable[5] /*oft*/) /*MMTypeFormal::bound*/;
-      variable[8] = variable[0];
-      variable[8] = CALL_abstractmetamodel___MMLocalClass___module(variable[8])(variable[8]) /*MMLocalClass::module*/;
+      /* Register variable[8]: Result */
+      variable[8] = CALL_abstractmetamodel___MMLocalClass___module(variable[0])(variable[0]) /*MMLocalClass::module*/;
+      /* Register variable[7]: Result */
       variable[7] = CALL_static_type___MMType___for_module(variable[7])(variable[7], variable[8]) /*MMType::for_module*/;
       CALL_genericity___MMTypeFormalParameter___bound__eq( variable[6] /*ft*/)( variable[6] /*ft*/, variable[7]) /*MMTypeFormalParameter::bound=*/;
       continue_8: while(0);
@@ -219,8 +271,8 @@ val_t genericity___MMLocalClass___formals_types(val_t  self) {
     }
     break_8: while(0);
   }
-  variable[2] = variable[0];
-  variable[2] = ATTR_genericity___MMLocalClass____formals_types(variable[2]) /*MMLocalClass::_formals_types*/;
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_genericity___MMLocalClass____formals_types(variable[0]) /*MMLocalClass::_formals_types*/;
   variable[1] = variable[2];
   goto return_label6;
   return_label6: while(false);
@@ -230,12 +282,15 @@ val_t genericity___MMLocalClass___formals_types(val_t  self) {
 val_t genericity___MMLocalClass___is_generic(val_t  self) {
   struct trace_t trace = {NULL, NULL, 90, LOCATE_genericity___MMLocalClass___is_generic};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_abstractmetamodel___MMLocalClass___arity(variable[2])(variable[2]) /*MMLocalClass::arity*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstractmetamodel___MMLocalClass___arity(variable[0])(variable[0]) /*MMLocalClass::arity*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool(UNTAG_Int(variable[2])>UNTAG_Int( TAG_Int(0)));
   variable[1] = variable[2];
   goto return_label10;
@@ -246,7 +301,7 @@ val_t genericity___MMLocalClass___is_generic(val_t  self) {
 val_t genericity___MMType___is_generic(val_t  self) {
   struct trace_t trace = {NULL, NULL, 95, LOCATE_genericity___MMType___is_generic};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
   fprintf(stderr, "Deferred method called");
@@ -258,12 +313,15 @@ val_t genericity___MMType___is_generic(val_t  self) {
 val_t genericity___MMTypeFormal___is_generic(val_t  self) {
   struct trace_t trace = {NULL, NULL, 100, LOCATE_genericity___MMTypeFormal___is_generic};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_type_formal___MMTypeFormal____bound(variable[2]) /*MMTypeFormal::_bound*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_type_formal___MMTypeFormal____bound(variable[0]) /*MMTypeFormal::_bound*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_genericity___MMType___is_generic(variable[2])(variable[2]) /*MMType::is_generic*/;
   variable[1] = variable[2];
   goto return_label11;
@@ -274,10 +332,12 @@ val_t genericity___MMTypeFormal___is_generic(val_t  self) {
 val_t genericity___MMTypeSimpleClass___is_generic(val_t  self) {
   struct trace_t trace = {NULL, NULL, 104, LOCATE_genericity___MMTypeSimpleClass___is_generic};
   val_t variable[2];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
   variable[1] =  TAG_Bool(false);
   goto return_label12;
   return_label12: while(false);
@@ -286,30 +346,63 @@ val_t genericity___MMTypeSimpleClass___is_generic(val_t  self) {
 }
 val_t genericity___MMTypeGeneric___to_s(val_t  self) {
   struct trace_t trace = {NULL, NULL, 174, LOCATE_genericity___MMTypeGeneric___to_s};
-  val_t variable[13];
-  void **closurevariable = NULL;
+  static val_t once_value_14 = NIT_NULL; /* Once value for string variable[3]*/
+  static val_t once_value_15 = NIT_NULL; /* Once value for string variable[3]*/
+  static val_t once_value_16 = NIT_NULL; /* Once value for string variable[4]*/
+  static val_t once_value_17 = NIT_NULL; /* Once value for string variable[3]*/
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-  variable[3] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[4] = variable[3];
-  CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[4]) /*AbstractArray::add*/;
-  variable[5] = CALL_SUPER_genericity___MMTypeGeneric___to_s(variable[0])(variable[0]) /*super MMTypeGeneric::to_s*/;
-  variable[6] = variable[5];
-  CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[6]) /*AbstractArray::add*/;
-  variable[7] = NEW_String_string___String___with_native(BOX_NativeString("["), TAG_Int(1)); /*new String*/
-  variable[8] = variable[7];
-  CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[8]) /*AbstractArray::add*/;
-  variable[9] = variable[0];
-  variable[9] = ATTR_genericity___MMTypeGeneric____params(variable[9]) /*MMTypeGeneric::_params*/;
-  variable[10] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
-  variable[9] = CALL_string___Collection___join(variable[9])(variable[9], variable[10]) /*Collection::join*/;
-  variable[10] = variable[9];
-  CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[10]) /*AbstractArray::add*/;
-  variable[11] = NEW_String_string___String___with_native(BOX_NativeString("]"), TAG_Int(1)); /*new String*/
-  variable[12] = variable[11];
-  CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[12]) /*AbstractArray::add*/;
+  /* Register variable[1]: Method return value and escape marker */
+  variable[2] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[3]: Once String constant */
+  if (once_value_14 != NIT_NULL) variable[3] = once_value_14;
+  else {
+    variable[3] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_14 = variable[3];
+  }
+  /* Register variable[3]: Result */
+  /* Ensure var variable[3]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[3]) /*AbstractArray::add*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_SUPER_genericity___MMTypeGeneric___to_s(variable[0])(variable[0]) /*super MMTypeGeneric::to_s*/;
+  /* Ensure var variable[3]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[3]) /*AbstractArray::add*/;
+  /* Register variable[3]: Once String constant */
+  if (once_value_15 != NIT_NULL) variable[3] = once_value_15;
+  else {
+    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("["), TAG_Int(1)) /*new String*/;
+    once_value_15 = variable[3];
+  }
+  /* Register variable[3]: Result */
+  /* Ensure var variable[3]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[3]) /*AbstractArray::add*/;
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_genericity___MMTypeGeneric____params(variable[0]) /*MMTypeGeneric::_params*/;
+  /* Register variable[4]: Once String constant */
+  if (once_value_16 != NIT_NULL) variable[4] = once_value_16;
+  else {
+    variable[4] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)) /*new String*/;
+    once_value_16 = variable[4];
+  }
+  /* Register variable[4]: Result */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_string___Collection___join(variable[3])(variable[3], variable[4]) /*Collection::join*/;
+  /* Ensure var variable[3]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[3]) /*AbstractArray::add*/;
+  /* Register variable[3]: Once String constant */
+  if (once_value_17 != NIT_NULL) variable[3] = once_value_17;
+  else {
+    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("]"), TAG_Int(1)) /*new String*/;
+    once_value_17 = variable[3];
+  }
+  /* Register variable[3]: Result */
+  /* Ensure var variable[3]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[3]) /*AbstractArray::add*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_string___Object___to_s(variable[2])(variable[2]) /*Object::to_s*/;
   variable[1] = variable[2];
   goto return_label13;
@@ -320,154 +413,195 @@ val_t genericity___MMTypeGeneric___to_s(val_t  self) {
 val_t genericity___MMTypeGeneric___is_supertype(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 114, LOCATE_genericity___MMTypeGeneric___is_supertype};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
   variable[3] = CALL_static_type___MMType___local_class( variable[1] /*t*/)( variable[1] /*t*/) /*MMType::local_class*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_abstractmetamodel___MMLocalClass___cshe(variable[3])(variable[3]) /*MMLocalClass::cshe*/;
-  variable[4] = variable[0];
-  variable[4] = ATTR_static_type___MMTypeClass____local_class(variable[4]) /*MMTypeClass::_local_class*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_static_type___MMTypeClass____local_class(variable[0]) /*MMTypeClass::_local_class*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_partial_order___PartialOrderElement_____leq(variable[3])(variable[3], variable[4]) /*PartialOrderElement::<=*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[4] = variable[0];
-    variable[4] = ATTR_static_type___MMTypeClass____local_class(variable[4]) /*MMTypeClass::_local_class*/;
+    /* Register variable[3]: Local variable */
+    /* Register variable[4]: Result */
+    variable[4] = ATTR_static_type___MMTypeClass____local_class(variable[0]) /*MMTypeClass::_local_class*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_static_type___MMType___upcast_for( variable[1] /*t*/)( variable[1] /*t*/, variable[4]) /*MMType::upcast_for*/;
     variable[3] = variable[4];
+    /* Register variable[4]: Result */
     variable[4] = TAG_Bool(( variable[3] /*u*/==NIT_NULL) || VAL_ISA( variable[3] /*u*/, COLOR_MMTypeGeneric, ID_MMTypeGeneric)) /*cast MMTypeGeneric*/;
     if (UNTAG_Bool(variable[4])) { /*if*/
-      variable[4] = variable[0];
-      variable[4] = CALL_genericity___MMTypeGeneric___is_subtype(variable[4])(variable[4],  variable[3] /*u*/) /*MMTypeGeneric::is_subtype*/;
+      /* Register variable[4]: Result */
+      variable[4] = CALL_genericity___MMTypeGeneric___is_subtype(variable[0])(variable[0],  variable[3] /*u*/) /*MMTypeGeneric::is_subtype*/;
       variable[2] = variable[4];
-      goto return_label14;
+      goto return_label18;
     }
   }
   variable[2] =  TAG_Bool(false);
-  goto return_label14;
-  return_label14: while(false);
+  goto return_label18;
+  return_label18: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t genericity___MMTypeGeneric___for_module(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 134, LOCATE_genericity___MMTypeGeneric___for_module};
   val_t variable[9];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[3] = variable[4];
-  variable[4] = variable[0];
-  variable[4] = CALL_static_type___MMType___module(variable[4])(variable[4]) /*MMTypeClass::module*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  variable[3] = variable[0];
+  /* Register variable[4]: Result */
+  variable[4] = CALL_static_type___MMType___module(variable[0])(variable[0]) /*MMTypeClass::module*/;
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  variable[1] /*mod*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], variable[1] /*mod*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  variable[1] /*mod*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[5] = NEW_Array_array___Array___init(); /*new Array[MMType]*/
+    /* Register variable[4]: Local variable */
+    /* Register variable[5]: Result */
+    variable[5] = NEW_Array_array___Array___init() /*new Array[MMType]*/;
     variable[4] = variable[5];
-    variable[5] = variable[0];
-    variable[5] = ATTR_genericity___MMTypeGeneric____params(variable[5]) /*MMTypeGeneric::_params*/;
-    variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*AbstractArray::iterator*/;
+    /* Register variable[5]: Result */
+    variable[5] = ATTR_genericity___MMTypeGeneric____params(variable[0]) /*MMTypeGeneric::_params*/;
+    /* Register variable[5]: For iterator */
+    variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*AbstractArrayRead::iterator*/;
     while (true) { /*for*/
+      /* Register variable[6]: For 'is_ok' result */
       variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[6])) break; /*for*/
-      variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/;
+      variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[7]: Local variable */
       variable[7] = variable[6];
+      /* Register variable[8]: Result */
       variable[8] = CALL_static_type___MMType___for_module( variable[7] /*p*/)( variable[7] /*p*/,  variable[1] /*mod*/) /*MMType::for_module*/;
       CALL_abstract_collection___SimpleCollection___add( variable[4] /*parms*/)( variable[4] /*parms*/, variable[8]) /*AbstractArray::add*/;
-      continue_16: while(0);
+      continue_20: while(0);
       CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*ArrayIterator::next*/;
     }
-    break_16: while(0);
-    variable[6] = variable[0];
-    variable[6] = ATTR_static_type___MMTypeClass____local_class(variable[6]) /*MMTypeClass::_local_class*/;
+    break_20: while(0);
+    /* Register variable[5]: Local variable */
+    /* Register variable[6]: Result */
+    variable[6] = ATTR_static_type___MMTypeClass____local_class(variable[0]) /*MMTypeClass::_local_class*/;
+    /* Register variable[6]: Result */
     variable[6] = CALL_abstractmetamodel___MMLocalClass___for_module(variable[6])(variable[6],  variable[1] /*mod*/) /*MMLocalClass::for_module*/;
     variable[5] = variable[6];
+    /* Register variable[6]: Result */
     variable[6] = CALL_genericity___MMLocalClass___get_instantiate_type( variable[5] /*b*/)( variable[5] /*b*/,  variable[4] /*parms*/) /*MMLocalClass::get_instantiate_type*/;
     variable[3] = variable[6] /*t=*/;
   }
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*t*/)( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_genericity___MMTypeGeneric___for_module, LOCATE_genericity, 145); nit_exit(1);}
-  variable[2] =  variable[3] /*t*/;
-  goto return_label15;
-  return_label15: while(false);
-  tracehead = trace.prev;
-  return variable[2];
-}
-val_t genericity___MMTypeGeneric___adapt_to(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 149, LOCATE_genericity___MMTypeGeneric___adapt_to};
-  val_t variable[8];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_genericity;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[4] = NEW_Array_array___Array___init(); /*new Array[MMType]*/
-  variable[3] = variable[4];
-  variable[4] = variable[0];
-  variable[4] = ATTR_genericity___MMTypeGeneric____params(variable[4]) /*MMTypeGeneric::_params*/;
-  variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*AbstractArray::iterator*/;
-  while (true) { /*for*/
-    variable[5] = CALL_abstract_collection___Iterator___is_ok(variable[4])(variable[4]) /*ArrayIterator::is_ok*/;
-    if (!UNTAG_Bool(variable[5])) break; /*for*/
-    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/;
-    variable[6] = variable[5];
-    variable[7] = CALL_static_type___MMType___adapt_to( variable[6] /*i*/)( variable[6] /*i*/,  variable[1] /*r*/) /*MMType::adapt_to*/;
-    CALL_abstract_collection___SimpleCollection___add( variable[3] /*rv*/)( variable[3] /*rv*/, variable[7]) /*AbstractArray::add*/;
-    continue_18: while(0);
-    CALL_abstract_collection___Iterator___next(variable[4])(variable[4]) /*ArrayIterator::next*/;
-  }
-  break_18: while(0);
-  variable[5] = variable[0];
-  variable[5] = ATTR_static_type___MMTypeClass____local_class(variable[5]) /*MMTypeClass::_local_class*/;
-  variable[5] = CALL_genericity___MMLocalClass___get_instantiate_type(variable[5])(variable[5],  variable[3] /*rv*/) /*MMLocalClass::get_instantiate_type*/;
-  variable[4] = variable[5];
-  variable[2] =  variable[4] /*l*/;
-  goto return_label17;
-  return_label17: while(false);
-  tracehead = trace.prev;
-  return variable[2];
-}
-val_t genericity___MMTypeGeneric___upcast_for(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 125, LOCATE_genericity___MMTypeGeneric___upcast_for};
-  val_t variable[5];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_genericity;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[4] = CALL_SUPER_genericity___MMTypeGeneric___upcast_for(variable[0])(variable[0], variable[1]) /*super MMTypeGeneric::upcast_for*/;
-  variable[3] = variable[4];
-  variable[4] = variable[0];
-  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ == variable[4]) || (( variable[3] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/,variable[4])):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*t*/)( variable[3] /*t*/, variable[4]) /*Object::==*/)))))));
-  if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    variable[4] = CALL_static_type___MMType___adapt_to( variable[3] /*t*/)( variable[3] /*t*/, variable[4]) /*MMType::adapt_to*/;
-    variable[3] = variable[4] /*t=*/;
-  }
   variable[2] =  variable[3] /*t*/;
   goto return_label19;
   return_label19: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
+val_t genericity___MMTypeGeneric___adapt_to(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 149, LOCATE_genericity___MMTypeGeneric___adapt_to};
+  val_t variable[8];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = NEW_Array_array___Array___init() /*new Array[MMType]*/;
+  variable[3] = variable[4];
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_genericity___MMTypeGeneric____params(variable[0]) /*MMTypeGeneric::_params*/;
+  /* Register variable[4]: For iterator */
+  variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*AbstractArrayRead::iterator*/;
+  while (true) { /*for*/
+    /* Register variable[5]: For 'is_ok' result */
+    variable[5] = CALL_abstract_collection___Iterator___is_ok(variable[4])(variable[4]) /*ArrayIterator::is_ok*/;
+    if (!UNTAG_Bool(variable[5])) break; /*for*/
+    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[6]: Local variable */
+    variable[6] = variable[5];
+    /* Register variable[7]: Result */
+    variable[7] = CALL_static_type___MMType___adapt_to( variable[6] /*i*/)( variable[6] /*i*/,  variable[1] /*r*/) /*MMType::adapt_to*/;
+    CALL_abstract_collection___SimpleCollection___add( variable[3] /*rv*/)( variable[3] /*rv*/, variable[7]) /*AbstractArray::add*/;
+    continue_22: while(0);
+    CALL_abstract_collection___Iterator___next(variable[4])(variable[4]) /*ArrayIterator::next*/;
+  }
+  break_22: while(0);
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = ATTR_static_type___MMTypeClass____local_class(variable[0]) /*MMTypeClass::_local_class*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_genericity___MMLocalClass___get_instantiate_type(variable[5])(variable[5],  variable[3] /*rv*/) /*MMLocalClass::get_instantiate_type*/;
+  variable[4] = variable[5];
+  variable[2] =  variable[4] /*l*/;
+  goto return_label21;
+  return_label21: while(false);
+  tracehead = trace.prev;
+  return variable[2];
+}
+val_t genericity___MMTypeGeneric___upcast_for(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 125, LOCATE_genericity___MMTypeGeneric___upcast_for};
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_SUPER_genericity___MMTypeGeneric___upcast_for(variable[0])(variable[0], variable[1]) /*super MMTypeGeneric::upcast_for*/;
+  variable[3] = variable[4];
+  /* Register variable[4]: Result */
+  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ == variable[0]) || (( variable[3] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/,variable[0])):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*t*/)( variable[3] /*t*/, variable[0]) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    /* Register variable[4]: Result */
+    variable[4] = CALL_static_type___MMType___adapt_to( variable[3] /*t*/)( variable[3] /*t*/, variable[0]) /*MMType::adapt_to*/;
+    variable[3] = variable[4] /*t=*/;
+  }
+  variable[2] =  variable[3] /*t*/;
+  goto return_label23;
+  return_label23: while(false);
+  tracehead = trace.prev;
+  return variable[2];
+}
 val_t genericity___MMTypeGeneric___is_generic(val_t  self) {
   struct trace_t trace = {NULL, NULL, 112, LOCATE_genericity___MMTypeGeneric___is_generic};
   val_t variable[2];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
   variable[1] =  TAG_Bool(true);
-  goto return_label20;
-  return_label20: while(false);
+  goto return_label24;
+  return_label24: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t genericity___MMTypeGeneric___params(val_t  self) {
   struct trace_t trace = {NULL, NULL, 109, LOCATE_genericity___MMTypeGeneric___params};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
   tracehead = trace.prev;
@@ -475,212 +609,279 @@ val_t genericity___MMTypeGeneric___params(val_t  self) {
 }
 val_t genericity___MMTypeGeneric___params_equals(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 159, LOCATE_genericity___MMTypeGeneric___params_equals};
-  val_t variable[12];
-  void **closurevariable = NULL;
+  val_t variable[11];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = CALL_abstract_collection___Collection___length( variable[1] /*t*/)( variable[1] /*t*/) /*AbstractArray::length*/;
-  variable[4] = variable[0];
-  variable[4] = ATTR_genericity___MMTypeGeneric____params(variable[4]) /*MMTypeGeneric::_params*/;
-  variable[4] = CALL_abstract_collection___Collection___length(variable[4])(variable[4]) /*AbstractArray::length*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___Collection___length( variable[1] /*t*/)( variable[1] /*t*/) /*AbstractArrayRead::length*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_genericity___MMTypeGeneric____params(variable[0]) /*MMTypeGeneric::_params*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstract_collection___Collection___length(variable[4])(variable[4]) /*AbstractArrayRead::length*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool((variable[3])!=(variable[4]));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[2] =  TAG_Bool(false);
-    goto return_label21;
+    goto return_label25;
   }
-  variable[3] = CALL_abstract_collection___Collection___length( variable[1] /*t*/)( variable[1] /*t*/) /*AbstractArray::length*/;
-  variable[4] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[3]); /*new Range[Int]*/
-  variable[3] = variable[4];
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___Collection___length( variable[1] /*t*/)( variable[1] /*t*/) /*AbstractArrayRead::length*/;
+  /* Register variable[3]: Result */
+  variable[3] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[3]) /*new Range[Int]*/;
+  /* Register variable[3]: For iterator */
   variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*Range::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
-    variable[6] = variable[0];
-    variable[6] = ATTR_genericity___MMTypeGeneric____params(variable[6]) /*MMTypeGeneric::_params*/;
+    /* Register variable[6]: Result */
+    variable[6] = ATTR_genericity___MMTypeGeneric____params(variable[0]) /*MMTypeGeneric::_params*/;
+    /* Register variable[7]: Local variable */
     variable[7] = variable[6];
+    /* Register variable[8]: Local variable */
     variable[8] =  variable[5] /*i*/;
+    /* Register variable[9]: Method return value and escape marker */
+    /* Register variable[10]: Result */
     variable[10] = TAG_Bool(UNTAG_Int( variable[8] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-    variable[11] = variable[10];
-    if (UNTAG_Bool(variable[11])) { /* and */
-      variable[11] = variable[7];
-      variable[11] = ATTR_array___AbstractArray____length(variable[11]) /*AbstractArray::_length*/;
-      variable[11] = TAG_Bool(UNTAG_Int( variable[8] /*index*/)<UNTAG_Int(variable[11]));
+    /* Ensure var variable[10]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[10])) { /* and */
+      /* Register variable[10]: Result */
+      variable[10] = ATTR_array___AbstractArrayRead____length(variable[7]) /*AbstractArrayRead::_length*/;
+      /* Register variable[10]: Result */
+      variable[10] = TAG_Bool(UNTAG_Int( variable[8] /*index*/)<UNTAG_Int(variable[10]));
     }
-    variable[10] = variable[11];
-    if (!UNTAG_Bool(variable[10])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_genericity, 229); nit_exit(1);}
-    variable[10] = variable[7];
-    variable[10] = ATTR_array___Array____items(variable[10]) /*Array::_items*/;
+    /* Register variable[10]: Result */
+    if (!UNTAG_Bool(variable[10])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_genericity, 234); nit_exit(1);}
+    /* Register variable[10]: Result */
+    variable[10] = ATTR_array___Array____items(variable[7]) /*Array::_items*/;
+    /* Register variable[10]: Result */
     variable[10] = UNBOX_NativeArray(variable[10])[UNTAG_Int( variable[8] /*index*/)];
     variable[9] = variable[10];
-    goto return_label23;
-    return_label23: while(false);
+    goto return_label27;
+    return_label27: while(false);
+    /* Register variable[6]: Result */
     variable[6] = variable[9];
+    /* Register variable[6]: Result */
     variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] ==  NIT_NULL /*null*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  NIT_NULL /*null*/) /*Object::==*/)))))));
     if (!UNTAG_Bool(variable[6])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_genericity___MMTypeGeneric___params_equals, LOCATE_genericity, 165); nit_exit(1);}
+    /* Register variable[6]: Local variable */
     variable[6] =  variable[1] /*t*/;
+    /* Register variable[7]: Local variable */
     variable[7] =  variable[5] /*i*/;
+    /* Register variable[8]: Method return value and escape marker */
+    /* Register variable[9]: Result */
     variable[9] = TAG_Bool(UNTAG_Int( variable[7] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-    variable[10] = variable[9];
-    if (UNTAG_Bool(variable[10])) { /* and */
-      variable[10] = variable[6];
-      variable[10] = ATTR_array___AbstractArray____length(variable[10]) /*AbstractArray::_length*/;
-      variable[10] = TAG_Bool(UNTAG_Int( variable[7] /*index*/)<UNTAG_Int(variable[10]));
+    /* Ensure var variable[9]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[9])) { /* and */
+      /* Register variable[9]: Result */
+      variable[9] = ATTR_array___AbstractArrayRead____length(variable[6]) /*AbstractArrayRead::_length*/;
+      /* Register variable[9]: Result */
+      variable[9] = TAG_Bool(UNTAG_Int( variable[7] /*index*/)<UNTAG_Int(variable[9]));
     }
-    variable[9] = variable[10];
-    if (!UNTAG_Bool(variable[9])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_genericity, 229); nit_exit(1);}
-    variable[9] = variable[6];
-    variable[9] = ATTR_array___Array____items(variable[9]) /*Array::_items*/;
+    /* Register variable[9]: Result */
+    if (!UNTAG_Bool(variable[9])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_genericity, 234); nit_exit(1);}
+    /* Register variable[9]: Result */
+    variable[9] = ATTR_array___Array____items(variable[6]) /*Array::_items*/;
+    /* Register variable[9]: Result */
     variable[9] = UNBOX_NativeArray(variable[9])[UNTAG_Int( variable[7] /*index*/)];
     variable[8] = variable[9];
-    goto return_label24;
-    return_label24: while(false);
+    goto return_label28;
+    return_label28: while(false);
+    /* Register variable[6]: Result */
     variable[6] = variable[8];
+    /* Register variable[6]: Result */
     variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] ==  NIT_NULL /*null*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  NIT_NULL /*null*/) /*Object::==*/)))))));
     if (!UNTAG_Bool(variable[6])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_genericity___MMTypeGeneric___params_equals, LOCATE_genericity, 166); nit_exit(1);}
-    variable[6] = variable[0];
-    variable[6] = ATTR_genericity___MMTypeGeneric____params(variable[6]) /*MMTypeGeneric::_params*/;
+    /* Register variable[6]: Result */
+    variable[6] = ATTR_genericity___MMTypeGeneric____params(variable[0]) /*MMTypeGeneric::_params*/;
+    /* Register variable[7]: Local variable */
     variable[7] = variable[6];
+    /* Register variable[8]: Local variable */
     variable[8] =  variable[5] /*i*/;
+    /* Register variable[9]: Method return value and escape marker */
+    /* Register variable[10]: Result */
     variable[10] = TAG_Bool(UNTAG_Int( variable[8] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-    variable[11] = variable[10];
-    if (UNTAG_Bool(variable[11])) { /* and */
-      variable[11] = variable[7];
-      variable[11] = ATTR_array___AbstractArray____length(variable[11]) /*AbstractArray::_length*/;
-      variable[11] = TAG_Bool(UNTAG_Int( variable[8] /*index*/)<UNTAG_Int(variable[11]));
+    /* Ensure var variable[10]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[10])) { /* and */
+      /* Register variable[10]: Result */
+      variable[10] = ATTR_array___AbstractArrayRead____length(variable[7]) /*AbstractArrayRead::_length*/;
+      /* Register variable[10]: Result */
+      variable[10] = TAG_Bool(UNTAG_Int( variable[8] /*index*/)<UNTAG_Int(variable[10]));
     }
-    variable[10] = variable[11];
-    if (!UNTAG_Bool(variable[10])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_genericity, 229); nit_exit(1);}
-    variable[10] = variable[7];
-    variable[10] = ATTR_array___Array____items(variable[10]) /*Array::_items*/;
+    /* Register variable[10]: Result */
+    if (!UNTAG_Bool(variable[10])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_genericity, 234); nit_exit(1);}
+    /* Register variable[10]: Result */
+    variable[10] = ATTR_array___Array____items(variable[7]) /*Array::_items*/;
+    /* Register variable[10]: Result */
     variable[10] = UNBOX_NativeArray(variable[10])[UNTAG_Int( variable[8] /*index*/)];
     variable[9] = variable[10];
-    goto return_label25;
-    return_label25: while(false);
+    goto return_label29;
+    return_label29: while(false);
+    /* Register variable[6]: Result */
     variable[6] = variable[9];
+    /* Register variable[7]: Local variable */
     variable[7] =  variable[1] /*t*/;
+    /* Register variable[8]: Local variable */
     variable[8] =  variable[5] /*i*/;
+    /* Register variable[9]: Method return value and escape marker */
+    /* Register variable[10]: Result */
     variable[10] = TAG_Bool(UNTAG_Int( variable[8] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-    variable[11] = variable[10];
-    if (UNTAG_Bool(variable[11])) { /* and */
-      variable[11] = variable[7];
-      variable[11] = ATTR_array___AbstractArray____length(variable[11]) /*AbstractArray::_length*/;
-      variable[11] = TAG_Bool(UNTAG_Int( variable[8] /*index*/)<UNTAG_Int(variable[11]));
+    /* Ensure var variable[10]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[10])) { /* and */
+      /* Register variable[10]: Result */
+      variable[10] = ATTR_array___AbstractArrayRead____length(variable[7]) /*AbstractArrayRead::_length*/;
+      /* Register variable[10]: Result */
+      variable[10] = TAG_Bool(UNTAG_Int( variable[8] /*index*/)<UNTAG_Int(variable[10]));
     }
-    variable[10] = variable[11];
-    if (!UNTAG_Bool(variable[10])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_genericity, 229); nit_exit(1);}
-    variable[10] = variable[7];
-    variable[10] = ATTR_array___Array____items(variable[10]) /*Array::_items*/;
+    /* Register variable[10]: Result */
+    if (!UNTAG_Bool(variable[10])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_genericity, 234); nit_exit(1);}
+    /* Register variable[10]: Result */
+    variable[10] = ATTR_array___Array____items(variable[7]) /*Array::_items*/;
+    /* Register variable[10]: Result */
     variable[10] = UNBOX_NativeArray(variable[10])[UNTAG_Int( variable[8] /*index*/)];
     variable[9] = variable[10];
-    goto return_label26;
-    return_label26: while(false);
+    goto return_label30;
+    return_label30: while(false);
+    /* Register variable[7]: Result */
     variable[7] = variable[9];
+    /* Register variable[6]: Result */
     variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] == variable[7]) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6],variable[7])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6], variable[7]) /*Object::==*/)))))));
     if (UNTAG_Bool(variable[6])) { /*if*/
       variable[2] =  TAG_Bool(false);
-      goto return_label21;
+      goto return_label25;
     }
-    continue_22: while(0);
+    continue_26: while(0);
     CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*Iterator::next*/;
   }
-  break_22: while(0);
+  break_26: while(0);
   variable[2] =  TAG_Bool(true);
-  goto return_label21;
-  return_label21: while(false);
+  goto return_label25;
+  return_label25: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t genericity___MMTypeGeneric___is_subtype(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 179, LOCATE_genericity___MMTypeGeneric___is_subtype};
-  val_t variable[13];
-  void **closurevariable = NULL;
+  val_t variable[12];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_genericity___MMTypeGeneric____params(variable[3]) /*MMTypeGeneric::_params*/;
-  variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*AbstractArray::length*/;
-  variable[4] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[3]); /*new Range[Int]*/
-  variable[3] = variable[4];
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_genericity___MMTypeGeneric____params(variable[0]) /*MMTypeGeneric::_params*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*AbstractArrayRead::length*/;
+  /* Register variable[3]: Result */
+  variable[3] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[3]) /*new Range[Int]*/;
+  /* Register variable[3]: For iterator */
   variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*Range::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
+    /* Register variable[6]: Result */
     variable[6] = CALL_genericity___MMTypeGeneric___params( variable[1] /*t*/)( variable[1] /*t*/) /*MMTypeGeneric::params*/;
+    /* Register variable[7]: Local variable */
     variable[7] = variable[6];
+    /* Register variable[8]: Local variable */
     variable[8] =  variable[5] /*i*/;
+    /* Register variable[9]: Method return value and escape marker */
+    /* Register variable[10]: Result */
     variable[10] = TAG_Bool(UNTAG_Int( variable[8] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-    variable[11] = variable[10];
-    if (UNTAG_Bool(variable[11])) { /* and */
-      variable[11] = variable[7];
-      variable[11] = ATTR_array___AbstractArray____length(variable[11]) /*AbstractArray::_length*/;
-      variable[11] = TAG_Bool(UNTAG_Int( variable[8] /*index*/)<UNTAG_Int(variable[11]));
+    /* Ensure var variable[10]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[10])) { /* and */
+      /* Register variable[10]: Result */
+      variable[10] = ATTR_array___AbstractArrayRead____length(variable[7]) /*AbstractArrayRead::_length*/;
+      /* Register variable[10]: Result */
+      variable[10] = TAG_Bool(UNTAG_Int( variable[8] /*index*/)<UNTAG_Int(variable[10]));
     }
-    variable[10] = variable[11];
-    if (!UNTAG_Bool(variable[10])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_genericity, 229); nit_exit(1);}
-    variable[10] = variable[7];
-    variable[10] = ATTR_array___Array____items(variable[10]) /*Array::_items*/;
+    /* Register variable[10]: Result */
+    if (!UNTAG_Bool(variable[10])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_genericity, 234); nit_exit(1);}
+    /* Register variable[10]: Result */
+    variable[10] = ATTR_array___Array____items(variable[7]) /*Array::_items*/;
+    /* Register variable[10]: Result */
     variable[10] = UNBOX_NativeArray(variable[10])[UNTAG_Int( variable[8] /*index*/)];
     variable[9] = variable[10];
-    goto return_label29;
-    return_label29: while(false);
+    goto return_label33;
+    return_label33: while(false);
+    /* Register variable[6]: Result */
     variable[6] = variable[9];
-    variable[7] = variable[0];
-    variable[7] = ATTR_genericity___MMTypeGeneric____params(variable[7]) /*MMTypeGeneric::_params*/;
+    /* Register variable[7]: Result */
+    variable[7] = ATTR_genericity___MMTypeGeneric____params(variable[0]) /*MMTypeGeneric::_params*/;
+    /* Register variable[8]: Local variable */
     variable[8] = variable[7];
+    /* Register variable[9]: Local variable */
     variable[9] =  variable[5] /*i*/;
+    /* Register variable[10]: Method return value and escape marker */
+    /* Register variable[11]: Result */
     variable[11] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-    variable[12] = variable[11];
-    if (UNTAG_Bool(variable[12])) { /* and */
-      variable[12] = variable[8];
-      variable[12] = ATTR_array___AbstractArray____length(variable[12]) /*AbstractArray::_length*/;
-      variable[12] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)<UNTAG_Int(variable[12]));
+    /* Ensure var variable[11]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[11])) { /* and */
+      /* Register variable[11]: Result */
+      variable[11] = ATTR_array___AbstractArrayRead____length(variable[8]) /*AbstractArrayRead::_length*/;
+      /* Register variable[11]: Result */
+      variable[11] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)<UNTAG_Int(variable[11]));
     }
-    variable[11] = variable[12];
-    if (!UNTAG_Bool(variable[11])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_genericity, 229); nit_exit(1);}
-    variable[11] = variable[8];
-    variable[11] = ATTR_array___Array____items(variable[11]) /*Array::_items*/;
+    /* Register variable[11]: Result */
+    if (!UNTAG_Bool(variable[11])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_genericity, 234); nit_exit(1);}
+    /* Register variable[11]: Result */
+    variable[11] = ATTR_array___Array____items(variable[8]) /*Array::_items*/;
+    /* Register variable[11]: Result */
     variable[11] = UNBOX_NativeArray(variable[11])[UNTAG_Int( variable[9] /*index*/)];
     variable[10] = variable[11];
-    goto return_label30;
-    return_label30: while(false);
+    goto return_label34;
+    return_label34: while(false);
+    /* Register variable[7]: Result */
     variable[7] = variable[10];
+    /* Register variable[6]: Result */
     variable[6] = CALL_static_type___MMType_____l(variable[6])(variable[6], variable[7]) /*MMType::<*/;
     if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[6])))) { /*if*/
       variable[2] =  TAG_Bool(false);
-      goto return_label27;
+      goto return_label31;
     }
-    continue_28: while(0);
+    continue_32: while(0);
     CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*Iterator::next*/;
   }
-  break_28: while(0);
+  break_32: while(0);
   variable[2] =  TAG_Bool(true);
-  goto return_label27;
-  return_label27: while(false);
+  goto return_label31;
+  return_label31: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 void genericity___MMTypeGeneric___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
   struct trace_t trace = {NULL, NULL, 192, LOCATE_genericity___MMTypeGeneric___init};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeGeneric].i]) return;
+  /* Register variable[3]: Method return value and escape marker */
   CALL_static_type___MMTypeClass___init(variable[0])(variable[0],  variable[1] /*c*/, init_table /*YYY*/) /*MMTypeClass::init*/;
-  variable[4] = variable[0];
-  ATTR_genericity___MMTypeGeneric____params(variable[4]) /*MMTypeGeneric::_params*/ =  variable[2] /*p*/;
-  return_label31: while(false);
+  ATTR_genericity___MMTypeGeneric____params(variable[0]) /*MMTypeGeneric::_params*/ =  variable[2] /*p*/;
+  return_label35: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeGeneric].i] = 1;
   tracehead = trace.prev;
   return;
@@ -688,115 +889,149 @@ void genericity___MMTypeGeneric___init(val_t  self, val_t  param0, val_t  param1
 val_t genericity___MMTypeFormalParameter___module(val_t  self) {
   struct trace_t trace = {NULL, NULL, 207, LOCATE_genericity___MMTypeFormalParameter___module};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_genericity___MMTypeFormalParameter____def_class(variable[2]) /*MMTypeFormalParameter::_def_class*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_genericity___MMTypeFormalParameter____def_class(variable[0]) /*MMTypeFormalParameter::_def_class*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_abstractmetamodel___MMLocalClass___module(variable[2])(variable[2]) /*MMLocalClass::module*/;
   variable[1] = variable[2];
-  goto return_label32;
-  return_label32: while(false);
+  goto return_label36;
+  return_label36: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t genericity___MMTypeFormalParameter___for_module(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 209, LOCATE_genericity___MMTypeFormalParameter___for_module};
   val_t variable[6];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[3] = variable[4];
-  variable[4] = variable[0];
-  variable[4] = CALL_static_type___MMType___module(variable[4])(variable[4]) /*MMTypeFormalParameter::module*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  variable[3] = variable[0];
+  /* Register variable[4]: Result */
+  variable[4] = CALL_static_type___MMType___module(variable[0])(variable[0]) /*MMTypeFormalParameter::module*/;
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  variable[1] /*mod*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], variable[1] /*mod*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  variable[1] /*mod*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    variable[4] = ATTR_genericity___MMTypeFormalParameter____def_class(variable[4]) /*MMTypeFormalParameter::_def_class*/;
+    /* Register variable[4]: Result */
+    variable[4] = ATTR_genericity___MMTypeFormalParameter____def_class(variable[0]) /*MMTypeFormalParameter::_def_class*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_abstractmetamodel___MMLocalClass___global(variable[4])(variable[4]) /*MMLocalClass::global*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_abstractmetamodel___MMModule_____bra( variable[1] /*mod*/)( variable[1] /*mod*/, variable[4]) /*MMModule::[]*/;
-    variable[5] = variable[0];
-    variable[5] = CALL_genericity___MMTypeFormalParameter___position(variable[5])(variable[5]) /*MMTypeFormalParameter::position*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_genericity___MMTypeFormalParameter___position(variable[0])(variable[0]) /*MMTypeFormalParameter::position*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_genericity___MMLocalClass___get_formal(variable[4])(variable[4], variable[5]) /*MMLocalClass::get_formal*/;
     variable[3] = variable[4] /*t=*/;
   }
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*t*/)( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_genericity___MMTypeFormalParameter___for_module, LOCATE_genericity, 215); nit_exit(1);}
   variable[2] =  variable[3] /*t*/;
-  goto return_label33;
-  return_label33: while(false);
+  goto return_label37;
+  return_label37: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t genericity___MMTypeFormalParameter___adapt_to(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 227, LOCATE_genericity___MMTypeFormalParameter___adapt_to};
-  val_t variable[12];
-  void **closurevariable = NULL;
+  val_t variable[11];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
   variable[3] = CALL_type_formal___MMType___direct_type( variable[1] /*r*/)( variable[1] /*r*/) /*MMType::direct_type*/;
   variable[1] = variable[3] /*r=*/;
-  variable[4] = variable[0];
-  variable[4] = CALL_genericity___MMTypeFormalParameter___def_class(variable[4])(variable[4]) /*MMTypeFormalParameter::def_class*/;
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_genericity___MMTypeFormalParameter___def_class(variable[0])(variable[0]) /*MMTypeFormalParameter::def_class*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_static_type___MMType___upcast_for( variable[1] /*r*/)( variable[1] /*r*/, variable[4]) /*MMType::upcast_for*/;
   variable[3] = variable[4];
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(( variable[3] /*old_r*/==NIT_NULL) || VAL_ISA( variable[3] /*old_r*/, COLOR_MMTypeGeneric, ID_MMTypeGeneric)) /*cast MMTypeGeneric*/;
   if (!UNTAG_Bool(variable[4])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_genericity___MMTypeFormalParameter___adapt_to, LOCATE_genericity, 235); nit_exit(1);}
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
   variable[5] = CALL_genericity___MMTypeGeneric___params( variable[3] /*old_r*/)( variable[3] /*old_r*/) /*MMTypeGeneric::params*/;
-  variable[6] = variable[0];
-  variable[6] = CALL_genericity___MMTypeFormalParameter___position(variable[6])(variable[6]) /*MMTypeFormalParameter::position*/;
+  /* Register variable[6]: Result */
+  variable[6] = CALL_genericity___MMTypeFormalParameter___position(variable[0])(variable[0]) /*MMTypeFormalParameter::position*/;
+  /* Register variable[7]: Local variable */
   variable[7] = variable[5];
+  /* Register variable[8]: Local variable */
   variable[8] = variable[6];
+  /* Register variable[9]: Method return value and escape marker */
+  /* Register variable[10]: Result */
   variable[10] = TAG_Bool(UNTAG_Int( variable[8] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-  variable[11] = variable[10];
-  if (UNTAG_Bool(variable[11])) { /* and */
-    variable[11] = variable[7];
-    variable[11] = ATTR_array___AbstractArray____length(variable[11]) /*AbstractArray::_length*/;
-    variable[11] = TAG_Bool(UNTAG_Int( variable[8] /*index*/)<UNTAG_Int(variable[11]));
+  /* Ensure var variable[10]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[10])) { /* and */
+    /* Register variable[10]: Result */
+    variable[10] = ATTR_array___AbstractArrayRead____length(variable[7]) /*AbstractArrayRead::_length*/;
+    /* Register variable[10]: Result */
+    variable[10] = TAG_Bool(UNTAG_Int( variable[8] /*index*/)<UNTAG_Int(variable[10]));
   }
-  variable[10] = variable[11];
-  if (!UNTAG_Bool(variable[10])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_genericity, 229); nit_exit(1);}
-  variable[10] = variable[7];
-  variable[10] = ATTR_array___Array____items(variable[10]) /*Array::_items*/;
+  /* Register variable[10]: Result */
+  if (!UNTAG_Bool(variable[10])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_genericity, 234); nit_exit(1);}
+  /* Register variable[10]: Result */
+  variable[10] = ATTR_array___Array____items(variable[7]) /*Array::_items*/;
+  /* Register variable[10]: Result */
   variable[10] = UNBOX_NativeArray(variable[10])[UNTAG_Int( variable[8] /*index*/)];
   variable[9] = variable[10];
-  goto return_label35;
-  return_label35: while(false);
+  goto return_label39;
+  return_label39: while(false);
+  /* Register variable[5]: Result */
   variable[5] = variable[9];
   variable[4] = variable[5];
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*reduct*/ ==  NIT_NULL /*null*/) || (( variable[4] /*reduct*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[4] /*reduct*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*reduct*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[4] /*reduct*/)( variable[4] /*reduct*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_genericity___MMTypeFormalParameter___adapt_to, LOCATE_genericity, 237); nit_exit(1);}
   variable[2] =  variable[4] /*reduct*/;
-  goto return_label34;
-  return_label34: while(false);
+  goto return_label38;
+  return_label38: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t genericity___MMTypeFormalParameter___upcast_for(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 219, LOCATE_genericity___MMTypeFormalParameter___upcast_for};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_type_formal___MMTypeFormal____bound(variable[0]) /*MMTypeFormal::_bound*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_static_type___MMType___upcast_for(variable[3])(variable[3],  variable[1] /*c*/) /*MMType::upcast_for*/;
   variable[2] = variable[3];
-  goto return_label36;
-  return_label36: while(false);
+  goto return_label40;
+  return_label40: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t genericity___MMTypeFormalParameter___def_class(val_t  self) {
   struct trace_t trace = {NULL, NULL, 201, LOCATE_genericity___MMTypeFormalParameter___def_class};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
   tracehead = trace.prev;
@@ -805,7 +1040,7 @@ val_t genericity___MMTypeFormalParameter___def_class(val_t  self) {
 val_t genericity___MMTypeFormalParameter___position(val_t  self) {
   struct trace_t trace = {NULL, NULL, 204, LOCATE_genericity___MMTypeFormalParameter___position};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
   tracehead = trace.prev;
@@ -814,38 +1049,45 @@ val_t genericity___MMTypeFormalParameter___position(val_t  self) {
 void genericity___MMTypeFormalParameter___bound__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 221, LOCATE_genericity___MMTypeFormalParameter___bound__eq};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_type_formal___MMTypeFormal____bound(variable[3]) /*MMTypeFormal::_bound*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_type_formal___MMTypeFormal____bound(variable[0]) /*MMTypeFormal::_bound*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_genericity___MMTypeFormalParameter___bound__eq, LOCATE_genericity, 223); nit_exit(1);}
-  variable[3] = variable[0];
-  ATTR_type_formal___MMTypeFormal____bound(variable[3]) /*MMTypeFormal::_bound*/ =  variable[1] /*t*/;
-  return_label37: while(false);
+  ATTR_type_formal___MMTypeFormal____bound(variable[0]) /*MMTypeFormal::_bound*/ =  variable[1] /*t*/;
+  return_label41: while(false);
   tracehead = trace.prev;
   return;
 }
 void genericity___MMTypeFormalParameter___with_bound(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table) {
   struct trace_t trace = {NULL, NULL, 241, LOCATE_genericity___MMTypeFormalParameter___with_bound};
-  val_t variable[7];
-  void **closurevariable = NULL;
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
+  /* Register variable[4]: Local variable */
   variable[4] =  param3;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeFormalParameter].i]) return;
-  variable[6] = variable[0];
-  CALL_genericity___MMTypeFormalParameter___init(variable[6])(variable[6],  variable[1] /*n*/,  variable[2] /*p*/,  variable[3] /*intro*/, init_table /*YYY*/) /*MMTypeFormalParameter::init*/;
-  variable[6] = variable[0];
-  ATTR_type_formal___MMTypeFormal____bound(variable[6]) /*MMTypeFormal::_bound*/ =  variable[4] /*b*/;
-  return_label38: while(false);
+  /* Register variable[5]: Method return value and escape marker */
+  CALL_genericity___MMTypeFormalParameter___init(variable[0])(variable[0],  variable[1] /*n*/,  variable[2] /*p*/,  variable[3] /*intro*/, init_table /*YYY*/) /*MMTypeFormalParameter::init*/;
+  ATTR_type_formal___MMTypeFormal____bound(variable[0]) /*MMTypeFormal::_bound*/ =  variable[4] /*b*/;
+  return_label42: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeFormalParameter].i] = 1;
   tracehead = trace.prev;
   return;
@@ -853,66 +1095,76 @@ void genericity___MMTypeFormalParameter___with_bound(val_t  self, val_t  param0,
 void genericity___MMTypeFormalParameter___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
   struct trace_t trace = {NULL, NULL, 247, LOCATE_genericity___MMTypeFormalParameter___init};
   val_t variable[6];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeFormalParameter].i]) return;
+  /* Register variable[4]: Method return value and escape marker */
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*n*/ ==  NIT_NULL /*null*/) || (( variable[1] /*n*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*n*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*n*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*n*/)( variable[1] /*n*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (!UNTAG_Bool(variable[5])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_genericity___MMTypeFormalParameter___init, LOCATE_genericity, 249); nit_exit(1);}
   CALL_type_formal___MMTypeFormal___init(variable[0])(variable[0],  variable[1] /*n*/,  NIT_NULL /*null*/, init_table /*YYY*/) /*MMTypeFormal::init*/;
-  variable[5] = variable[0];
-  ATTR_genericity___MMTypeFormalParameter____position(variable[5]) /*MMTypeFormalParameter::_position*/ =  variable[2] /*p*/;
-  variable[5] = variable[0];
-  ATTR_genericity___MMTypeFormalParameter____def_class(variable[5]) /*MMTypeFormalParameter::_def_class*/ =  variable[3] /*intro*/;
-  return_label39: while(false);
+  ATTR_genericity___MMTypeFormalParameter____position(variable[0]) /*MMTypeFormalParameter::_position*/ =  variable[2] /*p*/;
+  ATTR_genericity___MMTypeFormalParameter____def_class(variable[0]) /*MMTypeFormalParameter::_def_class*/ =  variable[3] /*intro*/;
+  return_label43: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeFormalParameter].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t genericity___MMTypeNone___for_module(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 258, LOCATE_genericity___MMTypeNone___for_module};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[2] = variable[3];
-  goto return_label40;
-  return_label40: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  variable[2] = variable[0];
+  goto return_label44;
+  return_label44: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t genericity___MMTypeNone___adapt_to(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 259, LOCATE_genericity___MMTypeNone___adapt_to};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[2] = variable[3];
-  goto return_label41;
-  return_label41: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  variable[2] = variable[0];
+  goto return_label45;
+  return_label45: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t genericity___MMTypeNone___is_generic(val_t  self) {
   struct trace_t trace = {NULL, NULL, 257, LOCATE_genericity___MMTypeNone___is_generic};
   val_t variable[2];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_genericity;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
   variable[1] =  TAG_Bool(false);
-  goto return_label42;
-  return_label42: while(false);
+  goto return_label46;
+  return_label46: while(false);
   tracehead = trace.prev;
   return variable[1];
 }

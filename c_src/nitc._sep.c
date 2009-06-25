@@ -2,220 +2,353 @@
 #include "nitc._sep.h"
 void nitc___NitCompiler___process_options(val_t  self) {
   struct trace_t trace = {NULL, NULL, 41, LOCATE_nitc___NitCompiler___process_options};
-    static val_t once_value_1; static int once_bool_1; /* Once value for variable[3]*/
+    static val_t once_value_1 = NIT_NULL; /* Once value for string variable[2]*/
     static val_t once_value_2; static int once_bool_2; /* Once value for variable[3]*/
-    static val_t once_value_3; static int once_bool_3; /* Once value for variable[3]*/
-  val_t variable[11];
-  void **closurevariable = NULL;
+      static val_t once_value_3 = NIT_NULL; /* Once value for string variable[3]*/
+      static val_t once_value_4 = NIT_NULL; /* Once value for string variable[3]*/
+    static val_t once_value_5; static int once_bool_5; /* Once value for variable[3]*/
+      static val_t once_value_6 = NIT_NULL; /* Once value for string variable[3]*/
+      static val_t once_value_7 = NIT_NULL; /* Once value for string variable[5]*/
+      static val_t once_value_8 = NIT_NULL; /* Once value for string variable[5]*/
+      static val_t once_value_9 = NIT_NULL; /* Once value for string variable[4]*/
+      static val_t once_value_10 = NIT_NULL; /* Once value for string variable[4]*/
+      static val_t once_value_11 = NIT_NULL; /* Once value for string variable[3]*/
+    static val_t once_value_12; static int once_bool_12; /* Once value for variable[3]*/
+      static val_t once_value_13 = NIT_NULL; /* Once value for string variable[3]*/
+      static val_t once_value_14 = NIT_NULL; /* Once value for string variable[5]*/
+      static val_t once_value_15 = NIT_NULL; /* Once value for string variable[5]*/
+      static val_t once_value_16 = NIT_NULL; /* Once value for string variable[4]*/
+      static val_t once_value_17 = NIT_NULL; /* Once value for string variable[4]*/
+      static val_t once_value_18 = NIT_NULL; /* Once value for string variable[3]*/
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_nitc;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
   CALL_SUPER_nitc___NitCompiler___process_options(variable[0])(variable[0]) /*super NitCompiler::process_options*/;
-  variable[2] = variable[0];
-  variable[3] = variable[0];
-  variable[3] = CALL_nitc___NitCompiler___opt_output(variable[3])(variable[3]) /*NitCompiler::opt_output*/;
-  variable[3] = CALL_opts___Option___value(variable[3])(variable[3]) /*Option::value*/;
-  CALL_compiling_base___ToolContext___output_file__eq(variable[2])(variable[2], variable[3]) /*ToolContext::output_file=*/;
-  variable[2] = variable[0];
-  variable[3] = variable[0];
-  variable[3] = CALL_nitc___NitCompiler___opt_boost(variable[3])(variable[3]) /*NitCompiler::opt_boost*/;
-  variable[3] = CALL_opts___Option___value(variable[3])(variable[3]) /*Option::value*/;
-  CALL_compiling_base___ToolContext___boost__eq(variable[2])(variable[2], variable[3]) /*ToolContext::boost=*/;
-  variable[2] = variable[0];
-  variable[3] = variable[0];
-  variable[3] = CALL_nitc___NitCompiler___opt_no_cc(variable[3])(variable[3]) /*NitCompiler::opt_no_cc*/;
-  variable[3] = CALL_opts___Option___value(variable[3])(variable[3]) /*Option::value*/;
-  CALL_compiling_base___ToolContext___no_cc__eq(variable[2])(variable[2], variable[3]) /*ToolContext::no_cc=*/;
-  variable[2] = variable[0];
-  variable[3] = variable[0];
-  variable[3] = CALL_nitc___NitCompiler___opt_extension_prefix(variable[3])(variable[3]) /*NitCompiler::opt_extension_prefix*/;
-  variable[3] = CALL_opts___Option___value(variable[3])(variable[3]) /*Option::value*/;
-  CALL_compiling_base___ToolContext___ext_prefix__eq(variable[2])(variable[2], variable[3]) /*ToolContext::ext_prefix=*/;
-  variable[2] = variable[0];
-  variable[2] = CALL_compiling_base___ToolContext___ext_prefix(variable[2])(variable[2]) /*ToolContext::ext_prefix*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_nitc___NitCompiler___opt_output(variable[0])(variable[0]) /*NitCompiler::opt_output*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_opts___Option___value(variable[2])(variable[2]) /*Option::value*/;
+  CALL_compiling_base___ToolContext___output_file__eq(variable[0])(variable[0], variable[2]) /*ToolContext::output_file=*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_nitc___NitCompiler___opt_boost(variable[0])(variable[0]) /*NitCompiler::opt_boost*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_opts___Option___value(variable[2])(variable[2]) /*Option::value*/;
+  CALL_compiling_base___ToolContext___boost__eq(variable[0])(variable[0], variable[2]) /*ToolContext::boost=*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_nitc___NitCompiler___opt_no_cc(variable[0])(variable[0]) /*NitCompiler::opt_no_cc*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_opts___Option___value(variable[2])(variable[2]) /*Option::value*/;
+  CALL_compiling_base___ToolContext___no_cc__eq(variable[0])(variable[0], variable[2]) /*ToolContext::no_cc=*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_nitc___NitCompiler___opt_extension_prefix(variable[0])(variable[0]) /*NitCompiler::opt_extension_prefix*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_opts___Option___value(variable[2])(variable[2]) /*Option::value*/;
+  CALL_compiling_base___ToolContext___ext_prefix__eq(variable[0])(variable[0], variable[2]) /*ToolContext::ext_prefix=*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_compiling_base___ToolContext___ext_prefix(variable[0])(variable[0]) /*ToolContext::ext_prefix*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*String::==*/)));
   if (UNTAG_Bool(variable[2])) { /*if*/
-    variable[2] = variable[0];
-    variable[3] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-    CALL_compiling_base___ToolContext___ext_prefix__eq(variable[2])(variable[2], variable[3]) /*ToolContext::ext_prefix=*/;
-  }
-  variable[2] = variable[0];
-  variable[3] = variable[0];
-  variable[3] = CALL_nitc___NitCompiler___opt_global(variable[3])(variable[3]) /*NitCompiler::opt_global*/;
-  variable[3] = CALL_opts___Option___value(variable[3])(variable[3]) /*Option::value*/;
-  CALL_compiling_base___ToolContext___global__eq(variable[2])(variable[2], variable[3]) /*ToolContext::global=*/;
-  variable[2] = variable[0];
-  variable[3] = variable[0];
-  variable[3] = CALL_nitc___NitCompiler___opt_compdir(variable[3])(variable[3]) /*NitCompiler::opt_compdir*/;
-  variable[3] = CALL_opts___Option___value(variable[3])(variable[3]) /*Option::value*/;
-  CALL_compiling_base___ToolContext___compdir__eq(variable[2])(variable[2], variable[3]) /*ToolContext::compdir=*/;
-  variable[2] = variable[0];
-  variable[2] = CALL_compiling_base___ToolContext___compdir(variable[2])(variable[2]) /*ToolContext::compdir*/;
-  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*String::==*/)));
-  if (UNTAG_Bool(variable[2])) { /*if*/
-    if (once_bool_1) variable[3] = once_value_1;
+    /* Register variable[2]: Once String constant */
+    if (once_value_1 != NIT_NULL) variable[2] = once_value_1;
     else {
-      variable[3] = NEW_String_string___String___with_native(BOX_NativeString("NIT_COMPDIR"), TAG_Int(11)); /*new String*/
-      variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
-      variable[3] = CALL_environ___Symbol___environ(variable[3])(variable[3]) /*Symbol::environ*/;
-      once_value_1 = variable[3];
-      once_bool_1 = true;
+      variable[2] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+      once_value_1 = variable[2];
     }
-    variable[2] = variable[3];
-    variable[3] = CALL_abstract_collection___Collection___is_empty( variable[2] /*dir*/)( variable[2] /*dir*/) /*AbstractArray::is_empty*/;
-    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) { /*if*/
-      variable[3] = variable[0];
-      CALL_compiling_base___ToolContext___compdir__eq(variable[3])(variable[3],  variable[2] /*dir*/) /*ToolContext::compdir=*/;
-    }
-    variable[3] = variable[0];
-    variable[3] = CALL_compiling_base___ToolContext___compdir(variable[3])(variable[3]) /*ToolContext::compdir*/;
-    variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*String::==*/)));
-    if (UNTAG_Bool(variable[3])) { /*if*/
-      variable[3] = variable[0];
-      variable[4] = NEW_String_string___String___with_native(BOX_NativeString(".nit_compile"), TAG_Int(12)); /*new String*/
-      CALL_compiling_base___ToolContext___compdir__eq(variable[3])(variable[3], variable[4]) /*ToolContext::compdir=*/;
-    }
+    /* Register variable[2]: Result */
+    CALL_compiling_base___ToolContext___ext_prefix__eq(variable[0])(variable[0], variable[2]) /*ToolContext::ext_prefix=*/;
   }
-  variable[2] = variable[0];
-  variable[2] = CALL_compiling_base___ToolContext___compdir(variable[2])(variable[2]) /*ToolContext::compdir*/;
-  variable[3] = variable[0];
-  variable[3] = CALL_compiling_base___ToolContext___ext_prefix(variable[3])(variable[3]) /*ToolContext::ext_prefix*/;
-  CALL_abstract_collection___IndexedCollection___append(variable[2])(variable[2], variable[3]) /*String::append*/;
-  variable[2] = variable[0];
-  variable[3] = variable[0];
-  variable[3] = CALL_nitc___NitCompiler___opt_clibdir(variable[3])(variable[3]) /*NitCompiler::opt_clibdir*/;
-  variable[3] = CALL_opts___Option___value(variable[3])(variable[3]) /*Option::value*/;
-  CALL_compiling_base___ToolContext___clibdir__eq(variable[2])(variable[2], variable[3]) /*ToolContext::clibdir=*/;
-  variable[2] = variable[0];
-  variable[2] = CALL_compiling_base___ToolContext___clibdir(variable[2])(variable[2]) /*ToolContext::clibdir*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_nitc___NitCompiler___opt_global(variable[0])(variable[0]) /*NitCompiler::opt_global*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_opts___Option___value(variable[2])(variable[2]) /*Option::value*/;
+  CALL_compiling_base___ToolContext___global__eq(variable[0])(variable[0], variable[2]) /*ToolContext::global=*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_nitc___NitCompiler___opt_compdir(variable[0])(variable[0]) /*NitCompiler::opt_compdir*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_opts___Option___value(variable[2])(variable[2]) /*Option::value*/;
+  CALL_compiling_base___ToolContext___compdir__eq(variable[0])(variable[0], variable[2]) /*ToolContext::compdir=*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_compiling_base___ToolContext___compdir(variable[0])(variable[0]) /*ToolContext::compdir*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*String::==*/)));
   if (UNTAG_Bool(variable[2])) { /*if*/
+    /* Register variable[2]: Local variable */
+    /* Register variable[3]: Once expression result */
     if (once_bool_2) variable[3] = once_value_2;
     else {
-      variable[3] = NEW_String_string___String___with_native(BOX_NativeString("NIT_DIR"), TAG_Int(7)); /*new String*/
+      /* Register variable[3]: Once String constant */
+      if (once_value_3 != NIT_NULL) variable[3] = once_value_3;
+      else {
+        variable[3] = NEW_String_string___String___with_native(BOX_NativeString("NIT_COMPDIR"), TAG_Int(11)) /*new String*/;
+        once_value_3 = variable[3];
+      }
+      /* Register variable[3]: Result */
+      /* Register variable[3]: Result */
       variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
+      /* Register variable[3]: Result */
       variable[3] = CALL_environ___Symbol___environ(variable[3])(variable[3]) /*Symbol::environ*/;
       once_value_2 = variable[3];
       once_bool_2 = true;
     }
+    /* Register variable[3]: Result */
     variable[2] = variable[3];
-    variable[3] = CALL_abstract_collection___Collection___is_empty( variable[2] /*dir*/)( variable[2] /*dir*/) /*AbstractArray::is_empty*/;
-    if (UNTAG_Bool(variable[3])) { /*if*/
-      variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-      variable[5] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-      variable[6] = variable[5];
-      CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[6]) /*AbstractArray::add*/;
-      variable[7] = variable[0];
-      variable[7] = (G_sys);
-      variable[7] = CALL_string___Sys___program_name(variable[7])(variable[7]) /*Sys::program_name*/;
-      variable[7] = CALL_file___String___dirname(variable[7])(variable[7]) /*String::dirname*/;
-      variable[8] = variable[7];
-      CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[8]) /*AbstractArray::add*/;
-      variable[9] = NEW_String_string___String___with_native(BOX_NativeString("/../lib"), TAG_Int(7)); /*new String*/
-      variable[10] = variable[9];
-      CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[10]) /*AbstractArray::add*/;
-      variable[4] = CALL_string___Object___to_s(variable[4])(variable[4]) /*Object::to_s*/;
-      variable[3] = variable[4];
-      variable[4] = CALL_file___String___file_exists( variable[3] /*dir*/)( variable[3] /*dir*/) /*String::file_exists*/;
-      if (UNTAG_Bool(variable[4])) { /*if*/
-        variable[4] = variable[0];
-        CALL_compiling_base___ToolContext___clibdir__eq(variable[4])(variable[4],  variable[3] /*dir*/) /*ToolContext::clibdir=*/;
-      }
-    } else { /*if*/
-      variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-      variable[4] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-      variable[5] = variable[4];
-      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[5]) /*AbstractArray::add*/;
-      variable[6] =  variable[2] /*dir*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[6]) /*AbstractArray::add*/;
-      variable[7] = NEW_String_string___String___with_native(BOX_NativeString("/lib"), TAG_Int(4)); /*new String*/
-      variable[8] = variable[7];
-      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[8]) /*AbstractArray::add*/;
-      variable[3] = CALL_string___Object___to_s(variable[3])(variable[3]) /*Object::to_s*/;
-      variable[2] = variable[3] /*dir=*/;
-      variable[3] = CALL_file___String___file_exists( variable[2] /*dir*/)( variable[2] /*dir*/) /*String::file_exists*/;
-      if (UNTAG_Bool(variable[3])) { /*if*/
-        variable[3] = variable[0];
-        CALL_compiling_base___ToolContext___clibdir__eq(variable[3])(variable[3],  variable[2] /*dir*/) /*ToolContext::clibdir=*/;
-      }
+    /* Register variable[3]: Result */
+    variable[3] = CALL_abstract_collection___Collection___is_empty( variable[2] /*dir*/)( variable[2] /*dir*/) /*AbstractArrayRead::is_empty*/;
+    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) { /*if*/
+      CALL_compiling_base___ToolContext___compdir__eq(variable[0])(variable[0],  variable[2] /*dir*/) /*ToolContext::compdir=*/;
     }
-    variable[3] = variable[0];
-    variable[3] = CALL_compiling_base___ToolContext___clibdir(variable[3])(variable[3]) /*ToolContext::clibdir*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_compiling_base___ToolContext___compdir(variable[0])(variable[0]) /*ToolContext::compdir*/;
+    /* Register variable[3]: Result */
     variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*String::==*/)));
     if (UNTAG_Bool(variable[3])) { /*if*/
-      variable[3] = variable[0];
-      variable[4] = NEW_String_string___String___with_native(BOX_NativeString("Error: Cannot locate NIT C library directory. Uses --clibdir or envvar NIT_DIR."), TAG_Int(79)); /*new String*/
-      CALL_mmloader___ToolContext___error(variable[3])(variable[3], variable[4]) /*ToolContext::error*/;
-      variable[3] = variable[0];
+      /* Register variable[3]: Once String constant */
+      if (once_value_4 != NIT_NULL) variable[3] = once_value_4;
+      else {
+        variable[3] = NEW_String_string___String___with_native(BOX_NativeString(".nit_compile"), TAG_Int(12)) /*new String*/;
+        once_value_4 = variable[3];
+      }
+      /* Register variable[3]: Result */
+      CALL_compiling_base___ToolContext___compdir__eq(variable[0])(variable[0], variable[3]) /*ToolContext::compdir=*/;
+    }
+  }
+  /* Register variable[2]: Result */
+  variable[2] = CALL_compiling_base___ToolContext___ext_prefix(variable[0])(variable[0]) /*ToolContext::ext_prefix*/;
+  CALL_compiling_base___ToolContext___compdir__eq(variable[0])(variable[0], CALL_string___String_____plus(CALL_compiling_base___ToolContext___compdir(variable[0])(variable[0]) /*ToolContext::compdir*/)(CALL_compiling_base___ToolContext___compdir(variable[0])(variable[0]) /*ToolContext::compdir*/, variable[2]) /*String::+*/) /*ToolContext::compdir=*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_nitc___NitCompiler___opt_clibdir(variable[0])(variable[0]) /*NitCompiler::opt_clibdir*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_opts___Option___value(variable[2])(variable[2]) /*Option::value*/;
+  CALL_compiling_base___ToolContext___clibdir__eq(variable[0])(variable[0], variable[2]) /*ToolContext::clibdir=*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_compiling_base___ToolContext___clibdir(variable[0])(variable[0]) /*ToolContext::clibdir*/;
+  /* Register variable[2]: Result */
+  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*String::==*/)));
+  if (UNTAG_Bool(variable[2])) { /*if*/
+    /* Register variable[2]: Local variable */
+    /* Register variable[3]: Once expression result */
+    if (once_bool_5) variable[3] = once_value_5;
+    else {
+      /* Register variable[3]: Once String constant */
+      if (once_value_6 != NIT_NULL) variable[3] = once_value_6;
+      else {
+        variable[3] = NEW_String_string___String___with_native(BOX_NativeString("NIT_DIR"), TAG_Int(7)) /*new String*/;
+        once_value_6 = variable[3];
+      }
+      /* Register variable[3]: Result */
+      /* Register variable[3]: Result */
+      variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
+      /* Register variable[3]: Result */
+      variable[3] = CALL_environ___Symbol___environ(variable[3])(variable[3]) /*Symbol::environ*/;
+      once_value_5 = variable[3];
+      once_bool_5 = true;
+    }
+    /* Register variable[3]: Result */
+    variable[2] = variable[3];
+    /* Register variable[3]: Result */
+    variable[3] = CALL_abstract_collection___Collection___is_empty( variable[2] /*dir*/)( variable[2] /*dir*/) /*AbstractArrayRead::is_empty*/;
+    if (UNTAG_Bool(variable[3])) { /*if*/
+      /* Register variable[3]: Local variable */
+      variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[5]: Once String constant */
+      if (once_value_7 != NIT_NULL) variable[5] = once_value_7;
+      else {
+        variable[5] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+        once_value_7 = variable[5];
+      }
+      /* Register variable[5]: Result */
+      /* Ensure var variable[5]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+      /* Register variable[5]: Result */
+      variable[5] = (G_sys);
+      /* Register variable[5]: Result */
+      variable[5] = CALL_string___Sys___program_name(variable[5])(variable[5]) /*Sys::program_name*/;
+      /* Register variable[5]: Result */
+      variable[5] = CALL_file___String___dirname(variable[5])(variable[5]) /*String::dirname*/;
+      /* Ensure var variable[5]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+      /* Register variable[5]: Once String constant */
+      if (once_value_8 != NIT_NULL) variable[5] = once_value_8;
+      else {
+        variable[5] = NEW_String_string___String___with_native(BOX_NativeString("/../lib"), TAG_Int(7)) /*new String*/;
+        once_value_8 = variable[5];
+      }
+      /* Register variable[5]: Result */
+      /* Ensure var variable[5]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+      /* Register variable[4]: Result */
+      variable[4] = CALL_string___Object___to_s(variable[4])(variable[4]) /*Object::to_s*/;
+      variable[3] = variable[4];
+      /* Register variable[4]: Result */
+      variable[4] = CALL_file___String___file_exists( variable[3] /*dir*/)( variable[3] /*dir*/) /*String::file_exists*/;
+      if (UNTAG_Bool(variable[4])) { /*if*/
+        CALL_compiling_base___ToolContext___clibdir__eq(variable[0])(variable[0],  variable[3] /*dir*/) /*ToolContext::clibdir=*/;
+      }
+    } else { /*if*/
+      variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[4]: Once String constant */
+      if (once_value_9 != NIT_NULL) variable[4] = once_value_9;
+      else {
+        variable[4] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+        once_value_9 = variable[4];
+      }
+      /* Register variable[4]: Result */
+      /* Ensure var variable[4]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
+      variable[4] =  variable[2] /*dir*/ /* Ensure var: super-string element*/;
+      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
+      /* Register variable[4]: Once String constant */
+      if (once_value_10 != NIT_NULL) variable[4] = once_value_10;
+      else {
+        variable[4] = NEW_String_string___String___with_native(BOX_NativeString("/lib"), TAG_Int(4)) /*new String*/;
+        once_value_10 = variable[4];
+      }
+      /* Register variable[4]: Result */
+      /* Ensure var variable[4]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
+      /* Register variable[3]: Result */
+      variable[3] = CALL_string___Object___to_s(variable[3])(variable[3]) /*Object::to_s*/;
+      variable[2] = variable[3] /*dir=*/;
+      /* Register variable[3]: Result */
+      variable[3] = CALL_file___String___file_exists( variable[2] /*dir*/)( variable[2] /*dir*/) /*String::file_exists*/;
+      if (UNTAG_Bool(variable[3])) { /*if*/
+        CALL_compiling_base___ToolContext___clibdir__eq(variable[0])(variable[0],  variable[2] /*dir*/) /*ToolContext::clibdir=*/;
+      }
+    }
+    /* Register variable[3]: Result */
+    variable[3] = CALL_compiling_base___ToolContext___clibdir(variable[0])(variable[0]) /*ToolContext::clibdir*/;
+    /* Register variable[3]: Result */
+    variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*String::==*/)));
+    if (UNTAG_Bool(variable[3])) { /*if*/
+      /* Register variable[3]: Once String constant */
+      if (once_value_11 != NIT_NULL) variable[3] = once_value_11;
+      else {
+        variable[3] = NEW_String_string___String___with_native(BOX_NativeString("Error: Cannot locate NIT C library directory. Uses --clibdir or envvar NIT_DIR."), TAG_Int(79)) /*new String*/;
+        once_value_11 = variable[3];
+      }
+      /* Register variable[3]: Result */
+      CALL_mmloader___ToolContext___error(variable[0])(variable[0], variable[3]) /*ToolContext::error*/;
       exit(UNTAG_Int( TAG_Int(1)));
     }
   }
-  variable[2] = variable[0];
-  variable[3] = variable[0];
-  variable[3] = CALL_nitc___NitCompiler___opt_bindir(variable[3])(variable[3]) /*NitCompiler::opt_bindir*/;
-  variable[3] = CALL_opts___Option___value(variable[3])(variable[3]) /*Option::value*/;
-  CALL_compiling_base___ToolContext___bindir__eq(variable[2])(variable[2], variable[3]) /*ToolContext::bindir=*/;
-  variable[2] = variable[0];
-  variable[2] = CALL_compiling_base___ToolContext___bindir(variable[2])(variable[2]) /*ToolContext::bindir*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_nitc___NitCompiler___opt_bindir(variable[0])(variable[0]) /*NitCompiler::opt_bindir*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_opts___Option___value(variable[2])(variable[2]) /*Option::value*/;
+  CALL_compiling_base___ToolContext___bindir__eq(variable[0])(variable[0], variable[2]) /*ToolContext::bindir=*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_compiling_base___ToolContext___bindir(variable[0])(variable[0]) /*ToolContext::bindir*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*String::==*/)));
   if (UNTAG_Bool(variable[2])) { /*if*/
-    if (once_bool_3) variable[3] = once_value_3;
+    /* Register variable[2]: Local variable */
+    /* Register variable[3]: Once expression result */
+    if (once_bool_12) variable[3] = once_value_12;
     else {
-      variable[3] = NEW_String_string___String___with_native(BOX_NativeString("NIT_DIR"), TAG_Int(7)); /*new String*/
+      /* Register variable[3]: Once String constant */
+      if (once_value_13 != NIT_NULL) variable[3] = once_value_13;
+      else {
+        variable[3] = NEW_String_string___String___with_native(BOX_NativeString("NIT_DIR"), TAG_Int(7)) /*new String*/;
+        once_value_13 = variable[3];
+      }
+      /* Register variable[3]: Result */
+      /* Register variable[3]: Result */
       variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
+      /* Register variable[3]: Result */
       variable[3] = CALL_environ___Symbol___environ(variable[3])(variable[3]) /*Symbol::environ*/;
-      once_value_3 = variable[3];
-      once_bool_3 = true;
+      once_value_12 = variable[3];
+      once_bool_12 = true;
     }
+    /* Register variable[3]: Result */
     variable[2] = variable[3];
-    variable[3] = CALL_abstract_collection___Collection___is_empty( variable[2] /*dir*/)( variable[2] /*dir*/) /*AbstractArray::is_empty*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_abstract_collection___Collection___is_empty( variable[2] /*dir*/)( variable[2] /*dir*/) /*AbstractArrayRead::is_empty*/;
     if (UNTAG_Bool(variable[3])) { /*if*/
-      variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-      variable[5] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-      variable[6] = variable[5];
-      CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[6]) /*AbstractArray::add*/;
-      variable[7] = variable[0];
-      variable[7] = (G_sys);
-      variable[7] = CALL_string___Sys___program_name(variable[7])(variable[7]) /*Sys::program_name*/;
-      variable[7] = CALL_file___String___dirname(variable[7])(variable[7]) /*String::dirname*/;
-      variable[8] = variable[7];
-      CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[8]) /*AbstractArray::add*/;
-      variable[9] = NEW_String_string___String___with_native(BOX_NativeString("/../bin"), TAG_Int(7)); /*new String*/
-      variable[10] = variable[9];
-      CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[10]) /*AbstractArray::add*/;
+      /* Register variable[3]: Local variable */
+      variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[5]: Once String constant */
+      if (once_value_14 != NIT_NULL) variable[5] = once_value_14;
+      else {
+        variable[5] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+        once_value_14 = variable[5];
+      }
+      /* Register variable[5]: Result */
+      /* Ensure var variable[5]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+      /* Register variable[5]: Result */
+      variable[5] = (G_sys);
+      /* Register variable[5]: Result */
+      variable[5] = CALL_string___Sys___program_name(variable[5])(variable[5]) /*Sys::program_name*/;
+      /* Register variable[5]: Result */
+      variable[5] = CALL_file___String___dirname(variable[5])(variable[5]) /*String::dirname*/;
+      /* Ensure var variable[5]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+      /* Register variable[5]: Once String constant */
+      if (once_value_15 != NIT_NULL) variable[5] = once_value_15;
+      else {
+        variable[5] = NEW_String_string___String___with_native(BOX_NativeString("/../bin"), TAG_Int(7)) /*new String*/;
+        once_value_15 = variable[5];
+      }
+      /* Register variable[5]: Result */
+      /* Ensure var variable[5]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+      /* Register variable[4]: Result */
       variable[4] = CALL_string___Object___to_s(variable[4])(variable[4]) /*Object::to_s*/;
       variable[3] = variable[4];
+      /* Register variable[4]: Result */
       variable[4] = CALL_file___String___file_exists( variable[3] /*dir*/)( variable[3] /*dir*/) /*String::file_exists*/;
       if (UNTAG_Bool(variable[4])) { /*if*/
-        variable[4] = variable[0];
-        CALL_compiling_base___ToolContext___bindir__eq(variable[4])(variable[4],  variable[3] /*dir*/) /*ToolContext::bindir=*/;
+        CALL_compiling_base___ToolContext___bindir__eq(variable[0])(variable[0],  variable[3] /*dir*/) /*ToolContext::bindir=*/;
       }
     } else { /*if*/
-      variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-      variable[4] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-      variable[5] = variable[4];
-      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[5]) /*AbstractArray::add*/;
-      variable[6] =  variable[2] /*dir*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[6]) /*AbstractArray::add*/;
-      variable[7] = NEW_String_string___String___with_native(BOX_NativeString("/bin"), TAG_Int(4)); /*new String*/
-      variable[8] = variable[7];
-      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[8]) /*AbstractArray::add*/;
+      variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[4]: Once String constant */
+      if (once_value_16 != NIT_NULL) variable[4] = once_value_16;
+      else {
+        variable[4] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+        once_value_16 = variable[4];
+      }
+      /* Register variable[4]: Result */
+      /* Ensure var variable[4]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
+      variable[4] =  variable[2] /*dir*/ /* Ensure var: super-string element*/;
+      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
+      /* Register variable[4]: Once String constant */
+      if (once_value_17 != NIT_NULL) variable[4] = once_value_17;
+      else {
+        variable[4] = NEW_String_string___String___with_native(BOX_NativeString("/bin"), TAG_Int(4)) /*new String*/;
+        once_value_17 = variable[4];
+      }
+      /* Register variable[4]: Result */
+      /* Ensure var variable[4]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
+      /* Register variable[3]: Result */
       variable[3] = CALL_string___Object___to_s(variable[3])(variable[3]) /*Object::to_s*/;
       variable[2] = variable[3] /*dir=*/;
+      /* Register variable[3]: Result */
       variable[3] = CALL_file___String___file_exists( variable[2] /*dir*/)( variable[2] /*dir*/) /*String::file_exists*/;
       if (UNTAG_Bool(variable[3])) { /*if*/
-        variable[3] = variable[0];
-        CALL_compiling_base___ToolContext___bindir__eq(variable[3])(variable[3],  variable[2] /*dir*/) /*ToolContext::bindir=*/;
+        CALL_compiling_base___ToolContext___bindir__eq(variable[0])(variable[0],  variable[2] /*dir*/) /*ToolContext::bindir=*/;
       }
     }
-    variable[3] = variable[0];
-    variable[3] = CALL_compiling_base___ToolContext___bindir(variable[3])(variable[3]) /*ToolContext::bindir*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_compiling_base___ToolContext___bindir(variable[0])(variable[0]) /*ToolContext::bindir*/;
+    /* Register variable[3]: Result */
     variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*String::==*/)));
     if (UNTAG_Bool(variable[3])) { /*if*/
-      variable[3] = variable[0];
-      variable[4] = NEW_String_string___String___with_native(BOX_NativeString("Error: Cannot locate NIT tools directory. Uses --bindir or envvar NIT_DIR."), TAG_Int(74)); /*new String*/
-      CALL_mmloader___ToolContext___error(variable[3])(variable[3], variable[4]) /*ToolContext::error*/;
-      variable[3] = variable[0];
+      /* Register variable[3]: Once String constant */
+      if (once_value_18 != NIT_NULL) variable[3] = once_value_18;
+      else {
+        variable[3] = NEW_String_string___String___with_native(BOX_NativeString("Error: Cannot locate NIT tools directory. Uses --bindir or envvar NIT_DIR."), TAG_Int(74)) /*new String*/;
+        once_value_18 = variable[3];
+      }
+      /* Register variable[3]: Result */
+      CALL_mmloader___ToolContext___error(variable[0])(variable[0], variable[3]) /*ToolContext::error*/;
       exit(UNTAG_Int( TAG_Int(1)));
     }
   }
@@ -226,33 +359,39 @@ void nitc___NitCompiler___process_options(val_t  self) {
 void nitc___NitCompiler___perform_work(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 95, LOCATE_nitc___NitCompiler___perform_work};
   val_t variable[7];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_nitc;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = CALL_abstract_collection___Collection___iterator( variable[1] /*mods*/)( variable[1] /*mods*/) /*AbstractArray::iterator*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator( variable[1] /*mods*/)( variable[1] /*mods*/) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
+    /* Register variable[6]: Result */
     variable[6] = TAG_Bool(( variable[5] /*mod*/==NIT_NULL) || VAL_ISA( variable[5] /*mod*/, COLOR_MMSrcModule, ID_MMSrcModule)) /*cast MMSrcModule*/;
     if (!UNTAG_Bool(variable[6])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_nitc___NitCompiler___perform_work, LOCATE_nitc, 98); nit_exit(1);}
-    variable[6] = variable[0];
-    CALL_compiling___MMSrcModule___compile_prog_to_c( variable[5] /*mod*/)( variable[5] /*mod*/, variable[6]) /*MMSrcModule::compile_prog_to_c*/;
-    continue_5: while(0);
+    CALL_compiling___MMSrcModule___compile_prog_to_c( variable[5] /*mod*/)( variable[5] /*mod*/, variable[0]) /*MMSrcModule::compile_prog_to_c*/;
+    continue_20: while(0);
     CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*ArrayIterator::next*/;
   }
-  break_5: while(0);
-  return_label4: while(false);
+  break_20: while(0);
+  return_label19: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t nitc___NitCompiler___opt_output(val_t  self) {
   struct trace_t trace = {NULL, NULL, 26, LOCATE_nitc___NitCompiler___opt_output};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_nitc;
   tracehead = trace.prev;
@@ -261,7 +400,7 @@ val_t nitc___NitCompiler___opt_output(val_t  self) {
 val_t nitc___NitCompiler___opt_boost(val_t  self) {
   struct trace_t trace = {NULL, NULL, 27, LOCATE_nitc___NitCompiler___opt_boost};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_nitc;
   tracehead = trace.prev;
@@ -270,7 +409,7 @@ val_t nitc___NitCompiler___opt_boost(val_t  self) {
 val_t nitc___NitCompiler___opt_no_cc(val_t  self) {
   struct trace_t trace = {NULL, NULL, 28, LOCATE_nitc___NitCompiler___opt_no_cc};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_nitc;
   tracehead = trace.prev;
@@ -279,7 +418,7 @@ val_t nitc___NitCompiler___opt_no_cc(val_t  self) {
 val_t nitc___NitCompiler___opt_global(val_t  self) {
   struct trace_t trace = {NULL, NULL, 29, LOCATE_nitc___NitCompiler___opt_global};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_nitc;
   tracehead = trace.prev;
@@ -288,7 +427,7 @@ val_t nitc___NitCompiler___opt_global(val_t  self) {
 val_t nitc___NitCompiler___opt_clibdir(val_t  self) {
   struct trace_t trace = {NULL, NULL, 30, LOCATE_nitc___NitCompiler___opt_clibdir};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_nitc;
   tracehead = trace.prev;
@@ -297,7 +436,7 @@ val_t nitc___NitCompiler___opt_clibdir(val_t  self) {
 val_t nitc___NitCompiler___opt_bindir(val_t  self) {
   struct trace_t trace = {NULL, NULL, 31, LOCATE_nitc___NitCompiler___opt_bindir};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_nitc;
   tracehead = trace.prev;
@@ -306,7 +445,7 @@ val_t nitc___NitCompiler___opt_bindir(val_t  self) {
 val_t nitc___NitCompiler___opt_compdir(val_t  self) {
   struct trace_t trace = {NULL, NULL, 32, LOCATE_nitc___NitCompiler___opt_compdir};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_nitc;
   tracehead = trace.prev;
@@ -315,7 +454,7 @@ val_t nitc___NitCompiler___opt_compdir(val_t  self) {
 val_t nitc___NitCompiler___opt_extension_prefix(val_t  self) {
   struct trace_t trace = {NULL, NULL, 33, LOCATE_nitc___NitCompiler___opt_extension_prefix};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_nitc;
   tracehead = trace.prev;
@@ -324,41 +463,44 @@ val_t nitc___NitCompiler___opt_extension_prefix(val_t  self) {
 void nitc___NitCompiler___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 35, LOCATE_nitc___NitCompiler___init};
   val_t variable[12];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_nitc;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_NitCompiler].i]) return;
+  /* Register variable[1]: Method return value and escape marker */
   CALL_abstracttool___AbstractCompiler___init(variable[0])(variable[0], init_table /*YYY*/) /*AbstractCompiler::init*/;
-  variable[2] = variable[0];
-  variable[2] = CALL_mmloader___ToolContext___option_context(variable[2])(variable[2]) /*ToolContext::option_context*/;
-  variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(8)); /*new Array[Option]*/
-  variable[4] = variable[0];
-  variable[4] = CALL_nitc___NitCompiler___opt_output(variable[4])(variable[4]) /*NitCompiler::opt_output*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_mmloader___ToolContext___option_context(variable[0])(variable[0]) /*ToolContext::option_context*/;
+  variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(8)) /*new Array[Option]*/ /* Ensure var: Literal array*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_nitc___NitCompiler___opt_output(variable[0])(variable[0]) /*NitCompiler::opt_output*/;
   CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
-  variable[5] = variable[0];
-  variable[5] = CALL_nitc___NitCompiler___opt_boost(variable[5])(variable[5]) /*NitCompiler::opt_boost*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_nitc___NitCompiler___opt_boost(variable[0])(variable[0]) /*NitCompiler::opt_boost*/;
   CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[5]) /*AbstractArray::add*/;
-  variable[6] = variable[0];
-  variable[6] = CALL_nitc___NitCompiler___opt_no_cc(variable[6])(variable[6]) /*NitCompiler::opt_no_cc*/;
+  /* Register variable[6]: Result */
+  variable[6] = CALL_nitc___NitCompiler___opt_no_cc(variable[0])(variable[0]) /*NitCompiler::opt_no_cc*/;
   CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[6]) /*AbstractArray::add*/;
-  variable[7] = variable[0];
-  variable[7] = CALL_nitc___NitCompiler___opt_global(variable[7])(variable[7]) /*NitCompiler::opt_global*/;
+  /* Register variable[7]: Result */
+  variable[7] = CALL_nitc___NitCompiler___opt_global(variable[0])(variable[0]) /*NitCompiler::opt_global*/;
   CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[7]) /*AbstractArray::add*/;
-  variable[8] = variable[0];
-  variable[8] = CALL_nitc___NitCompiler___opt_clibdir(variable[8])(variable[8]) /*NitCompiler::opt_clibdir*/;
+  /* Register variable[8]: Result */
+  variable[8] = CALL_nitc___NitCompiler___opt_clibdir(variable[0])(variable[0]) /*NitCompiler::opt_clibdir*/;
   CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[8]) /*AbstractArray::add*/;
-  variable[9] = variable[0];
-  variable[9] = CALL_nitc___NitCompiler___opt_bindir(variable[9])(variable[9]) /*NitCompiler::opt_bindir*/;
+  /* Register variable[9]: Result */
+  variable[9] = CALL_nitc___NitCompiler___opt_bindir(variable[0])(variable[0]) /*NitCompiler::opt_bindir*/;
   CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[9]) /*AbstractArray::add*/;
-  variable[10] = variable[0];
-  variable[10] = CALL_nitc___NitCompiler___opt_compdir(variable[10])(variable[10]) /*NitCompiler::opt_compdir*/;
+  /* Register variable[10]: Result */
+  variable[10] = CALL_nitc___NitCompiler___opt_compdir(variable[0])(variable[0]) /*NitCompiler::opt_compdir*/;
   CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[10]) /*AbstractArray::add*/;
-  variable[11] = variable[0];
-  variable[11] = CALL_nitc___NitCompiler___opt_extension_prefix(variable[11])(variable[11]) /*NitCompiler::opt_extension_prefix*/;
+  /* Register variable[11]: Result */
+  variable[11] = CALL_nitc___NitCompiler___opt_extension_prefix(variable[0])(variable[0]) /*NitCompiler::opt_extension_prefix*/;
   CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[11]) /*AbstractArray::add*/;
+  /* Register variable[3]: Result */
   CALL_opts___OptionContext___add_option(variable[2])(variable[2], variable[3]) /*OptionContext::add_option*/;
-  return_label6: while(false);
+  return_label21: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_NitCompiler].i] = 1;
   tracehead = trace.prev;
   return;
@@ -366,14 +508,18 @@ void nitc___NitCompiler___init(val_t  self, int* init_table) {
 void nitc___Sys___main(val_t  self) {
   struct trace_t trace = {NULL, NULL, 105, LOCATE_nitc___Sys___main};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_nitc;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[3] = NEW_NitCompiler_nitc___NitCompiler___init(); /*new NitCompiler*/
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = NEW_NitCompiler_nitc___NitCompiler___init() /*new NitCompiler*/;
   variable[2] = variable[3];
   CALL_abstracttool___AbstractCompiler___exec_cmd_line( variable[2] /*c*/)( variable[2] /*c*/) /*AbstractCompiler::exec_cmd_line*/;
-  return_label7: while(false);
+  return_label22: while(false);
   tracehead = trace.prev;
   return;
 }

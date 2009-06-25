@@ -196,12 +196,8 @@ typedef void (* file___Stderr___init_t)(val_t  self, int* init_table);
 void file___Stderr___init(val_t  self, int* init_table);
 #define LOCATE_file___Stderr___init "file::Stderr::init"
 val_t NEW_Stderr_file___Stderr___init();
-val_t NEW_String_string___String___init();
-val_t NEW_String_string___String___from(val_t p0);
-val_t NEW_String_string___String___with_capacity(val_t p0);
 val_t NEW_String_string___String___with_native(val_t p0, val_t p1);
 val_t NEW_String_string___String___from_cstring(val_t p0);
-val_t NEW_String_string___String___filled_with(val_t p0, val_t p1);
 typedef val_t (* file___String___file_exists_t)(val_t  self);
 val_t file___String___file_exists(val_t  self);
 #define LOCATE_file___String___file_exists "file::String::file_exists"

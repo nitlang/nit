@@ -3,7 +3,7 @@
 val_t syntax_base___MMSrcModule___node(val_t  self) {
   struct trace_t trace = {NULL, NULL, 26, LOCATE_syntax_base___MMSrcModule___node};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
@@ -12,30 +12,37 @@ val_t syntax_base___MMSrcModule___node(val_t  self) {
 val_t syntax_base___MMSrcModule___src_local_classes(val_t  self) {
   struct trace_t trace = {NULL, NULL, 29, LOCATE_syntax_base___MMSrcModule___src_local_classes};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
   return ATTR_syntax_base___MMSrcModule____src_local_classes( self) /*MMSrcModule::_src_local_classes*/;
 }
-void syntax_base___MMSrcModule___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table) {
+void syntax_base___MMSrcModule___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table) {
   struct trace_t trace = {NULL, NULL, 32, LOCATE_syntax_base___MMSrcModule___init};
   val_t variable[8];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
+  /* Register variable[4]: Local variable */
   variable[4] =  param3;
+  /* Register variable[5]: Local variable */
+  variable[5] =  param4;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcModule].i]) return;
-  CALL_abstractmetamodel___MMModule___init(variable[0])(variable[0],  variable[4] /*name*/,  variable[3] /*dir*/,  variable[1] /*c*/, init_table /*YYY*/) /*MMModule::init*/;
-  variable[6] = variable[0];
-  ATTR_syntax_base___MMSrcModule____node(variable[6]) /*MMSrcModule::_node*/ =  variable[2] /*source*/;
-  variable[6] = variable[0];
-  variable[7] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[Symbol, MMSrcLocalClass]*/
-  ATTR_syntax_base___MMSrcModule____src_local_classes(variable[6]) /*MMSrcModule::_src_local_classes*/ = variable[7];
+  /* Register variable[6]: Method return value and escape marker */
+  CALL_abstractmetamodel___MMModule___init(variable[0])(variable[0],  variable[4] /*name*/,  variable[3] /*dir*/,  variable[1] /*c*/,  variable[5] /*filename*/, init_table /*YYY*/) /*MMModule::init*/;
+  ATTR_syntax_base___MMSrcModule____node(variable[0]) /*MMSrcModule::_node*/ =  variable[2] /*source*/;
+  /* Register variable[7]: Result */
+  variable[7] = NEW_HashMap_hash___HashMap___init() /*new HashMap[Symbol, MMSrcLocalClass]*/;
+  ATTR_syntax_base___MMSrcModule____src_local_classes(variable[0]) /*MMSrcModule::_src_local_classes*/ = variable[7];
   return_label0: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcModule].i] = 1;
   tracehead = trace.prev;
@@ -43,66 +50,111 @@ void syntax_base___MMSrcModule___init(val_t  self, val_t  param0, val_t  param1,
 }
 val_t syntax_base___MMGlobalClass___check_visibility(val_t  self, val_t  param0, val_t  param1, val_t  param2) {
   struct trace_t trace = {NULL, NULL, 41, LOCATE_syntax_base___MMGlobalClass___check_visibility};
-  val_t variable[17];
-  void **closurevariable = NULL;
+      static val_t once_value_2 = NIT_NULL; /* Once value for string variable[8]*/
+      static val_t once_value_3 = NIT_NULL; /* Once value for string variable[8]*/
+      static val_t once_value_4 = NIT_NULL; /* Once value for string variable[8]*/
+        static val_t once_value_5 = NIT_NULL; /* Once value for string variable[8]*/
+        static val_t once_value_6 = NIT_NULL; /* Once value for string variable[8]*/
+  val_t variable[9];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
-  variable[6] = variable[0];
-  variable[6] = CALL_abstractmetamodel___MMGlobalClass___intro(variable[6])(variable[6]) /*MMGlobalClass::intro*/;
+  /* Register variable[4]: Method return value and escape marker */
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
+  variable[6] = CALL_abstractmetamodel___MMGlobalClass___intro(variable[0])(variable[0]) /*MMGlobalClass::intro*/;
+  /* Register variable[6]: Result */
   variable[6] = CALL_abstractmetamodel___MMLocalClass___module(variable[6])(variable[6]) /*MMLocalClass::module*/;
   variable[5] = variable[6];
+  /* Register variable[6]: Result */
   variable[6] = TAG_Bool(( variable[5] /*pm*/==NIT_NULL) || VAL_ISA( variable[5] /*pm*/, COLOR_MMSrcModule, ID_MMSrcModule)) /*cast MMSrcModule*/;
   if (!UNTAG_Bool(variable[6])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_syntax_base___MMGlobalClass___check_visibility, LOCATE_syntax_base, 44); nit_exit(1);}
+  /* Register variable[6]: Local variable */
+  /* Register variable[7]: Result */
   variable[7] = CALL_abstractmetamodel___MMModule___visibility_for( variable[3] /*cm*/)( variable[3] /*cm*/,  variable[5] /*pm*/) /*MMModule::visibility_for*/;
   variable[6] = variable[7];
+  /* Register variable[7]: Result */
   variable[7] = TAG_Bool(( variable[6] /*vpm*/)==( TAG_Int(3)));
   if (UNTAG_Bool(variable[7])) { /*if*/
     variable[4] =  TAG_Bool(true);
     goto return_label1;
   } else { /*if*/
+    /* Register variable[7]: Result */
     variable[7] = TAG_Bool(( variable[6] /*vpm*/)==( TAG_Int(0)));
     if (UNTAG_Bool(variable[7])) { /*if*/
-      variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-      variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Visibility error: Class "), TAG_Int(24)); /*new String*/
-      variable[9] = variable[8];
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[9]) /*AbstractArray::add*/;
-      variable[10] = variable[0];
-      variable[11] = variable[10];
-      variable[11] = CALL_string___Object___to_s(variable[11])(variable[11]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[11]) /*AbstractArray::add*/;
-      variable[12] = NEW_String_string___String___with_native(BOX_NativeString(" comes from the hidden module "), TAG_Int(30)); /*new String*/
-      variable[13] = variable[12];
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[13]) /*AbstractArray::add*/;
-      variable[14] =  variable[3] /*cm*/;
-      variable[14] = CALL_string___Object___to_s(variable[14])(variable[14]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[14]) /*AbstractArray::add*/;
-      variable[15] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-      variable[16] = variable[15];
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[16]) /*AbstractArray::add*/;
+      variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[8]: Once String constant */
+      if (once_value_2 != NIT_NULL) variable[8] = once_value_2;
+      else {
+        variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Visibility error: Class "), TAG_Int(24)) /*new String*/;
+        once_value_2 = variable[8];
+      }
+      /* Register variable[8]: Result */
+      /* Ensure var variable[8]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+      /* Ensure var variable[0]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], CALL_string___Object___to_s(variable[0])(variable[0]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[8]: Once String constant */
+      if (once_value_3 != NIT_NULL) variable[8] = once_value_3;
+      else {
+        variable[8] = NEW_String_string___String___with_native(BOX_NativeString(" comes from the hidden module "), TAG_Int(30)) /*new String*/;
+        once_value_3 = variable[8];
+      }
+      /* Register variable[8]: Result */
+      /* Ensure var variable[8]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+      variable[8] =  variable[3] /*cm*/ /* Ensure var: super-string element*/;
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[8]: Once String constant */
+      if (once_value_4 != NIT_NULL) variable[8] = once_value_4;
+      else {
+        variable[8] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+        once_value_4 = variable[8];
+      }
+      /* Register variable[8]: Result */
+      /* Ensure var variable[8]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+      /* Register variable[7]: Result */
       variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
       CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/,  variable[2] /*n*/, variable[7]) /*AbsSyntaxVisitor::error*/;
       variable[4] =  TAG_Bool(false);
       goto return_label1;
     } else { /*if*/
-      variable[7] = variable[0];
-      variable[7] = CALL_abstractmetamodel___MMGlobalClass___visibility_level(variable[7])(variable[7]) /*MMGlobalClass::visibility_level*/;
+      /* Register variable[7]: Result */
+      variable[7] = CALL_abstractmetamodel___MMGlobalClass___visibility_level(variable[0])(variable[0]) /*MMGlobalClass::visibility_level*/;
+      /* Register variable[7]: Result */
       variable[7] = TAG_Bool(UNTAG_Int(variable[7])>=UNTAG_Int( TAG_Int(3)));
       if (UNTAG_Bool(variable[7])) { /*if*/
-        variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-        variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Visibility error: Class "), TAG_Int(24)); /*new String*/
-        variable[9] = variable[8];
-        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[9]) /*AbstractArray::add*/;
-        variable[10] = variable[0];
-        variable[11] = variable[10];
-        variable[11] = CALL_string___Object___to_s(variable[11])(variable[11]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[11]) /*AbstractArray::add*/;
-        variable[12] = NEW_String_string___String___with_native(BOX_NativeString(" is private."), TAG_Int(12)); /*new String*/
-        variable[13] = variable[12];
-        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[13]) /*AbstractArray::add*/;
+        variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+        /* Register variable[8]: Once String constant */
+        if (once_value_5 != NIT_NULL) variable[8] = once_value_5;
+        else {
+          variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Visibility error: Class "), TAG_Int(24)) /*new String*/;
+          once_value_5 = variable[8];
+        }
+        /* Register variable[8]: Result */
+        /* Ensure var variable[8]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+        /* Ensure var variable[0]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], CALL_string___Object___to_s(variable[0])(variable[0]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[8]: Once String constant */
+        if (once_value_6 != NIT_NULL) variable[8] = once_value_6;
+        else {
+          variable[8] = NEW_String_string___String___with_native(BOX_NativeString(" is private."), TAG_Int(12)) /*new String*/;
+          once_value_6 = variable[8];
+        }
+        /* Register variable[8]: Result */
+        /* Ensure var variable[8]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+        /* Register variable[7]: Result */
         variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
         CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/,  variable[2] /*n*/, variable[7]) /*AbsSyntaxVisitor::error*/;
         variable[4] =  TAG_Bool(false);
@@ -119,7 +171,7 @@ val_t syntax_base___MMGlobalClass___check_visibility(val_t  self, val_t  param0,
 val_t syntax_base___MMSrcLocalClass___nodes(val_t  self) {
   struct trace_t trace = {NULL, NULL, 62, LOCATE_syntax_base___MMSrcLocalClass___nodes};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
@@ -128,7 +180,7 @@ val_t syntax_base___MMSrcLocalClass___nodes(val_t  self) {
 val_t syntax_base___MMSrcLocalClass___formal_dict(val_t  self) {
   struct trace_t trace = {NULL, NULL, 65, LOCATE_syntax_base___MMSrcLocalClass___formal_dict};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
@@ -137,7 +189,7 @@ val_t syntax_base___MMSrcLocalClass___formal_dict(val_t  self) {
 void syntax_base___MMSrcLocalClass___formal_dict__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 65, LOCATE_syntax_base___MMSrcLocalClass___formal_dict__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   ATTR_syntax_base___MMSrcLocalClass____formal_dict( self) /*MMSrcLocalClass::_formal_dict*/ =  param0;
@@ -147,168 +199,239 @@ void syntax_base___MMSrcLocalClass___formal_dict__eq(val_t  self, val_t  param0)
 val_t syntax_base___MMSrcLocalClass___src_local_properties(val_t  self) {
   struct trace_t trace = {NULL, NULL, 68, LOCATE_syntax_base___MMSrcLocalClass___src_local_properties};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
   return ATTR_syntax_base___MMSrcLocalClass____src_local_properties( self) /*MMSrcLocalClass::_src_local_properties*/;
 }
-void syntax_base___MMSrcLocalClass___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
+void syntax_base___MMSrcLocalClass___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table) {
   struct trace_t trace = {NULL, NULL, 71, LOCATE_syntax_base___MMSrcLocalClass___init};
   val_t variable[7];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
+  /* Register variable[4]: Local variable */
+  variable[4] =  param3;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcLocalClass].i]) return;
-  CALL_abstractmetamodel___MMLocalClass___init(variable[0])(variable[0],  variable[1] /*n*/,  variable[3] /*a*/, init_table /*YYY*/) /*MMLocalClass::init*/;
-  variable[5] = variable[0];
-  variable[6] = NEW_Array_array___Array___with_capacity(TAG_Int(1)); /*new Array[PClassdef]*/
-  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6],  variable[2] /*cla*/) /*AbstractArray::add*/;
-  ATTR_syntax_base___MMSrcLocalClass____nodes(variable[5]) /*MMSrcLocalClass::_nodes*/ = variable[6];
-  variable[5] = variable[0];
-  variable[6] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[Symbol, MMLocalProperty]*/
-  ATTR_syntax_base___MMSrcLocalClass____src_local_properties(variable[5]) /*MMSrcLocalClass::_src_local_properties*/ = variable[6];
-  return_label2: while(false);
+  /* Register variable[5]: Method return value and escape marker */
+  CALL_abstractmetamodel___MMLocalClass___init(variable[0])(variable[0],  variable[1] /*mod*/,  variable[2] /*n*/,  variable[4] /*a*/, init_table /*YYY*/) /*MMLocalClass::init*/;
+  variable[6] = NEW_Array_array___Array___with_capacity(TAG_Int(1)) /*new Array[PClassdef]*/ /* Ensure var: Literal array*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6],  variable[3] /*cla*/) /*AbstractArray::add*/;
+  /* Register variable[6]: Result */
+  ATTR_syntax_base___MMSrcLocalClass____nodes(variable[0]) /*MMSrcLocalClass::_nodes*/ = variable[6];
+  /* Register variable[6]: Result */
+  variable[6] = NEW_HashMap_hash___HashMap___init() /*new HashMap[Symbol, MMLocalProperty]*/;
+  ATTR_syntax_base___MMSrcLocalClass____src_local_properties(variable[0]) /*MMSrcLocalClass::_src_local_properties*/ = variable[6];
+  return_label7: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcLocalClass].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t syntax_base___MMGlobalProperty___check_visibility(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3) {
   struct trace_t trace = {NULL, NULL, 80, LOCATE_syntax_base___MMGlobalProperty___check_visibility};
-  val_t variable[18];
-  void **closurevariable = NULL;
+      static val_t once_value_9 = NIT_NULL; /* Once value for string variable[9]*/
+      static val_t once_value_10 = NIT_NULL; /* Once value for string variable[9]*/
+      static val_t once_value_11 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_12 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_13 = NIT_NULL; /* Once value for string variable[9]*/
+          static val_t once_value_14 = NIT_NULL; /* Once value for string variable[9]*/
+          static val_t once_value_15 = NIT_NULL; /* Once value for string variable[9]*/
+  val_t variable[10];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
+  /* Register variable[4]: Local variable */
   variable[4] =  param3;
-  variable[7] = variable[0];
-  variable[7] = CALL_abstractmetamodel___MMGlobalProperty___local_class(variable[7])(variable[7]) /*MMGlobalProperty::local_class*/;
+  /* Register variable[5]: Method return value and escape marker */
+  /* Register variable[6]: Local variable */
+  /* Register variable[7]: Result */
+  variable[7] = CALL_abstractmetamodel___MMGlobalProperty___local_class(variable[0])(variable[0]) /*MMGlobalProperty::local_class*/;
+  /* Register variable[7]: Result */
   variable[7] = CALL_abstractmetamodel___MMLocalClass___module(variable[7])(variable[7]) /*MMLocalClass::module*/;
   variable[6] = variable[7];
+  /* Register variable[7]: Result */
   variable[7] = TAG_Bool(( variable[6] /*pm*/==NIT_NULL) || VAL_ISA( variable[6] /*pm*/, COLOR_MMSrcModule, ID_MMSrcModule)) /*cast MMSrcModule*/;
   if (!UNTAG_Bool(variable[7])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_syntax_base___MMGlobalProperty___check_visibility, LOCATE_syntax_base, 83); nit_exit(1);}
+  /* Register variable[7]: Local variable */
+  /* Register variable[8]: Result */
   variable[8] = CALL_abstractmetamodel___MMModule___visibility_for( variable[3] /*cm*/)( variable[3] /*cm*/,  variable[6] /*pm*/) /*MMModule::visibility_for*/;
   variable[7] = variable[8];
+  /* Register variable[8]: Result */
   variable[8] = TAG_Bool(( variable[7] /*vpm*/)==( TAG_Int(3)));
   if (UNTAG_Bool(variable[8])) { /*if*/
     variable[5] =  TAG_Bool(true);
-    goto return_label3;
+    goto return_label8;
   } else { /*if*/
+    /* Register variable[8]: Result */
     variable[8] = TAG_Bool(( variable[7] /*vpm*/)==( TAG_Int(0)));
     if (UNTAG_Bool(variable[8])) { /*if*/
-      variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-      variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Visibility error: Property "), TAG_Int(27)); /*new String*/
-      variable[10] = variable[9];
-      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[10]) /*AbstractArray::add*/;
-      variable[11] = variable[0];
-      variable[12] = variable[11];
-      variable[12] = CALL_string___Object___to_s(variable[12])(variable[12]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[12]) /*AbstractArray::add*/;
-      variable[13] = NEW_String_string___String___with_native(BOX_NativeString(" comes from the hidden module "), TAG_Int(30)); /*new String*/
-      variable[14] = variable[13];
-      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[14]) /*AbstractArray::add*/;
-      variable[15] =  variable[3] /*cm*/;
-      variable[15] = CALL_string___Object___to_s(variable[15])(variable[15]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[15]) /*AbstractArray::add*/;
-      variable[16] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-      variable[17] = variable[16];
-      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[17]) /*AbstractArray::add*/;
+      variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[9]: Once String constant */
+      if (once_value_9 != NIT_NULL) variable[9] = once_value_9;
+      else {
+        variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Visibility error: Property "), TAG_Int(27)) /*new String*/;
+        once_value_9 = variable[9];
+      }
+      /* Register variable[9]: Result */
+      /* Ensure var variable[9]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+      /* Ensure var variable[0]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[0])(variable[0]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[9]: Once String constant */
+      if (once_value_10 != NIT_NULL) variable[9] = once_value_10;
+      else {
+        variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" comes from the hidden module "), TAG_Int(30)) /*new String*/;
+        once_value_10 = variable[9];
+      }
+      /* Register variable[9]: Result */
+      /* Ensure var variable[9]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+      variable[9] =  variable[3] /*cm*/ /* Ensure var: super-string element*/;
+      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[9]: Once String constant */
+      if (once_value_11 != NIT_NULL) variable[9] = once_value_11;
+      else {
+        variable[9] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+        once_value_11 = variable[9];
+      }
+      /* Register variable[9]: Result */
+      /* Ensure var variable[9]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+      /* Register variable[8]: Result */
       variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
       CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/,  variable[2] /*n*/, variable[8]) /*AbsSyntaxVisitor::error*/;
       variable[5] =  TAG_Bool(false);
-      goto return_label3;
+      goto return_label8;
     } else { /*if*/
-      variable[8] = variable[0];
-      variable[8] = CALL_abstractmetamodel___MMGlobalProperty___visibility_level(variable[8])(variable[8]) /*MMGlobalProperty::visibility_level*/;
+      /* Register variable[8]: Result */
+      variable[8] = CALL_abstractmetamodel___MMGlobalProperty___visibility_level(variable[0])(variable[0]) /*MMGlobalProperty::visibility_level*/;
+      /* Register variable[8]: Result */
       variable[8] = TAG_Bool(UNTAG_Int(variable[8])>=UNTAG_Int( TAG_Int(3)));
       if (UNTAG_Bool(variable[8])) { /*if*/
-        variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-        variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Visibility error: Property "), TAG_Int(27)); /*new String*/
-        variable[10] = variable[9];
-        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[10]) /*AbstractArray::add*/;
-        variable[11] = variable[0];
-        variable[12] = variable[11];
-        variable[12] = CALL_string___Object___to_s(variable[12])(variable[12]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[12]) /*AbstractArray::add*/;
-        variable[13] = NEW_String_string___String___with_native(BOX_NativeString(" is private."), TAG_Int(12)); /*new String*/
-        variable[14] = variable[13];
-        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[14]) /*AbstractArray::add*/;
+        variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_12 != NIT_NULL) variable[9] = once_value_12;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Visibility error: Property "), TAG_Int(27)) /*new String*/;
+          once_value_12 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Ensure var variable[0]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[0])(variable[0]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_13 != NIT_NULL) variable[9] = once_value_13;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" is private."), TAG_Int(12)) /*new String*/;
+          once_value_13 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[8]: Result */
         variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
         CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/,  variable[2] /*n*/, variable[8]) /*AbsSyntaxVisitor::error*/;
         variable[5] =  TAG_Bool(false);
-        goto return_label3;
+        goto return_label8;
       } else { /*if*/
-        variable[8] = variable[0];
-        variable[8] = CALL_abstractmetamodel___MMGlobalProperty___visibility_level(variable[8])(variable[8]) /*MMGlobalProperty::visibility_level*/;
+        /* Register variable[8]: Result */
+        variable[8] = CALL_abstractmetamodel___MMGlobalProperty___visibility_level(variable[0])(variable[0]) /*MMGlobalProperty::visibility_level*/;
+        /* Register variable[8]: Result */
         variable[8] = TAG_Bool(UNTAG_Int(variable[8])>=UNTAG_Int( TAG_Int(2)));
-        variable[9] = variable[8];
-        if (UNTAG_Bool(variable[9])) { /* and */
-          variable[9] =  TAG_Bool(!UNTAG_Bool( variable[4] /*allows_protected*/));
+        /* Ensure var variable[8]: Left 'and' operand*/
+        if (UNTAG_Bool(variable[8])) { /* and */
+          variable[8] =  TAG_Bool(!UNTAG_Bool( variable[4] /*allows_protected*/));
         }
-        variable[8] = variable[9];
+        /* Register variable[8]: Result */
         if (UNTAG_Bool(variable[8])) { /*if*/
-          variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-          variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Visibility error: Property "), TAG_Int(27)); /*new String*/
-          variable[10] = variable[9];
-          CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[10]) /*AbstractArray::add*/;
-          variable[11] = variable[0];
-          variable[12] = variable[11];
-          variable[12] = CALL_string___Object___to_s(variable[12])(variable[12]) /*Object::to_s*/;
-          CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[12]) /*AbstractArray::add*/;
-          variable[13] = NEW_String_string___String___with_native(BOX_NativeString(" is protected and can only acceded by self."), TAG_Int(43)); /*new String*/
-          variable[14] = variable[13];
-          CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[14]) /*AbstractArray::add*/;
+          variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+          /* Register variable[9]: Once String constant */
+          if (once_value_14 != NIT_NULL) variable[9] = once_value_14;
+          else {
+            variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Visibility error: Property "), TAG_Int(27)) /*new String*/;
+            once_value_14 = variable[9];
+          }
+          /* Register variable[9]: Result */
+          /* Ensure var variable[9]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+          /* Ensure var variable[0]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[0])(variable[0]) /*Object::to_s*/) /*AbstractArray::add*/;
+          /* Register variable[9]: Once String constant */
+          if (once_value_15 != NIT_NULL) variable[9] = once_value_15;
+          else {
+            variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" is protected and can only acceded by self."), TAG_Int(43)) /*new String*/;
+            once_value_15 = variable[9];
+          }
+          /* Register variable[9]: Result */
+          /* Ensure var variable[9]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+          /* Register variable[8]: Result */
           variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
           CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/,  variable[2] /*n*/, variable[8]) /*AbsSyntaxVisitor::error*/;
           variable[5] =  TAG_Bool(false);
-          goto return_label3;
+          goto return_label8;
         }
       }
     }
   }
   variable[5] =  TAG_Bool(true);
-  goto return_label3;
-  return_label3: while(false);
+  goto return_label8;
+  return_label8: while(false);
   tracehead = trace.prev;
   return variable[5];
 }
 val_t syntax_base___MMLocalProperty___node(val_t  self) {
   struct trace_t trace = {NULL, NULL, 103, LOCATE_syntax_base___MMLocalProperty___node};
   val_t variable[2];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
   variable[1] =  NIT_NULL /*null*/;
-  goto return_label4;
-  return_label4: while(false);
+  goto return_label16;
+  return_label16: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t syntax_base___MMLocalProperty___is_init(val_t  self) {
   struct trace_t trace = {NULL, NULL, 106, LOCATE_syntax_base___MMLocalProperty___is_init};
   val_t variable[2];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
   variable[1] =  TAG_Bool(false);
-  goto return_label5;
-  return_label5: while(false);
+  goto return_label17;
+  return_label17: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t syntax_base___MMSrcAttribute___node(val_t  self) {
   struct trace_t trace = {NULL, NULL, 113, LOCATE_syntax_base___MMSrcAttribute___node};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
@@ -316,19 +439,23 @@ val_t syntax_base___MMSrcAttribute___node(val_t  self) {
 }
 void syntax_base___MMSrcAttribute___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
   struct trace_t trace = {NULL, NULL, 114, LOCATE_syntax_base___MMSrcAttribute___init};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcAttribute].i]) return;
+  /* Register variable[4]: Method return value and escape marker */
   CALL_abstractmetamodel___MMLocalProperty___init(variable[0])(variable[0],  variable[1] /*name*/,  variable[2] /*cla*/, init_table /*YYY*/) /*MMLocalProperty::init*/;
-  variable[5] = variable[0];
-  ATTR_syntax_base___MMSrcAttribute____node(variable[5]) /*MMSrcAttribute::_node*/ =  variable[3] /*n*/;
-  return_label6: while(false);
+  ATTR_syntax_base___MMSrcAttribute____node(variable[0]) /*MMSrcAttribute::_node*/ =  variable[3] /*n*/;
+  return_label18: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcAttribute].i] = 1;
   tracehead = trace.prev;
   return;
@@ -336,7 +463,7 @@ void syntax_base___MMSrcAttribute___init(val_t  self, val_t  param0, val_t  para
 val_t syntax_base___MMAttrImplementationMethod___node(val_t  self) {
   struct trace_t trace = {NULL, NULL, 129, LOCATE_syntax_base___MMAttrImplementationMethod___node};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
@@ -344,19 +471,23 @@ val_t syntax_base___MMAttrImplementationMethod___node(val_t  self) {
 }
 void syntax_base___MMAttrImplementationMethod___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
   struct trace_t trace = {NULL, NULL, 130, LOCATE_syntax_base___MMAttrImplementationMethod___init};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMAttrImplementationMethod].i]) return;
+  /* Register variable[4]: Method return value and escape marker */
   CALL_abstractmetamodel___MMLocalProperty___init(variable[0])(variable[0],  variable[1] /*name*/,  variable[2] /*cla*/, init_table /*YYY*/) /*MMLocalProperty::init*/;
-  variable[5] = variable[0];
-  ATTR_syntax_base___MMAttrImplementationMethod____node(variable[5]) /*MMAttrImplementationMethod::_node*/ =  variable[3] /*n*/;
-  return_label7: while(false);
+  ATTR_syntax_base___MMAttrImplementationMethod____node(variable[0]) /*MMAttrImplementationMethod::_node*/ =  variable[3] /*n*/;
+  return_label19: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMAttrImplementationMethod].i] = 1;
   tracehead = trace.prev;
   return;
@@ -364,16 +495,21 @@ void syntax_base___MMAttrImplementationMethod___init(val_t  self, val_t  param0,
 void syntax_base___MMReadImplementationMethod___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
   struct trace_t trace = {NULL, NULL, 140, LOCATE_syntax_base___MMReadImplementationMethod___init};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMReadImplementationMethod].i]) return;
+  /* Register variable[4]: Method return value and escape marker */
   CALL_syntax_base___MMAttrImplementationMethod___init(variable[0])(variable[0],  variable[1] /*name*/,  variable[2] /*cla*/,  variable[3] /*n*/, init_table /*YYY*/) /*MMAttrImplementationMethod::init*/;
-  return_label8: while(false);
+  return_label20: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMReadImplementationMethod].i] = 1;
   tracehead = trace.prev;
   return;
@@ -381,16 +517,21 @@ void syntax_base___MMReadImplementationMethod___init(val_t  self, val_t  param0,
 void syntax_base___MMWriteImplementationMethod___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
   struct trace_t trace = {NULL, NULL, 149, LOCATE_syntax_base___MMWriteImplementationMethod___init};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMWriteImplementationMethod].i]) return;
+  /* Register variable[4]: Method return value and escape marker */
   CALL_syntax_base___MMAttrImplementationMethod___init(variable[0])(variable[0],  variable[1] /*name*/,  variable[2] /*cla*/,  variable[3] /*n*/, init_table /*YYY*/) /*MMAttrImplementationMethod::init*/;
-  return_label9: while(false);
+  return_label21: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMWriteImplementationMethod].i] = 1;
   tracehead = trace.prev;
   return;
@@ -398,7 +539,7 @@ void syntax_base___MMWriteImplementationMethod___init(val_t  self, val_t  param0
 val_t syntax_base___MMMethSrcMethod___node(val_t  self) {
   struct trace_t trace = {NULL, NULL, 159, LOCATE_syntax_base___MMMethSrcMethod___node};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
@@ -407,34 +548,41 @@ val_t syntax_base___MMMethSrcMethod___node(val_t  self) {
 val_t syntax_base___MMMethSrcMethod___is_init(val_t  self) {
   struct trace_t trace = {NULL, NULL, 158, LOCATE_syntax_base___MMMethSrcMethod___is_init};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_syntax_base___MMMethSrcMethod____node(variable[2]) /*MMMethSrcMethod::_node*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_syntax_base___MMMethSrcMethod____node(variable[0]) /*MMMethSrcMethod::_node*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool((variable[2]==NIT_NULL) || VAL_ISA(variable[2], COLOR_AConcreteInitPropdef, ID_AConcreteInitPropdef)) /*cast AConcreteInitPropdef*/;
   variable[1] = variable[2];
-  goto return_label10;
-  return_label10: while(false);
+  goto return_label22;
+  return_label22: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 void syntax_base___MMMethSrcMethod___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
   struct trace_t trace = {NULL, NULL, 160, LOCATE_syntax_base___MMMethSrcMethod___init};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMMethSrcMethod].i]) return;
+  /* Register variable[4]: Method return value and escape marker */
   CALL_abstractmetamodel___MMLocalProperty___init(variable[0])(variable[0],  variable[1] /*name*/,  variable[2] /*cla*/, init_table /*YYY*/) /*MMLocalProperty::init*/;
-  variable[5] = variable[0];
-  ATTR_syntax_base___MMMethSrcMethod____node(variable[5]) /*MMMethSrcMethod::_node*/ =  variable[3] /*n*/;
-  return_label11: while(false);
+  ATTR_syntax_base___MMMethSrcMethod____node(variable[0]) /*MMMethSrcMethod::_node*/ =  variable[3] /*n*/;
+  return_label23: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMMethSrcMethod].i] = 1;
   tracehead = trace.prev;
   return;
@@ -442,7 +590,7 @@ void syntax_base___MMMethSrcMethod___init(val_t  self, val_t  param0, val_t  par
 val_t syntax_base___MMSrcTypeProperty___node(val_t  self) {
   struct trace_t trace = {NULL, NULL, 171, LOCATE_syntax_base___MMSrcTypeProperty___node};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
@@ -450,19 +598,23 @@ val_t syntax_base___MMSrcTypeProperty___node(val_t  self) {
 }
 void syntax_base___MMSrcTypeProperty___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
   struct trace_t trace = {NULL, NULL, 172, LOCATE_syntax_base___MMSrcTypeProperty___init};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcTypeProperty].i]) return;
+  /* Register variable[4]: Method return value and escape marker */
   CALL_abstractmetamodel___MMLocalProperty___init(variable[0])(variable[0],  variable[1] /*name*/,  variable[2] /*cla*/, init_table /*YYY*/) /*MMLocalProperty::init*/;
-  variable[5] = variable[0];
-  ATTR_syntax_base___MMSrcTypeProperty____node(variable[5]) /*MMSrcTypeProperty::_node*/ =  variable[3] /*n*/;
-  return_label12: while(false);
+  ATTR_syntax_base___MMSrcTypeProperty____node(variable[0]) /*MMSrcTypeProperty::_node*/ =  variable[3] /*n*/;
+  return_label24: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcTypeProperty].i] = 1;
   tracehead = trace.prev;
   return;
@@ -470,20 +622,22 @@ void syntax_base___MMSrcTypeProperty___init(val_t  self, val_t  param0, val_t  p
 val_t syntax_base___MMImplicitInit___is_init(val_t  self) {
   struct trace_t trace = {NULL, NULL, 182, LOCATE_syntax_base___MMImplicitInit___is_init};
   val_t variable[2];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
   variable[1] =  TAG_Bool(true);
-  goto return_label13;
-  return_label13: while(false);
+  goto return_label25;
+  return_label25: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t syntax_base___MMImplicitInit___unassigned_attributes(val_t  self) {
   struct trace_t trace = {NULL, NULL, 183, LOCATE_syntax_base___MMImplicitInit___unassigned_attributes};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
@@ -492,7 +646,7 @@ val_t syntax_base___MMImplicitInit___unassigned_attributes(val_t  self) {
 val_t syntax_base___MMImplicitInit___super_inits(val_t  self) {
   struct trace_t trace = {NULL, NULL, 184, LOCATE_syntax_base___MMImplicitInit___super_inits};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
@@ -500,29 +654,42 @@ val_t syntax_base___MMImplicitInit___super_inits(val_t  self) {
 }
 void syntax_base___MMImplicitInit___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
   struct trace_t trace = {NULL, NULL, 185, LOCATE_syntax_base___MMImplicitInit___init};
-  static val_t once_value_15; static int once_bool_15; /* Once value for variable[5]*/
+  static val_t once_value_27; static int once_bool_27; /* Once value for variable[5]*/
+    static val_t once_value_28 = NIT_NULL; /* Once value for string variable[5]*/
   val_t variable[6];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMImplicitInit].i]) return;
-  if (once_bool_15) variable[5] = once_value_15;
+  /* Register variable[4]: Method return value and escape marker */
+  /* Register variable[5]: Once expression result */
+  if (once_bool_27) variable[5] = once_value_27;
   else {
-    variable[5] = NEW_String_string___String___with_native(BOX_NativeString("init"), TAG_Int(4)); /*new String*/
+    /* Register variable[5]: Once String constant */
+    if (once_value_28 != NIT_NULL) variable[5] = once_value_28;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString("init"), TAG_Int(4)) /*new String*/;
+      once_value_28 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    /* Register variable[5]: Result */
     variable[5] = CALL_symbol___String___to_symbol(variable[5])(variable[5]) /*String::to_symbol*/;
-    once_value_15 = variable[5];
-    once_bool_15 = true;
+    once_value_27 = variable[5];
+    once_bool_27 = true;
   }
+  /* Register variable[5]: Result */
   CALL_syntax_base___MMMethSrcMethod___init(variable[0])(variable[0], variable[5],  variable[1] /*cla*/,  NIT_NULL /*null*/, init_table /*YYY*/) /*MMMethSrcMethod::init*/;
-  variable[5] = variable[0];
-  ATTR_syntax_base___MMImplicitInit____unassigned_attributes(variable[5]) /*MMImplicitInit::_unassigned_attributes*/ =  variable[2] /*unassigned_attributes*/;
-  variable[5] = variable[0];
-  ATTR_syntax_base___MMImplicitInit____super_inits(variable[5]) /*MMImplicitInit::_super_inits*/ =  variable[3] /*super_inits*/;
-  return_label14: while(false);
+  ATTR_syntax_base___MMImplicitInit____unassigned_attributes(variable[0]) /*MMImplicitInit::_unassigned_attributes*/ =  variable[2] /*unassigned_attributes*/;
+  ATTR_syntax_base___MMImplicitInit____super_inits(variable[0]) /*MMImplicitInit::_super_inits*/ =  variable[3] /*super_inits*/;
+  return_label26: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMImplicitInit].i] = 1;
   tracehead = trace.prev;
   return;
@@ -530,23 +697,26 @@ void syntax_base___MMImplicitInit___init(val_t  self, val_t  param0, val_t  para
 val_t syntax_base___Variable___to_s(val_t  self) {
   struct trace_t trace = {NULL, NULL, 204, LOCATE_syntax_base___Variable___to_s};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_syntax_base___Variable____name(variable[2]) /*Variable::_name*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_syntax_base___Variable____name(variable[0]) /*Variable::_name*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_string___Object___to_s(variable[2])(variable[2]) /*Symbol::to_s*/;
   variable[1] = variable[2];
-  goto return_label16;
-  return_label16: while(false);
+  goto return_label29;
+  return_label29: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t syntax_base___Variable___name(val_t  self) {
   struct trace_t trace = {NULL, NULL, 195, LOCATE_syntax_base___Variable___name};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
@@ -555,7 +725,7 @@ val_t syntax_base___Variable___name(val_t  self) {
 val_t syntax_base___Variable___decl(val_t  self) {
   struct trace_t trace = {NULL, NULL, 198, LOCATE_syntax_base___Variable___decl};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
@@ -564,7 +734,7 @@ val_t syntax_base___Variable___decl(val_t  self) {
 val_t syntax_base___Variable___stype(val_t  self) {
   struct trace_t trace = {NULL, NULL, 201, LOCATE_syntax_base___Variable___stype};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
@@ -573,7 +743,7 @@ val_t syntax_base___Variable___stype(val_t  self) {
 void syntax_base___Variable___stype__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 201, LOCATE_syntax_base___Variable___stype__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   ATTR_syntax_base___Variable____stype( self) /*Variable::_stype*/ =  param0;
@@ -583,7 +753,7 @@ void syntax_base___Variable___stype__eq(val_t  self, val_t  param0) {
 val_t syntax_base___Variable___kind(val_t  self) {
   struct trace_t trace = {NULL, NULL, 206, LOCATE_syntax_base___Variable___kind};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   fprintf(stderr, "Deferred method called");
@@ -594,155 +764,213 @@ val_t syntax_base___Variable___kind(val_t  self) {
 }
 void syntax_base___Variable___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
   struct trace_t trace = {NULL, NULL, 208, LOCATE_syntax_base___Variable___init};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Variable].i]) return;
-  variable[4] = variable[0];
-  ATTR_syntax_base___Variable____name(variable[4]) /*Variable::_name*/ =  variable[1] /*n*/;
-  variable[4] = variable[0];
-  ATTR_syntax_base___Variable____decl(variable[4]) /*Variable::_decl*/ =  variable[2] /*d*/;
-  return_label17: while(false);
+  /* Register variable[3]: Method return value and escape marker */
+  ATTR_syntax_base___Variable____name(variable[0]) /*Variable::_name*/ =  variable[1] /*n*/;
+  ATTR_syntax_base___Variable____decl(variable[0]) /*Variable::_decl*/ =  variable[2] /*d*/;
+  return_label30: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Variable].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t syntax_base___VarVariable___kind(val_t  self) {
   struct trace_t trace = {NULL, NULL, 220, LOCATE_syntax_base___VarVariable___kind};
-  static val_t once_value_19; static int once_bool_19; /* Once value for variable[2]*/
+  static val_t once_value_32; static int once_bool_32; /* Once value for variable[2]*/
+    static val_t once_value_33 = NIT_NULL; /* Once value for string variable[2]*/
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  if (once_bool_19) variable[2] = once_value_19;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Once expression result */
+  if (once_bool_32) variable[2] = once_value_32;
   else {
-    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("variable"), TAG_Int(8)); /*new String*/
-    once_value_19 = variable[2];
-    once_bool_19 = true;
+    /* Register variable[2]: Once String constant */
+    if (once_value_33 != NIT_NULL) variable[2] = once_value_33;
+    else {
+      variable[2] = NEW_String_string___String___with_native(BOX_NativeString("variable"), TAG_Int(8)) /*new String*/;
+      once_value_33 = variable[2];
+    }
+    /* Register variable[2]: Result */
+    once_value_32 = variable[2];
+    once_bool_32 = true;
   }
+  /* Register variable[2]: Result */
   variable[1] = variable[2];
-  goto return_label18;
-  return_label18: while(false);
+  goto return_label31;
+  return_label31: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 void syntax_base___VarVariable___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
   struct trace_t trace = {NULL, NULL, 221, LOCATE_syntax_base___VarVariable___init};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_VarVariable].i]) return;
+  /* Register variable[3]: Method return value and escape marker */
   CALL_syntax_base___Variable___init(variable[0])(variable[0], variable[1], variable[2], init_table /*YYY*/) /*Variable::init*/;
-  return_label20: while(false);
+  return_label34: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_VarVariable].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t syntax_base___ParamVariable___kind(val_t  self) {
   struct trace_t trace = {NULL, NULL, 227, LOCATE_syntax_base___ParamVariable___kind};
-  static val_t once_value_22; static int once_bool_22; /* Once value for variable[2]*/
+  static val_t once_value_36; static int once_bool_36; /* Once value for variable[2]*/
+    static val_t once_value_37 = NIT_NULL; /* Once value for string variable[2]*/
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  if (once_bool_22) variable[2] = once_value_22;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Once expression result */
+  if (once_bool_36) variable[2] = once_value_36;
   else {
-    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("parameter"), TAG_Int(9)); /*new String*/
-    once_value_22 = variable[2];
-    once_bool_22 = true;
+    /* Register variable[2]: Once String constant */
+    if (once_value_37 != NIT_NULL) variable[2] = once_value_37;
+    else {
+      variable[2] = NEW_String_string___String___with_native(BOX_NativeString("parameter"), TAG_Int(9)) /*new String*/;
+      once_value_37 = variable[2];
+    }
+    /* Register variable[2]: Result */
+    once_value_36 = variable[2];
+    once_bool_36 = true;
   }
+  /* Register variable[2]: Result */
   variable[1] = variable[2];
-  goto return_label21;
-  return_label21: while(false);
+  goto return_label35;
+  return_label35: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 void syntax_base___ParamVariable___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
   struct trace_t trace = {NULL, NULL, 228, LOCATE_syntax_base___ParamVariable___init};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ParamVariable].i]) return;
+  /* Register variable[3]: Method return value and escape marker */
   CALL_syntax_base___Variable___init(variable[0])(variable[0], variable[1], variable[2], init_table /*YYY*/) /*Variable::init*/;
-  return_label23: while(false);
+  return_label38: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ParamVariable].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t syntax_base___AutoVariable___kind(val_t  self) {
   struct trace_t trace = {NULL, NULL, 234, LOCATE_syntax_base___AutoVariable___kind};
-  static val_t once_value_25; static int once_bool_25; /* Once value for variable[2]*/
+  static val_t once_value_40; static int once_bool_40; /* Once value for variable[2]*/
+    static val_t once_value_41 = NIT_NULL; /* Once value for string variable[2]*/
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  if (once_bool_25) variable[2] = once_value_25;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Once expression result */
+  if (once_bool_40) variable[2] = once_value_40;
   else {
-    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("automatic variable"), TAG_Int(18)); /*new String*/
-    once_value_25 = variable[2];
-    once_bool_25 = true;
+    /* Register variable[2]: Once String constant */
+    if (once_value_41 != NIT_NULL) variable[2] = once_value_41;
+    else {
+      variable[2] = NEW_String_string___String___with_native(BOX_NativeString("automatic variable"), TAG_Int(18)) /*new String*/;
+      once_value_41 = variable[2];
+    }
+    /* Register variable[2]: Result */
+    once_value_40 = variable[2];
+    once_bool_40 = true;
   }
+  /* Register variable[2]: Result */
   variable[1] = variable[2];
-  goto return_label24;
-  return_label24: while(false);
+  goto return_label39;
+  return_label39: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 void syntax_base___AutoVariable___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
   struct trace_t trace = {NULL, NULL, 235, LOCATE_syntax_base___AutoVariable___init};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_AutoVariable].i]) return;
+  /* Register variable[3]: Method return value and escape marker */
   CALL_syntax_base___Variable___init(variable[0])(variable[0], variable[1], variable[2], init_table /*YYY*/) /*Variable::init*/;
-  return_label26: while(false);
+  return_label42: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_AutoVariable].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t syntax_base___ClosureVariable___kind(val_t  self) {
   struct trace_t trace = {NULL, NULL, 242, LOCATE_syntax_base___ClosureVariable___kind};
-  static val_t once_value_28; static int once_bool_28; /* Once value for variable[2]*/
+  static val_t once_value_44; static int once_bool_44; /* Once value for variable[2]*/
+    static val_t once_value_45 = NIT_NULL; /* Once value for string variable[2]*/
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  if (once_bool_28) variable[2] = once_value_28;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Once expression result */
+  if (once_bool_44) variable[2] = once_value_44;
   else {
-    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("closure"), TAG_Int(7)); /*new String*/
-    once_value_28 = variable[2];
-    once_bool_28 = true;
+    /* Register variable[2]: Once String constant */
+    if (once_value_45 != NIT_NULL) variable[2] = once_value_45;
+    else {
+      variable[2] = NEW_String_string___String___with_native(BOX_NativeString("closure"), TAG_Int(7)) /*new String*/;
+      once_value_45 = variable[2];
+    }
+    /* Register variable[2]: Result */
+    once_value_44 = variable[2];
+    once_bool_44 = true;
   }
+  /* Register variable[2]: Result */
   variable[1] = variable[2];
-  goto return_label27;
-  return_label27: while(false);
+  goto return_label43;
+  return_label43: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t syntax_base___ClosureVariable___closure(val_t  self) {
   struct trace_t trace = {NULL, NULL, 244, LOCATE_syntax_base___ClosureVariable___closure};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
@@ -750,299 +978,457 @@ val_t syntax_base___ClosureVariable___closure(val_t  self) {
 }
 void syntax_base___ClosureVariable___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
   struct trace_t trace = {NULL, NULL, 247, LOCATE_syntax_base___ClosureVariable___init};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClosureVariable].i]) return;
+  /* Register variable[4]: Method return value and escape marker */
   CALL_syntax_base___Variable___init(variable[0])(variable[0],  variable[1] /*n*/,  variable[2] /*d*/, init_table /*YYY*/) /*Variable::init*/;
-  variable[5] = variable[0];
-  ATTR_syntax_base___ClosureVariable____closure(variable[5]) /*ClosureVariable::_closure*/ =  variable[3] /*c*/;
-  return_label29: while(false);
+  ATTR_syntax_base___ClosureVariable____closure(variable[0]) /*ClosureVariable::_closure*/ =  variable[3] /*c*/;
+  return_label46: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClosureVariable].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t syntax_base___AbsSyntaxVisitor___type_object(val_t  self) {
   struct trace_t trace = {NULL, NULL, 259, LOCATE_syntax_base___AbsSyntaxVisitor___type_object};
-  static val_t once_value_31; static int once_bool_31; /* Once value for variable[3]*/
+  static val_t once_value_48; static int once_bool_48; /* Once value for variable[3]*/
+    static val_t once_value_49 = NIT_NULL; /* Once value for string variable[3]*/
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[2]) /*AbsSyntaxVisitor::_module*/;
-  if (once_bool_31) variable[3] = once_value_31;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[0]) /*AbsSyntaxVisitor::_module*/;
+  /* Register variable[3]: Once expression result */
+  if (once_bool_48) variable[3] = once_value_48;
   else {
-    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("Object"), TAG_Int(6)); /*new String*/
+    /* Register variable[3]: Once String constant */
+    if (once_value_49 != NIT_NULL) variable[3] = once_value_49;
+    else {
+      variable[3] = NEW_String_string___String___with_native(BOX_NativeString("Object"), TAG_Int(6)) /*new String*/;
+      once_value_49 = variable[3];
+    }
+    /* Register variable[3]: Result */
+    /* Register variable[3]: Result */
     variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
-    once_value_31 = variable[3];
-    once_bool_31 = true;
+    once_value_48 = variable[3];
+    once_bool_48 = true;
   }
+  /* Register variable[3]: Result */
+  /* Register variable[2]: Result */
   variable[2] = CALL_abstractmetamodel___MMModule___class_by_name(variable[2])(variable[2], variable[3]) /*MMModule::class_by_name*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_static_type___MMLocalClass___get_type(variable[2])(variable[2]) /*MMLocalClass::get_type*/;
   variable[1] = variable[2];
-  goto return_label30;
-  return_label30: while(false);
+  goto return_label47;
+  return_label47: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t syntax_base___AbsSyntaxVisitor___type_bool(val_t  self) {
   struct trace_t trace = {NULL, NULL, 265, LOCATE_syntax_base___AbsSyntaxVisitor___type_bool};
-  static val_t once_value_33; static int once_bool_33; /* Once value for variable[3]*/
+  static val_t once_value_51; static int once_bool_51; /* Once value for variable[3]*/
+    static val_t once_value_52 = NIT_NULL; /* Once value for string variable[3]*/
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[2]) /*AbsSyntaxVisitor::_module*/;
-  if (once_bool_33) variable[3] = once_value_33;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[0]) /*AbsSyntaxVisitor::_module*/;
+  /* Register variable[3]: Once expression result */
+  if (once_bool_51) variable[3] = once_value_51;
   else {
-    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("Bool"), TAG_Int(4)); /*new String*/
+    /* Register variable[3]: Once String constant */
+    if (once_value_52 != NIT_NULL) variable[3] = once_value_52;
+    else {
+      variable[3] = NEW_String_string___String___with_native(BOX_NativeString("Bool"), TAG_Int(4)) /*new String*/;
+      once_value_52 = variable[3];
+    }
+    /* Register variable[3]: Result */
+    /* Register variable[3]: Result */
     variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
-    once_value_33 = variable[3];
-    once_bool_33 = true;
+    once_value_51 = variable[3];
+    once_bool_51 = true;
   }
+  /* Register variable[3]: Result */
+  /* Register variable[2]: Result */
   variable[2] = CALL_abstractmetamodel___MMModule___class_by_name(variable[2])(variable[2], variable[3]) /*MMModule::class_by_name*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_static_type___MMLocalClass___get_type(variable[2])(variable[2]) /*MMLocalClass::get_type*/;
-  variable[1] = variable[2];
-  goto return_label32;
-  return_label32: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t syntax_base___AbsSyntaxVisitor___type_int(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 271, LOCATE_syntax_base___AbsSyntaxVisitor___type_int};
-  static val_t once_value_35; static int once_bool_35; /* Once value for variable[3]*/
-  val_t variable[4];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[2]) /*AbsSyntaxVisitor::_module*/;
-  if (once_bool_35) variable[3] = once_value_35;
-  else {
-    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("Int"), TAG_Int(3)); /*new String*/
-    variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
-    once_value_35 = variable[3];
-    once_bool_35 = true;
-  }
-  variable[2] = CALL_abstractmetamodel___MMModule___class_by_name(variable[2])(variable[2], variable[3]) /*MMModule::class_by_name*/;
-  variable[2] = CALL_static_type___MMLocalClass___get_type(variable[2])(variable[2]) /*MMLocalClass::get_type*/;
-  variable[1] = variable[2];
-  goto return_label34;
-  return_label34: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t syntax_base___AbsSyntaxVisitor___type_float(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 277, LOCATE_syntax_base___AbsSyntaxVisitor___type_float};
-  static val_t once_value_37; static int once_bool_37; /* Once value for variable[3]*/
-  val_t variable[4];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[2]) /*AbsSyntaxVisitor::_module*/;
-  if (once_bool_37) variable[3] = once_value_37;
-  else {
-    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("Float"), TAG_Int(5)); /*new String*/
-    variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
-    once_value_37 = variable[3];
-    once_bool_37 = true;
-  }
-  variable[2] = CALL_abstractmetamodel___MMModule___class_by_name(variable[2])(variable[2], variable[3]) /*MMModule::class_by_name*/;
-  variable[2] = CALL_static_type___MMLocalClass___get_type(variable[2])(variable[2]) /*MMLocalClass::get_type*/;
-  variable[1] = variable[2];
-  goto return_label36;
-  return_label36: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t syntax_base___AbsSyntaxVisitor___type_char(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 283, LOCATE_syntax_base___AbsSyntaxVisitor___type_char};
-  static val_t once_value_39; static int once_bool_39; /* Once value for variable[3]*/
-  val_t variable[4];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[2]) /*AbsSyntaxVisitor::_module*/;
-  if (once_bool_39) variable[3] = once_value_39;
-  else {
-    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("Char"), TAG_Int(4)); /*new String*/
-    variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
-    once_value_39 = variable[3];
-    once_bool_39 = true;
-  }
-  variable[2] = CALL_abstractmetamodel___MMModule___class_by_name(variable[2])(variable[2], variable[3]) /*MMModule::class_by_name*/;
-  variable[2] = CALL_static_type___MMLocalClass___get_type(variable[2])(variable[2]) /*MMLocalClass::get_type*/;
-  variable[1] = variable[2];
-  goto return_label38;
-  return_label38: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t syntax_base___AbsSyntaxVisitor___type_string(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 289, LOCATE_syntax_base___AbsSyntaxVisitor___type_string};
-  static val_t once_value_41; static int once_bool_41; /* Once value for variable[3]*/
-  val_t variable[4];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[2]) /*AbsSyntaxVisitor::_module*/;
-  if (once_bool_41) variable[3] = once_value_41;
-  else {
-    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("String"), TAG_Int(6)); /*new String*/
-    variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
-    once_value_41 = variable[3];
-    once_bool_41 = true;
-  }
-  variable[2] = CALL_abstractmetamodel___MMModule___class_by_name(variable[2])(variable[2], variable[3]) /*MMModule::class_by_name*/;
-  variable[2] = CALL_static_type___MMLocalClass___get_type(variable[2])(variable[2]) /*MMLocalClass::get_type*/;
-  variable[1] = variable[2];
-  goto return_label40;
-  return_label40: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t syntax_base___AbsSyntaxVisitor___type_collection(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 295, LOCATE_syntax_base___AbsSyntaxVisitor___type_collection};
-  static val_t once_value_43; static int once_bool_43; /* Once value for variable[3]*/
-  val_t variable[4];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[2]) /*AbsSyntaxVisitor::_module*/;
-  if (once_bool_43) variable[3] = once_value_43;
-  else {
-    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("Collection"), TAG_Int(10)); /*new String*/
-    variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
-    once_value_43 = variable[3];
-    once_bool_43 = true;
-  }
-  variable[2] = CALL_abstractmetamodel___MMModule___class_by_name(variable[2])(variable[2], variable[3]) /*MMModule::class_by_name*/;
-  variable[2] = CALL_static_type___MMLocalClass___get_type(variable[2])(variable[2]) /*MMLocalClass::get_type*/;
-  variable[1] = variable[2];
-  goto return_label42;
-  return_label42: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t syntax_base___AbsSyntaxVisitor___type_array(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 301, LOCATE_syntax_base___AbsSyntaxVisitor___type_array};
-  static val_t once_value_45; static int once_bool_45; /* Once value for variable[4]*/
-  val_t variable[5];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[3]) /*AbsSyntaxVisitor::_module*/;
-  if (once_bool_45) variable[4] = once_value_45;
-  else {
-    variable[4] = NEW_String_string___String___with_native(BOX_NativeString("Array"), TAG_Int(5)); /*new String*/
-    variable[4] = CALL_symbol___String___to_symbol(variable[4])(variable[4]) /*String::to_symbol*/;
-    once_value_45 = variable[4];
-    once_bool_45 = true;
-  }
-  variable[3] = CALL_abstractmetamodel___MMModule___class_by_name(variable[3])(variable[3], variable[4]) /*MMModule::class_by_name*/;
-  variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(1)); /*new Array[MMType]*/
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4],  variable[1] /*stype*/) /*AbstractArray::add*/;
-  variable[3] = CALL_genericity___MMLocalClass___get_instantiate_type(variable[3])(variable[3], variable[4]) /*MMLocalClass::get_instantiate_type*/;
-  variable[2] = variable[3];
-  goto return_label44;
-  return_label44: while(false);
-  tracehead = trace.prev;
-  return variable[2];
-}
-val_t syntax_base___AbsSyntaxVisitor___type_discrete(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 307, LOCATE_syntax_base___AbsSyntaxVisitor___type_discrete};
-  static val_t once_value_47; static int once_bool_47; /* Once value for variable[3]*/
-  val_t variable[4];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[2]) /*AbsSyntaxVisitor::_module*/;
-  if (once_bool_47) variable[3] = once_value_47;
-  else {
-    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("Discrete"), TAG_Int(8)); /*new String*/
-    variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
-    once_value_47 = variable[3];
-    once_bool_47 = true;
-  }
-  variable[2] = CALL_abstractmetamodel___MMModule___class_by_name(variable[2])(variable[2], variable[3]) /*MMModule::class_by_name*/;
-  variable[2] = CALL_static_type___MMLocalClass___get_type(variable[2])(variable[2]) /*MMLocalClass::get_type*/;
-  variable[1] = variable[2];
-  goto return_label46;
-  return_label46: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t syntax_base___AbsSyntaxVisitor___type_range(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 313, LOCATE_syntax_base___AbsSyntaxVisitor___type_range};
-  static val_t once_value_49; static int once_bool_49; /* Once value for variable[4]*/
-  val_t variable[5];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[3]) /*AbsSyntaxVisitor::_module*/;
-  if (once_bool_49) variable[4] = once_value_49;
-  else {
-    variable[4] = NEW_String_string___String___with_native(BOX_NativeString("Range"), TAG_Int(5)); /*new String*/
-    variable[4] = CALL_symbol___String___to_symbol(variable[4])(variable[4]) /*String::to_symbol*/;
-    once_value_49 = variable[4];
-    once_bool_49 = true;
-  }
-  variable[3] = CALL_abstractmetamodel___MMModule___class_by_name(variable[3])(variable[3], variable[4]) /*MMModule::class_by_name*/;
-  variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(1)); /*new Array[MMType]*/
-  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4],  variable[1] /*stype*/) /*AbstractArray::add*/;
-  variable[3] = CALL_genericity___MMLocalClass___get_instantiate_type(variable[3])(variable[3], variable[4]) /*MMLocalClass::get_instantiate_type*/;
-  variable[2] = variable[3];
-  goto return_label48;
-  return_label48: while(false);
-  tracehead = trace.prev;
-  return variable[2];
-}
-val_t syntax_base___AbsSyntaxVisitor___type_none(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 319, LOCATE_syntax_base___AbsSyntaxVisitor___type_none};
-  val_t variable[3];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[2]) /*AbsSyntaxVisitor::_module*/;
-  variable[2] = CALL_static_type___MMModule___type_none(variable[2])(variable[2]) /*MMModule::type_none*/;
   variable[1] = variable[2];
   goto return_label50;
   return_label50: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
+val_t syntax_base___AbsSyntaxVisitor___type_int(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 271, LOCATE_syntax_base___AbsSyntaxVisitor___type_int};
+  static val_t once_value_54; static int once_bool_54; /* Once value for variable[3]*/
+    static val_t once_value_55 = NIT_NULL; /* Once value for string variable[3]*/
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[0]) /*AbsSyntaxVisitor::_module*/;
+  /* Register variable[3]: Once expression result */
+  if (once_bool_54) variable[3] = once_value_54;
+  else {
+    /* Register variable[3]: Once String constant */
+    if (once_value_55 != NIT_NULL) variable[3] = once_value_55;
+    else {
+      variable[3] = NEW_String_string___String___with_native(BOX_NativeString("Int"), TAG_Int(3)) /*new String*/;
+      once_value_55 = variable[3];
+    }
+    /* Register variable[3]: Result */
+    /* Register variable[3]: Result */
+    variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
+    once_value_54 = variable[3];
+    once_bool_54 = true;
+  }
+  /* Register variable[3]: Result */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstractmetamodel___MMModule___class_by_name(variable[2])(variable[2], variable[3]) /*MMModule::class_by_name*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_static_type___MMLocalClass___get_type(variable[2])(variable[2]) /*MMLocalClass::get_type*/;
+  variable[1] = variable[2];
+  goto return_label53;
+  return_label53: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t syntax_base___AbsSyntaxVisitor___type_float(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 277, LOCATE_syntax_base___AbsSyntaxVisitor___type_float};
+  static val_t once_value_57; static int once_bool_57; /* Once value for variable[3]*/
+    static val_t once_value_58 = NIT_NULL; /* Once value for string variable[3]*/
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[0]) /*AbsSyntaxVisitor::_module*/;
+  /* Register variable[3]: Once expression result */
+  if (once_bool_57) variable[3] = once_value_57;
+  else {
+    /* Register variable[3]: Once String constant */
+    if (once_value_58 != NIT_NULL) variable[3] = once_value_58;
+    else {
+      variable[3] = NEW_String_string___String___with_native(BOX_NativeString("Float"), TAG_Int(5)) /*new String*/;
+      once_value_58 = variable[3];
+    }
+    /* Register variable[3]: Result */
+    /* Register variable[3]: Result */
+    variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
+    once_value_57 = variable[3];
+    once_bool_57 = true;
+  }
+  /* Register variable[3]: Result */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstractmetamodel___MMModule___class_by_name(variable[2])(variable[2], variable[3]) /*MMModule::class_by_name*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_static_type___MMLocalClass___get_type(variable[2])(variable[2]) /*MMLocalClass::get_type*/;
+  variable[1] = variable[2];
+  goto return_label56;
+  return_label56: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t syntax_base___AbsSyntaxVisitor___type_char(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 283, LOCATE_syntax_base___AbsSyntaxVisitor___type_char};
+  static val_t once_value_60; static int once_bool_60; /* Once value for variable[3]*/
+    static val_t once_value_61 = NIT_NULL; /* Once value for string variable[3]*/
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[0]) /*AbsSyntaxVisitor::_module*/;
+  /* Register variable[3]: Once expression result */
+  if (once_bool_60) variable[3] = once_value_60;
+  else {
+    /* Register variable[3]: Once String constant */
+    if (once_value_61 != NIT_NULL) variable[3] = once_value_61;
+    else {
+      variable[3] = NEW_String_string___String___with_native(BOX_NativeString("Char"), TAG_Int(4)) /*new String*/;
+      once_value_61 = variable[3];
+    }
+    /* Register variable[3]: Result */
+    /* Register variable[3]: Result */
+    variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
+    once_value_60 = variable[3];
+    once_bool_60 = true;
+  }
+  /* Register variable[3]: Result */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstractmetamodel___MMModule___class_by_name(variable[2])(variable[2], variable[3]) /*MMModule::class_by_name*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_static_type___MMLocalClass___get_type(variable[2])(variable[2]) /*MMLocalClass::get_type*/;
+  variable[1] = variable[2];
+  goto return_label59;
+  return_label59: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t syntax_base___AbsSyntaxVisitor___type_string(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 289, LOCATE_syntax_base___AbsSyntaxVisitor___type_string};
+  static val_t once_value_63; static int once_bool_63; /* Once value for variable[3]*/
+    static val_t once_value_64 = NIT_NULL; /* Once value for string variable[3]*/
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[0]) /*AbsSyntaxVisitor::_module*/;
+  /* Register variable[3]: Once expression result */
+  if (once_bool_63) variable[3] = once_value_63;
+  else {
+    /* Register variable[3]: Once String constant */
+    if (once_value_64 != NIT_NULL) variable[3] = once_value_64;
+    else {
+      variable[3] = NEW_String_string___String___with_native(BOX_NativeString("String"), TAG_Int(6)) /*new String*/;
+      once_value_64 = variable[3];
+    }
+    /* Register variable[3]: Result */
+    /* Register variable[3]: Result */
+    variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
+    once_value_63 = variable[3];
+    once_bool_63 = true;
+  }
+  /* Register variable[3]: Result */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstractmetamodel___MMModule___class_by_name(variable[2])(variable[2], variable[3]) /*MMModule::class_by_name*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_static_type___MMLocalClass___get_type(variable[2])(variable[2]) /*MMLocalClass::get_type*/;
+  variable[1] = variable[2];
+  goto return_label62;
+  return_label62: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t syntax_base___AbsSyntaxVisitor___type_collection(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 295, LOCATE_syntax_base___AbsSyntaxVisitor___type_collection};
+  static val_t once_value_66; static int once_bool_66; /* Once value for variable[3]*/
+    static val_t once_value_67 = NIT_NULL; /* Once value for string variable[3]*/
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[0]) /*AbsSyntaxVisitor::_module*/;
+  /* Register variable[3]: Once expression result */
+  if (once_bool_66) variable[3] = once_value_66;
+  else {
+    /* Register variable[3]: Once String constant */
+    if (once_value_67 != NIT_NULL) variable[3] = once_value_67;
+    else {
+      variable[3] = NEW_String_string___String___with_native(BOX_NativeString("Collection"), TAG_Int(10)) /*new String*/;
+      once_value_67 = variable[3];
+    }
+    /* Register variable[3]: Result */
+    /* Register variable[3]: Result */
+    variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
+    once_value_66 = variable[3];
+    once_bool_66 = true;
+  }
+  /* Register variable[3]: Result */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstractmetamodel___MMModule___class_by_name(variable[2])(variable[2], variable[3]) /*MMModule::class_by_name*/;
+  variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(1)) /*new Array[MMType]*/ /* Ensure var: Literal array*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_syntax_base___AbsSyntaxVisitor___type_object(variable[0])(variable[0]) /*AbsSyntaxVisitor::type_object*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_static_type___MMType___as_nullable(variable[4])(variable[4]) /*MMType::as_nullable*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
+  /* Register variable[3]: Result */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_genericity___MMLocalClass___get_instantiate_type(variable[2])(variable[2], variable[3]) /*MMLocalClass::get_instantiate_type*/;
+  variable[1] = variable[2];
+  goto return_label65;
+  return_label65: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t syntax_base___AbsSyntaxVisitor___type_array(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 301, LOCATE_syntax_base___AbsSyntaxVisitor___type_array};
+  static val_t once_value_69; static int once_bool_69; /* Once value for variable[4]*/
+    static val_t once_value_70 = NIT_NULL; /* Once value for string variable[4]*/
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[0]) /*AbsSyntaxVisitor::_module*/;
+  /* Register variable[4]: Once expression result */
+  if (once_bool_69) variable[4] = once_value_69;
+  else {
+    /* Register variable[4]: Once String constant */
+    if (once_value_70 != NIT_NULL) variable[4] = once_value_70;
+    else {
+      variable[4] = NEW_String_string___String___with_native(BOX_NativeString("Array"), TAG_Int(5)) /*new String*/;
+      once_value_70 = variable[4];
+    }
+    /* Register variable[4]: Result */
+    /* Register variable[4]: Result */
+    variable[4] = CALL_symbol___String___to_symbol(variable[4])(variable[4]) /*String::to_symbol*/;
+    once_value_69 = variable[4];
+    once_bool_69 = true;
+  }
+  /* Register variable[4]: Result */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstractmetamodel___MMModule___class_by_name(variable[3])(variable[3], variable[4]) /*MMModule::class_by_name*/;
+  variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(1)) /*new Array[MMType]*/ /* Ensure var: Literal array*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4],  variable[1] /*stype*/) /*AbstractArray::add*/;
+  /* Register variable[4]: Result */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_genericity___MMLocalClass___get_instantiate_type(variable[3])(variable[3], variable[4]) /*MMLocalClass::get_instantiate_type*/;
+  variable[2] = variable[3];
+  goto return_label68;
+  return_label68: while(false);
+  tracehead = trace.prev;
+  return variable[2];
+}
+val_t syntax_base___AbsSyntaxVisitor___type_discrete(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 307, LOCATE_syntax_base___AbsSyntaxVisitor___type_discrete};
+  static val_t once_value_72; static int once_bool_72; /* Once value for variable[3]*/
+    static val_t once_value_73 = NIT_NULL; /* Once value for string variable[3]*/
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[0]) /*AbsSyntaxVisitor::_module*/;
+  /* Register variable[3]: Once expression result */
+  if (once_bool_72) variable[3] = once_value_72;
+  else {
+    /* Register variable[3]: Once String constant */
+    if (once_value_73 != NIT_NULL) variable[3] = once_value_73;
+    else {
+      variable[3] = NEW_String_string___String___with_native(BOX_NativeString("Discrete"), TAG_Int(8)) /*new String*/;
+      once_value_73 = variable[3];
+    }
+    /* Register variable[3]: Result */
+    /* Register variable[3]: Result */
+    variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
+    once_value_72 = variable[3];
+    once_bool_72 = true;
+  }
+  /* Register variable[3]: Result */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstractmetamodel___MMModule___class_by_name(variable[2])(variable[2], variable[3]) /*MMModule::class_by_name*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_static_type___MMLocalClass___get_type(variable[2])(variable[2]) /*MMLocalClass::get_type*/;
+  variable[1] = variable[2];
+  goto return_label71;
+  return_label71: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t syntax_base___AbsSyntaxVisitor___type_range(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 313, LOCATE_syntax_base___AbsSyntaxVisitor___type_range};
+  static val_t once_value_75; static int once_bool_75; /* Once value for variable[4]*/
+    static val_t once_value_76 = NIT_NULL; /* Once value for string variable[4]*/
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[0]) /*AbsSyntaxVisitor::_module*/;
+  /* Register variable[4]: Once expression result */
+  if (once_bool_75) variable[4] = once_value_75;
+  else {
+    /* Register variable[4]: Once String constant */
+    if (once_value_76 != NIT_NULL) variable[4] = once_value_76;
+    else {
+      variable[4] = NEW_String_string___String___with_native(BOX_NativeString("Range"), TAG_Int(5)) /*new String*/;
+      once_value_76 = variable[4];
+    }
+    /* Register variable[4]: Result */
+    /* Register variable[4]: Result */
+    variable[4] = CALL_symbol___String___to_symbol(variable[4])(variable[4]) /*String::to_symbol*/;
+    once_value_75 = variable[4];
+    once_bool_75 = true;
+  }
+  /* Register variable[4]: Result */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstractmetamodel___MMModule___class_by_name(variable[3])(variable[3], variable[4]) /*MMModule::class_by_name*/;
+  variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(1)) /*new Array[MMType]*/ /* Ensure var: Literal array*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4],  variable[1] /*stype*/) /*AbstractArray::add*/;
+  /* Register variable[4]: Result */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_genericity___MMLocalClass___get_instantiate_type(variable[3])(variable[3], variable[4]) /*MMLocalClass::get_instantiate_type*/;
+  variable[2] = variable[3];
+  goto return_label74;
+  return_label74: while(false);
+  tracehead = trace.prev;
+  return variable[2];
+}
+val_t syntax_base___AbsSyntaxVisitor___type_none(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 319, LOCATE_syntax_base___AbsSyntaxVisitor___type_none};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[0]) /*AbsSyntaxVisitor::_module*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_static_type___MMModule___type_none(variable[2])(variable[2]) /*MMModule::type_none*/;
+  variable[1] = variable[2];
+  goto return_label77;
+  return_label77: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
 val_t syntax_base___AbsSyntaxVisitor___module(val_t  self) {
   struct trace_t trace = {NULL, NULL, 325, LOCATE_syntax_base___AbsSyntaxVisitor___module};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
@@ -1051,7 +1437,7 @@ val_t syntax_base___AbsSyntaxVisitor___module(val_t  self) {
 void syntax_base___AbsSyntaxVisitor___module__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 325, LOCATE_syntax_base___AbsSyntaxVisitor___module__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   ATTR_syntax_base___AbsSyntaxVisitor____module( self) /*AbsSyntaxVisitor::_module*/ =  param0;
@@ -1061,7 +1447,7 @@ void syntax_base___AbsSyntaxVisitor___module__eq(val_t  self, val_t  param0) {
 val_t syntax_base___AbsSyntaxVisitor___local_class(val_t  self) {
   struct trace_t trace = {NULL, NULL, 328, LOCATE_syntax_base___AbsSyntaxVisitor___local_class};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
@@ -1070,7 +1456,7 @@ val_t syntax_base___AbsSyntaxVisitor___local_class(val_t  self) {
 void syntax_base___AbsSyntaxVisitor___local_class__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 328, LOCATE_syntax_base___AbsSyntaxVisitor___local_class__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   ATTR_syntax_base___AbsSyntaxVisitor____local_class( self) /*AbsSyntaxVisitor::_local_class*/ =  param0;
@@ -1080,7 +1466,7 @@ void syntax_base___AbsSyntaxVisitor___local_class__eq(val_t  self, val_t  param0
 val_t syntax_base___AbsSyntaxVisitor___local_property(val_t  self) {
   struct trace_t trace = {NULL, NULL, 331, LOCATE_syntax_base___AbsSyntaxVisitor___local_property};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
@@ -1089,7 +1475,7 @@ val_t syntax_base___AbsSyntaxVisitor___local_property(val_t  self) {
 void syntax_base___AbsSyntaxVisitor___local_property__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 331, LOCATE_syntax_base___AbsSyntaxVisitor___local_property__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   ATTR_syntax_base___AbsSyntaxVisitor____local_property( self) /*AbsSyntaxVisitor::_local_property*/ =  param0;
@@ -1099,7 +1485,7 @@ void syntax_base___AbsSyntaxVisitor___local_property__eq(val_t  self, val_t  par
 val_t syntax_base___AbsSyntaxVisitor___tc(val_t  self) {
   struct trace_t trace = {NULL, NULL, 334, LOCATE_syntax_base___AbsSyntaxVisitor___tc};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
@@ -1107,393 +1493,660 @@ val_t syntax_base___AbsSyntaxVisitor___tc(val_t  self) {
 }
 void syntax_base___AbsSyntaxVisitor___error(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 337, LOCATE_syntax_base___AbsSyntaxVisitor___error};
-  val_t variable[15];
-  void **closurevariable = NULL;
+  static val_t once_value_79 = NIT_NULL; /* Once value for string variable[6]*/
+  static val_t once_value_80 = NIT_NULL; /* Once value for string variable[6]*/
+  static val_t once_value_81 = NIT_NULL; /* Once value for string variable[6]*/
+  val_t variable[7];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
-  variable[4] = variable[0];
-  variable[4] = ATTR_syntax_base___AbsSyntaxVisitor____tc(variable[4]) /*AbsSyntaxVisitor::_tc*/;
-  variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-  variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[7] = variable[6];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[7]) /*AbstractArray::add*/;
-  variable[8] = variable[0];
-  variable[8] = CALL_syntax_base___AbsSyntaxVisitor___locate(variable[8])(variable[8],  variable[1] /*n*/) /*AbsSyntaxVisitor::locate*/;
-  variable[9] = variable[8];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[9]) /*AbstractArray::add*/;
-  variable[10] = NEW_String_string___String___with_native(BOX_NativeString(": "), TAG_Int(2)); /*new String*/
-  variable[11] = variable[10];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[11]) /*AbstractArray::add*/;
-  variable[12] =  variable[2] /*s*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[12]) /*AbstractArray::add*/;
-  variable[13] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[14] = variable[13];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[14]) /*AbstractArray::add*/;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_syntax_base___AbsSyntaxVisitor____tc(variable[0]) /*AbsSyntaxVisitor::_tc*/;
+  variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_79 != NIT_NULL) variable[6] = once_value_79;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_79 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[6]: Result */
+  variable[6] = CALL_syntax_base___AbsSyntaxVisitor___locate(variable[0])(variable[0],  variable[1] /*n*/) /*AbsSyntaxVisitor::locate*/;
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_80 != NIT_NULL) variable[6] = once_value_80;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString(": "), TAG_Int(2)) /*new String*/;
+    once_value_80 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  variable[6] =  variable[2] /*s*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_81 != NIT_NULL) variable[6] = once_value_81;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_81 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/;
   CALL_mmloader___ToolContext___error(variable[4])(variable[4], variable[5]) /*ToolContext::error*/;
-  return_label51: while(false);
+  return_label78: while(false);
   tracehead = trace.prev;
   return;
 }
 void syntax_base___AbsSyntaxVisitor___warning(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 343, LOCATE_syntax_base___AbsSyntaxVisitor___warning};
-  val_t variable[15];
-  void **closurevariable = NULL;
+  static val_t once_value_83 = NIT_NULL; /* Once value for string variable[6]*/
+  static val_t once_value_84 = NIT_NULL; /* Once value for string variable[6]*/
+  static val_t once_value_85 = NIT_NULL; /* Once value for string variable[6]*/
+  val_t variable[7];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
-  variable[4] = variable[0];
-  variable[4] = ATTR_syntax_base___AbsSyntaxVisitor____tc(variable[4]) /*AbsSyntaxVisitor::_tc*/;
-  variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-  variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[7] = variable[6];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[7]) /*AbstractArray::add*/;
-  variable[8] = variable[0];
-  variable[8] = CALL_syntax_base___AbsSyntaxVisitor___locate(variable[8])(variable[8],  variable[1] /*n*/) /*AbsSyntaxVisitor::locate*/;
-  variable[9] = variable[8];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[9]) /*AbstractArray::add*/;
-  variable[10] = NEW_String_string___String___with_native(BOX_NativeString(": "), TAG_Int(2)); /*new String*/
-  variable[11] = variable[10];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[11]) /*AbstractArray::add*/;
-  variable[12] =  variable[2] /*s*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[12]) /*AbstractArray::add*/;
-  variable[13] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[14] = variable[13];
-  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[14]) /*AbstractArray::add*/;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_syntax_base___AbsSyntaxVisitor____tc(variable[0]) /*AbsSyntaxVisitor::_tc*/;
+  variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_83 != NIT_NULL) variable[6] = once_value_83;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_83 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[6]: Result */
+  variable[6] = CALL_syntax_base___AbsSyntaxVisitor___locate(variable[0])(variable[0],  variable[1] /*n*/) /*AbsSyntaxVisitor::locate*/;
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_84 != NIT_NULL) variable[6] = once_value_84;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString(": "), TAG_Int(2)) /*new String*/;
+    once_value_84 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  variable[6] =  variable[2] /*s*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_85 != NIT_NULL) variable[6] = once_value_85;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_85 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/;
   CALL_mmloader___ToolContext___warning(variable[4])(variable[4], variable[5]) /*ToolContext::warning*/;
-  return_label52: while(false);
+  return_label82: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t syntax_base___AbsSyntaxVisitor___locate(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 349, LOCATE_syntax_base___AbsSyntaxVisitor___locate};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*n*/ ==  NIT_NULL /*null*/) || (( variable[1] /*n*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*n*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*n*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*n*/)( variable[1] /*n*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[3])) { /*if*/
+    /* Register variable[3]: Result */
     variable[3] = CALL_parser_prod___PNode___locate( variable[1] /*n*/)( variable[1] /*n*/) /*PNode::locate*/;
     variable[2] = variable[3];
-    goto return_label53;
+    goto return_label86;
   }
-  variable[3] = variable[0];
-  variable[3] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[3]) /*AbsSyntaxVisitor::_module*/;
-  variable[3] = CALL_mmloader___MMModule___filename(variable[3])(variable[3]) /*MMModule::filename*/;
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_syntax_base___AbsSyntaxVisitor____module(variable[0]) /*AbsSyntaxVisitor::_module*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstractmetamodel___MMModule___filename(variable[3])(variable[3]) /*MMModule::filename*/;
   variable[2] = variable[3];
-  goto return_label53;
-  return_label53: while(false);
+  goto return_label86;
+  return_label86: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t syntax_base___AbsSyntaxVisitor___check_conform(val_t  self, val_t  param0, val_t  param1, val_t  param2) {
   struct trace_t trace = {NULL, NULL, 356, LOCATE_syntax_base___AbsSyntaxVisitor___check_conform};
-  val_t variable[15];
-  void **closurevariable = NULL;
+    static val_t once_value_88 = NIT_NULL; /* Once value for string variable[6]*/
+    static val_t once_value_89 = NIT_NULL; /* Once value for string variable[6]*/
+    static val_t once_value_90 = NIT_NULL; /* Once value for string variable[6]*/
+  static val_t once_value_91 = NIT_NULL; /* Once value for string variable[6]*/
+  static val_t once_value_92 = NIT_NULL; /* Once value for string variable[6]*/
+  static val_t once_value_93 = NIT_NULL; /* Once value for string variable[6]*/
+  val_t variable[7];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
+  /* Register variable[4]: Method return value and escape marker */
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool(( variable[3] /*stype*/ ==  NIT_NULL /*null*/) || (( variable[3] /*stype*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*stype*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*stype*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*stype*/)( variable[3] /*stype*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  variable[6] = variable[5];
-  if (!UNTAG_Bool(variable[6])) { /* or */
-    variable[6] = TAG_Bool(( variable[2] /*subtype*/ ==  NIT_NULL /*null*/) || (( variable[2] /*subtype*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[2] /*subtype*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*subtype*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[2] /*subtype*/)( variable[2] /*subtype*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+  /* Ensure var variable[5]: Left 'or' operand*/
+  if (!UNTAG_Bool(variable[5])) { /* or */
+    /* Register variable[5]: Result */
+    variable[5] = TAG_Bool(( variable[2] /*subtype*/ ==  NIT_NULL /*null*/) || (( variable[2] /*subtype*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[2] /*subtype*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*subtype*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[2] /*subtype*/)( variable[2] /*subtype*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   }
-  variable[5] = variable[6];
+  /* Register variable[5]: Result */
   if (UNTAG_Bool(variable[5])) { /*if*/
     variable[4] =  TAG_Bool(false);
-    goto return_label54;
+    goto return_label87;
   }
+  /* Register variable[5]: Result */
   variable[5] = CALL_static_type___MMType_____l( variable[2] /*subtype*/)( variable[2] /*subtype*/,  variable[3] /*stype*/) /*MMType::<*/;
   if (UNTAG_Bool(variable[5])) { /*if*/
     variable[4] =  TAG_Bool(true);
-    goto return_label54;
+    goto return_label87;
   }
-  variable[5] = variable[0];
-  variable[6] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-  variable[7] = NEW_String_string___String___with_native(BOX_NativeString("Type error: expected "), TAG_Int(21)); /*new String*/
-  variable[8] = variable[7];
-  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[8]) /*AbstractArray::add*/;
-  variable[9] =  variable[3] /*stype*/;
-  variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[9]) /*AbstractArray::add*/;
-  variable[10] = NEW_String_string___String___with_native(BOX_NativeString(", got "), TAG_Int(6)); /*new String*/
-  variable[11] = variable[10];
-  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[11]) /*AbstractArray::add*/;
-  variable[12] =  variable[2] /*subtype*/;
-  variable[12] = CALL_string___Object___to_s(variable[12])(variable[12]) /*Object::to_s*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[12]) /*AbstractArray::add*/;
-  variable[13] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[14] = variable[13];
-  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[14]) /*AbstractArray::add*/;
-  variable[6] = CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/;
-  CALL_syntax_base___AbsSyntaxVisitor___error(variable[5])(variable[5],  variable[1] /*n*/, variable[6]) /*AbsSyntaxVisitor::error*/;
+  /* Register variable[5]: Result */
+  variable[5] = TAG_Bool(( variable[2] /*subtype*/==NIT_NULL) || VAL_ISA( variable[2] /*subtype*/, COLOR_MMTypeNone, ID_MMTypeNone)) /*cast MMTypeNone*/;
+  /* Ensure var variable[5]: Left 'or' operand*/
+  if (!UNTAG_Bool(variable[5])) { /* or */
+    /* Register variable[5]: Result */
+    variable[5] = CALL_static_type___MMType___as_notnull( variable[2] /*subtype*/)( variable[2] /*subtype*/) /*MMType::as_notnull*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_static_type___MMType___as_notnull( variable[3] /*stype*/)( variable[3] /*stype*/) /*MMType::as_notnull*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_static_type___MMType_____l(variable[5])(variable[5], variable[6]) /*MMType::<*/;
+  }
+  /* Register variable[5]: Result */
+  if (UNTAG_Bool(variable[5])) { /*if*/
+    variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[6]: Once String constant */
+    if (once_value_88 != NIT_NULL) variable[6] = once_value_88;
+    else {
+      variable[6] = NEW_String_string___String___with_native(BOX_NativeString("Nullable type warning: expected "), TAG_Int(32)) /*new String*/;
+      once_value_88 = variable[6];
+    }
+    /* Register variable[6]: Result */
+    /* Ensure var variable[6]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+    variable[6] =  variable[3] /*stype*/ /* Ensure var: super-string element*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[6]: Once String constant */
+    if (once_value_89 != NIT_NULL) variable[6] = once_value_89;
+    else {
+      variable[6] = NEW_String_string___String___with_native(BOX_NativeString(", got "), TAG_Int(6)) /*new String*/;
+      once_value_89 = variable[6];
+    }
+    /* Register variable[6]: Result */
+    /* Ensure var variable[6]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+    variable[6] =  variable[2] /*subtype*/ /* Ensure var: super-string element*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[6]: Once String constant */
+    if (once_value_90 != NIT_NULL) variable[6] = once_value_90;
+    else {
+      variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+      once_value_90 = variable[6];
+    }
+    /* Register variable[6]: Result */
+    /* Ensure var variable[6]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/;
+    CALL_syntax_base___AbsSyntaxVisitor___warning(variable[0])(variable[0],  variable[1] /*n*/, variable[5]) /*AbsSyntaxVisitor::warning*/;
+    variable[4] =  TAG_Bool(true);
+    goto return_label87;
+  }
+  variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_91 != NIT_NULL) variable[6] = once_value_91;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString("Type error: expected "), TAG_Int(21)) /*new String*/;
+    once_value_91 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  variable[6] =  variable[3] /*stype*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/) /*AbstractArray::add*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_92 != NIT_NULL) variable[6] = once_value_92;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString(", got "), TAG_Int(6)) /*new String*/;
+    once_value_92 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  variable[6] =  variable[2] /*subtype*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/) /*AbstractArray::add*/;
+  /* Register variable[6]: Once String constant */
+  if (once_value_93 != NIT_NULL) variable[6] = once_value_93;
+  else {
+    variable[6] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_93 = variable[6];
+  }
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[6]) /*AbstractArray::add*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/;
+  CALL_syntax_base___AbsSyntaxVisitor___error(variable[0])(variable[0],  variable[1] /*n*/, variable[5]) /*AbsSyntaxVisitor::error*/;
   variable[4] =  TAG_Bool(false);
-  goto return_label54;
-  return_label54: while(false);
+  goto return_label87;
+  return_label87: while(false);
   tracehead = trace.prev;
   return variable[4];
 }
 val_t syntax_base___AbsSyntaxVisitor___check_expr(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 371, LOCATE_syntax_base___AbsSyntaxVisitor___check_expr};
+  struct trace_t trace = {NULL, NULL, 374, LOCATE_syntax_base___AbsSyntaxVisitor___check_expr};
+      static val_t once_value_95 = NIT_NULL; /* Once value for string variable[4]*/
+      static val_t once_value_96 = NIT_NULL; /* Once value for string variable[4]*/
+      static val_t once_value_97 = NIT_NULL; /* Once value for string variable[3]*/
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_syntax_base___AbsSyntaxVisitor___tc(variable[3])(variable[3]) /*AbsSyntaxVisitor::tc*/;
-  variable[3] = CALL_mmloader___ToolContext___error_count(variable[3])(variable[3]) /*ToolContext::error_count*/;
-  variable[3] = TAG_Bool((variable[3])==( TAG_Int(0)));
-  variable[4] = variable[3];
-  if (UNTAG_Bool(variable[4])) { /* and */
-    variable[4] = CALL_syntax_base___PExpr___stype( variable[1] /*n*/)( variable[1] /*n*/) /*PExpr::stype*/;
-    variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
-  }
-  variable[3] = variable[4];
-  if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = variable[0];
-    variable[4] = NEW_String_string___String___with_native(BOX_NativeString("Type error: expected expression."), TAG_Int(32)); /*new String*/
-    CALL_syntax_base___AbsSyntaxVisitor___error(variable[3])(variable[3],  variable[1] /*n*/, variable[4]) /*AbsSyntaxVisitor::error*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_syntax_base___PExpr___is_typed( variable[1] /*n*/)( variable[1] /*n*/) /*PExpr::is_typed*/;
+  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) { /*if*/
+    /* Register variable[3]: Result */
+    variable[3] = CALL_syntax_base___AbsSyntaxVisitor___tc(variable[0])(variable[0]) /*AbsSyntaxVisitor::tc*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_mmloader___ToolContext___error_count(variable[3])(variable[3]) /*ToolContext::error_count*/;
+    /* Register variable[3]: Result */
+    variable[3] = TAG_Bool((variable[3])==( TAG_Int(0)));
+    if (UNTAG_Bool(variable[3])) { /*if*/
+      variable[3] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[4]: Once String constant */
+      if (once_value_95 != NIT_NULL) variable[4] = once_value_95;
+      else {
+        variable[4] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+        once_value_95 = variable[4];
+      }
+      /* Register variable[4]: Result */
+      /* Ensure var variable[4]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
+      /* Register variable[4]: Result */
+      variable[4] = CALL_parser_prod___PNode___locate( variable[1] /*n*/)( variable[1] /*n*/) /*Prod::locate*/;
+      /* Ensure var variable[4]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
+      /* Register variable[4]: Once String constant */
+      if (once_value_96 != NIT_NULL) variable[4] = once_value_96;
+      else {
+        variable[4] = NEW_String_string___String___with_native(BOX_NativeString(" not typed but not error"), TAG_Int(24)) /*new String*/;
+        once_value_96 = variable[4];
+      }
+      /* Register variable[4]: Result */
+      /* Ensure var variable[4]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
+      /* Register variable[3]: Result */
+      variable[3] = CALL_string___Object___to_s(variable[3])(variable[3]) /*Object::to_s*/;
+      CALL_file___Object___print(variable[0])(variable[0], variable[3]) /*Object::print*/;
+      fprintf(stderr, "Aborted"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_syntax_base___AbsSyntaxVisitor___check_expr, LOCATE_syntax_base, 382); nit_exit(1);
+    }
     variable[2] =  TAG_Bool(false);
-    goto return_label55;
+    goto return_label94;
+  } else { /*if*/
+    /* Register variable[3]: Result */
+    variable[3] = CALL_syntax_base___PExpr___is_statement( variable[1] /*n*/)( variable[1] /*n*/) /*PExpr::is_statement*/;
+    if (UNTAG_Bool(variable[3])) { /*if*/
+      /* Register variable[3]: Once String constant */
+      if (once_value_97 != NIT_NULL) variable[3] = once_value_97;
+      else {
+        variable[3] = NEW_String_string___String___with_native(BOX_NativeString("Type error: expected expression."), TAG_Int(32)) /*new String*/;
+        once_value_97 = variable[3];
+      }
+      /* Register variable[3]: Result */
+      CALL_syntax_base___AbsSyntaxVisitor___error(variable[0])(variable[0],  variable[1] /*n*/, variable[3]) /*AbsSyntaxVisitor::error*/;
+      variable[2] =  TAG_Bool(false);
+      goto return_label94;
+    }
   }
   variable[2] =  TAG_Bool(true);
-  goto return_label55;
-  return_label55: while(false);
+  goto return_label94;
+  return_label94: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t syntax_base___AbsSyntaxVisitor___check_conform_expr(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 385, LOCATE_syntax_base___AbsSyntaxVisitor___check_conform_expr};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 394, LOCATE_syntax_base___AbsSyntaxVisitor___check_conform_expr};
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
-  variable[4] = variable[0];
-  variable[4] = CALL_syntax_base___AbsSyntaxVisitor___check_expr(variable[4])(variable[4],  variable[1] /*n*/) /*AbsSyntaxVisitor::check_expr*/;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_syntax_base___AbsSyntaxVisitor___check_expr(variable[0])(variable[0],  variable[1] /*n*/) /*AbsSyntaxVisitor::check_expr*/;
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    variable[5] = CALL_syntax_base___PExpr___stype( variable[1] /*n*/)( variable[1] /*n*/) /*PExpr::stype*/;
-    variable[4] = CALL_syntax_base___AbsSyntaxVisitor___check_conform(variable[4])(variable[4],  variable[1] /*n*/, variable[5],  variable[2] /*stype*/) /*AbsSyntaxVisitor::check_conform*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_syntax_base___PExpr___stype( variable[1] /*n*/)( variable[1] /*n*/) /*PExpr::stype*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_syntax_base___AbsSyntaxVisitor___check_conform(variable[0])(variable[0],  variable[1] /*n*/, variable[4],  variable[2] /*stype*/) /*AbsSyntaxVisitor::check_conform*/;
     variable[3] = variable[4];
-    goto return_label56;
+    goto return_label98;
   } else { /*if*/
     variable[3] =  TAG_Bool(false);
-    goto return_label56;
+    goto return_label98;
   }
-  return_label56: while(false);
+  return_label98: while(false);
+  tracehead = trace.prev;
+  return variable[3];
+}
+val_t syntax_base___AbsSyntaxVisitor___check_conform_multiexpr(val_t  self, val_t  param0, val_t  param1) {
+  struct trace_t trace = {NULL, NULL, 400, LOCATE_syntax_base___AbsSyntaxVisitor___check_conform_multiexpr};
+        static val_t once_value_102 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_103 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_104 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_105 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_106 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_107 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_108 = NIT_NULL; /* Once value for string variable[9]*/
+  val_t variable[11];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Local variable */
+  variable[2] =  param1;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Local variable */
+  variable[4] =  NIT_NULL /*null*/;
+  /* Register variable[5]: For iterator */
+  variable[5] = CALL_abstract_collection___Collection___iterator( variable[2] /*nodes*/)( variable[2] /*nodes*/) /*Collection::iterator*/;
+  while (true) { /*for*/
+    /* Register variable[6]: For 'is_ok' result */
+    variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*Iterator::is_ok*/;
+    if (!UNTAG_Bool(variable[6])) break; /*for*/
+    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[7]: Local variable */
+    variable[7] = variable[6];
+    /* Register variable[8]: Result */
+    variable[8] = CALL_syntax_base___AbsSyntaxVisitor___check_expr(variable[0])(variable[0],  variable[7] /*n*/) /*AbsSyntaxVisitor::check_expr*/;
+    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[8])))) { /*if*/
+      variable[3] =  NIT_NULL /*null*/;
+      goto return_label99;
+    }
+    /* Register variable[8]: Local variable */
+    /* Register variable[9]: Result */
+    variable[9] = CALL_syntax_base___PExpr___stype( variable[7] /*n*/)( variable[7] /*n*/) /*PExpr::stype*/;
+    variable[8] = variable[9];
+    /* Register variable[9]: Result */
+    variable[9] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*stype*/ ==  NIT_NULL /*null*/) || (( variable[1] /*stype*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*stype*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*stype*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*stype*/)( variable[1] /*stype*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    /* Ensure var variable[9]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[9])) { /* and */
+      /* Register variable[9]: Result */
+      variable[9] = CALL_static_type___MMType___is_nullable( variable[1] /*stype*/)( variable[1] /*stype*/) /*MMType::is_nullable*/;
+      /* Register variable[10]: Result */
+      variable[10] = CALL_static_type___MMType___is_nullable( variable[8] /*ntype*/)( variable[8] /*ntype*/) /*MMType::is_nullable*/;
+      /* Register variable[9]: Result */
+      variable[9] = TAG_Bool((variable[9])!=(variable[10]));
+    }
+    /* Register variable[9]: Result */
+    if (UNTAG_Bool(variable[9])) { /*if*/
+      /* Register variable[9]: Result */
+      variable[9] = CALL_static_type___MMType___as_nullable( variable[1] /*stype*/)( variable[1] /*stype*/) /*MMType::as_nullable*/;
+      variable[1] = variable[9] /*stype=*/;
+      /* Register variable[9]: Result */
+      variable[9] = CALL_static_type___MMType___as_nullable( variable[8] /*ntype*/)( variable[8] /*ntype*/) /*MMType::as_nullable*/;
+      variable[8] = variable[9] /*ntype=*/;
+    }
+    /* Register variable[9]: Result */
+    variable[9] = TAG_Bool(( variable[1] /*stype*/ ==  NIT_NULL /*null*/) || (( variable[1] /*stype*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*stype*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*stype*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*stype*/)( variable[1] /*stype*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+    /* Ensure var variable[9]: Left 'or' operand*/
+    if (!UNTAG_Bool(variable[9])) { /* or */
+      /* Register variable[9]: Result */
+      variable[9] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[8] /*ntype*/ ==  NIT_NULL /*null*/) || (( variable[8] /*ntype*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[8] /*ntype*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[8] /*ntype*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[8] /*ntype*/)( variable[8] /*ntype*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+      /* Ensure var variable[9]: Left 'and' operand*/
+      if (UNTAG_Bool(variable[9])) { /* and */
+        /* Register variable[9]: Result */
+        variable[9] = CALL_static_type___MMType_____l( variable[1] /*stype*/)( variable[1] /*stype*/,  variable[8] /*ntype*/) /*MMType::<*/;
+      }
+      /* Register variable[9]: Result */
+    }
+    /* Register variable[9]: Result */
+    if (UNTAG_Bool(variable[9])) { /*if*/
+      variable[1] =  variable[8] /*ntype*/ /*stype=*/;
+      variable[4] =  variable[7] /*n*/ /*node=*/;
+    }
+    continue_100: while(0);
+    CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*Iterator::next*/;
+  }
+  break_100: while(0);
+  /* Register variable[5]: For iterator */
+  variable[5] = CALL_abstract_collection___Collection___iterator( variable[2] /*nodes*/)( variable[2] /*nodes*/) /*Collection::iterator*/;
+  while (true) { /*for*/
+    /* Register variable[6]: For 'is_ok' result */
+    variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*Iterator::is_ok*/;
+    if (!UNTAG_Bool(variable[6])) break; /*for*/
+    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[7]: Local variable */
+    variable[7] = variable[6];
+    /* Register variable[8]: Result */
+    variable[8] = CALL_syntax_base___PExpr___stype( variable[7] /*n*/)( variable[7] /*n*/) /*PExpr::stype*/;
+    /* Register variable[8]: Result */
+    variable[8] = CALL_static_type___MMType_____l(variable[8])(variable[8],  variable[1] /*stype*/) /*MMType::<*/;
+    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[8])))) { /*if*/
+      /* Register variable[8]: Result */
+      variable[8] = TAG_Bool(( variable[4] /*node*/ ==  NIT_NULL /*null*/) || (( variable[4] /*node*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[4] /*node*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*node*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[4] /*node*/)( variable[4] /*node*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+      if (UNTAG_Bool(variable[8])) { /*if*/
+        variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_102 != NIT_NULL) variable[9] = once_value_102;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Type error: no most general type. Got "), TAG_Int(38)) /*new String*/;
+          once_value_102 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[9]: Result */
+        variable[9] = CALL_syntax_base___PExpr___stype( variable[7] /*n*/)( variable[7] /*n*/) /*PExpr::stype*/;
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_103 != NIT_NULL) variable[9] = once_value_103;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" and "), TAG_Int(5)) /*new String*/;
+          once_value_103 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        variable[9] =  variable[1] /*stype*/ /* Ensure var: super-string element*/;
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_104 != NIT_NULL) variable[9] = once_value_104;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+          once_value_104 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[8]: Result */
+        variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
+        CALL_syntax_base___AbsSyntaxVisitor___error(variable[0])(variable[0],  variable[7] /*n*/, variable[8]) /*AbsSyntaxVisitor::error*/;
+      } else { /*if*/
+        variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(7)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_105 != NIT_NULL) variable[9] = once_value_105;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Type error: no most general type. Got "), TAG_Int(38)) /*new String*/;
+          once_value_105 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[9]: Result */
+        variable[9] = CALL_syntax_base___PExpr___stype( variable[7] /*n*/)( variable[7] /*n*/) /*PExpr::stype*/;
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_106 != NIT_NULL) variable[9] = once_value_106;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" and "), TAG_Int(5)) /*new String*/;
+          once_value_106 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        variable[9] =  variable[1] /*stype*/ /* Ensure var: super-string element*/;
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_107 != NIT_NULL) variable[9] = once_value_107;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" at "), TAG_Int(4)) /*new String*/;
+          once_value_107 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[9]: Result */
+        variable[9] = CALL_parser_prod___PNode___locate( variable[4] /*node*/)( variable[4] /*node*/) /*Prod::locate*/;
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_108 != NIT_NULL) variable[9] = once_value_108;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+          once_value_108 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[8]: Result */
+        variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
+        CALL_syntax_base___AbsSyntaxVisitor___error(variable[0])(variable[0],  variable[7] /*n*/, variable[8]) /*AbsSyntaxVisitor::error*/;
+      }
+      variable[3] =  NIT_NULL /*null*/;
+      goto return_label99;
+    }
+    continue_101: while(0);
+    CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*Iterator::next*/;
+  }
+  break_101: while(0);
+  variable[3] =  variable[1] /*stype*/;
+  goto return_label99;
+  return_label99: while(false);
   tracehead = trace.prev;
   return variable[3];
 }
 void syntax_base___AbsSyntaxVisitor___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 392, LOCATE_syntax_base___AbsSyntaxVisitor___init};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 439, LOCATE_syntax_base___AbsSyntaxVisitor___init};
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_AbsSyntaxVisitor].i]) return;
-  variable[4] = variable[0];
-  ATTR_syntax_base___AbsSyntaxVisitor____tc(variable[4]) /*AbsSyntaxVisitor::_tc*/ =  variable[1] /*tc*/;
-  variable[4] = variable[0];
-  ATTR_syntax_base___AbsSyntaxVisitor____module(variable[4]) /*AbsSyntaxVisitor::_module*/ =  variable[2] /*module*/;
-  return_label57: while(false);
+  /* Register variable[3]: Method return value and escape marker */
+  ATTR_syntax_base___AbsSyntaxVisitor____tc(variable[0]) /*AbsSyntaxVisitor::_tc*/ =  variable[1] /*tc*/;
+  ATTR_syntax_base___AbsSyntaxVisitor____module(variable[0]) /*AbsSyntaxVisitor::_module*/ =  variable[2] /*module*/;
+  return_label109: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_AbsSyntaxVisitor].i] = 1;
   tracehead = trace.prev;
   return;
 }
 void syntax_base___PNode___accept_abs_syntax_visitor(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 402, LOCATE_syntax_base___PNode___accept_abs_syntax_visitor};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 449, LOCATE_syntax_base___PNode___accept_abs_syntax_visitor};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  CALL_parser_prod___PNode___visit_all(variable[3])(variable[3],  variable[1] /*v*/) /*PNode::visit_all*/;
-  return_label58: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_parser_prod___PNode___visit_all(variable[0])(variable[0],  variable[1] /*v*/) /*PNode::visit_all*/;
+  return_label110: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t syntax_base___Token___to_symbol(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 408, LOCATE_syntax_base___Token___to_symbol};
+  struct trace_t trace = {NULL, NULL, 455, LOCATE_syntax_base___Token___to_symbol};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[3] = variable[0];
-  variable[3] = ATTR_syntax_base___Token____symbol(variable[3]) /*Token::_symbol*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_syntax_base___Token____symbol(variable[0]) /*Token::_symbol*/;
   variable[2] = variable[3];
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(( variable[2] /*s*/ ==  NIT_NULL /*null*/) || (( variable[2] /*s*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[2] /*s*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*s*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[2] /*s*/)( variable[2] /*s*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = variable[0];
-    variable[3] = CALL_lexer___Token___text(variable[3])(variable[3]) /*Token::text*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_lexer___Token___text(variable[0])(variable[0]) /*Token::text*/;
+    /* Register variable[3]: Result */
     variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
     variable[2] = variable[3] /*s=*/;
-    variable[3] = variable[0];
-    ATTR_syntax_base___Token____symbol(variable[3]) /*Token::_symbol*/ =  variable[2] /*s*/;
+    ATTR_syntax_base___Token____symbol(variable[0]) /*Token::_symbol*/ =  variable[2] /*s*/;
   }
   variable[1] =  variable[2] /*s*/;
-  goto return_label59;
-  return_label59: while(false);
+  goto return_label111;
+  return_label111: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t syntax_base___PClassdef___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 422, LOCATE_syntax_base___PClassdef___local_class};
+  struct trace_t trace = {NULL, NULL, 469, LOCATE_syntax_base___PClassdef___local_class};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 422);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return NIT_NULL;
-}
-val_t syntax_base___AAttrPropdef___prop(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 427, LOCATE_syntax_base___AAttrPropdef___prop};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 427);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return NIT_NULL;
-}
-val_t syntax_base___AAttrPropdef___readmethod(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 430, LOCATE_syntax_base___AAttrPropdef___readmethod};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 430);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return NIT_NULL;
-}
-val_t syntax_base___AAttrPropdef___writemethod(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 433, LOCATE_syntax_base___AAttrPropdef___writemethod};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 433);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return NIT_NULL;
-}
-val_t syntax_base___AMethPropdef___method(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 438, LOCATE_syntax_base___AMethPropdef___method};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 438);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return NIT_NULL;
-}
-val_t syntax_base___AMethPropdef___self_var(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 441, LOCATE_syntax_base___AMethPropdef___self_var};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 441);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return NIT_NULL;
-}
-val_t syntax_base___ATypePropdef___prop(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 446, LOCATE_syntax_base___ATypePropdef___prop};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 446);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return NIT_NULL;
-}
-val_t syntax_base___PParam___position(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 451, LOCATE_syntax_base___PParam___position};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 451);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return NIT_NULL;
-}
-val_t syntax_base___PParam___variable(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 454, LOCATE_syntax_base___PParam___variable};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 454);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return NIT_NULL;
-}
-val_t syntax_base___PClosureDecl___variable(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 459, LOCATE_syntax_base___PClosureDecl___variable};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 459);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return NIT_NULL;
-}
-val_t syntax_base___PType___get_local_class(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 464, LOCATE_syntax_base___PType___get_local_class};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_syntax_base;
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 464);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return NIT_NULL;
-}
-val_t syntax_base___PType___get_stype(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 469, LOCATE_syntax_base___PType___get_stype};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   fprintf(stderr, "Deferred method called");
@@ -1502,459 +2155,830 @@ val_t syntax_base___PType___get_stype(val_t  self, val_t  param0) {
   tracehead = trace.prev;
   return NIT_NULL;
 }
-val_t syntax_base___PType___get_unchecked_stype(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 473, LOCATE_syntax_base___PType___get_unchecked_stype};
+val_t syntax_base___AAttrPropdef___prop(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 474, LOCATE_syntax_base___AAttrPropdef___prop};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 473);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 474);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t syntax_base___AAttrPropdef___readmethod(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 477, LOCATE_syntax_base___AAttrPropdef___readmethod};
+  val_t *variable = NULL;
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 477);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t syntax_base___AAttrPropdef___writemethod(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 480, LOCATE_syntax_base___AAttrPropdef___writemethod};
+  val_t *variable = NULL;
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 480);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t syntax_base___AMethPropdef___method(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 485, LOCATE_syntax_base___AMethPropdef___method};
+  val_t *variable = NULL;
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 485);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t syntax_base___AMethPropdef___self_var(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 488, LOCATE_syntax_base___AMethPropdef___self_var};
+  val_t *variable = NULL;
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 488);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t syntax_base___ATypePropdef___prop(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 493, LOCATE_syntax_base___ATypePropdef___prop};
+  val_t *variable = NULL;
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 493);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t syntax_base___PParam___position(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 498, LOCATE_syntax_base___PParam___position};
+  val_t *variable = NULL;
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 498);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t syntax_base___PParam___variable(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 501, LOCATE_syntax_base___PParam___variable};
+  val_t *variable = NULL;
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 501);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t syntax_base___PClosureDecl___variable(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 506, LOCATE_syntax_base___PClosureDecl___variable};
+  val_t *variable = NULL;
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 506);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t syntax_base___PType___get_local_class(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 511, LOCATE_syntax_base___PType___get_local_class};
+  val_t *variable = NULL;
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 511);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t syntax_base___PType___get_stype(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 516, LOCATE_syntax_base___PType___get_stype};
+  val_t *variable = NULL;
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 516);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t syntax_base___PType___get_unchecked_stype(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 520, LOCATE_syntax_base___PType___get_unchecked_stype};
+  val_t *variable = NULL;
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 520);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 void syntax_base___PType___check_conform(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 479, LOCATE_syntax_base___PType___check_conform};
+  struct trace_t trace = {NULL, NULL, 526, LOCATE_syntax_base___PType___check_conform};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 479);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 526);
   nit_exit(1);
   tracehead = trace.prev;
   return;
 }
 val_t syntax_base___AType___get_local_class(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 489, LOCATE_syntax_base___AType___get_local_class};
-  val_t variable[16];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 536, LOCATE_syntax_base___AType___get_local_class};
+    static val_t once_value_113 = NIT_NULL; /* Once value for string variable[8]*/
+    static val_t once_value_114 = NIT_NULL; /* Once value for string variable[8]*/
+    static val_t once_value_115 = NIT_NULL; /* Once value for string variable[8]*/
+    static val_t once_value_116 = NIT_NULL; /* Once value for string variable[8]*/
+    static val_t once_value_117 = NIT_NULL; /* Once value for string variable[8]*/
+  val_t variable[9];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[4] = CALL_parser_nodes___AType___n_id(variable[4])(variable[4]) /*AType::n_id*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_parser_nodes___AType___n_id(variable[0])(variable[0]) /*AType::n_id*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_syntax_base___Token___to_symbol(variable[4])(variable[4]) /*Token::to_symbol*/;
   variable[3] = variable[4];
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
   variable[5] = CALL_syntax_base___AbsSyntaxVisitor___module( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
   variable[4] = variable[5];
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
   variable[6] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
   variable[5] = variable[6];
+  /* Register variable[6]: Result */
   variable[6] = CALL_syntax_base___MMSrcLocalClass___formal_dict( variable[5] /*cla*/)( variable[5] /*cla*/) /*MMSrcLocalClass::formal_dict*/;
+  /* Register variable[6]: Result */
   variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] ==  NIT_NULL /*null*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  variable[7] = variable[6];
-  if (UNTAG_Bool(variable[7])) { /* and */
-    variable[7] = CALL_syntax_base___MMSrcLocalClass___formal_dict( variable[5] /*cla*/)( variable[5] /*cla*/) /*MMSrcLocalClass::formal_dict*/;
-    variable[7] = CALL_abstract_collection___Map___has_key(variable[7])(variable[7],  variable[3] /*name*/) /*Map::has_key*/;
+  /* Ensure var variable[6]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[6])) { /* and */
+    /* Register variable[6]: Result */
+    variable[6] = CALL_syntax_base___MMSrcLocalClass___formal_dict( variable[5] /*cla*/)( variable[5] /*cla*/) /*MMSrcLocalClass::formal_dict*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_abstract_collection___MapRead___has_key(variable[6])(variable[6],  variable[3] /*name*/) /*MapRead::has_key*/;
   }
-  variable[6] = variable[7];
-  variable[7] = variable[6];
-  if (!UNTAG_Bool(variable[7])) { /* or */
-    variable[7] = CALL_abstractmetamodel___MMLocalClass___global_properties( variable[5] /*cla*/)( variable[5] /*cla*/) /*MMLocalClass::global_properties*/;
-    variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[7] ==  NIT_NULL /*null*/) || ((variable[7] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[7])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[7], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[7])(variable[7],  NIT_NULL /*null*/) /*Object::==*/)))))));
-    variable[8] = variable[7];
-    if (UNTAG_Bool(variable[8])) { /* and */
-      variable[8] = CALL_abstractmetamodel___MMLocalClass___has_global_property_by_name( variable[5] /*cla*/)( variable[5] /*cla*/,  variable[3] /*name*/) /*MMLocalClass::has_global_property_by_name*/;
+  /* Register variable[6]: Result */
+  /* Ensure var variable[6]: Left 'or' operand*/
+  if (!UNTAG_Bool(variable[6])) { /* or */
+    /* Register variable[6]: Result */
+    variable[6] = CALL_abstractmetamodel___MMLocalClass___global_properties( variable[5] /*cla*/)( variable[5] /*cla*/) /*MMLocalClass::global_properties*/;
+    /* Register variable[6]: Result */
+    variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] ==  NIT_NULL /*null*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  NIT_NULL /*null*/) /*Object::==*/)))))));
+    /* Ensure var variable[6]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[6])) { /* and */
+      /* Register variable[6]: Result */
+      variable[6] = CALL_abstractmetamodel___MMLocalClass___has_global_property_by_name( variable[5] /*cla*/)( variable[5] /*cla*/,  variable[3] /*name*/) /*MMLocalClass::has_global_property_by_name*/;
     }
-    variable[7] = variable[8];
+    /* Register variable[6]: Result */
   }
-  variable[6] = variable[7];
+  /* Register variable[6]: Result */
   if (UNTAG_Bool(variable[6])) { /*if*/
-    variable[6] = variable[0];
-    variable[6] = CALL_parser_nodes___AType___n_id(variable[6])(variable[6]) /*AType::n_id*/;
-    variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-    variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Type error: "), TAG_Int(12)); /*new String*/
-    variable[9] = variable[8];
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[9]) /*AbstractArray::add*/;
-    variable[10] =  variable[3] /*name*/;
-    variable[10] = CALL_string___Object___to_s(variable[10])(variable[10]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[10]) /*AbstractArray::add*/;
-    variable[11] = NEW_String_string___String___with_native(BOX_NativeString(" is a formal type"), TAG_Int(17)); /*new String*/
-    variable[12] = variable[11];
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[12]) /*AbstractArray::add*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_parser_nodes___AType___n_id(variable[0])(variable[0]) /*AType::n_id*/;
+    variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[8]: Once String constant */
+    if (once_value_113 != NIT_NULL) variable[8] = once_value_113;
+    else {
+      variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Type error: "), TAG_Int(12)) /*new String*/;
+      once_value_113 = variable[8];
+    }
+    /* Register variable[8]: Result */
+    /* Ensure var variable[8]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+    variable[8] =  variable[3] /*name*/ /* Ensure var: super-string element*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[8]: Once String constant */
+    if (once_value_114 != NIT_NULL) variable[8] = once_value_114;
+    else {
+      variable[8] = NEW_String_string___String___with_native(BOX_NativeString(" is a formal type"), TAG_Int(17)) /*new String*/;
+      once_value_114 = variable[8];
+    }
+    /* Register variable[8]: Result */
+    /* Ensure var variable[8]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+    /* Register variable[7]: Result */
     variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
     CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[6], variable[7]) /*AbsSyntaxVisitor::error*/;
-    variable[6] = variable[0];
-    ATTR_syntax_base___AType____stype_cached(variable[6]) /*AType::_stype_cached*/ =  TAG_Bool(true);
+    ATTR_syntax_base___AType____stype_cached(variable[0]) /*AType::_stype_cached*/ =  TAG_Bool(true);
     variable[2] =  NIT_NULL /*null*/;
-    goto return_label60;
+    goto return_label112;
   }
+  /* Register variable[6]: Result */
   variable[6] = CALL_abstractmetamodel___MMModule___has_global_class_named( variable[4] /*mod*/)( variable[4] /*mod*/,  variable[3] /*name*/) /*MMModule::has_global_class_named*/;
   if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[6])))) { /*if*/
-    variable[6] = variable[0];
-    variable[6] = CALL_parser_nodes___AType___n_id(variable[6])(variable[6]) /*AType::n_id*/;
-    variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-    variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Type error: class "), TAG_Int(18)); /*new String*/
-    variable[9] = variable[8];
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[9]) /*AbstractArray::add*/;
-    variable[10] =  variable[3] /*name*/;
-    variable[10] = CALL_string___Object___to_s(variable[10])(variable[10]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[10]) /*AbstractArray::add*/;
-    variable[11] = NEW_String_string___String___with_native(BOX_NativeString(" not found in module "), TAG_Int(21)); /*new String*/
-    variable[12] = variable[11];
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[12]) /*AbstractArray::add*/;
-    variable[13] =  variable[4] /*mod*/;
-    variable[13] = CALL_string___Object___to_s(variable[13])(variable[13]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[13]) /*AbstractArray::add*/;
-    variable[14] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-    variable[15] = variable[14];
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[15]) /*AbstractArray::add*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_parser_nodes___AType___n_id(variable[0])(variable[0]) /*AType::n_id*/;
+    variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[8]: Once String constant */
+    if (once_value_115 != NIT_NULL) variable[8] = once_value_115;
+    else {
+      variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Type error: class "), TAG_Int(18)) /*new String*/;
+      once_value_115 = variable[8];
+    }
+    /* Register variable[8]: Result */
+    /* Ensure var variable[8]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+    variable[8] =  variable[3] /*name*/ /* Ensure var: super-string element*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[8]: Once String constant */
+    if (once_value_116 != NIT_NULL) variable[8] = once_value_116;
+    else {
+      variable[8] = NEW_String_string___String___with_native(BOX_NativeString(" not found in module "), TAG_Int(21)) /*new String*/;
+      once_value_116 = variable[8];
+    }
+    /* Register variable[8]: Result */
+    /* Ensure var variable[8]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+    variable[8] =  variable[4] /*mod*/ /* Ensure var: super-string element*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[8]: Once String constant */
+    if (once_value_117 != NIT_NULL) variable[8] = once_value_117;
+    else {
+      variable[8] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+      once_value_117 = variable[8];
+    }
+    /* Register variable[8]: Result */
+    /* Ensure var variable[8]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+    /* Register variable[7]: Result */
     variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
     CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[6], variable[7]) /*AbsSyntaxVisitor::error*/;
-    variable[6] = variable[0];
-    ATTR_syntax_base___AType____stype_cached(variable[6]) /*AType::_stype_cached*/ =  TAG_Bool(true);
+    ATTR_syntax_base___AType____stype_cached(variable[0]) /*AType::_stype_cached*/ =  TAG_Bool(true);
     variable[2] =  NIT_NULL /*null*/;
-    goto return_label60;
+    goto return_label112;
   }
+  /* Register variable[6]: Local variable */
+  /* Register variable[7]: Result */
   variable[7] = CALL_abstractmetamodel___MMModule___class_by_name( variable[4] /*mod*/)( variable[4] /*mod*/,  variable[3] /*name*/) /*MMModule::class_by_name*/;
   variable[6] = variable[7];
+  /* Register variable[7]: Result */
   variable[7] = CALL_abstractmetamodel___MMLocalClass___global( variable[6] /*local_class*/)( variable[6] /*local_class*/) /*MMLocalClass::global*/;
-  variable[8] = variable[0];
-  CALL_syntax_base___MMGlobalClass___check_visibility(variable[7])(variable[7],  variable[1] /*v*/, variable[8],  variable[4] /*mod*/) /*MMGlobalClass::check_visibility*/;
+  CALL_syntax_base___MMGlobalClass___check_visibility(variable[7])(variable[7],  variable[1] /*v*/, variable[0],  variable[4] /*mod*/) /*MMGlobalClass::check_visibility*/;
   variable[2] =  variable[6] /*local_class*/;
-  goto return_label60;
-  return_label60: while(false);
+  goto return_label112;
+  return_label112: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t syntax_base___AType___get_stype(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 569, LOCATE_syntax_base___AType___get_stype};
+  struct trace_t trace = {NULL, NULL, 618, LOCATE_syntax_base___AType___get_stype};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[4] = CALL_syntax_base___PType___get_unchecked_stype(variable[4])(variable[4],  variable[1] /*v*/) /*AType::get_unchecked_stype*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_syntax_base___PType___get_unchecked_stype(variable[0])(variable[0],  variable[1] /*v*/) /*AType::get_unchecked_stype*/;
   variable[3] = variable[4];
-  variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*t*/)( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  /* Register variable[4]: Result */
+  variable[4] = TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*t*/)( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    CALL_syntax_base___PType___check_conform(variable[4])(variable[4],  variable[1] /*v*/) /*AType::check_conform*/;
+    variable[2] =  NIT_NULL /*null*/;
+    goto return_label118;
   }
+  /* Register variable[4]: Result */
+  variable[4] = CALL_static_type___MMType___is_valid( variable[3] /*t*/)( variable[3] /*t*/) /*MMType::is_valid*/;
+  if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[4])))) { /*if*/
+    variable[2] =  NIT_NULL /*null*/;
+    goto return_label118;
+  }
+  CALL_syntax_base___PType___check_conform(variable[0])(variable[0],  variable[1] /*v*/) /*AType::check_conform*/;
   variable[2] =  variable[3] /*t*/;
-  goto return_label61;
-  return_label61: while(false);
+  goto return_label118;
+  return_label118: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 val_t syntax_base___AType___get_unchecked_stype(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 512, LOCATE_syntax_base___AType___get_unchecked_stype};
-  val_t variable[22];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 559, LOCATE_syntax_base___AType___get_unchecked_stype};
+      static val_t once_value_120 = NIT_NULL; /* Once value for string variable[8]*/
+      static val_t once_value_121 = NIT_NULL; /* Once value for string variable[8]*/
+      static val_t once_value_122 = NIT_NULL; /* Once value for string variable[8]*/
+      static val_t once_value_123 = NIT_NULL; /* Once value for string variable[8]*/
+      static val_t once_value_124 = NIT_NULL; /* Once value for string variable[8]*/
+      static val_t once_value_125 = NIT_NULL; /* Once value for string variable[8]*/
+    static val_t once_value_126 = NIT_NULL; /* Once value for string variable[10]*/
+    static val_t once_value_127 = NIT_NULL; /* Once value for string variable[10]*/
+    static val_t once_value_128 = NIT_NULL; /* Once value for string variable[10]*/
+    static val_t once_value_129 = NIT_NULL; /* Once value for string variable[10]*/
+  val_t variable[14];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_syntax_base___AType____stype_cached(variable[3]) /*AType::_stype_cached*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_syntax_base___AType____stype_cached(variable[0]) /*AType::_stype_cached*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = variable[0];
-    variable[3] = ATTR_syntax_base___AType____stype_cache(variable[3]) /*AType::_stype_cache*/;
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_syntax_base___AType____stype_cache(variable[0]) /*AType::_stype_cache*/;
     variable[2] = variable[3];
-    goto return_label62;
+    goto return_label119;
   }
-  variable[3] = variable[0];
-  ATTR_syntax_base___AType____stype_cached(variable[3]) /*AType::_stype_cached*/ =  TAG_Bool(true);
-  variable[4] = variable[0];
-  variable[4] = CALL_parser_nodes___AType___n_id(variable[4])(variable[4]) /*AType::n_id*/;
+  ATTR_syntax_base___AType____stype_cached(variable[0]) /*AType::_stype_cached*/ =  TAG_Bool(true);
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_parser_nodes___AType___n_id(variable[0])(variable[0]) /*AType::n_id*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_syntax_base___Token___to_symbol(variable[4])(variable[4]) /*Token::to_symbol*/;
   variable[3] = variable[4];
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
   variable[5] = CALL_syntax_base___AbsSyntaxVisitor___module( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
   variable[4] = variable[5];
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
   variable[6] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
   variable[5] = variable[6];
-  variable[6] = CALL_syntax_base___MMSrcLocalClass___formal_dict( variable[5] /*cla*/)( variable[5] /*cla*/) /*MMSrcLocalClass::formal_dict*/;
-  variable[6] = CALL_abstract_collection___Map___has_key(variable[6])(variable[6],  variable[3] /*name*/) /*Map::has_key*/;
-  if (UNTAG_Bool(variable[6])) { /*if*/
-    variable[6] = variable[0];
-    variable[6] = CALL_parser_nodes___AType___n_types(variable[6])(variable[6]) /*AType::n_types*/;
-    variable[6] = CALL_abstract_collection___Collection___length(variable[6])(variable[6]) /*List::length*/;
-    variable[6] = TAG_Bool(UNTAG_Int(variable[6])>UNTAG_Int( TAG_Int(0)));
-    if (UNTAG_Bool(variable[6])) { /*if*/
-      variable[6] = variable[0];
-      variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-      variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Type error: formal type "), TAG_Int(24)); /*new String*/
-      variable[9] = variable[8];
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[9]) /*AbstractArray::add*/;
-      variable[10] =  variable[3] /*name*/;
-      variable[10] = CALL_string___Object___to_s(variable[10])(variable[10]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[10]) /*AbstractArray::add*/;
-      variable[11] = NEW_String_string___String___with_native(BOX_NativeString(" cannot have formal parameters."), TAG_Int(31)); /*new String*/
-      variable[12] = variable[11];
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[12]) /*AbstractArray::add*/;
+  /* Register variable[6]: Local variable */
+  /*variable[6] is variable t*/
+  /* Register variable[7]: Result */
+  variable[7] = CALL_syntax_base___MMSrcLocalClass___formal_dict( variable[5] /*cla*/)( variable[5] /*cla*/) /*MMSrcLocalClass::formal_dict*/;
+  /* Register variable[7]: Result */
+  variable[7] = CALL_abstract_collection___MapRead___has_key(variable[7])(variable[7],  variable[3] /*name*/) /*MapRead::has_key*/;
+  if (UNTAG_Bool(variable[7])) { /*if*/
+    /* Register variable[7]: Result */
+    variable[7] = CALL_parser_nodes___AType___n_types(variable[0])(variable[0]) /*AType::n_types*/;
+    /* Register variable[7]: Result */
+    variable[7] = CALL_abstract_collection___Collection___length(variable[7])(variable[7]) /*List::length*/;
+    /* Register variable[7]: Result */
+    variable[7] = TAG_Bool(UNTAG_Int(variable[7])>UNTAG_Int( TAG_Int(0)));
+    if (UNTAG_Bool(variable[7])) { /*if*/
+      variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[8]: Once String constant */
+      if (once_value_120 != NIT_NULL) variable[8] = once_value_120;
+      else {
+        variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Type error: formal type "), TAG_Int(24)) /*new String*/;
+        once_value_120 = variable[8];
+      }
+      /* Register variable[8]: Result */
+      /* Ensure var variable[8]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+      variable[8] =  variable[3] /*name*/ /* Ensure var: super-string element*/;
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[8]: Once String constant */
+      if (once_value_121 != NIT_NULL) variable[8] = once_value_121;
+      else {
+        variable[8] = NEW_String_string___String___with_native(BOX_NativeString(" cannot have formal parameters."), TAG_Int(31)) /*new String*/;
+        once_value_121 = variable[8];
+      }
+      /* Register variable[8]: Result */
+      /* Ensure var variable[8]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+      /* Register variable[7]: Result */
       variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
-      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[6], variable[7]) /*AbsSyntaxVisitor::error*/;
+      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[7]) /*AbsSyntaxVisitor::error*/;
       variable[2] =  NIT_NULL /*null*/;
-      goto return_label62;
+      goto return_label119;
     }
+    /* Register variable[7]: Result */
     variable[7] = CALL_syntax_base___MMSrcLocalClass___formal_dict( variable[5] /*cla*/)( variable[5] /*cla*/) /*MMSrcLocalClass::formal_dict*/;
-    variable[7] = CALL_abstract_collection___Map_____bra(variable[7])(variable[7],  variable[3] /*name*/) /*Map::[]*/;
-    variable[6] = variable[7];
-    variable[7] = variable[0];
-    ATTR_syntax_base___AType____stype_cache(variable[7]) /*AType::_stype_cache*/ =  variable[6] /*formal*/;
-    variable[2] =  variable[6] /*formal*/;
-    goto return_label62;
+    /* Register variable[7]: Result */
+    variable[7] = CALL_abstract_collection___MapRead_____bra(variable[7])(variable[7],  variable[3] /*name*/) /*MapRead::[]*/;
+    variable[6] = variable[7] /*t=*/;
+    /* Register variable[7]: Result */
+    variable[7] = CALL_parser_nodes___AType___n_kwnullable(variable[0])(variable[0]) /*AType::n_kwnullable*/;
+    /* Register variable[7]: Result */
+    variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[7] ==  NIT_NULL /*null*/) || ((variable[7] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[7])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[7], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[7])(variable[7],  NIT_NULL /*null*/) /*Object::==*/)))))));
+    if (UNTAG_Bool(variable[7])) { /*if*/
+      /* Register variable[7]: Result */
+      variable[7] = CALL_static_type___MMType___as_nullable( variable[6] /*t*/)( variable[6] /*t*/) /*MMType::as_nullable*/;
+      variable[6] = variable[7] /*t=*/;
+    }
+    ATTR_syntax_base___AType____stype_cache(variable[0]) /*AType::_stype_cache*/ =  variable[6] /*t*/;
+    variable[2] =  variable[6] /*t*/;
+    goto return_label119;
   }
-  variable[6] = CALL_abstractmetamodel___MMLocalClass___global_properties( variable[5] /*cla*/)( variable[5] /*cla*/) /*MMLocalClass::global_properties*/;
-  variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] ==  NIT_NULL /*null*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  variable[7] = variable[6];
+  /* Register variable[7]: Result */
+  variable[7] = CALL_abstractmetamodel___MMLocalClass___global_properties( variable[5] /*cla*/)( variable[5] /*cla*/) /*MMLocalClass::global_properties*/;
+  /* Register variable[7]: Result */
+  variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[7] ==  NIT_NULL /*null*/) || ((variable[7] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[7])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[7], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[7])(variable[7],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  /* Ensure var variable[7]: Left 'and' operand*/
   if (UNTAG_Bool(variable[7])) { /* and */
+    /* Register variable[7]: Result */
     variable[7] = CALL_abstractmetamodel___MMLocalClass___has_global_property_by_name( variable[5] /*cla*/)( variable[5] /*cla*/,  variable[3] /*name*/) /*MMLocalClass::has_global_property_by_name*/;
   }
-  variable[6] = variable[7];
-  if (UNTAG_Bool(variable[6])) { /*if*/
-    variable[6] = variable[0];
-    variable[6] = CALL_parser_nodes___AType___n_types(variable[6])(variable[6]) /*AType::n_types*/;
-    variable[6] = CALL_abstract_collection___Collection___length(variable[6])(variable[6]) /*List::length*/;
-    variable[6] = TAG_Bool(UNTAG_Int(variable[6])>UNTAG_Int( TAG_Int(0)));
-    if (UNTAG_Bool(variable[6])) { /*if*/
-      variable[6] = variable[0];
-      variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-      variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Type error: formal type "), TAG_Int(24)); /*new String*/
-      variable[9] = variable[8];
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[9]) /*AbstractArray::add*/;
-      variable[10] =  variable[3] /*name*/;
-      variable[10] = CALL_string___Object___to_s(variable[10])(variable[10]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[10]) /*AbstractArray::add*/;
-      variable[11] = NEW_String_string___String___with_native(BOX_NativeString(" cannot have formal parameters."), TAG_Int(31)); /*new String*/
-      variable[12] = variable[11];
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[12]) /*AbstractArray::add*/;
+  /* Register variable[7]: Result */
+  if (UNTAG_Bool(variable[7])) { /*if*/
+    /* Register variable[7]: Result */
+    variable[7] = CALL_parser_nodes___AType___n_types(variable[0])(variable[0]) /*AType::n_types*/;
+    /* Register variable[7]: Result */
+    variable[7] = CALL_abstract_collection___Collection___length(variable[7])(variable[7]) /*List::length*/;
+    /* Register variable[7]: Result */
+    variable[7] = TAG_Bool(UNTAG_Int(variable[7])>UNTAG_Int( TAG_Int(0)));
+    if (UNTAG_Bool(variable[7])) { /*if*/
+      variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[8]: Once String constant */
+      if (once_value_122 != NIT_NULL) variable[8] = once_value_122;
+      else {
+        variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Type error: formal type "), TAG_Int(24)) /*new String*/;
+        once_value_122 = variable[8];
+      }
+      /* Register variable[8]: Result */
+      /* Ensure var variable[8]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+      variable[8] =  variable[3] /*name*/ /* Ensure var: super-string element*/;
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[8]: Once String constant */
+      if (once_value_123 != NIT_NULL) variable[8] = once_value_123;
+      else {
+        variable[8] = NEW_String_string___String___with_native(BOX_NativeString(" cannot have formal parameters."), TAG_Int(31)) /*new String*/;
+        once_value_123 = variable[8];
+      }
+      /* Register variable[8]: Result */
+      /* Ensure var variable[8]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+      /* Register variable[7]: Result */
       variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
-      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[6], variable[7]) /*AbsSyntaxVisitor::error*/;
+      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[7]) /*AbsSyntaxVisitor::error*/;
       variable[2] =  NIT_NULL /*null*/;
-      goto return_label62;
+      goto return_label119;
     }
+    /* Register variable[7]: Result */
     variable[7] = CALL_static_type___MMLocalClass___get_type( variable[5] /*cla*/)( variable[5] /*cla*/) /*MMLocalClass::get_type*/;
+    /* Register variable[7]: Result */
     variable[7] = CALL_static_type___MMType___local_class(variable[7])(variable[7]) /*MMType::local_class*/;
+    /* Register variable[7]: Result */
     variable[7] = CALL_virtualtype___MMLocalClass___select_virtual_type(variable[7])(variable[7],  variable[3] /*name*/) /*MMLocalClass::select_virtual_type*/;
+    /* Register variable[8]: Result */
     variable[8] = CALL_static_type___MMLocalClass___get_type( variable[5] /*cla*/)( variable[5] /*cla*/) /*MMLocalClass::get_type*/;
+    /* Register variable[7]: Result */
     variable[7] = CALL_virtualtype___MMTypeProperty___stype_for(variable[7])(variable[7], variable[8]) /*MMTypeProperty::stype_for*/;
-    variable[6] = variable[7];
+    variable[6] = variable[7] /*t=*/;
+    /* Register variable[7]: Result */
     variable[7] = TAG_Bool(( variable[6] /*t*/ ==  NIT_NULL /*null*/) || (( variable[6] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[6] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[6] /*t*/)( variable[6] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))));
     if (UNTAG_Bool(variable[7])) { /*if*/
-      variable[7] = variable[0];
-      variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-      variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Type error: circular definition in formal type "), TAG_Int(47)); /*new String*/
-      variable[10] = variable[9];
-      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[10]) /*AbstractArray::add*/;
-      variable[11] =  variable[3] /*name*/;
-      variable[11] = CALL_string___Object___to_s(variable[11])(variable[11]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[11]) /*AbstractArray::add*/;
-      variable[12] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-      variable[13] = variable[12];
-      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[13]) /*AbstractArray::add*/;
-      variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
-      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[7], variable[8]) /*AbsSyntaxVisitor::error*/;
+      variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[8]: Once String constant */
+      if (once_value_124 != NIT_NULL) variable[8] = once_value_124;
+      else {
+        variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Type error: circular definition in formal type "), TAG_Int(47)) /*new String*/;
+        once_value_124 = variable[8];
+      }
+      /* Register variable[8]: Result */
+      /* Ensure var variable[8]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+      variable[8] =  variable[3] /*name*/ /* Ensure var: super-string element*/;
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[8]: Once String constant */
+      if (once_value_125 != NIT_NULL) variable[8] = once_value_125;
+      else {
+        variable[8] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+        once_value_125 = variable[8];
+      }
+      /* Register variable[8]: Result */
+      /* Ensure var variable[8]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+      /* Register variable[7]: Result */
+      variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
+      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[7]) /*AbsSyntaxVisitor::error*/;
       variable[2] =  NIT_NULL /*null*/;
-      goto return_label62;
+      goto return_label119;
     }
-    variable[7] = variable[0];
-    ATTR_syntax_base___AType____stype_cache(variable[7]) /*AType::_stype_cache*/ =  variable[6] /*t*/;
+    /* Register variable[7]: Result */
+    variable[7] = CALL_parser_nodes___AType___n_kwnullable(variable[0])(variable[0]) /*AType::n_kwnullable*/;
+    /* Register variable[7]: Result */
+    variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[7] ==  NIT_NULL /*null*/) || ((variable[7] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[7])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[7], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[7])(variable[7],  NIT_NULL /*null*/) /*Object::==*/)))))));
+    if (UNTAG_Bool(variable[7])) { /*if*/
+      /* Register variable[7]: Result */
+      variable[7] = CALL_static_type___MMType___as_nullable( variable[6] /*t*/)( variable[6] /*t*/) /*MMType::as_nullable*/;
+      variable[6] = variable[7] /*t=*/;
+    }
+    ATTR_syntax_base___AType____stype_cache(variable[0]) /*AType::_stype_cache*/ =  variable[6] /*t*/;
     variable[2] =  variable[6] /*t*/;
-    goto return_label62;
+    goto return_label119;
   }
-  variable[7] = variable[0];
-  variable[7] = CALL_syntax_base___PType___get_local_class(variable[7])(variable[7],  variable[1] /*v*/) /*AType::get_local_class*/;
-  variable[6] = variable[7];
-  variable[7] = TAG_Bool(( variable[6] /*local_class*/ ==  NIT_NULL /*null*/) || (( variable[6] /*local_class*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[6] /*local_class*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*local_class*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[6] /*local_class*/)( variable[6] /*local_class*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable[7])) { /*if*/
-    variable[2] =  NIT_NULL /*null*/;
-    goto return_label62;
-  }
-  variable[8] = variable[0];
-  variable[8] = CALL_parser_nodes___AType___n_types(variable[8])(variable[8]) /*AType::n_types*/;
-  variable[8] = CALL_abstract_collection___Collection___length(variable[8])(variable[8]) /*List::length*/;
+  /* Register variable[7]: Local variable */
+  /* Register variable[8]: Result */
+  variable[8] = CALL_syntax_base___PType___get_local_class(variable[0])(variable[0],  variable[1] /*v*/) /*AType::get_local_class*/;
   variable[7] = variable[8];
-  variable[8] = CALL_abstractmetamodel___MMLocalClass___arity( variable[6] /*local_class*/)( variable[6] /*local_class*/) /*MMLocalClass::arity*/;
-  variable[8] = TAG_Bool((variable[8])!=( variable[7] /*arity*/));
+  /* Register variable[8]: Result */
+  variable[8] = TAG_Bool(( variable[7] /*local_class*/ ==  NIT_NULL /*null*/) || (( variable[7] /*local_class*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[7] /*local_class*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[7] /*local_class*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[7] /*local_class*/)( variable[7] /*local_class*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[8])) { /*if*/
-    variable[8] = variable[0];
-    variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(7)); /*new Array[String]*/
-    variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Type error: '"), TAG_Int(13)); /*new String*/
-    variable[11] = variable[10];
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[11]) /*AbstractArray::add*/;
-    variable[12] =  variable[6] /*local_class*/;
-    variable[12] = CALL_string___Object___to_s(variable[12])(variable[12]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[12]) /*AbstractArray::add*/;
-    variable[13] = NEW_String_string___String___with_native(BOX_NativeString("' has "), TAG_Int(6)); /*new String*/
-    variable[14] = variable[13];
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[14]) /*AbstractArray::add*/;
-    variable[15] = CALL_abstractmetamodel___MMLocalClass___arity( variable[6] /*local_class*/)( variable[6] /*local_class*/) /*MMLocalClass::arity*/;
-    variable[16] = variable[15];
-    variable[16] = CALL_string___Object___to_s(variable[16])(variable[16]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[16]) /*AbstractArray::add*/;
-    variable[17] = NEW_String_string___String___with_native(BOX_NativeString(" parameters which differs from the "), TAG_Int(35)); /*new String*/
-    variable[18] = variable[17];
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[18]) /*AbstractArray::add*/;
-    variable[19] =  variable[7] /*arity*/;
-    variable[19] = CALL_string___Object___to_s(variable[19])(variable[19]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[19]) /*AbstractArray::add*/;
-    variable[20] = NEW_String_string___String___with_native(BOX_NativeString(" params."), TAG_Int(8)); /*new String*/
-    variable[21] = variable[20];
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[21]) /*AbstractArray::add*/;
-    variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
     variable[2] =  NIT_NULL /*null*/;
-    goto return_label62;
+    goto return_label119;
   }
-  variable[8] = TAG_Bool(UNTAG_Int( variable[7] /*arity*/)>UNTAG_Int( TAG_Int(0)));
-  if (UNTAG_Bool(variable[8])) { /*if*/
-    variable[9] = NEW_Array_array___Array___init(); /*new Array[MMType]*/
-    variable[8] = variable[9];
-    variable[9] = variable[0];
-    variable[9] = CALL_parser_nodes___AType___n_types(variable[9])(variable[9]) /*AType::n_types*/;
-    variable[9] = CALL_abstract_collection___Collection___iterator(variable[9])(variable[9]) /*List::iterator*/;
-    while (true) { /*for*/
-      variable[10] = CALL_abstract_collection___Iterator___is_ok(variable[9])(variable[9]) /*ListIterator::is_ok*/;
-      if (!UNTAG_Bool(variable[10])) break; /*for*/
-      variable[10] = CALL_abstract_collection___Iterator___item(variable[9])(variable[9]) /*ListIterator::item*/;
-      variable[11] = variable[10];
-      variable[12] = CALL_syntax_base___PType___get_unchecked_stype( variable[11] /*p*/)( variable[11] /*p*/,  variable[1] /*v*/) /*PType::get_unchecked_stype*/;
-      CALL_abstract_collection___SimpleCollection___add( variable[8] /*tab*/)( variable[8] /*tab*/, variable[12]) /*AbstractArray::add*/;
-      continue_63: while(0);
-      CALL_abstract_collection___Iterator___next(variable[9])(variable[9]) /*ListIterator::next*/;
+  /* Register variable[8]: Local variable */
+  /* Register variable[9]: Result */
+  variable[9] = CALL_parser_nodes___AType___n_types(variable[0])(variable[0]) /*AType::n_types*/;
+  /* Register variable[9]: Result */
+  variable[9] = CALL_abstract_collection___Collection___length(variable[9])(variable[9]) /*List::length*/;
+  variable[8] = variable[9];
+  /* Register variable[9]: Result */
+  variable[9] = CALL_abstractmetamodel___MMLocalClass___arity( variable[7] /*local_class*/)( variable[7] /*local_class*/) /*MMLocalClass::arity*/;
+  /* Register variable[9]: Result */
+  variable[9] = TAG_Bool((variable[9])!=( variable[8] /*arity*/));
+  if (UNTAG_Bool(variable[9])) { /*if*/
+    variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(7)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[10]: Once String constant */
+    if (once_value_126 != NIT_NULL) variable[10] = once_value_126;
+    else {
+      variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Type error: '"), TAG_Int(13)) /*new String*/;
+      once_value_126 = variable[10];
     }
-    break_63: while(0);
-    variable[10] = CALL_genericity___MMLocalClass___get_instantiate_type( variable[6] /*local_class*/)( variable[6] /*local_class*/,  variable[8] /*tab*/) /*MMLocalClass::get_instantiate_type*/;
-    variable[9] = variable[10];
-    variable[10] = variable[0];
-    ATTR_syntax_base___AType____stype_cache(variable[10]) /*AType::_stype_cache*/ =  variable[9] /*t*/;
-    variable[2] =  variable[9] /*t*/;
-    goto return_label62;
-  } else { /*if*/
-    variable[9] = CALL_static_type___MMLocalClass___get_type( variable[6] /*local_class*/)( variable[6] /*local_class*/) /*MMLocalClass::get_type*/;
-    variable[8] = variable[9];
-    variable[9] = variable[0];
-    ATTR_syntax_base___AType____stype_cache(variable[9]) /*AType::_stype_cache*/ =  variable[8] /*t*/;
-    variable[2] =  variable[8] /*t*/;
-    goto return_label62;
+    /* Register variable[10]: Result */
+    /* Ensure var variable[10]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[10]) /*AbstractArray::add*/;
+    variable[10] =  variable[7] /*local_class*/ /* Ensure var: super-string element*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], CALL_string___Object___to_s(variable[10])(variable[10]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[10]: Once String constant */
+    if (once_value_127 != NIT_NULL) variable[10] = once_value_127;
+    else {
+      variable[10] = NEW_String_string___String___with_native(BOX_NativeString("' has "), TAG_Int(6)) /*new String*/;
+      once_value_127 = variable[10];
+    }
+    /* Register variable[10]: Result */
+    /* Ensure var variable[10]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[10]) /*AbstractArray::add*/;
+    /* Register variable[10]: Result */
+    variable[10] = CALL_abstractmetamodel___MMLocalClass___arity( variable[7] /*local_class*/)( variable[7] /*local_class*/) /*MMLocalClass::arity*/;
+    /* Ensure var variable[10]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], CALL_string___Object___to_s(variable[10])(variable[10]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[10]: Once String constant */
+    if (once_value_128 != NIT_NULL) variable[10] = once_value_128;
+    else {
+      variable[10] = NEW_String_string___String___with_native(BOX_NativeString(" parameters which differs from the "), TAG_Int(35)) /*new String*/;
+      once_value_128 = variable[10];
+    }
+    /* Register variable[10]: Result */
+    /* Ensure var variable[10]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[10]) /*AbstractArray::add*/;
+    variable[10] =  variable[8] /*arity*/ /* Ensure var: super-string element*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], CALL_string___Object___to_s(variable[10])(variable[10]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[10]: Once String constant */
+    if (once_value_129 != NIT_NULL) variable[10] = once_value_129;
+    else {
+      variable[10] = NEW_String_string___String___with_native(BOX_NativeString(" params."), TAG_Int(8)) /*new String*/;
+      once_value_129 = variable[10];
+    }
+    /* Register variable[10]: Result */
+    /* Ensure var variable[10]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[10]) /*AbstractArray::add*/;
+    /* Register variable[9]: Result */
+    variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
+    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[9]) /*AbsSyntaxVisitor::error*/;
+    variable[2] =  NIT_NULL /*null*/;
+    goto return_label119;
   }
-  return_label62: while(false);
+  /* Register variable[9]: Result */
+  variable[9] = TAG_Bool(UNTAG_Int( variable[8] /*arity*/)>UNTAG_Int( TAG_Int(0)));
+  if (UNTAG_Bool(variable[9])) { /*if*/
+    /* Register variable[9]: Local variable */
+    /* Register variable[10]: Result */
+    variable[10] = NEW_Array_array___Array___init() /*new Array[MMType]*/;
+    variable[9] = variable[10];
+    /* Register variable[10]: Result */
+    variable[10] = CALL_parser_nodes___AType___n_types(variable[0])(variable[0]) /*AType::n_types*/;
+    /* Register variable[10]: For iterator */
+    variable[10] = CALL_abstract_collection___Collection___iterator(variable[10])(variable[10]) /*List::iterator*/;
+    while (true) { /*for*/
+      /* Register variable[11]: For 'is_ok' result */
+      variable[11] = CALL_abstract_collection___Iterator___is_ok(variable[10])(variable[10]) /*ListIterator::is_ok*/;
+      if (!UNTAG_Bool(variable[11])) break; /*for*/
+      variable[11] = CALL_abstract_collection___Iterator___item(variable[10])(variable[10]) /*ListIterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[12]: Local variable */
+      variable[12] = variable[11];
+      /* Register variable[13]: Result */
+      variable[13] = CALL_syntax_base___PType___get_unchecked_stype( variable[12] /*p*/)( variable[12] /*p*/,  variable[1] /*v*/) /*PType::get_unchecked_stype*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[9] /*tab*/)( variable[9] /*tab*/, variable[13]) /*AbstractArray::add*/;
+      continue_130: while(0);
+      CALL_abstract_collection___Iterator___next(variable[10])(variable[10]) /*ListIterator::next*/;
+    }
+    break_130: while(0);
+    /* Register variable[10]: Result */
+    variable[10] = CALL_genericity___MMLocalClass___get_instantiate_type( variable[7] /*local_class*/)( variable[7] /*local_class*/,  variable[9] /*tab*/) /*MMLocalClass::get_instantiate_type*/;
+    variable[6] = variable[10] /*t=*/;
+  } else { /*if*/
+    /* Register variable[9]: Result */
+    variable[9] = CALL_static_type___MMLocalClass___get_type( variable[7] /*local_class*/)( variable[7] /*local_class*/) /*MMLocalClass::get_type*/;
+    variable[6] = variable[9] /*t=*/;
+  }
+  /* Register variable[9]: Result */
+  variable[9] = CALL_parser_nodes___AType___n_kwnullable(variable[0])(variable[0]) /*AType::n_kwnullable*/;
+  /* Register variable[9]: Result */
+  variable[9] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[9] ==  NIT_NULL /*null*/) || ((variable[9] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[9])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[9], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[9])(variable[9],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  if (UNTAG_Bool(variable[9])) { /*if*/
+    /* Register variable[9]: Result */
+    variable[9] = CALL_static_type___MMType___as_nullable( variable[6] /*t*/)( variable[6] /*t*/) /*MMType::as_nullable*/;
+    variable[6] = variable[9] /*t=*/;
+  }
+  ATTR_syntax_base___AType____stype_cache(variable[0]) /*AType::_stype_cache*/ =  variable[6] /*t*/;
+  variable[2] =  variable[6] /*t*/;
+  goto return_label119;
+  return_label119: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 void syntax_base___AType___check_conform(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 576, LOCATE_syntax_base___AType___check_conform};
-  val_t variable[13];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 627, LOCATE_syntax_base___AType___check_conform};
+  val_t variable[14];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[4] = CALL_syntax_base___PType___get_unchecked_stype(variable[4])(variable[4],  variable[1] /*v*/) /*AType::get_unchecked_stype*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_syntax_base___PType___get_unchecked_stype(variable[0])(variable[0],  variable[1] /*v*/) /*AType::get_unchecked_stype*/;
   variable[3] = variable[4];
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(( variable[3] /*st*/ ==  NIT_NULL /*null*/) || (( variable[3] /*st*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*st*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*st*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*st*/)( variable[3] /*st*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    goto return_label64;
+    goto return_label131;
   }
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
   variable[5] = CALL_static_type___MMType___local_class( variable[3] /*st*/)( variable[3] /*st*/) /*MMType::local_class*/;
   variable[4] = variable[5];
-  variable[6] = variable[0];
-  variable[6] = CALL_parser_nodes___AType___n_types(variable[6])(variable[6]) /*AType::n_types*/;
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
+  variable[6] = CALL_parser_nodes___AType___n_types(variable[0])(variable[0]) /*AType::n_types*/;
+  /* Register variable[6]: Result */
   variable[6] = CALL_abstract_collection___Collection___length(variable[6])(variable[6]) /*List::length*/;
   variable[5] = variable[6];
+  /* Register variable[6]: Result */
   variable[6] = TAG_Bool(UNTAG_Int( variable[5] /*arity*/)>UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[6])) { /*if*/
-    variable[6] = NEW_Range_range___Range___without_last( TAG_Int(0),  variable[5] /*arity*/); /*new Range[Int]*/
+    /* Register variable[6]: Result */
+    variable[6] = NEW_Range_range___Range___without_last( TAG_Int(0),  variable[5] /*arity*/) /*new Range[Int]*/;
+    /* Register variable[6]: For iterator */
     variable[6] = CALL_abstract_collection___Collection___iterator(variable[6])(variable[6]) /*Range::iterator*/;
     while (true) { /*for*/
+      /* Register variable[7]: For 'is_ok' result */
       variable[7] = CALL_abstract_collection___Iterator___is_ok(variable[6])(variable[6]) /*Iterator::is_ok*/;
       if (!UNTAG_Bool(variable[7])) break; /*for*/
-      variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*Iterator::item*/;
+      variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*Iterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[8]: Local variable */
       variable[8] = variable[7];
-      variable[10] = variable[0];
-      variable[10] = CALL_parser_nodes___AType___n_types(variable[10])(variable[10]) /*AType::n_types*/;
-      variable[10] = CALL_abstract_collection___Map_____bra(variable[10])(variable[10],  variable[8] /*i*/) /*List::[]*/;
+      /* Register variable[9]: Local variable */
+      /* Register variable[10]: Result */
+      variable[10] = CALL_parser_nodes___AType___n_types(variable[0])(variable[0]) /*AType::n_types*/;
+      /* Register variable[10]: Result */
+      variable[10] = CALL_abstract_collection___MapRead_____bra(variable[10])(variable[10],  variable[8] /*i*/) /*List::[]*/;
       variable[9] = variable[10];
+      /* Register variable[10]: Local variable */
+      /* Register variable[11]: Result */
       variable[11] = CALL_syntax_base___PType___get_stype( variable[9] /*p*/)( variable[9] /*p*/,  variable[1] /*v*/) /*PType::get_stype*/;
       variable[10] = variable[11];
+      /* Register variable[11]: Local variable */
+      /* Register variable[12]: Result */
       variable[12] = CALL_genericity___MMLocalClass___get_formal( variable[4] /*local_class*/)( variable[4] /*local_class*/,  variable[8] /*i*/) /*MMLocalClass::get_formal*/;
-      variable[12] = CALL_type_formal___MMTypeFormal___bound(variable[12])(variable[12]) /*MMTypeFormal::bound*/;
       variable[11] = variable[12];
-      variable[12] = TAG_Bool(( variable[11] /*bt*/ ==  NIT_NULL /*null*/) || (( variable[11] /*bt*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[11] /*bt*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[11] /*bt*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[11] /*bt*/)( variable[11] /*bt*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-      if (UNTAG_Bool(variable[12])) { /*if*/
-        goto return_label64;
+      /* Register variable[12]: Result */
+      variable[12] = CALL_static_type___MMType___is_valid( variable[11] /*b*/)( variable[11] /*b*/) /*MMTypeFormal::is_valid*/;
+      if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[12])))) { /*if*/
+        goto return_label131;
       }
-      variable[12] = CALL_static_type___MMType___adapt_to( variable[11] /*bt*/)( variable[11] /*bt*/,  variable[3] /*st*/) /*MMType::adapt_to*/;
-      variable[11] = variable[12] /*bt=*/;
-      CALL_syntax_base___AbsSyntaxVisitor___check_conform( variable[1] /*v*/)( variable[1] /*v*/,  variable[9] /*p*/,  variable[10] /*pt*/,  variable[11] /*bt*/) /*AbsSyntaxVisitor::check_conform*/;
-      continue_65: while(0);
+      /* Register variable[12]: Local variable */
+      /* Register variable[13]: Result */
+      variable[13] = CALL_type_formal___MMTypeFormal___bound( variable[11] /*b*/)( variable[11] /*b*/) /*MMTypeFormal::bound*/;
+      variable[12] = variable[13];
+      /* Register variable[13]: Result */
+      variable[13] = CALL_static_type___MMType___adapt_to( variable[12] /*bt*/)( variable[12] /*bt*/,  variable[3] /*st*/) /*MMType::adapt_to*/;
+      variable[12] = variable[13] /*bt=*/;
+      CALL_syntax_base___AbsSyntaxVisitor___check_conform( variable[1] /*v*/)( variable[1] /*v*/,  variable[9] /*p*/,  variable[10] /*pt*/,  variable[12] /*bt*/) /*AbsSyntaxVisitor::check_conform*/;
+      continue_132: while(0);
       CALL_abstract_collection___Iterator___next(variable[6])(variable[6]) /*Iterator::next*/;
     }
-    break_65: while(0);
+    break_132: while(0);
   }
-  return_label64: while(false);
+  return_label131: while(false);
   tracehead = trace.prev;
   return;
 }
-val_t syntax_base___PExpr___stype(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 596, LOCATE_syntax_base___PExpr___stype};
+val_t syntax_base___PExpr___is_typed(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 648, LOCATE_syntax_base___PExpr___is_typed};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 596);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 648);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t syntax_base___PExpr___is_statement(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 653, LOCATE_syntax_base___PExpr___is_statement};
+  val_t *variable = NULL;
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 653);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t syntax_base___PExpr___stype(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 657, LOCATE_syntax_base___PExpr___stype};
+  val_t *variable = NULL;
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_syntax_base;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_syntax_base, 657);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t syntax_base___AVardeclExpr___variable(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 602, LOCATE_syntax_base___AVardeclExpr___variable};
+  struct trace_t trace = {NULL, NULL, 663, LOCATE_syntax_base___AVardeclExpr___variable};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
   return ATTR_syntax_base___AVardeclExpr____variable( self) /*AVardeclExpr::_variable*/;
 }
 void syntax_base___AVardeclExpr___variable__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 602, LOCATE_syntax_base___AVardeclExpr___variable__eq};
+  struct trace_t trace = {NULL, NULL, 663, LOCATE_syntax_base___AVardeclExpr___variable__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   ATTR_syntax_base___AVardeclExpr____variable( self) /*AVardeclExpr::_variable*/ =  param0;
   tracehead = trace.prev;
   return;
 }
-val_t syntax_base___AForVardeclExpr___variable(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 607, LOCATE_syntax_base___AForVardeclExpr___variable};
+val_t syntax_base___AForExpr___variable(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 668, LOCATE_syntax_base___AForExpr___variable};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
-  return ATTR_syntax_base___AForVardeclExpr____variable( self) /*AForVardeclExpr::_variable*/;
+  return ATTR_syntax_base___AForExpr____variable( self) /*AForExpr::_variable*/;
 }
-void syntax_base___AForVardeclExpr___variable__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 607, LOCATE_syntax_base___AForVardeclExpr___variable__eq};
+void syntax_base___AForExpr___variable__eq(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 668, LOCATE_syntax_base___AForExpr___variable__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
-  ATTR_syntax_base___AForVardeclExpr____variable( self) /*AForVardeclExpr::_variable*/ =  param0;
+  ATTR_syntax_base___AForExpr____variable( self) /*AForExpr::_variable*/ =  param0;
   tracehead = trace.prev;
   return;
 }
 val_t syntax_base___ASelfExpr___variable(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 612, LOCATE_syntax_base___ASelfExpr___variable};
+  struct trace_t trace = {NULL, NULL, 673, LOCATE_syntax_base___ASelfExpr___variable};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
   return ATTR_syntax_base___ASelfExpr____variable( self) /*ASelfExpr::_variable*/;
 }
 void syntax_base___ASelfExpr___variable__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 612, LOCATE_syntax_base___ASelfExpr___variable__eq};
+  struct trace_t trace = {NULL, NULL, 673, LOCATE_syntax_base___ASelfExpr___variable__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   ATTR_syntax_base___ASelfExpr____variable( self) /*ASelfExpr::_variable*/ =  param0;
@@ -1962,18 +2986,18 @@ void syntax_base___ASelfExpr___variable__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t syntax_base___AVarFormExpr___variable(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 617, LOCATE_syntax_base___AVarFormExpr___variable};
+  struct trace_t trace = {NULL, NULL, 678, LOCATE_syntax_base___AVarFormExpr___variable};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
   return ATTR_syntax_base___AVarFormExpr____variable( self) /*AVarFormExpr::_variable*/;
 }
 void syntax_base___AVarFormExpr___variable__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 617, LOCATE_syntax_base___AVarFormExpr___variable__eq};
+  struct trace_t trace = {NULL, NULL, 678, LOCATE_syntax_base___AVarFormExpr___variable__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   ATTR_syntax_base___AVarFormExpr____variable( self) /*AVarFormExpr::_variable*/ =  param0;
@@ -1981,18 +3005,18 @@ void syntax_base___AVarFormExpr___variable__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t syntax_base___AClosureCallExpr___variable(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 622, LOCATE_syntax_base___AClosureCallExpr___variable};
+  struct trace_t trace = {NULL, NULL, 683, LOCATE_syntax_base___AClosureCallExpr___variable};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
   return ATTR_syntax_base___AClosureCallExpr____variable( self) /*AClosureCallExpr::_variable*/;
 }
 void syntax_base___AClosureCallExpr___variable__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 622, LOCATE_syntax_base___AClosureCallExpr___variable__eq};
+  struct trace_t trace = {NULL, NULL, 683, LOCATE_syntax_base___AClosureCallExpr___variable__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   ATTR_syntax_base___AClosureCallExpr____variable( self) /*AClosureCallExpr::_variable*/ =  param0;
@@ -2000,18 +3024,18 @@ void syntax_base___AClosureCallExpr___variable__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t syntax_base___PClosureDef___closure(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 627, LOCATE_syntax_base___PClosureDef___closure};
+  struct trace_t trace = {NULL, NULL, 688, LOCATE_syntax_base___PClosureDef___closure};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
   return ATTR_syntax_base___PClosureDef____closure( self) /*PClosureDef::_closure*/;
 }
 void syntax_base___PClosureDef___closure__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 627, LOCATE_syntax_base___PClosureDef___closure__eq};
+  struct trace_t trace = {NULL, NULL, 688, LOCATE_syntax_base___PClosureDef___closure__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   ATTR_syntax_base___PClosureDef____closure( self) /*PClosureDef::_closure*/ =  param0;
@@ -2019,18 +3043,18 @@ void syntax_base___PClosureDef___closure__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t syntax_base___PClosureDef___variables(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 630, LOCATE_syntax_base___PClosureDef___variables};
+  struct trace_t trace = {NULL, NULL, 691, LOCATE_syntax_base___PClosureDef___variables};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   tracehead = trace.prev;
   return ATTR_syntax_base___PClosureDef____variables( self) /*PClosureDef::_variables*/;
 }
 void syntax_base___PClosureDef___variables__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 630, LOCATE_syntax_base___PClosureDef___variables__eq};
+  struct trace_t trace = {NULL, NULL, 691, LOCATE_syntax_base___PClosureDef___variables__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_syntax_base;
   ATTR_syntax_base___PClosureDef____variables( self) /*PClosureDef::_variables*/ =  param0;

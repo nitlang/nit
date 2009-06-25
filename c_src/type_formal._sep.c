@@ -2,27 +2,31 @@
 #include "type_formal._sep.h"
 val_t type_formal___MMType___direct_type(val_t  self) {
   struct trace_t trace = {NULL, NULL, 24, LOCATE_type_formal___MMType___direct_type};
-  val_t variable[3];
-  void **closurevariable = NULL;
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_type_formal;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[1] = variable[2];
+  /* Register variable[1]: Method return value and escape marker */
+  variable[1] = variable[0];
   goto return_label0;
   return_label0: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t type_formal___MMTypeFormal___to_s(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 46, LOCATE_type_formal___MMTypeFormal___to_s};
+  struct trace_t trace = {NULL, NULL, 50, LOCATE_type_formal___MMTypeFormal___to_s};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_type_formal;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_type_formal___MMTypeFormal____name(variable[2]) /*MMTypeFormal::_name*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_type_formal___MMTypeFormal____name(variable[0]) /*MMTypeFormal::_name*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_string___Object___to_s(variable[2])(variable[2]) /*Symbol::to_s*/;
   variable[1] = variable[2];
   goto return_label1;
@@ -31,21 +35,17 @@ val_t type_formal___MMTypeFormal___to_s(val_t  self) {
   return variable[1];
 }
 val_t type_formal___MMTypeFormal___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 40, LOCATE_type_formal___MMTypeFormal___local_class};
+  struct trace_t trace = {NULL, NULL, 48, LOCATE_type_formal___MMTypeFormal___local_class};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_type_formal;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_type_formal___MMTypeFormal____bound(variable[2]) /*MMTypeFormal::_bound*/;
-  variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable[2])) { /*if*/
-    variable[1] =  NIT_NULL /*null*/;
-    goto return_label2;
-  }
-  variable[2] = variable[0];
-  variable[2] = ATTR_type_formal___MMTypeFormal____bound(variable[2]) /*MMTypeFormal::_bound*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_type_formal___MMTypeFormal____bound(variable[0]) /*MMTypeFormal::_bound*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_static_type___MMType___local_class(variable[2])(variable[2]) /*MMType::local_class*/;
   variable[1] = variable[2];
   goto return_label2;
@@ -53,100 +53,171 @@ val_t type_formal___MMTypeFormal___local_class(val_t  self) {
   tracehead = trace.prev;
   return variable[1];
 }
-val_t type_formal___MMTypeFormal_____l(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 37, LOCATE_type_formal___MMTypeFormal_____l};
-  val_t variable[6];
-  void **closurevariable = NULL;
+val_t type_formal___MMTypeFormal___is_valid(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 31, LOCATE_type_formal___MMTypeFormal___is_valid};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_type_formal;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[1] =  param0;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*t*/ ==  NIT_NULL /*null*/) || (( variable[1] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*t*/)( variable[1] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  variable[4] = variable[3];
-  if (UNTAG_Bool(variable[4])) { /* and */
-    variable[4] = variable[0];
-    variable[4] = TAG_Bool(( variable[1] /*t*/ == variable[4]) || (( variable[1] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*t*/,variable[4])):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*t*/)( variable[1] /*t*/, variable[4]) /*Object::==*/)))));
-    variable[5] = variable[4];
-    if (!UNTAG_Bool(variable[5])) { /* or */
-      variable[5] = variable[0];
-      variable[5] = ATTR_type_formal___MMTypeFormal____bound(variable[5]) /*MMTypeFormal::_bound*/;
-      variable[5] = CALL_static_type___MMType___is_supertype( variable[1] /*t*/)( variable[1] /*t*/, variable[5]) /*MMType::is_supertype*/;
-    }
-    variable[4] = variable[5];
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_type_formal___MMTypeFormal____bound(variable[0]) /*MMTypeFormal::_bound*/;
+  /* Register variable[2]: Result */
+  variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  /* Ensure var variable[2]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[2])) { /* and */
+    /* Register variable[2]: Result */
+    variable[2] = ATTR_type_formal___MMTypeFormal____bound(variable[0]) /*MMTypeFormal::_bound*/;
+    /* Register variable[2]: Result */
+    variable[2] = CALL_static_type___MMType___is_valid(variable[2])(variable[2]) /*MMType::is_valid*/;
   }
-  variable[3] = variable[4];
-  variable[2] = variable[3];
+  /* Register variable[2]: Result */
+  variable[1] = variable[2];
   goto return_label3;
   return_label3: while(false);
   tracehead = trace.prev;
-  return variable[2];
+  return variable[1];
 }
-val_t type_formal___MMTypeFormal___is_supertype(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 38, LOCATE_type_formal___MMTypeFormal___is_supertype};
+val_t type_formal___MMTypeFormal_____l(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 44, LOCATE_type_formal___MMTypeFormal_____l};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_type_formal;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_type_formal___MMTypeFormal____bound(variable[3]) /*MMTypeFormal::_bound*/;
-  variable[3] = CALL_static_type___MMType___is_supertype(variable[3])(variable[3],  variable[1] /*t*/) /*MMType::is_supertype*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*t*/ ==  NIT_NULL /*null*/) || (( variable[1] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*t*/)( variable[1] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+  /* Ensure var variable[3]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[3])) { /* and */
+    /* Register variable[3]: Result */
+    variable[3] = TAG_Bool(( variable[1] /*t*/ == variable[0]) || (( variable[1] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*t*/,variable[0])):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*t*/)( variable[1] /*t*/, variable[0]) /*Object::==*/)))));
+    /* Ensure var variable[3]: Left 'or' operand*/
+    if (!UNTAG_Bool(variable[3])) { /* or */
+      /* Register variable[3]: Result */
+      variable[3] = ATTR_type_formal___MMTypeFormal____bound(variable[0]) /*MMTypeFormal::_bound*/;
+      /* Register variable[3]: Result */
+      variable[3] = CALL_static_type___MMType___is_supertype( variable[1] /*t*/)( variable[1] /*t*/, variable[3]) /*MMType::is_supertype*/;
+    }
+    /* Register variable[3]: Result */
+  }
+  /* Register variable[3]: Result */
   variable[2] = variable[3];
   goto return_label4;
   return_label4: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
-val_t type_formal___MMTypeFormal___direct_type(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 39, LOCATE_type_formal___MMTypeFormal___direct_type};
-  val_t variable[3];
-  void **closurevariable = NULL;
+val_t type_formal___MMTypeFormal___is_supertype(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 45, LOCATE_type_formal___MMTypeFormal___is_supertype};
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_type_formal;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_type_formal___MMTypeFormal____bound(variable[2]) /*MMTypeFormal::_bound*/;
-  variable[2] = CALL_type_formal___MMType___direct_type(variable[2])(variable[2]) /*MMType::direct_type*/;
-  variable[1] = variable[2];
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_type_formal___MMTypeFormal____bound(variable[0]) /*MMTypeFormal::_bound*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_static_type___MMType___is_supertype(variable[3])(variable[3],  variable[1] /*t*/) /*MMType::is_supertype*/;
+  variable[2] = variable[3];
   goto return_label5;
   return_label5: while(false);
+  tracehead = trace.prev;
+  return variable[2];
+}
+val_t type_formal___MMTypeFormal___is_nullable(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 46, LOCATE_type_formal___MMTypeFormal___is_nullable};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_type_formal;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_type_formal___MMTypeFormal____bound(variable[0]) /*MMTypeFormal::_bound*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_static_type___MMType___is_nullable(variable[2])(variable[2]) /*MMType::is_nullable*/;
+  variable[1] = variable[2];
+  goto return_label6;
+  return_label6: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t type_formal___MMTypeFormal___direct_type(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 47, LOCATE_type_formal___MMTypeFormal___direct_type};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_type_formal;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_type_formal___MMTypeFormal____bound(variable[0]) /*MMTypeFormal::_bound*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_type_formal___MMType___direct_type(variable[2])(variable[2]) /*MMType::direct_type*/;
+  variable[1] = variable[2];
+  goto return_label7;
+  return_label7: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t type_formal___MMTypeFormal___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 31, LOCATE_type_formal___MMTypeFormal___name};
+  struct trace_t trace = {NULL, NULL, 33, LOCATE_type_formal___MMTypeFormal___name};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_type_formal;
   tracehead = trace.prev;
   return ATTR_type_formal___MMTypeFormal____name( self) /*MMTypeFormal::_name*/;
 }
 val_t type_formal___MMTypeFormal___bound(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 34, LOCATE_type_formal___MMTypeFormal___bound};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 36, LOCATE_type_formal___MMTypeFormal___bound};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_type_formal;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_static_type___MMType___is_valid(variable[0])(variable[0]) /*MMTypeFormal::is_valid*/;
+  if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_type_formal___MMTypeFormal___bound, LOCATE_type_formal, 39); nit_exit(1);}
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_type_formal___MMTypeFormal____bound(variable[0]) /*MMTypeFormal::_bound*/;
+  variable[1] = variable[2];
+  goto return_label8;
+  return_label8: while(false);
   tracehead = trace.prev;
-  return ATTR_type_formal___MMTypeFormal____bound( self) /*MMTypeFormal::_bound*/;
+  return variable[1];
 }
 void type_formal___MMTypeFormal___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 48, LOCATE_type_formal___MMTypeFormal___init};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 52, LOCATE_type_formal___MMTypeFormal___init};
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_type_formal;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeFormal].i]) return;
-  variable[4] = variable[0];
-  ATTR_type_formal___MMTypeFormal____name(variable[4]) /*MMTypeFormal::_name*/ =  variable[1] /*name*/;
-  variable[4] = variable[0];
-  ATTR_type_formal___MMTypeFormal____bound(variable[4]) /*MMTypeFormal::_bound*/ =  variable[2] /*bound*/;
-  return_label6: while(false);
+  /* Register variable[3]: Method return value and escape marker */
+  ATTR_type_formal___MMTypeFormal____name(variable[0]) /*MMTypeFormal::_name*/ =  variable[1] /*name*/;
+  ATTR_type_formal___MMTypeFormal____bound(variable[0]) /*MMTypeFormal::_bound*/ =  variable[2] /*bound*/;
+  return_label9: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMTypeFormal].i] = 1;
   tracehead = trace.prev;
   return;

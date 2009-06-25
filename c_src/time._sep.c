@@ -3,7 +3,7 @@
 val_t time___Object___get_time(val_t  self) {
   struct trace_t trace = {NULL, NULL, 18, LOCATE_time___Object___get_time};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_time;
   tracehead = trace.prev;

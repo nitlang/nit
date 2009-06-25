@@ -43,8 +43,9 @@ CLIBDIR="./../lib"
   ./partial_order._sep.c\
   ./virtualtype._sep.c\
   ./opts._sep.c\
-  ./control_flow._sep.c\
   ./typing._sep.c\
+  ./escape._sep.c\
+  ./control_flow._sep.c\
   ./compiling._sep.c\
   ./compiling_global._sep.c\
   ./compiling_methods._sep.c\

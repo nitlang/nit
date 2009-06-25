@@ -113,12 +113,8 @@ val_t string_search___Char___search_index_in(val_t  self, val_t  param0, val_t  
 typedef val_t (* string_search___Char___search_in_t)(val_t  self, val_t  param0, val_t  param1);
 val_t string_search___Char___search_in(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_string_search___Char___search_in "string_search::Char::(string_search::Pattern::search_in)"
-val_t NEW_String_string___String___init();
-val_t NEW_String_string___String___from(val_t p0);
-val_t NEW_String_string___String___with_capacity(val_t p0);
 val_t NEW_String_string___String___with_native(val_t p0, val_t p1);
 val_t NEW_String_string___String___from_cstring(val_t p0);
-val_t NEW_String_string___String___filled_with(val_t p0, val_t p1);
 typedef val_t (* string_search___String___search_index_in_t)(val_t  self, val_t  param0, val_t  param1);
 val_t string_search___String___search_index_in(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_string_search___String___search_index_in "string_search::String::(string_search::Pattern::search_index_in)"

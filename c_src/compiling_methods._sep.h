@@ -7,6 +7,8 @@
 extern const classtable_elt_t VFT_CFunctionContext[];
 
 extern const classtable_elt_t VFT_NitMethodContext[];
+
+extern const classtable_elt_t VFT_AControlableBlock[];
 extern const char *LOCATE_compiling_methods;
 extern const int SFT_compiling_methods[];
 #define ATTR_compiling_methods___CompilerVisitor____cfc(recv) ATTR(recv, (SFT_compiling_methods[0] + 0))
@@ -23,28 +25,29 @@ extern const int SFT_compiling_methods[];
 #define CALL_compiling_methods___CompilerVisitor___out_contexts(recv) ((compiling_methods___CompilerVisitor___out_contexts_t)CALL((recv), (SFT_compiling_methods[1] + 8)))
 #define CALL_compiling_methods___CompilerVisitor___out_contexts__eq(recv) ((compiling_methods___CompilerVisitor___out_contexts__eq_t)CALL((recv), (SFT_compiling_methods[1] + 9)))
 #define CALL_compiling_methods___CompilerVisitor___printf_locate_error(recv) ((compiling_methods___CompilerVisitor___printf_locate_error_t)CALL((recv), (SFT_compiling_methods[1] + 10)))
-#define CALL_SUPER_compiling_methods___CompilerVisitor___init(recv) ((compiling_methods___CompilerVisitor___init_t)CALL((recv), (SFT_compiling_methods[1] + 11)))
-#define CALL_compiling_methods___CompilerVisitor___invoke_super_init_calls_after(recv) ((compiling_methods___CompilerVisitor___invoke_super_init_calls_after_t)CALL((recv), (SFT_compiling_methods[1] + 12)))
+#define CALL_compiling_methods___CompilerVisitor___invoke_super_init_calls_after(recv) ((compiling_methods___CompilerVisitor___invoke_super_init_calls_after_t)CALL((recv), (SFT_compiling_methods[1] + 11)))
 #define ID_CFunctionContext (SFT_compiling_methods[2])
 #define COLOR_CFunctionContext (SFT_compiling_methods[3])
 #define ATTR_compiling_methods___CFunctionContext____visitor(recv) ATTR(recv, (SFT_compiling_methods[4] + 0))
 #define ATTR_compiling_methods___CFunctionContext____variable_index(recv) ATTR(recv, (SFT_compiling_methods[4] + 1))
 #define ATTR_compiling_methods___CFunctionContext____variable_index_max(recv) ATTR(recv, (SFT_compiling_methods[4] + 2))
-#define ATTR_compiling_methods___CFunctionContext____varnames(recv) ATTR(recv, (SFT_compiling_methods[4] + 3))
-#define ATTR_compiling_methods___CFunctionContext____in_closure(recv) ATTR(recv, (SFT_compiling_methods[4] + 4))
+#define ATTR_compiling_methods___CFunctionContext____varindexes(recv) ATTR(recv, (SFT_compiling_methods[4] + 3))
+#define ATTR_compiling_methods___CFunctionContext____closure(recv) ATTR(recv, (SFT_compiling_methods[4] + 4))
 #define ATTR_compiling_methods___CFunctionContext____closurevariable_index(recv) ATTR(recv, (SFT_compiling_methods[4] + 5))
 #define INIT_TABLE_POS_CFunctionContext (SFT_compiling_methods[5] + 0)
 #define CALL_compiling_methods___CFunctionContext___visitor(recv) ((compiling_methods___CFunctionContext___visitor_t)CALL((recv), (SFT_compiling_methods[5] + 1)))
-#define CALL_compiling_methods___CFunctionContext___in_closure(recv) ((compiling_methods___CFunctionContext___in_closure_t)CALL((recv), (SFT_compiling_methods[5] + 2)))
-#define CALL_compiling_methods___CFunctionContext___in_closure__eq(recv) ((compiling_methods___CFunctionContext___in_closure__eq_t)CALL((recv), (SFT_compiling_methods[5] + 3)))
+#define CALL_compiling_methods___CFunctionContext___closure(recv) ((compiling_methods___CFunctionContext___closure_t)CALL((recv), (SFT_compiling_methods[5] + 2)))
+#define CALL_compiling_methods___CFunctionContext___closure__eq(recv) ((compiling_methods___CFunctionContext___closure__eq_t)CALL((recv), (SFT_compiling_methods[5] + 3)))
 #define CALL_compiling_methods___CFunctionContext___varname(recv) ((compiling_methods___CFunctionContext___varname_t)CALL((recv), (SFT_compiling_methods[5] + 4)))
 #define CALL_compiling_methods___CFunctionContext___get_var(recv) ((compiling_methods___CFunctionContext___get_var_t)CALL((recv), (SFT_compiling_methods[5] + 5)))
 #define CALL_compiling_methods___CFunctionContext___register_variable(recv) ((compiling_methods___CFunctionContext___register_variable_t)CALL((recv), (SFT_compiling_methods[5] + 6)))
 #define CALL_compiling_methods___CFunctionContext___register_closurevariable(recv) ((compiling_methods___CFunctionContext___register_closurevariable_t)CALL((recv), (SFT_compiling_methods[5] + 7)))
 #define CALL_compiling_methods___CFunctionContext___variable(recv) ((compiling_methods___CFunctionContext___variable_t)CALL((recv), (SFT_compiling_methods[5] + 8)))
-#define CALL_compiling_methods___CFunctionContext___free_var(recv) ((compiling_methods___CFunctionContext___free_var_t)CALL((recv), (SFT_compiling_methods[5] + 9)))
-#define CALL_compiling_methods___CFunctionContext___generate_var_decls(recv) ((compiling_methods___CFunctionContext___generate_var_decls_t)CALL((recv), (SFT_compiling_methods[5] + 10)))
-#define CALL_compiling_methods___CFunctionContext___init(recv) ((compiling_methods___CFunctionContext___init_t)CALL((recv), (SFT_compiling_methods[5] + 11)))
+#define CALL_compiling_methods___CFunctionContext___closure_variable(recv) ((compiling_methods___CFunctionContext___closure_variable_t)CALL((recv), (SFT_compiling_methods[5] + 9)))
+#define CALL_compiling_methods___CFunctionContext___is_valid_variable(recv) ((compiling_methods___CFunctionContext___is_valid_variable_t)CALL((recv), (SFT_compiling_methods[5] + 10)))
+#define CALL_compiling_methods___CFunctionContext___free_var(recv) ((compiling_methods___CFunctionContext___free_var_t)CALL((recv), (SFT_compiling_methods[5] + 11)))
+#define CALL_compiling_methods___CFunctionContext___generate_var_decls(recv) ((compiling_methods___CFunctionContext___generate_var_decls_t)CALL((recv), (SFT_compiling_methods[5] + 12)))
+#define CALL_compiling_methods___CFunctionContext___init(recv) ((compiling_methods___CFunctionContext___init_t)CALL((recv), (SFT_compiling_methods[5] + 13)))
 #define ID_NitMethodContext (SFT_compiling_methods[6])
 #define COLOR_NitMethodContext (SFT_compiling_methods[7])
 #define ATTR_compiling_methods___NitMethodContext____method(recv) ATTR(recv, (SFT_compiling_methods[8] + 0))
@@ -75,44 +78,54 @@ extern const int SFT_compiling_methods[];
 #define ATTR_compiling_methods___ClosureVariable____ctypename(recv) ATTR(recv, (SFT_compiling_methods[10] + 0))
 #define CALL_compiling_methods___ClosureVariable___ctypename(recv) ((compiling_methods___ClosureVariable___ctypename_t)CALL((recv), (SFT_compiling_methods[11] + 0)))
 #define CALL_compiling_methods___ClosureVariable___ctypename__eq(recv) ((compiling_methods___ClosureVariable___ctypename__eq_t)CALL((recv), (SFT_compiling_methods[11] + 1)))
-#define CALL_compiling_methods___MMMethod___compile_call(recv) ((compiling_methods___MMMethod___compile_call_t)CALL((recv), (SFT_compiling_methods[12] + 0)))
-#define CALL_compiling_methods___MMMethod___compile_constructor_call(recv) ((compiling_methods___MMMethod___compile_constructor_call_t)CALL((recv), (SFT_compiling_methods[12] + 1)))
-#define CALL_compiling_methods___MMMethod___compile_super_call(recv) ((compiling_methods___MMMethod___compile_super_call_t)CALL((recv), (SFT_compiling_methods[12] + 2)))
-#define CALL_compiling_methods___MMMethod___closure_cname(recv) ((compiling_methods___MMMethod___closure_cname_t)CALL((recv), (SFT_compiling_methods[12] + 3)))
-#define CALL_compiling_methods___MMAttribute___compile_access(recv) ((compiling_methods___MMAttribute___compile_access_t)CALL((recv), (SFT_compiling_methods[13] + 0)))
+#define CALL_compiling_methods___MMMethod___compile_expr_call(recv) ((compiling_methods___MMMethod___compile_expr_call_t)CALL((recv), (SFT_compiling_methods[12] + 0)))
+#define CALL_compiling_methods___MMMethod___compile_stmt_call(recv) ((compiling_methods___MMMethod___compile_stmt_call_t)CALL((recv), (SFT_compiling_methods[12] + 1)))
+#define CALL_compiling_methods___MMMethod___intern_compile_call(recv) ((compiling_methods___MMMethod___intern_compile_call_t)CALL((recv), (SFT_compiling_methods[12] + 2)))
+#define CALL_compiling_methods___MMMethod___compile_call_and_closures(recv) ((compiling_methods___MMMethod___compile_call_and_closures_t)CALL((recv), (SFT_compiling_methods[12] + 3)))
+#define CALL_compiling_methods___MMMethod___compile_constructor_call(recv) ((compiling_methods___MMMethod___compile_constructor_call_t)CALL((recv), (SFT_compiling_methods[12] + 4)))
+#define CALL_compiling_methods___MMMethod___compile_super_call(recv) ((compiling_methods___MMMethod___compile_super_call_t)CALL((recv), (SFT_compiling_methods[12] + 5)))
+#define CALL_compiling_methods___MMMethod___closure_cname(recv) ((compiling_methods___MMMethod___closure_cname_t)CALL((recv), (SFT_compiling_methods[12] + 6)))
+#define CALL_compiling_methods___MMAttribute___compile_isset(recv) ((compiling_methods___MMAttribute___compile_isset_t)CALL((recv), (SFT_compiling_methods[13] + 0)))
+#define CALL_compiling_methods___MMAttribute___compile_read_access(recv) ((compiling_methods___MMAttribute___compile_read_access_t)CALL((recv), (SFT_compiling_methods[13] + 1)))
+#define CALL_compiling_methods___MMAttribute___compile_write_access(recv) ((compiling_methods___MMAttribute___compile_write_access_t)CALL((recv), (SFT_compiling_methods[13] + 2)))
 #define CALL_compiling_methods___MMLocalProperty___compile_property_to_c(recv) ((compiling_methods___MMLocalProperty___compile_property_to_c_t)CALL((recv), (SFT_compiling_methods[14] + 0)))
 #define CALL_compiling_methods___MMSrcMethod___decl_csignature(recv) ((compiling_methods___MMSrcMethod___decl_csignature_t)CALL((recv), (SFT_compiling_methods[15] + 0)))
 #define CALL_compiling_methods___MMSrcMethod___do_compile_inside(recv) ((compiling_methods___MMSrcMethod___do_compile_inside_t)CALL((recv), (SFT_compiling_methods[15] + 1)))
 #define CALL_compiling_methods___MMType___compile_cast(recv) ((compiling_methods___MMType___compile_cast_t)CALL((recv), (SFT_compiling_methods[16] + 0)))
 #define CALL_compiling_methods___MMType___compile_type_check(recv) ((compiling_methods___MMType___compile_type_check_t)CALL((recv), (SFT_compiling_methods[16] + 1)))
+#define CALL_compiling_methods___MMType___compile_notnull_check(recv) ((compiling_methods___MMType___compile_notnull_check_t)CALL((recv), (SFT_compiling_methods[16] + 2)))
 #define CALL_compiling_methods___AMethPropdef___do_compile_inside(recv) ((compiling_methods___AMethPropdef___do_compile_inside_t)CALL((recv), (SFT_compiling_methods[17] + 0)))
 #define CALL_compiling_methods___PSignature___compile_parameters(recv) ((compiling_methods___PSignature___compile_parameters_t)CALL((recv), (SFT_compiling_methods[18] + 0)))
 #define CALL_compiling_methods___PExpr___compile_expr(recv) ((compiling_methods___PExpr___compile_expr_t)CALL((recv), (SFT_compiling_methods[19] + 0)))
 #define CALL_compiling_methods___PExpr___prepare_compile_stmt(recv) ((compiling_methods___PExpr___prepare_compile_stmt_t)CALL((recv), (SFT_compiling_methods[19] + 1)))
 #define CALL_compiling_methods___PExpr___compile_stmt(recv) ((compiling_methods___PExpr___compile_stmt_t)CALL((recv), (SFT_compiling_methods[19] + 2)))
-#define CALL_compiling_methods___AControlableBlock___compile_inside_block(recv) ((compiling_methods___AControlableBlock___compile_inside_block_t)CALL((recv), (SFT_compiling_methods[20] + 0)))
-#define ATTR_compiling_methods___AStringFormExpr____cstring(recv) ATTR(recv, (SFT_compiling_methods[21] + 0))
-#define ATTR_compiling_methods___AStringFormExpr____cstring_length(recv) ATTR(recv, (SFT_compiling_methods[21] + 1))
-#define CALL_compiling_methods___AStringFormExpr___string_text(recv) ((compiling_methods___AStringFormExpr___string_text_t)CALL((recv), (SFT_compiling_methods[22] + 0)))
-#define CALL_compiling_methods___AStringFormExpr___compute_string_info(recv) ((compiling_methods___AStringFormExpr___compute_string_info_t)CALL((recv), (SFT_compiling_methods[22] + 1)))
-#define CALL_compiling_methods___PClosureDef___compile_closure(recv) ((compiling_methods___PClosureDef___compile_closure_t)CALL((recv), (SFT_compiling_methods[23] + 0)))
-#define CALL_compiling_methods___PClosureDef___do_compile_inside(recv) ((compiling_methods___PClosureDef___do_compile_inside_t)CALL((recv), (SFT_compiling_methods[23] + 1)))
-#define ATTR_compiling_methods___AClosureDef____cname(recv) ATTR(recv, (SFT_compiling_methods[24] + 0))
-#define CALL_compiling_methods___AClosureDef___cname(recv) ((compiling_methods___AClosureDef___cname_t)CALL((recv), (SFT_compiling_methods[25] + 0)))
-#define CALL_compiling_methods___AClosureDef___decl_csignature(recv) ((compiling_methods___AClosureDef___decl_csignature_t)CALL((recv), (SFT_compiling_methods[25] + 1)))
-#define CALL_compiling_methods___PClosureDecl___do_compile_inside(recv) ((compiling_methods___PClosureDecl___do_compile_inside_t)CALL((recv), (SFT_compiling_methods[26] + 0)))
-typedef void (* compiling_methods___CompilerVisitor___init_t)(val_t  self, val_t  param0, int* init_table);
-void compiling_methods___CompilerVisitor___init(val_t  self, val_t  param0, int* init_table);
-#define LOCATE_compiling_methods___CompilerVisitor___init "compiling_methods::CompilerVisitor::(compiling_base::CompilerVisitor::init)"
-val_t NEW_CompilerVisitor_compiling_base___CompilerVisitor___init(val_t p0);
+#define ID_AControlableBlock (SFT_compiling_methods[20])
+#define COLOR_AControlableBlock (SFT_compiling_methods[21])
+#define INIT_TABLE_POS_AControlableBlock (SFT_compiling_methods[22] + 0)
+#define CALL_compiling_methods___AControlableBlock___compile_inside_block(recv) ((compiling_methods___AControlableBlock___compile_inside_block_t)CALL((recv), (SFT_compiling_methods[22] + 1)))
+#define ATTR_compiling_methods___AStringFormExpr____cstring(recv) ATTR(recv, (SFT_compiling_methods[23] + 0))
+#define ATTR_compiling_methods___AStringFormExpr____cstring_length(recv) ATTR(recv, (SFT_compiling_methods[23] + 1))
+#define CALL_compiling_methods___AStringFormExpr___string_text(recv) ((compiling_methods___AStringFormExpr___string_text_t)CALL((recv), (SFT_compiling_methods[24] + 0)))
+#define CALL_compiling_methods___AStringFormExpr___compute_string_info(recv) ((compiling_methods___AStringFormExpr___compute_string_info_t)CALL((recv), (SFT_compiling_methods[24] + 1)))
+#define CALL_compiling_methods___ASuperExpr___intern_compile_call(recv) ((compiling_methods___ASuperExpr___intern_compile_call_t)CALL((recv), (SFT_compiling_methods[25] + 0)))
+#define CALL_compiling_methods___AAbsAbsSendExpr___compile_arguments_in(recv) ((compiling_methods___AAbsAbsSendExpr___compile_arguments_in_t)CALL((recv), (SFT_compiling_methods[26] + 0)))
+#define CALL_compiling_methods___ASendExpr___intern_compile_call(recv) ((compiling_methods___ASendExpr___intern_compile_call_t)CALL((recv), (SFT_compiling_methods[27] + 0)))
+#define CALL_compiling_methods___PClosureDef___compile_closure(recv) ((compiling_methods___PClosureDef___compile_closure_t)CALL((recv), (SFT_compiling_methods[28] + 0)))
+#define CALL_compiling_methods___PClosureDef___do_compile_inside(recv) ((compiling_methods___PClosureDef___do_compile_inside_t)CALL((recv), (SFT_compiling_methods[28] + 1)))
+#define ATTR_compiling_methods___AClosureDef____cname(recv) ATTR(recv, (SFT_compiling_methods[29] + 0))
+#define CALL_compiling_methods___AClosureDef___cname(recv) ((compiling_methods___AClosureDef___cname_t)CALL((recv), (SFT_compiling_methods[30] + 0)))
+#define CALL_compiling_methods___AClosureDef___decl_csignature(recv) ((compiling_methods___AClosureDef___decl_csignature_t)CALL((recv), (SFT_compiling_methods[30] + 1)))
+#define CALL_compiling_methods___PClosureDecl___do_compile_inside(recv) ((compiling_methods___PClosureDecl___do_compile_inside_t)CALL((recv), (SFT_compiling_methods[31] + 0)))
+#define CALL_compiling_methods___AClosureCallExpr___intern_compile_call(recv) ((compiling_methods___AClosureCallExpr___intern_compile_call_t)CALL((recv), (SFT_compiling_methods[32] + 0)))
+val_t NEW_CompilerVisitor_compiling_base___CompilerVisitor___init(val_t p0, val_t p1);
 typedef void (* compiling_methods___CompilerVisitor___compile_stmt_t)(val_t  self, val_t  param0);
 void compiling_methods___CompilerVisitor___compile_stmt(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___CompilerVisitor___compile_stmt "compiling_methods::CompilerVisitor::compile_stmt"
 typedef val_t (* compiling_methods___CompilerVisitor___compile_expr_t)(val_t  self, val_t  param0);
 val_t compiling_methods___CompilerVisitor___compile_expr(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___CompilerVisitor___compile_expr "compiling_methods::CompilerVisitor::compile_expr"
-typedef val_t (* compiling_methods___CompilerVisitor___ensure_var_t)(val_t  self, val_t  param0);
-val_t compiling_methods___CompilerVisitor___ensure_var(val_t  self, val_t  param0);
+typedef val_t (* compiling_methods___CompilerVisitor___ensure_var_t)(val_t  self, val_t  param0, val_t  param1);
+val_t compiling_methods___CompilerVisitor___ensure_var(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_compiling_methods___CompilerVisitor___ensure_var "compiling_methods::CompilerVisitor::ensure_var"
 typedef void (* compiling_methods___CompilerVisitor___add_assignment_t)(val_t  self, val_t  param0, val_t  param1);
 void compiling_methods___CompilerVisitor___add_assignment(val_t  self, val_t  param0, val_t  param1);
@@ -144,17 +157,17 @@ void compiling_methods___CompilerVisitor___invoke_super_init_calls_after(val_t  
 typedef val_t (* compiling_methods___CFunctionContext___visitor_t)(val_t  self);
 val_t compiling_methods___CFunctionContext___visitor(val_t  self);
 #define LOCATE_compiling_methods___CFunctionContext___visitor "compiling_methods::CFunctionContext::visitor"
-typedef val_t (* compiling_methods___CFunctionContext___in_closure_t)(val_t  self);
-val_t compiling_methods___CFunctionContext___in_closure(val_t  self);
-#define LOCATE_compiling_methods___CFunctionContext___in_closure "compiling_methods::CFunctionContext::in_closure"
-typedef void (* compiling_methods___CFunctionContext___in_closure__eq_t)(val_t  self, val_t  param0);
-void compiling_methods___CFunctionContext___in_closure__eq(val_t  self, val_t  param0);
-#define LOCATE_compiling_methods___CFunctionContext___in_closure__eq "compiling_methods::CFunctionContext::in_closure="
+typedef val_t (* compiling_methods___CFunctionContext___closure_t)(val_t  self);
+val_t compiling_methods___CFunctionContext___closure(val_t  self);
+#define LOCATE_compiling_methods___CFunctionContext___closure "compiling_methods::CFunctionContext::closure"
+typedef void (* compiling_methods___CFunctionContext___closure__eq_t)(val_t  self, val_t  param0);
+void compiling_methods___CFunctionContext___closure__eq(val_t  self, val_t  param0);
+#define LOCATE_compiling_methods___CFunctionContext___closure__eq "compiling_methods::CFunctionContext::closure="
 typedef val_t (* compiling_methods___CFunctionContext___varname_t)(val_t  self, val_t  param0);
 val_t compiling_methods___CFunctionContext___varname(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___CFunctionContext___varname "compiling_methods::CFunctionContext::varname"
-typedef val_t (* compiling_methods___CFunctionContext___get_var_t)(val_t  self);
-val_t compiling_methods___CFunctionContext___get_var(val_t  self);
+typedef val_t (* compiling_methods___CFunctionContext___get_var_t)(val_t  self, val_t  param0);
+val_t compiling_methods___CFunctionContext___get_var(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___CFunctionContext___get_var "compiling_methods::CFunctionContext::get_var"
 typedef val_t (* compiling_methods___CFunctionContext___register_variable_t)(val_t  self, val_t  param0);
 val_t compiling_methods___CFunctionContext___register_variable(val_t  self, val_t  param0);
@@ -165,6 +178,12 @@ val_t compiling_methods___CFunctionContext___register_closurevariable(val_t  sel
 typedef val_t (* compiling_methods___CFunctionContext___variable_t)(val_t  self, val_t  param0);
 val_t compiling_methods___CFunctionContext___variable(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___CFunctionContext___variable "compiling_methods::CFunctionContext::variable"
+typedef val_t (* compiling_methods___CFunctionContext___closure_variable_t)(val_t  self, val_t  param0);
+val_t compiling_methods___CFunctionContext___closure_variable(val_t  self, val_t  param0);
+#define LOCATE_compiling_methods___CFunctionContext___closure_variable "compiling_methods::CFunctionContext::closure_variable"
+typedef val_t (* compiling_methods___CFunctionContext___is_valid_variable_t)(val_t  self, val_t  param0);
+val_t compiling_methods___CFunctionContext___is_valid_variable(val_t  self, val_t  param0);
+#define LOCATE_compiling_methods___CFunctionContext___is_valid_variable "compiling_methods::CFunctionContext::is_valid_variable"
 typedef void (* compiling_methods___CFunctionContext___free_var_t)(val_t  self, val_t  param0);
 void compiling_methods___CFunctionContext___free_var(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___CFunctionContext___free_var "compiling_methods::CFunctionContext::free_var"
@@ -232,9 +251,18 @@ typedef void (* compiling_methods___ClosureVariable___ctypename__eq_t)(val_t  se
 void compiling_methods___ClosureVariable___ctypename__eq(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___ClosureVariable___ctypename__eq "compiling_methods::ClosureVariable::ctypename="
 val_t NEW_MMMethod_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
-typedef val_t (* compiling_methods___MMMethod___compile_call_t)(val_t  self, val_t  param0, val_t  param1);
-val_t compiling_methods___MMMethod___compile_call(val_t  self, val_t  param0, val_t  param1);
-#define LOCATE_compiling_methods___MMMethod___compile_call "compiling_methods::MMMethod::compile_call"
+typedef val_t (* compiling_methods___MMMethod___compile_expr_call_t)(val_t  self, val_t  param0, val_t  param1);
+val_t compiling_methods___MMMethod___compile_expr_call(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_compiling_methods___MMMethod___compile_expr_call "compiling_methods::MMMethod::compile_expr_call"
+typedef void (* compiling_methods___MMMethod___compile_stmt_call_t)(val_t  self, val_t  param0, val_t  param1);
+void compiling_methods___MMMethod___compile_stmt_call(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_compiling_methods___MMMethod___compile_stmt_call "compiling_methods::MMMethod::compile_stmt_call"
+typedef val_t (* compiling_methods___MMMethod___intern_compile_call_t)(val_t  self, val_t  param0, val_t  param1);
+val_t compiling_methods___MMMethod___intern_compile_call(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_compiling_methods___MMMethod___intern_compile_call "compiling_methods::MMMethod::intern_compile_call"
+typedef val_t (* compiling_methods___MMMethod___compile_call_and_closures_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+val_t compiling_methods___MMMethod___compile_call_and_closures(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+#define LOCATE_compiling_methods___MMMethod___compile_call_and_closures "compiling_methods::MMMethod::compile_call_and_closures"
 typedef val_t (* compiling_methods___MMMethod___compile_constructor_call_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 val_t compiling_methods___MMMethod___compile_constructor_call(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_compiling_methods___MMMethod___compile_constructor_call "compiling_methods::MMMethod::compile_constructor_call"
@@ -245,9 +273,15 @@ typedef val_t (* compiling_methods___MMMethod___closure_cname_t)(val_t  self, va
 val_t compiling_methods___MMMethod___closure_cname(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___MMMethod___closure_cname "compiling_methods::MMMethod::closure_cname"
 val_t NEW_MMAttribute_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
-typedef val_t (* compiling_methods___MMAttribute___compile_access_t)(val_t  self, val_t  param0, val_t  param1);
-val_t compiling_methods___MMAttribute___compile_access(val_t  self, val_t  param0, val_t  param1);
-#define LOCATE_compiling_methods___MMAttribute___compile_access "compiling_methods::MMAttribute::compile_access"
+typedef val_t (* compiling_methods___MMAttribute___compile_isset_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+val_t compiling_methods___MMAttribute___compile_isset(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+#define LOCATE_compiling_methods___MMAttribute___compile_isset "compiling_methods::MMAttribute::compile_isset"
+typedef val_t (* compiling_methods___MMAttribute___compile_read_access_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+val_t compiling_methods___MMAttribute___compile_read_access(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+#define LOCATE_compiling_methods___MMAttribute___compile_read_access "compiling_methods::MMAttribute::compile_read_access"
+typedef void (* compiling_methods___MMAttribute___compile_write_access_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
+void compiling_methods___MMAttribute___compile_write_access(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
+#define LOCATE_compiling_methods___MMAttribute___compile_write_access "compiling_methods::MMAttribute::compile_write_access"
 val_t NEW_MMLocalProperty_abstractmetamodel___MMLocalProperty___init(val_t p0, val_t p1);
 typedef void (* compiling_methods___MMLocalProperty___compile_property_to_c_t)(val_t  self, val_t  param0);
 void compiling_methods___MMLocalProperty___compile_property_to_c(val_t  self, val_t  param0);
@@ -279,12 +313,15 @@ typedef val_t (* compiling_methods___MMImplicitInit___do_compile_inside_t)(val_t
 val_t compiling_methods___MMImplicitInit___do_compile_inside(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_compiling_methods___MMImplicitInit___do_compile_inside "compiling_methods::MMImplicitInit::(compiling_methods::MMSrcMethod::do_compile_inside)"
 val_t NEW_MMType_static_type___MMType___init();
-typedef val_t (* compiling_methods___MMType___compile_cast_t)(val_t  self, val_t  param0, val_t  param1);
-val_t compiling_methods___MMType___compile_cast(val_t  self, val_t  param0, val_t  param1);
+typedef val_t (* compiling_methods___MMType___compile_cast_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+val_t compiling_methods___MMType___compile_cast(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_compiling_methods___MMType___compile_cast "compiling_methods::MMType::compile_cast"
-typedef void (* compiling_methods___MMType___compile_type_check_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
-void compiling_methods___MMType___compile_type_check(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+typedef void (* compiling_methods___MMType___compile_type_check_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
+void compiling_methods___MMType___compile_type_check(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
 #define LOCATE_compiling_methods___MMType___compile_type_check "compiling_methods::MMType::compile_type_check"
+typedef void (* compiling_methods___MMType___compile_notnull_check_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+void compiling_methods___MMType___compile_notnull_check(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+#define LOCATE_compiling_methods___MMType___compile_notnull_check "compiling_methods::MMType::compile_notnull_check"
 val_t NEW_AMethPropdef_parser_nodes___PNode___init();
 val_t NEW_AMethPropdef_parser_prod___AMethPropdef___empty_init();
 val_t NEW_AMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
@@ -415,16 +452,10 @@ void compiling_methods___AWhileExpr___compile_inside_block(val_t  self, val_t  p
 #define LOCATE_compiling_methods___AWhileExpr___compile_inside_block "compiling_methods::AWhileExpr::(compiling_methods::AControlableBlock::compile_inside_block)"
 val_t NEW_AForExpr_parser_nodes___PNode___init();
 val_t NEW_AForExpr_parser_prod___AForExpr___empty_init();
-val_t NEW_AForExpr_parser_prod___AForExpr___init_aforexpr(val_t p0, val_t p1, val_t p2);
+val_t NEW_AForExpr_parser_prod___AForExpr___init_aforexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 typedef void (* compiling_methods___AForExpr___compile_inside_block_t)(val_t  self, val_t  param0);
 void compiling_methods___AForExpr___compile_inside_block(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___AForExpr___compile_inside_block "compiling_methods::AForExpr::(compiling_methods::AControlableBlock::compile_inside_block)"
-val_t NEW_AForVardeclExpr_parser_nodes___PNode___init();
-val_t NEW_AForVardeclExpr_parser_prod___AForVardeclExpr___empty_init();
-val_t NEW_AForVardeclExpr_parser_prod___AForVardeclExpr___init_aforvardeclexpr(val_t p0, val_t p1, val_t p2);
-typedef void (* compiling_methods___AForVardeclExpr___compile_stmt_t)(val_t  self, val_t  param0);
-void compiling_methods___AForVardeclExpr___compile_stmt(val_t  self, val_t  param0);
-#define LOCATE_compiling_methods___AForVardeclExpr___compile_stmt "compiling_methods::AForVardeclExpr::(compiling_methods::PExpr::compile_stmt)"
 val_t NEW_AAssertExpr_parser_nodes___PNode___init();
 val_t NEW_AAssertExpr_parser_prod___AAssertExpr___empty_init();
 val_t NEW_AAssertExpr_parser_prod___AAssertExpr___init_aassertexpr(val_t p0, val_t p1, val_t p2);
@@ -491,6 +522,12 @@ val_t NEW_AAsCastExpr_parser_prod___AAsCastExpr___init_aascastexpr(val_t p0, val
 typedef val_t (* compiling_methods___AAsCastExpr___compile_expr_t)(val_t  self, val_t  param0);
 val_t compiling_methods___AAsCastExpr___compile_expr(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___AAsCastExpr___compile_expr "compiling_methods::AAsCastExpr::(compiling_methods::PExpr::compile_expr)"
+val_t NEW_AAsNotnullExpr_parser_nodes___PNode___init();
+val_t NEW_AAsNotnullExpr_parser_prod___AAsNotnullExpr___empty_init();
+val_t NEW_AAsNotnullExpr_parser_prod___AAsNotnullExpr___init_aasnotnullexpr(val_t p0, val_t p1, val_t p2, val_t p3);
+typedef val_t (* compiling_methods___AAsNotnullExpr___compile_expr_t)(val_t  self, val_t  param0);
+val_t compiling_methods___AAsNotnullExpr___compile_expr(val_t  self, val_t  param0);
+#define LOCATE_compiling_methods___AAsNotnullExpr___compile_expr "compiling_methods::AAsNotnullExpr::(compiling_methods::PExpr::compile_expr)"
 val_t NEW_ATrueExpr_parser_nodes___PNode___init();
 val_t NEW_ATrueExpr_parser_prod___ATrueExpr___empty_init();
 val_t NEW_ATrueExpr_parser_prod___ATrueExpr___init_atrueexpr(val_t p0);
@@ -588,6 +625,9 @@ val_t compiling_methods___ASuperExpr___compile_expr(val_t  self, val_t  param0);
 typedef void (* compiling_methods___ASuperExpr___compile_stmt_t)(val_t  self, val_t  param0);
 void compiling_methods___ASuperExpr___compile_stmt(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___ASuperExpr___compile_stmt "compiling_methods::ASuperExpr::(compiling_methods::PExpr::compile_stmt)"
+typedef val_t (* compiling_methods___ASuperExpr___intern_compile_call_t)(val_t  self, val_t  param0);
+val_t compiling_methods___ASuperExpr___intern_compile_call(val_t  self, val_t  param0);
+#define LOCATE_compiling_methods___ASuperExpr___intern_compile_call "compiling_methods::ASuperExpr::intern_compile_call"
 val_t NEW_AAttrExpr_parser_nodes___PNode___init();
 val_t NEW_AAttrExpr_parser_prod___AAttrExpr___empty_init();
 val_t NEW_AAttrExpr_parser_prod___AAttrExpr___init_aattrexpr(val_t p0, val_t p1);
@@ -606,6 +646,16 @@ val_t NEW_AAttrReassignExpr_parser_prod___AAttrReassignExpr___init_aattrreassign
 typedef void (* compiling_methods___AAttrReassignExpr___compile_stmt_t)(val_t  self, val_t  param0);
 void compiling_methods___AAttrReassignExpr___compile_stmt(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___AAttrReassignExpr___compile_stmt "compiling_methods::AAttrReassignExpr::(compiling_methods::PExpr::compile_stmt)"
+val_t NEW_AIssetAttrExpr_parser_nodes___PNode___init();
+val_t NEW_AIssetAttrExpr_parser_prod___AIssetAttrExpr___empty_init();
+val_t NEW_AIssetAttrExpr_parser_prod___AIssetAttrExpr___init_aissetattrexpr(val_t p0, val_t p1, val_t p2);
+typedef val_t (* compiling_methods___AIssetAttrExpr___compile_expr_t)(val_t  self, val_t  param0);
+val_t compiling_methods___AIssetAttrExpr___compile_expr(val_t  self, val_t  param0);
+#define LOCATE_compiling_methods___AIssetAttrExpr___compile_expr "compiling_methods::AIssetAttrExpr::(compiling_methods::PExpr::compile_expr)"
+val_t NEW_AAbsAbsSendExpr_parser_nodes___PNode___init();
+typedef void (* compiling_methods___AAbsAbsSendExpr___compile_arguments_in_t)(val_t  self, val_t  param0, val_t  param1);
+void compiling_methods___AAbsAbsSendExpr___compile_arguments_in(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_compiling_methods___AAbsAbsSendExpr___compile_arguments_in "compiling_methods::AAbsAbsSendExpr::compile_arguments_in"
 val_t NEW_ASendExpr_parser_nodes___PNode___init();
 val_t NEW_ASendExpr_parser_prod___ASendExpr___empty_init();
 val_t NEW_ASendExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
@@ -615,18 +665,27 @@ val_t compiling_methods___ASendExpr___compile_expr(val_t  self, val_t  param0);
 typedef void (* compiling_methods___ASendExpr___compile_stmt_t)(val_t  self, val_t  param0);
 void compiling_methods___ASendExpr___compile_stmt(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___ASendExpr___compile_stmt "compiling_methods::ASendExpr::(compiling_methods::PExpr::compile_stmt)"
+typedef val_t (* compiling_methods___ASendExpr___intern_compile_call_t)(val_t  self, val_t  param0);
+val_t compiling_methods___ASendExpr___intern_compile_call(val_t  self, val_t  param0);
+#define LOCATE_compiling_methods___ASendExpr___intern_compile_call "compiling_methods::ASendExpr::intern_compile_call"
 val_t NEW_ASendReassignExpr_parser_nodes___PNode___init();
 val_t NEW_ASendReassignExpr_parser_prod___ASendExpr___empty_init();
 val_t NEW_ASendReassignExpr_parser_prod___ASendExpr___init_asendexpr(val_t p0);
 typedef val_t (* compiling_methods___ASendReassignExpr___compile_expr_t)(val_t  self, val_t  param0);
 val_t compiling_methods___ASendReassignExpr___compile_expr(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___ASendReassignExpr___compile_expr "compiling_methods::ASendReassignExpr::(compiling_methods::PExpr::compile_expr)"
+typedef void (* compiling_methods___ASendReassignExpr___compile_stmt_t)(val_t  self, val_t  param0);
+void compiling_methods___ASendReassignExpr___compile_stmt(val_t  self, val_t  param0);
+#define LOCATE_compiling_methods___ASendReassignExpr___compile_stmt "compiling_methods::ASendReassignExpr::(compiling_methods::PExpr::compile_stmt)"
 val_t NEW_ANewExpr_parser_nodes___PNode___init();
 val_t NEW_ANewExpr_parser_prod___ANewExpr___empty_init();
 val_t NEW_ANewExpr_parser_prod___ANewExpr___init_anewexpr(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef val_t (* compiling_methods___ANewExpr___compile_expr_t)(val_t  self, val_t  param0);
 val_t compiling_methods___ANewExpr___compile_expr(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___ANewExpr___compile_expr "compiling_methods::ANewExpr::(compiling_methods::PExpr::compile_expr)"
+typedef void (* compiling_methods___ANewExpr___compile_stmt_t)(val_t  self, val_t  param0);
+void compiling_methods___ANewExpr___compile_stmt(val_t  self, val_t  param0);
+#define LOCATE_compiling_methods___ANewExpr___compile_stmt "compiling_methods::ANewExpr::(compiling_methods::PExpr::compile_stmt)"
 val_t NEW_PClosureDef_parser_nodes___PNode___init();
 typedef val_t (* compiling_methods___PClosureDef___compile_closure_t)(val_t  self, val_t  param0, val_t  param1);
 val_t compiling_methods___PClosureDef___compile_closure(val_t  self, val_t  param0, val_t  param1);
@@ -659,10 +718,18 @@ val_t NEW_AClosureDecl_parser_prod___AClosureDecl___init_aclosuredecl(val_t p0, 
 typedef val_t (* compiling_methods___AClosureDecl___do_compile_inside_t)(val_t  self, val_t  param0, val_t  param1);
 val_t compiling_methods___AClosureDecl___do_compile_inside(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_compiling_methods___AClosureDecl___do_compile_inside "compiling_methods::AClosureDecl::(compiling_methods::PClosureDecl::do_compile_inside)"
-val_t NEW_AClosureCallExpr_parser_nodes___AClosureCallExpr___init(val_t p0, val_t p1, val_t p2);
+val_t NEW_AClosureCallExpr_parser_nodes___PNode___init();
+val_t NEW_AClosureCallExpr_parser_prod___AClosureCallExpr___empty_init();
+val_t NEW_AClosureCallExpr_parser_prod___AClosureCallExpr___init_aclosurecallexpr(val_t p0, val_t p1, val_t p2);
 typedef val_t (* compiling_methods___AClosureCallExpr___compile_expr_t)(val_t  self, val_t  param0);
 val_t compiling_methods___AClosureCallExpr___compile_expr(val_t  self, val_t  param0);
 #define LOCATE_compiling_methods___AClosureCallExpr___compile_expr "compiling_methods::AClosureCallExpr::(compiling_methods::PExpr::compile_expr)"
+typedef void (* compiling_methods___AClosureCallExpr___compile_stmt_t)(val_t  self, val_t  param0);
+void compiling_methods___AClosureCallExpr___compile_stmt(val_t  self, val_t  param0);
+#define LOCATE_compiling_methods___AClosureCallExpr___compile_stmt "compiling_methods::AClosureCallExpr::(compiling_methods::PExpr::compile_stmt)"
+typedef val_t (* compiling_methods___AClosureCallExpr___intern_compile_call_t)(val_t  self, val_t  param0);
+val_t compiling_methods___AClosureCallExpr___intern_compile_call(val_t  self, val_t  param0);
+#define LOCATE_compiling_methods___AClosureCallExpr___intern_compile_call "compiling_methods::AClosureCallExpr::intern_compile_call"
 val_t NEW_AProxyExpr_parser_nodes___PNode___init();
 typedef val_t (* compiling_methods___AProxyExpr___compile_expr_t)(val_t  self, val_t  param0);
 val_t compiling_methods___AProxyExpr___compile_expr(val_t  self, val_t  param0);

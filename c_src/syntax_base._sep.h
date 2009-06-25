@@ -161,7 +161,8 @@ extern const int SFT_syntax_base[];
 #define CALL_syntax_base___AbsSyntaxVisitor___check_conform(recv) ((syntax_base___AbsSyntaxVisitor___check_conform_t)CALL((recv), (SFT_syntax_base[60] + 22)))
 #define CALL_syntax_base___AbsSyntaxVisitor___check_expr(recv) ((syntax_base___AbsSyntaxVisitor___check_expr_t)CALL((recv), (SFT_syntax_base[60] + 23)))
 #define CALL_syntax_base___AbsSyntaxVisitor___check_conform_expr(recv) ((syntax_base___AbsSyntaxVisitor___check_conform_expr_t)CALL((recv), (SFT_syntax_base[60] + 24)))
-#define CALL_syntax_base___AbsSyntaxVisitor___init(recv) ((syntax_base___AbsSyntaxVisitor___init_t)CALL((recv), (SFT_syntax_base[60] + 25)))
+#define CALL_syntax_base___AbsSyntaxVisitor___check_conform_multiexpr(recv) ((syntax_base___AbsSyntaxVisitor___check_conform_multiexpr_t)CALL((recv), (SFT_syntax_base[60] + 25)))
+#define CALL_syntax_base___AbsSyntaxVisitor___init(recv) ((syntax_base___AbsSyntaxVisitor___init_t)CALL((recv), (SFT_syntax_base[60] + 26)))
 #define CALL_syntax_base___PNode___accept_abs_syntax_visitor(recv) ((syntax_base___PNode___accept_abs_syntax_visitor_t)CALL((recv), (SFT_syntax_base[61] + 0)))
 #define ATTR_syntax_base___Token____symbol(recv) ATTR(recv, (SFT_syntax_base[62] + 0))
 #define CALL_syntax_base___Token___to_symbol(recv) ((syntax_base___Token___to_symbol_t)CALL((recv), (SFT_syntax_base[63] + 0)))
@@ -181,13 +182,15 @@ extern const int SFT_syntax_base[];
 #define CALL_syntax_base___PType___check_conform(recv) ((syntax_base___PType___check_conform_t)CALL((recv), (SFT_syntax_base[70] + 3)))
 #define ATTR_syntax_base___AType____stype_cache(recv) ATTR(recv, (SFT_syntax_base[71] + 0))
 #define ATTR_syntax_base___AType____stype_cached(recv) ATTR(recv, (SFT_syntax_base[71] + 1))
-#define CALL_syntax_base___PExpr___stype(recv) ((syntax_base___PExpr___stype_t)CALL((recv), (SFT_syntax_base[72] + 0)))
+#define CALL_syntax_base___PExpr___is_typed(recv) ((syntax_base___PExpr___is_typed_t)CALL((recv), (SFT_syntax_base[72] + 0)))
+#define CALL_syntax_base___PExpr___is_statement(recv) ((syntax_base___PExpr___is_statement_t)CALL((recv), (SFT_syntax_base[72] + 1)))
+#define CALL_syntax_base___PExpr___stype(recv) ((syntax_base___PExpr___stype_t)CALL((recv), (SFT_syntax_base[72] + 2)))
 #define ATTR_syntax_base___AVardeclExpr____variable(recv) ATTR(recv, (SFT_syntax_base[73] + 0))
 #define CALL_syntax_base___AVardeclExpr___variable(recv) ((syntax_base___AVardeclExpr___variable_t)CALL((recv), (SFT_syntax_base[74] + 0)))
 #define CALL_syntax_base___AVardeclExpr___variable__eq(recv) ((syntax_base___AVardeclExpr___variable__eq_t)CALL((recv), (SFT_syntax_base[74] + 1)))
-#define ATTR_syntax_base___AForVardeclExpr____variable(recv) ATTR(recv, (SFT_syntax_base[75] + 0))
-#define CALL_syntax_base___AForVardeclExpr___variable(recv) ((syntax_base___AForVardeclExpr___variable_t)CALL((recv), (SFT_syntax_base[76] + 0)))
-#define CALL_syntax_base___AForVardeclExpr___variable__eq(recv) ((syntax_base___AForVardeclExpr___variable__eq_t)CALL((recv), (SFT_syntax_base[76] + 1)))
+#define ATTR_syntax_base___AForExpr____variable(recv) ATTR(recv, (SFT_syntax_base[75] + 0))
+#define CALL_syntax_base___AForExpr___variable(recv) ((syntax_base___AForExpr___variable_t)CALL((recv), (SFT_syntax_base[76] + 0)))
+#define CALL_syntax_base___AForExpr___variable__eq(recv) ((syntax_base___AForExpr___variable__eq_t)CALL((recv), (SFT_syntax_base[76] + 1)))
 #define ATTR_syntax_base___ASelfExpr____variable(recv) ATTR(recv, (SFT_syntax_base[77] + 0))
 #define CALL_syntax_base___ASelfExpr___variable(recv) ((syntax_base___ASelfExpr___variable_t)CALL((recv), (SFT_syntax_base[78] + 0)))
 #define CALL_syntax_base___ASelfExpr___variable__eq(recv) ((syntax_base___ASelfExpr___variable__eq_t)CALL((recv), (SFT_syntax_base[78] + 1)))
@@ -209,10 +212,10 @@ val_t syntax_base___MMSrcModule___node(val_t  self);
 typedef val_t (* syntax_base___MMSrcModule___src_local_classes_t)(val_t  self);
 val_t syntax_base___MMSrcModule___src_local_classes(val_t  self);
 #define LOCATE_syntax_base___MMSrcModule___src_local_classes "syntax_base::MMSrcModule::src_local_classes"
-typedef void (* syntax_base___MMSrcModule___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
-void syntax_base___MMSrcModule___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+typedef void (* syntax_base___MMSrcModule___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
+void syntax_base___MMSrcModule___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, val_t  param4, int* init_table);
 #define LOCATE_syntax_base___MMSrcModule___init "syntax_base::MMSrcModule::init"
-val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 val_t NEW_MMGlobalClass_abstractmetamodel___MMGlobalClass___init(val_t p0);
 typedef val_t (* syntax_base___MMGlobalClass___check_visibility_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 val_t syntax_base___MMGlobalClass___check_visibility(val_t  self, val_t  param0, val_t  param1, val_t  param2);
@@ -229,10 +232,10 @@ void syntax_base___MMSrcLocalClass___formal_dict__eq(val_t  self, val_t  param0)
 typedef val_t (* syntax_base___MMSrcLocalClass___src_local_properties_t)(val_t  self);
 val_t syntax_base___MMSrcLocalClass___src_local_properties(val_t  self);
 #define LOCATE_syntax_base___MMSrcLocalClass___src_local_properties "syntax_base::MMSrcLocalClass::src_local_properties"
-typedef void (* syntax_base___MMSrcLocalClass___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
-void syntax_base___MMSrcLocalClass___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+typedef void (* syntax_base___MMSrcLocalClass___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
+void syntax_base___MMSrcLocalClass___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table);
 #define LOCATE_syntax_base___MMSrcLocalClass___init "syntax_base::MMSrcLocalClass::init"
-val_t NEW_MMSrcLocalClass_syntax_base___MMSrcLocalClass___init(val_t p0, val_t p1, val_t p2);
+val_t NEW_MMSrcLocalClass_syntax_base___MMSrcLocalClass___init(val_t p0, val_t p1, val_t p2, val_t p3);
 val_t NEW_MMGlobalProperty_abstractmetamodel___MMGlobalProperty___init(val_t p0);
 typedef val_t (* syntax_base___MMGlobalProperty___check_visibility_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
 val_t syntax_base___MMGlobalProperty___check_visibility(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
@@ -422,6 +425,9 @@ val_t syntax_base___AbsSyntaxVisitor___check_expr(val_t  self, val_t  param0);
 typedef val_t (* syntax_base___AbsSyntaxVisitor___check_conform_expr_t)(val_t  self, val_t  param0, val_t  param1);
 val_t syntax_base___AbsSyntaxVisitor___check_conform_expr(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_syntax_base___AbsSyntaxVisitor___check_conform_expr "syntax_base::AbsSyntaxVisitor::check_conform_expr"
+typedef val_t (* syntax_base___AbsSyntaxVisitor___check_conform_multiexpr_t)(val_t  self, val_t  param0, val_t  param1);
+val_t syntax_base___AbsSyntaxVisitor___check_conform_multiexpr(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_syntax_base___AbsSyntaxVisitor___check_conform_multiexpr "syntax_base::AbsSyntaxVisitor::check_conform_multiexpr"
 typedef void (* syntax_base___AbsSyntaxVisitor___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void syntax_base___AbsSyntaxVisitor___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
 #define LOCATE_syntax_base___AbsSyntaxVisitor___init "syntax_base::AbsSyntaxVisitor::init"
@@ -440,7 +446,7 @@ val_t syntax_base___PClassdef___local_class(val_t  self);
 #define LOCATE_syntax_base___PClassdef___local_class "syntax_base::PClassdef::local_class"
 val_t NEW_AAttrPropdef_parser_nodes___PNode___init();
 val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___empty_init();
-val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8);
+val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8, val_t p9);
 typedef val_t (* syntax_base___AAttrPropdef___prop_t)(val_t  self);
 val_t syntax_base___AAttrPropdef___prop(val_t  self);
 #define LOCATE_syntax_base___AAttrPropdef___prop "syntax_base::AAttrPropdef::prop"
@@ -491,7 +497,7 @@ void syntax_base___PType___check_conform(val_t  self, val_t  param0);
 #define LOCATE_syntax_base___PType___check_conform "syntax_base::PType::check_conform"
 val_t NEW_AType_parser_nodes___PNode___init();
 val_t NEW_AType_parser_prod___AType___empty_init();
-val_t NEW_AType_parser_prod___AType___init_atype(val_t p0, val_t p1);
+val_t NEW_AType_parser_prod___AType___init_atype(val_t p0, val_t p1, val_t p2);
 typedef val_t (* syntax_base___AType___get_local_class_t)(val_t  self, val_t  param0);
 val_t syntax_base___AType___get_local_class(val_t  self, val_t  param0);
 #define LOCATE_syntax_base___AType___get_local_class "syntax_base::AType::(syntax_base::PType::get_local_class)"
@@ -505,6 +511,12 @@ typedef void (* syntax_base___AType___check_conform_t)(val_t  self, val_t  param
 void syntax_base___AType___check_conform(val_t  self, val_t  param0);
 #define LOCATE_syntax_base___AType___check_conform "syntax_base::AType::(syntax_base::PType::check_conform)"
 val_t NEW_PExpr_parser_nodes___PNode___init();
+typedef val_t (* syntax_base___PExpr___is_typed_t)(val_t  self);
+val_t syntax_base___PExpr___is_typed(val_t  self);
+#define LOCATE_syntax_base___PExpr___is_typed "syntax_base::PExpr::is_typed"
+typedef val_t (* syntax_base___PExpr___is_statement_t)(val_t  self);
+val_t syntax_base___PExpr___is_statement(val_t  self);
+#define LOCATE_syntax_base___PExpr___is_statement "syntax_base::PExpr::is_statement"
 typedef val_t (* syntax_base___PExpr___stype_t)(val_t  self);
 val_t syntax_base___PExpr___stype(val_t  self);
 #define LOCATE_syntax_base___PExpr___stype "syntax_base::PExpr::stype"
@@ -517,15 +529,15 @@ val_t syntax_base___AVardeclExpr___variable(val_t  self);
 typedef void (* syntax_base___AVardeclExpr___variable__eq_t)(val_t  self, val_t  param0);
 void syntax_base___AVardeclExpr___variable__eq(val_t  self, val_t  param0);
 #define LOCATE_syntax_base___AVardeclExpr___variable__eq "syntax_base::AVardeclExpr::variable="
-val_t NEW_AForVardeclExpr_parser_nodes___PNode___init();
-val_t NEW_AForVardeclExpr_parser_prod___AForVardeclExpr___empty_init();
-val_t NEW_AForVardeclExpr_parser_prod___AForVardeclExpr___init_aforvardeclexpr(val_t p0, val_t p1, val_t p2);
-typedef val_t (* syntax_base___AForVardeclExpr___variable_t)(val_t  self);
-val_t syntax_base___AForVardeclExpr___variable(val_t  self);
-#define LOCATE_syntax_base___AForVardeclExpr___variable "syntax_base::AForVardeclExpr::variable"
-typedef void (* syntax_base___AForVardeclExpr___variable__eq_t)(val_t  self, val_t  param0);
-void syntax_base___AForVardeclExpr___variable__eq(val_t  self, val_t  param0);
-#define LOCATE_syntax_base___AForVardeclExpr___variable__eq "syntax_base::AForVardeclExpr::variable="
+val_t NEW_AForExpr_parser_nodes___PNode___init();
+val_t NEW_AForExpr_parser_prod___AForExpr___empty_init();
+val_t NEW_AForExpr_parser_prod___AForExpr___init_aforexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
+typedef val_t (* syntax_base___AForExpr___variable_t)(val_t  self);
+val_t syntax_base___AForExpr___variable(val_t  self);
+#define LOCATE_syntax_base___AForExpr___variable "syntax_base::AForExpr::variable"
+typedef void (* syntax_base___AForExpr___variable__eq_t)(val_t  self, val_t  param0);
+void syntax_base___AForExpr___variable__eq(val_t  self, val_t  param0);
+#define LOCATE_syntax_base___AForExpr___variable__eq "syntax_base::AForExpr::variable="
 val_t NEW_ASelfExpr_parser_nodes___PNode___init();
 val_t NEW_ASelfExpr_parser_prod___ASelfExpr___empty_init();
 val_t NEW_ASelfExpr_parser_prod___ASelfExpr___init_aselfexpr(val_t p0);
@@ -542,7 +554,9 @@ val_t syntax_base___AVarFormExpr___variable(val_t  self);
 typedef void (* syntax_base___AVarFormExpr___variable__eq_t)(val_t  self, val_t  param0);
 void syntax_base___AVarFormExpr___variable__eq(val_t  self, val_t  param0);
 #define LOCATE_syntax_base___AVarFormExpr___variable__eq "syntax_base::AVarFormExpr::variable="
-val_t NEW_AClosureCallExpr_parser_nodes___AClosureCallExpr___init(val_t p0, val_t p1, val_t p2);
+val_t NEW_AClosureCallExpr_parser_nodes___PNode___init();
+val_t NEW_AClosureCallExpr_parser_prod___AClosureCallExpr___empty_init();
+val_t NEW_AClosureCallExpr_parser_prod___AClosureCallExpr___init_aclosurecallexpr(val_t p0, val_t p1, val_t p2);
 typedef val_t (* syntax_base___AClosureCallExpr___variable_t)(val_t  self);
 val_t syntax_base___AClosureCallExpr___variable(val_t  self);
 #define LOCATE_syntax_base___AClosureCallExpr___variable "syntax_base::AClosureCallExpr::variable"

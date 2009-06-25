@@ -8,6 +8,8 @@ extern const classtable_elt_t VFT_ColorContext[];
 
 extern const classtable_elt_t VFT_GlobalAnalysis[];
 
+extern const classtable_elt_t VFT_GlobalCompilerVisitor[];
+
 extern const classtable_elt_t VFT_CompiledClass[];
 
 extern const classtable_elt_t VFT_AbsTableElt[];
@@ -64,123 +66,122 @@ extern const int SFT_compiling_global[];
 #define CALL_compiling_global___GlobalAnalysis___max_class_table_length(recv) ((compiling_global___GlobalAnalysis___max_class_table_length_t)CALL((recv), (SFT_compiling_global[7] + 3)))
 #define CALL_compiling_global___GlobalAnalysis___max_class_table_length__eq(recv) ((compiling_global___GlobalAnalysis___max_class_table_length__eq_t)CALL((recv), (SFT_compiling_global[7] + 4)))
 #define CALL_compiling_global___GlobalAnalysis___init(recv) ((compiling_global___GlobalAnalysis___init_t)CALL((recv), (SFT_compiling_global[7] + 5)))
-#define ATTR_compiling_global___CompilerVisitor____global_analysis(recv) ATTR(recv, (SFT_compiling_global[8] + 0))
-#define CALL_compiling_global___CompilerVisitor___global_analysis(recv) ((compiling_global___CompilerVisitor___global_analysis_t)CALL((recv), (SFT_compiling_global[9] + 0)))
-#define CALL_compiling_global___CompilerVisitor___global_analysis__eq(recv) ((compiling_global___CompilerVisitor___global_analysis__eq_t)CALL((recv), (SFT_compiling_global[9] + 1)))
-#define ID_CompiledClass (SFT_compiling_global[10])
-#define COLOR_CompiledClass (SFT_compiling_global[11])
-#define ATTR_compiling_global___CompiledClass____local_class(recv) ATTR(recv, (SFT_compiling_global[12] + 0))
-#define ATTR_compiling_global___CompiledClass____id(recv) ATTR(recv, (SFT_compiling_global[12] + 1))
-#define ATTR_compiling_global___CompiledClass____class_table(recv) ATTR(recv, (SFT_compiling_global[12] + 2))
-#define ATTR_compiling_global___CompiledClass____instance_table(recv) ATTR(recv, (SFT_compiling_global[12] + 3))
-#define ATTR_compiling_global___CompiledClass____class_layout(recv) ATTR(recv, (SFT_compiling_global[12] + 4))
-#define ATTR_compiling_global___CompiledClass____instance_layout(recv) ATTR(recv, (SFT_compiling_global[12] + 5))
-#define INIT_TABLE_POS_CompiledClass (SFT_compiling_global[13] + 0)
-#define CALL_compiling_global___CompiledClass___local_class(recv) ((compiling_global___CompiledClass___local_class_t)CALL((recv), (SFT_compiling_global[13] + 1)))
-#define CALL_compiling_global___CompiledClass___id(recv) ((compiling_global___CompiledClass___id_t)CALL((recv), (SFT_compiling_global[13] + 2)))
-#define CALL_compiling_global___CompiledClass___id__eq(recv) ((compiling_global___CompiledClass___id__eq_t)CALL((recv), (SFT_compiling_global[13] + 3)))
-#define CALL_compiling_global___CompiledClass___class_table(recv) ((compiling_global___CompiledClass___class_table_t)CALL((recv), (SFT_compiling_global[13] + 4)))
-#define CALL_compiling_global___CompiledClass___class_table__eq(recv) ((compiling_global___CompiledClass___class_table__eq_t)CALL((recv), (SFT_compiling_global[13] + 5)))
-#define CALL_compiling_global___CompiledClass___instance_table(recv) ((compiling_global___CompiledClass___instance_table_t)CALL((recv), (SFT_compiling_global[13] + 6)))
-#define CALL_compiling_global___CompiledClass___instance_table__eq(recv) ((compiling_global___CompiledClass___instance_table__eq_t)CALL((recv), (SFT_compiling_global[13] + 7)))
-#define CALL_compiling_global___CompiledClass___class_layout(recv) ((compiling_global___CompiledClass___class_layout_t)CALL((recv), (SFT_compiling_global[13] + 8)))
-#define CALL_compiling_global___CompiledClass___class_layout__eq(recv) ((compiling_global___CompiledClass___class_layout__eq_t)CALL((recv), (SFT_compiling_global[13] + 9)))
-#define CALL_compiling_global___CompiledClass___instance_layout(recv) ((compiling_global___CompiledClass___instance_layout_t)CALL((recv), (SFT_compiling_global[13] + 10)))
-#define CALL_compiling_global___CompiledClass___instance_layout__eq(recv) ((compiling_global___CompiledClass___instance_layout__eq_t)CALL((recv), (SFT_compiling_global[13] + 11)))
-#define CALL_compiling_global___CompiledClass___init(recv) ((compiling_global___CompiledClass___init_t)CALL((recv), (SFT_compiling_global[13] + 12)))
-#define ATTR_compiling_global___MMSrcLocalClass____class_color_pos(recv) ATTR(recv, (SFT_compiling_global[14] + 0))
-#define ATTR_compiling_global___MMSrcLocalClass____class_layout(recv) ATTR(recv, (SFT_compiling_global[14] + 1))
-#define ATTR_compiling_global___MMSrcLocalClass____instance_layout(recv) ATTR(recv, (SFT_compiling_global[14] + 2))
-#define CALL_compiling_global___MMSrcLocalClass___class_color_pos(recv) ((compiling_global___MMSrcLocalClass___class_color_pos_t)CALL((recv), (SFT_compiling_global[15] + 0)))
-#define CALL_compiling_global___MMSrcLocalClass___class_layout(recv) ((compiling_global___MMSrcLocalClass___class_layout_t)CALL((recv), (SFT_compiling_global[15] + 1)))
-#define CALL_compiling_global___MMSrcLocalClass___instance_layout(recv) ((compiling_global___MMSrcLocalClass___instance_layout_t)CALL((recv), (SFT_compiling_global[15] + 2)))
-#define CALL_compiling_global___MMSrcLocalClass___build_layout_in(recv) ((compiling_global___MMSrcLocalClass___build_layout_in_t)CALL((recv), (SFT_compiling_global[15] + 3)))
-#define ATTR_compiling_global___MMSrcModule____local_table(recv) ATTR(recv, (SFT_compiling_global[16] + 0))
-#define CALL_compiling_global___MMSrcModule___local_analysis(recv) ((compiling_global___MMSrcModule___local_analysis_t)CALL((recv), (SFT_compiling_global[17] + 0)))
-#define CALL_compiling_global___MMSrcModule___global_analysis(recv) ((compiling_global___MMSrcModule___global_analysis_t)CALL((recv), (SFT_compiling_global[17] + 1)))
-#define CALL_compiling_global___MMSrcModule___append_to_table(recv) ((compiling_global___MMSrcModule___append_to_table_t)CALL((recv), (SFT_compiling_global[17] + 2)))
-#define CALL_compiling_global___MMSrcModule___build_tables(recv) ((compiling_global___MMSrcModule___build_tables_t)CALL((recv), (SFT_compiling_global[17] + 3)))
-#define CALL_compiling_global___MMSrcModule___colorize(recv) ((compiling_global___MMSrcModule___colorize_t)CALL((recv), (SFT_compiling_global[17] + 4)))
-#define CALL_compiling_global___MMSrcModule___free_color(recv) ((compiling_global___MMSrcModule___free_color_t)CALL((recv), (SFT_compiling_global[17] + 5)))
-#define CALL_compiling_global___MMSrcModule___compile_tables_to_c(recv) ((compiling_global___MMSrcModule___compile_tables_to_c_t)CALL((recv), (SFT_compiling_global[17] + 6)))
-#define CALL_compiling_global___MMSrcModule___declare_class_tables_to_c(recv) ((compiling_global___MMSrcModule___declare_class_tables_to_c_t)CALL((recv), (SFT_compiling_global[17] + 7)))
-#define CALL_compiling_global___MMSrcModule___compile_main_part(recv) ((compiling_global___MMSrcModule___compile_main_part_t)CALL((recv), (SFT_compiling_global[17] + 8)))
-#define CALL_compiling_global___MMSrcModule___compile_mod_to_c(recv) ((compiling_global___MMSrcModule___compile_mod_to_c_t)CALL((recv), (SFT_compiling_global[17] + 9)))
-#define CALL_compiling_global___MMSrcModule___compile_local_table_to_c(recv) ((compiling_global___MMSrcModule___compile_local_table_to_c_t)CALL((recv), (SFT_compiling_global[17] + 10)))
-#define ID_AbsTableElt (SFT_compiling_global[18])
-#define COLOR_AbsTableElt (SFT_compiling_global[19])
-#define INIT_TABLE_POS_AbsTableElt (SFT_compiling_global[20] + 0)
-#define CALL_compiling_global___AbsTableElt___compile_macros(recv) ((compiling_global___AbsTableElt___compile_macros_t)CALL((recv), (SFT_compiling_global[20] + 1)))
-#define CALL_compiling_global___AbsTableElt___init(recv) ((compiling_global___AbsTableElt___init_t)CALL((recv), (SFT_compiling_global[20] + 2)))
-#define ID_TableElt (SFT_compiling_global[21])
-#define COLOR_TableElt (SFT_compiling_global[22])
-#define INIT_TABLE_POS_TableElt (SFT_compiling_global[23] + 0)
-#define CALL_compiling_global___TableElt___is_related_to(recv) ((compiling_global___TableElt___is_related_to_t)CALL((recv), (SFT_compiling_global[23] + 1)))
-#define CALL_compiling_global___TableElt___length(recv) ((compiling_global___TableElt___length_t)CALL((recv), (SFT_compiling_global[23] + 2)))
-#define CALL_compiling_global___TableElt___item(recv) ((compiling_global___TableElt___item_t)CALL((recv), (SFT_compiling_global[23] + 3)))
-#define CALL_compiling_global___TableElt___compile_to_c(recv) ((compiling_global___TableElt___compile_to_c_t)CALL((recv), (SFT_compiling_global[23] + 4)))
-#define ID_ModuleTableElt (SFT_compiling_global[24])
-#define COLOR_ModuleTableElt (SFT_compiling_global[25])
-#define INIT_TABLE_POS_ModuleTableElt (SFT_compiling_global[26] + 0)
-#define CALL_compiling_global___ModuleTableElt___value(recv) ((compiling_global___ModuleTableElt___value_t)CALL((recv), (SFT_compiling_global[26] + 1)))
-#define ID_ModuleTableEltGroup (SFT_compiling_global[27])
-#define COLOR_ModuleTableEltGroup (SFT_compiling_global[28])
-#define ATTR_compiling_global___ModuleTableEltGroup____elements(recv) ATTR(recv, (SFT_compiling_global[29] + 0))
-#define INIT_TABLE_POS_ModuleTableEltGroup (SFT_compiling_global[30] + 0)
-#define CALL_compiling_global___ModuleTableEltGroup___elements(recv) ((compiling_global___ModuleTableEltGroup___elements_t)CALL((recv), (SFT_compiling_global[30] + 1)))
-#define ID_TableEltProp (SFT_compiling_global[31])
-#define COLOR_TableEltProp (SFT_compiling_global[32])
-#define ATTR_compiling_global___TableEltProp____property(recv) ATTR(recv, (SFT_compiling_global[33] + 0))
-#define INIT_TABLE_POS_TableEltProp (SFT_compiling_global[34] + 0)
-#define CALL_compiling_global___TableEltProp___init(recv) ((compiling_global___TableEltProp___init_t)CALL((recv), (SFT_compiling_global[34] + 1)))
-#define ID_TableEltMeth (SFT_compiling_global[35])
-#define COLOR_TableEltMeth (SFT_compiling_global[36])
-#define INIT_TABLE_POS_TableEltMeth (SFT_compiling_global[37] + 0)
-#define ID_TableEltSuper (SFT_compiling_global[38])
-#define COLOR_TableEltSuper (SFT_compiling_global[39])
-#define INIT_TABLE_POS_TableEltSuper (SFT_compiling_global[40] + 0)
-#define ID_TableEltAttr (SFT_compiling_global[41])
-#define COLOR_TableEltAttr (SFT_compiling_global[42])
-#define INIT_TABLE_POS_TableEltAttr (SFT_compiling_global[43] + 0)
-#define ID_AbsTableEltClass (SFT_compiling_global[44])
-#define COLOR_AbsTableEltClass (SFT_compiling_global[45])
-#define ATTR_compiling_global___AbsTableEltClass____local_class(recv) ATTR(recv, (SFT_compiling_global[46] + 0))
-#define INIT_TABLE_POS_AbsTableEltClass (SFT_compiling_global[47] + 0)
-#define CALL_compiling_global___AbsTableEltClass___init(recv) ((compiling_global___AbsTableEltClass___init_t)CALL((recv), (SFT_compiling_global[47] + 1)))
-#define CALL_compiling_global___AbsTableEltClass___symbol(recv) ((compiling_global___AbsTableEltClass___symbol_t)CALL((recv), (SFT_compiling_global[47] + 2)))
-#define ID_TableEltClass (SFT_compiling_global[48])
-#define COLOR_TableEltClass (SFT_compiling_global[49])
-#define INIT_TABLE_POS_TableEltClass (SFT_compiling_global[50] + 0)
-#define ID_TableEltClassId (SFT_compiling_global[51])
-#define COLOR_TableEltClassId (SFT_compiling_global[52])
-#define INIT_TABLE_POS_TableEltClassId (SFT_compiling_global[53] + 0)
-#define ID_TableEltClassInitTable (SFT_compiling_global[54])
-#define COLOR_TableEltClassInitTable (SFT_compiling_global[55])
-#define INIT_TABLE_POS_TableEltClassInitTable (SFT_compiling_global[56] + 0)
-#define ID_TableEltClassColor (SFT_compiling_global[57])
-#define COLOR_TableEltClassColor (SFT_compiling_global[58])
-#define INIT_TABLE_POS_TableEltClassColor (SFT_compiling_global[59] + 0)
-#define ID_TableEltComposite (SFT_compiling_global[60])
-#define COLOR_TableEltComposite (SFT_compiling_global[61])
-#define ATTR_compiling_global___TableEltComposite____table(recv) ATTR(recv, (SFT_compiling_global[62] + 0))
-#define ATTR_compiling_global___TableEltComposite____cc(recv) ATTR(recv, (SFT_compiling_global[62] + 1))
-#define ATTR_compiling_global___TableEltComposite____offsets(recv) ATTR(recv, (SFT_compiling_global[62] + 2))
-#define INIT_TABLE_POS_TableEltComposite (SFT_compiling_global[63] + 0)
-#define CALL_compiling_global___TableEltComposite___add(recv) ((compiling_global___TableEltComposite___add_t)CALL((recv), (SFT_compiling_global[63] + 1)))
-#define CALL_compiling_global___TableEltComposite___init(recv) ((compiling_global___TableEltComposite___init_t)CALL((recv), (SFT_compiling_global[63] + 2)))
-#define ID_TableEltClassSelfId (SFT_compiling_global[64])
-#define COLOR_TableEltClassSelfId (SFT_compiling_global[65])
-#define INIT_TABLE_POS_TableEltClassSelfId (SFT_compiling_global[66] + 0)
-#define ID_TableEltVftPointer (SFT_compiling_global[67])
-#define COLOR_TableEltVftPointer (SFT_compiling_global[68])
-#define INIT_TABLE_POS_TableEltVftPointer (SFT_compiling_global[69] + 0)
-#define ID_ClassSorter (SFT_compiling_global[70])
-#define COLOR_ClassSorter (SFT_compiling_global[71])
-#define INIT_TABLE_POS_ClassSorter (SFT_compiling_global[72] + 0)
-#define CALL_compiling_global___ClassSorter___init(recv) ((compiling_global___ClassSorter___init_t)CALL((recv), (SFT_compiling_global[72] + 1)))
-#define CALL_compiling_global___MMLocalClass___compare(recv) ((compiling_global___MMLocalClass___compare_t)CALL((recv), (SFT_compiling_global[73] + 0)))
-#define CALL_compiling_global___MMLocalClass___declare_tables_to_c(recv) ((compiling_global___MMLocalClass___declare_tables_to_c_t)CALL((recv), (SFT_compiling_global[73] + 1)))
-#define CALL_compiling_global___MMLocalClass___compile_tables_to_c(recv) ((compiling_global___MMLocalClass___compile_tables_to_c_t)CALL((recv), (SFT_compiling_global[73] + 2)))
+#define ID_GlobalCompilerVisitor (SFT_compiling_global[8])
+#define COLOR_GlobalCompilerVisitor (SFT_compiling_global[9])
+#define ATTR_compiling_global___GlobalCompilerVisitor____global_analysis(recv) ATTR(recv, (SFT_compiling_global[10] + 0))
+#define INIT_TABLE_POS_GlobalCompilerVisitor (SFT_compiling_global[11] + 0)
+#define CALL_compiling_global___GlobalCompilerVisitor___global_analysis(recv) ((compiling_global___GlobalCompilerVisitor___global_analysis_t)CALL((recv), (SFT_compiling_global[11] + 1)))
+#define CALL_compiling_global___GlobalCompilerVisitor___init(recv) ((compiling_global___GlobalCompilerVisitor___init_t)CALL((recv), (SFT_compiling_global[11] + 2)))
+#define ID_CompiledClass (SFT_compiling_global[12])
+#define COLOR_CompiledClass (SFT_compiling_global[13])
+#define ATTR_compiling_global___CompiledClass____local_class(recv) ATTR(recv, (SFT_compiling_global[14] + 0))
+#define ATTR_compiling_global___CompiledClass____id(recv) ATTR(recv, (SFT_compiling_global[14] + 1))
+#define ATTR_compiling_global___CompiledClass____class_table(recv) ATTR(recv, (SFT_compiling_global[14] + 2))
+#define ATTR_compiling_global___CompiledClass____instance_table(recv) ATTR(recv, (SFT_compiling_global[14] + 3))
+#define ATTR_compiling_global___CompiledClass____class_layout(recv) ATTR(recv, (SFT_compiling_global[14] + 4))
+#define ATTR_compiling_global___CompiledClass____instance_layout(recv) ATTR(recv, (SFT_compiling_global[14] + 5))
+#define INIT_TABLE_POS_CompiledClass (SFT_compiling_global[15] + 0)
+#define CALL_compiling_global___CompiledClass___local_class(recv) ((compiling_global___CompiledClass___local_class_t)CALL((recv), (SFT_compiling_global[15] + 1)))
+#define CALL_compiling_global___CompiledClass___id(recv) ((compiling_global___CompiledClass___id_t)CALL((recv), (SFT_compiling_global[15] + 2)))
+#define CALL_compiling_global___CompiledClass___id__eq(recv) ((compiling_global___CompiledClass___id__eq_t)CALL((recv), (SFT_compiling_global[15] + 3)))
+#define CALL_compiling_global___CompiledClass___class_table(recv) ((compiling_global___CompiledClass___class_table_t)CALL((recv), (SFT_compiling_global[15] + 4)))
+#define CALL_compiling_global___CompiledClass___instance_table(recv) ((compiling_global___CompiledClass___instance_table_t)CALL((recv), (SFT_compiling_global[15] + 5)))
+#define CALL_compiling_global___CompiledClass___class_layout(recv) ((compiling_global___CompiledClass___class_layout_t)CALL((recv), (SFT_compiling_global[15] + 6)))
+#define CALL_compiling_global___CompiledClass___instance_layout(recv) ((compiling_global___CompiledClass___instance_layout_t)CALL((recv), (SFT_compiling_global[15] + 7)))
+#define CALL_compiling_global___CompiledClass___init(recv) ((compiling_global___CompiledClass___init_t)CALL((recv), (SFT_compiling_global[15] + 8)))
+#define ATTR_compiling_global___MMSrcLocalClass____class_color_pos(recv) ATTR(recv, (SFT_compiling_global[16] + 0))
+#define ATTR_compiling_global___MMSrcLocalClass____class_layout(recv) ATTR(recv, (SFT_compiling_global[16] + 1))
+#define ATTR_compiling_global___MMSrcLocalClass____instance_layout(recv) ATTR(recv, (SFT_compiling_global[16] + 2))
+#define CALL_compiling_global___MMSrcLocalClass___class_color_pos(recv) ((compiling_global___MMSrcLocalClass___class_color_pos_t)CALL((recv), (SFT_compiling_global[17] + 0)))
+#define CALL_compiling_global___MMSrcLocalClass___class_layout(recv) ((compiling_global___MMSrcLocalClass___class_layout_t)CALL((recv), (SFT_compiling_global[17] + 1)))
+#define CALL_compiling_global___MMSrcLocalClass___instance_layout(recv) ((compiling_global___MMSrcLocalClass___instance_layout_t)CALL((recv), (SFT_compiling_global[17] + 2)))
+#define CALL_compiling_global___MMSrcLocalClass___build_layout_in(recv) ((compiling_global___MMSrcLocalClass___build_layout_in_t)CALL((recv), (SFT_compiling_global[17] + 3)))
+#define ATTR_compiling_global___MMSrcModule____local_table(recv) ATTR(recv, (SFT_compiling_global[18] + 0))
+#define CALL_compiling_global___MMSrcModule___local_analysis(recv) ((compiling_global___MMSrcModule___local_analysis_t)CALL((recv), (SFT_compiling_global[19] + 0)))
+#define CALL_compiling_global___MMSrcModule___global_analysis(recv) ((compiling_global___MMSrcModule___global_analysis_t)CALL((recv), (SFT_compiling_global[19] + 1)))
+#define CALL_compiling_global___MMSrcModule___append_to_table(recv) ((compiling_global___MMSrcModule___append_to_table_t)CALL((recv), (SFT_compiling_global[19] + 2)))
+#define CALL_compiling_global___MMSrcModule___build_tables_in(recv) ((compiling_global___MMSrcModule___build_tables_in_t)CALL((recv), (SFT_compiling_global[19] + 3)))
+#define CALL_compiling_global___MMSrcModule___colorize(recv) ((compiling_global___MMSrcModule___colorize_t)CALL((recv), (SFT_compiling_global[19] + 4)))
+#define CALL_compiling_global___MMSrcModule___free_color(recv) ((compiling_global___MMSrcModule___free_color_t)CALL((recv), (SFT_compiling_global[19] + 5)))
+#define CALL_compiling_global___MMSrcModule___compile_tables_to_c(recv) ((compiling_global___MMSrcModule___compile_tables_to_c_t)CALL((recv), (SFT_compiling_global[19] + 6)))
+#define CALL_compiling_global___MMSrcModule___declare_class_tables_to_c(recv) ((compiling_global___MMSrcModule___declare_class_tables_to_c_t)CALL((recv), (SFT_compiling_global[19] + 7)))
+#define CALL_compiling_global___MMSrcModule___compile_main_part(recv) ((compiling_global___MMSrcModule___compile_main_part_t)CALL((recv), (SFT_compiling_global[19] + 8)))
+#define CALL_compiling_global___MMSrcModule___compile_mod_to_c(recv) ((compiling_global___MMSrcModule___compile_mod_to_c_t)CALL((recv), (SFT_compiling_global[19] + 9)))
+#define CALL_compiling_global___MMSrcModule___compile_local_table_to_c(recv) ((compiling_global___MMSrcModule___compile_local_table_to_c_t)CALL((recv), (SFT_compiling_global[19] + 10)))
+#define ID_AbsTableElt (SFT_compiling_global[20])
+#define COLOR_AbsTableElt (SFT_compiling_global[21])
+#define INIT_TABLE_POS_AbsTableElt (SFT_compiling_global[22] + 0)
+#define CALL_compiling_global___AbsTableElt___compile_macros(recv) ((compiling_global___AbsTableElt___compile_macros_t)CALL((recv), (SFT_compiling_global[22] + 1)))
+#define CALL_compiling_global___AbsTableElt___init(recv) ((compiling_global___AbsTableElt___init_t)CALL((recv), (SFT_compiling_global[22] + 2)))
+#define ID_TableElt (SFT_compiling_global[23])
+#define COLOR_TableElt (SFT_compiling_global[24])
+#define INIT_TABLE_POS_TableElt (SFT_compiling_global[25] + 0)
+#define CALL_compiling_global___TableElt___is_related_to(recv) ((compiling_global___TableElt___is_related_to_t)CALL((recv), (SFT_compiling_global[25] + 1)))
+#define CALL_compiling_global___TableElt___length(recv) ((compiling_global___TableElt___length_t)CALL((recv), (SFT_compiling_global[25] + 2)))
+#define CALL_compiling_global___TableElt___item(recv) ((compiling_global___TableElt___item_t)CALL((recv), (SFT_compiling_global[25] + 3)))
+#define CALL_compiling_global___TableElt___compile_to_c(recv) ((compiling_global___TableElt___compile_to_c_t)CALL((recv), (SFT_compiling_global[25] + 4)))
+#define ID_ModuleTableElt (SFT_compiling_global[26])
+#define COLOR_ModuleTableElt (SFT_compiling_global[27])
+#define INIT_TABLE_POS_ModuleTableElt (SFT_compiling_global[28] + 0)
+#define CALL_compiling_global___ModuleTableElt___value(recv) ((compiling_global___ModuleTableElt___value_t)CALL((recv), (SFT_compiling_global[28] + 1)))
+#define ID_ModuleTableEltGroup (SFT_compiling_global[29])
+#define COLOR_ModuleTableEltGroup (SFT_compiling_global[30])
+#define ATTR_compiling_global___ModuleTableEltGroup____elements(recv) ATTR(recv, (SFT_compiling_global[31] + 0))
+#define INIT_TABLE_POS_ModuleTableEltGroup (SFT_compiling_global[32] + 0)
+#define CALL_compiling_global___ModuleTableEltGroup___elements(recv) ((compiling_global___ModuleTableEltGroup___elements_t)CALL((recv), (SFT_compiling_global[32] + 1)))
+#define ID_TableEltProp (SFT_compiling_global[33])
+#define COLOR_TableEltProp (SFT_compiling_global[34])
+#define ATTR_compiling_global___TableEltProp____property(recv) ATTR(recv, (SFT_compiling_global[35] + 0))
+#define INIT_TABLE_POS_TableEltProp (SFT_compiling_global[36] + 0)
+#define CALL_compiling_global___TableEltProp___init(recv) ((compiling_global___TableEltProp___init_t)CALL((recv), (SFT_compiling_global[36] + 1)))
+#define ID_TableEltMeth (SFT_compiling_global[37])
+#define COLOR_TableEltMeth (SFT_compiling_global[38])
+#define INIT_TABLE_POS_TableEltMeth (SFT_compiling_global[39] + 0)
+#define ID_TableEltSuper (SFT_compiling_global[40])
+#define COLOR_TableEltSuper (SFT_compiling_global[41])
+#define INIT_TABLE_POS_TableEltSuper (SFT_compiling_global[42] + 0)
+#define ID_TableEltAttr (SFT_compiling_global[43])
+#define COLOR_TableEltAttr (SFT_compiling_global[44])
+#define INIT_TABLE_POS_TableEltAttr (SFT_compiling_global[45] + 0)
+#define ID_AbsTableEltClass (SFT_compiling_global[46])
+#define COLOR_AbsTableEltClass (SFT_compiling_global[47])
+#define ATTR_compiling_global___AbsTableEltClass____local_class(recv) ATTR(recv, (SFT_compiling_global[48] + 0))
+#define INIT_TABLE_POS_AbsTableEltClass (SFT_compiling_global[49] + 0)
+#define CALL_compiling_global___AbsTableEltClass___init(recv) ((compiling_global___AbsTableEltClass___init_t)CALL((recv), (SFT_compiling_global[49] + 1)))
+#define CALL_compiling_global___AbsTableEltClass___symbol(recv) ((compiling_global___AbsTableEltClass___symbol_t)CALL((recv), (SFT_compiling_global[49] + 2)))
+#define ID_TableEltClass (SFT_compiling_global[50])
+#define COLOR_TableEltClass (SFT_compiling_global[51])
+#define INIT_TABLE_POS_TableEltClass (SFT_compiling_global[52] + 0)
+#define ID_TableEltClassId (SFT_compiling_global[53])
+#define COLOR_TableEltClassId (SFT_compiling_global[54])
+#define INIT_TABLE_POS_TableEltClassId (SFT_compiling_global[55] + 0)
+#define ID_TableEltClassInitTable (SFT_compiling_global[56])
+#define COLOR_TableEltClassInitTable (SFT_compiling_global[57])
+#define INIT_TABLE_POS_TableEltClassInitTable (SFT_compiling_global[58] + 0)
+#define ID_TableEltClassColor (SFT_compiling_global[59])
+#define COLOR_TableEltClassColor (SFT_compiling_global[60])
+#define INIT_TABLE_POS_TableEltClassColor (SFT_compiling_global[61] + 0)
+#define ID_TableEltComposite (SFT_compiling_global[62])
+#define COLOR_TableEltComposite (SFT_compiling_global[63])
+#define ATTR_compiling_global___TableEltComposite____table(recv) ATTR(recv, (SFT_compiling_global[64] + 0))
+#define ATTR_compiling_global___TableEltComposite____cc(recv) ATTR(recv, (SFT_compiling_global[64] + 1))
+#define ATTR_compiling_global___TableEltComposite____offsets(recv) ATTR(recv, (SFT_compiling_global[64] + 2))
+#define INIT_TABLE_POS_TableEltComposite (SFT_compiling_global[65] + 0)
+#define CALL_compiling_global___TableEltComposite___add(recv) ((compiling_global___TableEltComposite___add_t)CALL((recv), (SFT_compiling_global[65] + 1)))
+#define CALL_compiling_global___TableEltComposite___init(recv) ((compiling_global___TableEltComposite___init_t)CALL((recv), (SFT_compiling_global[65] + 2)))
+#define ID_TableEltClassSelfId (SFT_compiling_global[66])
+#define COLOR_TableEltClassSelfId (SFT_compiling_global[67])
+#define INIT_TABLE_POS_TableEltClassSelfId (SFT_compiling_global[68] + 0)
+#define ID_TableEltVftPointer (SFT_compiling_global[69])
+#define COLOR_TableEltVftPointer (SFT_compiling_global[70])
+#define INIT_TABLE_POS_TableEltVftPointer (SFT_compiling_global[71] + 0)
+#define ID_ClassSorter (SFT_compiling_global[72])
+#define COLOR_ClassSorter (SFT_compiling_global[73])
+#define INIT_TABLE_POS_ClassSorter (SFT_compiling_global[74] + 0)
+#define CALL_compiling_global___ClassSorter___init(recv) ((compiling_global___ClassSorter___init_t)CALL((recv), (SFT_compiling_global[74] + 1)))
+#define CALL_compiling_global___MMLocalClass___compare(recv) ((compiling_global___MMLocalClass___compare_t)CALL((recv), (SFT_compiling_global[75] + 0)))
+#define CALL_compiling_global___MMLocalClass___declare_tables_to_c(recv) ((compiling_global___MMLocalClass___declare_tables_to_c_t)CALL((recv), (SFT_compiling_global[75] + 1)))
+#define CALL_compiling_global___MMLocalClass___compile_tables_to_c(recv) ((compiling_global___MMLocalClass___compile_tables_to_c_t)CALL((recv), (SFT_compiling_global[75] + 2)))
 typedef val_t (* compiling_global___ColorContext___color_t)(val_t  self, val_t  param0);
 val_t compiling_global___ColorContext___color(val_t  self, val_t  param0);
 #define LOCATE_compiling_global___ColorContext___color "compiling_global::ColorContext::color"
@@ -210,13 +211,13 @@ typedef void (* compiling_global___GlobalAnalysis___init_t)(val_t  self, val_t  
 void compiling_global___GlobalAnalysis___init(val_t  self, val_t  param0, int* init_table);
 #define LOCATE_compiling_global___GlobalAnalysis___init "compiling_global::GlobalAnalysis::init"
 val_t NEW_GlobalAnalysis_compiling_global___GlobalAnalysis___init(val_t p0);
-val_t NEW_CompilerVisitor_compiling_base___CompilerVisitor___init(val_t p0);
-typedef val_t (* compiling_global___CompilerVisitor___global_analysis_t)(val_t  self);
-val_t compiling_global___CompilerVisitor___global_analysis(val_t  self);
-#define LOCATE_compiling_global___CompilerVisitor___global_analysis "compiling_global::CompilerVisitor::global_analysis"
-typedef void (* compiling_global___CompilerVisitor___global_analysis__eq_t)(val_t  self, val_t  param0);
-void compiling_global___CompilerVisitor___global_analysis__eq(val_t  self, val_t  param0);
-#define LOCATE_compiling_global___CompilerVisitor___global_analysis__eq "compiling_global::CompilerVisitor::global_analysis="
+typedef val_t (* compiling_global___GlobalCompilerVisitor___global_analysis_t)(val_t  self);
+val_t compiling_global___GlobalCompilerVisitor___global_analysis(val_t  self);
+#define LOCATE_compiling_global___GlobalCompilerVisitor___global_analysis "compiling_global::GlobalCompilerVisitor::global_analysis"
+typedef void (* compiling_global___GlobalCompilerVisitor___init_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+void compiling_global___GlobalCompilerVisitor___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table);
+#define LOCATE_compiling_global___GlobalCompilerVisitor___init "compiling_global::GlobalCompilerVisitor::init"
+val_t NEW_GlobalCompilerVisitor_compiling_global___GlobalCompilerVisitor___init(val_t p0, val_t p1, val_t p2);
 typedef val_t (* compiling_global___CompiledClass___local_class_t)(val_t  self);
 val_t compiling_global___CompiledClass___local_class(val_t  self);
 #define LOCATE_compiling_global___CompiledClass___local_class "compiling_global::CompiledClass::local_class"
@@ -229,32 +230,20 @@ void compiling_global___CompiledClass___id__eq(val_t  self, val_t  param0);
 typedef val_t (* compiling_global___CompiledClass___class_table_t)(val_t  self);
 val_t compiling_global___CompiledClass___class_table(val_t  self);
 #define LOCATE_compiling_global___CompiledClass___class_table "compiling_global::CompiledClass::class_table"
-typedef void (* compiling_global___CompiledClass___class_table__eq_t)(val_t  self, val_t  param0);
-void compiling_global___CompiledClass___class_table__eq(val_t  self, val_t  param0);
-#define LOCATE_compiling_global___CompiledClass___class_table__eq "compiling_global::CompiledClass::class_table="
 typedef val_t (* compiling_global___CompiledClass___instance_table_t)(val_t  self);
 val_t compiling_global___CompiledClass___instance_table(val_t  self);
 #define LOCATE_compiling_global___CompiledClass___instance_table "compiling_global::CompiledClass::instance_table"
-typedef void (* compiling_global___CompiledClass___instance_table__eq_t)(val_t  self, val_t  param0);
-void compiling_global___CompiledClass___instance_table__eq(val_t  self, val_t  param0);
-#define LOCATE_compiling_global___CompiledClass___instance_table__eq "compiling_global::CompiledClass::instance_table="
 typedef val_t (* compiling_global___CompiledClass___class_layout_t)(val_t  self);
 val_t compiling_global___CompiledClass___class_layout(val_t  self);
 #define LOCATE_compiling_global___CompiledClass___class_layout "compiling_global::CompiledClass::class_layout"
-typedef void (* compiling_global___CompiledClass___class_layout__eq_t)(val_t  self, val_t  param0);
-void compiling_global___CompiledClass___class_layout__eq(val_t  self, val_t  param0);
-#define LOCATE_compiling_global___CompiledClass___class_layout__eq "compiling_global::CompiledClass::class_layout="
 typedef val_t (* compiling_global___CompiledClass___instance_layout_t)(val_t  self);
 val_t compiling_global___CompiledClass___instance_layout(val_t  self);
 #define LOCATE_compiling_global___CompiledClass___instance_layout "compiling_global::CompiledClass::instance_layout"
-typedef void (* compiling_global___CompiledClass___instance_layout__eq_t)(val_t  self, val_t  param0);
-void compiling_global___CompiledClass___instance_layout__eq(val_t  self, val_t  param0);
-#define LOCATE_compiling_global___CompiledClass___instance_layout__eq "compiling_global::CompiledClass::instance_layout="
 typedef void (* compiling_global___CompiledClass___init_t)(val_t  self, val_t  param0, int* init_table);
 void compiling_global___CompiledClass___init(val_t  self, val_t  param0, int* init_table);
 #define LOCATE_compiling_global___CompiledClass___init "compiling_global::CompiledClass::init"
 val_t NEW_CompiledClass_compiling_global___CompiledClass___init(val_t p0);
-val_t NEW_MMSrcLocalClass_syntax_base___MMSrcLocalClass___init(val_t p0, val_t p1, val_t p2);
+val_t NEW_MMSrcLocalClass_syntax_base___MMSrcLocalClass___init(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef val_t (* compiling_global___MMSrcLocalClass___class_color_pos_t)(val_t  self);
 val_t compiling_global___MMSrcLocalClass___class_color_pos(val_t  self);
 #define LOCATE_compiling_global___MMSrcLocalClass___class_color_pos "compiling_global::MMSrcLocalClass::class_color_pos"
@@ -267,7 +256,7 @@ val_t compiling_global___MMSrcLocalClass___instance_layout(val_t  self);
 typedef void (* compiling_global___MMSrcLocalClass___build_layout_in_t)(val_t  self, val_t  param0, val_t  param1);
 void compiling_global___MMSrcLocalClass___build_layout_in(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_compiling_global___MMSrcLocalClass___build_layout_in "compiling_global::MMSrcLocalClass::build_layout_in"
-val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 typedef void (* compiling_global___MMSrcModule___local_analysis_t)(val_t  self, val_t  param0);
 void compiling_global___MMSrcModule___local_analysis(val_t  self, val_t  param0);
 #define LOCATE_compiling_global___MMSrcModule___local_analysis "compiling_global::MMSrcModule::local_analysis"
@@ -277,9 +266,9 @@ val_t compiling_global___MMSrcModule___global_analysis(val_t  self, val_t  param
 typedef void (* compiling_global___MMSrcModule___append_to_table_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 void compiling_global___MMSrcModule___append_to_table(val_t  self, val_t  param0, val_t  param1, val_t  param2);
 #define LOCATE_compiling_global___MMSrcModule___append_to_table "compiling_global::MMSrcModule::append_to_table"
-typedef val_t (* compiling_global___MMSrcModule___build_tables_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
-val_t compiling_global___MMSrcModule___build_tables(val_t  self, val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_compiling_global___MMSrcModule___build_tables "compiling_global::MMSrcModule::build_tables"
+typedef void (* compiling_global___MMSrcModule___build_tables_in_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
+void compiling_global___MMSrcModule___build_tables_in(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
+#define LOCATE_compiling_global___MMSrcModule___build_tables_in "compiling_global::MMSrcModule::build_tables_in"
 typedef void (* compiling_global___MMSrcModule___colorize_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
 void compiling_global___MMSrcModule___colorize(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
 #define LOCATE_compiling_global___MMSrcModule___colorize "compiling_global::MMSrcModule::colorize"
@@ -438,7 +427,7 @@ typedef void (* compiling_global___ClassSorter___init_t)(val_t  self, int* init_
 void compiling_global___ClassSorter___init(val_t  self, int* init_table);
 #define LOCATE_compiling_global___ClassSorter___init "compiling_global::ClassSorter::init"
 val_t NEW_ClassSorter_compiling_global___ClassSorter___init();
-val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1);
+val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
 typedef val_t (* compiling_global___MMLocalClass___compare_t)(val_t  self, val_t  param0);
 val_t compiling_global___MMLocalClass___compare(val_t  self, val_t  param0);
 #define LOCATE_compiling_global___MMLocalClass___compare "compiling_global::MMLocalClass::compare"

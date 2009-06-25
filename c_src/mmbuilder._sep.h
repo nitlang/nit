@@ -157,7 +157,6 @@ extern const int SFT_mmbuilder[];
 #define ATTR_mmbuilder___MethidAccumulator____name(recv) ATTR(recv, (SFT_mmbuilder[62] + 0))
 #define INIT_TABLE_POS_MethidAccumulator (SFT_mmbuilder[63] + 0)
 #define CALL_mmbuilder___MethidAccumulator___name(recv) ((mmbuilder___MethidAccumulator___name_t)CALL((recv), (SFT_mmbuilder[63] + 1)))
-#define CALL_mmbuilder___MethidAccumulator___init(recv) ((mmbuilder___MethidAccumulator___init_t)CALL((recv), (SFT_mmbuilder[63] + 2)))
 #define ATTR_mmbuilder___PMethid____name(recv) ATTR(recv, (SFT_mmbuilder[64] + 0))
 #define CALL_mmbuilder___PMethid___name(recv) ((mmbuilder___PMethid___name_t)CALL((recv), (SFT_mmbuilder[65] + 0)))
 #define CALL_SUPER_mmbuilder___PMethid___accept_property_builder(recv) ((mmbuilder___PMethid___accept_property_builder_t)CALL((recv), (SFT_mmbuilder[65] + 1)))
@@ -180,18 +179,18 @@ typedef void (* mmbuilder___CSHSorter___init_t)(val_t  self, int* init_table);
 void mmbuilder___CSHSorter___init(val_t  self, int* init_table);
 #define LOCATE_mmbuilder___CSHSorter___init "mmbuilder::CSHSorter::init"
 val_t NEW_CSHSorter_mmbuilder___CSHSorter___init();
-val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 typedef void (* mmbuilder___MMSrcModule___do_mmbuilder_t)(val_t  self, val_t  param0);
 void mmbuilder___MMSrcModule___do_mmbuilder(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___MMSrcModule___do_mmbuilder "mmbuilder::MMSrcModule::do_mmbuilder"
-val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1);
+val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
 typedef void (* mmbuilder___MMLocalClass___accept_class_visitor_t)(val_t  self, val_t  param0);
 void mmbuilder___MMLocalClass___accept_class_visitor(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___MMLocalClass___accept_class_visitor "mmbuilder::MMLocalClass::accept_class_visitor"
 typedef void (* mmbuilder___MMLocalClass___accept_properties_visitor_t)(val_t  self, val_t  param0);
 void mmbuilder___MMLocalClass___accept_properties_visitor(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___MMLocalClass___accept_properties_visitor "mmbuilder::MMLocalClass::accept_properties_visitor"
-val_t NEW_MMSrcLocalClass_syntax_base___MMSrcLocalClass___init(val_t p0, val_t p1, val_t p2);
+val_t NEW_MMSrcLocalClass_syntax_base___MMSrcLocalClass___init(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef void (* mmbuilder___MMSrcLocalClass___accept_class_visitor_t)(val_t  self, val_t  param0);
 void mmbuilder___MMSrcLocalClass___accept_class_visitor(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___MMSrcLocalClass___accept_class_visitor "mmbuilder::MMSrcLocalClass::(mmbuilder::MMLocalClass::accept_class_visitor)"
@@ -520,7 +519,7 @@ void mmbuilder___PPropdef___do_and_check_redef(val_t  self, val_t  param0, val_t
 #define LOCATE_mmbuilder___PPropdef___do_and_check_redef "mmbuilder::PPropdef::do_and_check_redef"
 val_t NEW_AAttrPropdef_parser_nodes___PNode___init();
 val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___empty_init();
-val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8);
+val_t NEW_AAttrPropdef_parser_prod___AAttrPropdef___init_aattrpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6, val_t p7, val_t p8, val_t p9);
 typedef void (* mmbuilder___AAttrPropdef___accept_abs_syntax_visitor_t)(val_t  self, val_t  param0);
 void mmbuilder___AAttrPropdef___accept_abs_syntax_visitor(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___AAttrPropdef___accept_abs_syntax_visitor "mmbuilder::AAttrPropdef::(syntax_base::PNode::accept_abs_syntax_visitor)"
@@ -585,13 +584,10 @@ void mmbuilder___ATypePropdef___accept_property_verifier(val_t  self, val_t  par
 typedef void (* mmbuilder___MethidAccumulator___visit_t)(val_t  self, val_t  param0);
 void mmbuilder___MethidAccumulator___visit(val_t  self, val_t  param0);
 #define LOCATE_mmbuilder___MethidAccumulator___visit "mmbuilder::MethidAccumulator::(parser_prod::Visitor::visit)"
+val_t NEW_MethidAccumulator_parser_prod___Visitor___init();
 typedef val_t (* mmbuilder___MethidAccumulator___name_t)(val_t  self);
 val_t mmbuilder___MethidAccumulator___name(val_t  self);
 #define LOCATE_mmbuilder___MethidAccumulator___name "mmbuilder::MethidAccumulator::name"
-typedef void (* mmbuilder___MethidAccumulator___init_t)(val_t  self, int* init_table);
-void mmbuilder___MethidAccumulator___init(val_t  self, int* init_table);
-#define LOCATE_mmbuilder___MethidAccumulator___init "mmbuilder::MethidAccumulator::init"
-val_t NEW_MethidAccumulator_mmbuilder___MethidAccumulator___init();
 val_t NEW_PMethid_parser_nodes___PNode___init();
 typedef void (* mmbuilder___PMethid___accept_property_builder_t)(val_t  self, val_t  param0);
 void mmbuilder___PMethid___accept_property_builder(val_t  self, val_t  param0);
@@ -652,7 +648,7 @@ void mmbuilder___PType___check_visibility(val_t  self, val_t  param0, val_t  par
 #define LOCATE_mmbuilder___PType___check_visibility "mmbuilder::PType::check_visibility"
 val_t NEW_AType_parser_nodes___PNode___init();
 val_t NEW_AType_parser_prod___AType___empty_init();
-val_t NEW_AType_parser_prod___AType___init_atype(val_t p0, val_t p1);
+val_t NEW_AType_parser_prod___AType___init_atype(val_t p0, val_t p1, val_t p2);
 typedef void (* mmbuilder___AType___check_visibility_t)(val_t  self, val_t  param0, val_t  param1);
 void mmbuilder___AType___check_visibility(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_mmbuilder___AType___check_visibility "mmbuilder::AType::(mmbuilder::PType::check_visibility)"

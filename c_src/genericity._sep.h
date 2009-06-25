@@ -38,7 +38,7 @@ extern const int SFT_genericity[];
 #define CALL_genericity___MMTypeFormalParameter___bound__eq(recv) ((genericity___MMTypeFormalParameter___bound__eq_t)CALL((recv), (SFT_genericity[10] + 3)))
 #define CALL_genericity___MMTypeFormalParameter___with_bound(recv) ((genericity___MMTypeFormalParameter___with_bound_t)CALL((recv), (SFT_genericity[10] + 4)))
 #define CALL_genericity___MMTypeFormalParameter___init(recv) ((genericity___MMTypeFormalParameter___init_t)CALL((recv), (SFT_genericity[10] + 5)))
-val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1);
+val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
 typedef val_t (* genericity___MMLocalClass___get_type_t)(val_t  self);
 val_t genericity___MMLocalClass___get_type(val_t  self);
 #define LOCATE_genericity___MMLocalClass___get_type "genericity::MMLocalClass::(static_type::MMLocalClass::get_type)"

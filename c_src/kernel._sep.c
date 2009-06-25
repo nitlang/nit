@@ -3,7 +3,7 @@
 val_t kernel___Object___object_id(val_t  self) {
   struct trace_t trace = {NULL, NULL, 26, LOCATE_kernel___Object___object_id};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -12,7 +12,7 @@ val_t kernel___Object___object_id(val_t  self) {
 val_t kernel___Object___is_same_type(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 29, LOCATE_kernel___Object___is_same_type};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -21,13 +21,16 @@ val_t kernel___Object___is_same_type(val_t  self, val_t  param0) {
 val_t kernel___Object_____eqeq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 32, LOCATE_kernel___Object_____eqeq};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = TAG_Bool(IS_EQUAL_NN(variable[3], variable[1] /*other*/));
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = TAG_Bool(IS_EQUAL_NN(variable[0], variable[1] /*other*/));
   variable[2] = variable[3];
   goto return_label0;
   return_label0: while(false);
@@ -37,13 +40,16 @@ val_t kernel___Object_____eqeq(val_t  self, val_t  param0) {
 val_t kernel___Object_____neq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 37, LOCATE_kernel___Object_____neq};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = TAG_Bool((variable[3] ==  variable[1] /*other*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], variable[1] /*other*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  variable[1] /*other*/) /*Object::==*/)))));
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = TAG_Bool((variable[0] ==  variable[1] /*other*/) || ((variable[0] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[0])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[0], variable[1] /*other*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[0])(variable[0],  variable[1] /*other*/) /*Object::==*/)))));
   variable[2] =  TAG_Bool(!UNTAG_Bool(variable[3]));
   goto return_label1;
   return_label1: while(false);
@@ -53,13 +59,15 @@ val_t kernel___Object_____neq(val_t  self, val_t  param0) {
 void kernel___Object___output(val_t  self) {
   struct trace_t trace = {NULL, NULL, 42, LOCATE_kernel___Object___output};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
   printf("%c", (unsigned char)UNTAG_Char( TAG_Char('<')));
-  variable[2] = variable[0];
-  variable[2] = TAG_Int((bigint)variable[2]);
+  /* Register variable[2]: Result */
+  variable[2] = TAG_Int((bigint)variable[0]);
   printf("%ld\n", UNTAG_Int(variable[2]));
   printf("%c", (unsigned char)UNTAG_Char( TAG_Char('>')));
   return_label2: while(false);
@@ -69,7 +77,7 @@ void kernel___Object___output(val_t  self) {
 void kernel___Object___exit(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 50, LOCATE_kernel___Object___exit};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   exit(UNTAG_Int( param0));
@@ -79,7 +87,7 @@ void kernel___Object___exit(val_t  self, val_t  param0) {
 val_t kernel___Object___sys(val_t  self) {
   struct trace_t trace = {NULL, NULL, 51, LOCATE_kernel___Object___sys};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -88,10 +96,12 @@ val_t kernel___Object___sys(val_t  self) {
 void kernel___Sys___main(val_t  self) {
   struct trace_t trace = {NULL, NULL, 56, LOCATE_kernel___Sys___main};
   val_t variable[2];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
   return_label3: while(false);
   tracehead = trace.prev;
   return;
@@ -99,7 +109,7 @@ void kernel___Sys___main(val_t  self) {
 void kernel___Sys___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 0, LOCATE_kernel___Sys___init};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -108,7 +118,7 @@ void kernel___Sys___init(val_t  self, int* init_table) {
 val_t kernel___Comparable_____l(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 69, LOCATE_kernel___Comparable_____l};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   fprintf(stderr, "Deferred method called");
@@ -120,13 +130,16 @@ val_t kernel___Comparable_____l(val_t  self, val_t  param0) {
 val_t kernel___Comparable_____leq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 72, LOCATE_kernel___Comparable_____leq};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_kernel___Comparable_____l( variable[1] /*other*/)( variable[1] /*other*/, variable[3]) /*Comparable::<*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_kernel___Comparable_____l( variable[1] /*other*/)( variable[1] /*other*/, variable[0]) /*Comparable::<*/;
   variable[2] =  TAG_Bool(!UNTAG_Bool(variable[3]));
   goto return_label4;
   return_label4: while(false);
@@ -136,13 +149,16 @@ val_t kernel___Comparable_____leq(val_t  self, val_t  param0) {
 val_t kernel___Comparable_____geq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 75, LOCATE_kernel___Comparable_____geq};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_kernel___Comparable_____l(variable[3])(variable[3],  variable[1] /*other*/) /*Comparable::<*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_kernel___Comparable_____l(variable[0])(variable[0],  variable[1] /*other*/) /*Comparable::<*/;
   variable[2] =  TAG_Bool(!UNTAG_Bool(variable[3]));
   goto return_label5;
   return_label5: while(false);
@@ -152,13 +168,16 @@ val_t kernel___Comparable_____geq(val_t  self, val_t  param0) {
 val_t kernel___Comparable_____g(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 78, LOCATE_kernel___Comparable_____g};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_kernel___Comparable_____l( variable[1] /*other*/)( variable[1] /*other*/, variable[3]) /*Comparable::<*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_kernel___Comparable_____l( variable[1] /*other*/)( variable[1] /*other*/, variable[0]) /*Comparable::<*/;
   variable[2] = variable[3];
   goto return_label6;
   return_label6: while(false);
@@ -168,20 +187,24 @@ val_t kernel___Comparable_____g(val_t  self, val_t  param0) {
 val_t kernel___Comparable_____leqg(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 81, LOCATE_kernel___Comparable_____leqg};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_kernel___Comparable_____l(variable[3])(variable[3],  variable[1] /*other*/) /*Comparable::<*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_kernel___Comparable_____l(variable[0])(variable[0],  variable[1] /*other*/) /*Comparable::<*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
+    /* Register variable[3]: Result */
     variable[3] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
     variable[2] = variable[3];
     goto return_label7;
   } else { /*if*/
-    variable[3] = variable[0];
-    variable[3] = CALL_kernel___Comparable_____l( variable[1] /*other*/)( variable[1] /*other*/, variable[3]) /*Comparable::<*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_kernel___Comparable_____l( variable[1] /*other*/)( variable[1] /*other*/, variable[0]) /*Comparable::<*/;
     if (UNTAG_Bool(variable[3])) { /*if*/
       variable[2] =  TAG_Int(1);
       goto return_label7;
@@ -196,21 +219,25 @@ val_t kernel___Comparable_____leqg(val_t  self, val_t  param0) {
 }
 val_t kernel___Comparable___is_between(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 93, LOCATE_kernel___Comparable___is_between};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
-  variable[4] = variable[0];
-  variable[4] = CALL_kernel___Comparable_____leq( variable[1] /*c*/)( variable[1] /*c*/, variable[4]) /*Comparable::<=*/;
-  variable[5] = variable[4];
-  if (UNTAG_Bool(variable[5])) { /* and */
-    variable[5] = variable[0];
-    variable[5] = CALL_kernel___Comparable_____leq(variable[5])(variable[5],  variable[2] /*d*/) /*Comparable::<=*/;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_kernel___Comparable_____leq( variable[1] /*c*/)( variable[1] /*c*/, variable[0]) /*Comparable::<=*/;
+  /* Ensure var variable[4]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[4])) { /* and */
+    /* Register variable[4]: Result */
+    variable[4] = CALL_kernel___Comparable_____leq(variable[0])(variable[0],  variable[2] /*d*/) /*Comparable::<=*/;
   }
-  variable[4] = variable[5];
+  /* Register variable[4]: Result */
   variable[3] = variable[4];
   goto return_label8;
   return_label8: while(false);
@@ -220,19 +247,21 @@ val_t kernel___Comparable___is_between(val_t  self, val_t  param0, val_t  param1
 val_t kernel___Comparable___max(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 99, LOCATE_kernel___Comparable___max};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_kernel___Comparable_____l(variable[3])(variable[3],  variable[1] /*other*/) /*Comparable::<*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_kernel___Comparable_____l(variable[0])(variable[0],  variable[1] /*other*/) /*Comparable::<*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[2] =  variable[1] /*other*/;
     goto return_label9;
   } else { /*if*/
-    variable[3] = variable[0];
-    variable[2] = variable[3];
+    variable[2] = variable[0];
     goto return_label9;
   }
   return_label9: while(false);
@@ -242,19 +271,21 @@ val_t kernel___Comparable___max(val_t  self, val_t  param0) {
 val_t kernel___Comparable___min(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 109, LOCATE_kernel___Comparable___min};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_kernel___Comparable_____l( variable[1] /*c*/)( variable[1] /*c*/, variable[3]) /*Comparable::<*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_kernel___Comparable_____l( variable[1] /*c*/)( variable[1] /*c*/, variable[0]) /*Comparable::<*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[2] =  variable[1] /*c*/;
     goto return_label10;
   } else { /*if*/
-    variable[3] = variable[0];
-    variable[2] = variable[3];
+    variable[2] = variable[0];
     goto return_label10;
   }
   return_label10: while(false);
@@ -264,12 +295,14 @@ val_t kernel___Comparable___min(val_t  self, val_t  param0) {
 val_t kernel___Discrete___succ(val_t  self) {
   struct trace_t trace = {NULL, NULL, 126, LOCATE_kernel___Discrete___succ};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_kernel___Discrete_____plus(variable[2])(variable[2],  TAG_Int(1)) /*Discrete::+*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_kernel___Discrete_____plus(variable[0])(variable[0],  TAG_Int(1)) /*Discrete::+*/;
   variable[1] = variable[2];
   goto return_label11;
   return_label11: while(false);
@@ -279,12 +312,14 @@ val_t kernel___Discrete___succ(val_t  self) {
 val_t kernel___Discrete___prec(val_t  self) {
   struct trace_t trace = {NULL, NULL, 129, LOCATE_kernel___Discrete___prec};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_kernel___Discrete_____minus(variable[2])(variable[2],  TAG_Int(1)) /*Discrete::-*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_kernel___Discrete_____minus(variable[0])(variable[0],  TAG_Int(1)) /*Discrete::-*/;
   variable[1] = variable[2];
   goto return_label12;
   return_label12: while(false);
@@ -294,7 +329,7 @@ val_t kernel___Discrete___prec(val_t  self) {
 val_t kernel___Discrete_____plus(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 132, LOCATE_kernel___Discrete_____plus};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   fprintf(stderr, "Deferred method called");
@@ -306,7 +341,7 @@ val_t kernel___Discrete_____plus(val_t  self, val_t  param0) {
 val_t kernel___Discrete_____minus(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 135, LOCATE_kernel___Discrete_____minus};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   fprintf(stderr, "Deferred method called");
@@ -318,35 +353,41 @@ val_t kernel___Discrete_____minus(val_t  self, val_t  param0) {
 val_t kernel___Discrete___distance(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 138, LOCATE_kernel___Discrete___distance};
   val_t variable[7];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
   /*variable[3] is variable cursor*/
+  /* Register variable[4]: Local variable */
   /*variable[4] is variable stop*/
-  variable[5] = variable[0];
-  variable[5] = CALL_kernel___Comparable_____l(variable[5])(variable[5],  variable[1] /*d*/) /*Comparable::<*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_kernel___Comparable_____l(variable[0])(variable[0],  variable[1] /*d*/) /*Comparable::<*/;
   if (UNTAG_Bool(variable[5])) { /*if*/
-    variable[5] = variable[0];
-    variable[3] = variable[5] /*cursor=*/;
+    variable[3] = variable[0] /*cursor=*/;
     variable[4] =  variable[1] /*d*/ /*stop=*/;
   } else { /*if*/
-    variable[5] = variable[0];
-    variable[5] = CALL_kernel___Comparable_____g(variable[5])(variable[5],  variable[1] /*d*/) /*Comparable::>*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_kernel___Comparable_____g(variable[0])(variable[0],  variable[1] /*d*/) /*Comparable::>*/;
     if (UNTAG_Bool(variable[5])) { /*if*/
       variable[3] =  variable[1] /*d*/ /*cursor=*/;
-      variable[5] = variable[0];
-      variable[4] = variable[5] /*stop=*/;
+      variable[4] = variable[0] /*stop=*/;
     } else { /*if*/
       variable[2] =  TAG_Int(0);
       goto return_label13;
     }
   }
+  /* Register variable[5]: Local variable */
   variable[5] =  TAG_Int(0);
   while (true) { /*while*/
+    /* Register variable[6]: Result */
     variable[6] = CALL_kernel___Comparable_____l( variable[3] /*cursor*/)( variable[3] /*cursor*/,  variable[4] /*stop*/) /*Comparable::<*/;
     if (!UNTAG_Bool(variable[6])) break; /* while*/
+    /* Register variable[6]: Result */
     variable[6] = CALL_kernel___Discrete___succ( variable[3] /*cursor*/)( variable[3] /*cursor*/) /*Discrete::succ*/;
     variable[3] = variable[6] /*cursor=*/;
     variable[5] = TAG_Int(UNTAG_Int(variable[5])+UNTAG_Int( TAG_Int(1))) /*nb*/;
@@ -362,7 +403,7 @@ val_t kernel___Discrete___distance(val_t  self, val_t  param0) {
 val_t kernel___Bool___object_id(val_t  self) {
   struct trace_t trace = {NULL, NULL, 174, LOCATE_kernel___Bool___object_id};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -371,7 +412,7 @@ val_t kernel___Bool___object_id(val_t  self) {
 val_t kernel___Bool_____eqeq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 175, LOCATE_kernel___Bool_____eqeq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -380,7 +421,7 @@ val_t kernel___Bool_____eqeq(val_t  self, val_t  param0) {
 val_t kernel___Bool_____neq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 176, LOCATE_kernel___Bool_____neq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -389,7 +430,7 @@ val_t kernel___Bool_____neq(val_t  self, val_t  param0) {
 void kernel___Bool___output(val_t  self) {
   struct trace_t trace = {NULL, NULL, 177, LOCATE_kernel___Bool___output};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   (void)printf(UNTAG_Bool( self)?"true\n":"false\n");
@@ -399,7 +440,7 @@ void kernel___Bool___output(val_t  self) {
 val_t kernel___Float___object_id(val_t  self) {
   struct trace_t trace = {NULL, NULL, 183, LOCATE_kernel___Float___object_id};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -408,7 +449,7 @@ val_t kernel___Float___object_id(val_t  self) {
 void kernel___Float___output(val_t  self) {
   struct trace_t trace = {NULL, NULL, 184, LOCATE_kernel___Float___output};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   printf("%f\n", UNBOX_Float( self));
@@ -418,7 +459,7 @@ void kernel___Float___output(val_t  self) {
 val_t kernel___Float_____leq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 186, LOCATE_kernel___Float_____leq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -427,7 +468,7 @@ val_t kernel___Float_____leq(val_t  self, val_t  param0) {
 val_t kernel___Float_____l(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 187, LOCATE_kernel___Float_____l};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -436,7 +477,7 @@ val_t kernel___Float_____l(val_t  self, val_t  param0) {
 val_t kernel___Float_____geq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 188, LOCATE_kernel___Float_____geq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -445,7 +486,7 @@ val_t kernel___Float_____geq(val_t  self, val_t  param0) {
 val_t kernel___Float_____g(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 189, LOCATE_kernel___Float_____g};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -454,7 +495,7 @@ val_t kernel___Float_____g(val_t  self, val_t  param0) {
 val_t kernel___Float_____plus(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 190, LOCATE_kernel___Float_____plus};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -463,7 +504,7 @@ val_t kernel___Float_____plus(val_t  self, val_t  param0) {
 val_t kernel___Float___unary__minus(val_t  self) {
   struct trace_t trace = {NULL, NULL, 191, LOCATE_kernel___Float___unary__minus};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -472,7 +513,7 @@ val_t kernel___Float___unary__minus(val_t  self) {
 val_t kernel___Float_____minus(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 192, LOCATE_kernel___Float_____minus};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -481,7 +522,7 @@ val_t kernel___Float_____minus(val_t  self, val_t  param0) {
 val_t kernel___Float_____star(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 193, LOCATE_kernel___Float_____star};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -490,7 +531,7 @@ val_t kernel___Float_____star(val_t  self, val_t  param0) {
 val_t kernel___Float_____slash(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 194, LOCATE_kernel___Float_____slash};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -499,7 +540,7 @@ val_t kernel___Float_____slash(val_t  self, val_t  param0) {
 val_t kernel___Float___to_i(val_t  self) {
   struct trace_t trace = {NULL, NULL, 196, LOCATE_kernel___Float___to_i};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -508,7 +549,7 @@ val_t kernel___Float___to_i(val_t  self) {
 val_t kernel___Int___object_id(val_t  self) {
   struct trace_t trace = {NULL, NULL, 206, LOCATE_kernel___Int___object_id};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -517,7 +558,7 @@ val_t kernel___Int___object_id(val_t  self) {
 val_t kernel___Int_____eqeq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 207, LOCATE_kernel___Int_____eqeq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -526,7 +567,7 @@ val_t kernel___Int_____eqeq(val_t  self, val_t  param0) {
 val_t kernel___Int_____neq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 208, LOCATE_kernel___Int_____neq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -535,7 +576,7 @@ val_t kernel___Int_____neq(val_t  self, val_t  param0) {
 void kernel___Int___output(val_t  self) {
   struct trace_t trace = {NULL, NULL, 209, LOCATE_kernel___Int___output};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   printf("%ld\n", UNTAG_Int( self));
@@ -545,7 +586,7 @@ void kernel___Int___output(val_t  self) {
 val_t kernel___Int_____l(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 212, LOCATE_kernel___Int_____l};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -554,7 +595,7 @@ val_t kernel___Int_____l(val_t  self, val_t  param0) {
 val_t kernel___Int_____leq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 211, LOCATE_kernel___Int_____leq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -563,7 +604,7 @@ val_t kernel___Int_____leq(val_t  self, val_t  param0) {
 val_t kernel___Int_____geq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 213, LOCATE_kernel___Int_____geq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -572,7 +613,7 @@ val_t kernel___Int_____geq(val_t  self, val_t  param0) {
 val_t kernel___Int_____g(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 214, LOCATE_kernel___Int_____g};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -581,20 +622,24 @@ val_t kernel___Int_____g(val_t  self, val_t  param0) {
 val_t kernel___Int_____leqg(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 239, LOCATE_kernel___Int_____leqg};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = TAG_Bool(UNTAG_Int(variable[3])<UNTAG_Int( variable[1] /*other*/));
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = TAG_Bool(UNTAG_Int(variable[0])<UNTAG_Int( variable[1] /*other*/));
   if (UNTAG_Bool(variable[3])) { /*if*/
+    /* Register variable[3]: Result */
     variable[3] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
     variable[2] = variable[3];
     goto return_label15;
   } else { /*if*/
-    variable[3] = variable[0];
-    variable[3] = TAG_Bool(UNTAG_Int( variable[1] /*other*/)<UNTAG_Int(variable[3]));
+    /* Register variable[3]: Result */
+    variable[3] = TAG_Bool(UNTAG_Int( variable[1] /*other*/)<UNTAG_Int(variable[0]));
     if (UNTAG_Bool(variable[3])) { /*if*/
       variable[2] =  TAG_Int(1);
       goto return_label15;
@@ -609,21 +654,25 @@ val_t kernel___Int_____leqg(val_t  self, val_t  param0) {
 }
 val_t kernel___Int___is_between(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 250, LOCATE_kernel___Int___is_between};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
-  variable[4] = variable[0];
-  variable[4] = TAG_Bool(UNTAG_Int(variable[4])<UNTAG_Int( variable[1] /*c*/));
-  variable[5] = variable[4];
-  if (!UNTAG_Bool(variable[5])) { /* or */
-    variable[5] = variable[0];
-    variable[5] = TAG_Bool(UNTAG_Int( variable[2] /*d*/)<UNTAG_Int(variable[5]));
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Result */
+  variable[4] = TAG_Bool(UNTAG_Int(variable[0])<UNTAG_Int( variable[1] /*c*/));
+  /* Ensure var variable[4]: Left 'or' operand*/
+  if (!UNTAG_Bool(variable[4])) { /* or */
+    /* Register variable[4]: Result */
+    variable[4] = TAG_Bool(UNTAG_Int( variable[2] /*d*/)<UNTAG_Int(variable[0]));
   }
-  variable[4] = variable[5];
+  /* Register variable[4]: Result */
   if (UNTAG_Bool(variable[4])) { /*if*/
     variable[3] =  TAG_Bool(false);
     goto return_label16;
@@ -638,19 +687,21 @@ val_t kernel___Int___is_between(val_t  self, val_t  param0, val_t  param1) {
 val_t kernel___Int___max(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 259, LOCATE_kernel___Int___max};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = TAG_Bool(UNTAG_Int(variable[3])<UNTAG_Int( variable[1] /*other*/));
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = TAG_Bool(UNTAG_Int(variable[0])<UNTAG_Int( variable[1] /*other*/));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[2] =  variable[1] /*other*/;
     goto return_label17;
   } else { /*if*/
-    variable[3] = variable[0];
-    variable[2] = variable[3];
+    variable[2] = variable[0];
     goto return_label17;
   }
   return_label17: while(false);
@@ -660,19 +711,21 @@ val_t kernel___Int___max(val_t  self, val_t  param0) {
 val_t kernel___Int___min(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 268, LOCATE_kernel___Int___min};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = TAG_Bool(UNTAG_Int( variable[1] /*c*/)<UNTAG_Int(variable[3]));
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = TAG_Bool(UNTAG_Int( variable[1] /*c*/)<UNTAG_Int(variable[0]));
   if (UNTAG_Bool(variable[3])) { /*if*/
     variable[2] =  variable[1] /*c*/;
     goto return_label18;
   } else { /*if*/
-    variable[3] = variable[0];
-    variable[2] = variable[3];
+    variable[2] = variable[0];
     goto return_label18;
   }
   return_label18: while(false);
@@ -682,7 +735,7 @@ val_t kernel___Int___min(val_t  self, val_t  param0) {
 val_t kernel___Int___succ(val_t  self) {
   struct trace_t trace = {NULL, NULL, 227, LOCATE_kernel___Int___succ};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -691,7 +744,7 @@ val_t kernel___Int___succ(val_t  self) {
 val_t kernel___Int___prec(val_t  self) {
   struct trace_t trace = {NULL, NULL, 228, LOCATE_kernel___Int___prec};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -700,7 +753,7 @@ val_t kernel___Int___prec(val_t  self) {
 val_t kernel___Int_____plus(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 215, LOCATE_kernel___Int_____plus};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -709,7 +762,7 @@ val_t kernel___Int_____plus(val_t  self, val_t  param0) {
 val_t kernel___Int_____minus(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 217, LOCATE_kernel___Int_____minus};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -718,19 +771,25 @@ val_t kernel___Int_____minus(val_t  self, val_t  param0) {
 val_t kernel___Int___distance(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 229, LOCATE_kernel___Int___distance};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[4] = TAG_Int(UNTAG_Int(variable[4])-UNTAG_Int( variable[1] /*i*/));
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = TAG_Int(UNTAG_Int(variable[0])-UNTAG_Int( variable[1] /*i*/));
   variable[3] = variable[4];
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*d*/)>=UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[4])) { /*if*/
     variable[2] =  variable[3] /*d*/;
     goto return_label19;
   } else { /*if*/
+    /* Register variable[4]: Result */
     variable[4] = TAG_Int(-UNTAG_Int( variable[3] /*d*/));
     variable[2] = variable[4];
     goto return_label19;
@@ -742,7 +801,7 @@ val_t kernel___Int___distance(val_t  self, val_t  param0) {
 val_t kernel___Int___unary__minus(val_t  self) {
   struct trace_t trace = {NULL, NULL, 216, LOCATE_kernel___Int___unary__minus};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -751,7 +810,7 @@ val_t kernel___Int___unary__minus(val_t  self) {
 val_t kernel___Int_____star(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 218, LOCATE_kernel___Int_____star};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -760,7 +819,7 @@ val_t kernel___Int_____star(val_t  self, val_t  param0) {
 val_t kernel___Int_____slash(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 219, LOCATE_kernel___Int_____slash};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -769,7 +828,7 @@ val_t kernel___Int_____slash(val_t  self, val_t  param0) {
 val_t kernel___Int_____percent(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 220, LOCATE_kernel___Int_____percent};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -778,7 +837,7 @@ val_t kernel___Int_____percent(val_t  self, val_t  param0) {
 val_t kernel___Int___lshift(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 221, LOCATE_kernel___Int___lshift};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -787,7 +846,7 @@ val_t kernel___Int___lshift(val_t  self, val_t  param0) {
 val_t kernel___Int___rshift(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 222, LOCATE_kernel___Int___rshift};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -796,7 +855,7 @@ val_t kernel___Int___rshift(val_t  self, val_t  param0) {
 val_t kernel___Int___to_f(val_t  self) {
   struct trace_t trace = {NULL, NULL, 224, LOCATE_kernel___Int___to_f};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -805,7 +864,7 @@ val_t kernel___Int___to_f(val_t  self) {
 val_t kernel___Int___ascii(val_t  self) {
   struct trace_t trace = {NULL, NULL, 277, LOCATE_kernel___Int___ascii};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -814,36 +873,42 @@ val_t kernel___Int___ascii(val_t  self) {
 val_t kernel___Int___digit_count(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 280, LOCATE_kernel___Int___digit_count};
   val_t variable[6];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
   /*variable[3] is variable d*/
+  /* Register variable[4]: Local variable */
   /*variable[4] is variable n*/
-  variable[5] = variable[0];
-  variable[5] = TAG_Bool(UNTAG_Int(variable[5])<UNTAG_Int( TAG_Int(0)));
+  /* Register variable[5]: Result */
+  variable[5] = TAG_Bool(UNTAG_Int(variable[0])<UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[5])) { /*if*/
     variable[3] =  TAG_Int(1) /*d=*/;
-    variable[5] = variable[0];
-    variable[5] = TAG_Int(-UNTAG_Int(variable[5]));
+    /* Register variable[5]: Result */
+    variable[5] = TAG_Int(-UNTAG_Int(variable[0]));
     variable[4] = variable[5] /*n=*/;
   } else { /*if*/
-    variable[5] = variable[0];
-    variable[5] = TAG_Bool((variable[5])==( TAG_Int(0)));
+    /* Register variable[5]: Result */
+    variable[5] = TAG_Bool((variable[0])==( TAG_Int(0)));
     if (UNTAG_Bool(variable[5])) { /*if*/
       variable[2] =  TAG_Int(1);
       goto return_label20;
     } else { /*if*/
       variable[3] =  TAG_Int(0) /*d=*/;
-      variable[5] = variable[0];
-      variable[4] = variable[5] /*n=*/;
+      variable[4] = variable[0] /*n=*/;
     }
   }
   while (true) { /*while*/
+    /* Register variable[5]: Result */
     variable[5] = TAG_Bool(UNTAG_Int( variable[4] /*n*/)>UNTAG_Int( TAG_Int(0)));
     if (!UNTAG_Bool(variable[5])) break; /* while*/
     variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(1))) /*d*/;
+    /* Register variable[5]: Result */
     variable[5] = TAG_Int(UNTAG_Int( variable[4] /*n*/)/UNTAG_Int( variable[1] /*b*/));
     variable[4] = variable[5] /*n=*/;
     continue_21: while(0);
@@ -857,34 +922,41 @@ val_t kernel___Int___digit_count(val_t  self, val_t  param0) {
 }
 val_t kernel___Int___to_c(val_t  self) {
   struct trace_t trace = {NULL, NULL, 303, LOCATE_kernel___Int___to_c};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = TAG_Bool(UNTAG_Int(variable[2])>=UNTAG_Int( TAG_Int(0)));
-  variable[3] = variable[2];
-  if (UNTAG_Bool(variable[3])) { /* and */
-    variable[3] = variable[0];
-    variable[3] = TAG_Bool(UNTAG_Int(variable[3])<=UNTAG_Int( TAG_Int(36)));
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = TAG_Bool(UNTAG_Int(variable[0])>=UNTAG_Int( TAG_Int(0)));
+  /* Ensure var variable[2]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[2])) { /* and */
+    /* Register variable[2]: Result */
+    variable[2] = TAG_Bool(UNTAG_Int(variable[0])<=UNTAG_Int( TAG_Int(36)));
   }
-  variable[2] = variable[3];
+  /* Register variable[2]: Result */
   if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_kernel___Int___to_c, LOCATE_kernel, 308); nit_exit(1);}
-  variable[2] = variable[0];
-  variable[2] = TAG_Bool(UNTAG_Int(variable[2])<UNTAG_Int( TAG_Int(10)));
+  /* Register variable[2]: Result */
+  variable[2] = TAG_Bool(UNTAG_Int(variable[0])<UNTAG_Int( TAG_Int(10)));
   if (UNTAG_Bool(variable[2])) { /*if*/
-    variable[2] = variable[0];
-    variable[3] = TAG_Int((unsigned char)UNTAG_Char( TAG_Char('0')));
-    variable[2] = TAG_Int(UNTAG_Int(variable[2])+UNTAG_Int(variable[3]));
+    /* Register variable[2]: Result */
+    variable[2] = TAG_Int((unsigned char)UNTAG_Char( TAG_Char('0')));
+    /* Register variable[2]: Result */
+    variable[2] = TAG_Int(UNTAG_Int(variable[0])+UNTAG_Int(variable[2]));
+    /* Register variable[2]: Result */
     variable[2] = TAG_Char(UNTAG_Int(variable[2]));
     variable[1] = variable[2];
     goto return_label22;
   } else { /*if*/
-    variable[2] = variable[0];
-    variable[3] = TAG_Int((unsigned char)UNTAG_Char( TAG_Char('a')));
-    variable[3] = TAG_Int(UNTAG_Int(variable[3])-UNTAG_Int( TAG_Int(10)));
-    variable[2] = TAG_Int(UNTAG_Int(variable[2])+UNTAG_Int(variable[3]));
+    /* Register variable[2]: Result */
+    variable[2] = TAG_Int((unsigned char)UNTAG_Char( TAG_Char('a')));
+    /* Register variable[2]: Result */
+    variable[2] = TAG_Int(UNTAG_Int(variable[2])-UNTAG_Int( TAG_Int(10)));
+    /* Register variable[2]: Result */
+    variable[2] = TAG_Int(UNTAG_Int(variable[0])+UNTAG_Int(variable[2]));
+    /* Register variable[2]: Result */
     variable[2] = TAG_Char(UNTAG_Int(variable[2]));
     variable[1] = variable[2];
     goto return_label22;
@@ -896,7 +968,7 @@ val_t kernel___Int___to_c(val_t  self) {
 val_t kernel___Char___object_id(val_t  self) {
   struct trace_t trace = {NULL, NULL, 324, LOCATE_kernel___Char___object_id};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -905,7 +977,7 @@ val_t kernel___Char___object_id(val_t  self) {
 val_t kernel___Char_____eqeq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 325, LOCATE_kernel___Char_____eqeq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -914,7 +986,7 @@ val_t kernel___Char_____eqeq(val_t  self, val_t  param0) {
 val_t kernel___Char_____neq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 326, LOCATE_kernel___Char_____neq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -923,7 +995,7 @@ val_t kernel___Char_____neq(val_t  self, val_t  param0) {
 void kernel___Char___output(val_t  self) {
   struct trace_t trace = {NULL, NULL, 327, LOCATE_kernel___Char___output};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   printf("%c", (unsigned char)UNTAG_Char( self));
@@ -933,7 +1005,7 @@ void kernel___Char___output(val_t  self) {
 val_t kernel___Char_____l(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 330, LOCATE_kernel___Char_____l};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -942,7 +1014,7 @@ val_t kernel___Char_____l(val_t  self, val_t  param0) {
 val_t kernel___Char_____leq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 329, LOCATE_kernel___Char_____leq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -951,7 +1023,7 @@ val_t kernel___Char_____leq(val_t  self, val_t  param0) {
 val_t kernel___Char_____geq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 331, LOCATE_kernel___Char_____geq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -960,7 +1032,7 @@ val_t kernel___Char_____geq(val_t  self, val_t  param0) {
 val_t kernel___Char_____g(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 332, LOCATE_kernel___Char_____g};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -969,7 +1041,7 @@ val_t kernel___Char_____g(val_t  self, val_t  param0) {
 val_t kernel___Char___succ(val_t  self) {
   struct trace_t trace = {NULL, NULL, 334, LOCATE_kernel___Char___succ};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -978,7 +1050,7 @@ val_t kernel___Char___succ(val_t  self) {
 val_t kernel___Char___prec(val_t  self) {
   struct trace_t trace = {NULL, NULL, 335, LOCATE_kernel___Char___prec};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -987,7 +1059,7 @@ val_t kernel___Char___prec(val_t  self) {
 val_t kernel___Char_____plus(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 363, LOCATE_kernel___Char_____plus};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -996,7 +1068,7 @@ val_t kernel___Char_____plus(val_t  self, val_t  param0) {
 val_t kernel___Char_____minus(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 364, LOCATE_kernel___Char_____minus};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -1005,21 +1077,29 @@ val_t kernel___Char_____minus(val_t  self, val_t  param0) {
 val_t kernel___Char___distance(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 337, LOCATE_kernel___Char___distance};
   val_t variable[6];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[4] = TAG_Int((unsigned char)UNTAG_Char(variable[4]));
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = TAG_Int((unsigned char)UNTAG_Char(variable[0]));
+  /* Register variable[5]: Result */
   variable[5] = TAG_Int((unsigned char)UNTAG_Char( variable[1] /*c*/));
+  /* Register variable[4]: Result */
   variable[4] = TAG_Int(UNTAG_Int(variable[4])-UNTAG_Int(variable[5]));
   variable[3] = variable[4];
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*d*/)>=UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[4])) { /*if*/
     variable[2] =  variable[3] /*d*/;
     goto return_label23;
   } else { /*if*/
+    /* Register variable[4]: Result */
     variable[4] = TAG_Int(-UNTAG_Int( variable[3] /*d*/));
     variable[2] = variable[4];
     goto return_label23;
@@ -1031,38 +1111,47 @@ val_t kernel___Char___distance(val_t  self, val_t  param0) {
 val_t kernel___Char___to_i(val_t  self) {
   struct trace_t trace = {NULL, NULL, 347, LOCATE_kernel___Char___to_i};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = TAG_Bool((variable[2])==( TAG_Char('-')));
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = TAG_Bool((variable[0])==( TAG_Char('-')));
   if (UNTAG_Bool(variable[2])) { /*if*/
+    /* Register variable[2]: Result */
     variable[2] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
     variable[1] = variable[2];
     goto return_label24;
   } else { /*if*/
-    variable[2] = variable[0];
-    variable[2] = TAG_Bool(UNTAG_Char(variable[2])>=UNTAG_Char( TAG_Char('0')));
-    variable[3] = variable[2];
-    if (UNTAG_Bool(variable[3])) { /* and */
-      variable[3] = variable[0];
-      variable[3] = TAG_Bool(UNTAG_Char(variable[3])<=UNTAG_Char( TAG_Char('9')));
+    /* Register variable[2]: Result */
+    variable[2] = TAG_Bool(UNTAG_Char(variable[0])>=UNTAG_Char( TAG_Char('0')));
+    /* Ensure var variable[2]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[2])) { /* and */
+      /* Register variable[2]: Result */
+      variable[2] = TAG_Bool(UNTAG_Char(variable[0])<=UNTAG_Char( TAG_Char('9')));
     }
-    variable[2] = variable[3];
+    /* Register variable[2]: Result */
     if (UNTAG_Bool(variable[2])) { /*if*/
-      variable[2] = variable[0];
-      variable[2] = TAG_Int((unsigned char)UNTAG_Char(variable[2]));
+      /* Register variable[2]: Result */
+      variable[2] = TAG_Int((unsigned char)UNTAG_Char(variable[0]));
+      /* Register variable[3]: Result */
       variable[3] = TAG_Int((unsigned char)UNTAG_Char( TAG_Char('0')));
+      /* Register variable[2]: Result */
       variable[2] = TAG_Int(UNTAG_Int(variable[2])-UNTAG_Int(variable[3]));
       variable[1] = variable[2];
       goto return_label24;
     } else { /*if*/
-      variable[2] = variable[0];
-      variable[2] = CALL_kernel___Char___to_lower(variable[2])(variable[2]) /*Char::to_lower*/;
+      /* Register variable[2]: Result */
+      variable[2] = CALL_kernel___Char___to_lower(variable[0])(variable[0]) /*Char::to_lower*/;
+      /* Register variable[2]: Result */
       variable[2] = TAG_Int((unsigned char)UNTAG_Char(variable[2]));
+      /* Register variable[3]: Result */
       variable[3] = TAG_Int((unsigned char)UNTAG_Char( TAG_Char('a')));
+      /* Register variable[3]: Result */
       variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(10)));
+      /* Register variable[2]: Result */
       variable[2] = TAG_Int(UNTAG_Int(variable[2])-UNTAG_Int(variable[3]));
       variable[1] = variable[2];
       goto return_label24;
@@ -1075,7 +1164,7 @@ val_t kernel___Char___to_i(val_t  self) {
 val_t kernel___Char___ascii(val_t  self) {
   struct trace_t trace = {NULL, NULL, 360, LOCATE_kernel___Char___ascii};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
   tracehead = trace.prev;
@@ -1084,29 +1173,33 @@ val_t kernel___Char___ascii(val_t  self) {
 val_t kernel___Char___to_lower(val_t  self) {
   struct trace_t trace = {NULL, NULL, 366, LOCATE_kernel___Char___to_lower};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = TAG_Bool(UNTAG_Char(variable[2])>=UNTAG_Char( TAG_Char('A')));
-  variable[3] = variable[2];
-  if (UNTAG_Bool(variable[3])) { /* and */
-    variable[3] = variable[0];
-    variable[3] = TAG_Bool(UNTAG_Char(variable[3])<=UNTAG_Char( TAG_Char('Z')));
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = TAG_Bool(UNTAG_Char(variable[0])>=UNTAG_Char( TAG_Char('A')));
+  /* Ensure var variable[2]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[2])) { /* and */
+    /* Register variable[2]: Result */
+    variable[2] = TAG_Bool(UNTAG_Char(variable[0])<=UNTAG_Char( TAG_Char('Z')));
   }
-  variable[2] = variable[3];
+  /* Register variable[2]: Result */
   if (UNTAG_Bool(variable[2])) { /*if*/
-    variable[2] = variable[0];
-    variable[2] = TAG_Int((unsigned char)UNTAG_Char(variable[2]));
+    /* Register variable[2]: Result */
+    variable[2] = TAG_Int((unsigned char)UNTAG_Char(variable[0]));
+    /* Register variable[3]: Result */
     variable[3] = CALL_kernel___Discrete___distance( TAG_Char('a'))( TAG_Char('a'),  TAG_Char('A')) /*Char::distance*/;
+    /* Register variable[2]: Result */
     variable[2] = TAG_Int(UNTAG_Int(variable[2])+UNTAG_Int(variable[3]));
+    /* Register variable[2]: Result */
     variable[2] = TAG_Char(UNTAG_Int(variable[2]));
     variable[1] = variable[2];
     goto return_label25;
   } else { /*if*/
-    variable[2] = variable[0];
-    variable[1] = variable[2];
+    variable[1] = variable[0];
     goto return_label25;
   }
   return_label25: while(false);
@@ -1116,29 +1209,33 @@ val_t kernel___Char___to_lower(val_t  self) {
 val_t kernel___Char___to_upper(val_t  self) {
   struct trace_t trace = {NULL, NULL, 376, LOCATE_kernel___Char___to_upper};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_kernel;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = TAG_Bool(UNTAG_Char(variable[2])>=UNTAG_Char( TAG_Char('a')));
-  variable[3] = variable[2];
-  if (UNTAG_Bool(variable[3])) { /* and */
-    variable[3] = variable[0];
-    variable[3] = TAG_Bool(UNTAG_Char(variable[3])<=UNTAG_Char( TAG_Char('z')));
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = TAG_Bool(UNTAG_Char(variable[0])>=UNTAG_Char( TAG_Char('a')));
+  /* Ensure var variable[2]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[2])) { /* and */
+    /* Register variable[2]: Result */
+    variable[2] = TAG_Bool(UNTAG_Char(variable[0])<=UNTAG_Char( TAG_Char('z')));
   }
-  variable[2] = variable[3];
+  /* Register variable[2]: Result */
   if (UNTAG_Bool(variable[2])) { /*if*/
-    variable[2] = variable[0];
-    variable[2] = TAG_Int((unsigned char)UNTAG_Char(variable[2]));
+    /* Register variable[2]: Result */
+    variable[2] = TAG_Int((unsigned char)UNTAG_Char(variable[0]));
+    /* Register variable[3]: Result */
     variable[3] = CALL_kernel___Discrete___distance( TAG_Char('a'))( TAG_Char('a'),  TAG_Char('A')) /*Char::distance*/;
+    /* Register variable[2]: Result */
     variable[2] = TAG_Int(UNTAG_Int(variable[2])-UNTAG_Int(variable[3]));
+    /* Register variable[2]: Result */
     variable[2] = TAG_Char(UNTAG_Int(variable[2]));
     variable[1] = variable[2];
     goto return_label26;
   } else { /*if*/
-    variable[2] = variable[0];
-    variable[1] = variable[2];
+    variable[1] = variable[0];
     goto return_label26;
   }
   return_label26: while(false);

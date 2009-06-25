@@ -2,7 +2,6 @@
 #ifndef syntax_sep
 #define syntax_sep
 #include "mmbuilder._sep.h"
-#include "control_flow._sep.h"
 #include "typing._sep.h"
 #include <nit_common.h>
 
@@ -28,7 +27,7 @@ typedef void (* syntax___SrcModuleLoader___init_t)(val_t  self, int* init_table)
 void syntax___SrcModuleLoader___init(val_t  self, int* init_table);
 #define LOCATE_syntax___SrcModuleLoader___init "syntax::SrcModuleLoader::init"
 val_t NEW_SrcModuleLoader_syntax___SrcModuleLoader___init();
-val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
+val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
 typedef void (* syntax___MMSrcModule___process_supermodules_t)(val_t  self, val_t  param0);
 void syntax___MMSrcModule___process_supermodules(val_t  self, val_t  param0);
 #define LOCATE_syntax___MMSrcModule___process_supermodules "syntax::MMSrcModule::process_supermodules"

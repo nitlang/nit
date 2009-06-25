@@ -4,78 +4,131 @@
 #include "syntax_base._sep.h"
 #include <nit_common.h>
 
-extern const classtable_elt_t VFT_ControlFlowVisitor[];
+extern const classtable_elt_t VFT_VariableContext[];
 
-extern const classtable_elt_t VFT_ControlFlowContext[];
+extern const classtable_elt_t VFT_RootVariableContext[];
 
-extern const classtable_elt_t VFT_ABlockControler[];
-
-extern const classtable_elt_t VFT_AControlableBlock[];
+extern const classtable_elt_t VFT_SubVariableContext[];
 extern const char *LOCATE_control_flow;
 extern const int SFT_control_flow[];
-#define CALL_control_flow___MMSrcModule___do_control_flow(recv) ((control_flow___MMSrcModule___do_control_flow_t)CALL((recv), (SFT_control_flow[0] + 0)))
-#define CALL_control_flow___Variable___must_be_set(recv) ((control_flow___Variable___must_be_set_t)CALL((recv), (SFT_control_flow[1] + 0)))
-#define ID_ControlFlowVisitor (SFT_control_flow[2])
-#define COLOR_ControlFlowVisitor (SFT_control_flow[3])
-#define ATTR_control_flow___ControlFlowVisitor____once_count(recv) ATTR(recv, (SFT_control_flow[4] + 0))
-#define ATTR_control_flow___ControlFlowVisitor____control_flow_ctx(recv) ATTR(recv, (SFT_control_flow[4] + 1))
-#define INIT_TABLE_POS_ControlFlowVisitor (SFT_control_flow[5] + 0)
-#define CALL_control_flow___ControlFlowVisitor___once_count(recv) ((control_flow___ControlFlowVisitor___once_count_t)CALL((recv), (SFT_control_flow[5] + 1)))
-#define CALL_control_flow___ControlFlowVisitor___once_count__eq(recv) ((control_flow___ControlFlowVisitor___once_count__eq_t)CALL((recv), (SFT_control_flow[5] + 2)))
-#define CALL_control_flow___ControlFlowVisitor___control_flow_ctx(recv) ((control_flow___ControlFlowVisitor___control_flow_ctx_t)CALL((recv), (SFT_control_flow[5] + 3)))
-#define CALL_control_flow___ControlFlowVisitor___control_flow_ctx__eq(recv) ((control_flow___ControlFlowVisitor___control_flow_ctx__eq_t)CALL((recv), (SFT_control_flow[5] + 4)))
-#define CALL_control_flow___ControlFlowVisitor___check_is_set(recv) ((control_flow___ControlFlowVisitor___check_is_set_t)CALL((recv), (SFT_control_flow[5] + 5)))
-#define CALL_control_flow___ControlFlowVisitor___mark_is_set(recv) ((control_flow___ControlFlowVisitor___mark_is_set_t)CALL((recv), (SFT_control_flow[5] + 6)))
-#define CALL_control_flow___ControlFlowVisitor___init(recv) ((control_flow___ControlFlowVisitor___init_t)CALL((recv), (SFT_control_flow[5] + 7)))
-#define ID_ControlFlowContext (SFT_control_flow[6])
-#define COLOR_ControlFlowContext (SFT_control_flow[7])
-#define ATTR_control_flow___ControlFlowContext____prev(recv) ATTR(recv, (SFT_control_flow[8] + 0))
-#define ATTR_control_flow___ControlFlowContext____unreash(recv) ATTR(recv, (SFT_control_flow[8] + 1))
-#define ATTR_control_flow___ControlFlowContext____already_unreash(recv) ATTR(recv, (SFT_control_flow[8] + 2))
-#define ATTR_control_flow___ControlFlowContext____base_block(recv) ATTR(recv, (SFT_control_flow[8] + 3))
-#define ATTR_control_flow___ControlFlowContext____set_variables(recv) ATTR(recv, (SFT_control_flow[8] + 4))
-#define INIT_TABLE_POS_ControlFlowContext (SFT_control_flow[9] + 0)
-#define CALL_control_flow___ControlFlowContext___prev(recv) ((control_flow___ControlFlowContext___prev_t)CALL((recv), (SFT_control_flow[9] + 1)))
-#define CALL_control_flow___ControlFlowContext___unreash(recv) ((control_flow___ControlFlowContext___unreash_t)CALL((recv), (SFT_control_flow[9] + 2)))
-#define CALL_control_flow___ControlFlowContext___unreash__eq(recv) ((control_flow___ControlFlowContext___unreash__eq_t)CALL((recv), (SFT_control_flow[9] + 3)))
-#define CALL_control_flow___ControlFlowContext___already_unreash(recv) ((control_flow___ControlFlowContext___already_unreash_t)CALL((recv), (SFT_control_flow[9] + 4)))
-#define CALL_control_flow___ControlFlowContext___already_unreash__eq(recv) ((control_flow___ControlFlowContext___already_unreash__eq_t)CALL((recv), (SFT_control_flow[9] + 5)))
-#define CALL_control_flow___ControlFlowContext___base_block(recv) ((control_flow___ControlFlowContext___base_block_t)CALL((recv), (SFT_control_flow[9] + 6)))
-#define CALL_control_flow___ControlFlowContext___base_block__eq(recv) ((control_flow___ControlFlowContext___base_block__eq_t)CALL((recv), (SFT_control_flow[9] + 7)))
-#define CALL_control_flow___ControlFlowContext___set_variables(recv) ((control_flow___ControlFlowContext___set_variables_t)CALL((recv), (SFT_control_flow[9] + 8)))
-#define CALL_control_flow___ControlFlowContext___is_set(recv) ((control_flow___ControlFlowContext___is_set_t)CALL((recv), (SFT_control_flow[9] + 9)))
-#define CALL_control_flow___ControlFlowContext___sub(recv) ((control_flow___ControlFlowContext___sub_t)CALL((recv), (SFT_control_flow[9] + 10)))
-#define CALL_control_flow___ControlFlowContext___init(recv) ((control_flow___ControlFlowContext___init_t)CALL((recv), (SFT_control_flow[9] + 11)))
-#define CALL_control_flow___ControlFlowContext___with_prev(recv) ((control_flow___ControlFlowContext___with_prev_t)CALL((recv), (SFT_control_flow[9] + 12)))
-#define CALL_control_flow___PNode___accept_control_flow(recv) ((control_flow___PNode___accept_control_flow_t)CALL((recv), (SFT_control_flow[10] + 0)))
-#define CALL_SUPER_control_flow___AMethPropdef___accept_control_flow(recv) ((control_flow___AMethPropdef___accept_control_flow_t)CALL((recv), (SFT_control_flow[11] + 0)))
-#define CALL_SUPER_control_flow___AConcreteMethPropdef___accept_control_flow(recv) ((control_flow___AConcreteMethPropdef___accept_control_flow_t)CALL((recv), (SFT_control_flow[12] + 0)))
-#define CALL_SUPER_control_flow___AVardeclExpr___accept_control_flow(recv) ((control_flow___AVardeclExpr___accept_control_flow_t)CALL((recv), (SFT_control_flow[13] + 0)))
-#define CALL_SUPER_control_flow___AReturnExpr___accept_control_flow(recv) ((control_flow___AReturnExpr___accept_control_flow_t)CALL((recv), (SFT_control_flow[14] + 0)))
-#define ID_ABlockControler (SFT_control_flow[15])
-#define COLOR_ABlockControler (SFT_control_flow[16])
-#define ATTR_control_flow___ABlockControler____block(recv) ATTR(recv, (SFT_control_flow[17] + 0))
-#define INIT_TABLE_POS_ABlockControler (SFT_control_flow[18] + 0)
-#define CALL_control_flow___ABlockControler___block(recv) ((control_flow___ABlockControler___block_t)CALL((recv), (SFT_control_flow[18] + 1)))
-#define CALL_SUPER_control_flow___ABreakExpr___accept_control_flow(recv) ((control_flow___ABreakExpr___accept_control_flow_t)CALL((recv), (SFT_control_flow[19] + 0)))
-#define CALL_SUPER_control_flow___AContinueExpr___accept_control_flow(recv) ((control_flow___AContinueExpr___accept_control_flow_t)CALL((recv), (SFT_control_flow[20] + 0)))
-#define CALL_SUPER_control_flow___AAbortExpr___accept_control_flow(recv) ((control_flow___AAbortExpr___accept_control_flow_t)CALL((recv), (SFT_control_flow[21] + 0)))
-#define CALL_SUPER_control_flow___AClosureCallExpr___accept_control_flow(recv) ((control_flow___AClosureCallExpr___accept_control_flow_t)CALL((recv), (SFT_control_flow[22] + 0)))
-#define ID_AControlableBlock (SFT_control_flow[23])
-#define COLOR_AControlableBlock (SFT_control_flow[24])
-#define INIT_TABLE_POS_AControlableBlock (SFT_control_flow[25] + 0)
-#define CALL_SUPER_control_flow___AControlableBlock___accept_control_flow(recv) ((control_flow___AControlableBlock___accept_control_flow_t)CALL((recv), (SFT_control_flow[25] + 1)))
-#define CALL_control_flow___AControlableBlock___check_control_flow(recv) ((control_flow___AControlableBlock___check_control_flow_t)CALL((recv), (SFT_control_flow[25] + 2)))
-#define CALL_SUPER_control_flow___AVarExpr___accept_control_flow(recv) ((control_flow___AVarExpr___accept_control_flow_t)CALL((recv), (SFT_control_flow[26] + 0)))
-#define CALL_SUPER_control_flow___AVarAssignExpr___accept_control_flow(recv) ((control_flow___AVarAssignExpr___accept_control_flow_t)CALL((recv), (SFT_control_flow[27] + 0)))
-#define CALL_SUPER_control_flow___AVarReassignExpr___accept_control_flow(recv) ((control_flow___AVarReassignExpr___accept_control_flow_t)CALL((recv), (SFT_control_flow[28] + 0)))
-#define CALL_SUPER_control_flow___AClosureDecl___accept_control_flow(recv) ((control_flow___AClosureDecl___accept_control_flow_t)CALL((recv), (SFT_control_flow[29] + 0)))
-#define CALL_SUPER_control_flow___AClosureDef___accept_control_flow(recv) ((control_flow___AClosureDef___accept_control_flow_t)CALL((recv), (SFT_control_flow[30] + 0)))
-#define CALL_SUPER_control_flow___AOnceExpr___accept_control_flow(recv) ((control_flow___AOnceExpr___accept_control_flow_t)CALL((recv), (SFT_control_flow[31] + 0)))
-val_t NEW_MMSrcModule_syntax_base___MMSrcModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
-typedef void (* control_flow___MMSrcModule___do_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___MMSrcModule___do_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___MMSrcModule___do_control_flow "control_flow::MMSrcModule::do_control_flow"
+#define ID_VariableContext (SFT_control_flow[0])
+#define COLOR_VariableContext (SFT_control_flow[1])
+#define ATTR_control_flow___VariableContext____dico(recv) ATTR(recv, (SFT_control_flow[2] + 0))
+#define ATTR_control_flow___VariableContext____all_variables(recv) ATTR(recv, (SFT_control_flow[2] + 1))
+#define ATTR_control_flow___VariableContext____stypes(recv) ATTR(recv, (SFT_control_flow[2] + 2))
+#define ATTR_control_flow___VariableContext____visitor(recv) ATTR(recv, (SFT_control_flow[2] + 3))
+#define ATTR_control_flow___VariableContext____node(recv) ATTR(recv, (SFT_control_flow[2] + 4))
+#define ATTR_control_flow___VariableContext____unreash(recv) ATTR(recv, (SFT_control_flow[2] + 5))
+#define ATTR_control_flow___VariableContext____already_unreash(recv) ATTR(recv, (SFT_control_flow[2] + 6))
+#define ATTR_control_flow___VariableContext____set_variables(recv) ATTR(recv, (SFT_control_flow[2] + 7))
+#define INIT_TABLE_POS_VariableContext (SFT_control_flow[3] + 0)
+#define CALL_control_flow___VariableContext_____bra(recv) ((control_flow___VariableContext_____bra_t)CALL((recv), (SFT_control_flow[3] + 1)))
+#define CALL_control_flow___VariableContext___add(recv) ((control_flow___VariableContext___add_t)CALL((recv), (SFT_control_flow[3] + 2)))
+#define CALL_control_flow___VariableContext___mark_is_set(recv) ((control_flow___VariableContext___mark_is_set_t)CALL((recv), (SFT_control_flow[3] + 3)))
+#define CALL_control_flow___VariableContext___check_is_set(recv) ((control_flow___VariableContext___check_is_set_t)CALL((recv), (SFT_control_flow[3] + 4)))
+#define CALL_control_flow___VariableContext___stype(recv) ((control_flow___VariableContext___stype_t)CALL((recv), (SFT_control_flow[3] + 5)))
+#define CALL_control_flow___VariableContext___stype__eq(recv) ((control_flow___VariableContext___stype__eq_t)CALL((recv), (SFT_control_flow[3] + 6)))
+#define CALL_control_flow___VariableContext___sub(recv) ((control_flow___VariableContext___sub_t)CALL((recv), (SFT_control_flow[3] + 7)))
+#define CALL_control_flow___VariableContext___sub_with(recv) ((control_flow___VariableContext___sub_with_t)CALL((recv), (SFT_control_flow[3] + 8)))
+#define CALL_control_flow___VariableContext___node(recv) ((control_flow___VariableContext___node_t)CALL((recv), (SFT_control_flow[3] + 9)))
+#define CALL_control_flow___VariableContext___init(recv) ((control_flow___VariableContext___init_t)CALL((recv), (SFT_control_flow[3] + 10)))
+#define CALL_control_flow___VariableContext___unreash(recv) ((control_flow___VariableContext___unreash_t)CALL((recv), (SFT_control_flow[3] + 11)))
+#define CALL_control_flow___VariableContext___unreash__eq(recv) ((control_flow___VariableContext___unreash__eq_t)CALL((recv), (SFT_control_flow[3] + 12)))
+#define CALL_control_flow___VariableContext___already_unreash(recv) ((control_flow___VariableContext___already_unreash_t)CALL((recv), (SFT_control_flow[3] + 13)))
+#define CALL_control_flow___VariableContext___already_unreash__eq(recv) ((control_flow___VariableContext___already_unreash__eq_t)CALL((recv), (SFT_control_flow[3] + 14)))
+#define CALL_control_flow___VariableContext___set_variables(recv) ((control_flow___VariableContext___set_variables_t)CALL((recv), (SFT_control_flow[3] + 15)))
+#define CALL_control_flow___VariableContext___is_set(recv) ((control_flow___VariableContext___is_set_t)CALL((recv), (SFT_control_flow[3] + 16)))
+#define CALL_control_flow___VariableContext___merge(recv) ((control_flow___VariableContext___merge_t)CALL((recv), (SFT_control_flow[3] + 17)))
+#define CALL_control_flow___VariableContext___merge2(recv) ((control_flow___VariableContext___merge2_t)CALL((recv), (SFT_control_flow[3] + 18)))
+#define ID_RootVariableContext (SFT_control_flow[4])
+#define COLOR_RootVariableContext (SFT_control_flow[5])
+#define INIT_TABLE_POS_RootVariableContext (SFT_control_flow[6] + 0)
+#define CALL_control_flow___RootVariableContext___init(recv) ((control_flow___RootVariableContext___init_t)CALL((recv), (SFT_control_flow[6] + 1)))
+#define ID_SubVariableContext (SFT_control_flow[7])
+#define COLOR_SubVariableContext (SFT_control_flow[8])
+#define ATTR_control_flow___SubVariableContext____prev(recv) ATTR(recv, (SFT_control_flow[9] + 0))
+#define INIT_TABLE_POS_SubVariableContext (SFT_control_flow[10] + 0)
+#define CALL_control_flow___SubVariableContext___prev(recv) ((control_flow___SubVariableContext___prev_t)CALL((recv), (SFT_control_flow[10] + 1)))
+#define CALL_control_flow___SubVariableContext___with_prev(recv) ((control_flow___SubVariableContext___with_prev_t)CALL((recv), (SFT_control_flow[10] + 2)))
+#define CALL_control_flow___Variable___must_be_set(recv) ((control_flow___Variable___must_be_set_t)CALL((recv), (SFT_control_flow[11] + 0)))
+typedef val_t (* control_flow___VariableContext___to_s_t)(val_t  self);
+val_t control_flow___VariableContext___to_s(val_t  self);
+#define LOCATE_control_flow___VariableContext___to_s "control_flow::VariableContext::(string::Object::to_s)"
+typedef val_t (* control_flow___VariableContext_____bra_t)(val_t  self, val_t  param0);
+val_t control_flow___VariableContext_____bra(val_t  self, val_t  param0);
+#define LOCATE_control_flow___VariableContext_____bra "control_flow::VariableContext::[]"
+typedef void (* control_flow___VariableContext___add_t)(val_t  self, val_t  param0);
+void control_flow___VariableContext___add(val_t  self, val_t  param0);
+#define LOCATE_control_flow___VariableContext___add "control_flow::VariableContext::add"
+typedef void (* control_flow___VariableContext___mark_is_set_t)(val_t  self, val_t  param0);
+void control_flow___VariableContext___mark_is_set(val_t  self, val_t  param0);
+#define LOCATE_control_flow___VariableContext___mark_is_set "control_flow::VariableContext::mark_is_set"
+typedef void (* control_flow___VariableContext___check_is_set_t)(val_t  self, val_t  param0, val_t  param1);
+void control_flow___VariableContext___check_is_set(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_control_flow___VariableContext___check_is_set "control_flow::VariableContext::check_is_set"
+typedef val_t (* control_flow___VariableContext___stype_t)(val_t  self, val_t  param0);
+val_t control_flow___VariableContext___stype(val_t  self, val_t  param0);
+#define LOCATE_control_flow___VariableContext___stype "control_flow::VariableContext::stype"
+typedef void (* control_flow___VariableContext___stype__eq_t)(val_t  self, val_t  param0, val_t  param1);
+void control_flow___VariableContext___stype__eq(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_control_flow___VariableContext___stype__eq "control_flow::VariableContext::stype="
+typedef val_t (* control_flow___VariableContext___sub_t)(val_t  self, val_t  param0);
+val_t control_flow___VariableContext___sub(val_t  self, val_t  param0);
+#define LOCATE_control_flow___VariableContext___sub "control_flow::VariableContext::sub"
+typedef val_t (* control_flow___VariableContext___sub_with_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+val_t control_flow___VariableContext___sub_with(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+#define LOCATE_control_flow___VariableContext___sub_with "control_flow::VariableContext::sub_with"
+typedef val_t (* control_flow___VariableContext___node_t)(val_t  self);
+val_t control_flow___VariableContext___node(val_t  self);
+#define LOCATE_control_flow___VariableContext___node "control_flow::VariableContext::node"
+typedef void (* control_flow___VariableContext___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void control_flow___VariableContext___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_control_flow___VariableContext___init "control_flow::VariableContext::init"
+val_t NEW_VariableContext_control_flow___VariableContext___init(val_t p0, val_t p1);
+typedef val_t (* control_flow___VariableContext___unreash_t)(val_t  self);
+val_t control_flow___VariableContext___unreash(val_t  self);
+#define LOCATE_control_flow___VariableContext___unreash "control_flow::VariableContext::unreash"
+typedef void (* control_flow___VariableContext___unreash__eq_t)(val_t  self, val_t  param0);
+void control_flow___VariableContext___unreash__eq(val_t  self, val_t  param0);
+#define LOCATE_control_flow___VariableContext___unreash__eq "control_flow::VariableContext::unreash="
+typedef val_t (* control_flow___VariableContext___already_unreash_t)(val_t  self);
+val_t control_flow___VariableContext___already_unreash(val_t  self);
+#define LOCATE_control_flow___VariableContext___already_unreash "control_flow::VariableContext::already_unreash"
+typedef void (* control_flow___VariableContext___already_unreash__eq_t)(val_t  self, val_t  param0);
+void control_flow___VariableContext___already_unreash__eq(val_t  self, val_t  param0);
+#define LOCATE_control_flow___VariableContext___already_unreash__eq "control_flow::VariableContext::already_unreash="
+typedef val_t (* control_flow___VariableContext___set_variables_t)(val_t  self);
+val_t control_flow___VariableContext___set_variables(val_t  self);
+#define LOCATE_control_flow___VariableContext___set_variables "control_flow::VariableContext::set_variables"
+typedef val_t (* control_flow___VariableContext___is_set_t)(val_t  self, val_t  param0);
+val_t control_flow___VariableContext___is_set(val_t  self, val_t  param0);
+#define LOCATE_control_flow___VariableContext___is_set "control_flow::VariableContext::is_set"
+typedef void (* control_flow___VariableContext___merge_t)(val_t  self, val_t  param0);
+void control_flow___VariableContext___merge(val_t  self, val_t  param0);
+#define LOCATE_control_flow___VariableContext___merge "control_flow::VariableContext::merge"
+typedef void (* control_flow___VariableContext___merge2_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+void control_flow___VariableContext___merge2(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+#define LOCATE_control_flow___VariableContext___merge2 "control_flow::VariableContext::merge2"
+typedef void (* control_flow___RootVariableContext___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void control_flow___RootVariableContext___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_control_flow___RootVariableContext___init "control_flow::RootVariableContext::init"
+val_t NEW_RootVariableContext_control_flow___RootVariableContext___init(val_t p0, val_t p1);
+typedef val_t (* control_flow___SubVariableContext_____bra_t)(val_t  self, val_t  param0);
+val_t control_flow___SubVariableContext_____bra(val_t  self, val_t  param0);
+#define LOCATE_control_flow___SubVariableContext_____bra "control_flow::SubVariableContext::(control_flow::VariableContext::[])"
+typedef val_t (* control_flow___SubVariableContext___stype_t)(val_t  self, val_t  param0);
+val_t control_flow___SubVariableContext___stype(val_t  self, val_t  param0);
+#define LOCATE_control_flow___SubVariableContext___stype "control_flow::SubVariableContext::(control_flow::VariableContext::stype)"
+typedef val_t (* control_flow___SubVariableContext___is_set_t)(val_t  self, val_t  param0);
+val_t control_flow___SubVariableContext___is_set(val_t  self, val_t  param0);
+#define LOCATE_control_flow___SubVariableContext___is_set "control_flow::SubVariableContext::(control_flow::VariableContext::is_set)"
+typedef val_t (* control_flow___SubVariableContext___prev_t)(val_t  self);
+val_t control_flow___SubVariableContext___prev(val_t  self);
+#define LOCATE_control_flow___SubVariableContext___prev "control_flow::SubVariableContext::prev"
+typedef void (* control_flow___SubVariableContext___with_prev_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void control_flow___SubVariableContext___with_prev(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_control_flow___SubVariableContext___with_prev "control_flow::SubVariableContext::with_prev"
+val_t NEW_SubVariableContext_control_flow___SubVariableContext___with_prev(val_t p0, val_t p1);
 val_t NEW_Variable_syntax_base___Variable___init(val_t p0, val_t p1);
 typedef val_t (* control_flow___Variable___must_be_set_t)(val_t  self);
 val_t control_flow___Variable___must_be_set(val_t  self);
@@ -84,187 +137,4 @@ val_t NEW_VarVariable_syntax_base___VarVariable___init(val_t p0, val_t p1);
 typedef val_t (* control_flow___VarVariable___must_be_set_t)(val_t  self);
 val_t control_flow___VarVariable___must_be_set(val_t  self);
 #define LOCATE_control_flow___VarVariable___must_be_set "control_flow::VarVariable::(control_flow::Variable::must_be_set)"
-typedef void (* control_flow___ControlFlowVisitor___visit_t)(val_t  self, val_t  param0);
-void control_flow___ControlFlowVisitor___visit(val_t  self, val_t  param0);
-#define LOCATE_control_flow___ControlFlowVisitor___visit "control_flow::ControlFlowVisitor::(parser_prod::Visitor::visit)"
-typedef val_t (* control_flow___ControlFlowVisitor___once_count_t)(val_t  self);
-val_t control_flow___ControlFlowVisitor___once_count(val_t  self);
-#define LOCATE_control_flow___ControlFlowVisitor___once_count "control_flow::ControlFlowVisitor::once_count"
-typedef void (* control_flow___ControlFlowVisitor___once_count__eq_t)(val_t  self, val_t  param0);
-void control_flow___ControlFlowVisitor___once_count__eq(val_t  self, val_t  param0);
-#define LOCATE_control_flow___ControlFlowVisitor___once_count__eq "control_flow::ControlFlowVisitor::once_count="
-typedef val_t (* control_flow___ControlFlowVisitor___control_flow_ctx_t)(val_t  self);
-val_t control_flow___ControlFlowVisitor___control_flow_ctx(val_t  self);
-#define LOCATE_control_flow___ControlFlowVisitor___control_flow_ctx "control_flow::ControlFlowVisitor::control_flow_ctx"
-typedef void (* control_flow___ControlFlowVisitor___control_flow_ctx__eq_t)(val_t  self, val_t  param0);
-void control_flow___ControlFlowVisitor___control_flow_ctx__eq(val_t  self, val_t  param0);
-#define LOCATE_control_flow___ControlFlowVisitor___control_flow_ctx__eq "control_flow::ControlFlowVisitor::control_flow_ctx="
-typedef void (* control_flow___ControlFlowVisitor___check_is_set_t)(val_t  self, val_t  param0, val_t  param1);
-void control_flow___ControlFlowVisitor___check_is_set(val_t  self, val_t  param0, val_t  param1);
-#define LOCATE_control_flow___ControlFlowVisitor___check_is_set "control_flow::ControlFlowVisitor::check_is_set"
-typedef void (* control_flow___ControlFlowVisitor___mark_is_set_t)(val_t  self, val_t  param0);
-void control_flow___ControlFlowVisitor___mark_is_set(val_t  self, val_t  param0);
-#define LOCATE_control_flow___ControlFlowVisitor___mark_is_set "control_flow::ControlFlowVisitor::mark_is_set"
-typedef void (* control_flow___ControlFlowVisitor___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void control_flow___ControlFlowVisitor___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
-#define LOCATE_control_flow___ControlFlowVisitor___init "control_flow::ControlFlowVisitor::init"
-val_t NEW_ControlFlowVisitor_control_flow___ControlFlowVisitor___init(val_t p0, val_t p1);
-typedef val_t (* control_flow___ControlFlowContext___prev_t)(val_t  self);
-val_t control_flow___ControlFlowContext___prev(val_t  self);
-#define LOCATE_control_flow___ControlFlowContext___prev "control_flow::ControlFlowContext::prev"
-typedef val_t (* control_flow___ControlFlowContext___unreash_t)(val_t  self);
-val_t control_flow___ControlFlowContext___unreash(val_t  self);
-#define LOCATE_control_flow___ControlFlowContext___unreash "control_flow::ControlFlowContext::unreash"
-typedef void (* control_flow___ControlFlowContext___unreash__eq_t)(val_t  self, val_t  param0);
-void control_flow___ControlFlowContext___unreash__eq(val_t  self, val_t  param0);
-#define LOCATE_control_flow___ControlFlowContext___unreash__eq "control_flow::ControlFlowContext::unreash="
-typedef val_t (* control_flow___ControlFlowContext___already_unreash_t)(val_t  self);
-val_t control_flow___ControlFlowContext___already_unreash(val_t  self);
-#define LOCATE_control_flow___ControlFlowContext___already_unreash "control_flow::ControlFlowContext::already_unreash"
-typedef void (* control_flow___ControlFlowContext___already_unreash__eq_t)(val_t  self, val_t  param0);
-void control_flow___ControlFlowContext___already_unreash__eq(val_t  self, val_t  param0);
-#define LOCATE_control_flow___ControlFlowContext___already_unreash__eq "control_flow::ControlFlowContext::already_unreash="
-typedef val_t (* control_flow___ControlFlowContext___base_block_t)(val_t  self);
-val_t control_flow___ControlFlowContext___base_block(val_t  self);
-#define LOCATE_control_flow___ControlFlowContext___base_block "control_flow::ControlFlowContext::base_block"
-typedef void (* control_flow___ControlFlowContext___base_block__eq_t)(val_t  self, val_t  param0);
-void control_flow___ControlFlowContext___base_block__eq(val_t  self, val_t  param0);
-#define LOCATE_control_flow___ControlFlowContext___base_block__eq "control_flow::ControlFlowContext::base_block="
-typedef val_t (* control_flow___ControlFlowContext___set_variables_t)(val_t  self);
-val_t control_flow___ControlFlowContext___set_variables(val_t  self);
-#define LOCATE_control_flow___ControlFlowContext___set_variables "control_flow::ControlFlowContext::set_variables"
-typedef val_t (* control_flow___ControlFlowContext___is_set_t)(val_t  self, val_t  param0);
-val_t control_flow___ControlFlowContext___is_set(val_t  self, val_t  param0);
-#define LOCATE_control_flow___ControlFlowContext___is_set "control_flow::ControlFlowContext::is_set"
-typedef val_t (* control_flow___ControlFlowContext___sub_t)(val_t  self);
-val_t control_flow___ControlFlowContext___sub(val_t  self);
-#define LOCATE_control_flow___ControlFlowContext___sub "control_flow::ControlFlowContext::sub"
-typedef void (* control_flow___ControlFlowContext___init_t)(val_t  self, int* init_table);
-void control_flow___ControlFlowContext___init(val_t  self, int* init_table);
-#define LOCATE_control_flow___ControlFlowContext___init "control_flow::ControlFlowContext::init"
-val_t NEW_ControlFlowContext_control_flow___ControlFlowContext___init();
-typedef void (* control_flow___ControlFlowContext___with_prev_t)(val_t  self, val_t  param0, int* init_table);
-void control_flow___ControlFlowContext___with_prev(val_t  self, val_t  param0, int* init_table);
-#define LOCATE_control_flow___ControlFlowContext___with_prev "control_flow::ControlFlowContext::with_prev"
-val_t NEW_ControlFlowContext_control_flow___ControlFlowContext___with_prev(val_t p0);
-val_t NEW_PNode_parser_nodes___PNode___init();
-typedef void (* control_flow___PNode___accept_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___PNode___accept_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___PNode___accept_control_flow "control_flow::PNode::accept_control_flow"
-val_t NEW_AMethPropdef_parser_nodes___PNode___init();
-val_t NEW_AMethPropdef_parser_prod___AMethPropdef___empty_init();
-val_t NEW_AMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-typedef void (* control_flow___AMethPropdef___accept_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___AMethPropdef___accept_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___AMethPropdef___accept_control_flow "control_flow::AMethPropdef::(control_flow::PNode::accept_control_flow)"
-val_t NEW_AConcreteMethPropdef_parser_nodes___PNode___init();
-val_t NEW_AConcreteMethPropdef_parser_prod___AMethPropdef___empty_init();
-val_t NEW_AConcreteMethPropdef_parser_prod___AMethPropdef___init_amethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-val_t NEW_AConcreteMethPropdef_parser_prod___AConcreteMethPropdef___empty_init();
-val_t NEW_AConcreteMethPropdef_parser_prod___AConcreteMethPropdef___init_aconcretemethpropdef(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4, val_t p5, val_t p6);
-typedef void (* control_flow___AConcreteMethPropdef___accept_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___AConcreteMethPropdef___accept_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___AConcreteMethPropdef___accept_control_flow "control_flow::AConcreteMethPropdef::(control_flow::PNode::accept_control_flow)"
-val_t NEW_AVardeclExpr_parser_nodes___PNode___init();
-val_t NEW_AVardeclExpr_parser_prod___AVardeclExpr___empty_init();
-val_t NEW_AVardeclExpr_parser_prod___AVardeclExpr___init_avardeclexpr(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-typedef void (* control_flow___AVardeclExpr___accept_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___AVardeclExpr___accept_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___AVardeclExpr___accept_control_flow "control_flow::AVardeclExpr::(control_flow::PNode::accept_control_flow)"
-val_t NEW_ABlockExpr_parser_nodes___PNode___init();
-val_t NEW_ABlockExpr_parser_prod___ABlockExpr___empty_init();
-val_t NEW_ABlockExpr_parser_prod___ABlockExpr___init_ablockexpr(val_t p0);
-typedef void (* control_flow___ABlockExpr___accept_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___ABlockExpr___accept_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___ABlockExpr___accept_control_flow "control_flow::ABlockExpr::(control_flow::PNode::accept_control_flow)"
-val_t NEW_AReturnExpr_parser_nodes___PNode___init();
-val_t NEW_AReturnExpr_parser_prod___AReturnExpr___empty_init();
-val_t NEW_AReturnExpr_parser_prod___AReturnExpr___init_areturnexpr(val_t p0, val_t p1);
-typedef void (* control_flow___AReturnExpr___accept_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___AReturnExpr___accept_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___AReturnExpr___accept_control_flow "control_flow::AReturnExpr::(control_flow::PNode::accept_control_flow)"
-val_t NEW_ABlockControler_parser_nodes___PNode___init();
-typedef val_t (* control_flow___ABlockControler___block_t)(val_t  self);
-val_t control_flow___ABlockControler___block(val_t  self);
-#define LOCATE_control_flow___ABlockControler___block "control_flow::ABlockControler::block"
-val_t NEW_ABreakExpr_parser_nodes___PNode___init();
-val_t NEW_ABreakExpr_parser_prod___ABreakExpr___empty_init();
-val_t NEW_ABreakExpr_parser_prod___ABreakExpr___init_abreakexpr(val_t p0, val_t p1);
-typedef void (* control_flow___ABreakExpr___accept_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___ABreakExpr___accept_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___ABreakExpr___accept_control_flow "control_flow::ABreakExpr::(control_flow::PNode::accept_control_flow)"
-val_t NEW_AContinueExpr_parser_nodes___PNode___init();
-val_t NEW_AContinueExpr_parser_prod___AContinueExpr___empty_init();
-val_t NEW_AContinueExpr_parser_prod___AContinueExpr___init_acontinueexpr(val_t p0, val_t p1);
-typedef void (* control_flow___AContinueExpr___accept_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___AContinueExpr___accept_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___AContinueExpr___accept_control_flow "control_flow::AContinueExpr::(control_flow::PNode::accept_control_flow)"
-val_t NEW_AAbortExpr_parser_nodes___PNode___init();
-val_t NEW_AAbortExpr_parser_prod___AAbortExpr___empty_init();
-val_t NEW_AAbortExpr_parser_prod___AAbortExpr___init_aabortexpr(val_t p0);
-typedef void (* control_flow___AAbortExpr___accept_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___AAbortExpr___accept_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___AAbortExpr___accept_control_flow "control_flow::AAbortExpr::(control_flow::PNode::accept_control_flow)"
-val_t NEW_AClosureCallExpr_parser_nodes___AClosureCallExpr___init(val_t p0, val_t p1, val_t p2);
-typedef void (* control_flow___AClosureCallExpr___accept_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___AClosureCallExpr___accept_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___AClosureCallExpr___accept_control_flow "control_flow::AClosureCallExpr::(control_flow::PNode::accept_control_flow)"
-val_t NEW_AIfExpr_parser_nodes___PNode___init();
-val_t NEW_AIfExpr_parser_prod___AIfExpr___empty_init();
-val_t NEW_AIfExpr_parser_prod___AIfExpr___init_aifexpr(val_t p0, val_t p1, val_t p2, val_t p3);
-typedef void (* control_flow___AIfExpr___accept_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___AIfExpr___accept_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___AIfExpr___accept_control_flow "control_flow::AIfExpr::(control_flow::PNode::accept_control_flow)"
-val_t NEW_AControlableBlock_parser_nodes___PNode___init();
-typedef void (* control_flow___AControlableBlock___accept_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___AControlableBlock___accept_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___AControlableBlock___accept_control_flow "control_flow::AControlableBlock::(control_flow::PNode::accept_control_flow)"
-typedef void (* control_flow___AControlableBlock___check_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___AControlableBlock___check_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___AControlableBlock___check_control_flow "control_flow::AControlableBlock::check_control_flow"
-val_t NEW_AWhileExpr_parser_nodes___PNode___init();
-val_t NEW_AWhileExpr_parser_prod___AWhileExpr___empty_init();
-val_t NEW_AWhileExpr_parser_prod___AWhileExpr___init_awhileexpr(val_t p0, val_t p1, val_t p2, val_t p3);
-val_t NEW_AForExpr_parser_nodes___PNode___init();
-val_t NEW_AForExpr_parser_prod___AForExpr___empty_init();
-val_t NEW_AForExpr_parser_prod___AForExpr___init_aforexpr(val_t p0, val_t p1, val_t p2);
-val_t NEW_AVarExpr_parser_nodes___PNode___init();
-val_t NEW_AVarExpr_parser_prod___AVarExpr___empty_init();
-val_t NEW_AVarExpr_parser_prod___AVarExpr___init_avarexpr(val_t p0);
-typedef void (* control_flow___AVarExpr___accept_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___AVarExpr___accept_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___AVarExpr___accept_control_flow "control_flow::AVarExpr::(control_flow::PNode::accept_control_flow)"
-val_t NEW_AVarAssignExpr_parser_nodes___PNode___init();
-val_t NEW_AVarAssignExpr_parser_prod___AVarAssignExpr___empty_init();
-val_t NEW_AVarAssignExpr_parser_prod___AVarAssignExpr___init_avarassignexpr(val_t p0, val_t p1, val_t p2);
-typedef void (* control_flow___AVarAssignExpr___accept_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___AVarAssignExpr___accept_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___AVarAssignExpr___accept_control_flow "control_flow::AVarAssignExpr::(control_flow::PNode::accept_control_flow)"
-val_t NEW_AVarReassignExpr_parser_nodes___PNode___init();
-val_t NEW_AVarReassignExpr_parser_prod___AVarReassignExpr___empty_init();
-val_t NEW_AVarReassignExpr_parser_prod___AVarReassignExpr___init_avarreassignexpr(val_t p0, val_t p1, val_t p2);
-typedef void (* control_flow___AVarReassignExpr___accept_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___AVarReassignExpr___accept_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___AVarReassignExpr___accept_control_flow "control_flow::AVarReassignExpr::(control_flow::PNode::accept_control_flow)"
-val_t NEW_AClosureDecl_parser_nodes___PNode___init();
-val_t NEW_AClosureDecl_parser_prod___AClosureDecl___empty_init();
-val_t NEW_AClosureDecl_parser_prod___AClosureDecl___init_aclosuredecl(val_t p0, val_t p1, val_t p2, val_t p3, val_t p4);
-typedef void (* control_flow___AClosureDecl___accept_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___AClosureDecl___accept_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___AClosureDecl___accept_control_flow "control_flow::AClosureDecl::(control_flow::PNode::accept_control_flow)"
-val_t NEW_AClosureDef_parser_nodes___PNode___init();
-val_t NEW_AClosureDef_parser_prod___AClosureDef___empty_init();
-val_t NEW_AClosureDef_parser_prod___AClosureDef___init_aclosuredef(val_t p0, val_t p1, val_t p2, val_t p3);
-typedef void (* control_flow___AClosureDef___accept_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___AClosureDef___accept_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___AClosureDef___accept_control_flow "control_flow::AClosureDef::(control_flow::PNode::accept_control_flow)"
-typedef void (* control_flow___AClosureDef___check_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___AClosureDef___check_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___AClosureDef___check_control_flow "control_flow::AClosureDef::(control_flow::AControlableBlock::check_control_flow)"
-val_t NEW_AOnceExpr_parser_nodes___PNode___init();
-val_t NEW_AOnceExpr_parser_prod___AOnceExpr___empty_init();
-val_t NEW_AOnceExpr_parser_prod___AOnceExpr___init_aonceexpr(val_t p0, val_t p1);
-typedef void (* control_flow___AOnceExpr___accept_control_flow_t)(val_t  self, val_t  param0);
-void control_flow___AOnceExpr___accept_control_flow(val_t  self, val_t  param0);
-#define LOCATE_control_flow___AOnceExpr___accept_control_flow "control_flow::AOnceExpr::(control_flow::PNode::accept_control_flow)"
 #endif

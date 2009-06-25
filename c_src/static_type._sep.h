@@ -12,6 +12,8 @@ extern const classtable_elt_t VFT_MMAncestor[];
 
 extern const classtable_elt_t VFT_MMType[];
 
+extern const classtable_elt_t VFT_MMNullableType[];
+
 extern const classtable_elt_t VFT_MMTypeClass[];
 
 extern const classtable_elt_t VFT_MMTypeSimpleClass[];
@@ -59,6 +61,7 @@ extern const int SFT_static_type[];
 #define CALL_static_type___MMClosure___adaptation_to(recv) ((static_type___MMClosure___adaptation_to_t)CALL((recv), (SFT_static_type[11] + 4)))
 #define CALL_static_type___MMClosure___init(recv) ((static_type___MMClosure___init_t)CALL((recv), (SFT_static_type[11] + 5)))
 #define CALL_static_type___MMClosure___not_for_self(recv) ((static_type___MMClosure___not_for_self_t)CALL((recv), (SFT_static_type[11] + 6)))
+#define CALL_static_type___MMClosure_____l(recv) ((static_type___MMClosure_____l_t)CALL((recv), (SFT_static_type[11] + 7)))
 #define ID_MMAncestor (SFT_static_type[12])
 #define COLOR_MMAncestor (SFT_static_type[13])
 #define ATTR_static_type___MMAncestor____stype(recv) ATTR(recv, (SFT_static_type[14] + 0))
@@ -74,33 +77,43 @@ extern const int SFT_static_type[];
 #define CALL_static_type___MMAncestor___init(recv) ((static_type___MMAncestor___init_t)CALL((recv), (SFT_static_type[15] + 8)))
 #define ID_MMType (SFT_static_type[16])
 #define COLOR_MMType (SFT_static_type[17])
-#define INIT_TABLE_POS_MMType (SFT_static_type[18] + 0)
-#define CALL_static_type___MMType___module(recv) ((static_type___MMType___module_t)CALL((recv), (SFT_static_type[18] + 1)))
-#define CALL_static_type___MMType___local_class(recv) ((static_type___MMType___local_class_t)CALL((recv), (SFT_static_type[18] + 2)))
-#define CALL_static_type___MMType_____l(recv) ((static_type___MMType_____l_t)CALL((recv), (SFT_static_type[18] + 3)))
-#define CALL_static_type___MMType___is_supertype(recv) ((static_type___MMType___is_supertype_t)CALL((recv), (SFT_static_type[18] + 4)))
-#define CALL_static_type___MMType___for_module(recv) ((static_type___MMType___for_module_t)CALL((recv), (SFT_static_type[18] + 5)))
-#define CALL_static_type___MMType___adapt_to(recv) ((static_type___MMType___adapt_to_t)CALL((recv), (SFT_static_type[18] + 6)))
-#define CALL_static_type___MMType___upcast_for(recv) ((static_type___MMType___upcast_for_t)CALL((recv), (SFT_static_type[18] + 7)))
-#define CALL_static_type___MMType___not_for_self(recv) ((static_type___MMType___not_for_self_t)CALL((recv), (SFT_static_type[18] + 8)))
-#define CALL_static_type___MMType___init(recv) ((static_type___MMType___init_t)CALL((recv), (SFT_static_type[18] + 9)))
-#define ID_MMTypeClass (SFT_static_type[19])
-#define COLOR_MMTypeClass (SFT_static_type[20])
-#define ATTR_static_type___MMTypeClass____local_class(recv) ATTR(recv, (SFT_static_type[21] + 0))
-#define INIT_TABLE_POS_MMTypeClass (SFT_static_type[22] + 0)
-#define CALL_static_type___MMTypeClass___init(recv) ((static_type___MMTypeClass___init_t)CALL((recv), (SFT_static_type[22] + 1)))
-#define ID_MMTypeSimpleClass (SFT_static_type[23])
-#define COLOR_MMTypeSimpleClass (SFT_static_type[24])
-#define INIT_TABLE_POS_MMTypeSimpleClass (SFT_static_type[25] + 0)
-#define CALL_static_type___MMTypeSimpleClass___init(recv) ((static_type___MMTypeSimpleClass___init_t)CALL((recv), (SFT_static_type[25] + 1)))
-#define ID_MMTypeNone (SFT_static_type[26])
-#define COLOR_MMTypeNone (SFT_static_type[27])
-#define ATTR_static_type___MMTypeNone____module(recv) ATTR(recv, (SFT_static_type[28] + 0))
-#define INIT_TABLE_POS_MMTypeNone (SFT_static_type[29] + 0)
-#define CALL_static_type___MMTypeNone___init(recv) ((static_type___MMTypeNone___init_t)CALL((recv), (SFT_static_type[29] + 1)))
-#define ATTR_static_type___MMModule____type_none(recv) ATTR(recv, (SFT_static_type[30] + 0))
-#define CALL_static_type___MMModule___type_none(recv) ((static_type___MMModule___type_none_t)CALL((recv), (SFT_static_type[31] + 0)))
-val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1);
+#define ATTR_static_type___MMType____as_nullable_cache(recv) ATTR(recv, (SFT_static_type[18] + 0))
+#define INIT_TABLE_POS_MMType (SFT_static_type[19] + 0)
+#define CALL_static_type___MMType___module(recv) ((static_type___MMType___module_t)CALL((recv), (SFT_static_type[19] + 1)))
+#define CALL_static_type___MMType___local_class(recv) ((static_type___MMType___local_class_t)CALL((recv), (SFT_static_type[19] + 2)))
+#define CALL_static_type___MMType___is_valid(recv) ((static_type___MMType___is_valid_t)CALL((recv), (SFT_static_type[19] + 3)))
+#define CALL_static_type___MMType_____l(recv) ((static_type___MMType_____l_t)CALL((recv), (SFT_static_type[19] + 4)))
+#define CALL_static_type___MMType___is_supertype(recv) ((static_type___MMType___is_supertype_t)CALL((recv), (SFT_static_type[19] + 5)))
+#define CALL_static_type___MMType___for_module(recv) ((static_type___MMType___for_module_t)CALL((recv), (SFT_static_type[19] + 6)))
+#define CALL_static_type___MMType___adapt_to(recv) ((static_type___MMType___adapt_to_t)CALL((recv), (SFT_static_type[19] + 7)))
+#define CALL_static_type___MMType___upcast_for(recv) ((static_type___MMType___upcast_for_t)CALL((recv), (SFT_static_type[19] + 8)))
+#define CALL_static_type___MMType___not_for_self(recv) ((static_type___MMType___not_for_self_t)CALL((recv), (SFT_static_type[19] + 9)))
+#define CALL_static_type___MMType___is_nullable(recv) ((static_type___MMType___is_nullable_t)CALL((recv), (SFT_static_type[19] + 10)))
+#define CALL_static_type___MMType___as_nullable(recv) ((static_type___MMType___as_nullable_t)CALL((recv), (SFT_static_type[19] + 11)))
+#define CALL_static_type___MMType___as_notnull(recv) ((static_type___MMType___as_notnull_t)CALL((recv), (SFT_static_type[19] + 12)))
+#define CALL_static_type___MMType___init(recv) ((static_type___MMType___init_t)CALL((recv), (SFT_static_type[19] + 13)))
+#define ID_MMNullableType (SFT_static_type[20])
+#define COLOR_MMNullableType (SFT_static_type[21])
+#define ATTR_static_type___MMNullableType____base_type(recv) ATTR(recv, (SFT_static_type[22] + 0))
+#define INIT_TABLE_POS_MMNullableType (SFT_static_type[23] + 0)
+#define CALL_static_type___MMNullableType___init(recv) ((static_type___MMNullableType___init_t)CALL((recv), (SFT_static_type[23] + 1)))
+#define ID_MMTypeClass (SFT_static_type[24])
+#define COLOR_MMTypeClass (SFT_static_type[25])
+#define ATTR_static_type___MMTypeClass____local_class(recv) ATTR(recv, (SFT_static_type[26] + 0))
+#define INIT_TABLE_POS_MMTypeClass (SFT_static_type[27] + 0)
+#define CALL_static_type___MMTypeClass___init(recv) ((static_type___MMTypeClass___init_t)CALL((recv), (SFT_static_type[27] + 1)))
+#define ID_MMTypeSimpleClass (SFT_static_type[28])
+#define COLOR_MMTypeSimpleClass (SFT_static_type[29])
+#define INIT_TABLE_POS_MMTypeSimpleClass (SFT_static_type[30] + 0)
+#define CALL_static_type___MMTypeSimpleClass___init(recv) ((static_type___MMTypeSimpleClass___init_t)CALL((recv), (SFT_static_type[30] + 1)))
+#define ID_MMTypeNone (SFT_static_type[31])
+#define COLOR_MMTypeNone (SFT_static_type[32])
+#define ATTR_static_type___MMTypeNone____module(recv) ATTR(recv, (SFT_static_type[33] + 0))
+#define INIT_TABLE_POS_MMTypeNone (SFT_static_type[34] + 0)
+#define CALL_static_type___MMTypeNone___init(recv) ((static_type___MMTypeNone___init_t)CALL((recv), (SFT_static_type[34] + 1)))
+#define ATTR_static_type___MMModule____type_none(recv) ATTR(recv, (SFT_static_type[35] + 0))
+#define CALL_static_type___MMModule___type_none(recv) ((static_type___MMModule___type_none_t)CALL((recv), (SFT_static_type[36] + 0)))
+val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
 typedef val_t (* static_type___MMLocalClass___get_type_t)(val_t  self);
 val_t static_type___MMLocalClass___get_type(val_t  self);
 #define LOCATE_static_type___MMLocalClass___get_type "static_type::MMLocalClass::get_type"
@@ -173,6 +186,9 @@ val_t NEW_MMClosure_static_type___MMClosure___init(val_t p0, val_t p1, val_t p2)
 typedef val_t (* static_type___MMClosure___not_for_self_t)(val_t  self);
 val_t static_type___MMClosure___not_for_self(val_t  self);
 #define LOCATE_static_type___MMClosure___not_for_self "static_type::MMClosure::not_for_self"
+typedef val_t (* static_type___MMClosure_____l_t)(val_t  self, val_t  param0);
+val_t static_type___MMClosure_____l(val_t  self, val_t  param0);
+#define LOCATE_static_type___MMClosure_____l "static_type::MMClosure::<"
 typedef val_t (* static_type___MMAncestor___to_s_t)(val_t  self);
 val_t static_type___MMAncestor___to_s(val_t  self);
 #define LOCATE_static_type___MMAncestor___to_s "static_type::MMAncestor::(string::Object::to_s)"
@@ -207,6 +223,9 @@ val_t static_type___MMType___module(val_t  self);
 typedef val_t (* static_type___MMType___local_class_t)(val_t  self);
 val_t static_type___MMType___local_class(val_t  self);
 #define LOCATE_static_type___MMType___local_class "static_type::MMType::local_class"
+typedef val_t (* static_type___MMType___is_valid_t)(val_t  self);
+val_t static_type___MMType___is_valid(val_t  self);
+#define LOCATE_static_type___MMType___is_valid "static_type::MMType::is_valid"
 typedef val_t (* static_type___MMType_____l_t)(val_t  self, val_t  param0);
 val_t static_type___MMType_____l(val_t  self, val_t  param0);
 #define LOCATE_static_type___MMType_____l "static_type::MMType::<"
@@ -225,10 +244,62 @@ val_t static_type___MMType___upcast_for(val_t  self, val_t  param0);
 typedef val_t (* static_type___MMType___not_for_self_t)(val_t  self);
 val_t static_type___MMType___not_for_self(val_t  self);
 #define LOCATE_static_type___MMType___not_for_self "static_type::MMType::not_for_self"
+typedef val_t (* static_type___MMType___is_nullable_t)(val_t  self);
+val_t static_type___MMType___is_nullable(val_t  self);
+#define LOCATE_static_type___MMType___is_nullable "static_type::MMType::is_nullable"
+typedef val_t (* static_type___MMType___as_nullable_t)(val_t  self);
+val_t static_type___MMType___as_nullable(val_t  self);
+#define LOCATE_static_type___MMType___as_nullable "static_type::MMType::as_nullable"
+typedef val_t (* static_type___MMType___as_notnull_t)(val_t  self);
+val_t static_type___MMType___as_notnull(val_t  self);
+#define LOCATE_static_type___MMType___as_notnull "static_type::MMType::as_notnull"
 typedef void (* static_type___MMType___init_t)(val_t  self, int* init_table);
 void static_type___MMType___init(val_t  self, int* init_table);
 #define LOCATE_static_type___MMType___init "static_type::MMType::init"
 val_t NEW_MMType_static_type___MMType___init();
+typedef val_t (* static_type___MMNullableType___to_s_t)(val_t  self);
+val_t static_type___MMNullableType___to_s(val_t  self);
+#define LOCATE_static_type___MMNullableType___to_s "static_type::MMNullableType::(string::Object::to_s)"
+typedef val_t (* static_type___MMNullableType___module_t)(val_t  self);
+val_t static_type___MMNullableType___module(val_t  self);
+#define LOCATE_static_type___MMNullableType___module "static_type::MMNullableType::(static_type::MMType::module)"
+typedef val_t (* static_type___MMNullableType___local_class_t)(val_t  self);
+val_t static_type___MMNullableType___local_class(val_t  self);
+#define LOCATE_static_type___MMNullableType___local_class "static_type::MMNullableType::(static_type::MMType::local_class)"
+typedef val_t (* static_type___MMNullableType___is_valid_t)(val_t  self);
+val_t static_type___MMNullableType___is_valid(val_t  self);
+#define LOCATE_static_type___MMNullableType___is_valid "static_type::MMNullableType::(static_type::MMType::is_valid)"
+typedef val_t (* static_type___MMNullableType_____l_t)(val_t  self, val_t  param0);
+val_t static_type___MMNullableType_____l(val_t  self, val_t  param0);
+#define LOCATE_static_type___MMNullableType_____l "static_type::MMNullableType::(static_type::MMType::<)"
+typedef val_t (* static_type___MMNullableType___is_supertype_t)(val_t  self, val_t  param0);
+val_t static_type___MMNullableType___is_supertype(val_t  self, val_t  param0);
+#define LOCATE_static_type___MMNullableType___is_supertype "static_type::MMNullableType::(static_type::MMType::is_supertype)"
+typedef val_t (* static_type___MMNullableType___for_module_t)(val_t  self, val_t  param0);
+val_t static_type___MMNullableType___for_module(val_t  self, val_t  param0);
+#define LOCATE_static_type___MMNullableType___for_module "static_type::MMNullableType::(static_type::MMType::for_module)"
+typedef val_t (* static_type___MMNullableType___adapt_to_t)(val_t  self, val_t  param0);
+val_t static_type___MMNullableType___adapt_to(val_t  self, val_t  param0);
+#define LOCATE_static_type___MMNullableType___adapt_to "static_type::MMNullableType::(static_type::MMType::adapt_to)"
+typedef val_t (* static_type___MMNullableType___upcast_for_t)(val_t  self, val_t  param0);
+val_t static_type___MMNullableType___upcast_for(val_t  self, val_t  param0);
+#define LOCATE_static_type___MMNullableType___upcast_for "static_type::MMNullableType::(static_type::MMType::upcast_for)"
+typedef val_t (* static_type___MMNullableType___not_for_self_t)(val_t  self);
+val_t static_type___MMNullableType___not_for_self(val_t  self);
+#define LOCATE_static_type___MMNullableType___not_for_self "static_type::MMNullableType::(static_type::MMType::not_for_self)"
+typedef val_t (* static_type___MMNullableType___is_nullable_t)(val_t  self);
+val_t static_type___MMNullableType___is_nullable(val_t  self);
+#define LOCATE_static_type___MMNullableType___is_nullable "static_type::MMNullableType::(static_type::MMType::is_nullable)"
+typedef val_t (* static_type___MMNullableType___as_nullable_t)(val_t  self);
+val_t static_type___MMNullableType___as_nullable(val_t  self);
+#define LOCATE_static_type___MMNullableType___as_nullable "static_type::MMNullableType::(static_type::MMType::as_nullable)"
+typedef val_t (* static_type___MMNullableType___as_notnull_t)(val_t  self);
+val_t static_type___MMNullableType___as_notnull(val_t  self);
+#define LOCATE_static_type___MMNullableType___as_notnull "static_type::MMNullableType::(static_type::MMType::as_notnull)"
+typedef void (* static_type___MMNullableType___init_t)(val_t  self, val_t  param0, int* init_table);
+void static_type___MMNullableType___init(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_static_type___MMNullableType___init "static_type::MMNullableType::init"
+val_t NEW_MMNullableType_static_type___MMNullableType___init(val_t p0);
 typedef val_t (* static_type___MMTypeClass___to_s_t)(val_t  self);
 val_t static_type___MMTypeClass___to_s(val_t  self);
 #define LOCATE_static_type___MMTypeClass___to_s "static_type::MMTypeClass::(string::Object::to_s)"
@@ -261,6 +332,9 @@ typedef void (* static_type___MMTypeSimpleClass___init_t)(val_t  self, val_t  pa
 void static_type___MMTypeSimpleClass___init(val_t  self, val_t  param0, int* init_table);
 #define LOCATE_static_type___MMTypeSimpleClass___init "static_type::MMTypeSimpleClass::init"
 val_t NEW_MMTypeSimpleClass_static_type___MMTypeSimpleClass___init(val_t p0);
+typedef val_t (* static_type___MMTypeNone___to_s_t)(val_t  self);
+val_t static_type___MMTypeNone___to_s(val_t  self);
+#define LOCATE_static_type___MMTypeNone___to_s "static_type::MMTypeNone::(string::Object::to_s)"
 typedef val_t (* static_type___MMTypeNone___module_t)(val_t  self);
 val_t static_type___MMTypeNone___module(val_t  self);
 #define LOCATE_static_type___MMTypeNone___module "static_type::MMTypeNone::(static_type::MMType::module)"
@@ -276,11 +350,20 @@ val_t static_type___MMTypeNone___is_supertype(val_t  self, val_t  param0);
 typedef val_t (* static_type___MMTypeNone___upcast_for_t)(val_t  self, val_t  param0);
 val_t static_type___MMTypeNone___upcast_for(val_t  self, val_t  param0);
 #define LOCATE_static_type___MMTypeNone___upcast_for "static_type::MMTypeNone::(static_type::MMType::upcast_for)"
+typedef val_t (* static_type___MMTypeNone___is_nullable_t)(val_t  self);
+val_t static_type___MMTypeNone___is_nullable(val_t  self);
+#define LOCATE_static_type___MMTypeNone___is_nullable "static_type::MMTypeNone::(static_type::MMType::is_nullable)"
+typedef val_t (* static_type___MMTypeNone___as_nullable_t)(val_t  self);
+val_t static_type___MMTypeNone___as_nullable(val_t  self);
+#define LOCATE_static_type___MMTypeNone___as_nullable "static_type::MMTypeNone::(static_type::MMType::as_nullable)"
+typedef val_t (* static_type___MMTypeNone___as_notnull_t)(val_t  self);
+val_t static_type___MMTypeNone___as_notnull(val_t  self);
+#define LOCATE_static_type___MMTypeNone___as_notnull "static_type::MMTypeNone::(static_type::MMType::as_notnull)"
 typedef void (* static_type___MMTypeNone___init_t)(val_t  self, val_t  param0, int* init_table);
 void static_type___MMTypeNone___init(val_t  self, val_t  param0, int* init_table);
 #define LOCATE_static_type___MMTypeNone___init "static_type::MMTypeNone::init"
 val_t NEW_MMTypeNone_static_type___MMTypeNone___init(val_t p0);
-val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2);
+val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef val_t (* static_type___MMModule___type_none_t)(val_t  self);
 val_t static_type___MMModule___type_none(val_t  self);
 #define LOCATE_static_type___MMModule___type_none "static_type::MMModule::type_none"

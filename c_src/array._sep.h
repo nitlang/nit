@@ -4,6 +4,8 @@
 #include "abstract_collection._sep.h"
 #include <nit_common.h>
 
+extern const classtable_elt_t VFT_AbstractArrayRead[];
+
 extern const classtable_elt_t VFT_AbstractArray[];
 
 extern const classtable_elt_t VFT_Array[];
@@ -24,92 +26,121 @@ val_t BOX_NativeArray(val_t * val);
 #define UNBOX_NativeArray(x) (((struct TBOX_NativeArray *)(VAL2OBJ(x)))->val)
 extern const char *LOCATE_array;
 extern const int SFT_array[];
-#define ID_AbstractArray (SFT_array[0])
-#define COLOR_AbstractArray (SFT_array[1])
-#define ATTR_array___AbstractArray____length(recv) ATTR(recv, (SFT_array[2] + 0))
-#define INIT_TABLE_POS_AbstractArray (SFT_array[3] + 0)
-#define CALL_array___AbstractArray___enlarge(recv) ((array___AbstractArray___enlarge_t)CALL((recv), (SFT_array[3] + 1)))
-#define CALL_array___AbstractArray___insert(recv) ((array___AbstractArray___insert_t)CALL((recv), (SFT_array[3] + 2)))
-#define CALL_array___AbstractArray___last_index_of(recv) ((array___AbstractArray___last_index_of_t)CALL((recv), (SFT_array[3] + 3)))
-#define CALL_array___AbstractArray___index_of_from(recv) ((array___AbstractArray___index_of_from_t)CALL((recv), (SFT_array[3] + 4)))
-#define CALL_array___AbstractArray___last_index_of_from(recv) ((array___AbstractArray___last_index_of_from_t)CALL((recv), (SFT_array[3] + 5)))
-#define CALL_array___AbstractArray___reversed(recv) ((array___AbstractArray___reversed_t)CALL((recv), (SFT_array[3] + 6)))
-#define CALL_array___AbstractArray___copy_to(recv) ((array___AbstractArray___copy_to_t)CALL((recv), (SFT_array[3] + 7)))
-#define CALL_array___AbstractArray___init(recv) ((array___AbstractArray___init_t)CALL((recv), (SFT_array[3] + 8)))
-#define ID_Array (SFT_array[4])
-#define COLOR_Array (SFT_array[5])
-#define ATTR_array___Array____items(recv) ATTR(recv, (SFT_array[6] + 0))
-#define ATTR_array___Array____capacity(recv) ATTR(recv, (SFT_array[6] + 1))
-#define INIT_TABLE_POS_Array (SFT_array[7] + 0)
-#define CALL_array___Array___init(recv) ((array___Array___init_t)CALL((recv), (SFT_array[7] + 1)))
-#define CALL_array___Array___with_items(recv) ((array___Array___with_items_t)CALL((recv), (SFT_array[7] + 2)))
-#define CALL_array___Array___with_capacity(recv) ((array___Array___with_capacity_t)CALL((recv), (SFT_array[7] + 3)))
-#define CALL_array___Array___filled_with(recv) ((array___Array___filled_with_t)CALL((recv), (SFT_array[7] + 4)))
-#define CALL_array___Array___with_native(recv) ((array___Array___with_native_t)CALL((recv), (SFT_array[7] + 5)))
-#define ID_ArrayIterator (SFT_array[8])
-#define COLOR_ArrayIterator (SFT_array[9])
-#define ATTR_array___ArrayIterator____index(recv) ATTR(recv, (SFT_array[10] + 0))
-#define ATTR_array___ArrayIterator____array(recv) ATTR(recv, (SFT_array[10] + 1))
-#define INIT_TABLE_POS_ArrayIterator (SFT_array[11] + 0)
-#define CALL_array___ArrayIterator___init(recv) ((array___ArrayIterator___init_t)CALL((recv), (SFT_array[11] + 1)))
-#define ID_ArraySet (SFT_array[12])
-#define COLOR_ArraySet (SFT_array[13])
-#define ATTR_array___ArraySet____array(recv) ATTR(recv, (SFT_array[14] + 0))
-#define INIT_TABLE_POS_ArraySet (SFT_array[15] + 0)
-#define CALL_array___ArraySet___enlarge(recv) ((array___ArraySet___enlarge_t)CALL((recv), (SFT_array[15] + 1)))
-#define CALL_array___ArraySet___remove_at(recv) ((array___ArraySet___remove_at_t)CALL((recv), (SFT_array[15] + 2)))
-#define CALL_array___ArraySet___init(recv) ((array___ArraySet___init_t)CALL((recv), (SFT_array[15] + 3)))
-#define CALL_array___ArraySet___with_capacity(recv) ((array___ArraySet___with_capacity_t)CALL((recv), (SFT_array[15] + 4)))
-#define ID_ArraySetIterator (SFT_array[16])
-#define COLOR_ArraySetIterator (SFT_array[17])
-#define ATTR_array___ArraySetIterator____iter(recv) ATTR(recv, (SFT_array[18] + 0))
-#define INIT_TABLE_POS_ArraySetIterator (SFT_array[19] + 0)
-#define CALL_array___ArraySetIterator___init(recv) ((array___ArraySetIterator___init_t)CALL((recv), (SFT_array[19] + 1)))
-#define ID_ArrayMap (SFT_array[20])
-#define COLOR_ArrayMap (SFT_array[21])
-#define ATTR_array___ArrayMap____items(recv) ATTR(recv, (SFT_array[22] + 0))
-#define ATTR_array___ArrayMap____last_index(recv) ATTR(recv, (SFT_array[22] + 1))
-#define INIT_TABLE_POS_ArrayMap (SFT_array[23] + 0)
-#define CALL_array___ArrayMap___enlarge(recv) ((array___ArrayMap___enlarge_t)CALL((recv), (SFT_array[23] + 1)))
-#define CALL_array___ArrayMap___remove_at_index(recv) ((array___ArrayMap___remove_at_index_t)CALL((recv), (SFT_array[23] + 2)))
-#define CALL_array___ArrayMap___index(recv) ((array___ArrayMap___index_t)CALL((recv), (SFT_array[23] + 3)))
-#define CALL_array___ArrayMap___init(recv) ((array___ArrayMap___init_t)CALL((recv), (SFT_array[23] + 4)))
-#define CALL_array___Iterator___to_a(recv) ((array___Iterator___to_a_t)CALL((recv), (SFT_array[24] + 0)))
-#define CALL_array___Collection___to_a(recv) ((array___Collection___to_a_t)CALL((recv), (SFT_array[25] + 0)))
-#define ID_ArrayCapable (SFT_array[26])
-#define COLOR_ArrayCapable (SFT_array[27])
-#define INIT_TABLE_POS_ArrayCapable (SFT_array[28] + 0)
-#define CALL_array___ArrayCapable___calloc_array(recv) ((array___ArrayCapable___calloc_array_t)CALL((recv), (SFT_array[28] + 1)))
-#define ID_NativeArray (SFT_array[29])
-#define COLOR_NativeArray (SFT_array[30])
-#define INIT_TABLE_POS_NativeArray (SFT_array[31] + 0)
-#define CALL_array___NativeArray_____bra(recv) ((array___NativeArray_____bra_t)CALL((recv), (SFT_array[31] + 1)))
-#define CALL_array___NativeArray_____braeq(recv) ((array___NativeArray_____braeq_t)CALL((recv), (SFT_array[31] + 2)))
-#define CALL_array___NativeArray___copy_to(recv) ((array___NativeArray___copy_to_t)CALL((recv), (SFT_array[31] + 3)))
-typedef val_t (* array___AbstractArray_____eqeq_t)(val_t  self, val_t  param0);
-val_t array___AbstractArray_____eqeq(val_t  self, val_t  param0);
-#define LOCATE_array___AbstractArray_____eqeq "array::AbstractArray::(kernel::Object::==)"
-typedef void (* array___AbstractArray___output_t)(val_t  self);
-void array___AbstractArray___output(val_t  self);
-#define LOCATE_array___AbstractArray___output "array::AbstractArray::(kernel::Object::output)"
-typedef val_t (* array___AbstractArray___iterator_t)(val_t  self);
-val_t array___AbstractArray___iterator(val_t  self);
-#define LOCATE_array___AbstractArray___iterator "array::AbstractArray::(abstract_collection::Collection::iterator)"
-typedef val_t (* array___AbstractArray___is_empty_t)(val_t  self);
-val_t array___AbstractArray___is_empty(val_t  self);
-#define LOCATE_array___AbstractArray___is_empty "array::AbstractArray::(abstract_collection::Collection::is_empty)"
-typedef val_t (* array___AbstractArray___length_t)(val_t  self);
-val_t array___AbstractArray___length(val_t  self);
-#define LOCATE_array___AbstractArray___length "array::AbstractArray::(abstract_collection::Collection::length)"
-typedef val_t (* array___AbstractArray___has_t)(val_t  self, val_t  param0);
-val_t array___AbstractArray___has(val_t  self, val_t  param0);
-#define LOCATE_array___AbstractArray___has "array::AbstractArray::(abstract_collection::Collection::has)"
-typedef val_t (* array___AbstractArray___has_only_t)(val_t  self, val_t  param0);
-val_t array___AbstractArray___has_only(val_t  self, val_t  param0);
-#define LOCATE_array___AbstractArray___has_only "array::AbstractArray::(abstract_collection::Collection::has_only)"
-typedef val_t (* array___AbstractArray___count_t)(val_t  self, val_t  param0);
-val_t array___AbstractArray___count(val_t  self, val_t  param0);
-#define LOCATE_array___AbstractArray___count "array::AbstractArray::(abstract_collection::Collection::count)"
+#define ID_AbstractArrayRead (SFT_array[0])
+#define COLOR_AbstractArrayRead (SFT_array[1])
+#define ATTR_array___AbstractArrayRead____length(recv) ATTR(recv, (SFT_array[2] + 0))
+#define INIT_TABLE_POS_AbstractArrayRead (SFT_array[3] + 0)
+#define CALL_array___AbstractArrayRead___last_index_of(recv) ((array___AbstractArrayRead___last_index_of_t)CALL((recv), (SFT_array[3] + 1)))
+#define CALL_array___AbstractArrayRead___index_of_from(recv) ((array___AbstractArrayRead___index_of_from_t)CALL((recv), (SFT_array[3] + 2)))
+#define CALL_array___AbstractArrayRead___last_index_of_from(recv) ((array___AbstractArrayRead___last_index_of_from_t)CALL((recv), (SFT_array[3] + 3)))
+#define CALL_array___AbstractArrayRead___reversed(recv) ((array___AbstractArrayRead___reversed_t)CALL((recv), (SFT_array[3] + 4)))
+#define CALL_array___AbstractArrayRead___copy_to(recv) ((array___AbstractArrayRead___copy_to_t)CALL((recv), (SFT_array[3] + 5)))
+#define CALL_array___AbstractArrayRead___init(recv) ((array___AbstractArrayRead___init_t)CALL((recv), (SFT_array[3] + 6)))
+#define ID_AbstractArray (SFT_array[4])
+#define COLOR_AbstractArray (SFT_array[5])
+#define INIT_TABLE_POS_AbstractArray (SFT_array[6] + 0)
+#define CALL_array___AbstractArray___enlarge(recv) ((array___AbstractArray___enlarge_t)CALL((recv), (SFT_array[6] + 1)))
+#define CALL_array___AbstractArray___insert(recv) ((array___AbstractArray___insert_t)CALL((recv), (SFT_array[6] + 2)))
+#define ID_Array (SFT_array[7])
+#define COLOR_Array (SFT_array[8])
+#define ATTR_array___Array____items(recv) ATTR(recv, (SFT_array[9] + 0))
+#define ATTR_array___Array____capacity(recv) ATTR(recv, (SFT_array[9] + 1))
+#define INIT_TABLE_POS_Array (SFT_array[10] + 0)
+#define CALL_array___Array___init(recv) ((array___Array___init_t)CALL((recv), (SFT_array[10] + 1)))
+#define CALL_array___Array___with_items(recv) ((array___Array___with_items_t)CALL((recv), (SFT_array[10] + 2)))
+#define CALL_array___Array___with_capacity(recv) ((array___Array___with_capacity_t)CALL((recv), (SFT_array[10] + 3)))
+#define CALL_array___Array___filled_with(recv) ((array___Array___filled_with_t)CALL((recv), (SFT_array[10] + 4)))
+#define CALL_array___Array___with_native(recv) ((array___Array___with_native_t)CALL((recv), (SFT_array[10] + 5)))
+#define ID_ArrayIterator (SFT_array[11])
+#define COLOR_ArrayIterator (SFT_array[12])
+#define ATTR_array___ArrayIterator____index(recv) ATTR(recv, (SFT_array[13] + 0))
+#define ATTR_array___ArrayIterator____array(recv) ATTR(recv, (SFT_array[13] + 1))
+#define INIT_TABLE_POS_ArrayIterator (SFT_array[14] + 0)
+#define CALL_array___ArrayIterator___init(recv) ((array___ArrayIterator___init_t)CALL((recv), (SFT_array[14] + 1)))
+#define ID_ArraySet (SFT_array[15])
+#define COLOR_ArraySet (SFT_array[16])
+#define ATTR_array___ArraySet____array(recv) ATTR(recv, (SFT_array[17] + 0))
+#define INIT_TABLE_POS_ArraySet (SFT_array[18] + 0)
+#define CALL_array___ArraySet___enlarge(recv) ((array___ArraySet___enlarge_t)CALL((recv), (SFT_array[18] + 1)))
+#define CALL_array___ArraySet___remove_at(recv) ((array___ArraySet___remove_at_t)CALL((recv), (SFT_array[18] + 2)))
+#define CALL_array___ArraySet___init(recv) ((array___ArraySet___init_t)CALL((recv), (SFT_array[18] + 3)))
+#define CALL_array___ArraySet___with_capacity(recv) ((array___ArraySet___with_capacity_t)CALL((recv), (SFT_array[18] + 4)))
+#define ID_ArraySetIterator (SFT_array[19])
+#define COLOR_ArraySetIterator (SFT_array[20])
+#define ATTR_array___ArraySetIterator____iter(recv) ATTR(recv, (SFT_array[21] + 0))
+#define INIT_TABLE_POS_ArraySetIterator (SFT_array[22] + 0)
+#define CALL_array___ArraySetIterator___init(recv) ((array___ArraySetIterator___init_t)CALL((recv), (SFT_array[22] + 1)))
+#define ID_ArrayMap (SFT_array[23])
+#define COLOR_ArrayMap (SFT_array[24])
+#define ATTR_array___ArrayMap____items(recv) ATTR(recv, (SFT_array[25] + 0))
+#define ATTR_array___ArrayMap____last_index(recv) ATTR(recv, (SFT_array[25] + 1))
+#define INIT_TABLE_POS_ArrayMap (SFT_array[26] + 0)
+#define CALL_array___ArrayMap___enlarge(recv) ((array___ArrayMap___enlarge_t)CALL((recv), (SFT_array[26] + 1)))
+#define CALL_array___ArrayMap___remove_at_index(recv) ((array___ArrayMap___remove_at_index_t)CALL((recv), (SFT_array[26] + 2)))
+#define CALL_array___ArrayMap___index(recv) ((array___ArrayMap___index_t)CALL((recv), (SFT_array[26] + 3)))
+#define CALL_array___ArrayMap___init(recv) ((array___ArrayMap___init_t)CALL((recv), (SFT_array[26] + 4)))
+#define CALL_array___Iterator___to_a(recv) ((array___Iterator___to_a_t)CALL((recv), (SFT_array[27] + 0)))
+#define CALL_array___Collection___to_a(recv) ((array___Collection___to_a_t)CALL((recv), (SFT_array[28] + 0)))
+#define ID_ArrayCapable (SFT_array[29])
+#define COLOR_ArrayCapable (SFT_array[30])
+#define INIT_TABLE_POS_ArrayCapable (SFT_array[31] + 0)
+#define CALL_array___ArrayCapable___calloc_array(recv) ((array___ArrayCapable___calloc_array_t)CALL((recv), (SFT_array[31] + 1)))
+#define ID_NativeArray (SFT_array[32])
+#define COLOR_NativeArray (SFT_array[33])
+#define INIT_TABLE_POS_NativeArray (SFT_array[34] + 0)
+#define CALL_array___NativeArray_____bra(recv) ((array___NativeArray_____bra_t)CALL((recv), (SFT_array[34] + 1)))
+#define CALL_array___NativeArray_____braeq(recv) ((array___NativeArray_____braeq_t)CALL((recv), (SFT_array[34] + 2)))
+#define CALL_array___NativeArray___copy_to(recv) ((array___NativeArray___copy_to_t)CALL((recv), (SFT_array[34] + 3)))
+typedef val_t (* array___AbstractArrayRead_____eqeq_t)(val_t  self, val_t  param0);
+val_t array___AbstractArrayRead_____eqeq(val_t  self, val_t  param0);
+#define LOCATE_array___AbstractArrayRead_____eqeq "array::AbstractArrayRead::(kernel::Object::==)"
+typedef void (* array___AbstractArrayRead___output_t)(val_t  self);
+void array___AbstractArrayRead___output(val_t  self);
+#define LOCATE_array___AbstractArrayRead___output "array::AbstractArrayRead::(kernel::Object::output)"
+typedef val_t (* array___AbstractArrayRead___iterator_t)(val_t  self);
+val_t array___AbstractArrayRead___iterator(val_t  self);
+#define LOCATE_array___AbstractArrayRead___iterator "array::AbstractArrayRead::(abstract_collection::Collection::iterator)"
+typedef val_t (* array___AbstractArrayRead___is_empty_t)(val_t  self);
+val_t array___AbstractArrayRead___is_empty(val_t  self);
+#define LOCATE_array___AbstractArrayRead___is_empty "array::AbstractArrayRead::(abstract_collection::Collection::is_empty)"
+typedef val_t (* array___AbstractArrayRead___length_t)(val_t  self);
+val_t array___AbstractArrayRead___length(val_t  self);
+#define LOCATE_array___AbstractArrayRead___length "array::AbstractArrayRead::(abstract_collection::Collection::length)"
+typedef val_t (* array___AbstractArrayRead___has_t)(val_t  self, val_t  param0);
+val_t array___AbstractArrayRead___has(val_t  self, val_t  param0);
+#define LOCATE_array___AbstractArrayRead___has "array::AbstractArrayRead::(abstract_collection::Collection::has)"
+typedef val_t (* array___AbstractArrayRead___has_only_t)(val_t  self, val_t  param0);
+val_t array___AbstractArrayRead___has_only(val_t  self, val_t  param0);
+#define LOCATE_array___AbstractArrayRead___has_only "array::AbstractArrayRead::(abstract_collection::Collection::has_only)"
+typedef val_t (* array___AbstractArrayRead___count_t)(val_t  self, val_t  param0);
+val_t array___AbstractArrayRead___count(val_t  self, val_t  param0);
+#define LOCATE_array___AbstractArrayRead___count "array::AbstractArrayRead::(abstract_collection::Collection::count)"
+typedef val_t (* array___AbstractArrayRead___has_key_t)(val_t  self, val_t  param0);
+val_t array___AbstractArrayRead___has_key(val_t  self, val_t  param0);
+#define LOCATE_array___AbstractArrayRead___has_key "array::AbstractArrayRead::(abstract_collection::MapRead::has_key)"
+typedef val_t (* array___AbstractArrayRead___index_of_t)(val_t  self, val_t  param0);
+val_t array___AbstractArrayRead___index_of(val_t  self, val_t  param0);
+#define LOCATE_array___AbstractArrayRead___index_of "array::AbstractArrayRead::(abstract_collection::IndexedCollectionRead::index_of)"
+typedef val_t (* array___AbstractArrayRead___last_index_of_t)(val_t  self, val_t  param0);
+val_t array___AbstractArrayRead___last_index_of(val_t  self, val_t  param0);
+#define LOCATE_array___AbstractArrayRead___last_index_of "array::AbstractArrayRead::last_index_of"
+typedef val_t (* array___AbstractArrayRead___index_of_from_t)(val_t  self, val_t  param0, val_t  param1);
+val_t array___AbstractArrayRead___index_of_from(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_array___AbstractArrayRead___index_of_from "array::AbstractArrayRead::index_of_from"
+typedef val_t (* array___AbstractArrayRead___last_index_of_from_t)(val_t  self, val_t  param0, val_t  param1);
+val_t array___AbstractArrayRead___last_index_of_from(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_array___AbstractArrayRead___last_index_of_from "array::AbstractArrayRead::last_index_of_from"
+typedef val_t (* array___AbstractArrayRead___reversed_t)(val_t  self);
+val_t array___AbstractArrayRead___reversed(val_t  self);
+#define LOCATE_array___AbstractArrayRead___reversed "array::AbstractArrayRead::reversed"
+typedef void (* array___AbstractArrayRead___copy_to_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
+void array___AbstractArrayRead___copy_to(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
+#define LOCATE_array___AbstractArrayRead___copy_to "array::AbstractArrayRead::copy_to"
+typedef void (* array___AbstractArrayRead___init_t)(val_t  self, int* init_table);
+void array___AbstractArrayRead___init(val_t  self, int* init_table);
+#define LOCATE_array___AbstractArrayRead___init "array::AbstractArrayRead::init"
+val_t NEW_AbstractArrayRead_array___AbstractArrayRead___init();
+val_t NEW_AbstractArray_array___AbstractArrayRead___init();
 typedef void (* array___AbstractArray___clear_t)(val_t  self);
 void array___AbstractArray___clear(val_t  self);
 #define LOCATE_array___AbstractArray___clear "array::AbstractArray::(abstract_collection::RemovableCollection::clear)"
@@ -119,9 +150,6 @@ void array___AbstractArray___remove(val_t  self, val_t  param0);
 typedef void (* array___AbstractArray___remove_all_t)(val_t  self, val_t  param0);
 void array___AbstractArray___remove_all(val_t  self, val_t  param0);
 #define LOCATE_array___AbstractArray___remove_all "array::AbstractArray::(abstract_collection::RemovableCollection::remove_all)"
-typedef val_t (* array___AbstractArray___has_key_t)(val_t  self, val_t  param0);
-val_t array___AbstractArray___has_key(val_t  self, val_t  param0);
-#define LOCATE_array___AbstractArray___has_key "array::AbstractArray::(abstract_collection::Map::has_key)"
 typedef void (* array___AbstractArray___remove_at_t)(val_t  self, val_t  param0);
 void array___AbstractArray___remove_at(val_t  self, val_t  param0);
 #define LOCATE_array___AbstractArray___remove_at "array::AbstractArray::(abstract_collection::Map::remove_at)"
@@ -140,37 +168,15 @@ void array___AbstractArray___unshift(val_t  self, val_t  param0);
 typedef val_t (* array___AbstractArray___shift_t)(val_t  self);
 val_t array___AbstractArray___shift(val_t  self);
 #define LOCATE_array___AbstractArray___shift "array::AbstractArray::(abstract_collection::IndexedCollection::shift)"
-typedef val_t (* array___AbstractArray___index_of_t)(val_t  self, val_t  param0);
-val_t array___AbstractArray___index_of(val_t  self, val_t  param0);
-#define LOCATE_array___AbstractArray___index_of "array::AbstractArray::(abstract_collection::IndexedCollection::index_of)"
 typedef void (* array___AbstractArray___enlarge_t)(val_t  self, val_t  param0);
 void array___AbstractArray___enlarge(val_t  self, val_t  param0);
 #define LOCATE_array___AbstractArray___enlarge "array::AbstractArray::enlarge"
 typedef void (* array___AbstractArray___insert_t)(val_t  self, val_t  param0, val_t  param1);
 void array___AbstractArray___insert(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_array___AbstractArray___insert "array::AbstractArray::insert"
-typedef val_t (* array___AbstractArray___last_index_of_t)(val_t  self, val_t  param0);
-val_t array___AbstractArray___last_index_of(val_t  self, val_t  param0);
-#define LOCATE_array___AbstractArray___last_index_of "array::AbstractArray::last_index_of"
-typedef val_t (* array___AbstractArray___index_of_from_t)(val_t  self, val_t  param0, val_t  param1);
-val_t array___AbstractArray___index_of_from(val_t  self, val_t  param0, val_t  param1);
-#define LOCATE_array___AbstractArray___index_of_from "array::AbstractArray::index_of_from"
-typedef val_t (* array___AbstractArray___last_index_of_from_t)(val_t  self, val_t  param0, val_t  param1);
-val_t array___AbstractArray___last_index_of_from(val_t  self, val_t  param0, val_t  param1);
-#define LOCATE_array___AbstractArray___last_index_of_from "array::AbstractArray::last_index_of_from"
-typedef val_t (* array___AbstractArray___reversed_t)(val_t  self);
-val_t array___AbstractArray___reversed(val_t  self);
-#define LOCATE_array___AbstractArray___reversed "array::AbstractArray::reversed"
-typedef void (* array___AbstractArray___copy_to_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
-void array___AbstractArray___copy_to(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3);
-#define LOCATE_array___AbstractArray___copy_to "array::AbstractArray::copy_to"
-typedef void (* array___AbstractArray___init_t)(val_t  self, int* init_table);
-void array___AbstractArray___init(val_t  self, int* init_table);
-#define LOCATE_array___AbstractArray___init "array::AbstractArray::init"
-val_t NEW_AbstractArray_array___AbstractArray___init();
 typedef val_t (* array___Array_____bra_t)(val_t  self, val_t  param0);
 val_t array___Array_____bra(val_t  self, val_t  param0);
-#define LOCATE_array___Array_____bra "array::Array::(abstract_collection::Map::[])"
+#define LOCATE_array___Array_____bra "array::Array::(abstract_collection::MapRead::[])"
 typedef void (* array___Array_____braeq_t)(val_t  self, val_t  param0, val_t  param1);
 void array___Array_____braeq(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_array___Array_____braeq "array::Array::(abstract_collection::Map::[]=)"
@@ -206,9 +212,6 @@ void array___ArrayIterator___next(val_t  self);
 typedef val_t (* array___ArrayIterator___is_ok_t)(val_t  self);
 val_t array___ArrayIterator___is_ok(val_t  self);
 #define LOCATE_array___ArrayIterator___is_ok "array::ArrayIterator::(abstract_collection::Iterator::is_ok)"
-typedef void (* array___ArrayIterator___item__eq_t)(val_t  self, val_t  param0);
-void array___ArrayIterator___item__eq(val_t  self, val_t  param0);
-#define LOCATE_array___ArrayIterator___item__eq "array::ArrayIterator::(abstract_collection::MapIterator::item=)"
 typedef val_t (* array___ArrayIterator___index_t)(val_t  self);
 val_t array___ArrayIterator___index(val_t  self);
 #define LOCATE_array___ArrayIterator___index "array::ArrayIterator::(abstract_collection::IndexedIterator::index)"
@@ -302,13 +305,13 @@ void array___ArrayMap___remove_all(val_t  self, val_t  param0);
 #define LOCATE_array___ArrayMap___remove_all "array::ArrayMap::(abstract_collection::RemovableCollection::remove_all)"
 typedef val_t (* array___ArrayMap_____bra_t)(val_t  self, val_t  param0);
 val_t array___ArrayMap_____bra(val_t  self, val_t  param0);
-#define LOCATE_array___ArrayMap_____bra "array::ArrayMap::(abstract_collection::Map::[])"
+#define LOCATE_array___ArrayMap_____bra "array::ArrayMap::(abstract_collection::MapRead::[])"
+typedef val_t (* array___ArrayMap___has_key_t)(val_t  self, val_t  param0);
+val_t array___ArrayMap___has_key(val_t  self, val_t  param0);
+#define LOCATE_array___ArrayMap___has_key "array::ArrayMap::(abstract_collection::MapRead::has_key)"
 typedef void (* array___ArrayMap_____braeq_t)(val_t  self, val_t  param0, val_t  param1);
 void array___ArrayMap_____braeq(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_array___ArrayMap_____braeq "array::ArrayMap::(abstract_collection::Map::[]=)"
-typedef val_t (* array___ArrayMap___has_key_t)(val_t  self, val_t  param0);
-val_t array___ArrayMap___has_key(val_t  self, val_t  param0);
-#define LOCATE_array___ArrayMap___has_key "array::ArrayMap::(abstract_collection::Map::has_key)"
 typedef void (* array___ArrayMap___remove_at_t)(val_t  self, val_t  param0);
 void array___ArrayMap___remove_at(val_t  self, val_t  param0);
 #define LOCATE_array___ArrayMap___remove_at "array::ArrayMap::(abstract_collection::Map::remove_at)"

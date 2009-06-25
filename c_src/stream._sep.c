@@ -3,7 +3,7 @@
 void stream___IOS___close(val_t  self) {
   struct trace_t trace = {NULL, NULL, 20, LOCATE_stream___IOS___close};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
   fprintf(stderr, "Deferred method called");
@@ -15,7 +15,7 @@ void stream___IOS___close(val_t  self) {
 void stream___IOS___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 0, LOCATE_stream___IOS___init};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
   tracehead = trace.prev;
@@ -24,7 +24,7 @@ void stream___IOS___init(val_t  self, int* init_table) {
 val_t stream___IStream___read_char(val_t  self) {
   struct trace_t trace = {NULL, NULL, 27, LOCATE_stream___IStream___read_char};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
   fprintf(stderr, "Deferred method called");
@@ -36,36 +36,47 @@ val_t stream___IStream___read_char(val_t  self) {
 val_t stream___IStream___read(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 30, LOCATE_stream___IStream___read};
   val_t variable[6];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = NEW_String_string___String___with_capacity( variable[1] /*i*/); /*new String*/
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = NEW_Buffer_string___Buffer___with_capacity( variable[1] /*i*/) /*new Buffer*/;
   variable[3] = variable[4];
   while (true) { /*while*/
+    /* Register variable[4]: Result */
     variable[4] = TAG_Bool(UNTAG_Int( variable[1] /*i*/)>UNTAG_Int( TAG_Int(0)));
-    variable[5] = variable[4];
-    if (UNTAG_Bool(variable[5])) { /* and */
-      variable[5] = variable[0];
-      variable[5] = CALL_stream___IStream___eof(variable[5])(variable[5]) /*IStream::eof*/;
-      variable[5] =  TAG_Bool(!UNTAG_Bool(variable[5]));
+    /* Ensure var variable[4]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[4])) { /* and */
+      /* Register variable[4]: Result */
+      variable[4] = CALL_stream___IStream___eof(variable[0])(variable[0]) /*IStream::eof*/;
+      variable[4] =  TAG_Bool(!UNTAG_Bool(variable[4]));
     }
-    variable[4] = variable[5];
+    /* Register variable[4]: Result */
     if (!UNTAG_Bool(variable[4])) break; /* while*/
-    variable[5] = variable[0];
-    variable[5] = CALL_stream___IStream___read_char(variable[5])(variable[5]) /*IStream::read_char*/;
+    /* Register variable[4]: Local variable */
+    /* Register variable[5]: Result */
+    variable[5] = CALL_stream___IStream___read_char(variable[0])(variable[0]) /*IStream::read_char*/;
     variable[4] = variable[5];
+    /* Register variable[5]: Result */
     variable[5] = TAG_Bool(UNTAG_Int( variable[4] /*c*/)>=UNTAG_Int( TAG_Int(0)));
     if (UNTAG_Bool(variable[5])) { /*if*/
+      /* Register variable[5]: Result */
       variable[5] = TAG_Char(UNTAG_Int( variable[4] /*c*/));
-      CALL_abstract_collection___SimpleCollection___add( variable[3] /*s*/)( variable[3] /*s*/, variable[5]) /*String::add*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[3] /*s*/)( variable[3] /*s*/, variable[5]) /*Buffer::add*/;
       variable[1] = TAG_Int(UNTAG_Int(variable[1])-UNTAG_Int( TAG_Int(1))) /*i*/;
     }
     continue_1: while(0);
   }
   break_1: while(0);
-  variable[2] =  variable[3] /*s*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_string___Object___to_s( variable[3] /*s*/)( variable[3] /*s*/) /*Buffer::to_s*/;
+  variable[2] = variable[4];
   goto return_label0;
   return_label0: while(false);
   tracehead = trace.prev;
@@ -74,18 +85,23 @@ val_t stream___IStream___read(val_t  self, val_t  param0) {
 val_t stream___IStream___read_line(val_t  self) {
   struct trace_t trace = {NULL, NULL, 44, LOCATE_stream___IStream___read_line};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_stream___IStream___eof(variable[2])(variable[2]) /*IStream::eof*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_stream___IStream___eof(variable[0])(variable[0]) /*IStream::eof*/;
   if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[2])))) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_stream___IStream___read_line, LOCATE_stream, 47); nit_exit(1);}
-  variable[3] = NEW_String_string___String___init(); /*new String*/
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = NEW_Buffer_string___Buffer___init() /*new Buffer*/;
   variable[2] = variable[3];
-  variable[3] = variable[0];
-  CALL_stream___IStream___append_line_to(variable[3])(variable[3],  variable[2] /*s*/) /*IStream::append_line_to*/;
-  variable[1] =  variable[2] /*s*/;
+  CALL_stream___IStream___append_line_to(variable[0])(variable[0],  variable[2] /*s*/) /*IStream::append_line_to*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_string___Object___to_s( variable[2] /*s*/)( variable[2] /*s*/) /*Buffer::to_s*/;
+  variable[1] = variable[3];
   goto return_label2;
   return_label2: while(false);
   tracehead = trace.prev;
@@ -94,28 +110,37 @@ val_t stream___IStream___read_line(val_t  self) {
 val_t stream___IStream___read_all(val_t  self) {
   struct trace_t trace = {NULL, NULL, 53, LOCATE_stream___IStream___read_all};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[3] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = NEW_Buffer_string___Buffer___init() /*new Buffer*/;
   variable[2] = variable[3];
   while (true) { /*while*/
-    variable[3] = variable[0];
-    variable[3] = CALL_stream___IStream___eof(variable[3])(variable[3]) /*IStream::eof*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_stream___IStream___eof(variable[0])(variable[0]) /*IStream::eof*/;
     if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) break; /* while*/
-    variable[4] = variable[0];
-    variable[4] = CALL_stream___IStream___read_char(variable[4])(variable[4]) /*IStream::read_char*/;
+    /* Register variable[3]: Local variable */
+    /* Register variable[4]: Result */
+    variable[4] = CALL_stream___IStream___read_char(variable[0])(variable[0]) /*IStream::read_char*/;
     variable[3] = variable[4];
+    /* Register variable[4]: Result */
     variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*c*/)>=UNTAG_Int( TAG_Int(0)));
     if (UNTAG_Bool(variable[4])) { /*if*/
+      /* Register variable[4]: Result */
       variable[4] = TAG_Char(UNTAG_Int( variable[3] /*c*/));
-      CALL_abstract_collection___SimpleCollection___add( variable[2] /*s*/)( variable[2] /*s*/, variable[4]) /*String::add*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[2] /*s*/)( variable[2] /*s*/, variable[4]) /*Buffer::add*/;
     }
     continue_4: while(0);
   }
   break_4: while(0);
-  variable[1] =  variable[2] /*s*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_string___Object___to_s( variable[2] /*s*/)( variable[2] /*s*/) /*Buffer::to_s*/;
+  variable[1] = variable[3];
   goto return_label3;
   return_label3: while(false);
   tracehead = trace.prev;
@@ -124,28 +149,37 @@ val_t stream___IStream___read_all(val_t  self) {
 void stream___IStream___append_line_to(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 64, LOCATE_stream___IStream___append_line_to};
   val_t variable[6];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
   while (true) { /*while*/
     if (!UNTAG_Bool( TAG_Bool(true))) break; /* while*/
-    variable[4] = variable[0];
-    variable[4] = CALL_stream___IStream___read_char(variable[4])(variable[4]) /*IStream::read_char*/;
+    /* Register variable[3]: Local variable */
+    /* Register variable[4]: Result */
+    variable[4] = CALL_stream___IStream___read_char(variable[0])(variable[0]) /*IStream::read_char*/;
     variable[3] = variable[4];
+    /* Register variable[4]: Result */
     variable[4] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
+    /* Register variable[4]: Result */
     variable[4] = TAG_Bool(( variable[3] /*x*/)==(variable[4]));
     if (UNTAG_Bool(variable[4])) { /*if*/
-      variable[4] = variable[0];
-      variable[4] = CALL_stream___IStream___eof(variable[4])(variable[4]) /*IStream::eof*/;
+      /* Register variable[4]: Result */
+      variable[4] = CALL_stream___IStream___eof(variable[0])(variable[0]) /*IStream::eof*/;
       if (UNTAG_Bool(variable[4])) { /*if*/
         goto return_label5;
       }
     } else { /*if*/
+      /* Register variable[4]: Local variable */
+      /* Register variable[5]: Result */
       variable[5] = TAG_Char(UNTAG_Int( variable[3] /*x*/));
       variable[4] = variable[5];
       CALL_abstract_collection___IndexedCollection___push( variable[1] /*s*/)( variable[1] /*s*/,  variable[4] /*c*/) /*AbstractArray::push*/;
+      /* Register variable[5]: Result */
       variable[5] = TAG_Bool(( variable[4] /*c*/)==( TAG_Char('\n')));
       if (UNTAG_Bool(variable[5])) { /*if*/
         goto return_label5;
@@ -161,7 +195,7 @@ void stream___IStream___append_line_to(val_t  self, val_t  param0) {
 val_t stream___IStream___eof(val_t  self) {
   struct trace_t trace = {NULL, NULL, 79, LOCATE_stream___IStream___eof};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
   fprintf(stderr, "Deferred method called");
@@ -173,7 +207,7 @@ val_t stream___IStream___eof(val_t  self) {
 void stream___OStream___write(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 86, LOCATE_stream___OStream___write};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
   fprintf(stderr, "Deferred method called");
@@ -185,7 +219,7 @@ void stream___OStream___write(val_t  self, val_t  param0) {
 val_t stream___OStream___is_writable(val_t  self) {
   struct trace_t trace = {NULL, NULL, 89, LOCATE_stream___OStream___is_writable};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
   fprintf(stderr, "Deferred method called");
@@ -197,42 +231,50 @@ val_t stream___OStream___is_writable(val_t  self) {
 val_t stream___BufferedIStream___read_char(val_t  self) {
   struct trace_t trace = {NULL, NULL, 96, LOCATE_stream___BufferedIStream___read_char};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_stream___IStream___eof(variable[2])(variable[2]) /*BufferedIStream::eof*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_stream___IStream___eof(variable[0])(variable[0]) /*BufferedIStream::eof*/;
   if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[2])))) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_stream___BufferedIStream___read_char, LOCATE_stream, 98); nit_exit(1);}
-  variable[2] = variable[0];
-  variable[2] = ATTR_stream___BufferedIStream____buffer_pos(variable[2]) /*BufferedIStream::_buffer_pos*/;
-  variable[3] = variable[0];
-  variable[3] = ATTR_stream___BufferedIStream____buffer(variable[3]) /*BufferedIStream::_buffer*/;
-  variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*AbstractArray::length*/;
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_stream___BufferedIStream____buffer_pos(variable[0]) /*BufferedIStream::_buffer_pos*/;
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_stream___BufferedIStream____buffer(variable[0]) /*BufferedIStream::_buffer*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*AbstractArrayRead::length*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool(UNTAG_Int(variable[2])>=UNTAG_Int(variable[3]));
   if (UNTAG_Bool(variable[2])) { /*if*/
-    variable[2] = variable[0];
-    CALL_stream___BufferedIStream___fill_buffer(variable[2])(variable[2]) /*BufferedIStream::fill_buffer*/;
+    CALL_stream___BufferedIStream___fill_buffer(variable[0])(variable[0]) /*BufferedIStream::fill_buffer*/;
   }
-  variable[2] = variable[0];
-  variable[2] = ATTR_stream___BufferedIStream____buffer_pos(variable[2]) /*BufferedIStream::_buffer_pos*/;
-  variable[3] = variable[0];
-  variable[3] = ATTR_stream___BufferedIStream____buffer(variable[3]) /*BufferedIStream::_buffer*/;
-  variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*AbstractArray::length*/;
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_stream___BufferedIStream____buffer_pos(variable[0]) /*BufferedIStream::_buffer_pos*/;
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_stream___BufferedIStream____buffer(variable[0]) /*BufferedIStream::_buffer*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*AbstractArrayRead::length*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool(UNTAG_Int(variable[2])>=UNTAG_Int(variable[3]));
   if (UNTAG_Bool(variable[2])) { /*if*/
+    /* Register variable[2]: Result */
     variable[2] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
     variable[1] = variable[2];
     goto return_label7;
   }
-  variable[3] = variable[0];
-  variable[3] = ATTR_stream___BufferedIStream____buffer(variable[3]) /*BufferedIStream::_buffer*/;
-  variable[4] = variable[0];
-  variable[4] = ATTR_stream___BufferedIStream____buffer_pos(variable[4]) /*BufferedIStream::_buffer_pos*/;
-  variable[3] = CALL_abstract_collection___Map_____bra(variable[3])(variable[3], variable[4]) /*String::[]*/;
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_stream___BufferedIStream____buffer(variable[0]) /*BufferedIStream::_buffer*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_stream___BufferedIStream____buffer_pos(variable[0]) /*BufferedIStream::_buffer_pos*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___MapRead_____bra(variable[3])(variable[3], variable[4]) /*AbstractString::[]*/;
   variable[2] = variable[3];
-  variable[3] = variable[0];
-  ATTR_stream___BufferedIStream____buffer_pos(variable[3]) /*BufferedIStream::_buffer_pos*/ = TAG_Int(UNTAG_Int(ATTR_stream___BufferedIStream____buffer_pos(variable[3]) /*BufferedIStream::_buffer_pos*/)+UNTAG_Int( TAG_Int(1)));
+  ATTR_stream___BufferedIStream____buffer_pos(variable[0]) /*BufferedIStream::_buffer_pos*/ = TAG_Int(UNTAG_Int(ATTR_stream___BufferedIStream____buffer_pos(variable[0]) /*BufferedIStream::_buffer_pos*/)+UNTAG_Int( TAG_Int(1)));
+  /* Register variable[3]: Result */
   variable[3] = TAG_Int((unsigned char)UNTAG_Char( variable[2] /*c*/));
   variable[1] = variable[3];
   goto return_label7;
@@ -242,54 +284,69 @@ val_t stream___BufferedIStream___read_char(val_t  self) {
 }
 val_t stream___BufferedIStream___read(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 110, LOCATE_stream___BufferedIStream___read};
-  val_t variable[8];
-  void **closurevariable = NULL;
+  val_t variable[7];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = NEW_String_string___String___with_capacity( variable[1] /*i*/); /*new String*/
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = NEW_Buffer_string___Buffer___with_capacity( variable[1] /*i*/) /*new Buffer*/;
   variable[3] = variable[4];
-  variable[5] = variable[0];
-  variable[5] = ATTR_stream___BufferedIStream____buffer_pos(variable[5]) /*BufferedIStream::_buffer_pos*/;
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = ATTR_stream___BufferedIStream____buffer_pos(variable[0]) /*BufferedIStream::_buffer_pos*/;
   variable[4] = variable[5];
-  variable[6] = variable[0];
-  variable[6] = ATTR_stream___BufferedIStream____buffer(variable[6]) /*BufferedIStream::_buffer*/;
-  variable[6] = CALL_abstract_collection___Collection___length(variable[6])(variable[6]) /*AbstractArray::length*/;
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
+  variable[6] = ATTR_stream___BufferedIStream____buffer(variable[0]) /*BufferedIStream::_buffer*/;
+  /* Register variable[6]: Result */
+  variable[6] = CALL_abstract_collection___Collection___length(variable[6])(variable[6]) /*AbstractArrayRead::length*/;
   variable[5] = variable[6];
   while (true) { /*while*/
+    /* Register variable[6]: Result */
     variable[6] = TAG_Bool(UNTAG_Int( variable[1] /*i*/)>UNTAG_Int( TAG_Int(0)));
     if (!UNTAG_Bool(variable[6])) break; /* while*/
+    /* Register variable[6]: Result */
     variable[6] = TAG_Bool(UNTAG_Int( variable[4] /*j*/)>=UNTAG_Int( variable[5] /*k*/));
     if (UNTAG_Bool(variable[6])) { /*if*/
-      variable[6] = variable[0];
-      CALL_stream___BufferedIStream___fill_buffer(variable[6])(variable[6]) /*BufferedIStream::fill_buffer*/;
-      variable[6] = variable[0];
-      variable[6] = CALL_stream___IStream___eof(variable[6])(variable[6]) /*BufferedIStream::eof*/;
+      CALL_stream___BufferedIStream___fill_buffer(variable[0])(variable[0]) /*BufferedIStream::fill_buffer*/;
+      /* Register variable[6]: Result */
+      variable[6] = CALL_stream___IStream___eof(variable[0])(variable[0]) /*BufferedIStream::eof*/;
       if (UNTAG_Bool(variable[6])) { /*if*/
-        variable[2] =  variable[3] /*s*/;
+        /* Register variable[6]: Result */
+        variable[6] = CALL_string___Object___to_s( variable[3] /*s*/)( variable[3] /*s*/) /*Buffer::to_s*/;
+        variable[2] = variable[6];
         goto return_label8;
       }
-      variable[6] = variable[0];
-      variable[6] = ATTR_stream___BufferedIStream____buffer_pos(variable[6]) /*BufferedIStream::_buffer_pos*/;
+      /* Register variable[6]: Result */
+      variable[6] = ATTR_stream___BufferedIStream____buffer_pos(variable[0]) /*BufferedIStream::_buffer_pos*/;
       variable[4] = variable[6] /*j=*/;
-      variable[6] = variable[0];
-      variable[6] = ATTR_stream___BufferedIStream____buffer(variable[6]) /*BufferedIStream::_buffer*/;
-      variable[6] = CALL_abstract_collection___Collection___length(variable[6])(variable[6]) /*AbstractArray::length*/;
+      /* Register variable[6]: Result */
+      variable[6] = ATTR_stream___BufferedIStream____buffer(variable[0]) /*BufferedIStream::_buffer*/;
+      /* Register variable[6]: Result */
+      variable[6] = CALL_abstract_collection___Collection___length(variable[6])(variable[6]) /*AbstractArrayRead::length*/;
       variable[5] = variable[6] /*k=*/;
     }
     while (true) { /*while*/
+      /* Register variable[6]: Result */
       variable[6] = TAG_Bool(UNTAG_Int( variable[4] /*j*/)<UNTAG_Int( variable[5] /*k*/));
-      variable[7] = variable[6];
-      if (UNTAG_Bool(variable[7])) { /* and */
-        variable[7] = TAG_Bool(UNTAG_Int( variable[1] /*i*/)>UNTAG_Int( TAG_Int(0)));
+      /* Ensure var variable[6]: Left 'and' operand*/
+      if (UNTAG_Bool(variable[6])) { /* and */
+        /* Register variable[6]: Result */
+        variable[6] = TAG_Bool(UNTAG_Int( variable[1] /*i*/)>UNTAG_Int( TAG_Int(0)));
       }
-      variable[6] = variable[7];
+      /* Register variable[6]: Result */
       if (!UNTAG_Bool(variable[6])) break; /* while*/
-      variable[6] = variable[0];
-      variable[6] = ATTR_stream___BufferedIStream____buffer(variable[6]) /*BufferedIStream::_buffer*/;
-      variable[6] = CALL_abstract_collection___Map_____bra(variable[6])(variable[6],  variable[4] /*j*/) /*String::[]*/;
-      CALL_abstract_collection___SimpleCollection___add( variable[3] /*s*/)( variable[3] /*s*/, variable[6]) /*String::add*/;
+      /* Register variable[6]: Result */
+      variable[6] = ATTR_stream___BufferedIStream____buffer(variable[0]) /*BufferedIStream::_buffer*/;
+      /* Register variable[6]: Result */
+      variable[6] = CALL_abstract_collection___MapRead_____bra(variable[6])(variable[6],  variable[4] /*j*/) /*AbstractString::[]*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[3] /*s*/)( variable[3] /*s*/, variable[6]) /*Buffer::add*/;
       variable[4] = TAG_Int(UNTAG_Int(variable[4])+UNTAG_Int( TAG_Int(1))) /*j*/;
       variable[1] = TAG_Int(UNTAG_Int(variable[1])-UNTAG_Int( TAG_Int(1))) /*i*/;
       continue_10: while(0);
@@ -298,9 +355,10 @@ val_t stream___BufferedIStream___read(val_t  self, val_t  param0) {
     continue_9: while(0);
   }
   break_9: while(0);
-  variable[6] = variable[0];
-  ATTR_stream___BufferedIStream____buffer_pos(variable[6]) /*BufferedIStream::_buffer_pos*/ =  variable[4] /*j*/;
-  variable[2] =  variable[3] /*s*/;
+  ATTR_stream___BufferedIStream____buffer_pos(variable[0]) /*BufferedIStream::_buffer_pos*/ =  variable[4] /*j*/;
+  /* Register variable[6]: Result */
+  variable[6] = CALL_string___Object___to_s( variable[3] /*s*/)( variable[3] /*s*/) /*Buffer::to_s*/;
+  variable[2] = variable[6];
   goto return_label8;
   return_label8: while(false);
   tracehead = trace.prev;
@@ -309,42 +367,51 @@ val_t stream___BufferedIStream___read(val_t  self, val_t  param0) {
 val_t stream___BufferedIStream___read_all(val_t  self) {
   struct trace_t trace = {NULL, NULL, 132, LOCATE_stream___BufferedIStream___read_all};
   val_t variable[6];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[3] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = NEW_Buffer_string___Buffer___init() /*new Buffer*/;
   variable[2] = variable[3];
   while (true) { /*while*/
-    variable[3] = variable[0];
-    variable[3] = CALL_stream___IStream___eof(variable[3])(variable[3]) /*BufferedIStream::eof*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_stream___IStream___eof(variable[0])(variable[0]) /*BufferedIStream::eof*/;
     if (!UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) break; /* while*/
-    variable[4] = variable[0];
-    variable[4] = ATTR_stream___BufferedIStream____buffer_pos(variable[4]) /*BufferedIStream::_buffer_pos*/;
+    /* Register variable[3]: Local variable */
+    /* Register variable[4]: Result */
+    variable[4] = ATTR_stream___BufferedIStream____buffer_pos(variable[0]) /*BufferedIStream::_buffer_pos*/;
     variable[3] = variable[4];
-    variable[5] = variable[0];
-    variable[5] = ATTR_stream___BufferedIStream____buffer(variable[5]) /*BufferedIStream::_buffer*/;
-    variable[5] = CALL_abstract_collection___Collection___length(variable[5])(variable[5]) /*AbstractArray::length*/;
+    /* Register variable[4]: Local variable */
+    /* Register variable[5]: Result */
+    variable[5] = ATTR_stream___BufferedIStream____buffer(variable[0]) /*BufferedIStream::_buffer*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_abstract_collection___Collection___length(variable[5])(variable[5]) /*AbstractArrayRead::length*/;
     variable[4] = variable[5];
     while (true) { /*while*/
+      /* Register variable[5]: Result */
       variable[5] = TAG_Bool(UNTAG_Int( variable[3] /*j*/)<UNTAG_Int( variable[4] /*k*/));
       if (!UNTAG_Bool(variable[5])) break; /* while*/
-      variable[5] = variable[0];
-      variable[5] = ATTR_stream___BufferedIStream____buffer(variable[5]) /*BufferedIStream::_buffer*/;
-      variable[5] = CALL_abstract_collection___Map_____bra(variable[5])(variable[5],  variable[3] /*j*/) /*String::[]*/;
-      CALL_abstract_collection___SimpleCollection___add( variable[2] /*s*/)( variable[2] /*s*/, variable[5]) /*String::add*/;
+      /* Register variable[5]: Result */
+      variable[5] = ATTR_stream___BufferedIStream____buffer(variable[0]) /*BufferedIStream::_buffer*/;
+      /* Register variable[5]: Result */
+      variable[5] = CALL_abstract_collection___MapRead_____bra(variable[5])(variable[5],  variable[3] /*j*/) /*AbstractString::[]*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[2] /*s*/)( variable[2] /*s*/, variable[5]) /*Buffer::add*/;
       variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(1))) /*j*/;
       continue_13: while(0);
     }
     break_13: while(0);
-    variable[5] = variable[0];
-    ATTR_stream___BufferedIStream____buffer_pos(variable[5]) /*BufferedIStream::_buffer_pos*/ =  variable[3] /*j*/;
-    variable[5] = variable[0];
-    CALL_stream___BufferedIStream___fill_buffer(variable[5])(variable[5]) /*BufferedIStream::fill_buffer*/;
+    ATTR_stream___BufferedIStream____buffer_pos(variable[0]) /*BufferedIStream::_buffer_pos*/ =  variable[3] /*j*/;
+    CALL_stream___BufferedIStream___fill_buffer(variable[0])(variable[0]) /*BufferedIStream::fill_buffer*/;
     continue_12: while(0);
   }
   break_12: while(0);
-  variable[1] =  variable[2] /*s*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_string___Object___to_s( variable[2] /*s*/)( variable[2] /*s*/) /*Buffer::to_s*/;
+  variable[1] = variable[3];
   goto return_label11;
   return_label11: while(false);
   tracehead = trace.prev;
@@ -353,78 +420,93 @@ val_t stream___BufferedIStream___read_all(val_t  self) {
 void stream___BufferedIStream___append_line_to(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 148, LOCATE_stream___BufferedIStream___append_line_to};
   val_t variable[6];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
   while (true) { /*while*/
     if (!UNTAG_Bool( TAG_Bool(true))) break; /* while*/
-    variable[4] = variable[0];
-    variable[4] = ATTR_stream___BufferedIStream____buffer_pos(variable[4]) /*BufferedIStream::_buffer_pos*/;
+    /* Register variable[3]: Local variable */
+    /* Register variable[4]: Result */
+    variable[4] = ATTR_stream___BufferedIStream____buffer_pos(variable[0]) /*BufferedIStream::_buffer_pos*/;
     variable[3] = variable[4];
     while (true) { /*while*/
-      variable[4] = variable[0];
-      variable[4] = ATTR_stream___BufferedIStream____buffer(variable[4]) /*BufferedIStream::_buffer*/;
-      variable[4] = CALL_abstract_collection___Collection___length(variable[4])(variable[4]) /*AbstractArray::length*/;
+      /* Register variable[4]: Result */
+      variable[4] = ATTR_stream___BufferedIStream____buffer(variable[0]) /*BufferedIStream::_buffer*/;
+      /* Register variable[4]: Result */
+      variable[4] = CALL_abstract_collection___Collection___length(variable[4])(variable[4]) /*AbstractArrayRead::length*/;
+      /* Register variable[4]: Result */
       variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*i*/)<UNTAG_Int(variable[4]));
-      variable[5] = variable[4];
-      if (UNTAG_Bool(variable[5])) { /* and */
-        variable[5] = variable[0];
-        variable[5] = ATTR_stream___BufferedIStream____buffer(variable[5]) /*BufferedIStream::_buffer*/;
-        variable[5] = CALL_abstract_collection___Map_____bra(variable[5])(variable[5],  variable[3] /*i*/) /*String::[]*/;
-        variable[5] = TAG_Bool((variable[5])!=( TAG_Char('\n')));
+      /* Ensure var variable[4]: Left 'and' operand*/
+      if (UNTAG_Bool(variable[4])) { /* and */
+        /* Register variable[4]: Result */
+        variable[4] = ATTR_stream___BufferedIStream____buffer(variable[0]) /*BufferedIStream::_buffer*/;
+        /* Register variable[4]: Result */
+        variable[4] = CALL_abstract_collection___MapRead_____bra(variable[4])(variable[4],  variable[3] /*i*/) /*AbstractString::[]*/;
+        /* Register variable[4]: Result */
+        variable[4] = TAG_Bool((variable[4])!=( TAG_Char('\n')));
       }
-      variable[4] = variable[5];
+      /* Register variable[4]: Result */
       if (!UNTAG_Bool(variable[4])) break; /* while*/
       variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(1))) /*i*/;
       continue_16: while(0);
     }
     break_16: while(0);
-    variable[4] = variable[0];
-    variable[4] = ATTR_stream___BufferedIStream____buffer_pos(variable[4]) /*BufferedIStream::_buffer_pos*/;
+    /* Register variable[4]: Result */
+    variable[4] = ATTR_stream___BufferedIStream____buffer_pos(variable[0]) /*BufferedIStream::_buffer_pos*/;
+    /* Register variable[4]: Result */
     variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*i*/)>UNTAG_Int(variable[4]));
     if (UNTAG_Bool(variable[4])) { /*if*/
-      variable[4] = CALL_abstract_collection___Collection___length( variable[1] /*s*/)( variable[1] /*s*/) /*AbstractArray::length*/;
+      /* Register variable[4]: Result */
+      variable[4] = CALL_abstract_collection___Collection___length( variable[1] /*s*/)( variable[1] /*s*/) /*AbstractArrayRead::length*/;
+      /* Register variable[4]: Result */
       variable[4] = TAG_Int(UNTAG_Int(variable[4])+UNTAG_Int( variable[3] /*i*/));
-      variable[5] = variable[0];
-      variable[5] = ATTR_stream___BufferedIStream____buffer_pos(variable[5]) /*BufferedIStream::_buffer_pos*/;
+      /* Register variable[5]: Result */
+      variable[5] = ATTR_stream___BufferedIStream____buffer_pos(variable[0]) /*BufferedIStream::_buffer_pos*/;
+      /* Register variable[4]: Result */
       variable[4] = TAG_Int(UNTAG_Int(variable[4])-UNTAG_Int(variable[5]));
-      CALL_array___AbstractArray___enlarge( variable[1] /*s*/)( variable[1] /*s*/, variable[4]) /*String::enlarge*/;
-      variable[5] = variable[0];
-      variable[5] = ATTR_stream___BufferedIStream____buffer_pos(variable[5]) /*BufferedIStream::_buffer_pos*/;
+      CALL_array___AbstractArray___enlarge( variable[1] /*s*/)( variable[1] /*s*/, variable[4]) /*Buffer::enlarge*/;
+      /* Register variable[4]: Local variable */
+      /* Register variable[5]: Result */
+      variable[5] = ATTR_stream___BufferedIStream____buffer_pos(variable[0]) /*BufferedIStream::_buffer_pos*/;
       variable[4] = variable[5];
       while (true) { /*while*/
+        /* Register variable[5]: Result */
         variable[5] = TAG_Bool(UNTAG_Int( variable[4] /*j*/)<UNTAG_Int( variable[3] /*i*/));
         if (!UNTAG_Bool(variable[5])) break; /* while*/
-        variable[5] = variable[0];
-        variable[5] = ATTR_stream___BufferedIStream____buffer(variable[5]) /*BufferedIStream::_buffer*/;
-        variable[5] = CALL_abstract_collection___Map_____bra(variable[5])(variable[5],  variable[4] /*j*/) /*String::[]*/;
-        CALL_abstract_collection___SimpleCollection___add( variable[1] /*s*/)( variable[1] /*s*/, variable[5]) /*String::add*/;
+        /* Register variable[5]: Result */
+        variable[5] = ATTR_stream___BufferedIStream____buffer(variable[0]) /*BufferedIStream::_buffer*/;
+        /* Register variable[5]: Result */
+        variable[5] = CALL_abstract_collection___MapRead_____bra(variable[5])(variable[5],  variable[4] /*j*/) /*AbstractString::[]*/;
+        CALL_abstract_collection___SimpleCollection___add( variable[1] /*s*/)( variable[1] /*s*/, variable[5]) /*Buffer::add*/;
         variable[4] = TAG_Int(UNTAG_Int(variable[4])+UNTAG_Int( TAG_Int(1))) /*j*/;
         continue_17: while(0);
       }
       break_17: while(0);
     }
-    variable[4] = variable[0];
-    variable[4] = ATTR_stream___BufferedIStream____buffer(variable[4]) /*BufferedIStream::_buffer*/;
-    variable[4] = CALL_abstract_collection___Collection___length(variable[4])(variable[4]) /*AbstractArray::length*/;
+    /* Register variable[4]: Result */
+    variable[4] = ATTR_stream___BufferedIStream____buffer(variable[0]) /*BufferedIStream::_buffer*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_abstract_collection___Collection___length(variable[4])(variable[4]) /*AbstractArrayRead::length*/;
+    /* Register variable[4]: Result */
     variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*i*/)<UNTAG_Int(variable[4]));
     if (UNTAG_Bool(variable[4])) { /*if*/
-      variable[4] = variable[0];
-      variable[5] = TAG_Int(UNTAG_Int( variable[3] /*i*/)+UNTAG_Int( TAG_Int(1)));
-      ATTR_stream___BufferedIStream____buffer_pos(variable[4]) /*BufferedIStream::_buffer_pos*/ = variable[5];
+      /* Register variable[4]: Result */
+      variable[4] = TAG_Int(UNTAG_Int( variable[3] /*i*/)+UNTAG_Int( TAG_Int(1)));
+      ATTR_stream___BufferedIStream____buffer_pos(variable[0]) /*BufferedIStream::_buffer_pos*/ = variable[4];
       goto return_label14;
     } else { /*if*/
-      variable[4] = variable[0];
-      ATTR_stream___BufferedIStream____buffer_pos(variable[4]) /*BufferedIStream::_buffer_pos*/ =  variable[3] /*i*/;
-      variable[4] = variable[0];
-      variable[4] = CALL_stream___BufferedIStream___end_reached(variable[4])(variable[4]) /*BufferedIStream::end_reached*/;
+      ATTR_stream___BufferedIStream____buffer_pos(variable[0]) /*BufferedIStream::_buffer_pos*/ =  variable[3] /*i*/;
+      /* Register variable[4]: Result */
+      variable[4] = CALL_stream___BufferedIStream___end_reached(variable[0])(variable[0]) /*BufferedIStream::end_reached*/;
       if (UNTAG_Bool(variable[4])) { /*if*/
         goto return_label14;
       } else { /*if*/
-        variable[4] = variable[0];
-        CALL_stream___BufferedIStream___fill_buffer(variable[4])(variable[4]) /*BufferedIStream::fill_buffer*/;
+        CALL_stream___BufferedIStream___fill_buffer(variable[0])(variable[0]) /*BufferedIStream::fill_buffer*/;
       }
     }
     continue_15: while(0);
@@ -437,22 +519,26 @@ void stream___BufferedIStream___append_line_to(val_t  self, val_t  param0) {
 val_t stream___BufferedIStream___eof(val_t  self) {
   struct trace_t trace = {NULL, NULL, 184, LOCATE_stream___BufferedIStream___eof};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_stream___BufferedIStream____buffer_pos(variable[2]) /*BufferedIStream::_buffer_pos*/;
-  variable[3] = variable[0];
-  variable[3] = ATTR_stream___BufferedIStream____buffer(variable[3]) /*BufferedIStream::_buffer*/;
-  variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*AbstractArray::length*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_stream___BufferedIStream____buffer_pos(variable[0]) /*BufferedIStream::_buffer_pos*/;
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_stream___BufferedIStream____buffer(variable[0]) /*BufferedIStream::_buffer*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*AbstractArrayRead::length*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool(UNTAG_Int(variable[2])>=UNTAG_Int(variable[3]));
-  variable[3] = variable[2];
-  if (UNTAG_Bool(variable[3])) { /* and */
-    variable[3] = variable[0];
-    variable[3] = CALL_stream___BufferedIStream___end_reached(variable[3])(variable[3]) /*BufferedIStream::end_reached*/;
+  /* Ensure var variable[2]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[2])) { /* and */
+    /* Register variable[2]: Result */
+    variable[2] = CALL_stream___BufferedIStream___end_reached(variable[0])(variable[0]) /*BufferedIStream::end_reached*/;
   }
-  variable[2] = variable[3];
+  /* Register variable[2]: Result */
   variable[1] = variable[2];
   goto return_label18;
   return_label18: while(false);
@@ -462,7 +548,7 @@ val_t stream___BufferedIStream___eof(val_t  self) {
 void stream___BufferedIStream___fill_buffer(val_t  self) {
   struct trace_t trace = {NULL, NULL, 192, LOCATE_stream___BufferedIStream___fill_buffer};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
   fprintf(stderr, "Deferred method called");
@@ -474,7 +560,7 @@ void stream___BufferedIStream___fill_buffer(val_t  self) {
 val_t stream___BufferedIStream___end_reached(val_t  self) {
   struct trace_t trace = {NULL, NULL, 195, LOCATE_stream___BufferedIStream___end_reached};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
   fprintf(stderr, "Deferred method called");
@@ -485,32 +571,35 @@ val_t stream___BufferedIStream___end_reached(val_t  self) {
 }
 void stream___BufferedIStream___prepare_buffer(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 198, LOCATE_stream___BufferedIStream___prepare_buffer};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[4] = NEW_String_string___String___with_capacity( variable[1] /*capacity*/); /*new String*/
-  ATTR_stream___BufferedIStream____buffer(variable[3]) /*BufferedIStream::_buffer*/ = variable[4];
-  variable[3] = variable[0];
-  ATTR_stream___BufferedIStream____buffer_pos(variable[3]) /*BufferedIStream::_buffer_pos*/ =  TAG_Int(0);
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = NEW_Buffer_string___Buffer___with_capacity( variable[1] /*capacity*/) /*new Buffer*/;
+  ATTR_stream___BufferedIStream____buffer(variable[0]) /*BufferedIStream::_buffer*/ = variable[3];
+  ATTR_stream___BufferedIStream____buffer_pos(variable[0]) /*BufferedIStream::_buffer_pos*/ =  TAG_Int(0);
   return_label19: while(false);
   tracehead = trace.prev;
   return;
 }
 void stream___FDStream___close(val_t  self) {
   struct trace_t trace = {NULL, NULL, 218, LOCATE_stream___FDStream___close};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[3] = variable[0];
-  variable[3] = ATTR_stream___FDStream____fd(variable[3]) /*FDStream::_fd*/;
-  CALL_stream___FDStream___native_close(variable[2])(variable[2], variable[3]) /*FDStream::native_close*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_stream___FDStream____fd(variable[0]) /*FDStream::_fd*/;
+  CALL_stream___FDStream___native_close(variable[0])(variable[0], variable[2]) /*FDStream::native_close*/;
   return_label20: while(false);
   tracehead = trace.prev;
   return;
@@ -518,7 +607,7 @@ void stream___FDStream___close(val_t  self) {
 val_t stream___FDStream___native_close(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 220, LOCATE_stream___FDStream___native_close};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
   tracehead = trace.prev;
@@ -527,7 +616,7 @@ val_t stream___FDStream___native_close(val_t  self, val_t  param0) {
 val_t stream___FDStream___native_read_char(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 221, LOCATE_stream___FDStream___native_read_char};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
   tracehead = trace.prev;
@@ -536,7 +625,7 @@ val_t stream___FDStream___native_read_char(val_t  self, val_t  param0) {
 val_t stream___FDStream___native_read(val_t  self, val_t  param0, val_t  param1, val_t  param2) {
   struct trace_t trace = {NULL, NULL, 222, LOCATE_stream___FDStream___native_read};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
   tracehead = trace.prev;
@@ -545,7 +634,7 @@ val_t stream___FDStream___native_read(val_t  self, val_t  param0, val_t  param1,
 val_t stream___FDStream___native_write(val_t  self, val_t  param0, val_t  param1, val_t  param2) {
   struct trace_t trace = {NULL, NULL, 223, LOCATE_stream___FDStream___native_write};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
   tracehead = trace.prev;
@@ -553,15 +642,17 @@ val_t stream___FDStream___native_write(val_t  self, val_t  param0, val_t  param1
 }
 void stream___FDStream___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 225, LOCATE_stream___FDStream___init};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDStream].i]) return;
-  variable[3] = variable[0];
-  ATTR_stream___FDStream____fd(variable[3]) /*FDStream::_fd*/ =  variable[1] /*fd*/;
+  /* Register variable[2]: Method return value and escape marker */
+  ATTR_stream___FDStream____fd(variable[0]) /*FDStream::_fd*/ =  variable[1] /*fd*/;
   return_label21: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDStream].i] = 1;
   tracehead = trace.prev;
@@ -569,21 +660,25 @@ void stream___FDStream___init(val_t  self, val_t  param0, int* init_table) {
 }
 val_t stream___FDIStream___read_char(val_t  self) {
   struct trace_t trace = {NULL, NULL, 233, LOCATE_stream___FDIStream___read_char};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[3] = variable[0];
-  variable[4] = variable[0];
-  variable[4] = ATTR_stream___FDStream____fd(variable[4]) /*FDStream::_fd*/;
-  variable[3] = CALL_stream___FDStream___native_read_char(variable[3])(variable[3], variable[4]) /*FDStream::native_read_char*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_stream___FDStream____fd(variable[0]) /*FDStream::_fd*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_stream___FDStream___native_read_char(variable[0])(variable[0], variable[3]) /*FDStream::native_read_char*/;
   variable[2] = variable[3];
+  /* Register variable[3]: Result */
   variable[3] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(( variable[2] /*nb*/)==(variable[3]));
   if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = variable[0];
-    ATTR_stream___FDIStream____eof(variable[3]) /*FDIStream::_eof*/ =  TAG_Bool(true);
+    ATTR_stream___FDIStream____eof(variable[0]) /*FDIStream::_eof*/ =  TAG_Bool(true);
   }
   variable[1] =  variable[2] /*nb*/;
   goto return_label22;
@@ -594,7 +689,7 @@ val_t stream___FDIStream___read_char(val_t  self) {
 val_t stream___FDIStream___eof(val_t  self) {
   struct trace_t trace = {NULL, NULL, 231, LOCATE_stream___FDIStream___eof};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
   tracehead = trace.prev;
@@ -603,12 +698,15 @@ val_t stream___FDIStream___eof(val_t  self) {
 void stream___FDIStream___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 240, LOCATE_stream___FDIStream___init};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDIStream].i]) return;
+  /* Register variable[2]: Method return value and escape marker */
   CALL_stream___FDStream___init(variable[0])(variable[0], variable[1], init_table /*YYY*/) /*FDStream::init*/;
   return_label23: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDIStream].i] = 1;
@@ -617,24 +715,31 @@ void stream___FDIStream___init(val_t  self, val_t  param0, int* init_table) {
 }
 void stream___FDOStream___write(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 248, LOCATE_stream___FDOStream___write};
-  val_t variable[8];
-  void **closurevariable = NULL;
+  val_t variable[7];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[5] = variable[0];
-  variable[5] = ATTR_stream___FDStream____fd(variable[5]) /*FDStream::_fd*/;
-  variable[6] = CALL_string___String___to_cstring( variable[1] /*s*/)( variable[1] /*s*/) /*String::to_cstring*/;
-  variable[7] = CALL_abstract_collection___Collection___length( variable[1] /*s*/)( variable[1] /*s*/) /*AbstractArray::length*/;
-  variable[4] = CALL_stream___FDStream___native_write(variable[4])(variable[4], variable[5], variable[6], variable[7]) /*FDStream::native_write*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_stream___FDStream____fd(variable[0]) /*FDStream::_fd*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_string___String___to_cstring( variable[1] /*s*/)( variable[1] /*s*/) /*String::to_cstring*/;
+  /* Register variable[6]: Result */
+  variable[6] = CALL_abstract_collection___Collection___length( variable[1] /*s*/)( variable[1] /*s*/) /*AbstractArrayRead::length*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_stream___FDStream___native_write(variable[0])(variable[0], variable[4], variable[5], variable[6]) /*FDStream::native_write*/;
   variable[3] = variable[4];
-  variable[4] = CALL_abstract_collection___Collection___length( variable[1] /*s*/)( variable[1] /*s*/) /*AbstractArray::length*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstract_collection___Collection___length( variable[1] /*s*/)( variable[1] /*s*/) /*AbstractArrayRead::length*/;
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(UNTAG_Int( variable[3] /*nb*/)<UNTAG_Int(variable[4]));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    ATTR_stream___FDOStream____is_writable(variable[4]) /*FDOStream::_is_writable*/ =  TAG_Bool(false);
+    ATTR_stream___FDOStream____is_writable(variable[0]) /*FDOStream::_is_writable*/ =  TAG_Bool(false);
   }
   return_label24: while(false);
   tracehead = trace.prev;
@@ -643,7 +748,7 @@ void stream___FDOStream___write(val_t  self, val_t  param0) {
 val_t stream___FDOStream___is_writable(val_t  self) {
   struct trace_t trace = {NULL, NULL, 246, LOCATE_stream___FDOStream___is_writable};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
   tracehead = trace.prev;
@@ -651,16 +756,18 @@ val_t stream___FDOStream___is_writable(val_t  self) {
 }
 void stream___FDOStream___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 254, LOCATE_stream___FDOStream___init};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDOStream].i]) return;
+  /* Register variable[2]: Method return value and escape marker */
   CALL_stream___FDStream___init(variable[0])(variable[0], variable[1], init_table /*YYY*/) /*FDStream::init*/;
-  variable[3] = variable[0];
-  ATTR_stream___FDOStream____is_writable(variable[3]) /*FDOStream::_is_writable*/ =  TAG_Bool(true);
+  ATTR_stream___FDOStream____is_writable(variable[0]) /*FDOStream::_is_writable*/ =  TAG_Bool(true);
   return_label25: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDOStream].i] = 1;
   tracehead = trace.prev;
@@ -668,19 +775,20 @@ void stream___FDOStream___init(val_t  self, val_t  param0, int* init_table) {
 }
 void stream___FDIOStream___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 264, LOCATE_stream___FDIOStream___init};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_stream;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDIOStream].i]) return;
+  /* Register variable[2]: Method return value and escape marker */
   CALL_stream___FDIStream___init(variable[0])(variable[0], variable[1], init_table /*YYY*/) /*FDIStream::init*/;
   CALL_stream___FDOStream___init(variable[0])(variable[0], variable[1], init_table /*YYY*/) /*FDOStream::init*/;
-  variable[3] = variable[0];
-  ATTR_stream___FDStream____fd(variable[3]) /*FDStream::_fd*/ =  variable[1] /*fd*/;
-  variable[3] = variable[0];
-  ATTR_stream___FDOStream____is_writable(variable[3]) /*FDOStream::_is_writable*/ =  TAG_Bool(true);
+  ATTR_stream___FDStream____fd(variable[0]) /*FDStream::_fd*/ =  variable[1] /*fd*/;
+  ATTR_stream___FDOStream____is_writable(variable[0]) /*FDOStream::_is_writable*/ =  TAG_Bool(true);
   return_label26: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_FDIOStream].i] = 1;
   tracehead = trace.prev;

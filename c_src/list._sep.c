@@ -2,15 +2,17 @@
 #include "list._sep.h"
 val_t list___List___iterator(val_t  self) {
   struct trace_t trace = {NULL, NULL, 173, LOCATE_list___List___iterator};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_list___List____head(variable[2]) /*List::_head*/;
-  variable[3] = NEW_ListIterator_list___ListIterator___init(variable[2]); /*new ListIterator[E]*/
-  variable[2] = variable[3];
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_list___List____head(variable[0]) /*List::_head*/;
+  /* Register variable[2]: Result */
+  variable[2] = NEW_ListIterator_list___ListIterator___init(variable[2]) /*new ListIterator[E]*/;
   variable[1] = variable[2];
   goto return_label0;
   return_label0: while(false);
@@ -20,12 +22,15 @@ val_t list___List___iterator(val_t  self) {
 val_t list___List___is_empty(val_t  self) {
   struct trace_t trace = {NULL, NULL, 40, LOCATE_list___List___is_empty};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_list___List____head(variable[2]) /*List::_head*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_list___List____head(variable[0]) /*List::_head*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))));
   variable[1] = variable[2];
   goto return_label1;
@@ -36,18 +41,24 @@ val_t list___List___is_empty(val_t  self) {
 val_t list___List___length(val_t  self) {
   struct trace_t trace = {NULL, NULL, 43, LOCATE_list___List___length};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
   variable[2] =  TAG_Int(0);
-  variable[4] = variable[0];
-  variable[4] = ATTR_list___List____head(variable[4]) /*List::_head*/;
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_list___List____head(variable[0]) /*List::_head*/;
   variable[3] = variable[4];
   while (true) { /*while*/
+    /* Register variable[4]: Result */
     variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*t*/ ==  NIT_NULL /*null*/) || (( variable[3] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*t*/)( variable[3] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
     if (!UNTAG_Bool(variable[4])) break; /* while*/
     variable[2] = TAG_Int(UNTAG_Int(variable[2])+UNTAG_Int( TAG_Int(1))) /*l*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_list___ListNode___next( variable[3] /*t*/)( variable[3] /*t*/) /*ListNode::next*/;
     variable[3] = variable[4] /*t=*/;
     continue_3: while(0);
@@ -61,16 +72,20 @@ val_t list___List___length(val_t  self) {
 }
 val_t list___List___has(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 55, LOCATE_list___List___has};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[4] = variable[0];
-  variable[4] = ATTR_list___List____head(variable[4]) /*List::_head*/;
-  variable[3] = CALL_list___List___search_node_after(variable[3])(variable[3],  variable[1] /*e*/, variable[4]) /*List::search_node_after*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_list___List____head(variable[0]) /*List::_head*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_list___List___search_node_after(variable[0])(variable[0],  variable[1] /*e*/, variable[3]) /*List::search_node_after*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   variable[2] = variable[3];
   goto return_label4;
@@ -81,23 +96,31 @@ val_t list___List___has(val_t  self, val_t  param0) {
 val_t list___List___has_only(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 58, LOCATE_list___List___has_only};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[4] = ATTR_list___List____head(variable[4]) /*List::_head*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_list___List____head(variable[0]) /*List::_head*/;
   variable[3] = variable[4];
   while (true) { /*while*/
+    /* Register variable[4]: Result */
     variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*node*/ ==  NIT_NULL /*null*/) || (( variable[3] /*node*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*node*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*node*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*node*/)( variable[3] /*node*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
     if (!UNTAG_Bool(variable[4])) break; /* while*/
+    /* Register variable[4]: Result */
     variable[4] = CALL_abstract_collection___Container___item( variable[3] /*node*/)( variable[3] /*node*/) /*Container::item*/;
+    /* Register variable[4]: Result */
     variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  variable[1] /*e*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], variable[1] /*e*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  variable[1] /*e*/) /*Object::==*/)))))));
     if (UNTAG_Bool(variable[4])) { /*if*/
       variable[2] =  TAG_Bool(false);
       goto return_label5;
     }
+    /* Register variable[4]: Result */
     variable[4] = CALL_list___ListNode___next( variable[3] /*node*/)( variable[3] /*node*/) /*ListNode::next*/;
     variable[3] = variable[4] /*node=*/;
     continue_6: while(0);
@@ -112,23 +135,32 @@ val_t list___List___has_only(val_t  self, val_t  param0) {
 val_t list___List___count(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 68, LOCATE_list___List___count};
   val_t variable[6];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
   variable[3] =  TAG_Int(0);
-  variable[5] = variable[0];
-  variable[5] = ATTR_list___List____head(variable[5]) /*List::_head*/;
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = ATTR_list___List____head(variable[0]) /*List::_head*/;
   variable[4] = variable[5];
   while (true) { /*while*/
+    /* Register variable[5]: Result */
     variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*node*/ ==  NIT_NULL /*null*/) || (( variable[4] /*node*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[4] /*node*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*node*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[4] /*node*/)( variable[4] /*node*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
     if (!UNTAG_Bool(variable[5])) break; /* while*/
+    /* Register variable[5]: Result */
     variable[5] = CALL_abstract_collection___Container___item( variable[4] /*node*/)( variable[4] /*node*/) /*Container::item*/;
+    /* Register variable[5]: Result */
     variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[5] ==  variable[1] /*e*/) || ((variable[5] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[5])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], variable[1] /*e*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[5])(variable[5],  variable[1] /*e*/) /*Object::==*/)))))));
     if (UNTAG_Bool(variable[5])) { /*if*/
       variable[3] = TAG_Int(UNTAG_Int(variable[3])+UNTAG_Int( TAG_Int(1))) /*nb*/;
     }
+    /* Register variable[5]: Result */
     variable[5] = CALL_list___ListNode___next( variable[4] /*node*/)( variable[4] /*node*/) /*ListNode::next*/;
     variable[4] = variable[5] /*node=*/;
     continue_8: while(0);
@@ -143,12 +175,15 @@ val_t list___List___count(val_t  self, val_t  param0) {
 val_t list___List___first(val_t  self) {
   struct trace_t trace = {NULL, NULL, 26, LOCATE_list___List___first};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_list___List____head(variable[2]) /*List::_head*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_list___List____head(variable[0]) /*List::_head*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_abstract_collection___Container___item(variable[2])(variable[2]) /*Container::item*/;
   variable[1] = variable[2];
   goto return_label9;
@@ -156,154 +191,183 @@ val_t list___List___first(val_t  self) {
   tracehead = trace.prev;
   return variable[1];
 }
-void list___List___clear(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 166, LOCATE_list___List___clear};
-  val_t variable[3];
-  void **closurevariable = NULL;
+val_t list___List_____bra(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 21, LOCATE_list___List_____bra};
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  ATTR_list___List____head(variable[2]) /*List::_head*/ =  NIT_NULL /*null*/;
-  variable[2] = variable[0];
-  ATTR_list___List____tail(variable[2]) /*List::_tail*/ =  NIT_NULL /*null*/;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_list___List___get_node(variable[0])(variable[0],  variable[1] /*index*/) /*List::get_node*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___Container___item(variable[3])(variable[3]) /*Container::item*/;
+  variable[2] = variable[3];
+  goto return_label10;
   return_label10: while(false);
+  tracehead = trace.prev;
+  return variable[2];
+}
+val_t list___List___has_key(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 79, LOCATE_list___List___has_key};
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_list___List___get_node(variable[0])(variable[0],  variable[1] /*index*/) /*List::get_node*/;
+  /* Register variable[3]: Result */
+  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  variable[2] = variable[3];
+  goto return_label11;
+  return_label11: while(false);
+  tracehead = trace.prev;
+  return variable[2];
+}
+val_t list___List___last(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 32, LOCATE_list___List___last};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_list___List____tail(variable[0]) /*List::_tail*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___Container___item(variable[2])(variable[2]) /*Container::item*/;
+  variable[1] = variable[2];
+  goto return_label12;
+  return_label12: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+void list___List___clear(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 166, LOCATE_list___List___clear};
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  ATTR_list___List____head(variable[0]) /*List::_head*/ =  NIT_NULL /*null*/;
+  ATTR_list___List____tail(variable[0]) /*List::_tail*/ =  NIT_NULL /*null*/;
+  return_label13: while(false);
   tracehead = trace.prev;
   return;
 }
 void list___List___remove(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 154, LOCATE_list___List___remove};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[5] = variable[0];
-  variable[5] = ATTR_list___List____head(variable[5]) /*List::_head*/;
-  variable[4] = CALL_list___List___search_node_after(variable[4])(variable[4],  variable[1] /*e*/, variable[5]) /*List::search_node_after*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_list___List____head(variable[0]) /*List::_head*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_list___List___search_node_after(variable[0])(variable[0],  variable[1] /*e*/, variable[4]) /*List::search_node_after*/;
   variable[3] = variable[4];
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*node*/ ==  NIT_NULL /*null*/) || (( variable[3] /*node*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*node*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*node*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*node*/)( variable[3] /*node*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    CALL_list___List___remove_node(variable[4])(variable[4],  variable[3] /*node*/) /*List::remove_node*/;
+    CALL_list___List___remove_node(variable[0])(variable[0],  variable[3] /*node*/) /*List::remove_node*/;
   }
-  return_label11: while(false);
+  return_label14: while(false);
   tracehead = trace.prev;
   return;
-}
-val_t list___List_____bra(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 21, LOCATE_list___List_____bra};
-  val_t variable[4];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_list;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_list___List___get_node(variable[3])(variable[3],  variable[1] /*index*/) /*List::get_node*/;
-  variable[3] = CALL_abstract_collection___Container___item(variable[3])(variable[3]) /*Container::item*/;
-  variable[2] = variable[3];
-  goto return_label12;
-  return_label12: while(false);
-  tracehead = trace.prev;
-  return variable[2];
 }
 void list___List_____braeq(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 24, LOCATE_list___List_____braeq};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
-  variable[4] = variable[0];
-  variable[4] = CALL_list___List___get_node(variable[4])(variable[4],  variable[1] /*index*/) /*List::get_node*/;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_list___List___get_node(variable[0])(variable[0],  variable[1] /*index*/) /*List::get_node*/;
   CALL_abstract_collection___Container___item__eq(variable[4])(variable[4],  variable[2] /*item*/) /*Container::item=*/;
-  return_label13: while(false);
+  return_label15: while(false);
   tracehead = trace.prev;
   return;
-}
-val_t list___List___has_key(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 79, LOCATE_list___List___has_key};
-  val_t variable[4];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_list;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_list___List___get_node(variable[3])(variable[3],  variable[1] /*index*/) /*List::get_node*/;
-  variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  variable[2] = variable[3];
-  goto return_label14;
-  return_label14: while(false);
-  tracehead = trace.prev;
-  return variable[2];
 }
 void list___List___remove_at(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 160, LOCATE_list___List___remove_at};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[4] = CALL_list___List___get_node(variable[4])(variable[4],  variable[1] /*i*/) /*List::get_node*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_list___List___get_node(variable[0])(variable[0],  variable[1] /*i*/) /*List::get_node*/;
   variable[3] = variable[4];
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*node*/ ==  NIT_NULL /*null*/) || (( variable[3] /*node*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*node*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*node*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*node*/)( variable[3] /*node*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    CALL_list___List___remove_node(variable[4])(variable[4],  variable[3] /*node*/) /*List::remove_node*/;
+    CALL_list___List___remove_node(variable[0])(variable[0],  variable[3] /*node*/) /*List::remove_node*/;
   }
-  return_label15: while(false);
+  return_label16: while(false);
   tracehead = trace.prev;
   return;
 }
 void list___List___first__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 29, LOCATE_list___List___first__eq};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_list___List____head(variable[3]) /*List::_head*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_list___List____head(variable[0]) /*List::_head*/;
   CALL_abstract_collection___Container___item__eq(variable[3])(variable[3],  variable[1] /*e*/) /*Container::item=*/;
-  return_label16: while(false);
-  tracehead = trace.prev;
-  return;
-}
-val_t list___List___last(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 32, LOCATE_list___List___last};
-  val_t variable[3];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_list;
-  variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_list___List____tail(variable[2]) /*List::_tail*/;
-  variable[2] = CALL_abstract_collection___Container___item(variable[2])(variable[2]) /*Container::item*/;
-  variable[1] = variable[2];
-  goto return_label17;
   return_label17: while(false);
   tracehead = trace.prev;
-  return variable[1];
+  return;
 }
 void list___List___last__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 35, LOCATE_list___List___last__eq};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_list___List____tail(variable[3]) /*List::_tail*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_list___List____tail(variable[0]) /*List::_tail*/;
   CALL_abstract_collection___Container___item__eq(variable[3])(variable[3],  variable[1] /*e*/) /*Container::item=*/;
   return_label18: while(false);
   tracehead = trace.prev;
@@ -312,58 +376,66 @@ void list___List___last__eq(val_t  self, val_t  param0) {
 void list___List___push(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 83, LOCATE_list___List___push};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = NEW_ListNode_list___ListNode___init( variable[1] /*e*/); /*new ListNode[E]*/
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = NEW_ListNode_list___ListNode___init( variable[1] /*e*/) /*new ListNode[E]*/;
   variable[3] = variable[4];
-  variable[4] = variable[0];
-  variable[4] = ATTR_list___List____tail(variable[4]) /*List::_tail*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_list___List____tail(variable[0]) /*List::_tail*/;
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    ATTR_list___List____head(variable[4]) /*List::_head*/ =  variable[3] /*node*/;
+    ATTR_list___List____head(variable[0]) /*List::_head*/ =  variable[3] /*node*/;
   } else { /*if*/
-    variable[4] = variable[0];
-    variable[4] = ATTR_list___List____tail(variable[4]) /*List::_tail*/;
+    /* Register variable[4]: Result */
+    variable[4] = ATTR_list___List____tail(variable[0]) /*List::_tail*/;
     CALL_list___ListNode___next__eq(variable[4])(variable[4],  variable[3] /*node*/) /*ListNode::next=*/;
-    variable[4] = variable[0];
-    variable[4] = ATTR_list___List____tail(variable[4]) /*List::_tail*/;
+    /* Register variable[4]: Result */
+    variable[4] = ATTR_list___List____tail(variable[0]) /*List::_tail*/;
     CALL_list___ListNode___prev__eq( variable[3] /*node*/)( variable[3] /*node*/, variable[4]) /*ListNode::prev=*/;
   }
-  variable[4] = variable[0];
-  ATTR_list___List____tail(variable[4]) /*List::_tail*/ =  variable[3] /*node*/;
+  ATTR_list___List____tail(variable[0]) /*List::_tail*/ =  variable[3] /*node*/;
   return_label19: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t list___List___pop(val_t  self) {
   struct trace_t trace = {NULL, NULL, 126, LOCATE_list___List___pop};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[3] = variable[0];
-  variable[3] = ATTR_list___List____tail(variable[3]) /*List::_tail*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_list___List____tail(variable[0]) /*List::_tail*/;
   variable[2] = variable[3];
-  variable[3] = variable[0];
-  variable[4] = CALL_list___ListNode___prev( variable[2] /*node*/)( variable[2] /*node*/) /*ListNode::prev*/;
-  ATTR_list___List____tail(variable[3]) /*List::_tail*/ = variable[4];
+  /* Register variable[3]: Result */
+  variable[3] = CALL_list___ListNode___prev( variable[2] /*node*/)( variable[2] /*node*/) /*ListNode::prev*/;
+  ATTR_list___List____tail(variable[0]) /*List::_tail*/ = variable[3];
   CALL_list___ListNode___prev__eq( variable[2] /*node*/)( variable[2] /*node*/,  NIT_NULL /*null*/) /*ListNode::prev=*/;
-  variable[3] = variable[0];
-  variable[3] = ATTR_list___List____tail(variable[3]) /*List::_tail*/;
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_list___List____tail(variable[0]) /*List::_tail*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = variable[0];
-    ATTR_list___List____head(variable[3]) /*List::_head*/ =  NIT_NULL /*null*/;
+    ATTR_list___List____head(variable[0]) /*List::_head*/ =  NIT_NULL /*null*/;
   } else { /*if*/
-    variable[3] = variable[0];
-    variable[3] = ATTR_list___List____tail(variable[3]) /*List::_tail*/;
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_list___List____tail(variable[0]) /*List::_tail*/;
     CALL_list___ListNode___next__eq(variable[3])(variable[3],  NIT_NULL /*null*/) /*ListNode::next=*/;
   }
+  /* Register variable[3]: Result */
   variable[3] = CALL_abstract_collection___Container___item( variable[2] /*node*/)( variable[2] /*node*/) /*Container::item*/;
   variable[1] = variable[3];
   goto return_label20;
@@ -374,58 +446,66 @@ val_t list___List___pop(val_t  self) {
 void list___List___unshift(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 96, LOCATE_list___List___unshift};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = NEW_ListNode_list___ListNode___init( variable[1] /*e*/); /*new ListNode[E]*/
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = NEW_ListNode_list___ListNode___init( variable[1] /*e*/) /*new ListNode[E]*/;
   variable[3] = variable[4];
-  variable[4] = variable[0];
-  variable[4] = ATTR_list___List____head(variable[4]) /*List::_head*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_list___List____head(variable[0]) /*List::_head*/;
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    ATTR_list___List____tail(variable[4]) /*List::_tail*/ =  variable[3] /*node*/;
+    ATTR_list___List____tail(variable[0]) /*List::_tail*/ =  variable[3] /*node*/;
   } else { /*if*/
-    variable[4] = variable[0];
-    variable[4] = ATTR_list___List____head(variable[4]) /*List::_head*/;
+    /* Register variable[4]: Result */
+    variable[4] = ATTR_list___List____head(variable[0]) /*List::_head*/;
     CALL_list___ListNode___next__eq( variable[3] /*node*/)( variable[3] /*node*/, variable[4]) /*ListNode::next=*/;
-    variable[4] = variable[0];
-    variable[4] = ATTR_list___List____head(variable[4]) /*List::_head*/;
+    /* Register variable[4]: Result */
+    variable[4] = ATTR_list___List____head(variable[0]) /*List::_head*/;
     CALL_list___ListNode___prev__eq(variable[4])(variable[4],  variable[3] /*node*/) /*ListNode::prev=*/;
   }
-  variable[4] = variable[0];
-  ATTR_list___List____head(variable[4]) /*List::_head*/ =  variable[3] /*node*/;
+  ATTR_list___List____head(variable[0]) /*List::_head*/ =  variable[3] /*node*/;
   return_label21: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t list___List___shift(val_t  self) {
   struct trace_t trace = {NULL, NULL, 140, LOCATE_list___List___shift};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[3] = variable[0];
-  variable[3] = ATTR_list___List____head(variable[3]) /*List::_head*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_list___List____head(variable[0]) /*List::_head*/;
   variable[2] = variable[3];
-  variable[3] = variable[0];
-  variable[4] = CALL_list___ListNode___next( variable[2] /*node*/)( variable[2] /*node*/) /*ListNode::next*/;
-  ATTR_list___List____head(variable[3]) /*List::_head*/ = variable[4];
+  /* Register variable[3]: Result */
+  variable[3] = CALL_list___ListNode___next( variable[2] /*node*/)( variable[2] /*node*/) /*ListNode::next*/;
+  ATTR_list___List____head(variable[0]) /*List::_head*/ = variable[3];
   CALL_list___ListNode___next__eq( variable[2] /*node*/)( variable[2] /*node*/,  NIT_NULL /*null*/) /*ListNode::next=*/;
-  variable[3] = variable[0];
-  variable[3] = ATTR_list___List____head(variable[3]) /*List::_head*/;
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_list___List____head(variable[0]) /*List::_head*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = variable[0];
-    ATTR_list___List____tail(variable[3]) /*List::_tail*/ =  NIT_NULL /*null*/;
+    ATTR_list___List____tail(variable[0]) /*List::_tail*/ =  NIT_NULL /*null*/;
   } else { /*if*/
-    variable[3] = variable[0];
-    variable[3] = ATTR_list___List____head(variable[3]) /*List::_head*/;
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_list___List____head(variable[0]) /*List::_head*/;
     CALL_list___ListNode___prev__eq(variable[3])(variable[3],  NIT_NULL /*null*/) /*ListNode::prev=*/;
   }
+  /* Register variable[3]: Result */
   variable[3] = CALL_abstract_collection___Container___item( variable[2] /*node*/)( variable[2] /*node*/) /*Container::item*/;
   variable[1] = variable[3];
   goto return_label22;
@@ -436,37 +516,45 @@ val_t list___List___shift(val_t  self) {
 void list___List___link(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 109, LOCATE_list___List___link};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_list___List____tail(variable[3]) /*List::_tail*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_list___List____tail(variable[0]) /*List::_tail*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = variable[0];
-    variable[4] = ATTR_list___List____head( variable[1] /*l*/) /*List::_head*/;
-    ATTR_list___List____head(variable[3]) /*List::_head*/ = variable[4];
-  } else { /*if*/
+    /* Register variable[3]: Result */
     variable[3] = ATTR_list___List____head( variable[1] /*l*/) /*List::_head*/;
+    ATTR_list___List____head(variable[0]) /*List::_head*/ = variable[3];
+  } else { /*if*/
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_list___List____head( variable[1] /*l*/) /*List::_head*/;
+    /* Register variable[3]: Result */
     variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
     if (UNTAG_Bool(variable[3])) { /*if*/
-      variable[3] = variable[0];
-      variable[3] = ATTR_list___List____tail(variable[3]) /*List::_tail*/;
+      /* Register variable[3]: Result */
+      variable[3] = ATTR_list___List____tail(variable[0]) /*List::_tail*/;
+      /* Register variable[4]: Result */
       variable[4] = ATTR_list___List____head( variable[1] /*l*/) /*List::_head*/;
       CALL_list___ListNode___next__eq(variable[3])(variable[3], variable[4]) /*ListNode::next=*/;
-      variable[3] = variable[0];
-      variable[3] = ATTR_list___List____tail(variable[3]) /*List::_tail*/;
+      /* Register variable[3]: Result */
+      variable[3] = ATTR_list___List____tail(variable[0]) /*List::_tail*/;
+      /* Register variable[3]: Result */
       variable[3] = CALL_list___ListNode___next(variable[3])(variable[3]) /*ListNode::next*/;
-      variable[4] = variable[0];
-      variable[4] = ATTR_list___List____tail(variable[4]) /*List::_tail*/;
+      /* Register variable[4]: Result */
+      variable[4] = ATTR_list___List____tail(variable[0]) /*List::_tail*/;
       CALL_list___ListNode___prev__eq(variable[3])(variable[3], variable[4]) /*ListNode::prev=*/;
     }
   }
-  variable[3] = variable[0];
-  variable[4] = ATTR_list___List____tail( variable[1] /*l*/) /*List::_tail*/;
-  ATTR_list___List____tail(variable[3]) /*List::_tail*/ = variable[4];
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_list___List____tail( variable[1] /*l*/) /*List::_tail*/;
+  ATTR_list___List____tail(variable[0]) /*List::_tail*/ = variable[3];
   CALL_abstract_collection___RemovableCollection___clear( variable[1] /*l*/)( variable[1] /*l*/) /*List::clear*/;
   return_label23: while(false);
   tracehead = trace.prev;
@@ -475,11 +563,13 @@ void list___List___link(val_t  self, val_t  param0) {
 void list___List___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 175, LOCATE_list___List___init};
   val_t variable[2];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_List].i]) return;
+  /* Register variable[1]: Method return value and escape marker */
   return_label24: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_List].i] = 1;
   tracehead = trace.prev;
@@ -487,15 +577,17 @@ void list___List___init(val_t  self, int* init_table) {
 }
 void list___List___from(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 178, LOCATE_list___List___from};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_List].i]) return;
-  variable[3] = variable[0];
-  CALL_abstract_collection___IndexedCollection___append(variable[3])(variable[3],  variable[1] /*coll*/) /*IndexedCollection::append*/;
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_abstract_collection___IndexedCollection___append(variable[0])(variable[0],  variable[1] /*coll*/) /*IndexedCollection::append*/;
   return_label25: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_List].i] = 1;
   tracehead = trace.prev;
@@ -503,28 +595,36 @@ void list___List___from(val_t  self, val_t  param0, int* init_table) {
 }
 val_t list___List___get_node(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 187, LOCATE_list___List___get_node};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[4] = ATTR_list___List____head(variable[4]) /*List::_head*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_list___List____head(variable[0]) /*List::_head*/;
   variable[3] = variable[4];
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(UNTAG_Int( variable[1] /*i*/)<UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[4])) { /*if*/
     variable[2] =  NIT_NULL /*null*/;
     goto return_label26;
   }
   while (true) { /*while*/
+    /* Register variable[4]: Result */
     variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*n*/ ==  NIT_NULL /*null*/) || (( variable[3] /*n*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*n*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*n*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*n*/)( variable[3] /*n*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    variable[5] = variable[4];
-    if (UNTAG_Bool(variable[5])) { /* and */
-      variable[5] = TAG_Bool(UNTAG_Int( variable[1] /*i*/)>UNTAG_Int( TAG_Int(0)));
+    /* Ensure var variable[4]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[4])) { /* and */
+      /* Register variable[4]: Result */
+      variable[4] = TAG_Bool(UNTAG_Int( variable[1] /*i*/)>UNTAG_Int( TAG_Int(0)));
     }
-    variable[4] = variable[5];
+    /* Register variable[4]: Result */
     if (!UNTAG_Bool(variable[4])) break; /* while*/
+    /* Register variable[4]: Result */
     variable[4] = CALL_list___ListNode___next( variable[3] /*n*/)( variable[3] /*n*/) /*ListNode::next*/;
     variable[3] = variable[4] /*n=*/;
     variable[1] = TAG_Int(UNTAG_Int(variable[1])-UNTAG_Int( TAG_Int(1))) /*i*/;
@@ -539,23 +639,32 @@ val_t list___List___get_node(val_t  self, val_t  param0) {
 }
 val_t list___List___search_node_after(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 201, LOCATE_list___List___search_node_after};
-  val_t variable[7];
-  void **closurevariable = NULL;
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Local variable */
   variable[4] =  variable[2] /*after*/;
   while (true) { /*while*/
+    /* Register variable[5]: Result */
     variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[4] /*n*/ ==  NIT_NULL /*null*/) || (( variable[4] /*n*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[4] /*n*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*n*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[4] /*n*/)( variable[4] /*n*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    variable[6] = variable[5];
-    if (UNTAG_Bool(variable[6])) { /* and */
-      variable[6] = CALL_abstract_collection___Container___item( variable[4] /*n*/)( variable[4] /*n*/) /*Container::item*/;
-      variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] ==  variable[1] /*e*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], variable[1] /*e*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  variable[1] /*e*/) /*Object::==*/)))))));
+    /* Ensure var variable[5]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[5])) { /* and */
+      /* Register variable[5]: Result */
+      variable[5] = CALL_abstract_collection___Container___item( variable[4] /*n*/)( variable[4] /*n*/) /*Container::item*/;
+      /* Register variable[5]: Result */
+      variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[5] ==  variable[1] /*e*/) || ((variable[5] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[5])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], variable[1] /*e*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[5])(variable[5],  variable[1] /*e*/) /*Object::==*/)))))));
     }
-    variable[5] = variable[6];
+    /* Register variable[5]: Result */
     if (!UNTAG_Bool(variable[5])) break; /* while*/
+    /* Register variable[5]: Result */
     variable[5] = CALL_list___ListNode___next( variable[4] /*n*/)( variable[4] /*n*/) /*ListNode::next*/;
     variable[4] = variable[5] /*n=*/;
     continue_29: while(0);
@@ -570,40 +679,54 @@ val_t list___List___search_node_after(val_t  self, val_t  param0, val_t  param1)
 void list___List___remove_node(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 209, LOCATE_list___List___remove_node};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
   variable[3] = CALL_list___ListNode___prev( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::prev*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = variable[0];
-    variable[4] = CALL_list___ListNode___next( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::next*/;
-    ATTR_list___List____head(variable[3]) /*List::_head*/ = variable[4];
+    /* Register variable[3]: Result */
     variable[3] = CALL_list___ListNode___next( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::next*/;
+    ATTR_list___List____head(variable[0]) /*List::_head*/ = variable[3];
+    /* Register variable[3]: Result */
+    variable[3] = CALL_list___ListNode___next( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::next*/;
+    /* Register variable[3]: Result */
     variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
     if (UNTAG_Bool(variable[3])) { /*if*/
-      variable[3] = variable[0];
-      ATTR_list___List____tail(variable[3]) /*List::_tail*/ =  NIT_NULL /*null*/;
+      ATTR_list___List____tail(variable[0]) /*List::_tail*/ =  NIT_NULL /*null*/;
     } else { /*if*/
+      /* Register variable[3]: Result */
       variable[3] = CALL_list___ListNode___next( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::next*/;
       CALL_list___ListNode___prev__eq(variable[3])(variable[3],  NIT_NULL /*null*/) /*ListNode::prev=*/;
     }
   } else { /*if*/
+    /* Register variable[3]: Result */
     variable[3] = CALL_list___ListNode___next( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::next*/;
+    /* Register variable[3]: Result */
     variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
     if (UNTAG_Bool(variable[3])) { /*if*/
-      variable[3] = variable[0];
-      variable[4] = CALL_list___ListNode___prev( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::prev*/;
-      ATTR_list___List____tail(variable[3]) /*List::_tail*/ = variable[4];
+      /* Register variable[3]: Result */
+      variable[3] = CALL_list___ListNode___prev( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::prev*/;
+      ATTR_list___List____tail(variable[0]) /*List::_tail*/ = variable[3];
+      /* Register variable[3]: Result */
       variable[3] = CALL_list___ListNode___prev( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::prev*/;
       CALL_list___ListNode___next__eq(variable[3])(variable[3],  NIT_NULL /*null*/) /*ListNode::next=*/;
     } else { /*if*/
+      /* Register variable[3]: Result */
       variable[3] = CALL_list___ListNode___prev( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::prev*/;
+      /* Register variable[4]: Result */
       variable[4] = CALL_list___ListNode___next( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::next*/;
       CALL_list___ListNode___next__eq(variable[3])(variable[3], variable[4]) /*ListNode::next=*/;
+      /* Register variable[3]: Result */
       variable[3] = CALL_list___ListNode___next( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::next*/;
+      /* Register variable[4]: Result */
       variable[4] = CALL_list___ListNode___prev( variable[1] /*node*/)( variable[1] /*node*/) /*ListNode::prev*/;
       CALL_list___ListNode___prev__eq(variable[3])(variable[3], variable[4]) /*ListNode::prev=*/;
     }
@@ -615,20 +738,28 @@ void list___List___remove_node(val_t  self, val_t  param0) {
 void list___List___insert_before(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 228, LOCATE_list___List___insert_before};
   val_t variable[7];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
-  variable[5] = NEW_ListNode_list___ListNode___init( variable[1] /*element*/); /*new ListNode[E]*/
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = NEW_ListNode_list___ListNode___init( variable[1] /*element*/) /*new ListNode[E]*/;
   variable[4] = variable[5];
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
   variable[6] = CALL_list___ListNode___prev( variable[2] /*node*/)( variable[2] /*node*/) /*ListNode::prev*/;
   variable[5] = variable[6];
+  /* Register variable[6]: Result */
   variable[6] = TAG_Bool(( variable[5] /*prev*/ ==  NIT_NULL /*null*/) || (( variable[5] /*prev*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*prev*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*prev*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*prev*/)( variable[5] /*prev*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[6])) { /*if*/
-    variable[6] = variable[0];
-    ATTR_list___List____head(variable[6]) /*List::_head*/ =  variable[4] /*nnode*/;
+    ATTR_list___List____head(variable[0]) /*List::_head*/ =  variable[4] /*nnode*/;
   } else { /*if*/
     CALL_list___ListNode___next__eq( variable[5] /*prev*/)( variable[5] /*prev*/,  variable[4] /*nnode*/) /*ListNode::next=*/;
   }
@@ -642,12 +773,15 @@ void list___List___insert_before(val_t  self, val_t  param0, val_t  param1) {
 val_t list___ListIterator___item(val_t  self) {
   struct trace_t trace = {NULL, NULL, 246, LOCATE_list___ListIterator___item};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_list___ListIterator____node(variable[2]) /*ListIterator::_node*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_list___ListIterator____node(variable[0]) /*ListIterator::_node*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_abstract_collection___Container___item(variable[2])(variable[2]) /*Container::item*/;
   variable[1] = variable[2];
   goto return_label32;
@@ -657,18 +791,19 @@ val_t list___ListIterator___item(val_t  self) {
 }
 void list___ListIterator___next(val_t  self) {
   struct trace_t trace = {NULL, NULL, 252, LOCATE_list___ListIterator___next};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[3] = variable[0];
-  variable[3] = ATTR_list___ListIterator____node(variable[3]) /*ListIterator::_node*/;
-  variable[3] = CALL_list___ListNode___next(variable[3])(variable[3]) /*ListNode::next*/;
-  ATTR_list___ListIterator____node(variable[2]) /*ListIterator::_node*/ = variable[3];
-  variable[2] = variable[0];
-  ATTR_list___ListIterator____index(variable[2]) /*ListIterator::_index*/ = TAG_Int(UNTAG_Int(ATTR_list___ListIterator____index(variable[2]) /*ListIterator::_index*/)+UNTAG_Int( TAG_Int(1)));
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_list___ListIterator____node(variable[0]) /*ListIterator::_node*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_list___ListNode___next(variable[2])(variable[2]) /*ListNode::next*/;
+  ATTR_list___ListIterator____node(variable[0]) /*ListIterator::_node*/ = variable[2];
+  ATTR_list___ListIterator____index(variable[0]) /*ListIterator::_index*/ = TAG_Int(UNTAG_Int(ATTR_list___ListIterator____index(variable[0]) /*ListIterator::_index*/)+UNTAG_Int( TAG_Int(1)));
   return_label33: while(false);
   tracehead = trace.prev;
   return;
@@ -676,12 +811,15 @@ void list___ListIterator___next(val_t  self) {
 val_t list___ListIterator___is_ok(val_t  self) {
   struct trace_t trace = {NULL, NULL, 250, LOCATE_list___ListIterator___is_ok};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_list___ListIterator____node(variable[2]) /*ListIterator::_node*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_list___ListIterator____node(variable[0]) /*ListIterator::_node*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))));
   variable[1] =  TAG_Bool(!UNTAG_Bool(variable[2]));
   goto return_label34;
@@ -689,25 +827,10 @@ val_t list___ListIterator___is_ok(val_t  self) {
   tracehead = trace.prev;
   return variable[1];
 }
-void list___ListIterator___item__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 248, LOCATE_list___ListIterator___item__eq};
-  val_t variable[4];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_list;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_list___ListIterator____node(variable[3]) /*ListIterator::_node*/;
-  CALL_abstract_collection___Container___item__eq(variable[3])(variable[3],  variable[1] /*e*/) /*Container::item=*/;
-  return_label35: while(false);
-  tracehead = trace.prev;
-  return;
-}
 val_t list___ListIterator___index(val_t  self) {
   struct trace_t trace = {NULL, NULL, 268, LOCATE_list___ListIterator___index};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
   tracehead = trace.prev;
@@ -715,35 +838,38 @@ val_t list___ListIterator___index(val_t  self) {
 }
 void list___ListIterator___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 258, LOCATE_list___ListIterator___init};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ListIterator].i]) return;
-  variable[3] = variable[0];
-  ATTR_list___ListIterator____node(variable[3]) /*ListIterator::_node*/ =  variable[1] /*node*/;
-  variable[3] = variable[0];
-  ATTR_list___ListIterator____index(variable[3]) /*ListIterator::_index*/ =  TAG_Int(0);
-  return_label36: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  ATTR_list___ListIterator____node(variable[0]) /*ListIterator::_node*/ =  variable[1] /*node*/;
+  ATTR_list___ListIterator____index(variable[0]) /*ListIterator::_index*/ =  TAG_Int(0);
+  return_label35: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ListIterator].i] = 1;
   tracehead = trace.prev;
   return;
 }
 void list___ListNode___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 275, LOCATE_list___ListNode___init};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ListNode].i]) return;
+  /* Register variable[2]: Method return value and escape marker */
   CALL_abstract_collection___Container___init(variable[0])(variable[0], variable[1], init_table /*YYY*/) /*Container::init*/;
-  variable[3] = variable[0];
-  CALL_abstract_collection___Container___item__eq(variable[3])(variable[3],  variable[1] /*i*/) /*Container::item=*/;
-  return_label37: while(false);
+  CALL_abstract_collection___Container___item__eq(variable[0])(variable[0],  variable[1] /*i*/) /*Container::item=*/;
+  return_label36: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ListNode].i] = 1;
   tracehead = trace.prev;
   return;
@@ -751,7 +877,7 @@ void list___ListNode___init(val_t  self, val_t  param0, int* init_table) {
 val_t list___ListNode___next(val_t  self) {
   struct trace_t trace = {NULL, NULL, 280, LOCATE_list___ListNode___next};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
   tracehead = trace.prev;
@@ -760,7 +886,7 @@ val_t list___ListNode___next(val_t  self) {
 void list___ListNode___next__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 280, LOCATE_list___ListNode___next__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
   ATTR_list___ListNode____next( self) /*ListNode::_next*/ =  param0;
@@ -770,7 +896,7 @@ void list___ListNode___next__eq(val_t  self, val_t  param0) {
 val_t list___ListNode___prev(val_t  self) {
   struct trace_t trace = {NULL, NULL, 283, LOCATE_list___ListNode___prev};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
   tracehead = trace.prev;
@@ -779,7 +905,7 @@ val_t list___ListNode___prev(val_t  self) {
 void list___ListNode___prev__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 283, LOCATE_list___ListNode___prev__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_list;
   ATTR_list___ListNode____prev( self) /*ListNode::_prev*/ =  param0;

@@ -10,6 +10,8 @@ extern const classtable_elt_t VFT_OptionText[];
 
 extern const classtable_elt_t VFT_OptionBool[];
 
+extern const classtable_elt_t VFT_OptionCount[];
+
 extern const classtable_elt_t VFT_OptionParameter[];
 
 extern const classtable_elt_t VFT_OptionString[];
@@ -55,43 +57,47 @@ extern const int SFT_opts[];
 #define COLOR_OptionBool (SFT_opts[8])
 #define INIT_TABLE_POS_OptionBool (SFT_opts[9] + 0)
 #define CALL_opts___OptionBool___init(recv) ((opts___OptionBool___init_t)CALL((recv), (SFT_opts[9] + 1)))
-#define ID_OptionParameter (SFT_opts[10])
-#define COLOR_OptionParameter (SFT_opts[11])
-#define INIT_TABLE_POS_OptionParameter (SFT_opts[12] + 0)
-#define CALL_opts___OptionParameter___convert(recv) ((opts___OptionParameter___convert_t)CALL((recv), (SFT_opts[12] + 1)))
-#define CALL_opts___OptionParameter___init_opt(recv) ((opts___OptionParameter___init_opt_t)CALL((recv), (SFT_opts[12] + 2)))
-#define ID_OptionString (SFT_opts[13])
-#define COLOR_OptionString (SFT_opts[14])
-#define INIT_TABLE_POS_OptionString (SFT_opts[15] + 0)
-#define CALL_opts___OptionString___init(recv) ((opts___OptionString___init_t)CALL((recv), (SFT_opts[15] + 1)))
-#define ID_OptionEnum (SFT_opts[16])
-#define COLOR_OptionEnum (SFT_opts[17])
-#define ATTR_opts___OptionEnum____enum(recv) ATTR(recv, (SFT_opts[18] + 0))
-#define INIT_TABLE_POS_OptionEnum (SFT_opts[19] + 0)
-#define CALL_opts___OptionEnum___init(recv) ((opts___OptionEnum___init_t)CALL((recv), (SFT_opts[19] + 1)))
-#define ID_OptionInt (SFT_opts[20])
-#define COLOR_OptionInt (SFT_opts[21])
-#define INIT_TABLE_POS_OptionInt (SFT_opts[22] + 0)
-#define CALL_opts___OptionInt___init(recv) ((opts___OptionInt___init_t)CALL((recv), (SFT_opts[22] + 1)))
-#define ID_OptionArray (SFT_opts[23])
-#define COLOR_OptionArray (SFT_opts[24])
-#define ATTR_opts___OptionArray____values(recv) ATTR(recv, (SFT_opts[25] + 0))
-#define INIT_TABLE_POS_OptionArray (SFT_opts[26] + 0)
-#define CALL_opts___OptionArray___init(recv) ((opts___OptionArray___init_t)CALL((recv), (SFT_opts[26] + 1)))
-#define ID_OptionContext (SFT_opts[27])
-#define COLOR_OptionContext (SFT_opts[28])
-#define ATTR_opts___OptionContext____options(recv) ATTR(recv, (SFT_opts[29] + 0))
-#define ATTR_opts___OptionContext____rest(recv) ATTR(recv, (SFT_opts[29] + 1))
-#define ATTR_opts___OptionContext____optmap(recv) ATTR(recv, (SFT_opts[29] + 2))
-#define INIT_TABLE_POS_OptionContext (SFT_opts[30] + 0)
-#define CALL_opts___OptionContext___options(recv) ((opts___OptionContext___options_t)CALL((recv), (SFT_opts[30] + 1)))
-#define CALL_opts___OptionContext___rest(recv) ((opts___OptionContext___rest_t)CALL((recv), (SFT_opts[30] + 2)))
-#define CALL_opts___OptionContext___usage(recv) ((opts___OptionContext___usage_t)CALL((recv), (SFT_opts[30] + 3)))
-#define CALL_opts___OptionContext___parse(recv) ((opts___OptionContext___parse_t)CALL((recv), (SFT_opts[30] + 4)))
-#define CALL_opts___OptionContext___parse_intern(recv) ((opts___OptionContext___parse_intern_t)CALL((recv), (SFT_opts[30] + 5)))
-#define CALL_opts___OptionContext___add_option(recv) ((opts___OptionContext___add_option_t)CALL((recv), (SFT_opts[30] + 6)))
-#define CALL_opts___OptionContext___init(recv) ((opts___OptionContext___init_t)CALL((recv), (SFT_opts[30] + 7)))
-#define CALL_opts___OptionContext___build(recv) ((opts___OptionContext___build_t)CALL((recv), (SFT_opts[30] + 8)))
+#define ID_OptionCount (SFT_opts[10])
+#define COLOR_OptionCount (SFT_opts[11])
+#define INIT_TABLE_POS_OptionCount (SFT_opts[12] + 0)
+#define CALL_opts___OptionCount___init(recv) ((opts___OptionCount___init_t)CALL((recv), (SFT_opts[12] + 1)))
+#define ID_OptionParameter (SFT_opts[13])
+#define COLOR_OptionParameter (SFT_opts[14])
+#define INIT_TABLE_POS_OptionParameter (SFT_opts[15] + 0)
+#define CALL_opts___OptionParameter___convert(recv) ((opts___OptionParameter___convert_t)CALL((recv), (SFT_opts[15] + 1)))
+#define CALL_opts___OptionParameter___init_opt(recv) ((opts___OptionParameter___init_opt_t)CALL((recv), (SFT_opts[15] + 2)))
+#define ID_OptionString (SFT_opts[16])
+#define COLOR_OptionString (SFT_opts[17])
+#define INIT_TABLE_POS_OptionString (SFT_opts[18] + 0)
+#define CALL_opts___OptionString___init(recv) ((opts___OptionString___init_t)CALL((recv), (SFT_opts[18] + 1)))
+#define ID_OptionEnum (SFT_opts[19])
+#define COLOR_OptionEnum (SFT_opts[20])
+#define ATTR_opts___OptionEnum____enum(recv) ATTR(recv, (SFT_opts[21] + 0))
+#define INIT_TABLE_POS_OptionEnum (SFT_opts[22] + 0)
+#define CALL_opts___OptionEnum___init(recv) ((opts___OptionEnum___init_t)CALL((recv), (SFT_opts[22] + 1)))
+#define ID_OptionInt (SFT_opts[23])
+#define COLOR_OptionInt (SFT_opts[24])
+#define INIT_TABLE_POS_OptionInt (SFT_opts[25] + 0)
+#define CALL_opts___OptionInt___init(recv) ((opts___OptionInt___init_t)CALL((recv), (SFT_opts[25] + 1)))
+#define ID_OptionArray (SFT_opts[26])
+#define COLOR_OptionArray (SFT_opts[27])
+#define ATTR_opts___OptionArray____values(recv) ATTR(recv, (SFT_opts[28] + 0))
+#define INIT_TABLE_POS_OptionArray (SFT_opts[29] + 0)
+#define CALL_opts___OptionArray___init(recv) ((opts___OptionArray___init_t)CALL((recv), (SFT_opts[29] + 1)))
+#define ID_OptionContext (SFT_opts[30])
+#define COLOR_OptionContext (SFT_opts[31])
+#define ATTR_opts___OptionContext____options(recv) ATTR(recv, (SFT_opts[32] + 0))
+#define ATTR_opts___OptionContext____rest(recv) ATTR(recv, (SFT_opts[32] + 1))
+#define ATTR_opts___OptionContext____optmap(recv) ATTR(recv, (SFT_opts[32] + 2))
+#define INIT_TABLE_POS_OptionContext (SFT_opts[33] + 0)
+#define CALL_opts___OptionContext___options(recv) ((opts___OptionContext___options_t)CALL((recv), (SFT_opts[33] + 1)))
+#define CALL_opts___OptionContext___rest(recv) ((opts___OptionContext___rest_t)CALL((recv), (SFT_opts[33] + 2)))
+#define CALL_opts___OptionContext___usage(recv) ((opts___OptionContext___usage_t)CALL((recv), (SFT_opts[33] + 3)))
+#define CALL_opts___OptionContext___parse(recv) ((opts___OptionContext___parse_t)CALL((recv), (SFT_opts[33] + 4)))
+#define CALL_opts___OptionContext___parse_intern(recv) ((opts___OptionContext___parse_intern_t)CALL((recv), (SFT_opts[33] + 5)))
+#define CALL_opts___OptionContext___add_option(recv) ((opts___OptionContext___add_option_t)CALL((recv), (SFT_opts[33] + 6)))
+#define CALL_opts___OptionContext___init(recv) ((opts___OptionContext___init_t)CALL((recv), (SFT_opts[33] + 7)))
+#define CALL_opts___OptionContext___build(recv) ((opts___OptionContext___build_t)CALL((recv), (SFT_opts[33] + 8)))
 typedef val_t (* opts___Option___to_s_t)(val_t  self);
 val_t opts___Option___to_s(val_t  self);
 #define LOCATE_opts___Option___to_s "opts::Option::(string::Object::to_s)"
@@ -158,6 +164,13 @@ typedef void (* opts___OptionBool___init_t)(val_t  self, val_t  param0, val_t  p
 void opts___OptionBool___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
 #define LOCATE_opts___OptionBool___init "opts::OptionBool::init"
 val_t NEW_OptionBool_opts___OptionBool___init(val_t p0, val_t p1);
+typedef void (* opts___OptionCount___read_param_t)(val_t  self, val_t  param0);
+void opts___OptionCount___read_param(val_t  self, val_t  param0);
+#define LOCATE_opts___OptionCount___read_param "opts::OptionCount::(opts::Option::read_param)"
+typedef void (* opts___OptionCount___init_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
+void opts___OptionCount___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
+#define LOCATE_opts___OptionCount___init "opts::OptionCount::init"
+val_t NEW_OptionCount_opts___OptionCount___init(val_t p0, val_t p1);
 typedef void (* opts___OptionParameter___read_param_t)(val_t  self, val_t  param0);
 void opts___OptionParameter___read_param(val_t  self, val_t  param0);
 #define LOCATE_opts___OptionParameter___read_param "opts::OptionParameter::(opts::Option::read_param)"

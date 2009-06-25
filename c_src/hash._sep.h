@@ -83,12 +83,8 @@ extern const int SFT_hash[];
 typedef val_t (* hash___Object___hash_t)(val_t  self);
 val_t hash___Object___hash(val_t  self);
 #define LOCATE_hash___Object___hash "hash::Object::hash"
-val_t NEW_String_string___String___init();
-val_t NEW_String_string___String___from(val_t p0);
-val_t NEW_String_string___String___with_capacity(val_t p0);
 val_t NEW_String_string___String___with_native(val_t p0, val_t p1);
 val_t NEW_String_string___String___from_cstring(val_t p0);
-val_t NEW_String_string___String___filled_with(val_t p0, val_t p1);
 typedef val_t (* hash___String___hash_t)(val_t  self);
 val_t hash___String___hash(val_t  self);
 #define LOCATE_hash___String___hash "hash::String::(hash::Object::hash)"
@@ -201,9 +197,6 @@ val_t hash___HashMapIterator___is_ok(val_t  self);
 typedef val_t (* hash___HashMapIterator___key_t)(val_t  self);
 val_t hash___HashMapIterator___key(val_t  self);
 #define LOCATE_hash___HashMapIterator___key "hash::HashMapIterator::(abstract_collection::MapIterator::key)"
-typedef void (* hash___HashMapIterator___item__eq_t)(val_t  self, val_t  param0);
-void hash___HashMapIterator___item__eq(val_t  self, val_t  param0);
-#define LOCATE_hash___HashMapIterator___item__eq "hash::HashMapIterator::(abstract_collection::MapIterator::item=)"
 typedef void (* hash___HashMapIterator___init_t)(val_t  self, val_t  param0, int* init_table);
 void hash___HashMapIterator___init(val_t  self, val_t  param0, int* init_table);
 #define LOCATE_hash___HashMapIterator___init "hash::HashMapIterator::init"

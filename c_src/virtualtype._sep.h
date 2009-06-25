@@ -59,7 +59,7 @@ typedef void (* virtualtype___MMVirtualType___init_t)(val_t  self, val_t  param0
 void virtualtype___MMVirtualType___init(val_t  self, val_t  param0, val_t  param1, int* init_table);
 #define LOCATE_virtualtype___MMVirtualType___init "virtualtype::MMVirtualType::init"
 val_t NEW_MMVirtualType_virtualtype___MMVirtualType___init(val_t p0, val_t p1);
-val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1);
+val_t NEW_MMLocalClass_abstractmetamodel___MMLocalClass___init(val_t p0, val_t p1, val_t p2);
 typedef val_t (* virtualtype___MMLocalClass___virtual_type_t)(val_t  self, val_t  param0);
 val_t virtualtype___MMLocalClass___virtual_type(val_t  self, val_t  param0);
 #define LOCATE_virtualtype___MMLocalClass___virtual_type "virtualtype::MMLocalClass::virtual_type"

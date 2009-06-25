@@ -26,12 +26,18 @@ val_t type_formal___MMTypeFormal___to_s(val_t  self);
 typedef val_t (* type_formal___MMTypeFormal___local_class_t)(val_t  self);
 val_t type_formal___MMTypeFormal___local_class(val_t  self);
 #define LOCATE_type_formal___MMTypeFormal___local_class "type_formal::MMTypeFormal::(static_type::MMType::local_class)"
+typedef val_t (* type_formal___MMTypeFormal___is_valid_t)(val_t  self);
+val_t type_formal___MMTypeFormal___is_valid(val_t  self);
+#define LOCATE_type_formal___MMTypeFormal___is_valid "type_formal::MMTypeFormal::(static_type::MMType::is_valid)"
 typedef val_t (* type_formal___MMTypeFormal_____l_t)(val_t  self, val_t  param0);
 val_t type_formal___MMTypeFormal_____l(val_t  self, val_t  param0);
 #define LOCATE_type_formal___MMTypeFormal_____l "type_formal::MMTypeFormal::(static_type::MMType::<)"
 typedef val_t (* type_formal___MMTypeFormal___is_supertype_t)(val_t  self, val_t  param0);
 val_t type_formal___MMTypeFormal___is_supertype(val_t  self, val_t  param0);
 #define LOCATE_type_formal___MMTypeFormal___is_supertype "type_formal::MMTypeFormal::(static_type::MMType::is_supertype)"
+typedef val_t (* type_formal___MMTypeFormal___is_nullable_t)(val_t  self);
+val_t type_formal___MMTypeFormal___is_nullable(val_t  self);
+#define LOCATE_type_formal___MMTypeFormal___is_nullable "type_formal::MMTypeFormal::(static_type::MMType::is_nullable)"
 typedef val_t (* type_formal___MMTypeFormal___direct_type_t)(val_t  self);
 val_t type_formal___MMTypeFormal___direct_type(val_t  self);
 #define LOCATE_type_formal___MMTypeFormal___direct_type "type_formal::MMTypeFormal::(type_formal::MMType::direct_type)"

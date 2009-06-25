@@ -3,12 +3,15 @@
 val_t exec___Process___id(val_t  self) {
   struct trace_t trace = {NULL, NULL, 23, LOCATE_exec___Process___id};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_exec___Process____data(variable[2]) /*Process::_data*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_exec___Process____data(variable[0]) /*Process::_data*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_exec___NativeProcess___id(variable[2])(variable[2]) /*NativeProcess::id*/;
   variable[1] = variable[2];
   goto return_label0;
@@ -19,12 +22,15 @@ val_t exec___Process___id(val_t  self) {
 val_t exec___Process___is_finished(val_t  self) {
   struct trace_t trace = {NULL, NULL, 26, LOCATE_exec___Process___is_finished};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_exec___Process____data(variable[2]) /*Process::_data*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_exec___Process____data(variable[0]) /*Process::_data*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_exec___NativeProcess___is_finished(variable[2])(variable[2]) /*NativeProcess::is_finished*/;
   variable[1] = variable[2];
   goto return_label1;
@@ -35,15 +41,17 @@ val_t exec___Process___is_finished(val_t  self) {
 void exec___Process___wait(val_t  self) {
   struct trace_t trace = {NULL, NULL, 29, LOCATE_exec___Process___wait};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_exec___Process____data(variable[2]) /*Process::_data*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_exec___Process____data(variable[0]) /*Process::_data*/;
   CALL_exec___NativeProcess___wait(variable[2])(variable[2]) /*NativeProcess::wait*/;
-  variable[2] = variable[0];
-  variable[2] = CALL_exec___Process___is_finished(variable[2])(variable[2]) /*Process::is_finished*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_exec___Process___is_finished(variable[0])(variable[0]) /*Process::is_finished*/;
   if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_exec___Process___wait, LOCATE_exec, 33); nit_exit(1);}
   return_label2: while(false);
   tracehead = trace.prev;
@@ -52,15 +60,18 @@ void exec___Process___wait(val_t  self) {
 val_t exec___Process___status(val_t  self) {
   struct trace_t trace = {NULL, NULL, 36, LOCATE_exec___Process___status};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_exec___Process___is_finished(variable[2])(variable[2]) /*Process::is_finished*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_exec___Process___is_finished(variable[0])(variable[0]) /*Process::is_finished*/;
   if (!UNTAG_Bool(variable[2])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_exec___Process___status, LOCATE_exec, 39); nit_exit(1);}
-  variable[2] = variable[0];
-  variable[2] = ATTR_exec___Process____data(variable[2]) /*Process::_data*/;
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_exec___Process____data(variable[0]) /*Process::_data*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_exec___NativeProcess___status(variable[2])(variable[2]) /*NativeProcess::status*/;
   variable[1] = variable[2];
   goto return_label3;
@@ -71,13 +82,16 @@ val_t exec___Process___status(val_t  self) {
 void exec___Process___kill(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 43, LOCATE_exec___Process___kill};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_exec___Process____data(variable[3]) /*Process::_data*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_exec___Process____data(variable[0]) /*Process::_data*/;
   CALL_exec___NativeProcess___kill(variable[3])(variable[3],  variable[1] /*signal*/) /*NativeProcess::kill*/;
   return_label4: while(false);
   tracehead = trace.prev;
@@ -85,31 +99,35 @@ void exec___Process___kill(val_t  self, val_t  param0) {
 }
 void exec___Process___term(val_t  self) {
   struct trace_t trace = {NULL, NULL, 46, LOCATE_exec___Process___term};
-  val_t variable[3];
-  void **closurevariable = NULL;
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  CALL_exec___Process___kill(variable[2])(variable[2],  TAG_Int(15)) /*Process::kill*/;
+  /* Register variable[1]: Method return value and escape marker */
+  CALL_exec___Process___kill(variable[0])(variable[0],  TAG_Int(15)) /*Process::kill*/;
   return_label5: while(false);
   tracehead = trace.prev;
   return;
 }
 void exec___Process___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
   struct trace_t trace = {NULL, NULL, 49, LOCATE_exec___Process___init};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   /* check if p<Array[String] with p:String */
   if (( param1!=NIT_NULL) && !VAL_ISA( param1, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_exec___Process___init, LOCATE_exec, 50); nit_exit(1); } /*cast Array[String]*/;
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Process].i]) return;
-  variable[4] = variable[0];
-  CALL_exec___Process___execute(variable[4])(variable[4],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(0), init_table /*YYY*/) /*Process::execute*/;
+  /* Register variable[3]: Method return value and escape marker */
+  CALL_exec___Process___execute(variable[0])(variable[0],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(0), init_table /*YYY*/) /*Process::execute*/;
   return_label6: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Process].i] = 1;
   tracehead = trace.prev;
@@ -117,15 +135,17 @@ void exec___Process___init(val_t  self, val_t  param0, val_t  param1, int* init_
 }
 void exec___Process___init_(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 55, LOCATE_exec___Process___init_};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Process].i]) return;
-  variable[3] = variable[0];
-  CALL_exec___Process___execute(variable[3])(variable[3],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(0), init_table /*YYY*/) /*Process::execute*/;
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_exec___Process___execute(variable[0])(variable[0],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(0), init_table /*YYY*/) /*Process::execute*/;
   return_label7: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Process].i] = 1;
   tracehead = trace.prev;
@@ -133,42 +153,58 @@ void exec___Process___init_(val_t  self, val_t  param0, int* init_table) {
 }
 void exec___Process___execute(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
   struct trace_t trace = {NULL, NULL, 61, LOCATE_exec___Process___execute};
-  val_t variable[11];
-  void **closurevariable = NULL;
+  val_t variable[10];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Process].i]) return;
-  variable[6] = NEW_String_string___String___init(); /*new String*/
+  /* Register variable[4]: Method return value and escape marker */
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
+  variable[6] = NEW_Buffer_string___Buffer___init() /*new Buffer*/;
   variable[5] = variable[6];
+  /* Register variable[6]: Local variable */
   variable[6] =  TAG_Int(1);
-  CALL_abstract_collection___IndexedCollection___append( variable[5] /*args*/)( variable[5] /*args*/,  variable[1] /*command*/) /*String::append*/;
+  CALL_abstract_collection___IndexedCollection___append( variable[5] /*args*/)( variable[5] /*args*/,  variable[1] /*command*/) /*Buffer::append*/;
+  /* Register variable[7]: Result */
   variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[2] /*arguments*/ ==  NIT_NULL /*null*/) || (( variable[2] /*arguments*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[2] /*arguments*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[2] /*arguments*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[2] /*arguments*/)( variable[2] /*arguments*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[7])) { /*if*/
-    variable[7] = CALL_abstract_collection___Collection___iterator( variable[2] /*arguments*/)( variable[2] /*arguments*/) /*AbstractArray::iterator*/;
+    /* Register variable[7]: For iterator */
+    variable[7] = CALL_abstract_collection___Collection___iterator( variable[2] /*arguments*/)( variable[2] /*arguments*/) /*AbstractArrayRead::iterator*/;
     while (true) { /*for*/
+      /* Register variable[8]: For 'is_ok' result */
       variable[8] = CALL_abstract_collection___Iterator___is_ok(variable[7])(variable[7]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[8])) break; /*for*/
-      variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*ArrayIterator::item*/;
+      variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[9]: Local variable */
       variable[9] = variable[8];
-      CALL_abstract_collection___SimpleCollection___add( variable[5] /*args*/)( variable[5] /*args*/,  TAG_Char('\0')) /*String::add*/;
-      CALL_abstract_collection___IndexedCollection___append( variable[5] /*args*/)( variable[5] /*args*/,  variable[9] /*a*/) /*String::append*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[5] /*args*/)( variable[5] /*args*/,  TAG_Char('\0')) /*Buffer::add*/;
+      CALL_abstract_collection___IndexedCollection___append( variable[5] /*args*/)( variable[5] /*args*/,  variable[9] /*a*/) /*Buffer::append*/;
       continue_9: while(0);
       CALL_abstract_collection___Iterator___next(variable[7])(variable[7]) /*ArrayIterator::next*/;
     }
     break_9: while(0);
-    variable[7] = CALL_abstract_collection___Collection___length( variable[2] /*arguments*/)( variable[2] /*arguments*/) /*AbstractArray::length*/;
+    /* Register variable[7]: Result */
+    variable[7] = CALL_abstract_collection___Collection___length( variable[2] /*arguments*/)( variable[2] /*arguments*/) /*AbstractArrayRead::length*/;
     variable[6] = TAG_Int(UNTAG_Int(variable[6])+UNTAG_Int(variable[7])) /*l*/;
   }
-  variable[7] = variable[0];
-  variable[8] = variable[0];
-  variable[9] = CALL_string___String___to_cstring( variable[1] /*command*/)( variable[1] /*command*/) /*String::to_cstring*/;
-  variable[10] = CALL_string___String___to_cstring( variable[5] /*args*/)( variable[5] /*args*/) /*String::to_cstring*/;
-  variable[8] = CALL_exec___Process___basic_exec_execute(variable[8])(variable[8], variable[9], variable[10],  variable[6] /*l*/,  variable[3] /*pipeflags*/) /*Process::basic_exec_execute*/;
-  ATTR_exec___Process____data(variable[7]) /*Process::_data*/ = variable[8];
+  /* Register variable[7]: Result */
+  variable[7] = CALL_string___String___to_cstring( variable[1] /*command*/)( variable[1] /*command*/) /*String::to_cstring*/;
+  /* Register variable[8]: Result */
+  variable[8] = CALL_string___Object___to_s( variable[5] /*args*/)( variable[5] /*args*/) /*Buffer::to_s*/;
+  /* Register variable[8]: Result */
+  variable[8] = CALL_string___String___to_cstring(variable[8])(variable[8]) /*String::to_cstring*/;
+  /* Register variable[7]: Result */
+  variable[7] = CALL_exec___Process___basic_exec_execute(variable[0])(variable[0], variable[7], variable[8],  variable[6] /*l*/,  variable[3] /*pipeflags*/) /*Process::basic_exec_execute*/;
+  ATTR_exec___Process____data(variable[0]) /*Process::_data*/ = variable[7];
   return_label8: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Process].i] = 1;
   tracehead = trace.prev;
@@ -177,7 +213,7 @@ void exec___Process___execute(val_t  self, val_t  param0, val_t  param1, val_t  
 val_t exec___Process___basic_exec_execute(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3) {
   struct trace_t trace = {NULL, NULL, 78, LOCATE_exec___Process___basic_exec_execute};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
   tracehead = trace.prev;
@@ -186,12 +222,14 @@ val_t exec___Process___basic_exec_execute(val_t  self, val_t  param0, val_t  par
 void exec___IProcess___close(val_t  self) {
   struct trace_t trace = {NULL, NULL, 87, LOCATE_exec___IProcess___close};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_exec___IProcess____in(variable[2]) /*IProcess::_in*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_exec___IProcess____in(variable[0]) /*IProcess::_in*/;
   CALL_stream___IOS___close(variable[2])(variable[2]) /*FDStream::close*/;
   return_label10: while(false);
   tracehead = trace.prev;
@@ -200,12 +238,15 @@ void exec___IProcess___close(val_t  self) {
 val_t exec___IProcess___read_char(val_t  self) {
   struct trace_t trace = {NULL, NULL, 89, LOCATE_exec___IProcess___read_char};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_exec___IProcess____in(variable[2]) /*IProcess::_in*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_exec___IProcess____in(variable[0]) /*IProcess::_in*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_stream___IStream___read_char(variable[2])(variable[2]) /*FDIStream::read_char*/;
   variable[1] = variable[2];
   goto return_label11;
@@ -216,12 +257,15 @@ val_t exec___IProcess___read_char(val_t  self) {
 val_t exec___IProcess___eof(val_t  self) {
   struct trace_t trace = {NULL, NULL, 91, LOCATE_exec___IProcess___eof};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_exec___IProcess____in(variable[2]) /*IProcess::_in*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_exec___IProcess____in(variable[0]) /*IProcess::_in*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_stream___IStream___eof(variable[2])(variable[2]) /*FDIStream::eof*/;
   variable[1] = variable[2];
   goto return_label12;
@@ -231,25 +275,28 @@ val_t exec___IProcess___eof(val_t  self) {
 }
 void exec___IProcess___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
   struct trace_t trace = {NULL, NULL, 93, LOCATE_exec___IProcess___init};
-  val_t variable[7];
-  void **closurevariable = NULL;
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   /* check if p<Array[String] with p:String */
   if (( param1!=NIT_NULL) && !VAL_ISA( param1, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_exec___IProcess___init, LOCATE_exec, 93); nit_exit(1); } /*cast Array[String]*/;
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IProcess].i]) return;
-  variable[4] = variable[0];
-  CALL_exec___Process___execute(variable[4])(variable[4],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(2), init_table /*YYY*/) /*Process::execute*/;
-  variable[4] = variable[0];
-  variable[5] = variable[0];
-  variable[5] = ATTR_exec___Process____data(variable[5]) /*Process::_data*/;
-  variable[5] = CALL_exec___NativeProcess___out_fd(variable[5])(variable[5]) /*NativeProcess::out_fd*/;
-  variable[6] = NEW_FDIStream_stream___FDIStream___init(variable[5]); /*new FDIStream*/
-  variable[5] = variable[6];
-  ATTR_exec___IProcess____in(variable[4]) /*IProcess::_in*/ = variable[5];
+  /* Register variable[3]: Method return value and escape marker */
+  CALL_exec___Process___execute(variable[0])(variable[0],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(2), init_table /*YYY*/) /*Process::execute*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_exec___Process____data(variable[0]) /*Process::_data*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_exec___NativeProcess___out_fd(variable[4])(variable[4]) /*NativeProcess::out_fd*/;
+  /* Register variable[4]: Result */
+  variable[4] = NEW_FDIStream_stream___FDIStream___init(variable[4]) /*new FDIStream*/;
+  ATTR_exec___IProcess____in(variable[0]) /*IProcess::_in*/ = variable[4];
   return_label13: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IProcess].i] = 1;
   tracehead = trace.prev;
@@ -257,22 +304,24 @@ void exec___IProcess___init(val_t  self, val_t  param0, val_t  param1, int* init
 }
 void exec___IProcess___init_(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 99, LOCATE_exec___IProcess___init_};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IProcess].i]) return;
-  variable[3] = variable[0];
-  CALL_exec___Process___execute(variable[3])(variable[3],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(2), init_table /*YYY*/) /*Process::execute*/;
-  variable[3] = variable[0];
-  variable[4] = variable[0];
-  variable[4] = ATTR_exec___Process____data(variable[4]) /*Process::_data*/;
-  variable[4] = CALL_exec___NativeProcess___out_fd(variable[4])(variable[4]) /*NativeProcess::out_fd*/;
-  variable[5] = NEW_FDIStream_stream___FDIStream___init(variable[4]); /*new FDIStream*/
-  variable[4] = variable[5];
-  ATTR_exec___IProcess____in(variable[3]) /*IProcess::_in*/ = variable[4];
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_exec___Process___execute(variable[0])(variable[0],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(2), init_table /*YYY*/) /*Process::execute*/;
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_exec___Process____data(variable[0]) /*Process::_data*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_exec___NativeProcess___out_fd(variable[3])(variable[3]) /*NativeProcess::out_fd*/;
+  /* Register variable[3]: Result */
+  variable[3] = NEW_FDIStream_stream___FDIStream___init(variable[3]) /*new FDIStream*/;
+  ATTR_exec___IProcess____in(variable[0]) /*IProcess::_in*/ = variable[3];
   return_label14: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IProcess].i] = 1;
   tracehead = trace.prev;
@@ -281,12 +330,14 @@ void exec___IProcess___init_(val_t  self, val_t  param0, int* init_table) {
 void exec___OProcess___close(val_t  self) {
   struct trace_t trace = {NULL, NULL, 112, LOCATE_exec___OProcess___close};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_exec___OProcess____out(variable[2]) /*OProcess::_out*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_exec___OProcess____out(variable[0]) /*OProcess::_out*/;
   CALL_stream___IOS___close(variable[2])(variable[2]) /*IOS::close*/;
   return_label15: while(false);
   tracehead = trace.prev;
@@ -295,13 +346,16 @@ void exec___OProcess___close(val_t  self) {
 void exec___OProcess___write(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 116, LOCATE_exec___OProcess___write};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_exec___OProcess____out(variable[3]) /*OProcess::_out*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_exec___OProcess____out(variable[0]) /*OProcess::_out*/;
   CALL_stream___OStream___write(variable[3])(variable[3],  variable[1] /*s*/) /*OStream::write*/;
   return_label16: while(false);
   tracehead = trace.prev;
@@ -310,12 +364,15 @@ void exec___OProcess___write(val_t  self, val_t  param0) {
 val_t exec___OProcess___is_writable(val_t  self) {
   struct trace_t trace = {NULL, NULL, 114, LOCATE_exec___OProcess___is_writable};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_exec___OProcess____out(variable[2]) /*OProcess::_out*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_exec___OProcess____out(variable[0]) /*OProcess::_out*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_stream___OStream___is_writable(variable[2])(variable[2]) /*OStream::is_writable*/;
   variable[1] = variable[2];
   goto return_label17;
@@ -325,25 +382,28 @@ val_t exec___OProcess___is_writable(val_t  self) {
 }
 void exec___OProcess___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
   struct trace_t trace = {NULL, NULL, 118, LOCATE_exec___OProcess___init};
-  val_t variable[7];
-  void **closurevariable = NULL;
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   /* check if p<Array[String] with p:String */
   if (( param1!=NIT_NULL) && !VAL_ISA( param1, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_exec___OProcess___init, LOCATE_exec, 118); nit_exit(1); } /*cast Array[String]*/;
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OProcess].i]) return;
-  variable[4] = variable[0];
-  CALL_exec___Process___execute(variable[4])(variable[4],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(1), init_table /*YYY*/) /*Process::execute*/;
-  variable[4] = variable[0];
-  variable[5] = variable[0];
-  variable[5] = ATTR_exec___Process____data(variable[5]) /*Process::_data*/;
-  variable[5] = CALL_exec___NativeProcess___in_fd(variable[5])(variable[5]) /*NativeProcess::in_fd*/;
-  variable[6] = NEW_FDOStream_stream___FDOStream___init(variable[5]); /*new FDOStream*/
-  variable[5] = variable[6];
-  ATTR_exec___OProcess____out(variable[4]) /*OProcess::_out*/ = variable[5];
+  /* Register variable[3]: Method return value and escape marker */
+  CALL_exec___Process___execute(variable[0])(variable[0],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(1), init_table /*YYY*/) /*Process::execute*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_exec___Process____data(variable[0]) /*Process::_data*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_exec___NativeProcess___in_fd(variable[4])(variable[4]) /*NativeProcess::in_fd*/;
+  /* Register variable[4]: Result */
+  variable[4] = NEW_FDOStream_stream___FDOStream___init(variable[4]) /*new FDOStream*/;
+  ATTR_exec___OProcess____out(variable[0]) /*OProcess::_out*/ = variable[4];
   return_label18: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OProcess].i] = 1;
   tracehead = trace.prev;
@@ -351,22 +411,24 @@ void exec___OProcess___init(val_t  self, val_t  param0, val_t  param1, int* init
 }
 void exec___OProcess___init_(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 124, LOCATE_exec___OProcess___init_};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OProcess].i]) return;
-  variable[3] = variable[0];
-  CALL_exec___Process___execute(variable[3])(variable[3],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(1), init_table /*YYY*/) /*Process::execute*/;
-  variable[3] = variable[0];
-  variable[4] = variable[0];
-  variable[4] = ATTR_exec___Process____data(variable[4]) /*Process::_data*/;
-  variable[4] = CALL_exec___NativeProcess___in_fd(variable[4])(variable[4]) /*NativeProcess::in_fd*/;
-  variable[5] = NEW_FDOStream_stream___FDOStream___init(variable[4]); /*new FDOStream*/
-  variable[4] = variable[5];
-  ATTR_exec___OProcess____out(variable[3]) /*OProcess::_out*/ = variable[4];
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_exec___Process___execute(variable[0])(variable[0],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(1), init_table /*YYY*/) /*Process::execute*/;
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_exec___Process____data(variable[0]) /*Process::_data*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_exec___NativeProcess___in_fd(variable[3])(variable[3]) /*NativeProcess::in_fd*/;
+  /* Register variable[3]: Result */
+  variable[3] = NEW_FDOStream_stream___FDOStream___init(variable[3]) /*new FDOStream*/;
+  ATTR_exec___OProcess____out(variable[0]) /*OProcess::_out*/ = variable[3];
   return_label19: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OProcess].i] = 1;
   tracehead = trace.prev;
@@ -375,15 +437,17 @@ void exec___OProcess___init_(val_t  self, val_t  param0, int* init_table) {
 void exec___IOProcess___close(val_t  self) {
   struct trace_t trace = {NULL, NULL, 137, LOCATE_exec___IOProcess___close};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_exec___IProcess____in(variable[2]) /*IProcess::_in*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_exec___IProcess____in(variable[0]) /*IProcess::_in*/;
   CALL_stream___IOS___close(variable[2])(variable[2]) /*FDStream::close*/;
-  variable[2] = variable[0];
-  variable[2] = ATTR_exec___OProcess____out(variable[2]) /*OProcess::_out*/;
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_exec___OProcess____out(variable[0]) /*OProcess::_out*/;
   CALL_stream___IOS___close(variable[2])(variable[2]) /*IOS::close*/;
   return_label20: while(false);
   tracehead = trace.prev;
@@ -391,34 +455,37 @@ void exec___IOProcess___close(val_t  self) {
 }
 void exec___IOProcess___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
   struct trace_t trace = {NULL, NULL, 143, LOCATE_exec___IOProcess___init};
-  val_t variable[7];
-  void **closurevariable = NULL;
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   /* check if p<Array[String] with p:String */
   if (( param1!=NIT_NULL) && !VAL_ISA( param1, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_exec___IOProcess___init, LOCATE_exec, 143); nit_exit(1); } /*cast Array[String]*/;
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IOProcess].i]) return;
-  variable[4] = variable[0];
-  CALL_exec___Process___execute(variable[4])(variable[4],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(3), init_table /*YYY*/) /*Process::execute*/;
+  /* Register variable[3]: Method return value and escape marker */
+  CALL_exec___Process___execute(variable[0])(variable[0],  variable[1] /*command*/,  variable[2] /*arguments*/,  TAG_Int(3), init_table /*YYY*/) /*Process::execute*/;
   CALL_exec___IProcess___init(variable[0])(variable[0], variable[1], variable[2], init_table /*YYY*/) /*IProcess::init*/;
   CALL_exec___OProcess___init(variable[0])(variable[0], variable[1], variable[2], init_table /*YYY*/) /*OProcess::init*/;
-  variable[4] = variable[0];
-  variable[5] = variable[0];
-  variable[5] = ATTR_exec___Process____data(variable[5]) /*Process::_data*/;
-  variable[5] = CALL_exec___NativeProcess___out_fd(variable[5])(variable[5]) /*NativeProcess::out_fd*/;
-  variable[6] = NEW_FDIStream_stream___FDIStream___init(variable[5]); /*new FDIStream*/
-  variable[5] = variable[6];
-  ATTR_exec___IProcess____in(variable[4]) /*IProcess::_in*/ = variable[5];
-  variable[4] = variable[0];
-  variable[5] = variable[0];
-  variable[5] = ATTR_exec___Process____data(variable[5]) /*Process::_data*/;
-  variable[5] = CALL_exec___NativeProcess___in_fd(variable[5])(variable[5]) /*NativeProcess::in_fd*/;
-  variable[6] = NEW_FDOStream_stream___FDOStream___init(variable[5]); /*new FDOStream*/
-  variable[5] = variable[6];
-  ATTR_exec___OProcess____out(variable[4]) /*OProcess::_out*/ = variable[5];
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_exec___Process____data(variable[0]) /*Process::_data*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_exec___NativeProcess___out_fd(variable[4])(variable[4]) /*NativeProcess::out_fd*/;
+  /* Register variable[4]: Result */
+  variable[4] = NEW_FDIStream_stream___FDIStream___init(variable[4]) /*new FDIStream*/;
+  ATTR_exec___IProcess____in(variable[0]) /*IProcess::_in*/ = variable[4];
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_exec___Process____data(variable[0]) /*Process::_data*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_exec___NativeProcess___in_fd(variable[4])(variable[4]) /*NativeProcess::in_fd*/;
+  /* Register variable[4]: Result */
+  variable[4] = NEW_FDOStream_stream___FDOStream___init(variable[4]) /*new FDOStream*/;
+  ATTR_exec___OProcess____out(variable[0]) /*OProcess::_out*/ = variable[4];
   return_label21: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IOProcess].i] = 1;
   tracehead = trace.prev;
@@ -426,31 +493,33 @@ void exec___IOProcess___init(val_t  self, val_t  param0, val_t  param1, int* ini
 }
 void exec___IOProcess___init_(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 150, LOCATE_exec___IOProcess___init_};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IOProcess].i]) return;
-  variable[3] = variable[0];
-  CALL_exec___Process___execute(variable[3])(variable[3],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(3), init_table /*YYY*/) /*Process::execute*/;
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_exec___Process___execute(variable[0])(variable[0],  variable[1] /*command*/,  NIT_NULL /*null*/,  TAG_Int(3), init_table /*YYY*/) /*Process::execute*/;
   CALL_exec___IProcess___init_(variable[0])(variable[0], variable[1], init_table /*YYY*/) /*IProcess::init_*/;
   CALL_exec___OProcess___init_(variable[0])(variable[0], variable[1], init_table /*YYY*/) /*OProcess::init_*/;
-  variable[3] = variable[0];
-  variable[4] = variable[0];
-  variable[4] = ATTR_exec___Process____data(variable[4]) /*Process::_data*/;
-  variable[4] = CALL_exec___NativeProcess___out_fd(variable[4])(variable[4]) /*NativeProcess::out_fd*/;
-  variable[5] = NEW_FDIStream_stream___FDIStream___init(variable[4]); /*new FDIStream*/
-  variable[4] = variable[5];
-  ATTR_exec___IProcess____in(variable[3]) /*IProcess::_in*/ = variable[4];
-  variable[3] = variable[0];
-  variable[4] = variable[0];
-  variable[4] = ATTR_exec___Process____data(variable[4]) /*Process::_data*/;
-  variable[4] = CALL_exec___NativeProcess___in_fd(variable[4])(variable[4]) /*NativeProcess::in_fd*/;
-  variable[5] = NEW_FDOStream_stream___FDOStream___init(variable[4]); /*new FDOStream*/
-  variable[4] = variable[5];
-  ATTR_exec___OProcess____out(variable[3]) /*OProcess::_out*/ = variable[4];
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_exec___Process____data(variable[0]) /*Process::_data*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_exec___NativeProcess___out_fd(variable[3])(variable[3]) /*NativeProcess::out_fd*/;
+  /* Register variable[3]: Result */
+  variable[3] = NEW_FDIStream_stream___FDIStream___init(variable[3]) /*new FDIStream*/;
+  ATTR_exec___IProcess____in(variable[0]) /*IProcess::_in*/ = variable[3];
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_exec___Process____data(variable[0]) /*Process::_data*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_exec___NativeProcess___in_fd(variable[3])(variable[3]) /*NativeProcess::in_fd*/;
+  /* Register variable[3]: Result */
+  variable[3] = NEW_FDOStream_stream___FDOStream___init(variable[3]) /*new FDOStream*/;
+  ATTR_exec___OProcess____out(variable[0]) /*OProcess::_out*/ = variable[3];
   return_label22: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_IOProcess].i] = 1;
   tracehead = trace.prev;
@@ -459,12 +528,17 @@ void exec___IOProcess___init_(val_t  self, val_t  param0, int* init_table) {
 val_t exec___Sys___system(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 159, LOCATE_exec___Sys___system};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
   variable[3] = CALL_string___String___to_cstring( variable[1] /*command*/)( variable[1] /*command*/) /*String::to_cstring*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_exec___NativeString___system(variable[3])(variable[3]) /*NativeString::system*/;
   variable[2] = variable[3];
   goto return_label23;
@@ -475,7 +549,7 @@ val_t exec___Sys___system(val_t  self, val_t  param0) {
 val_t exec___NativeString___system(val_t  self) {
   struct trace_t trace = {NULL, NULL, 167, LOCATE_exec___NativeString___system};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
   tracehead = trace.prev;
@@ -484,7 +558,7 @@ val_t exec___NativeString___system(val_t  self) {
 val_t exec___NativeProcess___id(val_t  self) {
   struct trace_t trace = {NULL, NULL, 172, LOCATE_exec___NativeProcess___id};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
   tracehead = trace.prev;
@@ -493,7 +567,7 @@ val_t exec___NativeProcess___id(val_t  self) {
 val_t exec___NativeProcess___is_finished(val_t  self) {
   struct trace_t trace = {NULL, NULL, 173, LOCATE_exec___NativeProcess___is_finished};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
   tracehead = trace.prev;
@@ -502,7 +576,7 @@ val_t exec___NativeProcess___is_finished(val_t  self) {
 val_t exec___NativeProcess___status(val_t  self) {
   struct trace_t trace = {NULL, NULL, 174, LOCATE_exec___NativeProcess___status};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
   tracehead = trace.prev;
@@ -511,7 +585,7 @@ val_t exec___NativeProcess___status(val_t  self) {
 void exec___NativeProcess___wait(val_t  self) {
   struct trace_t trace = {NULL, NULL, 175, LOCATE_exec___NativeProcess___wait};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
   exec_NativeProcess_NativeProcess_wait_0(UNBOX_NativeProcess( self));
@@ -521,7 +595,7 @@ void exec___NativeProcess___wait(val_t  self) {
 void exec___NativeProcess___kill(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 176, LOCATE_exec___NativeProcess___kill};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
   exec_NativeProcess_NativeProcess_kill_1(UNBOX_NativeProcess( self), UNTAG_Int( param0));
@@ -531,7 +605,7 @@ void exec___NativeProcess___kill(val_t  self, val_t  param0) {
 val_t exec___NativeProcess___in_fd(val_t  self) {
   struct trace_t trace = {NULL, NULL, 178, LOCATE_exec___NativeProcess___in_fd};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
   tracehead = trace.prev;
@@ -540,7 +614,7 @@ val_t exec___NativeProcess___in_fd(val_t  self) {
 val_t exec___NativeProcess___out_fd(val_t  self) {
   struct trace_t trace = {NULL, NULL, 179, LOCATE_exec___NativeProcess___out_fd};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
   tracehead = trace.prev;
@@ -549,7 +623,7 @@ val_t exec___NativeProcess___out_fd(val_t  self) {
 val_t exec___NativeProcess___err_fd(val_t  self) {
   struct trace_t trace = {NULL, NULL, 180, LOCATE_exec___NativeProcess___err_fd};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_exec;
   tracehead = trace.prev;

@@ -5,7 +5,11 @@
 #include <nit_common.h>
 #include <string_nit.h>
 
+extern const classtable_elt_t VFT_AbstractString[];
+
 extern const classtable_elt_t VFT_String[];
+
+extern const classtable_elt_t VFT_Buffer[];
 
 extern const classtable_elt_t VFT_NativeString[];
 struct TBOX_NativeString { const classtable_elt_t * vft; char * val;};
@@ -15,134 +19,116 @@ val_t BOX_NativeString(char * val);
 extern const classtable_elt_t VFT_StringCapable[];
 extern const char *LOCATE_string;
 extern const int SFT_string[];
-#define ID_String (SFT_string[0])
-#define COLOR_String (SFT_string[1])
-#define ATTR_string___String____items(recv) ATTR(recv, (SFT_string[2] + 0))
-#define ATTR_string___String____capacity(recv) ATTR(recv, (SFT_string[2] + 1))
-#define INIT_TABLE_POS_String (SFT_string[3] + 0)
-#define CALL_SUPER_string___String___append(recv) ((string___String___append_t)CALL((recv), (SFT_string[3] + 1)))
-#define CALL_string___String_____plus(recv) ((string___String_____plus_t)CALL((recv), (SFT_string[3] + 2)))
-#define CALL_string___String_____star(recv) ((string___String_____star_t)CALL((recv), (SFT_string[3] + 3)))
-#define CALL_string___String___to_i(recv) ((string___String___to_i_t)CALL((recv), (SFT_string[3] + 4)))
-#define CALL_string___String___to_hex(recv) ((string___String___to_hex_t)CALL((recv), (SFT_string[3] + 5)))
-#define CALL_string___String___a_to(recv) ((string___String___a_to_t)CALL((recv), (SFT_string[3] + 6)))
-#define CALL_string___String___to_cstring(recv) ((string___String___to_cstring_t)CALL((recv), (SFT_string[3] + 7)))
-#define CALL_string___String___substring(recv) ((string___String___substring_t)CALL((recv), (SFT_string[3] + 8)))
-#define CALL_string___String___substring_from(recv) ((string___String___substring_from_t)CALL((recv), (SFT_string[3] + 9)))
-#define CALL_string___String___has_substring(recv) ((string___String___has_substring_t)CALL((recv), (SFT_string[3] + 10)))
-#define CALL_string___String___has_prefix(recv) ((string___String___has_prefix_t)CALL((recv), (SFT_string[3] + 11)))
-#define CALL_string___String___has_suffix(recv) ((string___String___has_suffix_t)CALL((recv), (SFT_string[3] + 12)))
-#define CALL_string___String___init(recv) ((string___String___init_t)CALL((recv), (SFT_string[3] + 13)))
-#define CALL_string___String___from(recv) ((string___String___from_t)CALL((recv), (SFT_string[3] + 14)))
-#define CALL_string___String___with_capacity(recv) ((string___String___with_capacity_t)CALL((recv), (SFT_string[3] + 15)))
-#define CALL_string___String___with_native(recv) ((string___String___with_native_t)CALL((recv), (SFT_string[3] + 16)))
-#define CALL_string___String___from_cstring(recv) ((string___String___from_cstring_t)CALL((recv), (SFT_string[3] + 17)))
-#define CALL_string___String___filled_with(recv) ((string___String___filled_with_t)CALL((recv), (SFT_string[3] + 18)))
-#define CALL_string___String___to_upper(recv) ((string___String___to_upper_t)CALL((recv), (SFT_string[3] + 19)))
-#define CALL_string___String___to_lower(recv) ((string___String___to_lower_t)CALL((recv), (SFT_string[3] + 20)))
-#define CALL_string___String___items(recv) ((string___String___items_t)CALL((recv), (SFT_string[3] + 21)))
-#define CALL_string___String___capacity(recv) ((string___String___capacity_t)CALL((recv), (SFT_string[3] + 22)))
-#define CALL_string___Object___to_s(recv) ((string___Object___to_s_t)CALL((recv), (SFT_string[4] + 0)))
-#define CALL_string___Object___inspect(recv) ((string___Object___inspect_t)CALL((recv), (SFT_string[4] + 1)))
-#define CALL_string___Object___inspect_head(recv) ((string___Object___inspect_head_t)CALL((recv), (SFT_string[4] + 2)))
-#define CALL_string___Object___args(recv) ((string___Object___args_t)CALL((recv), (SFT_string[4] + 3)))
-#define CALL_string___Int___fill_string(recv) ((string___Int___fill_string_t)CALL((recv), (SFT_string[5] + 0)))
-#define CALL_string___Int___to_hex(recv) ((string___Int___to_hex_t)CALL((recv), (SFT_string[5] + 1)))
-#define CALL_string___Int___to_base(recv) ((string___Int___to_base_t)CALL((recv), (SFT_string[5] + 2)))
-#define CALL_string___Float___to_precision(recv) ((string___Float___to_precision_t)CALL((recv), (SFT_string[6] + 0)))
-#define CALL_string___Collection___join(recv) ((string___Collection___join_t)CALL((recv), (SFT_string[7] + 0)))
-#define CALL_string___Map___map_join(recv) ((string___Map___map_join_t)CALL((recv), (SFT_string[8] + 0)))
-#define ID_NativeString (SFT_string[9])
-#define COLOR_NativeString (SFT_string[10])
-#define INIT_TABLE_POS_NativeString (SFT_string[11] + 0)
-#define CALL_string___NativeString_____bra(recv) ((string___NativeString_____bra_t)CALL((recv), (SFT_string[11] + 1)))
-#define CALL_string___NativeString_____braeq(recv) ((string___NativeString_____braeq_t)CALL((recv), (SFT_string[11] + 2)))
-#define CALL_string___NativeString___copy_to(recv) ((string___NativeString___copy_to_t)CALL((recv), (SFT_string[11] + 3)))
-#define CALL_string___NativeString___cstring_length(recv) ((string___NativeString___cstring_length_t)CALL((recv), (SFT_string[11] + 4)))
-#define CALL_string___NativeString___atoi(recv) ((string___NativeString___atoi_t)CALL((recv), (SFT_string[11] + 5)))
-#define CALL_string___NativeString___init(recv) ((string___NativeString___init_t)CALL((recv), (SFT_string[11] + 6)))
-#define ID_StringCapable (SFT_string[12])
-#define COLOR_StringCapable (SFT_string[13])
-#define INIT_TABLE_POS_StringCapable (SFT_string[14] + 0)
-#define CALL_string___StringCapable___calloc_string(recv) ((string___StringCapable___calloc_string_t)CALL((recv), (SFT_string[14] + 1)))
-#define CALL_string___StringCapable___init(recv) ((string___StringCapable___init_t)CALL((recv), (SFT_string[14] + 2)))
-#define ATTR_string___Sys____args_cache(recv) ATTR(recv, (SFT_string[15] + 0))
-#define CALL_string___Sys___program_name(recv) ((string___Sys___program_name_t)CALL((recv), (SFT_string[16] + 0)))
-#define CALL_string___Sys___init_args(recv) ((string___Sys___init_args_t)CALL((recv), (SFT_string[16] + 1)))
-#define CALL_string___Sys___native_argc(recv) ((string___Sys___native_argc_t)CALL((recv), (SFT_string[16] + 2)))
-#define CALL_string___Sys___native_argv(recv) ((string___Sys___native_argv_t)CALL((recv), (SFT_string[16] + 3)))
+#define ID_AbstractString (SFT_string[0])
+#define COLOR_AbstractString (SFT_string[1])
+#define ATTR_string___AbstractString____items(recv) ATTR(recv, (SFT_string[2] + 0))
+#define INIT_TABLE_POS_AbstractString (SFT_string[3] + 0)
+#define CALL_string___AbstractString___items(recv) ((string___AbstractString___items_t)CALL((recv), (SFT_string[3] + 1)))
+#define CALL_string___AbstractString___substring(recv) ((string___AbstractString___substring_t)CALL((recv), (SFT_string[3] + 2)))
+#define CALL_string___AbstractString___substring_from(recv) ((string___AbstractString___substring_from_t)CALL((recv), (SFT_string[3] + 3)))
+#define CALL_string___AbstractString___has_substring(recv) ((string___AbstractString___has_substring_t)CALL((recv), (SFT_string[3] + 4)))
+#define CALL_string___AbstractString___has_prefix(recv) ((string___AbstractString___has_prefix_t)CALL((recv), (SFT_string[3] + 5)))
+#define CALL_string___AbstractString___has_suffix(recv) ((string___AbstractString___has_suffix_t)CALL((recv), (SFT_string[3] + 6)))
+#define CALL_string___AbstractString___to_i(recv) ((string___AbstractString___to_i_t)CALL((recv), (SFT_string[3] + 7)))
+#define CALL_string___AbstractString___to_hex(recv) ((string___AbstractString___to_hex_t)CALL((recv), (SFT_string[3] + 8)))
+#define CALL_string___AbstractString___a_to(recv) ((string___AbstractString___a_to_t)CALL((recv), (SFT_string[3] + 9)))
+#define CALL_string___AbstractString___to_upper(recv) ((string___AbstractString___to_upper_t)CALL((recv), (SFT_string[3] + 10)))
+#define CALL_string___AbstractString___to_lower(recv) ((string___AbstractString___to_lower_t)CALL((recv), (SFT_string[3] + 11)))
+#define ID_String (SFT_string[4])
+#define COLOR_String (SFT_string[5])
+#define INIT_TABLE_POS_String (SFT_string[6] + 0)
+#define CALL_string___String___with_native(recv) ((string___String___with_native_t)CALL((recv), (SFT_string[6] + 1)))
+#define CALL_string___String___from_cstring(recv) ((string___String___from_cstring_t)CALL((recv), (SFT_string[6] + 2)))
+#define CALL_string___String___to_cstring(recv) ((string___String___to_cstring_t)CALL((recv), (SFT_string[6] + 3)))
+#define CALL_string___String_____plus(recv) ((string___String_____plus_t)CALL((recv), (SFT_string[6] + 4)))
+#define CALL_string___String_____star(recv) ((string___String_____star_t)CALL((recv), (SFT_string[6] + 5)))
+#define ID_Buffer (SFT_string[7])
+#define COLOR_Buffer (SFT_string[8])
+#define ATTR_string___Buffer____capacity(recv) ATTR(recv, (SFT_string[9] + 0))
+#define INIT_TABLE_POS_Buffer (SFT_string[10] + 0)
+#define CALL_SUPER_string___Buffer___append(recv) ((string___Buffer___append_t)CALL((recv), (SFT_string[10] + 1)))
+#define CALL_string___Buffer___init(recv) ((string___Buffer___init_t)CALL((recv), (SFT_string[10] + 2)))
+#define CALL_string___Buffer___from(recv) ((string___Buffer___from_t)CALL((recv), (SFT_string[10] + 3)))
+#define CALL_string___Buffer___with_capacity(recv) ((string___Buffer___with_capacity_t)CALL((recv), (SFT_string[10] + 4)))
+#define CALL_string___Buffer___capacity(recv) ((string___Buffer___capacity_t)CALL((recv), (SFT_string[10] + 5)))
+#define CALL_string___Object___to_s(recv) ((string___Object___to_s_t)CALL((recv), (SFT_string[11] + 0)))
+#define CALL_string___Object___inspect(recv) ((string___Object___inspect_t)CALL((recv), (SFT_string[11] + 1)))
+#define CALL_string___Object___inspect_head(recv) ((string___Object___inspect_head_t)CALL((recv), (SFT_string[11] + 2)))
+#define CALL_string___Object___args(recv) ((string___Object___args_t)CALL((recv), (SFT_string[11] + 3)))
+#define CALL_string___Int___fill_buffer(recv) ((string___Int___fill_buffer_t)CALL((recv), (SFT_string[12] + 0)))
+#define CALL_string___Int___to_hex(recv) ((string___Int___to_hex_t)CALL((recv), (SFT_string[12] + 1)))
+#define CALL_string___Int___to_base(recv) ((string___Int___to_base_t)CALL((recv), (SFT_string[12] + 2)))
+#define CALL_string___Float___to_precision(recv) ((string___Float___to_precision_t)CALL((recv), (SFT_string[13] + 0)))
+#define CALL_string___Collection___join(recv) ((string___Collection___join_t)CALL((recv), (SFT_string[14] + 0)))
+#define CALL_string___Map___map_join(recv) ((string___Map___map_join_t)CALL((recv), (SFT_string[15] + 0)))
+#define ID_NativeString (SFT_string[16])
+#define COLOR_NativeString (SFT_string[17])
+#define INIT_TABLE_POS_NativeString (SFT_string[18] + 0)
+#define CALL_string___NativeString_____bra(recv) ((string___NativeString_____bra_t)CALL((recv), (SFT_string[18] + 1)))
+#define CALL_string___NativeString_____braeq(recv) ((string___NativeString_____braeq_t)CALL((recv), (SFT_string[18] + 2)))
+#define CALL_string___NativeString___copy_to(recv) ((string___NativeString___copy_to_t)CALL((recv), (SFT_string[18] + 3)))
+#define CALL_string___NativeString___cstring_length(recv) ((string___NativeString___cstring_length_t)CALL((recv), (SFT_string[18] + 4)))
+#define CALL_string___NativeString___atoi(recv) ((string___NativeString___atoi_t)CALL((recv), (SFT_string[18] + 5)))
+#define CALL_string___NativeString___init(recv) ((string___NativeString___init_t)CALL((recv), (SFT_string[18] + 6)))
+#define ID_StringCapable (SFT_string[19])
+#define COLOR_StringCapable (SFT_string[20])
+#define INIT_TABLE_POS_StringCapable (SFT_string[21] + 0)
+#define CALL_string___StringCapable___calloc_string(recv) ((string___StringCapable___calloc_string_t)CALL((recv), (SFT_string[21] + 1)))
+#define CALL_string___StringCapable___init(recv) ((string___StringCapable___init_t)CALL((recv), (SFT_string[21] + 2)))
+#define ATTR_string___Sys____args_cache(recv) ATTR(recv, (SFT_string[22] + 0))
+#define CALL_string___Sys___program_name(recv) ((string___Sys___program_name_t)CALL((recv), (SFT_string[23] + 0)))
+#define CALL_string___Sys___init_args(recv) ((string___Sys___init_args_t)CALL((recv), (SFT_string[23] + 1)))
+#define CALL_string___Sys___native_argc(recv) ((string___Sys___native_argc_t)CALL((recv), (SFT_string[23] + 2)))
+#define CALL_string___Sys___native_argv(recv) ((string___Sys___native_argv_t)CALL((recv), (SFT_string[23] + 3)))
+typedef void (* string___AbstractString___output_t)(val_t  self);
+void string___AbstractString___output(val_t  self);
+#define LOCATE_string___AbstractString___output "string::AbstractString::(kernel::Object::output)"
+typedef val_t (* string___AbstractString_____bra_t)(val_t  self, val_t  param0);
+val_t string___AbstractString_____bra(val_t  self, val_t  param0);
+#define LOCATE_string___AbstractString_____bra "string::AbstractString::(abstract_collection::MapRead::[])"
+val_t NEW_AbstractString_array___AbstractArrayRead___init();
+typedef val_t (* string___AbstractString___items_t)(val_t  self);
+val_t string___AbstractString___items(val_t  self);
+#define LOCATE_string___AbstractString___items "string::AbstractString::items"
+typedef val_t (* string___AbstractString___substring_t)(val_t  self, val_t  param0, val_t  param1);
+val_t string___AbstractString___substring(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_string___AbstractString___substring "string::AbstractString::substring"
+typedef val_t (* string___AbstractString___substring_from_t)(val_t  self, val_t  param0);
+val_t string___AbstractString___substring_from(val_t  self, val_t  param0);
+#define LOCATE_string___AbstractString___substring_from "string::AbstractString::substring_from"
+typedef val_t (* string___AbstractString___has_substring_t)(val_t  self, val_t  param0, val_t  param1);
+val_t string___AbstractString___has_substring(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_string___AbstractString___has_substring "string::AbstractString::has_substring"
+typedef val_t (* string___AbstractString___has_prefix_t)(val_t  self, val_t  param0);
+val_t string___AbstractString___has_prefix(val_t  self, val_t  param0);
+#define LOCATE_string___AbstractString___has_prefix "string::AbstractString::has_prefix"
+typedef val_t (* string___AbstractString___has_suffix_t)(val_t  self, val_t  param0);
+val_t string___AbstractString___has_suffix(val_t  self, val_t  param0);
+#define LOCATE_string___AbstractString___has_suffix "string::AbstractString::has_suffix"
+typedef val_t (* string___AbstractString___to_i_t)(val_t  self);
+val_t string___AbstractString___to_i(val_t  self);
+#define LOCATE_string___AbstractString___to_i "string::AbstractString::to_i"
+typedef val_t (* string___AbstractString___to_hex_t)(val_t  self);
+val_t string___AbstractString___to_hex(val_t  self);
+#define LOCATE_string___AbstractString___to_hex "string::AbstractString::to_hex"
+typedef val_t (* string___AbstractString___a_to_t)(val_t  self, val_t  param0);
+val_t string___AbstractString___a_to(val_t  self, val_t  param0);
+#define LOCATE_string___AbstractString___a_to "string::AbstractString::a_to"
+typedef val_t (* string___AbstractString___to_upper_t)(val_t  self);
+val_t string___AbstractString___to_upper(val_t  self);
+#define LOCATE_string___AbstractString___to_upper "string::AbstractString::to_upper"
+typedef val_t (* string___AbstractString___to_lower_t)(val_t  self);
+val_t string___AbstractString___to_lower(val_t  self);
+#define LOCATE_string___AbstractString___to_lower "string::AbstractString::to_lower"
 typedef val_t (* string___String_____eqeq_t)(val_t  self, val_t  param0);
 val_t string___String_____eqeq(val_t  self, val_t  param0);
 #define LOCATE_string___String_____eqeq "string::String::(kernel::Object::==)"
-typedef void (* string___String___output_t)(val_t  self);
-void string___String___output(val_t  self);
-#define LOCATE_string___String___output "string::String::(kernel::Object::output)"
-typedef val_t (* string___String_____bra_t)(val_t  self, val_t  param0);
-val_t string___String_____bra(val_t  self, val_t  param0);
-#define LOCATE_string___String_____bra "string::String::(abstract_collection::Map::[])"
-typedef void (* string___String_____braeq_t)(val_t  self, val_t  param0, val_t  param1);
-void string___String_____braeq(val_t  self, val_t  param0, val_t  param1);
-#define LOCATE_string___String_____braeq "string::String::(abstract_collection::Map::[]=)"
-typedef void (* string___String___add_t)(val_t  self, val_t  param0);
-void string___String___add(val_t  self, val_t  param0);
-#define LOCATE_string___String___add "string::String::(abstract_collection::SimpleCollection::add)"
-typedef void (* string___String___append_t)(val_t  self, val_t  param0);
-void string___String___append(val_t  self, val_t  param0);
-#define LOCATE_string___String___append "string::String::(abstract_collection::IndexedCollection::append)"
-typedef void (* string___String___enlarge_t)(val_t  self, val_t  param0);
-void string___String___enlarge(val_t  self, val_t  param0);
-#define LOCATE_string___String___enlarge "string::String::(array::AbstractArray::enlarge)"
-typedef val_t (* string___String___to_s_t)(val_t  self);
-val_t string___String___to_s(val_t  self);
-#define LOCATE_string___String___to_s "string::String::(string::Object::to_s)"
 typedef val_t (* string___String_____l_t)(val_t  self, val_t  param0);
 val_t string___String_____l(val_t  self, val_t  param0);
 #define LOCATE_string___String_____l "string::String::(kernel::Comparable::<)"
-typedef val_t (* string___String_____plus_t)(val_t  self, val_t  param0);
-val_t string___String_____plus(val_t  self, val_t  param0);
-#define LOCATE_string___String_____plus "string::String::+"
-typedef val_t (* string___String_____star_t)(val_t  self, val_t  param0);
-val_t string___String_____star(val_t  self, val_t  param0);
-#define LOCATE_string___String_____star "string::String::*"
-typedef val_t (* string___String___to_i_t)(val_t  self);
-val_t string___String___to_i(val_t  self);
-#define LOCATE_string___String___to_i "string::String::to_i"
-typedef val_t (* string___String___to_hex_t)(val_t  self);
-val_t string___String___to_hex(val_t  self);
-#define LOCATE_string___String___to_hex "string::String::to_hex"
-typedef val_t (* string___String___a_to_t)(val_t  self, val_t  param0);
-val_t string___String___a_to(val_t  self, val_t  param0);
-#define LOCATE_string___String___a_to "string::String::a_to"
-typedef val_t (* string___String___to_cstring_t)(val_t  self);
-val_t string___String___to_cstring(val_t  self);
-#define LOCATE_string___String___to_cstring "string::String::to_cstring"
-typedef val_t (* string___String___substring_t)(val_t  self, val_t  param0, val_t  param1);
-val_t string___String___substring(val_t  self, val_t  param0, val_t  param1);
-#define LOCATE_string___String___substring "string::String::substring"
-typedef val_t (* string___String___substring_from_t)(val_t  self, val_t  param0);
-val_t string___String___substring_from(val_t  self, val_t  param0);
-#define LOCATE_string___String___substring_from "string::String::substring_from"
-typedef val_t (* string___String___has_substring_t)(val_t  self, val_t  param0, val_t  param1);
-val_t string___String___has_substring(val_t  self, val_t  param0, val_t  param1);
-#define LOCATE_string___String___has_substring "string::String::has_substring"
-typedef val_t (* string___String___has_prefix_t)(val_t  self, val_t  param0);
-val_t string___String___has_prefix(val_t  self, val_t  param0);
-#define LOCATE_string___String___has_prefix "string::String::has_prefix"
-typedef val_t (* string___String___has_suffix_t)(val_t  self, val_t  param0);
-val_t string___String___has_suffix(val_t  self, val_t  param0);
-#define LOCATE_string___String___has_suffix "string::String::has_suffix"
-typedef void (* string___String___init_t)(val_t  self, int* init_table);
-void string___String___init(val_t  self, int* init_table);
-#define LOCATE_string___String___init "string::String::init"
-val_t NEW_String_string___String___init();
-typedef void (* string___String___from_t)(val_t  self, val_t  param0, int* init_table);
-void string___String___from(val_t  self, val_t  param0, int* init_table);
-#define LOCATE_string___String___from "string::String::from"
-val_t NEW_String_string___String___from(val_t p0);
-typedef void (* string___String___with_capacity_t)(val_t  self, val_t  param0, int* init_table);
-void string___String___with_capacity(val_t  self, val_t  param0, int* init_table);
-#define LOCATE_string___String___with_capacity "string::String::with_capacity"
-val_t NEW_String_string___String___with_capacity(val_t p0);
+typedef val_t (* string___String___to_s_t)(val_t  self);
+val_t string___String___to_s(val_t  self);
+#define LOCATE_string___String___to_s "string::String::(string::Object::to_s)"
 typedef void (* string___String___with_native_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
 void string___String___with_native(val_t  self, val_t  param0, val_t  param1, int* init_table);
 #define LOCATE_string___String___with_native "string::String::with_native"
@@ -151,22 +137,51 @@ typedef void (* string___String___from_cstring_t)(val_t  self, val_t  param0, in
 void string___String___from_cstring(val_t  self, val_t  param0, int* init_table);
 #define LOCATE_string___String___from_cstring "string::String::from_cstring"
 val_t NEW_String_string___String___from_cstring(val_t p0);
-typedef void (* string___String___filled_with_t)(val_t  self, val_t  param0, val_t  param1, int* init_table);
-void string___String___filled_with(val_t  self, val_t  param0, val_t  param1, int* init_table);
-#define LOCATE_string___String___filled_with "string::String::filled_with"
-val_t NEW_String_string___String___filled_with(val_t p0, val_t p1);
-typedef val_t (* string___String___to_upper_t)(val_t  self);
-val_t string___String___to_upper(val_t  self);
-#define LOCATE_string___String___to_upper "string::String::to_upper"
-typedef val_t (* string___String___to_lower_t)(val_t  self);
-val_t string___String___to_lower(val_t  self);
-#define LOCATE_string___String___to_lower "string::String::to_lower"
-typedef val_t (* string___String___items_t)(val_t  self);
-val_t string___String___items(val_t  self);
-#define LOCATE_string___String___items "string::String::items"
-typedef val_t (* string___String___capacity_t)(val_t  self);
-val_t string___String___capacity(val_t  self);
-#define LOCATE_string___String___capacity "string::String::capacity"
+typedef val_t (* string___String___to_cstring_t)(val_t  self);
+val_t string___String___to_cstring(val_t  self);
+#define LOCATE_string___String___to_cstring "string::String::to_cstring"
+typedef val_t (* string___String_____plus_t)(val_t  self, val_t  param0);
+val_t string___String_____plus(val_t  self, val_t  param0);
+#define LOCATE_string___String_____plus "string::String::+"
+typedef val_t (* string___String_____star_t)(val_t  self, val_t  param0);
+val_t string___String_____star(val_t  self, val_t  param0);
+#define LOCATE_string___String_____star "string::String::*"
+typedef val_t (* string___Buffer_____eqeq_t)(val_t  self, val_t  param0);
+val_t string___Buffer_____eqeq(val_t  self, val_t  param0);
+#define LOCATE_string___Buffer_____eqeq "string::Buffer::(kernel::Object::==)"
+typedef val_t (* string___Buffer___to_s_t)(val_t  self);
+val_t string___Buffer___to_s(val_t  self);
+#define LOCATE_string___Buffer___to_s "string::Buffer::(string::Object::to_s)"
+typedef val_t (* string___Buffer_____l_t)(val_t  self, val_t  param0);
+val_t string___Buffer_____l(val_t  self, val_t  param0);
+#define LOCATE_string___Buffer_____l "string::Buffer::(kernel::Comparable::<)"
+typedef void (* string___Buffer_____braeq_t)(val_t  self, val_t  param0, val_t  param1);
+void string___Buffer_____braeq(val_t  self, val_t  param0, val_t  param1);
+#define LOCATE_string___Buffer_____braeq "string::Buffer::(abstract_collection::Map::[]=)"
+typedef void (* string___Buffer___add_t)(val_t  self, val_t  param0);
+void string___Buffer___add(val_t  self, val_t  param0);
+#define LOCATE_string___Buffer___add "string::Buffer::(abstract_collection::SimpleCollection::add)"
+typedef void (* string___Buffer___append_t)(val_t  self, val_t  param0);
+void string___Buffer___append(val_t  self, val_t  param0);
+#define LOCATE_string___Buffer___append "string::Buffer::(abstract_collection::IndexedCollection::append)"
+typedef void (* string___Buffer___enlarge_t)(val_t  self, val_t  param0);
+void string___Buffer___enlarge(val_t  self, val_t  param0);
+#define LOCATE_string___Buffer___enlarge "string::Buffer::(array::AbstractArray::enlarge)"
+typedef void (* string___Buffer___init_t)(val_t  self, int* init_table);
+void string___Buffer___init(val_t  self, int* init_table);
+#define LOCATE_string___Buffer___init "string::Buffer::init"
+val_t NEW_Buffer_string___Buffer___init();
+typedef void (* string___Buffer___from_t)(val_t  self, val_t  param0, int* init_table);
+void string___Buffer___from(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_string___Buffer___from "string::Buffer::from"
+val_t NEW_Buffer_string___Buffer___from(val_t p0);
+typedef void (* string___Buffer___with_capacity_t)(val_t  self, val_t  param0, int* init_table);
+void string___Buffer___with_capacity(val_t  self, val_t  param0, int* init_table);
+#define LOCATE_string___Buffer___with_capacity "string::Buffer::with_capacity"
+val_t NEW_Buffer_string___Buffer___with_capacity(val_t p0);
+typedef val_t (* string___Buffer___capacity_t)(val_t  self);
+val_t string___Buffer___capacity(val_t  self);
+#define LOCATE_string___Buffer___capacity "string::Buffer::capacity"
 typedef val_t (* string___Object___to_s_t)(val_t  self);
 val_t string___Object___to_s(val_t  self);
 #define LOCATE_string___Object___to_s "string::Object::to_s"
@@ -185,9 +200,9 @@ val_t string___Bool___to_s(val_t  self);
 typedef val_t (* string___Int___to_s_t)(val_t  self);
 val_t string___Int___to_s(val_t  self);
 #define LOCATE_string___Int___to_s "string::Int::(string::Object::to_s)"
-typedef void (* string___Int___fill_string_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
-void string___Int___fill_string(val_t  self, val_t  param0, val_t  param1, val_t  param2);
-#define LOCATE_string___Int___fill_string "string::Int::fill_string"
+typedef void (* string___Int___fill_buffer_t)(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+void string___Int___fill_buffer(val_t  self, val_t  param0, val_t  param1, val_t  param2);
+#define LOCATE_string___Int___fill_buffer "string::Int::fill_buffer"
 typedef val_t (* string___Int___to_hex_t)(val_t  self);
 val_t string___Int___to_hex(val_t  self);
 #define LOCATE_string___Int___to_hex "string::Int::to_hex"
@@ -209,6 +224,14 @@ val_t string___Collection___to_s(val_t  self);
 typedef val_t (* string___Collection___join_t)(val_t  self, val_t  param0);
 val_t string___Collection___join(val_t  self, val_t  param0);
 #define LOCATE_string___Collection___join "string::Collection::join"
+val_t NEW_Array_array___Array___init();
+val_t NEW_Array_array___Array___with_items(val_t p0);
+val_t NEW_Array_array___Array___with_capacity(val_t p0);
+val_t NEW_Array_array___Array___filled_with(val_t p0, val_t p1);
+val_t NEW_Array_array___Array___with_native(val_t p0, val_t p1);
+typedef val_t (* string___Array___to_s_t)(val_t  self);
+val_t string___Array___to_s(val_t  self);
+#define LOCATE_string___Array___to_s "string::Array::(string::Object::to_s)"
 typedef val_t (* string___Map___map_join_t)(val_t  self, val_t  param0, val_t  param1);
 val_t string___Map___map_join(val_t  self, val_t  param0, val_t  param1);
 #define LOCATE_string___Map___map_join "string::Map::map_join"

@@ -3,16 +3,25 @@
 val_t mmbuilder___CSHSorter___compare(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 27, LOCATE_mmbuilder___CSHSorter___compare};
   val_t variable[6];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Result */
   variable[4] = CALL_abstractmetamodel___MMLocalClass___cshe( variable[1] /*a*/)( variable[1] /*a*/) /*MMLocalClass::cshe*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_partial_order___PartialOrderElement___rank(variable[4])(variable[4]) /*PartialOrderElement::rank*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_abstractmetamodel___MMLocalClass___cshe( variable[2] /*b*/)( variable[2] /*b*/) /*MMLocalClass::cshe*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_partial_order___PartialOrderElement___rank(variable[5])(variable[5]) /*PartialOrderElement::rank*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_kernel___Comparable_____leqg(variable[4])(variable[4], variable[5]) /*Int::<=>*/;
   variable[3] = variable[4];
   goto return_label0;
@@ -23,11 +32,13 @@ val_t mmbuilder___CSHSorter___compare(val_t  self, val_t  param0, val_t  param1)
 void mmbuilder___CSHSorter___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 32, LOCATE_mmbuilder___CSHSorter___init};
   val_t variable[2];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_CSHSorter].i]) return;
+  /* Register variable[1]: Method return value and escape marker */
   return_label1: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_CSHSorter].i] = 1;
   tracehead = trace.prev;
@@ -37,56 +48,68 @@ void mmbuilder___MMSrcModule___do_mmbuilder(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 36, LOCATE_mmbuilder___MMSrcModule___do_mmbuilder};
   static val_t once_value_4; static int once_bool_4; /* Once value for variable[7]*/
   val_t variable[19];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  CALL_inheritance___MMModule___import_global_classes(variable[3])(variable[3]) /*MMModule::import_global_classes*/;
-  variable[4] = variable[0];
-  variable[5] = NEW_ClassBuilderVisitor_mmbuilder___ClassBuilderVisitor___init( variable[1] /*tc*/, variable[4]); /*new ClassBuilderVisitor*/
-  variable[4] = variable[5];
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_inheritance___MMModule___import_global_classes(variable[0])(variable[0]) /*MMModule::import_global_classes*/;
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = NEW_ClassBuilderVisitor_mmbuilder___ClassBuilderVisitor___init( variable[1] /*tc*/, variable[0]) /*new ClassBuilderVisitor*/;
   variable[3] = variable[4];
-  variable[4] = variable[0];
-  variable[4] = CALL_syntax_base___MMSrcModule___node(variable[4])(variable[4]) /*MMSrcModule::node*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_syntax_base___MMSrcModule___node(variable[0])(variable[0]) /*MMSrcModule::node*/;
   CALL_parser_prod___Visitor___visit( variable[3] /*mmbv*/)( variable[3] /*mmbv*/, variable[4]) /*ClassBuilderVisitor::visit*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_mmloader___ToolContext___error_count( variable[1] /*tc*/)( variable[1] /*tc*/) /*ToolContext::error_count*/;
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(UNTAG_Int(variable[4])>UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
     exit(UNTAG_Int( TAG_Int(1)));
   }
-  variable[4] = variable[0];
-  CALL_inheritance___MMModule___import_local_classes(variable[4])(variable[4]) /*MMModule::import_local_classes*/;
-  variable[5] = variable[0];
-  variable[6] = NEW_ClassSpecializationBuilderVisitor_mmbuilder___ClassSpecializationBuilderVisitor___init( variable[1] /*tc*/, variable[5]); /*new ClassSpecializationBuilderVisitor*/
-  variable[5] = variable[6];
+  CALL_inheritance___MMModule___import_local_classes(variable[0])(variable[0]) /*MMModule::import_local_classes*/;
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = NEW_ClassSpecializationBuilderVisitor_mmbuilder___ClassSpecializationBuilderVisitor___init( variable[1] /*tc*/, variable[0]) /*new ClassSpecializationBuilderVisitor*/;
   variable[4] = variable[5];
-  variable[5] = variable[0];
-  variable[5] = CALL_syntax_base___MMSrcModule___node(variable[5])(variable[5]) /*MMSrcModule::node*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_syntax_base___MMSrcModule___node(variable[0])(variable[0]) /*MMSrcModule::node*/;
   CALL_parser_prod___Visitor___visit( variable[4] /*mmbv1*/)( variable[4] /*mmbv1*/, variable[5]) /*ClassSpecializationBuilderVisitor::visit*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_mmloader___ToolContext___error_count( variable[1] /*tc*/)( variable[1] /*tc*/) /*ToolContext::error_count*/;
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool(UNTAG_Int(variable[5])>UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[5])) { /*if*/
-    variable[5] = variable[0];
     exit(UNTAG_Int( TAG_Int(1)));
   }
-  variable[5] = variable[0];
-  variable[5] = CALL_abstractmetamodel___MMModule___local_classes(variable[5])(variable[5]) /*MMModule::local_classes*/;
-  variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*AbstractArray::iterator*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_abstractmetamodel___MMModule___local_classes(variable[0])(variable[0]) /*MMModule::local_classes*/;
+  /* Register variable[5]: For iterator */
+  variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[6]: For 'is_ok' result */
     variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[6])) break; /*for*/
-    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/;
+    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[7]: Local variable */
     variable[7] = variable[6];
-    variable[8] = variable[0];
+    /* Register variable[8]: Result */
+    variable[8] = CALL_abstractmetamodel___MMLocalClass___global( variable[7] /*c*/)( variable[7] /*c*/) /*MMLocalClass::global*/;
+    /* Register variable[8]: Result */
+    variable[8] = CALL_abstractmetamodel___MMGlobalClass___intro(variable[8])(variable[8]) /*MMGlobalClass::intro*/;
+    /* Register variable[8]: Result */
+    variable[8] = CALL_abstractmetamodel___MMLocalClass___module(variable[8])(variable[8]) /*MMLocalClass::module*/;
+    /* Register variable[8]: Result */
+    variable[8] = CALL_abstractmetamodel___MMModule___visibility_for(variable[0])(variable[0], variable[8]) /*MMModule::visibility_for*/;
+    /* Register variable[9]: Result */
     variable[9] = CALL_abstractmetamodel___MMLocalClass___global( variable[7] /*c*/)( variable[7] /*c*/) /*MMLocalClass::global*/;
-    variable[9] = CALL_abstractmetamodel___MMGlobalClass___intro(variable[9])(variable[9]) /*MMGlobalClass::intro*/;
-    variable[9] = CALL_abstractmetamodel___MMLocalClass___module(variable[9])(variable[9]) /*MMLocalClass::module*/;
-    variable[8] = CALL_abstractmetamodel___MMModule___visibility_for(variable[8])(variable[8], variable[9]) /*MMModule::visibility_for*/;
-    variable[9] = CALL_abstractmetamodel___MMLocalClass___global( variable[7] /*c*/)( variable[7] /*c*/) /*MMLocalClass::global*/;
+    /* Register variable[9]: Result */
     variable[9] = CALL_abstractmetamodel___MMGlobalClass___visibility_level(variable[9])(variable[9]) /*MMGlobalClass::visibility_level*/;
+    /* Register variable[8]: Result */
     variable[8] = TAG_Bool(UNTAG_Int(variable[8])<UNTAG_Int(variable[9]));
     if (UNTAG_Bool(variable[8])) { /*if*/
       goto continue_3;
@@ -96,27 +119,36 @@ void mmbuilder___MMSrcModule___do_mmbuilder(val_t  self, val_t  param0) {
     CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*ArrayIterator::next*/;
   }
   break_3: while(0);
-  variable[6] = variable[0];
-  variable[6] = CALL_abstractmetamodel___MMModule___class_specialization_hierarchy(variable[6])(variable[6]) /*MMModule::class_specialization_hierarchy*/;
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
+  variable[6] = CALL_abstractmetamodel___MMModule___class_specialization_hierarchy(variable[0])(variable[0]) /*MMModule::class_specialization_hierarchy*/;
+  /* Register variable[6]: Result */
   variable[6] = CALL_array___Collection___to_a(variable[6])(variable[6]) /*Collection::to_a*/;
   variable[5] = variable[6];
+  /* Register variable[6]: Local variable */
+  /* Register variable[7]: Once expression result */
   if (once_bool_4) variable[7] = once_value_4;
   else {
-    variable[7] = NEW_CSHSorter_mmbuilder___CSHSorter___init(); /*new CSHSorter*/
+    /* Register variable[7]: Result */
+    variable[7] = NEW_CSHSorter_mmbuilder___CSHSorter___init() /*new CSHSorter*/;
     once_value_4 = variable[7];
     once_bool_4 = true;
   }
+  /* Register variable[7]: Result */
   variable[6] = variable[7];
   CALL_sorter___AbstractSorter___sort( variable[6] /*sorter*/)( variable[6] /*sorter*/,  variable[5] /*classes*/) /*AbstractSorter::sort*/;
-  variable[8] = variable[0];
-  variable[9] = NEW_ClassAncestorBuilder_mmbuilder___ClassAncestorBuilder___init( variable[1] /*tc*/, variable[8]); /*new ClassAncestorBuilder*/
-  variable[8] = variable[9];
+  /* Register variable[7]: Local variable */
+  /* Register variable[8]: Result */
+  variable[8] = NEW_ClassAncestorBuilder_mmbuilder___ClassAncestorBuilder___init( variable[1] /*tc*/, variable[0]) /*new ClassAncestorBuilder*/;
   variable[7] = variable[8];
-  variable[8] = CALL_abstract_collection___Collection___iterator( variable[5] /*classes*/)( variable[5] /*classes*/) /*AbstractArray::iterator*/;
+  /* Register variable[8]: For iterator */
+  variable[8] = CALL_abstract_collection___Collection___iterator( variable[5] /*classes*/)( variable[5] /*classes*/) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[9]: For 'is_ok' result */
     variable[9] = CALL_abstract_collection___Iterator___is_ok(variable[8])(variable[8]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[9])) break; /*for*/
-    variable[9] = CALL_abstract_collection___Iterator___item(variable[8])(variable[8]) /*ArrayIterator::item*/;
+    variable[9] = CALL_abstract_collection___Iterator___item(variable[8])(variable[8]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[10]: Local variable */
     variable[10] = variable[9];
     CALL_mmbuilder___MMLocalClass___accept_class_visitor( variable[10] /*c*/)( variable[10] /*c*/,  variable[7] /*mmbv1b*/) /*MMLocalClass::accept_class_visitor*/;
     CALL_inheritance___MMLocalClass___compute_ancestors( variable[10] /*c*/)( variable[10] /*c*/) /*MMLocalClass::compute_ancestors*/;
@@ -124,67 +156,83 @@ void mmbuilder___MMSrcModule___do_mmbuilder(val_t  self, val_t  param0) {
     CALL_abstract_collection___Iterator___next(variable[8])(variable[8]) /*ArrayIterator::next*/;
   }
   break_5: while(0);
+  /* Register variable[8]: Result */
   variable[8] = CALL_mmloader___ToolContext___error_count( variable[1] /*tc*/)( variable[1] /*tc*/) /*ToolContext::error_count*/;
+  /* Register variable[8]: Result */
   variable[8] = TAG_Bool(UNTAG_Int(variable[8])>UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[8])) { /*if*/
-    variable[8] = variable[0];
     exit(UNTAG_Int( TAG_Int(1)));
   }
-  variable[9] = variable[0];
-  variable[10] = NEW_ClassVerifierVisitor_mmbuilder___ClassVerifierVisitor___init( variable[1] /*tc*/, variable[9]); /*new ClassVerifierVisitor*/
-  variable[9] = variable[10];
+  /* Register variable[8]: Local variable */
+  /* Register variable[9]: Result */
+  variable[9] = NEW_ClassVerifierVisitor_mmbuilder___ClassVerifierVisitor___init( variable[1] /*tc*/, variable[0]) /*new ClassVerifierVisitor*/;
   variable[8] = variable[9];
-  variable[9] = CALL_abstract_collection___Collection___iterator( variable[5] /*classes*/)( variable[5] /*classes*/) /*AbstractArray::iterator*/;
+  /* Register variable[9]: For iterator */
+  variable[9] = CALL_abstract_collection___Collection___iterator( variable[5] /*classes*/)( variable[5] /*classes*/) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[10]: For 'is_ok' result */
     variable[10] = CALL_abstract_collection___Iterator___is_ok(variable[9])(variable[9]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[10])) break; /*for*/
-    variable[10] = CALL_abstract_collection___Iterator___item(variable[9])(variable[9]) /*ArrayIterator::item*/;
+    variable[10] = CALL_abstract_collection___Iterator___item(variable[9])(variable[9]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[11]: Local variable */
     variable[11] = variable[10];
     CALL_mmbuilder___MMLocalClass___accept_class_visitor( variable[11] /*c*/)( variable[11] /*c*/,  variable[8] /*mmbv1b*/) /*MMLocalClass::accept_class_visitor*/;
     continue_6: while(0);
     CALL_abstract_collection___Iterator___next(variable[9])(variable[9]) /*ArrayIterator::next*/;
   }
   break_6: while(0);
+  /* Register variable[9]: Result */
   variable[9] = CALL_mmloader___ToolContext___error_count( variable[1] /*tc*/)( variable[1] /*tc*/) /*ToolContext::error_count*/;
+  /* Register variable[9]: Result */
   variable[9] = TAG_Bool(UNTAG_Int(variable[9])>UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[9])) { /*if*/
-    variable[9] = variable[0];
     exit(UNTAG_Int( TAG_Int(1)));
   }
-  variable[10] = variable[0];
-  variable[11] = NEW_PropertyBuilderVisitor_mmbuilder___PropertyBuilderVisitor___init( variable[1] /*tc*/, variable[10]); /*new PropertyBuilderVisitor*/
-  variable[10] = variable[11];
+  /* Register variable[9]: Local variable */
+  /* Register variable[10]: Result */
+  variable[10] = NEW_PropertyBuilderVisitor_mmbuilder___PropertyBuilderVisitor___init( variable[1] /*tc*/, variable[0]) /*new PropertyBuilderVisitor*/;
   variable[9] = variable[10];
-  variable[10] = CALL_abstract_collection___Collection___iterator( variable[5] /*classes*/)( variable[5] /*classes*/) /*AbstractArray::iterator*/;
+  /* Register variable[10]: For iterator */
+  variable[10] = CALL_abstract_collection___Collection___iterator( variable[5] /*classes*/)( variable[5] /*classes*/) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[11]: For 'is_ok' result */
     variable[11] = CALL_abstract_collection___Iterator___is_ok(variable[10])(variable[10]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[11])) break; /*for*/
-    variable[11] = CALL_abstract_collection___Iterator___item(variable[10])(variable[10]) /*ArrayIterator::item*/;
+    variable[11] = CALL_abstract_collection___Iterator___item(variable[10])(variable[10]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[12]: Local variable */
     variable[12] = variable[11];
     CALL_inheritance___MMLocalClass___inherit_global_properties( variable[12] /*c*/)( variable[12] /*c*/) /*MMLocalClass::inherit_global_properties*/;
     CALL_mmbuilder___MMLocalClass___accept_class_visitor( variable[12] /*c*/)( variable[12] /*c*/,  variable[9] /*mmbv2*/) /*MMLocalClass::accept_class_visitor*/;
+    /* Register variable[13]: Result */
     variable[13] = TAG_Bool(( variable[12] /*c*/==NIT_NULL) || VAL_ISA( variable[12] /*c*/, COLOR_MMSrcLocalClass, ID_MMSrcLocalClass)) /*cast MMSrcLocalClass*/;
-    variable[14] = variable[13];
-    if (UNTAG_Bool(variable[14])) { /* and */
-      variable[14] = CALL_abstractmetamodel___MMLocalClass___global( variable[12] /*c*/)( variable[12] /*c*/) /*MMLocalClass::global*/;
-      variable[14] = CALL_abstractmetamodel___MMGlobalClass___intro(variable[14])(variable[14]) /*MMGlobalClass::intro*/;
-      variable[14] = TAG_Bool((variable[14] ==  variable[12] /*c*/) || ((variable[14] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[14])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[14], variable[12] /*c*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[14])(variable[14],  variable[12] /*c*/) /*Object::==*/)))));
+    /* Ensure var variable[13]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[13])) { /* and */
+      /* Register variable[13]: Result */
+      variable[13] = CALL_abstractmetamodel___MMLocalClass___global( variable[12] /*c*/)( variable[12] /*c*/) /*MMLocalClass::global*/;
+      /* Register variable[13]: Result */
+      variable[13] = CALL_abstractmetamodel___MMGlobalClass___intro(variable[13])(variable[13]) /*MMGlobalClass::intro*/;
+      /* Register variable[13]: Result */
+      variable[13] = TAG_Bool((variable[13] ==  variable[12] /*c*/) || ((variable[13] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[13])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[13], variable[12] /*c*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[13])(variable[13],  variable[12] /*c*/) /*Object::==*/)))));
     }
-    variable[13] = variable[14];
-    variable[14] = variable[13];
-    if (UNTAG_Bool(variable[14])) { /* and */
-      variable[14] = CALL_abstractmetamodel___MMLocalClass___global( variable[12] /*c*/)( variable[12] /*c*/) /*MMLocalClass::global*/;
-      variable[14] = CALL_abstractmetamodel___MMGlobalClass___is_universal(variable[14])(variable[14]) /*MMGlobalClass::is_universal*/;
-      variable[14] =  TAG_Bool(!UNTAG_Bool(variable[14]));
+    /* Register variable[13]: Result */
+    /* Ensure var variable[13]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[13])) { /* and */
+      /* Register variable[13]: Result */
+      variable[13] = CALL_abstractmetamodel___MMLocalClass___global( variable[12] /*c*/)( variable[12] /*c*/) /*MMLocalClass::global*/;
+      /* Register variable[13]: Result */
+      variable[13] = CALL_abstractmetamodel___MMGlobalClass___is_universal(variable[13])(variable[13]) /*MMGlobalClass::is_universal*/;
+      variable[13] =  TAG_Bool(!UNTAG_Bool(variable[13]));
     }
-    variable[13] = variable[14];
-    variable[14] = variable[13];
-    if (UNTAG_Bool(variable[14])) { /* and */
-      variable[14] = CALL_abstractmetamodel___MMLocalClass___global( variable[12] /*c*/)( variable[12] /*c*/) /*MMLocalClass::global*/;
-      variable[14] = CALL_abstractmetamodel___MMGlobalClass___is_interface(variable[14])(variable[14]) /*MMGlobalClass::is_interface*/;
-      variable[14] =  TAG_Bool(!UNTAG_Bool(variable[14]));
+    /* Register variable[13]: Result */
+    /* Ensure var variable[13]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[13])) { /* and */
+      /* Register variable[13]: Result */
+      variable[13] = CALL_abstractmetamodel___MMLocalClass___global( variable[12] /*c*/)( variable[12] /*c*/) /*MMLocalClass::global*/;
+      /* Register variable[13]: Result */
+      variable[13] = CALL_abstractmetamodel___MMGlobalClass___is_interface(variable[13])(variable[13]) /*MMGlobalClass::is_interface*/;
+      variable[13] =  TAG_Bool(!UNTAG_Bool(variable[13]));
     }
-    variable[13] = variable[14];
+    /* Register variable[13]: Result */
     if (UNTAG_Bool(variable[13])) { /*if*/
       CALL_mmbuilder___MMSrcLocalClass___process_default_constructors( variable[12] /*c*/)( variable[12] /*c*/,  variable[9] /*mmbv2*/) /*MMSrcLocalClass::process_default_constructors*/;
     }
@@ -192,49 +240,66 @@ void mmbuilder___MMSrcModule___do_mmbuilder(val_t  self, val_t  param0) {
     CALL_abstract_collection___Iterator___next(variable[10])(variable[10]) /*ArrayIterator::next*/;
   }
   break_7: while(0);
+  /* Register variable[10]: Result */
   variable[10] = CALL_mmloader___ToolContext___error_count( variable[1] /*tc*/)( variable[1] /*tc*/) /*ToolContext::error_count*/;
+  /* Register variable[10]: Result */
   variable[10] = TAG_Bool(UNTAG_Int(variable[10])>UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[10])) { /*if*/
-    variable[10] = variable[0];
     exit(UNTAG_Int( TAG_Int(1)));
   }
-  variable[11] = variable[0];
-  variable[12] = NEW_PropertyVerifierVisitor_mmbuilder___PropertyVerifierVisitor___init( variable[1] /*tc*/, variable[11]); /*new PropertyVerifierVisitor*/
-  variable[11] = variable[12];
+  /* Register variable[10]: Local variable */
+  /* Register variable[11]: Result */
+  variable[11] = NEW_PropertyVerifierVisitor_mmbuilder___PropertyVerifierVisitor___init( variable[1] /*tc*/, variable[0]) /*new PropertyVerifierVisitor*/;
   variable[10] = variable[11];
-  variable[11] = CALL_abstract_collection___Collection___iterator( variable[5] /*classes*/)( variable[5] /*classes*/) /*AbstractArray::iterator*/;
+  /* Register variable[11]: For iterator */
+  variable[11] = CALL_abstract_collection___Collection___iterator( variable[5] /*classes*/)( variable[5] /*classes*/) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[12]: For 'is_ok' result */
     variable[12] = CALL_abstract_collection___Iterator___is_ok(variable[11])(variable[11]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[12])) break; /*for*/
-    variable[12] = CALL_abstract_collection___Iterator___item(variable[11])(variable[11]) /*ArrayIterator::item*/;
+    variable[12] = CALL_abstract_collection___Iterator___item(variable[11])(variable[11]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[13]: Local variable */
     variable[13] = variable[12];
     CALL_mmbuilder___MMLocalClass___accept_properties_visitor( variable[13] /*c*/)( variable[13] /*c*/,  variable[10] /*mmbv3*/) /*MMLocalClass::accept_properties_visitor*/;
     continue_8: while(0);
     CALL_abstract_collection___Iterator___next(variable[11])(variable[11]) /*ArrayIterator::next*/;
   }
   break_8: while(0);
-  variable[11] = CALL_abstract_collection___Collection___iterator( variable[5] /*classes*/)( variable[5] /*classes*/) /*AbstractArray::iterator*/;
+  /* Register variable[11]: For iterator */
+  variable[11] = CALL_abstract_collection___Collection___iterator( variable[5] /*classes*/)( variable[5] /*classes*/) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[12]: For 'is_ok' result */
     variable[12] = CALL_abstract_collection___Iterator___is_ok(variable[11])(variable[11]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[12])) break; /*for*/
-    variable[12] = CALL_abstract_collection___Iterator___item(variable[11])(variable[11]) /*ArrayIterator::item*/;
+    variable[12] = CALL_abstract_collection___Iterator___item(variable[11])(variable[11]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[13]: Local variable */
     variable[13] = variable[12];
+    /* Register variable[14]: Result */
     variable[14] = CALL_abstractmetamodel___MMLocalClass___global_properties( variable[13] /*c*/)( variable[13] /*c*/) /*MMLocalClass::global_properties*/;
+    /* Register variable[14]: For iterator */
     variable[14] = CALL_abstract_collection___Collection___iterator(variable[14])(variable[14]) /*Collection::iterator*/;
     while (true) { /*for*/
+      /* Register variable[15]: For 'is_ok' result */
       variable[15] = CALL_abstract_collection___Iterator___is_ok(variable[14])(variable[14]) /*Iterator::is_ok*/;
       if (!UNTAG_Bool(variable[15])) break; /*for*/
-      variable[15] = CALL_abstract_collection___Iterator___item(variable[14])(variable[14]) /*Iterator::item*/;
+      variable[15] = CALL_abstract_collection___Iterator___item(variable[14])(variable[14]) /*Iterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[16]: Local variable */
       variable[16] = variable[15];
-      variable[17] = variable[0];
-      variable[18] = CALL_abstractmetamodel___MMGlobalProperty___intro( variable[16] /*g*/)( variable[16] /*g*/) /*MMGlobalProperty::intro*/;
-      variable[18] = CALL_abstractmetamodel___MMLocalProperty___module(variable[18])(variable[18]) /*MMLocalProperty::module*/;
-      variable[17] = CALL_abstractmetamodel___MMModule___visibility_for(variable[17])(variable[17], variable[18]) /*MMModule::visibility_for*/;
+      /* Register variable[17]: Result */
+      variable[17] = CALL_abstractmetamodel___MMGlobalProperty___intro( variable[16] /*g*/)( variable[16] /*g*/) /*MMGlobalProperty::intro*/;
+      /* Register variable[17]: Result */
+      variable[17] = CALL_abstractmetamodel___MMLocalProperty___module(variable[17])(variable[17]) /*MMLocalProperty::module*/;
+      /* Register variable[17]: Result */
+      variable[17] = CALL_abstractmetamodel___MMModule___visibility_for(variable[0])(variable[0], variable[17]) /*MMModule::visibility_for*/;
+      /* Register variable[18]: Result */
       variable[18] = CALL_abstractmetamodel___MMGlobalProperty___visibility_level( variable[16] /*g*/)( variable[16] /*g*/) /*MMGlobalProperty::visibility_level*/;
+      /* Register variable[17]: Result */
       variable[17] = TAG_Bool(UNTAG_Int(variable[17])<UNTAG_Int(variable[18]));
       if (UNTAG_Bool(variable[17])) { /*if*/
         goto continue_10;
       }
+      /* Register variable[17]: Local variable */
+      /* Register variable[18]: Result */
       variable[18] = CALL_abstractmetamodel___MMLocalClass_____bra( variable[13] /*c*/)( variable[13] /*c*/,  variable[16] /*g*/) /*MMLocalClass::[]*/;
       variable[17] = variable[18];
       continue_10: while(0);
@@ -245,10 +310,11 @@ void mmbuilder___MMSrcModule___do_mmbuilder(val_t  self, val_t  param0) {
     CALL_abstract_collection___Iterator___next(variable[11])(variable[11]) /*ArrayIterator::next*/;
   }
   break_9: while(0);
+  /* Register variable[11]: Result */
   variable[11] = CALL_mmloader___ToolContext___error_count( variable[1] /*tc*/)( variable[1] /*tc*/) /*ToolContext::error_count*/;
+  /* Register variable[11]: Result */
   variable[11] = TAG_Bool(UNTAG_Int(variable[11])>UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[11])) { /*if*/
-    variable[11] = variable[0];
     exit(UNTAG_Int( TAG_Int(1)));
   }
   return_label2: while(false);
@@ -258,11 +324,14 @@ void mmbuilder___MMSrcModule___do_mmbuilder(val_t  self, val_t  param0) {
 void mmbuilder___MMLocalClass___accept_class_visitor(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 125, LOCATE_mmbuilder___MMLocalClass___accept_class_visitor};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
   return_label11: while(false);
   tracehead = trace.prev;
   return;
@@ -270,11 +339,14 @@ void mmbuilder___MMLocalClass___accept_class_visitor(val_t  self, val_t  param0)
 void mmbuilder___MMLocalClass___accept_properties_visitor(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 130, LOCATE_mmbuilder___MMLocalClass___accept_properties_visitor};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
   return_label12: while(false);
   tracehead = trace.prev;
   return;
@@ -282,18 +354,24 @@ void mmbuilder___MMLocalClass___accept_properties_visitor(val_t  self, val_t  pa
 void mmbuilder___MMSrcLocalClass___accept_class_visitor(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 137, LOCATE_mmbuilder___MMSrcLocalClass___accept_class_visitor};
   val_t variable[6];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_syntax_base___MMSrcLocalClass___nodes(variable[3])(variable[3]) /*MMSrcLocalClass::nodes*/;
-  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArray::iterator*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_syntax_base___MMSrcLocalClass___nodes(variable[0])(variable[0]) /*MMSrcLocalClass::nodes*/;
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
     CALL_parser_prod___Visitor___visit( variable[1] /*v*/)( variable[1] /*v*/,  variable[5] /*n*/) /*Visitor::visit*/;
     continue_14: while(0);
@@ -307,31 +385,40 @@ void mmbuilder___MMSrcLocalClass___accept_class_visitor(val_t  self, val_t  para
 void mmbuilder___MMSrcLocalClass___accept_properties_visitor(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 144, LOCATE_mmbuilder___MMSrcLocalClass___accept_properties_visitor};
   val_t variable[6];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_syntax_base___MMSrcLocalClass___nodes(variable[3])(variable[3]) /*MMSrcLocalClass::nodes*/;
-  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArray::iterator*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_syntax_base___MMSrcLocalClass___nodes(variable[0])(variable[0]) /*MMSrcLocalClass::nodes*/;
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
     CALL_parser_prod___Visitor___visit( variable[1] /*v*/)( variable[1] /*v*/,  variable[5] /*n*/) /*Visitor::visit*/;
     continue_16: while(0);
     CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*ArrayIterator::next*/;
   }
   break_16: while(0);
-  variable[3] = variable[0];
-  variable[3] = CALL_syntax_base___MMSrcLocalClass___src_local_properties(variable[3])(variable[3]) /*MMSrcLocalClass::src_local_properties*/;
-  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*Map::iterator*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_syntax_base___MMSrcLocalClass___src_local_properties(variable[0])(variable[0]) /*MMSrcLocalClass::src_local_properties*/;
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*MapRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
     CALL_mmbuilder___MMLocalProperty___accept_property_visitor( variable[5] /*p*/)( variable[5] /*p*/,  variable[1] /*v*/) /*MMLocalProperty::accept_property_visitor*/;
     continue_17: while(0);
@@ -345,26 +432,42 @@ void mmbuilder___MMSrcLocalClass___accept_properties_visitor(val_t  self, val_t 
 void mmbuilder___MMSrcLocalClass___process_default_constructors(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 156, LOCATE_mmbuilder___MMSrcLocalClass___process_default_constructors};
     static val_t once_value_22; static int once_bool_22; /* Once value for variable[9]*/
-  val_t variable[24];
-  void **closurevariable = NULL;
+      static val_t once_value_23 = NIT_NULL; /* Once value for string variable[9]*/
+      static val_t once_value_26 = NIT_NULL; /* Once value for string variable[10]*/
+      static val_t once_value_27 = NIT_NULL; /* Once value for string variable[10]*/
+      static val_t once_value_28 = NIT_NULL; /* Once value for string variable[10]*/
+      static val_t once_value_29 = NIT_NULL; /* Once value for string variable[10]*/
+      static val_t once_value_30 = NIT_NULL; /* Once value for string variable[10]*/
+      static val_t once_value_31 = NIT_NULL; /* Once value for string variable[10]*/
+  val_t variable[12];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_abstractmetamodel___MMLocalClass___global_properties(variable[3])(variable[3]) /*MMLocalClass::global_properties*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstractmetamodel___MMLocalClass___global_properties(variable[0])(variable[0]) /*MMLocalClass::global_properties*/;
+  /* Register variable[3]: For iterator */
   variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*Collection::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
+    /* Register variable[6]: Result */
     variable[6] = CALL_abstractmetamodel___MMGlobalProperty___is_init( variable[5] /*gp*/)( variable[5] /*gp*/) /*MMGlobalProperty::is_init*/;
     if (UNTAG_Bool(variable[6])) { /*if*/
+      /* Register variable[6]: Result */
       variable[6] = CALL_abstractmetamodel___MMGlobalProperty___intro( variable[5] /*gp*/)( variable[5] /*gp*/) /*MMGlobalProperty::intro*/;
+      /* Register variable[6]: Result */
       variable[6] = CALL_abstractmetamodel___MMLocalProperty___local_class(variable[6])(variable[6]) /*MMLocalProperty::local_class*/;
-      variable[7] = variable[0];
-      variable[6] = TAG_Bool((variable[6] == variable[7]) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6],variable[7])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6], variable[7]) /*Object::==*/)))));
+      /* Register variable[6]: Result */
+      variable[6] = TAG_Bool((variable[6] == variable[0]) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6],variable[0])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6], variable[0]) /*Object::==*/)))));
       if (UNTAG_Bool(variable[6])) { /*if*/
         goto return_label18;
       }
@@ -373,37 +476,54 @@ void mmbuilder___MMSrcLocalClass___process_default_constructors(val_t  self, val
     CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*Iterator::next*/;
   }
   break_19: while(0);
-  variable[4] = NEW_ArraySet_array___ArraySet___init(); /*new ArraySet[MMLocalProperty]*/
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = NEW_ArraySet_array___ArraySet___init() /*new ArraySet[MMLocalProperty]*/;
   variable[3] = variable[4];
-  variable[5] = NEW_ArraySet_array___ArraySet___init(); /*new ArraySet[MMGlobalProperty]*/
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = NEW_ArraySet_array___ArraySet___init() /*new ArraySet[MMGlobalProperty]*/;
   variable[4] = variable[5];
-  variable[5] = variable[0];
-  variable[5] = CALL_abstractmetamodel___MMLocalClass___che(variable[5])(variable[5]) /*MMLocalClass::che*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_abstractmetamodel___MMLocalClass___che(variable[0])(variable[0]) /*MMLocalClass::che*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_partial_order___PartialOrderElement___direct_greaters(variable[5])(variable[5]) /*PartialOrderElement::direct_greaters*/;
-  variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*AbstractArray::iterator*/;
+  /* Register variable[5]: For iterator */
+  variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[6]: For 'is_ok' result */
     variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[6])) break; /*for*/
-    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/;
+    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[7]: Local variable */
     variable[7] = variable[6];
+    /* Register variable[8]: Result */
     variable[8] = CALL_abstractmetamodel___MMLocalClass___global( variable[7] /*sc*/)( variable[7] /*sc*/) /*MMLocalClass::global*/;
+    /* Register variable[8]: Result */
     variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_universal(variable[8])(variable[8]) /*MMGlobalClass::is_universal*/;
-    variable[9] = variable[8];
-    if (!UNTAG_Bool(variable[9])) { /* or */
-      variable[9] = CALL_abstractmetamodel___MMLocalClass___global( variable[7] /*sc*/)( variable[7] /*sc*/) /*MMLocalClass::global*/;
-      variable[9] = CALL_abstractmetamodel___MMGlobalClass___is_interface(variable[9])(variable[9]) /*MMGlobalClass::is_interface*/;
+    /* Ensure var variable[8]: Left 'or' operand*/
+    if (!UNTAG_Bool(variable[8])) { /* or */
+      /* Register variable[8]: Result */
+      variable[8] = CALL_abstractmetamodel___MMLocalClass___global( variable[7] /*sc*/)( variable[7] /*sc*/) /*MMLocalClass::global*/;
+      /* Register variable[8]: Result */
+      variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_interface(variable[8])(variable[8]) /*MMGlobalClass::is_interface*/;
     }
-    variable[8] = variable[9];
+    /* Register variable[8]: Result */
     if (UNTAG_Bool(variable[8])) { /*if*/
       goto continue_20;
     }
+    /* Register variable[8]: Result */
     variable[8] = CALL_abstractmetamodel___MMLocalClass___global_properties( variable[7] /*sc*/)( variable[7] /*sc*/) /*MMLocalClass::global_properties*/;
+    /* Register variable[8]: For iterator */
     variable[8] = CALL_abstract_collection___Collection___iterator(variable[8])(variable[8]) /*Collection::iterator*/;
     while (true) { /*for*/
+      /* Register variable[9]: For 'is_ok' result */
       variable[9] = CALL_abstract_collection___Iterator___is_ok(variable[8])(variable[8]) /*Iterator::is_ok*/;
       if (!UNTAG_Bool(variable[9])) break; /*for*/
-      variable[9] = CALL_abstract_collection___Iterator___item(variable[8])(variable[8]) /*Iterator::item*/;
+      variable[9] = CALL_abstract_collection___Iterator___item(variable[8])(variable[8]) /*Iterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[10]: Local variable */
       variable[10] = variable[9];
+      /* Register variable[11]: Result */
       variable[11] = CALL_abstractmetamodel___MMGlobalProperty___is_init( variable[10] /*gp*/)( variable[10] /*gp*/) /*MMGlobalProperty::is_init*/;
       if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[11])))) { /*if*/
         goto continue_21;
@@ -413,450 +533,665 @@ void mmbuilder___MMSrcLocalClass___process_default_constructors(val_t  self, val
       CALL_abstract_collection___Iterator___next(variable[8])(variable[8]) /*Iterator::next*/;
     }
     break_21: while(0);
+    /* Register variable[8]: Local variable */
+    /* Register variable[9]: Once expression result */
     if (once_bool_22) variable[9] = once_value_22;
     else {
-      variable[9] = NEW_String_string___String___with_native(BOX_NativeString("init"), TAG_Int(4)); /*new String*/
+      /* Register variable[9]: Once String constant */
+      if (once_value_23 != NIT_NULL) variable[9] = once_value_23;
+      else {
+        variable[9] = NEW_String_string___String___with_native(BOX_NativeString("init"), TAG_Int(4)) /*new String*/;
+        once_value_23 = variable[9];
+      }
+      /* Register variable[9]: Result */
+      /* Register variable[9]: Result */
       variable[9] = CALL_symbol___String___to_symbol(variable[9])(variable[9]) /*String::to_symbol*/;
       once_value_22 = variable[9];
       once_bool_22 = true;
     }
-    variable[9] = CALL_abstractmetamodel___MMLocalClass___get_property_by_name( variable[7] /*sc*/)( variable[7] /*sc*/, variable[9]) /*MMLocalClass::get_property_by_name*/;
+    /* Register variable[9]: Result */
     variable[8] = variable[9];
-    variable[9] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[8] /*gp*/ ==  NIT_NULL /*null*/) || (( variable[8] /*gp*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[8] /*gp*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[8] /*gp*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[8] /*gp*/)( variable[8] /*gp*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    /* Register variable[9]: Result */
+    variable[9] = CALL_abstractmetamodel___MMLocalClass___has_global_property_by_name( variable[7] /*sc*/)( variable[7] /*sc*/,  variable[8] /*initname*/) /*MMLocalClass::has_global_property_by_name*/;
     if (UNTAG_Bool(variable[9])) { /*if*/
-      variable[9] = variable[0];
-      variable[9] = CALL_abstractmetamodel___MMLocalClass_____bra(variable[9])(variable[9],  variable[8] /*gp*/) /*MMLocalClass::[]*/;
-      CALL_abstract_collection___SimpleCollection___add( variable[3] /*super_inits*/)( variable[3] /*super_inits*/, variable[9]) /*ArraySet::add*/;
+      /* Register variable[9]: Local variable */
+      /* Register variable[10]: Result */
+      variable[10] = CALL_abstractmetamodel___MMLocalClass___get_property_by_name( variable[7] /*sc*/)( variable[7] /*sc*/,  variable[8] /*initname*/) /*MMLocalClass::get_property_by_name*/;
+      variable[9] = variable[10];
+      /* Register variable[10]: Result */
+      variable[10] = CALL_abstractmetamodel___MMLocalClass_____bra(variable[0])(variable[0],  variable[9] /*gp*/) /*MMLocalClass::[]*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[3] /*super_inits*/)( variable[3] /*super_inits*/, variable[10]) /*ArraySet::add*/;
     }
     continue_20: while(0);
     CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*ArrayIterator::next*/;
   }
   break_20: while(0);
-  variable[6] = NEW_Array_array___Array___init(); /*new Array[MMSrcAttribute]*/
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
+  variable[6] = NEW_Array_array___Array___init() /*new Array[MMSrcAttribute]*/;
   variable[5] = variable[6];
-  variable[6] = variable[0];
-  variable[6] = CALL_syntax_base___MMSrcLocalClass___src_local_properties(variable[6])(variable[6]) /*MMSrcLocalClass::src_local_properties*/;
-  variable[6] = CALL_abstract_collection___Collection___iterator(variable[6])(variable[6]) /*Map::iterator*/;
+  /* Register variable[6]: Result */
+  variable[6] = CALL_syntax_base___MMSrcLocalClass___src_local_properties(variable[0])(variable[0]) /*MMSrcLocalClass::src_local_properties*/;
+  /* Register variable[6]: For iterator */
+  variable[6] = CALL_abstract_collection___Collection___iterator(variable[6])(variable[6]) /*MapRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[7]: For 'is_ok' result */
     variable[7] = CALL_abstract_collection___Iterator___is_ok(variable[6])(variable[6]) /*Iterator::is_ok*/;
     if (!UNTAG_Bool(variable[7])) break; /*for*/
-    variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*Iterator::item*/;
+    variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*Iterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[8]: Local variable */
     variable[8] = variable[7];
+    /* Register variable[9]: Result */
     variable[9] = TAG_Bool(( variable[8] /*a*/==NIT_NULL) || VAL_ISA( variable[8] /*a*/, COLOR_MMSrcAttribute, ID_MMSrcAttribute)) /*cast MMSrcAttribute*/;
     if (UNTAG_Bool(variable[9])) { /*if*/
+      /* Register variable[9]: Local variable */
+      /* Register variable[10]: Result */
       variable[10] = CALL_syntax_base___MMLocalProperty___node( variable[8] /*a*/)( variable[8] /*a*/) /*MMSrcAttribute::node*/;
       variable[9] = variable[10];
+      /* Register variable[10]: Result */
       variable[10] = TAG_Bool(( variable[9] /*n*/==NIT_NULL) || VAL_ISA( variable[9] /*n*/, COLOR_AAttrPropdef, ID_AAttrPropdef)) /*cast AAttrPropdef*/;
-      if (!UNTAG_Bool(variable[10])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_mmbuilder___MMSrcLocalClass___process_default_constructors, LOCATE_mmbuilder, 187); nit_exit(1);}
+      if (!UNTAG_Bool(variable[10])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_mmbuilder___MMSrcLocalClass___process_default_constructors, LOCATE_mmbuilder, 188); nit_exit(1);}
+      /* Register variable[10]: Result */
       variable[10] = CALL_parser_nodes___AAttrPropdef___n_expr( variable[9] /*n*/)( variable[9] /*n*/) /*AAttrPropdef::n_expr*/;
+      /* Register variable[10]: Result */
       variable[10] = TAG_Bool((variable[10] ==  NIT_NULL /*null*/) || ((variable[10] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[10])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[10], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[10])(variable[10],  NIT_NULL /*null*/) /*Object::==*/)))));
       if (UNTAG_Bool(variable[10])) { /*if*/
         CALL_abstract_collection___SimpleCollection___add( variable[5] /*unassigned_attributes*/)( variable[5] /*unassigned_attributes*/,  variable[8] /*a*/) /*AbstractArray::add*/;
       }
     }
-    continue_23: while(0);
+    continue_24: while(0);
     CALL_abstract_collection___Iterator___next(variable[6])(variable[6]) /*Iterator::next*/;
   }
-  break_23: while(0);
+  break_24: while(0);
+  /* Register variable[6]: Result */
   variable[6] = CALL_abstract_collection___Collection___is_empty( variable[4] /*super_constructors*/)( variable[4] /*super_constructors*/) /*ArraySet::is_empty*/;
   if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[6])))) { /*if*/
-    variable[7] = NEW_Array_array___Array___init(); /*new Array[MMLocalClass]*/
+    /* Register variable[6]: Local variable */
+    /* Register variable[7]: Result */
+    variable[7] = NEW_Array_array___Array___init() /*new Array[MMLocalClass]*/;
     variable[6] = variable[7];
+    /* Register variable[7]: For iterator */
     variable[7] = CALL_abstract_collection___Collection___iterator( variable[4] /*super_constructors*/)( variable[4] /*super_constructors*/) /*ArraySet::iterator*/;
     while (true) { /*for*/
+      /* Register variable[8]: For 'is_ok' result */
       variable[8] = CALL_abstract_collection___Iterator___is_ok(variable[7])(variable[7]) /*Iterator::is_ok*/;
       if (!UNTAG_Bool(variable[8])) break; /*for*/
-      variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*Iterator::item*/;
+      variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*Iterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[9]: Local variable */
       variable[9] = variable[8];
+      /* Register variable[10]: Local variable */
+      /* Register variable[11]: Result */
       variable[11] = CALL_abstractmetamodel___MMGlobalProperty___local_class( variable[9] /*gp*/)( variable[9] /*gp*/) /*MMGlobalProperty::local_class*/;
       variable[10] = variable[11];
-      variable[11] = CALL_abstract_collection___Collection___has( variable[6] /*supers*/)( variable[6] /*supers*/,  variable[10] /*sc*/) /*AbstractArray::has*/;
+      /* Register variable[11]: Result */
+      variable[11] = CALL_abstract_collection___Collection___has( variable[6] /*supers*/)( variable[6] /*supers*/,  variable[10] /*sc*/) /*AbstractArrayRead::has*/;
       if (UNTAG_Bool(variable[11])) { /*if*/
-        goto continue_24;
+        goto continue_25;
       }
+      /* Register variable[11]: Result */
       variable[11] = CALL_abstractmetamodel___MMLocalClass___global( variable[10] /*sc*/)( variable[10] /*sc*/) /*MMLocalClass::global*/;
+      /* Register variable[11]: Result */
       variable[11] = CALL_abstractmetamodel___MMGlobalClass___is_mixin(variable[11])(variable[11]) /*MMGlobalClass::is_mixin*/;
       if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[11])))) { /*if*/
         CALL_abstract_collection___SimpleCollection___add( variable[6] /*supers*/)( variable[6] /*supers*/,  variable[10] /*sc*/) /*AbstractArray::add*/;
       }
-      continue_24: while(0);
+      continue_25: while(0);
       CALL_abstract_collection___Iterator___next(variable[7])(variable[7]) /*Iterator::next*/;
     }
-    break_24: while(0);
-    variable[7] = variable[0];
-    variable[7] = CALL_abstractmetamodel___MMLocalClass___che(variable[7])(variable[7]) /*MMLocalClass::che*/;
+    break_25: while(0);
+    /* Register variable[7]: Result */
+    variable[7] = CALL_abstractmetamodel___MMLocalClass___che(variable[0])(variable[0]) /*MMLocalClass::che*/;
+    /* Register variable[7]: Result */
     variable[7] = CALL_partial_order___PartialOrderElement___order(variable[7])(variable[7]) /*PartialOrderElement::order*/;
+    /* Register variable[7]: Result */
     variable[7] = CALL_partial_order___PartialOrder___select_smallests(variable[7])(variable[7],  variable[6] /*supers*/) /*PartialOrder::select_smallests*/;
     variable[6] = variable[7] /*supers=*/;
+    /* Register variable[7]: Local variable */
     variable[7] =  NIT_NULL /*null*/;
-    variable[8] = CALL_abstract_collection___Collection___length( variable[6] /*supers*/)( variable[6] /*supers*/) /*AbstractArray::length*/;
+    /* Register variable[8]: Result */
+    variable[8] = CALL_abstract_collection___Collection___length( variable[6] /*supers*/)( variable[6] /*supers*/) /*AbstractArrayRead::length*/;
+    /* Register variable[8]: Result */
     variable[8] = TAG_Bool(UNTAG_Int(variable[8])>UNTAG_Int( TAG_Int(1)));
     if (UNTAG_Bool(variable[8])) { /*if*/
-      variable[8] = variable[0];
-      variable[8] = CALL_syntax_base___MMSrcLocalClass___nodes(variable[8])(variable[8]) /*MMSrcLocalClass::nodes*/;
-      variable[8] = CALL_abstract_collection___Collection___first(variable[8])(variable[8]) /*IndexedCollection::first*/;
-      variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(7)); /*new Array[String]*/
-      variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Error: Explicit constructor required in "), TAG_Int(40)); /*new String*/
-      variable[11] = variable[10];
-      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[11]) /*AbstractArray::add*/;
-      variable[12] = variable[0];
-      variable[13] = variable[12];
-      variable[13] = CALL_string___Object___to_s(variable[13])(variable[13]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[13]) /*AbstractArray::add*/;
-      variable[14] = NEW_String_string___String___with_native(BOX_NativeString(" since multiple inheritance of constructor is forbiden. Conflicting classes are "), TAG_Int(80)); /*new String*/
-      variable[15] = variable[14];
-      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[15]) /*AbstractArray::add*/;
-      variable[16] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
-      variable[16] = CALL_string___Collection___join( variable[6] /*supers*/)( variable[6] /*supers*/, variable[16]) /*Collection::join*/;
-      variable[17] = variable[16];
-      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[17]) /*AbstractArray::add*/;
-      variable[18] = NEW_String_string___String___with_native(BOX_NativeString(". Costructors are "), TAG_Int(18)); /*new String*/
-      variable[19] = variable[18];
-      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[19]) /*AbstractArray::add*/;
-      variable[20] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
-      variable[20] = CALL_string___Collection___join( variable[4] /*super_constructors*/)( variable[4] /*super_constructors*/, variable[20]) /*Collection::join*/;
-      variable[21] = variable[20];
-      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[21]) /*AbstractArray::add*/;
-      variable[22] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-      variable[23] = variable[22];
-      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[23]) /*AbstractArray::add*/;
+      /* Register variable[8]: Result */
+      variable[8] = CALL_syntax_base___MMSrcLocalClass___nodes(variable[0])(variable[0]) /*MMSrcLocalClass::nodes*/;
+      /* Register variable[8]: Result */
+      variable[8] = CALL_abstract_collection___Collection___first(variable[8])(variable[8]) /*IndexedCollectionRead::first*/;
+      variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(7)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[10]: Once String constant */
+      if (once_value_26 != NIT_NULL) variable[10] = once_value_26;
+      else {
+        variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Error: Explicit constructor required in "), TAG_Int(40)) /*new String*/;
+        once_value_26 = variable[10];
+      }
+      /* Register variable[10]: Result */
+      /* Ensure var variable[10]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[10]) /*AbstractArray::add*/;
+      /* Ensure var variable[0]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], CALL_string___Object___to_s(variable[0])(variable[0]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[10]: Once String constant */
+      if (once_value_27 != NIT_NULL) variable[10] = once_value_27;
+      else {
+        variable[10] = NEW_String_string___String___with_native(BOX_NativeString(" since multiple inheritance of constructor is forbiden. Conflicting classes are "), TAG_Int(80)) /*new String*/;
+        once_value_27 = variable[10];
+      }
+      /* Register variable[10]: Result */
+      /* Ensure var variable[10]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[10]) /*AbstractArray::add*/;
+      /* Register variable[10]: Once String constant */
+      if (once_value_28 != NIT_NULL) variable[10] = once_value_28;
+      else {
+        variable[10] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)) /*new String*/;
+        once_value_28 = variable[10];
+      }
+      /* Register variable[10]: Result */
+      /* Register variable[10]: Result */
+      variable[10] = CALL_string___Collection___join( variable[6] /*supers*/)( variable[6] /*supers*/, variable[10]) /*Collection::join*/;
+      /* Ensure var variable[10]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[10]) /*AbstractArray::add*/;
+      /* Register variable[10]: Once String constant */
+      if (once_value_29 != NIT_NULL) variable[10] = once_value_29;
+      else {
+        variable[10] = NEW_String_string___String___with_native(BOX_NativeString(". Costructors are "), TAG_Int(18)) /*new String*/;
+        once_value_29 = variable[10];
+      }
+      /* Register variable[10]: Result */
+      /* Ensure var variable[10]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[10]) /*AbstractArray::add*/;
+      /* Register variable[10]: Once String constant */
+      if (once_value_30 != NIT_NULL) variable[10] = once_value_30;
+      else {
+        variable[10] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)) /*new String*/;
+        once_value_30 = variable[10];
+      }
+      /* Register variable[10]: Result */
+      /* Register variable[10]: Result */
+      variable[10] = CALL_string___Collection___join( variable[4] /*super_constructors*/)( variable[4] /*super_constructors*/, variable[10]) /*Collection::join*/;
+      /* Ensure var variable[10]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[10]) /*AbstractArray::add*/;
+      /* Register variable[10]: Once String constant */
+      if (once_value_31 != NIT_NULL) variable[10] = once_value_31;
+      else {
+        variable[10] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+        once_value_31 = variable[10];
+      }
+      /* Register variable[10]: Result */
+      /* Ensure var variable[10]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[10]) /*AbstractArray::add*/;
+      /* Register variable[9]: Result */
       variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
       CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
       goto return_label18;
     } else { /*if*/
-      variable[8] = CALL_abstract_collection___Collection___length( variable[6] /*supers*/)( variable[6] /*supers*/) /*AbstractArray::length*/;
+      /* Register variable[8]: Result */
+      variable[8] = CALL_abstract_collection___Collection___length( variable[6] /*supers*/)( variable[6] /*supers*/) /*AbstractArrayRead::length*/;
+      /* Register variable[8]: Result */
       variable[8] = TAG_Bool((variable[8])==( TAG_Int(1)));
       if (UNTAG_Bool(variable[8])) { /*if*/
-        variable[8] = CALL_abstract_collection___Collection___first( variable[6] /*supers*/)( variable[6] /*supers*/) /*IndexedCollection::first*/;
+        /* Register variable[8]: Result */
+        variable[8] = CALL_abstract_collection___Collection___first( variable[6] /*supers*/)( variable[6] /*supers*/) /*IndexedCollectionRead::first*/;
         variable[7] = variable[8] /*superclass=*/;
       }
     }
+    /* Register variable[8]: For iterator */
     variable[8] = CALL_abstract_collection___Collection___iterator( variable[4] /*super_constructors*/)( variable[4] /*super_constructors*/) /*ArraySet::iterator*/;
     while (true) { /*for*/
+      /* Register variable[9]: For 'is_ok' result */
       variable[9] = CALL_abstract_collection___Iterator___is_ok(variable[8])(variable[8]) /*Iterator::is_ok*/;
       if (!UNTAG_Bool(variable[9])) break; /*for*/
-      variable[9] = CALL_abstract_collection___Iterator___item(variable[8])(variable[8]) /*Iterator::item*/;
+      variable[9] = CALL_abstract_collection___Iterator___item(variable[8])(variable[8]) /*Iterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[10]: Local variable */
       variable[10] = variable[9];
+      /* Register variable[11]: Result */
       variable[11] = TAG_Bool(( variable[7] /*superclass*/ ==  NIT_NULL /*null*/) || (( variable[7] /*superclass*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[7] /*superclass*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[7] /*superclass*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[7] /*superclass*/)( variable[7] /*superclass*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-      variable[12] = variable[11];
-      if (!UNTAG_Bool(variable[12])) { /* or */
-        variable[12] = CALL_abstractmetamodel___MMGlobalProperty___local_class( variable[10] /*gp*/)( variable[10] /*gp*/) /*MMGlobalProperty::local_class*/;
-        variable[12] = TAG_Bool((variable[12] ==  variable[7] /*superclass*/) || ((variable[12] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[12])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[12], variable[7] /*superclass*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[12])(variable[12],  variable[7] /*superclass*/) /*Object::==*/)))));
+      /* Ensure var variable[11]: Left 'or' operand*/
+      if (!UNTAG_Bool(variable[11])) { /* or */
+        /* Register variable[11]: Result */
+        variable[11] = CALL_abstractmetamodel___MMGlobalProperty___local_class( variable[10] /*gp*/)( variable[10] /*gp*/) /*MMGlobalProperty::local_class*/;
+        /* Register variable[11]: Result */
+        variable[11] = TAG_Bool((variable[11] ==  variable[7] /*superclass*/) || ((variable[11] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[11])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[11], variable[7] /*superclass*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[11])(variable[11],  variable[7] /*superclass*/) /*Object::==*/)))));
       }
-      variable[11] = variable[12];
+      /* Register variable[11]: Result */
       if (UNTAG_Bool(variable[11])) { /*if*/
-        variable[11] = variable[0];
-        CALL_inheritance___MMLocalClass___make_visible_an_inherited_global_property(variable[11])(variable[11],  variable[10] /*gp*/) /*MMLocalClass::make_visible_an_inherited_global_property*/;
+        CALL_inheritance___MMLocalClass___make_visible_an_inherited_global_property(variable[0])(variable[0],  variable[10] /*gp*/) /*MMLocalClass::make_visible_an_inherited_global_property*/;
       }
-      continue_25: while(0);
+      continue_32: while(0);
       CALL_abstract_collection___Iterator___next(variable[8])(variable[8]) /*Iterator::next*/;
     }
-    break_25: while(0);
-    variable[8] = variable[0];
-    variable[8] = CALL_abstractmetamodel___MMLocalClass___global(variable[8])(variable[8]) /*MMLocalClass::global*/;
+    break_32: while(0);
+    /* Register variable[8]: Result */
+    variable[8] = CALL_abstractmetamodel___MMLocalClass___global(variable[0])(variable[0]) /*MMLocalClass::global*/;
+    /* Register variable[9]: Result */
     variable[9] = CALL_abstractmetamodel___MMLocalClass___global( variable[7] /*superclass*/)( variable[7] /*superclass*/) /*MMLocalClass::global*/;
     CALL_abstractmetamodel___MMGlobalClass___mixin_of__eq(variable[8])(variable[8], variable[9]) /*MMGlobalClass::mixin_of=*/;
   } else { /*if*/
-    variable[7] = variable[0];
-    variable[8] = CALL_array___Collection___to_a( variable[3] /*super_inits*/)( variable[3] /*super_inits*/) /*Collection::to_a*/;
-    variable[9] = NEW_MMImplicitInit_syntax_base___MMImplicitInit___init(variable[7],  variable[5] /*unassigned_attributes*/, variable[8]); /*new MMImplicitInit*/
-    variable[7] = variable[9];
+    /* Register variable[6]: Local variable */
+    /* Register variable[7]: Result */
+    variable[7] = CALL_array___Collection___to_a( variable[3] /*super_inits*/)( variable[3] /*super_inits*/) /*Collection::to_a*/;
+    /* Register variable[7]: Result */
+    variable[7] = NEW_MMImplicitInit_syntax_base___MMImplicitInit___init(variable[0],  variable[5] /*unassigned_attributes*/, variable[7]) /*new MMImplicitInit*/;
     variable[6] = variable[7];
-    variable[7] = variable[0];
-    CALL_mmbuilder___MMSrcLocalClass___add_src_local_property(variable[7])(variable[7],  variable[1] /*v*/,  variable[6] /*p*/) /*MMSrcLocalClass::add_src_local_property*/;
+    CALL_mmbuilder___MMSrcLocalClass___add_src_local_property(variable[0])(variable[0],  variable[1] /*v*/,  variable[6] /*p*/) /*MMSrcLocalClass::add_src_local_property*/;
   }
   return_label18: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___MMSrcLocalClass___add_src_local_property(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 232, LOCATE_mmbuilder___MMSrcLocalClass___add_src_local_property};
-  val_t variable[21];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 233, LOCATE_mmbuilder___MMSrcLocalClass___add_src_local_property};
+    static val_t once_value_34 = NIT_NULL; /* Once value for string variable[7]*/
+    static val_t once_value_35 = NIT_NULL; /* Once value for string variable[7]*/
+    static val_t once_value_36 = NIT_NULL; /* Once value for string variable[7]*/
+      static val_t once_value_37 = NIT_NULL; /* Once value for string variable[8]*/
+      static val_t once_value_38 = NIT_NULL; /* Once value for string variable[8]*/
+      static val_t once_value_39 = NIT_NULL; /* Once value for string variable[8]*/
+      static val_t once_value_40 = NIT_NULL; /* Once value for string variable[8]*/
+  val_t variable[9];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
   variable[5] = CALL_abstractmetamodel___MMLocalProperty___name( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::name*/;
   variable[4] = variable[5];
-  variable[5] = variable[0];
-  variable[5] = CALL_syntax_base___MMSrcLocalClass___src_local_properties(variable[5])(variable[5]) /*MMSrcLocalClass::src_local_properties*/;
-  variable[5] = CALL_abstract_collection___Map___has_key(variable[5])(variable[5],  variable[4] /*pname*/) /*Map::has_key*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_syntax_base___MMSrcLocalClass___src_local_properties(variable[0])(variable[0]) /*MMSrcLocalClass::src_local_properties*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_abstract_collection___MapRead___has_key(variable[5])(variable[5],  variable[4] /*pname*/) /*MapRead::has_key*/;
   if (UNTAG_Bool(variable[5])) { /*if*/
+    /* Register variable[5]: Result */
     variable[5] = CALL_syntax_base___MMLocalProperty___node( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::node*/;
-    variable[6] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-    variable[7] = NEW_String_string___String___with_native(BOX_NativeString("Error: A property "), TAG_Int(18)); /*new String*/
-    variable[8] = variable[7];
-    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[8]) /*AbstractArray::add*/;
-    variable[9] =  variable[4] /*pname*/;
-    variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[9]) /*AbstractArray::add*/;
-    variable[10] = NEW_String_string___String___with_native(BOX_NativeString(" is already defined in class "), TAG_Int(29)); /*new String*/
-    variable[11] = variable[10];
-    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[11]) /*AbstractArray::add*/;
-    variable[12] = variable[0];
-    variable[12] = CALL_abstractmetamodel___MMLocalClass___name(variable[12])(variable[12]) /*MMLocalClass::name*/;
-    variable[13] = variable[12];
-    variable[13] = CALL_string___Object___to_s(variable[13])(variable[13]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[13]) /*AbstractArray::add*/;
-    variable[14] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-    variable[15] = variable[14];
-    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[15]) /*AbstractArray::add*/;
+    variable[6] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[7]: Once String constant */
+    if (once_value_34 != NIT_NULL) variable[7] = once_value_34;
+    else {
+      variable[7] = NEW_String_string___String___with_native(BOX_NativeString("Error: A property "), TAG_Int(18)) /*new String*/;
+      once_value_34 = variable[7];
+    }
+    /* Register variable[7]: Result */
+    /* Ensure var variable[7]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+    variable[7] =  variable[4] /*pname*/ /* Ensure var: super-string element*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[7]: Once String constant */
+    if (once_value_35 != NIT_NULL) variable[7] = once_value_35;
+    else {
+      variable[7] = NEW_String_string___String___with_native(BOX_NativeString(" is already defined in class "), TAG_Int(29)) /*new String*/;
+      once_value_35 = variable[7];
+    }
+    /* Register variable[7]: Result */
+    /* Ensure var variable[7]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+    /* Register variable[7]: Result */
+    variable[7] = CALL_abstractmetamodel___MMLocalClass___name(variable[0])(variable[0]) /*MMLocalClass::name*/;
+    /* Ensure var variable[7]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[7]: Once String constant */
+    if (once_value_36 != NIT_NULL) variable[7] = once_value_36;
+    else {
+      variable[7] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+      once_value_36 = variable[7];
+    }
+    /* Register variable[7]: Result */
+    /* Ensure var variable[7]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+    /* Register variable[6]: Result */
     variable[6] = CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/;
     CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[5], variable[6]) /*AbsSyntaxVisitor::error*/;
-    goto return_label26;
+    goto return_label33;
   }
-  variable[5] = variable[0];
-  variable[5] = CALL_syntax_base___MMSrcLocalClass___src_local_properties(variable[5])(variable[5]) /*MMSrcLocalClass::src_local_properties*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_syntax_base___MMSrcLocalClass___src_local_properties(variable[0])(variable[0]) /*MMSrcLocalClass::src_local_properties*/;
   CALL_abstract_collection___Map_____braeq(variable[5])(variable[5],  variable[4] /*pname*/,  variable[2] /*prop*/) /*Map::[]=*/;
-  variable[5] = variable[0];
-  variable[5] = CALL_abstractmetamodel___MMLocalClass___has_global_property_by_name(variable[5])(variable[5],  variable[4] /*pname*/) /*MMLocalClass::has_global_property_by_name*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_abstractmetamodel___MMLocalClass___has_global_property_by_name(variable[0])(variable[0],  variable[4] /*pname*/) /*MMLocalClass::has_global_property_by_name*/;
   if (UNTAG_Bool(variable[5])) { /*if*/
-    variable[6] = variable[0];
-    variable[6] = CALL_abstractmetamodel___MMLocalClass___properties_by_name(variable[6])(variable[6]) /*MMLocalClass::properties_by_name*/;
-    variable[6] = CALL_abstract_collection___Map_____bra(variable[6])(variable[6],  variable[4] /*pname*/) /*Map::[]*/;
+    /* Register variable[5]: Local variable */
+    /* Register variable[6]: Result */
+    variable[6] = CALL_abstractmetamodel___MMLocalClass___properties_by_name(variable[0])(variable[0]) /*MMLocalClass::properties_by_name*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_abstract_collection___MapRead_____bra(variable[6])(variable[6],  variable[4] /*pname*/) /*MapRead::[]*/;
     variable[5] = variable[6];
-    variable[6] = CALL_abstract_collection___Collection___length( variable[5] /*globs*/)( variable[5] /*globs*/) /*AbstractArray::length*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_abstract_collection___Collection___length( variable[5] /*globs*/)( variable[5] /*globs*/) /*AbstractArrayRead::length*/;
+    /* Register variable[6]: Result */
     variable[6] = TAG_Bool(UNTAG_Int(variable[6])>UNTAG_Int( TAG_Int(1)));
     if (UNTAG_Bool(variable[6])) { /*if*/
+      /* Register variable[6]: Result */
       variable[6] = CALL_syntax_base___MMLocalProperty___node( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::node*/;
-      variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(7)); /*new Array[String]*/
-      variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Name error: "), TAG_Int(12)); /*new String*/
-      variable[9] = variable[8];
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[9]) /*AbstractArray::add*/;
-      variable[10] = variable[0];
-      variable[11] = variable[10];
-      variable[11] = CALL_string___Object___to_s(variable[11])(variable[11]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[11]) /*AbstractArray::add*/;
-      variable[12] = NEW_String_string___String___with_native(BOX_NativeString(" inherits "), TAG_Int(10)); /*new String*/
-      variable[13] = variable[12];
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[13]) /*AbstractArray::add*/;
-      variable[14] = CALL_abstract_collection___Collection___length( variable[5] /*globs*/)( variable[5] /*globs*/) /*AbstractArray::length*/;
-      variable[15] = variable[14];
-      variable[15] = CALL_string___Object___to_s(variable[15])(variable[15]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[15]) /*AbstractArray::add*/;
-      variable[16] = NEW_String_string___String___with_native(BOX_NativeString(" global properties named "), TAG_Int(25)); /*new String*/
-      variable[17] = variable[16];
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[17]) /*AbstractArray::add*/;
-      variable[18] =  variable[4] /*pname*/;
-      variable[18] = CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[18]) /*AbstractArray::add*/;
-      variable[19] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-      variable[20] = variable[19];
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[20]) /*AbstractArray::add*/;
+      variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(7)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[8]: Once String constant */
+      if (once_value_37 != NIT_NULL) variable[8] = once_value_37;
+      else {
+        variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Name error: "), TAG_Int(12)) /*new String*/;
+        once_value_37 = variable[8];
+      }
+      /* Register variable[8]: Result */
+      /* Ensure var variable[8]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+      /* Ensure var variable[0]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], CALL_string___Object___to_s(variable[0])(variable[0]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[8]: Once String constant */
+      if (once_value_38 != NIT_NULL) variable[8] = once_value_38;
+      else {
+        variable[8] = NEW_String_string___String___with_native(BOX_NativeString(" inherits "), TAG_Int(10)) /*new String*/;
+        once_value_38 = variable[8];
+      }
+      /* Register variable[8]: Result */
+      /* Ensure var variable[8]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+      /* Register variable[8]: Result */
+      variable[8] = CALL_abstract_collection___Collection___length( variable[5] /*globs*/)( variable[5] /*globs*/) /*AbstractArrayRead::length*/;
+      /* Ensure var variable[8]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[8]: Once String constant */
+      if (once_value_39 != NIT_NULL) variable[8] = once_value_39;
+      else {
+        variable[8] = NEW_String_string___String___with_native(BOX_NativeString(" global properties named "), TAG_Int(25)) /*new String*/;
+        once_value_39 = variable[8];
+      }
+      /* Register variable[8]: Result */
+      /* Ensure var variable[8]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+      variable[8] =  variable[4] /*pname*/ /* Ensure var: super-string element*/;
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[8]: Once String constant */
+      if (once_value_40 != NIT_NULL) variable[8] = once_value_40;
+      else {
+        variable[8] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+        once_value_40 = variable[8];
+      }
+      /* Register variable[8]: Result */
+      /* Ensure var variable[8]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+      /* Register variable[7]: Result */
       variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
       CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[6], variable[7]) /*AbsSyntaxVisitor::error*/;
     }
-    variable[7] = CALL_abstract_collection___Collection___first( variable[5] /*globs*/)( variable[5] /*globs*/) /*IndexedCollection::first*/;
+    /* Register variable[6]: Local variable */
+    /* Register variable[7]: Result */
+    variable[7] = CALL_abstract_collection___Collection___first( variable[5] /*globs*/)( variable[5] /*globs*/) /*IndexedCollectionRead::first*/;
     variable[6] = variable[7];
     CALL_inheritance___MMLocalProperty___inherit_global( variable[2] /*prop*/)( variable[2] /*prop*/,  variable[6] /*g*/) /*MMLocalProperty::inherit_global*/;
   }
+  /* Register variable[5]: Result */
   variable[5] = CALL_abstractmetamodel___MMLocalProperty___global( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::global*/;
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[5])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[5])(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[5])) { /*if*/
     CALL_abstractmetamodel___MMLocalProperty___new_global( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::new_global*/;
+    /* Register variable[5]: Result */
     variable[5] = CALL_abstractmetamodel___MMLocalProperty___global( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::global*/;
+    /* Register variable[6]: Result */
     variable[6] = CALL_syntax_base___MMLocalProperty___is_init( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::is_init*/;
     CALL_abstractmetamodel___MMGlobalProperty___is_init__eq(variable[5])(variable[5], variable[6]) /*MMGlobalProperty::is_init=*/;
   }
-  return_label26: while(false);
+  return_label33: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___MMLocalProperty___accept_property_visitor(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 262, LOCATE_mmbuilder___MMLocalProperty___accept_property_visitor};
+  struct trace_t trace = {NULL, NULL, 263, LOCATE_mmbuilder___MMLocalProperty___accept_property_visitor};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  return_label27: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  return_label41: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___MMImplicitInit___accept_property_visitor(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 269, LOCATE_mmbuilder___MMImplicitInit___accept_property_visitor};
-  val_t variable[22];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 270, LOCATE_mmbuilder___MMImplicitInit___accept_property_visitor};
+        static val_t once_value_44 = NIT_NULL; /* Once value for string variable[8]*/
+        static val_t once_value_45 = NIT_NULL; /* Once value for string variable[8]*/
+        static val_t once_value_46 = NIT_NULL; /* Once value for string variable[8]*/
+        static val_t once_value_47 = NIT_NULL; /* Once value for string variable[8]*/
+  val_t variable[10];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
   variable[3] =  NIT_NULL /*null*/;
-  variable[4] = variable[0];
-  variable[4] = CALL_syntax_base___MMImplicitInit___super_inits(variable[4])(variable[4]) /*MMImplicitInit::super_inits*/;
-  variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*AbstractArray::iterator*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_syntax_base___MMImplicitInit___super_inits(variable[0])(variable[0]) /*MMImplicitInit::super_inits*/;
+  /* Register variable[4]: For iterator */
+  variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[5]: For 'is_ok' result */
     variable[5] = CALL_abstract_collection___Iterator___is_ok(variable[4])(variable[4]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[5])) break; /*for*/
-    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/;
+    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[6]: Local variable */
     variable[6] = variable[5];
+    /* Register variable[7]: Result */
     variable[7] = CALL_static_type___MMLocalProperty___signature( variable[6] /*p*/)( variable[6] /*p*/) /*MMLocalProperty::signature*/;
+    /* Register variable[7]: Result */
     variable[7] = CALL_static_type___MMSignature___arity(variable[7])(variable[7]) /*MMSignature::arity*/;
+    /* Register variable[7]: Result */
     variable[7] = TAG_Bool(UNTAG_Int(variable[7])>UNTAG_Int( TAG_Int(0)));
     if (UNTAG_Bool(variable[7])) { /*if*/
+      /* Register variable[7]: Result */
       variable[7] = TAG_Bool(( variable[3] /*base*/ ==  NIT_NULL /*null*/) || (( variable[3] /*base*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*base*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*base*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*base*/)( variable[3] /*base*/,  NIT_NULL /*null*/) /*Object::==*/)))));
       if (UNTAG_Bool(variable[7])) { /*if*/
         variable[3] =  variable[6] /*p*/ /*base=*/;
       } else { /*if*/
-        variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(7)); /*new Array[String]*/
-        variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Error: explicit constructor needed in "), TAG_Int(38)); /*new String*/
-        variable[9] = variable[8];
-        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[9]) /*AbstractArray::add*/;
-        variable[10] = variable[0];
-        variable[10] = CALL_abstractmetamodel___MMLocalProperty___local_class(variable[10])(variable[10]) /*MMLocalProperty::local_class*/;
-        variable[11] = variable[10];
-        variable[11] = CALL_string___Object___to_s(variable[11])(variable[11]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[11]) /*AbstractArray::add*/;
-        variable[12] = NEW_String_string___String___with_native(BOX_NativeString(" since both super-constructor "), TAG_Int(30)); /*new String*/
-        variable[13] = variable[12];
-        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[13]) /*AbstractArray::add*/;
-        variable[14] = CALL_abstractmetamodel___MMLocalProperty___full_name( variable[3] /*base*/)( variable[3] /*base*/) /*MMLocalProperty::full_name*/;
-        variable[15] = variable[14];
-        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[15]) /*AbstractArray::add*/;
-        variable[16] = NEW_String_string___String___with_native(BOX_NativeString(" and "), TAG_Int(5)); /*new String*/
-        variable[17] = variable[16];
-        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[17]) /*AbstractArray::add*/;
-        variable[18] = CALL_abstractmetamodel___MMLocalProperty___full_name( variable[6] /*p*/)( variable[6] /*p*/) /*MMLocalProperty::full_name*/;
-        variable[19] = variable[18];
-        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[19]) /*AbstractArray::add*/;
-        variable[20] = NEW_String_string___String___with_native(BOX_NativeString(" have paramters"), TAG_Int(15)); /*new String*/
-        variable[21] = variable[20];
-        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[21]) /*AbstractArray::add*/;
+        variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(7)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+        /* Register variable[8]: Once String constant */
+        if (once_value_44 != NIT_NULL) variable[8] = once_value_44;
+        else {
+          variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Error: explicit constructor needed in "), TAG_Int(38)) /*new String*/;
+          once_value_44 = variable[8];
+        }
+        /* Register variable[8]: Result */
+        /* Ensure var variable[8]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+        /* Register variable[8]: Result */
+        variable[8] = CALL_abstractmetamodel___MMLocalProperty___local_class(variable[0])(variable[0]) /*MMLocalProperty::local_class*/;
+        /* Ensure var variable[8]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[8]: Once String constant */
+        if (once_value_45 != NIT_NULL) variable[8] = once_value_45;
+        else {
+          variable[8] = NEW_String_string___String___with_native(BOX_NativeString(" since both super-constructor "), TAG_Int(30)) /*new String*/;
+          once_value_45 = variable[8];
+        }
+        /* Register variable[8]: Result */
+        /* Ensure var variable[8]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+        /* Register variable[8]: Result */
+        variable[8] = CALL_abstractmetamodel___MMLocalProperty___full_name( variable[3] /*base*/)( variable[3] /*base*/) /*MMLocalProperty::full_name*/;
+        /* Ensure var variable[8]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+        /* Register variable[8]: Once String constant */
+        if (once_value_46 != NIT_NULL) variable[8] = once_value_46;
+        else {
+          variable[8] = NEW_String_string___String___with_native(BOX_NativeString(" and "), TAG_Int(5)) /*new String*/;
+          once_value_46 = variable[8];
+        }
+        /* Register variable[8]: Result */
+        /* Ensure var variable[8]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+        /* Register variable[8]: Result */
+        variable[8] = CALL_abstractmetamodel___MMLocalProperty___full_name( variable[6] /*p*/)( variable[6] /*p*/) /*MMLocalProperty::full_name*/;
+        /* Ensure var variable[8]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+        /* Register variable[8]: Once String constant */
+        if (once_value_47 != NIT_NULL) variable[8] = once_value_47;
+        else {
+          variable[8] = NEW_String_string___String___with_native(BOX_NativeString(" have paramters"), TAG_Int(15)) /*new String*/;
+          once_value_47 = variable[8];
+        }
+        /* Register variable[8]: Result */
+        /* Ensure var variable[8]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+        /* Register variable[7]: Result */
         variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
         CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/,  NIT_NULL /*null*/, variable[7]) /*AbsSyntaxVisitor::error*/;
-        goto return_label28;
+        goto return_label42;
       }
     }
-    continue_29: while(0);
+    continue_43: while(0);
     CALL_abstract_collection___Iterator___next(variable[4])(variable[4]) /*ArrayIterator::next*/;
   }
-  break_29: while(0);
-  variable[4] = variable[0];
-  ATTR_mmbuilder___MMImplicitInit____super_init(variable[4]) /*MMImplicitInit::_super_init*/ =  variable[3] /*base*/;
-  variable[5] = NEW_Array_array___Array___init(); /*new Array[MMType]*/
+  break_43: while(0);
+  ATTR_mmbuilder___MMImplicitInit____super_init(variable[0]) /*MMImplicitInit::_super_init*/ =  variable[3] /*base*/;
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = NEW_Array_array___Array___init() /*new Array[MMType]*/;
   variable[4] = variable[5];
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[3] /*base*/ ==  NIT_NULL /*null*/) || (( variable[3] /*base*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*base*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*base*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*base*/)( variable[3] /*base*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[5])) { /*if*/
+    /* Register variable[5]: Local variable */
+    /* Register variable[6]: Result */
     variable[6] = CALL_static_type___MMLocalProperty___signature( variable[3] /*base*/)( variable[3] /*base*/) /*MMLocalProperty::signature*/;
     variable[5] = variable[6];
+    /* Register variable[6]: Result */
     variable[6] = CALL_static_type___MMSignature___arity( variable[5] /*sig*/)( variable[5] /*sig*/) /*MMSignature::arity*/;
-    variable[7] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[6]); /*new Range[Int]*/
-    variable[6] = variable[7];
+    /* Register variable[6]: Result */
+    variable[6] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[6]) /*new Range[Int]*/;
+    /* Register variable[6]: For iterator */
     variable[6] = CALL_abstract_collection___Collection___iterator(variable[6])(variable[6]) /*Range::iterator*/;
     while (true) { /*for*/
+      /* Register variable[7]: For 'is_ok' result */
       variable[7] = CALL_abstract_collection___Iterator___is_ok(variable[6])(variable[6]) /*Iterator::is_ok*/;
       if (!UNTAG_Bool(variable[7])) break; /*for*/
-      variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*Iterator::item*/;
+      variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*Iterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[8]: Local variable */
       variable[8] = variable[7];
+      /* Register variable[9]: Result */
       variable[9] = CALL_static_type___MMSignature_____bra( variable[5] /*sig*/)( variable[5] /*sig*/,  variable[8] /*i*/) /*MMSignature::[]*/;
       CALL_abstract_collection___SimpleCollection___add( variable[4] /*params*/)( variable[4] /*params*/, variable[9]) /*AbstractArray::add*/;
-      continue_30: while(0);
+      continue_48: while(0);
       CALL_abstract_collection___Iterator___next(variable[6])(variable[6]) /*Iterator::next*/;
     }
-    break_30: while(0);
+    break_48: while(0);
   }
-  variable[5] = variable[0];
-  variable[5] = CALL_syntax_base___MMImplicitInit___unassigned_attributes(variable[5])(variable[5]) /*MMImplicitInit::unassigned_attributes*/;
-  variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*AbstractArray::iterator*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_syntax_base___MMImplicitInit___unassigned_attributes(variable[0])(variable[0]) /*MMImplicitInit::unassigned_attributes*/;
+  /* Register variable[5]: For iterator */
+  variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[6]: For 'is_ok' result */
     variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[6])) break; /*for*/
-    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/;
+    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[7]: Local variable */
     variable[7] = variable[6];
+    /* Register variable[8]: Result */
     variable[8] = CALL_static_type___MMLocalProperty___signature( variable[7] /*a*/)( variable[7] /*a*/) /*MMLocalProperty::signature*/;
+    /* Register variable[8]: Result */
     variable[8] = CALL_static_type___MMSignature___return_type(variable[8])(variable[8]) /*MMSignature::return_type*/;
     CALL_abstract_collection___SimpleCollection___add( variable[4] /*params*/)( variable[4] /*params*/, variable[8]) /*AbstractArray::add*/;
-    continue_31: while(0);
+    continue_49: while(0);
     CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*ArrayIterator::next*/;
   }
-  break_31: while(0);
-  variable[5] = variable[0];
-  variable[6] = variable[0];
-  variable[6] = CALL_abstractmetamodel___MMLocalProperty___local_class(variable[6])(variable[6]) /*MMLocalProperty::local_class*/;
-  variable[6] = CALL_static_type___MMLocalClass___get_type(variable[6])(variable[6]) /*MMLocalClass::get_type*/;
-  variable[7] = NEW_MMSignature_static_type___MMSignature___init( variable[4] /*params*/,  NIT_NULL /*null*/, variable[6]); /*new MMSignature*/
-  variable[6] = variable[7];
-  CALL_static_type___MMLocalProperty___signature__eq(variable[5])(variable[5], variable[6]) /*MMLocalProperty::signature=*/;
-  return_label28: while(false);
+  break_49: while(0);
+  /* Register variable[5]: Result */
+  variable[5] = CALL_abstractmetamodel___MMLocalProperty___local_class(variable[0])(variable[0]) /*MMLocalProperty::local_class*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_static_type___MMLocalClass___get_type(variable[5])(variable[5]) /*MMLocalClass::get_type*/;
+  /* Register variable[5]: Result */
+  variable[5] = NEW_MMSignature_static_type___MMSignature___init( variable[4] /*params*/,  NIT_NULL /*null*/, variable[5]) /*new MMSignature*/;
+  CALL_static_type___MMLocalProperty___signature__eq(variable[0])(variable[0], variable[5]) /*MMLocalProperty::signature=*/;
+  return_label42: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t mmbuilder___MMImplicitInit___super_init(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 268, LOCATE_mmbuilder___MMImplicitInit___super_init};
+  struct trace_t trace = {NULL, NULL, 269, LOCATE_mmbuilder___MMImplicitInit___super_init};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___MMImplicitInit____super_init( self) /*MMImplicitInit::_super_init*/;
 }
 val_t mmbuilder___MMSrcAncestor___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 304, LOCATE_mmbuilder___MMSrcAncestor___local_class};
+  struct trace_t trace = {NULL, NULL, 305, LOCATE_mmbuilder___MMSrcAncestor___local_class};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___MMSrcAncestor____local_class( self) /*MMSrcAncestor::_local_class*/;
 }
 val_t mmbuilder___MMSrcAncestor___node(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 302, LOCATE_mmbuilder___MMSrcAncestor___node};
+  struct trace_t trace = {NULL, NULL, 303, LOCATE_mmbuilder___MMSrcAncestor___node};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___MMSrcAncestor____node( self) /*MMSrcAncestor::_node*/;
 }
 void mmbuilder___MMSrcAncestor___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 306, LOCATE_mmbuilder___MMSrcAncestor___init};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 307, LOCATE_mmbuilder___MMSrcAncestor___init};
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcAncestor].i]) return;
-  variable[4] = variable[0];
-  ATTR_mmbuilder___MMSrcAncestor____node(variable[4]) /*MMSrcAncestor::_node*/ =  variable[1] /*n*/;
-  variable[4] = variable[0];
-  ATTR_mmbuilder___MMSrcAncestor____local_class(variable[4]) /*MMSrcAncestor::_local_class*/ =  variable[2] /*c*/;
-  return_label32: while(false);
+  /* Register variable[3]: Method return value and escape marker */
+  ATTR_mmbuilder___MMSrcAncestor____node(variable[0]) /*MMSrcAncestor::_node*/ =  variable[1] /*n*/;
+  ATTR_mmbuilder___MMSrcAncestor____local_class(variable[0]) /*MMSrcAncestor::_local_class*/ =  variable[2] /*c*/;
+  return_label50: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcAncestor].i] = 1;
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___ClassBuilderVisitor___visit(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 326, LOCATE_mmbuilder___ClassBuilderVisitor___visit};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 327, LOCATE_mmbuilder___ClassBuilderVisitor___visit};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  CALL_mmbuilder___PNode___accept_class_builder( variable[1] /*n*/)( variable[1] /*n*/, variable[3]) /*PNode::accept_class_builder*/;
-  return_label33: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_mmbuilder___PNode___accept_class_builder( variable[1] /*n*/)( variable[1] /*n*/, variable[0]) /*PNode::accept_class_builder*/;
+  return_label51: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t mmbuilder___ClassBuilderVisitor___local_class_arity(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 320, LOCATE_mmbuilder___ClassBuilderVisitor___local_class_arity};
+  struct trace_t trace = {NULL, NULL, 321, LOCATE_mmbuilder___ClassBuilderVisitor___local_class_arity};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___ClassBuilderVisitor____local_class_arity( self) /*ClassBuilderVisitor::_local_class_arity*/;
 }
 void mmbuilder___ClassBuilderVisitor___local_class_arity__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 320, LOCATE_mmbuilder___ClassBuilderVisitor___local_class_arity__eq};
+  struct trace_t trace = {NULL, NULL, 321, LOCATE_mmbuilder___ClassBuilderVisitor___local_class_arity__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   ATTR_mmbuilder___ClassBuilderVisitor____local_class_arity( self) /*ClassBuilderVisitor::_local_class_arity*/ =  param0;
@@ -864,18 +1199,18 @@ void mmbuilder___ClassBuilderVisitor___local_class_arity__eq(val_t  self, val_t 
   return;
 }
 val_t mmbuilder___ClassBuilderVisitor___formals(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 323, LOCATE_mmbuilder___ClassBuilderVisitor___formals};
+  struct trace_t trace = {NULL, NULL, 324, LOCATE_mmbuilder___ClassBuilderVisitor___formals};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___ClassBuilderVisitor____formals( self) /*ClassBuilderVisitor::_formals*/;
 }
 void mmbuilder___ClassBuilderVisitor___formals__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 323, LOCATE_mmbuilder___ClassBuilderVisitor___formals__eq};
+  struct trace_t trace = {NULL, NULL, 324, LOCATE_mmbuilder___ClassBuilderVisitor___formals__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   ATTR_mmbuilder___ClassBuilderVisitor____formals( self) /*ClassBuilderVisitor::_formals*/ =  param0;
@@ -883,168 +1218,198 @@ void mmbuilder___ClassBuilderVisitor___formals__eq(val_t  self, val_t  param0) {
   return;
 }
 void mmbuilder___ClassBuilderVisitor___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 327, LOCATE_mmbuilder___ClassBuilderVisitor___init};
+  struct trace_t trace = {NULL, NULL, 328, LOCATE_mmbuilder___ClassBuilderVisitor___init};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClassBuilderVisitor].i]) return;
+  /* Register variable[3]: Method return value and escape marker */
   CALL_syntax_base___AbsSyntaxVisitor___init(variable[0])(variable[0], variable[1], variable[2], init_table /*YYY*/) /*AbsSyntaxVisitor::init*/;
-  return_label34: while(false);
+  return_label52: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClassBuilderVisitor].i] = 1;
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___ClassSpecializationBuilderVisitor___visit(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 334, LOCATE_mmbuilder___ClassSpecializationBuilderVisitor___visit};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 335, LOCATE_mmbuilder___ClassSpecializationBuilderVisitor___visit};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  CALL_mmbuilder___PNode___accept_class_specialization_builder( variable[1] /*n*/)( variable[1] /*n*/, variable[3]) /*PNode::accept_class_specialization_builder*/;
-  return_label35: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_mmbuilder___PNode___accept_class_specialization_builder( variable[1] /*n*/)( variable[1] /*n*/, variable[0]) /*PNode::accept_class_specialization_builder*/;
+  return_label53: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___ClassSpecializationBuilderVisitor___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 335, LOCATE_mmbuilder___ClassSpecializationBuilderVisitor___init};
+  struct trace_t trace = {NULL, NULL, 336, LOCATE_mmbuilder___ClassSpecializationBuilderVisitor___init};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClassSpecializationBuilderVisitor].i]) return;
+  /* Register variable[3]: Method return value and escape marker */
   CALL_syntax_base___AbsSyntaxVisitor___init(variable[0])(variable[0], variable[1], variable[2], init_table /*YYY*/) /*AbsSyntaxVisitor::init*/;
-  return_label36: while(false);
+  return_label54: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClassSpecializationBuilderVisitor].i] = 1;
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___ClassAncestorBuilder___visit(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 342, LOCATE_mmbuilder___ClassAncestorBuilder___visit};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 343, LOCATE_mmbuilder___ClassAncestorBuilder___visit};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  CALL_mmbuilder___PNode___accept_class_ancestor_builder( variable[1] /*n*/)( variable[1] /*n*/, variable[3]) /*PNode::accept_class_ancestor_builder*/;
-  return_label37: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_mmbuilder___PNode___accept_class_ancestor_builder( variable[1] /*n*/)( variable[1] /*n*/, variable[0]) /*PNode::accept_class_ancestor_builder*/;
+  return_label55: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___ClassAncestorBuilder___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 343, LOCATE_mmbuilder___ClassAncestorBuilder___init};
+  struct trace_t trace = {NULL, NULL, 344, LOCATE_mmbuilder___ClassAncestorBuilder___init};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClassAncestorBuilder].i]) return;
+  /* Register variable[3]: Method return value and escape marker */
   CALL_syntax_base___AbsSyntaxVisitor___init(variable[0])(variable[0], variable[1], variable[2], init_table /*YYY*/) /*AbsSyntaxVisitor::init*/;
-  return_label38: while(false);
+  return_label56: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClassAncestorBuilder].i] = 1;
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___ClassVerifierVisitor___visit(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 350, LOCATE_mmbuilder___ClassVerifierVisitor___visit};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 351, LOCATE_mmbuilder___ClassVerifierVisitor___visit};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  CALL_mmbuilder___PNode___accept_class_verifier( variable[1] /*n*/)( variable[1] /*n*/, variable[3]) /*PNode::accept_class_verifier*/;
-  return_label39: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_mmbuilder___PNode___accept_class_verifier( variable[1] /*n*/)( variable[1] /*n*/, variable[0]) /*PNode::accept_class_verifier*/;
+  return_label57: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___ClassVerifierVisitor___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 351, LOCATE_mmbuilder___ClassVerifierVisitor___init};
+  struct trace_t trace = {NULL, NULL, 352, LOCATE_mmbuilder___ClassVerifierVisitor___init};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClassVerifierVisitor].i]) return;
+  /* Register variable[3]: Method return value and escape marker */
   CALL_syntax_base___AbsSyntaxVisitor___init(variable[0])(variable[0], variable[1], variable[2], init_table /*YYY*/) /*AbsSyntaxVisitor::init*/;
-  return_label40: while(false);
+  return_label58: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ClassVerifierVisitor].i] = 1;
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___PropertyBuilderVisitor___visit(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 361, LOCATE_mmbuilder___PropertyBuilderVisitor___visit};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 362, LOCATE_mmbuilder___PropertyBuilderVisitor___visit};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  CALL_mmbuilder___PNode___accept_property_builder( variable[1] /*n*/)( variable[1] /*n*/, variable[3]) /*PNode::accept_property_builder*/;
-  return_label41: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_mmbuilder___PNode___accept_property_builder( variable[1] /*n*/)( variable[1] /*n*/, variable[0]) /*PNode::accept_property_builder*/;
+  return_label59: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___PropertyBuilderVisitor___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 362, LOCATE_mmbuilder___PropertyBuilderVisitor___init};
+  struct trace_t trace = {NULL, NULL, 363, LOCATE_mmbuilder___PropertyBuilderVisitor___init};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PropertyBuilderVisitor].i]) return;
+  /* Register variable[3]: Method return value and escape marker */
   CALL_syntax_base___AbsSyntaxVisitor___init(variable[0])(variable[0], variable[1], variable[2], init_table /*YYY*/) /*AbsSyntaxVisitor::init*/;
-  return_label42: while(false);
+  return_label60: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PropertyBuilderVisitor].i] = 1;
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___PropertyVerifierVisitor___visit(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 373, LOCATE_mmbuilder___PropertyVerifierVisitor___visit};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 374, LOCATE_mmbuilder___PropertyVerifierVisitor___visit};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  CALL_mmbuilder___PNode___accept_property_verifier( variable[1] /*n*/)( variable[1] /*n*/, variable[3]) /*PNode::accept_property_verifier*/;
-  return_label43: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_mmbuilder___PNode___accept_property_verifier( variable[1] /*n*/)( variable[1] /*n*/, variable[0]) /*PNode::accept_property_verifier*/;
+  return_label61: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t mmbuilder___PropertyVerifierVisitor___signature_builder(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 370, LOCATE_mmbuilder___PropertyVerifierVisitor___signature_builder};
+  struct trace_t trace = {NULL, NULL, 371, LOCATE_mmbuilder___PropertyVerifierVisitor___signature_builder};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___PropertyVerifierVisitor____signature_builder( self) /*PropertyVerifierVisitor::_signature_builder*/;
 }
 void mmbuilder___PropertyVerifierVisitor___signature_builder__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 370, LOCATE_mmbuilder___PropertyVerifierVisitor___signature_builder__eq};
+  struct trace_t trace = {NULL, NULL, 371, LOCATE_mmbuilder___PropertyVerifierVisitor___signature_builder__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   ATTR_mmbuilder___PropertyVerifierVisitor____signature_builder( self) /*PropertyVerifierVisitor::_signature_builder*/ =  param0;
@@ -1052,37 +1417,41 @@ void mmbuilder___PropertyVerifierVisitor___signature_builder__eq(val_t  self, va
   return;
 }
 void mmbuilder___PropertyVerifierVisitor___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 375, LOCATE_mmbuilder___PropertyVerifierVisitor___init};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 376, LOCATE_mmbuilder___PropertyVerifierVisitor___init};
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PropertyVerifierVisitor].i]) return;
+  /* Register variable[3]: Method return value and escape marker */
   CALL_syntax_base___AbsSyntaxVisitor___init(variable[0])(variable[0], variable[1], variable[2], init_table /*YYY*/) /*AbsSyntaxVisitor::init*/;
-  variable[4] = variable[0];
-  variable[5] = NEW_SignatureBuilder_mmbuilder___SignatureBuilder___init(); /*new SignatureBuilder*/
-  ATTR_mmbuilder___PropertyVerifierVisitor____signature_builder(variable[4]) /*PropertyVerifierVisitor::_signature_builder*/ = variable[5];
-  return_label44: while(false);
+  /* Register variable[4]: Result */
+  variable[4] = NEW_SignatureBuilder_mmbuilder___SignatureBuilder___init() /*new SignatureBuilder*/;
+  ATTR_mmbuilder___PropertyVerifierVisitor____signature_builder(variable[0]) /*PropertyVerifierVisitor::_signature_builder*/ = variable[4];
+  return_label62: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_PropertyVerifierVisitor].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t mmbuilder___SignatureBuilder___params(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 384, LOCATE_mmbuilder___SignatureBuilder___params};
+  struct trace_t trace = {NULL, NULL, 385, LOCATE_mmbuilder___SignatureBuilder___params};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___SignatureBuilder____params( self) /*SignatureBuilder::_params*/;
 }
 void mmbuilder___SignatureBuilder___params__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 384, LOCATE_mmbuilder___SignatureBuilder___params__eq};
+  struct trace_t trace = {NULL, NULL, 385, LOCATE_mmbuilder___SignatureBuilder___params__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   ATTR_mmbuilder___SignatureBuilder____params( self) /*SignatureBuilder::_params*/ =  param0;
@@ -1090,18 +1459,18 @@ void mmbuilder___SignatureBuilder___params__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t mmbuilder___SignatureBuilder___untyped_params(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 387, LOCATE_mmbuilder___SignatureBuilder___untyped_params};
+  struct trace_t trace = {NULL, NULL, 388, LOCATE_mmbuilder___SignatureBuilder___untyped_params};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___SignatureBuilder____untyped_params( self) /*SignatureBuilder::_untyped_params*/;
 }
 void mmbuilder___SignatureBuilder___untyped_params__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 387, LOCATE_mmbuilder___SignatureBuilder___untyped_params__eq};
+  struct trace_t trace = {NULL, NULL, 388, LOCATE_mmbuilder___SignatureBuilder___untyped_params__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   ATTR_mmbuilder___SignatureBuilder____untyped_params( self) /*SignatureBuilder::_untyped_params*/ =  param0;
@@ -1109,18 +1478,18 @@ void mmbuilder___SignatureBuilder___untyped_params__eq(val_t  self, val_t  param
   return;
 }
 val_t mmbuilder___SignatureBuilder___vararg_rank(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 390, LOCATE_mmbuilder___SignatureBuilder___vararg_rank};
+  struct trace_t trace = {NULL, NULL, 391, LOCATE_mmbuilder___SignatureBuilder___vararg_rank};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___SignatureBuilder____vararg_rank( self) /*SignatureBuilder::_vararg_rank*/;
 }
 void mmbuilder___SignatureBuilder___vararg_rank__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 390, LOCATE_mmbuilder___SignatureBuilder___vararg_rank__eq};
+  struct trace_t trace = {NULL, NULL, 391, LOCATE_mmbuilder___SignatureBuilder___vararg_rank__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   ATTR_mmbuilder___SignatureBuilder____vararg_rank( self) /*SignatureBuilder::_vararg_rank*/ =  param0;
@@ -1128,18 +1497,18 @@ void mmbuilder___SignatureBuilder___vararg_rank__eq(val_t  self, val_t  param0) 
   return;
 }
 val_t mmbuilder___SignatureBuilder___closure_decls(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 393, LOCATE_mmbuilder___SignatureBuilder___closure_decls};
+  struct trace_t trace = {NULL, NULL, 394, LOCATE_mmbuilder___SignatureBuilder___closure_decls};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___SignatureBuilder____closure_decls( self) /*SignatureBuilder::_closure_decls*/;
 }
 void mmbuilder___SignatureBuilder___closure_decls__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 393, LOCATE_mmbuilder___SignatureBuilder___closure_decls__eq};
+  struct trace_t trace = {NULL, NULL, 394, LOCATE_mmbuilder___SignatureBuilder___closure_decls__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   ATTR_mmbuilder___SignatureBuilder____closure_decls( self) /*SignatureBuilder::_closure_decls*/ =  param0;
@@ -1147,18 +1516,18 @@ void mmbuilder___SignatureBuilder___closure_decls__eq(val_t  self, val_t  param0
   return;
 }
 val_t mmbuilder___SignatureBuilder___signature(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 396, LOCATE_mmbuilder___SignatureBuilder___signature};
+  struct trace_t trace = {NULL, NULL, 397, LOCATE_mmbuilder___SignatureBuilder___signature};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___SignatureBuilder____signature( self) /*SignatureBuilder::_signature*/;
 }
 void mmbuilder___SignatureBuilder___signature__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 396, LOCATE_mmbuilder___SignatureBuilder___signature__eq};
+  struct trace_t trace = {NULL, NULL, 397, LOCATE_mmbuilder___SignatureBuilder___signature__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   ATTR_mmbuilder___SignatureBuilder____signature( self) /*SignatureBuilder::_signature*/ =  param0;
@@ -1168,2966 +1537,4498 @@ void mmbuilder___SignatureBuilder___signature__eq(val_t  self, val_t  param0) {
 void mmbuilder___SignatureBuilder___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 0, LOCATE_mmbuilder___SignatureBuilder___init};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___PNode___accept_class_builder(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 403, LOCATE_mmbuilder___PNode___accept_class_builder};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 404, LOCATE_mmbuilder___PNode___accept_class_builder};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  CALL_syntax_base___PNode___accept_abs_syntax_visitor(variable[3])(variable[3],  variable[1] /*v*/) /*PNode::accept_abs_syntax_visitor*/;
-  return_label45: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_syntax_base___PNode___accept_abs_syntax_visitor(variable[0])(variable[0],  variable[1] /*v*/) /*PNode::accept_abs_syntax_visitor*/;
+  return_label63: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___PNode___accept_class_specialization_builder(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 404, LOCATE_mmbuilder___PNode___accept_class_specialization_builder};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 405, LOCATE_mmbuilder___PNode___accept_class_specialization_builder};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  CALL_syntax_base___PNode___accept_abs_syntax_visitor(variable[3])(variable[3],  variable[1] /*v*/) /*PNode::accept_abs_syntax_visitor*/;
-  return_label46: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_syntax_base___PNode___accept_abs_syntax_visitor(variable[0])(variable[0],  variable[1] /*v*/) /*PNode::accept_abs_syntax_visitor*/;
+  return_label64: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___PNode___accept_class_ancestor_builder(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 405, LOCATE_mmbuilder___PNode___accept_class_ancestor_builder};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 406, LOCATE_mmbuilder___PNode___accept_class_ancestor_builder};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  CALL_syntax_base___PNode___accept_abs_syntax_visitor(variable[3])(variable[3],  variable[1] /*v*/) /*PNode::accept_abs_syntax_visitor*/;
-  return_label47: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_syntax_base___PNode___accept_abs_syntax_visitor(variable[0])(variable[0],  variable[1] /*v*/) /*PNode::accept_abs_syntax_visitor*/;
+  return_label65: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___PNode___accept_class_verifier(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 406, LOCATE_mmbuilder___PNode___accept_class_verifier};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 407, LOCATE_mmbuilder___PNode___accept_class_verifier};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  CALL_syntax_base___PNode___accept_abs_syntax_visitor(variable[3])(variable[3],  variable[1] /*v*/) /*PNode::accept_abs_syntax_visitor*/;
-  return_label48: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_syntax_base___PNode___accept_abs_syntax_visitor(variable[0])(variable[0],  variable[1] /*v*/) /*PNode::accept_abs_syntax_visitor*/;
+  return_label66: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___PNode___accept_property_builder(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 407, LOCATE_mmbuilder___PNode___accept_property_builder};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 408, LOCATE_mmbuilder___PNode___accept_property_builder};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  CALL_syntax_base___PNode___accept_abs_syntax_visitor(variable[3])(variable[3],  variable[1] /*v*/) /*PNode::accept_abs_syntax_visitor*/;
-  return_label49: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_syntax_base___PNode___accept_abs_syntax_visitor(variable[0])(variable[0],  variable[1] /*v*/) /*PNode::accept_abs_syntax_visitor*/;
+  return_label67: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___PNode___accept_property_verifier(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 408, LOCATE_mmbuilder___PNode___accept_property_verifier};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 409, LOCATE_mmbuilder___PNode___accept_property_verifier};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  CALL_syntax_base___PNode___accept_abs_syntax_visitor(variable[3])(variable[3],  variable[1] /*v*/) /*PNode::accept_abs_syntax_visitor*/;
-  return_label50: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_syntax_base___PNode___accept_abs_syntax_visitor(variable[0])(variable[0],  variable[1] /*v*/) /*PNode::accept_abs_syntax_visitor*/;
+  return_label68: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___AModule___import_super_modules(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 412, LOCATE_mmbuilder___AModule___import_super_modules};
-      static val_t once_value_53; static int once_bool_53; /* Once value for variable[8]*/
-  val_t variable[14];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 413, LOCATE_mmbuilder___AModule___import_super_modules};
+      static val_t once_value_71 = NIT_NULL; /* Once value for string variable[8]*/
+      static val_t once_value_72 = NIT_NULL; /* Once value for string variable[8]*/
+      static val_t once_value_73; static int once_bool_73; /* Once value for variable[8]*/
+        static val_t once_value_74 = NIT_NULL; /* Once value for string variable[8]*/
+  val_t variable[13];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
-  variable[5] = NEW_Array_array___Array___init(); /*new Array[Symbol]*/
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = NEW_Array_array___Array___init() /*new Array[Symbol]*/;
   variable[4] = variable[5];
-  variable[6] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[Symbol, Int]*/
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
+  variable[6] = NEW_HashMap_hash___HashMap___init() /*new HashMap[Symbol, Int]*/;
   variable[5] = variable[6];
+  /* Register variable[6]: Local variable */
   variable[6] =  NIT_NULL /*null*/;
-  variable[7] = variable[0];
-  variable[7] = CALL_parser_nodes___AModule___n_imports(variable[7])(variable[7]) /*AModule::n_imports*/;
+  /* Register variable[7]: Result */
+  variable[7] = CALL_parser_nodes___AModule___n_imports(variable[0])(variable[0]) /*AModule::n_imports*/;
+  /* Register variable[7]: For iterator */
   variable[7] = CALL_abstract_collection___Collection___iterator(variable[7])(variable[7]) /*List::iterator*/;
   while (true) { /*for*/
+    /* Register variable[8]: For 'is_ok' result */
     variable[8] = CALL_abstract_collection___Iterator___is_ok(variable[7])(variable[7]) /*ListIterator::is_ok*/;
     if (!UNTAG_Bool(variable[8])) break; /*for*/
-    variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*ListIterator::item*/;
+    variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*ListIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[9]: Local variable */
     variable[9] = variable[8];
+    /* Register variable[10]: Local variable */
+    /* Register variable[11]: Result */
     variable[11] = CALL_mmbuilder___PImport___module_name( variable[9] /*i*/)( variable[9] /*i*/) /*PImport::module_name*/;
     variable[10] = variable[11];
+    /* Register variable[11]: Result */
     variable[11] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[10] /*n*/ ==  NIT_NULL /*null*/) || (( variable[10] /*n*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[10] /*n*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[10] /*n*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[10] /*n*/)( variable[10] /*n*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
     if (UNTAG_Bool(variable[11])) { /*if*/
       CALL_abstract_collection___SimpleCollection___add( variable[4] /*module_names_to_import*/)( variable[4] /*module_names_to_import*/,  variable[10] /*n*/) /*AbstractArray::add*/;
+      /* Register variable[11]: Result */
       variable[11] = CALL_mmbuilder___PImport___visibility_level( variable[9] /*i*/)( variable[9] /*i*/) /*PImport::visibility_level*/;
       CALL_abstract_collection___Map_____braeq( variable[5] /*module_visibility*/)( variable[5] /*module_visibility*/,  variable[10] /*n*/, variable[11]) /*HashMap::[]=*/;
     } else { /*if*/
       variable[6] =  variable[9] /*i*/ /*no_import=*/;
     }
-    continue_52: while(0);
+    continue_70: while(0);
     CALL_abstract_collection___Iterator___next(variable[7])(variable[7]) /*ListIterator::next*/;
   }
-  break_52: while(0);
+  break_70: while(0);
+  /* Register variable[7]: Result */
   variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[6] /*no_import*/ ==  NIT_NULL /*null*/) || (( variable[6] /*no_import*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[6] /*no_import*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*no_import*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[6] /*no_import*/)( variable[6] /*no_import*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[7])) { /*if*/
-    variable[7] = CALL_abstract_collection___Collection___is_empty( variable[4] /*module_names_to_import*/)( variable[4] /*module_names_to_import*/) /*AbstractArray::is_empty*/;
+    /* Register variable[7]: Result */
+    variable[7] = CALL_abstract_collection___Collection___is_empty( variable[4] /*module_names_to_import*/)( variable[4] /*module_names_to_import*/) /*AbstractArrayRead::is_empty*/;
     if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[7])))) { /*if*/
-      variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-      variable[8] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-      variable[9] = variable[8];
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[9]) /*AbstractArray::add*/;
-      variable[10] = CALL_parser_prod___PNode___locate( variable[6] /*no_import*/)( variable[6] /*no_import*/) /*Prod::locate*/;
-      variable[11] = variable[10];
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[11]) /*AbstractArray::add*/;
-      variable[12] = NEW_String_string___String___with_native(BOX_NativeString(": Error: Top modules cannot import other modules."), TAG_Int(49)); /*new String*/
-      variable[13] = variable[12];
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[13]) /*AbstractArray::add*/;
+      variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[8]: Once String constant */
+      if (once_value_71 != NIT_NULL) variable[8] = once_value_71;
+      else {
+        variable[8] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+        once_value_71 = variable[8];
+      }
+      /* Register variable[8]: Result */
+      /* Ensure var variable[8]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+      /* Register variable[8]: Result */
+      variable[8] = CALL_parser_prod___PNode___locate( variable[6] /*no_import*/)( variable[6] /*no_import*/) /*Prod::locate*/;
+      /* Ensure var variable[8]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+      /* Register variable[8]: Once String constant */
+      if (once_value_72 != NIT_NULL) variable[8] = once_value_72;
+      else {
+        variable[8] = NEW_String_string___String___with_native(BOX_NativeString(": Error: Top modules cannot import other modules."), TAG_Int(49)) /*new String*/;
+        once_value_72 = variable[8];
+      }
+      /* Register variable[8]: Result */
+      /* Ensure var variable[8]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[8]) /*AbstractArray::add*/;
+      /* Register variable[7]: Result */
       variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
       CALL_mmloader___ToolContext___error( variable[1] /*tc*/)( variable[1] /*tc*/, variable[7]) /*ToolContext::error*/;
     }
   } else { /*if*/
-    variable[7] = CALL_abstract_collection___Collection___is_empty( variable[4] /*module_names_to_import*/)( variable[4] /*module_names_to_import*/) /*AbstractArray::is_empty*/;
+    /* Register variable[7]: Result */
+    variable[7] = CALL_abstract_collection___Collection___is_empty( variable[4] /*module_names_to_import*/)( variable[4] /*module_names_to_import*/) /*AbstractArrayRead::is_empty*/;
     if (UNTAG_Bool(variable[7])) { /*if*/
-      if (once_bool_53) variable[8] = once_value_53;
+      /* Register variable[7]: Local variable */
+      /* Register variable[8]: Once expression result */
+      if (once_bool_73) variable[8] = once_value_73;
       else {
-        variable[8] = NEW_String_string___String___with_native(BOX_NativeString("standard"), TAG_Int(8)); /*new String*/
+        /* Register variable[8]: Once String constant */
+        if (once_value_74 != NIT_NULL) variable[8] = once_value_74;
+        else {
+          variable[8] = NEW_String_string___String___with_native(BOX_NativeString("standard"), TAG_Int(8)) /*new String*/;
+          once_value_74 = variable[8];
+        }
+        /* Register variable[8]: Result */
+        /* Register variable[8]: Result */
         variable[8] = CALL_symbol___String___to_symbol(variable[8])(variable[8]) /*String::to_symbol*/;
-        once_value_53 = variable[8];
-        once_bool_53 = true;
+        once_value_73 = variable[8];
+        once_bool_73 = true;
       }
+      /* Register variable[8]: Result */
       variable[7] = variable[8];
       CALL_abstract_collection___SimpleCollection___add( variable[4] /*module_names_to_import*/)( variable[4] /*module_names_to_import*/,  variable[7] /*stdname*/) /*AbstractArray::add*/;
       CALL_abstract_collection___Map_____braeq( variable[5] /*module_visibility*/)( variable[5] /*module_visibility*/,  variable[7] /*stdname*/,  TAG_Int(1)) /*HashMap::[]=*/;
     }
   }
   CALL_mmloader___MMModule___import_supers_modules( variable[2] /*mod*/)( variable[2] /*mod*/,  variable[4] /*module_names_to_import*/) /*MMModule::import_supers_modules*/;
-  variable[7] = CALL_abstract_collection___Collection___iterator( variable[4] /*module_names_to_import*/)( variable[4] /*module_names_to_import*/) /*AbstractArray::iterator*/;
+  /* Register variable[7]: For iterator */
+  variable[7] = CALL_abstract_collection___Collection___iterator( variable[4] /*module_names_to_import*/)( variable[4] /*module_names_to_import*/) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[8]: For 'is_ok' result */
     variable[8] = CALL_abstract_collection___Iterator___is_ok(variable[7])(variable[7]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[8])) break; /*for*/
-    variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*ArrayIterator::item*/;
+    variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[9]: Local variable */
     variable[9] = variable[8];
-    variable[11] = CALL_abstract_collection___Map_____bra( variable[5] /*module_visibility*/)( variable[5] /*module_visibility*/,  variable[9] /*mname*/) /*CoupleMap::[]*/;
+    /* Register variable[10]: Local variable */
+    /* Register variable[11]: Result */
+    variable[11] = CALL_abstract_collection___MapRead_____bra( variable[5] /*module_visibility*/)( variable[5] /*module_visibility*/,  variable[9] /*mname*/) /*CoupleMap::[]*/;
     variable[10] = variable[11];
+    /* Register variable[11]: Local variable */
+    /* Register variable[12]: Result */
     variable[12] = CALL_mmloader___ToolContext___get_module( variable[1] /*tc*/)( variable[1] /*tc*/,  variable[9] /*mname*/,  variable[2] /*mod*/) /*ToolContext::get_module*/;
     variable[11] = variable[12];
     CALL_abstractmetamodel___MMModule___add_super_module( variable[2] /*mod*/)( variable[2] /*mod*/,  variable[11] /*m*/,  variable[10] /*level*/) /*MMModule::add_super_module*/;
-    continue_54: while(0);
+    continue_75: while(0);
     CALL_abstract_collection___Iterator___next(variable[7])(variable[7]) /*ArrayIterator::next*/;
   }
-  break_54: while(0);
-  return_label51: while(false);
+  break_75: while(0);
+  return_label69: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___APackagedecl___accept_class_builder(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 449, LOCATE_mmbuilder___APackagedecl___accept_class_builder};
-  val_t variable[15];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 450, LOCATE_mmbuilder___APackagedecl___accept_class_builder};
+    static val_t once_value_77 = NIT_NULL; /* Once value for string variable[5]*/
+    static val_t once_value_78 = NIT_NULL; /* Once value for string variable[5]*/
+    static val_t once_value_79 = NIT_NULL; /* Once value for string variable[5]*/
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_parser_nodes___APackagedecl___n_id(variable[3])(variable[3]) /*APackagedecl::n_id*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_parser_nodes___APackagedecl___n_id(variable[0])(variable[0]) /*APackagedecl::n_id*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_syntax_base___Token___to_symbol(variable[3])(variable[3]) /*Token::to_symbol*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_syntax_base___AbsSyntaxVisitor___module( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_abstractmetamodel___MMModule___name(variable[4])(variable[4]) /*MMModule::name*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] == variable[4]) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3],variable[4])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3], variable[4]) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = variable[0];
-    variable[3] = CALL_parser_nodes___APackagedecl___n_id(variable[3])(variable[3]) /*APackagedecl::n_id*/;
-    variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-    variable[5] = NEW_String_string___String___with_native(BOX_NativeString("Error: Package name missmatch between "), TAG_Int(38)); /*new String*/
-    variable[6] = variable[5];
-    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[6]) /*AbstractArray::add*/;
-    variable[7] = CALL_syntax_base___AbsSyntaxVisitor___module( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
-    variable[7] = CALL_abstractmetamodel___MMModule___name(variable[7])(variable[7]) /*MMModule::name*/;
-    variable[8] = variable[7];
-    variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[8]) /*AbstractArray::add*/;
-    variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" and "), TAG_Int(5)); /*new String*/
-    variable[10] = variable[9];
-    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[10]) /*AbstractArray::add*/;
-    variable[11] = variable[0];
-    variable[11] = CALL_parser_nodes___APackagedecl___n_id(variable[11])(variable[11]) /*APackagedecl::n_id*/;
-    variable[11] = CALL_syntax_base___Token___to_symbol(variable[11])(variable[11]) /*Token::to_symbol*/;
-    variable[12] = variable[11];
-    variable[12] = CALL_string___Object___to_s(variable[12])(variable[12]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[12]) /*AbstractArray::add*/;
-    variable[13] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-    variable[14] = variable[13];
-    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[14]) /*AbstractArray::add*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_parser_nodes___APackagedecl___n_id(variable[0])(variable[0]) /*APackagedecl::n_id*/;
+    variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[5]: Once String constant */
+    if (once_value_77 != NIT_NULL) variable[5] = once_value_77;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString("Error: Package name missmatch between "), TAG_Int(38)) /*new String*/;
+      once_value_77 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_syntax_base___AbsSyntaxVisitor___module( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_abstractmetamodel___MMModule___name(variable[5])(variable[5]) /*MMModule::name*/;
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[5]: Once String constant */
+    if (once_value_78 != NIT_NULL) variable[5] = once_value_78;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString(" and "), TAG_Int(5)) /*new String*/;
+      once_value_78 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_parser_nodes___APackagedecl___n_id(variable[0])(variable[0]) /*APackagedecl::n_id*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_syntax_base___Token___to_symbol(variable[5])(variable[5]) /*Token::to_symbol*/;
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[5]: Once String constant */
+    if (once_value_79 != NIT_NULL) variable[5] = once_value_79;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+      once_value_79 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_string___Object___to_s(variable[4])(variable[4]) /*Object::to_s*/;
     CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[3], variable[4]) /*AbsSyntaxVisitor::error*/;
   }
-  return_label55: while(false);
+  return_label76: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t mmbuilder___PImport___module_name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 458, LOCATE_mmbuilder___PImport___module_name};
+  struct trace_t trace = {NULL, NULL, 459, LOCATE_mmbuilder___PImport___module_name};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_mmbuilder, 458);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_mmbuilder, 459);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t mmbuilder___PImport___visibility_level(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 461, LOCATE_mmbuilder___PImport___visibility_level};
+  struct trace_t trace = {NULL, NULL, 462, LOCATE_mmbuilder___PImport___visibility_level};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_mmbuilder, 461);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_mmbuilder, 462);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t mmbuilder___AImport___module_name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 465, LOCATE_mmbuilder___AImport___module_name};
+  struct trace_t trace = {NULL, NULL, 466, LOCATE_mmbuilder___AImport___module_name};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_parser_nodes___AImport___n_id(variable[2])(variable[2]) /*AImport::n_id*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_parser_nodes___AImport___n_id(variable[0])(variable[0]) /*AImport::n_id*/;
+  /* Register variable[2]: Result */
   variable[2] = CALL_syntax_base___Token___to_symbol(variable[2])(variable[2]) /*Token::to_symbol*/;
-  variable[1] = variable[2];
-  goto return_label56;
-  return_label56: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t mmbuilder___AImport___visibility_level(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 469, LOCATE_mmbuilder___AImport___visibility_level};
-  val_t variable[3];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_parser_nodes___AImport___n_visibility(variable[2])(variable[2]) /*AImport::n_visibility*/;
-  variable[2] = CALL_mmbuilder___PVisibility___level(variable[2])(variable[2]) /*PVisibility::level*/;
-  variable[1] = variable[2];
-  goto return_label57;
-  return_label57: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t mmbuilder___ANoImport___module_name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 475, LOCATE_mmbuilder___ANoImport___module_name};
-  val_t variable[2];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[1] =  NIT_NULL /*null*/;
-  goto return_label58;
-  return_label58: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t mmbuilder___PVisibility___level(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 482, LOCATE_mmbuilder___PVisibility___level};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_mmbuilder, 482);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return NIT_NULL;
-}
-val_t mmbuilder___APublicVisibility___level(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 486, LOCATE_mmbuilder___APublicVisibility___level};
-  val_t variable[2];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[1] =  TAG_Int(1);
-  goto return_label59;
-  return_label59: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t mmbuilder___AProtectedVisibility___level(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 489, LOCATE_mmbuilder___AProtectedVisibility___level};
-  val_t variable[2];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[1] =  TAG_Int(2);
-  goto return_label60;
-  return_label60: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t mmbuilder___APrivateVisibility___level(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 492, LOCATE_mmbuilder___APrivateVisibility___level};
-  val_t variable[2];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[1] =  TAG_Int(3);
-  goto return_label61;
-  return_label61: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t mmbuilder___AIntrudeVisibility___level(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 495, LOCATE_mmbuilder___AIntrudeVisibility___level};
-  val_t variable[2];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[1] =  TAG_Int(0);
-  goto return_label62;
-  return_label62: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-void mmbuilder___PClassdef___accept_abs_syntax_visitor(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 550, LOCATE_mmbuilder___PClassdef___accept_abs_syntax_visitor};
-  val_t variable[4];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_mmbuilder___PClassdef____local_class(variable[3]) /*PClassdef::_local_class*/;
-  CALL_syntax_base___AbsSyntaxVisitor___local_class__eq( variable[1] /*v*/)( variable[1] /*v*/, variable[3]) /*AbsSyntaxVisitor::local_class=*/;
-  CALL_SUPER_mmbuilder___PClassdef___accept_abs_syntax_visitor(variable[0])(variable[0], variable[1]) /*super PClassdef::accept_abs_syntax_visitor*/;
-  CALL_syntax_base___AbsSyntaxVisitor___local_class__eq( variable[1] /*v*/)( variable[1] /*v*/,  NIT_NULL /*null*/) /*AbsSyntaxVisitor::local_class=*/;
-  return_label63: while(false);
-  tracehead = trace.prev;
-  return;
-}
-val_t mmbuilder___PClassdef___local_class(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 500, LOCATE_mmbuilder___PClassdef___local_class};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  tracehead = trace.prev;
-  return ATTR_mmbuilder___PClassdef____local_class( self) /*PClassdef::_local_class*/;
-}
-void mmbuilder___PClassdef___accept_class_builder(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 511, LOCATE_mmbuilder___PClassdef___accept_class_builder};
-  val_t variable[18];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[1] =  param0;
-  /*variable[3] is variable local_class*/
-  variable[5] = CALL_syntax_base___AbsSyntaxVisitor___module( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
-  variable[4] = variable[5];
-  variable[6] = CALL_syntax_base___MMSrcModule___src_local_classes( variable[4] /*mod*/)( variable[4] /*mod*/) /*MMSrcModule::src_local_classes*/;
-  variable[5] = variable[6];
-  variable[6] = variable[0];
-  variable[6] = CALL_mmbuilder___PClassdef___name(variable[6])(variable[6]) /*PClassdef::name*/;
-  variable[6] = CALL_abstract_collection___Map___has_key( variable[5] /*local_classes*/)( variable[5] /*local_classes*/, variable[6]) /*Map::has_key*/;
-  if (UNTAG_Bool(variable[6])) { /*if*/
-    variable[6] = variable[0];
-    variable[6] = CALL_mmbuilder___PClassdef___name(variable[6])(variable[6]) /*PClassdef::name*/;
-    variable[6] = CALL_abstract_collection___Map_____bra( variable[5] /*local_classes*/)( variable[5] /*local_classes*/, variable[6]) /*Map::[]*/;
-    variable[3] = variable[6] /*local_class=*/;
-    variable[6] = variable[0];
-    variable[6] = TAG_Bool((variable[6]==NIT_NULL) || VAL_ISA(variable[6], COLOR_AClassdef, ID_AClassdef)) /*cast AClassdef*/;
-    if (UNTAG_Bool(variable[6])) { /*if*/
-      variable[6] = variable[0];
-      variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-      variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Error: A class "), TAG_Int(15)); /*new String*/
-      variable[9] = variable[8];
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[9]) /*AbstractArray::add*/;
-      variable[10] = variable[0];
-      variable[10] = CALL_mmbuilder___PClassdef___name(variable[10])(variable[10]) /*AClassdef::name*/;
-      variable[11] = variable[10];
-      variable[11] = CALL_string___Object___to_s(variable[11])(variable[11]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[11]) /*AbstractArray::add*/;
-      variable[12] = NEW_String_string___String___with_native(BOX_NativeString(" is already defined at line "), TAG_Int(28)); /*new String*/
-      variable[13] = variable[12];
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[13]) /*AbstractArray::add*/;
-      variable[14] = CALL_syntax_base___MMSrcLocalClass___nodes( variable[3] /*local_class*/)( variable[3] /*local_class*/) /*MMSrcLocalClass::nodes*/;
-      variable[14] = CALL_abstract_collection___Collection___first(variable[14])(variable[14]) /*IndexedCollection::first*/;
-      variable[14] = CALL_parser_prod___Prod___first_token(variable[14])(variable[14]) /*Prod::first_token*/;
-      variable[14] = CALL_lexer___Token___line(variable[14])(variable[14]) /*Token::line*/;
-      variable[15] = variable[14];
-      variable[15] = CALL_string___Object___to_s(variable[15])(variable[15]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[15]) /*AbstractArray::add*/;
-      variable[16] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-      variable[17] = variable[16];
-      CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[17]) /*AbstractArray::add*/;
-      variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
-      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[6], variable[7]) /*AbsSyntaxVisitor::error*/;
-      goto return_label64;
-    }
-    variable[6] = CALL_syntax_base___MMSrcLocalClass___nodes( variable[3] /*local_class*/)( variable[3] /*local_class*/) /*MMSrcLocalClass::nodes*/;
-    variable[7] = variable[0];
-    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
-  } else { /*if*/
-    variable[6] = variable[0];
-    variable[6] = CALL_mmbuilder___PClassdef___name(variable[6])(variable[6]) /*PClassdef::name*/;
-    variable[7] = variable[0];
-    variable[8] = variable[0];
-    variable[8] = CALL_mmbuilder___PClassdef___arity(variable[8])(variable[8]) /*PClassdef::arity*/;
-    variable[9] = NEW_MMSrcLocalClass_syntax_base___MMSrcLocalClass___init(variable[6], variable[7], variable[8]); /*new MMSrcLocalClass*/
-    variable[6] = variable[9];
-    variable[3] = variable[6] /*local_class=*/;
-    CALL_abstractmetamodel___MMModule___add_local_class( variable[4] /*mod*/)( variable[4] /*mod*/,  variable[3] /*local_class*/) /*MMModule::add_local_class*/;
-    variable[6] = variable[0];
-    variable[6] = CALL_mmbuilder___PClassdef___name(variable[6])(variable[6]) /*PClassdef::name*/;
-    CALL_abstract_collection___Map_____braeq( variable[5] /*local_classes*/)( variable[5] /*local_classes*/, variable[6],  variable[3] /*local_class*/) /*Map::[]=*/;
-    variable[7] = variable[0];
-    variable[7] = CALL_mmbuilder___PClassdef___name(variable[7])(variable[7]) /*PClassdef::name*/;
-    variable[7] = CALL_abstractmetamodel___MMModule___global_class_named( variable[4] /*mod*/)( variable[4] /*mod*/, variable[7]) /*MMModule::global_class_named*/;
-    variable[6] = variable[7];
-    variable[7] = TAG_Bool(( variable[6] /*g*/ ==  NIT_NULL /*null*/) || (( variable[6] /*g*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[6] /*g*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[6] /*g*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[6] /*g*/)( variable[6] /*g*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-    if (UNTAG_Bool(variable[7])) { /*if*/
-      CALL_abstractmetamodel___MMLocalClass___new_global( variable[3] /*local_class*/)( variable[3] /*local_class*/) /*MMLocalClass::new_global*/;
-      variable[7] = CALL_abstractmetamodel___MMLocalClass___global( variable[3] /*local_class*/)( variable[3] /*local_class*/) /*MMLocalClass::global*/;
-      variable[6] = variable[7] /*g=*/;
-    } else { /*if*/
-      CALL_abstractmetamodel___MMLocalClass___set_global( variable[3] /*local_class*/)( variable[3] /*local_class*/,  variable[6] /*g*/) /*MMLocalClass::set_global*/;
-    }
-  }
-  variable[6] = variable[0];
-  ATTR_mmbuilder___PClassdef____local_class(variable[6]) /*PClassdef::_local_class*/ =  variable[3] /*local_class*/;
-  CALL_mmbuilder___ClassBuilderVisitor___local_class_arity__eq( variable[1] /*v*/)( variable[1] /*v*/,  TAG_Int(0)) /*ClassBuilderVisitor::local_class_arity=*/;
-  variable[6] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[Symbol, MMTypeFormalParameter]*/
-  CALL_mmbuilder___ClassBuilderVisitor___formals__eq( variable[1] /*v*/)( variable[1] /*v*/, variable[6]) /*ClassBuilderVisitor::formals=*/;
-  CALL_SUPER_mmbuilder___PClassdef___accept_class_builder(variable[0])(variable[0], variable[1]) /*super PClassdef::accept_class_builder*/;
-  variable[6] = variable[0];
-  variable[6] = ATTR_mmbuilder___PClassdef____local_class(variable[6]) /*PClassdef::_local_class*/;
-  variable[7] = CALL_mmbuilder___ClassBuilderVisitor___formals( variable[1] /*v*/)( variable[1] /*v*/) /*ClassBuilderVisitor::formals*/;
-  CALL_syntax_base___MMSrcLocalClass___formal_dict__eq(variable[6])(variable[6], variable[7]) /*MMSrcLocalClass::formal_dict=*/;
-  CALL_mmbuilder___ClassBuilderVisitor___formals__eq( variable[1] /*v*/)( variable[1] /*v*/,  NIT_NULL /*null*/) /*ClassBuilderVisitor::formals=*/;
-  return_label64: while(false);
-  tracehead = trace.prev;
-  return;
-}
-val_t mmbuilder___PClassdef___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 502, LOCATE_mmbuilder___PClassdef___name};
-  val_t *variable = NULL;
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_mmbuilder, 502);
-  nit_exit(1);
-  tracehead = trace.prev;
-  return NIT_NULL;
-}
-val_t mmbuilder___PClassdef___arity(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 505, LOCATE_mmbuilder___PClassdef___arity};
-  val_t variable[2];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[1] =  TAG_Int(0);
-  goto return_label65;
-  return_label65: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t mmbuilder___PClassdef___visibility_level(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 508, LOCATE_mmbuilder___PClassdef___visibility_level};
-  val_t variable[2];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[1] =  TAG_Int(1);
-  goto return_label66;
-  return_label66: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t mmbuilder___PClasskind___is_interface(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 559, LOCATE_mmbuilder___PClasskind___is_interface};
-  val_t variable[2];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[1] =  TAG_Bool(false);
-  goto return_label67;
-  return_label67: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t mmbuilder___PClasskind___is_universal(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 560, LOCATE_mmbuilder___PClasskind___is_universal};
-  val_t variable[2];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[1] =  TAG_Bool(false);
-  goto return_label68;
-  return_label68: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t mmbuilder___PClasskind___is_abstract(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 561, LOCATE_mmbuilder___PClasskind___is_abstract};
-  val_t variable[2];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[1] =  TAG_Bool(false);
-  goto return_label69;
-  return_label69: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t mmbuilder___AInterfaceClasskind___is_interface(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 565, LOCATE_mmbuilder___AInterfaceClasskind___is_interface};
-  val_t variable[2];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[1] =  TAG_Bool(true);
-  goto return_label70;
-  return_label70: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t mmbuilder___AUniversalClasskind___is_universal(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 568, LOCATE_mmbuilder___AUniversalClasskind___is_universal};
-  val_t variable[2];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[1] =  TAG_Bool(true);
-  goto return_label71;
-  return_label71: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t mmbuilder___AAbstractClasskind___is_abstract(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 571, LOCATE_mmbuilder___AAbstractClasskind___is_abstract};
-  val_t variable[2];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[1] =  TAG_Bool(true);
-  goto return_label72;
-  return_label72: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-void mmbuilder___AClassdef___accept_class_verifier(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 583, LOCATE_mmbuilder___AClassdef___accept_class_verifier};
-  val_t variable[20];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[1] =  param0;
-  CALL_SUPER_mmbuilder___AClassdef___accept_class_verifier(variable[0])(variable[0], variable[1]) /*super AClassdef::accept_class_verifier*/;
-  variable[4] = variable[0];
-  variable[4] = ATTR_mmbuilder___PClassdef____local_class(variable[4]) /*PClassdef::_local_class*/;
-  variable[4] = CALL_abstractmetamodel___MMLocalClass___global(variable[4])(variable[4]) /*MMLocalClass::global*/;
-  variable[3] = variable[4];
-  variable[4] = CALL_abstractmetamodel___MMGlobalClass___intro( variable[3] /*glob*/)( variable[3] /*glob*/) /*MMGlobalClass::intro*/;
-  variable[5] = variable[0];
-  variable[5] = ATTR_mmbuilder___PClassdef____local_class(variable[5]) /*PClassdef::_local_class*/;
-  variable[4] = TAG_Bool((variable[4] == variable[5]) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4],variable[5])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4], variable[5]) /*Object::==*/)))));
-  if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    variable[4] = CALL_mmbuilder___PClassdef___visibility_level(variable[4])(variable[4]) /*AClassdef::visibility_level*/;
-    CALL_abstractmetamodel___MMGlobalClass___visibility_level__eq( variable[3] /*glob*/)( variable[3] /*glob*/, variable[4]) /*MMGlobalClass::visibility_level=*/;
-    variable[4] = variable[0];
-    variable[4] = CALL_parser_nodes___AClassdef___n_classkind(variable[4])(variable[4]) /*AClassdef::n_classkind*/;
-    variable[4] = CALL_mmbuilder___PClasskind___is_interface(variable[4])(variable[4]) /*PClasskind::is_interface*/;
-    CALL_abstractmetamodel___MMGlobalClass___is_interface__eq( variable[3] /*glob*/)( variable[3] /*glob*/, variable[4]) /*MMGlobalClass::is_interface=*/;
-    variable[4] = variable[0];
-    variable[4] = CALL_parser_nodes___AClassdef___n_classkind(variable[4])(variable[4]) /*AClassdef::n_classkind*/;
-    variable[4] = CALL_mmbuilder___PClasskind___is_abstract(variable[4])(variable[4]) /*PClasskind::is_abstract*/;
-    CALL_abstractmetamodel___MMGlobalClass___is_abstract__eq( variable[3] /*glob*/)( variable[3] /*glob*/, variable[4]) /*MMGlobalClass::is_abstract=*/;
-    variable[4] = variable[0];
-    variable[4] = CALL_parser_nodes___AClassdef___n_classkind(variable[4])(variable[4]) /*AClassdef::n_classkind*/;
-    variable[4] = CALL_mmbuilder___PClasskind___is_universal(variable[4])(variable[4]) /*PClasskind::is_universal*/;
-    CALL_abstractmetamodel___MMGlobalClass___is_universal__eq( variable[3] /*glob*/)( variable[3] /*glob*/, variable[4]) /*MMGlobalClass::is_universal=*/;
-    variable[4] = variable[0];
-    variable[4] = CALL_parser_nodes___AClassdef___n_kwredef(variable[4])(variable[4]) /*AClassdef::n_kwredef*/;
-    variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
-    if (UNTAG_Bool(variable[4])) { /*if*/
-      variable[4] = variable[0];
-      variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-      variable[6] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: No class "), TAG_Int(22)); /*new String*/
-      variable[7] = variable[6];
-      CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[7]) /*AbstractArray::add*/;
-      variable[8] = variable[0];
-      variable[8] = CALL_mmbuilder___PClassdef___name(variable[8])(variable[8]) /*AClassdef::name*/;
-      variable[9] = variable[8];
-      variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[9]) /*AbstractArray::add*/;
-      variable[10] = NEW_String_string___String___with_native(BOX_NativeString(" is imported. Remove the redef keyword to define a new class."), TAG_Int(61)); /*new String*/
-      variable[11] = variable[10];
-      CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[11]) /*AbstractArray::add*/;
-      variable[5] = CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/;
-      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::error*/;
-    }
-    variable[4] = variable[0];
-    variable[4] = ATTR_mmbuilder___PClassdef____local_class(variable[4]) /*PClassdef::_local_class*/;
-    variable[4] = CALL_abstractmetamodel___MMLocalClass___cshe(variable[4])(variable[4]) /*MMLocalClass::cshe*/;
-    variable[4] = CALL_partial_order___PartialOrderElement___direct_greaters(variable[4])(variable[4]) /*PartialOrderElement::direct_greaters*/;
-    variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*AbstractArray::iterator*/;
-    while (true) { /*for*/
-      variable[5] = CALL_abstract_collection___Iterator___is_ok(variable[4])(variable[4]) /*ArrayIterator::is_ok*/;
-      if (!UNTAG_Bool(variable[5])) break; /*for*/
-      variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/;
-      variable[6] = variable[5];
-      variable[8] = CALL_abstractmetamodel___MMLocalClass___global( variable[6] /*c*/)( variable[6] /*c*/) /*MMLocalClass::global*/;
-      variable[7] = variable[8];
-      variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_interface( variable[3] /*glob*/)( variable[3] /*glob*/) /*MMGlobalClass::is_interface*/;
-      if (UNTAG_Bool(variable[8])) { /*if*/
-        variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_universal( variable[7] /*cg*/)( variable[7] /*cg*/) /*MMGlobalClass::is_universal*/;
-        if (UNTAG_Bool(variable[8])) { /*if*/
-          variable[8] = variable[0];
-          variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-          variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Special error: Interface "), TAG_Int(25)); /*new String*/
-          variable[11] = variable[10];
-          CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[11]) /*AbstractArray::add*/;
-          variable[12] = variable[0];
-          variable[12] = CALL_mmbuilder___PClassdef___name(variable[12])(variable[12]) /*AClassdef::name*/;
-          variable[13] = variable[12];
-          variable[13] = CALL_string___Object___to_s(variable[13])(variable[13]) /*Object::to_s*/;
-          CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[13]) /*AbstractArray::add*/;
-          variable[14] = NEW_String_string___String___with_native(BOX_NativeString(" try to specialise universal class "), TAG_Int(35)); /*new String*/
-          variable[15] = variable[14];
-          CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[15]) /*AbstractArray::add*/;
-          variable[16] = CALL_abstractmetamodel___MMLocalClass___name( variable[6] /*c*/)( variable[6] /*c*/) /*MMLocalClass::name*/;
-          variable[17] = variable[16];
-          variable[17] = CALL_string___Object___to_s(variable[17])(variable[17]) /*Object::to_s*/;
-          CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[17]) /*AbstractArray::add*/;
-          variable[18] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-          variable[19] = variable[18];
-          CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[19]) /*AbstractArray::add*/;
-          variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-          CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
-        } else { /*if*/
-          variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_interface( variable[7] /*cg*/)( variable[7] /*cg*/) /*MMGlobalClass::is_interface*/;
-          if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[8])))) { /*if*/
-            variable[8] = variable[0];
-            variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-            variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Special error: Interface "), TAG_Int(25)); /*new String*/
-            variable[11] = variable[10];
-            CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[11]) /*AbstractArray::add*/;
-            variable[12] = variable[0];
-            variable[12] = CALL_mmbuilder___PClassdef___name(variable[12])(variable[12]) /*AClassdef::name*/;
-            variable[13] = variable[12];
-            variable[13] = CALL_string___Object___to_s(variable[13])(variable[13]) /*Object::to_s*/;
-            CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[13]) /*AbstractArray::add*/;
-            variable[14] = NEW_String_string___String___with_native(BOX_NativeString(" try to specialise class "), TAG_Int(25)); /*new String*/
-            variable[15] = variable[14];
-            CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[15]) /*AbstractArray::add*/;
-            variable[16] = CALL_abstractmetamodel___MMLocalClass___name( variable[6] /*c*/)( variable[6] /*c*/) /*MMLocalClass::name*/;
-            variable[17] = variable[16];
-            variable[17] = CALL_string___Object___to_s(variable[17])(variable[17]) /*Object::to_s*/;
-            CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[17]) /*AbstractArray::add*/;
-            variable[18] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-            variable[19] = variable[18];
-            CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[19]) /*AbstractArray::add*/;
-            variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-            CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
-          }
-        }
-      } else { /*if*/
-        variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_universal( variable[3] /*glob*/)( variable[3] /*glob*/) /*MMGlobalClass::is_universal*/;
-        if (UNTAG_Bool(variable[8])) { /*if*/
-          variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_interface( variable[7] /*cg*/)( variable[7] /*cg*/) /*MMGlobalClass::is_interface*/;
-          variable[8] =  TAG_Bool(!UNTAG_Bool(variable[8]));
-          if (UNTAG_Bool(variable[8])) { /* and */
-            variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_universal( variable[7] /*cg*/)( variable[7] /*cg*/) /*MMGlobalClass::is_universal*/;
-            variable[8] =  TAG_Bool(!UNTAG_Bool(variable[8]));
-          }
-          if (UNTAG_Bool(variable[8])) { /*if*/
-            variable[8] = variable[0];
-            variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-            variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Special error: Universal class "), TAG_Int(31)); /*new String*/
-            variable[11] = variable[10];
-            CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[11]) /*AbstractArray::add*/;
-            variable[12] = variable[0];
-            variable[12] = CALL_mmbuilder___PClassdef___name(variable[12])(variable[12]) /*AClassdef::name*/;
-            variable[13] = variable[12];
-            variable[13] = CALL_string___Object___to_s(variable[13])(variable[13]) /*Object::to_s*/;
-            CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[13]) /*AbstractArray::add*/;
-            variable[14] = NEW_String_string___String___with_native(BOX_NativeString(" try to specialise class "), TAG_Int(25)); /*new String*/
-            variable[15] = variable[14];
-            CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[15]) /*AbstractArray::add*/;
-            variable[16] = CALL_abstractmetamodel___MMLocalClass___name( variable[6] /*c*/)( variable[6] /*c*/) /*MMLocalClass::name*/;
-            variable[17] = variable[16];
-            variable[17] = CALL_string___Object___to_s(variable[17])(variable[17]) /*Object::to_s*/;
-            CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[17]) /*AbstractArray::add*/;
-            variable[18] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-            variable[19] = variable[18];
-            CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[19]) /*AbstractArray::add*/;
-            variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-            CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
-          }
-        } else { /*if*/
-          variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_universal( variable[7] /*cg*/)( variable[7] /*cg*/) /*MMGlobalClass::is_universal*/;
-          if (UNTAG_Bool(variable[8])) { /*if*/
-            variable[8] = variable[0];
-            variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-            variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Special error: Class "), TAG_Int(21)); /*new String*/
-            variable[11] = variable[10];
-            CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[11]) /*AbstractArray::add*/;
-            variable[12] = variable[0];
-            variable[12] = CALL_mmbuilder___PClassdef___name(variable[12])(variable[12]) /*AClassdef::name*/;
-            variable[13] = variable[12];
-            variable[13] = CALL_string___Object___to_s(variable[13])(variable[13]) /*Object::to_s*/;
-            CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[13]) /*AbstractArray::add*/;
-            variable[14] = NEW_String_string___String___with_native(BOX_NativeString(" try to specialise universal class "), TAG_Int(35)); /*new String*/
-            variable[15] = variable[14];
-            CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[15]) /*AbstractArray::add*/;
-            variable[16] = CALL_abstractmetamodel___MMLocalClass___name( variable[6] /*c*/)( variable[6] /*c*/) /*MMLocalClass::name*/;
-            variable[17] = variable[16];
-            variable[17] = CALL_string___Object___to_s(variable[17])(variable[17]) /*Object::to_s*/;
-            CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[17]) /*AbstractArray::add*/;
-            variable[18] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-            variable[19] = variable[18];
-            CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[19]) /*AbstractArray::add*/;
-            variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-            CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
-          }
-        }
-      }
-      continue_74: while(0);
-      CALL_abstract_collection___Iterator___next(variable[4])(variable[4]) /*ArrayIterator::next*/;
-    }
-    break_74: while(0);
-    goto return_label73;
-  }
-  variable[4] = variable[0];
-  variable[5] = CALL_syntax_base___AbsSyntaxVisitor___module( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
-  CALL_syntax_base___MMGlobalClass___check_visibility( variable[3] /*glob*/)( variable[3] /*glob*/,  variable[1] /*v*/, variable[4], variable[5]) /*MMGlobalClass::check_visibility*/;
-  variable[4] = variable[0];
-  variable[4] = CALL_parser_nodes___AClassdef___n_kwredef(variable[4])(variable[4]) /*AClassdef::n_kwredef*/;
-  variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
-  if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-    variable[6] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: "), TAG_Int(13)); /*new String*/
-    variable[7] = variable[6];
-    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[7]) /*AbstractArray::add*/;
-    variable[8] = variable[0];
-    variable[8] = CALL_mmbuilder___PClassdef___name(variable[8])(variable[8]) /*AClassdef::name*/;
-    variable[9] = variable[8];
-    variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[9]) /*AbstractArray::add*/;
-    variable[10] = NEW_String_string___String___with_native(BOX_NativeString(" is an imported class. Add the redef keyword to refine it."), TAG_Int(58)); /*new String*/
-    variable[11] = variable[10];
-    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[11]) /*AbstractArray::add*/;
-    variable[5] = CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/;
-    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::error*/;
-    goto return_label73;
-  }
-  variable[4] = CALL_abstractmetamodel___MMGlobalClass___intro( variable[3] /*glob*/)( variable[3] /*glob*/) /*MMGlobalClass::intro*/;
-  variable[4] = CALL_abstractmetamodel___MMLocalClass___arity(variable[4])(variable[4]) /*MMLocalClass::arity*/;
-  variable[5] = variable[0];
-  variable[5] = ATTR_mmbuilder___PClassdef____local_class(variable[5]) /*PClassdef::_local_class*/;
-  variable[5] = CALL_abstractmetamodel___MMLocalClass___arity(variable[5])(variable[5]) /*MMLocalClass::arity*/;
-  variable[4] = TAG_Bool((variable[4])!=(variable[5]));
-  if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-    variable[6] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: Formal parameter arity missmatch; got "), TAG_Int(51)); /*new String*/
-    variable[7] = variable[6];
-    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[7]) /*AbstractArray::add*/;
-    variable[8] = variable[0];
-    variable[8] = ATTR_mmbuilder___PClassdef____local_class(variable[8]) /*PClassdef::_local_class*/;
-    variable[8] = CALL_abstractmetamodel___MMLocalClass___arity(variable[8])(variable[8]) /*MMLocalClass::arity*/;
-    variable[9] = variable[8];
-    variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[9]) /*AbstractArray::add*/;
-    variable[10] = NEW_String_string___String___with_native(BOX_NativeString(", expected "), TAG_Int(11)); /*new String*/
-    variable[11] = variable[10];
-    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[11]) /*AbstractArray::add*/;
-    variable[12] = CALL_abstractmetamodel___MMGlobalClass___intro( variable[3] /*glob*/)( variable[3] /*glob*/) /*MMGlobalClass::intro*/;
-    variable[12] = CALL_abstractmetamodel___MMLocalClass___arity(variable[12])(variable[12]) /*MMLocalClass::arity*/;
-    variable[13] = variable[12];
-    variable[13] = CALL_string___Object___to_s(variable[13])(variable[13]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[13]) /*AbstractArray::add*/;
-    variable[14] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-    variable[15] = variable[14];
-    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[15]) /*AbstractArray::add*/;
-    variable[5] = CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/;
-    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::error*/;
-  }
-  variable[4] = CALL_abstractmetamodel___MMGlobalClass___is_interface( variable[3] /*glob*/)( variable[3] /*glob*/) /*MMGlobalClass::is_interface*/;
-  variable[4] =  TAG_Bool(!UNTAG_Bool(variable[4]));
-  if (UNTAG_Bool(variable[4])) { /* and */
-    variable[4] = variable[0];
-    variable[4] = CALL_parser_nodes___AClassdef___n_classkind(variable[4])(variable[4]) /*AClassdef::n_classkind*/;
-    variable[4] = CALL_mmbuilder___PClasskind___is_interface(variable[4])(variable[4]) /*PClasskind::is_interface*/;
-  }
-  variable[5] = variable[4];
-  if (!UNTAG_Bool(variable[5])) { /* or */
-    variable[5] = CALL_abstractmetamodel___MMGlobalClass___is_abstract( variable[3] /*glob*/)( variable[3] /*glob*/) /*MMGlobalClass::is_abstract*/;
-    variable[5] =  TAG_Bool(!UNTAG_Bool(variable[5]));
-  }
-  variable[4] = variable[5];
-  variable[5] = variable[4];
-  if (UNTAG_Bool(variable[5])) { /* and */
-    variable[5] = variable[0];
-    variable[5] = CALL_parser_nodes___AClassdef___n_classkind(variable[5])(variable[5]) /*AClassdef::n_classkind*/;
-    variable[5] = CALL_mmbuilder___PClasskind___is_abstract(variable[5])(variable[5]) /*PClasskind::is_abstract*/;
-  }
-  variable[4] = variable[5];
-  variable[5] = variable[4];
-  if (!UNTAG_Bool(variable[5])) { /* or */
-    variable[5] = CALL_abstractmetamodel___MMGlobalClass___is_universal( variable[3] /*glob*/)( variable[3] /*glob*/) /*MMGlobalClass::is_universal*/;
-    variable[5] =  TAG_Bool(!UNTAG_Bool(variable[5]));
-  }
-  variable[4] = variable[5];
-  variable[5] = variable[4];
-  if (UNTAG_Bool(variable[5])) { /* and */
-    variable[5] = variable[0];
-    variable[5] = CALL_parser_nodes___AClassdef___n_classkind(variable[5])(variable[5]) /*AClassdef::n_classkind*/;
-    variable[5] = CALL_mmbuilder___PClasskind___is_universal(variable[5])(variable[5]) /*PClasskind::is_universal*/;
-  }
-  variable[4] = variable[5];
-  if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-    variable[6] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: cannot change kind of class "), TAG_Int(41)); /*new String*/
-    variable[7] = variable[6];
-    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[7]) /*AbstractArray::add*/;
-    variable[8] = variable[0];
-    variable[8] = CALL_mmbuilder___PClassdef___name(variable[8])(variable[8]) /*AClassdef::name*/;
-    variable[9] = variable[8];
-    variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[9]) /*AbstractArray::add*/;
-    variable[10] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-    variable[11] = variable[10];
-    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[11]) /*AbstractArray::add*/;
-    variable[5] = CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/;
-    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::error*/;
-  }
-  return_label73: while(false);
-  tracehead = trace.prev;
-  return;
-}
-val_t mmbuilder___AClassdef___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 575, LOCATE_mmbuilder___AClassdef___name};
-  val_t variable[3];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_parser_nodes___AClassdef___n_id(variable[2])(variable[2]) /*AClassdef::n_id*/;
-  variable[2] = CALL_syntax_base___Token___to_symbol(variable[2])(variable[2]) /*Token::to_symbol*/;
-  variable[1] = variable[2];
-  goto return_label75;
-  return_label75: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t mmbuilder___AClassdef___arity(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 579, LOCATE_mmbuilder___AClassdef___arity};
-  val_t variable[3];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_parser_nodes___AClassdef___n_formaldefs(variable[2])(variable[2]) /*AClassdef::n_formaldefs*/;
-  variable[2] = CALL_abstract_collection___Collection___length(variable[2])(variable[2]) /*List::length*/;
-  variable[1] = variable[2];
-  goto return_label76;
-  return_label76: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t mmbuilder___AClassdef___visibility_level(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 640, LOCATE_mmbuilder___AClassdef___visibility_level};
-  val_t variable[3];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_parser_nodes___AClassdef___n_visibility(variable[2])(variable[2]) /*AClassdef::n_visibility*/;
-  variable[2] = CALL_mmbuilder___PVisibility___level(variable[2])(variable[2]) /*PVisibility::level*/;
-  variable[1] = variable[2];
-  goto return_label77;
-  return_label77: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t mmbuilder___AMainClassdef___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 647, LOCATE_mmbuilder___AMainClassdef___name};
-  static val_t once_value_79; static int once_bool_79; /* Once value for variable[2]*/
-  val_t variable[3];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  if (once_bool_79) variable[2] = once_value_79;
-  else {
-    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("Sys"), TAG_Int(3)); /*new String*/
-    variable[2] = CALL_symbol___String___to_symbol(variable[2])(variable[2]) /*String::to_symbol*/;
-    once_value_79 = variable[2];
-    once_bool_79 = true;
-  }
-  variable[1] = variable[2];
-  goto return_label78;
-  return_label78: while(false);
-  tracehead = trace.prev;
-  return variable[1];
-}
-val_t mmbuilder___ATopClassdef___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 654, LOCATE_mmbuilder___ATopClassdef___name};
-  static val_t once_value_81; static int once_bool_81; /* Once value for variable[2]*/
-  val_t variable[3];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  if (once_bool_81) variable[2] = once_value_81;
-  else {
-    variable[2] = NEW_String_string___String___with_native(BOX_NativeString("Object"), TAG_Int(6)); /*new String*/
-    variable[2] = CALL_symbol___String___to_symbol(variable[2])(variable[2]) /*String::to_symbol*/;
-    once_value_81 = variable[2];
-    once_bool_81 = true;
-  }
   variable[1] = variable[2];
   goto return_label80;
   return_label80: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
-val_t mmbuilder___MMSrcTypeFormalParameter___node(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 662, LOCATE_mmbuilder___MMSrcTypeFormalParameter___node};
+val_t mmbuilder___AImport___visibility_level(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 470, LOCATE_mmbuilder___AImport___visibility_level};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_parser_nodes___AImport___n_visibility(variable[0])(variable[0]) /*AImport::n_visibility*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_mmbuilder___PVisibility___level(variable[2])(variable[2]) /*PVisibility::level*/;
+  variable[1] = variable[2];
+  goto return_label81;
+  return_label81: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t mmbuilder___ANoImport___module_name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 476, LOCATE_mmbuilder___ANoImport___module_name};
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  variable[1] =  NIT_NULL /*null*/;
+  goto return_label82;
+  return_label82: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t mmbuilder___PVisibility___level(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 483, LOCATE_mmbuilder___PVisibility___level};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_mmbuilder, 483);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t mmbuilder___APublicVisibility___level(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 487, LOCATE_mmbuilder___APublicVisibility___level};
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  variable[1] =  TAG_Int(1);
+  goto return_label83;
+  return_label83: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t mmbuilder___AProtectedVisibility___level(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 490, LOCATE_mmbuilder___AProtectedVisibility___level};
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  variable[1] =  TAG_Int(2);
+  goto return_label84;
+  return_label84: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t mmbuilder___APrivateVisibility___level(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 493, LOCATE_mmbuilder___APrivateVisibility___level};
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  variable[1] =  TAG_Int(3);
+  goto return_label85;
+  return_label85: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t mmbuilder___AIntrudeVisibility___level(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 496, LOCATE_mmbuilder___AIntrudeVisibility___level};
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  variable[1] =  TAG_Int(0);
+  goto return_label86;
+  return_label86: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+void mmbuilder___PClassdef___accept_abs_syntax_visitor(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 547, LOCATE_mmbuilder___PClassdef___accept_abs_syntax_visitor};
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_mmbuilder___PClassdef____local_class(variable[0]) /*PClassdef::_local_class*/;
+  CALL_syntax_base___AbsSyntaxVisitor___local_class__eq( variable[1] /*v*/)( variable[1] /*v*/, variable[3]) /*AbsSyntaxVisitor::local_class=*/;
+  CALL_SUPER_mmbuilder___PClassdef___accept_abs_syntax_visitor(variable[0])(variable[0], variable[1]) /*super PClassdef::accept_abs_syntax_visitor*/;
+  CALL_syntax_base___AbsSyntaxVisitor___local_class__eq( variable[1] /*v*/)( variable[1] /*v*/,  NIT_NULL /*null*/) /*AbsSyntaxVisitor::local_class=*/;
+  return_label87: while(false);
+  tracehead = trace.prev;
+  return;
+}
+val_t mmbuilder___PClassdef___local_class(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 501, LOCATE_mmbuilder___PClassdef___local_class};
+  val_t *variable = NULL;
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  tracehead = trace.prev;
+  return ATTR_mmbuilder___PClassdef____local_class( self) /*PClassdef::_local_class*/;
+}
+void mmbuilder___PClassdef___accept_class_builder(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 512, LOCATE_mmbuilder___PClassdef___accept_class_builder};
+      static val_t once_value_89 = NIT_NULL; /* Once value for string variable[7]*/
+      static val_t once_value_90 = NIT_NULL; /* Once value for string variable[7]*/
+      static val_t once_value_91 = NIT_NULL; /* Once value for string variable[7]*/
+  val_t variable[8];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /*variable[3] is variable local_class*/
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = CALL_syntax_base___AbsSyntaxVisitor___module( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
+  variable[4] = variable[5];
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
+  variable[6] = CALL_syntax_base___MMSrcModule___src_local_classes( variable[4] /*mod*/)( variable[4] /*mod*/) /*MMSrcModule::src_local_classes*/;
+  variable[5] = variable[6];
+  /* Register variable[6]: Result */
+  variable[6] = CALL_mmbuilder___PClassdef___name(variable[0])(variable[0]) /*PClassdef::name*/;
+  /* Register variable[6]: Result */
+  variable[6] = CALL_abstract_collection___MapRead___has_key( variable[5] /*local_classes*/)( variable[5] /*local_classes*/, variable[6]) /*MapRead::has_key*/;
+  if (UNTAG_Bool(variable[6])) { /*if*/
+    /* Register variable[6]: Result */
+    variable[6] = CALL_mmbuilder___PClassdef___name(variable[0])(variable[0]) /*PClassdef::name*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_abstract_collection___MapRead_____bra( variable[5] /*local_classes*/)( variable[5] /*local_classes*/, variable[6]) /*MapRead::[]*/;
+    variable[3] = variable[6] /*local_class=*/;
+    /* Register variable[6]: Result */
+    variable[6] = TAG_Bool((variable[0]==NIT_NULL) || VAL_ISA(variable[0], COLOR_AClassdef, ID_AClassdef)) /*cast AClassdef*/;
+    if (UNTAG_Bool(variable[6])) { /*if*/
+      variable[6] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[7]: Once String constant */
+      if (once_value_89 != NIT_NULL) variable[7] = once_value_89;
+      else {
+        variable[7] = NEW_String_string___String___with_native(BOX_NativeString("Error: A class "), TAG_Int(15)) /*new String*/;
+        once_value_89 = variable[7];
+      }
+      /* Register variable[7]: Result */
+      /* Ensure var variable[7]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+      /* Register variable[7]: Result */
+      variable[7] = CALL_mmbuilder___PClassdef___name(variable[0])(variable[0]) /*AClassdef::name*/;
+      /* Ensure var variable[7]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[7]: Once String constant */
+      if (once_value_90 != NIT_NULL) variable[7] = once_value_90;
+      else {
+        variable[7] = NEW_String_string___String___with_native(BOX_NativeString(" is already defined at line "), TAG_Int(28)) /*new String*/;
+        once_value_90 = variable[7];
+      }
+      /* Register variable[7]: Result */
+      /* Ensure var variable[7]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+      /* Register variable[7]: Result */
+      variable[7] = CALL_syntax_base___MMSrcLocalClass___nodes( variable[3] /*local_class*/)( variable[3] /*local_class*/) /*MMSrcLocalClass::nodes*/;
+      /* Register variable[7]: Result */
+      variable[7] = CALL_abstract_collection___Collection___first(variable[7])(variable[7]) /*IndexedCollectionRead::first*/;
+      /* Register variable[7]: Result */
+      variable[7] = CALL_parser_prod___Prod___first_token(variable[7])(variable[7]) /*Prod::first_token*/;
+      /* Register variable[7]: Result */
+      variable[7] = CALL_lexer___Token___line(variable[7])(variable[7]) /*Token::line*/;
+      /* Ensure var variable[7]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[7]: Once String constant */
+      if (once_value_91 != NIT_NULL) variable[7] = once_value_91;
+      else {
+        variable[7] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+        once_value_91 = variable[7];
+      }
+      /* Register variable[7]: Result */
+      /* Ensure var variable[7]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+      /* Register variable[6]: Result */
+      variable[6] = CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/;
+      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[6]) /*AbsSyntaxVisitor::error*/;
+      goto return_label88;
+    }
+    /* Register variable[6]: Result */
+    variable[6] = CALL_syntax_base___MMSrcLocalClass___nodes( variable[3] /*local_class*/)( variable[3] /*local_class*/) /*MMSrcLocalClass::nodes*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[0]) /*AbstractArray::add*/;
+  } else { /*if*/
+    /* Register variable[6]: Result */
+    variable[6] = CALL_mmbuilder___PClassdef___name(variable[0])(variable[0]) /*PClassdef::name*/;
+    /* Register variable[7]: Result */
+    variable[7] = CALL_mmbuilder___PClassdef___arity(variable[0])(variable[0]) /*PClassdef::arity*/;
+    /* Register variable[6]: Result */
+    variable[6] = NEW_MMSrcLocalClass_syntax_base___MMSrcLocalClass___init( variable[4] /*mod*/, variable[6], variable[0], variable[7]) /*new MMSrcLocalClass*/;
+    variable[3] = variable[6] /*local_class=*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_mmbuilder___PClassdef___name(variable[0])(variable[0]) /*PClassdef::name*/;
+    CALL_abstract_collection___Map_____braeq( variable[5] /*local_classes*/)( variable[5] /*local_classes*/, variable[6],  variable[3] /*local_class*/) /*Map::[]=*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_mmbuilder___PClassdef___name(variable[0])(variable[0]) /*PClassdef::name*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_abstractmetamodel___MMModule___has_global_class_named( variable[4] /*mod*/)( variable[4] /*mod*/, variable[6]) /*MMModule::has_global_class_named*/;
+    if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[6])))) { /*if*/
+      CALL_abstractmetamodel___MMLocalClass___new_global( variable[3] /*local_class*/)( variable[3] /*local_class*/) /*MMLocalClass::new_global*/;
+    } else { /*if*/
+      /* Register variable[6]: Result */
+      variable[6] = CALL_mmbuilder___PClassdef___name(variable[0])(variable[0]) /*PClassdef::name*/;
+      /* Register variable[6]: Result */
+      variable[6] = CALL_abstractmetamodel___MMModule___global_class_named( variable[4] /*mod*/)( variable[4] /*mod*/, variable[6]) /*MMModule::global_class_named*/;
+      CALL_abstractmetamodel___MMLocalClass___set_global( variable[3] /*local_class*/)( variable[3] /*local_class*/, variable[6]) /*MMLocalClass::set_global*/;
+    }
+  }
+  ATTR_mmbuilder___PClassdef____local_class(variable[0]) /*PClassdef::_local_class*/ =  variable[3] /*local_class*/;
+  CALL_mmbuilder___ClassBuilderVisitor___local_class_arity__eq( variable[1] /*v*/)( variable[1] /*v*/,  TAG_Int(0)) /*ClassBuilderVisitor::local_class_arity=*/;
+  /* Register variable[6]: Result */
+  variable[6] = NEW_HashMap_hash___HashMap___init() /*new HashMap[Symbol, MMTypeFormalParameter]*/;
+  CALL_mmbuilder___ClassBuilderVisitor___formals__eq( variable[1] /*v*/)( variable[1] /*v*/, variable[6]) /*ClassBuilderVisitor::formals=*/;
+  CALL_SUPER_mmbuilder___PClassdef___accept_class_builder(variable[0])(variable[0], variable[1]) /*super PClassdef::accept_class_builder*/;
+  /* Register variable[6]: Result */
+  variable[6] = ATTR_mmbuilder___PClassdef____local_class(variable[0]) /*PClassdef::_local_class*/;
+  /* Register variable[7]: Result */
+  variable[7] = CALL_mmbuilder___ClassBuilderVisitor___formals( variable[1] /*v*/)( variable[1] /*v*/) /*ClassBuilderVisitor::formals*/;
+  CALL_syntax_base___MMSrcLocalClass___formal_dict__eq(variable[6])(variable[6], variable[7]) /*MMSrcLocalClass::formal_dict=*/;
+  CALL_mmbuilder___ClassBuilderVisitor___formals__eq( variable[1] /*v*/)( variable[1] /*v*/,  NIT_NULL /*null*/) /*ClassBuilderVisitor::formals=*/;
+  return_label88: while(false);
+  tracehead = trace.prev;
+  return;
+}
+val_t mmbuilder___PClassdef___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 503, LOCATE_mmbuilder___PClassdef___name};
+  val_t *variable = NULL;
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  fprintf(stderr, "Deferred method called");
+  fprintf(stderr, " (%s:%d)\n", LOCATE_mmbuilder, 503);
+  nit_exit(1);
+  tracehead = trace.prev;
+  return NIT_NULL;
+}
+val_t mmbuilder___PClassdef___arity(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 506, LOCATE_mmbuilder___PClassdef___arity};
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  variable[1] =  TAG_Int(0);
+  goto return_label92;
+  return_label92: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t mmbuilder___PClassdef___visibility_level(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 509, LOCATE_mmbuilder___PClassdef___visibility_level};
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  variable[1] =  TAG_Int(1);
+  goto return_label93;
+  return_label93: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t mmbuilder___PClasskind___is_interface(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 556, LOCATE_mmbuilder___PClasskind___is_interface};
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  variable[1] =  TAG_Bool(false);
+  goto return_label94;
+  return_label94: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t mmbuilder___PClasskind___is_universal(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 557, LOCATE_mmbuilder___PClasskind___is_universal};
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  variable[1] =  TAG_Bool(false);
+  goto return_label95;
+  return_label95: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t mmbuilder___PClasskind___is_abstract(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 558, LOCATE_mmbuilder___PClasskind___is_abstract};
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  variable[1] =  TAG_Bool(false);
+  goto return_label96;
+  return_label96: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t mmbuilder___AInterfaceClasskind___is_interface(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 562, LOCATE_mmbuilder___AInterfaceClasskind___is_interface};
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  variable[1] =  TAG_Bool(true);
+  goto return_label97;
+  return_label97: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t mmbuilder___AUniversalClasskind___is_universal(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 565, LOCATE_mmbuilder___AUniversalClasskind___is_universal};
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  variable[1] =  TAG_Bool(true);
+  goto return_label98;
+  return_label98: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t mmbuilder___AAbstractClasskind___is_abstract(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 568, LOCATE_mmbuilder___AAbstractClasskind___is_abstract};
+  val_t variable[2];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  variable[1] =  TAG_Bool(true);
+  goto return_label99;
+  return_label99: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+void mmbuilder___AClassdef___accept_class_verifier(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 580, LOCATE_mmbuilder___AClassdef___accept_class_verifier};
+      static val_t once_value_101 = NIT_NULL; /* Once value for string variable[5]*/
+      static val_t once_value_102 = NIT_NULL; /* Once value for string variable[5]*/
+          static val_t once_value_104 = NIT_NULL; /* Once value for string variable[9]*/
+          static val_t once_value_105 = NIT_NULL; /* Once value for string variable[9]*/
+          static val_t once_value_106 = NIT_NULL; /* Once value for string variable[9]*/
+            static val_t once_value_107 = NIT_NULL; /* Once value for string variable[9]*/
+            static val_t once_value_108 = NIT_NULL; /* Once value for string variable[9]*/
+            static val_t once_value_109 = NIT_NULL; /* Once value for string variable[9]*/
+            static val_t once_value_110 = NIT_NULL; /* Once value for string variable[9]*/
+            static val_t once_value_111 = NIT_NULL; /* Once value for string variable[9]*/
+            static val_t once_value_112 = NIT_NULL; /* Once value for string variable[9]*/
+            static val_t once_value_113 = NIT_NULL; /* Once value for string variable[9]*/
+            static val_t once_value_114 = NIT_NULL; /* Once value for string variable[9]*/
+            static val_t once_value_115 = NIT_NULL; /* Once value for string variable[9]*/
+    static val_t once_value_116 = NIT_NULL; /* Once value for string variable[5]*/
+    static val_t once_value_117 = NIT_NULL; /* Once value for string variable[5]*/
+    static val_t once_value_118 = NIT_NULL; /* Once value for string variable[5]*/
+    static val_t once_value_119 = NIT_NULL; /* Once value for string variable[5]*/
+    static val_t once_value_120 = NIT_NULL; /* Once value for string variable[5]*/
+    static val_t once_value_121 = NIT_NULL; /* Once value for string variable[5]*/
+    static val_t once_value_122 = NIT_NULL; /* Once value for string variable[5]*/
+  val_t variable[10];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_SUPER_mmbuilder___AClassdef___accept_class_verifier(variable[0])(variable[0], variable[1]) /*super AClassdef::accept_class_verifier*/;
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_mmbuilder___PClassdef____local_class(variable[0]) /*PClassdef::_local_class*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstractmetamodel___MMLocalClass___global(variable[4])(variable[4]) /*MMLocalClass::global*/;
+  variable[3] = variable[4];
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstractmetamodel___MMGlobalClass___intro( variable[3] /*glob*/)( variable[3] /*glob*/) /*MMGlobalClass::intro*/;
+  /* Register variable[5]: Result */
+  variable[5] = ATTR_mmbuilder___PClassdef____local_class(variable[0]) /*PClassdef::_local_class*/;
+  /* Register variable[4]: Result */
+  variable[4] = TAG_Bool((variable[4] == variable[5]) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4],variable[5])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4], variable[5]) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    /* Register variable[4]: Result */
+    variable[4] = CALL_mmbuilder___PClassdef___visibility_level(variable[0])(variable[0]) /*AClassdef::visibility_level*/;
+    CALL_abstractmetamodel___MMGlobalClass___visibility_level__eq( variable[3] /*glob*/)( variable[3] /*glob*/, variable[4]) /*MMGlobalClass::visibility_level=*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_parser_nodes___AClassdef___n_classkind(variable[0])(variable[0]) /*AClassdef::n_classkind*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_mmbuilder___PClasskind___is_interface(variable[4])(variable[4]) /*PClasskind::is_interface*/;
+    CALL_abstractmetamodel___MMGlobalClass___is_interface__eq( variable[3] /*glob*/)( variable[3] /*glob*/, variable[4]) /*MMGlobalClass::is_interface=*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_parser_nodes___AClassdef___n_classkind(variable[0])(variable[0]) /*AClassdef::n_classkind*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_mmbuilder___PClasskind___is_abstract(variable[4])(variable[4]) /*PClasskind::is_abstract*/;
+    CALL_abstractmetamodel___MMGlobalClass___is_abstract__eq( variable[3] /*glob*/)( variable[3] /*glob*/, variable[4]) /*MMGlobalClass::is_abstract=*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_parser_nodes___AClassdef___n_classkind(variable[0])(variable[0]) /*AClassdef::n_classkind*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_mmbuilder___PClasskind___is_universal(variable[4])(variable[4]) /*PClasskind::is_universal*/;
+    CALL_abstractmetamodel___MMGlobalClass___is_universal__eq( variable[3] /*glob*/)( variable[3] /*glob*/, variable[4]) /*MMGlobalClass::is_universal=*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_parser_nodes___AClassdef___n_kwredef(variable[0])(variable[0]) /*AClassdef::n_kwredef*/;
+    /* Register variable[4]: Result */
+    variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
+    if (UNTAG_Bool(variable[4])) { /*if*/
+      variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[5]: Once String constant */
+      if (once_value_101 != NIT_NULL) variable[5] = once_value_101;
+      else {
+        variable[5] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: No class "), TAG_Int(22)) /*new String*/;
+        once_value_101 = variable[5];
+      }
+      /* Register variable[5]: Result */
+      /* Ensure var variable[5]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+      /* Register variable[5]: Result */
+      variable[5] = CALL_mmbuilder___PClassdef___name(variable[0])(variable[0]) /*AClassdef::name*/;
+      /* Ensure var variable[5]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[5]: Once String constant */
+      if (once_value_102 != NIT_NULL) variable[5] = once_value_102;
+      else {
+        variable[5] = NEW_String_string___String___with_native(BOX_NativeString(" is imported. Remove the redef keyword to define a new class."), TAG_Int(61)) /*new String*/;
+        once_value_102 = variable[5];
+      }
+      /* Register variable[5]: Result */
+      /* Ensure var variable[5]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+      /* Register variable[4]: Result */
+      variable[4] = CALL_string___Object___to_s(variable[4])(variable[4]) /*Object::to_s*/;
+      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[4]) /*AbsSyntaxVisitor::error*/;
+    }
+    /* Register variable[4]: Result */
+    variable[4] = ATTR_mmbuilder___PClassdef____local_class(variable[0]) /*PClassdef::_local_class*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_abstractmetamodel___MMLocalClass___cshe(variable[4])(variable[4]) /*MMLocalClass::cshe*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_partial_order___PartialOrderElement___direct_greaters(variable[4])(variable[4]) /*PartialOrderElement::direct_greaters*/;
+    /* Register variable[4]: For iterator */
+    variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*AbstractArrayRead::iterator*/;
+    while (true) { /*for*/
+      /* Register variable[5]: For 'is_ok' result */
+      variable[5] = CALL_abstract_collection___Iterator___is_ok(variable[4])(variable[4]) /*ArrayIterator::is_ok*/;
+      if (!UNTAG_Bool(variable[5])) break; /*for*/
+      variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[6]: Local variable */
+      variable[6] = variable[5];
+      /* Register variable[7]: Local variable */
+      /* Register variable[8]: Result */
+      variable[8] = CALL_abstractmetamodel___MMLocalClass___global( variable[6] /*c*/)( variable[6] /*c*/) /*MMLocalClass::global*/;
+      variable[7] = variable[8];
+      /* Register variable[8]: Result */
+      variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_interface( variable[3] /*glob*/)( variable[3] /*glob*/) /*MMGlobalClass::is_interface*/;
+      if (UNTAG_Bool(variable[8])) { /*if*/
+        /* Register variable[8]: Result */
+        variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_universal( variable[7] /*cg*/)( variable[7] /*cg*/) /*MMGlobalClass::is_universal*/;
+        if (UNTAG_Bool(variable[8])) { /*if*/
+          variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+          /* Register variable[9]: Once String constant */
+          if (once_value_104 != NIT_NULL) variable[9] = once_value_104;
+          else {
+            variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Special error: Interface "), TAG_Int(25)) /*new String*/;
+            once_value_104 = variable[9];
+          }
+          /* Register variable[9]: Result */
+          /* Ensure var variable[9]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+          /* Register variable[9]: Result */
+          variable[9] = CALL_mmbuilder___PClassdef___name(variable[0])(variable[0]) /*AClassdef::name*/;
+          /* Ensure var variable[9]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+          /* Register variable[9]: Once String constant */
+          if (once_value_105 != NIT_NULL) variable[9] = once_value_105;
+          else {
+            variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" try to specialise universal class "), TAG_Int(35)) /*new String*/;
+            once_value_105 = variable[9];
+          }
+          /* Register variable[9]: Result */
+          /* Ensure var variable[9]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+          /* Register variable[9]: Result */
+          variable[9] = CALL_abstractmetamodel___MMLocalClass___name( variable[6] /*c*/)( variable[6] /*c*/) /*MMLocalClass::name*/;
+          /* Ensure var variable[9]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+          /* Register variable[9]: Once String constant */
+          if (once_value_106 != NIT_NULL) variable[9] = once_value_106;
+          else {
+            variable[9] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+            once_value_106 = variable[9];
+          }
+          /* Register variable[9]: Result */
+          /* Ensure var variable[9]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+          /* Register variable[8]: Result */
+          variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
+          CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[8]) /*AbsSyntaxVisitor::error*/;
+        } else { /*if*/
+          /* Register variable[8]: Result */
+          variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_interface( variable[7] /*cg*/)( variable[7] /*cg*/) /*MMGlobalClass::is_interface*/;
+          if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[8])))) { /*if*/
+            variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+            /* Register variable[9]: Once String constant */
+            if (once_value_107 != NIT_NULL) variable[9] = once_value_107;
+            else {
+              variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Special error: Interface "), TAG_Int(25)) /*new String*/;
+              once_value_107 = variable[9];
+            }
+            /* Register variable[9]: Result */
+            /* Ensure var variable[9]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+            /* Register variable[9]: Result */
+            variable[9] = CALL_mmbuilder___PClassdef___name(variable[0])(variable[0]) /*AClassdef::name*/;
+            /* Ensure var variable[9]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+            /* Register variable[9]: Once String constant */
+            if (once_value_108 != NIT_NULL) variable[9] = once_value_108;
+            else {
+              variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" try to specialise class "), TAG_Int(25)) /*new String*/;
+              once_value_108 = variable[9];
+            }
+            /* Register variable[9]: Result */
+            /* Ensure var variable[9]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+            /* Register variable[9]: Result */
+            variable[9] = CALL_abstractmetamodel___MMLocalClass___name( variable[6] /*c*/)( variable[6] /*c*/) /*MMLocalClass::name*/;
+            /* Ensure var variable[9]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+            /* Register variable[9]: Once String constant */
+            if (once_value_109 != NIT_NULL) variable[9] = once_value_109;
+            else {
+              variable[9] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+              once_value_109 = variable[9];
+            }
+            /* Register variable[9]: Result */
+            /* Ensure var variable[9]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+            /* Register variable[8]: Result */
+            variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
+            CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[8]) /*AbsSyntaxVisitor::error*/;
+          }
+        }
+      } else { /*if*/
+        /* Register variable[8]: Result */
+        variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_universal( variable[3] /*glob*/)( variable[3] /*glob*/) /*MMGlobalClass::is_universal*/;
+        if (UNTAG_Bool(variable[8])) { /*if*/
+          /* Register variable[8]: Result */
+          variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_interface( variable[7] /*cg*/)( variable[7] /*cg*/) /*MMGlobalClass::is_interface*/;
+          variable[8] =  TAG_Bool(!UNTAG_Bool(variable[8])) /* Ensure var: Left 'and' operand*/;
+          if (UNTAG_Bool(variable[8])) { /* and */
+            /* Register variable[8]: Result */
+            variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_universal( variable[7] /*cg*/)( variable[7] /*cg*/) /*MMGlobalClass::is_universal*/;
+            variable[8] =  TAG_Bool(!UNTAG_Bool(variable[8]));
+          }
+          /* Register variable[8]: Result */
+          if (UNTAG_Bool(variable[8])) { /*if*/
+            variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+            /* Register variable[9]: Once String constant */
+            if (once_value_110 != NIT_NULL) variable[9] = once_value_110;
+            else {
+              variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Special error: Universal class "), TAG_Int(31)) /*new String*/;
+              once_value_110 = variable[9];
+            }
+            /* Register variable[9]: Result */
+            /* Ensure var variable[9]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+            /* Register variable[9]: Result */
+            variable[9] = CALL_mmbuilder___PClassdef___name(variable[0])(variable[0]) /*AClassdef::name*/;
+            /* Ensure var variable[9]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+            /* Register variable[9]: Once String constant */
+            if (once_value_111 != NIT_NULL) variable[9] = once_value_111;
+            else {
+              variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" try to specialise class "), TAG_Int(25)) /*new String*/;
+              once_value_111 = variable[9];
+            }
+            /* Register variable[9]: Result */
+            /* Ensure var variable[9]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+            /* Register variable[9]: Result */
+            variable[9] = CALL_abstractmetamodel___MMLocalClass___name( variable[6] /*c*/)( variable[6] /*c*/) /*MMLocalClass::name*/;
+            /* Ensure var variable[9]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+            /* Register variable[9]: Once String constant */
+            if (once_value_112 != NIT_NULL) variable[9] = once_value_112;
+            else {
+              variable[9] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+              once_value_112 = variable[9];
+            }
+            /* Register variable[9]: Result */
+            /* Ensure var variable[9]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+            /* Register variable[8]: Result */
+            variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
+            CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[8]) /*AbsSyntaxVisitor::error*/;
+          }
+        } else { /*if*/
+          /* Register variable[8]: Result */
+          variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_universal( variable[7] /*cg*/)( variable[7] /*cg*/) /*MMGlobalClass::is_universal*/;
+          if (UNTAG_Bool(variable[8])) { /*if*/
+            variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+            /* Register variable[9]: Once String constant */
+            if (once_value_113 != NIT_NULL) variable[9] = once_value_113;
+            else {
+              variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Special error: Class "), TAG_Int(21)) /*new String*/;
+              once_value_113 = variable[9];
+            }
+            /* Register variable[9]: Result */
+            /* Ensure var variable[9]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+            /* Register variable[9]: Result */
+            variable[9] = CALL_mmbuilder___PClassdef___name(variable[0])(variable[0]) /*AClassdef::name*/;
+            /* Ensure var variable[9]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+            /* Register variable[9]: Once String constant */
+            if (once_value_114 != NIT_NULL) variable[9] = once_value_114;
+            else {
+              variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" try to specialise universal class "), TAG_Int(35)) /*new String*/;
+              once_value_114 = variable[9];
+            }
+            /* Register variable[9]: Result */
+            /* Ensure var variable[9]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+            /* Register variable[9]: Result */
+            variable[9] = CALL_abstractmetamodel___MMLocalClass___name( variable[6] /*c*/)( variable[6] /*c*/) /*MMLocalClass::name*/;
+            /* Ensure var variable[9]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+            /* Register variable[9]: Once String constant */
+            if (once_value_115 != NIT_NULL) variable[9] = once_value_115;
+            else {
+              variable[9] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+              once_value_115 = variable[9];
+            }
+            /* Register variable[9]: Result */
+            /* Ensure var variable[9]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+            /* Register variable[8]: Result */
+            variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
+            CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[8]) /*AbsSyntaxVisitor::error*/;
+          }
+        }
+      }
+      continue_103: while(0);
+      CALL_abstract_collection___Iterator___next(variable[4])(variable[4]) /*ArrayIterator::next*/;
+    }
+    break_103: while(0);
+    goto return_label100;
+  }
+  /* Register variable[4]: Result */
+  variable[4] = CALL_syntax_base___AbsSyntaxVisitor___module( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
+  CALL_syntax_base___MMGlobalClass___check_visibility( variable[3] /*glob*/)( variable[3] /*glob*/,  variable[1] /*v*/, variable[0], variable[4]) /*MMGlobalClass::check_visibility*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_parser_nodes___AClassdef___n_kwredef(variable[0])(variable[0]) /*AClassdef::n_kwredef*/;
+  /* Register variable[4]: Result */
+  variable[4] = TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[5]: Once String constant */
+    if (once_value_116 != NIT_NULL) variable[5] = once_value_116;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: "), TAG_Int(13)) /*new String*/;
+      once_value_116 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_mmbuilder___PClassdef___name(variable[0])(variable[0]) /*AClassdef::name*/;
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[5]: Once String constant */
+    if (once_value_117 != NIT_NULL) variable[5] = once_value_117;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString(" is an imported class. Add the redef keyword to refine it."), TAG_Int(58)) /*new String*/;
+      once_value_117 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_string___Object___to_s(variable[4])(variable[4]) /*Object::to_s*/;
+    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[4]) /*AbsSyntaxVisitor::error*/;
+    goto return_label100;
+  }
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstractmetamodel___MMGlobalClass___intro( variable[3] /*glob*/)( variable[3] /*glob*/) /*MMGlobalClass::intro*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstractmetamodel___MMLocalClass___arity(variable[4])(variable[4]) /*MMLocalClass::arity*/;
+  /* Register variable[5]: Result */
+  variable[5] = ATTR_mmbuilder___PClassdef____local_class(variable[0]) /*PClassdef::_local_class*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_abstractmetamodel___MMLocalClass___arity(variable[5])(variable[5]) /*MMLocalClass::arity*/;
+  /* Register variable[4]: Result */
+  variable[4] = TAG_Bool((variable[4])!=(variable[5]));
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[5]: Once String constant */
+    if (once_value_118 != NIT_NULL) variable[5] = once_value_118;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: Formal parameter arity missmatch; got "), TAG_Int(51)) /*new String*/;
+      once_value_118 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+    /* Register variable[5]: Result */
+    variable[5] = ATTR_mmbuilder___PClassdef____local_class(variable[0]) /*PClassdef::_local_class*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_abstractmetamodel___MMLocalClass___arity(variable[5])(variable[5]) /*MMLocalClass::arity*/;
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[5]: Once String constant */
+    if (once_value_119 != NIT_NULL) variable[5] = once_value_119;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString(", expected "), TAG_Int(11)) /*new String*/;
+      once_value_119 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_abstractmetamodel___MMGlobalClass___intro( variable[3] /*glob*/)( variable[3] /*glob*/) /*MMGlobalClass::intro*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_abstractmetamodel___MMLocalClass___arity(variable[5])(variable[5]) /*MMLocalClass::arity*/;
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[5]: Once String constant */
+    if (once_value_120 != NIT_NULL) variable[5] = once_value_120;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+      once_value_120 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_string___Object___to_s(variable[4])(variable[4]) /*Object::to_s*/;
+    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[4]) /*AbsSyntaxVisitor::error*/;
+  }
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstractmetamodel___MMGlobalClass___is_interface( variable[3] /*glob*/)( variable[3] /*glob*/) /*MMGlobalClass::is_interface*/;
+  variable[4] =  TAG_Bool(!UNTAG_Bool(variable[4])) /* Ensure var: Left 'and' operand*/;
+  if (UNTAG_Bool(variable[4])) { /* and */
+    /* Register variable[4]: Result */
+    variable[4] = CALL_parser_nodes___AClassdef___n_classkind(variable[0])(variable[0]) /*AClassdef::n_classkind*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_mmbuilder___PClasskind___is_interface(variable[4])(variable[4]) /*PClasskind::is_interface*/;
+  }
+  /* Register variable[4]: Result */
+  /* Ensure var variable[4]: Left 'or' operand*/
+  if (!UNTAG_Bool(variable[4])) { /* or */
+    /* Register variable[4]: Result */
+    variable[4] = CALL_abstractmetamodel___MMGlobalClass___is_abstract( variable[3] /*glob*/)( variable[3] /*glob*/) /*MMGlobalClass::is_abstract*/;
+    variable[4] =  TAG_Bool(!UNTAG_Bool(variable[4]));
+  }
+  /* Register variable[4]: Result */
+  /* Ensure var variable[4]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[4])) { /* and */
+    /* Register variable[4]: Result */
+    variable[4] = CALL_parser_nodes___AClassdef___n_classkind(variable[0])(variable[0]) /*AClassdef::n_classkind*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_mmbuilder___PClasskind___is_abstract(variable[4])(variable[4]) /*PClasskind::is_abstract*/;
+  }
+  /* Register variable[4]: Result */
+  /* Ensure var variable[4]: Left 'or' operand*/
+  if (!UNTAG_Bool(variable[4])) { /* or */
+    /* Register variable[4]: Result */
+    variable[4] = CALL_abstractmetamodel___MMGlobalClass___is_universal( variable[3] /*glob*/)( variable[3] /*glob*/) /*MMGlobalClass::is_universal*/;
+    variable[4] =  TAG_Bool(!UNTAG_Bool(variable[4]));
+  }
+  /* Register variable[4]: Result */
+  /* Ensure var variable[4]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[4])) { /* and */
+    /* Register variable[4]: Result */
+    variable[4] = CALL_parser_nodes___AClassdef___n_classkind(variable[0])(variable[0]) /*AClassdef::n_classkind*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_mmbuilder___PClasskind___is_universal(variable[4])(variable[4]) /*PClasskind::is_universal*/;
+  }
+  /* Register variable[4]: Result */
+  if (UNTAG_Bool(variable[4])) { /*if*/
+    variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[5]: Once String constant */
+    if (once_value_121 != NIT_NULL) variable[5] = once_value_121;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: cannot change kind of class "), TAG_Int(41)) /*new String*/;
+      once_value_121 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_mmbuilder___PClassdef___name(variable[0])(variable[0]) /*AClassdef::name*/;
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[5]: Once String constant */
+    if (once_value_122 != NIT_NULL) variable[5] = once_value_122;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+      once_value_122 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_string___Object___to_s(variable[4])(variable[4]) /*Object::to_s*/;
+    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[4]) /*AbsSyntaxVisitor::error*/;
+  }
+  return_label100: while(false);
+  tracehead = trace.prev;
+  return;
+}
+val_t mmbuilder___AClassdef___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 572, LOCATE_mmbuilder___AClassdef___name};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_parser_nodes___AClassdef___n_id(variable[0])(variable[0]) /*AClassdef::n_id*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_syntax_base___Token___to_symbol(variable[2])(variable[2]) /*Token::to_symbol*/;
+  variable[1] = variable[2];
+  goto return_label123;
+  return_label123: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t mmbuilder___AClassdef___arity(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 576, LOCATE_mmbuilder___AClassdef___arity};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_parser_nodes___AClassdef___n_formaldefs(variable[0])(variable[0]) /*AClassdef::n_formaldefs*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_abstract_collection___Collection___length(variable[2])(variable[2]) /*List::length*/;
+  variable[1] = variable[2];
+  goto return_label124;
+  return_label124: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t mmbuilder___AClassdef___visibility_level(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 637, LOCATE_mmbuilder___AClassdef___visibility_level};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_parser_nodes___AClassdef___n_visibility(variable[0])(variable[0]) /*AClassdef::n_visibility*/;
+  /* Register variable[2]: Result */
+  variable[2] = CALL_mmbuilder___PVisibility___level(variable[2])(variable[2]) /*PVisibility::level*/;
+  variable[1] = variable[2];
+  goto return_label125;
+  return_label125: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t mmbuilder___AMainClassdef___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 644, LOCATE_mmbuilder___AMainClassdef___name};
+  static val_t once_value_127; static int once_bool_127; /* Once value for variable[2]*/
+    static val_t once_value_128 = NIT_NULL; /* Once value for string variable[2]*/
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Once expression result */
+  if (once_bool_127) variable[2] = once_value_127;
+  else {
+    /* Register variable[2]: Once String constant */
+    if (once_value_128 != NIT_NULL) variable[2] = once_value_128;
+    else {
+      variable[2] = NEW_String_string___String___with_native(BOX_NativeString("Sys"), TAG_Int(3)) /*new String*/;
+      once_value_128 = variable[2];
+    }
+    /* Register variable[2]: Result */
+    /* Register variable[2]: Result */
+    variable[2] = CALL_symbol___String___to_symbol(variable[2])(variable[2]) /*String::to_symbol*/;
+    once_value_127 = variable[2];
+    once_bool_127 = true;
+  }
+  /* Register variable[2]: Result */
+  variable[1] = variable[2];
+  goto return_label126;
+  return_label126: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t mmbuilder___ATopClassdef___name(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 651, LOCATE_mmbuilder___ATopClassdef___name};
+  static val_t once_value_130; static int once_bool_130; /* Once value for variable[2]*/
+    static val_t once_value_131 = NIT_NULL; /* Once value for string variable[2]*/
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Once expression result */
+  if (once_bool_130) variable[2] = once_value_130;
+  else {
+    /* Register variable[2]: Once String constant */
+    if (once_value_131 != NIT_NULL) variable[2] = once_value_131;
+    else {
+      variable[2] = NEW_String_string___String___with_native(BOX_NativeString("Object"), TAG_Int(6)) /*new String*/;
+      once_value_131 = variable[2];
+    }
+    /* Register variable[2]: Result */
+    /* Register variable[2]: Result */
+    variable[2] = CALL_symbol___String___to_symbol(variable[2])(variable[2]) /*String::to_symbol*/;
+    once_value_130 = variable[2];
+    once_bool_130 = true;
+  }
+  /* Register variable[2]: Result */
+  variable[1] = variable[2];
+  goto return_label129;
+  return_label129: while(false);
+  tracehead = trace.prev;
+  return variable[1];
+}
+val_t mmbuilder___MMSrcTypeFormalParameter___node(val_t  self) {
+  struct trace_t trace = {NULL, NULL, 659, LOCATE_mmbuilder___MMSrcTypeFormalParameter___node};
+  val_t *variable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___MMSrcTypeFormalParameter____node( self) /*MMSrcTypeFormalParameter::_node*/;
 }
 void mmbuilder___MMSrcTypeFormalParameter___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 665, LOCATE_mmbuilder___MMSrcTypeFormalParameter___init};
-  val_t variable[7];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 662, LOCATE_mmbuilder___MMSrcTypeFormalParameter___init};
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
+  /* Register variable[4]: Local variable */
   variable[4] =  param3;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcTypeFormalParameter].i]) return;
+  /* Register variable[5]: Method return value and escape marker */
   CALL_genericity___MMTypeFormalParameter___init(variable[0])(variable[0],  variable[1] /*name*/,  variable[2] /*pos*/,  variable[3] /*local_class*/, init_table /*YYY*/) /*MMTypeFormalParameter::init*/;
-  variable[6] = variable[0];
-  ATTR_mmbuilder___MMSrcTypeFormalParameter____node(variable[6]) /*MMSrcTypeFormalParameter::_node*/ =  variable[4] /*n*/;
-  return_label82: while(false);
+  ATTR_mmbuilder___MMSrcTypeFormalParameter____node(variable[0]) /*MMSrcTypeFormalParameter::_node*/ =  variable[4] /*n*/;
+  return_label132: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MMSrcTypeFormalParameter].i] = 1;
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___AFormaldef___accept_class_builder(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 676, LOCATE_mmbuilder___AFormaldef___accept_class_builder};
-  val_t variable[9];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 673, LOCATE_mmbuilder___AFormaldef___accept_class_builder};
+  val_t variable[7];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[4] = CALL_parser_nodes___AFormaldef___n_id(variable[4])(variable[4]) /*AFormaldef::n_id*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_parser_nodes___AFormaldef___n_id(variable[0])(variable[0]) /*AFormaldef::n_id*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_syntax_base___Token___to_symbol(variable[4])(variable[4]) /*Token::to_symbol*/;
   variable[3] = variable[4];
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
   variable[5] = CALL_mmbuilder___ClassBuilderVisitor___local_class_arity( variable[1] /*v*/)( variable[1] /*v*/) /*ClassBuilderVisitor::local_class_arity*/;
+  /* Register variable[6]: Result */
   variable[6] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
-  variable[7] = variable[0];
-  variable[8] = NEW_MMSrcTypeFormalParameter_mmbuilder___MMSrcTypeFormalParameter___init( variable[3] /*name*/, variable[5], variable[6], variable[7]); /*new MMSrcTypeFormalParameter*/
-  variable[5] = variable[8];
+  /* Register variable[5]: Result */
+  variable[5] = NEW_MMSrcTypeFormalParameter_mmbuilder___MMSrcTypeFormalParameter___init( variable[3] /*name*/, variable[5], variable[6], variable[0]) /*new MMSrcTypeFormalParameter*/;
   variable[4] = variable[5];
-  variable[5] = variable[0];
-  ATTR_mmbuilder___AFormaldef____formal(variable[5]) /*AFormaldef::_formal*/ =  variable[4] /*formal_type*/;
+  ATTR_mmbuilder___AFormaldef____formal(variable[0]) /*AFormaldef::_formal*/ =  variable[4] /*formal_type*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_mmbuilder___ClassBuilderVisitor___local_class_arity( variable[1] /*v*/)( variable[1] /*v*/) /*ClassBuilderVisitor::local_class_arity*/;
+  /* Register variable[5]: Result */
   variable[5] = TAG_Int(UNTAG_Int(variable[5])+UNTAG_Int( TAG_Int(1)));
   CALL_mmbuilder___ClassBuilderVisitor___local_class_arity__eq( variable[1] /*v*/)( variable[1] /*v*/, variable[5]) /*ClassBuilderVisitor::local_class_arity=*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
   CALL_genericity___MMLocalClass___register_formal(variable[5])(variable[5],  variable[4] /*formal_type*/) /*MMLocalClass::register_formal*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_mmbuilder___ClassBuilderVisitor___formals( variable[1] /*v*/)( variable[1] /*v*/) /*ClassBuilderVisitor::formals*/;
   CALL_abstract_collection___Map_____braeq(variable[5])(variable[5],  variable[3] /*name*/,  variable[4] /*formal_type*/) /*Map::[]=*/;
   CALL_SUPER_mmbuilder___AFormaldef___accept_class_builder(variable[0])(variable[0], variable[1]) /*super AFormaldef::accept_class_builder*/;
-  return_label83: while(false);
+  return_label133: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___AFormaldef___accept_class_verifier(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 687, LOCATE_mmbuilder___AFormaldef___accept_class_verifier};
-  val_t variable[20];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 684, LOCATE_mmbuilder___AFormaldef___accept_class_verifier};
+        static val_t once_value_135 = NIT_NULL; /* Once value for string variable[7]*/
+        static val_t once_value_136 = NIT_NULL; /* Once value for string variable[7]*/
+        static val_t once_value_137 = NIT_NULL; /* Once value for string variable[7]*/
+        static val_t once_value_138 = NIT_NULL; /* Once value for string variable[7]*/
+  val_t variable[8];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
   CALL_SUPER_mmbuilder___AFormaldef___accept_class_verifier(variable[0])(variable[0], variable[1]) /*super AFormaldef::accept_class_verifier*/;
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
   variable[4] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
   variable[3] = variable[4];
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
   variable[5] = CALL_abstractmetamodel___MMLocalClass___global( variable[3] /*c*/)( variable[3] /*c*/) /*MMLocalClass::global*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_abstractmetamodel___MMGlobalClass___intro(variable[5])(variable[5]) /*MMGlobalClass::intro*/;
   variable[4] = variable[5];
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool(( variable[3] /*c*/ ==  variable[4] /*o*/) || (( variable[3] /*c*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[3] /*c*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[3] /*c*/, variable[4] /*o*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*c*/)( variable[3] /*c*/,  variable[4] /*o*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[5])) { /*if*/
-    variable[5] = variable[0];
-    variable[5] = CALL_parser_nodes___AFormaldef___n_type(variable[5])(variable[5]) /*AFormaldef::n_type*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_parser_nodes___AFormaldef___n_type(variable[0])(variable[0]) /*AFormaldef::n_type*/;
+    /* Register variable[5]: Result */
     variable[5] = TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[5])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[5])(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))));
     if (UNTAG_Bool(variable[5])) { /*if*/
-      variable[5] = variable[0];
-      variable[5] = ATTR_mmbuilder___AFormaldef____formal(variable[5]) /*AFormaldef::_formal*/;
+      /* Register variable[5]: Result */
+      variable[5] = ATTR_mmbuilder___AFormaldef____formal(variable[0]) /*AFormaldef::_formal*/;
+      /* Register variable[6]: Result */
       variable[6] = CALL_syntax_base___AbsSyntaxVisitor___module( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
+      /* Register variable[6]: Result */
       variable[6] = CALL_inheritance___MMModule___type_any(variable[6])(variable[6]) /*MMModule::type_any*/;
+      /* Register variable[6]: Result */
+      variable[6] = CALL_static_type___MMType___as_nullable(variable[6])(variable[6]) /*MMType::as_nullable*/;
       CALL_genericity___MMTypeFormalParameter___bound__eq(variable[5])(variable[5], variable[6]) /*MMTypeFormalParameter::bound=*/;
     } else { /*if*/
-      variable[5] = variable[0];
-      variable[5] = ATTR_mmbuilder___AFormaldef____formal(variable[5]) /*AFormaldef::_formal*/;
-      variable[6] = variable[0];
-      variable[6] = CALL_parser_nodes___AFormaldef___n_type(variable[6])(variable[6]) /*AFormaldef::n_type*/;
+      /* Register variable[5]: Result */
+      variable[5] = ATTR_mmbuilder___AFormaldef____formal(variable[0]) /*AFormaldef::_formal*/;
+      /* Register variable[6]: Result */
+      variable[6] = CALL_parser_nodes___AFormaldef___n_type(variable[0])(variable[0]) /*AFormaldef::n_type*/;
+      /* Register variable[6]: Result */
       variable[6] = CALL_syntax_base___PType___get_stype(variable[6])(variable[6],  variable[1] /*v*/) /*PType::get_stype*/;
       CALL_genericity___MMTypeFormalParameter___bound__eq(variable[5])(variable[5], variable[6]) /*MMTypeFormalParameter::bound=*/;
     }
   } else { /*if*/
-    variable[6] = variable[0];
-    variable[6] = ATTR_mmbuilder___AFormaldef____formal(variable[6]) /*AFormaldef::_formal*/;
+    /* Register variable[5]: Local variable */
+    /* Register variable[6]: Result */
+    variable[6] = ATTR_mmbuilder___AFormaldef____formal(variable[0]) /*AFormaldef::_formal*/;
+    /* Register variable[6]: Result */
     variable[6] = CALL_genericity___MMTypeFormalParameter___position(variable[6])(variable[6]) /*MMTypeFormalParameter::position*/;
+    /* Register variable[6]: Result */
     variable[6] = CALL_genericity___MMLocalClass___get_formal( variable[4] /*o*/)( variable[4] /*o*/, variable[6]) /*MMLocalClass::get_formal*/;
+    /* Register variable[6]: Result */
     variable[6] = CALL_type_formal___MMTypeFormal___bound(variable[6])(variable[6]) /*MMTypeFormal::bound*/;
+    /* Register variable[7]: Result */
     variable[7] = CALL_syntax_base___AbsSyntaxVisitor___module( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
+    /* Register variable[6]: Result */
     variable[6] = CALL_static_type___MMType___for_module(variable[6])(variable[6], variable[7]) /*MMType::for_module*/;
     variable[5] = variable[6];
-    variable[6] = variable[0];
-    variable[6] = CALL_parser_nodes___AFormaldef___n_type(variable[6])(variable[6]) /*AFormaldef::n_type*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_parser_nodes___AFormaldef___n_type(variable[0])(variable[0]) /*AFormaldef::n_type*/;
+    /* Register variable[6]: Result */
     variable[6] = TAG_Bool((variable[6] ==  NIT_NULL /*null*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  NIT_NULL /*null*/) /*Object::==*/)))));
     if (UNTAG_Bool(variable[6])) { /*if*/
-      variable[6] = variable[0];
-      variable[6] = ATTR_mmbuilder___AFormaldef____formal(variable[6]) /*AFormaldef::_formal*/;
+      /* Register variable[6]: Result */
+      variable[6] = ATTR_mmbuilder___AFormaldef____formal(variable[0]) /*AFormaldef::_formal*/;
       CALL_genericity___MMTypeFormalParameter___bound__eq(variable[6])(variable[6],  variable[5] /*ob*/) /*MMTypeFormalParameter::bound=*/;
     } else { /*if*/
-      variable[6] = variable[0];
-      variable[6] = ATTR_mmbuilder___AFormaldef____formal(variable[6]) /*AFormaldef::_formal*/;
-      variable[7] = variable[0];
-      variable[7] = CALL_parser_nodes___AFormaldef___n_type(variable[7])(variable[7]) /*AFormaldef::n_type*/;
+      /* Register variable[6]: Result */
+      variable[6] = ATTR_mmbuilder___AFormaldef____formal(variable[0]) /*AFormaldef::_formal*/;
+      /* Register variable[7]: Result */
+      variable[7] = CALL_parser_nodes___AFormaldef___n_type(variable[0])(variable[0]) /*AFormaldef::n_type*/;
+      /* Register variable[7]: Result */
       variable[7] = CALL_syntax_base___PType___get_stype(variable[7])(variable[7],  variable[1] /*v*/) /*PType::get_stype*/;
       CALL_genericity___MMTypeFormalParameter___bound__eq(variable[6])(variable[6], variable[7]) /*MMTypeFormalParameter::bound=*/;
-      variable[6] = variable[0];
-      variable[6] = ATTR_mmbuilder___AFormaldef____formal(variable[6]) /*AFormaldef::_formal*/;
+      /* Register variable[6]: Result */
+      variable[6] = ATTR_mmbuilder___AFormaldef____formal(variable[0]) /*AFormaldef::_formal*/;
+      /* Register variable[6]: Result */
       variable[6] = CALL_type_formal___MMTypeFormal___bound(variable[6])(variable[6]) /*MMTypeFormal::bound*/;
+      /* Register variable[6]: Result */
       variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] ==  variable[5] /*ob*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], variable[5] /*ob*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  variable[5] /*ob*/) /*Object::==*/)))))));
       if (UNTAG_Bool(variable[6])) { /*if*/
-        variable[6] = variable[0];
-        variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(7)); /*new Array[String]*/
-        variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: Cannot change formal parameter type of class "), TAG_Int(58)); /*new String*/
-        variable[9] = variable[8];
-        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[9]) /*AbstractArray::add*/;
-        variable[10] =  variable[3] /*c*/;
-        variable[10] = CALL_string___Object___to_s(variable[10])(variable[10]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[10]) /*AbstractArray::add*/;
-        variable[11] = NEW_String_string___String___with_native(BOX_NativeString("; got "), TAG_Int(6)); /*new String*/
-        variable[12] = variable[11];
-        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[12]) /*AbstractArray::add*/;
-        variable[13] = variable[0];
-        variable[13] = ATTR_mmbuilder___AFormaldef____formal(variable[13]) /*AFormaldef::_formal*/;
-        variable[13] = CALL_type_formal___MMTypeFormal___bound(variable[13])(variable[13]) /*MMTypeFormal::bound*/;
-        variable[14] = variable[13];
-        variable[14] = CALL_string___Object___to_s(variable[14])(variable[14]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[14]) /*AbstractArray::add*/;
-        variable[15] = NEW_String_string___String___with_native(BOX_NativeString(", expected "), TAG_Int(11)); /*new String*/
-        variable[16] = variable[15];
-        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[16]) /*AbstractArray::add*/;
-        variable[17] =  variable[5] /*ob*/;
-        variable[17] = CALL_string___Object___to_s(variable[17])(variable[17]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[17]) /*AbstractArray::add*/;
-        variable[18] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-        variable[19] = variable[18];
-        CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[19]) /*AbstractArray::add*/;
-        variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
-        CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[6], variable[7]) /*AbsSyntaxVisitor::error*/;
+        variable[6] = NEW_Array_array___Array___with_capacity(TAG_Int(7)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+        /* Register variable[7]: Once String constant */
+        if (once_value_135 != NIT_NULL) variable[7] = once_value_135;
+        else {
+          variable[7] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: Cannot change formal parameter type of class "), TAG_Int(58)) /*new String*/;
+          once_value_135 = variable[7];
+        }
+        /* Register variable[7]: Result */
+        /* Ensure var variable[7]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+        variable[7] =  variable[3] /*c*/ /* Ensure var: super-string element*/;
+        CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[7]: Once String constant */
+        if (once_value_136 != NIT_NULL) variable[7] = once_value_136;
+        else {
+          variable[7] = NEW_String_string___String___with_native(BOX_NativeString("; got "), TAG_Int(6)) /*new String*/;
+          once_value_136 = variable[7];
+        }
+        /* Register variable[7]: Result */
+        /* Ensure var variable[7]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+        /* Register variable[7]: Result */
+        variable[7] = ATTR_mmbuilder___AFormaldef____formal(variable[0]) /*AFormaldef::_formal*/;
+        /* Register variable[7]: Result */
+        variable[7] = CALL_type_formal___MMTypeFormal___bound(variable[7])(variable[7]) /*MMTypeFormal::bound*/;
+        /* Ensure var variable[7]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[7]: Once String constant */
+        if (once_value_137 != NIT_NULL) variable[7] = once_value_137;
+        else {
+          variable[7] = NEW_String_string___String___with_native(BOX_NativeString(", expected "), TAG_Int(11)) /*new String*/;
+          once_value_137 = variable[7];
+        }
+        /* Register variable[7]: Result */
+        /* Ensure var variable[7]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+        variable[7] =  variable[5] /*ob*/ /* Ensure var: super-string element*/;
+        CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[7]: Once String constant */
+        if (once_value_138 != NIT_NULL) variable[7] = once_value_138;
+        else {
+          variable[7] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+          once_value_138 = variable[7];
+        }
+        /* Register variable[7]: Result */
+        /* Ensure var variable[7]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+        /* Register variable[6]: Result */
+        variable[6] = CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/;
+        CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[6]) /*AbsSyntaxVisitor::error*/;
       }
     }
   }
-  return_label84: while(false);
+  return_label134: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___ASuperclass___accept_class_specialization_builder(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 715, LOCATE_mmbuilder___ASuperclass___accept_class_specialization_builder};
-  val_t variable[7];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 712, LOCATE_mmbuilder___ASuperclass___accept_class_specialization_builder};
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
   CALL_SUPER_mmbuilder___ASuperclass___accept_class_specialization_builder(variable[0])(variable[0], variable[1]) /*super ASuperclass::accept_class_specialization_builder*/;
-  variable[4] = variable[0];
-  variable[4] = CALL_parser_nodes___ASuperclass___n_type(variable[4])(variable[4]) /*ASuperclass::n_type*/;
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_parser_nodes___ASuperclass___n_type(variable[0])(variable[0]) /*ASuperclass::n_type*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_syntax_base___PType___get_local_class(variable[4])(variable[4],  variable[1] /*v*/) /*PType::get_local_class*/;
   variable[3] = variable[4];
-  variable[5] = variable[0];
-  variable[6] = NEW_MMSrcAncestor_mmbuilder___MMSrcAncestor___init(variable[5],  variable[3] /*c*/); /*new MMSrcAncestor*/
-  variable[5] = variable[6];
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = NEW_MMSrcAncestor_mmbuilder___MMSrcAncestor___init(variable[0],  variable[3] /*c*/) /*new MMSrcAncestor*/;
   variable[4] = variable[5];
-  variable[5] = variable[0];
-  ATTR_mmbuilder___ASuperclass____ancestor(variable[5]) /*ASuperclass::_ancestor*/ =  variable[4] /*ancestor*/;
+  ATTR_mmbuilder___ASuperclass____ancestor(variable[0]) /*ASuperclass::_ancestor*/ =  variable[4] /*ancestor*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
   CALL_inheritance___MMLocalClass___add_direct_parent(variable[5])(variable[5],  variable[4] /*ancestor*/) /*MMLocalClass::add_direct_parent*/;
-  return_label85: while(false);
+  return_label139: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___ASuperclass___accept_class_ancestor_builder(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 724, LOCATE_mmbuilder___ASuperclass___accept_class_ancestor_builder};
+  struct trace_t trace = {NULL, NULL, 721, LOCATE_mmbuilder___ASuperclass___accept_class_ancestor_builder};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
   CALL_SUPER_mmbuilder___ASuperclass___accept_class_ancestor_builder(variable[0])(variable[0], variable[1]) /*super ASuperclass::accept_class_ancestor_builder*/;
-  variable[3] = variable[0];
-  variable[3] = ATTR_mmbuilder___ASuperclass____ancestor(variable[3]) /*ASuperclass::_ancestor*/;
-  variable[4] = variable[0];
-  variable[4] = CALL_parser_nodes___ASuperclass___n_type(variable[4])(variable[4]) /*ASuperclass::n_type*/;
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_mmbuilder___ASuperclass____ancestor(variable[0]) /*ASuperclass::_ancestor*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_parser_nodes___ASuperclass___n_type(variable[0])(variable[0]) /*ASuperclass::n_type*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_syntax_base___PType___get_unchecked_stype(variable[4])(variable[4],  variable[1] /*v*/) /*PType::get_unchecked_stype*/;
   CALL_static_type___MMAncestor___stype__eq(variable[3])(variable[3], variable[4]) /*MMAncestor::stype=*/;
-  variable[3] = variable[0];
-  variable[3] = ATTR_mmbuilder___ASuperclass____ancestor(variable[3]) /*ASuperclass::_ancestor*/;
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_mmbuilder___ASuperclass____ancestor(variable[0]) /*ASuperclass::_ancestor*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_static_type___MMLocalClass___get_type(variable[4])(variable[4]) /*MMLocalClass::get_type*/;
   CALL_static_type___MMAncestor___inheriter__eq(variable[3])(variable[3], variable[4]) /*MMAncestor::inheriter=*/;
-  return_label86: while(false);
+  return_label140: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___ASuperclass___accept_class_verifier(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 731, LOCATE_mmbuilder___ASuperclass___accept_class_verifier};
+  struct trace_t trace = {NULL, NULL, 728, LOCATE_mmbuilder___ASuperclass___accept_class_verifier};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
   CALL_SUPER_mmbuilder___ASuperclass___accept_class_verifier(variable[0])(variable[0], variable[1]) /*super ASuperclass::accept_class_verifier*/;
-  variable[3] = variable[0];
-  variable[3] = CALL_parser_nodes___ASuperclass___n_type(variable[3])(variable[3]) /*ASuperclass::n_type*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_parser_nodes___ASuperclass___n_type(variable[0])(variable[0]) /*ASuperclass::n_type*/;
   CALL_syntax_base___PType___check_conform(variable[3])(variable[3],  variable[1] /*v*/) /*PType::check_conform*/;
-  return_label87: while(false);
+  return_label141: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t mmbuilder___ASuperclass___ancestor(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 713, LOCATE_mmbuilder___ASuperclass___ancestor};
+  struct trace_t trace = {NULL, NULL, 710, LOCATE_mmbuilder___ASuperclass___ancestor};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___ASuperclass____ancestor( self) /*ASuperclass::_ancestor*/;
 }
 void mmbuilder___PPropdef___process_and_check(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3) {
-  struct trace_t trace = {NULL, NULL, 739, LOCATE_mmbuilder___PPropdef___process_and_check};
+  struct trace_t trace = {NULL, NULL, 736, LOCATE_mmbuilder___PPropdef___process_and_check};
   val_t variable[7];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
+  /* Register variable[4]: Local variable */
   variable[4] =  param3;
+  /* Register variable[5]: Method return value and escape marker */
+  /* Register variable[6]: Result */
   variable[6] = CALL_abstractmetamodel___MMLocalProperty___global( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::global*/;
+  /* Register variable[6]: Result */
   variable[6] = CALL_abstractmetamodel___MMGlobalProperty___intro(variable[6])(variable[6]) /*MMGlobalProperty::intro*/;
+  /* Register variable[6]: Result */
   variable[6] = TAG_Bool((variable[6] ==  variable[2] /*prop*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], variable[2] /*prop*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  variable[2] /*prop*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[6])) { /*if*/
-    variable[6] = variable[0];
-    CALL_mmbuilder___PPropdef___do_and_check_intro(variable[6])(variable[6],  variable[1] /*v*/,  variable[2] /*prop*/,  variable[3] /*has_redef*/,  variable[4] /*visibility_level*/) /*PPropdef::do_and_check_intro*/;
+    CALL_mmbuilder___PPropdef___do_and_check_intro(variable[0])(variable[0],  variable[1] /*v*/,  variable[2] /*prop*/,  variable[3] /*has_redef*/,  variable[4] /*visibility_level*/) /*PPropdef::do_and_check_intro*/;
   } else { /*if*/
-    variable[6] = variable[0];
-    CALL_mmbuilder___PPropdef___do_and_check_redef(variable[6])(variable[6],  variable[1] /*v*/,  variable[2] /*prop*/,  variable[3] /*has_redef*/,  variable[4] /*visibility_level*/) /*PPropdef::do_and_check_redef*/;
+    CALL_mmbuilder___PPropdef___do_and_check_redef(variable[0])(variable[0],  variable[1] /*v*/,  variable[2] /*prop*/,  variable[3] /*has_redef*/,  variable[4] /*visibility_level*/) /*PPropdef::do_and_check_redef*/;
   }
-  return_label88: while(false);
+  return_label142: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___PPropdef___do_and_check_intro(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3) {
-  struct trace_t trace = {NULL, NULL, 754, LOCATE_mmbuilder___PPropdef___do_and_check_intro};
-  val_t variable[19];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 751, LOCATE_mmbuilder___PPropdef___do_and_check_intro};
+    static val_t once_value_144 = NIT_NULL; /* Once value for string variable[9]*/
+    static val_t once_value_145 = NIT_NULL; /* Once value for string variable[9]*/
+    static val_t once_value_146 = NIT_NULL; /* Once value for string variable[9]*/
+      static val_t once_value_147 = NIT_NULL; /* Once value for string variable[9]*/
+      static val_t once_value_148 = NIT_NULL; /* Once value for string variable[9]*/
+      static val_t once_value_149 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_150 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_151 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_152 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_153 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_154 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_155 = NIT_NULL; /* Once value for string variable[9]*/
+          static val_t once_value_156 = NIT_NULL; /* Once value for string variable[9]*/
+          static val_t once_value_157 = NIT_NULL; /* Once value for string variable[9]*/
+          static val_t once_value_158 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_159 = NIT_NULL; /* Once value for string variable[9]*/
+  val_t variable[13];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
+  /* Register variable[4]: Local variable */
   variable[4] =  param3;
+  /* Register variable[5]: Method return value and escape marker */
+  /* Register variable[6]: Local variable */
+  /* Register variable[7]: Result */
   variable[7] = CALL_abstractmetamodel___MMLocalProperty___global( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::global*/;
   variable[6] = variable[7];
+  /* Register variable[7]: Local variable */
+  /* Register variable[8]: Result */
   variable[8] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+  /* Register variable[8]: Result */
   variable[8] = CALL_abstractmetamodel___MMLocalClass___global(variable[8])(variable[8]) /*MMLocalClass::global*/;
   variable[7] = variable[8];
+  /* Register variable[8]: Result */
   variable[8] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
+  /* Register variable[8]: Result */
   variable[8] = CALL_abstractmetamodel___MMLocalClass___global(variable[8])(variable[8]) /*MMLocalClass::global*/;
+  /* Register variable[8]: Result */
   variable[8] = CALL_abstractmetamodel___MMGlobalClass___visibility_level(variable[8])(variable[8]) /*MMGlobalClass::visibility_level*/;
+  /* Register variable[8]: Result */
   variable[8] = TAG_Bool(UNTAG_Int(variable[8])>=UNTAG_Int( TAG_Int(3)));
   if (UNTAG_Bool(variable[8])) { /*if*/
     variable[4] =  TAG_Int(3) /*visibility_level=*/;
   }
   CALL_abstractmetamodel___MMGlobalProperty___visibility_level__eq( variable[6] /*glob*/)( variable[6] /*glob*/,  variable[4] /*visibility_level*/) /*MMGlobalProperty::visibility_level=*/;
   if (UNTAG_Bool( variable[3] /*has_redef*/)) { /*if*/
-    variable[8] = variable[0];
-    variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-    variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Error: No property "), TAG_Int(19)); /*new String*/
-    variable[11] = variable[10];
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[11]) /*AbstractArray::add*/;
-    variable[12] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
-    variable[13] = variable[12];
-    variable[13] = CALL_string___Object___to_s(variable[13])(variable[13]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[13]) /*AbstractArray::add*/;
-    variable[14] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-    variable[15] = variable[14];
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[15]) /*AbstractArray::add*/;
-    variable[16] =  variable[2] /*prop*/;
-    variable[16] = CALL_string___Object___to_s(variable[16])(variable[16]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[16]) /*AbstractArray::add*/;
-    variable[17] = NEW_String_string___String___with_native(BOX_NativeString(" is inherited. Remove the redef keyword to define a new property."), TAG_Int(65)); /*new String*/
-    variable[18] = variable[17];
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[18]) /*AbstractArray::add*/;
-    variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
+    variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[9]: Once String constant */
+    if (once_value_144 != NIT_NULL) variable[9] = once_value_144;
+    else {
+      variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Error: No property "), TAG_Int(19)) /*new String*/;
+      once_value_144 = variable[9];
+    }
+    /* Register variable[9]: Result */
+    /* Ensure var variable[9]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+    /* Register variable[9]: Result */
+    variable[9] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+    /* Ensure var variable[9]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[9]: Once String constant */
+    if (once_value_145 != NIT_NULL) variable[9] = once_value_145;
+    else {
+      variable[9] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+      once_value_145 = variable[9];
+    }
+    /* Register variable[9]: Result */
+    /* Ensure var variable[9]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+    variable[9] =  variable[2] /*prop*/ /* Ensure var: super-string element*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[9]: Once String constant */
+    if (once_value_146 != NIT_NULL) variable[9] = once_value_146;
+    else {
+      variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" is inherited. Remove the redef keyword to define a new property."), TAG_Int(65)) /*new String*/;
+      once_value_146 = variable[9];
+    }
+    /* Register variable[9]: Result */
+    /* Ensure var variable[9]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+    /* Register variable[8]: Result */
+    variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
+    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[8]) /*AbsSyntaxVisitor::error*/;
   }
+  /* Register variable[8]: Result */
   variable[8] = CALL_abstractmetamodel___MMGlobalProperty___is_attribute( variable[6] /*glob*/)( variable[6] /*glob*/) /*MMGlobalProperty::is_attribute*/;
   if (UNTAG_Bool(variable[8])) { /*if*/
+    /* Register variable[8]: Result */
     variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_interface( variable[7] /*gbc*/)( variable[7] /*gbc*/) /*MMGlobalClass::is_interface*/;
     if (UNTAG_Bool(variable[8])) { /*if*/
-      variable[8] = variable[0];
-      variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-      variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Error: Attempt to define attribute "), TAG_Int(35)); /*new String*/
-      variable[11] = variable[10];
-      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[11]) /*AbstractArray::add*/;
-      variable[12] =  variable[2] /*prop*/;
-      variable[12] = CALL_string___Object___to_s(variable[12])(variable[12]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[12]) /*AbstractArray::add*/;
-      variable[13] = NEW_String_string___String___with_native(BOX_NativeString(" in the interface "), TAG_Int(18)); /*new String*/
-      variable[14] = variable[13];
-      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[14]) /*AbstractArray::add*/;
-      variable[15] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
-      variable[16] = variable[15];
-      variable[16] = CALL_string___Object___to_s(variable[16])(variable[16]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[16]) /*AbstractArray::add*/;
-      variable[17] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-      variable[18] = variable[17];
-      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[18]) /*AbstractArray::add*/;
-      variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
+      variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[9]: Once String constant */
+      if (once_value_147 != NIT_NULL) variable[9] = once_value_147;
+      else {
+        variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Error: Attempt to define attribute "), TAG_Int(35)) /*new String*/;
+        once_value_147 = variable[9];
+      }
+      /* Register variable[9]: Result */
+      /* Ensure var variable[9]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+      variable[9] =  variable[2] /*prop*/ /* Ensure var: super-string element*/;
+      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[9]: Once String constant */
+      if (once_value_148 != NIT_NULL) variable[9] = once_value_148;
+      else {
+        variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" in the interface "), TAG_Int(18)) /*new String*/;
+        once_value_148 = variable[9];
+      }
+      /* Register variable[9]: Result */
+      /* Ensure var variable[9]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+      /* Register variable[9]: Result */
+      variable[9] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+      /* Ensure var variable[9]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[9]: Once String constant */
+      if (once_value_149 != NIT_NULL) variable[9] = once_value_149;
+      else {
+        variable[9] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+        once_value_149 = variable[9];
+      }
+      /* Register variable[9]: Result */
+      /* Ensure var variable[9]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+      /* Register variable[8]: Result */
+      variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
+      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[8]) /*AbsSyntaxVisitor::error*/;
     } else { /*if*/
+      /* Register variable[8]: Result */
       variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_universal( variable[7] /*gbc*/)( variable[7] /*gbc*/) /*MMGlobalClass::is_universal*/;
       if (UNTAG_Bool(variable[8])) { /*if*/
-        variable[8] = variable[0];
-        variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-        variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Error: Attempt to define attribute "), TAG_Int(35)); /*new String*/
-        variable[11] = variable[10];
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[11]) /*AbstractArray::add*/;
-        variable[12] =  variable[2] /*prop*/;
-        variable[12] = CALL_string___Object___to_s(variable[12])(variable[12]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[12]) /*AbstractArray::add*/;
-        variable[13] = NEW_String_string___String___with_native(BOX_NativeString(" in the universal class "), TAG_Int(24)); /*new String*/
-        variable[14] = variable[13];
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[14]) /*AbstractArray::add*/;
-        variable[15] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
-        variable[16] = variable[15];
-        variable[16] = CALL_string___Object___to_s(variable[16])(variable[16]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[16]) /*AbstractArray::add*/;
-        variable[17] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-        variable[18] = variable[17];
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[18]) /*AbstractArray::add*/;
-        variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-        CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
+        variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_150 != NIT_NULL) variable[9] = once_value_150;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Error: Attempt to define attribute "), TAG_Int(35)) /*new String*/;
+          once_value_150 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        variable[9] =  variable[2] /*prop*/ /* Ensure var: super-string element*/;
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_151 != NIT_NULL) variable[9] = once_value_151;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" in the universal class "), TAG_Int(24)) /*new String*/;
+          once_value_151 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[9]: Result */
+        variable[9] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_152 != NIT_NULL) variable[9] = once_value_152;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+          once_value_152 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[8]: Result */
+        variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
+        CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[8]) /*AbsSyntaxVisitor::error*/;
       }
     }
   } else { /*if*/
+    /* Register variable[8]: Result */
     variable[8] = CALL_abstractmetamodel___MMGlobalProperty___is_init( variable[6] /*glob*/)( variable[6] /*glob*/) /*MMGlobalProperty::is_init*/;
     if (UNTAG_Bool(variable[8])) { /*if*/
+      /* Register variable[8]: Result */
       variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_interface( variable[7] /*gbc*/)( variable[7] /*gbc*/) /*MMGlobalClass::is_interface*/;
       if (UNTAG_Bool(variable[8])) { /*if*/
-        variable[8] = variable[0];
-        variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-        variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Error: Attempt to define a constructor "), TAG_Int(39)); /*new String*/
-        variable[11] = variable[10];
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[11]) /*AbstractArray::add*/;
-        variable[12] =  variable[2] /*prop*/;
-        variable[12] = CALL_string___Object___to_s(variable[12])(variable[12]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[12]) /*AbstractArray::add*/;
-        variable[13] = NEW_String_string___String___with_native(BOX_NativeString(" in the class "), TAG_Int(14)); /*new String*/
-        variable[14] = variable[13];
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[14]) /*AbstractArray::add*/;
-        variable[15] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
-        variable[16] = variable[15];
-        variable[16] = CALL_string___Object___to_s(variable[16])(variable[16]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[16]) /*AbstractArray::add*/;
-        variable[17] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-        variable[18] = variable[17];
-        CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[18]) /*AbstractArray::add*/;
-        variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-        CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
+        variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_153 != NIT_NULL) variable[9] = once_value_153;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Error: Attempt to define a constructor "), TAG_Int(39)) /*new String*/;
+          once_value_153 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        variable[9] =  variable[2] /*prop*/ /* Ensure var: super-string element*/;
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_154 != NIT_NULL) variable[9] = once_value_154;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" in the class "), TAG_Int(14)) /*new String*/;
+          once_value_154 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[9]: Result */
+        variable[9] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_155 != NIT_NULL) variable[9] = once_value_155;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+          once_value_155 = variable[9];
+        }
+        /* Register variable[9]: Result */
+        /* Ensure var variable[9]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+        /* Register variable[8]: Result */
+        variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
+        CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[8]) /*AbsSyntaxVisitor::error*/;
       } else { /*if*/
+        /* Register variable[8]: Result */
         variable[8] = CALL_abstractmetamodel___MMGlobalClass___is_universal( variable[7] /*gbc*/)( variable[7] /*gbc*/) /*MMGlobalClass::is_universal*/;
         if (UNTAG_Bool(variable[8])) { /*if*/
-          variable[8] = variable[0];
-          variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-          variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Error: Attempt to define a constructor "), TAG_Int(39)); /*new String*/
-          variable[11] = variable[10];
-          CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[11]) /*AbstractArray::add*/;
-          variable[12] =  variable[2] /*prop*/;
-          variable[12] = CALL_string___Object___to_s(variable[12])(variable[12]) /*Object::to_s*/;
-          CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[12]) /*AbstractArray::add*/;
-          variable[13] = NEW_String_string___String___with_native(BOX_NativeString(" in the universal "), TAG_Int(18)); /*new String*/
-          variable[14] = variable[13];
-          CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[14]) /*AbstractArray::add*/;
-          variable[15] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
-          variable[16] = variable[15];
-          variable[16] = CALL_string___Object___to_s(variable[16])(variable[16]) /*Object::to_s*/;
-          CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[16]) /*AbstractArray::add*/;
-          variable[17] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-          variable[18] = variable[17];
-          CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[18]) /*AbstractArray::add*/;
-          variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-          CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
+          variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+          /* Register variable[9]: Once String constant */
+          if (once_value_156 != NIT_NULL) variable[9] = once_value_156;
+          else {
+            variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Error: Attempt to define a constructor "), TAG_Int(39)) /*new String*/;
+            once_value_156 = variable[9];
+          }
+          /* Register variable[9]: Result */
+          /* Ensure var variable[9]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+          variable[9] =  variable[2] /*prop*/ /* Ensure var: super-string element*/;
+          CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+          /* Register variable[9]: Once String constant */
+          if (once_value_157 != NIT_NULL) variable[9] = once_value_157;
+          else {
+            variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" in the universal "), TAG_Int(18)) /*new String*/;
+            once_value_157 = variable[9];
+          }
+          /* Register variable[9]: Result */
+          /* Ensure var variable[9]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+          /* Register variable[9]: Result */
+          variable[9] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+          /* Ensure var variable[9]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+          /* Register variable[9]: Once String constant */
+          if (once_value_158 != NIT_NULL) variable[9] = once_value_158;
+          else {
+            variable[9] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+            once_value_158 = variable[9];
+          }
+          /* Register variable[9]: Result */
+          /* Ensure var variable[9]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+          /* Register variable[8]: Result */
+          variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
+          CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[8]) /*AbsSyntaxVisitor::error*/;
         }
       }
     }
   }
+  /* Register variable[8]: Result */
   variable[8] = CALL_static_type___MMLocalProperty___signature( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::signature*/;
+  /* Register variable[8]: Result */
   variable[8] = TAG_Bool((variable[8] ==  NIT_NULL /*null*/) || ((variable[8] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[8])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[8], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[8])(variable[8],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[8])) { /*if*/
+    /* Register variable[8]: Result */
     variable[8] = CALL_abstractmetamodel___MMGlobalProperty___is_init( variable[6] /*glob*/)( variable[6] /*glob*/) /*MMGlobalProperty::is_init*/;
     if (UNTAG_Bool(variable[8])) { /*if*/
+      /* Register variable[8]: Local variable */
+      /* Register variable[9]: Result */
       variable[9] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+      /* Register variable[10]: Result */
       variable[10] = CALL_abstractmetamodel___MMLocalProperty___name( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::name*/;
+      /* Register variable[9]: Result */
       variable[9] = CALL_abstractmetamodel___MMLocalClass___super_methods_named(variable[9])(variable[9], variable[10]) /*MMLocalClass::super_methods_named*/;
       variable[8] = variable[9];
-      variable[9] = variable[0];
-      CALL_mmbuilder___PPropdef___inherit_signature(variable[9])(variable[9],  variable[1] /*v*/,  variable[2] /*prop*/,  variable[8] /*supers*/) /*PPropdef::inherit_signature*/;
+      CALL_mmbuilder___PPropdef___inherit_signature(variable[0])(variable[0],  variable[1] /*v*/,  variable[2] /*prop*/,  variable[8] /*supers*/) /*PPropdef::inherit_signature*/;
     }
+    /* Register variable[8]: Result */
     variable[8] = CALL_static_type___MMLocalProperty___signature( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::signature*/;
+    /* Register variable[8]: Result */
     variable[8] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[8] ==  NIT_NULL /*null*/) || ((variable[8] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[8])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[8], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[8])(variable[8],  NIT_NULL /*null*/) /*Object::==*/)))))));
     if (UNTAG_Bool(variable[8])) { /*if*/
     } else { /*if*/
+      /* Register variable[8]: Result */
       variable[8] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+      /* Register variable[8]: Result */
       variable[8] = CALL_mmbuilder___SignatureBuilder___untyped_params(variable[8])(variable[8]) /*SignatureBuilder::untyped_params*/;
-      variable[8] = CALL_abstract_collection___Collection___is_empty(variable[8])(variable[8]) /*AbstractArray::is_empty*/;
+      /* Register variable[8]: Result */
+      variable[8] = CALL_abstract_collection___Collection___is_empty(variable[8])(variable[8]) /*AbstractArrayRead::is_empty*/;
       if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[8])))) { /*if*/
+        /* Register variable[8]: Result */
         variable[8] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+        /* Register variable[8]: Result */
         variable[8] = CALL_mmbuilder___SignatureBuilder___untyped_params(variable[8])(variable[8]) /*SignatureBuilder::untyped_params*/;
-        variable[8] = CALL_abstract_collection___Collection___first(variable[8])(variable[8]) /*IndexedCollection::first*/;
-        variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Error: Untyped parameter."), TAG_Int(25)); /*new String*/
+        /* Register variable[8]: Result */
+        variable[8] = CALL_abstract_collection___Collection___first(variable[8])(variable[8]) /*IndexedCollectionRead::first*/;
+        /* Register variable[9]: Once String constant */
+        if (once_value_159 != NIT_NULL) variable[9] = once_value_159;
+        else {
+          variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Error: Untyped parameter."), TAG_Int(25)) /*new String*/;
+          once_value_159 = variable[9];
+        }
+        /* Register variable[9]: Result */
         CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
       } else { /*if*/
-        variable[8] = NEW_Array_array___Array___init(); /*new Array[MMType]*/
+        /* Register variable[8]: Result */
+        variable[8] = NEW_Array_array___Array___init() /*new Array[MMType]*/;
+        /* Register variable[9]: Result */
         variable[9] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
+        /* Register variable[9]: Result */
         variable[9] = CALL_static_type___MMLocalClass___get_type(variable[9])(variable[9]) /*MMLocalClass::get_type*/;
-        variable[10] = NEW_MMSignature_static_type___MMSignature___init(variable[8],  NIT_NULL /*null*/, variable[9]); /*new MMSignature*/
-        variable[8] = variable[10];
+        /* Register variable[8]: Result */
+        variable[8] = NEW_MMSignature_static_type___MMSignature___init(variable[8],  NIT_NULL /*null*/, variable[9]) /*new MMSignature*/;
         CALL_static_type___MMLocalProperty___signature__eq( variable[2] /*prop*/)( variable[2] /*prop*/, variable[8]) /*MMLocalProperty::signature=*/;
+        /* Register variable[8]: Result */
         variable[8] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+        /* Register variable[8]: Result */
         variable[8] = CALL_mmbuilder___SignatureBuilder___closure_decls(variable[8])(variable[8]) /*SignatureBuilder::closure_decls*/;
+        /* Register variable[8]: Result */
         variable[8] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[8] ==  NIT_NULL /*null*/) || ((variable[8] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[8])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[8], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[8])(variable[8],  NIT_NULL /*null*/) /*Object::==*/)))))));
         if (UNTAG_Bool(variable[8])) { /*if*/
+          /* Register variable[8]: Result */
           variable[8] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+          /* Register variable[8]: Result */
           variable[8] = CALL_mmbuilder___SignatureBuilder___closure_decls(variable[8])(variable[8]) /*SignatureBuilder::closure_decls*/;
-          variable[8] = CALL_abstract_collection___Collection___iterator(variable[8])(variable[8]) /*AbstractArray::iterator*/;
+          /* Register variable[8]: For iterator */
+          variable[8] = CALL_abstract_collection___Collection___iterator(variable[8])(variable[8]) /*AbstractArrayRead::iterator*/;
           while (true) { /*for*/
+            /* Register variable[9]: For 'is_ok' result */
             variable[9] = CALL_abstract_collection___Iterator___is_ok(variable[8])(variable[8]) /*ArrayIterator::is_ok*/;
             if (!UNTAG_Bool(variable[9])) break; /*for*/
-            variable[9] = CALL_abstract_collection___Iterator___item(variable[8])(variable[8]) /*ArrayIterator::item*/;
+            variable[9] = CALL_abstract_collection___Iterator___item(variable[8])(variable[8]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+            /* Register variable[10]: Local variable */
             variable[10] = variable[9];
+            /* Register variable[11]: Result */
             variable[11] = CALL_static_type___MMLocalProperty___signature( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::signature*/;
+            /* Register variable[11]: Result */
             variable[11] = CALL_static_type___MMSignature___closures(variable[11])(variable[11]) /*MMSignature::closures*/;
+            /* Register variable[12]: Result */
             variable[12] = CALL_syntax_base___PClosureDecl___variable( variable[10] /*clos*/)( variable[10] /*clos*/) /*AClosureDecl::variable*/;
+            /* Register variable[12]: Result */
             variable[12] = CALL_syntax_base___ClosureVariable___closure(variable[12])(variable[12]) /*ClosureVariable::closure*/;
             CALL_abstract_collection___SimpleCollection___add(variable[11])(variable[11], variable[12]) /*AbstractArray::add*/;
-            continue_90: while(0);
+            continue_160: while(0);
             CALL_abstract_collection___Iterator___next(variable[8])(variable[8]) /*ArrayIterator::next*/;
           }
-          break_90: while(0);
+          break_160: while(0);
         }
       }
     }
   }
-  return_label89: while(false);
+  return_label143: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___PPropdef___inherit_signature(val_t  self, val_t  param0, val_t  param1, val_t  param2) {
-  struct trace_t trace = {NULL, NULL, 800, LOCATE_mmbuilder___PPropdef___inherit_signature};
+  struct trace_t trace = {NULL, NULL, 797, LOCATE_mmbuilder___PPropdef___inherit_signature};
   val_t variable[16];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
+  /* Register variable[4]: Method return value and escape marker */
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
   variable[6] = CALL_static_type___MMLocalProperty___signature( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::signature*/;
   variable[5] = variable[6];
-  variable[6] = CALL_abstract_collection___Collection___iterator( variable[3] /*supers*/)( variable[3] /*supers*/) /*AbstractArray::iterator*/;
+  /* Register variable[6]: For iterator */
+  variable[6] = CALL_abstract_collection___Collection___iterator( variable[3] /*supers*/)( variable[3] /*supers*/) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[7]: For 'is_ok' result */
     variable[7] = CALL_abstract_collection___Iterator___is_ok(variable[6])(variable[6]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[7])) break; /*for*/
-    variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*ArrayIterator::item*/;
+    variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[8]: Local variable */
     variable[8] = variable[7];
+    /* Register variable[9]: Local variable */
+    /* Register variable[10]: Result */
     variable[10] = CALL_static_type___MMLocalProperty___signature( variable[8] /*ip*/)( variable[8] /*ip*/) /*MMLocalProperty::signature*/;
+    /* Register variable[11]: Result */
     variable[11] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
+    /* Register variable[11]: Result */
     variable[11] = CALL_static_type___MMLocalClass___get_type(variable[11])(variable[11]) /*MMLocalClass::get_type*/;
+    /* Register variable[10]: Result */
     variable[10] = CALL_static_type___MMSignature___adaptation_to(variable[10])(variable[10], variable[11]) /*MMSignature::adaptation_to*/;
     variable[9] = variable[10];
+    /* Register variable[10]: Result */
     variable[10] = TAG_Bool(( variable[5] /*s*/ ==  NIT_NULL /*null*/) || (( variable[5] /*s*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*s*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*s*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*s*/)( variable[5] /*s*/,  NIT_NULL /*null*/) /*Object::==*/)))));
     if (UNTAG_Bool(variable[10])) { /*if*/
+      /* Register variable[10]: Result */
       variable[10] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+      /* Register variable[10]: Result */
       variable[10] = CALL_mmbuilder___SignatureBuilder___params(variable[10])(variable[10]) /*SignatureBuilder::params*/;
-      variable[10] = CALL_abstract_collection___Collection___length(variable[10])(variable[10]) /*AbstractArray::length*/;
+      /* Register variable[10]: Result */
+      variable[10] = CALL_abstract_collection___Collection___length(variable[10])(variable[10]) /*AbstractArrayRead::length*/;
+      /* Register variable[11]: Result */
       variable[11] = CALL_static_type___MMSignature___arity( variable[9] /*isig*/)( variable[9] /*isig*/) /*MMSignature::arity*/;
+      /* Register variable[10]: Result */
       variable[10] = TAG_Bool((variable[10])!=(variable[11]));
       if (UNTAG_Bool(variable[10])) { /*if*/
-        goto return_label91;
+        goto return_label161;
       }
+      /* Register variable[10]: Result */
       variable[10] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+      /* Register variable[10]: Result */
       variable[10] = CALL_mmbuilder___SignatureBuilder___params(variable[10])(variable[10]) /*SignatureBuilder::params*/;
-      variable[10] = CALL_abstract_collection___Collection___iterator(variable[10])(variable[10]) /*AbstractArray::iterator*/;
+      /* Register variable[10]: For iterator */
+      variable[10] = CALL_abstract_collection___Collection___iterator(variable[10])(variable[10]) /*AbstractArrayRead::iterator*/;
       while (true) { /*for*/
+        /* Register variable[11]: For 'is_ok' result */
         variable[11] = CALL_abstract_collection___Iterator___is_ok(variable[10])(variable[10]) /*ArrayIterator::is_ok*/;
         if (!UNTAG_Bool(variable[11])) break; /*for*/
-        variable[11] = CALL_abstract_collection___Iterator___item(variable[10])(variable[10]) /*ArrayIterator::item*/;
+        variable[11] = CALL_abstract_collection___Iterator___item(variable[10])(variable[10]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+        /* Register variable[12]: Local variable */
         variable[12] = variable[11];
+        /* Register variable[13]: Local variable */
+        /* Register variable[14]: Result */
         variable[14] = CALL_syntax_base___PParam___position( variable[12] /*p*/)( variable[12] /*p*/) /*PParam::position*/;
+        /* Register variable[14]: Result */
         variable[14] = CALL_static_type___MMSignature_____bra( variable[9] /*isig*/)( variable[9] /*isig*/, variable[14]) /*MMSignature::[]*/;
         variable[13] = variable[14];
         CALL_mmbuilder___PParam___stype__eq( variable[12] /*p*/)( variable[12] /*p*/,  variable[13] /*t*/) /*PParam::stype=*/;
+        /* Register variable[14]: Result */
         variable[14] = CALL_syntax_base___PParam___position( variable[12] /*p*/)( variable[12] /*p*/) /*PParam::position*/;
+        /* Register variable[15]: Result */
         variable[15] = CALL_vararg___MMSignature___vararg_rank( variable[9] /*isig*/)( variable[9] /*isig*/) /*MMSignature::vararg_rank*/;
+        /* Register variable[14]: Result */
         variable[14] = TAG_Bool((variable[14])==(variable[15]));
         if (UNTAG_Bool(variable[14])) { /*if*/
+          /* Register variable[14]: Result */
           variable[14] = CALL_syntax_base___AbsSyntaxVisitor___type_array( variable[1] /*v*/)( variable[1] /*v*/,  variable[13] /*t*/) /*AbsSyntaxVisitor::type_array*/;
           variable[13] = variable[14] /*t=*/;
         }
+        /* Register variable[14]: Result */
         variable[14] = CALL_syntax_base___PParam___variable( variable[12] /*p*/)( variable[12] /*p*/) /*PParam::variable*/;
         CALL_syntax_base___Variable___stype__eq(variable[14])(variable[14],  variable[13] /*t*/) /*Variable::stype=*/;
-        continue_93: while(0);
+        continue_163: while(0);
         CALL_abstract_collection___Iterator___next(variable[10])(variable[10]) /*ArrayIterator::next*/;
       }
-      break_93: while(0);
+      break_163: while(0);
       variable[5] =  variable[9] /*isig*/ /*s=*/;
       CALL_static_type___MMLocalProperty___signature__eq( variable[2] /*prop*/)( variable[2] /*prop*/,  variable[5] /*s*/) /*MMLocalProperty::signature=*/;
     }
-    continue_92: while(0);
+    continue_162: while(0);
     CALL_abstract_collection___Iterator___next(variable[6])(variable[6]) /*ArrayIterator::next*/;
   }
-  break_92: while(0);
-  return_label91: while(false);
+  break_162: while(0);
+  return_label161: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___PPropdef___do_and_check_redef(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3) {
-  struct trace_t trace = {NULL, NULL, 826, LOCATE_mmbuilder___PPropdef___do_and_check_redef};
-  val_t variable[43];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 823, LOCATE_mmbuilder___PPropdef___do_and_check_redef};
+    static val_t once_value_165 = NIT_NULL; /* Once value for string variable[9]*/
+    static val_t once_value_166 = NIT_NULL; /* Once value for string variable[9]*/
+    static val_t once_value_167 = NIT_NULL; /* Once value for string variable[9]*/
+    static val_t once_value_168 = NIT_NULL; /* Once value for string variable[9]*/
+    static val_t once_value_169 = NIT_NULL; /* Once value for string variable[9]*/
+    static val_t once_value_170 = NIT_NULL; /* Once value for string variable[9]*/
+      static val_t once_value_171 = NIT_NULL; /* Once value for string variable[9]*/
+      static val_t once_value_172 = NIT_NULL; /* Once value for string variable[9]*/
+      static val_t once_value_173 = NIT_NULL; /* Once value for string variable[9]*/
+        static val_t once_value_175 = NIT_NULL; /* Once value for string variable[15]*/
+        static val_t once_value_176 = NIT_NULL; /* Once value for string variable[15]*/
+        static val_t once_value_177 = NIT_NULL; /* Once value for string variable[15]*/
+        static val_t once_value_178 = NIT_NULL; /* Once value for string variable[15]*/
+        static val_t once_value_179 = NIT_NULL; /* Once value for string variable[15]*/
+        static val_t once_value_180 = NIT_NULL; /* Once value for string variable[15]*/
+        static val_t once_value_181 = NIT_NULL; /* Once value for string variable[15]*/
+        static val_t once_value_182 = NIT_NULL; /* Once value for string variable[15]*/
+        static val_t once_value_183 = NIT_NULL; /* Once value for string variable[15]*/
+        static val_t once_value_184 = NIT_NULL; /* Once value for string variable[15]*/
+        static val_t once_value_185 = NIT_NULL; /* Once value for string variable[15]*/
+        static val_t once_value_186 = NIT_NULL; /* Once value for string variable[15]*/
+      static val_t once_value_188 = NIT_NULL; /* Once value for string variable[16]*/
+      static val_t once_value_189 = NIT_NULL; /* Once value for string variable[16]*/
+      static val_t once_value_190 = NIT_NULL; /* Once value for string variable[16]*/
+      static val_t once_value_191 = NIT_NULL; /* Once value for string variable[16]*/
+      static val_t once_value_192 = NIT_NULL; /* Once value for string variable[16]*/
+      static val_t once_value_193 = NIT_NULL; /* Once value for string variable[16]*/
+          static val_t once_value_195 = NIT_NULL; /* Once value for string variable[19]*/
+          static val_t once_value_196 = NIT_NULL; /* Once value for string variable[19]*/
+          static val_t once_value_197 = NIT_NULL; /* Once value for string variable[19]*/
+          static val_t once_value_198 = NIT_NULL; /* Once value for string variable[19]*/
+          static val_t once_value_199 = NIT_NULL; /* Once value for string variable[19]*/
+          static val_t once_value_200 = NIT_NULL; /* Once value for string variable[19]*/
+          static val_t once_value_201 = NIT_NULL; /* Once value for string variable[19]*/
+      static val_t once_value_202 = NIT_NULL; /* Once value for string variable[18]*/
+      static val_t once_value_203 = NIT_NULL; /* Once value for string variable[18]*/
+      static val_t once_value_204 = NIT_NULL; /* Once value for string variable[18]*/
+      static val_t once_value_205 = NIT_NULL; /* Once value for string variable[18]*/
+      static val_t once_value_206 = NIT_NULL; /* Once value for string variable[18]*/
+        static val_t once_value_207 = NIT_NULL; /* Once value for string variable[18]*/
+        static val_t once_value_208 = NIT_NULL; /* Once value for string variable[18]*/
+        static val_t once_value_209 = NIT_NULL; /* Once value for string variable[18]*/
+        static val_t once_value_210 = NIT_NULL; /* Once value for string variable[18]*/
+        static val_t once_value_211 = NIT_NULL; /* Once value for string variable[18]*/
+          static val_t once_value_212 = NIT_NULL; /* Once value for string variable[18]*/
+          static val_t once_value_213 = NIT_NULL; /* Once value for string variable[18]*/
+          static val_t once_value_214 = NIT_NULL; /* Once value for string variable[18]*/
+          static val_t once_value_215 = NIT_NULL; /* Once value for string variable[18]*/
+          static val_t once_value_216 = NIT_NULL; /* Once value for string variable[18]*/
+          static val_t once_value_217 = NIT_NULL; /* Once value for string variable[18]*/
+          static val_t once_value_218 = NIT_NULL; /* Once value for string variable[18]*/
+            static val_t once_value_219 = NIT_NULL; /* Once value for string variable[18]*/
+            static val_t once_value_220 = NIT_NULL; /* Once value for string variable[18]*/
+            static val_t once_value_221 = NIT_NULL; /* Once value for string variable[18]*/
+            static val_t once_value_222 = NIT_NULL; /* Once value for string variable[18]*/
+            static val_t once_value_223 = NIT_NULL; /* Once value for string variable[18]*/
+              static val_t once_value_224 = NIT_NULL; /* Once value for string variable[18]*/
+              static val_t once_value_225 = NIT_NULL; /* Once value for string variable[18]*/
+              static val_t once_value_226 = NIT_NULL; /* Once value for string variable[18]*/
+              static val_t once_value_227 = NIT_NULL; /* Once value for string variable[18]*/
+              static val_t once_value_228 = NIT_NULL; /* Once value for string variable[18]*/
+              static val_t once_value_229 = NIT_NULL; /* Once value for string variable[18]*/
+              static val_t once_value_230 = NIT_NULL; /* Once value for string variable[18]*/
+    static val_t once_value_231 = NIT_NULL; /* Once value for string variable[10]*/
+    static val_t once_value_232 = NIT_NULL; /* Once value for string variable[10]*/
+    static val_t once_value_233 = NIT_NULL; /* Once value for string variable[10]*/
+  val_t variable[20];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
+  /* Register variable[4]: Local variable */
   variable[4] =  param3;
-  variable[7] = variable[0];
-  variable[7] = TAG_Bool((variable[7]==NIT_NULL) || VAL_ISA(variable[7], COLOR_AConcreteInitPropdef, ID_AConcreteInitPropdef)) /*cast AConcreteInitPropdef*/;
+  /* Register variable[5]: Method return value and escape marker */
+  /* Register variable[6]: Local variable */
+  /* Register variable[7]: Result */
+  variable[7] = TAG_Bool((variable[0]==NIT_NULL) || VAL_ISA(variable[0], COLOR_AConcreteInitPropdef, ID_AConcreteInitPropdef)) /*cast AConcreteInitPropdef*/;
   variable[6] = variable[7];
+  /* Register variable[7]: Local variable */
+  /* Register variable[8]: Result */
   variable[8] = CALL_abstractmetamodel___MMLocalProperty___global( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::global*/;
   variable[7] = variable[8];
   if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool( variable[3] /*has_redef*/)))) { /*if*/
-    variable[8] = variable[0];
-    variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-    variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: "), TAG_Int(13)); /*new String*/
-    variable[11] = variable[10];
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[11]) /*AbstractArray::add*/;
-    variable[12] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
-    variable[13] = variable[12];
-    variable[13] = CALL_string___Object___to_s(variable[13])(variable[13]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[13]) /*AbstractArray::add*/;
-    variable[14] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-    variable[15] = variable[14];
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[15]) /*AbstractArray::add*/;
-    variable[16] =  variable[2] /*prop*/;
-    variable[16] = CALL_string___Object___to_s(variable[16])(variable[16]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[16]) /*AbstractArray::add*/;
-    variable[17] = NEW_String_string___String___with_native(BOX_NativeString(" is an inherited property. To redefine it, add the redef keyword."), TAG_Int(65)); /*new String*/
-    variable[18] = variable[17];
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[18]) /*AbstractArray::add*/;
-    variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
-    goto return_label94;
+    variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[9]: Once String constant */
+    if (once_value_165 != NIT_NULL) variable[9] = once_value_165;
+    else {
+      variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: "), TAG_Int(13)) /*new String*/;
+      once_value_165 = variable[9];
+    }
+    /* Register variable[9]: Result */
+    /* Ensure var variable[9]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+    /* Register variable[9]: Result */
+    variable[9] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+    /* Ensure var variable[9]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[9]: Once String constant */
+    if (once_value_166 != NIT_NULL) variable[9] = once_value_166;
+    else {
+      variable[9] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+      once_value_166 = variable[9];
+    }
+    /* Register variable[9]: Result */
+    /* Ensure var variable[9]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+    variable[9] =  variable[2] /*prop*/ /* Ensure var: super-string element*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[9]: Once String constant */
+    if (once_value_167 != NIT_NULL) variable[9] = once_value_167;
+    else {
+      variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" is an inherited property. To redefine it, add the redef keyword."), TAG_Int(65)) /*new String*/;
+      once_value_167 = variable[9];
+    }
+    /* Register variable[9]: Result */
+    /* Ensure var variable[9]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+    /* Register variable[8]: Result */
+    variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
+    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[8]) /*AbsSyntaxVisitor::error*/;
+    goto return_label164;
   }
+  /* Register variable[8]: Result */
   variable[8] = CALL_abstractmetamodel___MMGlobalProperty___is_init( variable[7] /*glob*/)( variable[7] /*glob*/) /*MMGlobalProperty::is_init*/;
-  variable[9] = variable[8];
-  if (UNTAG_Bool(variable[9])) { /* and */
-    variable[9] =  TAG_Bool(!UNTAG_Bool( variable[6] /*is_init*/));
+  /* Ensure var variable[8]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[8])) { /* and */
+    variable[8] =  TAG_Bool(!UNTAG_Bool( variable[6] /*is_init*/));
   }
-  variable[8] = variable[9];
+  /* Register variable[8]: Result */
   if (UNTAG_Bool(variable[8])) { /*if*/
-    variable[8] = variable[0];
-    variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-    variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: A method "), TAG_Int(22)); /*new String*/
-    variable[11] = variable[10];
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[11]) /*AbstractArray::add*/;
-    variable[12] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
-    variable[13] = variable[12];
-    variable[13] = CALL_string___Object___to_s(variable[13])(variable[13]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[13]) /*AbstractArray::add*/;
-    variable[14] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-    variable[15] = variable[14];
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[15]) /*AbstractArray::add*/;
-    variable[16] =  variable[2] /*prop*/;
-    variable[16] = CALL_string___Object___to_s(variable[16])(variable[16]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[16]) /*AbstractArray::add*/;
-    variable[17] = NEW_String_string___String___with_native(BOX_NativeString(" cannot redefine a constructor."), TAG_Int(31)); /*new String*/
-    variable[18] = variable[17];
-    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[18]) /*AbstractArray::add*/;
-    variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
+    variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[9]: Once String constant */
+    if (once_value_168 != NIT_NULL) variable[9] = once_value_168;
+    else {
+      variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: A method "), TAG_Int(22)) /*new String*/;
+      once_value_168 = variable[9];
+    }
+    /* Register variable[9]: Result */
+    /* Ensure var variable[9]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+    /* Register variable[9]: Result */
+    variable[9] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+    /* Ensure var variable[9]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[9]: Once String constant */
+    if (once_value_169 != NIT_NULL) variable[9] = once_value_169;
+    else {
+      variable[9] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+      once_value_169 = variable[9];
+    }
+    /* Register variable[9]: Result */
+    /* Ensure var variable[9]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+    variable[9] =  variable[2] /*prop*/ /* Ensure var: super-string element*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[9]: Once String constant */
+    if (once_value_170 != NIT_NULL) variable[9] = once_value_170;
+    else {
+      variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" cannot redefine a constructor."), TAG_Int(31)) /*new String*/;
+      once_value_170 = variable[9];
+    }
+    /* Register variable[9]: Result */
+    /* Ensure var variable[9]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+    /* Register variable[8]: Result */
+    variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
+    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[8]) /*AbsSyntaxVisitor::error*/;
   } else { /*if*/
+    /* Register variable[8]: Result */
     variable[8] = CALL_abstractmetamodel___MMGlobalProperty___is_init( variable[7] /*glob*/)( variable[7] /*glob*/) /*MMGlobalProperty::is_init*/;
-    variable[8] =  TAG_Bool(!UNTAG_Bool(variable[8]));
+    variable[8] =  TAG_Bool(!UNTAG_Bool(variable[8])) /* Ensure var: Left 'and' operand*/;
     if (UNTAG_Bool(variable[8])) { /* and */
       variable[8] =  variable[6] /*is_init*/;
     }
+    /* Register variable[8]: Result */
     if (UNTAG_Bool(variable[8])) { /*if*/
-      variable[8] = variable[0];
-      variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-      variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: A constructor "), TAG_Int(27)); /*new String*/
-      variable[11] = variable[10];
-      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[11]) /*AbstractArray::add*/;
-      variable[12] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
-      variable[13] = variable[12];
-      variable[13] = CALL_string___Object___to_s(variable[13])(variable[13]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[13]) /*AbstractArray::add*/;
-      variable[14] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-      variable[15] = variable[14];
-      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[15]) /*AbstractArray::add*/;
-      variable[16] =  variable[2] /*prop*/;
-      variable[16] = CALL_string___Object___to_s(variable[16])(variable[16]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[16]) /*AbstractArray::add*/;
-      variable[17] = NEW_String_string___String___with_native(BOX_NativeString(" cannot redefine a method."), TAG_Int(26)); /*new String*/
-      variable[18] = variable[17];
-      CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[18]) /*AbstractArray::add*/;
-      variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[8], variable[9]) /*AbsSyntaxVisitor::error*/;
+      variable[8] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[9]: Once String constant */
+      if (once_value_171 != NIT_NULL) variable[9] = once_value_171;
+      else {
+        variable[9] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: A constructor "), TAG_Int(27)) /*new String*/;
+        once_value_171 = variable[9];
+      }
+      /* Register variable[9]: Result */
+      /* Ensure var variable[9]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+      /* Register variable[9]: Result */
+      variable[9] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+      /* Ensure var variable[9]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[9]: Once String constant */
+      if (once_value_172 != NIT_NULL) variable[9] = once_value_172;
+      else {
+        variable[9] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+        once_value_172 = variable[9];
+      }
+      /* Register variable[9]: Result */
+      /* Ensure var variable[9]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+      variable[9] =  variable[2] /*prop*/ /* Ensure var: super-string element*/;
+      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[9]: Once String constant */
+      if (once_value_173 != NIT_NULL) variable[9] = once_value_173;
+      else {
+        variable[9] = NEW_String_string___String___with_native(BOX_NativeString(" cannot redefine a method."), TAG_Int(26)) /*new String*/;
+        once_value_173 = variable[9];
+      }
+      /* Register variable[9]: Result */
+      /* Ensure var variable[9]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
+      /* Register variable[8]: Result */
+      variable[8] = CALL_string___Object___to_s(variable[8])(variable[8]) /*Object::to_s*/;
+      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[8]) /*AbsSyntaxVisitor::error*/;
     }
   }
+  /* Register variable[8]: Local variable */
+  /* Register variable[9]: Result */
   variable[9] = CALL_static_type___MMLocalProperty___signature( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::signature*/;
   variable[8] = variable[9];
+  /* Register variable[9]: Result */
   variable[9] = CALL_abstractmetamodel___MMLocalProperty___prhe( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::prhe*/;
+  /* Register variable[9]: Result */
   variable[9] = CALL_partial_order___PartialOrderElement___direct_greaters(variable[9])(variable[9]) /*PartialOrderElement::direct_greaters*/;
-  variable[9] = CALL_abstract_collection___Collection___iterator(variable[9])(variable[9]) /*AbstractArray::iterator*/;
+  /* Register variable[9]: For iterator */
+  variable[9] = CALL_abstract_collection___Collection___iterator(variable[9])(variable[9]) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[10]: For 'is_ok' result */
     variable[10] = CALL_abstract_collection___Iterator___is_ok(variable[9])(variable[9]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[10])) break; /*for*/
-    variable[10] = CALL_abstract_collection___Iterator___item(variable[9])(variable[9]) /*ArrayIterator::item*/;
+    variable[10] = CALL_abstract_collection___Iterator___item(variable[9])(variable[9]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[11]: Local variable */
     variable[11] = variable[10];
+    /* Register variable[12]: Local variable */
+    /* Register variable[13]: Result */
     variable[13] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[11] /*i*/)( variable[11] /*i*/) /*MMLocalProperty::local_class*/;
+    /* Register variable[14]: Result */
     variable[14] = CALL_abstractmetamodel___MMLocalProperty___global( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::global*/;
+    /* Register variable[13]: Result */
     variable[13] = CALL_abstractmetamodel___MMLocalClass_____bra(variable[13])(variable[13], variable[14]) /*MMLocalClass::[]*/;
     variable[12] = variable[13];
+    /* Register variable[13]: Local variable */
+    /* Register variable[14]: Result */
     variable[14] = CALL_static_type___MMLocalProperty___signature( variable[11] /*i*/)( variable[11] /*i*/) /*MMLocalProperty::signature*/;
+    /* Register variable[15]: Result */
     variable[15] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
+    /* Register variable[15]: Result */
     variable[15] = CALL_static_type___MMLocalClass___get_type(variable[15])(variable[15]) /*MMLocalClass::get_type*/;
+    /* Register variable[14]: Result */
     variable[14] = CALL_static_type___MMSignature___adaptation_to(variable[14])(variable[14], variable[15]) /*MMSignature::adaptation_to*/;
     variable[13] = variable[14];
+    /* Register variable[14]: Result */
     variable[14] = TAG_Bool(( variable[8] /*s*/ ==  NIT_NULL /*null*/) || (( variable[8] /*s*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[8] /*s*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[8] /*s*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[8] /*s*/)( variable[8] /*s*/,  NIT_NULL /*null*/) /*Object::==*/)))));
     if (UNTAG_Bool(variable[14])) { /*if*/
+      /* Register variable[14]: Result */
       variable[14] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+      /* Register variable[14]: Result */
       variable[14] = CALL_mmbuilder___SignatureBuilder___params(variable[14])(variable[14]) /*SignatureBuilder::params*/;
-      variable[14] = CALL_abstract_collection___Collection___length(variable[14])(variable[14]) /*AbstractArray::length*/;
+      /* Register variable[14]: Result */
+      variable[14] = CALL_abstract_collection___Collection___length(variable[14])(variable[14]) /*AbstractArrayRead::length*/;
+      /* Register variable[15]: Result */
       variable[15] = CALL_static_type___MMSignature___arity( variable[13] /*isig*/)( variable[13] /*isig*/) /*MMSignature::arity*/;
+      /* Register variable[14]: Result */
       variable[14] = TAG_Bool((variable[14])!=(variable[15]));
       if (UNTAG_Bool(variable[14])) { /*if*/
-        variable[14] = variable[0];
-        variable[15] = NEW_Array_array___Array___with_capacity(TAG_Int(11)); /*new Array[String]*/
-        variable[16] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: "), TAG_Int(13)); /*new String*/
-        variable[17] = variable[16];
-        CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[17]) /*AbstractArray::add*/;
-        variable[18] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
-        variable[19] = variable[18];
-        variable[19] = CALL_string___Object___to_s(variable[19])(variable[19]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[19]) /*AbstractArray::add*/;
-        variable[20] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-        variable[21] = variable[20];
-        CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[21]) /*AbstractArray::add*/;
-        variable[22] =  variable[2] /*prop*/;
-        variable[22] = CALL_string___Object___to_s(variable[22])(variable[22]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[22]) /*AbstractArray::add*/;
-        variable[23] = NEW_String_string___String___with_native(BOX_NativeString(" redefines "), TAG_Int(11)); /*new String*/
-        variable[24] = variable[23];
-        CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[24]) /*AbstractArray::add*/;
-        variable[25] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[12] /*ip*/)( variable[12] /*ip*/) /*MMLocalProperty::local_class*/;
-        variable[26] = variable[25];
-        variable[26] = CALL_string___Object___to_s(variable[26])(variable[26]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[26]) /*AbstractArray::add*/;
-        variable[27] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-        variable[28] = variable[27];
-        CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[28]) /*AbstractArray::add*/;
-        variable[29] =  variable[12] /*ip*/;
-        variable[29] = CALL_string___Object___to_s(variable[29])(variable[29]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[29]) /*AbstractArray::add*/;
-        variable[30] = NEW_String_string___String___with_native(BOX_NativeString(" with "), TAG_Int(6)); /*new String*/
-        variable[31] = variable[30];
-        CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[31]) /*AbstractArray::add*/;
-        variable[32] = CALL_static_type___MMSignature___arity( variable[13] /*isig*/)( variable[13] /*isig*/) /*MMSignature::arity*/;
-        variable[33] = variable[32];
-        variable[33] = CALL_string___Object___to_s(variable[33])(variable[33]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[33]) /*AbstractArray::add*/;
-        variable[34] = NEW_String_string___String___with_native(BOX_NativeString(" parameter(s)."), TAG_Int(14)); /*new String*/
-        variable[35] = variable[34];
-        CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[35]) /*AbstractArray::add*/;
-        variable[15] = CALL_string___Object___to_s(variable[15])(variable[15]) /*Object::to_s*/;
-        CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[14], variable[15]) /*AbsSyntaxVisitor::error*/;
-        goto return_label94;
+        variable[14] = NEW_Array_array___Array___with_capacity(TAG_Int(11)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+        /* Register variable[15]: Once String constant */
+        if (once_value_175 != NIT_NULL) variable[15] = once_value_175;
+        else {
+          variable[15] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: "), TAG_Int(13)) /*new String*/;
+          once_value_175 = variable[15];
+        }
+        /* Register variable[15]: Result */
+        /* Ensure var variable[15]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], variable[15]) /*AbstractArray::add*/;
+        /* Register variable[15]: Result */
+        variable[15] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+        /* Ensure var variable[15]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], CALL_string___Object___to_s(variable[15])(variable[15]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[15]: Once String constant */
+        if (once_value_176 != NIT_NULL) variable[15] = once_value_176;
+        else {
+          variable[15] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+          once_value_176 = variable[15];
+        }
+        /* Register variable[15]: Result */
+        /* Ensure var variable[15]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], variable[15]) /*AbstractArray::add*/;
+        variable[15] =  variable[2] /*prop*/ /* Ensure var: super-string element*/;
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], CALL_string___Object___to_s(variable[15])(variable[15]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[15]: Once String constant */
+        if (once_value_177 != NIT_NULL) variable[15] = once_value_177;
+        else {
+          variable[15] = NEW_String_string___String___with_native(BOX_NativeString(" redefines "), TAG_Int(11)) /*new String*/;
+          once_value_177 = variable[15];
+        }
+        /* Register variable[15]: Result */
+        /* Ensure var variable[15]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], variable[15]) /*AbstractArray::add*/;
+        /* Register variable[15]: Result */
+        variable[15] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[12] /*ip*/)( variable[12] /*ip*/) /*MMLocalProperty::local_class*/;
+        /* Ensure var variable[15]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], CALL_string___Object___to_s(variable[15])(variable[15]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[15]: Once String constant */
+        if (once_value_178 != NIT_NULL) variable[15] = once_value_178;
+        else {
+          variable[15] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+          once_value_178 = variable[15];
+        }
+        /* Register variable[15]: Result */
+        /* Ensure var variable[15]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], variable[15]) /*AbstractArray::add*/;
+        variable[15] =  variable[12] /*ip*/ /* Ensure var: super-string element*/;
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], CALL_string___Object___to_s(variable[15])(variable[15]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[15]: Once String constant */
+        if (once_value_179 != NIT_NULL) variable[15] = once_value_179;
+        else {
+          variable[15] = NEW_String_string___String___with_native(BOX_NativeString(" with "), TAG_Int(6)) /*new String*/;
+          once_value_179 = variable[15];
+        }
+        /* Register variable[15]: Result */
+        /* Ensure var variable[15]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], variable[15]) /*AbstractArray::add*/;
+        /* Register variable[15]: Result */
+        variable[15] = CALL_static_type___MMSignature___arity( variable[13] /*isig*/)( variable[13] /*isig*/) /*MMSignature::arity*/;
+        /* Ensure var variable[15]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], CALL_string___Object___to_s(variable[15])(variable[15]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[15]: Once String constant */
+        if (once_value_180 != NIT_NULL) variable[15] = once_value_180;
+        else {
+          variable[15] = NEW_String_string___String___with_native(BOX_NativeString(" parameter(s)."), TAG_Int(14)) /*new String*/;
+          once_value_180 = variable[15];
+        }
+        /* Register variable[15]: Result */
+        /* Ensure var variable[15]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], variable[15]) /*AbstractArray::add*/;
+        /* Register variable[14]: Result */
+        variable[14] = CALL_string___Object___to_s(variable[14])(variable[14]) /*Object::to_s*/;
+        CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[14]) /*AbsSyntaxVisitor::error*/;
+        goto return_label164;
       }
+      /* Register variable[14]: Result */
       variable[14] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+      /* Register variable[14]: Result */
+      variable[14] = CALL_mmbuilder___SignatureBuilder___closure_decls(variable[14])(variable[14]) /*SignatureBuilder::closure_decls*/;
+      /* Register variable[14]: Result */
+      variable[14] = CALL_abstract_collection___Collection___length(variable[14])(variable[14]) /*AbstractArrayRead::length*/;
+      /* Register variable[15]: Result */
+      variable[15] = CALL_static_type___MMSignature___closures( variable[13] /*isig*/)( variable[13] /*isig*/) /*MMSignature::closures*/;
+      /* Register variable[15]: Result */
+      variable[15] = CALL_abstract_collection___Collection___length(variable[15])(variable[15]) /*AbstractArrayRead::length*/;
+      /* Register variable[14]: Result */
+      variable[14] = TAG_Bool((variable[14])!=(variable[15]));
+      if (UNTAG_Bool(variable[14])) { /*if*/
+        variable[14] = NEW_Array_array___Array___with_capacity(TAG_Int(11)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+        /* Register variable[15]: Once String constant */
+        if (once_value_181 != NIT_NULL) variable[15] = once_value_181;
+        else {
+          variable[15] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: "), TAG_Int(13)) /*new String*/;
+          once_value_181 = variable[15];
+        }
+        /* Register variable[15]: Result */
+        /* Ensure var variable[15]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], variable[15]) /*AbstractArray::add*/;
+        /* Register variable[15]: Result */
+        variable[15] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+        /* Ensure var variable[15]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], CALL_string___Object___to_s(variable[15])(variable[15]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[15]: Once String constant */
+        if (once_value_182 != NIT_NULL) variable[15] = once_value_182;
+        else {
+          variable[15] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+          once_value_182 = variable[15];
+        }
+        /* Register variable[15]: Result */
+        /* Ensure var variable[15]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], variable[15]) /*AbstractArray::add*/;
+        variable[15] =  variable[2] /*prop*/ /* Ensure var: super-string element*/;
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], CALL_string___Object___to_s(variable[15])(variable[15]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[15]: Once String constant */
+        if (once_value_183 != NIT_NULL) variable[15] = once_value_183;
+        else {
+          variable[15] = NEW_String_string___String___with_native(BOX_NativeString(" redefines "), TAG_Int(11)) /*new String*/;
+          once_value_183 = variable[15];
+        }
+        /* Register variable[15]: Result */
+        /* Ensure var variable[15]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], variable[15]) /*AbstractArray::add*/;
+        /* Register variable[15]: Result */
+        variable[15] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[12] /*ip*/)( variable[12] /*ip*/) /*MMLocalProperty::local_class*/;
+        /* Ensure var variable[15]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], CALL_string___Object___to_s(variable[15])(variable[15]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[15]: Once String constant */
+        if (once_value_184 != NIT_NULL) variable[15] = once_value_184;
+        else {
+          variable[15] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+          once_value_184 = variable[15];
+        }
+        /* Register variable[15]: Result */
+        /* Ensure var variable[15]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], variable[15]) /*AbstractArray::add*/;
+        variable[15] =  variable[12] /*ip*/ /* Ensure var: super-string element*/;
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], CALL_string___Object___to_s(variable[15])(variable[15]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[15]: Once String constant */
+        if (once_value_185 != NIT_NULL) variable[15] = once_value_185;
+        else {
+          variable[15] = NEW_String_string___String___with_native(BOX_NativeString(" with "), TAG_Int(6)) /*new String*/;
+          once_value_185 = variable[15];
+        }
+        /* Register variable[15]: Result */
+        /* Ensure var variable[15]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], variable[15]) /*AbstractArray::add*/;
+        /* Register variable[15]: Result */
+        variable[15] = CALL_static_type___MMSignature___arity( variable[13] /*isig*/)( variable[13] /*isig*/) /*MMSignature::arity*/;
+        /* Ensure var variable[15]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], CALL_string___Object___to_s(variable[15])(variable[15]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[15]: Once String constant */
+        if (once_value_186 != NIT_NULL) variable[15] = once_value_186;
+        else {
+          variable[15] = NEW_String_string___String___with_native(BOX_NativeString(" closure(s)."), TAG_Int(12)) /*new String*/;
+          once_value_186 = variable[15];
+        }
+        /* Register variable[15]: Result */
+        /* Ensure var variable[15]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[14])(variable[14], variable[15]) /*AbstractArray::add*/;
+        /* Register variable[14]: Result */
+        variable[14] = CALL_string___Object___to_s(variable[14])(variable[14]) /*Object::to_s*/;
+        CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[14]) /*AbsSyntaxVisitor::error*/;
+        goto return_label164;
+      }
+      /* Register variable[14]: Result */
+      variable[14] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+      /* Register variable[14]: Result */
       variable[14] = CALL_mmbuilder___SignatureBuilder___params(variable[14])(variable[14]) /*SignatureBuilder::params*/;
-      variable[14] = CALL_abstract_collection___Collection___iterator(variable[14])(variable[14]) /*AbstractArray::iterator*/;
+      /* Register variable[14]: For iterator */
+      variable[14] = CALL_abstract_collection___Collection___iterator(variable[14])(variable[14]) /*AbstractArrayRead::iterator*/;
       while (true) { /*for*/
+        /* Register variable[15]: For 'is_ok' result */
         variable[15] = CALL_abstract_collection___Iterator___is_ok(variable[14])(variable[14]) /*ArrayIterator::is_ok*/;
         if (!UNTAG_Bool(variable[15])) break; /*for*/
-        variable[15] = CALL_abstract_collection___Iterator___item(variable[14])(variable[14]) /*ArrayIterator::item*/;
+        variable[15] = CALL_abstract_collection___Iterator___item(variable[14])(variable[14]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+        /* Register variable[16]: Local variable */
         variable[16] = variable[15];
+        /* Register variable[17]: Local variable */
+        /* Register variable[18]: Result */
         variable[18] = CALL_syntax_base___PParam___position( variable[16] /*p*/)( variable[16] /*p*/) /*PParam::position*/;
+        /* Register variable[18]: Result */
         variable[18] = CALL_static_type___MMSignature_____bra( variable[13] /*isig*/)( variable[13] /*isig*/, variable[18]) /*MMSignature::[]*/;
         variable[17] = variable[18];
         CALL_mmbuilder___PParam___stype__eq( variable[16] /*p*/)( variable[16] /*p*/,  variable[17] /*t*/) /*PParam::stype=*/;
+        /* Register variable[18]: Result */
         variable[18] = CALL_syntax_base___PParam___position( variable[16] /*p*/)( variable[16] /*p*/) /*PParam::position*/;
+        /* Register variable[19]: Result */
         variable[19] = CALL_vararg___MMSignature___vararg_rank( variable[13] /*isig*/)( variable[13] /*isig*/) /*MMSignature::vararg_rank*/;
+        /* Register variable[18]: Result */
         variable[18] = TAG_Bool((variable[18])==(variable[19]));
         if (UNTAG_Bool(variable[18])) { /*if*/
+          /* Register variable[18]: Result */
           variable[18] = CALL_syntax_base___AbsSyntaxVisitor___type_array( variable[1] /*v*/)( variable[1] /*v*/,  variable[17] /*t*/) /*AbsSyntaxVisitor::type_array*/;
           variable[17] = variable[18] /*t=*/;
         }
+        /* Register variable[18]: Result */
         variable[18] = CALL_syntax_base___PParam___variable( variable[16] /*p*/)( variable[16] /*p*/) /*PParam::variable*/;
         CALL_syntax_base___Variable___stype__eq(variable[18])(variable[18],  variable[17] /*t*/) /*Variable::stype=*/;
-        continue_96: while(0);
+        continue_187: while(0);
         CALL_abstract_collection___Iterator___next(variable[14])(variable[14]) /*ArrayIterator::next*/;
       }
-      break_96: while(0);
+      break_187: while(0);
       variable[8] =  variable[13] /*isig*/ /*s=*/;
       CALL_static_type___MMLocalProperty___signature__eq( variable[2] /*prop*/)( variable[2] /*prop*/,  variable[8] /*s*/) /*MMLocalProperty::signature=*/;
     }
-    variable[14] = CALL_static_type___MMSignature___arity( variable[8] /*s*/)( variable[8] /*s*/) /*MMSignature::arity*/;
-    variable[15] = CALL_static_type___MMSignature___arity( variable[13] /*isig*/)( variable[13] /*isig*/) /*MMSignature::arity*/;
-    variable[14] = TAG_Bool((variable[14])!=(variable[15]));
-    if (UNTAG_Bool(variable[14])) { /*if*/
-      variable[14] = variable[0];
-      variable[15] = NEW_Array_array___Array___with_capacity(TAG_Int(11)); /*new Array[String]*/
-      variable[16] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: "), TAG_Int(13)); /*new String*/
-      variable[17] = variable[16];
-      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[17]) /*AbstractArray::add*/;
-      variable[18] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
-      variable[19] = variable[18];
-      variable[19] = CALL_string___Object___to_s(variable[19])(variable[19]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[19]) /*AbstractArray::add*/;
-      variable[20] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-      variable[21] = variable[20];
-      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[21]) /*AbstractArray::add*/;
-      variable[22] =  variable[2] /*prop*/;
-      variable[22] = CALL_string___Object___to_s(variable[22])(variable[22]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[22]) /*AbstractArray::add*/;
-      variable[23] = NEW_String_string___String___with_native(BOX_NativeString(" redefines "), TAG_Int(11)); /*new String*/
-      variable[24] = variable[23];
-      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[24]) /*AbstractArray::add*/;
-      variable[25] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[12] /*ip*/)( variable[12] /*ip*/) /*MMLocalProperty::local_class*/;
-      variable[26] = variable[25];
-      variable[26] = CALL_string___Object___to_s(variable[26])(variable[26]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[26]) /*AbstractArray::add*/;
-      variable[27] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-      variable[28] = variable[27];
-      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[28]) /*AbstractArray::add*/;
-      variable[29] =  variable[12] /*ip*/;
-      variable[29] = CALL_string___Object___to_s(variable[29])(variable[29]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[29]) /*AbstractArray::add*/;
-      variable[30] = NEW_String_string___String___with_native(BOX_NativeString(" with "), TAG_Int(6)); /*new String*/
-      variable[31] = variable[30];
-      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[31]) /*AbstractArray::add*/;
-      variable[32] = CALL_static_type___MMSignature___arity( variable[13] /*isig*/)( variable[13] /*isig*/) /*MMSignature::arity*/;
-      variable[33] = variable[32];
-      variable[33] = CALL_string___Object___to_s(variable[33])(variable[33]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[33]) /*AbstractArray::add*/;
-      variable[34] = NEW_String_string___String___with_native(BOX_NativeString(" parameter(s)."), TAG_Int(14)); /*new String*/
-      variable[35] = variable[34];
-      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[35]) /*AbstractArray::add*/;
-      variable[15] = CALL_string___Object___to_s(variable[15])(variable[15]) /*Object::to_s*/;
-      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[14], variable[15]) /*AbsSyntaxVisitor::error*/;
-    } else { /*if*/
-      variable[14] = CALL_static_type___MMSignature___arity( variable[8] /*s*/)( variable[8] /*s*/) /*MMSignature::arity*/;
-      variable[15] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[14]); /*new Range[Int]*/
-      variable[14] = variable[15];
-      variable[14] = CALL_abstract_collection___Collection___iterator(variable[14])(variable[14]) /*Range::iterator*/;
-      while (true) { /*for*/
-        variable[15] = CALL_abstract_collection___Iterator___is_ok(variable[14])(variable[14]) /*Iterator::is_ok*/;
-        if (!UNTAG_Bool(variable[15])) break; /*for*/
-        variable[15] = CALL_abstract_collection___Iterator___item(variable[14])(variable[14]) /*Iterator::item*/;
-        variable[16] = variable[15];
-        variable[17] = CALL_static_type___MMSignature_____bra( variable[8] /*s*/)( variable[8] /*s*/,  variable[16] /*i*/) /*MMSignature::[]*/;
-        variable[18] = CALL_static_type___MMSignature_____bra( variable[13] /*isig*/)( variable[13] /*isig*/,  variable[16] /*i*/) /*MMSignature::[]*/;
-        variable[17] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[17] == variable[18]) || ((variable[17] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[17])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[17],variable[18])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[17])(variable[17], variable[18]) /*Object::==*/)))))));
-        if (UNTAG_Bool(variable[17])) { /*if*/
-          variable[17] = variable[0];
-          variable[18] = NEW_Array_array___Array___with_capacity(TAG_Int(13)); /*new Array[String]*/
-          variable[19] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: Expected "), TAG_Int(22)); /*new String*/
-          variable[20] = variable[19];
-          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[20]) /*AbstractArray::add*/;
-          variable[21] = CALL_static_type___MMSignature_____bra( variable[13] /*isig*/)( variable[13] /*isig*/,  variable[16] /*i*/) /*MMSignature::[]*/;
-          variable[22] = variable[21];
-          variable[22] = CALL_string___Object___to_s(variable[22])(variable[22]) /*Object::to_s*/;
-          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[22]) /*AbstractArray::add*/;
-          variable[23] = NEW_String_string___String___with_native(BOX_NativeString(" (as in "), TAG_Int(8)); /*new String*/
-          variable[24] = variable[23];
-          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[24]) /*AbstractArray::add*/;
-          variable[25] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[12] /*ip*/)( variable[12] /*ip*/) /*MMLocalProperty::local_class*/;
-          variable[26] = variable[25];
-          variable[26] = CALL_string___Object___to_s(variable[26])(variable[26]) /*Object::to_s*/;
-          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[26]) /*AbstractArray::add*/;
-          variable[27] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-          variable[28] = variable[27];
-          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[28]) /*AbstractArray::add*/;
-          variable[29] =  variable[12] /*ip*/;
-          variable[29] = CALL_string___Object___to_s(variable[29])(variable[29]) /*Object::to_s*/;
-          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[29]) /*AbstractArray::add*/;
-          variable[30] = NEW_String_string___String___with_native(BOX_NativeString("), got "), TAG_Int(7)); /*new String*/
-          variable[31] = variable[30];
-          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[31]) /*AbstractArray::add*/;
-          variable[32] = CALL_static_type___MMSignature_____bra( variable[8] /*s*/)( variable[8] /*s*/,  variable[16] /*i*/) /*MMSignature::[]*/;
-          variable[33] = variable[32];
-          variable[33] = CALL_string___Object___to_s(variable[33])(variable[33]) /*Object::to_s*/;
-          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[33]) /*AbstractArray::add*/;
-          variable[34] = NEW_String_string___String___with_native(BOX_NativeString(" in "), TAG_Int(4)); /*new String*/
-          variable[35] = variable[34];
-          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[35]) /*AbstractArray::add*/;
-          variable[36] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
-          variable[37] = variable[36];
-          variable[37] = CALL_string___Object___to_s(variable[37])(variable[37]) /*Object::to_s*/;
-          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[37]) /*AbstractArray::add*/;
-          variable[38] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-          variable[39] = variable[38];
-          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[39]) /*AbstractArray::add*/;
-          variable[40] =  variable[2] /*prop*/;
-          variable[40] = CALL_string___Object___to_s(variable[40])(variable[40]) /*Object::to_s*/;
-          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[40]) /*AbstractArray::add*/;
-          variable[41] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-          variable[42] = variable[41];
-          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[42]) /*AbstractArray::add*/;
-          variable[18] = CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/;
-          CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[17], variable[18]) /*AbsSyntaxVisitor::error*/;
-        }
-        continue_97: while(0);
-        CALL_abstract_collection___Iterator___next(variable[14])(variable[14]) /*Iterator::next*/;
-      }
-      break_97: while(0);
-    }
-    variable[15] = CALL_static_type___MMSignature___return_type( variable[8] /*s*/)( variable[8] /*s*/) /*MMSignature::return_type*/;
+    /* Register variable[14]: Local variable */
+    /* Register variable[15]: Result */
+    variable[15] = CALL_syntax_base___AbsSyntaxVisitor___tc( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::tc*/;
+    /* Register variable[15]: Result */
+    variable[15] = CALL_mmloader___ToolContext___error_count(variable[15])(variable[15]) /*ToolContext::error_count*/;
     variable[14] = variable[15];
-    variable[16] = CALL_static_type___MMSignature___return_type( variable[13] /*isig*/)( variable[13] /*isig*/) /*MMSignature::return_type*/;
-    variable[15] = variable[16];
-    variable[16] = TAG_Bool(( variable[14] /*srt*/ ==  NIT_NULL /*null*/) || (( variable[14] /*srt*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[14] /*srt*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[14] /*srt*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[14] /*srt*/)( variable[14] /*srt*/,  NIT_NULL /*null*/) /*Object::==*/)))));
-    variable[17] = variable[16];
-    if (UNTAG_Bool(variable[17])) { /* and */
-      variable[17] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[15] /*isrt*/ ==  NIT_NULL /*null*/) || (( variable[15] /*isrt*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[15] /*isrt*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[15] /*isrt*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[15] /*isrt*/)( variable[15] /*isrt*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-    }
-    variable[16] = variable[17];
-    if (UNTAG_Bool(variable[16])) { /*if*/
-      variable[16] = variable[0];
-      variable[17] = NEW_Array_array___Array___with_capacity(TAG_Int(9)); /*new Array[String]*/
-      variable[18] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: The procedure "), TAG_Int(27)); /*new String*/
-      variable[19] = variable[18];
-      CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[19]) /*AbstractArray::add*/;
-      variable[20] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
-      variable[21] = variable[20];
-      variable[21] = CALL_string___Object___to_s(variable[21])(variable[21]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[21]) /*AbstractArray::add*/;
-      variable[22] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-      variable[23] = variable[22];
-      CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[23]) /*AbstractArray::add*/;
-      variable[24] =  variable[2] /*prop*/;
-      variable[24] = CALL_string___Object___to_s(variable[24])(variable[24]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[24]) /*AbstractArray::add*/;
-      variable[25] = NEW_String_string___String___with_native(BOX_NativeString(" redefines the function "), TAG_Int(24)); /*new String*/
-      variable[26] = variable[25];
-      CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[26]) /*AbstractArray::add*/;
-      variable[27] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[12] /*ip*/)( variable[12] /*ip*/) /*MMLocalProperty::local_class*/;
-      variable[28] = variable[27];
-      variable[28] = CALL_string___Object___to_s(variable[28])(variable[28]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[28]) /*AbstractArray::add*/;
-      variable[29] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-      variable[30] = variable[29];
-      CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[30]) /*AbstractArray::add*/;
-      variable[31] =  variable[12] /*ip*/;
-      variable[31] = CALL_string___Object___to_s(variable[31])(variable[31]) /*Object::to_s*/;
-      CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[31]) /*AbstractArray::add*/;
-      variable[32] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-      variable[33] = variable[32];
-      CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[33]) /*AbstractArray::add*/;
-      variable[17] = CALL_string___Object___to_s(variable[17])(variable[17]) /*Object::to_s*/;
-      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[16], variable[17]) /*AbsSyntaxVisitor::error*/;
-    } else { /*if*/
-      variable[16] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[14] /*srt*/ ==  NIT_NULL /*null*/) || (( variable[14] /*srt*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[14] /*srt*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[14] /*srt*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[14] /*srt*/)( variable[14] /*srt*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-      variable[17] = variable[16];
-      if (UNTAG_Bool(variable[17])) { /* and */
-        variable[17] = TAG_Bool(( variable[15] /*isrt*/ ==  NIT_NULL /*null*/) || (( variable[15] /*isrt*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[15] /*isrt*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[15] /*isrt*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[15] /*isrt*/)( variable[15] /*isrt*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+    /* Register variable[15]: Result */
+    variable[15] = CALL_static_type___MMSignature___arity( variable[8] /*s*/)( variable[8] /*s*/) /*MMSignature::arity*/;
+    /* Register variable[16]: Result */
+    variable[16] = CALL_static_type___MMSignature___arity( variable[13] /*isig*/)( variable[13] /*isig*/) /*MMSignature::arity*/;
+    /* Register variable[15]: Result */
+    variable[15] = TAG_Bool((variable[15])!=(variable[16]));
+    if (UNTAG_Bool(variable[15])) { /*if*/
+      variable[15] = NEW_Array_array___Array___with_capacity(TAG_Int(11)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[16]: Once String constant */
+      if (once_value_188 != NIT_NULL) variable[16] = once_value_188;
+      else {
+        variable[16] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: "), TAG_Int(13)) /*new String*/;
+        once_value_188 = variable[16];
       }
-      variable[16] = variable[17];
-      if (UNTAG_Bool(variable[16])) { /*if*/
-        variable[16] = variable[0];
-        variable[17] = NEW_Array_array___Array___with_capacity(TAG_Int(9)); /*new Array[String]*/
-        variable[18] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: The function "), TAG_Int(26)); /*new String*/
-        variable[19] = variable[18];
-        CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[19]) /*AbstractArray::add*/;
-        variable[20] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
-        variable[21] = variable[20];
-        variable[21] = CALL_string___Object___to_s(variable[21])(variable[21]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[21]) /*AbstractArray::add*/;
-        variable[22] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-        variable[23] = variable[22];
-        CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[23]) /*AbstractArray::add*/;
-        variable[24] =  variable[2] /*prop*/;
-        variable[24] = CALL_string___Object___to_s(variable[24])(variable[24]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[24]) /*AbstractArray::add*/;
-        variable[25] = NEW_String_string___String___with_native(BOX_NativeString(" redefines the procedure "), TAG_Int(25)); /*new String*/
-        variable[26] = variable[25];
-        CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[26]) /*AbstractArray::add*/;
-        variable[27] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[12] /*ip*/)( variable[12] /*ip*/) /*MMLocalProperty::local_class*/;
-        variable[28] = variable[27];
-        variable[28] = CALL_string___Object___to_s(variable[28])(variable[28]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[28]) /*AbstractArray::add*/;
-        variable[29] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-        variable[30] = variable[29];
-        CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[30]) /*AbstractArray::add*/;
-        variable[31] =  variable[12] /*ip*/;
-        variable[31] = CALL_string___Object___to_s(variable[31])(variable[31]) /*Object::to_s*/;
-        CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[31]) /*AbstractArray::add*/;
-        variable[32] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-        variable[33] = variable[32];
-        CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[33]) /*AbstractArray::add*/;
-        variable[17] = CALL_string___Object___to_s(variable[17])(variable[17]) /*Object::to_s*/;
-        CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[16], variable[17]) /*AbsSyntaxVisitor::error*/;
-      } else { /*if*/
-        variable[16] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[14] /*srt*/ ==  NIT_NULL /*null*/) || (( variable[14] /*srt*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[14] /*srt*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[14] /*srt*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[14] /*srt*/)( variable[14] /*srt*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+      /* Register variable[16]: Result */
+      /* Ensure var variable[16]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[16]) /*AbstractArray::add*/;
+      /* Register variable[16]: Result */
+      variable[16] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+      /* Ensure var variable[16]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], CALL_string___Object___to_s(variable[16])(variable[16]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[16]: Once String constant */
+      if (once_value_189 != NIT_NULL) variable[16] = once_value_189;
+      else {
+        variable[16] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+        once_value_189 = variable[16];
+      }
+      /* Register variable[16]: Result */
+      /* Ensure var variable[16]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[16]) /*AbstractArray::add*/;
+      variable[16] =  variable[2] /*prop*/ /* Ensure var: super-string element*/;
+      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], CALL_string___Object___to_s(variable[16])(variable[16]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[16]: Once String constant */
+      if (once_value_190 != NIT_NULL) variable[16] = once_value_190;
+      else {
+        variable[16] = NEW_String_string___String___with_native(BOX_NativeString(" redefines "), TAG_Int(11)) /*new String*/;
+        once_value_190 = variable[16];
+      }
+      /* Register variable[16]: Result */
+      /* Ensure var variable[16]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[16]) /*AbstractArray::add*/;
+      /* Register variable[16]: Result */
+      variable[16] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[12] /*ip*/)( variable[12] /*ip*/) /*MMLocalProperty::local_class*/;
+      /* Ensure var variable[16]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], CALL_string___Object___to_s(variable[16])(variable[16]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[16]: Once String constant */
+      if (once_value_191 != NIT_NULL) variable[16] = once_value_191;
+      else {
+        variable[16] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+        once_value_191 = variable[16];
+      }
+      /* Register variable[16]: Result */
+      /* Ensure var variable[16]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[16]) /*AbstractArray::add*/;
+      variable[16] =  variable[12] /*ip*/ /* Ensure var: super-string element*/;
+      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], CALL_string___Object___to_s(variable[16])(variable[16]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[16]: Once String constant */
+      if (once_value_192 != NIT_NULL) variable[16] = once_value_192;
+      else {
+        variable[16] = NEW_String_string___String___with_native(BOX_NativeString(" with "), TAG_Int(6)) /*new String*/;
+        once_value_192 = variable[16];
+      }
+      /* Register variable[16]: Result */
+      /* Ensure var variable[16]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[16]) /*AbstractArray::add*/;
+      /* Register variable[16]: Result */
+      variable[16] = CALL_static_type___MMSignature___arity( variable[13] /*isig*/)( variable[13] /*isig*/) /*MMSignature::arity*/;
+      /* Ensure var variable[16]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], CALL_string___Object___to_s(variable[16])(variable[16]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[16]: Once String constant */
+      if (once_value_193 != NIT_NULL) variable[16] = once_value_193;
+      else {
+        variable[16] = NEW_String_string___String___with_native(BOX_NativeString(" parameter(s)."), TAG_Int(14)) /*new String*/;
+        once_value_193 = variable[16];
+      }
+      /* Register variable[16]: Result */
+      /* Ensure var variable[16]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[15])(variable[15], variable[16]) /*AbstractArray::add*/;
+      /* Register variable[15]: Result */
+      variable[15] = CALL_string___Object___to_s(variable[15])(variable[15]) /*Object::to_s*/;
+      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[15]) /*AbsSyntaxVisitor::error*/;
+    } else { /*if*/
+      /* Register variable[15]: Result */
+      variable[15] = CALL_static_type___MMSignature___arity( variable[8] /*s*/)( variable[8] /*s*/) /*MMSignature::arity*/;
+      /* Register variable[15]: Result */
+      variable[15] = NEW_Range_range___Range___without_last( TAG_Int(0), variable[15]) /*new Range[Int]*/;
+      /* Register variable[15]: For iterator */
+      variable[15] = CALL_abstract_collection___Collection___iterator(variable[15])(variable[15]) /*Range::iterator*/;
+      while (true) { /*for*/
+        /* Register variable[16]: For 'is_ok' result */
+        variable[16] = CALL_abstract_collection___Iterator___is_ok(variable[15])(variable[15]) /*Iterator::is_ok*/;
+        if (!UNTAG_Bool(variable[16])) break; /*for*/
+        variable[16] = CALL_abstract_collection___Iterator___item(variable[15])(variable[15]) /*Iterator::item*/ /* Ensure var: For item*/;
+        /* Register variable[17]: Local variable */
         variable[17] = variable[16];
-        if (UNTAG_Bool(variable[17])) { /* and */
-          variable[17] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[15] /*isrt*/ ==  NIT_NULL /*null*/) || (( variable[15] /*isrt*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[15] /*isrt*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[15] /*isrt*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[15] /*isrt*/)( variable[15] /*isrt*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+        /* Register variable[18]: Result */
+        variable[18] = CALL_static_type___MMSignature_____bra( variable[8] /*s*/)( variable[8] /*s*/,  variable[17] /*i*/) /*MMSignature::[]*/;
+        /* Register variable[19]: Result */
+        variable[19] = CALL_static_type___MMSignature_____bra( variable[13] /*isig*/)( variable[13] /*isig*/,  variable[17] /*i*/) /*MMSignature::[]*/;
+        /* Register variable[18]: Result */
+        variable[18] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[18] == variable[19]) || ((variable[18] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[18])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[18],variable[19])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[18])(variable[18], variable[19]) /*Object::==*/)))))));
+        if (UNTAG_Bool(variable[18])) { /*if*/
+          variable[18] = NEW_Array_array___Array___with_capacity(TAG_Int(13)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+          /* Register variable[19]: Once String constant */
+          if (once_value_195 != NIT_NULL) variable[19] = once_value_195;
+          else {
+            variable[19] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: Expected "), TAG_Int(22)) /*new String*/;
+            once_value_195 = variable[19];
+          }
+          /* Register variable[19]: Result */
+          /* Ensure var variable[19]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[19]) /*AbstractArray::add*/;
+          /* Register variable[19]: Result */
+          variable[19] = CALL_static_type___MMSignature_____bra( variable[13] /*isig*/)( variable[13] /*isig*/,  variable[17] /*i*/) /*MMSignature::[]*/;
+          /* Ensure var variable[19]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], CALL_string___Object___to_s(variable[19])(variable[19]) /*Object::to_s*/) /*AbstractArray::add*/;
+          /* Register variable[19]: Once String constant */
+          if (once_value_196 != NIT_NULL) variable[19] = once_value_196;
+          else {
+            variable[19] = NEW_String_string___String___with_native(BOX_NativeString(" (as in "), TAG_Int(8)) /*new String*/;
+            once_value_196 = variable[19];
+          }
+          /* Register variable[19]: Result */
+          /* Ensure var variable[19]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[19]) /*AbstractArray::add*/;
+          /* Register variable[19]: Result */
+          variable[19] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[12] /*ip*/)( variable[12] /*ip*/) /*MMLocalProperty::local_class*/;
+          /* Ensure var variable[19]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], CALL_string___Object___to_s(variable[19])(variable[19]) /*Object::to_s*/) /*AbstractArray::add*/;
+          /* Register variable[19]: Once String constant */
+          if (once_value_197 != NIT_NULL) variable[19] = once_value_197;
+          else {
+            variable[19] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+            once_value_197 = variable[19];
+          }
+          /* Register variable[19]: Result */
+          /* Ensure var variable[19]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[19]) /*AbstractArray::add*/;
+          variable[19] =  variable[12] /*ip*/ /* Ensure var: super-string element*/;
+          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], CALL_string___Object___to_s(variable[19])(variable[19]) /*Object::to_s*/) /*AbstractArray::add*/;
+          /* Register variable[19]: Once String constant */
+          if (once_value_198 != NIT_NULL) variable[19] = once_value_198;
+          else {
+            variable[19] = NEW_String_string___String___with_native(BOX_NativeString("), got "), TAG_Int(7)) /*new String*/;
+            once_value_198 = variable[19];
+          }
+          /* Register variable[19]: Result */
+          /* Ensure var variable[19]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[19]) /*AbstractArray::add*/;
+          /* Register variable[19]: Result */
+          variable[19] = CALL_static_type___MMSignature_____bra( variable[8] /*s*/)( variable[8] /*s*/,  variable[17] /*i*/) /*MMSignature::[]*/;
+          /* Ensure var variable[19]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], CALL_string___Object___to_s(variable[19])(variable[19]) /*Object::to_s*/) /*AbstractArray::add*/;
+          /* Register variable[19]: Once String constant */
+          if (once_value_199 != NIT_NULL) variable[19] = once_value_199;
+          else {
+            variable[19] = NEW_String_string___String___with_native(BOX_NativeString(" in "), TAG_Int(4)) /*new String*/;
+            once_value_199 = variable[19];
+          }
+          /* Register variable[19]: Result */
+          /* Ensure var variable[19]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[19]) /*AbstractArray::add*/;
+          /* Register variable[19]: Result */
+          variable[19] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+          /* Ensure var variable[19]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], CALL_string___Object___to_s(variable[19])(variable[19]) /*Object::to_s*/) /*AbstractArray::add*/;
+          /* Register variable[19]: Once String constant */
+          if (once_value_200 != NIT_NULL) variable[19] = once_value_200;
+          else {
+            variable[19] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+            once_value_200 = variable[19];
+          }
+          /* Register variable[19]: Result */
+          /* Ensure var variable[19]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[19]) /*AbstractArray::add*/;
+          variable[19] =  variable[2] /*prop*/ /* Ensure var: super-string element*/;
+          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], CALL_string___Object___to_s(variable[19])(variable[19]) /*Object::to_s*/) /*AbstractArray::add*/;
+          /* Register variable[19]: Once String constant */
+          if (once_value_201 != NIT_NULL) variable[19] = once_value_201;
+          else {
+            variable[19] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+            once_value_201 = variable[19];
+          }
+          /* Register variable[19]: Result */
+          /* Ensure var variable[19]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[18])(variable[18], variable[19]) /*AbstractArray::add*/;
+          /* Register variable[18]: Result */
+          variable[18] = CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/;
+          CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[18]) /*AbsSyntaxVisitor::error*/;
         }
-        variable[16] = variable[17];
-        variable[17] = variable[16];
+        continue_194: while(0);
+        CALL_abstract_collection___Iterator___next(variable[15])(variable[15]) /*Iterator::next*/;
+      }
+      break_194: while(0);
+    }
+    /* Register variable[15]: Local variable */
+    /* Register variable[16]: Result */
+    variable[16] = CALL_static_type___MMSignature___return_type( variable[8] /*s*/)( variable[8] /*s*/) /*MMSignature::return_type*/;
+    variable[15] = variable[16];
+    /* Register variable[16]: Local variable */
+    /* Register variable[17]: Result */
+    variable[17] = CALL_static_type___MMSignature___return_type( variable[13] /*isig*/)( variable[13] /*isig*/) /*MMSignature::return_type*/;
+    variable[16] = variable[17];
+    /* Register variable[17]: Result */
+    variable[17] = TAG_Bool(( variable[15] /*srt*/ ==  NIT_NULL /*null*/) || (( variable[15] /*srt*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[15] /*srt*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[15] /*srt*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[15] /*srt*/)( variable[15] /*srt*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+    /* Ensure var variable[17]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[17])) { /* and */
+      /* Register variable[17]: Result */
+      variable[17] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[16] /*isrt*/ ==  NIT_NULL /*null*/) || (( variable[16] /*isrt*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[16] /*isrt*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[16] /*isrt*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[16] /*isrt*/)( variable[16] /*isrt*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+    }
+    /* Register variable[17]: Result */
+    if (UNTAG_Bool(variable[17])) { /*if*/
+      variable[17] = NEW_Array_array___Array___with_capacity(TAG_Int(9)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+      /* Register variable[18]: Once String constant */
+      if (once_value_202 != NIT_NULL) variable[18] = once_value_202;
+      else {
+        variable[18] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: The procedure "), TAG_Int(27)) /*new String*/;
+        once_value_202 = variable[18];
+      }
+      /* Register variable[18]: Result */
+      /* Ensure var variable[18]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+      /* Register variable[18]: Result */
+      variable[18] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+      /* Ensure var variable[18]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[18]: Once String constant */
+      if (once_value_203 != NIT_NULL) variable[18] = once_value_203;
+      else {
+        variable[18] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+        once_value_203 = variable[18];
+      }
+      /* Register variable[18]: Result */
+      /* Ensure var variable[18]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+      variable[18] =  variable[2] /*prop*/ /* Ensure var: super-string element*/;
+      CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[18]: Once String constant */
+      if (once_value_204 != NIT_NULL) variable[18] = once_value_204;
+      else {
+        variable[18] = NEW_String_string___String___with_native(BOX_NativeString(" redefines the function "), TAG_Int(24)) /*new String*/;
+        once_value_204 = variable[18];
+      }
+      /* Register variable[18]: Result */
+      /* Ensure var variable[18]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+      /* Register variable[18]: Result */
+      variable[18] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[12] /*ip*/)( variable[12] /*ip*/) /*MMLocalProperty::local_class*/;
+      /* Ensure var variable[18]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[18]: Once String constant */
+      if (once_value_205 != NIT_NULL) variable[18] = once_value_205;
+      else {
+        variable[18] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+        once_value_205 = variable[18];
+      }
+      /* Register variable[18]: Result */
+      /* Ensure var variable[18]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+      variable[18] =  variable[12] /*ip*/ /* Ensure var: super-string element*/;
+      CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+      /* Register variable[18]: Once String constant */
+      if (once_value_206 != NIT_NULL) variable[18] = once_value_206;
+      else {
+        variable[18] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+        once_value_206 = variable[18];
+      }
+      /* Register variable[18]: Result */
+      /* Ensure var variable[18]: super-string element*/
+      CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+      /* Register variable[17]: Result */
+      variable[17] = CALL_string___Object___to_s(variable[17])(variable[17]) /*Object::to_s*/;
+      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[17]) /*AbsSyntaxVisitor::error*/;
+    } else { /*if*/
+      /* Register variable[17]: Result */
+      variable[17] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[15] /*srt*/ ==  NIT_NULL /*null*/) || (( variable[15] /*srt*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[15] /*srt*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[15] /*srt*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[15] /*srt*/)( variable[15] /*srt*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+      /* Ensure var variable[17]: Left 'and' operand*/
+      if (UNTAG_Bool(variable[17])) { /* and */
+        /* Register variable[17]: Result */
+        variable[17] = TAG_Bool(( variable[16] /*isrt*/ ==  NIT_NULL /*null*/) || (( variable[16] /*isrt*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[16] /*isrt*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[16] /*isrt*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[16] /*isrt*/)( variable[16] /*isrt*/,  NIT_NULL /*null*/) /*Object::==*/)))));
+      }
+      /* Register variable[17]: Result */
+      if (UNTAG_Bool(variable[17])) { /*if*/
+        variable[17] = NEW_Array_array___Array___with_capacity(TAG_Int(9)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+        /* Register variable[18]: Once String constant */
+        if (once_value_207 != NIT_NULL) variable[18] = once_value_207;
+        else {
+          variable[18] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: The function "), TAG_Int(26)) /*new String*/;
+          once_value_207 = variable[18];
+        }
+        /* Register variable[18]: Result */
+        /* Ensure var variable[18]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+        /* Register variable[18]: Result */
+        variable[18] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+        /* Ensure var variable[18]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[18]: Once String constant */
+        if (once_value_208 != NIT_NULL) variable[18] = once_value_208;
+        else {
+          variable[18] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+          once_value_208 = variable[18];
+        }
+        /* Register variable[18]: Result */
+        /* Ensure var variable[18]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+        variable[18] =  variable[2] /*prop*/ /* Ensure var: super-string element*/;
+        CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[18]: Once String constant */
+        if (once_value_209 != NIT_NULL) variable[18] = once_value_209;
+        else {
+          variable[18] = NEW_String_string___String___with_native(BOX_NativeString(" redefines the procedure "), TAG_Int(25)) /*new String*/;
+          once_value_209 = variable[18];
+        }
+        /* Register variable[18]: Result */
+        /* Ensure var variable[18]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+        /* Register variable[18]: Result */
+        variable[18] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[12] /*ip*/)( variable[12] /*ip*/) /*MMLocalProperty::local_class*/;
+        /* Ensure var variable[18]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[18]: Once String constant */
+        if (once_value_210 != NIT_NULL) variable[18] = once_value_210;
+        else {
+          variable[18] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+          once_value_210 = variable[18];
+        }
+        /* Register variable[18]: Result */
+        /* Ensure var variable[18]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+        variable[18] =  variable[12] /*ip*/ /* Ensure var: super-string element*/;
+        CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+        /* Register variable[18]: Once String constant */
+        if (once_value_211 != NIT_NULL) variable[18] = once_value_211;
+        else {
+          variable[18] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+          once_value_211 = variable[18];
+        }
+        /* Register variable[18]: Result */
+        /* Ensure var variable[18]: super-string element*/
+        CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+        /* Register variable[17]: Result */
+        variable[17] = CALL_string___Object___to_s(variable[17])(variable[17]) /*Object::to_s*/;
+        CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[17]) /*AbsSyntaxVisitor::error*/;
+      } else { /*if*/
+        /* Register variable[17]: Result */
+        variable[17] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[15] /*srt*/ ==  NIT_NULL /*null*/) || (( variable[15] /*srt*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[15] /*srt*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[15] /*srt*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[15] /*srt*/)( variable[15] /*srt*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+        /* Ensure var variable[17]: Left 'and' operand*/
         if (UNTAG_Bool(variable[17])) { /* and */
-          variable[17] = CALL_static_type___MMType_____l( variable[14] /*srt*/)( variable[14] /*srt*/,  variable[15] /*isrt*/) /*MMType::<*/;
+          /* Register variable[17]: Result */
+          variable[17] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[16] /*isrt*/ ==  NIT_NULL /*null*/) || (( variable[16] /*isrt*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[16] /*isrt*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[16] /*isrt*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[16] /*isrt*/)( variable[16] /*isrt*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+        }
+        /* Register variable[17]: Result */
+        /* Ensure var variable[17]: Left 'and' operand*/
+        if (UNTAG_Bool(variable[17])) { /* and */
+          /* Register variable[17]: Result */
+          variable[17] = CALL_static_type___MMType_____l( variable[15] /*srt*/)( variable[15] /*srt*/,  variable[16] /*isrt*/) /*MMType::<*/;
           variable[17] =  TAG_Bool(!UNTAG_Bool(variable[17]));
         }
-        variable[16] = variable[17];
-        if (UNTAG_Bool(variable[16])) { /*if*/
-          variable[16] = variable[0];
-          variable[17] = NEW_Array_array___Array___with_capacity(TAG_Int(13)); /*new Array[String]*/
-          variable[18] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: Expected "), TAG_Int(22)); /*new String*/
-          variable[19] = variable[18];
-          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[19]) /*AbstractArray::add*/;
-          variable[20] =  variable[15] /*isrt*/;
-          variable[20] = CALL_string___Object___to_s(variable[20])(variable[20]) /*Object::to_s*/;
-          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[20]) /*AbstractArray::add*/;
-          variable[21] = NEW_String_string___String___with_native(BOX_NativeString(" (as in "), TAG_Int(8)); /*new String*/
-          variable[22] = variable[21];
-          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[22]) /*AbstractArray::add*/;
-          variable[23] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[12] /*ip*/)( variable[12] /*ip*/) /*MMLocalProperty::local_class*/;
-          variable[24] = variable[23];
-          variable[24] = CALL_string___Object___to_s(variable[24])(variable[24]) /*Object::to_s*/;
-          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[24]) /*AbstractArray::add*/;
-          variable[25] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-          variable[26] = variable[25];
-          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[26]) /*AbstractArray::add*/;
-          variable[27] =  variable[12] /*ip*/;
-          variable[27] = CALL_string___Object___to_s(variable[27])(variable[27]) /*Object::to_s*/;
-          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[27]) /*AbstractArray::add*/;
-          variable[28] = NEW_String_string___String___with_native(BOX_NativeString("), got "), TAG_Int(7)); /*new String*/
-          variable[29] = variable[28];
-          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[29]) /*AbstractArray::add*/;
-          variable[30] =  variable[14] /*srt*/;
-          variable[30] = CALL_string___Object___to_s(variable[30])(variable[30]) /*Object::to_s*/;
-          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[30]) /*AbstractArray::add*/;
-          variable[31] = NEW_String_string___String___with_native(BOX_NativeString(" in "), TAG_Int(4)); /*new String*/
-          variable[32] = variable[31];
-          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[32]) /*AbstractArray::add*/;
-          variable[33] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
-          variable[34] = variable[33];
-          variable[34] = CALL_string___Object___to_s(variable[34])(variable[34]) /*Object::to_s*/;
-          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[34]) /*AbstractArray::add*/;
-          variable[35] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-          variable[36] = variable[35];
-          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[36]) /*AbstractArray::add*/;
-          variable[37] =  variable[2] /*prop*/;
-          variable[37] = CALL_string___Object___to_s(variable[37])(variable[37]) /*Object::to_s*/;
-          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[37]) /*AbstractArray::add*/;
-          variable[38] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-          variable[39] = variable[38];
-          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[39]) /*AbstractArray::add*/;
+        /* Register variable[17]: Result */
+        if (UNTAG_Bool(variable[17])) { /*if*/
+          variable[17] = NEW_Array_array___Array___with_capacity(TAG_Int(13)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+          /* Register variable[18]: Once String constant */
+          if (once_value_212 != NIT_NULL) variable[18] = once_value_212;
+          else {
+            variable[18] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: Expected "), TAG_Int(22)) /*new String*/;
+            once_value_212 = variable[18];
+          }
+          /* Register variable[18]: Result */
+          /* Ensure var variable[18]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+          variable[18] =  variable[16] /*isrt*/ /* Ensure var: super-string element*/;
+          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+          /* Register variable[18]: Once String constant */
+          if (once_value_213 != NIT_NULL) variable[18] = once_value_213;
+          else {
+            variable[18] = NEW_String_string___String___with_native(BOX_NativeString(" (as in "), TAG_Int(8)) /*new String*/;
+            once_value_213 = variable[18];
+          }
+          /* Register variable[18]: Result */
+          /* Ensure var variable[18]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+          /* Register variable[18]: Result */
+          variable[18] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[12] /*ip*/)( variable[12] /*ip*/) /*MMLocalProperty::local_class*/;
+          /* Ensure var variable[18]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+          /* Register variable[18]: Once String constant */
+          if (once_value_214 != NIT_NULL) variable[18] = once_value_214;
+          else {
+            variable[18] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+            once_value_214 = variable[18];
+          }
+          /* Register variable[18]: Result */
+          /* Ensure var variable[18]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+          variable[18] =  variable[12] /*ip*/ /* Ensure var: super-string element*/;
+          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+          /* Register variable[18]: Once String constant */
+          if (once_value_215 != NIT_NULL) variable[18] = once_value_215;
+          else {
+            variable[18] = NEW_String_string___String___with_native(BOX_NativeString("), got "), TAG_Int(7)) /*new String*/;
+            once_value_215 = variable[18];
+          }
+          /* Register variable[18]: Result */
+          /* Ensure var variable[18]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+          variable[18] =  variable[15] /*srt*/ /* Ensure var: super-string element*/;
+          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+          /* Register variable[18]: Once String constant */
+          if (once_value_216 != NIT_NULL) variable[18] = once_value_216;
+          else {
+            variable[18] = NEW_String_string___String___with_native(BOX_NativeString(" in "), TAG_Int(4)) /*new String*/;
+            once_value_216 = variable[18];
+          }
+          /* Register variable[18]: Result */
+          /* Ensure var variable[18]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+          /* Register variable[18]: Result */
+          variable[18] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+          /* Ensure var variable[18]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+          /* Register variable[18]: Once String constant */
+          if (once_value_217 != NIT_NULL) variable[18] = once_value_217;
+          else {
+            variable[18] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+            once_value_217 = variable[18];
+          }
+          /* Register variable[18]: Result */
+          /* Ensure var variable[18]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+          variable[18] =  variable[2] /*prop*/ /* Ensure var: super-string element*/;
+          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+          /* Register variable[18]: Once String constant */
+          if (once_value_218 != NIT_NULL) variable[18] = once_value_218;
+          else {
+            variable[18] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+            once_value_218 = variable[18];
+          }
+          /* Register variable[18]: Result */
+          /* Ensure var variable[18]: super-string element*/
+          CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+          /* Register variable[17]: Result */
           variable[17] = CALL_string___Object___to_s(variable[17])(variable[17]) /*Object::to_s*/;
-          CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[16], variable[17]) /*AbsSyntaxVisitor::error*/;
+          CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[17]) /*AbsSyntaxVisitor::error*/;
         } else { /*if*/
-          variable[16] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[14] /*srt*/ ==  NIT_NULL /*null*/) || (( variable[14] /*srt*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[14] /*srt*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[14] /*srt*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[14] /*srt*/)( variable[14] /*srt*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-          variable[17] = variable[16];
+          /* Register variable[17]: Result */
+          variable[17] = CALL_static_type___MMSignature_____l( variable[8] /*s*/)( variable[8] /*s*/,  variable[13] /*isig*/) /*MMSignature::<*/;
+          variable[17] =  TAG_Bool(!UNTAG_Bool(variable[17])) /* Ensure var: Left 'and' operand*/;
           if (UNTAG_Bool(variable[17])) { /* and */
-            variable[17] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[15] /*isrt*/ ==  NIT_NULL /*null*/) || (( variable[15] /*isrt*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[15] /*isrt*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[15] /*isrt*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[15] /*isrt*/)( variable[15] /*isrt*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+            /* Register variable[17]: Result */
+            variable[17] = CALL_syntax_base___AbsSyntaxVisitor___tc( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::tc*/;
+            /* Register variable[17]: Result */
+            variable[17] = CALL_mmloader___ToolContext___error_count(variable[17])(variable[17]) /*ToolContext::error_count*/;
+            /* Register variable[17]: Result */
+            variable[17] = TAG_Bool(( variable[14] /*nberr*/)==(variable[17]));
           }
-          variable[16] = variable[17];
-          variable[17] = variable[16];
-          if (UNTAG_Bool(variable[17])) { /* and */
-            variable[17] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[14] /*srt*/ ==  variable[15] /*isrt*/) || (( variable[14] /*srt*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[14] /*srt*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[14] /*srt*/, variable[15] /*isrt*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[14] /*srt*/)( variable[14] /*srt*/,  variable[15] /*isrt*/) /*Object::==*/)))))));
-          }
-          variable[16] = variable[17];
-          variable[17] = variable[16];
-          if (UNTAG_Bool(variable[17])) { /* and */
-            variable[17] = TAG_Bool(( variable[2] /*prop*/==NIT_NULL) || VAL_ISA( variable[2] /*prop*/, COLOR_MMAttribute, ID_MMAttribute)) /*cast MMAttribute*/;
-          }
-          variable[16] = variable[17];
-          if (UNTAG_Bool(variable[16])) { /*if*/
-            variable[16] = variable[0];
-            variable[17] = NEW_Array_array___Array___with_capacity(TAG_Int(13)); /*new Array[String]*/
-            variable[18] = NEW_String_string___String___with_native(BOX_NativeString("Redef warning: Expected "), TAG_Int(24)); /*new String*/
-            variable[19] = variable[18];
-            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[19]) /*AbstractArray::add*/;
-            variable[20] =  variable[15] /*isrt*/;
-            variable[20] = CALL_string___Object___to_s(variable[20])(variable[20]) /*Object::to_s*/;
-            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[20]) /*AbstractArray::add*/;
-            variable[21] = NEW_String_string___String___with_native(BOX_NativeString(" (as in "), TAG_Int(8)); /*new String*/
-            variable[22] = variable[21];
-            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[22]) /*AbstractArray::add*/;
-            variable[23] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[12] /*ip*/)( variable[12] /*ip*/) /*MMLocalProperty::local_class*/;
-            variable[24] = variable[23];
-            variable[24] = CALL_string___Object___to_s(variable[24])(variable[24]) /*Object::to_s*/;
-            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[24]) /*AbstractArray::add*/;
-            variable[25] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-            variable[26] = variable[25];
-            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[26]) /*AbstractArray::add*/;
-            variable[27] =  variable[12] /*ip*/;
-            variable[27] = CALL_string___Object___to_s(variable[27])(variable[27]) /*Object::to_s*/;
-            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[27]) /*AbstractArray::add*/;
-            variable[28] = NEW_String_string___String___with_native(BOX_NativeString("), got "), TAG_Int(7)); /*new String*/
-            variable[29] = variable[28];
-            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[29]) /*AbstractArray::add*/;
-            variable[30] =  variable[14] /*srt*/;
-            variable[30] = CALL_string___Object___to_s(variable[30])(variable[30]) /*Object::to_s*/;
-            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[30]) /*AbstractArray::add*/;
-            variable[31] = NEW_String_string___String___with_native(BOX_NativeString(" in "), TAG_Int(4)); /*new String*/
-            variable[32] = variable[31];
-            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[32]) /*AbstractArray::add*/;
-            variable[33] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
-            variable[34] = variable[33];
-            variable[34] = CALL_string___Object___to_s(variable[34])(variable[34]) /*Object::to_s*/;
-            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[34]) /*AbstractArray::add*/;
-            variable[35] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-            variable[36] = variable[35];
-            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[36]) /*AbstractArray::add*/;
-            variable[37] =  variable[2] /*prop*/;
-            variable[37] = CALL_string___Object___to_s(variable[37])(variable[37]) /*Object::to_s*/;
-            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[37]) /*AbstractArray::add*/;
-            variable[38] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-            variable[39] = variable[38];
-            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[39]) /*AbstractArray::add*/;
+          /* Register variable[17]: Result */
+          if (UNTAG_Bool(variable[17])) { /*if*/
+            variable[17] = NEW_Array_array___Array___with_capacity(TAG_Int(9)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+            /* Register variable[18]: Once String constant */
+            if (once_value_219 != NIT_NULL) variable[18] = once_value_219;
+            else {
+              variable[18] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: Incompatible redefinition of "), TAG_Int(42)) /*new String*/;
+              once_value_219 = variable[18];
+            }
+            /* Register variable[18]: Result */
+            /* Ensure var variable[18]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+            /* Register variable[18]: Result */
+            variable[18] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[12] /*ip*/)( variable[12] /*ip*/) /*MMLocalProperty::local_class*/;
+            /* Ensure var variable[18]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+            /* Register variable[18]: Once String constant */
+            if (once_value_220 != NIT_NULL) variable[18] = once_value_220;
+            else {
+              variable[18] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+              once_value_220 = variable[18];
+            }
+            /* Register variable[18]: Result */
+            /* Ensure var variable[18]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+            variable[18] =  variable[12] /*ip*/ /* Ensure var: super-string element*/;
+            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+            /* Register variable[18]: Once String constant */
+            if (once_value_221 != NIT_NULL) variable[18] = once_value_221;
+            else {
+              variable[18] = NEW_String_string___String___with_native(BOX_NativeString(" with "), TAG_Int(6)) /*new String*/;
+              once_value_221 = variable[18];
+            }
+            /* Register variable[18]: Result */
+            /* Ensure var variable[18]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+            /* Register variable[18]: Result */
+            variable[18] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+            /* Ensure var variable[18]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+            /* Register variable[18]: Once String constant */
+            if (once_value_222 != NIT_NULL) variable[18] = once_value_222;
+            else {
+              variable[18] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+              once_value_222 = variable[18];
+            }
+            /* Register variable[18]: Result */
+            /* Ensure var variable[18]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+            variable[18] =  variable[2] /*prop*/ /* Ensure var: super-string element*/;
+            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+            /* Register variable[18]: Once String constant */
+            if (once_value_223 != NIT_NULL) variable[18] = once_value_223;
+            else {
+              variable[18] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+              once_value_223 = variable[18];
+            }
+            /* Register variable[18]: Result */
+            /* Ensure var variable[18]: super-string element*/
+            CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+            /* Register variable[17]: Result */
             variable[17] = CALL_string___Object___to_s(variable[17])(variable[17]) /*Object::to_s*/;
-            CALL_syntax_base___AbsSyntaxVisitor___warning( variable[1] /*v*/)( variable[1] /*v*/, variable[16], variable[17]) /*AbsSyntaxVisitor::warning*/;
+            CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[17]) /*AbsSyntaxVisitor::error*/;
+          } else { /*if*/
+            /* Register variable[17]: Result */
+            variable[17] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[15] /*srt*/ ==  NIT_NULL /*null*/) || (( variable[15] /*srt*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[15] /*srt*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[15] /*srt*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[15] /*srt*/)( variable[15] /*srt*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+            /* Ensure var variable[17]: Left 'and' operand*/
+            if (UNTAG_Bool(variable[17])) { /* and */
+              /* Register variable[17]: Result */
+              variable[17] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[16] /*isrt*/ ==  NIT_NULL /*null*/) || (( variable[16] /*isrt*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[16] /*isrt*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[16] /*isrt*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[16] /*isrt*/)( variable[16] /*isrt*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
+            }
+            /* Register variable[17]: Result */
+            /* Ensure var variable[17]: Left 'and' operand*/
+            if (UNTAG_Bool(variable[17])) { /* and */
+              /* Register variable[17]: Result */
+              variable[17] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[15] /*srt*/ ==  variable[16] /*isrt*/) || (( variable[15] /*srt*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[15] /*srt*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[15] /*srt*/, variable[16] /*isrt*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[15] /*srt*/)( variable[15] /*srt*/,  variable[16] /*isrt*/) /*Object::==*/)))))));
+            }
+            /* Register variable[17]: Result */
+            /* Ensure var variable[17]: Left 'and' operand*/
+            if (UNTAG_Bool(variable[17])) { /* and */
+              /* Register variable[17]: Result */
+              variable[17] = TAG_Bool(( variable[2] /*prop*/==NIT_NULL) || VAL_ISA( variable[2] /*prop*/, COLOR_MMAttribute, ID_MMAttribute)) /*cast MMAttribute*/;
+            }
+            /* Register variable[17]: Result */
+            if (UNTAG_Bool(variable[17])) { /*if*/
+              variable[17] = NEW_Array_array___Array___with_capacity(TAG_Int(13)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+              /* Register variable[18]: Once String constant */
+              if (once_value_224 != NIT_NULL) variable[18] = once_value_224;
+              else {
+		variable[18] = NEW_String_string___String___with_native(BOX_NativeString("Redef warning: Expected "), TAG_Int(24)) /*new String*/;
+		once_value_224 = variable[18];
+              }
+              /* Register variable[18]: Result */
+              /* Ensure var variable[18]: super-string element*/
+              CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+              variable[18] =  variable[16] /*isrt*/ /* Ensure var: super-string element*/;
+              CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+              /* Register variable[18]: Once String constant */
+              if (once_value_225 != NIT_NULL) variable[18] = once_value_225;
+              else {
+		variable[18] = NEW_String_string___String___with_native(BOX_NativeString(" (as in "), TAG_Int(8)) /*new String*/;
+		once_value_225 = variable[18];
+              }
+              /* Register variable[18]: Result */
+              /* Ensure var variable[18]: super-string element*/
+              CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+              /* Register variable[18]: Result */
+              variable[18] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[12] /*ip*/)( variable[12] /*ip*/) /*MMLocalProperty::local_class*/;
+              /* Ensure var variable[18]: super-string element*/
+              CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+              /* Register variable[18]: Once String constant */
+              if (once_value_226 != NIT_NULL) variable[18] = once_value_226;
+              else {
+		variable[18] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+		once_value_226 = variable[18];
+              }
+              /* Register variable[18]: Result */
+              /* Ensure var variable[18]: super-string element*/
+              CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+              variable[18] =  variable[12] /*ip*/ /* Ensure var: super-string element*/;
+              CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+              /* Register variable[18]: Once String constant */
+              if (once_value_227 != NIT_NULL) variable[18] = once_value_227;
+              else {
+		variable[18] = NEW_String_string___String___with_native(BOX_NativeString("), got "), TAG_Int(7)) /*new String*/;
+		once_value_227 = variable[18];
+              }
+              /* Register variable[18]: Result */
+              /* Ensure var variable[18]: super-string element*/
+              CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+              variable[18] =  variable[15] /*srt*/ /* Ensure var: super-string element*/;
+              CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+              /* Register variable[18]: Once String constant */
+              if (once_value_228 != NIT_NULL) variable[18] = once_value_228;
+              else {
+		variable[18] = NEW_String_string___String___with_native(BOX_NativeString(" in "), TAG_Int(4)) /*new String*/;
+		once_value_228 = variable[18];
+              }
+              /* Register variable[18]: Result */
+              /* Ensure var variable[18]: super-string element*/
+              CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+              /* Register variable[18]: Result */
+              variable[18] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+              /* Ensure var variable[18]: super-string element*/
+              CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+              /* Register variable[18]: Once String constant */
+              if (once_value_229 != NIT_NULL) variable[18] = once_value_229;
+              else {
+		variable[18] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+		once_value_229 = variable[18];
+              }
+              /* Register variable[18]: Result */
+              /* Ensure var variable[18]: super-string element*/
+              CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+              variable[18] =  variable[2] /*prop*/ /* Ensure var: super-string element*/;
+              CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], CALL_string___Object___to_s(variable[18])(variable[18]) /*Object::to_s*/) /*AbstractArray::add*/;
+              /* Register variable[18]: Once String constant */
+              if (once_value_230 != NIT_NULL) variable[18] = once_value_230;
+              else {
+		variable[18] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+		once_value_230 = variable[18];
+              }
+              /* Register variable[18]: Result */
+              /* Ensure var variable[18]: super-string element*/
+              CALL_abstract_collection___SimpleCollection___add(variable[17])(variable[17], variable[18]) /*AbstractArray::add*/;
+              /* Register variable[17]: Result */
+              variable[17] = CALL_string___Object___to_s(variable[17])(variable[17]) /*Object::to_s*/;
+              CALL_syntax_base___AbsSyntaxVisitor___warning( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[17]) /*AbsSyntaxVisitor::warning*/;
+            }
           }
         }
       }
     }
-    continue_95: while(0);
+    continue_174: while(0);
     CALL_abstract_collection___Iterator___next(variable[9])(variable[9]) /*ArrayIterator::next*/;
   }
-  break_95: while(0);
+  break_174: while(0);
+  /* Register variable[9]: Result */
   variable[9] = TAG_Bool(( variable[4] /*visibility_level*/)!=( TAG_Int(1)));
-  variable[10] = variable[9];
-  if (UNTAG_Bool(variable[10])) { /* and */
-    variable[10] = CALL_abstractmetamodel___MMGlobalProperty___visibility_level( variable[7] /*glob*/)( variable[7] /*glob*/) /*MMGlobalProperty::visibility_level*/;
-    variable[10] = TAG_Bool((variable[10])!=( variable[4] /*visibility_level*/));
+  /* Ensure var variable[9]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[9])) { /* and */
+    /* Register variable[9]: Result */
+    variable[9] = CALL_abstractmetamodel___MMGlobalProperty___visibility_level( variable[7] /*glob*/)( variable[7] /*glob*/) /*MMGlobalProperty::visibility_level*/;
+    /* Register variable[9]: Result */
+    variable[9] = TAG_Bool((variable[9])!=( variable[4] /*visibility_level*/));
   }
-  variable[9] = variable[10];
+  /* Register variable[9]: Result */
   if (UNTAG_Bool(variable[9])) { /*if*/
-    variable[9] = variable[0];
-    variable[10] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-    variable[11] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: "), TAG_Int(13)); /*new String*/
-    variable[12] = variable[11];
-    CALL_abstract_collection___SimpleCollection___add(variable[10])(variable[10], variable[12]) /*AbstractArray::add*/;
-    variable[13] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
-    variable[14] = variable[13];
-    variable[14] = CALL_string___Object___to_s(variable[14])(variable[14]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[10])(variable[10], variable[14]) /*AbstractArray::add*/;
-    variable[15] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-    variable[16] = variable[15];
-    CALL_abstract_collection___SimpleCollection___add(variable[10])(variable[10], variable[16]) /*AbstractArray::add*/;
-    variable[17] =  variable[2] /*prop*/;
-    variable[17] = CALL_string___Object___to_s(variable[17])(variable[17]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[10])(variable[10], variable[17]) /*AbstractArray::add*/;
-    variable[18] = NEW_String_string___String___with_native(BOX_NativeString(" redefinition cannot change visibility."), TAG_Int(39)); /*new String*/
-    variable[19] = variable[18];
-    CALL_abstract_collection___SimpleCollection___add(variable[10])(variable[10], variable[19]) /*AbstractArray::add*/;
-    variable[10] = CALL_string___Object___to_s(variable[10])(variable[10]) /*Object::to_s*/;
-    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[9], variable[10]) /*AbsSyntaxVisitor::error*/;
+    variable[9] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[10]: Once String constant */
+    if (once_value_231 != NIT_NULL) variable[10] = once_value_231;
+    else {
+      variable[10] = NEW_String_string___String___with_native(BOX_NativeString("Redef error: "), TAG_Int(13)) /*new String*/;
+      once_value_231 = variable[10];
+    }
+    /* Register variable[10]: Result */
+    /* Ensure var variable[10]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[10]) /*AbstractArray::add*/;
+    /* Register variable[10]: Result */
+    variable[10] = CALL_abstractmetamodel___MMLocalProperty___local_class( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::local_class*/;
+    /* Ensure var variable[10]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], CALL_string___Object___to_s(variable[10])(variable[10]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[10]: Once String constant */
+    if (once_value_232 != NIT_NULL) variable[10] = once_value_232;
+    else {
+      variable[10] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+      once_value_232 = variable[10];
+    }
+    /* Register variable[10]: Result */
+    /* Ensure var variable[10]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[10]) /*AbstractArray::add*/;
+    variable[10] =  variable[2] /*prop*/ /* Ensure var: super-string element*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], CALL_string___Object___to_s(variable[10])(variable[10]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[10]: Once String constant */
+    if (once_value_233 != NIT_NULL) variable[10] = once_value_233;
+    else {
+      variable[10] = NEW_String_string___String___with_native(BOX_NativeString(" redefinition cannot change visibility."), TAG_Int(39)) /*new String*/;
+      once_value_233 = variable[10];
+    }
+    /* Register variable[10]: Result */
+    /* Ensure var variable[10]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[9])(variable[9], variable[10]) /*AbstractArray::add*/;
+    /* Register variable[9]: Result */
+    variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
+    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[9]) /*AbsSyntaxVisitor::error*/;
   }
-  variable[9] = variable[0];
-  variable[10] = CALL_syntax_base___AbsSyntaxVisitor___module( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
-  CALL_syntax_base___MMGlobalProperty___check_visibility( variable[7] /*glob*/)( variable[7] /*glob*/,  variable[1] /*v*/, variable[9], variable[10],  TAG_Bool(true)) /*MMGlobalProperty::check_visibility*/;
-  return_label94: while(false);
+  /* Register variable[9]: Result */
+  variable[9] = CALL_syntax_base___AbsSyntaxVisitor___module( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::module*/;
+  CALL_syntax_base___MMGlobalProperty___check_visibility( variable[7] /*glob*/)( variable[7] /*glob*/,  variable[1] /*v*/, variable[0], variable[9],  TAG_Bool(true)) /*MMGlobalProperty::check_visibility*/;
+  return_label164: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___AAttrPropdef___accept_abs_syntax_visitor(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 953, LOCATE_mmbuilder___AAttrPropdef___accept_abs_syntax_visitor};
+  struct trace_t trace = {NULL, NULL, 962, LOCATE_mmbuilder___AAttrPropdef___accept_abs_syntax_visitor};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_syntax_base___AAttrPropdef___prop(variable[3])(variable[3]) /*AAttrPropdef::prop*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_syntax_base___AAttrPropdef___prop(variable[0])(variable[0]) /*AAttrPropdef::prop*/;
   CALL_syntax_base___AbsSyntaxVisitor___local_property__eq( variable[1] /*v*/)( variable[1] /*v*/, variable[3]) /*AbsSyntaxVisitor::local_property=*/;
   CALL_SUPER_mmbuilder___AAttrPropdef___accept_abs_syntax_visitor(variable[0])(variable[0], variable[1]) /*super AAttrPropdef::accept_abs_syntax_visitor*/;
   CALL_syntax_base___AbsSyntaxVisitor___local_property__eq( variable[1] /*v*/)( variable[1] /*v*/,  NIT_NULL /*null*/) /*AbsSyntaxVisitor::local_property=*/;
-  return_label98: while(false);
+  return_label234: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t mmbuilder___AAttrPropdef___prop(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 904, LOCATE_mmbuilder___AAttrPropdef___prop};
+  struct trace_t trace = {NULL, NULL, 913, LOCATE_mmbuilder___AAttrPropdef___prop};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___AAttrPropdef____prop( self) /*AAttrPropdef::_prop*/;
 }
 val_t mmbuilder___AAttrPropdef___readmethod(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 902, LOCATE_mmbuilder___AAttrPropdef___readmethod};
+  struct trace_t trace = {NULL, NULL, 911, LOCATE_mmbuilder___AAttrPropdef___readmethod};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___AAttrPropdef____readmethod( self) /*AAttrPropdef::_readmethod*/;
 }
 val_t mmbuilder___AAttrPropdef___writemethod(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 903, LOCATE_mmbuilder___AAttrPropdef___writemethod};
+  struct trace_t trace = {NULL, NULL, 912, LOCATE_mmbuilder___AAttrPropdef___writemethod};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___AAttrPropdef____writemethod( self) /*AAttrPropdef::_writemethod*/;
 }
 void mmbuilder___AAttrPropdef___accept_property_builder(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 906, LOCATE_mmbuilder___AAttrPropdef___accept_property_builder};
-  val_t variable[9];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 915, LOCATE_mmbuilder___AAttrPropdef___accept_property_builder};
+    static val_t once_value_236 = NIT_NULL; /* Once value for string variable[6]*/
+  val_t variable[7];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
   CALL_SUPER_mmbuilder___AAttrPropdef___accept_property_builder(variable[0])(variable[0], variable[1]) /*super AAttrPropdef::accept_property_builder*/;
-  variable[4] = variable[0];
-  variable[4] = CALL_parser_nodes___AAttrPropdef___n_id(variable[4])(variable[4]) /*AAttrPropdef::n_id*/;
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_parser_nodes___AAttrPropdef___n_id(variable[0])(variable[0]) /*AAttrPropdef::n_id*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_syntax_base___Token___to_symbol(variable[4])(variable[4]) /*Token::to_symbol*/;
   variable[3] = variable[4];
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
   variable[5] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
-  variable[6] = variable[0];
-  variable[7] = NEW_MMSrcAttribute_syntax_base___MMSrcAttribute___init( variable[3] /*name*/, variable[5], variable[6]); /*new MMSrcAttribute*/
-  variable[5] = variable[7];
+  /* Register variable[5]: Result */
+  variable[5] = NEW_MMSrcAttribute_syntax_base___MMSrcAttribute___init( variable[3] /*name*/, variable[5], variable[0]) /*new MMSrcAttribute*/;
   variable[4] = variable[5];
-  variable[5] = variable[0];
-  ATTR_mmbuilder___AAttrPropdef____prop(variable[5]) /*AAttrPropdef::_prop*/ =  variable[4] /*prop*/;
+  ATTR_mmbuilder___AAttrPropdef____prop(variable[0]) /*AAttrPropdef::_prop*/ =  variable[4] /*prop*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
   CALL_mmbuilder___MMSrcLocalClass___add_src_local_property(variable[5])(variable[5],  variable[1] /*v*/,  variable[4] /*prop*/) /*MMSrcLocalClass::add_src_local_property*/;
-  variable[5] = variable[0];
-  variable[5] = CALL_parser_nodes___AAttrPropdef___n_readable(variable[5])(variable[5]) /*AAttrPropdef::n_readable*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_parser_nodes___AAttrPropdef___n_readable(variable[0])(variable[0]) /*AAttrPropdef::n_readable*/;
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[5])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[5])(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[5])) { /*if*/
-    variable[5] = variable[0];
-    variable[5] = CALL_parser_nodes___AAttrPropdef___n_id(variable[5])(variable[5]) /*AAttrPropdef::n_id*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_parser_nodes___AAttrPropdef___n_id(variable[0])(variable[0]) /*AAttrPropdef::n_id*/;
+    /* Register variable[5]: Result */
     variable[5] = CALL_lexer___Token___text(variable[5])(variable[5]) /*Token::text*/;
-    variable[5] = CALL_string___String___substring_from(variable[5])(variable[5],  TAG_Int(1)) /*String::substring_from*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_string___AbstractString___substring_from(variable[5])(variable[5],  TAG_Int(1)) /*AbstractString::substring_from*/;
+    /* Register variable[5]: Result */
     variable[5] = CALL_symbol___String___to_symbol(variable[5])(variable[5]) /*String::to_symbol*/;
     variable[3] = variable[5] /*name=*/;
-    variable[5] = variable[0];
-    variable[6] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
-    variable[7] = variable[0];
-    variable[8] = NEW_MMReadImplementationMethod_syntax_base___MMReadImplementationMethod___init( variable[3] /*name*/, variable[6], variable[7]); /*new MMReadImplementationMethod*/
-    variable[6] = variable[8];
-    ATTR_mmbuilder___AAttrPropdef____readmethod(variable[5]) /*AAttrPropdef::_readmethod*/ = variable[6];
+    /* Register variable[5]: Result */
     variable[5] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
-    variable[6] = variable[0];
-    variable[6] = ATTR_mmbuilder___AAttrPropdef____readmethod(variable[6]) /*AAttrPropdef::_readmethod*/;
+    /* Register variable[5]: Result */
+    variable[5] = NEW_MMReadImplementationMethod_syntax_base___MMReadImplementationMethod___init( variable[3] /*name*/, variable[5], variable[0]) /*new MMReadImplementationMethod*/;
+    ATTR_mmbuilder___AAttrPropdef____readmethod(variable[0]) /*AAttrPropdef::_readmethod*/ = variable[5];
+    /* Register variable[5]: Result */
+    variable[5] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
+    /* Register variable[6]: Result */
+    variable[6] = ATTR_mmbuilder___AAttrPropdef____readmethod(variable[0]) /*AAttrPropdef::_readmethod*/;
     CALL_mmbuilder___MMSrcLocalClass___add_src_local_property(variable[5])(variable[5],  variable[1] /*v*/, variable[6]) /*MMSrcLocalClass::add_src_local_property*/;
   }
-  variable[5] = variable[0];
-  variable[5] = CALL_parser_nodes___AAttrPropdef___n_writable(variable[5])(variable[5]) /*AAttrPropdef::n_writable*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_parser_nodes___AAttrPropdef___n_writable(variable[0])(variable[0]) /*AAttrPropdef::n_writable*/;
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[5])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[5])(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[5])) { /*if*/
-    variable[5] = variable[0];
-    variable[5] = CALL_parser_nodes___AAttrPropdef___n_id(variable[5])(variable[5]) /*AAttrPropdef::n_id*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_parser_nodes___AAttrPropdef___n_id(variable[0])(variable[0]) /*AAttrPropdef::n_id*/;
+    /* Register variable[5]: Result */
     variable[5] = CALL_lexer___Token___text(variable[5])(variable[5]) /*Token::text*/;
-    variable[5] = CALL_string___String___substring_from(variable[5])(variable[5],  TAG_Int(1)) /*String::substring_from*/;
-    variable[6] = NEW_String_string___String___with_native(BOX_NativeString("="), TAG_Int(1)); /*new String*/
+    /* Register variable[5]: Result */
+    variable[5] = CALL_string___AbstractString___substring_from(variable[5])(variable[5],  TAG_Int(1)) /*AbstractString::substring_from*/;
+    /* Register variable[6]: Once String constant */
+    if (once_value_236 != NIT_NULL) variable[6] = once_value_236;
+    else {
+      variable[6] = NEW_String_string___String___with_native(BOX_NativeString("="), TAG_Int(1)) /*new String*/;
+      once_value_236 = variable[6];
+    }
+    /* Register variable[6]: Result */
+    /* Register variable[5]: Result */
     variable[5] = CALL_string___String_____plus(variable[5])(variable[5], variable[6]) /*String::+*/;
+    /* Register variable[5]: Result */
     variable[5] = CALL_symbol___String___to_symbol(variable[5])(variable[5]) /*String::to_symbol*/;
     variable[3] = variable[5] /*name=*/;
-    variable[5] = variable[0];
-    variable[6] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
-    variable[7] = variable[0];
-    variable[8] = NEW_MMWriteImplementationMethod_syntax_base___MMWriteImplementationMethod___init( variable[3] /*name*/, variable[6], variable[7]); /*new MMWriteImplementationMethod*/
-    variable[6] = variable[8];
-    ATTR_mmbuilder___AAttrPropdef____writemethod(variable[5]) /*AAttrPropdef::_writemethod*/ = variable[6];
+    /* Register variable[5]: Result */
     variable[5] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
-    variable[6] = variable[0];
-    variable[6] = ATTR_mmbuilder___AAttrPropdef____writemethod(variable[6]) /*AAttrPropdef::_writemethod*/;
+    /* Register variable[5]: Result */
+    variable[5] = NEW_MMWriteImplementationMethod_syntax_base___MMWriteImplementationMethod___init( variable[3] /*name*/, variable[5], variable[0]) /*new MMWriteImplementationMethod*/;
+    ATTR_mmbuilder___AAttrPropdef____writemethod(variable[0]) /*AAttrPropdef::_writemethod*/ = variable[5];
+    /* Register variable[5]: Result */
+    variable[5] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
+    /* Register variable[6]: Result */
+    variable[6] = ATTR_mmbuilder___AAttrPropdef____writemethod(variable[0]) /*AAttrPropdef::_writemethod*/;
     CALL_mmbuilder___MMSrcLocalClass___add_src_local_property(variable[5])(variable[5],  variable[1] /*v*/, variable[6]) /*MMSrcLocalClass::add_src_local_property*/;
   }
-  return_label99: while(false);
+  return_label235: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___AAttrPropdef___accept_property_verifier(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 926, LOCATE_mmbuilder___AAttrPropdef___accept_property_verifier};
-  val_t variable[16];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 935, LOCATE_mmbuilder___AAttrPropdef___accept_property_verifier};
+    static val_t once_value_238 = NIT_NULL; /* Once value for string variable[5]*/
+    static val_t once_value_239 = NIT_NULL; /* Once value for string variable[5]*/
+    static val_t once_value_240 = NIT_NULL; /* Once value for string variable[5]*/
+  val_t variable[9];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
   CALL_SUPER_mmbuilder___AAttrPropdef___accept_property_verifier(variable[0])(variable[0], variable[1]) /*super AAttrPropdef::accept_property_verifier*/;
+  /* Register variable[3]: Local variable */
   /*variable[3] is variable t*/
-  variable[4] = variable[0];
-  variable[4] = CALL_parser_nodes___AAttrPropdef___n_type(variable[4])(variable[4]) /*AAttrPropdef::n_type*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_parser_nodes___AAttrPropdef___n_type(variable[0])(variable[0]) /*AAttrPropdef::n_type*/;
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    variable[4] = CALL_parser_nodes___AAttrPropdef___n_type(variable[4])(variable[4]) /*AAttrPropdef::n_type*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_parser_nodes___AAttrPropdef___n_type(variable[0])(variable[0]) /*AAttrPropdef::n_type*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_syntax_base___PType___get_stype(variable[4])(variable[4],  variable[1] /*v*/) /*PType::get_stype*/;
     variable[3] = variable[4] /*t=*/;
   } else { /*if*/
-    variable[4] = variable[0];
-    variable[5] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-    variable[6] = NEW_String_string___String___with_native(BOX_NativeString("Not yet implemented: Attribute definition "), TAG_Int(42)); /*new String*/
-    variable[7] = variable[6];
-    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[7]) /*AbstractArray::add*/;
-    variable[8] = variable[0];
-    variable[8] = ATTR_mmbuilder___AAttrPropdef____prop(variable[8]) /*AAttrPropdef::_prop*/;
-    variable[8] = CALL_abstractmetamodel___MMLocalProperty___local_class(variable[8])(variable[8]) /*MMLocalProperty::local_class*/;
-    variable[9] = variable[8];
-    variable[9] = CALL_string___Object___to_s(variable[9])(variable[9]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[9]) /*AbstractArray::add*/;
-    variable[10] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)); /*new String*/
-    variable[11] = variable[10];
-    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[11]) /*AbstractArray::add*/;
-    variable[12] = variable[0];
-    variable[12] = ATTR_mmbuilder___AAttrPropdef____prop(variable[12]) /*AAttrPropdef::_prop*/;
-    variable[13] = variable[12];
-    variable[13] = CALL_string___Object___to_s(variable[13])(variable[13]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[13]) /*AbstractArray::add*/;
-    variable[14] = NEW_String_string___String___with_native(BOX_NativeString(" requires an explicit type."), TAG_Int(27)); /*new String*/
-    variable[15] = variable[14];
-    CALL_abstract_collection___SimpleCollection___add(variable[5])(variable[5], variable[15]) /*AbstractArray::add*/;
-    variable[5] = CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/;
-    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[4], variable[5]) /*AbsSyntaxVisitor::error*/;
-    goto return_label100;
+    variable[4] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[5]: Once String constant */
+    if (once_value_238 != NIT_NULL) variable[5] = once_value_238;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString("Not yet implemented: Attribute definition "), TAG_Int(42)) /*new String*/;
+      once_value_238 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+    /* Register variable[5]: Result */
+    variable[5] = ATTR_mmbuilder___AAttrPropdef____prop(variable[0]) /*AAttrPropdef::_prop*/;
+    /* Register variable[5]: Result */
+    variable[5] = CALL_abstractmetamodel___MMLocalProperty___local_class(variable[5])(variable[5]) /*MMLocalProperty::local_class*/;
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[5]: Once String constant */
+    if (once_value_239 != NIT_NULL) variable[5] = once_value_239;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString("::"), TAG_Int(2)) /*new String*/;
+      once_value_239 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+    /* Register variable[5]: Result */
+    variable[5] = ATTR_mmbuilder___AAttrPropdef____prop(variable[0]) /*AAttrPropdef::_prop*/;
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], CALL_string___Object___to_s(variable[5])(variable[5]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[5]: Once String constant */
+    if (once_value_240 != NIT_NULL) variable[5] = once_value_240;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString(" requires an explicit type."), TAG_Int(27)) /*new String*/;
+      once_value_240 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    /* Ensure var variable[5]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[4])(variable[4], variable[5]) /*AbstractArray::add*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_string___Object___to_s(variable[4])(variable[4]) /*Object::to_s*/;
+    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[4]) /*AbsSyntaxVisitor::error*/;
+    goto return_label237;
   }
-  variable[5] = NEW_Array_array___Array___init(); /*new Array[MMType]*/
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = NEW_Array_array___Array___init() /*new Array[MMType]*/;
+  /* Register variable[6]: Result */
   variable[6] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
+  /* Register variable[6]: Result */
   variable[6] = CALL_static_type___MMLocalClass___get_type(variable[6])(variable[6]) /*MMLocalClass::get_type*/;
-  variable[7] = NEW_MMSignature_static_type___MMSignature___init(variable[5],  variable[3] /*t*/, variable[6]); /*new MMSignature*/
-  variable[5] = variable[7];
+  /* Register variable[5]: Result */
+  variable[5] = NEW_MMSignature_static_type___MMSignature___init(variable[5],  variable[3] /*t*/, variable[6]) /*new MMSignature*/;
   variable[4] = variable[5];
-  variable[5] = variable[0];
-  variable[5] = ATTR_mmbuilder___AAttrPropdef____prop(variable[5]) /*AAttrPropdef::_prop*/;
+  /* Register variable[5]: Result */
+  variable[5] = ATTR_mmbuilder___AAttrPropdef____prop(variable[0]) /*AAttrPropdef::_prop*/;
   CALL_static_type___MMLocalProperty___signature__eq(variable[5])(variable[5],  variable[4] /*signature*/) /*MMLocalProperty::signature=*/;
-  variable[6] = variable[0];
-  variable[6] = CALL_parser_nodes___AAttrPropdef___n_visibility(variable[6])(variable[6]) /*AAttrPropdef::n_visibility*/;
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
+  variable[6] = CALL_parser_nodes___AAttrPropdef___n_visibility(variable[0])(variable[0]) /*AAttrPropdef::n_visibility*/;
+  /* Register variable[6]: Result */
   variable[6] = CALL_mmbuilder___PVisibility___level(variable[6])(variable[6]) /*PVisibility::level*/;
   variable[5] = variable[6];
-  variable[6] = variable[0];
-  variable[7] = variable[0];
-  variable[7] = ATTR_mmbuilder___AAttrPropdef____prop(variable[7]) /*AAttrPropdef::_prop*/;
-  variable[8] = variable[0];
-  variable[8] = CALL_parser_nodes___AAttrPropdef___n_kwredef(variable[8])(variable[8]) /*AAttrPropdef::n_kwredef*/;
-  variable[8] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[8] ==  NIT_NULL /*null*/) || ((variable[8] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[8])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[8], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[8])(variable[8],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  CALL_mmbuilder___PPropdef___process_and_check(variable[6])(variable[6],  variable[1] /*v*/, variable[7], variable[8],  variable[5] /*visibility_level*/) /*PPropdef::process_and_check*/;
-  variable[6] = variable[0];
-  variable[6] = CALL_parser_nodes___AAttrPropdef___n_readable(variable[6])(variable[6]) /*AAttrPropdef::n_readable*/;
+  /* Register variable[6]: Result */
+  variable[6] = ATTR_mmbuilder___AAttrPropdef____prop(variable[0]) /*AAttrPropdef::_prop*/;
+  /* Register variable[7]: Result */
+  variable[7] = CALL_parser_nodes___AAttrPropdef___n_kwredef(variable[0])(variable[0]) /*AAttrPropdef::n_kwredef*/;
+  /* Register variable[7]: Result */
+  variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[7] ==  NIT_NULL /*null*/) || ((variable[7] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[7])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[7], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[7])(variable[7],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  CALL_mmbuilder___PPropdef___process_and_check(variable[0])(variable[0],  variable[1] /*v*/, variable[6], variable[7],  variable[5] /*visibility_level*/) /*PPropdef::process_and_check*/;
+  /* Register variable[6]: Result */
+  variable[6] = CALL_parser_nodes___AAttrPropdef___n_readable(variable[0])(variable[0]) /*AAttrPropdef::n_readable*/;
+  /* Register variable[6]: Result */
   variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] ==  NIT_NULL /*null*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[6])) { /*if*/
-    variable[6] = variable[0];
-    variable[6] = ATTR_mmbuilder___AAttrPropdef____readmethod(variable[6]) /*AAttrPropdef::_readmethod*/;
+    /* Register variable[6]: Result */
+    variable[6] = ATTR_mmbuilder___AAttrPropdef____readmethod(variable[0]) /*AAttrPropdef::_readmethod*/;
     CALL_static_type___MMLocalProperty___signature__eq(variable[6])(variable[6],  variable[4] /*signature*/) /*MMLocalProperty::signature=*/;
-    variable[6] = variable[0];
-    variable[7] = variable[0];
-    variable[7] = ATTR_mmbuilder___AAttrPropdef____readmethod(variable[7]) /*AAttrPropdef::_readmethod*/;
-    variable[8] = variable[0];
-    variable[8] = CALL_parser_nodes___AAttrPropdef___n_readable(variable[8])(variable[8]) /*AAttrPropdef::n_readable*/;
-    variable[8] = CALL_parser_nodes___PAble___n_kwredef(variable[8])(variable[8]) /*PAble::n_kwredef*/;
-    variable[8] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[8] ==  NIT_NULL /*null*/) || ((variable[8] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[8])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[8], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[8])(variable[8],  NIT_NULL /*null*/) /*Object::==*/)))))));
-    CALL_mmbuilder___PPropdef___process_and_check(variable[6])(variable[6],  variable[1] /*v*/, variable[7], variable[8],  variable[5] /*visibility_level*/) /*PPropdef::process_and_check*/;
-    variable[6] = variable[0];
-    variable[6] = CALL_parser_nodes___AAttrPropdef___n_type(variable[6])(variable[6]) /*AAttrPropdef::n_type*/;
-    variable[7] = variable[0];
-    variable[7] = ATTR_mmbuilder___AAttrPropdef____readmethod(variable[7]) /*AAttrPropdef::_readmethod*/;
+    /* Register variable[6]: Result */
+    variable[6] = ATTR_mmbuilder___AAttrPropdef____readmethod(variable[0]) /*AAttrPropdef::_readmethod*/;
+    /* Register variable[7]: Result */
+    variable[7] = CALL_parser_nodes___AAttrPropdef___n_readable(variable[0])(variable[0]) /*AAttrPropdef::n_readable*/;
+    /* Register variable[7]: Result */
+    variable[7] = CALL_parser_nodes___PAble___n_kwredef(variable[7])(variable[7]) /*PAble::n_kwredef*/;
+    /* Register variable[7]: Result */
+    variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[7] ==  NIT_NULL /*null*/) || ((variable[7] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[7])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[7], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[7])(variable[7],  NIT_NULL /*null*/) /*Object::==*/)))))));
+    CALL_mmbuilder___PPropdef___process_and_check(variable[0])(variable[0],  variable[1] /*v*/, variable[6], variable[7],  variable[5] /*visibility_level*/) /*PPropdef::process_and_check*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_parser_nodes___AAttrPropdef___n_type(variable[0])(variable[0]) /*AAttrPropdef::n_type*/;
+    /* Register variable[7]: Result */
+    variable[7] = ATTR_mmbuilder___AAttrPropdef____readmethod(variable[0]) /*AAttrPropdef::_readmethod*/;
     CALL_mmbuilder___PType___check_visibility(variable[6])(variable[6],  variable[1] /*v*/, variable[7]) /*PType::check_visibility*/;
   }
-  variable[6] = variable[0];
-  variable[6] = CALL_parser_nodes___AAttrPropdef___n_writable(variable[6])(variable[6]) /*AAttrPropdef::n_writable*/;
+  /* Register variable[6]: Result */
+  variable[6] = CALL_parser_nodes___AAttrPropdef___n_writable(variable[0])(variable[0]) /*AAttrPropdef::n_writable*/;
+  /* Register variable[6]: Result */
   variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] ==  NIT_NULL /*null*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[6])) { /*if*/
-    variable[6] = variable[0];
-    variable[6] = ATTR_mmbuilder___AAttrPropdef____writemethod(variable[6]) /*AAttrPropdef::_writemethod*/;
-    variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(1)); /*new Array[MMType]*/
+    /* Register variable[6]: Result */
+    variable[6] = ATTR_mmbuilder___AAttrPropdef____writemethod(variable[0]) /*AAttrPropdef::_writemethod*/;
+    variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(1)) /*new Array[MMType]*/ /* Ensure var: Literal array*/;
     CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7],  variable[3] /*t*/) /*AbstractArray::add*/;
-    variable[8] = NEW_Array_array___Array___with_items(variable[7]); /*new Array[MMType]*/
-    variable[7] = variable[8];
+    /* Register variable[7]: Result */
+    /* Register variable[7]: Result */
+    variable[7] = NEW_Array_array___Array___with_items(variable[7]) /*new Array[MMType]*/;
+    /* Register variable[8]: Result */
     variable[8] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
+    /* Register variable[8]: Result */
     variable[8] = CALL_static_type___MMLocalClass___get_type(variable[8])(variable[8]) /*MMLocalClass::get_type*/;
-    variable[9] = NEW_MMSignature_static_type___MMSignature___init(variable[7],  NIT_NULL /*null*/, variable[8]); /*new MMSignature*/
-    variable[7] = variable[9];
+    /* Register variable[7]: Result */
+    variable[7] = NEW_MMSignature_static_type___MMSignature___init(variable[7],  NIT_NULL /*null*/, variable[8]) /*new MMSignature*/;
     CALL_static_type___MMLocalProperty___signature__eq(variable[6])(variable[6], variable[7]) /*MMLocalProperty::signature=*/;
-    variable[6] = variable[0];
-    variable[7] = variable[0];
-    variable[7] = ATTR_mmbuilder___AAttrPropdef____writemethod(variable[7]) /*AAttrPropdef::_writemethod*/;
-    variable[8] = variable[0];
-    variable[8] = CALL_parser_nodes___AAttrPropdef___n_writable(variable[8])(variable[8]) /*AAttrPropdef::n_writable*/;
-    variable[8] = CALL_parser_nodes___PAble___n_kwredef(variable[8])(variable[8]) /*PAble::n_kwredef*/;
-    variable[8] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[8] ==  NIT_NULL /*null*/) || ((variable[8] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[8])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[8], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[8])(variable[8],  NIT_NULL /*null*/) /*Object::==*/)))))));
-    CALL_mmbuilder___PPropdef___process_and_check(variable[6])(variable[6],  variable[1] /*v*/, variable[7], variable[8],  variable[5] /*visibility_level*/) /*PPropdef::process_and_check*/;
-    variable[6] = variable[0];
-    variable[6] = CALL_parser_nodes___AAttrPropdef___n_type(variable[6])(variable[6]) /*AAttrPropdef::n_type*/;
-    variable[7] = variable[0];
-    variable[7] = ATTR_mmbuilder___AAttrPropdef____writemethod(variable[7]) /*AAttrPropdef::_writemethod*/;
+    /* Register variable[6]: Result */
+    variable[6] = ATTR_mmbuilder___AAttrPropdef____writemethod(variable[0]) /*AAttrPropdef::_writemethod*/;
+    /* Register variable[7]: Result */
+    variable[7] = CALL_parser_nodes___AAttrPropdef___n_writable(variable[0])(variable[0]) /*AAttrPropdef::n_writable*/;
+    /* Register variable[7]: Result */
+    variable[7] = CALL_parser_nodes___PAble___n_kwredef(variable[7])(variable[7]) /*PAble::n_kwredef*/;
+    /* Register variable[7]: Result */
+    variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[7] ==  NIT_NULL /*null*/) || ((variable[7] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[7])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[7], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[7])(variable[7],  NIT_NULL /*null*/) /*Object::==*/)))))));
+    CALL_mmbuilder___PPropdef___process_and_check(variable[0])(variable[0],  variable[1] /*v*/, variable[6], variable[7],  variable[5] /*visibility_level*/) /*PPropdef::process_and_check*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_parser_nodes___AAttrPropdef___n_type(variable[0])(variable[0]) /*AAttrPropdef::n_type*/;
+    /* Register variable[7]: Result */
+    variable[7] = ATTR_mmbuilder___AAttrPropdef____writemethod(variable[0]) /*AAttrPropdef::_writemethod*/;
     CALL_mmbuilder___PType___check_visibility(variable[6])(variable[6],  variable[1] /*v*/, variable[7]) /*PType::check_visibility*/;
   }
-  return_label100: while(false);
+  return_label237: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___AMethPropdef___accept_abs_syntax_visitor(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1009, LOCATE_mmbuilder___AMethPropdef___accept_abs_syntax_visitor};
+  struct trace_t trace = {NULL, NULL, 1018, LOCATE_mmbuilder___AMethPropdef___accept_abs_syntax_visitor};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_syntax_base___AMethPropdef___method(variable[3])(variable[3]) /*AMethPropdef::method*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_syntax_base___AMethPropdef___method(variable[0])(variable[0]) /*AMethPropdef::method*/;
   CALL_syntax_base___AbsSyntaxVisitor___local_property__eq( variable[1] /*v*/)( variable[1] /*v*/, variable[3]) /*AbsSyntaxVisitor::local_property=*/;
   CALL_SUPER_mmbuilder___AMethPropdef___accept_abs_syntax_visitor(variable[0])(variable[0], variable[1]) /*super AMethPropdef::accept_abs_syntax_visitor*/;
   CALL_syntax_base___AbsSyntaxVisitor___local_property__eq( variable[1] /*v*/)( variable[1] /*v*/,  NIT_NULL /*null*/) /*AbsSyntaxVisitor::local_property=*/;
-  return_label101: while(false);
+  return_label241: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t mmbuilder___AMethPropdef___method(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 965, LOCATE_mmbuilder___AMethPropdef___method};
+  struct trace_t trace = {NULL, NULL, 974, LOCATE_mmbuilder___AMethPropdef___method};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___AMethPropdef____method( self) /*AMethPropdef::_method*/;
 }
 void mmbuilder___AMethPropdef___accept_property_builder(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 967, LOCATE_mmbuilder___AMethPropdef___accept_property_builder};
-      static val_t once_value_103; static int once_bool_103; /* Once value for variable[4]*/
-      static val_t once_value_104; static int once_bool_104; /* Once value for variable[4]*/
-    static val_t once_value_105; static int once_bool_105; /* Once value for variable[4]*/
-        static val_t once_value_106; static int once_bool_106; /* Once value for variable[5]*/
-  val_t variable[8];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 976, LOCATE_mmbuilder___AMethPropdef___accept_property_builder};
+      static val_t once_value_243; static int once_bool_243; /* Once value for variable[3]*/
+        static val_t once_value_244 = NIT_NULL; /* Once value for string variable[3]*/
+      static val_t once_value_245; static int once_bool_245; /* Once value for variable[3]*/
+        static val_t once_value_246 = NIT_NULL; /* Once value for string variable[3]*/
+    static val_t once_value_247; static int once_bool_247; /* Once value for variable[4]*/
+      static val_t once_value_248 = NIT_NULL; /* Once value for string variable[4]*/
+        static val_t once_value_249; static int once_bool_249; /* Once value for variable[4]*/
+          static val_t once_value_250 = NIT_NULL; /* Once value for string variable[4]*/
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
   CALL_SUPER_mmbuilder___AMethPropdef___accept_property_builder(variable[0])(variable[0], variable[1]) /*super AMethPropdef::accept_property_builder*/;
-  variable[3] = variable[0];
-  variable[3] = CALL_parser_nodes___AMethPropdef___n_methid(variable[3])(variable[3]) /*AMethPropdef::n_methid*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_parser_nodes___AMethPropdef___n_methid(variable[0])(variable[0]) /*AMethPropdef::n_methid*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = variable[0];
-    variable[3] = TAG_Bool((variable[3]==NIT_NULL) || VAL_ISA(variable[3], COLOR_AConcreteInitPropdef, ID_AConcreteInitPropdef)) /*cast AConcreteInitPropdef*/;
+    /* Register variable[3]: Result */
+    variable[3] = TAG_Bool((variable[0]==NIT_NULL) || VAL_ISA(variable[0], COLOR_AConcreteInitPropdef, ID_AConcreteInitPropdef)) /*cast AConcreteInitPropdef*/;
     if (UNTAG_Bool(variable[3])) { /*if*/
-      variable[3] = variable[0];
-      if (once_bool_103) variable[4] = once_value_103;
+      /* Register variable[3]: Once expression result */
+      if (once_bool_243) variable[3] = once_value_243;
       else {
-        variable[4] = NEW_String_string___String___with_native(BOX_NativeString("init"), TAG_Int(4)); /*new String*/
-        variable[4] = CALL_symbol___String___to_symbol(variable[4])(variable[4]) /*String::to_symbol*/;
-        once_value_103 = variable[4];
-        once_bool_103 = true;
+        /* Register variable[3]: Once String constant */
+        if (once_value_244 != NIT_NULL) variable[3] = once_value_244;
+        else {
+          variable[3] = NEW_String_string___String___with_native(BOX_NativeString("init"), TAG_Int(4)) /*new String*/;
+          once_value_244 = variable[3];
+        }
+        /* Register variable[3]: Result */
+        /* Register variable[3]: Result */
+        variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
+        once_value_243 = variable[3];
+        once_bool_243 = true;
       }
-      ATTR_mmbuilder___AMethPropdef____name(variable[3]) /*AMethPropdef::_name*/ = variable[4];
+      /* Register variable[3]: Result */
+      ATTR_mmbuilder___AMethPropdef____name(variable[0]) /*AMethPropdef::_name*/ = variable[3];
     } else { /*if*/
-      variable[3] = variable[0];
-      if (once_bool_104) variable[4] = once_value_104;
+      /* Register variable[3]: Once expression result */
+      if (once_bool_245) variable[3] = once_value_245;
       else {
-        variable[4] = NEW_String_string___String___with_native(BOX_NativeString("main"), TAG_Int(4)); /*new String*/
-        variable[4] = CALL_symbol___String___to_symbol(variable[4])(variable[4]) /*String::to_symbol*/;
-        once_value_104 = variable[4];
-        once_bool_104 = true;
+        /* Register variable[3]: Once String constant */
+        if (once_value_246 != NIT_NULL) variable[3] = once_value_246;
+        else {
+          variable[3] = NEW_String_string___String___with_native(BOX_NativeString("main"), TAG_Int(4)) /*new String*/;
+          once_value_246 = variable[3];
+        }
+        /* Register variable[3]: Result */
+        /* Register variable[3]: Result */
+        variable[3] = CALL_symbol___String___to_symbol(variable[3])(variable[3]) /*String::to_symbol*/;
+        once_value_245 = variable[3];
+        once_bool_245 = true;
       }
-      ATTR_mmbuilder___AMethPropdef____name(variable[3]) /*AMethPropdef::_name*/ = variable[4];
+      /* Register variable[3]: Result */
+      ATTR_mmbuilder___AMethPropdef____name(variable[0]) /*AMethPropdef::_name*/ = variable[3];
     }
   } else { /*if*/
-    variable[3] = variable[0];
-    variable[4] = variable[0];
-    variable[4] = CALL_parser_nodes___AMethPropdef___n_methid(variable[4])(variable[4]) /*AMethPropdef::n_methid*/;
-    variable[4] = CALL_mmbuilder___PMethid___name(variable[4])(variable[4]) /*PMethid::name*/;
-    ATTR_mmbuilder___AMethPropdef____name(variable[3]) /*AMethPropdef::_name*/ = variable[4];
-    variable[3] = variable[0];
-    variable[3] = CALL_parser_nodes___AMethPropdef___n_methid(variable[3])(variable[3]) /*AMethPropdef::n_methid*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_parser_nodes___AMethPropdef___n_methid(variable[0])(variable[0]) /*AMethPropdef::n_methid*/;
+    /* Register variable[3]: Result */
     variable[3] = CALL_mmbuilder___PMethid___name(variable[3])(variable[3]) /*PMethid::name*/;
-    if (once_bool_105) variable[4] = once_value_105;
+    ATTR_mmbuilder___AMethPropdef____name(variable[0]) /*AMethPropdef::_name*/ = variable[3];
+    /* Register variable[3]: Result */
+    variable[3] = CALL_parser_nodes___AMethPropdef___n_methid(variable[0])(variable[0]) /*AMethPropdef::n_methid*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_mmbuilder___PMethid___name(variable[3])(variable[3]) /*PMethid::name*/;
+    /* Register variable[4]: Once expression result */
+    if (once_bool_247) variable[4] = once_value_247;
     else {
-      variable[4] = NEW_String_string___String___with_native(BOX_NativeString("-"), TAG_Int(1)); /*new String*/
+      /* Register variable[4]: Once String constant */
+      if (once_value_248 != NIT_NULL) variable[4] = once_value_248;
+      else {
+        variable[4] = NEW_String_string___String___with_native(BOX_NativeString("-"), TAG_Int(1)) /*new String*/;
+        once_value_248 = variable[4];
+      }
+      /* Register variable[4]: Result */
+      /* Register variable[4]: Result */
       variable[4] = CALL_symbol___String___to_symbol(variable[4])(variable[4]) /*String::to_symbol*/;
-      once_value_105 = variable[4];
-      once_bool_105 = true;
+      once_value_247 = variable[4];
+      once_bool_247 = true;
     }
+    /* Register variable[4]: Result */
+    /* Register variable[3]: Result */
     variable[3] = TAG_Bool((variable[3] == variable[4]) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3],variable[4])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3], variable[4]) /*Object::==*/)))));
     if (UNTAG_Bool(variable[3])) { /*if*/
-      variable[4] = variable[0];
-      variable[4] = CALL_parser_nodes___AMethPropdef___n_signature(variable[4])(variable[4]) /*AMethPropdef::n_signature*/;
+      /* Register variable[3]: Local variable */
+      /* Register variable[4]: Result */
+      variable[4] = CALL_parser_nodes___AMethPropdef___n_signature(variable[0])(variable[0]) /*AMethPropdef::n_signature*/;
       variable[3] = variable[4];
+      /* Register variable[4]: Result */
       variable[4] = TAG_Bool(( variable[3] /*ns*/==NIT_NULL) || VAL_ISA( variable[3] /*ns*/, COLOR_ASignature, ID_ASignature)) /*cast ASignature*/;
-      variable[5] = variable[4];
-      if (UNTAG_Bool(variable[5])) { /* and */
-        variable[5] = CALL_parser_nodes___ASignature___n_params( variable[3] /*ns*/)( variable[3] /*ns*/) /*ASignature::n_params*/;
-        variable[5] = CALL_abstract_collection___Collection___length(variable[5])(variable[5]) /*List::length*/;
-        variable[5] = TAG_Bool((variable[5])==( TAG_Int(0)));
+      /* Ensure var variable[4]: Left 'and' operand*/
+      if (UNTAG_Bool(variable[4])) { /* and */
+        /* Register variable[4]: Result */
+        variable[4] = CALL_parser_nodes___ASignature___n_params( variable[3] /*ns*/)( variable[3] /*ns*/) /*ASignature::n_params*/;
+        /* Register variable[4]: Result */
+        variable[4] = CALL_abstract_collection___Collection___length(variable[4])(variable[4]) /*List::length*/;
+        /* Register variable[4]: Result */
+        variable[4] = TAG_Bool((variable[4])==( TAG_Int(0)));
       }
-      variable[4] = variable[5];
+      /* Register variable[4]: Result */
       if (UNTAG_Bool(variable[4])) { /*if*/
-        variable[4] = variable[0];
-        if (once_bool_106) variable[5] = once_value_106;
+        /* Register variable[4]: Once expression result */
+        if (once_bool_249) variable[4] = once_value_249;
         else {
-          variable[5] = NEW_String_string___String___with_native(BOX_NativeString("unary -"), TAG_Int(7)); /*new String*/
-          variable[5] = CALL_symbol___String___to_symbol(variable[5])(variable[5]) /*String::to_symbol*/;
-          once_value_106 = variable[5];
-          once_bool_106 = true;
+          /* Register variable[4]: Once String constant */
+          if (once_value_250 != NIT_NULL) variable[4] = once_value_250;
+          else {
+            variable[4] = NEW_String_string___String___with_native(BOX_NativeString("unary -"), TAG_Int(7)) /*new String*/;
+            once_value_250 = variable[4];
+          }
+          /* Register variable[4]: Result */
+          /* Register variable[4]: Result */
+          variable[4] = CALL_symbol___String___to_symbol(variable[4])(variable[4]) /*String::to_symbol*/;
+          once_value_249 = variable[4];
+          once_bool_249 = true;
         }
-        ATTR_mmbuilder___AMethPropdef____name(variable[4]) /*AMethPropdef::_name*/ = variable[5];
+        /* Register variable[4]: Result */
+        ATTR_mmbuilder___AMethPropdef____name(variable[0]) /*AMethPropdef::_name*/ = variable[4];
       }
     }
   }
-  variable[4] = variable[0];
-  variable[4] = ATTR_mmbuilder___AMethPropdef____name(variable[4]) /*AMethPropdef::_name*/;
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_mmbuilder___AMethPropdef____name(variable[0]) /*AMethPropdef::_name*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
-  variable[6] = variable[0];
-  variable[7] = NEW_MMMethSrcMethod_syntax_base___MMMethSrcMethod___init(variable[4], variable[5], variable[6]); /*new MMMethSrcMethod*/
-  variable[4] = variable[7];
+  /* Register variable[4]: Result */
+  variable[4] = NEW_MMMethSrcMethod_syntax_base___MMMethSrcMethod___init(variable[4], variable[5], variable[0]) /*new MMMethSrcMethod*/;
   variable[3] = variable[4];
-  variable[4] = variable[0];
-  ATTR_mmbuilder___AMethPropdef____method(variable[4]) /*AMethPropdef::_method*/ =  variable[3] /*prop*/;
+  ATTR_mmbuilder___AMethPropdef____method(variable[0]) /*AMethPropdef::_method*/ =  variable[3] /*prop*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
   CALL_mmbuilder___MMSrcLocalClass___add_src_local_property(variable[4])(variable[4],  variable[1] /*v*/,  variable[3] /*prop*/) /*MMSrcLocalClass::add_src_local_property*/;
-  return_label102: while(false);
+  return_label242: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___AMethPropdef___accept_property_verifier(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 991, LOCATE_mmbuilder___AMethPropdef___accept_property_verifier};
-  val_t variable[7];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 1000, LOCATE_mmbuilder___AMethPropdef___accept_property_verifier};
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = NEW_SignatureBuilder_mmbuilder___SignatureBuilder___init(); /*new SignatureBuilder*/
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = NEW_SignatureBuilder_mmbuilder___SignatureBuilder___init() /*new SignatureBuilder*/;
   CALL_mmbuilder___PropertyVerifierVisitor___signature_builder__eq( variable[1] /*v*/)( variable[1] /*v*/, variable[3]) /*PropertyVerifierVisitor::signature_builder=*/;
   CALL_SUPER_mmbuilder___AMethPropdef___accept_property_verifier(variable[0])(variable[0], variable[1]) /*super AMethPropdef::accept_property_verifier*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_mmbuilder___SignatureBuilder___signature(variable[3])(variable[3]) /*SignatureBuilder::signature*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[3])) { /*if*/
   } else { /*if*/
-    variable[3] = variable[0];
-    variable[3] = ATTR_mmbuilder___AMethPropdef____method(variable[3]) /*AMethPropdef::_method*/;
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_mmbuilder___AMethPropdef____method(variable[0]) /*AMethPropdef::_method*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_mmbuilder___SignatureBuilder___signature(variable[4])(variable[4]) /*SignatureBuilder::signature*/;
     CALL_static_type___MMLocalProperty___signature__eq(variable[3])(variable[3], variable[4]) /*MMLocalProperty::signature=*/;
   }
+  /* Register variable[3]: Local variable */
   variable[3] =  TAG_Int(1);
-  variable[4] = variable[0];
-  variable[4] = CALL_parser_nodes___AMethPropdef___n_visibility(variable[4])(variable[4]) /*AMethPropdef::n_visibility*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_parser_nodes___AMethPropdef___n_visibility(variable[0])(variable[0]) /*AMethPropdef::n_visibility*/;
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  variable[5] = variable[4];
-  if (UNTAG_Bool(variable[5])) { /* and */
-    variable[5] = variable[0];
-    variable[5] = CALL_parser_nodes___AMethPropdef___n_visibility(variable[5])(variable[5]) /*AMethPropdef::n_visibility*/;
-    variable[5] = CALL_mmbuilder___PVisibility___level(variable[5])(variable[5]) /*PVisibility::level*/;
-    variable[5] = TAG_Bool(UNTAG_Int(variable[5])>UNTAG_Int( TAG_Int(1)));
+  /* Ensure var variable[4]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[4])) { /* and */
+    /* Register variable[4]: Result */
+    variable[4] = CALL_parser_nodes___AMethPropdef___n_visibility(variable[0])(variable[0]) /*AMethPropdef::n_visibility*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_mmbuilder___PVisibility___level(variable[4])(variable[4]) /*PVisibility::level*/;
+    /* Register variable[4]: Result */
+    variable[4] = TAG_Bool(UNTAG_Int(variable[4])>UNTAG_Int( TAG_Int(1)));
   }
-  variable[4] = variable[5];
+  /* Register variable[4]: Result */
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    variable[4] = CALL_parser_nodes___AMethPropdef___n_visibility(variable[4])(variable[4]) /*AMethPropdef::n_visibility*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_parser_nodes___AMethPropdef___n_visibility(variable[0])(variable[0]) /*AMethPropdef::n_visibility*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_mmbuilder___PVisibility___level(variable[4])(variable[4]) /*PVisibility::level*/;
     variable[3] = variable[4] /*visibility_level=*/;
   }
-  variable[4] = variable[0];
-  variable[5] = variable[0];
-  variable[5] = ATTR_mmbuilder___AMethPropdef____method(variable[5]) /*AMethPropdef::_method*/;
-  variable[6] = variable[0];
-  variable[6] = CALL_parser_nodes___AMethPropdef___n_kwredef(variable[6])(variable[6]) /*AMethPropdef::n_kwredef*/;
-  variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] ==  NIT_NULL /*null*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  CALL_mmbuilder___PPropdef___process_and_check(variable[4])(variable[4],  variable[1] /*v*/, variable[5], variable[6],  variable[3] /*visibility_level*/) /*PPropdef::process_and_check*/;
-  variable[4] = variable[0];
-  variable[4] = CALL_parser_nodes___AMethPropdef___n_signature(variable[4])(variable[4]) /*AMethPropdef::n_signature*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_mmbuilder___AMethPropdef____method(variable[0]) /*AMethPropdef::_method*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_parser_nodes___AMethPropdef___n_kwredef(variable[0])(variable[0]) /*AMethPropdef::n_kwredef*/;
+  /* Register variable[5]: Result */
+  variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[5])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[5])(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  CALL_mmbuilder___PPropdef___process_and_check(variable[0])(variable[0],  variable[1] /*v*/, variable[4], variable[5],  variable[3] /*visibility_level*/) /*PPropdef::process_and_check*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_parser_nodes___AMethPropdef___n_signature(variable[0])(variable[0]) /*AMethPropdef::n_signature*/;
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    variable[4] = CALL_parser_nodes___AMethPropdef___n_signature(variable[4])(variable[4]) /*AMethPropdef::n_signature*/;
-    variable[5] = variable[0];
-    variable[5] = ATTR_mmbuilder___AMethPropdef____method(variable[5]) /*AMethPropdef::_method*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_parser_nodes___AMethPropdef___n_signature(variable[0])(variable[0]) /*AMethPropdef::n_signature*/;
+    /* Register variable[5]: Result */
+    variable[5] = ATTR_mmbuilder___AMethPropdef____method(variable[0]) /*AMethPropdef::_method*/;
     CALL_mmbuilder___PSignature___check_visibility(variable[4])(variable[4],  variable[1] /*v*/, variable[5]) /*PSignature::check_visibility*/;
   }
-  return_label107: while(false);
+  return_label251: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t mmbuilder___AMethPropdef___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 962, LOCATE_mmbuilder___AMethPropdef___name};
+  struct trace_t trace = {NULL, NULL, 971, LOCATE_mmbuilder___AMethPropdef___name};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___AMethPropdef____name( self) /*AMethPropdef::_name*/;
 }
 void mmbuilder___AMainMethPropdef___process_and_check(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3) {
-  struct trace_t trace = {NULL, NULL, 1018, LOCATE_mmbuilder___AMainMethPropdef___process_and_check};
-  val_t variable[9];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 1027, LOCATE_mmbuilder___AMainMethPropdef___process_and_check};
+  val_t variable[8];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
+  /* Register variable[4]: Local variable */
   variable[4] =  param3;
+  /* Register variable[5]: Method return value and escape marker */
+  /* Register variable[6]: Result */
   variable[6] = CALL_abstractmetamodel___MMLocalProperty___global( variable[2] /*prop*/)( variable[2] /*prop*/) /*MMLocalProperty::global*/;
   CALL_abstractmetamodel___MMGlobalProperty___visibility_level__eq(variable[6])(variable[6],  variable[4] /*visibility_level*/) /*MMGlobalProperty::visibility_level=*/;
-  variable[6] = NEW_Array_array___Array___init(); /*new Array[MMType]*/
+  /* Register variable[6]: Result */
+  variable[6] = NEW_Array_array___Array___init() /*new Array[MMType]*/;
+  /* Register variable[7]: Result */
   variable[7] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
+  /* Register variable[7]: Result */
   variable[7] = CALL_static_type___MMLocalClass___get_type(variable[7])(variable[7]) /*MMLocalClass::get_type*/;
-  variable[8] = NEW_MMSignature_static_type___MMSignature___init(variable[6],  NIT_NULL /*null*/, variable[7]); /*new MMSignature*/
-  variable[6] = variable[8];
+  /* Register variable[6]: Result */
+  variable[6] = NEW_MMSignature_static_type___MMSignature___init(variable[6],  NIT_NULL /*null*/, variable[7]) /*new MMSignature*/;
   CALL_static_type___MMLocalProperty___signature__eq( variable[2] /*prop*/)( variable[2] /*prop*/, variable[6]) /*MMLocalProperty::signature=*/;
-  return_label108: while(false);
+  return_label252: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___ATypePropdef___accept_abs_syntax_visitor(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1047, LOCATE_mmbuilder___ATypePropdef___accept_abs_syntax_visitor};
+  struct trace_t trace = {NULL, NULL, 1056, LOCATE_mmbuilder___ATypePropdef___accept_abs_syntax_visitor};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_syntax_base___ATypePropdef___prop(variable[3])(variable[3]) /*ATypePropdef::prop*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_syntax_base___ATypePropdef___prop(variable[0])(variable[0]) /*ATypePropdef::prop*/;
   CALL_syntax_base___AbsSyntaxVisitor___local_property__eq( variable[1] /*v*/)( variable[1] /*v*/, variable[3]) /*AbsSyntaxVisitor::local_property=*/;
   CALL_SUPER_mmbuilder___ATypePropdef___accept_abs_syntax_visitor(variable[0])(variable[0], variable[1]) /*super ATypePropdef::accept_abs_syntax_visitor*/;
   CALL_syntax_base___AbsSyntaxVisitor___local_property__eq( variable[1] /*v*/)( variable[1] /*v*/,  NIT_NULL /*null*/) /*AbsSyntaxVisitor::local_property=*/;
-  return_label109: while(false);
+  return_label253: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t mmbuilder___ATypePropdef___prop(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1027, LOCATE_mmbuilder___ATypePropdef___prop};
+  struct trace_t trace = {NULL, NULL, 1036, LOCATE_mmbuilder___ATypePropdef___prop};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___ATypePropdef____prop( self) /*ATypePropdef::_prop*/;
 }
 void mmbuilder___ATypePropdef___accept_property_builder(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1029, LOCATE_mmbuilder___ATypePropdef___accept_property_builder};
-  val_t variable[8];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 1038, LOCATE_mmbuilder___ATypePropdef___accept_property_builder};
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
   CALL_SUPER_mmbuilder___ATypePropdef___accept_property_builder(variable[0])(variable[0], variable[1]) /*super ATypePropdef::accept_property_builder*/;
-  variable[4] = variable[0];
-  variable[4] = CALL_parser_nodes___ATypePropdef___n_id(variable[4])(variable[4]) /*ATypePropdef::n_id*/;
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = CALL_parser_nodes___ATypePropdef___n_id(variable[0])(variable[0]) /*ATypePropdef::n_id*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_syntax_base___Token___to_symbol(variable[4])(variable[4]) /*Token::to_symbol*/;
   variable[3] = variable[4];
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
   variable[5] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
-  variable[6] = variable[0];
-  variable[7] = NEW_MMSrcTypeProperty_syntax_base___MMSrcTypeProperty___init( variable[3] /*name*/, variable[5], variable[6]); /*new MMSrcTypeProperty*/
-  variable[5] = variable[7];
+  /* Register variable[5]: Result */
+  variable[5] = NEW_MMSrcTypeProperty_syntax_base___MMSrcTypeProperty___init( variable[3] /*name*/, variable[5], variable[0]) /*new MMSrcTypeProperty*/;
   variable[4] = variable[5];
-  variable[5] = variable[0];
-  ATTR_mmbuilder___ATypePropdef____prop(variable[5]) /*ATypePropdef::_prop*/ =  variable[4] /*prop*/;
+  ATTR_mmbuilder___ATypePropdef____prop(variable[0]) /*ATypePropdef::_prop*/ =  variable[4] /*prop*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
   CALL_mmbuilder___MMSrcLocalClass___add_src_local_property(variable[5])(variable[5],  variable[1] /*v*/,  variable[4] /*prop*/) /*MMSrcLocalClass::add_src_local_property*/;
-  return_label110: while(false);
+  return_label254: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___ATypePropdef___accept_property_verifier(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1038, LOCATE_mmbuilder___ATypePropdef___accept_property_verifier};
-  val_t variable[8];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 1047, LOCATE_mmbuilder___ATypePropdef___accept_property_verifier};
+  val_t variable[7];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
   CALL_SUPER_mmbuilder___ATypePropdef___accept_property_verifier(variable[0])(variable[0], variable[1]) /*super ATypePropdef::accept_property_verifier*/;
-  variable[4] = NEW_Array_array___Array___init(); /*new Array[MMType]*/
-  variable[5] = variable[0];
-  variable[5] = CALL_parser_nodes___ATypePropdef___n_type(variable[5])(variable[5]) /*ATypePropdef::n_type*/;
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = NEW_Array_array___Array___init() /*new Array[MMType]*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_parser_nodes___ATypePropdef___n_type(variable[0])(variable[0]) /*ATypePropdef::n_type*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_syntax_base___PType___get_stype(variable[5])(variable[5],  variable[1] /*v*/) /*PType::get_stype*/;
+  /* Register variable[6]: Result */
   variable[6] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
+  /* Register variable[6]: Result */
   variable[6] = CALL_static_type___MMLocalClass___get_type(variable[6])(variable[6]) /*MMLocalClass::get_type*/;
-  variable[7] = NEW_MMSignature_static_type___MMSignature___init(variable[4], variable[5], variable[6]); /*new MMSignature*/
-  variable[4] = variable[7];
+  /* Register variable[4]: Result */
+  variable[4] = NEW_MMSignature_static_type___MMSignature___init(variable[4], variable[5], variable[6]) /*new MMSignature*/;
   variable[3] = variable[4];
-  variable[4] = variable[0];
-  variable[4] = ATTR_mmbuilder___ATypePropdef____prop(variable[4]) /*ATypePropdef::_prop*/;
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_mmbuilder___ATypePropdef____prop(variable[0]) /*ATypePropdef::_prop*/;
   CALL_static_type___MMLocalProperty___signature__eq(variable[4])(variable[4],  variable[3] /*signature*/) /*MMLocalProperty::signature=*/;
-  variable[5] = variable[0];
-  variable[5] = CALL_parser_nodes___ATypePropdef___n_visibility(variable[5])(variable[5]) /*ATypePropdef::n_visibility*/;
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = CALL_parser_nodes___ATypePropdef___n_visibility(variable[0])(variable[0]) /*ATypePropdef::n_visibility*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_mmbuilder___PVisibility___level(variable[5])(variable[5]) /*PVisibility::level*/;
   variable[4] = variable[5];
-  variable[5] = variable[0];
-  variable[6] = variable[0];
-  variable[6] = ATTR_mmbuilder___ATypePropdef____prop(variable[6]) /*ATypePropdef::_prop*/;
-  variable[7] = variable[0];
-  variable[7] = CALL_parser_nodes___ATypePropdef___n_kwredef(variable[7])(variable[7]) /*ATypePropdef::n_kwredef*/;
-  variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[7] ==  NIT_NULL /*null*/) || ((variable[7] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[7])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[7], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[7])(variable[7],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  CALL_mmbuilder___PPropdef___process_and_check(variable[5])(variable[5],  variable[1] /*v*/, variable[6], variable[7],  variable[4] /*visibility_level*/) /*PPropdef::process_and_check*/;
-  return_label111: while(false);
+  /* Register variable[5]: Result */
+  variable[5] = ATTR_mmbuilder___ATypePropdef____prop(variable[0]) /*ATypePropdef::_prop*/;
+  /* Register variable[6]: Result */
+  variable[6] = CALL_parser_nodes___ATypePropdef___n_kwredef(variable[0])(variable[0]) /*ATypePropdef::n_kwredef*/;
+  /* Register variable[6]: Result */
+  variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] ==  NIT_NULL /*null*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  CALL_mmbuilder___PPropdef___process_and_check(variable[0])(variable[0],  variable[1] /*v*/, variable[5], variable[6],  variable[4] /*visibility_level*/) /*PPropdef::process_and_check*/;
+  return_label255: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___MethidAccumulator___visit(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1059, LOCATE_mmbuilder___MethidAccumulator___visit};
+  struct trace_t trace = {NULL, NULL, 1068, LOCATE_mmbuilder___MethidAccumulator___visit};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(( variable[1] /*n*/==NIT_NULL) || VAL_ISA( variable[1] /*n*/, COLOR_Token, ID_Token)) /*cast Token*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = variable[0];
-    variable[3] = ATTR_mmbuilder___MethidAccumulator____name(variable[3]) /*MethidAccumulator::_name*/;
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_mmbuilder___MethidAccumulator____name(variable[0]) /*MethidAccumulator::_name*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_lexer___Token___text( variable[1] /*n*/)( variable[1] /*n*/) /*Token::text*/;
-    CALL_abstract_collection___IndexedCollection___append(variable[3])(variable[3], variable[4]) /*String::append*/;
+    CALL_abstract_collection___IndexedCollection___append(variable[3])(variable[3], variable[4]) /*Buffer::append*/;
   } else { /*if*/
-    variable[3] = variable[0];
-    CALL_parser_prod___PNode___visit_all( variable[1] /*n*/)( variable[1] /*n*/, variable[3]) /*PNode::visit_all*/;
+    CALL_parser_prod___PNode___visit_all( variable[1] /*n*/)( variable[1] /*n*/, variable[0]) /*PNode::visit_all*/;
   }
-  return_label112: while(false);
+  return_label256: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t mmbuilder___MethidAccumulator___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1058, LOCATE_mmbuilder___MethidAccumulator___name};
+  struct trace_t trace = {NULL, NULL, 1067, LOCATE_mmbuilder___MethidAccumulator___name};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___MethidAccumulator____name( self) /*MethidAccumulator::_name*/;
 }
-void mmbuilder___MethidAccumulator___init(val_t  self, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 1068, LOCATE_mmbuilder___MethidAccumulator___init};
-  val_t variable[4];
-  void **closurevariable = NULL;
-  trace.prev = tracehead; tracehead = &trace;
-  trace.file = LOCATE_mmbuilder;
-  variable[0] =  self;
-  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MethidAccumulator].i]) return;
-  variable[2] = variable[0];
-  variable[3] = NEW_String_string___String___init(); /*new String*/
-  ATTR_mmbuilder___MethidAccumulator____name(variable[2]) /*MethidAccumulator::_name*/ = variable[3];
-  return_label113: while(false);
-  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_MethidAccumulator].i] = 1;
-  tracehead = trace.prev;
-  return;
-}
 void mmbuilder___PMethid___accept_property_builder(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1078, LOCATE_mmbuilder___PMethid___accept_property_builder};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 1082, LOCATE_mmbuilder___PMethid___accept_property_builder};
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = NEW_MethidAccumulator_mmbuilder___MethidAccumulator___init(); /*new MethidAccumulator*/
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = NEW_MethidAccumulator_parser_prod___Visitor___init() /*new MethidAccumulator*/;
   variable[3] = variable[4];
-  variable[4] = variable[0];
-  CALL_parser_prod___Visitor___visit( variable[3] /*accumulator*/)( variable[3] /*accumulator*/, variable[4]) /*MethidAccumulator::visit*/;
-  variable[4] = variable[0];
-  variable[5] = CALL_mmbuilder___MethidAccumulator___name( variable[3] /*accumulator*/)( variable[3] /*accumulator*/) /*MethidAccumulator::name*/;
-  variable[5] = CALL_symbol___String___to_symbol(variable[5])(variable[5]) /*String::to_symbol*/;
-  ATTR_mmbuilder___PMethid____name(variable[4]) /*PMethid::_name*/ = variable[5];
+  CALL_parser_prod___Visitor___visit( variable[3] /*accumulator*/)( variable[3] /*accumulator*/, variable[0]) /*MethidAccumulator::visit*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_mmbuilder___MethidAccumulator___name( variable[3] /*accumulator*/)( variable[3] /*accumulator*/) /*MethidAccumulator::name*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_string___Object___to_s(variable[4])(variable[4]) /*Buffer::to_s*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_symbol___String___to_symbol(variable[4])(variable[4]) /*String::to_symbol*/;
+  ATTR_mmbuilder___PMethid____name(variable[0]) /*PMethid::_name*/ = variable[4];
   CALL_SUPER_mmbuilder___PMethid___accept_property_builder(variable[0])(variable[0], variable[1]) /*super PMethid::accept_property_builder*/;
-  return_label114: while(false);
+  return_label257: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t mmbuilder___PMethid___name(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1075, LOCATE_mmbuilder___PMethid___name};
+  struct trace_t trace = {NULL, NULL, 1079, LOCATE_mmbuilder___PMethid___name};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___PMethid____name( self) /*PMethid::_name*/;
 }
 void mmbuilder___PSignature___check_visibility(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 1088, LOCATE_mmbuilder___PSignature___check_visibility};
+  struct trace_t trace = {NULL, NULL, 1092, LOCATE_mmbuilder___PSignature___check_visibility};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_mmbuilder, 1088);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_mmbuilder, 1092);
   nit_exit(1);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___ASignature___accept_property_verifier(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1093, LOCATE_mmbuilder___ASignature___accept_property_verifier};
+  struct trace_t trace = {NULL, NULL, 1097, LOCATE_mmbuilder___ASignature___accept_property_verifier};
+      static val_t once_value_259 = NIT_NULL; /* Once value for string variable[4]*/
   val_t variable[10];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
   CALL_SUPER_mmbuilder___ASignature___accept_property_verifier(variable[0])(variable[0], variable[1]) /*super ASignature::accept_property_verifier*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_mmbuilder___SignatureBuilder___untyped_params(variable[3])(variable[3]) /*SignatureBuilder::untyped_params*/;
-  variable[3] = CALL_abstract_collection___Collection___is_empty(variable[3])(variable[3]) /*AbstractArray::is_empty*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___Collection___is_empty(variable[3])(variable[3]) /*AbstractArrayRead::is_empty*/;
   if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[3])))) { /*if*/
+    /* Register variable[3]: Result */
     variable[3] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+    /* Register variable[3]: Result */
     variable[3] = CALL_mmbuilder___SignatureBuilder___untyped_params(variable[3])(variable[3]) /*SignatureBuilder::untyped_params*/;
-    variable[3] = CALL_abstract_collection___Collection___first(variable[3])(variable[3]) /*IndexedCollection::first*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_abstract_collection___Collection___first(variable[3])(variable[3]) /*IndexedCollectionRead::first*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_mmbuilder___SignatureBuilder___params(variable[4])(variable[4]) /*SignatureBuilder::params*/;
-    variable[4] = CALL_abstract_collection___Collection___first(variable[4])(variable[4]) /*IndexedCollection::first*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_abstract_collection___Collection___first(variable[4])(variable[4]) /*IndexedCollectionRead::first*/;
+    /* Register variable[3]: Result */
     variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] == variable[4]) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3],variable[4])):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3], variable[4]) /*Object::==*/)))))));
-    variable[4] = variable[3];
-    if (!UNTAG_Bool(variable[4])) { /* or */
-      variable[4] = variable[0];
-      variable[4] = CALL_parser_nodes___ASignature___n_type(variable[4])(variable[4]) /*ASignature::n_type*/;
-      variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
-    }
-    variable[3] = variable[4];
-    if (UNTAG_Bool(variable[3])) { /*if*/
-      variable[3] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
-      variable[3] = CALL_mmbuilder___SignatureBuilder___untyped_params(variable[3])(variable[3]) /*SignatureBuilder::untyped_params*/;
-      variable[3] = CALL_abstract_collection___Collection___first(variable[3])(variable[3]) /*IndexedCollection::first*/;
-      variable[4] = NEW_String_string___String___with_native(BOX_NativeString("Syntax error: untyped parameter."), TAG_Int(32)); /*new String*/
-      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[3], variable[4]) /*AbsSyntaxVisitor::error*/;
-      goto return_label115;
-    }
-  } else { /*if*/
-    variable[3] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
-    variable[3] = CALL_mmbuilder___SignatureBuilder___params(variable[3])(variable[3]) /*SignatureBuilder::params*/;
-    variable[3] = CALL_abstract_collection___Collection___is_empty(variable[3])(variable[3]) /*AbstractArray::is_empty*/;
-    variable[3] =  TAG_Bool(!UNTAG_Bool(variable[3]));
+    /* Ensure var variable[3]: Left 'or' operand*/
     if (!UNTAG_Bool(variable[3])) { /* or */
-      variable[3] = variable[0];
-      variable[3] = CALL_parser_nodes___ASignature___n_type(variable[3])(variable[3]) /*ASignature::n_type*/;
+      /* Register variable[3]: Result */
+      variable[3] = CALL_parser_nodes___ASignature___n_type(variable[0])(variable[0]) /*ASignature::n_type*/;
+      /* Register variable[3]: Result */
       variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
     }
+    /* Register variable[3]: Result */
     if (UNTAG_Bool(variable[3])) { /*if*/
-      variable[4] = NEW_Array_array___Array___init(); /*new Array[MMType]*/
+      /* Register variable[3]: Result */
+      variable[3] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+      /* Register variable[3]: Result */
+      variable[3] = CALL_mmbuilder___SignatureBuilder___untyped_params(variable[3])(variable[3]) /*SignatureBuilder::untyped_params*/;
+      /* Register variable[3]: Result */
+      variable[3] = CALL_abstract_collection___Collection___first(variable[3])(variable[3]) /*IndexedCollectionRead::first*/;
+      /* Register variable[4]: Once String constant */
+      if (once_value_259 != NIT_NULL) variable[4] = once_value_259;
+      else {
+        variable[4] = NEW_String_string___String___with_native(BOX_NativeString("Syntax error: untyped parameter."), TAG_Int(32)) /*new String*/;
+        once_value_259 = variable[4];
+      }
+      /* Register variable[4]: Result */
+      CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[3], variable[4]) /*AbsSyntaxVisitor::error*/;
+      goto return_label258;
+    }
+  } else { /*if*/
+    /* Register variable[3]: Result */
+    variable[3] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_mmbuilder___SignatureBuilder___params(variable[3])(variable[3]) /*SignatureBuilder::params*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_abstract_collection___Collection___is_empty(variable[3])(variable[3]) /*AbstractArrayRead::is_empty*/;
+    variable[3] =  TAG_Bool(!UNTAG_Bool(variable[3])) /* Ensure var: Left 'or' operand*/;
+    if (!UNTAG_Bool(variable[3])) { /* or */
+      /* Register variable[3]: Result */
+      variable[3] = CALL_parser_nodes___ASignature___n_type(variable[0])(variable[0]) /*ASignature::n_type*/;
+      /* Register variable[3]: Result */
+      variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
+    }
+    /* Register variable[3]: Result */
+    if (UNTAG_Bool(variable[3])) { /*if*/
+      /* Register variable[3]: Local variable */
+      /* Register variable[4]: Result */
+      variable[4] = NEW_Array_array___Array___init() /*new Array[MMType]*/;
       variable[3] = variable[4];
+      /* Register variable[4]: Result */
       variable[4] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+      /* Register variable[4]: Result */
       variable[4] = CALL_mmbuilder___SignatureBuilder___params(variable[4])(variable[4]) /*SignatureBuilder::params*/;
-      variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*AbstractArray::iterator*/;
+      /* Register variable[4]: For iterator */
+      variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*AbstractArrayRead::iterator*/;
       while (true) { /*for*/
+        /* Register variable[5]: For 'is_ok' result */
         variable[5] = CALL_abstract_collection___Iterator___is_ok(variable[4])(variable[4]) /*ArrayIterator::is_ok*/;
         if (!UNTAG_Bool(variable[5])) break; /*for*/
-        variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/;
+        variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+        /* Register variable[6]: Local variable */
         variable[6] = variable[5];
+        /* Register variable[7]: Result */
         variable[7] = CALL_mmbuilder___PParam___stype( variable[6] /*p*/)( variable[6] /*p*/) /*PParam::stype*/;
         CALL_abstract_collection___SimpleCollection___add( variable[3] /*pars*/)( variable[3] /*pars*/, variable[7]) /*AbstractArray::add*/;
-        continue_116: while(0);
+        continue_260: while(0);
         CALL_abstract_collection___Iterator___next(variable[4])(variable[4]) /*ArrayIterator::next*/;
       }
-      break_116: while(0);
+      break_260: while(0);
+      /* Register variable[4]: Local variable */
       variable[4] =  NIT_NULL /*null*/;
-      variable[5] = variable[0];
-      variable[5] = CALL_parser_nodes___ASignature___n_type(variable[5])(variable[5]) /*ASignature::n_type*/;
+      /* Register variable[5]: Result */
+      variable[5] = CALL_parser_nodes___ASignature___n_type(variable[0])(variable[0]) /*ASignature::n_type*/;
+      /* Register variable[5]: Result */
       variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[5])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[5])(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))))));
       if (UNTAG_Bool(variable[5])) { /*if*/
-        variable[5] = variable[0];
-        variable[5] = CALL_parser_nodes___ASignature___n_type(variable[5])(variable[5]) /*ASignature::n_type*/;
+        /* Register variable[5]: Result */
+        variable[5] = CALL_parser_nodes___ASignature___n_type(variable[0])(variable[0]) /*ASignature::n_type*/;
+        /* Register variable[5]: Result */
         variable[5] = CALL_syntax_base___PType___get_stype(variable[5])(variable[5],  variable[1] /*v*/) /*PType::get_stype*/;
         variable[4] = variable[5] /*ret=*/;
       }
+      /* Register variable[5]: Result */
       variable[5] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+      /* Register variable[6]: Result */
       variable[6] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
+      /* Register variable[6]: Result */
       variable[6] = CALL_static_type___MMLocalClass___get_type(variable[6])(variable[6]) /*MMLocalClass::get_type*/;
-      variable[7] = NEW_MMSignature_static_type___MMSignature___init( variable[3] /*pars*/,  variable[4] /*ret*/, variable[6]); /*new MMSignature*/
-      variable[6] = variable[7];
+      /* Register variable[6]: Result */
+      variable[6] = NEW_MMSignature_static_type___MMSignature___init( variable[3] /*pars*/,  variable[4] /*ret*/, variable[6]) /*new MMSignature*/;
       CALL_mmbuilder___SignatureBuilder___signature__eq(variable[5])(variable[5], variable[6]) /*SignatureBuilder::signature=*/;
+      /* Register variable[5]: Result */
       variable[5] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+      /* Register variable[5]: Result */
       variable[5] = CALL_mmbuilder___SignatureBuilder___vararg_rank(variable[5])(variable[5]) /*SignatureBuilder::vararg_rank*/;
+      /* Register variable[5]: Result */
       variable[5] = TAG_Bool(UNTAG_Int(variable[5])>=UNTAG_Int( TAG_Int(0)));
       if (UNTAG_Bool(variable[5])) { /*if*/
+        /* Register variable[5]: Result */
         variable[5] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+        /* Register variable[5]: Result */
         variable[5] = CALL_mmbuilder___SignatureBuilder___signature(variable[5])(variable[5]) /*SignatureBuilder::signature*/;
+        /* Register variable[6]: Result */
         variable[6] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+        /* Register variable[6]: Result */
         variable[6] = CALL_mmbuilder___SignatureBuilder___vararg_rank(variable[6])(variable[6]) /*SignatureBuilder::vararg_rank*/;
         CALL_vararg___MMSignature___vararg_rank__eq(variable[5])(variable[5], variable[6]) /*MMSignature::vararg_rank=*/;
       }
+      /* Register variable[5]: Result */
       variable[5] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+      /* Register variable[5]: Result */
       variable[5] = CALL_mmbuilder___SignatureBuilder___closure_decls(variable[5])(variable[5]) /*SignatureBuilder::closure_decls*/;
-      variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*AbstractArray::iterator*/;
+      /* Register variable[5]: For iterator */
+      variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*AbstractArrayRead::iterator*/;
       while (true) { /*for*/
+        /* Register variable[6]: For 'is_ok' result */
         variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*ArrayIterator::is_ok*/;
         if (!UNTAG_Bool(variable[6])) break; /*for*/
-        variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/;
+        variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+        /* Register variable[7]: Local variable */
         variable[7] = variable[6];
+        /* Register variable[8]: Result */
         variable[8] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+        /* Register variable[8]: Result */
         variable[8] = CALL_mmbuilder___SignatureBuilder___signature(variable[8])(variable[8]) /*SignatureBuilder::signature*/;
+        /* Register variable[8]: Result */
         variable[8] = CALL_static_type___MMSignature___closures(variable[8])(variable[8]) /*MMSignature::closures*/;
+        /* Register variable[9]: Result */
         variable[9] = CALL_syntax_base___PClosureDecl___variable( variable[7] /*clos*/)( variable[7] /*clos*/) /*AClosureDecl::variable*/;
+        /* Register variable[9]: Result */
         variable[9] = CALL_syntax_base___ClosureVariable___closure(variable[9])(variable[9]) /*ClosureVariable::closure*/;
         CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
-        continue_117: while(0);
+        continue_261: while(0);
         CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*ArrayIterator::next*/;
       }
-      break_117: while(0);
+      break_261: while(0);
     }
   }
-  return_label115: while(false);
+  return_label258: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___ASignature___check_visibility(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 1120, LOCATE_mmbuilder___ASignature___check_visibility};
+  struct trace_t trace = {NULL, NULL, 1124, LOCATE_mmbuilder___ASignature___check_visibility};
   val_t variable[8];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Result */
   variable[4] = CALL_abstractmetamodel___MMLocalProperty___global( variable[2] /*p*/)( variable[2] /*p*/) /*MMLocalProperty::global*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_abstractmetamodel___MMGlobalProperty___visibility_level(variable[4])(variable[4]) /*MMGlobalProperty::visibility_level*/;
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(UNTAG_Int(variable[4])>=UNTAG_Int( TAG_Int(3)));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    goto return_label118;
+    goto return_label262;
   }
-  variable[4] = variable[0];
-  variable[4] = CALL_parser_nodes___ASignature___n_params(variable[4])(variable[4]) /*ASignature::n_params*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_parser_nodes___ASignature___n_params(variable[0])(variable[0]) /*ASignature::n_params*/;
+  /* Register variable[4]: For iterator */
   variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*List::iterator*/;
   while (true) { /*for*/
+    /* Register variable[5]: For 'is_ok' result */
     variable[5] = CALL_abstract_collection___Iterator___is_ok(variable[4])(variable[4]) /*ListIterator::is_ok*/;
     if (!UNTAG_Bool(variable[5])) break; /*for*/
-    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ListIterator::item*/;
+    variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ListIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[6]: Local variable */
     variable[6] = variable[5];
+    /* Register variable[7]: Result */
     variable[7] = CALL_parser_nodes___PParam___n_type( variable[6] /*n*/)( variable[6] /*n*/) /*PParam::n_type*/;
+    /* Register variable[7]: Result */
     variable[7] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[7] ==  NIT_NULL /*null*/) || ((variable[7] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[7])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[7], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[7])(variable[7],  NIT_NULL /*null*/) /*Object::==*/)))))));
     if (UNTAG_Bool(variable[7])) { /*if*/
+      /* Register variable[7]: Result */
       variable[7] = CALL_parser_nodes___PParam___n_type( variable[6] /*n*/)( variable[6] /*n*/) /*PParam::n_type*/;
       CALL_mmbuilder___PType___check_visibility(variable[7])(variable[7],  variable[1] /*v*/,  variable[2] /*p*/) /*PType::check_visibility*/;
     }
-    continue_119: while(0);
+    continue_263: while(0);
     CALL_abstract_collection___Iterator___next(variable[4])(variable[4]) /*ListIterator::next*/;
   }
-  break_119: while(0);
-  variable[4] = variable[0];
-  variable[4] = CALL_parser_nodes___ASignature___n_type(variable[4])(variable[4]) /*ASignature::n_type*/;
+  break_263: while(0);
+  /* Register variable[4]: Result */
+  variable[4] = CALL_parser_nodes___ASignature___n_type(variable[0])(variable[0]) /*ASignature::n_type*/;
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[4] ==  NIT_NULL /*null*/) || ((variable[4] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[4])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[4], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[4])(variable[4],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    variable[4] = variable[0];
-    variable[4] = CALL_parser_nodes___ASignature___n_type(variable[4])(variable[4]) /*ASignature::n_type*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_parser_nodes___ASignature___n_type(variable[0])(variable[0]) /*ASignature::n_type*/;
     CALL_mmbuilder___PType___check_visibility(variable[4])(variable[4],  variable[1] /*v*/,  variable[2] /*p*/) /*PType::check_visibility*/;
   }
-  return_label118: while(false);
+  return_label262: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t mmbuilder___PParam___position(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1131, LOCATE_mmbuilder___PParam___position};
+  struct trace_t trace = {NULL, NULL, 1135, LOCATE_mmbuilder___PParam___position};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___PParam____position( self) /*PParam::_position*/;
 }
 val_t mmbuilder___PParam___variable(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1133, LOCATE_mmbuilder___PParam___variable};
+  struct trace_t trace = {NULL, NULL, 1137, LOCATE_mmbuilder___PParam___variable};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___PParam____variable( self) /*PParam::_variable*/;
 }
 void mmbuilder___PParam___accept_property_verifier(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1138, LOCATE_mmbuilder___PParam___accept_property_verifier};
+  struct trace_t trace = {NULL, NULL, 1142, LOCATE_mmbuilder___PParam___accept_property_verifier};
+          static val_t once_value_266 = NIT_NULL; /* Once value for string variable[7]*/
   val_t variable[9];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
   CALL_SUPER_mmbuilder___PParam___accept_property_verifier(variable[0])(variable[0], variable[1]) /*super PParam::accept_property_verifier*/;
-  variable[3] = variable[0];
-  variable[4] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
-  variable[4] = CALL_mmbuilder___SignatureBuilder___params(variable[4])(variable[4]) /*SignatureBuilder::params*/;
-  variable[4] = CALL_abstract_collection___Collection___length(variable[4])(variable[4]) /*AbstractArray::length*/;
-  ATTR_mmbuilder___PParam____position(variable[3]) /*PParam::_position*/ = variable[4];
-  variable[3] = variable[0];
-  variable[4] = variable[0];
-  variable[4] = CALL_parser_nodes___PParam___n_id(variable[4])(variable[4]) /*PParam::n_id*/;
-  variable[4] = CALL_syntax_base___Token___to_symbol(variable[4])(variable[4]) /*Token::to_symbol*/;
-  variable[5] = variable[0];
-  variable[6] = NEW_ParamVariable_syntax_base___ParamVariable___init(variable[4], variable[5]); /*new ParamVariable*/
-  variable[4] = variable[6];
-  ATTR_mmbuilder___PParam____variable(variable[3]) /*PParam::_variable*/ = variable[4];
+  /* Register variable[3]: Result */
   variable[3] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_mmbuilder___SignatureBuilder___params(variable[3])(variable[3]) /*SignatureBuilder::params*/;
-  variable[4] = variable[0];
-  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___Collection___length(variable[3])(variable[3]) /*AbstractArrayRead::length*/;
+  ATTR_mmbuilder___PParam____position(variable[0]) /*PParam::_position*/ = variable[3];
+  /* Register variable[3]: Result */
+  variable[3] = CALL_parser_nodes___PParam___n_id(variable[0])(variable[0]) /*PParam::n_id*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_syntax_base___Token___to_symbol(variable[3])(variable[3]) /*Token::to_symbol*/;
+  /* Register variable[3]: Result */
+  variable[3] = NEW_ParamVariable_syntax_base___ParamVariable___init(variable[3], variable[0]) /*new ParamVariable*/;
+  ATTR_mmbuilder___PParam____variable(variable[0]) /*PParam::_variable*/ = variable[3];
+  /* Register variable[3]: Result */
   variable[3] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_mmbuilder___SignatureBuilder___params(variable[3])(variable[3]) /*SignatureBuilder::params*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[0]) /*AbstractArray::add*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+  /* Register variable[3]: Result */
   variable[3] = CALL_mmbuilder___SignatureBuilder___untyped_params(variable[3])(variable[3]) /*SignatureBuilder::untyped_params*/;
-  variable[4] = variable[0];
-  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[4]) /*AbstractArray::add*/;
-  variable[3] = variable[0];
-  variable[3] = CALL_parser_nodes___PParam___n_type(variable[3])(variable[3]) /*PParam::n_type*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3], variable[0]) /*AbstractArray::add*/;
+  /* Register variable[3]: Result */
+  variable[3] = CALL_parser_nodes___PParam___n_type(variable[0])(variable[0]) /*PParam::n_type*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[4] = variable[0];
-    variable[4] = CALL_parser_nodes___PParam___n_type(variable[4])(variable[4]) /*PParam::n_type*/;
+    /* Register variable[3]: Local variable */
+    /* Register variable[4]: Result */
+    variable[4] = CALL_parser_nodes___PParam___n_type(variable[0])(variable[0]) /*PParam::n_type*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_syntax_base___PType___get_stype(variable[4])(variable[4],  variable[1] /*v*/) /*PType::get_stype*/;
     variable[3] = variable[4];
+    /* Register variable[4]: Result */
     variable[4] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_mmbuilder___SignatureBuilder___untyped_params(variable[4])(variable[4]) /*SignatureBuilder::untyped_params*/;
-    variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*AbstractArray::iterator*/;
+    /* Register variable[4]: For iterator */
+    variable[4] = CALL_abstract_collection___Collection___iterator(variable[4])(variable[4]) /*AbstractArrayRead::iterator*/;
     while (true) { /*for*/
+      /* Register variable[5]: For 'is_ok' result */
       variable[5] = CALL_abstract_collection___Iterator___is_ok(variable[4])(variable[4]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[5])) break; /*for*/
-      variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/;
+      variable[5] = CALL_abstract_collection___Iterator___item(variable[4])(variable[4]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[6]: Local variable */
       variable[6] = variable[5];
       CALL_mmbuilder___PParam___stype__eq( variable[6] /*p*/)( variable[6] /*p*/,  variable[3] /*stype*/) /*PParam::stype=*/;
-      variable[7] = variable[0];
-      variable[7] = CALL_mmbuilder___PParam___is_vararg(variable[7])(variable[7]) /*PParam::is_vararg*/;
+      /* Register variable[7]: Result */
+      variable[7] = CALL_mmbuilder___PParam___is_vararg(variable[0])(variable[0]) /*PParam::is_vararg*/;
       if (UNTAG_Bool(variable[7])) { /*if*/
+        /* Register variable[7]: Result */
         variable[7] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+        /* Register variable[7]: Result */
         variable[7] = CALL_mmbuilder___SignatureBuilder___vararg_rank(variable[7])(variable[7]) /*SignatureBuilder::vararg_rank*/;
+        /* Register variable[8]: Result */
         variable[8] = TAG_Int(-UNTAG_Int( TAG_Int(1)));
+        /* Register variable[7]: Result */
         variable[7] = TAG_Bool((variable[7])==(variable[8]));
         if (UNTAG_Bool(variable[7])) { /*if*/
+          /* Register variable[7]: Result */
           variable[7] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+          /* Register variable[8]: Result */
           variable[8] = CALL_syntax_base___PParam___position( variable[6] /*p*/)( variable[6] /*p*/) /*PParam::position*/;
           CALL_mmbuilder___SignatureBuilder___vararg_rank__eq(variable[7])(variable[7], variable[8]) /*SignatureBuilder::vararg_rank=*/;
         } else { /*if*/
-          variable[7] = variable[0];
-          variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Error: A vararg parameter is already defined."), TAG_Int(45)); /*new String*/
-          CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[7], variable[8]) /*AbsSyntaxVisitor::error*/;
+          /* Register variable[7]: Once String constant */
+          if (once_value_266 != NIT_NULL) variable[7] = once_value_266;
+          else {
+            variable[7] = NEW_String_string___String___with_native(BOX_NativeString("Error: A vararg parameter is already defined."), TAG_Int(45)) /*new String*/;
+            once_value_266 = variable[7];
+          }
+          /* Register variable[7]: Result */
+          CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[7]) /*AbsSyntaxVisitor::error*/;
         }
+        /* Register variable[7]: Result */
         variable[7] = CALL_syntax_base___AbsSyntaxVisitor___type_array( variable[1] /*v*/)( variable[1] /*v*/,  variable[3] /*stype*/) /*AbsSyntaxVisitor::type_array*/;
         variable[3] = variable[7] /*stype=*/;
       }
+      /* Register variable[7]: Result */
       variable[7] = CALL_syntax_base___PParam___variable( variable[6] /*p*/)( variable[6] /*p*/) /*PParam::variable*/;
       CALL_syntax_base___Variable___stype__eq(variable[7])(variable[7],  variable[3] /*stype*/) /*Variable::stype=*/;
-      continue_121: while(0);
+      continue_265: while(0);
       CALL_abstract_collection___Iterator___next(variable[4])(variable[4]) /*ArrayIterator::next*/;
     }
-    break_121: while(0);
+    break_265: while(0);
+    /* Register variable[4]: Result */
     variable[4] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+    /* Register variable[4]: Result */
     variable[4] = CALL_mmbuilder___SignatureBuilder___untyped_params(variable[4])(variable[4]) /*SignatureBuilder::untyped_params*/;
     CALL_abstract_collection___RemovableCollection___clear(variable[4])(variable[4]) /*AbstractArray::clear*/;
   }
-  return_label120: while(false);
+  return_label264: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t mmbuilder___PParam___stype(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1135, LOCATE_mmbuilder___PParam___stype};
+  struct trace_t trace = {NULL, NULL, 1139, LOCATE_mmbuilder___PParam___stype};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___PParam____stype( self) /*PParam::_stype*/;
 }
 void mmbuilder___PParam___stype__eq(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1135, LOCATE_mmbuilder___PParam___stype__eq};
+  struct trace_t trace = {NULL, NULL, 1139, LOCATE_mmbuilder___PParam___stype__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   ATTR_mmbuilder___PParam____stype( self) /*PParam::_stype*/ =  param0;
@@ -4135,228 +6036,306 @@ void mmbuilder___PParam___stype__eq(val_t  self, val_t  param0) {
   return;
 }
 val_t mmbuilder___PParam___is_vararg(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1163, LOCATE_mmbuilder___PParam___is_vararg};
+  struct trace_t trace = {NULL, NULL, 1167, LOCATE_mmbuilder___PParam___is_vararg};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_mmbuilder, 1163);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_mmbuilder, 1167);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 val_t mmbuilder___AParam___is_vararg(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1167, LOCATE_mmbuilder___AParam___is_vararg};
+  struct trace_t trace = {NULL, NULL, 1171, LOCATE_mmbuilder___AParam___is_vararg};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_parser_nodes___AParam___n_dotdotdot(variable[2])(variable[2]) /*AParam::n_dotdotdot*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_parser_nodes___AParam___n_dotdotdot(variable[0])(variable[0]) /*AParam::n_dotdotdot*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))))));
   variable[1] = variable[2];
-  goto return_label122;
-  return_label122: while(false);
+  goto return_label267;
+  return_label267: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t mmbuilder___AClosureDecl___variable(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 1171, LOCATE_mmbuilder___AClosureDecl___variable};
+  struct trace_t trace = {NULL, NULL, 1175, LOCATE_mmbuilder___AClosureDecl___variable};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   tracehead = trace.prev;
   return ATTR_mmbuilder___AClosureDecl____variable( self) /*AClosureDecl::_variable*/;
 }
 void mmbuilder___AClosureDecl___accept_property_verifier(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1173, LOCATE_mmbuilder___AClosureDecl___accept_property_verifier};
-  val_t variable[12];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 1177, LOCATE_mmbuilder___AClosureDecl___accept_property_verifier};
+    static val_t once_value_269 = NIT_NULL; /* Once value for string variable[5]*/
+  val_t variable[10];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
   variable[4] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
   variable[3] = variable[4];
-  variable[4] = NEW_SignatureBuilder_mmbuilder___SignatureBuilder___init(); /*new SignatureBuilder*/
+  /* Register variable[4]: Result */
+  variable[4] = NEW_SignatureBuilder_mmbuilder___SignatureBuilder___init() /*new SignatureBuilder*/;
   CALL_mmbuilder___PropertyVerifierVisitor___signature_builder__eq( variable[1] /*v*/)( variable[1] /*v*/, variable[4]) /*PropertyVerifierVisitor::signature_builder=*/;
   CALL_SUPER_mmbuilder___AClosureDecl___accept_property_verifier(variable[0])(variable[0], variable[1]) /*super AClosureDecl::accept_property_verifier*/;
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
   variable[5] = CALL_mmbuilder___PropertyVerifierVisitor___signature_builder( variable[1] /*v*/)( variable[1] /*v*/) /*PropertyVerifierVisitor::signature_builder*/;
+  /* Register variable[5]: Result */
   variable[5] = CALL_mmbuilder___SignatureBuilder___signature(variable[5])(variable[5]) /*SignatureBuilder::signature*/;
   variable[4] = variable[5];
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool(( variable[4] /*sig*/ ==  NIT_NULL /*null*/) || (( variable[4] /*sig*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[4] /*sig*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*sig*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[4] /*sig*/)( variable[4] /*sig*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[5])) { /*if*/
-    variable[5] = NEW_Array_array___Array___init(); /*new Array[MMType]*/
+    /* Register variable[5]: Result */
+    variable[5] = NEW_Array_array___Array___init() /*new Array[MMType]*/;
+    /* Register variable[6]: Result */
     variable[6] = CALL_syntax_base___AbsSyntaxVisitor___local_class( variable[1] /*v*/)( variable[1] /*v*/) /*AbsSyntaxVisitor::local_class*/;
+    /* Register variable[6]: Result */
     variable[6] = CALL_static_type___MMLocalClass___get_type(variable[6])(variable[6]) /*MMLocalClass::get_type*/;
-    variable[7] = NEW_MMSignature_static_type___MMSignature___init(variable[5],  NIT_NULL /*null*/, variable[6]); /*new MMSignature*/
-    variable[5] = variable[7];
+    /* Register variable[5]: Result */
+    variable[5] = NEW_MMSignature_static_type___MMSignature___init(variable[5],  NIT_NULL /*null*/, variable[6]) /*new MMSignature*/;
     variable[4] = variable[5] /*sig=*/;
   }
+  /* Register variable[5]: Result */
   variable[5] = CALL_static_type___MMSignature___return_type( variable[4] /*sig*/)( variable[4] /*sig*/) /*MMSignature::return_type*/;
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[5])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[5])(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  variable[6] = variable[5];
-  if (UNTAG_Bool(variable[6])) { /* and */
-    variable[6] = variable[0];
-    variable[6] = CALL_parser_nodes___AClosureDecl___n_kwbreak(variable[6])(variable[6]) /*AClosureDecl::n_kwbreak*/;
-    variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[6] ==  NIT_NULL /*null*/) || ((variable[6] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[6])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[6], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[6])(variable[6],  NIT_NULL /*null*/) /*Object::==*/)))))));
+  /* Ensure var variable[5]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[5])) { /* and */
+    /* Register variable[5]: Result */
+    variable[5] = CALL_parser_nodes___AClosureDecl___n_kwbreak(variable[0])(variable[0]) /*AClosureDecl::n_kwbreak*/;
+    /* Register variable[5]: Result */
+    variable[5] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[5] ==  NIT_NULL /*null*/) || ((variable[5] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[5])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[5], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[5])(variable[5],  NIT_NULL /*null*/) /*Object::==*/)))))));
   }
-  variable[5] = variable[6];
+  /* Register variable[5]: Result */
   if (UNTAG_Bool(variable[5])) { /*if*/
-    variable[5] = variable[0];
-    variable[6] = NEW_String_string___String___with_native(BOX_NativeString("Syntax Error: A break bloc cannot have a return value."), TAG_Int(54)); /*new String*/
-    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[5], variable[6]) /*AbsSyntaxVisitor::error*/;
+    /* Register variable[5]: Once String constant */
+    if (once_value_269 != NIT_NULL) variable[5] = once_value_269;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString("Syntax Error: A break block cannot have a return value."), TAG_Int(55)) /*new String*/;
+      once_value_269 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[5]) /*AbsSyntaxVisitor::error*/;
   }
-  variable[6] = NEW_Array_array___Array___init(); /*new Array[MMType]*/
-  variable[7] = NEW_MMSignature_static_type___MMSignature___init(variable[6],  NIT_NULL /*null*/,  NIT_NULL /*null*/); /*new MMSignature*/
-  variable[6] = variable[7];
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
+  variable[6] = NEW_Array_array___Array___init() /*new Array[MMType]*/;
+  /* Register variable[6]: Result */
+  variable[6] = NEW_MMSignature_static_type___MMSignature___init(variable[6],  NIT_NULL /*null*/,  NIT_NULL /*null*/) /*new MMSignature*/;
   variable[5] = variable[6];
-  variable[7] = NEW_MMClosure_static_type___MMClosure___init( variable[5] /*finalize_sig*/,  TAG_Bool(false),  TAG_Bool(true)); /*new MMClosure*/
+  /* Register variable[6]: Local variable */
+  /* Register variable[7]: Result */
+  variable[7] = NEW_MMClosure_static_type___MMClosure___init( variable[5] /*finalize_sig*/,  TAG_Bool(false),  TAG_Bool(true)) /*new MMClosure*/;
   variable[6] = variable[7];
+  /* Register variable[7]: Result */
   variable[7] = CALL_static_type___MMSignature___closures( variable[4] /*sig*/)( variable[4] /*sig*/) /*MMSignature::closures*/;
   CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7],  variable[6] /*finalizer_clos*/) /*AbstractArray::add*/;
-  variable[8] = variable[0];
-  variable[8] = CALL_parser_nodes___AClosureDecl___n_kwbreak(variable[8])(variable[8]) /*AClosureDecl::n_kwbreak*/;
+  /* Register variable[7]: Local variable */
+  /* Register variable[8]: Result */
+  variable[8] = CALL_parser_nodes___AClosureDecl___n_kwbreak(variable[0])(variable[0]) /*AClosureDecl::n_kwbreak*/;
+  /* Register variable[8]: Result */
   variable[8] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[8] ==  NIT_NULL /*null*/) || ((variable[8] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[8])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[8], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[8])(variable[8],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  variable[9] = variable[0];
-  variable[9] = CALL_parser_nodes___AClosureDecl___n_expr(variable[9])(variable[9]) /*AClosureDecl::n_expr*/;
+  /* Register variable[9]: Result */
+  variable[9] = CALL_parser_nodes___AClosureDecl___n_expr(variable[0])(variable[0]) /*AClosureDecl::n_expr*/;
+  /* Register variable[9]: Result */
   variable[9] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[9] ==  NIT_NULL /*null*/) || ((variable[9] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[9])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[9], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[9])(variable[9],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  variable[10] = NEW_MMClosure_static_type___MMClosure___init( variable[4] /*sig*/, variable[8], variable[9]); /*new MMClosure*/
-  variable[8] = variable[10];
+  /* Register variable[8]: Result */
+  variable[8] = NEW_MMClosure_static_type___MMClosure___init( variable[4] /*sig*/, variable[8], variable[9]) /*new MMClosure*/;
   variable[7] = variable[8];
   CALL_mmbuilder___PropertyVerifierVisitor___signature_builder__eq( variable[1] /*v*/)( variable[1] /*v*/,  variable[3] /*old_signature_builder*/) /*PropertyVerifierVisitor::signature_builder=*/;
+  /* Register variable[8]: Result */
   variable[8] = CALL_mmbuilder___SignatureBuilder___closure_decls( variable[3] /*old_signature_builder*/)( variable[3] /*old_signature_builder*/) /*SignatureBuilder::closure_decls*/;
-  variable[9] = variable[0];
-  CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[9]) /*AbstractArray::add*/;
-  variable[8] = variable[0];
-  variable[9] = variable[0];
-  variable[9] = CALL_parser_nodes___AClosureDecl___n_id(variable[9])(variable[9]) /*AClosureDecl::n_id*/;
-  variable[9] = CALL_syntax_base___Token___to_symbol(variable[9])(variable[9]) /*Token::to_symbol*/;
-  variable[10] = variable[0];
-  variable[11] = NEW_ClosureVariable_syntax_base___ClosureVariable___init(variable[9], variable[10],  variable[7] /*clos*/); /*new ClosureVariable*/
-  variable[9] = variable[11];
-  ATTR_mmbuilder___AClosureDecl____variable(variable[8]) /*AClosureDecl::_variable*/ = variable[9];
-  return_label123: while(false);
+  CALL_abstract_collection___SimpleCollection___add(variable[8])(variable[8], variable[0]) /*AbstractArray::add*/;
+  /* Register variable[8]: Result */
+  variable[8] = CALL_parser_nodes___AClosureDecl___n_id(variable[0])(variable[0]) /*AClosureDecl::n_id*/;
+  /* Register variable[8]: Result */
+  variable[8] = CALL_syntax_base___Token___to_symbol(variable[8])(variable[8]) /*Token::to_symbol*/;
+  /* Register variable[8]: Result */
+  variable[8] = NEW_ClosureVariable_syntax_base___ClosureVariable___init(variable[8], variable[0],  variable[7] /*clos*/) /*new ClosureVariable*/;
+  ATTR_mmbuilder___AClosureDecl____variable(variable[0]) /*AClosureDecl::_variable*/ = variable[8];
+  return_label268: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___PType___check_visibility(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 1199, LOCATE_mmbuilder___PType___check_visibility};
+  struct trace_t trace = {NULL, NULL, 1203, LOCATE_mmbuilder___PType___check_visibility};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_mmbuilder, 1199);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_mmbuilder, 1203);
   nit_exit(1);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___AType___check_visibility(val_t  self, val_t  param0, val_t  param1) {
-  struct trace_t trace = {NULL, NULL, 1204, LOCATE_mmbuilder___AType___check_visibility};
-  val_t variable[16];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 1208, LOCATE_mmbuilder___AType___check_visibility};
+    static val_t once_value_271 = NIT_NULL; /* Once value for string variable[7]*/
+    static val_t once_value_272 = NIT_NULL; /* Once value for string variable[7]*/
+    static val_t once_value_273 = NIT_NULL; /* Once value for string variable[7]*/
+  val_t variable[9];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Result */
   variable[4] = CALL_abstractmetamodel___MMLocalProperty___global( variable[2] /*p*/)( variable[2] /*p*/) /*MMLocalProperty::global*/;
+  /* Register variable[4]: Result */
   variable[4] = CALL_abstractmetamodel___MMGlobalProperty___visibility_level(variable[4])(variable[4]) /*MMGlobalProperty::visibility_level*/;
+  /* Register variable[4]: Result */
   variable[4] = TAG_Bool(UNTAG_Int(variable[4])>=UNTAG_Int( TAG_Int(3)));
   if (UNTAG_Bool(variable[4])) { /*if*/
-    goto return_label124;
+    goto return_label270;
   }
-  variable[5] = variable[0];
-  variable[5] = CALL_syntax_base___PType___get_stype(variable[5])(variable[5],  variable[1] /*v*/) /*AType::get_stype*/;
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = CALL_syntax_base___PType___get_stype(variable[0])(variable[0],  variable[1] /*v*/) /*AType::get_stype*/;
   variable[4] = variable[5];
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool(( variable[4] /*t*/ ==  NIT_NULL /*null*/) || (( variable[4] /*t*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[4] /*t*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[4] /*t*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[4] /*t*/)( variable[4] /*t*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[5])) { /*if*/
-    goto return_label124;
+    goto return_label270;
   }
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Result */
   variable[6] = CALL_static_type___MMType___local_class( variable[4] /*t*/)( variable[4] /*t*/) /*MMType::local_class*/;
   variable[5] = variable[6];
+  /* Register variable[6]: Result */
   variable[6] = TAG_Bool(( variable[5] /*bc*/ ==  NIT_NULL /*null*/) || (( variable[5] /*bc*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[5] /*bc*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[5] /*bc*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*bc*/)( variable[5] /*bc*/,  NIT_NULL /*null*/) /*Object::==*/)))));
   if (UNTAG_Bool(variable[6])) { /*if*/
-    goto return_label124;
+    goto return_label270;
   }
+  /* Register variable[6]: Result */
   variable[6] = CALL_abstractmetamodel___MMLocalClass___global( variable[5] /*bc*/)( variable[5] /*bc*/) /*MMLocalClass::global*/;
+  /* Register variable[6]: Result */
   variable[6] = CALL_abstractmetamodel___MMGlobalClass___visibility_level(variable[6])(variable[6]) /*MMGlobalClass::visibility_level*/;
+  /* Register variable[6]: Result */
   variable[6] = TAG_Bool(UNTAG_Int(variable[6])>=UNTAG_Int( TAG_Int(3)));
   if (UNTAG_Bool(variable[6])) { /*if*/
-    variable[6] = variable[0];
-    variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-    variable[8] = NEW_String_string___String___with_native(BOX_NativeString("Access error: Class "), TAG_Int(20)); /*new String*/
-    variable[9] = variable[8];
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[9]) /*AbstractArray::add*/;
-    variable[10] =  variable[5] /*bc*/;
-    variable[10] = CALL_string___Object___to_s(variable[10])(variable[10]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[10]) /*AbstractArray::add*/;
-    variable[11] = NEW_String_string___String___with_native(BOX_NativeString(" is private and cannot be used in the signature of the non-private property "), TAG_Int(76)); /*new String*/
-    variable[12] = variable[11];
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[12]) /*AbstractArray::add*/;
-    variable[13] =  variable[2] /*p*/;
-    variable[13] = CALL_string___Object___to_s(variable[13])(variable[13]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[13]) /*AbstractArray::add*/;
-    variable[14] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)); /*new String*/
-    variable[15] = variable[14];
-    CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[15]) /*AbstractArray::add*/;
-    variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
-    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[6], variable[7]) /*AbsSyntaxVisitor::error*/;
+    variable[6] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[7]: Once String constant */
+    if (once_value_271 != NIT_NULL) variable[7] = once_value_271;
+    else {
+      variable[7] = NEW_String_string___String___with_native(BOX_NativeString("Access error: Class "), TAG_Int(20)) /*new String*/;
+      once_value_271 = variable[7];
+    }
+    /* Register variable[7]: Result */
+    /* Ensure var variable[7]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+    variable[7] =  variable[5] /*bc*/ /* Ensure var: super-string element*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[7]: Once String constant */
+    if (once_value_272 != NIT_NULL) variable[7] = once_value_272;
+    else {
+      variable[7] = NEW_String_string___String___with_native(BOX_NativeString(" is private and cannot be used in the signature of the non-private property "), TAG_Int(76)) /*new String*/;
+      once_value_272 = variable[7];
+    }
+    /* Register variable[7]: Result */
+    /* Ensure var variable[7]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+    variable[7] =  variable[2] /*p*/ /* Ensure var: super-string element*/;
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[7]: Once String constant */
+    if (once_value_273 != NIT_NULL) variable[7] = once_value_273;
+    else {
+      variable[7] = NEW_String_string___String___with_native(BOX_NativeString("."), TAG_Int(1)) /*new String*/;
+      once_value_273 = variable[7];
+    }
+    /* Register variable[7]: Result */
+    /* Ensure var variable[7]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+    /* Register variable[6]: Result */
+    variable[6] = CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/;
+    CALL_syntax_base___AbsSyntaxVisitor___error( variable[1] /*v*/)( variable[1] /*v*/, variable[0], variable[6]) /*AbsSyntaxVisitor::error*/;
   }
-  variable[6] = variable[0];
-  variable[6] = CALL_parser_nodes___AType___n_types(variable[6])(variable[6]) /*AType::n_types*/;
+  /* Register variable[6]: Result */
+  variable[6] = CALL_parser_nodes___AType___n_types(variable[0])(variable[0]) /*AType::n_types*/;
+  /* Register variable[6]: For iterator */
   variable[6] = CALL_abstract_collection___Collection___iterator(variable[6])(variable[6]) /*List::iterator*/;
   while (true) { /*for*/
+    /* Register variable[7]: For 'is_ok' result */
     variable[7] = CALL_abstract_collection___Iterator___is_ok(variable[6])(variable[6]) /*ListIterator::is_ok*/;
     if (!UNTAG_Bool(variable[7])) break; /*for*/
-    variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*ListIterator::item*/;
+    variable[7] = CALL_abstract_collection___Iterator___item(variable[6])(variable[6]) /*ListIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[8]: Local variable */
     variable[8] = variable[7];
     CALL_mmbuilder___PType___check_visibility( variable[8] /*n*/)( variable[8] /*n*/,  variable[1] /*v*/,  variable[2] /*p*/) /*PType::check_visibility*/;
-    continue_125: while(0);
+    continue_274: while(0);
     CALL_abstract_collection___Iterator___next(variable[6])(variable[6]) /*ListIterator::next*/;
   }
-  break_125: while(0);
-  return_label124: while(false);
+  break_274: while(0);
+  return_label270: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___PExpr___accept_class_builder(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1221, LOCATE_mmbuilder___PExpr___accept_class_builder};
+  struct trace_t trace = {NULL, NULL, 1225, LOCATE_mmbuilder___PExpr___accept_class_builder};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  return_label126: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  return_label275: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___PExpr___accept_property_builder(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1222, LOCATE_mmbuilder___PExpr___accept_property_builder};
+  struct trace_t trace = {NULL, NULL, 1226, LOCATE_mmbuilder___PExpr___accept_property_builder};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  return_label127: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  return_label276: while(false);
   tracehead = trace.prev;
   return;
 }
 void mmbuilder___PExpr___accept_property_verifier(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 1223, LOCATE_mmbuilder___PExpr___accept_property_verifier};
+  struct trace_t trace = {NULL, NULL, 1227, LOCATE_mmbuilder___PExpr___accept_property_verifier};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_mmbuilder;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  return_label128: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  return_label277: while(false);
   tracehead = trace.prev;
   return;
 }

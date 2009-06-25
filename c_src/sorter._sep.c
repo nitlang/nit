@@ -3,7 +3,7 @@
 val_t sorter___AbstractSorter___compare(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 22, LOCATE_sorter___AbstractSorter___compare};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_sorter;
   fprintf(stderr, "Deferred method called");
@@ -14,16 +14,20 @@ val_t sorter___AbstractSorter___compare(val_t  self, val_t  param0, val_t  param
 }
 void sorter___AbstractSorter___sort(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 29, LOCATE_sorter___AbstractSorter___sort};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_sorter;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[4] = CALL_abstract_collection___Collection___length( variable[1] /*array*/)( variable[1] /*array*/) /*AbstractArray::length*/;
-  variable[4] = TAG_Int(UNTAG_Int(variable[4])-UNTAG_Int( TAG_Int(1)));
-  CALL_sorter___AbstractSorter___sub_sort(variable[3])(variable[3],  variable[1] /*array*/,  TAG_Int(0), variable[4]) /*AbstractSorter::sub_sort*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_abstract_collection___Collection___length( variable[1] /*array*/)( variable[1] /*array*/) /*AbstractArrayRead::length*/;
+  /* Register variable[3]: Result */
+  variable[3] = TAG_Int(UNTAG_Int(variable[3])-UNTAG_Int( TAG_Int(1)));
+  CALL_sorter___AbstractSorter___sub_sort(variable[0])(variable[0],  variable[1] /*array*/,  TAG_Int(0), variable[3]) /*AbstractSorter::sub_sort*/;
   return_label0: while(false);
   tracehead = trace.prev;
   return;
@@ -31,25 +35,31 @@ void sorter___AbstractSorter___sort(val_t  self, val_t  param0) {
 void sorter___AbstractSorter___sub_sort(val_t  self, val_t  param0, val_t  param1, val_t  param2) {
   struct trace_t trace = {NULL, NULL, 32, LOCATE_sorter___AbstractSorter___sub_sort};
   val_t variable[6];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_sorter;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
+  /* Register variable[4]: Method return value and escape marker */
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool(UNTAG_Int( variable[2] /*from*/)>=UNTAG_Int( variable[3] /*to*/));
   if (UNTAG_Bool(variable[5])) { /*if*/
     goto return_label1;
   } else { /*if*/
+    /* Register variable[5]: Result */
     variable[5] = TAG_Int(UNTAG_Int( variable[2] /*from*/)+UNTAG_Int( TAG_Int(7)));
+    /* Register variable[5]: Result */
     variable[5] = TAG_Bool(UNTAG_Int(variable[5])<UNTAG_Int( variable[3] /*to*/));
     if (UNTAG_Bool(variable[5])) { /*if*/
-      variable[5] = variable[0];
-      CALL_sorter___AbstractSorter___quick_sort(variable[5])(variable[5],  variable[1] /*array*/,  variable[2] /*from*/,  variable[3] /*to*/) /*AbstractSorter::quick_sort*/;
+      CALL_sorter___AbstractSorter___quick_sort(variable[0])(variable[0],  variable[1] /*array*/,  variable[2] /*from*/,  variable[3] /*to*/) /*AbstractSorter::quick_sort*/;
     } else { /*if*/
-      variable[5] = variable[0];
-      CALL_sorter___AbstractSorter___bubble_sort(variable[5])(variable[5],  variable[1] /*array*/,  variable[2] /*from*/,  variable[3] /*to*/) /*AbstractSorter::bubble_sort*/;
+      CALL_sorter___AbstractSorter___bubble_sort(variable[0])(variable[0],  variable[1] /*array*/,  variable[2] /*from*/,  variable[3] /*to*/) /*AbstractSorter::bubble_sort*/;
     }
   }
   return_label1: while(false);
@@ -58,140 +68,190 @@ void sorter___AbstractSorter___sub_sort(val_t  self, val_t  param0, val_t  param
 }
 void sorter___AbstractSorter___quick_sort(val_t  self, val_t  param0, val_t  param1, val_t  param2) {
   struct trace_t trace = {NULL, NULL, 44, LOCATE_sorter___AbstractSorter___quick_sort};
-  val_t variable[15];
-  void **closurevariable = NULL;
+  val_t variable[13];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_sorter;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
+  /* Register variable[4]: Method return value and escape marker */
+  /* Register variable[5]: Local variable */
+  /* Register variable[6]: Local variable */
   variable[6] =  variable[1] /*array*/;
+  /* Register variable[7]: Local variable */
   variable[7] =  variable[2] /*from*/;
+  /* Register variable[8]: Method return value and escape marker */
+  /* Register variable[9]: Result */
   variable[9] = TAG_Bool(UNTAG_Int( variable[7] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-  variable[10] = variable[9];
-  if (UNTAG_Bool(variable[10])) { /* and */
-    variable[10] = variable[6];
-    variable[10] = ATTR_array___AbstractArray____length(variable[10]) /*AbstractArray::_length*/;
-    variable[10] = TAG_Bool(UNTAG_Int( variable[7] /*index*/)<UNTAG_Int(variable[10]));
+  /* Ensure var variable[9]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[9])) { /* and */
+    /* Register variable[9]: Result */
+    variable[9] = ATTR_array___AbstractArrayRead____length(variable[6]) /*AbstractArrayRead::_length*/;
+    /* Register variable[9]: Result */
+    variable[9] = TAG_Bool(UNTAG_Int( variable[7] /*index*/)<UNTAG_Int(variable[9]));
   }
-  variable[9] = variable[10];
-  if (!UNTAG_Bool(variable[9])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 229); nit_exit(1);}
-  variable[9] = variable[6];
-  variable[9] = ATTR_array___Array____items(variable[9]) /*Array::_items*/;
+  /* Register variable[9]: Result */
+  if (!UNTAG_Bool(variable[9])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 234); nit_exit(1);}
+  /* Register variable[9]: Result */
+  variable[9] = ATTR_array___Array____items(variable[6]) /*Array::_items*/;
+  /* Register variable[9]: Result */
   variable[9] = UNBOX_NativeArray(variable[9])[UNTAG_Int( variable[7] /*index*/)];
   variable[8] = variable[9];
   goto return_label3;
   return_label3: while(false);
+  /* Register variable[6]: Result */
   variable[6] = variable[8];
   variable[5] = variable[6];
+  /* Register variable[6]: Local variable */
   variable[6] =  variable[2] /*from*/;
+  /* Register variable[7]: Local variable */
   variable[7] =  variable[3] /*to*/;
   while (true) { /*while*/
+    /* Register variable[8]: Result */
     variable[8] = TAG_Bool(UNTAG_Int( variable[7] /*j*/)>UNTAG_Int( variable[6] /*i*/));
     if (!UNTAG_Bool(variable[8])) break; /* while*/
     while (true) { /*while*/
+      /* Register variable[8]: Result */
       variable[8] = TAG_Bool(UNTAG_Int( variable[6] /*i*/)<=UNTAG_Int( variable[3] /*to*/));
-      variable[9] = variable[8];
-      if (UNTAG_Bool(variable[9])) { /* and */
-        variable[9] = variable[0];
-        variable[10] =  variable[1] /*array*/;
-        variable[11] =  variable[6] /*i*/;
-        variable[13] = TAG_Bool(UNTAG_Int( variable[11] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-        variable[14] = variable[13];
-        if (UNTAG_Bool(variable[14])) { /* and */
-          variable[14] = variable[10];
-          variable[14] = ATTR_array___AbstractArray____length(variable[14]) /*AbstractArray::_length*/;
-          variable[14] = TAG_Bool(UNTAG_Int( variable[11] /*index*/)<UNTAG_Int(variable[14]));
+      /* Ensure var variable[8]: Left 'and' operand*/
+      if (UNTAG_Bool(variable[8])) { /* and */
+        /* Register variable[8]: Local variable */
+        variable[8] =  variable[1] /*array*/;
+        /* Register variable[9]: Local variable */
+        variable[9] =  variable[6] /*i*/;
+        /* Register variable[10]: Method return value and escape marker */
+        /* Register variable[11]: Result */
+        variable[11] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+        /* Ensure var variable[11]: Left 'and' operand*/
+        if (UNTAG_Bool(variable[11])) { /* and */
+          /* Register variable[11]: Result */
+          variable[11] = ATTR_array___AbstractArrayRead____length(variable[8]) /*AbstractArrayRead::_length*/;
+          /* Register variable[11]: Result */
+          variable[11] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)<UNTAG_Int(variable[11]));
         }
-        variable[13] = variable[14];
-        if (!UNTAG_Bool(variable[13])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 229); nit_exit(1);}
-        variable[13] = variable[10];
-        variable[13] = ATTR_array___Array____items(variable[13]) /*Array::_items*/;
-        variable[13] = UNBOX_NativeArray(variable[13])[UNTAG_Int( variable[11] /*index*/)];
-        variable[12] = variable[13];
+        /* Register variable[11]: Result */
+        if (!UNTAG_Bool(variable[11])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 234); nit_exit(1);}
+        /* Register variable[11]: Result */
+        variable[11] = ATTR_array___Array____items(variable[8]) /*Array::_items*/;
+        /* Register variable[11]: Result */
+        variable[11] = UNBOX_NativeArray(variable[11])[UNTAG_Int( variable[9] /*index*/)];
+        variable[10] = variable[11];
         goto return_label6;
         return_label6: while(false);
-        variable[10] = variable[12];
-        variable[9] = CALL_sorter___AbstractSorter___compare(variable[9])(variable[9], variable[10],  variable[5] /*pivot*/) /*AbstractSorter::compare*/;
-        variable[9] = TAG_Bool(UNTAG_Int(variable[9])<=UNTAG_Int( TAG_Int(0)));
+        /* Register variable[8]: Result */
+        variable[8] = variable[10];
+        /* Register variable[8]: Result */
+        variable[8] = CALL_sorter___AbstractSorter___compare(variable[0])(variable[0], variable[8],  variable[5] /*pivot*/) /*AbstractSorter::compare*/;
+        /* Register variable[8]: Result */
+        variable[8] = TAG_Bool(UNTAG_Int(variable[8])<=UNTAG_Int( TAG_Int(0)));
       }
-      variable[8] = variable[9];
+      /* Register variable[8]: Result */
       if (!UNTAG_Bool(variable[8])) break; /* while*/
       variable[6] = TAG_Int(UNTAG_Int(variable[6])+UNTAG_Int( TAG_Int(1))) /*i*/;
       continue_5: while(0);
     }
     break_5: while(0);
     while (true) { /*while*/
+      /* Register variable[8]: Result */
       variable[8] = TAG_Bool(UNTAG_Int( variable[7] /*j*/)>UNTAG_Int( variable[6] /*i*/));
-      variable[9] = variable[8];
-      if (UNTAG_Bool(variable[9])) { /* and */
-        variable[9] = variable[0];
-        variable[10] =  variable[1] /*array*/;
-        variable[11] =  variable[7] /*j*/;
-        variable[13] = TAG_Bool(UNTAG_Int( variable[11] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-        variable[14] = variable[13];
-        if (UNTAG_Bool(variable[14])) { /* and */
-          variable[14] = variable[10];
-          variable[14] = ATTR_array___AbstractArray____length(variable[14]) /*AbstractArray::_length*/;
-          variable[14] = TAG_Bool(UNTAG_Int( variable[11] /*index*/)<UNTAG_Int(variable[14]));
+      /* Ensure var variable[8]: Left 'and' operand*/
+      if (UNTAG_Bool(variable[8])) { /* and */
+        /* Register variable[8]: Local variable */
+        variable[8] =  variable[1] /*array*/;
+        /* Register variable[9]: Local variable */
+        variable[9] =  variable[7] /*j*/;
+        /* Register variable[10]: Method return value and escape marker */
+        /* Register variable[11]: Result */
+        variable[11] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+        /* Ensure var variable[11]: Left 'and' operand*/
+        if (UNTAG_Bool(variable[11])) { /* and */
+          /* Register variable[11]: Result */
+          variable[11] = ATTR_array___AbstractArrayRead____length(variable[8]) /*AbstractArrayRead::_length*/;
+          /* Register variable[11]: Result */
+          variable[11] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)<UNTAG_Int(variable[11]));
         }
-        variable[13] = variable[14];
-        if (!UNTAG_Bool(variable[13])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 229); nit_exit(1);}
-        variable[13] = variable[10];
-        variable[13] = ATTR_array___Array____items(variable[13]) /*Array::_items*/;
-        variable[13] = UNBOX_NativeArray(variable[13])[UNTAG_Int( variable[11] /*index*/)];
-        variable[12] = variable[13];
+        /* Register variable[11]: Result */
+        if (!UNTAG_Bool(variable[11])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 234); nit_exit(1);}
+        /* Register variable[11]: Result */
+        variable[11] = ATTR_array___Array____items(variable[8]) /*Array::_items*/;
+        /* Register variable[11]: Result */
+        variable[11] = UNBOX_NativeArray(variable[11])[UNTAG_Int( variable[9] /*index*/)];
+        variable[10] = variable[11];
         goto return_label8;
         return_label8: while(false);
-        variable[10] = variable[12];
-        variable[9] = CALL_sorter___AbstractSorter___compare(variable[9])(variable[9], variable[10],  variable[5] /*pivot*/) /*AbstractSorter::compare*/;
-        variable[9] = TAG_Bool(UNTAG_Int(variable[9])>=UNTAG_Int( TAG_Int(0)));
+        /* Register variable[8]: Result */
+        variable[8] = variable[10];
+        /* Register variable[8]: Result */
+        variable[8] = CALL_sorter___AbstractSorter___compare(variable[0])(variable[0], variable[8],  variable[5] /*pivot*/) /*AbstractSorter::compare*/;
+        /* Register variable[8]: Result */
+        variable[8] = TAG_Bool(UNTAG_Int(variable[8])>=UNTAG_Int( TAG_Int(0)));
       }
-      variable[8] = variable[9];
+      /* Register variable[8]: Result */
       if (!UNTAG_Bool(variable[8])) break; /* while*/
       variable[7] = TAG_Int(UNTAG_Int(variable[7])-UNTAG_Int( TAG_Int(1))) /*j*/;
       continue_7: while(0);
     }
     break_7: while(0);
+    /* Register variable[8]: Result */
     variable[8] = TAG_Bool(UNTAG_Int( variable[7] /*j*/)>UNTAG_Int( variable[6] /*i*/));
     if (UNTAG_Bool(variable[8])) { /*if*/
+      /* Register variable[8]: Local variable */
+      /* Register variable[9]: Local variable */
       variable[9] =  variable[1] /*array*/;
+      /* Register variable[10]: Local variable */
       variable[10] =  variable[6] /*i*/;
+      /* Register variable[11]: Method return value and escape marker */
+      /* Register variable[12]: Result */
       variable[12] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-      variable[13] = variable[12];
-      if (UNTAG_Bool(variable[13])) { /* and */
-        variable[13] = variable[9];
-        variable[13] = ATTR_array___AbstractArray____length(variable[13]) /*AbstractArray::_length*/;
-        variable[13] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)<UNTAG_Int(variable[13]));
+      /* Ensure var variable[12]: Left 'and' operand*/
+      if (UNTAG_Bool(variable[12])) { /* and */
+        /* Register variable[12]: Result */
+        variable[12] = ATTR_array___AbstractArrayRead____length(variable[9]) /*AbstractArrayRead::_length*/;
+        /* Register variable[12]: Result */
+        variable[12] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)<UNTAG_Int(variable[12]));
       }
-      variable[12] = variable[13];
-      if (!UNTAG_Bool(variable[12])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 229); nit_exit(1);}
-      variable[12] = variable[9];
-      variable[12] = ATTR_array___Array____items(variable[12]) /*Array::_items*/;
+      /* Register variable[12]: Result */
+      if (!UNTAG_Bool(variable[12])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 234); nit_exit(1);}
+      /* Register variable[12]: Result */
+      variable[12] = ATTR_array___Array____items(variable[9]) /*Array::_items*/;
+      /* Register variable[12]: Result */
       variable[12] = UNBOX_NativeArray(variable[12])[UNTAG_Int( variable[10] /*index*/)];
       variable[11] = variable[12];
       goto return_label9;
       return_label9: while(false);
+      /* Register variable[9]: Result */
       variable[9] = variable[11];
       variable[8] = variable[9];
+      /* Register variable[9]: Local variable */
       variable[9] =  variable[1] /*array*/;
+      /* Register variable[10]: Local variable */
       variable[10] =  variable[7] /*j*/;
+      /* Register variable[11]: Method return value and escape marker */
+      /* Register variable[12]: Result */
       variable[12] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-      variable[13] = variable[12];
-      if (UNTAG_Bool(variable[13])) { /* and */
-        variable[13] = variable[9];
-        variable[13] = ATTR_array___AbstractArray____length(variable[13]) /*AbstractArray::_length*/;
-        variable[13] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)<UNTAG_Int(variable[13]));
+      /* Ensure var variable[12]: Left 'and' operand*/
+      if (UNTAG_Bool(variable[12])) { /* and */
+        /* Register variable[12]: Result */
+        variable[12] = ATTR_array___AbstractArrayRead____length(variable[9]) /*AbstractArrayRead::_length*/;
+        /* Register variable[12]: Result */
+        variable[12] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)<UNTAG_Int(variable[12]));
       }
-      variable[12] = variable[13];
-      if (!UNTAG_Bool(variable[12])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 229); nit_exit(1);}
-      variable[12] = variable[9];
-      variable[12] = ATTR_array___Array____items(variable[12]) /*Array::_items*/;
+      /* Register variable[12]: Result */
+      if (!UNTAG_Bool(variable[12])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 234); nit_exit(1);}
+      /* Register variable[12]: Result */
+      variable[12] = ATTR_array___Array____items(variable[9]) /*Array::_items*/;
+      /* Register variable[12]: Result */
       variable[12] = UNBOX_NativeArray(variable[12])[UNTAG_Int( variable[10] /*index*/)];
       variable[11] = variable[12];
       goto return_label10;
       return_label10: while(false);
+      /* Register variable[9]: Result */
       variable[9] = variable[11];
       CALL_abstract_collection___Map_____braeq( variable[1] /*array*/)( variable[1] /*array*/,  variable[6] /*i*/, variable[9]) /*Array::[]=*/;
       CALL_abstract_collection___Map_____braeq( variable[1] /*array*/)( variable[1] /*array*/,  variable[7] /*j*/,  variable[8] /*t*/) /*Array::[]=*/;
@@ -199,115 +259,156 @@ void sorter___AbstractSorter___quick_sort(val_t  self, val_t  param0, val_t  par
     continue_4: while(0);
   }
   break_4: while(0);
+  /* Register variable[8]: Result */
   variable[8] = TAG_Int(UNTAG_Int( variable[6] /*i*/)-UNTAG_Int( TAG_Int(1)));
+  /* Register variable[9]: Local variable */
   variable[9] =  variable[1] /*array*/;
+  /* Register variable[10]: Local variable */
   variable[10] = variable[8];
+  /* Register variable[11]: Method return value and escape marker */
+  /* Register variable[12]: Result */
   variable[12] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-  variable[13] = variable[12];
-  if (UNTAG_Bool(variable[13])) { /* and */
-    variable[13] = variable[9];
-    variable[13] = ATTR_array___AbstractArray____length(variable[13]) /*AbstractArray::_length*/;
-    variable[13] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)<UNTAG_Int(variable[13]));
+  /* Ensure var variable[12]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[12])) { /* and */
+    /* Register variable[12]: Result */
+    variable[12] = ATTR_array___AbstractArrayRead____length(variable[9]) /*AbstractArrayRead::_length*/;
+    /* Register variable[12]: Result */
+    variable[12] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)<UNTAG_Int(variable[12]));
   }
-  variable[12] = variable[13];
-  if (!UNTAG_Bool(variable[12])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 229); nit_exit(1);}
-  variable[12] = variable[9];
-  variable[12] = ATTR_array___Array____items(variable[12]) /*Array::_items*/;
+  /* Register variable[12]: Result */
+  if (!UNTAG_Bool(variable[12])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 234); nit_exit(1);}
+  /* Register variable[12]: Result */
+  variable[12] = ATTR_array___Array____items(variable[9]) /*Array::_items*/;
+  /* Register variable[12]: Result */
   variable[12] = UNBOX_NativeArray(variable[12])[UNTAG_Int( variable[10] /*index*/)];
   variable[11] = variable[12];
   goto return_label11;
   return_label11: while(false);
+  /* Register variable[8]: Result */
   variable[8] = variable[11];
   CALL_abstract_collection___Map_____braeq( variable[1] /*array*/)( variable[1] /*array*/,  variable[2] /*from*/, variable[8]) /*Array::[]=*/;
+  /* Register variable[8]: Result */
   variable[8] = TAG_Int(UNTAG_Int( variable[6] /*i*/)-UNTAG_Int( TAG_Int(1)));
   CALL_abstract_collection___Map_____braeq( variable[1] /*array*/)( variable[1] /*array*/, variable[8],  variable[5] /*pivot*/) /*Array::[]=*/;
-  variable[8] = variable[0];
-  variable[9] = TAG_Int(UNTAG_Int( variable[6] /*i*/)-UNTAG_Int( TAG_Int(2)));
-  CALL_sorter___AbstractSorter___sub_sort(variable[8])(variable[8],  variable[1] /*array*/,  variable[2] /*from*/, variable[9]) /*AbstractSorter::sub_sort*/;
-  variable[8] = variable[0];
-  CALL_sorter___AbstractSorter___sub_sort(variable[8])(variable[8],  variable[1] /*array*/,  variable[6] /*i*/,  variable[3] /*to*/) /*AbstractSorter::sub_sort*/;
+  /* Register variable[8]: Result */
+  variable[8] = TAG_Int(UNTAG_Int( variable[6] /*i*/)-UNTAG_Int( TAG_Int(2)));
+  CALL_sorter___AbstractSorter___sub_sort(variable[0])(variable[0],  variable[1] /*array*/,  variable[2] /*from*/, variable[8]) /*AbstractSorter::sub_sort*/;
+  CALL_sorter___AbstractSorter___sub_sort(variable[0])(variable[0],  variable[1] /*array*/,  variable[6] /*i*/,  variable[3] /*to*/) /*AbstractSorter::sub_sort*/;
   return_label2: while(false);
   tracehead = trace.prev;
   return;
 }
 void sorter___AbstractSorter___bubble_sort(val_t  self, val_t  param0, val_t  param1, val_t  param2) {
   struct trace_t trace = {NULL, NULL, 65, LOCATE_sorter___AbstractSorter___bubble_sort};
-  val_t variable[15];
-  void **closurevariable = NULL;
+  val_t variable[13];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_sorter;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
+  /* Register variable[4]: Method return value and escape marker */
+  /* Register variable[5]: Local variable */
   variable[5] =  variable[2] /*from*/;
   while (true) { /*while*/
+    /* Register variable[6]: Result */
     variable[6] = TAG_Bool(UNTAG_Int( variable[5] /*i*/)<UNTAG_Int( variable[3] /*to*/));
     if (!UNTAG_Bool(variable[6])) break; /* while*/
+    /* Register variable[6]: Local variable */
     variable[6] =  variable[5] /*i*/;
+    /* Register variable[7]: Local variable */
+    /* Register variable[8]: Local variable */
     variable[8] =  variable[1] /*array*/;
+    /* Register variable[9]: Local variable */
     variable[9] =  variable[5] /*i*/;
+    /* Register variable[10]: Method return value and escape marker */
+    /* Register variable[11]: Result */
     variable[11] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-    variable[12] = variable[11];
-    if (UNTAG_Bool(variable[12])) { /* and */
-      variable[12] = variable[8];
-      variable[12] = ATTR_array___AbstractArray____length(variable[12]) /*AbstractArray::_length*/;
-      variable[12] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)<UNTAG_Int(variable[12]));
+    /* Ensure var variable[11]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[11])) { /* and */
+      /* Register variable[11]: Result */
+      variable[11] = ATTR_array___AbstractArrayRead____length(variable[8]) /*AbstractArrayRead::_length*/;
+      /* Register variable[11]: Result */
+      variable[11] = TAG_Bool(UNTAG_Int( variable[9] /*index*/)<UNTAG_Int(variable[11]));
     }
-    variable[11] = variable[12];
-    if (!UNTAG_Bool(variable[11])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 229); nit_exit(1);}
-    variable[11] = variable[8];
-    variable[11] = ATTR_array___Array____items(variable[11]) /*Array::_items*/;
+    /* Register variable[11]: Result */
+    if (!UNTAG_Bool(variable[11])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 234); nit_exit(1);}
+    /* Register variable[11]: Result */
+    variable[11] = ATTR_array___Array____items(variable[8]) /*Array::_items*/;
+    /* Register variable[11]: Result */
     variable[11] = UNBOX_NativeArray(variable[11])[UNTAG_Int( variable[9] /*index*/)];
     variable[10] = variable[11];
     goto return_label14;
     return_label14: while(false);
+    /* Register variable[8]: Result */
     variable[8] = variable[10];
     variable[7] = variable[8];
+    /* Register variable[8]: Local variable */
     variable[8] =  variable[5] /*i*/;
     while (true) { /*while*/
+      /* Register variable[9]: Result */
       variable[9] = TAG_Bool(UNTAG_Int( variable[8] /*j*/)<=UNTAG_Int( variable[3] /*to*/));
       if (!UNTAG_Bool(variable[9])) break; /* while*/
-      variable[9] = variable[0];
-      variable[10] =  variable[1] /*array*/;
-      variable[11] =  variable[8] /*j*/;
-      variable[13] = TAG_Bool(UNTAG_Int( variable[11] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-      variable[14] = variable[13];
-      if (UNTAG_Bool(variable[14])) { /* and */
-        variable[14] = variable[10];
-        variable[14] = ATTR_array___AbstractArray____length(variable[14]) /*AbstractArray::_length*/;
-        variable[14] = TAG_Bool(UNTAG_Int( variable[11] /*index*/)<UNTAG_Int(variable[14]));
+      /* Register variable[9]: Local variable */
+      variable[9] =  variable[1] /*array*/;
+      /* Register variable[10]: Local variable */
+      variable[10] =  variable[8] /*j*/;
+      /* Register variable[11]: Method return value and escape marker */
+      /* Register variable[12]: Result */
+      variable[12] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+      /* Ensure var variable[12]: Left 'and' operand*/
+      if (UNTAG_Bool(variable[12])) { /* and */
+        /* Register variable[12]: Result */
+        variable[12] = ATTR_array___AbstractArrayRead____length(variable[9]) /*AbstractArrayRead::_length*/;
+        /* Register variable[12]: Result */
+        variable[12] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)<UNTAG_Int(variable[12]));
       }
-      variable[13] = variable[14];
-      if (!UNTAG_Bool(variable[13])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 229); nit_exit(1);}
-      variable[13] = variable[10];
-      variable[13] = ATTR_array___Array____items(variable[13]) /*Array::_items*/;
-      variable[13] = UNBOX_NativeArray(variable[13])[UNTAG_Int( variable[11] /*index*/)];
-      variable[12] = variable[13];
+      /* Register variable[12]: Result */
+      if (!UNTAG_Bool(variable[12])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 234); nit_exit(1);}
+      /* Register variable[12]: Result */
+      variable[12] = ATTR_array___Array____items(variable[9]) /*Array::_items*/;
+      /* Register variable[12]: Result */
+      variable[12] = UNBOX_NativeArray(variable[12])[UNTAG_Int( variable[10] /*index*/)];
+      variable[11] = variable[12];
       goto return_label16;
       return_label16: while(false);
-      variable[10] = variable[12];
-      variable[9] = CALL_sorter___AbstractSorter___compare(variable[9])(variable[9],  variable[7] /*min_v*/, variable[10]) /*AbstractSorter::compare*/;
+      /* Register variable[9]: Result */
+      variable[9] = variable[11];
+      /* Register variable[9]: Result */
+      variable[9] = CALL_sorter___AbstractSorter___compare(variable[0])(variable[0],  variable[7] /*min_v*/, variable[9]) /*AbstractSorter::compare*/;
+      /* Register variable[9]: Result */
       variable[9] = TAG_Bool(UNTAG_Int(variable[9])>UNTAG_Int( TAG_Int(0)));
       if (UNTAG_Bool(variable[9])) { /*if*/
         variable[6] =  variable[8] /*j*/ /*min=*/;
+        /* Register variable[9]: Local variable */
         variable[9] =  variable[1] /*array*/;
+        /* Register variable[10]: Local variable */
         variable[10] =  variable[8] /*j*/;
+        /* Register variable[11]: Method return value and escape marker */
+        /* Register variable[12]: Result */
         variable[12] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-        variable[13] = variable[12];
-        if (UNTAG_Bool(variable[13])) { /* and */
-          variable[13] = variable[9];
-          variable[13] = ATTR_array___AbstractArray____length(variable[13]) /*AbstractArray::_length*/;
-          variable[13] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)<UNTAG_Int(variable[13]));
+        /* Ensure var variable[12]: Left 'and' operand*/
+        if (UNTAG_Bool(variable[12])) { /* and */
+          /* Register variable[12]: Result */
+          variable[12] = ATTR_array___AbstractArrayRead____length(variable[9]) /*AbstractArrayRead::_length*/;
+          /* Register variable[12]: Result */
+          variable[12] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)<UNTAG_Int(variable[12]));
         }
-        variable[12] = variable[13];
-        if (!UNTAG_Bool(variable[12])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 229); nit_exit(1);}
-        variable[12] = variable[9];
-        variable[12] = ATTR_array___Array____items(variable[12]) /*Array::_items*/;
+        /* Register variable[12]: Result */
+        if (!UNTAG_Bool(variable[12])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 234); nit_exit(1);}
+        /* Register variable[12]: Result */
+        variable[12] = ATTR_array___Array____items(variable[9]) /*Array::_items*/;
+        /* Register variable[12]: Result */
         variable[12] = UNBOX_NativeArray(variable[12])[UNTAG_Int( variable[10] /*index*/)];
         variable[11] = variable[12];
         goto return_label17;
         return_label17: while(false);
+        /* Register variable[9]: Result */
         variable[9] = variable[11];
         variable[7] = variable[9] /*min_v=*/;
       }
@@ -315,25 +416,33 @@ void sorter___AbstractSorter___bubble_sort(val_t  self, val_t  param0, val_t  pa
       continue_15: while(0);
     }
     break_15: while(0);
+    /* Register variable[9]: Result */
     variable[9] = TAG_Bool(( variable[6] /*min*/)!=( variable[5] /*i*/));
     if (UNTAG_Bool(variable[9])) { /*if*/
+      /* Register variable[9]: Local variable */
       variable[9] =  variable[1] /*array*/;
+      /* Register variable[10]: Local variable */
       variable[10] =  variable[5] /*i*/;
+      /* Register variable[11]: Method return value and escape marker */
+      /* Register variable[12]: Result */
       variable[12] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-      variable[13] = variable[12];
-      if (UNTAG_Bool(variable[13])) { /* and */
-        variable[13] = variable[9];
-        variable[13] = ATTR_array___AbstractArray____length(variable[13]) /*AbstractArray::_length*/;
-        variable[13] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)<UNTAG_Int(variable[13]));
+      /* Ensure var variable[12]: Left 'and' operand*/
+      if (UNTAG_Bool(variable[12])) { /* and */
+        /* Register variable[12]: Result */
+        variable[12] = ATTR_array___AbstractArrayRead____length(variable[9]) /*AbstractArrayRead::_length*/;
+        /* Register variable[12]: Result */
+        variable[12] = TAG_Bool(UNTAG_Int( variable[10] /*index*/)<UNTAG_Int(variable[12]));
       }
-      variable[12] = variable[13];
-      if (!UNTAG_Bool(variable[12])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 229); nit_exit(1);}
-      variable[12] = variable[9];
-      variable[12] = ATTR_array___Array____items(variable[12]) /*Array::_items*/;
+      /* Register variable[12]: Result */
+      if (!UNTAG_Bool(variable[12])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_sorter, 234); nit_exit(1);}
+      /* Register variable[12]: Result */
+      variable[12] = ATTR_array___Array____items(variable[9]) /*Array::_items*/;
+      /* Register variable[12]: Result */
       variable[12] = UNBOX_NativeArray(variable[12])[UNTAG_Int( variable[10] /*index*/)];
       variable[11] = variable[12];
       goto return_label18;
       return_label18: while(false);
+      /* Register variable[9]: Result */
       variable[9] = variable[11];
       CALL_abstract_collection___Map_____braeq( variable[1] /*array*/)( variable[1] /*array*/,  variable[6] /*min*/, variable[9]) /*Array::[]=*/;
       CALL_abstract_collection___Map_____braeq( variable[1] /*array*/)( variable[1] /*array*/,  variable[5] /*i*/,  variable[7] /*min_v*/) /*Array::[]=*/;
@@ -349,7 +458,7 @@ void sorter___AbstractSorter___bubble_sort(val_t  self, val_t  param0, val_t  pa
 void sorter___AbstractSorter___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 0, LOCATE_sorter___AbstractSorter___init};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_sorter;
   tracehead = trace.prev;
@@ -358,12 +467,17 @@ void sorter___AbstractSorter___init(val_t  self, int* init_table) {
 val_t sorter___ComparableSorter___compare(val_t  self, val_t  param0, val_t  param1) {
   struct trace_t trace = {NULL, NULL, 93, LOCATE_sorter___ComparableSorter___compare};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_sorter;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Result */
   variable[4] = CALL_kernel___Comparable_____leqg( variable[1] /*a*/)( variable[1] /*a*/,  variable[2] /*b*/) /*Comparable::<=>*/;
   variable[3] = variable[4];
   goto return_label19;
@@ -374,11 +488,13 @@ val_t sorter___ComparableSorter___compare(val_t  self, val_t  param0, val_t  par
 void sorter___ComparableSorter___init(val_t  self, int* init_table) {
   struct trace_t trace = {NULL, NULL, 96, LOCATE_sorter___ComparableSorter___init};
   val_t variable[2];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_sorter;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ComparableSorter].i]) return;
+  /* Register variable[1]: Method return value and escape marker */
   return_label20: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_ComparableSorter].i] = 1;
   tracehead = trace.prev;

@@ -3,12 +3,14 @@
 val_t opts___Option___to_s(val_t  self) {
   struct trace_t trace = {NULL, NULL, 54, LOCATE_opts___Option___to_s};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_opts___Option___pretty(variable[2])(variable[2],  TAG_Int(2)) /*Option::pretty*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_opts___Option___pretty(variable[0])(variable[0],  TAG_Int(2)) /*Option::pretty*/;
   variable[1] = variable[2];
   goto return_label0;
   return_label0: while(false);
@@ -18,7 +20,7 @@ val_t opts___Option___to_s(val_t  self) {
 val_t opts___Option___names(val_t  self) {
   struct trace_t trace = {NULL, NULL, 16, LOCATE_opts___Option___names};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
   tracehead = trace.prev;
@@ -27,7 +29,7 @@ val_t opts___Option___names(val_t  self) {
 val_t opts___Option___helptext(val_t  self) {
   struct trace_t trace = {NULL, NULL, 22, LOCATE_opts___Option___helptext};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
   tracehead = trace.prev;
@@ -36,7 +38,7 @@ val_t opts___Option___helptext(val_t  self) {
 val_t opts___Option___mandatory(val_t  self) {
   struct trace_t trace = {NULL, NULL, 25, LOCATE_opts___Option___mandatory};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
   tracehead = trace.prev;
@@ -45,7 +47,7 @@ val_t opts___Option___mandatory(val_t  self) {
 void opts___Option___mandatory__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 25, LOCATE_opts___Option___mandatory__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
   ATTR_opts___Option____mandatory( self) /*Option::_mandatory*/ =  param0;
@@ -55,7 +57,7 @@ void opts___Option___mandatory__eq(val_t  self, val_t  param0) {
 val_t opts___Option___context(val_t  self) {
   struct trace_t trace = {NULL, NULL, 28, LOCATE_opts___Option___context};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
   tracehead = trace.prev;
@@ -64,7 +66,7 @@ val_t opts___Option___context(val_t  self) {
 void opts___Option___context__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 28, LOCATE_opts___Option___context__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
   ATTR_opts___Option____context( self) /*Option::_context*/ =  param0;
@@ -74,7 +76,7 @@ void opts___Option___context__eq(val_t  self, val_t  param0) {
 val_t opts___Option___value(val_t  self) {
   struct trace_t trace = {NULL, NULL, 31, LOCATE_opts___Option___value};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
   tracehead = trace.prev;
@@ -83,7 +85,7 @@ val_t opts___Option___value(val_t  self) {
 void opts___Option___value__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 31, LOCATE_opts___Option___value__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
   ATTR_opts___Option____value( self) /*Option::_value*/ =  param0;
@@ -93,7 +95,7 @@ void opts___Option___value__eq(val_t  self, val_t  param0) {
 val_t opts___Option___default_value(val_t  self) {
   struct trace_t trace = {NULL, NULL, 34, LOCATE_opts___Option___default_value};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
   tracehead = trace.prev;
@@ -102,7 +104,7 @@ val_t opts___Option___default_value(val_t  self) {
 void opts___Option___default_value__eq(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 34, LOCATE_opts___Option___default_value__eq};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
   ATTR_opts___Option____default_value( self) /*Option::_default_value*/ =  param0;
@@ -111,33 +113,35 @@ void opts___Option___default_value__eq(val_t  self, val_t  param0) {
 }
 void opts___Option___init_opt(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
   struct trace_t trace = {NULL, NULL, 37, LOCATE_opts___Option___init_opt};
-  val_t variable[7];
-  void **closurevariable = NULL;
+  val_t variable[6];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Option].i]) return;
-  variable[5] = TAG_Bool(( variable[3] /*names*/ ==  NIT_NULL /*null*/) || (( variable[3] /*names*/ != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*names*/)( variable[3] /*names*/,  NIT_NULL /*null*/) /*AbstractArray::==*/)));
+  /* Register variable[4]: Method return value and escape marker */
+  /* Register variable[5]: Result */
+  variable[5] = TAG_Bool(( variable[3] /*names*/ ==  NIT_NULL /*null*/) || (( variable[3] /*names*/ != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[3] /*names*/)( variable[3] /*names*/,  NIT_NULL /*null*/) /*AbstractArrayRead::==*/)));
   if (UNTAG_Bool(variable[5])) { /*if*/
-    variable[5] = variable[0];
-    variable[6] = NEW_Array_array___Array___init(); /*new Array[String]*/
-    ATTR_opts___Option____names(variable[5]) /*Option::_names*/ = variable[6];
+    /* Register variable[5]: Result */
+    variable[5] = NEW_Array_array___Array___init() /*new Array[String]*/;
+    ATTR_opts___Option____names(variable[0]) /*Option::_names*/ = variable[5];
   } else { /*if*/
-    variable[5] = variable[0];
-    variable[6] = CALL_array___Collection___to_a( variable[3] /*names*/)( variable[3] /*names*/) /*Collection::to_a*/;
-    ATTR_opts___Option____names(variable[5]) /*Option::_names*/ = variable[6];
+    /* Register variable[5]: Result */
+    variable[5] = CALL_array___Collection___to_a( variable[3] /*names*/)( variable[3] /*names*/) /*Collection::to_a*/;
+    ATTR_opts___Option____names(variable[0]) /*Option::_names*/ = variable[5];
   }
-  variable[5] = variable[0];
-  ATTR_opts___Option____helptext(variable[5]) /*Option::_helptext*/ =  variable[1] /*help*/;
-  variable[5] = variable[0];
-  ATTR_opts___Option____mandatory(variable[5]) /*Option::_mandatory*/ =  TAG_Bool(false);
-  variable[5] = variable[0];
-  ATTR_opts___Option____default_value(variable[5]) /*Option::_default_value*/ =  variable[2] /*default*/;
-  variable[5] = variable[0];
-  ATTR_opts___Option____value(variable[5]) /*Option::_value*/ =  variable[2] /*default*/;
+  ATTR_opts___Option____helptext(variable[0]) /*Option::_helptext*/ =  variable[1] /*help*/;
+  ATTR_opts___Option____mandatory(variable[0]) /*Option::_mandatory*/ =  TAG_Bool(false);
+  ATTR_opts___Option____default_value(variable[0]) /*Option::_default_value*/ =  variable[2] /*default*/;
+  ATTR_opts___Option____value(variable[0]) /*Option::_value*/ =  variable[2] /*default*/;
   return_label1: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_Option].i] = 1;
   tracehead = trace.prev;
@@ -146,15 +150,18 @@ void opts___Option___init_opt(val_t  self, val_t  param0, val_t  param1, val_t  
 void opts___Option___add_aliases(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 51, LOCATE_opts___Option___add_aliases};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   /* check if p<Array[String] with p:String */
   if (( param0!=NIT_NULL) && !VAL_ISA( param0, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___Option___add_aliases, LOCATE_opts, 52); nit_exit(1); } /*cast Array[String]*/;
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_opts___Option____names(variable[3]) /*Option::_names*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_opts___Option____names(variable[0]) /*Option::_names*/;
   CALL_abstract_collection___SimpleCollection___add_all(variable[3])(variable[3],  variable[1] /*names*/) /*SimpleCollection::add_all*/;
   return_label2: while(false);
   tracehead = trace.prev;
@@ -162,34 +169,76 @@ void opts___Option___add_aliases(val_t  self, val_t  param0) {
 }
 val_t opts___Option___pretty(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 57, LOCATE_opts___Option___pretty};
+  static val_t once_value_4 = NIT_NULL; /* Once value for string variable[4]*/
+  static val_t once_value_5 = NIT_NULL; /* Once value for string variable[5]*/
+  static val_t once_value_6 = NIT_NULL; /* Once value for string variable[4]*/
+    static val_t once_value_7 = NIT_NULL; /* Once value for string variable[5]*/
   val_t variable[6];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = NEW_String_string___String___with_native(BOX_NativeString("  "), TAG_Int(2)); /*new String*/
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Once String constant */
+  if (once_value_4 != NIT_NULL) variable[4] = once_value_4;
+  else {
+    variable[4] = NEW_String_string___String___with_native(BOX_NativeString("  "), TAG_Int(2)) /*new String*/;
+    once_value_4 = variable[4];
+  }
+  /* Register variable[4]: Result */
+  /* Register variable[4]: Result */
+  variable[4] = NEW_Buffer_string___Buffer___from(variable[4]) /*new Buffer*/;
   variable[3] = variable[4];
-  variable[4] = variable[0];
-  variable[4] = ATTR_opts___Option____names(variable[4]) /*Option::_names*/;
-  variable[5] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_opts___Option____names(variable[0]) /*Option::_names*/;
+  /* Register variable[5]: Once String constant */
+  if (once_value_5 != NIT_NULL) variable[5] = once_value_5;
+  else {
+    variable[5] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)) /*new String*/;
+    once_value_5 = variable[5];
+  }
+  /* Register variable[5]: Result */
+  /* Register variable[4]: Result */
   variable[4] = CALL_string___Collection___join(variable[4])(variable[4], variable[5]) /*Collection::join*/;
-  CALL_abstract_collection___IndexedCollection___append( variable[3] /*text*/)( variable[3] /*text*/, variable[4]) /*String::append*/;
-  variable[4] = NEW_String_string___String___with_native(BOX_NativeString("  "), TAG_Int(2)); /*new String*/
-  CALL_abstract_collection___IndexedCollection___append( variable[3] /*text*/)( variable[3] /*text*/, variable[4]) /*String::append*/;
-  variable[5] = CALL_abstract_collection___Collection___length( variable[3] /*text*/)( variable[3] /*text*/) /*AbstractArray::length*/;
+  CALL_abstract_collection___IndexedCollection___append( variable[3] /*text*/)( variable[3] /*text*/, variable[4]) /*Buffer::append*/;
+  /* Register variable[4]: Once String constant */
+  if (once_value_6 != NIT_NULL) variable[4] = once_value_6;
+  else {
+    variable[4] = NEW_String_string___String___with_native(BOX_NativeString("  "), TAG_Int(2)) /*new String*/;
+    once_value_6 = variable[4];
+  }
+  /* Register variable[4]: Result */
+  CALL_abstract_collection___IndexedCollection___append( variable[3] /*text*/)( variable[3] /*text*/, variable[4]) /*Buffer::append*/;
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = CALL_abstract_collection___Collection___length( variable[3] /*text*/)( variable[3] /*text*/) /*AbstractArrayRead::length*/;
+  /* Register variable[5]: Result */
   variable[5] = TAG_Int(UNTAG_Int( variable[1] /*off*/)-UNTAG_Int(variable[5]));
   variable[4] = variable[5];
+  /* Register variable[5]: Result */
   variable[5] = TAG_Bool(UNTAG_Int( variable[4] /*rest*/)>UNTAG_Int( TAG_Int(0)));
   if (UNTAG_Bool(variable[5])) { /*if*/
-    variable[5] = NEW_String_string___String___with_native(BOX_NativeString(" "), TAG_Int(1)); /*new String*/
+    /* Register variable[5]: Once String constant */
+    if (once_value_7 != NIT_NULL) variable[5] = once_value_7;
+    else {
+      variable[5] = NEW_String_string___String___with_native(BOX_NativeString(" "), TAG_Int(1)) /*new String*/;
+      once_value_7 = variable[5];
+    }
+    /* Register variable[5]: Result */
+    /* Register variable[5]: Result */
     variable[5] = CALL_string___String_____star(variable[5])(variable[5],  variable[4] /*rest*/) /*String::**/;
-    CALL_abstract_collection___IndexedCollection___append( variable[3] /*text*/)( variable[3] /*text*/, variable[5]) /*String::append*/;
+    CALL_abstract_collection___IndexedCollection___append( variable[3] /*text*/)( variable[3] /*text*/, variable[5]) /*Buffer::append*/;
   }
-  variable[5] = variable[0];
-  variable[5] = CALL_opts___Option___helptext(variable[5])(variable[5]) /*Option::helptext*/;
-  CALL_abstract_collection___IndexedCollection___append( variable[3] /*text*/)( variable[3] /*text*/, variable[5]) /*String::append*/;
-  variable[2] =  variable[3] /*text*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_opts___Option___helptext(variable[0])(variable[0]) /*Option::helptext*/;
+  CALL_abstract_collection___IndexedCollection___append( variable[3] /*text*/)( variable[3] /*text*/, variable[5]) /*Buffer::append*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_string___Object___to_s( variable[3] /*text*/)( variable[3] /*text*/) /*Buffer::to_s*/;
+  variable[2] = variable[5];
   goto return_label3;
   return_label3: while(false);
   tracehead = trace.prev;
@@ -197,42 +246,66 @@ val_t opts___Option___pretty(val_t  self, val_t  param0) {
 }
 val_t opts___Option___pretty_default(val_t  self) {
   struct trace_t trace = {NULL, NULL, 70, LOCATE_opts___Option___pretty_default};
-  val_t variable[9];
-  void **closurevariable = NULL;
+    static val_t once_value_9 = NIT_NULL; /* Once value for string variable[3]*/
+    static val_t once_value_10 = NIT_NULL; /* Once value for string variable[3]*/
+  static val_t once_value_11 = NIT_NULL; /* Once value for string variable[2]*/
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_opts___Option___default_value(variable[2])(variable[2]) /*Option::default_value*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_opts___Option___default_value(variable[0])(variable[0]) /*Option::default_value*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[2] ==  NIT_NULL /*null*/) || ((variable[2] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[2])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[2], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[2])(variable[2],  NIT_NULL /*null*/) /*Object::==*/)))))));
   if (UNTAG_Bool(variable[2])) { /*if*/
-    variable[2] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-    variable[3] = NEW_String_string___String___with_native(BOX_NativeString(" ("), TAG_Int(2)); /*new String*/
-    variable[4] = variable[3];
-    CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[4]) /*AbstractArray::add*/;
-    variable[5] = variable[0];
-    variable[5] = CALL_opts___Option___default_value(variable[5])(variable[5]) /*Option::default_value*/;
-    variable[6] = variable[5];
-    variable[6] = CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/;
-    CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[6]) /*AbstractArray::add*/;
-    variable[7] = NEW_String_string___String___with_native(BOX_NativeString(")"), TAG_Int(1)); /*new String*/
-    variable[8] = variable[7];
-    CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[8]) /*AbstractArray::add*/;
+    variable[2] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[3]: Once String constant */
+    if (once_value_9 != NIT_NULL) variable[3] = once_value_9;
+    else {
+      variable[3] = NEW_String_string___String___with_native(BOX_NativeString(" ("), TAG_Int(2)) /*new String*/;
+      once_value_9 = variable[3];
+    }
+    /* Register variable[3]: Result */
+    /* Ensure var variable[3]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[3]) /*AbstractArray::add*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_opts___Option___default_value(variable[0])(variable[0]) /*Option::default_value*/;
+    /* Ensure var variable[3]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], CALL_string___Object___to_s(variable[3])(variable[3]) /*Object::to_s*/) /*AbstractArray::add*/;
+    /* Register variable[3]: Once String constant */
+    if (once_value_10 != NIT_NULL) variable[3] = once_value_10;
+    else {
+      variable[3] = NEW_String_string___String___with_native(BOX_NativeString(")"), TAG_Int(1)) /*new String*/;
+      once_value_10 = variable[3];
+    }
+    /* Register variable[3]: Result */
+    /* Ensure var variable[3]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[3]) /*AbstractArray::add*/;
+    /* Register variable[2]: Result */
     variable[2] = CALL_string___Object___to_s(variable[2])(variable[2]) /*Object::to_s*/;
     variable[1] = variable[2];
-    goto return_label4;
+    goto return_label8;
   }
-  variable[2] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+  /* Register variable[2]: Once String constant */
+  if (once_value_11 != NIT_NULL) variable[2] = once_value_11;
+  else {
+    variable[2] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_11 = variable[2];
+  }
+  /* Register variable[2]: Result */
   variable[1] = variable[2];
-  goto return_label4;
-  return_label4: while(false);
+  goto return_label8;
+  return_label8: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 void opts___Option___read_param(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 78, LOCATE_opts___Option___read_param};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
   fprintf(stderr, "Deferred method called");
@@ -244,600 +317,813 @@ void opts___Option___read_param(val_t  self, val_t  param0) {
 val_t opts___OptionText___to_s(val_t  self) {
   struct trace_t trace = {NULL, NULL, 88, LOCATE_opts___OptionText___to_s};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_opts___Option___helptext(variable[2])(variable[2]) /*Option::helptext*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_opts___Option___helptext(variable[0])(variable[0]) /*Option::helptext*/;
   variable[1] = variable[2];
-  goto return_label5;
-  return_label5: while(false);
+  goto return_label12;
+  return_label12: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t opts___OptionText___pretty(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 86, LOCATE_opts___OptionText___pretty};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_string___Object___to_s(variable[3])(variable[3]) /*OptionText::to_s*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_string___Object___to_s(variable[0])(variable[0]) /*OptionText::to_s*/;
   variable[2] = variable[3];
-  goto return_label6;
-  return_label6: while(false);
+  goto return_label13;
+  return_label13: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 void opts___OptionText___init(val_t  self, val_t  param0, int* init_table) {
   struct trace_t trace = {NULL, NULL, 84, LOCATE_opts___OptionText___init};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionText].i]) return;
-  variable[3] = variable[0];
-  CALL_opts___Option___init_opt(variable[3])(variable[3],  variable[1] /*text*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/, init_table /*YYY*/) /*Option::init_opt*/;
-  return_label7: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_opts___Option___init_opt(variable[0])(variable[0],  variable[1] /*text*/,  NIT_NULL /*null*/,  NIT_NULL /*null*/, init_table /*YYY*/) /*Option::init_opt*/;
+  return_label14: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionText].i] = 1;
   tracehead = trace.prev;
   return;
 }
 void opts___OptionBool___read_param(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 97, LOCATE_opts___OptionBool___read_param};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  CALL_opts___Option___value__eq(variable[3])(variable[3],  TAG_Bool(true)) /*Option::value=*/;
-  return_label8: while(false);
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_opts___Option___value__eq(variable[0])(variable[0],  TAG_Bool(true)) /*Option::value=*/;
+  return_label15: while(false);
   tracehead = trace.prev;
   return;
 }
 void opts___OptionBool___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
   struct trace_t trace = {NULL, NULL, 95, LOCATE_opts___OptionBool___init};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   /* check if p<Array[String] with p:String */
   if (( param1!=NIT_NULL) && !VAL_ISA( param1, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionBool___init, LOCATE_opts, 95); nit_exit(1); } /*cast Array[String]*/;
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionBool].i]) return;
-  variable[4] = variable[0];
-  CALL_opts___Option___init_opt(variable[4])(variable[4],  variable[1] /*help*/,  TAG_Bool(false),  variable[2] /*names*/, init_table /*YYY*/) /*Option::init_opt*/;
-  return_label9: while(false);
+  /* Register variable[3]: Method return value and escape marker */
+  CALL_opts___Option___init_opt(variable[0])(variable[0],  variable[1] /*help*/,  TAG_Bool(false),  variable[2] /*names*/, init_table /*YYY*/) /*Option::init_opt*/;
+  return_label16: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionBool].i] = 1;
   tracehead = trace.prev;
   return;
 }
-void opts___OptionParameter___read_param(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 105, LOCATE_opts___OptionParameter___read_param};
-  val_t variable[6];
-  void **closurevariable = NULL;
+void opts___OptionCount___read_param(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 106, LOCATE_opts___OptionCount___read_param};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = CALL_opts___Option___context(variable[3])(variable[3]) /*Option::context*/;
+  /* Register variable[2]: Method return value and escape marker */
+  CALL_opts___Option___value__eq(variable[0])(variable[0], TAG_Int(UNTAG_Int(CALL_opts___Option___value(variable[0])(variable[0]) /*Option::value*/)+UNTAG_Int( TAG_Int(1)))) /*Option::value=*/;
+  return_label17: while(false);
+  tracehead = trace.prev;
+  return;
+}
+void opts___OptionCount___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
+  struct trace_t trace = {NULL, NULL, 104, LOCATE_opts___OptionCount___init};
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Local variable */
+  /* check if p<Array[String] with p:String */
+  if (( param1!=NIT_NULL) && !VAL_ISA( param1, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionCount___init, LOCATE_opts, 104); nit_exit(1); } /*cast Array[String]*/;
+  variable[2] =  param1;
+  if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionCount].i]) return;
+  /* Register variable[3]: Method return value and escape marker */
+  CALL_opts___Option___init_opt(variable[0])(variable[0],  variable[1] /*help*/,  TAG_Int(0),  variable[2] /*names*/, init_table /*YYY*/) /*Option::init_opt*/;
+  return_label18: while(false);
+  init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionCount].i] = 1;
+  tracehead = trace.prev;
+  return;
+}
+void opts___OptionParameter___read_param(val_t  self, val_t  param0) {
+  struct trace_t trace = {NULL, NULL, 114, LOCATE_opts___OptionParameter___read_param};
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
+  trace.prev = tracehead; tracehead = &trace;
+  trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
+  variable[0] =  self;
+  /* Register variable[1]: Local variable */
+  variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_opts___Option___context(variable[0])(variable[0]) /*Option::context*/;
+  /* Register variable[3]: Result */
   variable[3] = TAG_Bool(!UNTAG_Bool(TAG_Bool((variable[3] ==  NIT_NULL /*null*/) || ((variable[3] != NIT_NULL) && ((CALL_kernel___Object_____eqeq(variable[3])==kernel___Object_____eqeq)?(IS_EQUAL_NN(variable[3], NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq(variable[3])(variable[3],  NIT_NULL /*null*/) /*Object::==*/)))))));
-  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionParameter___read_param, LOCATE_opts, 107); nit_exit(1);}
+  if (!UNTAG_Bool(variable[3])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionParameter___read_param, LOCATE_opts, 116); nit_exit(1);}
+  /* Register variable[3]: Result */
   variable[3] = CALL_abstract_collection___Iterator___is_ok( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::is_ok*/;
   if (UNTAG_Bool(variable[3])) { /*if*/
-    variable[3] = variable[0];
-    variable[4] = variable[0];
-    variable[5] = CALL_abstract_collection___Iterator___item( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::item*/;
-    variable[4] = CALL_opts___OptionParameter___convert(variable[4])(variable[4], variable[5]) /*OptionParameter::convert*/;
-    CALL_opts___Option___value__eq(variable[3])(variable[3], variable[4]) /*Option::value=*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_abstract_collection___Iterator___item( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::item*/;
+    /* Register variable[3]: Result */
+    variable[3] = CALL_opts___OptionParameter___convert(variable[0])(variable[0], variable[3]) /*OptionParameter::convert*/;
+    CALL_opts___Option___value__eq(variable[0])(variable[0], variable[3]) /*Option::value=*/;
     CALL_abstract_collection___Iterator___next( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::next*/;
   } else { /*if*/
   }
-  return_label10: while(false);
+  return_label19: while(false);
   tracehead = trace.prev;
   return;
 }
 val_t opts___OptionParameter___convert(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 103, LOCATE_opts___OptionParameter___convert};
+  struct trace_t trace = {NULL, NULL, 112, LOCATE_opts___OptionParameter___convert};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
   fprintf(stderr, "Deferred method called");
-  fprintf(stderr, " (%s:%d)\n", LOCATE_opts, 103);
+  fprintf(stderr, " (%s:%d)\n", LOCATE_opts, 112);
   nit_exit(1);
   tracehead = trace.prev;
   return NIT_NULL;
 }
 void opts___OptionParameter___init_opt(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 116, LOCATE_opts___OptionParameter___init_opt};
+  struct trace_t trace = {NULL, NULL, 125, LOCATE_opts___OptionParameter___init_opt};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionParameter].i]) return;
+  /* Register variable[4]: Method return value and escape marker */
   CALL_opts___Option___init_opt(variable[0])(variable[0], variable[1], variable[2], variable[3], init_table /*YYY*/) /*Option::init_opt*/;
-  return_label11: while(false);
+  return_label20: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionParameter].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t opts___OptionString___convert(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 125, LOCATE_opts___OptionString___convert};
+  struct trace_t trace = {NULL, NULL, 134, LOCATE_opts___OptionString___convert};
   val_t variable[3];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
   variable[2] =  variable[1] /*str*/;
-  goto return_label12;
-  return_label12: while(false);
+  goto return_label21;
+  return_label21: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 void opts___OptionString___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 123, LOCATE_opts___OptionString___init};
-  val_t variable[5];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 132, LOCATE_opts___OptionString___init};
+  val_t variable[4];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   /* check if p<Array[String] with p:String */
-  if (( param1!=NIT_NULL) && !VAL_ISA( param1, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionString___init, LOCATE_opts, 123); nit_exit(1); } /*cast Array[String]*/;
+  if (( param1!=NIT_NULL) && !VAL_ISA( param1, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionString___init, LOCATE_opts, 132); nit_exit(1); } /*cast Array[String]*/;
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionString].i]) return;
-  variable[4] = variable[0];
-  CALL_opts___OptionParameter___init_opt(variable[4])(variable[4],  variable[1] /*help*/,  NIT_NULL /*null*/,  variable[2] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
-  return_label13: while(false);
+  /* Register variable[3]: Method return value and escape marker */
+  CALL_opts___OptionParameter___init_opt(variable[0])(variable[0],  variable[1] /*help*/,  NIT_NULL /*null*/,  variable[2] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
+  return_label22: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionString].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t opts___OptionEnum___pretty_default(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 146, LOCATE_opts___OptionEnum___pretty_default};
-  val_t variable[12];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 155, LOCATE_opts___OptionEnum___pretty_default};
+    static val_t once_value_24 = NIT_NULL; /* Once value for string variable[3]*/
+    static val_t once_value_26 = NIT_NULL; /* Once value for string variable[3]*/
+    static val_t once_value_27 = NIT_NULL; /* Once value for string variable[2]*/
+  val_t variable[9];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = CALL_opts___Option___default_value(variable[2])(variable[2]) /*Option::default_value*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = CALL_opts___Option___default_value(variable[0])(variable[0]) /*Option::default_value*/;
+  /* Register variable[2]: Result */
   variable[2] = TAG_Bool((variable[2])!=( NIT_NULL /*null*/));
   if (UNTAG_Bool(variable[2])) { /*if*/
-    variable[2] = NEW_Array_array___Array___with_capacity(TAG_Int(3)); /*new Array[String]*/
-    variable[3] = NEW_String_string___String___with_native(BOX_NativeString(" ("), TAG_Int(2)); /*new String*/
-    variable[4] = variable[3];
-    CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[4]) /*AbstractArray::add*/;
-    variable[5] = variable[0];
-    variable[5] = ATTR_opts___OptionEnum____enum(variable[5]) /*OptionEnum::_enum*/;
-    variable[6] = variable[0];
-    variable[6] = CALL_opts___Option___default_value(variable[6])(variable[6]) /*Option::default_value*/;
-    variable[7] = variable[5];
-    variable[8] = variable[6];
-    variable[10] = TAG_Bool(UNTAG_Int( variable[8] /*index*/)>=UNTAG_Int( TAG_Int(0)));
-    variable[11] = variable[10];
-    if (UNTAG_Bool(variable[11])) { /* and */
-      variable[11] = variable[7];
-      variable[11] = ATTR_array___AbstractArray____length(variable[11]) /*AbstractArray::_length*/;
-      variable[11] = TAG_Bool(UNTAG_Int( variable[8] /*index*/)<UNTAG_Int(variable[11]));
+    variable[2] = NEW_Array_array___Array___with_capacity(TAG_Int(3)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+    /* Register variable[3]: Once String constant */
+    if (once_value_24 != NIT_NULL) variable[3] = once_value_24;
+    else {
+      variable[3] = NEW_String_string___String___with_native(BOX_NativeString(" ("), TAG_Int(2)) /*new String*/;
+      once_value_24 = variable[3];
     }
-    variable[10] = variable[11];
-    if (!UNTAG_Bool(variable[10])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_opts, 229); nit_exit(1);}
-    variable[10] = variable[7];
-    variable[10] = ATTR_array___Array____items(variable[10]) /*Array::_items*/;
-    variable[10] = UNBOX_NativeArray(variable[10])[UNTAG_Int( variable[8] /*index*/)];
-    variable[9] = variable[10];
-    goto return_label15;
-    return_label15: while(false);
-    variable[5] = variable[9];
-    variable[6] = variable[5];
-    CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[6]) /*AbstractArray::add*/;
-    variable[7] = NEW_String_string___String___with_native(BOX_NativeString(")"), TAG_Int(1)); /*new String*/
-    variable[8] = variable[7];
-    CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[8]) /*AbstractArray::add*/;
+    /* Register variable[3]: Result */
+    /* Ensure var variable[3]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[3]) /*AbstractArray::add*/;
+    /* Register variable[3]: Result */
+    variable[3] = ATTR_opts___OptionEnum____enum(variable[0]) /*OptionEnum::_enum*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_opts___Option___default_value(variable[0])(variable[0]) /*Option::default_value*/;
+    /* Register variable[5]: Local variable */
+    variable[5] = variable[3];
+    /* Register variable[6]: Local variable */
+    variable[6] = variable[4];
+    /* Register variable[7]: Method return value and escape marker */
+    /* Register variable[8]: Result */
+    variable[8] = TAG_Bool(UNTAG_Int( variable[6] /*index*/)>=UNTAG_Int( TAG_Int(0)));
+    /* Ensure var variable[8]: Left 'and' operand*/
+    if (UNTAG_Bool(variable[8])) { /* and */
+      /* Register variable[8]: Result */
+      variable[8] = ATTR_array___AbstractArrayRead____length(variable[5]) /*AbstractArrayRead::_length*/;
+      /* Register variable[8]: Result */
+      variable[8] = TAG_Bool(UNTAG_Int( variable[6] /*index*/)<UNTAG_Int(variable[8]));
+    }
+    /* Register variable[8]: Result */
+    if (!UNTAG_Bool(variable[8])) { fprintf(stderr, "Assert%s failed", " 'index' "); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_array___Array_____bra, LOCATE_opts, 234); nit_exit(1);}
+    /* Register variable[8]: Result */
+    variable[8] = ATTR_array___Array____items(variable[5]) /*Array::_items*/;
+    /* Register variable[8]: Result */
+    variable[8] = UNBOX_NativeArray(variable[8])[UNTAG_Int( variable[6] /*index*/)];
+    variable[7] = variable[8];
+    goto return_label25;
+    return_label25: while(false);
+    /* Register variable[3]: Result */
+    variable[3] = variable[7];
+    /* Ensure var variable[3]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[3]) /*AbstractArray::add*/;
+    /* Register variable[3]: Once String constant */
+    if (once_value_26 != NIT_NULL) variable[3] = once_value_26;
+    else {
+      variable[3] = NEW_String_string___String___with_native(BOX_NativeString(")"), TAG_Int(1)) /*new String*/;
+      once_value_26 = variable[3];
+    }
+    /* Register variable[3]: Result */
+    /* Ensure var variable[3]: super-string element*/
+    CALL_abstract_collection___SimpleCollection___add(variable[2])(variable[2], variable[3]) /*AbstractArray::add*/;
+    /* Register variable[2]: Result */
     variable[2] = CALL_string___Object___to_s(variable[2])(variable[2]) /*Object::to_s*/;
     variable[1] = variable[2];
-    goto return_label14;
+    goto return_label23;
   } else { /*if*/
-    variable[2] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
+    /* Register variable[2]: Once String constant */
+    if (once_value_27 != NIT_NULL) variable[2] = once_value_27;
+    else {
+      variable[2] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+      once_value_27 = variable[2];
+    }
+    /* Register variable[2]: Result */
     variable[1] = variable[2];
-    goto return_label14;
+    goto return_label23;
   }
-  return_label14: while(false);
+  return_label23: while(false);
   tracehead = trace.prev;
   return variable[1];
 }
 val_t opts___OptionEnum___convert(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 140, LOCATE_opts___OptionEnum___convert};
+  struct trace_t trace = {NULL, NULL, 149, LOCATE_opts___OptionEnum___convert};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[4] = variable[0];
-  variable[4] = ATTR_opts___OptionEnum____enum(variable[4]) /*OptionEnum::_enum*/;
-  variable[4] = CALL_abstract_collection___IndexedCollection___index_of(variable[4])(variable[4],  variable[1] /*str*/) /*AbstractArray::index_of*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_opts___OptionEnum____enum(variable[0]) /*OptionEnum::_enum*/;
+  /* Register variable[4]: Result */
+  variable[4] = CALL_abstract_collection___IndexedCollectionRead___index_of(variable[4])(variable[4],  variable[1] /*str*/) /*AbstractArrayRead::index_of*/;
   variable[3] = variable[4];
   variable[2] =  variable[3] /*id*/;
-  goto return_label16;
-  return_label16: while(false);
+  goto return_label28;
+  return_label28: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 void opts___OptionEnum___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, val_t  param3, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 133, LOCATE_opts___OptionEnum___init};
-  val_t variable[17];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 142, LOCATE_opts___OptionEnum___init};
+  static val_t once_value_30 = NIT_NULL; /* Once value for string variable[7]*/
+  static val_t once_value_31 = NIT_NULL; /* Once value for string variable[7]*/
+  static val_t once_value_32 = NIT_NULL; /* Once value for string variable[7]*/
+  static val_t once_value_33 = NIT_NULL; /* Once value for string variable[7]*/
+  val_t variable[8];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   variable[3] =  param2;
+  /* Register variable[4]: Local variable */
   /* check if p<Array[String] with p:String */
-  if (( param3!=NIT_NULL) && !VAL_ISA( param3, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionEnum___init, LOCATE_opts, 133); nit_exit(1); } /*cast Array[String]*/;
+  if (( param3!=NIT_NULL) && !VAL_ISA( param3, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionEnum___init, LOCATE_opts, 142); nit_exit(1); } /*cast Array[String]*/;
   variable[4] =  param3;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionEnum].i]) return;
+  /* Register variable[5]: Method return value and escape marker */
+  /* Register variable[6]: Result */
   variable[6] = TAG_Bool(!UNTAG_Bool(TAG_Bool(( variable[1] /*enum*/ ==  NIT_NULL /*null*/) || (( variable[1] /*enum*/ != NIT_NULL) && ((CALL_kernel___Object_____eqeq( variable[1] /*enum*/)==kernel___Object_____eqeq)?(IS_EQUAL_NN( variable[1] /*enum*/, NIT_NULL /*null*/)):(UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[1] /*enum*/)( variable[1] /*enum*/,  NIT_NULL /*null*/) /*Object::==*/)))))));
-  variable[7] = variable[6];
-  if (UNTAG_Bool(variable[7])) { /* and */
-    variable[7] = CALL_abstract_collection___Collection___length( variable[1] /*enum*/)( variable[1] /*enum*/) /*AbstractArray::length*/;
-    variable[7] = TAG_Bool(UNTAG_Int(variable[7])>UNTAG_Int( TAG_Int(0)));
+  /* Ensure var variable[6]: Left 'and' operand*/
+  if (UNTAG_Bool(variable[6])) { /* and */
+    /* Register variable[6]: Result */
+    variable[6] = CALL_abstract_collection___Collection___length( variable[1] /*enum*/)( variable[1] /*enum*/) /*AbstractArrayRead::length*/;
+    /* Register variable[6]: Result */
+    variable[6] = TAG_Bool(UNTAG_Int(variable[6])>UNTAG_Int( TAG_Int(0)));
   }
-  variable[6] = variable[7];
-  if (!UNTAG_Bool(variable[6])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionEnum___init, LOCATE_opts, 135); nit_exit(1);}
-  variable[6] = variable[0];
-  variable[7] = CALL_array___Collection___to_a( variable[1] /*enum*/)( variable[1] /*enum*/) /*Collection::to_a*/;
-  ATTR_opts___OptionEnum____enum(variable[6]) /*OptionEnum::_enum*/ = variable[7];
-  variable[6] = variable[0];
-  variable[7] = NEW_Array_array___Array___with_capacity(TAG_Int(5)); /*new Array[String]*/
-  variable[8] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)); /*new String*/
-  variable[9] = variable[8];
-  CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[9]) /*AbstractArray::add*/;
-  variable[10] =  variable[2] /*help*/;
-  CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[10]) /*AbstractArray::add*/;
-  variable[11] = NEW_String_string___String___with_native(BOX_NativeString(" <"), TAG_Int(2)); /*new String*/
-  variable[12] = variable[11];
-  CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[12]) /*AbstractArray::add*/;
-  variable[13] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)); /*new String*/
-  variable[13] = CALL_string___Collection___join( variable[1] /*enum*/)( variable[1] /*enum*/, variable[13]) /*Collection::join*/;
-  variable[14] = variable[13];
-  CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[14]) /*AbstractArray::add*/;
-  variable[15] = NEW_String_string___String___with_native(BOX_NativeString(">"), TAG_Int(1)); /*new String*/
-  variable[16] = variable[15];
-  CALL_abstract_collection___SimpleCollection___add(variable[7])(variable[7], variable[16]) /*AbstractArray::add*/;
-  variable[7] = CALL_string___Object___to_s(variable[7])(variable[7]) /*Object::to_s*/;
-  CALL_opts___OptionParameter___init_opt(variable[6])(variable[6], variable[7],  variable[3] /*default*/,  variable[4] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
-  return_label17: while(false);
+  /* Register variable[6]: Result */
+  if (!UNTAG_Bool(variable[6])) { fprintf(stderr, "Assert%s failed", ""); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionEnum___init, LOCATE_opts, 144); nit_exit(1);}
+  /* Register variable[6]: Result */
+  variable[6] = CALL_array___Collection___to_a( variable[1] /*enum*/)( variable[1] /*enum*/) /*Collection::to_a*/;
+  ATTR_opts___OptionEnum____enum(variable[0]) /*OptionEnum::_enum*/ = variable[6];
+  variable[6] = NEW_Array_array___Array___with_capacity(TAG_Int(5)) /*new Array[String]*/ /* Ensure var: Array (for super-string)*/;
+  /* Register variable[7]: Once String constant */
+  if (once_value_30 != NIT_NULL) variable[7] = once_value_30;
+  else {
+    variable[7] = NEW_String_string___String___with_native(BOX_NativeString(""), TAG_Int(0)) /*new String*/;
+    once_value_30 = variable[7];
+  }
+  /* Register variable[7]: Result */
+  /* Ensure var variable[7]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+  variable[7] =  variable[2] /*help*/ /* Ensure var: super-string element*/;
+  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+  /* Register variable[7]: Once String constant */
+  if (once_value_31 != NIT_NULL) variable[7] = once_value_31;
+  else {
+    variable[7] = NEW_String_string___String___with_native(BOX_NativeString(" <"), TAG_Int(2)) /*new String*/;
+    once_value_31 = variable[7];
+  }
+  /* Register variable[7]: Result */
+  /* Ensure var variable[7]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+  /* Register variable[7]: Once String constant */
+  if (once_value_32 != NIT_NULL) variable[7] = once_value_32;
+  else {
+    variable[7] = NEW_String_string___String___with_native(BOX_NativeString(", "), TAG_Int(2)) /*new String*/;
+    once_value_32 = variable[7];
+  }
+  /* Register variable[7]: Result */
+  /* Register variable[7]: Result */
+  variable[7] = CALL_string___Collection___join( variable[1] /*enum*/)( variable[1] /*enum*/, variable[7]) /*Collection::join*/;
+  /* Ensure var variable[7]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+  /* Register variable[7]: Once String constant */
+  if (once_value_33 != NIT_NULL) variable[7] = once_value_33;
+  else {
+    variable[7] = NEW_String_string___String___with_native(BOX_NativeString(">"), TAG_Int(1)) /*new String*/;
+    once_value_33 = variable[7];
+  }
+  /* Register variable[7]: Result */
+  /* Ensure var variable[7]: super-string element*/
+  CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6], variable[7]) /*AbstractArray::add*/;
+  /* Register variable[6]: Result */
+  variable[6] = CALL_string___Object___to_s(variable[6])(variable[6]) /*Object::to_s*/;
+  CALL_opts___OptionParameter___init_opt(variable[0])(variable[0], variable[6],  variable[3] /*default*/,  variable[4] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
+  return_label29: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionEnum].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t opts___OptionInt___convert(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 162, LOCATE_opts___OptionInt___convert};
+  struct trace_t trace = {NULL, NULL, 171, LOCATE_opts___OptionInt___convert};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = CALL_string___String___to_i( variable[1] /*str*/)( variable[1] /*str*/) /*String::to_i*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = CALL_string___AbstractString___to_i( variable[1] /*str*/)( variable[1] /*str*/) /*AbstractString::to_i*/;
   variable[2] = variable[3];
-  goto return_label18;
-  return_label18: while(false);
+  goto return_label34;
+  return_label34: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 void opts___OptionInt___init(val_t  self, val_t  param0, val_t  param1, val_t  param2, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 160, LOCATE_opts___OptionInt___init};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 169, LOCATE_opts___OptionInt___init};
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   variable[2] =  param1;
+  /* Register variable[3]: Local variable */
   /* check if p<Array[String] with p:String */
-  if (( param2!=NIT_NULL) && !VAL_ISA( param2, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionInt___init, LOCATE_opts, 160); nit_exit(1); } /*cast Array[String]*/;
+  if (( param2!=NIT_NULL) && !VAL_ISA( param2, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionInt___init, LOCATE_opts, 169); nit_exit(1); } /*cast Array[String]*/;
   variable[3] =  param2;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionInt].i]) return;
-  variable[5] = variable[0];
-  CALL_opts___OptionParameter___init_opt(variable[5])(variable[5],  variable[1] /*help*/,  variable[2] /*default*/,  variable[3] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
-  return_label19: while(false);
+  /* Register variable[4]: Method return value and escape marker */
+  CALL_opts___OptionParameter___init_opt(variable[0])(variable[0],  variable[1] /*help*/,  variable[2] /*default*/,  variable[3] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
+  return_label35: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionInt].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t opts___OptionArray___convert(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 176, LOCATE_opts___OptionArray___convert};
+  struct trace_t trace = {NULL, NULL, 185, LOCATE_opts___OptionArray___convert};
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
-  variable[3] = variable[0];
-  variable[3] = ATTR_opts___OptionArray____values(variable[3]) /*OptionArray::_values*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_opts___OptionArray____values(variable[0]) /*OptionArray::_values*/;
   CALL_abstract_collection___SimpleCollection___add(variable[3])(variable[3],  variable[1] /*str*/) /*AbstractArray::add*/;
-  variable[3] = variable[0];
-  variable[3] = ATTR_opts___OptionArray____values(variable[3]) /*OptionArray::_values*/;
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_opts___OptionArray____values(variable[0]) /*OptionArray::_values*/;
   variable[2] = variable[3];
-  goto return_label20;
-  return_label20: while(false);
+  goto return_label36;
+  return_label36: while(false);
   tracehead = trace.prev;
   return variable[2];
 }
 void opts___OptionArray___init(val_t  self, val_t  param0, val_t  param1, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 169, LOCATE_opts___OptionArray___init};
-  val_t variable[6];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 178, LOCATE_opts___OptionArray___init};
+  val_t variable[5];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Local variable */
   /* check if p<Array[String] with p:String */
-  if (( param1!=NIT_NULL) && !VAL_ISA( param1, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionArray___init, LOCATE_opts, 169); nit_exit(1); } /*cast Array[String]*/;
+  if (( param1!=NIT_NULL) && !VAL_ISA( param1, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionArray___init, LOCATE_opts, 178); nit_exit(1); } /*cast Array[String]*/;
   variable[2] =  param1;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionArray].i]) return;
-  variable[4] = variable[0];
-  variable[5] = NEW_Array_array___Array___init(); /*new Array[String]*/
-  ATTR_opts___OptionArray____values(variable[4]) /*OptionArray::_values*/ = variable[5];
-  variable[4] = variable[0];
-  variable[5] = variable[0];
-  variable[5] = ATTR_opts___OptionArray____values(variable[5]) /*OptionArray::_values*/;
-  CALL_opts___OptionParameter___init_opt(variable[4])(variable[4],  variable[1] /*help*/, variable[5],  variable[2] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
-  return_label21: while(false);
+  /* Register variable[3]: Method return value and escape marker */
+  /* Register variable[4]: Result */
+  variable[4] = NEW_Array_array___Array___init() /*new Array[String]*/;
+  ATTR_opts___OptionArray____values(variable[0]) /*OptionArray::_values*/ = variable[4];
+  /* Register variable[4]: Result */
+  variable[4] = ATTR_opts___OptionArray____values(variable[0]) /*OptionArray::_values*/;
+  CALL_opts___OptionParameter___init_opt(variable[0])(variable[0],  variable[1] /*help*/, variable[4],  variable[2] /*names*/, init_table /*YYY*/) /*OptionParameter::init_opt*/;
+  return_label37: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionArray].i] = 1;
   tracehead = trace.prev;
   return;
 }
 val_t opts___OptionContext___options(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 184, LOCATE_opts___OptionContext___options};
+  struct trace_t trace = {NULL, NULL, 193, LOCATE_opts___OptionContext___options};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
   tracehead = trace.prev;
   return ATTR_opts___OptionContext____options( self) /*OptionContext::_options*/;
 }
 val_t opts___OptionContext___rest(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 185, LOCATE_opts___OptionContext___rest};
+  struct trace_t trace = {NULL, NULL, 194, LOCATE_opts___OptionContext___rest};
   val_t *variable = NULL;
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
   tracehead = trace.prev;
   return ATTR_opts___OptionContext____rest( self) /*OptionContext::_rest*/;
 }
 void opts___OptionContext___usage(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 189, LOCATE_opts___OptionContext___usage};
+  struct trace_t trace = {NULL, NULL, 198, LOCATE_opts___OptionContext___usage};
   val_t variable[11];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
   variable[2] =  TAG_Int(1);
-  variable[3] = variable[0];
-  variable[3] = ATTR_opts___OptionContext____options(variable[3]) /*OptionContext::_options*/;
-  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArray::iterator*/;
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_opts___OptionContext____options(variable[0]) /*OptionContext::_options*/;
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
+    /* Register variable[6]: Local variable */
     variable[6] =  TAG_Int(3);
+    /* Register variable[7]: Result */
     variable[7] = CALL_opts___Option___names( variable[5] /*i*/)( variable[5] /*i*/) /*Option::names*/;
-    variable[7] = CALL_abstract_collection___Collection___iterator(variable[7])(variable[7]) /*AbstractArray::iterator*/;
+    /* Register variable[7]: For iterator */
+    variable[7] = CALL_abstract_collection___Collection___iterator(variable[7])(variable[7]) /*AbstractArrayRead::iterator*/;
     while (true) { /*for*/
+      /* Register variable[8]: For 'is_ok' result */
       variable[8] = CALL_abstract_collection___Iterator___is_ok(variable[7])(variable[7]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[8])) break; /*for*/
-      variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*ArrayIterator::item*/;
+      variable[8] = CALL_abstract_collection___Iterator___item(variable[7])(variable[7]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[9]: Local variable */
       variable[9] = variable[8];
-      variable[10] = CALL_abstract_collection___Collection___length( variable[9] /*n*/)( variable[9] /*n*/) /*AbstractArray::length*/;
+      /* Register variable[10]: Result */
+      variable[10] = CALL_abstract_collection___Collection___length( variable[9] /*n*/)( variable[9] /*n*/) /*AbstractArrayRead::length*/;
+      /* Register variable[10]: Result */
       variable[10] = TAG_Int(UNTAG_Int(variable[10])+UNTAG_Int( TAG_Int(2)));
       variable[6] = TAG_Int(UNTAG_Int(variable[6])+UNTAG_Int(variable[10])) /*l*/;
-      continue_24: while(0);
+      continue_40: while(0);
       CALL_abstract_collection___Iterator___next(variable[7])(variable[7]) /*ArrayIterator::next*/;
     }
-    break_24: while(0);
+    break_40: while(0);
+    /* Register variable[7]: Result */
     variable[7] = TAG_Bool(UNTAG_Int( variable[2] /*lmax*/)<UNTAG_Int( variable[6] /*l*/));
     if (UNTAG_Bool(variable[7])) { /*if*/
       variable[2] =  variable[6] /*l*/ /*lmax=*/;
     }
-    continue_23: while(0);
+    continue_39: while(0);
     CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*ArrayIterator::next*/;
   }
-  break_23: while(0);
-  variable[3] = variable[0];
-  variable[3] = ATTR_opts___OptionContext____options(variable[3]) /*OptionContext::_options*/;
-  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArray::iterator*/;
+  break_39: while(0);
+  /* Register variable[3]: Result */
+  variable[3] = ATTR_opts___OptionContext____options(variable[0]) /*OptionContext::_options*/;
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator(variable[3])(variable[3]) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
-    variable[6] = variable[0];
-    variable[7] = CALL_opts___Option___pretty( variable[5] /*i*/)( variable[5] /*i*/,  variable[2] /*lmax*/) /*Option::pretty*/;
-    CALL_file___Object___print(variable[6])(variable[6], variable[7]) /*Object::print*/;
-    continue_25: while(0);
+    /* Register variable[6]: Result */
+    variable[6] = CALL_opts___Option___pretty( variable[5] /*i*/)( variable[5] /*i*/,  variable[2] /*lmax*/) /*Option::pretty*/;
+    CALL_file___Object___print(variable[0])(variable[0], variable[6]) /*Object::print*/;
+    continue_41: while(0);
     CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*ArrayIterator::next*/;
   }
-  break_25: while(0);
-  return_label22: while(false);
+  break_41: while(0);
+  return_label38: while(false);
   tracehead = trace.prev;
   return;
 }
 void opts___OptionContext___parse(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 205, LOCATE_opts___OptionContext___parse};
+  struct trace_t trace = {NULL, NULL, 214, LOCATE_opts___OptionContext___parse};
   val_t variable[5];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Result */
   variable[4] = CALL_abstract_collection___Collection___iterator( variable[1] /*argv*/)( variable[1] /*argv*/) /*Collection::iterator*/;
   variable[3] = variable[4];
-  variable[4] = variable[0];
-  CALL_opts___OptionContext___parse_intern(variable[4])(variable[4],  variable[3] /*it*/) /*OptionContext::parse_intern*/;
-  return_label26: while(false);
+  CALL_opts___OptionContext___parse_intern(variable[0])(variable[0],  variable[3] /*it*/) /*OptionContext::parse_intern*/;
+  return_label42: while(false);
   tracehead = trace.prev;
   return;
 }
 void opts___OptionContext___parse_intern(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 212, LOCATE_opts___OptionContext___parse_intern};
+  struct trace_t trace = {NULL, NULL, 221, LOCATE_opts___OptionContext___parse_intern};
+    static val_t once_value_45 = NIT_NULL; /* Once value for string variable[6]*/
   val_t variable[8];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
   variable[3] =  TAG_Bool(true);
-  variable[4] = variable[0];
-  CALL_opts___OptionContext___build(variable[4])(variable[4]) /*OptionContext::build*/;
-  variable[5] = variable[0];
-  variable[5] = ATTR_opts___OptionContext____rest(variable[5]) /*OptionContext::_rest*/;
+  CALL_opts___OptionContext___build(variable[0])(variable[0]) /*OptionContext::build*/;
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = ATTR_opts___OptionContext____rest(variable[0]) /*OptionContext::_rest*/;
   variable[4] = variable[5];
   while (true) { /*while*/
-    variable[5] =  variable[3] /*parseargs*/;
+    variable[5] =  variable[3] /*parseargs*/ /* Ensure var: Left 'and' operand*/;
     if (UNTAG_Bool(variable[5])) { /* and */
+      /* Register variable[5]: Result */
       variable[5] = CALL_abstract_collection___Iterator___is_ok( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::is_ok*/;
     }
+    /* Register variable[5]: Result */
     if (!UNTAG_Bool(variable[5])) break; /* while*/
+    /* Register variable[5]: Local variable */
+    /* Register variable[6]: Result */
     variable[6] = CALL_abstract_collection___Iterator___item( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::item*/;
     variable[5] = variable[6];
-    variable[6] = NEW_String_string___String___with_native(BOX_NativeString("--"), TAG_Int(2)); /*new String*/
+    /* Register variable[6]: Once String constant */
+    if (once_value_45 != NIT_NULL) variable[6] = once_value_45;
+    else {
+      variable[6] = NEW_String_string___String___with_native(BOX_NativeString("--"), TAG_Int(2)) /*new String*/;
+      once_value_45 = variable[6];
+    }
+    /* Register variable[6]: Result */
+    /* Register variable[6]: Result */
     variable[6] = TAG_Bool(( variable[5] /*str*/ == variable[6]) || (( variable[5] /*str*/ != NIT_NULL) && UNTAG_Bool(CALL_kernel___Object_____eqeq( variable[5] /*str*/)( variable[5] /*str*/, variable[6]) /*String::==*/)));
     if (UNTAG_Bool(variable[6])) { /*if*/
       CALL_abstract_collection___Iterator___next( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::next*/;
+      /* Register variable[6]: Result */
       variable[6] = CALL_array___Iterator___to_a( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::to_a*/;
       CALL_abstract_collection___SimpleCollection___add_all( variable[4] /*rest*/)( variable[4] /*rest*/, variable[6]) /*SimpleCollection::add_all*/;
       variable[3] =  TAG_Bool(false) /*parseargs=*/;
     } else { /*if*/
-      variable[6] = variable[0];
-      variable[6] = ATTR_opts___OptionContext____optmap(variable[6]) /*OptionContext::_optmap*/;
-      variable[6] = CALL_abstract_collection___Map___has_key(variable[6])(variable[6],  variable[5] /*str*/) /*Map::has_key*/;
+      /* Register variable[6]: Result */
+      variable[6] = ATTR_opts___OptionContext____optmap(variable[0]) /*OptionContext::_optmap*/;
+      /* Register variable[6]: Result */
+      variable[6] = CALL_abstract_collection___MapRead___has_key(variable[6])(variable[6],  variable[5] /*str*/) /*MapRead::has_key*/;
       if (UNTAG_Bool(variable[6])) { /*if*/
-        variable[7] = variable[0];
-        variable[7] = ATTR_opts___OptionContext____optmap(variable[7]) /*OptionContext::_optmap*/;
-        variable[7] = CALL_abstract_collection___Map_____bra(variable[7])(variable[7],  variable[5] /*str*/) /*Map::[]*/;
+        /* Register variable[6]: Local variable */
+        /* Register variable[7]: Result */
+        variable[7] = ATTR_opts___OptionContext____optmap(variable[0]) /*OptionContext::_optmap*/;
+        /* Register variable[7]: Result */
+        variable[7] = CALL_abstract_collection___MapRead_____bra(variable[7])(variable[7],  variable[5] /*str*/) /*MapRead::[]*/;
         variable[6] = variable[7];
         CALL_abstract_collection___Iterator___next( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::next*/;
         CALL_opts___Option___read_param( variable[6] /*opt*/)( variable[6] /*opt*/,  variable[1] /*it*/) /*Option::read_param*/;
       } else { /*if*/
+        /* Register variable[6]: Result */
         variable[6] = CALL_abstract_collection___Iterator___item( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::item*/;
         CALL_abstract_collection___SimpleCollection___add( variable[4] /*rest*/)( variable[4] /*rest*/, variable[6]) /*AbstractArray::add*/;
         CALL_abstract_collection___Iterator___next( variable[1] /*it*/)( variable[1] /*it*/) /*Iterator::next*/;
       }
     }
-    continue_28: while(0);
+    continue_44: while(0);
   }
-  break_28: while(0);
-  return_label27: while(false);
+  break_44: while(0);
+  return_label43: while(false);
   tracehead = trace.prev;
   return;
 }
 void opts___OptionContext___add_option(val_t  self, val_t  param0) {
-  struct trace_t trace = {NULL, NULL, 237, LOCATE_opts___OptionContext___add_option};
+  struct trace_t trace = {NULL, NULL, 246, LOCATE_opts___OptionContext___add_option};
   val_t variable[7];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   /* check if p<Array[Option] with p:Option */
-  if (( param0!=NIT_NULL) && !VAL_ISA( param0, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionContext___add_option, LOCATE_opts, 237); nit_exit(1); } /*cast Array[Option]*/;
+  if (( param0!=NIT_NULL) && !VAL_ISA( param0, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_opts___OptionContext___add_option, LOCATE_opts, 246); nit_exit(1); } /*cast Array[Option]*/;
   variable[1] =  param0;
-  variable[3] = CALL_abstract_collection___Collection___iterator( variable[1] /*opts*/)( variable[1] /*opts*/) /*AbstractArray::iterator*/;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: For iterator */
+  variable[3] = CALL_abstract_collection___Collection___iterator( variable[1] /*opts*/)( variable[1] /*opts*/) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[4]: For 'is_ok' result */
     variable[4] = CALL_abstract_collection___Iterator___is_ok(variable[3])(variable[3]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[4])) break; /*for*/
-    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/;
+    variable[4] = CALL_abstract_collection___Iterator___item(variable[3])(variable[3]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[5]: Local variable */
     variable[5] = variable[4];
-    variable[6] = variable[0];
-    CALL_opts___Option___context__eq( variable[5] /*opt*/)( variable[5] /*opt*/, variable[6]) /*Option::context=*/;
-    variable[6] = variable[0];
-    variable[6] = ATTR_opts___OptionContext____options(variable[6]) /*OptionContext::_options*/;
+    CALL_opts___Option___context__eq( variable[5] /*opt*/)( variable[5] /*opt*/, variable[0]) /*Option::context=*/;
+    /* Register variable[6]: Result */
+    variable[6] = ATTR_opts___OptionContext____options(variable[0]) /*OptionContext::_options*/;
     CALL_abstract_collection___SimpleCollection___add(variable[6])(variable[6],  variable[5] /*opt*/) /*AbstractArray::add*/;
-    continue_30: while(0);
+    continue_47: while(0);
     CALL_abstract_collection___Iterator___next(variable[3])(variable[3]) /*ArrayIterator::next*/;
   }
-  break_30: while(0);
-  return_label29: while(false);
+  break_47: while(0);
+  return_label46: while(false);
   tracehead = trace.prev;
   return;
 }
 void opts___OptionContext___init(val_t  self, int* init_table) {
-  struct trace_t trace = {NULL, NULL, 245, LOCATE_opts___OptionContext___init};
-  val_t variable[4];
-  void **closurevariable = NULL;
+  struct trace_t trace = {NULL, NULL, 254, LOCATE_opts___OptionContext___init};
+  val_t variable[3];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
   if (init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionContext].i]) return;
-  variable[2] = variable[0];
-  variable[3] = NEW_Array_array___Array___init(); /*new Array[Option]*/
-  ATTR_opts___OptionContext____options(variable[2]) /*OptionContext::_options*/ = variable[3];
-  variable[2] = variable[0];
-  variable[3] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[String, Option]*/
-  ATTR_opts___OptionContext____optmap(variable[2]) /*OptionContext::_optmap*/ = variable[3];
-  variable[2] = variable[0];
-  variable[3] = NEW_Array_array___Array___init(); /*new Array[String]*/
-  ATTR_opts___OptionContext____rest(variable[2]) /*OptionContext::_rest*/ = variable[3];
-  return_label31: while(false);
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = NEW_Array_array___Array___init() /*new Array[Option]*/;
+  ATTR_opts___OptionContext____options(variable[0]) /*OptionContext::_options*/ = variable[2];
+  /* Register variable[2]: Result */
+  variable[2] = NEW_HashMap_hash___HashMap___init() /*new HashMap[String, Option]*/;
+  ATTR_opts___OptionContext____optmap(variable[0]) /*OptionContext::_optmap*/ = variable[2];
+  /* Register variable[2]: Result */
+  variable[2] = NEW_Array_array___Array___init() /*new Array[String]*/;
+  ATTR_opts___OptionContext____rest(variable[0]) /*OptionContext::_rest*/ = variable[2];
+  return_label48: while(false);
   init_table[VAL2OBJ(variable[0])->vft[INIT_TABLE_POS_OptionContext].i] = 1;
   tracehead = trace.prev;
   return;
 }
 void opts___OptionContext___build(val_t  self) {
-  struct trace_t trace = {NULL, NULL, 252, LOCATE_opts___OptionContext___build};
+  struct trace_t trace = {NULL, NULL, 261, LOCATE_opts___OptionContext___build};
   val_t variable[9];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_opts;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[2] = variable[0];
-  variable[2] = ATTR_opts___OptionContext____options(variable[2]) /*OptionContext::_options*/;
-  variable[2] = CALL_abstract_collection___Collection___iterator(variable[2])(variable[2]) /*AbstractArray::iterator*/;
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Result */
+  variable[2] = ATTR_opts___OptionContext____options(variable[0]) /*OptionContext::_options*/;
+  /* Register variable[2]: For iterator */
+  variable[2] = CALL_abstract_collection___Collection___iterator(variable[2])(variable[2]) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[3]: For 'is_ok' result */
     variable[3] = CALL_abstract_collection___Iterator___is_ok(variable[2])(variable[2]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[3])) break; /*for*/
-    variable[3] = CALL_abstract_collection___Iterator___item(variable[2])(variable[2]) /*ArrayIterator::item*/;
+    variable[3] = CALL_abstract_collection___Iterator___item(variable[2])(variable[2]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[4]: Local variable */
     variable[4] = variable[3];
+    /* Register variable[5]: Result */
     variable[5] = CALL_opts___Option___names( variable[4] /*o*/)( variable[4] /*o*/) /*Option::names*/;
-    variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*AbstractArray::iterator*/;
+    /* Register variable[5]: For iterator */
+    variable[5] = CALL_abstract_collection___Collection___iterator(variable[5])(variable[5]) /*AbstractArrayRead::iterator*/;
     while (true) { /*for*/
+      /* Register variable[6]: For 'is_ok' result */
       variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[6])) break; /*for*/
-      variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/;
+      variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[7]: Local variable */
       variable[7] = variable[6];
-      variable[8] = variable[0];
-      variable[8] = ATTR_opts___OptionContext____optmap(variable[8]) /*OptionContext::_optmap*/;
+      /* Register variable[8]: Result */
+      variable[8] = ATTR_opts___OptionContext____optmap(variable[0]) /*OptionContext::_optmap*/;
       CALL_abstract_collection___Map_____braeq(variable[8])(variable[8],  variable[7] /*n*/,  variable[4] /*o*/) /*Map::[]=*/;
-      continue_34: while(0);
+      continue_51: while(0);
       CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*ArrayIterator::next*/;
     }
-    break_34: while(0);
-    continue_33: while(0);
+    break_51: while(0);
+    continue_50: while(0);
     CALL_abstract_collection___Iterator___next(variable[2])(variable[2]) /*ArrayIterator::next*/;
   }
-  break_33: while(0);
-  return_label32: while(false);
+  break_50: while(0);
+  return_label49: while(false);
   tracehead = trace.prev;
   return;
 }

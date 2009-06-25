@@ -56,13 +56,7 @@ extern const int SFT_mmloader[];
 #define CALL_mmloader___ModuleLoader___parse_file(recv) ((mmloader___ModuleLoader___parse_file_t)CALL((recv), (SFT_mmloader[6] + 6)))
 #define CALL_mmloader___ModuleLoader___process_metamodel(recv) ((mmloader___ModuleLoader___process_metamodel_t)CALL((recv), (SFT_mmloader[6] + 7)))
 #define CALL_mmloader___ModuleLoader___init(recv) ((mmloader___ModuleLoader___init_t)CALL((recv), (SFT_mmloader[6] + 8)))
-#define ATTR_mmloader___MMModule____filename(recv) ATTR(recv, (SFT_mmloader[7] + 0))
-#define ATTR_mmloader___MMModule____mtime(recv) ATTR(recv, (SFT_mmloader[7] + 1))
-#define CALL_mmloader___MMModule___filename(recv) ((mmloader___MMModule___filename_t)CALL((recv), (SFT_mmloader[8] + 0)))
-#define CALL_mmloader___MMModule___filename__eq(recv) ((mmloader___MMModule___filename__eq_t)CALL((recv), (SFT_mmloader[8] + 1)))
-#define CALL_mmloader___MMModule___mtime(recv) ((mmloader___MMModule___mtime_t)CALL((recv), (SFT_mmloader[8] + 2)))
-#define CALL_mmloader___MMModule___mtime__eq(recv) ((mmloader___MMModule___mtime__eq_t)CALL((recv), (SFT_mmloader[8] + 3)))
-#define CALL_mmloader___MMModule___import_supers_modules(recv) ((mmloader___MMModule___import_supers_modules_t)CALL((recv), (SFT_mmloader[8] + 4)))
+#define CALL_mmloader___MMModule___import_supers_modules(recv) ((mmloader___MMModule___import_supers_modules_t)CALL((recv), (SFT_mmloader[7] + 0)))
 typedef val_t (* mmloader___ToolContext___error_count_t)(val_t  self);
 val_t mmloader___ToolContext___error_count(val_t  self);
 #define LOCATE_mmloader___ToolContext___error_count "mmloader::ToolContext::error_count"
@@ -146,19 +140,7 @@ typedef void (* mmloader___ModuleLoader___init_t)(val_t  self, int* init_table);
 void mmloader___ModuleLoader___init(val_t  self, int* init_table);
 #define LOCATE_mmloader___ModuleLoader___init "mmloader::ModuleLoader::init"
 val_t NEW_ModuleLoader_mmloader___ModuleLoader___init();
-val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2);
-typedef val_t (* mmloader___MMModule___filename_t)(val_t  self);
-val_t mmloader___MMModule___filename(val_t  self);
-#define LOCATE_mmloader___MMModule___filename "mmloader::MMModule::filename"
-typedef void (* mmloader___MMModule___filename__eq_t)(val_t  self, val_t  param0);
-void mmloader___MMModule___filename__eq(val_t  self, val_t  param0);
-#define LOCATE_mmloader___MMModule___filename__eq "mmloader::MMModule::filename="
-typedef val_t (* mmloader___MMModule___mtime_t)(val_t  self);
-val_t mmloader___MMModule___mtime(val_t  self);
-#define LOCATE_mmloader___MMModule___mtime "mmloader::MMModule::mtime"
-typedef void (* mmloader___MMModule___mtime__eq_t)(val_t  self, val_t  param0);
-void mmloader___MMModule___mtime__eq(val_t  self, val_t  param0);
-#define LOCATE_mmloader___MMModule___mtime__eq "mmloader::MMModule::mtime="
+val_t NEW_MMModule_abstractmetamodel___MMModule___init(val_t p0, val_t p1, val_t p2, val_t p3);
 typedef void (* mmloader___MMModule___import_supers_modules_t)(val_t  self, val_t  param0);
 void mmloader___MMModule___import_supers_modules(val_t  self, val_t  param0);
 #define LOCATE_mmloader___MMModule___import_supers_modules "mmloader::MMModule::import_supers_modules"

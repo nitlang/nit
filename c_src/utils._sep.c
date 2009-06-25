@@ -3,96 +3,124 @@
 val_t utils___Object___cmangle(val_t  self, val_t  param0) {
   struct trace_t trace = {NULL, NULL, 21, LOCATE_utils___Object___cmangle};
   static val_t once_value_1; static int once_bool_1; /* Once value for variable[4]*/
-  val_t variable[17];
-  void **closurevariable = NULL;
+  val_t variable[15];
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_utils;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
+  /* Register variable[1]: Local variable */
   /* check if p<Array[Symbol] with p:Symbol */
   if (( param0!=NIT_NULL) && !VAL_ISA( param0, COLOR_Array, ID_Array)) { fprintf(stderr, "Cast failled"); fprintf(stderr, " in %s (%s:%d)\n", LOCATE_utils___Object___cmangle, LOCATE_utils, 22); nit_exit(1); } /*cast Array[Symbol]*/;
   variable[1] =  param0;
+  /* Register variable[2]: Method return value and escape marker */
+  /* Register variable[3]: Local variable */
+  /* Register variable[4]: Once expression result */
   if (once_bool_1) variable[4] = once_value_1;
   else {
-    variable[4] = variable[0];
-    variable[4] = CALL_utils___Object___cmangle_table(variable[4])(variable[4]) /*Object::cmangle_table*/;
+    /* Register variable[4]: Result */
+    variable[4] = CALL_utils___Object___cmangle_table(variable[0])(variable[0]) /*Object::cmangle_table*/;
     once_value_1 = variable[4];
     once_bool_1 = true;
   }
+  /* Register variable[4]: Result */
   variable[3] = variable[4];
-  variable[5] = NEW_String_string___String___init(); /*new String*/
+  /* Register variable[4]: Local variable */
+  /* Register variable[5]: Result */
+  variable[5] = NEW_Buffer_string___Buffer___init() /*new Buffer*/;
   variable[4] = variable[5];
-  variable[5] = CALL_abstract_collection___Collection___iterator( variable[1] /*symbols*/)( variable[1] /*symbols*/) /*AbstractArray::iterator*/;
+  /* Register variable[5]: For iterator */
+  variable[5] = CALL_abstract_collection___Collection___iterator( variable[1] /*symbols*/)( variable[1] /*symbols*/) /*AbstractArrayRead::iterator*/;
   while (true) { /*for*/
+    /* Register variable[6]: For 'is_ok' result */
     variable[6] = CALL_abstract_collection___Iterator___is_ok(variable[5])(variable[5]) /*ArrayIterator::is_ok*/;
     if (!UNTAG_Bool(variable[6])) break; /*for*/
-    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/;
+    variable[6] = CALL_abstract_collection___Iterator___item(variable[5])(variable[5]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+    /* Register variable[7]: Local variable */
     variable[7] = variable[6];
-    variable[8] = CALL_abstract_collection___Collection___is_empty( variable[4] /*res*/)( variable[4] /*res*/) /*AbstractArray::is_empty*/;
+    /* Register variable[8]: Result */
+    variable[8] = CALL_abstract_collection___Collection___is_empty( variable[4] /*res*/)( variable[4] /*res*/) /*AbstractArrayRead::is_empty*/;
     if (UNTAG_Bool( TAG_Bool(!UNTAG_Bool(variable[8])))) { /*if*/
-      CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  TAG_Char('_')) /*String::add*/;
-      CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  TAG_Char('_')) /*String::add*/;
-      CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  TAG_Char('_')) /*String::add*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  TAG_Char('_')) /*Buffer::add*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  TAG_Char('_')) /*Buffer::add*/;
+      CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  TAG_Char('_')) /*Buffer::add*/;
     }
+    /* Register variable[8]: Local variable */
     variable[8] =  TAG_Bool(false);
+    /* Register variable[9]: Local variable */
     variable[9] =  TAG_Bool(true);
+    /* Register variable[10]: Local variable */
+    /* Register variable[11]: Result */
     variable[11] = CALL_string___Object___to_s( variable[7] /*sym*/)( variable[7] /*sym*/) /*Symbol::to_s*/;
     variable[10] = variable[11];
-    variable[11] = CALL_abstract_collection___Collection___iterator( variable[10] /*s*/)( variable[10] /*s*/) /*AbstractArray::iterator*/;
+    /* Register variable[11]: For iterator */
+    variable[11] = CALL_abstract_collection___Collection___iterator( variable[10] /*s*/)( variable[10] /*s*/) /*AbstractArrayRead::iterator*/;
     while (true) { /*for*/
+      /* Register variable[12]: For 'is_ok' result */
       variable[12] = CALL_abstract_collection___Iterator___is_ok(variable[11])(variable[11]) /*ArrayIterator::is_ok*/;
       if (!UNTAG_Bool(variable[12])) break; /*for*/
-      variable[12] = CALL_abstract_collection___Iterator___item(variable[11])(variable[11]) /*ArrayIterator::item*/;
+      variable[12] = CALL_abstract_collection___Iterator___item(variable[11])(variable[11]) /*ArrayIterator::item*/ /* Ensure var: For item*/;
+      /* Register variable[13]: Local variable */
       variable[13] = variable[12];
+      /* Register variable[14]: Result */
       variable[14] = TAG_Bool(UNTAG_Char( variable[13] /*c*/)>=UNTAG_Char( TAG_Char('a')));
-      variable[15] = variable[14];
-      if (UNTAG_Bool(variable[15])) { /* and */
-        variable[15] = TAG_Bool(UNTAG_Char( variable[13] /*c*/)<=UNTAG_Char( TAG_Char('z')));
+      /* Ensure var variable[14]: Left 'and' operand*/
+      if (UNTAG_Bool(variable[14])) { /* and */
+        /* Register variable[14]: Result */
+        variable[14] = TAG_Bool(UNTAG_Char( variable[13] /*c*/)<=UNTAG_Char( TAG_Char('z')));
       }
-      variable[14] = variable[15];
-      variable[15] = variable[14];
-      if (!UNTAG_Bool(variable[15])) { /* or */
-        variable[15] = TAG_Bool(UNTAG_Char( variable[13] /*c*/)>=UNTAG_Char( TAG_Char('A')));
-        variable[16] = variable[15];
-        if (UNTAG_Bool(variable[16])) { /* and */
-          variable[16] = TAG_Bool(UNTAG_Char( variable[13] /*c*/)<=UNTAG_Char( TAG_Char('Z')));
+      /* Register variable[14]: Result */
+      /* Ensure var variable[14]: Left 'or' operand*/
+      if (!UNTAG_Bool(variable[14])) { /* or */
+        /* Register variable[14]: Result */
+        variable[14] = TAG_Bool(UNTAG_Char( variable[13] /*c*/)>=UNTAG_Char( TAG_Char('A')));
+        /* Ensure var variable[14]: Left 'and' operand*/
+        if (UNTAG_Bool(variable[14])) { /* and */
+          /* Register variable[14]: Result */
+          variable[14] = TAG_Bool(UNTAG_Char( variable[13] /*c*/)<=UNTAG_Char( TAG_Char('Z')));
         }
-        variable[15] = variable[16];
+        /* Register variable[14]: Result */
       }
-      variable[14] = variable[15];
-      variable[15] = variable[14];
-      if (!UNTAG_Bool(variable[15])) { /* or */
-        variable[15] = TAG_Bool(UNTAG_Char( variable[13] /*c*/)>=UNTAG_Char( TAG_Char('0')));
-        variable[16] = variable[15];
-        if (UNTAG_Bool(variable[16])) { /* and */
-          variable[16] = TAG_Bool(UNTAG_Char( variable[13] /*c*/)<=UNTAG_Char( TAG_Char('9')));
+      /* Register variable[14]: Result */
+      /* Ensure var variable[14]: Left 'or' operand*/
+      if (!UNTAG_Bool(variable[14])) { /* or */
+        /* Register variable[14]: Result */
+        variable[14] = TAG_Bool(UNTAG_Char( variable[13] /*c*/)>=UNTAG_Char( TAG_Char('0')));
+        /* Ensure var variable[14]: Left 'and' operand*/
+        if (UNTAG_Bool(variable[14])) { /* and */
+          /* Register variable[14]: Result */
+          variable[14] = TAG_Bool(UNTAG_Char( variable[13] /*c*/)<=UNTAG_Char( TAG_Char('9')));
         }
-        variable[15] = variable[16];
+        /* Register variable[14]: Result */
       }
-      variable[14] = variable[15];
+      /* Register variable[14]: Result */
       if (UNTAG_Bool(variable[14])) { /*if*/
-        CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  variable[13] /*c*/) /*String::add*/;
+        CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  variable[13] /*c*/) /*Buffer::add*/;
         variable[8] =  TAG_Bool(false) /*underscore=*/;
         variable[9] =  TAG_Bool(true) /*normal=*/;
       } else { /*if*/
+        /* Register variable[14]: Result */
         variable[14] = TAG_Bool(( variable[13] /*c*/)==( TAG_Char('_')));
-        variable[15] = variable[14];
-        if (UNTAG_Bool(variable[15])) { /* and */
-          variable[15] =  TAG_Bool(!UNTAG_Bool( variable[8] /*underscore*/));
+        /* Ensure var variable[14]: Left 'and' operand*/
+        if (UNTAG_Bool(variable[14])) { /* and */
+          variable[14] =  TAG_Bool(!UNTAG_Bool( variable[8] /*underscore*/));
         }
-        variable[14] = variable[15];
+        /* Register variable[14]: Result */
         if (UNTAG_Bool(variable[14])) { /*if*/
-          CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  variable[13] /*c*/) /*String::add*/;
+          CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  variable[13] /*c*/) /*Buffer::add*/;
           variable[8] =  TAG_Bool(true) /*underscore=*/;
           variable[9] =  TAG_Bool(true) /*normal=*/;
         } else { /*if*/
-          variable[14] = CALL_abstract_collection___Map___has_key( variable[3] /*table*/)( variable[3] /*table*/,  variable[13] /*c*/) /*CoupleMap::has_key*/;
+          /* Register variable[14]: Result */
+          variable[14] = CALL_abstract_collection___MapRead___has_key( variable[3] /*table*/)( variable[3] /*table*/,  variable[13] /*c*/) /*CoupleMap::has_key*/;
           if (UNTAG_Bool(variable[14])) { /*if*/
             if (UNTAG_Bool( variable[9] /*normal*/)) { /*if*/
-              CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  TAG_Char('_')) /*String::add*/;
-              CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  TAG_Char('_')) /*String::add*/;
+              CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  TAG_Char('_')) /*Buffer::add*/;
+              CALL_abstract_collection___SimpleCollection___add( variable[4] /*res*/)( variable[4] /*res*/,  TAG_Char('_')) /*Buffer::add*/;
             }
-            variable[14] = CALL_abstract_collection___Map_____bra( variable[3] /*table*/)( variable[3] /*table*/,  variable[13] /*c*/) /*CoupleMap::[]*/;
-            CALL_abstract_collection___IndexedCollection___append( variable[4] /*res*/)( variable[4] /*res*/, variable[14]) /*String::append*/;
+            /* Register variable[14]: Result */
+            variable[14] = CALL_abstract_collection___MapRead_____bra( variable[3] /*table*/)( variable[3] /*table*/,  variable[13] /*c*/) /*CoupleMap::[]*/;
+            CALL_abstract_collection___IndexedCollection___append( variable[4] /*res*/)( variable[4] /*res*/, variable[14]) /*Buffer::append*/;
             variable[9] =  TAG_Bool(false) /*normal=*/;
             variable[8] =  TAG_Bool(false) /*underscore=*/;
           }
@@ -106,7 +134,9 @@ val_t utils___Object___cmangle(val_t  self, val_t  param0) {
     CALL_abstract_collection___Iterator___next(variable[5])(variable[5]) /*ArrayIterator::next*/;
   }
   break_2: while(0);
-  variable[2] =  variable[4] /*res*/;
+  /* Register variable[5]: Result */
+  variable[5] = CALL_string___Object___to_s( variable[4] /*res*/)( variable[4] /*res*/) /*Buffer::to_s*/;
+  variable[2] = variable[5];
   goto return_label0;
   return_label0: while(false);
   tracehead = trace.prev;
@@ -114,36 +144,124 @@ val_t utils___Object___cmangle(val_t  self, val_t  param0) {
 }
 val_t utils___Object___cmangle_table(val_t  self) {
   struct trace_t trace = {NULL, NULL, 58, LOCATE_utils___Object___cmangle_table};
+  static val_t once_value_5 = NIT_NULL; /* Once value for string variable[3]*/
+  static val_t once_value_6 = NIT_NULL; /* Once value for string variable[3]*/
+  static val_t once_value_7 = NIT_NULL; /* Once value for string variable[3]*/
+  static val_t once_value_8 = NIT_NULL; /* Once value for string variable[3]*/
+  static val_t once_value_9 = NIT_NULL; /* Once value for string variable[3]*/
+  static val_t once_value_10 = NIT_NULL; /* Once value for string variable[3]*/
+  static val_t once_value_11 = NIT_NULL; /* Once value for string variable[3]*/
+  static val_t once_value_12 = NIT_NULL; /* Once value for string variable[3]*/
+  static val_t once_value_13 = NIT_NULL; /* Once value for string variable[3]*/
+  static val_t once_value_14 = NIT_NULL; /* Once value for string variable[3]*/
+  static val_t once_value_15 = NIT_NULL; /* Once value for string variable[3]*/
+  static val_t once_value_16 = NIT_NULL; /* Once value for string variable[3]*/
   val_t variable[4];
-  void **closurevariable = NULL;
+  struct WBT_ **closurevariable = NULL;
   trace.prev = tracehead; tracehead = &trace;
   trace.file = LOCATE_utils;
+  /* Register variable[0]: Local variable */
   variable[0] =  self;
-  variable[3] = NEW_HashMap_hash___HashMap___init(); /*new HashMap[Char, String]*/
+  /* Register variable[1]: Method return value and escape marker */
+  /* Register variable[2]: Local variable */
+  /* Register variable[3]: Result */
+  variable[3] = NEW_HashMap_hash___HashMap___init() /*new HashMap[Char, String]*/;
   variable[2] = variable[3];
-  variable[3] = NEW_String_string___String___with_native(BOX_NativeString("plus"), TAG_Int(4)); /*new String*/
+  /* Register variable[3]: Once String constant */
+  if (once_value_5 != NIT_NULL) variable[3] = once_value_5;
+  else {
+    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("plus"), TAG_Int(4)) /*new String*/;
+    once_value_5 = variable[3];
+  }
+  /* Register variable[3]: Result */
   CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('+'), variable[3]) /*HashMap::[]=*/;
-  variable[3] = NEW_String_string___String___with_native(BOX_NativeString("minus"), TAG_Int(5)); /*new String*/
+  /* Register variable[3]: Once String constant */
+  if (once_value_6 != NIT_NULL) variable[3] = once_value_6;
+  else {
+    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("minus"), TAG_Int(5)) /*new String*/;
+    once_value_6 = variable[3];
+  }
+  /* Register variable[3]: Result */
   CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('-'), variable[3]) /*HashMap::[]=*/;
-  variable[3] = NEW_String_string___String___with_native(BOX_NativeString("star"), TAG_Int(4)); /*new String*/
+  /* Register variable[3]: Once String constant */
+  if (once_value_7 != NIT_NULL) variable[3] = once_value_7;
+  else {
+    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("star"), TAG_Int(4)) /*new String*/;
+    once_value_7 = variable[3];
+  }
+  /* Register variable[3]: Result */
   CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('*'), variable[3]) /*HashMap::[]=*/;
-  variable[3] = NEW_String_string___String___with_native(BOX_NativeString("slash"), TAG_Int(5)); /*new String*/
+  /* Register variable[3]: Once String constant */
+  if (once_value_8 != NIT_NULL) variable[3] = once_value_8;
+  else {
+    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("slash"), TAG_Int(5)) /*new String*/;
+    once_value_8 = variable[3];
+  }
+  /* Register variable[3]: Result */
   CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('/'), variable[3]) /*HashMap::[]=*/;
-  variable[3] = NEW_String_string___String___with_native(BOX_NativeString("percent"), TAG_Int(7)); /*new String*/
+  /* Register variable[3]: Once String constant */
+  if (once_value_9 != NIT_NULL) variable[3] = once_value_9;
+  else {
+    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("percent"), TAG_Int(7)) /*new String*/;
+    once_value_9 = variable[3];
+  }
+  /* Register variable[3]: Result */
   CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('%'), variable[3]) /*HashMap::[]=*/;
-  variable[3] = NEW_String_string___String___with_native(BOX_NativeString("bra"), TAG_Int(3)); /*new String*/
+  /* Register variable[3]: Once String constant */
+  if (once_value_10 != NIT_NULL) variable[3] = once_value_10;
+  else {
+    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("bra"), TAG_Int(3)) /*new String*/;
+    once_value_10 = variable[3];
+  }
+  /* Register variable[3]: Result */
   CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('['), variable[3]) /*HashMap::[]=*/;
-  variable[3] = NEW_String_string___String___with_native(BOX_NativeString("eq"), TAG_Int(2)); /*new String*/
+  /* Register variable[3]: Once String constant */
+  if (once_value_11 != NIT_NULL) variable[3] = once_value_11;
+  else {
+    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("eq"), TAG_Int(2)) /*new String*/;
+    once_value_11 = variable[3];
+  }
+  /* Register variable[3]: Result */
   CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('='), variable[3]) /*HashMap::[]=*/;
-  variable[3] = NEW_String_string___String___with_native(BOX_NativeString("l"), TAG_Int(1)); /*new String*/
+  /* Register variable[3]: Once String constant */
+  if (once_value_12 != NIT_NULL) variable[3] = once_value_12;
+  else {
+    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("l"), TAG_Int(1)) /*new String*/;
+    once_value_12 = variable[3];
+  }
+  /* Register variable[3]: Result */
   CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('<'), variable[3]) /*HashMap::[]=*/;
-  variable[3] = NEW_String_string___String___with_native(BOX_NativeString("g"), TAG_Int(1)); /*new String*/
+  /* Register variable[3]: Once String constant */
+  if (once_value_13 != NIT_NULL) variable[3] = once_value_13;
+  else {
+    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("g"), TAG_Int(1)) /*new String*/;
+    once_value_13 = variable[3];
+  }
+  /* Register variable[3]: Result */
   CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('>'), variable[3]) /*HashMap::[]=*/;
-  variable[3] = NEW_String_string___String___with_native(BOX_NativeString("n"), TAG_Int(1)); /*new String*/
+  /* Register variable[3]: Once String constant */
+  if (once_value_14 != NIT_NULL) variable[3] = once_value_14;
+  else {
+    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("n"), TAG_Int(1)) /*new String*/;
+    once_value_14 = variable[3];
+  }
+  /* Register variable[3]: Result */
   CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('!'), variable[3]) /*HashMap::[]=*/;
-  variable[3] = NEW_String_string___String___with_native(BOX_NativeString("u"), TAG_Int(1)); /*new String*/
+  /* Register variable[3]: Once String constant */
+  if (once_value_15 != NIT_NULL) variable[3] = once_value_15;
+  else {
+    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("u"), TAG_Int(1)) /*new String*/;
+    once_value_15 = variable[3];
+  }
+  /* Register variable[3]: Result */
   CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('_'), variable[3]) /*HashMap::[]=*/;
-  variable[3] = NEW_String_string___String___with_native(BOX_NativeString("at"), TAG_Int(2)); /*new String*/
+  /* Register variable[3]: Once String constant */
+  if (once_value_16 != NIT_NULL) variable[3] = once_value_16;
+  else {
+    variable[3] = NEW_String_string___String___with_native(BOX_NativeString("at"), TAG_Int(2)) /*new String*/;
+    once_value_16 = variable[3];
+  }
+  /* Register variable[3]: Result */
   CALL_abstract_collection___Map_____braeq( variable[2] /*res*/)( variable[2] /*res*/,  TAG_Char('@'), variable[3]) /*HashMap::[]=*/;
   variable[1] =  variable[2] /*res*/;
   goto return_label4;
