@@ -34,10 +34,10 @@ print(not a2 isa Discrete)
 print(a2 isa Object)
 
 print("null:")
-var a3: Object = null
-print(a3 isa Int)
-print(a3 isa String)
-print(a3 isa AbstractArray[Char])
-print(a3 isa Iterator[Int])
-print(a3 isa Discrete)
-print(a3 isa Object)
+var a3: nullable Object = null
+print(a3 isa nullable Int)
+print(a3 isa nullable String)
+print(a3 isa nullable AbstractArray[Char])
+print(a3 isa nullable Iterator[Int])
+print(a3 isa nullable Discrete)
+print(a3 isa nullable Object)

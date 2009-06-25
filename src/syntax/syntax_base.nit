@@ -362,11 +362,6 @@ special Visitor
 		if subtype < stype  then
 			return true
 		end
-		# Do not enforce nullable subtype rules yet
-		if subtype isa MMTypeNone or subtype.as_notnull < stype.as_notnull then
-			warning(n, "Nullable type warning: expected {stype}, got {subtype}")
-			return true
-		end
 		error(n, "Type error: expected {stype}, got {subtype}")
 		return false
 	end

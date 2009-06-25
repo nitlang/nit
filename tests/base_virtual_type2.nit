@@ -19,7 +19,7 @@ import kernel
 class A
 	type E: T
 	
-	readable writable attr _e: E = null
+	readable writable attr _e: nullable E = null
 end
 
 class B
@@ -39,8 +39,8 @@ special T
 end
 
 var b = new B
-var t: T
-var u = new U
+var t: nullable T
+var u: nullable U = new U
 
 b.e = u
 #alt1#u = b.e

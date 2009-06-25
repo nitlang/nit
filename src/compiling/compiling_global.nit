@@ -912,8 +912,8 @@ redef class MMLocalClass
 			for g in global_properties do
 				var p = self[g]
 				var t = p.signature.return_type
-				if p isa MMAttribute and t != null and not t.is_nullable and v.tc.opt_warn.value > 0 then
-					v.add_instr("if ({p.global.attr_access}(self) == NIT_NULL) fprintf(stderr, \"Uninitialized attribute %s at %s.\\n\", \"{p.full_name}\", from);")
+				if p isa MMAttribute and t != null and not t.is_nullable then
+					v.add_instr("if ({p.global.attr_access}(self) == NIT_NULL) \{ fprintf(stderr, \"Uninitialized attribute %s at %s.\\n\", \"{p.full_name}\", from); nit_exit(1); \}")
 				end
 			end
 			ctx_old.append(v.ctx)

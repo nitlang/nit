@@ -23,28 +23,27 @@ special Object
    meth f: F do return _f_ end 
    meth f=(x: F) do _f_ = x end
 
-   init do end
+   init(e:E) do _e = e
 end
 
 class Gen2[G: Int]
 special Gen1[G, Char]
-
-   init do end
+   init(e:G) do super(e)
 end
 
 class Gen3[H: Int]
 special Gen1[H, Char]
    redef readable redef writable redef attr _e: H
-   redef attr _f_: Char
+   redef attr _f_: Char = 'N'
    redef meth f: Char do return _f_ end 
    redef meth f=(x: Char) do _f_ = x end
 
-   init do end
+   init(e:H) do super(e)
 end
 
-var g1 = new Gen1[Int, Char]
-var g2 = new Gen2[Int]
-var g3 = new Gen3[Int]
+var g1 = new Gen1[Int, Char](1)
+var g2 = new Gen2[Int](2)
+var g3 = new Gen3[Int](3)
 g1.e = 1
 g1.f = '1'
 g2.e = 2

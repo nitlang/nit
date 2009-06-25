@@ -15,26 +15,26 @@
 # limitations under the License.
 
 class A
-	attr _attribute: A
+	attr _attribute: nullable A
 	attr _num: Char
 
-	meth foo=(a: A)
+	meth foo=(a: nullable A)
 	do
 		_attribute = a
 	end
 
-	meth foo: A
+	meth foo: nullable A
 	do
 		return _attribute
 	end
 
-	meth bar=(c: Char, a: A)   
+	meth bar=(c: Char, a: nullable A)   
 	do
 		_num = c
 		_attribute = a
 	end
 
-	meth bar(c: Char): A
+	meth bar(c: Char): nullable A
 	do
 		if c == _num then
 			return _attribute
@@ -61,7 +61,7 @@ class A
 		_num = '*'
 	end
 
-	init init2(c: Char, a: A)
+	init init2(c: Char, a: nullable A)
 	do
 		_num = c
 		_attribute = a

@@ -208,8 +208,8 @@ end
 
 class Rayon
 private
-	attr _stock: Array[Produit] = null	# Des produits en stock
-	attr _rubrique: String = null		# La catégorie des produits stockés
+	attr _stock: Array[Produit]		# Des produits en stock
+	attr _rubrique: String			# La catégorie des produits stockés
 
 	# Cette fonction est utilisé par to_s pour afficher un petit titre
 	meth to_s_head: String
@@ -227,7 +227,7 @@ private
 		return s.to_s
 	end
 
-	meth cherche_produit(n: String): Produit
+	meth cherche_produit(n: String): nullable Produit
 	do
 		var i = _stock.iterator
 		while i.is_ok do
@@ -300,6 +300,8 @@ private
 	# pour obtenir la quantité de clous dans le rayon, et :
 	#	r.quantite("clous") = 15
 	# pour mettre le nombre de clous à 15
+
+	init do end
 end
 
 class RayonNormal

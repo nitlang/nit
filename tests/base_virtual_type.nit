@@ -19,7 +19,7 @@ import kernel
 class A
 	type E: T
 	
-	readable writable attr _e: E = null
+	readable writable attr _e: nullable E = null 
 end
 
 class B

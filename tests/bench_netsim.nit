@@ -19,7 +19,7 @@ class Node
 	do
 		return _name
 	end
-	attr _name: String = null
+	attr _name: String = "noname"
 end
 
 class WakeUpNode
@@ -31,12 +31,12 @@ special Node
 	do
 		_scheduler.add_event(self, d)
 	end
-	attr _scheduler: Scheduler = null
+	attr _scheduler: Scheduler
 end
 
 class NodeSource
 special Node
-	attr _nexts: ArraySet[NodeSink] = null
+	attr _nexts: nullable ArraySet[NodeSink] = null
 	meth attach(n: NodeSink)
 	# Add the sink `n' the the connected nodes
 	# Do nothing if `n' is already connected
@@ -63,7 +63,7 @@ special Node
 		if _nexts == null then
 			return
 		end
-		for n in _nexts do
+		for n in _nexts.as(not null) do
 			n.recieve(self)
 		end
 	end
@@ -78,7 +78,7 @@ end
 #
 
 class Scheduler
-	attr _time_list: Array[Couple[Int, WakeUpNode]]
+	attr _time_list: Array[Couple[Int, WakeUpNode]] = new Array[Couple[Int, WakeUpNode]]
 	attr _time: Int = 0 # What time is it ?
 	meth add_event(n: WakeUpNode, d: Int)
 	# The node `n' whant to be weaked up in `d' time units
@@ -87,7 +87,7 @@ class Scheduler
 		_time_list.add(entry)
 	end
 
-	meth next_event: WakeUpNode
+	meth next_event: nullable WakeUpNode
 	# Get the
 	do
 		if _time_list.is_empty then
@@ -125,7 +125,6 @@ class Scheduler
 
 	init
 	do
-		_time_list = new Array[Couple[Int, WakeUpNode]]
 	end
 end
 
@@ -174,7 +173,7 @@ end
 class NodeAlternate
 special NodeSink
 special NodeSource
-	attr _last: NodeSource
+	attr _last: nullable NodeSource
 	redef meth recieve(n: NodeSource)
 	do
 		if n != _last then

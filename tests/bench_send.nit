@@ -16,7 +16,7 @@
 
 
 class A
-	readable writable attr _val: Int
+	readable writable attr _val: Int = 0
 	meth hop(a: A, b: A, c: A)
 	do
 		if a.val > val then

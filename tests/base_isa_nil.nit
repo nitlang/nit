@@ -32,7 +32,13 @@ var b: Object = new B
 (a isa A).output
 (a isa Object).output
 (not a isa B).output
-var c: Object = null
+(a isa nullable A).output
+(a isa nullable Object).output
+(not a isa nullable B).output
+var c: nullable Object = null
 (c isa A).output
 (c isa Object).output
 (c isa B).output
+(c isa nullable A).output
+(c isa nullable Object).output
+(c isa nullable B).output

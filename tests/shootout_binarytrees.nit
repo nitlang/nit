@@ -20,12 +20,12 @@
 # contributed by Jean Privat
 
 class TreeNode
-    attr _left: TreeNode
-    attr _right: TreeNode
+    attr _left: nullable TreeNode
+    attr _right: nullable TreeNode
     attr _item: Int
 
 
-    init(left: TreeNode, right: TreeNode, item: Int)
+    init(left: nullable TreeNode, right: nullable TreeNode, item: Int)
 	do
 	    _left = left
 	    _right = right
@@ -65,7 +65,7 @@ if min_depth + 2 > max_depth then
 end
 
 var stretch_depth = max_depth + 1
-var stretch_tree = bottom_up_tree(0, stretch_depth)
+var stretch_tree: nullable TreeNode = bottom_up_tree(0, stretch_depth)
 
 print("stretch tree of depth {stretch_depth}\t check: {stretch_tree.item_check}")
 

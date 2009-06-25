@@ -20,7 +20,7 @@ class A
 	meth foo: U
 		with bar
 	do
-		return null
+		return new U
 	end
 end
 

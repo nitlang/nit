@@ -65,16 +65,16 @@ print(not 5 is b)
 print(not a is b)
 
 print("* null")
-a = null
-b = null
+var a1: nullable Object = null
+var b1: nullable Object = null
 print(not null is s)
 print(not s is null)
-print(not a is s)
-print(not s is a)
+print(not a1 is s)
+print(not s is a1)
 print(null is null)
-print(b is null)
-print(b is a)
+print(b1 is null)
+print(b1 is a1)
 print(not i is null)
-print(not i is a)
+print(not i is a1)
 print(not null is i)
-print(not a is i)
+print(not a1 is i)

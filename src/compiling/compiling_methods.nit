@@ -464,9 +464,9 @@ redef class MMAttribute
 	meth compile_read_access(v: CompilerVisitor, n: PNode, recv: String): String
 	do
 		var res = "{global.attr_access}({recv}) /*{local_class}::{name}*/"
-		if not signature.return_type.is_nullable and v.tc.opt_warn.value > 0 then
+		if not signature.return_type.is_nullable then
 			res = v.ensure_var(res, "{local_class}::{name}")
-			v.add_instr("if ({res} == NIT_NULL) \{ fprintf(stderr, \"Uninitialized attribute %s\", \"{name}\"); {v.printf_locate_error(n)} } /* implicit isset */;")
+			v.add_instr("if ({res} == NIT_NULL) \{ fprintf(stderr, \"Uninitialized attribute %s\", \"{name}\"); {v.printf_locate_error(n)} nit_exit(1); } /* implicit isset */;")
 		end
 		return res
 	end

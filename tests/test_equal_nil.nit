@@ -19,8 +19,8 @@ class A
 	init do end
 end
 
-var a = new A
-var b: A = null
+var a: nullable A = new A
+var b: nullable A = null
 if a == null then printn(0) else printn(1)
 if a is null then printn(0) else printn(1)
 #if b == null then printn(1) else printn(0)
