@@ -179,13 +179,13 @@ special IndexedCollection[E]
 	init from(coll: Collection[E]) do append(coll)
 
 	# The first node of the list
-	attr _head: ListNode[E]
+	attr _head: nullable ListNode[E]
 
 	# The last node of the list
-	attr _tail: ListNode[E]
+	attr _tail: nullable ListNode[E]
 
 	# Get the `i'th node. get `null' otherwise.
-	private meth get_node(i: Int): ListNode[E]
+	private meth get_node(i: Int): nullable ListNode[E]
 	do
 		var n = _head
 		if i < 0 then
@@ -199,7 +199,7 @@ special IndexedCollection[E]
 	end
 
 	# get the first node that contains e after 'after', null otherwise
-	private meth search_node_after(e: E, after: ListNode[E]): ListNode[E]
+	private meth search_node_after(e: E, after: nullable ListNode[E]): nullable ListNode[E]
 	do
 		var n = after
 		while n != null and n.item != e do n = n.next
@@ -256,14 +256,14 @@ special IndexedIterator[E]
 	end
 
 	# Build a new iterator from `node'.
-	private init(node: ListNode[E])
+	private init(node: nullable ListNode[E])
 	do
 		_node = node
 		_index = 0
 	end
 
 	# The current node of the list
-	attr _node: ListNode[E]
+	attr _node: nullable ListNode[E]
 
 	# The index of the current node
 	redef readable attr _index: Int
@@ -278,8 +278,8 @@ special Container[E]
 	end
 
 	# The next node.
-	readable writable attr _next: ListNode[E]
+	readable writable attr _next: nullable ListNode[E]
 
 	# The previous node.
-	readable writable attr _prev: ListNode[E]
+	readable writable attr _prev: nullable ListNode[E]
 end

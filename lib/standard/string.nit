@@ -188,7 +188,6 @@ special AbstractString
 	redef meth ==(o)
 	do
 		if not o isa String or o is null then return false
-		assert o isa String
 		var l = length
 		if o.length != l then return false
 		var i = 0
@@ -359,7 +358,6 @@ special AbstractArray[Char]
 	redef meth ==(o)
 	do
 		if not o isa Buffer or o is null then return false
-		assert o isa Buffer
 		var l = length
 		if o.length != l then return false
 		var i = 0
@@ -589,14 +587,14 @@ class StringCapable
 end
 
 redef class Sys
-	attr _args_cache: IndexedCollection[String]
+	attr _args_cache: nullable IndexedCollection[String]
 
 	redef meth args: IndexedCollection[String]
 	do
 		if _args_cache == null then init_args
-		return _args_cache
+		return _args_cache.as(not null)
 	end
-	
+
 	# The name of the program as given by the OS
 	meth program_name: String
 	do

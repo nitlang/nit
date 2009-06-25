@@ -129,7 +129,6 @@ special IndexedCollectionRead[E]
 	redef meth ==(o)
 	do
 		if not o isa AbstractArray[E] or o is null then return false
-		assert o isa AbstractArray[E]
 		var l = length
 		if o.length != l then return false
 		var i = 0
@@ -306,7 +305,7 @@ special ArrayCapable[E]
 	end
 
 	# The internal storage.
-	attr _items: NativeArray[E] = null
+	attr _items: nullable NativeArray[E] = null
 
 	# The size of `_items'.
 	attr _capacity: Int = 0
@@ -325,7 +324,6 @@ special IndexedIterator[E]
 
 	init(a: AbstractArrayRead[E])
 	do
-		assert not_nil: a != null
 		_array = a
 		_index = 0
 	end

@@ -27,7 +27,7 @@ end
 
 class B
 special A
-	redef meth ==(a: Object): Bool
+	redef meth ==(a: nullable Object): Bool
 	do
 		if not a isa B then
 			return false

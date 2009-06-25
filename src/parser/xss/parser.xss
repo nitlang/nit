@@ -24,9 +24,9 @@ private class State
 	readable writable attr _state: Int
 
 	# The node stored with the state in the stack
-	readable writable attr _nodes: Object 
+	readable writable attr _nodes: nullable Object 
 
-	init(state: Int, nodes: Object)
+	init(state: Int, nodes: nullable Object)
 	do
 		_state = state
 		_nodes = nodes
@@ -80,7 +80,7 @@ special ParserTable
 	end
 
 	# Push someting in the state stack
-	private meth push(numstate: Int, list_node: Object)
+	private meth push(numstate: Int, list_node: nullable Object)
 	do
 		var pos = _stack_pos + 1
 		_stack_pos = pos
@@ -100,7 +100,7 @@ special ParserTable
 	end
 
 	# Pop something from the stack state
-	private meth pop: Object
+	private meth pop: nullable Object
 	do
 		var res = _stack[_stack_pos].nodes
 		_stack_pos = _stack_pos -1
@@ -112,7 +112,6 @@ special ParserTable
 	do
 		push(0, null)
 
-		var ign: List[Token] = null
 		var lexer = _lexer
 		while true do
 			var token = lexer.peek
@@ -120,7 +119,6 @@ special ParserTable
 			var last_line = token.line
 
 			if token isa PError then
-				assert token isa PError
 				return new Start(null, token)
 			end
 
@@ -165,7 +163,7 @@ special ParserTable
 				return node
 			end
 		end
-		return null
+		abort
 	end
 
 	attr _reduce_table: Array[ReduceAction]
@@ -183,11 +181,12 @@ end
 private class SearchTokensVisitor
 special Visitor
 	attr _untokenned_nodes: Array[Prod]
-	attr _last_token: Token
-	redef meth visit(n: PNode)
+	attr _last_token: nullable Token = null
+	redef meth visit(n: nullable PNode)
 	do
-		if n isa Token then
-			assert n isa Token
+		if n == null then
+			return
+		else if n isa Token then
 			_last_token = n
 			for no in _untokenned_nodes do
 				no.first_token = n
@@ -216,19 +215,19 @@ private class ReduceAction@index
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 $   foreach {action}
 $   choose
 $     when {@cmd='POP'}
 					var ${translate(@result,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} = p.pop
 $     end
 $     when {@cmd='FETCHLIST'}
-					var ${translate(@result,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} = ${translate(@from,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} 
+					var ${translate(@result,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} = ${translate(@from,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}
 					assert ${translate(@result,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} isa Array[Object]
 $     end
 $     when {@cmd='FETCHNODE'}
 					var ${translate(@result,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} = ${translate(@from,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}
-					assert ${translate(@result,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} isa @etype
+					assert ${translate(@result,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} isa nullable @etype
 $     end
 $     when {@cmd='ADDNODE'}
 					if ${translate(@node,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} != null then
@@ -236,19 +235,19 @@ $     when {@cmd='ADDNODE'}
 					end
 $     end
 $     when {@cmd='ADDLIST'}
-					if ${translate(@fromlist,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} != null then
+#					if ${translate(@fromlist,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} != null then
 						if ${translate(@tolist,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}.is_empty then
 							${translate(@tolist,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} = ${translate(@fromlist,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}
 						else
 							${translate(@tolist,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}.append(${translate(@fromlist,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")})
 						end
-					end
+#					end
 $     end
 $     when {@cmd='MAKELIST'}
 					var ${translate(@result,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} = new Array[Object]
 $     end
 $     when {@cmd='MAKENODE'}
-					var ${translate(@result,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")} = new @etype.init_${translate(@etype,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}(
+					var ${translate(@result,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}: nullable @etype = new @etype.init_${translate(@etype,"ABCDEFGHIJKLMNOPQRSTUVWXYZ","abcdefghijklmnopqrstuvwxyz")}(
 $       foreach {arg}
 $           if @null
 						null[-sep ','-]
@@ -280,7 +279,7 @@ $ end template
 $ template make_parser_tables()
 # Parser that build a full AST
 abstract class ParserTable
-	attr _action_table: Array[Array[Int]] = null
+	attr _action_table: Array[Array[Int]]
 	private meth build_action_table
 	do
 		_action_table = once [ 
@@ -301,7 +300,7 @@ $   end foreach
 	end
 $ end foreach
 
-	attr _goto_table: Array[Array[Int]] = null
+	attr _goto_table: Array[Array[Int]]
 	private meth build_goto_table
 	do
 		_goto_table = once [ 
@@ -330,5 +329,7 @@ $ end
             		[-foreach {parser_data/errors/i}-]${.} [-sep ','-] [-end-]
 		]
 	end
+
+	init do end
 end
 $ end template

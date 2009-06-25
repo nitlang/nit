@@ -81,7 +81,7 @@ redef class MMLocalClass
 	do
 		if _base_type_cache == null and is_generic then
 			_base_type_cache = get_instantiate_type(formals_types)
-			return _base_type_cache
+			return _base_type_cache.as(not null)
 		else
 			return super
 		end
@@ -142,7 +142,6 @@ special MMTypeClass
 			var b = _local_class.for_module(mod)
 			t = b.get_instantiate_type(parms)
 		end
-		assert t != null
 		return t
 	end
 
@@ -162,8 +161,6 @@ special MMTypeClass
 			return false
 		end
 		for i in [0..t.length[ do
-			assert _params[i] != null
-			assert t[i] != null
 			if _params[i] != t[i] then
 				return false
 			end
@@ -212,7 +209,6 @@ special MMTypeFormal
 		if module != mod then
 			t = mod[_def_class.global].get_formal(position)
 		end
-		assert t != null
 		return t
 	end
 
@@ -234,7 +230,6 @@ special MMTypeFormal
 		#end
 		assert old_r isa MMTypeGeneric
 		var reduct = old_r.params[position]
-		assert reduct != null
 		return reduct
 	end
 
@@ -246,7 +241,6 @@ special MMTypeFormal
 
 	init(n: Symbol, p: Int, intro: MMLocalClass)
 	do
-		assert n != null
 		super(n, null)
 		_position = p
 		_def_class = intro

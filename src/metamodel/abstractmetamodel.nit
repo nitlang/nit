@@ -38,12 +38,10 @@ class MMContext
 	# All known modules
 	readable attr _modules: Array[MMModule] = new Array[MMModule]
 
-	# Register a new module with the modules it depends on 
+	# Register a new module with the modules it depends on
 	meth add_module(module: MMModule, supers: Array[MMModule])
 	do
-		assert supers != null
 		_module_hierarchy.add(module, _module_hierarchy.select_smallests(supers))
-		assert module.name != null
 		_modules.add(module)
 		module._mhe = _module_hierarchy[module]
 	end
@@ -54,7 +52,6 @@ class MMContext
 	# Register a local class
 	meth add_local_class(c: MMLocalClass, sup: Array[MMLocalClass])
 	do
-		assert sup != null
 		var csup = new Array[MMLocalClass]
 		var csups = new Array[String]
 		for s in sup do
@@ -82,10 +79,10 @@ class MMDirectory
 
 	# Parent directory
 	# null if none
-	readable attr _parent: MMDirectory
+	readable attr _parent: nullable MMDirectory
 
 	# The module that introduces the directory if any
-	readable writable attr _owner: MMModule
+	readable writable attr _owner: nullable MMModule = null
 
 	# Known modules in the directory
 	readable attr _modules: Map[Symbol, MMModule] = new HashMap[Symbol, MMModule]
@@ -97,10 +94,7 @@ class MMDirectory
 		_modules[module.name] = module
 	end
 
-	# Directory hierarchy element
-	readable attr _dhe: PartialOrderElement[MMDirectory]
-
-	init(name: Symbol, path: String, parent: MMDirectory) do
+	init(name: Symbol, path: String, parent: nullable MMDirectory) do
 		_name = name
 		_path = path
 		_parent = parent
@@ -130,7 +124,7 @@ class MMModule
 	readable attr _filename: String
 
 	# Module dependence hierarchy element
-	readable attr _mhe: PartialOrderElement[MMModule] 
+	readable attr _mhe: nullable PartialOrderElement[MMModule]
 
 	# All global classes of the module (defined and imported)
 	readable attr _global_classes: Array[MMGlobalClass] = new Array[MMGlobalClass]
@@ -164,12 +158,7 @@ class MMModule
 		_name = name
 		_directory = dir
 		_context = context
-
-		if dir == null then
-			_full_name = name
-		else
-			_full_name = dir.full_name_for(name)
-		end
+		_full_name = dir.full_name_for(name)
 		_filename = filename
 	end
 
@@ -219,8 +208,6 @@ class MMModule
 	# Get the local class associated with a global class 
 	meth [](c: MMGlobalClass): MMLocalClass
 	do
-		assert _local_class_by_global != null
-		assert c != null
 		return _local_class_by_global[c]
 	end
 
@@ -248,7 +235,6 @@ class MMModule
 	# Assign super_classes for a local class
 	meth set_supers_class(c: MMLocalClass, supers: Array[MMLocalClass])
 	do
-		assert supers != null
 		var tab = _class_specialization_hierarchy.select_smallests(supers)
 		c._cshe = _class_specialization_hierarchy.add(c,tab)
 		var tab_all = c.crhe.direct_greaters.to_a
@@ -259,7 +245,6 @@ class MMModule
 	# Register a local class and its global class in the module
 	private meth register_global_class(c: MMLocalClass)
 	do
-		assert c.global != null
 		_local_class_by_global[c.global] = c
 	end
 end
@@ -299,9 +284,7 @@ class MMGlobalClass
 	# register a new Local class to local class hierarchy (set the crhe value)
 	private meth register_local_class(c: MMLocalClass)
 	do
-		assert c.module != null
-		assert c.crhe == null
-		var sup = new  Array[MMLocalClass]
+		var sup = new Array[MMLocalClass]
 		for s in class_refinement_hierarchy do
 			if c.module.mhe < s.module and s isa MMConcreteClass then
 				sup.add(s)
@@ -351,25 +334,29 @@ class MMLocalClass
 	readable attr _module: MMModule
 
 	# The global class of the local class
-	readable attr _global: MMGlobalClass 
+	meth global: MMGlobalClass do return _global.as(not null)
+	attr _global: nullable MMGlobalClass
 
 	# The local class refinement hierarchy element
-	readable attr _crhe: PartialOrderElement[MMLocalClass] 
+	meth crhe: PartialOrderElement[MMLocalClass] do return _crhe.as(not null)
+	attr _crhe: nullable PartialOrderElement[MMLocalClass]
 
 	# The local class specialization hierarchy element
-	readable attr _cshe: PartialOrderElement[MMLocalClass] 
+	meth cshe: PartialOrderElement[MMLocalClass] do return _cshe.as(not null)
+	attr _cshe: nullable PartialOrderElement[MMLocalClass]
 
 	# The local class full hierarchy element
-	readable attr _che: PartialOrderElement[MMLocalClass]
+	meth che: PartialOrderElement[MMLocalClass] do return _che.as(not null)
+	attr _che: nullable PartialOrderElement[MMLocalClass]
 
 	# Association between local properties and global properties
-	readable attr _local_property_by_global: Map[MMGlobalProperty, MMLocalProperty] 
+	attr _local_property_by_global: Map[MMGlobalProperty, MMLocalProperty] = new HashMap[MMGlobalProperty, MMLocalProperty]
 
 	# All known global properties
-	readable attr _global_properties: Set[MMGlobalProperty] 
+	readable attr _global_properties: Set[MMGlobalProperty] = new HashSet[MMGlobalProperty]
 
 	# Dictionnary of global properties
-	readable attr _properties_by_name: Map[Symbol, Array[MMGlobalProperty]]
+	attr _properties_by_name: Map[Symbol, Array[MMGlobalProperty]] = new HashMap[Symbol, Array[MMGlobalProperty]]
 
 	# Create a new class with a given name and arity
 	protected init(mod: MMModule, name: Symbol, arity: Int)
@@ -400,7 +387,6 @@ class MMLocalClass
 	# refined classes for this class
 	meth set_global(g: MMGlobalClass)
 	do
-		assert g != null
 		_global = g
 		_global.register_local_class(self)
 		_module.register_global_class(self)
@@ -433,7 +419,6 @@ class MMLocalClass
 	# TODO: Will disapear when qualified names will be available
 	meth method(na: Symbol): MMGlobalProperty
 	do
-		assert _properties_by_name != null
 		return _properties_by_name[na].first
 	end
 
@@ -441,7 +426,6 @@ class MMLocalClass
 	# TODO: Will disapear when qualified names will be available
 	meth select_method(name: Symbol): MMMethod
 	do
-		assert name != null
 		var gp = method(name)
 		var res = self[gp]
 		assert res isa MMMethod
@@ -452,7 +436,6 @@ class MMLocalClass
 	# TODO: Will disapear when qualified names will be available
 	meth select_attribute(name: Symbol): MMAttribute
 	do
-		assert name != null
 		var gp = attribute(name)
 		var res = self[gp]
 		assert res isa MMAttribute
@@ -480,11 +463,7 @@ class MMLocalClass
 	# Register a local property and associate it with its global property
 	meth register_local_property(p: MMLocalProperty)
 	do
-		assert p.global != null
-		# FIXME: Why a test?
-		if not _local_property_by_global.has_key(p.global) then
-			_local_property_by_global[p.global] = p
-		end
+		_local_property_by_global[p.global] = p
 	end
 
 	# Register a global property and associate it with its name
@@ -530,10 +509,10 @@ class MMGlobalProperty
 	readable attr _intro: MMLocalProperty
 
 	# The local class that introduces the global property
- 	meth local_class: MMLocalClass
- 	do
- 		return intro.local_class
- 	end
+	meth local_class: MMLocalClass
+	do
+		return intro.local_class
+	end
 
 	# The property redefinition hierarchy
 	readable attr _property_hierarchy: PartialOrder[MMLocalProperty] = new PartialOrder[MMLocalProperty]
@@ -541,10 +520,6 @@ class MMGlobalProperty
 	# Create a new global property introduced by a local one
 	protected init(p: MMLocalProperty)
 	do
-		assert p != null
-
-		_property_hierarchy = new PartialOrder[MMLocalProperty]
-	
 		_intro = p
 		add_local_property(p, new Array[MMLocalProperty])
 	end
@@ -554,8 +529,6 @@ class MMGlobalProperty
 	# Register a new local property
 	meth add_local_property(i: MMLocalProperty, sup: Array[MMLocalProperty])
 	do
-		assert i != null
-		assert sup != null
 		i._prhe = _property_hierarchy.add(i,sup)
 	end
 
@@ -566,7 +539,7 @@ class MMGlobalProperty
 	meth is_method: Bool do return intro isa MMMethod
 
 	# Is the global property a constructor (thus also a method)?
-	readable writable attr _is_init: Bool
+	readable writable attr _is_init: Bool = false
 
 	# Is the global property a constructor for a given class?
 	meth is_init_for(c: MMLocalClass): Bool
@@ -593,10 +566,15 @@ class MMLocalProperty
 	readable attr _local_class: MMLocalClass
 
 	# The global property where belong the local property
-	readable attr _global: MMGlobalProperty
+	attr _global: nullable MMGlobalProperty
+
+	meth global: MMGlobalProperty do return _global.as(not null)
+	meth is_global_set: Bool do return _global != null
 
 	# Redefinition hierarchy of the local property
-	readable attr _prhe: PartialOrderElement[MMLocalProperty]
+	attr _prhe: nullable PartialOrderElement[MMLocalProperty]
+
+	meth prhe: PartialOrderElement[MMLocalProperty] do return _prhe.as(not null)
 
 	# The module of the local property
 	meth module: MMModule do return _local_class.module
@@ -604,7 +582,7 @@ class MMLocalProperty
 	# Full expanded name with all qualifications
 	meth full_name: String
 	do
-		if global == null then
+		if _global == null then
 			return "{local_class.module}::{local_class}::(?::{name})"
 		else if global.intro == self then
 			return "{local_class.module}::{local_class}::{name}"
@@ -616,7 +594,6 @@ class MMLocalProperty
 	# set the global property for this property
 	meth set_global(g: MMGlobalProperty)
 	do
-		assert g != null
 		_global = g
 		_local_class.register_local_property(self)
 	end
@@ -625,10 +602,11 @@ class MMLocalProperty
 	meth new_global
 	do
 		assert _global == null
-		_global = new MMGlobalProperty(self)
-		_local_class.register_global_property(_global)
+		var global = new MMGlobalProperty(self)
+		_global = global
+		_local_class.register_global_property(global)
 	end
-	
+
 	redef meth to_s do return name.to_s
 
 	# Is the concrete property contain a `super' in the body?

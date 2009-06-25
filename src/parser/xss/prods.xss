@@ -28,9 +28,13 @@ class @ename
 special ${../@ename}
 $ foreach {elem}
 $   if @is_list
-    readable writable attr _n_@name: List[@etype] = null
+    readable writable attr _n_@name: List[@etype] = new List[@etype]
 $   else
-    readable writable attr _n_@name: @etype = null
+$   if @modifier
+    readable writable attr _n_@name: nullable @etype = null
+$   else
+    readable writable attr _n_@name: @etype
+$   end
 $   end
 $ end
 end
@@ -38,7 +42,7 @@ $ end
 
 class Start
 special Prod
-    readable writable attr _n_base: $baseprod 
+    readable writable attr _n_base: nullable $baseprod 
     readable writable attr _n_eof: EOF 
 end
 $ end template
@@ -50,12 +54,16 @@ redef class @ename
 $ foreach {elem}
 $   if @is_list
 $   else
-    redef meth n_@name=(n: @etype)
+    redef meth n_@name=(n)
     do
         _n_@name = n
+$   if @modifier
         if n != null then
 	    n.parent = self
         end
+$   else
+	n.parent = self
+$   end
     end
 $   end
 $ end
@@ -68,7 +76,7 @@ $ foreach {elem}
 $   if {@is_list}
             n_@{name}: Collection[Object] [-sep ','-] # Should be Collection[@etype]
 $   else
-            n_@{name}: @etype [-sep ','-]
+            n_@{name}: nullable @etype [-sep ','-]
 $   end
 $ end
     )
@@ -79,24 +87,27 @@ $ end
         empty_init
 $ foreach {elem}
 $   if @is_list
-        _n_@{name} = new List[@{etype}]
 	for n in n_@{name} do
 		assert n isa @{etype}
 		_n_@{name}.add(n)
 		n.parent = self
 	end
 $   else
+$   if {@modifier}
         _n_@name = n_@{name}
 	if n_@{name} != null then
 		n_@{name}.parent = self
 	end
+$   else
+        _n_@name = n_@{name}.as(not null)
+	n_@{name}.parent = self
+$   end
 $   end
 $ end
     end
 
-    redef meth replace_child(old_child: PNode, new_child: PNode)
+    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
     do
-        assert old_child != null
 $ foreach {elem}
 $   if @is_list
         for i in [0.._n_@{name}.length[ do
@@ -118,7 +129,11 @@ $   else
 		assert new_child isa @etype
                 _n_@{name} = new_child
 	    else
+$   if @modifier
 		_n_@{name} = null
+$   else
+		abort
+$   end
             end
             return
 	end
@@ -134,9 +149,13 @@ $     if @is_list
                 v.visit(n)
 	    end
 $     else
+$       if @modifier
         if _n_@{name} != null then
-            v.visit(_n_@{name})
+            v.visit(_n_@{name}.as(not null))
         end
+$       else
+        v.visit(_n_@{name})
+$       end
 $     end
 $   end foreach
     end
@@ -153,9 +172,13 @@ $     if @is_list
 	    end
 	end
 $     else
+$       if @modifier
         if _n_@{name} != null then
-            v.visit(_n_@{name})
+            v.visit(_n_@{name}.as(not null))
         end
+$       else
+        v.visit(_n_@{name})
+$       end
 $     end
 $   end foreach
     end
@@ -164,16 +187,15 @@ $ end foreach
 
 redef class Start
     init(
-        n_base: $baseprod,
+        n_base: nullable $baseprod,
         n_eof: EOF)
     do
         _n_base = n_base
         _n_eof = n_eof
     end
 
-    redef meth replace_child(old_child: PNode, new_child: PNode)
+    redef meth replace_child(old_child: PNode, new_child: nullable PNode)
     do
-        assert old_child != null
         if _n_base == old_child then
             if new_child == null then
             else
@@ -189,14 +211,14 @@ redef class Start
     redef meth visit_all(v: Visitor)
     do
         if _n_base != null then
-            v.visit(_n_base)
+            v.visit(_n_base.as(not null))
         end
     end
 
     redef meth visit_all_reverse(v: Visitor)
     do
         if _n_base != null then
-            v.visit(_n_base)
+            v.visit(_n_base.as(not null))
         end
     end
 end

@@ -95,7 +95,7 @@ special Collection[E]
 	end
 
 	# Get an array consisting of only minimal elements
-	meth select_smallests(c: Collection[E]): Array[E]
+	meth select_smallests(c: nullable Collection[E]): Array[E]
 	do
 		if c == null then return new Array[E]
 		assert has_all(c)
@@ -114,9 +114,9 @@ special Collection[E]
 		end
 		return res
 	end
-	
+
 	# Add a new element inferior of some others
-	meth add(e: E, supers: Collection[E]): PartialOrderElement[E]
+	meth add(e: E, supers: nullable Collection[E]): PartialOrderElement[E]
 	do
 		assert not has(e)
 		assert supers == null or has_all(supers)
@@ -209,7 +209,7 @@ class PartialOrderElement[E]
 	readable attr _greaters: Set[E]
 
 	# Cached result of greaters_and_self
-	attr _greaters_and_self_cache: Array[E]
+	attr _greaters_and_self_cache: nullable Array[E]
 
 	# Elements that are self or greater than self
 	meth greaters_and_self: Collection[E]
@@ -218,7 +218,7 @@ class PartialOrderElement[E]
 			_greaters_and_self_cache = _greaters.to_a
 			_greaters_and_self_cache.add(_value)
 		end
-		return _greaters_and_self_cache
+		return _greaters_and_self_cache.as(not null)
 	end
 	
 	# Cached value of _order.length to validade smallers_cache
@@ -238,7 +238,7 @@ class PartialOrderElement[E]
 	end
 
 	# Cached result of linear_extension
-	attr _linear_extension_cache: Array[E]
+	attr _linear_extension_cache: nullable Array[E]
 
 	# Return a linear extension of self
 	# FIXME: Uses the C++ algo that is not good!
@@ -262,11 +262,11 @@ class PartialOrderElement[E]
 			end
 			_linear_extension_cache = res
 		end
-		return _linear_extension_cache
+		return _linear_extension_cache.as(not null)
 	end
 
 	# Cached result of reverse_linear_extension
-	attr _reverse_linear_extension_cache: Array[E]
+	attr _reverse_linear_extension_cache: nullable Array[E]
 
 	# Return a reverse linear extension of self
 	# FIXME: Uses the C++ algo that is not good!
@@ -281,7 +281,7 @@ class PartialOrderElement[E]
 			res.add(value)
 			_linear_extension_cache = res.to_a
 		end
-		return _linear_extension_cache
+		return _linear_extension_cache.as(not null)
 	end
 
 	# Is value < o according to order?

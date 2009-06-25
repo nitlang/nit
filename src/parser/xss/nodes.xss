@@ -35,7 +35,7 @@ $ end template
 $ template make_nodes()
 redef class PNode
 	# Parent of the node in the AST
-	readable writable attr _parent: PNode 
+	readable writable attr _parent: nullable PNode
 
 	# Remove a child from the AST
 	meth remove_child(child: PNode)
@@ -44,7 +44,7 @@ redef class PNode
 	end
 
 	# Replace a child with an other node in the AST
-	meth replace_child(old_child: PNode, new_child: PNode) is abstract
+	meth replace_child(old_child: PNode, new_child: nullable PNode) is abstract
 
 	# Replace itself with an other node in the AST
 	meth replace_with(node: PNode)
@@ -78,7 +78,7 @@ end
 redef class Token
 	redef meth visit_all(v: Visitor) do end
 	redef meth visit_all_reverse(v: Visitor) do end
-	redef meth replace_child(old_child: PNode, new_child: PNode) do end
+	redef meth replace_child(old_child: PNode, new_child: nullable PNode) do end
 
 	redef meth locate: String
 	do
@@ -90,10 +90,10 @@ end
 
 redef class Prod
 	# The first token of the production node
-	readable writable attr _first_token: Token 
+	readable writable attr _first_token: nullable Token
 
 	# The last token of the production node
-	readable writable attr _last_token: Token 
+	readable writable attr _last_token: nullable Token
 
 	redef meth locate: String
 	do
@@ -134,7 +134,7 @@ class Visitor
         # Ask the visitor to visit a given node.
         # Usually automatically called by visit_all* methods.
         # Concrete visitors should redefine this method.
-        meth visit(e: PNode) is abstract
+        meth visit(e: nullable PNode) is abstract
 end
 
 $ end template

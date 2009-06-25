@@ -58,7 +58,7 @@ end
 # For and while use this class. closures uses the EscapableClosure subclass.
 class EscapableBlock
 	# The syntax node of the block
-	readable attr _node: PNode = null
+	readable attr _node: PNode
 
 	# Is self a break closure ?
 	meth is_break_block: Bool do return false
@@ -66,10 +66,10 @@ class EscapableBlock
 	# Collected expressions used in breaks.
 	# null if break does not accept values.
 	# break_list is used to store expressions used in break statments and perform type checks latter
-	meth break_list: Array[PExpr] do return null
+	meth break_list: nullable Array[PExpr] do return null
 
 	# The static type required by the continue statement (if any)
-	meth continue_stype: MMType do return null
+	meth continue_stype: nullable MMType do return null
 
 	init(node: PNode)
 	do
@@ -85,11 +85,11 @@ special EscapableBlock
 
 	redef meth is_break_block do return _closure.is_break
 
-	redef readable attr _break_list: Array[PExpr]
+	redef readable attr _break_list: nullable Array[PExpr]
 
 	redef meth continue_stype do return _closure.signature.return_type
 
-	init(node: PNode, closure: MMClosure, break_list: Array[PExpr])
+	init(node: PNode, closure: MMClosure, break_list: nullable Array[PExpr])
 	do
 		super(node)
 		_closure = closure
@@ -102,13 +102,13 @@ end
 class AEscapeExpr
 special PNode
 	# The associated escapable block
-	readable attr _escapable_block: EscapableBlock
+	readable attr _escapable_block: nullable EscapableBlock
 
 	# The name of the keyword
 	meth kwname: String is abstract
 
 	# Compute, set and return the _abelable_node value
-	meth compute_escapable_block(lctx: EscapableContext): EscapableBlock
+	meth compute_escapable_block(lctx: EscapableContext): nullable EscapableBlock
 	do
 		var block: EscapableBlock
 		if lctx.is_empty then

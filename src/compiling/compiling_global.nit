@@ -23,7 +23,7 @@ private import syntax
 
 # Something that store color of table elements
 class ColorContext
-	attr _colors: HashMap[TableElt, Int] = null
+	attr _colors: HashMap[TableElt, Int] = new HashMap[TableElt, Int]
 
 	# The color of a table element.
 	meth color(e: TableElt): Int
@@ -34,13 +34,12 @@ class ColorContext
 	# Is a table element already colored?
 	meth has_color(e: TableElt): Bool
 	do
-		return _colors != null and _colors.has_key(e)
+		return _colors.has_key(e)
 	end
 
 	# Assign a color to a table element.
 	meth color=(e: TableElt, c: Int)
 	do
-		if _colors == null then _colors = new HashMap[TableElt, Int]
 		_colors[e] = c
 		var idx = c
 		for i in [0..e.length[ do
@@ -60,7 +59,7 @@ special ColorContext
 	readable attr _module: MMModule
 
 	# FIXME: do something better.
-	readable writable attr _max_class_table_length: Int
+	readable writable attr _max_class_table_length: Int = 0
 
 	init(module: MMSrcModule)
 	do
@@ -86,26 +85,27 @@ special ColorContext
 	readable attr _local_class: MMLocalClass
 
 	# The identifier of the class
-	readable writable attr _id: Int
+	readable writable attr _id: Int = 0
 
 	# The full class table of the class
-	readable attr _class_table: Array[TableElt] = new Array[TableElt]
+	readable attr _class_table: Array[nullable TableElt] = new Array[nullable TableElt]
 
 	# The full instance table of the class
-	readable attr _instance_table: Array[TableElt] = new Array[TableElt]
+	readable attr _instance_table: Array[nullable TableElt] = new Array[nullable TableElt]
 
 	# The proper class table part (no superclasses but all refinements)
-	readable attr _class_layout: TableEltComposite = new TableEltComposite(self)
+	readable writable attr _class_layout: TableEltComposite = new TableEltComposite(self)
 
 	# The proper instance table part (no superclasses but all refinements)
-	readable attr _instance_layout: TableEltComposite = new TableEltComposite(self)
+	readable writable attr _instance_layout: TableEltComposite = new TableEltComposite(self)
 
 	init(c: MMLocalClass) do _local_class = c
 end
 
 redef class MMSrcLocalClass
 	# The table element of the subtype check
-	readable attr _class_color_pos: TableEltClassColor
+	meth class_color_pos: TableEltClassColor do return _class_color_pos.as(not null)
+	attr _class_color_pos: nullable TableEltClassColor
 
 	# The proper local class table part (nor superclasses nor refinments)
 	readable attr _class_layout: Array[TableElt] = new Array[TableElt]
@@ -121,8 +121,9 @@ redef class MMSrcLocalClass
 
 		if global.intro == self then
 			module_table.add(new TableEltClassId(self))
-			_class_color_pos = new TableEltClassColor(self)
-			module_table.add(_class_color_pos)
+			var cpp = new TableEltClassColor(self)
+			_class_color_pos = cpp
+			module_table.add(cpp)
 			clt.add(new TableEltClassInitTable(self))
 		end
 		for p in src_local_properties do
@@ -318,7 +319,7 @@ redef class MMSrcModule
 		return ga
 	end
 
-	private meth append_to_table(cc: ColorContext, table: Array[TableElt], cmp: TableEltComposite)
+	private meth append_to_table(cc: ColorContext, table: Array[nullable TableElt], cmp: TableEltComposite)
 	do
 		for j in [0..cmp.length[ do
 			var e = cmp.item(j)
@@ -327,7 +328,7 @@ redef class MMSrcModule
 		end
 	end
 
-	private meth build_tables_in(table: Array[TableElt], ga: GlobalAnalysis, c: MMLocalClass, elts: Array[TableElt])
+	private meth build_tables_in(table: Array[nullable TableElt], ga: GlobalAnalysis, c: MMLocalClass, elts: Array[TableElt])
 	do
 		var tab = new HashMap[Int, TableElt]
 		var len = 0
@@ -455,12 +456,11 @@ redef class MMSrcModule
 			print("No main")
 		else
 			var sys = class_by_name(sysname)
-			# var initm = sys.select_method(once "init".to_symbol)
-			var mainm = sys.select_method(once "main".to_symbol)
-			if mainm == null then
+			var name = once "main".to_symbol
+			if not sys.has_global_property_by_name(name) then
 				print("No main")
 			else
-				#v.add_instr("G_sys = NEW_{initm.cname}();")
+				var mainm = sys.select_method(name)
 				v.add_instr("G_sys = NEW_Sys();")
 				v.add_instr("{mainm.cname}(G_sys);")
 			end
@@ -627,8 +627,7 @@ special TableEltProp
 				end
 			end
 		end
-		assert false
-		return null
+		abort
 	end
 end
 
@@ -874,7 +873,7 @@ redef class MMLocalClass
 			var ctx_old = v.ctx
 			v.ctx = new CContext
 
-			var self_var = new ParamVariable(null, null)
+			var self_var = new ParamVariable(once ("self".to_symbol), null)
 			var self_var_cname = v.cfc.register_variable(self_var)
 			v.nmc.method_params = [self_var]
 
@@ -890,7 +889,6 @@ redef class MMLocalClass
 					# FIXME: Not compatible with sep compilation
 					assert p isa MMSrcAttribute
 					var np = p.node
-					assert np isa AAttrPropdef
 					var ne = np.n_expr
 					if ne != null then
 						var e = ne.compile_expr(v)

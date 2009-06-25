@@ -11,9 +11,9 @@ private class State
 	readable writable attr _state: Int
 
 	# The node stored with the state in the stack
-	readable writable attr _nodes: Object 
+	readable writable attr _nodes: nullable Object 
 
-	init(state: Int, nodes: Object)
+	init(state: Int, nodes: nullable Object)
 	do
 		_state = state
 		_nodes = nodes
@@ -67,7 +67,7 @@ special ParserTable
 	end
 
 	# Push someting in the state stack
-	private meth push(numstate: Int, list_node: Object)
+	private meth push(numstate: Int, list_node: nullable Object)
 	do
 		var pos = _stack_pos + 1
 		_stack_pos = pos
@@ -87,7 +87,7 @@ special ParserTable
 	end
 
 	# Pop something from the stack state
-	private meth pop: Object
+	private meth pop: nullable Object
 	do
 		var res = _stack[_stack_pos].nodes
 		_stack_pos = _stack_pos -1
@@ -99,7 +99,6 @@ special ParserTable
 	do
 		push(0, null)
 
-		var ign: List[Token] = null
 		var lexer = _lexer
 		while true do
 			var token = lexer.peek
@@ -107,7 +106,6 @@ special ParserTable
 			var last_line = token.line
 
 			if token isa PError then
-				assert token isa PError
 				return new Start(null, token)
 			end
 
@@ -152,7 +150,7 @@ special ParserTable
 				return node
 			end
 		end
-		return null
+		abort
 	end
 
 	attr _reduce_table: Array[ReduceAction]
@@ -905,11 +903,12 @@ end
 private class SearchTokensVisitor
 special Visitor
 	attr _untokenned_nodes: Array[Prod]
-	attr _last_token: Token
-	redef meth visit(n: PNode)
+	attr _last_token: nullable Token = null
+	redef meth visit(n: nullable PNode)
 	do
-		if n isa Token then
-			assert n isa Token
+		if n == null then
+			return
+		else if n isa Token then
 			_last_token = n
 			for no in _untokenned_nodes do
 				no.first_token = n
@@ -937,10 +936,10 @@ private class ReduceAction0
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var listnode3 = new Array[Object]
 					var listnode4 = new Array[Object]
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode3,
 						listnode4
@@ -954,13 +953,13 @@ private class ReduceAction1
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode4 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
-					var pmodulenode1 = new AModule.init_amodule(
+					assert ppackagedeclnode2 isa nullable PPackagedecl
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode3,
 						listnode4
@@ -974,20 +973,20 @@ private class ReduceAction2
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode5 = new Array[Object]
-					var listnode3 = nodearraylist1 
+					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
-					var pmodulenode1 = new AModule.init_amodule(
+#					end
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode4,
 						listnode5
@@ -1001,23 +1000,23 @@ private class ReduceAction3
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode5 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
-					var listnode3 = nodearraylist2 
+					assert ppackagedeclnode2 isa nullable PPackagedecl
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
-					var pmodulenode1 = new AModule.init_amodule(
+#					end
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode4,
 						listnode5
@@ -1031,20 +1030,20 @@ private class ReduceAction4
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode5 = new Array[Object]
-					var listnode4 = nodearraylist1 
+					var listnode4 = nodearraylist1
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pmodulenode1 = new AModule.init_amodule(
+#					end
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode3,
 						listnode5
@@ -1058,23 +1057,23 @@ private class ReduceAction5
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode5 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
-					var listnode4 = nodearraylist2 
+					assert ppackagedeclnode2 isa nullable PPackagedecl
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pmodulenode1 = new AModule.init_amodule(
+#					end
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode3,
 						listnode5
@@ -1088,30 +1087,30 @@ private class ReduceAction6
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode6 = new Array[Object]
-					var listnode3 = nodearraylist1 
+					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
-					var listnode5 = nodearraylist2 
+#					end
+					var listnode5 = nodearraylist2
 					assert listnode5 isa Array[Object]
-					if listnode5 != null then
+#					if listnode5 != null then
 						if listnode6.is_empty then
 							listnode6 = listnode5
 						else
 							listnode6.append(listnode5)
 						end
-					end
-					var pmodulenode1 = new AModule.init_amodule(
+#					end
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode4,
 						listnode6
@@ -1125,33 +1124,33 @@ private class ReduceAction7
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
-					var listnode3 = nodearraylist2 
+					assert ppackagedeclnode2 isa nullable PPackagedecl
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
-					var listnode5 = nodearraylist3 
+#					end
+					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
-					if listnode5 != null then
+#					if listnode5 != null then
 						if listnode6.is_empty then
 							listnode6 = listnode5
 						else
 							listnode6.append(listnode5)
 						end
-					end
-					var pmodulenode1 = new AModule.init_amodule(
+#					end
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode4,
 						listnode6
@@ -1165,24 +1164,24 @@ private class ReduceAction8
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var ppropdefnode5 = nodearraylist1
-					assert ppropdefnode5 isa PPropdef
+					assert ppropdefnode5 isa nullable PPropdef
 					if ppropdefnode5 != null then
 						listnode6.add(ppropdefnode5)
 					end
-					var pclassdefnode4 = new ATopClassdef.init_atopclassdef(
+					var pclassdefnode4: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode6
 					)
 					if pclassdefnode4 != null then
 						listnode7.add(pclassdefnode4)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode3,
 						listnode7
@@ -1196,7 +1195,7 @@ private class ReduceAction9
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
@@ -1204,26 +1203,26 @@ special ReduceAction
 					var listnode8 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var ppropdefnode5 = nodearraylist1
-					assert ppropdefnode5 isa PPropdef
-					var listnode6 = nodearraylist3 
+					assert ppropdefnode5 isa nullable PPropdef
+					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
 					if ppropdefnode5 != null then
 						listnode7.add(ppropdefnode5)
 					end
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pclassdefnode4 = new ATopClassdef.init_atopclassdef(
+#					end
+					var pclassdefnode4: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
 					if pclassdefnode4 != null then
 						listnode8.add(pclassdefnode4)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode3,
 						listnode8
@@ -1237,27 +1236,27 @@ private class ReduceAction10
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
+					assert ppackagedeclnode2 isa nullable PPackagedecl
 					var listnode6 = new Array[Object]
 					var ppropdefnode5 = nodearraylist2
-					assert ppropdefnode5 isa PPropdef
+					assert ppropdefnode5 isa nullable PPropdef
 					if ppropdefnode5 != null then
 						listnode6.add(ppropdefnode5)
 					end
-					var pclassdefnode4 = new ATopClassdef.init_atopclassdef(
+					var pclassdefnode4: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode6
 					)
 					if pclassdefnode4 != null then
 						listnode7.add(pclassdefnode4)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode3,
 						listnode7
@@ -1271,7 +1270,7 @@ private class ReduceAction11
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
@@ -1279,29 +1278,29 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode8 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
+					assert ppackagedeclnode2 isa nullable PPackagedecl
 					var listnode7 = new Array[Object]
 					var ppropdefnode5 = nodearraylist2
-					assert ppropdefnode5 isa PPropdef
-					var listnode6 = nodearraylist4 
+					assert ppropdefnode5 isa nullable PPropdef
+					var listnode6 = nodearraylist4
 					assert listnode6 isa Array[Object]
 					if ppropdefnode5 != null then
 						listnode7.add(ppropdefnode5)
 					end
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pclassdefnode4 = new ATopClassdef.init_atopclassdef(
+#					end
+					var pclassdefnode4: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
 					if pclassdefnode4 != null then
 						listnode8.add(pclassdefnode4)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode3,
 						listnode8
@@ -1315,34 +1314,34 @@ private class ReduceAction12
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode8 = new Array[Object]
-					var listnode3 = nodearraylist1 
+					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
+#					end
 					var listnode7 = new Array[Object]
 					var ppropdefnode6 = nodearraylist2
-					assert ppropdefnode6 isa PPropdef
+					assert ppropdefnode6 isa nullable PPropdef
 					if ppropdefnode6 != null then
 						listnode7.add(ppropdefnode6)
 					end
-					var pclassdefnode5 = new ATopClassdef.init_atopclassdef(
+					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
 					if pclassdefnode5 != null then
 						listnode8.add(pclassdefnode5)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode4,
 						listnode8
@@ -1356,44 +1355,44 @@ private class ReduceAction13
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode9 = new Array[Object]
-					var listnode3 = nodearraylist1 
+					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
+#					end
 					var listnode8 = new Array[Object]
 					var ppropdefnode6 = nodearraylist2
-					assert ppropdefnode6 isa PPropdef
-					var listnode7 = nodearraylist4 
+					assert ppropdefnode6 isa nullable PPropdef
+					var listnode7 = nodearraylist4
 					assert listnode7 isa Array[Object]
 					if ppropdefnode6 != null then
 						listnode8.add(ppropdefnode6)
 					end
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
-					var pclassdefnode5 = new ATopClassdef.init_atopclassdef(
+#					end
+					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode8
 					)
 					if pclassdefnode5 != null then
 						listnode9.add(pclassdefnode5)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode4,
 						listnode9
@@ -1407,7 +1406,7 @@ private class ReduceAction14
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
@@ -1415,29 +1414,29 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode8 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
-					var listnode3 = nodearraylist2 
+					assert ppackagedeclnode2 isa nullable PPackagedecl
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
+#					end
 					var listnode7 = new Array[Object]
 					var ppropdefnode6 = nodearraylist3
-					assert ppropdefnode6 isa PPropdef
+					assert ppropdefnode6 isa nullable PPropdef
 					if ppropdefnode6 != null then
 						listnode7.add(ppropdefnode6)
 					end
-					var pclassdefnode5 = new ATopClassdef.init_atopclassdef(
+					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
 					if pclassdefnode5 != null then
 						listnode8.add(pclassdefnode5)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode4,
 						listnode8
@@ -1451,7 +1450,7 @@ private class ReduceAction15
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -1460,38 +1459,38 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode9 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
-					var listnode3 = nodearraylist2 
+					assert ppackagedeclnode2 isa nullable PPackagedecl
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
+#					end
 					var listnode8 = new Array[Object]
 					var ppropdefnode6 = nodearraylist3
-					assert ppropdefnode6 isa PPropdef
-					var listnode7 = nodearraylist5 
+					assert ppropdefnode6 isa nullable PPropdef
+					var listnode7 = nodearraylist5
 					assert listnode7 isa Array[Object]
 					if ppropdefnode6 != null then
 						listnode8.add(ppropdefnode6)
 					end
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
-					var pclassdefnode5 = new ATopClassdef.init_atopclassdef(
+#					end
+					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode8
 					)
 					if pclassdefnode5 != null then
 						listnode9.add(pclassdefnode5)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode4,
 						listnode9
@@ -1505,34 +1504,34 @@ private class ReduceAction16
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode8 = new Array[Object]
-					var listnode4 = nodearraylist1 
+					var listnode4 = nodearraylist1
 					assert listnode4 isa Array[Object]
 					var listnode7 = new Array[Object]
 					var ppropdefnode6 = nodearraylist2
-					assert ppropdefnode6 isa PPropdef
+					assert ppropdefnode6 isa nullable PPropdef
 					if ppropdefnode6 != null then
 						listnode7.add(ppropdefnode6)
 					end
-					var pclassdefnode5 = new ATopClassdef.init_atopclassdef(
+					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode4
 						else
 							listnode8.append(listnode4)
 						end
-					end
+#					end
 					if pclassdefnode5 != null then
 						listnode8.add(pclassdefnode5)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode3,
 						listnode8
@@ -1546,44 +1545,44 @@ private class ReduceAction17
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode9 = new Array[Object]
-					var listnode4 = nodearraylist1 
+					var listnode4 = nodearraylist1
 					assert listnode4 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var ppropdefnode6 = nodearraylist2
-					assert ppropdefnode6 isa PPropdef
-					var listnode7 = nodearraylist4 
+					assert ppropdefnode6 isa nullable PPropdef
+					var listnode7 = nodearraylist4
 					assert listnode7 isa Array[Object]
 					if ppropdefnode6 != null then
 						listnode8.add(ppropdefnode6)
 					end
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
-					var pclassdefnode5 = new ATopClassdef.init_atopclassdef(
+#					end
+					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode8
 					)
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode9.is_empty then
 							listnode9 = listnode4
 						else
 							listnode9.append(listnode4)
 						end
-					end
+#					end
 					if pclassdefnode5 != null then
 						listnode9.add(pclassdefnode5)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode3,
 						listnode9
@@ -1597,7 +1596,7 @@ private class ReduceAction18
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
@@ -1605,29 +1604,29 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode8 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
-					var listnode4 = nodearraylist2 
+					assert ppackagedeclnode2 isa nullable PPackagedecl
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
 					var listnode7 = new Array[Object]
 					var ppropdefnode6 = nodearraylist3
-					assert ppropdefnode6 isa PPropdef
+					assert ppropdefnode6 isa nullable PPropdef
 					if ppropdefnode6 != null then
 						listnode7.add(ppropdefnode6)
 					end
-					var pclassdefnode5 = new ATopClassdef.init_atopclassdef(
+					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode4
 						else
 							listnode8.append(listnode4)
 						end
-					end
+#					end
 					if pclassdefnode5 != null then
 						listnode8.add(pclassdefnode5)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode3,
 						listnode8
@@ -1641,7 +1640,7 @@ private class ReduceAction19
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -1650,38 +1649,38 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode9 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
-					var listnode4 = nodearraylist2 
+					assert ppackagedeclnode2 isa nullable PPackagedecl
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var ppropdefnode6 = nodearraylist3
-					assert ppropdefnode6 isa PPropdef
-					var listnode7 = nodearraylist5 
+					assert ppropdefnode6 isa nullable PPropdef
+					var listnode7 = nodearraylist5
 					assert listnode7 isa Array[Object]
 					if ppropdefnode6 != null then
 						listnode8.add(ppropdefnode6)
 					end
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
-					var pclassdefnode5 = new ATopClassdef.init_atopclassdef(
+#					end
+					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode8
 					)
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode9.is_empty then
 							listnode9 = listnode4
 						else
 							listnode9.append(listnode4)
 						end
-					end
+#					end
 					if pclassdefnode5 != null then
 						listnode9.add(pclassdefnode5)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode3,
 						listnode9
@@ -1695,44 +1694,44 @@ private class ReduceAction20
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode9 = new Array[Object]
-					var listnode3 = nodearraylist1 
+					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
-					var listnode5 = nodearraylist2 
+#					end
+					var listnode5 = nodearraylist2
 					assert listnode5 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var ppropdefnode7 = nodearraylist3
-					assert ppropdefnode7 isa PPropdef
+					assert ppropdefnode7 isa nullable PPropdef
 					if ppropdefnode7 != null then
 						listnode8.add(ppropdefnode7)
 					end
-					var pclassdefnode6 = new ATopClassdef.init_atopclassdef(
+					var pclassdefnode6: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode8
 					)
-					if listnode5 != null then
+#					if listnode5 != null then
 						if listnode9.is_empty then
 							listnode9 = listnode5
 						else
 							listnode9.append(listnode5)
 						end
-					end
+#					end
 					if pclassdefnode6 != null then
 						listnode9.add(pclassdefnode6)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode4,
 						listnode9
@@ -1746,7 +1745,7 @@ private class ReduceAction21
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -1754,46 +1753,46 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode10 = new Array[Object]
-					var listnode3 = nodearraylist1 
+					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
-					var listnode5 = nodearraylist2 
+#					end
+					var listnode5 = nodearraylist2
 					assert listnode5 isa Array[Object]
 					var listnode9 = new Array[Object]
 					var ppropdefnode7 = nodearraylist3
-					assert ppropdefnode7 isa PPropdef
-					var listnode8 = nodearraylist5 
+					assert ppropdefnode7 isa nullable PPropdef
+					var listnode8 = nodearraylist5
 					assert listnode8 isa Array[Object]
 					if ppropdefnode7 != null then
 						listnode9.add(ppropdefnode7)
 					end
-					if listnode8 != null then
+#					if listnode8 != null then
 						if listnode9.is_empty then
 							listnode9 = listnode8
 						else
 							listnode9.append(listnode8)
 						end
-					end
-					var pclassdefnode6 = new ATopClassdef.init_atopclassdef(
+#					end
+					var pclassdefnode6: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode9
 					)
-					if listnode5 != null then
+#					if listnode5 != null then
 						if listnode10.is_empty then
 							listnode10 = listnode5
 						else
 							listnode10.append(listnode5)
 						end
-					end
+#					end
 					if pclassdefnode6 != null then
 						listnode10.add(pclassdefnode6)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode4,
 						listnode10
@@ -1807,7 +1806,7 @@ private class ReduceAction22
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -1816,38 +1815,38 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode9 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
-					var listnode3 = nodearraylist2 
+					assert ppackagedeclnode2 isa nullable PPackagedecl
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
-					var listnode5 = nodearraylist3 
+#					end
+					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var ppropdefnode7 = nodearraylist4
-					assert ppropdefnode7 isa PPropdef
+					assert ppropdefnode7 isa nullable PPropdef
 					if ppropdefnode7 != null then
 						listnode8.add(ppropdefnode7)
 					end
-					var pclassdefnode6 = new ATopClassdef.init_atopclassdef(
+					var pclassdefnode6: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode8
 					)
-					if listnode5 != null then
+#					if listnode5 != null then
 						if listnode9.is_empty then
 							listnode9 = listnode5
 						else
 							listnode9.append(listnode5)
 						end
-					end
+#					end
 					if pclassdefnode6 != null then
 						listnode9.add(pclassdefnode6)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode4,
 						listnode9
@@ -1861,7 +1860,7 @@ private class ReduceAction23
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -1871,47 +1870,47 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
-					var listnode3 = nodearraylist2 
+					assert ppackagedeclnode2 isa nullable PPackagedecl
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
-					var listnode5 = nodearraylist3 
+#					end
+					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
 					var listnode9 = new Array[Object]
 					var ppropdefnode7 = nodearraylist4
-					assert ppropdefnode7 isa PPropdef
-					var listnode8 = nodearraylist6 
+					assert ppropdefnode7 isa nullable PPropdef
+					var listnode8 = nodearraylist6
 					assert listnode8 isa Array[Object]
 					if ppropdefnode7 != null then
 						listnode9.add(ppropdefnode7)
 					end
-					if listnode8 != null then
+#					if listnode8 != null then
 						if listnode9.is_empty then
 							listnode9 = listnode8
 						else
 							listnode9.append(listnode8)
 						end
-					end
-					var pclassdefnode6 = new ATopClassdef.init_atopclassdef(
+#					end
+					var pclassdefnode6: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode9
 					)
-					if listnode5 != null then
+#					if listnode5 != null then
 						if listnode10.is_empty then
 							listnode10 = listnode5
 						else
 							listnode10.append(listnode5)
 						end
-					end
+#					end
 					if pclassdefnode6 != null then
 						listnode10.add(pclassdefnode6)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode4,
 						listnode10
@@ -1925,16 +1924,16 @@ private class ReduceAction24
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode5 = new Array[Object]
 					var pclassdefnode4 = nodearraylist1
-					assert pclassdefnode4 isa PClassdef
+					assert pclassdefnode4 isa nullable PClassdef
 					if pclassdefnode4 != null then
 						listnode5.add(pclassdefnode4)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode3,
 						listnode5
@@ -1948,19 +1947,19 @@ private class ReduceAction25
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode5 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
+					assert ppackagedeclnode2 isa nullable PPackagedecl
 					var pclassdefnode4 = nodearraylist2
-					assert pclassdefnode4 isa PClassdef
+					assert pclassdefnode4 isa nullable PClassdef
 					if pclassdefnode4 != null then
 						listnode5.add(pclassdefnode4)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode3,
 						listnode5
@@ -1974,26 +1973,26 @@ private class ReduceAction26
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode6 = new Array[Object]
-					var listnode3 = nodearraylist1 
+					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
+#					end
 					var pclassdefnode5 = nodearraylist2
-					assert pclassdefnode5 isa PClassdef
+					assert pclassdefnode5 isa nullable PClassdef
 					if pclassdefnode5 != null then
 						listnode6.add(pclassdefnode5)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode4,
 						listnode6
@@ -2007,29 +2006,29 @@ private class ReduceAction27
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
-					var listnode3 = nodearraylist2 
+					assert ppackagedeclnode2 isa nullable PPackagedecl
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
+#					end
 					var pclassdefnode5 = nodearraylist3
-					assert pclassdefnode5 isa PClassdef
+					assert pclassdefnode5 isa nullable PClassdef
 					if pclassdefnode5 != null then
 						listnode6.add(pclassdefnode5)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode4,
 						listnode6
@@ -2043,26 +2042,26 @@ private class ReduceAction28
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode6 = new Array[Object]
-					var listnode4 = nodearraylist1 
+					var listnode4 = nodearraylist1
 					assert listnode4 isa Array[Object]
 					var pclassdefnode5 = nodearraylist2
-					assert pclassdefnode5 isa PClassdef
-					if listnode4 != null then
+					assert pclassdefnode5 isa nullable PClassdef
+#					if listnode4 != null then
 						if listnode6.is_empty then
 							listnode6 = listnode4
 						else
 							listnode6.append(listnode4)
 						end
-					end
+#					end
 					if pclassdefnode5 != null then
 						listnode6.add(pclassdefnode5)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode3,
 						listnode6
@@ -2076,29 +2075,29 @@ private class ReduceAction29
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
-					var listnode4 = nodearraylist2 
+					assert ppackagedeclnode2 isa nullable PPackagedecl
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
 					var pclassdefnode5 = nodearraylist3
-					assert pclassdefnode5 isa PClassdef
-					if listnode4 != null then
+					assert pclassdefnode5 isa nullable PClassdef
+#					if listnode4 != null then
 						if listnode6.is_empty then
 							listnode6 = listnode4
 						else
 							listnode6.append(listnode4)
 						end
-					end
+#					end
 					if pclassdefnode5 != null then
 						listnode6.add(pclassdefnode5)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode3,
 						listnode6
@@ -2112,36 +2111,36 @@ private class ReduceAction30
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode7 = new Array[Object]
-					var listnode3 = nodearraylist1 
+					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
-					var listnode5 = nodearraylist2 
+#					end
+					var listnode5 = nodearraylist2
 					assert listnode5 isa Array[Object]
 					var pclassdefnode6 = nodearraylist3
-					assert pclassdefnode6 isa PClassdef
-					if listnode5 != null then
+					assert pclassdefnode6 isa nullable PClassdef
+#					if listnode5 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode5
 						else
 							listnode7.append(listnode5)
 						end
-					end
+#					end
 					if pclassdefnode6 != null then
 						listnode7.add(pclassdefnode6)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode4,
 						listnode7
@@ -2155,7 +2154,7 @@ private class ReduceAction31
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
@@ -2163,31 +2162,31 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
-					var listnode3 = nodearraylist2 
+					assert ppackagedeclnode2 isa nullable PPackagedecl
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
-					var listnode5 = nodearraylist3 
+#					end
+					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
 					var pclassdefnode6 = nodearraylist4
-					assert pclassdefnode6 isa PClassdef
-					if listnode5 != null then
+					assert pclassdefnode6 isa nullable PClassdef
+#					if listnode5 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode5
 						else
 							listnode7.append(listnode5)
 						end
-					end
+#					end
 					if pclassdefnode6 != null then
 						listnode7.add(pclassdefnode6)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode4,
 						listnode7
@@ -2201,7 +2200,7 @@ private class ReduceAction32
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
@@ -2209,22 +2208,22 @@ special ReduceAction
 					var listnode8 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var ppropdefnode5 = nodearraylist1
-					assert ppropdefnode5 isa PPropdef
+					assert ppropdefnode5 isa nullable PPropdef
 					if ppropdefnode5 != null then
 						listnode6.add(ppropdefnode5)
 					end
-					var pclassdefnode4 = new ATopClassdef.init_atopclassdef(
+					var pclassdefnode4: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode6
 					)
 					var pclassdefnode7 = nodearraylist3
-					assert pclassdefnode7 isa PClassdef
+					assert pclassdefnode7 isa nullable PClassdef
 					if pclassdefnode4 != null then
 						listnode8.add(pclassdefnode4)
 					end
 					if pclassdefnode7 != null then
 						listnode8.add(pclassdefnode7)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode3,
 						listnode8
@@ -2238,7 +2237,7 @@ private class ReduceAction33
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
@@ -2247,31 +2246,31 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var ppropdefnode5 = nodearraylist1
-					assert ppropdefnode5 isa PPropdef
-					var listnode6 = nodearraylist3 
+					assert ppropdefnode5 isa nullable PPropdef
+					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
 					if ppropdefnode5 != null then
 						listnode7.add(ppropdefnode5)
 					end
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pclassdefnode4 = new ATopClassdef.init_atopclassdef(
+#					end
+					var pclassdefnode4: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
 					var pclassdefnode8 = nodearraylist4
-					assert pclassdefnode8 isa PClassdef
+					assert pclassdefnode8 isa nullable PClassdef
 					if pclassdefnode4 != null then
 						listnode9.add(pclassdefnode4)
 					end
 					if pclassdefnode8 != null then
 						listnode9.add(pclassdefnode8)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode3,
 						listnode9
@@ -2285,7 +2284,7 @@ private class ReduceAction34
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
@@ -2293,25 +2292,25 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode8 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
+					assert ppackagedeclnode2 isa nullable PPackagedecl
 					var listnode6 = new Array[Object]
 					var ppropdefnode5 = nodearraylist2
-					assert ppropdefnode5 isa PPropdef
+					assert ppropdefnode5 isa nullable PPropdef
 					if ppropdefnode5 != null then
 						listnode6.add(ppropdefnode5)
 					end
-					var pclassdefnode4 = new ATopClassdef.init_atopclassdef(
+					var pclassdefnode4: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode6
 					)
 					var pclassdefnode7 = nodearraylist4
-					assert pclassdefnode7 isa PClassdef
+					assert pclassdefnode7 isa nullable PClassdef
 					if pclassdefnode4 != null then
 						listnode8.add(pclassdefnode4)
 					end
 					if pclassdefnode7 != null then
 						listnode8.add(pclassdefnode7)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode3,
 						listnode8
@@ -2325,7 +2324,7 @@ private class ReduceAction35
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -2334,34 +2333,34 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode9 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
+					assert ppackagedeclnode2 isa nullable PPackagedecl
 					var listnode7 = new Array[Object]
 					var ppropdefnode5 = nodearraylist2
-					assert ppropdefnode5 isa PPropdef
-					var listnode6 = nodearraylist4 
+					assert ppropdefnode5 isa nullable PPropdef
+					var listnode6 = nodearraylist4
 					assert listnode6 isa Array[Object]
 					if ppropdefnode5 != null then
 						listnode7.add(ppropdefnode5)
 					end
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pclassdefnode4 = new ATopClassdef.init_atopclassdef(
+#					end
+					var pclassdefnode4: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
 					var pclassdefnode8 = nodearraylist5
-					assert pclassdefnode8 isa PClassdef
+					assert pclassdefnode8 isa nullable PClassdef
 					if pclassdefnode4 != null then
 						listnode9.add(pclassdefnode4)
 					end
 					if pclassdefnode8 != null then
 						listnode9.add(pclassdefnode8)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode3,
 						listnode9
@@ -2375,40 +2374,40 @@ private class ReduceAction36
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode9 = new Array[Object]
-					var listnode3 = nodearraylist1 
+					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
+#					end
 					var listnode7 = new Array[Object]
 					var ppropdefnode6 = nodearraylist2
-					assert ppropdefnode6 isa PPropdef
+					assert ppropdefnode6 isa nullable PPropdef
 					if ppropdefnode6 != null then
 						listnode7.add(ppropdefnode6)
 					end
-					var pclassdefnode5 = new ATopClassdef.init_atopclassdef(
+					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
 					var pclassdefnode8 = nodearraylist4
-					assert pclassdefnode8 isa PClassdef
+					assert pclassdefnode8 isa nullable PClassdef
 					if pclassdefnode5 != null then
 						listnode9.add(pclassdefnode5)
 					end
 					if pclassdefnode8 != null then
 						listnode9.add(pclassdefnode8)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode4,
 						listnode9
@@ -2422,7 +2421,7 @@ private class ReduceAction37
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -2430,42 +2429,42 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode10 = new Array[Object]
-					var listnode3 = nodearraylist1 
+					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
+#					end
 					var listnode8 = new Array[Object]
 					var ppropdefnode6 = nodearraylist2
-					assert ppropdefnode6 isa PPropdef
-					var listnode7 = nodearraylist4 
+					assert ppropdefnode6 isa nullable PPropdef
+					var listnode7 = nodearraylist4
 					assert listnode7 isa Array[Object]
 					if ppropdefnode6 != null then
 						listnode8.add(ppropdefnode6)
 					end
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
-					var pclassdefnode5 = new ATopClassdef.init_atopclassdef(
+#					end
+					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode8
 					)
 					var pclassdefnode9 = nodearraylist5
-					assert pclassdefnode9 isa PClassdef
+					assert pclassdefnode9 isa nullable PClassdef
 					if pclassdefnode5 != null then
 						listnode10.add(pclassdefnode5)
 					end
 					if pclassdefnode9 != null then
 						listnode10.add(pclassdefnode9)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode4,
 						listnode10
@@ -2479,7 +2478,7 @@ private class ReduceAction38
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -2488,34 +2487,34 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode9 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
-					var listnode3 = nodearraylist2 
+					assert ppackagedeclnode2 isa nullable PPackagedecl
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
+#					end
 					var listnode7 = new Array[Object]
 					var ppropdefnode6 = nodearraylist3
-					assert ppropdefnode6 isa PPropdef
+					assert ppropdefnode6 isa nullable PPropdef
 					if ppropdefnode6 != null then
 						listnode7.add(ppropdefnode6)
 					end
-					var pclassdefnode5 = new ATopClassdef.init_atopclassdef(
+					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
 					var pclassdefnode8 = nodearraylist5
-					assert pclassdefnode8 isa PClassdef
+					assert pclassdefnode8 isa nullable PClassdef
 					if pclassdefnode5 != null then
 						listnode9.add(pclassdefnode5)
 					end
 					if pclassdefnode8 != null then
 						listnode9.add(pclassdefnode8)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode4,
 						listnode9
@@ -2529,7 +2528,7 @@ private class ReduceAction39
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -2539,43 +2538,43 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
-					var listnode3 = nodearraylist2 
+					assert ppackagedeclnode2 isa nullable PPackagedecl
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
+#					end
 					var listnode8 = new Array[Object]
 					var ppropdefnode6 = nodearraylist3
-					assert ppropdefnode6 isa PPropdef
-					var listnode7 = nodearraylist5 
+					assert ppropdefnode6 isa nullable PPropdef
+					var listnode7 = nodearraylist5
 					assert listnode7 isa Array[Object]
 					if ppropdefnode6 != null then
 						listnode8.add(ppropdefnode6)
 					end
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
-					var pclassdefnode5 = new ATopClassdef.init_atopclassdef(
+#					end
+					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode8
 					)
 					var pclassdefnode9 = nodearraylist6
-					assert pclassdefnode9 isa PClassdef
+					assert pclassdefnode9 isa nullable PClassdef
 					if pclassdefnode5 != null then
 						listnode10.add(pclassdefnode5)
 					end
 					if pclassdefnode9 != null then
 						listnode10.add(pclassdefnode9)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode4,
 						listnode10
@@ -2589,40 +2588,40 @@ private class ReduceAction40
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode9 = new Array[Object]
-					var listnode4 = nodearraylist1 
+					var listnode4 = nodearraylist1
 					assert listnode4 isa Array[Object]
 					var listnode7 = new Array[Object]
 					var ppropdefnode6 = nodearraylist2
-					assert ppropdefnode6 isa PPropdef
+					assert ppropdefnode6 isa nullable PPropdef
 					if ppropdefnode6 != null then
 						listnode7.add(ppropdefnode6)
 					end
-					var pclassdefnode5 = new ATopClassdef.init_atopclassdef(
+					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
 					var pclassdefnode8 = nodearraylist4
-					assert pclassdefnode8 isa PClassdef
-					if listnode4 != null then
+					assert pclassdefnode8 isa nullable PClassdef
+#					if listnode4 != null then
 						if listnode9.is_empty then
 							listnode9 = listnode4
 						else
 							listnode9.append(listnode4)
 						end
-					end
+#					end
 					if pclassdefnode5 != null then
 						listnode9.add(pclassdefnode5)
 					end
 					if pclassdefnode8 != null then
 						listnode9.add(pclassdefnode8)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode3,
 						listnode9
@@ -2636,7 +2635,7 @@ private class ReduceAction41
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -2644,42 +2643,42 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode10 = new Array[Object]
-					var listnode4 = nodearraylist1 
+					var listnode4 = nodearraylist1
 					assert listnode4 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var ppropdefnode6 = nodearraylist2
-					assert ppropdefnode6 isa PPropdef
-					var listnode7 = nodearraylist4 
+					assert ppropdefnode6 isa nullable PPropdef
+					var listnode7 = nodearraylist4
 					assert listnode7 isa Array[Object]
 					if ppropdefnode6 != null then
 						listnode8.add(ppropdefnode6)
 					end
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
-					var pclassdefnode5 = new ATopClassdef.init_atopclassdef(
+#					end
+					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode8
 					)
 					var pclassdefnode9 = nodearraylist5
-					assert pclassdefnode9 isa PClassdef
-					if listnode4 != null then
+					assert pclassdefnode9 isa nullable PClassdef
+#					if listnode4 != null then
 						if listnode10.is_empty then
 							listnode10 = listnode4
 						else
 							listnode10.append(listnode4)
 						end
-					end
+#					end
 					if pclassdefnode5 != null then
 						listnode10.add(pclassdefnode5)
 					end
 					if pclassdefnode9 != null then
 						listnode10.add(pclassdefnode9)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode3,
 						listnode10
@@ -2693,7 +2692,7 @@ private class ReduceAction42
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -2702,34 +2701,34 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode9 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
-					var listnode4 = nodearraylist2 
+					assert ppackagedeclnode2 isa nullable PPackagedecl
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
 					var listnode7 = new Array[Object]
 					var ppropdefnode6 = nodearraylist3
-					assert ppropdefnode6 isa PPropdef
+					assert ppropdefnode6 isa nullable PPropdef
 					if ppropdefnode6 != null then
 						listnode7.add(ppropdefnode6)
 					end
-					var pclassdefnode5 = new ATopClassdef.init_atopclassdef(
+					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode7
 					)
 					var pclassdefnode8 = nodearraylist5
-					assert pclassdefnode8 isa PClassdef
-					if listnode4 != null then
+					assert pclassdefnode8 isa nullable PClassdef
+#					if listnode4 != null then
 						if listnode9.is_empty then
 							listnode9 = listnode4
 						else
 							listnode9.append(listnode4)
 						end
-					end
+#					end
 					if pclassdefnode5 != null then
 						listnode9.add(pclassdefnode5)
 					end
 					if pclassdefnode8 != null then
 						listnode9.add(pclassdefnode8)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode3,
 						listnode9
@@ -2743,7 +2742,7 @@ private class ReduceAction43
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -2753,43 +2752,43 @@ special ReduceAction
 					var listnode3 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
-					var listnode4 = nodearraylist2 
+					assert ppackagedeclnode2 isa nullable PPackagedecl
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var ppropdefnode6 = nodearraylist3
-					assert ppropdefnode6 isa PPropdef
-					var listnode7 = nodearraylist5 
+					assert ppropdefnode6 isa nullable PPropdef
+					var listnode7 = nodearraylist5
 					assert listnode7 isa Array[Object]
 					if ppropdefnode6 != null then
 						listnode8.add(ppropdefnode6)
 					end
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
-					var pclassdefnode5 = new ATopClassdef.init_atopclassdef(
+#					end
+					var pclassdefnode5: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode8
 					)
 					var pclassdefnode9 = nodearraylist6
-					assert pclassdefnode9 isa PClassdef
-					if listnode4 != null then
+					assert pclassdefnode9 isa nullable PClassdef
+#					if listnode4 != null then
 						if listnode10.is_empty then
 							listnode10 = listnode4
 						else
 							listnode10.append(listnode4)
 						end
-					end
+#					end
 					if pclassdefnode5 != null then
 						listnode10.add(pclassdefnode5)
 					end
 					if pclassdefnode9 != null then
 						listnode10.add(pclassdefnode9)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode3,
 						listnode10
@@ -2803,7 +2802,7 @@ private class ReduceAction44
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -2811,42 +2810,42 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode10 = new Array[Object]
-					var listnode3 = nodearraylist1 
+					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
-					var listnode5 = nodearraylist2 
+#					end
+					var listnode5 = nodearraylist2
 					assert listnode5 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var ppropdefnode7 = nodearraylist3
-					assert ppropdefnode7 isa PPropdef
+					assert ppropdefnode7 isa nullable PPropdef
 					if ppropdefnode7 != null then
 						listnode8.add(ppropdefnode7)
 					end
-					var pclassdefnode6 = new ATopClassdef.init_atopclassdef(
+					var pclassdefnode6: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode8
 					)
 					var pclassdefnode9 = nodearraylist5
-					assert pclassdefnode9 isa PClassdef
-					if listnode5 != null then
+					assert pclassdefnode9 isa nullable PClassdef
+#					if listnode5 != null then
 						if listnode10.is_empty then
 							listnode10 = listnode5
 						else
 							listnode10.append(listnode5)
 						end
-					end
+#					end
 					if pclassdefnode6 != null then
 						listnode10.add(pclassdefnode6)
 					end
 					if pclassdefnode9 != null then
 						listnode10.add(pclassdefnode9)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode4,
 						listnode10
@@ -2860,7 +2859,7 @@ private class ReduceAction45
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -2869,51 +2868,51 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode11 = new Array[Object]
-					var listnode3 = nodearraylist1 
+					var listnode3 = nodearraylist1
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
-					var listnode5 = nodearraylist2 
+#					end
+					var listnode5 = nodearraylist2
 					assert listnode5 isa Array[Object]
 					var listnode9 = new Array[Object]
 					var ppropdefnode7 = nodearraylist3
-					assert ppropdefnode7 isa PPropdef
-					var listnode8 = nodearraylist5 
+					assert ppropdefnode7 isa nullable PPropdef
+					var listnode8 = nodearraylist5
 					assert listnode8 isa Array[Object]
 					if ppropdefnode7 != null then
 						listnode9.add(ppropdefnode7)
 					end
-					if listnode8 != null then
+#					if listnode8 != null then
 						if listnode9.is_empty then
 							listnode9 = listnode8
 						else
 							listnode9.append(listnode8)
 						end
-					end
-					var pclassdefnode6 = new ATopClassdef.init_atopclassdef(
+#					end
+					var pclassdefnode6: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode9
 					)
 					var pclassdefnode10 = nodearraylist6
-					assert pclassdefnode10 isa PClassdef
-					if listnode5 != null then
+					assert pclassdefnode10 isa nullable PClassdef
+#					if listnode5 != null then
 						if listnode11.is_empty then
 							listnode11 = listnode5
 						else
 							listnode11.append(listnode5)
 						end
-					end
+#					end
 					if pclassdefnode6 != null then
 						listnode11.add(pclassdefnode6)
 					end
 					if pclassdefnode10 != null then
 						listnode11.add(pclassdefnode10)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						null,
 						listnode4,
 						listnode11
@@ -2927,7 +2926,7 @@ private class ReduceAction46
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -2937,43 +2936,43 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
-					var listnode3 = nodearraylist2 
+					assert ppackagedeclnode2 isa nullable PPackagedecl
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
-					var listnode5 = nodearraylist3 
+#					end
+					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
 					var listnode8 = new Array[Object]
 					var ppropdefnode7 = nodearraylist4
-					assert ppropdefnode7 isa PPropdef
+					assert ppropdefnode7 isa nullable PPropdef
 					if ppropdefnode7 != null then
 						listnode8.add(ppropdefnode7)
 					end
-					var pclassdefnode6 = new ATopClassdef.init_atopclassdef(
+					var pclassdefnode6: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode8
 					)
 					var pclassdefnode9 = nodearraylist6
-					assert pclassdefnode9 isa PClassdef
-					if listnode5 != null then
+					assert pclassdefnode9 isa nullable PClassdef
+#					if listnode5 != null then
 						if listnode10.is_empty then
 							listnode10 = listnode5
 						else
 							listnode10.append(listnode5)
 						end
-					end
+#					end
 					if pclassdefnode6 != null then
 						listnode10.add(pclassdefnode6)
 					end
 					if pclassdefnode9 != null then
 						listnode10.add(pclassdefnode9)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode4,
 						listnode10
@@ -2987,7 +2986,7 @@ private class ReduceAction47
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -2998,52 +2997,52 @@ special ReduceAction
 					var listnode4 = new Array[Object]
 					var listnode11 = new Array[Object]
 					var ppackagedeclnode2 = nodearraylist1
-					assert ppackagedeclnode2 isa PPackagedecl
-					var listnode3 = nodearraylist2 
+					assert ppackagedeclnode2 isa nullable PPackagedecl
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
-					var listnode5 = nodearraylist3 
+#					end
+					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
 					var listnode9 = new Array[Object]
 					var ppropdefnode7 = nodearraylist4
-					assert ppropdefnode7 isa PPropdef
-					var listnode8 = nodearraylist6 
+					assert ppropdefnode7 isa nullable PPropdef
+					var listnode8 = nodearraylist6
 					assert listnode8 isa Array[Object]
 					if ppropdefnode7 != null then
 						listnode9.add(ppropdefnode7)
 					end
-					if listnode8 != null then
+#					if listnode8 != null then
 						if listnode9.is_empty then
 							listnode9 = listnode8
 						else
 							listnode9.append(listnode8)
 						end
-					end
-					var pclassdefnode6 = new ATopClassdef.init_atopclassdef(
+#					end
+					var pclassdefnode6: nullable ATopClassdef = new ATopClassdef.init_atopclassdef(
 						listnode9
 					)
 					var pclassdefnode10 = nodearraylist7
-					assert pclassdefnode10 isa PClassdef
-					if listnode5 != null then
+					assert pclassdefnode10 isa nullable PClassdef
+#					if listnode5 != null then
 						if listnode11.is_empty then
 							listnode11 = listnode5
 						else
 							listnode11.append(listnode5)
 						end
-					end
+#					end
 					if pclassdefnode6 != null then
 						listnode11.add(pclassdefnode6)
 					end
 					if pclassdefnode10 != null then
 						listnode11.add(pclassdefnode10)
 					end
-					var pmodulenode1 = new AModule.init_amodule(
+					var pmodulenode1: nullable AModule = new AModule.init_amodule(
 						ppackagedeclnode2,
 						listnode4,
 						listnode11
@@ -3057,19 +3056,19 @@ private class ReduceAction48
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwpackagenode3 = nodearraylist2
-					assert tkwpackagenode3 isa TKwpackage
+					assert tkwpackagenode3 isa nullable TKwpackage
 					var tidnode4 = nodearraylist4
-					assert tidnode4 isa TId
-					var ppackagedeclnode1 = new APackagedecl.init_apackagedecl(
+					assert tidnode4 isa nullable TId
+					var ppackagedeclnode1: nullable APackagedecl = new APackagedecl.init_apackagedecl(
 						pdocnode2,
 						tkwpackagenode3,
 						tidnode4
@@ -3083,7 +3082,7 @@ private class ReduceAction49
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -3091,12 +3090,12 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pvisibilitynode2 = nodearraylist2
-					assert pvisibilitynode2 isa PVisibility
+					assert pvisibilitynode2 isa nullable PVisibility
 					var tkwimportnode3 = nodearraylist3
-					assert tkwimportnode3 isa TKwimport
+					assert tkwimportnode3 isa nullable TKwimport
 					var tidnode4 = nodearraylist5
-					assert tidnode4 isa TId
-					var pimportnode1 = new AImport.init_aimport(
+					assert tidnode4 isa nullable TId
+					var pimportnode1: nullable AImport = new AImport.init_aimport(
 						pvisibilitynode2,
 						tkwimportnode3,
 						tidnode4
@@ -3110,7 +3109,7 @@ private class ReduceAction50
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -3118,12 +3117,12 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pvisibilitynode2 = nodearraylist2
-					assert pvisibilitynode2 isa PVisibility
+					assert pvisibilitynode2 isa nullable PVisibility
 					var tkwimportnode3 = nodearraylist3
-					assert tkwimportnode3 isa TKwimport
+					assert tkwimportnode3 isa nullable TKwimport
 					var tkwendnode4 = nodearraylist5
-					assert tkwendnode4 isa TKwend
-					var pimportnode1 = new ANoImport.init_anoimport(
+					assert tkwendnode4 isa nullable TKwend
+					var pimportnode1: nullable ANoImport = new ANoImport.init_anoimport(
 						pvisibilitynode2,
 						tkwimportnode3,
 						tkwendnode4
@@ -3137,15 +3136,15 @@ private class ReduceAction51
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var ppropdefnode2 = nodearraylist1
-					assert ppropdefnode2 isa PPropdef
+					assert ppropdefnode2 isa nullable PPropdef
 					if ppropdefnode2 != null then
 						listnode3.add(ppropdefnode2)
 					end
-					var pclassdefnode1 = new AMainClassdef.init_amainclassdef(
+					var pclassdefnode1: nullable AMainClassdef = new AMainClassdef.init_amainclassdef(
 						listnode3
 					)
 					node_list = pclassdefnode1
@@ -3157,7 +3156,7 @@ private class ReduceAction52
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					node_list = null
 					p.push(p.go_to(3), node_list)
@@ -3168,20 +3167,20 @@ private class ReduceAction53
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode4 = nodearraylist2
-					assert pexprnode4 isa PExpr
+					assert pexprnode4 isa nullable PExpr
 					if pexprnode4 != null then
 						listnode5.add(pexprnode4)
 					end
-					var pexprnode3 = new ABlockExpr.init_ablockexpr(
+					var pexprnode3: nullable ABlockExpr = new ABlockExpr.init_ablockexpr(
 						listnode5
 					)
-					var ppropdefnode1 = new AMainMethPropdef.init_amainmethpropdef(
+					var ppropdefnode1: nullable AMainMethPropdef = new AMainMethPropdef.init_amainmethpropdef(
 						null,
 						pexprnode3
 					)
@@ -3194,30 +3193,30 @@ private class ReduceAction54
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode6 = new Array[Object]
 					var pexprnode4 = nodearraylist2
-					assert pexprnode4 isa PExpr
-					var listnode5 = nodearraylist3 
+					assert pexprnode4 isa nullable PExpr
+					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
 					if pexprnode4 != null then
 						listnode6.add(pexprnode4)
 					end
-					if listnode5 != null then
+#					if listnode5 != null then
 						if listnode6.is_empty then
 							listnode6 = listnode5
 						else
 							listnode6.append(listnode5)
 						end
-					end
-					var pexprnode3 = new ABlockExpr.init_ablockexpr(
+#					end
+					var pexprnode3: nullable ABlockExpr = new ABlockExpr.init_ablockexpr(
 						listnode6
 					)
-					var ppropdefnode1 = new AMainMethPropdef.init_amainmethpropdef(
+					var ppropdefnode1: nullable AMainMethPropdef = new AMainMethPropdef.init_amainmethpropdef(
 						null,
 						pexprnode3
 					)
@@ -3230,7 +3229,7 @@ private class ReduceAction55
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -3242,14 +3241,14 @@ special ReduceAction
 					var listnode8 = new Array[Object]
 					var listnode9 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist5
-					assert tclassidnode6 isa TClassid
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+					assert tclassidnode6 isa nullable TClassid
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -3268,7 +3267,7 @@ private class ReduceAction56
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -3281,16 +3280,16 @@ special ReduceAction
 					var listnode8 = new Array[Object]
 					var listnode9 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist6
-					assert tclassidnode6 isa TClassid
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+					assert tclassidnode6 isa nullable TClassid
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -3309,7 +3308,7 @@ private class ReduceAction57
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -3322,23 +3321,23 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist5
-					assert tclassidnode6 isa TClassid
-					var listnode7 = nodearraylist6 
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist6
 					assert listnode7 isa Array[Object]
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+#					end
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -3357,7 +3356,7 @@ private class ReduceAction58
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -3371,25 +3370,25 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist6
-					assert tclassidnode6 isa TClassid
-					var listnode7 = nodearraylist7 
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
 					assert listnode7 isa Array[Object]
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+#					end
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -3408,7 +3407,7 @@ private class ReduceAction59
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -3421,23 +3420,23 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist5
-					assert tclassidnode6 isa TClassid
-					var listnode8 = nodearraylist6 
+					assert tclassidnode6 isa nullable TClassid
+					var listnode8 = nodearraylist6
 					assert listnode8 isa Array[Object]
-					if listnode8 != null then
+#					if listnode8 != null then
 						if listnode9.is_empty then
 							listnode9 = listnode8
 						else
 							listnode9.append(listnode8)
 						end
-					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+#					end
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -3456,7 +3455,7 @@ private class ReduceAction60
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -3470,25 +3469,25 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist6
-					assert tclassidnode6 isa TClassid
-					var listnode8 = nodearraylist7 
+					assert tclassidnode6 isa nullable TClassid
+					var listnode8 = nodearraylist7
 					assert listnode8 isa Array[Object]
-					if listnode8 != null then
+#					if listnode8 != null then
 						if listnode9.is_empty then
 							listnode9 = listnode8
 						else
 							listnode9.append(listnode8)
 						end
-					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+#					end
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -3507,7 +3506,7 @@ private class ReduceAction61
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -3521,32 +3520,32 @@ special ReduceAction
 					var listnode10 = new Array[Object]
 					var listnode11 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist5
-					assert tclassidnode6 isa TClassid
-					var listnode7 = nodearraylist6 
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist6
 					assert listnode7 isa Array[Object]
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
-					var listnode9 = nodearraylist7 
+#					end
+					var listnode9 = nodearraylist7
 					assert listnode9 isa Array[Object]
-					if listnode9 != null then
+#					if listnode9 != null then
 						if listnode10.is_empty then
 							listnode10 = listnode9
 						else
 							listnode10.append(listnode9)
 						end
-					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+#					end
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -3565,7 +3564,7 @@ private class ReduceAction62
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -3580,34 +3579,34 @@ special ReduceAction
 					var listnode10 = new Array[Object]
 					var listnode11 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist6
-					assert tclassidnode6 isa TClassid
-					var listnode7 = nodearraylist7 
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
 					assert listnode7 isa Array[Object]
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
-					var listnode9 = nodearraylist8 
+#					end
+					var listnode9 = nodearraylist8
 					assert listnode9 isa Array[Object]
-					if listnode9 != null then
+#					if listnode9 != null then
 						if listnode10.is_empty then
 							listnode10 = listnode9
 						else
 							listnode10.append(listnode9)
 						end
-					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+#					end
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -3626,7 +3625,7 @@ private class ReduceAction63
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -3640,19 +3639,19 @@ special ReduceAction
 					var listnode8 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist5
-					assert tclassidnode6 isa TClassid
+					assert tclassidnode6 isa nullable TClassid
 					var ppropdefnode9 = nodearraylist6
-					assert ppropdefnode9 isa PPropdef
+					assert ppropdefnode9 isa nullable PPropdef
 					if ppropdefnode9 != null then
 						listnode10.add(ppropdefnode9)
 					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -3671,7 +3670,7 @@ private class ReduceAction64
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -3686,28 +3685,28 @@ special ReduceAction
 					var listnode8 = new Array[Object]
 					var listnode11 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist5
-					assert tclassidnode6 isa TClassid
+					assert tclassidnode6 isa nullable TClassid
 					var ppropdefnode9 = nodearraylist6
-					assert ppropdefnode9 isa PPropdef
-					var listnode10 = nodearraylist8 
+					assert ppropdefnode9 isa nullable PPropdef
+					var listnode10 = nodearraylist8
 					assert listnode10 isa Array[Object]
 					if ppropdefnode9 != null then
 						listnode11.add(ppropdefnode9)
 					end
-					if listnode10 != null then
+#					if listnode10 != null then
 						if listnode11.is_empty then
 							listnode11 = listnode10
 						else
 							listnode11.append(listnode10)
 						end
-					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+#					end
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -3726,7 +3725,7 @@ private class ReduceAction65
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -3741,21 +3740,21 @@ special ReduceAction
 					var listnode8 = new Array[Object]
 					var listnode10 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist6
-					assert tclassidnode6 isa TClassid
+					assert tclassidnode6 isa nullable TClassid
 					var ppropdefnode9 = nodearraylist7
-					assert ppropdefnode9 isa PPropdef
+					assert ppropdefnode9 isa nullable PPropdef
 					if ppropdefnode9 != null then
 						listnode10.add(ppropdefnode9)
 					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -3774,7 +3773,7 @@ private class ReduceAction66
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -3790,30 +3789,30 @@ special ReduceAction
 					var listnode8 = new Array[Object]
 					var listnode11 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist6
-					assert tclassidnode6 isa TClassid
+					assert tclassidnode6 isa nullable TClassid
 					var ppropdefnode9 = nodearraylist7
-					assert ppropdefnode9 isa PPropdef
-					var listnode10 = nodearraylist9 
+					assert ppropdefnode9 isa nullable PPropdef
+					var listnode10 = nodearraylist9
 					assert listnode10 isa Array[Object]
 					if ppropdefnode9 != null then
 						listnode11.add(ppropdefnode9)
 					end
-					if listnode10 != null then
+#					if listnode10 != null then
 						if listnode11.is_empty then
 							listnode11 = listnode10
 						else
 							listnode11.append(listnode10)
 						end
-					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+#					end
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -3832,7 +3831,7 @@ private class ReduceAction67
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -3847,28 +3846,28 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode11 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist5
-					assert tclassidnode6 isa TClassid
-					var listnode7 = nodearraylist6 
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist6
 					assert listnode7 isa Array[Object]
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
+#					end
 					var ppropdefnode10 = nodearraylist7
-					assert ppropdefnode10 isa PPropdef
+					assert ppropdefnode10 isa nullable PPropdef
 					if ppropdefnode10 != null then
 						listnode11.add(ppropdefnode10)
 					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -3887,7 +3886,7 @@ private class ReduceAction68
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -3903,37 +3902,37 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode12 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist5
-					assert tclassidnode6 isa TClassid
-					var listnode7 = nodearraylist6 
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist6
 					assert listnode7 isa Array[Object]
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
+#					end
 					var ppropdefnode10 = nodearraylist7
-					assert ppropdefnode10 isa PPropdef
-					var listnode11 = nodearraylist9 
+					assert ppropdefnode10 isa nullable PPropdef
+					var listnode11 = nodearraylist9
 					assert listnode11 isa Array[Object]
 					if ppropdefnode10 != null then
 						listnode12.add(ppropdefnode10)
 					end
-					if listnode11 != null then
+#					if listnode11 != null then
 						if listnode12.is_empty then
 							listnode12 = listnode11
 						else
 							listnode12.append(listnode11)
 						end
-					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+#					end
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -3952,7 +3951,7 @@ private class ReduceAction69
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -3968,30 +3967,30 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode11 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist6
-					assert tclassidnode6 isa TClassid
-					var listnode7 = nodearraylist7 
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
 					assert listnode7 isa Array[Object]
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
+#					end
 					var ppropdefnode10 = nodearraylist8
-					assert ppropdefnode10 isa PPropdef
+					assert ppropdefnode10 isa nullable PPropdef
 					if ppropdefnode10 != null then
 						listnode11.add(ppropdefnode10)
 					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -4010,7 +4009,7 @@ private class ReduceAction70
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
@@ -4027,39 +4026,39 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode12 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist6
-					assert tclassidnode6 isa TClassid
-					var listnode7 = nodearraylist7 
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
 					assert listnode7 isa Array[Object]
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
+#					end
 					var ppropdefnode10 = nodearraylist8
-					assert ppropdefnode10 isa PPropdef
-					var listnode11 = nodearraylist10 
+					assert ppropdefnode10 isa nullable PPropdef
+					var listnode11 = nodearraylist10
 					assert listnode11 isa Array[Object]
 					if ppropdefnode10 != null then
 						listnode12.add(ppropdefnode10)
 					end
-					if listnode11 != null then
+#					if listnode11 != null then
 						if listnode12.is_empty then
 							listnode12 = listnode11
 						else
 							listnode12.append(listnode11)
 						end
-					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+#					end
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -4078,7 +4077,7 @@ private class ReduceAction71
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -4093,28 +4092,28 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode11 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist5
-					assert tclassidnode6 isa TClassid
-					var listnode8 = nodearraylist6 
+					assert tclassidnode6 isa nullable TClassid
+					var listnode8 = nodearraylist6
 					assert listnode8 isa Array[Object]
-					if listnode8 != null then
+#					if listnode8 != null then
 						if listnode9.is_empty then
 							listnode9 = listnode8
 						else
 							listnode9.append(listnode8)
 						end
-					end
+#					end
 					var ppropdefnode10 = nodearraylist7
-					assert ppropdefnode10 isa PPropdef
+					assert ppropdefnode10 isa nullable PPropdef
 					if ppropdefnode10 != null then
 						listnode11.add(ppropdefnode10)
 					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -4133,7 +4132,7 @@ private class ReduceAction72
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -4149,37 +4148,37 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode12 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist5
-					assert tclassidnode6 isa TClassid
-					var listnode8 = nodearraylist6 
+					assert tclassidnode6 isa nullable TClassid
+					var listnode8 = nodearraylist6
 					assert listnode8 isa Array[Object]
-					if listnode8 != null then
+#					if listnode8 != null then
 						if listnode9.is_empty then
 							listnode9 = listnode8
 						else
 							listnode9.append(listnode8)
 						end
-					end
+#					end
 					var ppropdefnode10 = nodearraylist7
-					assert ppropdefnode10 isa PPropdef
-					var listnode11 = nodearraylist9 
+					assert ppropdefnode10 isa nullable PPropdef
+					var listnode11 = nodearraylist9
 					assert listnode11 isa Array[Object]
 					if ppropdefnode10 != null then
 						listnode12.add(ppropdefnode10)
 					end
-					if listnode11 != null then
+#					if listnode11 != null then
 						if listnode12.is_empty then
 							listnode12 = listnode11
 						else
 							listnode12.append(listnode11)
 						end
-					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+#					end
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -4198,7 +4197,7 @@ private class ReduceAction73
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -4214,30 +4213,30 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode11 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist6
-					assert tclassidnode6 isa TClassid
-					var listnode8 = nodearraylist7 
+					assert tclassidnode6 isa nullable TClassid
+					var listnode8 = nodearraylist7
 					assert listnode8 isa Array[Object]
-					if listnode8 != null then
+#					if listnode8 != null then
 						if listnode9.is_empty then
 							listnode9 = listnode8
 						else
 							listnode9.append(listnode8)
 						end
-					end
+#					end
 					var ppropdefnode10 = nodearraylist8
-					assert ppropdefnode10 isa PPropdef
+					assert ppropdefnode10 isa nullable PPropdef
 					if ppropdefnode10 != null then
 						listnode11.add(ppropdefnode10)
 					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -4256,7 +4255,7 @@ private class ReduceAction74
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
@@ -4273,39 +4272,39 @@ special ReduceAction
 					var listnode9 = new Array[Object]
 					var listnode12 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist6
-					assert tclassidnode6 isa TClassid
-					var listnode8 = nodearraylist7 
+					assert tclassidnode6 isa nullable TClassid
+					var listnode8 = nodearraylist7
 					assert listnode8 isa Array[Object]
-					if listnode8 != null then
+#					if listnode8 != null then
 						if listnode9.is_empty then
 							listnode9 = listnode8
 						else
 							listnode9.append(listnode8)
 						end
-					end
+#					end
 					var ppropdefnode10 = nodearraylist8
-					assert ppropdefnode10 isa PPropdef
-					var listnode11 = nodearraylist10 
+					assert ppropdefnode10 isa nullable PPropdef
+					var listnode11 = nodearraylist10
 					assert listnode11 isa Array[Object]
 					if ppropdefnode10 != null then
 						listnode12.add(ppropdefnode10)
 					end
-					if listnode11 != null then
+#					if listnode11 != null then
 						if listnode12.is_empty then
 							listnode12 = listnode11
 						else
 							listnode12.append(listnode11)
 						end
-					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+#					end
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -4324,7 +4323,7 @@ private class ReduceAction75
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -4340,37 +4339,37 @@ special ReduceAction
 					var listnode10 = new Array[Object]
 					var listnode12 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist5
-					assert tclassidnode6 isa TClassid
-					var listnode7 = nodearraylist6 
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist6
 					assert listnode7 isa Array[Object]
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
-					var listnode9 = nodearraylist7 
+#					end
+					var listnode9 = nodearraylist7
 					assert listnode9 isa Array[Object]
-					if listnode9 != null then
+#					if listnode9 != null then
 						if listnode10.is_empty then
 							listnode10 = listnode9
 						else
 							listnode10.append(listnode9)
 						end
-					end
+#					end
 					var ppropdefnode11 = nodearraylist8
-					assert ppropdefnode11 isa PPropdef
+					assert ppropdefnode11 isa nullable PPropdef
 					if ppropdefnode11 != null then
 						listnode12.add(ppropdefnode11)
 					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -4389,7 +4388,7 @@ private class ReduceAction76
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
@@ -4406,46 +4405,46 @@ special ReduceAction
 					var listnode10 = new Array[Object]
 					var listnode13 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist3
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist5
-					assert tclassidnode6 isa TClassid
-					var listnode7 = nodearraylist6 
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist6
 					assert listnode7 isa Array[Object]
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
-					var listnode9 = nodearraylist7 
+#					end
+					var listnode9 = nodearraylist7
 					assert listnode9 isa Array[Object]
-					if listnode9 != null then
+#					if listnode9 != null then
 						if listnode10.is_empty then
 							listnode10 = listnode9
 						else
 							listnode10.append(listnode9)
 						end
-					end
+#					end
 					var ppropdefnode11 = nodearraylist8
-					assert ppropdefnode11 isa PPropdef
-					var listnode12 = nodearraylist10 
+					assert ppropdefnode11 isa nullable PPropdef
+					var listnode12 = nodearraylist10
 					assert listnode12 isa Array[Object]
 					if ppropdefnode11 != null then
 						listnode13.add(ppropdefnode11)
 					end
-					if listnode12 != null then
+#					if listnode12 != null then
 						if listnode13.is_empty then
 							listnode13 = listnode12
 						else
 							listnode13.append(listnode12)
 						end
-					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+#					end
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -4464,7 +4463,7 @@ private class ReduceAction77
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
@@ -4481,39 +4480,39 @@ special ReduceAction
 					var listnode10 = new Array[Object]
 					var listnode12 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist6
-					assert tclassidnode6 isa TClassid
-					var listnode7 = nodearraylist7 
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
 					assert listnode7 isa Array[Object]
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
-					var listnode9 = nodearraylist8 
+#					end
+					var listnode9 = nodearraylist8
 					assert listnode9 isa Array[Object]
-					if listnode9 != null then
+#					if listnode9 != null then
 						if listnode10.is_empty then
 							listnode10 = listnode9
 						else
 							listnode10.append(listnode9)
 						end
-					end
+#					end
 					var ppropdefnode11 = nodearraylist9
-					assert ppropdefnode11 isa PPropdef
+					assert ppropdefnode11 isa nullable PPropdef
 					if ppropdefnode11 != null then
 						listnode12.add(ppropdefnode11)
 					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -4532,7 +4531,7 @@ private class ReduceAction78
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist13 = p.pop
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
@@ -4550,48 +4549,48 @@ special ReduceAction
 					var listnode10 = new Array[Object]
 					var listnode13 = new Array[Object]
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var pclasskindnode5 = nodearraylist4
-					assert pclasskindnode5 isa PClasskind
+					assert pclasskindnode5 isa nullable PClasskind
 					var tclassidnode6 = nodearraylist6
-					assert tclassidnode6 isa TClassid
-					var listnode7 = nodearraylist7 
+					assert tclassidnode6 isa nullable TClassid
+					var listnode7 = nodearraylist7
 					assert listnode7 isa Array[Object]
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
-					var listnode9 = nodearraylist8 
+#					end
+					var listnode9 = nodearraylist8
 					assert listnode9 isa Array[Object]
-					if listnode9 != null then
+#					if listnode9 != null then
 						if listnode10.is_empty then
 							listnode10 = listnode9
 						else
 							listnode10.append(listnode9)
 						end
-					end
+#					end
 					var ppropdefnode11 = nodearraylist9
-					assert ppropdefnode11 isa PPropdef
-					var listnode12 = nodearraylist11 
+					assert ppropdefnode11 isa nullable PPropdef
+					var listnode12 = nodearraylist11
 					assert listnode12 isa Array[Object]
 					if ppropdefnode11 != null then
 						listnode13.add(ppropdefnode11)
 					end
-					if listnode12 != null then
+#					if listnode12 != null then
 						if listnode13.is_empty then
 							listnode13 = listnode12
 						else
 							listnode13.append(listnode12)
 						end
-					end
-					var pclassdefnode1 = new AClassdef.init_aclassdef(
+#					end
+					var pclassdefnode1: nullable AClassdef = new AClassdef.init_aclassdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -4610,11 +4609,11 @@ private class ReduceAction79
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwclassnode2 = nodearraylist1
-					assert tkwclassnode2 isa TKwclass
-					var pclasskindnode1 = new AConcreteClasskind.init_aconcreteclasskind(
+					assert tkwclassnode2 isa nullable TKwclass
+					var pclasskindnode1: nullable AConcreteClasskind = new AConcreteClasskind.init_aconcreteclasskind(
 						tkwclassnode2
 					)
 					node_list = pclasskindnode1
@@ -4626,14 +4625,14 @@ private class ReduceAction80
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwabstractnode2 = nodearraylist1
-					assert tkwabstractnode2 isa TKwabstract
+					assert tkwabstractnode2 isa nullable TKwabstract
 					var tkwclassnode3 = nodearraylist2
-					assert tkwclassnode3 isa TKwclass
-					var pclasskindnode1 = new AAbstractClasskind.init_aabstractclasskind(
+					assert tkwclassnode3 isa nullable TKwclass
+					var pclasskindnode1: nullable AAbstractClasskind = new AAbstractClasskind.init_aabstractclasskind(
 						tkwabstractnode2,
 						tkwclassnode3
 					)
@@ -4646,11 +4645,11 @@ private class ReduceAction81
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwinterfacenode2 = nodearraylist1
-					assert tkwinterfacenode2 isa TKwinterface
-					var pclasskindnode1 = new AInterfaceClasskind.init_ainterfaceclasskind(
+					assert tkwinterfacenode2 isa nullable TKwinterface
+					var pclasskindnode1: nullable AInterfaceClasskind = new AInterfaceClasskind.init_ainterfaceclasskind(
 						tkwinterfacenode2
 					)
 					node_list = pclasskindnode1
@@ -4662,11 +4661,11 @@ private class ReduceAction82
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwuniversalnode2 = nodearraylist1
-					assert tkwuniversalnode2 isa TKwuniversal
-					var pclasskindnode1 = new AUniversalClasskind.init_auniversalclasskind(
+					assert tkwuniversalnode2 isa nullable TKwuniversal
+					var pclasskindnode1: nullable AUniversalClasskind = new AUniversalClasskind.init_auniversalclasskind(
 						tkwuniversalnode2
 					)
 					node_list = pclasskindnode1
@@ -4678,7 +4677,7 @@ private class ReduceAction83
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -4686,7 +4685,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pformaldefnode1 = nodearraylist3
-					assert pformaldefnode1 isa PFormaldef
+					assert pformaldefnode1 isa nullable PFormaldef
 					if pformaldefnode1 != null then
 						listnode2.add(pformaldefnode1)
 					end
@@ -4699,7 +4698,7 @@ private class ReduceAction84
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -4708,19 +4707,19 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pformaldefnode1 = nodearraylist3
-					assert pformaldefnode1 isa PFormaldef
-					var listnode2 = nodearraylist4 
+					assert pformaldefnode1 isa nullable PFormaldef
+					var listnode2 = nodearraylist4
 					assert listnode2 isa Array[Object]
 					if pformaldefnode1 != null then
 						listnode3.add(pformaldefnode1)
 					end
-					if listnode2 != null then
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
+#					end
 					node_list = listnode3
 					p.push(p.go_to(7), node_list)
 	end
@@ -4730,12 +4729,12 @@ private class ReduceAction85
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pformaldefnode1 = nodearraylist3
-					assert pformaldefnode1 isa PFormaldef
+					assert pformaldefnode1 isa nullable PFormaldef
 					node_list = pformaldefnode1
 					p.push(p.go_to(8), node_list)
 	end
@@ -4745,11 +4744,11 @@ private class ReduceAction86
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tclassidnode2 = nodearraylist1
-					assert tclassidnode2 isa TClassid
-					var pformaldefnode1 = new AFormaldef.init_aformaldef(
+					assert tclassidnode2 isa nullable TClassid
+					var pformaldefnode1: nullable AFormaldef = new AFormaldef.init_aformaldef(
 						tclassidnode2,
 						null
 					)
@@ -4762,14 +4761,14 @@ private class ReduceAction87
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tclassidnode2 = nodearraylist1
-					assert tclassidnode2 isa TClassid
+					assert tclassidnode2 isa nullable TClassid
 					var ptypenode3 = nodearraylist2
-					assert ptypenode3 isa PType
-					var pformaldefnode1 = new AFormaldef.init_aformaldef(
+					assert ptypenode3 isa nullable PType
+					var pformaldefnode1: nullable AFormaldef = new AFormaldef.init_aformaldef(
 						tclassidnode2,
 						ptypenode3
 					)
@@ -4782,16 +4781,16 @@ private class ReduceAction88
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwspecialnode2 = nodearraylist2
-					assert tkwspecialnode2 isa TKwspecial
+					assert tkwspecialnode2 isa nullable TKwspecial
 					var ptypenode3 = nodearraylist4
-					assert ptypenode3 isa PType
-					var psuperclassnode1 = new ASuperclass.init_asuperclass(
+					assert ptypenode3 isa nullable PType
+					var psuperclassnode1: nullable ASuperclass = new ASuperclass.init_asuperclass(
 						tkwspecialnode2,
 						ptypenode3
 					)
@@ -4804,11 +4803,11 @@ private class ReduceAction89
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var ppropdefnode1 = nodearraylist1
-					assert ppropdefnode1 isa PPropdef
+					assert ppropdefnode1 isa nullable PPropdef
 					node_list = ppropdefnode1
 					p.push(p.go_to(11), node_list)
 	end
@@ -4818,7 +4817,7 @@ private class ReduceAction90
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -4827,18 +4826,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist3
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var pexprnode8 = nodearraylist7
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+					assert pexprnode8 isa nullable PExpr
+					var ppropdefnode1: nullable AConcreteMethPropdef = new AConcreteMethPropdef.init_aconcretemethpropdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -4856,7 +4855,7 @@ private class ReduceAction91
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -4866,20 +4865,20 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist4
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var pexprnode8 = nodearraylist8
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+					assert pexprnode8 isa nullable PExpr
+					var ppropdefnode1: nullable AConcreteMethPropdef = new AConcreteMethPropdef.init_aconcretemethpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -4897,7 +4896,7 @@ private class ReduceAction92
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -4907,18 +4906,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist3
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var pexprnode8 = nodearraylist7
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+					assert pexprnode8 isa nullable PExpr
+					var ppropdefnode1: nullable AConcreteMethPropdef = new AConcreteMethPropdef.init_aconcretemethpropdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -4936,7 +4935,7 @@ private class ReduceAction93
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -4947,20 +4946,20 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist4
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var pexprnode8 = nodearraylist8
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+					assert pexprnode8 isa nullable PExpr
+					var ppropdefnode1: nullable AConcreteMethPropdef = new AConcreteMethPropdef.init_aconcretemethpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -4978,7 +4977,7 @@ private class ReduceAction94
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -4987,16 +4986,16 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist3
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
-					var ppropdefnode1 = new ADeferredMethPropdef.init_adeferredmethpropdef(
+					assert psignaturenode7 isa nullable PSignature
+					var ppropdefnode1: nullable ADeferredMethPropdef = new ADeferredMethPropdef.init_adeferredmethpropdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -5013,7 +5012,7 @@ private class ReduceAction95
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -5023,18 +5022,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist4
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
-					var ppropdefnode1 = new ADeferredMethPropdef.init_adeferredmethpropdef(
+					assert psignaturenode7 isa nullable PSignature
+					var ppropdefnode1: nullable ADeferredMethPropdef = new ADeferredMethPropdef.init_adeferredmethpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -5051,7 +5050,7 @@ private class ReduceAction96
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -5060,16 +5059,16 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist3
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
-					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
+					assert psignaturenode7 isa nullable PSignature
+					var ppropdefnode1: nullable AInternMethPropdef = new AInternMethPropdef.init_ainternmethpropdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -5086,7 +5085,7 @@ private class ReduceAction97
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -5096,18 +5095,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist4
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
-					var ppropdefnode1 = new AInternMethPropdef.init_ainternmethpropdef(
+					assert psignaturenode7 isa nullable PSignature
+					var ppropdefnode1: nullable AInternMethPropdef = new AInternMethPropdef.init_ainternmethpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -5124,7 +5123,7 @@ private class ReduceAction98
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -5133,16 +5132,16 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist3
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
-					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+					assert psignaturenode7 isa nullable PSignature
+					var ppropdefnode1: nullable AExternMethPropdef = new AExternMethPropdef.init_aexternmethpropdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -5160,7 +5159,7 @@ private class ReduceAction99
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -5170,18 +5169,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist4
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
-					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+					assert psignaturenode7 isa nullable PSignature
+					var ppropdefnode1: nullable AExternMethPropdef = new AExternMethPropdef.init_aexternmethpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -5199,7 +5198,7 @@ private class ReduceAction100
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -5209,18 +5208,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist3
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var tstringnode8 = nodearraylist8
-					assert tstringnode8 isa TString
-					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+					assert tstringnode8 isa nullable TString
+					var ppropdefnode1: nullable AExternMethPropdef = new AExternMethPropdef.init_aexternmethpropdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -5238,7 +5237,7 @@ private class ReduceAction101
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -5249,20 +5248,20 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist4
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var tstringnode8 = nodearraylist9
-					assert tstringnode8 isa TString
-					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+					assert tstringnode8 isa nullable TString
+					var ppropdefnode1: nullable AExternMethPropdef = new AExternMethPropdef.init_aexternmethpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -5280,7 +5279,7 @@ private class ReduceAction102
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -5288,26 +5287,26 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist3
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist4
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist5
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist6
-					assert tattridnode13 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode13 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -5328,7 +5327,7 @@ private class ReduceAction103
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -5337,28 +5336,28 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist6
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode13 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -5379,27 +5378,27 @@ private class ReduceAction104
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist4
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist5
-					assert tattridnode11 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode11 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -5420,7 +5419,7 @@ private class ReduceAction105
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -5429,28 +5428,28 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist6
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode13 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -5471,7 +5470,7 @@ private class ReduceAction106
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -5481,30 +5480,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist5
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist7
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode13 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -5525,7 +5524,7 @@ private class ReduceAction107
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -5533,22 +5532,22 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist5
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode11 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -5569,27 +5568,27 @@ private class ReduceAction108
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwwritablenode6 = nodearraylist2
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist4
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist5
-					assert tattridnode11 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode11 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -5610,7 +5609,7 @@ private class ReduceAction109
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -5618,22 +5617,22 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode5,
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist5
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode11 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -5654,20 +5653,20 @@ private class ReduceAction110
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode6 = nodearraylist2
-					assert pvisibilitynode6 isa PVisibility
+					assert pvisibilitynode6 isa nullable PVisibility
 					var tkwattrnode7 = nodearraylist3
-					assert tkwattrnode7 isa TKwattr
+					assert tkwattrnode7 isa nullable TKwattr
 					var tattridnode9 = nodearraylist4
-					assert tattridnode9 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode9 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						null,
@@ -5688,7 +5687,7 @@ private class ReduceAction111
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -5697,28 +5696,28 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist3
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist4
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist6
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode13 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -5739,7 +5738,7 @@ private class ReduceAction112
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -5749,30 +5748,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist5
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist7
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode13 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -5793,7 +5792,7 @@ private class ReduceAction113
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -5801,22 +5800,22 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist5
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode11 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -5837,7 +5836,7 @@ private class ReduceAction114
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -5847,30 +5846,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist5
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist7
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode13 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -5891,7 +5890,7 @@ private class ReduceAction115
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -5902,32 +5901,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist5
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist6
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist7
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist8
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist9
-					assert tattridnode13 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode13 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -5948,7 +5947,7 @@ private class ReduceAction116
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -5957,24 +5956,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist6
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist7
-					assert tattridnode11 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode11 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -5995,7 +5994,7 @@ private class ReduceAction117
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -6003,22 +6002,22 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwwritablenode6 = nodearraylist2
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode6
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist5
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode11 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -6039,7 +6038,7 @@ private class ReduceAction118
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -6048,24 +6047,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode5,
 						tkwwritablenode6
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist6
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist7
-					assert tattridnode11 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode11 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -6086,23 +6085,23 @@ private class ReduceAction119
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var pvisibilitynode6 = nodearraylist3
-					assert pvisibilitynode6 isa PVisibility
+					assert pvisibilitynode6 isa nullable PVisibility
 					var tkwattrnode7 = nodearraylist4
-					assert tkwattrnode7 isa TKwattr
+					assert tkwattrnode7 isa nullable TKwattr
 					var tattridnode9 = nodearraylist5
-					assert tattridnode9 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode9 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						null,
@@ -6123,7 +6122,7 @@ private class ReduceAction120
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -6132,28 +6131,28 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist3
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist4
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist5
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist6
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist7
-					assert ptypenode14 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode14 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -6174,7 +6173,7 @@ private class ReduceAction121
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -6184,30 +6183,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist6
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode14 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -6228,7 +6227,7 @@ private class ReduceAction122
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -6236,22 +6235,22 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist4
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist5
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist6
-					assert ptypenode12 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode12 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -6272,7 +6271,7 @@ private class ReduceAction123
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -6282,30 +6281,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist6
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode14 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -6326,7 +6325,7 @@ private class ReduceAction124
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -6337,32 +6336,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist5
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist7
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode14 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -6383,7 +6382,7 @@ private class ReduceAction125
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -6392,24 +6391,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist5
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode12 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -6430,7 +6429,7 @@ private class ReduceAction126
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -6438,22 +6437,22 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwwritablenode6 = nodearraylist2
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist4
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist5
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist6
-					assert ptypenode12 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode12 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -6474,7 +6473,7 @@ private class ReduceAction127
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -6483,24 +6482,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode5,
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist5
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode12 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -6521,23 +6520,23 @@ private class ReduceAction128
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode6 = nodearraylist2
-					assert pvisibilitynode6 isa PVisibility
+					assert pvisibilitynode6 isa nullable PVisibility
 					var tkwattrnode7 = nodearraylist3
-					assert tkwattrnode7 isa TKwattr
+					assert tkwattrnode7 isa nullable TKwattr
 					var tattridnode9 = nodearraylist4
-					assert tattridnode9 isa TAttrid
+					assert tattridnode9 isa nullable TAttrid
 					var ptypenode10 = nodearraylist5
-					assert ptypenode10 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode10 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						null,
@@ -6558,7 +6557,7 @@ private class ReduceAction129
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -6568,30 +6567,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist3
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist4
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist6
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode14 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -6612,7 +6611,7 @@ private class ReduceAction130
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -6623,32 +6622,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist5
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist7
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode14 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -6669,7 +6668,7 @@ private class ReduceAction131
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -6678,24 +6677,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist5
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode12 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -6716,7 +6715,7 @@ private class ReduceAction132
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -6727,32 +6726,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist5
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist7
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode14 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -6773,7 +6772,7 @@ private class ReduceAction133
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -6785,34 +6784,34 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist5
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist6
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist7
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist8
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist9
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist10
-					assert ptypenode14 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode14 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -6833,7 +6832,7 @@ private class ReduceAction134
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -6843,26 +6842,26 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist6
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist7
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist8
-					assert ptypenode12 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode12 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -6883,7 +6882,7 @@ private class ReduceAction135
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -6892,24 +6891,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwwritablenode6 = nodearraylist2
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode6
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist5
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode12 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -6930,7 +6929,7 @@ private class ReduceAction136
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -6940,26 +6939,26 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode5,
 						tkwwritablenode6
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist6
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist7
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist8
-					assert ptypenode12 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode12 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -6980,7 +6979,7 @@ private class ReduceAction137
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -6988,18 +6987,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var pvisibilitynode6 = nodearraylist3
-					assert pvisibilitynode6 isa PVisibility
+					assert pvisibilitynode6 isa nullable PVisibility
 					var tkwattrnode7 = nodearraylist4
-					assert tkwattrnode7 isa TKwattr
+					assert tkwattrnode7 isa nullable TKwattr
 					var tattridnode9 = nodearraylist5
-					assert tattridnode9 isa TAttrid
+					assert tattridnode9 isa nullable TAttrid
 					var ptypenode10 = nodearraylist6
-					assert ptypenode10 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode10 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						null,
@@ -7020,7 +7019,7 @@ private class ReduceAction138
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -7031,28 +7030,28 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist3
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist4
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist5
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist6
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist9
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -7073,7 +7072,7 @@ private class ReduceAction139
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -7085,30 +7084,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist6
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist10
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -7129,7 +7128,7 @@ private class ReduceAction140
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -7139,22 +7138,22 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist4
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist5
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist8
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -7175,7 +7174,7 @@ private class ReduceAction141
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -7187,30 +7186,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist6
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist10
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -7231,7 +7230,7 @@ private class ReduceAction142
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -7244,32 +7243,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist5
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist7
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -7290,7 +7289,7 @@ private class ReduceAction143
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -7301,24 +7300,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist5
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -7339,7 +7338,7 @@ private class ReduceAction144
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -7349,22 +7348,22 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwwritablenode6 = nodearraylist2
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist4
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist5
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist8
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -7385,7 +7384,7 @@ private class ReduceAction145
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -7396,24 +7395,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode5,
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist5
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -7434,7 +7433,7 @@ private class ReduceAction146
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -7443,16 +7442,16 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode6 = nodearraylist2
-					assert pvisibilitynode6 isa PVisibility
+					assert pvisibilitynode6 isa nullable PVisibility
 					var tkwattrnode7 = nodearraylist3
-					assert tkwattrnode7 isa TKwattr
+					assert tkwattrnode7 isa nullable TKwattr
 					var tattridnode9 = nodearraylist4
-					assert tattridnode9 isa TAttrid
+					assert tattridnode9 isa nullable TAttrid
 					var pexprnode11 = nodearraylist7
-					assert pexprnode11 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode11 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						null,
@@ -7473,7 +7472,7 @@ private class ReduceAction147
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -7485,30 +7484,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist3
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist4
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist6
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist10
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -7529,7 +7528,7 @@ private class ReduceAction148
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -7542,32 +7541,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist5
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist7
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -7588,7 +7587,7 @@ private class ReduceAction149
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -7599,24 +7598,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist5
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -7637,7 +7636,7 @@ private class ReduceAction150
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -7650,32 +7649,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist5
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist7
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -7696,7 +7695,7 @@ private class ReduceAction151
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
@@ -7710,34 +7709,34 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist5
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist6
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist7
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist8
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist9
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist12
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -7758,7 +7757,7 @@ private class ReduceAction152
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -7770,26 +7769,26 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist6
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist7
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -7810,7 +7809,7 @@ private class ReduceAction153
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -7821,24 +7820,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwwritablenode6 = nodearraylist2
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode6
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist5
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -7859,7 +7858,7 @@ private class ReduceAction154
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -7871,26 +7870,26 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode5,
 						tkwwritablenode6
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist6
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist7
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -7911,7 +7910,7 @@ private class ReduceAction155
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -7921,18 +7920,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var pvisibilitynode6 = nodearraylist3
-					assert pvisibilitynode6 isa PVisibility
+					assert pvisibilitynode6 isa nullable PVisibility
 					var tkwattrnode7 = nodearraylist4
-					assert tkwattrnode7 isa TKwattr
+					assert tkwattrnode7 isa nullable TKwattr
 					var tattridnode9 = nodearraylist5
-					assert tattridnode9 isa TAttrid
+					assert tattridnode9 isa nullable TAttrid
 					var pexprnode11 = nodearraylist8
-					assert pexprnode11 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode11 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						null,
@@ -7953,7 +7952,7 @@ private class ReduceAction156
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -7965,30 +7964,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist3
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist4
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist5
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist6
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist7
-					assert ptypenode14 isa PType
+					assert ptypenode14 isa nullable PType
 					var pexprnode15 = nodearraylist10
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -8009,7 +8008,7 @@ private class ReduceAction157
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -8022,32 +8021,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist6
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa PType
+					assert ptypenode14 isa nullable PType
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -8068,7 +8067,7 @@ private class ReduceAction158
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -8079,24 +8078,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist4
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist5
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist6
-					assert ptypenode12 isa PType
+					assert ptypenode12 isa nullable PType
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -8117,7 +8116,7 @@ private class ReduceAction159
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -8130,32 +8129,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist6
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa PType
+					assert ptypenode14 isa nullable PType
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -8176,7 +8175,7 @@ private class ReduceAction160
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
@@ -8190,34 +8189,34 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist5
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist7
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa PType
+					assert ptypenode14 isa nullable PType
 					var pexprnode15 = nodearraylist12
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -8238,7 +8237,7 @@ private class ReduceAction161
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -8250,26 +8249,26 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist5
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa PType
+					assert ptypenode12 isa nullable PType
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -8290,7 +8289,7 @@ private class ReduceAction162
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -8301,24 +8300,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwwritablenode6 = nodearraylist2
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist4
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist5
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist6
-					assert ptypenode12 isa PType
+					assert ptypenode12 isa nullable PType
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -8339,7 +8338,7 @@ private class ReduceAction163
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -8351,26 +8350,26 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode5,
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist5
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa PType
+					assert ptypenode12 isa nullable PType
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -8391,7 +8390,7 @@ private class ReduceAction164
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -8401,18 +8400,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode6 = nodearraylist2
-					assert pvisibilitynode6 isa PVisibility
+					assert pvisibilitynode6 isa nullable PVisibility
 					var tkwattrnode7 = nodearraylist3
-					assert tkwattrnode7 isa TKwattr
+					assert tkwattrnode7 isa nullable TKwattr
 					var tattridnode9 = nodearraylist4
-					assert tattridnode9 isa TAttrid
+					assert tattridnode9 isa nullable TAttrid
 					var ptypenode10 = nodearraylist5
-					assert ptypenode10 isa PType
+					assert ptypenode10 isa nullable PType
 					var pexprnode11 = nodearraylist8
-					assert pexprnode11 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode11 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						null,
@@ -8433,7 +8432,7 @@ private class ReduceAction165
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -8446,32 +8445,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist3
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist4
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist6
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa PType
+					assert ptypenode14 isa nullable PType
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -8492,7 +8491,7 @@ private class ReduceAction166
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
@@ -8506,34 +8505,34 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist5
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist7
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa PType
+					assert ptypenode14 isa nullable PType
 					var pexprnode15 = nodearraylist12
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -8554,7 +8553,7 @@ private class ReduceAction167
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -8566,26 +8565,26 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist5
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa PType
+					assert ptypenode12 isa nullable PType
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -8606,7 +8605,7 @@ private class ReduceAction168
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
@@ -8620,34 +8619,34 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist5
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist7
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa PType
+					assert ptypenode14 isa nullable PType
 					var pexprnode15 = nodearraylist12
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -8668,7 +8667,7 @@ private class ReduceAction169
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist13 = p.pop
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
@@ -8683,36 +8682,36 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist5
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist6
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist7
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwattrnode11 = nodearraylist8
-					assert tkwattrnode11 isa TKwattr
+					assert tkwattrnode11 isa nullable TKwattr
 					var tattridnode13 = nodearraylist9
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist10
-					assert ptypenode14 isa PType
+					assert ptypenode14 isa nullable PType
 					var pexprnode15 = nodearraylist13
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -8733,7 +8732,7 @@ private class ReduceAction170
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -8746,28 +8745,28 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist6
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist7
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist8
-					assert ptypenode12 isa PType
+					assert ptypenode12 isa nullable PType
 					var pexprnode13 = nodearraylist11
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -8788,7 +8787,7 @@ private class ReduceAction171
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -8800,26 +8799,26 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwwritablenode6 = nodearraylist2
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode6
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist5
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa PType
+					assert ptypenode12 isa nullable PType
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -8840,7 +8839,7 @@ private class ReduceAction172
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -8853,28 +8852,28 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode5,
 						tkwwritablenode6
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwattrnode9 = nodearraylist6
-					assert tkwattrnode9 isa TKwattr
+					assert tkwattrnode9 isa nullable TKwattr
 					var tattridnode11 = nodearraylist7
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist8
-					assert ptypenode12 isa PType
+					assert ptypenode12 isa nullable PType
 					var pexprnode13 = nodearraylist11
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -8895,7 +8894,7 @@ private class ReduceAction173
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -8906,20 +8905,20 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var pvisibilitynode6 = nodearraylist3
-					assert pvisibilitynode6 isa PVisibility
+					assert pvisibilitynode6 isa nullable PVisibility
 					var tkwattrnode7 = nodearraylist4
-					assert tkwattrnode7 isa TKwattr
+					assert tkwattrnode7 isa nullable TKwattr
 					var tattridnode9 = nodearraylist5
-					assert tattridnode9 isa TAttrid
+					assert tattridnode9 isa nullable TAttrid
 					var ptypenode10 = nodearraylist6
-					assert ptypenode10 isa PType
+					assert ptypenode10 isa nullable PType
 					var pexprnode11 = nodearraylist9
-					assert pexprnode11 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode11 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						null,
@@ -8940,7 +8939,7 @@ private class ReduceAction174
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -8948,26 +8947,26 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist3
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist4
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist5
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist6
-					assert tattridnode13 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode13 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -8988,7 +8987,7 @@ private class ReduceAction175
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -8997,28 +8996,28 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist6
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode13 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -9039,27 +9038,27 @@ private class ReduceAction176
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist4
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist5
-					assert tattridnode11 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode11 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -9080,7 +9079,7 @@ private class ReduceAction177
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -9089,28 +9088,28 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist6
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode13 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -9131,7 +9130,7 @@ private class ReduceAction178
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -9141,30 +9140,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist5
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist7
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode13 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -9185,7 +9184,7 @@ private class ReduceAction179
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -9193,22 +9192,22 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist5
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode11 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -9229,27 +9228,27 @@ private class ReduceAction180
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwwritablenode6 = nodearraylist2
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist4
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist5
-					assert tattridnode11 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode11 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -9270,7 +9269,7 @@ private class ReduceAction181
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -9278,22 +9277,22 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode5,
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist5
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode11 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -9314,20 +9313,20 @@ private class ReduceAction182
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode6 = nodearraylist2
-					assert pvisibilitynode6 isa PVisibility
+					assert pvisibilitynode6 isa nullable PVisibility
 					var tkwvarnode8 = nodearraylist3
-					assert tkwvarnode8 isa TKwvar
+					assert tkwvarnode8 isa nullable TKwvar
 					var tattridnode9 = nodearraylist4
-					assert tattridnode9 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode9 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						null,
@@ -9348,7 +9347,7 @@ private class ReduceAction183
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -9357,28 +9356,28 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist3
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist4
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist6
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode13 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -9399,7 +9398,7 @@ private class ReduceAction184
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -9409,30 +9408,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist5
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist7
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode13 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -9453,7 +9452,7 @@ private class ReduceAction185
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -9461,22 +9460,22 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist5
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode11 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -9497,7 +9496,7 @@ private class ReduceAction186
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -9507,30 +9506,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist5
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist7
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode13 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -9551,7 +9550,7 @@ private class ReduceAction187
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -9562,32 +9561,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist5
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist6
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist7
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist8
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist9
-					assert tattridnode13 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode13 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -9608,7 +9607,7 @@ private class ReduceAction188
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -9617,24 +9616,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist6
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist7
-					assert tattridnode11 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode11 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -9655,7 +9654,7 @@ private class ReduceAction189
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -9663,22 +9662,22 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwwritablenode6 = nodearraylist2
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode6
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist5
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode11 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -9699,7 +9698,7 @@ private class ReduceAction190
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -9708,24 +9707,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode5,
 						tkwwritablenode6
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist6
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist7
-					assert tattridnode11 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode11 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -9746,23 +9745,23 @@ private class ReduceAction191
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var pvisibilitynode6 = nodearraylist3
-					assert pvisibilitynode6 isa PVisibility
+					assert pvisibilitynode6 isa nullable PVisibility
 					var tkwvarnode8 = nodearraylist4
-					assert tkwvarnode8 isa TKwvar
+					assert tkwvarnode8 isa nullable TKwvar
 					var tattridnode9 = nodearraylist5
-					assert tattridnode9 isa TAttrid
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert tattridnode9 isa nullable TAttrid
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						null,
@@ -9783,7 +9782,7 @@ private class ReduceAction192
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -9792,28 +9791,28 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist3
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist4
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist5
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist6
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist7
-					assert ptypenode14 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode14 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -9834,7 +9833,7 @@ private class ReduceAction193
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -9844,30 +9843,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist6
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode14 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -9888,7 +9887,7 @@ private class ReduceAction194
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -9896,22 +9895,22 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist4
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist5
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist6
-					assert ptypenode12 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode12 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -9932,7 +9931,7 @@ private class ReduceAction195
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -9942,30 +9941,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist6
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode14 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -9986,7 +9985,7 @@ private class ReduceAction196
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -9997,32 +9996,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist5
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist7
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode14 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -10043,7 +10042,7 @@ private class ReduceAction197
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -10052,24 +10051,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist5
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode12 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -10090,7 +10089,7 @@ private class ReduceAction198
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -10098,22 +10097,22 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwwritablenode6 = nodearraylist2
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist4
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist5
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist6
-					assert ptypenode12 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode12 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -10134,7 +10133,7 @@ private class ReduceAction199
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -10143,24 +10142,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode5,
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist5
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode12 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -10181,23 +10180,23 @@ private class ReduceAction200
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode6 = nodearraylist2
-					assert pvisibilitynode6 isa PVisibility
+					assert pvisibilitynode6 isa nullable PVisibility
 					var tkwvarnode8 = nodearraylist3
-					assert tkwvarnode8 isa TKwvar
+					assert tkwvarnode8 isa nullable TKwvar
 					var tattridnode9 = nodearraylist4
-					assert tattridnode9 isa TAttrid
+					assert tattridnode9 isa nullable TAttrid
 					var ptypenode10 = nodearraylist5
-					assert ptypenode10 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode10 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						null,
@@ -10218,7 +10217,7 @@ private class ReduceAction201
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -10228,30 +10227,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist3
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist4
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist6
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode14 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -10272,7 +10271,7 @@ private class ReduceAction202
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -10283,32 +10282,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist5
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist7
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode14 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -10329,7 +10328,7 @@ private class ReduceAction203
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -10338,24 +10337,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist5
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode12 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -10376,7 +10375,7 @@ private class ReduceAction204
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -10387,32 +10386,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist5
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist7
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode14 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -10433,7 +10432,7 @@ private class ReduceAction205
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -10445,34 +10444,34 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist5
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist6
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist7
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist8
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist9
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist10
-					assert ptypenode14 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode14 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -10493,7 +10492,7 @@ private class ReduceAction206
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -10503,26 +10502,26 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist6
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist7
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist8
-					assert ptypenode12 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode12 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -10543,7 +10542,7 @@ private class ReduceAction207
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -10552,24 +10551,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwwritablenode6 = nodearraylist2
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode6
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist5
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode12 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -10590,7 +10589,7 @@ private class ReduceAction208
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -10600,26 +10599,26 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode5,
 						tkwwritablenode6
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist6
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist7
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist8
-					assert ptypenode12 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode12 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -10640,7 +10639,7 @@ private class ReduceAction209
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -10648,18 +10647,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var pvisibilitynode6 = nodearraylist3
-					assert pvisibilitynode6 isa PVisibility
+					assert pvisibilitynode6 isa nullable PVisibility
 					var tkwvarnode8 = nodearraylist4
-					assert tkwvarnode8 isa TKwvar
+					assert tkwvarnode8 isa nullable TKwvar
 					var tattridnode9 = nodearraylist5
-					assert tattridnode9 isa TAttrid
+					assert tattridnode9 isa nullable TAttrid
 					var ptypenode10 = nodearraylist6
-					assert ptypenode10 isa PType
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert ptypenode10 isa nullable PType
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						null,
@@ -10680,7 +10679,7 @@ private class ReduceAction210
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -10691,28 +10690,28 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist3
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist4
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist5
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist6
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist9
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -10733,7 +10732,7 @@ private class ReduceAction211
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -10745,30 +10744,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist6
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist10
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -10789,7 +10788,7 @@ private class ReduceAction212
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -10799,22 +10798,22 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist4
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist5
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist8
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -10835,7 +10834,7 @@ private class ReduceAction213
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -10847,30 +10846,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist6
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist10
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -10891,7 +10890,7 @@ private class ReduceAction214
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -10904,32 +10903,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist5
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist7
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -10950,7 +10949,7 @@ private class ReduceAction215
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -10961,24 +10960,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist5
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -10999,7 +10998,7 @@ private class ReduceAction216
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -11009,22 +11008,22 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwwritablenode6 = nodearraylist2
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist4
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist5
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist8
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -11045,7 +11044,7 @@ private class ReduceAction217
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -11056,24 +11055,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode5,
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist5
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -11094,7 +11093,7 @@ private class ReduceAction218
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -11103,16 +11102,16 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode6 = nodearraylist2
-					assert pvisibilitynode6 isa PVisibility
+					assert pvisibilitynode6 isa nullable PVisibility
 					var tkwvarnode8 = nodearraylist3
-					assert tkwvarnode8 isa TKwvar
+					assert tkwvarnode8 isa nullable TKwvar
 					var tattridnode9 = nodearraylist4
-					assert tattridnode9 isa TAttrid
+					assert tattridnode9 isa nullable TAttrid
 					var pexprnode11 = nodearraylist7
-					assert pexprnode11 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode11 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						null,
@@ -11133,7 +11132,7 @@ private class ReduceAction219
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -11145,30 +11144,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist3
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist4
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist6
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist10
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -11189,7 +11188,7 @@ private class ReduceAction220
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -11202,32 +11201,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist5
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist7
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -11248,7 +11247,7 @@ private class ReduceAction221
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -11259,24 +11258,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist5
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -11297,7 +11296,7 @@ private class ReduceAction222
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -11310,32 +11309,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist5
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist7
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -11356,7 +11355,7 @@ private class ReduceAction223
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
@@ -11370,34 +11369,34 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist5
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist6
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist7
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist8
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist9
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var pexprnode15 = nodearraylist12
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -11418,7 +11417,7 @@ private class ReduceAction224
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -11430,26 +11429,26 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist6
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist7
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -11470,7 +11469,7 @@ private class ReduceAction225
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -11481,24 +11480,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwwritablenode6 = nodearraylist2
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode6
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist5
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -11519,7 +11518,7 @@ private class ReduceAction226
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -11531,26 +11530,26 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode5,
 						tkwwritablenode6
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist6
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist7
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -11571,7 +11570,7 @@ private class ReduceAction227
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -11581,18 +11580,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var pvisibilitynode6 = nodearraylist3
-					assert pvisibilitynode6 isa PVisibility
+					assert pvisibilitynode6 isa nullable PVisibility
 					var tkwvarnode8 = nodearraylist4
-					assert tkwvarnode8 isa TKwvar
+					assert tkwvarnode8 isa nullable TKwvar
 					var tattridnode9 = nodearraylist5
-					assert tattridnode9 isa TAttrid
+					assert tattridnode9 isa nullable TAttrid
 					var pexprnode11 = nodearraylist8
-					assert pexprnode11 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode11 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						null,
@@ -11613,7 +11612,7 @@ private class ReduceAction228
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -11625,30 +11624,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist3
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist4
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist5
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist6
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist7
-					assert ptypenode14 isa PType
+					assert ptypenode14 isa nullable PType
 					var pexprnode15 = nodearraylist10
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -11669,7 +11668,7 @@ private class ReduceAction229
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -11682,32 +11681,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist6
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa PType
+					assert ptypenode14 isa nullable PType
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -11728,7 +11727,7 @@ private class ReduceAction230
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -11739,24 +11738,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist4
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist5
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist6
-					assert ptypenode12 isa PType
+					assert ptypenode12 isa nullable PType
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -11777,7 +11776,7 @@ private class ReduceAction231
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -11790,32 +11789,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist6
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa PType
+					assert ptypenode14 isa nullable PType
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -11836,7 +11835,7 @@ private class ReduceAction232
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
@@ -11850,34 +11849,34 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist5
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist7
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa PType
+					assert ptypenode14 isa nullable PType
 					var pexprnode15 = nodearraylist12
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -11898,7 +11897,7 @@ private class ReduceAction233
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -11910,26 +11909,26 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist5
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa PType
+					assert ptypenode12 isa nullable PType
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -11950,7 +11949,7 @@ private class ReduceAction234
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -11961,24 +11960,24 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwwritablenode6 = nodearraylist2
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist3
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist4
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist5
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist6
-					assert ptypenode12 isa PType
+					assert ptypenode12 isa nullable PType
 					var pexprnode13 = nodearraylist9
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -11999,7 +11998,7 @@ private class ReduceAction235
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -12011,26 +12010,26 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode5,
 						tkwwritablenode6
 					)
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist5
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa PType
+					assert ptypenode12 isa nullable PType
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -12051,7 +12050,7 @@ private class ReduceAction236
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -12061,18 +12060,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode6 = nodearraylist2
-					assert pvisibilitynode6 isa PVisibility
+					assert pvisibilitynode6 isa nullable PVisibility
 					var tkwvarnode8 = nodearraylist3
-					assert tkwvarnode8 isa TKwvar
+					assert tkwvarnode8 isa nullable TKwvar
 					var tattridnode9 = nodearraylist4
-					assert tattridnode9 isa TAttrid
+					assert tattridnode9 isa nullable TAttrid
 					var ptypenode10 = nodearraylist5
-					assert ptypenode10 isa PType
+					assert ptypenode10 isa nullable PType
 					var pexprnode11 = nodearraylist8
-					assert pexprnode11 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode11 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						null,
@@ -12093,7 +12092,7 @@ private class ReduceAction237
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -12106,32 +12105,32 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist3
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist4
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist5
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist6
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist7
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist8
-					assert ptypenode14 isa PType
+					assert ptypenode14 isa nullable PType
 					var pexprnode15 = nodearraylist11
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -12152,7 +12151,7 @@ private class ReduceAction238
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
@@ -12166,34 +12165,34 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist5
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist7
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa PType
+					assert ptypenode14 isa nullable PType
 					var pexprnode15 = nodearraylist12
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -12214,7 +12213,7 @@ private class ReduceAction239
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -12226,26 +12225,26 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwreadablenode5 = nodearraylist2
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						null,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist5
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa PType
+					assert ptypenode12 isa nullable PType
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -12266,7 +12265,7 @@ private class ReduceAction240
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
@@ -12280,34 +12279,34 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwwritablenode8 = nodearraylist4
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist5
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist6
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist7
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist8
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist9
-					assert ptypenode14 isa PType
+					assert ptypenode14 isa nullable PType
 					var pexprnode15 = nodearraylist12
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -12328,7 +12327,7 @@ private class ReduceAction241
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist13 = p.pop
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
@@ -12343,36 +12342,36 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var tkwwritablenode8 = nodearraylist5
-					assert tkwwritablenode8 isa TKwwritable
-					var pablenode6 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode8 isa nullable TKwwritable
+					var pablenode6: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode7,
 						tkwwritablenode8
 					)
 					var tkwredefnode9 = nodearraylist6
-					assert tkwredefnode9 isa TKwredef
+					assert tkwredefnode9 isa nullable TKwredef
 					var pvisibilitynode10 = nodearraylist7
-					assert pvisibilitynode10 isa PVisibility
+					assert pvisibilitynode10 isa nullable PVisibility
 					var tkwvarnode12 = nodearraylist8
-					assert tkwvarnode12 isa TKwvar
+					assert tkwvarnode12 isa nullable TKwvar
 					var tattridnode13 = nodearraylist9
-					assert tattridnode13 isa TAttrid
+					assert tattridnode13 isa nullable TAttrid
 					var ptypenode14 = nodearraylist10
-					assert ptypenode14 isa PType
+					assert ptypenode14 isa nullable PType
 					var pexprnode15 = nodearraylist13
-					assert pexprnode15 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode15 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						pablenode6,
@@ -12393,7 +12392,7 @@ private class ReduceAction242
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -12406,28 +12405,28 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode4 = nodearraylist2
-					assert tkwredefnode4 isa TKwredef
+					assert tkwredefnode4 isa nullable TKwredef
 					var tkwreadablenode5 = nodearraylist3
-					assert tkwreadablenode5 isa TKwreadable
-					var pablenode3 = new AReadAble.init_areadable(
+					assert tkwreadablenode5 isa nullable TKwreadable
+					var pablenode3: nullable AReadAble = new AReadAble.init_areadable(
 						tkwredefnode4,
 						tkwreadablenode5
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist6
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist7
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist8
-					assert ptypenode12 isa PType
+					assert ptypenode12 isa nullable PType
 					var pexprnode13 = nodearraylist11
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						pablenode3,
 						null,
@@ -12448,7 +12447,7 @@ private class ReduceAction243
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -12460,26 +12459,26 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwwritablenode6 = nodearraylist2
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						null,
 						tkwwritablenode6
 					)
 					var tkwredefnode7 = nodearraylist3
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist4
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist5
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist6
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist7
-					assert ptypenode12 isa PType
+					assert ptypenode12 isa nullable PType
 					var pexprnode13 = nodearraylist10
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -12500,7 +12499,7 @@ private class ReduceAction244
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -12513,28 +12512,28 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var tkwwritablenode6 = nodearraylist3
-					assert tkwwritablenode6 isa TKwwritable
-					var pablenode4 = new AWriteAble.init_awriteable(
+					assert tkwwritablenode6 isa nullable TKwwritable
+					var pablenode4: nullable AWriteAble = new AWriteAble.init_awriteable(
 						tkwredefnode5,
 						tkwwritablenode6
 					)
 					var tkwredefnode7 = nodearraylist4
-					assert tkwredefnode7 isa TKwredef
+					assert tkwredefnode7 isa nullable TKwredef
 					var pvisibilitynode8 = nodearraylist5
-					assert pvisibilitynode8 isa PVisibility
+					assert pvisibilitynode8 isa nullable PVisibility
 					var tkwvarnode10 = nodearraylist6
-					assert tkwvarnode10 isa TKwvar
+					assert tkwvarnode10 isa nullable TKwvar
 					var tattridnode11 = nodearraylist7
-					assert tattridnode11 isa TAttrid
+					assert tattridnode11 isa nullable TAttrid
 					var ptypenode12 = nodearraylist8
-					assert ptypenode12 isa PType
+					assert ptypenode12 isa nullable PType
 					var pexprnode13 = nodearraylist11
-					assert pexprnode13 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode13 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						pablenode4,
@@ -12555,7 +12554,7 @@ private class ReduceAction245
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -12566,20 +12565,20 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode5 = nodearraylist2
-					assert tkwredefnode5 isa TKwredef
+					assert tkwredefnode5 isa nullable TKwredef
 					var pvisibilitynode6 = nodearraylist3
-					assert pvisibilitynode6 isa PVisibility
+					assert pvisibilitynode6 isa nullable PVisibility
 					var tkwvarnode8 = nodearraylist4
-					assert tkwvarnode8 isa TKwvar
+					assert tkwvarnode8 isa nullable TKwvar
 					var tattridnode9 = nodearraylist5
-					assert tattridnode9 isa TAttrid
+					assert tattridnode9 isa nullable TAttrid
 					var ptypenode10 = nodearraylist6
-					assert ptypenode10 isa PType
+					assert ptypenode10 isa nullable PType
 					var pexprnode11 = nodearraylist9
-					assert pexprnode11 isa PExpr
-					var ppropdefnode1 = new AAttrPropdef.init_aattrpropdef(
+					assert pexprnode11 isa nullable PExpr
+					var ppropdefnode1: nullable AAttrPropdef = new AAttrPropdef.init_aattrpropdef(
 						pdocnode2,
 						null,
 						null,
@@ -12600,7 +12599,7 @@ private class ReduceAction246
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -12608,16 +12607,16 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwinitnode5 = nodearraylist3
-					assert tkwinitnode5 isa TKwinit
+					assert tkwinitnode5 isa nullable TKwinit
 					var psignaturenode7 = nodearraylist4
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var pexprnode8 = nodearraylist6
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+					assert pexprnode8 isa nullable PExpr
+					var ppropdefnode1: nullable AConcreteInitPropdef = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -12635,7 +12634,7 @@ private class ReduceAction247
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -12644,18 +12643,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwinitnode5 = nodearraylist4
-					assert tkwinitnode5 isa TKwinit
+					assert tkwinitnode5 isa nullable TKwinit
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var pexprnode8 = nodearraylist7
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+					assert pexprnode8 isa nullable PExpr
+					var ppropdefnode1: nullable AConcreteInitPropdef = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -12673,7 +12672,7 @@ private class ReduceAction248
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -12682,18 +12681,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwinitnode5 = nodearraylist3
-					assert tkwinitnode5 isa TKwinit
+					assert tkwinitnode5 isa nullable TKwinit
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var pexprnode8 = nodearraylist7
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+					assert pexprnode8 isa nullable PExpr
+					var ppropdefnode1: nullable AConcreteInitPropdef = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -12711,7 +12710,7 @@ private class ReduceAction249
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -12721,20 +12720,20 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwinitnode5 = nodearraylist4
-					assert tkwinitnode5 isa TKwinit
+					assert tkwinitnode5 isa nullable TKwinit
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var pexprnode8 = nodearraylist8
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+					assert pexprnode8 isa nullable PExpr
+					var ppropdefnode1: nullable AConcreteInitPropdef = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -12752,7 +12751,7 @@ private class ReduceAction250
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -12761,16 +12760,16 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwinitnode5 = nodearraylist3
-					assert tkwinitnode5 isa TKwinit
+					assert tkwinitnode5 isa nullable TKwinit
 					var psignaturenode7 = nodearraylist4
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var pexprnode8 = nodearraylist6
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+					assert pexprnode8 isa nullable PExpr
+					var ppropdefnode1: nullable AConcreteInitPropdef = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -12788,7 +12787,7 @@ private class ReduceAction251
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -12798,18 +12797,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwinitnode5 = nodearraylist4
-					assert tkwinitnode5 isa TKwinit
+					assert tkwinitnode5 isa nullable TKwinit
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var pexprnode8 = nodearraylist7
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+					assert pexprnode8 isa nullable PExpr
+					var ppropdefnode1: nullable AConcreteInitPropdef = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -12827,7 +12826,7 @@ private class ReduceAction252
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -12837,18 +12836,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwinitnode5 = nodearraylist3
-					assert tkwinitnode5 isa TKwinit
+					assert tkwinitnode5 isa nullable TKwinit
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var pexprnode8 = nodearraylist7
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+					assert pexprnode8 isa nullable PExpr
+					var ppropdefnode1: nullable AConcreteInitPropdef = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -12866,7 +12865,7 @@ private class ReduceAction253
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -12877,20 +12876,20 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwinitnode5 = nodearraylist4
-					assert tkwinitnode5 isa TKwinit
+					assert tkwinitnode5 isa nullable TKwinit
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var pexprnode8 = nodearraylist8
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteInitPropdef.init_aconcreteinitpropdef(
+					assert pexprnode8 isa nullable PExpr
+					var ppropdefnode1: nullable AConcreteInitPropdef = new AConcreteInitPropdef.init_aconcreteinitpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -12908,23 +12907,23 @@ private class ReduceAction254
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwtypenode5 = nodearraylist3
-					assert tkwtypenode5 isa TKwtype
+					assert tkwtypenode5 isa nullable TKwtype
 					var tclassidnode6 = nodearraylist4
-					assert tclassidnode6 isa TClassid
+					assert tclassidnode6 isa nullable TClassid
 					var ptypenode7 = nodearraylist5
-					assert ptypenode7 isa PType
-					var ppropdefnode1 = new ATypePropdef.init_atypepropdef(
+					assert ptypenode7 isa nullable PType
+					var ppropdefnode1: nullable ATypePropdef = new ATypePropdef.init_atypepropdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -12941,7 +12940,7 @@ private class ReduceAction255
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -12949,18 +12948,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwtypenode5 = nodearraylist4
-					assert tkwtypenode5 isa TKwtype
+					assert tkwtypenode5 isa nullable TKwtype
 					var tclassidnode6 = nodearraylist5
-					assert tclassidnode6 isa TClassid
+					assert tclassidnode6 isa nullable TClassid
 					var ptypenode7 = nodearraylist6
-					assert ptypenode7 isa PType
-					var ppropdefnode1 = new ATypePropdef.init_atypepropdef(
+					assert ptypenode7 isa nullable PType
+					var ppropdefnode1: nullable ATypePropdef = new ATypePropdef.init_atypepropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -12977,8 +12976,8 @@ private class ReduceAction256
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
-					var pvisibilitynode1 = new APublicVisibility.init_apublicvisibility(
+					var node_list: nullable Object = null
+					var pvisibilitynode1: nullable APublicVisibility = new APublicVisibility.init_apublicvisibility(
 					)
 					node_list = pvisibilitynode1
 					p.push(p.go_to(13), node_list)
@@ -12989,12 +12988,12 @@ private class ReduceAction257
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwprivatenode2 = nodearraylist1
-					assert tkwprivatenode2 isa TKwprivate
-					var pvisibilitynode1 = new APrivateVisibility.init_aprivatevisibility(
+					assert tkwprivatenode2 isa nullable TKwprivate
+					var pvisibilitynode1: nullable APrivateVisibility = new APrivateVisibility.init_aprivatevisibility(
 						tkwprivatenode2
 					)
 					node_list = pvisibilitynode1
@@ -13006,12 +13005,12 @@ private class ReduceAction258
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwprotectednode2 = nodearraylist1
-					assert tkwprotectednode2 isa TKwprotected
-					var pvisibilitynode1 = new AProtectedVisibility.init_aprotectedvisibility(
+					assert tkwprotectednode2 isa nullable TKwprotected
+					var pvisibilitynode1: nullable AProtectedVisibility = new AProtectedVisibility.init_aprotectedvisibility(
 						tkwprotectednode2
 					)
 					node_list = pvisibilitynode1
@@ -13023,12 +13022,12 @@ private class ReduceAction259
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwintrudenode2 = nodearraylist1
-					assert tkwintrudenode2 isa TKwintrude
-					var pvisibilitynode1 = new AIntrudeVisibility.init_aintrudevisibility(
+					assert tkwintrudenode2 isa nullable TKwintrude
+					var pvisibilitynode1: nullable AIntrudeVisibility = new AIntrudeVisibility.init_aintrudevisibility(
 						tkwintrudenode2
 					)
 					node_list = pvisibilitynode1
@@ -13040,11 +13039,11 @@ private class ReduceAction260
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tidnode2 = nodearraylist1
-					assert tidnode2 isa TId
-					var pmethidnode1 = new AIdMethid.init_aidmethid(
+					assert tidnode2 isa nullable TId
+					var pmethidnode1: nullable AIdMethid = new AIdMethid.init_aidmethid(
 						tidnode2
 					)
 					node_list = pmethidnode1
@@ -13056,11 +13055,11 @@ private class ReduceAction261
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tplusnode2 = nodearraylist1
-					assert tplusnode2 isa TPlus
-					var pmethidnode1 = new APlusMethid.init_aplusmethid(
+					assert tplusnode2 isa nullable TPlus
+					var pmethidnode1: nullable APlusMethid = new APlusMethid.init_aplusmethid(
 						tplusnode2
 					)
 					node_list = pmethidnode1
@@ -13072,11 +13071,11 @@ private class ReduceAction262
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tminusnode2 = nodearraylist1
-					assert tminusnode2 isa TMinus
-					var pmethidnode1 = new AMinusMethid.init_aminusmethid(
+					assert tminusnode2 isa nullable TMinus
+					var pmethidnode1: nullable AMinusMethid = new AMinusMethid.init_aminusmethid(
 						tminusnode2
 					)
 					node_list = pmethidnode1
@@ -13088,11 +13087,11 @@ private class ReduceAction263
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tstarnode2 = nodearraylist1
-					assert tstarnode2 isa TStar
-					var pmethidnode1 = new AStarMethid.init_astarmethid(
+					assert tstarnode2 isa nullable TStar
+					var pmethidnode1: nullable AStarMethid = new AStarMethid.init_astarmethid(
 						tstarnode2
 					)
 					node_list = pmethidnode1
@@ -13104,11 +13103,11 @@ private class ReduceAction264
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tslashnode2 = nodearraylist1
-					assert tslashnode2 isa TSlash
-					var pmethidnode1 = new ASlashMethid.init_aslashmethid(
+					assert tslashnode2 isa nullable TSlash
+					var pmethidnode1: nullable ASlashMethid = new ASlashMethid.init_aslashmethid(
 						tslashnode2
 					)
 					node_list = pmethidnode1
@@ -13120,11 +13119,11 @@ private class ReduceAction265
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tpercentnode2 = nodearraylist1
-					assert tpercentnode2 isa TPercent
-					var pmethidnode1 = new APercentMethid.init_apercentmethid(
+					assert tpercentnode2 isa nullable TPercent
+					var pmethidnode1: nullable APercentMethid = new APercentMethid.init_apercentmethid(
 						tpercentnode2
 					)
 					node_list = pmethidnode1
@@ -13136,11 +13135,11 @@ private class ReduceAction266
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var teqnode2 = nodearraylist1
-					assert teqnode2 isa TEq
-					var pmethidnode1 = new AEqMethid.init_aeqmethid(
+					assert teqnode2 isa nullable TEq
+					var pmethidnode1: nullable AEqMethid = new AEqMethid.init_aeqmethid(
 						teqnode2
 					)
 					node_list = pmethidnode1
@@ -13152,11 +13151,11 @@ private class ReduceAction267
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tnenode2 = nodearraylist1
-					assert tnenode2 isa TNe
-					var pmethidnode1 = new ANeMethid.init_anemethid(
+					assert tnenode2 isa nullable TNe
+					var pmethidnode1: nullable ANeMethid = new ANeMethid.init_anemethid(
 						tnenode2
 					)
 					node_list = pmethidnode1
@@ -13168,11 +13167,11 @@ private class ReduceAction268
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tlenode2 = nodearraylist1
-					assert tlenode2 isa TLe
-					var pmethidnode1 = new ALeMethid.init_alemethid(
+					assert tlenode2 isa nullable TLe
+					var pmethidnode1: nullable ALeMethid = new ALeMethid.init_alemethid(
 						tlenode2
 					)
 					node_list = pmethidnode1
@@ -13184,11 +13183,11 @@ private class ReduceAction269
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tgenode2 = nodearraylist1
-					assert tgenode2 isa TGe
-					var pmethidnode1 = new AGeMethid.init_agemethid(
+					assert tgenode2 isa nullable TGe
+					var pmethidnode1: nullable AGeMethid = new AGeMethid.init_agemethid(
 						tgenode2
 					)
 					node_list = pmethidnode1
@@ -13200,11 +13199,11 @@ private class ReduceAction270
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tltnode2 = nodearraylist1
-					assert tltnode2 isa TLt
-					var pmethidnode1 = new ALtMethid.init_altmethid(
+					assert tltnode2 isa nullable TLt
+					var pmethidnode1: nullable ALtMethid = new ALtMethid.init_altmethid(
 						tltnode2
 					)
 					node_list = pmethidnode1
@@ -13216,11 +13215,11 @@ private class ReduceAction271
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tgtnode2 = nodearraylist1
-					assert tgtnode2 isa TGt
-					var pmethidnode1 = new AGtMethid.init_agtmethid(
+					assert tgtnode2 isa nullable TGt
+					var pmethidnode1: nullable AGtMethid = new AGtMethid.init_agtmethid(
 						tgtnode2
 					)
 					node_list = pmethidnode1
@@ -13232,14 +13231,14 @@ private class ReduceAction272
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tobranode2 = nodearraylist1
-					assert tobranode2 isa TObra
+					assert tobranode2 isa nullable TObra
 					var tcbranode3 = nodearraylist2
-					assert tcbranode3 isa TCbra
-					var pmethidnode1 = new ABraMethid.init_abramethid(
+					assert tcbranode3 isa nullable TCbra
+					var pmethidnode1: nullable ABraMethid = new ABraMethid.init_abramethid(
 						tobranode2,
 						tcbranode3
 					)
@@ -13252,11 +13251,11 @@ private class ReduceAction273
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tstarshipnode2 = nodearraylist1
-					assert tstarshipnode2 isa TStarship
-					var pmethidnode1 = new AStarshipMethid.init_astarshipmethid(
+					assert tstarshipnode2 isa nullable TStarship
+					var pmethidnode1: nullable AStarshipMethid = new AStarshipMethid.init_astarshipmethid(
 						tstarshipnode2
 					)
 					node_list = pmethidnode1
@@ -13268,14 +13267,14 @@ private class ReduceAction274
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tidnode2 = nodearraylist1
-					assert tidnode2 isa TId
+					assert tidnode2 isa nullable TId
 					var tassignnode3 = nodearraylist2
-					assert tassignnode3 isa TAssign
-					var pmethidnode1 = new AAssignMethid.init_aassignmethid(
+					assert tassignnode3 isa nullable TAssign
+					var pmethidnode1: nullable AAssignMethid = new AAssignMethid.init_aassignmethid(
 						tidnode2,
 						tassignnode3
 					)
@@ -13288,17 +13287,17 @@ private class ReduceAction275
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tobranode2 = nodearraylist1
-					assert tobranode2 isa TObra
+					assert tobranode2 isa nullable TObra
 					var tcbranode3 = nodearraylist2
-					assert tcbranode3 isa TCbra
+					assert tcbranode3 isa nullable TCbra
 					var tassignnode4 = nodearraylist3
-					assert tassignnode4 isa TAssign
-					var pmethidnode1 = new ABraassignMethid.init_abraassignmethid(
+					assert tassignnode4 isa nullable TAssign
+					var pmethidnode1: nullable ABraassignMethid = new ABraassignMethid.init_abraassignmethid(
 						tobranode2,
 						tcbranode3,
 						tassignnode4
@@ -13312,20 +13311,20 @@ private class ReduceAction276
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var listnode5 = new Array[Object]
-					var listnode4 = nodearraylist1 
+					var listnode4 = nodearraylist1
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var psignaturenode1 = new ASignature.init_asignature(
+#					end
+					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode2,
 						null,
 						listnode5
@@ -13339,30 +13338,30 @@ private class ReduceAction277
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode6 = new Array[Object]
-					var listnode2 = nodearraylist1 
+					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-					if listnode2 != null then
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
-					var listnode5 = nodearraylist2 
+#					end
+					var listnode5 = nodearraylist2
 					assert listnode5 isa Array[Object]
-					if listnode5 != null then
+#					if listnode5 != null then
 						if listnode6.is_empty then
 							listnode6 = listnode5
 						else
 							listnode6.append(listnode5)
 						end
-					end
-					var psignaturenode1 = new ASignature.init_asignature(
+#					end
+					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode3,
 						null,
 						listnode6
@@ -13376,23 +13375,23 @@ private class ReduceAction278
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var listnode5 = new Array[Object]
 					var ptypenode3 = nodearraylist1
-					assert ptypenode3 isa PType
-					var listnode4 = nodearraylist2 
+					assert ptypenode3 isa nullable PType
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var psignaturenode1 = new ASignature.init_asignature(
+#					end
+					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode2,
 						ptypenode3,
 						listnode5
@@ -13406,33 +13405,33 @@ private class ReduceAction279
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode6 = new Array[Object]
-					var listnode2 = nodearraylist1 
+					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-					if listnode2 != null then
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
+#					end
 					var ptypenode4 = nodearraylist2
-					assert ptypenode4 isa PType
-					var listnode5 = nodearraylist3 
+					assert ptypenode4 isa nullable PType
+					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
-					if listnode5 != null then
+#					if listnode5 != null then
 						if listnode6.is_empty then
 							listnode6 = listnode5
 						else
 							listnode6.append(listnode5)
 						end
-					end
-					var psignaturenode1 = new ASignature.init_asignature(
+#					end
+					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode3,
 						ptypenode4,
 						listnode6
@@ -13446,11 +13445,11 @@ private class ReduceAction280
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var listnode4 = new Array[Object]
-					var psignaturenode1 = new ASignature.init_asignature(
+					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode2,
 						null,
 						listnode4
@@ -13464,21 +13463,21 @@ private class ReduceAction281
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode5 = new Array[Object]
-					var listnode2 = nodearraylist1 
+					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-					if listnode2 != null then
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
-					var psignaturenode1 = new ASignature.init_asignature(
+#					end
+					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode3,
 						null,
 						listnode5
@@ -13492,14 +13491,14 @@ private class ReduceAction282
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var listnode4 = new Array[Object]
 					var ptypenode3 = nodearraylist1
-					assert ptypenode3 isa PType
-					var psignaturenode1 = new ASignature.init_asignature(
+					assert ptypenode3 isa nullable PType
+					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode2,
 						ptypenode3,
 						listnode4
@@ -13513,24 +13512,24 @@ private class ReduceAction283
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode5 = new Array[Object]
-					var listnode2 = nodearraylist1 
+					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-					if listnode2 != null then
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
+#					end
 					var ptypenode4 = nodearraylist2
-					assert ptypenode4 isa PType
-					var psignaturenode1 = new ASignature.init_asignature(
+					assert ptypenode4 isa nullable PType
+					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode3,
 						ptypenode4,
 						listnode5
@@ -13544,10 +13543,10 @@ private class ReduceAction284
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var listnode2 = new Array[Object]
 					var listnode4 = new Array[Object]
-					var psignaturenode1 = new ASignature.init_asignature(
+					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode2,
 						null,
 						listnode4
@@ -13561,20 +13560,20 @@ private class ReduceAction285
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode5 = new Array[Object]
-					var listnode2 = nodearraylist1 
+					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-					if listnode2 != null then
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
-					var psignaturenode1 = new ASignature.init_asignature(
+#					end
+					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode3,
 						null,
 						listnode5
@@ -13588,13 +13587,13 @@ private class ReduceAction286
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var listnode4 = new Array[Object]
 					var ptypenode3 = nodearraylist1
-					assert ptypenode3 isa PType
-					var psignaturenode1 = new ASignature.init_asignature(
+					assert ptypenode3 isa nullable PType
+					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode2,
 						ptypenode3,
 						listnode4
@@ -13608,23 +13607,23 @@ private class ReduceAction287
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var listnode5 = new Array[Object]
-					var listnode2 = nodearraylist1 
+					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-					if listnode2 != null then
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
+#					end
 					var ptypenode4 = nodearraylist2
-					assert ptypenode4 isa PType
-					var psignaturenode1 = new ASignature.init_asignature(
+					assert ptypenode4 isa nullable PType
+					var psignaturenode1: nullable ASignature = new ASignature.init_asignature(
 						listnode3,
 						ptypenode4,
 						listnode5
@@ -13638,7 +13637,7 @@ private class ReduceAction288
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -13646,7 +13645,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pparamnode1 = nodearraylist3
-					assert pparamnode1 isa PParam
+					assert pparamnode1 isa nullable PParam
 					if pparamnode1 != null then
 						listnode2.add(pparamnode1)
 					end
@@ -13659,7 +13658,7 @@ private class ReduceAction289
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -13668,19 +13667,19 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pparamnode1 = nodearraylist3
-					assert pparamnode1 isa PParam
-					var listnode2 = nodearraylist4 
+					assert pparamnode1 isa nullable PParam
+					var listnode2 = nodearraylist4
 					assert listnode2 isa Array[Object]
 					if pparamnode1 != null then
 						listnode3.add(pparamnode1)
 					end
-					if listnode2 != null then
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
+#					end
 					node_list = listnode3
 					p.push(p.go_to(17), node_list)
 	end
@@ -13690,7 +13689,7 @@ private class ReduceAction290
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
@@ -13704,12 +13703,12 @@ private class ReduceAction291
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pparamnode1 = nodearraylist3
-					assert pparamnode1 isa PParam
+					assert pparamnode1 isa nullable PParam
 					node_list = pparamnode1
 					p.push(p.go_to(18), node_list)
 	end
@@ -13719,11 +13718,11 @@ private class ReduceAction292
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tidnode2 = nodearraylist1
-					assert tidnode2 isa TId
-					var pparamnode1 = new AParam.init_aparam(
+					assert tidnode2 isa nullable TId
+					var pparamnode1: nullable AParam = new AParam.init_aparam(
 						tidnode2,
 						null,
 						null
@@ -13737,14 +13736,14 @@ private class ReduceAction293
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tidnode2 = nodearraylist1
-					assert tidnode2 isa TId
+					assert tidnode2 isa nullable TId
 					var ptypenode3 = nodearraylist2
-					assert ptypenode3 isa PType
-					var pparamnode1 = new AParam.init_aparam(
+					assert ptypenode3 isa nullable PType
+					var pparamnode1: nullable AParam = new AParam.init_aparam(
 						tidnode2,
 						ptypenode3,
 						null
@@ -13758,17 +13757,17 @@ private class ReduceAction294
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tidnode2 = nodearraylist1
-					assert tidnode2 isa TId
+					assert tidnode2 isa nullable TId
 					var ptypenode3 = nodearraylist2
-					assert ptypenode3 isa PType
+					assert ptypenode3 isa nullable PType
 					var tdotdotdotnode4 = nodearraylist3
-					assert tdotdotdotnode4 isa TDotdotdot
-					var pparamnode1 = new AParam.init_aparam(
+					assert tdotdotdotnode4 isa nullable TDotdotdot
+					var pparamnode1: nullable AParam = new AParam.init_aparam(
 						tidnode2,
 						ptypenode3,
 						tdotdotdotnode4
@@ -13782,19 +13781,19 @@ private class ReduceAction295
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
-					var listnode1 = nodearraylist2 
+					var listnode1 = nodearraylist2
 					assert listnode1 isa Array[Object]
-					if listnode1 != null then
+#					if listnode1 != null then
 						if listnode2.is_empty then
 							listnode2 = listnode1
 						else
 							listnode2.append(listnode1)
 						end
-					end
+#					end
 					node_list = listnode2
 					p.push(p.go_to(20), node_list)
 	end
@@ -13804,19 +13803,19 @@ private class ReduceAction296
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwwithnode2 = nodearraylist1
-					assert tkwwithnode2 isa TKwwith
+					assert tkwwithnode2 isa nullable TKwwith
 					var tidnode4 = nodearraylist3
-					assert tidnode4 isa TId
+					assert tidnode4 isa nullable TId
 					var psignaturenode5 = nodearraylist4
-					assert psignaturenode5 isa PSignature
-					var pclosuredeclnode1 = new AClosureDecl.init_aclosuredecl(
+					assert psignaturenode5 isa nullable PSignature
+					var pclosuredeclnode1: nullable AClosureDecl = new AClosureDecl.init_aclosuredecl(
 						tkwwithnode2,
 						null,
 						tidnode4,
@@ -13832,7 +13831,7 @@ private class ReduceAction297
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -13840,14 +13839,14 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwwithnode2 = nodearraylist1
-					assert tkwwithnode2 isa TKwwith
+					assert tkwwithnode2 isa nullable TKwwith
 					var tkwbreaknode3 = nodearraylist2
-					assert tkwbreaknode3 isa TKwbreak
+					assert tkwbreaknode3 isa nullable TKwbreak
 					var tidnode4 = nodearraylist4
-					assert tidnode4 isa TId
+					assert tidnode4 isa nullable TId
 					var psignaturenode5 = nodearraylist5
-					assert psignaturenode5 isa PSignature
-					var pclosuredeclnode1 = new AClosureDecl.init_aclosuredecl(
+					assert psignaturenode5 isa nullable PSignature
+					var pclosuredeclnode1: nullable AClosureDecl = new AClosureDecl.init_aclosuredecl(
 						tkwwithnode2,
 						tkwbreaknode3,
 						tidnode4,
@@ -13863,7 +13862,7 @@ private class ReduceAction298
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -13872,14 +13871,14 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwwithnode2 = nodearraylist1
-					assert tkwwithnode2 isa TKwwith
+					assert tkwwithnode2 isa nullable TKwwith
 					var tidnode4 = nodearraylist3
-					assert tidnode4 isa TId
+					assert tidnode4 isa nullable TId
 					var psignaturenode5 = nodearraylist4
-					assert psignaturenode5 isa PSignature
+					assert psignaturenode5 isa nullable PSignature
 					var pexprnode6 = nodearraylist6
-					assert pexprnode6 isa PExpr
-					var pclosuredeclnode1 = new AClosureDecl.init_aclosuredecl(
+					assert pexprnode6 isa nullable PExpr
+					var pclosuredeclnode1: nullable AClosureDecl = new AClosureDecl.init_aclosuredecl(
 						tkwwithnode2,
 						null,
 						tidnode4,
@@ -13895,7 +13894,7 @@ private class ReduceAction299
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -13905,16 +13904,16 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwwithnode2 = nodearraylist1
-					assert tkwwithnode2 isa TKwwith
+					assert tkwwithnode2 isa nullable TKwwith
 					var tkwbreaknode3 = nodearraylist2
-					assert tkwbreaknode3 isa TKwbreak
+					assert tkwbreaknode3 isa nullable TKwbreak
 					var tidnode4 = nodearraylist4
-					assert tidnode4 isa TId
+					assert tidnode4 isa nullable TId
 					var psignaturenode5 = nodearraylist5
-					assert psignaturenode5 isa PSignature
+					assert psignaturenode5 isa nullable PSignature
 					var pexprnode6 = nodearraylist7
-					assert pexprnode6 isa PExpr
-					var pclosuredeclnode1 = new AClosureDecl.init_aclosuredecl(
+					assert pexprnode6 isa nullable PExpr
+					var pclosuredeclnode1: nullable AClosureDecl = new AClosureDecl.init_aclosuredecl(
 						tkwwithnode2,
 						tkwbreaknode3,
 						tidnode4,
@@ -13930,12 +13929,12 @@ private class ReduceAction300
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var tclassidnode3 = nodearraylist1
-					assert tclassidnode3 isa TClassid
-					var ptypenode1 = new AType.init_atype(
+					assert tclassidnode3 isa nullable TClassid
+					var ptypenode1: nullable AType = new AType.init_atype(
 						null,
 						tclassidnode3,
 						listnode4
@@ -13949,15 +13948,15 @@ private class ReduceAction301
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var tkwnullablenode2 = nodearraylist1
-					assert tkwnullablenode2 isa TKwnullable
+					assert tkwnullablenode2 isa nullable TKwnullable
 					var tclassidnode3 = nodearraylist2
-					assert tclassidnode3 isa TClassid
-					var ptypenode1 = new AType.init_atype(
+					assert tclassidnode3 isa nullable TClassid
+					var ptypenode1: nullable AType = new AType.init_atype(
 						tkwnullablenode2,
 						tclassidnode3,
 						listnode4
@@ -13971,7 +13970,7 @@ private class ReduceAction302
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -13980,17 +13979,17 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var tclassidnode3 = nodearraylist1
-					assert tclassidnode3 isa TClassid
-					var listnode4 = nodearraylist4 
+					assert tclassidnode3 isa nullable TClassid
+					var listnode4 = nodearraylist4
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var ptypenode1 = new AType.init_atype(
+#					end
+					var ptypenode1: nullable AType = new AType.init_atype(
 						null,
 						tclassidnode3,
 						listnode5
@@ -14004,7 +14003,7 @@ private class ReduceAction303
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -14014,19 +14013,19 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var tkwnullablenode2 = nodearraylist1
-					assert tkwnullablenode2 isa TKwnullable
+					assert tkwnullablenode2 isa nullable TKwnullable
 					var tclassidnode3 = nodearraylist2
-					assert tclassidnode3 isa TClassid
-					var listnode4 = nodearraylist5 
+					assert tclassidnode3 isa nullable TClassid
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var ptypenode1 = new AType.init_atype(
+#					end
+					var ptypenode1: nullable AType = new AType.init_atype(
 						tkwnullablenode2,
 						tclassidnode3,
 						listnode5
@@ -14040,11 +14039,11 @@ private class ReduceAction304
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var ptypenode1 = nodearraylist1
-					assert ptypenode1 isa PType
+					assert ptypenode1 isa nullable PType
 					if ptypenode1 != null then
 						listnode2.add(ptypenode1)
 					end
@@ -14057,24 +14056,24 @@ private class ReduceAction305
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var ptypenode1 = nodearraylist1
-					assert ptypenode1 isa PType
-					var listnode2 = nodearraylist2 
+					assert ptypenode1 isa nullable PType
+					var listnode2 = nodearraylist2
 					assert listnode2 isa Array[Object]
 					if ptypenode1 != null then
 						listnode3.add(ptypenode1)
 					end
-					if listnode2 != null then
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
+#					end
 					node_list = listnode3
 					p.push(p.go_to(23), node_list)
 	end
@@ -14084,12 +14083,12 @@ private class ReduceAction306
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var ptypenode1 = nodearraylist3
-					assert ptypenode1 isa PType
+					assert ptypenode1 isa nullable PType
 					node_list = ptypenode1
 					p.push(p.go_to(24), node_list)
 	end
@@ -14099,12 +14098,12 @@ private class ReduceAction307
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var ptypenode1 = nodearraylist3
-					assert ptypenode1 isa PType
+					assert ptypenode1 isa nullable PType
 					node_list = ptypenode1
 					p.push(p.go_to(25), node_list)
 	end
@@ -14114,10 +14113,10 @@ private class ReduceAction308
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(26), node_list)
 	end
@@ -14127,18 +14126,18 @@ private class ReduceAction309
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pexprnode2 = nodearraylist2
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					if pexprnode2 != null then
 						listnode3.add(pexprnode2)
 					end
-					var pexprnode1 = new ABlockExpr.init_ablockexpr(
+					var pexprnode1: nullable ABlockExpr = new ABlockExpr.init_ablockexpr(
 						listnode3
 					)
 					node_list = pexprnode1
@@ -14150,7 +14149,7 @@ private class ReduceAction310
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -14158,20 +14157,20 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var pexprnode2 = nodearraylist2
-					assert pexprnode2 isa PExpr
-					var listnode3 = nodearraylist3 
+					assert pexprnode2 isa nullable PExpr
+					var listnode3 = nodearraylist3
 					assert listnode3 isa Array[Object]
 					if pexprnode2 != null then
 						listnode4.add(pexprnode2)
 					end
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
-					var pexprnode1 = new ABlockExpr.init_ablockexpr(
+#					end
+					var pexprnode1: nullable ABlockExpr = new ABlockExpr.init_ablockexpr(
 						listnode4
 					)
 					node_list = pexprnode1
@@ -14183,11 +14182,11 @@ private class ReduceAction311
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
-					var pexprnode1 = new ABlockExpr.init_ablockexpr(
+					var pexprnode1: nullable ABlockExpr = new ABlockExpr.init_ablockexpr(
 						listnode2
 					)
 					node_list = pexprnode1
@@ -14199,10 +14198,10 @@ private class ReduceAction312
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
-					var pexprnode1 = new ABlockExpr.init_ablockexpr(
+					var pexprnode1: nullable ABlockExpr = new ABlockExpr.init_ablockexpr(
 						listnode2
 					)
 					node_list = pexprnode1
@@ -14214,11 +14213,11 @@ private class ReduceAction313
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist2
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(27), node_list)
 	end
@@ -14228,10 +14227,10 @@ private class ReduceAction314
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(28), node_list)
 	end
@@ -14241,10 +14240,10 @@ private class ReduceAction315
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(28), node_list)
 	end
@@ -14254,11 +14253,11 @@ private class ReduceAction316
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwreturnnode2 = nodearraylist1
-					assert tkwreturnnode2 isa TKwreturn
-					var pexprnode1 = new AReturnExpr.init_areturnexpr(
+					assert tkwreturnnode2 isa nullable TKwreturn
+					var pexprnode1: nullable AReturnExpr = new AReturnExpr.init_areturnexpr(
 						tkwreturnnode2,
 						null
 					)
@@ -14271,14 +14270,14 @@ private class ReduceAction317
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwreturnnode2 = nodearraylist1
-					assert tkwreturnnode2 isa TKwreturn
+					assert tkwreturnnode2 isa nullable TKwreturn
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AReturnExpr.init_areturnexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AReturnExpr = new AReturnExpr.init_areturnexpr(
 						tkwreturnnode2,
 						pexprnode3
 					)
@@ -14291,11 +14290,11 @@ private class ReduceAction318
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwbreaknode2 = nodearraylist1
-					assert tkwbreaknode2 isa TKwbreak
-					var pexprnode1 = new ABreakExpr.init_abreakexpr(
+					assert tkwbreaknode2 isa nullable TKwbreak
+					var pexprnode1: nullable ABreakExpr = new ABreakExpr.init_abreakexpr(
 						tkwbreaknode2,
 						null
 					)
@@ -14308,14 +14307,14 @@ private class ReduceAction319
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwbreaknode2 = nodearraylist1
-					assert tkwbreaknode2 isa TKwbreak
+					assert tkwbreaknode2 isa nullable TKwbreak
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ABreakExpr.init_abreakexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ABreakExpr = new ABreakExpr.init_abreakexpr(
 						tkwbreaknode2,
 						pexprnode3
 					)
@@ -14328,11 +14327,11 @@ private class ReduceAction320
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwabortnode2 = nodearraylist1
-					assert tkwabortnode2 isa TKwabort
-					var pexprnode1 = new AAbortExpr.init_aabortexpr(
+					assert tkwabortnode2 isa nullable TKwabort
+					var pexprnode1: nullable AAbortExpr = new AAbortExpr.init_aabortexpr(
 						tkwabortnode2
 					)
 					node_list = pexprnode1
@@ -14344,11 +14343,11 @@ private class ReduceAction321
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwcontinuenode2 = nodearraylist1
-					assert tkwcontinuenode2 isa TKwcontinue
-					var pexprnode1 = new AContinueExpr.init_acontinueexpr(
+					assert tkwcontinuenode2 isa nullable TKwcontinue
+					var pexprnode1: nullable AContinueExpr = new AContinueExpr.init_acontinueexpr(
 						tkwcontinuenode2,
 						null
 					)
@@ -14361,14 +14360,14 @@ private class ReduceAction322
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwcontinuenode2 = nodearraylist1
-					assert tkwcontinuenode2 isa TKwcontinue
+					assert tkwcontinuenode2 isa nullable TKwcontinue
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AContinueExpr.init_acontinueexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AContinueExpr = new AContinueExpr.init_acontinueexpr(
 						tkwcontinuenode2,
 						pexprnode3
 					)
@@ -14381,10 +14380,10 @@ private class ReduceAction323
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(28), node_list)
 	end
@@ -14394,10 +14393,10 @@ private class ReduceAction324
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(28), node_list)
 	end
@@ -14407,10 +14406,10 @@ private class ReduceAction325
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(28), node_list)
 	end
@@ -14420,10 +14419,10 @@ private class ReduceAction326
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(28), node_list)
 	end
@@ -14433,10 +14432,10 @@ private class ReduceAction327
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(28), node_list)
 	end
@@ -14446,7 +14445,7 @@ private class ReduceAction328
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -14455,19 +14454,19 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist4
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist5 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -14482,25 +14481,25 @@ private class ReduceAction329
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var listnode6 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist2 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -14515,7 +14514,7 @@ private class ReduceAction330
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -14525,28 +14524,28 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist4
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist5 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist6 
+#					end
+					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -14561,35 +14560,35 @@ private class ReduceAction331
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist2 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist3 
+#					end
+					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -14604,22 +14603,22 @@ private class ReduceAction332
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var tkwsupernode3 = nodearraylist1
-					assert tkwsupernode3 isa TKwsuper
-					var listnode4 = nodearraylist2 
+					assert tkwsupernode3 isa nullable TKwsuper
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ASuperExpr.init_asuperexpr(
+#					end
+					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						null,
 						tkwsupernode3,
 						listnode5
@@ -14633,25 +14632,25 @@ private class ReduceAction333
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pqualifiednode2 = nodearraylist1
-					assert pqualifiednode2 isa PQualified
+					assert pqualifiednode2 isa nullable PQualified
 					var tkwsupernode3 = nodearraylist2
-					assert tkwsupernode3 isa TKwsuper
-					var listnode4 = nodearraylist3 
+					assert tkwsupernode3 isa nullable TKwsuper
+					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ASuperExpr.init_asuperexpr(
+#					end
+					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						pqualifiednode2,
 						tkwsupernode3,
 						listnode5
@@ -14665,7 +14664,7 @@ private class ReduceAction334
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -14673,19 +14672,19 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tkwinitnode3 = nodearraylist4
-					assert tkwinitnode3 isa TKwinit
-					var listnode4 = nodearraylist5 
+					assert tkwinitnode3 isa nullable TKwinit
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new AInitExpr.init_ainitexpr(
+#					end
+					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
 						listnode5
@@ -14699,24 +14698,24 @@ private class ReduceAction335
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tkwinitnode3 = nodearraylist1
-					assert tkwinitnode3 isa TKwinit
-					var listnode4 = nodearraylist2 
+					assert tkwinitnode3 isa nullable TKwinit
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new AInitExpr.init_ainitexpr(
+#					end
+					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
 						listnode5
@@ -14730,11 +14729,11 @@ private class ReduceAction336
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pclosuredefnode1 = nodearraylist1
-					assert pclosuredefnode1 isa PClosureDef
+					assert pclosuredefnode1 isa nullable PClosureDef
 					if pclosuredefnode1 != null then
 						listnode2.add(pclosuredefnode1)
 					end
@@ -14747,24 +14746,24 @@ private class ReduceAction337
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pclosuredefnode1 = nodearraylist1
-					assert pclosuredefnode1 isa PClosureDef
-					var listnode2 = nodearraylist2 
+					assert pclosuredefnode1 isa nullable PClosureDef
+					var listnode2 = nodearraylist2
 					assert listnode2 isa Array[Object]
 					if pclosuredefnode1 != null then
 						listnode3.add(pclosuredefnode1)
 					end
-					if listnode2 != null then
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
+#					end
 					node_list = listnode3
 					p.push(p.go_to(29), node_list)
 	end
@@ -14774,18 +14773,18 @@ private class ReduceAction338
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var tkwwithnode2 = nodearraylist1
-					assert tkwwithnode2 isa TKwwith
+					assert tkwwithnode2 isa nullable TKwwith
 					var tkwdonode4 = nodearraylist2
-					assert tkwdonode4 isa TKwdo
+					assert tkwdonode4 isa nullable TKwdo
 					var pexprnode5 = nodearraylist3
-					assert pexprnode5 isa PExpr
-					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+					assert pexprnode5 isa nullable PExpr
+					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
 						tkwwithnode2,
 						listnode3,
 						tkwdonode4,
@@ -14800,28 +14799,28 @@ private class ReduceAction339
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var tkwwithnode2 = nodearraylist1
-					assert tkwwithnode2 isa TKwwith
-					var listnode3 = nodearraylist2 
+					assert tkwwithnode2 isa nullable TKwwith
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
+#					end
 					var tkwdonode5 = nodearraylist3
-					assert tkwdonode5 isa TKwdo
+					assert tkwdonode5 isa nullable TKwdo
 					var pexprnode6 = nodearraylist4
-					assert pexprnode6 isa PExpr
-					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+					assert pexprnode6 isa nullable PExpr
+					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
 						tkwwithnode2,
 						listnode4,
 						tkwdonode5,
@@ -14836,7 +14835,7 @@ private class ReduceAction340
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -14844,19 +14843,19 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var tkwwithnode2 = nodearraylist1
-					assert tkwwithnode2 isa TKwwith
+					assert tkwwithnode2 isa nullable TKwwith
 					var tkwdonode4 = nodearraylist2
-					assert tkwdonode4 isa TKwdo
+					assert tkwdonode4 isa nullable TKwdo
 					var listnode7 = new Array[Object]
 					var pexprnode6 = nodearraylist4
-					assert pexprnode6 isa PExpr
+					assert pexprnode6 isa nullable PExpr
 					if pexprnode6 != null then
 						listnode7.add(pexprnode6)
 					end
-					var pexprnode5 = new ABlockExpr.init_ablockexpr(
+					var pexprnode5: nullable ABlockExpr = new ABlockExpr.init_ablockexpr(
 						listnode7
 					)
-					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
 						tkwwithnode2,
 						listnode3,
 						tkwdonode4,
@@ -14871,7 +14870,7 @@ private class ReduceAction341
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -14880,28 +14879,28 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var tkwwithnode2 = nodearraylist1
-					assert tkwwithnode2 isa TKwwith
+					assert tkwwithnode2 isa nullable TKwwith
 					var tkwdonode4 = nodearraylist2
-					assert tkwdonode4 isa TKwdo
+					assert tkwdonode4 isa nullable TKwdo
 					var listnode8 = new Array[Object]
 					var pexprnode6 = nodearraylist4
-					assert pexprnode6 isa PExpr
-					var listnode7 = nodearraylist5 
+					assert pexprnode6 isa nullable PExpr
+					var listnode7 = nodearraylist5
 					assert listnode7 isa Array[Object]
 					if pexprnode6 != null then
 						listnode8.add(pexprnode6)
 					end
-					if listnode7 != null then
+#					if listnode7 != null then
 						if listnode8.is_empty then
 							listnode8 = listnode7
 						else
 							listnode8.append(listnode7)
 						end
-					end
-					var pexprnode5 = new ABlockExpr.init_ablockexpr(
+#					end
+					var pexprnode5: nullable ABlockExpr = new ABlockExpr.init_ablockexpr(
 						listnode8
 					)
-					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
 						tkwwithnode2,
 						listnode3,
 						tkwdonode4,
@@ -14916,7 +14915,7 @@ private class ReduceAction342
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -14925,28 +14924,28 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var tkwwithnode2 = nodearraylist1
-					assert tkwwithnode2 isa TKwwith
-					var listnode3 = nodearraylist2 
+					assert tkwwithnode2 isa nullable TKwwith
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
+#					end
 					var tkwdonode5 = nodearraylist3
-					assert tkwdonode5 isa TKwdo
+					assert tkwdonode5 isa nullable TKwdo
 					var listnode8 = new Array[Object]
 					var pexprnode7 = nodearraylist5
-					assert pexprnode7 isa PExpr
+					assert pexprnode7 isa nullable PExpr
 					if pexprnode7 != null then
 						listnode8.add(pexprnode7)
 					end
-					var pexprnode6 = new ABlockExpr.init_ablockexpr(
+					var pexprnode6: nullable ABlockExpr = new ABlockExpr.init_ablockexpr(
 						listnode8
 					)
-					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
 						tkwwithnode2,
 						listnode4,
 						tkwdonode5,
@@ -14961,7 +14960,7 @@ private class ReduceAction343
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -14971,37 +14970,37 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var tkwwithnode2 = nodearraylist1
-					assert tkwwithnode2 isa TKwwith
-					var listnode3 = nodearraylist2 
+					assert tkwwithnode2 isa nullable TKwwith
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
+#					end
 					var tkwdonode5 = nodearraylist3
-					assert tkwdonode5 isa TKwdo
+					assert tkwdonode5 isa nullable TKwdo
 					var listnode9 = new Array[Object]
 					var pexprnode7 = nodearraylist5
-					assert pexprnode7 isa PExpr
-					var listnode8 = nodearraylist6 
+					assert pexprnode7 isa nullable PExpr
+					var listnode8 = nodearraylist6
 					assert listnode8 isa Array[Object]
 					if pexprnode7 != null then
 						listnode9.add(pexprnode7)
 					end
-					if listnode8 != null then
+#					if listnode8 != null then
 						if listnode9.is_empty then
 							listnode9 = listnode8
 						else
 							listnode9.append(listnode8)
 						end
-					end
-					var pexprnode6 = new ABlockExpr.init_ablockexpr(
+#					end
+					var pexprnode6: nullable ABlockExpr = new ABlockExpr.init_ablockexpr(
 						listnode9
 					)
-					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
 						tkwwithnode2,
 						listnode4,
 						tkwdonode5,
@@ -15016,16 +15015,16 @@ private class ReduceAction344
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var tkwwithnode2 = nodearraylist1
-					assert tkwwithnode2 isa TKwwith
+					assert tkwwithnode2 isa nullable TKwwith
 					var tkwdonode4 = nodearraylist2
-					assert tkwdonode4 isa TKwdo
-					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+					assert tkwdonode4 isa nullable TKwdo
+					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
 						tkwwithnode2,
 						listnode3,
 						tkwdonode4,
@@ -15040,26 +15039,26 @@ private class ReduceAction345
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var tkwwithnode2 = nodearraylist1
-					assert tkwwithnode2 isa TKwwith
-					var listnode3 = nodearraylist2 
+					assert tkwwithnode2 isa nullable TKwwith
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
+#					end
 					var tkwdonode5 = nodearraylist3
-					assert tkwdonode5 isa TKwdo
-					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+					assert tkwdonode5 isa nullable TKwdo
+					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
 						tkwwithnode2,
 						listnode4,
 						tkwdonode5,
@@ -15074,14 +15073,14 @@ private class ReduceAction346
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwvarnode2 = nodearraylist1
-					assert tkwvarnode2 isa TKwvar
+					assert tkwvarnode2 isa nullable TKwvar
 					var tidnode3 = nodearraylist2
-					assert tidnode3 isa TId
-					var pexprnode1 = new AVardeclExpr.init_avardeclexpr(
+					assert tidnode3 isa nullable TId
+					var pexprnode1: nullable AVardeclExpr = new AVardeclExpr.init_avardeclexpr(
 						tkwvarnode2,
 						tidnode3,
 						null,
@@ -15097,17 +15096,17 @@ private class ReduceAction347
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwvarnode2 = nodearraylist1
-					assert tkwvarnode2 isa TKwvar
+					assert tkwvarnode2 isa nullable TKwvar
 					var tidnode3 = nodearraylist2
-					assert tidnode3 isa TId
+					assert tidnode3 isa nullable TId
 					var ptypenode4 = nodearraylist3
-					assert ptypenode4 isa PType
-					var pexprnode1 = new AVardeclExpr.init_avardeclexpr(
+					assert ptypenode4 isa nullable PType
+					var pexprnode1: nullable AVardeclExpr = new AVardeclExpr.init_avardeclexpr(
 						tkwvarnode2,
 						tidnode3,
 						ptypenode4,
@@ -15123,21 +15122,21 @@ private class ReduceAction348
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwvarnode2 = nodearraylist1
-					assert tkwvarnode2 isa TKwvar
+					assert tkwvarnode2 isa nullable TKwvar
 					var tidnode3 = nodearraylist2
-					assert tidnode3 isa TId
+					assert tidnode3 isa nullable TId
 					var tassignnode5 = nodearraylist3
-					assert tassignnode5 isa TAssign
+					assert tassignnode5 isa nullable TAssign
 					var pexprnode6 = nodearraylist5
-					assert pexprnode6 isa PExpr
-					var pexprnode1 = new AVardeclExpr.init_avardeclexpr(
+					assert pexprnode6 isa nullable PExpr
+					var pexprnode1: nullable AVardeclExpr = new AVardeclExpr.init_avardeclexpr(
 						tkwvarnode2,
 						tidnode3,
 						null,
@@ -15153,7 +15152,7 @@ private class ReduceAction349
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -15161,16 +15160,16 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwvarnode2 = nodearraylist1
-					assert tkwvarnode2 isa TKwvar
+					assert tkwvarnode2 isa nullable TKwvar
 					var tidnode3 = nodearraylist2
-					assert tidnode3 isa TId
+					assert tidnode3 isa nullable TId
 					var ptypenode4 = nodearraylist3
-					assert ptypenode4 isa PType
+					assert ptypenode4 isa nullable PType
 					var tassignnode5 = nodearraylist4
-					assert tassignnode5 isa TAssign
+					assert tassignnode5 isa nullable TAssign
 					var pexprnode6 = nodearraylist6
-					assert pexprnode6 isa PExpr
-					var pexprnode1 = new AVardeclExpr.init_avardeclexpr(
+					assert pexprnode6 isa nullable PExpr
+					var pexprnode1: nullable AVardeclExpr = new AVardeclExpr.init_avardeclexpr(
 						tkwvarnode2,
 						tidnode3,
 						ptypenode4,
@@ -15186,7 +15185,7 @@ private class ReduceAction350
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -15194,14 +15193,14 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tattridnode3 = nodearraylist4
-					assert tattridnode3 isa TAttrid
+					assert tattridnode3 isa nullable TAttrid
 					var tassignnode4 = nodearraylist5
-					assert tassignnode4 isa TAssign
+					assert tassignnode4 isa nullable TAssign
 					var pexprnode5 = nodearraylist6
-					assert pexprnode5 isa PExpr
-					var pexprnode1 = new AAttrAssignExpr.init_aattrassignexpr(
+					assert pexprnode5 isa nullable PExpr
+					var pexprnode1: nullable AAttrAssignExpr = new AAttrAssignExpr.init_aattrassignexpr(
 						pexprnode2,
 						tattridnode3,
 						tassignnode4,
@@ -15216,19 +15215,19 @@ private class ReduceAction351
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tattridnode3 = nodearraylist1
-					assert tattridnode3 isa TAttrid
+					assert tattridnode3 isa nullable TAttrid
 					var tassignnode4 = nodearraylist2
-					assert tassignnode4 isa TAssign
+					assert tassignnode4 isa nullable TAssign
 					var pexprnode5 = nodearraylist3
-					assert pexprnode5 isa PExpr
-					var pexprnode1 = new AAttrAssignExpr.init_aattrassignexpr(
+					assert pexprnode5 isa nullable PExpr
+					var pexprnode1: nullable AAttrAssignExpr = new AAttrAssignExpr.init_aattrassignexpr(
 						pexprnode2,
 						tattridnode3,
 						tassignnode4,
@@ -15243,7 +15242,7 @@ private class ReduceAction352
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -15253,23 +15252,23 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist4
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist5 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
+#					end
 					var tassignnode6 = nodearraylist6
-					assert tassignnode6 isa TAssign
+					assert tassignnode6 isa nullable TAssign
 					var pexprnode7 = nodearraylist7
-					assert pexprnode7 isa PExpr
-					var pexprnode1 = new ACallAssignExpr.init_acallassignexpr(
+					assert pexprnode7 isa nullable PExpr
+					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -15285,30 +15284,30 @@ private class ReduceAction353
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist2 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
+#					end
 					var tassignnode6 = nodearraylist3
-					assert tassignnode6 isa TAssign
+					assert tassignnode6 isa nullable TAssign
 					var pexprnode7 = nodearraylist4
-					assert pexprnode7 isa PExpr
-					var pexprnode1 = new ACallAssignExpr.init_acallassignexpr(
+					assert pexprnode7 isa nullable PExpr
+					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -15324,28 +15323,28 @@ private class ReduceAction354
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
-					var listnode3 = nodearraylist2 
+					assert pexprnode2 isa nullable PExpr
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
+#					end
 					var tassignnode5 = nodearraylist3
-					assert tassignnode5 isa TAssign
+					assert tassignnode5 isa nullable TAssign
 					var pexprnode6 = nodearraylist4
-					assert pexprnode6 isa PExpr
-					var pexprnode1 = new ABraAssignExpr.init_abraassignexpr(
+					assert pexprnode6 isa nullable PExpr
+					var pexprnode1: nullable ABraAssignExpr = new ABraAssignExpr.init_abraassignexpr(
 						pexprnode2,
 						listnode4,
 						tassignnode5,
@@ -15360,7 +15359,7 @@ private class ReduceAction355
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -15368,14 +15367,14 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tattridnode3 = nodearraylist4
-					assert tattridnode3 isa TAttrid
+					assert tattridnode3 isa nullable TAttrid
 					var passignopnode4 = nodearraylist5
-					assert passignopnode4 isa PAssignOp
+					assert passignopnode4 isa nullable PAssignOp
 					var pexprnode5 = nodearraylist6
-					assert pexprnode5 isa PExpr
-					var pexprnode1 = new AAttrReassignExpr.init_aattrreassignexpr(
+					assert pexprnode5 isa nullable PExpr
+					var pexprnode1: nullable AAttrReassignExpr = new AAttrReassignExpr.init_aattrreassignexpr(
 						pexprnode2,
 						tattridnode3,
 						passignopnode4,
@@ -15390,19 +15389,19 @@ private class ReduceAction356
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tattridnode3 = nodearraylist1
-					assert tattridnode3 isa TAttrid
+					assert tattridnode3 isa nullable TAttrid
 					var passignopnode4 = nodearraylist2
-					assert passignopnode4 isa PAssignOp
+					assert passignopnode4 isa nullable PAssignOp
 					var pexprnode5 = nodearraylist3
-					assert pexprnode5 isa PExpr
-					var pexprnode1 = new AAttrReassignExpr.init_aattrreassignexpr(
+					assert pexprnode5 isa nullable PExpr
+					var pexprnode1: nullable AAttrReassignExpr = new AAttrReassignExpr.init_aattrreassignexpr(
 						pexprnode2,
 						tattridnode3,
 						passignopnode4,
@@ -15417,7 +15416,7 @@ private class ReduceAction357
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -15427,23 +15426,23 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist4
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist5 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
+#					end
 					var passignopnode6 = nodearraylist6
-					assert passignopnode6 isa PAssignOp
+					assert passignopnode6 isa nullable PAssignOp
 					var pexprnode7 = nodearraylist7
-					assert pexprnode7 isa PExpr
-					var pexprnode1 = new ACallReassignExpr.init_acallreassignexpr(
+					assert pexprnode7 isa nullable PExpr
+					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -15459,30 +15458,30 @@ private class ReduceAction358
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist2 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
+#					end
 					var passignopnode6 = nodearraylist3
-					assert passignopnode6 isa PAssignOp
+					assert passignopnode6 isa nullable PAssignOp
 					var pexprnode7 = nodearraylist4
-					assert pexprnode7 isa PExpr
-					var pexprnode1 = new ACallReassignExpr.init_acallreassignexpr(
+					assert pexprnode7 isa nullable PExpr
+					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -15498,28 +15497,28 @@ private class ReduceAction359
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
-					var listnode3 = nodearraylist2 
+					assert pexprnode2 isa nullable PExpr
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
+#					end
 					var passignopnode5 = nodearraylist3
-					assert passignopnode5 isa PAssignOp
+					assert passignopnode5 isa nullable PAssignOp
 					var pexprnode6 = nodearraylist4
-					assert pexprnode6 isa PExpr
-					var pexprnode1 = new ABraReassignExpr.init_abrareassignexpr(
+					assert pexprnode6 isa nullable PExpr
+					var pexprnode1: nullable ABraReassignExpr = new ABraReassignExpr.init_abrareassignexpr(
 						pexprnode2,
 						listnode4,
 						passignopnode5,
@@ -15534,11 +15533,11 @@ private class ReduceAction360
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tpluseqnode2 = nodearraylist1
-					assert tpluseqnode2 isa TPluseq
-					var passignopnode1 = new APlusAssignOp.init_aplusassignop(
+					assert tpluseqnode2 isa nullable TPluseq
+					var passignopnode1: nullable APlusAssignOp = new APlusAssignOp.init_aplusassignop(
 						tpluseqnode2
 					)
 					node_list = passignopnode1
@@ -15550,11 +15549,11 @@ private class ReduceAction361
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tminuseqnode2 = nodearraylist1
-					assert tminuseqnode2 isa TMinuseq
-					var passignopnode1 = new AMinusAssignOp.init_aminusassignop(
+					assert tminuseqnode2 isa nullable TMinuseq
+					var passignopnode1: nullable AMinusAssignOp = new AMinusAssignOp.init_aminusassignop(
 						tminuseqnode2
 					)
 					node_list = passignopnode1
@@ -15566,14 +15565,14 @@ private class ReduceAction362
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwdonode2 = nodearraylist1
-					assert tkwdonode2 isa TKwdo
+					assert tkwdonode2 isa nullable TKwdo
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ADoExpr.init_adoexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ADoExpr = new ADoExpr.init_adoexpr(
 						tkwdonode2,
 						pexprnode3
 					)
@@ -15586,7 +15585,7 @@ private class ReduceAction363
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -15596,14 +15595,14 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwifnode2 = nodearraylist1
-					assert tkwifnode2 isa TKwif
+					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
+					assert pexprnode3 isa nullable PExpr
 					var pexprnode4 = nodearraylist6
-					assert pexprnode4 isa PExpr
+					assert pexprnode4 isa nullable PExpr
 					var pexprnode5 = nodearraylist8
-					assert pexprnode5 isa PExpr
-					var pexprnode1 = new AIfExpr.init_aifexpr(
+					assert pexprnode5 isa nullable PExpr
+					var pexprnode1: nullable AIfExpr = new AIfExpr.init_aifexpr(
 						tkwifnode2,
 						pexprnode3,
 						pexprnode4,
@@ -15618,7 +15617,7 @@ private class ReduceAction364
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -15626,12 +15625,12 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwifnode2 = nodearraylist1
-					assert tkwifnode2 isa TKwif
+					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
+					assert pexprnode3 isa nullable PExpr
 					var pexprnode4 = nodearraylist6
-					assert pexprnode4 isa PExpr
-					var pexprnode1 = new AIfExpr.init_aifexpr(
+					assert pexprnode4 isa nullable PExpr
+					var pexprnode1: nullable AIfExpr = new AIfExpr.init_aifexpr(
 						tkwifnode2,
 						pexprnode3,
 						pexprnode4,
@@ -15646,7 +15645,7 @@ private class ReduceAction365
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -15657,21 +15656,21 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwifnode2 = nodearraylist1
-					assert tkwifnode2 isa TKwif
+					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
+					assert pexprnode3 isa nullable PExpr
 					var listnode6 = new Array[Object]
 					var pexprnode5 = nodearraylist7
-					assert pexprnode5 isa PExpr
+					assert pexprnode5 isa nullable PExpr
 					if pexprnode5 != null then
 						listnode6.add(pexprnode5)
 					end
-					var pexprnode4 = new ABlockExpr.init_ablockexpr(
+					var pexprnode4: nullable ABlockExpr = new ABlockExpr.init_ablockexpr(
 						listnode6
 					)
 					var pexprnode7 = nodearraylist9
-					assert pexprnode7 isa PExpr
-					var pexprnode1 = new AIfExpr.init_aifexpr(
+					assert pexprnode7 isa nullable PExpr
+					var pexprnode1: nullable AIfExpr = new AIfExpr.init_aifexpr(
 						tkwifnode2,
 						pexprnode3,
 						pexprnode4,
@@ -15686,7 +15685,7 @@ private class ReduceAction366
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -15698,30 +15697,30 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwifnode2 = nodearraylist1
-					assert tkwifnode2 isa TKwif
+					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
+					assert pexprnode3 isa nullable PExpr
 					var listnode7 = new Array[Object]
 					var pexprnode5 = nodearraylist7
-					assert pexprnode5 isa PExpr
-					var listnode6 = nodearraylist8 
+					assert pexprnode5 isa nullable PExpr
+					var listnode6 = nodearraylist8
 					assert listnode6 isa Array[Object]
 					if pexprnode5 != null then
 						listnode7.add(pexprnode5)
 					end
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode4 = new ABlockExpr.init_ablockexpr(
+#					end
+					var pexprnode4: nullable ABlockExpr = new ABlockExpr.init_ablockexpr(
 						listnode7
 					)
 					var pexprnode8 = nodearraylist10
-					assert pexprnode8 isa PExpr
-					var pexprnode1 = new AIfExpr.init_aifexpr(
+					assert pexprnode8 isa nullable PExpr
+					var pexprnode1: nullable AIfExpr = new AIfExpr.init_aifexpr(
 						tkwifnode2,
 						pexprnode3,
 						pexprnode4,
@@ -15736,7 +15735,7 @@ private class ReduceAction367
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -15744,12 +15743,12 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwifnode2 = nodearraylist1
-					assert tkwifnode2 isa TKwif
+					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
+					assert pexprnode3 isa nullable PExpr
 					var pexprnode5 = nodearraylist6
-					assert pexprnode5 isa PExpr
-					var pexprnode1 = new AIfExpr.init_aifexpr(
+					assert pexprnode5 isa nullable PExpr
+					var pexprnode1: nullable AIfExpr = new AIfExpr.init_aifexpr(
 						tkwifnode2,
 						pexprnode3,
 						null,
@@ -15764,7 +15763,7 @@ private class ReduceAction368
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -15773,12 +15772,12 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwifnode2 = nodearraylist1
-					assert tkwifnode2 isa TKwif
+					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
+					assert pexprnode3 isa nullable PExpr
 					var pexprnode5 = nodearraylist7
-					assert pexprnode5 isa PExpr
-					var pexprnode1 = new AIfExpr.init_aifexpr(
+					assert pexprnode5 isa nullable PExpr
+					var pexprnode1: nullable AIfExpr = new AIfExpr.init_aifexpr(
 						tkwifnode2,
 						pexprnode3,
 						null,
@@ -15793,11 +15792,11 @@ private class ReduceAction369
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist2
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(37), node_list)
 	end
@@ -15807,7 +15806,7 @@ private class ReduceAction370
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					node_list = null
 					p.push(p.go_to(37), node_list)
@@ -15818,7 +15817,7 @@ private class ReduceAction371
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -15826,14 +15825,14 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwwhilenode2 = nodearraylist1
-					assert tkwwhilenode2 isa TKwwhile
+					assert tkwwhilenode2 isa nullable TKwwhile
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
+					assert pexprnode3 isa nullable PExpr
 					var tkwdonode4 = nodearraylist5
-					assert tkwdonode4 isa TKwdo
+					assert tkwdonode4 isa nullable TKwdo
 					var pexprnode5 = nodearraylist6
-					assert pexprnode5 isa PExpr
-					var pexprnode1 = new AWhileExpr.init_awhileexpr(
+					assert pexprnode5 isa nullable PExpr
+					var pexprnode1: nullable AWhileExpr = new AWhileExpr.init_awhileexpr(
 						tkwwhilenode2,
 						pexprnode3,
 						tkwdonode4,
@@ -15848,7 +15847,7 @@ private class ReduceAction372
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -15860,16 +15859,16 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwfornode2 = nodearraylist1
-					assert tkwfornode2 isa TKwfor
+					assert tkwfornode2 isa nullable TKwfor
 					var tidnode3 = nodearraylist3
-					assert tidnode3 isa TId
+					assert tidnode3 isa nullable TId
 					var pexprnode4 = nodearraylist7
-					assert pexprnode4 isa PExpr
+					assert pexprnode4 isa nullable PExpr
 					var tkwdonode5 = nodearraylist9
-					assert tkwdonode5 isa TKwdo
+					assert tkwdonode5 isa nullable TKwdo
 					var pexprnode6 = nodearraylist10
-					assert pexprnode6 isa PExpr
-					var pexprnode1 = new AForExpr.init_aforexpr(
+					assert pexprnode6 isa nullable PExpr
+					var pexprnode1: nullable AForExpr = new AForExpr.init_aforexpr(
 						tkwfornode2,
 						tidnode3,
 						pexprnode4,
@@ -15885,14 +15884,14 @@ private class ReduceAction373
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwassertnode2 = nodearraylist1
-					assert tkwassertnode2 isa TKwassert
+					assert tkwassertnode2 isa nullable TKwassert
 					var pexprnode4 = nodearraylist2
-					assert pexprnode4 isa PExpr
-					var pexprnode1 = new AAssertExpr.init_aassertexpr(
+					assert pexprnode4 isa nullable PExpr
+					var pexprnode1: nullable AAssertExpr = new AAssertExpr.init_aassertexpr(
 						tkwassertnode2,
 						null,
 						pexprnode4
@@ -15906,17 +15905,17 @@ private class ReduceAction374
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwassertnode2 = nodearraylist1
-					assert tkwassertnode2 isa TKwassert
+					assert tkwassertnode2 isa nullable TKwassert
 					var tidnode3 = nodearraylist2
-					assert tidnode3 isa TId
+					assert tidnode3 isa nullable TId
 					var pexprnode4 = nodearraylist3
-					assert pexprnode4 isa PExpr
-					var pexprnode1 = new AAssertExpr.init_aassertexpr(
+					assert pexprnode4 isa nullable PExpr
+					var pexprnode1: nullable AAssertExpr = new AAssertExpr.init_aassertexpr(
 						tkwassertnode2,
 						tidnode3,
 						pexprnode4
@@ -15930,11 +15929,11 @@ private class ReduceAction375
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tidnode1 = nodearraylist1
-					assert tidnode1 isa TId
+					assert tidnode1 isa nullable TId
 					node_list = tidnode1
 					p.push(p.go_to(41), node_list)
 	end
@@ -15944,10 +15943,10 @@ private class ReduceAction376
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(42), node_list)
 	end
@@ -15957,7 +15956,7 @@ private class ReduceAction377
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -15967,28 +15966,28 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist4
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist5 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist6 
+#					end
+					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -16003,35 +16002,35 @@ private class ReduceAction378
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist2 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist3 
+#					end
+					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -16046,33 +16045,33 @@ private class ReduceAction379
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
-					var listnode3 = nodearraylist2 
+					assert pexprnode2 isa nullable PExpr
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
-					var listnode5 = nodearraylist3 
+#					end
+					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
-					if listnode5 != null then
+#					if listnode5 != null then
 						if listnode6.is_empty then
 							listnode6 = listnode5
 						else
 							listnode6.append(listnode5)
 						end
-					end
-					var pexprnode1 = new ABraExpr.init_abraexpr(
+#					end
+					var pexprnode1: nullable ABraExpr = new ABraExpr.init_abraexpr(
 						pexprnode2,
 						listnode4,
 						listnode6
@@ -16086,10 +16085,10 @@ private class ReduceAction380
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(43), node_list)
 	end
@@ -16099,7 +16098,7 @@ private class ReduceAction381
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -16112,18 +16111,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwifnode2 = nodearraylist1
-					assert tkwifnode2 isa TKwif
+					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
+					assert pexprnode3 isa nullable PExpr
 					var tkwthennode4 = nodearraylist5
-					assert tkwthennode4 isa TKwthen
+					assert tkwthennode4 isa nullable TKwthen
 					var pexprnode5 = nodearraylist7
-					assert pexprnode5 isa PExpr
+					assert pexprnode5 isa nullable PExpr
 					var tkwelsenode6 = nodearraylist9
-					assert tkwelsenode6 isa TKwelse
+					assert tkwelsenode6 isa nullable TKwelse
 					var pexprnode7 = nodearraylist11
-					assert pexprnode7 isa PExpr
-					var pexprnode1 = new AIfexprExpr.init_aifexprexpr(
+					assert pexprnode7 isa nullable PExpr
+					var pexprnode1: nullable AIfexprExpr = new AIfexprExpr.init_aifexprexpr(
 						tkwifnode2,
 						pexprnode3,
 						tkwthennode4,
@@ -16140,10 +16139,10 @@ private class ReduceAction382
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(44), node_list)
 	end
@@ -16153,16 +16152,16 @@ private class ReduceAction383
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AOrExpr.init_aorexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AOrExpr = new AOrExpr.init_aorexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -16175,16 +16174,16 @@ private class ReduceAction384
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AAndExpr.init_aandexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AAndExpr = new AAndExpr.init_aandexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -16197,10 +16196,10 @@ private class ReduceAction385
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(45), node_list)
 	end
@@ -16210,15 +16209,15 @@ private class ReduceAction386
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwnotnode2 = nodearraylist1
-					assert tkwnotnode2 isa TKwnot
+					assert tkwnotnode2 isa nullable TKwnot
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ANotExpr.init_anotexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ANotExpr = new ANotExpr.init_anotexpr(
 						tkwnotnode2,
 						pexprnode3
 					)
@@ -16231,10 +16230,10 @@ private class ReduceAction387
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(46), node_list)
 	end
@@ -16244,16 +16243,16 @@ private class ReduceAction388
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AEqExpr.init_aeqexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AEqExpr = new AEqExpr.init_aeqexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -16266,16 +16265,16 @@ private class ReduceAction389
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AEeExpr.init_aeeexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AEeExpr = new AEeExpr.init_aeeexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -16288,16 +16287,16 @@ private class ReduceAction390
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ANeExpr.init_aneexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ANeExpr = new ANeExpr.init_aneexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -16310,16 +16309,16 @@ private class ReduceAction391
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ALtExpr.init_altexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ALtExpr = new ALtExpr.init_altexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -16332,16 +16331,16 @@ private class ReduceAction392
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ALeExpr.init_aleexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ALeExpr = new ALeExpr.init_aleexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -16354,16 +16353,16 @@ private class ReduceAction393
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AGtExpr.init_agtexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AGtExpr = new AGtExpr.init_agtexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -16376,16 +16375,16 @@ private class ReduceAction394
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AGeExpr.init_ageexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AGeExpr = new AGeExpr.init_ageexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -16398,16 +16397,16 @@ private class ReduceAction395
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AStarshipExpr.init_astarshipexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AStarshipExpr = new AStarshipExpr.init_astarshipexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -16420,16 +16419,16 @@ private class ReduceAction396
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var ptypenode3 = nodearraylist4
-					assert ptypenode3 isa PType
-					var pexprnode1 = new AIsaExpr.init_aisaexpr(
+					assert ptypenode3 isa nullable PType
+					var pexprnode1: nullable AIsaExpr = new AIsaExpr.init_aisaexpr(
 						pexprnode2,
 						ptypenode3
 					)
@@ -16442,10 +16441,10 @@ private class ReduceAction397
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(47), node_list)
 	end
@@ -16455,16 +16454,16 @@ private class ReduceAction398
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new APlusExpr.init_aplusexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable APlusExpr = new APlusExpr.init_aplusexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -16477,16 +16476,16 @@ private class ReduceAction399
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AMinusExpr.init_aminusexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AMinusExpr = new AMinusExpr.init_aminusexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -16499,10 +16498,10 @@ private class ReduceAction400
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(48), node_list)
 	end
@@ -16512,16 +16511,16 @@ private class ReduceAction401
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AStarExpr.init_astarexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AStarExpr = new AStarExpr.init_astarexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -16534,16 +16533,16 @@ private class ReduceAction402
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ASlashExpr.init_aslashexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ASlashExpr = new ASlashExpr.init_aslashexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -16556,16 +16555,16 @@ private class ReduceAction403
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new APercentExpr.init_apercentexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable APercentExpr = new APercentExpr.init_apercentexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -16578,10 +16577,10 @@ private class ReduceAction404
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(49), node_list)
 	end
@@ -16591,15 +16590,15 @@ private class ReduceAction405
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tminusnode2 = nodearraylist1
-					assert tminusnode2 isa TMinus
+					assert tminusnode2 isa nullable TMinus
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AUminusExpr.init_auminusexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AUminusExpr = new AUminusExpr.init_auminusexpr(
 						tminusnode2,
 						pexprnode3
 					)
@@ -16612,15 +16611,15 @@ private class ReduceAction406
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwoncenode2 = nodearraylist1
-					assert tkwoncenode2 isa TKwonce
+					assert tkwoncenode2 isa nullable TKwonce
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AOnceExpr.init_aonceexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AOnceExpr = new AOnceExpr.init_aonceexpr(
 						tkwoncenode2,
 						pexprnode3
 					)
@@ -16633,10 +16632,10 @@ private class ReduceAction407
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(50), node_list)
 	end
@@ -16646,26 +16645,26 @@ private class ReduceAction408
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode6 = new Array[Object]
 					var tkwnewnode2 = nodearraylist1
-					assert tkwnewnode2 isa TKwnew
+					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
-					assert ptypenode3 isa PType
-					var listnode5 = nodearraylist4 
+					assert ptypenode3 isa nullable PType
+					var listnode5 = nodearraylist4
 					assert listnode5 isa Array[Object]
-					if listnode5 != null then
+#					if listnode5 != null then
 						if listnode6.is_empty then
 							listnode6 = listnode5
 						else
 							listnode6.append(listnode5)
 						end
-					end
-					var pexprnode1 = new ANewExpr.init_anewexpr(
+#					end
+					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
 						null,
@@ -16680,19 +16679,19 @@ private class ReduceAction409
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwissetnode2 = nodearraylist1
-					assert tkwissetnode2 isa TKwisset
+					assert tkwissetnode2 isa nullable TKwisset
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa PExpr
+					assert pexprnode3 isa nullable PExpr
 					var tattridnode4 = nodearraylist5
-					assert tattridnode4 isa TAttrid
-					var pexprnode1 = new AIssetAttrExpr.init_aissetattrexpr(
+					assert tattridnode4 isa nullable TAttrid
+					var pexprnode1: nullable AIssetAttrExpr = new AIssetAttrExpr.init_aissetattrexpr(
 						tkwissetnode2,
 						pexprnode3,
 						tattridnode4
@@ -16706,16 +16705,16 @@ private class ReduceAction410
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwissetnode2 = nodearraylist1
-					assert tkwissetnode2 isa TKwisset
-					var pexprnode3 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					assert tkwissetnode2 isa nullable TKwisset
+					var pexprnode3: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tattridnode4 = nodearraylist2
-					assert tattridnode4 isa TAttrid
-					var pexprnode1 = new AIssetAttrExpr.init_aissetattrexpr(
+					assert tattridnode4 isa nullable TAttrid
+					var pexprnode1: nullable AIssetAttrExpr = new AIssetAttrExpr.init_aissetattrexpr(
 						tkwissetnode2,
 						pexprnode3,
 						tattridnode4
@@ -16729,16 +16728,16 @@ private class ReduceAction411
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tattridnode3 = nodearraylist4
-					assert tattridnode3 isa TAttrid
-					var pexprnode1 = new AAttrExpr.init_aattrexpr(
+					assert tattridnode3 isa nullable TAttrid
+					var pexprnode1: nullable AAttrExpr = new AAttrExpr.init_aattrexpr(
 						pexprnode2,
 						tattridnode3
 					)
@@ -16751,13 +16750,13 @@ private class ReduceAction412
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tattridnode3 = nodearraylist1
-					assert tattridnode3 isa TAttrid
-					var pexprnode1 = new AAttrExpr.init_aattrexpr(
+					assert tattridnode3 isa nullable TAttrid
+					var pexprnode1: nullable AAttrExpr = new AAttrExpr.init_aattrexpr(
 						pexprnode2,
 						tattridnode3
 					)
@@ -16770,7 +16769,7 @@ private class ReduceAction413
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -16779,19 +16778,19 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist4
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist5 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -16806,25 +16805,25 @@ private class ReduceAction414
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var listnode6 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist2 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -16839,22 +16838,22 @@ private class ReduceAction415
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var tkwsupernode3 = nodearraylist1
-					assert tkwsupernode3 isa TKwsuper
-					var listnode4 = nodearraylist2 
+					assert tkwsupernode3 isa nullable TKwsuper
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ASuperExpr.init_asuperexpr(
+#					end
+					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						null,
 						tkwsupernode3,
 						listnode5
@@ -16868,25 +16867,25 @@ private class ReduceAction416
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pqualifiednode2 = nodearraylist1
-					assert pqualifiednode2 isa PQualified
+					assert pqualifiednode2 isa nullable PQualified
 					var tkwsupernode3 = nodearraylist2
-					assert tkwsupernode3 isa TKwsuper
-					var listnode4 = nodearraylist3 
+					assert tkwsupernode3 isa nullable TKwsuper
+					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ASuperExpr.init_asuperexpr(
+#					end
+					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						pqualifiednode2,
 						tkwsupernode3,
 						listnode5
@@ -16900,7 +16899,7 @@ private class ReduceAction417
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -16908,19 +16907,19 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tkwinitnode3 = nodearraylist4
-					assert tkwinitnode3 isa TKwinit
-					var listnode4 = nodearraylist5 
+					assert tkwinitnode3 isa nullable TKwinit
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new AInitExpr.init_ainitexpr(
+#					end
+					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
 						listnode5
@@ -16934,24 +16933,24 @@ private class ReduceAction418
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tkwinitnode3 = nodearraylist1
-					assert tkwinitnode3 isa TKwinit
-					var listnode4 = nodearraylist2 
+					assert tkwinitnode3 isa nullable TKwinit
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new AInitExpr.init_ainitexpr(
+#					end
+					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
 						listnode5
@@ -16965,23 +16964,23 @@ private class ReduceAction419
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
-					var listnode3 = nodearraylist2 
+					assert pexprnode2 isa nullable PExpr
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
-					var pexprnode1 = new ABraExpr.init_abraexpr(
+#					end
+					var pexprnode1: nullable ABraExpr = new ABraExpr.init_abraexpr(
 						pexprnode2,
 						listnode4,
 						listnode5
@@ -16995,7 +16994,7 @@ private class ReduceAction420
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -17005,21 +17004,21 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode6 = new Array[Object]
 					var tkwnewnode2 = nodearraylist1
-					assert tkwnewnode2 isa TKwnew
+					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
-					assert ptypenode3 isa PType
+					assert ptypenode3 isa nullable PType
 					var tidnode4 = nodearraylist6
-					assert tidnode4 isa TId
-					var listnode5 = nodearraylist7 
+					assert tidnode4 isa nullable TId
+					var listnode5 = nodearraylist7
 					assert listnode5 isa Array[Object]
-					if listnode5 != null then
+#					if listnode5 != null then
 						if listnode6.is_empty then
 							listnode6 = listnode5
 						else
 							listnode6.append(listnode5)
 						end
-					end
-					var pexprnode1 = new ANewExpr.init_anewexpr(
+#					end
+					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
 						tidnode4,
@@ -17034,7 +17033,7 @@ private class ReduceAction421
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -17045,10 +17044,10 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist3
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist7
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ACrangeExpr.init_acrangeexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ACrangeExpr = new ACrangeExpr.init_acrangeexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -17061,7 +17060,7 @@ private class ReduceAction422
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -17072,10 +17071,10 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist3
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist7
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AOrangeExpr.init_aorangeexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AOrangeExpr = new AOrangeExpr.init_aorangeexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -17088,19 +17087,19 @@ private class ReduceAction423
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode2 = nodearraylist1 
+					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-					if listnode2 != null then
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
-					var pexprnode1 = new AArrayExpr.init_aarrayexpr(
+#					end
+					var pexprnode1: nullable AArrayExpr = new AArrayExpr.init_aarrayexpr(
 						listnode3
 					)
 					node_list = pexprnode1
@@ -17112,11 +17111,11 @@ private class ReduceAction424
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwselfnode2 = nodearraylist1
-					assert tkwselfnode2 isa TKwself
-					var pexprnode1 = new ASelfExpr.init_aselfexpr(
+					assert tkwselfnode2 isa nullable TKwself
+					var pexprnode1: nullable ASelfExpr = new ASelfExpr.init_aselfexpr(
 						tkwselfnode2
 					)
 					node_list = pexprnode1
@@ -17128,11 +17127,11 @@ private class ReduceAction425
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwtruenode2 = nodearraylist1
-					assert tkwtruenode2 isa TKwtrue
-					var pexprnode1 = new ATrueExpr.init_atrueexpr(
+					assert tkwtruenode2 isa nullable TKwtrue
+					var pexprnode1: nullable ATrueExpr = new ATrueExpr.init_atrueexpr(
 						tkwtruenode2
 					)
 					node_list = pexprnode1
@@ -17144,11 +17143,11 @@ private class ReduceAction426
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwfalsenode2 = nodearraylist1
-					assert tkwfalsenode2 isa TKwfalse
-					var pexprnode1 = new AFalseExpr.init_afalseexpr(
+					assert tkwfalsenode2 isa nullable TKwfalse
+					var pexprnode1: nullable AFalseExpr = new AFalseExpr.init_afalseexpr(
 						tkwfalsenode2
 					)
 					node_list = pexprnode1
@@ -17160,11 +17159,11 @@ private class ReduceAction427
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwnullnode2 = nodearraylist1
-					assert tkwnullnode2 isa TKwnull
-					var pexprnode1 = new ANullExpr.init_anullexpr(
+					assert tkwnullnode2 isa nullable TKwnull
+					var pexprnode1: nullable ANullExpr = new ANullExpr.init_anullexpr(
 						tkwnullnode2
 					)
 					node_list = pexprnode1
@@ -17176,11 +17175,11 @@ private class ReduceAction428
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tnumbernode2 = nodearraylist1
-					assert tnumbernode2 isa TNumber
-					var pexprnode1 = new AIntExpr.init_aintexpr(
+					assert tnumbernode2 isa nullable TNumber
+					var pexprnode1: nullable AIntExpr = new AIntExpr.init_aintexpr(
 						tnumbernode2
 					)
 					node_list = pexprnode1
@@ -17192,11 +17191,11 @@ private class ReduceAction429
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tfloatnode2 = nodearraylist1
-					assert tfloatnode2 isa TFloat
-					var pexprnode1 = new AFloatExpr.init_afloatexpr(
+					assert tfloatnode2 isa nullable TFloat
+					var pexprnode1: nullable AFloatExpr = new AFloatExpr.init_afloatexpr(
 						tfloatnode2
 					)
 					node_list = pexprnode1
@@ -17208,11 +17207,11 @@ private class ReduceAction430
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tcharnode2 = nodearraylist1
-					assert tcharnode2 isa TChar
-					var pexprnode1 = new ACharExpr.init_acharexpr(
+					assert tcharnode2 isa nullable TChar
+					var pexprnode1: nullable ACharExpr = new ACharExpr.init_acharexpr(
 						tcharnode2
 					)
 					node_list = pexprnode1
@@ -17224,11 +17223,11 @@ private class ReduceAction431
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tstringnode2 = nodearraylist1
-					assert tstringnode2 isa TString
-					var pexprnode1 = new AStringExpr.init_astringexpr(
+					assert tstringnode2 isa nullable TString
+					var pexprnode1: nullable AStringExpr = new AStringExpr.init_astringexpr(
 						tstringnode2
 					)
 					node_list = pexprnode1
@@ -17240,10 +17239,10 @@ private class ReduceAction432
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(51), node_list)
 	end
@@ -17253,12 +17252,12 @@ private class ReduceAction433
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist2
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(51), node_list)
 	end
@@ -17268,7 +17267,7 @@ private class ReduceAction434
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -17280,12 +17279,12 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tkwasnode3 = nodearraylist4
-					assert tkwasnode3 isa TKwas
+					assert tkwasnode3 isa nullable TKwas
 					var ptypenode4 = nodearraylist8
-					assert ptypenode4 isa PType
-					var pexprnode1 = new AAsCastExpr.init_aascastexpr(
+					assert ptypenode4 isa nullable PType
+					var pexprnode1: nullable AAsCastExpr = new AAsCastExpr.init_aascastexpr(
 						pexprnode2,
 						tkwasnode3,
 						ptypenode4
@@ -17299,7 +17298,7 @@ private class ReduceAction435
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
@@ -17313,14 +17312,14 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tkwasnode3 = nodearraylist4
-					assert tkwasnode3 isa TKwas
+					assert tkwasnode3 isa nullable TKwas
 					var tkwnotnode4 = nodearraylist8
-					assert tkwnotnode4 isa TKwnot
+					assert tkwnotnode4 isa nullable TKwnot
 					var tkwnullnode5 = nodearraylist10
-					assert tkwnullnode5 isa TKwnull
-					var pexprnode1 = new AAsNotnullExpr.init_aasnotnullexpr(
+					assert tkwnullnode5 isa nullable TKwnull
+					var pexprnode1: nullable AAsNotnullExpr = new AAsNotnullExpr.init_aasnotnullexpr(
 						pexprnode2,
 						tkwasnode3,
 						tkwnotnode4,
@@ -17335,25 +17334,25 @@ private class ReduceAction436
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
-					var listnode2 = nodearraylist1 
+					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa PExpr
-					if listnode2 != null then
+					assert pexprnode3 isa nullable PExpr
+#					if listnode2 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode2
 						else
 							listnode4.append(listnode2)
 						end
-					end
+#					end
 					if pexprnode3 != null then
 						listnode4.add(pexprnode3)
 					end
-					var pexprnode1 = new ASuperstringExpr.init_asuperstringexpr(
+					var pexprnode1: nullable ASuperstringExpr = new ASuperstringExpr.init_asuperstringexpr(
 						listnode4
 					)
 					node_list = pexprnode1
@@ -17365,35 +17364,35 @@ private class ReduceAction437
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
-					var listnode2 = nodearraylist1 
+					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-					var listnode3 = nodearraylist2 
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
 					var pexprnode4 = nodearraylist3
-					assert pexprnode4 isa PExpr
-					if listnode2 != null then
+					assert pexprnode4 isa nullable PExpr
+#					if listnode2 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode2
 						else
 							listnode5.append(listnode2)
 						end
-					end
-					if listnode3 != null then
+#					end
+#					if listnode3 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode3
 						else
 							listnode5.append(listnode3)
 						end
-					end
+#					end
 					if pexprnode4 != null then
 						listnode5.add(pexprnode4)
 					end
-					var pexprnode1 = new ASuperstringExpr.init_asuperstringexpr(
+					var pexprnode1: nullable ASuperstringExpr = new ASuperstringExpr.init_asuperstringexpr(
 						listnode5
 					)
 					node_list = pexprnode1
@@ -17405,16 +17404,16 @@ private class ReduceAction438
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					var pexprnode2 = nodearraylist3
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					if pexprnode1 != null then
 						listnode3.add(pexprnode1)
 					end
@@ -17430,11 +17429,11 @@ private class ReduceAction439
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tstartstringnode2 = nodearraylist1
-					assert tstartstringnode2 isa TStartString
-					var pexprnode1 = new AStartStringExpr.init_astartstringexpr(
+					assert tstartstringnode2 isa nullable TStartString
+					var pexprnode1: nullable AStartStringExpr = new AStartStringExpr.init_astartstringexpr(
 						tstartstringnode2
 					)
 					node_list = pexprnode1
@@ -17446,16 +17445,16 @@ private class ReduceAction440
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					var pexprnode2 = nodearraylist3
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					if pexprnode1 != null then
 						listnode3.add(pexprnode1)
 					end
@@ -17471,11 +17470,11 @@ private class ReduceAction441
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tmidstringnode2 = nodearraylist1
-					assert tmidstringnode2 isa TMidString
-					var pexprnode1 = new AMidStringExpr.init_amidstringexpr(
+					assert tmidstringnode2 isa nullable TMidString
+					var pexprnode1: nullable AMidStringExpr = new AMidStringExpr.init_amidstringexpr(
 						tmidstringnode2
 					)
 					node_list = pexprnode1
@@ -17487,11 +17486,11 @@ private class ReduceAction442
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tendstringnode2 = nodearraylist1
-					assert tendstringnode2 isa TEndString
-					var pexprnode1 = new AEndStringExpr.init_aendstringexpr(
+					assert tendstringnode2 isa nullable TEndString
+					var pexprnode1: nullable AEndStringExpr = new AEndStringExpr.init_aendstringexpr(
 						tendstringnode2
 					)
 					node_list = pexprnode1
@@ -17503,7 +17502,7 @@ private class ReduceAction443
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -17511,7 +17510,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pexprnode1 = nodearraylist3
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					if pexprnode1 != null then
 						listnode2.add(pexprnode1)
 					end
@@ -17524,7 +17523,7 @@ private class ReduceAction444
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -17533,19 +17532,19 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pexprnode1 = nodearraylist3
-					assert pexprnode1 isa PExpr
-					var listnode2 = nodearraylist5 
+					assert pexprnode1 isa nullable PExpr
+					var listnode2 = nodearraylist5
 					assert listnode2 isa Array[Object]
 					if pexprnode1 != null then
 						listnode3.add(pexprnode1)
 					end
-					if listnode2 != null then
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
+#					end
 					node_list = listnode3
 					p.push(p.go_to(58), node_list)
 	end
@@ -17555,7 +17554,7 @@ private class ReduceAction445
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
@@ -17569,7 +17568,7 @@ private class ReduceAction446
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var listnode1 = new Array[Object]
 					node_list = listnode1
 					p.push(p.go_to(58), node_list)
@@ -17580,7 +17579,7 @@ private class ReduceAction447
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -17588,7 +17587,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pexprnode1 = nodearraylist3
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					if pexprnode1 != null then
 						listnode2.add(pexprnode1)
 					end
@@ -17601,7 +17600,7 @@ private class ReduceAction448
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -17610,19 +17609,19 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pexprnode1 = nodearraylist3
-					assert pexprnode1 isa PExpr
-					var listnode2 = nodearraylist5 
+					assert pexprnode1 isa nullable PExpr
+					var listnode2 = nodearraylist5
 					assert listnode2 isa Array[Object]
 					if pexprnode1 != null then
 						listnode3.add(pexprnode1)
 					end
-					if listnode2 != null then
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
+#					end
 					node_list = listnode3
 					p.push(p.go_to(59), node_list)
 	end
@@ -17632,11 +17631,11 @@ private class ReduceAction449
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					if pexprnode1 != null then
 						listnode2.add(pexprnode1)
 					end
@@ -17649,7 +17648,7 @@ private class ReduceAction450
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
@@ -17663,7 +17662,7 @@ private class ReduceAction451
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var listnode1 = new Array[Object]
 					node_list = listnode1
 					p.push(p.go_to(59), node_list)
@@ -17674,7 +17673,7 @@ private class ReduceAction452
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -17682,7 +17681,7 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pexprnode1 = nodearraylist3
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					if pexprnode1 != null then
 						listnode2.add(pexprnode1)
 					end
@@ -17695,7 +17694,7 @@ private class ReduceAction453
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -17704,19 +17703,19 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pexprnode1 = nodearraylist3
-					assert pexprnode1 isa PExpr
-					var listnode2 = nodearraylist5 
+					assert pexprnode1 isa nullable PExpr
+					var listnode2 = nodearraylist5
 					assert listnode2 isa Array[Object]
 					if pexprnode1 != null then
 						listnode3.add(pexprnode1)
 					end
-					if listnode2 != null then
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
+#					end
 					node_list = listnode3
 					p.push(p.go_to(60), node_list)
 	end
@@ -17726,13 +17725,13 @@ private class ReduceAction454
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist3
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(61), node_list)
 	end
@@ -17742,11 +17741,11 @@ private class ReduceAction455
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var tidnode1 = nodearraylist1
-					assert tidnode1 isa TId
+					assert tidnode1 isa nullable TId
 					if tidnode1 != null then
 						listnode2.add(tidnode1)
 					end
@@ -17759,24 +17758,24 @@ private class ReduceAction456
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode1 = nodearraylist1 
+					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var tidnode2 = nodearraylist5
-					assert tidnode2 isa TId
-					if listnode1 != null then
+					assert tidnode2 isa nullable TId
+#					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
 						else
 							listnode3.append(listnode1)
 						end
-					end
+#					end
 					if tidnode2 != null then
 						listnode3.add(tidnode2)
 					end
@@ -17789,12 +17788,12 @@ private class ReduceAction457
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var tclassidnode3 = nodearraylist1
-					assert tclassidnode3 isa TClassid
-					var pqualifiednode1 = new AQualified.init_aqualified(
+					assert tclassidnode3 isa nullable TClassid
+					var pqualifiednode1: nullable AQualified = new AQualified.init_aqualified(
 						listnode2,
 						tclassidnode3
 					)
@@ -17807,22 +17806,22 @@ private class ReduceAction458
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode2 = nodearraylist1 
+					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-					if listnode2 != null then
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
+#					end
 					var tclassidnode4 = nodearraylist2
-					assert tclassidnode4 isa TClassid
-					var pqualifiednode1 = new AQualified.init_aqualified(
+					assert tclassidnode4 isa nullable TClassid
+					var pqualifiednode1: nullable AQualified = new AQualified.init_aqualified(
 						listnode3,
 						tclassidnode4
 					)
@@ -17835,19 +17834,19 @@ private class ReduceAction459
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode2 = nodearraylist1 
+					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-					if listnode2 != null then
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
-					var pqualifiednode1 = new AQualified.init_aqualified(
+#					end
+					var pqualifiednode1: nullable AQualified = new AQualified.init_aqualified(
 						listnode3,
 						null
 					)
@@ -17860,12 +17859,12 @@ private class ReduceAction460
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tidnode1 = nodearraylist1
-					assert tidnode1 isa TId
+					assert tidnode1 isa nullable TId
 					node_list = tidnode1
 					p.push(p.go_to(64), node_list)
 	end
@@ -17875,12 +17874,12 @@ private class ReduceAction461
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tclassidnode1 = nodearraylist1
-					assert tclassidnode1 isa TClassid
+					assert tclassidnode1 isa nullable TClassid
 					node_list = tclassidnode1
 					p.push(p.go_to(65), node_list)
 	end
@@ -17890,7 +17889,7 @@ private class ReduceAction462
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					p.push(p.go_to(66), node_list)
 	end
@@ -17900,7 +17899,7 @@ private class ReduceAction463
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					p.push(p.go_to(66), node_list)
 	end
@@ -17910,19 +17909,19 @@ private class ReduceAction464
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode2 = nodearraylist1 
+					var listnode2 = nodearraylist1
 					assert listnode2 isa Array[Object]
-					if listnode2 != null then
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
-					var pdocnode1 = new ADoc.init_adoc(
+#					end
+					var pdocnode1: nullable ADoc = new ADoc.init_adoc(
 						listnode3
 					)
 					node_list = pdocnode1
@@ -17934,20 +17933,20 @@ private class ReduceAction465
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode2 = nodearraylist2 
+					var listnode2 = nodearraylist2
 					assert listnode2 isa Array[Object]
-					if listnode2 != null then
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
-					var pdocnode1 = new ADoc.init_adoc(
+#					end
+					var pdocnode1: nullable ADoc = new ADoc.init_adoc(
 						listnode3
 					)
 					node_list = pdocnode1
@@ -17959,7 +17958,7 @@ private class ReduceAction466
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					node_list = null
 					p.push(p.go_to(67), node_list)
@@ -17970,7 +17969,7 @@ private class ReduceAction467
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					node_list = null
 					p.push(p.go_to(68), node_list)
 	end
@@ -17980,10 +17979,10 @@ private class ReduceAction468
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pdocnode1 = nodearraylist1
-					assert pdocnode1 isa PDoc
+					assert pdocnode1 isa nullable PDoc
 					node_list = pdocnode1
 					p.push(p.go_to(68), node_list)
 	end
@@ -17993,7 +17992,7 @@ private class ReduceAction469
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					p.push(p.go_to(69), node_list)
@@ -18004,7 +18003,7 @@ private class ReduceAction470
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
@@ -18016,7 +18015,7 @@ private class ReduceAction471
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					p.push(p.go_to(69), node_list)
 	end
@@ -18026,11 +18025,11 @@ private class ReduceAction472
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var ppropdefnode1 = nodearraylist1
-					assert ppropdefnode1 isa PPropdef
+					assert ppropdefnode1 isa nullable PPropdef
 					node_list = ppropdefnode1
 					p.push(p.go_to(70), node_list)
 	end
@@ -18040,7 +18039,7 @@ private class ReduceAction473
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -18049,18 +18048,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist3
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var pexprnode8 = nodearraylist7
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+					assert pexprnode8 isa nullable PExpr
+					var ppropdefnode1: nullable AConcreteMethPropdef = new AConcreteMethPropdef.init_aconcretemethpropdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -18078,7 +18077,7 @@ private class ReduceAction474
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -18088,20 +18087,20 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist4
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var pexprnode8 = nodearraylist8
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+					assert pexprnode8 isa nullable PExpr
+					var ppropdefnode1: nullable AConcreteMethPropdef = new AConcreteMethPropdef.init_aconcretemethpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -18119,7 +18118,7 @@ private class ReduceAction475
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -18129,18 +18128,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist3
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var pexprnode8 = nodearraylist7
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+					assert pexprnode8 isa nullable PExpr
+					var ppropdefnode1: nullable AConcreteMethPropdef = new AConcreteMethPropdef.init_aconcretemethpropdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -18158,7 +18157,7 @@ private class ReduceAction476
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -18169,20 +18168,20 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist4
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var pexprnode8 = nodearraylist8
-					assert pexprnode8 isa PExpr
-					var ppropdefnode1 = new AConcreteMethPropdef.init_aconcretemethpropdef(
+					assert pexprnode8 isa nullable PExpr
+					var ppropdefnode1: nullable AConcreteMethPropdef = new AConcreteMethPropdef.init_aconcretemethpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -18200,7 +18199,7 @@ private class ReduceAction477
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -18209,16 +18208,16 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist3
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
-					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+					assert psignaturenode7 isa nullable PSignature
+					var ppropdefnode1: nullable AExternMethPropdef = new AExternMethPropdef.init_aexternmethpropdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -18236,7 +18235,7 @@ private class ReduceAction478
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -18246,18 +18245,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist4
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
-					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+					assert psignaturenode7 isa nullable PSignature
+					var ppropdefnode1: nullable AExternMethPropdef = new AExternMethPropdef.init_aexternmethpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -18275,7 +18274,7 @@ private class ReduceAction479
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -18285,18 +18284,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var pvisibilitynode4 = nodearraylist2
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist3
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist4
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist5
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var tstringnode8 = nodearraylist8
-					assert tstringnode8 isa TString
-					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+					assert tstringnode8 isa nullable TString
+					var ppropdefnode1: nullable AExternMethPropdef = new AExternMethPropdef.init_aexternmethpropdef(
 						pdocnode2,
 						null,
 						pvisibilitynode4,
@@ -18314,7 +18313,7 @@ private class ReduceAction480
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
@@ -18325,20 +18324,20 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pdocnode2 = nodearraylist1
-					assert pdocnode2 isa PDoc
+					assert pdocnode2 isa nullable PDoc
 					var tkwredefnode3 = nodearraylist2
-					assert tkwredefnode3 isa TKwredef
+					assert tkwredefnode3 isa nullable TKwredef
 					var pvisibilitynode4 = nodearraylist3
-					assert pvisibilitynode4 isa PVisibility
+					assert pvisibilitynode4 isa nullable PVisibility
 					var tkwmethnode5 = nodearraylist4
-					assert tkwmethnode5 isa TKwmeth
+					assert tkwmethnode5 isa nullable TKwmeth
 					var pmethidnode6 = nodearraylist5
-					assert pmethidnode6 isa PMethid
+					assert pmethidnode6 isa nullable PMethid
 					var psignaturenode7 = nodearraylist6
-					assert psignaturenode7 isa PSignature
+					assert psignaturenode7 isa nullable PSignature
 					var tstringnode8 = nodearraylist9
-					assert tstringnode8 isa TString
-					var ppropdefnode1 = new AExternMethPropdef.init_aexternmethpropdef(
+					assert tstringnode8 isa nullable TString
+					var ppropdefnode1: nullable AExternMethPropdef = new AExternMethPropdef.init_aexternmethpropdef(
 						pdocnode2,
 						tkwredefnode3,
 						pvisibilitynode4,
@@ -18356,12 +18355,12 @@ private class ReduceAction481
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var tclassidnode3 = nodearraylist1
-					assert tclassidnode3 isa TClassid
-					var ptypenode1 = new AType.init_atype(
+					assert tclassidnode3 isa nullable TClassid
+					var ptypenode1: nullable AType = new AType.init_atype(
 						null,
 						tclassidnode3,
 						listnode4
@@ -18375,15 +18374,15 @@ private class ReduceAction482
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var tkwnullablenode2 = nodearraylist1
-					assert tkwnullablenode2 isa TKwnullable
+					assert tkwnullablenode2 isa nullable TKwnullable
 					var tclassidnode3 = nodearraylist2
-					assert tclassidnode3 isa TClassid
-					var ptypenode1 = new AType.init_atype(
+					assert tclassidnode3 isa nullable TClassid
+					var ptypenode1: nullable AType = new AType.init_atype(
 						tkwnullablenode2,
 						tclassidnode3,
 						listnode4
@@ -18397,10 +18396,10 @@ private class ReduceAction483
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(73), node_list)
 	end
@@ -18410,7 +18409,7 @@ private class ReduceAction484
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -18420,28 +18419,28 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist4
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist5 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist6 
+#					end
+					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -18456,35 +18455,35 @@ private class ReduceAction485
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist2 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist3 
+#					end
+					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -18499,10 +18498,10 @@ private class ReduceAction486
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(74), node_list)
 	end
@@ -18512,7 +18511,7 @@ private class ReduceAction487
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -18525,18 +18524,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwifnode2 = nodearraylist1
-					assert tkwifnode2 isa TKwif
+					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
+					assert pexprnode3 isa nullable PExpr
 					var tkwthennode4 = nodearraylist5
-					assert tkwthennode4 isa TKwthen
+					assert tkwthennode4 isa nullable TKwthen
 					var pexprnode5 = nodearraylist7
-					assert pexprnode5 isa PExpr
+					assert pexprnode5 isa nullable PExpr
 					var tkwelsenode6 = nodearraylist9
-					assert tkwelsenode6 isa TKwelse
+					assert tkwelsenode6 isa nullable TKwelse
 					var pexprnode7 = nodearraylist11
-					assert pexprnode7 isa PExpr
-					var pexprnode1 = new AIfexprExpr.init_aifexprexpr(
+					assert pexprnode7 isa nullable PExpr
+					var pexprnode1: nullable AIfexprExpr = new AIfexprExpr.init_aifexprexpr(
 						tkwifnode2,
 						pexprnode3,
 						tkwthennode4,
@@ -18553,10 +18552,10 @@ private class ReduceAction488
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(75), node_list)
 	end
@@ -18566,16 +18565,16 @@ private class ReduceAction489
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AOrExpr.init_aorexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AOrExpr = new AOrExpr.init_aorexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -18588,16 +18587,16 @@ private class ReduceAction490
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AAndExpr.init_aandexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AAndExpr = new AAndExpr.init_aandexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -18610,10 +18609,10 @@ private class ReduceAction491
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(76), node_list)
 	end
@@ -18623,15 +18622,15 @@ private class ReduceAction492
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwnotnode2 = nodearraylist1
-					assert tkwnotnode2 isa TKwnot
+					assert tkwnotnode2 isa nullable TKwnot
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ANotExpr.init_anotexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ANotExpr = new ANotExpr.init_anotexpr(
 						tkwnotnode2,
 						pexprnode3
 					)
@@ -18644,10 +18643,10 @@ private class ReduceAction493
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(77), node_list)
 	end
@@ -18657,16 +18656,16 @@ private class ReduceAction494
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AEqExpr.init_aeqexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AEqExpr = new AEqExpr.init_aeqexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -18679,16 +18678,16 @@ private class ReduceAction495
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AEeExpr.init_aeeexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AEeExpr = new AEeExpr.init_aeeexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -18701,16 +18700,16 @@ private class ReduceAction496
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ANeExpr.init_aneexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ANeExpr = new ANeExpr.init_aneexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -18723,16 +18722,16 @@ private class ReduceAction497
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ALtExpr.init_altexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ALtExpr = new ALtExpr.init_altexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -18745,16 +18744,16 @@ private class ReduceAction498
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ALeExpr.init_aleexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ALeExpr = new ALeExpr.init_aleexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -18767,16 +18766,16 @@ private class ReduceAction499
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AGtExpr.init_agtexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AGtExpr = new AGtExpr.init_agtexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -18789,16 +18788,16 @@ private class ReduceAction500
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AGeExpr.init_ageexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AGeExpr = new AGeExpr.init_ageexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -18811,16 +18810,16 @@ private class ReduceAction501
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AStarshipExpr.init_astarshipexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AStarshipExpr = new AStarshipExpr.init_astarshipexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -18833,16 +18832,16 @@ private class ReduceAction502
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var ptypenode3 = nodearraylist4
-					assert ptypenode3 isa PType
-					var pexprnode1 = new AIsaExpr.init_aisaexpr(
+					assert ptypenode3 isa nullable PType
+					var pexprnode1: nullable AIsaExpr = new AIsaExpr.init_aisaexpr(
 						pexprnode2,
 						ptypenode3
 					)
@@ -18855,10 +18854,10 @@ private class ReduceAction503
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(78), node_list)
 	end
@@ -18868,16 +18867,16 @@ private class ReduceAction504
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new APlusExpr.init_aplusexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable APlusExpr = new APlusExpr.init_aplusexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -18890,16 +18889,16 @@ private class ReduceAction505
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AMinusExpr.init_aminusexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AMinusExpr = new AMinusExpr.init_aminusexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -18912,10 +18911,10 @@ private class ReduceAction506
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(79), node_list)
 	end
@@ -18925,16 +18924,16 @@ private class ReduceAction507
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AStarExpr.init_astarexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AStarExpr = new AStarExpr.init_astarexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -18947,16 +18946,16 @@ private class ReduceAction508
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ASlashExpr.init_aslashexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ASlashExpr = new ASlashExpr.init_aslashexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -18969,16 +18968,16 @@ private class ReduceAction509
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new APercentExpr.init_apercentexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable APercentExpr = new APercentExpr.init_apercentexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -18991,10 +18990,10 @@ private class ReduceAction510
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(80), node_list)
 	end
@@ -19004,15 +19003,15 @@ private class ReduceAction511
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tminusnode2 = nodearraylist1
-					assert tminusnode2 isa TMinus
+					assert tminusnode2 isa nullable TMinus
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AUminusExpr.init_auminusexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AUminusExpr = new AUminusExpr.init_auminusexpr(
 						tminusnode2,
 						pexprnode3
 					)
@@ -19025,15 +19024,15 @@ private class ReduceAction512
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwoncenode2 = nodearraylist1
-					assert tkwoncenode2 isa TKwonce
+					assert tkwoncenode2 isa nullable TKwonce
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AOnceExpr.init_aonceexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AOnceExpr = new AOnceExpr.init_aonceexpr(
 						tkwoncenode2,
 						pexprnode3
 					)
@@ -19046,10 +19045,10 @@ private class ReduceAction513
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(81), node_list)
 	end
@@ -19059,26 +19058,26 @@ private class ReduceAction514
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode6 = new Array[Object]
 					var tkwnewnode2 = nodearraylist1
-					assert tkwnewnode2 isa TKwnew
+					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
-					assert ptypenode3 isa PType
-					var listnode5 = nodearraylist4 
+					assert ptypenode3 isa nullable PType
+					var listnode5 = nodearraylist4
 					assert listnode5 isa Array[Object]
-					if listnode5 != null then
+#					if listnode5 != null then
 						if listnode6.is_empty then
 							listnode6 = listnode5
 						else
 							listnode6.append(listnode5)
 						end
-					end
-					var pexprnode1 = new ANewExpr.init_anewexpr(
+#					end
+					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
 						null,
@@ -19093,19 +19092,19 @@ private class ReduceAction515
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwissetnode2 = nodearraylist1
-					assert tkwissetnode2 isa TKwisset
+					assert tkwissetnode2 isa nullable TKwisset
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa PExpr
+					assert pexprnode3 isa nullable PExpr
 					var tattridnode4 = nodearraylist5
-					assert tattridnode4 isa TAttrid
-					var pexprnode1 = new AIssetAttrExpr.init_aissetattrexpr(
+					assert tattridnode4 isa nullable TAttrid
+					var pexprnode1: nullable AIssetAttrExpr = new AIssetAttrExpr.init_aissetattrexpr(
 						tkwissetnode2,
 						pexprnode3,
 						tattridnode4
@@ -19119,16 +19118,16 @@ private class ReduceAction516
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwissetnode2 = nodearraylist1
-					assert tkwissetnode2 isa TKwisset
-					var pexprnode3 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					assert tkwissetnode2 isa nullable TKwisset
+					var pexprnode3: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tattridnode4 = nodearraylist2
-					assert tattridnode4 isa TAttrid
-					var pexprnode1 = new AIssetAttrExpr.init_aissetattrexpr(
+					assert tattridnode4 isa nullable TAttrid
+					var pexprnode1: nullable AIssetAttrExpr = new AIssetAttrExpr.init_aissetattrexpr(
 						tkwissetnode2,
 						pexprnode3,
 						tattridnode4
@@ -19142,16 +19141,16 @@ private class ReduceAction517
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tattridnode3 = nodearraylist4
-					assert tattridnode3 isa TAttrid
-					var pexprnode1 = new AAttrExpr.init_aattrexpr(
+					assert tattridnode3 isa nullable TAttrid
+					var pexprnode1: nullable AAttrExpr = new AAttrExpr.init_aattrexpr(
 						pexprnode2,
 						tattridnode3
 					)
@@ -19164,13 +19163,13 @@ private class ReduceAction518
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tattridnode3 = nodearraylist1
-					assert tattridnode3 isa TAttrid
-					var pexprnode1 = new AAttrExpr.init_aattrexpr(
+					assert tattridnode3 isa nullable TAttrid
+					var pexprnode1: nullable AAttrExpr = new AAttrExpr.init_aattrexpr(
 						pexprnode2,
 						tattridnode3
 					)
@@ -19183,7 +19182,7 @@ private class ReduceAction519
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -19192,19 +19191,19 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist4
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist5 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -19219,25 +19218,25 @@ private class ReduceAction520
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var listnode6 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist2 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -19252,22 +19251,22 @@ private class ReduceAction521
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var tkwsupernode3 = nodearraylist1
-					assert tkwsupernode3 isa TKwsuper
-					var listnode4 = nodearraylist2 
+					assert tkwsupernode3 isa nullable TKwsuper
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ASuperExpr.init_asuperexpr(
+#					end
+					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						null,
 						tkwsupernode3,
 						listnode5
@@ -19281,25 +19280,25 @@ private class ReduceAction522
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pqualifiednode2 = nodearraylist1
-					assert pqualifiednode2 isa PQualified
+					assert pqualifiednode2 isa nullable PQualified
 					var tkwsupernode3 = nodearraylist2
-					assert tkwsupernode3 isa TKwsuper
-					var listnode4 = nodearraylist3 
+					assert tkwsupernode3 isa nullable TKwsuper
+					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ASuperExpr.init_asuperexpr(
+#					end
+					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						pqualifiednode2,
 						tkwsupernode3,
 						listnode5
@@ -19313,7 +19312,7 @@ private class ReduceAction523
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -19321,19 +19320,19 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tkwinitnode3 = nodearraylist4
-					assert tkwinitnode3 isa TKwinit
-					var listnode4 = nodearraylist5 
+					assert tkwinitnode3 isa nullable TKwinit
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new AInitExpr.init_ainitexpr(
+#					end
+					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
 						listnode5
@@ -19347,24 +19346,24 @@ private class ReduceAction524
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tkwinitnode3 = nodearraylist1
-					assert tkwinitnode3 isa TKwinit
-					var listnode4 = nodearraylist2 
+					assert tkwinitnode3 isa nullable TKwinit
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new AInitExpr.init_ainitexpr(
+#					end
+					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
 						listnode5
@@ -19378,7 +19377,7 @@ private class ReduceAction525
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -19388,21 +19387,21 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode6 = new Array[Object]
 					var tkwnewnode2 = nodearraylist1
-					assert tkwnewnode2 isa TKwnew
+					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
-					assert ptypenode3 isa PType
+					assert ptypenode3 isa nullable PType
 					var tidnode4 = nodearraylist6
-					assert tidnode4 isa TId
-					var listnode5 = nodearraylist7 
+					assert tidnode4 isa nullable TId
+					var listnode5 = nodearraylist7
 					assert listnode5 isa Array[Object]
-					if listnode5 != null then
+#					if listnode5 != null then
 						if listnode6.is_empty then
 							listnode6 = listnode5
 						else
 							listnode6.append(listnode5)
 						end
-					end
-					var pexprnode1 = new ANewExpr.init_anewexpr(
+#					end
+					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
 						tidnode4,
@@ -19417,11 +19416,11 @@ private class ReduceAction526
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwselfnode2 = nodearraylist1
-					assert tkwselfnode2 isa TKwself
-					var pexprnode1 = new ASelfExpr.init_aselfexpr(
+					assert tkwselfnode2 isa nullable TKwself
+					var pexprnode1: nullable ASelfExpr = new ASelfExpr.init_aselfexpr(
 						tkwselfnode2
 					)
 					node_list = pexprnode1
@@ -19433,11 +19432,11 @@ private class ReduceAction527
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwtruenode2 = nodearraylist1
-					assert tkwtruenode2 isa TKwtrue
-					var pexprnode1 = new ATrueExpr.init_atrueexpr(
+					assert tkwtruenode2 isa nullable TKwtrue
+					var pexprnode1: nullable ATrueExpr = new ATrueExpr.init_atrueexpr(
 						tkwtruenode2
 					)
 					node_list = pexprnode1
@@ -19449,11 +19448,11 @@ private class ReduceAction528
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwfalsenode2 = nodearraylist1
-					assert tkwfalsenode2 isa TKwfalse
-					var pexprnode1 = new AFalseExpr.init_afalseexpr(
+					assert tkwfalsenode2 isa nullable TKwfalse
+					var pexprnode1: nullable AFalseExpr = new AFalseExpr.init_afalseexpr(
 						tkwfalsenode2
 					)
 					node_list = pexprnode1
@@ -19465,11 +19464,11 @@ private class ReduceAction529
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwnullnode2 = nodearraylist1
-					assert tkwnullnode2 isa TKwnull
-					var pexprnode1 = new ANullExpr.init_anullexpr(
+					assert tkwnullnode2 isa nullable TKwnull
+					var pexprnode1: nullable ANullExpr = new ANullExpr.init_anullexpr(
 						tkwnullnode2
 					)
 					node_list = pexprnode1
@@ -19481,11 +19480,11 @@ private class ReduceAction530
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tnumbernode2 = nodearraylist1
-					assert tnumbernode2 isa TNumber
-					var pexprnode1 = new AIntExpr.init_aintexpr(
+					assert tnumbernode2 isa nullable TNumber
+					var pexprnode1: nullable AIntExpr = new AIntExpr.init_aintexpr(
 						tnumbernode2
 					)
 					node_list = pexprnode1
@@ -19497,11 +19496,11 @@ private class ReduceAction531
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tfloatnode2 = nodearraylist1
-					assert tfloatnode2 isa TFloat
-					var pexprnode1 = new AFloatExpr.init_afloatexpr(
+					assert tfloatnode2 isa nullable TFloat
+					var pexprnode1: nullable AFloatExpr = new AFloatExpr.init_afloatexpr(
 						tfloatnode2
 					)
 					node_list = pexprnode1
@@ -19513,11 +19512,11 @@ private class ReduceAction532
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tcharnode2 = nodearraylist1
-					assert tcharnode2 isa TChar
-					var pexprnode1 = new ACharExpr.init_acharexpr(
+					assert tcharnode2 isa nullable TChar
+					var pexprnode1: nullable ACharExpr = new ACharExpr.init_acharexpr(
 						tcharnode2
 					)
 					node_list = pexprnode1
@@ -19529,11 +19528,11 @@ private class ReduceAction533
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tstringnode2 = nodearraylist1
-					assert tstringnode2 isa TString
-					var pexprnode1 = new AStringExpr.init_astringexpr(
+					assert tstringnode2 isa nullable TString
+					var pexprnode1: nullable AStringExpr = new AStringExpr.init_astringexpr(
 						tstringnode2
 					)
 					node_list = pexprnode1
@@ -19545,10 +19544,10 @@ private class ReduceAction534
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(82), node_list)
 	end
@@ -19558,12 +19557,12 @@ private class ReduceAction535
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist2
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(82), node_list)
 	end
@@ -19573,7 +19572,7 @@ private class ReduceAction536
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -19585,12 +19584,12 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tkwasnode3 = nodearraylist4
-					assert tkwasnode3 isa TKwas
+					assert tkwasnode3 isa nullable TKwas
 					var ptypenode4 = nodearraylist8
-					assert ptypenode4 isa PType
-					var pexprnode1 = new AAsCastExpr.init_aascastexpr(
+					assert ptypenode4 isa nullable PType
+					var pexprnode1: nullable AAsCastExpr = new AAsCastExpr.init_aascastexpr(
 						pexprnode2,
 						tkwasnode3,
 						ptypenode4
@@ -19604,7 +19603,7 @@ private class ReduceAction537
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
@@ -19618,14 +19617,14 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tkwasnode3 = nodearraylist4
-					assert tkwasnode3 isa TKwas
+					assert tkwasnode3 isa nullable TKwas
 					var tkwnotnode4 = nodearraylist8
-					assert tkwnotnode4 isa TKwnot
+					assert tkwnotnode4 isa nullable TKwnot
 					var tkwnullnode5 = nodearraylist10
-					assert tkwnullnode5 isa TKwnull
-					var pexprnode1 = new AAsNotnullExpr.init_aasnotnullexpr(
+					assert tkwnullnode5 isa nullable TKwnull
+					var pexprnode1: nullable AAsNotnullExpr = new AAsNotnullExpr.init_aasnotnullexpr(
 						pexprnode2,
 						tkwasnode3,
 						tkwnotnode4,
@@ -19640,10 +19639,10 @@ private class ReduceAction538
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(83), node_list)
 	end
@@ -19653,18 +19652,18 @@ private class ReduceAction539
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pexprnode2 = nodearraylist2
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					if pexprnode2 != null then
 						listnode3.add(pexprnode2)
 					end
-					var pexprnode1 = new ABlockExpr.init_ablockexpr(
+					var pexprnode1: nullable ABlockExpr = new ABlockExpr.init_ablockexpr(
 						listnode3
 					)
 					node_list = pexprnode1
@@ -19676,7 +19675,7 @@ private class ReduceAction540
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -19684,20 +19683,20 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var pexprnode2 = nodearraylist2
-					assert pexprnode2 isa PExpr
-					var listnode3 = nodearraylist3 
+					assert pexprnode2 isa nullable PExpr
+					var listnode3 = nodearraylist3
 					assert listnode3 isa Array[Object]
 					if pexprnode2 != null then
 						listnode4.add(pexprnode2)
 					end
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
-					var pexprnode1 = new ABlockExpr.init_ablockexpr(
+#					end
+					var pexprnode1: nullable ABlockExpr = new ABlockExpr.init_ablockexpr(
 						listnode4
 					)
 					node_list = pexprnode1
@@ -19709,11 +19708,11 @@ private class ReduceAction541
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
-					var pexprnode1 = new ABlockExpr.init_ablockexpr(
+					var pexprnode1: nullable ABlockExpr = new ABlockExpr.init_ablockexpr(
 						listnode2
 					)
 					node_list = pexprnode1
@@ -19725,10 +19724,10 @@ private class ReduceAction542
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
-					var pexprnode1 = new ABlockExpr.init_ablockexpr(
+					var pexprnode1: nullable ABlockExpr = new ABlockExpr.init_ablockexpr(
 						listnode2
 					)
 					node_list = pexprnode1
@@ -19740,10 +19739,10 @@ private class ReduceAction543
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(84), node_list)
 	end
@@ -19753,10 +19752,10 @@ private class ReduceAction544
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(84), node_list)
 	end
@@ -19766,11 +19765,11 @@ private class ReduceAction545
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwreturnnode2 = nodearraylist1
-					assert tkwreturnnode2 isa TKwreturn
-					var pexprnode1 = new AReturnExpr.init_areturnexpr(
+					assert tkwreturnnode2 isa nullable TKwreturn
+					var pexprnode1: nullable AReturnExpr = new AReturnExpr.init_areturnexpr(
 						tkwreturnnode2,
 						null
 					)
@@ -19783,14 +19782,14 @@ private class ReduceAction546
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwreturnnode2 = nodearraylist1
-					assert tkwreturnnode2 isa TKwreturn
+					assert tkwreturnnode2 isa nullable TKwreturn
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AReturnExpr.init_areturnexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AReturnExpr = new AReturnExpr.init_areturnexpr(
 						tkwreturnnode2,
 						pexprnode3
 					)
@@ -19803,11 +19802,11 @@ private class ReduceAction547
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwbreaknode2 = nodearraylist1
-					assert tkwbreaknode2 isa TKwbreak
-					var pexprnode1 = new ABreakExpr.init_abreakexpr(
+					assert tkwbreaknode2 isa nullable TKwbreak
+					var pexprnode1: nullable ABreakExpr = new ABreakExpr.init_abreakexpr(
 						tkwbreaknode2,
 						null
 					)
@@ -19820,14 +19819,14 @@ private class ReduceAction548
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwbreaknode2 = nodearraylist1
-					assert tkwbreaknode2 isa TKwbreak
+					assert tkwbreaknode2 isa nullable TKwbreak
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ABreakExpr.init_abreakexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ABreakExpr = new ABreakExpr.init_abreakexpr(
 						tkwbreaknode2,
 						pexprnode3
 					)
@@ -19840,11 +19839,11 @@ private class ReduceAction549
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwabortnode2 = nodearraylist1
-					assert tkwabortnode2 isa TKwabort
-					var pexprnode1 = new AAbortExpr.init_aabortexpr(
+					assert tkwabortnode2 isa nullable TKwabort
+					var pexprnode1: nullable AAbortExpr = new AAbortExpr.init_aabortexpr(
 						tkwabortnode2
 					)
 					node_list = pexprnode1
@@ -19856,11 +19855,11 @@ private class ReduceAction550
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwcontinuenode2 = nodearraylist1
-					assert tkwcontinuenode2 isa TKwcontinue
-					var pexprnode1 = new AContinueExpr.init_acontinueexpr(
+					assert tkwcontinuenode2 isa nullable TKwcontinue
+					var pexprnode1: nullable AContinueExpr = new AContinueExpr.init_acontinueexpr(
 						tkwcontinuenode2,
 						null
 					)
@@ -19873,14 +19872,14 @@ private class ReduceAction551
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwcontinuenode2 = nodearraylist1
-					assert tkwcontinuenode2 isa TKwcontinue
+					assert tkwcontinuenode2 isa nullable TKwcontinue
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AContinueExpr.init_acontinueexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AContinueExpr = new AContinueExpr.init_acontinueexpr(
 						tkwcontinuenode2,
 						pexprnode3
 					)
@@ -19893,10 +19892,10 @@ private class ReduceAction552
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(84), node_list)
 	end
@@ -19906,10 +19905,10 @@ private class ReduceAction553
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(84), node_list)
 	end
@@ -19919,10 +19918,10 @@ private class ReduceAction554
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(84), node_list)
 	end
@@ -19932,10 +19931,10 @@ private class ReduceAction555
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(84), node_list)
 	end
@@ -19945,10 +19944,10 @@ private class ReduceAction556
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(84), node_list)
 	end
@@ -19958,7 +19957,7 @@ private class ReduceAction557
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -19967,19 +19966,19 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist4
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist5 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -19994,25 +19993,25 @@ private class ReduceAction558
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var listnode6 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist2 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -20027,7 +20026,7 @@ private class ReduceAction559
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -20037,28 +20036,28 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist4
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist5 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist6 
+#					end
+					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -20073,35 +20072,35 @@ private class ReduceAction560
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist2 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist3 
+#					end
+					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -20116,22 +20115,22 @@ private class ReduceAction561
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var tkwsupernode3 = nodearraylist1
-					assert tkwsupernode3 isa TKwsuper
-					var listnode4 = nodearraylist2 
+					assert tkwsupernode3 isa nullable TKwsuper
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ASuperExpr.init_asuperexpr(
+#					end
+					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						null,
 						tkwsupernode3,
 						listnode5
@@ -20145,25 +20144,25 @@ private class ReduceAction562
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pqualifiednode2 = nodearraylist1
-					assert pqualifiednode2 isa PQualified
+					assert pqualifiednode2 isa nullable PQualified
 					var tkwsupernode3 = nodearraylist2
-					assert tkwsupernode3 isa TKwsuper
-					var listnode4 = nodearraylist3 
+					assert tkwsupernode3 isa nullable TKwsuper
+					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ASuperExpr.init_asuperexpr(
+#					end
+					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						pqualifiednode2,
 						tkwsupernode3,
 						listnode5
@@ -20177,7 +20176,7 @@ private class ReduceAction563
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -20185,19 +20184,19 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tkwinitnode3 = nodearraylist4
-					assert tkwinitnode3 isa TKwinit
-					var listnode4 = nodearraylist5 
+					assert tkwinitnode3 isa nullable TKwinit
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new AInitExpr.init_ainitexpr(
+#					end
+					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
 						listnode5
@@ -20211,24 +20210,24 @@ private class ReduceAction564
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tkwinitnode3 = nodearraylist1
-					assert tkwinitnode3 isa TKwinit
-					var listnode4 = nodearraylist2 
+					assert tkwinitnode3 isa nullable TKwinit
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new AInitExpr.init_ainitexpr(
+#					end
+					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
 						listnode5
@@ -20242,11 +20241,11 @@ private class ReduceAction565
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pclosuredefnode1 = nodearraylist1
-					assert pclosuredefnode1 isa PClosureDef
+					assert pclosuredefnode1 isa nullable PClosureDef
 					if pclosuredefnode1 != null then
 						listnode2.add(pclosuredefnode1)
 					end
@@ -20259,24 +20258,24 @@ private class ReduceAction566
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var pclosuredefnode1 = nodearraylist1
-					assert pclosuredefnode1 isa PClosureDef
-					var listnode2 = nodearraylist2 
+					assert pclosuredefnode1 isa nullable PClosureDef
+					var listnode2 = nodearraylist2
 					assert listnode2 isa Array[Object]
 					if pclosuredefnode1 != null then
 						listnode3.add(pclosuredefnode1)
 					end
-					if listnode2 != null then
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
+#					end
 					node_list = listnode3
 					p.push(p.go_to(85), node_list)
 	end
@@ -20286,18 +20285,18 @@ private class ReduceAction567
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
 					var tkwwithnode2 = nodearraylist1
-					assert tkwwithnode2 isa TKwwith
+					assert tkwwithnode2 isa nullable TKwwith
 					var tkwdonode4 = nodearraylist2
-					assert tkwdonode4 isa TKwdo
+					assert tkwdonode4 isa nullable TKwdo
 					var pexprnode5 = nodearraylist3
-					assert pexprnode5 isa PExpr
-					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+					assert pexprnode5 isa nullable PExpr
+					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
 						tkwwithnode2,
 						listnode3,
 						tkwdonode4,
@@ -20312,28 +20311,28 @@ private class ReduceAction568
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var tkwwithnode2 = nodearraylist1
-					assert tkwwithnode2 isa TKwwith
-					var listnode3 = nodearraylist2 
+					assert tkwwithnode2 isa nullable TKwwith
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
+#					end
 					var tkwdonode5 = nodearraylist3
-					assert tkwdonode5 isa TKwdo
+					assert tkwdonode5 isa nullable TKwdo
 					var pexprnode6 = nodearraylist4
-					assert pexprnode6 isa PExpr
-					var pclosuredefnode1 = new AClosureDef.init_aclosuredef(
+					assert pexprnode6 isa nullable PExpr
+					var pclosuredefnode1: nullable AClosureDef = new AClosureDef.init_aclosuredef(
 						tkwwithnode2,
 						listnode4,
 						tkwdonode5,
@@ -20348,14 +20347,14 @@ private class ReduceAction569
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwvarnode2 = nodearraylist1
-					assert tkwvarnode2 isa TKwvar
+					assert tkwvarnode2 isa nullable TKwvar
 					var tidnode3 = nodearraylist2
-					assert tidnode3 isa TId
-					var pexprnode1 = new AVardeclExpr.init_avardeclexpr(
+					assert tidnode3 isa nullable TId
+					var pexprnode1: nullable AVardeclExpr = new AVardeclExpr.init_avardeclexpr(
 						tkwvarnode2,
 						tidnode3,
 						null,
@@ -20371,17 +20370,17 @@ private class ReduceAction570
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwvarnode2 = nodearraylist1
-					assert tkwvarnode2 isa TKwvar
+					assert tkwvarnode2 isa nullable TKwvar
 					var tidnode3 = nodearraylist2
-					assert tidnode3 isa TId
+					assert tidnode3 isa nullable TId
 					var ptypenode4 = nodearraylist3
-					assert ptypenode4 isa PType
-					var pexprnode1 = new AVardeclExpr.init_avardeclexpr(
+					assert ptypenode4 isa nullable PType
+					var pexprnode1: nullable AVardeclExpr = new AVardeclExpr.init_avardeclexpr(
 						tkwvarnode2,
 						tidnode3,
 						ptypenode4,
@@ -20397,21 +20396,21 @@ private class ReduceAction571
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwvarnode2 = nodearraylist1
-					assert tkwvarnode2 isa TKwvar
+					assert tkwvarnode2 isa nullable TKwvar
 					var tidnode3 = nodearraylist2
-					assert tidnode3 isa TId
+					assert tidnode3 isa nullable TId
 					var tassignnode5 = nodearraylist3
-					assert tassignnode5 isa TAssign
+					assert tassignnode5 isa nullable TAssign
 					var pexprnode6 = nodearraylist5
-					assert pexprnode6 isa PExpr
-					var pexprnode1 = new AVardeclExpr.init_avardeclexpr(
+					assert pexprnode6 isa nullable PExpr
+					var pexprnode1: nullable AVardeclExpr = new AVardeclExpr.init_avardeclexpr(
 						tkwvarnode2,
 						tidnode3,
 						null,
@@ -20427,7 +20426,7 @@ private class ReduceAction572
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -20435,16 +20434,16 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwvarnode2 = nodearraylist1
-					assert tkwvarnode2 isa TKwvar
+					assert tkwvarnode2 isa nullable TKwvar
 					var tidnode3 = nodearraylist2
-					assert tidnode3 isa TId
+					assert tidnode3 isa nullable TId
 					var ptypenode4 = nodearraylist3
-					assert ptypenode4 isa PType
+					assert ptypenode4 isa nullable PType
 					var tassignnode5 = nodearraylist4
-					assert tassignnode5 isa TAssign
+					assert tassignnode5 isa nullable TAssign
 					var pexprnode6 = nodearraylist6
-					assert pexprnode6 isa PExpr
-					var pexprnode1 = new AVardeclExpr.init_avardeclexpr(
+					assert pexprnode6 isa nullable PExpr
+					var pexprnode1: nullable AVardeclExpr = new AVardeclExpr.init_avardeclexpr(
 						tkwvarnode2,
 						tidnode3,
 						ptypenode4,
@@ -20460,7 +20459,7 @@ private class ReduceAction573
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -20468,14 +20467,14 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tattridnode3 = nodearraylist4
-					assert tattridnode3 isa TAttrid
+					assert tattridnode3 isa nullable TAttrid
 					var tassignnode4 = nodearraylist5
-					assert tassignnode4 isa TAssign
+					assert tassignnode4 isa nullable TAssign
 					var pexprnode5 = nodearraylist6
-					assert pexprnode5 isa PExpr
-					var pexprnode1 = new AAttrAssignExpr.init_aattrassignexpr(
+					assert pexprnode5 isa nullable PExpr
+					var pexprnode1: nullable AAttrAssignExpr = new AAttrAssignExpr.init_aattrassignexpr(
 						pexprnode2,
 						tattridnode3,
 						tassignnode4,
@@ -20490,19 +20489,19 @@ private class ReduceAction574
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tattridnode3 = nodearraylist1
-					assert tattridnode3 isa TAttrid
+					assert tattridnode3 isa nullable TAttrid
 					var tassignnode4 = nodearraylist2
-					assert tassignnode4 isa TAssign
+					assert tassignnode4 isa nullable TAssign
 					var pexprnode5 = nodearraylist3
-					assert pexprnode5 isa PExpr
-					var pexprnode1 = new AAttrAssignExpr.init_aattrassignexpr(
+					assert pexprnode5 isa nullable PExpr
+					var pexprnode1: nullable AAttrAssignExpr = new AAttrAssignExpr.init_aattrassignexpr(
 						pexprnode2,
 						tattridnode3,
 						tassignnode4,
@@ -20517,7 +20516,7 @@ private class ReduceAction575
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -20527,23 +20526,23 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist4
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist5 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
+#					end
 					var tassignnode6 = nodearraylist6
-					assert tassignnode6 isa TAssign
+					assert tassignnode6 isa nullable TAssign
 					var pexprnode7 = nodearraylist7
-					assert pexprnode7 isa PExpr
-					var pexprnode1 = new ACallAssignExpr.init_acallassignexpr(
+					assert pexprnode7 isa nullable PExpr
+					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -20559,30 +20558,30 @@ private class ReduceAction576
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist2 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
+#					end
 					var tassignnode6 = nodearraylist3
-					assert tassignnode6 isa TAssign
+					assert tassignnode6 isa nullable TAssign
 					var pexprnode7 = nodearraylist4
-					assert pexprnode7 isa PExpr
-					var pexprnode1 = new ACallAssignExpr.init_acallassignexpr(
+					assert pexprnode7 isa nullable PExpr
+					var pexprnode1: nullable ACallAssignExpr = new ACallAssignExpr.init_acallassignexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -20598,28 +20597,28 @@ private class ReduceAction577
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
-					var listnode3 = nodearraylist2 
+					assert pexprnode2 isa nullable PExpr
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
+#					end
 					var tassignnode5 = nodearraylist3
-					assert tassignnode5 isa TAssign
+					assert tassignnode5 isa nullable TAssign
 					var pexprnode6 = nodearraylist4
-					assert pexprnode6 isa PExpr
-					var pexprnode1 = new ABraAssignExpr.init_abraassignexpr(
+					assert pexprnode6 isa nullable PExpr
+					var pexprnode1: nullable ABraAssignExpr = new ABraAssignExpr.init_abraassignexpr(
 						pexprnode2,
 						listnode4,
 						tassignnode5,
@@ -20634,7 +20633,7 @@ private class ReduceAction578
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -20642,14 +20641,14 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tattridnode3 = nodearraylist4
-					assert tattridnode3 isa TAttrid
+					assert tattridnode3 isa nullable TAttrid
 					var passignopnode4 = nodearraylist5
-					assert passignopnode4 isa PAssignOp
+					assert passignopnode4 isa nullable PAssignOp
 					var pexprnode5 = nodearraylist6
-					assert pexprnode5 isa PExpr
-					var pexprnode1 = new AAttrReassignExpr.init_aattrreassignexpr(
+					assert pexprnode5 isa nullable PExpr
+					var pexprnode1: nullable AAttrReassignExpr = new AAttrReassignExpr.init_aattrreassignexpr(
 						pexprnode2,
 						tattridnode3,
 						passignopnode4,
@@ -20664,19 +20663,19 @@ private class ReduceAction579
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tattridnode3 = nodearraylist1
-					assert tattridnode3 isa TAttrid
+					assert tattridnode3 isa nullable TAttrid
 					var passignopnode4 = nodearraylist2
-					assert passignopnode4 isa PAssignOp
+					assert passignopnode4 isa nullable PAssignOp
 					var pexprnode5 = nodearraylist3
-					assert pexprnode5 isa PExpr
-					var pexprnode1 = new AAttrReassignExpr.init_aattrreassignexpr(
+					assert pexprnode5 isa nullable PExpr
+					var pexprnode1: nullable AAttrReassignExpr = new AAttrReassignExpr.init_aattrreassignexpr(
 						pexprnode2,
 						tattridnode3,
 						passignopnode4,
@@ -20691,7 +20690,7 @@ private class ReduceAction580
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -20701,23 +20700,23 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist4
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist5 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
+#					end
 					var passignopnode6 = nodearraylist6
-					assert passignopnode6 isa PAssignOp
+					assert passignopnode6 isa nullable PAssignOp
 					var pexprnode7 = nodearraylist7
-					assert pexprnode7 isa PExpr
-					var pexprnode1 = new ACallReassignExpr.init_acallreassignexpr(
+					assert pexprnode7 isa nullable PExpr
+					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -20733,30 +20732,30 @@ private class ReduceAction581
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist2 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
+#					end
 					var passignopnode6 = nodearraylist3
-					assert passignopnode6 isa PAssignOp
+					assert passignopnode6 isa nullable PAssignOp
 					var pexprnode7 = nodearraylist4
-					assert pexprnode7 isa PExpr
-					var pexprnode1 = new ACallReassignExpr.init_acallreassignexpr(
+					assert pexprnode7 isa nullable PExpr
+					var pexprnode1: nullable ACallReassignExpr = new ACallReassignExpr.init_acallreassignexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -20772,28 +20771,28 @@ private class ReduceAction582
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
-					var listnode3 = nodearraylist2 
+					assert pexprnode2 isa nullable PExpr
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
+#					end
 					var passignopnode5 = nodearraylist3
-					assert passignopnode5 isa PAssignOp
+					assert passignopnode5 isa nullable PAssignOp
 					var pexprnode6 = nodearraylist4
-					assert pexprnode6 isa PExpr
-					var pexprnode1 = new ABraReassignExpr.init_abrareassignexpr(
+					assert pexprnode6 isa nullable PExpr
+					var pexprnode1: nullable ABraReassignExpr = new ABraReassignExpr.init_abrareassignexpr(
 						pexprnode2,
 						listnode4,
 						passignopnode5,
@@ -20808,14 +20807,14 @@ private class ReduceAction583
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwdonode2 = nodearraylist1
-					assert tkwdonode2 isa TKwdo
+					assert tkwdonode2 isa nullable TKwdo
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ADoExpr.init_adoexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ADoExpr = new ADoExpr.init_adoexpr(
 						tkwdonode2,
 						pexprnode3
 					)
@@ -20828,7 +20827,7 @@ private class ReduceAction584
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist8 = p.pop
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
@@ -20838,14 +20837,14 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwifnode2 = nodearraylist1
-					assert tkwifnode2 isa TKwif
+					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
+					assert pexprnode3 isa nullable PExpr
 					var pexprnode4 = nodearraylist6
-					assert pexprnode4 isa PExpr
+					assert pexprnode4 isa nullable PExpr
 					var pexprnode5 = nodearraylist8
-					assert pexprnode5 isa PExpr
-					var pexprnode1 = new AIfExpr.init_aifexpr(
+					assert pexprnode5 isa nullable PExpr
+					var pexprnode1: nullable AIfExpr = new AIfExpr.init_aifexpr(
 						tkwifnode2,
 						pexprnode3,
 						pexprnode4,
@@ -20860,7 +20859,7 @@ private class ReduceAction585
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -20868,14 +20867,14 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwwhilenode2 = nodearraylist1
-					assert tkwwhilenode2 isa TKwwhile
+					assert tkwwhilenode2 isa nullable TKwwhile
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
+					assert pexprnode3 isa nullable PExpr
 					var tkwdonode4 = nodearraylist5
-					assert tkwdonode4 isa TKwdo
+					assert tkwdonode4 isa nullable TKwdo
 					var pexprnode5 = nodearraylist6
-					assert pexprnode5 isa PExpr
-					var pexprnode1 = new AWhileExpr.init_awhileexpr(
+					assert pexprnode5 isa nullable PExpr
+					var pexprnode1: nullable AWhileExpr = new AWhileExpr.init_awhileexpr(
 						tkwwhilenode2,
 						pexprnode3,
 						tkwdonode4,
@@ -20890,7 +20889,7 @@ private class ReduceAction586
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -20902,16 +20901,16 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwfornode2 = nodearraylist1
-					assert tkwfornode2 isa TKwfor
+					assert tkwfornode2 isa nullable TKwfor
 					var tidnode3 = nodearraylist3
-					assert tidnode3 isa TId
+					assert tidnode3 isa nullable TId
 					var pexprnode4 = nodearraylist7
-					assert pexprnode4 isa PExpr
+					assert pexprnode4 isa nullable PExpr
 					var tkwdonode5 = nodearraylist9
-					assert tkwdonode5 isa TKwdo
+					assert tkwdonode5 isa nullable TKwdo
 					var pexprnode6 = nodearraylist10
-					assert pexprnode6 isa PExpr
-					var pexprnode1 = new AForExpr.init_aforexpr(
+					assert pexprnode6 isa nullable PExpr
+					var pexprnode1: nullable AForExpr = new AForExpr.init_aforexpr(
 						tkwfornode2,
 						tidnode3,
 						pexprnode4,
@@ -20927,14 +20926,14 @@ private class ReduceAction587
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwassertnode2 = nodearraylist1
-					assert tkwassertnode2 isa TKwassert
+					assert tkwassertnode2 isa nullable TKwassert
 					var pexprnode4 = nodearraylist2
-					assert pexprnode4 isa PExpr
-					var pexprnode1 = new AAssertExpr.init_aassertexpr(
+					assert pexprnode4 isa nullable PExpr
+					var pexprnode1: nullable AAssertExpr = new AAssertExpr.init_aassertexpr(
 						tkwassertnode2,
 						null,
 						pexprnode4
@@ -20948,17 +20947,17 @@ private class ReduceAction588
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwassertnode2 = nodearraylist1
-					assert tkwassertnode2 isa TKwassert
+					assert tkwassertnode2 isa nullable TKwassert
 					var tidnode3 = nodearraylist2
-					assert tidnode3 isa TId
+					assert tidnode3 isa nullable TId
 					var pexprnode4 = nodearraylist3
-					assert pexprnode4 isa PExpr
-					var pexprnode1 = new AAssertExpr.init_aassertexpr(
+					assert pexprnode4 isa nullable PExpr
+					var pexprnode1: nullable AAssertExpr = new AAssertExpr.init_aassertexpr(
 						tkwassertnode2,
 						tidnode3,
 						pexprnode4
@@ -20972,10 +20971,10 @@ private class ReduceAction589
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(94), node_list)
 	end
@@ -20985,7 +20984,7 @@ private class ReduceAction590
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -20995,28 +20994,28 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist4
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist5 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist6 
+#					end
+					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -21031,35 +21030,35 @@ private class ReduceAction591
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist2 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist3 
+#					end
+					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -21074,33 +21073,33 @@ private class ReduceAction592
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode4 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
-					var listnode3 = nodearraylist2 
+					assert pexprnode2 isa nullable PExpr
+					var listnode3 = nodearraylist2
 					assert listnode3 isa Array[Object]
-					if listnode3 != null then
+#					if listnode3 != null then
 						if listnode4.is_empty then
 							listnode4 = listnode3
 						else
 							listnode4.append(listnode3)
 						end
-					end
-					var listnode5 = nodearraylist3 
+#					end
+					var listnode5 = nodearraylist3
 					assert listnode5 isa Array[Object]
-					if listnode5 != null then
+#					if listnode5 != null then
 						if listnode6.is_empty then
 							listnode6 = listnode5
 						else
 							listnode6.append(listnode5)
 						end
-					end
-					var pexprnode1 = new ABraExpr.init_abraexpr(
+#					end
+					var pexprnode1: nullable ABraExpr = new ABraExpr.init_abraexpr(
 						pexprnode2,
 						listnode4,
 						listnode6
@@ -21114,10 +21113,10 @@ private class ReduceAction593
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(95), node_list)
 	end
@@ -21127,7 +21126,7 @@ private class ReduceAction594
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -21137,28 +21136,28 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist4
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist5 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist6 
+#					end
+					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -21173,35 +21172,35 @@ private class ReduceAction595
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist2 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist3 
+#					end
+					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -21216,10 +21215,10 @@ private class ReduceAction596
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(96), node_list)
 	end
@@ -21229,7 +21228,7 @@ private class ReduceAction597
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -21239,28 +21238,28 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist4
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist5 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist6 
+#					end
+					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -21275,35 +21274,35 @@ private class ReduceAction598
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist2 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist3 
+#					end
+					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -21318,10 +21317,10 @@ private class ReduceAction599
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(97), node_list)
 	end
@@ -21331,7 +21330,7 @@ private class ReduceAction600
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -21344,18 +21343,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwifnode2 = nodearraylist1
-					assert tkwifnode2 isa TKwif
+					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
+					assert pexprnode3 isa nullable PExpr
 					var tkwthennode4 = nodearraylist5
-					assert tkwthennode4 isa TKwthen
+					assert tkwthennode4 isa nullable TKwthen
 					var pexprnode5 = nodearraylist7
-					assert pexprnode5 isa PExpr
+					assert pexprnode5 isa nullable PExpr
 					var tkwelsenode6 = nodearraylist9
-					assert tkwelsenode6 isa TKwelse
+					assert tkwelsenode6 isa nullable TKwelse
 					var pexprnode7 = nodearraylist11
-					assert pexprnode7 isa PExpr
-					var pexprnode1 = new AIfexprExpr.init_aifexprexpr(
+					assert pexprnode7 isa nullable PExpr
+					var pexprnode1: nullable AIfexprExpr = new AIfexprExpr.init_aifexprexpr(
 						tkwifnode2,
 						pexprnode3,
 						tkwthennode4,
@@ -21372,10 +21371,10 @@ private class ReduceAction601
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(98), node_list)
 	end
@@ -21385,16 +21384,16 @@ private class ReduceAction602
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AOrExpr.init_aorexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AOrExpr = new AOrExpr.init_aorexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -21407,16 +21406,16 @@ private class ReduceAction603
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AAndExpr.init_aandexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AAndExpr = new AAndExpr.init_aandexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -21429,10 +21428,10 @@ private class ReduceAction604
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(99), node_list)
 	end
@@ -21442,15 +21441,15 @@ private class ReduceAction605
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwnotnode2 = nodearraylist1
-					assert tkwnotnode2 isa TKwnot
+					assert tkwnotnode2 isa nullable TKwnot
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ANotExpr.init_anotexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ANotExpr = new ANotExpr.init_anotexpr(
 						tkwnotnode2,
 						pexprnode3
 					)
@@ -21463,10 +21462,10 @@ private class ReduceAction606
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(100), node_list)
 	end
@@ -21476,16 +21475,16 @@ private class ReduceAction607
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AEqExpr.init_aeqexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AEqExpr = new AEqExpr.init_aeqexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -21498,16 +21497,16 @@ private class ReduceAction608
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AEeExpr.init_aeeexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AEeExpr = new AEeExpr.init_aeeexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -21520,16 +21519,16 @@ private class ReduceAction609
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ANeExpr.init_aneexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ANeExpr = new ANeExpr.init_aneexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -21542,16 +21541,16 @@ private class ReduceAction610
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ALtExpr.init_altexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ALtExpr = new ALtExpr.init_altexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -21564,16 +21563,16 @@ private class ReduceAction611
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ALeExpr.init_aleexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ALeExpr = new ALeExpr.init_aleexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -21586,16 +21585,16 @@ private class ReduceAction612
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AGtExpr.init_agtexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AGtExpr = new AGtExpr.init_agtexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -21608,16 +21607,16 @@ private class ReduceAction613
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AGeExpr.init_ageexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AGeExpr = new AGeExpr.init_ageexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -21630,16 +21629,16 @@ private class ReduceAction614
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AStarshipExpr.init_astarshipexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AStarshipExpr = new AStarshipExpr.init_astarshipexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -21652,16 +21651,16 @@ private class ReduceAction615
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var ptypenode3 = nodearraylist4
-					assert ptypenode3 isa PType
-					var pexprnode1 = new AIsaExpr.init_aisaexpr(
+					assert ptypenode3 isa nullable PType
+					var pexprnode1: nullable AIsaExpr = new AIsaExpr.init_aisaexpr(
 						pexprnode2,
 						ptypenode3
 					)
@@ -21674,10 +21673,10 @@ private class ReduceAction616
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(101), node_list)
 	end
@@ -21687,16 +21686,16 @@ private class ReduceAction617
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new APlusExpr.init_aplusexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable APlusExpr = new APlusExpr.init_aplusexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -21709,16 +21708,16 @@ private class ReduceAction618
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AMinusExpr.init_aminusexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AMinusExpr = new AMinusExpr.init_aminusexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -21731,10 +21730,10 @@ private class ReduceAction619
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(102), node_list)
 	end
@@ -21744,16 +21743,16 @@ private class ReduceAction620
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AStarExpr.init_astarexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AStarExpr = new AStarExpr.init_astarexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -21766,16 +21765,16 @@ private class ReduceAction621
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ASlashExpr.init_aslashexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ASlashExpr = new ASlashExpr.init_aslashexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -21788,16 +21787,16 @@ private class ReduceAction622
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new APercentExpr.init_apercentexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable APercentExpr = new APercentExpr.init_apercentexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -21810,10 +21809,10 @@ private class ReduceAction623
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(103), node_list)
 	end
@@ -21823,15 +21822,15 @@ private class ReduceAction624
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tminusnode2 = nodearraylist1
-					assert tminusnode2 isa TMinus
+					assert tminusnode2 isa nullable TMinus
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AUminusExpr.init_auminusexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AUminusExpr = new AUminusExpr.init_auminusexpr(
 						tminusnode2,
 						pexprnode3
 					)
@@ -21844,15 +21843,15 @@ private class ReduceAction625
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwoncenode2 = nodearraylist1
-					assert tkwoncenode2 isa TKwonce
+					assert tkwoncenode2 isa nullable TKwonce
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AOnceExpr.init_aonceexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AOnceExpr = new AOnceExpr.init_aonceexpr(
 						tkwoncenode2,
 						pexprnode3
 					)
@@ -21865,10 +21864,10 @@ private class ReduceAction626
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(104), node_list)
 	end
@@ -21878,26 +21877,26 @@ private class ReduceAction627
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode6 = new Array[Object]
 					var tkwnewnode2 = nodearraylist1
-					assert tkwnewnode2 isa TKwnew
+					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
-					assert ptypenode3 isa PType
-					var listnode5 = nodearraylist4 
+					assert ptypenode3 isa nullable PType
+					var listnode5 = nodearraylist4
 					assert listnode5 isa Array[Object]
-					if listnode5 != null then
+#					if listnode5 != null then
 						if listnode6.is_empty then
 							listnode6 = listnode5
 						else
 							listnode6.append(listnode5)
 						end
-					end
-					var pexprnode1 = new ANewExpr.init_anewexpr(
+#					end
+					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
 						null,
@@ -21912,19 +21911,19 @@ private class ReduceAction628
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwissetnode2 = nodearraylist1
-					assert tkwissetnode2 isa TKwisset
+					assert tkwissetnode2 isa nullable TKwisset
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa PExpr
+					assert pexprnode3 isa nullable PExpr
 					var tattridnode4 = nodearraylist5
-					assert tattridnode4 isa TAttrid
-					var pexprnode1 = new AIssetAttrExpr.init_aissetattrexpr(
+					assert tattridnode4 isa nullable TAttrid
+					var pexprnode1: nullable AIssetAttrExpr = new AIssetAttrExpr.init_aissetattrexpr(
 						tkwissetnode2,
 						pexprnode3,
 						tattridnode4
@@ -21938,16 +21937,16 @@ private class ReduceAction629
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwissetnode2 = nodearraylist1
-					assert tkwissetnode2 isa TKwisset
-					var pexprnode3 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					assert tkwissetnode2 isa nullable TKwisset
+					var pexprnode3: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tattridnode4 = nodearraylist2
-					assert tattridnode4 isa TAttrid
-					var pexprnode1 = new AIssetAttrExpr.init_aissetattrexpr(
+					assert tattridnode4 isa nullable TAttrid
+					var pexprnode1: nullable AIssetAttrExpr = new AIssetAttrExpr.init_aissetattrexpr(
 						tkwissetnode2,
 						pexprnode3,
 						tattridnode4
@@ -21961,16 +21960,16 @@ private class ReduceAction630
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tattridnode3 = nodearraylist4
-					assert tattridnode3 isa TAttrid
-					var pexprnode1 = new AAttrExpr.init_aattrexpr(
+					assert tattridnode3 isa nullable TAttrid
+					var pexprnode1: nullable AAttrExpr = new AAttrExpr.init_aattrexpr(
 						pexprnode2,
 						tattridnode3
 					)
@@ -21983,13 +21982,13 @@ private class ReduceAction631
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tattridnode3 = nodearraylist1
-					assert tattridnode3 isa TAttrid
-					var pexprnode1 = new AAttrExpr.init_aattrexpr(
+					assert tattridnode3 isa nullable TAttrid
+					var pexprnode1: nullable AAttrExpr = new AAttrExpr.init_aattrexpr(
 						pexprnode2,
 						tattridnode3
 					)
@@ -22002,7 +22001,7 @@ private class ReduceAction632
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -22011,19 +22010,19 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist4
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist5 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -22038,25 +22037,25 @@ private class ReduceAction633
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var listnode6 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist2 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -22071,22 +22070,22 @@ private class ReduceAction634
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var tkwsupernode3 = nodearraylist1
-					assert tkwsupernode3 isa TKwsuper
-					var listnode4 = nodearraylist2 
+					assert tkwsupernode3 isa nullable TKwsuper
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ASuperExpr.init_asuperexpr(
+#					end
+					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						null,
 						tkwsupernode3,
 						listnode5
@@ -22100,25 +22099,25 @@ private class ReduceAction635
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pqualifiednode2 = nodearraylist1
-					assert pqualifiednode2 isa PQualified
+					assert pqualifiednode2 isa nullable PQualified
 					var tkwsupernode3 = nodearraylist2
-					assert tkwsupernode3 isa TKwsuper
-					var listnode4 = nodearraylist3 
+					assert tkwsupernode3 isa nullable TKwsuper
+					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ASuperExpr.init_asuperexpr(
+#					end
+					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						pqualifiednode2,
 						tkwsupernode3,
 						listnode5
@@ -22132,7 +22131,7 @@ private class ReduceAction636
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
@@ -22140,19 +22139,19 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tkwinitnode3 = nodearraylist4
-					assert tkwinitnode3 isa TKwinit
-					var listnode4 = nodearraylist5 
+					assert tkwinitnode3 isa nullable TKwinit
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new AInitExpr.init_ainitexpr(
+#					end
+					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
 						listnode5
@@ -22166,24 +22165,24 @@ private class ReduceAction637
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tkwinitnode3 = nodearraylist1
-					assert tkwinitnode3 isa TKwinit
-					var listnode4 = nodearraylist2 
+					assert tkwinitnode3 isa nullable TKwinit
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new AInitExpr.init_ainitexpr(
+#					end
+					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
 						listnode5
@@ -22197,7 +22196,7 @@ private class ReduceAction638
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -22207,21 +22206,21 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode6 = new Array[Object]
 					var tkwnewnode2 = nodearraylist1
-					assert tkwnewnode2 isa TKwnew
+					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
-					assert ptypenode3 isa PType
+					assert ptypenode3 isa nullable PType
 					var tidnode4 = nodearraylist6
-					assert tidnode4 isa TId
-					var listnode5 = nodearraylist7 
+					assert tidnode4 isa nullable TId
+					var listnode5 = nodearraylist7
 					assert listnode5 isa Array[Object]
-					if listnode5 != null then
+#					if listnode5 != null then
 						if listnode6.is_empty then
 							listnode6 = listnode5
 						else
 							listnode6.append(listnode5)
 						end
-					end
-					var pexprnode1 = new ANewExpr.init_anewexpr(
+#					end
+					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
 						tidnode4,
@@ -22236,11 +22235,11 @@ private class ReduceAction639
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwselfnode2 = nodearraylist1
-					assert tkwselfnode2 isa TKwself
-					var pexprnode1 = new ASelfExpr.init_aselfexpr(
+					assert tkwselfnode2 isa nullable TKwself
+					var pexprnode1: nullable ASelfExpr = new ASelfExpr.init_aselfexpr(
 						tkwselfnode2
 					)
 					node_list = pexprnode1
@@ -22252,11 +22251,11 @@ private class ReduceAction640
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwtruenode2 = nodearraylist1
-					assert tkwtruenode2 isa TKwtrue
-					var pexprnode1 = new ATrueExpr.init_atrueexpr(
+					assert tkwtruenode2 isa nullable TKwtrue
+					var pexprnode1: nullable ATrueExpr = new ATrueExpr.init_atrueexpr(
 						tkwtruenode2
 					)
 					node_list = pexprnode1
@@ -22268,11 +22267,11 @@ private class ReduceAction641
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwfalsenode2 = nodearraylist1
-					assert tkwfalsenode2 isa TKwfalse
-					var pexprnode1 = new AFalseExpr.init_afalseexpr(
+					assert tkwfalsenode2 isa nullable TKwfalse
+					var pexprnode1: nullable AFalseExpr = new AFalseExpr.init_afalseexpr(
 						tkwfalsenode2
 					)
 					node_list = pexprnode1
@@ -22284,11 +22283,11 @@ private class ReduceAction642
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwnullnode2 = nodearraylist1
-					assert tkwnullnode2 isa TKwnull
-					var pexprnode1 = new ANullExpr.init_anullexpr(
+					assert tkwnullnode2 isa nullable TKwnull
+					var pexprnode1: nullable ANullExpr = new ANullExpr.init_anullexpr(
 						tkwnullnode2
 					)
 					node_list = pexprnode1
@@ -22300,11 +22299,11 @@ private class ReduceAction643
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tnumbernode2 = nodearraylist1
-					assert tnumbernode2 isa TNumber
-					var pexprnode1 = new AIntExpr.init_aintexpr(
+					assert tnumbernode2 isa nullable TNumber
+					var pexprnode1: nullable AIntExpr = new AIntExpr.init_aintexpr(
 						tnumbernode2
 					)
 					node_list = pexprnode1
@@ -22316,11 +22315,11 @@ private class ReduceAction644
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tfloatnode2 = nodearraylist1
-					assert tfloatnode2 isa TFloat
-					var pexprnode1 = new AFloatExpr.init_afloatexpr(
+					assert tfloatnode2 isa nullable TFloat
+					var pexprnode1: nullable AFloatExpr = new AFloatExpr.init_afloatexpr(
 						tfloatnode2
 					)
 					node_list = pexprnode1
@@ -22332,11 +22331,11 @@ private class ReduceAction645
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tcharnode2 = nodearraylist1
-					assert tcharnode2 isa TChar
-					var pexprnode1 = new ACharExpr.init_acharexpr(
+					assert tcharnode2 isa nullable TChar
+					var pexprnode1: nullable ACharExpr = new ACharExpr.init_acharexpr(
 						tcharnode2
 					)
 					node_list = pexprnode1
@@ -22348,11 +22347,11 @@ private class ReduceAction646
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tstringnode2 = nodearraylist1
-					assert tstringnode2 isa TString
-					var pexprnode1 = new AStringExpr.init_astringexpr(
+					assert tstringnode2 isa nullable TString
+					var pexprnode1: nullable AStringExpr = new AStringExpr.init_astringexpr(
 						tstringnode2
 					)
 					node_list = pexprnode1
@@ -22364,10 +22363,10 @@ private class ReduceAction647
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(105), node_list)
 	end
@@ -22377,7 +22376,7 @@ private class ReduceAction648
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -22389,12 +22388,12 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tkwasnode3 = nodearraylist4
-					assert tkwasnode3 isa TKwas
+					assert tkwasnode3 isa nullable TKwas
 					var ptypenode4 = nodearraylist8
-					assert ptypenode4 isa PType
-					var pexprnode1 = new AAsCastExpr.init_aascastexpr(
+					assert ptypenode4 isa nullable PType
+					var pexprnode1: nullable AAsCastExpr = new AAsCastExpr.init_aascastexpr(
 						pexprnode2,
 						tkwasnode3,
 						ptypenode4
@@ -22408,7 +22407,7 @@ private class ReduceAction649
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
@@ -22422,14 +22421,14 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tkwasnode3 = nodearraylist4
-					assert tkwasnode3 isa TKwas
+					assert tkwasnode3 isa nullable TKwas
 					var tkwnotnode4 = nodearraylist8
-					assert tkwnotnode4 isa TKwnot
+					assert tkwnotnode4 isa nullable TKwnot
 					var tkwnullnode5 = nodearraylist10
-					assert tkwnullnode5 isa TKwnull
-					var pexprnode1 = new AAsNotnullExpr.init_aasnotnullexpr(
+					assert tkwnullnode5 isa nullable TKwnull
+					var pexprnode1: nullable AAsNotnullExpr = new AAsNotnullExpr.init_aasnotnullexpr(
 						pexprnode2,
 						tkwasnode3,
 						tkwnotnode4,
@@ -22444,10 +22443,10 @@ private class ReduceAction650
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(106), node_list)
 	end
@@ -22457,7 +22456,7 @@ private class ReduceAction651
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -22467,28 +22466,28 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist4
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist5 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist6 
+#					end
+					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -22503,35 +22502,35 @@ private class ReduceAction652
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist2 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist3 
+#					end
+					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -22546,10 +22545,10 @@ private class ReduceAction653
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(107), node_list)
 	end
@@ -22559,7 +22558,7 @@ private class ReduceAction654
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
@@ -22572,18 +22571,18 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwifnode2 = nodearraylist1
-					assert tkwifnode2 isa TKwif
+					assert tkwifnode2 isa nullable TKwif
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
+					assert pexprnode3 isa nullable PExpr
 					var tkwthennode4 = nodearraylist5
-					assert tkwthennode4 isa TKwthen
+					assert tkwthennode4 isa nullable TKwthen
 					var pexprnode5 = nodearraylist7
-					assert pexprnode5 isa PExpr
+					assert pexprnode5 isa nullable PExpr
 					var tkwelsenode6 = nodearraylist9
-					assert tkwelsenode6 isa TKwelse
+					assert tkwelsenode6 isa nullable TKwelse
 					var pexprnode7 = nodearraylist11
-					assert pexprnode7 isa PExpr
-					var pexprnode1 = new AIfexprExpr.init_aifexprexpr(
+					assert pexprnode7 isa nullable PExpr
+					var pexprnode1: nullable AIfexprExpr = new AIfexprExpr.init_aifexprexpr(
 						tkwifnode2,
 						pexprnode3,
 						tkwthennode4,
@@ -22600,10 +22599,10 @@ private class ReduceAction655
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(108), node_list)
 	end
@@ -22613,16 +22612,16 @@ private class ReduceAction656
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AOrExpr.init_aorexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AOrExpr = new AOrExpr.init_aorexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -22635,16 +22634,16 @@ private class ReduceAction657
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AAndExpr.init_aandexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AAndExpr = new AAndExpr.init_aandexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -22657,10 +22656,10 @@ private class ReduceAction658
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(109), node_list)
 	end
@@ -22670,15 +22669,15 @@ private class ReduceAction659
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwnotnode2 = nodearraylist1
-					assert tkwnotnode2 isa TKwnot
+					assert tkwnotnode2 isa nullable TKwnot
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ANotExpr.init_anotexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ANotExpr = new ANotExpr.init_anotexpr(
 						tkwnotnode2,
 						pexprnode3
 					)
@@ -22691,10 +22690,10 @@ private class ReduceAction660
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(110), node_list)
 	end
@@ -22704,16 +22703,16 @@ private class ReduceAction661
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AEqExpr.init_aeqexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AEqExpr = new AEqExpr.init_aeqexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -22726,16 +22725,16 @@ private class ReduceAction662
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AEeExpr.init_aeeexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AEeExpr = new AEeExpr.init_aeeexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -22748,16 +22747,16 @@ private class ReduceAction663
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ANeExpr.init_aneexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ANeExpr = new ANeExpr.init_aneexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -22770,16 +22769,16 @@ private class ReduceAction664
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ALtExpr.init_altexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ALtExpr = new ALtExpr.init_altexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -22792,16 +22791,16 @@ private class ReduceAction665
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ALeExpr.init_aleexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ALeExpr = new ALeExpr.init_aleexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -22814,16 +22813,16 @@ private class ReduceAction666
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AGtExpr.init_agtexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AGtExpr = new AGtExpr.init_agtexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -22836,16 +22835,16 @@ private class ReduceAction667
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AGeExpr.init_ageexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AGeExpr = new AGeExpr.init_ageexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -22858,16 +22857,16 @@ private class ReduceAction668
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AStarshipExpr.init_astarshipexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AStarshipExpr = new AStarshipExpr.init_astarshipexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -22880,16 +22879,16 @@ private class ReduceAction669
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var ptypenode3 = nodearraylist4
-					assert ptypenode3 isa PType
-					var pexprnode1 = new AIsaExpr.init_aisaexpr(
+					assert ptypenode3 isa nullable PType
+					var pexprnode1: nullable AIsaExpr = new AIsaExpr.init_aisaexpr(
 						pexprnode2,
 						ptypenode3
 					)
@@ -22902,10 +22901,10 @@ private class ReduceAction670
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(111), node_list)
 	end
@@ -22915,16 +22914,16 @@ private class ReduceAction671
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new APlusExpr.init_aplusexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable APlusExpr = new APlusExpr.init_aplusexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -22937,16 +22936,16 @@ private class ReduceAction672
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AMinusExpr.init_aminusexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AMinusExpr = new AMinusExpr.init_aminusexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -22959,10 +22958,10 @@ private class ReduceAction673
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(112), node_list)
 	end
@@ -22972,16 +22971,16 @@ private class ReduceAction674
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AStarExpr.init_astarexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AStarExpr = new AStarExpr.init_astarexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -22994,16 +22993,16 @@ private class ReduceAction675
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new ASlashExpr.init_aslashexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable ASlashExpr = new ASlashExpr.init_aslashexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -23016,16 +23015,16 @@ private class ReduceAction676
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var pexprnode3 = nodearraylist4
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new APercentExpr.init_apercentexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable APercentExpr = new APercentExpr.init_apercentexpr(
 						pexprnode2,
 						pexprnode3
 					)
@@ -23038,10 +23037,10 @@ private class ReduceAction677
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(113), node_list)
 	end
@@ -23051,15 +23050,15 @@ private class ReduceAction678
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tminusnode2 = nodearraylist1
-					assert tminusnode2 isa TMinus
+					assert tminusnode2 isa nullable TMinus
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AUminusExpr.init_auminusexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AUminusExpr = new AUminusExpr.init_auminusexpr(
 						tminusnode2,
 						pexprnode3
 					)
@@ -23072,15 +23071,15 @@ private class ReduceAction679
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwoncenode2 = nodearraylist1
-					assert tkwoncenode2 isa TKwonce
+					assert tkwoncenode2 isa nullable TKwonce
 					var pexprnode3 = nodearraylist3
-					assert pexprnode3 isa PExpr
-					var pexprnode1 = new AOnceExpr.init_aonceexpr(
+					assert pexprnode3 isa nullable PExpr
+					var pexprnode1: nullable AOnceExpr = new AOnceExpr.init_aonceexpr(
 						tkwoncenode2,
 						pexprnode3
 					)
@@ -23093,10 +23092,10 @@ private class ReduceAction680
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(114), node_list)
 	end
@@ -23106,26 +23105,26 @@ private class ReduceAction681
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist4 = p.pop
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode6 = new Array[Object]
 					var tkwnewnode2 = nodearraylist1
-					assert tkwnewnode2 isa TKwnew
+					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
-					assert ptypenode3 isa PType
-					var listnode5 = nodearraylist4 
+					assert ptypenode3 isa nullable PType
+					var listnode5 = nodearraylist4
 					assert listnode5 isa Array[Object]
-					if listnode5 != null then
+#					if listnode5 != null then
 						if listnode6.is_empty then
 							listnode6 = listnode5
 						else
 							listnode6.append(listnode5)
 						end
-					end
-					var pexprnode1 = new ANewExpr.init_anewexpr(
+#					end
+					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
 						null,
@@ -23140,17 +23139,17 @@ private class ReduceAction682
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var tkwissetnode2 = nodearraylist1
-					assert tkwissetnode2 isa TKwisset
+					assert tkwissetnode2 isa nullable TKwisset
 					var pexprnode3 = nodearraylist2
-					assert pexprnode3 isa PExpr
+					assert pexprnode3 isa nullable PExpr
 					var tattridnode4 = nodearraylist3
-					assert tattridnode4 isa TAttrid
-					var pexprnode1 = new AIssetAttrExpr.init_aissetattrexpr(
+					assert tattridnode4 isa nullable TAttrid
+					var pexprnode1: nullable AIssetAttrExpr = new AIssetAttrExpr.init_aissetattrexpr(
 						tkwissetnode2,
 						pexprnode3,
 						tattridnode4
@@ -23164,14 +23163,14 @@ private class ReduceAction683
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tattridnode3 = nodearraylist2
-					assert tattridnode3 isa TAttrid
-					var pexprnode1 = new AAttrExpr.init_aattrexpr(
+					assert tattridnode3 isa nullable TAttrid
+					var pexprnode1: nullable AAttrExpr = new AAttrExpr.init_aattrexpr(
 						pexprnode2,
 						tattridnode3
 					)
@@ -23184,26 +23183,26 @@ private class ReduceAction684
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var listnode6 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist2
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist3 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -23218,22 +23217,22 @@ private class ReduceAction685
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var tkwsupernode3 = nodearraylist1
-					assert tkwsupernode3 isa TKwsuper
-					var listnode4 = nodearraylist2 
+					assert tkwsupernode3 isa nullable TKwsuper
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ASuperExpr.init_asuperexpr(
+#					end
+					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						null,
 						tkwsupernode3,
 						listnode5
@@ -23247,25 +23246,25 @@ private class ReduceAction686
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pqualifiednode2 = nodearraylist1
-					assert pqualifiednode2 isa PQualified
+					assert pqualifiednode2 isa nullable PQualified
 					var tkwsupernode3 = nodearraylist2
-					assert tkwsupernode3 isa TKwsuper
-					var listnode4 = nodearraylist3 
+					assert tkwsupernode3 isa nullable TKwsuper
+					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new ASuperExpr.init_asuperexpr(
+#					end
+					var pexprnode1: nullable ASuperExpr = new ASuperExpr.init_asuperexpr(
 						pqualifiednode2,
 						tkwsupernode3,
 						listnode5
@@ -23279,25 +23278,25 @@ private class ReduceAction687
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tkwinitnode3 = nodearraylist2
-					assert tkwinitnode3 isa TKwinit
-					var listnode4 = nodearraylist3 
+					assert tkwinitnode3 isa nullable TKwinit
+					var listnode4 = nodearraylist3
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var pexprnode1 = new AInitExpr.init_ainitexpr(
+#					end
+					var pexprnode1: nullable AInitExpr = new AInitExpr.init_ainitexpr(
 						pexprnode2,
 						tkwinitnode3,
 						listnode5
@@ -23311,7 +23310,7 @@ private class ReduceAction688
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist7 = p.pop
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
@@ -23321,21 +23320,21 @@ special ReduceAction
 					var nodearraylist1 = p.pop
 					var listnode6 = new Array[Object]
 					var tkwnewnode2 = nodearraylist1
-					assert tkwnewnode2 isa TKwnew
+					assert tkwnewnode2 isa nullable TKwnew
 					var ptypenode3 = nodearraylist3
-					assert ptypenode3 isa PType
+					assert ptypenode3 isa nullable PType
 					var tidnode4 = nodearraylist6
-					assert tidnode4 isa TId
-					var listnode5 = nodearraylist7 
+					assert tidnode4 isa nullable TId
+					var listnode5 = nodearraylist7
 					assert listnode5 isa Array[Object]
-					if listnode5 != null then
+#					if listnode5 != null then
 						if listnode6.is_empty then
 							listnode6 = listnode5
 						else
 							listnode6.append(listnode5)
 						end
-					end
-					var pexprnode1 = new ANewExpr.init_anewexpr(
+#					end
+					var pexprnode1: nullable ANewExpr = new ANewExpr.init_anewexpr(
 						tkwnewnode2,
 						ptypenode3,
 						tidnode4,
@@ -23350,11 +23349,11 @@ private class ReduceAction689
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwselfnode2 = nodearraylist1
-					assert tkwselfnode2 isa TKwself
-					var pexprnode1 = new ASelfExpr.init_aselfexpr(
+					assert tkwselfnode2 isa nullable TKwself
+					var pexprnode1: nullable ASelfExpr = new ASelfExpr.init_aselfexpr(
 						tkwselfnode2
 					)
 					node_list = pexprnode1
@@ -23366,11 +23365,11 @@ private class ReduceAction690
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwtruenode2 = nodearraylist1
-					assert tkwtruenode2 isa TKwtrue
-					var pexprnode1 = new ATrueExpr.init_atrueexpr(
+					assert tkwtruenode2 isa nullable TKwtrue
+					var pexprnode1: nullable ATrueExpr = new ATrueExpr.init_atrueexpr(
 						tkwtruenode2
 					)
 					node_list = pexprnode1
@@ -23382,11 +23381,11 @@ private class ReduceAction691
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwfalsenode2 = nodearraylist1
-					assert tkwfalsenode2 isa TKwfalse
-					var pexprnode1 = new AFalseExpr.init_afalseexpr(
+					assert tkwfalsenode2 isa nullable TKwfalse
+					var pexprnode1: nullable AFalseExpr = new AFalseExpr.init_afalseexpr(
 						tkwfalsenode2
 					)
 					node_list = pexprnode1
@@ -23398,11 +23397,11 @@ private class ReduceAction692
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tkwnullnode2 = nodearraylist1
-					assert tkwnullnode2 isa TKwnull
-					var pexprnode1 = new ANullExpr.init_anullexpr(
+					assert tkwnullnode2 isa nullable TKwnull
+					var pexprnode1: nullable ANullExpr = new ANullExpr.init_anullexpr(
 						tkwnullnode2
 					)
 					node_list = pexprnode1
@@ -23414,11 +23413,11 @@ private class ReduceAction693
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tnumbernode2 = nodearraylist1
-					assert tnumbernode2 isa TNumber
-					var pexprnode1 = new AIntExpr.init_aintexpr(
+					assert tnumbernode2 isa nullable TNumber
+					var pexprnode1: nullable AIntExpr = new AIntExpr.init_aintexpr(
 						tnumbernode2
 					)
 					node_list = pexprnode1
@@ -23430,11 +23429,11 @@ private class ReduceAction694
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tfloatnode2 = nodearraylist1
-					assert tfloatnode2 isa TFloat
-					var pexprnode1 = new AFloatExpr.init_afloatexpr(
+					assert tfloatnode2 isa nullable TFloat
+					var pexprnode1: nullable AFloatExpr = new AFloatExpr.init_afloatexpr(
 						tfloatnode2
 					)
 					node_list = pexprnode1
@@ -23446,11 +23445,11 @@ private class ReduceAction695
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tcharnode2 = nodearraylist1
-					assert tcharnode2 isa TChar
-					var pexprnode1 = new ACharExpr.init_acharexpr(
+					assert tcharnode2 isa nullable TChar
+					var pexprnode1: nullable ACharExpr = new ACharExpr.init_acharexpr(
 						tcharnode2
 					)
 					node_list = pexprnode1
@@ -23462,11 +23461,11 @@ private class ReduceAction696
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var tstringnode2 = nodearraylist1
-					assert tstringnode2 isa TString
-					var pexprnode1 = new AStringExpr.init_astringexpr(
+					assert tstringnode2 isa nullable TString
+					var pexprnode1: nullable AStringExpr = new AStringExpr.init_astringexpr(
 						tstringnode2
 					)
 					node_list = pexprnode1
@@ -23478,10 +23477,10 @@ private class ReduceAction697
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(115), node_list)
 	end
@@ -23491,7 +23490,7 @@ private class ReduceAction698
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist10 = p.pop
 					var nodearraylist9 = p.pop
 					var nodearraylist8 = p.pop
@@ -23503,12 +23502,12 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tkwasnode3 = nodearraylist4
-					assert tkwasnode3 isa TKwas
+					assert tkwasnode3 isa nullable TKwas
 					var ptypenode4 = nodearraylist8
-					assert ptypenode4 isa PType
-					var pexprnode1 = new AAsCastExpr.init_aascastexpr(
+					assert ptypenode4 isa nullable PType
+					var pexprnode1: nullable AAsCastExpr = new AAsCastExpr.init_aascastexpr(
 						pexprnode2,
 						tkwasnode3,
 						ptypenode4
@@ -23522,7 +23521,7 @@ private class ReduceAction699
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist12 = p.pop
 					var nodearraylist11 = p.pop
 					var nodearraylist10 = p.pop
@@ -23536,14 +23535,14 @@ special ReduceAction
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tkwasnode3 = nodearraylist4
-					assert tkwasnode3 isa TKwas
+					assert tkwasnode3 isa nullable TKwas
 					var tkwnotnode4 = nodearraylist8
-					assert tkwnotnode4 isa TKwnot
+					assert tkwnotnode4 isa nullable TKwnot
 					var tkwnullnode5 = nodearraylist10
-					assert tkwnullnode5 isa TKwnull
-					var pexprnode1 = new AAsNotnullExpr.init_aasnotnullexpr(
+					assert tkwnullnode5 isa nullable TKwnull
+					var pexprnode1: nullable AAsNotnullExpr = new AAsNotnullExpr.init_aasnotnullexpr(
 						pexprnode2,
 						tkwasnode3,
 						tkwnotnode4,
@@ -23558,12 +23557,12 @@ private class ReduceAction700
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(116), node_list)
 	end
@@ -23573,8 +23572,8 @@ private class ReduceAction701
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
-					var pexprnode1 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var node_list: nullable Object = null
+					var pexprnode1: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					node_list = pexprnode1
 					p.push(p.go_to(116), node_list)
@@ -23585,10 +23584,10 @@ private class ReduceAction702
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(117), node_list)
 	end
@@ -23598,7 +23597,7 @@ private class ReduceAction703
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -23608,28 +23607,28 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist4
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist5 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist6 
+#					end
+					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -23644,35 +23643,35 @@ private class ReduceAction704
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist2 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist3 
+#					end
+					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -23687,10 +23686,10 @@ private class ReduceAction705
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					node_list = pexprnode1
 					p.push(p.go_to(118), node_list)
 	end
@@ -23700,7 +23699,7 @@ private class ReduceAction706
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist6 = p.pop
 					var nodearraylist5 = p.pop
 					var nodearraylist4 = p.pop
@@ -23710,28 +23709,28 @@ special ReduceAction
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
 					var pexprnode2 = nodearraylist1
-					assert pexprnode2 isa PExpr
+					assert pexprnode2 isa nullable PExpr
 					var tidnode3 = nodearraylist4
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist5 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist5
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist6 
+#					end
+					var listnode6 = nodearraylist6
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -23746,35 +23745,35 @@ private class ReduceAction707
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist3 = p.pop
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode5 = new Array[Object]
 					var listnode7 = new Array[Object]
-					var pexprnode2 = new AImplicitSelfExpr.init_aimplicitselfexpr(
+					var pexprnode2: nullable AImplicitSelfExpr = new AImplicitSelfExpr.init_aimplicitselfexpr(
 					)
 					var tidnode3 = nodearraylist1
-					assert tidnode3 isa TId
-					var listnode4 = nodearraylist2 
+					assert tidnode3 isa nullable TId
+					var listnode4 = nodearraylist2
 					assert listnode4 isa Array[Object]
-					if listnode4 != null then
+#					if listnode4 != null then
 						if listnode5.is_empty then
 							listnode5 = listnode4
 						else
 							listnode5.append(listnode4)
 						end
-					end
-					var listnode6 = nodearraylist3 
+#					end
+					var listnode6 = nodearraylist3
 					assert listnode6 isa Array[Object]
-					if listnode6 != null then
+#					if listnode6 != null then
 						if listnode7.is_empty then
 							listnode7 = listnode6
 						else
 							listnode7.append(listnode6)
 						end
-					end
-					var pexprnode1 = new ACallExpr.init_acallexpr(
+#					end
+					var pexprnode1: nullable ACallExpr = new ACallExpr.init_acallexpr(
 						pexprnode2,
 						tidnode3,
 						listnode5,
@@ -23789,11 +23788,11 @@ private class ReduceAction708
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pimportnode1 = nodearraylist1
-					assert pimportnode1 isa PImport
+					assert pimportnode1 isa nullable PImport
 					if pimportnode1 != null then
 						listnode2.add(pimportnode1)
 					end
@@ -23806,21 +23805,21 @@ private class ReduceAction709
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode1 = nodearraylist1 
+					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var pimportnode2 = nodearraylist2
-					assert pimportnode2 isa PImport
-					if listnode1 != null then
+					assert pimportnode2 isa nullable PImport
+#					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
 						else
 							listnode3.append(listnode1)
 						end
-					end
+#					end
 					if pimportnode2 != null then
 						listnode3.add(pimportnode2)
 					end
@@ -23833,11 +23832,11 @@ private class ReduceAction710
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pclassdefnode1 = nodearraylist1
-					assert pclassdefnode1 isa PClassdef
+					assert pclassdefnode1 isa nullable PClassdef
 					if pclassdefnode1 != null then
 						listnode2.add(pclassdefnode1)
 					end
@@ -23850,21 +23849,21 @@ private class ReduceAction711
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode1 = nodearraylist1 
+					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var pclassdefnode2 = nodearraylist2
-					assert pclassdefnode2 isa PClassdef
-					if listnode1 != null then
+					assert pclassdefnode2 isa nullable PClassdef
+#					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
 						else
 							listnode3.append(listnode1)
 						end
-					end
+#					end
 					if pclassdefnode2 != null then
 						listnode3.add(pclassdefnode2)
 					end
@@ -23877,11 +23876,11 @@ private class ReduceAction712
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var psuperclassnode1 = nodearraylist1
-					assert psuperclassnode1 isa PSuperclass
+					assert psuperclassnode1 isa nullable PSuperclass
 					if psuperclassnode1 != null then
 						listnode2.add(psuperclassnode1)
 					end
@@ -23894,21 +23893,21 @@ private class ReduceAction713
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode1 = nodearraylist1 
+					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var psuperclassnode2 = nodearraylist2
-					assert psuperclassnode2 isa PSuperclass
-					if listnode1 != null then
+					assert psuperclassnode2 isa nullable PSuperclass
+#					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
 						else
 							listnode3.append(listnode1)
 						end
-					end
+#					end
 					if psuperclassnode2 != null then
 						listnode3.add(psuperclassnode2)
 					end
@@ -23921,11 +23920,11 @@ private class ReduceAction714
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pformaldefnode1 = nodearraylist1
-					assert pformaldefnode1 isa PFormaldef
+					assert pformaldefnode1 isa nullable PFormaldef
 					if pformaldefnode1 != null then
 						listnode2.add(pformaldefnode1)
 					end
@@ -23938,21 +23937,21 @@ private class ReduceAction715
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode1 = nodearraylist1 
+					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var pformaldefnode2 = nodearraylist2
-					assert pformaldefnode2 isa PFormaldef
-					if listnode1 != null then
+					assert pformaldefnode2 isa nullable PFormaldef
+#					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
 						else
 							listnode3.append(listnode1)
 						end
-					end
+#					end
 					if pformaldefnode2 != null then
 						listnode3.add(pformaldefnode2)
 					end
@@ -23965,11 +23964,11 @@ private class ReduceAction716
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var ppropdefnode1 = nodearraylist1
-					assert ppropdefnode1 isa PPropdef
+					assert ppropdefnode1 isa nullable PPropdef
 					if ppropdefnode1 != null then
 						listnode2.add(ppropdefnode1)
 					end
@@ -23982,21 +23981,21 @@ private class ReduceAction717
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode1 = nodearraylist1 
+					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var ppropdefnode2 = nodearraylist2
-					assert ppropdefnode2 isa PPropdef
-					if listnode1 != null then
+					assert ppropdefnode2 isa nullable PPropdef
+#					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
 						else
 							listnode3.append(listnode1)
 						end
-					end
+#					end
 					if ppropdefnode2 != null then
 						listnode3.add(ppropdefnode2)
 					end
@@ -24009,11 +24008,11 @@ private class ReduceAction718
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pparamnode1 = nodearraylist1
-					assert pparamnode1 isa PParam
+					assert pparamnode1 isa nullable PParam
 					if pparamnode1 != null then
 						listnode2.add(pparamnode1)
 					end
@@ -24026,21 +24025,21 @@ private class ReduceAction719
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode1 = nodearraylist1 
+					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var pparamnode2 = nodearraylist2
-					assert pparamnode2 isa PParam
-					if listnode1 != null then
+					assert pparamnode2 isa nullable PParam
+#					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
 						else
 							listnode3.append(listnode1)
 						end
-					end
+#					end
 					if pparamnode2 != null then
 						listnode3.add(pparamnode2)
 					end
@@ -24053,11 +24052,11 @@ private class ReduceAction720
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pclosuredeclnode1 = nodearraylist1
-					assert pclosuredeclnode1 isa PClosureDecl
+					assert pclosuredeclnode1 isa nullable PClosureDecl
 					if pclosuredeclnode1 != null then
 						listnode2.add(pclosuredeclnode1)
 					end
@@ -24070,21 +24069,21 @@ private class ReduceAction721
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode1 = nodearraylist1 
+					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var pclosuredeclnode2 = nodearraylist2
-					assert pclosuredeclnode2 isa PClosureDecl
-					if listnode1 != null then
+					assert pclosuredeclnode2 isa nullable PClosureDecl
+#					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
 						else
 							listnode3.append(listnode1)
 						end
-					end
+#					end
 					if pclosuredeclnode2 != null then
 						listnode3.add(pclosuredeclnode2)
 					end
@@ -24097,11 +24096,11 @@ private class ReduceAction722
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var ptypenode1 = nodearraylist1
-					assert ptypenode1 isa PType
+					assert ptypenode1 isa nullable PType
 					if ptypenode1 != null then
 						listnode2.add(ptypenode1)
 					end
@@ -24114,21 +24113,21 @@ private class ReduceAction723
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode1 = nodearraylist1 
+					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var ptypenode2 = nodearraylist2
-					assert ptypenode2 isa PType
-					if listnode1 != null then
+					assert ptypenode2 isa nullable PType
+#					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
 						else
 							listnode3.append(listnode1)
 						end
-					end
+#					end
 					if ptypenode2 != null then
 						listnode3.add(ptypenode2)
 					end
@@ -24141,11 +24140,11 @@ private class ReduceAction724
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					if pexprnode1 != null then
 						listnode2.add(pexprnode1)
 					end
@@ -24158,21 +24157,21 @@ private class ReduceAction725
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode1 = nodearraylist1 
+					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var pexprnode2 = nodearraylist2
-					assert pexprnode2 isa PExpr
-					if listnode1 != null then
+					assert pexprnode2 isa nullable PExpr
+#					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
 						else
 							listnode3.append(listnode1)
 						end
-					end
+#					end
 					if pexprnode2 != null then
 						listnode3.add(pexprnode2)
 					end
@@ -24185,18 +24184,18 @@ private class ReduceAction726
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
-					var listnode1 = nodearraylist1 
+					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
-					if listnode1 != null then
+#					if listnode1 != null then
 						if listnode2.is_empty then
 							listnode2 = listnode1
 						else
 							listnode2.append(listnode1)
 						end
-					end
+#					end
 					node_list = listnode2
 					p.push(p.go_to(128), node_list)
 	end
@@ -24206,28 +24205,28 @@ private class ReduceAction727
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode1 = nodearraylist1 
+					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
-					var listnode2 = nodearraylist2 
+					var listnode2 = nodearraylist2
 					assert listnode2 isa Array[Object]
-					if listnode1 != null then
+#					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
 						else
 							listnode3.append(listnode1)
 						end
-					end
-					if listnode2 != null then
+#					end
+#					if listnode2 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode2
 						else
 							listnode3.append(listnode2)
 						end
-					end
+#					end
 					node_list = listnode3
 					p.push(p.go_to(128), node_list)
 	end
@@ -24237,11 +24236,11 @@ private class ReduceAction728
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var pexprnode1 = nodearraylist1
-					assert pexprnode1 isa PExpr
+					assert pexprnode1 isa nullable PExpr
 					if pexprnode1 != null then
 						listnode2.add(pexprnode1)
 					end
@@ -24254,21 +24253,21 @@ private class ReduceAction729
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode1 = nodearraylist1 
+					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var pexprnode2 = nodearraylist2
-					assert pexprnode2 isa PExpr
-					if listnode1 != null then
+					assert pexprnode2 isa nullable PExpr
+#					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
 						else
 							listnode3.append(listnode1)
 						end
-					end
+#					end
 					if pexprnode2 != null then
 						listnode3.add(pexprnode2)
 					end
@@ -24281,11 +24280,11 @@ private class ReduceAction730
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var tidnode1 = nodearraylist1
-					assert tidnode1 isa TId
+					assert tidnode1 isa nullable TId
 					if tidnode1 != null then
 						listnode2.add(tidnode1)
 					end
@@ -24298,21 +24297,21 @@ private class ReduceAction731
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode1 = nodearraylist1 
+					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var tidnode2 = nodearraylist2
-					assert tidnode2 isa TId
-					if listnode1 != null then
+					assert tidnode2 isa nullable TId
+#					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
 						else
 							listnode3.append(listnode1)
 						end
-					end
+#					end
 					if tidnode2 != null then
 						listnode3.add(tidnode2)
 					end
@@ -24325,11 +24324,11 @@ private class ReduceAction732
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var tcommentnode1 = nodearraylist1
-					assert tcommentnode1 isa TComment
+					assert tcommentnode1 isa nullable TComment
 					if tcommentnode1 != null then
 						listnode2.add(tcommentnode1)
 					end
@@ -24342,21 +24341,21 @@ private class ReduceAction733
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode1 = nodearraylist1 
+					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var tcommentnode2 = nodearraylist2
-					assert tcommentnode2 isa TComment
-					if listnode1 != null then
+					assert tcommentnode2 isa nullable TComment
+#					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
 						else
 							listnode3.append(listnode1)
 						end
-					end
+#					end
 					if tcommentnode2 != null then
 						listnode3.add(tcommentnode2)
 					end
@@ -24369,11 +24368,11 @@ private class ReduceAction734
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var teolnode1 = nodearraylist1
-					assert teolnode1 isa TEol
+					assert teolnode1 isa nullable TEol
 					if teolnode1 != null then
 						listnode2.add(teolnode1)
 					end
@@ -24386,21 +24385,21 @@ private class ReduceAction735
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode1 = nodearraylist1 
+					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var teolnode2 = nodearraylist2
-					assert teolnode2 isa TEol
-					if listnode1 != null then
+					assert teolnode2 isa nullable TEol
+#					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
 						else
 							listnode3.append(listnode1)
 						end
-					end
+#					end
 					if teolnode2 != null then
 						listnode3.add(teolnode2)
 					end
@@ -24413,11 +24412,11 @@ private class ReduceAction736
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist1 = p.pop
 					var listnode2 = new Array[Object]
 					var ppropdefnode1 = nodearraylist1
-					assert ppropdefnode1 isa PPropdef
+					assert ppropdefnode1 isa nullable PPropdef
 					if ppropdefnode1 != null then
 						listnode2.add(ppropdefnode1)
 					end
@@ -24430,21 +24429,21 @@ private class ReduceAction737
 special ReduceAction
 	redef meth action(p: Parser)
 	do
-					var node_list: Object = null
+					var node_list: nullable Object = null
 					var nodearraylist2 = p.pop
 					var nodearraylist1 = p.pop
 					var listnode3 = new Array[Object]
-					var listnode1 = nodearraylist1 
+					var listnode1 = nodearraylist1
 					assert listnode1 isa Array[Object]
 					var ppropdefnode2 = nodearraylist2
-					assert ppropdefnode2 isa PPropdef
-					if listnode1 != null then
+					assert ppropdefnode2 isa nullable PPropdef
+#					if listnode1 != null then
 						if listnode3.is_empty then
 							listnode3 = listnode1
 						else
 							listnode3.append(listnode1)
 						end
-					end
+#					end
 					if ppropdefnode2 != null then
 						listnode3.add(ppropdefnode2)
 					end

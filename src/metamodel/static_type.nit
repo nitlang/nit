@@ -22,13 +22,13 @@ intrude import abstractmetamodel
 
 redef class MMLocalClass
 	# Cached result of get_type
-	attr _base_type_cache: MMType
+	attr _base_type_cache: nullable MMType
 
 	# Return the type of self for this class
 	meth get_type: MMType
 	do
 		if _base_type_cache == null then _base_type_cache = new MMTypeSimpleClass(self)
-		return _base_type_cache
+		return _base_type_cache.as(not null)
 	end
 
 	# Register a new ancestor
@@ -40,7 +40,7 @@ redef class MMLocalClass
 	end
 
 	# Array of ancestor that associate each superclass with the corresponding ancestor
-	readable attr _ancestors: Map[MMLocalClass, MMAncestor]
+	readable attr _ancestors: nullable Map[MMLocalClass, MMAncestor]
 
 	# The ancestor type for a given superclass
 	meth ancestor(c: MMLocalClass): MMType
@@ -51,13 +51,13 @@ end
 
 redef class MMLocalProperty
 	# The signature of the property (where it is declared)
-	readable writable attr _signature: MMSignature
+	readable writable attr _signature: nullable MMSignature
 
 	attr _signatures_cache: HashMap[MMType, MMSignature] = new HashMap[MMType, MMSignature]
 
 	# Return the adapted signature of self for a receiver of type t
 	meth signature_for(t: MMType): MMSignature do
-		if t == local_class.get_type then return signature
+		if t == local_class.get_type then return signature.as(not null)
 
 		if _signatures_cache.has_key(t) then return _signatures_cache[t]
 
@@ -70,34 +70,34 @@ end
 # Signature for local properties
 class MMSignature
 	# The type of the reveiver
-	readable attr _recv: MMType 
+	readable attr _recv: MMType
 
 	# The parameter types
- 	attr _params: Array[MMType]
+	attr _params: Array[MMType]
 
 	# The return type
- 	readable attr _return_type: MMType 
+	readable attr _return_type: nullable MMType
 
 	# The closure parameters
- 	readable attr _closures: Array[MMClosure] = new Array[MMClosure]
+	readable attr _closures: Array[MMClosure] = new Array[MMClosure]
 
 	# Number of parameters
 	meth arity: Int
 	do
-		assert _params != null
 		return _params.length
 	end
 
 	# Is self a valid subtype of an other signature
 	meth <(s: MMSignature): Bool
 	do
-		assert s != null
 		if self == s then
 			return true
 		end
 		assert _recv.module == s.recv.module
-		if arity != s.arity or (_return_type == null) != (s.return_type == null) then return false
-		if _return_type != null and not _return_type < s.return_type then
+		var rt = _return_type
+		var srt = s.return_type
+		if arity != s.arity or (rt == null) != (srt == null) then return false
+		if rt != null and not rt < srt.as(not null) then
 			return false
 		end
 
@@ -124,7 +124,7 @@ class MMSignature
 	redef meth to_s
 	do
 		var s = new Buffer
-		if _params != null and _params.length > 0 then
+		if _params.length > 0 then
 			var tmp: String
 			var a = new Array[String].with_capacity(_params.length)
 			for i in [0.._params.length[ do
@@ -148,12 +148,9 @@ class MMSignature
 			return self
 		end
 		var mod = r.module
-		var p = _params
-		if p != null then
-			p = new Array[MMType]
-			for i in _params do
-				p.add(i.for_module(mod).adapt_to(r))
-			end
+		var p = new Array[MMType]
+		for i in _params do
+			p.add(i.for_module(mod).adapt_to(r))
 		end
 		var rv = _return_type
 		if rv != null then
@@ -166,42 +163,36 @@ class MMSignature
 		return res
 	end
 
-	attr _not_for_self_cache: MMSignature = null
+	attr _not_for_self_cache: nullable MMSignature = null
 
 	# Return a type approximation if the reveiver is not self
 	# Useful for virtual types
 	meth not_for_self: MMSignature
 	do
-		var res = _not_for_self_cache
-		if res != null then return res
+		if _not_for_self_cache != null then return _not_for_self_cache.as(not null)
 
 		var need_for_self = false
-		var p = _params
-		if p != null then
-			p = new Array[MMType]
-			for i in _params do
-				var i2 = i.not_for_self
-				if i != i2 then need_for_self = true
-				p.add(i2)
-			end
+		var p = new Array[MMType]
+		for i in _params do
+			var i2 = i.not_for_self
+			if i != i2 then need_for_self = true
+			p.add(i2)
 		end
-		
+
 		var rv = _return_type
 		if rv != null then
 			rv = rv.not_for_self
 			if rv != _return_type then need_for_self = true
 		end
-		
-		var clos = _closures
-		if clos != null then
-			clos = new Array[MMClosure]
-			for c in _closures do
-				var c2 = c.not_for_self
-				if c2 != c then need_for_self = true
-				clos.add(c2)
-			end
+
+		var clos = new Array[MMClosure]
+		for c in _closures do
+			var c2 = c.not_for_self
+			if c2 != c then need_for_self = true
+			clos.add(c2)
 		end
 
+		var res: MMSignature
 		if need_for_self then
 			res = new MMSignature(p, rv, _recv)
 			res.closures.add_all(clos)
@@ -213,9 +204,8 @@ class MMSignature
 		return res
 	end
 
-	init(params: Array[MMType], return_type: MMType, r: MMType)
+	init(params: Array[MMType], return_type: nullable MMType, r: MMType)
 	do
-		assert params != null
 		_params = params
 		_return_type = return_type
 		_recv = r
@@ -269,10 +259,16 @@ end
 # Inheritance relation between two types
 abstract class MMAncestor
 	# The inherited type
-	readable writable attr _stype: MMType = null 
+	writable attr _stype: nullable MMType = null
+
+	# The inherited type
+	meth stype: MMType do return _stype.as(not null)
 
 	# The inheriter (heir) type
-	readable writable attr _inheriter: MMType  = null
+	writable attr _inheriter: nullable MMType = null
+
+	# The inheriter (heir) type
+	meth inheriter: MMType do return _inheriter.as(not null)
 
 	meth is_reffinement: Bool do
 		return stype.module != stype.module
@@ -287,7 +283,7 @@ abstract class MMAncestor
 
 	redef meth to_s
 	do
-		if stype == null then
+		if _stype == null then
 			return local_class.to_s
 		else
 			return stype.to_s
@@ -350,7 +346,7 @@ abstract class MMType
 	meth not_for_self: MMType do return self
 
 	# The nullable version of self (if needed)
-	attr _as_nullable_cache: MMType = null
+	attr _as_nullable_cache: nullable MMType = null
 
 	# IS the type can accept null?
 	meth is_nullable: Bool do return false
@@ -423,7 +419,7 @@ class MMTypeClass
 special MMType
 	redef readable attr _local_class: MMLocalClass
 	redef meth module do return _local_class.module end
-	redef meth <(t) do return t != null and t.is_supertype(self)
+	redef meth <(t) do return t.is_supertype(self)
 
 	redef meth to_s
 	do
@@ -432,14 +428,10 @@ special MMType
 
 	redef meth upcast_for(c)
 	do
-		assert _local_class != null
-		assert c != null
-
 		var t: MMType = self
 		if _local_class != c then
 			t = _local_class.ancestor(c)
 		end
-		assert t != null
 		return t
 	end
 
@@ -462,7 +454,6 @@ special MMTypeClass
 		if module != mod then
 			t = _local_class.for_module(mod).get_type
 		end
-		assert t != null
 		return t
 	end
 

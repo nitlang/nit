@@ -22,7 +22,7 @@ class Foo
 		10.output
 	end
 
-	redef meth ==(o: Object): Bool
+	redef meth ==(o: nullable Object): Bool
 	do
 		return true
 	end

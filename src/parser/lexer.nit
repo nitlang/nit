@@ -1338,7 +1338,7 @@ end
 # It is better user with the Parser
 class Lexer
 	# Last peeked token
-	attr _token: Token
+	attr _token: nullable Token
 
 	# Lexer current state
 	attr _state: Int = 0
@@ -1391,7 +1391,7 @@ class Lexer
 		while _token == null do
 			_token = get_token
 		end
-		return _token
+		return _token.as(not null)
 	end
 
 	# Give and consume the next token
@@ -1402,11 +1402,11 @@ class Lexer
 			result = get_token
 		end
 		_token = null
-		return result
+		return result.as(not null)
 	end
 
 	# Get a token, or null if it is discarded
-	private meth get_token: Token
+	private meth get_token: nullable Token
 	do
 		var dfa_state = 0
 

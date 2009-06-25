@@ -31,17 +31,13 @@ special MMType
 	redef meth is_valid do return _bound != null and _bound.is_valid
 
 	# The name of the type
-	readable attr _name: Symbol 
+	readable attr _name: Symbol
 
 	# The type refered
-	meth bound: MMType
-	do
-		assert is_valid
-		return _bound
-	end
-	attr _bound: MMType
+	meth bound: MMType do return _bound.as(not null)
+	attr _bound: nullable MMType
 
-	redef meth <(t) do return t != null and (t == self or t.is_supertype(_bound))
+	redef meth <(t) do return t == self or t.is_supertype(bound)
 	redef meth is_supertype(t) do return _bound.is_supertype(t)
 	redef meth is_nullable do return _bound.is_nullable
 	redef meth direct_type do return _bound.direct_type
@@ -49,7 +45,7 @@ special MMType
 
 	redef meth to_s do return _name.to_s
 
-	protected init(name: Symbol, bound: MMType)
+	protected init(name: Symbol, bound: nullable MMType)
 	do
 		_name = name
 		_bound = bound

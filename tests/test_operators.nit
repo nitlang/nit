@@ -46,7 +46,7 @@ class A
 	   5.output
 	   return self
    end
-   redef meth ==(a: Object): Bool
+   redef meth ==(a: nullable Object): Bool
    do
 	   7.output
 	   return true

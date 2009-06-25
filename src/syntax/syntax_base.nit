@@ -63,10 +63,10 @@ special MMConcreteClass
 	readable attr _nodes: Array[PClassdef]
 
 	# Concrete NIT source generic formal parameter by name
-	readable writable attr _formal_dict: Map[Symbol, MMTypeFormalParameter]
+	readable attr _formal_dict: Map[Symbol, MMTypeFormalParameter] = new HashMap[Symbol, MMTypeFormalParameter]
 
 	# Concrete NIT source properties by name
-	readable attr _src_local_properties: Map[Symbol, MMLocalProperty] 
+	readable attr _src_local_properties: Map[Symbol, MMLocalProperty]
 
 	init(mod: MMSrcModule, n: Symbol, cla: PClassdef, a: Int)
 	do
@@ -101,7 +101,7 @@ end
 
 redef class MMLocalProperty
 	# The attached node (if any)
-	meth node: PNode do return null
+	meth node: nullable PNode do return null
 
 	# Is the concrete method defined as init
 	meth is_init: Bool do return false
@@ -156,8 +156,8 @@ end
 class MMMethSrcMethod
 special MMSrcMethod
 	redef meth is_init do return _node isa AConcreteInitPropdef
-	redef readable attr _node: AMethPropdef
-	init(name: Symbol, cla: MMLocalClass, n: AMethPropdef)
+	redef readable attr _node: nullable AMethPropdef
+	init(name: Symbol, cla: MMLocalClass, n: nullable AMethPropdef)
 	do
 		super(name, cla)
 		_node = n
@@ -193,22 +193,20 @@ end
 # Local variables
 abstract class Variable
 	# Name of the variable
-	readable attr _name: Symbol 
+	readable attr _name: Symbol
 
 	# Declaration AST node
-	readable attr _decl: PNode
+	readable attr _decl: nullable PNode
 
 	# Static type
-	readable writable attr _stype: MMType 
+	readable writable attr _stype: nullable MMType
 
 	redef meth to_s do return _name.to_s
 
 	meth kind: String is abstract
 
-	init(n: Symbol, d: PNode)
+	init(n: Symbol, d: nullable PNode)
 	do
-		#assert n != null
-		#assert d != null
 		_name = n
 		_decl = d
 	end
@@ -225,7 +223,7 @@ end
 class ParamVariable
 special Variable
 	redef meth kind do return once "parameter"
-	init(n: Symbol, d: PNode) do super
+	init(n: Symbol, d: nullable PNode) do super
 end
 
 # Automatic variable (like in the 'for' statement)
@@ -323,43 +321,45 @@ special Visitor
 	end
 
 	# The current module
-	readable writable attr _module: MMSrcModule 
+	readable attr _module: MMSrcModule
 
 	# The current class
-	readable writable attr _local_class: MMSrcLocalClass 
+	meth local_class: MMSrcLocalClass do return _local_class.as(not null)
+	writable attr _local_class: nullable MMSrcLocalClass
 
 	# The current property
-	readable writable attr _local_property: MMLocalProperty
+	meth local_property: MMLocalProperty do return _local_property.as(not null)
+	writable attr _local_property: nullable MMLocalProperty
 
 	# The current tool configuration/status
 	readable attr _tc: ToolContext 
 
 	# Display an error for a given syntax node
-	meth error(n: PNode, s: String)
+	meth error(n: nullable PNode, s: String)
 	do
 		_tc.error("{locate(n)}: {s}")
 	end
 
 	# Display a warning for a given syntax node
-	meth warning(n: PNode, s: String)
+	meth warning(n: nullable PNode, s: String)
 	do
 		_tc.warning("{locate(n)}: {s}")
 	end
 
 	#
-	meth locate(n: PNode): String
+	meth locate(n: nullable PNode): String
 	do
 		if n != null then return n.locate
 		return _module.filename
 	end
 
 	# Check conformity and display error
-	meth check_conform(n: PNode, subtype: MMType, stype: MMType): Bool
+	meth check_conform(n: PNode, subtype: nullable MMType, stype: nullable MMType): Bool
 	do
 		if stype == null or subtype == null then
 			return false
 		end
-		if subtype < stype then
+		if subtype < stype  then
 			return true
 		end
 		# Do not enforce nullable subtype rules yet
@@ -392,8 +392,9 @@ special Visitor
 	end
 
 	# Combine check_conform and check_expr
-	meth check_conform_expr(n: PExpr, stype: MMType): Bool
+	meth check_conform_expr(n: PExpr, stype: nullable MMType): Bool
 	do
+		if stype == null then return false
 		if check_expr(n) then return check_conform(n, n.stype, stype) else return false
 	end
 
@@ -407,9 +408,9 @@ special Visitor
 	#   Int, Int, Object => return Object
 	#   Int, Float => display error, return null
 	#   nullable Int, Object => return nullable Object
-	meth check_conform_multiexpr(stype: MMType, nodes: Collection[PExpr]): MMType
+	meth check_conform_multiexpr(stype: nullable MMType, nodes: Collection[PExpr]): nullable MMType
 	do
-		var node: PExpr = null # candidate node
+		var node: nullable PExpr = null # candidate node
 		for n in nodes do
 			if not check_expr(n) then return null
 			var ntype = n.stype
@@ -418,13 +419,13 @@ special Visitor
 				stype = stype.as_nullable
 				ntype = ntype.as_nullable
 			end
-			if stype == null or (ntype != null and stype < ntype) then
+			if stype == null or stype < ntype then
 				stype = ntype
 				node = n
 			end
 		end
 		for n in nodes do
-			if not n.stype < stype then
+			if not n.stype < stype.as(not null) then
 				if node == null then
 					error(n, "Type error: no most general type. Got {n.stype} and {stype}.")
 				else
@@ -450,16 +451,16 @@ redef class PNode
 end
 
 redef class Token
-	attr _symbol: Symbol
+	attr _symbol_cache: nullable Symbol
 
 	# Symbol associated with the text
 	# Lazily computed
 	meth to_symbol: Symbol
 	do
-		var s = _symbol
+		var s = _symbol_cache
 		if s == null then
 			s = text.to_symbol
-			_symbol = s
+			_symbol_cache = s
 		end
 		return s
 	end
@@ -475,10 +476,10 @@ redef class AAttrPropdef
 	meth prop: MMSrcAttribute is abstract
 
 	# Associated read accessor (MM entity)
-	meth readmethod: MMSrcMethod is abstract
+	meth readmethod: nullable MMSrcMethod is abstract
 
 	# Associated write accessor (MM entity)
-	meth writemethod: MMSrcMethod is abstract
+	meth writemethod: nullable MMSrcMethod is abstract
 end
 
 redef class AMethPropdef
@@ -511,17 +512,17 @@ redef class PType
 	# Retrieve the local class corresponding to the type.
 	# Display an error and return null if there is no class
 	# Display an error and return null if the type is not class based (formal one)
-	meth get_local_class(v: AbsSyntaxVisitor): MMLocalClass is abstract
+	meth get_local_class(v: AbsSyntaxVisitor): nullable MMLocalClass is abstract
 
 	# Retrieve corresponding static type.
 	# Display an error and return null if there is a problem
-	meth get_stype(v: AbsSyntaxVisitor): MMType is abstract
+	meth get_stype(v: AbsSyntaxVisitor): nullable MMType is abstract
 
 	# Retrieve corresponding static type.
 	# Display an error and return null if there is a problem
 	# But do not performs any subtype check.
 	# get_unchecked_stype should be called to check that the static type is fully valid
-	meth get_unchecked_stype(v: AbsSyntaxVisitor): MMType is abstract
+	meth get_unchecked_stype(v: AbsSyntaxVisitor): nullable MMType is abstract
 
 	# Check that a static definition type is conform with regard to formal types
 	# Useful with get_unchecked_stype
@@ -530,7 +531,7 @@ redef class PType
 end
 
 redef class AType
-	attr _stype_cache: MMType
+	attr _stype_cache: nullable MMType = null
 	attr _stype_cached: Bool = false
 
 	redef meth get_local_class(v)
@@ -539,7 +540,7 @@ redef class AType
 		var mod = v.module
 		var cla = v.local_class
 
-		if (cla.formal_dict != null and cla.formal_dict.has_key(name)) or (cla.global_properties != null and cla.has_global_property_by_name(name)) then
+		if cla.formal_dict.has_key(name) or cla.has_global_property_by_name(name) then
 			v.error(n_id, "Type error: {name} is a formal type")
 			_stype_cached = true
 			return null
@@ -564,7 +565,7 @@ redef class AType
 		var name = n_id.to_symbol
 		var mod = v.module
 		var cla = v.local_class
-		var t: MMType
+		var t: nullable MMType
 
 		if cla.formal_dict.has_key(name) then
 			if n_types.length > 0 then
@@ -577,7 +578,7 @@ redef class AType
 			return t
 		end
 
-		if cla.global_properties != null and cla.has_global_property_by_name(name) then
+		if cla.has_global_property_by_name(name) then
 			if n_types.length > 0 then
 				v.error(self, "Type error: formal type {name} cannot have formal parameters.")
 				return null
@@ -604,7 +605,9 @@ redef class AType
 		if arity > 0 then
 			var tab = new Array[MMType]
 			for p in n_types do
-				tab.add(p.get_unchecked_stype(v))
+				var t2 = p.get_unchecked_stype(v)
+				if t2 == null then return null
+				tab.add(t2)
 			end
 			t = local_class.get_instantiate_type(tab)
 		else
@@ -661,33 +664,39 @@ end
 
 redef class AVardeclExpr
 	# Assiociated local variable
-	readable writable attr _variable: VarVariable
+	meth variable: VarVariable is abstract
+	#readable writable attr _variable: nullable VarVariable
 end
 
 redef class AForExpr
 	# Associated automatic local variable
-	readable writable attr _variable: AutoVariable
+	meth variable: AutoVariable is abstract
+	#readable writable attr _variable: nullable AutoVariable
 end
 
 redef class ASelfExpr
 	# Associated local variable
-	readable writable attr _variable: ParamVariable 
+	meth variable: ParamVariable is abstract
+	#readable writable attr _variable: nullable ParamVariable
 end
 
 redef class AVarFormExpr
 	# Associated local variable
-	readable writable attr _variable: Variable 
+	meth variable: Variable is abstract
+	#readable writable attr _variable: nullable Variable
 end
 
 redef class AClosureCallExpr
 	# Associated closure variable
-	readable writable attr _variable: ClosureVariable
+	meth variable: ClosureVariable is abstract
+	#readable writable attr _variable: nullable ClosureVariable
 end
 
 redef class PClosureDef
 	# Associated closure
-	readable writable attr _closure: MMClosure
+	#readable writable attr _closure: nullable MMClosure
+	meth closure: MMClosure is abstract
 
 	# Automatic variables
-	readable writable attr _variables: Array[AutoVariable]
+	readable writable attr _variables: nullable Array[AutoVariable]
 end

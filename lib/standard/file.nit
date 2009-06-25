@@ -31,9 +31,7 @@ redef class Object
 	# Print an `object' on the standard output (`stdout') and add a newline.
 	protected meth print(object: Object)
 	do
-		if object != null then
-			stdout.write(object.to_s)
-		end
+		stdout.write(object.to_s)
 		stdout.write("\n")
 	end
 
@@ -54,12 +52,11 @@ end
 class FStream
 special IOS
 special NativeFileCapable
-	
 	# The path of the file.
-	readable attr _path: String = null
+	readable attr _path: nullable String = null
 
 	# The FILE *.
-	attr _file: NativeFile = null
+	attr _file: nullable NativeFile = null
 
 	meth file_stat: FileStat
 	do return _file.file_stat end

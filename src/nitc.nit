@@ -44,8 +44,8 @@ special AbstractCompiler
 		output_file = opt_output.value
 		boost = opt_boost.value
 		no_cc = opt_no_cc.value
-		ext_prefix = opt_extension_prefix.value
-		if ext_prefix == null then ext_prefix = ""
+		var ext = opt_extension_prefix.value
+		if ext != null then ext_prefix = ext else ext_prefix = ""
 		global = opt_global.value
 		compdir = opt_compdir.value
 		if compdir == null then

@@ -184,7 +184,7 @@ special IStream
 	redef meth eof do return _buffer_pos >= _buffer.length and end_reached
 
 	# The buffer
-	attr _buffer: Buffer = null
+	attr _buffer: nullable Buffer = null
 
 	# The current position in the buffer
 	attr _buffer_pos: Int = 0

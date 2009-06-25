@@ -186,7 +186,7 @@ special RemovableCollection[E]
 	meth add(item: E) is abstract
 
 	# Add each item of `coll`.
-	meth add_all(coll: Collection[E]) do if coll != null then for i in coll do add(i)
+	meth add_all(coll: Collection[E]) do for i in coll do add(i)
 end
 
 # Abstract sets.
@@ -346,7 +346,7 @@ special SimpleCollection[E]
 	meth push(e: E) is abstract
 
 	# Add each item of `coll` after the last.
-	meth append(coll: Collection[E]) do if coll != null then for i in coll do push(i)
+	meth append(coll: Collection[E]) do for i in coll do push(i)
 
 	# Remove the last item.
 	meth pop: E is abstract
@@ -375,7 +375,7 @@ interface CoupleMap[K, E]
 special Map[K, E]
 	# Return the couple of the corresponding key
 	# Return null if the key is no associated element
-	protected meth couple_at(key: K): Couple[K, E] is abstract
+	protected meth couple_at(key: K): nullable Couple[K, E] is abstract
 
 	redef meth [](key)
 	do
@@ -406,7 +406,6 @@ special MapIterator[K, E]
 	redef meth next
 	do 
 		_iter.next
-		while _iter.is_ok and _iter.item == null do _iter.next
 	end
 
 	attr _iter: Iterator[Couple[K,E]]

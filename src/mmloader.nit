@@ -50,7 +50,7 @@ special MMContext
 	end
 
 	# Paths where to locate modules files
-	readable attr _paths: Array[String]
+	readable attr _paths: Array[String] = new Array[String]
 
 	# List of module loaders
 	attr _loaders: Array[ModuleLoader] = new Array[ModuleLoader]
@@ -89,7 +89,6 @@ special MMContext
 		option_context.parse(args)
 
 		# Setup the paths value
-		_paths = new Array[String]
 		paths.append(opt_path.value)
 
 		var path_env = once ("NIT_PATH".to_symbol).environ
@@ -110,7 +109,7 @@ special MMContext
 	# Load and process a module in a directory (or a parent directory).
 	# If the module is already loaded, just return it without further processing.
 	# If no module is found, just return null without complaining.
-	private meth try_to_load(module_name: Symbol, dir: MMDirectory): MMModule
+	private meth try_to_load(module_name: Symbol, dir: MMDirectory): nullable MMModule
 	do
 		# Look in the module directory
 		for m in dir.modules do
@@ -190,11 +189,11 @@ special MMContext
 
 	# Locate, load and analysis a module (and its supermodules).
 	# If the module is already loaded, just return it without further processing.
-	meth get_module(module_name: Symbol, from: MMModule): MMModule
+	meth get_module(module_name: Symbol, from: nullable MMModule): MMModule
 	do
 		var m: MMModule
 		if from != null then
-			var dir = from.directory
+			var dir: nullable MMDirectory = from.directory
 			while dir != null do
 				var m = try_to_load(module_name, dir)
 				if m != null then return m
@@ -237,7 +236,7 @@ class ModuleLoader
 	meth file_type: String is abstract
 
 	# Try to load a new module directory
-	meth try_to_load_dir(dirname: Symbol, parent_dir: MMDirectory): MMDirectory
+	meth try_to_load_dir(dirname: Symbol, parent_dir: MMDirectory): nullable MMDirectory
 	do
 		var fname = "{parent_dir.path}/{dirname}/"
 		if not fname.file_exists then return null

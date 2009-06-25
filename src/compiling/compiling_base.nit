@@ -21,14 +21,14 @@ import syntax
 private import utils
 
 redef class ToolContext
-	readable writable attr _global: Bool = false 
-	readable writable attr _compdir: String
-	readable writable attr _clibdir: String
-	readable writable attr _bindir: String
-	readable writable attr _output_file: String
+	readable writable attr _global: Bool = false
+	readable writable attr _compdir: nullable String = null
+	readable writable attr _clibdir: nullable String = null
+	readable writable attr _bindir: nullable String = null
+	readable writable attr _output_file: nullable String = null
 	readable writable attr _boost: Bool = false
 	readable writable attr _no_cc: Bool = false
-	readable writable attr _ext_prefix: String 
+	readable writable attr _ext_prefix: String = ""
 end
 
 # Class used to generate files.
@@ -163,7 +163,7 @@ end
 
 redef class MMLocalClass
 	# Cached primitive_info result
-	attr _primitive_info_cache: PrimitiveInfo
+	attr _primitive_info_cache: nullable PrimitiveInfo = null
 
 	# If primitive_info result cached?
 	attr _primitive_info_b: Bool = false
@@ -171,7 +171,7 @@ redef class MMLocalClass
 	# Return the primitive information of the class.
 	# Return null if the class is not primitive
 	# FIXME: Only here since there is no universal type yet
-	meth primitive_info: PrimitiveInfo
+	meth primitive_info: nullable PrimitiveInfo
 	do
 		if _primitive_info_b == true then return _primitive_info_cache
 
@@ -288,15 +288,17 @@ end
 
 redef class MMLocalProperty
 	# Cacher result of cname
-	attr _cname_cache: String
+	attr _cname_cache: nullable String
 
 	# The mangled name of the method
 	meth cname: String
 	do
-		if _cname_cache == null then
-			_cname_cache = cmangle(module.name, local_class.name, name)
+		var cname = _cname_cache
+		if cname == null then
+			cname = cmangle(module.name, local_class.name, name)
+			_cname_cache = cname
 		end
-		return _cname_cache
+		return cname
 	end
 
 	# C macro used to get the function for the call of a super property

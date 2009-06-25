@@ -63,25 +63,24 @@ end
 # A HashCollection is an array of HashNode[K] indexed by the K hash value
 private class HashCollection[K: Object, N: HashNode[K], E]
 special Collection[E]
-special ArrayCapable[N]
-	attr _array: NativeArray[N] = null # Used to store items
+special ArrayCapable[nullable N]
+	attr _array: nullable NativeArray[nullable N] = null # Used to store items
 	attr _capacity: Int = 0 # Size of _array
 	redef readable attr _length: Int = 0 # Number of items in the map
 
-	readable attr _first_item: N = null # First added item (used to visit items in nice order)
-	attr _last_item: N = null # Last added item (same)
+	readable attr _first_item: nullable N = null # First added item (used to visit items in nice order)
+	attr _last_item: nullable N = null # Last added item (same)
 
 	# The last index accessed
 	attr _last_accessed_index: Int = -1
 
 	# The last key accessed
-	attr _last_accessed_key: K = null
+	attr _last_accessed_key: nullable K = null
 
 	# Return the index of the k element
 	meth index_at(k: K): Int
 	do
 		var arr = _array
-		assert k != null
 
 		# Fisrt step: look in the last indexed elt
 		if k == _last_accessed_key then return _last_accessed_index
@@ -221,8 +220,8 @@ end
 private class HashNode[K]
 	meth key: K is abstract
 	type N: HashNode[K]
-	readable writable attr _next_item: N = null
-	readable writable attr _prev_item: N = null
+	readable writable attr _next_item: nullable N = null
+	readable writable attr _prev_item: nullable N = null
 end
 
 class HashMap[K, V]
@@ -358,7 +357,7 @@ special MapIterator[K, V]
 	attr _map: HashMap[K, V]
 
 	# The current node
-	attr _node: HashMapNode[K, V]
+	attr _node: nullable HashMapNode[K, V]
 
 	init(map: HashMap[K, V])
 	do
@@ -441,7 +440,7 @@ special Iterator[E]
 	attr _set: HashSet[E]
 
 	# The position in the internal map storage
-	attr _node: HashSetNode[E]
+	attr _node: nullable HashSetNode[E]
 
 	init(set: HashSet[E])
 	do

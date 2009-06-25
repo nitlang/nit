@@ -32,12 +32,12 @@ interface Object
 	# Have `self' and `other' the same value?
 	##
 	# Implicitely, the default implementation, is ==
-	meth ==(other: Object): Bool do return self is other
+	meth ==(other: nullable Object): Bool do return self is other
 
 	# Have `self' and `other' different values?
 	##
 	# != is equivament with "not =".
-	meth !=(other: Object): Bool do return not (self == other)
+	meth !=(other: nullable Object): Bool do return not (self == other)
 
 	# Display self on stdout (debug only).
 	meth output

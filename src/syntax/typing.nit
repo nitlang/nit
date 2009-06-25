@@ -44,25 +44,28 @@ special AbsSyntaxVisitor
 	end
 
 	# Current knowledge about variables names and types
-	readable writable attr _variable_ctx: VariableContext
+	meth variable_ctx: VariableContext do return _variable_ctx.as(not null)
+	writable attr _variable_ctx: nullable VariableContext
 
 	# Non-bypassable knowledge about variables names and types
-	readable writable attr _base_variable_ctx: VariableContext
+	meth base_variable_ctx: VariableContext do return _base_variable_ctx.as(not null)
+	writable attr _base_variable_ctx: nullable VariableContext
 
 	# Current knowledge about escapable blocks
 	readable writable attr _escapable_ctx: EscapableContext = new EscapableContext(self)
 
 	# The current reciever
-	readable writable attr _self_var: ParamVariable
+	meth self_var: ParamVariable do return _self_var.as(not null)
+	writable attr _self_var: nullable ParamVariable
 
 	# Block of the current method
-	readable writable attr _top_block: PExpr
+	readable writable attr _top_block: nullable PExpr
 
 	# List of explicit invocation of constructors of super-classes
-	readable writable attr _explicit_super_init_calls: Array[MMMethod]
+	readable writable attr _explicit_super_init_calls: nullable Array[MMMethod]
 
 	# Is a other constructor of the same class invoked
-	readable writable attr _explicit_other_init_call: Bool
+	readable writable attr _explicit_other_init_call: Bool = false
 
 	# Make the if_true_variable_ctx of the expression effective
 	private meth use_if_true_variable_ctx(e: PExpr)
@@ -83,7 +86,7 @@ special AbsSyntaxVisitor
 
 	init(tc, module) do super
 
-	private meth get_default_constructor_for(n: PNode, c: MMLocalClass, prop: MMSrcMethod): MMMethod
+	private meth get_default_constructor_for(n: PNode, c: MMLocalClass, prop: MMSrcMethod): nullable MMMethod
 	do
 		var v = self
 		#var prop = v.local_property
@@ -97,7 +100,7 @@ special AbsSyntaxVisitor
 			var gps = gp.signature_for(c.get_type)
 			assert gp isa MMSrcMethod
 			var garity = gps.arity
-			if prop != null and gp.name == prop.name then
+			if gp.name == prop.name then
 				if garity == 0 or (parity == garity and prop.signature < gps) then
 					return gp
 				else
@@ -159,13 +162,14 @@ redef class AAttrPropdef
 	do
 		super
 		if n_expr != null then
-			v.check_conform_expr(n_expr, prop.signature.return_type)
+			v.check_conform_expr(n_expr.as(not null), prop.signature.return_type.as(not null))
 		end
 	end
 end
 
 redef class AMethPropdef
-	redef readable attr _self_var: ParamVariable
+	redef meth self_var do return _self_var.as(not null)
+	attr _self_var: nullable ParamVariable
 	redef meth accept_typing(v)
 	do
 		v.variable_ctx = new RootVariableContext(v, self)
@@ -199,8 +203,8 @@ redef class AConcreteInitPropdef
 		else 
 			var i = 0
 			var l = explicit_super_init_calls.length
-			var cur_m: MMMethod = null
-			var cur_c: MMLocalClass = null
+			var cur_m: nullable MMMethod = null
+			var cur_c: nullable MMLocalClass = null
 			if i < l then
 				cur_m = explicit_super_init_calls[i]
 				cur_c = cur_m.global.intro.local_class.for_module(v.module)
@@ -212,7 +216,7 @@ redef class AConcreteInitPropdef
 					j += 1
 				else if cur_c != null and (c.cshe <= cur_c or cur_c.global.is_mixin) then
 					if c == cur_c then j += 1
-					super_init_calls.add(cur_m)
+					super_init_calls.add(cur_m.as(not null))
 					i += 1
 					if i < l then
 						cur_m = explicit_super_init_calls[i]
@@ -236,16 +240,13 @@ end
 redef class PParam
 	redef meth after_typing(v)
 	do
-		# TODO: why the test?
-		if v.variable_ctx != null then
-			v.variable_ctx.add(variable)
-		end
+		v.variable_ctx.add(variable)
 	end
 end
 
 redef class AClosureDecl
 	# The corresponding escapable object
-	readable attr _escapable: EscapableBlock
+	readable attr _escapable: nullable EscapableBlock
 
 	redef meth accept_typing(v)
 	do
@@ -257,8 +258,9 @@ redef class AClosureDecl
 		v.base_variable_ctx = v.variable_ctx
 		v.variable_ctx = v.variable_ctx.sub(self)
 
-		_escapable = new EscapableClosure(self, variable.closure, null)
-		v.escapable_ctx.push(_escapable)
+		var escapable = new EscapableClosure(self, variable.closure, null)
+		_escapable = escapable
+		v.escapable_ctx.push(escapable)
 
 		super
 
@@ -280,7 +282,9 @@ redef class AClosureDecl
 end
 
 redef class PType
-	readable attr _stype: MMType
+	meth stype: MMType do return _stype.as(not null)
+	attr _stype: nullable MMType
+
 	redef meth after_typing(v)
 	do
 		_stype = get_stype(v)
@@ -300,9 +304,9 @@ redef class PExpr
 			print "{locate}: is_statement"
 			abort
 		end
-		return _stype
+		return _stype.as(not null)
 	end
-	attr _stype: MMType
+	attr _stype: nullable MMType
 
 	# Is the expression the implicit receiver
 	meth is_implicit_self: Bool do return false
@@ -311,30 +315,33 @@ redef class PExpr
 	meth is_self: Bool do return false
 
 	# The variable accessed is any
-	meth its_variable: Variable do return null
+	meth its_variable: nullable Variable do return null
 
 	# The variable type information if current boolean expression is true
-	readable private attr _if_true_variable_ctx: VariableContext
+	readable private attr _if_true_variable_ctx: nullable VariableContext
 
 	# The variable type information if current boolean expression is false
-	readable private attr _if_false_variable_ctx: VariableContext
+	readable private attr _if_false_variable_ctx: nullable VariableContext
 end
 
 redef class AVardeclExpr
+	attr _variable: nullable VarVariable
+	redef meth variable do return _variable.as(not null)
+
 	redef meth after_typing(v)
 	do
 		var va = new VarVariable(n_id.to_symbol, self)
-		variable = va
+		_variable = va
 		v.variable_ctx.add(va)
 		if n_expr != null then v.variable_ctx.mark_is_set(va)
 
 		if n_type != null then
 			va.stype = n_type.stype
 			if n_expr != null then
-				v.check_conform_expr(n_expr, va.stype)
+				v.check_conform_expr(n_expr.as(not null), va.stype)
 			end
 		else
-			if not v.check_expr(n_expr) then return
+			if not v.check_expr(n_expr.as(not null)) then return
 			va.stype = n_expr.stype
 		end
 		_is_typed = true
@@ -366,12 +373,13 @@ redef class AReturnExpr
 	do
 		v.variable_ctx.unreash = true
 		var t = v.local_property.signature.return_type
-		if n_expr == null and t != null then
+		var e = n_expr
+		if e == null and t != null then
 			v.error(self, "Error: Return without value in a function.")
-		else if n_expr != null and t == null then
+		else if e != null and t == null then
 			v.error(self, "Error: Return with value in a procedure.")
-		else if n_expr != null and t != null then
-			v.check_conform_expr(n_expr, t)
+		else if e != null and t != null then
+			v.check_conform_expr(e, t)
 		end
 		_is_typed = true
 	end
@@ -395,7 +403,7 @@ redef class AContinueExpr
 		else if n_expr != null and t == null then
 			v.error(self, "Error: continue without value required in this block.")
 		else if n_expr != null and t != null then
-			v.check_conform_expr(n_expr, t)
+			v.check_conform_expr(n_expr.as(not null), t)
 		end
 		_is_typed = true
 	end
@@ -415,7 +423,7 @@ redef class ABreakExpr
 			v.error(self, "Error: break without value required in this block.")
 		else if n_expr != null and bl != null then
 			# Typing check can only be done later
-			bl.add(n_expr)
+			bl.add(n_expr.as(not null))
 		end
 		_is_typed = true
 	end
@@ -440,7 +448,7 @@ redef class AIfExpr
 
 		# Process the 'then'
 		if n_then != null then
-			v.variable_ctx = v.variable_ctx.sub(n_then)
+			v.variable_ctx = v.variable_ctx.sub(n_then.as(not null))
 			v.visit(n_then)
 		end
 
@@ -453,7 +461,7 @@ redef class AIfExpr
 
 		# Process the 'else'
 		if n_else != null then
-			v.variable_ctx = v.variable_ctx.sub(n_else)
+			v.variable_ctx = v.variable_ctx.sub(n_else.as(not null))
 			v.visit(n_else)
 		end
 
@@ -466,12 +474,13 @@ end
 
 redef class AWhileExpr
 	# The corresponding escapable block
-	readable attr _escapable: EscapableBlock
+	readable attr _escapable: nullable EscapableBlock
 
 	redef meth accept_typing(v)
 	do
-		_escapable = new EscapableBlock(self)
-		v.escapable_ctx.push(_escapable)
+		var escapable = new EscapableBlock(self)
+		_escapable = escapable
+		v.escapable_ctx.push(escapable)
 		var old_var_ctx = v.variable_ctx
 		var old_base_var_ctx = v.base_variable_ctx
 		v.base_variable_ctx = v.variable_ctx
@@ -486,7 +495,7 @@ redef class AWhileExpr
 
 		# Process inside
 		if n_block != null then
-			v.variable_ctx = v.variable_ctx.sub(n_block)
+			v.variable_ctx = v.variable_ctx.sub(n_block.as(not null))
 			v.visit(n_block)
 		end
 
@@ -498,36 +507,45 @@ redef class AWhileExpr
 end
 
 redef class AForExpr
-	# The corresponding escapable block
-	readable attr _escapable: EscapableBlock
+	attr _variable: nullable AutoVariable
+	redef meth variable do return _variable.as(not null)
 
-	readable attr _meth_iterator: MMMethod
-	readable attr _meth_is_ok: MMMethod
-	readable attr _meth_item: MMMethod
-	readable attr _meth_next: MMMethod
+	# The corresponding escapable block
+	readable attr _escapable: nullable EscapableBlock
+
+	attr _meth_iterator: nullable MMMethod
+	meth meth_iterator: MMMethod do return _meth_iterator.as(not null)
+	attr _meth_is_ok: nullable MMMethod
+	meth meth_is_ok: MMMethod do return _meth_is_ok.as(not null)
+	attr _meth_item: nullable MMMethod
+	meth meth_item: MMMethod do return _meth_item.as(not null)
+	attr _meth_next: nullable MMMethod
+	meth meth_next: MMMethod do return _meth_next.as(not null)
 	redef meth accept_typing(v)
 	do
-		_escapable = new EscapableBlock(self)
-		v.escapable_ctx.push(_escapable)
+		var escapable = new EscapableBlock(self)
+		_escapable = escapable
+		v.escapable_ctx.push(escapable)
 
 		var old_var_ctx = v.variable_ctx
 		var old_base_var_ctx = v.base_variable_ctx
 		v.base_variable_ctx = v.variable_ctx
 		v.variable_ctx = v.variable_ctx.sub(self)
 		var va = new AutoVariable(n_id.to_symbol, self)
-		variable = va
+		_variable = va
 		v.variable_ctx.add(va)
 
 		v.visit(n_expr)
 
 		if not v.check_conform_expr(n_expr, v.type_collection) then return
 		var expr_type = n_expr.stype
+
 		_meth_iterator = expr_type.local_class.select_method(once ("iterator".to_symbol))
 		if _meth_iterator == null then
 			v.error(self, "Error: Collection MUST have an iterate method")
 			return
 		end
-		var iter_type = _meth_iterator.signature_for(expr_type).return_type
+		var iter_type = _meth_iterator.signature_for(expr_type).return_type.as(not null)
 		_meth_is_ok = iter_type.local_class.select_method(once ("is_ok".to_symbol))
 		if _meth_is_ok == null then
 			v.error(self, "Error: {iter_type} MUST have an is_ok method")
@@ -566,6 +584,11 @@ redef class AAssertExpr
 	end
 end
 
+redef class AVarFormExpr
+	attr _variable: nullable Variable
+	redef meth variable do return _variable.as(not null)
+end
+
 redef class AVarExpr
 	redef meth its_variable do return variable
 
@@ -598,7 +621,7 @@ redef class AReassignFormExpr
 	# Compute and check method used through the reassigment operator
 	# On success return the static type of the result of the reassigment operator
 	# Else display an error and return null
-	private meth do_rvalue_typing(v: TypingVisitor, type_lvalue: MMType): MMType
+	private meth do_rvalue_typing(v: TypingVisitor, type_lvalue: nullable MMType): nullable MMType
 	do
 		if type_lvalue == null then
 			return null
@@ -618,7 +641,7 @@ redef class AReassignFormExpr
 	end
 
 	# Method used through the reassigment operator (once computed)
-	readable attr _assign_method: MMMethod
+	readable attr _assign_method: nullable MMMethod
 end
 
 redef class AVarReassignExpr
@@ -652,11 +675,14 @@ redef class AMinusAssignOp
 end
 
 redef class ASelfExpr
+	attr _variable: nullable ParamVariable
+	redef meth variable do return _variable.as(not null)
+
 	redef meth its_variable do return variable
 
 	redef meth after_typing(v)
 	do
-		variable = v.self_var
+		_variable = v.self_var
 		_stype = v.variable_ctx.stype(variable)
 		_is_typed = true
 	end
@@ -782,7 +808,8 @@ redef class ACharExpr
 end
 
 redef class AStringFormExpr
-	readable attr _meth_with_native: MMMethod
+	attr _meth_with_native: nullable MMMethod
+	meth meth_with_native: MMMethod do return _meth_with_native.as(not null)
 	redef meth after_typing(v)
 	do
 		_stype = v.type_string
@@ -793,17 +820,22 @@ redef class AStringFormExpr
 end
 
 redef class ASuperstringExpr
-	readable attr _meth_with_capacity: MMMethod
-	readable attr _meth_add: MMMethod
-	readable attr _meth_to_s: MMMethod
-	readable attr _atype: MMType
+	meth meth_with_capacity: MMMethod do return _meth_with_capacity.as(not null)
+	attr _meth_with_capacity: nullable MMMethod
+	meth meth_add: MMMethod do return _meth_add.as(not null)
+	attr _meth_add: nullable MMMethod
+	meth meth_to_s: MMMethod do return _meth_to_s.as(not null)
+	attr _meth_to_s: nullable MMMethod
+	readable attr _atype: nullable MMType
 	redef meth after_typing(v)
 	do
-		_stype = v.type_string
-		_atype = v.type_array(_stype)
-		_meth_with_capacity = _atype.local_class.select_method(once "with_capacity".to_symbol)
+		var stype = v.type_string
+		_stype = stype
+		var atype = v.type_array(stype)
+		_atype = atype
+		_meth_with_capacity = atype.local_class.select_method(once "with_capacity".to_symbol)
 		if _meth_with_capacity == null then v.error(self, "{_atype} MUST have a with_capacity method.")
-		_meth_add = _atype.local_class.select_method(once "add".to_symbol)
+		_meth_add = atype.local_class.select_method(once "add".to_symbol)
 		if _meth_add == null then v.error(self, "{_atype} MUST have an add method.")
 		_meth_to_s = v.type_object.local_class.select_method(once "to_s".to_symbol)
 		if _meth_to_s == null then v.error(self, "Object MUST have a to_s method.")
@@ -820,14 +852,15 @@ redef class ANullExpr
 end
 
 redef class AArrayExpr
-	readable attr _meth_with_capacity: MMMethod
-	readable attr _meth_add: MMMethod
+	meth meth_with_capacity: MMMethod do return _meth_with_capacity.as(not null)
+	attr _meth_with_capacity: nullable MMMethod
+	meth meth_add: MMMethod do return _meth_add.as(not null)
+	attr _meth_add: nullable MMMethod
 
 	redef meth after_typing(v)
 	do
 		var stype = v.check_conform_multiexpr(null, n_exprs)
-		if stype == null then return
-		do_typing(v, stype)
+		if stype != null then do_typing(v, stype)
 	end
 
 	private meth do_typing(v: TypingVisitor, element_type: MMType)
@@ -844,7 +877,8 @@ redef class AArrayExpr
 end
 
 redef class ARangeExpr
-	readable attr _meth_init: MMMethod
+	meth meth_init: MMMethod do return _meth_init.as(not null)
+	attr _meth_init: nullable MMMethod
 	redef meth after_typing(v)
 	do
 		if not v.check_expr(n_expr) or not v.check_expr(n_expr2) then return
@@ -882,7 +916,7 @@ end
 redef class ASuperExpr
 special ASuperInitCall
 	# readable attr _prop: MMSrcMethod
-	readable attr _init_in_superclass: MMMethod
+	readable attr _init_in_superclass: nullable MMMethod
 	redef meth after_typing(v)
 	do
 		var precs: Array[MMLocalProperty] = v.local_property.prhe.direct_greaters
@@ -909,7 +943,7 @@ special ASuperInitCall
 			_init_in_superclass = p
 			register_super_init_call(v, p)
 			if n_args.length > 0 then
-				var signature = get_signature(v, v.self_var.stype, p, true)
+				var signature = get_signature(v, v.self_var.stype.as(not null), p, true)
 				_arguments = process_signature(v, signature, p.name, n_args.to_a)
 			end
 		else
@@ -917,19 +951,19 @@ special ASuperInitCall
 			return
 		end
 
-		if precs.first.signature_for(v.self_var.stype).return_type != null then
+		if precs.first.signature_for(v.self_var.stype.as(not null)).return_type != null then
 			var stypes = new Array[MMType]
-			var stype: MMType = null
+			var stype: nullable MMType = null
 			for prop in precs do
 				assert prop isa MMMethod
-				var t = prop.signature_for(v.self_var.stype).return_type.for_module(v.module).adapt_to(v.local_property.signature.recv)
+				var t = prop.signature_for(v.self_var.stype.as(not null)).return_type.for_module(v.module).adapt_to(v.local_property.signature.recv)
 				stypes.add(t)
 				if stype == null or stype < t then
 					stype = t
 				end
 			end
 			for t in stypes do
-				v.check_conform(self, t, stype)
+				v.check_conform(self, t, stype.as(not null))
 			end
 			_stype = stype
 		end
@@ -942,10 +976,10 @@ end
 
 redef class AAttrFormExpr
 	# Attribute accessed
-	readable attr _prop: MMAttribute
+	readable attr _prop: nullable MMAttribute
 
 	# Attribute type of the acceded attribute
-	readable attr _attr_type: MMType
+	readable attr _attr_type: nullable MMType
 
 	# Compute the attribute accessed
 	private meth do_typing(v: TypingVisitor)
@@ -1017,13 +1051,13 @@ end
 class AAbsAbsSendExpr
 special PExpr
 	# The signature of the called property
-	readable attr _prop_signature: MMSignature
+	readable attr _prop_signature: nullable MMSignature
 
 	# The real arguments used (after star transformation) (once computed)
-	readable attr _arguments: Array[PExpr]
+	readable attr _arguments: nullable Array[PExpr]
 
 	# Check the conformity of a set of arguments `raw_args' to a signature.
-	private meth process_signature(v: TypingVisitor, psig: MMSignature, name: Symbol, raw_args: Array[PExpr]): Array[PExpr]
+	private meth process_signature(v: TypingVisitor, psig: MMSignature, name: Symbol, raw_args: nullable Array[PExpr]): nullable Array[PExpr]
 	do
 		var par_vararg = psig.vararg_rank
 		var par_arity = psig.arity
@@ -1060,7 +1094,7 @@ special PExpr
 	end
 
 	# Check the conformity of a set of defined closures
-	private meth process_closures(v: TypingVisitor, psig: MMSignature, name: Symbol, cd: Array[PClosureDef]): MMType
+	private meth process_closures(v: TypingVisitor, psig: MMSignature, name: Symbol, cd: nullable Array[PClosureDef]): nullable MMType
 	do
 		var t = psig.return_type
 		var cs = psig.closures # Declared closures
@@ -1075,7 +1109,7 @@ special PExpr
 				v.error(self, "Error: {name} requires {cs.length} blocks, {cd.length} found.")
 			else
 				# Initialize the break list if a value is required for breaks (ie. if the method is a function)
-				var break_list: Array[ABreakExpr] = null
+				var break_list: nullable Array[ABreakExpr] = null
 				if t != null then break_list = new Array[ABreakExpr]
 
 				# Process each closure definition
@@ -1103,12 +1137,11 @@ end
 class AAbsSendExpr
 special AAbsAbsSendExpr
 	# Compute the called global property
-	private meth do_typing(v: TypingVisitor, type_recv: MMType, is_implicit_self: Bool, recv_is_self: Bool, name: Symbol, raw_args: Array[PExpr], closure_defs: Array[PClosureDef])
+	private meth do_typing(v: TypingVisitor, type_recv: MMType, is_implicit_self: Bool, recv_is_self: Bool, name: Symbol, raw_args: nullable Array[PExpr], closure_defs: nullable Array[PClosureDef])
 	do
 		var prop = get_property(v, type_recv, is_implicit_self, name)
 		if prop == null then return
 		var sig = get_signature(v, type_recv, prop, recv_is_self)
-		if sig == null then return
 		var args = process_signature(v, sig, prop.name, raw_args)
 		if args == null then return
 		var rtype = process_closures(v, sig, prop.name, closure_defs)
@@ -1119,11 +1152,10 @@ special AAbsAbsSendExpr
 		_return_type = rtype
 	end
 
-	private meth get_property(v: TypingVisitor, type_recv: MMType, is_implicit_self: Bool, name: Symbol): MMMethod
+	private meth get_property(v: TypingVisitor, type_recv: MMType, is_implicit_self: Bool, name: Symbol): nullable MMMethod
 	do
-		if type_recv == null then return null
 		var lc = type_recv.local_class
-		var prop: MMMethod = null
+		var prop: nullable MMMethod = null
 		if lc.has_global_property_by_name(name) then prop = lc.select_method(name)
 		if prop == null and v.local_property.global.is_init then
 			var props = type_recv.local_class.super_methods_named(name)
@@ -1158,10 +1190,10 @@ special AAbsAbsSendExpr
 	end
 
 	# The invoked method (once computed)
-	readable attr _prop: MMMethod
+	readable attr _prop: nullable MMMethod
 
 	# The return type (if any) (once computed)
-	readable attr _return_type: MMType
+	readable attr _return_type: nullable MMType
 end
 
 # A possible call of constructor in a super class
@@ -1174,9 +1206,10 @@ special AAbsSendExpr
 			v.error(self, "Error: Constructor invocation {property} must not be in nested block.")
 		end
 		var cla = v.module[property.global.intro.local_class.global]
-		var prev_class: MMLocalClass = null
-		if not v.explicit_super_init_calls.is_empty then
-			prev_class = v.explicit_super_init_calls.last.global.intro.local_class
+		var prev_class: nullable MMLocalClass = null
+		var esic = v.explicit_super_init_calls.as(not null)
+		if not esic.is_empty then
+			prev_class = esic.last.global.intro.local_class
 		end
 		var order = v.local_class.cshe.reverse_linear_extension
 		if cla == v.local_class then
@@ -1194,7 +1227,7 @@ special AAbsSendExpr
 					if not last_is_found then
 						v.error(self, "Error: Constructor of {c} must be invoked before constructor of {prev_class}")
 					end
-					v.explicit_super_init_calls.add(property)
+					esic.add(property)
 					break
 				end
 			end
@@ -1207,8 +1240,8 @@ redef class ANewExpr
 special AAbsSendExpr
 	redef meth after_typing(v)
 	do
+		if n_type._stype == null then return
 		var t = n_type.stype
-		if t == null then return
 		if t.local_class.global.is_abstract then
 			v.error(self, "Error: try to instantiate abstract class {t.local_class}.")
 			return
@@ -1239,10 +1272,10 @@ special ASuperInitCall
 	meth name: Symbol is abstract 
 
 	# Raw arguments used (withour star transformation)
-	meth raw_arguments: Array[PExpr] is abstract
+	meth raw_arguments: nullable Array[PExpr] is abstract
 
 	# Closure definitions
-	meth closure_defs: Array[PClosureDef] do return null
+	meth closure_defs: nullable Array[PClosureDef] do return null
 
 	redef meth after_typing(v)
 	do
@@ -1253,7 +1286,8 @@ special ASuperInitCall
 	do
 		if not v.check_expr(n_expr) then return
 		do_typing(v, n_expr.stype, n_expr.is_implicit_self, n_expr.is_self, name, raw_arguments, closure_defs)
-		if prop == null then return
+		if _prop == null then return
+		var prop = _prop.as(not null)
 
 		if prop.global.is_init then
 			if not v.local_property.global.is_init then
@@ -1273,12 +1307,13 @@ end
 class ASendReassignExpr
 special ASendExpr
 special AReassignFormExpr
-	readable attr _read_prop: MMMethod
+	readable attr _read_prop: nullable MMMethod
 	redef meth do_all_typing(v)
 	do
 		if not v.check_expr(n_expr) then return
 		var raw_args = raw_arguments
 		do_typing(v, n_expr.stype, n_expr.is_implicit_self, n_expr.is_self, name, raw_args, null)
+		var prop = _prop
 		if prop == null then return
 		if prop.global.is_init then
 			if not v.local_property.global.is_init then
@@ -1287,7 +1322,7 @@ special AReassignFormExpr
 				v.error(self, "Error: constructor {prop} is not invoken on 'self'.")
 			end
 		end
-		var t = prop.signature_for(n_expr.stype).return_type
+		var t = prop.signature_for(n_expr.stype).return_type.as(not null)
 		if not n_expr.is_self then t = t.not_for_self
 
 		var t2 = do_rvalue_typing(v, t)
@@ -1299,7 +1334,6 @@ special AReassignFormExpr
 		raw_args.add(n_value)
 
 		do_typing(v, n_expr.stype, n_expr.is_implicit_self, n_expr.is_self, "{name}=".to_symbol, raw_args, null)
-		if prop == null then return
 		if prop.global.is_init then
 			if not v.local_property.global.is_init then
 				v.error(self, "Error: try to invoke constructor {prop} in a method.")
@@ -1407,14 +1441,14 @@ end
 redef class ACallFormExpr
 	redef meth after_typing(v)
 	do
-		if n_expr != null and n_expr.is_implicit_self then
+		if n_expr.is_implicit_self then
 			var name = n_id.to_symbol
 			var variable = v.variable_ctx[name]
 			if variable != null then
 				if variable isa ClosureVariable then
 					var n = new AClosureCallExpr.init_aclosurecallexpr(n_id, n_args, n_closure_defs)
 					replace_with(n)
-					n.variable = variable
+					n._variable = variable
 					n.after_typing(v)
 					return
 				else
@@ -1423,7 +1457,7 @@ redef class ACallFormExpr
 						return
 					end
 					var vform = variable_create(variable)
-					vform.variable = variable
+					vform._variable = variable
 					replace_with(vform)
 					vform.after_typing(v)
 					return
@@ -1436,7 +1470,7 @@ redef class ACallFormExpr
 
 	redef meth closure_defs
 	do
-		if n_closure_defs == null or n_closure_defs.is_empty then
+		if n_closure_defs.is_empty then
 			return null
 		else
 			return n_closure_defs.to_a
@@ -1509,6 +1543,9 @@ end
 
 redef class AClosureCallExpr
 special AAbsAbsSendExpr
+	attr _variable: nullable ClosureVariable
+	redef meth variable do return _variable.as(not null)
+
 	redef meth after_typing(v)
 	do
 		var va = variable
@@ -1527,10 +1564,13 @@ special AAbsAbsSendExpr
 end
 
 redef class PClosureDef
-	# The corresponding escapable object
-	readable attr _escapable: EscapableBlock
+	attr _closure: nullable MMClosure
+	redef meth closure do return _closure.as(not null)
 
-	attr _accept_typing2: Bool
+	# The corresponding escapable object
+	readable attr _escapable: nullable EscapableBlock
+
+	attr _accept_typing2: Bool = false
 	redef meth accept_typing(v)
 	do
 		# Typing is deferred, wait accept_typing2(v)
@@ -1551,7 +1591,7 @@ redef class AClosureDef
 			return
 		end
 
-		closure = esc.closure
+		_closure = esc.closure
 
 		var old_var_ctx = v.variable_ctx
 		var old_base_var_ctx = v.base_variable_ctx

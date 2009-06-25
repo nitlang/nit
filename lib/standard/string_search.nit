@@ -25,7 +25,7 @@ class Pattern
 
 	# Search `self' into `s' from a certain position.
 	# Return null if not found.
-	meth search_in(s: String, from: Int): Match is abstract
+	meth search_in(s: String, from: Int): nullable Match is abstract
 
 	# Search all `self' occucences into `s'.
 	meth search_all_in(s: String): Array[Match]
@@ -220,7 +220,6 @@ class Match
 	# Matches `len' characters of `s' from `f'.
 	init(s: String, f: Int, len: Int)
 	do
-		assert non_null_string: s != null 
 		assert positive_length: len >= 0
 		assert valid_from: f >= 0
 		assert valid_after: f + len <= s.length
@@ -281,12 +280,12 @@ special Pattern
 	end
 
 	# Like `search_from' but from the first chararter.
-	meth search(p: Pattern): Match do return p.search_in(self, 0)
+	meth search(p: Pattern): nullable Match do return p.search_in(self, 0)
 
 	# Search the given pattern into self from a.
 	# The search starts at `from'.
 	# Return null if not found.
-	meth search_from(p: Pattern, from: Int): Match do return p.search_in(self, from)
+	meth search_from(p: Pattern, from: Int): nullable Match do return p.search_in(self, from)
 
 	# Search all occurences of p into self.
 	#

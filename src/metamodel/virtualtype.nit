@@ -29,7 +29,7 @@ end
 class MMTypeProperty
 special MMLocalProperty
 	# The virtual static type associated
-	meth stype_for(recv: MMType): MMVirtualType
+	meth stype_for(recv: MMType): nullable MMVirtualType
 	do
 		var prop = recv.local_class[global]
 		assert prop isa MMTypeProperty
@@ -39,7 +39,7 @@ special MMLocalProperty
 	# Cached results of stype
 	attr _stypes_cache: HashMap[MMType, MMVirtualType] = new HashMap[MMType, MMVirtualType]
 
-	private meth real_stype_for(recv: MMType): MMVirtualType
+	private meth real_stype_for(recv: MMType): nullable MMVirtualType
 	do
 		# If the signature is not build: Circular definition
 		if signature == null then return null
@@ -83,7 +83,7 @@ special MMTypeFormal
 
 	redef meth adapt_to(recv)
 	do
-		return property.stype_for(recv)
+		return property.stype_for(recv).as(not null)
 	end
 end
 
@@ -94,15 +94,13 @@ redef class MMLocalClass
 		if prop.is_virtual_type then
 			return prop
 		end
-		return null
+		abort
 	end
 
 	# Select a virtual type property by its name
 	meth select_virtual_type(name: Symbol): MMTypeProperty
 	do
-		assert name != null
 		var gp = virtual_type(name)
-		if gp == null then return null
 		var res = self[gp]
 		assert res isa MMTypeProperty
 		return res

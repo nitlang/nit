@@ -185,7 +185,6 @@ redef class MMSrcLocalClass
 		for a in src_local_properties do
 			if a isa MMSrcAttribute then
 				var n = a.node
-				assert n isa AAttrPropdef
 				if n.n_expr == null then unassigned_attributes.add(a)
 			end
 		end
@@ -204,7 +203,7 @@ redef class MMSrcLocalClass
 			supers = che.order.select_smallests(supers)
 
 			# A mixin class can only have 0 or 1 most specific non-mixin superclass
-			var superclass: MMLocalClass = null # This most specific non-mixin superclass (if any)
+			var superclass: nullable MMLocalClass = null # This most specific non-mixin superclass (if any)
 
 			if supers.length > 1 then
 				v.error(nodes.first, "Error: Explicit constructor required in {self} since multiple inheritance of constructor is forbiden. Conflicting classes are {supers.join(", ")}. Costructors are {super_constructors.join(", ")}.")
@@ -219,7 +218,7 @@ redef class MMSrcLocalClass
 					make_visible_an_inherited_global_property(gp)
 				end
 			end
-			global.mixin_of = superclass.global
+			global.mixin_of = superclass.as(not null).global # FIXME Dear! this should break!
 		else
 			# v.error(nodes.first, "Error, constructor required in {self} since no anonimous init found in {sc}.")
 
@@ -244,15 +243,11 @@ redef class MMSrcLocalClass
 
 		# Intro or redefinition ?
 		if has_global_property_by_name(pname) then
-			var globs = properties_by_name[pname]
-			if globs.length > 1 then
-				v.error(prop.node, "Name error: {self} inherits {globs.length} global properties named {pname}.")
-			end
-			var g = globs.first
+			var g = get_property_by_name(pname)
 			prop.inherit_global(g)
 		end
 
-		if prop.global == null then
+		if not prop.is_global_set then
 			prop.new_global
 			prop.global.is_init = prop.is_init
 		end
@@ -266,10 +261,10 @@ redef class MMLocalProperty
 end
 
 redef class MMImplicitInit
-	readable attr _super_init: MMLocalProperty = null
+	readable attr _super_init: nullable MMLocalProperty = null
 	redef meth accept_property_visitor(v)
 	do
-		var base: MMLocalProperty = null
+		var base: nullable MMLocalProperty = null
 		for p in super_inits do
 			if p.signature.arity > 0 then
 				if base == null then
@@ -290,7 +285,9 @@ redef class MMImplicitInit
 			end
 		end
 		for a in unassigned_attributes do
-			params.add(a.signature.return_type)
+			var sig = a.signature
+			if sig == null then return # Broken attribute definition
+			params.add(sig.return_type.as(not null))
 		end
 		signature = new MMSignature(params, null, local_class.get_type)
 	end
@@ -319,10 +316,10 @@ end
 private class ClassBuilderVisitor
 special AbsSyntaxVisitor
 	# Current class arity
-	readable writable attr _local_class_arity: Int 
+	readable writable attr _local_class_arity: Int = 0
 
 	# Current class formal parameters
-	readable writable attr _formals: Map[Symbol, MMTypeFormalParameter] 
+	readable writable attr _formals: nullable Map[Symbol, MMTypeFormalParameter]
 
 	redef meth visit(n) do n.accept_class_builder(self)
 	init(tc, m) do super
@@ -395,7 +392,7 @@ private class SignatureBuilder
 	readable writable attr _closure_decls: Array[AClosureDecl] = new Array[AClosureDecl]
 
 	# Current signature
-	readable writable attr _signature: MMSignature = null 
+	readable writable attr _signature: nullable MMSignature = null 
 end
 
 ###############################################################################
@@ -416,7 +413,7 @@ redef class AModule
 		# Import super-modules
 		var module_names_to_import = new Array[Symbol]
 		var module_visibility = new HashMap[Symbol, Int]
-		var no_import: PImport = null
+		var no_import: nullable PImport = null
 		for i in n_imports do
 			var n = i.module_name
 			if n != null then
@@ -457,7 +454,7 @@ end
 
 redef class PImport
 	# Imported module name (or null)
-	meth module_name: Symbol is abstract
+	meth module_name: nullable Symbol is abstract
 
 	# Visibility level (intrude/public/private)
 	meth visibility_level: Int is abstract
@@ -498,7 +495,8 @@ end
 
 
 redef class PClassdef
-	redef readable attr _local_class: MMSrcLocalClass
+	redef meth local_class: MMSrcLocalClass do return _local_class.as(not null)
+	attr _local_class: nullable MMSrcLocalClass
 
 	# Name of the class
 	meth name: Symbol is abstract
@@ -534,13 +532,12 @@ redef class PClassdef
 		end
 		_local_class = local_class
 		v.local_class_arity = 0
-		v.formals = new HashMap[Symbol, MMTypeFormalParameter]
+		v.formals = local_class.formal_dict
 
 		#####
 		super
 		#####
 
-		_local_class.formal_dict = v.formals
 		v.formals = null
 	end
 
@@ -668,7 +665,7 @@ end
 
 redef class AFormaldef
 	# The associated formal generic parameter (MM entity)
-	attr _formal: MMSrcTypeFormalParameter
+	attr _formal: nullable MMSrcTypeFormalParameter
 
 	redef meth accept_class_builder(v)
 	do
@@ -690,14 +687,14 @@ redef class AFormaldef
 			if n_type == null then
 				_formal.bound = v.module.type_any.as_nullable
 			else
-				_formal.bound = n_type.get_stype(v)
+				_formal.bound = n_type.get_stype(v).as(not null)
 			end
 		else
 			var ob = o.get_formal(_formal.position).bound.for_module(v.module)
 			if n_type == null then
 				_formal.bound = ob
 			else
-				_formal.bound = n_type.get_stype(v)
+				_formal.bound = n_type.get_stype(v).as(not null)
 				if _formal.bound != ob then
 					v.error(self, "Redef error: Cannot change formal parameter type of class {c}; got {_formal.bound}, expected {ob}.")
 				end
@@ -707,12 +704,13 @@ redef class AFormaldef
 end
 
 redef class ASuperclass
-	readable attr _ancestor: MMSrcAncestor
+	readable attr _ancestor: nullable MMSrcAncestor
 
 	redef meth accept_class_specialization_builder(v)
 	do
 		super
 		var c = n_type.get_local_class(v)
+		if c == null then return
 		var ancestor = new MMSrcAncestor(self, c)
 		_ancestor = ancestor
 		v.local_class.add_direct_parent(ancestor)
@@ -785,10 +783,8 @@ redef class PPropdef
 				v.error(v.signature_builder.untyped_params.first, "Error: Untyped parameter.")
 			else
 				prop.signature = new MMSignature(new Array[MMType], null, v.local_class.get_type)
-				if v.signature_builder.closure_decls != null then
-					for clos in v.signature_builder.closure_decls do
-						prop.signature.closures.add(clos.variable.closure)
-					end
+				for clos in v.signature_builder.closure_decls do
+					prop.signature.closures.add(clos.variable.closure)
 				end
 			end
 		end
@@ -908,27 +904,31 @@ redef class PPropdef
 end
 
 redef class AAttrPropdef
-	redef readable attr _readmethod: MMSrcMethod
-	redef readable attr _writemethod: MMSrcMethod
-	redef readable attr _prop: MMSrcAttribute 
+	redef readable attr _readmethod: nullable MMSrcMethod
+	redef readable attr _writemethod: nullable MMSrcMethod
+	attr _prop: nullable MMSrcAttribute
+	redef meth prop do return _prop.as(not null)
 
 	redef meth accept_property_builder(v)
 	do
 		super
 		var name = n_id.to_symbol
-		var prop = new MMSrcAttribute(name, v.local_class, self)
+		var lc = v.local_class
+		var prop = new MMSrcAttribute(name, lc, self)
 		_prop = prop
 		v.local_class.add_src_local_property(v, prop)
 
 		if n_readable != null then
 			name = n_id.text.substring_from(1).to_symbol
-			_readmethod = new MMReadImplementationMethod(name, v.local_class, self)
-			v.local_class.add_src_local_property(v, _readmethod)
+			var readmethod = new MMReadImplementationMethod(name, lc, self)
+			_readmethod = readmethod
+			v.local_class.add_src_local_property(v, readmethod)
 		end
 		if n_writable != null then
 			name = (n_id.text.substring_from(1) + "=").to_symbol
-			_writemethod = new MMWriteImplementationMethod(name, v.local_class, self)
-			v.local_class.add_src_local_property(v, _writemethod)
+			var writemethod = new MMWriteImplementationMethod(name, lc, self)
+			_writemethod = writemethod
+			v.local_class.add_src_local_property(v, writemethod)
 		end
 	end
 	
@@ -937,31 +937,35 @@ redef class AAttrPropdef
 		super
 		var t: MMType
 		if n_type != null then
-			t = n_type.get_stype(v)
+			var t0 = n_type.get_stype(v)
+			if t0 != null then t = t0 else return
 		else
 			v.error(self, "Not yet implemented: Attribute definition {_prop.local_class}::{_prop} requires an explicit type.")
 			return
 		end
 
+		var prop = prop
 		var signature = new MMSignature(new Array[MMType], t, v.local_class.get_type)
-		_prop.signature = signature
+		prop.signature = signature
 		var visibility_level = n_visibility.level
-		process_and_check(v, _prop, n_kwredef != null, visibility_level)
+		process_and_check(v, prop, n_kwredef != null, visibility_level)
 		if n_readable != null then
-			_readmethod.signature = signature
-			process_and_check(v, _readmethod, n_readable.n_kwredef != null, visibility_level)
-			n_type.check_visibility(v, _readmethod)
+			var m = _readmethod.as(not null)
+			m.signature = signature
+			process_and_check(v, m, n_readable.n_kwredef != null, visibility_level)
+			n_type.check_visibility(v, m)
 		end
 		if n_writable != null then
-			_writemethod.signature = new MMSignature(new Array[MMType].with_items(t), null, v.local_class.get_type)
-			process_and_check(v, _writemethod, n_writable.n_kwredef != null, visibility_level)
-			n_type.check_visibility(v, _writemethod)
+			var m = _writemethod.as(not null)
+			m.signature = new MMSignature(new Array[MMType].with_items(t), null, v.local_class.get_type)
+			process_and_check(v, m, n_writable.n_kwredef != null, visibility_level)
+			n_type.check_visibility(v, m)
 		end
 	end
 
 	redef meth accept_abs_syntax_visitor(v)
 	do
-		v.local_property = prop
+		v.local_property = _prop
 		super
 		v.local_property = null
 	end
@@ -969,30 +973,33 @@ end
 
 redef class AMethPropdef
 	# Name of the method
-	readable attr _name: Symbol 
+	readable attr _name: nullable Symbol 
 
-	redef readable attr _method: MMMethSrcMethod
+	attr _method: nullable MMMethSrcMethod
+	redef meth method do return _method.as(not null)
 
 	redef meth accept_property_builder(v)
 	do
 		super
+		var name: Symbol
 		if n_methid == null then
 			if self isa AConcreteInitPropdef then
-				_name = once "init".to_symbol
+				name = once "init".to_symbol
 			else
-				_name = once "main".to_symbol
+				name = once "main".to_symbol
 			end
-		else 
-			_name = n_methid.name
+		else
+			name = n_methid.name.as(not null)
 			# FIXME: Add the 'unary' keyword
 			if n_methid.name == (once "-".to_symbol) then
 				var ns = n_signature
 				if ns isa ASignature and ns.n_params.length == 0 then
-					_name = once "unary -".to_symbol
+					name = once "unary -".to_symbol
 				end
 			end
 		end
-		var prop = new MMMethSrcMethod(_name, v.local_class, self)
+		_name = name
+		var prop = new MMMethSrcMethod(name, v.local_class, self)
 		_method = prop
 		v.local_class.add_src_local_property(v, prop)
 	end
@@ -1005,19 +1012,19 @@ redef class AMethPropdef
 		if v.signature_builder.signature == null then
 			#_method.signature = new MMSignature(new Array[MMType], null, v.local_class.get_type)
 		else
-			_method.signature = v.signature_builder.signature
+			method.signature = v.signature_builder.signature.as(not null)
 		end
 		var visibility_level = 1
 		if n_visibility != null and n_visibility.level > 1 then
 			visibility_level = n_visibility.level
 		end
-		process_and_check(v, _method, n_kwredef != null, visibility_level)
-		if n_signature != null then n_signature.check_visibility(v, _method)
+		process_and_check(v, method, n_kwredef != null, visibility_level)
+		if n_signature != null then n_signature.check_visibility(v, method)
 	end
 
 	redef meth accept_abs_syntax_visitor(v)
 	do
-		v.local_property = method
+		v.local_property = _method
 		super
 		v.local_property = null
 	end
@@ -1033,7 +1040,8 @@ redef class AMainMethPropdef
 end
 
 redef class ATypePropdef
-	redef readable attr _prop: MMSrcTypeProperty 
+	redef meth prop do return _prop.as(not null)
+	attr _prop: nullable MMSrcTypeProperty
 
 	redef meth accept_property_builder(v)
 	do
@@ -1048,14 +1056,14 @@ redef class ATypePropdef
 	do
 		super
 		var signature = new MMSignature(new Array[MMType], n_type.get_stype(v), v.local_class.get_type)
-		_prop.signature = signature
+		prop.signature = signature
 		var visibility_level = n_visibility.level
-		process_and_check(v, _prop, n_kwredef != null, visibility_level)
+		process_and_check(v, prop, n_kwredef != null, visibility_level)
 	end
 	
 	redef meth accept_abs_syntax_visitor(v)
 	do
-		v.local_property = prop
+		v.local_property = _prop
 		super
 		v.local_property = null
 	end
@@ -1077,7 +1085,7 @@ end
 
 redef class PMethid
 	# Method name
-	readable attr _name: Symbol 
+	readable attr _name: nullable Symbol 
 
 	redef meth accept_property_builder(v)
 	do
@@ -1105,9 +1113,9 @@ redef class ASignature
 		else if not v.signature_builder.params.is_empty or n_type != null then
 			var pars = new Array[MMType]
 			for p in v.signature_builder.params do
-				pars.add(p.stype)
+				pars.add(p.stype.as(not null))
 			end
-			var ret: MMType = null
+			var ret: nullable MMType = null
 			if n_type != null then
 				ret = n_type.get_stype(v)
 			end
@@ -1132,12 +1140,13 @@ redef class ASignature
 end
 
 redef class PParam
-	redef readable attr _position: Int
+	redef readable attr _position: Int = 0
 
-	redef readable attr _variable: ParamVariable 
+	redef meth variable: ParamVariable do return _variable.as(not null)
+	attr _variable: nullable ParamVariable
 
 	# The type of the parameter in signature
-	readable writable attr _stype: MMType
+	readable writable attr _stype: nullable MMType
 
 	redef meth accept_property_verifier(v)
 	do
@@ -1147,7 +1156,7 @@ redef class PParam
 		v.signature_builder.params.add(self)
 		v.signature_builder.untyped_params.add(self)
 		if n_type != null then
-			var stype = n_type.get_stype(v)
+			var stype = n_type.get_stype(v).as(not null)
 			for p in v.signature_builder.untyped_params do
 				p.stype = stype
 				if is_vararg then
@@ -1156,7 +1165,7 @@ redef class PParam
 					else
 						v.error(self, "Error: A vararg parameter is already defined.")
 					end
-					stype = v.type_array(stype) 
+					stype = v.type_array(stype)
 				end
 				p.variable.stype = stype
 			end
@@ -1172,7 +1181,8 @@ redef class AParam
 end
 
 redef class AClosureDecl
-	redef readable attr _variable: ClosureVariable
+	redef meth variable: ClosureVariable do return _variable.as(not null)
+	attr _variable: nullable ClosureVariable
 
 	redef meth accept_property_verifier(v)
 	do
@@ -1188,7 +1198,7 @@ redef class AClosureDecl
 		end
 
 		# Add the finalizer to the closure signature
-		var finalize_sig = new MMSignature(new Array[MMType], null, null)
+		var finalize_sig = new MMSignature(new Array[MMType], null, v.module.type_any) # FIXME should be no receiver
 		var finalizer_clos = new MMClosure(finalize_sig, false, true)
 		sig.closures.add(finalizer_clos)
 
@@ -1211,7 +1221,6 @@ redef class AType
 		var t = get_stype(v)
 		if t == null then return
 		var bc = t.local_class
-		if bc == null then return
 		if bc.global.visibility_level >= 3 then
 			v.error(self, "Access error: Class {bc} is private and cannot be used in the signature of the non-private property {p}.")
 		end

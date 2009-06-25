@@ -59,7 +59,7 @@ class Process
 	end
 
 	# Internal code to handle execusion
-	protected init execute(command: String, arguments: Array[String], pipeflags: Int)
+	protected init execute(command: String, arguments: nullable Array[String], pipeflags: Int)
 	do
 		var args = new Buffer
 		var l = 1 # Number of elements in args

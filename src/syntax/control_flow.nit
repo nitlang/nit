@@ -24,7 +24,7 @@ import syntax_base
 abstract class VariableContext
 	# Look for the variable from its name
 	# Return null if nothing found
-	meth [](s: Symbol): Variable
+	meth [](s: Symbol): nullable Variable
 	do
 		if _dico.has_key(s) then
 			return _dico[s]
@@ -64,7 +64,7 @@ abstract class VariableContext
 
 	# The effective static type of a given variable
 	# May be different from the declaration static type
-	meth stype(v: Variable): MMType
+	meth stype(v: Variable): nullable MMType
 	do
 		if _stypes.has_key(v) then
 			return _stypes[v]
@@ -75,7 +75,7 @@ abstract class VariableContext
 
 	# Set effective static type of a given variable
 	# May be different from the declaration static type
-	meth stype=(v: Variable, t: MMType)
+	meth stype=(v: Variable, t: nullable MMType)
 	do
 		_stypes[v] = t
 	end
@@ -87,7 +87,7 @@ abstract class VariableContext
 	attr _all_variables: Set[Variable]
 
 	# Updated static type of variables
-	attr _stypes: Map[Variable, MMType] = new HashMap[Variable, MMType]
+	attr _stypes: Map[Variable, nullable MMType] = new HashMap[Variable, nullable MMType]
 
 	# Build a new VariableContext
 	meth sub(node: PNode): SubVariableContext
@@ -170,9 +170,9 @@ abstract class VariableContext
 				# NOP
 			else if s1 == s2 then
 				stype(v) = s1
-			else if s1 < s2 then
+			else if s2 == null or s1 < s2 then
 				stype(v) = s2
-			else if s2 < s1 then
+			else if s1 == null or s2 < s1 then
 				stype(v) = s1
 			else
 				stype(v) = basectx.stype(v)

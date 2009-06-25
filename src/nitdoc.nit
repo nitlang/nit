@@ -26,7 +26,7 @@ import abstracttool
 class DocContext
 special AbstractCompiler
 	# Destination directory
-	readable writable attr _dir: String
+	readable writable attr _dir: String = "."
 
 	# Content of a generated file
 	attr _stage_context: StageContext = new StageContext(null)
@@ -51,6 +51,7 @@ special AbstractCompiler
 			s.content.add_all(_stage_context.content)
 			s.validate = true
 		end
+		assert s != null
 		_stage_context = s
 	end
 
@@ -66,13 +67,13 @@ special AbstractCompiler
 	end
 
 	# Currently computed module
-	readable attr _module: MMSrcModule
+	readable attr _module: nullable MMSrcModule
 
 	# Is the current directory module computed as a simple modude ?
-	readable writable attr _inside_mode: Bool
+	readable writable attr _inside_mode: Bool = false
 
 	# Is the current module computed as a intruded one ?
-	readable writable attr _intrude_mode: Bool
+	readable writable attr _intrude_mode: Bool = false
 
 	# Compued introducing entities (for the index)
 	attr _entities: Array[MMEntity] = new Array[MMEntity]
@@ -215,12 +216,13 @@ special AbstractCompiler
 		_sorter.sort(array)
 	end
 
-	readable writable attr _owned_modules: Array[MMModule]
+	readable writable attr _owned_modules: Array[MMModule] = new Array[MMModule]
 
 	# Return the known_owner for current module
 	# if inside_mode is set, it could be a different result
 	meth known_owner_of(m: MMModule): MMModule
 	do
+		var module = module
 		if module == null then return m
 		var res = module.known_owner_of(m)
 		if not inside_mode and not intrude_mode and res.directory.owner == module then
@@ -252,8 +254,8 @@ special AbstractCompiler
 	redef meth process_options
 	do
 		super
-		dir = opt_dir.value
-		if dir == null then dir = "."
+		var d = opt_dir.value
+		if d != null then dir = d
 	end
 end
 
@@ -263,12 +265,12 @@ class StageContext
 	readable attr _content: Array[String] = new Array[String]
 
 	# Is a normal string already added?
-	readable writable attr _validate: Bool
+	readable writable attr _validate: Bool = false
 
 	# Parent stage is any
-	readable attr _parent: StageContext
+	readable attr _parent: nullable StageContext = null
 
-	init(parent: StageContext) do _parent = parent
+	init(parent: nullable StageContext) do _parent = parent
 end
 
 
@@ -314,7 +316,7 @@ class MMEntity
 
 	# The doc node from the AST
 	# Return null is none
-	meth doc: ADoc do return null
+	meth doc: nullable ADoc do return null
 
 	# Human redable location of the entity (module/class/property)
 	meth locate(dctx: DocContext): String do return ""
@@ -356,7 +358,7 @@ special MMEntity
 	meth owner(from: MMModule): MMModule
 	do
 		var res = self
-		var d = directory
+		var d: nullable MMDirectory = directory
 		while d != null and d != from.directory do
 			var o = d.owner
 			if o != null and o.mhe <= res then res = o
@@ -494,10 +496,10 @@ special MMEntity
 		end
 		assert n isa PPropdef
 		var d = n.n_doc
-		assert d isa ADoc
 		if d == null then
 			return null
 		end
+		assert d isa ADoc
 		if d.n_comment.is_empty then
 			return null
 		else
@@ -545,7 +547,7 @@ redef class MMSrcModule
 		dctx.add_header("Module {self}")
 		dctx.add("<h1>Module {self}</h1>\n<dl>")
 		var s = ""
-		var d = directory
+		var d: nullable MMDirectory = directory
 		while d == null do
 			if d.owner != null and (d.owner != self or dctx.inside_mode or dctx.intrude_mode) then
 				s = "{d.owner.html_link(dctx)}::{s}"
@@ -558,8 +560,8 @@ redef class MMSrcModule
 		var intrude_modules = new Array[MMModule]
 		var public_modules = new Array[MMModule]
 		var private_modules = new Array[MMModule]
-		var owned_modules = new Array[MMModule]
-		dctx.owned_modules = owned_modules
+		var owned_modules = dctx.owned_modules
+		owned_modules.clear
 		for m in mhe.greaters do
 			var v = visibility_for(m) 
 			if not dctx.inside_mode and not dctx.intrude_mode and m.directory.owner == self then 
@@ -652,20 +654,16 @@ redef class MMSrcModule
 	redef meth doc
 	do
 		var n = node
-		if not n isa AModule then
-			return null
-		end
-		assert n isa AModule
 		if n.n_packagedecl == null then
 			return null
 		end
 		var np = n.n_packagedecl
 		assert np isa APackagedecl
 		var d = np.n_doc
-		assert d isa ADoc
 		if d == null then
 			return null
 		end
+		assert d isa ADoc
 		if d.n_comment.is_empty then
 			return null
 		else
@@ -913,7 +911,7 @@ special MMEntity
 				if c isa MMSrcLocalClass then
 					var km = dctx.known_owner_of(c.module)
 					var kc = km[c.global]
-					if kc == self or not c isa MMConcreteClass then continue
+					if kc == self then continue
 					var props: Array[MMLocalProperty]
 					if km == module then
 						if cmap.has_key(kc) then
@@ -1079,10 +1077,10 @@ redef class MMSrcLocalClass
 		end
 		assert n isa AClassdef
 		var d = n.n_doc
-		assert d isa ADoc
 		if d == null then
 			return null
 		end
+		assert d isa ADoc
 		if d.n_comment.is_empty then
 			return null
 		else

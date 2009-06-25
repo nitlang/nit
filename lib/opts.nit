@@ -17,7 +17,7 @@ class Option
 	readable attr _names: Array[String]
 
 	# Type of the value of the option
-	type VALUE: Object
+	type VALUE: nullable Object
 
 	# Human readable description of the option
 	readable attr _helptext: String 
@@ -25,17 +25,17 @@ class Option
 	# Is this option mandatory?
 	readable writable attr _mandatory: Bool 
 
-	# context where the option is located
-	readable writable attr _context: OptionContext 
+	# Current value of this option
+	writable attr _value: nullable VALUE
 
 	# Current value of this option
-	readable writable attr _value: VALUE 
+	meth value: VALUE do return _value.as(VALUE)
 
 	# Default value of this option
-	readable writable attr _default_value: VALUE
+	readable writable attr _default_value: nullable VALUE
 
 	# Create a new option
-	init init_opt(help: String, default: VALUE, names: Array[String])
+	init init_opt(help: String, default: nullable VALUE, names: nullable Array[String])
 	do
 		if names == null then
 			_names = new Array[String]
@@ -113,7 +113,6 @@ special Option
 
 	redef meth read_param(it)
 	do
-		assert context != null
 		if it.is_ok then
 			value = convert(it.item)
 			it.next
@@ -127,7 +126,7 @@ end
 
 class OptionString
 special OptionParameter
-	redef type VALUE: String
+	redef type VALUE: nullable String
 
 	init(help: String, names: String...) do init_opt(help, null, names)
 
@@ -141,7 +140,7 @@ special OptionParameter
 
 	init(enum: Array[String], help: String, default: Int, names: String...)
 	do
-		assert enum != null and enum.length > 0
+		assert enum.length > 0
 		_enum = enum.to_a
 		init_opt("{help} <{enum.join(", ")}>", default, names)
 	end
@@ -155,7 +154,7 @@ special OptionParameter
 	redef meth pretty_default
 	do
 		if default_value != null then
-			return " ({_enum[default_value]})"
+			return " ({_enum[default_value.as(not null)]})"
 		else
 			return ""
 		end
@@ -246,7 +245,6 @@ class OptionContext
 	meth add_option(opts: Option...)
 	do
 		for opt in opts do
-			opt.context = self
 			_options.add(opt)
 		end
 	end

@@ -22,7 +22,7 @@ private import syntax
 
 redef class CompilerVisitor
 	# Compile a statment node
-	meth compile_stmt(n: PExpr)
+	meth compile_stmt(n: nullable PExpr)
 	do
 		if n == null then return
 		#add_instr("/* Compile stmt {n.locate} */")
@@ -67,9 +67,9 @@ redef class CompilerVisitor
 		end
 	end
 
-	readable writable attr _cfc: CFunctionContext
+	readable writable attr _cfc: nullable CFunctionContext
 
-	readable writable attr _nmc: NitMethodContext
+	readable writable attr _nmc: nullable NitMethodContext
 
 	# C outputs written outside the current C function.
 	readable writable attr _out_contexts: Array[CContext] = new Array[CContext]
@@ -85,7 +85,7 @@ redef class CompilerVisitor
 		return s.to_s
 	end
 
-	meth invoke_super_init_calls_after(start_prop: MMMethod)
+	meth invoke_super_init_calls_after(start_prop: nullable MMMethod)
 	do
 		var n = nmc.method.node
 		assert n isa AConcreteInitPropdef
@@ -107,7 +107,7 @@ redef class CompilerVisitor
 			end
 			j += 1
 		end
-		var stop_prop: MMMethod = null
+		var stop_prop: nullable MMMethod = null
 		if j < n.explicit_super_init_calls.length then
 			stop_prop = n.explicit_super_init_calls[j]
 		end
@@ -120,7 +120,7 @@ redef class CompilerVisitor
 			if p.signature.arity == 0 then
 				cargs.add(cfc.varname(nmc.method_params[0]))
 			else
-				for va in nmc.method_params do
+				for va in nmc.method_params.as(not null) do
 					cargs.add(cfc.varname(va))
 				end
 			end
@@ -152,7 +152,7 @@ class CFunctionContext
 	attr _varindexes: Map[Variable, Int] = new HashMap[Variable, Int]
 
 	# Are we currenlty in a closure definition?
-	readable writable attr _closure: NitMethodContext = null
+	readable writable attr _closure: nullable NitMethodContext = null
 
 	# Return the cvariable of a Nit variable
 	meth varname(v: Variable): String
@@ -165,7 +165,7 @@ class CFunctionContext
 	end
 
 	# Return the next available variable
-	meth get_var(comment: String): String
+	meth get_var(comment: nullable String): String
 	do
 		var v = variable(_variable_index)
 		_variable_index = _variable_index + 1
@@ -272,30 +272,30 @@ end
 # A Nit method currenlty compiled
 class NitMethodContext
 	# Current method compiled
-	readable attr _method: MMSrcMethod
+	readable attr _method: nullable MMSrcMethod
 
 	# Association between parameters and the corresponding variables
-	readable writable attr _method_params: Array[ParamVariable] 
+	readable writable attr _method_params: nullable Array[ParamVariable]
 
 	# Where a nit return must branch
-	readable writable attr _return_label: String 
-	
+	readable writable attr _return_label: nullable String
+
 	# Where a nit break must branch
-	readable writable attr _break_label: String 
-	
+	readable writable attr _break_label: nullable String
+
 	# Where a nit continue must branch
-	readable writable attr _continue_label: String 
+	readable writable attr _continue_label: nullable String
 
 	# Variable where a functionnal nit return must store its value
-	readable writable attr _return_value: String 
+	readable writable attr _return_value: nullable String
 
 	# Variable where a functionnal nit break must store its value
-	readable writable attr _break_value: String 
+	readable writable attr _break_value: nullable String
 
 	# Variable where a functionnal nit continue must store its value
-	readable writable attr _continue_value: String 
+	readable writable attr _continue_value: nullable String
 
-	init(method: MMSrcMethod)
+	init(method: nullable MMSrcMethod)
 	do
 		_method = method
 	end
@@ -304,7 +304,7 @@ end
 ###############################################################################
 
 redef class ClosureVariable
-	readable writable attr _ctypename: String
+	readable writable attr _ctypename: nullable String
 end
 
 redef class MMMethod
@@ -331,7 +331,7 @@ redef class MMMethod
 	# Most calls are compiled with a table access,
 	# primitive calles are inlined
 	# == and != are guarded and possibly inlined
-	private meth intern_compile_call(v: CompilerVisitor, cargs: Array[String]): String
+	private meth intern_compile_call(v: CompilerVisitor, cargs: Array[String]): nullable String
 	do
 		var i = self
 		if i isa MMSrcMethod then
@@ -373,9 +373,9 @@ redef class MMMethod
 	end
 
 	# Compile a call on self for given arguments and given closures
-	meth compile_call_and_closures(v: CompilerVisitor, cargs: Array[String], clos_defs: Array[PClosureDef]): String
+	meth compile_call_and_closures(v: CompilerVisitor, cargs: Array[String], clos_defs: nullable Array[PClosureDef]): nullable String
 	do
-		var ve: String = null
+		var ve: String
 		var arity = 0
 		if clos_defs != null then arity = clos_defs.length
 
@@ -472,7 +472,7 @@ redef class MMAttribute
 	end
 
 	# Compile a write acces on selffor a given reciever.
-	meth compile_write_access(v: CompilerVisitor, n: PNode, recv: String, value: String)
+	meth compile_write_access(v: CompilerVisitor, n: nullable PNode, recv: String, value: String)
 	do
 		v.add_instr("{global.attr_access}({recv}) /*{local_class}::{name}*/ = {value};")
 	end
@@ -576,7 +576,7 @@ redef class MMSrcMethod
 	end
 
 	# Compile the method body inline
-	meth do_compile_inside(v: CompilerVisitor, params: Array[String]): String is abstract
+	meth do_compile_inside(v: CompilerVisitor, params: Array[String]): nullable String is abstract
 end
 
 redef class MMReadImplementationMethod
@@ -681,7 +681,7 @@ end
 
 redef class AMethPropdef
 	# Compile the method body
-	meth do_compile_inside(v: CompilerVisitor, method: MMSrcMethod, params: Array[String]): String is abstract
+	meth do_compile_inside(v: CompilerVisitor, method: MMSrcMethod, params: Array[String]): nullable String is abstract
 end
 
 redef class PSignature
@@ -695,7 +695,7 @@ redef class ASignature
 			var cname = v.cfc.register_variable(ap.variable)
 			v.nmc.method_params.add(ap.variable)
 			var orig_type = orig_sig[ap.position]
-			if not orig_type < ap.variable.stype then
+			if not orig_type < ap.variable.stype.as(not null) then
 				# FIXME: do not test always
 				# FIXME: handle formal types
 				v.add_instr("/* check if p<{ap.variable.stype} with p:{orig_type} */")
@@ -723,13 +723,13 @@ redef class AConcreteMethPropdef
 		params.shift
 		v.nmc.method_params = [self_var]
 
+		var orig_meth: MMLocalProperty = method.global.intro
+		var orig_sig = orig_meth.signature_for(method.signature.recv)
 		if n_signature != null then
-			var orig_meth: MMLocalProperty = method.global.intro
-			var orig_sig = orig_meth.signature_for(method.signature.recv)
 			n_signature.compile_parameters(v, orig_sig, params)
 		end
 
-		var itpos: String = null
+		var itpos: nullable String = null
 		if self isa AConcreteInitPropdef then
 			itpos = "VAL2OBJ({selfcname})->vft[{method.local_class.global.init_table_pos_id}].i"
 			# v.add_instr("printf(\"{method.full_name}: inittable[%d] = %d\\n\", {itpos}, init_table[{itpos}]);")
@@ -747,7 +747,7 @@ redef class AConcreteMethPropdef
 			v.add_instr("init_table[{itpos}] = 1;")
 		end
 
-		var ret: String = null
+		var ret: nullable String = null
 		if method.signature.return_type != null then
 			ret = v.nmc.return_value
 		end
@@ -803,7 +803,7 @@ redef class AInternMethPropdef
 	do
 		var c = method.local_class.name
 		var n = method.name
-		var s: String = null
+		var s: nullable String = null
 		if c == once "Int".to_symbol then
 			if n == once "object_id".to_symbol then
 				s = "{p[0]}"
@@ -1009,7 +1009,7 @@ redef class AVardeclExpr
 		if n_expr == null then
 			v.add_instr("/*{cname} is variable {variable.name}*/")
 		else
-			var e = v.compile_expr(n_expr)
+			var e = v.compile_expr(n_expr.as(not null))
 			v.add_assignment(cname, e)
 		end
 	end
@@ -1019,8 +1019,8 @@ redef class AReturnExpr
 	redef meth compile_stmt(v)
 	do
 		if n_expr != null then
-			var e = v.compile_expr(n_expr)
-			v.add_assignment(v.nmc.return_value, e)
+			var e = v.compile_expr(n_expr.as(not null))
+			v.add_assignment(v.nmc.return_value.as(not null), e)
 		end
 		if v.cfc.closure == v.nmc then v.add_instr("closctx->has_broke = &({v.nmc.return_value});")
 		v.add_instr("goto {v.nmc.return_label};")
@@ -1031,8 +1031,8 @@ redef class ABreakExpr
 	redef meth compile_stmt(v)
 	do
 		if n_expr != null then
-			var e = v.compile_expr(n_expr)
-			v.add_assignment(v.nmc.break_value, e)
+			var e = v.compile_expr(n_expr.as(not null))
+			v.add_assignment(v.nmc.break_value.as(not null), e)
 		end
 		if v.cfc.closure == v.nmc then v.add_instr("closctx->has_broke = &({v.nmc.break_value}); closctx->broke_value = *closctx->has_broke;")
 		v.add_instr("goto {v.nmc.break_label};")
@@ -1043,8 +1043,8 @@ redef class AContinueExpr
 	redef meth compile_stmt(v)
 	do
 		if n_expr != null then
-			var e = v.compile_expr(n_expr)
-			v.add_assignment(v.nmc.continue_value, e)
+			var e = v.compile_expr(n_expr.as(not null))
+			v.add_assignment(v.nmc.continue_value.as(not null), e)
 		end
 		v.add_instr("goto {v.nmc.continue_label};")
 	end
@@ -1331,7 +1331,7 @@ redef class AStringFormExpr
 		v.add_instr("else \{")
 		v.indent
 		v.cfc.free_var(cvar)
-		var e = meth_with_native.compile_constructor_call(v, stype , ["BOX_NativeString(\"{_cstring}\")", "TAG_Int({_cstring_length})"])
+		var e = meth_with_native.compile_constructor_call(v, stype, ["BOX_NativeString(\"{_cstring}\")", "TAG_Int({_cstring_length})"])
 		v.add_assignment(cvar, e)
 		v.add_instr("once_value_{i} = {cvar};")
 		v.unindent
@@ -1343,10 +1343,10 @@ redef class AStringFormExpr
 	protected meth string_text: String is abstract
 
 	# The string in a C native format
-	protected attr _cstring: String
+	protected attr _cstring: nullable String
 
 	# The string length in bytes
-	protected attr _cstring_length: Int
+	protected attr _cstring_length: nullable Int
 
 	# Compute _cstring and _cstring_length using string_text
 	protected meth compute_string_info
@@ -1390,7 +1390,7 @@ end
 redef class ASuperstringExpr
 	redef meth compile_expr(v)
 	do
-		var array = meth_with_capacity.compile_constructor_call(v, atype, ["TAG_Int({n_exprs.length})"])
+		var array = meth_with_capacity.compile_constructor_call(v, atype.as(not null), ["TAG_Int({n_exprs.length})"])
 		array = v.ensure_var(array, "Array (for super-string)")
 
 		for ne in n_exprs do
@@ -1453,7 +1453,7 @@ redef class ASuperExpr
 		return e
 	end
 
-	private meth intern_compile_call(v: CompilerVisitor): String
+	private meth intern_compile_call(v: CompilerVisitor): nullable String
 	do
 		var arity = v.nmc.method_params.length - 1
 		if init_in_superclass != null then
@@ -1519,7 +1519,7 @@ redef class AAbsAbsSendExpr
 	# Compile each argument and add them to the array
 	meth compile_arguments_in(v: CompilerVisitor, cargs: Array[String])
 	do
-		for a in arguments do
+		for a in arguments.as(not null) do
 			cargs.add(v.compile_expr(a))
 		end
 	end
@@ -1527,14 +1527,14 @@ redef class AAbsAbsSendExpr
 end
 
 redef class ASendExpr
-	private meth intern_compile_call(v: CompilerVisitor): String
+	private meth intern_compile_call(v: CompilerVisitor): nullable String
 	do
 		var recv = v.compile_expr(n_expr)
 		var cargs = new Array[String]
 		cargs.add(recv)
 		compile_arguments_in(v, cargs)
 
-		var e: String
+		var e: nullable String
 		if prop_signature.closures.is_empty then
 			e = prop.intern_compile_call(v, cargs)
 		else
@@ -1586,7 +1586,7 @@ redef class ANewExpr
 	do
 		var cargs = new Array[String]
 		compile_arguments_in(v, cargs)
-		return prop.compile_constructor_call(v, stype, cargs) 
+		return prop.compile_constructor_call(v, stype, cargs)
 	end
 
 	redef meth compile_stmt(v) do abort
@@ -1598,12 +1598,12 @@ redef class PClosureDef
 	meth compile_closure(v: CompilerVisitor, closcn: String): String is abstract
 
 	# Compile the closure definition inside the current C function.
-	meth do_compile_inside(v: CompilerVisitor, params: Array[String]): String is abstract
+	meth do_compile_inside(v: CompilerVisitor, params: nullable Array[String]): nullable String is abstract
 end
 
 redef class AClosureDef
 	# The cname of the function
-	readable attr _cname: String
+	readable attr _cname: nullable String
 
 	redef meth compile_closure(v, closcn)
 	do
@@ -1715,7 +1715,7 @@ redef class AClosureDef
 
 		v.add_instr("{v.nmc.continue_label}: while(false);")
 
-		var ret: String = null
+		var ret: nullable String = null
 		if closure.signature.return_type != null then ret = v.nmc.continue_value
 
 		v.nmc.continue_value = old_cv
@@ -1727,12 +1727,12 @@ redef class AClosureDef
 end
 
 redef class PClosureDecl
-	meth do_compile_inside(v: CompilerVisitor, params: Array[String]): String is abstract
+	meth do_compile_inside(v: CompilerVisitor, params: Array[String]): nullable String is abstract
 end
 redef class AClosureDecl
 	redef meth do_compile_inside(v, params)
 	do
-		if n_signature != null then n_signature.compile_parameters(v, variable.closure.signature, params)
+		n_signature.compile_parameters(v, variable.closure.signature, params)
 
 		var old_cv = v.nmc.continue_value
 		var old_cl = v.nmc.continue_label
@@ -1746,7 +1746,7 @@ redef class AClosureDecl
 
 		v.add_instr("{v.nmc.continue_label}: while(false);")
 
-		var ret: String = null
+		var ret: nullable String = null
 		if variable.closure.signature.return_type != null then ret = v.nmc.continue_value
 
 		v.nmc.continue_value = old_cv
@@ -1758,11 +1758,11 @@ redef class AClosureDecl
 end
 
 redef class AClosureCallExpr
-	meth intern_compile_call(v: CompilerVisitor): String
+	meth intern_compile_call(v: CompilerVisitor): nullable String
 	do
 		var cargs = new Array[String]
 		compile_arguments_in(v, cargs)
-		var va: String = null
+		var va: nullable String = null
 		if variable.closure.signature.return_type != null then va = v.cfc.get_var("Closure call result value")
 
 		if variable.closure.is_optional then
@@ -1771,7 +1771,7 @@ redef class AClosureCallExpr
 			var n = variable.decl
 			assert n isa AClosureDecl
 			var s = n.do_compile_inside(v, cargs)
-			if s != null then v.add_assignment(va, s)
+			if s != null then v.add_assignment(va.as(not null), s)
 			v.unindent
 			v.add_instr("} else \{")
 			v.indent
@@ -1788,7 +1788,7 @@ redef class AClosureCallExpr
 		end
 		v.add_instr("if ({ivar}->has_broke) \{")
 		v.indent
-		if n_closure_defs != null and n_closure_defs.length == 1 then do
+		if n_closure_defs.length == 1 then do
 			n_closure_defs.first.do_compile_inside(v, null)
 		end
 		if v.cfc.closure == v.nmc then v.add_instr("if ({ivar}->has_broke) \{ closctx->has_broke = {ivar}->has_broke; closctx->broke_value = {ivar}->broke_value;\}")

@@ -106,14 +106,13 @@ redef class MMLocalClass
 		end
 	end
 
+	attr _are_global_properties_inherited: Bool = false
+
 	# Inherit global properties for a class
 	meth inherit_global_properties
 	do
-		if _global_properties != null then return
-
-		_global_properties = new HashSet[MMGlobalProperty]
-		_properties_by_name = new HashMap[Symbol, Array[MMGlobalProperty]]
-		_local_property_by_global = new HashMap[MMGlobalProperty, MMLocalProperty]
+		if _are_global_properties_inherited then return
+		_are_global_properties_inherited = true
 
 		var names = _properties_by_name
 		var set = _global_properties
@@ -218,10 +217,8 @@ redef class MMLocalClass
 	do
 		assert _crhe != null
 		for ref in _crhe.direct_greaters do
-			assert ref.cshe != null
 			for sup in ref.cshe.direct_greaters do
 				var cla = sup.for_module(_module)
-				assert cla != null
 				supers.add(cla)
 			end
 		end
@@ -239,7 +236,6 @@ redef class MMLocalClass
 	private meth compute_super_parents(supers: Array[MMLocalClass])
 	do
 		for p in supers do
-			assert p != null
 			p.compute_super_classes
 		end
 	end
@@ -323,7 +319,6 @@ redef class MMLocalClass
 	private meth inherit_local_property(glob: MMGlobalProperty): MMLocalProperty
 	do
 		assert not _local_property_by_global.has_key(glob)
-		assert glob != null
 
 		var impl: MMLocalProperty
 
@@ -389,11 +384,9 @@ redef class MMAncestor
 	# Add this ancestor and it's super one in tab
 	private meth add_in(tab: Array[MMAncestor])
 	do
-		assert ancestor: stype != null
-		assert local_class: stype.local_class != null
 		tab.add(self)
 		stype.local_class.compute_ancestors
-		for anc in stype.local_class.ancestors do
+		for anc in stype.local_class.ancestors.as(not null) do
 			var aaa = anc.stype.for_module(stype.module)
 			var a = aaa.adapt_to(stype).for_module(inheriter.module)
 			if a.local_class != inheriter.local_class then
@@ -454,9 +447,6 @@ special MMAncestor
 
 	init(b: MMLocalClass, anc: MMType)
 	do
-		assert b != null
-		assert b.module != null
-		assert anc != null
 		inheriter = b.get_type
 		stype = anc
 	end

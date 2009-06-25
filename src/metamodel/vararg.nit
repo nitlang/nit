@@ -44,7 +44,7 @@ redef class MMSignature
 		return s
 	end
 
-	redef init(params: Array[MMType], return_type: MMType, r: MMType)
+	redef init(params, return_type, r)
 	do
 		super
 		_vararg_rank = -1
