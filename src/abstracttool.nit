@@ -21,6 +21,7 @@ package abstracttool
 
 import mmloader
 import syntax
+import nit_version
 
 class AbstractCompiler
 special ToolContext
@@ -39,6 +40,11 @@ special ToolContext
 	meth exec_cmd_line
 	do
 		process_options
+
+		if opt_version.value then
+			print "{tool_name} version {nit_version}"
+			exit(0)
+		end
 
 		if opt_help.value then
 			print "usage: {tool_name} [options] file..."

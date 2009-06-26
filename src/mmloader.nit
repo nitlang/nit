@@ -76,10 +76,13 @@ special MMContext
 	# Option --help
 	readable attr _opt_help: OptionBool = new OptionBool("Show Help (This screen)", "-h", "-?", "--help")
 
+	# Option --version
+	readable attr _opt_version: OptionBool = new OptionBool("Show version and exit", "--version")
+
 	init
 	do
 		super
- 		option_context.add_option(opt_warn, opt_path, opt_log, opt_only_parse, opt_only_metamodel, opt_help)
+		option_context.add_option(opt_warn, opt_path, opt_log, opt_only_parse, opt_only_metamodel, opt_help, opt_version)
 	end
 
 	# Parse and process the options given on the command line
