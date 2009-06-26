@@ -25,22 +25,29 @@ import syntax
 class AbstractCompiler
 special ToolContext
 
-	init
+	init(tool_name: String)
 	do
+		_tool_name = tool_name
 		super
 		register_loader(new SrcModuleLoader)
 	end
+
+	# The name of the tool
+	# Used in help messages for instance
+	readable attr _tool_name: String
 
 	meth exec_cmd_line
 	do
 		process_options
 
 		if opt_help.value then
+			print "usage: {tool_name} [options] file..."
 			option_context.usage
 			exit(0)
 		end
 
 		if option_context.rest.length == 0 then
+			print "usage: {tool_name} [options] file..."
 			option_context.usage
 			exit(1)
 		end

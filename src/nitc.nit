@@ -34,7 +34,7 @@ special AbstractCompiler
 
 	init
 	do
-		super
+		super("nitc")
 		option_context.add_option(opt_output, opt_boost, opt_no_cc, opt_global, opt_clibdir, opt_bindir, opt_compdir, opt_extension_prefix)
 	end
 
